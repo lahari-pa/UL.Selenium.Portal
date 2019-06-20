@@ -31,7 +31,17 @@ Then I save the product information as: TestCase59273
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I should see the Additional Product Information Page
+
+Given I set 'Product has been classified using OSHA' to: No
+
+Given I set 'Product is shipped directly' to: No
+
+Given I set 'Product is a Retailers Private Label or Brand' to: No
+
+Given I set 'Product is solely for the Retailer's use' to: No
+
+Given I click continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -39,17 +49,31 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Zinc chloride       | 9.5     | false               | false       |            |
 | Aqua                | 70      | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+# removed Shared Step 57571
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59273 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I should see the Regulatory Documents to Provide Page
+
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given I click continue
 
 Given in the Additional Documents to Provide page I click Continue
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -60,7 +84,6 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alkaline battery
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
-
 
 @TReVorId:11527
 Scenario: [59274] Battery Containing Mercury - RU000729
@@ -81,7 +104,19 @@ Then I save the product information as: TestCase59274
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I should see the Additional Product Information Page
+
+Given I set 'Product has been classified using OSHA' to: No
+
+Given I set 'Product is shipped directly' to: No
+
+Given I set 'Product is a Retailers Private Label or Brand' to: No
+
+Given I set 'Product is solely for the Retailer's use' to: No
+
+Given I click continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -89,17 +124,31 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Cadmium acetate | 14.7    | false               | false       |            |
 | Aqua            | 70.1    | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59274 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I should see the Regulatory Documents to Provide Page
+
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given I click continue
 
 Given in the Additional Documents to Provide page I click Continue
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -110,7 +159,6 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Battery Containing Mercury
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59274
-
 
 @TReVorId:11532
 Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
@@ -131,24 +179,50 @@ Then I save the product information as: TestCase59276
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I should see the Additional Product Information Page
+
+Given I set 'Product has been classified using OSHA' to: No
+
+Given I set 'Product is shipped directly' to: No
+
+Given I set 'Product is a Retailers Private Label or Brand' to: No
+
+Given I set 'Product is solely for the Retailer's use' to: No
+
+Given I click continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Lead sulfate  | 50      | false               | false       |            |
 | Aqua          | 50      | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59276 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I should see the Regulatory Documents to Provide Page
+
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given I click continue
 
 Given in the Additional Documents to Provide page I click Continue
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -159,7 +233,6 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid Battery - No Acid Included
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
-
 
 @TReVorId:11534
 Scenario: [59277] Magnesium Battery - RU000728
@@ -180,24 +253,50 @@ Given I save the product information as: TestCase59277
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I should see the Additional Product Information Page
+
+Given I set 'Product has been classified using OSHA' to: No
+
+Given I set 'Product is shipped directly' to: No
+
+Given I set 'Product is a Retailers Private Label or Brand' to: No
+
+Given I set 'Product is solely for the Retailer's use' to: No
+
+Given I click continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Magnesium     | 50      | false               | false       |            |
 | Sulfuric acid | 50      | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59277 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I should see the Regulatory Documents to Provide Page
+
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given I click continue
 
 Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -208,7 +307,6 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Magnesium Battery
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59277
-
 
 @TReVorId:11536
 Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
@@ -229,7 +327,19 @@ Given I save the product information as: TestCase59278
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I should see the Additional Product Information Page
+
+Given I set 'Product has been classified using OSHA' to: No
+
+Given I set 'Product is shipped directly' to: No
+
+Given I set 'Product is a Retailers Private Label or Brand' to: No
+
+Given I set 'Product is solely for the Retailer's use' to: No
+
+Given I click continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -237,17 +347,31 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Lanthanum     | 1       | false               | false       |            |
 | Aqua          | 90      | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59278 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I should see the Regulatory Documents to Provide Page
+
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given I click continue
 
 Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -258,8 +382,6 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel Metal Hydride (NiMH) Battery
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59278
-
-
 
 @TReVorId:11538
 Scenario: [59279] Nickel-Cadmium Battery - RU000346
@@ -280,7 +402,19 @@ Given I save the product information as: TestCase59279
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I should see the Additional Product Information Page
+
+Given I set 'Product has been classified using OSHA' to: No
+
+Given I set 'Product is shipped directly' to: No
+
+Given I set 'Product is a Retailers Private Label or Brand' to: No
+
+Given I set 'Product is solely for the Retailer's use' to: No
+
+Given I click continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -288,17 +422,31 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Cadmium sulfide | 12.75   | false               | false       |            |
 | Aqua            | 76.13   | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59279 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I should see the Regulatory Documents to Provide Page
+
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given I click continue
 
 Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -309,7 +457,6 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel-cadmium battery
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59279
-
 
 @TReVorId:11539
 Scenario: [59280] Silver Battery - RU000698
@@ -330,7 +477,19 @@ Given I save the product information as: TestCase59280
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I should see the Additional Product Information Page
+
+Given I set 'Product has been classified using OSHA' to: No
+
+Given I set 'Product is shipped directly' to: No
+
+Given I set 'Product is a Retailers Private Label or Brand' to: No
+
+Given I set 'Product is solely for the Retailer's use' to: No
+
+Given I click continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -338,17 +497,31 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Zinc          | 5.18    | false               | false       |            |
 | Aqua          | 75.3    | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59280 with container type: Metal Container size: 10.0 and quantity: 1
 
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#
+Given I should see the Regulatory Documents to Provide Page
+
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given I click continue
 
 Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -359,7 +532,6 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Silver Battery
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59280
-
 
 @TReVorId:11540
 Scenario: [59281] Water-Charged Cell - RU001543
@@ -380,7 +552,19 @@ Given I save the product information as: TestCase59281
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I should see the Additional Product Information Page
+
+Given I set 'Product has been classified using OSHA' to: No
+
+Given I set 'Product is shipped directly' to: No
+
+Given I set 'Product is a Retailers Private Label or Brand' to: No
+
+Given I set 'Product is solely for the Retailer's use' to: No
+
+Given I click continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -389,17 +573,31 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Magnesium       | 5.30    | false               | false       |            |
 | Aqua            | 56.67   | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59281 with container type: Metal Container size: 30.0 and quantity: 50
 
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I should see the Regulatory Documents to Provide Page
+
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given I click continue
 
 Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -410,8 +608,6 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Water-Charged Cell
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59281
-
-
 
 @TReVorId:11541
 Scenario: [59282] Zinc Air - RU001205
@@ -432,7 +628,19 @@ Given I save the product information as: TestCase59282
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I should see the Additional Product Information Page
+
+Given I set 'Product has been classified using OSHA' to: No
+
+Given I set 'Product is shipped directly' to: No
+
+Given I set 'Product is a Retailers Private Label or Brand' to: No
+
+Given I set 'Product is solely for the Retailer's use' to: No
+
+Given I click continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -440,17 +648,31 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Carbon        | 15      | false               | false       |            |
 | Aqua          | 55      | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59282 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I should see the Regulatory Documents to Provide Page
+
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given I click continue
 
 Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -461,7 +683,6 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Zinc Air
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59282
-
 
 @TReVorId:11529
 Scenario: [59275] Carbon Zinc Battery - RU000727
@@ -482,7 +703,19 @@ Given I save the product information as: TestCase59275
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I should see the Additional Product Information Page
+
+Given I set 'Product has been classified using OSHA' to: No
+
+Given I set 'Product is shipped directly' to: No
+
+Given I set 'Product is a Retailers Private Label or Brand' to: No
+
+Given I set 'Product is solely for the Retailer's use' to: No
+
+Given I click continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -490,17 +723,31 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Carbon        | 15      | false               | false       |            |
 | Aqua          | 55      | false               | false       |            |
 
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59275 with container type: Metal Container size: 20.0 and quantity: 10
 
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I should see the Regulatory Documents to Provide Page
+
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given I click continue
 
 Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
