@@ -1,7 +1,6 @@
 using System;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
@@ -254,7 +253,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					.FindElements(By.XPath(".//div[contains(@class,'data-consent')]//table//tbody//tr/td"), 2).Select(x => x.Text)
 					.ToList().Where(x => x.Length > 0).ToList();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return new List<string>();
 			}
@@ -441,12 +440,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickClose()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick();
 		}
 
 		public bool ClickOK()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[text()='Ok']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this.containerElement.FindElement(By.XPath(".//button[text()='Ok']"), 2).TryClick();
 		}
 
 

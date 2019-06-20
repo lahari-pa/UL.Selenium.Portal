@@ -51,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return true;
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 
 			}
@@ -342,7 +342,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 				}
 
@@ -365,7 +365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 				}
 
@@ -388,7 +388,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 
 				}

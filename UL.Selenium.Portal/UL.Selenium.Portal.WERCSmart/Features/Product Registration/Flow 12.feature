@@ -195,19 +195,19 @@ And I confirm that for the first component an error is shown below the Public Na
 And I edit the first component to select: Undisclosed Ingredient from the Public Name drop down and save choice as firstnewpublicName
 And I click Save in The Product Page
 And I should see the Formulation Page
-And in the New Product page I click section: Ingredients
+And I click the page heading: Ingredients
 And I edit the first component to show No for Publicly disclosed
 And I click Save in The Product Page
 #And I confirm that for the first component shows no error below the Public Name drop down
 And I should see the Formulation Page
-And in the New Product page I click section: Ingredients
+And I click the page heading: Ingredients
 And I edit the second component to show Yes for Publicly disclosed
 And I edit the second component to select: <random> from the Public Name drop down and save choice as publicName
 And I click Save in The Product Page
 #And I confirm that for the first component shows no error below the Public Name drop down
 And I should see the Formulation Page
 And I click Save in The Product Page
-And in the New Product page I click section: Data Acceptance
+And I click the page heading: Data Acceptance
 And I should see the Data Acceptance Page
 And I click the Summary button in the Data Acceptance window
 And I switch to the Data Summary page

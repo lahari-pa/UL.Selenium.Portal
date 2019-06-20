@@ -480,7 +480,7 @@ And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC8
 And I close the window that opened
 And I switch to tab: WERCSmart Version 2.0
 Given In the New Product page I click tab: Recipient and UPC Details
-Given in the New Product page I click section: Universal Product Code (UPC)
+Given I click the page heading: Universal Product Code (UPC)
 And I delete UPC: saved as UPC87676
 Then In the list of UPCs I should not see UPC: saved as UPC87676
 Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC876761 with container type: Plastic Container size: 25 and quantity:  do not click continue

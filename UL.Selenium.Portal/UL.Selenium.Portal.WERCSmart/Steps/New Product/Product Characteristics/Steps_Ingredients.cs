@@ -678,7 +678,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			if (!newProductIngredients.Exists)
 			{
 				Report.Failure("Ingredients page is not showing as expected. Navigating to it....");
-				new StepsNewProduct().GivenInTheNewProductPageIClickSection("Ingredients");
+				new StepsNewProduct().ClickPageHeading("Ingredients");
 			}
 			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
 			if (ListOfIngredients.Count == 0)

@@ -361,26 +361,9 @@ testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Rando
 #line 133
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 134
-testRunner.Given("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 135
-testRunner.Given("I set the Select all modes of transport field to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 136
-testRunner.Given("I set the Select all modes of transport field to: Shipping fully regulated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I set the Product is Regulated for Transport field to: Not Regulated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 137
 testRunner.Then("in the Transport Details 1 page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 138
-testRunner.And("I should see the U. S. Department of Transportation (DOT) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 139
-testRunner.Given("I set the UN Number field to: UN1950", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 140
-testRunner.Given("I set the Proper Shipping Name field to: Aerosols", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 141
-testRunner.Given("I set the Hazard Class field to: 2.1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 142
-testRunner.Given("I set the Packing Group field to: None", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 143
-testRunner.Then("in the U. S. Department of Transportation (DOT) Classification page I click Conti" +
-                    "nue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 144
 testRunner.Given("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -715,7 +698,7 @@ testRunner.And("I click Save in The Product Page", ((string)(null)), ((TechTalk.
 #line 290
 testRunner.And("In the New Product page I click tab: Review and Submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 291
-testRunner.And("in the New Product page I click section: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 292
 testRunner.And("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 293
@@ -820,7 +803,7 @@ testRunner.And("I click Save in The Product Page", ((string)(null)), ((TechTalk.
 #line 346
 testRunner.And("In the New Product page I click tab: Review and Submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 347
-testRunner.And("in the New Product page I click section: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 348
 testRunner.And("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 349

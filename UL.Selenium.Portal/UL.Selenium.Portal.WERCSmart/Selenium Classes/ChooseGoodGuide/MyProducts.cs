@@ -52,7 +52,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 				return true;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 			}
 
@@ -154,7 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 						return;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 				}
 

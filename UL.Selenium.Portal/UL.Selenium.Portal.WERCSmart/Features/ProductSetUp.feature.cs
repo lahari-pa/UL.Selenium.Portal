@@ -1274,8 +1274,7 @@ testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk
 #line 442
 testRunner.And("In the New Product page I click tab: Product Characteristics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 443
-testRunner.And("in the New Product page I click section: Toxicity Characteristic Leaching Procedu" +
-                    "re (TCLP)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Toxicity Characteristic Leaching Procedure (TCLP)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 444
 testRunner.And("I set the Lead option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 445
@@ -1287,7 +1286,7 @@ testRunner.Then("I click Save in The Product Page", ((string)(null)), ((TechTalk
 #line 448
 testRunner.And("In the New Product page I click tab: Review and Submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 449
-testRunner.And("in the New Product page I click section: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 450
 testRunner.And("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 451
@@ -1399,7 +1398,7 @@ testRunner.And("I click on the Row Action: Update Required", ((string)(null)), (
 #line 506
 testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 507
-testRunner.And("in the New Product page I click section: Product Characteristics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Product Characteristics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 508
 testRunner.And("I Change the Secondary Physical State drop down from its current selection to a n" +
                     "ew selection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1408,7 +1407,7 @@ testRunner.Then("I click Save in The Product Page", ((string)(null)), ((TechTalk
 #line 510
 testRunner.And("In the New Product page I click tab: Review and Submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 511
-testRunner.And("in the New Product page I click section: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 512
 testRunner.And("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 513

@@ -383,8 +383,8 @@ testRunner.Then("in the VOC Limits table, the VOC Compliance Limit column should
 testRunner.Then("in the VOC Limits table, the Regulation column should contain the value: (g/L) in" +
                     "cluding water & exempts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 226
-testRunner.Then("in the New Product page I click section: Volatile Organic Compounds (VOC) for Cal" +
-                    "ifornia Air District(s) and Canada", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the page heading: Volatile Organic Compounds (VOC) for California Air Dis" +
+                    "trict(s) and Canada", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 228
 testRunner.And("I should see the Volatile Organic Compounds (VOC) for California Air District(s) " +
                     "and Canada Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

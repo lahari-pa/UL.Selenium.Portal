@@ -41,18 +41,19 @@ Scenario: [84595] Product Name - can contain special characters - & character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: &The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: "&The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod&uct Name
 And I click continue
 And I confirm the product name: "The Prod&uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name&
 And I click continue
 And I confirm the product name: "The Product Name&" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The & Product & Name &
 And I click continue
 And I confirm the product name: "The & Product & Name &" is displayed in the header
@@ -64,18 +65,19 @@ Scenario: [84624] Product Name - can contain special characters - @ character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: @The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: "@The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod@uct Name
 And I click continue
 And I confirm the product name: "The Prod@uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name@
 And I click continue
 And I confirm the product name: "The Product Name@" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The @ Product @ Name @
 And I click continue
 And I confirm the product name: "The @ Product @ Name @" is displayed in the header
@@ -87,18 +89,19 @@ Scenario: [84629] Product Name - can contain special characters - # character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: #The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: "#The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod#uct Name
 And I click continue
 And I confirm the product name: "The Prod#uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name#
 And I click continue
 And I confirm the product name: "The Product Name#" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The # Product # Name #
 And I click continue
 And I confirm the product name: "The # Product # Name #" is displayed in the header
@@ -110,18 +113,19 @@ Scenario: [84630] Product Name - can contain special characters - $ character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: $The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: "$The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod$uct Name
 And I click continue
 And I confirm the product name: "The Prod$uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name$
 And I click continue
 And I confirm the product name: "The Product Name$" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The $ Product $ Name $
 And I click continue
 And I confirm the product name: "The $ Product $ Name $" is displayed in the header
@@ -133,18 +137,19 @@ Scenario: [84631] Product Name - can contain special characters - ! character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: !The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: "!The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod!uct Name
 And I click continue
 And I confirm the product name: "The Prod!uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name!
 And I click continue
 And I confirm the product name: "The Product Name!" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The ! Product ! Name !
 And I click continue
 And I confirm the product name: "The ! Product ! Name !" is displayed in the header
@@ -156,18 +161,19 @@ Scenario: [84632] Product Name - can contain special characters - * character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: *The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: "*The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod*uct Name
 And I click continue
 And I confirm the product name: "The Prod*uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name*
 And I click continue
 And I confirm the product name: "The Product Name*" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The * Product * Name *
 And I click continue
 And I confirm the product name: "The * Product * Name *" is displayed in the header
@@ -179,18 +185,19 @@ Scenario: [84635] Product Name - can contain special characters - ( character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: (The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: "(The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod(uct Name
 And I click continue
 And I confirm the product name: "The Prod(uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name(
 And I click continue
 And I confirm the product name: "The Product Name(" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The ( Product ( Name (
 And I click continue
 And I confirm the product name: "The ( Product ( Name (" is displayed in the header
@@ -202,18 +209,19 @@ Scenario: [84636] Product Name - can contain special characters - ) character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: )The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: ")The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod)uct Name
 And I click continue
 And I confirm the product name: "The Prod)uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name)
 And I click continue
 And I confirm the product name: "The Product Name)" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The ) Product ) Name )
 And I click continue
 And I confirm the product name: "The ) Product ) Name )" is displayed in the header
@@ -225,18 +233,19 @@ Scenario: [84637] Product Name - can contain special characters - _ character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: _The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: "_The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod_uct Name
 And I click continue
 And I confirm the product name: "The Prod_uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name_
 And I click continue
 And I confirm the product name: "The Product Name_" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The _ Product _ Name _
 And I click continue
 And I confirm the product name: "The _ Product _ Name _" is displayed in the header
@@ -248,18 +257,19 @@ Scenario: [84638] Product Name - can contain special characters - "-" character 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: -The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: "-The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod-uct Name
 And I click continue
 And I confirm the product name: "The Prod-uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name-
 And I click continue
 And I confirm the product name: "The Product Name-" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The - Product - Name -
 And I click continue
 And I confirm the product name: "The - Product - Name -" is displayed in the header
@@ -271,18 +281,19 @@ Scenario: [84639] Product Name - can contain special characters - : character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: :The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: ":The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod:uct Name
 And I click continue
 And I confirm the product name: "The Prod:uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name:
 And I click continue
 And I confirm the product name: "The Product Name:" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The : Product : Name :
 And I click continue
 And I confirm the product name: "The : Product : Name :" is displayed in the header
@@ -294,7 +305,8 @@ Scenario: [84640] Product Name - can not contain special characters - ; characte
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: ;The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The Prod;uct Name
@@ -314,7 +326,8 @@ Scenario: [84641] Product Name - can contain special characters - < character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: <The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The Prod<uct Name
@@ -333,7 +346,8 @@ Scenario: [84642] Product Name - can contain special characters - > character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: >The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The Prod>uct Name
@@ -352,18 +366,19 @@ Scenario: [84643] Product Name - can contain special characters - , character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: ,The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: ",The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod,uct Name
 And I click continue
 And I confirm the product name: "The Prod,uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name,
 And I click continue
 And I confirm the product name: "The Product Name," is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The , Product , Name ,
 And I click continue
 And I confirm the product name: "The , Product , Name ," is displayed in the header
@@ -375,18 +390,19 @@ Scenario: [84644] Product Name - can contain special characters - . character te
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: .The Product Name
-And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
+And I set 'Type of Product' to: Bubble solution
 And I click continue
 And I confirm the product name: ".The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Prod.uct Name
 And I click continue
 And I confirm the product name: "The Prod.uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The Product Name.
 And I click continue
 And I confirm the product name: "The Product Name." is displayed in the header
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 And I set the Product Name as it a appears on the Package Label field to: The . Product . Name .
 And I click continue
 And I confirm the product name: "The . Product . Name ." is displayed in the header

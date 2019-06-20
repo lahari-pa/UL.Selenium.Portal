@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
@@ -130,7 +129,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				try
 				{
@@ -215,7 +214,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 					default:
 						throw new Exception("you must provide a valid value");
-						break;
 				}
 
 				Report.IsTrue(thisGraphicEditor.SelectGraphic(valueToSearchFor),
@@ -344,7 +342,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(!thisSelectRulesPage.Wait_for_close(30), "Select rules popup has not closed",
 					"Select rules popup has closed");
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				//do nothing
 			}
@@ -360,7 +358,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				thisApplyRulesPage.Wait_for_load(60);
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				if (SeleniumBrowser.Alert.WaitForAlert(3))
 				{
@@ -552,7 +550,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 				Delay.Seconds(1);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Info("Alert is not showing");
 			}
@@ -654,7 +652,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(thisStudioShaManager.SelectProductByID(idToSelect),
 					"Failed to select item by id: " + idToSelect, "Selected item with id: " + idToSelect);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Info("Alert is not showing");
 			}
@@ -669,7 +667,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(thisStudioShaManager.ClickBottomMenuOption(menuItem), "Failed to click: " + menuItem,
 					"Clicked menu item: " + menuItem);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Info("Alert is not showing");
 			}

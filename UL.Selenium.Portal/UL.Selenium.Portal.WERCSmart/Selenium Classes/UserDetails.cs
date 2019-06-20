@@ -168,7 +168,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return matchingButton.TryClick();
 			}
-
 			return false;
 		}
 
