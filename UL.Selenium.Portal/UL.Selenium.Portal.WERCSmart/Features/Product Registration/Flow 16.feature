@@ -33,15 +33,7 @@ Given I call Shared Step 59927 (Primary Physical State > Solid only available â€
 
 Given I should see the Additional Product Information Page
 
-Given I set 'Product has been classified using OSHA' to: No
-
-Given I set 'Product is shipped directly' to: No
-
-Given I set 'Product is a Retailers Private Label or Brand' to: No
-
-Given I set 'Product is solely for the Retailer's use' to: No
-
-Given I click continue
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -108,15 +100,7 @@ Given I call Shared Step 59927 (Primary Physical State > Solid only available â€
 
 Given I should see the Additional Product Information Page
 
-Given I set 'Product has been classified using OSHA' to: No
-
-Given I set 'Product is shipped directly' to: No
-
-Given I set 'Product is a Retailers Private Label or Brand' to: No
-
-Given I set 'Product is solely for the Retailer's use' to: No
-
-Given I click continue
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -183,15 +167,7 @@ Given I call Shared Step 59927 (Primary Physical State > Solid only available â€
 
 Given I should see the Additional Product Information Page
 
-Given I set 'Product has been classified using OSHA' to: No
-
-Given I set 'Product is shipped directly' to: No
-
-Given I set 'Product is a Retailers Private Label or Brand' to: No
-
-Given I set 'Product is solely for the Retailer's use' to: No
-
-Given I click continue
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -257,15 +233,7 @@ Given I call Shared Step 59927 (Primary Physical State > Solid only available â€
 
 Given I should see the Additional Product Information Page
 
-Given I set 'Product has been classified using OSHA' to: No
-
-Given I set 'Product is shipped directly' to: No
-
-Given I set 'Product is a Retailers Private Label or Brand' to: No
-
-Given I set 'Product is solely for the Retailer's use' to: No
-
-Given I click continue
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -331,15 +299,7 @@ Given I call Shared Step 59927 (Primary Physical State > Solid only available â€
 
 Given I should see the Additional Product Information Page
 
-Given I set 'Product has been classified using OSHA' to: No
-
-Given I set 'Product is shipped directly' to: No
-
-Given I set 'Product is a Retailers Private Label or Brand' to: No
-
-Given I set 'Product is solely for the Retailer's use' to: No
-
-Given I click continue
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -406,15 +366,7 @@ Given I call Shared Step 59927 (Primary Physical State > Solid only available â€
 
 Given I should see the Additional Product Information Page
 
-Given I set 'Product has been classified using OSHA' to: No
-
-Given I set 'Product is shipped directly' to: No
-
-Given I set 'Product is a Retailers Private Label or Brand' to: No
-
-Given I set 'Product is solely for the Retailer's use' to: No
-
-Given I click continue
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -481,15 +433,7 @@ Given I call Shared Step 59927 (Primary Physical State > Solid only available â€
 
 Given I should see the Additional Product Information Page
 
-Given I set 'Product has been classified using OSHA' to: No
-
-Given I set 'Product is shipped directly' to: No
-
-Given I set 'Product is a Retailers Private Label or Brand' to: No
-
-Given I set 'Product is solely for the Retailer's use' to: No
-
-Given I click continue
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -556,15 +500,7 @@ Given I call Shared Step 59927 (Primary Physical State > Solid only available â€
 
 Given I should see the Additional Product Information Page
 
-Given I set 'Product has been classified using OSHA' to: No
-
-Given I set 'Product is shipped directly' to: No
-
-Given I set 'Product is a Retailers Private Label or Brand' to: No
-
-Given I set 'Product is solely for the Retailer's use' to: No
-
-Given I click continue
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -632,15 +568,7 @@ Given I call Shared Step 59927 (Primary Physical State > Solid only available â€
 
 Given I should see the Additional Product Information Page
 
-Given I set 'Product has been classified using OSHA' to: No
-
-Given I set 'Product is shipped directly' to: No
-
-Given I set 'Product is a Retailers Private Label or Brand' to: No
-
-Given I set 'Product is solely for the Retailer's use' to: No
-
-Given I click continue
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -707,15 +635,7 @@ Given I call Shared Step 59927 (Primary Physical State > Solid only available â€
 
 Given I should see the Additional Product Information Page
 
-Given I set 'Product has been classified using OSHA' to: No
-
-Given I set 'Product is shipped directly' to: No
-
-Given I set 'Product is a Retailers Private Label or Brand' to: No
-
-Given I set 'Product is solely for the Retailer's use' to: No
-
-Given I click continue
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
