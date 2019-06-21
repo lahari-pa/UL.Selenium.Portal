@@ -190,7 +190,7 @@ testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not P
                         "How many batteries required to run"});
             table1.AddRow(new string[] {
                         "Alkaline",
-                        "AG Alkaline button cell batteries by L\'image Home Products Inc.",
+                        "<any>",
                         "4",
                         "2"});
 #line 53
@@ -227,4 +227,3 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
 }
 #pragma warning restore
 #endregion
-

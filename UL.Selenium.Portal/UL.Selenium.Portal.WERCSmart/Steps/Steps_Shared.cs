@@ -518,9 +518,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					// setter adds a table row for each battery in the list and enters data into each column
 					productIncludesBattery.Batteries = listOfBatteries;
 					productIncludesBattery.DeleteEmptyBatteryRows();
-					return;
 				}
-				Report.Error("There were no batteries to add");
+				else
+				{
+					Report.Error("There were no batteries to add");
+				}
 			}
 			catch (Exception ex)
 			{
@@ -554,8 +556,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			NewProduct myNewProduct = new NewProduct();
-			TestReport.StartStep(
-				"I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page");
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristic Leaching Procedure (TCLP)");
 			TestReport.StartStep("I set the Product has had TCLP testing; Report is available option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has had TCLP testing; Report is available", "No");
@@ -2627,6 +2629,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Product Characteristics Page");
 			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			TestReport.StartStep("Confirm that  you see only Liquid option for Physical state");
+			var option = new Table("Option");
+			option.AddRow("Liquid");
+			MyNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Primary Physical State", option);
 			TestReport.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
 				table.Rows[0]["Secondary Physical State"]);
