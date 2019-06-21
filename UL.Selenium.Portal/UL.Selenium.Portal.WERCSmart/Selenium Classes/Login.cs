@@ -130,12 +130,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Email_Error_Text()
 		{
-			return this.EmailError?.FindElement(By.XPath("//span"), 2)?.Text;
+			return this.EmailError?.FindElement(By.XPath(".//span"), 2)?.Text;
 		}
 
 		public string Password_Error_Text()
 		{
-			return this.PasswordError?.FindElement(By.XPath("///span"), 2)?.Text;
+			return this.PasswordError?.FindElement(By.XPath(".//span"), 2)?.Text;
 		}
 
 	}
