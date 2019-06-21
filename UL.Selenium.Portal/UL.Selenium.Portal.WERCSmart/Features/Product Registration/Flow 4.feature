@@ -349,7 +349,7 @@ Then The home screen should load
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner - Leave In
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner - Leave In (Liquid, Non Aerosol)
 
 Then I save the product information as: TestCase57950
 
@@ -391,7 +391,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Conditioner - Leave In
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Conditioner - Leave In (Liquid, Non Aerosol)
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57950
 

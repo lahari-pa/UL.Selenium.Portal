@@ -37,7 +37,7 @@ Then I should see battery manufacturer message: Important: Prior to registering 
 
 Given I call Shared Step 48367 (Product Includes Battery > any type)
 | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
-| Alkaline     | L1028F       | 6                               | 6                                  |
+| Alkaline     | <any>        | 6                               | 6                                  |
 
 Given I click continue
 
@@ -79,10 +79,8 @@ Given I call Shared Step 70393 (Additional Product Information - With marketed f
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-| Battery Type | Manufacturer                                                   | Number of batteries per package | How many batteries required to run |
-| Alkaline     | Alkaline battery23A by Shenzhen AllKey Battery Co., Ltd.       | 6                               | 6                                  |
-
-Given I click continue
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Alkaline     | <any>        | 6                               | 6                                  |
 
 Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 
