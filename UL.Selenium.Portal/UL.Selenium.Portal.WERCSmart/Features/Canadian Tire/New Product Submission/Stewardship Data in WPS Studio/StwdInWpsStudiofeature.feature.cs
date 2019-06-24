@@ -614,4 +614,3 @@ testRunner.Given("I call Shared Step 86015 - WPS PD+ -  Product attributes - che
 }
 #pragma warning restore
 #endregion
-
