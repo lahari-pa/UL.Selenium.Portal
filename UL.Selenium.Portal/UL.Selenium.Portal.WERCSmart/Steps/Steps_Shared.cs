@@ -3666,8 +3666,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
 			TestReport.StartStep("I should see the Product Characteristics Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			TestReport.StartStep("There should be at least 2 options for Primary Physical State");
 			MyNewProductSteps.RadioButtonCountInSection("at least", "2", "Primary Physical State");
-			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("solid");
+			TestReport.StartStep("I set the Primary Physical State to: Solid");
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Solid");
 			var thisNewProduct = new NewProduct();
 			if (thisNewProduct.OptionExists("Secondary Physical State"))
 			{

@@ -257,7 +257,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string SelectedInputForLabel(string lblText)
 		{
 			var label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
-			var selectedOption = label?.FindElements(By.XPath("../..//input"), 2)?.First(x => x.Selected);
+			var selectedOption = label?.FindElements(By.XPath("../..//input"), 2)?.FirstOrDefault(x => x.Selected);
 			return selectedOption?.FindElement(By.XPath("../..//label/span"), 2)?.Text;
 		}
 
