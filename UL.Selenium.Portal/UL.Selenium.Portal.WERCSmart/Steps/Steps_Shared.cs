@@ -899,7 +899,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I click the browse button for label: Product Label in section: " + section +
-			                     @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+								 @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", section,
 				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
@@ -961,7 +961,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(
 					table.Rows[0]["Personal Protection Equipment"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " +
-			                     table.Rows[0]["Autoignition Temperature"]);
+								 table.Rows[0]["Autoignition Temperature"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(
 				table.Rows[0]["Autoignition Temperature"]);
 			TestReport.StartStep(
@@ -970,17 +970,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(
 				table.Rows[0]["Minimum Ignition Energy"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-			                     table.Rows[0]["Viscosity"]);
+								 table.Rows[0]["Viscosity"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(table.Rows[0]["Viscosity"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
-			                     table.Rows[0]["Appearance"]);
+								 table.Rows[0]["Appearance"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(
 				table.Rows[0]["Appearance"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " +
-			                     table.Rows[0]["Odor"]);
+								 table.Rows[0]["Odor"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(table.Rows[0]["Odor"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " +
-			                     table.Rows[0]["Odor Threshold"]);
+								 table.Rows[0]["Odor Threshold"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(
 				table.Rows[0]["Odor Threshold"]);
 			Delay.Seconds(1);
@@ -1301,7 +1301,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (waterSolubility != null && waterSolubility != "N/A")
 			{
 				TestReport.StartStep("I set the Select the best Water Solubility description option to: " +
-				                     waterSolubility);
+									 waterSolubility);
 				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", waterSolubility);
 			}
 			else
@@ -1700,7 +1700,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Personal Protection Equipment"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " +
-			                     table.Rows[0]["Autoignition Temperature"]);
+								 table.Rows[0]["Autoignition Temperature"]);
 			MyNewProduct.SetTheSectionOptionTo("Autoignition Temperature", table.Rows[0]["Autoignition Temperature"]);
 
 			TestReport.StartStep(
@@ -1709,19 +1709,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Minimum Ignition Energy", table.Rows[0]["Minimum Ignition Energy"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-			                     table.Rows[0]["Viscosity"]);
+								 table.Rows[0]["Viscosity"]);
 			MyNewProduct.SetTheSectionOptionTo("Viscosity", table.Rows[0]["Viscosity"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
-			                     table.Rows[0]["Appearance"]);
+								 table.Rows[0]["Appearance"]);
 			MyNewProduct.SetTheSectionOptionTo("Appearance", table.Rows[0]["Appearance"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " +
-			                     table.Rows[0]["Odor"]);
+								 table.Rows[0]["Odor"]);
 			MyNewProduct.SetTheSectionOptionTo("Odor", table.Rows[0]["Odor"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " +
-			                     table.Rows[0]["Odor Threshold"]);
+								 table.Rows[0]["Odor Threshold"]);
 			MyNewProduct.SetTheSectionOptionTo("Odor Threshold", table.Rows[0]["Odor Threshold"]);
 			// if Product's Dispensing Method is required enter any option
 
@@ -3839,8 +3839,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
-			TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {"Statement"});
-			table1.AddRow(new string[] {"VOC Analysis Date (Today's Date) " + DateTime.Today.ToString("MM/dd/yyyy")});
+			TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] { "Statement" });
+			table1.AddRow(new string[] { "VOC Analysis Date (Today's Date) " + DateTime.Today.ToString("MM/dd/yyyy") });
 			MyStepsNewProduct.ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(table1);
 		}
 
@@ -3988,7 +3988,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
 			{
 				TestReport.StartStep("In the Select Retailers popup I select the retailer: " +
-				                     thisRetailer["Retailer"]);
+									 thisRetailer["Retailer"]);
 				new StepsSelectRetailers().SelectTheRetailer(thisRetailer["Retailer"]);
 			}
 			TestReport.StartStep("I click continue");
@@ -4118,14 +4118,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (MatchingJob != null)
 			{
 				Report.Success("Matching job has been found with username=SHAMANAGER, date=" +
-				               DateTime.Today.Date.ToString() +
-				               ", class=Wercs.Core.BLLPortal.ImportProcessRules");
+							   DateTime.Today.Date.ToString() +
+							   ", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
 			else
 			{
 				Report.Info("No matching job has been found with username=SHAMANAGER, date=" +
-				            DateTime.Today.Date.ToString() +
-				            ", class=Wercs.Core.BLLPortal.ImportProcessRules");
+							DateTime.Today.Date.ToString() +
+							", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
 
 			TestReport.StartStep("I wait for this job to complete processing");
@@ -4682,7 +4682,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 51664 \(SHA - Accepted Product - set Retailers to Completed for saved as: (.*)\) for")]
-		public void GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(string savedAs,Table retailers)
+		public void GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(string savedAs, Table retailers)
 		{
 			TestReport.UseSubSteps = true;
 			Steps_Studio thisStepsStudio = new Steps_Studio();
@@ -5509,7 +5509,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 
 				TestReport.StartStep("In the Select Retailers popup I select the retailer: " +
-				                     thisRetailer["Retailer"]);
+									 thisRetailer["Retailer"]);
 				new StepsSelectRetailers().SelectTheRetailer(thisRetailer["Retailer"]);
 			}
 			foreach (var thisRetailer in retailers.Rows)
@@ -6499,7 +6499,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var pesticideDetailsState = new PesticideDetailsState();
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state +
-			                     " and select a date for the current year that is not June 30th");
+								 " and select a date for the current year that is not June 30th");
 			var MyStepsNewProduct = new StepsNewProduct();
 			var year = DateTime.Now.Year + 2;
 			var dt = new DateTime(year, 8, 8);
@@ -6549,7 +6549,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var pesticideDetailsState = new PesticideDetailsState();
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state +
-			                     " and select a date for the current year that is not June 30th");
+								 " and select a date for the current year that is not June 30th");
 			var MyStepsNewProduct = new StepsNewProduct();
 			var date = DateTime.Now;
 			var year = date.Year + 2;
@@ -6985,7 +6985,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 86293 - UPC - Package type shown but not required - Enter UPC, Container and size, Continue for UPC: (.*)")]
-		public void GivenICallSharedStep_UPC_PackageTypeShownButNotRequired_EnterUPCContainerAndSizeContinue(string UPC)
+		public void GivenICallSharedStep_UPC_PackageTypeShownButNotRequired_EnterUPCContainerAndSizeContinue(string aUPC)
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -7004,7 +7004,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I DO NOT select a Package Type from the drop down listPackage type should not be required for this UPC entry
 
 			Table upcTable = new Table("Field", "Value");
-			upcTable.AddRow("UPCNumber", UPC);
+			upcTable.AddRow("UPCNumber", aUPC);
 			upcTable.AddRow("ContainerType", "Cardboard");
 			upcTable.AddRow("Size", "40");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
