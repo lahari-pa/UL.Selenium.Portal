@@ -150,24 +150,24 @@ this.ScenarioInitialize(scenarioInfo);
 #line 35
  testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table91 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sections"});
-            table1.AddRow(new string[] {
+            table91.AddRow(new string[] {
                         "ECOLOGO"});
-            table1.AddRow(new string[] {
+            table91.AddRow(new string[] {
                         "Prospector"});
-            table1.AddRow(new string[] {
+            table91.AddRow(new string[] {
                         "GoodGuide for Consumers"});
-            table1.AddRow(new string[] {
+            table91.AddRow(new string[] {
                         "GoodGuide for Suppliers"});
-            table1.AddRow(new string[] {
+            table91.AddRow(new string[] {
                         "UL Secure Connect (ULSC)"});
-            table1.AddRow(new string[] {
+            table91.AddRow(new string[] {
                         "ULGHS"});
-            table1.AddRow(new string[] {
+            table91.AddRow(new string[] {
                         "Navigator"});
 #line 36
- testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table1, "Then ");
+ testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table91, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -383,29 +383,31 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[102411] UL Solution Center shows correct entries - Navigator section")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22280")]
         public virtual void _102411ULSolutionCenterShowsCorrectEntries_NavigatorSection()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[102411] UL Solution Center shows correct entries - Navigator section", null, ((string[])(null)));
-#line 128
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[102411] UL Solution Center shows correct entries - Navigator section", null, new string[] {
+                        "TReVorId:22280"});
+#line 129
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 129
- testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 130
- testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 131
- testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 132
- testRunner.Then("I Confirm the Navigator heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 133
- testRunner.And(@"I Confirm the information statement for section: Navigator reads: Navigator highlights the main chemical regulatory requirements for over 50 countries around the world. These summaries compile the most important information all in one place, offering easy to understand explanations of complex topics, paired with links to laws and helpful resources. Summaries are authored and updated by our global regulatory specialists, whose primary responsibility is the monitoring and reporting of regulations in their given country.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I Confirm the Navigator heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 134
- testRunner.And("I confirm the Learn More button is displayed for section: Navigator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(@"I Confirm the information statement for section: Navigator reads: Navigator highlights the main chemical regulatory requirements for over 50 countries around the world. These summaries compile the most important information all in one place, offering easy to understand explanations of complex topics, paired with links to laws and helpful resources. Summaries are authored and updated by our global regulatory specialists, whose primary responsibility is the monitoring and reporting of regulations in their given country.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 135
- testRunner.Given("I click the Learn More button for section: Navigator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.And("I confirm the Learn More button is displayed for section: Navigator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 136
- testRunner.Given("I switch to the Navigator information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I click the Learn More button for section: Navigator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 137
+ testRunner.Given("I switch to the Navigator information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 138
  testRunner.Then("I check that the current URL contains: https://psi.ul.com/en/products/navigator/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -414,4 +416,3 @@ this.ScenarioInitialize(scenarioInfo);
 }
 #pragma warning restore
 #endregion
-

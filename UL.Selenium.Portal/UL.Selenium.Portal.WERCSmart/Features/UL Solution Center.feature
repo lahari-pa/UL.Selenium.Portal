@@ -125,6 +125,7 @@ Scenario: [59661] UL Solution Center shows correct entries - ULGHS section
 
 #And I close the window that opened
 #Then I confirm that the UL Solution Center page is loaded
+@TReVorId:22280
 Scenario: [102411] UL Solution Center shows correct entries - Navigator section
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I click the UL Solution Center icon in the QuickLinks Pane
