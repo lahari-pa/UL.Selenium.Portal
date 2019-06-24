@@ -211,6 +211,7 @@ Then The home screen should load
 
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65516
 
+@TReVorId:22281
 Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium Battery Transportation step - question wording and validation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -310,6 +311,7 @@ Then The home screen should load
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65520
 
 
+@TReVorId:22282
 Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lithium Battery Transportation step - question wording and validation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

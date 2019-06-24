@@ -463,34 +463,36 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[65520] BCP - Contains Lithium Primary installed in product - Lithium Battery Tra" +
             "nsportation step - question wording and validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22281")]
         public virtual void _65520BCP_ContainsLithiumPrimaryInstalledInProduct_LithiumBatteryTransportationStep_QuestionWordingAndValidation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65520] BCP - Contains Lithium Primary installed in product - Lithium Battery Tra" +
-                    "nsportation step - question wording and validation", null, ((string[])(null)));
-#line 214
+                    "nsportation step - question wording and validation", null, new string[] {
+                        "TReVorId:22281"});
+#line 215
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 216
+#line 217
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 218
+#line 219
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 220
+#line 221
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 222
+#line 223
 testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Camera w/Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 224
+#line 225
 testRunner.Then("I save the product information as: TestCase65520", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 226
+#line 227
 testRunner.Given("I call Shared Step 65511 (Additional Product Information - No Child, No Direct sh" +
                     "ip, No PL, Click Continue - Happy Path (use in a BCP))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 228
+#line 229
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 230
+#line 231
 testRunner.Then("I should see the Product Includes Battery Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 232
+#line 233
 testRunner.Given("I set the Indicate how battery is packaged option to: Installed in the product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
@@ -505,17 +507,17 @@ testRunner.Given("I set the Indicate how battery is packaged option to: Installe
                         "4",
                         "4",
                         "lithium"});
-#line 234
+#line 235
 testRunner.Given("I add the following batteries:", ((string)(null)), table19, "Given ");
-#line 238
+#line 239
 testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 240
+#line 241
 testRunner.Given("I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - sele" +
                     "ct No to all - Click Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 242
+#line 243
 testRunner.Given("I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ra" +
                     "y - No to all)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 244
+#line 245
 testRunner.Then("I should see the Lithium Battery Transportation Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
@@ -523,9 +525,9 @@ testRunner.Then("I should see the Lithium Battery Transportation Page", ((string
             table20.AddRow(new string[] {
                         "For U.S. Department of Transportation (DOT), indicate the transport classificatio" +
                             "n"});
-#line 246
+#line 247
 testRunner.And("I see the following sections", ((string)(null)), table20, "And ");
-#line 250
+#line 251
 testRunner.And("I should see a total of 3 radio buttons for the section: For U.S. Department of T" +
                     "ransportation (DOT), indicate the transport classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -540,10 +542,10 @@ testRunner.And("I should see a total of 3 radio buttons for the section: For U.S
             table21.AddRow(new string[] {
                         "Meets the requirements of 49CFR173.185(c)(i) to be transported as non-dangerous g" +
                             "oods for road, rail, air, and vessel"});
-#line 252
+#line 253
 testRunner.And("The following radio buttons should be displayed for section: For U.S. Department " +
                     "of Transportation (DOT), indicate the transport classification", ((string)(null)), table21, "And ");
-#line 258
+#line 259
 testRunner.And("The alert message is displayed with text: Need help? Regulatory services are incl" +
                     "uded in Premium Subscription. Upgrade now!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -551,9 +553,9 @@ testRunner.And("The alert message is displayed with text: Need help? Regulatory 
                         "Section"});
             table22.AddRow(new string[] {
                         "For Marine transport (IMDG), indicate the classification"});
-#line 260
+#line 261
 testRunner.And("I see the following sections", ((string)(null)), table22, "And ");
-#line 264
+#line 265
 testRunner.And("I should see a total of 3 radio buttons for the section: For Marine transport (IM" +
                     "DG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -567,7 +569,7 @@ testRunner.And("I should see a total of 3 radio buttons for the section: For Mar
                             "ipment, 9"});
             table23.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IMDG"});
-#line 266
+#line 267
 testRunner.And("The following radio buttons should be displayed for section: For Marine transport" +
                     " (IMDG), indicate the classification", ((string)(null)), table23, "And ");
 #line hidden
@@ -575,9 +577,9 @@ testRunner.And("The following radio buttons should be displayed for section: For
                         "Section"});
             table24.AddRow(new string[] {
                         "For Air transport (IATA), indicate the classification"});
-#line 272
+#line 273
 testRunner.And("I see the following sections", ((string)(null)), table24, "And ");
-#line 276
+#line 277
 testRunner.And("I should see a total of 3 radio buttons for the section: For Air transport (IATA)" +
                     ", indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -589,7 +591,7 @@ testRunner.And("I should see a total of 3 radio buttons for the section: For Air
                         "Section II"});
             table25.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IATA"});
-#line 278
+#line 279
 testRunner.And("The following radio buttons should be displayed for section: For Air transport (I" +
                     "ATA), indicate the classification", ((string)(null)), table25, "And ");
 #line hidden
@@ -598,9 +600,9 @@ testRunner.And("The following radio buttons should be displayed for section: For
             table26.AddRow(new string[] {
                         "For Canada\'s Transportation of Dangerous Goods (TDG), indicate the classification" +
                             ""});
-#line 284
+#line 285
 testRunner.And("I see the following sections", ((string)(null)), table26, "And ");
-#line 288
+#line 289
 testRunner.And("I should see a total of 3 radio buttons for the section: For Canada\'s Transportat" +
                     "ion of Dangerous Goods (TDG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -614,28 +616,28 @@ testRunner.And("I should see a total of 3 radio buttons for the section: For Can
                             "rous goods."});
             table27.AddRow(new string[] {
                         "None of the above/Not intended for shipment in Canada"});
-#line 290
+#line 291
 testRunner.And("The following radio buttons should be displayed for section: For Canada\'s Transpo" +
                     "rtation of Dangerous Goods (TDG), indicate the classification", ((string)(null)), table27, "And ");
-#line 296
+#line 297
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 298
+#line 299
 testRunner.Then("For U.S. Department of Transportation (DOT), indicate the transport classificatio" +
                     "n should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 300
+#line 301
 testRunner.Then("For Marine transport (IMDG), indicate the classification should be showing the er" +
                     "ror messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 302
+#line 303
 testRunner.Then("For Air transport (IATA), indicate the classification should be showing the error" +
                     " messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 304
+#line 305
 testRunner.Then("For Canada\'s Transportation of Dangerous Goods (TDG), indicate the classification" +
                     " should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 306
+#line 307
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 308
+#line 309
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 310
+#line 311
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase65520", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -645,34 +647,36 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[65523] BCP - Contains Lithium Primary packaged with the product - Lithium Batter" +
             "y Transportation step - question wording and validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22282")]
         public virtual void _65523BCP_ContainsLithiumPrimaryPackagedWithTheProduct_LithiumBatteryTransportationStep_QuestionWordingAndValidation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65523] BCP - Contains Lithium Primary packaged with the product - Lithium Batter" +
-                    "y Transportation step - question wording and validation", null, ((string[])(null)));
-#line 313
+                    "y Transportation step - question wording and validation", null, new string[] {
+                        "TReVorId:22282"});
+#line 315
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 315
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 317
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 319
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 321
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 321
+#line 323
 testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Camera w/Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 323
-testRunner.Then("I save the product information as: TestCase65523", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 325
+testRunner.Then("I save the product information as: TestCase65523", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 327
 testRunner.Given("I call Shared Step 65511 (Additional Product Information - No Child, No Direct sh" +
                     "ip, No PL, Click Continue - Happy Path (use in a BCP))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 327
+#line 329
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 329
-testRunner.Then("I should see the Product Includes Battery Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 331
+testRunner.Then("I should see the Product Includes Battery Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 333
 testRunner.Given("I set the Indicate how battery is packaged option to: The battery is shipped with" +
                     " but not included in my product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -688,17 +692,17 @@ testRunner.Given("I set the Indicate how battery is packaged option to: The batt
                         "4",
                         "4",
                         "lithium"});
-#line 333
+#line 335
 testRunner.Given("I add the following batteries:", ((string)(null)), table28, "Given ");
-#line 337
-testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 339
+testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 341
 testRunner.Given("I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - sele" +
                     "ct No to all - Click Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 341
+#line 343
 testRunner.Given("I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ra" +
                     "y - No to all)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 343
+#line 345
 testRunner.Then("I should see the Lithium Battery Transportation Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
@@ -706,9 +710,9 @@ testRunner.Then("I should see the Lithium Battery Transportation Page", ((string
             table29.AddRow(new string[] {
                         "For U.S. Department of Transportation (DOT), indicate the transport classificatio" +
                             "n"});
-#line 345
+#line 347
 testRunner.And("I see the following sections", ((string)(null)), table29, "And ");
-#line 349
+#line 351
 testRunner.And("I should see a total of 3 radio buttons for the section: For U.S. Department of T" +
                     "ransportation (DOT), indicate the transport classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -723,10 +727,10 @@ testRunner.And("I should see a total of 3 radio buttons for the section: For U.S
             table30.AddRow(new string[] {
                         "Meets the requirements of 49CFR173.185(c)(i) to be transported as non-dangerous g" +
                             "oods for road, rail, air, and vessel"});
-#line 351
+#line 353
 testRunner.And("The following radio buttons should be displayed for section: For U.S. Department " +
                     "of Transportation (DOT), indicate the transport classification", ((string)(null)), table30, "And ");
-#line 357
+#line 359
 testRunner.And("The alert message is displayed with text: Need help? Regulatory services are incl" +
                     "uded in Premium Subscription. Upgrade now!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -734,9 +738,9 @@ testRunner.And("The alert message is displayed with text: Need help? Regulatory 
                         "Section"});
             table31.AddRow(new string[] {
                         "For Marine transport (IMDG), indicate the classification"});
-#line 359
+#line 361
 testRunner.And("I see the following sections", ((string)(null)), table31, "And ");
-#line 363
+#line 365
 testRunner.And("I should see a total of 3 radio buttons for the section: For Marine transport (IM" +
                     "DG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -750,7 +754,7 @@ testRunner.And("I should see a total of 3 radio buttons for the section: For Mar
                             "pment, 9"});
             table32.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IMDG"});
-#line 365
+#line 367
 testRunner.And("The following radio buttons should be displayed for section: For Marine transport" +
                     " (IMDG), indicate the classification", ((string)(null)), table32, "And ");
 #line hidden
@@ -758,9 +762,9 @@ testRunner.And("The following radio buttons should be displayed for section: For
                         "Section"});
             table33.AddRow(new string[] {
                         "For Air transport (IATA), indicate the classification"});
-#line 371
+#line 373
 testRunner.And("I see the following sections", ((string)(null)), table33, "And ");
-#line 375
+#line 377
 testRunner.And("I should see a total of 3 radio buttons for the section: For Air transport (IATA)" +
                     ", indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -772,7 +776,7 @@ testRunner.And("I should see a total of 3 radio buttons for the section: For Air
                         "Section II"});
             table34.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IATA"});
-#line 377
+#line 379
 testRunner.And("The following radio buttons should be displayed for section: For Air transport (I" +
                     "ATA), indicate the classification", ((string)(null)), table34, "And ");
 #line hidden
@@ -781,9 +785,9 @@ testRunner.And("The following radio buttons should be displayed for section: For
             table35.AddRow(new string[] {
                         "For Canada\'s Transportation of Dangerous Goods (TDG), indicate the classification" +
                             ""});
-#line 383
+#line 385
 testRunner.And("I see the following sections", ((string)(null)), table35, "And ");
-#line 387
+#line 389
 testRunner.And("I should see a total of 3 radio buttons for the section: For Canada\'s Transportat" +
                     "ion of Dangerous Goods (TDG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -797,28 +801,28 @@ testRunner.And("I should see a total of 3 radio buttons for the section: For Can
                             "rous goods."});
             table36.AddRow(new string[] {
                         "None of the above/Not intended for shipment in Canada"});
-#line 389
+#line 391
 testRunner.And("The following radio buttons should be displayed for section: For Canada\'s Transpo" +
                     "rtation of Dangerous Goods (TDG), indicate the classification", ((string)(null)), table36, "And ");
-#line 395
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 397
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 399
 testRunner.Then("For U.S. Department of Transportation (DOT), indicate the transport classificatio" +
                     "n should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 399
+#line 401
 testRunner.Then("For Marine transport (IMDG), indicate the classification should be showing the er" +
                     "ror messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 401
+#line 403
 testRunner.Then("For Air transport (IATA), indicate the classification should be showing the error" +
                     " messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 403
+#line 405
 testRunner.Then("For Canada\'s Transportation of Dangerous Goods (TDG), indicate the classification" +
                     " should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 405
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 407
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 409
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 411
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase65523", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -828,4 +832,3 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
 }
 #pragma warning restore
 #endregion
-
