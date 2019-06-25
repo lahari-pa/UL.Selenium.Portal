@@ -67,22 +67,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see a user name next to the user icon")]
+		[StepDefinition(@"I should see a user name in the header next to the user icon")]
 		public void ThenIShouldSeeAUserNameNextToTheUserIcon()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + username + " in the top right corner");
-			try
-			{
-				TopMenuBar thisTopMenuBar = new TopMenuBar();
-				var currentUser = thisTopMenuBar.GetCurrentUser();
-				Report.IsTrue(currentUser.Length>0,
-					"Username should be showing","Username showing as: " + currentUser);
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			TopMenuBar thisTopMenuBar = new TopMenuBar();
+			var currentUser = thisTopMenuBar.GetCurrentUser();
+			Report.IsTrue(currentUser.Length>0,
+				"Username should be showing","Username showing as: " + currentUser);
 		}
 
 		[StepDefinition(@"I should see username: (.*) in the right corner")]
