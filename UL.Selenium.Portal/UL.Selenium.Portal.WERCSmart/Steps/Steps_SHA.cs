@@ -2017,5 +2017,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Matching UPC has been found for UPC: " + UPC + " and retailer: " + retailer);
 		}
 
+		[StepDefinition(@"I should see a new tabbed document whose URL contains DocumentID")]
+		public void ThenIShouldSeeANewTabbedDocumentWhoseURLContainsDocumentID()
+		{
+			Delay.Seconds(30);
+			var allWindowHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+
+			foreach (var thisWindowHandle in allWindowHandles)
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(thisWindowHandle);
+				Delay.Seconds(2);
+				string currentURL = SeleniumBrowser.WebBrowser.Url;
+				Report.Info( "URL:" + currentURL);
+				Report.Screenshot();
+				if (SeleniumBrowser.WebBrowser.Url.ToLower().Contains("documentid"))
+				{
+					string regexPattern = @"DocumentID=(.*)";
+					Match match = new Regex(regexPattern).Match(currentURL);
+					if (match.Success)
+					{
+						Report.Info("Document id is: " + match.Groups[1].Value);
+					}
+				}
+			}
+		}
+
+
 	}
 }
