@@ -196,7 +196,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					break;
 				}
 				Report.Info("User Not Found On Page " + myPageNumber.Text + ", Navigating to Next Page");
-				myNext.Click();
+				if (!myNext.TryClick())
+				{
+					throw new Exception("Failed to click move to next page");
+				}
 				pageNo++;
 			}
 			Report.Info("User: " + userName + " Has Not Been Created");
