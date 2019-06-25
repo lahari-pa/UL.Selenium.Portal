@@ -994,5 +994,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
+		[StepDefinition (@"I check that there are at least (\d) pages of users\. If not this test will not work\.")]
+		public void GivenICheckThatThereAreAtLeastSixPagesOfUsers_IfNotThisTestWillNotWork_(int minPages)
+		{
+			Report.IsTrue(new MyAccount().GetHighestPageNo() > 5,
+				"Can't run this test since we need a page count of 6 or higher", "OK to continue with this test.");
+		}
+
+
 	}
 }

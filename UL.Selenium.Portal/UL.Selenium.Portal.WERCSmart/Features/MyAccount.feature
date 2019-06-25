@@ -70,39 +70,28 @@ Then The My Account user grid is currently on page number: 1
 
 @TReVorId:22224
 Scenario: [70511] Pagination (...) need an account with six pages of users
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-
+#CLF 25/6/2019 Changed login account to one that has enough products to page through
+#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click on My Account
-
+Given I check that there are at least 6 pages of users. If not this test will not work.
 Given I click ... in the My Account user grid
-
 Given I see the user grid page navigation input with up and down arrows
-
 Given I type the number 2 into the user grid page navigation box and press the enter key
-
 Then The My Account user grid is currently on page number: 2
-
 Given I click ... in the My Account user grid
-
 Given I enter the up arrow into the user grid page navigation box then the correct page is shown
-
 Given I click ... in the My Account user grid
-
 Given I enter the down arrow into the user grid page navigation box then the correct page is shown
 
 @TReVorId:16677
 Scenario: [68417] Company Information
-
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-
 Given I click on My Account
-
 Given In the My Account page I navigate to the Company Information page
-
 Then In the Company Information page I confirm the Company Information is correct
-| Company Name | Admin Name                | Email Address   | Supplier Type | Country       | Address                  | City   | State | Zip Code | Country Code | Phone        |
-| Visual       | Automated, Visual Company | <VisualAccount> | Manufacturer  | United States | 31 British American Blvd | Latham | NY    | 12110    | 1            | 555-555-5555 |
+| Company Name   | Admin Name               | Email Address   | Supplier Type | Country       | Address           | City   | State | Zip Code | Country Code | Phone        |
+| Visual Testing | Automated Visual Testing | <VisualAccount> | Manufacturer  | United States | 31 British Am Ave | Latham | NY    | 12110    | 1            | 555-555-5555 |
 
 # Assigned to Paulina Mata
 # Created by Larkin, Steve

@@ -606,6 +606,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return 1;
 		}
 
+		public int GetHighestPageNo()
+		{
+			var pageNumbers = this.containerElement.FindElements(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+			List<short> intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
+			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
+
+
+		}
+
 		public IWebElement UserGridNavPageInput()
 		{
 			return this.containerElement.FindElement(By.XPath(".//input[@type='number']"), 2);
