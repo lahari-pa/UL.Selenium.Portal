@@ -806,7 +806,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
@@ -2009,7 +2009,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I set the Has a LCD for Plasma Display option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Has a LCD or Plasma Display", "No");
 			TestReport.StartStep("In the Answer Electronic Equipment questions page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Answer Electronic Equipment questions");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Electronic Equipment");
 		}
 
 		[StepDefinition(@"I call Shared Step 60741 \(Select Primary Physical Property - Solid - With Ingredients\)")]
@@ -3666,8 +3666,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
 			TestReport.StartStep("I should see the Product Characteristics Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			TestReport.StartStep("There should be at least 2 options for Primary Physical State");
 			MyNewProductSteps.RadioButtonCountInSection("at least", "2", "Primary Physical State");
-			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("solid");
+			TestReport.StartStep("I set the Primary Physical State to: Solid");
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Solid");
 			var thisNewProduct = new NewProduct();
 			if (thisNewProduct.OptionExists("Secondary Physical State"))
 			{
