@@ -55,21 +55,15 @@ Then In the Company Information screen I should see 0 Division Accounts
 
 @TReVorId:13901
 Scenario: [65887] Pagination
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-
+#CLF 25/6/2019 Changed login account to one that has enough products to page through
+#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
-
 Given I navigate to the MyAccount page
-
 Then The My Account user grid is currently on page number: 1
-
 Given I click next in the My Account user grid
-
 Then The My Account user grid is currently on page number: 2
-
 Given I click previous in the My Account user grid
-
 Then The My Account user grid is currently on page number: 1
 
 
