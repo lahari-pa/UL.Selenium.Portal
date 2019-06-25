@@ -42,17 +42,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I should see user name: (.*) in the header next to the user icon")]
+		[StepDefinition(@"I should see user name: (.*) in the header next to the user icon")]
 		public void ThenIShouldSeeUserNameInTheHeaderNextToTheUserIcon(string username)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + username + " in the top right corner");
 			try
 			{
+				if (username.ToLower().Contains("saved as"))
+				{
+					var savedUser = (User)Context
+						.GetFromContext(username.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+					username = savedUser.Username;
+				}
 				TopMenuBar thisTopMenuBar = new TopMenuBar();
 				Report.Info("Looking for username: " + username);
 				Report.IsTrue(thisTopMenuBar.GetCurrentUser() == username,
 					"Username should have been showing as: " + username + " but is: " + thisTopMenuBar.GetCurrentUser(),
 					"Username correctly showing as: " + username);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I should see a user name next to the user icon")]
+		public void ThenIShouldSeeAUserNameNextToTheUserIcon()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + username + " in the top right corner");
+			try
+			{
+				TopMenuBar thisTopMenuBar = new TopMenuBar();
+				var currentUser = thisTopMenuBar.GetCurrentUser();
+				Report.IsTrue(currentUser.Length>0,
+					"Username should be showing","Username showing as: " + currentUser);
 			}
 			catch (Exception ex)
 			{
