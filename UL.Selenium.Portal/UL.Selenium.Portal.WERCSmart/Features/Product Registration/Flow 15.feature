@@ -20,19 +20,15 @@ Then The home screen should load
 Given I generate a random UPC number and save as: UPC58760
 Given I delete all products with UPC Number: saved as UPC58760
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Emitting Diodes
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Light Emitting Diodes (LED)
 Then I save the product information as: TestCase58760
 And I call Shared Step 69687 (Additional Product Information - US, No(PL))
-#Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-# Missing step in test case - TCLP page
-#Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58760, container type: Plastic Container and size: 22
 Given in the Additional Documents to Provide page I click Continue
-Given in the Other Product Document Uploads page I click Continue
-# Given in the Additional Documents Request page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Light Bulbs - Light Emitting Diodes (LED)
 Given I navigate to the home page
@@ -59,7 +55,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58759, container type: Plastic Container and size: 10.00
 #Given in the Additional Documents to Provide page I click Continue
 #Given in the Other Product Document Uploads page I click Continue
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58759. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Servers, Small-Scale
 Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58759

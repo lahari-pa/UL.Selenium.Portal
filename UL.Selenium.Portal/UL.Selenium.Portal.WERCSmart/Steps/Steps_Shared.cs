@@ -806,7 +806,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
@@ -2009,7 +2009,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I set the Has a LCD for Plasma Display option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Has a LCD or Plasma Display", "No");
 			TestReport.StartStep("In the Answer Electronic Equipment questions page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Answer Electronic Equipment questions");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Electronic Equipment");
 		}
 
 		[StepDefinition(@"I call Shared Step 60741 \(Select Primary Physical Property - Solid - With Ingredients\)")]
