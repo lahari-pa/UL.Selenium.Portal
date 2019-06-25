@@ -187,7 +187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info(listOfIngredients.Count.ToString() + " ingredients found:");
 			for (int i = 0; i < listOfIngredients.Count; i++)
 			{
-				Report.Info((i + 1).ToString() + ": " + listOfIngredients[i].getDetails());
+				Report.Info((i + 1).ToString() + ": " + listOfIngredients[i].GetDetails());
 			}
 			Report.IsTrue(thisIngredient.PublicallyDisclosed == (publiclyDisclosed == "Yes"),
 				"For ingredient: " + thisIngredient.CASNumber + " expected publicly disclosed: " + publiclyDisclosed,
