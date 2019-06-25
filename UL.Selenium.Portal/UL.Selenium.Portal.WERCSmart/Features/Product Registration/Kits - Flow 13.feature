@@ -114,7 +114,7 @@ And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 #And I The Purchase summary step is shown with the success message
 
-#Call create product to completed steps (one is regulated for transport, one is not regulated for transport)
+#Call create product to COMPLETED steps (one is regulated for transport, one is not regulated for transport)
 @TReVorId:20254
 Scenario: [63521] Kit Product - One or more inputs is regulated for transport - Transportation step does NOT shows Not regulated option
 Given I login into the WERCSmart Portal - Administrator Role
@@ -131,16 +131,16 @@ Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
-Given I set the Product is Regulated for Transport field to: Yes
-Given I set the Select all modes of transport field to: DOT
-Given I set the Select all modes of transport field to: Shipping fully regulated
+Given I set the Product is Regulated for Transport field to: Not Regulated
+#Given I set the Select all modes of transport field to: DOT
+#Given I set the Select all modes of transport field to: Shipping fully regulated
 Then in the Transport Details 1 page I click Continue
-And I should see the U. S. Department of Transportation (DOT) Classification Page
-Given I set the UN Number field to: UN1950
-Given I set the Proper Shipping Name field to: Aerosols
-Given I set the Hazard Class field to: 2.1
-Given I set the Packing Group field to: None
-Then in the U. S. Department of Transportation (DOT) Classification page I click Continue
+#And I should see the U. S. Department of Transportation (DOT) Classification Page
+#Given I set the UN Number field to: UN1950
+#Given I set the Proper Shipping Name field to: Aerosols
+#Given I set the Hazard Class field to: 2.1
+#Given I set the Packing Group field to: None
+#Then in the U. S. Department of Transportation (DOT) Classification page I click Continue
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Then I should see the Additional Documents to Provide Page

@@ -131,7 +131,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Info("Expecting to find message: '" + error + "'");
 			Report.Info("Actual message was: '" + errorShowing + "'");
-			Report.IsTrue(errorShowing.Trim() == error.Trim(), "Error message was not as expected!", "Error message was showing correctly!");
+			Report.IsTrue(errorShowing?.Trim() == error.Trim(), "Error message was not as expected!", "Error message was showing correctly!");
 		}
 
 		[StepDefinition(@"I login as user: (.*)")]

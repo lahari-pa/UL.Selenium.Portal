@@ -126,20 +126,20 @@ testRunner.Then("I should see the Product Includes Battery Page", ((string)(null
 #line 35
 testRunner.Given("I set the Indicate how battery is packaged option to: Installed in the product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run",
                         "Saved As"});
-            table1.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Lithium Ion",
                         "<any>",
                         "4",
                         "4",
                         "lithiumbattery"});
 #line 37
-testRunner.Given("I add the following batteries:", ((string)(null)), table1, "Given ");
+testRunner.Given("I add the following batteries:", ((string)(null)), table2, "Given ");
 #line 41
 testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 43
@@ -151,105 +151,105 @@ testRunner.Given("I call Shared Step 58189 (Answer Electronic Equipment question
 #line 47
 testRunner.Then("I should see the Lithium Battery Transportation Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table2.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "For U.S. Department of Transportation (DOT), indicate the transport classificatio" +
                             "n"});
 #line 49
-testRunner.And("I see the following sections", ((string)(null)), table2, "And ");
+testRunner.And("I see the following sections", ((string)(null)), table3, "And ");
 #line 53
 testRunner.And("I should see a total of 3 radio buttons for the section: For U.S. Department of T" +
                     "ransportation (DOT), indicate the transport classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table3.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous " +
                             "goods for road and rail"});
-            table3.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Meets the requirements of 49CFR173.185(c)(i) to be transported as non-dangerous g" +
                             "oods for road, rail, air, and vessel"});
-            table3.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3481, Lithium ion batteries contained in equip" +
                             "ment, 9"});
 #line 55
 testRunner.And("The following radio buttons should be displayed for section: For U.S. Department " +
-                    "of Transportation (DOT), indicate the transport classification", ((string)(null)), table3, "And ");
+                    "of Transportation (DOT), indicate the transport classification", ((string)(null)), table4, "And ");
 #line 61
 testRunner.And("The alert message is displayed with text: Need help? Regulatory services are incl" +
                     "uded in Premium Subscription. Upgrade now!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table4.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "For Marine transport (IMDG), indicate the classification"});
 #line 63
-testRunner.And("I see the following sections", ((string)(null)), table4, "And ");
+testRunner.And("I see the following sections", ((string)(null)), table5, "And ");
 #line 67
 testRunner.And("I should see a total of 3 radio buttons for the section: For Marine transport (IM" +
                     "DG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table5.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Meets requirements of IMDG Special Provision 188 to be transported as non-dangero" +
                             "us goods"});
-            table5.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3481, Lithium ion batteries contained in equip" +
                             "ment, 9"});
-            table5.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IMDG"});
 #line 69
 testRunner.And("The following radio buttons should be displayed for section: For Marine transport" +
-                    " (IMDG), indicate the classification", ((string)(null)), table5, "And ");
+                    " (IMDG), indicate the classification", ((string)(null)), table6, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "For Air transport (IATA), indicate the classification"});
 #line 75
-testRunner.And("I see the following sections", ((string)(null)), table6, "And ");
+testRunner.And("I see the following sections", ((string)(null)), table7, "And ");
 #line 79
 testRunner.And("I should see a total of 3 radio buttons for the section: For Air transport (IATA)" +
                     ", indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table7.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Section I"});
-            table7.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Section II"});
-            table7.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IATA"});
 #line 81
 testRunner.And("The following radio buttons should be displayed for section: For Air transport (I" +
-                    "ATA), indicate the classification", ((string)(null)), table7, "And ");
+                    "ATA), indicate the classification", ((string)(null)), table8, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table8.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "For Canada\'s Transportation of Dangerous Goods (TDG), indicate the classification" +
                             ""});
 #line 87
-testRunner.And("I see the following sections", ((string)(null)), table8, "And ");
+testRunner.And("I see the following sections", ((string)(null)), table9, "And ");
 #line 91
 testRunner.And("I should see a total of 3 radio buttons for the section: For Canada\'s Transportat" +
                     "ion of Dangerous Goods (TDG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table9.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Meets the requirements of TDG special provision 34 to be transported as non-dange" +
                             "rous goods."});
-            table9.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3481, Lithium ion batteries contained in equip" +
                             "ment, 9"});
-            table9.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "None of the above/Not intended for shipment in Canada"});
 #line 93
 testRunner.And("The following radio buttons should be displayed for section: For Canada\'s Transpo" +
-                    "rtation of Dangerous Goods (TDG), indicate the classification", ((string)(null)), table9, "And ");
+                    "rtation of Dangerous Goods (TDG), indicate the classification", ((string)(null)), table10, "And ");
 #line 99
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 101
@@ -311,20 +311,20 @@ testRunner.Then("I should see the Product Includes Battery Page", ((string)(null
 testRunner.Given("I set the Indicate how battery is packaged option to: The battery is shipped with" +
                     " but not included in my product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run",
                         "Saved As"});
-            table10.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Lithium Ion",
                         "<any>",
                         "4",
                         "4",
                         "lithiumbattery"});
 #line 136
-testRunner.Given("I add the following batteries:", ((string)(null)), table10, "Given ");
+testRunner.Given("I add the following batteries:", ((string)(null)), table11, "Given ");
 #line 140
 testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 142
@@ -336,105 +336,105 @@ testRunner.Given("I call Shared Step 58189 (Answer Electronic Equipment question
 #line 146
 testRunner.Then("I should see the Lithium Battery Transportation Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table11.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "For U.S. Department of Transportation (DOT), indicate the transport classificatio" +
                             "n"});
 #line 148
-testRunner.And("I see the following sections", ((string)(null)), table11, "And ");
+testRunner.And("I see the following sections", ((string)(null)), table12, "And ");
 #line 152
 testRunner.And("I should see a total of 3 radio buttons for the section: For U.S. Department of T" +
                     "ransportation (DOT), indicate the transport classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table12.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous " +
                             "goods for road and rail"});
-            table12.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Meets the requirements of 49CFR173.185(c)(i) to be transported as non-dangerous g" +
                             "oods for road, rail, air, and vessel"});
-            table12.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipm" +
                             "ent, 9"});
 #line 154
 testRunner.And("The following radio buttons should be displayed for section: For U.S. Department " +
-                    "of Transportation (DOT), indicate the transport classification", ((string)(null)), table12, "And ");
+                    "of Transportation (DOT), indicate the transport classification", ((string)(null)), table13, "And ");
 #line 160
 testRunner.And("The alert message is displayed with text: Need help? Regulatory services are incl" +
                     "uded in Premium Subscription. Upgrade now!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table13.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "For Marine transport (IMDG), indicate the classification"});
 #line 162
-testRunner.And("I see the following sections", ((string)(null)), table13, "And ");
+testRunner.And("I see the following sections", ((string)(null)), table14, "And ");
 #line 166
 testRunner.And("I should see a total of 3 radio buttons for the section: For Marine transport (IM" +
                     "DG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table14.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Meets requirements of IMDG Special Provision 188 to be transported as non-dangero" +
                             "us goods"});
-            table14.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipm" +
                             "ent, 9"});
-            table14.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IMDG"});
 #line 168
 testRunner.And("The following radio buttons should be displayed for section: For Marine transport" +
-                    " (IMDG), indicate the classification", ((string)(null)), table14, "And ");
+                    " (IMDG), indicate the classification", ((string)(null)), table15, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table15.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "For Air transport (IATA), indicate the classification"});
 #line 174
-testRunner.And("I see the following sections", ((string)(null)), table15, "And ");
+testRunner.And("I see the following sections", ((string)(null)), table16, "And ");
 #line 178
 testRunner.And("I should see a total of 3 radio buttons for the section: For Air transport (IATA)" +
                     ", indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table16.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "Section I"});
-            table16.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "Section II"});
-            table16.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IATA"});
 #line 180
 testRunner.And("The following radio buttons should be displayed for section: For Air transport (I" +
-                    "ATA), indicate the classification", ((string)(null)), table16, "And ");
+                    "ATA), indicate the classification", ((string)(null)), table17, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table17.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "For Canada\'s Transportation of Dangerous Goods (TDG), indicate the classification" +
                             ""});
 #line 186
-testRunner.And("I see the following sections", ((string)(null)), table17, "And ");
+testRunner.And("I see the following sections", ((string)(null)), table18, "And ");
 #line 190
 testRunner.And("I should see a total of 3 radio buttons for the section: For Canada\'s Transportat" +
                     "ion of Dangerous Goods (TDG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table18.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "Meets the requirements of TDG special provision 34 to be transported as non-dange" +
                             "rous goods."});
-            table18.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipm" +
                             "ent, 9"});
-            table18.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "None of the above/Not intended for shipment in Canada"});
 #line 192
 testRunner.And("The following radio buttons should be displayed for section: For Canada\'s Transpo" +
-                    "rtation of Dangerous Goods (TDG), indicate the classification", ((string)(null)), table18, "And ");
+                    "rtation of Dangerous Goods (TDG), indicate the classification", ((string)(null)), table19, "And ");
 #line 198
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 200
@@ -495,20 +495,24 @@ testRunner.Then("I should see the Product Includes Battery Page", ((string)(null
 #line 233
 testRunner.Given("I set the Indicate how battery is packaged option to: Installed in the product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run",
                         "Saved As"});
-            table19.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "Lithium Ion",
                         "<any>",
                         "4",
                         "4",
                         "lithium"});
 #line 235
+<<<<<<< HEAD
 testRunner.Given("I add the following batteries:", ((string)(null)), table19, "Given ");
+=======
+testRunner.Given("I add the following batteries:", ((string)(null)), table20, "Given ");
+>>>>>>> origin/QA
 #line 239
 testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 241
@@ -520,105 +524,129 @@ testRunner.Given("I call Shared Step 58189 (Answer Electronic Equipment question
 #line 245
 testRunner.Then("I should see the Lithium Battery Transportation Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table20.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "For U.S. Department of Transportation (DOT), indicate the transport classificatio" +
                             "n"});
 #line 247
+<<<<<<< HEAD
 testRunner.And("I see the following sections", ((string)(null)), table20, "And ");
+=======
+testRunner.And("I see the following sections", ((string)(null)), table21, "And ");
+>>>>>>> origin/QA
 #line 251
 testRunner.And("I should see a total of 3 radio buttons for the section: For U.S. Department of T" +
                     "ransportation (DOT), indicate the transport classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table21.AddRow(new string[] {
+            table22.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3091, Lithium metal batteries contained in equ" +
                             "ipment, 9"});
-            table21.AddRow(new string[] {
+            table22.AddRow(new string[] {
                         "Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous " +
                             "goods for road and rail"});
-            table21.AddRow(new string[] {
+            table22.AddRow(new string[] {
                         "Meets the requirements of 49CFR173.185(c)(i) to be transported as non-dangerous g" +
                             "oods for road, rail, air, and vessel"});
 #line 253
 testRunner.And("The following radio buttons should be displayed for section: For U.S. Department " +
+<<<<<<< HEAD
                     "of Transportation (DOT), indicate the transport classification", ((string)(null)), table21, "And ");
+=======
+                    "of Transportation (DOT), indicate the transport classification", ((string)(null)), table22, "And ");
+>>>>>>> origin/QA
 #line 259
 testRunner.And("The alert message is displayed with text: Need help? Regulatory services are incl" +
                     "uded in Premium Subscription. Upgrade now!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table22.AddRow(new string[] {
+            table23.AddRow(new string[] {
                         "For Marine transport (IMDG), indicate the classification"});
 #line 261
+<<<<<<< HEAD
 testRunner.And("I see the following sections", ((string)(null)), table22, "And ");
+=======
+testRunner.And("I see the following sections", ((string)(null)), table23, "And ");
+>>>>>>> origin/QA
 #line 265
 testRunner.And("I should see a total of 3 radio buttons for the section: For Marine transport (IM" +
                     "DG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table23.AddRow(new string[] {
+            table24.AddRow(new string[] {
                         "Meets requirements of IMDG Special Provision 188 to be transported as non-dangero" +
                             "us goods"});
-            table23.AddRow(new string[] {
+            table24.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3091, Lithium metal batteries contained in equ" +
                             "ipment, 9"});
-            table23.AddRow(new string[] {
+            table24.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IMDG"});
 #line 267
 testRunner.And("The following radio buttons should be displayed for section: For Marine transport" +
-                    " (IMDG), indicate the classification", ((string)(null)), table23, "And ");
+                    " (IMDG), indicate the classification", ((string)(null)), table24, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table24.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "For Air transport (IATA), indicate the classification"});
 #line 273
+<<<<<<< HEAD
 testRunner.And("I see the following sections", ((string)(null)), table24, "And ");
+=======
+testRunner.And("I see the following sections", ((string)(null)), table25, "And ");
+>>>>>>> origin/QA
 #line 277
 testRunner.And("I should see a total of 3 radio buttons for the section: For Air transport (IATA)" +
                     ", indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table25.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Section I"});
-            table25.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Section II"});
-            table25.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IATA"});
 #line 279
 testRunner.And("The following radio buttons should be displayed for section: For Air transport (I" +
-                    "ATA), indicate the classification", ((string)(null)), table25, "And ");
+                    "ATA), indicate the classification", ((string)(null)), table26, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table26.AddRow(new string[] {
+            table27.AddRow(new string[] {
                         "For Canada\'s Transportation of Dangerous Goods (TDG), indicate the classification" +
                             ""});
 #line 285
+<<<<<<< HEAD
 testRunner.And("I see the following sections", ((string)(null)), table26, "And ");
+=======
+testRunner.And("I see the following sections", ((string)(null)), table27, "And ");
+>>>>>>> origin/QA
 #line 289
 testRunner.And("I should see a total of 3 radio buttons for the section: For Canada\'s Transportat" +
                     "ion of Dangerous Goods (TDG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table27.AddRow(new string[] {
+            table28.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3091, Lithium metal batteries contained in equ" +
                             "ipment, 9"});
-            table27.AddRow(new string[] {
+            table28.AddRow(new string[] {
                         "Meets the requirements of TDG special provision 34 to be transported as non-dange" +
                             "rous goods."});
-            table27.AddRow(new string[] {
+            table28.AddRow(new string[] {
                         "None of the above/Not intended for shipment in Canada"});
 #line 291
 testRunner.And("The following radio buttons should be displayed for section: For Canada\'s Transpo" +
+<<<<<<< HEAD
                     "rtation of Dangerous Goods (TDG), indicate the classification", ((string)(null)), table27, "And ");
+=======
+                    "rtation of Dangerous Goods (TDG), indicate the classification", ((string)(null)), table28, "And ");
+>>>>>>> origin/QA
 #line 297
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 299
@@ -680,20 +708,24 @@ testRunner.Then("I should see the Product Includes Battery Page", ((string)(null
 testRunner.Given("I set the Indicate how battery is packaged option to: The battery is shipped with" +
                     " but not included in my product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run",
                         "Saved As"});
-            table28.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "Lithium Ion",
                         "<any>",
                         "4",
                         "4",
                         "lithium"});
 #line 335
+<<<<<<< HEAD
 testRunner.Given("I add the following batteries:", ((string)(null)), table28, "Given ");
+=======
+testRunner.Given("I add the following batteries:", ((string)(null)), table29, "Given ");
+>>>>>>> origin/QA
 #line 339
 testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 341
@@ -705,105 +737,129 @@ testRunner.Given("I call Shared Step 58189 (Answer Electronic Equipment question
 #line 345
 testRunner.Then("I should see the Lithium Battery Transportation Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table29.AddRow(new string[] {
+            table30.AddRow(new string[] {
                         "For U.S. Department of Transportation (DOT), indicate the transport classificatio" +
                             "n"});
 #line 347
+<<<<<<< HEAD
 testRunner.And("I see the following sections", ((string)(null)), table29, "And ");
+=======
+testRunner.And("I see the following sections", ((string)(null)), table30, "And ");
+>>>>>>> origin/QA
 #line 351
 testRunner.And("I should see a total of 3 radio buttons for the section: For U.S. Department of T" +
                     "ransportation (DOT), indicate the transport classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table30.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equi" +
                             "pment, 9"});
-            table30.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous " +
                             "goods for road and rail"});
-            table30.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "Meets the requirements of 49CFR173.185(c)(i) to be transported as non-dangerous g" +
                             "oods for road, rail, air, and vessel"});
 #line 353
 testRunner.And("The following radio buttons should be displayed for section: For U.S. Department " +
+<<<<<<< HEAD
                     "of Transportation (DOT), indicate the transport classification", ((string)(null)), table30, "And ");
+=======
+                    "of Transportation (DOT), indicate the transport classification", ((string)(null)), table31, "And ");
+>>>>>>> origin/QA
 #line 359
 testRunner.And("The alert message is displayed with text: Need help? Regulatory services are incl" +
                     "uded in Premium Subscription. Upgrade now!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table31.AddRow(new string[] {
+            table32.AddRow(new string[] {
                         "For Marine transport (IMDG), indicate the classification"});
 #line 361
+<<<<<<< HEAD
 testRunner.And("I see the following sections", ((string)(null)), table31, "And ");
+=======
+testRunner.And("I see the following sections", ((string)(null)), table32, "And ");
+>>>>>>> origin/QA
 #line 365
 testRunner.And("I should see a total of 3 radio buttons for the section: For Marine transport (IM" +
                     "DG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table32.AddRow(new string[] {
+            table33.AddRow(new string[] {
                         "Meets requirements of IMDG Special Provision 188 to be transported as non-dangero" +
                             "us goods"});
-            table32.AddRow(new string[] {
+            table33.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equi" +
                             "pment, 9"});
-            table32.AddRow(new string[] {
+            table33.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IMDG"});
 #line 367
 testRunner.And("The following radio buttons should be displayed for section: For Marine transport" +
-                    " (IMDG), indicate the classification", ((string)(null)), table32, "And ");
+                    " (IMDG), indicate the classification", ((string)(null)), table33, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table33.AddRow(new string[] {
+            table34.AddRow(new string[] {
                         "For Air transport (IATA), indicate the classification"});
 #line 373
+<<<<<<< HEAD
 testRunner.And("I see the following sections", ((string)(null)), table33, "And ");
+=======
+testRunner.And("I see the following sections", ((string)(null)), table34, "And ");
+>>>>>>> origin/QA
 #line 377
 testRunner.And("I should see a total of 3 radio buttons for the section: For Air transport (IATA)" +
                     ", indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table34.AddRow(new string[] {
+            table35.AddRow(new string[] {
                         "Section I"});
-            table34.AddRow(new string[] {
+            table35.AddRow(new string[] {
                         "Section II"});
-            table34.AddRow(new string[] {
+            table35.AddRow(new string[] {
                         "None of the above/Not intended for shipment under IATA"});
 #line 379
 testRunner.And("The following radio buttons should be displayed for section: For Air transport (I" +
-                    "ATA), indicate the classification", ((string)(null)), table34, "And ");
+                    "ATA), indicate the classification", ((string)(null)), table35, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table35.AddRow(new string[] {
+            table36.AddRow(new string[] {
                         "For Canada\'s Transportation of Dangerous Goods (TDG), indicate the classification" +
                             ""});
 #line 385
+<<<<<<< HEAD
 testRunner.And("I see the following sections", ((string)(null)), table35, "And ");
+=======
+testRunner.And("I see the following sections", ((string)(null)), table36, "And ");
+>>>>>>> origin/QA
 #line 389
 testRunner.And("I should see a total of 3 radio buttons for the section: For Canada\'s Transportat" +
                     "ion of Dangerous Goods (TDG), indicate the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table36.AddRow(new string[] {
+            table37.AddRow(new string[] {
                         "Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equi" +
                             "pment, 9"});
-            table36.AddRow(new string[] {
+            table37.AddRow(new string[] {
                         "Meets the requirements of TDG special provision 34 to be transported as non-dange" +
                             "rous goods."});
-            table36.AddRow(new string[] {
+            table37.AddRow(new string[] {
                         "None of the above/Not intended for shipment in Canada"});
 #line 391
 testRunner.And("The following radio buttons should be displayed for section: For Canada\'s Transpo" +
+<<<<<<< HEAD
                     "rtation of Dangerous Goods (TDG), indicate the classification", ((string)(null)), table36, "And ");
+=======
+                    "rtation of Dangerous Goods (TDG), indicate the classification", ((string)(null)), table37, "And ");
+>>>>>>> origin/QA
 #line 397
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 399

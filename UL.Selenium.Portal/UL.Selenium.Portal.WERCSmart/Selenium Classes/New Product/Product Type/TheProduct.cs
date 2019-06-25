@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.SpecFlow;
 using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
@@ -38,23 +39,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			set
 			{
 				this.ProductTypeSearch.TryClick();
-				this.ProductTypeSearchInput.TryEnterText(value);
-				GeneralUtilities.Wait_for_load_finish();
-				var searchResult = this.ProductTypeSearchResults.FirstOrDefault(x=>x.Text==value);
-				// Check again ignoring the case
-				if (searchResult == null)
+				if (!value.Contains("+"))
 				{
-					searchResult = this.ProductTypeSearchResults.FirstOrDefault(x => x.Text.ToLower() == value.ToLower());
-					if (searchResult == null)
-					{
-						//Check again accepting contains rather than full match
-						searchResult = this.ProductTypeSearchResults.FirstOrDefault(x => x.Text.ToLower().Contains(value.ToLower()));
-						if (searchResult == null)
-						{
-							return;
-						}
-					}
+					this.ProductTypeSearchInput.TryEnterText(value);
 				}
+				else
+				{
+					var newString = new string(value.TakeWhile(x => x != '+').ToArray());
+					this.ProductTypeSearchInput.TryEnterText(newString);
+				}
+				GeneralUtilities.Wait_for_load_finish();
+				var searchResult = this.ProductTypeSearchResults.FirstOrDefault(x=>x.Text==value)
+				                   ?? this.ProductTypeSearchResults.FirstOrDefault(x => string.Equals(x.Text, value, StringComparison.CurrentCultureIgnoreCase))
+				                   ?? this.ProductTypeSearchResults.FirstOrDefault(x => x.Text.ToLower().Contains(value.ToLower()));
 				searchResult.TryClick();
 			}
 		}

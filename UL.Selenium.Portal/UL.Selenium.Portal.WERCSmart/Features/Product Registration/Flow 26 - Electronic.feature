@@ -28,7 +28,7 @@ Then The home screen should load
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Computer (Combination of Monitor
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Computer (Combination of Monitor + Desktop)
 
 Then I save the product information as: TestCase60671
 
@@ -41,8 +41,8 @@ Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 #Given I call Shared 48367 Product Includes Battery > any type
 
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-| Battery Type | Manufacturer                      | Number of batteries per package | How many batteries required to run |
-| Alkaline     | Panasonic Alkaline battery LR6 AA | 6                               | 6                                  |
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Alkaline     | <any>        | 6                               | 6                                  |
 
 Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 

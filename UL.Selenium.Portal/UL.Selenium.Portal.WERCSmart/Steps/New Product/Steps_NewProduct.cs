@@ -277,18 +277,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(selNewProduct.ClickBrowseForVolatileOrganicCompounds(), "Failed to upload ", "Successfully upload ");
 		}
 
+		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload PDF: (.*)")]
+		public void UploadPDFFileSectionAndType(string type, string label, string pdfFile)
+		{
+			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(type, label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
+
+		}
+
 		[StepDefinition(@"I click the browse button for label: (.*) and upload PDF: (.*)")]
 		public void UploadPDFFile(string label, string pdfFile)
 		{
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
-		[StepDefinition(@"I click the browse button for label: (.*) in section: (.*) and upload PDF: (.*)")]
-		public void UploadPDFFileSectionAndType(string label, string section, string pdfFile)
-		{
-			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(label, section, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 
-		}
 
 		[StepDefinition(@"I purchase the following additional documents:")]
 		public void ThenIPurchaseTheFollowingAdditionalDocuments(Table table)
@@ -393,7 +395,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Context.AddToContext(savedas, prodDetails);
 			Report.Success("Product Information saved!");
 		}
-        
+
 		[StepDefinition(@"in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOSHACompliantSDSISelect(string selection)
 		{

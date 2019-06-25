@@ -128,42 +128,42 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 #line 40
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 55
+#line 42
 testRunner.Given("I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Ha" +
                     "ppy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 57
+#line 44
 testRunner.Given("I call Shared Step 57508 (VOC SCAQMD/Canada - Yes Low Solid, Yes apply to all Sta" +
                     "tes - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 59
+#line 46
 testRunner.Given("I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis da" +
                     "te is shown - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 48
 testRunner.Then("The VOC Summary page contains the statement with the text: Based on your previous" +
                     " selections, the product is an architectural coating with the following intended" +
                     " use. The SCAQMD VOC compliant limits for this intended use are:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 63
+#line 50
 testRunner.Then("in the VOC Limits table, the Use column should contain the value: ABS Welding", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 65
+#line 52
 testRunner.Then("The VOC content in g/L message shows the value: 10.0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 67
+#line 54
 testRunner.Then("The VOC Summary page contains the statement with the text: Does not exceed the li" +
-                    "mits specified by the South Coast Air Quality Management District", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 69
+                    "mits specified by the California Air District(s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 56
 testRunner.Given("in the Volatile Organic Compound Summary page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 71
+#line 58
 testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
                     "appy Path) and select the retailer: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 73
+#line 60
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
                     " - Size Only) for UPC: saved as UPC57863, container type: Metal Container and si" +
                     "ze: 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 75
+#line 62
 testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 79
+#line 66
 testRunner.Given("I call Shared Step 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\" +
                     "testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 81
+#line 68
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -185,20 +185,20 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Odorless",
                         "No data available",
                         "10"});
-#line 85
+#line 72
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
                     "g:", ((string)(null)), table1, "Given ");
-#line 89
+#line 76
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 57863. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
                     " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 91
+#line 78
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: ABS W" +
                     "elding", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 93
+#line 80
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 95
+#line 82
 testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase57863", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -212,74 +212,74 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (RU001232)", null, new string[] {
                         "TReVorId:11644"});
-#line 98
+#line 85
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 100
+#line 87
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 102
+#line 89
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 104
+#line 91
 testRunner.Given("I generate a random UPC number and save as: UPC57905", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 106
+#line 93
 testRunner.Given("I delete all products with UPC Number: saved as UPC57905", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 108
+#line 95
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 110
+#line 97
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Automotive Coating - SCAQMD any other coating type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 112
+#line 99
 testRunner.Then("I save the product information as: TestCase57905", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 114
+#line 101
 testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
                     "Solid - State&Subcat - Mixed&Water -random - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 118
+#line 105
 testRunner.Given("I call Shared Step 73748 (Additional Product Information - US only - No to GHS - " +
                     "No to shipped supplier - No to Private Label - No to Sold to retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 120
+#line 107
 testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Polymethyl a" +
                     "crylate", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 123
+#line 110
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 137
+#line 124
 testRunner.Given("I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Ha" +
                     "ppy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 139
+#line 126
 testRunner.Given("I call Shared Step 57508 (VOC SCAQMD/Canada - Yes Low Solid, Yes apply to all Sta" +
                     "tes - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 141
+#line 128
 testRunner.Given("I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis da" +
                     "te is shown - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 143
+#line 130
 testRunner.Then("The VOC Summary page contains the statement with the text: Based on your previous" +
                     " selections, the product is an architectural coating with the following intended" +
                     " use. The SCAQMD VOC compliant limits for this intended use are:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 145
+#line 132
 testRunner.Then("in the VOC Limits table, the Use column should contain the value: Automotive Coat" +
                     "ing - SCAQMD Any Other Coating Type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 147
+#line 134
 testRunner.Then("The VOC content in g/L message shows the value: 10.0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 149
+#line 136
 testRunner.Then("The VOC Summary page contains the statement with the text: Does not exceed the li" +
                     "mits specified by the South Coast Air Quality Management District", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 151
+#line 138
 testRunner.Given("in the Volatile Organic Compound Summary page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 153
+#line 140
 testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
                     "appy Path) and select the retailer: Amazon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 157
+#line 144
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
                     " - Size Only) for UPC: saved as UPC57905, container type: Metal Container and si" +
                     "ze: 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 159
+#line 146
 testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 163
+#line 150
 testRunner.Given("I call Shared Step 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\" +
                     "testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 165
+#line 152
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -301,20 +301,20 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Berry",
                         "No data available",
                         "2"});
-#line 173
+#line 160
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
                     "g:", ((string)(null)), table2, "Given ");
-#line 177
+#line 164
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text. !\"£$%^&*() 1234567890 (Provide any additional comments or infor" +
                     "mation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 179
+#line 166
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Autom" +
                     "otive Coating - SCAQMD Any Other Coating Type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 181
+#line 168
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 183
+#line 170
 testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase57905", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -328,79 +328,79 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63623] Flow 7 - Grout (RU001548) - has its own SCAQMD limit", null, new string[] {
                         "TReVorId:11652"});
-#line 186
+#line 173
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 188
+#line 175
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 190
+#line 177
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 192
+#line 179
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 194
+#line 181
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Grout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 196
+#line 183
 testRunner.Then("I save the product information as: TestCase63623", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 198
+#line 185
 testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
                     "Solid - State&Subcat - Mixed&Water -random - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 200
+#line 187
 testRunner.Given("I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not " +
                     "Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 202
+#line 189
 testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Polymethyl a" +
                     "crylate", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 204
+#line 191
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 206
+#line 193
 testRunner.Given("I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Ha" +
                     "ppy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 208
+#line 195
 testRunner.Given("I call Shared Step 57794 (Confirm VOC (SCAQMD) step title, Confirm ACP question s" +
                     "hown  - Select No - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 210
+#line 197
 testRunner.Given("I set the Product is a Low Solid option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 212
+#line 199
 testRunner.Given("I set the VOC content of product in g/L, including water and exempt compounds. op" +
                     "tion to: 1.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 214
+#line 201
 testRunner.Given("I set the Would you like to use the VOC data provided to be copied for all areas " +
                     "(e.g. country, state, local) for comparison? option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 216
+#line 203
 testRunner.Given("in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada" +
                     " page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 218
+#line 205
 testRunner.Given("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 220
+#line 207
 testRunner.Then("in the VOC Limits table, the Use column should contain the value: Grout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 222
+#line 209
 testRunner.Then("in the VOC Limits table, the VOC Compliance Limit column should contain the value" +
                     ": 120", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 224
+#line 211
 testRunner.Then("in the VOC Limits table, the Regulation column should contain the value: (g/L) in" +
                     "cluding water & exempts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 226
+#line 213
 testRunner.Then("I click the page heading: Volatile Organic Compounds (VOC) for California Air Dis" +
                     "trict(s) and Canada", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 228
+#line 215
 testRunner.And("I should see the Volatile Organic Compounds (VOC) for California Air District(s) " +
                     "and Canada Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 230
+#line 217
 testRunner.Given("I set the Product is a Low Solid option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 232
+#line 219
 testRunner.Given("I set the VOC content in g/L contained in this product option to: 2.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 234
+#line 221
 testRunner.Given("in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada" +
                     " page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 236
+#line 223
 testRunner.Then("in the VOC Limits table, the VOC Compliance Limit column should contain the value" +
                     ": 65", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 238
+#line 225
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 240
+#line 227
 testRunner.Then("I delete the product: TestCase63623", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -409,4 +409,3 @@ testRunner.Then("I delete the product: TestCase63623", ((string)(null)), ((TechT
 }
 #pragma warning restore
 #endregion
-

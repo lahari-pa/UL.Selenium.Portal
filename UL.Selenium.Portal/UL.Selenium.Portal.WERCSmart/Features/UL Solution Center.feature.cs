@@ -112,21 +112,21 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59654] UL Solution Center shows when expanded menu item is clicked", null, new string[] {
                         "TReVorId:19010"});
-#line 23
+#line 22
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
+#line 23
+ testRunner.Given("I login as the administrator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 24
+ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 25
-testRunner.Given("I login as the administrator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I expand the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 26
+ testRunner.Then("the Navigation Menu should be expanded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 27
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 29
-testRunner.Given("I expand the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
-testRunner.Then("the Navigation Menu should be expanded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 33
-testRunner.Given("I click the UL Solution Center link in the expanded navigation side menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 35
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("I click the UL Solution Center link in the expanded navigation side menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 28
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -138,17 +138,17 @@ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59655] UL Solution Center shows correct entries", null, new string[] {
                         "TReVorId:19011"});
-#line 38
+#line 31
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 40
-testRunner.Given("I login as the administrator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 44
-testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 32
+ testRunner.Given("I login as the administrator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 33
+ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 34
+ testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 35
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sections"});
@@ -164,8 +164,10 @@ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string
                         "UL Secure Connect (ULSC)"});
             table1.AddRow(new string[] {
                         "ULGHS"});
-#line 48
-testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table1, "Then ");
+            table1.AddRow(new string[] {
+                        "Navigator"});
+#line 36
+ testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table1, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -177,29 +179,29 @@ testRunner.Then("I confirm the following sections are displayed in the UL Soluti
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[81288] UL Solution Center shows correct entries - ECOLOGO section", null, new string[] {
                         "TReVorId:19012"});
-#line 58
+#line 47
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 60
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 62
-testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 66
-testRunner.Then("I Confirm the ECOLOGO heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 68
-testRunner.And(@"I Confirm the information statement for section: ECOLOGO reads: ECOLOGO Certified products, services and packaging are certified for reduced environmental impact. ECOLOGO Certifications are voluntary, multi-attribute, lifecycle based environmental certifications that indicate a product has undergone rigorous scientific testing, exhaustive auditing, or both, to prove its compliance with stringent, third-party, environmental performance standards.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
-testRunner.And("I confirm the Learn More button is displayed for section: ECOLOGO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 72
-testRunner.Given("I click the Learn More button for section: ECOLOGO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 76
-testRunner.Given("I switch to the ECOLOGO information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 78
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 80
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 48
+ testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 49
+ testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 50
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 51
+ testRunner.Then("I Confirm the ECOLOGO heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 52
+ testRunner.And(@"I Confirm the information statement for section: ECOLOGO reads: ECOLOGO Certified products, services and packaging are certified for reduced environmental impact. ECOLOGO Certifications are voluntary, multi-attribute, lifecycle based environmental certifications that indicate a product has undergone rigorous scientific testing, exhaustive auditing, or both, to prove its compliance with stringent, third-party, environmental performance standards.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 53
+ testRunner.And("I confirm the Learn More button is displayed for section: ECOLOGO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 54
+ testRunner.Given("I click the Learn More button for section: ECOLOGO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 56
+ testRunner.Given("I switch to the ECOLOGO information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 57
+ testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -211,31 +213,31 @@ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59657] UL Solution Center shows correct entries - Prospector section", null, new string[] {
                         "TReVorId:19013"});
-#line 83
+#line 61
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 85
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 87
-testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 89
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 91
-testRunner.Then("I Confirm the Prospector heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 93
-testRunner.And("I Confirm the information statement for section: Prospector reads: Spanning 10 in" +
+#line 62
+ testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 63
+ testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 64
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 65
+ testRunner.Then("I Confirm the Prospector heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 66
+ testRunner.And("I Confirm the information statement for section: Prospector reads: Spanning 10 in" +
                     "dustries, UL\'s Prospector offers accurate, reliable technical information for hu" +
                     "ndreds of thousands of products from suppliers around the world.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
-testRunner.And("I confirm the Learn More button is displayed for section: Prospector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 97
-testRunner.Given("I click the Learn More button for section: Prospector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 100
-testRunner.Given("I switch to the Prospector information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 102
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 104
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 67
+ testRunner.And("I confirm the Learn More button is displayed for section: Prospector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 68
+ testRunner.Given("I click the Learn More button for section: Prospector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 70
+ testRunner.Given("I switch to the Prospector information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 71
+ testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 72
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -249,30 +251,30 @@ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59658] UL Solution Center shows correct entries - GOODGUIDE for CONSUMERS sectio" +
                     "n", null, new string[] {
                         "TReVorId:19014"});
-#line 107
+#line 75
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 109
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 111
-testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 113
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 115
-testRunner.Then("I Confirm the GoodGuide for Consumers heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 117
-testRunner.And(@"I Confirm the information statement for section: GoodGuide for Consumers reads: GoodGuide is a product rating system designed to provide consumers with the information they need to make better shopping decisions. For the past 10 years, GoodGuide scientists have rated thousands of products and guided millions of people to healthier choices.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 119
-testRunner.And("I confirm the Learn More button is displayed for section: GoodGuide for Consumers" +
+#line 76
+ testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 77
+ testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 78
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 79
+ testRunner.Then("I Confirm the GoodGuide for Consumers heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 80
+ testRunner.And(@"I Confirm the information statement for section: GoodGuide for Consumers reads: GoodGuide is a product rating system designed to provide consumers with the information they need to make better shopping decisions. For the past 10 years, GoodGuide scientists have rated thousands of products and guided millions of people to healthier choices.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 81
+ testRunner.And("I confirm the Learn More button is displayed for section: GoodGuide for Consumers" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 121
-testRunner.Given("I click the Learn More button for section: GoodGuide for Consumers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 123
-testRunner.Given("I switch to the GoodGuide for Consumers information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 125
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 127
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 82
+ testRunner.Given("I click the Learn More button for section: GoodGuide for Consumers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 83
+ testRunner.Given("I switch to the GoodGuide for Consumers information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 84
+ testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 85
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -286,26 +288,28 @@ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59659] UL Solution Center shows correct entries - GOODGUIDE FOR SUPPLIERS sectio" +
                     "n", null, new string[] {
                         "TReVorId:19015"});
-#line 130
+#line 88
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 132
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 134
-testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 136
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 138
-testRunner.Then("I Confirm the GoodGuide for Suppliers heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 140
-testRunner.And(@"I Confirm the information statement for section: GoodGuide for Suppliers reads: GoodGuide is a product rating system designed to provide consumers with the information they need to make better shopping decisions. Upload product information, preview the GoodGuide Rating, publish, and reach thousands of consumers every month.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 142
-testRunner.And("I confirm the Learn More button is displayed for section: GoodGuide for Suppliers" +
+#line 89
+ testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 90
+ testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 91
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 92
+ testRunner.Then("I Confirm the GoodGuide for Suppliers heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 93
+ testRunner.And(@"I Confirm the information statement for section: GoodGuide for Suppliers reads: GoodGuide is a product rating system designed to provide consumers with the information they need to make better shopping decisions. Upload product information, preview the GoodGuide Rating, publish, and reach thousands of consumers every month.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 94
+ testRunner.And("I confirm the Learn More button is displayed for section: GoodGuide for Suppliers" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 144
-testRunner.Given("I click the Learn More button for section: GoodGuide for Suppliers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 148
-testRunner.Then("I check that the current URL contains: https://choosegoodguide.com/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 95
+ testRunner.Given("I click the Learn More button for section: GoodGuide for Suppliers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 96
+ testRunner.Given("I switch to the GoodGuide for Suppliers information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 97
+ testRunner.Then("I check that the current URL contains: https://choosegoodguide.com/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -317,30 +321,30 @@ testRunner.Then("I check that the current URL contains: https://choosegoodguide.
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59660] UL Solution Center shows correct entries - UL Secure Connect section", null, new string[] {
                         "TReVorId:19016"});
-#line 155
+#line 102
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 157
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 159
-testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 161
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 163
-testRunner.Then("I Confirm the UL Secure Connect (ULSC) heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 165
-testRunner.And(@"I Confirm the information statement for section: UL Secure Connect (ULSC) reads: Get additional insights from your data with UL Secure Connect, a data generation tool. ULSC allows you to generate additional valuable data, and receive that data in an editable format which you can analyze and import into your internal systems.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 167
-testRunner.And("I confirm the Learn More button is displayed for section: UL Secure Connect (ULSC" +
+#line 103
+ testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 104
+ testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 105
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 106
+ testRunner.Then("I Confirm the UL Secure Connect (ULSC) heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 107
+ testRunner.And(@"I Confirm the information statement for section: UL Secure Connect (ULSC) reads: Get additional insights from your data with UL Secure Connect, a data generation tool. ULSC allows you to generate additional valuable data, and receive that data in an editable format which you can analyze and import into your internal systems.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 108
+ testRunner.And("I confirm the Learn More button is displayed for section: UL Secure Connect (ULSC" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 169
-testRunner.Given("I click the Learn More button for section: UL Secure Connect (ULSC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 171
-testRunner.Given("I switch to the UL Secure Connect (ULSC) information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 173
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 175
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 109
+ testRunner.Given("I click the Learn More button for section: UL Secure Connect (ULSC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 110
+ testRunner.Given("I switch to the UL Secure Connect (ULSC) information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 111
+ testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 112
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -352,25 +356,59 @@ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59661] UL Solution Center shows correct entries - ULGHS section", null, new string[] {
                         "TReVorId:19017"});
-#line 178
+#line 115
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 180
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 182
-testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 184
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 186
-testRunner.Then("I Confirm the ULGHS heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 188
-testRunner.And(@"I Confirm the information statement for section: ULGHS reads: ULGHS is a right-sized SDS authoring tool for small to mid-sized companies that produce products that contain chemicals. Powered by UL WERCSmart, ULGHS – SDS Authoring Tool is a first of its kind, automated GHS-compliant SDS authoring solution.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 190
-testRunner.And("I confirm the Learn More button is displayed for section: ULGHS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 192
-testRunner.Given("I click the Learn More button for section: ULGHS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 196
-testRunner.Then("I check that the current URL contains: https://www.ulghs.com/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 116
+ testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 117
+ testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 118
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 119
+ testRunner.Then("I Confirm the ULGHS heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 120
+ testRunner.And(@"I Confirm the information statement for section: ULGHS reads: ULGHS is a right-sized SDS authoring tool for small to mid-sized companies that produce products that contain chemicals. Powered by UL WERCSmart, ULGHS – SDS Authoring Tool is a first of its kind, automated GHS-compliant SDS authoring solution.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 121
+ testRunner.And("I confirm the Learn More button is displayed for section: ULGHS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 122
+ testRunner.Given("I click the Learn More button for section: ULGHS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 123
+ testRunner.Given("I switch to the ULGHS information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 124
+ testRunner.Then("I check that the current URL contains: https://psi.ul.com/en/products/ulghs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[102411] UL Solution Center shows correct entries - Navigator section")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22280")]
+        public virtual void _102411ULSolutionCenterShowsCorrectEntries_NavigatorSection()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[102411] UL Solution Center shows correct entries - Navigator section", null, new string[] {
+                        "TReVorId:22280"});
+#line 129
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 130
+ testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 131
+ testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 132
+ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 133
+ testRunner.Then("I Confirm the Navigator heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 134
+ testRunner.And(@"I Confirm the information statement for section: Navigator reads: Navigator highlights the main chemical regulatory requirements for over 50 countries around the world. These summaries compile the most important information all in one place, offering easy to understand explanations of complex topics, paired with links to laws and helpful resources. Summaries are authored and updated by our global regulatory specialists, whose primary responsibility is the monitoring and reporting of regulations in their given country.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 135
+ testRunner.And("I confirm the Learn More button is displayed for section: Navigator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 136
+ testRunner.Given("I click the Learn More button for section: Navigator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 137
+ testRunner.Given("I switch to the Navigator information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 138
+ testRunner.Then("I check that the current URL contains: https://psi.ul.com/en/products/navigator/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -378,4 +416,3 @@ testRunner.Then("I check that the current URL contains: https://www.ulghs.com/",
 }
 #pragma warning restore
 #endregion
-

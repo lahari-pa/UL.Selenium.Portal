@@ -134,7 +134,7 @@ testRunner.Then("I should see battery manufacturer message: Important: Prior to 
                         "How many batteries required to run"});
             table1.AddRow(new string[] {
                         "Alkaline",
-                        "L1028F",
+                        "<any>",
                         "6",
                         "6"});
 #line 38
@@ -207,34 +207,32 @@ testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not P
                         "How many batteries required to run"});
             table2.AddRow(new string[] {
                         "Alkaline",
-                        "Alkaline battery23A by Shenzhen AllKey Battery Co., Ltd.",
+                        "<any>",
                         "6",
                         "6"});
 #line 81
 testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table2, "Given ");
 #line 85
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 87
 testRunner.Given("I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No" +
                     " to ALL With Copper)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 91
+#line 89
 testRunner.Given("I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ra" +
                     "y - No to all)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 93
+#line 91
 testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
                     "appy Path) and select the retailer: Amazon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 95
+#line 93
 testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
                     " - Size Only) for UPC: saved as UPC60643, container type: Aerosol Can and size: " +
                     "33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 97
+#line 95
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 60643. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
                     " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 99
+#line 97
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Camer" +
                     "a w/Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 101
+#line 99
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase60643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -244,4 +242,3 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 }
 #pragma warning restore
 #endregion
-

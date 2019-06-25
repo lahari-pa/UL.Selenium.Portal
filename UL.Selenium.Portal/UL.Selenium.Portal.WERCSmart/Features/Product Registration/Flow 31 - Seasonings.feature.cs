@@ -114,7 +114,7 @@ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Regist
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 34
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-                    "duct): Seasonings, Spices or Flavoring for Food - Salts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "duct): Seasonings, Spices or Flavoring for Food - Salts - Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
 testRunner.Then("I save the product information as: TestCase60737", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 38
@@ -258,4 +258,3 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 }
 #pragma warning restore
 #endregion
-

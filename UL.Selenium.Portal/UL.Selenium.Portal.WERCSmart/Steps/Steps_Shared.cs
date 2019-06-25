@@ -518,9 +518,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					// setter adds a table row for each battery in the list and enters data into each column
 					productIncludesBattery.Batteries = listOfBatteries;
 					productIncludesBattery.DeleteEmptyBatteryRows();
-					return;
 				}
-				Report.Error("There were no batteries to add");
+				else
+				{
+					Report.Error("There were no batteries to add");
+				}
 			}
 			catch (Exception ex)
 			{
@@ -554,8 +556,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			NewProduct myNewProduct = new NewProduct();
-			TestReport.StartStep(
-				"I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page");
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristic Leaching Procedure (TCLP)");
 			TestReport.StartStep("I set the Product has had TCLP testing; Report is available option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has had TCLP testing; Report is available", "No");
@@ -2168,7 +2170,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
 		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
@@ -2627,6 +2629,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Product Characteristics Page");
 			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			TestReport.StartStep("Confirm that  you see only Liquid option for Physical state");
+			var option = new Table("Option");
+			option.AddRow("Liquid");
+			MyNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Primary Physical State", option);
 			TestReport.StartStep(
 				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
 				table.Rows[0]["Secondary Physical State"]);
@@ -6171,7 +6177,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully inputted UPC information!");
 
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
 		[StepDefinition(
@@ -6179,14 +6185,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenICallSharedStep78868_RegulatoryDocumentsToProvide_USAndCanada_RequestAuthoringForBoth()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			var MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant label, English and French-Canadian");
+			TestReport.StartStep("I set 'OSHA-compliant Safety Data Sheet, English' to: Request to author");
 			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
-			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
-				"Request to author");
+			TestReport.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: Request to author");
+			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "Request to author");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			TestReport.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
@@ -6204,7 +6211,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Address", "Address");
 			MyNewProduct.SetTheSectionOptionTo("Phone", "Phone");
 			MyNewProduct.SetTheSectionOptionTo("Emergency Phone", "1234 8856789");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents -> Contact Information Page");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents -> Contact Information");
 		}
 
 		[StepDefinition(
@@ -7078,13 +7085,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Regulatory Documents to Provide page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			TestReport.StartStep("I set WHMIS-complient SDS to 'I need an SDS authored'");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
-				"Request to author");
+				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
+			TestReport.StartStep("I upload a label");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
-			//Commented out as per Beverley 20 March 2019
-			//MyNewProduct.SetTheSectionOptionTo("WHMIS Document Date", DateTime.Now.ToString("yyyy-MM-dd"));
+			TestReport.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 
@@ -7858,6 +7867,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"SK-2"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKSN", table20);
+		}
+
+		[StepDefinition(@"I call Shared Step 102767 \(Additional Product Information \(Battery flow - not Lithium\) - OSHA \(No\), DSV \(No\), PLP \(No\), GNFR \(No\)\)")]
+		public void Shared_102767_AdditionalProductInformation_BatteryFlowNotLithium()
+		{
+			var stepsAdditionalProductInformation = new Steps_AdditionalProductInformation();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I set 'Classified using OSHA' to No");
+			stepsAdditionalProductInformation.SetProductHasBeenClassifiedOSHATo("No");
+			TestReport.StartStep("I set 'Product is shipped directly' to No");
+			stepsAdditionalProductInformation.SetProductIsShippedDirectlyTo("No");
+			TestReport.StartStep("I set 'Is Retailers Private Brand' to No'");
+			stepsAdditionalProductInformation.SetProductIsRetailersPrivateLabelOrBrandTo("No");
+			TestReport.StartStep("I set 'Solely for the retailers use' to No'");
+			stepsAdditionalProductInformation.SetProductIsSolelyForTheRetailersUseTo("No");
+			TestReport.StartStep("I click continue");
+			new StepsNewProduct().ClickContinue();
 		}
 
 	}
