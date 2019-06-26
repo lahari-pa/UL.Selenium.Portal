@@ -58,6 +58,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 # no product characteristics step has been added to the test case!
 #Retailers section needs to be confirmed!
+@TReVorId:22293
 Scenario: [60695] Juice and Juice Drinks - RU001413
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -1742,38 +1742,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
-		public bool UploadFileForCONEG(string pdfFilePath)
-		{
-			string path = "//*[@id='collapse2']/div/form/div[3]/div[2]/div[1]/div/a";
-			string section = "CONEG Certificate";
-			var el = this.containerElement.FindElement(By.XPath(path), 2);
-			Report.Info("Clicking Browse for document type: " + section);
-			Report.Screenshot();
-			if (el == null)
-			{
-				Report.Error("The browse button was not found!! - Looking for xpath: " + path);
-				return false;
-			}
-
-			if (!el.TryClick())
-			{
-				Report.Error("Failed to click the Browse button!");
-				return false;
-			}
-			Delay.Seconds(2);
-			Report.Info("Entering file name with path: " + pdfFilePath);
-			Report.IsTrue(GeneralFunctions.EnterFilename(pdfFilePath), "Failed to enter file name!", "Successfully entered file name");
-			int i = 0;
-			var viewEl = this.containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[contains(text(), 'View')]"), 2);
-			while ((viewEl == null || !viewEl.Displayed) && i < 10)
-			{
-				i++;
-				Delay.Seconds(1);
-				viewEl = this.containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[contains(text(), 'View')]"), 2);
-			}
-			return (viewEl != null && viewEl.Displayed);
-		}
-
 		public bool UploadFileForSection(string section, string pdfFilePath)
 		{
 			var el = this.containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Browse']"), 2);

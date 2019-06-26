@@ -290,12 +290,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
-		[StepDefinition(@"I click the CONEG browse button and upload PDF: (.*)")]
-		public void UploadDPFForCONEG(string pdfFile)
-		{
-			Report.IsTrue(new NewProduct().UploadFileForCONEG(pdfFile), "Failed to upload CONEG pdf", "Uploaded CONEG pdf");
-		}
-
 		[StepDefinition(@"I purchase the following additional documents:")]
 		public void ThenIPurchaseTheFollowingAdditionalDocuments(Table table)
 		{
