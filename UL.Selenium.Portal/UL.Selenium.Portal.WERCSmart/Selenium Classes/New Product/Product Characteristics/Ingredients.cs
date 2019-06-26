@@ -39,13 +39,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					// If no elements match this, then we will simply take the first element in the list
 					var results =
 						this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
-					if (!results.Any() || results.Any(x=>x.GetValue()== "No results found"))
+					if (!results.Any() || results.Any(x => x.GetValue() == "No results found"))
 					{
 						Report.Info("No results were returned on search");
 						return false;
 					}
 					i = 0;
-					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) == null && i<10)
+					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) == null && i < 10)
 					{
 						Delay.Seconds(1);
 						results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
@@ -847,7 +847,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[@class='public_disclosure']"), 2).FirstOrDefault() != null;
 
 		}
-		
+
 
 		public class Ingredient
 		{
@@ -862,7 +862,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			public bool PublicNameEnabled { get; set; } = false;
 			public bool Selected { get; set; } = false;
 
-			public string getDetails()
+			public string GetDetails()
 			{
 				return "Component Name " + this.ComponentName + " CAS Number: " + this.CASNumber + " Percent: " + this.Percent +
 					" Publicly disclosed: " + this.PublicallyDisclosed.ToString() + " Trade secret: " +

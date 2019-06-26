@@ -108,7 +108,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
-				Report.IsTrue(NewProduct.WaitForSection(page),page + " is not showing when it was expected to",page + " is showing as expected");
+				Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
 				return;
 			}
 			Report.Failure("New product page was not visible");
@@ -290,7 +290,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
-
+		[StepDefinition(@"I click the CONEG browse button and upload PDF: (.*)")]
+		public void UploadDPFForCONEG(string pdfFile)
+		{
+			Report.IsTrue(new NewProduct().UploadFileForCONEG(pdfFile), "Failed to upload CONEG pdf", "Uploaded CONEG pdf");
+		}
 
 		[StepDefinition(@"I purchase the following additional documents:")]
 		public void ThenIPurchaseTheFollowingAdditionalDocuments(Table table)
@@ -2400,7 +2404,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.IsTrue(labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was not found", "Add new Packaging Type was found on the upc page as expected");
 			}
-			else if(shouldOrNot == "should not")
+			else if (shouldOrNot == "should not")
 			{
 				Report.IsTrue(!labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was found on the upc page, it should not have been", "Add new Packaging Type was not found on the upc page as expected");
 			}
