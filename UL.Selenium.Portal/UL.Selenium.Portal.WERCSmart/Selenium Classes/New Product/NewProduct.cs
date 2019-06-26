@@ -41,8 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#region New Product general methods
 		public string HeaderText => this.Header?.Text;
 
-		public string ProductId
-		{
+		public string ProductId {
 			get
 			{
 				var headText = this.HeaderText;
@@ -1966,7 +1965,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"),2);
+				var errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"), 2);
 				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
 			}
 			catch (Exception)

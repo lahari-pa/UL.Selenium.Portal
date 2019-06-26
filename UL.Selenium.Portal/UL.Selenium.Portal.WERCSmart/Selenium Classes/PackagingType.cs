@@ -7,6 +7,8 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
+using NTTQA.Selenium.UniversalFunctions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -102,6 +104,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool UploadFileForSection(string section, string pdfFilePath)
+		{
+			return new NewProduct().UploadFileForSection(section, pdfFilePath);
+		}
 
 	}
 }

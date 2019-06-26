@@ -218,21 +218,21 @@ testRunner.Then("In the Company Information screen I should see 0 Division Accou
 #line 57
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 59
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 60
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 61
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 63
+#line 62
 testRunner.Given("I navigate to the MyAccount page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 65
+#line 63
 testRunner.Then("The My Account user grid is currently on page number: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 67
+#line 64
 testRunner.Given("I click next in the My Account user grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 69
+#line 65
 testRunner.Then("The My Account user grid is currently on page number: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 71
+#line 66
 testRunner.Given("I click previous in the My Account user grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 73
+#line 67
 testRunner.Then("The My Account user grid is currently on page number: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -245,30 +245,33 @@ testRunner.Then("The My Account user grid is currently on page number: 1", ((str
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70511] Pagination (...) need an account with six pages of users", null, new string[] {
                         "TReVorId:22224"});
-#line 78
+#line 72
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 80
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 82
+#line 75
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 76
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 84
+#line 77
+testRunner.Given("I check that there are at least 6 pages of users. If not this test will not work." +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 78
 testRunner.Given("I click ... in the My Account user grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 86
+#line 79
 testRunner.Given("I see the user grid page navigation input with up and down arrows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 88
+#line 80
 testRunner.Given("I type the number 2 into the user grid page navigation box and press the enter ke" +
                     "y", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 90
+#line 81
 testRunner.Then("The My Account user grid is currently on page number: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 92
+#line 82
 testRunner.Given("I click ... in the My Account user grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 94
+#line 83
 testRunner.Given("I enter the up arrow into the user grid page navigation box then the correct page" +
                     " is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 96
+#line 84
 testRunner.Given("I click ... in the My Account user grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 98
+#line 85
 testRunner.Given("I enter the down arrow into the user grid page navigation box then the correct pa" +
                     "ge is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -282,14 +285,14 @@ testRunner.Given("I enter the down arrow into the user grid page navigation box 
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68417] Company Information", null, new string[] {
                         "TReVorId:16677"});
-#line 101
+#line 88
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 103
+#line 89
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 105
+#line 90
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 107
+#line 91
 testRunner.Given("In the My Account page I navigate to the Company Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -305,18 +308,18 @@ testRunner.Given("In the My Account page I navigate to the Company Information p
                         "Country Code",
                         "Phone"});
             table2.AddRow(new string[] {
-                        "Visual",
-                        "Automated, Visual Company",
+                        "Visual Testing",
+                        "Automated Visual Testing",
                         "<VisualAccount>",
                         "Manufacturer",
                         "United States",
-                        "31 British American Blvd",
+                        "31 British Am Ave",
                         "Latham",
                         "NY",
                         "12110",
                         "1",
                         "555-555-5555"});
-#line 109
+#line 92
 testRunner.Then("In the Company Information page I confirm the Company Information is correct", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -329,29 +332,29 @@ testRunner.Then("In the Company Information page I confirm the Company Informati
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[87304] Video link How to Subscribe", null, new string[] {
                         "TReVorId:21429"});
-#line 118
+#line 101
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 119
+#line 102
 testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 120
+#line 103
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 121
+#line 104
 testRunner.And("I click the \'How to Subscribe\' link in My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 122
+#line 105
 testRunner.Given("I switch to the tab: https://wercsmart.freshdesk.com/en/support/solutions/article" +
                     "s/25000014513-wercsmart-2-0-subscription-enrollment-and-management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 123
+#line 106
 testRunner.And("I save the current window as: Subscription Enrollment and Management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 124
+#line 107
 testRunner.And("In the \"WERCSmart 2.0 - Subscription Enrollment and Management\" WercSmart Solutio" +
                     "ns article, I click the link for \'To view a video... click here\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 125
+#line 108
 testRunner.And("I confirm a new tab opens to YouTube with a video titled: WERCSmart Subscription " +
                     "Overview", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 126
+#line 109
 testRunner.And("I close the window saved as: YouTube", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 127
+#line 110
 testRunner.And("I close the window saved as: Subscription Enrollment and Management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

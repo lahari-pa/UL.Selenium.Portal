@@ -196,7 +196,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					break;
 				}
 				Report.Info("User Not Found On Page " + myPageNumber.Text + ", Navigating to Next Page");
-				myNext.Click();
+				if (!myNext.TryClick())
+				{
+					throw new Exception("Failed to click move to next page");
+				}
 				pageNo++;
 			}
 			Report.Info("User: " + userName + " Has Not Been Created");
@@ -601,6 +604,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return int.Parse(lastControl.Last().Text);
 			}
 			return 1;
+		}
+
+		public int GetHighestPageNo()
+		{
+			var pageNumbers = this.containerElement.FindElements(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+			List<short> intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
+			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
+
+
 		}
 
 		public IWebElement UserGridNavPageInput()
