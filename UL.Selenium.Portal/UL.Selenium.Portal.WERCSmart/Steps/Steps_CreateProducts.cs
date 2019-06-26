@@ -1,4 +1,4 @@
-﻿using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.Reporting.Core;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 

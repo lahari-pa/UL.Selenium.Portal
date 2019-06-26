@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.Linq;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
+using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
@@ -61,12 +61,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				input.EnterText(productName);
 				return true;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
-
-			return false;
 		}
 
 		public bool ProductLineExists(string productLine)
@@ -108,7 +106,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[@class='form-group child']//select")).Select(category);
 				return true;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 			}
 
@@ -123,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[contains(@class,'form-group offset')]//select")).Select(subcategory);
 				return true;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 			}
 
@@ -137,10 +135,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='form-group']/div[@class='INFO' and not(contains(@style, 'none'))]/p")).Text.Trim();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 			}
-
 			return "";
 		}
 
@@ -156,12 +153,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 					select.Select(productLine);
 					return true;
 				}
-				else
-				{
-					Report.Info("Option does not exist in select box");
-				}
+				Report.Info("Option does not exist in select box");
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -199,7 +193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 					".//label[contains(text(),'physical state of your product')]/..//label/span[text()='" + state + "']/..//input"));
 				return radio.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 			}
 
@@ -214,7 +208,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				phInput.EnterText(value);
 				return true;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 			}
 
@@ -229,7 +223,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				var score = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//*[@id='GGPREV_chart']//*[name()='svg']//*[name()='text']//*[name()='tspan']"));
 				return Convert.ToInt16(score.Text.Trim());
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 
 			}
@@ -251,7 +245,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 				return input.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 
 			}
@@ -366,7 +360,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				upcCheckbox.Check(trueOrFalse);
 				return true;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 			}
 
@@ -420,7 +414,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 				}
 				Delay.Seconds(1);

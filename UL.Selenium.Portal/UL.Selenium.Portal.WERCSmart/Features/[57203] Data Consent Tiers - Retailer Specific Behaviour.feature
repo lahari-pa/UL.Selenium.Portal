@@ -9,6 +9,7 @@
 Feature: [57203] Data Consent Tiers - Retailer Specific Behavior
 
 #Background:
+
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 #Then I click the Retail Partners icon in the Navigation Pane
 
@@ -108,7 +109,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: Wal-Mart
-And I confirm that: Walmart requires suppliers of formulated products in the following categories to grant Tier 2.1 and Tier 2.2 permissions: Cleaning, Health and Beauty, OTC - Over the Counter, Nutritional Supplements, Battery and Battery-containing Products and Lawn and Garden is showing under the Data Consent Tiers heading
+And I confirm that: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. is showing under the Data Consent Tiers heading
 
 When I click the More Information hyperlink
 Then I check that the current URL contains: https://www.walmartsustainabilityhub.com/sustainable-chemistry
@@ -136,7 +137,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: TopCo
-And I confirm that: This recipient does not require additional data consent tiers at this time. is showing under the Data Consent Tiers
+And I confirm that: TopCo requires suppliers of products to grant Tier 1 at this time. What are the Data Usage Tiers? Data Consent Tiers Accepted Tier 1: Regulatory Support By agreeing to the Terms of Use upon creation of the WERCSmart account, you agree that all registrations will comply with Data Tier 1 for Regulatory Support to the retail recipient for your product registrations. This option cannot be changed in any way. The Terms of Use designate Tier 1 as: Mandatory Consent. Any registered WERCSmart supplier of a product (a "Direct Supplier") is deemed to consent to providing Tier 1 Data Use - Regulatory Support ("Tier 1 Consent") to any entity that sells, transports, stores or disposes of such Direct Supplier's product (each, a "WERCSmart Recipient"). The WERCSmart platform provides Direct Suppliers with a current list of all WERCSmart Recipients as well as product-level information about which specific Recipients are in receipt of Tier 1 data. Any registered supplier that provides components to a Direct Supplier (a "Third-Party Supplier") is also deemed to provide Tier 1 Consent to WERCSmart Recipients. Use of the term "Supplier(s)" shall mean both Direct Suppliers and Third-Party Suppliers. is showing under the Data Consent Tiers
 
 @TReVorId:18955
 Scenario: [74540] Target - Data Tier Warning when not all are selected

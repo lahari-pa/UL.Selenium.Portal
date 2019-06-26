@@ -463,7 +463,7 @@ testRunner.And("I click Save in The Product Page", ((string)(null)), ((TechTalk.
 #line 197
 testRunner.And("I should see the Formulation Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 198
-testRunner.And("in the New Product page I click section: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 199
 testRunner.And("I edit the first component to show No for Publicly disclosed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 200
@@ -471,7 +471,7 @@ testRunner.And("I click Save in The Product Page", ((string)(null)), ((TechTalk.
 #line 202
 testRunner.And("I should see the Formulation Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 203
-testRunner.And("in the New Product page I click section: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 204
 testRunner.And("I edit the second component to show Yes for Publicly disclosed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 205
@@ -484,7 +484,7 @@ testRunner.And("I should see the Formulation Page", ((string)(null)), ((TechTalk
 #line 209
 testRunner.And("I click Save in The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 210
-testRunner.And("in the New Product page I click section: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 211
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 212
@@ -547,3 +547,4 @@ testRunner.Given("For product saved as: TestCase42196 the status is: Completed",
 }
 #pragma warning restore
 #endregion
+

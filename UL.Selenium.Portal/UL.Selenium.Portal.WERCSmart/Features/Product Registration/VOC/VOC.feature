@@ -176,9 +176,9 @@ And in the New Product page I click Continue
 # The Product Page
 And I should see the The Product Page
 And I set the Product Name option to: Charcoal Lighter Material
-And In the Product Type tab of the New Product Page, I enter: Charcoal Lighter Material in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Charcoal Lighter Material in the Type of Product select field
+And I set 'Type of Product' to: Charcoal Lighter Material
 And in the New Product page I click Continue
-
 # Product Characteristics Page
 And I should see the Product Characteristics Page
 Then I save the product information as: TestCase56477
@@ -214,7 +214,7 @@ Given in the New Product page I click Continue
 # Regulatory 1 Page Details
 And I should see the Regulatory Information 1 Page
 And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And I set 'Prop65' to: No
 Given in the New Product page I click Continue
 
 # Transportation Details 1 Page
@@ -254,7 +254,7 @@ And I confirm statement: limits specified by CARB shows the text: Exceeds the li
 And I confirm statement: limits specified by OTC shows the text: Exceeds the limits specified by OTC Model Rule
 
 # Change the CARB  and OTC threshold options
-Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
+Then I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
 And I set the Verify VOC content is below the threshold of 0.02lb/start of CARB option to: Yes
 And I set the Verify VOC content is below the threshold of 0.02lb/start of OTC option to: Yes
 And in the New Product page I click Continue
@@ -432,7 +432,8 @@ And in the New Product page I click Continue
 # The Product Page
 And I should see the The Product Page
 And I set the Product Name option to: Antiperspirants - Non-aerosol
-And In the Product Type tab of the New Product Page, I enter: Antiperspirants - Non-aerosol in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Antiperspirants - Non-aerosol in the Type of Product select field
+And I set 'Type of Product' to: Antiperspirants - Non-aerosol
 And in the New Product page I click Continue
 
 # Product Characteristics Page
@@ -467,7 +468,7 @@ Given in the New Product page I click Continue
 # Regulatory 1 Page Details
 And I should see the Regulatory Information 1 Page
 And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And I set 'Prop65' to: No
 Given in the New Product page I click Continue
 
 # Regulatory 3 Page Details
@@ -505,7 +506,7 @@ And I confirm statement: Based on the type of product shows the text: Based on t
 And I confirm statement: limits specified shows the text: Exceeds the limits specified by CARB and OTC Model Rule
 
 #change the HVOC and MVOC value
-Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
+Then I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
 And I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 0
 And I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 0
 And in the New Product page I click Continue
@@ -565,7 +566,8 @@ And in the New Product page I click Continue
 # The Product Page
 And I should see the The Product Page
 And I set the Product Name option to: Clear Coating - Aerosol
-And In the Product Type tab of the New Product Page, I enter: Clear Coating - Aerosol in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Clear Coating - Aerosol in the Type of Product select field
+And I set 'Type of Product' to: Clear Coating - Aerosol
 And in the New Product page I click Continue
 
 # Product Characteristics Page
@@ -599,7 +601,7 @@ Given in the New Product page I click Continue
 # Regulatory 1 Page Details
 And I should see the Regulatory Information 1 Page
 And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And I set 'Prop65' to: No
 Given in the New Product page I click Continue
 
 # Transportation Details 1 Page
@@ -643,7 +645,7 @@ And I confirm statement: limits specified shows the text: Does not exceed the li
 And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
 
 #change the VOC grams value
-Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
+Then I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
 And I set the VOC content in grams ozone per gram field to: 1
 And in the New Product page I click Continue
 And I confirm statement: limits specified shows the text: Exceeds the limits specified in the Aerosol Coatings by the CARB
@@ -767,13 +769,13 @@ And I confirm that statement with text: 'Does not exceed the limits specified by
 And I confirm that statement with text: 'Exceeds the limit specified by the California Consumer Products Regulation' is not displayed
 And The VOC Summary page contains the statement with the text: Alternative Control Plan
 And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
-And in the New Product page I click section: Volatile Organic Compounds (VOC)
+And I click the page heading: Volatile Organic Compounds (VOC)
 And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 30
 And I click continue
 Given I scroll to the bottom of the page
 And I confirm that statement with text: 'Alternative Control Plan' is not displayed
 And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
-And in the New Product page I click section: Volatile Organic Compounds (VOC)
+And I click the page heading: Volatile Organic Compounds (VOC)
 And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations option to: No
 And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 55
 And I click continue

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Configuration;
-using NTTQA_Reporting_Module;
+using NTTQA.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Database_Functions
 {

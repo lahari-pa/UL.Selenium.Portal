@@ -67,7 +67,8 @@ And I enter UPC Number: saved as UPC85849
 And I Select a container type from the drop down list
 And I enter Size Value: 12
 And I click continue
-And I Confirm This is a required field. error message is shown below the Package Type field
+#And I Confirm This is a required field. error message is shown below the Package Type field
+And Package Type should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85849
 
 

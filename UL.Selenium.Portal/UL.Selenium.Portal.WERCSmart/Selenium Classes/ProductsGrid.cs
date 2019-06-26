@@ -1,12 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -107,6 +106,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickMoreFilters()
 		{
 			return this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2).TryClick();
+		}
+
+		public bool MoreFiltersExpanded()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2);
+			var expandedAttr = el?.GetAttribute("aria-expanded");
+			bool.TryParse(expandedAttr, out bool result);
+			return expandedAttr != null && result;
 		}
 
 		public bool ProductIdNameFieldPresent()
@@ -410,7 +417,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[1]"), 2);
 				return (productRow != null);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 				throw;

@@ -1,14 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module;
-using NTTQA_Reporting_Module.Reporting.Core;
-using NTTQA_TReVor_Module.Cache;
-using NTTQA_TReVor_Module.Classes;
-using SeleniumUtilities;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.Cache;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -44,12 +42,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I should see user name: (.*) in the header next to the user icon")]
+		[StepDefinition(@"I should see user name: (.*) in the header next to the user icon")]
 		public void ThenIShouldSeeUserNameInTheHeaderNextToTheUserIcon(string username)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + username + " in the top right corner");
 			try
 			{
+				if (username.ToLower().Contains("saved as"))
+				{
+					var savedUser = (User)Context
+						.GetFromContext(username.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+					username = savedUser.Username;
+				}
 				TopMenuBar thisTopMenuBar = new TopMenuBar();
 				Report.Info("Looking for username: " + username);
 				Report.IsTrue(thisTopMenuBar.GetCurrentUser() == username,
@@ -61,6 +65,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I should see a user name in the header next to the user icon")]
+		public void ThenIShouldSeeAUserNameNextToTheUserIcon()
+		{
+			TopMenuBar thisTopMenuBar = new TopMenuBar();
+			var currentUser = thisTopMenuBar.GetCurrentUser();
+			Report.IsTrue(currentUser.Length>0,
+				"Username should be showing","Username showing as: " + currentUser);
 		}
 
 		[StepDefinition(@"I should see username: (.*) in the right corner")]
@@ -980,6 +993,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("The YouTube tab did not open as expected!");
 			Report.Screenshot();
 		}
+
+		[StepDefinition (@"I check that there are at least (\d) pages of users\. If not this test will not work\.")]
+		public void GivenICheckThatThereAreAtLeastSixPagesOfUsers_IfNotThisTestWillNotWork_(int minPages)
+		{
+			Report.IsTrue(new MyAccount().GetHighestPageNo() > 5,
+				"Can't run this test since we need a page count of 6 or higher", "OK to continue with this test.");
+		}
+
 
 	}
 }

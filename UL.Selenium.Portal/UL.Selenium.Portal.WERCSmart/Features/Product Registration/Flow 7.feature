@@ -39,19 +39,6 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Keton
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-
-#Given I call Shared Step 57590 (Enter Pesticide Data - United States (with EPA number))
-
-#Given I confirm that there is data populated in the Expiration Date Column for some States
-
-#And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
-
-#Given in the Pesticide Details - State Registration Details page I click Continue
-
-#The test case calls two conflicting Transportation Details 1 Shared Steps in succession. Picking the Not Regulated option because there is no Transportation Details 3 step afterwards
-
-#Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-
 Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 
 Given I call Shared Step 57508 (VOC SCAQMD/Canada - Yes Low Solid, Yes apply to all States - Continue - Happy Path)
@@ -64,7 +51,7 @@ Then in the VOC Limits table, the Use column should contain the value: ABS Weldi
 
 Then The VOC content in g/L message shows the value: 10.0
 
-Then The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the South Coast Air Quality Management District
+Then The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the California Air District(s)
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
@@ -213,7 +200,7 @@ Given I set the VOC content of product in g/L, including water and exempt compou
 
 Given I set the Would you like to use the VOC data provided to be copied for all areas (e.g. country, state, local) for comparison? option to: Yes
 
-Given in the VOC SCAQMD/Canada page I click Continue
+Given in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada page I click Continue
 
 Given I should see the Volatile Organic Compound Summary Page
 
@@ -223,15 +210,15 @@ Then in the VOC Limits table, the VOC Compliance Limit column should contain the
 
 Then in the VOC Limits table, the Regulation column should contain the value: (g/L) including water & exempts
 
-Then in the New Product page I click section: Volatile Organic Compounds (VOC) for South Coast Air Quality Management District (SCAQMD) and Canada
+Then I click the page heading: Volatile Organic Compounds (VOC) for California Air District(s) and Canada
 
-And I should see the Volatile Organic Compounds (VOC) for South Coast Air Quality Management District (SCAQMD) and Canada Page
+And I should see the Volatile Organic Compounds (VOC) for California Air District(s) and Canada Page
 
 Given I set the Product is a Low Solid option to: No
 
 Given I set the VOC content in g/L contained in this product option to: 2.00
 
-Given in the VOC SCAQMD/Canada page I click Continue
+Given in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada page I click Continue
 
 Then in the VOC Limits table, the VOC Compliance Limit column should contain the value: 65
 

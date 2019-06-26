@@ -883,7 +883,7 @@ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Regist
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 352
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-                    "duct): Conditioner - Leave In", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "duct): Conditioner - Leave In (Liquid, Non Aerosol)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 354
 testRunner.Then("I save the product information as: TestCase57950", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -999,7 +999,7 @@ testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the
                     "ext", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 394
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Condi" +
-                    "tioner - Leave In", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "tioner - Leave In (Liquid, Non Aerosol)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 396
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase57950", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

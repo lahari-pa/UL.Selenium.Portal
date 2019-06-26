@@ -27,7 +27,7 @@ Given I call Shared Step 57794 (Confirm VOC (SCAQMD) step title, Confirm ACP que
 Given I set the Product is a Low Solid option to: Yes
 Given I set the VOC content of product in g/L, including water and exempt compounds. option to: 121
 Given I set the Would you like to use the VOC data provided to be copied for all areas (e.g. country, state, local) for comparison? option to: No
-Given in the VOC SCAQMD/Canada page I click Continue
+Given in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada page I click Continue
 Given I set the Canada option to: 121
 Given I set the Delaware option to: 121
 Given I set the Maryland option to: 121

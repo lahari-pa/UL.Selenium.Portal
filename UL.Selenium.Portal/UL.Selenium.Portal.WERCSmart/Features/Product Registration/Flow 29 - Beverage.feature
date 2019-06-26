@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -8,11 +8,12 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
-@run_FLow29_Beverage
+@run_Flow29_Beverage
 
 Feature: Flow 29 - Beverage
 
 @tfs_design
+@TReVorId:11622
 Scenario: [60694] Wine - RU001418
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -57,6 +58,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 # no product characteristics step has been added to the test case!
 #Retailers section needs to be confirmed!
+@TReVorId:22293
 Scenario: [60695] Juice and Juice Drinks - RU001413
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

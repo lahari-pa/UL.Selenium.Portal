@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -41,7 +42,7 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="CredentialManagement, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.0.433\lib\net452\CredentialManagement.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.682\lib\net452\CredentialManagement.dll</HintPath>
     </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\EnvDTE.8.0.1\lib\net10\EnvDTE.dll</HintPath>
@@ -94,13 +95,13 @@
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.0.433\lib\net452\NTTQA.Selenium.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.682\lib\net452\NTTQA.Selenium.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.0.433\lib\net452\NTTQA.Selenium.Reporting.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.682\lib\net452\NTTQA.Selenium.Reporting.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium.TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.0.433\lib\net452\NTTQA.Selenium.TReVor.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.682\lib\net452\NTTQA.Selenium.TReVor.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
@@ -214,6 +215,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CANAddYes_PkgNo_StwdFull.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Canadian Tire\New Product Submission\Stewardship Data in WPS Studio\StwdInWpsStudiofeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StwdInWpsStudiofeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has No Stwd Data\AccHasNoStwdData.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccHasNoStwdData.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Partial Sewardship Data\AccHasPartialStwd.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccHasPartialStwd.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Cart.feature.cs">
       <AutoGen>True</AutoGen>
@@ -445,6 +461,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Pesticides.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Product Documents\Product Documents.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Product Documents.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Product Registration.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -590,12 +611,20 @@
     <Compile Include="Selenium Classes\MyAccount.cs" />
     <Compile Include="Selenium Classes\MyIngredientsModal.cs" />
     <Compile Include="Selenium Classes\NavigationBar.cs" />
-    <Compile Include="Selenium Classes\New Product\Ingredients.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\ElectronicEquipment.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\Ingredients.cs" />
     <Compile Include="Selenium Classes\New Product\NewProduct.cs" />
     <Compile Include="Selenium Classes\New Product\PesticideDetailsState.cs" />
     <Compile Include="Selenium Classes\New Product\PesticideDetailsUS.cs" />
-    <Compile Include="Selenium Classes\New Product\Retailer.cs" />
-    <Compile Include="Selenium Classes\New Product\SelectRetailers.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\LithiumBatteryTransportation.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\ProductIncludesBattery.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\RegulatoryInformation1.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\TCLP.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Type\AdditionalProductInformation.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Type\ProductCharacteristics.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Type\TheProduct.cs" />
+    <Compile Include="Selenium Classes\New Product\Recipient and UPC Details\Retailer.cs" />
+    <Compile Include="Selenium Classes\New Product\Recipient and UPC Details\SelectRetailers.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
     <Compile Include="Selenium Classes\PackagingType.cs" />
     <Compile Include="Selenium Classes\PasswordExpired.cs" />
@@ -632,17 +661,25 @@
     <Compile Include="Selenium Classes\ULSCLogin.cs" />
     <Compile Include="Selenium Classes\UlSolutionCenter.cs" />
     <Compile Include="Selenium Classes\ULWercSmartSolutionsArticle.cs" />
-    <Compile Include="Selenium Classes\UPC.cs" />
+    <Compile Include="Selenium Classes\New Product\Recipient and UPC Details\UPC.cs" />
     <Compile Include="Selenium Classes\UserDetails.cs" />
     <Compile Include="Selenium Classes\WERCSLinkDashboard.cs" />
     <Compile Include="Selenium Classes\YouTube.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
-    <Compile Include="Steps\New Product\Steps_Ingredients.cs" />
+    <Compile Include="Steps\New Product\Product Characteristics\Steps_ElectronicEquipment.cs" />
+    <Compile Include="Steps\New Product\Product Characteristics\Steps_Ingredients.cs" />
+    <Compile Include="Steps\New Product\Product Characteristics\Steps_LithiumBatteryTransportation.cs" />
+    <Compile Include="Steps\New Product\Product Characteristics\Steps_RegulatoryInformation1.cs" />
+    <Compile Include="Steps\New Product\Product Type\Steps_AdditionalProductInformation.cs" />
+    <Compile Include="Steps\New Product\Product Type\Steps_ProductCharacteristics.cs" />
+    <Compile Include="Steps\New Product\Product Type\Steps_TheProduct.cs" />
     <Compile Include="Steps\New Product\Steps_NewProduct.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
+    <Compile Include="Steps\New Product\Product Characteristics\Steps_ProductIncludesBattery.cs" />
     <Compile Include="Steps\New Product\Steps_Retailer.cs" />
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
+    <Compile Include="Steps\New Product\Product Characteristics\Steps_TCLP.cs" />
     <Compile Include="Steps\Steps_Brands.cs" />
     <Compile Include="Steps\Steps_ChooseGoodGuide.cs" />
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
@@ -676,7 +713,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="app.manifest" />
     <None Include="Features\AdditionalProductInformation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -737,6 +776,18 @@
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdFull.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CANAddYes_PkgNo_StwdFull.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire\New Product Submission\Stewardship Data in WPS Studio\StwdInWpsStudiofeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>StwdInWpsStudiofeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has No Stwd Data\AccHasNoStwdData.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AccHasNoStwdData.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Partial Sewardship Data\AccHasPartialStwd.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AccHasPartialStwd.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Cart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -922,6 +973,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Pesticides.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Product Registration\Product Documents\Product Documents.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Product Documents.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Product Registration\Product Registration.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Product Registration.feature.cs</LastGenOutput>
@@ -1018,19 +1073,24 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>[57203] Data Consent Tiers - Retailer Specific Behaviour.feature.cs</LastGenOutput>
     </None>
-    <None Include="packages.config" />
     <Content Include="ReportFiles\UL.Selenium.Portal.WERCSmart.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Selenium Classes\New Product\Review and Submit\" />
+    <Folder Include="Steps\New Product\Recipient and UPC Details\" />
+    <Folder Include="Steps\New Product\Review and Submit\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem ##### TReVor Post Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.0.433\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.682\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>rem ##### TReVor Pre Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.0.433\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.682\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
 </PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -1039,10 +1099,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.0.433\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.5.0.433\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
+    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.682\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.5.1.682\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
-  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.0.433\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.0.433\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
+  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.1.682\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.682\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
 </Project>

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -53,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					.FirstOrDefault(x => x.Text == "CANCEL");
 				return (CancelButton.Enabled && CancelButton.Displayed);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}

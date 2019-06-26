@@ -1,14 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Reporting_Module;
-using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -27,8 +28,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			// Log in to administrator role
-			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
-			sharedSteps.Shared68210_LoginToWercSmart_PremiumAccount();
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//sharedSteps.Shared68210_LoginToWercSmart_PremiumAccount();
 			// Generate UPC number and delete duplicates
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75335");
@@ -153,7 +154,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Brand Product " + testCaseId);
 			TestReport.StartStep(
 				"In the Product Type tab of the New Product Page, I enter: Bleach in the Type of Product select field");
-			newProductSteps.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField("Bleach");
+			//newProductSteps.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField("Bleach");
+			new Steps_TheProduct().SetProductNameTo("Bleach");
 			TestReport.StartStep(
 				"I select the first option in the 'Product Line or Brand' drop down and save as: Brand" + testCaseId);
 			newProductSteps.SelectFirstOptionInBrandDropDown();
@@ -217,11 +219,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 			newProductSteps.GivenIShouldSeeXPage("The Product");
 			//newProductSteps.GivenInTheNewProductPageIClickTab("Product Characteristics");
-			newProductSteps.GivenInTheNewProductPageIClickSection("Product Characteristics");
+			newProductSteps.ClickPageHeading("Product Characteristics");
 			newProductSteps.GivenIChangeTheSecondaryPhysicalStateDropDownFromItsCurrentSelectionToANewSelection();
 			newProductSteps.ThenIClickSaveOrCancelInTheProductPage("Save");
 			newProductSteps.GivenInTheNewProductPageIClickTab("Review and Submit");
-			newProductSteps.GivenInTheNewProductPageIClickSection("Data Acceptance");
+			newProductSteps.ClickPageHeading("Data Acceptance");
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			thisStepsHomePage.ThenINavigateToTheHomePage();
@@ -305,8 +307,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			thisGlobalSteps.NavigateToLandingPage();
 			// Log in to administrator role
-			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
-			thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
 			// Generate UPC number and delete duplicates
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75335");
@@ -326,6 +328,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			// 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: CVS
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("CVS");
+
+			Context.AddToContext("retailer", "CVS");
 			// 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75335",
 				"Metal Container", "40");
@@ -693,7 +697,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And In the New Product page I click tab: Product Characteristics
 			newProductSteps.GivenInTheNewProductPageIClickTab("Product Characteristics");
 			//And in the New Product page I click section: Toxicity Characteristic Leaching Procedure(TCLP)
-			newProductSteps.GivenInTheNewProductPageIClickSection("Toxicity Characteristic Leaching Procedure (TCLP)");
+			newProductSteps.ClickPageHeading("Toxicity Characteristic Leaching Procedure (TCLP)");
 			//And I set the Lead option to: Yes
 			newProductSteps.SetTheSectionOptionTo("Lead", "Yes");
 			//And I set the Mercury option to: Yes
@@ -705,7 +709,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And In the New Product page I click tab: Review and Submit
 			newProductSteps.GivenInTheNewProductPageIClickTab("Review and Submit");
 			//And in the New Product page I click section: Data Acceptance
-			newProductSteps.GivenInTheNewProductPageIClickSection("Data Acceptance");
+			newProductSteps.ClickPageHeading("Data Acceptance");
 			//And In the Data Acceptance page I click on the Accept button
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
 			//Given If purchase details are showing click confirm order
@@ -1666,6 +1670,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Completed");
 
 		}
+
+
+		[StepDefinition(@"I create a product and take it to the ingredients page and save as: (.*)")]
+		public void CreateProductAndTakeToTheIngredientsPage(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			// 57408 (Create a New Registration via Register New Product icon)
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			// 57500 (The Product- Enter name, select product type - Continue - Happy Path)
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", "ingredient test");
+			// Save product to context
+			new StepsNewProduct().SaveProductInformation(savedAs);
+			// 26897 (Product Characteristics - Solid only available - continue)
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+		}
+
 
 	}
 

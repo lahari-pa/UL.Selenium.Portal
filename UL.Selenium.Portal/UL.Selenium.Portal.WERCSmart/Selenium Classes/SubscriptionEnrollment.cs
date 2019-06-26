@@ -1,17 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Components.DictionaryAdapter;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using SeleniumUtilities;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -84,7 +83,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return this._selectArticles.Displayed;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -129,9 +128,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Get_Extra_Text_Link(string subHeader)
 		{
-			return this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
-														 "')]/following-sibling::div/p/a")).Text;
-			Delay.Seconds(1);
+			return this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +"')]/following-sibling::div/p/a")).Text;
 		}
 
 		public void Click_Extra_Text_Link(string subHeader, string link)
@@ -158,7 +155,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return this._selectEnArticles.Displayed;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -198,7 +195,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return this._selectFormProds.Displayed;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -438,7 +435,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Delay.Seconds(1);
 					}
 
-					catch (Exception e)
+					catch (Exception)
 					{
 					}
 					newPlan.Info_points.Add(thisInfoPoint);
@@ -530,33 +527,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								}
 								return expandableDivText.Trim();
 							}
-							else
-							{
-								throw new Exception("Extra information is not showing.");
-							}
+							throw new Exception("Extra information is not showing.");
 						}
-						else
-						{
-							throw new Exception("No info link was found");
-						}
+						throw new Exception("No info link was found");
 					}
-					catch (Exception e)
+					catch (Exception)
 					{
 						throw new Exception("No info link was found");
 					}
 				}
-				else
-				{
-					throw new Exception("Matching item was not found");
-				}
+				throw new Exception("Matching item was not found");
 			}
-			else
-			{
-				throw new Exception("Matching plan was not found");
-			}
-
-
-			return "";
+			throw new Exception("Matching plan was not found");
 		}
 
 

@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
+using NTTQA.Selenium.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -143,7 +143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					.Replace("bold", "", StringComparison.InvariantCultureIgnoreCase).Trim();
 
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return null;
 			}
@@ -454,7 +454,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return true;
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return true;
 			}
@@ -542,7 +542,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							.ToList();
 						gotRow = true;
 					}
-					catch (Exception e)
+					catch (Exception)
 					{
 						Report.Info("Try " + counter + "Failed to get row values for row " + j);
 					}
@@ -735,7 +735,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkProcess']"));
 				return button.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("process product data button was not found");
 				return false;
@@ -848,12 +848,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement menuOption = ListOfTopMenuOptions.FirstOrDefault(x => x.Text.ToLower() == option.ToLower());
 				return menuOption.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
-
-			return false;
 		}
 
 		public bool ClickSuppliersButton()
@@ -906,7 +904,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				            string.Join(",", ListOfTopMenuOptions.Select(x => x.GetValue(true)).ToList()));
 				if (menuOption != null)
 				{
-					return menuOption.TryClick(Click_Functionality.ClickType.JavaScript);
+					return menuOption.TryClick(ClickFunctionality.ClickType.JavaScript);
 				}
 				else
 				{
@@ -938,7 +936,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Info("Did not find status select");
 				return false;
@@ -987,6 +985,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Type')]"))) + 1;
 			var pkgSizePosition =
 				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Size')]"))) + 1;
+			var retailersStartPosition =
+				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Transport')]"))) + 2;
+			var retailersEndPosition =
+				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'DPCI')]")))
+				;
 			// IndexOf() returns -1 if el not found in the row. position()= 0 will fail to get the correct td
 			if (upcPosition == 0 || pkgTypePosition == 0 || pkgSizePosition == 0)
 			{
@@ -1001,6 +1004,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					PackagingType = row.FindElement(By.XPath($"./td[position()= {pkgTypePosition}]"), 2)?.Text,
 					PackagingSize = row.FindElement(By.XPath($"./td[position()= {pkgSizePosition}]"), 2)?.Text
 				};
+				List<string> retailers = new List<string>();
+				for (int i = retailersStartPosition; i < retailersEndPosition + 1; i++)
+				{
+					if (row.FindElement(By.XPath($"./td[position()= {i}]"), 2)?.Text.Length > 0)
+					{
+						retailers.Add(headerRow.FindElement(By.XPath($"./td[position()= {i}]"), 2)?.Text);
+					}
+				}
+
+				thisUpc.Retailers = retailers;
 				rList.Add(thisUpc);
 			}
 
@@ -1016,7 +1029,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkRecertification']"));
 				return button.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("process recertification button was not found");
 				return false;
@@ -1057,7 +1070,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					{
 						return thisIDTD.GetValue().Trim();
 					}
-						
+
 				}
 			}
 
@@ -1082,12 +1095,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
-
-			return false;
 		}
 
 		public bool SelectFromStatusFilter(string option)
@@ -1099,7 +1110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1113,7 +1124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1127,7 +1138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1142,7 +1153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1157,7 +1168,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1285,7 +1296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				recUseSelect.Select(option);
 				return recUseSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1300,7 +1311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				flashPtSelect.Select(option);
 				return flashPtSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1315,7 +1326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				phSelect.Select(option);
 				return phSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1419,7 +1430,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusDD.Select(status);
 				return statusDD.SelectedOption() == status;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1433,7 +1444,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var updateStatusButton = this.containerElement.FindElement(By.XPath(".//select[@id='statusupdate']/following-sibling::a"));
 				return updateStatusButton.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1447,7 +1458,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var refeedToClient = this.containerElement.FindElement(By.XPath(".//fieldset[@id='fldFeedClient']/a"));
 				return refeedToClient.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1507,7 +1518,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					//do nothing
 				}
@@ -1654,7 +1665,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Report.Info("Exception");
 				}
@@ -1714,7 +1725,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return closeCorner.TryClick();
 				}
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				Report.Info("Failed to close dialog by clicking on close button");
 				SeleniumBrowser.WebBrowser.Close();
@@ -1741,12 +1752,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
-
-			return false;
 		}
 
 		public bool SelectSubject(string option)
@@ -1757,7 +1766,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1909,6 +1918,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		
 	}
 
 
@@ -1948,6 +1958,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string UPCNumber { get; set; }
 		public string PackagingType { get; set; }
 		public string PackagingSize { get; set; }
+		public List<string> Retailers { get; set; }
 	}
 
 	class ProcessUIDialog : BaseObject

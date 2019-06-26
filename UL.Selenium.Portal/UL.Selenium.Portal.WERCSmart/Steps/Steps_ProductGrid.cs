@@ -1,12 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module;
-using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -138,7 +137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
 					id = productToSearch.ProductId;
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					//do nothing
 				}
@@ -151,7 +150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 						id = productDetails.Id;
 					}
-					catch (Exception e)
+					catch (Exception)
 					{
 						//do nothing
 					}
@@ -164,7 +163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						id = Context.GetFromContext(savedAs).ToString();
 					}
-					catch (Exception e)
+					catch (Exception)
 					{
 
 					}
@@ -186,21 +185,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I clear the Search Criteria")]
 		public void ClearSearchCriteria()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clearing Previous Search");
-			try
+			var selProdGrid = new ProductsGrid();
+			var expanded = selProdGrid.MoreFiltersExpanded();
+			if (!expanded)
 			{
-				Report.Info("Clearing Search Criteria");
-				var selProdGrid = new ProductsGrid();
-				selProdGrid.ProductIdField = "";
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Success("Cleared Search Criteria");
-				Report.Screenshot();
+				Report.Info("More Filters was collapsed so expanding it");
+				selProdGrid.ClickMoreFilters();
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Clicking Clear");
+			selProdGrid.ClickClear();
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Info("Collapsing More Filters");
+			selProdGrid.ClickMoreFilters();
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I confirm the Delete Dialog")]
@@ -553,6 +550,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition("I generate a unique UPC number and save as: (.*)")]
+		public void GenerateUniqueUpcNumber(string savedAs)
+		{
+			var grid = new ProductsGrid();
+			for (var i = 0; i < 6; i++)
+			{
+				Report.Info("Generating upc attempt " + (i+1));
+				var uPCNo = GeneralFunctions.GenerateUPCNumber();
+				Report.Info("Generated UPC No: " + uPCNo);
+				Report.Info("Searching for generated upc number");
+				grid.UpcNumber = uPCNo;
+				Report.Info("Clicking search");
+				if (grid.ClickUpcNumberSearchButton())
+				{
+					GeneralUtilities.Wait_for_load_finish();
+					Report.Info("Clicked search");
+					if (grid.ProductsPresent())
+					{
+						Report.Info("There were products in the grid!");
+						continue;
+					}
+					Report.Success("Successfully generated a unique UPC number");
+					Context.AddToContext(savedAs, uPCNo);
+					this.ClearSearchCriteria();
+					return;
+				}
+				Report.Failure("Failed to click 'search' for UPC field");
+			}
+			Report.Failure("Failed to generate a unique UPC number after 5 attempts!");
+		}
+
+		[StepDefinition(@"I generate a random UPC number and save as: (.*) and (keep|delete) duplicate UPC products")]
+		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs, string keepOrDelete)
+		{
+			var delete = keepOrDelete == "delete";
+			TestReport.UseSubSteps = delete;
+			TestReport.StartStep("I generate a random UPC number and save as: " + savedAs);
+			this.GivenIGenerateARandomUPCNumberAndSaveAs(savedAs);
+			if (delete)
+			{
+				TestReport.StartStep("I delete all products with UPC Number: saved as " + savedAs);
+				this.DeleteAllProductsMatchingCriteria("UPC Number", "saved as " + savedAs);
+			}
+		}
+
 		[Given(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
@@ -560,6 +602,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, uPCNo);
 			Report.Info("Generated UPC No: " + uPCNo);
 		}
+
 
 		[StepDefinition(@"I delete all products with (UPC Number): (.*)")]
 		public void DeleteAllProductsMatchingCriteria(string option, string value)

@@ -214,10 +214,8 @@ Given I call Shared Step 70393 (Additional Product Information - With marketed f
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-| Battery Type | Manufacturer                                                   | Number of batteries per package | How many batteries required to run |
-| Alkaline     | Alkaline battery23A by Shenzhen AllKey Battery Co., Ltd.       | 6                               | 6                                  |
-
-Given I click continue
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Alkaline     | <any>        | 6                               | 6                                  |
 
 Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 
@@ -480,7 +478,7 @@ And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC8
 And I close the window that opened
 And I switch to tab: WERCSmart Version 2.0
 Given In the New Product page I click tab: Recipient and UPC Details
-Given in the New Product page I click section: Universal Product Code (UPC)
+Given I click the page heading: Universal Product Code (UPC)
 And I delete UPC: saved as UPC87676
 Then In the list of UPCs I should not see UPC: saved as UPC87676
 Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC876761 with container type: Plastic Container size: 25 and quantity:  do not click continue

@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -9,10 +9,11 @@
 @wercsmart
 @RetailPartners
 @SubEnrollment
-@run_FLow30_Grocery
+@run_Flow30_Grocery
 
 Feature: [64735] Flow 30 - Grocery
 
+@TReVorId:11670
 Scenario: [60725] Baked Goods, Crackers - RU001449
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -60,6 +61,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60725
 
 
+@TReVorId:11660
 Scenario: [60724] Condiments, Sauces - RU001454
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -107,6 +109,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60724
 
 
+@TReVorId:11639
 Scenario: [60723] Jelly, Jam or Preserves - RU001456
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -201,6 +204,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60722
 
 
+@TReVorId:11680
 Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens and Harbor Freight
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -225,9 +229,11 @@ Given I call Shared Step 60726 (Additional Product Information - Country and Pri
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Then In the 'Select retailers' window I should see the following retailers:
-| Retailer             |
-| Walgreens            |
-| Harbor Freight Tools |
+| Retailer                              |
+| No Retailer/No UPC Product            |
+| Optoro                                |
+| Publix                                |
+| Walgreens                             |
 
 Given I click Done in the Select Retailers popup
 

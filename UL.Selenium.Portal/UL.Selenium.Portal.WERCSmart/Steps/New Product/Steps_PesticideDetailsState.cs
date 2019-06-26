@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
-using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
@@ -13,22 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_PesticideDetailsState
 	{
-		[StepDefinition(@"in page Pesticide Details - State Registration page I should see error: (.*)")]
-		public void IShouldSeeError(string error)
-		{
-			var thisNewProduct = new NewProduct();
-			var erros = thisNewProduct.AllErrorMessages();
-			Report.IsTrue(erros.Contains(error), "Expected error: " + error + " but got: " + string.Join(", ", erros), "As expected, error is showing as: " + error);
-		}
-
-		[StepDefinition(@"in page Pesticide Details - State Registration Details I should see no errors")]
-		public void IShouldSeeNoError()
-		{
-			var thisNewProduct = new NewProduct();
-			var erros = thisNewProduct.AllErrorMessages();
-			Report.IsTrue(!erros.Any(), "Expected no errors but there were errors!",
-				"There were no errors as expected");
-		}
+		private StepsNewProduct StepsNewProduct => new StepsNewProduct();
 
 		[StepDefinition(@"I should see the appropriate response depending on today's date for state: (.*)")]
 		public void ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(string state)
@@ -38,13 +23,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var Oct1stthisYear = new DateTime(year, 10, 1);
 			if (DateTime.Now < Oct1stthisYear)
 			{
-				this.IShouldSeeError("State " + state + ": Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+				this.StepsNewProduct.ErrorMessageSpecific("State " + state + ": Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
 			}
 			else
 			{
 				//If the current date is > Oct 1st confirm the Transportation Details 1 step is shown and Click the Pesticide Details -State Registration Details heading
 				stepsNewProduct.GivenIShouldSeeXPage("Transportation Details 1");
-				stepsNewProduct.GivenInTheNewProductPageIClickSection("Pesticide Details - State Registration Details");
+				stepsNewProduct.ClickPageHeading("Pesticide Details - State Registration Details");
 			}
 		}
 
@@ -105,19 +90,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			Report.Success("Successfully added text '-edited' to each Registration Number in the State Registration Details table");
 			Report.Screenshot();
-			//var pesticideDetailsState = new PesticideDetailsState();
-			//var rowCount = pesticideDetailsState.StateRowsCount();
-			//var notEdited = new List<string>();
-			//for (var i = 0; i < rowCount; i++)
-			//{
-			//	if (!pesticideDetailsState.AddEditedTextToRegistrationNumber(i))
-			//	{
-			//		notEdited.Add((i + 1).ToString());
-			//	}
-			//}
-			//Report.IsTrue(notEdited.Count == 0,
-			//	"The State Pesticide Registration Number for the following rows was not successfully edited: " + string.Join(", ", notEdited),
-			//	"Every State Pesticide Registrtaion Number in the table was successfully edited");
 		}
 
 		[StepDefinition(@"I check each State Pesticide Registration Number contains the edited suffix")]
@@ -168,25 +140,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				var statesWithData = pesticideStateData.Where(x => !x.ExpirationDate.IsNullOrEmpty()).Select(x => x.State).ToList();
 				Context.AddToContext("Expiration Date States", statesWithData);
 			}
-			//var pesticideDetailsState = new PesticideDetailsState();
-			//var rowCount = pesticideDetailsState.StateRowsCount();
-			//var expirationDateIndexes = new List<int>();
-			//Report.Screenshot();
-			//for (var i = 0; i < rowCount; i++)
-			//{
-			//	if (!pesticideDetailsState.StateRowHasExpirationDate(i))
-			//	{
-			//		continue;
-			//	}
-			//	var rowNumber = i + 1;
-			//	Report.Info("State at row number: " + rowNumber + " contained an Expiration Date");
-			//	expirationDateIndexes.Add(i);
-			//}
-			//Report.IsTrue(expirationDateIndexes.Count > 0,
-			//	"No States were found to contain data for Expiration Date on the Pesticide State Registration Details page",
-			//	"Some States contained data in Expiration Date column as expected");
-			//// We add the indexes as a list to the scenario context to allow checking the 'Is Kelly Data Data' field in another step
-			//Context.AddToContext("Expiration Date Indexes", expirationDateIndexes);
 		}
 
 		[StepDefinition(@"I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'")]
@@ -203,27 +156,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.IsTrue(stateRegistrationData.First(x => x.State == state).IsKellyData, "The state: " + state + " did not contain a tick under 'Is Kelly Data' as expected!", "State: " + state + " contained a tick under 'Is Kelly Data' as expected");
 			}
-			//var pesticideDetailsState = new PesticideDetailsState();
-			//var rowsToCheck = new List<int>();
-			//if (ScenarioContext.Current.ContainsKey("Expiration Date States"))
-			//{
-			//	rowsToCheck = (List<int>)Context.GetFromContext("Expiration Date Indexes");
-			//	foreach (var index in rowsToCheck)
-			//	{
-			//		if (!pesticideDetailsState.KellyDataIsTicked(index))
-			//		{
-			//			Report.Failure("The State at row index: " + index + " did not contain a check mark under the Is Kelly Data column as expected");
-			//			return;
-			//		}
-			//	}
-			//	Report.Success("All States with an Expiration Date also had a check mark under the 'Is Kelly Data' column as expceted");
-			//	Report.Screenshot();
-			//}
-			//else
-			//{
-			//	Report.Failure("There were no States to check the Kelly Data field (rows containing an Expiration Date)");
-			//	Report.Screenshot();
-			//}
 		}
 
 		[StepDefinition(@"I confirm the Expiration Date Provided By Kelly field for state: (.*) is blank")]
@@ -346,12 +278,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			if (DateTime.Now < comparisonDate)
 			{
 				Report.Info("Date is prior to " + month + "/" + day + " so I expect to see the state error");
-				this.IShouldSeeError(error);
+				this.StepsNewProduct.ErrorMessageSpecific(error);
 			}
 			else
 			{
 				Report.Info("Date is after " + month + "/" + day + " so I expect no state error");
-				this.IShouldSeeNoError();
+				this.StepsNewProduct.NoErrorMessages();
 			}
 		}
 
@@ -374,13 +306,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 
 				Report.Info("Current date is prior to the expiration date. I expect no state error");
-				this.IShouldSeeNoError();
+				this.StepsNewProduct.NoErrorMessages();
 				new StepsNewProduct().GivenIShouldSeeXPage(page);
 			}
 			else
 			{
 				Report.Info("Current date has passed expiration date. I expect to see the state error");
-				this.IShouldSeeError("The expiration date must be a valid future date");
+				this.StepsNewProduct.ErrorMessageSpecific("The expiration date must be a valid future date");
 
 			}
 		}
@@ -556,12 +488,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				if (error.ToLower() == "none" || error.ToLower() == "n/a")
 				{
 					Report.Info("I don't expect any state error");
-					this.IShouldSeeNoError();
+					this.StepsNewProduct.NoErrorMessages();
 				}
 				else
 				{
 					Report.Info("I expect to see the state error");
-					this.IShouldSeeError(error);
+					this.StepsNewProduct.ErrorMessageSpecific(error);
 				}
 			}
 			else
@@ -580,7 +512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var year = DateTime.Now.Year;
 			if ((evenOdd == "even") == (year % 2 == 0))
 			{
-				this.IShouldSeeNoError();
+				this.StepsNewProduct.NoErrorMessages();
 				new StepsNewProduct().GivenIShouldSeeXPage(page);
 			}
 			else

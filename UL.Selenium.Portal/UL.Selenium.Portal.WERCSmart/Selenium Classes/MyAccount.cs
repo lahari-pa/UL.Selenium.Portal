@@ -1,15 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
-using NTTQA_TReVor_Module.Classes;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
+using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -197,7 +196,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					break;
 				}
 				Report.Info("User Not Found On Page " + myPageNumber.Text + ", Navigating to Next Page");
-				myNext.Click();
+				if (!myNext.TryClick())
+				{
+					throw new Exception("Failed to click move to next page");
+				}
 				pageNo++;
 			}
 			Report.Info("User: " + userName + " Has Not Been Created");
@@ -602,6 +604,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return int.Parse(lastControl.Last().Text);
 			}
 			return 1;
+		}
+
+		public int GetHighestPageNo()
+		{
+			var pageNumbers = this.containerElement.FindElements(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+			List<short> intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
+			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
+
+
 		}
 
 		public IWebElement UserGridNavPageInput()
@@ -1306,7 +1317,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var rowIndex = allRows.IndexOf(row);
 			Context.AddToContext("Saved brand name", rowName?.GetAttribute("value"));
 			Context.AddToContext("Saved brand row index", rowIndex);
-			return row.FindElement(By.XPath(".//a[@data-bind='click: save']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return row.FindElement(By.XPath(".//a[@data-bind='click: save']"), 2).TryClick();
 		}
 		public bool ClickCancel()
 		{
@@ -1437,7 +1448,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickSave()
 		{
-			return this.containerElement.FindElement(By.XPath(".//a[@data-bind= 'click: saveIngredients']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this.containerElement.FindElements(By.XPath(".//a[text()='Save']"), 2).First(x=>x.Displayed).TryClick();
 		}
 		public bool ClickDeleteChecked()
 		{
@@ -1453,9 +1464,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			switch (navOption.ToLower())
 			{
 				case "next":
-					return this.containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link next']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
+					return this.containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link next']")).TryClick();
 				case "previous":
-					return this.containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link prev']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
+					return this.containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link prev']")).TryClick();
 			}
 			Report.Failure("Unable to apply navigation option: " + navOption);
 			return false;

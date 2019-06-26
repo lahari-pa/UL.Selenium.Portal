@@ -1,5 +1,5 @@
-﻿using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
@@ -164,7 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					packagingType.ID, packagingType.Name));
 		}
 
-		[Given(@"Save the top packaging id as (.*) if there are no packacking types listed add a new packing type as follows")]
+		[Given(@"Save the top packaging id as (.*) if there are no packaging types listed add a new packing type as follows")]
 		public void GivenSaveTheTopPackagingIdAsMPIIfThereAreNoPackackingTypesListedAddANewPackingTypeAsFollows(string saveAs, Table table)
 		{
 			StepsMyAccount myAccountSteps = new StepsMyAccount();
@@ -203,6 +203,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+		}
+
+		[StepDefinition(@"I click the CONEG browse button and upload PDF: (.*)")]
+		public void UploadDPFForCONEG(string pdfFile)
+		{
+			Report.IsTrue(new PackagingType().UploadFileForSection("CONEG Certificate", pdfFile), "Failed to upload CONEG pdf", "Uploaded CONEG pdf");
 		}
 
 	}

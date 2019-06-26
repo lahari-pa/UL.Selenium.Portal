@@ -115,7 +115,7 @@ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Regist
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 31
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-                    "duct): Computer (Combination of Monitor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "duct): Computer (Combination of Monitor + Desktop)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 33
 testRunner.Then("I save the product information as: TestCase60671", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 35
@@ -131,7 +131,7 @@ testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not P
                         "How many batteries required to run"});
             table1.AddRow(new string[] {
                         "Alkaline",
-                        "Panasonic Alkaline battery LR6 AA",
+                        "<any>",
                         "6",
                         "6"});
 #line 43

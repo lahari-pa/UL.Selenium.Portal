@@ -4,6 +4,7 @@
 @Signup
 @RetailPartners
 @wercsmart
+@DocumentAcceptance
 @run_RetailerPartners
 
 Feature: Retailer Partners
@@ -396,3 +397,47 @@ And I should see the button: Products in Scope in section: Data Consent Tiers
 And I confirm that there is a section labeled: Wal-Mart/SAM'S CLUB & You
 And The pie chart should be showing on the retailer details page
 And The pie chart footer text should contain: % of your product portfolio is associated with Wal-Mart/SAM'S CLUB
+
+
+@TReVorId:22257
+Scenario: [56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - Download PDF
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: CVS
+And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
+And I click the "Tier 1: Regulatory Compliance" tab in Data Tier Details
+And I click download PDF for "What does Regulatory Support mean?"
+Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+
+
+@TReVorId:22258
+Scenario: [56930] What are the Data Usage Tiers - Tier 2: Chemical Program Support - Download PDF
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: CVS
+And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
+And I click the "Tier 2: Chemical Program Support" tab in Data Tier Details
+And I click download PDF for "What does Chemical Program Support mean?"
+Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+
+
+@TReVorId:22259
+Scenario: [56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (Internal Business Use Only) - Download PDF
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: CVS
+And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
+And I click the "Tier 3: Supplemental Reports" tab in Data Tier Details
+And I click download PDF for "What does Supplemental Reports for Internal Business Use Only mean?"
+Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
+
+
+@TReVorId:22260
+Scenario: [56934] What are the Data Usage Tiers - Tier 4: Public Disclosure Options - Download PDF
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: CVS
+And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
+And I click the "Tier 4: Public Disclosure Options" tab in Data Tier Details
+And I click download PDF for "What are my Public Disclosure Options?"
+Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017

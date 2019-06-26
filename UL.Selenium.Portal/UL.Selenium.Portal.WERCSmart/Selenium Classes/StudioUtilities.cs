@@ -1,9 +1,9 @@
-﻿using System;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using System;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
-using SeleniumUtilities;
+using NTTQA.Selenium.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -21,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(Context.GetFromContext("BaseWindow").ToString());
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					var handlesTemp = SeleniumBrowser.WebBrowser.WindowHandles;
 					var currentWindow = SeleniumBrowser.WebBrowser.CurrentWindowHandle;

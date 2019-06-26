@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
@@ -238,12 +238,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				StudioUtilites.SwitchToWindow("Wercs Studio");
 				SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
 				IWebElement frame =
-					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'workspaceDesignMode')]"));
+					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'powertoolsworkspaceDesignMode')]"));
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 				return base.Wait_for_load(30);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -263,7 +263,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				return false;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -371,7 +371,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return editButton.TryClick();
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Delay.Seconds(1);
 				}
@@ -392,7 +392,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return button.TryClick();
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Delay.Seconds(1);
 				}
@@ -406,7 +406,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning click tool bar item: " + item);
 			var aLinks = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='divBtmToolbars']//a[not(contains(@style, 'none'))]"));
-
 			if (aLinks.Count == 0)
 			{
 				Report.Info("No toolbar items found.");
@@ -642,14 +641,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				Report.Error("Image was not found: " + code);
 				return false;
-
 			}
-			else
-			{
-				Report.Error("Button was not found: " + code);
-				return false;
-			}
-
+			Report.Error("Button was not found: " + code);
 			return false;
 		}
 
@@ -662,12 +655,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					return true;
 				}
-
 				Delay.Seconds(1);
 			}
-
 			return false;
-
 		}
 
 
@@ -1149,7 +1139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return this.containerElement.FindElement(By.XPath(".//input[@id='btnCancel']")).TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1485,7 +1475,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Report.Info("List of buttons not found");
 				}
@@ -1654,7 +1644,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				matchingSelect.Select(value);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("Found select box but unable to select option: " + value);
 				return false;
@@ -1866,7 +1856,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					string itemCount = spanCount.GetValue();
 					return Convert.ToInt16(itemCount.Substring(0, itemCount.IndexOf(" ")));
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Report.Info("Failed to extract a number from: " + spanCount.GetValue());
 					return -1;
@@ -1903,6 +1893,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			return matchingSection.TryClick();
+		}
+
+		public List<string> GetAliasSubsectionOptions()
+		{
+			return SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath("//div[@id='AttributesGrid_divSRData']//table//tr//td[1]"), 2).ToList()
+				.Select(x => x.GetValue()).ToList();
 		}
 	}
 
@@ -1952,7 +1949,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				matchingSelect.Select(value);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("Found select box but unable to select option: " + value);
 				return false;
@@ -2193,7 +2190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						By.XPath(".//table[@id='DocumentQueue_grdSR']//tr[contains(@class, 'ColHeader')]"));
 				return headerRow.FindElements(By.XPath(".//td//a")).Select(x => x.GetValue()).ToList();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("No header row was found");
 				return new List<string>();
@@ -2397,7 +2394,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				matchingSelect.Select(value);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("Found select box but unable to select option: " + value);
 				return false;
@@ -2513,7 +2510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								return (dtDateFrom.Date == dtExpectedDateFrom.Date &&
 										dtDateTo.Date == dtExpectedDateTo.Date);
 							}
-							catch (Exception e)
+							catch (Exception)
 							{
 								return false;
 							}
@@ -2781,7 +2778,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return matchingDay.TryClick();
 
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -2854,7 +2851,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				return matchingDay.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -3071,7 +3068,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				matchingButton.Click();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 
 			}

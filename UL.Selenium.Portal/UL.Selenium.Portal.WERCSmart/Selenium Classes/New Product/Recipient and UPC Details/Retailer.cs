@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
@@ -154,7 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				List<string> vendorOptions = el.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
 				Random r = new Random();
-				int rInt = r.Next(0, vendorOptions.Count - 1);
+				int rInt = r.Next(1, vendorOptions.Count - 1);
 				Report.Info("Attempting to select vendor: " + vendorOptions[rInt]);
 				el.Select(vendorOptions[rInt]);
 				Delay.Seconds(1);
