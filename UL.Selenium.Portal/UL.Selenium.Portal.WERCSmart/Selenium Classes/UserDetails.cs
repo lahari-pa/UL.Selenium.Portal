@@ -201,7 +201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(2 * Delay.SpeedFactor);
 
 			var myDlg = new AddUserThankYouDialog();
-			myDlg.Wait_for_load();
+			myDlg.Wait_for_load(60);
 			if (!myDlg.Add_User_Thank_You())
 			{
 				Report.Info("Failed to Add User");
@@ -213,19 +213,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class AddUserThankYouDialog : BaseObject
+	class AddUserThankYouDialog : SeleniumBaseObject
 	{
-		[FindsBy(How = How.XPath, Using = "//div[@id='add-user-dialog']")]
-		protected override IWebElement containerElement { get; set; }
+		public const string BasePath = "//div[@id='add-user-dialog']";
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		//Close Button
-		[FindsBy(How = How.XPath, Using = ".//div/button[text()='Close']")]
-		private IWebElement _btnClose;
+		private IWebElement BtnClose => containerElement.FindElement(By.XPath(".//div/button[text()='Close']"),5);
 
 		public bool Close_click()
 		{
 			Report.Info("Attempting to Click Close Button");
-			return this._btnClose.TryClick();
+			return BtnClose.TryClick();
 		}
 
 		public bool Add_User_Thank_You()
@@ -236,7 +236,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (myText == null)
 			{
-				Report.Info("Failed to Find Thenk You Text");
+				Report.Info("Failed to Find Thank You Text");
 				Report.Screenshot();
 				return false;
 			}
