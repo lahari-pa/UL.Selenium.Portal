@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -8,11 +8,12 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
-@run_FLow29_Beverage
+@run_Flow29_Beverage
 
 Feature: Flow 29 - Beverage
 
 @tfs_design
+@TReVorId:11622
 Scenario: [60694] Wine - RU001418
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
