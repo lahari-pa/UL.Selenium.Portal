@@ -8,12 +8,12 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ConflictMinerals : SeleniumBaseObject
+	class ConflictMinerals : BaseObject
 	{
 		public const string BasePath = "//div[@class='container-fluid']";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override By ContainerElementLocator /*IWebElement containerElement*/ { get; }
+		protected override IWebElement containerElement { get; set; }
 
 		public string VerificationCode {
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='VerificationCode']"), 2).GetValue().Trim(); }
