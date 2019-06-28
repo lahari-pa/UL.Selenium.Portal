@@ -134,22 +134,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 					var alpha = "abcdefghijklmnopqrstuvwxyz";
 					var count = 0;
 					var foundResult = false;
-					while (count < 30 && !foundResult)
+					while (!foundResult && count < alpha.Length - 1)
 					{
 						if (this.EnterManufacturer == null)
 						{
 							throw new Exception("Enter manufacturer element was not found!");
 						}
+						Report.Info("Entering text: " + alpha[count] + " into the search input");
 						this.EnterManufacturer.TryEnterText(thisBattery.Manufacturer == "<any>" ? alpha[count].ToString() : thisBattery.Manufacturer);
-						Delay.Seconds(1);
-						var selectDropDown = this.EnterManufacturer.FindElement(By.XPath("../following-sibling::span"), 2);
-						foundResult = selectDropDown != null;
+						var result = this.EnterManufacturer.FindElement(By.XPath("./parent::span/following-sibling::span/ul/li[not(contains(@class,'loading-results'))]"), 10);
+						foundResult = result != null;
 						if (foundResult)
 						{
 							Report.Info("Found search results. Clicking the first option.");
-							var resultEl = selectDropDown.FindElement(By.XPath(".//ul/li"), 2);
-							var resultElText = resultEl?.Text;
-							if (resultEl.TryClick())
+							var resultElText = result.Text;
+							if (result.TryClick())
 							{
 								if (thisBattery.SavedAs != null)
 								{
@@ -157,10 +156,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 								}
 								break;
 							}
-							Report.Info("Failed to click first search result option. Trying again...");
+							Report.Info("Failed to click first search result option. Attempting the next alpha");
 						}
 						count++;
-						Delay.Seconds(1);
 					}
 					if (!foundResult)
 					{
