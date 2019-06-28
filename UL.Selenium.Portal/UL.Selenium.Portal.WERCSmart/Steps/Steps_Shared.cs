@@ -7891,5 +7891,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().ClickContinue();
 		}
 
+		[StepDefinition(@"I call Shared Step 103904 - Validate Product Name can contain character: (.*)")]
+		public void Shared_103904_ProductNameCanContain(string character)
+		{
+			TestReport.UseSubSteps = true;
+
+			string[] modifiedStrings = { character + "The Product Name", "The " + character + " Product Name", "The Product Name " + character, "The " + character + " Product " + character + " Name" };
+
+			foreach (string productType in modifiedStrings)
+			{
+				TestReport.StartStep("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is allowed in the field.");
+				StepsNewProduct newProd = new StepsNewProduct();
+				newProd.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", productType);
+				newProd.ClickContinue();
+				newProd.ClickPageHeading("The Product");
+				newProd.ConfirmTheProductNameIsDisplayedInTheHeader(productType);
+			}
+			TestReport.EndScenario();
+		}
 	}
 }
