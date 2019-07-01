@@ -7910,6 +7910,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				StepsNewProduct newProd = new StepsNewProduct();
 				newProd.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", productType);
 				newProd.ClickContinue();
+				newProd.GivenIShouldSeeXPage("Product Characteristics");
 				newProd.ClickPageHeading("The Product");
 				newProd.ConfirmTheProductNameIsDisplayedInTheHeader(productType);
 			}

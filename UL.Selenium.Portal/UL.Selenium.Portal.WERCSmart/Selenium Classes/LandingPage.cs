@@ -8,11 +8,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class LandingPage : BaseObject
-	{
-		public const string BasePath = "//div[@class='navbar navbar-default']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+	class LandingPage : SeleniumBaseObject
+	{		//public const string BasePath = "//div[@class='navbar navbar-default']";
+		//[FindsBy(How = How.XPath, Using = BasePath)]
+		//protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//div[@class='navbar navbar-default']");
 
 		public void Click_Login()
 		{
@@ -20,9 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (loginButton == null)
 			{ loginButton = this.containerElement.FindElement(By.XPath(".//a[contains (@href, 'ssologin')]"), 2); };
 			loginButton.Click();
-			var selLogin = new Login();
-			selLogin.Wait_for_load();
-			Delay.Seconds(Delay.SpeedFactor * 1);
+			new Login().WaitForContainerToBeVisible();
 		}
 
 		public void Click_Signup()
