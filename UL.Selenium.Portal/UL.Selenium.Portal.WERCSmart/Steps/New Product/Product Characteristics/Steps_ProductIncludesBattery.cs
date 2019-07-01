@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using NTTQA.Selenium.Reporting.Core;
 using TechTalk.SpecFlow;
@@ -58,7 +59,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				if (listOfBatteries.Any())
 				{
 					// add a table row for each battery in the list and enters data into each column
+					Report.Info("Adding the following batteries:");
+					Report.Table(table);
 					this.ProductIncludesBattery.Batteries = listOfBatteries;
+					Report.Info("Removing empty battery rows");
 					this.ProductIncludesBattery.DeleteEmptyBatteryRows();
 					return;
 				}

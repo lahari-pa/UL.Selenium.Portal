@@ -54,11 +54,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click the page heading: (.*)")]
 		public void ClickPageHeading(string section)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I click section header " + section);
 			Report.IsTrue(NewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
 			GeneralUtilities.Wait_for_load_finish();
-			TestReport.StartStep("I should see page has loaded: " + section);
 			this.GivenIShouldSeeXPage(section);
 		}
 

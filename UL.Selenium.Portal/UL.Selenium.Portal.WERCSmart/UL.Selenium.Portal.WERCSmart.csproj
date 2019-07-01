@@ -663,6 +663,7 @@
     <Compile Include="Selenium Classes\ULWercSmartSolutionsArticle.cs" />
     <Compile Include="Selenium Classes\New Product\Recipient and UPC Details\UPC.cs" />
     <Compile Include="Selenium Classes\UserDetails.cs" />
+    <Compile Include="Selenium Classes\ViewUpcs.cs" />
     <Compile Include="Selenium Classes\WERCSLinkDashboard.cs" />
     <Compile Include="Selenium Classes\YouTube.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
@@ -709,6 +710,7 @@
     <Compile Include="Steps\Steps_SubscriptionUpgrade.cs" />
     <Compile Include="Steps\Steps_Summary.cs" />
     <Compile Include="Steps\Steps_SupplierReports.cs" />
+    <Compile Include="Steps\Steps_ViewUpcs.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
   </ItemGroup>
   <ItemGroup>

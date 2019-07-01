@@ -2017,5 +2017,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Matching UPC has been found for UPC: " + UPC + " and retailer: " + retailer);
 		}
 
+		[StepDefinition(@"I confirm all UPC numbers in the list saved as: (.*) are displayed in the SHA Manager Product UPC list")]
+		public void ConfirmAllUpcsAreDisplayedInShaManagerProductUpcList(string savedAs)
+		{
+			try
+			{
+				// Switch to window
+				var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (var handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//div[@class='upcTableOutter']"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+				}
+
+				// Get Displayed UPCs
+				var displayedUpcs = new StudioSHAManager().GetUPCs();
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the Product UPC window!");
+					Report.Screenshot();
+					return;
+				}
+
+				// Confirm match
+				var upcNumbers = (List<string>)Context.GetFromContext("UPC" + savedAs);
+				Report.IsTrue(displayedUpcs.All(x => upcNumbers.Contains(x.UPCNumber)),
+					"Not all UPCs saved as: " + savedAs + " were displayed! Expected: " + string.Join(", ", upcNumbers) + ". but got: " + string.Join(", ", displayedUpcs.Select(x=>x.UPCNumber).ToList()));
+			}
+			catch (NoSuchWindowException)
+			{
+				Report.Failure("Failed to switch to the SHA Manager Product UPC window!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
+
+
 	}
 }

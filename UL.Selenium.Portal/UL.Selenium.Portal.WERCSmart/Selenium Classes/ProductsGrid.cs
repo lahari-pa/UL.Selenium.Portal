@@ -312,48 +312,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public ProductGridItem FirstProductInGridWithRetailers()
 		{
-			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr"),2).Count == 0)
 			{
 				Report.Error("No rows have been found!");
 				return null;
 			}
-
 			var productRows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
 			foreach (var row in productRows)
 			{
-				if (row.FindElement(By.XPath(".//ul[@class='list-inline retailers']/li[@class='abr']"), 2) != null)
+				if (row.FindElement(By.XPath(".//ul[@class='list-inline retailers']/li"), 2) == null)
 				{
-					var productRow = row;
-					if (productRow == null || !productRow.Displayed)
-					{
-						continue;
-					}
-
-					var actionsButton = row.FindElement(By.XPath(".//button[contains(@class,'ellipsis')]"));
-					if (actionsButton != null)
-					{
-						if (actionsButton.TryClick())
-						{
-							if (this.ActionsAvailableInDropDown().Contains("Archive Retailers"))
-							{
-								var productElement = new ProductGridItem() {
-									ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
-									ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
-									DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
-									Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList()
-								};
-								return productElement;
-							}
-						}
-					}
-
 					continue;
 				}
+				var productElement = new ProductGridItem { ProductId = row.FindElement(By.XPath(".//small"), 2).Text.Trim(), ProductName = row.FindElement(By.XPath(".//div/p"), 2).Text.Trim(), DateCreated = row.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(), Retailers = row.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList() };
+				return productElement;
 			}
-
 			return null;
-
-
 		}
 
 		public List<ProductGridItem> GetAllItemsInGrid()
