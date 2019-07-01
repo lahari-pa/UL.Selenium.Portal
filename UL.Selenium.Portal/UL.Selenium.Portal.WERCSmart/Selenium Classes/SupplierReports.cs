@@ -23,7 +23,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetCurrentTitle()
 		{
-			return this.containerElement.FindElement(By.XPath(".//form[@id='panel']//h3"))?.Text;
+			var thing = this.containerElement.FindElement(By.XPath("..//h2"))?.Text;
+			return thing;
 		}
 
 		public string GetCurrentSubText()
