@@ -1983,25 +1983,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save the ProductID and Name of the first Product in the grid with a retailer as: (.*)")]
 		public void SaveFirstProductInGridWithARetailer(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Saving Product ID and Name of First Product as " + savedAs);
-			try
+			Report.Info("Saving Product ID and Name of First Product as " + savedAs);
+			var selProdGrid = new ProductsGrid();
+			var productElement = selProdGrid.FirstProductInGridWithRetailers();
+			if (productElement == null)
 			{
-				Report.Info("Saving Product ID and Name of First Product as " + savedAs);
-				var selProdGrid = new ProductsGrid();
-				var productElement = selProdGrid.FirstProductInGridWithRetailers();
-				Context.AddToContext(savedAs, productElement);
-				Report.Success("Got the first Product in Grid (ID: " + productElement.ProductId + ") and saved to: " + savedAs);
-				Report.Info("Filtering on product id: " + productElement.ProductId);
-				selProdGrid.ProductIdField = productElement.ProductId;
-				selProdGrid.ClickProductIdNameSearchButton();
-				Delay.Seconds(3);
+				Report.Failure("No results were returned in the grid");
 				Report.Screenshot();
+				return;
 			}
-			catch (Exception ex)
+			Context.AddToContext(savedAs, productElement);
+			Report.Success("Got the first Product in Grid (ID: " + productElement.ProductId + ") and saved to: " + savedAs);
+			Report.Info("Filtering on product id: " + productElement.ProductId);
+			selProdGrid.ProductIdField = productElement.ProductId;
+			selProdGrid.ClickProductIdNameSearchButton();
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I save the ProductID and Name of the first Product in the grid with a retailer as Product Information, saved as: (.*)")]
+		public void SaveFirstProductInGridWithARetailerAsProductInformation(string savedAs)
+		{
+			Report.Info("Saving Product ID and Name of First Product as " + savedAs);
+			var selProdGrid = new ProductsGrid();
+			var productElement = selProdGrid.FirstProductInGridWithRetailers();
+			if (productElement == null)
 			{
-				Report.Failure(ex.Message);
-				throw;
+				Report.Failure("No results were returned in the grid");
+				Report.Screenshot();
+				return;
 			}
+			var productInformation = new ProductInformation(){Id = productElement.ProductId, Name = productElement.ProductName};
+			Context.AddToContext(savedAs, productInformation);
+			Report.Success("Got the first Product in Grid (ID: " + productElement.ProductId + ") and saved to: " + savedAs);
+			Report.Info("Filtering on product id: " + productElement.ProductId);
+			selProdGrid.ProductIdField = productElement.ProductId;
+			selProdGrid.ClickProductIdNameSearchButton();
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Screenshot();
 		}
 
 		[Given(@"I check for all items in the grid that the retailers are alphabetically listed")]

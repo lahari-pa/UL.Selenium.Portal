@@ -1290,10 +1290,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
-			TestReport.StartStep("Primary Physical State should be showing the value: Solid");
-			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
 			TestReport.StartStep("I set the Primary Physical State option to: Solid");
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			TestReport.StartStep("Primary Physical State should be showing the value: Solid");
+			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
 			TestReport.StartStep(
 				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -1334,8 +1334,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
-			TestReport.StartStep("I set 'Which one best describes your product' to the first available option");
-			MyNewProduct.SelectFirstOptionInSection("Which one best describes your product");
+			TestReport.StartStep("I set any option for: 'Which one best describes your product'");
+			// Step says 'any' but prefer seetting not pesticide because some tests didn't account for Pesticides page appearing later.
+			if (new NewProduct().GetAllOptionsForSection("Which one best describes your product").Contains("Product is not considered a pesticide product"))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Which one best describes your product", "Product is not considered a pesticide product");
+			}
+			else
+			{
+				MyNewProduct.SelectFirstOptionInSection("Which one best describes your product");
+			}
 			TestReport.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
 			MyNewProduct.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
@@ -1648,8 +1656,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(1);
 			}
 
-			TestReport.StartStep("In the Product is Regulated for Transport page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product is Regulated for Transport");
+			TestReport.StartStep("In the Transportation Details 1 page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
 
 		[StepDefinition(@"I call Shared Step 57502 \(Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
@@ -4041,16 +4049,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.StudioWaitForSpinner();
 			myStudioShaManager.WaitForProductList(60);
 			Report.Info("Getting saved product: " + savedAs);
-
 			if (!Context.Contains(savedAs))
 			{
 				Report.Error("Context does not contain: " + savedAs);
 			}
-
-			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var id = productDetails.Id;
-			Report.Info("Looking for id: " + id.ToString());
-			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = product.Id;
+			Report.Info("Looking for id: " + id);
+			TechTalk.SpecFlow.Table table = new Table(new string[] {
 				"SearchTerm",
 				"SearchValue"
 			});
@@ -7891,5 +7897,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().ClickContinue();
 		}
 
+		[StepDefinition(@"I call Shared Step 103904 - Validate Product Name can contain character: (.*)")]
+		public void Shared_103904_ProductNameCanContain(string character)
+		{
+			TestReport.UseSubSteps = true;
+
+			string[] modifiedStrings = { character + "The Product Name", "The " + character + " Product Name", "The Product Name " + character, "The " + character + " Product " + character + " Name" };
+
+			foreach (string productType in modifiedStrings)
+			{
+				TestReport.StartStep("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is allowed in the field.");
+				StepsNewProduct newProd = new StepsNewProduct();
+				newProd.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", productType);
+				newProd.ClickContinue();
+				newProd.GivenIShouldSeeXPage("Product Characteristics");
+				newProd.ClickPageHeading("The Product");
+				newProd.ConfirmTheProductNameIsDisplayedInTheHeader(productType);
+			}
+			TestReport.EndScenario();
+		}
 	}
 }

@@ -91,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				inputTitle = match.Groups[1].Value;
 
-				errorsList.Add(new InputError() { errorMessage = errorString, input = errorInput, inputName = inputTitle });
+				errorsList.Add(new InputError() { ErrorMessage = errorString, Input = errorInput, InputName = inputTitle });
 
 			}
 
@@ -3181,9 +3181,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 	public class InputError
 	{
-		public string inputName { get; set; }
-		public IWebElement input { get; set; }
-		public string errorMessage { get; set; }
+		public string InputName { get; set; }
+		public IWebElement Input { get; set; }
+		public string ErrorMessage { get; set; }
 	}
 
 }
