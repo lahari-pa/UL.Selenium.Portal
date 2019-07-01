@@ -2346,12 +2346,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenIConfirmErrorMessageIsShownBelowField(string errorMessage, string field)
 		{
 			var errorsList = new NewProduct().GetAllErrors();
-			Report.IsTrue(errorsList.FirstOrDefault(x => x.inputName == field) != null,
+			Report.IsTrue(errorsList.FirstOrDefault(x => x.InputName == field) != null,
 				"An error is not showing on field: " + field, "An error is showing on field: " + field);
 
-			Report.Info("Error message is showing as: " + errorsList.FirstOrDefault(x => x.inputName == field).errorMessage);
+			Report.Info("Error message is showing as: " + errorsList.FirstOrDefault(x => x.InputName == field).ErrorMessage);
 
-			Report.IsTrue(errorsList.FirstOrDefault(x => x.inputName == field && x.errorMessage.Trim() == errorMessage.Trim()) != null,
+			Report.IsTrue(errorsList.FirstOrDefault(x => x.InputName == field && x.ErrorMessage.Trim() == errorMessage.Trim()) != null,
 				"An error message is not showing as expected: " + errorMessage, "An error is showing as expected: " + errorMessage);
 		}
 
