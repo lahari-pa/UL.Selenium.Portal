@@ -43,16 +43,20 @@ Scenario: [68420] List of Supplier Reports
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: Active UPCs for Products Report
-	Then In the Supplier Reports screen the current page should be: Active UPCs for Products Report
+	Then In the Supplier Reports screen the current page should be: Available Reports
+	Given Under the Supplier Reports menu I choose: UPCs (Active) for all Registrations
+	Then In the Supplier Reports screen the current sub-page should be: UPCs (Active) for all Registrations
 	Given In the Supplier Reports screen I click on the Download button
-	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called Active UPCs for Products Report.xlsx and save as 68421
+	Given I confirm that an excel file is produced called UPCs (Active) for all Registrations.xlsx and save as 68421
 	Then I confirm that the excel file saved as: 68421 contains the following columns:
-		| Column       |
-		| WPSID        |
-		| Product Name |
-		| Active UPCs  |
+		| Column          |
+		| WPSID           |
+		| Product Name    |
+		| Brand           |
+		| Recommended Use |
+		| Individual UPC  |
+		| Case UPC        |
+	Given I click on close in the Report Download dialog
 
 @tfstestcase:68422
 @tfs_design
