@@ -289,6 +289,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return publiclyDisclosedInput.TryCheck(checked_);
 		}
 
+		public bool SetPercentageValue(string ingredient, string value)
+		{
+			var percentageInput = this.IngredientRow(ingredient).FindElement(By.XPath(".//input[@class='form-control percent-comp']"));
+			if (percentageInput == null)
+			{
+				Report.Failure("Could not find the percentage input");
+				return false;
+			}
+
+			return percentageInput.TryEnterTextAndTab(value);
+
+		}
+
 		public bool SetIngredientTradeSecret(string chemicalName, bool checkedTrueFalse)
 		{
 			var tradeSecretInput = this.IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"));
