@@ -7901,18 +7901,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void Shared_103904_ProductNameCanContain(string character)
 		{
 			TestReport.UseSubSteps = true;
+			var newProd = new NewProduct();
 
-			string[] modifiedStrings = { character + "The Product Name", "The " + character + " Product Name", "The Product Name " + character, "The " + character + " Product " + character + " Name" };
-
-			foreach (string productType in modifiedStrings)
+			foreach (string productType in newProd.ModifiedStrings(character))
 			{
-				TestReport.StartStep("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is allowed in the field.");
-				StepsNewProduct newProd = new StepsNewProduct();
-				newProd.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", productType);
-				newProd.ClickContinue();
-				newProd.GivenIShouldSeeXPage("Product Characteristics");
-				newProd.ClickPageHeading("The Product");
-				newProd.ConfirmTheProductNameIsDisplayedInTheHeader(productType);
+				TestReport.UpdateRunnerText("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is allowed in the field.");
+				var newProdSteps = new StepsNewProduct();
+				newProdSteps.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", productType);
+				newProdSteps.ClickContinue();
+				newProdSteps.GivenIShouldSeeXPage("Product Characteristics");
+				newProdSteps.ClickPageHeading("The Product");
+				newProdSteps.ConfirmTheProductNameIsDisplayedInTheHeader(productType);
+			}
+			TestReport.EndScenario();
+		}
+
+		[StepDefinition(@"I call Shared Step 104068 Validate Product Name can not contain special characters: (.*)")]
+		public void ThenICallSharedStepValidateProductNameCanNotContainSpecialCharacters(string character)
+		{
+			TestReport.UseSubSteps = true;
+			var newProd = new NewProduct();
+
+			foreach (string productType in newProd.ModifiedStrings(character))
+			{
+				TestReport.UpdateRunnerText("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is not allowed in the field.");
+				var newProdSteps = new StepsNewProduct();
+				newProdSteps.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", productType);
+				newProdSteps.ClickContinue();
+				newProdSteps.ErrorMessageSpecific(@"Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )");
 			}
 			TestReport.EndScenario();
 		}
