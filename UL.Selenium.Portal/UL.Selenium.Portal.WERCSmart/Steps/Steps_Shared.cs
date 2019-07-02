@@ -7905,9 +7905,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			foreach (string productType in newProd.ModifiedStrings(character))
 			{
-				TestReport.UpdateRunnerText("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is allowed in the field.");
+				TestReport.UpdateRunnerText("I enter the text: '" + @productType + "' into the Product Name field and verify that '" + character + "' is allowed in the field.");
 				var newProdSteps = new StepsNewProduct();
-				newProdSteps.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", productType);
+				var product = new TheProduct {
+					ProductName = productType
+				};
 				newProdSteps.ClickContinue();
 				newProdSteps.GivenIShouldSeeXPage("Product Characteristics");
 				newProdSteps.ClickPageHeading("The Product");
@@ -7926,7 +7928,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				TestReport.UpdateRunnerText("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is not allowed in the field.");
 				var newProdSteps = new StepsNewProduct();
-				newProdSteps.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", productType);
+				var product = new TheProduct {
+					ProductName = productType
+				};
 				newProdSteps.ClickContinue();
 				newProdSteps.ErrorMessageSpecific(@"Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )");
 			}
