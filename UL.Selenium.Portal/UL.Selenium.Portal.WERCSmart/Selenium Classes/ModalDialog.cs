@@ -104,6 +104,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				.FirstOrDefault(x => x.Text.ToLower() == "save").TryClick();
 		}
 
+		public bool ClickApprove()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+				.FirstOrDefault(x => x.Text.ToLower() == "approve").TryClick();
+		}
+
 		public bool ClickButton(string button)
 		{
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2).FirstOrDefault(x => x.Text == button).TryClick();
