@@ -136,7 +136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-	class RetailParntersDetails : BaseObject
+	class RetailPartnersDetails : BaseObject
 	{
 		public const string BasePath = "//div[@id='retailDetails']";
 		[FindsBy(How = How.XPath, Using = BasePath)]
@@ -429,6 +429,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return false;
+		}
+
+		public bool Compare(string showing, string text)
+		{
+			text = text.Trim();
+
+			List<string> textSplit = text.Split(' ').ToList();
+			List<string> showingSplit = showing.Split(' ').ToList();
+
+			IEnumerable<string> fromPage;
+			IEnumerable<string> fromText;
+
+			fromPage = showingSplit.Except(textSplit);
+			fromText = textSplit.Except(showingSplit);
+
+			if (fromPage.Count() > 0 || fromText.Count() > 0)
+			{
+				List<string> fromPageRes = fromPage.ToList<string>();
+				List<string> fromTextRes = fromText.ToList<string>();
+				for (int i = 0; i < fromPageRes.Count; i++)
+				{
+					Report.Info("  * from page: " + fromPageRes[i] + "  * from text: " + fromTextRes[i]);
+				}
+				return false;
+			}
+			return true;
 		}
 	}
 
