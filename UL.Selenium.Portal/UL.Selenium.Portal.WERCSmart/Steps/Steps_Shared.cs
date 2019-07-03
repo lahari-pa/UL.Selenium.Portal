@@ -7905,7 +7905,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			foreach (string productType in newProd.ModifiedStrings(character))
 			{
-				TestReport.UpdateRunnerText("I enter the text: '" + @productType + "' into the Product Name field and verify that '" + character + "' is allowed in the field.");
+				Report.Info("I enter the text: '" + @productType + "' into the Product Name field and verify that '" + character + "' is allowed in the field.");
 				var newProdSteps = new StepsNewProduct();
 				var product = new TheProduct {
 					ProductName = productType
@@ -7915,7 +7915,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				newProdSteps.ClickPageHeading("The Product");
 				newProdSteps.ConfirmTheProductNameIsDisplayedInTheHeader(productType);
 			}
-			TestReport.EndScenario();
 		}
 
 		[StepDefinition(@"I call Shared Step 104068 Validate Product Name can not contain special characters: (.*)")]
@@ -7926,7 +7925,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			foreach (string productType in newProd.ModifiedStrings(character))
 			{
-				TestReport.UpdateRunnerText("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is not allowed in the field.");
+				Report.Info("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is not allowed in the field.");
 				var newProdSteps = new StepsNewProduct();
 				var product = new TheProduct {
 					ProductName = productType
@@ -7934,7 +7933,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				newProdSteps.ClickContinue();
 				newProdSteps.ErrorMessageSpecific(@"Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )");
 			}
-			TestReport.EndScenario();
 		}
 	}
 }
