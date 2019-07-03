@@ -279,6 +279,65 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool Select_ActivateDeactivate(string userName, string activate)
+		{
+			Report.Info("Beginning Select_ActivateDeactivate");
+			IWebElement myFirstPageNo = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='1']"), 10).FirstOrDefault();
+
+			myFirstPageNo.Click();
+
+			int pageNo = 1;
+
+			while (pageNo < 10)
+			{
+				Delay.Seconds(1.5 * Delay.SpeedFactor);
+
+				IWebElement myPageNumber = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/span[@class='current']"), 10).FirstOrDefault();
+
+				Report.Info("Searching on Page " + myPageNumber.Text + " For User: " + userName);
+
+				var userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+				var listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+
+				foreach (var userRow in listOfUsersRows)
+				{
+					string myUsername = userRow.FindElement(By.XPath(".//td[1]")).Text;
+
+					if (myUsername == userName)
+					{
+						Report.Info("Row Found");
+
+						bool userSelected = userRow.FindElement(By.XPath(".//button")).TryClick();
+						if (userSelected)
+						{
+							return userRow.FindElement(By.XPath(".//a[@id='activeDeactivateUser']")).TryClick();
+						}
+						else
+						{
+							Report.Info("Could not select user");
+							return false;
+						}
+					}
+					Report.Info("Row Not Found");
+				}
+
+				IWebElement myNext = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='Next']"), 10).FirstOrDefault();
+
+				if (myNext == null)
+				{
+					Report.Info("On Last Page");
+					Report.Screenshot();
+					break;
+				}
+				Report.Info("User Not Found On Page " + myPageNumber.Text + ", Navigating to Next Page");
+				myNext.Click();
+				pageNo++;
+			}
+			Report.Info("User: " + userName + " Has Not Been Created");
+			Report.Screenshot();
+			return false;
+		}
+
 		//New Subscription Button
 		[FindsBy(How = How.XPath, Using = ".//div/a[text()='New Subscription']")]
 		private IWebElement _btnNewSub;
@@ -601,6 +660,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info("Last page is: 1");
 					return 1;
 				}
+				int temp = int.Parse(lastControl.Last().Text);
 				return int.Parse(lastControl.Last().Text);
 			}
 			return 1;
@@ -1448,7 +1508,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickSave()
 		{
-			return this.containerElement.FindElements(By.XPath(".//a[text()='Save']"), 2).First(x=>x.Displayed).TryClick();
+			return this.containerElement.FindElements(By.XPath(".//a[text()='Save']"), 2).First(x => x.Displayed).TryClick();
 		}
 		public bool ClickDeleteChecked()
 		{

@@ -671,6 +671,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
+		[StepDefinition(@"I change the percent field to (.*)")]
+		public void IChangeThePercentFieldTo(string value)
+		{
+			var newProductIngredients = new Ingredients();
+			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
+			if (ListOfIngredients.Count == 0)
+			{
+				Report.Failure("No ingredients have been found to edit");
+			}
+			string firstIngredientName = ListOfIngredients[0].ComponentName;
+			Report.IsTrue(newProductIngredients.SetPercentageValue(firstIngredientName, value), "Could not set percentage value to " + value, "Successfully set percentage value to " + value);
+		}
+
 		[StepDefinition(@"I confirm that for the first component an error is shown below the Public Name drop down which reads: (.*)")]
 		public void ThenIConfirmThatForTheFirstComponentAnErrorIsShownBelowThePublicNameDropDownWhichReads(string expectedError)
 		{
