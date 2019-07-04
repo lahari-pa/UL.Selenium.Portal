@@ -479,8 +479,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
+		/// <summary>
+		/// Requires a table with headings: | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+		/// </summary>
+		/// <param name="table"></param>
 		[StepDefinition(@"I call Shared Step 48367 \(Product Includes Battery > any type\)")]
-		// Requires a table with heading: | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
 		public void GivenICallSharedProductIncludesBatteryAnyType(Table table)
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();

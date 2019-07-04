@@ -11,12 +11,9 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	public class ProductsGrid : BaseObject
+	public class ProductsGrid : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@id='products-grid']";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//div[@id='products-grid']");
 
 		public bool HeaderShowing()
 		{
@@ -547,7 +544,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool GridNavigation(string navOption)
 		{
 			Report.Info("Navigating in the products grid with action - " + navOption);
-			this.RefreshContainer();
 			IWebElement navEl;
 			switch (navOption)
 			{
@@ -666,12 +662,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return inputEl.GetAttribute("value");
-		}
-
-		public bool RefreshContainer()
-		{
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
-			return this.containerElement != null;
 		}
 
 		public List<ProductGridItem> GetAllProducts(bool firstPage = false)
@@ -910,13 +900,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-	class BulkActions : BaseObject
+	class BulkActions : SeleniumBaseObject
 	{
 		// Really rubbish identifier - but it's the best we have at the moment!
-		public const string BasePath = "//h3[text()='Bulk Actions']/../..";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//h3[text()='Bulk Actions']/../..");
 
 		public List<string> OptionsAvailable()
 		{
@@ -954,12 +941,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-	class DeleteDialog : BaseObject
+	class DeleteDialog : SeleniumBaseObject
 	{
-		public const string BasePath = "//h3[text()='Delete Product']/../..";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//h3[text()='Delete Product']/../..");
 
 		public bool ClickDelete()
 		{
@@ -987,12 +971,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	/// <summary>
 	/// Bulk Actions - Sync ULSC Products dialog
 	/// </summary>
-	class SyncUlscProductsDialog : BaseObject
+	class SyncUlscProductsDialog : SeleniumBaseObject
 	{
-		public const string BasePath = "//h3[text()='Sync Products to ULSC']/../..";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//h3[text()='Sync Products to ULSC']/../..");
 
 		/// <summary>
 		/// this is the title of the dialog Sync Products to ULSC
