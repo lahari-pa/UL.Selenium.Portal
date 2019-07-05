@@ -152,7 +152,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		/// <summary>
-		/// The retail partner details is in Data Consent Tiers section.It is the section of text above 'What are the Data Usage Tiers?'
+		/// The retail partner details is in Data Consent Tiers section.
+		/// It is the section of text above 'What are the Data Usage Tiers?'
 		/// eg: Lowe's requires suppliers of products to grant Tier 1 at this time.
 		/// </summary>
 		[StepDefinition(@"Retail partner details should be showing text: (.*)")]
