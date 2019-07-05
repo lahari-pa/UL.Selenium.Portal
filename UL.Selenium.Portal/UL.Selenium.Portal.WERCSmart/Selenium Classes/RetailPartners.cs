@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
@@ -136,7 +137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-	class RetailParntersDetails : BaseObject
+	class RetailPartnersDetails : BaseObject
 	{
 		public const string BasePath = "//div[@id='retailDetails']";
 		[FindsBy(How = How.XPath, Using = BasePath)]
@@ -151,6 +152,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetSectionText(string section)
 		{
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'panel') and (./preceding-sibling::h3[text()='" + section + "'])]"), 2).Text;
+		}
+
+		public string GetDCDescription()
+		{
+			var descriptionElement = this.containerElement.FindElement(By.XPath("//div[@class='well']"),5);
+			if(descriptionElement!=null)
+			{
+				var htmlDescription = descriptionElement.GetInnerHTML();
+				string regExPattern = @"(?s)\<span.*\>(.+?)\<\/span\>(.+?)\<";
+				
+				Match match = Regex.Match(htmlDescription,regExPattern, RegexOptions.IgnoreCase);
+				if (match.Success)
+				{
+					string companyName = match.Groups[1].Value;
+					string companyText = match.Groups[2].Value;
+					return companyName.Trim() + " " + companyText.Trim();
+				}
+
+				return "";
+			}
+
+			return "";
 		}
 
 		public bool SupplierIDTableShowing()
