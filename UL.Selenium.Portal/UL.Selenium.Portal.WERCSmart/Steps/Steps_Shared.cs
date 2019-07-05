@@ -2996,8 +2996,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsRetailPartners thisStepsRetailPartners = new StepsRetailPartners();
-			RetailPartnersDetails thisRetailParntersDetails = new RetailPartnersDetails();
-			Report.IsTrue(thisRetailParntersDetails.GetAndYouText().Contains(retailer),
+			RetailPartnersDetails thisRetailPartnersDetails = new RetailPartnersDetails();
+			Report.IsTrue(thisRetailPartnersDetails.GetAndYouText().Contains(retailer),
 				"The & You text is not as expected.", "The & You text is showing as expected");
 
 			thisStepsRetailPartners.PieChartShowing();

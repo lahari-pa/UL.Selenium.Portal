@@ -42,18 +42,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					GeneralUtilities.Wait_for_load_finish();
 					Report.Screenshot();
 
-					RetailPartnersDetails thisRetailParntersDetails = new RetailPartnersDetails();
-					List<string> DataConsentTiers = thisRetailParntersDetails.GetAllDataConsentTiers();
+					RetailPartnersDetails thisRetailPartnersDetails = new RetailPartnersDetails();
+					List<string> DataConsentTiers = thisRetailPartnersDetails.GetAllDataConsentTiers();
 
 					foreach (string DCT in DataConsentTiers)
 					{
-						thisRetailParntersDetails.SetDataConsentTier(DCT, true);
+						thisRetailPartnersDetails.SetDataConsentTier(DCT, true);
 					}
 
 					this.GivenClickTheSaveChangesButton();
 					this.ClickCloseOnSavePopupDialog();
 
-					thisRetailParntersDetails.ClickBackButton();
+					thisRetailPartnersDetails.ClickBackButton();
 
 					GeneralUtilities.Wait_for_load_finish();
 					if (!selRetailPartners.Wait_for_load(10))
@@ -74,9 +74,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I toggle the data consent tier: (.*) to: (on|off)")]
 		public void SetDataConsentTier(string dct, string onOff)
 		{
-			var selRetailParntersDetails = new RetailPartnersDetails();
+			var selRetailPartnersDetails = new RetailPartnersDetails();
 			var toggle = onOff == "on";
-			Report.IsTrue(selRetailParntersDetails.SetDataConsentTier(dct, toggle), "failed to toggle the data consent tier: " + dct + " to: " + onOff, "Successfully toggled the data consent tier: " + dct + " to: " + onOff);
+			Report.IsTrue(selRetailPartnersDetails.SetDataConsentTier(dct, toggle), "failed to toggle the data consent tier: " + dct + " to: " + onOff, "Successfully toggled the data consent tier: " + dct + " to: " + onOff);
 		}
 
 		[StepDefinition(@"I (should|should not) see the following subheading (.*)")]
@@ -151,15 +151,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
+		/// <summary>
+		/// The retail partner details is in Data Consent Tiers section.
+		/// It is the section of text above 'What are the Data Usage Tiers?'
+		/// eg: Lowe's requires suppliers of products to grant Tier 1 at this time.
+		/// </summary>
+		[StepDefinition(@"Retail partner details should be showing text: (.*)")]
+		public void RetailPartnersDetailShouldBeShowing(string text)
+		{
+			var showing = new RetailPartnersDetails().GetDCDescription();
+			Report.IsTrue(showing == text.Trim(), "Text was not showing: " + text.Trim() + ". Instead found: " + showing, "Text was showing: " + text.Trim() + ", as expected!");
+		}
+
+
 		[StepDefinition(@"Section: (.*) should be showing text: (.*)")]
 		public void SectionShouldBeShowingText(string section, string text)
 		{
-			var retailPartnersDetails = new RetailPartnersDetails();
-			var showing = new RetailPartnersDetails().GetSectionText(section).Trim().Replace("\r\n", " ");
-
-			bool condition = (showing.Equals(text) || retailPartnersDetails.Compare(showing, text));
-
-			Report.IsTrue(condition, "Text was not showing: " + text.Trim() + ". Instead found: " + showing, "Text was showing: " + text.Trim() + ", as expected!");
+			var showing = new RetailPartnersDetails().GetSectionText(section).Trim();
+			Report.IsTrue(showing == text.Trim(), "Text was not showing: " + text.Trim() + ". Instead found: " + showing, "Text was showing: " + text.Trim() + ", as expected!");
 		}
 
 		[StepDefinition(@"I should see the button: (.*) in section: (.*)")]
@@ -1228,7 +1237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public bool MatchAbbreviatedRetailer(string abbreviation, string retailerToMatch)
 		{
-			List<string> abbreviationList = abbreviation.Split(',').Select(x => x.Trim()).ToList();
+			List<string>abbreviationList = abbreviation.Split(',').Select(x => x.Trim()).ToList();
 			string capitalLetters = string.Concat(retailerToMatch.Where(c => c >= 'A' && c <= 'Z'));
 
 
@@ -1239,7 +1248,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					if (capitalLetters.Substring(0, abbrv.Length) == abbrv)
 					{
 						Report.Info("Retailer to match has been abbreviated to: " +
-									capitalLetters.Substring(0, abbrv.Length) + " and a match has been found");
+						            capitalLetters.Substring(0, abbrv.Length) + " and a match has been found");
 						return true;
 					}
 				}
