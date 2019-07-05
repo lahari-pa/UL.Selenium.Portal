@@ -725,6 +725,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//Report.Info("Billing Address Found");
 			//return myAddress.Text;
 			var myBill = this.containerElement.FindElements(By.XPath(".//div/h3[text()='Billing Address']"), 10).FirstOrDefault();
+			if (myBill == null)
+			{
+				Report.Info("Failed to Find Billing Address heading");
+				return null;
+			}
 			var myAddress = myBill.FindElements(By.XPath("../div"), 10);
 			if (myAddress != null)
 			{
