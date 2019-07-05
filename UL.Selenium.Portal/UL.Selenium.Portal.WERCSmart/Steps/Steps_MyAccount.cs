@@ -72,8 +72,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TopMenuBar thisTopMenuBar = new TopMenuBar();
 			var currentUser = thisTopMenuBar.GetCurrentUser();
-			Report.IsTrue(currentUser.Length>0,
-				"Username should be showing","Username showing as: " + currentUser);
+			Report.IsTrue(currentUser.Length > 0,
+				"Username should be showing", "Username showing as: " + currentUser);
 		}
 
 		[StepDefinition(@"I should see username: (.*) in the right corner")]
@@ -384,14 +384,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					//Open New User Form
 					Report.IsTrue(selMyAccount.Add_New_User_click(), "Failed to Click Add New User Link",
 						"New User Form Link Clicked");
-					Delay.Seconds(1);
+					Delay.Seconds(5);
 					var selMyUserForm = new UserDetails();
 					//Check Form Has Opened
 					Report.IsTrue(!selMyUserForm.Exists, "Failed to Open Add User Form", "Add User Form Open");
 					//Add New User
 					Report.IsTrue(selMyUserForm.Add_New_User(userName, title, role, phoneNo, emailAddress, confirmEmail, country),
 						"Failed to Add a New User", "New User Added");
-					Delay.Seconds(1);
+					Delay.Seconds(5);
 					//Check User Has Been Created
 					Report.IsTrue(selMyAccount.User_Added_Check(userName, emailAddress, role), "User Has Not Been Created",
 						"User Created Successfully");
@@ -422,6 +422,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.IsTrue(selMyAccount.Is_User_Active(userName, active), "User is NOT " + active, "User is " + active);
 
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I Select the ... from the Actions column of the account I just created and select (Deactivate|Activate)")]
+		public void IClickDeactivateFromTheActionsColumn(string activate)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I select the ... from the Actions column");
+			try
+			{
+				var selMyAccount = new MyAccount();
+
+				string userName = string.Empty;
+
+				if (ScenarioContext.Current.ContainsKey("CurrentUser"))
+				{
+					userName = ScenarioContext.Current["CurrentUser"].ToString();
+				}
+
+				Report.IsTrue(selMyAccount.Select_ActivateDeactivate(userName, activate), "Could not click ellipses", "Successfully clicked ellipses");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I Click approve in dialog")]
+		public void IClickApprove()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Approve");
+			try
+			{
+				var modal = new ModalDialog();
+
+				Report.IsTrue(modal.ClickApprove(), "Could not click Approve in modal window", "Successfully clicked Approve in modal window");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I Click close in dialog")]
+		public void IClickClose()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Close");
+			try
+			{
+				var modal = new ModalDialog();
+
+				Report.IsTrue(modal.Click_Close(), "Could not click Close in modal window", "Successfully clicked Close in modal window");
 			}
 			catch (Exception ex)
 			{
@@ -995,7 +1053,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition (@"I check that there are at least (\d) pages of users\. If not this test will not work\.")]
+		[StepDefinition(@"I check that there are at least (\d) pages of users\. If not this test will not work\.")]
 		public void GivenICheckThatThereAreAtLeastSixPagesOfUsers_IfNotThisTestWillNotWork_(int minPages)
 		{
 			Report.IsTrue(new MyAccount().GetHighestPageNo() > 5,

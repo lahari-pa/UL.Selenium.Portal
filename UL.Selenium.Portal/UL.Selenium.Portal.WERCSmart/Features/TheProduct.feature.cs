@@ -100,25 +100,25 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31346] The Product navigation", null, new string[] {
                         "TReVorId:20203"});
-#line 17
+#line 16
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
+#line 17
+ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 19
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 20
-testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 20
+ testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
-testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
-testRunner.And("I should see following statement: Product Name as it a appears on the Package Lab" +
+ testRunner.And("I should see following statement: Product Name as it a appears on the Package Lab" +
                     "el, Container or Safety Data Sheet (SDS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
+ testRunner.And("I should see following statement: Product Line or Brand (optional)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
-testRunner.And("I should see following statement: Product Line or Brand (optional)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 24
-testRunner.And("I should see following statement: Type of Product (select)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I should see following statement: Type of Product (select)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -130,840 +130,21 @@ testRunner.And("I should see following statement: Type of Product (select)", ((s
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31347] The Product validation", null, new string[] {
                         "TReVorId:20206"});
+#line 26
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
 #line 27
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
+ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 28
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 29
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 30
-testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 34
-testRunner.And("Type of Product (select) should be showing the error messages: This is a required" +
+#line 30
+ testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 33
+ testRunner.And("Type of Product (select) should be showing the error messages: This is a required" +
                     " field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84595] Product Name - can contain special characters - & character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20261")]
-        public virtual void _84595ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84595] Product Name - can contain special characters - & character testing", null, new string[] {
-                        "TReVorId:20261"});
-#line 40
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 41
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: &The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
-testRunner.And("I confirm the product name: \"&The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod&uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 51
-testRunner.And("I confirm the product name: \"The Prod&uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name&", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
-testRunner.And("I confirm the product name: \"The Product Name&\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The & Produ" +
-                    "ct & Name &", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 59
-testRunner.And("I confirm the product name: \"The & Product & Name &\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 60
-testRunner.Then("I save the product information as: TestCase84595", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 61
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84595", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84624] Product Name - can contain special characters - @ character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20262")]
-        public virtual void _84624ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84624] Product Name - can contain special characters - @ character testing", null, new string[] {
-                        "TReVorId:20262"});
-#line 64
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 65
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 66
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: @The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
-testRunner.And("I confirm the product name: \"@The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 72
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 73
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod@uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
-testRunner.And("I confirm the product name: \"The Prod@uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 77
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name@", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
-testRunner.And("I confirm the product name: \"The Product Name@\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 80
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The @ Produ" +
-                    "ct @ Name @", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
-testRunner.And("I confirm the product name: \"The @ Product @ Name @\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
-testRunner.Then("I save the product information as: TestCase84624", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 85
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84624", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84629] Product Name - can contain special characters - # character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20263")]
-        public virtual void _84629ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84629] Product Name - can contain special characters - # character testing", null, new string[] {
-                        "TReVorId:20263"});
-#line 88
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 89
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 90
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 91
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: #The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 93
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 94
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
-testRunner.And("I confirm the product name: \"#The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 96
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 97
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod#uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 98
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 99
-testRunner.And("I confirm the product name: \"The Prod#uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 100
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 101
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name#", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 102
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 103
-testRunner.And("I confirm the product name: \"The Product Name#\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 104
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 105
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The # Produ" +
-                    "ct # Name #", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 106
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 107
-testRunner.And("I confirm the product name: \"The # Product # Name #\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 108
-testRunner.Then("I save the product information as: TestCase84629", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 109
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84629", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84630] Product Name - can contain special characters - $ character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20264")]
-        public virtual void _84630ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84630] Product Name - can contain special characters - $ character testing", null, new string[] {
-                        "TReVorId:20264"});
-#line 112
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 113
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 114
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 115
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: $The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 117
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 118
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 119
-testRunner.And("I confirm the product name: \"$The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 120
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 121
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod$uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 122
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 123
-testRunner.And("I confirm the product name: \"The Prod$uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 124
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 125
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name$", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 126
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 127
-testRunner.And("I confirm the product name: \"The Product Name$\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 128
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 129
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The $ Produ" +
-                    "ct $ Name $", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 130
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 131
-testRunner.And("I confirm the product name: \"The $ Product $ Name $\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 132
-testRunner.Then("I save the product information as: TestCase84630", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 133
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84630", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84631] Product Name - can contain special characters - ! character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20265")]
-        public virtual void _84631ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84631] Product Name - can contain special characters - ! character testing", null, new string[] {
-                        "TReVorId:20265"});
-#line 136
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 137
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 138
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 139
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: !The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 141
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 142
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 143
-testRunner.And("I confirm the product name: \"!The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 144
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 145
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod!uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 146
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 147
-testRunner.And("I confirm the product name: \"The Prod!uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 148
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 149
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 150
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 151
-testRunner.And("I confirm the product name: \"The Product Name!\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 152
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 153
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The ! Produ" +
-                    "ct ! Name !", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 154
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 155
-testRunner.And("I confirm the product name: \"The ! Product ! Name !\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 156
-testRunner.Then("I save the product information as: TestCase84631", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 157
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84631", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84632] Product Name - can contain special characters - * character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20266")]
-        public virtual void _84632ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84632] Product Name - can contain special characters - * character testing", null, new string[] {
-                        "TReVorId:20266"});
-#line 160
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 161
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 162
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 163
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: *The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 165
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 166
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 167
-testRunner.And("I confirm the product name: \"*The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 168
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 169
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod*uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 170
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 171
-testRunner.And("I confirm the product name: \"The Prod*uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 172
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 173
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name*", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 174
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 175
-testRunner.And("I confirm the product name: \"The Product Name*\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 176
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 177
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The * Produ" +
-                    "ct * Name *", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 178
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 179
-testRunner.And("I confirm the product name: \"The * Product * Name *\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 180
-testRunner.Then("I save the product information as: TestCase84632", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 181
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84632", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84635] Product Name - can contain special characters - ( character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20267")]
-        public virtual void _84635ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84635] Product Name - can contain special characters - ( character testing", null, new string[] {
-                        "TReVorId:20267"});
-#line 184
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 185
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 186
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 187
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: (The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 189
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 190
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 191
-testRunner.And("I confirm the product name: \"(The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 192
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 193
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod(uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 194
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 195
-testRunner.And("I confirm the product name: \"The Prod(uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 196
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 197
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name(", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 198
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 199
-testRunner.And("I confirm the product name: \"The Product Name(\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 200
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 201
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The ( Produ" +
-                    "ct ( Name (", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 202
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 203
-testRunner.And("I confirm the product name: \"The ( Product ( Name (\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 204
-testRunner.Then("I save the product information as: TestCase84635", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 205
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84635", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84636] Product Name - can contain special characters - ) character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20268")]
-        public virtual void _84636ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84636] Product Name - can contain special characters - ) character testing", null, new string[] {
-                        "TReVorId:20268"});
-#line 208
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 209
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 210
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 211
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: )The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 213
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 214
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 215
-testRunner.And("I confirm the product name: \")The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 216
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 217
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod)uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 218
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 219
-testRunner.And("I confirm the product name: \"The Prod)uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 220
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 221
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 222
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 223
-testRunner.And("I confirm the product name: \"The Product Name)\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 224
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 225
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The ) Produ" +
-                    "ct ) Name )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 226
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 227
-testRunner.And("I confirm the product name: \"The ) Product ) Name )\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 228
-testRunner.Then("I save the product information as: TestCase84636", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 229
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84636", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84637] Product Name - can contain special characters - _ character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20269")]
-        public virtual void _84637ProductName_CanContainSpecialCharacters__CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84637] Product Name - can contain special characters - _ character testing", null, new string[] {
-                        "TReVorId:20269"});
-#line 232
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 233
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 234
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 235
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: _The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 237
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 238
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 239
-testRunner.And("I confirm the product name: \"_The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 240
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 241
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod_uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 242
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 243
-testRunner.And("I confirm the product name: \"The Prod_uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 244
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 245
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name_", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 246
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 247
-testRunner.And("I confirm the product name: \"The Product Name_\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 248
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 249
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The _ Produ" +
-                    "ct _ Name _", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 250
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 251
-testRunner.And("I confirm the product name: \"The _ Product _ Name _\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 252
-testRunner.Then("I save the product information as: TestCase84637", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 253
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84637", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84638] Product Name - can contain special characters - \"-\" character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20270")]
-        public virtual void _84638ProductName_CanContainSpecialCharacters__CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84638] Product Name - can contain special characters - \"-\" character testing", null, new string[] {
-                        "TReVorId:20270"});
-#line 256
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 257
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 258
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 259
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: -The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 261
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 262
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 263
-testRunner.And("I confirm the product name: \"-The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 264
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 265
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod-uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 266
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 267
-testRunner.And("I confirm the product name: \"The Prod-uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 268
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 269
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name-", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 270
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 271
-testRunner.And("I confirm the product name: \"The Product Name-\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 272
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 273
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The - Produ" +
-                    "ct - Name -", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 274
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 275
-testRunner.And("I confirm the product name: \"The - Product - Name -\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 276
-testRunner.Then("I save the product information as: TestCase84638", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 277
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84638", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84639] Product Name - can contain special characters - : character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20271")]
-        public virtual void _84639ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84639] Product Name - can contain special characters - : character testing", null, new string[] {
-                        "TReVorId:20271"});
-#line 280
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 281
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 282
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 283
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: :The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 285
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 286
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 287
-testRunner.And("I confirm the product name: \":The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 288
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 289
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod:uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 290
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 291
-testRunner.And("I confirm the product name: \"The Prod:uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 292
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 293
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 294
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 295
-testRunner.And("I confirm the product name: \"The Product Name:\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 296
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 297
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The : Produ" +
-                    "ct : Name :", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 298
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 299
-testRunner.And("I confirm the product name: \"The : Product : Name :\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 300
-testRunner.Then("I save the product information as: TestCase84639", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 301
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84639", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84640] Product Name - can not contain special characters - ; character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20272")]
-        public virtual void _84640ProductName_CanNotContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84640] Product Name - can not contain special characters - ; character testing", null, new string[] {
-                        "TReVorId:20272"});
-#line 304
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 305
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 306
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 307
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: ;The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 309
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 310
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 311
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 312
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod;uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 313
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 314
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 315
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name;", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 316
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 317
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 318
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The ; Produ" +
-                    "ct ; Name ;", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 319
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 320
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84641] Product Name - can contain special characters - < character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20273")]
-        public virtual void _84641ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84641] Product Name - can contain special characters - < character testing", null, new string[] {
-                        "TReVorId:20273"});
-#line 325
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 326
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 327
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 328
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: <The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 330
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 331
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 332
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 333
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod<uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 334
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 335
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 336
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name<", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 337
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 338
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 339
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The < Produ" +
-                    "ct < Name <", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 340
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 341
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[84642] Product Name - can contain special characters - > character testing")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20274")]
-        public virtual void _84642ProductName_CanContainSpecialCharacters_CharacterTesting()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84642] Product Name - can contain special characters - > character testing", null, new string[] {
-                        "TReVorId:20274"});
-#line 345
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 346
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 347
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 348
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: >The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 350
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 351
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 352
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 353
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod>uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 354
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 355
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 356
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 357
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 358
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 359
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The > Produ" +
-                    "ct > Name >", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 360
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 361
-testRunner.Then("I should see an error message: Enter valid information (The following characters " +
-                    "are not allowed: = ; ^ * ¿? !¡ \\ ~ [] <> | {} + )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -975,54 +156,22 @@ testRunner.Then("I should see an error message: Enter valid information (The fol
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84643] Product Name - can contain special characters - , character testing", null, new string[] {
                         "TReVorId:20275"});
-#line 365
+#line 39
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 366
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 367
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+#line 40
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 41
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 368
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: ,The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 370
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 371
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 372
-testRunner.And("I confirm the product name: \",The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 373
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 374
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod,uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 375
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 376
-testRunner.And("I confirm the product name: \"The Prod,uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 377
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 378
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name,", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 379
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 380
-testRunner.And("I confirm the product name: \"The Product Name,\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 381
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 382
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The , Produ" +
-                    "ct , Name ,", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 383
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 384
-testRunner.And("I confirm the product name: \"The , Product , Name ,\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 385
-testRunner.Then("I save the product information as: TestCase84643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 386
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+#line 42
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 43
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: ,", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 44
+ testRunner.Then("I save the product information as: TestCase84643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 45
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase84643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1035,55 +184,473 @@ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84644] Product Name - can contain special characters - . character testing", null, new string[] {
                         "TReVorId:20276"});
-#line 389
+#line 48
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 390
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 391
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+#line 49
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 50
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 392
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: .The Produc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 394
-testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 395
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 396
-testRunner.And("I confirm the product name: \".The Product Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 397
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 398
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Prod.uc" +
-                    "t Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 399
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 400
-testRunner.And("I confirm the product name: \"The Prod.uct Name\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 401
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 402
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The Product" +
-                    " Name.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 403
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 404
-testRunner.And("I confirm the product name: \"The Product Name.\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 405
-testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 406
-testRunner.And("I set the Product Name as it a appears on the Package Label field to: The . Produ" +
-                    "ct . Name .", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 407
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 408
-testRunner.And("I confirm the product name: \"The . Product . Name .\" is displayed in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 409
-testRunner.Then("I save the product information as: TestCase84644", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 410
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+#line 51
+ testRunner.Then("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 52
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: .", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 53
+ testRunner.Then("I save the product information as: TestCase84644", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 54
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase84644", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84595] Product Name - can contain special characters - & character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20261")]
+        public virtual void _84595ProductName_CanContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84595] Product Name - can contain special characters - & character testing", null, new string[] {
+                        "TReVorId:20261"});
+#line 57
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 58
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 59
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 60
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 61
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: &", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 62
+ testRunner.Then("I save the product information as: TestCase84595", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 63
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase84595", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[104073] Product Name - can contain special characters - \" character testing")]
+        public virtual void _104073ProductName_CanContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[104073] Product Name - can contain special characters - \" character testing", null, ((string[])(null)));
+#line 65
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 66
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 67
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 68
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 69
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: \"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 70
+ testRunner.Then("I save the product information as: TestCase104073", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 71
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase104073", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[104074] Product Name - can contain special characters - \' character testing")]
+        public virtual void _104074ProductName_CanContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[104074] Product Name - can contain special characters - \' character testing", null, ((string[])(null)));
+#line 73
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 74
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 75
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 76
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: \'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
+ testRunner.Then("I save the product information as: TestCase104074", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 79
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase104074", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[104075] Product Name - can contain special characters - % character testing")]
+        public virtual void _104075ProductName_CanContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[104075] Product Name - can contain special characters - % character testing", null, ((string[])(null)));
+#line 81
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 82
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 83
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 84
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 85
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: %", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 86
+ testRunner.Then("I save the product information as: TestCase104075", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 87
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase104075", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84624] Product Name - can contain special characters - @ character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20262")]
+        public virtual void _84624ProductName_CanContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84624] Product Name - can contain special characters - @ character testing", null, new string[] {
+                        "TReVorId:20262"});
+#line 90
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 91
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 92
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 93
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 94
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: @", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 95
+ testRunner.Then("I save the product information as: TestCase84624", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 96
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase84624", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84629] Product Name - can contain special characters - # character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20263")]
+        public virtual void _84629ProductName_CanContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84629] Product Name - can contain special characters - # character testing", null, new string[] {
+                        "TReVorId:20263"});
+#line 99
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 100
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 101
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 102
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 103
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: #", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 104
+ testRunner.Then("I save the product information as: TestCase84629", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 105
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase84629", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84630] Product Name - can contain special characters - $ character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20264")]
+        public virtual void _84630ProductName_CanContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84630] Product Name - can contain special characters - $ character testing", null, new string[] {
+                        "TReVorId:20264"});
+#line 108
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 109
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 110
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 111
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 112
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: $", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 113
+ testRunner.Then("I save the product information as: TestCase84630", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 114
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase84630", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84635] Product Name - can contain special characters - ( character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20267")]
+        public virtual void _84635ProductName_CanContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84635] Product Name - can contain special characters - ( character testing", null, new string[] {
+                        "TReVorId:20267"});
+#line 117
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 118
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 119
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 120
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 121
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: (", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 122
+ testRunner.Then("I save the product information as: TestCase84635", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 123
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase84635", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84636] Product Name - can contain special characters - ) character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20268")]
+        public virtual void _84636ProductName_CanContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84636] Product Name - can contain special characters - ) character testing", null, new string[] {
+                        "TReVorId:20268"});
+#line 126
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 127
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 128
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 129
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 130
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 131
+ testRunner.Then("I save the product information as: TestCase84636", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 132
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase84636", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84637] Product Name - can contain special characters - _ character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20269")]
+        public virtual void _84637ProductName_CanContainSpecialCharacters__CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84637] Product Name - can contain special characters - _ character testing", null, new string[] {
+                        "TReVorId:20269"});
+#line 135
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 136
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 137
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 138
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 139
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: _", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 140
+ testRunner.Then("I save the product information as: TestCase84637", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 141
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase84637", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84638] Product Name - can contain special characters - \"-\" character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20270")]
+        public virtual void _84638ProductName_CanContainSpecialCharacters__CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84638] Product Name - can contain special characters - \"-\" character testing", null, new string[] {
+                        "TReVorId:20270"});
+#line 144
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 145
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 146
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 147
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 148
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: -", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 149
+ testRunner.Then("I save the product information as: TestCase84638", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 150
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase84638", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84639] Product Name - can contain special characters - : character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20271")]
+        public virtual void _84639ProductName_CanContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84639] Product Name - can contain special characters - : character testing", null, new string[] {
+                        "TReVorId:20271"});
+#line 153
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 154
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 155
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 156
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 157
+ testRunner.And("I call Shared Step 103904 - Validate Product Name can contain character: :", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 158
+ testRunner.Then("I save the product information as: TestCase84639", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 159
+ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase84639", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84640] Product Name - can not contain special characters - ; character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20272")]
+        public virtual void _84640ProductName_CanNotContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84640] Product Name - can not contain special characters - ; character testing", null, new string[] {
+                        "TReVorId:20272"});
+#line 162
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 163
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 164
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 165
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 166
+ testRunner.Then("I call Shared Step 104068 Validate Product Name can not contain special character" +
+                    "s: ;", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84641] Product Name - can not contain special characters - < character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20273")]
+        public virtual void _84641ProductName_CanNotContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84641] Product Name - can not contain special characters - < character testing", null, new string[] {
+                        "TReVorId:20273"});
+#line 169
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 170
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 171
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 172
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 173
+ testRunner.Then("I call Shared Step 104068 Validate Product Name can not contain special character" +
+                    "s: <", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84642] Product Name - can not contain special characters - > character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20274")]
+        public virtual void _84642ProductName_CanNotContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84642] Product Name - can not contain special characters - > character testing", null, new string[] {
+                        "TReVorId:20274"});
+#line 176
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 177
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 178
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 179
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 180
+ testRunner.Then("I call Shared Step 104068 Validate Product Name can not contain special character" +
+                    "s: >", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84631] Product Name - can not contain special characters - ! character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20265")]
+        public virtual void _84631ProductName_CanNotContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84631] Product Name - can not contain special characters - ! character testing", null, new string[] {
+                        "TReVorId:20265"});
+#line 183
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 184
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 185
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 186
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 187
+ testRunner.Then("I call Shared Step 104068 Validate Product Name can not contain special character" +
+                    "s: !", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[84632] Product Name - can not contain special characters - * character testing")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20266")]
+        public virtual void _84632ProductName_CanNotContainSpecialCharacters_CharacterTesting()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84632] Product Name - can not contain special characters - * character testing", null, new string[] {
+                        "TReVorId:20266"});
+#line 190
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 191
+ testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 192
+ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 193
+ testRunner.And("I set \'Type of Product\' to: Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 194
+ testRunner.Then("I call Shared Step 104068 Validate Product Name can not contain special character" +
+                    "s: *", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

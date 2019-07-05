@@ -54,11 +54,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click the page heading: (.*)")]
 		public void ClickPageHeading(string section)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I click section header " + section);
 			Report.IsTrue(NewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
 			GeneralUtilities.Wait_for_load_finish();
-			TestReport.StartStep("I should see page has loaded: " + section);
 			this.GivenIShouldSeeXPage(section);
 		}
 
@@ -108,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
-				Report.IsTrue(NewProduct.WaitForSection(page),page + " is not showing when it was expected to",page + " is showing as expected");
+				Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
 				return;
 			}
 			Report.Failure("New product page was not visible");
@@ -289,8 +286,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
-
-
 
 		[StepDefinition(@"I purchase the following additional documents:")]
 		public void ThenIPurchaseTheFollowingAdditionalDocuments(Table table)
@@ -2349,12 +2344,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenIConfirmErrorMessageIsShownBelowField(string errorMessage, string field)
 		{
 			var errorsList = new NewProduct().GetAllErrors();
-			Report.IsTrue(errorsList.FirstOrDefault(x => x.inputName == field) != null,
+			Report.IsTrue(errorsList.FirstOrDefault(x => x.InputName == field) != null,
 				"An error is not showing on field: " + field, "An error is showing on field: " + field);
 
-			Report.Info("Error message is showing as: " + errorsList.FirstOrDefault(x => x.inputName == field).errorMessage);
+			Report.Info("Error message is showing as: " + errorsList.FirstOrDefault(x => x.InputName == field).ErrorMessage);
 
-			Report.IsTrue(errorsList.FirstOrDefault(x => x.inputName == field && x.errorMessage.Trim() == errorMessage.Trim()) != null,
+			Report.IsTrue(errorsList.FirstOrDefault(x => x.InputName == field && x.ErrorMessage.Trim() == errorMessage.Trim()) != null,
 				"An error message is not showing as expected: " + errorMessage, "An error is showing as expected: " + errorMessage);
 		}
 
@@ -2401,7 +2396,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.IsTrue(labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was not found", "Add new Packaging Type was found on the upc page as expected");
 			}
-			else if(shouldOrNot == "should not")
+			else if (shouldOrNot == "should not")
 			{
 				Report.IsTrue(!labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was found on the upc page, it should not have been", "Add new Packaging Type was not found on the upc page as expected");
 			}

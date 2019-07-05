@@ -21,9 +21,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				.FirstOrDefault(x => x.Text == report).FindElement(By.XPath("./../../a")).TryClick();
 		}
 
+		// This gets the title of the right side frame on the page
+		public string GetCurrentSubTitle()
+		{
+			var thing = this.containerElement.FindElement(By.XPath(".//div[@id='rptname']//h3"))?.Text;
+			return thing;
+		}
+
+
+		// This gets the left (main) title of the page
 		public string GetCurrentTitle()
 		{
-			return this.containerElement.FindElement(By.XPath(".//form[@id='panel']//h3"))?.Text;
+			return this.containerElement.FindElement(By.XPath("..//h2"))?.Text;
 		}
 
 		public string GetCurrentSubText()

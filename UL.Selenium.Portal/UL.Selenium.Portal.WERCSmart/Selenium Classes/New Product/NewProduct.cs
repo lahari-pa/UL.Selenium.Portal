@@ -41,8 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#region New Product general methods
 		public string HeaderText => this.Header?.Text;
 
-		public string ProductId
-		{
+		public string ProductId {
 			get
 			{
 				var headText = this.HeaderText;
@@ -92,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				inputTitle = match.Groups[1].Value;
 
-				errorsList.Add(new InputError() { errorMessage = errorString, input = errorInput, inputName = inputTitle });
+				errorsList.Add(new InputError() { ErrorMessage = errorString, Input = errorInput, InputName = inputTitle });
 
 			}
 
@@ -122,6 +121,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				return false;
 			}
+		}
+
+		public string[] ModifiedStrings(string character)
+		{
+			string[] outStrings = { character + " The Product Name", "The " + character + " Product Name", "The Product Name " + character, "The " + character + " Product " + character + " Name" };
+			return outStrings;
 		}
 
 		public bool ClickContinue(bool waitForLoadingBtnSpinner = true)
@@ -1966,7 +1971,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"),2);
+				var errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"), 2);
 				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
 			}
 			catch (Exception)
@@ -3079,6 +3084,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return pkgType.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
 		}
 
+		internal void SetProductName(string productType)
+		{
+			var productName = containerElement.FindElement(By.XPath(@"//*[@id='collapse1']/div/form/div[1]/div[2]/input"));
+			productName.EnterText(productType);
+		}
 	}
 
 	public class ProductInformation
@@ -3182,9 +3192,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 	public class InputError
 	{
-		public string inputName { get; set; }
-		public IWebElement input { get; set; }
-		public string errorMessage { get; set; }
+		public string InputName { get; set; }
+		public IWebElement Input { get; set; }
+		public string ErrorMessage { get; set; }
 	}
 
 }

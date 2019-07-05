@@ -10,6 +10,7 @@ using NTTQA.Selenium.Cache;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -1249,7 +1250,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.WebBrowser.Close();
 		}
 
-
+		[StepDefinition(@"I switch to the tab with title: (.*)")]
+		public void SwitchToTabWithTitle(string title)
+		{
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+            Report.Info("Saving current window to context as MainWindowHandle");
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				var currentTitle = SeleniumBrowser.WebBrowser.Title;
+				if (currentTitle == title)
+				{
+                    Report.Success("Tab with title was loaded");
+                    Report.Screenshot();
+                    return;
+				}
+			}
+            throw new Exception("Failed to find window with title: " +title);
+		}
 
 
 	}

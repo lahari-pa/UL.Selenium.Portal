@@ -205,5 +205,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
 		}
 
+		[StepDefinition(@"I click the CONEG browse button and upload PDF: (.*)")]
+		public void UploadDPFForCONEG(string pdfFile)
+		{
+			Report.IsTrue(new PackagingType().UploadFileForSection("CONEG Certificate", pdfFile), "Failed to upload CONEG pdf", "Uploaded CONEG pdf");
+		}
+
 	}
 }
