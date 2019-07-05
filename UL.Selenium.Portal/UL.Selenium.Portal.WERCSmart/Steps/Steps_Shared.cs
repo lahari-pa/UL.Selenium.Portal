@@ -2996,8 +2996,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsRetailPartners thisStepsRetailPartners = new StepsRetailPartners();
-			RetailParntersDetails thisRetailParntersDetails = new RetailParntersDetails();
-			Report.IsTrue(thisRetailParntersDetails.GetAndYouText().Contains(retailer),
+			RetailPartnersDetails thisRetailPartnersDetails = new RetailPartnersDetails();
+			Report.IsTrue(thisRetailPartnersDetails.GetAndYouText().Contains(retailer),
 				"The & You text is not as expected.", "The & You text is showing as expected");
 
 			thisStepsRetailPartners.PieChartShowing();
@@ -6908,7 +6908,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Beginning shared step: 57621");
 			Steps_SHA MyStepsSha = new Steps_SHA();
-			RetailParntersDetails thisRPD = new RetailParntersDetails();
+			RetailPartnersDetails thisRPD = new RetailPartnersDetails();
 			string SupplierId = Context.GetFromContext(supplierIDSavedAs).ToString();
 			Report.IsTrue(thisRPD.ClickActionBySupplierID(SupplierId, "Deactivate"),
 				"Failed to click Deactivate for Supplier id: " + SupplierId,
@@ -6928,7 +6928,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Beginning shared step: 57565");
 			Steps_SHA MyStepsSha = new Steps_SHA();
-			RetailParntersDetails thisRPD = new RetailParntersDetails();
+			RetailPartnersDetails thisRPD = new RetailPartnersDetails();
 			string SupplierId = Context.GetFromContext(supplierIDSavedAs).ToString();
 			Report.IsTrue(thisRPD.ClickActionBySupplierID(SupplierId, "Activate"),
 				"Failed to click Activate for Supplier id: " + SupplierId,
