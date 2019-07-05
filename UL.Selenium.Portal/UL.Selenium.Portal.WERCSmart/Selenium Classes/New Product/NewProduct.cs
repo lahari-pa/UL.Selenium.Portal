@@ -36,6 +36,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		private IEnumerable<IWebElement> SectionControlLabels => this.containerElement.FindElements(By.XPath(".//label[@class='control-label']"), 1);
 
+		private IWebElement LabelContains(string LblContains) => this.containerElement.FindElement(By.XPath($@".//label[contains(text(),""{LblContains}"")]"), 1);
+
+		private IWebElement BoldElementContains(string bContains) => this.containerElement.FindElement(By.XPath($@".//b[contains(text(),""{bContains}"")]"), 1);
 		#endregion
 
 		#region New Product general methods
@@ -279,6 +282,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			var label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
 			return label.FindElement(By.XPath("../following-sibling::div//input[@type ='text']"), 2)?.GetValue();
 		}
+
+		/// <summary>
+		/// Returns the full text of a label element for the first match containing partial text
+		/// This is used when there is no other reliable identifier for an element other than text
+		/// </summary>
+		public string LabelContainsFullText(string partialText) => this.LabelContains(partialText)?.Text;
+
+		/// <summary>
+		/// Returns the full text of a bold element (b) for the first match containing partial text
+		/// 		/// This is used when there is no other reliable identifier for an element other than text
+		/// </summary>
+		public string BoldElementContainsFullText(string partialText) => this.BoldElementContains(partialText)?.Text;
 
 		#endregion
 
@@ -2041,50 +2056,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string VOCContentsAsUsedError()
 		{
-			var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-				.FirstOrDefault(x => x.Text.Contains("Product's VOC content as used"));
-
-			if (lbl != null)
+			var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Product's VOC content as used"));
+			try
 			{
-				try
-				{
-					var error = lbl.FindElement(By.XPath("../..//input/../p//span"));
-					if (error != null)
-					{
-						return error.Text;
-					}
-					else
-					{
-						return null;
-					}
-				}
-				catch (Exception)
-				{
-					return null;
-				}
-
+				var error = lbl.FindElement(By.XPath("../..//input/../p//span"));
+				return error?.Text;
 			}
-			else
+			catch (Exception)
 			{
-				throw new Exception("Label not found as expected.");
+				return null;
 			}
-
-		}
-
-		/// <summary>
-		/// Get Ecologo statement
-		/// </summary>
-		public string GetEcologoStatement()
-		{
-			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'UL ECOLOGO Readiness Assessment')]"), 2).Text;
-		}
-
-		/// <summary>
-		/// Gets statement - Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
-		/// </summary>
-		public string GetProductGrantedAlternativeControlPlanStatement()
-		{
-			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product has been granted an Alternative Control Plan')]"), 2).Text;
 		}
 
 		/// <summary>
