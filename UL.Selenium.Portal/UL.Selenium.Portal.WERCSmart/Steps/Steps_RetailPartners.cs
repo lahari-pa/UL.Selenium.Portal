@@ -42,18 +42,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					GeneralUtilities.Wait_for_load_finish();
 					Report.Screenshot();
 
-					RetailParntersDetails thisRetailParntersDetails = new RetailParntersDetails();
-					List<string> DataConsentTiers = thisRetailParntersDetails.GetAllDataConsentTiers();
+					RetailPartnersDetails thisRetailPartnersDetails = new RetailPartnersDetails();
+					List<string> DataConsentTiers = thisRetailPartnersDetails.GetAllDataConsentTiers();
 
 					foreach (string DCT in DataConsentTiers)
 					{
-						thisRetailParntersDetails.SetDataConsentTier(DCT, true);
+						thisRetailPartnersDetails.SetDataConsentTier(DCT, true);
 					}
 
 					this.GivenClickTheSaveChangesButton();
 					this.ClickCloseOnSavePopupDialog();
 
-					thisRetailParntersDetails.ClickBackButton();
+					thisRetailPartnersDetails.ClickBackButton();
 
 					GeneralUtilities.Wait_for_load_finish();
 					if (!selRetailPartners.Wait_for_load(10))
@@ -74,9 +74,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I toggle the data consent tier: (.*) to: (on|off)")]
 		public void SetDataConsentTier(string dct, string onOff)
 		{
-			var selRetailParntersDetails = new RetailParntersDetails();
+			var selRetailPartnersDetails = new RetailPartnersDetails();
 			var toggle = onOff == "on";
-			Report.IsTrue(selRetailParntersDetails.SetDataConsentTier(dct, toggle), "failed to toggle the data consent tier: " + dct + " to: " + onOff, "Successfully toggled the data consent tier: " + dct + " to: " + onOff);
+			Report.IsTrue(selRetailPartnersDetails.SetDataConsentTier(dct, toggle), "failed to toggle the data consent tier: " + dct + " to: " + onOff, "Successfully toggled the data consent tier: " + dct + " to: " + onOff);
 		}
 
 		[StepDefinition(@"I (should|should not) see the following subheading (.*)")]
@@ -130,7 +130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the retailer heading: (.*)")]
 		public void CorrectRetailerShowing(string retailer)
 		{
-			Report.IsTrue(new RetailParntersDetails().GetSelectedRetailer().Trim() == retailer.Trim(), "Retailer: " + retailer + " was not showing!", "Retailer: " + retailer + " was showing as expected!");
+			Report.IsTrue(new RetailPartnersDetails().GetSelectedRetailer().Trim() == retailer.Trim(), "Retailer: " + retailer + " was not showing!", "Retailer: " + retailer + " was showing as expected!");
 		}
 
 		[StepDefinition(@"I select the retailer: (.*)")]
@@ -151,17 +151,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
+		/// <summary>
+		/// The retail partner details is in Data Consent Tiers section.It is the section of text above 'What are the Data Usage Tiers?'
+		/// eg: Lowe's requires suppliers of products to grant Tier 1 at this time.
+		/// </summary>
+		[StepDefinition(@"Retail partner details should be showing text: (.*)")]
+		public void RetailPartnersDetailShouldBeShowing(string text)
+		{
+			var showing = new RetailPartnersDetails().GetDCDescription();
+			Report.IsTrue(showing == text.Trim(), "Text was not showing: " + text.Trim() + ". Instead found: " + showing, "Text was showing: " + text.Trim() + ", as expected!");
+		}
+
+
 		[StepDefinition(@"Section: (.*) should be showing text: (.*)")]
 		public void SectionShouldBeShowingText(string section, string text)
 		{
-			var showing = new RetailParntersDetails().GetSectionText(section).Trim();
+			var showing = new RetailPartnersDetails().GetSectionText(section).Trim();
 			Report.IsTrue(showing == text.Trim(), "Text was not showing: " + text.Trim() + ". Instead found: " + showing, "Text was showing: " + text.Trim() + ", as expected!");
 		}
 
 		[StepDefinition(@"I should see the button: (.*) in section: (.*)")]
 		public void ButtonsShowingInSection(string button, string section)
 		{
-			var buttons = new RetailParntersDetails().GetButtons(section);
+			var buttons = new RetailPartnersDetails().GetButtons(section);
 			Report.Info("Buttons showing: " + string.Join(", ", buttons));
 			Report.IsTrue(buttons.Contains(button.Trim()), "Failed to find the button: " + button + "!", "Succesfully found the button: " + button);
 		}
@@ -169,7 +181,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that there is a section labeled: (.*)")]
 		public void ConfirmHeadingShowing(string header)
 		{
-			Report.IsTrue(new RetailParntersDetails().HeaderShowing(header),
+			Report.IsTrue(new RetailPartnersDetails().HeaderShowing(header),
 				"Header '" + header + "' was not showing on page!",
 				"Header '" + header + "' was showing, as expected!");
 		}
@@ -178,7 +190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SupplierIdShowingCorrectly(string shouldornot)
 		{
 			bool expected = shouldornot == "should";
-			Report.IsTrue(new RetailParntersDetails().SupplierIDTableShowing() == expected, (expected ? "Expected" : "Did not expect") + " the Supplier ID table to be showing!", "The Supplier ID " + (expected ? "was" : "was not") + " table showing, as expected!");
+			Report.IsTrue(new RetailPartnersDetails().SupplierIDTableShowing() == expected, (expected ? "Expected" : "Did not expect") + " the Supplier ID table to be showing!", "The Supplier ID " + (expected ? "was" : "was not") + " table showing, as expected!");
 		}
 
 		[StepDefinition(@"I confirm that under the pie chart I see the label: (.*)")]
@@ -189,7 +201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Confirming that the pie chart has legend containing: " + legendLabel);
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 
 				if (!selRetailDetails.Wait_for_load(10))
 				{
@@ -212,13 +224,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The pie chart should be showing on the retailer details page")]
 		public void PieChartShowing()
 		{
-			Report.IsTrue(new RetailParntersDetails().PieChartShowing(), "Pie Chart was not visible!", "Pie chart was visible, as exoected!");
+			Report.IsTrue(new RetailPartnersDetails().PieChartShowing(), "Pie Chart was not visible!", "Pie chart was visible, as exoected!");
 		}
 
 		[StepDefinition(@"The pie chart footer text should contain: (.*)")]
 		public void PieChartFooterTextShowingAsExpected(string text)
 		{
-			var showing = new RetailParntersDetails().GetPieChartFooterText();
+			var showing = new RetailPartnersDetails().GetPieChartFooterText();
 			Report.Info("Text found was: " + showing);
 			Report.IsTrue(showing.Contains(text), "Showing text did not contain: " + text + "!", "Displayed text successfully contained: " + text);
 		}
@@ -226,7 +238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I see a percentage number in the middle of the pie chart")]
 		public void PercentageMiddleOfPieChart()
 		{
-			var percentage = new RetailParntersDetails().ChartCentrePercentage();
+			var percentage = new RetailPartnersDetails().ChartCentrePercentage();
 			Report.IsTrue(!percentage.IsNullOrEmpty(),
 				"There was no percentage showing in the middle of the pie chart",
 				"The percentage: " + percentage + " was displayed in the middle of the pie chart");
@@ -235,7 +247,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that the color of the pie chart for the Retailer selected is Green")]
 		public void ColorOfPieChartForSelectedRetailerGreen()
 		{
-			var selRetailPartnersDetails = new RetailParntersDetails();
+			var selRetailPartnersDetails = new RetailPartnersDetails();
 			var testChartFill = selRetailPartnersDetails.ChartRetailerFill();
 			Report.IsTrue(testChartFill == "#9ac36c",
 				"The pie chart fill for the retailer was not green. The hex code displayed is: " + testChartFill,
@@ -245,7 +257,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the percentage in the pie chart legend statement matches the percentage shown in the middle of the pie chart")]
 		public void PieChartLegendPercentageMatchesPieChartPercentage()
 		{
-			var selRetailPartnersDetails = new RetailParntersDetails();
+			var selRetailPartnersDetails = new RetailPartnersDetails();
 			var chartPercentage = selRetailPartnersDetails.ChartCentrePercentage();
 			var chartLegend = selRetailPartnersDetails.GetChartLegend();
 			Report.IsTrue(chartLegend.Contains(chartPercentage),
@@ -261,7 +273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Confirming that '" + tierInformation + "' is showing under the Data Consent Tiers heading");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 
 				if (!selRetailDetails.Wait_for_load(10))
 				{
@@ -289,7 +301,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Confirming that '" + info + "' is showing under the Data Consent Tiers heading");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 
 				if (!selRetailDetails.Wait_for_load(10))
 				{
@@ -317,7 +329,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Clicking 'More Information' Hyperlink");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 
 				if (!selRetailDetails.Wait_for_load(10))
 				{
@@ -352,7 +364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("I " + should + " see the More Information hyperlink");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 
 				if (!selRetailDetails.Wait_for_load(10))
 				{
@@ -377,7 +389,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Click the Products in Scope button");
 
-			var selRetailDetails = new RetailParntersDetails();
+			var selRetailDetails = new RetailPartnersDetails();
 
 			if (!selRetailDetails.Wait_for_load(10))
 			{
@@ -485,7 +497,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Ensure the Data Consent Tier Sliders are set");
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 				foreach (var row in expected.Rows)
 				{
 					Report.Info("Setting Tier " + row["Tier"] + " to be in the " + row["State"] + " position");
@@ -505,7 +517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void DataConsentTierShouldBeSetTo(string tier, string onOff)
 		{
 			var toggle = onOff == "on";
-			Report.IsTrue(new RetailParntersDetails().GetDataConsentTier(tier) == toggle,
+			Report.IsTrue(new RetailPartnersDetails().GetDataConsentTier(tier) == toggle,
 				"The Data Consent Tier: " + tier + " was not set to: " + onOff,
 				"The Data Consent Tier: " + tier + " was set to " + onOff);
 		}
@@ -517,7 +529,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Ensure Tier " + tier + " " + (should == "should" ? "is" : "is not") + " editable");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 				bool currentState = selRetailDetails.GetDataConsentTier(tier);
 
 				Report.Info("Current state is " + (currentState ? "On" : "Off"));
@@ -553,7 +565,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Check that the Save Changes button " + shown + " shown");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 				bool buttonShowing = selRetailDetails.SaveChangesButtonShowing();
 
 				Report.IsTrue(buttonShowing == (shown == "is"),
@@ -572,7 +584,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenClickTheSaveChangesButton()
 		{
 			Report.Info("Click the Save Changes button");
-			var selRetailDetails = new RetailParntersDetails();
+			var selRetailDetails = new RetailPartnersDetails();
 			Report.IsTrue(selRetailDetails.ClickSaveChanges(), "Failed to click 'Save Changes'", "Successfully clicked 'Save Changes'");
 		}
 
@@ -591,7 +603,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"if the save button is visible, I save changes and close the popup dialog")]
 		public void ClickSaveClosePopupIfVisible()
 		{
-			var selRetailDetails = new RetailParntersDetails();
+			var selRetailDetails = new RetailPartnersDetails();
 			if (selRetailDetails.SaveChangesButtonShowing())
 			{
 				Report.Info("The save button was visible, so saving changes.");
@@ -619,7 +631,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var expected = new List<string>();
 			warning.Rows.ForEach(x => expected.Add(x["Message"]));
-			var displayed = new RetailParntersDetails().WarningMessages();
+			var displayed = new RetailPartnersDetails().WarningMessages();
 			var differences = expected.Except(displayed);
 			Report.IsTrue(!differences.Any(),
 				"The warning message did not match the expected text. Displayed is: " + string.Join("; ", displayed) + ". Expected is: " + string.Join("; ", expected),
@@ -634,7 +646,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Correct warning message is showing");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 				var showing = selRetailDetails.WarningMessage();
 
 				Report.Info("Message was showing: " + showing);
@@ -653,7 +665,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown")]
 		public void ThenConfirmTheNoteMessageBelowTheDataConsentTiersHeadingIsNotShown()
 		{
-			var displayed = new RetailParntersDetails().WarningMessages();
+			var displayed = new RetailPartnersDetails().WarningMessages();
 			Report.IsTrue(!displayed.Any(x => x.Contains("NOTE")),
 				"The NOTE error message was displayed under the Data Cosent Tiers Heading",
 				"The NOTE error message was not diplayed under the Data Consent Tiers Heading");
@@ -738,7 +750,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the back arrow next to CVS")]
 		public void GivenIClickTheBackArrowNextToCVS()
 		{
-			Report.IsTrue(new RetailParntersDetails().ClickBackButton(), "Failed to click the back arrow",
+			Report.IsTrue(new RetailPartnersDetails().ClickBackButton(), "Failed to click the back arrow",
 				"Successfully clicked the back arrow");
 		}
 
@@ -752,14 +764,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the Retailer Detail page")]
 		public void ThenIShouldSeeTheRetailerDetailPage()
 		{
-			Report.IsTrue(new RetailParntersDetails().Wait_for_load(60), "Retailer detail page is not showing as expected",
+			Report.IsTrue(new RetailPartnersDetails().Wait_for_load(60), "Retailer detail page is not showing as expected",
 				"Retailer detail page is showing as expected");
 		}
 
 		[StepDefinition(@"I check that in the Supplier ID table the following columns are showing:")]
 		public void ThenICheckThatInTheSupplierIDTableTheFollowingColumnsAreShowing(Table supplierIDTable)
 		{
-			List<string> SupplierIDHeaders = new RetailParntersDetails().GetSupplierIDTableHeaders().OrderBy(x => x).ToList();
+			List<string> SupplierIDHeaders = new RetailPartnersDetails().GetSupplierIDTableHeaders().OrderBy(x => x).ToList();
 
 			List<string> ExpectedSupplierIDHeaders = supplierIDTable.Rows.Select(row => row["Column name"].Trim()).OrderBy(x => x).ToList();
 
@@ -784,7 +796,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Given(@"I click on the Add new Supplier ID link")]
 		public void GivenIClickOnTheAddNewSupplierIDLink()
 		{
-			Report.IsTrue(new RetailParntersDetails().ClickAddSupplierId(), "Failed to click add supplier id link",
+			Report.IsTrue(new RetailPartnersDetails().ClickAddSupplierId(), "Failed to click add supplier id link",
 				"Successfully clicked add supplier id link");
 		}
 
@@ -798,7 +810,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the back arrow on the Retail Partners Details page")]
 		public void ClickTheBackArrowRetailPartnersDetails()
 		{
-			Report.IsTrue(new RetailParntersDetails().ClickBackButton(), "Failed to click the back arrow",
+			Report.IsTrue(new RetailPartnersDetails().ClickBackButton(), "Failed to click the back arrow",
 				"Successfully clicked the back arrow");
 			GeneralUtilities.Wait_for_load_finish();
 		}
@@ -907,7 +919,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				TestReport.StartStep("Clicking the retailer: " + retailer.Value + " should navigate to the Wal-Mart/SAM'S CLUB Retail Partners Details page with all 7 affiliates shown under <retailer> & You");
 				TestReport.UseSubSteps = true;
 				var selRetailPartners = new RetailPartners();
-				var selRetailPartnersDetails = new RetailParntersDetails();
+				var selRetailPartnersDetails = new RetailPartnersDetails();
 				TestReport.StartStep("Clicking on the logo for the retailer: " + retailer.Value + " in the Retail Partners page");
 				Report.IsTrue(selRetailPartners.ClickRetailerLogo(retailer.Key),
 					"Failed to click on the logo for retailer: " + retailer.Value,
@@ -973,13 +985,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the ""(.*)"" information button in the Retail Partners Details screen")]
 		public void ClickInformationButtonInDataTierDetails(string button)
 		{
-			Report.IsTrue(new RetailParntersDetails().ClickInfoButton(button), $"Failed to click the {button} button!", $"Successfully clicked the {button} button");
+			Report.IsTrue(new RetailPartnersDetails().ClickInfoButton(button), $"Failed to click the {button} button!", $"Successfully clicked the {button} button");
 		}
 
 		[StepDefinition(@"I confirm the ""(.*)"" information button is displayed on the Retail Partners Details screen")]
 		public void ConfirmTheInfoButtonIsDisplayedOnRetailPartnersDetails(string button)
 		{
-			Report.IsTrue(new RetailParntersDetails().InfoButton(button) != null,
+			Report.IsTrue(new RetailPartnersDetails().InfoButton(button) != null,
 				$@"The ""{button}"" button was not displayed!",
 				$@"The ""{button}"" was dipslayed as expected");
 		}
@@ -1033,13 +1045,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Retailer Details Page has loaded")]
 		public void IConfirmTheRetailerDetailsPageHasLoaded()
 		{
-			Report.IsTrue(new RetailParntersDetails().Wait_for_load(), "The Retailer Details page was not loaded!", "The Retailer Details page was loaded as expected");
+			Report.IsTrue(new RetailPartnersDetails().Wait_for_load(), "The Retailer Details page was not loaded!", "The Retailer Details page was loaded as expected");
 		}
 
 		[StepDefinition(@"I confirm the Data Consent Tiers table is displayed")]
 		public void ConfirmTheDataConsentTiersTableIsDisplayed()
 		{
-			Report.IsTrue(new RetailParntersDetails().DataConsentTiersTable() != null,
+			Report.IsTrue(new RetailPartnersDetails().DataConsentTiersTable() != null,
 				"The Data Consent Tiers table was not displayed!",
 				"The Data Consent Tiers table was displayed as expected.");
 		}
@@ -1047,7 +1059,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that row: (.*) of the Data Consent Tiers table displays: ""(.*)""")]
 		public void ConfirmThatRowOfTheDataConsentTiersTableDisplaysText(string row, string text)
 		{
-			var selRetailPartnersDetails = new RetailParntersDetails();
+			var selRetailPartnersDetails = new RetailPartnersDetails();
 			var tierRows = selRetailPartnersDetails.GetAllDataConsentTiers();
 			if (int.TryParse(row, out var rowNum))
 			{
@@ -1128,7 +1140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"I confirm that in the Supplier IDS list the following row exists")]
 		public void ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(Table table)
 		{
-			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
+			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
 
 			string expectedSupplierID = table.Rows[0]["Supplier ID"];
 			string expectedCompany = table.Rows[0]["Company or Brand Name"];
@@ -1150,7 +1162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I find the Supplier ID for (.*) in the SupplierID table and save as (.*)")]
 		public void GivenIFindTheSupplierIDForSupplierInTheSupplierIDTable(string supplier, string saveAs)
 		{
-			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
+			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
 			Regex regex = new Regex(@"\d+");
 			List<string> potentialRootStrings = new List<string>();
 			foreach (Supplier thisSupplier in allSuppliers)
@@ -1205,7 +1217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Confirm the Is Active column for SupplierID saved as (.*) (shows|does not show) a green check mark")]
 		public void GivenIConfirmTheIsActiveColumnForSupplierIDSavedAsSupplierIDShowsAGreenCheckMark(string savedAs, string showsDoesNotShow)
 		{
-			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
+			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
 			string SupplierId = Context.GetFromContext(savedAs).ToString();
 			if (showsDoesNotShow == "shows")
 			{

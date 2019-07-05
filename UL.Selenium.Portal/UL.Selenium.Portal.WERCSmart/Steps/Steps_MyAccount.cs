@@ -866,6 +866,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I update the password for TReVor test user: (.*) in the change user password popup")]
 		public void IUpdateThePasswordForTrevorTestUser(string savedAs)
 		{
+			
 			// Get user credentials from TReVor based on saved as ID
 			var user = TestUsers.GetUserSavedAs(savedAs);
 			if (user == null)
