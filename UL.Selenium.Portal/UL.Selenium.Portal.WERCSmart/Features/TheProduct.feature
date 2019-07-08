@@ -34,6 +34,25 @@ Scenario: [31347] The Product validation
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+## Need tests for Cannot contain = ^ ? \ ~ [ ] | { } +
+@TReVorId:20275
+Scenario: [84643] Product Name - can contain special characters - , character testing
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I set 'Type of Product' to: Bubble solution
+	And I call Shared Step 103904 - Validate Product Name can contain character: ,
+	Then I save the product information as: TestCase84643
+	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84643
+
+@TReVorId:20276
+Scenario: [84644] Product Name - can contain special characters - . character testing
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I set 'Type of Product' to: Bubble solution
+	And I call Shared Step 103904 - Validate Product Name can contain character: .
+	Then I save the product information as: TestCase84644
+	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84644
+
 @TReVorId:20261
 Scenario: [84595] Product Name - can contain special characters - & character testing
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -42,6 +61,30 @@ Scenario: [84595] Product Name - can contain special characters - & character te
 	And I call Shared Step 103904 - Validate Product Name can contain character: &
 	Then I save the product information as: TestCase84595
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84595
+
+Scenario: [104073] Product Name - can contain special characters - " character testing
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I set 'Type of Product' to: Bubble solution
+	And I call Shared Step 103904 - Validate Product Name can contain character: "
+	Then I save the product information as: TestCase104073
+	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104073
+
+Scenario: [104074] Product Name - can contain special characters - ' character testing
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I set 'Type of Product' to: Bubble solution
+	And I call Shared Step 103904 - Validate Product Name can contain character: '
+	Then I save the product information as: TestCase104074
+	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104074
+
+Scenario: [104075] Product Name - can contain special characters - % character testing
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I set 'Type of Product' to: Bubble solution
+	And I call Shared Step 103904 - Validate Product Name can contain character: %
+	Then I save the product information as: TestCase104075
+	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104075
 
 @TReVorId:20262
 Scenario: [84624] Product Name - can contain special characters - @ character testing
@@ -69,24 +112,6 @@ Scenario: [84630] Product Name - can contain special characters - $ character te
 	And I call Shared Step 103904 - Validate Product Name can contain character: $
 	Then I save the product information as: TestCase84630
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84630
-
-@TReVorId:20265
-Scenario: [84631] Product Name - can contain special characters - ! character testing
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I set 'Type of Product' to: Bubble solution
-	And I call Shared Step 103904 - Validate Product Name can contain character: !
-	Then I save the product information as: TestCase84631
-	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84631
-
-@TReVorId:20266
-Scenario: [84632] Product Name - can contain special characters - * character testing
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I set 'Type of Product' to: Bubble solution
-	And I call Shared Step 103904 - Validate Product Name can contain character: *
-	Then I save the product information as: TestCase84632
-	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84632
 
 @TReVorId:20267
 Scenario: [84635] Product Name - can contain special characters - ( character testing
@@ -129,7 +154,7 @@ Scenario: [84639] Product Name - can contain special characters - : character te
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I set 'Type of Product' to: Bubble solution
-	And I call Shared Step 103904 - Validate Product Name can contain character: -
+	And I call Shared Step 103904 - Validate Product Name can contain character: :
 	Then I save the product information as: TestCase84639
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84639
 
@@ -137,73 +162,33 @@ Scenario: [84639] Product Name - can contain special characters - : character te
 Scenario: [84640] Product Name - can not contain special characters - ; character testing
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I set the Product Name as it a appears on the Package Label field to: ;The Product Name
-	#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
 	And I set 'Type of Product' to: Bubble solution
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
-	And I set the Product Name as it a appears on the Package Label field to: The Prod;uct Name
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
-	And I set the Product Name as it a appears on the Package Label field to: The Product Name;
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
-	And I set the Product Name as it a appears on the Package Label field to: The ; Product ; Name ;
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
+	Then I call Shared Step 104068 Validate Product Name can not contain special characters: ;
 
 @TReVorId:20273
 Scenario: [84641] Product Name - can not contain special characters - < character testing
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I set the Product Name as it a appears on the Package Label field to: <The Product Name
-	#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
 	And I set 'Type of Product' to: Bubble solution
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
-	And I set the Product Name as it a appears on the Package Label field to: The Prod<uct Name
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
-	And I set the Product Name as it a appears on the Package Label field to: The Product Name<
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
-	And I set the Product Name as it a appears on the Package Label field to: The < Product < Name <
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
+	Then I call Shared Step 104068 Validate Product Name can not contain special characters: <
 
 @TReVorId:20274
 Scenario: [84642] Product Name - can not contain special characters - > character testing
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I set the Product Name as it a appears on the Package Label field to: >The Product Name
-	#And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
 	And I set 'Type of Product' to: Bubble solution
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
-	And I set the Product Name as it a appears on the Package Label field to: The Prod>uct Name
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
-	And I set the Product Name as it a appears on the Package Label field to: The Product Name>
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
-	And I set the Product Name as it a appears on the Package Label field to: The > Product > Name >
-	And I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * �? !� \ ~ [] <> | {} + )
+	Then I call Shared Step 104068 Validate Product Name can not contain special characters: >
 
-@TReVorId:20275
-Scenario: [84643] Product Name - can contain special characters - , character testing
+@TReVorId:20265
+Scenario: [84631] Product Name - can not contain special characters - ! character testing
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I set 'Type of Product' to: Bubble solution
-	And I call Shared Step 103904 - Validate Product Name can contain character: ,
-	Then I save the product information as: TestCase84643
-	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84643
+	Then I call Shared Step 104068 Validate Product Name can not contain special characters: !
 
-@TReVorId:20276
-Scenario: [84644] Product Name - can contain special characters - . character testing
+@TReVorId:20266
+Scenario: [84632] Product Name - can not contain special characters - * character testing
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I set 'Type of Product' to: Bubble solution
-	And I call Shared Step 103904 - Validate Product Name can contain character: .
-	Then I save the product information as: TestCase84644
-	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84644
+	And I set 'Type of Product' to: Bubble solution
+	Then I call Shared Step 104068 Validate Product Name can not contain special characters: *

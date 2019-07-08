@@ -2999,8 +2999,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsRetailPartners thisStepsRetailPartners = new StepsRetailPartners();
-			RetailParntersDetails thisRetailParntersDetails = new RetailParntersDetails();
-			Report.IsTrue(thisRetailParntersDetails.GetAndYouText().Contains(retailer),
+			RetailPartnersDetails thisRetailPartnersDetails = new RetailPartnersDetails();
+			Report.IsTrue(thisRetailPartnersDetails.GetAndYouText().Contains(retailer),
 				"The & You text is not as expected.", "The & You text is showing as expected");
 
 			thisStepsRetailPartners.PieChartShowing();
@@ -6911,7 +6911,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Beginning shared step: 57621");
 			Steps_SHA MyStepsSha = new Steps_SHA();
-			RetailParntersDetails thisRPD = new RetailParntersDetails();
+			RetailPartnersDetails thisRPD = new RetailPartnersDetails();
 			string SupplierId = Context.GetFromContext(supplierIDSavedAs).ToString();
 			Report.IsTrue(thisRPD.ClickActionBySupplierID(SupplierId, "Deactivate"),
 				"Failed to click Deactivate for Supplier id: " + SupplierId,
@@ -6931,7 +6931,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Beginning shared step: 57565");
 			Steps_SHA MyStepsSha = new Steps_SHA();
-			RetailParntersDetails thisRPD = new RetailParntersDetails();
+			RetailPartnersDetails thisRPD = new RetailPartnersDetails();
 			string SupplierId = Context.GetFromContext(supplierIDSavedAs).ToString();
 			Report.IsTrue(thisRPD.ClickActionBySupplierID(SupplierId, "Activate"),
 				"Failed to click Activate for Supplier id: " + SupplierId,
@@ -7904,20 +7904,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void Shared_103904_ProductNameCanContain(string character)
 		{
 			TestReport.UseSubSteps = true;
+			var newProd = new NewProduct();
 
-			string[] modifiedStrings = { character + "The Product Name", "The " + character + " Product Name", "The Product Name " + character, "The " + character + " Product " + character + " Name" };
-
-			foreach (string productType in modifiedStrings)
+			foreach (string productType in newProd.ModifiedStrings(character))
 			{
-				TestReport.StartStep("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is allowed in the field.");
-				StepsNewProduct newProd = new StepsNewProduct();
-				newProd.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", productType);
-				newProd.ClickContinue();
-				newProd.GivenIShouldSeeXPage("Product Characteristics");
-				newProd.ClickPageHeading("The Product");
-				newProd.ConfirmTheProductNameIsDisplayedInTheHeader(productType);
+				Report.Info("I enter the text: '" + @productType + "' into the Product Name field and verify that '" + character + "' is allowed in the field.");
+				var newProdSteps = new StepsNewProduct();
+				var product = new TheProduct {
+					ProductName = productType
+				};
+				newProdSteps.ClickContinue();
+				newProdSteps.GivenIShouldSeeXPage("Product Characteristics");
+				newProdSteps.ClickPageHeading("The Product");
+				newProdSteps.ConfirmTheProductNameIsDisplayedInTheHeader(productType);
 			}
-			TestReport.EndScenario();
+		}
+
+		[StepDefinition(@"I call Shared Step 104068 Validate Product Name can not contain special characters: (.*)")]
+		public void ThenICallSharedStepValidateProductNameCanNotContainSpecialCharacters(string character)
+		{
+			TestReport.UseSubSteps = true;
+			var newProd = new NewProduct();
+
+			foreach (string productType in newProd.ModifiedStrings(character))
+			{
+				Report.Info("I enter the text: '" + productType + "' into the Product Name field and verify that '" + character + "' is not allowed in the field.");
+				var newProdSteps = new StepsNewProduct();
+				var product = new TheProduct {
+					ProductName = productType
+				};
+				newProdSteps.ClickContinue();
+				newProdSteps.ErrorMessageSpecific(@"Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )");
+			}
 		}
 	}
 }

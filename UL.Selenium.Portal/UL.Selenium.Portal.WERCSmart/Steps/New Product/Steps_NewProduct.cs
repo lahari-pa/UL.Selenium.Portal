@@ -1028,6 +1028,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var ActualSections = new NewProduct().GetDisplayedSections().Select(x => x).ToList();
 			var actualNormalised = ActualSections.Select(x => x.Replace(" ", "")).ToList();
 			Report.Info("Actual sections: " + string.Join(",", ActualSections));
+			Report.Info("Expected sections: " + string.Join(",", expectedSections));
 			if (condition == "only see")
 			{
 				List<string> mismatch = new List<string>();

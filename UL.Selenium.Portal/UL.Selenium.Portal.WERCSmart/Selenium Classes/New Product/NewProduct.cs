@@ -126,6 +126,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public string[] ModifiedStrings(string character)
+		{
+			string[] outStrings = { character + " The Product Name", "The " + character + " Product Name", "The Product Name " + character, "The " + character + " Product " + character + " Name" };
+			return outStrings;
+		}
+
 		public bool ClickContinue(bool waitForLoadingBtnSpinner = true)
 		{
 			try
@@ -3059,6 +3065,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return pkgType.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
 		}
 
+		internal void SetProductName(string productType)
+		{
+			var productName = containerElement.FindElement(By.XPath(@"//*[@id='collapse1']/div/form/div[1]/div[2]/input"));
+			productName.EnterText(productType);
+		}
 	}
 
 	public class ProductInformation
