@@ -7,6 +7,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			set => this.SelectRadio("TSCA", value);
 		}
 
+		public string CEPAStatus {
+			get => this.SelectedInputForLabel("CEPA");
+			set => this.SelectRadio("CEPA", value);
+		}
+
 		public bool Prop65 {
 			get
 			{

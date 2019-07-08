@@ -28,6 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.ProductRegistration
     [NUnit.Framework.CategoryAttribute("ProductGrid")]
     [NUnit.Framework.CategoryAttribute("DataSummarySheet")]
     [NUnit.Framework.CategoryAttribute("wercsmart")]
+    [NUnit.Framework.CategoryAttribute("DocumentAcceptance")]
     [NUnit.Framework.CategoryAttribute("RetailPartners")]
     [NUnit.Framework.CategoryAttribute("run_Flow17")]
     public partial class Flow17Feature
@@ -52,6 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.ProductRegistration
                         "ProductGrid",
                         "DataSummarySheet",
                         "wercsmart",
+                        "DocumentAcceptance",
                         "RetailPartners",
                         "run_Flow17"});
             testRunner.OnFeatureStart(featureInfo);
@@ -103,27 +105,27 @@ namespace UL.Selenium.Portal.WERCSmart.Features.ProductRegistration
 #line 17
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
+#line 18
+ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 20
+ testRunner.Given("I generate a random UPC number and save as: UPC60017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 21
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 23
-testRunner.Given("I generate a random UPC number and save as: UPC60017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 25
-testRunner.Given("I delete all products with UPC Number: saved as UPC60017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 27
-testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+ testRunner.Given("I delete all products with UPC Number: saved as UPC60017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 22
+ testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 29
-testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+#line 23
+ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Lithium Primary/Metal Batteries", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
-testRunner.Then("I save the product information as: TestCase60017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 33
-testRunner.Given("I call Shared Step 59927 (Primary Physical State > Solid only available – Without" +
+#line 24
+ testRunner.Then("I save the product information as: TestCase60017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 25
+ testRunner.Given("I call Shared Step 59927 (Primary Physical State > Solid only available – Without" +
                     " Water Solubility question)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 35
-testRunner.Given("I call Shared Step 60026 (Additional Product Information - US - Battery - No to a" +
+#line 26
+ testRunner.Given("I call Shared Step 60026 (Additional Product Information - US - Battery - No to a" +
                     "ll)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -144,29 +146,29 @@ testRunner.Given("I call Shared Step 60026 (Additional Product Information - US 
                         "false",
                         "false",
                         ""});
-#line 37
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table1, "Given ");
-#line 42
-testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 44
-testRunner.Given("I call Shared Step 73282 (Lithium Battery Characteristics - Weight in Grams)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
-testRunner.Given("I call Shared Step 60096 (Lithium Battery Transportation)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 48
-testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+#line 27
+ testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table1, "Given ");
+#line 31
+ testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 32
+ testRunner.Given("I call Shared Step 73282 (Lithium Battery Characteristics - Weight in Grams)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 33
+ testRunner.Given("I call Shared Step 60096 (Lithium Battery Transportation)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 34
+ testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
                     "appy Path) and select the retailer: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 50
-testRunner.Given("I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm " +
+#line 35
+ testRunner.Given("I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm " +
                     "Quantity ) for UPC saved as: UPC60017 with container type: Plastic Container siz" +
                     "e: 50.0 and quantity: 1000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
-testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+#line 36
+ testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 54
-testRunner.Given("I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)" +
+#line 37
+ testRunner.Given("I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 56
-testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
+#line 38
+ testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -187,18 +189,18 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Acidic",
                         "No data available",
                         "7.388"});
-#line 58
-testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
+#line 39
+ testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     "))", ((string)(null)), table2, "Given ");
-#line 62
-testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+#line 42
+ testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 60017. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
                     " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
-testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithi" +
+#line 43
+ testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithi" +
                     "um Primary/Metal Batteries", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 66
-testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+#line 44
+ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase60017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -211,30 +213,30 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60018] Lithium Ion Battery - RU000345", null, new string[] {
                         "TReVorId:11597"});
-#line 70
+#line 47
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 72
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 74
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 76
-testRunner.Given("I generate a random UPC number and save as: UPC60018", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 78
-testRunner.Given("I delete all products with UPC Number: saved as UPC60018", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 80
-testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+#line 48
+ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 49
+ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 50
+ testRunner.Given("I generate a random UPC number and save as: UPC60018", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 51
+ testRunner.Given("I delete all products with UPC Number: saved as UPC60018", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 52
+ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 82
-testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+#line 53
+ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Lithium ion batteries", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 84
-testRunner.Then("I save the product information as: TestCase60018", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 86
-testRunner.Given("I call Shared Step 59927 (Primary Physical State > Solid only available – Without" +
+#line 54
+ testRunner.Then("I save the product information as: TestCase60018", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 55
+ testRunner.Given("I call Shared Step 59927 (Primary Physical State > Solid only available – Without" +
                     " Water Solubility question)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 88
-testRunner.Given("I call Shared Step 65493 (Additional Product Information - US only - Battery is p" +
+#line 56
+ testRunner.Given("I call Shared Step 65493 (Additional Product Information - US only - Battery is p" +
                     "ackaged for Retail Sales - No to everything else - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -261,36 +263,36 @@ testRunner.Given("I call Shared Step 65493 (Additional Product Information - US 
                         "false",
                         "false",
                         ""});
-#line 90
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table3, "Given ");
-#line 96
-testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 98
-testRunner.Given("I call Shared Step 54799 (Lithium Battery Characteristics - any data - Happy path" +
+#line 57
+ testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table3, "Given ");
+#line 62
+ testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 63
+ testRunner.Given("I call Shared Step 54799 (Lithium Battery Characteristics - any data - Happy path" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 100
-testRunner.Given("I call Shared Step 60096 (Lithium Battery Transportation)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 102
-testRunner.Then("I should see the Retailer Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 64
+ testRunner.Given("I call Shared Step 60096 (Lithium Battery Transportation)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 65
+ testRunner.Then("I should see the Retailer Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
             table4.AddRow(new string[] {
                         "No Retailer/No UPC Product"});
-#line 104
-testRunner.And("The selected retailers on the Retailer page should be:", ((string)(null)), table4, "And ");
-#line 108
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 110
-testRunner.Then("If the UPCs Warning popup is displayed I click OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 112
-testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+#line 66
+ testRunner.And("The selected retailers on the Retailer page should be:", ((string)(null)), table4, "And ");
+#line 69
+ testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 70
+ testRunner.Then("If the UPCs Warning popup is displayed I click OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 71
+ testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 114
-testRunner.Given("I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)" +
+#line 72
+ testRunner.Given("I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 116
-testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
+#line 73
+ testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -311,19 +313,260 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Acidic",
                         "No data available",
                         "7.388"});
-#line 118
-testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
+#line 74
+ testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     "))", ((string)(null)), table5, "Given ");
-#line 122
-testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+#line 77
+ testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 60018. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
                     " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 124
-testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: LITHI" +
+#line 78
+ testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: LITHI" +
                     "UM ION BATTERIES", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 126
-testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+#line 79
+ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase60018", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[104222] Lithium Battery UN38.3 Regulatory Documents to Provide")]
+        public virtual void _104222LithiumBatteryUN38_3RegulatoryDocumentsToProvide()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[104222] Lithium Battery UN38.3 Regulatory Documents to Provide", null, ((string[])(null)));
+#line 81
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 82
+ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 83
+ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 84
+ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 85
+ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Lithium Primary/Metal Batteries", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 86
+ testRunner.Then("I save the product information as: TestCase104222", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 87
+ testRunner.Given("I call Shared Step 59927 (Primary Physical State > Solid only available – Without" +
+                    " Water Solubility question)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 88
+ testRunner.Given("I call Shared Step 65493 (Additional Product Information - US only - Battery is p" +
+                    "ackaged for Retail Sales - No to everything else - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table6.AddRow(new string[] {
+                        "Lithium hydroxide",
+                        "6.7",
+                        "false",
+                        "false",
+                        ""});
+            table6.AddRow(new string[] {
+                        "Graphite",
+                        "33.2",
+                        "false",
+                        "false",
+                        ""});
+            table6.AddRow(new string[] {
+                        "Ethylene carbonate",
+                        "60.1",
+                        "false",
+                        "false",
+                        ""});
+#line 89
+ testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table6, "Given ");
+#line 94
+ testRunner.Given("I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 95
+ testRunner.Given("I call Shared Step 73282 (Lithium Battery Characteristics - Weight in Grams)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 96
+ testRunner.Given("I call Shared Step 60096 (Lithium Battery Transportation)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 97
+ testRunner.Then("I should see the Retailer Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Retailer"});
+            table7.AddRow(new string[] {
+                        "No Retailer/No UPC Product"});
+#line 98
+ testRunner.And("The selected retailers on the Retailer page should be:", ((string)(null)), table7, "And ");
+#line 101
+ testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 102
+ testRunner.Then("If the UPCs Warning popup is displayed I click OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 103
+ testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 104
+ testRunner.Then(@"UN38.3 Testing Results should be showing the error messages with no special characters: The U.S.Department of Transportation, as of January 1, 2020, requires that lithium batteries have testing performed in relation to UN38.3.Please provide the testing document from the successful UN38.3 test performed on this battery.If you do not have a test document to provide, you are unable to submit this registration for assessment and your battery will not be available for selection by other suppliers. Should you have further questions regarding this requirement, please contact the WERCSmart Support team for assistance.Or you may refer to the Solution Center article outlining the regulatory requirement.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 105
+ testRunner.And("I click the browse button for label: I have an Article Information Sheet (AIS), T" +
+                    "echnical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: " +
+                    "C:\\Dependencies\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 106
+ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 107
+ testRunner.Then("Article Information Sheet (AIS) should not be showing the error messages: Documen" +
+                    "t is required: I have an Article Information Sheet (AIS), Technical Data Sheet (" +
+                    "TDS), Battery Data Sheet (BDS) to provide.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 108
+ testRunner.Then(@"Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. should be showing the error messages: Select at least one of the options", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 109
+ testRunner.Given(@"I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 110
+ testRunner.Then(@"Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. should not be showing the error messages: Select at least one of the options", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 111
+ testRunner.And("I click the browse button for label: Upload UN38.3 Test Document (Required) and u" +
+                    "pload PDF: C:\\Dependencies\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 112
+ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 113
+ testRunner.Then(@"UN38.3 Testing Results should not be showing the error messages with no special characters: The U.S.Department of Transportation, as of January 1, 2020, requires that lithium batteries have testing performed in relation to UN38.3.Please provide the testing document from the successful UN38.3 test performed on this battery.If you do not have a test document to provide, you are unable to submit this registration for assessment and your battery will not be available for selection by other suppliers. Should you have further questions regarding this requirement, please contact the WERCSmart Support team for assistance.Or you may refer to the Solution Center article outlining the regulatory requirement.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 114
+ testRunner.Then("WHMIS-compliant Safety Data Sheet, English and French-Canadian should be showing " +
+                    "the error messages: Select at least one of the options", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 115
+ testRunner.Given("I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and" +
+                    " French-Canadian to: I don\'t need a WHMIS-Compliant document for this product.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 116
+ testRunner.Then("WHMIS-compliant Safety Data Sheet, English and French-Canadian should not be show" +
+                    "ing the error messages: Select at least one of the options", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 117
+ testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 118
+ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase104222", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[104227] Lithium Battery UN38.3 Summary Page")]
+        public virtual void _104227LithiumBatteryUN38_3SummaryPage()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[104227] Lithium Battery UN38.3 Summary Page", null, ((string[])(null)));
+#line 120
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 121
+ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 122
+ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 123
+ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 124
+ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Lithium Primary/Metal Batteries", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 125
+ testRunner.Then("I save the product information as: TestCase104227", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 126
+ testRunner.Given("I call Shared Step 59927 (Primary Physical State > Solid only available – Without" +
+                    " Water Solubility question)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 127
+ testRunner.Given("I call Shared Step 65493 (Additional Product Information - US only - Battery is p" +
+                    "ackaged for Retail Sales - No to everything else - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table8.AddRow(new string[] {
+                        "Lithium hydroxide",
+                        "6.7",
+                        "false",
+                        "false",
+                        ""});
+            table8.AddRow(new string[] {
+                        "Graphite",
+                        "33.2",
+                        "false",
+                        "false",
+                        ""});
+            table8.AddRow(new string[] {
+                        "Ethylene carbonate",
+                        "60.1",
+                        "false",
+                        "false",
+                        ""});
+#line 128
+ testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table8, "Given ");
+#line 133
+ testRunner.Given("I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 134
+ testRunner.Given("I call Shared Step 73282 (Lithium Battery Characteristics - Weight in Grams)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 135
+ testRunner.Given("I call Shared Step 60096 (Lithium Battery Transportation)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 136
+ testRunner.Then("I should see the Retailer Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Retailer"});
+            table9.AddRow(new string[] {
+                        "No Retailer/No UPC Product"});
+#line 137
+ testRunner.And("The selected retailers on the Retailer page should be:", ((string)(null)), table9, "And ");
+#line 140
+ testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 141
+ testRunner.Then("If the UPCs Warning popup is displayed I click OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 142
+ testRunner.And("I click the browse button for label: I have an Article Information Sheet (AIS), T" +
+                    "echnical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: " +
+                    "C:\\Dependencies\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 143
+ testRunner.Given(@"I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 144
+ testRunner.And("I click the browse button for label: Upload UN38.3 Test Document (Required) and u" +
+                    "pload PDF: C:\\Dependencies\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 145
+ testRunner.Given("I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and" +
+                    " French-Canadian to: I don\'t need a WHMIS-Compliant document for this product.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 146
+ testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 147
+ testRunner.Given("I click the browse button for label: Please upload a PDF of the product. and uplo" +
+                    "ad PDF: C:\\Dependencies\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 148
+ testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 149
+ testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
+                    "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 150
+ testRunner.Then("in the Comments page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 151
+ testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 152
+ testRunner.And("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 153
+ testRunner.Then("Upload UN38.3 Test Document (Required) document section should be showing the fol" +
+                    "lowing document: testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 154
+ testRunner.Given("I click the View button for section: Upload UN38.3 Test Document (Required)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 155
+ testRunner.Then("I confirm a new window opens displaying the document url: ProductDocument", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 156
+ testRunner.Given("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 157
+ testRunner.And("I switch to the main window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 158
+ testRunner.And("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 159
+ testRunner.And("I close the Data Summary tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 160
+ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase104227", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

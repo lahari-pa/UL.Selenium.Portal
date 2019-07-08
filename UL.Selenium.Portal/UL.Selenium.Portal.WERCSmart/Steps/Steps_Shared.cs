@@ -479,6 +479,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
+		[StepDefinition(@"I call Shared Step 104276 \(Enter Regulatory Information - TSCA, CEPA, Not Prop 65\)")]
+		public void GivenICallSharedEnterRegulatoryInformation_TSCACEPANotProp()
+		{
+			var regulatoryInformation = new RegulatoryInformation1();
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			TestReport.StartStep("I should see the Regulatory Information 1 Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
+			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			TestReport.StartStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
+			stepsRegulatoryInformation.SetCEPATo("Compliant with Domestic Substances List (DSL)");
+			TestReport.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+		}
+
 		[StepDefinition(@"I call Shared Step 48367 \(Product Includes Battery > any type\)")]
 		// Requires a table with heading: | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
 		public void GivenICallSharedProductIncludesBatteryAnyType(Table table)
@@ -2241,8 +2260,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo("Weight of Lithium in grams (single unit)", "0.1");
 			TestReport.StartStep("I set the Weight of the single unit (grams) field to: 10");
 			MyNewProductSteps.SetTheSectionOptionTo("Weight of the single unit (grams)", "10");
-			TestReport.StartStep("I set the Battery meets UN 38.3 testing requirements field to: Yes");
-			MyNewProductSteps.SetTheSectionOptionTo("Battery meets ", "Yes");
 			TestReport.StartStep(
 				"I set the Battery is manufactured under a Quality Management Program outlined in IATA 3.9.2.6 field to: YES");
 			MyNewProductSteps.SetTheSectionOptionTo(
