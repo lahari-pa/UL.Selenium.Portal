@@ -169,7 +169,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw new Exception("Landing page did not load!");
 			}
 			Report.Info("Clicking 'Log In' on the Landing Page");
-			selLandingPage.Click_Login();
+			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;
@@ -251,7 +251,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw new Exception("Landing page did not load!");
 			}
 			Report.Info("Clicking 'Log In' on the Landing Page");
-			selLandingPage.Click_Login();
+			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
 			var selHomepage = new Homepage();
 			var selLogin = new Login();
 			if (!Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!"))

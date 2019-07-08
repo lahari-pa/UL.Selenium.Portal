@@ -34,20 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
-			int counter = 0;
-			while (counter < secondsToWait)
-			{
-				var addProductHeader = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div/h1"))
-					.FirstOrDefault(x => x.Text.Contains(sectionHeader));
-				if (addProductHeader != null)
-				{
-					return true;
-				}
-				Delay.Seconds(Delay.SpeedFactor * 1);
-				counter++;
-			}
-			Report.Info("Waited until: " + counter.ToString());
-			return false;
+			return SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div/h1[contains(text(),'" + sectionHeader + "')]"), secondsToWait) != null;
 		}
 
 		/****************  Product Identification*/

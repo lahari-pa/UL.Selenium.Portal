@@ -88,7 +88,9 @@ Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65
 
 Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
 
-Then I confirm that I see the following VOC-OTC-CARB statement1: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+Then I see the following questions
+| Section                                                                                                                                        |
+| Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. |
 
 Then The following options should be displayed for section: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
 | Option |
@@ -101,7 +103,9 @@ Then Product has been granted an Alternative Control Plan should be showing the 
 
 Given I set the Product has been granted an Alternative Control Plan option to: No
 
-Then I confirm that I see the following VOC-OTC-CARB statement2: Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
+Then I see the following questions
+| Section                                                                                                                                                       |
+| Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1. |
 
 Then I should see a total of 2 radio buttons for the section: Product does not contain more than 0.05 grams
 
@@ -130,7 +134,6 @@ Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - requ
 
 Then I should see the Additional Documents to Provide Page
 
-# Confirm the Volatile Organic Compounds - Product label document upload control is shown along with the TCLP file control updates
 Then I see the following sections
 | Section                                           |
 | Volatile Organic Compounds                        |
@@ -625,8 +628,10 @@ Given in the New Product page I click Continue
 
 # Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
 And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
-And I confirm that I see the following VOC-OTC-CARB statement1: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
-And I confirm that I see the following VOC-OTC-CARB statement3: VOC content in grams ozone per gram
+Then I see the following questions
+| Section                                                                                                                                        |
+| Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. |
+| VOC content in grams ozone per gram                                                                                                            |
 And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: No
 And in the New Product page I click Continue
 Then VOC content in grams ozone per gram should be showing the error messages: This is a required field.
@@ -636,7 +641,7 @@ And in the New Product page I click Continue
 # Volatile Organic Compound Summary page
 And I should see the Volatile Organic Compound Summary Page
 And I confirm that I see todays VOC Analysis Date
-And I confirm that I see the following VOC-OTC-CARB statement4: Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are:
+And I confirm that I see the bold VOC-OTC-CARB Compliance Limits statement: Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are:
 And I should see the following Voc Limits present:
 | Use                         | VOC Compliance Limit         | Regulation                                                |
 | Clear Coating - Aerosol     | 0.85                         | Aerosol Coatings CARB limit                               |
@@ -714,7 +719,7 @@ Then Amount of VOC content as weight percentage of the total formula, excluding 
 Given I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 20
 Given in the New Product page I click Continue
 Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
-Then I confirm that I see the following VOC-OTC-CARB statement4: Based on your selection, you have verified your product contains VOC with intended uses as follows. The CARB VOC compliance limit(s) for the intended use you identified is/are:
+Then I confirm that I see the bold VOC-OTC-CARB Compliance Limits statement: Based on your selection, you have verified your product contains VOC with intended uses as follows. The CARB VOC compliance limit(s) for the intended use you identified is/are:
 Given I call Shared Step 57819 (VOC Results - Confirm VOC Limits table shows correct values (CARB only) - Happy Path): Personal Fragrance Product (more than 20% fragrance) - Liquid
 And I confirm that I see the following VOC content as weight percentage for each state statement: VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.
 Then I confirm that I see the following CARB value: 20
