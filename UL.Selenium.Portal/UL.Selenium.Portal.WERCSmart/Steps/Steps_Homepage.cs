@@ -201,14 +201,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							var selProdGrid = new ProductsGrid();
 							switch (item.ToLower())
 							{
-								case ("subheading your products"):
-									Report.IsTrue(selProdGrid.HeaderShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+								case ("subheading my products"):
+									Report.IsTrue(selProdGrid.HeadingShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
 									break;
 							}
 							break;
 						}
 				}
-				Report.Screenshot();
 			}
 			catch (Exception ex)
 			{
@@ -518,19 +517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"there should be products available in the Products Grid")]
 		public void ThenThereShouldBeProductsAvailableInTheProductsTable()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Products Present In Products Grid");
-			try
-			{
-				Report.Info("Checking that there are products available in the Products Grid");
-				var selProdGrid = new ProductsGrid();
-				Report.IsTrue(selProdGrid.ProductsPresent(), "Products were not present in the grid!", "There were products present in the grid, as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(new ProductsGrid().ProductsPresent(), "Products were not present in the grid!", "There were products present in the grid, as expected!");
 		}
 
 		[StepDefinition(@"I click on the Notification Icon")]
