@@ -932,9 +932,14 @@ testRunner.And("In the Document List popup I Confirm the Filename column shows a
 #line 397
 testRunner.And("In the Document List popup I Double click on the filename for product saved as: T" +
                     "estCase73949", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 402
+testRunner.Then("I should see a new tabbed document with the pdf containing product code saved as:" +
+                    " TestCase73949 and NGHS / English twice", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 403
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see a new tabbed document whose URL contains DocumentID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 404
+testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 405
 testRunner.And("I Click Cancel on the Document List window pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -949,99 +954,99 @@ testRunner.And("I Click Cancel on the Document List window pop up", ((string)(nu
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73950] Kit Document merge - Canada only", null, new string[] {
                         "73950",
                         "TReVorId:22068"});
-#line 414
+#line 415
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 416
+#line 417
 testRunner.Given("I create a product with name: Kit product 1 and take to completed using Test Case" +
                     " 78865 and save as: 73950_KitProduct1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 417
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 418
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 419
 testRunner.Given("I create a product with name: Kit product 2 and take to completed using Test Case" +
                     " 78865 and save as: 73950_KitProduct2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 419
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 420
-testRunner.Given("I generate a random UPC number and save as: UPC73949", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 421
-testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 422
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 423
 testRunner.Given("I generate a random UPC number and save as: UPC73949", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 424
+#line 422
 testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 425
+#line 423
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 427
+#line 424
+testRunner.Given("I generate a random UPC number and save as: UPC73949", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 425
+testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 426
+testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 428
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Hair Color Kit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 428
-testRunner.Then("I save the product information as: TestCase73950", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 429
+testRunner.Then("I save the product information as: TestCase73950", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 430
 testRunner.And("I call Shared Step 62681 - Additional Product Information - Canada, No(OSHA), No(" +
                     "DSV), No(PLP), No(GNFR), Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 430
+#line 431
 testRunner.And("I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue -" +
                     " Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 431
+#line 432
 testRunner.And("I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 73950_" +
                     "KitProduct1 and product 2: 73950_KitProduct2)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 432
+#line 433
 testRunner.And("I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) " +
                     "- Exemption(Random) - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 433
+#line 434
 testRunner.And("I call Shared Step 62536 (Transportation Details 2 > I do not ship internationall" +
                     "y > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 434
+#line 435
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 435
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 436
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 437
-testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: yrdy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 438
-testRunner.And("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: yrdy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 439
+testRunner.And("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 440
 testRunner.And("If purchase details are showing click confirm order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 441
-testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 442
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 443
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase73949)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 443
+#line 444
 testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 a" +
                     "nd its status is: Submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 444
+#line 445
 testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
                     "uct data for product saved as: TestCase73949)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 445
-testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 446
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 447
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase73949)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 447
+#line 448
 testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 a" +
                     "nd its status is: Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 448
+#line 449
 testRunner.And("I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Mana" +
                     "gement for saved as: TestCase73949", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 449
-testRunner.And("I Confirm you see the Document List pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 450
+testRunner.And("I Confirm you see the Document List pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 451
 testRunner.And("In the Document List popup I Confirm the Filename column shows an entry for xxxxx" +
                     "xx.pdf - where xxxxxxx is the product id of product saved as: TestCase73949", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 451
+#line 452
 testRunner.And("In the Document List popup I Double click on the filename for product saved as: T" +
                     "estCase73949", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 456
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 457
+testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 458
 testRunner.And("I Click Cancel on the Document List window pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1050,4 +1055,3 @@ testRunner.And("I Click Cancel on the Document List window pop up", ((string)(nu
 }
 #pragma warning restore
 #endregion
-

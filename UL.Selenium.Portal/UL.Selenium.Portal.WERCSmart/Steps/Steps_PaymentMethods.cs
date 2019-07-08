@@ -119,13 +119,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				string address_one = userDetails.Address1;
 				string address_two = userDetails.Address2;
-				string city = userDetails.City;
-				string state = myAcc.Get_State_Code(userDetails.State);
-				string zip_code = userDetails.Zip;
+				string city_state_zip = userDetails.City + " " + myAcc.Get_State_Code(userDetails.State) + " " + userDetails.Zip;
+				//string state = myAcc.Get_State_Code(userDetails.State);
+				//string zip_code = userDetails.Zip;
 				string country = userDetails.Country;
 				string phone_no = userDetails.CompanyPhone;
 
-				Report.IsTrue(myPay.Confirm_Billing_Address(address_one, address_two, city, state, zip_code, country, phone_no),
+				Report.IsTrue(myPay.Confirm_Billing_Address(address_one, address_two, city_state_zip, country, phone_no),
 					"Billing Address Incorrect", "Confirmed Billing Address");
 
 			}

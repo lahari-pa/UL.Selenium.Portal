@@ -27,7 +27,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I click on the New to WERCSmart Link")]
 		public void GivenIClickOnTheNewToWercsmartLink()
 		{
-			Report.IsTrue(new Login().Click_New_To_WercSmart(), "Failed to click 'New Tt WercSmart' link", "Clicked 'New to WERCSmart' link");
+			Report.IsTrue(new Login().Click_New_To_WercSmart(), "Failed to click 'New Tt WercSmart' link",
+				"Clicked 'New to WERCSmart' link");
 		}
 
 		[StepDefinition(@"From the Language drop down I select (.*)")]
