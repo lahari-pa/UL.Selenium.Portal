@@ -1515,7 +1515,7 @@ testRunner.Then("In the Subscription Enrollment screen I confirm that under the 
                         "Further details"});
             table45.AddRow(new string[] {
                         "Bronze Agent Support Plan",
-                        @"In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform."});
+                        @"Enjoy the benefits of having a dedicated account agent, with technical expertise, to assist with answering questions related to product registrations, holds, re-certifications and updates. On the next screen, you will be able to upgrade to Silver or Gold Agent Support Services for additional data entry, advanced reporting and liaison services."});
 #line 550
 testRunner.Then("In the Subscription Enrollment screen I confirm that under the Standard Plan I se" +
                     "e the following items and further details", ((string)(null)), table45, "Then ");
@@ -1527,7 +1527,7 @@ testRunner.Then("In the Subscription Enrollment screen I confirm that under the 
                         "Link url"});
             table46.AddRow(new string[] {
                         "PurView Sustainability Platform",
-                        @"Enjoy the benefits of having a dedicated account agent, with technical expertise, to assist with answering questions related to product registrations, holds, re-certifications and updates. On the next screen, you will be able to upgrade to Silver or Gold Agent Support Services for additional data entry, advanced reporting and liaison services.",
+                        @"In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.",
                         "Learn More",
                         "https://www.ulpurview.com/"});
 #line 554
@@ -1756,4 +1756,3 @@ testRunner.Then("In the Purchase Summary screen I confirm the following statemen
 }
 #pragma warning restore
 #endregion
-

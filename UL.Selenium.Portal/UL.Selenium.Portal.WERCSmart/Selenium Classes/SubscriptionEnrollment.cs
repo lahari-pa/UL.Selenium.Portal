@@ -642,6 +642,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			Report.Info(featurePlan + " Plan Found - Attempting to Select");
+			GeneralUtilities.ScrollToTopOfPage();
 			myFeature.TryClick();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			Report.Success(featurePlan + " Feature Plan Selected");
