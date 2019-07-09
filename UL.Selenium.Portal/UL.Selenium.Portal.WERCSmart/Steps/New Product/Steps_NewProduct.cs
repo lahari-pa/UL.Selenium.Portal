@@ -7,6 +7,7 @@ using NTTQA.Selenium.UniversalFunctions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -1151,6 +1152,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 			}
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"(.*) (should|should not) be showing the error messages with no special characters: (.*)")]
+		public void ErrorMessagesAreShowingForItemNoSpecialChars(string section, string should, string pipeDelimitedErrorMessages)
+		{
+			Delay.Seconds(1);
+			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			var errorMessages = new NewProduct().GetErrorsForSection(section);
+			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
+			List<string> strippedErrorMessages = new List<string>();
+			foreach (string message in errorMessages)
+			{
+				string temp = this.RemoveSpecialCharacters(message);
+				strippedErrorMessages.Add(temp);
+			}
+			if (should == "should")
+			{
+				foreach (var item in errorMessagesExpected)
+				{
+					Report.IsTrue(strippedErrorMessages.Any(e => e.Contains(this.RemoveSpecialCharacters(item))),
+						"Failed to find the error message: " + item + " under section: " + section + "!",
+						"Successfully found the error message: " + item + " for section: " + section, false, false);
+				}
+			}
+			if (should == "should not")
+			{
+				foreach (var item in errorMessagesExpected)
+				{
+					Report.IsFalse(strippedErrorMessages.Contains(this.RemoveSpecialCharacters(item.Trim())),
+						"The error message: " + item + " was displayed under section" + section + " when it should not be.",
+						"The error message: " + item + " was not displayed under section: " + section + " as expected", false, false);
+				}
+			}
+			Report.Screenshot();
+		}
+
+		public string RemoveSpecialCharacters(string str)
+		{
+			StringBuilder sb = new StringBuilder();
+			foreach (char c in str)
+			{
+				if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
+				{
+					sb.Append(c);
+				}
+			}
+			return sb.ToString();
 		}
 
 		// NB: Multiple values should be delimited by the '|' character!

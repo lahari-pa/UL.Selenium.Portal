@@ -111,6 +111,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return productName.GetValue();
 		}
 
+		public string GetDocumentForSection(string section, string option)
+		{
+			var document = this.containerElement.FindElement(By.XPath(".//div[@class='form-group has-success']//span[contains(text(), '" + section + "')]/../div/span[contains(text(),'" + option + "')]"), 2);
+			if (document == null)
+			{
+				Report.Info("Could not find option " + option + " for section " + section);
+				return "";
+			}
+
+			return document.GetValue();
+		}
+
+		public bool ClickViewForDocument(string section)
+		{
+			var button = this.containerElement.FindElement(By.XPath(".//div[@class='form-group has-success']//span[contains(text(), '" + section + "')]/../div/a[contains(text(),'View')]"), 2);
+			if (button == null)
+			{
+				Report.Info("Could not find View button for section: " + section);
+				return false;
+			}
+
+			return button.TryClick();
+		}
+
 		public List<Ingredients.Ingredient> GetIngredients()
 		{
 			Report.Info("Getting ingredients");
