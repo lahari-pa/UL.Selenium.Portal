@@ -434,17 +434,17 @@ testRunner.Given("I click the Save Changes button", ((string)(null)), ((TechTalk
 #line 159
 testRunner.Given("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Message"});
-            table38.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "NOTE: Your selection does not meet this retailer\'s request. Target requests suppl" +
                             "iers of Cleaning and Health & Beauty products to grant Tier 2.1, Tier 2.2, Tier " +
                             "3, and Tier 4.1 consent. Target will be notified of your Data Tier selections"});
-            table38.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         @"Revising the Data Use Tier consents you have provided to a retailer will suspend your participation in that retailer’s programs. Product data and reports generated while you consent was in effect will remain available to the retailer, but no further product data or reports will be generated."});
 #line 161
 testRunner.Then("the warning message in the Retail Partners details page should contain the follow" +
-                    "ing:", ((string)(null)), table38, "Then ");
+                    "ing:", ((string)(null)), table1, "Then ");
 #line 166
 testRunner.Given("I toggle the data consent tier: Tier 2.1 to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 168
@@ -464,3 +464,4 @@ testRunner.And("I confirm the NOTE message below the Data Consent Tiers Heading 
 }
 #pragma warning restore
 #endregion
+
