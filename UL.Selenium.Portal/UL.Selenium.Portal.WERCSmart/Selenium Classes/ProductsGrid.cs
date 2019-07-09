@@ -21,9 +21,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement ProductTable => this.containerElement.FindElement(By.XPath(".//table[contains(@class, 'products-table')]"), 1);
 
-		private List<IWebElement> ProductRows => this.ProductTable?.FindElements(By.XPath("//tbody/tr"), 1).ToList();
+		private List<IWebElement> ProductRows => this.ProductTable?.FindElements(By.XPath(".//tbody/tr"), 1).ToList();
 
 		private IWebElement ProductsHeading => this.containerElement.FindElement(By.XPath("./h2[contains(@class,'title')]"), 1);
+
+		private List<IWebElement> ProductTableHeadings => this.ProductTable.FindElements(By.XPath(".//th"), 2).ToList();
 
 		#endregion
 
@@ -35,13 +37,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public int ProductsCount()
 		{
-			var productsGrid = this.containerElement.FindElement(By.XPath(".//table"), 2);
-			if (productsGrid == null)
+			var productRows = this.ProductRows;
+			if (productRows == null || !productRows.Any())
 			{
 				return 0;
 			}
-			return productsGrid.FindElements(By.XPath(".//tbody/tr"), 2).Where(x => x.Displayed).ToList().Count;
+			return productRows.Count(x => x.Displayed);
 		}
+
+		public string GetIdInFirstGridRow() => this.ProductRows.FirstOrDefault()?.FindElement(By.XPath(".//small"), 2)?.Text;
 
 		public List<string> GetAllFilters()
 		{
@@ -128,16 +132,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'Bulk Actions')]"), 2).Click();
 		}
 
-		public bool GridHeaderShowing(string header)
-		{
-			var allGridHeaders = this.containerElement.FindElements(By.XPath(".//table//th"), 2);
-			return allGridHeaders.Select(x => x.Text.Trim()).Contains(header);
-		}
-
-		public string GetIdInFirstGridRow()
-		{
-			return this.containerElement.FindElement(By.XPath(".//tbody//tr/td[1]//small"), 2).Text;
-		}
+		public bool GridHeaderShowing(string header) => this.ProductTableHeadings.Select(x => x.Text.Trim()).Contains(header);
 
 		public List<string> AllIDsInGrid()
 		{
@@ -171,15 +166,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var button = this.containerElement.FindElement(By.XPath(".//table//tbody//tr[1]//button[contains(@class,'ellipsis-button')]"), 2);
-				button.Click();
-				return true;
+				var button = this.ProductRows.FirstOrDefault()?.FindElement(By.XPath(".//button[contains(@class,'ellipsis-button')]"), 1);
+				return button.TryClick();
 			}
 			catch (Exception)
 			{
 				return false;
 			}
-
 		}
 
 		public bool ClickActions(int row)
@@ -212,9 +205,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return false;
 			}
-
-			el.TryClick();
-			return true;
+			return el.TryClick();
 		}
 
 		public string GetFirstProductIDNotNeedsAttention()
@@ -362,7 +353,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return ListProductGridItems;
 		}
-
 
 		public ProductGridItem ProductInRow(int row)
 		{

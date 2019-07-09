@@ -62,6 +62,7 @@ Scenario: [84595] Product Name - can contain special characters - & character te
 	Then I save the product information as: TestCase84595
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84595
 
+@TReVorId:22321
 Scenario: [104073] Product Name - can contain special characters - " character testing
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -70,6 +71,7 @@ Scenario: [104073] Product Name - can contain special characters - " character t
 	Then I save the product information as: TestCase104073
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104073
 
+@TReVorId:22322
 Scenario: [104074] Product Name - can contain special characters - ' character testing
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -78,6 +80,7 @@ Scenario: [104074] Product Name - can contain special characters - ' character t
 	Then I save the product information as: TestCase104074
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104074
 
+@TReVorId:22323
 Scenario: [104075] Product Name - can contain special characters - % character testing
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
