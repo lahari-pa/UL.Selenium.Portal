@@ -2555,7 +2555,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			var el = this.containerElement.FindElement(By.XPath(xPath), 10);
 
-
 			if (el == null)
 			{
 				Report.Error("Could not find the correct input in section: " + section);
@@ -2618,7 +2617,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
+				var xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]";
 				var el = this.containerElement.FindElement(By.XPath(xPath), 2);
 				if (el != null)
 				{
