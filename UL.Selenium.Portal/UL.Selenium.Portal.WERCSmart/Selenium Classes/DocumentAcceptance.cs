@@ -176,6 +176,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool CloseDocumentWindow(string option)
+		{
+			Report.Info("Close the document window");
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in handles)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains(option))
+				{
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Close();
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public bool SwitchToMainWindow()
+		{
+			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in handles)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("WercSmart"))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public string DocumentText(string address)
 		{
 			PdfReader reader = new PdfReader(address);
