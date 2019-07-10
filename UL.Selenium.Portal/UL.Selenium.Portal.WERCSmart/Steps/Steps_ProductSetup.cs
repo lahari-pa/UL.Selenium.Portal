@@ -131,8 +131,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.CreateProductUsingTestCase75335(savedAs, "Chalk");
 		}
 
-		[StepDefinition(@"I create a new product of type: Bleach, with a Product Line/ Brand added")]
-		public void CreateProductWithProductLineBrand()
+		[StepDefinition(@"I create a new product of type: Bleach, with a Product Line/ Brand added and select Type of Product: (.*)")]
+		public void CreateProductWithProductLineBrand(string type)
 		{
 			TestReport.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
@@ -149,16 +149,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			TestReport.StartStep(
-				"I set the Product Name as it a appears on the Package Label option to: Brand Product " + testCaseId);
-			newProductSteps.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
-				"Brand Product " + testCaseId);
-			TestReport.StartStep(
 				"In the Product Type tab of the New Product Page, I enter: Bleach in the Type of Product select field");
 			//newProductSteps.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField("Bleach");
 			new Steps_TheProduct().SetProductNameTo("Bleach");
 			TestReport.StartStep(
 				"I select the first option in the 'Product Line or Brand' drop down and save as: Brand" + testCaseId);
 			newProductSteps.SelectFirstOptionInBrandDropDown();
+			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			new Steps_TheProduct().SetTypeOfProductTo(type);
 			TestReport.StartStep("I click Continue");
 			newProductSteps.ClickContinue();
 			TestReport.StartStep("I save the product information as TestCase" + testCaseId);

@@ -105,8 +105,7 @@ Scenario: [56903] Retailer Detail Page - Retailer does not require Supplier ID o
 	#Then I should see message: you may receive your assessment in approximately two (2) business days, if no delays in the assessment, and should no data issues arise. "
 	And Section: Your Supplier IDs should be showing text: This retailer does not support Supplier ID management
 	And I confirm that there is a section labeled: Data Consent Tiers
-And Retail partner details should be showing text: Lowe's requires suppliers of products to grant Tier 1 at this time.
-
+	And Retail partner details should be showing text: Lowe's requires suppliers of products to grant Tier 1 at this time.
 
 @TReVorId:13889
 Scenario: [56907] Retailer Detail Page - Retailer does require Supplier ID but does not require Data Consent Tiers
@@ -124,9 +123,8 @@ Scenario: [56907] Retailer Detail Page - Retailer does require Supplier ID but d
 		| Is Active             |
 		| Is Default            |
 		| Actions               |
-	Given I call Shared Step 56968 (Confirm - Data Consent Tiers not required )
+	And Retail partner details should be showing text: Sears/K-Mart requires suppliers of products to grant Tier 1 at this time.
 	And I confirm that there is a section labeled: Data Consent Tiers
-	And Section: Data Consent Tiers should be showing text: This recipient does not require additional data consent tiers at this time.
 	Given I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) for retailer: Sears/K-Mart
 
 @TReVorId:13893
