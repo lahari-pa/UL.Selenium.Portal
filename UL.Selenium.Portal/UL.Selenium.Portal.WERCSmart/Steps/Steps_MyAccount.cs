@@ -391,11 +391,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					//Add New User
 					Report.IsTrue(selMyUserForm.Add_New_User(userName, title, role, phoneNo, emailAddress, confirmEmail, country),
 						"Failed to Add a New User", "New User Added");
-					Delay.Seconds(5);
+					Delay.Seconds(10);
 					//Check User Has Been Created
 					Report.IsTrue(selMyAccount.User_Added_Check(userName, emailAddress, role), "User Has Not Been Created",
 						"User Created Successfully");
-
 				}
 			}
 			catch (Exception ex)
@@ -924,7 +923,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I update the password for TReVor test user: (.*) in the change user password popup")]
 		public void IUpdateThePasswordForTrevorTestUser(string savedAs)
 		{
-			
+
 			// Get user credentials from TReVor based on saved as ID
 			var user = TestUsers.GetUserSavedAs(savedAs);
 			if (user == null)
