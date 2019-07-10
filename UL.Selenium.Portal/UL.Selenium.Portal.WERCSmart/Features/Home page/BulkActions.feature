@@ -214,7 +214,6 @@ Given I close the window that opened
 Given I navigate to the home page
 
 @ForwardProductRegistration
-@TReVorId:22087
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
 Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
 Given I navigate to the landing page
