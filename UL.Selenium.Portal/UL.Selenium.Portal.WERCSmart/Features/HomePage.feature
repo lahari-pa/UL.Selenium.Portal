@@ -347,7 +347,7 @@ Scenario: [65886] My Products - Pagination
 Scenario: [68388] More Filters - Brand
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I create a new product of type: Bleach, with a Product Line/ Brand added
+	Given I create a new product of type: Bleach, with a Product Line/ Brand added and select Type of Product: Bleach
 	And I should see an option for More Filters
 	Given I click More Filters in the products grid
 	Given I select the More Filters - Brand saved as: Brand68388 by ID
