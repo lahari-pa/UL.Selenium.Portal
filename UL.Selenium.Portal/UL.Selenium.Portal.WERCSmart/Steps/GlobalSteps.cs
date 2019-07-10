@@ -44,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.LoginToAccount("ProductAccount");
 		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account)")]
+		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account)")]
 		public void LoginToWERCSmartAdmin(string type)
 		{
 			switch (type)
@@ -60,6 +60,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				case ("WERCs ULSC Account"):
 					this.LoginToAccount("ULSCAccount");
+					break;
+				case ("NoPLProducts Account"):
+					this.LoginToAccount("NoPLProducts Account");
 					break;
 			}
 		}
@@ -1051,7 +1054,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var users = TestUsers.GetAllUsers();
-			var allUsers = users.Where(x=>x.SoftwareId==GlobalParameters.EditionDetails.SoftwareId && x.BranchName == GlobalParameters.Branch);
+			var allUsers = users.Where(x => x.SoftwareId == GlobalParameters.EditionDetails.SoftwareId && x.BranchName == GlobalParameters.Branch);
 			var usersSavedAs = allUsers.Select(x => x.SavedAs).ToList();
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (var savedAs in usersSavedAs)
@@ -1254,7 +1257,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SwitchToTabWithTitle(string title)
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-            Report.Info("Saving current window to context as MainWindowHandle");
+			Report.Info("Saving current window to context as MainWindowHandle");
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (var handle in allHandles)
@@ -1263,12 +1266,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var currentTitle = SeleniumBrowser.WebBrowser.Title;
 				if (currentTitle == title)
 				{
-                    Report.Success("Tab with title was loaded");
-                    Report.Screenshot();
-                    return;
+					Report.Success("Tab with title was loaded");
+					Report.Screenshot();
+					return;
 				}
 			}
-            throw new Exception("Failed to find window with title: " +title);
+			throw new Exception("Failed to find window with title: " + title);
 		}
 
 
