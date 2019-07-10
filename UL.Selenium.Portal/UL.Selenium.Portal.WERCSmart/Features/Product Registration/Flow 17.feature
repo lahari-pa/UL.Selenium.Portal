@@ -98,8 +98,7 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	And The selected retailers on the Retailer page should be:
 		| Retailer                   |
 		| No Retailer/No UPC Product |
-	Given I click continue
-	Then If the UPCs Warning popup is displayed I click OK
+	Given I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'
 	Given in the Regulatory Documents to Provide page I click Continue
 	Then UN38.3 Testing Results should be showing the error messages with no special characters: The U.S.Department of Transportation, as of January 1, 2020, requires that lithium batteries have testing performed in relation to UN38.3.Please provide the testing document from the successful UN38.3 test performed on this battery.If you do not have a test document to provide, you are unable to submit this registration for assessment and your battery will not be available for selection by other suppliers. Should you have further questions regarding this requirement, please contact the WERCSmart Support team for assistance.Or you may refer to the Solution Center article outlining the regulatory requirement.
 	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
@@ -137,8 +136,7 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	And The selected retailers on the Retailer page should be:
 		| Retailer                   |
 		| No Retailer/No UPC Product |
-	Given I click continue
-	Then If the UPCs Warning popup is displayed I click OK
+	Given I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'
 	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
 	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf

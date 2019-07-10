@@ -167,11 +167,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 	}
 
-	class NoRetailerWarningPopup : BaseObject
+	class NoRetailerWarningPopup : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@class='modal fade in']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		//public const string BasePath = "//div[@class='modal fade in']";
+		//[FindsBy(How = How.XPath, Using = BasePath)]
+		//protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath("//div[@class='modal fade in']");
 
 		public bool ClickOk()
 		{
