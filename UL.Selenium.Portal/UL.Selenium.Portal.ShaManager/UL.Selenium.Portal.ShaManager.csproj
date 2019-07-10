@@ -105,35 +105,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\SHA Manager\Home Page\Suspended.feature.cs">
-      <DependentUpon>Suspended.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Features\SHA Manager\LowerOptions.feature.cs">
-      <DependentUpon>LowerOptions.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Features\SHA Manager\Recertification.feature.cs">
-      <DependentUpon>Recertification.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\SHA Manager\Home Page\Suspended.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Suspended.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\SHA Manager\LowerOptions.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>LowerOptions.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\SHA Manager\Recertification.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Recertification.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
@@ -173,4 +155,9 @@
   </PropertyGroup>
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
+  <Target Name="AfterUpdateFeatureFilesInProject">
+    <ItemGroup>
+      <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
+    </ItemGroup>
+  </Target>
 </Project>

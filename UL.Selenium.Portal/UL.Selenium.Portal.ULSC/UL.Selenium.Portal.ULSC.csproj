@@ -133,26 +133,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Dashboard\Dashboard.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Dashboard.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Dashboard\Services.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Services.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Product creation.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Product creation.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\ULSC.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ULSC.feature</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium Classes\Dashboard.cs" />
     <Compile Include="Selenium Classes\GeneralUtilities.cs" />
@@ -167,19 +147,15 @@
     <None Include=".editorconfig" />
     <None Include="App.config" />
     <None Include="Features\Dashboard\Dashboard.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Dashboard.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Dashboard\Services.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Services.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product creation.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Product creation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ULSC.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ULSC.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
@@ -218,4 +194,9 @@
   </PropertyGroup>
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
+  <Target Name="AfterUpdateFeatureFilesInProject">
+    <ItemGroup>
+      <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
+    </ItemGroup>
+  </Target>
 </Project>
