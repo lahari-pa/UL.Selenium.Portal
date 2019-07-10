@@ -35,7 +35,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CredentialManagement, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+<<<<<<< HEAD
       <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\lib\net452\CredentialManagement.dll</HintPath>
+=======
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.699\lib\net452\CredentialManagement.dll</HintPath>
+>>>>>>> 288ca6f8fce324151677c343e46a0f9e9da6f7de
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.6.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.6.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -71,6 +75,7 @@
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+<<<<<<< HEAD
       <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\lib\net452\NTTQA.Selenium.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -78,6 +83,15 @@
     </Reference>
     <Reference Include="NTTQA.Selenium.TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\lib\net452\NTTQA.Selenium.TReVor.dll</HintPath>
+=======
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.699\lib\net452\NTTQA.Selenium.dll</HintPath>
+    </Reference>
+    <Reference Include="NTTQA.Selenium.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.699\lib\net452\NTTQA.Selenium.Reporting.dll</HintPath>
+    </Reference>
+    <Reference Include="NTTQA.Selenium.TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.699\lib\net452\NTTQA.Selenium.TReVor.dll</HintPath>
+>>>>>>> 288ca6f8fce324151677c343e46a0f9e9da6f7de
     </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
@@ -134,6 +148,7 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+<<<<<<< HEAD
   <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -160,4 +175,24 @@
       <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
     </ItemGroup>
   </Target>
+=======
+  <PropertyGroup>
+    <PostBuildEvent>rem ##### TReVor Post Build Events #####
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.699\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>rem ##### TReVor Pre Build Events #####
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.699\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
+</PreBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.699\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.5.1.699\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
+  </Target>
+  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.1.699\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.699\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
+>>>>>>> 288ca6f8fce324151677c343e46a0f9e9da6f7de
 </Project>
