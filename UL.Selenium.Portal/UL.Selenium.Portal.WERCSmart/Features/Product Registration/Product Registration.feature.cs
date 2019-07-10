@@ -180,26 +180,26 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("For \'Indicate how battery is packaged\' I select: The battery is shipped with but " +
                     "not included in my product.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table544 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run",
                         "Saved As"});
-            table1.AddRow(new string[] {
+            table544.AddRow(new string[] {
                         "Lithium Ion",
                         "<any>",
                         "4",
                         "4",
                         "battery1"});
-            table1.AddRow(new string[] {
+            table544.AddRow(new string[] {
                         "Alkaline",
                         "<any>",
                         "6",
                         "6",
                         "battery2"});
 #line 55
- testRunner.And("I add the following batteries:", ((string)(null)), table1, "And ");
+ testRunner.And("I add the following batteries:", ((string)(null)), table544, "And ");
 #line 59
  testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 60
@@ -241,26 +241,26 @@ this.ScenarioInitialize(scenarioInfo);
 #line 81
  testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table545 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table2.AddRow(new string[] {
+            table545.AddRow(new string[] {
                         "UPCNumber",
                         "630509667031"});
-            table2.AddRow(new string[] {
+            table545.AddRow(new string[] {
                         "ContainerType",
                         "Aerosol Can"});
-            table2.AddRow(new string[] {
+            table545.AddRow(new string[] {
                         "Size",
                         "20"});
-            table2.AddRow(new string[] {
+            table545.AddRow(new string[] {
                         "DPCI",
                         "087-16-0238"});
-            table2.AddRow(new string[] {
+            table545.AddRow(new string[] {
                         "Quantity",
                         ""});
 #line 82
- testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table2, "Then ");
+ testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table545, "Then ");
 #line 89
  testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 90
@@ -276,26 +276,26 @@ this.ScenarioInitialize(scenarioInfo);
 #line 95
  testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table546 = new TechTalk.SpecFlow.Table(new string[] {
                         "BatteryType",
                         "Manufacturer",
                         "NumberPerPackage",
                         "RequiredToRun",
                         "Saved As"});
-            table3.AddRow(new string[] {
+            table546.AddRow(new string[] {
                         "Lithium Ion",
                         "saved as",
                         "4",
                         "4",
                         "battery1"});
-            table3.AddRow(new string[] {
+            table546.AddRow(new string[] {
                         "Alkaline",
                         "saved as",
                         "6",
                         "6",
                         "battery2"});
 #line 96
- testRunner.And("I should see the following batteries present:", ((string)(null)), table3, "And ");
+ testRunner.And("I should see the following batteries present:", ((string)(null)), table546, "And ");
 #line 100
  testRunner.Then("I close the Data Summary tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 101
@@ -349,20 +349,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 123
  testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table547 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table4.AddRow(new string[] {
+            table547.AddRow(new string[] {
                         "Formaldehyde",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 125
- testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table4, "Given ");
+ testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table547, "Given ");
 #line 128
  testRunner.Given("I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -375,26 +375,26 @@ this.ScenarioInitialize(scenarioInfo);
 #line 132
  testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table548 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table5.AddRow(new string[] {
+            table548.AddRow(new string[] {
                         "UPCNumber",
                         "012345678905"});
-            table5.AddRow(new string[] {
+            table548.AddRow(new string[] {
                         "ContainerType",
                         "Aerosol Can"});
-            table5.AddRow(new string[] {
+            table548.AddRow(new string[] {
                         "Size",
                         "20"});
-            table5.AddRow(new string[] {
+            table548.AddRow(new string[] {
                         "DPCI",
                         "087-16-0238"});
-            table5.AddRow(new string[] {
+            table548.AddRow(new string[] {
                         "Quantity",
                         "12"});
 #line 133
- testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table5, "Then ");
+ testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table548, "Then ");
 #line 141
  testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 142
@@ -524,20 +524,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 196
  testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table549 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table6.AddRow(new string[] {
+            table549.AddRow(new string[] {
                         "Formaldehyde",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 198
- testRunner.Then("I add the following ingredients:", ((string)(null)), table6, "Then ");
+ testRunner.Then("I add the following ingredients:", ((string)(null)), table549, "Then ");
 #line 201
  testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 203
@@ -562,23 +562,23 @@ this.ScenarioInitialize(scenarioInfo);
 #line 217
  testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table550 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table7.AddRow(new string[] {
+            table550.AddRow(new string[] {
                         "UPCNumber",
                         "saved as UPC65441"});
-            table7.AddRow(new string[] {
+            table550.AddRow(new string[] {
                         "ContainerType",
                         "Aerosol Can"});
-            table7.AddRow(new string[] {
+            table550.AddRow(new string[] {
                         "Size",
                         "20"});
-            table7.AddRow(new string[] {
+            table550.AddRow(new string[] {
                         "DPCI",
                         "087-16-0238"});
 #line 218
- testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table7, "Then ");
+ testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table550, "Then ");
 #line 224
  testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 226
@@ -639,20 +639,20 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table551 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table8.AddRow(new string[] {
+            table551.AddRow(new string[] {
                         "Formaldehyde",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 250
- testRunner.Then("I add the following ingredients:", ((string)(null)), table8, "Then ");
+ testRunner.Then("I add the following ingredients:", ((string)(null)), table551, "Then ");
 #line 253
  testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 254
@@ -676,14 +676,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 262
  testRunner.And(@"I confirm that I see the following Ecologo statement: Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment. This report will indicate if the product is eligible to be awarded an ECOLOGO Certification, an established symbol of reduced environmental impact. Would you like to receive this assessment?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table552 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table9.AddRow(new string[] {
+            table552.AddRow(new string[] {
                         "Yes"});
-            table9.AddRow(new string[] {
+            table552.AddRow(new string[] {
                         "Not at this time"});
 #line 263
- testRunner.And("I should see the following radio buttons:", ((string)(null)), table9, "And ");
+ testRunner.And("I should see the following radio buttons:", ((string)(null)), table552, "And ");
 #line 267
  testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 268
@@ -772,20 +772,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 313
  testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table553 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table10.AddRow(new string[] {
+            table553.AddRow(new string[] {
                         "Formaldehyde",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 314
- testRunner.Then("I add the following ingredients:", ((string)(null)), table10, "Then ");
+ testRunner.Then("I add the following ingredients:", ((string)(null)), table553, "Then ");
 #line 317
  testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 319
@@ -800,12 +800,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 324
  testRunner.And("I should see the Regulatory Information 3 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table554 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table11.AddRow(new string[] {
+            table554.AddRow(new string[] {
                         "None of the Above"});
 #line 325
- testRunner.And("I set the below options for field: Refer to your Product Label", ((string)(null)), table11, "And ");
+ testRunner.And("I set the below options for field: Refer to your Product Label", ((string)(null)), table554, "And ");
 #line 328
  testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 330
@@ -813,15 +813,15 @@ this.ScenarioInitialize(scenarioInfo);
 #line 331
  testRunner.And("I set the Product is Regulated for Transport option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table555 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table12.AddRow(new string[] {
+            table555.AddRow(new string[] {
                         "DOT"});
-            table12.AddRow(new string[] {
+            table555.AddRow(new string[] {
                         "Shipping with limited quantity"});
 #line 332
  testRunner.And("I set the below options for field: Select all modes of transport that you\'ve clas" +
-                    "sified the product for", ((string)(null)), table12, "And ");
+                    "sified the product for", ((string)(null)), table555, "And ");
 #line 336
  testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 338
@@ -864,20 +864,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 360
  testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table556 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table13.AddRow(new string[] {
+            table556.AddRow(new string[] {
                         "UPCNumber",
                         "saved as UPC67661"});
-            table13.AddRow(new string[] {
+            table556.AddRow(new string[] {
                         "ContainerType",
                         "Glass Container"});
-            table13.AddRow(new string[] {
+            table556.AddRow(new string[] {
                         "Size",
                         "20"});
 #line 361
- testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table13, "Then ");
+ testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table556, "Then ");
 #line 366
  testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 368
@@ -896,14 +896,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 376
  testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table557 = new TechTalk.SpecFlow.Table(new string[] {
                         "Document Name",
                         "Language"});
-            table14.AddRow(new string[] {
+            table557.AddRow(new string[] {
                         "Canada GHS SDS",
                         "English (U.S)"});
 #line 377
- testRunner.And("I purchase the following additional documents:", ((string)(null)), table14, "And ");
+ testRunner.And("I purchase the following additional documents:", ((string)(null)), table557, "And ");
 #line 380
  testRunner.Then("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 382
@@ -921,12 +921,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 389
  testRunner.And("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table558 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table15.AddRow(new string[] {
+            table558.AddRow(new string[] {
                         "Mask"});
 #line 390
- testRunner.And("I set the below options for field: Personal Protection Equipment Recommended", ((string)(null)), table15, "And ");
+ testRunner.And("I set the below options for field: Personal Protection Equipment Recommended", ((string)(null)), table558, "And ");
 #line 393
  testRunner.And("I set the Autoignition Temperature (°C) field to: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 394
@@ -946,14 +946,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 402
  testRunner.Then("I click the page heading: Optional Reports and Documents Available for Purchase", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table559 = new TechTalk.SpecFlow.Table(new string[] {
                         "Document Name",
                         "Language"});
-            table16.AddRow(new string[] {
+            table559.AddRow(new string[] {
                         "Canada GHS SDS",
                         "English (U.S)"});
 #line 403
- testRunner.And("the following additional documents should be showing as selected:", ((string)(null)), table16, "And ");
+ testRunner.And("the following additional documents should be showing as selected:", ((string)(null)), table559, "And ");
 #line 407
  testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 408
@@ -965,4 +965,3 @@ this.ScenarioInitialize(scenarioInfo);
 }
 #pragma warning restore
 #endregion
-

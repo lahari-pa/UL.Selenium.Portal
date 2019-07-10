@@ -129,25 +129,25 @@ testRunner.Given("I click the Export button", ((string)(null)), ((TechTalk.SpecF
 testRunner.Given("I confirm an excel file is downloaded then close the Report Download popup. I sav" +
                     "e the file as excel72582", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table172 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table1.AddRow(new string[] {
+            table172.AddRow(new string[] {
                         "WPSID"});
-            table1.AddRow(new string[] {
+            table172.AddRow(new string[] {
                         "Product Name"});
-            table1.AddRow(new string[] {
+            table172.AddRow(new string[] {
                         "Type of Alert"});
-            table1.AddRow(new string[] {
+            table172.AddRow(new string[] {
                         "Alert Date"});
-            table1.AddRow(new string[] {
+            table172.AddRow(new string[] {
                         "Subject"});
-            table1.AddRow(new string[] {
+            table172.AddRow(new string[] {
                         "Details"});
-            table1.AddRow(new string[] {
+            table172.AddRow(new string[] {
                         "Status"});
 #line 37
 testRunner.Then("I confirm that the exported excel file saved as: excel72582 contains the followin" +
-                    "g columns:", ((string)(null)), table1, "Then ");
+                    "g columns:", ((string)(null)), table172, "Then ");
 #line 47
 testRunner.Then("I confirm that the text: Active is displayed exclusively under the Status column " +
                     "for file saved as excel72582", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -189,25 +189,25 @@ testRunner.Given("I click the Export button", ((string)(null)), ((TechTalk.SpecF
 testRunner.Given("I confirm an excel file is downloaded then close the Report Download popup. I sav" +
                     "e the file as excel72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table173 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table2.AddRow(new string[] {
+            table173.AddRow(new string[] {
                         "WPSID"});
-            table2.AddRow(new string[] {
+            table173.AddRow(new string[] {
                         "Product Name"});
-            table2.AddRow(new string[] {
+            table173.AddRow(new string[] {
                         "Type of Alert"});
-            table2.AddRow(new string[] {
+            table173.AddRow(new string[] {
                         "Alert Date"});
-            table2.AddRow(new string[] {
+            table173.AddRow(new string[] {
                         "Subject"});
-            table2.AddRow(new string[] {
+            table173.AddRow(new string[] {
                         "Details"});
-            table2.AddRow(new string[] {
+            table173.AddRow(new string[] {
                         "Status"});
 #line 75
 testRunner.Then("I confirm that the exported excel file saved as: excel72586 contains the followin" +
-                    "g columns:", ((string)(null)), table2, "Then ");
+                    "g columns:", ((string)(null)), table173, "Then ");
 #line 85
 testRunner.Then("I confirm that the text: Archived is displayed under the Status column for file s" +
                     "aved as excel72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -220,4 +220,3 @@ testRunner.And("I delete the excel file saved as excel72586", ((string)(null)), 
 }
 #pragma warning restore
 #endregion
-

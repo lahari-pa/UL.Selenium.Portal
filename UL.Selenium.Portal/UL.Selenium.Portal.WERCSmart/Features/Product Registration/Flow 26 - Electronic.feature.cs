@@ -124,18 +124,18 @@ testRunner.Given("I call Shared Step 60935 Additional Product Information - US -
 #line 37
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table254 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run"});
-            table1.AddRow(new string[] {
+            table254.AddRow(new string[] {
                         "Alkaline",
                         "<any>",
                         "6",
                         "6"});
 #line 43
-testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table1, "Given ");
+testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table254, "Given ");
 #line 47
 testRunner.Given("I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - sele" +
                     "ct No to all - Click Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -161,4 +161,3 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 }
 #pragma warning restore
 #endregion
-

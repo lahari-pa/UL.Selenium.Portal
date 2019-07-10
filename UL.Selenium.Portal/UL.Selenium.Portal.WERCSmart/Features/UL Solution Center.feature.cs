@@ -150,24 +150,24 @@ this.ScenarioInitialize(scenarioInfo);
 #line 35
  testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table796 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sections"});
-            table1.AddRow(new string[] {
+            table796.AddRow(new string[] {
                         "ECOLOGO"});
-            table1.AddRow(new string[] {
+            table796.AddRow(new string[] {
                         "Prospector"});
-            table1.AddRow(new string[] {
+            table796.AddRow(new string[] {
                         "GoodGuide for Consumers"});
-            table1.AddRow(new string[] {
+            table796.AddRow(new string[] {
                         "GoodGuide for Suppliers"});
-            table1.AddRow(new string[] {
+            table796.AddRow(new string[] {
                         "UL Secure Connect (ULSC)"});
-            table1.AddRow(new string[] {
+            table796.AddRow(new string[] {
                         "ULGHS"});
-            table1.AddRow(new string[] {
+            table796.AddRow(new string[] {
                         "Navigator"});
 #line 36
- testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table1, "Then ");
+ testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table796, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -416,4 +416,3 @@ this.ScenarioInitialize(scenarioInfo);
 }
 #pragma warning restore
 #endregion
-

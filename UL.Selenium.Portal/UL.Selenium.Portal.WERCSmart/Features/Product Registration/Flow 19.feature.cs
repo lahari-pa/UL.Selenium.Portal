@@ -94,4 +94,3 @@ namespace UL.Selenium.Portal.WERCSmart.Features.ProductRegistration
 }
 #pragma warning restore
 #endregion
-

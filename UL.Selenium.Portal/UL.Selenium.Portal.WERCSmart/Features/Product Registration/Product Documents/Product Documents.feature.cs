@@ -172,7 +172,7 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table539 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -181,7 +181,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table1.AddRow(new string[] {
+            table539.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -193,7 +193,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 #line 53
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table1, "And ");
+                    "g:", ((string)(null)), table539, "And ");
 #line 56
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 57
@@ -233,17 +233,17 @@ testRunner.And("I call Shared Step 26897 (Product Characteristics - Solid only a
 testRunner.And("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table540 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage"});
-            table2.AddRow(new string[] {
+            table540.AddRow(new string[] {
                         "FRAGRANCE",
                         "Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2",
                         "100"});
 #line 70
 testRunner.And("I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclos" +
-                    "ed = Yes,  Select Public Name) and save ingredient as: shared79436", ((string)(null)), table2, "And ");
+                    "ed = Yes,  Select Public Name) and save ingredient as: shared79436", ((string)(null)), table540, "And ");
 #line 73
 testRunner.Given("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 74
@@ -275,7 +275,7 @@ testRunner.Then("in the Additional Documents to Provide page I click Continue", 
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table541 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -284,7 +284,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table3.AddRow(new string[] {
+            table541.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -296,7 +296,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 #line 84
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table3, "And ");
+                    "g:", ((string)(null)), table541, "And ");
 #line 87
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 88
@@ -336,17 +336,17 @@ testRunner.And("I call Shared Step 26897 (Product Characteristics - Solid only a
 testRunner.And("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table542 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage"});
-            table4.AddRow(new string[] {
+            table542.AddRow(new string[] {
                         "FLAVOR",
                         "FLAVOR",
                         "100"});
 #line 100
 testRunner.Given("I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed " +
-                    "= Yes, Select Public Name) and save ingredients as: shared79431", ((string)(null)), table4, "Given ");
+                    "= Yes, Select Public Name) and save ingredients as: shared79431", ((string)(null)), table542, "Given ");
 #line 103
 testRunner.Given("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 104
@@ -375,7 +375,7 @@ testRunner.Then("in the Additional Documents to Provide page I click Continue", 
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table543 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -384,7 +384,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table5.AddRow(new string[] {
+            table543.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -396,7 +396,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 #line 113
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table5, "And ");
+                    "g:", ((string)(null)), table543, "And ");
 #line 116
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 117
@@ -412,4 +412,3 @@ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid
 }
 #pragma warning restore
 #endregion
-

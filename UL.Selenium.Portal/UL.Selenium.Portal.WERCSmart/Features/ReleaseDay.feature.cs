@@ -225,13 +225,13 @@ testRunner.And("I Confirm the Product shows status: Completed for retailer: save
 testRunner.And("I Confirm the Product shows status: Accepted for retailer: saved as TestCase75321" +
                     "Retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table706 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table1.AddRow(new string[] {
+            table706.AddRow(new string[] {
                         "saved as TestCase75321Retailer"});
 #line 87
 testRunner.Given("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
-                    " saved as: TestCase75321) for", ((string)(null)), table1, "Given ");
+                    " saved as: TestCase75321) for", ((string)(null)), table706, "Given ");
 #line 90
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase75321)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -247,4 +247,3 @@ testRunner.And("I Confirm the Product shows status: Completed for retailer: save
 }
 #pragma warning restore
 #endregion
-

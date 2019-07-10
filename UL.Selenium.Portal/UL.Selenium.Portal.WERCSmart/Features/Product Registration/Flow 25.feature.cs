@@ -127,18 +127,18 @@ testRunner.Then("I should see battery manufacturer message: Important: Prior to 
                     "attery-containing product, the battery manufacturer must first register the cont" +
                     "ained battery.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table252 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run"});
-            table1.AddRow(new string[] {
+            table252.AddRow(new string[] {
                         "Alkaline",
                         "<any>",
                         "6",
                         "6"});
 #line 38
-testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table1, "Given ");
+testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table252, "Given ");
 #line 42
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 44
@@ -200,18 +200,18 @@ testRunner.Given("I call Shared Step 70393 (Additional Product Information - Wit
 #line 79
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table253 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run"});
-            table2.AddRow(new string[] {
+            table253.AddRow(new string[] {
                         "Alkaline",
                         "<any>",
                         "6",
                         "6"});
 #line 81
-testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table2, "Given ");
+testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table253, "Given ");
 #line 85
 testRunner.Given("I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No" +
                     " to ALL With Copper)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -242,4 +242,3 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 }
 #pragma warning restore
 #endregion
-

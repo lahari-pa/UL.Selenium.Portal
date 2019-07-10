@@ -151,7 +151,7 @@ testRunner.Given("in the Additional Documents to Provide page I click Continue",
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table257 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -160,7 +160,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table1.AddRow(new string[] {
+            table257.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -172,7 +172,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 #line 56
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table1, "Given ");
+                    "g:", ((string)(null)), table257, "Given ");
 #line 60
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 74992. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
@@ -242,19 +242,19 @@ testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Rando
 testRunner.Given("I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Ha" +
                     "ppy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table258 = new TechTalk.SpecFlow.Table(new string[] {
                         "Product granted Alternative Control Plan",
                         "Amount of VOC by CARB",
                         "Amount of VOC by OTC Model",
                         "VOC for states"});
-            table2.AddRow(new string[] {
+            table258.AddRow(new string[] {
                         "No",
                         "2",
                         "2",
                         "Yes"});
 #line 107
 testRunner.Given("I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CA" +
-                    "RB - Yes for state values)", ((string)(null)), table2, "Given ");
+                    "RB - Yes for state values)", ((string)(null)), table258, "Given ");
 #line 111
 testRunner.Given("I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is" +
                     " shown - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -299,7 +299,7 @@ testRunner.Then("I should see the Optional Reports and Documents Available for P
 #line 143
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table259 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -308,7 +308,7 @@ testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table3.AddRow(new string[] {
+            table259.AddRow(new string[] {
                         "Gloves",
                         "120",
                         "4",
@@ -320,7 +320,7 @@ testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table
 #line 145
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table3, "Given ");
+                    "g:", ((string)(null)), table259, "Given ");
 #line 149
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 74992. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
@@ -354,4 +354,3 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
 }
 #pragma warning restore
 #endregion
-

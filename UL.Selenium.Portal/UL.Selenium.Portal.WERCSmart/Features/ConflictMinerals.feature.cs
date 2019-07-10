@@ -127,44 +127,44 @@ testRunner.Given("in the Conflict Minerals page I click on Next", ((string)(null
 #line 31
 testRunner.Then("in the Conflict Minerals page the Create Company Account form should have loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "Company Name",
                         "This test company"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "Address",
                         "Address first"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "Address 2",
                         "Address second"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "Address 3",
                         "Address third"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "City",
                         "City name"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "State",
                         "Kansas"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "Postal Code",
                         "66506"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "Country",
                         "United States"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "Phone Number",
                         "785-532-6412"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "Emergency Phone Number",
                         "785-532-6412"});
-            table1.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "Fax",
                         "785-532-7408"});
 #line 32
-testRunner.Given("in the Conflict Minerals page I create enter Company Details as follows:", ((string)(null)), table1, "Given ");
+testRunner.Given("in the Conflict Minerals page I create enter Company Details as follows:", ((string)(null)), table45, "Given ");
 #line 45
 testRunner.Given("in the Conflict Minerals page I click on Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 46
@@ -173,41 +173,41 @@ testRunner.Then("in the Conflict Minerals page the Company Contact Person form s
 testRunner.Then("in the Conflict Minerals page the Company Contact Person form email value is: sav" +
                     "ed as Myemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table2.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "Contact",
                         "Jane Richardson"});
-            table2.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "Phone Number",
                         "785-532-6413"});
-            table2.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "Additional Emails",
                         "richardSmith@smith.com"});
-            table2.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "Password",
                         "Welcome1!"});
-            table2.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "City",
                         "London"});
-            table2.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "Model",
                         "Fiat Uno"});
-            table2.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "Sport",
                         "Basketball"});
-            table2.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "Food",
                         "Profiteroles"});
-            table2.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "Vacation",
                         "New Zealand"});
-            table2.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "IdentityPassword",
                         "Welcome1!"});
 #line 48
-testRunner.Given("in the Conflict Minerals page I create enter Company Contact Person as follows:", ((string)(null)), table2, "Given ");
+testRunner.Given("in the Conflict Minerals page I create enter Company Contact Person as follows:", ((string)(null)), table46, "Given ");
 #line 60
 testRunner.Given("in the Conflict Minerals page I click on Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 61
@@ -261,4 +261,3 @@ testRunner.Then("in the Conflict Minerals I confirm I see my email address in th
 }
 #pragma warning restore
 #endregion
-

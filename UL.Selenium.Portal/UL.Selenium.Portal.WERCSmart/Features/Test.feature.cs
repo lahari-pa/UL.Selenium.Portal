@@ -98,118 +98,118 @@ this.ScenarioInitialize(scenarioInfo);
 #line 15
 testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table790 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "Email",
                         "User_<random>"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "Country",
                         "UNITED STATES"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "FirstName",
                         "Richard"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "LastName",
                         "Smith"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "Password",
                         "Pa4*ytuufnn"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "Address1",
                         "Address 1"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "Address2",
                         "Address 2"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "City",
                         "City Name"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "State",
                         "Florida"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "Zip",
                         "999"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "CompanyName",
                         "Company 1"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "CompanyPhone",
                         "123-456-7889"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "EmergencyPhoneNumber",
                         "123-456-7789"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "SupplierType",
                         "Manufacturer"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "PhoneQuestion",
                         "PhoneQuestion"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "PhoneHint",
                         "PhoneHint"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "MentorQuestion",
                         "MentorQuestion"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "MentorHint",
                         "MentorHint"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "FriendQuestion",
                         "FriendQuestion"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "FriendHint",
                         "FriendHint"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "AnimalQuestion",
                         "AnimalQuestion"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "AnimalHint",
                         "AnimalHint"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "CollegeQuestion",
                         "CollegeQuestion"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "CollegeHint",
                         "CollegeHint"});
-            table1.AddRow(new string[] {
+            table790.AddRow(new string[] {
                         "Pin",
                         "1234"});
 #line 16
-testRunner.Given("If not already created, I create a user: New_Sub with the following parameters:", ((string)(null)), table1, "Given ");
+testRunner.Given("If not already created, I create a user: New_Sub with the following parameters:", ((string)(null)), table790, "Given ");
 #line 43
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 44
 testRunner.Then("I click on NEW SUBSCRIPTION", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table791 = new TechTalk.SpecFlow.Table(new string[] {
                         "Articles",
                         "Enhanced Articles",
                         "Formulated Products",
                         "Feature Plan",
                         "Support Services Plan"});
-            table2.AddRow(new string[] {
+            table791.AddRow(new string[] {
                         "Up to 5 Product(s)",
                         "Up to 5 Product(s)",
                         "Up to 5 Product(s)",
                         "Standard",
                         "Silver"});
 #line 45
-testRunner.Then("In the Subscription Enrollment screen I select the following enrollment options", ((string)(null)), table2, "Then ");
+testRunner.Then("In the Subscription Enrollment screen I select the following enrollment options", ((string)(null)), table791, "Then ");
 #line 48
 testRunner.Then("I click on Checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 49
 testRunner.Then("In the Payment Methods screen I select Payment Method: Credit Card", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table792 = new TechTalk.SpecFlow.Table(new string[] {
                         "Card Type",
                         "Card Number",
                         "Expiration Month",
                         "Expiration Year",
                         "CVV",
                         "Cardholder Name"});
-            table3.AddRow(new string[] {
+            table792.AddRow(new string[] {
                         "Visa",
                         "4111 1111 1111 1111",
                         "08",
@@ -217,7 +217,7 @@ testRunner.Then("In the Payment Methods screen I select Payment Method: Credit C
                         "1111",
                         "test"});
 #line 50
-testRunner.Then("In the Payment Methods screen I enter Credit Card details", ((string)(null)), table3, "Then ");
+testRunner.Then("In the Payment Methods screen I enter Credit Card details", ((string)(null)), table792, "Then ");
 #line 53
 testRunner.Then("In the Payment Methods screen I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 55
@@ -262,31 +262,31 @@ testRunner.Then("In the Subscription Upgrade screen I confirm the Estimated Annu
 testRunner.Then("In the Subscription Upgrade screen I confirm the Estimated Annual Cost per Produc" +
                     "t changes when Enhanced Articles are changed to Up to 75 Product(s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table793 = new TechTalk.SpecFlow.Table(new string[] {
                         "Articles",
                         "Enhanced Articles",
                         "Formulated Products",
                         "Feature Plan",
                         "Support Services Plan"});
-            table4.AddRow(new string[] {
+            table793.AddRow(new string[] {
                         "Up to 15 Product(s)",
                         "Up to 15 Product(s)",
                         "Up to 15 Product(s)",
                         "Premium",
                         "Gold"});
 #line 72
-testRunner.Then("In the Subscription Upgrade screen I select the following enrollment options", ((string)(null)), table4, "Then ");
+testRunner.Then("In the Subscription Upgrade screen I select the following enrollment options", ((string)(null)), table793, "Then ");
 #line 75
 testRunner.Then("In the Subscription popup I confirm the Subscription Upgrade header exists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table794 = new TechTalk.SpecFlow.Table(new string[] {
                         "Articles",
                         "Enhanced Articles",
                         "Formulated Products",
                         "Feature Plan",
                         "Support Services Plan",
                         "Body Text"});
-            table5.AddRow(new string[] {
+            table794.AddRow(new string[] {
                         "Up to 15 Product(s)",
                         "Up to 15 Product(s)",
                         "Up to 15 Product(s)",
@@ -295,7 +295,7 @@ testRunner.Then("In the Subscription popup I confirm the Subscription Upgrade he
                         "Your new purchase will be prorated based on the credit and time left in your curr" +
                             "ent subscription. Checkout to see the final amount."});
 #line 76
-testRunner.And("I confirm the chosen options and body text are correct", ((string)(null)), table5, "And ");
+testRunner.And("I confirm the chosen options and body text are correct", ((string)(null)), table794, "And ");
 #line 79
 testRunner.Then("I click on Checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 80
@@ -331,21 +331,21 @@ testRunner.Then("In the My Account screen I navigate to the Subscription Informa
 testRunner.Then("In the Subscription Information screen I confirm the Status has the correct infor" +
                     "mation: 15 Formulated, 15 Articles, 15 Enhanced Articles", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table795 = new TechTalk.SpecFlow.Table(new string[] {
                         "Subscription Level Status",
                         "Quantity"});
-            table6.AddRow(new string[] {
+            table795.AddRow(new string[] {
                         "Premium Gold Formulated",
                         "15"});
-            table6.AddRow(new string[] {
+            table795.AddRow(new string[] {
                         "Premium Gold Articles",
                         "15"});
-            table6.AddRow(new string[] {
+            table795.AddRow(new string[] {
                         "Premium Gold Enhanced Articles",
                         "15"});
 #line 97
 testRunner.Then("In the Subscription Information screen I confirm the Subscription History table h" +
-                    "as the correct information", ((string)(null)), table6, "Then ");
+                    "as the correct information", ((string)(null)), table795, "Then ");
 #line 102
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 103
@@ -362,4 +362,3 @@ testRunner.Then("In the Order History screen I get the Invoice Number and Date a
 }
 #pragma warning restore
 #endregion
-

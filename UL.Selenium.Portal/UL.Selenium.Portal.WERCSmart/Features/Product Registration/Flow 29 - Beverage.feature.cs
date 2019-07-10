@@ -193,12 +193,12 @@ testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not P
 #line 82
 testRunner.Given("I call Shared Step 49818 (Beverage Regulatory Details)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table255 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table1.AddRow(new string[] {
+            table255.AddRow(new string[] {
                         "Autozone"});
 #line 84
-testRunner.Then("In the \'Select retailers\' window I should not see the following retailers:", ((string)(null)), table1, "Then ");
+testRunner.Then("In the \'Select retailers\' window I should not see the following retailers:", ((string)(null)), table255, "Then ");
 #line 88
 testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
                     "appy Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -270,14 +270,14 @@ testRunner.Given("I call Shared Step 71618 (U. S. Department of Transportation (
 #line 132
 testRunner.Then("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table256 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table2.AddRow(new string[] {
+            table256.AddRow(new string[] {
                         "Walgreens"});
-            table2.AddRow(new string[] {
+            table256.AddRow(new string[] {
                         "No Retailer/No UPC Product"});
 #line 134
-testRunner.Then("In the \'Select retailers\' window I should only see the following retailers:", ((string)(null)), table2, "Then ");
+testRunner.Then("In the \'Select retailers\' window I should only see the following retailers:", ((string)(null)), table256, "Then ");
 #line 139
 testRunner.Given("I click Close in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 143
@@ -290,4 +290,3 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 }
 #pragma warning restore
 #endregion
-

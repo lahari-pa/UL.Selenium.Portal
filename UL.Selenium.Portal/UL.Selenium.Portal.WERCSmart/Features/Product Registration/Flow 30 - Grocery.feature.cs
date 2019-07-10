@@ -409,18 +409,18 @@ testRunner.Given("I call Shared Step 60726 (Additional Product Information - Cou
 #line 229
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table260 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table1.AddRow(new string[] {
+            table260.AddRow(new string[] {
                         "No Retailer/No UPC Product"});
-            table1.AddRow(new string[] {
+            table260.AddRow(new string[] {
                         "Optoro"});
-            table1.AddRow(new string[] {
+            table260.AddRow(new string[] {
                         "Publix"});
-            table1.AddRow(new string[] {
+            table260.AddRow(new string[] {
                         "Walgreens"});
 #line 231
-testRunner.Then("In the \'Select retailers\' window I should see the following retailers:", ((string)(null)), table1, "Then ");
+testRunner.Then("In the \'Select retailers\' window I should see the following retailers:", ((string)(null)), table260, "Then ");
 #line 238
 testRunner.Given("I click Done in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 240
@@ -434,4 +434,3 @@ testRunner.Then("I delete the product: TestCase73041", ((string)(null)), ((TechT
 }
 #pragma warning restore
 #endregion
-

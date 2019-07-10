@@ -191,20 +191,20 @@ testRunner.And("The ingredients error message should be showing: ALERT! The ingr
                     " not include a compressed gas (Bag-On-Valve) or a propellant. Please update your" +
                     " ingredients to include the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table263 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table1.AddRow(new string[] {
+            table263.AddRow(new string[] {
                         "Butane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 72
-testRunner.Then("I add the following ingredients:", ((string)(null)), table1, "Then ");
+testRunner.Then("I add the following ingredients:", ((string)(null)), table263, "Then ");
 #line 75
 testRunner.And("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 77
@@ -215,15 +215,15 @@ testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)
 #line 81
 testRunner.And("I set the Product is Regulated for Transport option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table264 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table2.AddRow(new string[] {
+            table264.AddRow(new string[] {
                         "IMDG"});
-            table2.AddRow(new string[] {
+            table264.AddRow(new string[] {
                         "Shipping fully regulated"});
 #line 82
 testRunner.And("I set the below options for field: Select all modes of transport that you\'ve clas" +
-                    "sified the product for", ((string)(null)), table2, "And ");
+                    "sified the product for", ((string)(null)), table264, "And ");
 #line 86
 testRunner.And("in the Transportation Details 1 page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 89
@@ -249,20 +249,20 @@ testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(n
 #line 101
 testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table265 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table3.AddRow(new string[] {
+            table265.AddRow(new string[] {
                         "UPCNumber",
                         "saved as UPC60774"});
-            table3.AddRow(new string[] {
+            table265.AddRow(new string[] {
                         "ContainerType",
                         "Aerosol Can"});
-            table3.AddRow(new string[] {
+            table265.AddRow(new string[] {
                         "Size",
                         "20"});
 #line 102
-testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table3, "Then ");
+testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table265, "Then ");
 #line 107
 testRunner.And("in the Universal Product Code (UPC) page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 110
@@ -330,20 +330,20 @@ testRunner.Given("I call Shared Step 60779 (Enter Liquid - Cooking Oil - Non-Aer
 testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
                     "ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table266 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table4.AddRow(new string[] {
+            table266.AddRow(new string[] {
                         "Butane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 155
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table4, "Given ");
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table266, "Given ");
 #line 161
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 163
@@ -395,4 +395,3 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 }
 #pragma warning restore
 #endregion
-

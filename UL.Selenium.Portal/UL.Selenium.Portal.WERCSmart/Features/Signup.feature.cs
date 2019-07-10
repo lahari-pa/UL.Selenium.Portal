@@ -116,86 +116,86 @@ this.ScenarioInitialize(scenarioInfo);
 #line 16
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table716 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "Email",
                         "User_<random>"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "Country",
                         "UNITED STATES"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "FirstName",
                         "Richard"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "LastName",
                         "Smith"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "Password",
                         "Pa4*ytuufnn"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "Address1",
                         "Address 1"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "Address2",
                         "Address 2"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "City",
                         "City Name"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "State",
                         "Florida"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "Zip",
                         "999"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "CompanyName",
                         "Wercs QA Automated test"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "CompanyPhone",
                         "123-456-7889"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "EmergencyPhoneNumber",
                         "123-456-7789"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "SupplierType",
                         "Manufacturer"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "PhoneQuestion",
                         "PhoneQuestion"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "PhoneHint",
                         "PhoneHint"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "MentorQuestion",
                         "MentorQuestion"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "MentorHint",
                         "MentorHint"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "FriendQuestion",
                         "FriendQuestion"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "FriendHint",
                         "FriendHint"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "AnimalQuestion",
                         "AnimalQuestion"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "AnimalHint",
                         "AnimalHint"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "CollegeQuestion",
                         "CollegeQuestion"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "CollegeHint",
                         "CollegeHint"});
-            table1.AddRow(new string[] {
+            table716.AddRow(new string[] {
                         "Pin",
                         "1234"});
 #line 21
- testRunner.Given("I define the user: SignupUser with the following parameters:", ((string)(null)), table1, "Given ");
+ testRunner.Given("I define the user: SignupUser with the following parameters:", ((string)(null)), table716, "Given ");
 #line 48
  testRunner.Given("I save the current emails in the inbox for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 49
@@ -263,19 +263,19 @@ this.FeatureBackground();
 #line 75
  testRunner.And("I click on submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table717 = new TechTalk.SpecFlow.Table(new string[] {
                         "Error text"});
-            table2.AddRow(new string[] {
+            table717.AddRow(new string[] {
                         "This is a required field."});
 #line 76
- testRunner.Then("Under the Enter Email text box the following errors should appear", ((string)(null)), table2, "Then ");
+ testRunner.Then("Under the Enter Email text box the following errors should appear", ((string)(null)), table717, "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table718 = new TechTalk.SpecFlow.Table(new string[] {
                         "Error text"});
-            table3.AddRow(new string[] {
+            table718.AddRow(new string[] {
                         "This is a required field."});
 #line 79
- testRunner.Then("Under the Confirm Email text box the following errors should appear", ((string)(null)), table3, "Then ");
+ testRunner.Then("Under the Confirm Email text box the following errors should appear", ((string)(null)), table718, "Then ");
 #line 82
  testRunner.Given("I enter signup email: AnyOldUser@fake.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 83
@@ -283,12 +283,12 @@ this.FeatureBackground();
 #line 84
  testRunner.And("I click on submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table719 = new TechTalk.SpecFlow.Table(new string[] {
                         "Error text"});
-            table4.AddRow(new string[] {
+            table719.AddRow(new string[] {
                         "Email and confirm email fields do not match"});
 #line 85
- testRunner.Then("Under the Enter Email text box the following errors should appear", ((string)(null)), table4, "Then ");
+ testRunner.Then("Under the Enter Email text box the following errors should appear", ((string)(null)), table719, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -336,86 +336,86 @@ this.ScenarioInitialize(scenarioInfo);
 #line 16
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table720 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "Email",
                         "User_<random>"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "Country",
                         "UNITED STATES"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "FirstName",
                         "Richard"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "LastName",
                         "Smith"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "Password",
                         "Pa4*ytuufnn"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "Address1",
                         "Address 1"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "Address2",
                         "Address 2"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "City",
                         "City Name"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "State",
                         "Florida"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "Zip",
                         "999"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "CompanyName",
                         "Company 1"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "CompanyPhone",
                         "123-456-4789"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "EmergencyPhoneNumber",
                         "123-456-4789"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "SupplierType",
                         "Manufacturer"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "PhoneQuestion",
                         "PhoneQuestion"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "PhoneHint",
                         "PhoneHint"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "MentorQuestion",
                         "MentorQuestion"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "MentorHint",
                         "MentorHint"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "FriendQuestion",
                         "FriendQuestion"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "FriendHint",
                         "FriendHint"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "AnimalQuestion",
                         "AnimalQuestion"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "AnimalHint",
                         "AnimalHint"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "CollegeQuestion",
                         "CollegeQuestion"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "CollegeHint",
                         "CollegeHint"});
-            table5.AddRow(new string[] {
+            table720.AddRow(new string[] {
                         "Pin",
                         "abcd"});
 #line 102
- testRunner.Given("I define the user: SignupUser2 with the following parameters:", ((string)(null)), table5, "Given ");
+ testRunner.Given("I define the user: SignupUser2 with the following parameters:", ((string)(null)), table720, "Given ");
 #line 129
  testRunner.Given("I save the current emails in the inbox for user saved as: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 130
@@ -522,4 +522,3 @@ this.FeatureBackground();
 }
 #pragma warning restore
 #endregion
-

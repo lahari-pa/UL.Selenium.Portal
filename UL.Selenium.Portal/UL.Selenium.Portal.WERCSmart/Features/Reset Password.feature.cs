@@ -96,12 +96,12 @@ namespace UL.Selenium.Portal.WERCSmart.Features
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table707 = new TechTalk.SpecFlow.Table(new string[] {
                         "User"});
-            table1.AddRow(new string[] {
+            table707.AddRow(new string[] {
                         "ProductAccount"});
 #line 15
-testRunner.Given("I update the password for the following TReVor test users:", ((string)(null)), table1, "Given ");
+testRunner.Given("I update the password for the following TReVor test users:", ((string)(null)), table707, "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -127,4 +127,3 @@ testRunner.Given("I update the password for all TReVor Test Users within the cur
 }
 #pragma warning restore
 #endregion
-

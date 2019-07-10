@@ -99,84 +99,84 @@ testRunner.Given("I save the current emails in the inbox for address saved as: A
 #line 14
 testRunner.And("I click the Next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table797 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "Company Name",
                         "This test company"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "Address",
                         "Address first"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "Address 2",
                         "Address second"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "Address 3",
                         "Address third"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "City",
                         "City name"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "State",
                         "Kansas"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "Postal Code",
                         "66506"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "Country",
                         "United States"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "Phone Number",
                         "785-532-6412"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "Emergency Phone Number",
                         "785-532-6412"});
-            table1.AddRow(new string[] {
+            table797.AddRow(new string[] {
                         "Fax",
                         "785-532-7408"});
 #line 15
-testRunner.Given("I create an account with the following parameters:", ((string)(null)), table1, "Given ");
+testRunner.Given("I create an account with the following parameters:", ((string)(null)), table797, "Given ");
 #line 28
 testRunner.And("I click the Next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
 testRunner.And("The contact person page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table798 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table2.AddRow(new string[] {
+            table798.AddRow(new string[] {
                         "Contact",
                         "Jane Richardson"});
-            table2.AddRow(new string[] {
+            table798.AddRow(new string[] {
                         "Phone Number",
                         "785-532-6413"});
-            table2.AddRow(new string[] {
+            table798.AddRow(new string[] {
                         "Additional Emails",
                         "richardSmith@smith.com"});
-            table2.AddRow(new string[] {
+            table798.AddRow(new string[] {
                         "Password",
                         "Welcome1!"});
-            table2.AddRow(new string[] {
+            table798.AddRow(new string[] {
                         "What city were you born in?",
                         "TheWercs"});
-            table2.AddRow(new string[] {
+            table798.AddRow(new string[] {
                         "What was the Model of your first car?",
                         "TheWercs"});
-            table2.AddRow(new string[] {
+            table798.AddRow(new string[] {
                         "What is your favorite sport?",
                         "TheWercs"});
-            table2.AddRow(new string[] {
+            table798.AddRow(new string[] {
                         "What is your favorite food or drink?",
                         "TheWercs"});
-            table2.AddRow(new string[] {
+            table798.AddRow(new string[] {
                         "What is your favorite vacation destination?",
                         "TheWercs"});
-            table2.AddRow(new string[] {
+            table798.AddRow(new string[] {
                         "Secure Password",
                         "Welcome1!"});
 #line 30
-testRunner.Given("I setup the Company Contact Person as follows:", ((string)(null)), table2, "Given ");
+testRunner.Given("I setup the Company Contact Person as follows:", ((string)(null)), table798, "Given ");
 #line 42
 testRunner.And("I click the Next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 43
@@ -223,4 +223,3 @@ testRunner.And("the ULToys My Company Details page should load", ((string)(null)
 }
 #pragma warning restore
 #endregion
-

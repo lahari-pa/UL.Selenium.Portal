@@ -152,7 +152,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 testRunner.Given("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any " +
                     "Name, address, phone and emergency phone - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -161,7 +161,7 @@ testRunner.Given("I call Shared Step 64097 - Additional Documents -> Contact Inf
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table1.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -173,7 +173,7 @@ testRunner.Given("I call Shared Step 64097 - Additional Documents -> Contact Inf
 #line 38
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table1, "Given ");
+                    "g:", ((string)(null)), table16, "Given ");
 #line 41
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 57863. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
@@ -223,13 +223,13 @@ testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as produ
 testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for sa" +
                     "ved as: TestCase86121)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table2.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "Amazon"});
 #line 60
 testRunner.Given("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
-                    " saved as: TestCase86121) for", ((string)(null)), table2, "Given ");
+                    " saved as: TestCase86121) for", ((string)(null)), table17, "Given ");
 #line 63
 testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase86121)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -295,7 +295,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 testRunner.Given("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any " +
                     "Name, address, phone and emergency phone - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -304,7 +304,7 @@ testRunner.Given("I call Shared Step 64097 - Additional Documents -> Contact Inf
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table3.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -316,7 +316,7 @@ testRunner.Given("I call Shared Step 64097 - Additional Documents -> Contact Inf
 #line 84
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table3, "Given ");
+                    "g:", ((string)(null)), table18, "Given ");
 #line 87
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 57863. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
@@ -366,13 +366,13 @@ testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as produ
 testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for sa" +
                     "ved as: TestCase86122)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table4.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "Amazon"});
 #line 106
 testRunner.Given("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
-                    " saved as: TestCase86122) for", ((string)(null)), table4, "Given ");
+                    " saved as: TestCase86122) for", ((string)(null)), table19, "Given ");
 #line 109
 testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase86122)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -432,7 +432,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any " +
                     "Name, address, phone and emergency phone - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -441,7 +441,7 @@ testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Infor
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table5.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -453,7 +453,7 @@ testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Infor
 #line 128
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table5, "And ");
+                    "g:", ((string)(null)), table20, "And ");
 #line 131
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 132
@@ -550,7 +550,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any " +
                     "Name, address, phone and emergency phone - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -559,7 +559,7 @@ testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Infor
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table6.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -571,7 +571,7 @@ testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Infor
 #line 166
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table6, "And ");
+                    "g:", ((string)(null)), table21, "And ");
 #line 169
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 170
@@ -656,13 +656,13 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.And("I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue -" +
                     " Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table7.AddRow(new string[] {
+            table22.AddRow(new string[] {
                         "Canadian Tire"});
 #line 204
 testRunner.And("I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add " +
-                    "PL information - Continue", ((string)(null)), table7, "And ");
+                    "PL information - Continue", ((string)(null)), table22, "And ");
 #line 207
 testRunner.And("I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (" +
                     "no retailer data needed) - Continue for UPC: saved as UPC86416, container type: " +
@@ -679,7 +679,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any " +
                     "Name, address, phone and emergency phone - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -688,7 +688,7 @@ testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Infor
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table8.AddRow(new string[] {
+            table23.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -700,7 +700,7 @@ testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Infor
 #line 212
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table8, "And ");
+                    "g:", ((string)(null)), table23, "And ");
 #line 215
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 216
@@ -779,20 +779,20 @@ testRunner.And("I call Shared Step 26897 (Product Characteristics - Solid only a
 testRunner.And("I call Shared Step 62678 (Additional Product Information - US & Canada, No Child," +
                     " No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table9.AddRow(new string[] {
+            table24.AddRow(new string[] {
                         "Propane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 249
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table9, "Given ");
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table24, "Given ");
 #line 252
 testRunner.And("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PRO" +
                     "P 65 - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -815,7 +815,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any " +
                     "Name, address, phone and emergency phone - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -824,7 +824,7 @@ testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Infor
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table10.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -836,7 +836,7 @@ testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Infor
 #line 259
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table10, "And ");
+                    "g:", ((string)(null)), table25, "And ");
 #line 262
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 263
@@ -921,13 +921,13 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.And("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PRO" +
                     "P 65 - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table11.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Canadian Tire"});
 #line 299
 testRunner.And("I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add " +
-                    "PL information - Continue", ((string)(null)), table11, "And ");
+                    "PL information - Continue", ((string)(null)), table26, "And ");
 #line 302
 testRunner.And("I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (" +
                     "no retailer data needed) - Continue for UPC: saved as UPC86418, container type: " +
@@ -944,7 +944,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 testRunner.Given("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any " +
                     "Name, address, phone and emergency phone - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -953,7 +953,7 @@ testRunner.Given("I call Shared Step 64097 - Additional Documents -> Contact Inf
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table12.AddRow(new string[] {
+            table27.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -965,7 +965,7 @@ testRunner.Given("I call Shared Step 64097 - Additional Documents -> Contact Inf
 #line 308
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table12, "Given ");
+                    "g:", ((string)(null)), table27, "Given ");
 #line 311
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: awesome p" +
                     "roduct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -1045,20 +1045,20 @@ testRunner.And("I call Shared Step 26897 (Product Characteristics - Solid only a
 testRunner.And("I call Shared Step 62678 (Additional Product Information - US & Canada, No Child," +
                     " No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table13.AddRow(new string[] {
+            table28.AddRow(new string[] {
                         "Propane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 346
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table13, "Given ");
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table28, "Given ");
 #line 349
 testRunner.And("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PRO" +
                     "P 65 - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1081,7 +1081,7 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
 testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any " +
                     "Name, address, phone and emergency phone - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1090,7 +1090,7 @@ testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Infor
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table14.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -1102,7 +1102,7 @@ testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Infor
 #line 356
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table14, "And ");
+                    "g:", ((string)(null)), table29, "And ");
 #line 359
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 360
@@ -1153,4 +1153,3 @@ testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as produ
 }
 #pragma warning restore
 #endregion
-

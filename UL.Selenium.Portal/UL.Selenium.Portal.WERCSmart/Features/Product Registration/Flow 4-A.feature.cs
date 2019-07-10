@@ -139,19 +139,19 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
                     "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table268 = new TechTalk.SpecFlow.Table(new string[] {
                         "Product granted Alternative Control Plan",
                         "Amount of VOC by CARB",
                         "Amount of VOC by OTC Model",
                         "VOC for states"});
-            table1.AddRow(new string[] {
+            table268.AddRow(new string[] {
                         "No",
                         "2",
                         "2",
                         "Yes"});
 #line 31
  testRunner.And("I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CA" +
-                    "RB - Yes for state values)", ((string)(null)), table1, "And ");
+                    "RB - Yes for state values)", ((string)(null)), table268, "And ");
 #line 34
  testRunner.And("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
@@ -168,7 +168,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 39
  testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table269 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -178,7 +178,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "Odor Threshold",
                         "Partition Coefficient",
                         "Product\'s Dispensing Method"});
-            table2.AddRow(new string[] {
+            table269.AddRow(new string[] {
                         "Gloves",
                         "340",
                         "12",
@@ -190,7 +190,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "Aerosol"});
 #line 40
  testRunner.And("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
-                    "))", ((string)(null)), table2, "And ");
+                    "))", ((string)(null)), table269, "And ");
 #line 43
  testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -206,4 +206,3 @@ this.ScenarioInitialize(scenarioInfo);
 }
 #pragma warning restore
 #endregion
-

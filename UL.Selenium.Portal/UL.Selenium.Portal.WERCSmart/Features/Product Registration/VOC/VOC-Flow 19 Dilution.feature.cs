@@ -143,21 +143,21 @@ this.ScenarioInitialize(scenarioInfo);
 #line 31
  testRunner.Then("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table606 = new TechTalk.SpecFlow.Table(new string[] {
                         "Statement"});
-            table1.AddRow(new string[] {
+            table606.AddRow(new string[] {
                         "VOC percent as sold 50"});
-            table1.AddRow(new string[] {
+            table606.AddRow(new string[] {
                         "VOC percent diluted for use 45"});
-            table1.AddRow(new string[] {
+            table606.AddRow(new string[] {
                         "Based on the type of product, this must comply with the most restrictive VOC limi" +
                             "t."});
-            table1.AddRow(new string[] {
+            table606.AddRow(new string[] {
                         "Exceeds the limits specified in the California Consumer Products Regulation"});
-            table1.AddRow(new string[] {
+            table606.AddRow(new string[] {
                         "Exceeds the limits specified by the Ozone Transport Commission"});
 #line 32
- testRunner.Then("in the VOC Summary page I should see the following noneditable statements", ((string)(null)), table1, "Then ");
+ testRunner.Then("in the VOC Summary page I should see the following noneditable statements", ((string)(null)), table606, "Then ");
 #line 39
  testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase62730", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -214,21 +214,21 @@ this.ScenarioInitialize(scenarioInfo);
 #line 57
  testRunner.Then("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table607 = new TechTalk.SpecFlow.Table(new string[] {
                         "Statement"});
-            table2.AddRow(new string[] {
+            table607.AddRow(new string[] {
                         "VOC percent as sold 50"});
-            table2.AddRow(new string[] {
+            table607.AddRow(new string[] {
                         "VOC percent diluted for use 15"});
-            table2.AddRow(new string[] {
+            table607.AddRow(new string[] {
                         "Based on the type of product, this must comply with the most restrictive VOC limi" +
                             "t."});
-            table2.AddRow(new string[] {
+            table607.AddRow(new string[] {
                         "Exceeds the limits specified in the California Consumer Products Regulation"});
-            table2.AddRow(new string[] {
+            table607.AddRow(new string[] {
                         "Exceeds the limits specified by the Ozone Transport Commission"});
 #line 58
- testRunner.Then("in the VOC Summary page I should see the following noneditable statements", ((string)(null)), table2, "Then ");
+ testRunner.Then("in the VOC Summary page I should see the following noneditable statements", ((string)(null)), table607, "Then ");
 #line 65
  testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase62728", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -285,22 +285,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line 83
  testRunner.Then("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table608 = new TechTalk.SpecFlow.Table(new string[] {
                         "Statement"});
-            table3.AddRow(new string[] {
+            table608.AddRow(new string[] {
                         "VOC percent as sold 50"});
-            table3.AddRow(new string[] {
+            table608.AddRow(new string[] {
                         "VOC percent diluted for use 2"});
-            table3.AddRow(new string[] {
+            table608.AddRow(new string[] {
                         "Based on the type of product, this must comply with the most restrictive VOC limi" +
                             "t."});
-            table3.AddRow(new string[] {
+            table608.AddRow(new string[] {
                         "Does not exceed the limits specified in the California Consumer Products Regulati" +
                             "on"});
-            table3.AddRow(new string[] {
+            table608.AddRow(new string[] {
                         "Does not exceed the limits specified by the Ozone Transport Commission"});
 #line 84
- testRunner.Then("in the VOC Summary page I should see the following noneditable statements", ((string)(null)), table3, "Then ");
+ testRunner.Then("in the VOC Summary page I should see the following noneditable statements", ((string)(null)), table608, "Then ");
 #line 91
  testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase62724", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -375,25 +375,25 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 57817 (VOC Results - Confirm VOC Limits table shows correct va" +
                     "lues (OTC & CARB) - Happy Path): Floor Wax Stripper (Light or Medium Build-Up)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table609 = new TechTalk.SpecFlow.Table(new string[] {
                         "Statement"});
-            table4.AddRow(new string[] {
+            table609.AddRow(new string[] {
                         "VOC percent as sold 1"});
-            table4.AddRow(new string[] {
+            table609.AddRow(new string[] {
                         "VOC percent diluted for use 2"});
-            table4.AddRow(new string[] {
+            table609.AddRow(new string[] {
                         "Based on the type of product, this must comply with the most restrictive VOC limi" +
                             "t."});
-            table4.AddRow(new string[] {
+            table609.AddRow(new string[] {
                         "Does not exceed the limits specified in the California Consumer Products Regulati" +
                             "on"});
-            table4.AddRow(new string[] {
+            table609.AddRow(new string[] {
                         "Does not exceed the limits specified by the Ozone Transport Commission"});
-            table4.AddRow(new string[] {
+            table609.AddRow(new string[] {
                         "Based on your previous selections, the product has the following intended use: Th" +
                             "e OTC Model Rule and CARB limits for this intended use are:"});
 #line 117
- testRunner.Then("in the VOC Summary page I should see the following noneditable statements", ((string)(null)), table4, "Then ");
+ testRunner.Then("in the VOC Summary page I should see the following noneditable statements", ((string)(null)), table609, "Then ");
 #line 125
  testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase62708", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -466,4 +466,3 @@ this.ScenarioInitialize(scenarioInfo);
 }
 #pragma warning restore
 #endregion
-

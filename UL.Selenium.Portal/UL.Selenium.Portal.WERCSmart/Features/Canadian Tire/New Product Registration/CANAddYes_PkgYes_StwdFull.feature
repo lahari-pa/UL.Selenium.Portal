@@ -94,7 +94,6 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Registration\4. Account Canada address(Yes), Package type (Yes), Stewardship (FULL)
 
 @85752
-@TReVorId:22074
 Scenario: [85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 #Given [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
 Given I login into the WERCSmart Portal - Canada has all data account

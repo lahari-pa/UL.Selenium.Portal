@@ -156,7 +156,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 40
  testRunner.Then("I create a new email address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table166 = new TechTalk.SpecFlow.Table(new string[] {
                         "User Name",
                         "Title",
                         "Role",
@@ -165,7 +165,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "Confirm Email",
                         "Country Code",
                         "Country"});
-            table1.AddRow(new string[] {
+            table166.AddRow(new string[] {
                         "User",
                         "Mr",
                         "User",
@@ -175,7 +175,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "empty",
                         "United Kingdom"});
 #line 41
- testRunner.Then("I add a new user with the following information", ((string)(null)), table1, "Then ");
+ testRunner.Then("I add a new user with the following information", ((string)(null)), table166, "Then ");
 #line 44
  testRunner.Then("I confirm the new user is Active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 45
@@ -316,7 +316,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 97
  testRunner.Given("In the My Account page I navigate to the Company Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table167 = new TechTalk.SpecFlow.Table(new string[] {
                         "Company Name",
                         "Admin Name",
                         "Email Address",
@@ -328,7 +328,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "Zip Code",
                         "Country Code",
                         "Phone"});
-            table2.AddRow(new string[] {
+            table167.AddRow(new string[] {
                         "Visual Testing",
                         "Automated Visual Testing",
                         "<VisualAccount>",
@@ -341,7 +341,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "1",
                         "555-555-5555"});
 #line 98
- testRunner.Then("In the Company Information page I confirm the Company Information is correct", ((string)(null)), table2, "Then ");
+ testRunner.Then("In the Company Information page I confirm the Company Information is correct", ((string)(null)), table167, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -384,4 +384,3 @@ this.ScenarioInitialize(scenarioInfo);
 }
 #pragma warning restore
 #endregion
-

@@ -120,4 +120,3 @@ testRunner.Then("I should see the product returned in the search results", ((str
 }
 #pragma warning restore
 #endregion
-

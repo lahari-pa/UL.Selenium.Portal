@@ -121,84 +121,84 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table134 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table1.AddRow(new string[] {
+            table134.AddRow(new string[] {
                         "Wood dust",
                         "50.0",
                         "false",
                         "false",
                         ""});
-            table1.AddRow(new string[] {
+            table134.AddRow(new string[] {
                         "RED 4",
                         "23.0",
                         "false",
                         "false",
                         ""});
-            table1.AddRow(new string[] {
+            table134.AddRow(new string[] {
                         "Clothianidin",
                         "27.0",
                         "false",
                         "false",
                         ""});
 #line 25
- testRunner.Given("I add the following ingredients:", ((string)(null)), table1, "Given ");
+ testRunner.Given("I add the following ingredients:", ((string)(null)), table134, "Given ");
 #line 30
  testRunner.When("In the ingredients table I click Chemical Name to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table135 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name"});
-            table2.AddRow(new string[] {
+            table135.AddRow(new string[] {
                         "Clothianidin"});
-            table2.AddRow(new string[] {
+            table135.AddRow(new string[] {
                         "RED 4"});
-            table2.AddRow(new string[] {
+            table135.AddRow(new string[] {
                         "Wood dust"});
 #line 31
- testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table2, "Then ");
+ testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table135, "Then ");
 #line 36
  testRunner.When("In the ingredients table I click Chemical Name to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table136 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name"});
-            table3.AddRow(new string[] {
+            table136.AddRow(new string[] {
                         "Wood dust"});
-            table3.AddRow(new string[] {
+            table136.AddRow(new string[] {
                         "RED 4"});
-            table3.AddRow(new string[] {
+            table136.AddRow(new string[] {
                         "Clothianidin"});
 #line 37
- testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table3, "Then ");
+ testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table136, "Then ");
 #line 42
  testRunner.When("In the ingredients table I click CAS Number to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table137 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name"});
-            table4.AddRow(new string[] {
+            table137.AddRow(new string[] {
                         "RED 4"});
-            table4.AddRow(new string[] {
+            table137.AddRow(new string[] {
                         "Clothianidin"});
-            table4.AddRow(new string[] {
+            table137.AddRow(new string[] {
                         "Wood dust"});
 #line 43
- testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table4, "Then ");
+ testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table137, "Then ");
 #line 48
  testRunner.When("In the ingredients table I click CAS Number to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table138 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name"});
-            table5.AddRow(new string[] {
+            table138.AddRow(new string[] {
                         "Wood dust"});
-            table5.AddRow(new string[] {
+            table138.AddRow(new string[] {
                         "Clothianidin"});
-            table5.AddRow(new string[] {
+            table138.AddRow(new string[] {
                         "RED 4"});
 #line 49
- testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table5, "Then ");
+ testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table138, "Then ");
 #line 54
  testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase71985", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -236,58 +236,58 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table139 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table6.AddRow(new string[] {
+            table139.AddRow(new string[] {
                         "Wood dust",
                         "70.0",
                         "false",
                         "false",
                         ""});
-            table6.AddRow(new string[] {
+            table139.AddRow(new string[] {
                         "RED 4",
                         "5.0",
                         "false",
                         "false",
                         ""});
-            table6.AddRow(new string[] {
+            table139.AddRow(new string[] {
                         "Clothianidin",
                         "25.0",
                         "false",
                         "false",
                         ""});
 #line 66
- testRunner.Given("I add the following ingredients:", ((string)(null)), table6, "Given ");
+ testRunner.Given("I add the following ingredients:", ((string)(null)), table139, "Given ");
 #line 71
  testRunner.When("In the ingredients table I click Percent to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table140 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name"});
-            table7.AddRow(new string[] {
+            table140.AddRow(new string[] {
                         "RED 4"});
-            table7.AddRow(new string[] {
+            table140.AddRow(new string[] {
                         "Clothianidin"});
-            table7.AddRow(new string[] {
+            table140.AddRow(new string[] {
                         "Wood dust"});
 #line 72
- testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table7, "Then ");
+ testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table140, "Then ");
 #line 77
  testRunner.When("In the ingredients table I click Percent to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table141 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name"});
-            table8.AddRow(new string[] {
+            table141.AddRow(new string[] {
                         "Wood dust"});
-            table8.AddRow(new string[] {
+            table141.AddRow(new string[] {
                         "Clothianidin"});
-            table8.AddRow(new string[] {
+            table141.AddRow(new string[] {
                         "RED 4"});
 #line 78
- testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table8, "Then ");
+ testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table141, "Then ");
 #line 83
  testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase71987", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -324,20 +324,20 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table142 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table9.AddRow(new string[] {
+            table142.AddRow(new string[] {
                         "Butane",
                         "100",
                         "true",
                         "false",
                         ""});
 #line 93
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table9, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table142, "Given ");
 #line 96
  testRunner.Then("for ingredient: Butane the Trade Secret field is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 97
@@ -384,20 +384,20 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table143 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table10.AddRow(new string[] {
+            table143.AddRow(new string[] {
                         "Butane",
                         "100",
                         "false",
                         "true",
                         ""});
 #line 111
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table10, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table143, "Given ");
 #line 114
  testRunner.Then("for ingredient: Butane the Publicly Disclosed field is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 115
@@ -451,20 +451,20 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table144 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table11.AddRow(new string[] {
+            table144.AddRow(new string[] {
                         "Butane",
                         "100",
                         "false",
                         "true",
                         ""});
 #line 133
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table11, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table144, "Given ");
 #line 136
  testRunner.Then("for ingredient: Butane the Publicly Disclosed field is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 137
@@ -509,20 +509,20 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table145 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table12.AddRow(new string[] {
+            table145.AddRow(new string[] {
                         "Butane",
                         "100",
                         "true",
                         "false",
                         ""});
 #line 150
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table12, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table145, "Given ");
 #line 153
  testRunner.Then("for ingredient: Butane the Trade Secret field is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 154
@@ -572,39 +572,39 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table146 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table13.AddRow(new string[] {
+            table146.AddRow(new string[] {
                         "Butane",
                         "100",
                         "false",
                         "true",
                         ""});
 #line 169
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table13, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table146, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table147 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column",
                         "Input"});
-            table14.AddRow(new string[] {
+            table147.AddRow(new string[] {
                         "Percent",
                         "textbox"});
-            table14.AddRow(new string[] {
+            table147.AddRow(new string[] {
                         "Publicly Disclosed?",
                         "checkbox"});
-            table14.AddRow(new string[] {
+            table147.AddRow(new string[] {
                         "Trade Secret?",
                         "checkbox"});
-            table14.AddRow(new string[] {
+            table147.AddRow(new string[] {
                         "Public Name",
                         "select"});
 #line 172
  testRunner.Given("I confirm the following column titles and inputs are displayed in the ingredients" +
-                    " table", ((string)(null)), table14, "Given ");
+                    " table", ((string)(null)), table147, "Given ");
 #line 178
  testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 179
@@ -647,26 +647,26 @@ this.ScenarioInitialize(scenarioInfo);
 #line 190
  testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table148 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table15.AddRow(new string[] {
+            table148.AddRow(new string[] {
                         "WPS1434087",
                         "50",
                         "false",
                         "true",
                         ""});
-            table15.AddRow(new string[] {
+            table148.AddRow(new string[] {
                         "Butane",
                         "50",
                         "false",
                         "true",
                         ""});
 #line 191
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table15, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table148, "Given ");
 #line 195
  testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 196
@@ -712,32 +712,32 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table149 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table16.AddRow(new string[] {
+            table149.AddRow(new string[] {
                         "Wood dust",
                         "75.0",
                         "false",
                         "false",
                         ""});
-            table16.AddRow(new string[] {
+            table149.AddRow(new string[] {
                         "RED 4",
                         "20.0",
                         "false",
                         "false",
                         ""});
-            table16.AddRow(new string[] {
+            table149.AddRow(new string[] {
                         "Clothianidin",
                         "5.0",
                         "false",
                         "false",
                         ""});
 #line 210
- testRunner.Given("I add the following ingredients:", ((string)(null)), table16, "Given ");
+ testRunner.Given("I add the following ingredients:", ((string)(null)), table149, "Given ");
 #line 215
  testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 216
@@ -788,20 +788,20 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not " +
                     "Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table150 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table17.AddRow(new string[] {
+            table150.AddRow(new string[] {
                         "Chlorine",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 232
- testRunner.Given("I add the following ingredients:", ((string)(null)), table17, "Given ");
+ testRunner.Given("I add the following ingredients:", ((string)(null)), table150, "Given ");
 #line 235
  testRunner.Given("I click the Regulated button for ingredient: Chlorine in the Ingredients table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 236
@@ -864,20 +864,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 258
  testRunner.Then("I should see an error message: Formulation must total or exceed 100%.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table151 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table18.AddRow(new string[] {
+            table151.AddRow(new string[] {
                         "Water",
                         "80",
                         "false",
                         "false",
                         ""});
 #line 259
- testRunner.Given("I add the following ingredients:", ((string)(null)), table18, "Given ");
+ testRunner.Given("I add the following ingredients:", ((string)(null)), table151, "Given ");
 #line 262
  testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 263
@@ -942,17 +942,17 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a danger", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table152 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage"});
-            table19.AddRow(new string[] {
+            table152.AddRow(new string[] {
                         "FRAGRANCE",
                         "Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2",
                         "100"});
 #line 285
  testRunner.And("I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclos" +
-                    "ed = Yes,  Select Public Name) and save ingredient as: shared79436", ((string)(null)), table19, "And ");
+                    "ed = Yes,  Select Public Name) and save ingredient as: shared79436", ((string)(null)), table152, "And ");
 #line 288
  testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -1014,17 +1014,17 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a danger", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table153 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage"});
-            table20.AddRow(new string[] {
+            table153.AddRow(new string[] {
                         "FLAVOR",
                         "FLAVOR",
                         "100"});
 #line 308
  testRunner.Given("I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed " +
-                    "= Yes, Select Public Name) and save ingredients as: shared79431", ((string)(null)), table20, "Given ");
+                    "= Yes, Select Public Name) and save ingredients as: shared79431", ((string)(null)), table153, "Given ");
 #line 311
  testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -1072,40 +1072,40 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table154 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table21.AddRow(new string[] {
+            table154.AddRow(new string[] {
                         "Sodium hydroxide",
                         "33",
                         "false",
                         "false",
                         ""});
 #line 329
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table21, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table154, "Given ");
 #line 332
  testRunner.And("I select the first Public Name dropdown option for ingredient: Sodium hydroxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 333
  testRunner.And("I confirm the Publicly Disclosed checkbox is: checked for ingredient: Sodium hydr" +
                     "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table155 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table22.AddRow(new string[] {
+            table155.AddRow(new string[] {
                         "Water",
                         "33",
                         "false",
                         "false",
                         ""});
 #line 334
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table22, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table155, "Given ");
 #line 337
  testRunner.And("I click the Trade Secret checkbox for ingredient: Water", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 338
@@ -1113,20 +1113,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 339
  testRunner.Then("for ingredient: Water the Publicly Disclosed field is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table156 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table23.AddRow(new string[] {
+            table156.AddRow(new string[] {
                         "Boric acid",
                         "34",
                         "false",
                         "false",
                         ""});
 #line 340
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table23, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table156, "Given ");
 #line 343
  testRunner.And("I select the first Public Name dropdown option for ingredient: Boric acid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 344
@@ -1175,95 +1175,95 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table157 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table24.AddRow(new string[] {
+            table157.AddRow(new string[] {
                         "Boric acid",
                         "10",
                         "false",
                         "false",
                         ""});
 #line 366
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table24, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table157, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table158 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table25.AddRow(new string[] {
+            table158.AddRow(new string[] {
                         "Sodium hydroxide",
                         "10",
                         "false",
                         "false",
                         ""});
 #line 369
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table25, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table158, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table159 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table26.AddRow(new string[] {
+            table159.AddRow(new string[] {
                         "Dye X",
                         "10",
                         "false",
                         "false",
                         ""});
 #line 372
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table26, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table159, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table160 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table27.AddRow(new string[] {
+            table160.AddRow(new string[] {
                         "Sodium chloride",
                         "10",
                         "false",
                         "false",
                         ""});
 #line 375
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table27, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table160, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table161 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table28.AddRow(new string[] {
+            table161.AddRow(new string[] {
                         "Potassium sulfate",
                         "10",
                         "false",
                         "false",
                         ""});
 #line 378
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table28, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table161, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table162 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table29.AddRow(new string[] {
+            table162.AddRow(new string[] {
                         "Water",
                         "50",
                         "false",
                         "false",
                         ""});
 #line 381
- testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table29, "Given ");
+ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table162, "Given ");
 #line 384
  testRunner.And("I click \'Select all\' in the Ingredients table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 385
@@ -1271,27 +1271,27 @@ this.ScenarioInitialize(scenarioInfo);
 #line 386
  testRunner.And("I confirm the \'Delete\' button is available in the Ingredients table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table163 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name"});
-            table30.AddRow(new string[] {
+            table163.AddRow(new string[] {
                         "Water"});
-            table30.AddRow(new string[] {
+            table163.AddRow(new string[] {
                         "Sodium chloride"});
-            table30.AddRow(new string[] {
+            table163.AddRow(new string[] {
                         "Boric acid"});
 #line 387
- testRunner.And("I deselect the following ingredients:", ((string)(null)), table30, "And ");
+ testRunner.And("I deselect the following ingredients:", ((string)(null)), table163, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table164 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name"});
-            table31.AddRow(new string[] {
+            table164.AddRow(new string[] {
                         "Water"});
-            table31.AddRow(new string[] {
+            table164.AddRow(new string[] {
                         "Sodium chloride"});
-            table31.AddRow(new string[] {
+            table164.AddRow(new string[] {
                         "Boric acid"});
 #line 392
- testRunner.And("I confirm the following ingredients are unselected:", ((string)(null)), table31, "And ");
+ testRunner.And("I confirm the following ingredients are unselected:", ((string)(null)), table164, "And ");
 #line 397
  testRunner.And("I confirm the \'Select all\' checkbox in the Ingredients table is unchecked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 398
@@ -1399,4 +1399,3 @@ this.ScenarioInitialize(scenarioInfo);
 }
 #pragma warning restore
 #endregion
-
