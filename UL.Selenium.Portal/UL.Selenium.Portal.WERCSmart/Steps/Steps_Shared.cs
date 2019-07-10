@@ -6203,8 +6203,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.ThenFieldExists("WHMIS-compliant label, English and French-Canadian");
 			TestReport.StartStep("I set 'OSHA-compliant Safety Data Sheet, English' to: Request to author");
 			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
-			TestReport.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: Request to author");
-			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "Request to author");
+			TestReport.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
+			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			TestReport.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
@@ -7933,6 +7933,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				newProdSteps.ClickContinue();
 				newProdSteps.ErrorMessageSpecific(@"Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )");
 			}
+		}
+
+		[StepDefinition(@"I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED")]
+		public void GivenICallSharedStepToxicityCharacteristicsLeachingProcedureTCLP_NoToALLWithoutCopper()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NewProduct myNewProduct = new NewProduct();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristic Leaching Procedure (TCLP)");
+			TestReport.StartStep("I set the Product has had TCLP testing; Report is available option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has had TCLP testing; Report is available", "No");
+			TestReport.StartStep("I select No for all elements including Copper");
+			MyStepsNewProduct.SetTheSectionOptionTo("Lead", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Mercury", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Silver", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Cadmium", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Chromium", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Barium", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Arsenic", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Selenium", "No");
+			if (myNewProduct.SectionExists("Platinum"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Platinum", "No");
+			}
+
+			TestReport.StartStep(
+				"In the Toxicity Characteristic Leaching Procedure (TCLP) Product Report page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Toxicity Characteristic Leaching Procedure (TCLP) Product Report");
 		}
 	}
 }
