@@ -996,7 +996,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void SetTheSectionOptionTo(string section, string option)
 		{
 			NewProduct thisNewProduct = new NewProduct();
-			if (!thisNewProduct.Wait_for_load(3))
+			if (!thisNewProduct.WaitForContainerToBeVisible(3))
 			{
 				Report.Failure("The new product page is not showing");
 			}
