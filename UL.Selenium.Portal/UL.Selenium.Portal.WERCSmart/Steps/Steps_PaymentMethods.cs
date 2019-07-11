@@ -72,9 +72,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				if (savedAs == "New_Sub")
 				{
-					if (FeatureContext.Current.ContainsKey("CurrentAccount"))
+					if (Context.FeatureContext.ContainsKey("CurrentAccount"))
 					{
-						savedAs = FeatureContext.Current["CurrentAccount"].ToString();
+						savedAs = Context.FeatureContext["CurrentAccount"].ToString();
 					}
 					Report.Info("Account = " + savedAs);
 				}
@@ -108,9 +108,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				if (savedAs == "New_Sub")
 				{
-					if (FeatureContext.Current.ContainsKey("CurrentAccount"))
+					if (Context.FeatureContext.ContainsKey("CurrentAccount"))
 					{
-						savedAs = FeatureContext.Current["CurrentAccount"].ToString();
+						savedAs = Context.FeatureContext["CurrentAccount"].ToString();
 					}
 					Report.Info("Account = " + savedAs);
 				}
@@ -350,9 +350,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				if (savedAs == "New_Sub")
 				{
-					if (FeatureContext.Current.ContainsKey("CurrentAccount"))
+					if (Context.FeatureContext.ContainsKey("CurrentAccount"))
 					{
-						savedAs = FeatureContext.Current["CurrentAccount"].ToString();
+						savedAs = Context.FeatureContext["CurrentAccount"].ToString();
 					}
 					Report.Info("Account = " + savedAs);
 				}
