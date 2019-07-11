@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Remoting.Messaging;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
@@ -7,56 +8,23 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class InactivityPopup : BaseObject
+	class InactivityPopup : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='LogOutModal']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		private IWebElement ButtonByText(string btnText) => this.containerElement.FindElement(By.XPath($@"./button[text()=""{btnText}""]"), 1);
 
 		public bool IsVisible()
 		{
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+			//this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
 			return this.containerElement.GetAttribute("class") != "modal fade";
 		}
 
-		public bool ClickYes()
-		{
-			var btn = this.containerElement.FindElement(By.XPath(".//button[text()='Yes']"));
-			if (btn == null)
-			{
-				return false;
-			}
+		public bool ClickYes() => this.ButtonByText("Yes").TryClick();
 
-			try
-			{
-				btn.Click();
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-
-		public bool ClickNo()
-		{
-			var btn = this.containerElement.FindElement(By.XPath(".//a[text()='No']"));
-			if (btn == null)
-			{
-				return false;
-			}
-
-			try
-			{
-				btn.Click();
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-
+		public bool ClickNo() => this.ButtonByText("No").TryClick();
 
 	}
 }

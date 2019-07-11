@@ -17,21 +17,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the WERCSmart homepage should be loaded")]
 		public void ThenTheWercSmartHomepageShouldLoad()
 		{
-			try
-			{
-				Report.Info("Making sure that the WERCSmart homepage is loaded");
-				var selHomepage = new Homepage();
-
-
-				Report.IsTrue(selHomepage.Wait_for_load(), "WERCSmart Homepage failed to load!", "WERCSmart homepage loaded successfully!");
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(new Homepage().WaitForContainerToBeVisible(), "WERCSmart Homepage failed to load!", "WERCSmart homepage loaded successfully!");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Screenshot();
 		}
 
 
