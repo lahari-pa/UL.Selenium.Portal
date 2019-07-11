@@ -83,6 +83,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"A window containing the document opened as expected");
 		}
 
+		[StepDefinition(@"I close the document window: (.*)")]
+		public void CloseTheDocumentWindow(string option)
+		{
+			var selDocumentAcceptance = new DocumentAcceptance();
+			Report.IsTrue(selDocumentAcceptance.CloseDocumentWindow(option),
+				"Failed to close the document window",
+				"Successfully closed the document window");
+		}
+
+		[StepDefinition(@"I switch to the main window")]
+		public void ISwitchToMainWindow()
+		{
+			var selDocumentAcceptance = new DocumentAcceptance();
+			Report.IsTrue(selDocumentAcceptance.SwitchToMainWindow(),
+				"Failed to switch to the main window",
+				"Successfully switched to the main window");
+		}
+
 		[StepDefinition(@"I confirm the subformat type at the top of the document matches the vaulue in the Documents table for the first document I viewed")]
 		public void ConfirmSubformatTypeInDocumentMatchesDocumentsTableValue()
 		{

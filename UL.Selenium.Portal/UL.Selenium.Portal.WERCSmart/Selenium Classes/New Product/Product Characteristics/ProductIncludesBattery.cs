@@ -74,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 		/// <summary>
 		/// On the 'Contains Batteries' page.
-		/// set = enters the battery information for a list of Battery objects (value). Optional use of Manufacturer property = '&lt;any&gt;'
+		/// set = enters the battery information in the table for a list of Battery objects (value). Optional use of Manufacturer property = '&lt;any&gt;' selects a random manufacturer from the drop
 		/// get = returns a list of Battery objects corresponding to the batteries displayed in the table
 		///
 		/// </summary>

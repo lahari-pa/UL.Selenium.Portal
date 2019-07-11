@@ -36,9 +36,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Expected Manufacturer: " + expectedBattery.Manufacturer);
 				Report.Info("Expected Number per package: " + expectedBattery.NumberPerPackage);
 				Report.IsTrue(displayed.Any(x => x.BatteryType == expectedBattery.BatteryType &&
-				                                 x.Manufacturer == expectedBattery.Manufacturer &&
-				                                 x.NumberPerPackage == expectedBattery.NumberPerPackage &&
-				                                 x.RequiredToRun == expectedBattery.RequiredToRun),
+												 x.Manufacturer == expectedBattery.Manufacturer &&
+												 x.NumberPerPackage == expectedBattery.NumberPerPackage &&
+												 x.RequiredToRun == expectedBattery.RequiredToRun),
 					"Battery saved as " + expectedBattery.SavedAs + " was not found on the summary page!",
 					"Battery saved as " + expectedBattery.SavedAs + " was found on the summary page");
 			}
@@ -93,6 +93,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
 		}
 
+		[StepDefinition(@"(.*) document section should be showing the following document: (.*)")]
+		public void DocumentSectionShouldBeShowingTheFollowingDocument(string section, string option)
+		{
+			var dataSummarySheet = new DataSummary();
+
+			var found = dataSummarySheet.GetDocumentForSection(section, option);
+
+			Report.IsTrue(found.Contains(option),
+				"Expected: " + option + " but got: " + found + " for section " + section + ".",
+				"Got value: " + option + " as expected for section " + section + ".");
+		}
+
+		[StepDefinition(@"I click the View button for section: (.*)")]
+		public void IClickTheViewButtonForDocument(string section)
+		{
+			var dataSummarySheet = new DataSummary();
+
+			Report.IsTrue(dataSummarySheet.ClickViewForDocument(section),
+				"Failed to click the View button for section " + section + ".",
+				"Successfully clicked the View button for section " + section + ".");
+		}
 
 		[StepDefinition(@"(.*) should be showing the following option: (.*)")]
 		public void ShouldBeShowingFollowing(string section, string option)

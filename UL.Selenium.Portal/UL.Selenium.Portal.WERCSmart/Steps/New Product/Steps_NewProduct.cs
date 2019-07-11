@@ -7,6 +7,7 @@ using NTTQA.Selenium.UniversalFunctions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -635,57 +636,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		/// <summary>
-		/// Confirm the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations statement
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC-OTC-CARB statement1: (.*)")]
-		public void GivenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement1(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.GetProductGrantedAlternativeControlPlanStatement();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"Product has been granted an Alternative Control Plan statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"Product has been granted an Alternative Control Plan statement was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
-		/// Confirm Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1 statement
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC-OTC-CARB statement2: (.*)")]
-		public void GivenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement2(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.GetProductDoesNotContainGramsOfVocStatement();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"Product has been granted an Alternative Control Plan statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"Product has been granted an Alternative Control Plan statement was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
-		/// Confirm VOC content in grams ozone per gram statement
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC-OTC-CARB statement3: (.*)")]
-		public void ThenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement3(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.GetVocContentInGramsStatement();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"statement was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
 		/// Confirm Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are: statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC-OTC-CARB statement4: (.*)")]
-		public void ThenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement4(string statement)
+		[StepDefinition(@"I confirm that I see the bold VOC-OTC-CARB Compliance Limits statement: (.*)")]
+		public void ConfirmISeeTheVOC_OTC_CARB_ComplianceLimitStatement(string statement)
 		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.GetCarbVocComplianceLimitStatement();
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+			var fullText = new NewProduct().BoldElementContainsFullText("Based on your selection, you have verified your product contains VOC with intended uses as follows.");
+			Report.IsTrue(fullText.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + fullText + "!",
 				"statement was showing: " + statement + ", as expected!");
 		}
 
@@ -849,13 +807,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm that I see the following Ecologo statement: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingEcologoStatement(string statement)
 		{
-
-			var newProductpage = new NewProduct();
-			var found = newProductpage.GetEcologoStatement();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"ecologo statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"ecologo statement was showing: " + statement + ", as expected!");
+			var fullText = new NewProduct().LabelContainsFullText("UL ECOLOGO Readiness Assessment");
+			Report.IsTrue(fullText.Trim() == statement.Trim(),
+				"Ecologo statement was not as expected! Expected: " + statement + ", but found: " + fullText + "!",
+				"Ecologo statement was showing: " + statement + ", as expected!");
 		}
 
 		[StepDefinition(@"I set the water mixture question to: (Yes|No)")]
@@ -1060,6 +1015,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Successfully set the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
 		}
 
+		[StepDefinition(@"I (see|only see|do not see) the following questions")]
 		[StepDefinition(@"I (see|only see|do not see) the following sections")]
 		public void CheckDisplayedSections(string condition, Table sections)
 		{
@@ -1196,6 +1152,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 			}
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"(.*) (should|should not) be showing the error messages with no special characters: (.*)")]
+		public void ErrorMessagesAreShowingForItemNoSpecialChars(string section, string should, string pipeDelimitedErrorMessages)
+		{
+			Delay.Seconds(1);
+			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			var errorMessages = new NewProduct().GetErrorsForSection(section);
+			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
+			List<string> strippedErrorMessages = new List<string>();
+			foreach (string message in errorMessages)
+			{
+				string temp = this.RemoveSpecialCharacters(message);
+				strippedErrorMessages.Add(temp);
+			}
+			if (should == "should")
+			{
+				foreach (var item in errorMessagesExpected)
+				{
+					Report.IsTrue(strippedErrorMessages.Any(e => e.Contains(this.RemoveSpecialCharacters(item))),
+						"Failed to find the error message: " + item + " under section: " + section + "!",
+						"Successfully found the error message: " + item + " for section: " + section, false, false);
+				}
+			}
+			if (should == "should not")
+			{
+				foreach (var item in errorMessagesExpected)
+				{
+					Report.IsFalse(strippedErrorMessages.Contains(this.RemoveSpecialCharacters(item.Trim())),
+						"The error message: " + item + " was displayed under section" + section + " when it should not be.",
+						"The error message: " + item + " was not displayed under section: " + section + " as expected", false, false);
+				}
+			}
+			Report.Screenshot();
+		}
+
+		public string RemoveSpecialCharacters(string str)
+		{
+			StringBuilder sb = new StringBuilder();
+			foreach (char c in str)
+			{
+				if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
+				{
+					sb.Append(c);
+				}
+			}
+			return sb.ToString();
 		}
 
 		// NB: Multiple values should be delimited by the '|' character!

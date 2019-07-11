@@ -203,146 +203,83 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Delete Dialog")]
 		public void ConfirmDeleteDialog()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirming the delete dialog");
-			try
-			{
-				Report.Info("Confirming the delete dialog");
-				var selDeleteConfirm = new DeleteDialog();
-				if (!selDeleteConfirm.Wait_for_load())
-				{ throw new Exception("Delete Dialog did not load!"); }
-
-				selDeleteConfirm.ClickDelete();
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Success("Delete confirmed!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			var selDeleteConfirm = new DeleteDialog();
+			if (!selDeleteConfirm.WaitForContainerToBeVisible())
+			{ throw new Exception("Delete Dialog did not load!"); }
+			Report.IsTrue(selDeleteConfirm.ClickDelete(), "Failed to click Delete", "Clicked Delete");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 		[StepDefinition(@"I cancel the Delete Dialog")]
 		public void CancelDeleteDialog()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Canceling the delete dialog");
-			try
-			{
-				Report.Info("Canceling the delete dialog");
-				var selDeleteConfirm = new DeleteDialog();
-				if (!selDeleteConfirm.Wait_for_load())
-				{ throw new Exception("Delete Dialog did not load!"); }
-
-				selDeleteConfirm.ClickCancel();
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Success("Delete confirmed!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			var selDeleteConfirm = new DeleteDialog();
+			if (!selDeleteConfirm.WaitForContainerToBeVisible())
+			{ throw new Exception("Delete Dialog did not load!"); }
+			Report.IsTrue(selDeleteConfirm.ClickCancel(), "Failed to click cancel", "Clicked cancel");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 		[StepDefinition(@"I (should|should not) see the product returned in the search results")]
 		public void ThenIShouldSeeTheProductReturnedInTheSearchResults(string shouldOrNot)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Correct product " + shouldOrNot + " be returned in the search grid");
-			try
+			Report.Info("Correct product " + shouldOrNot + " be returned in the search grid");
+			var searchedId = Context.GetFromContext("SearchedID")?.ToString();
+			if (searchedId == null)
 			{
-				Report.Info("Correct product " + shouldOrNot + " be returned in the search grid");
-				var searchedId = Context.GetFromContext("SearchedID").ToString();
-				Report.Info("ID searched for: '" + searchedId + "'");
-				var selProdGrid = new ProductsGrid();
-				Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
-				Report.IsTrue(selProdGrid.GetIdInFirstGridRow() == searchedId, "ID returned was not the same as that searched for!", "ID returned was the same as that searched for");
-				Report.Screenshot();
+				Report.Failure("Context did not contain string for saved as: SearchedID");
+				return;
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("ID searched for: '" + searchedId + "'");
+			var selProdGrid = new ProductsGrid();
+			Report.IsTrue(selProdGrid.ProductsCount() == 1, "More than one entry was found!", "Only one entry was found, as expected!");
+			Report.IsTrue(selProdGrid.GetIdInFirstGridRow() == searchedId, "ID returned was not the same as that searched for!", "ID returned was the same as that searched for");
 		}
 
 		[StepDefinition(@"I should only see one product in the grid, with Product ID matching that saved as: (.*)")]
 		public void IShouldOnlySeeOneProductWithUPC(string savedAs)
 		{
 			var selProductsGrid = new ProductsGrid();
-			var searchID = Context.GetFromContext(savedAs)?.ToString();
-			if (searchID == null)
+			var searchId = Context.GetFromContext(savedAs)?.ToString();
+			if (searchId == null)
 			{
 				Report.Failure("Could not find UPC number in context saved as: " + savedAs);
 				return;
 			}
-			var firstID = selProductsGrid.GetIdInFirstGridRow();
+			var firstId = selProductsGrid.GetIdInFirstGridRow();
 			var productsCount = selProductsGrid.ProductsCount();
-			Report.IsTrue(productsCount == 1 && firstID == searchID,
-				"Product with ID: " + searchID + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstID,
-				"Product with ID: " + searchID + " was the only result returned as expected");
+			Report.IsTrue(productsCount == 1 && firstId == searchId,
+				"Product with ID: " + searchId + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstId,
+				"Product with ID: " + searchId + " was the only result returned as expected");
 		}
 
 		[StepDefinition(@"I (should|should not) see products in the Product Grid")]
 		public void ProductsPresentInGrid(string shouldOrNot)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Products " + shouldOrNot + " be returned in the search grid");
-			try
-			{
-				Report.Info("Products " + shouldOrNot + " be returned in the search grid");
-				var selProdGrid = new ProductsGrid();
-				Delay.Seconds(1);
-				bool productsExpected = shouldOrNot == "should";
-
-				Report.IsTrue((selProdGrid.ProductsCount() != 0) == productsExpected,
-					"Results grid " + (productsExpected ? "was not" : "was") + " showing products!",
-					"Results grid " + (productsExpected ? "was" : "was not") + " showing products, as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Products " + shouldOrNot + " be returned in the search grid");
+			var selProdGrid = new ProductsGrid();
+			bool productsExpected = shouldOrNot == "should";
+			Report.IsTrue((selProdGrid.ProductsCount() != 0) == productsExpected,
+				"Results grid " + (productsExpected ? "was not" : "was") + " showing products!",
+				"Results grid " + (productsExpected ? "was" : "was not") + " showing products, as expected!");
 		}
 
 		[StepDefinition(@"I filter the products by: (All|Not Yet Submitted|Assessment in Progress|Sending to Retailers|Accepted by Retailers|Needs Your Attention)")]
 		public void WhenIFilterTheProductsByNotYetSubmitted(string filter)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Filtering Product Grid by " + filter);
-			try
-			{
-				Report.Info("Filtering Product Grid by " + filter);
-				var selProdGrid = new ProductsGrid();
-				Report.IsTrue(selProdGrid.ClickStatusFilter(filter), "Failed to click filter option: '" + filter + "'", "Successfully filtered grid by: '" + filter + "'");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Filtering Product Grid by " + filter);
+			var selProdGrid = new ProductsGrid();
+			Report.IsTrue(selProdGrid.ClickStatusFilter(filter), "Failed to click filter option: '" + filter + "'", "Successfully filtered grid by: '" + filter + "'");
 		}
 
 		[StepDefinition(@"I save the ProductID and Name of the first Product in the grid as: (.*)")]
 		public void SaveFirstProductInGrid(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Saving Product ID and Name of First Product as " + savedAs);
-			try
-			{
-				Report.Info("Saving Product ID and Name of First Product as " + savedAs);
-				var selProdGrid = new ProductsGrid();
-				var productElement = selProdGrid.FirstProductInGrid();
-				Context.AddToContext(savedAs, productElement);
-				Report.Success("Got the first Product in Grid (ID: " + productElement.ProductId + ") and saved to: " + savedAs);
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Saving Product ID and Name of First Product as " + savedAs);
+			var selProdGrid = new ProductsGrid();
+			var productElement = selProdGrid.FirstProductInGrid();
+			Context.AddToContext(savedAs, productElement);
+			Report.Success("Got the first Product in Grid (ID: " + productElement.ProductId + ") and saved to: " + savedAs);
 		}
 
 		[StepDefinition(@"I click Row Actions for the first product returned")]
