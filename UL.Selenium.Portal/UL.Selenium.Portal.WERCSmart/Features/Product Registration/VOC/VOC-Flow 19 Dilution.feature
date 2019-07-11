@@ -101,6 +101,7 @@ Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 	Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: Yes
 	Given in the VOC page I click Continue
