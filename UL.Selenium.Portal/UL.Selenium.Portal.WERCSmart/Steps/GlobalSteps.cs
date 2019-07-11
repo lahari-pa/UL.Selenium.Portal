@@ -333,12 +333,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (savedAs == "New_Sub")
 			{
 				savedAs = "New_Sub" + "_" + System.DateTime.Now.ToString("HHmmddMMyy");
-				FeatureContext.Current.Add("CurrentAccount", savedAs);
+				Context.FeatureContext.Add("CurrentAccount", savedAs);
 			}
 
 			try
 			{
-				if (!FeatureContext.Current.ContainsKey(savedAs))
+				if (!Context.FeatureContext.ContainsKey(savedAs))
 				{
 					Report.Info("Setting up account details for user: '" + savedAs + "'");
 					var account = parameters.CreateInstance<WERCSmartUser>();
@@ -652,7 +652,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					throw new Exception("Failed to Create a New Email Address");
 				}
-				ScenarioContext.Current.Add("CurrentEmail", myEmail);
+				Context.ScenarioContext.Add("CurrentEmail", myEmail);
 				Report.Success("Email Address Created and Saved in Scenario Context");
 			}
 			catch (Exception ex)

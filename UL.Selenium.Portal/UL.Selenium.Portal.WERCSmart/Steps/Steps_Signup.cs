@@ -574,7 +574,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a link the email which sets up the WERCSmart account");
 			try
 			{
-				Email matchingEmail = (Email)ScenarioContext.Current["Matching"];
+				Email matchingEmail = (Email)Context.ScenarioContext["Matching"];
 				var myLink = matchingEmail.Html.Links[0].Href;
 				Report.Info("Found a link: '" + myLink + "' in the email!");
 				Context.AddToContext("EmailLink", myLink);

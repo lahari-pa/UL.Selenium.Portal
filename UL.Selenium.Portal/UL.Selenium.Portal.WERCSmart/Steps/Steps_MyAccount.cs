@@ -352,25 +352,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						userName = userName + "_" + System.DateTime.Now.ToString("HHmmddMMyy");
 
-						ScenarioContext.Current.Add("CurrentUser", userName);
+						Context.ScenarioContext.Add("CurrentUser", userName);
 
 						Report.Info("User Name = " + userName);
 					}
 
 					if (emailAddress == "Saved")
 					{
-						if (ScenarioContext.Current.ContainsKey("CurrentEmail"))
+						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
 						{
-							emailAddress = ScenarioContext.Current["CurrentEmail"].ToString();
+							emailAddress = Context.ScenarioContext["CurrentEmail"].ToString();
 						}
 						Report.Info("Email Address = " + emailAddress);
 					}
 
 					if (confirmEmail == "Saved")
 					{
-						if (ScenarioContext.Current.ContainsKey("CurrentEmail"))
+						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
 						{
-							confirmEmail = ScenarioContext.Current["CurrentEmail"].ToString();
+							confirmEmail = Context.ScenarioContext["CurrentEmail"].ToString();
 						}
 						Report.Info("Email Address = " + confirmEmail);
 					}
@@ -414,9 +414,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				string userName = string.Empty;
 
-				if (ScenarioContext.Current.ContainsKey("CurrentUser"))
+				if (Context.ScenarioContext.ContainsKey("CurrentUser"))
 				{
-					userName = ScenarioContext.Current["CurrentUser"].ToString();
+					userName = Context.ScenarioContext["CurrentUser"].ToString();
 				}
 
 				Report.IsTrue(selMyAccount.Is_User_Active(userName, active), "User is NOT " + active, "User is " + active);
@@ -439,9 +439,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				string userName = string.Empty;
 
-				if (ScenarioContext.Current.ContainsKey("CurrentUser"))
+				if (Context.ScenarioContext.ContainsKey("CurrentUser"))
 				{
-					userName = ScenarioContext.Current["CurrentUser"].ToString();
+					userName = Context.ScenarioContext["CurrentUser"].ToString();
 				}
 
 				Report.IsTrue(selMyAccount.Select_ActivateDeactivate(userName, activate), "Could not click ellipses", "Successfully clicked ellipses");
@@ -607,9 +607,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				if (savedAs == "New_Sub")
 				{
-					if (FeatureContext.Current.ContainsKey("CurrentAccount"))
+					if (Context.FeatureContext.ContainsKey("CurrentAccount"))
 					{
-						savedAs = FeatureContext.Current["CurrentAccount"].ToString();
+						savedAs = Context.FeatureContext["CurrentAccount"].ToString();
 					}
 					Report.Info("Account = " + savedAs);
 				}
@@ -731,18 +731,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					if (emailAddress == "Saved")
 					{
-						if (ScenarioContext.Current.ContainsKey("CurrentEmail"))
+						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
 						{
-							emailAddress = ScenarioContext.Current["CurrentEmail"].ToString();
+							emailAddress = Context.ScenarioContext["CurrentEmail"].ToString();
 						}
 						Report.Info("Email Address = " + emailAddress);
 					}
 
 					if (confirmEmail == "Saved")
 					{
-						if (ScenarioContext.Current.ContainsKey("CurrentEmail"))
+						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
 						{
-							confirmEmail = ScenarioContext.Current["CurrentEmail"].ToString();
+							confirmEmail = Context.ScenarioContext["CurrentEmail"].ToString();
 						}
 						Report.Info("Email Address = " + confirmEmail);
 					}
