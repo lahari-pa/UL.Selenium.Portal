@@ -2166,8 +2166,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
 				"No");
-			TestReport.StartStep("In the Physical Properties page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical Properties");
+            TestReport.StartStep("In the Product Characteristics page I click Continue");
+            MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
 		[StepDefinition(@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity \) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]

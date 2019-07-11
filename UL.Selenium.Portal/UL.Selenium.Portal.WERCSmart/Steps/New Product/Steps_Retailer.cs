@@ -211,10 +211,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void IfISeeUpcWarningPopupClickOk()
 		{
 			var noRetailerWarning = new NoRetailerWarningPopup();
-			if (noRetailerWarning.Wait_for_load(10))
+			if (noRetailerWarning.WaitForContainerToBeVisible(10))
 			{
 				Report.IsTrue(noRetailerWarning.ClickOk(), "Failed to click OK in the UPC Warning popup!", "Successfully clicked OK in the UPC Warning popup");
 			}
+			else
+			{
+				Report.Info("The UPC Warning popup was not displayed");
+			}
 		}
+
+		[StepDefinition(@"I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'")]
+		public void ClickContinueDismissNoUpcPopup()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click continue");
+			Report.IsTrue(new NewProduct().ClickContinue(false), "Failed to click continue", "Clicked continue");
+			TestReport.StartStep("I click 'OK' in the 'UPCs Warning' popup if it is displayed");
+			this.IfISeeUpcWarningPopupClickOk();
+		}
+
 	}
 }
