@@ -130,16 +130,9 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
     <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
-  </Target>
   <PropertyGroup>
     <PostBuildEvent>rem ##### TReVor Post Build Events #####
 "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.721\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
@@ -156,4 +149,14 @@
     </ItemGroup>
   </Target>
   <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
+    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
+    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
+  </Target>
+  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
+  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.721\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
+  <Target Name="AfterUpdateFeatureFilesInProject">
+    <ItemGroup>
+      <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
+    </ItemGroup>
+  </Target>
 </Project>
