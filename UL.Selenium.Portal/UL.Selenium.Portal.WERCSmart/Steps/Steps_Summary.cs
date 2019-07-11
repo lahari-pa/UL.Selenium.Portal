@@ -98,7 +98,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Summary document I confirm that the following Additional documents are showing")]
 		public void GivenInTheSummaryDocumentIConfirmThatTheFollowingAdditionalDocumentsAreShowing(Table table)
 		{
-			ScenarioContext.Current.Pending();
+			Context.ScenarioContext.Pending();
 		}
 
 

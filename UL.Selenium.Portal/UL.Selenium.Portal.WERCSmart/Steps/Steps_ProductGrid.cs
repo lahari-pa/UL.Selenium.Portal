@@ -2025,7 +2025,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the View UPCs page")]
 		public void WhenIShouldSeeTheViewUPCsPage()
 		{
-			ScenarioContext.Current.Pending();
+			Context.ScenarioContext.Pending();
 		}
 
 		[StepDefinition(@"I should see the Update Registration popup")]
