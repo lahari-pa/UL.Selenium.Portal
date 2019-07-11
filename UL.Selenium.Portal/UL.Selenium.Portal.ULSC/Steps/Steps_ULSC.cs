@@ -627,7 +627,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I Close the Data Management window")]
 		public void GivenICloseTheDataManagementWindow()
 		{
-			ScenarioContext.Current.Pending();
+			Context.ScenarioContext.Pending();
 		}
 
 		[Given(@"I navigate to WERCSmart")]

@@ -32,35 +32,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I select the Sign Up link")]
 		public void ClickSignUpLink()
 		{
-			Report.Info("Beginning to click the Sign Up button");
 			Report.IsTrue(new LandingPage().Click_SignUp(), "Failed to click Sign Up", "Successfully clicked Sign Up");
 		}
 
 		[StepDefinition(@"the login page should (appear|dissappear)")]
 		public void LoginPageAppears(string appear)
 		{
-			Report.Info("Checking that the login page has " + appear + "ed.");
-			var selLogin = new Login();
-			Report.Screenshot();
-			Report.IsTrue(selLogin.WaitForContainerToBeVisible() == (appear == "appear"), "Login page did not " + appear + "!", "Login page " + appear + "ed successfully!");
+			Report.IsTrue(new Login().WaitForContainerToBeVisible() == (appear == "appear"), "Login page did not " + appear + "!", "Login page " + appear + "ed successfully!");
 		}
 
 		[StepDefinition("I click outside of the login popup")]
 		public void ClickOutisdeOfLoginPopup()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click outside the login popup");
-			try
-			{
-				Report.Info("Clicking outside of the login popup");
-				var selLogin = new Login();
-				selLogin.ClickOutside();
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Clicking outside of the login popup");
+			new Login().ClickOutside();
+			Report.Info("Clicked outside of the login popup");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I should see the following menu options in the header:")]
@@ -123,8 +110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the Terms of Use link in the Landing Page footer")]
 		public void ClickTermsOfUse()
 		{
-			var selLandingPageFooter = new LandingPageFooter();
-			Report.IsTrue(selLandingPageFooter.ClickTermsOfUse(), "Failed to click Terms of Use", "Successfully clicked Terms of Use");
+			Report.IsTrue(new LandingPageFooter().ClickTermsOfUse(), "Failed to click Terms of Use", "Successfully clicked Terms of Use");
 		}
 
 		[StepDefinition(@"I confirm the WERCSmart Terms of Use page has loaded")]
