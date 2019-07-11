@@ -58,7 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void IConfirmTheExpirationDateMatchesTheKellyValue()
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
-			if (!ScenarioContext.Current.ContainsKey("state"))
+			if (!Context.ScenarioContext.ContainsKey("state"))
 			{
 				throw new Exception("There was no State text in the scenario context. Check the pre-requisite step for editing Expiration Date has ran successfully.");
 			}
@@ -163,7 +163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
 			var state = "";
-			if (ScenarioContext.Current.ContainsKey("state"))
+			if (Context.ScenarioContext.ContainsKey("state"))
 			{
 				state = Context.GetFromContext("state").ToString();
 				Report.Info("Looking at state from test context: " + state);
