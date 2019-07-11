@@ -239,7 +239,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning click link. Plan name: " + planName + " item: " + item + " linktext: " + linkText + " url: " + linkURL);
 			List<Plan> allPlans = new List<Plan>();
-			if (ScenarioContext.Current.ContainsKey("Plans"))
+			if (Context.ScenarioContext.ContainsKey("Plans"))
 			{
 				allPlans = (List<Plan>)Context.GetFromContext("Plans");
 			}
@@ -488,7 +488,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string Click_Info_By_Plan_Item_Return_Hidden(string planName, string item)
 		{
 			List<Plan> allPlans = new List<Plan>();
-			if (ScenarioContext.Current.ContainsKey("Plans"))
+			if (Context.ScenarioContext.ContainsKey("Plans"))
 			{
 				allPlans = (List<Plan>)Context.GetFromContext("Plans");
 			}

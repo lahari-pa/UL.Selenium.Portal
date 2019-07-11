@@ -80,7 +80,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
 			List<Plan> allPlans = new List<Plan>();
-			if (ScenarioContext.Current.ContainsKey("Plans"))
+			if (Context.ScenarioContext.ContainsKey("Plans"))
 			{
 				allPlans = (List<Plan>)Context.GetFromContext("Plans");
 			}
@@ -264,7 +264,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
 			List<Plan> allPlans = new List<Plan>();
-			if (ScenarioContext.Current.ContainsKey("Plans"))
+			if (Context.ScenarioContext.ContainsKey("Plans"))
 			{
 				allPlans = (List<Plan>)Context.GetFromContext("Plans");
 			}

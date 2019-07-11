@@ -75,7 +75,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string sEmail = EmailFunctions.CreateEmail("<random>");
 				User newUser = new User();
 				newUser.Email = sEmail;
-				ScenarioContext.Current.Add(savedAs, newUser);
+				Context.ScenarioContext.Add(savedAs, newUser);
 			}
 			catch (Exception ex)
 			{
@@ -227,7 +227,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Checking whether there is a link the email which allows Password Reset");
-				Email matchingEmail = (Email)ScenarioContext.Current["Matching"];
+				Email matchingEmail = (Email)Context.ScenarioContext["Matching"];
 				var myLink = matchingEmail.Html.Links[0].Href;
 				Report.Info("Found a link: '" + myLink + "' in the email!");
 				Context.AddToContext("EmailLink", myLink);
@@ -249,7 +249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				//IWebElement myLink = IWebElement;
 
-				Email matchingEmail = (Email)ScenarioContext.Current["Matching"];
+				Email matchingEmail = (Email)Context.ScenarioContext["Matching"];
 				//var myLink = matchingEmail.Html.Links[0].Href;
 				var myLink = matchingEmail.Html.Links.ToList();
 
@@ -388,7 +388,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(myForgotPw.New_Password_Form(newPw, verifyPw), "Failed to Enter New Password and Verify",
 					"New Password Entered and Verified");
 
-				ScenarioContext.Current.Add("NewPassword", newPw);
+				Context.ScenarioContext.Add("NewPassword", newPw);
 
 			}
 			catch (Exception ex)

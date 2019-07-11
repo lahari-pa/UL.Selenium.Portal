@@ -467,7 +467,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I get the verification code from the email")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount()
 		{
-			Email matchingEmail = (Email)ScenarioContext.Current["Matching"];
+			Email matchingEmail = (Email)Context.ScenarioContext["Matching"];
 			var bodyText = matchingEmail.Text.Body;
 			var code = Regex.Match(bodyText, @"Your verification code is: (.*)").Groups[1];
 
