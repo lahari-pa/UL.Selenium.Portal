@@ -116,7 +116,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenTheHomeScreenShouldLoad()
 		{
 			var selHomepage = new Homepage();
-			Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
+			Report.IsTrue(selHomepage.WaitForContainerToBeVisible(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
@@ -379,7 +379,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[When(@"I wait for (.*) seconds")]
+		[StepDefinition(@"I wait for (.*) seconds")]
 		public void WhenIWaitForSeconds(int p0)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " I wait for " + p0.ToString() + " seconds.");
@@ -395,25 +395,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I scroll to the (top|bottom) of the page")]
-		public void ThenIScrollToTheOfThePage(string topbottom)
+		public void ThenIScrollToTheOfThePage(string location)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Scroll to " + topbottom + " of page");
-			try
+			Report.Info("Attempting to scroll to the " + location + " of the page");
+			if (location == "top")
 			{
-				Report.Info("Attempting to scroll to the " + topbottom + " of the page");
-				if (topbottom == "top")
-				{ GeneralUtilities.ScrollToTopOfPage(); }
-				else
-				{ GeneralUtilities.ScrollToBottomOfPage(); }
-
-				Report.Screenshot();
-				Report.Success("Scrolled to the " + topbottom + " of the page!");
+				GeneralUtilities.ScrollToTopOfPage();
 			}
-			catch (Exception ex)
+			else if (location == "bottom")
 			{
-				Report.Failure(ex.Message);
-				throw;
+				GeneralUtilities.ScrollToBottomOfPage();
 			}
+			else
+			{
+				Report.Error("Step parameter must be 'top' or 'bottom'");
+				return;
+			}
+			Report.Screenshot();
+			Report.Success("Scrolled to the " + location + " of the page!");
 		}
 
 		[StepDefinition(@"I navigate to the landing page")]

@@ -14,7 +14,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
-		private IWebElement ButtonByText(string btnText) => this.containerElement.FindElement(By.XPath($@"./button[text()=""{btnText}""]"), 1);
+		private IWebElement ButtonByText(string btnText) => this.containerElement.FindElement(By.XPath($@".//button[text() = ""{btnText}""]"), 1);
 
 		public bool IsVisible()
 		{

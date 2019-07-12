@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.Info("Staying on the homepage with no activity until the inactivity popup appears");
 				var selInactivityPopup = new InactivityPopup();
-
+				selInactivityPopup.WaitForContainerToBeVisible(900);
 				while (!selInactivityPopup.IsVisible())
 				{
 					Delay.Seconds(Delay.SpeedFactor * 1);
@@ -47,32 +47,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
+		public void ConfirmTheInactivityPopupDisplayedAfterWait(int expectedWait, int marginOfError)
+		{
+			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
+			if (new InactivityPopup().WaitForContainerToBeVisible((expectedWait * 60) + (marginOfError * 60), out int actualWait))
+			{
+				// check if pop up was displayed before 'expected wait - margin' (test lower limit)
+				Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
+					"The Inactivity popup did not load within the expected time frame of " + expectedWait + " minutes. It was loaded after " + actualWait + " seconds",
+					"The Inactivity popup loaded within the expected time frame of " + expectedWait + " minutes. It was loaded after: " + actualWait + " minutes");
+				return;
+			}
+			Report.Failure($"The Inactivity popup did not load after {expectedWait + marginOfError} minutes!");
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I confirm the Inactivity pop is closed")]
+		public void ConfirmInactivityPopupIsClosed()
+		{
+			Report.IsTrue(new InactivityPopup().WaitForContainerToBeInvisible(), "The Inactivity popup was not closed!", "The Inactivity popup was closed.");
+		}
+
 		[StepDefinition(@"Click (Yes|No) on the inactivity popup")]
 		public void GivenClickOnInactivityPopup(string button)
 		{
-			try
+			Report.Info("Clicking " + button + " on inactivity popup");
+			var selInactivityPopup = new InactivityPopup();
+			var clicked = false;
+			switch (button)
 			{
-				Report.Info("Clicking " + button + " on inactivity popup");
-				var selInactivityPopup = new InactivityPopup();
-
-				switch (button)
-				{
-					case ("Yes"):
-						selInactivityPopup.ClickYes();
-						break;
-					default:
-						selInactivityPopup.ClickNo();
-						break;
-				}
-
-				Report.Success(button + " was clicked successfully!");
-				Report.Screenshot();
+				case ("Yes"):
+					clicked = selInactivityPopup.ClickYes();
+					break;
+				case ("No"):
+					clicked = selInactivityPopup.ClickNo();
+					break;
+				default:
+					Report.Error("Button parameter must be 'Yes' or 'No'!");
+					return;
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(clicked, $"Failed to click the '{button}' button", $"Successfully clicked the '{button}' button");
 		}
 
 
