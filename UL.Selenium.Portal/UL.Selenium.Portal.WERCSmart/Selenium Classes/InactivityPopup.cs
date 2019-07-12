@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Runtime.Remoting.Messaging;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
@@ -26,5 +27,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickNo() => this.ButtonByText("No").TryClick();
 
+
+		public bool WaitUntilDisplayed(int timeout, out int secondsWaited)
+		{
+			var timer = new Stopwatch();
+			timer.Start();
+			var res = this.WaitForContainerToBeVisible(timeout);
+			timer.Stop();
+			secondsWaited = Convert.ToInt32(timer.Elapsed.TotalSeconds);
+			return res;
+			//return this.WaitForMethodTimeout(WaitForContainerToBeVisible, timeout, true, out secondsWaited);
+		}
+
+		//private bool WaitForMethodTimeout(Func<int, bool, bool> function, int timeout, bool report, out int secondsWaited)
+		//{
+		//	var timer = new Stopwatch();
+		//	timer.Start();
+		//	var res = function.Invoke(timeout, report);
+		//	timer.Stop();
+		//	secondsWaited = Convert.ToInt32(timer.Elapsed.TotalSeconds);
+		//	return res;
+		//}
 	}
 }
