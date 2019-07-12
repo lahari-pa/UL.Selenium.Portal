@@ -105,7 +105,7 @@ Scenario: [57737] New Account - Required fields
 		| Country              | UNITED STATES   |
 		| FirstName            | Richard         |
 		| LastName             | Smith           |
-		| Password             | Pa4*ytuufnn     |
+		| Password             | Selenium1!      |
 		| Address1             | Address 1       |
 		| Address2             | Address 2       |
 		| City                 | City Name       |
@@ -125,7 +125,7 @@ Scenario: [57737] New Account - Required fields
 		| AnimalHint           | AnimalHint      |
 		| CollegeQuestion      | CollegeQuestion |
 		| CollegeHint          | CollegeHint     |
-		| Pin                  | abcd            |
+		| Pin                  | 1234            |
 	Given I save the current emails in the inbox for user saved as: SignupUser2
 	Given I click on the New to WERCSmart Link
 	Then the signup page should appear
@@ -156,22 +156,24 @@ Scenario: [57737] New Account - Required fields
 	And In the new user form I click on continue
 	Then I should be on the Security Questions page of the form
 	And In the new user form I click on continue
-	Then In the CityQuestion entry error I see error message: This is a required field.
-	Then In the CarQuestion entry error I see error message: This is a required field.
-	Then In the FriendQuestion entry error I see error message: This is a required field.
-	Then In the JobQuestion entry error I see error message: This is a required field.
-	Then In the MascotQuestion entry error I see error message: This is a required field.
-	Then In the PINQuestion entry error I see error message: This is a required field.
+	# Questions changed by #71591
+	Then I check the Security Questions show the error: This is a required field.
 	And I enter the following into the Security Questions window for user saved as: SignupUser2
+	When In the new user form I click on continue
+	Then In the PINQuestion entry error I see error message: This is a required field.
 	And I enter the pin for user saved as: SignupUser2
+	#Then I wait 2 seconds
 	When In the new user form I click on continue
-	#CLF 22 June 2018 This error message seems to have changed
-	#Then In the PINQuestion entry error I see error message: Please choose a four digit pin number that we can use to verify your identity.
-	Then In the PINQuestion entry error I see error message: PIN must be a 4 digit number.
-	And I enter the pin: 1234
 	When In the new user form I click on continue
+	#Then I wait 5 seconds
 	Given I go to the WERCSmart Log in
 	Given I login as user: SignupUser2
 	Given If terms of use page appears I accept
 	Then the WERCSmart homepage should load
 	Then I should see username for user saved as: SignupUser2 in the right corner
+# Then In the CityQuestion entry error I see error message: This is a required field.
+# Then In the CarQuestion entry error I see error message: This is a required field.
+# Then In the JobQuestion entry error I see error message: This is a required field.
+# Then In the MascotQuestion entry error I see error message: This is a required field.
+# Then In the FriendQuestion entry error I see error message: This is a required field.
+# Then In the PINQuestion entry error I see error message: This is a required field.
