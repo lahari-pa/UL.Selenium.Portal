@@ -1059,6 +1059,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (var savedAs in usersSavedAs)
 			{
+				bool expired = false;
 				var user = TestUsers.GetUserSavedAs(savedAs);
 				if (!user.Username.Contains("@"))
 				{
@@ -1090,6 +1091,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						var message = passwordExpired.TopMessage();
 						if (message != null && message.Contains("Your password has expired after 90 days for security reasons"))
 						{
+							expired = true;
 							Report.Info("The password expired after 90 days.");
 							Report.Info("Attempting to reset password");
 							var currentPassword = user.Password;
@@ -1158,7 +1160,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Clicking Reset Password for the current logged in user");
 				selMyAccount.GivenIGoToActionInUserGrid("Reset Password");
 				Report.Info("Updating the password for test user " + savedAs);
-				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs);
+				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs, expired);
 				Report.Info("Logging out");
 				this.GivenILogout();
 				if (!new LandingPage().Wait_for_load())
@@ -1176,22 +1178,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"I save to context name: (.*) and value: (.*)")]
+		[StepDefinition(@"I save to context name: (.*) and value: (.*)")]
 		public void GivenISaveToContextNameAndValue(string name, string value)
 		{
-			ProductInformation newProductInformation = new ProductInformation();
-			newProductInformation.Id = value;
-			newProductInformation.Name = value;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, newProductInformation);
+			ProductInformation newProductInformation = new ProductInformation {
+				Id = value,
+				Name = value
+			};
+			Context.AddToContext(name, newProductInformation);
 		}
 
 		[StepDefinition(@"I add to context name: (.*) and value: (.*)")]
 		public void GivenIAddToContextNameAndValue(string name, string value)
 		{
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, value);
+			Context.AddToContext(name, value);
 		}
 
-		[Given(@"I check alert text contains (.*) and dismiss")]
+		[StepDefinition(@"I check alert text contains (.*) and dismiss")]
 		public void GivenICheckAlertTextContainsXAndDismiss(string searchText)
 		{
 			//Putting this in because standard get alert functionality does not work in this page.
@@ -1210,7 +1213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 		}
 
-		[Given(@"I save to context name: (.*) and string value: (.*)")]
+		[StepDefinition(@"I save to context name: (.*) and string value: (.*)")]
 		public void GivenISaveToContextNameAndStringValue(string name, string value)
 		{
 			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, value);

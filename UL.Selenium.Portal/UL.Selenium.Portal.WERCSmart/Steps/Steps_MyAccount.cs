@@ -921,7 +921,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I update the password for TReVor test user: (.*) in the change user password popup")]
-		public void IUpdateThePasswordForTrevorTestUser(string savedAs)
+		[StepDefinition(@"I update the password for TReVor test user: (.*) in the change user password popup and expired is (.*)")]
+		public void IUpdateThePasswordForTrevorTestUser(string savedAs, bool expired = true)
 		{
 
 			// Get user credentials from TReVor based on saved as ID
@@ -949,18 +950,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				return;
 			}
-			Report.Info("Entering current password in the input: " + oldPassword);
-			selModal.EnterLoginPassword(oldPassword);
-			Report.Info("Clicking continue in the Change Password popup");
-			if (!Report.IsTrue(selModal.ClickContinue(),
-				"Failed to click continue in Change Password",
-				"Successfully clicked continue in Change Password"))
+
+			// If the password has expired, the old password is required. Else it isn't.
+			if (expired)
 			{
-				if (selModal.Click_Close())
+				Report.Info("Entering current password in the input: " + oldPassword);
+				selModal.EnterLoginPassword(oldPassword);
+			}
+
+			if (expired)
+			{
+				Report.Info("Clicking continue in the Change Password popup");
+				if (!Report.IsTrue(selModal.ClickContinue(),
+					"Failed to click continue in Change Password",
+					"Successfully clicked continue in Change Password"))
 				{
-					return;
+					if (selModal.Click_Close())
+					{
+						return;
+					}
+					throw new Exception("Failed to click continue in the change password modal, and failed to close it!");
 				}
-				throw new Exception("Failed to click continue in the change password modal, and failed to close it!");
 			}
 			GeneralUtilities.Wait_for_load_finish();
 			int attempt = 0;
