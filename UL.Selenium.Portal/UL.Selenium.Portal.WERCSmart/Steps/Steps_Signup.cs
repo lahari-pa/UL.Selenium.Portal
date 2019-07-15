@@ -713,13 +713,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I wait (.*) seconds")]
-		public void ThenIWaitSeconds(int p0)
-		{
-			Delay.Seconds(p0);
-		}
-
-
 		[StepDefinition(@"I should be on the (.*) page of the form")]
 		public void ThenIShouldBeOnThePageOfTheForm(string pageTitle)
 		{
