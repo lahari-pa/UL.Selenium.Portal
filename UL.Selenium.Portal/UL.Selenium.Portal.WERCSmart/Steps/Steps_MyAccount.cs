@@ -10,6 +10,7 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using NTTQA.Selenium.TReVor;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -197,17 +198,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				var myUserDetails = new UserDetails();
-				User thisUser = new User();
-
-				thisUser.Username = myUserDetails.Name;
-				thisUser.Title = myUserDetails.Title;
-				thisUser.Role = myUserDetails.UserRole;
-				thisUser.Purview = myUserDetails.Purview;
-				thisUser.Email = myUserDetails.EmailAddress;
-				thisUser.Country = myUserDetails.Country;
-				thisUser.CountryCode = myUserDetails.CountryCode;
-				thisUser.PhoneNumber = myUserDetails.PhoneNumber;
-				thisUser.SendNotifications = myUserDetails.SendNotifications;
+				User thisUser = new User {
+					Username = myUserDetails.Name,
+					Title = myUserDetails.Title,
+					Role = myUserDetails.UserRole,
+					Purview = myUserDetails.Purview,
+					Email = myUserDetails.EmailAddress,
+					Country = myUserDetails.Country,
+					CountryCode = myUserDetails.CountryCode,
+					PhoneNumber = myUserDetails.PhoneNumber,
+					SendNotifications = myUserDetails.SendNotifications
+				};
 				Delay.Seconds(1);
 
 				Context.AddToContext(saveAs, thisUser);
@@ -995,7 +996,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (selModal.Wait_for_close())
 				{
 					Report.Info("Updating the password in TReVor Test Users");
-					TestUsers.UpdatePassword(savedAs, newPassword);
+					Api.UpdateTestUserPassword(savedAs, newPassword);
 					return;
 				}
 				throw new Exception("Modal dialog did not close!");

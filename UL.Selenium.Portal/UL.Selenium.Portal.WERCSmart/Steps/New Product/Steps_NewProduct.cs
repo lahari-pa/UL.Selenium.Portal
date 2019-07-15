@@ -213,7 +213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.Info("Creating shell product with name " + name + ", saved as " + savedAs);
 				var selNewProduct = new NewProduct();
-				if (!selNewProduct.Wait_for_load(10))
+				if (!selNewProduct.WaitForContainerToBeVisible(10))
 				{
 					throw new Exception("Page failed to load!");
 				}
@@ -235,9 +235,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				// Product Name made out of the name + the Id - so if we remove the Name from the product we should be left with an ID!
 				string productId = fullProductName.Replace(name, "").Replace("(", "").Replace(")", "").Trim();
 				Report.Info("ProductID was: '" + productId + "'");
-				var productEntry = new ProductGridItem();
-				productEntry.ProductId = productId;
-				productEntry.ProductName = name.Trim();
+				var productEntry = new ProductGridItem {
+					ProductId = productId,
+					ProductName = name.Trim()
+				};
 				Context.AddToContext(savedAs, productEntry);
 				Report.Success("Product created successfully!");
 				Report.Screenshot();
@@ -357,7 +358,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			try
 			{
 				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.Wait_for_load(10), "New product page is not loaded", "New product page is loaded.");
+				Report.IsTrue(selNewProduct.WaitForContainerToBeVisible(10), "New product page is not loaded", "New product page is loaded.");
 				selNewProduct.SelectTypeOfProductToCreate("New");
 			}
 			catch (Exception ex)
@@ -555,8 +556,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForInternationalShippingWhenDOTExemptionTakenISelect(string selection)
 		{
-			var selNewProduct = new NewProduct();
-			selNewProduct.InternationalShippingDOTExemption = selection;
+			var selNewProduct = new NewProduct {
+				InternationalShippingDOTExemption = selection
+			};
 			Report.IsTrue(selNewProduct.InternationalShippingDOTExemption == selection, "Failed to select: " + selection,
 				"Successfully selected: " + selection);
 		}
@@ -587,8 +589,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Other DOT Exception I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForOtherDOTExceptionISelect(string selection)
 		{
-			var selNewProduct = new NewProduct();
-			selNewProduct.OtherDOTException = selection;
+			var selNewProduct = new NewProduct {
+				OtherDOTException = selection
+			};
 			Report.IsTrue(selNewProduct.OtherDOTException == selection, "Failed to select: " + selection,
 				"Successfully selected: " + selection);
 		}
@@ -849,7 +852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			List<string> radioButtonsShowing = selNewProduct.RadioButtons();
 			foreach (TableRow row in expected.Rows)
 			{
-				var button = row["Button"];
+				string button = row["Button"];
 				Report.Info("Checking that I see the radio button '" + button + "'");
 				Report.IsTrue(radioButtonsShowing.Contains(button.Trim()),
 					"Radio Button was not showing as expected! Expected: '" + button + "', but found: '" + string.Join("', '", radioButtonsShowing) + "'!",
@@ -862,10 +865,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ShouldSeeCheboxes(Table expected)
 		{
 			var selNewProduct = new NewProduct();
-			var checkboxShowing = selNewProduct.Checkboxes();
-			foreach (var row in expected.Rows)
+			List<string> checkboxShowing = selNewProduct.Checkboxes();
+			foreach (TableRow row in expected.Rows)
 			{
-				var button = row["Checkbox"];
+				string button = row["Checkbox"];
 				Report.Info("Checking that I see the checkbox '" + button + "'");
 				Report.IsTrue(checkboxShowing.Contains(button.Trim()),
 					"Checkbox was not showing as expected! Expected: '" + button + "', but found: '" + string.Join("', '", checkboxShowing) + "'!",
@@ -878,7 +881,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void RadioButtonCountInSection(string condition, string count, string section)
 		{
 			var selNewProduct = new NewProduct();
-			var expectedCount = Convert.ToInt32(count);
+			int expectedCount = Convert.ToInt32(count);
 			int actualCount = selNewProduct.RadioButtonCountInSection(section);
 			if (condition == "a total of")
 			{
@@ -896,7 +899,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var expectedRadioButtons = new List<string>();
 			expected.Rows.ForEach(x => expectedRadioButtons.Add(x["Button"]));
-			var radioButtonsShowing = new NewProduct().RadioButtonsInSection(section);
+			List<string> radioButtonsShowing = new NewProduct().RadioButtonsInSection(section);
 
 			if (shouldOrNot == "should")
 			{
@@ -922,7 +925,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I add the following into the UPC Fields")]
 		public void ThenIAddTheFollowingIntoTheUpcFields(Table table)
 		{
-			var upcInfo = table.CreateInstance<UpcInformation>();
+			UpcInformation upcInfo = table.CreateInstance<UpcInformation>();
 			Report.Info("UPC Number: " + upcInfo.UpcNumber);
 			Report.Info("Container Type: " + upcInfo.ContainerType);
 			Report.Info("Size: " + upcInfo.Size);
@@ -1022,7 +1025,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.Info("Beginning I " + condition + " the following sections");
 			var expectedSections = new List<string>();
-			foreach (var Row in sections.Rows)
+			foreach (TableRow Row in sections.Rows)
 			{
 				expectedSections.Add(Row["Section"]);
 			}
@@ -1034,7 +1037,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			if (condition == "only see")
 			{
 				List<string> mismatch = new List<string>();
-				foreach (var section in ActualSections)
+				foreach (string section in ActualSections)
 				{
 					if (!expectedSections.Contains(section))
 					{
@@ -1059,7 +1062,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void CheckDisplayedSections(string section, string position)
 		{
 			var actualSections = new NewProduct().GetDisplayedSections().Select(x => x.Trim()).ToList();
-			var index = position.All(char.IsDigit) ? int.Parse(position) - 1 : -1;
+			int index = position.All(char.IsDigit) ? int.Parse(position) - 1 : -1;
 			if (index == -1)
 			{
 				Report.Failure("The specified question position must be numeric");
@@ -1074,7 +1077,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void SelectFirstOptionInSection(string section)
 		{
 			NewProduct myProduct = new NewProduct();
-			var options = myProduct.GetAllOptionsForSection(section);
+			List<string> options = myProduct.GetAllOptionsForSection(section);
 			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), "The option: " + options[0] + " could not be selected in section: " + section, "The option: " + options[0] + " was selected in section: " + section);
 		}
 
@@ -1118,7 +1121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I set the below options for field: (.*)")]
 		public void CheckAvailableOptionsInSection(string section, Table options)
 		{
-			foreach (var row in options.Rows)
+			foreach (TableRow row in options.Rows)
 			{
 				Report.IsTrue(new NewProduct().SetOptionInSection(section, row["Option"]), "Failed to set the input to " + row["Option"] + " in section: " + section, "Successfully set the input to " + row["Option"] + " in section: " + section, false, false);
 			}
@@ -1548,7 +1551,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var selNewProduct = new NewProduct();
 			Report.Info("Checking new product is loaded");
-			Report.IsTrue(selNewProduct.Wait_for_load(10),
+			Report.IsTrue(selNewProduct.WaitForContainerToBeVisible(10),
 				"The New Product page is not currently loaded",
 				"The New Product page is loaded");
 			var currentPage = selNewProduct.ActivePanelHeadingText();
@@ -2257,11 +2260,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenIChangeTheSecondaryPhysicalStateDropDownFromItsCurrentSelectionToANewSelection()
 		{
 			Report.Info("Changing secondary physical state");
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 			string currentlySelected = thisNewProduct.SelectedOptionsForSection("Secondary Physical State").FirstOrDefault();
 			List<string> available = thisNewProduct.GetAllOptionsForSection("Secondary Physical State");
 
-			var newOption = available.FirstOrDefault(x => x != currentlySelected);
+			string newOption = available.FirstOrDefault(x => x != currentlySelected);
 
 			Report.IsTrue(thisNewProduct.SelectSecondaryPhysicalState(newOption), "Failed to select: " + newOption,
 				"Selected: " + newOption);
@@ -2374,7 +2377,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				return;
 			}
 			var random = new Random();
-			var randomNumber = random.Next(1, containerTypes.Count - 1);
+			int randomNumber = random.Next(1, containerTypes.Count - 1);
 			Report.IsTrue(new NewProduct().SelectContainerType(containerTypes[randomNumber]),
 				"Failed to select: " + containerTypes[randomNumber], "Selected: " + containerTypes[randomNumber]);
 		}

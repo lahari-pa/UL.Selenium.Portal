@@ -702,9 +702,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Attempting to click continue");
-				NewUser thisNewUser = new NewUser();
+				var thisNewUser = new NewUser();
 				Report.IsTrue(thisNewUser.ClickContinue(), "Failed to click continue!", "Successfully clicked continue!");
-				string str = "";
 			}
 			catch (Exception ex)
 			{
@@ -791,7 +790,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 1; i < 5; i++)
 			{
 				string actual = nu.GetSecurityQuestionError(i);
-				Report.Info("Checking Question "+ i + "...");
+				Report.Info("Checking Question " + i + "...");
 				Report.IsTrue(expected == (actual ?? ""), "Error message is not showing " + expected + ", it is showing " + actual + ".", "Error message is showing " + expected + " as expected.");
 			}
 		}
@@ -824,8 +823,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				Report.Info("Beginning to enter pin: '" + user.Pin + "'");
-				NewUser thisNewUser = new NewUser();
-				thisNewUser.Pin = user.Pin;
+				NewUser thisNewUser = new NewUser {
+					Pin = user.Pin
+				};
 				Report.IsTrue(user.Pin == thisNewUser.Pin, "Pin was not entered correctly!", "Pin was entered successfully!");
 				Report.Screenshot();
 			}

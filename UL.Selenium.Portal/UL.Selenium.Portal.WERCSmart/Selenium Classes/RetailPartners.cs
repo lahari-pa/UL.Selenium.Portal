@@ -383,13 +383,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (IWebElement thisRow in supplierRows)
 			{
-				var newSupplier = new Supplier();
-				newSupplier.SupplierID = thisRow.FindElement(By.XPath(".//td[1]"), 2).GetValue();
-				newSupplier.CompanyOrBrandName = thisRow.FindElement(By.XPath(".//td[2]"), 2).GetValue();
-				newSupplier.IsActive = thisRow.FindElement(By.XPath(".//td[3]/i"), 2).GetAttribute("class")
-					.Contains("success");
-				newSupplier.IsDefault = thisRow.FindElement(By.XPath(".//td[4]/i"), 2).GetAttribute("class")
-					.Contains("success");
+				var newSupplier = new Supplier {
+					SupplierID = thisRow.FindElement(By.XPath(".//td[1]"), 2).GetValue(),
+					CompanyOrBrandName = thisRow.FindElement(By.XPath(".//td[2]"), 2).GetValue(),
+					IsActive = thisRow.FindElement(By.XPath(".//td[3]/i"), 2).GetAttribute("class")
+					.Contains("success"),
+					IsDefault = thisRow.FindElement(By.XPath(".//td[4]/i"), 2).GetAttribute("class")
+					.Contains("success")
+				};
 
 				supplierList.Add(newSupplier);
 

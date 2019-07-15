@@ -25,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public void Click_Continue()
 		{
-			var btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselContinue']"), 2);
+			IWebElement btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselContinue']"), 2);
 			btn.Click();
 		}
 
@@ -34,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public void Click_Cancel()
 		{
-			var btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
+			IWebElement btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
 			btn.Click();
 		}
 

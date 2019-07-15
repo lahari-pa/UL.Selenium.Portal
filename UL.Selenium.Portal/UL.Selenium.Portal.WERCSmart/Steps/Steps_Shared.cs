@@ -2634,7 +2634,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			var selSelectRetailers = new SelectRetailers();
-			if (!selSelectRetailers.Wait_for_load(10))
+			if (!selSelectRetailers.WaitForContainerToBeVisible(10))
 			{
 				Report.Warn("The Select Retailers page was not loaded on entering the Retailer page");
 				new Retailer().ClickAddRetailers();
@@ -6673,7 +6673,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var selNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
-			if (selNewProduct.Wait_for_load())
+			if (selNewProduct.WaitForContainerToBeVisible())
 			{
 				if (selNewProduct.WaitForSection("ULSC Service Data Re-Import"))
 				{

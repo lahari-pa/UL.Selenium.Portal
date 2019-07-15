@@ -115,7 +115,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// download file to C:\temp\GetFile.pdf
 			var address = @"C:\temp\GetFile.pdf";
 			var documentText = selDocumentsAcceptance.DocumentText(address);
-			var break_ = "";
 		}
 	}
 }

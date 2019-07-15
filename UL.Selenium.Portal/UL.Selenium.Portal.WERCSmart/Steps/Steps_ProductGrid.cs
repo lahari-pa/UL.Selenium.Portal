@@ -170,8 +170,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Report.Info("Searching for product with ID: '" + id + "'");
-				var selProdGrid = new ProductsGrid();
-				selProdGrid.ProductIdField = id;
+				var selProdGrid = new ProductsGrid {
+					ProductIdField = id
+				};
 				GeneralUtilities.Wait_for_load_finish();
 				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + id + "'!", "Product was returned!");
 			}
@@ -399,7 +400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking Bulk Actions popup appears");
 				var selBulkActions = new BulkActions();
-				selBulkActions.Wait_for_load();
+				selBulkActions.WaitForContainerToBeVisible();
 				Report.Success("Bulk Actions window opened successfully!");
 			}
 			catch (Exception ex)
@@ -586,8 +587,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var Product = (ProductInformation)Context.GetFromContext(savedas);
 			Report.Info("Attempting to delete: " + Product.Name);
-			var ProductGrid = new ProductsGrid();
-			ProductGrid.ProductIdField = Product.Id;
+			var ProductGrid = new ProductsGrid {
+				ProductIdField = Product.Id
+			};
 			if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
 			{
 				if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the search button", "Successfully clicked the search button!", false, false))
@@ -720,8 +722,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I edit the product with ID: (.*)")]
 		public void EditFirstProductForRetailer(string id)
 		{
-			var selProductsGrid = new ProductsGrid();
-			selProductsGrid.ProductIdField = id;
+			var selProductsGrid = new ProductsGrid {
+				ProductIdField = id
+			};
 			Report.IsTrue(selProductsGrid.ClickActionsForFirstResultInGrid() && selProductsGrid.ClickRowAction("Edit"),
 				"Failed to edit the product with ID: " + id,
 				"Successfully edited the product with ID: " + id);
@@ -884,8 +887,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Could not find UPC number in context saved as: " + savedAs);
 				return;
 			}
-			var selProductGrid = new ProductsGrid();
-			selProductGrid.UpcNumber = upc;
+			var selProductGrid = new ProductsGrid {
+				UpcNumber = upc
+			};
 			if (!Report.IsTrue(selProductGrid.UpcNumber == upc,
 				"Value: " + upc + " was not inputted into the UPC field correctly!",
 				"Value: " + upc + " was correctly inputted into the UPC field", false, false))
@@ -1084,8 +1088,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the product exists with Product ID: (.*) and Name: (.*)")]
 		public void ProductExistsWithIDAndName(string id, string name)
 		{
-			var selProdGrid = new ProductsGrid();
-			selProdGrid.ProductIdField = id;
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = id
+			};
 			GeneralUtilities.Wait_for_load_finish();
 			var firstProduct = selProdGrid.FirstProductInGrid();
 			Report.IsTrue(firstProduct != null && firstProduct.ProductName == name,

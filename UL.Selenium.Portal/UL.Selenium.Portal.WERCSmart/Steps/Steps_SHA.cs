@@ -116,8 +116,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<Message> ListOfMessages = new List<Message>();
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
-				Message thisMessage = new Message();
-				thisMessage.Title = thisRow["Title"];
+				Message thisMessage = new Message {
+					Title = thisRow["Title"]
+				};
 
 				if (thisRow["Message"] == "generated")
 				{
@@ -1007,8 +1008,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string id = thisStudioSHAManager.SelectFirstProduct();
 			Report.IsTrue(id.Length > 0, "Product " + id + " has not been selected",
 				"Product " + id + " has been selected");
-			ProductInformation thisProductInformation = new ProductInformation();
-			thisProductInformation.Id = id;
+			ProductInformation thisProductInformation = new ProductInformation {
+				Id = id
+			};
 			Context.AddToContext("ID", thisProductInformation);
 		}
 
@@ -1453,8 +1455,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (Product thisProduct in productList)
 			{
 
-				ProductInformation thisPI = new ProductInformation();
-				thisPI.Id = thisProduct.ID;
+				ProductInformation thisPI = new ProductInformation {
+					Id = thisProduct.ID
+				};
 				Context.AddToContext(thisProduct.ID, thisPI);
 				if (counter == 1)
 				{

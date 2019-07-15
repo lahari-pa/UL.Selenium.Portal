@@ -57,11 +57,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				foreach (var userRow in listOfUsersRows)
 				{
-					User thisUser = new User();
-					thisUser.Username = userRow.FindElement(By.XPath(".//td[1]")).Text;
-					thisUser.Email = userRow.FindElement(By.XPath(".//td[2]")).Text;
-					thisUser.Role = userRow.FindElement(By.XPath(".//td[3]")).Text;
-					thisUser.IsActive = userRow.FindElement(By.XPath(".//td[4]")).Text == "Yes";
+					User thisUser = new User {
+						Username = userRow.FindElement(By.XPath(".//td[1]")).Text,
+						Email = userRow.FindElement(By.XPath(".//td[2]")).Text,
+						Role = userRow.FindElement(By.XPath(".//td[3]")).Text,
+						IsActive = userRow.FindElement(By.XPath(".//td[4]")).Text == "Yes"
+					};
 					var checkboxes = userRow.FindElements(By.XPath(".//td[5]/div[@class='checkbox']"));
 					foreach (var checkbox in checkboxes)
 					{
@@ -981,10 +982,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Report.Info(myText.Text.Trim());
 
-			var Expected = new List<string>();
-			Expected.Add(form_no == "0" ? "" : form_no + " Formulated");
-			Expected.Add(art_no == "0" ? "" : art_no + " Articles");
-			Expected.Add(en_art_no == "0" ? "" : en_art_no + " Enhanced Articles");
+			var Expected = new List<string> {
+				form_no == "0" ? "" : form_no + " Formulated",
+				art_no == "0" ? "" : art_no + " Articles",
+				en_art_no == "0" ? "" : en_art_no + " Enhanced Articles"
+			};
 			var ExpectedText = string.Join(", ", Expected.Where(x => x != ""));
 
 			Report.Info("Expected string: " + ExpectedText);
@@ -1315,9 +1317,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var thisID = rows[rInt - 1].FindElement(By.XPath("./td/div/small"), 2).Text;
 			var thisName = rows[rInt - 1].FindElement(By.XPath("./td/div[@data-bind='text:Name']"), 2).Text;
 
-			PackagingTypeItem thisItem = new PackagingTypeItem();
-			thisItem.ID = thisID;
-			thisItem.Name = thisName;
+			PackagingTypeItem thisItem = new PackagingTypeItem {
+				ID = thisID,
+				Name = thisName
+			};
 			return thisItem;
 		}
 		public class PackagingTypeItem
@@ -1646,10 +1649,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public IngredientItem GetIngredient(int row, int index)
 		{
-			IngredientItem rIngredient = new IngredientItem();
-			rIngredient.Row = row;
-			rIngredient.Page = this.GetPage("current");
-			rIngredient.Index = index;
+			IngredientItem rIngredient = new IngredientItem {
+				Row = row,
+				Page = this.GetPage("current"),
+				Index = index
+			};
 			var tableRow = this.containerElement.FindElement(By.XPath(".//div[@id='settings']//tbody/tr[" + row + "]"), 2);
 			if (tableRow == null)
 			{

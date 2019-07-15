@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ErrorsExist()
 		{
-			var errors = containerElement.FindElements(By.XPath(".//i[contains(@class, 'exclamation')]"));
+			var errors = this.containerElement.FindElements(By.XPath(".//i[contains(@class, 'exclamation')]"));
 			return errors.Count > 0;
 		}
 
@@ -94,7 +94,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> SelectProducts_GetListOfIDs()
 		{
-			var products = containerElement.FindElements(By.XPath(".//tbody/tr/td//label[contains(@data-bind, 'wpsid')]"));
+			var products = this.containerElement.FindElements(By.XPath(".//tbody/tr/td//label[contains(@data-bind, 'wpsid')]"));
 			return products.Select(x => x.GetValue()).ToList();
 		}
 
@@ -202,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectOtherRetailer(string retailer)
 		{
-			var retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//span[contains(text(),'" + retailer + "')]/../input"),2);
+			var retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//span[contains(text(),'" + retailer + "')]/../input"), 2);
 
 			if (retailerInput == null)
 			{
@@ -271,14 +271,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectUPCByNumber(string UPCNumber)
 		{
-			SelectUPCs thisSelectUPCs = new SelectUPCs();
-			thisSelectUPCs.UPCInfo = new UPC() {UPCNumber = UPCNumber};
+			SelectUPCs thisSelectUPCs = new SelectUPCs {
+				UPCInfo = new UPC() { UPCNumber = UPCNumber }
+			};
 			return thisSelectUPCs.SelectUPC();
 		}
 
 		public bool ClickActionByUPCNumber(string UPCNumber, string Action)
 		{
-			UPC thisUPC= new UPC() { UPCNumber = UPCNumber };
+			UPC thisUPC = new UPC() { UPCNumber = UPCNumber };
 			return thisUPC.ClickAction(Action);
 		}
 
@@ -590,7 +591,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public bool ClickButton(string button)
 			{
 				var buttons = this.containerElement.FindElements(By.XPath(".//button"), 2);
-				if (buttons.Count==0)
+				if (buttons.Count == 0)
 				{
 					Report.Info("No buttons were found");
 					return false;

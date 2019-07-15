@@ -19,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenIShouldSeeTheSelectRetailersPopUp()
 		{
 			var selSelectRetailers = new SelectRetailers();
-			Report.IsTrue(selSelectRetailers.Wait_for_load(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
+			Report.IsTrue(selSelectRetailers.WaitForContainerToBeVisible(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
 		}
 
 		[StepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]
@@ -82,12 +82,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void SelectTheRetailer(string retailer)
 		{
 			var selectRetailers = new SelectRetailers();
-			if (!selectRetailers.Wait_for_load(1))
+			if (!selectRetailers.WaitForContainerToBeVisible(1))
 			{
 				new Retailer().ClickAddRetailers();
 				Delay.Seconds(1);
 			}
-			if (!selectRetailers.Wait_for_load(1))
+			if (!selectRetailers.WaitForContainerToBeVisible(1))
 			{
 				throw new Exception("Select retailers popup is not showing as expected");
 			}

@@ -23,21 +23,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		public bool ClickNext =>
 			this.containerElement.FindElement(By.XPath(".//input[@id='cmdNext']"), 2).TryClick();
 
-		public new bool ClickCancel => this.containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"), 2).TryClick();
+		public new bool ClickCancel =>
+			this.containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"), 2).TryClick();
 
 		public string WhatCityWereYouBornIn {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).Text.Trim(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).Text.Trim();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).EnterText(value);
 		}
 
 		public string WhatWasTheModelOfYourFirstCar {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).Text.Trim(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).Text.Trim();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).EnterText(value);
 		}
 
 		public string WhatIsYourFavouriteSport {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).Text.Trim(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).Text.Trim();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).EnterText(value);
 		}
 		public string WhatIsYourFavouriteFoodOrDrink {
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).Text.Trim();

@@ -20,6 +20,7 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
+using NTTQA.Selenium.TReVor;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -246,7 +247,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Beginning I login with email and password");
 			var selLandingPage = new LandingPage();
-			if (!selLandingPage.Wait_for_load(5))
+			if (!selLandingPage.WaitForContainerToBeVisible(5))
 			{
 				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 2) != null)
 				{
@@ -584,7 +585,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Warn("AREA UNDER DEVELOPMENT");
 				Report.Failure("AREA UNDER DEVELOPMENT");
 				var selBulkActions = new BulkActions();
-				if (selBulkActions.Wait_for_load(5))
+				if (selBulkActions.WaitForContainerToBeVisible(5))
 				{
 					Report.Info("Closing Bulk Actions window as result is not yet developed");
 					selBulkActions.ClickClose();
@@ -1123,7 +1124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							if (passwordExpired.TopHeading().Contains("Thank You"))
 							{
 								Report.Info("Updating the password in TReVor Test Users");
-								TestUsers.UpdatePassword(savedAs, newPassword);
+								Api.UpdateTestUserPassword(savedAs, newPassword);
 								Report.Info("Navigating to the landing page");
 								SeleniumBrowser.WebBrowser.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
 								Report.Info("Checking I can log in with the new credentials");
@@ -1166,7 +1167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs);
 				Report.Info("Logging out");
 				this.GivenILogout();
-				if (!new LandingPage().Wait_for_load())
+				if (!new LandingPage().WaitForContainerToBeVisible())
 				{
 					Report.Info("Directed to an unexpected WercSmart landing page!");
 					Report.Info("Navigating to the landing page");

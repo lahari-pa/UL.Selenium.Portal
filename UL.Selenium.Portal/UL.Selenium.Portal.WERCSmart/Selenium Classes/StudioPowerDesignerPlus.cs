@@ -3350,11 +3350,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (var selectedPhrase in selectedRows)
 			{
-				Phrase thisPhrase = new Phrase();
-				thisPhrase.Code = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfCode + "]"), 2).GetValue();
-				thisPhrase.Text = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfText + "]"), 2).GetValue();
-				thisPhrase.Type = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue();
-				thisPhrase.Notes = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfNotes + "]"), 2).GetValue();
+				Phrase thisPhrase = new Phrase {
+					Code = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfCode + "]"), 2).GetValue(),
+					Text = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfText + "]"), 2).GetValue(),
+					Type = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue(),
+					Notes = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfNotes + "]"), 2).GetValue()
+				};
 				listOfPhrases.Add(thisPhrase);
 			}
 
@@ -3372,11 +3373,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			List<Phrase> listOfPhrases = new List<Phrase>();
 			foreach (var selectedPhrase in selectedRows)
 			{
-				Phrase thisPhrase = new Phrase();
-				thisPhrase.Code = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfCode + "]"), 2).GetValue();
-				thisPhrase.Text = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfText + "]"), 2).GetValue();
-				thisPhrase.Type = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue();
-				thisPhrase.Notes = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfNotes + "]"), 2).GetValue();
+				Phrase thisPhrase = new Phrase {
+					Code = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfCode + "]"), 2).GetValue(),
+					Text = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfText + "]"), 2).GetValue(),
+					Type = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue(),
+					Notes = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfNotes + "]"), 2).GetValue()
+				};
 				listOfPhrases.Add(thisPhrase);
 			}
 
