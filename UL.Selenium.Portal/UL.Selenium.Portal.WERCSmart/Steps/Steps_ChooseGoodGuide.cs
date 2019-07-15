@@ -365,7 +365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the 'Create Company Account' button")]
 		public void ClickCreateCompanyAccountButton()
 		{
-			Report.IsTrue(new ChooseGoodGuide_AccountCreation().ClickCreateCompanyAccount(), "Failed to click the 'Create Company Account' button!", "Successfully clicked the 'Create Company Account' button!");
+			Report.IsTrue(new ChooseGoodGuide_AccountCreation().ClickCreateCompanyAccount, "Failed to click the 'Create Company Account' button!", "Successfully clicked the 'Create Company Account' button!");
 		}
 
 		[StepDefinition(@"I enter the (Email): (.*)")]
@@ -393,12 +393,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				case ("Next"):
 					{
-						Report.IsTrue(accountCreation.ClickNext(), "Failed to click " + button + "!", "Successfully clicked " + button + "!");
+						Report.IsTrue(accountCreation.ClickNext, "Failed to click " + button + "!", "Successfully clicked " + button + "!");
 						return;
 					}
 				default:
 					{
-						Report.IsTrue(accountCreation.ClickCancel(), "Failed to click " + button + "!", "Successfully clicked " + button + "!");
+						Report.IsTrue(accountCreation.ClickCancel, "Failed to click " + button + "!", "Successfully clicked " + button + "!");
 						return;
 					}
 			}
