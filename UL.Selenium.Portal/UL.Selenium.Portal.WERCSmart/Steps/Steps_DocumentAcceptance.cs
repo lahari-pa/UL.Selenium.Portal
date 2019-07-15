@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
@@ -14,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmThereAreProductsListedUnderMyProducts(string savedAs)
 		{
 			var selDocumentAcceptance = new DocumentAcceptance();
-			var products = selDocumentAcceptance.GetProducts();
+			List<DocumentAcceptance.MyProductsItem> products = selDocumentAcceptance.GetProducts();
 			Context.AddToContext(savedAs, products);
 			Report.IsTrue(products.Any(),
 				"No products were listed under My Products!",
@@ -26,9 +27,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selDocumentAcceptance = new DocumentAcceptance();
 			var products = (List<DocumentAcceptance.MyProductsItem>)Context.GetFromContext(savedAs);
-			foreach (var product in products)
+			foreach (DocumentAcceptance.MyProductsItem product in products)
 			{
-				var documents = selDocumentAcceptance.GetDocuments();
+				List<DocumentAcceptance.DocumentsItem> documents = selDocumentAcceptance.GetDocuments();
 				if (product.Click() && GeneralUtilities.Wait_for_load_finish() && documents.Any())
 				{
 					Report.Success("Selected product: " + product.ProductName + " (" + product.WPSID + ") which displayed document(s)");
@@ -44,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveDisplayedDocumentsOnDocumentsAcceptancePage(string savedAs)
 		{
 			var selDocumentsAcceptance = new DocumentAcceptance();
-			var documents = selDocumentsAcceptance.GetDocuments();
+			List<DocumentAcceptance.DocumentsItem> documents = selDocumentsAcceptance.GetDocuments();
 			Report.Info("Saving " + documents.Count + " documents to context as: " + savedAs);
 			Context.AddToContext(savedAs, documents);
 		}
@@ -67,7 +68,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Unable to find the documents list in context saved as: " + savedAs);
 				return;
 			}
-			var viewDocument = documents.First();
+			DocumentAcceptance.DocumentsItem viewDocument = documents.First();
 			Context.AddToContext("ViewDocument", viewDocument);
 			Report.IsTrue(viewDocument.ClickAction("View"),
 				"Failed to click 'view' for document: " + documents.First().FileName,
@@ -111,10 +112,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Unable to find the document in context saved as: ViewDocument");
 				return;
 			}
-			var subFormat = document.Subformat;
+			string subFormat = document.Subformat;
 			// download file to C:\temp\GetFile.pdf
-			var address = @"C:\temp\GetFile.pdf";
-			var documentText = selDocumentsAcceptance.DocumentText(address);
+			string address = @"C:\temp\GetFile.pdf";
+			Delay.Seconds(1);
+			string documentText = selDocumentsAcceptance.DocumentText(address);
 		}
 	}
 }

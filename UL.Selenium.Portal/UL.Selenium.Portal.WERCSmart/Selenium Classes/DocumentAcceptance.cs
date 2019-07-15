@@ -10,15 +10,14 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class DocumentAcceptance : BaseObject
+	class DocumentAcceptance : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@id='documentAcceptanceContainer']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//div[@id='documentAcceptanceContainer']");
 
 		public bool ClickApproveSDS()
 		{
@@ -59,7 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			if (position.ToLower() == "current")
 			{
-				var activePageControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']/li[@class='active']/span"), 2);
+				IWebElement activePageControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']/li[@class='active']/span"), 2);
 				if (activePageControl == null)
 				{
 					Report.Failure("The page control could not be found on the My Packaging Types grid");
@@ -69,7 +68,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			if (position.ToLower() == "last")
 			{
-				var lastControl = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[@class='page-link']"), 2);
+				IList<IWebElement> lastControl = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[@class='page-link']"), 2);
 				if (lastControl.Count == 0)
 				{
 					Report.Info("Last page is: 1");
@@ -92,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool NextDisabled()
 		{
-			var pagingControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
+			IWebElement pagingControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
 			if (pagingControl == null)
 			{
 				Report.Failure("Unable to find the paging control on grid navigation");
@@ -106,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var rList = new List<MyProductsItem>();
 			this.ClickPage("1");
 			int pageNumber = this.GetPage("current");
-			var ingredientNumber = 1;
+			int ingredientNumber = 1;
 			if (pageNumber == -1)
 			{
 				Report.Failure("Could not get current page number from the grid");
@@ -115,8 +114,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int lastPageNumber = this.GetPage("last");
 			while (pageNumber <= lastPageNumber && pageNumber != -1)
 			{
-				var rows = this.containerElement.FindElements(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr"), 2);
-				foreach (var row in rows)
+				IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr"), 2);
+				foreach (IWebElement row in rows)
 				{
 					var productsItem = new MyProductsItem {
 						WPSID = row.FindElement(By.XPath("./td[contains(@data-bind,'ProductID')]"), 2)?.Text,
@@ -138,15 +137,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> DocumentsGridHeadings()
 		{
 			var rList = new List<string>();
-			var headings = this.containerElement.FindElements(By.XPath(".//div[./h3[contains(text(),'Documents')]]//thead//th"), 2);
+			IList<IWebElement> headings = this.containerElement.FindElements(By.XPath(".//div[./h3[contains(text(),'Documents')]]//thead//th"), 2);
 			return headings.Select(x => x.Text).ToList();
 		}
 		public List<DocumentsItem> GetDocuments()
 		{
 			var rList = new List<DocumentsItem>();
-			var rows = this.containerElement.FindElements(By.XPath(".//div[./h3[contains(text(),'Documents')]]//tbody/tr"), 2);
+			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//div[./h3[contains(text(),'Documents')]]//tbody/tr"), 2);
 			int i = 1;
-			foreach (var row in rows)
+			foreach (IWebElement row in rows)
 			{
 				var documentsItem = new DocumentsItem() {
 					FileName = row.FindElement(By.XPath("./td[contains(@data-bind,'FileName')]"), 2)?.Text,
@@ -163,10 +162,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool DocumentWindowOpen(string option)
 		{
 			Report.Info("Switch to Wercs Document window");
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in handles)
+			System.Collections.ObjectModel.ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in handles)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains(option))
 				{
@@ -179,10 +178,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CloseDocumentWindow(string option)
 		{
 			Report.Info("Close the document window");
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in handles)
+			System.Collections.ObjectModel.ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in handles)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains(option))
 				{
@@ -195,8 +194,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SwitchToMainWindow()
 		{
-			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in handles)
+			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in handles)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("WercSmart"))
 				{
