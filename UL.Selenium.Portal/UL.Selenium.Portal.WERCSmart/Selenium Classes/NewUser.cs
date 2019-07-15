@@ -194,69 +194,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetSecurityQuestionError(int i)
 		{
 			string xPath = "//*[@id='question" + i + "Answer_error']";
-			IWebElement we = this.containerElement.FindElement(By.XPath(xPath));
-			return we.GetValue();
-		}
-
-		public string GetSecurityQuestion1Error()
-		{
-
-			if (this._iSecE1 != null)
-			{
-				return this._iSecE1.GetValue();
-			}
-			else
-			{
-				return "";
-			}
-		}
-
-		public string GetSecurityQuestion2Error()
-		{
-			if (this._iSecE2 != null)
-			{
-				return this._iSecE2.GetValue();
-			}
-			else
-			{
-				return "";
-			}
-		}
-
-		public string GetSecurityQuestion3Error()
-		{
-			if (this._iSecE3 != null)
-			{
-				return this._iSecE3.GetValue();
-			}
-			else
-			{
-				return "";
-			}
-		}
-
-		public string GetSecurityQuestion4Error()
-		{
-			if (this._iSecE4 != null)
-			{
-				return this._iSecE4.GetValue();
-			}
-			else
-			{
-				return "";
-			}
-		}
-
-		public string GetSecurityQuestion5Error()
-		{
-			if (this._iSecE5 != null)
-			{
-				return this._iSecE5.GetValue();
-			}
-			else
-			{
-				return "";
-			}
+			IWebElement we = this.containerElement.FindElement(By.XPath(xPath),2);
+			return we?.GetValue();
 		}
 
 		public string FirstNameErrorValue {

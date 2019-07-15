@@ -791,7 +791,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 1; i < 5; i++)
 			{
 				string actual = nu.GetSecurityQuestionError(i);
-				Report.IsTrue(expected == actual, "Error message is not showing " + expected + ", it is showing " + actual + ".", "Error message is showing " + expected + " as expected.");
+				Report.Info("Checking Question "+ i + "...");
+				Report.IsTrue(expected == (actual ?? ""), "Error message is not showing " + expected + ", it is showing " + actual + ".", "Error message is showing " + expected + " as expected.");
 			}
 		}
 
