@@ -1059,7 +1059,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (var savedAs in usersSavedAs)
 			{
-				bool expired = false;
+				if(savedAs != "CanadaHasAllData")
+				{
+					continue;
+				}
 				var user = TestUsers.GetUserSavedAs(savedAs);
 				if (!user.Username.Contains("@"))
 				{
@@ -1091,7 +1094,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						var message = passwordExpired.TopMessage();
 						if (message != null && message.Contains("Your password has expired after 90 days for security reasons"))
 						{
-							expired = true;
 							Report.Info("The password expired after 90 days.");
 							Report.Info("Attempting to reset password");
 							var currentPassword = user.Password;
@@ -1160,7 +1162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Clicking Reset Password for the current logged in user");
 				selMyAccount.GivenIGoToActionInUserGrid("Reset Password");
 				Report.Info("Updating the password for test user " + savedAs);
-				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs, expired);
+				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs);
 				Report.Info("Logging out");
 				this.GivenILogout();
 				if (!new LandingPage().Wait_for_load())

@@ -17,6 +17,7 @@ Given I update the password for the following TReVor test users:
 | ProductAccount |
 
 @TrevorUsers
+@JacobRun
 @TReVorId:22135
 Scenario: Reset password for TReVor test user accounts
 
