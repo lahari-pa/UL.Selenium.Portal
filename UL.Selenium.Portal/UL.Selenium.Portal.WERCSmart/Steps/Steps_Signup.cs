@@ -1,12 +1,12 @@
+using Mailosaur;
+using NTTQA.Selenium.Cache;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Mailosaur;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -65,7 +65,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Then(@"Under the Enter Email text box the following errors should appear")]
+		[StepDefinition(@"Under the Enter Email text box the following errors should appear")]
 		public void ThenUnderTheEnterEmailTextBoxTheFollowingErrorsShouldAppear(TechTalk.SpecFlow.Table table)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Under the Enter Email text box the following errors should appear");
@@ -241,7 +241,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"In the (.*) entry error I see error message: (.*)")]
+		[StepDefinition(@"In the (.*) entry error I see error message: (.*)")]
 		public void ThenInTheEntryErrorISeeErrorMessage(string input, string errorMessage)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- In the " + input + " entry error I see error message: " + errorMessage);
@@ -529,7 +529,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-
+		// No StepDefinition?
 		public void CheckForEmailDifferences(WERCSmartUser user, string emailFrom, string title, bool should = true)
 		{
 			var differences = EmailFunctions.GetInboxDifferences(user.Email);
@@ -704,6 +704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Attempting to click continue");
 				NewUser thisNewUser = new NewUser();
 				Report.IsTrue(thisNewUser.ClickContinue(), "Failed to click continue!", "Successfully clicked continue!");
+				string str = "";
 			}
 			catch (Exception ex)
 			{
@@ -753,7 +754,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-
 		[StepDefinition(@"I enter the following into the Security Questions window for user saved as: (.*)")]
 		public void EnterTheFollowingIntoSecurityQuestions(string savedAs)
 		{
@@ -783,6 +783,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"I check the Security Questions show the error: (.*)")]
+		public void ThenICheckTheSecurityQuestionsShowTheError_(string expected)
+		{
+			NewUser nu = new NewUser();
+			for (int i = 1; i < 5; i++)
+			{
+				string actual = nu.GetSecurityQuestionError(i);
+				Report.Info("Checking Question "+ i + "...");
+				Report.IsTrue(expected == (actual ?? ""), "Error message is not showing " + expected + ", it is showing " + actual + ".", "Error message is showing " + expected + " as expected.");
+			}
+		}
+
 
 		[StepDefinition(@"I enter the pin: (.*)")]
 		public void EnterPin(string pin)

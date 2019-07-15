@@ -36,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		private IEnumerable<IWebElement> SectionControlLabels => this.containerElement.FindElements(By.XPath(".//label[@class='control-label']"), 1);
 
-		private IWebElement LabelContains(string LblContains) => this.containerElement.FindElement(By.XPath($@".//label[contains(text(),""{LblContains}"")]"), 1);
+		private IWebElement LabelContains(string lblContains) => this.containerElement.FindElement(By.XPath($@".//label[contains(text(),""{lblContains}"")]"), 1);
 
 		private IWebElement BoldElementContains(string bContains) => this.containerElement.FindElement(By.XPath($@".//b[contains(text(),""{bContains}"")]"), 1);
 		#endregion

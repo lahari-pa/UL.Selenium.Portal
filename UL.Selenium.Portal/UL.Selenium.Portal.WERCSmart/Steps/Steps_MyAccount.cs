@@ -391,11 +391,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					//Add New User
 					Report.IsTrue(selMyUserForm.Add_New_User(userName, title, role, phoneNo, emailAddress, confirmEmail, country),
 						"Failed to Add a New User", "New User Added");
-					Delay.Seconds(5);
+					Delay.Seconds(10);
 					//Check User Has Been Created
 					Report.IsTrue(selMyAccount.User_Added_Check(userName, emailAddress, role), "User Has Not Been Created",
 						"User Created Successfully");
-
 				}
 			}
 			catch (Exception ex)
@@ -921,10 +920,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new AddUserThankYouDialog().Add_User_Thank_You(), "Failed to click Close in Thank You pop up", "Successfully clicked Close in the Thank You pop up");
 		}
 
+
 		[StepDefinition(@"I update the password for TReVor test user: (.*) in the change user password popup")]
 		public void IUpdateThePasswordForTrevorTestUser(string savedAs)
 		{
-			
 			// Get user credentials from TReVor based on saved as ID
 			var user = TestUsers.GetUserSavedAs(savedAs);
 			if (user == null)
@@ -932,6 +931,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Unable to find TReVor test user saved as: " + savedAs);
 				return;
 			}
+
 			var oldPassword = user.Password;
 			var newPassword = "";
 			// If the current password ends in a character, append with a 1 for the new password
@@ -950,19 +950,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				return;
 			}
-			Report.Info("Entering current password in the input: " + oldPassword);
-			selModal.EnterLoginPassword(oldPassword);
-			Report.Info("Clicking continue in the Change Password popup");
-			if (!Report.IsTrue(selModal.ClickContinue(),
-				"Failed to click continue in Change Password",
-				"Successfully clicked continue in Change Password"))
+
+			// If the password has expired, the old password is required. Else it isn't.
+			if (selModal.LoginPasswordFieldPresent())
 			{
-				if (selModal.Click_Close())
-				{
-					return;
-				}
-				throw new Exception("Failed to click continue in the change password modal, and failed to close it!");
+				Report.Info("Entering current password in the input: " + oldPassword);
+				selModal.EnterLoginPassword(oldPassword);
 			}
+
 			GeneralUtilities.Wait_for_load_finish();
 			int attempt = 0;
 			while (attempt < 10)

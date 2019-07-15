@@ -82,6 +82,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2).EnterText(password);
 		}
 
+		public bool LoginPasswordFieldPresent()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2);
+			return el != null && el.Displayed;
+		}
+
 		public void EnterNewPassword(string password)
 		{
 			this.containerElement.FindElement(By.XPath(".//input[@id='newPassword']"), 2).EnterText(password);
@@ -142,7 +148,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingRetailer == null)
 			{
-				Report.Info("Could not find matching retailer. Retailers found were: " + String.Join(",", this.GetRetailers()));
+				Report.Info("Could not find matching retailer. Retailers found were: " + string.Join(",", this.GetRetailers()));
 				return false;
 			}
 			else

@@ -15,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement Login => this.containerElement.FindElement(By.XPath("//a[@id='loginButton']"), 1);
 
-		private IWebElement SignUp => this.containerElement.FindElement(By.XPath("//ul[@class='nav navbar-nav']//a[text()='Sign Up']"), 1);
+		private IWebElement SignUp => this.containerElement.FindElement(By.XPath("//ul[@class='nav navbar-nav']//a[contains(text(),'Sign Up')]"), 1);
 
 		private IWebElement NavigationBar => this.containerElement.FindElement(By.XPath(".//ul[@class='nav navbar-nav']"), 1);
 
