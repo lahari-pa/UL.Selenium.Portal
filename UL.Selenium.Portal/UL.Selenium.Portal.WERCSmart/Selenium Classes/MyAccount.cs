@@ -37,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				string innerText = companyNameH3.GetInnerHTML();
 				string regExPattern = @"\<.*\>.*\<\/.*\>";
-				Regex rgx = new Regex(regExPattern);
+				var rgx = new Regex(regExPattern);
 				return rgx.Replace(innerText, "").Trim();
 			}
 			else
@@ -53,11 +53,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
 				var listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
 
-				List<User> listOfUsers = new List<User>();
+				var listOfUsers = new List<User>();
 
 				foreach (var userRow in listOfUsersRows)
 				{
-					User thisUser = new User {
+					var thisUser = new User {
 						Username = userRow.FindElement(By.XPath(".//td[1]")).Text,
 						Email = userRow.FindElement(By.XPath(".//td[2]")).Text,
 						Role = userRow.FindElement(By.XPath(".//td[3]")).Text,
@@ -670,7 +670,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public int GetHighestPageNo()
 		{
 			var pageNumbers = this.containerElement.FindElements(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
-			List<short> intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
+			var intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
 			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
 
 
@@ -1312,12 +1312,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return null;
 			}
-			Random r = new Random();
+			var r = new Random();
 			int rInt = r.Next(1, rows.Count + 1); //for ints
 			var thisID = rows[rInt - 1].FindElement(By.XPath("./td/div/small"), 2).Text;
 			var thisName = rows[rInt - 1].FindElement(By.XPath("./td/div[@data-bind='text:Name']"), 2).Text;
 
-			PackagingTypeItem thisItem = new PackagingTypeItem {
+			var thisItem = new PackagingTypeItem {
 				ID = thisID,
 				Name = thisName
 			};
@@ -1649,12 +1649,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public IngredientItem GetIngredient(int row, int index)
 		{
-			IngredientItem rIngredient = new IngredientItem {
+			var rIngredient = new IngredientItem {
 				Row = row,
 				Page = this.GetPage("current"),
 				Index = index
 			};
-			var tableRow = this.containerElement.FindElement(By.XPath(".//div[@id='settings']//tbody/tr[" + row + "]"), 2);
+			IWebElement tableRow = this.containerElement.FindElement(By.XPath(".//div[@id='settings']//tbody/tr[" + row + "]"), 2);
 			if (tableRow == null)
 			{
 				return new IngredientItem();

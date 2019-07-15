@@ -208,8 +208,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string DocumentText(string address)
 		{
-			PdfReader reader = new PdfReader(address);
-			StringWriter output = new StringWriter();
+			var reader = new PdfReader(address);
+			var output = new StringWriter();
 			for (int i = 1; i <= reader.NumberOfPages; i++)
 			{
 				output.WriteLine(PdfTextExtractor.GetTextFromPage(reader, i, new SimpleTextExtractionStrategy()));

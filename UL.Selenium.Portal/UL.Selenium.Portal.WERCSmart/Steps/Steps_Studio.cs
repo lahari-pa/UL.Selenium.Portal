@@ -983,7 +983,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						if (table.ContainsColumn("Text"))
 						{
-							thisPhraseEditor.filterSelectPhrases(thisPhrase["Text"]);
+							thisPhraseEditor.FilterSelectPhrases(thisPhrase["Text"]);
 							if (!thisPhraseEditor.SelectItem("Text", thisPhrase["Text"]))
 							{
 								Report.Info("Failed to add phrase: " + thisPhrase["Text"]);
@@ -1150,7 +1150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InProductAttributePageIShouldSeeXResults(int expectedResults)
 		{
 			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
-			Report.IsTrue(thisProductAttributePage.getRecordCount() == expectedResults, "Reults were not as expected",
+			Report.IsTrue(thisProductAttributePage.GetRecordCount() == expectedResults, "Reults were not as expected",
 				"Results count was as expected");
 		}
 

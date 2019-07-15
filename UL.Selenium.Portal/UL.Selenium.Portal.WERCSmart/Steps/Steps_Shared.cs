@@ -6135,8 +6135,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				supplier = user.Username;
 			}
 
-			string retailerGUID = dbRetailers.getGUIDByRetailer(retailer);
-			string supplierGUID = dbRetailers.getSupplierGUIDByUsername(supplier);
+			string retailerGUID = DbRetailers.GetGUIDByRetailer(retailer);
+			string supplierGUID = DbRetailers.GetSupplierGUIDByUsername(supplier);
 		}
 
 		[StepDefinition(

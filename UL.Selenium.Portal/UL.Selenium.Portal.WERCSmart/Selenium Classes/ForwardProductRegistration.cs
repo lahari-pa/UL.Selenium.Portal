@@ -269,18 +269,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return upcs.First().SelectUPC();
 		}
 
-		public bool SelectUPCByNumber(string UPCNumber)
+		public bool SelectUPCByNumber(string aUPCNumber)
 		{
-			SelectUPCs thisSelectUPCs = new SelectUPCs {
-				UPCInfo = new UPC() { UPCNumber = UPCNumber }
+			var thisSelectUPCs = new SelectUPCs {
+				UPCInfo = new UPC() { UPCNumber = aUPCNumber }
 			};
 			return thisSelectUPCs.SelectUPC();
 		}
 
-		public bool ClickActionByUPCNumber(string UPCNumber, string Action)
+		public bool ClickActionByUPCNumber(string aUPCNumber, string action)
 		{
-			UPC thisUPC = new UPC() { UPCNumber = UPCNumber };
-			return thisUPC.ClickAction(Action);
+			var thisUPC = new UPC() { UPCNumber = aUPCNumber };
+			return thisUPC.ClickAction(action);
 		}
 
 		public bool SelectFirstProduct_SelectUPCs()
