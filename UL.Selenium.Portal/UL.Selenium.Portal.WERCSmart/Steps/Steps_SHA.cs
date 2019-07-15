@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "SHA")]
 	public class Steps_SHA
 	{
-		[Given(@"I navigate to Studio")]
+		[StepDefinition(@"I navigate to Studio")]
 		public void GivenINavigateToStudio()
 		{
 			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
@@ -34,14 +34,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
-		[Given(@"I navigate to Portal")]
+		[StepDefinition(@"I navigate to Portal")]
 		public void GivenINavigateToPortal()
 		{
 			SeleniumBrowser.WebBrowser.Url = GlobalParameters.TestUrl;
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
-		[Given(@"I login to Studio as Administrator")]
+		[StepDefinition(@"I login to Studio as Administrator")]
 		public void GivenILoginToStudioAsAdministrator()
 		{
 			StudioLogin thisStudioLogin = new StudioLogin();
@@ -61,7 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
 
-		[Given(@"I click top menu item: (.*) and submenu item: (.*)")]
+		[StepDefinition(@"I click top menu item: (.*) and submenu item: (.*)")]
 		public void GivenIClickTopMenuItemAndSubMenuItem(string menuItem, string submenuItem)
 		{
 			StudioTopMenu thisTopMenu = new StudioTopMenu();
@@ -80,7 +80,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"In SHA Manager Page I click top menu item: (.*)")]
+		[StepDefinition(@"In SHA Manager Page I click top menu item: (.*)")]
 		public void GivenInSHAManagerPageIClickTopMenuItem(string menuItem)
 		{
 			StudioSHAManager thisShaManager = new StudioSHAManager();
@@ -88,7 +88,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked: " + menuItem);
 		}
 
-		[Given(@"In SHA Manager Page I click sub menu item: (.*)")]
+		[StepDefinition(@"In SHA Manager Page I click sub menu item: (.*)")]
 		public void GivenInSHAManagerPageIClickSubMenuItem(string menuItem)
 		{
 			StudioSHAManager thisShaManager = new StudioSHAManager();
@@ -107,7 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Failed to click: " + menuItem);
 		}
 
-		[Given(@"In the the Manage Global Messages dialog I add and save the following messages:")]
+		[StepDefinition(@"In the the Manage Global Messages dialog I add and save the following messages:")]
 		public void GivenIAddTheFollowingMessages(Table table)
 		{
 			StudioManageGlobalMessages thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
@@ -139,7 +139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("Messages", ListOfMessages);
 		}
 
-		[Given(@"I close the Manage Global Messages dialog")]
+		[StepDefinition(@"I close the Manage Global Messages dialog")]
 		public void GivenICloseTheManageGlobalMessagesDialog()
 		{
 			StudioManageGlobalMessages thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
@@ -147,7 +147,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully closed messages dialog");
 		}
 
-		[Given(@"In SHA Manager Page I select status: (.*)")]
+		[StepDefinition(@"In SHA Manager Page I select status: (.*)")]
 		public void GivenInSHAManagerPageISelectStatus(string status)
 		{
 			StudioSHAManager thisShaManager = new StudioSHAManager();
@@ -551,7 +551,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"In the SHA manager grid I right click against product saved as: (.*)")]
+		[StepDefinition(@"In the SHA manager grid I right click against product saved as: (.*)")]
 		public void GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(string savedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -561,7 +561,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Right clicked against: " + ID);
 		}
 
-		[Given(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
+		[StepDefinition(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
 		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string option)
 		{
 			RightClickProductMenu thisContextMenu = new RightClickProductMenu();
@@ -569,7 +569,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Selected option: " + option);
 		}
 
-		[Given(@"In the Product Recertification History popup I should see the following entry")]
+		[StepDefinition(@"In the Product Recertification History popup I should see the following entry")]
 		public void GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(Table table)
 		{
 			ProductRecertificationHistory thisProductRecertificationHistory = new ProductRecertificationHistory();
@@ -740,7 +740,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product was not highlighted yellow background as expected");
 		}
 
-		[Given(@"In SHA Manager I select the following products:")]
+		[StepDefinition(@"In SHA Manager I select the following products:")]
 		public void GivenInSHAManagerISelectTheFollowingProducts(Table table)
 		{
 			string ID = "";
@@ -1277,7 +1277,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Given(@"In SHA Manager I set the filter for status to : (.*)")]
+		[StepDefinition(@"In SHA Manager I set the filter for status to : (.*)")]
 		public void GivenInSHAManagerISetTheFilterForStatusTo(string status)
 		{
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
@@ -1308,7 +1308,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[Given(@"I verify the product saved as: (.*) displays in red with a red box around it")]
+		[StepDefinition(@"I verify the product saved as: (.*) displays in red with a red box around it")]
 		public void GivenIVerifyTheProductDisplaysInRedWithARedBoxAroundIt(string savedAs)
 		{
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
@@ -1802,7 +1802,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data item " + expectedData + " showing as expected");
 		}
 
-		[Given(@"In the SHA Manager Grid I run a search for product saved as: (.*) and its status is: (.*)")]
+		[StepDefinition(@"In the SHA Manager Grid I run a search for product saved as: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridIRunASearchForProductSavedAsTestCaseAndItsStatusIs(string savedAs,
 			string status)
 		{

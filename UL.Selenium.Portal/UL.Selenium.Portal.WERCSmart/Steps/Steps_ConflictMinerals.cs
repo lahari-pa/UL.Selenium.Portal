@@ -44,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Given(@"in the Conflict Minerals page I put in email account: (.*)")]
+		[StepDefinition(@"in the Conflict Minerals page I put in email account: (.*)")]
 		public void GivenInTheConflictMineralsPageIPutInEmailAccount(string emailToEnter)
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();

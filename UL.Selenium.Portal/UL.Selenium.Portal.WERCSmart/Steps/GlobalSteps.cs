@@ -925,7 +925,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.WebBrowser.SwitchTo().Window(mainHandle);
 		}
 
-		[Given(@"If a modal dialog opens I skip it")]
+		[StepDefinition(@"If a modal dialog opens I skip it")]
 		public void GivenIfAModalDialogOpensISkipIt()
 		{
 			var thisModalDialog = new ModalDialog();
@@ -936,7 +936,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"If a modal dialog opens I close it")]
+		[StepDefinition(@"If a modal dialog opens I close it")]
 		public void GivenIfAModalDialogOpensICloseIt()
 		{
 			var thisModalDialog = new ModalDialog();
@@ -1060,7 +1060,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (string savedAs in usersSavedAs)
 			{
-				if(savedAs != "CanadaHasAllData")
+				if (savedAs != "CanadaHasAllData")
 				{
 					continue;
 				}
@@ -1279,7 +1279,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			throw new Exception("Failed to find window with title: " + title);
 		}
-
-
 	}
 }

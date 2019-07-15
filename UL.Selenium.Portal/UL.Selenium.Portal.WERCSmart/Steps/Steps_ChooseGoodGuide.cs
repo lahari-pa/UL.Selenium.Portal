@@ -37,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(10);
 		}
 
-		[Given(@"on the top navigation bar I click on (.*)")]
+		[StepDefinition(@"on the top navigation bar I click on (.*)")]
 		public void GivenOnTheTopNavigationBarIClick(string menu)
 		{
 			Report.IsTrue(new TopMenu().ClickSelectBox(menu), "Failed to click menu" + menu, "Successfully clicked menu" + menu);
@@ -342,7 +342,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I generate a random product name and save as (.*)")]
+		[StepDefinition(@"I generate a random product name and save as (.*)")]
 		public void GivenIGenerateARandomProductNameAndSaveAs(string saveAs)
 		{
 			Context.AddToContext(saveAs, Guid.NewGuid().ToString());
@@ -513,14 +513,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ChooseGoodGuide_AccountCreation().UlToysDashboardLoads(), "ULToys dashboard failed to load!", "ULToys dashboard loaded successfully!");
 		}
 
-		[Given(@"I navigate to ChooseGoodGuide")]
+		[StepDefinition(@"I navigate to ChooseGoodGuide")]
 		public void GivenINavigateToChooseGoodGuide()
 		{
 			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("ChooseGGUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
-		[Given(@"I login to ChooseGoodGuide as Administrator")]
+		[StepDefinition(@"I login to ChooseGoodGuide as Administrator")]
 		public void GivenILoginToChooseGoodGuideAsAdministrator()
 		{
 			ConflictMinerals thisChooseGGLogin = new ConflictMinerals();

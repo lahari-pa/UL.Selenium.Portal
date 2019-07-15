@@ -86,7 +86,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		//	}
 		// }
 
-		[Given(@"I navigate to Studio for ULSC")]
+		[StepDefinition(@"I navigate to Studio for ULSC")]
 		public void GivenINavigateToStudioULSC()
 		{
 			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("TestUrl");
@@ -94,7 +94,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 
 		}
 
-		[Given(@"I login to Studio as ULSC")]
+		[StepDefinition(@"I login to Studio as ULSC")]
 		public void GivenILoginToStudioAsULSCUser()
 		{
 			StudioLogin thisStudioLogin = new StudioLogin();
@@ -111,7 +111,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
 
-		[Given(@"the ULSC Login page should open in a new tab")]
+		[StepDefinition(@"the ULSC Login page should open in a new tab")]
 		public void GivenTheULSCLoginPageShouldOpenInANewTab()
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
@@ -630,7 +630,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Context.ScenarioContext.Pending();
 		}
 
-		[Given(@"I navigate to WERCSmart")]
+		[StepDefinition(@"I navigate to WERCSmart")]
 		public void GivenINavigateToWERCSmart()
 		{
 			Report.Info("Getting test variable saved as 'WercSmart_TestUrl'");
@@ -1077,7 +1077,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm that the Subscription Status widget displays centered heading with text: (.*)")]
 		public void ConfirmSubscriptionStatusWidgetDisplaysCenteredHeading(string headingText)
 		{
-			var subscriptionStatus = new Dashboard().GetSubscriptionStatus();
+			Dashboard.SubscriptionStatus subscriptionStatus = new Dashboard().GetSubscriptionStatus();
 			if (subscriptionStatus == null)
 			{
 				Report.Failure("No Subscription Status widget was found!");

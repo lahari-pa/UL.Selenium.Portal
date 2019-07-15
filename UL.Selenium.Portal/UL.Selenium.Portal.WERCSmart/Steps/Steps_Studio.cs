@@ -673,7 +673,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"In the Process Products popup in SHAManager I select the following retailers")]
+		[StepDefinition(@"In the Process Products popup in SHAManager I select the following retailers")]
 		public void GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(Table table)
 		{
 			ProcessProducts thisProcessProducts = new ProcessProducts();
@@ -694,7 +694,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"In the Process Products popup in SHAManager I set the new status drop down list to be: (.*)")]
+		[StepDefinition(@"In the Process Products popup in SHAManager I set the new status drop down list to be: (.*)")]
 		public void GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo(string status)
 		{
 			ProcessProducts thisProcessProducts = new ProcessProducts();
@@ -704,7 +704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Selected new status: " + status);
 		}
 
-		[Given(@"In the Process Products popup in SHAManager I click on update status button")]
+		[StepDefinition(@"In the Process Products popup in SHAManager I click on update status button")]
 		public void GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton()
 		{
 			ProcessProducts thisProcessProducts = new ProcessProducts();
@@ -715,7 +715,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Given(@"In the Product Formulation page I click button: (.*)")]
+		[StepDefinition(@"In the Product Formulation page I click button: (.*)")]
 		public void InTheProductForulationPageIClickButton(string button)
 		{
 			ProductFormulationPage thisFormulationPage = new ProductFormulationPage();
@@ -725,7 +725,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked button: " + button);
 		}
 
-		[Given(@"In the Create component page I add component")]
+		[StepDefinition(@"In the Create component page I add component")]
 		public void InTheCreateComponentPageIAddComponent(TechTalk.SpecFlow.Table component)
 		{
 			CreateComponentPage thisCreateComponentPage = new CreateComponentPage();
@@ -862,7 +862,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I close the Product Formulation page")]
+		[StepDefinition(@"I close the Product Formulation page")]
 		public void GivenICloseTheProductFormulationPage()
 		{
 			ProductFormulationPage thisFormulationPage = new ProductFormulationPage();
@@ -1034,7 +1034,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[Given(@"I click on home to navigate back to editing specific product saved as (.*)")]
+		[StepDefinition(@"I click on home to navigate back to editing specific product saved as (.*)")]
 		public void GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(string savedAs)
 		{
 			StudioPowerDesignerPlusDesignMode thispd = new StudioPowerDesignerPlusDesignMode();
@@ -1066,7 +1066,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked continue button");
 		}
 
-		[Given(@"I check whether the current environment is Staging or Production and if it is I skip the next three steps")]
+		[StepDefinition(@"I check whether the current environment is Staging or Production and if it is I skip the next three steps")]
 		public void GivenICheckWhetherTheCurrentEnvironmentIsStagingOrProductionAndIfItIsISkipTheNextThreeSteps()
 		{
 			if (GlobalParameters.SiteType == "Staging" || GlobalParameters.SiteType == "Local Production" ||

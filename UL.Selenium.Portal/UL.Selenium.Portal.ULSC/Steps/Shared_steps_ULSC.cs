@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			myStepsULSC.GivenInTheWERCSLinkDashboardIClickMenuItemAndSubmenuItem("Services", "WERCSmart");
 		}
 
-		[Given(@"I call Shared Step 29148 - Login to ULSC as an Administrator User")]
+		[StepDefinition(@"I call Shared Step 29148 - Login to ULSC as an Administrator User")]
 		public void GivenICallSharedStep_LoginToULSCAsAnAdministratorUser()
 		{
 			Steps_SHA MyStepsSHA = new Steps_SHA();
@@ -45,7 +45,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			MyStepsULSC.GivenITheULSCLoginPageIClickLogin();
 		}
 
-		[Given(@"I call Shared Step 54595 - WERCSLink Dashboard > Services > My Products")]
+		[StepDefinition(@"I call Shared Step 54595 - WERCSLink Dashboard > Services > My Products")]
 		public void GivenICallSharedStep54595WERCSLinkDashboardServicesMyProducts()
 		{
 			TestReport.UseSubSteps = true;
