@@ -305,39 +305,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			thisGlobalSteps.NavigateToLandingPage();
 			// Log in to administrator role
+			Report.Info("Starting Shared Step 67823 Login To WERCSmart_ProductsAutomationAccount");
 			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
 			//thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
 			// Generate UPC number and delete duplicates
+			Report.Info("Generating UPC");
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
+			Report.Info("Removing all refernces to the UPC generated");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75335");
 			// 57408 (Create a New Registration via Register New Product icon)
+			Report.Info("Create a New Registration via Register New Product icon");
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			// 57500 (The Product- Enter name, select product type - Continue - Happy Path)
+			Report.Info("The Product- Enter name, select product type - Continue - Happy Path");
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
 			// 26897 (Product Characteristics - Solid only available - continue)
+			Report.Info("Product Characteristics - Solid only available - continue");
 			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
 			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			Report.Info("Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path");
 			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+			Report.Info("(Ingredients - add any chemical) with name: Sodium hydroxide");
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			Report.Info("Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			// 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: CVS
+			Report.Info("(Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS");
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("CVS");
 
 			Context.AddToContext("retailer", "CVS");
 			// 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40
+			Report.Info("(Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40");
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75335",
 				"Metal Container", "40");
 			// 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+			Report.Info("Regulatory Documents to Provide - US only - request authoring - Happy Path");
 			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
 			// Click continue
 			newProductSteps.ClickContinue();
 			// Click continue
 			newProductSteps.ClickContinue();
 			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+			Report.Info("Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path");
 			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
 				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
 				"Partition Coefficient");
@@ -346,10 +359,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
 			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.Info("Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			Report.Info("Data Acceptance - Click Accept - Happy Path");
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
 			// If purchase details are showing click confirm order
+			Report.Info("If purchase details are showing click confirm order");
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			// 65080 (Login to Studio and Open SHA manager)
 			//********************
