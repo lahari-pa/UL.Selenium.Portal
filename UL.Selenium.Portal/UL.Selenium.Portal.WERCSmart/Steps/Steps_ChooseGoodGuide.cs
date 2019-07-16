@@ -11,6 +11,7 @@ using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -37,7 +38,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(10);
 		}
 
-		[Given(@"on the top navigation bar I click on (.*)")]
+		[StepDefinition(@"on the top navigation bar I click on (.*)")]
 		public void GivenOnTheTopNavigationBarIClick(string menu)
 		{
 			Report.IsTrue(new TopMenu().ClickSelectBox(menu), "Failed to click menu" + menu, "Successfully clicked menu" + menu);
@@ -49,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Product Identification page I select Product Line/Brand: (.*) and if it does not exist I create it")]
 		public void GivenInTheProductIdentificationPageISelectProductLineBrandAndIfItDoesNotExistICreateIt(string productLine)
 		{
-			GGNewProduct thisGgNewProduct = new GGNewProduct();
+			var thisGgNewProduct = new GGNewProduct();
 			if (!thisGgNewProduct.ProductLineExists(productLine))
 			{
 				if (!thisGgNewProduct.AddNewProductLineBrandName(productLine))
@@ -105,9 +106,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the GoodGuide site I add the following ingredients:")]
 		public void ThenInTheGoodGuideSiteIAddTheFollowingIngredients(Table ingredientInformation)
 		{
-			var Ingredients = ingredientInformation.CreateSet<Ingredients.Ingredient>();
+			IEnumerable<Ingredients.Ingredient> Ingredients = ingredientInformation.CreateSet<Ingredients.Ingredient>();
 
-			foreach (var item in Ingredients)
+			foreach (Ingredients.Ingredient item in Ingredients)
 			{
 				Report.IsTrue(new GGNewProduct().AddIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
 			}
@@ -116,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the UPC Grid in the (.*) drop down I select: (.*)")]
 		public void GivenInTheUPCGridInTheDropDownISelect(string dropDown, string item)
 		{
-			GGNewProduct thisGgNewProduct = new GGNewProduct();
+			var thisGgNewProduct = new GGNewProduct();
 			switch (dropDown)
 			{
 				case "GoodGuide":
@@ -136,7 +137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the UPC Grid in the (.*) upload I select: (.*)")]
 		public void GivenInTheUPCGridInTheUploadISelect(string uploadType, string filePath)
 		{
-			GGNewProduct thisGgNewProduct = new GGNewProduct();
+			var thisGgNewProduct = new GGNewProduct();
 			Report.IsTrue(thisGgNewProduct.UPCUpload(uploadType, filePath), "Failed to upload image",
 				"Successfully uploaded image");
 			Delay.Seconds(3);
@@ -162,12 +163,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the GoodGuide site I add the following into the UPC Fields")]
 		public void ThenIAddTheFollowingIntoTheUpcFields(Table table)
 		{
-			GGNewProduct thisGgNewProduct = new GGNewProduct();
+			var thisGgNewProduct = new GGNewProduct();
 			if (!thisGgNewProduct.WaitForUPCAdd(30))
 			{
 				throw new Exception("Add UPC fields not showing as expected.");
 			}
-			var upcInfo = table.CreateInstance<UpcInformation>();
+			UpcInformation upcInfo = table.CreateInstance<UpcInformation>();
 			Report.Info("UPC Number: " + upcInfo.UpcNumber);
 			Report.Info("Container Type: " + upcInfo.ContainerType);
 			Report.Info("Size: " + upcInfo.Size);
@@ -240,7 +241,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"in the GoodGuide My Products page I delete product with (.*): (.*)")]
 		public void ThenInTheGoodGuideMyProductsPageIDeleteProductWithItemValue(string columnName, string value)
 		{
-			MyProducts thisMyProducts = new MyProducts();
+			var thisMyProducts = new MyProducts();
 			if (!thisMyProducts.Wait_for_load(60))
 			{
 				throw new Exception("My Products page has not loaded");
@@ -254,7 +255,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisMyProducts.ClickDeleteProduct(columnName, value), "Product was not showing as expected.",
 				"Product found");
 
-			DeleteProduct thisDeleteProduct = new DeleteProduct();
+			var thisDeleteProduct = new DeleteProduct();
 			if (!thisDeleteProduct.Wait_for_load(60))
 			{
 				throw new Exception("Delete confirmation page has not loaded");
@@ -324,7 +325,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the GoodGuide site the (.*) page should load")]
 		public void ThenSectionShouldLoad(string section)
 		{
-			GGNewProduct thisGgNewProduct = new GGNewProduct();
+			var thisGgNewProduct = new GGNewProduct();
 			switch (section)
 			{
 				case "New Product":
@@ -342,7 +343,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I generate a random product name and save as (.*)")]
+		[StepDefinition(@"I generate a random product name and save as (.*)")]
 		public void GivenIGenerateARandomProductNameAndSaveAs(string saveAs)
 		{
 			Context.AddToContext(saveAs, Guid.NewGuid().ToString());
@@ -365,7 +366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the 'Create Company Account' button")]
 		public void ClickCreateCompanyAccountButton()
 		{
-			Report.IsTrue(new ChooseGoodGuide_AccountCreation().ClickCreateCompanyAccount(), "Failed to click the 'Create Company Account' button!", "Successfully clicked the 'Create Company Account' button!");
+			Report.IsTrue(new ChooseGoodGuide_AccountCreation().ClickCreateCompanyAccount, "Failed to click the 'Create Company Account' button!", "Successfully clicked the 'Create Company Account' button!");
 		}
 
 		[StepDefinition(@"I enter the (Email): (.*)")]
@@ -393,12 +394,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				case ("Next"):
 					{
-						Report.IsTrue(accountCreation.ClickNext(), "Failed to click " + button + "!", "Successfully clicked " + button + "!");
+						Report.IsTrue(accountCreation.ClickNext, "Failed to click " + button + "!", "Successfully clicked " + button + "!");
 						return;
 					}
 				default:
 					{
-						Report.IsTrue(accountCreation.ClickCancel(), "Failed to click " + button + "!", "Successfully clicked " + button + "!");
+						Report.IsTrue(accountCreation.ClickCancel, "Failed to click " + button + "!", "Successfully clicked " + button + "!");
 						return;
 					}
 			}
@@ -467,9 +468,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I get the verification code from the email")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount()
 		{
-			Email matchingEmail = (Email)Context.ScenarioContext["Matching"];
-			var bodyText = matchingEmail.Text.Body;
-			var code = Regex.Match(bodyText, @"Your verification code is: (.*)").Groups[1];
+			var matchingEmail = (Email)Context.ScenarioContext["Matching"];
+			string bodyText = matchingEmail.Text.Body;
+			Group code = Regex.Match(bodyText, @"Your verification code is: (.*)").Groups[1];
 
 			Report.Info("Found a verification code: '" + code + "' in the email!");
 			Context.AddToContext("VerificationCode", code);
@@ -484,7 +485,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that I have received a (GoodGuide|ULToys) account email to account: (.*)")]
 		public void ThenIConfirmThatIHaveReceivedACARPAccountEmailToAccount(string emailType, string emailToFind)
 		{
-			var emailTitle = emailType == "GoodGuide" ? "Welcome to GoodGuide!" : "Welcome to WERCSmart! Thank you for creating an account!";
+			string emailTitle = emailType == "GoodGuide" ? "Welcome to GoodGuide!" : "Welcome to WERCSmart! Thank you for creating an account!";
 			Report.Info("Expecting an email with title: " + emailTitle);
 			if (emailToFind.ToLower().Contains("saved as"))
 			{
@@ -492,7 +493,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			var passed = EmailFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
+			bool passed = EmailFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
 			if (!passed)
 			{
 				passed = EmailFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
@@ -513,25 +514,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ChooseGoodGuide_AccountCreation().UlToysDashboardLoads(), "ULToys dashboard failed to load!", "ULToys dashboard loaded successfully!");
 		}
 
-		[Given(@"I navigate to ChooseGoodGuide")]
+		[StepDefinition(@"I navigate to ChooseGoodGuide")]
 		public void GivenINavigateToChooseGoodGuide()
 		{
 			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("ChooseGGUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
-		[Given(@"I login to ChooseGoodGuide as Administrator")]
+		[StepDefinition(@"I login to ChooseGoodGuide as Administrator")]
 		public void GivenILoginToChooseGoodGuideAsAdministrator()
 		{
-			ConflictMinerals thisChooseGGLogin = new ConflictMinerals();
-			Steps_ChooseGoodGuide myStepsGG = new Steps_ChooseGoodGuide();
-			GGNewProduct thisGgNewProduct = new GGNewProduct();
-			var shaUser = TestUsers.GetUserSavedAs("ChooseGGUser");
+			var thisChooseGGLogin = new ConflictMinerals();
+			var myStepsGG = new Steps_ChooseGoodGuide();
+			var thisGgNewProduct = new GGNewProduct();
+			TestUser shaUser = TestUsers.GetUserSavedAs("ChooseGGUser");
 			thisChooseGGLogin.EmailAddress = shaUser.Username;
 			thisChooseGGLogin.Password = shaUser.Password;
 			thisChooseGGLogin.ClickLogin();
 			Report.Info("My products desktop is loaded");
-			MyProducts thisMyProducts = new MyProducts();
+			var thisMyProducts = new MyProducts();
 			Report.IsTrue(thisMyProducts.Wait_for_load(60), "Failed to load My products page", " is showing My Products as expected.");
 		}
 
@@ -539,7 +540,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void LoginToChooseGG()
 		{
 			TestReport.UseSubSteps = true;
-			Steps_ChooseGoodGuide myStepsGG = new Steps_ChooseGoodGuide();
+			var myStepsGG = new Steps_ChooseGoodGuide();
 			TestReport.StartStep("I navigate to ChooseGoodGuide");
 			myStepsGG.GivenINavigateToChooseGoodGuide();
 			TestReport.StartStep("I log in to ChooseGoodGuide as administrator");

@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Given(@"I click on the View link of the first document in Supplier Uploaded")]
+		[StepDefinition(@"I click on the View link of the first document in Supplier Uploaded")]
 		public void GivenIClickOnTheViewLinkOfTheFirstDocumentInSupplierUploaded()
 		{
 			var newReviewDocs = new ReviewDocuments();
@@ -61,7 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I close the document")]
+		[StepDefinition(@"I close the document")]
 		public void GivenICloseTheDocument()
 		{
 			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs();

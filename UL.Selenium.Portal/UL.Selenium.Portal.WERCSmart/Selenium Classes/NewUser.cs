@@ -24,7 +24,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = "//input[@id='regConfirmPass']")]
 		private IWebElement _iConfirmPassword;
 
-		[FindsBy(How = How.XPath, Using = "//label[@for='regLastName']/../input")] private IWebElement _iLastName;
+		[FindsBy(How = How.XPath, Using = "//label[@for='regLastName']/../input")]
+		private IWebElement _iLastName;
 
 		[FindsBy(How = How.XPath, Using = "//input[@id='regAddress']")]
 		private IWebElement _iAddress1;
@@ -68,6 +69,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = "//input[@id='secAnswer1']")]
 		private IWebElement _iSecQ1;
 
+		[FindsBy(How = How.XPath, Using = "//*[@id='question1Answer_error']")]
+		private IWebElement _iSecE1;
+
 		[FindsBy(How = How.XPath, Using = "//input[@id='secHint1']")]
 		private IWebElement _iHintQ1;
 
@@ -77,23 +81,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = "//input[@id='secHint2']")]
 		private IWebElement _iHintQ2;
 
+		[FindsBy(How = How.XPath, Using = "//*[@id='question2Answer_error']")]
+		private IWebElement _iSecE2;
+
 		[FindsBy(How = How.XPath, Using = "//input[@id='secAnswer3']")]
 		private IWebElement _iSecQ3;
 
 		[FindsBy(How = How.XPath, Using = "//input[@id='secHint3']")]
 		private IWebElement _iHintQ3;
 
-		[FindsBy(How = How.XPath, Using = "//input[@id='secAnswer3']")]
-		private IWebElement _iSecQ4;
+		[FindsBy(How = How.XPath, Using = "//*[@id='question3Answer_error']")]
+		private IWebElement _iSecE3;
 
-		[FindsBy(How = How.XPath, Using = "//input[@id='secHint3']")]
+		[FindsBy(How = How.XPath, Using = "//input[@id='secAnswer4']")]
+		private IWebElement _iSecA4;
+
+		[FindsBy(How = How.XPath, Using = "//input[@id='secHint4']")]
 		private IWebElement _iHintQ4;
 
-		[FindsBy(How = How.XPath, Using = "//input[@id='secAnswer3']")]
+		[FindsBy(How = How.XPath, Using = "//*[@id='question4Answer_error']")]
+		private IWebElement _iSecE4;
+
+		[FindsBy(How = How.XPath, Using = "//input[@id='secAnswer5']")]
 		private IWebElement _iSecQ5;
 
-		[FindsBy(How = How.XPath, Using = "//input[@id='secHint3']")]
+		[FindsBy(How = How.XPath, Using = "//input[@id='secHint5']")]
 		private IWebElement _iHintQ5;
+
+		[FindsBy(How = How.XPath, Using = "//input[@id='question5Answer_error']")]
+		private IWebElement _iSecE5;
 
 		[FindsBy(How = How.XPath, Using = "//input[@id='secQuestionPassword']")]
 		private IWebElement _iSecPassword;
@@ -173,6 +189,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return "";
 				}
 			}
+		}
+
+		public string GetSecurityQuestionError(int i)
+		{
+			string xPath = "//*[@id='question" + i + "Answer_error']";
+			IWebElement we = this.containerElement.FindElement(By.XPath(xPath),2);
+			return we?.GetValue();
 		}
 
 		public string FirstNameErrorValue {
@@ -440,7 +463,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-
 		public string Country {
 			get
 			{
@@ -471,7 +493,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string FirstName {
-			get { return this._iFirstName.GetValue(); }
+			get => this._iFirstName.GetValue();
 			set
 			{
 				this._iFirstName.EnterText(value);

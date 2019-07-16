@@ -359,8 +359,7 @@ Scenario: [70516] Add and Remove Packaging Type
 	Then I should see the CONEG Page
 	Given I set the Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA) field to: No
 	Given I set the Do you have a CONEG Certificate for this package? field to: Yes
-	#CLF - 26/3/2019 had to spell CONEG Certficate wrongly because otherwise it will not work.
-	And I click the browse button for label: CONEG Certficate and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I click the browse button for label: CONEG Certificate and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	#And I Verify the 'VIEW' and 'REMOVE' Buttons become active
 	#And I Click the 'VIEW BUTTON'
 	#And I Confirm the file opens for viewing in a new window

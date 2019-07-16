@@ -105,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return false;
 			}
-			Random rand = new Random();
+			var rand = new Random();
 
 			int index = rand.Next(results.Count - 1);
 
@@ -756,7 +756,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Category was not found");
 				return false;
 			}
-			Actions action = new Actions(SeleniumBrowser.WebBrowser);
+			var action = new Actions(SeleniumBrowser.WebBrowser);
 			action.MoveToElement(matchingCategory).Build().Perform();
 			matchingCategory.TryClick();
 			Delay.Seconds(1);
@@ -780,7 +780,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-		public string getCategoryValue(string category)
+		public string GetCategoryValue(string category)
 		{
 			var listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
 			var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
@@ -790,7 +790,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Category was not found");
 				return null;
 			}
-			Actions action = new Actions(SeleniumBrowser.WebBrowser);
+			var action = new Actions(SeleniumBrowser.WebBrowser);
 			action.MoveToElement(matchingCategory).Build().Perform();
 			matchingCategory.TryClick();
 			Delay.Seconds(1);
@@ -800,7 +800,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			matchingCategory.Click();
 			Delay.Seconds(5);
 			Report.Screenshot();
-			ValueEditor thisValueEditor = new ValueEditor();
+			var thisValueEditor = new ValueEditor();
 			return thisValueEditor.GetSelectedValue();
 
 		}
@@ -1841,7 +1841,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return linkToClick.TryClick();
 		}
 
-		public int getRecordCount()
+		public int GetRecordCount()
 		{
 			var spanCount = this.containerElement.FindElement(By.XPath(".//span[@id='AttributesGrid_litRecordCount']"), 2);
 			if (spanCount == null)
@@ -2113,7 +2113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<Document> GetAllDocuments()
 		{
-			List<Document> DocumentList = new List<Document>();
+			var DocumentList = new List<Document>();
 
 			var rowList =
 				SeleniumBrowser.WebBrowser.FindElements(
@@ -2121,7 +2121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			List<string> documentQueueHeaders = this.GetDocumentQueueTableHeaders();
 
-			List<string> propertiesInDocument = new Document().GetType().GetProperties().Select(x => x.Name).ToList();
+			var propertiesInDocument = new Document().GetType().GetProperties().Select(x => x.Name).ToList();
 
 			if (documentQueueHeaders.Count == 0)
 			{
@@ -2138,7 +2138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (var row in rowList)
 			{
-				Document thisDocument = new Document();
+				var thisDocument = new Document();
 				for (int i = 0; i < documentQueueHeaders.Count; i++)
 				{
 					//properties in Document class
@@ -2484,7 +2484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			if (this.ClickDatePicker())
 			{
-				SelectDateRangePage thisSelectDateRangePage = new SelectDateRangePage();
+				var thisSelectDateRangePage = new SelectDateRangePage();
 				if (thisSelectDateRangePage.Wait_for_load())
 				{
 					if (thisSelectDateRangePage.SelectDateFrom(dayFrom, monthFrom, yearFrom))
@@ -3350,11 +3350,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (var selectedPhrase in selectedRows)
 			{
-				Phrase thisPhrase = new Phrase();
-				thisPhrase.Code = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfCode + "]"), 2).GetValue();
-				thisPhrase.Text = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfText + "]"), 2).GetValue();
-				thisPhrase.Type = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue();
-				thisPhrase.Notes = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfNotes + "]"), 2).GetValue();
+				Phrase thisPhrase = new Phrase {
+					Code = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfCode + "]"), 2).GetValue(),
+					Text = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfText + "]"), 2).GetValue(),
+					Type = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue(),
+					Notes = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfNotes + "]"), 2).GetValue()
+				};
 				listOfPhrases.Add(thisPhrase);
 			}
 
@@ -3372,18 +3373,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			List<Phrase> listOfPhrases = new List<Phrase>();
 			foreach (var selectedPhrase in selectedRows)
 			{
-				Phrase thisPhrase = new Phrase();
-				thisPhrase.Code = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfCode + "]"), 2).GetValue();
-				thisPhrase.Text = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfText + "]"), 2).GetValue();
-				thisPhrase.Type = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue();
-				thisPhrase.Notes = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfNotes + "]"), 2).GetValue();
+				Phrase thisPhrase = new Phrase {
+					Code = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfCode + "]"), 2).GetValue(),
+					Text = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfText + "]"), 2).GetValue(),
+					Type = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue(),
+					Notes = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfNotes + "]"), 2).GetValue()
+				};
 				listOfPhrases.Add(thisPhrase);
 			}
 
 			return listOfPhrases;
 		}
 
-		public bool filterSelectPhrases(string filter)
+		public bool FilterSelectPhrases(string filter)
 		{
 			var input = this.containerElement.FindElement(By.XPath(".//input[@id='AttrEditPager_txtPhraseFilter']"), 2);
 

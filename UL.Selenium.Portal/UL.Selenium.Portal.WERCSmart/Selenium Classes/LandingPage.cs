@@ -15,13 +15,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement Login => this.containerElement.FindElement(By.XPath("//a[@id='loginButton']"), 1);
 
-		private IWebElement SignUp => this.containerElement.FindElement(By.XPath("//ul[@class='nav navbar-nav']//a[text()='Sign Up']"), 1);
+		private IWebElement SignUp => this.containerElement.FindElement(By.XPath("//ul[@class='nav navbar-nav']//a[contains(text(),'Sign Up')]"), 1);
 
 		private IWebElement NavigationBar => this.containerElement.FindElement(By.XPath(".//ul[@class='nav navbar-nav']"), 1);
 
 		public bool Click_Login()
 		{
-			var loginButton = this.Login ?? this.containerElement.FindElement(By.XPath(".//a[contains (@href, 'ssologin')]"), 2);
+			IWebElement loginButton = this.Login ?? this.containerElement.FindElement(By.XPath(".//a[contains (@href, 'ssologin')]"), 2);
 			return loginButton.TryClick() && new Login().WaitForContainerToBeVisible();
 		}
 
@@ -29,13 +29,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> NavigationOptionsAvailable()
 		{
-			var els = this.NavigationBar.FindElements(By.XPath(".//a"), 1);
+			IList<IWebElement> els = this.NavigationBar.FindElements(By.XPath(".//a"), 1);
 			return els.Any() ? els.Select(x => x.Text.Trim()).ToList() : new List<string>();
 		}
 
 		public bool SelectOption(string option)
 		{
-			var optionLink = this.NavigationBar.FindElements(By.XPath(".//a"), 2).FirstOrDefault(x => x.GetValue().Trim() == option.Trim());
+			IWebElement optionLink = this.NavigationBar.FindElements(By.XPath(".//a"), 2).FirstOrDefault(x => x.GetValue().Trim() == option.Trim());
 			return optionLink != null && optionLink.TryClick();
 		}
 

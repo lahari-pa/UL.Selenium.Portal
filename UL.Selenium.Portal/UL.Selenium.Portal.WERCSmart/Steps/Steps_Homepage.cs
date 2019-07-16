@@ -597,7 +597,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//	}
 		//}
 
-		[Then(@"Confirm that freshdesk opens in another tab")]
+		[StepDefinition(@"Confirm that freshdesk opens in another tab")]
 		public void ConfirmThatFreshdeskOpensInAnotherTab()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that freshdesk opens in another tab");
@@ -802,7 +802,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"I should see the following filters in the following order under My products:")]
+		[StepDefinition(@"I should see the following filters in the following order under My products:")]
 		public void GivenIShouldSeeTheFollowingFiltersInTheFollowingOrderUnderMyProducts(Table table)
 		{
 			try
@@ -828,7 +828,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"In the announcements area I should see my saved messages")]
+		[StepDefinition(@"In the announcements area I should see my saved messages")]
 		public void ThenInTheAnnouncementsAreaIShouldSeeMySavedMessages()
 		{
 			Homepage myHomepage = new Homepage();
@@ -865,24 +865,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected, message count is showing as: " + ActualMessageCount.ToString());
 		}
 
-		[Given(@"I click on the Live Help button on the upper right")]
-		public void GivenIClickOnTheLiveHelpButtonOnTheUpperRight()
+		[StepDefinition(@"I click on the Live Help button on the lower right")]
+		public void GivenIClickOnTheLiveHelpButtonOnTheLowerRight()
 		{
 			TopMenuBar myTopMenuBar = new TopMenuBar();
 			Report.IsTrue(myTopMenuBar.ClickLiveHelp(), "Failed to click live help", "Clicked live help");
 		}
 
-		[Then(@"I should see the Live Help dialog")]
+		[StepDefinition(@"I should see the Live Help dialog")]
 		public void ThenIShouldSeeTheLiveHelpDialog()
 		{
 			Report.IsTrue(new LiveHelp().Wait_for_load(), "Live Help dialog is not showing",
 				"Live Help dialog is showing as expected");
 		}
 
-		[Then(@"In the Live Help dialog I should see the following text: (.*)")]
+		[StepDefinition(@"In the Live Help dialog I should see the following text: (.*)")]
 		public void ThenInTheLiveHelpDialogIShouldSeeTheFollowingText(string expectedText)
 		{
-			string actualText = new LiveHelp().GetFormText().Trim().Replace(System.Environment.NewLine, " ");
+			string actualText = new LiveHelp().GetFormText().Trim().Replace(Environment.NewLine, " ");
 
 			Report.Info("ActualText length = " + actualText.Length.ToString());
 			Report.Info("ExpectedText length = " + expectedText.Trim().Length.ToString());
@@ -907,7 +907,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Text is showing as expected: " + expectedText);
 		}
 
-		[Given(@"In the Live Help dialog I enter name: (.*)")]
+		[StepDefinition(@"In the Live Help dialog I enter name: (.*)")]
 		public void GivenInTheLiveHelpDialogIEnterName(string name)
 		{
 			LiveHelp myLiveHelp = new LiveHelp();
@@ -915,7 +915,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered name: " + name);
 		}
 
-		[Given(@"In the Live Help dialog I enter email: (.*)")]
+		[StepDefinition(@"In the Live Help dialog I enter email: (.*)")]
 		public void GivenInTheLiveHelpDialogIEnterEmail(string email)
 		{
 			LiveHelp myLiveHelp = new LiveHelp();
@@ -923,7 +923,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered email: " + email);
 		}
 
-		[Given(@"In the Live Help dialog I click on the x to close")]
+		[StepDefinition(@"In the Live Help dialog I click on the x to close")]
 		public void GivenInTheLiveHelpDialogIClickOnTheXToClose()
 		{
 			Report.IsTrue(new LiveHelp().ClickCloseX(), "Failed to click x to close", "Clicked x to close");

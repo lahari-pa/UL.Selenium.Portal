@@ -24,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				try
 				{
-					var select = this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']"));
+					IWebElement select = this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']"));
 					if (select != null)
 					{
 						return select.TryClick();
@@ -46,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				if (this.ClickDropDownNextToSelectBox(selectBoxText))
 				{
 					Delay.Seconds(1);
-					var dropDownMenu = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']")).FirstOrDefault(x => x.Displayed);
+					IWebElement dropDownMenu = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']")).FirstOrDefault(x => x.Displayed);
 					return dropDownMenu.FindElement(By.XPath(".//li/a/span[text()='" + itemToSelect + "']")).TryClick();
 
 				}
