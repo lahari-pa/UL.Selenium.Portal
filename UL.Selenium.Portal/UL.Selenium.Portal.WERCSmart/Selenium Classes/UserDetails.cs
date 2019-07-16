@@ -201,7 +201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(2 * Delay.SpeedFactor);
 
 			var myDlg = new AddUserThankYouDialog();
-			myDlg.Wait_for_load(60);
+			myDlg.WaitForContainerToBeVisible(60);
 			if (!myDlg.Add_User_Thank_You())
 			{
 				Report.Info("Failed to Add User");
@@ -220,12 +220,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		//Close Button
-		private IWebElement BtnClose => containerElement.FindElement(By.XPath(".//div/button[text()='Close']"),5);
+		private IWebElement BtnClose => this.containerElement.FindElement(By.XPath(".//div/button[text()='Close']"), 5);
 
 		public bool Close_click()
 		{
 			Report.Info("Attempting to Click Close Button");
-			return BtnClose.TryClick();
+			return this.BtnClose.TryClick();
 		}
 
 		public bool Add_User_Thank_You()

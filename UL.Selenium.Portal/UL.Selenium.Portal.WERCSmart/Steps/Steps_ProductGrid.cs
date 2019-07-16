@@ -170,8 +170,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Report.Info("Searching for product with ID: '" + id + "'");
-				var selProdGrid = new ProductsGrid();
-				selProdGrid.ProductIdField = id;
+				var selProdGrid = new ProductsGrid {
+					ProductIdField = id
+				};
 				GeneralUtilities.Wait_for_load_finish();
 				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + id + "'!", "Product was returned!");
 			}
@@ -493,7 +494,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var grid = new ProductsGrid();
 			for (var i = 0; i < 6; i++)
 			{
-				Report.Info("Generating upc attempt " + (i+1));
+				Report.Info("Generating upc attempt " + (i + 1));
 				var uPCNo = GeneralFunctions.GenerateUPCNumber();
 				Report.Info("Generated UPC No: " + uPCNo);
 				Report.Info("Searching for generated upc number");
@@ -532,7 +533,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"I generate a random UPC number and save as: (.*)")]
+		[StepDefinition(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
@@ -586,8 +587,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var Product = (ProductInformation)Context.GetFromContext(savedas);
 			Report.Info("Attempting to delete: " + Product.Name);
-			var ProductGrid = new ProductsGrid();
-			ProductGrid.ProductIdField = Product.Id;
+			var ProductGrid = new ProductsGrid {
+				ProductIdField = Product.Id
+			};
 			if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
 			{
 				if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the search button", "Successfully clicked the search button!", false, false))
@@ -720,8 +722,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I edit the product with ID: (.*)")]
 		public void EditFirstProductForRetailer(string id)
 		{
-			var selProductsGrid = new ProductsGrid();
-			selProductsGrid.ProductIdField = id;
+			var selProductsGrid = new ProductsGrid {
+				ProductIdField = id
+			};
 			Report.IsTrue(selProductsGrid.ClickActionsForFirstResultInGrid() && selProductsGrid.ClickRowAction("Edit"),
 				"Failed to edit the product with ID: " + id,
 				"Successfully edited the product with ID: " + id);
@@ -776,7 +779,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Accept button is not showing");
 		}
 
-		[Given(@"I close the browser tab with the Summary page")]
+		[StepDefinition(@"I close the browser tab with the Summary page")]
 		public void GivenICloseTheBrowserTabWithTheSummaryPage()
 		{
 			List<string> OpenBrowsers =
@@ -806,7 +809,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Did not find Summary page to close");
 		}
 
-		[Given(@"I save the number of items in the pie chart")]
+		[StepDefinition(@"I save the number of items in the pie chart")]
 		public void GivenISaveTheNumberOfItemsInThePieChart()
 		{
 			Homepage myHomepage = new Homepage();
@@ -836,14 +839,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Document Acceptance page is not showing as expected.", "Document Acceptance page is showing");
 		}
 
-		[Given(@"I should see the header: Delete Active Products on the Delete Active Product window")]
+		[StepDefinition(@"I should see the header: Delete Active Products on the Delete Active Product window")]
 		public void GivenIShouldSeeTheHeaderDeleteActiveProductsOnTheDeleteActiveProductWindow()
 		{
 			Report.IsTrue(new DeleteActiveProducts().Wait_for_load(),
 				"Delete Active Products page is not showing as expected.", "Delete Active Products page is showing");
 		}
 
-		[Then(@"I should see the header: Message Center on the Message Center window")]
+		[StepDefinition(@"I should see the header: Message Center on the Message Center window")]
 		public void ThenIShouldSeeTheHeaderMessageCenterOnTheMessageCenterWindow()
 		{
 			Report.IsTrue(new MessageCenter().Wait_for_load(),
@@ -884,8 +887,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Could not find UPC number in context saved as: " + savedAs);
 				return;
 			}
-			var selProductGrid = new ProductsGrid();
-			selProductGrid.UpcNumber = upc;
+			var selProductGrid = new ProductsGrid {
+				UpcNumber = upc
+			};
 			if (!Report.IsTrue(selProductGrid.UpcNumber == upc,
 				"Value: " + upc + " was not inputted into the UPC field correctly!",
 				"Value: " + upc + " was correctly inputted into the UPC field", false, false))
@@ -1084,8 +1088,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the product exists with Product ID: (.*) and Name: (.*)")]
 		public void ProductExistsWithIDAndName(string id, string name)
 		{
-			var selProdGrid = new ProductsGrid();
-			selProdGrid.ProductIdField = id;
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = id
+			};
 			GeneralUtilities.Wait_for_load_finish();
 			var firstProduct = selProdGrid.FirstProductInGrid();
 			Report.IsTrue(firstProduct != null && firstProduct.ProductName == name,
@@ -1950,7 +1955,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
-			var productInformation = new ProductInformation(){Id = productElement.ProductId, Name = productElement.ProductName};
+			var productInformation = new ProductInformation() { Id = productElement.ProductId, Name = productElement.ProductName };
 			Context.AddToContext(savedAs, productInformation);
 			Report.Success("Got the first Product in Grid (ID: " + productElement.ProductId + ") and saved to: " + savedAs);
 			Report.Info("Filtering on product id: " + productElement.ProductId);
@@ -1960,7 +1965,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[Given(@"I check for all items in the grid that the retailers are alphabetically listed")]
+		[StepDefinition(@"I check for all items in the grid that the retailers are alphabetically listed")]
 		public void GivenISaveTheProductIDAndNameOfTheFirstProductInTheGridWithMoreThanOneRetailerAs()
 		{
 

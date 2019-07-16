@@ -4,10 +4,10 @@ using System.Data.SqlClient;
 
 namespace UL.Selenium.Portal.WERCSmart.Database_Functions
 {
-	static class dbRetailers
+	static class DbRetailers
 	{
 
-		public static string getGUIDByRetailer(string retailerName)
+		public static string GetGUIDByRetailer(string retailerName)
 		{
 			SqlConnection conn = null;
 			try
@@ -44,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Database_Functions
 			}
 		}
 
-		public static string getSupplierGUIDByUsername(string supplierUsername)
+		public static string GetSupplierGUIDByUsername(string supplierUsername)
 		{
 			SqlConnection conn = null;
 			try

@@ -164,7 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					packagingType.ID, packagingType.Name));
 		}
 
-		[Given(@"Save the top packaging id as (.*) if there are no packaging types listed add a new packing type as follows")]
+		[StepDefinition(@"Save the top packaging id as (.*) if there are no packaging types listed add a new packing type as follows")]
 		public void GivenSaveTheTopPackagingIdAsMPIIfThereAreNoPackackingTypesListedAddANewPackingTypeAsFollows(string saveAs, Table table)
 		{
 			StepsMyAccount myAccountSteps = new StepsMyAccount();

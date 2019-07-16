@@ -19,14 +19,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool QuickLinkButtonShowing(string button)
 		{
 			// Specific XPath used as the elements in the 'Bulk Actions' window also seem to appear in the general search...
-			var mainBodyQuickLinks = this.containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2);
-			var specificQuickLink = mainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(button));
+			IList<IWebElement> mainBodyQuickLinks = this.containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2);
+			IWebElement specificQuickLink = mainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(button));
 			return specificQuickLink != null;
 		}
 
 		public bool ClickQuickLink(string button)
 		{
-			var buttonEl = this.containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2).FirstOrDefault(x => x.Text.Contains(button.Trim()));
+			IWebElement buttonEl = this.containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2).FirstOrDefault(x => x.Text.Contains(button.Trim()));
 			if (buttonEl == null)
 			{
 				return false;
@@ -38,15 +38,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool QuickLinkHoveringChangeColour(string button)
 		{
-			var mainBodyQuickLinks = this.containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2);
-			var specificQuickLink = mainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(button));
-			var parentElement = specificQuickLink.FindElement(By.XPath(".."), 2);
+			IList<IWebElement> mainBodyQuickLinks = this.containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2);
+			IWebElement specificQuickLink = mainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(button));
+			IWebElement parentElement = specificQuickLink.FindElement(By.XPath(".."), 2);
 			return parentElement.HoveringChangesColour();
 		}
 
 		public bool TopGridHeaderPresent(string header)
 		{
-			var headers = this.containerElement.FindElements(By.XPath(".//div[@id='homeHeader']//h3"), 2);
+			IList<IWebElement> headers = this.containerElement.FindElements(By.XPath(".//div[@id='homeHeader']//h3"), 2);
 			return headers.FirstOrDefault(x => x.Text.Trim().Contains(header.Trim())) != null;
 		}
 
@@ -59,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var button = this.containerElement.FindElement(By.XPath(".//h3[@class='sr-only' and contains(text(),'" + panel + "')]/..//a[contains(@class,'small-link')]"), 2);
+				IWebElement button = this.containerElement.FindElement(By.XPath(".//h3[@class='sr-only' and contains(text(),'" + panel + "')]/..//a[contains(@class,'small-link')]"), 2);
 				button.Click();
 				return true;
 			}
@@ -71,8 +71,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool NotificationsExistInPanel(string panel)
 		{
-			var alertsPanel = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'status-panels')]//h3[contains(text(),'" + panel + "')]/.."), 2);
-			var rows = alertsPanel.FindElements(By.XPath(".//table//tr"), 2);
+			IWebElement alertsPanel = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'status-panels')]//h3[contains(text(),'" + panel + "')]/.."), 2);
+			IList<IWebElement> rows = alertsPanel.FindElements(By.XPath(".//table//tr"), 2);
 			return (rows.Count != 0);
 		}
 
@@ -80,8 +80,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var panelContainer = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'status-panels')]//h3[contains(text(),'" + panel + "')]/.."), 2);
-				var rows = panelContainer.FindElements(By.XPath(".//table//tr"), 2);
+				IWebElement panelContainer = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'status-panels')]//h3[contains(text(),'" + panel + "')]/.."), 2);
+				IList<IWebElement> rows = panelContainer.FindElements(By.XPath(".//table//tr"), 2);
 				rows.FirstOrDefault().Click();
 				return true;
 			}
@@ -96,8 +96,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var element = this.containerElement.FindElement(By.XPath("./div[@id='homeHeader']//a[contains(@class,'collapse-control')]"), 2);
-				var expanded = element.GetAttribute("aria-expanded") == null || Convert.ToBoolean(element.GetAttribute("aria-expanded"));
+				IWebElement element = this.containerElement.FindElement(By.XPath("./div[@id='homeHeader']//a[contains(@class,'collapse-control')]"), 2);
+				bool expanded = element.GetAttribute("aria-expanded") == null || Convert.ToBoolean(element.GetAttribute("aria-expanded"));
 				return expanded == expand || element.TryClick();
 			}
 			catch (Exception ex)
@@ -110,19 +110,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool PieChartShowingInProductInformation()
 		{
-			var pieChart = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']"), 2);
+			IWebElement pieChart = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']"), 2);
 			return pieChart != null && pieChart.Displayed;
 		}
 
 		public bool PieChartLegendShowingInProductInformation()
 		{
-			var pieChartLegend = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']//ul[@class='status-list']"), 2);
+			IWebElement pieChartLegend = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']//ul[@class='status-list']"), 2);
 			return pieChartLegend != null && pieChartLegend.Displayed;
 		}
 
 		public int PieChartProductsTotal()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//div[@id='total-products']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[@id='total-products']"), 2);
 			if (el == null)
 			{
 				return -1;
@@ -137,16 +137,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EntryShowingInPieChartLegend(string text, string colour)
 		{
-			var pieChartLegend = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']//ul[@class='status-list']"), 2);
-			var legendEntry = pieChartLegend.FindElements(By.XPath(".//span[text()='" + text + "']"), 2);
+			IWebElement pieChartLegend = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']//ul[@class='status-list']"), 2);
+			IList<IWebElement> legendEntry = pieChartLegend.FindElements(By.XPath(".//span[text()='" + text + "']"), 2);
 			if (legendEntry.FirstOrDefault() == null)
 			{
 				return false;
 			}
 			// Element exists, so now we need to check the colour
-			var colourShowingRaw = legendEntry.FirstOrDefault().FindElement(By.XPath("../div"), 2).GetCssValue("background-color");
+			string colourShowingRaw = legendEntry.FirstOrDefault().FindElement(By.XPath("../div"), 2).GetCssValue("background-color");
 
-			var colourShowing = "";
+			string colourShowing = "";
 			switch (colourShowingRaw)
 			{
 				case ("rgba(239, 157, 14, 1)"):
@@ -234,8 +234,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool QuickLinkButtonShowing(string button)
 		{
-			var mainBodyQuickLinks = this.containerElement.FindElements(By.XPath("//a"), 2);
-			var specificQuickLink = mainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(button));
+			IList<IWebElement> mainBodyQuickLinks = this.containerElement.FindElements(By.XPath("//a"), 2);
+			IWebElement specificQuickLink = mainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(button));
 			return specificQuickLink != null;
 		}
 	}

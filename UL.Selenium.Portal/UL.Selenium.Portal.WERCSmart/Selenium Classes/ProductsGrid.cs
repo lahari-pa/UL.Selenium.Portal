@@ -300,7 +300,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public ProductGridItem FirstProductInGridWithRetailers()
 		{
-			if (this.containerElement.FindElements(By.XPath(".//tbody/tr"),2).Count == 0)
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2).Count == 0)
 			{
 				Report.Error("No rows have been found!");
 				return null;
@@ -326,7 +326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return null;
 			}
 
-			List<ProductGridItem> ListProductGridItems = new List<ProductGridItem>();
+			var ListProductGridItems = new List<ProductGridItem>();
 			var productRows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
 			foreach (var row in productRows)
 			{
@@ -753,13 +753,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 
-		public string GetRetailersStatusByID(string ID)
+		public string GetRetailersStatusByID(string anID)
 		{
 			var listOfProducts = this.containerElement.FindElements(By.XPath(".//td//small"));
-			var matchingProduct = listOfProducts.FirstOrDefault(x => x.GetValue().Contains(ID));
+			var matchingProduct = listOfProducts.FirstOrDefault(x => x.GetValue().Contains(anID));
 			if (matchingProduct == null)
 			{
-				Report.Error("No matching product has been found for ID: " + ID);
+				Report.Error("No matching product has been found for ID: " + anID);
 				return "";
 			}
 
@@ -768,7 +768,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (retailerLi == null)
 			{
-				Report.Error("No matching retailer colour has been found for ID: " + ID);
+				Report.Error("No matching retailer colour has been found for ID: " + anID);
 				return "";
 			}
 
@@ -1034,7 +1034,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			get
 			{
 				var el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
-				return el == null ? null : el.SelectedOption();
+				return el?.SelectedOption();
 			}
 			set
 			{

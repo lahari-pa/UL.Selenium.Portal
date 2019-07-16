@@ -25,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public void Click_Continue()
 		{
-			var btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselContinue']"), 2);
+			IWebElement btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselContinue']"), 2);
 			btn.Click();
 		}
 
@@ -34,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public void Click_Cancel()
 		{
-			var btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
+			IWebElement btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
 			btn.Click();
 		}
 
@@ -91,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		///</summary>
 		public string ForgotPasswordSuccessMessage()
 		{
-			var text = this.containerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
+			string text = this.containerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
 			int i = 0;
 			while (text == "" && i < 10)
 			{
