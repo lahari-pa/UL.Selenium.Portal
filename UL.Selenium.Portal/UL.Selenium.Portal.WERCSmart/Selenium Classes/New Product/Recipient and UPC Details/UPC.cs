@@ -132,8 +132,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'transport.field')]"), 2);
 					if (info.TransportationOption.ToLower().Contains("random"))
 					{
-						List<string> packageOptions = packageField.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
-						Random r = new Random();
+						var packageOptions = packageField.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
+						var r = new Random();
 						int rInt = r.Next(0, packageOptions.Count - 1);
 						packageField.Select(packageOptions[rInt]);
 					}

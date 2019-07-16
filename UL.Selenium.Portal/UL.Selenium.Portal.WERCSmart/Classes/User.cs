@@ -66,7 +66,7 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 			{
 				return false;
 			}
-			User p = (User)obj;
+			var p = (User)obj;
 			return (this.Email == p.Email);
 		}
 
@@ -100,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 
 
 			//Check whether any of the compared objects is null.
-			if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null))
+			if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
 			{
 				return false;
 			}
@@ -116,7 +116,7 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 		public int GetHashCode(User user)
 		{
 			//Check whether the object is null
-			if (Object.ReferenceEquals(user, null))
+			if (ReferenceEquals(user, null))
 			{
 				return 0;
 			}
@@ -138,10 +138,10 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 	{
 		public static IEnumerable<User> Except(List<User> listFirst, List<User> listSecond)
 		{
-			foreach (var thisUser in listFirst)
+			foreach (User thisUser in listFirst)
 			{
 				bool found = false;
-				foreach (var otherUser in listSecond)
+				foreach (User otherUser in listSecond)
 				{
 					if (thisUser.Email == otherUser.Email)
 					{

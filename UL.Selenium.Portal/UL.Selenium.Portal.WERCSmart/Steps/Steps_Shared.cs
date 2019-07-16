@@ -2166,8 +2166,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
 				"No");
-            TestReport.StartStep("In the Product Characteristics page I click Continue");
-            MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+			TestReport.StartStep("In the Product Characteristics page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
 		[StepDefinition(@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity \) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
@@ -2634,7 +2634,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			var selSelectRetailers = new SelectRetailers();
-			if (!selSelectRetailers.Wait_for_load(10))
+			if (!selSelectRetailers.WaitForContainerToBeVisible(10))
 			{
 				Report.Warn("The Select Retailers page was not loaded on entering the Retailer page");
 				new Retailer().ClickAddRetailers();
@@ -3399,7 +3399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		/*
-		[Given(@"I call Shared Step 57514 \(Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57514 \(Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path\)")]
 		public void GivenICallSharedStepProductCharacteristics_LiquidOnlyAvailable_EnterAllData_Continue_HappyPath()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -4014,7 +4014,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.ContinueInTheProductRegistration();
 		}
 
-		[Given(
+		[StepDefinition(
 			@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\) for")]
 		public void
 			GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(
@@ -6135,8 +6135,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				supplier = user.Username;
 			}
 
-			string retailerGUID = dbRetailers.getGUIDByRetailer(retailer);
-			string supplierGUID = dbRetailers.getSupplierGUIDByUsername(supplier);
+			string retailerGUID = DbRetailers.GetGUIDByRetailer(retailer);
+			string supplierGUID = DbRetailers.GetSupplierGUIDByUsername(supplier);
 		}
 
 		[StepDefinition(
@@ -6673,7 +6673,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var selNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
-			if (selNewProduct.Wait_for_load())
+			if (selNewProduct.WaitForContainerToBeVisible())
 			{
 				if (selNewProduct.WaitForSection("ULSC Service Data Re-Import"))
 				{
@@ -6991,7 +6991,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(
+		[StepDefinition(
 			@"I call Shared Step 51352 - Products page - Filter for your product - Update Required link for product saved as: (.*)")]
 		public void GivenICallSharedStep_ProductsPage_FilterForYourProduct_UpdateRequiredLink(string savedAs)
 		{

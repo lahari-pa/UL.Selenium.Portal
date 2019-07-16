@@ -907,7 +907,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Text is showing as expected: " + expectedText);
 		}
 
-		[Given(@"In the Live Help dialog I enter name: (.*)")]
+		[StepDefinition(@"In the Live Help dialog I enter name: (.*)")]
 		public void GivenInTheLiveHelpDialogIEnterName(string name)
 		{
 			LiveHelp myLiveHelp = new LiveHelp();
@@ -915,7 +915,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered name: " + name);
 		}
 
-		[Given(@"In the Live Help dialog I enter email: (.*)")]
+		[StepDefinition(@"In the Live Help dialog I enter email: (.*)")]
 		public void GivenInTheLiveHelpDialogIEnterEmail(string email)
 		{
 			LiveHelp myLiveHelp = new LiveHelp();
@@ -923,7 +923,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered email: " + email);
 		}
 
-		[Given(@"In the Live Help dialog I click on the x to close")]
+		[StepDefinition(@"In the Live Help dialog I click on the x to close")]
 		public void GivenInTheLiveHelpDialogIClickOnTheXToClose()
 		{
 			Report.IsTrue(new LiveHelp().ClickCloseX(), "Failed to click x to close", "Clicked x to close");
