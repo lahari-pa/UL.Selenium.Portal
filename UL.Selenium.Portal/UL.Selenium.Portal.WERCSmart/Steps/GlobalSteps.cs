@@ -751,7 +751,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)NTTQA.Selenium.SpecFlow.Context.GetFromContext("Matching");
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
 				string emailBody = EmailFunctions.getEmailBody(email);
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
@@ -759,7 +759,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Body of the Email was: " + emailBody);
 				string actualTrimmed = bodyDecode.Replace(" ", "");
 				string expectedTrimmed = bodyText.Replace(" ", "");
-				Report.IsTrue(actualTrimmed == expectedTrimmed, "Body text did not match correctly!", "Body text matched correctly!");
+				Report.IsTrue(actualTrimmed == expectedTrimmed, "Body text did not match correctly! Expected: " + bodyText, "Body text matched correctly!");
 			}
 			catch (Exception ex)
 			{
@@ -778,7 +778,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)NTTQA.Selenium.SpecFlow.Context.GetFromContext("Matching");
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
 				string emailBody = EmailFunctions.getEmailBody(email);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);

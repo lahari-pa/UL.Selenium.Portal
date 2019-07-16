@@ -232,7 +232,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking if " + dialog + " dialog is visible");
 				var selHomepage = new Homepage();
-				var showing = false;
+				bool showing = false;
 				switch (dialog)
 				{
 					case ("Product Information"):
@@ -274,7 +274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking contents of Pie Chart Legend");
 				var selHomepage = new Homepage();
-				foreach (var row in table.Rows)
+				foreach (TableRow row in table.Rows)
 				{
 					Report.IsTrue(selHomepage.EntryShowingInPieChartLegend(row["State"], row["Colour"]), "Legend entry was not showing correctly!", "Entry was showing correctly in the legend!");
 				}
@@ -401,7 +401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking 'My Products' Filter Options");
 				var selProdGrid = new ProductsGrid();
-				foreach (var row in table.Rows)
+				foreach (TableRow row in table.Rows)
 				{
 					Report.IsTrue(selProdGrid.FilterOptionShowingCorrectly(row["Options"], row["Colour"]), "Filter option: '" + row["Options"] + "' was not showing correctly!", "Filter option: '" + row["Options"] + "' was showing correctly!");
 				}
@@ -462,7 +462,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void TheFollowingAreShowingInThe(string lookingfor, string area, TechTalk.SpecFlow.Table expected)
 		{
-			foreach (var row in expected.Rows)
+			foreach (TableRow row in expected.Rows)
 			{
 				switch (area)
 				{
@@ -672,7 +672,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the Empty Cart pop up message reads: (.*)")]
 		public void EmptyCartPopUpText(string value)
 		{
-			var actualMessage = new EmptyCart().BodyMessage();
+			string actualMessage = new EmptyCart().BodyMessage();
 			Report.IsTrue(actualMessage == value,
 				"The Empty Cart pop up message text did not match the expected value. Expected: '" + value + "'. Actual: '" + actualMessage + "'",
 				"The Emoty Cart pop up message text matched the expected value: '" + value + "'");
@@ -755,7 +755,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Info("Checking that Cart is Empty window appears");
 				var selCartEmpty = new CartIsEmptyDialog();
-				var showing = selCartEmpty.HeaderShowing();
+				string showing = selCartEmpty.HeaderShowing();
 				Report.IsTrue(showing == headerExpected.Trim(),
 					"Cart is Empty header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
 					"Cart is Empty header was showing '" + headerExpected + "', as expected!");
@@ -783,7 +783,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking order of states in the Pie Chart Legend");
 				var selHomepage = new Homepage();
-				var ListOfStates = selHomepage.PieChartLegendItems();
+				List<string> ListOfStates = selHomepage.PieChartLegendItems();
 				var ExpectedStates = table.Rows.Select(x => x["State"]).ToList();
 				int i = 0;
 				foreach (string expectedState in ExpectedStates)
@@ -809,7 +809,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking order of states in the Pie Chart Legend");
 				var selProductsGrid = new ProductsGrid();
-				var ListOfFilters = selProductsGrid.GetAllFilters();
+				List<string> ListOfFilters = selProductsGrid.GetAllFilters();
 				var ExpectedFilters = table.Rows.Select(x => x["Filter"]).ToList();
 				int i = 0;
 				foreach (string expectedFilter in ExpectedFilters)
@@ -831,8 +831,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the announcements area I should see my saved messages")]
 		public void ThenInTheAnnouncementsAreaIShouldSeeMySavedMessages()
 		{
-			Homepage myHomepage = new Homepage();
-			List<Message> ListOfMessages = (List<Message>)Context.GetFromContext("Messages");
+			var myHomepage = new Homepage();
+			var ListOfMessages = (List<Message>)Context.GetFromContext("Messages");
 			List<string> MessagesOnHomepage = myHomepage.GetAnnouncements();
 			foreach (string thisMessage in ListOfMessages.Select(x => x.MessageBody).ToList())
 			{
@@ -868,7 +868,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on the Live Help button on the lower right")]
 		public void GivenIClickOnTheLiveHelpButtonOnTheLowerRight()
 		{
-			TopMenuBar myTopMenuBar = new TopMenuBar();
+			var myTopMenuBar = new TopMenuBar();
 			Report.IsTrue(myTopMenuBar.ClickLiveHelp(), "Failed to click live help", "Clicked live help");
 		}
 
@@ -910,7 +910,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Live Help dialog I enter name: (.*)")]
 		public void GivenInTheLiveHelpDialogIEnterName(string name)
 		{
-			LiveHelp myLiveHelp = new LiveHelp();
+			var myLiveHelp = new LiveHelp();
 			Report.IsTrue(myLiveHelp.EnterName(name), "Failed to enter name: " + name,
 				"Successfully entered name: " + name);
 		}
@@ -918,7 +918,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Live Help dialog I enter email: (.*)")]
 		public void GivenInTheLiveHelpDialogIEnterEmail(string email)
 		{
-			LiveHelp myLiveHelp = new LiveHelp();
+			var myLiveHelp = new LiveHelp();
 			Report.IsTrue(myLiveHelp.EnterEmail(email), "Failed to enter email: " + email,
 				"Successfully entered email: " + email);
 		}
@@ -932,10 +932,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the hover over text is as expected for the following navigation icons")]
 		public void HoverOverIconsAndConfirmTheTitleAppears(Table icons)
 		{
-			foreach (var row in icons.Rows)
+			foreach (TableRow row in icons.Rows)
 			{
-				var icon = row["Icon"];
-				var text = row["Text"];
+				string icon = row["Icon"];
+				string text = row["Text"];
 				Report.IsTrue(new NavigationBar().IconTextDisplayedOnHover(icon, text),
 					"Title text: " + text + " did not appear on hover for icon: " + icon,
 					"Title text: " + text + " appeared on hover for icon: " + icon + " as expected", false, false);
@@ -946,7 +946,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveListOfIDsDisplayedOnThePageAs(string savedAs)
 		{
 			var selProductsGrid = new ProductsGrid();
-			var prodIDs = selProductsGrid.AllIDsInGrid();
+			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
 			Context.AddToContext(savedAs, prodIDs);
 		}
