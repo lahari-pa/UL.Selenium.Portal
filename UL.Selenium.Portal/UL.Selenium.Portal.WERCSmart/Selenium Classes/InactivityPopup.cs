@@ -15,7 +15,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
-		private IWebElement ButtonByText(string btnText) => this.containerElement.FindElement(By.XPath($@".//button[text() = ""{btnText}""]"), 1);
+		private IWebElement YesButton => this.containerElement.FindElement(By.XPath($@".//button[text() = ""Yes""]"), 1);
+
+		private IWebElement NoButton => this.containerElement.FindElement(By.XPath(@".//a[@class= 'btn btn-default' and text() = ""No""]"), 1);
 
 		public bool IsVisible()
 		{
@@ -23,9 +25,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.GetAttribute("class") != "modal fade";
 		}
 
-		public bool ClickYes() => this.ButtonByText("Yes").TryClick();
+		public bool ClickYes() => this.YesButton.TryClick();
 
-		public bool ClickNo() => this.ButtonByText("No").TryClick();
+		public bool ClickNo() => this.NoButton.TryClick();
 
 
 		public bool WaitUntilDisplayed(int timeout, out int secondsWaited)
@@ -36,17 +38,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			timer.Stop();
 			secondsWaited = Convert.ToInt32(timer.Elapsed.TotalSeconds);
 			return res;
-			//return this.WaitForMethodTimeout(WaitForContainerToBeVisible, timeout, true, out secondsWaited);
 		}
 
-		//private bool WaitForMethodTimeout(Func<int, bool, bool> function, int timeout, bool report, out int secondsWaited)
-		//{
-		//	var timer = new Stopwatch();
-		//	timer.Start();
-		//	var res = function.Invoke(timeout, report);
-		//	timer.Stop();
-		//	secondsWaited = Convert.ToInt32(timer.Elapsed.TotalSeconds);
-		//	return res;
-		//}
 	}
 }

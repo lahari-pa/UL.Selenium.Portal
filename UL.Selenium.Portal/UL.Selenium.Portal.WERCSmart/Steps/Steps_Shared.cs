@@ -6673,7 +6673,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var selNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
-			if (selNewProduct.Wait_for_load())
+			if (selNewProduct.WaitForContainerToBeVisible())
 			{
 				if (selNewProduct.WaitForSection("ULSC Service Data Re-Import"))
 				{

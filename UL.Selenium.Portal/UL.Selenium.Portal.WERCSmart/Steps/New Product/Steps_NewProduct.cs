@@ -213,7 +213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.Info("Creating shell product with name " + name + ", saved as " + savedAs);
 				var selNewProduct = new NewProduct();
-				if (!selNewProduct.Wait_for_load(10))
+				if (!selNewProduct.WaitForContainerToBeVisible(10))
 				{
 					throw new Exception("Page failed to load!");
 				}
@@ -357,7 +357,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			try
 			{
 				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.Wait_for_load(10), "New product page is not loaded", "New product page is loaded.");
+				Report.IsTrue(selNewProduct.WaitForContainerToBeVisible(10), "New product page is not loaded", "New product page is loaded.");
 				selNewProduct.SelectTypeOfProductToCreate("New");
 			}
 			catch (Exception ex)
@@ -996,7 +996,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void SetTheSectionOptionTo(string section, string option)
 		{
 			NewProduct thisNewProduct = new NewProduct();
-			if (!thisNewProduct.Wait_for_load(3))
+			if (!thisNewProduct.WaitForContainerToBeVisible(3))
 			{
 				Report.Failure("The new product page is not showing");
 			}
@@ -1547,7 +1547,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var selNewProduct = new NewProduct();
 			Report.Info("Checking new product is loaded");
-			Report.IsTrue(selNewProduct.Wait_for_load(10),
+			Report.IsTrue(selNewProduct.WaitForContainerToBeVisible(10),
 				"The New Product page is not currently loaded",
 				"The New Product page is loaded");
 			var currentPage = selNewProduct.ActivePanelHeadingText();

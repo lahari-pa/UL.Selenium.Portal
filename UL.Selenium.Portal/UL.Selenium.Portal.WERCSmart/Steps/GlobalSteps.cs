@@ -160,7 +160,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Beginning I login with email and password");
 			var selLandingPage = new LandingPage();
-			if (!selLandingPage.Wait_for_load(5))
+			if (!selLandingPage.WaitForContainerToBeVisible(5))
 			{
 				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 2) != null)
 				{
@@ -173,7 +173,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;
-			while ((!selHomepage.Wait_for_load(1) || !selTopMenuBar.Wait_for_load(1)) && i < 4)
+			while ((!selHomepage.WaitForContainerToBeVisible(1) || !selTopMenuBar.Wait_for_load(1)) && i < 4)
 			{
 				Report.Info("========== Login Attempt: " + i + " ==========");
 				var selLogin = new Login();
@@ -188,7 +188,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Clicking login");
 				Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
 				selHomepage = new Homepage();
-				if (selHomepage.Wait_for_load())
+				if (selHomepage.WaitForContainerToBeVisible())
 				{
 					Report.Success("Successfully logged in!");
 					GeneralUtilities.Wait_for_load_finish();
@@ -201,7 +201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Delay.Seconds(Delay.SpeedFactor * 1);
 
 					selHomepage = new Homepage();
-					if (selHomepage.Wait_for_load(10))
+					if (selHomepage.WaitForContainerToBeVisible(10))
 					{
 						Report.Success("Successfully logged in!");
 						GeneralUtilities.Wait_for_load_finish();
@@ -242,7 +242,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Beginning I login with email and password");
 			var selLandingPage = new LandingPage();
-			if (!selLandingPage.Wait_for_load(5))
+			if (!selLandingPage.WaitForContainerToBeVisible(5))
 			{
 				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 2) != null)
 				{
@@ -280,7 +280,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			selHomepage = new Homepage();
 			// check for home page
-			if (selHomepage.Wait_for_load())
+			if (selHomepage.WaitForContainerToBeVisible())
 			{
 				Report.Success("Successfully logged in!");
 				GeneralUtilities.Wait_for_load_finish();
@@ -294,7 +294,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Closing modal dialog");
 				modalDialog.Click_Closex();
 				selHomepage = new Homepage();
-				if (selHomepage.Wait_for_load())
+				if (selHomepage.WaitForContainerToBeVisible())
 				{
 					Report.Success("Successfully logged in!");
 					GeneralUtilities.Wait_for_load_finish();
@@ -579,7 +579,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Warn("AREA UNDER DEVELOPMENT");
 				Report.Failure("AREA UNDER DEVELOPMENT");
 				var selBulkActions = new BulkActions();
-				if (selBulkActions.Wait_for_load(5))
+				if (selBulkActions.WaitForContainerToBeVisible(5))
 				{
 					Report.Info("Closing Bulk Actions window as result is not yet developed");
 					selBulkActions.ClickClose();
@@ -1077,7 +1077,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					this.GivenILogout();
 					continue;
 				}
-				if (!new Homepage().Wait_for_load())
+				if (!new Homepage().WaitForContainerToBeVisible())
 				{
 					// if 90 day expiry attempt to reset it
 					var passwordExpired = new PasswordExpired();

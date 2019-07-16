@@ -99,7 +99,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClickOptionInDeleteProductPopUp(string button)
 		{
 			var delDialog = new DeleteDialog();
-			delDialog.Wait_for_load();
+			delDialog.WaitForContainerToBeVisible();
 			if (button.ToLower() == "delete")
 			{
 				Report.IsTrue(delDialog.ClickDelete(),

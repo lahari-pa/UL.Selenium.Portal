@@ -399,7 +399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking Bulk Actions popup appears");
 				var selBulkActions = new BulkActions();
-				selBulkActions.Wait_for_load();
+				selBulkActions.WaitForContainerToBeVisible();
 				Report.Success("Bulk Actions window opened successfully!");
 			}
 			catch (Exception ex)

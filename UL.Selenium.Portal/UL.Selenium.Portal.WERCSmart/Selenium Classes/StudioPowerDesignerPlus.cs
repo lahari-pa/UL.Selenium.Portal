@@ -914,7 +914,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					{
 						SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 					}
-					catch (Exception e)
+					catch (Exception)
 					{
 						Report.Info("Problems with maximising");
 					}

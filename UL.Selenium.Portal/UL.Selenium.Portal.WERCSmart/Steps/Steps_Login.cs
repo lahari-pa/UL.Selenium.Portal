@@ -213,7 +213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ShouldSeeAServerErrorWithMessage(string expectedMessage)
 		{
 			var selServerError = new ServerErrorDialog();
-			if (!selServerError.Wait_for_load(10))
+			if (!selServerError.WaitForContainerToBeVisible(10))
 			{
 				throw new Exception("Server Error Dialog did not appear!");
 			}

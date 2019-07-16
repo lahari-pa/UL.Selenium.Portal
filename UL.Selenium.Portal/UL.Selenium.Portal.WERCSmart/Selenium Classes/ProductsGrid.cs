@@ -456,7 +456,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					if (deleteButton.TryClick())
 					{
 						var delDialog = new DeleteDialog();
-						delDialog.Wait_for_load();
+						delDialog.WaitForContainerToBeVisible();
 						delDialog.ClickDelete();
 						GeneralUtilities.Wait_for_load_finish();
 					}
@@ -481,7 +481,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				if (deleteButton.TryClick())
 				{
 					var delDialog = new DeleteDialog();
-					delDialog.Wait_for_load();
+					delDialog.WaitForContainerToBeVisible();
 					if (delDialog.ClickDelete())
 					{
 						Report.Info("Clicked 'delete'");

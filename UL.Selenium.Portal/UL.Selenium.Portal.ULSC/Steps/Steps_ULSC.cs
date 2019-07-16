@@ -275,7 +275,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				{
 					case "The Product":
 						var selNewProduct = new NewProduct();
-						if (selNewProduct.Wait_for_load())
+						if (selNewProduct.WaitForContainerToBeVisible())
 						{
 							if (selNewProduct.WaitForSection(page))
 							{
@@ -295,7 +295,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 						break;
 					case "New Product":
 						var selNewProductnp = new NewProduct();
-						if (selNewProductnp.Wait_for_load())
+						if (selNewProductnp.WaitForContainerToBeVisible())
 						{
 
 							Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
