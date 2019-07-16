@@ -81,12 +81,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickPage(string page)
 		{
-			if (this.GetPage("current") == int.Parse(page))
+			try
 			{
-				return false;
+				if (this.GetPage("current") == int.Parse(page))
+				{
+					return false;
+				}
+				Report.Info("Clicking page: " + page);
+				return this.containerElement.FindElement(By.XPath("//a[@class='page-link' and text()= '" + page + "']"), 2).TryClick();
 			}
-			Report.Info("Clicking page: " + page);
-			return this.containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link' and text()= '" + page + "']"), 2).TryClick();
+			finally
+			{
+				GeneralUtilities.Wait_for_load_finish();
+			}
 		}
 
 		public bool NextDisabled()
@@ -104,6 +111,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var rList = new List<MyProductsItem>();
 			this.ClickPage("1");
+			GeneralUtilities.Wait_for_load_finish();
 			int pageNumber = this.GetPage("current");
 			int ingredientNumber = 1;
 			if (pageNumber == -1)
@@ -119,7 +127,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					var productsItem = new MyProductsItem {
 						WPSID = row.FindElement(By.XPath("./td[contains(@data-bind,'ProductID')]"), 2)?.Text,
-						ProductName = row.FindElement(By.XPath("./td[contains(@data-bind,'Name')]"), 2)?.Text
+						ProductName = row.FindElement(By.XPath("./td[contains(@data-bind,'Name')]"), 2)?.Text,
+						PageNumber = this.GetPage("current").ToString()
 					};
 					rList.Add(productsItem);
 				}
@@ -130,6 +139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return rList;
 				}
 				this.ProductGridNavigation("next");
+				GeneralUtilities.Wait_for_load_finish();
 				pageNumber = this.GetPage("current");
 			}
 			return rList;
@@ -220,10 +230,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			public string WPSID { get; set; }
 			public string ProductName { get; set; }
+			public string PageNumber { get; set; }
 
 			public bool Click()
 			{
-				return this.containerElement.FindElement(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr[./td[contains(@data-bind, 'ProductID') and text()='" + this.WPSID + "']]"), 2).TryClick();
+				bool thisThing = this.containerElement.FindElement(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr[./td[contains(@data-bind, 'ProductID') and text()='" + this.WPSID + "']]"), 2).TryClick();
+				return thisThing;
 			}
 		}
 		public class DocumentsItem : DocumentAcceptance
