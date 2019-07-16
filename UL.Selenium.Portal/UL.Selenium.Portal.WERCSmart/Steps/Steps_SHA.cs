@@ -353,7 +353,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						if (status.ToLower() == "accepted or completed")
 						{
 							if (topProductnew.Status.ToLower() == "accepted" |
-							    topProductnew.Status.ToLower() == "completed")
+								topProductnew.Status.ToLower() == "completed")
 							{
 								found = true;
 							}
@@ -612,7 +612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					else
 					{
 						Report.Info("Active did not match. Expected: " + thisRow["Active"] + " but got: " +
-						            thisProduct.Active);
+									thisProduct.Active);
 						allPassed = false;
 					}
 
@@ -623,8 +623,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					else
 					{
 						Report.Info("Recertification reason did not match. Expected: " +
-						            thisRow["Recertification Reason"] + " but got: " +
-						            thisProduct.RecertificationReason);
+									thisRow["Recertification Reason"] + " but got: " +
+									thisProduct.RecertificationReason);
 						allPassed = false;
 					}
 
@@ -636,15 +636,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							DateTime yesterday = now.AddDays(-1);
 							DateTime tommorrow = now.AddDays(+1);
 							if (thisProduct.RecertificationDate > yesterday &&
-							    thisProduct.RecertificationDate <= tommorrow)
+								thisProduct.RecertificationDate <= tommorrow)
 							{
 								Report.Info("Recertification date: " + thisRow["Date"]);
 							}
 							else
 							{
 								Report.Info("Recertification date did not match. Expected date between " +
-								            yesterday.ToString() + " and " + tommorrow.ToString() + " but got: " +
-								            thisProduct.RecertificationDate.ToString());
+											yesterday.ToString() + " and " + tommorrow.ToString() + " but got: " +
+											thisProduct.RecertificationDate.ToString());
 								allPassed = false;
 							}
 						}
@@ -659,8 +659,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							else
 							{
 								Report.Info("Recertification date did not match. Expected: " +
-								            thisRow["Date"] + " but got: " +
-								            thisProduct.RecertificationDate.ToString());
+											thisRow["Date"] + " but got: " +
+											thisProduct.RecertificationDate.ToString());
 								allPassed = false;
 							}
 						}
@@ -904,7 +904,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-						    By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -1027,7 +1027,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			actualMessage = regex.Replace(actualMessage, " ");
 
 			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
-			            " expected message length is: " + shouldSee.Trim().Length);
+						" expected message length is: " + shouldSee.Trim().Length);
 			if (actualMessage.Trim() != shouldSee.Trim())
 			{
 				StringBuilder builder = new StringBuilder();
@@ -1080,7 +1080,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			actualMessage = regex.Replace(actualMessage, " ");
 
 			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
-			            " expected message length is: " + shouldSee.Trim().Length);
+						" expected message length is: " + shouldSee.Trim().Length);
 			if (actualMessage.Trim() != shouldSee.Trim())
 			{
 				StringBuilder builder = new StringBuilder();
@@ -1141,7 +1141,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var notification = notifications[i];
 				Report.Info("Notification" + i + 1 + ". Type = '" + notification.Type + "'. Notification Date = '" +
-				            notification.NotificationDate + "'. Subject = '" + notification.Subject + ".");
+							notification.NotificationDate + "'. Subject = '" + notification.Subject + ".");
 			}
 
 			if (table.ContainsColumn("Type"))
@@ -1250,7 +1250,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				actualMessage = regex.Replace(actualMessage, " ");
 
 				Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
-				            " expected message length is: " + shouldSee.Trim().Length);
+							" expected message length is: " + shouldSee.Trim().Length);
 				if (actualMessage.Trim() != shouldSee.Trim())
 				{
 					StringBuilder builder = new StringBuilder();
@@ -1631,7 +1631,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-						    By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -1706,7 +1706,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Checking handle: " + handle);
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				if (SeleniumBrowser.WebBrowser.FindElement(
-					    By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+						By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 				{
 					Report.Success("Tab was switched successfully!");
 					Report.Screenshot();
@@ -2075,7 +2075,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-						    By.XPath(".//div[@class='upcTableOutter']"), 2) != null)
+							By.XPath(".//div[@class='upcTableOutter']"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -2100,7 +2100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				// Confirm match
-				var upcNumbers = (List<string>)Context.GetFromContext("UPC" + savedAs);
+				var upcNumbers = (List<string>)Context.GetFromContext(savedAs);
 				Report.IsTrue(displayedUpcs.All(x => upcNumbers.Contains(x.UPCNumber)),
 					"Not all UPCs saved as: " + savedAs + " were displayed! Expected: " +
 					string.Join(", ", upcNumbers) + ". but got: " +

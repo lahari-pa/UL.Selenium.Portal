@@ -633,7 +633,7 @@ Scenario: [64530] Process UPC Update
 	Given I generate a random UPC number and save as: UPC64530
 	Given I navigate to the landing page
 	#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: ProductSetup64530
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
@@ -651,14 +651,11 @@ Scenario: [64530] Process UPC Update
 	And the Purchase Summary should load
 	And I navigate to the home page
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64530)
+	#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64530)
+	Given In the SHA Manager Grid I run a search for product saved as: ProductSetup64530 and its status is: Recertification
 	And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: ProductSetup64530
 	And I confirm UPC number saved as: "UPC64530" is displayed in the SHA Manager Product UPC list
 	And I close the window that opened
-	And I call Shared Step 55637 (SHA - Process UPC Update for Specific product) saved as: ProductSetup64530
-	And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: ProductSetup64530) for
-		| Retailer |
-		| CVS      |
 
 #Scenario: debug64530
 #
