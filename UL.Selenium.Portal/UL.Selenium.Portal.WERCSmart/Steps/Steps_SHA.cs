@@ -575,7 +575,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ProductRecertificationHistory thisProductRecertificationHistory = new ProductRecertificationHistory();
 			thisProductRecertificationHistory.Wait_for_load(30);
-			Delay.Seconds(15);
+			thisProductRecertificationHistory.WaitForTableLoad();
 			Report.Screenshot();
 			List<Product> ListOfRecertificationProducts = thisProductRecertificationHistory.GetProducts();
 			Report.Info("Found " + ListOfRecertificationProducts.Count.ToString() + " recertification products");
