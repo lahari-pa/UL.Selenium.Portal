@@ -575,6 +575,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ProductRecertificationHistory thisProductRecertificationHistory = new ProductRecertificationHistory();
 			thisProductRecertificationHistory.Wait_for_load(30);
+			thisProductRecertificationHistory.WaitForTableLoad();
 			Report.Screenshot();
 			List<Product> ListOfRecertificationProducts = thisProductRecertificationHistory.GetProducts();
 			Report.Info("Found " + ListOfRecertificationProducts.Count.ToString() + " recertification products");
@@ -905,7 +906,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-							By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -1634,7 +1635,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-							By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -1709,7 +1710,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Checking handle: " + handle);
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				if (SeleniumBrowser.WebBrowser.FindElement(
-						By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+						By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 				{
 					Report.Success("Tab was switched successfully!");
 					Report.Screenshot();
@@ -2103,7 +2104,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				// Confirm match
-				var upcNumbers = (List<string>)Context.GetFromContext("UPC" + savedAs);
+				var upcNumbers = (List<string>)Context.GetFromContext(savedAs);
 				Report.IsTrue(displayedUpcs.All(x => upcNumbers.Contains(x.UPCNumber)),
 					"Not all UPCs saved as: " + savedAs + " were displayed! Expected: " +
 					string.Join(", ", upcNumbers) + ". but got: " +

@@ -226,8 +226,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			thisStepsHomePage.ThenINavigateToTheHomePage();
 			thisStepsProductGrid.GivenISearchForTheProductSavedAs(savedAs);
-			//CLF 26 Oct 2018 This does not always seem to change immediately
-			thisStepsProductGrid.GivenForProductSavedAsTestCaseTheStatusIs(savedAs, "Assessment in Progress");
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,

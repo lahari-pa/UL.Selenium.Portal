@@ -73,11 +73,7 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 		| No Retailer/No UPC Product |
 	Given I click continue
 	Then If the UPCs Warning popup is displayed I click OK
-	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-	Given I click continue
+	Given I call Shared Step 104662 - Regulatory Documents to Provide - Lithium Batteries - US and Canada - Request authoring for both
 	Given I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
@@ -88,6 +84,7 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: LITHIUM ION BATTERIES
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60018
 
+@TReVorId:22337
 Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -126,6 +123,7 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Given I click continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104222
 
+@TReVorId:22340
 Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

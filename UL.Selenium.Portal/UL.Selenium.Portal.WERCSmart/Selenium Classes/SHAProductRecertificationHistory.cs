@@ -34,6 +34,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public void WaitForTableLoad(double timeout = 10)
+		{
+			Delay.Seconds(2);
+			this.containerElement.WaitUntilElementInvisible(By.Id("load_listProdRecertHistory"), timeout);
+		}
+
 		//Close, Export
 		public bool ClickButton(string button)
 		{
