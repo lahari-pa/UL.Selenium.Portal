@@ -105,7 +105,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var rList = new List<MyProductsItem>();
 			this.ClickPage("1");
 			int pageNumber = this.GetPage("current");
-			int ingredientNumber = 1;
 			if (pageNumber == -1)
 			{
 				Report.Failure("Could not get current page number from the grid");
