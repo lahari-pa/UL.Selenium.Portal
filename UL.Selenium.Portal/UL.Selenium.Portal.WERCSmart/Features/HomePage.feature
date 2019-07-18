@@ -164,18 +164,22 @@ Scenario: [56214] My Products grid Actions - Submit navigation
 	Given I generate a random UPC number and save as: UPC56214
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase56214
-	And I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-	And I call Shared Step 94674 (Additional Product Information - RU Wine)
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	And I call Shared Step 49818 (Beverage Regulatory Details)
-	And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-	And I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
+	#And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	#And I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	#And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
-	#Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test
 	And I navigate to the home page
 	And I filter the products by: Not Yet Submitted
@@ -633,7 +637,7 @@ Scenario: [64530] Process UPC Update
 	Given I generate a random UPC number and save as: UPC64530
 	Given I navigate to the landing page
 	#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: ProductSetup64530
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
@@ -651,14 +655,11 @@ Scenario: [64530] Process UPC Update
 	And the Purchase Summary should load
 	And I navigate to the home page
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64530)
+	#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64530)
+	Given In the SHA Manager Grid I run a search for product saved as: ProductSetup64530 and its status is: Recertification
 	And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: ProductSetup64530
 	And I confirm UPC number saved as: "UPC64530" is displayed in the SHA Manager Product UPC list
 	And I close the window that opened
-	And I call Shared Step 55637 (SHA - Process UPC Update for Specific product) saved as: ProductSetup64530
-	And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: ProductSetup64530) for
-		| Retailer |
-		| CVS      |
 
 #Scenario: debug64530
 #

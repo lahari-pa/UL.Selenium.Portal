@@ -200,8 +200,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				if (thisProductStatus != null)
 				{
 					if ((idStatus == thisProductStatus.StatusName || idStatus.ToLower() == "n/a") &&
-					    thisProductStatus.Bold == expectingBold &&
-					    (tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor))
+						thisProductStatus.Bold == expectingBold &&
+						(tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor))
 					{
 						return true;
 					}
@@ -214,7 +214,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					else
 					{
 						matchReport += " status did not match. Expecting: " + idStatus + " but got: " +
-						               thisProductStatus.StatusName;
+									   thisProductStatus.StatusName;
 					}
 
 					if (thisProductStatus.Bold == expectingBold)
@@ -224,7 +224,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					else
 					{
 						matchReport += " bolding did not match. Expecting: " + expectingBold.ToString() + " but got: " +
-						               thisProductStatus.Bold.ToString();
+									   thisProductStatus.Bold.ToString();
 					}
 
 					if (tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor)
@@ -591,7 +591,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							{
 								var status = SeleniumBrowser.WebBrowser.FindElement(
 									By.XPath("//table[@id='list']//tr[@class!='jqgfirstrow'][" + (j + 1) + "]//td[" +
-									         (i + addIndex) + "]"), 2);
+											 (i + addIndex) + "]"), 2);
 								Report.Info("Status is: " + status.GetValue());
 								if (status != null)
 								{
@@ -700,7 +700,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var rightBorderColour = matchingTD.GetCssValue("border-right-color");
 
 				if (bottomBorderColour == "rgba(205, 10, 10, 1)" && leftBorderColour == "rgba(205, 10, 10, 1)" &&
-				    rightBorderColour == "rgba(205, 10, 10, 1)")
+					rightBorderColour == "rgba(205, 10, 10, 1)")
 				{
 					return true;
 				}
@@ -901,7 +901,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement menuOption =
 					ListOfTopMenuOptions.FirstOrDefault(x => x.GetValue(true).ToLower() == option.ToLower());
 				Report.Info("Found options: " +
-				            string.Join(",", ListOfTopMenuOptions.Select(x => x.GetValue(true)).ToList()));
+							string.Join(",", ListOfTopMenuOptions.Select(x => x.GetValue(true)).ToList()));
 				if (menuOption != null)
 				{
 					return menuOption.TryClick(ClickFunctionality.ClickType.JavaScript);
@@ -959,7 +959,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (matchingOption == null)
 			{
 				Report.Info("No matching menu option found: " + option + ". Available options: " +
-				            string.Join(",", listOfOptions));
+							string.Join(",", listOfOptions));
 				return false;
 			}
 
@@ -979,41 +979,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			var headers = headerRow.FindElements(By.XPath("./td"), 2);
-			var upcPosition = headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'UPC Number')]"))) +
-			                  1;
-			var pkgTypePosition =
-				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Type')]"))) + 1;
-			var pkgSizePosition =
-				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Size')]"))) + 1;
-			var retailersStartPosition =
-				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Transport')]"))) + 2;
-			var retailersEndPosition =
-				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'DPCI')]")))
-				;
-			// IndexOf() returns -1 if el not found in the row. position()= 0 will fail to get the correct td
-			if (upcPosition == 0 || pkgTypePosition == 0 || pkgSizePosition == 0)
-			{
-				Report.Info("Could not locate 'UPC Number', 'Pkg Type' or 'Pkg Size' in header row!");
-				return null;
-			}
+			var upcPosition = headers.IndexOf(headerRow.FindElement(By.XPath(".//th[contains(text(),'UPC Number')]"))) +
+							  1;
 
 			foreach (var row in rows)
 			{
 				var thisUpc = new SHAManagerProdcutUPC {
-					UPCNumber = row.FindElement(By.XPath($"./td[position()= {upcPosition}]"), 2)?.Text,
-					PackagingType = row.FindElement(By.XPath($"./td[position()= {pkgTypePosition}]"), 2)?.Text,
-					PackagingSize = row.FindElement(By.XPath($"./td[position()= {pkgSizePosition}]"), 2)?.Text
+					UPCNumber = row.Text.Split(' ')[0]
 				};
-				List<string> retailers = new List<string>();
-				for (int i = retailersStartPosition; i < retailersEndPosition + 1; i++)
-				{
-					if (row.FindElement(By.XPath($"./td[position()= {i}]"), 2)?.Text.Length > 0)
-					{
-						retailers.Add(headerRow.FindElement(By.XPath($"./td[position()= {i}]"), 2)?.Text);
-					}
-				}
 
-				thisUpc.Retailers = retailers;
 				rList.Add(thisUpc);
 			}
 
@@ -1066,7 +1040,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					var rightBorderColour = thisIDTD.GetCssValue("border-right-color");
 
 					if (!(bottomBorderColour == "rgba(205, 10, 10, 1)" && leftBorderColour == "rgba(205, 10, 10, 1)" &&
-					      rightBorderColour == "rgba(205, 10, 10, 1)"))
+						  rightBorderColour == "rgba(205, 10, 10, 1)"))
 					{
 						return thisIDTD.GetValue().Trim();
 					}
@@ -1918,7 +1892,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		
+
 	}
 
 

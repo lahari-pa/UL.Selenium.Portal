@@ -71,7 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Container Type: " + upcInfo.ContainerType);
 			Report.Info("Size: " + upcInfo.Size);
 			Report.Info("Quantity: " + upcInfo.Quantity);
-			Report.Info("Transportation Option: " + upcInfo.TransportationOption);
+			Report.Info("Transportation Options: " + upcInfo.TransportationOption);
 
 			Report.IsTrue(new UPC().InputUpcCaseInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
 		}
@@ -432,6 +432,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int randomNumber = random.Next(1, upcOptions.Count - 1);
 			Report.IsTrue(new NewProduct().SelectPackageType(upcOptions[randomNumber]),
 				"Failed to select: " + upcOptions[randomNumber], "Selected: " + upcOptions[randomNumber]);
+		}
+
+		// Enter UPC string in the form: "Equals"+upcNumber where upcNumber is the exact number to input, rather than using the randomly generated step from context
+		// Enter '_CVS' or '_cvs' for upc variable to use a upc number for retailer CVS from (required for some test cases eg. CVS RCL feature)
+		[StepDefinition(
+			@"I enter information for Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC(.*), container type: (.*) and size: (.*) - do not click continue")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc,
+			string containerType, string size)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			TestReport.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			TestReport.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				var upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				Table upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
 		}
 	}
 }
