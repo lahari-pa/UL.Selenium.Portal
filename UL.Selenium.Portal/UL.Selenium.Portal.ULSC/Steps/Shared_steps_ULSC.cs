@@ -13,7 +13,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		public void GivenICallSharedStep_LoginToWSWAsULSCUser()
 		{
 			TestReport.UseSubSteps = true;
-			StepsUlsc myStepsULSC = new StepsUlsc();
+			var myStepsULSC = new StepsUlsc();
 			TestReport.StartStep("I navigate to Studio");
 			myStepsULSC.GivenINavigateToStudioULSC();
 			Delay.Seconds(2);
@@ -27,29 +27,29 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		public void GivenICallSharedStep_WERCSLinkGoToServices_WERCSmart()
 		{
 			TestReport.UseSubSteps = true;
-			StepsUlsc myStepsULSC = new StepsUlsc();
+			var myStepsULSC = new StepsUlsc();
 			myStepsULSC.GivenIShouldSeeTheWERCSLinkDashboard();
 			myStepsULSC.GivenInTheWERCSLinkDashboardIClickMenuItemAndSubmenuItem("Services", "WERCSmart");
 		}
 
-		[Given(@"I call Shared Step 29148 - Login to ULSC as an Administrator User")]
+		[StepDefinition(@"I call Shared Step 29148 - Login to ULSC as an Administrator User")]
 		public void GivenICallSharedStep_LoginToULSCAsAnAdministratorUser()
 		{
-			Steps_SHA MyStepsSHA = new Steps_SHA();
+			var MyStepsSHA = new Steps_SHA();
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("UL Secure Connect", "Home");
 			Delay.Seconds(20);
 			GeneralUtilities.StudioWaitForSpinner(120);
-			StepsUlsc MyStepsULSC = new StepsUlsc();
+			var MyStepsULSC = new StepsUlsc();
 			MyStepsULSC.GivenTheULSCLoginPageShouldOpenInANewTab();
 			MyStepsULSC.GivenInTheULSCLoginPageIEnterUsernameAndPasswordForTheFollowingAccountTest("ULSC_WercsUser");
 			MyStepsULSC.GivenITheULSCLoginPageIClickLogin();
 		}
 
-		[Given(@"I call Shared Step 54595 - WERCSLink Dashboard > Services > My Products")]
+		[StepDefinition(@"I call Shared Step 54595 - WERCSLink Dashboard > Services > My Products")]
 		public void GivenICallSharedStep54595WERCSLinkDashboardServicesMyProducts()
 		{
 			TestReport.UseSubSteps = true;
-			StepsUlsc myStepsULSC = new StepsUlsc();
+			var myStepsULSC = new StepsUlsc();
 			myStepsULSC.GivenIShouldSeeTheWERCSLinkDashboard();
 			myStepsULSC.GivenInTheWERCSLinkDashboardIClickMenuItemAndSubmenuItem("Services", "WERCSmart");
 			myStepsULSC.GivenInTheWERCSLinkPage_ClickTheMyProductLinkFromTheWERCSmartAreaOfTheServicesPage("My Products",

@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "SHA")]
 	public class Steps_SHA
 	{
-		[Given(@"I navigate to Studio")]
+		[StepDefinition(@"I navigate to Studio")]
 		public void GivenINavigateToStudio()
 		{
 			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
@@ -34,14 +34,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
-		[Given(@"I navigate to Portal")]
+		[StepDefinition(@"I navigate to Portal")]
 		public void GivenINavigateToPortal()
 		{
 			SeleniumBrowser.WebBrowser.Url = GlobalParameters.TestUrl;
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
-		[Given(@"I login to Studio as Administrator")]
+		[StepDefinition(@"I login to Studio as Administrator")]
 		public void GivenILoginToStudioAsAdministrator()
 		{
 			StudioLogin thisStudioLogin = new StudioLogin();
@@ -61,7 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
 
-		[Given(@"I click top menu item: (.*) and submenu item: (.*)")]
+		[StepDefinition(@"I click top menu item: (.*) and submenu item: (.*)")]
 		public void GivenIClickTopMenuItemAndSubMenuItem(string menuItem, string submenuItem)
 		{
 			StudioTopMenu thisTopMenu = new StudioTopMenu();
@@ -80,7 +80,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"In SHA Manager Page I click top menu item: (.*)")]
+		[StepDefinition(@"In SHA Manager Page I click top menu item: (.*)")]
 		public void GivenInSHAManagerPageIClickTopMenuItem(string menuItem)
 		{
 			StudioSHAManager thisShaManager = new StudioSHAManager();
@@ -88,7 +88,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked: " + menuItem);
 		}
 
-		[Given(@"In SHA Manager Page I click sub menu item: (.*)")]
+		[StepDefinition(@"In SHA Manager Page I click sub menu item: (.*)")]
 		public void GivenInSHAManagerPageIClickSubMenuItem(string menuItem)
 		{
 			StudioSHAManager thisShaManager = new StudioSHAManager();
@@ -107,7 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Failed to click: " + menuItem);
 		}
 
-		[Given(@"In the the Manage Global Messages dialog I add and save the following messages:")]
+		[StepDefinition(@"In the the Manage Global Messages dialog I add and save the following messages:")]
 		public void GivenIAddTheFollowingMessages(Table table)
 		{
 			StudioManageGlobalMessages thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
@@ -116,8 +116,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<Message> ListOfMessages = new List<Message>();
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
-				Message thisMessage = new Message();
-				thisMessage.Title = thisRow["Title"];
+				Message thisMessage = new Message {
+					Title = thisRow["Title"]
+				};
 
 				if (thisRow["Message"] == "generated")
 				{
@@ -139,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("Messages", ListOfMessages);
 		}
 
-		[Given(@"I close the Manage Global Messages dialog")]
+		[StepDefinition(@"I close the Manage Global Messages dialog")]
 		public void GivenICloseTheManageGlobalMessagesDialog()
 		{
 			StudioManageGlobalMessages thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
@@ -147,7 +148,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully closed messages dialog");
 		}
 
-		[Given(@"In SHA Manager Page I select status: (.*)")]
+		[StepDefinition(@"In SHA Manager Page I select status: (.*)")]
 		public void GivenInSHAManagerPageISelectStatus(string status)
 		{
 			StudioSHAManager thisShaManager = new StudioSHAManager();
@@ -353,7 +354,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						if (status.ToLower() == "accepted or completed")
 						{
 							if (topProductnew.Status.ToLower() == "accepted" |
-							    topProductnew.Status.ToLower() == "completed")
+								topProductnew.Status.ToLower() == "completed")
 							{
 								found = true;
 							}
@@ -551,7 +552,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"In the SHA manager grid I right click against product saved as: (.*)")]
+		[StepDefinition(@"In the SHA manager grid I right click against product saved as: (.*)")]
 		public void GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(string savedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -561,19 +562,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Right clicked against: " + ID);
 		}
 
-		[Given(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
-		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string Option)
+		[StepDefinition(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
+		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string option)
 		{
 			RightClickProductMenu thisContextMenu = new RightClickProductMenu();
-			Report.IsTrue(thisContextMenu.SelectOption(Option), "Failed to select option: " + Option,
-				"Selected option: " + Option);
+			Report.IsTrue(thisContextMenu.SelectOption(option), "Failed to select option: " + option,
+				"Selected option: " + option);
 		}
 
-		[Given(@"In the Product Recertification History popup I should see the following entry")]
+		[StepDefinition(@"In the Product Recertification History popup I should see the following entry")]
 		public void GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(Table table)
 		{
 			ProductRecertificationHistory thisProductRecertificationHistory = new ProductRecertificationHistory();
 			thisProductRecertificationHistory.Wait_for_load(30);
+			thisProductRecertificationHistory.WaitForTableLoad();
 			Report.Screenshot();
 			List<Product> ListOfRecertificationProducts = thisProductRecertificationHistory.GetProducts();
 			Report.Info("Found " + ListOfRecertificationProducts.Count.ToString() + " recertification products");
@@ -612,7 +614,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					else
 					{
 						Report.Info("Active did not match. Expected: " + thisRow["Active"] + " but got: " +
-						            thisProduct.Active);
+									thisProduct.Active);
 						allPassed = false;
 					}
 
@@ -623,8 +625,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					else
 					{
 						Report.Info("Recertification reason did not match. Expected: " +
-						            thisRow["Recertification Reason"] + " but got: " +
-						            thisProduct.RecertificationReason);
+									thisRow["Recertification Reason"] + " but got: " +
+									thisProduct.RecertificationReason);
 						allPassed = false;
 					}
 
@@ -636,15 +638,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							DateTime yesterday = now.AddDays(-1);
 							DateTime tommorrow = now.AddDays(+1);
 							if (thisProduct.RecertificationDate > yesterday &&
-							    thisProduct.RecertificationDate <= tommorrow)
+								thisProduct.RecertificationDate <= tommorrow)
 							{
 								Report.Info("Recertification date: " + thisRow["Date"]);
 							}
 							else
 							{
 								Report.Info("Recertification date did not match. Expected date between " +
-								            yesterday.ToString() + " and " + tommorrow.ToString() + " but got: " +
-								            thisProduct.RecertificationDate.ToString());
+											yesterday.ToString() + " and " + tommorrow.ToString() + " but got: " +
+											thisProduct.RecertificationDate.ToString());
 								allPassed = false;
 							}
 						}
@@ -659,8 +661,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							else
 							{
 								Report.Info("Recertification date did not match. Expected: " +
-								            thisRow["Date"] + " but got: " +
-								            thisProduct.RecertificationDate.ToString());
+											thisRow["Date"] + " but got: " +
+											thisProduct.RecertificationDate.ToString());
 								allPassed = false;
 							}
 						}
@@ -740,7 +742,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product was not highlighted yellow background as expected");
 		}
 
-		[Given(@"In SHA Manager I select the following products:")]
+		[StepDefinition(@"In SHA Manager I select the following products:")]
 		public void GivenInSHAManagerISelectTheFollowingProducts(Table table)
 		{
 			string ID = "";
@@ -904,7 +906,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-						    By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -1007,8 +1009,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string id = thisStudioSHAManager.SelectFirstProduct();
 			Report.IsTrue(id.Length > 0, "Product " + id + " has not been selected",
 				"Product " + id + " has been selected");
-			ProductInformation thisProductInformation = new ProductInformation();
-			thisProductInformation.Id = id;
+			ProductInformation thisProductInformation = new ProductInformation {
+				Id = id
+			};
 			Context.AddToContext("ID", thisProductInformation);
 		}
 
@@ -1027,7 +1030,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			actualMessage = regex.Replace(actualMessage, " ");
 
 			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
-			            " expected message length is: " + shouldSee.Trim().Length);
+						" expected message length is: " + shouldSee.Trim().Length);
 			if (actualMessage.Trim() != shouldSee.Trim())
 			{
 				StringBuilder builder = new StringBuilder();
@@ -1080,7 +1083,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			actualMessage = regex.Replace(actualMessage, " ");
 
 			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
-			            " expected message length is: " + shouldSee.Trim().Length);
+						" expected message length is: " + shouldSee.Trim().Length);
 			if (actualMessage.Trim() != shouldSee.Trim())
 			{
 				StringBuilder builder = new StringBuilder();
@@ -1141,7 +1144,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var notification = notifications[i];
 				Report.Info("Notification" + i + 1 + ". Type = '" + notification.Type + "'. Notification Date = '" +
-				            notification.NotificationDate + "'. Subject = '" + notification.Subject + ".");
+							notification.NotificationDate + "'. Subject = '" + notification.Subject + ".");
 			}
 
 			if (table.ContainsColumn("Type"))
@@ -1250,7 +1253,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				actualMessage = regex.Replace(actualMessage, " ");
 
 				Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
-				            " expected message length is: " + shouldSee.Trim().Length);
+							" expected message length is: " + shouldSee.Trim().Length);
 				if (actualMessage.Trim() != shouldSee.Trim())
 				{
 					StringBuilder builder = new StringBuilder();
@@ -1277,7 +1280,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Given(@"In SHA Manager I set the filter for status to : (.*)")]
+		[StepDefinition(@"In SHA Manager I set the filter for status to : (.*)")]
 		public void GivenInSHAManagerISetTheFilterForStatusTo(string status)
 		{
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
@@ -1308,7 +1311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[Given(@"I verify the product saved as: (.*) displays in red with a red box around it")]
+		[StepDefinition(@"I verify the product saved as: (.*) displays in red with a red box around it")]
 		public void GivenIVerifyTheProductDisplaysInRedWithARedBoxAroundIt(string savedAs)
 		{
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
@@ -1453,8 +1456,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (Product thisProduct in productList)
 			{
 
-				ProductInformation thisPI = new ProductInformation();
-				thisPI.Id = thisProduct.ID;
+				ProductInformation thisPI = new ProductInformation {
+					Id = thisProduct.ID
+				};
 				Context.AddToContext(thisProduct.ID, thisPI);
 				if (counter == 1)
 				{
@@ -1631,7 +1635,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-						    By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -1706,7 +1710,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Checking handle: " + handle);
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				if (SeleniumBrowser.WebBrowser.FindElement(
-					    By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+						By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 				{
 					Report.Success("Tab was switched successfully!");
 					Report.Screenshot();
@@ -1802,7 +1806,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data item " + expectedData + " showing as expected");
 		}
 
-		[Given(@"In the SHA Manager Grid I run a search for product saved as: (.*) and its status is: (.*)")]
+		[StepDefinition(@"In the SHA Manager Grid I run a search for product saved as: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridIRunASearchForProductSavedAsTestCaseAndItsStatusIs(string savedAs,
 			string status)
 		{
@@ -1863,7 +1867,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Searching for " + expectedFilename);
 			Report.IsTrue(Documents.FirstOrDefault(x => x.Contains(expectedFilename)) != null,
 				"Filename: " + expectedFilename + " is not showing as expected. Filenames showing are: " +
-				String.Join(",", Documents), "Filename: " + expectedFilename + " is showing as expected");
+				string.Join(",", Documents), "Filename: " + expectedFilename + " is showing as expected");
 		}
 
 		[StepDefinition(@"In the Document List popup I Double click on the filename for product saved as: (.*)")]
@@ -2075,7 +2079,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-						    By.XPath(".//div[@class='upcTableOutter']"), 2) != null)
+							By.XPath(".//div[@class='upcTableOutter']"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -2100,7 +2104,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				// Confirm match
-				var upcNumbers = (List<string>)Context.GetFromContext("UPC" + savedAs);
+				var upcNumbers = (List<string>)Context.GetFromContext(savedAs);
 				Report.IsTrue(displayedUpcs.All(x => upcNumbers.Contains(x.UPCNumber)),
 					"Not all UPCs saved as: " + savedAs + " were displayed! Expected: " +
 					string.Join(", ", upcNumbers) + ". but got: " +

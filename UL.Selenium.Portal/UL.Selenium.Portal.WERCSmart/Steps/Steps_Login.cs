@@ -182,7 +182,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var savedAsValue = Context.GetFromContext(text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 				if (savedAsValue == null)
 				{
-					throw new Exception("User saved as: " + text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim() +" was not found in context.");
+					throw new Exception("User saved as: " + text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim() + " was not found in context.");
 				}
 				var savedUser = (WERCSmartUser)savedAsValue;
 				switch (inputField)
@@ -213,7 +213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ShouldSeeAServerErrorWithMessage(string expectedMessage)
 		{
 			var selServerError = new ServerErrorDialog();
-			if (!selServerError.Wait_for_load(10))
+			if (!selServerError.WaitForContainerToBeVisible(10))
 			{
 				throw new Exception("Server Error Dialog did not appear!");
 			}

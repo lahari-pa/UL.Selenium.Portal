@@ -37,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				string innerText = companyNameH3.GetInnerHTML();
 				string regExPattern = @"\<.*\>.*\<\/.*\>";
-				Regex rgx = new Regex(regExPattern);
+				var rgx = new Regex(regExPattern);
 				return rgx.Replace(innerText, "").Trim();
 			}
 			else
@@ -53,15 +53,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
 				var listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
 
-				List<User> listOfUsers = new List<User>();
+				var listOfUsers = new List<User>();
 
 				foreach (var userRow in listOfUsersRows)
 				{
-					User thisUser = new User();
-					thisUser.Username = userRow.FindElement(By.XPath(".//td[1]")).Text;
-					thisUser.Email = userRow.FindElement(By.XPath(".//td[2]")).Text;
-					thisUser.Role = userRow.FindElement(By.XPath(".//td[3]")).Text;
-					thisUser.IsActive = userRow.FindElement(By.XPath(".//td[4]")).Text == "Yes";
+					var thisUser = new User {
+						Username = userRow.FindElement(By.XPath(".//td[1]")).Text,
+						Email = userRow.FindElement(By.XPath(".//td[2]")).Text,
+						Role = userRow.FindElement(By.XPath(".//td[3]")).Text,
+						IsActive = userRow.FindElement(By.XPath(".//td[4]")).Text == "Yes"
+					};
 					var checkboxes = userRow.FindElements(By.XPath(".//td[5]/div[@class='checkbox']"));
 					foreach (var checkbox in checkboxes)
 					{
@@ -669,7 +670,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public int GetHighestPageNo()
 		{
 			var pageNumbers = this.containerElement.FindElements(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
-			List<short> intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
+			var intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
 			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
 
 
@@ -981,10 +982,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Report.Info(myText.Text.Trim());
 
-			var Expected = new List<string>();
-			Expected.Add(form_no == "0" ? "" : form_no + " Formulated");
-			Expected.Add(art_no == "0" ? "" : art_no + " Articles");
-			Expected.Add(en_art_no == "0" ? "" : en_art_no + " Enhanced Articles");
+			var Expected = new List<string> {
+				form_no == "0" ? "" : form_no + " Formulated",
+				art_no == "0" ? "" : art_no + " Articles",
+				en_art_no == "0" ? "" : en_art_no + " Enhanced Articles"
+			};
 			var ExpectedText = string.Join(", ", Expected.Where(x => x != ""));
 
 			Report.Info("Expected string: " + ExpectedText);
@@ -1342,14 +1344,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return null;
 			}
-			Random r = new Random();
+			var r = new Random();
 			int rInt = r.Next(1, rows.Count + 1); //for ints
 			var thisID = rows[rInt - 1].FindElement(By.XPath("./td/div/small"), 2).Text;
 			var thisName = rows[rInt - 1].FindElement(By.XPath("./td/div[@data-bind='text:Name']"), 2).Text;
 
-			PackagingTypeItem thisItem = new PackagingTypeItem();
-			thisItem.ID = thisID;
-			thisItem.Name = thisName;
+			var thisItem = new PackagingTypeItem {
+				ID = thisID,
+				Name = thisName
+			};
 			return thisItem;
 		}
 		public class PackagingTypeItem
@@ -1678,11 +1681,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public IngredientItem GetIngredient(int row, int index)
 		{
-			IngredientItem rIngredient = new IngredientItem();
-			rIngredient.Row = row;
-			rIngredient.Page = this.GetPage("current");
-			rIngredient.Index = index;
-			var tableRow = this.containerElement.FindElement(By.XPath(".//div[@id='settings']//tbody/tr[" + row + "]"), 2);
+			var rIngredient = new IngredientItem {
+				Row = row,
+				Page = this.GetPage("current"),
+				Index = index
+			};
+			IWebElement tableRow = this.containerElement.FindElement(By.XPath(".//div[@id='settings']//tbody/tr[" + row + "]"), 2);
 			if (tableRow == null)
 			{
 				return new IngredientItem();

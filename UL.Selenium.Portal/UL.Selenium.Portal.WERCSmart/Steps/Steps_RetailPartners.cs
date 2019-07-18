@@ -15,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "RetailPartners")]
 	class StepsRetailPartners
 	{
-		[Given(@"If I see the retail partners page I set all data consent tiers to true for all retailers in the top section")]
+		[StepDefinition(@"If I see the retail partners page I set all data consent tiers to true for all retailers in the top section")]
 		public void GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection()
 		{
 			var selRetailPartners = new RetailPartners();
@@ -794,14 +794,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I click on the Add new Supplier ID link")]
+		[StepDefinition(@"I click on the Add new Supplier ID link")]
 		public void GivenIClickOnTheAddNewSupplierIDLink()
 		{
 			Report.IsTrue(new RetailPartnersDetails().ClickAddSupplierId(), "Failed to click add supplier id link",
 				"Successfully clicked add supplier id link");
 		}
 
-		[Then(@"I confirm the pop up shows the heading: (.*)")]
+		[StepDefinition(@"I confirm the pop up shows the heading: (.*)")]
 		public void ThenIConfirmThePopUpShowsTheHeading(string title)
 		{
 			var actualTitle = new ModalDialog().GetTitle();
@@ -875,13 +875,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Dialog has closed as expected");
 		}
 
-		[Given(@"I confirm in the browser popup")]
+		[StepDefinition(@"I confirm in the browser popup")]
 		public void GivenIConfirmInTheBrowserPopup()
 		{
 			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 		}
 
-		[Then(@"I confirm that the excel file saved as: (.*) contains the following columns:")]
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columns:")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
 			var File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -1237,7 +1237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public bool MatchAbbreviatedRetailer(string abbreviation, string retailerToMatch)
 		{
-			List<string>abbreviationList = abbreviation.Split(',').Select(x => x.Trim()).ToList();
+			List<string> abbreviationList = abbreviation.Split(',').Select(x => x.Trim()).ToList();
 			string capitalLetters = string.Concat(retailerToMatch.Where(c => c >= 'A' && c <= 'Z'));
 
 
@@ -1248,7 +1248,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					if (capitalLetters.Substring(0, abbrv.Length) == abbrv)
 					{
 						Report.Info("Retailer to match has been abbreviated to: " +
-						            capitalLetters.Substring(0, abbrv.Length) + " and a match has been found");
+									capitalLetters.Substring(0, abbrv.Length) + " and a match has been found");
 						return true;
 					}
 				}

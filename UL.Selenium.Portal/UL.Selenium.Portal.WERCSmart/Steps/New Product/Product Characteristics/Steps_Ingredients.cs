@@ -593,7 +593,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			string CASNo = "";
 			if (component.Rows.First()["CASNumber"].Contains("WPS"))
 			{
-				string casSavedAs = "";
 				if (Context.Contains(component.Rows.First()["CASNumber"].Split(' ')[2].Trim()))
 				{
 					ProductInformation CASProd =

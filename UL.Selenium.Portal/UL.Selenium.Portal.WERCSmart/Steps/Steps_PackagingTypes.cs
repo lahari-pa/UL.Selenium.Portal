@@ -99,7 +99,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClickOptionInDeleteProductPopUp(string button)
 		{
 			var delDialog = new DeleteDialog();
-			delDialog.Wait_for_load();
+			delDialog.WaitForContainerToBeVisible();
 			if (button.ToLower() == "delete")
 			{
 				Report.IsTrue(delDialog.ClickDelete(),
@@ -164,7 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					packagingType.ID, packagingType.Name));
 		}
 
-		[Given(@"Save the top packaging id as (.*) if there are no packaging types listed add a new packing type as follows")]
+		[StepDefinition(@"Save the top packaging id as (.*) if there are no packaging types listed add a new packing type as follows")]
 		public void GivenSaveTheTopPackagingIdAsMPIIfThereAreNoPackackingTypesListedAddANewPackingTypeAsFollows(string saveAs, Table table)
 		{
 			StepsMyAccount myAccountSteps = new StepsMyAccount();

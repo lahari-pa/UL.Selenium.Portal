@@ -22,9 +22,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			try
 			{
-				User thisUser = (User)Context.GetFromContext(savedAsUser);
-				ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-				thisConflictMinerals.EmailAddress = thisUser.Email;
+				var thisUser = (User)Context.GetFromContext(savedAsUser);
+				var thisConflictMinerals = new ConflictMinerals {
+					EmailAddress = thisUser.Email
+				};
 
 			}
 			catch (Exception e)
@@ -38,16 +39,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"the Conflict Minerals page should load")]
 		public void ThenTheConflictMineralsPageShouldLoad()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.Wait_for_load(60), "Conflict Minerals page did not load",
 				"Conflict minerals page loaded as expected.");
 		}
 
 
-		[Given(@"in the Conflict Minerals page I put in email account: (.*)")]
+		[StepDefinition(@"in the Conflict Minerals page I put in email account: (.*)")]
 		public void GivenInTheConflictMineralsPageIPutInEmailAccount(string emailToEnter)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 
 			if (emailToEnter.ToLower().Contains("saved as"))
 			{
@@ -62,14 +63,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Conflict Minerals page I click on Next")]
 		public void GivenInTheConflictMineralsPageIClickOnNext()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			thisConflictMinerals.ClickNext();
 		}
 
 		[StepDefinition(@"in the Conflict Minerals page the Create Company Account form should have loaded")]
 		public void GivenInTheConflictMineralsPageTheCreateCompanyAccountFormShouldHaveLoaded()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.WaitForCompanyContactFormPage(30),
 				"Create Company Account form has not loaded", "Create Company Account form has loaded as expected.");
 		}
@@ -77,7 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Conflict Minerals page the Company Contact Person form should have loaded")]
 		public void ThenInTheConflictMineralsPageTheCompanyContactPersonFormShouldHaveLoaded()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.WaitForCreateCompanyAccountFormPage(30),
 				"Create company account form has not loaded", "Company account form has loaded as expected.");
 		}
@@ -85,7 +86,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Conflict Minerals page the Company Contact Person form email value is: (.*)")]
 		public void ThenInTheConflictMineralsPageTheCompanyContactPersonFormEmailValueIs(string expectedEmail)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			if (expectedEmail.ToLower().Contains("saved as"))
 			{
 				expectedEmail = Context.GetFromContext(expectedEmail.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
@@ -98,7 +99,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on the login button on the congratulations page")]
 		public void GivenIClickOnTheLoginButtonOnTheCongratulationsPage()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			thisConflictMinerals.ClickCongratulationsLogin();
 		}
 
@@ -108,7 +109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Conflict Minerals page the New Email form should have loaded")]
 		public void ThenInTheConflictMineralsPageTheNewEmailFormShouldHaveLoaded()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.WaitForVerifyNewCompanyAccountPage(30),
 				"New email form has not loaded", "New email form has loaded as expected.");
 		}
@@ -116,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Conflict Minerals page I create enter Company Contact Person as follows:")]
 		public void GivenInTheConflictMineralsPageICreateEnterCompanyContactPersonAsFollows(Table table)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
@@ -163,7 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see a congratulations page")]
 		public void ThenIShouldSeeACongratulationsPage()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.WaitForCongratulationsPage(120), "Congratulations page has not loaded",
 				"Congratulations page has loaded as expected");
 		}
@@ -177,8 +178,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				emailAddress = Context.GetFromContext(emailAddress.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
 					.ToString().Trim();
 			}
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-			thisConflictMinerals.EmailAddress = emailAddress;
+			var thisConflictMinerals = new ConflictMinerals {
+				EmailAddress = emailAddress
+			};
 			Report.IsTrue(thisConflictMinerals.EmailAddress == emailAddress, "Failed to input the email address: " + emailAddress, "Successfully inputted the email address: " + emailAddress);
 		}
 
@@ -194,7 +196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the (.*) terms of use page should load")]
 		public void ThenTheConflictMineralsTermsOfUsePageShouldLoad(string dummyTitle)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.WaitForTermsOfUsePage(60),
 				"Terms of use page has not loaded", "Terms of use page has loaded");
 		}
@@ -203,15 +205,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"on the (.*) terms of use I check the Accept checkbox")]
 		public void ThenInTheConflictMineralsTermsOfUseICheckTheAcceptCheckbox(string dummyTitle)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-			thisConflictMinerals.AcceptTermsOfUse = true;
+			var thisConflictMinerals = new ConflictMinerals {
+				AcceptTermsOfUse = true
+			};
 			Report.Success("Successfully accepted the terms of use!");
 		}
 
 		[Then(@"in the Conflict Minerals I should see the dashboard")]
 		public void ThenInTheConflictMineralsIShouldSeeTheDashboard()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.WaitForDashboardPage(60),
 				"Dashboard page has not loaded", "Dashboard page has loaded");
 		}
@@ -219,7 +222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"in the Conflict Minerals I should see company name in the header: (.*)")]
 		public void ThenInTheConflictMineralsIShouldSeeCompanyNameInTheHeader(string companyName)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.GetCompanyNameSignedIn().Trim() == companyName,
 				"Company name is not showing in header as expected.", "Company name is showing in header as expected.");
 		}
@@ -232,7 +235,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				emailAddress = Context.GetFromContext(emailAddress.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
 					.ToString().Trim();
 			}
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.GetEmailSignedIn().Trim() == emailAddress,
 				"Email address is not showing in header as expected.", "Email address is showing in header as expected.");
 
@@ -255,8 +258,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the (.*) login page I enter Password: (.*)")]
 		public void GivenInTheConflictMineralsLoginPageIEnterPassword(string dummyTitle, string password)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-			thisConflictMinerals.Password = password;
+			ConflictMinerals thisConflictMinerals = new ConflictMinerals {
+				Password = password
+			};
 			Report.IsTrue(thisConflictMinerals.Password == password, "Failed to input the password: " + password, "Successfully entered the password: " + password);
 
 		}
@@ -340,8 +344,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-			thisConflictMinerals.VerificationCode = verificationCode;
+			ConflictMinerals thisConflictMinerals = new ConflictMinerals {
+				VerificationCode = verificationCode
+			};
 			Report.IsTrue(thisConflictMinerals.VerificationCode == verificationCode, "Failed to input the verification code: " + verificationCode, "Successfully inputted the verification code: " + verificationCode);
 		}
 

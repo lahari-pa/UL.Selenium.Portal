@@ -803,19 +803,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		//Proceed Button
-		[FindsBy(How = How.XPath, Using = ".//div[@class='row']/div/button[text()='PROCEED']")]
-		private IWebElement _btnProceed;
+		private IWebElement Proceed => this.containerElement.FindElement(By.XPath(".//div[@class='row']/div/button[text()='PROCEED']"),1);
 
 		public bool Proceed_click()
 		{
 			Report.Info("Attempting to Click Proceed Button");
-			return this._btnProceed.TryClick();
+			return this.Proceed.TryClick();
 		}
 
 		public bool Proceed_button_enabled()
 		{
-			return this._btnProceed.Enabled;
+			return this.Proceed.Enabled;
 		}
 
 		public bool Select_Enrollment_Options(string articles, string enArticles, string formProds, string featurePlan,
@@ -921,31 +919,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		//Articles
-		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Articles']/../")]
-		private IWebElement _rowArticles;
+		private IWebElement ArticlesRow => this.containerElement.FindElement(By.XPath(".//tbody/tr/td[text()='Articles']/../"), 1);
 
-		//Enhanced Articles
-		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Enhanced Articles']/../")]
-		private IWebElement _rowEnArticles;
+		private IWebElement EnhancedArticlesRow => this.containerElement.FindElement(By.XPath(".//tbody/tr/td[text()='Enhanced Articles']/../"), 1);
 
 		//Formulated Products
 		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Formulated Products ']/../")]
-		private IWebElement _rowFormProds;
+		private IWebElement FormulatedProductsRow => this.containerElement.FindElement(By.XPath(".//tbody/tr/td[text()='Formulated Products ']/../"), 1);
 
 		public bool Feature_Plan_Check(string plan)
 		{
 			Report.Info("Beginning Feature_Plan_Check: " + plan);
-
-			IWebElement myFeat = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']/span[1]"), 10)
-				.FirstOrDefault();
-
+			IWebElement myFeat = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']/span[1]"), 10).FirstOrDefault();
 			if (myFeat == null)
 			{
 				Report.Info("Failed to Find Feature Plan");
 				return false;
 			}
-
 			if (myFeat.Text != plan)
 			{
 				Report.Info("Feature Plan is Incorrect: " + myFeat.Text);
@@ -954,7 +944,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Success("Feature Plan is Correct");
 			Report.Screenshot();
 			return true;
-
 		}
 
 		public string Get_Option(string option)

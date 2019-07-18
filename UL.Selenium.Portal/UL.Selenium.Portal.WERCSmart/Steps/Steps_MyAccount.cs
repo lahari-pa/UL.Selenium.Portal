@@ -10,6 +10,7 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using NTTQA.Selenium.TReVor;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -197,17 +198,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				var myUserDetails = new UserDetails();
-				User thisUser = new User();
-
-				thisUser.Username = myUserDetails.Name;
-				thisUser.Title = myUserDetails.Title;
-				thisUser.Role = myUserDetails.UserRole;
-				thisUser.Purview = myUserDetails.Purview;
-				thisUser.Email = myUserDetails.EmailAddress;
-				thisUser.Country = myUserDetails.Country;
-				thisUser.CountryCode = myUserDetails.CountryCode;
-				thisUser.PhoneNumber = myUserDetails.PhoneNumber;
-				thisUser.SendNotifications = myUserDetails.SendNotifications;
+				User thisUser = new User {
+					Username = myUserDetails.Name,
+					Title = myUserDetails.Title,
+					Role = myUserDetails.UserRole,
+					Purview = myUserDetails.Purview,
+					Email = myUserDetails.EmailAddress,
+					Country = myUserDetails.Country,
+					CountryCode = myUserDetails.CountryCode,
+					PhoneNumber = myUserDetails.PhoneNumber,
+					SendNotifications = myUserDetails.SendNotifications
+				};
 				Delay.Seconds(1);
 
 				Context.AddToContext(saveAs, thisUser);
@@ -391,11 +392,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					//Add New User
 					Report.IsTrue(selMyUserForm.Add_New_User(userName, title, role, phoneNo, emailAddress, confirmEmail, country),
 						"Failed to Add a New User", "New User Added");
-					Delay.Seconds(5);
+					Delay.Seconds(10);
 					//Check User Has Been Created
 					Report.IsTrue(selMyAccount.User_Added_Check(userName, emailAddress, role), "User Has Not Been Created",
 						"User Created Successfully");
-
 				}
 			}
 			catch (Exception ex)
@@ -921,10 +921,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new AddUserThankYouDialog().Add_User_Thank_You(), "Failed to click Close in Thank You pop up", "Successfully clicked Close in the Thank You pop up");
 		}
 
+
 		[StepDefinition(@"I update the password for TReVor test user: (.*) in the change user password popup")]
 		public void IUpdateThePasswordForTrevorTestUser(string savedAs)
 		{
-			
 			// Get user credentials from TReVor based on saved as ID
 			var user = TestUsers.GetUserSavedAs(savedAs);
 			if (user == null)
@@ -932,6 +932,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Unable to find TReVor test user saved as: " + savedAs);
 				return;
 			}
+
 			var oldPassword = user.Password;
 			var newPassword = "";
 			// If the current password ends in a character, append with a 1 for the new password
@@ -950,19 +951,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				return;
 			}
-			Report.Info("Entering current password in the input: " + oldPassword);
-			selModal.EnterLoginPassword(oldPassword);
-			Report.Info("Clicking continue in the Change Password popup");
-			if (!Report.IsTrue(selModal.ClickContinue(),
-				"Failed to click continue in Change Password",
-				"Successfully clicked continue in Change Password"))
+
+			// If the password has expired, the old password is required. Else it isn't.
+			if (selModal.LoginPasswordFieldPresent())
 			{
-				if (selModal.Click_Close())
-				{
-					return;
-				}
-				throw new Exception("Failed to click continue in the change password modal, and failed to close it!");
+				Report.Info("Entering current password in the input: " + oldPassword);
+				selModal.EnterLoginPassword(oldPassword);
 			}
+
 			GeneralUtilities.Wait_for_load_finish();
 			int attempt = 0;
 			while (attempt < 10)
@@ -1000,7 +996,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (selModal.Wait_for_close())
 				{
 					Report.Info("Updating the password in TReVor Test Users");
-					TestUsers.UpdatePassword(savedAs, newPassword);
+					Api.UpdateTestUserPassword(savedAs, newPassword);
 					return;
 				}
 				throw new Exception("Modal dialog did not close!");

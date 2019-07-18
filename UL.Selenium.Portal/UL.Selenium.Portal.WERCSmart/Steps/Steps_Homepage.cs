@@ -17,21 +17,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the WERCSmart homepage should be loaded")]
 		public void ThenTheWercSmartHomepageShouldLoad()
 		{
-			try
-			{
-				Report.Info("Making sure that the WERCSmart homepage is loaded");
-				var selHomepage = new Homepage();
-
-
-				Report.IsTrue(selHomepage.Wait_for_load(), "WERCSmart Homepage failed to load!", "WERCSmart homepage loaded successfully!");
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(new Homepage().WaitForContainerToBeVisible(), "WERCSmart Homepage failed to load!", "WERCSmart homepage loaded successfully!");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Screenshot();
 		}
 
 
@@ -44,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.Info("Staying on the homepage with no activity until the inactivity popup appears");
 				var selInactivityPopup = new InactivityPopup();
-
+				selInactivityPopup.WaitForContainerToBeVisible(900);
 				while (!selInactivityPopup.IsVisible())
 				{
 					Delay.Seconds(Delay.SpeedFactor * 1);
@@ -59,32 +47,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
+		public void ConfirmTheInactivityPopupDisplayedAfterWait(int expectedWait, int marginOfError)
+		{
+			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
+			if (!new InactivityPopup().WaitUntilDisplayed((expectedWait * 60) + (marginOfError * 60), out int actualWait))
+			{
+				Report.Failure($"The Inactivity popup did not load after {expectedWait + marginOfError} minutes!");
+				Report.Screenshot();
+				return;
+			}
+			// check if pop up was displayed before 'expected wait - margin' (test lower limit)
+			Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
+				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
+				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes");
+		}
+
+		[StepDefinition(@"I confirm the Inactivity pop is closed")]
+		public void ConfirmInactivityPopupIsClosed()
+		{
+			Report.IsTrue(new InactivityPopup().WaitForContainerToBeInvisible(), "The Inactivity popup was not closed!", "The Inactivity popup was closed.");
+		}
+
 		[StepDefinition(@"Click (Yes|No) on the inactivity popup")]
 		public void GivenClickOnInactivityPopup(string button)
 		{
-			try
+			Report.Info("Clicking " + button + " on inactivity popup");
+			var selInactivityPopup = new InactivityPopup();
+			var clicked = false;
+			switch (button)
 			{
-				Report.Info("Clicking " + button + " on inactivity popup");
-				var selInactivityPopup = new InactivityPopup();
-
-				switch (button)
-				{
-					case ("Yes"):
-						selInactivityPopup.ClickYes();
-						break;
-					default:
-						selInactivityPopup.ClickNo();
-						break;
-				}
-
-				Report.Success(button + " was clicked successfully!");
-				Report.Screenshot();
+				case ("Yes"):
+					clicked = selInactivityPopup.ClickYes();
+					break;
+				case ("No"):
+					clicked = selInactivityPopup.ClickNo();
+					break;
+				default:
+					Report.Error("Button parameter must be 'Yes' or 'No'!");
+					return;
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(clicked, $"Failed to click the '{button}' button", $"Successfully clicked the '{button}' button");
 		}
 
 
@@ -383,7 +386,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				GeneralUtilities.Wait_for_load_finish();
 				var selHomepage = new Homepage();
-				Report.IsTrue(selHomepage.Wait_for_load(),
+				Report.IsTrue(selHomepage.WaitForContainerToBeVisible(),
 					"Homepage did not load after clicking the Home icon!",
 					"Homepage successfully loaded after clicking the home icon");
 			}
@@ -597,7 +600,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//	}
 		//}
 
-		[Then(@"Confirm that freshdesk opens in another tab")]
+		[StepDefinition(@"Confirm that freshdesk opens in another tab")]
 		public void ConfirmThatFreshdeskOpensInAnotherTab()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that freshdesk opens in another tab");
@@ -802,7 +805,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"I should see the following filters in the following order under My products:")]
+		[StepDefinition(@"I should see the following filters in the following order under My products:")]
 		public void GivenIShouldSeeTheFollowingFiltersInTheFollowingOrderUnderMyProducts(Table table)
 		{
 			try
@@ -828,7 +831,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"In the announcements area I should see my saved messages")]
+		[StepDefinition(@"In the announcements area I should see my saved messages")]
 		public void ThenInTheAnnouncementsAreaIShouldSeeMySavedMessages()
 		{
 			Homepage myHomepage = new Homepage();
@@ -865,24 +868,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected, message count is showing as: " + ActualMessageCount.ToString());
 		}
 
-		[Given(@"I click on the Live Help button on the upper right")]
-		public void GivenIClickOnTheLiveHelpButtonOnTheUpperRight()
+		[StepDefinition(@"I click on the Live Help button on the lower right")]
+		public void GivenIClickOnTheLiveHelpButtonOnTheLowerRight()
 		{
 			TopMenuBar myTopMenuBar = new TopMenuBar();
 			Report.IsTrue(myTopMenuBar.ClickLiveHelp(), "Failed to click live help", "Clicked live help");
 		}
 
-		[Then(@"I should see the Live Help dialog")]
+		[StepDefinition(@"I should see the Live Help dialog")]
 		public void ThenIShouldSeeTheLiveHelpDialog()
 		{
 			Report.IsTrue(new LiveHelp().Wait_for_load(), "Live Help dialog is not showing",
 				"Live Help dialog is showing as expected");
 		}
 
-		[Then(@"In the Live Help dialog I should see the following text: (.*)")]
+		[StepDefinition(@"In the Live Help dialog I should see the following text: (.*)")]
 		public void ThenInTheLiveHelpDialogIShouldSeeTheFollowingText(string expectedText)
 		{
-			string actualText = new LiveHelp().GetFormText().Trim().Replace(System.Environment.NewLine, " ");
+			string actualText = new LiveHelp().GetFormText().Trim().Replace(Environment.NewLine, " ");
 
 			Report.Info("ActualText length = " + actualText.Length.ToString());
 			Report.Info("ExpectedText length = " + expectedText.Trim().Length.ToString());
@@ -907,7 +910,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Text is showing as expected: " + expectedText);
 		}
 
-		[Given(@"In the Live Help dialog I enter name: (.*)")]
+		[StepDefinition(@"In the Live Help dialog I enter name: (.*)")]
 		public void GivenInTheLiveHelpDialogIEnterName(string name)
 		{
 			LiveHelp myLiveHelp = new LiveHelp();
@@ -915,7 +918,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered name: " + name);
 		}
 
-		[Given(@"In the Live Help dialog I enter email: (.*)")]
+		[StepDefinition(@"In the Live Help dialog I enter email: (.*)")]
 		public void GivenInTheLiveHelpDialogIEnterEmail(string email)
 		{
 			LiveHelp myLiveHelp = new LiveHelp();
@@ -923,7 +926,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered email: " + email);
 		}
 
-		[Given(@"In the Live Help dialog I click on the x to close")]
+		[StepDefinition(@"In the Live Help dialog I click on the x to close")]
 		public void GivenInTheLiveHelpDialogIClickOnTheXToClose()
 		{
 			Report.IsTrue(new LiveHelp().ClickCloseX(), "Failed to click x to close", "Clicked x to close");

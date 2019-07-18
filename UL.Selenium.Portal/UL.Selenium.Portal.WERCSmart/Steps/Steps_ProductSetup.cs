@@ -226,8 +226,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			thisStepsHomePage.ThenINavigateToTheHomePage();
 			thisStepsProductGrid.GivenISearchForTheProductSavedAs(savedAs);
-			//CLF 26 Oct 2018 This does not always seem to change immediately
-			thisStepsProductGrid.GivenForProductSavedAsTestCaseTheStatusIs(savedAs, "Assessment in Progress");
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
@@ -250,7 +248,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		/*
-		[Given(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
+		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
 		public void GivenITakeProductWithNameFromCompletedToRecertification84108(string name, string savedAs)
 		{
 			this.TakeProductFromCompletedToRecertification84108(savedAs, name);
@@ -262,7 +260,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.TakeProductFromCompletedToRecertification84108(savedAs, "Alkaline battery");
 		}
 
-		[Given(@"I create a product with name: (.*) and take to completed using Test Case 84109 and save as: (.*)")]
+		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 84109 and save as: (.*)")]
 		public void GivenITakeProductFromCompletedToRecertification84109(string name, string savedAs)
 		{
 			this.TakeProductFromCompletedToRecertification84109(savedAs, name);
@@ -274,7 +272,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.TakeProductFromCompletedToRecertification84109(savedAs, "Alkaline battery");
 		}
 
-		[Given(@"I call test stuff for saved as: (.*)")]
+		[StepDefinition(@"I call test stuff for saved as: (.*)")]
 		public void GivenICallTestStuff(string savedAs)
 		{
 			this.Test(savedAs);
@@ -441,7 +439,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
+		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
 		public void TakeProductFromCompletedToRecertification84108(string name, string savedAs)
 		{
 			if (Context.Contains("ElectronicProduct"))
@@ -620,7 +618,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I take a product from completed to recertification using Test Case 84511 saved: (.*)")]
+		[StepDefinition(@"I take a product from completed to recertification using Test Case 84511 saved: (.*)")]
 		public void GivenITakeAProductFromCompletedToRecertificationUsingTestCaseSavedTestCase(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -746,7 +744,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.GivenICloseTheProductRecertificationHistoryPopUp();
 		}
 
-		[Given(@"I create a product with name: (.*) and take to completed using Test Case 80821 and save as: (.*)")]
+		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 80821 and save as: (.*)")]
 		public void GivenICreateAProductWithNameAndTakeToCompletedUsingTestCaseAndSaveAsTestCase(string productName,
 			string savedAs)
 		{
@@ -1262,7 +1260,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru to Submitted status in SHA
-		[Given(@"I use Test case 77862 to create a kit and save as (.*)")]
+		[StepDefinition(@"I use Test case 77862 to create a kit and save as (.*)")]
 		public void GivenIUseTestCaseToCreateAKitAndSaveAsTestCase(string saveAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -1435,7 +1433,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I Use Test case 84518 to process the product from Assigned back to Completed status saved as (.*)")]
+		[StepDefinition(@"I Use Test case 84518 to process the product from Assigned back to Completed status saved as (.*)")]
 		public void GivenIUseTestCaseToProcessTheProductFromAssignedBackToCompletedStatusSavedAsTestCase(string savedAs)
 		{
 			this.ProcessAssignedFormulatedProductBackToCompletedUsingTestCase84518(savedAs);
