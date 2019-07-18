@@ -43,7 +43,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Beginning Sub_Heading_Correct");
 
 			IWebElement myHeader = this.containerElement
-				.FindElements(By.XPath(".//div[@class='main-wrapper has-title payment-methods']/h2[text()='Select your payment method']"), 10).FirstOrDefault();
+				.FindElements(By.XPath(".//div[@class='main-wrapper has-title payment-methods']/h2"), 10).FirstOrDefault();
 
 			if (myHeader == null)
 			{
@@ -1393,6 +1393,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Subscription_Billing_Header_Correct");
 
+			if (!this.Exists)
+			{
+				Report.Info("Not on Purchase Summary Page");
+				Report.Screenshot();
+				return false;
+			}
+
 			IWebElement myHeader = this.containerElement
 				.FindElements(By.XPath(".//div/h3[text()='Subscription Billing']"), 10).FirstOrDefault();
 
@@ -1624,6 +1631,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ThankYou_Header_Correct()
 		{
 			Report.Info("Beginning ThankYou_Header_Correct");
+
+			if (!this.Exists)
+			{
+				Report.Info("Not on Thank you Page");
+				Report.Screenshot();
+				return false;
+			}
 
 			IWebElement myHeader = this.containerElement
 				.FindElements(By.XPath(".//div[@class='header-with-back']/h2[text()=' Thank You']"), 10).FirstOrDefault();

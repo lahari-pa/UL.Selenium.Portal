@@ -7972,10 +7972,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Barium", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Arsenic", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Selenium", "No");
-			if (myNewProduct.SectionExists("Platinum"))
-			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Platinum", "No");
-			}
+			//if (myNewProduct.SectionExists("Platinum"))
+			//{
+			//	MyStepsNewProduct.SetTheSectionOptionTo("Platinum", "No");
+			//}
 
 			TestReport.StartStep(
 				"In the Toxicity Characteristic Leaching Procedure (TCLP) Product Report page I click Continue");
