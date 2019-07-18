@@ -10,11 +10,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	public class Homepage : BaseObject
+	public class Homepage : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='masterContainer']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool QuickLinkButtonShowing(string button)
 		{
@@ -226,11 +226,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 
-	class HomePageHeader : BaseObject
+	class HomePageHeader : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@class='page-inner-header home-header affix']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool QuickLinkButtonShowing(string button)
 		{
@@ -243,11 +243,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	/// <summary>
 	/// Shoppimg Cart - Cart is Empty dialog
 	/// </summary>
-	class CartIsEmptyDialog : BaseObject
+	class CartIsEmptyDialog : SeleniumBaseObject
 	{
 		public const string BasePath = "//h4[@id='myModalLabel']/../..";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		/// <summary>
 		/// this is the title of the dialog Cart is Empty

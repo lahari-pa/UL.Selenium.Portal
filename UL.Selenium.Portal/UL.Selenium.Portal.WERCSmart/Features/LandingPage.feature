@@ -33,15 +33,12 @@ Scenario: [50770] Sign Up Link
 Scenario: [59830] TimeOut Feature
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
-	Given I stay on the homepage with no activity until the inactivity popup appears
-	# are you still active message appears
+Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 	Then Click Yes on the inactivity popup
-	# popup goes away
+Then I confirm the Inactivity pop is closed
 	And the WERCSmart homepage should load
-	Given I stay on the homepage with no activity until the inactivity popup appears
-	# are you still active message appears
+Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 	Then Click No on the inactivity popup
-	# You are logged out of the site
 	And the landing page should load
 
 #verify the wait time is 15 min for each click on popup (yes/no)

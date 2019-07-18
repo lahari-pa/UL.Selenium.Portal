@@ -127,14 +127,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		//Question 1
-		[FindsBy(How = How.Id, Using = "secQuestion1")]
-		private IWebElement _txtQuestionOne;
+		private IWebElement QuestionOne => this.containerElement.FindElement(By.Id("secQuestion1"),1);
 
 		public bool Enter_Answer_One(string answerText)
 		{
 			Report.Info("Entering Answer One: " + answerText);
-			this._txtQuestionOne.EnterText(answerText);
+			this.QuestionOne.EnterText(answerText);
 			return true;
 		}
 
