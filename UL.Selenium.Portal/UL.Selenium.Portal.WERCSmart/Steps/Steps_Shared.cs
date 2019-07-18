@@ -1383,8 +1383,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Given(@"I call Shared Step 105379 Additional Product Information - US, Pesticide, No \(OSHA\), No\(DSV\), No\(PL\), No \(GNFR\) Without Child question")]
-		public void GivenICallSharedStepAdditionalProductInformation_USPesticideNoNoOSHANoDSVNoPLNoGNFRWithoutChildQuestion(int p0)
+		[StepDefinition(@"I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question")]
+		public void GivenICallSharedStepAdditionalProductInformation_USPesticideNoNoOSHANoDSVNoPLNoGNFRWithoutChildQuestion()
 		{
 			TestReport.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
