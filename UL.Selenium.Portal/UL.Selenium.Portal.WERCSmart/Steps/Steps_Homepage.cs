@@ -51,16 +51,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmTheInactivityPopupDisplayedAfterWait(int expectedWait, int marginOfError)
 		{
 			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
-			if (new InactivityPopup().WaitUntilDisplayed((expectedWait * 60) + (marginOfError * 60), out int actualWait))
+			if (!new InactivityPopup().WaitUntilDisplayed((expectedWait * 60) + (marginOfError * 60), out int actualWait))
 			{
-				// check if pop up was displayed before 'expected wait - margin' (test lower limit)
-				Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
-					"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait/60 + " minutes",
-					"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait/60 + " minutes");
+				Report.Failure($"The Inactivity popup did not load after {expectedWait + marginOfError} minutes!");
+				Report.Screenshot();
 				return;
 			}
-			Report.Failure($"The Inactivity popup did not load after {expectedWait + marginOfError} minutes!");
-			Report.Screenshot();
+			// check if pop up was displayed before 'expected wait - margin' (test lower limit)
+			Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
+				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
+				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes");
 		}
 
 		[StepDefinition(@"I confirm the Inactivity pop is closed")]
