@@ -233,8 +233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			public bool Click()
 			{
-				bool thisThing = this.containerElement.FindElement(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr[./td[contains(@data-bind, 'ProductID') and text()='" + this.WPSID + "']]"), 2).TryClick();
-				return thisThing;
+				return this.containerElement.FindElement(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr[./td[contains(@data-bind, 'ProductID') and text()='" + this.WPSID + "']]"), 2).TryClick();
 			}
 		}
 		public class DocumentsItem : DocumentAcceptance
