@@ -51,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmTheInactivityPopupDisplayedAfterWait(int expectedWait, int marginOfError)
 		{
 			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
-			if (new InactivityPopup().WaitForContainerToBeVisible((expectedWait * 60) + (marginOfError * 60), out int actualWait))
+			if (new InactivityPopup().WaitUntilDisplayed((expectedWait * 60) + (marginOfError * 60), out int actualWait))
 			{
 				// check if pop up was displayed before 'expected wait - margin' (test lower limit)
 				Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
