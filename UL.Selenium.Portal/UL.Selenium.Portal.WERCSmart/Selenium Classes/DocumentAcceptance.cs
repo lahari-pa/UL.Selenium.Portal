@@ -113,7 +113,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.ClickPage("1");
 			GeneralUtilities.Wait_for_load_finish();
 			int pageNumber = this.GetPage("current");
-			int ingredientNumber = 1;
 			if (pageNumber == -1)
 			{
 				Report.Failure("Could not get current page number from the grid");
