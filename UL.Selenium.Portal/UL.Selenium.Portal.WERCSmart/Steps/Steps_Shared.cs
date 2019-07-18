@@ -1,14 +1,15 @@
+using Castle.Core.Internal;
+using NTTQA.Selenium.Cache;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
+using NTTQA.Selenium.TReVor;
+using NTTQA.Selenium.UniversalFunctions;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
-using NTTQA.Selenium.TReVor;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -18,7 +19,6 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
-using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1357,8 +1357,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+
+			TestReport.StartStep(
+				"Select countries the product may be sold in should be showing the value: United States");
+			MyNewProduct.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			TestReport.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			TestReport.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+
+		[Given(@"I call Shared Step 105379 Additional Product Information - US, Pesticide, No \(OSHA\), No\(DSV\), No\(PL\), No \(GNFR\) Without Child question")]
+		public void GivenICallSharedStepAdditionalProductInformation_USPesticideNoNoOSHANoDSVNoPLNoGNFRWithoutChildQuestion(int p0)
+		{
+			TestReport.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I set any option for: 'Which one best describes your product'");
-			// Step says 'any' but prefer seetting not pesticide because some tests didn't account for Pesticides page appearing later.
+			// Step says 'any' but prefer setting not pesticide because some tests didn't account for Pesticides page appearing later.
 			if (new NewProduct().GetAllOptionsForSection("Which one best describes your product").Contains("Product is not considered a pesticide product"))
 			{
 				MyNewProduct.SetTheSectionOptionTo("Which one best describes your product", "Product is not considered a pesticide product");

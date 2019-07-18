@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -16,6 +16,7 @@
 Feature: Account has Partial Stewardship Data
 
 
+@TReVorId:22338
 Scenario: [86114] Create a new simple product SOLD = US and Canada, PL = Yes, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
 Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 Given I generate a random UPC number and save as: UPC86114
@@ -62,6 +63,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86114 and its status is: Completed
 
 
+@TReVorId:22339
 Scenario: [86115] Create a new product SOLD = US and Canada, PL = No, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
 Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 Given I generate a random UPC number and save as: UPC86115
@@ -107,6 +109,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86115 and its status is: Completed
 
 
+@TReVorId:22343
 Scenario: [86452] Create a new product SOLD = Canada, Private Label = Yes, NR product - Submission and process thru to completed
 Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -144,6 +147,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86452 and its status is: Completed
 
 
+@TReVorId:22342
 Scenario: [86117] Create a new product SOLD = Canada only , PL = No, NR product and submit thru to Completed status (HGHS only)
 Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -185,6 +189,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 
 
+@TReVorId:22341
 Scenario: [86116] Create a new product SOLD = Canada, Private Label = Yes, CT retailer product - Submission and process thru to completed
 Given I generate a random UPC number and save as: UPC86116
 Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -231,6 +236,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 
 
+@TReVorId:22344
 Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer product - submit thru to Completed status (HGHS only)
 Given I generate a random UPC number and save as: UPC86454
 Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -277,6 +283,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 
 
+@TReVorId:22345
 Scenario: [86455] Create a new simple product SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product  - submit thru to Completed status
 Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 Given I generate a random UPC number and save as: UPC86455
@@ -326,6 +333,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86455 and its status is: Completed
 
 
+@TReVorId:22346
 Scenario: [86458] Create a new simple product SOLD = US and Canada, PL = No, Canadian Tire retailer product (Chalk) and submit thru to Completed status
 Given I generate a random UPC number and save as: UPC86458
 Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship

@@ -25,6 +25,40 @@ Scenario: Create a new product
 	Given I click the Register New Product icon in the Navigation Pane
 	When I click continue
 
+Scenario: [38192] Product Comments screen
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I call Shared Step 23829 - Go to My Products - Register- Formulated Product
+	And I call Shared Step 31050 - Welcome page - Save and Next
+	#Test case calls shared 31053 but this is identical
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I Enter in a name of the product
+	And I Select a Product Line
+	#And I call Shared Step 38138 - Portal - RU - Grocery - Food Color
+	#And I call Shared Step 37854 - portal-Select all apply screen - select No option
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	#And in the New Product page I click Continue
+	And I Select Solid option for Select the physical state of your product
+	And I Select any option from dropdown options for Select the physical state subcategory of your product
+	And I Select No for When mixed with an equal weight of water, will this produce a solution with a pH less than or equal to 2 or greater than or equal to 12.5?
+	#And in the New Product page I click Continue
+	#And Shared Step 32933 - Portal - Physical Property - TSCA and  Chemical Inventory - select Compliant
+	#And Shared Step 32942 - Portal - Physical Property Grocery - select all ingredients in this product
+	#And in the New Product page I click Continue
+	And I Select the Checkbox "I have read and understand the above statement regarding GHS Classification of my product."
+	#And in the New Product page I click Continue
+	And I Select No Retailer/No UPC Product
+	#And in the New Product page I click Continue
+	And I Select I would like a draft OSHA SDS created radio option
+	#And in the New Product page I click Continue
+	And I Select None of the above option
+	#And in the New Product page I click Continue
+	#And in the New Product page I click Continue
+	#And in the New Product page I click Continue
+	#And in the New Product page I click Continue
+	# Perhaps? And I should see the Subheading Product Comments in the main window
+	# instead of... And I Confirm the heading as Product Comments
+	And I Confirm that you see the following statement: "Are there any additional comments or information you would like to provide about your product registration which may assist in processing the assessment and avoiding delays? If so, please provide here."
+
 @TReVorId:22124
 Scenario: [63705] New Product - BCP
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
