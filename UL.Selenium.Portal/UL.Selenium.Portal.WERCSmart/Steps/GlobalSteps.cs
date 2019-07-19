@@ -698,7 +698,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					Mailosaur.Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
 
-
 					if (shouldOrNot == "should")
 					{
 						Report.IsTrue(matchingEmail != null, "A matching email has not been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has been found.");
@@ -755,6 +754,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
+				Report.Info("Expected email body text: " + bodyText);
 				Report.Info("Body of the Email was: " + emailBody);
 				string actualTrimmed = bodyDecode.Replace(" ", "");
 				string expectedTrimmed = bodyText.Replace(" ", "");
@@ -1060,10 +1060,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (string savedAs in usersSavedAs)
 			{
-				if (savedAs != "CanadaHasAllData")
-				{
-					continue;
-				}
 				TestUser user = TestUsers.GetUserSavedAs(savedAs);
 				if (!user.Username.Contains("@"))
 				{

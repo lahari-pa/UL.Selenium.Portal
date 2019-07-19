@@ -543,6 +543,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.IsTrue(newCurrentState != currentState,
 						"Expected to able to edit Tier " + tier + ", but this was not the case!",
 						"Tier " + tier + " was edited successfully!");
+					Report.Info("Turning the Data Tier back to the original state");
+					Report.IsTrue(selRetailDetails.SetDataConsentTier(tier, currentState), "Failed to set the tier '" + tier + "' to: " + currentState, "Successfully set the tier " + tier + " to: " + currentState);
 				}
 				else
 				{
