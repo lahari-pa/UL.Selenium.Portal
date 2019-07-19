@@ -222,6 +222,7 @@
     <Compile Include="Selenium Classes\ViewUpcs.cs" />
     <Compile Include="Selenium Classes\WERCSLinkDashboard.cs" />
     <Compile Include="Selenium Classes\YouTube.cs" />
+    <Compile Include="Steps\API\Steps_Api.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_ElectronicEquipment.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_Ingredients.cs" />
@@ -277,6 +278,9 @@
     <None Include="app.manifest" />
     <None Include="Features\AdditionalProductInformation.feature">
       <LastGenOutput>AdditionalProductInformation.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\API\Waste Haulers.feature">
+      <LastGenOutput>Waste Haulers.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Basic Tests.feature">
       <LastGenOutput>Basic Tests.feature.cs</LastGenOutput>
