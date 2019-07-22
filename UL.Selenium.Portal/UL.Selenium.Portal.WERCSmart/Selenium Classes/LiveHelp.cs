@@ -29,30 +29,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyX()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i")) != null;
+			return this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i"), 2) != null;
 		}
 
 		public bool VerifyInboxText()
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[@class='list-title ']"));
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[@class='list-title ']"), 2);
 			return elem != null && elem.Text == "Inbox";
 		}
 
 		public bool VerifyMessageText(string message)
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@class='h-message-text']"));
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@class='h-message-text']"), 2);
 			return elem != null && elem.Text == message;
 		}
 
 		public bool VerifyLowerText(string text)
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//a[@class='product']"));
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//a[@class='product']"), 2);
 			return elem != null && elem.Text == text;
 		}
 
 		public bool VerifyPlaceholder(string text)
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@id='app-conversation-editor']"));
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@id='app-conversation-editor']"), 2);
 			return elem != null && elem.GetAttribute("data-placeholder") == text;
 		}
 
@@ -60,11 +60,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			if (icon == "paperclip")
 			{
-				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_attachment']")) != null;
+				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_attachment']"), 2) != null;
 			}
 			else if (icon == "smiley")
 			{
-				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_smiley']")) != null;
+				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_smiley']"), 2) != null;
 			}
 			else
 			{
@@ -74,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCloseX()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i"), 2).TryClick();
 		}
 
 
