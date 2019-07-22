@@ -5,6 +5,7 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -17,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
-			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
 			{
 				urls = SeleniumBrowser.WebBrowser.WindowHandles;
@@ -34,10 +35,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("BaseWindow", current);
 
-			foreach (var handle in urls)
+			foreach (string handle in urls)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Select product"))
 				{
@@ -48,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 			return base.Wait_for_load(30);
@@ -56,13 +57,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickFilterButton()
 		{
-			var button = this.containerElement.FindElement(By.XPath(".//a[@id='srAliases_lnkFilter']"));
+			IWebElement button = this.containerElement.FindElement(By.XPath(".//a[@id='srAliases_lnkFilter']"));
 			return button.TryClick();
 		}
 
 		public bool SelectItemInResults()
 		{
-			var rows = this.containerElement.FindElements(By.XPath(
+			ReadOnlyCollection<IWebElement> rows = this.containerElement.FindElements(By.XPath(
 				".//table[@id='srAliases_tblSelectRecord']/tbody/tr[not(@id='srAliases_rowTitle') and not(@id='srAliases_rowHeader')]"));
 
 			return true;

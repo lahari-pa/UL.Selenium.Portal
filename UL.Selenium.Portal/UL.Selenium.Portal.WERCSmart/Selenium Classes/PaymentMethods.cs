@@ -7,6 +7,7 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -72,9 +73,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Select_Payment_Method: " + payment_method);
 			this.RefindContainerElement();
-			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div"), 2).ToList();
+			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div"), 2).ToList();
 
-			foreach (var method in allProducts)
+			foreach (IWebElement method in allProducts)
 			{
 				Report.Info("Payment Method = " + method.Text);
 
@@ -97,9 +98,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Delay.Seconds(2 * Delay.SpeedFactor);
 
-			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div")).ToList();
+			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div")).ToList();
 
-			foreach (var method in allProducts)
+			foreach (IWebElement method in allProducts)
 			{
 				Report.Info("Payment Method = " + method.Text);
 
@@ -120,11 +121,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Credit_Card_Default");
 
-			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//h4[@class='card-title']")).ToList();
+			var allProducts = this.containerElement.FindElements(By.XPath(".//h4[@class='card-title']")).ToList();
 
 			IWebElement myCard = null;
 
-			foreach (var method in allProducts)
+			foreach (IWebElement method in allProducts)
 			{
 				if (method.Text.Trim().Replace("\r\n", " ").Contains("Credit Card"))
 				{
@@ -178,7 +179,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement _lbl_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-creditCardHolderName']"), 2);
 
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -266,7 +267,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement _err_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-creditCardHolderName']"), 2);
 
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -412,7 +413,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement _lbl_bank_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankName']"), 2);
 			IWebElement _lbl_acc_holder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankAccountName']"), 2);
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -500,7 +501,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement _err_bank_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankName']"), 2);
 			IWebElement _err_acc_holder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankAccountName']"), 2);
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -660,7 +661,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//}
 			//Report.Info("Contact Information Found");
 			//return myContact.Text;
-			var myContact = this._tbl_addresses.FindElements(By.XPath("div[1]/div"), 10);
+			IList<IWebElement> myContact = this._tbl_addresses.FindElements(By.XPath("div[1]/div"), 10);
 			if (myContact != null)
 			{
 				return myContact.Select(x => x.GetValue()).ToList();
@@ -672,7 +673,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Confirm_Contact_Info");
 
-			var myInfo = this.Get_Contact_Info();
+			List<string> myInfo = this.Get_Contact_Info();
 
 			if (!myInfo.Contains(company_name))
 			{
@@ -724,13 +725,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//}
 			//Report.Info("Billing Address Found");
 			//return myAddress.Text;
-			var myBill = this.containerElement.FindElements(By.XPath(".//div/h3[text()='Billing Address']"), 10).FirstOrDefault();
+			IWebElement myBill = this.containerElement.FindElements(By.XPath(".//div/h3[text()='Billing Address']"), 10).FirstOrDefault();
 			if (myBill == null)
 			{
 				Report.Info("Failed to Find Billing Address heading");
 				return null;
 			}
-			var myAddress = myBill.FindElements(By.XPath("../div"), 10);
+			IList<IWebElement> myAddress = myBill.FindElements(By.XPath("../div"), 10);
 			if (myAddress != null)
 			{
 				return myAddress.Select(x => x.GetValue()).ToList();
@@ -742,7 +743,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Confirm_Billing_Address");
 
-			var myInfo = this.Get_Billing_Address();
+			List<string> myInfo = this.Get_Billing_Address();
 
 			if (!myInfo.Contains(address_one))
 			{
@@ -938,7 +939,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement myFieldHeader = null;
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -1253,7 +1254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement myFieldHeader = null;
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -1598,7 +1599,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetRowsBelowProduct()
 		{
-			var headerRows = SeleniumBrowser.WebBrowser.FindElements(
+			ReadOnlyCollection<IWebElement> headerRows = SeleniumBrowser.WebBrowser.FindElements(
 				By.XPath("//h3[contains(text(),'Product Billing')]/..//table/tbody/tr/td/b"));
 
 			if (headerRows.Count > 1)
@@ -1607,7 +1608,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			else
 			{
-				var subRows = SeleniumBrowser.WebBrowser.FindElements(
+				ReadOnlyCollection<IWebElement> subRows = SeleniumBrowser.WebBrowser.FindElements(
 					By.XPath("//h3[contains(text(),'Product Billing')]/..//table/tbody/tr/td[2]"));
 				return subRows.Select(x => x.GetValue()).ToList();
 
@@ -1664,7 +1665,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Home_click()
 		{
 			Report.Info("Attempting to Click Home Button");
-			var el = this.containerElement.FindElement(By.XPath(".//a[text()='Home']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[text()='Home']"), 2);
 			return el.TryClick();
 		}
 
@@ -1679,8 +1680,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 		public string EmailField {
-			get { return this.containerElement.FindElement(By.Id("email"), 2).Text; }
-			set { this.containerElement.FindElement(By.Id("email"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.Id("email"), 2).Text;
+			set => this.containerElement.FindElement(By.Id("email"), 2).EnterText(value);
 		}
 
 
@@ -1701,7 +1702,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string PasswordField {
-			get { return this.containerElement.FindElement(By.Id("password"), 2).Text; }
+			get => this.containerElement.FindElement(By.Id("password"), 2).Text;
 			set
 			{
 				IWebElement pw = this.containerElement.FindElement(By.Id("password"), 2);
@@ -1740,7 +1741,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool WaitForSpinner()
 		{
-			var spinner = this._spinnerFinder.FindElement(By.XPath("//div[@class='spinWrap']"), 2);
+			IWebElement spinner = this._spinnerFinder.FindElement(By.XPath("//div[@class='spinWrap']"), 2);
 			if (spinner == null)
 			{
 				return true;

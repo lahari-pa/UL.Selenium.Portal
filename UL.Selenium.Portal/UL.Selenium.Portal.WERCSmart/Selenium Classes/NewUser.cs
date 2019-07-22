@@ -194,7 +194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetSecurityQuestionError(int i)
 		{
 			string xPath = "//*[@id='question" + i + "Answer_error']";
-			IWebElement we = this.containerElement.FindElement(By.XPath(xPath),2);
+			IWebElement we = this.containerElement.FindElement(By.XPath(xPath), 2);
 			return we?.GetValue();
 		}
 
@@ -466,7 +466,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string Country {
 			get
 			{
-				var countryDropDown = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"), 2);
+				IWebElement countryDropDown = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"), 2);
 				return countryDropDown.GetValue();
 
 			}
@@ -479,13 +479,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void Select_Country(string country)
 		{
 
-			var countryDropDown = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"), 2);
+			IWebElement countryDropDown = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"), 2);
 			if (countryDropDown == null)
 			{ throw new Exception("Country drop down control could not be found!"); }
 
 			countryDropDown.Click();
 
-			var selectElement = countryDropDown.FindElements(By.XPath(".//option"), 2).FirstOrDefault(x => x.Text == country);
+			IWebElement selectElement = countryDropDown.FindElements(By.XPath(".//option"), 2).FirstOrDefault(x => x.Text == country);
 			if (selectElement == null)
 			{ throw new Exception("Country not present in container!"); }
 
@@ -504,10 +504,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 		public string LastName {
-			get
-			{
-				return this._iLastName.GetValue();
-			}
+			get => this._iLastName.GetValue();
 			set
 			{
 				this._iLastName.EnterText(value);
@@ -516,10 +513,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string Password {
-			get
-			{
-				return this._iPassword.GetValue();
-			}
+			get => this._iPassword.GetValue();
 			set
 			{
 				this._iPassword.EnterText(value);
@@ -528,10 +522,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string ConfirmPassword {
-			get
-			{
-				return this._iConfirmPassword.GetValue();
-			}
+			get => this._iConfirmPassword.GetValue();
 			set
 			{
 				this._iConfirmPassword.EnterText(value);
@@ -540,10 +531,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string Address1 {
-			get
-			{
-				return this._iAddress1.GetValue();
-			}
+			get => this._iAddress1.GetValue();
 			set
 			{
 				this._iAddress1.EnterText(value);
@@ -552,10 +540,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string Address2 {
-			get
-			{
-				return this._iAddress2.GetValue();
-			}
+			get => this._iAddress2.GetValue();
 			set
 			{
 				this._iAddress2.EnterText(value);
@@ -564,10 +549,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string City {
-			get
-			{
-				return this._iCity.GetValue();
-			}
+			get => this._iCity.GetValue();
 			set
 			{
 				this._iCity.EnterText(value);
@@ -576,10 +558,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string State {
-			get
-			{
-				return this._iState.GetValue();
-			}
+			get => this._iState.GetValue();
 			set
 			{
 				this._iState.EnterText(value);
@@ -588,10 +567,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string Zip {
-			get
-			{
-				return this._iZip.GetValue();
-			}
+			get => this._iZip.GetValue();
 			set
 			{
 				this._iZip.EnterText(value);
@@ -600,10 +576,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string CompanyName {
-			get
-			{
-				return this._iCompanyName.GetValue();
-			}
+			get => this._iCompanyName.GetValue();
 			set
 			{
 				this._iCompanyName.EnterText(value);
@@ -612,10 +585,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string CompanyPhone {
-			get
-			{
-				return this._iCompanyPhone.GetValue();
-			}
+			get => this._iCompanyPhone.GetValue();
 			set
 			{
 				this._iCompanyPhone.EnterText(value);
@@ -626,22 +596,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string CountryCode {
 			get
 			{
-				var countryCode = this.containerElement.FindElement(By.XPath(".//input[@id='txtCountryCode']"), 2);
+				IWebElement countryCode = this.containerElement.FindElement(By.XPath(".//input[@id='txtCountryCode']"), 2);
 				return countryCode != null ? countryCode.GetValue() : "";
 			}
 			set
 			{
-				var countryCode = this.containerElement.FindElement(By.XPath(".//input[@id='txtCountryCode']"), 2);
+				IWebElement countryCode = this.containerElement.FindElement(By.XPath(".//input[@id='txtCountryCode']"), 2);
 				countryCode.EnterText(value);
 				Report.Success("Entered country code: " + value);
 			}
 		}
 
 		public string EmergencyPhoneNumber {
-			get
-			{
-				return this._iEmergencyPhone.GetValue();
-			}
+			get => this._iEmergencyPhone.GetValue();
 			set
 			{
 				this._iEmergencyPhone.EnterText(value);
@@ -651,7 +618,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void SelectSupplierType(string supplierType)
 		{
-			var ddSupplierType = this.containerElement.FindElement(By.XPath("//select[@id='ddSupplierType']"), 2);
+			IWebElement ddSupplierType = this.containerElement.FindElement(By.XPath("//select[@id='ddSupplierType']"), 2);
 			if (ddSupplierType == null)
 			{
 				throw new Exception("Supplier type control could not be found!");
@@ -659,7 +626,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			ddSupplierType.ScrollElementIntoView();
 
-			var selectElement = ddSupplierType.FindElements(By.XPath(".//option"), 2).FirstOrDefault(x => x.Text == supplierType);
+			IWebElement selectElement = ddSupplierType.FindElements(By.XPath(".//option"), 2).FirstOrDefault(x => x.Text == supplierType);
 			if (selectElement == null)
 			{ throw new Exception("Supplier type was not present in container!"); }
 
@@ -674,7 +641,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (this._ddState == null)
 			{ throw new Exception("US state drop down control could not be found!"); }
 
-			var selectElement = this._ddState.FindElements(By.XPath(".//option"), 2).FirstOrDefault(x => x.Text == usState);
+			IWebElement selectElement = this._ddState.FindElements(By.XPath(".//option"), 2).FirstOrDefault(x => x.Text == usState);
 			if (selectElement == null)
 			{ throw new Exception("US State was not present in container!"); }
 
@@ -702,7 +669,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string CurrentPageTitle()
 		{
-			var headerTitle = this.containerElement.FindElement(By.XPath("//div[@class='item active']/h4"), 2);
+			IWebElement headerTitle = this.containerElement.FindElement(By.XPath("//div[@class='item active']/h4"), 2);
 			return headerTitle == null ? "" : headerTitle.Text;
 		}
 
@@ -720,21 +687,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void EnterQuestionAnswer(string number, string answer)
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//input[@id='secAnswer" + number + "']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@id='secAnswer" + number + "']"), 2);
 			if (el != null)
 			{ el.EnterText(answer); }
 		}
 
 		public void EnterQuestionHint(string number, string answer)
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//input[@id='secHint" + number + "']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@id='secHint" + number + "']"), 2);
 			if (el != null)
 			{ el.EnterText(answer); }
 		}
 
 		public string Pin {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).GetValue(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).GetValue();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).EnterText(value);
 		}
 
 	}
