@@ -12,12 +12,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override IWebElement containerElement { get; set; }
 
 		public string Username {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).Text; }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).Text;
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).EnterText(value);
 		}
 
 		public string Password {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='Password']"), 2).Text; }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='Password']"), 2).Text;
 			set
 			{
 				IWebElement pw = this.containerElement.FindElement(By.XPath(".//input[@id='Password']"), 2);
