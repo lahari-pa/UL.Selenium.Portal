@@ -868,8 +868,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected, message count is showing as: " + ActualMessageCount.ToString());
 		}
 
-		[StepDefinition(@"I click on the Live Help button on the lower right")]
-		public void GivenIClickOnTheLiveHelpButtonOnTheLowerRight()
+		[StepDefinition(@"I click on the Live Help button on the upper right")]
+		public void GivenIClickOnTheLiveHelpButtonOnTheUpperRight()
 		{
 			var myTopMenuBar = new TopMenuBar();
 			Report.IsTrue(myTopMenuBar.ClickLiveHelp(), "Failed to click live help", "Clicked live help");
@@ -882,48 +882,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Live Help dialog is showing as expected");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I should see the following text: (.*)")]
-		public void ThenInTheLiveHelpDialogIShouldSeeTheFollowingText(string expectedText)
+		[StepDefinition(@"In the Live Help dialog I should see a small icon with three lines in the upper left hand corner")]
+		public void ThenIShouldSeeThreeLinesIcon()
 		{
-			string actualText = new LiveHelp().GetFormText().Trim().Replace(Environment.NewLine, " ");
-
-			Report.Info("ActualText length = " + actualText.Length.ToString());
-			Report.Info("ExpectedText length = " + expectedText.Trim().Length.ToString());
-			int i = 0;
-			if (actualText != expectedText.Trim())
-			{
-				foreach (char thisChar in expectedText.ToCharArray().ToList())
-				{
-					if (i + 2 < actualText.Length)
-					{
-						Report.Info("Expecting: " + thisChar.ToString() + " and getting: " + actualText[i]);
-					}
-					else
-					{
-						break;
-					}
-					i++;
-				}
-			}
-
-			Report.IsTrue(actualText == expectedText.Trim(), "Expected: " + expectedText + " but got: " + actualText,
-				"Text is showing as expected: " + expectedText);
+			Report.IsTrue(new LiveHelp().VerifyThreeLinesIcon(), "Three lines icon is not present in the upper left hand corner",
+				"Three lines icon is present in the upper left hand corner");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I enter name: (.*)")]
-		public void GivenInTheLiveHelpDialogIEnterName(string name)
+		[StepDefinition(@"In the Live Help dialog I should see an x in the upper right hand corner")]
+		public void ThenIShouldSeeAnXInTheUpperRightHandCorner()
 		{
-			var myLiveHelp = new LiveHelp();
-			Report.IsTrue(myLiveHelp.EnterName(name), "Failed to enter name: " + name,
-				"Successfully entered name: " + name);
+			Report.IsTrue(new LiveHelp().VerifyX(), "X is not present in the upper right hand corner",
+				"X is present in the upper right hand corner");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I enter email: (.*)")]
-		public void GivenInTheLiveHelpDialogIEnterEmail(string email)
+		[StepDefinition(@"In the Live Help dialog I should see the text 'Inbox' at the top of the chat window")]
+		public void ThenIShouldSeeInbox()
 		{
-			var myLiveHelp = new LiveHelp();
-			Report.IsTrue(myLiveHelp.EnterEmail(email), "Failed to enter email: " + email,
-				"Successfully entered email: " + email);
+			Report.IsTrue(new LiveHelp().VerifyInboxText(), "Inbox text is not present", "Inbox text is present");
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the following text in the message area: (.*)")]
+		public void ThenIShouldSeeTheFollowingTextInTheMessageArea(string message)
+		{
+			Report.IsTrue(new LiveHelp().VerifyMessageText(message), "Text is not present in the message area: " + message,
+				"Text is present in the message area: " + message);
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the following text in the lower part of the chat window: (.*)")]
+		public void ThenIShouldSeeTheFollowingTextInTheLowerPartOfTheChatWindow(string text)
+		{
+			Report.IsTrue(new LiveHelp().VerifyLowerText(text), "Text '" + text + "' does not appear in the lower part of the message area",
+				"Text appears correctly in the lower part of the chat window: " + text);
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the following placeholder text in the text entry field: (.*)")]
+		public void ThenIShouldSeeTheFollowingPlaceholder(string text)
+		{
+			Report.IsTrue(new LiveHelp().VerifyPlaceholder(text), "Placeholder '" + text + "' does not appear in the text entry area",
+				"Placeholder appears correctly in the text entry area: " + text);
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the (.*) icon in the lower right hand corner")]
+		public void ThenIShouldSeeTheIconInTheLowerRightHandCorner(string icon)
+		{
+			Report.IsTrue(new LiveHelp().VerifyIcon(icon), icon + " icon not found in the lower right hand corner",
+				icon + " icon found in the lower right hand corner");
 		}
 
 		[StepDefinition(@"In the Live Help dialog I click on the x to close")]
