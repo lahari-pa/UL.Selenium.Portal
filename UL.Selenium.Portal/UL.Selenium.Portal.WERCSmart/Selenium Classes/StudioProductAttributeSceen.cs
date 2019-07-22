@@ -7,6 +7,7 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -19,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
-			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
 			{
 				urls = SeleniumBrowser.WebBrowser.WindowHandles;
@@ -36,10 +37,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("BaseWindow", current);
 
-			foreach (var handle in urls)
+			foreach (string handle in urls)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Product Attribute Screen"))
 				{
@@ -50,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 			return base.Wait_for_load(30);
@@ -58,27 +59,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickFilterButton()
 		{
-			var button = this.containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_imgFilter']"));
+			IWebElement button = this.containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_imgFilter']"));
 			return button.TryClick();
 		}
 
 		public bool ResultsAreFound()
 		{
 			Delay.Seconds(1);
-			var codeTDsFindElements = this.containerElement.FindElements(By.XPath(
+			ReadOnlyCollection<IWebElement> codeTDsFindElements = this.containerElement.FindElements(By.XPath(
 				".//table[@id='AttributesGrid_tblSelectRecord']/tbody/tr[not(@id='AttributesGrid_rowHeader') and not(@id='AttributesGrid_rowTitle')]//tr[not(contains(@class, 'FixedHeader'))]/td[1]"));
 			return codeTDsFindElements.Count > 0;
 		}
 
-		public bool SelectItemByCode(string Code)
+		public bool SelectItemByCode(string code)
 		{
-			var codeTDsFindElements = this.containerElement.FindElements(By.XPath(
+			ReadOnlyCollection<IWebElement> codeTDsFindElements = this.containerElement.FindElements(By.XPath(
 				".//table[@id='AttributesGrid_tblSelectRecord']/tbody/tr[not(@id='AttributesGrid_rowHeader') and not(@id='AttributesGrid_rowTitle')]//tr[not(contains(@class, 'FixedHeader'))]/td[1]"));
 
-			var matchingTD = codeTDsFindElements.FirstOrDefault(x => x.GetValue() == Code);
+			IWebElement matchingTD = codeTDsFindElements.FirstOrDefault(x => x.GetValue() == code);
 			if (matchingTD == null)
 			{
-				Report.Info("Could not find matching item for: " + Code);
+				Report.Info("Could not find matching item for: " + code);
 				return false;
 			}
 
@@ -87,8 +88,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetDataText()
 		{
-			List<string> returnList = new List<string>();
-			var dataAreaSelect = this.containerElement.FindElement(By.XPath(".//select[@id='lbData']"), 2);
+			var returnList = new List<string>();
+			IWebElement dataAreaSelect = this.containerElement.FindElement(By.XPath(".//select[@id='lbData']"), 2);
 
 			if (dataAreaSelect == null)
 			{
@@ -96,7 +97,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			else
 			{
-				var options = dataAreaSelect.FindElements(By.XPath(".//option"));
+				ReadOnlyCollection<IWebElement> options = dataAreaSelect.FindElements(By.XPath(".//option"));
 				if (options == null)
 				{
 					Report.Info("Found data area but could not find data area values");

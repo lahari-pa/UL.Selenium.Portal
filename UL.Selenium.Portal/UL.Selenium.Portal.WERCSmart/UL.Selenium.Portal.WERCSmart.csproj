@@ -43,7 +43,7 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="CredentialManagement, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.736\lib\net452\CredentialManagement.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.737\lib\net452\CredentialManagement.dll</HintPath>
     </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\EnvDTE.8.0.1\lib\net10\EnvDTE.dll</HintPath>
@@ -96,13 +96,13 @@
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.736\lib\net452\NTTQA.Selenium.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.737\lib\net452\NTTQA.Selenium.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.736\lib\net452\NTTQA.Selenium.Reporting.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.737\lib\net452\NTTQA.Selenium.Reporting.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium.TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.736\lib\net452\NTTQA.Selenium.TReVor.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.737\lib\net452\NTTQA.Selenium.TReVor.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
@@ -276,271 +276,182 @@
     </None>
     <None Include="app.manifest" />
     <None Include="Features\AdditionalProductInformation.feature">
-      <LastGenOutput>AdditionalProductInformation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Basic Tests.feature">
-      <LastGenOutput>Basic Tests.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\Forwarding\AccountHasStewardship.feature">
-      <LastGenOutput>AccountHasStewardship.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\1 Account has no Canada Data.feature">
-      <LastGenOutput>1 Account has no Canada Data.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgNo_StwdFull.feature">
-      <LastGenOutput>CANAddNo_PkgNo_StwdFull.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgNo_StwdPartial.feature">
-      <LastGenOutput>CANAddNo_PkgNo_StwdPartial.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgYes_StwdFull.feature">
-      <LastGenOutput>CANAddNo_PkgYes_StwdFull1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgYes_StwdNo.feature">
-      <LastGenOutput>CANAddNo_PkgYes_StwdNo.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgYes_StwdPartial.feature">
-      <LastGenOutput>CANAddNo_PkgYes_StwdPartial.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdNo.feature">
-      <LastGenOutput>CANAddYes_PkgNo_StwdNo.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdPartial.feature">
-      <LastGenOutput>CANAddYes_PkgNo_StwdPartial.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgYes_StwdNo.feature">
-      <LastGenOutput>CANAddYes_PkgYes_StwdNo.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgYes_StwdFull.feature">
-      <LastGenOutput>CANAddYes_PkgYes_StwdFull.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgYes_StwdPartial.feature">
-      <LastGenOutput>CANAddYes_PkgYes_StwdPartial.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdFull.feature">
-      <LastGenOutput>CANAddYes_PkgNo_StwdFull.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Submission\Stewardship Data in WPS Studio\StwdInWpsStudiofeature.feature">
-      <LastGenOutput>StwdInWpsStudiofeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has No Stwd Data\AccHasNoStwdData.feature">
-      <LastGenOutput>AccHasNoStwdData.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Partial Sewardship Data\AccHasPartialStwd.feature">
-      <LastGenOutput>AccHasPartialStwd.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Cart.feature">
-      <LastGenOutput>Cart.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ConflictMinerals.feature">
-      <LastGenOutput>ConflictMinerals.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\CVS RCL.feature">
-      <LastGenOutput>CVS RCL.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Data Consent Tiers.feature">
-      <LastGenOutput>Data Consent Tiers.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\FlashpointTestingTransportation.feature">
-      <LastGenOutput>FlashpointTestingTransportation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Forgotten Password.feature">
-      <LastGenOutput>Forgotten Password.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Home page\Actions.feature">
-      <LastGenOutput>Actions.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Home page\BulkActions.feature">
-      <LastGenOutput>BulkActions.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\HomePage.feature">
-      <LastGenOutput>HomePage.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Ingredients.feature">
-      <LastGenOutput>Ingredients.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\LandingPage.feature">
-      <LastGenOutput>LandingPage.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Login.feature">
-      <LastGenOutput>Login.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\MyAccount.feature">
-      <LastGenOutput>MyAccount.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\MyLibrary.feature">
-      <LastGenOutput>MyLibrary.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\MyMessages.feature">
-      <LastGenOutput>MyMessages.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\NewProduct.feature">
-      <LastGenOutput>NewProduct.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 12.feature">
-      <LastGenOutput>Flow 12.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 14.feature">
-      <LastGenOutput>Flow 14.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 15.feature">
-      <LastGenOutput>Flow 15.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 16.feature">
-      <LastGenOutput>Flow 16.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 17.feature">
-      <LastGenOutput>Flow 17.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 18.feature">
-      <LastGenOutput>Flow 18.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 19.feature">
-      <LastGenOutput>Flow 19.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 2.feature">
-      <LastGenOutput>Flow 2.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 22.feature">
-      <LastGenOutput>Flow 22.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 24 - Deodorant.feature">
-      <LastGenOutput>Flow 24 - Deodorant.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 25.feature">
-      <LastGenOutput>Flow 25.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 26 - Electronic.feature">
-      <LastGenOutput>Flow 26 - Electronic.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 28 - Auto Parts.feature">
-      <LastGenOutput>Flow 28 - Auto Parts.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 29 - Beverage.feature">
-      <LastGenOutput>Flow 29 - Beverage.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 3.feature">
-      <LastGenOutput>Flow 3.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 30 - Grocery.feature">
-      <LastGenOutput>Flow 30 - Grocery.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 31 - Seasonings.feature">
-      <LastGenOutput>Flow 31 - Seasonings.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 32 - Grocery.feature">
-      <LastGenOutput>Flow 32 - Grocery.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 33 - Cooking Oil Spray.feature">
-      <LastGenOutput>Flow 33 - Cooking Oil Spray.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 4-A.feature">
-      <LastGenOutput>Flow 4-A.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 4.feature">
-      <LastGenOutput>Flow 4.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 6.feature">
-      <LastGenOutput>Flow 6.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 7.feature">
-      <LastGenOutput>Flow 7.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 8.feature">
-      <LastGenOutput>Flow 8.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 9.feature">
-      <LastGenOutput>Flow 9.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Ingredients\TransparencyRationCalculation.feature">
-      <LastGenOutput>TransparencyRationCalculation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Kits - Flow 13.feature">
-      <LastGenOutput>Kits - Flow 13.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Lithium Battery Transport Informarion.feature">
-      <LastGenOutput>Lithium Battery Transport Informarion.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature">
-      <LastGenOutput>EPA State Expiry Date Validation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Pesticides\Pesticides.feature">
-      <LastGenOutput>Pesticides.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Product Documents\Product Documents.feature">
-      <LastGenOutput>Product Documents.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Product Registration.feature">
-      <LastGenOutput>Product Registration.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Retailer Selection.feature">
-      <LastGenOutput>Retailer Selection.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Transportation.feature">
-      <LastGenOutput>Transportation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
-      <LastGenOutput>VOC-Flow 19 Dilution.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\VOC\VOC-SCAQMD.feature">
-      <LastGenOutput>VOC-SCAQMD.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\VOC\VOC.feature">
-      <LastGenOutput>VOC.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ProductCharacteristics.feature">
-      <LastGenOutput>ProductCharacteristics.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ProductSetUp.feature">
-      <LastGenOutput>ProductSetUp.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\RegulatoryInformation1.feature">
-      <LastGenOutput>RegulatoryInformation1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\RegulatoryInformation3.feature">
-      <LastGenOutput>RegulatoryInformation3.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ReleaseDay.feature">
-      <LastGenOutput>ReleaseDay.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Reset Password.feature">
-      <LastGenOutput>Reset Password.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\RetailerPartners.feature">
-      <LastGenOutput>RetailerPartners.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Security Roles.feature">
-      <LastGenOutput>Security Roles.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Signup.feature">
-      <LastGenOutput>Signup.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Subscription.feature">
-      <LastGenOutput>Subscription.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\SupplierReports.feature">
-      <LastGenOutput>SupplierReports.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Test.feature">
-      <LastGenOutput>Test.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\TheProduct.feature">
-      <LastGenOutput>TheProduct.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\UL Solution Center.feature">
-      <LastGenOutput>UL Solution Center.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\UL Toys.feature">
-      <LastGenOutput>UL Toys.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\UPC.feature">
-      <LastGenOutput>UPC.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Walmart.feature">
-      <LastGenOutput>Walmart.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\[57203] Data Consent Tiers - Retailer Specific Behaviour.feature">
-      <LastGenOutput>[57203] Data Consent Tiers - Retailer Specific Behaviour.feature.cs</LastGenOutput>
     </None>
     <Content Include="ReportFiles\UL.Selenium.Portal.WERCSmart.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -555,11 +466,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem ##### TReVor Post Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.736\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.737\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>rem ##### TReVor Pre Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.736\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.737\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
 </PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -572,7 +483,7 @@
     <Error Condition="!Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
-    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.736\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.5.1.736\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
+    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.737\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.5.1.737\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
@@ -582,5 +493,5 @@
       <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
     </ItemGroup>
   </Target>
-  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.1.736\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.736\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
+  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.1.737\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.1.737\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
 </Project>

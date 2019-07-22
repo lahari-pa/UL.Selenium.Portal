@@ -9,13 +9,10 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
-	class MyProducts : BaseObject
+	class MyProducts : SeleniumBaseObject
 	{
 		// Cannot have a more precise container element than this
-		public const string BasePath = "//section[@id='productGridSection']";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//section[@id='productGridSection']");
 
 		public bool SetSearchCriteria(string searchBy, string filter, string upc, string status)
 		{
