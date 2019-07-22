@@ -406,3 +406,78 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	# Delete the prodiuct created to cleanup
 	Given I navigate to the home page
 	Then I delete the product: TestCase67661
+
+@jacob
+Scenario: [105352] Product Comments screen Max input length
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+	Then The home screen should load
+	Given I delete all products with UPC Number: 630509667031
+	And I click the Register New Product icon in the Navigation Pane
+	And I should see the header New Product
+	And I Select the Create a New Registration radio button
+	And in the New Product page I click Continue
+	And I set 'Product Name' to: Answering Machine, Battery Included
+	And I set 'Type of Product' to: Answering Machine, Battery Included
+	And in the New Product page I click Continue
+	Then I save the product information as: TestCase105352
+	And I should see the Additional Product Information Page
+	And In the Additional Information Page the check box for: United States should be: checked
+	And I set 'Product is shipped directly' to: No
+	And I set 'Product is a Retailers Private Label or Brand' to: No
+	And I set 'Product is solely for the Retailer's use' to: No
+	And in the New Product page I click Continue
+	And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
+	And I set 'Prop65' to: No
+	And in the New Product page I click Continue
+	And I should see the Product Includes Battery Page
+	And For 'Indicate how battery is packaged' I select: The battery is shipped with but not included in my product.
+	And I add the following batteries:
+		| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As |
+		| Lithium Ion  | <any>        | 4                               | 4                                  | battery1 |
+		| Alkaline     | <any>        | 6                               | 6                                  | battery2 |
+	And in the New Product page I click Continue
+	And I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
+	And I set 'Product has had TCLP; Report is available' to: No
+	And I set all the metal presence value to: No
+	And in the New Product page I click Continue
+	And I should see the Electronic Equipment Page
+	And I set 'Contains Circuit Board' to: No
+	And I set 'Has a LCD or Plasma Display' to: No
+	And in the New Product page I click Continue
+	And I should see the Lithium Battery Transportation Page
+	And I set 'DOT' to: Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipment, 9
+	And I set 'IMDG' to: None of the above/Not intended for shipment under IMDG
+	And I set 'IATA' to: Section II
+	And I set 'TDG' to: Meets the requirements of TDG special provision 34 to be transported as non-dangerous goods.
+	And in the New Product page I click Continue
+	Given the 'Select Retailers' window appears
+	Then In the 'Select Retailers' window I select the retailer: Target
+	And in the New Product page I click Continue
+	Given I click the 'Add UPC' button
+	Then I add the following into the UPC Fields
+		| Field         | Value        |
+		| UPCNumber     | 630509667031 |
+		| ContainerType | Aerosol Can  |
+		| Size          | 20           |
+		| DPCI          | 087-16-0238  |
+		| Quantity      | 1            |
+	Given in the New Product page I click Continue
+	Then the comments field should appear
+	And I enter the following into the comments field: 300 character test: 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+	And in the New Product page I click Continue
+	Then I check the Comment error message shows: This field exceeds max length (200).
+	Then I enter the following into the comments field: 201 character test: 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901	And in the New Product page I click Continue
+	Then I check the Comment error message shows: This field exceeds max length (200).
+	Then I enter the following into the comments field: 200 character test: 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+	Then in the New Product page I click Continue
+	Then The Data Acceptance page should appear
+	Given I click the Summary button in the Data Acceptance window
+	Then I switch to the Data Summary page
+	And I should see the following batteries present:
+		| BatteryType | Manufacturer | NumberPerPackage | RequiredToRun | Saved As |
+		| Lithium Ion | saved as     | 4                | 4             | battery1 |
+		| Alkaline    | saved as     | 6                | 6             | battery2 |
+	Then I close the Data Summary tab
+	Given I navigate to the home page
+	Then I delete the product: TestCase105352

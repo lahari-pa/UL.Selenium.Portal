@@ -695,6 +695,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool CommentErrorDisplayed(string expected, out string actual)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(@"//p[contains(concat(' ',normalize-space(@class),' '),'form-error')]"));
+			if (el != null)
+			{
+				actual = el.Text;
+				return actual == expected;
+			}
+			actual = "null";
+			return false;
+		}
+
 		public bool DataAcceptanceScreenAppears()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Data Acceptance']"), 2);

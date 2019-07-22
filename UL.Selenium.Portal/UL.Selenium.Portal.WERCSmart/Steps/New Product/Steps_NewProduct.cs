@@ -942,6 +942,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().CommentsAreaShowing(), "Comments field was not displayed!", "Comments field was displayed, as expected");
 		}
 
+		[StepDefinition(@"I check the Comment error message shows: (.*)")]
+		public void CheckTheCommentErrorMessageShows(string p0)
+		{
+			string actual;
+			var np = new NewProduct();
+			Report.IsTrue(np.CommentErrorDisplayed(p0, out actual), "The error text was " + actual + ", but expected " + p0, "The error text was " + actual + " as expected.");
+		}
+
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
