@@ -31,25 +31,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<ProductUpc> Upcs()
 		{
 			var rList = new List<ProductUpc>();
-			foreach (var row in this.UpcRows)
+			foreach (IWebElement row in this.UpcRows)
 			{
 				var thisUpc = new ProductUpc();
-				var upcNumberIndex = Array.IndexOf(this.HeadingTitles, "UPC Number");
+				int upcNumberIndex = Array.IndexOf(this.HeadingTitles, "UPC Number");
 				if (upcNumberIndex != -1)
 				{
 					thisUpc.UpcNumber = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2)?.Text;
 				}
-				var containerTypeIndex = Array.IndexOf(this.HeadingTitles, "Container Type");
+				int containerTypeIndex = Array.IndexOf(this.HeadingTitles, "Container Type");
 				if (containerTypeIndex != -1)
 				{
 					thisUpc.ContainerType = row.FindElement(By.XPath($"./td[position()={containerTypeIndex + 1}]/ div"), 2)?.Text;
 				}
-				var sizeIndex = Array.IndexOf(this.HeadingTitles, "Size (Ounces)");
+				int sizeIndex = Array.IndexOf(this.HeadingTitles, "Size (Ounces)");
 				if (sizeIndex != -1)
 				{
 					thisUpc.SizeOunces = row.FindElement(By.XPath($"./td[position()={sizeIndex + 1}]/ div"), 2)?.Text;
 				}
-				var retailersIndex = Array.IndexOf(this.HeadingTitles, "Retailers");
+				int retailersIndex = Array.IndexOf(this.HeadingTitles, "Retailers");
 				if (retailersIndex != -1)
 				{
 					thisUpc.Retailers = row.FindElement(By.XPath($"./td[position()={retailersIndex + 1}]/ div"), 2)?.Text.Split(',').Select(x => x.Trim()).ToList();

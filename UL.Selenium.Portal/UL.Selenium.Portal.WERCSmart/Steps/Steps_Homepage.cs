@@ -74,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Clicking " + button + " on inactivity popup");
 			var selInactivityPopup = new InactivityPopup();
-			var clicked = false;
+			bool clicked = false;
 			switch (button)
 			{
 				case ("Yes"):

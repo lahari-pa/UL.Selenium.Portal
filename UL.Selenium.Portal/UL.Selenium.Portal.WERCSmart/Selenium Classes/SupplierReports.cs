@@ -5,6 +5,7 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -24,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		// This gets the title of the right side frame on the page
 		public string GetCurrentSubTitle()
 		{
-			var thing = this.containerElement.FindElement(By.XPath(".//div[@id='rptname']//h3"))?.Text;
+			string thing = this.containerElement.FindElement(By.XPath(".//div[@id='rptname']//h3"))?.Text;
 			return thing;
 		}
 
@@ -56,11 +57,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]")).TryClick();
 			Delay.Seconds(1);
-			var Searches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//input"));
-			var Search = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@type='search']"));
+			ReadOnlyCollection<IWebElement> Searches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//input"));
+			IWebElement Search = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@type='search']"));
 			Search.EnterText(searchTerm);
 			Delay.Seconds(1);
-			var searching =
+			IWebElement searching =
 				this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 			int i = 0;
 			while (searching != null && i < 10)
@@ -71,7 +72,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					2);
 			}
 
-			var Matches =
+			IList<IWebElement> Matches =
 			SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 
 			/*
@@ -88,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			var MatchingValues = Matches.Where(x => x.GetValue().Trim().Contains(searchTerm.Trim()));
+			IEnumerable<IWebElement> MatchingValues = Matches.Where(x => x.GetValue().Trim().Contains(searchTerm.Trim()));
 
 			if (MatchingValues.Count() == 0)
 			{
@@ -96,14 +97,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			else
 			{
-				var MatchedEntry = MatchingValues.FirstOrDefault();
+				IWebElement MatchedEntry = MatchingValues.FirstOrDefault();
 				return MatchedEntry.TryClick();
 			}
 		}
 
 		public bool SelectRetailer(string retailer)
 		{
-			var selectionBox = this.containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"));
+			IWebElement selectionBox = this.containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"));
 			selectionBox.Select(retailer);
 			return selectionBox.SelectedOption() == retailer;
 		}

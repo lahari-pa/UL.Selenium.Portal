@@ -23,7 +23,7 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding]
-	public class Steps_Shared : TechTalk.SpecFlow.Steps
+	public class Steps_Shared
 	{
 		// For additional details on SpecFlow step definitions see http://go.specflow.org/doc-stepdef
 
