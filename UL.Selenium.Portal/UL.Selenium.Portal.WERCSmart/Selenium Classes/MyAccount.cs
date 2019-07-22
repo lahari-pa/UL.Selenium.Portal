@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -32,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetCompanyName()
 		{
-			var companyNameH3 = this.containerElement.FindElement(By.XPath("//div[@class='col-sm-3 basic-info']/h3"), 2);
+			IWebElement companyNameH3 = this.containerElement.FindElement(By.XPath("//div[@class='col-sm-3 basic-info']/h3"), 2);
 			if (companyNameH3 != null)
 			{
 				string innerText = companyNameH3.GetInnerHTML();
@@ -50,12 +51,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
-				var listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+				IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
 
 				var listOfUsers = new List<User>();
 
-				foreach (var userRow in listOfUsersRows)
+				foreach (IWebElement userRow in listOfUsersRows)
 				{
 					var thisUser = new User {
 						Username = userRow.FindElement(By.XPath(".//td[1]")).Text,
@@ -63,8 +64,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Role = userRow.FindElement(By.XPath(".//td[3]")).Text,
 						IsActive = userRow.FindElement(By.XPath(".//td[4]")).Text == "Yes"
 					};
-					var checkboxes = userRow.FindElements(By.XPath(".//td[5]/div[@class='checkbox']"));
-					foreach (var checkbox in checkboxes)
+					ReadOnlyCollection<IWebElement> checkboxes = userRow.FindElements(By.XPath(".//td[5]/div[@class='checkbox']"));
+					foreach (IWebElement checkbox in checkboxes)
 					{
 						switch (checkbox.FindElement(By.XPath("./label")).Text.Trim())
 						{
@@ -96,8 +97,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//Valid Actions: Details, Deactivate, Reset Password
 		public bool ForUserClickAction(string username, string action)
 		{
-			var userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
-			var listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+			IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+			ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
 			var listOfUsers = listOfUsersRows.Select(x => x.FindElement(By.XPath(".//td[1]/span")).Text).ToList();
 			if (!listOfUsers.Contains(username))
 			{
@@ -105,13 +106,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 											  string.Join(",", listOfUsers));
 				return false;
 			}
-			var actionsButtonTd = userAccountsDiv.FindElement(By.XPath(".//tbody/tr/td[./span[contains(text(),'" + username + "')]]"), 2);
+			IWebElement actionsButtonTd = userAccountsDiv.FindElement(By.XPath(".//tbody/tr/td[./span[contains(text(),'" + username + "')]]"), 2);
 			if (actionsButtonTd == null)
 			{
-				var actionTds = userAccountsDiv.FindElements(By.XPath(".//tbody/tr/td[./span]"), 2);
+				IList<IWebElement> actionTds = userAccountsDiv.FindElements(By.XPath(".//tbody/tr/td[./span]"), 2);
 				actionsButtonTd = actionTds.First(x => x.Text.Replace(" ", "") == username.Replace(" ", ""));
 			}
-			var actionsButton = actionsButtonTd?.FindElement(By.XPath("..//td//button"), 2);
+			IWebElement actionsButton = actionsButtonTd?.FindElement(By.XPath("..//td//button"), 2);
 			if (!actionsButton.TryClick())
 			{
 				Report.Error("Failed to click actions button!");
@@ -119,7 +120,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Info("Clicked actions button");
 			//Actions drop down menu should now open
-			var dropDownMenu = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@aria-expanded='true']/following-sibling::ul[@class='dropdown-menu']"), 2);
+			IWebElement dropDownMenu = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@aria-expanded='true']/following-sibling::ul[@class='dropdown-menu']"), 2);
 			var actionLink = (IWebElement)dropDownMenu?.FindElements(By.XPath("./li")).FirstOrDefault(x => x.Text == action);
 			if (!actionLink.TryClick())
 			{
@@ -155,10 +156,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				Report.Info("Searching on Page " + myPageNumber.Text + " For User: " + userName);
 
-				var userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
-				var listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+				IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
 
-				foreach (var userRow in listOfUsersRows)
+				foreach (IWebElement userRow in listOfUsersRows)
 				{
 					string myUsername = userRow.FindElement(By.XPath(".//td[1]")).Text;
 
@@ -226,10 +227,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				Report.Info("Searching on Page " + myPageNumber.Text + " For User: " + userName);
 
-				var userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
-				var listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+				IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
 
-				foreach (var userRow in listOfUsersRows)
+				foreach (IWebElement userRow in listOfUsersRows)
 				{
 					string myUsername = userRow.FindElement(By.XPath(".//td[1]")).Text;
 
@@ -297,10 +298,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				Report.Info("Searching on Page " + myPageNumber.Text + " For User: " + userName);
 
-				var userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
-				var listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+				IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
 
-				foreach (var userRow in listOfUsersRows)
+				foreach (IWebElement userRow in listOfUsersRows)
 				{
 					string myUsername = userRow.FindElement(By.XPath(".//td[1]")).Text;
 
@@ -593,12 +594,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string UserAccountsActivePage()
 		{
-			var userGrid = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
+			IWebElement userGrid = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
 			if (userGrid == null)
 			{
 				return null;
 			}
-			var pageEl = userGrid.FindElement(By.XPath(".//li[@class='active']/span"), 2);
+			IWebElement pageEl = userGrid.FindElement(By.XPath(".//li[@class='active']/span"), 2);
 			if (pageEl == null)
 			{
 				return null;
@@ -610,7 +611,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool UserGridNavigation(string navOption)
 		{
 			Report.Info("Navigating in the user grid with action - " + navOption);
-			var userGrid = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
+			IWebElement userGrid = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
 			if (userGrid == null)
 			{
 				Report.Info("Could not locate the user grid");
@@ -645,7 +646,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			if (position.ToLower() == "current")
 			{
-				var activePageControl = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li[@class='active']/span"), 2);
+				IWebElement activePageControl = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li[@class='active']/span"), 2);
 				if (activePageControl == null)
 				{
 					Report.Failure("The page control could not be found on the My Packaging Types grid");
@@ -655,7 +656,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			if (position.ToLower() == "last")
 			{
-				var lastControl = this.containerElement.FindElements(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+				IList<IWebElement> lastControl = this.containerElement.FindElements(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
 				if (lastControl.Count == 0)
 				{
 					Report.Info("Last page is: 1");
@@ -669,7 +670,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public int GetHighestPageNo()
 		{
-			var pageNumbers = this.containerElement.FindElements(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+			IList<IWebElement> pageNumbers = this.containerElement.FindElements(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
 			var intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
 			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
 
@@ -688,7 +689,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void KeyToUserGridNavPageInput(string action)
 		{
-			var inputEl = this.UserGridNavPageInput();
+			IWebElement inputEl = this.UserGridNavPageInput();
 			if (inputEl == null)
 			{
 				Report.Failure("The navigation input box could not be found");
@@ -714,7 +715,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void NumToUserGridNavPageInput(string pageNumber)
 		{
-			var inputEl = this.UserGridNavPageInput();
+			IWebElement inputEl = this.UserGridNavPageInput();
 			if (inputEl == null)
 			{
 				Report.Failure("The navigation input box could not be found");
@@ -725,7 +726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string CurrentPageUserGridNavPageInput()
 		{
-			var inputEl = this.UserGridNavPageInput();
+			IWebElement inputEl = this.UserGridNavPageInput();
 			if (inputEl == null)
 			{
 				Report.Failure("The navigation input box could not be found");
@@ -987,7 +988,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				art_no == "0" ? "" : art_no + " Articles",
 				en_art_no == "0" ? "" : en_art_no + " Enhanced Articles"
 			};
-			var ExpectedText = string.Join(", ", Expected.Where(x => x != ""));
+			string ExpectedText = string.Join(", ", Expected.Where(x => x != ""));
 
 			Report.Info("Expected string: " + ExpectedText);
 
@@ -1232,11 +1233,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int lastPageNumber = this.GetPage("last");
 			while (pageNumber <= lastPageNumber)
 			{
-				var rows = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']/tr"), 2);
-				foreach (var row in rows)
+				IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']/tr"), 2);
+				foreach (IWebElement row in rows)
 				{
-					var thisID = row.FindElement(By.XPath("./td/div/small"), 2).Text;
-					var thisName = row.FindElement(By.XPath("./td/div[@data-bind='text:Name']"), 2).Text;
+					string thisID = row.FindElement(By.XPath("./td/div/small"), 2).Text;
+					string thisName = row.FindElement(By.XPath("./td/div[@data-bind='text:Name']"), 2).Text;
 					if (thisID == packagingType.ID && thisName == packagingType.Name)
 					{
 						return appears;
@@ -1253,7 +1254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool NextDisabled()
 		{
-			var pagingControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
+			IWebElement pagingControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
 			if (pagingControl == null)
 			{
 				Report.Failure("Unable to find the paging control on grid navigation");
@@ -1263,7 +1264,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool Navigation(string navOption)
 		{
-			var pagingControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
+			IWebElement pagingControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
 			if (pagingControl == null)
 			{
 				Report.Failure("Unable to find the paging control on grid navigation");
@@ -1283,7 +1284,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			if (position.ToLower() == "current")
 			{
-				var activePageControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']/li[@class='active']/span"), 2);
+				IWebElement activePageControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']/li[@class='active']/span"), 2);
 				if (activePageControl == null)
 				{
 					Report.Failure("The page control could not be found on the My Packaging Types grid");
@@ -1293,7 +1294,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			if (position.ToLower() == "last")
 			{
-				var lastControl = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[@class='page-link']"), 2);
+				IList<IWebElement> lastControl = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[@class='page-link']"), 2);
 				if (lastControl.Count == 0)
 				{
 					Report.Info("Last page is: 1");
@@ -1306,7 +1307,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public PackagingTypeItem GetRandomPackagingTypeInGrid()
 		{
-			var rows = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']/tr"), 2);
+			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']/tr"), 2);
 
 			if (rows.Count == 0)
 			{
@@ -1314,8 +1315,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			var r = new Random();
 			int rInt = r.Next(1, rows.Count + 1); //for ints
-			var thisID = rows[rInt - 1].FindElement(By.XPath("./td/div/small"), 2).Text;
-			var thisName = rows[rInt - 1].FindElement(By.XPath("./td/div[@data-bind='text:Name']"), 2).Text;
+			string thisID = rows[rInt - 1].FindElement(By.XPath("./td/div/small"), 2).Text;
+			string thisName = rows[rInt - 1].FindElement(By.XPath("./td/div[@data-bind='text:Name']"), 2).Text;
 
 			var thisItem = new PackagingTypeItem {
 				ID = thisID,
@@ -1339,7 +1340,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public void EnterBrandName(string value)
 		{
-			var inputEl = this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='text']"), 2);
+			IWebElement inputEl = this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='text']"), 2);
 			if (inputEl == null)
 			{
 				Report.Failure("Could not find input element for Brand Name");
@@ -1349,7 +1350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ActiveIsChecked()
 		{
-			var inputEl = this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='checkbox' and @data-bind='checked:IsActive']"), 2);
+			IWebElement inputEl = this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='checkbox' and @data-bind='checked:IsActive']"), 2);
 			if (inputEl == null)
 			{
 				Report.Failure("Could not find 'Active?' checkbox input element in My Brands page");
@@ -1359,7 +1360,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickActive()
 		{
-			var inputEl = this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='checkbox' and @data-bind='checked:IsActive']"), 2);
+			IWebElement inputEl = this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='checkbox' and @data-bind='checked:IsActive']"), 2);
 			if (inputEl == null)
 			{
 				Report.Failure("Could not find 'Active?' checkbox input element in My Brands page");
@@ -1369,15 +1370,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickSave()
 		{
-			var row = this.containerElement.FindElement(By.XPath(".//tr[.//a[@data-bind='click: save']]"), 2);
+			IWebElement row = this.containerElement.FindElement(By.XPath(".//tr[.//a[@data-bind='click: save']]"), 2);
 			var allRows = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr"), 2).ToList();
 			if (row == null)
 			{
 				Report.Failure("Could not find a row in the My Brands grid with the 'save' button");
 				return false;
 			}
-			var rowName = row.FindElement(By.XPath(".//input[@type='text']"), 2);
-			var rowIndex = allRows.IndexOf(row);
+			IWebElement rowName = row.FindElement(By.XPath(".//input[@type='text']"), 2);
+			int rowIndex = allRows.IndexOf(row);
 			Context.AddToContext("Saved brand name", rowName?.GetAttribute("value"));
 			Context.AddToContext("Saved brand row index", rowIndex);
 			return row.FindElement(By.XPath(".//a[@data-bind='click: save']"), 2).TryClick();
@@ -1402,7 +1403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string BrandName(int rowIndex)
 		{
 			Report.Info("Getting Brand name at row position: " + rowIndex);
-			var row = this.containerElement.FindElement(By.XPath("//tbody[@data-bind='foreach: productLines']/tr[" + rowIndex + "]"), 2);
+			IWebElement row = this.containerElement.FindElement(By.XPath("//tbody[@data-bind='foreach: productLines']/tr[" + rowIndex + "]"), 2);
 			if (row == null)
 			{
 				Report.Failure("There was no row showing at position: " + rowIndex);
@@ -1413,7 +1414,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string IsActiveText(int row, string brandName)
 		{
 			Report.Info("Getting 'Active?' text at row number: " + row);
-			var textEl = this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[" + row + "][.//span[text()='" + brandName + "']]//span[starts-with(@data-bind,'text: IsActive')]"), 2);
+			IWebElement textEl = this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[" + row + "][.//span[text()='" + brandName + "']]//span[starts-with(@data-bind,'text: IsActive')]"), 2);
 			if (textEl == null)
 			{
 				Report.Failure("Unable to locate 'Active?' text element for the My Brands row at index: " + row);
@@ -1434,22 +1435,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			//refocus in case previous search results are open
 			this.containerElement.Click();
-			var placeholderEl = this.containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 2);
+			IWebElement placeholderEl = this.containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 2);
 			if (!placeholderEl.TryClick())
 			{
 				Report.Info("Could not find the search field element");
 				return false;
 			}
-			var inputEl = this.containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+			IWebElement inputEl = this.containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
 			if (inputEl == null)
 			{
 				Report.Failure("Could not find the search field input");
 				return false;
 			}
 			inputEl.EnterText(value);
-			var searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+			IWebElement searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 			int i = 0;
-			var results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+			IList<IWebElement> results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 			while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 0.5) == null && i < 20)
 			{
 				results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 0.5);
@@ -1467,27 +1468,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickSearchResult(string name, string cas)
 		{
-			var resultsName = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]//span[@class='component-name']"), 2);
+			IList<IWebElement> resultsName = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]//span[@class='component-name']"), 2);
 			if (resultsName.Count == 0 && GeneralUtilities.Wait_for_load_finish())
 			{
 				Report.Info("Unable to locate any search results with chemical name!");
 				return false;
 			}
-			var nameMatch = resultsName.FirstOrDefault(x => x.GetValue().Trim().ToLower() == name.Trim().ToLower());
+			IWebElement nameMatch = resultsName.FirstOrDefault(x => x.GetValue().Trim().ToLower() == name.Trim().ToLower());
 			if (nameMatch == null)
 			{
 				Report.Info("There was no match on name, so picking on CAS Number: " + cas);
-				var resultsCAS = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]//span[@class='text-muted']"), 2);
+				IList<IWebElement> resultsCAS = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]//span[@class='text-muted']"), 2);
 				if (resultsCAS.Count == 0)
 				{
 					Report.Info("Unable to locate any search results with chemical name!");
 					return false;
 				}
-				var casMatch = resultsCAS.FirstOrDefault(x => x.GetValue().Trim().ToLower() == cas.Trim().ToLower());
+				IWebElement casMatch = resultsCAS.FirstOrDefault(x => x.GetValue().Trim().ToLower() == cas.Trim().ToLower());
 				if (casMatch == null)
 				{
-					var results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
-					var firstName = results.FirstOrDefault().FindElement(By.XPath(".//span[1]"), 2).GetValue();
+					IList<IWebElement> results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					string firstName = results.FirstOrDefault().FindElement(By.XPath(".//span[1]"), 2).GetValue();
 					Report.Info("There was no match on name, so selected the first search result with name: " + firstName);
 					return results.FirstOrDefault().TryClick();
 				}
@@ -1500,7 +1501,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var rList = new List<SearchResult>();
 			var results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option') and not(@aria-disabled)]"), 2).ToList();
-			foreach (var result in results)
+			foreach (IWebElement result in results)
 			{
 				rList.Add(new SearchResult {
 					CAS = result.FindElement(By.XPath(".//span[@class='text-muted']"), 2).Text,
@@ -1547,7 +1548,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			if (position.ToLower() == "current")
 			{
-				var activePageControl = this.containerElement.FindElement(By.XPath(".//div[@id='settings']//ul[starts-with(@class,'pagination')]/li[@class='active']/span"), 2);
+				IWebElement activePageControl = this.containerElement.FindElement(By.XPath(".//div[@id='settings']//ul[starts-with(@class,'pagination')]/li[@class='active']/span"), 2);
 				if (activePageControl == null)
 				{
 					Report.Failure("The page control could not be found on the My Packaging Types grid");
@@ -1557,7 +1558,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			if (position.ToLower() == "last")
 			{
-				var lastControl = this.containerElement.FindElements(By.XPath(".//div[@id='settings']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+				IList<IWebElement> lastControl = this.containerElement.FindElements(By.XPath(".//div[@id='settings']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
 				if (lastControl.Count == 0)
 				{
 					Report.Info("Last page is: 1");
@@ -1618,7 +1619,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var rList = new List<IngredientItem>();
 			selMyIngredients.ClickPage("1");
 			int pageNumber = selMyIngredients.GetPage("current");
-			var ingredientNumber = 1;
+			int ingredientNumber = 1;
 			if (pageNumber == -1)
 			{
 				Report.Failure("Could not get current page number from the grid");
@@ -1627,7 +1628,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int lastPageNumber = selMyIngredients.GetPage("last");
 			while (pageNumber <= lastPageNumber && pageNumber != -1)
 			{
-				var rowCount = selMyIngredients.IngredientCount();
+				int rowCount = selMyIngredients.IngredientCount();
 				for (int i = 1; i <= rowCount; i++)
 				{
 					rList.Add(selMyIngredients.GetIngredient(i, ingredientNumber));
@@ -1670,14 +1671,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Clicking Page: " + ingredient.Page);
 			this.ClickPage(ingredient.Page.ToString());
-			var ingredientRow = this.containerElement.FindElement(By.XPath(".//div[@id='settings']//tbody/tr[" + ingredient.Row + "]"), 2);
+			IWebElement ingredientRow = this.containerElement.FindElement(By.XPath(".//div[@id='settings']//tbody/tr[" + ingredient.Row + "]"), 2);
 			var edited = new List<bool>();
 			if (ingredientRow == null)
 			{
 				Report.Failure("Row: " + ingredient.Row + " was not visible");
 				return false;
 			}
-			var publicallyDislosed = ingredientRow.FindElement(By.XPath(".//input[contains(@data-bind,'checked: isDisclosed')]"), 2);
+			IWebElement publicallyDislosed = ingredientRow.FindElement(By.XPath(".//input[contains(@data-bind,'checked: isDisclosed')]"), 2);
 			if (publicallyDislosed == null)
 			{
 				Report.Failure("Could not find Publicly Dislosed checkbox");
@@ -1685,7 +1686,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Info("Ingredient: " + ingredient.Index + ". Setting Publicly Disclosed checbox to: " + ingredient.PublicallyDisclosed);
 			edited.Add(publicallyDislosed.Checked() == ingredient.PublicallyDisclosed || publicallyDislosed.TryClick());
-			var tradeSecret = ingredientRow.FindElement(By.XPath(".//input[contains(@data-bind,'checked: isTradeSecret')]"), 2);
+			IWebElement tradeSecret = ingredientRow.FindElement(By.XPath(".//input[contains(@data-bind,'checked: isTradeSecret')]"), 2);
 			if (tradeSecret == null)
 			{
 				Report.Failure("Could not find Trade Secret checkbox");
@@ -1693,7 +1694,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Info("Ingredient: " + ingredient.Index + ". Setting Trade Secret checbox to: " + ingredient.TradeSecret);
 			edited.Add(tradeSecret.Checked() == ingredient.TradeSecret || tradeSecret.TryClick());
-			var publicName = ingredientRow.FindElement(By.XPath(".//select[contains(@data-bind,'value: publicName')]"), 2);
+			IWebElement publicName = ingredientRow.FindElement(By.XPath(".//select[contains(@data-bind,'value: publicName')]"), 2);
 			if (publicName == null)
 			{
 				Report.Failure("Could not find Public Name option");
