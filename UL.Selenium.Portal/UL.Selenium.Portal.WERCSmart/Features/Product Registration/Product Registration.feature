@@ -25,10 +25,6 @@ Scenario: Create a new product
 	Given I click the Register New Product icon in the Navigation Pane
 	When I click continue
 
-Scenario: [38192] Product Comments screen - 200 character limit
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-
-#Jacob working on 38192
 @TReVorId:22124
 Scenario: [63705] New Product - BCP
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
