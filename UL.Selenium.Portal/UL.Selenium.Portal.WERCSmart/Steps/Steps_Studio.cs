@@ -18,14 +18,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on publish this Document to open current document popup")]
 		public void IClickOnPublishThisDocumentToOpenCurrentDocumentPopup()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("publish"),
 				"Failed to click publish tool bar option", "Clicked publish tool bar option");
 
-			CurrentDocument thisCurrentDocument = new CurrentDocument();
+			var thisCurrentDocument = new CurrentDocument();
 			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load",
 				"Current document loaded");
 
@@ -35,7 +35,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in Power Designer Plus page I click on tab: (.*)")]
 		public void GivenInPowerDesignerPlusPageIClickOnTab(string tab)
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickTabOption(tab), "Failed to click tab: " + tab,
@@ -45,12 +45,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on edit button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickEditButton(), "Failed to click edit button",
 				"Clicked edit button");
 			Delay.Seconds(3);
-			PDEditPage thisPdEditPage = new PDEditPage();
+			var thisPdEditPage = new PDEditPage();
 			Report.Info("Wait for PD Edit page to load");
 			Report.IsTrue(thisPdEditPage.Wait_for_load(120), "Edit page has failed to load", "Edit page has loaded");
 		}
@@ -58,13 +58,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on apply rules button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickApplyRulesButton(),
 				"Failed to click apply rules button",
 				"Clicked apply rules button");
-			ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
+			var thisApplyRulesPage = new ApplyRulesPage();
 			Report.IsTrue(thisApplyRulesPage.Wait_for_load(60), "Apply rules page has failed to load",
 				"Apply rules page has loaded");
 		}
@@ -72,13 +72,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on document queue button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("document queue"),
 				"Failed to click document queue button",
 				"Clicked document queue button");
-			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			var thisDocumentQueuePage = new DocumentQueuePage();
 			Report.IsTrue(thisDocumentQueuePage.Wait_for_load(60), "Document queue page has failed to load",
 				"Document queue page has loaded");
 		}
@@ -86,14 +86,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on the product attributes button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentAttributesButton()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("attributes"),
 				"Failed to click the product attributes button",
 				"Clicked the product attributes button");
 			Delay.Seconds(5);
-			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
+			var thisProductAttributePage = new ProductAttributePage();
 			Report.IsTrue(thisProductAttributePage.Wait_for_load(60), "Product attribute page has failed to load",
 				"Product attribute page has loaded");
 
@@ -103,7 +103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InCurrentDocumentPageSelectCheckbox(string checkbox)
 		{
 			Report.Info("Selecting checkbox: " + checkbox);
-			CurrentDocument thisCurrentDocument = new CurrentDocument();
+			var thisCurrentDocument = new CurrentDocument();
 			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load", "Current document loaded");
 			Report.IsTrue(thisCurrentDocument.SetCheckBox(checkbox, true), "Failed to set checkbox: " + checkbox, "Set checkbox: " + checkbox);
 			Report.Screenshot();
@@ -112,7 +112,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close Current Document")]
 		public void GivenICloseCurrentDocument()
 		{
-			CurrentDocument thisCurrentDocument = new CurrentDocument();
+			var thisCurrentDocument = new CurrentDocument();
 			thisCurrentDocument.Close();
 		}
 
@@ -122,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Beginning confirm that alert matches what is expected.");
 			Delay.Seconds(2);
-			CurrentDocument thisCurrentDocument = new CurrentDocument();
+			var thisCurrentDocument = new CurrentDocument();
 			Report.Info("Get alert text");
 			string alertText = "";
 			try
@@ -144,7 +144,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Alert is showing as: " + alertText);
 			string regExPattern = @"\s[ABCDEFGHIJKLMNOPQRSTUVWZYZ1234567890]{3,7}[\,\\r]?";
 			MatchCollection mc = Regex.Matches(alertText, regExPattern);
-			List<string> codes = new List<string>();
+			var codes = new List<string>();
 
 			foreach (Match match in mc)
 			{
@@ -185,11 +185,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
-				StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				var thisStudioPowerDesignerPlusDesignMode =
 					new StudioPowerDesignerPlusDesignMode();
 				thisStudioPowerDesignerPlusDesignMode.DoubleClickDataCode(thisRow["datacode"]);
 				Delay.Seconds(1);
-				GraphicEditor thisGraphicEditor = new GraphicEditor();
+				var thisGraphicEditor = new GraphicEditor();
 				Report.IsTrue(thisGraphicEditor.Wait_for_load(60), "Graphic editor has not loaded",
 					"Graphic editor has loaded.");
 				string valueToSearchFor = "";
@@ -229,7 +229,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Edit Toolbar page I check the following items:")]
 		public void GivenInTheEditToolbarPageICheckTheFollowingItems(Table table)
 		{
-			PDEditPage thisPDiEditPage = new PDEditPage();
+			var thisPDiEditPage = new PDEditPage();
 			Report.IsTrue(thisPDiEditPage.Wait_for_load(30), "Edit tool bar page is not open",
 				"Edit toolbar page is open");
 			foreach (TableRow thisRow in table.Rows)
@@ -242,7 +242,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Edit Toolbar page I click: (.*)")]
 		public void GivenInTheEditToolbarPageIClick(string button)
 		{
-			PDEditPage thisPDiEditPage = new PDEditPage();
+			var thisPDiEditPage = new PDEditPage();
 			if (button.ToLower() == "save")
 			{
 				Report.IsTrue(thisPDiEditPage.ClickSave(), "Failed to click save",
@@ -258,7 +258,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Apply Rules Page I click on the following apply radio button: (.*)")]
 		public void InApplyRulesPageIClickOnTheFollowingApplyRadioButton(string button)
 		{
-			ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
+			var thisApplyRulesPage = new ApplyRulesPage();
 			Report.IsTrue(thisApplyRulesPage.SetApplyOption(button), "Failed to click " + button + " button",
 				"Clicked " + button);
 		}
@@ -266,11 +266,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Apply Rules Page I click on the single rule ellipsis button")]
 		public void InApplyRulesPageIClickOnTheSingleRulesEllipsisButton()
 		{
-			ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
+			var thisApplyRulesPage = new ApplyRulesPage();
 			Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis",
 				"Clicked single rules ellipsis");
 			Delay.Seconds(3);
-			SelectRulesPage thisSelectRulesPage = new SelectRulesPage();
+			var thisSelectRulesPage = new SelectRulesPage();
 			Report.IsTrue(thisSelectRulesPage.Wait_for_load(120), "Select rules page has not loaded",
 				"Select rules page has loaded");
 		}
@@ -278,10 +278,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Select Rules Popup Page I click on the filter icon")]
 		public void InSelectRulesPageIClickOnFilterIcon()
 		{
-			SelectRulesPage thisSelectRulesPage = new SelectRulesPage();
+			var thisSelectRulesPage = new SelectRulesPage();
 			Report.IsTrue(thisSelectRulesPage.ClickFilterButton(), "Failed to click filter button",
 				"Clicked filter button");
-			SelectRulesFilter thisSelectRulesFilter = new SelectRulesFilter();
+			var thisSelectRulesFilter = new SelectRulesFilter();
 			Report.IsTrue(thisSelectRulesFilter.Wait_for_load(), "Select rules popup has not loaded",
 				"Select rules popup has loaded");
 		}
@@ -289,7 +289,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Select Rules Filter Popup Page I enter the following: (.*) in textbox: (.*)")]
 		public void InSelectRulesFilterPopupIEnterValueInTextBox(string value, string textbox)
 		{
-			SelectRulesFilter thisSelectRulesFilter = new SelectRulesFilter();
+			var thisSelectRulesFilter = new SelectRulesFilter();
 			Report.IsTrue(thisSelectRulesFilter.EnterInTextBox(textbox, value),
 				"Failed to enter value: " + value + " in textbox: " + textbox,
 				"Succeeded in entering value: " + value + " in textbox: " + textbox);
@@ -298,7 +298,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Select Rules Filter Popup Page I select the following: (.*) from selectbox: (.*)")]
 		public void InSelectRulesFilterPopupISelectFromSelectBox(string value, string selectbox)
 		{
-			SelectRulesFilter thisSelectRulesFilter = new SelectRulesFilter();
+			var thisSelectRulesFilter = new SelectRulesFilter();
 			Report.IsTrue(thisSelectRulesFilter.SelectFromSelectBox(selectbox, value),
 				"Failed to enter value: " + value + " in selectbox: " + selectbox,
 				"Succeeded in entering value: " + value + " in selectbox: " + selectbox);
@@ -307,7 +307,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Select Rules Filter Popup Page I click button: (.*)")]
 		public void InSelectRulesFilterPopupIClickButton(string button)
 		{
-			SelectRulesFilter thisSelectRulesFilter = new SelectRulesFilter();
+			var thisSelectRulesFilter = new SelectRulesFilter();
 
 			switch (button.ToLower())
 			{
@@ -333,7 +333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Select Rules Popup Page I click first record to select")]
 		public void InSelectRulesPageIClickOnFirstRecord()
 		{
-			SelectRulesPage thisSelectRulesPage = new SelectRulesPage();
+			var thisSelectRulesPage = new SelectRulesPage();
 			thisSelectRulesPage.Wait_for_load(30);
 			Report.IsTrue(thisSelectRulesPage.SelectTopRule(), "Failed to select first rule", "Selected first rule");
 			Delay.Seconds(3);
@@ -353,7 +353,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InApplyRulesPageIClickOnButton(string button)
 		{
 			Report.Info("Beginning: In Apply Rules Page I click on the button: " + button);
-			ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
+			var thisApplyRulesPage = new ApplyRulesPage();
 			try
 			{
 				thisApplyRulesPage.Wait_for_load(60);
@@ -401,7 +401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on document queue to open document queue popup")]
 		public void IClickOnPublishThisDocumentToOpenDocumentQueuePopup()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
@@ -413,7 +413,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("There may have been a problem clicking the document queue tool bar option...");
 			}
 
-			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			var thisDocumentQueuePage = new DocumentQueuePage();
 			Report.IsTrue(thisDocumentQueuePage.Wait_for_load(60), "Document Queue page failed to load",
 				"Document queue page loaded");
 		}
@@ -421,12 +421,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In document queue popup I click on filter icon")]
 		public void InDocumentQueuePopupIClickOnFilterIcon()
 		{
-			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			var thisDocumentQueuePage = new DocumentQueuePage();
 			Report.IsTrue(thisDocumentQueuePage.Wait_for_load(60), "Document Queue page failed to load",
 				"Document queue page loaded");
 			Report.IsTrue(thisDocumentQueuePage.ClickFilterButton(), "Failed to click filter button",
 				"Clicked filter button");
-			SelectDocumentQueueFilter thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
+			var thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
 			Report.IsTrue(thisSelectDocumentQueueFilter.Wait_for_load(60), "Document Queue filter page failed to load",
 				"Document queue filter page loaded");
 
@@ -435,7 +435,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In document queue filter page I enter value: (.*) in select box: (.*)")]
 		public void InDocumentQueueFilterPageIEnterValueInSelectBox(string value, string selectBox)
 		{
-			SelectDocumentQueueFilter thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
+			var thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
 			Report.IsTrue(thisSelectDocumentQueueFilter.Wait_for_load(60), "Document Queue filter page failed to load",
 				"Document queue filter page loaded");
 			Report.IsTrue(thisSelectDocumentQueueFilter.SelectFromSelectBox(selectBox, value),
@@ -452,7 +452,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var productDetails = (ProductInformation)Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 				value = productDetails.Id;
 			}
-			SelectDocumentQueueFilter thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
+			var thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
 			Report.IsTrue(thisSelectDocumentQueueFilter.Wait_for_load(60), "Document Queue filter page failed to load",
 				"Document queue filter page loaded");
 			Report.IsTrue(thisSelectDocumentQueueFilter.EnterInTextBox(entryBox, value),
@@ -464,7 +464,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In document queue filter page I click on apply")]
 		public void InDocumentQueueFilterPageIClickOnApply()
 		{
-			SelectDocumentQueueFilter thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
+			var thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
 			Report.IsTrue(thisSelectDocumentQueueFilter.ClickApply(), "Failed to click on apply",
 				"Click on apply");
 		}
@@ -472,7 +472,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In document queue filter page I click on select all checkbox")]
 		public void InDocumentQueueFilterPageIClickOnSelectAllCheckbox()
 		{
-			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			var thisDocumentQueuePage = new DocumentQueuePage();
 			thisDocumentQueuePage.Wait_for_load();
 			Report.IsTrue(thisDocumentQueuePage.CheckSelectAllCheckbox(), "Failed to click select all checkbox",
 				"Clicked select all checkbox");
@@ -482,7 +482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InDocumentQueueFilterPageIClickOnProcessDocuments()
 		{
 			Report.Info("Beginning: In document queue filter page I click on process documents");
-			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			var thisDocumentQueuePage = new DocumentQueuePage();
 			thisDocumentQueuePage.Wait_for_load();
 			Report.IsTrue(thisDocumentQueuePage.ClickProcessDocuments(), "Failed to click process documents",
 				"Clicked process documents");
@@ -491,7 +491,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In document queue filter page I click on clone selected row")]
 		public void InDocumentQueueFilterPageIClickOnCloneSelectedRow()
 		{
-			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			var thisDocumentQueuePage = new DocumentQueuePage();
 			Report.IsTrue(thisDocumentQueuePage.ClickCloneSelectedRow(), "Failed to click clone selected row",
 				"Clicked clone selected row");
 		}
@@ -499,7 +499,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In document queue filter page I click on delete selected")]
 		public void InDocumentQueueFilterPageIClickOnDeleteSelected()
 		{
-			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			var thisDocumentQueuePage = new DocumentQueuePage();
 			Report.IsTrue(thisDocumentQueuePage.ClickDeleteSelected(), "Failed to click delete selected",
 				"Clicked delete selected");
 		}
@@ -507,19 +507,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In document queue filter page I click on close")]
 		public void InDocumentQueueFilterPageIClickOnClose()
 		{
-			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			var thisDocumentQueuePage = new DocumentQueuePage();
 			thisDocumentQueuePage.ClickClose();
-
-
 		}
 
 		[StepDefinition(@"I navigate to power designer plus")]
 		public void NavigateToPowerDesignerPlus()
 		{
-			StudioTopMenu thisTopMenu = new StudioTopMenu();
+			var thisTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
 			thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus");
-			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 			thisPowerDesignerPlus.ClickContinueButton();
@@ -528,7 +526,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see an alert with the following message: (.*)")]
 		public void IShouldSeeAnAlertAsFollows(string expectedAlertText)
 		{
-			CurrentDocument thisCurrentDocument = new CurrentDocument();
+			var thisCurrentDocument = new CurrentDocument();
 			string alertText = thisCurrentDocument.GetAlertText("");
 			if (alertText == null)
 			{
@@ -560,17 +558,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check the following items are showing in the Document Queue table")]
 		public void GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(Table table)
 		{
-			List<string> tableHeaders = table.Header.ToList();
+			var tableHeaders = table.Header.ToList();
 
-			DocumentQueuePage newDocumentQueuePage = new DocumentQueuePage();
+			var newDocumentQueuePage = new DocumentQueuePage();
 			Report.IsTrue(newDocumentQueuePage.Wait_for_load(30), "Document queue page failed to load",
 				"Document queue page loaded");
 			List<Document> listOfDocuments = newDocumentQueuePage.GetAllDocuments();
 			Report.Info(listOfDocuments.Count.ToString() + " documents found");
 
-			List<string> propertiesInDocument = new Document().GetType().GetProperties().Select(x => x.Name).ToList();
+			var propertiesInDocument = new Document().GetType().GetProperties().Select(x => x.Name).ToList();
 
-			List<string> notFoundInDocument = tableHeaders.Except(propertiesInDocument).ToList();
+			var notFoundInDocument = tableHeaders.Except(propertiesInDocument).ToList();
 
 			if (notFoundInDocument.Count() > 0)
 			{
@@ -581,7 +579,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Checking all rows in the table
 			foreach (TableRow thisRow in table.Rows)
 			{
-				List<string> actualHeaders = new List<string>();
+				var actualHeaders = new List<string>();
 				listOfDocuments = newDocumentQueuePage.GetAllDocuments();
 				//for each column in the table
 				foreach (string header in tableHeaders)
@@ -648,7 +646,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					idToSelect = productDetails.Id;
 				}
 
-				StudioSHAManager thisStudioShaManager = new StudioSHAManager();
+				var thisStudioShaManager = new StudioSHAManager();
 				Report.IsTrue(thisStudioShaManager.SelectProductByID(idToSelect),
 					"Failed to select item by id: " + idToSelect, "Selected item with id: " + idToSelect);
 			}
@@ -663,7 +661,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			try
 			{
-				StudioSHAManager thisStudioShaManager = new StudioSHAManager();
+				var thisStudioShaManager = new StudioSHAManager();
 				Report.IsTrue(thisStudioShaManager.ClickBottomMenuOption(menuItem), "Failed to click: " + menuItem,
 					"Clicked menu item: " + menuItem);
 			}
@@ -676,7 +674,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Process Products popup in SHAManager I select the following retailers")]
 		public void GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(Table table)
 		{
-			ProcessProducts thisProcessProducts = new ProcessProducts();
+			var thisProcessProducts = new ProcessProducts();
 			Report.IsTrue(thisProcessProducts.Wait_for_load(30), "Process products screen is not showing",
 				"Process products screen is showing");
 			foreach (TableRow tableRetailer in table.Rows)
@@ -697,7 +695,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Process Products popup in SHAManager I set the new status drop down list to be: (.*)")]
 		public void GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo(string status)
 		{
-			ProcessProducts thisProcessProducts = new ProcessProducts();
+			var thisProcessProducts = new ProcessProducts();
 			Report.IsTrue(thisProcessProducts.Wait_for_load(30), "Process products screen is not showing",
 				"Process products screen is showing");
 			Report.IsTrue(thisProcessProducts.SelectNewStatus(status), "Failed to select new status: " + status,
@@ -707,7 +705,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Process Products popup in SHAManager I click on update status button")]
 		public void GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton()
 		{
-			ProcessProducts thisProcessProducts = new ProcessProducts();
+			var thisProcessProducts = new ProcessProducts();
 			Report.IsTrue(thisProcessProducts.Wait_for_load(30), "Process products screen is not showing",
 				"Process products screen is showing");
 			Report.IsTrue(thisProcessProducts.ClickUpdateStatus(), "Failed to click update status",
@@ -718,7 +716,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Product Formulation page I click button: (.*)")]
 		public void InTheProductForulationPageIClickButton(string button)
 		{
-			ProductFormulationPage thisFormulationPage = new ProductFormulationPage();
+			var thisFormulationPage = new ProductFormulationPage();
 			Report.IsTrue(thisFormulationPage.Wait_for_load(30), "Product formulation screen is not showing",
 				"Product formulation screen is showing");
 			Report.IsTrue(thisFormulationPage.ClickButton(button), "Failed to click button: " + button,
@@ -728,7 +726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Create component page I add component")]
 		public void InTheCreateComponentPageIAddComponent(TechTalk.SpecFlow.Table component)
 		{
-			CreateComponentPage thisCreateComponentPage = new CreateComponentPage();
+			var thisCreateComponentPage = new CreateComponentPage();
 			Report.IsTrue(thisCreateComponentPage.Wait_for_load(30), "Create component screen is not showing",
 				"Create component screen is showing");
 			Report.IsTrue(thisCreateComponentPage.WaitForCAS(30), "CAS entry is not showing",
@@ -741,7 +739,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					string CASNo = component.Rows[0]["Component CAS"];
 					if (CASNo.ToLower().Contains("saved as"))
 					{
-						var savedAsItem = Context.GetFromContext(CASNo.Replace("saved as", "").Trim());
+						object savedAsItem = Context.GetFromContext(CASNo.Replace("saved as", "").Trim());
 						if (savedAsItem.GetType() == typeof(string))
 						{
 							CASNo = savedAsItem.ToString();
@@ -770,7 +768,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					string chemName = component.Rows[0]["Chemical Name"];
 					if (chemName.ToLower().Contains("saved as"))
 					{
-						var savedAsItem = Context.GetFromContext(chemName.Replace("saved as", "").Trim());
+						object savedAsItem = Context.GetFromContext(chemName.Replace("saved as", "").Trim());
 						if (savedAsItem.GetType() == typeof(string))
 						{
 							chemName = savedAsItem.ToString();
@@ -865,7 +863,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the Product Formulation page")]
 		public void GivenICloseTheProductFormulationPage()
 		{
-			ProductFormulationPage thisFormulationPage = new ProductFormulationPage();
+			var thisFormulationPage = new ProductFormulationPage();
 			Report.IsTrue(thisFormulationPage.Wait_for_load(30), "Product formulation screen is not showing",
 				"Product formulation screen is showing");
 			thisFormulationPage.ClickClose();
@@ -874,7 +872,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Power Designer Plus Welcome page I enter Select Source Product: (.*)")]
 		public void PowerDesignerPlusWelcomeIEnterSelectSourceProduct(string productID)
 		{
-			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.EnterSourceProduct(productID), $"Failed to enter {productID} into the Select Source Product field!", $"Successfully entered {productID} into the Select Source Product field");
 			Report.Info("Clicking Refresh");
 			thisPowerDesignerPlus.ClickRefreshButton();
@@ -884,7 +882,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IConfirmTheSelectedSubformatInThePdPlusPopupIs(string subFormat)
 		{
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
-			var selectedSubFormat = selStudioPowerDesignerPlus.SelectedSubFormat();
+			string selectedSubFormat = selStudioPowerDesignerPlus.SelectedSubFormat();
 			if (selectedSubFormat != null)
 			{
 				Report.IsTrue(selStudioPowerDesignerPlus.SelectedSubFormat() == subFormat,
@@ -933,7 +931,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Power Designer the phrase selector screen should open")]
 		public void ThenInPowerDesignerThePhraseSelectorScreenShouldOpen()
 		{
-			PhraseEditor thisPhraseEditor = new PhraseEditor();
+			var thisPhraseEditor = new PhraseEditor();
 			Report.IsTrue(thisPhraseEditor.Wait_for_load(60), "Phrase editor has not opened.",
 				"Phrase editor has opened");
 		}
@@ -942,7 +940,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInThePhraseSelectorScreenISelectPhrases(Table table)
 		{
 			bool addedSuccessfully = true;
-			PhraseEditor thisPhraseEditor = new PhraseEditor();
+			var thisPhraseEditor = new PhraseEditor();
 			if (!thisPhraseEditor.Wait_for_load(60))
 			{
 				throw new Exception("Phrase editor is not loaded");
@@ -1022,7 +1020,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the phrase selector screen I click button: (.*)")]
 		public void ThenInThePhraseSelectorScreenIClickButton(string button)
 		{
-			PhraseEditor thisPhraseEditor = new PhraseEditor();
+			var thisPhraseEditor = new PhraseEditor();
 			if (!thisPhraseEditor.Wait_for_load(60))
 			{
 				throw new Exception("Phrase editor is not loaded");
@@ -1037,11 +1035,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on home to navigate back to editing specific product saved as (.*)")]
 		public void GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(string savedAs)
 		{
-			StudioPowerDesignerPlusDesignMode thispd = new StudioPowerDesignerPlusDesignMode();
+			var thispd = new StudioPowerDesignerPlusDesignMode();
 			thispd.Wait_for_load(5);
 			thispd.ClickMenuAndSubmenuOptions("Home");
 			Delay.Seconds(3);
-			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 
@@ -1057,7 +1055,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			Delay.Seconds(1);
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var id = productDetails.Id;
+			string id = productDetails.Id;
 			thisPowerDesignerPlus.EnterSourceProduct(id);
 			thisPowerDesignerPlus.ClickRefreshButton();
 			Delay.Seconds(1);
@@ -1080,7 +1078,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on Product Attributes to open product attribute popup")]
 		public void IClickOnProductAttributesToOpenProductAttributePopup()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
@@ -1093,11 +1091,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Product Attributes Popup Page I click on the filter icon")]
 		public void InProductAttributePageIClickOnFilterIcon()
 		{
-			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
+			var thisProductAttributePage = new ProductAttributePage();
 			thisProductAttributePage.Wait_for_load(30);
 			Report.IsTrue(thisProductAttributePage.ClickToolbarItem("Filter"), "Failed to click filter button",
 				"Clicked filter button");
-			ProductAttributesFilter thisProductAttributesFilter = new ProductAttributesFilter();
+			var thisProductAttributesFilter = new ProductAttributesFilter();
 			Report.IsTrue(thisProductAttributesFilter.Wait_for_load(), "Product attribute popup has not loaded",
 				"Product attributes popup has loaded");
 		}
@@ -1105,7 +1103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Product Attributes Filter Popup Page I enter the following: (.*) in textbox: (.*)")]
 		public void InProductAttributeFilterPopupIEnterValueInTextBox(string value, string textbox)
 		{
-			ProductAttributesFilter thisProductAttributesFilter = new ProductAttributesFilter();
+			var thisProductAttributesFilter = new ProductAttributesFilter();
 			Report.IsTrue(thisProductAttributesFilter.EnterInTextBox(textbox, value),
 				"Failed to enter value: " + value + " in textbox: " + textbox,
 				"Succeeded in entering value: " + value + " in textbox: " + textbox);
@@ -1114,7 +1112,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Product Attributes Filter Popup Page I select the following: (.*) from selectbox: (.*)")]
 		public void InProductAttributeFilterPopupISelectFromSelectBox(string value, string selectbox)
 		{
-			ProductAttributesFilter thisProductAttributesFilter = new ProductAttributesFilter();
+			var thisProductAttributesFilter = new ProductAttributesFilter();
 			Report.IsTrue(thisProductAttributesFilter.SelectFromSelectBox(selectbox, value),
 				"Failed to enter value: " + value + " in selectbox: " + selectbox,
 				"Succeeded in entering value: " + value + " in selectbox: " + selectbox);
@@ -1123,7 +1121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Product Attributes Filter Popup Page I click button: (.*)")]
 		public void InProductAttributeFilterPopupIClickButton(string button)
 		{
-			ProductAttributesFilter thisProductAttributesFilter = new ProductAttributesFilter();
+			var thisProductAttributesFilter = new ProductAttributesFilter();
 
 			switch (button.ToLower())
 			{
@@ -1149,7 +1147,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Product Attributes Popup Page I should see (\d+) results")]
 		public void InProductAttributePageIShouldSeeXResults(int expectedResults)
 		{
-			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
+			var thisProductAttributePage = new ProductAttributePage();
 			Report.IsTrue(thisProductAttributePage.GetRecordCount() == expectedResults, "Reults were not as expected",
 				"Results count was as expected");
 		}
@@ -1157,7 +1155,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on check in\/out button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnInOutButton()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("in out"),
@@ -1168,7 +1166,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Assign\/Reassign products I click on: (Check In|Check Out)")]
 		public void GivenInAssignProductsPopupIClickOnCheckInOrCheckOut(string checkInOrCheckOut)
 		{
-			AssignReassignProducts thisAssignReassignProducts = new AssignReassignProducts();
+			var thisAssignReassignProducts = new AssignReassignProducts();
 			thisAssignReassignProducts.Wait_for_load();
 			Report.IsTrue(thisAssignReassignProducts.ClickButton(checkInOrCheckOut),
 				"Failed to click button: " + checkInOrCheckOut,
@@ -1184,7 +1182,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In power designer popup I set language option: (.*)")]
 		public void InPowerDesignerPopupISetLanguageOption(string language)
 		{
-			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 			Report.Info("Setting power designer plus options...");
@@ -1195,7 +1193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In power designer popup I set subformat option: (.*)")]
 		public void InPowerDesignerPopupISetSubFormatOption(string subformat)
 		{
-			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 			Report.Info("Setting power designer plus options...");
@@ -1207,7 +1205,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In power designer popup I set format: (.*) and subformat: (.*)")]
 		public void InPowerDesignerPopupISetFormatAndSubFormatOption(string format, string subformat)
 		{
-			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 			Report.IsTrue(thisPowerDesignerPlus.SelectFormat(format, subformat), "Failed to set format option",
@@ -1217,7 +1215,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In power designer popup I select product id option: (.*)")]
 		public void InPowerDesignerPopupISelectProductIDOption(string productIDOption)
 		{
-			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption(productIDOption), "Failed to set action option",
@@ -1227,7 +1225,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In power designer popup I select any Format/Subformat")]
 		public void InPowerDesignerPopupISelectAnyFormatSubFormatOption()
 		{
-			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 			Report.IsTrue(thisPowerDesignerPlus.SelectRandomFormat(), "Failed to select ranodm format",

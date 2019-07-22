@@ -121,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenTheHomeScreenShouldLoad()
 		{
 			var selHomepage = new Homepage();
-			Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
+			Report.IsTrue(selHomepage.WaitForContainerToBeVisible(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
@@ -178,7 +178,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;
-			while ((!selHomepage.Wait_for_load(1) || !selTopMenuBar.Wait_for_load(1)) && i < 4)
+			while ((!selHomepage.WaitForContainerToBeVisible(1) || !selTopMenuBar.Wait_for_load(1)) && i < 4)
 			{
 				Report.Info("========== Login Attempt: " + i + " ==========");
 				var selLogin = new Login();
@@ -193,7 +193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Clicking login");
 				Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
 				selHomepage = new Homepage();
-				if (selHomepage.Wait_for_load())
+				if (selHomepage.WaitForContainerToBeVisible())
 				{
 					Report.Success("Successfully logged in!");
 					GeneralUtilities.Wait_for_load_finish();
@@ -206,7 +206,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Delay.Seconds(Delay.SpeedFactor * 1);
 
 					selHomepage = new Homepage();
-					if (selHomepage.Wait_for_load(10))
+					if (selHomepage.WaitForContainerToBeVisible(10))
 					{
 						Report.Success("Successfully logged in!");
 						GeneralUtilities.Wait_for_load_finish();
@@ -285,7 +285,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			selHomepage = new Homepage();
 			// check for home page
-			if (selHomepage.Wait_for_load())
+			if (selHomepage.WaitForContainerToBeVisible())
 			{
 				Report.Success("Successfully logged in!");
 				GeneralUtilities.Wait_for_load_finish();
@@ -299,7 +299,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Closing modal dialog");
 				modalDialog.Click_Closex();
 				selHomepage = new Homepage();
-				if (selHomepage.Wait_for_load())
+				if (selHomepage.WaitForContainerToBeVisible())
 				{
 					Report.Success("Successfully logged in!");
 					GeneralUtilities.Wait_for_load_finish();
@@ -384,7 +384,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[When(@"I wait for (.*) seconds")]
+		[StepDefinition(@"I wait for (.*) seconds")]
 		public void WhenIWaitForSeconds(int p0)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " I wait for " + p0.ToString() + " seconds.");
@@ -400,25 +400,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I scroll to the (top|bottom) of the page")]
-		public void ThenIScrollToTheOfThePage(string topbottom)
+		public void ThenIScrollToTheOfThePage(string location)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Scroll to " + topbottom + " of page");
-			try
+			Report.Info("Attempting to scroll to the " + location + " of the page");
+			if (location == "top")
 			{
-				Report.Info("Attempting to scroll to the " + topbottom + " of the page");
-				if (topbottom == "top")
-				{ GeneralUtilities.ScrollToTopOfPage(); }
-				else
-				{ GeneralUtilities.ScrollToBottomOfPage(); }
-
-				Report.Screenshot();
-				Report.Success("Scrolled to the " + topbottom + " of the page!");
+				GeneralUtilities.ScrollToTopOfPage();
 			}
-			catch (Exception ex)
+			else if (location == "bottom")
 			{
-				Report.Failure(ex.Message);
-				throw;
+				GeneralUtilities.ScrollToBottomOfPage();
 			}
+			else
+			{
+				Report.Error("Step parameter must be 'top' or 'bottom'");
+				return;
+			}
+			Report.Screenshot();
+			Report.Success("Scrolled to the " + location + " of the page!");
 		}
 
 		[StepDefinition(@"I navigate to the landing page")]
@@ -751,7 +750,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)NTTQA.Selenium.SpecFlow.Context.GetFromContext("Matching");
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
 				string emailBody = EmailFunctions.getEmailBody(email);
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
@@ -759,7 +758,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Body of the Email was: " + emailBody);
 				string actualTrimmed = bodyDecode.Replace(" ", "");
 				string expectedTrimmed = bodyText.Replace(" ", "");
-				Report.IsTrue(actualTrimmed == expectedTrimmed, "Body text did not match correctly!", "Body text matched correctly!");
+				Report.IsTrue(actualTrimmed == expectedTrimmed, "Body text did not match correctly! Expected: " + bodyText, "Body text matched correctly!");
 			}
 			catch (Exception ex)
 			{
@@ -778,7 +777,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)NTTQA.Selenium.SpecFlow.Context.GetFromContext("Matching");
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
 				string emailBody = EmailFunctions.getEmailBody(email);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
@@ -1087,7 +1086,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					this.GivenILogout();
 					continue;
 				}
-				if (!new Homepage().Wait_for_load())
+				if (!new Homepage().WaitForContainerToBeVisible())
 				{
 					// if 90 day expiry attempt to reset it
 					var passwordExpired = new PasswordExpired();
