@@ -945,11 +945,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"I check the Comment error message shows: (.*)")]
-		public void CheckTheCommentErrorMessageShows(string p0)
+		public void CheckTheCommentErrorMessageShows(string expected)
 		{
-			string actual;
 			var np = new NewProduct();
-			Report.IsTrue(np.CommentErrorDisplayed(p0, out actual), "The error text was " + actual + ", but expected " + p0, "The error text was " + actual + " as expected.");
+			Report.IsTrue(np.CommentErrorDisplayed(expected, out string actual), "The error text was " + actual + ", but expected " + expected, "The error text was " + actual + " as expected.");
 		}
 
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
@@ -1145,12 +1144,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ErrorMessagesAreShowingForItem(string section, string should, string pipeDelimitedErrorMessages)
 		{
 			Delay.Seconds(1);
-			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
-			var errorMessages = new NewProduct().GetErrorsForSection(section);
+			string[] errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			List<string> errorMessages = new NewProduct().GetErrorsForSection(section);
 			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
 			if (should == "should")
 			{
-				foreach (var item in errorMessagesExpected)
+				foreach (string item in errorMessagesExpected)
 				{
 					Report.IsTrue(errorMessages.Any(e => e.Contains(item)),
 						"Failed to find the error message: " + item + " under section: " + section + "!",
@@ -1159,7 +1158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			if (should == "should not")
 			{
-				foreach (var item in errorMessagesExpected)
+				foreach (string item in errorMessagesExpected)
 				{
 					Report.IsFalse(errorMessages.Contains(item.Trim()),
 						"The error message: " + item + " was displayed under section" + section + " when it should not be.",
@@ -1173,8 +1172,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ErrorMessagesAreShowingForItemNoSpecialChars(string section, string should, string pipeDelimitedErrorMessages)
 		{
 			Delay.Seconds(1);
-			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
-			var errorMessages = new NewProduct().GetErrorsForSection(section);
+			string[] errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			List<string> errorMessages = new NewProduct().GetErrorsForSection(section);
 			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
 			var strippedErrorMessages = new List<string>();
 			foreach (string message in errorMessages)
@@ -1184,7 +1183,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			if (should == "should")
 			{
-				foreach (var item in errorMessagesExpected)
+				foreach (string item in errorMessagesExpected)
 				{
 					Report.IsTrue(strippedErrorMessages.Any(e => e.Contains(this.RemoveSpecialCharacters(item))),
 						"Failed to find the error message: " + item + " under section: " + section + "!",
@@ -1193,7 +1192,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			if (should == "should not")
 			{
-				foreach (var item in errorMessagesExpected)
+				foreach (string item in errorMessagesExpected)
 				{
 					Report.IsFalse(strippedErrorMessages.Contains(this.RemoveSpecialCharacters(item.Trim())),
 						"The error message: " + item + " was displayed under section" + section + " when it should not be.",
@@ -1222,17 +1221,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (value.StartsWith("~saved as"))
 			{
-				var savedAs = value.Replace("~saved as", "").Trim();
+				string savedAs = value.Replace("~saved as", "").Trim();
 				value = Context.GetFromContext(savedAs)?.ToString();
 				if (value == null)
 				{
 					throw new Exception("Could not find item in context: " + savedAs + " for checking field input is correct value!");
 				}
 			}
-			var showing = new NewProduct().SelectedOptionsForSection(section);
+			List<string> showing = new NewProduct().SelectedOptionsForSection(section);
 			Report.Info("Value(s) showing were: " + string.Join(", ", showing));
 			var expected = value.Split('|').Select(x => x.Trim()).ToList();
-			foreach (var expec in expected)
+			foreach (string expec in expected)
 			{
 				Report.IsTrue(showing.Contains(expec), "Failed to find the selected value: " + expec + " in the section: " + section + "!", string.Format("Successfully found {0} in section: {1}", expec, section), false, false);
 			}
@@ -1243,7 +1242,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmThatIsNotTheOnlyOptionForSection(string option, string section)
 		{
 			var selNewProduct = new NewProduct();
-			var options = selNewProduct.GetAllOptionsForSection(section);
+			List<string> options = selNewProduct.GetAllOptionsForSection(section);
 			if (!options.Contains(option))
 			{
 				Report.Failure($"Option: '{option}' was not available in section: '{section}'!");
@@ -1265,8 +1264,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void VOCLimitsTableHasEntryForRegulation(string regulation)
 		{
 			var selNewProduct = new NewProduct();
-			var displayed = selNewProduct.GetDisplayedVocLimits();
-			var expectedRegulation = "";
+			List<VocLimits> displayed = selNewProduct.GetDisplayedVocLimits();
+			string expectedRegulation = "";
 			if (regulation == "OTC")
 			{
 				expectedRegulation = "OTC Model rule limit";
@@ -1283,13 +1282,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I should see the following Voc Limits present:")]
 		public void ThenIShouldSeeTheFollowingVocLimitsPresent(Table information)
 		{
-			var expected = information.CreateSet<VocLimits>();
+			IEnumerable<VocLimits> expected = information.CreateSet<VocLimits>();
 			var voclimits = new NewProduct();
-			var displayed = voclimits.GetDisplayedVocLimits();
-			foreach (var expectedinfo in expected)
+			List<VocLimits> displayed = voclimits.GetDisplayedVocLimits();
+			foreach (VocLimits expectedinfo in expected)
 			{
 				Report.Info("Checking use: " + expectedinfo.Use + " and Voc Compliance Limit: " + expectedinfo.VocComplianceLimit + " and Regulation: " + expectedinfo.Regulation);
-				var matchingType = displayed.Where(x => x.Use == expectedinfo.Use);
+				IEnumerable<VocLimits> matchingType = displayed.Where(x => x.Use == expectedinfo.Use);
 				if (matchingType.Count() == 0)
 				{
 					Report.Failure("No Use data displayed: " + expectedinfo.Use + " were displayed!");
@@ -1297,7 +1296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 
 				bool passed = false;
-				foreach (var matched in matchingType)
+				foreach (VocLimits matched in matchingType)
 				{
 					if (matched.Use.Contains(expectedinfo.Use) && matched.VocComplianceLimit == expectedinfo.VocComplianceLimit && matched.Regulation == expectedinfo.Regulation)
 					{
@@ -1314,13 +1313,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void VocLimitsWithUnits(Table information)
 		{
 			Delay.Seconds(3);
-			var expected = information.CreateSet<VocLimitsWithUnits>();
+			IEnumerable<VocLimitsWithUnits> expected = information.CreateSet<VocLimitsWithUnits>();
 			var voclimits = new NewProduct();
-			var displayed = voclimits.GetDisplayedVocLimitsWithUnits();
-			foreach (var expectedinfo in expected)
+			List<VocLimitsWithUnits> displayed = voclimits.GetDisplayedVocLimitsWithUnits();
+			foreach (VocLimitsWithUnits expectedinfo in expected)
 			{
 				Report.Info("Checking use: " + expectedinfo.Use + " and Voc Compliance Limit: " + expectedinfo.VocComplianceLimit + " and Units: " + expectedinfo.Units + " and Regulation: " + expectedinfo.Regulation);
-				var matchingType = displayed.Where(x => x.Use == expectedinfo.Use);
+				IEnumerable<VocLimitsWithUnits> matchingType = displayed.Where(x => x.Use == expectedinfo.Use);
 				if (matchingType.Count() == 0)
 				{
 					Report.Failure("No Use data displayed: " + expectedinfo.Use + " were displayed!");
@@ -1328,7 +1327,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 
 				bool passed = false;
-				foreach (var matched in matchingType)
+				foreach (VocLimitsWithUnits matched in matchingType)
 				{
 					if (matched.Use.Contains(expectedinfo.Use) && matched.VocComplianceLimit == expectedinfo.VocComplianceLimit && matched.Units == expectedinfo.Units && matched.Regulation == expectedinfo.Regulation)
 					{
@@ -1345,13 +1344,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIShouldSeeTheFollowingVocPercentForEachState(Table information)
 		{
 			//Delay.Seconds(5 * Delay.SpeedFactor);
-			var expected = information.CreateSet<VocPercentForStates>();
+			IEnumerable<VocPercentForStates> expected = information.CreateSet<VocPercentForStates>();
 			var voclimits = new NewProduct();
-			var displayed = voclimits.GetDisplayedVocPercentForEachState();
-			foreach (var expectedinfo in expected)
+			List<VocPercentForStates> displayed = voclimits.GetDisplayedVocPercentForEachState();
+			foreach (VocPercentForStates expectedinfo in expected)
 			{
 				Report.Info("Checking State: " + expectedinfo.State + " and Regulation: " + expectedinfo.Regulation + " and VOC value: " + expectedinfo.VocValue + " and State VOC Threshold: " + expectedinfo.StateVocThreshold + " and Message: " + expectedinfo.Message);
-				var matchingType = displayed.Where(x => x.State == expectedinfo.State);
+				IEnumerable<VocPercentForStates> matchingType = displayed.Where(x => x.State == expectedinfo.State);
 				if (matchingType.Count() == 0)
 				{
 					Report.Failure("No State data displayed: " + expectedinfo.State + " were displayed!");
@@ -1374,7 +1373,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void DataForStatesInVOCContentAsWeightPercentageTable()
 		{
 			var selNewProduct = new NewProduct();
-			var displayed = selNewProduct.GetDisplayedVocPercentForEachState();
+			List<VocPercentForStates> displayed = selNewProduct.GetDisplayedVocPercentForEachState();
 			Report.IsTrue(displayed.Count > 0 && displayed.All(x => !x.State.IsNullOrEmpty() && !x.VocValue.IsNullOrEmpty() && !x.StateVocThreshold.IsNullOrEmpty()),
 				"There was not data displayed for all states in the VOC Cotent As Weight table!",
 				"There was data displayed for all states in the VOC Content As Weight table as expected");
@@ -1388,7 +1387,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 
 			var newProductpage = new NewProduct();
-			var found = newProductpage.GetAmountOfVocByOTCRuleNotStatement();
+			bool found = newProductpage.GetAmountOfVocByOTCRuleNotStatement();
 
 			Report.IsTrue(!found, "statement was displayed", "statement was not displayed", false);
 		}
@@ -1401,7 +1400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 
 			var newProductpage = new NewProduct();
-			var found = newProductpage.GetAmountOfVocByOTCRuleStatement();
+			string found = newProductpage.GetAmountOfVocByOTCRuleStatement();
 
 			Report.IsTrue(found.Equals(statement), "statement was not displayed", "statement was displayed");
 		}
@@ -1413,7 +1412,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIConfirmThatISeeTheFollowingVOCContentAsDefinedByCARBStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
-			var found = newProductpage.GetAmountOfVocDefinedByCARBStatement();
+			string found = newProductpage.GetAmountOfVocDefinedByCARBStatement();
 
 			Report.IsTrue(found.Trim() == statement.Trim(),
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
@@ -1427,7 +1426,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIConfirmThatISeeTheFollowingVOCContentBelowThresholdCARBStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
-			var found = newProductpage.GetVOCContentBelowThresholdOfCARBStatement();
+			string found = newProductpage.GetVOCContentBelowThresholdOfCARBStatement();
 
 			Report.IsTrue(found.Trim() == statement.Trim(),
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
@@ -1441,7 +1440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIConfirmThatISeeTheFollowingVOCContentBelowThresholdOTCStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
-			var found = newProductpage.GetVOCContentBelowThresholdOfOTCStatement();
+			string found = newProductpage.GetVOCContentBelowThresholdOfOTCStatement();
 
 			Report.IsTrue(found.Trim() == statement.Trim(),
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
@@ -1455,7 +1454,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIConfirmThatISeeTheFollowingVOCPercentagesEnteredForAllAreasStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
-			var found = newProductpage.GetUseVocPercentageAllAreaStatement();
+			string found = newProductpage.GetUseVocPercentageAllAreaStatement();
 
 			Report.IsTrue(found.Trim() == statement.Trim(),
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
@@ -1469,7 +1468,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIConfirmThatISeeTheFollowingVOCContentAsWeightPercentageForEachStateStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
-			var found = newProductpage.VocWeightPercentageForEachStateStatement();
+			string found = newProductpage.VocWeightPercentageForEachStateStatement();
 
 			Report.IsTrue(found.Trim() == statement.Trim(),
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
@@ -1480,7 +1479,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void IConfirmLabelInformationOnRegulatoryInformationPageContains(string labelLink)
 		{
 			var newProductPage = new NewProduct();
-			var labelLinksShowing = newProductPage.RegulatoryInformationLabelLinks();
+			List<string> labelLinksShowing = newProductPage.RegulatoryInformationLabelLinks();
 			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the Regulatory Information 3 page", "The link with text: '" + labelLink + "' was found on the Regulatory Information 3 page as expected");
 		}
 
@@ -1493,14 +1492,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"The VOC intended use text is shown: (.*)")]
 		public void VOCIntendedUseTextMatches(string text)
 		{
-			var displayedStatements = new NewProduct().AllAdditionalStatements();
+			List<string> displayedStatements = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(displayedStatements.Contains(text), "The VOC Intended Use text was not as expected: '" + text + "'", "The VOC Intended Use text matched as expected: '" + text + "'");
 		}
 
 		[StepDefinition(@"in the VOC Limits table, the (Use|VOC Compliance Limit|Regulation) column should contain the value: (.*)")]
 		public void VOCLimitsTableContainsUse(string column, string valueExpected)
 		{
-			var displayed = new NewProduct().GetDisplayedVocLimitsWithUnits();
+			List<VocLimitsWithUnits> displayed = new NewProduct().GetDisplayedVocLimitsWithUnits();
 			if (column == "Use")
 			{
 				Report.IsTrue(displayed.Any(x => x.Use == valueExpected),
@@ -1525,14 +1524,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"The VOC content in g/L message shows the value: (.*)")]
 		public void VOCContentMessageShowsTheValue(string value)
 		{
-			var vocContentValue = new NewProduct().VOCContentInGPerL();
+			string vocContentValue = new NewProduct().VOCContentInGPerL();
 			Report.IsTrue(vocContentValue.Trim() == value, "The value for VOC content in g/L was not as expected. The value showing is: " + vocContentValue + " The expected value was: " + value, "The VOC content in g/L value was as expected: " + value);
 		}
 
 		[StepDefinition(@"The VOC Summary page contains the statement with the text: (.*)")]
 		public void VOCSummaryContainsStatement(string value)
 		{
-			var statements = new NewProduct().AllAdditionalStatements();
+			List<string> statements = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(statements.Contains(value), "The statement with text: " + value + " was not showing on the VOC Summary page", "The statement with text: " + value + " was showing on the VOC summary page as expected.");
 		}
 
@@ -1540,13 +1539,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		public void StatementIsNotDisplayed(string statement)
 		{
-			var allStatements = new NewProduct().AllAdditionalStatements();
+			List<string> allStatements = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(!allStatements.Contains(statement), "Statement: " + statement + " was displayed when it was not expected!", "Statement: " + statement + " was not displayed as expected");
 		}
 		public void SelectTCLPElementOptionsToNo(List<string> elements)
 		{
 			var newProduct = new NewProduct();
-			foreach (var section in elements)
+			foreach (string section in elements)
 			{
 				TestReport.StartStep("I set the " + elements + " option to: No");
 				Report.IsTrue(newProduct.SetOptionInSection(section, "No"),
@@ -1565,7 +1564,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(selNewProduct.WaitForContainerToBeVisible(10),
 				"The New Product page is not currently loaded",
 				"The New Product page is loaded");
-			var currentPage = selNewProduct.ActivePanelHeadingText();
+			string currentPage = selNewProduct.ActivePanelHeadingText();
 			Report.Info("Current expanded section is: " + currentPage);
 			Report.Info("Clicking continue");
 			Report.IsTrue(selNewProduct.ClickContinue(),
@@ -1588,11 +1587,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Info("New page did not load. Checking for 'required field' error message.");
 			if (selNewProduct.ErrorMessageText == "This is a required field.")
 			{
-				var section = selNewProduct.SectionWithRequiredFieldError();
+				string section = selNewProduct.SectionWithRequiredFieldError();
 				Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
 				Report.Screenshot();
 				Report.Info("Selecting the first option for the required field");
-				var option = selNewProduct.GetAllOptionsForSection(section).First();
+				string option = selNewProduct.GetAllOptionsForSection(section).First();
 				selNewProduct.SetOptionInSection(section, option);
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(),
@@ -1608,7 +1607,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"The message with text: (.*) is visble on the (.*) page")]
 		public void MessageVisibleOnPage(string message, string page)
 		{
-			var actualMessages = new NewProduct().AllAdditionalStatements();
+			List<string> actualMessages = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(actualMessages.Any(x => x.Contains(message)),
 				$"The message: '{message}' was not visble on the '{page}' page.",
 				$"The message: '{message}' was visble on the '{page}' page as expected.");
@@ -1624,7 +1623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("Saved brand name was not found in context. The test must call 'click save' in My Library - My Brands");
 				return;
 			}
-			var productLineOptions = new NewProduct().AllProductLineOrBrandOptions();
+			List<MyBrands.Brand> productLineOptions = new NewProduct().AllProductLineOrBrandOptions();
 			Report.IsTrue(!productLineOptions.Select(x => x.Name).ToList().Except(activeBrands).Any() && productLineOptions.Count == activeBrands.Count,
 				"The 'Product Line or Brand' drop down options were not limited exclusively to saved active brands. The options showing were: " + string.Join(", ", productLineOptions),
 				"The 'Product Line or Brand' drop down options were limited exclusively to saved active brands as expected. The options showing were: " + string.Join(", ", productLineOptions));
@@ -1746,8 +1745,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void MyIngredientsDialogContainsIngredient(string savedAs)
 		{
 			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
-			var showingIngredients = new MyIngredientsModal().MyIngredients();
-			var matchID = showingIngredients.Where(x => x.Index == ingredient.Index);
+			List<MyIngredients.IngredientItem> showingIngredients = new MyIngredientsModal().MyIngredients();
+			IEnumerable<MyIngredients.IngredientItem> matchID = showingIngredients.Where(x => x.Index == ingredient.Index);
 			if (matchID.Count() == 0)
 			{
 				Report.Failure("The saved ingredient at position: " + ingredient.Index + " was not found on the My Ingredients pop up");
@@ -1789,7 +1788,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ErrorMessagesShouldNotBeShowingForItem(string section)
 		{
 			Delay.Seconds(1);
-			var errorMessages = new NewProduct().GetErrorsForSection(section);
+			List<string> errorMessages = new NewProduct().GetErrorsForSection(section);
 			Report.IsTrue(errorMessages.Count == 0, "No error message should be showing for section: " + section + " but found: " + string.Join(", ", errorMessages),
 				"As expected, no error messages were showing for section: " + section);
 		}
@@ -1798,7 +1797,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ErrorMessagesShouldBeShowingForItem(string section)
 		{
 			Delay.Seconds(1);
-			var errorMessages = new NewProduct().GetErrorsForSection(section);
+			List<string> errorMessages = new NewProduct().GetErrorsForSection(section);
 			Report.IsTrue(errorMessages.Any(), "No error message was displayed for section: " + section + " when there was expected to be!",
 				"As expected, an error message were displayed for section: " + section);
 		}
@@ -1832,7 +1831,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var differences = new List<string>();
 			expected.Rows.ForEach(x => expectedOptions.Add(x["Option"]));
 			var expectedOptionsLower = expectedOptions.Select(x => x.ToLower()).ToList();
-			var displayedOptions = new NewProduct().GetAllOptionsForSection(section);
+			List<string> displayedOptions = new NewProduct().GetAllOptionsForSection(section);
 			var displayedOptionsLower = displayedOptions.Select(x => x.ToLower()).ToList();
 			if (exclusive == "displayed")
 			{
@@ -1853,15 +1852,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			else if (exclusive == "displayed exclusively")
 			{
 				Report.Info("Expected options to be displayed are:");
-				foreach (var option in expectedOptions)
+				foreach (string option in expectedOptions)
 				{
 					Report.Info(option);
 				}
-				var allMatch = true;
-				foreach (var displayedOption in displayedOptionsLower)
+				bool allMatch = true;
+				foreach (string displayedOption in displayedOptionsLower)
 				{
-					var match = false;
-					foreach (var expectedOption in expectedOptionsLower)
+					bool match = false;
+					foreach (string expectedOption in expectedOptionsLower)
 					{
 						if (expectedOption != displayedOption)
 						{
@@ -1889,7 +1888,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"The Product Development Manager options should comprise a list containing the domain @CVSHealth.com")]
 		public void PDMOptionsShouldContainCVSEmailDomain()
 		{
-			var displayedOptions = new NewProduct().GetAllOptionsForSection("Who is the Product Development Manager (PDM) for this product?");
+			List<string> displayedOptions = new NewProduct().GetAllOptionsForSection("Who is the Product Development Manager (PDM) for this product?");
 			Report.IsTrue(displayedOptions.Where(x => x != "Choose...").ToList().All(x => x.ToLower().Contains("@cvshealth.com")),
 				"Not all options in the PDM drop down contained the domain CVSHealth.com",
 				"All options in the PDM drop down contained the domain CVSHealth.com as expected");
@@ -2021,9 +2020,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			TestReport.UseSubSteps = true;
 			var expectedParagraphs = new List<string>();
 			paragraphText.Rows.ForEach(x => expectedParagraphs.Add(x["Paragraph"]));
-			var actualParagraphs = new NewProduct().AllAdditionalStatementParagraphs();
+			List<string> actualParagraphs = new NewProduct().AllAdditionalStatementParagraphs();
 			int count = 1;
-			foreach (var para in actualParagraphs)
+			foreach (string para in actualParagraphs)
 			{
 				TestReport.StartStep("Checking paragraph: " + count + " matches expected text");
 				Report.IsTrue(para.Trim() == expectedParagraphs[count - 1],
@@ -2035,7 +2034,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[Then(@"The alert message (is|is not) displayed with text: (.*)")]
 		public void AlertMessageDisplayed(string displayed, string alert)
 		{
-			var expectDisplayed = false;
+			bool expectDisplayed = false;
 			switch (displayed)
 			{
 				case "is":
@@ -2047,7 +2046,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					Report.Failure("Step parameter must be either 'is' or 'is not'");
 					return;
 			}
-			var actualAlerts = new NewProduct().DisplayedAlerts();
+			List<string> actualAlerts = new NewProduct().DisplayedAlerts();
 			if (actualAlerts == null)
 			{
 				Report.Failure("Error fetching alert messages!");
@@ -2071,7 +2070,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"the 'Regulatory List' window opens")]
 		public void RegulatoryListWindowOpens()
 		{
-			var header = new RegulatoryList().Heading();
+			string header = new RegulatoryList().Heading();
 			if (header == null)
 			{
 				Report.Failure("Regulatory List pop up was not displayed");
@@ -2085,7 +2084,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmListOfRegulationsAssociatedWithComponentDisplayed()
 		{
 			var selRegulatoryList = new RegulatoryList();
-			var regulatoryListData = selRegulatoryList.GetRegulatoryListRows();
+			List<RegulatoryList.RegulatoryListItem> regulatoryListData = selRegulatoryList.GetRegulatoryListRows();
 			if (regulatoryListData.Count > 0)
 			{
 				Report.IsTrue(!regulatoryListData.Any(x => x.Classification.IsNullOrEmpty() || x.RegulatoryCode.IsNullOrEmpty()),
@@ -2109,7 +2108,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var selNewProduct = new NewProduct();
 			string category;
 			double complianceLimit;
-			var limits = selNewProduct.GetDisplayedVocLimits();
+			List<VocLimits> limits = selNewProduct.GetDisplayedVocLimits();
 			if (limits.IsNullOrEmpty())
 			{
 				Report.Failure("Failed to find Compliance Limits on the VOC summary page");
@@ -2129,14 +2128,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					Report.Failure("Must specify VOC value type: CARB or OTC only");
 					return;
 			}
-			var phrase = selNewProduct.GetVocSummaryStatementText(category);
+			string phrase = selNewProduct.GetVocSummaryStatementText(category);
 			if (phrase == null)
 			{
 				Report.Failure("Unable to find statement phrase for: " + category + " on the VOC summary page");
 				return;
 			}
 			Report.Info("The CARB exceeds phrase was showing: " + phrase);
-			var valueNum = Convert.ToDouble(value);
+			double valueNum = Convert.ToDouble(value);
 			if (valueNum > complianceLimit)
 			{
 				Report.Info("The " + carbOtc + " is expected to exceed the compliance limit");
@@ -2163,7 +2162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ICheckTheCheckboxWithDescription(string check, string description)
 		{
 			var selNewProduct = new NewProduct();
-			var toCheck = false;
+			bool toCheck = false;
 			if (check == "check")
 			{
 				toCheck = true;
@@ -2176,7 +2175,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				throw new Exception("Specflow paramater must be equal to 'check' or 'uncheck'");
 			}
-			var isChecked = selNewProduct.StandaloneCheckbox(description).Checked();
+			bool isChecked = selNewProduct.StandaloneCheckbox(description).Checked();
 			if (isChecked == toCheck)
 			{
 				Report.Failure($"The checkbox was already {check}ed");
@@ -2194,9 +2193,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void SectionIsHighlightedInRedIndicatingAnError(string section)
 		{
 			var selNewProduct = new NewProduct();
-			var colour = selNewProduct.SectionColour(section);
+			string colour = selNewProduct.SectionColour(section);
 			// Not the best. Will break if the exact shade changes (hex #A9443F, rgb 169, 68, 66) and verified it is intended
-			var expected = "(169, 68, 66, 1)";
+			string expected = "(169, 68, 66, 1)";
 			Report.IsTrue(colour.Contains(expected),
 				$"Section '{section}' colour was not the expected red! The colour is: {colour}",
 				$"Section '{section}' colour was red as expected");
@@ -2207,7 +2206,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.Info("Checking statement");
 			var selNewProduct = new NewProduct();
-			var found = selNewProduct.GetDisplayedSections();
+			List<string> found = selNewProduct.GetDisplayedSections();
 
 			Report.IsTrue(found.Contains(option),
 				"statement was not as expected! Expected: " + option + ", but found: " + found + "!",
@@ -2271,16 +2270,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm the product name: ""(.*)"" is displayed in the header")]
 		public void ConfirmTheProductNameIsDisplayedInTheHeader(string name)
 		{
-			var header = NewProduct.HeaderText;
-			var matches = Regex.Matches(header, @"\(\d*\)");
+			string header = NewProduct.HeaderText;
+			MatchCollection matches = Regex.Matches(header, @"\(\d*\)");
 			if (matches.Count == 0)
 			{
 				Report.Failure("Could not find product ID in the New Product header!");
 				Report.Screenshot();
 				return;
 			}
-			var bracketedValue = matches[matches.Count - 1].Groups[0].Value;
-			var headerName = header.TrimEnd(bracketedValue).Trim();
+			string bracketedValue = matches[matches.Count - 1].Groups[0].Value;
+			string headerName = header.TrimEnd(bracketedValue).Trim();
 			Report.IsTrue(headerName == name,
 				$@"The name displayed in the header did not match the expected value! Expected: ""{name}"" but got: ""{headerName}""",
 				$@"The name displayed in the header matcehd the expected value: ""{name}""");
@@ -2289,7 +2288,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm that retailer ""(.*)"" is present under the 'Destination Retailers' column in the UPC table")]
 		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer)
 		{
-			var displayedRetailers = new NewProduct().GetAllUPCDestinationRetailers();
+			List<string> displayedRetailers = new NewProduct().GetAllUPCDestinationRetailers();
 			Report.IsTrue(displayedRetailers.Contains(retailer),
 				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}",
 				$@"Retailer ""{retailer}"" is present under Destination Retailers");
@@ -2333,14 +2332,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I select the first option in the 'Product Line or Brand' drop down and save as Brand{TestCaseId}")]
 		public void SelectFirstOptionInBrandDropDown()
 		{
-			var testCaseId = GlobalParameters.TestCaseId;
+			string testCaseId = GlobalParameters.TestCaseId;
 			if (testCaseId == null)
 			{
 				throw new Exception("Unable to locate a test case ID in global parameters which is required!");
 			}
 			Report.Info("Current test case ID: " + testCaseId);
 			var newProduct = new NewProduct();
-			var options = newProduct.AllProductLineOrBrandOptions();
+			List<MyBrands.Brand> options = newProduct.AllProductLineOrBrandOptions();
 			if (options.Count == 0)
 			{
 				// test can't continue
@@ -2348,7 +2347,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				// instead.. go to create a new brand (My Account - My Library)
 			}
 			Report.Info($"There are {options.Count} brand options. Selecting the first one");
-			var brand = options.First();
+			MyBrands.Brand brand = options.First();
 			Report.Info($"Selecting the brand: {brand.Name}");
 			Report.IsTrue(newProduct.SetOptionInSectionByValue("Product Line or Brand (optional)", brand.ID, brand.Name),
 				$"Failed to set the Product Line or Brand option to: {brand.Name} ({brand.ID})!",
@@ -2409,7 +2408,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I Confirm (.*) error message is shown below the (.*) field")]
 		public void GivenIConfirmErrorMessageIsShownBelowField(string errorMessage, string field)
 		{
-			var errorsList = new NewProduct().GetAllErrors();
+			List<InputError> errorsList = new NewProduct().GetAllErrors();
 			Report.IsTrue(errorsList.FirstOrDefault(x => x.InputName == field) != null,
 				"An error is not showing on field: " + field, "An error is showing on field: " + field);
 
@@ -2428,7 +2427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I Select a container type from the drop down list")]
 		public void GivenISelectAContainerTypeFromTheDropDownList()
 		{
-			var containerTypes = new NewProduct().GetContainerOptions();
+			List<string> containerTypes = new NewProduct().GetContainerOptions();
 			// the container type count must be greater than 1 or random number will throw argument out of range exception (cannot have a range between 1 and 0)
 			if (containerTypes.Count <= 1)
 			{
@@ -2457,7 +2456,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the UPC page I (should|should not) see Add new Packaging Type link")]
 		public void GivenInTheUPCPageIShouldSeeAddNewPackagingTypeLink(string shouldOrNot)
 		{
-			var labelLinksShowing = new UPC().UpcPageLinks();
+			List<string> labelLinksShowing = new UPC().UpcPageLinks();
 			if (shouldOrNot == "should")
 			{
 				Report.IsTrue(labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was not found", "Add new Packaging Type was found on the upc page as expected");

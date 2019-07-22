@@ -42,7 +42,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var retailersToSelect = new List<string>();
 			var selSelectRetailers = new SelectRetailers();
 			retailers.Rows.ForEach(x => retailersToSelect.Add(x["Retailer"]));
-			foreach (var retailer in retailersToSelect)
+			foreach (string retailer in retailersToSelect)
 			{
 				Report.IsTrue(selSelectRetailers.SelectRetailerFromListView(retailer), "Failed to select retailer: " + retailer + " from the Select Retailers list view", "Successfully selected the retailer: " + retailer + " from the Select Retailers list view");
 			}
@@ -65,7 +65,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void AllRetailersAreSelectedInSelectRetailersWindow()
 		{
 			var selSelectRetailers = new SelectRetailers();
-			var notSelected = selSelectRetailers.UnselectedRetailers();
+			List<string> notSelected = selSelectRetailers.UnselectedRetailers();
 			Report.IsTrue(!notSelected.Any(), "Some retailers were not selected: " + string.Join(", ", notSelected),
 				"All retailers were selected as expected");
 		}
@@ -123,10 +123,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmDislayedRetailers(string should, Table expected)
 		{
 			var showing = new SelectRetailers().GetListOfRetailers().Where(x => x.Trim() != "").ToList();
-			var checkedRetailers = showing;
+			List<string> checkedRetailers = showing;
 			Report.Info("Retailers showing were: " + string.Join(", ", showing));
 			bool expectedOrNot = should != "should not";
-			foreach (var row in expected.Rows)
+			foreach (TableRow row in expected.Rows)
 			{
 				Report.IsTrue(showing.Contains(row["Retailer"]) == expectedOrNot, (expectedOrNot ? "Did not find" : "Found") + " the retailer: " + row["Retailer"], "The retailer " + row["Retailer"] + (expectedOrNot ? " was" : " was not") + " showing, as expected!", false, false);
 				if (showing.Contains(row["Retailer"]))
@@ -145,8 +145,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I check that Walmart and all of its affiliates are not available")]
 		public void GivenICheckThatWalmartAndAllOfItsAffiliatesAreNotAvailable()
 		{
-			var retailerList = new SelectRetailers().GetListOfRetailers();
-			foreach (var myRetailer in retailerList)
+			List<string> retailerList = new SelectRetailers().GetListOfRetailers();
+			foreach (string myRetailer in retailerList)
 			{
 				Report.Info("Retailer = " + myRetailer);
 				if (myRetailer.Contains("Walmart"))
@@ -169,7 +169,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var selSelectRetailers = new SelectRetailers();
 			var expectedSelected = new List<string>();
 			retailers.Rows.ForEach(x => expectedSelected.Add(x["Retailer"]));
-			var actualSelected = selSelectRetailers.SelectedRetailers();
+			List<string> actualSelected = selSelectRetailers.SelectedRetailers();
 			Report.IsTrue(expectedSelected.All(x => actualSelected.Contains(x)),
 				"Not all of the expected retailers were selected!",
 				"All of the expected retailers were selected");
