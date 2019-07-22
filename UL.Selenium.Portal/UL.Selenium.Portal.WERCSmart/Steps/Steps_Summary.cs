@@ -16,7 +16,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Summary page I save the UPC number to context as: (.*)")]
 		public void SaveUPCToContext(string savedAs)
 		{
-			var upc = new SummaryPage().UPCNumber();
+			string upc = new SummaryPage().UPCNumber();
 			Report.Info("Adding UPC number: " + upc + " to context as: " + savedAs);
 			Context.AddToContext(savedAs, upc);
 		}
@@ -24,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Summary page I save the Product ID to context as: (.*)")]
 		public void SaveProductIDToContext(string savedAs)
 		{
-			var productID = new SummaryPage().ProductID();
+			string productID = new SummaryPage().ProductID();
 			Report.Info("Adding Product ID: " + productID + " to context as: " + savedAs);
 			Context.AddToContext(savedAs, productID);
 		}
@@ -32,8 +32,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Summary page the UPC number should match that saved as: (.*)")]
 		public void SummaryPageUPCShouldMatchSavedAs(string savedAs)
 		{
-			var actualUPC = new SummaryPage().UPCNumber();
-			var expectedUPC = Context.GetFromContext(savedAs).ToString();
+			string actualUPC = new SummaryPage().UPCNumber();
+			string expectedUPC = Context.GetFromContext(savedAs).ToString();
 			Report.IsTrue(expectedUPC == actualUPC,
 				"The actual UPC number did not match the expected value! Expected: " + expectedUPC + ". Actual: " + actualUPC,
 				"The actual UPC number matched the expected value: " + expectedUPC);
@@ -54,9 +54,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selSummaryPage = new SummaryPage();
 			List<string> kitContents = selSummaryPage.GetKitContents();
-			foreach (var row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
-				var kit = row["Kit items"];
+				string kit = row["Kit items"];
 				if (kit.ToLower().Contains("saved as"))
 				{
 					var piKit = (ProductInformation)Context.GetFromContext(kit
@@ -74,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheDataSummaryPageIConfirmTheFollowingQuestionsAndAnswers(Table table)
 		{
 			var selSummaryPage = new SummaryPage();
-			foreach (var row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
 				string answer = selSummaryPage.GetAnswerToQuestion(row["Question"]);
 				if (row["True or False"] == "True")

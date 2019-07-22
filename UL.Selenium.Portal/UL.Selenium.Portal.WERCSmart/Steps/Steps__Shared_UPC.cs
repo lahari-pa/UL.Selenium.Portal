@@ -11,6 +11,7 @@ using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -28,12 +29,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ShouldSeeTheUPCOptions(string condition, Table expected)
 		{
 			var selNewProduct = new UPC();
-			var upcOptions = selNewProduct.GetUPCOptions();
+			List<string> upcOptions = selNewProduct.GetUPCOptions();
 			if (condition == "see")
 			{
-				foreach (var row in expected.Rows)
+				foreach (TableRow row in expected.Rows)
 				{
-					var option = row["Option"];
+					string option = row["Option"];
 					Report.Info("Checking that I see the option '" + option + "'");
 					Report.IsTrue(upcOptions.Contains(option.Trim()),
 						"Option was not showing as expected! Expected: '" + option + "', but found: '" + string.Join("', '", upcOptions) + "'!",
@@ -42,9 +43,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (condition == "not see")
 			{
-				foreach (var row in expected.Rows)
+				foreach (TableRow row in expected.Rows)
 				{
-					var option = row["Option"];
+					string option = row["Option"];
 					Report.Info("Checking that I do not see the option '" + option + "'");
 					Report.IsFalse(upcOptions.Contains(option.Trim()),
 						"Options were showing which should not be. The sections not allowed are: " + string.Join("; ", option) + ". Actual sections: " + string.Join("; ", option), "Sections were not showing as expected: " + string.Join("; ", option));
@@ -66,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I add the following into the UPC case fields")]
 		public void ThenIAddTheFollowingIntoTheUpcFields(Table table)
 		{
-			var upcInfo = table.CreateInstance<UpcCaseInformation>();
+			UpcCaseInformation upcInfo = table.CreateInstance<UpcCaseInformation>();
 			Report.Info("UPC Number: " + upcInfo.UpcNumber);
 			Report.Info("Container Type: " + upcInfo.ContainerType);
 			Report.Info("Size: " + upcInfo.Size);
@@ -81,8 +82,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void UPCCaseInformation(string upc, string containerType, string size, string quantity, string transportation)
 		{
 			TestReport.UseSubSteps = true;
-			StepsUPC MyStepsNewProduct = new StepsUPC();
-			StepsNewProduct MyStepsProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsUPC();
+			var MyStepsProduct = new StepsNewProduct();
 			//TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			TestReport.StartStep("I click the 'Add Case UPC' button");
@@ -91,7 +92,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
 			{
-				var upc_ = upc.Replace("Equals", "");
+				string upc_ = upc.Replace("Equals", "");
 				var upcInfo = new UpcCaseInformation {
 					ContainerType = containerType,
 					Size = size,
@@ -104,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Table upcTable = new Table("Field", "Value");
+				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
 				upcTable.AddRow("Size", size);
@@ -122,7 +123,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void EnterUPCInfoDoNotClickContinue(string upc, string containerType, string size)
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			TestReport.StartStep("I click the 'Add UPC' button");
@@ -130,7 +131,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
 			{
-				var upc_ = upc.Replace("Equals", "");
+				string upc_ = upc.Replace("Equals", "");
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
 					Size = size,
@@ -141,7 +142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Table upcTable = new Table("Field", "Value");
+				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
 				upcTable.AddRow("Size", size);
@@ -155,13 +156,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string size, string quantity)
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
 			//TestReport.StartStep("I confirm 'Quantity' is visible in the UPC header");
 			//MyStepsNewProduct.ConfirmQuantityIsVisibleInUPCHeader();
 			TestReport.StartStep("I click the 'Add UPC' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			GeneralUtilities.Wait_for_load_finish();
-			TechTalk.SpecFlow.Table upcTable = new TechTalk.SpecFlow.Table(new string[] {
+			var upcTable = new Table(new string[] {
 				"Field",
 				"Value"
 			});
@@ -190,7 +191,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Checking error message");
 			var selNewUpc = new UPC();
-			var found = selNewUpc.LithiumBatteyWarning();
+			string found = selNewUpc.LithiumBatteyWarning();
 
 			Report.IsTrue(found.Trim() == message.Trim(),
 				"Warning message was not as expected! Expected: " + message + ", but found: " + found + "!",
@@ -202,7 +203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Checking error message");
 			var selNewUpc = new UPC();
-			var found = selNewUpc.MaximumLimitUpcWarning();
+			string found = selNewUpc.MaximumLimitUpcWarning();
 
 			Report.IsTrue(found.Trim() == message.Trim(),
 				"Warning message was not as expected! Expected: " + message + ", but found: " + found + "!",
@@ -214,12 +215,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Delay.Seconds(1);
 			var selNewProduct = new UPC();
-			var upcButtons = selNewProduct.GetUPCbuttons();
+			List<string> upcButtons = selNewProduct.GetUPCbuttons();
 			if (condition == "see")
 			{
-				foreach (var row in expected.Rows)
+				foreach (TableRow row in expected.Rows)
 				{
-					var option = row["Option"];
+					string option = row["Option"];
 					Report.Info("Checking that I see the option '" + option + "'");
 					Report.IsTrue(upcButtons.Contains(option.Trim()),
 						"Option was not showing as expected! Expected: '" + option + "', but found: '" + string.Join("', '", upcButtons) + "'!",
@@ -228,9 +229,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (condition == "not see")
 			{
-				foreach (var row in expected.Rows)
+				foreach (TableRow row in expected.Rows)
 				{
-					var option = row["Option"];
+					string option = row["Option"];
 					Report.Info("Checking that I do not see the option '" + option + "'");
 					Report.IsFalse(upcButtons.Contains(option.Trim()),
 						"Options were showing which should not be. The sections not allowed are: " + string.Join("; ", option) + ". Actual sections: " + string.Join("; ", option), "Sections were not showing as expected: " + string.Join("; ", option));
@@ -243,10 +244,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I switch to tab: (.*)")]
 		public void ThenISwitchToDataAcceptancePage(string option)
 		{
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in allHandles)
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
 			{
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//title"), 2) != null)
@@ -262,8 +263,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void UPCCaseInformationDonotClickContinue(string upc, string containerType, string size, string quantity, string transportation)
 		{
 			TestReport.UseSubSteps = true;
-			StepsUPC MyStepsNewProduct = new StepsUPC();
-			StepsNewProduct MyStepsProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsUPC();
+			var MyStepsProduct = new StepsNewProduct();
 			//TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			TestReport.StartStep("I click the 'Add Case UPC' button");
@@ -272,7 +273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
 			{
-				var upc_ = upc.Replace("Equals", "");
+				string upc_ = upc.Replace("Equals", "");
 				var upcInfo = new UpcCaseInformation {
 					ContainerType = containerType,
 					Size = size,
@@ -285,7 +286,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Table upcTable = new Table("Field", "Value");
+				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
 				upcTable.AddRow("Size", size);
@@ -299,7 +300,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IConfirmUPCContains(string labelLink)
 		{
 			var uPCpage = new UPC();
-			var labelLinksShowing = uPCpage.UpcPageLinks();
+			List<string> labelLinksShowing = uPCpage.UpcPageLinks();
 			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the upc page", "The link with text: '" + labelLink + "' was found on the upc page as expected");
 		}
 
@@ -307,12 +308,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ErrorMessagesAreShowingOnUpc(string section, string should, string pipeDelimitedErrorMessages)
 		{
 			Delay.Seconds(1);
-			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
-			var errorMessages = new UPC().GetUPCErrorsForSection(section);
+			string[] errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			List<string> errorMessages = new UPC().GetUPCErrorsForSection(section);
 			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
 			if (should == "should")
 			{
-				foreach (var item in errorMessagesExpected)
+				foreach (string item in errorMessagesExpected)
 				{
 					Report.IsTrue(errorMessages.Any(e => e.Contains(item)),
 						"Failed to find the error message: " + item + " under section: " + section + "!",
@@ -321,7 +322,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (should == "should not")
 			{
-				foreach (var item in errorMessagesExpected)
+				foreach (string item in errorMessagesExpected)
 				{
 					Report.IsFalse(errorMessages.Contains(item.Trim()),
 						"The error message: " + item + " was displayed under section" + section + " when it should not be.",
@@ -336,20 +337,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void EnterUPCInfoConfirmPackagingTypeLinkAndError(string upc, string containerType, string size)
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			StepsUPC MyStepsUpc = new StepsUPC();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsUpc = new StepsUPC();
 			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			UPC uPCpage = new UPC();
+			var uPCpage = new UPC();
 			TestReport.StartStep("I confirm Add new Packaging Type link");
-			var labelLinksShowing = uPCpage.UpcPageLinks();
+			List<string> labelLinksShowing = uPCpage.UpcPageLinks();
 			Report.IsTrue(labelLinksShowing.Contains("Add new Packaging Type"), "The link with text: Add new Packaging Type was not found on the upc page", "The link with text: Add new Packaging Type was found on the upc page as expected");
 			TestReport.StartStep("I click the 'Add UPC' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			TestReport.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
 			{
-				var upc_ = upc.Replace("Equals", "");
+				string upc_ = upc.Replace("Equals", "");
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
 					Size = size,
@@ -360,7 +361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Table upcTable = new Table("Field", "Value");
+				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
 				upcTable.AddRow("Size", size);
@@ -371,9 +372,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			TestReport.StartStep("Confirm error message!");
 			string pipeDelimitedErrorMessages = "This is a required field.";
-			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
-			var errorMessages = new UPC().GetUPCErrorsForSection("Package Type");
-			foreach (var item in errorMessagesExpected)
+			string[] errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			List<string> errorMessages = new UPC().GetUPCErrorsForSection("Package Type");
+			foreach (string item in errorMessagesExpected)
 			{
 				Report.IsTrue(errorMessages.Any(e => e.Equals(item)),
 					"Failed to find the error message",
@@ -386,24 +387,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void EnterUPCInfoConfirmPackagingTypeLinkdoesNotExists(string upc, string containerType, string size)
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			StepsUPC MyStepsUpc = new StepsUPC();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsUpc = new StepsUPC();
 			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			UPC uPCpage = new UPC();
+			var uPCpage = new UPC();
 			TestReport.StartStep("I confirm Add new Packaging Type link does not display");
-			var labelLinksShowing = uPCpage.UpcPageLinks();
+			List<string> labelLinksShowing = uPCpage.UpcPageLinks();
 			Report.IsFalse(labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was found on the upc page, it should not have been", "Add new Packaging Type was not found on the upc page as expected");
 			TestReport.StartStep("I click the 'Add UPC' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			TestReport.StartStep("I should not see Package Type option");
-			var upcOptions = uPCpage.GetUPCOptions();
+			List<string> upcOptions = uPCpage.GetUPCOptions();
 			Report.IsFalse(upcOptions.Contains("Package Type"),
 				"option was displayed which should not have been", "option did not displayed as expected");
 			TestReport.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
 			{
-				var upc_ = upc.Replace("Equals", "");
+				string upc_ = upc.Replace("Equals", "");
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
 					Size = size,
@@ -414,7 +415,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Table upcTable = new Table("Field", "Value");
+				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
 				upcTable.AddRow("Size", size);
@@ -428,7 +429,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenISelectAPackagerTypeFromTheDropDownList()
 		{
 			List<string> upcOptions = new NewProduct().GetPackageOptions();
-			Random random = new Random();
+			var random = new Random();
 			int randomNumber = random.Next(1, upcOptions.Count - 1);
 			Report.IsTrue(new NewProduct().SelectPackageType(upcOptions[randomNumber]),
 				"Failed to select: " + upcOptions[randomNumber], "Selected: " + upcOptions[randomNumber]);
@@ -442,7 +443,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string containerType, string size)
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			TestReport.StartStep("I click the 'Add UPC' button");
@@ -450,7 +451,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
 			{
-				var upc_ = upc.Replace("Equals", "");
+				string upc_ = upc.Replace("Equals", "");
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
 					Size = size,
@@ -461,7 +462,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Table upcTable = new Table("Field", "Value");
+				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
 				upcTable.AddRow("Size", size);
