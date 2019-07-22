@@ -2443,6 +2443,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return DisplayedSections;
 		}
 
+		public bool ClickAdoptionArticleLink()
+		{
+			IWebElement link = this.containerElement.FindElement(By.XPath(@"//label[@class='control-label']//a"));
+			if (link != null)
+			{
+				return link.TryClick();
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public bool OptionExists(string section)
 		{
 			try

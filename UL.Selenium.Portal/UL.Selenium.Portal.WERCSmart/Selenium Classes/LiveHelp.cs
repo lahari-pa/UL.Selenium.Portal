@@ -24,109 +24,52 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyThreeLinesIcon()
 		{
-			var icon = this.containerElement.FindElement(By.XPath(".//span[@class='ic-chat']//i"));
-			return icon != null;
+			return this.containerElement.FindElement(By.XPath(".//span[@class='ic-chat']//i"), 5) != null;
 		}
 
 		public bool VerifyX()
 		{
-			var x = this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i"));
-			return x != null;
+			return this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i")) != null;
 		}
 
 		public bool VerifyInboxText()
 		{
-			string text = this.containerElement.FindElement(By.XPath(".//h1[@class='list-title ']")).Text;
-			return text == "Inbox";
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[@class='list-title ']"));
+			return elem != null && elem.Text == "Inbox";
 		}
 
 		public bool VerifyMessageText(string message)
 		{
-			string text = this.containerElement.FindElement(By.XPath(".//div[@class='h-message-text']")).Text;
-			return text == message;
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@class='h-message-text']"));
+			return elem != null && elem.Text == message;
 		}
 
 		public bool VerifyLowerText(string text)
 		{
-			string foundText = this.containerElement.FindElement(By.XPath(".//a[@class='product']")).Text;
-			return foundText == text;
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//a[@class='product']"));
+			return elem != null && elem.Text == text;
 		}
 
 		public bool VerifyPlaceholder(string text)
 		{
-			string placeholder = this.containerElement.FindElement(By.XPath(".//div[@id='app-conversation-editor']")).GetAttribute("data-placeholder");
-			return placeholder == text;
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@id='app-conversation-editor']"));
+			return elem != null && elem.GetAttribute("data-placeholder") == text;
 		}
 
 		public bool VerifyIcon(string icon)
 		{
-			IWebElement foundIcon = null;
 			if (icon == "paperclip")
 			{
-				foundIcon = this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_attachment']"));
-				return foundIcon != null;
+				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_attachment']")) != null;
 			}
 			else if (icon == "smiley")
 			{
-				foundIcon = this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_smiley']"));
-				return foundIcon != null;
+				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_smiley']")) != null;
 			}
 			else
 			{
 				return false;
 			}
-		}
-
-		public bool EnterName(string name)
-		{
-			try
-			{
-				var NameInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='lc_chat_name']"));
-				NameInput.TryClick();
-				if (NameInput == null)
-				{
-					Report.Error("Failed to find name");
-				}
-				else
-				{
-					NameInput.EnterText(name);
-					return this.GetName() == name;
-				}
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-
-			return false;
-
-		}
-
-		public string GetName()
-		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='lc_chat_name']")).GetValue();
-		}
-
-		public bool EnterEmail(string email)
-		{
-			SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='lc_chat_email']")).EnterText(email);
-			return this.GetEmail() == email;
-		}
-
-		public string GetEmail()
-		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='lc_chat_email']")).GetValue();
-		}
-
-		public bool ClickSubmit()
-		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='lc_precaht_submit']")).TryClick();
-		}
-
-		public string GetFormText()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[@id='lc_prechat_form']/p")).GetValue().Trim();
-
 		}
 
 		public bool ClickCloseX()
