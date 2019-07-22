@@ -1265,12 +1265,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						ReadOnlyCollection<IWebElement> listOfSelected = SeleniumBrowser.WebBrowser.FindElements(By.XPath(
 							"//div[contains(text(), 'Select Existing Registrations')]/../..//table/tbody/tr//input/../..//span"));
 
-						var matchingProduct = listOfSelected.FirstOrDefault(x => x.GetValue().Contains(product.Name));
+						IWebElement matchingProduct = listOfSelected.FirstOrDefault(x => x.GetValue().Contains(product.Name));
 
 						if (matchingProduct != null)
 						{
 							Report.Info("Matching product showing in table, attempting to check checkbox");
-							var matchingCheckbox = matchingProduct.FindElement(By.XPath("../..//input"), 2);
+							IWebElement matchingCheckbox = matchingProduct.FindElement(By.XPath("../..//input"), 2);
 							return matchingCheckbox.TryClick();
 						}
 					}
@@ -1292,12 +1292,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				for (int j = 0; j < 5; j++)
 				{
-					var placeholderEl = this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
+					IWebElement placeholderEl = this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
 					placeholderEl.TryClick();
 					IWebElement MatchedEntry = null;
-					var inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+					IWebElement inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
 					inputEl.EnterText(product.Id);
-					var searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+					IWebElement searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					int i = 0;
 					while (searching != null && i < 10)
 					{
@@ -1305,8 +1305,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						i++;
 						searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					}
-					var Matches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
-					var MatchingByID = Matches.FirstOrDefault(x => x.GetValue().Trim().ToLower().Contains(product.Id.ToLower()));
+					IList<IWebElement> Matches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					IWebElement MatchingByID = Matches.FirstOrDefault(x => x.GetValue().Trim().ToLower().Contains(product.Id.ToLower()));
 					if (MatchingByID == null)
 					{
 						// No matching name entry was found, so we take the first one just in case we are looking for a partial match!
@@ -1323,15 +1323,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						Report.Info("Found matching search item, attempting to click");
 						MatchedEntry.TryClick();
 						Delay.Seconds(1);
-						var listOfSelected = SeleniumBrowser.WebBrowser.FindElements(By.XPath(
+						ReadOnlyCollection<IWebElement> listOfSelected = SeleniumBrowser.WebBrowser.FindElements(By.XPath(
 							"//div[contains(text(), 'Select Existing Registrations')]/../..//table/tbody/tr//input/../..//span"));
 
-						var matchingProduct = listOfSelected.FirstOrDefault(x => x.GetValue().Contains(product.Id));
+						IWebElement matchingProduct = listOfSelected.FirstOrDefault(x => x.GetValue().Contains(product.Id));
 
 						if (matchingProduct != null)
 						{
 							Report.Info("Matching product showing in table, attempting to check checkbox");
-							var matchingCheckbox = matchingProduct.FindElement(By.XPath("../..//input"), 2);
+							IWebElement matchingCheckbox = matchingProduct.FindElement(By.XPath("../..//input"), 2);
 							return matchingCheckbox.TryClick();
 						}
 					}
@@ -1350,7 +1350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetFullNameOfProductForRetailer(string retailer, string name)
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)' and (./ancestor::td//preceding-sibling::td[contains(text(),'" + retailer + "')]) ]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)' and (./ancestor::td//preceding-sibling::td[contains(text(),'" + retailer + "')]) ]"), 2);
 			if (el == null)
 			{
 				Report.Error("Could not find the Full Product Name field!");
@@ -1367,17 +1367,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string PersonalProtectionEquipmentRecommended {
 			get
 			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Personal Protection Equipment"));
 
 				if (lbl != null)
 				{
-					var listOfItems = lbl.FindElements(By.XPath("../..//input"));
-					foreach (var item in listOfItems)
+					ReadOnlyCollection<IWebElement> listOfItems = lbl.FindElements(By.XPath("../..//input"));
+					foreach (IWebElement item in listOfItems)
 					{
 						if (item.Selected)
 						{
-							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
+							string selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
 							Report.Info(selectedText + " is selected.");
 							return selectedText;
 						}
@@ -1393,15 +1393,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			set
 			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Personal Protection Equipment"));
 
 				if (lbl != null)
 				{
-					var thisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text.Contains(value));
+					IWebElement thisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text.Contains(value));
 					if (thisLabel != null)
 					{
-						var thisInput = thisLabel.FindElement(By.XPath(".//../input"));
+						IWebElement thisInput = thisLabel.FindElement(By.XPath(".//../input"));
 						if (!thisInput.Selected)
 						{
 							thisInput.TryClick();
@@ -1422,12 +1422,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string AutoignitionTemperature {
 			get
 			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Autoignition Temperature"));
 
 				if (lbl != null)
 				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
 					return input.Text;
 				}
 				else
@@ -1438,12 +1438,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			set
 			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Autoignition Temperature"));
 
 				if (lbl != null)
 				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
 					input.EnterText(value);
 				}
 				else
@@ -1457,12 +1457,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string MinimumIgnitionEnergy {
 			get
 			{
-				var lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
+				IWebElement lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Ignition"));
 
 				if (lbl != null)
 				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
 					return input.Text;
 				}
 				else
@@ -1473,12 +1473,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			set
 			{
-				var lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
+				IWebElement lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Ignition"));
 
 				if (lbl != null)
 				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
+					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
 					input.EnterText(value);
 				}
 				else
@@ -1496,7 +1496,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var el = this.containerElement.FindElement(By.XPath(".//label[text()='Technical Name (if applicable)']/../following-sibling::div//input"), 2);
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Technical Name (if applicable)']/../following-sibling::div//input"), 2);
 
 				if (el != null)
 				{

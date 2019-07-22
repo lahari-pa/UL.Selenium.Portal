@@ -408,6 +408,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	Then I delete the product: TestCase67661
 
 @jacob
+@TReVorId:22350
 Scenario: [105352] Product Comments screen Max input length
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -461,7 +462,7 @@ Scenario: [105352] Product Comments screen Max input length
 		| ContainerType | Aerosol Can  |
 		| Size          | 20           |
 		| DPCI          | 087-16-0238  |
-		| Quantity      | 1            |
+		| Quantity      |              |
 	Given in the New Product page I click Continue
 	Then the comments field should appear
 	And I enter the following into the comments field: 300 character test: 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890

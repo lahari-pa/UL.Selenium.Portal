@@ -1045,7 +1045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Info("Expected sections: " + string.Join(",", expectedSections));
 			if (condition == "only see")
 			{
-				List<string> mismatch = new List<string>();
+				var mismatch = new List<string>();
 				foreach (string section in ActualSections)
 				{
 					if (!expectedSections.Contains(section))
@@ -1085,7 +1085,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I select the first option in section: (.*)")]
 		public void SelectFirstOptionInSection(string section)
 		{
-			NewProduct myProduct = new NewProduct();
+			var myProduct = new NewProduct();
 			List<string> options = myProduct.GetAllOptionsForSection(section);
 			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), "The option: " + options[0] + " could not be selected in section: " + section, "The option: " + options[0] + " was selected in section: " + section);
 		}
@@ -1093,7 +1093,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"If Section: (.*) is visible, I select the first option")]
 		public void IfSectionIsVisibleISelectTheOption(string section, string option)
 		{
-			NewProduct myProduct = new NewProduct();
+			var myProduct = new NewProduct();
 			if (myProduct.GetDisplayedSections().Contains(section))
 			{
 				Report.Info("Selecting the first option for section: " + section);
@@ -1174,7 +1174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
 			var errorMessages = new NewProduct().GetErrorsForSection(section);
 			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
-			List<string> strippedErrorMessages = new List<string>();
+			var strippedErrorMessages = new List<string>();
 			foreach (string message in errorMessages)
 			{
 				string temp = this.RemoveSpecialCharacters(message);
@@ -1203,7 +1203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		public string RemoveSpecialCharacters(string str)
 		{
-			StringBuilder sb = new StringBuilder();
+			var sb = new StringBuilder();
 			foreach (char c in str)
 			{
 				if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
@@ -1668,7 +1668,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"in the (.*) page I (should|should not) see the (.*) question")]
 		public void ThenInThePageIShouldOrShouldNotSeeQuestion(string page, string shouldOrNot, string question)
 		{
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 			if (!thisNewProduct.WaitForSection(page))
 			{
 				throw new Exception("Not on the right page");
@@ -1681,7 +1681,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[Then(@"a (Danger & Warning|Warning) popup dialog should appear with the message: (.*)")]
 		public void ThenAWarningPopupDialogShouldAppearWithTheMessage(string title, string message)
 		{
-			ModalDialog thisModalDialog = new ModalDialog();
+			var thisModalDialog = new ModalDialog();
 			Report.IsTrue(thisModalDialog.GetTitle() == title, "Title is not showing as " + title,
 				"Title is showing as" + title);
 			Report.IsTrue(thisModalDialog.GetText() == message, "Expected message: " + message + " but got: " + thisModalDialog.GetText(),
@@ -1694,7 +1694,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[Then(@"I should see an alert with title: (.*) subtitle: (.*) Text: (.*)")]
 		public void ThenIShouldSeeAnAlertWithTitleSubtitleText(string title, string subtitle, string text)
 		{
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 			Alert thisAlert = thisNewProduct.GetAlert();
 			Report.IsTrue(thisAlert.Title == title, "Title is not as expected", "Title matches");
 			Report.IsTrue(thisAlert.SubTitle.Contains(subtitle), "SubTitle is not as expected. Expected " + subtitle + " but got: " + thisAlert.SubTitle, "SubTitle matches");
@@ -1704,7 +1704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[Then(@"on the Neonicotinoid Warning Page I should see a link with text: (.*) which links to page: (.*)")]
 		public void ThenOnTheNeonicotinoidWarningPageIShouldSeeALinkWithTextWhichLinksToPage(string linkText, string link)
 		{
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 			Alert thisAlert = thisNewProduct.GetAlert();
 			Report.IsTrue(thisAlert.Text.Contains(linkText), "Link text: " + linkText + " is not showing as expected.",
 				"Link text is showing as expected.");
@@ -1814,10 +1814,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[Then(@"For every field in the table I call Shared Step 56494 expecting error: (.*)")]
 		public void ThenForEveryFieldInTheTableICallSharedStep56494ExpecingError(string error, Table table)
 		{
-			Steps_Shared thisStepShared = new Steps_Shared();
+			var thisStepShared = new Steps_Shared();
 			foreach (TableRow thisRow in table.Rows)
 			{
-				NewProduct MyNewProduct = new NewProduct();
+				var MyNewProduct = new NewProduct();
 				MyNewProduct.MoveToLabel(thisRow["Field"]);
 				thisStepShared.GivenICallSharedStep56494PesticideDetailsCanadaProvinceCodeconfirmationvalidationAndSelectionForProvince(thisRow["Field"], error);
 			}
@@ -1897,7 +1897,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(Table table)
 		{
 			List<string> VOCSummaryStatements = new NewProduct().GetVOCSummaryStatements();
-			List<string> expectedStatements = table.Rows.Select(x => x["Statement"]).ToList();
+			var expectedStatements = table.Rows.Select(x => x["Statement"]).ToList();
 			foreach (string statement in expectedStatements)
 			{
 				Report.IsTrue(VOCSummaryStatements.Contains(statement), "Expected statement: " + statement,
@@ -2060,7 +2060,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
 		{
 			// if subscription upgrade - Proceed ?
-			Steps_PaymentMethods MyStepsPaymentMethods = new Steps_PaymentMethods();
+			var MyStepsPaymentMethods = new Steps_PaymentMethods();
 			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
 			GeneralUtilities.StudioWaitForSpinner();
 			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
@@ -2248,7 +2248,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click (Save|Cancel) in The Product Page")]
 		public void ThenIClickSaveOrCancelInTheProductPage(string saveOrCancel)
 		{
-			NewProduct selNewProduct = new NewProduct();
+			var selNewProduct = new NewProduct();
 
 			if (saveOrCancel.ToLower() == "save")
 			{
@@ -2312,7 +2312,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void DataAcceptancePageShouldNotShow()
 		{
 			bool pageHasDisappeared = false;
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 			for (int i = 0; i < 120; i++)
 			{
 				if (!thisNewProduct.YesAgreedExists())
@@ -2331,7 +2331,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"For retailer: (.*) I add additional requirements: (.*)")]
 		public void ThenIAddAdditionaRequirmentsInfoForRetailer(string retailer, string additionalRequirements)
 		{
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 			Report.IsTrue(thisNewProduct.EnterAdditionalRequirement(retailer, additionalRequirements),
 				"Failed to enter additional requirements: " + additionalRequirements + " for retailer: " + retailer,
 				"Added additional requirements for retailer: " + retailer);
