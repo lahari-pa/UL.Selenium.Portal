@@ -10,9 +10,72 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class LiveHelp : BaseObject
 	{
-		public const string BasePath = "//div[@id='lc_chat_layout']";
+		public const string BasePath = "//div[@class='h-conv ember-view']";
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
+
+		public bool Wait_for_load()
+		{
+			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			return base.Wait_for_load(30);
+		}
+
+		public bool VerifyThreeLinesIcon()
+		{
+			var icon = this.containerElement.FindElement(By.XPath(".//span[@class='ic-chat']//i"));
+			return icon != null;
+		}
+
+		public bool VerifyX()
+		{
+			var x = this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i"));
+			return x != null;
+		}
+
+		public bool VerifyInboxText()
+		{
+			string text = this.containerElement.FindElement(By.XPath(".//h1[@class='list-title ']")).Text;
+			return text == "Inbox";
+		}
+
+		public bool VerifyMessageText(string message)
+		{
+			string text = this.containerElement.FindElement(By.XPath(".//div[@class='h-message-text']")).Text;
+			return text == message;
+		}
+
+		public bool VerifyLowerText(string text)
+		{
+			string foundText = this.containerElement.FindElement(By.XPath(".//a[@class='product']")).Text;
+			return foundText == text;
+		}
+
+		public bool VerifyPlaceholder(string text)
+		{
+			string placeholder = this.containerElement.FindElement(By.XPath(".//div[@id='app-conversation-editor']")).GetAttribute("data-placeholder");
+			return placeholder == text;
+		}
+
+		public bool VerifyIcon(string icon)
+		{
+			IWebElement foundIcon = null;
+			if (icon == "paperclip")
+			{
+				foundIcon = this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_attachment']"));
+				return foundIcon != null;
+			}
+			else if (icon == "smiley")
+			{
+				foundIcon = this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_smiley']"));
+				return foundIcon != null;
+			}
+			else
+			{
+				return false;
+			}
+		}
 
 		public bool EnterName(string name)
 		{
@@ -68,7 +131,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCloseX()
 		{
-			return this.containerElement.FindElement(By.XPath(".//span[@id='lc-close']")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i")).TryClick();
 		}
 
 

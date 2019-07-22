@@ -421,9 +421,14 @@ Scenario: [58579] Live Help - Chat Feature
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Given I click on the Live Help button on the upper right
 	Then I should see the Live Help dialog
-	Then In the Live Help dialog I should see the following text: Please provide the following to begin a live chat or call: Support: +1-518-720-6220 or +1-877-642-6753  Agency: +1-855-313-1230
-	Given In the Live Help dialog I enter name: John Smith
-	Given In the Live Help dialog I enter email: johnsmithtest@test.co.uk
+	Then In the Live Help dialog I should see a small icon with three lines in the upper left hand corner
+	Then In the Live Help dialog I should see an x in the upper right hand corner
+	Then In the Live Help dialog I should see the text 'Inbox' at the top of the chat window
+	Then In the Live Help dialog I should see the following text in the message area: Hello there! Need help? Reach out to us right here, and we'll get back to you as soon as we can!
+	Then In the Live Help dialog I should see the following text in the lower part of the chat window: Freshchat
+	Then In the Live Help dialog I should see the following placeholder text in the text entry field: Reply here...
+	Then In the Live Help dialog I should see the paperclip icon in the lower right hand corner
+	Then In the Live Help dialog I should see the smiley icon in the lower right hand corner
 	Given In the Live Help dialog I click on the x to close
 
 @TReVorId:17229
