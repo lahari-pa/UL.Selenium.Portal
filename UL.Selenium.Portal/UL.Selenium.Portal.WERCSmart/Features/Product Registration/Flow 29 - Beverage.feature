@@ -44,6 +44,7 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Juice and Juice Drinks
 	Then I save the product information as: TestCase60695
+	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 49818 (Beverage Regulatory Details)
@@ -54,8 +55,6 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60695, container type: Plastic Container and size: 3.5
 	Then I should see the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
-	Then I should see the Optional Reports and Documents Available for Purchase Page
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Juice and Juice Drinks
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60695
