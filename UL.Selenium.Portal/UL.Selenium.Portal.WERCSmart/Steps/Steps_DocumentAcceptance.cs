@@ -14,6 +14,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm there are products listed under My Products on the Document Acceptance page and save as: (.*)")]
 		public void ConfirmThereAreProductsListedUnderMyProducts(string savedAs)
 		{
+			GeneralUtilities.Wait_for_load_finish();
 			var selDocumentAcceptance = new DocumentAcceptance();
 			List<DocumentAcceptance.MyProductsItem> products = selDocumentAcceptance.GetProducts();
 			Context.AddToContext(savedAs, products);
@@ -29,6 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var products = (List<DocumentAcceptance.MyProductsItem>)Context.GetFromContext(savedAs);
 			foreach (DocumentAcceptance.MyProductsItem product in products)
 			{
+				selDocumentAcceptance.ClickPage(product.PageNumber);
 				List<DocumentAcceptance.DocumentsItem> documents = selDocumentAcceptance.GetDocuments();
 				if (product.Click() && GeneralUtilities.Wait_for_load_finish() && documents.Any())
 				{

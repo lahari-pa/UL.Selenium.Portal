@@ -110,13 +110,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\SHA Manager\Home Page\Suspended.feature">
-      <LastGenOutput>Suspended.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\SHA Manager\LowerOptions.feature">
-      <LastGenOutput>LowerOptions.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\SHA Manager\Recertification.feature">
-      <LastGenOutput>Recertification.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

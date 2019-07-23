@@ -74,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Clicking " + button + " on inactivity popup");
 			var selInactivityPopup = new InactivityPopup();
-			var clicked = false;
+			bool clicked = false;
 			switch (button)
 			{
 				case ("Yes"):
@@ -235,7 +235,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking if " + dialog + " dialog is visible");
 				var selHomepage = new Homepage();
-				var showing = false;
+				bool showing = false;
 				switch (dialog)
 				{
 					case ("Product Information"):
@@ -277,7 +277,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking contents of Pie Chart Legend");
 				var selHomepage = new Homepage();
-				foreach (var row in table.Rows)
+				foreach (TableRow row in table.Rows)
 				{
 					Report.IsTrue(selHomepage.EntryShowingInPieChartLegend(row["State"], row["Colour"]), "Legend entry was not showing correctly!", "Entry was showing correctly in the legend!");
 				}
@@ -404,7 +404,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking 'My Products' Filter Options");
 				var selProdGrid = new ProductsGrid();
-				foreach (var row in table.Rows)
+				foreach (TableRow row in table.Rows)
 				{
 					Report.IsTrue(selProdGrid.FilterOptionShowingCorrectly(row["Options"], row["Colour"]), "Filter option: '" + row["Options"] + "' was not showing correctly!", "Filter option: '" + row["Options"] + "' was showing correctly!");
 				}
@@ -465,7 +465,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void TheFollowingAreShowingInThe(string lookingfor, string area, TechTalk.SpecFlow.Table expected)
 		{
-			foreach (var row in expected.Rows)
+			foreach (TableRow row in expected.Rows)
 			{
 				switch (area)
 				{
@@ -675,7 +675,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the Empty Cart pop up message reads: (.*)")]
 		public void EmptyCartPopUpText(string value)
 		{
-			var actualMessage = new EmptyCart().BodyMessage();
+			string actualMessage = new EmptyCart().BodyMessage();
 			Report.IsTrue(actualMessage == value,
 				"The Empty Cart pop up message text did not match the expected value. Expected: '" + value + "'. Actual: '" + actualMessage + "'",
 				"The Emoty Cart pop up message text matched the expected value: '" + value + "'");
@@ -758,7 +758,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Info("Checking that Cart is Empty window appears");
 				var selCartEmpty = new CartIsEmptyDialog();
-				var showing = selCartEmpty.HeaderShowing();
+				string showing = selCartEmpty.HeaderShowing();
 				Report.IsTrue(showing == headerExpected.Trim(),
 					"Cart is Empty header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
 					"Cart is Empty header was showing '" + headerExpected + "', as expected!");
@@ -786,7 +786,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking order of states in the Pie Chart Legend");
 				var selHomepage = new Homepage();
-				var ListOfStates = selHomepage.PieChartLegendItems();
+				List<string> ListOfStates = selHomepage.PieChartLegendItems();
 				var ExpectedStates = table.Rows.Select(x => x["State"]).ToList();
 				int i = 0;
 				foreach (string expectedState in ExpectedStates)
@@ -812,7 +812,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking order of states in the Pie Chart Legend");
 				var selProductsGrid = new ProductsGrid();
-				var ListOfFilters = selProductsGrid.GetAllFilters();
+				List<string> ListOfFilters = selProductsGrid.GetAllFilters();
 				var ExpectedFilters = table.Rows.Select(x => x["Filter"]).ToList();
 				int i = 0;
 				foreach (string expectedFilter in ExpectedFilters)
@@ -834,8 +834,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the announcements area I should see my saved messages")]
 		public void ThenInTheAnnouncementsAreaIShouldSeeMySavedMessages()
 		{
-			Homepage myHomepage = new Homepage();
-			List<Message> ListOfMessages = (List<Message>)Context.GetFromContext("Messages");
+			var myHomepage = new Homepage();
+			var ListOfMessages = (List<Message>)Context.GetFromContext("Messages");
 			List<string> MessagesOnHomepage = myHomepage.GetAnnouncements();
 			foreach (string thisMessage in ListOfMessages.Select(x => x.MessageBody).ToList())
 			{
@@ -868,10 +868,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected, message count is showing as: " + ActualMessageCount.ToString());
 		}
 
-		[StepDefinition(@"I click on the Live Help button on the lower right")]
-		public void GivenIClickOnTheLiveHelpButtonOnTheLowerRight()
+		[StepDefinition(@"I click on the Live Help button on the upper right")]
+		public void GivenIClickOnTheLiveHelpButtonOnTheUpperRight()
 		{
-			TopMenuBar myTopMenuBar = new TopMenuBar();
+			var myTopMenuBar = new TopMenuBar();
 			Report.IsTrue(myTopMenuBar.ClickLiveHelp(), "Failed to click live help", "Clicked live help");
 		}
 
@@ -882,48 +882,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Live Help dialog is showing as expected");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I should see the following text: (.*)")]
-		public void ThenInTheLiveHelpDialogIShouldSeeTheFollowingText(string expectedText)
+		[StepDefinition(@"In the Live Help dialog I should see a small icon with three lines in the upper left hand corner")]
+		public void ThenIShouldSeeThreeLinesIcon()
 		{
-			string actualText = new LiveHelp().GetFormText().Trim().Replace(Environment.NewLine, " ");
-
-			Report.Info("ActualText length = " + actualText.Length.ToString());
-			Report.Info("ExpectedText length = " + expectedText.Trim().Length.ToString());
-			int i = 0;
-			if (actualText != expectedText.Trim())
-			{
-				foreach (char thisChar in expectedText.ToCharArray().ToList())
-				{
-					if (i + 2 < actualText.Length)
-					{
-						Report.Info("Expecting: " + thisChar.ToString() + " and getting: " + actualText[i]);
-					}
-					else
-					{
-						break;
-					}
-					i++;
-				}
-			}
-
-			Report.IsTrue(actualText == expectedText.Trim(), "Expected: " + expectedText + " but got: " + actualText,
-				"Text is showing as expected: " + expectedText);
+			Report.IsTrue(new LiveHelp().VerifyThreeLinesIcon(), "Three lines icon is not present in the upper left hand corner",
+				"Three lines icon is present in the upper left hand corner");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I enter name: (.*)")]
-		public void GivenInTheLiveHelpDialogIEnterName(string name)
+		[StepDefinition(@"In the Live Help dialog I should see an x in the upper right hand corner")]
+		public void ThenIShouldSeeAnXInTheUpperRightHandCorner()
 		{
-			LiveHelp myLiveHelp = new LiveHelp();
-			Report.IsTrue(myLiveHelp.EnterName(name), "Failed to enter name: " + name,
-				"Successfully entered name: " + name);
+			Report.IsTrue(new LiveHelp().VerifyX(), "X is not present in the upper right hand corner",
+				"X is present in the upper right hand corner");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I enter email: (.*)")]
-		public void GivenInTheLiveHelpDialogIEnterEmail(string email)
+		[StepDefinition(@"In the Live Help dialog I should see the text 'Inbox' at the top of the chat window")]
+		public void ThenIShouldSeeInbox()
 		{
-			LiveHelp myLiveHelp = new LiveHelp();
-			Report.IsTrue(myLiveHelp.EnterEmail(email), "Failed to enter email: " + email,
-				"Successfully entered email: " + email);
+			Report.IsTrue(new LiveHelp().VerifyInboxText(), "Inbox text is not present", "Inbox text is present");
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the following text in the message area: (.*)")]
+		public void ThenIShouldSeeTheFollowingTextInTheMessageArea(string message)
+		{
+			Report.IsTrue(new LiveHelp().VerifyMessageText(message), "Text is not present in the message area: " + message,
+				"Text is present in the message area: " + message);
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the following text in the lower part of the chat window: (.*)")]
+		public void ThenIShouldSeeTheFollowingTextInTheLowerPartOfTheChatWindow(string text)
+		{
+			Report.IsTrue(new LiveHelp().VerifyLowerText(text), "Text '" + text + "' does not appear in the lower part of the message area",
+				"Text appears correctly in the lower part of the chat window: " + text);
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the following placeholder text in the text entry field: (.*)")]
+		public void ThenIShouldSeeTheFollowingPlaceholder(string text)
+		{
+			Report.IsTrue(new LiveHelp().VerifyPlaceholder(text), "Placeholder '" + text + "' does not appear in the text entry area",
+				"Placeholder appears correctly in the text entry area: " + text);
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the (.*) icon in the lower right hand corner")]
+		public void ThenIShouldSeeTheIconInTheLowerRightHandCorner(string icon)
+		{
+			Report.IsTrue(new LiveHelp().VerifyIcon(icon), icon + " icon not found in the lower right hand corner",
+				icon + " icon found in the lower right hand corner");
 		}
 
 		[StepDefinition(@"In the Live Help dialog I click on the x to close")]
@@ -935,10 +939,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the hover over text is as expected for the following navigation icons")]
 		public void HoverOverIconsAndConfirmTheTitleAppears(Table icons)
 		{
-			foreach (var row in icons.Rows)
+			foreach (TableRow row in icons.Rows)
 			{
-				var icon = row["Icon"];
-				var text = row["Text"];
+				string icon = row["Icon"];
+				string text = row["Text"];
 				Report.IsTrue(new NavigationBar().IconTextDisplayedOnHover(icon, text),
 					"Title text: " + text + " did not appear on hover for icon: " + icon,
 					"Title text: " + text + " appeared on hover for icon: " + icon + " as expected", false, false);
@@ -949,7 +953,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveListOfIDsDisplayedOnThePageAs(string savedAs)
 		{
 			var selProductsGrid = new ProductsGrid();
-			var prodIDs = selProductsGrid.AllIDsInGrid();
+			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
 			Context.AddToContext(savedAs, prodIDs);
 		}
