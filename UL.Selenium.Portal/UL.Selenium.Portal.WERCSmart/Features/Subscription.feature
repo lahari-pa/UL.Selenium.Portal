@@ -933,32 +933,32 @@ Then In the Subscription Information screen I confirm grace period is: None
 Scenario: [73394] Grace period through My Account 
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: New_Sub with the following parameters:
-| Field                | Value                        |
-| Email                | User_<random>                |
-| Country              | UNITED STATES                |
-| FirstName            | WERCS                        |
-| LastName             | Automated_TEST73394          |
-| Password             | Pa4*ytuufnn    |
-| Address1             | Address 1      |
-| Address2             | Address 2      |
-| City                 | City Name      |
-| State                | Florida        |
-| Zip                  | 999            |
-| CompanyName          | Company 1      |
-| CompanyPhone         | 123-456-7889   |
-| EmergencyPhoneNumber | 123-456-7789   |
-| SupplierType         | Manufacturer   |
-| PhoneQuestion         | PhoneQuestion   |
-| PhoneHint             | PhoneHint       |
-| MentorQuestion          | MentorQuestion    |
-| MentorHint              | MentorHint        |
-| FriendQuestion       | FriendQuestion |
-| FriendHint           | FriendHint     |
-| AnimalQuestion          | AnimalQuestion    |
-| AnimalHint              | AnimalHint        |
-| CollegeQuestion       | CollegeQuestion |
-| CollegeHint           | CollegeHint     |
-| Pin                  | 1234           |
+| Field                | Value                   |
+| Email                | User_<random>           |
+| Country              | UNITED STATES           |
+| FirstName            | WERCS                   |
+| LastName             | Automated_TEST73394     |
+| Password             | Welcome1!               |
+| Address1             | Address 1               |
+| Address2             | Address 2               |
+| City                 | City Name               |
+| State                | Florida                 |
+| Zip                  | 999                     |
+| CompanyName          | Company 1               |
+| CompanyPhone         | 123-456-7889            |
+| EmergencyPhoneNumber | 123-456-7789            |
+| SupplierType         | Manufacturer            |
+| PhoneQuestion        | PhoneQuestion           |
+| PhoneHint            | PhoneHint               |
+| MentorQuestion       | MentorQuestion          |
+| MentorHint           | MentorHint              |
+| FriendQuestion       | FriendQuestion          |
+| FriendHint           | FriendHint              |
+| AnimalQuestion       | AnimalQuestion          |
+| AnimalHint           | AnimalHint              |
+| CollegeQuestion      | CollegeQuestion         |
+| CollegeHint          | CollegeHint             |
+| Pin                  | 1234                    |
 Given I click on My Account
 Then I click on NEW SUBSCRIPTION
 Then In the Subscription Enrollment screen I select the following enrollment options
@@ -969,8 +969,21 @@ Then In the Payment Methods screen I select Payment Method: Wire Transfer
 Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I check the Header is correct
+#Given I log in with email: User_4b44c15b958d.kxxyxunf@mailosaur.io and password: Welcome1!
 Given I click on My Account
 Then In the My Account screen I navigate to the Subscription Information page
 Then In the Subscription Information screen I confirm the Status has the correct information: 1 Formulated, 0 Articles, 0 Enhanced Articles
 Then In the Subscription Information screen I confirm status is: LOCKED
+Then In the Subscription Information screen I confirm grace period is: None
+Given I click on My Account
+Then In the My Account screen I navigate to the Payment Methods page
+Then In the Payment Methods under Add a new Payment method I select: Credit Card
+Then In the Payment Methods screen I enter Credit Card details
+| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
+| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test73394_cc           |
+Given In the Add new Credit card popup I click Save
+Given I click on Make Default for user: test73394_cc
+Given I click on My Account
+Then In the My Account screen I navigate to the Subscription Information page
+Then In the Subscription Information screen I confirm status is: ACTIVE
 Then In the Subscription Information screen I confirm grace period is: None

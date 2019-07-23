@@ -155,6 +155,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool ClickMakeDefault(string user)
+		{
+			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='card payment-method']")).ToList();
+
+			IWebElement myCard = null;
+
+			foreach (var method in allProducts)
+			{
+				if (method.Text.Trim().Replace("\r\n", " ").Contains(user))
+				{
+					Report.Success("Payment Method for user found");
+					myCard = method;
+					break;
+				}
+				Report.Info("Payment Method for user doesn't match!");
+			}
+
+			if (myCard == null)
+			{
+				Report.Info("Failed to Find Credit Card Payment Method for user");
+				Report.Screenshot();
+				return false;
+			}
+
+			IWebElement myMakeDefault = myCard.FindElement(By.XPath(".//a[@class='btn btn-default btn-xs']"), 2);
+
+			if (myMakeDefault == null)
+			{
+				Report.Info("Not able to find make default option for user");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("found make default for user");
+			myMakeDefault.TryClick();
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Screenshot();
+			return true;
+		}
 
 		public bool Credit_Card_Fields_Check(List<string> myList)
 		{
@@ -810,8 +848,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		//Add a New Payment Method
+		public bool Add_A_New_Payment_Method(string payment_method)
+		{
+			Report.Info("Beginning Select_Payment_Method: " + payment_method);
+			this.RefindContainerElement();
+			List<IWebElement> paymentOptions = this.containerElement.FindElements(By.XPath("//ul[@class='list-inline']//button"), 2).ToList();
 
+			foreach (var method in paymentOptions)
+			{
+				Report.Info("Payment Method = " + method.Text);
 
+				if (method.Text == payment_method)
+				{
+					Report.Success("Payment Method Found");
+					method.TryClick();
+					Delay.Seconds(3 * Delay.SpeedFactor);
+					return true;
+				}
+				Report.Info("Payment Method Doesn't Match");
+			}
+			Report.Info("Failed to Find Payment Method");
+			return false;
+		}
 
 	}
 
@@ -1788,5 +1847,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
+	public class Add_Credit_Card_Popup : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath("//div[@id='add-ccach-modal']//div[@class='modal-content']");
 
+		private IWebElement SaveButton => this.containerElement.FindElement(By.Id("save-pm"), 1);
+
+		public bool Click_Save()
+		{
+			Report.Info("Attempting to Click Save Button");
+			this.SaveButton.TryClick();
+			return true;
+		}
+
+	}
 }
