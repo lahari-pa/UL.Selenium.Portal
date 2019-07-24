@@ -188,10 +188,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			Report.Success("found make default for user");
-			myMakeDefault.TryClick();
-			GeneralUtilities.Wait_for_load_finish();
-			Report.Screenshot();
-			return true;
+			return myMakeDefault.TryClick();
 		}
 
 		public bool Credit_Card_Fields_Check(List<string> myList)
@@ -862,10 +859,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				if (method.Text == payment_method)
 				{
 					Report.Success("Payment Method Found");
-					method.TryClick();
-					Delay.Seconds(3 * Delay.SpeedFactor);
-					return true;
+					return method.TryClick();
 				}
+
 				Report.Info("Payment Method Doesn't Match");
 			}
 			Report.Info("Failed to Find Payment Method");
@@ -1856,8 +1852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Click_Save()
 		{
 			Report.Info("Attempting to Click Save Button");
-			this.SaveButton.TryClick();
-			return true;
+			return this.SaveButton.TryClick();
 		}
 
 	}

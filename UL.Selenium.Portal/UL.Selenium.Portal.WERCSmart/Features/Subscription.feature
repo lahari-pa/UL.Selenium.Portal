@@ -21,7 +21,7 @@ Feature: Subscription
 
 @TReVorId:19117
 Scenario: [63297] Add subscription to a new supplier through data entry
-Given If not already created, I create a user: New_Sub with the following parameters:
+Given If not already created, I create a user: TC63297User with the following parameters:
 | Field                | Value          |
 | Email                | User_<random>  |
 | Country              | UNITED STATES  |
@@ -206,8 +206,8 @@ Then In the Payment Methods screen I confirm the following payment options are a
 | ACH           |
 | PayPal        |
 | Wire Transfer |
-Then In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as New_Sub
-Then In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as New_Sub
+Then In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as TC63297User
+Then In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as TC63297User
 And In the Payment Methods screen I open the Edit Address form
 Then I confirm the Edit Address form has the correct fields
 | Field                     |
@@ -223,11 +223,11 @@ Then I confirm the Edit Address form has the correct fields
 | Phone Number              |
 | Shipping/Billing Checkbox |
 Then I cancel the Edit Address form
-Then I edit the Billing Address for user saved as: New_Sub
+Then I edit the Billing Address for user saved as: TC63297User
 # ** If field is not to be changed, enter <empty> into table **
 | Address Line 1 | Address Line 2 | City    | State   | Zip Code | Country | Phone Number |
 | Address_New    | <empty>        | <empty> | <empty> | <empty>  | <empty> | <empty>      |
-And In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as New_Sub
+And In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as TC63297User
 Then In the Payment Methods screen I confirm the Continue Button is disabled
 Then In the Payment Methods screen I select Payment Method: Credit Card
 Then In the Payment Methods screen I confirm the Credit Card fields are correct
@@ -291,13 +291,13 @@ Then In the Subscription Information screen I confirm the Subscription History t
 Given I click on My Account
 Then In the My Account screen I navigate to the Order History page
 Then In the Order History screen I select Subscription
-Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: New_Sub
+Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC63297User
 
 
 @TReVorId:19118
 Scenario: [59245] Add subscription to a new supplier from My account
 Given I go to the WERCSmart Log in
-Given If not already created, I create a user: New_Sub with the following parameters:
+Given If not already created, I create a user: TC59245User with the following parameters:
 | Field                | Value          |
 | Email                | User_<random>  |
 | Country              | UNITED STATES  |
@@ -340,8 +340,8 @@ Then In the Payment Methods screen I confirm the following payment options are a
 | Credit Card   |
 | ACH           |
 | Wire Transfer |
-Then In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as New_Sub
-Then In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as New_Sub
+Then In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as TC59245User
+Then In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as TC59245User
 And In the Payment Methods screen I open the Edit Address form
 Then I confirm the Sub Headings are correct: Primary Account Contact, Billing Address
 Then I confirm the Edit Address form has the correct fields
@@ -370,11 +370,11 @@ And I confirm the Shipping Address form has the correct fields
 Then I check the Shipping Address is the same as the billing address checkbox
 Then I confirm the Shipping Address is hidden
 Then I cancel the Edit Address form
-Then I edit the Billing Address for user saved as: New_Sub
+Then I edit the Billing Address for user saved as: TC59245User
 # ** If field is not to be changed, enter <empty> into table **
 | Address Line 1 | Address Line 2 | City    | State   | Zip Code | Country | Phone Number |
 | Address_New    | <empty>        | <empty> | <empty> | <empty>  | <empty> | <empty>      |
-And In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as New_Sub
+And In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as TC59245User
 Then In the Payment Methods screen I confirm the Continue Button is disabled
 Then In the Payment Methods screen I select Payment Method: Credit Card
 Then In the Payment Methods screen I confirm the Credit Card fields are correct
@@ -439,7 +439,7 @@ Then In the Subscription Information screen I confirm the Subscription History t
 Given I click on My Account
 Then In the My Account page I navigate to the Order History page
 Then In the Order History screen I select Subscription
-Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: New_Sub
+Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC59245User
 
 @TReVorId:19119
 Scenario: [67822] New subscription to a new supplier from My account - Visual Checks
@@ -609,9 +609,10 @@ Then In the Purchase Summary screen I confirm the Prices and Payment section con
 Then In the Purchase Summary screen I confirm the following statement is shown: By clicking "Confirm Order" you will be enrolled in our subscription plan.
 
 
+@TReVorId:22351
 Scenario: [105063] Upgrade Subscription Message
 Given I go to the WERCSmart Log in
-Given If not already created, I create a user: New_Sub with the following parameters:
+Given If not already created, I create a user: TC105063User with the following parameters:
 | Field                | Value          |
 | Email                | User_<random>  |
 | Country              | UNITED STATES  |
@@ -692,9 +693,10 @@ Then In the Thank You screen I check the Header is correct
 Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
 
 
+@TReVorId:22352
 Scenario: [62727] Upgrade Subscription through My Account 
 Given I go to the WERCSmart Log in
-Given If not already created, I create a user: New_Sub with the following parameters:
+Given If not already created, I create a user: TC62727User with the following parameters:
 | Field                | Value                   |
 | Email                | User_<random>           |
 | Country              | UNITED STATES           |
@@ -784,12 +786,13 @@ Then In the Subscription Information screen I confirm the Subscription History t
 Given I click on My Account
 Then In the My Account screen I navigate to the Order History page
 Then In the Order History screen I select Subscription
-Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: New_Sub
+Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC62727User
 
 
+@TReVorId:22353
 Scenario: [63224] Upgrade subscription through data entry 
 Given I go to the WERCSmart Log in
-Given If not already created, I create a user: New_Sub with the following parameters:
+Given If not already created, I create a user: TC63224User with the following parameters:
 | Field                | Value                   |
 | Email                | User_<random>           |
 | Country              | UNITED STATES           |
@@ -878,12 +881,13 @@ Then In the Subscription Information screen I confirm the Subscription History t
 Given I click on My Account
 Then In the My Account screen I navigate to the Order History page
 Then In the Order History screen I select Subscription
-Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: New_Sub
+Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC63224User
 
 
+@TReVorId:22354
 Scenario: [73388] Grace period through new account 
 Given I go to the WERCSmart Log in
-Given If not already created, I create a user: New_Sub with the following parameters:
+Given If not already created, I create a user: TC73388User with the following parameters:
 | Field                | Value          |
 | Email                | User_<random>  |
 | Country              | UNITED STATES  |
@@ -930,9 +934,10 @@ Then In the Subscription Information screen I confirm status is: ACTIVE
 Then In the Subscription Information screen I confirm grace period is: None
 
 
+@TReVorId:22355
 Scenario: [73394] Grace period through My Account 
 Given I go to the WERCSmart Log in
-Given If not already created, I create a user: New_Sub with the following parameters:
+Given If not already created, I create a user: TC73394User with the following parameters:
 | Field                | Value                   |
 | Email                | User_<random>           |
 | Country              | UNITED STATES           |

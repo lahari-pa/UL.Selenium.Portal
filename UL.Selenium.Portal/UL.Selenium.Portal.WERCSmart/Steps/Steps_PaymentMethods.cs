@@ -927,6 +927,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new PaymentMethods().ClickMakeDefault(user), "Failed to click the make default",
 				"Successfully clicked make default");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 	}
 }
