@@ -439,8 +439,6 @@
     </None>
     <None Include="Features\SupplierReports.feature">
     </None>
-    <None Include="Features\Test.feature">
-    </None>
     <None Include="Features\TheProduct.feature">
     </None>
     <None Include="Features\UL Solution Center.feature">
