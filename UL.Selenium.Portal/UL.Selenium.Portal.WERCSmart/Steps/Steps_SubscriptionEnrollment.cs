@@ -550,7 +550,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I see the alert message with text: (.*) under Subscription Enrollment")]
 		public void TopAlertMessage(string value)
 		{
-			string actualText = new SubscriptionEnrollment().GetAlertMessage();
+			var actualText = new SubscriptionEnrollment().GetAlertMessage();
 			//Report.IsTrue(actualText == value,
 			//	"The alert message was not showing the expeted text! Expected: '" + value + "' but got: '" + actualText,
 			//	"The alert message was showing the expected text: '" + value + "'");
