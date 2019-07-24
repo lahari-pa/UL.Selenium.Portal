@@ -5,6 +5,7 @@ using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -25,12 +26,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public string ProductID()
 		{
-			var headerText = this.containerElement.FindElement(By.XPath(".//span[contains(@data-bind,'text: dataEntry.pname')]"), 2)?.Text;
+			string headerText = this.containerElement.FindElement(By.XPath(".//span[contains(@data-bind,'text: dataEntry.pname')]"), 2)?.Text;
 			if (headerText == null)
 			{
 				return null;
 			}
-			var bracketsMatch = Regex.Match(headerText, @"\(\d+\)");
+			Match bracketsMatch = Regex.Match(headerText, @"\(\d+\)");
 			if (!bracketsMatch.Success)
 			{
 				return null;
@@ -40,17 +41,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetAnswerToQuestion(string question)
 		{
-			var allQuestions = this.containerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h3"));
+			ReadOnlyCollection<IWebElement> allQuestions = this.containerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h3"));
 			if (allQuestions.Count == 0)
 			{
 				return null;
 			}
 
-			var matchingQuestion = allQuestions.FirstOrDefault(x => x.GetValue().Contains(question));
+			IWebElement matchingQuestion = allQuestions.FirstOrDefault(x => x.GetValue().Contains(question));
 
 			if (matchingQuestion != null)
 			{
-				var matchingAnswer = matchingQuestion.FindElement(By.XPath("../p[contains(@data-bind, 'Data')]"), 2);
+				IWebElement matchingAnswer = matchingQuestion.FindElement(By.XPath("../p[contains(@data-bind, 'Data')]"), 2);
 				if (matchingAnswer != null)
 				{
 					return matchingAnswer.GetValue();
@@ -62,19 +63,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetKitContents()
 		{
-			List<string> lGetKitContents = new List<string>();
-			var allTableQuestions = this.containerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h2"));
+			var lGetKitContents = new List<string>();
+			ReadOnlyCollection<IWebElement> allTableQuestions = this.containerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h2"));
 			if (allTableQuestions.Count == 0)
 			{
 				return lGetKitContents;
 			}
 
-			var matchingQuestion = allTableQuestions.FirstOrDefault(x => x.GetValue().Contains("Select Existing Registrations to include in the Kit"));
+			IWebElement matchingQuestion = allTableQuestions.FirstOrDefault(x => x.GetValue().Contains("Select Existing Registrations to include in the Kit"));
 
 			if (matchingQuestion != null)
 			{
-				var matchingAnswers = matchingQuestion.FindElements(By.XPath("../table//tbody/tr//div"));
-				foreach (var answer in matchingAnswers)
+				ReadOnlyCollection<IWebElement> matchingAnswers = matchingQuestion.FindElements(By.XPath("../table//tbody/tr//div"));
+				foreach (IWebElement answer in matchingAnswers)
 				{
 					lGetKitContents.Add(answer.GetValue());
 				}
@@ -85,27 +86,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<SummaryDocument> GetAdditionalDocuments()
 		{
-			List<SummaryDocument> listOfDocuments = new List<SummaryDocument>();
-			var allTableQuestions = this.containerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h2"));
+			var listOfDocuments = new List<SummaryDocument>();
+			ReadOnlyCollection<IWebElement> allTableQuestions = this.containerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h2"));
 			if (allTableQuestions.Count == 0)
 			{
 				return listOfDocuments;
 			}
 
-			var matchingQuestion = allTableQuestions.FirstOrDefault(x => x.GetValue().Contains("Additional documents you've requested"));
+			IWebElement matchingQuestion = allTableQuestions.FirstOrDefault(x => x.GetValue().Contains("Additional documents you've requested"));
 
 			if (matchingQuestion != null)
 			{
 
-				var matchingAnswers = matchingQuestion.FindElements(By.XPath("../table//tbody/tr"));
-				foreach (var answer in matchingAnswers)
+				ReadOnlyCollection<IWebElement> matchingAnswers = matchingQuestion.FindElements(By.XPath("../table//tbody/tr"));
+				foreach (IWebElement answer in matchingAnswers)
 				{
-					var DocumentName = answer.FindElement(By.XPath(".//td[1]/div"), 2);
-					var DocumentLang = answer.FindElement(By.XPath(".//td[2]/div"), 2);
+					IWebElement DocumentName = answer.FindElement(By.XPath(".//td[1]/div"), 2);
+					IWebElement DocumentLang = answer.FindElement(By.XPath(".//td[2]/div"), 2);
 
 					if (DocumentName != null && DocumentLang != null)
 					{
-						SummaryDocument thisSummaryDocument = new SummaryDocument() { DocumentName = DocumentName.GetValue(), DocumentLanguage = DocumentLang.GetValue() };
+						var thisSummaryDocument = new SummaryDocument() { DocumentName = DocumentName.GetValue(), DocumentLanguage = DocumentLang.GetValue() };
 						listOfDocuments.Add(thisSummaryDocument);
 					}
 

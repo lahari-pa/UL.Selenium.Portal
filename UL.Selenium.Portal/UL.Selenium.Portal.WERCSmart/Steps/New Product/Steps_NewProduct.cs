@@ -4,8 +4,10 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using NTTQA.Selenium.UniversalFunctions;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -973,6 +975,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
 		{
 			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to click accept button", "Clicked accept button", true);
+			GeneralUtilities.Wait_for_load_finish();
 			Delay.Seconds(1);
 		}
 
@@ -2202,6 +2205,54 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(found.Contains(option),
 				"statement was not as expected! Expected: " + option + ", but found: " + found + "!",
 				"statement was showing: " + option + ", as expected!");
+		}
+
+		[StepDefinition(@"I click on the Notice of Adoption Article link")]
+		public void IClickOnTheNoticeOfAdoptionArticleLink()
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.ClickAdoptionArticleLink(), "Failed to click Notice of Adoption Article link",
+				"Successfully clicked Notice of Adoption Article link");
+		}
+
+		[StepDefinition(@"I confirm that a new Notice of Adoption Article tab opens and navigate to it")]
+		public void ConfirmThatANewTabOpensAndNavigateToIt()
+		{
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext("MainWindowHandle", currentHandle);
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
+			{
+				Report.Info("Switching tab");
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h1[contains(text(),'Notice of Adoption Article')]"), 2) != null)
+				{
+					Report.Success("The Notice of Adoption Article page opened in a new tab. Successfully switched to that tab.");
+					Report.Screenshot();
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab!");
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I close the Notice of Adoption Article tab")]
+		public void ICloseTheNoticeOfAdoptionArticleTab()
+		{
+			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs();
+
+			foreach (string url in OpenBrowsers)
+			{
+				SeleniumBrowser.SwitchToTabWithURL(url);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h1[contains(text(),'Notice of Adoption Article')]"), 2) != null)
+				{
+					Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
+										"Closed tab with url: " + url);
+				}
+				return;
+			}
+
+			Report.Failure("Did not find Notice of Adoption Article page to close");
 		}
 
 		[StepDefinition(@"I Check the check box for the TDS/BDS current version question")]

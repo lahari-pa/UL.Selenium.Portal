@@ -112,7 +112,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Features\ChooseGoodGuide.feature">
-      <LastGenOutput>ChooseGoodGuide.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

@@ -84,7 +84,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var dataSummarySheet = new DataSummary();
 
 
-			var found = dataSummarySheet.sGetProductName();
+			var found = dataSummarySheet.SGetProductName();
 
 			Report.IsTrue(found.Contains(option),
 				"Expected: " + option + " but got: " + found,
@@ -168,7 +168,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenConfirmThatTransparencyRatioSavedAsTRAfterIs(string numerator, string denominator)
 		{
 			DataSummary thisDataSummary = new DataSummary();
-			string actualRatio = thisDataSummary.sGetTransparencyRatio();
+			string actualRatio = thisDataSummary.SGetTransparencyRatio();
 			string pattern = @"([0123456789\.]*)\s*\/\s*([0123456789\.]*)";
 			var regMatch = System.Text.RegularExpressions.Regex.Match(actualRatio, pattern);
 			if (!regMatch.Success || regMatch.Groups.Count != 3)

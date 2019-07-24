@@ -127,7 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		private IWebElement QuestionOne => this.containerElement.FindElement(By.Id("secQuestion1"),1);
+		private IWebElement QuestionOne => this.containerElement.FindElement(By.Id("secQuestion1"), 1);
 
 		public bool Enter_Answer_One(string answerText)
 		{

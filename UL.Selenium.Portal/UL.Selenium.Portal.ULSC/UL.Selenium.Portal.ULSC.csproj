@@ -147,16 +147,12 @@
     <None Include=".editorconfig" />
     <None Include="App.config" />
     <None Include="Features\Dashboard\Dashboard.feature">
-      <LastGenOutput>Dashboard.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Dashboard\Services.feature">
-      <LastGenOutput>Services.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product creation.feature">
-      <LastGenOutput>Product creation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ULSC.feature">
-      <LastGenOutput>ULSC.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

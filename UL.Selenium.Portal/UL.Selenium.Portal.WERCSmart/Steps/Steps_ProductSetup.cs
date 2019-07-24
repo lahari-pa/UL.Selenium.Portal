@@ -104,7 +104,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", savedAs);
 			// 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75335)
-			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+			var table4 = new Table(new string[] {
 				"Retailer"
 			});
 			table4.AddRow(new string[] {
@@ -142,7 +142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			TestReport.StartStep("I should see the The Product Page");
 			newProductSteps.GivenIShouldSeeXPage("The Product");
-			var testCaseId = GlobalParameters.TestCaseId;
+			string testCaseId = GlobalParameters.TestCaseId;
 			if (testCaseId == null)
 			{
 				throw new Exception("Unable to locate a test case ID in global parameters which is required!");
@@ -160,7 +160,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click Continue");
 			newProductSteps.ClickContinue();
 			TestReport.StartStep("I save the product information as TestCase" + testCaseId);
-			var prodDetails = new NewProduct().GetCurrentProductInformation();
+			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			Context.AddToContext($"TestCase{testCaseId}", prodDetails);
 			TestReport.StartStep("Navigate to the home page");
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -196,7 +196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				savedAs, "red");
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 
-			TechTalk.SpecFlow.Table recertification = new TechTalk.SpecFlow.Table(new string[] {
+			var recertification = new Table(new string[] {
 				"Product ID",
 				"Active",
 				"Recertification Reason"
@@ -232,7 +232,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Recertification");
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 
-			TechTalk.SpecFlow.Table recertification2 = new TechTalk.SpecFlow.Table(new string[] {
+			var recertification2 = new Table(new string[] {
 				"Product ID",
 				"Active",
 				"Recertification Reason"
@@ -303,39 +303,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			thisGlobalSteps.NavigateToLandingPage();
 			// Log in to administrator role
+			Report.Info("Starting Shared Step 67823 Login To WERCSmart_ProductsAutomationAccount");
 			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
 			//thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
 			// Generate UPC number and delete duplicates
+			Report.Info("Generating UPC");
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
+			Report.Info("Removing all refernces to the UPC generated");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75335");
 			// 57408 (Create a New Registration via Register New Product icon)
+			Report.Info("Create a New Registration via Register New Product icon");
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			// 57500 (The Product- Enter name, select product type - Continue - Happy Path)
+			Report.Info("The Product- Enter name, select product type - Continue - Happy Path");
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
 			// 26897 (Product Characteristics - Solid only available - continue)
+			Report.Info("Product Characteristics - Solid only available - continue");
 			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
 			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			Report.Info("Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path");
 			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+			Report.Info("(Ingredients - add any chemical) with name: Sodium hydroxide");
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			Report.Info("Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			// 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: CVS
+			Report.Info("(Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS");
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("CVS");
 
 			Context.AddToContext("retailer", "CVS");
 			// 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40
+			Report.Info("(Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40");
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75335",
 				"Metal Container", "40");
 			// 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+			Report.Info("Regulatory Documents to Provide - US only - request authoring - Happy Path");
 			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
 			// Click continue
 			newProductSteps.ClickContinue();
 			// Click continue
 			newProductSteps.ClickContinue();
 			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+			Report.Info("Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path");
 			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
 				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
 				"Partition Coefficient");
@@ -344,10 +357,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
 			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			Report.Info("Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			Report.Info("Data Acceptance - Click Accept - Happy Path");
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
 			// If purchase details are showing click confirm order
+			Report.Info("If purchase details are showing click confirm order");
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			// 65080 (Login to Studio and Open SHA manager)
 			//********************
@@ -378,8 +394,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"75347 (WPS) Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase75335");
 			sharedSteps.GivenICallSharedWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTNGHSAndSBCS(savedAs);
 			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
+			Report.Info("WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved");
 			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
 			// 59066(Go to SHA Manager)
+			Report.Info("Go to SHA Manager");
 			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
@@ -392,7 +410,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("(SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)");
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			Report.Info("51664 (SHA - Accepted); Product - set Retailers to Completed for saved as: TestCase75335)");
-			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+			var table4 = new Table(new string[] {
 				"Retailer"
 			});
 			table4.AddRow(new string[] {
@@ -406,14 +424,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var ID = ProductDetails.Id;
-			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			string ID = ProductDetails.Id;
+			var myStudioShaManager = new StudioSHAManager();
 
 			myStudioShaManager.ClickBottomMenuOption("Search");
 
-			Steps_SHA myStepsSha = new Steps_SHA();
+			var myStepsSha = new Steps_SHA();
 			string status = "Completed";
-			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+			var table = new Table(new string[] {
 				"SearchTerm",
 				"SearchValue"
 			});
@@ -428,7 +446,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 
 			Delay.Seconds(2);
-			StudioSHAManager mySHAManager = new StudioSHAManager();
+			var mySHAManager = new StudioSHAManager();
 			mySHAManager.WaitForProductList(10);
 			Product topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
 
@@ -661,7 +679,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And In the Product Recertification History popup I should see the following entry
 			//| Product ID | Active | Recertification Reason |
 			//| saved as TestCase84511 | true | Recertification of Product by WERCSmart Customer |
-			TechTalk.SpecFlow.Table recertification = new TechTalk.SpecFlow.Table(new string[] {
+			var recertification = new Table(new string[] {
 				"Product ID",
 				"Active",
 				"Recertification Reason"
@@ -729,7 +747,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And In the Product Recertification History popup I should see the following entry
 			//| Product ID | Active | Recertification Reason |
 			//| saved as TestCase84511 | false | Recertification of Product by WERCSmart Customer |
-			TechTalk.SpecFlow.Table recertification2 = new TechTalk.SpecFlow.Table(new string[] {
+			var recertification2 = new Table(new string[] {
 				"Product ID",
 				"Active",
 				"Recertification Reason"
@@ -772,7 +790,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Then I save the product information as: TestCase80821
 			newProductSteps.SaveProductInformation(savedAs);
 			//And I call Shared Step 80822 - Ingredients - Add non - generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808211
-			TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
+			var table34 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage",
@@ -798,7 +816,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808212
 			//| CASNumber  | ComponentName | Percentage | Publicly Disclosed | Public Name            |
 			//| 37334-84-2 | Cellolyn 21   | 15         | No                 | Undisclosed Ingredient |
-			TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
+			var table35 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage",
@@ -823,7 +841,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing808213
 			//| CASNumber  | ComponentName    | Percentage |
 			//| RR-38384-6 | FRAGRANCE-HERBAL | 10         |
-			TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
+			var table36 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage"
@@ -843,7 +861,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing808214
 			//| CASNumber  | ComponentName    | Percentage |
 			//| RR-38213-8 | FRAGRANCE-BANANA | 10         |
-			TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
+			var table37 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage"
@@ -863,7 +881,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808215
 			//| CASNumber | ComponentName    | Percentage | Publicly Disclosed | Public Name            |
 			//| FLAVOR    | 611 Grape Flavor | 10         | No                 | Undisclosed Ingredient |
-			TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
+			var table38 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage",
@@ -888,7 +906,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808216
 			//| CASNumber | ComponentName                 | Percentage | Publicly Disclosed | Public Name            |
 			//| NA519     | Black Cherry - Natural Flavor | 10         | Yes                | Undisclosed Ingredient |
-			TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
+			var table39 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage",
@@ -913,7 +931,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing808217
 			//| CASNumber | ComponentName                                                                                                       | Percentage |
 			//| FRAGRANCE | Fragrance - Birch Branch: Skin Irrit. 2, Eye Irrit. 2A, Skin Sens. 1, Repro Tox 2, Acute Aquatic 2, Chronic Acute 2 | 10         |
-			TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
+			var table40 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage"
@@ -934,7 +952,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808218
 			//| CASNumber | ComponentName | Percentage | Publicly Disclosed | Public Name            |
 			//| 7732-18-5 | Water         | 10         | Yes                | Undisclosed Ingredient |
-			TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
+			var table41 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage",
@@ -1013,7 +1031,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And In the phrase selector screen I select phrases:
 			//| Text |
 			//| Y    |
-			TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
+			var table42 = new Table(new string[] {
 				"Text"
 			});
 			table42.AddRow(new string[] {
@@ -1026,7 +1044,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//| Component CAS          | Component ID | Chemical Name               |
 			//| saved as TestCase80821 | MIXTURE      | AAA WERCS Test Raw Material |
 
-			TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
+			var table43 = new Table(new string[] {
 				"Component CAS",
 				"Component ID",
 				"Chemical Name"
@@ -1108,7 +1126,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I Use the shared step below to add a FLAVOR component to your formulation - for example use a FLAVORS Ingredient with the CAS Number of RR - 38669 - 6
 			//And I call Shared Step 79431(Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: (.*)
 
-			TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
+			var table34 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage",
@@ -1129,7 +1147,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I Use the shared step below to add a FRAGRANCE component to your formulation - for example use Fragrance - Gardenia: Skin irritant 2, Eye damage 1, Skin sensitization 1, Carcinogen 1A, reproductive toxin 2, Aquatic acute 2, Aquatic Chronic 2 / FRAGRANCE
 			//And I call Shared Step 79436(Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: (.*)
 
-			TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
+			var table36 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage"
@@ -1146,7 +1164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 79490(Ingredients - Add non - generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
 			//	| CASNumber | ComponentName | Percentage |
 			//	| 50 - 00 - 0 | Formaldehyde | 30 |
-			TechTalk.SpecFlow.Table table55 = new TechTalk.SpecFlow.Table(new string[] {
+			var table55 = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage",
@@ -1225,7 +1243,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And In the phrase selector screen I select phrases:
 			//| Text |
 			//| Y    |
-			TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
+			var table42 = new Table(new string[] {
 				"Text"
 			});
 			table42.AddRow(new string[] {
@@ -1381,7 +1399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			//And I call Shared Step 75146(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue)
-			TechTalk.SpecFlow.Table retailerTable = new TechTalk.SpecFlow.Table(new string[] {
+			var retailerTable = new Table(new string[] {
 				"Retailer"});
 			retailerTable.AddRow(new string[] {
 				"CVS"});
@@ -1443,7 +1461,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void ProcessAssignedFormulatedProductBackToCompletedUsingTestCase84518(string savedAs)
 		{
-			Steps_Shared sharedSteps = new Steps_Shared();
+			var sharedSteps = new Steps_Shared();
 
 			//If you are running this test case you already have a formulated product which is in Assigned status having come from Recertification.
 			//And I call Shared Step 65080(Login to Studio and Open SHA manager)
@@ -1460,12 +1478,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Step 84505 - WPS PD + -Current Document - Add NGHS RTF and PDF to Document queue]
 			//And I Click the Document Queue icon(icon looks like a page with three dots below it)
 			//TestReport.StartStep("I click the Document queue icon in the tool bar");
-			Steps_Studio thisStepsStudio = new Steps_Studio();
+			var thisStepsStudio = new Steps_Studio();
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
 			TestReport.StartStep("I click the filter icon");
 			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var id = productDetails.Id;
+			string id = productDetails.Id;
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
 			TestReport.StartStep("I enter the product id in the Product/Alias area of the filter and click Apply");
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
@@ -1475,7 +1493,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Delay.Seconds(5);
 				Report.Screenshot();
-				DocumentQueuePage newDocumentQueuePage = new DocumentQueuePage();
+				var newDocumentQueuePage = new DocumentQueuePage();
 				Report.IsTrue(newDocumentQueuePage.Wait_for_load(30), "Document queue page failed to load",
 					"Document queue page loaded");
 				List<Document> listOfDocuments = newDocumentQueuePage.GetAllDocuments();
@@ -1487,7 +1505,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			TestReport.StartStep(
 				"I confirm the product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF");
-			TechTalk.SpecFlow.Table tblCheckDocument = new TechTalk.SpecFlow.Table(new string[] {
+			var tblCheckDocument = new TechTalk.SpecFlow.Table(new string[] {
 				"ProductOrAlias",
 				"Subformat",
 				"Language",
@@ -1551,16 +1569,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			//And I Depending in the retailers you selected your product will be shown in the Accepted or Completed status.If any retailer is shown in Accepted use the shared step below to set to Completed
-			Steps_SHA shaSteps = new Steps_SHA();
+			var shaSteps = new Steps_SHA();
 			TestReport.StartStep("Depending in the retailers you selected your product will be shown in the Accepted or Completed status");
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Accepted or Completed");
 
-			var currentStatus = new StudioSHAManager().GetproductStatus(id).StatusName;
+			string currentStatus = new StudioSHAManager().GetproductStatus(id).StatusName;
 
 			if (currentStatus == "Accepted")
 			{
 				// 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75335)
-				TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+				var table4 = new TechTalk.SpecFlow.Table(new string[] {
 					"Retailer"
 				});
 				table4.AddRow(new string[] {
@@ -1687,6 +1705,73 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		public void CreateProductAndTakeToSubmitted(string savedAs, string name)
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			//thisGlobalSteps.NavigateToLandingPage();
+			//// Log in to administrator role
+			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
+			// 57408 (Create a New Registration via Register New Product icon)
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			// 57500 (The Product- Enter name, select product type - Continue - Happy Path)
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
+			// Save product to context
+			newProductSteps.SaveProductInformation(savedAs);
+			// 26897 (Product Characteristics - Solid only available - continue)
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			// 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: CVS
+			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
+			// 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
+			// Click continue
+			newProductSteps.ClickContinue();
+			// Click continue
+			newProductSteps.ClickContinue();
+			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
+			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
+			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+
+			////SHA Manager
+			////********************
+			//sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			//// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			//sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			//Report.Info(
+			//	"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
+			//// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
+			//shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+			//	"Submitted");
+		}
+
+		[StepDefinition(@"I create a product with RU - Chalk and take to submitted and save as: (.*)")]
+		public void GivenICreateProductAndTakeItToSubmitted(string savedAs)
+		{
+			this.CreateProductAndTakeToSubmitted(savedAs, "Chalk");
+		}
 	}
 
 }

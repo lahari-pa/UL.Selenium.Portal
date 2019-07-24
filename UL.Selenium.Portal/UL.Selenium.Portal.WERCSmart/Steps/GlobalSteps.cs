@@ -749,7 +749,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)NTTQA.Selenium.SpecFlow.Context.GetFromContext("Matching");
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
 				string emailBody = EmailFunctions.getEmailBody(email);
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
@@ -777,7 +777,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)NTTQA.Selenium.SpecFlow.Context.GetFromContext("Matching");
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
 				string emailBody = EmailFunctions.getEmailBody(email);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
