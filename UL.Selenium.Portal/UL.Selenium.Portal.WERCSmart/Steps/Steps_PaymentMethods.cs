@@ -902,5 +902,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var reviewPayPal = new PaymentMethods_PayPal_MemberReview();
 			reviewPayPal.Click_AgreeAndContinue();
 		}
+
+		[StepDefinition(@"In the Payment Methods under Add a new Payment method I select: (.*)")]
+		public void ThenISelectAddANewPaymentMethod(string payMethod)
+		{
+			var myPay = new PaymentMethods();
+			Delay.Seconds(3 * Delay.SpeedFactor);
+			Report.IsTrue(myPay.Add_A_New_Payment_Method(payMethod), "Failed to Select " + payMethod,
+				"Successfully Selected " + payMethod);
+			Delay.Seconds(3 * Delay.SpeedFactor);
+		}
+
+		[StepDefinition(@"In the Add new Credit card popup I click Save")]
+		public void ThenIClickSave()
+		{
+			var myPay = new Add_Credit_Card_Popup();
+			Delay.Seconds(2 * Delay.SpeedFactor);
+			Report.IsTrue(myPay.Click_Save(), "Failed to Click Save", "Save Button Clicked");
+			Delay.Seconds(10 * Delay.SpeedFactor);
+		}
+
+		[StepDefinition(@"I click on Make Default for user: (.*)")]
+		public void GivenIClickOnMakeDefault(string user)
+		{
+			Report.IsTrue(new PaymentMethods().ClickMakeDefault(user), "Failed to click the make default",
+				"Successfully clicked make default");
+			GeneralUtilities.Wait_for_load_finish();
+		}
 	}
 }

@@ -1056,6 +1056,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Can't run this test since we need a page count of 6 or higher", "OK to continue with this test.");
 		}
 
+		[StepDefinition(@"In the Subscription Information screen I confirm status is: (.*)")]
+		public void ThenIConfirmStatus(string status)
+		{
+			var selMyAccount = new MyAccount_SubscriptionInfo();
 
+			Report.IsTrue(selMyAccount.Get_Status() == status, "status is not as expected",
+				"Status is as expected");
+		}
+
+		[StepDefinition(@"In the Subscription Information screen I confirm grace period is: (.*)")]
+		public void ThenIConfirmGracePeriod(string gracePeriod)
+		{
+			var selMyAccount = new MyAccount_SubscriptionInfo();
+
+			Report.IsTrue(selMyAccount.Get_GracePeriod() == gracePeriod, "grace period is not as expected",
+				"grace period is as expected");
+		}
 	}
 }
