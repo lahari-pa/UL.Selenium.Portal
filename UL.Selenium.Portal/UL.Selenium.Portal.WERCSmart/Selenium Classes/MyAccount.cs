@@ -32,18 +32,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetCompanyName()
 		{
-			var companyNameH3 = this.containerElement.FindElement(By.XPath("//div[@class='col-sm-3 basic-info']/h3"), 2);
-			if (companyNameH3 != null)
-			{
-				string innerText = companyNameH3.GetInnerHTML();
-				string regExPattern = @"\<.*\>.*\<\/.*\>";
-				var rgx = new Regex(regExPattern);
-				return rgx.Replace(innerText, "").Trim();
-			}
-			else
-			{
-				return "";
-			}
+			var companyNameH3 = this.containerElement.FindElement(By.XPath(".//div[@id= 'basic-user-info']/h3"), 2);
+			return companyNameH3?.Text;
 		}
 
 		public bool SaveUserGrid(string saveAs)

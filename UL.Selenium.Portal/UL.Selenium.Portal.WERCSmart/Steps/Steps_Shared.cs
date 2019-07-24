@@ -8044,12 +8044,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		///  | Tier 2.1		| Disabled		|
 		///  | Tier 2.2		| Enabled		|
 		/// </summary>
-		[StepDefinition(@"I call Shared Step 57186 \(Data Consent Tiers - Administrator Email Confirmation - Walmart\) for email address saved as: (.*)")]
-		public void SharedStep57186_DataConsentTiers_AdministratorEmailConfirmation_Walmart(string savedAs, Table dataUsage)
+		[StepDefinition(@"I call Shared Step 57186 \(Data Consent Tiers - Administrator Email Confirmation - Walmart\) for email address saved as: (.*) and company name saved as: (.*)")]
+		public void SharedStep57186_DataConsentTiers_AdministratorEmailConfirmation_Walmart(string emailSavedAs, string companySavedAs, Table dataUsage)
 		{
 			TestReport.UseSubSteps = true;
-			var username = new TopMenuBar().GetCurrentUser();
-			var expectedText = "Hello " + username + ", Recently an administrator has changed the Data Usage permissions for Wal-Mart/SAM'S CLUB to include: ";
+			var name = Context.GetFromContext(companySavedAs)?.ToString();
+			if (name == null)
+			{
+				Report.Failure("Requires a Company Name saved to context as: " + companySavedAs);
+				return;
+			}
+			var expectedText = "Hello " + name + ", Recently an administrator has changed the Data Usage permissions for Wal-Mart/SAM'S CLUB to include: ";
 			foreach (var row in dataUsage.Rows)
 			{
 				switch (row["Data Tier"])
@@ -8073,7 +8078,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			expectedText += "For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team";
 			TestReport.StartStep("I confirm the administrator receieved an email with subject 'WERCSmart Data Use Tier Consents Changed for Wal-Mart/Sam's Club'");
-			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "WERCSmart Data Use Tier Consents Changed for Wal-Mart/SAM'S CLUB");
+			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", "WERCSmart Data Use Tier Consents Changed for Wal-Mart/SAM'S CLUB");
 			TestReport.StartStep("I confirm the body text of the email matches the expected text");
 			new GlobalSteps().ThenTheBodyOfTheEmailShouldShow(expectedText);
 		}

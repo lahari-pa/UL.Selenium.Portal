@@ -758,7 +758,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Body of the Email was: " + emailBody);
 				string actualTrimmed = bodyDecode.Replace(" ", "");
 				string expectedTrimmed = bodyText.Replace(" ", "");
-				Report.IsTrue(actualTrimmed == expectedTrimmed, "Body text did not match correctly!", "Body text matched correctly!");
+				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
 			}
 			catch (Exception ex)
 			{
