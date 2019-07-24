@@ -121,6 +121,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					quantityField.EnterText(info.Quantity);
 				}
 
+				if (info.IndividualUpcCasePack.ToLower().Contains("saved as"))
+				{
+					try
+					{
+						var savedUPC = Context
+							.GetFromContext(info.IndividualUpcCasePack.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+							.ToString();
+						info.IndividualUpcCasePack = savedUPC;
+					}
+					catch (Exception e)
+					{
+						Report.Info("Failed to find saved item in context: " + info.IndividualUpcCasePack.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+						throw;
+					}
+
+				}
+
 				if (info.IndividualUpcCasePack.Length > 0)
 				{
 					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'upcContained.field')]"), 2);
