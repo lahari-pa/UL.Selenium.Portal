@@ -982,6 +982,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
 		{
 			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to click accept button", "Clicked accept button", true);
+			GeneralUtilities.Wait_for_load_finish();
 			Delay.Seconds(1);
 		}
 

@@ -1091,8 +1091,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public string Get_Status()
+		{
+			Report.Info("Beginning to get status");
+
+			IWebElement myStatus = this.containerElement.FindElement(By.XPath(".//p[@class='spaced-text']//span[contains(@class,'text-bold text-uppercase')]"), 2);
+
+			if (myStatus == null)
+			{
+				Report.Info("Failed to Find Status");
+				Report.Screenshot();
+				return "";
+			}
+			Report.Info("Status Found: " + myStatus.Text);
+			Report.Screenshot();
+			return myStatus.Text;
+		}
 
 
+		public string Get_GracePeriod()
+		{
+			Report.Info("Beginning to get grace period");
+
+			IWebElement myGracePeriod = this.containerElement.FindElement(By.XPath(".//p[@class='spaced-text']//span[contains(@data-bind,'model.gracePeriod')]"), 2);
+
+			if (myGracePeriod == null)
+			{
+				Report.Info("Failed to Find grace period");
+				Report.Screenshot();
+				return "";
+			}
+			Report.Info("grace period Found: " + myGracePeriod.Text);
+			Report.Screenshot();
+			return myGracePeriod.Text;
+		}
 	}
 	class MyAccount_OrderHistory : BaseObject
 	{

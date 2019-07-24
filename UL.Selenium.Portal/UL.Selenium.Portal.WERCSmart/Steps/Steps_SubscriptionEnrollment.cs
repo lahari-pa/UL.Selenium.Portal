@@ -551,9 +551,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void TopAlertMessage(string value)
 		{
 			string actualText = new SubscriptionEnrollment().GetAlertMessage();
-			Report.IsTrue(actualText == value,
-				"The alert message was not showing the expeted text! Expected: '" + value + "' but got: '" + actualText,
-				"The alert message was showing the expected text: '" + value + "'");
+			//Report.IsTrue(actualText == value,
+			//	"The alert message was not showing the expeted text! Expected: '" + value + "' but got: '" + actualText,
+			//	"The alert message was showing the expected text: '" + value + "'");
+			Report.IsTrue(actualText.Contains(value), "Warning is not showing as expected. Expected: " + value + " but got: " + string.Join(",", actualText),
+				"Warning is showing as expected");
 		}
 	}
 }
