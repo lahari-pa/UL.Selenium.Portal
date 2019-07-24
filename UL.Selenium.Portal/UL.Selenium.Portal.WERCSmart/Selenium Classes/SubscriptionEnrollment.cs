@@ -357,9 +357,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public string GetAlertMessage()
+		public List<string> GetAlertMessage()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 2)?.Text;
+			//return this.containerElement.FindElement(By.XPath(".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 2);
+			try
+			{
+				var errors = this.containerElement.FindElements(By.XPath(".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 2);
+				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
+			}
+			catch (Exception)
+			{
+				return null;
+			}
 		}
 
 
@@ -737,7 +746,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_Support_Services_Plan(string servicesPlan)
 		{
 			Report.Info("Beginning Select_Support_Services_Plan: " + servicesPlan);
-
+			SeleniumBrowser.ScrollToBottomOfPage();
+			//GeneralUtilities.ScrollToBottomOfPage();
 			if (!this.Exists)
 			{
 				Report.Info("Not on Subscription Enrollment Page");
