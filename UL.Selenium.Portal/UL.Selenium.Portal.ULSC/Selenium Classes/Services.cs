@@ -19,8 +19,8 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public bool Wait_For_Load(int secondsToWait = 30)
 		{
-			var counter = 0;
-			var loaded = false;
+			int counter = 0;
+			bool loaded = false;
 			while (counter < secondsToWait && !loaded)
 			{
 				loaded = this.SectionContainer("", true) != null;
@@ -34,7 +34,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		{
 			if (!firstSection)
 			{
-				var match = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2)
+				IWebElement match = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2)
 					?.FirstOrDefault(x => x.Text == heading);
 				return match?.FindElement(By.XPath("./ancestor::div[starts-with(@id,'well')][1]"), 2);
 			}
@@ -43,7 +43,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public List<string> SectionHeadings()
 		{
-			var sectionHeadings = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2);
+			IList<IWebElement> sectionHeadings = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2);
 			if (sectionHeadings.Count != 0)
 			{
 				return sectionHeadings.Select(x => x.GetValue().Trim()).ToList();
@@ -54,17 +54,17 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public string SectionDescription(string heading)
 		{
-			var el = this.SectionContainer(heading);
+			IWebElement el = this.SectionContainer(heading);
 			if (el == null)
 			{
 				Report.Error($"No Services section was found with heading: {heading}!");
 				return null;
 			}
-			var description = "";
-			var descRows = el.FindElements(By.XPath("./div[contains(@class,'row')]/div[contains(@class,'col-md-12') and ./span]"), 2);
-			foreach (var row in descRows)
+			string description = "";
+			IList<IWebElement> descRows = el.FindElements(By.XPath("./div[contains(@class,'row')]/div[contains(@class,'col-md-12') and ./span]"), 2);
+			foreach (IWebElement row in descRows)
 			{
-				var textEls = row.FindElements(By.XPath("./*"), 2);
+				IList<IWebElement> textEls = row.FindElements(By.XPath("./*"), 2);
 				description = textEls.Aggregate(description, (desc, textEl) => desc + textEl.Text.Trim());
 			}
 			return description;
@@ -72,7 +72,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public List<string> SectionImages(string heading)
 		{
-			var el = this.SectionContainer(heading);
+			IWebElement el = this.SectionContainer(heading);
 			if (el == null)
 			{
 				Report.Error($"No Services section was found with heading: {heading}!");
@@ -80,15 +80,15 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			}
 			var images = new List<string>();
 			var regex = new Regex(@"(?<=images\/)(.*)(?=\.)");
-			var srcs = el.FindElements(By.XPath(".//img"), 2);
-			foreach (var srcEl in srcs)
+			IList<IWebElement> srcs = el.FindElements(By.XPath(".//img"), 2);
+			foreach (IWebElement srcEl in srcs)
 			{
-				var src = srcEl?.GetAttribute("src");
+				string src = srcEl?.GetAttribute("src");
 				if (src == null)
 				{
 					continue;
 				}
-				var match = regex.Match(src);
+				Match match = regex.Match(src);
 				if (match.Success)
 				{
 					images.Add(match.Value);
@@ -146,13 +146,13 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			//	Report.Error("No matching section was found: " + heading);
 			//	return null;
 			//}
-			var el = this.SectionContainer(heading);
+			IWebElement el = this.SectionContainer(heading);
 			if (el == null)
 			{
 				Report.Error($"No Services section was found with heading: {heading}!");
 				return null;
 			}
-			var subHeadingEls = el.FindElements(By.XPath("//span[@class='pullup']"));
+			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> subHeadingEls = el.FindElements(By.XPath("//span[@class='pullup']"));
 			if (subHeadingEls.Count != 0)
 			{
 				return subHeadingEls.Select(x => x.Text).ToList();
@@ -177,15 +177,15 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			//	return null;
 			//}
 
-			var el = this.SectionContainer(heading);
+			IWebElement el = this.SectionContainer(heading);
 			if (el == null)
 			{
 				Report.Error($"No Services section was found with heading: {heading}!");
 				return null;
 			}
 			var links = new List<ServiceLink>();
-			var linkEls = el.FindElements(By.XPath(".//div[./em and ./a]"), 2);
-			foreach (var thisLink in linkEls)
+			IList<IWebElement> linkEls = el.FindElements(By.XPath(".//div[./em and ./a]"), 2);
+			foreach (IWebElement thisLink in linkEls)
 			{
 				if (thisLink == null)
 				{
@@ -203,8 +203,8 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public WercsLinkService GetSection(string title)
 		{
-			var match = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2)?.FirstOrDefault(x => x.Text == title);
-			var sectionEl = match?.FindElement(By.XPath("./ancestor::div[starts-with(@id,'well')][1]"), 2);
+			IWebElement match = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2)?.FirstOrDefault(x => x.Text == title);
+			IWebElement sectionEl = match?.FindElement(By.XPath("./ancestor::div[starts-with(@id,'well')][1]"), 2);
 			return sectionEl == null ? null : this.GetSection(sectionEl);
 		}
 
@@ -223,8 +223,8 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		public List<WercsLinkService> GetSections()
 		{
 			var rList = new List<WercsLinkService>();
-			var sectionEls = this.containerElement.FindElements(By.XPath(".//div[starts-with(@id,'well')]"), 2);
-			foreach (var el in sectionEls)
+			IList<IWebElement> sectionEls = this.containerElement.FindElements(By.XPath(".//div[starts-with(@id,'well')]"), 2);
+			foreach (IWebElement el in sectionEls)
 			{
 				rList.Add(this.GetSection(el));
 			}

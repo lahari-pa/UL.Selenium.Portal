@@ -6,6 +6,7 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -49,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var CancelButton = this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+				IWebElement CancelButton = this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 					.FirstOrDefault(x => x.Text == "CANCEL");
 				return (CancelButton.Enabled && CancelButton.Displayed);
 			}
@@ -84,7 +85,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool LoginPasswordFieldPresent()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2);
 			return el != null && el.Displayed;
 		}
 
@@ -129,10 +130,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetRetailers()
 		{
-			var retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+			ReadOnlyCollection<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
 
-			List<string> retailerList = new List<string>();
-			foreach (var retailer in retailers)
+			var retailerList = new List<string>();
+			foreach (IWebElement retailer in retailers)
 			{
 				retailerList.Add(retailer.GetValue());
 			}
@@ -142,9 +143,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectRetailer(string retailer)
 		{
-			var retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+			ReadOnlyCollection<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
 
-			var matchingRetailer = retailers.FirstOrDefault(x => x.GetValue() == retailer);
+			IWebElement matchingRetailer = retailers.FirstOrDefault(x => x.GetValue() == retailer);
 
 			if (matchingRetailer == null)
 			{
@@ -153,7 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			else
 			{
-				var retailerCheckbox = matchingRetailer.FindElement(By.XPath("..//input"), 2);
+				IWebElement retailerCheckbox = matchingRetailer.FindElement(By.XPath("..//input"), 2);
 				if (retailerCheckbox == null)
 				{
 					Report.Info(("Found retailer but could not find checkbox"));

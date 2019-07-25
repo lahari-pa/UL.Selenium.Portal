@@ -18,14 +18,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveUpcsToContext(string savedAs)
 		{
 			var upcNumbers = new List<string>();
-			var upcs = new ViewUpcs().Upcs();
-			foreach (var upc in upcs)
+			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
+			foreach (ViewUpcs.ProductUpc upc in upcs)
 			{
 				upcNumbers.Add(upc.UpcNumber);
 			}
-            Report.Info("there are " + upcNumbers.Count + " upc numbers to save");
-            Report.Info("Saving to context as: " + savedAs);
-            Context.AddToContext(savedAs, upcNumbers);
+			Report.Info("there are " + upcNumbers.Count + " upc numbers to save");
+			Report.Info("Saving to context as: " + savedAs);
+			Context.AddToContext(savedAs, upcNumbers);
 		}
 
 	}

@@ -102,7 +102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Setting up account details for user: '" + savedAs + "'");
-				var account = parameters.CreateInstance<WERCSmartUser>();
+				WERCSmartUser account = parameters.CreateInstance<WERCSmartUser>();
 				account.Email = EmailFunctions.CreateEmail(account.Email);
 				account.Identifier = savedAs;
 				Context.AddToContext(savedAs, account, true);
@@ -247,7 +247,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- In the " + input + " entry error I see error message: " + errorMessage);
 			try
 			{
-				NewUser thisNewUser = new NewUser();
+				var thisNewUser = new NewUser();
 				switch (input)
 				{
 					case "Country":
@@ -532,7 +532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		// No StepDefinition?
 		public void CheckForEmailDifferences(WERCSmartUser user, string emailFrom, string title, bool should = true)
 		{
-			var differences = EmailFunctions.GetInboxDifferences(user.Email);
+			List<Email> differences = EmailFunctions.GetInboxDifferences(user.Email);
 
 			Report.Info("Checking that differences have been found...");
 			if (differences.FirstOrDefault() == null)
@@ -542,7 +542,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.Info("Emails have been found!");
-			var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom && x.Subject == title);
+			Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom && x.Subject == title);
 			Report.Info("Checking that a matching email has been found");
 
 			if (should)
@@ -574,8 +574,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a link the email which sets up the WERCSmart account");
 			try
 			{
-				Email matchingEmail = (Email)Context.ScenarioContext["Matching"];
-				var myLink = matchingEmail.Html.Links[0].Href;
+				var matchingEmail = (Email)Context.ScenarioContext["Matching"];
+				string myLink = matchingEmail.Html.Links[0].Href;
 				Report.Info("Found a link: '" + myLink + "' in the email!");
 				Context.AddToContext("EmailLink", myLink);
 			}
@@ -593,7 +593,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Delay.Seconds(2);
-				AccountNotifications thisPopup = new AccountNotifications();
+				var thisPopup = new AccountNotifications();
 				Report.IsTrue(thisPopup.Wait_for_load(30), "Popup error is not showing as expected");
 				Report.IsTrue(thisPopup.GetErrorText() == expectedError,
 					"Expected error was: " + expectedError + " actual error was: " + thisPopup.GetErrorText(),
@@ -614,7 +614,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Delay.Seconds(2);
-				AccountNotifications thisPopup = new AccountNotifications();
+				var thisPopup = new AccountNotifications();
 				Report.IsTrue(thisPopup.Wait_for_load(30), "Popup error is not showing as expected");
 				thisPopup.Click_Close();
 			}
@@ -635,12 +635,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Attempting to open the email link");
-				var mylink = Context.GetFromContext("EmailLink").ToString();
+				string mylink = Context.GetFromContext("EmailLink").ToString();
 				Report.Info("Found a signup link of: '" + mylink + "'");
 				Report.Info("Attempting to navigate to the link...");
 				SeleniumBrowser.Navigate(mylink);
 				Report.Success("Navigated to the link!");
-				NewUser userCreatonPage = new NewUser();
+				var userCreatonPage = new NewUser();
 				Report.IsTrue(userCreatonPage.Wait_for_load(30), "New User Creation page did not load!", "User creation page loaded as expected!");
 			}
 			catch (Exception ex)
@@ -658,7 +658,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
-				NewUser thisNewUser = new NewUser();
+				var thisNewUser = new NewUser();
 				Report.IsTrue(thisNewUser.Wait_for_load(), "New user form failed to load", "New user form is loaded as expected.");
 				Report.Screenshot();
 
@@ -718,7 +718,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- check current page title");
 			try
 			{
-				NewUser thisNewUser = new NewUser();
+				var thisNewUser = new NewUser();
 				Report.IsTrue(thisNewUser.WaitForPageTitle(pageTitle, 60),
 					pageTitle + " page has not loaded as expected.",
 					pageTitle + " page loaded as expected!");
@@ -739,7 +739,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- If terms of use page appears I accept");
 			try
 			{
-				TermsOfUse myTermsOfUse = new TermsOfUse();
+				var myTermsOfUse = new TermsOfUse();
 				if (myTermsOfUse.Wait_for_load(60))
 				{
 					myTermsOfUse.Accept();
@@ -786,7 +786,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check the Security Questions show the error: (.*)")]
 		public void ThenICheckTheSecurityQuestionsShowTheError_(string expected)
 		{
-			NewUser nu = new NewUser();
+			var nu = new NewUser();
 			for (int i = 1; i < 5; i++)
 			{
 				string actual = nu.GetSecurityQuestionError(i);
@@ -802,7 +802,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter Pin: '" + pin + "'");
 			try
 			{
-				NewUser thisNewUser = new NewUser();
+				var thisNewUser = new NewUser();
 				Report.Info("Beginning to enter pin: '" + pin + "'");
 				thisNewUser.Pin = pin;
 				Report.IsTrue(pin == thisNewUser.Pin, "Pin was not entered correctly!", "Pin was entered successfully!");
@@ -823,7 +823,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				Report.Info("Beginning to enter pin: '" + user.Pin + "'");
-				NewUser thisNewUser = new NewUser {
+				var thisNewUser = new NewUser {
 					Pin = user.Pin
 				};
 				Report.IsTrue(user.Pin == thisNewUser.Pin, "Pin was not entered correctly!", "Pin was entered successfully!");

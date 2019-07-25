@@ -4,6 +4,7 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -46,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void BrandNameExistsMyBrandsGrid(string brandName)
 		{
 			Report.Info("Fetching all brands saved in the My Brands grid");
-			var displayedBrands = new MyBrands().SavedBrands();
+			List<string> displayedBrands = new MyBrands().SavedBrands();
 			Report.IsTrue(displayedBrands.Contains(brandName),
 				"The brand: " + brandName + " was not present in the My Brands grid. The saved brands are: " + string.Join(", ", displayedBrands.Select(x => "'" + x + "'").ToList()),
 				"The brand: " + brandName + " was present in the My Brands grid as expected");
@@ -56,10 +57,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ActiveValueIsYesForLastBrand(string active)
 		{
 			//Requires Context on latest brand save
-			var savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
-			var savedBrandName = Context.GetFromContext("Saved brand name").ToString();
+			int savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
+			string savedBrandName = Context.GetFromContext("Saved brand name").ToString();
 			//Matching on both row index and brand name in case there are previously added duplicates
-			var actualActive = new MyBrands().IsActiveText(savedRowIndex, savedBrandName);
+			string actualActive = new MyBrands().IsActiveText(savedRowIndex, savedBrandName);
 			Report.IsTrue(actualActive.Trim().ToLower() == active.ToLower(),
 				"The 'Active?' text did not match the expected value for the last saved Brand : " + savedBrandName + ". Expected: " + active + " but found: " + actualActive,
 				"The 'Active?' text: '" + actualActive + "' matched the expected value for the last saved Brand: " + savedBrandName);
@@ -68,10 +69,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the last saved brand appears in the My Brands grid")]
 		public void SavedBrandAppearsInGrid()
 		{
-			var savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
-			var savedBrandName = Context.GetFromContext("Saved brand name").ToString();
+			int savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
+			string savedBrandName = Context.GetFromContext("Saved brand name").ToString();
 			var selMyBrands = new MyBrands();
-			var brandName = selMyBrands.BrandName(savedRowIndex);
+			string brandName = selMyBrands.BrandName(savedRowIndex);
 			Report.IsTrue(brandName == savedBrandName,
 				"The saved brand: '" + savedBrandName + "' was not appearing in the Brands Grid. The brands displayed are: " + string.Join(", ", selMyBrands.SavedBrands()),
 				"The saved brand: " + savedBrandName + " was appearing in the Brands Grid as expected");
@@ -80,8 +81,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Edit in the My Brands grid for the last saved brand")]
 		public void ClickEditMyBrandsGrid()
 		{
-			var savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
-			var savedBrandName = Context.GetFromContext("Saved brand name").ToString();
+			int savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
+			string savedBrandName = Context.GetFromContext("Saved brand name").ToString();
 			Report.IsTrue(new MyBrands().ClickEdit(savedRowIndex, savedBrandName),
 				"Failed to click 'Edit' for the saved Brand: " + savedBrandName + " at row: " + savedRowIndex,
 				"Successfully clicked 'Edit' for the saved Brand: " + savedBrandName + " at row: " + savedRowIndex);
@@ -90,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I (select|deselect) the 'Active' checkbox on the expanded row in the My Brands grid")]
 		public void CheckActiveCheckboxExpandedRow(string selectOrNot)
 		{
-			var select = selectOrNot == "select";
+			bool select = selectOrNot == "select";
 			var selMyBrands = new MyBrands();
 			if (select && selMyBrands.ActiveIsChecked())
 			{
@@ -113,7 +114,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save the active brands list to context")]
 		public void SaveActiveBrandsListToContext()
 		{
-			var activeBrands = new MyBrands().ActiveSavedBrands();
+			List<string> activeBrands = new MyBrands().ActiveSavedBrands();
 			if (activeBrands.Count == 0)
 			{
 				Report.Failure("There were no active brands to save in the My Brands grid");

@@ -258,7 +258,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the (.*) login page I enter Password: (.*)")]
 		public void GivenInTheConflictMineralsLoginPageIEnterPassword(string dummyTitle, string password)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals {
+			var thisConflictMinerals = new ConflictMinerals {
 				Password = password
 			};
 			Report.IsTrue(thisConflictMinerals.Password == password, "Failed to input the password: " + password, "Successfully entered the password: " + password);
@@ -268,7 +268,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"if an error message shows I retry entering password: (.*) and clicking on login")]
 		public void ThenIfAnErrorMessageShowsIRetryEnteringPasswordAndClickingOnLogin(string password)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			if (thisConflictMinerals.ErrorMessageShowing())
 			{
 				thisConflictMinerals.Password = password;
@@ -344,7 +344,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals {
+			var thisConflictMinerals = new ConflictMinerals {
 				VerificationCode = verificationCode
 			};
 			Report.IsTrue(thisConflictMinerals.VerificationCode == verificationCode, "Failed to input the verification code: " + verificationCode, "Successfully inputted the verification code: " + verificationCode);
@@ -354,7 +354,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"on the (.*) Verification page I click Verify")]
 		public void ThenInTheConflictMineralsVerificationPageIClickVerify(string dummyTitle)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.ClickVerify(), "Failed to click the verify button", "Successfully clicked the verify button!");
 		}
 
@@ -368,7 +368,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			var ListOfEmails = EmailFunctions.GetAllEmailsForEmailEmailAddress(emailToFind)
+			IOrderedEnumerable<Email> ListOfEmails = EmailFunctions.GetAllEmailsForEmailEmailAddress(emailToFind)
 				.OrderByDescending(y => y.CreationDate);
 			Email thisEmail = ListOfEmails.FirstOrDefault(x => x.Subject.Contains("New Verification Code"));
 
@@ -379,7 +379,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			string EmailBody = thisEmail.Text.ToString();
 
-			Regex regex = new Regex(@"Your verification code is:\s*\d*");
+			var regex = new Regex(@"Your verification code is:\s*\d*");
 			Match match = regex.Match(EmailBody);
 			if (match.Success)
 			{
@@ -399,7 +399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Conflict Minerals page I create enter Company Details as follows:")]
 		public void GivenInTheConflictMineralsPageICreateEnterCompanyDetailsAsFollows(Table table)
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
@@ -451,7 +451,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Conflict Minerals page I click on Create Company Account")]
 		public void GivenInTheConflictMineralsPageIClickOnCreateCompanyAccount()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			var thisConflictMinerals = new ConflictMinerals();
 			thisConflictMinerals.ClickCreateCompanyAccount();
 		}
 

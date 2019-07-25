@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetErrorMessage()
 		{
-			var errorMessageContainer = this.containerElement.FindElement(By.XPath("../..//div[@class='modal-body']"), 2);
+			IWebElement errorMessageContainer = this.containerElement.FindElement(By.XPath("../..//div[@class='modal-body']"), 2);
 			if (errorMessageContainer != null)
 			{
 				return errorMessageContainer.GetValue();

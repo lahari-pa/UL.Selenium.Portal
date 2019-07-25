@@ -21,17 +21,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+				IWebElement popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
 				if (popupEditor != null)
 				{
 					return true;
 				}
-
 				Delay.Seconds(1);
 			}
-
 			return false;
-
 		}
 
 		public void WaitForTableLoad(double timeout = 10)
@@ -43,8 +40,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//Close, Export
 		public bool ClickButton(string button)
 		{
-			var varButtons = this.containerElement.FindElements(By.XPath("..//button/span"), 2);
-			var matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
+			IList<IWebElement> varButtons = this.containerElement.FindElements(By.XPath("..//button/span"), 2);
+			IWebElement matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
 			if (matchingButton == null)
 			{
 				Report.Info("Failed to find button: " + button);
@@ -67,7 +64,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Selecting item: " + value + " in column: " + columnHeader);
 			List<string> rawHeaders = this.GetHeaders();
-			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
+			var headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			int indexOfHeader = 0;
 			for (int i = 0; i < headers.Count; i++)
 			{
@@ -83,7 +80,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				.ToList();
 
 			var sValues = listOfColumnItems.Select(x => x.GetValue().Trim()).ToList();
-			var matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
+			IWebElement matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
 
 			if (matchingItem == null)
 			{
@@ -110,7 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<Product> GetProducts()
 		{
 			List<string> rawHeaders = this.GetHeaders();
-			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
+			var headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			int indexOfID = 0;
 			int indexOfProductName = 0;
 			int indexOfActive = 0;
@@ -145,17 +142,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			var selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='listProdRecertHistory']//tr"), 2);
-			List<Product> listOfProducts = new List<Product>();
+			IList<IWebElement> selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='listProdRecertHistory']//tr"), 2);
+			var listOfProducts = new List<Product>();
 			if (selectedRows == null)
 			{
 				Report.Info("No rows are showing");
 				return listOfProducts;
 			}
 
-			foreach (var thisRow in selectedRows)
+			foreach (IWebElement thisRow in selectedRows)
 			{
-				Product thisProduct = new Product();
+				var thisProduct = new Product();
 				thisProduct.ID = thisRow.FindElement(By.XPath(".//td[" + indexOfID + "]"), 2).GetValue();
 				thisProduct.Name = thisRow.FindElement(By.XPath(".//td[" + indexOfProductName + "]"), 2).GetValue();
 				thisProduct.Active = thisRow.FindElement(By.XPath(".//td[" + indexOfActive + "]"), 2).GetValue() ==

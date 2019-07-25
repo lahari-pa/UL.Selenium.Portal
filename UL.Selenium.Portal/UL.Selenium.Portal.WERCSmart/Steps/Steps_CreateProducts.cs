@@ -11,10 +11,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICreateAnElectronicProductAndSaveItAs(string saveAs)
 		{
 			TestReport.UseSubSteps = true;
-			Steps_Shared MyStepsShared = new Steps_Shared();
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			Steps_SHA MyStepsSHA = new Steps_SHA();
-			Steps_Studio MyStepsStudio = new Steps_Studio();
+			var MyStepsShared = new Steps_Shared();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsSHA = new Steps_SHA();
+			var MyStepsStudio = new Steps_Studio();
 
 			//And I call Shared Step 67823(Login to WERCSmart - Products Automation Account)
 			MyStepsShared.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
