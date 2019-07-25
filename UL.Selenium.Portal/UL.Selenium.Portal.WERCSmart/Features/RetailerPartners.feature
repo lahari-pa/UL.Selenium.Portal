@@ -273,8 +273,8 @@ Scenario: [56926] My Data & Recipients - What are the Data Usage Tiers - tab/hea
 		| Tab                               |
 		| Tier 1: Regulatory Compliance     |
 		| Tier 2: Chemical Program Support  |
-		| Tier Tier 3: Supplemental Reports |
-		| Tier 4: Publicly Disclose Options |
+		| Tier 3: Supplemental Reports      |
+		| Tier 4: Public Disclosure Options |
 	And I close the Data Tier Details popup
 	And I navigate to the home page
 
