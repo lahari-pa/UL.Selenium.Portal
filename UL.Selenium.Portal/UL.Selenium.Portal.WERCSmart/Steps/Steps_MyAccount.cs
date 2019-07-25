@@ -670,7 +670,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Success("The user: " + user + " was found in the My Account user grid");
 			Report.Screenshot();
-			string adminEmail = TestVariables.GetVariableSavedAs("AdministratorEmailAddress");
+			string adminEmail = new MyAccount().GetAdminEmail();
 
 			Report.IsTrue(userMatch.Email == adminEmail,
 				string.Format("The user: '{0}' was not associated with the email address: '{1}'",

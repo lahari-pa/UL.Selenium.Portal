@@ -26,6 +26,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'page-inner-header')]/h2"), 2).Text;
 		}
 
+		public string GetAdminEmail()
+		{
+			return this.containerElement.FindElement(By.XPath("//span[contains(@data-bind,'userEmail')]"), 2).Text;
+		}
+
 		public List<string> Subheadings()
 		{
 			return this.containerElement.FindElements(By.XPath(".//h2"), 2).Select(x => x.GetValue().Trim()).ToList();

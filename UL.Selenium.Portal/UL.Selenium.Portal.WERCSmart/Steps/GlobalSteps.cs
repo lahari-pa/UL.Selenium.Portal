@@ -38,9 +38,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		[StepDefinition(@"I login as the administrator")]
-		[StepDefinition(@"I login as the administrator")]
-		[When(@"I login as the administrator")]
-		[Then(@"I login as the administrator")]
 		public void GivenILoginAsTheAdministrator()
 		{
 			this.LoginToAccount("ProductAccount");
