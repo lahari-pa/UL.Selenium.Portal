@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -20,6 +20,7 @@
 
 Feature: SupplierAccounts
 
+@TReVorId:22360
 Scenario: Create new account with supplier settings
 Given I go to the WERCSmart Log in
 Given I create supplier account with the following parameters and save as: ProductsNewAccount

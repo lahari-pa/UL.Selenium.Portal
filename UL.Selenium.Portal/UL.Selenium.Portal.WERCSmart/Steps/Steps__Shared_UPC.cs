@@ -72,6 +72,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Container Type: " + upcInfo.ContainerType);
 			Report.Info("Size: " + upcInfo.Size);
 			Report.Info("Quantity: " + upcInfo.Quantity);
+			Report.Info("Individual Upc Case Pack: " + upcInfo.IndividualUpcCasePack);
 			Report.Info("Transportation Options: " + upcInfo.TransportationOption);
 
 			Report.IsTrue(new UPC().InputUpcCaseInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
@@ -115,7 +116,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
+			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+		}
+
+		[StepDefinition(@"I call Shared Step 87641 \(Enter Universal Product Code - case information\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) and Quantity: (.*) and Associated UPC: (.*) and Transportation option: (.*)")]
+		public void UPCCaseInformationWithAssociatedUPC(string upc, string containerType, string size, string quantity, string assocUPC, string transportation)
+		{
+			TestReport.UseSubSteps = true;
+			StepsUPC MyStepsNewProduct = new StepsUPC();
+			StepsNewProduct MyStepsProduct = new StepsNewProduct();
+			//TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			TestReport.StartStep("I click the 'Add Case UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddCaseUpcButton();
+			GeneralUtilities.Wait_for_load_finish();
+			TestReport.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				var upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcCaseInformation {
+					ContainerType = containerType,
+					Size = size,
+					Quantity = quantity,
+					TransportationOption = transportation,
+					IndividualUpcCasePack = assocUPC,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new UPC().InputUpcCaseInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				Table upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				upcTable.AddRow("Quantity", quantity);
+				upcTable.AddRow("IndividualUpcCasePack", "saved as " + assocUPC);
+				upcTable.AddRow("TransportationOption", transportation);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
 
