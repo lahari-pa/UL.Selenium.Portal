@@ -17,7 +17,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		[StepDefinition(@"I set 'Specific Gravity' to: (.*)")]
 		public void SetSpecificGravityTo(string specificGravity)
 		{
-			Report.IsTrue(this.ProductCharacteristics.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded","Product Type tab is loaded.");
+			Report.IsTrue(this.ProductCharacteristics.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product Type tab is loaded.");
 			Report.Info("Entering text: " + specificGravity + " to the Specific Gravity field");
 			this.ProductCharacteristics.SpecificGravity = specificGravity;
 			Report.IsTrue(this.ProductCharacteristics.SpecificGravity == specificGravity, "Failed to set Specific Gravity", "Successfully set Specific Gravity");
@@ -55,9 +55,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		{
 			var expected = new List<string>();
 			table.Rows.ForEach(x => expected.Add(x["State"]));
-			var found = new NewProduct().ListOfPrimaryPhysicalStates();
+			List<string> found = new NewProduct().ListOfPrimaryPhysicalStates();
 			Report.Info("Primary Physical States found: " + string.Join(", ", found));
-			foreach (var state in expected)
+			foreach (string state in expected)
 			{
 				if (Report.IsTrue(found.Contains(state), "Failed to find state: " + state + " in the list!", state + " was successfully found!"))
 				{
@@ -86,7 +86,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		[StepDefinition(@"I set the water solubility description to: (.*)")]
 		public void ThenISetTheWaterSolubilityDescriptionTo(string description)
 		{
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 			new NewProduct().WaterSolubility = description;
 			Report.IsTrue(thisNewProduct.WaterSolubility == description, "Failed to set the water solubility description to be: " + description, "Successfully set the water solubility description to be: " + description);
 		}

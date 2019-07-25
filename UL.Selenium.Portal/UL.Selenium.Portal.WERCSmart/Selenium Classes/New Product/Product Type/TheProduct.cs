@@ -21,20 +21,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 
 		private IEnumerable<IWebElement> ProductTypeSearchResults => this.containerElement.FindElements(By.XPath("//span[contains(@class,'select2-container')]//ul/li"), 2);
 
-		public string ProductName
-		{
+		public string ProductName {
 			get => this.ProductNameInput?.GetValue();
 			set => this.ProductNameInput?.EnterText(value);
 		}
 
-		public string ProductLineOrBrand
-		{
+		public string ProductLineOrBrand {
 			get => this.ProductLineInput.SelectedOption();
 			set => this.ProductLineInput.SelectByValue(value);
 		}
 
-		public string ProductType
-		{
+		public string ProductType {
 			get => this.ProductTypeSearch?.Text;
 			set
 			{
@@ -45,13 +42,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 				}
 				else
 				{
-					var newString = new string(value.TakeWhile(x => x != '+').ToArray());
+					string newString = new string(value.TakeWhile(x => x != '+').ToArray());
 					this.ProductTypeSearchInput.TryEnterText(newString);
 				}
 				GeneralUtilities.Wait_for_load_finish();
-				var searchResult = this.ProductTypeSearchResults.FirstOrDefault(x=>x.Text==value)
-				                   ?? this.ProductTypeSearchResults.FirstOrDefault(x => string.Equals(x.Text, value, StringComparison.CurrentCultureIgnoreCase))
-				                   ?? this.ProductTypeSearchResults.FirstOrDefault(x => x.Text.ToLower().Contains(value.ToLower()));
+				IWebElement searchResult = this.ProductTypeSearchResults.FirstOrDefault(x => x.Text == value)
+								   ?? this.ProductTypeSearchResults.FirstOrDefault(x => string.Equals(x.Text, value, StringComparison.CurrentCultureIgnoreCase))
+								   ?? this.ProductTypeSearchResults.FirstOrDefault(x => x.Text.ToLower().Contains(value.ToLower()));
 				searchResult.TryClick();
 			}
 		}

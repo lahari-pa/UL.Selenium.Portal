@@ -21,9 +21,9 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		{
 			var rList = new List<NavLink>();
 			var sidebarItems = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li"), 2).ToList();
-			foreach (var item in sidebarItems)
+			foreach (IWebElement item in sidebarItems)
 			{
-				var thisLink = this.GetNavLink(item);
+				NavLink thisLink = this.GetNavLink(item);
 				rList.Add(thisLink);
 			}
 			return rList;
@@ -36,8 +36,8 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		/// </summary>
 		public NavLink GetNavLink(string title)
 		{
-			var els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li"), 2);
-			foreach (var el in els)
+			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li"), 2);
+			foreach (IWebElement el in els)
 			{
 				if (el.FindElement(By.XPath("./a"))?.Text == title)
 				{
@@ -60,7 +60,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 				Href = el.FindElement(By.XPath("./a"), 2)?.GetAttribute("href"),
 				Icon = el.FindElement(By.XPath("./a/em"), 2).GetAttribute("class").Replace("fa fa-", "")
 			};
-			var multilevelUl = el.FindElement(By.XPath("./a/following-sibling::ul[starts-with(@id,'multilevel')]"), 2);
+			IWebElement multilevelUl = el.FindElement(By.XPath("./a/following-sibling::ul[starts-with(@id,'multilevel')]"), 2);
 			var rsubLinks = new List<NavSubLink>();
 			// Only add sub links if the multilevel ul exists
 			if (multilevelUl != null)
@@ -69,20 +69,20 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 				// Only add sub links if multilevel ul is expanded
 				if (thisLink.Expanded)
 				{
-					var subEls = multilevelUl.FindElements(By.XPath("./li/a"), 2);
-					for (var i = 0; i < subEls.Count; i++)
+					IList<IWebElement> subEls = multilevelUl.FindElements(By.XPath("./li/a"), 2);
+					for (int i = 0; i < subEls.Count; i++)
 					{
 						if (!subEls[i].Displayed)
 						{
 							continue;
 						}
-						var levelxUl = el.FindElement(By.XPath("//ul[@id='level" + (i + 1).ToString() + "']"), 2);
+						IWebElement levelxUl = el.FindElement(By.XPath("//ul[@id='level" + (i + 1).ToString() + "']"), 2);
 						var rSubSubLinks = new List<NavSubSubLink>();
 						// Only add sub sub links if the levelx ul exists and is expanded
 						if (levelxUl != null && levelxUl.GetAttribute("aria-expanded") == "true")
 						{
 							// Add sub sub links to the list belonging to this sub link
-							var subSubEls = levelxUl.FindElements(By.XPath("./li/a"), 2);
+							IList<IWebElement> subSubEls = levelxUl.FindElements(By.XPath("./li/a"), 2);
 							rSubSubLinks = subSubEls.Select(ss => new NavSubSubLink {
 								Title = ss.Text,
 								ParentLevel = i + 1,
@@ -113,8 +113,8 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		/// </summary>
 		public bool ClickNavItem(NavLink link)
 		{
-			var els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']//li/a"), 2);
-			foreach (var el in els)
+			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']//li/a"), 2);
+			foreach (IWebElement el in els)
 			{
 				if (el.Text == link.Title)
 				{
@@ -129,8 +129,8 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		/// </summary>
 		public bool ClickNavItem(NavSubLink link)
 		{
-			var els = this.containerElement.FindElements(By.XPath(".//ul[starts-with(@id,'multilevel')]/li/a"), 2);
-			foreach (var el in els)
+			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(".//ul[starts-with(@id,'multilevel')]/li/a"), 2);
+			foreach (IWebElement el in els)
 			{
 				if (el.Text == link.Title)
 				{
@@ -145,8 +145,8 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		/// </summary>
 		public bool ClickNavItem(NavSubSubLink link)
 		{
-			var els = this.containerElement.FindElements(By.XPath(".//ul[@id='level" + link.ParentLevel + "']/li/a"), 2);
-			foreach (var el in els)
+			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(".//ul[@id='level" + link.ParentLevel + "']/li/a"), 2);
+			foreach (IWebElement el in els)
 			{
 				if (el.Text == link.Title)
 				{

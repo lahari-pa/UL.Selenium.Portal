@@ -10,6 +10,7 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -24,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+				IWebElement popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
 				if (popupEditor != null)
 				{
 					return true;
@@ -39,15 +40,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetPDFNames()
 		{
-			var ListOfFilenameTDs = this.containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
+			ReadOnlyCollection<IWebElement> ListOfFilenameTDs = this.containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
 
 			return ListOfFilenameTDs.Select(x => x.GetValue()).ToList();
 		}
 
 		public bool DoubleClickPDF(string pdfName)
 		{
-			var ListOfFilenameTDs = this.containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
-			var matchingTD = ListOfFilenameTDs.FirstOrDefault(x => x.GetValue().Contains(pdfName));
+			ReadOnlyCollection<IWebElement> ListOfFilenameTDs = this.containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
+			IWebElement matchingTD = ListOfFilenameTDs.FirstOrDefault(x => x.GetValue().Contains(pdfName));
 			if (matchingTD != null)
 			{
 				return matchingTD.TryDoubleClick();
@@ -58,10 +59,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickButton(string buttonName)
 		{
-			var listOfButtons =
+			ReadOnlyCollection<IWebElement> listOfButtons =
 				this.containerElement.FindElements(By.XPath(".//button|.//input[@type='submit' or @type='button']"));
 
-			var matchingButton = listOfButtons.FirstOrDefault(x => x.GetValue() == buttonName);
+			IWebElement matchingButton = listOfButtons.FirstOrDefault(x => x.GetValue() == buttonName);
 
 			if (matchingButton == null)
 			{
@@ -75,10 +76,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string DocumentWindowOpen()
 		{
 			Report.Info("Switch to SHA Document window");
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in handles)
+			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in handles)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("GetDocument"))
 				{
@@ -90,8 +91,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string DocumentText(string address)
 		{
-			PdfReader reader = new PdfReader(address);
-			StringWriter output = new StringWriter();
+			var reader = new PdfReader(address);
+			var output = new StringWriter();
 			for (int i = 1; i <= reader.NumberOfPages; i++)
 			{
 				output.WriteLine(PdfTextExtractor.GetTextFromPage(reader, i, new SimpleTextExtractionStrategy()));

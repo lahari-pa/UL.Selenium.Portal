@@ -4,6 +4,7 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -28,18 +29,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<ProductStatus> GetProductStatuses()
 		{
-			List<ProductStatus> listOfProductStatuses = new List<ProductStatus>();
-			var listOfProductStatusRows = this.containerElement.FindElements(By.XPath(".//table//tr[1]/td/ul/li"));
+			var listOfProductStatuses = new List<ProductStatus>();
+			ReadOnlyCollection<IWebElement> listOfProductStatusRows = this.containerElement.FindElements(By.XPath(".//table//tr[1]/td/ul/li"));
 			if (listOfProductStatusRows.Count > 0)
 			{
-				foreach (var row in listOfProductStatusRows)
+				foreach (IWebElement row in listOfProductStatusRows)
 				{
-					var codeSpan = row.FindElement(By.XPath("./span"));
+					IWebElement codeSpan = row.FindElement(By.XPath("./span"));
 					if (codeSpan.GetValue().Trim().Length == 0)
 					{
 						break;
 					}
-					ProductStatus thisProductStatus = new ProductStatus();
+					var thisProductStatus = new ProductStatus();
 					thisProductStatus.StatusName = codeSpan.GetValue();
 					thisProductStatus.StatusDescription = row.GetValue();
 

@@ -11,8 +11,8 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		public static bool WaitForWidgetSpinner(int secondsToWait = 30)
 		{
 			Report.Info("Waiting for spinners to disappear");
-			var spinner = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='xbox-spinner']"), 2);
-			var i = 0;
+			IWebElement spinner = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='xbox-spinner']"), 2);
+			int i = 0;
 			try
 			{
 				while ((spinner != null && spinner.Displayed) && i < secondsToWait)

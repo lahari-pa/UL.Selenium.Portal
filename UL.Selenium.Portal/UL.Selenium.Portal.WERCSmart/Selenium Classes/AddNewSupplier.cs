@@ -9,7 +9,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		public bool EnterSupplierID(string supplierID)
 		{
-			var SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID']"), 2);
+			IWebElement SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID']"), 2);
 			SupplierID.EnterText(supplierID);
 			return SupplierID.GetValue() == supplierID;
 		}
@@ -19,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID' and ./preceding-sibling::label[text()='Supplier ID']]"), 2);
+				IWebElement SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID' and ./preceding-sibling::label[text()='Supplier ID']]"), 2);
 				return (SupplierID.Enabled && SupplierID.Displayed);
 			}
 			catch (Exception)
@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']"), 2);
+				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']"), 2);
 				return (SupplierError.Enabled && SupplierError.Displayed);
 			}
 			catch (Exception)
@@ -45,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']/span"), 2);
+				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']/span"), 2);
 				return SupplierError.GetValue();
 			}
 			catch (Exception)
@@ -58,7 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']"), 2);
+				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']"), 2);
 				return (SupplierError.Enabled && SupplierError.Displayed);
 			}
 			catch (Exception)
@@ -71,7 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']/span"), 2);
+				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']/span"), 2);
 				return SupplierError.GetValue();
 			}
 			catch (Exception)
@@ -82,7 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterCompanyOrBrandName(string companyOrBrandName)
 		{
-			var Company = this.containerElement.FindElement(By.XPath("//select[@id='description']"), 2);
+			IWebElement Company = this.containerElement.FindElement(By.XPath("//select[@id='description']"), 2);
 			Company.Select(companyOrBrandName);
 			return Company.SelectedOption() == companyOrBrandName;
 		}
@@ -91,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var companyInput = this.containerElement.FindElement(By.XPath("//select[@id='description' and ./preceding-sibling::label[text()='Company or Brand Name']]"), 2);
+				IWebElement companyInput = this.containerElement.FindElement(By.XPath("//select[@id='description' and ./preceding-sibling::label[text()='Company or Brand Name']]"), 2);
 				if (companyInput == null)
 				{
 					return false;
@@ -106,7 +106,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SetDefault(bool bDefault)
 		{
-			var IsDefault = this.containerElement.FindElement(By.XPath("//input[@type='checkbox']"), 2);
+			IWebElement IsDefault = this.containerElement.FindElement(By.XPath("//input[@type='checkbox']"), 2);
 			IsDefault.Check(bDefault);
 			return IsDefault.Checked() == bDefault;
 
@@ -116,7 +116,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var IsDefault = this.containerElement.FindElement(By.XPath("//input[@type='checkbox']"), 2);
+				IWebElement IsDefault = this.containerElement.FindElement(By.XPath("//input[@type='checkbox']"), 2);
 				return (IsDefault.Enabled && IsDefault.Displayed);
 			}
 			catch (Exception)
@@ -136,7 +136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var SaveButton = this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+				IWebElement SaveButton = this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 					.FirstOrDefault(x => x.Text == "SAVE");
 				return (SaveButton.Enabled && SaveButton.Displayed);
 			}

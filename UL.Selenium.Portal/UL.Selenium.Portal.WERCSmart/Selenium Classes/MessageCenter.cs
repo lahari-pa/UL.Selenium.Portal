@@ -29,19 +29,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickShowArchived()
 		{
-			var input = this.containerElement.FindElement(By.XPath(".//input[@id='chkArchivedMsgCtr']"), 2);
+			IWebElement input = this.containerElement.FindElement(By.XPath(".//input[@id='chkArchivedMsgCtr']"), 2);
 			if (input == null)
 			{
 				return false;
 			}
-			var currentlyChecked = input.Checked();
+			bool currentlyChecked = input.Checked();
 			return input.TryClick() && input.Checked() != currentlyChecked;
 		}
 		public int GetPage(string position)
 		{
 			if (position.ToLower() == "current")
 			{
-				var activePageControl = this.containerElement.FindElement(By.XPath(".//ul[starts-with(@class,'pagination')]/li[@class='active']/span"), 2);
+				IWebElement activePageControl = this.containerElement.FindElement(By.XPath(".//ul[starts-with(@class,'pagination')]/li[@class='active']/span"), 2);
 				if (activePageControl == null)
 				{
 					Report.Failure("The page control could not be found on the My Packaging Types grid");
@@ -51,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			if (position.ToLower() == "last")
 			{
-				var lastControl = this.containerElement.FindElements(By.XPath(".//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+				IList<IWebElement> lastControl = this.containerElement.FindElements(By.XPath(".//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
 				if (lastControl.Count == 0)
 				{
 					Report.Info("Last page is: 1");
@@ -96,7 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var rList = new List<Message>();
 			this.ClickPage("1");
 			int pageNumber = this.GetPage("current");
-			var ingredientNumber = 1;
+			int ingredientNumber = 1;
 			if (pageNumber == -1)
 			{
 				Report.Failure("Could not get current page number from the grid");
@@ -105,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int lastPageNumber = this.GetPage("last");
 			while (pageNumber <= lastPageNumber && pageNumber != -1)
 			{
-				var rowCount = this.MessageCount();
+				int rowCount = this.MessageCount();
 				for (int i = 1; i <= rowCount; i++)
 				{
 					rList.Add(this.GetMessage(i));
@@ -127,7 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public Message GetMessage(int row)
 		{
-			var tableRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[" + row + "]"), 2);
+			IWebElement tableRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[" + row + "]"), 2);
 			if (tableRow == null)
 			{
 				return new Message();

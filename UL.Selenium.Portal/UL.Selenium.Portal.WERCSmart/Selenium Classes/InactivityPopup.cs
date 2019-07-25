@@ -34,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var timer = new Stopwatch();
 			timer.Start();
-			var res = this.WaitForContainerToBeVisible(timeout);
+			bool res = this.WaitForContainerToBeVisible(timeout);
 			timer.Stop();
 			secondsWaited = Convert.ToInt32(timer.Elapsed.TotalSeconds);
 			return res;

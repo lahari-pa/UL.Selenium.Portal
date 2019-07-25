@@ -100,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 
 
 			//Check whether any of the compared objects is null.
-			if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+			if (x is null || y is null)
 			{
 				return false;
 			}
@@ -116,7 +116,7 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 		public int GetHashCode(User user)
 		{
 			//Check whether the object is null
-			if (ReferenceEquals(user, null))
+			if (user is null)
 			{
 				return 0;
 			}
