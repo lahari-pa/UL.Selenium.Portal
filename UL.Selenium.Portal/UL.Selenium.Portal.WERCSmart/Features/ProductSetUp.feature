@@ -463,8 +463,7 @@ Scenario: [75410] Product from Completed status to Recertification
 	#Given I save to context name: TestCase75410 and value: 1549822
 	#Given I call test stuff for saved as: TestCase75410
 	Given I navigate to the landing page
-	#Given I login into the WERCSmart Portal - Administrator Role
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
+	Given I login into the WERCSmart Portal - Administrator Role
 	Given I search for the product saved as: TestCase75410
 	Given For product saved as: TestCase75410 the status is: Completed
 	And I click Row Actions for the first product returned
