@@ -8036,5 +8036,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
 				"Toxicity Characteristic Leaching Procedure (TCLP) Product Report");
 		}
+
+		[StepDefinition(@"I call Shared Step 58828 - Delete Supplier with ID: (.*)")]
+		public void ThenICallSharedStep58828_DeleteSupplierID(string supplierId)
+		{
+			var retailPartnersDetails = new RetailPartnersDetails();
+			IList<Supplier> suppliers = retailPartnersDetails.GetAllSuppliers();
+
+			Report.IsTrue(retailPartnersDetails.DeleteSupplier(supplierId),
+				"Unable to delete supplier with ID " + supplierId,
+				"Sucessfully deleted supplier with ID " + supplierId);
+		}
 	}
 }

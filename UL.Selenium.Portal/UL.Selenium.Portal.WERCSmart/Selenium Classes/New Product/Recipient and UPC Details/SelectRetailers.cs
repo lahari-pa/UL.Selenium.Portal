@@ -12,10 +12,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	class SelectRetailers : NewProduct
 	{
-		//public const string BasePath = "//div[@id='select-retailers-dialog']";
-		//[FindsBy(How = How.XPath, Using = BasePath)]
-		//protected override IWebElement containerElement { get; set; }
-
 		protected override By ContainerElementLocator => By.XPath("//div[@id='select-retailers-dialog']");
 
 		public bool SelectRetailer(string retailer)
@@ -169,10 +165,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 	class NoRetailerWarningPopup : SeleniumBaseObject
 	{
-		//public const string BasePath = "//div[@class='modal fade in']";
-		//[FindsBy(How = How.XPath, Using = BasePath)]
-		//protected override IWebElement containerElement { get; set; }
-
 		protected override By ContainerElementLocator => By.XPath("//div[@class='modal fade in']");
 
 		public bool ClickOk()

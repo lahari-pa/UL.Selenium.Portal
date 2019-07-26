@@ -293,30 +293,34 @@ Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New S
 	And I confirm the Retailer Details Page has loaded
 	And I confirm that there is a section labeled: Your Supplier IDs
 	And The Supplier ID Table should be showing
+	Given I call Shared Step 58828 - Delete Supplier with ID: 654327
 	Given I click on the Add new Supplier ID link
 	And in the Add New Supplier Dialog I click save
-	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: This is a required field
-	And in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: This is a required field
+	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: This is a required field.
+	And in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: This is a required field.
 	And in the Add New Supplier Dialog I enter the following in the Supplier ID input: abc
 	And in the Add New Supplier Dialog I click save
-	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id
-	And in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: This is a required field
-	And in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: Automated
+	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id.
+	And in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: This is a required field.
+	And in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: WERCS QA Automated Products test steve
 	And in the Add New Supplier Dialog I click save
 	And in the Add New Supplier Dialog I Confirm that no error shows below Company or Brand Name question
-	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id
+	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id.
 	And in the Add New Supplier Dialog I enter the following in the Supplier ID input: 12
 	And in the Add New Supplier Dialog I click save
-	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id
+	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id.
 	And in the Add New Supplier Dialog I enter the following in the Supplier ID input: 654327
 	And in the Add New Supplier Dialog I click save
 	Then I confirm that in the Supplier IDS list the following row exists
-		| Supplier ID | Company or Brand Name |
-		| 654327      | Automated             |
-	And I call Shared Step 57247 - Database check - find t_vendor records for specific Retailer: Reilly and Supplier: Products Automation Account
-	And I Confirm the Supplier ID you added is shown in the result for the query on the t_vendor table
-	And [Shared Step 58828 - Delete Supplier ID]
+		| Supplier ID | Company or Brand Name                  |
+		| 654327      | WERCS QA Automated Products test steve |
+	And I call Shared Step 58828 - Delete Supplier with ID: 654327
 
+#And I call Shared Step 57247 - Database check - find t_vendor records for specific Retailer: Reilly and Supplier: Products Automation Account
+# And I Confirm the Supplier ID you added is shown in the result for the query on the t_vendor table
+#
+# ***** Space between test cases ***** #
+#
 # Assigned to Barrett, Beverly
 # Created by Barrett, Beverly
 # Test case can be found at the following paths:
