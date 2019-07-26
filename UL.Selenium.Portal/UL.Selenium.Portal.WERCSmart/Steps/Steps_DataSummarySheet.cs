@@ -18,10 +18,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the following batteries present:")]
 		public void ThenIShouldSeeTheFollowingBatteriesPresent(Table information)
 		{
-			var expected = information.CreateSet<Battery>();
+			IEnumerable<Battery> expected = information.CreateSet<Battery>();
 			var dataSummarySheet = new DataSummary();
-			var displayed = dataSummarySheet.GetDisplayedBatteries();
-			foreach (var expectedBattery in expected)
+			List<Battery> displayed = dataSummarySheet.GetDisplayedBatteries();
+			foreach (Battery expectedBattery in expected)
 			{
 				Report.Info("Checking battery saved as: " + expectedBattery.SavedAs);
 				if (expectedBattery.Manufacturer.ToLower().StartsWith("saved as"))
@@ -49,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatISeeTheFollowingOptionForPrivateLabelQuestion(string message)
 		{
 			var dataSummarySheet = new DataSummary();
-			var found = dataSummarySheet.GetPrivateLabelStatement();
+			string found = dataSummarySheet.GetPrivateLabelStatement();
 
 			Report.IsTrue(found.Trim() == message.Trim(),
 				"private label option was not as expected! Expected: " + message + ", but found: " + found + "!",
@@ -60,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatISeeTheFollowingOptionForProductHasBeenGrantedAnAlternativeControlPlanQuestion(string message)
 		{
 			var dataSummarySheet = new DataSummary();
-			var found = dataSummarySheet.GetAlternativeControlPlanQuestion();
+			string found = dataSummarySheet.GetAlternativeControlPlanQuestion();
 
 			Report.IsTrue(found.Trim() == message.Trim(),
 				"option was not as expected! Expected: " + message + ", but found: " + found + "!",
@@ -71,7 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatISeeTheFollowingOptionForProductDoesNotContainMoreThanGramsOfVOCPerUseQuestion(string message)
 		{
 			var dataSummarySheet = new DataSummary();
-			var found = dataSummarySheet.GetGramsOfVocPerUseAsDefinedCaliforniaConsumerProductsQuestion();
+			string found = dataSummarySheet.GetGramsOfVocPerUseAsDefinedCaliforniaConsumerProductsQuestion();
 
 			Report.IsTrue(found.Trim() == message.Trim(),
 				"option was not as expected! Expected: " + message + ", but found: " + found + "!",
@@ -84,7 +84,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var dataSummarySheet = new DataSummary();
 
 
-			var found = dataSummarySheet.sGetProductName();
+			string found = dataSummarySheet.SGetProductName();
 
 			Report.IsTrue(found.Contains(option),
 				"Expected: " + option + " but got: " + found,
@@ -98,7 +98,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var dataSummarySheet = new DataSummary();
 
-			var found = dataSummarySheet.GetDocumentForSection(section, option);
+			string found = dataSummarySheet.GetDocumentForSection(section, option);
 
 			Report.IsTrue(found.Contains(option),
 				"Expected: " + option + " but got: " + found + " for section " + section + ".",
@@ -121,13 +121,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var dataSummarySheet = new DataSummary();
 
 
-			var found = dataSummarySheet.GetInfoForSectionOption(section, option);
+			List<string> found = dataSummarySheet.GetInfoForSectionOption(section, option);
 
 			Report.IsTrue(found.Contains(option),
 					"option was not as expected! Expected: " + option + " in section: " + section + " but got: " + string.Join(",", found),
 					"option was showing: " + option + " in section: " + section);
 
 			//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
+		}
+
+		[StepDefinition(@"The Data Summary section (.*) should be showing the following UPC table:")]
+		public void ShouldBeShowingTheFollowingTable(string section, Table table)
+		{
+			var dataSummarySheet = new DataSummary();
+
+			ICollection<string> headers = table.Header;
+
+			Report.IsTrue(dataSummarySheet.ConfirmHeaders(headers, section), "Could not find the appropriate headers",
+				"Found all the appropriate headers");
+			TableRows rows = table.Rows;
+			Report.IsTrue(dataSummarySheet.ConfirmCaseUPC(rows, section), "Could not find Case UPC information.",
+				"Successfully found Case UPC information.");
+			Report.IsTrue(dataSummarySheet.ConfirmUPC(rows, section), "Could not find UPC information.",
+				"Successfully found UPC information.");
 		}
 
 		[StepDefinition(@"The data summary window should be showing")]
@@ -143,7 +159,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			if (Context.Contains(savedAs))
 			{
-				ProductInformation thisProductInformation = (ProductInformation)Context.GetFromContext(savedAs);
+				var thisProductInformation = (ProductInformation)Context.GetFromContext(savedAs);
 				thisProductInformation.ListOfIngredients = new DataSummary().GetIngredients();
 			}
 			else
@@ -155,7 +171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Get transparency ratio and save as (.*)")]
 		public void GetTransparencyRatioAndSaveAs(string saveAs)
 		{
-			var transparencyRatio = new DataSummary().GetTransparencyRatio();
+			decimal transparencyRatio = new DataSummary().GetTransparencyRatio();
 			if (transparencyRatio > -1)
 			{
 				Context.AddToContext(saveAs, transparencyRatio);
@@ -167,10 +183,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Confirm that transparency ratio is (.*) / (.*)")]
 		public void GivenConfirmThatTransparencyRatioSavedAsTRAfterIs(string numerator, string denominator)
 		{
-			DataSummary thisDataSummary = new DataSummary();
-			string actualRatio = thisDataSummary.sGetTransparencyRatio();
+			var thisDataSummary = new DataSummary();
+			string actualRatio = thisDataSummary.SGetTransparencyRatio();
 			string pattern = @"([0123456789\.]*)\s*\/\s*([0123456789\.]*)";
-			var regMatch = System.Text.RegularExpressions.Regex.Match(actualRatio, pattern);
+			System.Text.RegularExpressions.Match regMatch = System.Text.RegularExpressions.Regex.Match(actualRatio, pattern);
 			if (!regMatch.Success || regMatch.Groups.Count != 3)
 			{
 				Report.Failure("Actual ratio was not as expected. It is: " + actualRatio);
@@ -183,7 +199,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I take a screenshot of the ingredients")]
 		public void GivenITakeAScreenshotOfTheIngredients()
 		{
-			DataSummary thisDataSummary = new DataSummary();
+			var thisDataSummary = new DataSummary();
 			thisDataSummary.WaitForSpinner();
 			thisDataSummary.ScrollToIngredients();
 			Report.Screenshot();
@@ -192,9 +208,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"In the Data Summary window the (first|second) component should have Public Name: (.*) and Publicly Disclosed: (Yes|No)")]
 		public void ThenInTheDataSummaryWindowTheSecondComponentShouldHavePublicNameAndPubliclyDisclosed(string firstOrSecond, string publicName, string publiclyDisclosed)
 		{
-			DataSummary thisDataSummary = new DataSummary();
+			var thisDataSummary = new DataSummary();
 			List<Ingredients.Ingredient> listOfIngredients = thisDataSummary.GetIngredients();
-			var thisIngredient = listOfIngredients[0];
+			Ingredients.Ingredient thisIngredient = listOfIngredients[0];
 			if (firstOrSecond.ToLower() == "second")
 			{
 				thisIngredient = listOfIngredients[1];

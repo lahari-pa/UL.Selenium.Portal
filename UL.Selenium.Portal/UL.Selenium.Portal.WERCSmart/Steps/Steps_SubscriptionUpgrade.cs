@@ -11,8 +11,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Subscription Upgrade screen I confirm heading as (.*)")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmHeadingAs(string expectedHeader)
 		{
-			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
-			var actualHeader = MySE.Get_Page_Header().Trim();
+			var MySE = new SubscriptionEnrollment();
+			string actualHeader = MySE.Get_Page_Header().Trim();
 			Report.IsTrue(actualHeader == expectedHeader, "Expected: " + expectedHeader + " but got: " + actualHeader,
 				"Page header is showing as expected: " + actualHeader);
 		}
@@ -22,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var mySub = new SubscriptionUpgrade();
 
-			foreach (var thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				string plan = thisRow["Plan"];
 				string current = thisRow["Current"];

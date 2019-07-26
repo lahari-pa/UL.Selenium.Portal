@@ -36,19 +36,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selReportDownload = new ReportDownload();
 			if (selReportDownload.Wait_for_load())
 			{
-				var count = 0;
+				int count = 0;
 				Report.Info("Confirm file is downloaded");
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-				var today = DateTime.Today;
-				var path = today.Month + "-" + today.Day + "-" + today.Year + "*.xlsx";
+				DateTime today = DateTime.Today;
+				string path = today.Month + "-" + today.Day + "-" + today.Year + "*.xlsx";
 				var downloads = new DirectoryInfo(downloadsFolder);
 				while (count < 120)
 				{
 					Delay.Seconds(1);
-					var dir = downloads.GetFiles(path);
+					FileInfo[] dir = downloads.GetFiles(path);
 					if (dir.Any())
 					{
-						var mostRecent = dir.OrderByDescending(x => x.LastWriteTime).FirstOrDefault();
+						FileInfo mostRecent = dir.OrderByDescending(x => x.LastWriteTime).FirstOrDefault();
 						Report.Success("File with name: " + mostRecent + " was found in the download directory");
 						Report.Info("Closing the Report Download popup");
 						Report.IsTrue(selReportDownload.ClickClose(),
@@ -70,7 +70,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save the messages in Message Center as (.*)")]
 		public void SaveListOfMessages(string savedAs)
 		{
-			var myMessages = new MessageCenter().MessageItems();
+			List<MessageCenter.Message> myMessages = new MessageCenter().MessageItems();
 			Report.Info("Saving " + myMessages.Count + " messages as: " + savedAs);
 			Context.AddToContext(savedAs, myMessages);
 		}
@@ -85,7 +85,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
-			var newMessages = new MessageCenter().MessageItems();
+			List<MessageCenter.Message> newMessages = new MessageCenter().MessageItems();
 			Report.IsTrue(newMessages.Count > oldMessages.Count,
 				"The message count did not increase compared to messages saved to context as: " + savedAs + "! Message count is: " + newMessages.Count,
 				"The message count increased compared to messages saved to context as: " + savedAs + " as expected. Previous count was: " + oldMessages.Count + ". New count is: " + newMessages.Count);
@@ -94,13 +94,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that the text: (.*) is (displayed|displayed exclusively|not displayed) under the (.*) column for file saved as (.*)")]
 		public void StatusColumnDisplaysTextActive(string value, string displayCondition, string column, string savedAs)
 		{
-			var file = Context.GetFromContext(savedAs);
+			object file = Context.GetFromContext(savedAs);
 			if (Report.IsTrue(file != null, "No matching file was found saved as: " + savedAs, "Found file saved as: " + savedAs))
 			{
 				var ExcelUtils = new ExcelUtilities(file.ToString(), "Messages");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
-				var columnIndex = ColumnTitles.FindIndex(x => x == column);
+				int columnIndex = ColumnTitles.FindIndex(x => x == column);
 				List<string> rows = ExcelUtils.Excel_GetColumn(columnIndex);
 				if (rows.Count == 0)
 				{
@@ -132,15 +132,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the number of rows in the file saved as (.*) matches the number of messages in My Messages saved as (.*)")]
 		public void ExportMessagesCountMatchesInboxCount(string fileSavedAs, string messagesSavedAs)
 		{
-			var file = Context.GetFromContext(fileSavedAs);
+			object file = Context.GetFromContext(fileSavedAs);
 			if (Report.IsTrue(file != null, "No matching file was found saved as: " + fileSavedAs, "Found file saved as: " + fileSavedAs, false, false))
 			{
 				var myMessages = (List<MessageCenter.Message>)Context.GetFromContext(messagesSavedAs);
 				if (Report.IsTrue(myMessages != null, "No matching messages saved as: " + messagesSavedAs, "Found message saved as: " + messagesSavedAs, false, false))
 				{
 					var excelUtils = new ExcelUtilities(file.ToString(), "Messages");
-					var fileRowCount = excelUtils.Excel_GetNoRows() - 1;
-					var messageCount = myMessages.Count;
+					int fileRowCount = excelUtils.Excel_GetNoRows() - 1;
+					int messageCount = myMessages.Count;
 					Report.IsTrue(fileRowCount == messageCount,
 						"The report file row count (discounting the header) did not match the Message Center inbox count. File count: " + fileRowCount + " Message inbox count: " + messageCount,
 						"The report file row count (discounting the header) matched the Message Center inbox count : " + messageCount);
@@ -151,7 +151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"I confirm that the exported excel file saved as: (.*) contains the following columns:")]
 		public void ThenIConfirmThatTheExportedExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
-			var File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Messages");

@@ -9,13 +9,10 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
-	class MyProducts : BaseObject
+	class MyProducts : SeleniumBaseObject
 	{
 		// Cannot have a more precise container element than this
-		public const string BasePath = "//section[@id='productGridSection']";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//section[@id='productGridSection']");
 
 		public bool SetSearchCriteria(string searchBy, string filter, string upc, string status)
 		{
@@ -23,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				if (searchBy.Length > 0)
 				{
-					var searchBySelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
+					IWebElement searchBySelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
 						"//section[@id='productGridSection']//label[contains(text(), 'Search By')]/following-sibling::select"));
 					searchBySelect.Select(searchBy);
 
@@ -80,7 +77,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				var ListOfHeaders =
+				System.Collections.Generic.IEnumerable<string> ListOfHeaders =
 					SeleniumBrowser.WebBrowser.FindElements(
 							By.XPath(".//table[@class='ui-jqgrid-htable']//th[not(contains(@style, 'none'))]/div"))
 						.Select(x => x.Text.Trim());
@@ -147,7 +144,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				try
 				{
-					var invisibleLoading =
+					IWebElement invisibleLoading =
 						SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='load_tblProducts' and contains(@style,'none')]"));
 					if (invisibleLoading != null)
 					{

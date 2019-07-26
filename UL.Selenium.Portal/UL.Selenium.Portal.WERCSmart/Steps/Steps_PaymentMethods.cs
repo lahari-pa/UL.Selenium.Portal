@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var myPay = new PaymentMethods();
 
-			foreach (var Row in table.Rows)
+			foreach (TableRow Row in table.Rows)
 			{
 				Report.IsTrue(myPay.Payment_Method_Exists(Row["Options"]), Row["Options"] + " Is Not Available", Row["Options"] + " Available");
 			}
@@ -191,9 +191,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods_Edit_Address();
 
-				List<string> myList = new List<string>();
+				var myList = new List<string>();
 
-				foreach (var Row in table.Rows)
+				foreach (TableRow Row in table.Rows)
 				{
 					myList.Add(Row["Field"]);
 				}
@@ -239,9 +239,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods_Edit_Address();
 
-				List<string> myList = new List<string>();
+				var myList = new List<string>();
 
-				foreach (var Row in table.Rows)
+				foreach (TableRow Row in table.Rows)
 				{
 					myList.Add(Row["Field"]);
 				}
@@ -309,7 +309,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods_Edit_Address();
 
-				foreach (var thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					string firstName = thisRow["First Name"];
 					string lastName = thisRow["Last Name"];
@@ -358,7 +358,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				var wsUser = (WERCSmartUser)Context.GetFromContext(savedAs);
-				foreach (var thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					string address1 = thisRow["Address Line 1"];
 					string address2 = thisRow["Address Line 2"];
@@ -446,9 +446,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods();
 
-				List<string> myList = new List<string>();
+				var myList = new List<string>();
 
-				foreach (var Row in table.Rows)
+				foreach (TableRow Row in table.Rows)
 				{
 					myList.Add(Row["Field"]);
 				}
@@ -520,9 +520,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods();
 
-				List<string> myList = new List<string>();
+				var myList = new List<string>();
 
-				foreach (var Row in table.Rows)
+				foreach (TableRow Row in table.Rows)
 				{
 					myList.Add(Row["Field"]);
 				}
@@ -577,7 +577,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods();
 
-				foreach (var thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					string card_type = thisRow["Card Type"];
 					string card_no = thisRow["Card Number"];
@@ -848,7 +848,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the PayPal page should load")]
 		public void ThenThePayPalPageShouldLoad()
 		{
-			PaymentMethods_PayPal MyPP = new PaymentMethods_PayPal();
+			var MyPP = new PaymentMethods_PayPal();
 			Report.IsTrue(MyPP.Wait_for_load(60), "PayPal page is not showing",
 				"PayPal page is showing.");
 		}
@@ -877,7 +877,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I log into PayPal with user saved as: (.*) and click Continue")]
 		public void GivenILogInWithEmailAndPassword(string savedAs)
 		{
-			var user = TestUsers.GetUserSavedAs(savedAs);
+			TestUser user = TestUsers.GetUserSavedAs(savedAs);
 			this.GivenILogInWithEmailAndPassword(user.Username, user.Password);
 		}
 
@@ -901,6 +901,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Clicking AgreeAndContinue");
 			var reviewPayPal = new PaymentMethods_PayPal_MemberReview();
 			reviewPayPal.Click_AgreeAndContinue();
+		}
+
+		[StepDefinition(@"In the Payment Methods under Add a new Payment method I select: (.*)")]
+		public void ThenISelectAddANewPaymentMethod(string payMethod)
+		{
+			var myPay = new PaymentMethods();
+			Delay.Seconds(3 * Delay.SpeedFactor);
+			Report.IsTrue(myPay.Add_A_New_Payment_Method(payMethod), "Failed to Select " + payMethod,
+				"Successfully Selected " + payMethod);
+			Delay.Seconds(3 * Delay.SpeedFactor);
+		}
+
+		[StepDefinition(@"In the Add new Credit card popup I click Save")]
+		public void ThenIClickSave()
+		{
+			var myPay = new Add_Credit_Card_Popup();
+			Delay.Seconds(2 * Delay.SpeedFactor);
+			Report.IsTrue(myPay.Click_Save(), "Failed to Click Save", "Save Button Clicked");
+			Delay.Seconds(10 * Delay.SpeedFactor);
+		}
+
+		[StepDefinition(@"I click on Make Default for user: (.*)")]
+		public void GivenIClickOnMakeDefault(string user)
+		{
+			Report.IsTrue(new PaymentMethods().ClickMakeDefault(user), "Failed to click the make default",
+				"Successfully clicked make default");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 	}
 }

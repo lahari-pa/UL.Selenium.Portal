@@ -27,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void CopyEnterEmailContentsToClipboard()
 		{
-			var enteremail = this.containerElement.FindElement(By.XPath("//input[@id='txtEmail']"));
+			IWebElement enteremail = this.containerElement.FindElement(By.XPath("//input[@id='txtEmail']"));
 			enteremail.SendKeys(OpenQA.Selenium.Keys.Control + "a");
 			enteremail.SendKeys(OpenQA.Selenium.Keys.Control + "c");
 		}
@@ -45,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void PasteIntoConfirmEmailFromClipboard()
 		{
-			var confirmEmail = this.containerElement.FindElement(By.XPath("//input[@id='txtConfirm']"));
+			IWebElement confirmEmail = this.containerElement.FindElement(By.XPath("//input[@id='txtConfirm']"));
 			confirmEmail.SendKeys(OpenQA.Selenium.Keys.Control + "v");
 		}
 
@@ -65,7 +65,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void Click_Cancel()
 		{
-			var btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
+			IWebElement btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
 			btn.Click();
 		}
 

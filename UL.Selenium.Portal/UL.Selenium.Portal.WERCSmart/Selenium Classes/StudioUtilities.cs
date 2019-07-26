@@ -4,6 +4,7 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using NTTQA.Selenium.SpecFlow;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -23,8 +24,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				catch (Exception)
 				{
-					var handlesTemp = SeleniumBrowser.WebBrowser.WindowHandles;
-					var currentWindow = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+					ReadOnlyCollection<string> handlesTemp = SeleniumBrowser.WebBrowser.WindowHandles;
+					string currentWindow = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 					Context.AddToContext("BaseWindow", currentWindow);
 				}
 
@@ -36,13 +37,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return true;
 			}
 
-			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
 
 
 			int i = 0;
 			while (i < 20)
 			{
-				foreach (var handle in handles)
+				foreach (string handle in handles)
 				{
 					if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains(popupTitle))
 					{

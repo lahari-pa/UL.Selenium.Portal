@@ -12,6 +12,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -35,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SetSection(string section, string option)
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
 			if (el == null)
 			{
 				Report.Error("Could not find the section: " + section);
@@ -49,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetSectionSelectedOption(string section)
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
 			if (el == null)
 			{
 				Report.Error("Could not find the section: " + section);
@@ -102,7 +103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool HoverOverInformationElement(string label)
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//label[starts-with(text(),'" + label + "')]//i[contains(@class,'info-circle')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//label[starts-with(text(),'" + label + "')]//i[contains(@class,'info-circle')]"), 2);
 			var actions = new Actions(SeleniumBrowser.WebBrowser);
 			actions.MoveToElement(el).Build().Perform();
 			Delay.Seconds(Delay.SpeedFactor * 3);
@@ -128,7 +129,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Get_Extra_Text_Link(string subHeader)
 		{
-			return this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +"')]/following-sibling::div/p/a")).Text;
+			return this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader + "')]/following-sibling::div/p/a")).Text;
 		}
 
 		public void Click_Extra_Text_Link(string subHeader, string link)
@@ -219,8 +220,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> Get_Feature_Plans()
 		{
-			List<string> featurePlans = new List<string>();
-			Regex regex = new Regex(@".*\r\n");
+			var featurePlans = new List<string>();
+			var regex = new Regex(@".*\r\n");
 			var listOfPlans = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).Select(x => x.Text).ToList();
 			foreach (string thisPlan in listOfPlans)
 			{
@@ -238,7 +239,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Click_link(string planName, string item, string linkText, string linkURL)
 		{
 			Report.Info("Beginning click link. Plan name: " + planName + " item: " + item + " linktext: " + linkText + " url: " + linkURL);
-			List<Plan> allPlans = new List<Plan>();
+			var allPlans = new List<Plan>();
 			if (Context.ScenarioContext.ContainsKey("Plans"))
 			{
 				allPlans = (List<Plan>)Context.GetFromContext("Plans");
@@ -253,13 +254,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				if (thisPlan.Info_points.Select(x => x.Info_Header).Contains(item))
 				{
-					var PlanLabel = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
+					IWebElement PlanLabel = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
 						.FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == thisPlan.Plan_Name));
 					try
 					{
-						var listOfLis = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"));
-						var infoText = listOfLis.FirstOrDefault(x => x.Text.Trim() == item.Trim());
-						var infoLink = infoText.FindElement(By.XPath(".//a"));
+						ReadOnlyCollection<IWebElement> listOfLis = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"));
+						IWebElement infoText = listOfLis.FirstOrDefault(x => x.Text.Trim() == item.Trim());
+						IWebElement infoLink = infoText.FindElement(By.XPath(".//a"));
 
 						if (infoLink != null)
 						{
@@ -271,11 +272,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Delay.Seconds(1);
 							Report.Info("Clicked info link");
 							Report.Screenshot();
-							var expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
+							IWebElement expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
 							if (expandableDiv.GetAttribute("aria-expanded") == "true")
 							{
 								Report.Info("Got extra info. Trying to find url link.");
-								var link = expandableDiv.FindElements(By.XPath(".//a")).FirstOrDefault(x => x.Text.Trim() == linkText && x.GetAttribute("href").Contains(linkURL));
+								IWebElement link = expandableDiv.FindElements(By.XPath(".//a")).FirstOrDefault(x => x.Text.Trim() == linkText && x.GetAttribute("href").Contains(linkURL));
 								if (link == null)
 								{
 									Report.Info("Could not find matching url: " + linkText);
@@ -356,9 +357,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public string GetAlertMessage()
+		public List<string> GetAlertMessage()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 2)?.Text;
+			//return this.containerElement.FindElement(By.XPath(".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 2);
+			try
+			{
+				var errors = this.containerElement.FindElements(By.XPath(".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 2);
+				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
+			}
+			catch (Exception)
+			{
+				return null;
+			}
 		}
 
 
@@ -367,14 +377,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<Plan> Get_All_Plans()
 		{
 			List<string> featurePlans = this.Get_Feature_Plans();
-			List<Plan> listOfPlans = new List<Plan>();
+			var listOfPlans = new List<Plan>();
 			var listSubscriptions = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'subscription')]")).ToList();
 
-			foreach (var subscription in listSubscriptions)
+			foreach (IWebElement subscription in listSubscriptions)
 			{
-				Plan newPlan = new Plan();
+				var newPlan = new Plan();
 
-				Regex regex = new Regex(@".*\r\n");
+				var regex = new Regex(@".*\r\n");
 
 				string allLabel = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]/label")).Text.Trim();
 				Match match = regex.Match(allLabel);
@@ -384,7 +394,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 
-				var spans = subscription.FindElements(By.XPath(".//div[contains(@class, 'heading')]//span"));
+				ReadOnlyCollection<IWebElement> spans = subscription.FindElements(By.XPath(".//div[contains(@class, 'heading')]//span"));
 				if (spans.Count > 1)
 				{
 					newPlan.Best_Value = true;
@@ -405,26 +415,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				var infos = subscription.FindElements(By.XPath(".//div[contains(@class, 'body')]//li")).ToList();
 				newPlan.Info_points = new List<Info_Point>();
-				foreach (var info in infos)
+				foreach (IWebElement info in infos)
 				{
 
-					Info_Point thisInfoPoint = new Info_Point();
-					thisInfoPoint.Info_Header = info.Text.Trim();
+					var thisInfoPoint = new Info_Point {
+						Info_Header = info.Text.Trim()
+					};
 					//	Report.Info("Looking at: " + thisInfoPoint.Info_Header);
 					try
 					{
 						//expand
-						var infoLink = info.FindElement(By.XPath(".//a"));
+						IWebElement infoLink = info.FindElement(By.XPath(".//a"));
 						infoLink.TryClick();
 						Delay.Seconds(1);
 
 						thisInfoPoint.Info_Detail = info.FindElement(By.XPath(".//div")).Text.Trim();
 						thisInfoPoint.Info_Links = new List<Info_Link>();
 						var links = info.FindElements(By.XPath(".//div/a")).ToList();
-						foreach (var link in links)
+						foreach (IWebElement link in links)
 						{
 							//refinding because link text is missing
-							var refoundLink =
+							IWebElement refoundLink =
 								SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[contains(@href, '" + link.GetAttribute("href") + "')]"));
 							Report.Info("Adding new link: " + link.Text + " " + refoundLink.Text);
 							thisInfoPoint.Info_Links.Add(new Info_Link(refoundLink.Text, refoundLink.GetAttribute("href")));
@@ -442,7 +453,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				//newPlan.Info_points
-				var subsIndicator = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//div[@class='subs__indicator']"));
+				IWebElement subsIndicator = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//div[@class='subs__indicator']"));
 
 				string backGroundColour = subsIndicator.GetCssValue("background-color");
 				if (backGroundColour.Contains("255, 255, 255"))
@@ -473,7 +484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Extract_Before_Return(string stringPlusExtra)
 		{
-			Regex regex = new Regex(@".*\r\n");
+			var regex = new Regex(@".*\r\n");
 			Match match = regex.Match(stringPlusExtra);
 			if (match.Success)
 			{
@@ -487,7 +498,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Click_Info_By_Plan_Item_Return_Hidden(string planName, string item)
 		{
-			List<Plan> allPlans = new List<Plan>();
+			var allPlans = new List<Plan>();
 			if (Context.ScenarioContext.ContainsKey("Plans"))
 			{
 				allPlans = (List<Plan>)Context.GetFromContext("Plans");
@@ -502,13 +513,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				if (thisPlan.Info_points.Select(x => x.Info_Header).Contains(item))
 				{
-					var PlanLabel = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
+					IWebElement PlanLabel = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
 						.FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == thisPlan.Plan_Name));
 					try
 					{
-						var listOfLis = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"));
-						var infoText = listOfLis.FirstOrDefault(x => x.Text.Trim() == item.Trim());
-						var infoLink = infoText.FindElement(By.XPath(".//a"));
+						ReadOnlyCollection<IWebElement> listOfLis = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"));
+						IWebElement infoText = listOfLis.FirstOrDefault(x => x.Text.Trim() == item.Trim());
+						IWebElement infoLink = infoText.FindElement(By.XPath(".//a"));
 
 						if (infoLink != null)
 						{
@@ -517,7 +528,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								throw new Exception("Failed to click info link.");
 							}
 							Delay.Seconds(1);
-							var expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
+							IWebElement expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
 							if (expandableDiv.GetAttribute("aria-expanded") == "true")
 							{
 								string expandableDivText = expandableDiv.Text.Trim();
@@ -588,9 +599,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Get_Feature_Plan: " + feature_plan);
 
-			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).ToList();
+			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).ToList();
 
-			foreach (var feature in allProducts)
+			foreach (IWebElement feature in allProducts)
 			{
 				string featureNew = feature.Text;
 				string featureTrimmed = Regex.Replace(featureNew, @"\r\n.*", "").Trim();
@@ -687,10 +698,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			switch (section.ToLower())
 			{
 				case ("select the feature plan"):
-					var input_1 = this.containerElement.FindElements(By.XPath(".//h3[normalize-space(text())='" + section + "']//following-sibling::div[@class='row']//input"), 2).FirstOrDefault(x => x.Checked());
+					IWebElement input_1 = this.containerElement.FindElements(By.XPath(".//h3[normalize-space(text())='" + section + "']//following-sibling::div[@class='row']//input"), 2).FirstOrDefault(x => x.Checked());
 					return input_1.FindElement(By.XPath("./parent::label"), 2).GetElementText();
 				case ("select the support services plan"):
-					var input_2 = this.containerElement.FindElements(By.XPath(".//h3[normalize-space(text())='" + section + "']//following-sibling::div//input"), 2).FirstOrDefault(x => x.Checked());
+					IWebElement input_2 = this.containerElement.FindElements(By.XPath(".//h3[normalize-space(text())='" + section + "']//following-sibling::div//input"), 2).FirstOrDefault(x => x.Checked());
 					return input_2.FindElement(By.XPath("./parent::label"), 2).GetElementText();
 			}
 			return "";
@@ -700,9 +711,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Get_General_Support_Plan");
 
-			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-4']/div/div/label")).ToList();
+			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-4']/div/div/label")).ToList();
 
-			foreach (var feature in allProducts)
+			foreach (IWebElement feature in allProducts)
 			{
 				string featureNew = feature.Text;
 				string featureTrimmed = Regex.Replace(featureNew, @"\r\n.*", "").Trim();
@@ -735,7 +746,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_Support_Services_Plan(string servicesPlan)
 		{
 			Report.Info("Beginning Select_Support_Services_Plan: " + servicesPlan);
-
+			SeleniumBrowser.ScrollToBottomOfPage();
+			//GeneralUtilities.ScrollToBottomOfPage();
 			if (!this.Exists)
 			{
 				Report.Info("Not on Subscription Enrollment Page");
@@ -793,19 +805,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		//Proceed Button
-		[FindsBy(How = How.XPath, Using = ".//div[@class='row']/div/button[text()='PROCEED']")]
-		private IWebElement _btnProceed;
+		private IWebElement Proceed => this.containerElement.FindElement(By.XPath(".//div[@class='row']/div/button[text()='PROCEED']"), 1);
 
 		public bool Proceed_click()
 		{
 			Report.Info("Attempting to Click Proceed Button");
-			return this._btnProceed.TryClick();
+			return this.Proceed.TryClick();
 		}
 
 		public bool Proceed_button_enabled()
 		{
-			return this._btnProceed.Enabled;
+			return this.Proceed.Enabled;
 		}
 
 		public bool Select_Enrollment_Options(string articles, string enArticles, string formProds, string featurePlan,
@@ -911,31 +921,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		//Articles
-		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Articles']/../")]
-		private IWebElement _rowArticles;
+		private IWebElement ArticlesRow => this.containerElement.FindElement(By.XPath(".//tbody/tr/td[text()='Articles']/../"), 1);
 
-		//Enhanced Articles
-		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Enhanced Articles']/../")]
-		private IWebElement _rowEnArticles;
+		private IWebElement EnhancedArticlesRow => this.containerElement.FindElement(By.XPath(".//tbody/tr/td[text()='Enhanced Articles']/../"), 1);
 
 		//Formulated Products
 		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Formulated Products ']/../")]
-		private IWebElement _rowFormProds;
+		private IWebElement FormulatedProductsRow => this.containerElement.FindElement(By.XPath(".//tbody/tr/td[text()='Formulated Products ']/../"), 1);
 
 		public bool Feature_Plan_Check(string plan)
 		{
 			Report.Info("Beginning Feature_Plan_Check: " + plan);
-
-			IWebElement myFeat = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']/span[1]"), 10)
-				.FirstOrDefault();
-
+			IWebElement myFeat = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']/span[1]"), 10).FirstOrDefault();
 			if (myFeat == null)
 			{
 				Report.Info("Failed to Find Feature Plan");
 				return false;
 			}
-
 			if (myFeat.Text != plan)
 			{
 				Report.Info("Feature Plan is Incorrect: " + myFeat.Text);
@@ -944,7 +946,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Success("Feature Plan is Correct");
 			Report.Screenshot();
 			return true;
-
 		}
 
 		public string Get_Option(string option)
@@ -1125,7 +1126,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string AgencyPopupText()
 		{
-			var el = this.Agencypopuptext;
+			IWebElement el = this.Agencypopuptext;
 
 			if (el == null)
 			{
@@ -1139,7 +1140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			//containerElement.FindElement(By.XPath("#showAgencyServiceAgreement > div > div > div.modal-footer > button")).TryClick();
 
-			var el = this.PopupCloseButton;
+			IWebElement el = this.PopupCloseButton;
 
 			if (el == null)
 			{
@@ -1162,7 +1163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Error("Popup dialo could not be located!");
 				return "";
 			}
-			var el = this.containerElement.FindElement(By.XPath(".//h3"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//h3"), 2);
 
 			if (el == null)
 			{
@@ -1179,7 +1180,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Error("Popup dialo could not be located!");
 				return "";
 			}
-			var el = this.containerElement.FindElement(By.XPath(".//div[@class='popover-content']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[@class='popover-content']"), 2);
 
 			if (el == null)
 			{

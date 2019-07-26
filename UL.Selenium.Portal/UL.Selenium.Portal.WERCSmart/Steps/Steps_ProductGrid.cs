@@ -53,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking Product Grid Headers");
 				var selProdGrid = new ProductsGrid();
-				foreach (var row in table.Rows)
+				foreach (TableRow row in table.Rows)
 				{ Report.IsTrue(selProdGrid.GridHeaderShowing(row["Header"]), "Header " + row["Header"] + " was not showing as expected!", "Header " + row["Header"] + " was showing as expected!"); }
 				Report.Screenshot();
 			}
@@ -73,7 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Checking Pagniation");
 				Report.Info("Getting the first product from the first screen");
 				var selProdGrid = new ProductsGrid();
-				var firstId = selProdGrid.GetIdInFirstGridRow();
+				string firstId = selProdGrid.GetIdInFirstGridRow();
 				Report.Info("Got an ID of: '" + firstId + "'");
 				Report.Screenshot();
 				Report.Info("Clicking the next button");
@@ -81,7 +81,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Screenshot();
-				var secondId = selProdGrid.GetIdInFirstGridRow();
+				string secondId = selProdGrid.GetIdInFirstGridRow();
 				Report.Info("Got an ID of '" + secondId + "' from the next page");
 				Report.IsTrue(firstId != secondId, "Product IDs were identical, so pagniation is not working!", "Product IDs are different, so pagination is working");
 			}
@@ -101,7 +101,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Searching for First Product In Grid");
 				Report.Info("Getting the first product from the screen");
 				var selProdGrid = new ProductsGrid();
-				var firstId = selProdGrid.GetIdInFirstGridRow();
+				string firstId = selProdGrid.GetIdInFirstGridRow();
 				Report.Info("Got an ID of: '" + firstId + "'");
 				Context.AddToContext("SearchedID", firstId);
 				selProdGrid.ProductIdField = firstId;
@@ -170,8 +170,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Report.Info("Searching for product with ID: '" + id + "'");
-				var selProdGrid = new ProductsGrid();
-				selProdGrid.ProductIdField = id;
+				var selProdGrid = new ProductsGrid {
+					ProductIdField = id
+				};
 				GeneralUtilities.Wait_for_load_finish();
 				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + id + "'!", "Product was returned!");
 			}
@@ -186,7 +187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClearSearchCriteria()
 		{
 			var selProdGrid = new ProductsGrid();
-			var expanded = selProdGrid.MoreFiltersExpanded();
+			bool expanded = selProdGrid.MoreFiltersExpanded();
 			if (!expanded)
 			{
 				Report.Info("More Filters was collapsed so expanding it");
@@ -224,7 +225,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIShouldSeeTheProductReturnedInTheSearchResults(string shouldOrNot)
 		{
 			Report.Info("Correct product " + shouldOrNot + " be returned in the search grid");
-			var searchedId = Context.GetFromContext("SearchedID")?.ToString();
+			string searchedId = Context.GetFromContext("SearchedID")?.ToString();
 			if (searchedId == null)
 			{
 				Report.Failure("Context did not contain string for saved as: SearchedID");
@@ -240,14 +241,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IShouldOnlySeeOneProductWithUPC(string savedAs)
 		{
 			var selProductsGrid = new ProductsGrid();
-			var searchId = Context.GetFromContext(savedAs)?.ToString();
+			string searchId = Context.GetFromContext(savedAs)?.ToString();
 			if (searchId == null)
 			{
 				Report.Failure("Could not find UPC number in context saved as: " + savedAs);
 				return;
 			}
-			var firstId = selProductsGrid.GetIdInFirstGridRow();
-			var productsCount = selProductsGrid.ProductsCount();
+			string firstId = selProductsGrid.GetIdInFirstGridRow();
+			int productsCount = selProductsGrid.ProductsCount();
 			Report.IsTrue(productsCount == 1 && firstId == searchId,
 				"Product with ID: " + searchId + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstId,
 				"Product with ID: " + searchId + " was the only result returned as expected");
@@ -277,7 +278,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Saving Product ID and Name of First Product as " + savedAs);
 			var selProdGrid = new ProductsGrid();
-			var productElement = selProdGrid.FirstProductInGrid();
+			ProductGridItem productElement = selProdGrid.FirstProductInGrid();
 			Context.AddToContext(savedAs, productElement);
 			Report.Success("Got the first Product in Grid (ID: " + productElement.ProductId + ") and saved to: " + savedAs);
 		}
@@ -340,7 +341,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
-			var rowActions = selProdGrid.ActionsAvailableInDropDown();
+			List<string> rowActions = selProdGrid.ActionsAvailableInDropDown();
 			if (rowActions == null)
 			{
 				Report.Failure("No row actions were found!");
@@ -399,7 +400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking Bulk Actions popup appears");
 				var selBulkActions = new BulkActions();
-				selBulkActions.Wait_for_load();
+				selBulkActions.WaitForContainerToBeVisible();
 				Report.Success("Bulk Actions window opened successfully!");
 			}
 			catch (Exception ex)
@@ -474,7 +475,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Info("Checking that Sync Products to ULSC window appears");
 				var selUlscSyncPopup = new SyncUlscProductsDialog();
-				var showing = selUlscSyncPopup.HeaderShowing();
+				string showing = selUlscSyncPopup.HeaderShowing();
 				Report.IsTrue(showing == headerExpected.Trim(),
 					"Sync Products to ULSC header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
 					"Sync Products to ULSC header was showing '" + headerExpected + "', as expected!");
@@ -491,10 +492,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GenerateUniqueUpcNumber(string savedAs)
 		{
 			var grid = new ProductsGrid();
-			for (var i = 0; i < 6; i++)
+			for (int i = 0; i < 6; i++)
 			{
-				Report.Info("Generating upc attempt " + (i+1));
-				var uPCNo = GeneralFunctions.GenerateUPCNumber();
+				Report.Info("Generating upc attempt " + (i + 1));
+				string uPCNo = GeneralFunctions.GenerateUPCNumber();
 				Report.Info("Generated UPC No: " + uPCNo);
 				Report.Info("Searching for generated upc number");
 				grid.UpcNumber = uPCNo;
@@ -521,7 +522,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I generate a random UPC number and save as: (.*) and (keep|delete) duplicate UPC products")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs, string keepOrDelete)
 		{
-			var delete = keepOrDelete == "delete";
+			bool delete = keepOrDelete == "delete";
 			TestReport.UseSubSteps = delete;
 			TestReport.StartStep("I generate a random UPC number and save as: " + savedAs);
 			this.GivenIGenerateARandomUPCNumberAndSaveAs(savedAs);
@@ -532,7 +533,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"I generate a random UPC number and save as: (.*)")]
+		[StepDefinition(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
@@ -586,8 +587,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var Product = (ProductInformation)Context.GetFromContext(savedas);
 			Report.Info("Attempting to delete: " + Product.Name);
-			var ProductGrid = new ProductsGrid();
-			ProductGrid.ProductIdField = Product.Id;
+			var ProductGrid = new ProductsGrid {
+				ProductIdField = Product.Id
+			};
 			if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
 			{
 				if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the search button", "Successfully clicked the search button!", false, false))
@@ -598,7 +600,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Failure($"No products with ID '{Product.Id}' were found in the grid!");
 						return;
 					}
-					var firstProduct = ProductGrid.FirstProductInGrid();
+					ProductGridItem firstProduct = ProductGrid.FirstProductInGrid();
 					if (Report.IsTrue(firstProduct.ProductName.StartsWith(Product.Name) && firstProduct.ProductId == Product.Id, "First product did not match the required paremeters!", "Product was showing at the top of the grid, as expected!"))
 					{
 						Report.IsTrue(ProductGrid.DeleteFirstRow(), "Failed to delete product in first row!", "Successfully deleted product in first row!");
@@ -610,7 +612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The current page in the products grid is: (.*)")]
 		public void CurrentPageProductsGrid(string expectedPage)
 		{
-			var currentPage = new ProductsGrid().ActivePage();
+			string currentPage = new ProductsGrid().ActivePage();
 			Report.IsTrue(currentPage == expectedPage,
 				"The current page in the products grid did not match the expected page",
 				"The current page in the products grid matched the expected page");
@@ -646,16 +648,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void EnterArrowUserGridNavigationBox(string direction)
 		{
 			var selProductsGrid = new ProductsGrid();
-			var pageNavigationValue = selProductsGrid.CurrentPageGridNavigationInput();
+			string pageNavigationValue = selProductsGrid.CurrentPageGridNavigationInput();
 			TestReport.StartStep(GlobalParameters.StepCount + " - I enter the " + direction + " arrow into the page navigation box");
 			Report.Info("Entering the " + direction + " arrow key to the products grid page navigation input");
 			selProductsGrid.KeyToGridNavigationInput(direction);
 			Report.Info("Pressing the enter key");
 			selProductsGrid.KeyToGridNavigationInput("enter");
-			var iteration = direction == "up" ? "increased" : "decreased";
+			string iteration = direction == "up" ? "increased" : "decreased";
 			GlobalParameters.StepCount++;
 			TestReport.StartStep(GlobalParameters.StepCount + " - I confirm the page number has " + iteration + " by 1");
-			var currentPage = Convert.ToInt32(selProductsGrid.ActivePage());
+			int currentPage = Convert.ToInt32(selProductsGrid.ActivePage());
 			int difference = direction == "up" ? 1 : -1;
 			Report.IsTrue(currentPage == Convert.ToInt32(pageNavigationValue) + difference,
 				string.Format("The active page did not {0} by 1 after entering the '{1}' arrow into the page navigation box at position '{2}'",
@@ -678,7 +680,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selMoreFilters = new MoreFilters();
 			if (option.StartsWith("~saved as"))
 			{
-				var savedAs = option.Replace("~saved as", "").Trim();
+				string savedAs = option.Replace("~saved as", "").Trim();
 				option = Context.GetFromContext(savedAs)?.ToString();
 				if (option == null)
 				{
@@ -720,8 +722,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I edit the product with ID: (.*)")]
 		public void EditFirstProductForRetailer(string id)
 		{
-			var selProductsGrid = new ProductsGrid();
-			selProductsGrid.ProductIdField = id;
+			var selProductsGrid = new ProductsGrid {
+				ProductIdField = id
+			};
 			Report.IsTrue(selProductsGrid.ClickActionsForFirstResultInGrid() && selProductsGrid.ClickRowAction("Edit"),
 				"Failed to edit the product with ID: " + id,
 				"Successfully edited the product with ID: " + id);
@@ -741,7 +744,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"A Summary page should open in a new browser tab")]
 		public void ThenASummaryPageShouldOpenInANewBrowserTab()
 		{
-			List<string> OpenBrowsers =
+			var OpenBrowsers =
 				SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()))
 					.ToList();
 			for (int i = 0; i < 30; i++)
@@ -771,15 +774,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"I should not seen an Accept button")]
 		public void ThenIShouldNotSeenAnAcceptButton()
 		{
-			SummaryPage thisSummaryPage = new SummaryPage();
+			var thisSummaryPage = new SummaryPage();
 			Report.IsTrue(!thisSummaryPage.ListOfButtons().Contains("Accept"), "Accept button is showing",
 				"Accept button is not showing");
 		}
 
-		[Given(@"I close the browser tab with the Summary page")]
+		[StepDefinition(@"I close the browser tab with the Summary page")]
 		public void GivenICloseTheBrowserTabWithTheSummaryPage()
 		{
-			List<string> OpenBrowsers =
+			var OpenBrowsers =
 				SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()))
 					.ToList();
 			for (int i = 0; i < 30; i++)
@@ -806,10 +809,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Did not find Summary page to close");
 		}
 
-		[Given(@"I save the number of items in the pie chart")]
+		[StepDefinition(@"I save the number of items in the pie chart")]
 		public void GivenISaveTheNumberOfItemsInThePieChart()
 		{
-			Homepage myHomepage = new Homepage();
+			var myHomepage = new Homepage();
 			int currentProductCount = myHomepage.PieChartProductsTotal();
 			Context.AddToContext("ProductCount", currentProductCount);
 			Report.IsTrue(currentProductCount > -1, "Failed to get current product count",
@@ -819,7 +822,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"the number of items in the pie chart should be one less than the figure I saved")]
 		public void ThenTheNumberOfItemsInThePieChartShouldBeOneLessThanTheFigureISaved()
 		{
-			Homepage myHomepage = new Homepage();
+			var myHomepage = new Homepage();
 			int currentProductCount = myHomepage.PieChartProductsTotal();
 			int savedProductcount = Convert.ToInt16(Context.GetFromContext("ProductCount"));
 			Report.IsTrue(currentProductCount == (savedProductcount - 1),
@@ -832,18 +835,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the header: Document Acceptance on the Document Acceptance window")]
 		public void GivenIShouldSeeTheHeaderDocumentAcceptanceOnTheDocumentAcceptanceWindow()
 		{
-			Report.IsTrue(new DocumentAcceptance().Wait_for_load(),
+			Report.IsTrue(new DocumentAcceptance().WaitForContainerToBeVisible(),
 				"Document Acceptance page is not showing as expected.", "Document Acceptance page is showing");
 		}
 
-		[Given(@"I should see the header: Delete Active Products on the Delete Active Product window")]
+		[StepDefinition(@"I should see the header: Delete Active Products on the Delete Active Product window")]
 		public void GivenIShouldSeeTheHeaderDeleteActiveProductsOnTheDeleteActiveProductWindow()
 		{
 			Report.IsTrue(new DeleteActiveProducts().Wait_for_load(),
 				"Delete Active Products page is not showing as expected.", "Delete Active Products page is showing");
 		}
 
-		[Then(@"I should see the header: Message Center on the Message Center window")]
+		[StepDefinition(@"I should see the header: Message Center on the Message Center window")]
 		public void ThenIShouldSeeTheHeaderMessageCenterOnTheMessageCenterWindow()
 		{
 			Report.IsTrue(new MessageCenter().Wait_for_load(),
@@ -878,14 +881,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I search for UPC number saved as: (.*)")]
 		public void SearchForUPCSavedAs(string savedAs)
 		{
-			var upc = Context.GetFromContext(savedAs)?.ToString();
+			string upc = Context.GetFromContext(savedAs)?.ToString();
 			if (upc == null)
 			{
 				Report.Failure("Could not find UPC number in context saved as: " + savedAs);
 				return;
 			}
-			var selProductGrid = new ProductsGrid();
-			selProductGrid.UpcNumber = upc;
+			var selProductGrid = new ProductsGrid {
+				UpcNumber = upc
+			};
 			if (!Report.IsTrue(selProductGrid.UpcNumber == upc,
 				"Value: " + upc + " was not inputted into the UPC field correctly!",
 				"Value: " + upc + " was correctly inputted into the UPC field", false, false))
@@ -908,7 +912,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selProductsGrid = new ProductsGrid();
 			var selMoreFilters = new MoreFilters();
 			var filters = new List<KeyValuePair<string, string>>();
-			foreach (var row in moreFilters.Rows)
+			foreach (TableRow row in moreFilters.Rows)
 			{
 				filters.Add(new KeyValuePair<string, string>(
 					row["Filter"],
@@ -939,10 +943,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						bool productReturned = match.All(x => x);
 						for (int l = 0; l < filtersToDo.Count; l++)
 						{
-							var filter = filtersToDo[l];
-							var filterType = filter.Key;
-							var options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
-							var option = match[l] ? filter.Value : options.First(x => x != filter.Value);
+							KeyValuePair<string, string> filter = filtersToDo[l];
+							string filterType = filter.Key;
+							List<string> options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
+							string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 							switch (filterType)
 							{
 								case "UPC":
@@ -994,10 +998,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					bool productReturned = match.All(x => x);
 					for (int l = 0; l < filtersToDo.Count; l++)
 					{
-						var filter = filtersToDo[l];
-						var filterType = filter.Key;
-						var options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
-						var option = match[l] ? filter.Value : options.First(x => x != filter.Value);
+						KeyValuePair<string, string> filter = filtersToDo[l];
+						string filterType = filter.Key;
+						List<string> options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
+						string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 						switch (filterType)
 						{
 							case "UPC":
@@ -1044,10 +1048,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					bool productReturned = match.All(x => x);
 					for (int l = 0; l < filters.Count; l++)
 					{
-						var filter = filters[l];
-						var filterType = filter.Key;
-						var options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
-						var option = match[l] ? filter.Value : options.First(x => x != filter.Value);
+						KeyValuePair<string, string> filter = filters[l];
+						string filterType = filter.Key;
+						List<string> options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
+						string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 						switch (filterType)
 						{
 							case "UPC":
@@ -1084,10 +1088,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the product exists with Product ID: (.*) and Name: (.*)")]
 		public void ProductExistsWithIDAndName(string id, string name)
 		{
-			var selProdGrid = new ProductsGrid();
-			selProdGrid.ProductIdField = id;
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = id
+			};
 			GeneralUtilities.Wait_for_load_finish();
-			var firstProduct = selProdGrid.FirstProductInGrid();
+			ProductGridItem firstProduct = selProdGrid.FirstProductInGrid();
 			Report.IsTrue(firstProduct != null && firstProduct.ProductName == name,
 				"Product with ID: " + id + " and name: " + name + " was not returned in the product grid",
 				"Product with ID: " + id + " and name: " + name + " was returned in the product grid");
@@ -1108,13 +1113,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Accepted by Retailers",
 				"Needs Your Attention"
 			};
-			foreach (var row in statusAndFilters.Rows)
+			foreach (TableRow row in statusAndFilters.Rows)
 			{
 				filters.Add(new KeyValuePair<string, string>(
 					row["Filter"],
 					row["Match"]));
 			}
-			var status = filters.FirstOrDefault(x => x.Key == "Status");
+			KeyValuePair<string, string> status = filters.FirstOrDefault(x => x.Key == "Status");
 			filters.RemoveAll(x => x.Key == "Status");
 			for (int i = 0; i < filters.Count; i++)
 			{
@@ -1131,10 +1136,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					bool productReturned = match.All(x => x);
 					for (int l = 0; l < filtersToDo.Count; l++)
 					{
-						var filter = filtersToDo[l];
-						var filterType = filter.Key;
-						var options = filterType == "Status" ? statuses : selMoreFilters.Options(filterType);
-						var option = match[l] ? filter.Value : options.First(x => x != filter.Value);
+						KeyValuePair<string, string> filter = filtersToDo[l];
+						string filterType = filter.Key;
+						List<string> options = filterType == "Status" ? statuses : selMoreFilters.Options(filterType);
+						string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 						switch (filterType)
 						{
 							case "Status":
@@ -1188,7 +1193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the following options for the (Retailer|Brand|Additional Programs) filter")]
 		public void ShouldSeeTheFollowingOptionsMoreFilters(string filter, Table table)
 		{
-			var displayedOptions = new MoreFilters().Options(filter);
+			List<string> displayedOptions = new MoreFilters().Options(filter);
 			var expectedOptions = new List<string>();
 			table.Rows.ForEach(x => expectedOptions.Add(x["Option"]));
 			Report.IsTrue(expectedOptions.All(x => displayedOptions.Contains(x)) && expectedOptions.Count == displayedOptions.Count,
@@ -1202,9 +1207,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (GlobalParameters.SiteType == "Development")
 			{
 				TestReport.UseSubSteps = true;
-				StepsProductGrid MyNewProduct = new StepsProductGrid();
+				var MyNewProduct = new StepsProductGrid();
 				TestReport.StartStep("I should only see the following retailers");
-				TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				var produtTable = new TechTalk.SpecFlow.Table(new string[] {
 				"Option"
 			});
 				produtTable.AddRow(new string[] {
@@ -1377,9 +1382,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (GlobalParameters.SiteType == "Staging")
 			{
 				TestReport.UseSubSteps = true;
-				StepsProductGrid MyNewProduct = new StepsProductGrid();
+				var MyNewProduct = new StepsProductGrid();
 				TestReport.StartStep("I should only see the following retailers");
-				TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				var produtTable = new Table(new string[] {
 				"Option"
 			});
 				produtTable.AddRow(new string[] {
@@ -1537,9 +1542,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (GlobalParameters.SiteType == "Local Production")
 			{
 				TestReport.UseSubSteps = true;
-				StepsProductGrid MyNewProduct = new StepsProductGrid();
+				var MyNewProduct = new StepsProductGrid();
 				TestReport.StartStep("I should only see the following retailers");
-				TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				var produtTable = new Table(new string[] {
 				"Option"
 			});
 				produtTable.AddRow(new string[] {
@@ -1697,7 +1702,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmFilterDisplayedWithLabelAndDefaultOption(string label, string option)
 		{
 			var selMoreFilters = new MoreFilters();
-			var displayedLabels = selMoreFilters.MoreFilterLabels();
+			List<string> displayedLabels = selMoreFilters.MoreFilterLabels();
 			Report.IsTrue(displayedLabels.Contains(label),
 				$@"The label ""{label}"" was not displayed under More Filters! Displayed labels: {string.Join(", ", displayedLabels.Select(x => $"'{x}'"))}",
 				$@"The label ""{label}"" was displayed under More Filters as expected");
@@ -1728,7 +1733,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm all products in the grid contain either the the text ""(.*)"" or ""All"" under the 'Retailers' column")]
 		public void ConfirmAllProductsInGridContainTextInRetailersColumn(string retailer)
 		{
-			var allProducts = new ProductsGrid().GetAllProducts();
+			List<ProductGridItem> allProducts = new ProductsGrid().GetAllProducts();
 			var idsFail = allProducts.Where(x => !x.Retailers.Contains(retailer) && !x.Retailers.Contains("All")).Select(x => x.ProductId).ToList();
 			Report.IsTrue(idsFail.Count == 0,
 				$@"Not all products in the grid contained either ""{retailer}"" or ""All"". Product Ids: {string.Join(", ", idsFail.Select(x => $"'{x}'").ToList())}",
@@ -1747,9 +1752,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenForProductSavedAsTestCaseTheStatusIs(string savedAs, string status)
 		{
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var id = productDetails.Id;
+			string id = productDetails.Id;
 
-			ProductsGrid thisProductsGrid = new ProductsGrid();
+			var thisProductsGrid = new ProductsGrid();
 
 			string statusColour = thisProductsGrid.GetRetailersStatusByID(id);
 
@@ -1771,7 +1776,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
-			var displayedWarnings = removeUpc.AlertWarningRows();
+			List<string> displayedWarnings = removeUpc.AlertWarningRows();
 			if (displayedWarnings.Count == 0)
 			{
 				Report.Failure("The UPC Update popup did not contain any body error text!");
@@ -1793,7 +1798,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
-			var displayedWarnings = removeUpc.AlertWarningRows();
+			List<string> displayedWarnings = removeUpc.AlertWarningRows();
 			if (displayedWarnings.Count == 0)
 			{
 				Report.Failure("The UPC Update popup did not contain any body error text!");
@@ -1835,7 +1840,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Retailers popup is (displayed|not displayed)")]
 		public void ConfirmRetailerPopupIsDisplayedNotDisplayed(string isDisplayed)
 		{
-			var displayed = new ProductsGrid().RetailerPopupDisplayed();
+			bool displayed = new ProductsGrid().RetailerPopupDisplayed();
 			switch (isDisplayed)
 			{
 				case "displayed":
@@ -1865,7 +1870,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the Archive Retailers Popup")]
 		public void GivenIShouldSeeTheArchiveRetailersPopup()
 		{
-			ModalDialog thisModalDialog = new ModalDialog();
+			var thisModalDialog = new ModalDialog();
 			if (thisModalDialog.Wait_for_load(5))
 			{
 				Report.IsTrue(thisModalDialog.GetTitle() == "Archive Retailers", "Dialog is not showing as expected",
@@ -1880,7 +1885,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Archive Retailers popup, I select the the checkbox next to the the first retailer")]
 		public void GivenIInTheArchiveRetailersPopupSelectTheTheCheckboxNextToTheRetailerSYouWantToArchive()
 		{
-			ModalDialog thisModalDialog = new ModalDialog();
+			var thisModalDialog = new ModalDialog();
 			List<string> retailers = thisModalDialog.GetRetailers();
 			string retailerToArchive = retailers[0];
 			Report.IsTrue(thisModalDialog.SelectRetailer(retailerToArchive), "Failed to select: " + retailerToArchive,
@@ -1892,7 +1897,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Archive Retailers popup click on: (.*)")]
 		public void GivenInTheArchiveRetailersPopupClickOn(string buttonToClick)
 		{
-			ModalDialog thisModalDialog = new ModalDialog();
+			var thisModalDialog = new ModalDialog();
 			Report.IsTrue(thisModalDialog.ClickButton(buttonToClick), "Failed to click: " + buttonToClick,
 				"Clicked: " + buttonToClick);
 			Delay.Seconds(3);
@@ -1901,7 +1906,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I (Select|Deselect) the check box next to Show Archived Retailers")]
 		public void GivenISelectTheCheckBoxNextToShowArchivedRetailers(string selectOrDeselect)
 		{
-			ProductsGrid thisProductsGrid = new ProductsGrid();
+			var thisProductsGrid = new ProductsGrid();
 
 			if (selectOrDeselect.ToLower() == "select")
 			{
@@ -1922,7 +1927,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Saving Product ID and Name of First Product as " + savedAs);
 			var selProdGrid = new ProductsGrid();
-			var productElement = selProdGrid.FirstProductInGridWithRetailers();
+			ProductGridItem productElement = selProdGrid.FirstProductInGridWithRetailers();
 			if (productElement == null)
 			{
 				Report.Failure("No results were returned in the grid");
@@ -1943,14 +1948,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Saving Product ID and Name of First Product as " + savedAs);
 			var selProdGrid = new ProductsGrid();
-			var productElement = selProdGrid.FirstProductInGridWithRetailers();
+			ProductGridItem productElement = selProdGrid.FirstProductInGridWithRetailers();
 			if (productElement == null)
 			{
 				Report.Failure("No results were returned in the grid");
 				Report.Screenshot();
 				return;
 			}
-			var productInformation = new ProductInformation(){Id = productElement.ProductId, Name = productElement.ProductName};
+			var productInformation = new ProductInformation() { Id = productElement.ProductId, Name = productElement.ProductName };
 			Context.AddToContext(savedAs, productInformation);
 			Report.Success("Got the first Product in Grid (ID: " + productElement.ProductId + ") and saved to: " + savedAs);
 			Report.Info("Filtering on product id: " + productElement.ProductId);
@@ -1960,7 +1965,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[Given(@"I check for all items in the grid that the retailers are alphabetically listed")]
+		[StepDefinition(@"I check for all items in the grid that the retailers are alphabetically listed")]
 		public void GivenISaveTheProductIDAndNameOfTheFirstProductInTheGridWithMoreThanOneRetailerAs()
 		{
 
@@ -1990,9 +1995,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				string archivedRetailer = Context.GetFromContext("retailer").ToString();
 				var selProdGrid = new ProductsGrid();
-				var productElement = selProdGrid.FirstProductInGrid();
+				ProductGridItem productElement = selProdGrid.FirstProductInGrid();
 				List<string> retailers = productElement.Retailers;
-				var abbreviatedRetailer = "";
+				string abbreviatedRetailer = "";
 				if (retailers.Contains(archivedRetailer))
 				{
 					for (int i = 0; i < retailers.Count; i++)
@@ -2031,7 +2036,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the Update Registration popup")]
 		public void IShouldSeeTheUpdateRegistrationPopup()
 		{
-			ModalDialog thisModalDialog = new ModalDialog();
+			var thisModalDialog = new ModalDialog();
 			Report.IsTrue(thisModalDialog.Wait_for_load(30), "Modal dialog has not opened as expected",
 				"Modal dialog is showing");
 			Report.IsTrue(thisModalDialog.GetTitle() == "Update Registration",
@@ -2041,7 +2046,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Update Registration popup I click on button (Cancel|View|Yes)")]
 		public void InUpdateRegistrationPopupIClickButton(string button)
 		{
-			ModalDialog thisModalDialog = new ModalDialog();
+			var thisModalDialog = new ModalDialog();
 			Report.IsTrue(thisModalDialog.Wait_for_load(30), "Modal dialog has not opened as expected",
 				"Modal dialog is showing");
 			Report.IsTrue(thisModalDialog.ClickButton(button.ToUpper()),
@@ -2053,7 +2058,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmThatTheProductNameLabelIsDisplayed(string label)
 		{
 			Report.Info("Getting first product in the grid");
-			var product = new ProductsGrid().FirstProductInGrid();
+			ProductGridItem product = new ProductsGrid().FirstProductInGrid();
 			if (product == null)
 			{
 				Report.Failure("No products were found in the grid!");

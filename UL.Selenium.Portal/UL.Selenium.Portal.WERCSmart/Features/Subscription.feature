@@ -13,71 +13,41 @@
 @SubEnrollment
 @WERCSmart_Signup
 @MyAccount
+@SubUpgrade
+@ProductSetUp
 @run_Subscription
 
 Feature: Subscription
 
 @TReVorId:19117
 Scenario: [63297] Add subscription to a new supplier through data entry
-Given I define the user: 63297 with the following parameters:
-| Field                | Value           |
-| Email                | User_<random>   |
-| Country              | UNITED STATES   |
-| FirstName            | Richard         |
-| LastName             | Smith           |
-| Password             | Pa4*ytuufnn     |
-| Address1             | Address 1       |
-| Address2             | Address 2       |
-| City                 | City Name       |
-| State                | Florida         |
-| Zip                  | 999             |
-| CompanyName          | Company 1       |
-| CompanyPhone         | 123-456-7889    |
-| EmergencyPhoneNumber | 123-456-7789    |
-| SupplierType         | Manufacturer    |
-| CityQuestion         | CityQuestion    |
-| CityHint             | CityHint        |
-| CarQuestion          | CarQuestion     |
-| CarHint              | CarHint         |
-| FriendQuestion       | FriendQuestion  |
-| FriendHint           | FriendHint      |
-| JobQuestion          | JobQuestion     |
-| JobHint              | JobHint         |
-| MascotQuestion       | MascotQuestion  |
-| MascotHint           | MascotHint      |
-| PhoneQuestion        | PhoneQuestion   |
-| PhoneHint            | PhoneHint       |
-| MentorQuestion       | MentorQuestion  |
-| MentorHint           | MentorHint      |
-| FriendQuestion       | FriendQuestion  |
-| FriendHint           | FriendHint      |
-| AnimalQuestion       | AnimalQuestion  |
-| AnimalHint           | AnimalHint      |
-| CollegeQuestion      | CollegeQuestion |
-| CollegeHint          | CollegeHint     |
-| Pin                  | 1234            |
-
-Given I save the current emails in the inbox for user saved as: 63297
-#Given I click on the New to WERCSmart Link
-Given I select the Sign Up link
-Then the signup page should appear
-Given I enter signup email for user: 63297
-And I confirm signup email for user: 63297
-And I click on submit
-Then the signup thank you page should appear
-Then there should be a new email for user: 63297 from: <SiteNotification> with the title: Link to create WERCSmart Account
-Then the email should contain a link to set up the WERCSmart account
-When I click on the link I should see the WERCSmart new account page
-And I enter the information into the new user form for user saved as: 63297
-And In the new user form I click on continue
-Then I should be on the Security Questions page of the form
-And I enter the following into the Security Questions window for user saved as: 63297
-And I enter the pin for user saved as: 63297
-When In the new user form I click on continue
-Given I go to the WERCSmart Log in
-Given I login as user: 63297
-Given If terms of use page appears I accept
-Then the WERCSmart homepage should load
+Given If not already created, I create a user: TC63297User with the following parameters:
+| Field                | Value          |
+| Email                | User_<random>  |
+| Country              | UNITED STATES  |
+| FirstName            | Richard        |
+| LastName             | Smith          |
+| Password             | Pa4*ytuufnn    |
+| Address1             | Address 1      |
+| Address2             | Address 2      |
+| City                 | City Name      |
+| State                | Florida        |
+| Zip                  | 999            |
+| CompanyName          | Company 1      |
+| CompanyPhone         | 123-456-7889   |
+| EmergencyPhoneNumber | 123-456-7789   |
+| SupplierType         | Manufacturer   |
+| PhoneQuestion         | PhoneQuestion   |
+| PhoneHint             | PhoneHint       |
+| MentorQuestion          | MentorQuestion    |
+| MentorHint              | MentorHint        |
+| FriendQuestion       | FriendQuestion |
+| FriendHint           | FriendHint     |
+| AnimalQuestion          | AnimalQuestion    |
+| AnimalHint              | AnimalHint        |
+| CollegeQuestion       | CollegeQuestion |
+| CollegeHint           | CollegeHint     |
+| Pin                  | 1234           |
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Then I save the product information as: TestCase63297
@@ -97,6 +67,7 @@ Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 # Subscription Enrollment - Section 1 Checks
 Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
+And I see the alert message with text: Subscription enrollment is required to submit your registration for assessment. Please enroll at this time. Once you purchase your subscription, the registration data will transfer for assessment. under Subscription Enrollment
 Then In the Subscription Enrollment screen I confirm that I see the following subheadings:
 | Subheading                                                          |
 | 1 Select the range of your products, articles and enhanced articles |
@@ -235,8 +206,8 @@ Then In the Payment Methods screen I confirm the following payment options are a
 | ACH           |
 | PayPal        |
 | Wire Transfer |
-Then In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as 63297
-Then In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as 63297
+Then In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as TC63297User
+Then In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as TC63297User
 And In the Payment Methods screen I open the Edit Address form
 Then I confirm the Edit Address form has the correct fields
 | Field                     |
@@ -252,11 +223,11 @@ Then I confirm the Edit Address form has the correct fields
 | Phone Number              |
 | Shipping/Billing Checkbox |
 Then I cancel the Edit Address form
-Then I edit the Billing Address for user saved as: 63297
+Then I edit the Billing Address for user saved as: TC63297User
 # ** If field is not to be changed, enter <empty> into table **
 | Address Line 1 | Address Line 2 | City    | State   | Zip Code | Country | Phone Number |
 | Address_New    | <empty>        | <empty> | <empty> | <empty>  | <empty> | <empty>      |
-And In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as 63297
+And In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as TC63297User
 Then In the Payment Methods screen I confirm the Continue Button is disabled
 Then In the Payment Methods screen I select Payment Method: Credit Card
 Then In the Payment Methods screen I confirm the Credit Card fields are correct
@@ -320,13 +291,13 @@ Then In the Subscription Information screen I confirm the Subscription History t
 Given I click on My Account
 Then In the My Account screen I navigate to the Order History page
 Then In the Order History screen I select Subscription
-Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: 63297
+Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC63297User
 
 
 @TReVorId:19118
 Scenario: [59245] Add subscription to a new supplier from My account
 Given I go to the WERCSmart Log in
-Given If not already created, I create a user: New_Sub with the following parameters:
+Given If not already created, I create a user: TC59245User with the following parameters:
 | Field                | Value          |
 | Email                | User_<random>  |
 | Country              | UNITED STATES  |
@@ -369,8 +340,8 @@ Then In the Payment Methods screen I confirm the following payment options are a
 | Credit Card   |
 | ACH           |
 | Wire Transfer |
-Then In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as New_Sub
-Then In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as New_Sub
+Then In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as TC59245User
+Then In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as TC59245User
 And In the Payment Methods screen I open the Edit Address form
 Then I confirm the Sub Headings are correct: Primary Account Contact, Billing Address
 Then I confirm the Edit Address form has the correct fields
@@ -399,11 +370,11 @@ And I confirm the Shipping Address form has the correct fields
 Then I check the Shipping Address is the same as the billing address checkbox
 Then I confirm the Shipping Address is hidden
 Then I cancel the Edit Address form
-Then I edit the Billing Address for user saved as: New_Sub
+Then I edit the Billing Address for user saved as: TC59245User
 # ** If field is not to be changed, enter <empty> into table **
 | Address Line 1 | Address Line 2 | City    | State   | Zip Code | Country | Phone Number |
 | Address_New    | <empty>        | <empty> | <empty> | <empty>  | <empty> | <empty>      |
-And In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as New_Sub
+And In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as TC59245User
 Then In the Payment Methods screen I confirm the Continue Button is disabled
 Then In the Payment Methods screen I select Payment Method: Credit Card
 Then In the Payment Methods screen I confirm the Credit Card fields are correct
@@ -468,7 +439,7 @@ Then In the Subscription Information screen I confirm the Subscription History t
 Given I click on My Account
 Then In the My Account page I navigate to the Order History page
 Then In the Order History screen I select Subscription
-Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: New_Sub
+Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC59245User
 
 @TReVorId:19119
 Scenario: [67822] New subscription to a new supplier from My account - Visual Checks
@@ -636,3 +607,388 @@ Then In the Purchase Summary screen I confirm the column headings are correct: P
 Then In the Purchase Summary screen I confirm the folling statement is shown: Subscription will be automatically charged to the default payment method.
 Then In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars. Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL. Payment is required when your order is submitted. The method of payment designated on the My Account area will be used. UL reserves the right to accept or refuse any payment made in any form. UL does not collect or process your payment details. Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.
 Then In the Purchase Summary screen I confirm the following statement is shown: By clicking "Confirm Order" you will be enrolled in our subscription plan.
+
+
+@TReVorId:22351
+Scenario: [105063] Upgrade Subscription Message
+Given I go to the WERCSmart Log in
+Given If not already created, I create a user: TC105063User with the following parameters:
+| Field                | Value          |
+| Email                | User_<random>  |
+| Country              | UNITED STATES  |
+| FirstName            | WERCS          |
+| LastName             | Test_Automatio |
+| Password             | Pa4*ytuufnn    |
+| Address1             | Address 1      |
+| Address2             | Address 2      |
+| City                 | City Name      |
+| State                | Florida        |
+| Zip                  | 999            |
+| CompanyName          | Company 1      |
+| CompanyPhone         | 123-456-7889   |
+| EmergencyPhoneNumber | 123-456-7789   |
+| SupplierType         | Manufacturer   |
+| PhoneQuestion        | PhoneQuestion  |
+| PhoneHint            | PhoneHint      |
+| MentorQuestion       | MentorQuestion |
+| MentorHint           | MentorHint     |
+| FriendQuestion       | FriendQuestion |
+| FriendHint           | FriendHint     |
+| AnimalQuestion       | AnimalQuestion |
+| AnimalHint           | AnimalHint     |
+| CollegeQuestion      | CollegeQuestion|
+| CollegeHint          | CollegeHint    |
+| Pin                  | 1234           |
+Given I click on My Account
+Then I click on NEW SUBSCRIPTION
+Then In the Subscription Enrollment screen I select the following enrollment options
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+| None               | None               | Up to 1 Product(s)  | Limited      | General Support       |
+#And I click on the Proceed button
+Then I click on Checkout
+Then In the Payment Methods screen I check the Payment Methods heading and sub headings are correct
+Then In the Payment Methods screen I select Payment Method: Credit Card
+Then In the Payment Methods screen I enter Credit Card details
+| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
+| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I check the Header is correct
+#Then In the Thank You screen I confirm the following statement is shown: Thank you for enrolling in a subscription plan. You’ve successfully submitted your first registration for assessment! What happens now? Our team of Assessment Professionals will review your product’s data and provide information to your recipient for proper handling, transport and storage. The assessment process takes about two (2) business days to finalize and then is transferred to your recipient. Your product’s registration data remains in our database. The UL WERCSmart team works with you to provide over 45 retailers critical product information to on-board your products while keeping the recipient’s employees, consumers and the environment safe. UL is committed to helping you monitor and manage your product’s data needs with the highest standard of confidentiality and service. Should you need any assistance regarding your registration, please visit the Support area’s Solution Center, or contact one of our professional Support Team Representatives.
+Then In the Thank You screen I click Home
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Servers, Small-Scale
+Then I save the product information as: TestCase105063
+Given I call Shared Step 60935 (Additional Product Information - US - Direct Ship - Private Label Only)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 48367 (Product Includes Battery > any type)
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Alkaline     | <any>        | 4                               | 2                                  |
+Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
+Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
+Given I call Shared Step 86163 - Retailer - Canada Only & PL, Select No Retailer, Add PL, Continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then In the Subscription Enrollment screen I confirm heading as Subscription  Upgrade
+And I see the alert message with text: Subscription upgrade is required to submit your registration for assessment. Please upgrade at this time. Once you purchase your subscription, the registration data will transfer for assessment. Upgrades are pro-rated for the remainder of the subscription term and your default payment method will be used. under Subscription Enrollment
+And I click on the Proceed button
+Then In the Subscription popup I confirm the Subscription Upgrade header exists
+And I confirm the chosen options and body text are correct
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan | Body Text                                                                                                                            |
+| Up to 1 Product(s) |                    | Up to 1 Product(s)  | Limited      | General               | Your new purchase will be prorated based on the credit and time left in your current subscription. Checkout to see the final amount. |
+Then I click on Checkout
+Then In the Payment Methods screen I check the Payment Methods heading and sub headings are correct
+Then In the Payment Methods screen I confirm the Default method is: Credit Card
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Purchase Summary screen I check the Subscription Billing header is correct
+Then In the Purchase Summary screen I confirm the Yearly Radio Option is selected
+Then In the Purchase Summary screen I confirm the column headings are correct: Plan Selected, Service Date, Amount
+Then In the Purchase Summary screen I confirm the folling statement is shown: Subscription will be automatically charged to the default payment method.
+Then In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars. Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL. Payment is required when your order is submitted. The method of payment designated on the My Account area will be used. UL reserves the right to accept or refuse any payment made in any form. UL does not collect or process your payment details. Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.
+Then In the Purchase Summary screen I confirm the following statement is shown: By clicking "Confirm Order" you will be enrolled in our subscription plan.
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I check the Header is correct
+Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
+
+
+@TReVorId:22352
+Scenario: [62727] Upgrade Subscription through My Account 
+Given I go to the WERCSmart Log in
+Given If not already created, I create a user: TC62727User with the following parameters:
+| Field                | Value                   |
+| Email                | User_<random>           |
+| Country              | UNITED STATES           |
+| FirstName            | WERCS                   |
+| LastName             | Test_Automation_Upgrade |
+| Password             | Pa4*ytuufnn             |
+| Address1             | Address 1               |
+| Address2             | Address 2               |
+| City                 | City Name               |
+| State                | Florida                 |
+| Zip                  | 999                     |
+| CompanyName          | Company 1               |
+| CompanyPhone         | 123-456-7889            |
+| EmergencyPhoneNumber | 123-456-7789            |
+| SupplierType         | Manufacturer            |
+| PhoneQuestion        | PhoneQuestion           |
+| PhoneHint            | PhoneHint               |
+| MentorQuestion       | MentorQuestion          |
+| MentorHint           | MentorHint              |
+| FriendQuestion       | FriendQuestion          |
+| FriendHint           | FriendHint              |
+| AnimalQuestion       | AnimalQuestion          |
+| AnimalHint           | AnimalHint              |
+| CollegeQuestion      | CollegeQuestion         |
+| CollegeHint          | CollegeHint             |
+| Pin                  | 1234                    |
+Given I click on My Account
+Then I click on NEW SUBSCRIPTION
+Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
+Then In the Subscription Enrollment screen I select the following enrollment options
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+| Up to 5 Product(s) | Up to 5 Product(s) | Up to 5 Product(s)  | Standard     | Silver                |
+Then I click on Checkout
+Then In the Payment Methods screen I select Payment Method: Credit Card
+Then In the Payment Methods screen I enter Credit Card details
+| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
+| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I click Home
+#Given I log in with email: User_ceef42822c24.kxxyxunf@mailosaur.io and password: Pa4*ytuufnn
+Given I click on My Account
+#Then In the My Account screen I navigate to the Subscription Information page
+#Then In the Subscription Information screen I confirm the Status has the correct information: 5 Formulated, 5 Articles, 5 Enhanced Articles
+Then In the Subscription Information screen I click the Upgrade button
+Then In the Subscription Upgrade screen I confirm heading as Subscription  Upgrade
+Then In the Subscription Upgrade screen I confirm the Standard Feature Plan is selected
+Then In the Subscription Upgrade screen I confirm I cannot downgrade the current Feature Plan: Standard
+Then In the Subscription Upgrade screen I confirm the Silver Support Services Plan is selected
+Then In the Subscription Upgrade screen I confirm I cannot downgrade the current Support Services Plan: Silver
+Then In the Subscription Upgrade screen I confirm the Proceed button is disabled when there is no change in the plan selection
+Then In the Subscription Upgrade screen for Articles I select Up to 10 Product(s)
+Then In the Subscription Upgrade screen I confirm the Proceed button is enabled when a change is made in the plan selection
+Then In the Subscription Upgrade screen I confirm the Estimated Annual Cost changes when Articles are changed to Up to 15 Product(s)
+Then In the Subscription Upgrade screen I confirm the Estimated Annual Cost per Product changes when Enhanced Articles are changed to Up to 75 Product(s)
+Then In the Subscription Upgrade screen I select the following enrollment options
+| Articles            | Enhanced Articles   | Formulated Products | Feature Plan | Support Services Plan |
+| Up to 15 Product(s) | Up to 15 Product(s) | Up to 15 Product(s) | Premium      | Gold                  |
+Then In the Subscription popup I confirm the Subscription Upgrade header exists
+And I confirm the chosen options and body text are correct
+| Articles            | Enhanced Articles   | Formulated Products | Feature Plan | Support Services Plan | Body Text                                                                                                                            |
+| Up to 15 Product(s) | Up to 15 Product(s) | Up to 15 Product(s) | Premium      | Gold                  | Your new purchase will be prorated based on the credit and time left in your current subscription. Checkout to see the final amount. |
+Then I click on Checkout
+Then In the Payment Methods screen I confirm the Default method is: Credit Card
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Purchase Summary screen I check the Subscription Billing header is correct
+Then In the Purchase Summary screen I confirm the Yearly Radio Option is selected
+Then In the Purchase Summary screen I confirm the column headings are correct: Plan Selected, Service Date, Amount
+Then In the Purchase Summary screen I confirm the folling statement is shown: Subscription will be automatically charged to the default payment method.
+Then In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars. Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL. Payment is required when your order is submitted. The method of payment designated on the My Account area will be used. UL reserves the right to accept or refuse any payment made in any form. UL does not collect or process your payment details. Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.
+Then In the Purchase Summary screen I confirm the following statement is shown: By clicking "Confirm Order" you will be enrolled in our subscription plan.
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I check the Header is correct
+Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
+#Then In the Thank You screen I click Home
+#Given I log in with email: User_ceef42822c24.kxxyxunf@mailosaur.io and password: Pa4*ytuufnn
+Given I click on My Account
+Then In the My Account screen I navigate to the Subscription Information page
+Then In the Subscription Information screen I confirm the Status has the correct information: 15 Formulated, 15 Articles, 15 Enhanced Articles
+Then In the Subscription Information screen I confirm status is: ACTIVE
+Then In the Subscription Information screen I confirm the Subscription History table has the correct information
+| Subscription Level Status      | Quantity |
+| Premium Gold Formulated        | 15       |
+| Premium Gold Articles          | 15       |
+| Premium Gold Enhanced Articles | 15       |
+Given I click on My Account
+Then In the My Account screen I navigate to the Order History page
+Then In the Order History screen I select Subscription
+Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC62727User
+
+
+@TReVorId:22353
+Scenario: [63224] Upgrade subscription through data entry 
+Given I go to the WERCSmart Log in
+Given If not already created, I create a user: TC63224User with the following parameters:
+| Field                | Value                   |
+| Email                | User_<random>           |
+| Country              | UNITED STATES           |
+| FirstName            | WERCS                   |
+| LastName             | Test_Automation_Upgrade |
+| Password             | Pa4*ytuufnn             |
+| Address1             | Address 1               |
+| Address2             | Address 2               |
+| City                 | City Name               |
+| State                | Florida                 |
+| Zip                  | 999                     |
+| CompanyName          | Company 1               |
+| CompanyPhone         | 123-456-7889            |
+| EmergencyPhoneNumber | 123-456-7789            |
+| SupplierType         | Manufacturer            |
+| PhoneQuestion        | PhoneQuestion           |
+| PhoneHint            | PhoneHint               |
+| MentorQuestion       | MentorQuestion          |
+| MentorHint           | MentorHint              |
+| FriendQuestion       | FriendQuestion          |
+| FriendHint           | FriendHint              |
+| AnimalQuestion       | AnimalQuestion          |
+| AnimalHint           | AnimalHint              |
+| CollegeQuestion      | CollegeQuestion         |
+| CollegeHint          | CollegeHint             |
+| Pin                  | 1234                    |
+Given I click on My Account
+Then I click on NEW SUBSCRIPTION
+Then In the Subscription Enrollment screen I select the following enrollment options
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+| None               | None               | Up to 1 Product(s)  | Limited      | General Support       |
+Then I click on Checkout
+Then In the Payment Methods screen I select Payment Method: Credit Card
+Then In the Payment Methods screen I enter Credit Card details
+| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
+| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I click Home
+Given I create a product with RU - Chalk and take to submitted and save as: TestCase63224Product1
+Given I navigate to the home page
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase63224Product2
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then In the Subscription Enrollment screen I confirm heading as Subscription  Upgrade
+And I see the alert message with text: Subscription upgrade is required to submit your registration for assessment. Please upgrade at this time. Once you purchase your subscription, the registration data will transfer for assessment. Upgrades are pro-rated for the remainder of the subscription term and your default payment method will be used. under Subscription Enrollment
+And I click on the Proceed button
+Then In the Subscription popup I confirm the Subscription Upgrade header exists
+And I confirm the chosen options and body text are correct
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan | Body Text                                                                                                                            |
+|                    |                    | Up to 3 Product(s)  | Limited      | General               | Your new purchase will be prorated based on the credit and time left in your current subscription. Checkout to see the final amount. |
+Then I click on Checkout
+Then In the Payment Methods screen I check the Payment Methods heading and sub headings are correct
+Then In the Payment Methods screen I confirm the Default method is: Credit Card
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Purchase Summary screen I check the Subscription Billing header is correct
+Then In the Purchase Summary screen I confirm the Yearly Radio Option is selected
+Then In the Purchase Summary screen I confirm the column headings are correct: Plan Selected, Service Date, Amount
+Then In the Purchase Summary screen I confirm the folling statement is shown: Subscription will be automatically charged to the default payment method.
+Then In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars. Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL. Payment is required when your order is submitted. The method of payment designated on the My Account area will be used. UL reserves the right to accept or refuse any payment made in any form. UL does not collect or process your payment details. Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.
+Then In the Purchase Summary screen I confirm the following statement is shown: By clicking "Confirm Order" you will be enrolled in our subscription plan.
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I check the Header is correct
+Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
+Given I click on My Account
+Then In the My Account screen I navigate to the Subscription Information page
+Then In the Subscription Information screen I confirm the Status has the correct information: 3 Formulated, 0 Articles, 0 Enhanced Articles
+Then In the Subscription Information screen I confirm status is: ACTIVE
+Then In the Subscription Information screen I confirm the Subscription History table has the correct information
+| Subscription Level Status      | Quantity |
+| Limited Formulated             | 3        |
+Given I click on My Account
+Then In the My Account screen I navigate to the Order History page
+Then In the Order History screen I select Subscription
+Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC63224User
+
+
+@TReVorId:22354
+Scenario: [73388] Grace period through new account 
+Given I go to the WERCSmart Log in
+Given If not already created, I create a user: TC73388User with the following parameters:
+| Field                | Value          |
+| Email                | User_<random>  |
+| Country              | UNITED STATES  |
+| FirstName            | Richard        |
+| LastName             | Smith          |
+| Password             | Pa4*ytuufnn    |
+| Address1             | Address 1      |
+| Address2             | Address 2      |
+| City                 | City Name      |
+| State                | Florida        |
+| Zip                  | 999            |
+| CompanyName          | Company 1      |
+| CompanyPhone         | 123-456-7889   |
+| EmergencyPhoneNumber | 123-456-7789   |
+| SupplierType         | Manufacturer   |
+| PhoneQuestion         | PhoneQuestion   |
+| PhoneHint             | PhoneHint       |
+| MentorQuestion          | MentorQuestion    |
+| MentorHint              | MentorHint        |
+| FriendQuestion       | FriendQuestion |
+| FriendHint           | FriendHint     |
+| AnimalQuestion          | AnimalQuestion    |
+| AnimalHint              | AnimalHint        |
+| CollegeQuestion       | CollegeQuestion |
+| CollegeHint           | CollegeHint     |
+| Pin                  | 1234           |
+Given I click on My Account
+Then I click on NEW SUBSCRIPTION
+Then In the Subscription Enrollment screen I select the following enrollment options
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+| None               | None               | Up to 1 Product(s)  | Limited      | General Support       |
+Then I click on Checkout
+Then In the Payment Methods screen I select Payment Method: Credit Card
+Then In the Payment Methods screen I enter Credit Card details
+| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
+| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I check the Header is correct
+Given I click on My Account
+Then In the My Account screen I navigate to the Subscription Information page
+Then In the Subscription Information screen I confirm the Status has the correct information: 1 Formulated, 0 Articles, 0 Enhanced Articles
+Then In the Subscription Information screen I confirm status is: ACTIVE
+Then In the Subscription Information screen I confirm grace period is: None
+
+
+@TReVorId:22355
+Scenario: [73394] Grace period through My Account 
+Given I go to the WERCSmart Log in
+Given If not already created, I create a user: TC73394User with the following parameters:
+| Field                | Value                   |
+| Email                | User_<random>           |
+| Country              | UNITED STATES           |
+| FirstName            | WERCS                   |
+| LastName             | Automated_TEST73394     |
+| Password             | Welcome1!               |
+| Address1             | Address 1               |
+| Address2             | Address 2               |
+| City                 | City Name               |
+| State                | Florida                 |
+| Zip                  | 999                     |
+| CompanyName          | Company 1               |
+| CompanyPhone         | 123-456-7889            |
+| EmergencyPhoneNumber | 123-456-7789            |
+| SupplierType         | Manufacturer            |
+| PhoneQuestion        | PhoneQuestion           |
+| PhoneHint            | PhoneHint               |
+| MentorQuestion       | MentorQuestion          |
+| MentorHint           | MentorHint              |
+| FriendQuestion       | FriendQuestion          |
+| FriendHint           | FriendHint              |
+| AnimalQuestion       | AnimalQuestion          |
+| AnimalHint           | AnimalHint              |
+| CollegeQuestion      | CollegeQuestion         |
+| CollegeHint          | CollegeHint             |
+| Pin                  | 1234                    |
+Given I click on My Account
+Then I click on NEW SUBSCRIPTION
+Then In the Subscription Enrollment screen I select the following enrollment options
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+| None               | None               | Up to 1 Product(s)  | Limited      | General Support       |
+Then I click on Checkout
+Then In the Payment Methods screen I select Payment Method: Wire Transfer
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I check the Header is correct
+#Given I log in with email: User_4b44c15b958d.kxxyxunf@mailosaur.io and password: Welcome1!
+Given I click on My Account
+Then In the My Account screen I navigate to the Subscription Information page
+Then In the Subscription Information screen I confirm the Status has the correct information: 1 Formulated, 0 Articles, 0 Enhanced Articles
+Then In the Subscription Information screen I confirm status is: LOCKED
+Then In the Subscription Information screen I confirm grace period is: None
+Given I click on My Account
+Then In the My Account screen I navigate to the Payment Methods page
+Then In the Payment Methods under Add a new Payment method I select: Credit Card
+Then In the Payment Methods screen I enter Credit Card details
+| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
+| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test73394_cc           |
+Given In the Add new Credit card popup I click Save
+Given I click on Make Default for user: test73394_cc
+Given I click on My Account
+Then In the My Account screen I navigate to the Subscription Information page
+Then In the Subscription Information screen I confirm status is: ACTIVE
+Then In the Subscription Information screen I confirm grace period is: None

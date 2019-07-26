@@ -179,10 +179,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (text.Contains("saved as"))
 			{
-				var savedAsValue = Context.GetFromContext(text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+				object savedAsValue = Context.GetFromContext(text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 				if (savedAsValue == null)
 				{
-					throw new Exception("User saved as: " + text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim() +" was not found in context.");
+					throw new Exception("User saved as: " + text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim() + " was not found in context.");
 				}
 				var savedUser = (WERCSmartUser)savedAsValue;
 				switch (inputField)
@@ -213,11 +213,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ShouldSeeAServerErrorWithMessage(string expectedMessage)
 		{
 			var selServerError = new ServerErrorDialog();
-			if (!selServerError.Wait_for_load(10))
+			if (!selServerError.WaitForContainerToBeVisible(10))
 			{
 				throw new Exception("Server Error Dialog did not appear!");
 			}
-			var actualText = selServerError.Error_Text();
+			string actualText = selServerError.Error_Text();
 			Report.Info("Expecting to see a server error with message: '" + expectedMessage + "'");
 			Report.Info("Actual error text was: '" + actualText + "'");
 			Report.IsTrue(actualText.Trim() == expectedMessage.Trim(), "Message text did not match! Expected: '" + expectedMessage + "', but got: '" + actualText + "'!", "Message text matched successfully!");
@@ -232,12 +232,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				throw new Exception("Log in page did not load after 30 seconds!");
 			}
-			var user = TestUsers.GetUserSavedAs(accountSavedAs);
+			TestUser user = TestUsers.GetUserSavedAs(accountSavedAs);
 			if (user == null)
 			{
 				throw new Exception("The user saved as: " + accountSavedAs + " could not be located in TReVor!");
 			}
-			var value = "";
+			string value = "";
 			switch (inputField)
 			{
 				case ("email"):
@@ -259,7 +259,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				throw new Exception("Log in page did not load after 30 seconds!");
 			}
-			var user = TestUsers.GetUserSavedAs(account);
+			TestUser user = TestUsers.GetUserSavedAs(account);
 			if (user == null)
 			{
 				throw new Exception("The user saved as: " + account + " could not be located in TReVor!");

@@ -79,13 +79,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			get
 			{
 				var rList = new List<UlSection>();
-				var sections = this.containerElement.FindElements(By.XPath(".//div[@class='col-md-6']"), 2);
-				foreach (var section in sections)
+				IList<IWebElement> sections = this.containerElement.FindElements(By.XPath(".//div[@class='col-md-6']"), 2);
+				foreach (IWebElement section in sections)
 				{
-					var header = section.FindElement(By.XPath(".//h3"), 2)?.Text;
-					var statement = section.FindElement(By.XPath(".//p[not(.//a[@role='button'])]"), 2)?.Text;
-					var logoEl = section.FindElement(By.XPath(".//div[@class='media-left']//img"), 2);
-					var learnMoreEl = section.FindElement(By.XPath(".//a[@role='button' and text()='Learn More']"), 2);
+					string header = section.FindElement(By.XPath(".//h3"), 2)?.Text;
+					string statement = section.FindElement(By.XPath(".//p[not(.//a[@role='button'])]"), 2)?.Text;
+					IWebElement logoEl = section.FindElement(By.XPath(".//div[@class='media-left']//img"), 2);
+					IWebElement learnMoreEl = section.FindElement(By.XPath(".//a[@role='button' and text()='Learn More']"), 2);
 					rList.Add(new UlSection {
 						Header = header,
 						Statement = statement,

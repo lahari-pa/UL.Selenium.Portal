@@ -14,6 +14,7 @@ using UL.Selenium.Portal.ULSC.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.ULSC.Steps
 {
@@ -34,7 +35,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 					throw new Exception("Page failed to load!");
 				}
 
-				var optionShowing = selUlSolutionCenter.OptionShowing();
+				List<string> optionShowing = selUlSolutionCenter.OptionShowing();
 
 				Report.IsTrue(optionShowing.Contains(option.Trim()),
 					"Option: " + option + " was not showing in the list of options! Options showing were: " + string.Join(", ", optionShowing),
@@ -86,7 +87,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		//	}
 		// }
 
-		[Given(@"I navigate to Studio for ULSC")]
+		[StepDefinition(@"I navigate to Studio for ULSC")]
 		public void GivenINavigateToStudioULSC()
 		{
 			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("TestUrl");
@@ -94,30 +95,30 @@ namespace UL.Selenium.Portal.ULSC.Steps
 
 		}
 
-		[Given(@"I login to Studio as ULSC")]
+		[StepDefinition(@"I login to Studio as ULSC")]
 		public void GivenILoginToStudioAsULSCUser()
 		{
-			StudioLogin thisStudioLogin = new StudioLogin();
-			var ulscUser = TestUsers.GetUserSavedAs("ULSC_StudioUser");
+			var thisStudioLogin = new StudioLogin();
+			TestUser ulscUser = TestUsers.GetUserSavedAs("ULSC_StudioUser");
 			thisStudioLogin.Username = ulscUser.Username;
 			thisStudioLogin.Password = ulscUser.Password;
 			thisStudioLogin.ClickSignIn();
 			Delay.Seconds(3);
-			StudioDesktop thisStudioDesktop = new StudioDesktop();
+			var thisStudioDesktop = new StudioDesktop();
 			Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
 				"Studio desktop is showing as expected");
 			Report.Info("Studio desktop is loaded");
-			StudioTopMenu thisStudioTopMenu = new StudioTopMenu();
+			var thisStudioTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
 
-		[Given(@"the ULSC Login page should open in a new tab")]
+		[StepDefinition(@"the ULSC Login page should open in a new tab")]
 		public void GivenTheULSCLoginPageShouldOpenInANewTab()
 		{
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in allHandles)
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
 			{
 				Report.Info("Switching tab");
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
@@ -135,8 +136,8 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"In the ULSC Login page I enter Username and password for the following account: (.*)")]
 		public void GivenInTheULSCLoginPageIEnterUsernameAndPasswordForTheFollowingAccountTest(string accountSavedAs)
 		{
-			ULSCLogin thisULSCLogin = new ULSCLogin();
-			var user = TestUsers.GetUserSavedAs(accountSavedAs);
+			var thisULSCLogin = new ULSCLogin();
+			TestUser user = TestUsers.GetUserSavedAs(accountSavedAs);
 			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
 			{
 				thisULSCLogin.Username = user.Username;
@@ -147,7 +148,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I the ULSC Login page I click Login")]
 		public void GivenITheULSCLoginPageIClickLogin()
 		{
-			ULSCLogin thisULSCLogin = new ULSCLogin();
+			var thisULSCLogin = new ULSCLogin();
 			Report.IsTrue(thisULSCLogin.ClickLogIn(), "Failed to click login in the ULSC login page",
 				"Clicked login on the ULSC login page");
 		}
@@ -155,7 +156,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I should see the WERCSLink dashboard")]
 		public void GivenIShouldSeeTheWERCSLinkDashboard()
 		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			var thisWercsLinkDashboard = new WERCSLinkDashboard();
 			Report.IsTrue(thisWercsLinkDashboard.Wait_for_load(60), "WERCSlink dashboard has not opened.",
 				"WERCSlink dasboard is showing as expected");
 		}
@@ -169,7 +170,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 
 			// trying this...
 			// first check if we are on 'Services page already and click' you have to click the menu item twice to get the sub items expanded
-			var thisLink = new SideBarNavigation().GetNavLink(menu);
+			SideBarNavigation.NavLink thisLink = new SideBarNavigation().GetNavLink(menu);
 			if (thisLink == null)
 			{
 				Report.Failure("There was no menu item with title: " + menu);
@@ -188,7 +189,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			if (thisLink.SubLinks.Any())
 			{
 				Report.Info("Menu item: " + menu + " is already expanded. Clicking sub menu item: " + submenu);
-				var subMatch = thisLink.SubLinks.First(x => x.Title == submenu);
+				SideBarNavigation.NavSubLink subMatch = thisLink.SubLinks.First(x => x.Title == submenu);
 				if (subMatch == null)
 				{
 					Report.Failure("No sub link was found with title: " + submenu);
@@ -206,7 +207,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				if (thisLink.SubLinks.Any())
 				{
 					Report.Info("Clicking sub menu item: " + submenu);
-					var subMatch = thisLink.SubLinks.First(x => x.Title == submenu);
+					SideBarNavigation.NavSubLink subMatch = thisLink.SubLinks.First(x => x.Title == submenu);
 					if (subMatch == null)
 					{
 						Report.Failure("No sub link was found with title: " + submenu);
@@ -236,10 +237,10 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		public void GivenIConfirmTheWerCSMartProductInformationPageIsShownInNewWindowTab()
 		{
 			Delay.Seconds(30);
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in allHandles)
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
 			{
 				//Report.Info("Switching tab");
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
@@ -251,7 +252,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				}
 			}
 			Report.Failure("Failed to find the correct tab! The available tabs (with screenshots) were:", false);
-			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+			var OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
 			int counter = 1;
 			foreach (string url in OpenBrowsers)
 			{
@@ -266,7 +267,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I close the tab with the (.*) page")]
 		public void GivenICloseTheTabWithTheProductInformationPage(string page)
 		{
-			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+			var OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
 
 			foreach (string url in OpenBrowsers)
 			{
@@ -275,7 +276,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				{
 					case "The Product":
 						var selNewProduct = new NewProduct();
-						if (selNewProduct.Wait_for_load())
+						if (selNewProduct.WaitForContainerToBeVisible())
 						{
 							if (selNewProduct.WaitForSection(page))
 							{
@@ -295,7 +296,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 						break;
 					case "New Product":
 						var selNewProductnp = new NewProduct();
-						if (selNewProductnp.Wait_for_load())
+						if (selNewProductnp.WaitForContainerToBeVisible())
 						{
 
 							Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
@@ -347,7 +348,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I navigate to tab with title: (.*)")]
 		public void GivenINavigateToTabWithTitle(string tabTitle)
 		{
-			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+			var OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
 
 			foreach (string url in OpenBrowsers)
 			{
@@ -365,7 +366,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"In the WERCSLink page - Click the (.*) link from the (.*) area of the Services page")]
 		public void GivenInTheWERCSLinkPage_ClickTheMyProductLinkFromTheWERCSmartAreaOfTheServicesPage(string link, string area)
 		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			var thisWercsLinkDashboard = new WERCSLinkDashboard();
 
 			switch (area)
 			{
@@ -388,10 +389,10 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		public void GivenIConfirmANewWindowOpensWithTheWERCSmartNewProductPageShown()
 		{
 			Delay.Seconds(30);
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in allHandles)
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
 			{
 				//Report.Info("Switching tab");
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
@@ -403,7 +404,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				}
 			}
 			Report.Failure("Failed to find the correct tab! The available tabs (with screen shots) were:");
-			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+			var OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
 			int counter = 1;
 			foreach (string url in OpenBrowsers)
 			{
@@ -427,7 +428,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		public void GivenIConfirmThatTheFollowingWERCSLinkMenuItemsAreShowing(Table table)
 		{
 			var menuItems = new SideBarNavigation().GetNavLinks().Select(x => x.Title).ToList();
-			foreach (var thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				Report.IsTrue(menuItems.Contains(thisRow["Menu item"]), "Failed to find menu item: " + thisRow["Menu item"],
 					"Found left menu item: " + thisRow["Menu item"]);
@@ -437,14 +438,14 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm the following sub links are displayed below the WERCSLink menu item: (.*):")]
 		public void ConfirmWercsLinkMenuItemDisplaysSubItems(string menuItem, Table table)
 		{
-			var thisMenuItem = new SideBarNavigation().GetNavLink(menuItem);
+			SideBarNavigation.NavLink thisMenuItem = new SideBarNavigation().GetNavLink(menuItem);
 			if (thisMenuItem == null)
 			{
 				Report.Failure($"The menu item: {menuItem} was not displayed!");
 				Report.Screenshot();
 				return;
 			}
-			foreach (var row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
 				if (thisMenuItem.SubLinks.All(x => x.Title != row["Sub link"]))
 				{
@@ -461,14 +462,14 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I click the link: (.*) below the WERCSLink menu item: (.*)")]
 		public void ClickSubLinkItem(string subLink, string menuItem)
 		{
-			var thisMenuItem = new SideBarNavigation().GetNavLink(menuItem);
+			SideBarNavigation.NavLink thisMenuItem = new SideBarNavigation().GetNavLink(menuItem);
 			if (thisMenuItem == null)
 			{
 				Report.Failure($"The menu item: {menuItem} was not displayed!");
 				Report.Screenshot();
 				return;
 			}
-			var thisSubLink = thisMenuItem.SubLinks.First(x => x.Title == subLink);
+			SideBarNavigation.NavSubLink thisSubLink = thisMenuItem.SubLinks.First(x => x.Title == subLink);
 			if (thisSubLink == null)
 			{
 				Report.Failure("The sub link with title: " + subLink + " was not displayed under the primary link: " + menuItem);
@@ -481,8 +482,8 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm that the Services page displays the following sections:")]
 		public void ConfirmServicesPageDisplaysSections(Table table)
 		{
-			var sections = new Services().SectionHeadings();
-			foreach (var thisRow in table.Rows)
+			List<string> sections = new Services().SectionHeadings();
+			foreach (TableRow thisRow in table.Rows)
 			{
 				Report.IsTrue(sections.Contains(thisRow["Section"]), "Failed to find Services section: " + thisRow["Section"],
 					"Found Services section: " + thisRow["Section"]);
@@ -492,7 +493,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm that the Services page contains a section with the WERCSmart logo, name and Registered trade mark")]
 		public void ConfirmServicesPageContainsASectionWithWercSmartLogoNameAndRegisteredTrademark()
 		{
-			var images = new Services().SectionImages("WERCSmart®");
+			List<string> images = new Services().SectionImages("WERCSmart®");
 			if (images != null)
 			{
 				Report.IsTrue(images.Contains("wercsmart-logo"), "The WercSmart Logo was not displayed for section with heading: WercSmart name and registered trademark!",
@@ -506,9 +507,9 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm that the Services section: (.*) contains the description text: (.*)")]
 		public void ConfirmThatInServicesSectionContainsDescriptionText(string heading, string expectedText)
 		{
-			var actualText = new Services().SectionDescription(heading);
-			var normalisedActual = Regex.Replace(actualText, @"\s+", "");
-			var normalisedExpected = Regex.Replace(expectedText, @"\s+", "");
+			string actualText = new Services().SectionDescription(heading);
+			string normalisedActual = Regex.Replace(actualText, @"\s+", "");
+			string normalisedExpected = Regex.Replace(expectedText, @"\s+", "");
 			Report.IsTrue(normalisedActual == normalisedExpected,
 				$"Expected text ({expectedText}) did not match actual text ({actualText}) for section: {heading}!", "Expected description text matched actual text for section: " + heading);
 		}
@@ -516,11 +517,11 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm that the following links are displayed in the Services section: (.*):")]
 		public void ConfirmLinksAreDisplayedInServicesSection(string section, Table table)
 		{
-			var links = new Services().SectionLinks(section);
-			foreach (var row in table.Rows)
+			List<Services.ServiceLink> links = new Services().SectionLinks(section);
+			foreach (TableRow row in table.Rows)
 			{
-				var expectedTitle = row["Link title"];
-				var expectedIcon = row["Link icon"];
+				string expectedTitle = row["Link title"];
+				string expectedIcon = row["Link icon"];
 				if (Report.IsTrue(links.Any(x => x.Title == expectedTitle), "No link with title: " + expectedTitle + " was displayed in Services section: " + section, "Link with title: " + expectedTitle + " was displayed in Services section: " + section + " as expected"))
 				{
 					Report.IsTrue(links.Any(x => x.Icon == expectedIcon), "No link with icon: " + expectedIcon + " was displayed in Services section: " + section, "Link with icon: " + expectedIcon + " was displayed in Services section: " + section + " as expected");
@@ -531,10 +532,10 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm that the following subheadings are displayed in the Services section: (.*)")]
 		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingSubheadingsAppear(string section, Table table)
 		{
-			var subheadings = new Services().SectionSubHeadings(section);
-			foreach (var thisRow in table.Rows)
+			List<string> subheadings = new Services().SectionSubHeadings(section);
+			foreach (TableRow thisRow in table.Rows)
 			{
-				var matchingSubheading = subheadings.FirstOrDefault(x => x == thisRow["Subheading"]);
+				string matchingSubheading = subheadings.FirstOrDefault(x => x == thisRow["Subheading"]);
 				Report.IsTrue(matchingSubheading != null, "Failed to find matching subheading: " + thisRow["Subheading"],
 					"Found matching subheading: " + thisRow["Subheading"]);
 			}
@@ -543,11 +544,11 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm the following images are displayed in the Services section: (.*)")]
 		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingImagesAppear(string section, Table table)
 		{
-			var images = new Services().SectionImages(section);
+			List<string> images = new Services().SectionImages(section);
 
-			foreach (var thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
-				var matchingImage = images.FirstOrDefault(x => x == thisRow["Image"]);
+				string matchingImage = images.FirstOrDefault(x => x == thisRow["Image"]);
 				Report.IsTrue(matchingImage != null, "Failed to find matching image: " + thisRow["Image"],
 					"Found matching image: " + thisRow["Image"]);
 			}
@@ -558,10 +559,10 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		{
 			Delay.Seconds(30);
 			string targetURL = TestVariables.GetVariableSavedAs("ULGHS.COM");
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in allHandles)
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
 			{
 				//Report.Info("Switching tab");
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
@@ -574,7 +575,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				}
 			}
 			Report.Failure("Failed to find the correct tab! The available tabs (with screen shots) were:");
-			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+			var OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
 			int counter = 1;
 			foreach (string url in OpenBrowsers)
 			{
@@ -591,10 +592,10 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		{
 			Delay.Seconds(30);
 			string targetURL = TestVariables.GetVariableSavedAs("Studio");
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in allHandles)
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
 			{
 				//Report.Info("Switching tab");
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
@@ -602,7 +603,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				if (SeleniumBrowser.WebBrowser.Url.Contains(targetURL))
 				{
 					Report.Success("Studio Data management page opened. Successfully switched to that tab.");
-					StudioPowerDesignerPlus thisStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
+					var thisStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
 
 					Report.IsTrue(thisStudioPowerDesignerPlus.Wait_for_load(120),
 						"Waiting for power designer load failed", "Welcome page loaded as expected");
@@ -612,7 +613,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				}
 			}
 			Report.Failure("Failed to find the correct tab! The available tabs (with screen shots) were:");
-			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+			var OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
 			int counter = 1;
 			foreach (string url in OpenBrowsers)
 			{
@@ -630,11 +631,11 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Context.ScenarioContext.Pending();
 		}
 
-		[Given(@"I navigate to WERCSmart")]
+		[StepDefinition(@"I navigate to WERCSmart")]
 		public void GivenINavigateToWERCSmart()
 		{
 			Report.Info("Getting test variable saved as 'WercSmart_TestUrl'");
-			var url = TestVariables.GetVariableSavedAs("WercSmart_TestUrl");
+			string url = TestVariables.GetVariableSavedAs("WercSmart_TestUrl");
 			if (url == null)
 			{
 				throw new Exception("WercSmart test url not found in trevor!");
@@ -664,10 +665,10 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Delay.Seconds(30);
 			string currentURL = SeleniumBrowser.WebBrowser.Url;
 			string targetURL = "ULSC";
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in allHandles)
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
 			{
 				//Report.Info("Switching tab");
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
@@ -675,9 +676,9 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				if (SeleniumBrowser.WebBrowser.Url.Contains(targetURL))
 				{
 					Report.Success("Additional tab opened. Successfully switched to that tab.");
-					StudioPowerDesignerPlus thisStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
+					var thisStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
 
-					var body = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//body"), 2);
+					IWebElement body = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//body"), 2);
 					Report.IsTrue(body.GetElementText().Trim() == errorMessage,
 						"Expected error message: " + errorMessage + " but got: " + body.GetElementText(),
 						"As expected, error message is showing: " + errorMessage);
@@ -687,7 +688,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				}
 			}
 			Report.Failure("Failed to find the correct tab! The available tabs (with screen shots) were:");
-			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+			var OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
 			int counter = 1;
 			foreach (string url in OpenBrowsers)
 			{
@@ -714,7 +715,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			var expectedWidgets = new List<string>();
 			table.Rows.ForEach(x => expectedWidgets.Add(x["Widget"]));
 			Report.Info("Expected widgets are: " + string.Join(", ", expectedWidgets));
-			var actualWidgets = new Dashboard().WidgetTitles();
+			List<string> actualWidgets = new Dashboard().WidgetTitles();
 			Report.Info("Actual widgets are: " + string.Join(", ", actualWidgets));
 			switch (displayed)
 			{
@@ -751,7 +752,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			TestReport.StartStep("I confirm the KPI widget panels are displayed on the Dashboard");
 			var kpiTitles = new List<string> { "Products By Retailer and Status", "RUs by Category", "Products by Recertification Reason", "Products by RU", "RUs by Category by Retailer", "Subscription Status" };
 			table = new Table("Widget");
-			foreach (var title in kpiTitles)
+			foreach (string title in kpiTitles)
 			{
 				table.AddRow(title);
 			}
@@ -773,7 +774,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm the left hand navigation list is (collapsed|expanded)")]
 		public void ConfirmLeftNavigationCollapsesWithTitlesNotDisplayed(string navState)
 		{
-			var sideBarItems = new SideBarNavigation().GetNavLinks();
+			List<SideBarNavigation.NavLink> sideBarItems = new SideBarNavigation().GetNavLinks();
 			switch (navState)
 			{
 				case "collapsed":
@@ -791,14 +792,14 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm the user button in the header displays the logged in username")]
 		public void ConfirmUserButtonDisplaysLoggedInUserName()
 		{
-			var user = TestUsers.GetUserSavedAs("WercsUser");
+			TestUser user = TestUsers.GetUserSavedAs("WercsUser");
 			if (user == null)
 			{
 				Report.Failure("No ULCS WercsUser found for current branch in TReVor");
 				return;
 			}
-			var username = user.Username;
-			var displayedUser = new TopBarNavigation().UserButtonText();
+			string username = user.Username;
+			string displayedUser = new TopBarNavigation().UserButtonText();
 			Report.IsTrue(displayedUser == username, "Expected username in the header to be: " + user + " but was: " + displayedUser + "!", "Username: " + username + " was displayed in the header as expected");
 		}
 
@@ -865,7 +866,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I click the side bar navigation link: (.*)")]
 		public void ClickSideBarLink(string title)
 		{
-			var menuItem = new SideBarNavigation().GetNavLink(title);
+			SideBarNavigation.NavLink menuItem = new SideBarNavigation().GetNavLink(title);
 			if (menuItem == null)
 			{
 				throw new Exception("There was no side bar displayed with title: " + title);
@@ -876,8 +877,8 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm the WERCSLink Additional Services page loads")]
 		public void ConfirmAdditionalServicesPageLoads()
 		{
-			var anyServices = new WERCSLinkDashboard().AnyServicesGrid();
-			var i = 0;
+			bool anyServices = new WERCSLinkDashboard().AnyServicesGrid();
+			int i = 0;
 			while (!anyServices && i < 60)
 			{
 				anyServices = new WERCSLinkDashboard().AnyServicesGrid();
@@ -890,8 +891,8 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm the WERCSLink Recent Activities page loads")]
 		public void ConfirmRecentActivitiesPageLoads()
 		{
-			var loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Recent Activities");
-			var i = 0;
+			bool loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Recent Activities");
+			int i = 0;
 			while (!loaded && i < 60)
 			{
 				loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Recent Activities");
@@ -904,8 +905,8 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm the WERCSLink Product Lookup page loads")]
 		public void ConfirmProductLookupPageLoads()
 		{
-			var loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Product Lookup");
-			var i = 0;
+			bool loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Product Lookup");
+			int i = 0;
 			while (!loaded && i < 60)
 			{
 				loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Product Lookup");
@@ -919,28 +920,28 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm the WERCSLink Key Performance Indicators page loads")]
 		public void ConfirmKeyPerformanceIndicatorsPageLoads()
 		{
-			var widgets = new Dashboard().WidgetTitles();
+			List<string> widgets = new Dashboard().WidgetTitles();
 			Report.IsTrue(widgets.Any(), "The Key Performance Indicators page did not load with widgets!", "The Key Performance Indictors page loaded with widgets");
 		}
 
 		[StepDefinition(@"I confirm the following links are displayed below menu item: (.*) and sub item (.*)")]
 		public void ConfirmFollowingSubSubLinksDisplayedBelowWercSmartSubLink(string menuItem, string subLink, Table table)
 		{
-			var link = new SideBarNavigation().GetNavLink(menuItem);
+			SideBarNavigation.NavLink link = new SideBarNavigation().GetNavLink(menuItem);
 			if (link == null)
 			{
 				Report.Failure("Menu item: " + menuItem + " was not displayed in the nav side bar!");
 				Report.Screenshot();
 				return;
 			}
-			var subSubLinks = link.SubLinks.First(x => x.Title == subLink)?.SubSubLinks;
+			List<SideBarNavigation.NavSubSubLink> subSubLinks = link.SubLinks.First(x => x.Title == subLink)?.SubSubLinks;
 			if (subSubLinks == null)
 			{
 				Report.Failure("No sub link matching title: '" + subLink + "' with sub sub link was found!");
 				Report.Screenshot();
 				return;
 			}
-			foreach (var row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
 				if (subSubLinks.All(x => x.Title != row["Link"]))
 				{
@@ -957,21 +958,21 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I click the link: (.*) below menu item: (.*) and sub item (.*)")]
 		public void ClickLinkBelowWercSmartSubLink(string subSub, string menu, string sub)
 		{
-			var thisMenuItem = new SideBarNavigation().GetNavLink(menu);
+			SideBarNavigation.NavLink thisMenuItem = new SideBarNavigation().GetNavLink(menu);
 			if (thisMenuItem == null)
 			{
 				Report.Failure($"The menu item: {menu} was not displayed!");
 				Report.Screenshot();
 				return;
 			}
-			var thisSubLink = thisMenuItem.SubLinks.First(x => x.Title == sub);
+			SideBarNavigation.NavSubLink thisSubLink = thisMenuItem.SubLinks.First(x => x.Title == sub);
 			if (thisSubLink == null)
 			{
 				Report.Failure("The link with title: " + sub + " was not displayed under the menu item: " + menu);
 				Report.Screenshot();
 				return;
 			}
-			var thisSubSubLink = thisSubLink.SubSubLinks.First(x => x.Title == subSub);
+			SideBarNavigation.NavSubSubLink thisSubSubLink = thisSubLink.SubSubLinks.First(x => x.Title == subSub);
 			if (thisSubSubLink == null)
 			{
 				Report.Failure("The link with title: " + subSub + " was not displayed under the sub menu item: " + sub);
@@ -1039,7 +1040,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I Confirm the 'Enter WPS ID or Product Name' filter input is displayed in the Message Center widget")]
 		public void ConfirmFilterInputIsDisplayedInTheMessageCenterWidget()
 		{
-			var messageCenter = new Dashboard().GetMessageCenter();
+			Dashboard.MessageCenter messageCenter = new Dashboard().GetMessageCenter();
 			Report.IsTrue(messageCenter.FilterPlaceholder == "Enter WPS ID or Product Name", "The 'Enter WPS ID or Product Name' input was not displayed!", "The 'Enter WPS ID or Product Name' input was displayed as expected");
 		}
 
@@ -1052,7 +1053,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				Report.Screenshot();
 				return;
 			}
-			var graph = new Dashboard().GetGraph(widget);
+			Dashboard.WidgetGraph graph = new Dashboard().GetGraph(widget);
 			if (graph == null)
 			{
 				Report.Failure("No graph was displayed for widget: " + widget);
@@ -1077,7 +1078,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm that the Subscription Status widget displays centered heading with text: (.*)")]
 		public void ConfirmSubscriptionStatusWidgetDisplaysCenteredHeading(string headingText)
 		{
-			var subscriptionStatus = new Dashboard().GetSubscriptionStatus();
+			Dashboard.SubscriptionStatus subscriptionStatus = new Dashboard().GetSubscriptionStatus();
 			if (subscriptionStatus == null)
 			{
 				Report.Failure("No Subscription Status widget was found!");

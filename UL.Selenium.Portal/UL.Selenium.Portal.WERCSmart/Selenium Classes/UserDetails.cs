@@ -5,6 +5,7 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -40,10 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 		public string Name {
-			get
-			{
-				return this._sName.GetValue();
-			}
+			get => this._sName.GetValue();
 			set
 			{
 				this._sName.EnterText(value);
@@ -52,10 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string Title {
-			get
-			{
-				return this._sTitle.GetValue();
-			}
+			get => this._sTitle.GetValue();
 			set
 			{
 				this._sTitle.EnterText(value);
@@ -70,23 +65,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				//var test2 = test.FindElement(By.XPath("following-sibling::select"));
 				//this.RefreshPageObject();
 				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-				var el = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind, 'userRole')]"));
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind, 'userRole')]"));
 				return el.GetValue();
 			}
 			set
 			{
 				//var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'User Role')]/following-sibling::select"), 2);
 				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-				var el = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind, 'userRole')]"), 2);
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind, 'userRole')]"), 2);
 				el.Select(value);
 			}
 		}
 
 		public string PhoneNumber {
-			get
-			{
-				return this._sPhoneNumber.GetValue();
-			}
+			get => this._sPhoneNumber.GetValue();
 			set
 			{
 				this._sPhoneNumber.EnterText(value);
@@ -95,10 +87,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string EmailAddress {
-			get
-			{
-				return this._sEmailAddress.GetValue();
-			}
+			get => this._sEmailAddress.GetValue();
 			set
 			{
 				this._sEmailAddress.EnterText(value);
@@ -107,10 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string ConfirmEmailAddress {
-			get
-			{
-				return this.containerElement.FindElement(By.Id("txtConfirm"), 2).GetValue();
-			}
+			get => this.containerElement.FindElement(By.Id("txtConfirm"), 2).GetValue();
 			set
 			{
 				this.containerElement.FindElement(By.Id("txtConfirm"), 2).EnterText(value);
@@ -123,12 +109,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				//var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Country')]/following-sibling::select"), 2);
 				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-				var el = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"));
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"));
 				return el.GetValue();
 			}
 			set
 			{
-				var el = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"), 2);
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"), 2);
 				el.Select(value);
 			}
 		}
@@ -143,27 +129,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public bool SendNotifications {
-			get { return this._bNotificatinos.Selected; }
-			set { this._bNotificatinos.Click(); }
+			get => this._bNotificatinos.Selected;
+			set => this._bNotificatinos.Click();
 		}
 
 		public bool Purview {
-			get { return this._bPurview.Selected; }
-			set { this._bPurview.Click(); }
+			get => this._bPurview.Selected;
+			set => this._bPurview.Click();
 		}
 
 		public bool ClickButton(string sButtonName)
 		{
-			var buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//a[@id='carouselContinue']"));
-			var thisButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == sButtonName.ToLower());
+			ReadOnlyCollection<IWebElement> buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//a[@id='carouselContinue']"));
+			IWebElement thisButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == sButtonName.ToLower());
 			return thisButton.TryClick();
 		}
 
 		public bool ClickButtonOnAddUserDialog(string buttonToClick)
 		{
-			var addUserDialog = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='add-user-dialog']"));
-			var buttons = addUserDialog.FindElements(By.XPath(".//button"));
-			var matchingButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == buttonToClick.ToLower());
+			IWebElement addUserDialog = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='add-user-dialog']"));
+			ReadOnlyCollection<IWebElement> buttons = addUserDialog.FindElements(By.XPath(".//button"));
+			IWebElement matchingButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == buttonToClick.ToLower());
 			if (matchingButton != null)
 			{
 				return matchingButton.TryClick();
@@ -201,7 +187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(2 * Delay.SpeedFactor);
 
 			var myDlg = new AddUserThankYouDialog();
-			myDlg.Wait_for_load(60);
+			myDlg.WaitForContainerToBeVisible(60);
 			if (!myDlg.Add_User_Thank_You())
 			{
 				Report.Info("Failed to Add User");
@@ -220,12 +206,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		//Close Button
-		private IWebElement BtnClose => containerElement.FindElement(By.XPath(".//div/button[text()='Close']"),5);
+		private IWebElement BtnClose => this.containerElement.FindElement(By.XPath(".//div/button[text()='Close']"), 5);
 
 		public bool Close_click()
 		{
 			Report.Info("Attempting to Click Close Button");
-			return BtnClose.TryClick();
+			return this.BtnClose.TryClick();
 		}
 
 		public bool Add_User_Thank_You()
