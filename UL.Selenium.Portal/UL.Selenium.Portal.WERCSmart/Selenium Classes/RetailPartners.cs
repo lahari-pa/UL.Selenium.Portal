@@ -372,9 +372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool DeleteSupplier(string supplierId)
 		{
-			//Jacob
 			IWebElement allSuppliers = this.GetSuppliersAsIWebElement();
-			//IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table//tr"), 5);
 
 			IList<IWebElement> rows = allSuppliers.FindElements(By.TagName("tr"), 2);
 			foreach (IWebElement row in rows)
@@ -628,8 +626,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickDeleteSupplierModalWindowButton(string choice)
 		{
-			IWebElement modalWindow = this.FindElement(By.XPath(BasePath), 2);
-			IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h3[@class='modal-title']"), 2);
+			IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 2);
+			IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h3[@class='modal-title']"), 10);
 
 			if (modalWindow is null || modalTitle is null)
 			{
