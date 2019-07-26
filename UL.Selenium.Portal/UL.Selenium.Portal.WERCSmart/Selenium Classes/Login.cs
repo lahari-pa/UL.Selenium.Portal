@@ -34,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void ClickOutside()
 		{
-			var el = this.containerElement.FindElement(By.XPath("//div[contains(@class,'panel-body')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[contains(@class,'panel-body')]"), 2);
 			var actionClass = new Actions(SeleniumBrowser.WebBrowser);
 			actionClass.MoveToElement(el, -100, -100).Click().Perform();
 		}
@@ -42,20 +42,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void Change_Language(string language)
 		{
 
-			var languageDropDown = this.containerElement.FindElement(By.XPath("//div[@class='btn-group btn-language']"), 2);
+			IWebElement languageDropDown = this.containerElement.FindElement(By.XPath("//div[@class='btn-group btn-language']"), 2);
 			if (languageDropDown == null)
 			{
 				throw new Exception("Language Button container could not be found!");
 			}
 
-			var button = languageDropDown.FindElement(By.XPath(".//button"), 2);
+			IWebElement button = languageDropDown.FindElement(By.XPath(".//button"), 2);
 			if (button.Text.Trim() == language)
 			{
 				return;
 			}
 
 			button.Click();
-			var selectElement = languageDropDown.FindElements(By.XPath("//ul//a"), 2).FirstOrDefault(x => x.Text == language);
+			IWebElement selectElement = languageDropDown.FindElements(By.XPath("//ul//a"), 2).FirstOrDefault(x => x.Text == language);
 			if (selectElement == null)
 			{
 				throw new Exception("Language not present in container!");
@@ -103,8 +103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string PasswordField
-		{
+		public string PasswordField {
 			get => this.PasswordInput?.Text;
 			set
 			{

@@ -40,8 +40,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var rIngredients = new List<MyIngredients.IngredientItem>();
 			int count = 1;
-			var rows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
-			foreach (var row in rows)
+			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
+			foreach (IWebElement row in rows)
 			{
 				rIngredients.Add(new MyIngredients.IngredientItem() {
 					Index = count,
@@ -56,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			while (this.Click_Next())
 			{
 				rows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
-				foreach (var row in rows)
+				foreach (IWebElement row in rows)
 				{
 					rIngredients.Add(new MyIngredients.IngredientItem() {
 						Index = count,

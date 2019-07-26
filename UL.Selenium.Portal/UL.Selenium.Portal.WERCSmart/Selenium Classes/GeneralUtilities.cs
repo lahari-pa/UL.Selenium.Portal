@@ -15,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+				IList<IWebElement> spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
 				while (spinner.Any(x => x.Displayed))
 				{
 					Delay.Seconds(Delay.SpeedFactor * 1);
@@ -36,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				for (int i = 0; i < maxSecondsToWait; i++)
 				{
-					var spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+					IList<IWebElement> spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
 					if (!spinner.Any(x => x.Displayed))
 					{
 						return true;
@@ -56,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			// wait up to 2 seconds for the loading bar to become visible
 			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//body[contains(@class,'pace-running')]"), 2);
 			// waits up to 30 seconds for the loading bar to then become invisible
-			return  SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 30);
+			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 30);
 		}
 
 		public static bool Loading_Active()
@@ -111,10 +111,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public static List<string> CvsUpcs()
 		{
 			var web = new HtmlWeb();
-			var document = web.Load(@"https://www.upcitemdb.com/info-cvs");
-			var nodes = document.DocumentNode.SelectNodes(@"//a[@name='upclist']//following-sibling::div//ul//li//div[@class='rImage']/a");
+			HtmlDocument document = web.Load(@"https://www.upcitemdb.com/info-cvs");
+			HtmlNodeCollection nodes = document.DocumentNode.SelectNodes(@"//a[@name='upclist']//following-sibling::div//ul//li//div[@class='rImage']/a");
 			var upcValues = nodes.Select(x => x.InnerText).ToList();
-			 return upcValues;
+			return upcValues;
 		}
 
 		public static bool TrySelect(IWebElement el, string optionValue, bool ignoreWhitespace = false)
@@ -130,10 +130,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					el.Select(optionValue);
 					return el.SelectedOption() == optionValue;
 				}
-				var options = el.FindElements(By.XPath("./option"), 1);
-				foreach (var thisOptionEl in options)
+				IList<IWebElement> options = el.FindElements(By.XPath("./option"), 1);
+				foreach (IWebElement thisOptionEl in options)
 				{
-					var thisOptionValue = thisOptionEl.GetValue();
+					string thisOptionValue = thisOptionEl.GetValue();
 					if (thisOptionValue.Replace(" ", string.Empty) != optionValue.Replace(" ", string.Empty))
 					{
 						continue;

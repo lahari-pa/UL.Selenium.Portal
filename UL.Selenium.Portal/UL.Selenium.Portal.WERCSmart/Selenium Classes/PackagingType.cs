@@ -35,7 +35,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			while (counter < secondsToWait)
 			{
 				this.RefreshContainer();
-				var addProductHeader = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3"))
+				IWebElement addProductHeader = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3"))
 					.FirstOrDefault(x => x.Text.Contains(sectionHeader));
 				if (addProductHeader != null)
 				{
@@ -54,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AddRowDisplayed()
 		{
-			var el = this.AddRow();
+			IWebElement el = this.AddRow();
 			return el != null && el.Displayed;
 		}
 
@@ -65,14 +65,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectOptionForField(string option, string field)
 		{
-			var columnIndex = this.containerElement.FindElements(By.XPath(".//thead//th")).ToList().FindIndex(x => x.Text == field) + 1;
+			int columnIndex = this.containerElement.FindElements(By.XPath(".//thead//th")).ToList().FindIndex(x => x.Text == field) + 1;
 			if (columnIndex < 1)
 			{
 				Report.Failure("Couldn't find column: " + field);
 				return false;
 			}
-			var xPath = ".//tbody//td[" + columnIndex + "]/child::*";
-			var el = this.containerElement.FindElement(By.XPath(xPath), 2);
+			string xPath = ".//tbody//td[" + columnIndex + "]/child::*";
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 2);
 			if (el.TagName == "select")
 			{
 				el.Select(option);
@@ -90,15 +90,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SavePackagingDetails(string savedAs)
 		{
-			var header = this.containerElement.FindElement(By.XPath(".//h2"), 2);
+			IWebElement header = this.containerElement.FindElement(By.XPath(".//h2"), 2);
 			if (header == null)
 			{
 				Report.Failure("Could not locate header element contianing Packaging Type Name (ID)");
 				return false;
 			}
-			var headerText = header.Text;
-			var ID = headerText.Split('(').Last().Replace(")", "");
-			var name = headerText.Replace("(" + ID + ")", "").Trim();
+			string headerText = header.Text;
+			string ID = headerText.Split('(').Last().Replace(")", "");
+			string name = headerText.Replace("(" + ID + ")", "").Trim();
 			Context.AddToContext("PackagingTypeID_" + savedAs, ID);
 			Context.AddToContext("PackagingTypeName_" + savedAs, name);
 			return true;

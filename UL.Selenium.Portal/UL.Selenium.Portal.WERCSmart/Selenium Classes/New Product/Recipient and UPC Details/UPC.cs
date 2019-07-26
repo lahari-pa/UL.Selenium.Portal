@@ -15,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		public bool ClickAddCaseUpcButton()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -38,7 +38,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetUPCOptions()
 		{
-			var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			var rList = new List<string>();
 			if (container != null)
 			{
@@ -55,7 +55,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AddCaseUpcButton()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -67,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AddUpcButton()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -80,15 +80,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-				var textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
-				var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
+				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
 					try
 					{
-						var savedUPC = Context
+						string savedUPC = Context
 							.GetFromContext(info.UpcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 							.ToString();
 						info.UpcNumber = savedUPC;
@@ -101,13 +101,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				}
 				upcNumberField.EnterText(info.UpcNumber);
-				var containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+				IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
 				containsType.Select(info.ContainerType);
-				var regex = @"(.*)\((.*)\)";
-				var sizeField = (from input in textInputs
-								 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
-								 where match.Success && match.Groups[1].Value.StartsWith("Size") && match.Groups[2].Value.Contains("Ounces")
-								 select input).FirstOrDefault();
+				string regex = @"(.*)\((.*)\)";
+				IWebElement sizeField = (from input in textInputs
+										 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
+										 where match.Success && match.Groups[1].Value.StartsWith("Size") && match.Groups[2].Value.Contains("Ounces")
+										 select input).FirstOrDefault();
 				if (sizeField == null)
 				{
 					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
@@ -117,19 +117,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				if (info.Quantity.Length > 0)
 				{
-					var quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity of Units within the Case']"), 2);
+					IWebElement quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity of Units within the Case']"), 2);
 					quantityField.EnterText(info.Quantity);
+				}
+
+				if (info.IndividualUpcCasePack.ToLower().Contains("saved as"))
+				{
+					try
+					{
+						var savedUPC = Context
+							.GetFromContext(info.IndividualUpcCasePack.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+							.ToString();
+						info.IndividualUpcCasePack = savedUPC;
+					}
+					catch (Exception e)
+					{
+						Report.Info("Failed to find saved item in context: " + info.IndividualUpcCasePack.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+						throw;
+					}
+
 				}
 
 				if (info.IndividualUpcCasePack.Length > 0)
 				{
-					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'upcContained.field')]"), 2);
+					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'upcContained.field')]"), 2);
 					packageField.Select(info.IndividualUpcCasePack);
 				}
 
 				if (info.TransportationOption.Length > 0)
 				{
-					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'transport.field')]"), 2);
+					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'transport.field')]"), 2);
 					if (info.TransportationOption.ToLower().Contains("random"))
 					{
 						var packageOptions = packageField.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
@@ -162,17 +179,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetUPCErrorsForSection(string section)
 		{
-			var xPath = @"(.//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//label[@class='sr-only'][contains(text(),""" + section + @""")])] | " +
+			string xPath = @"(.//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//label[@class='sr-only'][contains(text(),""" + section + @""")])] | " +
 						@".//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//select[@class='form-control']//option[contains(text(),""" + section + @""")])])";
-			var el = this.containerElement.FindElements(By.XPath(xPath), 10);
+			IList<IWebElement> el = this.containerElement.FindElements(By.XPath(xPath), 10);
 			return el.Count == 0 ? new List<string>() : el.Select(x => x.Text).ToList();
 		}
 
 
 		public bool SelectRadio(string section, string value)
 		{
-			var xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
-			var el = this.containerElement.FindElement(By.XPath(xPath), 2);
+			string xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 2);
 			if (el != null)
 			{
 				return el.TryClick();

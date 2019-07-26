@@ -6,7 +6,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			get => this.CheckedInputForLabel("Plasma Display") == "Yes";
 			set
 			{
-				var textValue = value ? "Yes" : "No";
+				string textValue = value ? "Yes" : "No";
 				this.SelectRadio("Plasma Display", textValue);
 			}
 		}
@@ -15,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			get => this.CheckedInputForLabel("Circuit Board") == "Yes";
 			set
 			{
-				var textValue = value ? "Yes" : "No";
+				string textValue = value ? "Yes" : "No";
 				this.SelectRadio("Contains Circuit Board", textValue);
 			}
 		}

@@ -19,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(string state)
 		{
 			var stepsNewProduct = new StepsNewProduct();
-			var year = DateTime.Now.Year;
+			int year = DateTime.Now.Year;
 			var Oct1stthisYear = new DateTime(year, 10, 1);
 			if (DateTime.Now < Oct1stthisYear)
 			{
@@ -62,9 +62,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				throw new Exception("There was no State text in the scenario context. Check the pre-requisite step for editing Expiration Date has ran successfully.");
 			}
-			var state = Context.GetFromContext("state").ToString();
-			var expirationDate = pesticideDetailsState.ExpirationDate(state);
-			var kellyExpirationDate = pesticideDetailsState.GetPesticideRegKellyExpirationDate(state);
+			string state = Context.GetFromContext("state").ToString();
+			string expirationDate = pesticideDetailsState.ExpirationDate(state);
+			string kellyExpirationDate = pesticideDetailsState.GetPesticideRegKellyExpirationDate(state);
 			Report.IsTrue(expirationDate == kellyExpirationDate, "The Expiration Date does not match the value provided by Kelly", "The Expiration correctly matches the value provided by Kelly");
 		}
 
@@ -78,8 +78,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I update each Registration Number with the appended text '-edited'")]
 		public void IEditEachStatePesticideRegNumberWithSuffix()
 		{
-			var pesticideStateData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
-			foreach (var row in pesticideStateData)
+			List<PesticideDetailsState.StatePesticideRegistration> pesticideStateData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
+			foreach (PesticideDetailsState.StatePesticideRegistration row in pesticideStateData)
 			{
 				if (!row.EditRegistrationNumber(row.RegistrationNumber + "-edited"))
 				{
@@ -95,8 +95,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I check each State Pesticide Registration Number contains the edited suffix")]
 		public void ICheckEachStatePesticideRegNumberContains()
 		{
-			var pesticideStateData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
-			foreach (var row in pesticideStateData)
+			List<PesticideDetailsState.StatePesticideRegistration> pesticideStateData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
+			foreach (PesticideDetailsState.StatePesticideRegistration row in pesticideStateData)
 			{
 				if (!row.EditRegistrationNumber(row.RegistrationNumber + "-edited"))
 				{
@@ -110,14 +110,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 			var pesticideDetailsState = new PesticideDetailsState();
-			var rowCount = pesticideDetailsState.StateRowsCount();
+			int rowCount = pesticideDetailsState.StateRowsCount();
 			if (rowCount == -1)
 			{
 				Report.Failure("Failed to count State Registration Details table rows due to null element!");
 				return;
 			}
 			var notEdited = new List<string>();
-			for (var i = 0; i < rowCount; i++)
+			for (int i = 0; i < rowCount; i++)
 			{
 				if (pesticideDetailsState.StatePesticideRegistrationNumberIsEdited(i))
 				{
@@ -134,7 +134,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm that there is data populated in the Expiration Date Column for some States")]
 		public void IConfirmDataInExpirationDateColumnPesticideStates()
 		{
-			var pesticideStateData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
+			List<PesticideDetailsState.StatePesticideRegistration> pesticideStateData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
 			if (Report.IsTrue(pesticideStateData.Any(x => !x.ExpirationDate.IsNullOrEmpty()), "There were no states with Expiration Date values!", "As expected some states contained Expiration Date values"))
 			{
 				var statesWithData = pesticideStateData.Where(x => !x.ExpirationDate.IsNullOrEmpty()).Select(x => x.State).ToList();
@@ -151,8 +151,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				return;
 			}
 			var states = (List<string>)Context.GetFromContext("Expiration Date States");
-			var stateRegistrationData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
-			foreach (var state in states)
+			List<PesticideDetailsState.StatePesticideRegistration> stateRegistrationData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
+			foreach (string state in states)
 			{
 				Report.IsTrue(stateRegistrationData.First(x => x.State == state).IsKellyData, "The state: " + state + " did not contain a tick under 'Is Kelly Data' as expected!", "State: " + state + " contained a tick under 'Is Kelly Data' as expected");
 			}
@@ -162,7 +162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void IConfirmTheExpirationDateProvidedByKellyForStateIsBlank(string currentState)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
-			var state = "";
+			string state = "";
 			if (Context.ScenarioContext.ContainsKey("state"))
 			{
 				state = Context.GetFromContext("state").ToString();
@@ -182,8 +182,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void IConfirmKellyDataIsOrIsNotChecked(string state, string check)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
-			var epaRegistrations = pesticideDetailsState.GetStatePesticideRegistrationDetails();
-			var stateRegistration = epaRegistrations.First(x => x.State == state);
+			List<PesticideDetailsState.StatePesticideRegistration> epaRegistrations = pesticideDetailsState.GetStatePesticideRegistrationDetails();
+			PesticideDetailsState.StatePesticideRegistration stateRegistration = epaRegistrations.First(x => x.State == state);
 			if (stateRegistration == null)
 			{
 				Report.Failure("No state registration row was found for state: " + state);
@@ -210,7 +210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ExpirationDateForStateIsShowingValue(string state, string date)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
-			var actualDate = pesticideDetailsState.ExpirationDate(state);
+			string actualDate = pesticideDetailsState.ExpirationDate(state);
 			Report.IsTrue(actualDate == date,
 				$"The Expiration Date field for State: '{state}' was not showing the value: '{date}' as expected. It was showing the value: '{actualDate}'",
 				$"The Expiration Date field for State: '{state}' was showing the value: '{date}' as expected");
@@ -220,7 +220,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIConfirmThatEveryDateInTheExpirationDateColumnHasAMatchingDateInTheExpirationDateProvidedByKellyColumn()
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
-			var AllPesticideDetails = pesticideDetailsState.GetStatePesticideRegistrationDetails();
+			List<PesticideDetailsState.StatePesticideRegistration> AllPesticideDetails = pesticideDetailsState.GetStatePesticideRegistrationDetails();
 
 			foreach (PesticideDetailsState.StatePesticideRegistration thisRow in AllPesticideDetails)
 			{
@@ -239,9 +239,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void CheckStatePesticideRegistrationNumber(string regNumText)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
-			var stateRegistrationData = pesticideDetailsState.GetStatePesticideRegistrationDetails();
-			var failReg = stateRegistrationData.FirstOrDefault(x => x.RegistrationNumber.Trim() != regNumText.Trim());
-			var failState = failReg == null ? "N/A" : failReg.State;
+			List<PesticideDetailsState.StatePesticideRegistration> stateRegistrationData = pesticideDetailsState.GetStatePesticideRegistrationDetails();
+			PesticideDetailsState.StatePesticideRegistration failReg = stateRegistrationData.FirstOrDefault(x => x.RegistrationNumber.Trim() != regNumText.Trim());
+			string failState = failReg == null ? "N/A" : failReg.State;
 			Report.IsTrue(failReg == null,
 				"The State Pesticide Registration Number column did not match the expected text: " + regNumText + ". Failed on state: " + failState,
 				"The State Pesticide Registration Number column matched the expected text: " + regNumText);
@@ -251,9 +251,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmExpirationDataBlankInStateEPATable()
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
-			var epaData = pesticideDetailsState.GetStatePesticideRegistrationDetails();
-			var failReg = epaData.FirstOrDefault(x => !x.ExpirationDate.IsNullOrEmpty()) ?? epaData.FirstOrDefault(x => !x.ExpirationDateByKelly.IsNullOrEmpty());
-			var failState = failReg == null ? "N/A" : failReg.State;
+			List<PesticideDetailsState.StatePesticideRegistration> epaData = pesticideDetailsState.GetStatePesticideRegistrationDetails();
+			PesticideDetailsState.StatePesticideRegistration failReg = epaData.FirstOrDefault(x => !x.ExpirationDate.IsNullOrEmpty()) ?? epaData.FirstOrDefault(x => !x.ExpirationDateByKelly.IsNullOrEmpty());
+			string failState = failReg == null ? "N/A" : failReg.State;
 			Report.IsTrue(failReg == null,
 				"The State Registration EPA table contained Expiration data when it was not expected. Broke on state: " + failState,
 				"The State Registration EPA table did not contain any Expiration data as expected");
@@ -263,7 +263,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmNovemberErrorBasedOnCurrentDate(string month, string day, string state, string error)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
-			var year = DateTime.Now.Year;
+			int year = DateTime.Now.Year;
 			DateTime comparisonDate;
 			if (int.TryParse(month, out int monthNum) && int.TryParse(day, out int dayNum))
 			{
@@ -273,7 +273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				throw new Exception("Day/ month parameter must be parsable as an int!");
 			}
-			var currentDate = DateTime.Now;
+			DateTime currentDate = DateTime.Now;
 			Report.Info("Current date (DD/MM/YY) is: " + currentDate.Date + "/" + currentDate.Month + "/" + currentDate.Year);
 			if (DateTime.Now < comparisonDate)
 			{
@@ -290,7 +290,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"If the current date is after \(MM/DD\): (.*)/(.*) then I confirm the error is displayed: 'The expiration date must be a valid future date' - else I confirm that no error is shown and the '(.*)' page has loaded")]
 		public void IfCurrentDateExceedsEpaDateConfirmError(string month, string day, string page)
 		{
-			var year = DateTime.Now.Year;
+			int year = DateTime.Now.Year;
 			DateTime comparisonDate;
 			if (int.TryParse(month, out int monthNum) && int.TryParse(day, out int dayNum))
 			{
@@ -300,7 +300,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				throw new Exception("Day/ month parameter must be parsable as an int!");
 			}
-			var currentDate = DateTime.Now;
+			DateTime currentDate = DateTime.Now;
 			Report.Info("Current date (DD/MM/YY) is: " + currentDate.Date + "/" + currentDate.Month + "/" + currentDate.Year);
 			if (DateTime.Now < comparisonDate)
 			{
@@ -323,12 +323,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			//'increment year?' set to yes or no depending on whether you want to +1 to the year if the current date is later than the reg date input (which causes an error, as stated by tests)
 			// | State | Day | Month | Increment year?			|
 			// | NY    | 01  | 01    | yes						|
-			foreach (var row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
-				var month = row["Month"];
-				var day = row["Day"];
-				var state = row["State"];
-				var useNextYear = row["Increment year?"];
+				string month = row["Month"];
+				string day = row["Day"];
+				string state = row["State"];
+				string useNextYear = row["Increment year?"];
 				bool iterateYear;
 				if (useNextYear.ToLower() == "yes" || useNextYear.ToLower() == "true")
 				{
@@ -347,8 +347,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				var pesticideDetailsState = new PesticideDetailsState();
 				TestReport.UseSubSteps = true;
 				TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
-				var year = DateTime.Now.Year;
-				if (int.TryParse(month, out var monthNum) && int.TryParse(day, out var dateNum))
+				int year = DateTime.Now.Year;
+				if (int.TryParse(month, out int monthNum) && int.TryParse(day, out int dateNum))
 				{
 					Report.Info("From test plan: 'If the current date is after XX xxth for the current year select XX xxth for next year'");
 					var dt = new DateTime(year, monthNum, dateNum);
@@ -380,8 +380,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var pesticideDetailsState = new PesticideDetailsState();
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
-			var year = DateTime.Now.Year;
-			if (int.TryParse(month, out var monthNum) && int.TryParse(date, out var dateNum))
+			int year = DateTime.Now.Year;
+			if (int.TryParse(month, out int monthNum) && int.TryParse(date, out int dateNum))
 			{
 				if (addYear)
 				{
@@ -433,21 +433,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			// Select EPA day/ month for the current year + 2
 			// | State | Day | Month |
 			// | NY    | 01  | 01    |
-			if (!int.TryParse(addYear, out var addYearNum))
+			if (!int.TryParse(addYear, out int addYearNum))
 			{
 				throw new Exception("Step parameter addYear must be parsable as an int!");
 			}
-			foreach (var row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
-				var day = row["Day"];
-				var month = row["Month"];
-				var state = row["State"];
+				string day = row["Day"];
+				string month = row["Month"];
+				string state = row["State"];
 				var pesticideDetailsState = new PesticideDetailsState();
 				TestReport.UseSubSteps = true;
 				TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select date for the current year plus " + addYear);
-				var year = DateTime.Now.Year + addYearNum;
+				int year = DateTime.Now.Year + addYearNum;
 				DateTime dt;
-				if (int.TryParse(month, out var monthNum) && int.TryParse(day, out var dayNum))
+				if (int.TryParse(month, out int monthNum) && int.TryParse(day, out int dayNum))
 				{
 					dt = new DateTime(year, monthNum, dayNum);
 				}
@@ -509,7 +509,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				throw new Exception("Step parameter must be either 'even' or 'odd'!");
 			}
-			var year = DateTime.Now.Year;
+			int year = DateTime.Now.Year;
 			if ((evenOdd == "even") == (year % 2 == 0))
 			{
 				this.StepsNewProduct.NoErrorMessages();
@@ -529,8 +529,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("The entered number of days must be numeric");
 				return;
 			}
-			var daysParse = int.Parse(days);
-			var targetDate = DateTime.Today.Add(TimeSpan.FromDays(daysParse));
+			int daysParse = int.Parse(days);
+			DateTime targetDate = DateTime.Today.Add(TimeSpan.FromDays(daysParse));
 			Report.Info("Setting the date to: " + targetDate.ToString("yyyy-dd-MM") + " for state: " + state);
 			Report.IsTrue(new PesticideDetailsState().SelectExpirationDateFromCalendar(state, targetDate),
 				"Failed to set the date to " + days + " from today: " + targetDate.Day + " " + targetDate.Month + " " + targetDate.Year + " with the calendar selector for state: " + state,
@@ -557,8 +557,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					return;
 			}
 			// Matching on the 'code' (rowcolor-0, 1, 2) contained in the td class. Reporting the hex code for additional info.
-			var actualColourCode = new PesticideDetailsState().TableRowClassColour(state);
-			var actualHexCode = new PesticideDetailsState().TableRowBackgroundHex(state);
+			string actualColourCode = new PesticideDetailsState().TableRowClassColour(state);
+			string actualHexCode = new PesticideDetailsState().TableRowBackgroundHex(state);
 			Report.IsTrue(expectedColourCode == actualColourCode,
 				"The row for state: " + state + " was not highlighted " + colour + " as expected. The displayed hex code is: " + actualHexCode,
 				"The row for state " + state + " was highlighted " + colour + " as expected");

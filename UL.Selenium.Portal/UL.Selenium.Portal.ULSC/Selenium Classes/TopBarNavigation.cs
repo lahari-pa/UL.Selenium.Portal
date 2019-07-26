@@ -38,7 +38,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public bool ResetDashboardIconDisplayed()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//a[@id='dashboard-widgets']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[@id='dashboard-widgets']"), 2);
 			return el != null && el.Displayed;
 		}
 
@@ -49,13 +49,13 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public bool ResetDashboardDropdownItemDisplayed()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//a[@id='dashboard-reset']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[@id='dashboard-reset']"), 2);
 			return el != null && el.Displayed;
 		}
 
 		public bool SignOutDropDownItemDisplayed()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//a[@id='logoutDialog']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[@id='logoutDialog']"), 2);
 			return el != null && el.Displayed;
 		}
 
@@ -66,7 +66,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public bool ULLogoDisplayed()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']"), 2);
 			return el != null && el.Displayed;
 		}
 
@@ -77,7 +77,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public bool TopLeftTitleExists(string expectedTitle)
 		{
-			var topLeftTitle = this.containerElement.FindElements(By.XPath(".//h3"));
+			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> topLeftTitle = this.containerElement.FindElements(By.XPath(".//h3"));
 			if (topLeftTitle.Count == 1)
 			{
 				return expectedTitle == topLeftTitle.First().Text.Trim();

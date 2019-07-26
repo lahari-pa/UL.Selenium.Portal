@@ -21,8 +21,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheDocumentsSectionIShouldSeeTheFollowingColumns(string columns)
 		{
 			var newReviewDocs = new ReviewDocuments();
-			List<string> actualColumns = newReviewDocs.GetColumnsFromDocumentsTable().Select(x => x.Trim()).ToList();
-			List<string> expectedColumns = columns.Split(',').Select(x => x.Trim()).ToList();
+			var actualColumns = newReviewDocs.GetColumnsFromDocumentsTable().Select(x => x.Trim()).ToList();
+			var expectedColumns = columns.Split(',').Select(x => x.Trim()).ToList();
 
 			Report.IsTrue(actualColumns.SequenceEqual(expectedColumns),
 				"Expected columns: " + string.Join(",", expectedColumns) + " actual columns: " +
