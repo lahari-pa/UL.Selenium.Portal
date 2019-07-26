@@ -463,12 +463,13 @@ Scenario: [75410] Product from Completed status to Recertification
 	#Given I save to context name: TestCase75410 and value: 1549822
 	#Given I call test stuff for saved as: TestCase75410
 	Given I navigate to the landing page
-	#Given I login into the WERCSmart Portal - Administrator Role
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
+	Given I login into the WERCSmart Portal - Administrator Role
 	Given I search for the product saved as: TestCase75410
 	Given For product saved as: TestCase75410 the status is: Completed
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Data
+	And I should see the Update Registration popup
+	And In the Update Registration popup I click on button Yes
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
 	Then I click Save in The Product Page
@@ -499,10 +500,9 @@ Scenario: [75410] Product from Completed status to Recertification
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
 	And I search for the product saved as: TestCase75410
-	Given For product saved as: TestCase75410 the status is: Assessment in Progress
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75410 and its status is: Recertification
-	#And I Confirm your product is shown in the Recertification status without the red recertification font color
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75410 and its font is not red indicating a recertification
 	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: TestCase75410
 	And In the Product Recertification History popup I should see the following entry
 		| Product ID             | Active | Recertification Reason                           |

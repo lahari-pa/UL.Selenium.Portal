@@ -8047,5 +8047,83 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
 				"Toxicity Characteristic Leaching Procedure (TCLP) Product Report");
 		}
+
+		[StepDefinition(@"I call Shared Step 54139 \(Data Usage Tiers - Tier 1 - confirm cannot edit\)")]
+		public void SharedStep54139_DataUsageTiers_Tier1_ConfirmCannotEdit()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I confirm 'Tier 1: Regulatory Support' is the first entry in the Data Consent Tiers table");
+			var tiers = new RetailPartnersDetails().GetAllDataConsentTiers();
+			Report.IsTrue(tiers.Any() && tiers.First() == "Tier 1: Regulatory Support", "The first entry in the Data Consent Tiers table was not 'Tier 1: Regulatory Support'!", "The first entry in the Data Consent Tiers table was 'Tier 1: Regulatory Support' as expected");
+			TestReport.StartStep("I confirm 'Tier 1' is set to: active/ on");
+			Report.IsTrue(new RetailPartnersDetails().GetDataConsentTier("Tier 1"), "Tier 1 was not set to active!", "Tier 1 was set to active as expected");
+			TestReport.StartStep("I confirm that I cannot set 'Tier 1' to: inactive/ off");
+			Report.IsTrue(!new RetailPartnersDetails().SetDataConsentTier("Tier 1", false), "I was able to set Tier 1 to: inactive/ off but it should be uneditable!", "As expected I was unable to set Tier 1 to: inactive/ off");
+		}
+
+		[StepDefinition(@"I call Shared Step 54139 \(Data Usage Tiers - Tier 2.1 - confirm you can edit\)")]
+		public void SharedStep54139_DataUsageTiers_Tier21_CanEdit()
+		{
+			new StepsRetailPartners().DataUsageTierEditing("should", "Tier 2.1");
+		}
+
+		[StepDefinition(@"I call Shared Step 54140 \(Data Usage Tiers - Tier 2.2 - confirm you can edit\)")]
+		public void SharedStep54139_DataUsageTiers_Tier22_CanEdit()
+		{
+			new StepsRetailPartners().DataUsageTierEditing("should", "Tier 2.2");
+		}
+
+		[StepDefinition(@"I call Shared Step 57069 \(Data Usage Tiers - Tier 4.2 - confirm you can edit\)")]
+		public void SharedStep54139_DataUsageTiers_Tier42_CanEdit()
+		{
+			new StepsRetailPartners().DataUsageTierEditing("should", "Tier 4.2");
+		}
+
+		/// <summary>
+		/// Requires a table with a columns 'Data Tier' (eg. Tier 1) and 'Permission' (Enabled/ Disabled) depending on the Data Consent Tiers settings in the Retail Partners page.
+		/// example:
+		///  | Data Tier	| Permission	|
+		///  | Tier 1		| Enabled		|
+		///  | Tier 2.1		| Disabled		|
+		///  | Tier 2.2		| Enabled		|
+		/// </summary>
+		[StepDefinition(@"I call Shared Step 57186 \(Data Consent Tiers - Administrator Email Confirmation - Walmart\) for email address saved as: (.*) and company name saved as: (.*)")]
+		public void SharedStep57186_DataConsentTiers_AdministratorEmailConfirmation_Walmart(string emailSavedAs, string companySavedAs, Table dataUsage)
+		{
+			TestReport.UseSubSteps = true;
+			var name = Context.GetFromContext(companySavedAs)?.ToString();
+			if (name == null)
+			{
+				Report.Failure("Requires a Company Name saved to context as: " + companySavedAs);
+				return;
+			}
+			var expectedText = "Hello " + name + ", Recently an administrator has changed the Data Usage permissions for Wal-Mart/SAM'S CLUB to include: ";
+			foreach (var row in dataUsage.Rows)
+			{
+				switch (row["Data Tier"])
+				{
+					case "Tier 1":
+						expectedText += "Tier 1: Regulatory Support: " + row["Permission"];
+						break;
+					case "Tier 2.1":
+						expectedText += "Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports: " + row["Permission"];
+						break;
+					case "Tier 2.2":
+						expectedText += "Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency: " + row["Permission"];
+						break;
+					case "Tier 4.2":
+						expectedText += "Tier 4.2: Publicly Disclose Product Ingredient Lists: " + row["Permission"];
+						break;
+					default:
+						Report.Error("Walmart tier must be 'Tier 1', 'Tier 2.1', 'Tier 2.2' or 'Tier 4.2'!");
+						break;
+				}
+			}
+			expectedText += "For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team";
+			TestReport.StartStep("I confirm the administrator receieved an email with subject 'WERCSmart Data Use Tier Consents Changed for Wal-Mart/Sam's Club'");
+			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", "WERCSmart Data Use Tier Consents Changed for Wal-Mart/SAM'S CLUB");
+			TestReport.StartStep("I confirm the body text of the email matches the expected text");
+			new GlobalSteps().ThenTheBodyOfTheEmailShouldShow(expectedText);
+		}
 	}
 }
