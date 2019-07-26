@@ -23,10 +23,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"In the Supplier Reports screen the current page should be: (.*)")]
-		public void ThenInTheSupplierReportsScreenTheCurrentPageShouldBe(string title)
+		public void ThenInTheSupplierReportsScreenTheCurrentPageShouldBe(string expected)
 		{
-			Report.IsTrue(new SupplierReports().GetCurrentTitle() == title, "Title is not showing as expected",
-				"Showing subtitle: " + title + " as expected.");
+			string actual = new SupplierReports().GetCurrentSubTitle();
+			Report.IsTrue(actual == expected, "Title is not showing as expected",
+				"Showing subtitle: " + expected + " as expected.");
 		}
 
 		[StepDefinition(@"In the Supplier Reports screen the current sub-page should be: (.*)")]
