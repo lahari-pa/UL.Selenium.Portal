@@ -61,13 +61,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						throw new Exception("Retail partners page has not loaded.");
 					}
-
 				}
-
 				//navigate to the home screen
 				var myNavBar = new NavigationBar();
 				myNavBar.Click_Icon("Home");
-
 			}
 
 		}

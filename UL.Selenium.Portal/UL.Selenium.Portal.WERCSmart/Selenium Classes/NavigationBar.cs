@@ -8,11 +8,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class NavigationBar : BaseObject
+	class NavigationBar : SeleniumBaseObject
 	{
 		public const string BasePath = "//nav[@role='navigation']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool NavigationIconShowing()
 		{

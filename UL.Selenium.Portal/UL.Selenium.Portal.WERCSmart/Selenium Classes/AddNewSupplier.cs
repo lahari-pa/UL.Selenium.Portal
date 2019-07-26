@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 
@@ -45,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']/span"), 2);
+				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']"), 2);
 				return SupplierError.GetValue();
 			}
 			catch (Exception)
@@ -58,8 +59,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
+				Delay.Seconds(2);
 				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']"), 2);
-				return (SupplierError.Enabled && SupplierError.Displayed);
+				return (SupplierError.Enabled && SupplierError.Displayed && SupplierError.Text != string.Empty);
 			}
 			catch (Exception)
 			{

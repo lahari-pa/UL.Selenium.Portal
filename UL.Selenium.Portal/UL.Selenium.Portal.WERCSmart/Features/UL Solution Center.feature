@@ -121,7 +121,7 @@ Scenario: [59661] UL Solution Center shows correct entries - ULGHS section
 	And I confirm the Learn More button is displayed for section: ULGHS
 	Given I click the Learn More button for section: ULGHS
 	Given I switch to the ULGHS information tab
-	Then I check that the current URL contains: https://psi.ul.com/en/products/ulghs
+	Then I check that the current URL contains: https://msc.ul.com/en/products/ulghs
 
 #And I close the window that opened
 #Then I confirm that the UL Solution Center page is loaded
@@ -135,4 +135,4 @@ Scenario: [102411] UL Solution Center shows correct entries - Navigator section
 	And I confirm the Learn More button is displayed for section: Navigator
 	Given I click the Learn More button for section: Navigator
 	Given I switch to the Navigator information tab
-	Then I check that the current URL contains: https://psi.ul.com/en/products/navigator/
+	Then I check that the current URL contains: https://msc.ul.com/en/products/navigator/
