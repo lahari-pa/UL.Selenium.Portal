@@ -113,6 +113,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I save the administrator Company Name as: (.*)")]
+		public void SaveCompanyNameToContext(string savedAs)
+		{
+			var companyName = new MyAccount().GetCompanyName();
+			if (companyName == null)
+			{
+				Report.Failure("Failed to get Company Name on My Account");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Info("Company Name is: " + companyName);
+			}
+			Report.Info("Adding Company Name to context");
+			Context.AddToContext(savedAs, companyName);
+		}
+
 		[StepDefinition(@"I navigate to the MyAccount page")]
 		public void GivenINavigateToTheMyAccountPage()
 		{
