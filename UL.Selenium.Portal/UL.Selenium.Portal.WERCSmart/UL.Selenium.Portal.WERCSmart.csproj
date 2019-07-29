@@ -167,6 +167,7 @@
     <Compile Include="Selenium Classes\MyAccount.cs" />
     <Compile Include="Selenium Classes\MyIngredientsModal.cs" />
     <Compile Include="Selenium Classes\NavigationBar.cs" />
+    <Compile Include="Selenium Classes\New Product\OptionalReports.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ElectronicEquipment.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\Ingredients.cs" />
     <Compile Include="Selenium Classes\New Product\NewProduct.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_TCLP.cs" />
     <Compile Include="Steps\Steps_Brands.cs" />
+    <Compile Include="Steps\Steps_Cart.cs" />
     <Compile Include="Steps\Steps_ChooseGoodGuide.cs" />
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
     <Compile Include="Steps\Steps_CreateProducts.cs" />
