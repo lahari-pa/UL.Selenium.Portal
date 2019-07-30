@@ -65,7 +65,7 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
 	Then I save the product information as: TestCase73085
 	Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
 	Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
