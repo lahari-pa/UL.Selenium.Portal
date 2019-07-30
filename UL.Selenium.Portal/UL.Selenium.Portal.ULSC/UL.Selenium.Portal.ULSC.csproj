@@ -39,7 +39,9 @@
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="CredentialManagement, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.766\lib\net461\CredentialManagement.dll</HintPath>
+    </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\EnvDTE.8.0.1\lib\net10\EnvDTE.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -93,9 +95,15 @@
     <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="NTTQA.Selenium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.766\lib\net461\NTTQA.Selenium.dll</HintPath>
+    </Reference>
+    <Reference Include="NTTQA.Selenium.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.766\lib\net461\NTTQA.Selenium.Reporting.dll</HintPath>
+    </Reference>
+    <Reference Include="NTTQA.Selenium.TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.5.1.766\lib\net461\NTTQA.Selenium.TReVor.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -169,13 +177,16 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem ##### TReVor Post Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.766\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
+    <PostBuildEvent>
+      rem ##### TReVor Post Build Events #####
+      "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.766\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>rem ##### TReVor Pre Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.766\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
-</PreBuildEvent>
+    <PreBuildEvent>
+      rem ##### TReVor Pre Build Events #####
+      "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.766\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
+    </PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
