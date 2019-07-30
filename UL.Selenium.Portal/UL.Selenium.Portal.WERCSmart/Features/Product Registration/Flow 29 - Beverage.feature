@@ -78,6 +78,8 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 		| Retailer                   |
 		| Walgreens                  |
 		| No Retailer/No UPC Product |
+		| Publix                     |
+		| Optoro                     |
 	Given I click Close in the Select Retailers popup
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nut Butters
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73085
