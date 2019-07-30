@@ -38,9 +38,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		[StepDefinition(@"I login as the administrator")]
-		[StepDefinition(@"I login as the administrator")]
-		[When(@"I login as the administrator")]
-		[Then(@"I login as the administrator")]
 		public void GivenILoginAsTheAdministrator()
 		{
 			this.LoginToAccount("ProductAccount");
@@ -255,6 +252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				throw new Exception("Landing page did not load!");
 			}
+
 			Report.Info("Clicking 'Log In' on the Landing Page");
 			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
 			var selHomepage = new Homepage();
@@ -263,6 +261,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				return;
 			}
+
 			Report.Info("Entering Email: '" + email + "'");
 			selLogin.EmailField = email;
 			Report.Info("Entering Password: '" + password + "'");

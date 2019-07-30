@@ -107,10 +107,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					urls = new[] { "https://www.ulprospector.com/en/eu", "https://www.ulprospector.com/en/na" };
 					break;
 				case "ULGHS":
-					urls = new[] { "https://psi.ul.com/en/products/ulghs" };
+					urls = new[] { "https://msc.ul.com/en/products/ulghs" };
 					break;
 				case "UL Secure Connect (ULSC)":
-					urls = new[] { "https://psi.ul.com/en/products/wercs-studio/" };
+					urls = new[] { "https://msc.ul.com/en/products/wercs-studio/" };
 					break;
 				case "GoodGuide for Suppliers":
 					urls = new[] { "https://choosegoodguide.com/" };
@@ -119,7 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					urls = new[] { "https://www.goodguide.com/" };
 					break;
 				case "Navigator":
-					urls = new[] { "https://psi.ul.com/en/products/navigator/" };
+					urls = new[] { "https://msc.ul.com/en/products/navigator/" };
 					break;
 			}
 			Report.Info("Switch to Tab: " + string.Join(", ", urls));
