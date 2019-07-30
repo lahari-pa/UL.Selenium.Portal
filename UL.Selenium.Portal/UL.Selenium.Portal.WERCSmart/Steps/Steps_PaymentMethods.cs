@@ -753,6 +753,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
 					Delay.Seconds(20 * Delay.SpeedFactor);
+					GeneralUtilities.Wait_for_load_finish();
+
 				}
 				else
 				{
@@ -791,6 +793,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods_Thank_You();
 				Delay.Seconds(5 * Delay.SpeedFactor);
+				GeneralUtilities.Wait_for_load_finish();
 				Report.IsTrue(myPay.ThankYou_Header_Correct(), "Thank You Header is Incorrect",
 					"Thank You Header is Correct");
 			}
@@ -824,24 +827,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Thank You screen I click Home")]
 		public void ThenInTheThankYouScreenIClickHome()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Thank You screen I click Home");
-			try
-			{
-				var myPay = new PaymentMethods_Thank_You();
-				Report.IsTrue(myPay.Home_click(), "Failed to Click Home Button",
-					"Home Button Clicked");
+			var myPay = new PaymentMethods_Thank_You();
+			Report.IsTrue(myPay.Home_click(), "Failed to Click Home Button",
+				"Home Button Clicked");
 
-				Delay.Seconds(5 * Delay.SpeedFactor);
+			Delay.Seconds(5 * Delay.SpeedFactor);
 
-				var myHome = new StepsHomepage();
+			var myHome = new StepsHomepage();
 
-				myHome.ThenTheWercSmartHomepageShouldLoad();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			myHome.ThenTheWercSmartHomepageShouldLoad();
 		}
 
 
