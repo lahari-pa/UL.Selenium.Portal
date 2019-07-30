@@ -373,6 +373,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
 				// Screenshot throws exception while an alert is open - selenium utils needs updating
 				//Report.Screenshot();
+				SeleniumBrowser.Alert.WaitForAlert(5);
 				if (alertAction == "accept")
 				{
 					Report.Info("Accepting the pop up alert");

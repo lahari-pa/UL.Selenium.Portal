@@ -11,11 +11,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class RetailPartners : BaseObject
+	class RetailPartners : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='retailPartners']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public string HeaderShowing()
 		{
@@ -135,13 +135,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3')]//span[@class='sr-only']")).Select(x => x.Text).ToList();
 		}
+
+		//Jacob
 	}
 
-	class RetailPartnersDetails : BaseObject
+	class RetailPartnersDetails : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='retailDetails']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool HeaderShowing(string header, bool exact = true)
 		{
@@ -369,6 +370,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//table[./thead/tr/th[text()='Data Consent Tiers']]"), 2);
 		}
 
+		public bool DeleteSupplier(string supplierId)
+		{
+			IWebElement allSuppliers = this.GetSuppliersAsIWebElement();
+
+			IList<IWebElement> rows = allSuppliers.FindElements(By.TagName("tr"), 2);
+			foreach (IWebElement row in rows)
+			{
+				IWebElement tableSupplierId = row.FindElement(By.XPath(".//*[@class='col-sm-3']"), 2);
+
+				if (tableSupplierId.Text == supplierId)
+				{
+					try
+					{
+						IWebElement tableActionBtn = row.FindElement(By.XPath(".//span[contains(@class,ellipsis)]"), 2);
+						IWebElement dropDown = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']"));
+						IWebElement deleteButton = dropDown.FindElement(By.XPath(".//a[contains(@data-bind,'delete')]"));
+						tableActionBtn.TryClick();
+						deleteButton.TryClick();
+						var deleteModal = new DeleteSupplierModal();
+						return deleteModal.ClickDeleteSupplierModalWindowButton("Delete");
+
+					}
+					catch (Exception e)
+					{
+						Report.Info("Error trying to delete Supplier " + supplierId + ". Error encountered: " + e.Message);
+						return false;
+					}
+				}
+			}
+			Report.Info("Supplier " + supplierId + " not found");
+			return true;
+		}
+
+		public IWebElement GetSuppliersAsIWebElement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table"), 2);
+		}
+
 		public List<Supplier> GetAllSuppliers()
 		{
 			var supplierList = new List<Supplier>();
@@ -456,11 +495,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-	public class DataEntryNotification : BaseObject
+	public class DataEntryNotification : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='dataEntryNotifications']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool ClickClose()
 		{
@@ -475,11 +514,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	public class ReportDownload : BaseObject
+	public class ReportDownload : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='download-modal']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool ClickClose()
 		{
@@ -489,11 +528,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	public class DataTierDetails : BaseObject
+	public class DataTierDetails : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@class='modal in' and @id='data-tiers-details']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool ClickTab(string option)
 		{
@@ -579,6 +618,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
+	public class DeleteSupplierModal : SeleniumBaseObject
+	{
+		public const string BasePath = "//div[contains(@role,'document')]//div[contains(@class,'modal-content')]";
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		public bool ClickDeleteSupplierModalWindowButton(string choice)
+		{
+			IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 2);
+			IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h3[@class='modal-title']"), 10);
+
+			if (modalWindow is null || modalTitle is null)
+			{
+				Report.Failure("Could not locate Delete Supplier ID modal window.");
+				return false;
+			}
+
+			Report.IsTrue(modalTitle.Text == "Delete Supplier ID?", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
+			switch (choice)
+			{
+				case "Delete":
+					IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'yesText')]"), 2);
+					return deleteBtn.TryClick();
+				case "Cancel":
+					IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'noText')]"), 2);
+					return cancelBtn.TryClick();
+				default:
+					Report.Info("'" + choice + "' button not available in modal window. Only 'Delete' and 'Cancel' are available.");
+					return false;
+			}
+		}
+	}
+
+
 	public class Supplier
 	{
 		public string SupplierID { get; set; }
@@ -586,5 +659,4 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool IsActive { get; set; }
 		public bool IsDefault { get; set; }
 	}
-
 }

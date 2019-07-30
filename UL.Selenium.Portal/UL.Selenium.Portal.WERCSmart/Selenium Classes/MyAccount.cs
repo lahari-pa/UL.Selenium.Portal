@@ -15,15 +15,20 @@ using System.Collections.ObjectModel;
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 
-	class MyAccount : BaseObject
+	class MyAccount : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='mainBody']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public string HeaderShowing()
 		{
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'page-inner-header')]/h2"), 2).Text;
+		}
+
+		public string GetAdminEmail()
+		{
+			return this.containerElement.FindElement(By.XPath("//span[contains(@data-bind,'userEmail')]"), 2).Text;
 		}
 
 		public List<string> Subheadings()
@@ -34,17 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetCompanyName()
 		{
 			IWebElement companyNameH3 = this.containerElement.FindElement(By.XPath("//div[@class='col-sm-3 basic-info']/h3"), 2);
-			if (companyNameH3 != null)
-			{
-				string innerText = companyNameH3.GetInnerHTML();
-				string regExPattern = @"\<.*\>.*\<\/.*\>";
-				var rgx = new Regex(regExPattern);
-				return rgx.Replace(innerText, "").Trim();
-			}
-			else
-			{
-				return "";
-			}
+			return companyNameH3?.Text;
 		}
 
 		public bool SaveUserGrid(string saveAs)

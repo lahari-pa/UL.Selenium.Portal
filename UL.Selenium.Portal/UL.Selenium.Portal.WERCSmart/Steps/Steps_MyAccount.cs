@@ -113,6 +113,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I save the administrator Company Name as: (.*)")]
+		public void SaveCompanyNameToContext(string savedAs)
+		{
+			var companyName = new MyAccount().GetCompanyName();
+			if (companyName == null)
+			{
+				Report.Failure("Failed to get Company Name on My Account");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Info("Company Name is: " + companyName);
+			}
+			Report.Info("Adding Company Name to context");
+			Context.AddToContext(savedAs, companyName);
+		}
+
 		[StepDefinition(@"I navigate to the MyAccount page")]
 		public void GivenINavigateToTheMyAccountPage()
 		{
@@ -670,7 +687,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Success("The user: " + user + " was found in the My Account user grid");
 			Report.Screenshot();
-			string adminEmail = TestVariables.GetVariableSavedAs("AdministratorEmailAddress");
+			string adminEmail = new MyAccount().GetAdminEmail();
 
 			Report.IsTrue(userMatch.Email == adminEmail,
 				string.Format("The user: '{0}' was not associated with the email address: '{1}'",

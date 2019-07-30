@@ -94,7 +94,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 			this.WaitForSpinner();
-			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(".//h3[@class='summary-question' and contains(text(),'" + section + "')]/../p[contains(text(),'" + option + "')]"), 2);
+			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(@".//h3[@class='summary-question' and contains(text(),""" + section + @""")]/../p[contains(text(),""" + option + @""")]"), 2);
 
 			return els.Select(x => x.GetElementText()).ToList();
 		}
