@@ -252,6 +252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				throw new Exception("Landing page did not load!");
 			}
+
 			Report.Info("Clicking 'Log In' on the Landing Page");
 			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
 			var selHomepage = new Homepage();
@@ -260,6 +261,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				return;
 			}
+
 			Report.Info("Entering Email: '" + email + "'");
 			selLogin.EmailField = email;
 			Report.Info("Entering Password: '" + password + "'");
