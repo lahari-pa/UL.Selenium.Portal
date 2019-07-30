@@ -10,6 +10,9 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
+using TechTalk.SpecFlow;
+using NTTQA.Selenium.SpecFlow;
+using NTTQA.Selenium.UniversalFunctions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -91,9 +94,205 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 			this.WaitForSpinner();
-			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(".//h3[@class='summary-question' and contains(text(),'" + section + "')]/../p[contains(text(),'" + option + "')]"), 2);
+			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(@".//h3[@class='summary-question' and contains(text(),""" + section + @""")]/../p[contains(text(),""" + option + @""")]"), 2);
 
 			return els.Select(x => x.GetElementText()).ToList();
+		}
+
+		public bool ConfirmHeaders(ICollection<string> headers, string section)
+		{
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"));
+			table.ScrollElementIntoView();
+			IList<IWebElement> headersElems = table.FindElements(By.TagName("th"));
+			var foundHeaders = new List<string>();
+			foreach (IWebElement elem in headersElems)
+			{
+				foundHeaders.Add(elem.Text);
+			}
+			foreach (string header in headers)
+			{
+				if (!foundHeaders.Contains(header))
+				{
+					Report.Info("Failed to find header '" + header + "'.");
+					return false;
+				}
+				else
+				{
+					Report.Info("Successfully found header '" + header + "'.");
+				}
+			}
+
+			return true;
+		}
+
+		public bool ConfirmCaseUPC(TableRows rows, string section)
+		{
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"));
+			table.ScrollElementIntoView();
+
+			IWebElement caseUPCIcon = table.FindElement(By.XPath("//i[@class='fa fa-truck']"), 2);
+			if (caseUPCIcon == null)
+			{
+				Report.Info("Could not find the case UPC icon.");
+				return false;
+			}
+			string caseUPCNumber = "";
+			IWebElement caseUPC = table.FindElement(By.XPath("//i[@class='fa fa-truck']/.."), 2);
+			if (caseUPC != null && caseUPC.Text != "")
+			{
+				Report.Info("Found case UPC number on the screen!");
+				caseUPCNumber = caseUPC.Text.Trim();
+			}
+			else
+			{
+				Report.Info("Could not find case UPC number on the screen.");
+				return false;
+			}
+
+			IWebElement caseUPCRow = table.FindElement(By.XPath("//i[@class='fa fa-truck']/../../.."), 2);
+			IList<IWebElement> caseUPCValues = caseUPCRow.FindElements(By.TagName("div"), 2);
+
+			bool found = false;
+			foreach (TableRow row in rows)
+			{
+				if (row["UPC Number"].ToLower().Contains("saved as"))
+				{
+					try
+					{
+						string savedUPC = Context
+							.GetFromContext(row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+							.ToString();
+						row["UPC Number"] = savedUPC;
+					}
+					catch (Exception e)
+					{
+						Report.Info("Failed to find saved item in context: " + row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+						throw;
+					}
+				}
+				if (row["Associated UPC"].ToLower().Contains("saved as"))
+				{
+					try
+					{
+						string savedUPC = Context
+							.GetFromContext(row["Associated UPC"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+							.ToString();
+						row["Associated UPC"] = savedUPC;
+					}
+					catch (Exception e)
+					{
+						Report.Info("Failed to find saved item in context: " + row["Associated UPC"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+						throw;
+					}
+				}
+
+				if (row["UPC Number"] == caseUPCNumber)
+				{
+					found = true;
+					string[] rowValues = row.Values.ToArray();
+					for (int i = 0; i < rowValues.Length; i++)
+					{
+						if (rowValues[i] != caseUPCValues[i].Text.Trim())
+						{
+							Report.Info("Values do not match: '" + rowValues[i] + "' and '" + caseUPCValues[i].Text.Trim() + "'.");
+							return false;
+						}
+						else
+						{
+							Report.Info("Values match: '" + rowValues[i] + "' and '" + caseUPCValues[i].Text.Trim() + "'.");
+						}
+					}
+				}
+			}
+
+			if (found == false)
+			{
+				Report.Info("Could not find the correct case UPC number.");
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool ConfirmUPC(TableRows rows, string section)
+		{
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"), 2);
+			table.ScrollElementIntoView();
+
+			IWebElement upcRow = null;
+			upcRow = table.FindElement(By.XPath("//i[@class='fa fa-truck']/../../../following-sibling::tr"), 2);
+			if (upcRow == null)
+			{
+				upcRow = table.FindElement(By.XPath("//i[@class='fa fa-truck']/../../../preceding-sibling::tr"), 2);
+				if (upcRow == null)
+				{
+					Report.Info("Could not find UPC row in table!");
+					return false;
+				}
+			}
+			IList<IWebElement> upcValues = upcRow.FindElements(By.TagName("div"), 2);
+			string upcNumber = upcValues != null ? upcValues[0].Text : "";
+
+			bool found = false;
+			foreach (TableRow row in rows)
+			{
+				if (row["UPC Number"].ToLower().Contains("saved as"))
+				{
+					try
+					{
+						string savedUPC = Context
+							.GetFromContext(row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+							.ToString();
+						row["UPC Number"] = savedUPC;
+					}
+					catch (Exception e)
+					{
+						Report.Info("Failed to find saved item in context: " + row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+						throw;
+					}
+				}
+				if (row["Associated UPC"].ToLower().Contains("saved as"))
+				{
+					try
+					{
+						string savedUPC = Context
+							.GetFromContext(row["Associated UPC"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+							.ToString();
+						row["Associated UPC"] = savedUPC;
+					}
+					catch (Exception e)
+					{
+						Report.Info("Failed to find saved item in context: " + row["Associated UPC"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+						throw;
+					}
+				}
+
+				if (upcNumber != "" && row["UPC Number"] == upcNumber)
+				{
+					found = true;
+					string[] rowValues = row.Values.ToArray();
+					for (int i = 0; i < rowValues.Length; i++)
+					{
+						if (rowValues[i] != upcValues[i].Text.Trim())
+						{
+							Report.Info("Values do not match: '" + rowValues[i] + "' and '" + upcValues[i].Text.Trim() + "'.");
+							return false;
+						}
+						else
+						{
+							Report.Info("Values match: '" + rowValues[i] + "' and '" + upcValues[i].Text.Trim() + "'.");
+						}
+					}
+				}
+			}
+
+			if (found == false)
+			{
+				Report.Info("Could not find the correct UPC number!");
+				return false;
+			}
+
+			return true;
 		}
 
 		public string SGetProductName()

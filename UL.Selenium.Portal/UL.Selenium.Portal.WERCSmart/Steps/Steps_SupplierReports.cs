@@ -7,6 +7,7 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -22,10 +23,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"In the Supplier Reports screen the current page should be: (.*)")]
-		public void ThenInTheSupplierReportsScreenTheCurrentPageShouldBe(string title)
+		public void ThenInTheSupplierReportsScreenTheCurrentPageShouldBe(string expected)
 		{
-			Report.IsTrue(new SupplierReports().GetCurrentTitle() == title, "Title is not showing as expected",
-				"Showing subtitle: " + title + " as expected.");
+			string actual = new SupplierReports().GetCurrentSubTitle();
+			Report.IsTrue(actual == expected, "Title is not showing as expected",
+				"Showing subtitle: " + expected + " as expected.");
 		}
 
 		[StepDefinition(@"In the Supplier Reports screen the current sub-page should be: (.*)")]
@@ -45,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"under the supplier Reports menu I should see the following options")]
 		public void GivenUnderTheSupplierReportsMenuIShouldSeeTheFollowingOptions(Table table)
 		{
-			var SupplierReports = new SupplierReports().GetReportList();
+			List<string> SupplierReports = new SupplierReports().GetReportList();
 
 			foreach (TableRow thisRow in table.Rows)
 			{
@@ -81,12 +83,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selReportDownload = new ReportDownload();
 			if (selReportDownload.Wait_for_load())
 			{
-				var count = 0;
+				int count = 0;
 				Report.Info("Confirm file is downloaded with name: " + file);
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 				while (count < 120)
 				{
-					var dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+					string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 					if (dir.Any())
 					{
 						Report.Success("File with name: " + dir.FirstOrDefault() + " was found in the download directory");
@@ -111,7 +113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I delete the Supplier Report file saved as (.*)")]
 		public void DeleteExcelFile(string savedAs)
 		{
-			var file = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (file.IsNullOrEmpty())
 			{
 				Report.Failure("Could not find file saved as: " + savedAs);
@@ -124,7 +126,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Report page I should see the report description should be showing with text: (.*)")]
 		public void SupplierReportPageIShoudSeeDescription(string expected)
 		{
-			var displayed = new SupplierReports().GetCurrentSubText();
+			string displayed = new SupplierReports().GetCurrentSubText();
 			Report.IsTrue(expected == displayed,
 				"The report description text did not match the expected text. Expected: '" + expected + "'. But got: '" + displayed + "'.",
 				"The report description text was displayed as expected.");

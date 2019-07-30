@@ -16,8 +16,8 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public bool Wait_For_Load(int secondsToWait = 30)
 		{
-			var counter = 0;
-			var loaded = false;
+			int counter = 0;
+			bool loaded = false;
 			while (counter < secondsToWait && !loaded)
 			{
 				loaded = this.WidgetContainer("", true) != null && GeneralUtilities.WaitForWidgetSpinner(1);
@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			{
 				return this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'grid-stack-item-content')]"), 2).FirstOrDefault();
 			}
-			var match = this.containerElement.FindElements(By.XPath(".//div[@class='panel-title']"), 2)
+			IWebElement match = this.containerElement.FindElements(By.XPath(".//div[@class='panel-title']"), 2)
 				?.FirstOrDefault(x => x.Text == title);
 			return match?.FindElement(By.XPath("./ancestor::div[starts-with(@class,'grid-stack-item-content')][1]"), 2);
 		}

@@ -53,8 +53,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the following menu options in the header:")]
 		public void NavigationOptionShowing(Table expected)
 		{
-			var optionsAvailable = new LandingPage().NavigationOptionsAvailable();
-			foreach (var row in expected.Rows)
+			System.Collections.Generic.List<string> optionsAvailable = new LandingPage().NavigationOptionsAvailable();
+			foreach (TableRow row in expected.Rows)
 			{
 				string option = row["Option"];
 				Report.Info("Expecting to see menu option: '" + option + "' available on the landing page");

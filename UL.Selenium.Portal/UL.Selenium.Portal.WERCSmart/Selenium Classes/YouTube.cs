@@ -17,7 +17,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VideoDisplayed()
 		{
-			var videoEl = this.containerElement.FindElement(By.XPath(".//div[@id='player']//video"), 2);
+			IWebElement videoEl = this.containerElement.FindElement(By.XPath(".//div[@id='player']//video"), 2);
 			return videoEl != null && videoEl.Displayed;
 		}
 	}

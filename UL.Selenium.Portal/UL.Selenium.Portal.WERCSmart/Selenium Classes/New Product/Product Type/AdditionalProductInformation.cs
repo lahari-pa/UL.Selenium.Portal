@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 {
@@ -13,11 +14,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 		public List<string> ProductsMayBeSold {
 			get
 			{
-				List<string> countries = new List<string>();
-				var listOfCountries = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				var countries = new List<string>();
+				ReadOnlyCollection<IWebElement> listOfCountries = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in"))
 					.FindElements(By.XPath("../..//input"));
-				foreach (var country in listOfCountries)
+				foreach (IWebElement country in listOfCountries)
 				{
 					if (country.Selected)
 					{
@@ -29,10 +30,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			}
 			set
 			{
-				foreach (var country in value)
+				foreach (string country in value)
 				{
-					var thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == country);
-					var countryInput = thisLabel.FindElement(By.XPath(".//../input"));
+					IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == country);
+					IWebElement countryInput = thisLabel.FindElement(By.XPath(".//../input"));
 					if (!countryInput.Selected)
 					{
 						countryInput.Click();
@@ -46,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 		public bool ProductClassifiedUnderOSHA {
 			get
 			{
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Product has been classified using OSHA"))
 					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
@@ -75,7 +76,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 					valueToSet = "No";
 				}
 
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Product has been classified using OSHA"))
 					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
@@ -85,7 +86,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 		public bool ProductShippedDirectly {
 			get
 			{
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Product is shipped directly"))
 					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
@@ -114,7 +115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 					valueToSet = "No";
 				}
 
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Product is shipped directly"))
 					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
@@ -124,7 +125,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 		public bool RetailersPrivateLabelOrBrand {
 			get
 			{
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Private Label or Brand"))
 					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
@@ -153,7 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 					valueToSet = "No";
 				}
 
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Private Label or Brand"))
 					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
@@ -165,7 +166,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 		public bool SolelyForRetailersUse {
 			get
 			{
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("solely for the Retailer's use"))
 					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
@@ -194,7 +195,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 					valueToSet = "No";
 				}
 
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("solely for the Retailer's use"))
 					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();

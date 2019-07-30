@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var myPay = new PaymentMethods();
 
-			foreach (var Row in table.Rows)
+			foreach (TableRow Row in table.Rows)
 			{
 				Report.IsTrue(myPay.Payment_Method_Exists(Row["Options"]), Row["Options"] + " Is Not Available", Row["Options"] + " Available");
 			}
@@ -191,9 +191,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods_Edit_Address();
 
-				List<string> myList = new List<string>();
+				var myList = new List<string>();
 
-				foreach (var Row in table.Rows)
+				foreach (TableRow Row in table.Rows)
 				{
 					myList.Add(Row["Field"]);
 				}
@@ -239,9 +239,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods_Edit_Address();
 
-				List<string> myList = new List<string>();
+				var myList = new List<string>();
 
-				foreach (var Row in table.Rows)
+				foreach (TableRow Row in table.Rows)
 				{
 					myList.Add(Row["Field"]);
 				}
@@ -309,7 +309,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods_Edit_Address();
 
-				foreach (var thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					string firstName = thisRow["First Name"];
 					string lastName = thisRow["Last Name"];
@@ -358,7 +358,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				var wsUser = (WERCSmartUser)Context.GetFromContext(savedAs);
-				foreach (var thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					string address1 = thisRow["Address Line 1"];
 					string address2 = thisRow["Address Line 2"];
@@ -446,9 +446,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods();
 
-				List<string> myList = new List<string>();
+				var myList = new List<string>();
 
-				foreach (var Row in table.Rows)
+				foreach (TableRow Row in table.Rows)
 				{
 					myList.Add(Row["Field"]);
 				}
@@ -520,9 +520,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods();
 
-				List<string> myList = new List<string>();
+				var myList = new List<string>();
 
-				foreach (var Row in table.Rows)
+				foreach (TableRow Row in table.Rows)
 				{
 					myList.Add(Row["Field"]);
 				}
@@ -577,7 +577,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods();
 
-				foreach (var thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					string card_type = thisRow["Card Type"];
 					string card_no = thisRow["Card Number"];
@@ -842,7 +842,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the PayPal page should load")]
 		public void ThenThePayPalPageShouldLoad()
 		{
-			PaymentMethods_PayPal MyPP = new PaymentMethods_PayPal();
+			var MyPP = new PaymentMethods_PayPal();
 			Report.IsTrue(MyPP.Wait_for_load(60), "PayPal page is not showing",
 				"PayPal page is showing.");
 		}
@@ -871,7 +871,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I log into PayPal with user saved as: (.*) and click Continue")]
 		public void GivenILogInWithEmailAndPassword(string savedAs)
 		{
-			var user = TestUsers.GetUserSavedAs(savedAs);
+			TestUser user = TestUsers.GetUserSavedAs(savedAs);
 			this.GivenILogInWithEmailAndPassword(user.Username, user.Password);
 		}
 

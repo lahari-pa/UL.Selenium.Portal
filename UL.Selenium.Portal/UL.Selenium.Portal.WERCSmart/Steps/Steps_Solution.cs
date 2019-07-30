@@ -5,6 +5,7 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -19,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(sectionsShowing.Count == table.RowCount,
 				$"Expected there to be: {table.RowCount} items displayed in UL Solution Center but there were: {sectionsShowing.Count}",
 				$"There were {table.RowCount} items displayed in UL Solution Center as expected");
-			foreach (var thisrow in table.Rows)
+			foreach (TableRow thisrow in table.Rows)
 			{
 				string sectionToFind = thisrow["Sections"];
 				Report.IsTrue(sectionsShowing.Contains(sectionToFind),
@@ -32,8 +33,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmTheHeadingIsShownNextToTheLogo(string sectionHeader)
 		{
 			var selSolutionCenter = new UlSolutionCenter();
-			var sections = selSolutionCenter.GetSections;
-			var sectionMatch = sections.FirstOrDefault(x => x.Header == sectionHeader);
+			List<UlSection> sections = selSolutionCenter.GetSections;
+			UlSection sectionMatch = sections.FirstOrDefault(x => x.Header == sectionHeader);
 			if (Report.IsTrue(sectionMatch != null, $"Section with header: '{sectionHeader}' was not displayed!", $"Section with header: '{sectionHeader}' was displayed as expected"))
 			{
 				Report.IsTrue(sectionMatch.LogoDisplayed,
@@ -46,8 +47,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmInformationStatementReads(string sectionHeader, string expectedStatement)
 		{
 			var selSolutionCenter = new UlSolutionCenter();
-			var sections = selSolutionCenter.GetSections;
-			var sectionMatch = sections.FirstOrDefault(x => x.Header == sectionHeader);
+			List<UlSection> sections = selSolutionCenter.GetSections;
+			UlSection sectionMatch = sections.FirstOrDefault(x => x.Header == sectionHeader);
 			if (sectionMatch != null)
 			{
 				Report.IsTrue(sectionMatch.Statement == expectedStatement,
@@ -63,8 +64,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmTheLearnMoreButtonIsDisplayedForSection(string sectionHeader)
 		{
 			var selSolutionCenter = new UlSolutionCenter();
-			var sections = selSolutionCenter.GetSections;
-			var sectionMatch = sections.FirstOrDefault(x => x.Header == sectionHeader);
+			List<UlSection> sections = selSolutionCenter.GetSections;
+			UlSection sectionMatch = sections.FirstOrDefault(x => x.Header == sectionHeader);
 			if (sectionMatch != null)
 			{
 				Report.IsTrue(sectionMatch.LearnMoreDisplayed,
@@ -80,8 +81,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClickTheLearnMoreButtonForSection(string sectionHeader)
 		{
 			var selSolutionCenter = new UlSolutionCenter();
-			var sections = selSolutionCenter.GetSections;
-			var sectionMatch = sections.FirstOrDefault(x => x.Header == sectionHeader);
+			List<UlSection> sections = selSolutionCenter.GetSections;
+			UlSection sectionMatch = sections.FirstOrDefault(x => x.Header == sectionHeader);
 			if (sectionMatch != null)
 			{
 				Report.IsTrue(sectionMatch.ClickLearnMore(),
@@ -106,10 +107,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					urls = new[] { "https://www.ulprospector.com/en/eu", "https://www.ulprospector.com/en/na" };
 					break;
 				case "ULGHS":
-					urls = new[] { "https://psi.ul.com/en/products/ulghs" };
+					urls = new[] { "https://msc.ul.com/en/products/ulghs" };
 					break;
 				case "UL Secure Connect (ULSC)":
-					urls = new[] { "https://psi.ul.com/en/products/wercs-studio/" };
+					urls = new[] { "https://msc.ul.com/en/products/wercs-studio/" };
 					break;
 				case "GoodGuide for Suppliers":
 					urls = new[] { "https://choosegoodguide.com/" };
@@ -118,18 +119,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					urls = new[] { "https://www.goodguide.com/" };
 					break;
 				case "Navigator":
-					urls = new[] { "https://psi.ul.com/en/products/navigator/" };
+					urls = new[] { "https://msc.ul.com/en/products/navigator/" };
 					break;
 			}
 			Report.Info("Switch to Tab: " + string.Join(", ", urls));
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in allHandles)
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
 			{
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				SeleniumBrowser.WebBrowser.WaitForPageLoad();
-				foreach (var url in urls)
+				foreach (string url in urls)
 				{
 					if (SeleniumBrowser.WebBrowser.Url.Contains(url))
 					{

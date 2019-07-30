@@ -29,7 +29,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure("Could not find user saved as: " + savedAs + " in context");
 					return;
 				}
-				TopMenuBar thisTopMenuBar = new TopMenuBar();
+				var thisTopMenuBar = new TopMenuBar();
 				string username = user.FirstName + " " + user.LastName;
 				Report.Info("Looking for username: " + username);
 				Report.IsTrue(thisTopMenuBar.GetCurrentUser() == username,
@@ -55,7 +55,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						.GetFromContext(username.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 					username = savedUser.Username;
 				}
-				TopMenuBar thisTopMenuBar = new TopMenuBar();
+				var thisTopMenuBar = new TopMenuBar();
 				Report.Info("Looking for username: " + username);
 				Report.IsTrue(thisTopMenuBar.GetCurrentUser() == username,
 					"Username should have been showing as: " + username + " but is: " + thisTopMenuBar.GetCurrentUser(),
@@ -71,8 +71,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see a user name in the header next to the user icon")]
 		public void ThenIShouldSeeAUserNameNextToTheUserIcon()
 		{
-			TopMenuBar thisTopMenuBar = new TopMenuBar();
-			var currentUser = thisTopMenuBar.GetCurrentUser();
+			var thisTopMenuBar = new TopMenuBar();
+			string currentUser = thisTopMenuBar.GetCurrentUser();
 			Report.IsTrue(currentUser.Length > 0,
 				"Username should be showing", "Username showing as: " + currentUser);
 		}
@@ -83,7 +83,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + username + " in the top right corner");
 			try
 			{
-				TopMenuBar thisTopMenuBar = new TopMenuBar();
+				var thisTopMenuBar = new TopMenuBar();
 				Report.IsTrue(thisTopMenuBar.GetCurrentUser() == username,
 					"Username should have been showing as: " + username + " but is: " + thisTopMenuBar.GetCurrentUser(),
 					"Username correctly showing as: " + username);
@@ -101,7 +101,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see company username: " + companyName);
 			try
 			{
-				MyAccount myMyAccount = new MyAccount();
+				var myMyAccount = new MyAccount();
 				Report.IsTrue(myMyAccount.GetCompanyName() == companyName,
 					"Company name should be showing as: " + companyName + " but is: " + myMyAccount.GetCompanyName(),
 					"Company name is correctly showing as: " + companyName);
@@ -113,11 +113,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I save the administrator Company Name as: (.*)")]
+		public void SaveCompanyNameToContext(string savedAs)
+		{
+			var companyName = new MyAccount().GetCompanyName();
+			if (companyName == null)
+			{
+				Report.Failure("Failed to get Company Name on My Account");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Info("Company Name is: " + companyName);
+			}
+			Report.Info("Adding Company Name to context");
+			Context.AddToContext(savedAs, companyName);
+		}
+
 		[StepDefinition(@"I navigate to the MyAccount page")]
 		public void GivenINavigateToTheMyAccountPage()
 		{
 			Report.Info("Navigating to the My Account page");
-			TopMenuBar thisTopMenuBar = new TopMenuBar();
+			var thisTopMenuBar = new TopMenuBar();
 			thisTopMenuBar.ClickMyAccount();
 			Report.IsTrue(new MyAccount().Wait_for_load(),
 				"The My Account page did not load",
@@ -152,11 +169,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var selMyAccount = new MyAccount();
 				Report.IsTrue(selMyAccount.SaveUserGrid("userGridNew"), "Failed to save users in the user Grid", "Successfully saved users in the User grid");
 				Delay.Seconds(2);
-				List<User> originalGrid = (List<User>)Context.GetFromContext("userGrid");
-				List<User> newGrid = (List<User>)Context.GetFromContext("userGridNew");
-				User savedUser = (User)Context.GetFromContext(savedAs);
+				var originalGrid = (List<User>)Context.GetFromContext("userGrid");
+				var newGrid = (List<User>)Context.GetFromContext("userGridNew");
+				var savedUser = (User)Context.GetFromContext(savedAs);
 
-				List<User> matching = originalGrid.Where(y => newGrid.Any(z => z.Username == y.Username)).ToList();
+				var matching = originalGrid.Where(y => newGrid.Any(z => z.Username == y.Username)).ToList();
 
 
 
@@ -198,7 +215,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				var myUserDetails = new UserDetails();
-				User thisUser = new User {
+				var thisUser = new User {
 					Username = myUserDetails.Name,
 					Title = myUserDetails.Title,
 					Role = myUserDetails.UserRole,
@@ -298,7 +315,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking that I see the heading: '" + headingExpected + "'");
 				var selMyAccount = new MyAccount();
-				var headingShowing = selMyAccount.HeaderShowing();
+				string headingShowing = selMyAccount.HeaderShowing();
 				Report.IsTrue(headingShowing.Trim() == headingExpected.Trim(),
 					"Heading was not as expected! Expected: " + headingExpected + ", but found " + headingShowing + "!",
 					"Heading was showing: " + headingShowing + ", as expected!");
@@ -319,7 +336,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking that I see the heading: '" + subheadingExpected + "'");
 				var selMyAccount = new MyAccount();
-				var subheadingsShowing = selMyAccount.Subheadings();
+				List<string> subheadingsShowing = selMyAccount.Subheadings();
 				Report.IsTrue(subheadingsShowing.Any(x => x.StartsWith(subheadingExpected.Trim())),
 					"Subheading was not as expected! Expected: " + subheadingExpected + ", but found " + string.Join(", ", subheadingsShowing) + "!",
 					"Heading was showing: " + subheadingExpected + ", as expected!");
@@ -338,7 +355,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I add a new user with the following information");
 			try
 			{
-				foreach (var thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					string userName = thisRow["User Name"];
 					string title = thisRow["Title"];
@@ -541,7 +558,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var selMyAccount = new MyAccount_SubscriptionInfo();
 
-				foreach (var thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					try
 					{
@@ -649,7 +666,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Company Information screen I should see (.*) (Division|User) Accounts")]
 		public void CompanyInformation_DivisionAccountsShowing(string number, string type)
 		{
-			var showing = new MyAccount_CompanyInfo().ReturnUserOrDivisionAccountsNumber(type);
+			string showing = new MyAccount_CompanyInfo().ReturnUserOrDivisionAccountsNumber(type);
 			Report.IsTrue(showing.Trim() == number, "Found: " + showing + " " + type + " accounts, when " + number + " were expected!", "Successfully found: " + number + " " + type + " accounts!");
 
 		}
@@ -657,8 +674,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Your Company User Accounts the user (.*) is associated with the administrator email address")]
 		public void UserIsAssociatedAdminEmail(string user)
 		{
-			List<User> listOfUsers = (List<User>)Context.GetFromContext("userGrid");
-			var userMatch = listOfUsers.FirstOrDefault(x => x.Username == user);
+			var listOfUsers = (List<User>)Context.GetFromContext("userGrid");
+			User userMatch = listOfUsers.FirstOrDefault(x => x.Username == user);
 			Report.IsFalse(userMatch == null,
 				"The user: " + user + " was not found in the My Account user grid",
 				"The user: " + user + " was found in the My Account user grid");
@@ -670,7 +687,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Success("The user: " + user + " was found in the My Account user grid");
 			Report.Screenshot();
-			var adminEmail = TestVariables.GetVariableSavedAs("AdministratorEmailAddress");
+			string adminEmail = new MyAccount().GetAdminEmail();
 
 			Report.IsTrue(userMatch.Email == adminEmail,
 				string.Format("The user: '{0}' was not associated with the email address: '{1}'",
@@ -683,7 +700,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void UserGridIsActiveOnPageNumber(string expectedPage)
 		{
 			var selMyAccount = new MyAccount();
-			var activePage = selMyAccount.UserAccountsActivePage();
+			string activePage = selMyAccount.UserAccountsActivePage();
 			Report.IsTrue(activePage == expectedPage,
 				"The My Account user grid is not on the expected page: " + expectedPage + ". It is on page: " + activePage,
 				"The My Account user grid is on the expected page: " + expectedPage);
@@ -710,7 +727,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Context.AddToContext("CurrentEmail", myEmail);
 				Report.Success("Email Address Created and Saved in Scenario Context");
-				foreach (var thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					string userName = thisRow["User Name"];
 					string title = thisRow["Title"];
@@ -782,7 +799,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void EnterArrowUserGridNavigationBox(string direction)
 		{
 			var selMyAccount = new MyAccount();
-			var pageNavigationValue = Context.GetFromContext("Page Navigation Value") == null
+			string pageNavigationValue = Context.GetFromContext("Page Navigation Value") == null
 				? selMyAccount.CurrentPageUserGridNavPageInput()
 				: Context.GetFromContext("Page Navigation Value").ToString();
 
@@ -791,10 +808,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selMyAccount.KeyToUserGridNavPageInput(direction);
 			Report.Info("Pressing the enter key");
 			selMyAccount.KeyToUserGridNavPageInput("enter");
-			var iteration = direction == "up" ? "increased" : "decreased";
+			string iteration = direction == "up" ? "increased" : "decreased";
 			GlobalParameters.StepCount++;
 			TestReport.StartStep(GlobalParameters.StepCount + " - I confirm the page number has " + iteration + " by 1");
-			var currentPage = Convert.ToInt32(selMyAccount.UserAccountsActivePage());
+			int currentPage = Convert.ToInt32(selMyAccount.UserAccountsActivePage());
 			int difference = direction == "up" ? 1 : -1;
 			Report.IsTrue(currentPage == Convert.ToInt32(pageNavigationValue) + difference,
 				string.Format("The active page did not {0} by 1 after entering the '{1}' arrow into the page navigation box at position '{2}'",
@@ -819,7 +836,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selMyLibrary = new MyAccount_MyLibrary();
 			var tabsExpected = new List<string>();
 			tabs.Rows.ForEach(x => tabsExpected.Add(x["Tab"]));
-			var tabsDisplayed = selMyLibrary.AllTabs();
+			List<string> tabsDisplayed = selMyLibrary.AllTabs();
 			Report.IsTrue(!tabsDisplayed.Except(tabsExpected).Any() && tabsDisplayed.Count == tabsExpected.Count,
 				"The displayed tabs did not match the list of expected tabs. Displayed was: " + string.Join(", ", tabsDisplayed),
 				"The displayed tabs matched the list of expected tabs: " + string.Join(", ", tabsDisplayed));
@@ -840,7 +857,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selMyLibrary = new MyAccount_MyLibrary();
 			var selMyPackagingTypes = new MyPackagingTypes();
-			var activeTab = selMyLibrary.ActiveTab();
+			string activeTab = selMyLibrary.ActiveTab();
 			Report.IsTrue(selMyPackagingTypes.Active = activeTab == expectedTab,
 				"The current active tab was not: " + expectedTab + "' as expected. The active tab was: " + activeTab,
 				"The current active tab was: '" + activeTab + "' as expected");
@@ -872,7 +889,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var myCompanyInfo = new MyAccount_CompanyInfo();
 
-			foreach (var thisRow in myTable.Rows)
+			foreach (TableRow thisRow in myTable.Rows)
 			{
 				string companyName = thisRow["Company Name"];
 				Report.Info("Company Name = '" + companyName + "'");
@@ -926,15 +943,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IUpdateThePasswordForTrevorTestUser(string savedAs)
 		{
 			// Get user credentials from TReVor based on saved as ID
-			var user = TestUsers.GetUserSavedAs(savedAs);
+			TestUser user = TestUsers.GetUserSavedAs(savedAs);
 			if (user == null)
 			{
 				Report.Failure("Unable to find TReVor test user saved as: " + savedAs);
 				return;
 			}
 
-			var oldPassword = user.Password;
-			var newPassword = "";
+			string oldPassword = user.Password;
+			string newPassword = "";
 			// If the current password ends in a character, append with a 1 for the new password
 			if (!char.IsDigit(oldPassword.Last()))
 			{
@@ -942,8 +959,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				var passwordChr = oldPassword.ToCharArray();
-				var result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
+				char[] passwordChr = oldPassword.ToCharArray();
+				string result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
 				newPassword = oldPassword.TrimEnd(result) + (Convert.ToInt32(result) + 1);
 			}
 			var selModal = new ModalDialog();
@@ -976,8 +993,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("The test attempted to assign a previously used password! Iterating the password suffix...");
 					Report.Info($"Current attempted password is: {newPassword}");
-					var passwordChr = newPassword.ToCharArray();
-					var result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
+					char[] passwordChr = newPassword.ToCharArray();
+					string result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
 					newPassword = newPassword.TrimEnd(result) + (Convert.ToInt32(result) + 1);
 					Report.Info($"New attempted password is: {newPassword}");
 					if (selModal.Click_Close())
@@ -1013,7 +1030,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the ""(.*)"" WercSmart Solutions article, I click the link for 'To view a video... click here'")]
 		public void InWercSmartSolutionArticleIClickViewVideoHere(string articleHeading)
 		{
-			var displayedArticle = new WercSmartSolutionsArticle().ArticleHeading();
+			string displayedArticle = new WercSmartSolutionsArticle().ArticleHeading();
 			if (Report.IsTrue(displayedArticle == articleHeading, "The correct article was not displayed! Expected: " + articleHeading + " but got: " + displayedArticle, "The correct article heading was dipslayed: " + articleHeading))
 			{
 				Report.IsTrue(new SubscriptionEnrollmentManagement().ClickViewVideo(), "Failed to click 'View Video here' on the Subscription Enrollment and Management article!", "Successfully clicked 'View Video here' on the Subscription Enrollment and Management article");
@@ -1024,8 +1041,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmANewTabOpensToYouTubeWithVideoTitled(string videoTitle)
 		{
 			var selYoutube = new YouTube();
-			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (var handle in allHandles)
+			System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in allHandles)
 			{
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				if (selYoutube.Wait_for_load(10))
@@ -1036,7 +1053,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					new GlobalSteps().SaveTheCurrentWindowAs("YouTube");
 					if (selYoutube.VideoDisplayed())
 					{
-						var actualTitle = selYoutube.VideoTitle();
+						string actualTitle = selYoutube.VideoTitle();
 						Report.IsTrue(actualTitle == videoTitle, "The video title did not match the expected text! Expected: " + videoTitle + " but found: " + actualTitle, "A video was displayed with the title: " + videoTitle + " as expected");
 						return;
 					}

@@ -38,9 +38,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		[StepDefinition(@"I login as the administrator")]
-		[StepDefinition(@"I login as the administrator")]
-		[When(@"I login as the administrator")]
-		[Then(@"I login as the administrator")]
 		public void GivenILoginAsTheAdministrator()
 		{
 			this.LoginToAccount("ProductAccount");
@@ -255,6 +252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				throw new Exception("Landing page did not load!");
 			}
+
 			Report.Info("Clicking 'Log In' on the Landing Page");
 			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
 			var selHomepage = new Homepage();
@@ -263,6 +261,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				return;
 			}
+
 			Report.Info("Entering Email: '" + email + "'");
 			selLogin.EmailField = email;
 			Report.Info("Entering Password: '" + password + "'");
@@ -698,7 +697,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					Mailosaur.Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
 
-
 					if (shouldOrNot == "should")
 					{
 						Report.IsTrue(matchingEmail != null, "A matching email has not been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has been found.");
@@ -755,10 +753,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
+				Report.Info("Expected email body text: " + bodyText);
 				Report.Info("Body of the Email was: " + emailBody);
 				string actualTrimmed = bodyDecode.Replace(" ", "");
 				string expectedTrimmed = bodyText.Replace(" ", "");
-				Report.IsTrue(actualTrimmed == expectedTrimmed, "Body text did not match correctly! Expected: " + bodyText, "Body text matched correctly!");
+				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
 			}
 			catch (Exception ex)
 			{
@@ -1060,10 +1059,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (string savedAs in usersSavedAs)
 			{
-				if (savedAs != "CanadaHasAllData")
-				{
-					continue;
-				}
 				TestUser user = TestUsers.GetUserSavedAs(savedAs);
 				if (!user.Username.Contains("@"))
 				{

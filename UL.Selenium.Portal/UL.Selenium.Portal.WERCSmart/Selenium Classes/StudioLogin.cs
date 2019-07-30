@@ -14,12 +14,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override IWebElement containerElement { get; set; }
 
 		public string Username {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtUsername']"), 2).Text; }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtUsername']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtUsername']"), 2).Text;
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtUsername']"), 2).EnterText(value);
 		}
 
 		public string Password {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtPassword']"), 2).Text; }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtPassword']"), 2).Text;
 			set
 			{
 				IWebElement pw = this.containerElement.FindElement(By.XPath(".//input[@id='txtPassword']"), 2);
@@ -30,11 +30,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string Language {
-			get
-			{
-				return this.containerElement.FindElement(By.XPath(".//select[@id='ddlGUILanguage']"), 2)
+			get => this.containerElement.FindElement(By.XPath(".//select[@id='ddlGUILanguage']"), 2)
 					.SelectedOption();
-			}
 			set
 			{
 				IWebElement lang = this.containerElement.FindElement(By.XPath(".//select[@id='ddlGUILanguage']"), 2);
@@ -44,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSignIn()
 		{
-			var currentWindow = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentWindow = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("BaseWindow", currentWindow);
 			return this.containerElement.FindElement(By.XPath(".//input[@id='cmdLogin']"), 2).TryClick();
 		}
