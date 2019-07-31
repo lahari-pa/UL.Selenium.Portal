@@ -30,6 +30,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the Show Archived checkbox");
 		}
 
+		[StepDefinition(@"I click Filter")]
+		public void ClickFilter()
+		{
+			Report.IsTrue(new MessageCenter().ClickFilter(),
+				"Failed to click Filter",
+				"Successfully clicked Filter");
+		}
+
 		[StepDefinition(@"I confirm an excel file is downloaded then close the Report Download popup. I save the file as (.*)")]
 		public void ExcelFileDownloadedCloseReportDownload(string savedAs)
 		{

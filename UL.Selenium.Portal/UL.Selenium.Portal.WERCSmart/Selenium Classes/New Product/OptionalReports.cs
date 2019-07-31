@@ -1,0 +1,75 @@
+﻿using System;
+using System.Linq;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Reporting.Core;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using NTTQA.Selenium.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
+{
+	class OptionalReports : NewProduct
+	{
+		public bool SelectInputForSection(string section, string selection)
+		{
+			IWebElement sectionHeader = this.containerElement.FindElement(By.XPath(@"//div[@class='doc-name']//span[contains(text(), """ + section + @""")]/../.."), 2);
+			if (sectionHeader == null)
+			{
+				Report.Info("Could not find section title '" + section + "' on page.");
+				return false;
+			}
+
+			IWebElement input = sectionHeader.FindElement(By.XPath(@"//input[@class='select2-search__field']"), 2);
+			if (input == null)
+			{
+				Report.Info("Could not find input field for section '" + section + "'.");
+				return false;
+			}
+
+			bool clickInput = input.TryClick();
+
+			if (!clickInput)
+			{
+				Report.Info("Failed to click input for section '" + section + "'.");
+				return false;
+			}
+
+			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[@class='select2-container select2-container--default select2-container--open']//li[contains(text(), """ + selection + @""")]"), 2);
+
+			if (select == null)
+			{
+				Report.Info("Could not find selection '" + selection + "'.");
+				return false;
+			}
+
+			return select.TryClick();
+		}
+
+		public bool CheckTotalForSection(string section, string value)
+		{
+			IWebElement total = this.containerElement.FindElement(By.XPath(@"//div[@class='doc-name']//span[contains(text(), """ + section + @""")]/../../following-sibling::div//span[contains(text(), """ + value + @""")]"), 2);
+			if (total == null)
+			{
+				Report.Info("Could not find Total text for section '" + section + "'.");
+				return false;
+			}
+
+			if (total.Text == value)
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Failed to find text '" + value + "' in section '" + section + "'. Found text: '" + total.Text + "'.");
+				return false;
+			}
+		}
+	}
+}
