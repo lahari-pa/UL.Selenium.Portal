@@ -177,6 +177,7 @@
     <Compile Include="Selenium Classes\MyAccount.cs" />
     <Compile Include="Selenium Classes\MyIngredientsModal.cs" />
     <Compile Include="Selenium Classes\NavigationBar.cs" />
+    <Compile Include="Selenium Classes\New Product\OptionalReports.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ElectronicEquipment.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\Ingredients.cs" />
     <Compile Include="Selenium Classes\New Product\NewProduct.cs" />
@@ -479,13 +480,16 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem ##### TReVor Post Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.766\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
+    <PostBuildEvent>
+      rem ##### TReVor Post Build Events #####
+      "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.766\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>rem ##### TReVor Pre Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.766\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
-</PreBuildEvent>
+    <PreBuildEvent>
+      rem ##### TReVor Pre Build Events #####
+      "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.1.766\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
+    </PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -7,6 +7,7 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -922,6 +923,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new PaymentMethods().ClickMakeDefault(user), "Failed to click the make default",
 				"Successfully clicked make default");
 			GeneralUtilities.Wait_for_load_finish();
+		}
+
+		[StepDefinition(@"In the Purchase Summary screen I click Remove for product (.*)")]
+		public void InThePurchaseSummaryScreenIClickRemove(string product)
+		{
+			var newProduct = new NewProduct();
+
+			if (product.ToLower().Contains("saved as"))
+			{
+				object savedAsItem = Context.GetFromContext(product.Replace("saved as", "").Trim());
+				if (savedAsItem.GetType() == typeof(string))
+				{
+					product = savedAsItem.ToString();
+				}
+				else
+				{
+					product = ((ProductInformation)savedAsItem).Id;
+				}
+			}
+
+			Report.IsTrue(newProduct.PurchaseSummaryClickRemove(product), "Failed to click Remove for product '" + product + "'.",
+				"Successfully clicked Remove for product '" + product + "'.");
 		}
 	}
 }

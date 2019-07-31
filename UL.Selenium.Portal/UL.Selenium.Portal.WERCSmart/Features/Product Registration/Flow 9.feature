@@ -100,6 +100,7 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I navigate to the home page
 	Then I delete the product: TestCase58078
 
+@TReVorId:22362
 Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -228,6 +229,7 @@ Scenario: [58091] Latex Gloves - RU000151
 	Given I navigate to the home page
 	Then I delete the product: TestCase58091
 
+@TReVorId:22361
 Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -260,6 +262,7 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I navigate to the home page
 	Then I delete the product: TestCase58075
 
+@TReVorId:22363
 Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

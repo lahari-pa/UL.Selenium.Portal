@@ -1274,5 +1274,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			throw new Exception("Failed to find window with title: " + title);
 		}
+
+		[StepDefinition(@"I confirm that I see the following text in the modal window popup: (.*)")]
+		public void IConfirmThatISeeTheFollowingTextInTheModalWindow(string text)
+		{
+			var modal = new ModalDialog();
+
+			Report.IsTrue(modal.GetText() == text, "Failed to find text '" + text + "' in modal window. Found text '" + modal.GetText() + "' instead.",
+				"Successfully found text '" + text + "' in modal window.");
+		}
 	}
 }

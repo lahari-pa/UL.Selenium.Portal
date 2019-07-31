@@ -483,6 +483,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
 
+@TReVorId:22366
 Scenario: [87832] View Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC87832
@@ -519,6 +520,7 @@ Scenario: [87832] View Shows Case UPC Data
 		| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
 		| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
 
+@TReVorId:22365
 Scenario: [87825] Summary Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC87825
