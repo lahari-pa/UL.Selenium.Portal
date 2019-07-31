@@ -250,7 +250,6 @@
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_TCLP.cs" />
     <Compile Include="Steps\Steps_Brands.cs" />
-    <Compile Include="Steps\Steps_Cart.cs" />
     <Compile Include="Steps\Steps_ChooseGoodGuide.cs" />
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
     <Compile Include="Steps\Steps_CreateProducts.cs" />

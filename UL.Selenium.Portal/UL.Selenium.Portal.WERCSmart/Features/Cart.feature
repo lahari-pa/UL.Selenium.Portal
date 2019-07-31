@@ -38,7 +38,7 @@ Scenario: [63323] Remove single product from cart
 	Given in the Additional Documents to Provide page I click Continue
 	Given I click the Australia GHS SDS input section in Optional Reports and Documents Available for Purchase and select English (U.S)
 	Given I click the Australia GHS SDS input section in Optional Reports and Documents Available for Purchase and select English (Australian)
-	Given The total for section Australia GHS SDS should equal $400.00
+	Given The total for section Australia GHS SDS in Optional Reports and Documents Available for Purchase should equal $400.00
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
@@ -61,7 +61,7 @@ Scenario: [63323] Remove single product from cart
 		| Delete    |
 		| View UPCs |
 	Given I click the Shopping Cart icon in the Navigation Pane
-	Then I confirm that I see the following text in the model window popup: There are no items in the shopping cart.
+	Then I confirm that I see the following text in the modal window popup: There are no items in the shopping cart.
 	Then If a modal dialog opens I close it
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63323
 

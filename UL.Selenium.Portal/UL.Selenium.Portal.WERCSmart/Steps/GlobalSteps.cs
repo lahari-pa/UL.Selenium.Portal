@@ -1275,7 +1275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			throw new Exception("Failed to find window with title: " + title);
 		}
 
-		[StepDefinition(@"I confirm that I see the following text in the model window popup: (.*)")]
+		[StepDefinition(@"I confirm that I see the following text in the modal window popup: (.*)")]
 		public void IConfirmThatISeeTheFollowingTextInTheModalWindow(string text)
 		{
 			var modal = new ModalDialog();
