@@ -21,13 +21,14 @@ Feature: Subscription
 
 @TReVorId:19117
 Scenario: [63297] Add subscription to a new supplier through data entry
+Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC63297User with the following parameters:
 | Field                | Value          |
 | Email                | User_<random>  |
 | Country              | UNITED STATES  |
-| FirstName            | Richard        |
-| LastName             | Smith          |
-| Password             | Pa4*ytuufnn    |
+| FirstName            | WERCS          |
+| LastName             | Test_Automatio |
+| Password             | Welcome1!      |
 | Address1             | Address 1      |
 | Address2             | Address 2      |
 | City                 | City Name      |
@@ -37,16 +38,16 @@ Given If not already created, I create a user: TC63297User with the following pa
 | CompanyPhone         | 123-456-7889   |
 | EmergencyPhoneNumber | 123-456-7789   |
 | SupplierType         | Manufacturer   |
-| PhoneQuestion         | PhoneQuestion   |
-| PhoneHint             | PhoneHint       |
-| MentorQuestion          | MentorQuestion    |
-| MentorHint              | MentorHint        |
+| PhoneQuestion        | PhoneQuestion  |
+| PhoneHint            | PhoneHint      |
+| MentorQuestion       | MentorQuestion |
+| MentorHint           | MentorHint     |
 | FriendQuestion       | FriendQuestion |
 | FriendHint           | FriendHint     |
-| AnimalQuestion          | AnimalQuestion    |
-| AnimalHint              | AnimalHint        |
-| CollegeQuestion       | CollegeQuestion |
-| CollegeHint           | CollegeHint     |
+| AnimalQuestion       | AnimalQuestion |
+| AnimalHint           | AnimalHint     |
+| CollegeQuestion      | CollegeQuestion|
+| CollegeHint          | CollegeHint    |
 | Pin                  | 1234           |
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk

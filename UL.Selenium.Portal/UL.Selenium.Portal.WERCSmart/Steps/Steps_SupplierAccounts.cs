@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NTTQA.Selenium.Cache;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
+using NTTQA.Selenium.TReVor;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -17,16 +19,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	class StepsSupplierAccounts
 	{
 
-		[StepDefinition(@"I create supplier account with the following parameters and save as: (.*)")]
-		public void GivenIfNotAlreadyCreatedICreateAUserXWithTheFollowingParameters(string savedAs, Table parameters)
+		[StepDefinition(@"I create a new supplier products account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountWithFollowingParameters(string savedAs)
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
-			WERCSmartUser account = parameters.CreateInstance<WERCSmartUser>();
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_Automation_ProductsAccount", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
 			account.Email = EmailFunctions.CreateEmail(account.Email);
 			account.Identifier = savedAs;
 			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
 			Report.Success("Account details saved!");
-
 			var mySignUp = new StepsSignup();
 			var myLogin = new StepsLogin();
 			var myLanding = new StepsLandingPage();
@@ -62,6 +67,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
 			myHome.ThenTheWercSmartHomepageShouldLoad();
 			myHome.ThenIClickOnUserItem("My Account");
+
+			//Subscription 
 			myAccount.ThenIClickOnNewSubscription();
 			var subEnrollTable = new Table("Articles", "Enhanced Articles",
 				"Formulated Products", "Feature Plan", "Support Services Plan");
@@ -77,12 +84,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
 			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("1", "0", "0");
+
+			//My Packaging Type
+			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
 			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
 			newProductSteps.GivenIShouldSeeXPage("Packaging Type");
 			newProductSteps.SetTheSectionOptionTo("Package Type Name", "myPkg");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
+			myPkgType.SavePackagingTypeDetails("MyPkg1");
 			myPkgType.ClickAddRowBillOfMaterials();
 			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
 			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
@@ -97,11 +110,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
+
+			//My Brands
 			myAccount.ClickTabMyLibrary("My Brands");
 			myAccount.ClickAddNewMyLibrary("My Brands");
 			myBrand.EnterBrandNameExpandedRow("TestBrand");
 			myBrand.ClickSaveMyBrandsGrid();
 			myBrand.ActiveValueIsYesForLastBrand("Yes");
+
+			//Supplier/Vendor id 
 			myHome.ClickItemInNavigationPanel("Retail Partners");
 			myRetailPartner.SelectRetailer("Wal-Mart/SAM'S CLUB");
 			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
@@ -112,10 +130,1328 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var brandTable = new Table("Supplier ID", "Company or Brand Name");
 			brandTable.AddRow("123456", "TestBrand");
 			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable);
-			myProductsetup.CreateProductAndTakeToSubmitted("product1", "Chalk");
+
+			//create a product for Walmart data tier 4.2 
+			myProductsetup.CreateProductConditionerAndTakeToSubmitted("product1", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Wal-Mart/SAM'S CLUB");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.SetDataConsentTier("Tier 4.2", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			//Save account and update TReVor data
 			Report.Info(savedAs + " Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Api.UpdateTestUsername(savedAs, account.Email);
+				Api.UpdateTestUserPassword(savedAs, account.Password);
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+
 		}
 
 
+		[StepDefinition(@"I create a new supplier packaging only account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountPkgOnlyWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Upgrade", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_Packaging_Only", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
+			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
+			newProductSteps.GivenIShouldSeeXPage("Packaging Type");
+			newProductSteps.SetTheSectionOptionTo("Package Type Name", "myPkg");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
+			myPkgType.SavePackagingTypeDetails("MyPkg1");
+			myPkgType.ClickAddRowBillOfMaterials();
+			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container or any packaging", "No");
+			newProductSteps.SetTheSectionOptionTo("Do you have a CONEG Certificate", "No");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container contain", "None of the above");
+			newProductSteps.SetTheSectionOptionTo("Packaging Component Recyclable", "21");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
+			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
+			Report.Info(savedAs + " Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Api.UpdateTestUsername(savedAs, account.Email);
+				Api.UpdateTestUserPassword(savedAs, account.Password);
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier lockout account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountLockOutWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Lockout", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_AccountLockTest", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			Report.Info(savedAs + " Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Api.UpdateTestUsername(savedAs, account.Email);
+				Api.UpdateTestUserPassword(savedAs, account.Password);
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier Canada address only account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountCanadaAddressOnlyWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "CANADA", "WERCS", "Test_Automation_Upgrade", "Welcome1!", "1425 Kingsway", "Address2", "Sudbury", "ON", "P3A 4R7", "QA_Packaging_Only", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier Stewardship only account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountStewardshipOnlyWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Full_Stewardship_Only", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.StewardshipInformation("BC-1-1", "", "", "British Columbia");
+			myAccount.StewardshipInformation("SA-1-1", "", "", "Saskatchewan");
+			myAccount.StewardshipInformation("MA-1-1", "", "", "Manitoba");
+			myAccount.StewardshipInformation("ON-1-1", "", "", "Ontario");
+			myAccount.StewardshipInformation("QU-1-1", "", "", "Quebec");
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+		[StepDefinition(@"I create a new supplier Canada has address packaging account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountCanadaHasAddressPackagingWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_CanHasAddPkg", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+
+			//Subscription 
+			myAccount.ThenIClickOnNewSubscription();
+			var subEnrollTable = new Table("Articles", "Enhanced Articles",
+				"Formulated Products", "Feature Plan", "Support Services Plan");
+			subEnrollTable.AddRow("Up to 400 Product(s)", "Up to 400 Product(s)", "Up to 400 Product(s)", "Standard", "Bronze");
+			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
+			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
+			myPay.ThenISelectPaymentMethodX("Credit Card");
+			var myCreditCardTable = new Table("Card Type", "Card Number",
+				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
+			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
+			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+			myPay.ThenIClickContinue();
+			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+			myPay.ThenInTheThankYouScreenIClickHome();
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("400", "400", "400");
+
+			//My Packaging Type
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
+			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
+			newProductSteps.GivenIShouldSeeXPage("Packaging Type");
+			newProductSteps.SetTheSectionOptionTo("Package Type Name", "myPkg");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
+			myPkgType.SavePackagingTypeDetails("MyPkg1");
+			myPkgType.ClickAddRowBillOfMaterials();
+			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container or any packaging", "No");
+			newProductSteps.SetTheSectionOptionTo("Do you have a CONEG Certificate", "No");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container contain", "None of the above");
+			newProductSteps.SetTheSectionOptionTo("Packaging Component Recyclable", "21");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
+			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
+
+			//Canada supplier address
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.AddCanadaAddress("100 King St W", "Ontario", "Toronto", "ON M5X 1A9", "123-123-1234","CANADA","1");
+
+			//data tiers
+			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Canadian Tire");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier Canada has pack and partial stewardship account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountCanadaHasPackAndPartialStwdshipWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_Account", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+
+			//Subscription 
+			myAccount.ThenIClickOnNewSubscription();
+			var subEnrollTable = new Table("Articles", "Enhanced Articles",
+				"Formulated Products", "Feature Plan", "Support Services Plan");
+			subEnrollTable.AddRow("Up to 400 Product(s)", "Up to 400 Product(s)", "Up to 400 Product(s)", "Standard", "Bronze");
+			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
+			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
+			myPay.ThenISelectPaymentMethodX("Credit Card");
+			var myCreditCardTable = new Table("Card Type", "Card Number",
+				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
+			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
+			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+			myPay.ThenIClickContinue();
+			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+			myPay.ThenInTheThankYouScreenIClickHome();
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("400", "400", "400");
+
+			//My Packaging Type
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
+			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
+			newProductSteps.GivenIShouldSeeXPage("Packaging Type");
+			newProductSteps.SetTheSectionOptionTo("Package Type Name", "myPkg");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
+			myPkgType.SavePackagingTypeDetails("MyPkg1");
+			myPkgType.ClickAddRowBillOfMaterials();
+			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container or any packaging", "No");
+			newProductSteps.SetTheSectionOptionTo("Do you have a CONEG Certificate", "No");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container contain", "None of the above");
+			newProductSteps.SetTheSectionOptionTo("Packaging Component Recyclable", "21");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
+			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
+
+			//Canada supplier address
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.AddCanadaAddress("100 King St W", "Ontario", "Toronto", "ON M5X 1A9", "123-123-1234", "CANADA", "1");
+
+			//Stewardship information
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.StewardshipInformation("BC-1-1", "", "", "British Columbia");
+			myAccount.StewardshipInformation("MA-1-1", "", "", "Manitoba");
+
+			//data tiers
+			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Canadian Tire");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier no pkg stewardship partial and update TReVor information for: (.*)")]
+		public void CreateNewAccountNoPkgPartialStwdshipWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_Account", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+
+
+			//Stewardship information
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
+
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier data consent and update TReVor information for: (.*)")]
+		public void CreateNewAccountDataConsentWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_DataConsent", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+
+
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier no Canada data and update TReVor information for: (.*)")]
+		public void CreateNewAccountNoCanadaDataWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_NoCanadaData", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+
+
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier no canada yes packaging full stewardship with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountNoCanYesPkgStwdFullWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_NoCanYesPkgStwdFull", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+
+			//My Packaging Type
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
+			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
+			newProductSteps.GivenIShouldSeeXPage("Packaging Type");
+			newProductSteps.SetTheSectionOptionTo("Package Type Name", "myPkg");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
+			myPkgType.SavePackagingTypeDetails("MyPkg1");
+			myPkgType.ClickAddRowBillOfMaterials();
+			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container or any packaging", "No");
+			newProductSteps.SetTheSectionOptionTo("Do you have a CONEG Certificate", "No");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container contain", "None of the above");
+			newProductSteps.SetTheSectionOptionTo("Packaging Component Recyclable", "21");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
+			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
+
+			//Stewardship data
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.StewardshipInformation("BC-1-1", "", "", "British Columbia");
+			myAccount.StewardshipInformation("SA-1-1", "", "", "Saskatchewan");
+			myAccount.StewardshipInformation("MA-1-1", "", "", "Manitoba");
+			myAccount.StewardshipInformation("ON-1-1", "", "", "Ontario");
+			myAccount.StewardshipInformation("QU-1-1", "", "", "Quebec");
+
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier Partial Stewardship only account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountpartialStewardshipOnlyWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Partial_Stewardship_Only", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.StewardshipInformation("BC-1-1", "", "", "British Columbia");
+			myAccount.StewardshipInformation("SA-1-1", "", "", "Saskatchewan");
+			myAccount.StewardshipInformation("QU-1-1", "", "", "Quebec");
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier premium subscription with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountPremiumSubsWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_PremiumSubscription", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+
+			//Subscription 
+			myAccount.ThenIClickOnNewSubscription();
+			var subEnrollTable = new Table("Articles", "Enhanced Articles",
+				"Formulated Products", "Feature Plan", "Support Services Plan");
+			subEnrollTable.AddRow("Up to 100 Product(s)", "Up to 100 Product(s)", "Up to 100 Product(s)", "Premium", "Silver");
+			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
+			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
+			myPay.ThenISelectPaymentMethodX("Credit Card");
+			var myCreditCardTable = new Table("Card Type", "Card Number",
+				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
+			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
+			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+			myPay.ThenIClickContinue();
+			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+			myPay.ThenInTheThankYouScreenIClickHome();
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("100", "100", "100");
+
+			//Save account and update TReVor data
+			Report.Info(savedAs + " Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Api.UpdateTestUsername(savedAs, account.Email);
+				Api.UpdateTestUserPassword(savedAs, account.Password);
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+
+		}
+
+
+		[StepDefinition(@"I create a new supplier Partial Stewardship and packaging account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountpartialStewardshipAndPkgWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Partial_Stewardship_Pkg", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+
+			//My Packaging Type
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
+			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
+			newProductSteps.GivenIShouldSeeXPage("Packaging Type");
+			newProductSteps.SetTheSectionOptionTo("Package Type Name", "myPkg");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
+			myPkgType.SavePackagingTypeDetails("MyPkg1");
+			myPkgType.ClickAddRowBillOfMaterials();
+			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container or any packaging", "No");
+			newProductSteps.SetTheSectionOptionTo("Do you have a CONEG Certificate", "No");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container contain", "None of the above");
+			newProductSteps.SetTheSectionOptionTo("Packaging Component Recyclable", "21");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
+			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
+
+			//Stewardship information
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.StewardshipInformation("BC-1-1", "", "", "British Columbia");
+			myAccount.StewardshipInformation("MA-1-1", "", "", "Manitoba");
+
+			//update TReVor info
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier no PLP with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountNoPLPWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_NoPLP_Products", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+
+			//update TReVor info
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
+
+
+		[StepDefinition(@"I create a new supplier Canada has all data with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewAccountCanadaHasAddressPackageStwdshipWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_CanadaAllData", "123-456-7889",
+				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Identifier = savedAs;
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			Report.Success("Account details saved!");
+			var mySignUp = new StepsSignup();
+			var myLogin = new StepsLogin();
+			var myLanding = new StepsLandingPage();
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var myGlobalpage = new GlobalSteps();
+
+			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			myLogin.GivenIClickOnTheNewToWercsmartLink();
+			mySignUp.ThenTheSignupPageShouldAppear();
+			mySignUp.GivenIEnterSignupEmailUser(savedAs);
+			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+			mySignUp.GivenIClickOnSubmit();
+			mySignUp.ThenTheSignupThankYouPageShouldAppear();
+			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			mySignUp.EnterPinForUser(savedAs);
+			mySignUp.WhenInTheNewUserFormIClickOnContinue();
+			myLanding.ClickTheLoginButton();
+			myLogin.GivenILoginAsUser(savedAs);
+			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
+			myHome.ThenTheWercSmartHomepageShouldLoad();
+			myHome.ThenIClickOnUserItem("My Account");
+
+			//Subscription 
+			myAccount.ThenIClickOnNewSubscription();
+			var subEnrollTable = new Table("Articles", "Enhanced Articles",
+				"Formulated Products", "Feature Plan", "Support Services Plan");
+			subEnrollTable.AddRow("Up to 400 Product(s)", "Up to 400 Product(s)", "Up to 400 Product(s)", "Standard", "Bronze");
+			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
+			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
+			myPay.ThenISelectPaymentMethodX("Credit Card");
+			var myCreditCardTable = new Table("Card Type", "Card Number",
+				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
+			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
+			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+			myPay.ThenIClickContinue();
+			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+			myPay.ThenInTheThankYouScreenIClickHome();
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("400", "400", "400");
+
+			//My Packaging Type
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
+			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
+			newProductSteps.GivenIShouldSeeXPage("Packaging Type");
+			newProductSteps.SetTheSectionOptionTo("Package Type Name", "myPkg");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
+			myPkgType.SavePackagingTypeDetails("MyPkg1");
+			myPkgType.ClickAddRowBillOfMaterials();
+			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container or any packaging", "No");
+			newProductSteps.SetTheSectionOptionTo("Do you have a CONEG Certificate", "No");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container contain", "None of the above");
+			newProductSteps.SetTheSectionOptionTo("Packaging Component Recyclable", "21");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
+			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
+
+			//Canada supplier address
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.AddCanadaAddress("100 King St W", "Ontario", "Toronto", "ON M5X 1A9", "123-123-1234", "CANADA", "1");
+
+			//Stewardship information
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.StewardshipInformation("BC-1-1", "", "", "British Columbia");
+			myAccount.StewardshipInformation("SA-1-1", "", "", "Saskatchewan");
+			myAccount.StewardshipInformation("MA-1-1", "", "", "Manitoba");
+			myAccount.StewardshipInformation("ON-1-1", "", "", "Ontario");
+			myAccount.StewardshipInformation("QU-1-1", "", "", "Quebec");
+
+			//data tiers
+			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Canadian Tire");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			Report.Info(savedAs + " Account Created");
+			var user = TestUsers.GetUserSavedAs(savedAs);
+			if (user != null)
+			{
+				Report.Info("User found!, Updating the password in TReVor");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+			}
+			else
+			{
+				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+			}
+		}
 	}
 }
