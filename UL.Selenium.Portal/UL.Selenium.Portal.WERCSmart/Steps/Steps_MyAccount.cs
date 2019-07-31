@@ -1090,5 +1090,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selMyAccount.Get_GracePeriod() == gracePeriod, "grace period is not as expected",
 				"grace period is as expected");
 		}
+
+
+		[StepDefinition(@"In Stewardship table I select the following options: (.*)  and (.*) for the (.*) field")]
+		public void StewardshipInformation(string field,string options1, string options2, string option3)
+		{
+			GeneralUtilities.ScrollToBottomOfPage();
+			var mystwdinfo = new MyAccount_CompanyInfo();
+			Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.IsTrue(mystwdinfo.EnterStewardshipInfo(field, options1, options2, option3), "failed to enter stewardship information", "successfully entered steward information");
+			Report.IsTrue(mystwdinfo.StewardshipSave_click(), "failed to click save", "successfully clicked save");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+		[StepDefinition(@"I add the following in Canada Supplier Address")]
+		public void AddCanadaAddress(string options1, string options2, string option3, string options4, string options5, string option6, string option7)
+		{
+			GeneralUtilities.ScrollToBottomOfPage();
+			var canadd = new MyAccount_CompanyInfo();
+			Report.IsTrue(canadd.Canada_Supplier_Edit_click(), "failed to click edit", "successfully clicked edit");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.IsTrue(canadd.Add_Canada_Supplier_Address(options1, options2, option3, options4,options5,option6,option7), "failed to enter stewardship information", "successfully entered steward information");
+			Report.IsTrue(canadd.Canada_Supplier_Save_click(), "failed to click save", "successfully clicked save");
+			GeneralUtilities.Wait_for_load_finish();
+		}
 	}
 }
