@@ -8,7 +8,6 @@
 @run_RetailerPartners
 Feature: Retailer Partners
 
-@tfs_design
 Scenario: [56881] Retailer Partners - Main Page layout (existing supplier)
 	# Note: We will have a separate test case for new suppliers views of this page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
