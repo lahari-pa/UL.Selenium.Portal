@@ -7,6 +7,7 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -753,6 +754,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
 					Delay.Seconds(20 * Delay.SpeedFactor);
+					GeneralUtilities.Wait_for_load_finish();
+
 				}
 				else
 				{
@@ -791,6 +794,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var myPay = new PaymentMethods_Thank_You();
 				Delay.Seconds(5 * Delay.SpeedFactor);
+				GeneralUtilities.Wait_for_load_finish();
 				Report.IsTrue(myPay.ThankYou_Header_Correct(), "Thank You Header is Incorrect",
 					"Thank You Header is Correct");
 			}
@@ -824,24 +828,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Thank You screen I click Home")]
 		public void ThenInTheThankYouScreenIClickHome()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Thank You screen I click Home");
-			try
-			{
-				var myPay = new PaymentMethods_Thank_You();
-				Report.IsTrue(myPay.Home_click(), "Failed to Click Home Button",
-					"Home Button Clicked");
+			var myPay = new PaymentMethods_Thank_You();
+			Report.IsTrue(myPay.Home_click(), "Failed to Click Home Button",
+				"Home Button Clicked");
 
-				Delay.Seconds(5 * Delay.SpeedFactor);
+			Delay.Seconds(5 * Delay.SpeedFactor);
 
-				var myHome = new StepsHomepage();
+			var myHome = new StepsHomepage();
 
-				myHome.ThenTheWercSmartHomepageShouldLoad();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			myHome.ThenTheWercSmartHomepageShouldLoad();
 		}
 
 
@@ -928,6 +923,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new PaymentMethods().ClickMakeDefault(user), "Failed to click the make default",
 				"Successfully clicked make default");
 			GeneralUtilities.Wait_for_load_finish();
+		}
+
+		[StepDefinition(@"In the Purchase Summary screen I click Remove for product (.*)")]
+		public void InThePurchaseSummaryScreenIClickRemove(string product)
+		{
+			var newProduct = new NewProduct();
+
+			if (product.ToLower().Contains("saved as"))
+			{
+				object savedAsItem = Context.GetFromContext(product.Replace("saved as", "").Trim());
+				if (savedAsItem.GetType() == typeof(string))
+				{
+					product = savedAsItem.ToString();
+				}
+				else
+				{
+					product = ((ProductInformation)savedAsItem).Id;
+				}
+			}
+
+			Report.IsTrue(newProduct.PurchaseSummaryClickRemove(product), "Failed to click Remove for product '" + product + "'.",
+				"Successfully clicked Remove for product '" + product + "'.");
 		}
 	}
 }

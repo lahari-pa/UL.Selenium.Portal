@@ -181,6 +181,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Header was showing: '" + header + "', as expected!");
 		}
 
+		[StepDefinition(@"I click the (.*) input section in Optional Reports and Documents Available for Purchase and select (.*)")]
+		public void IClickTheInputSectionAndSelect(string section, string selection)
+		{
+			var reports = new OptionalReports();
+
+			Report.IsTrue(reports.SelectInputForSection(section, selection), "Failed to select input '" + selection + "' for section '" + section + "'.",
+				"Successfully selected input '" + selection + "' for section '" + section + "'.");
+		}
+
+		[StepDefinition(@"The total for section (.*) in Optional Reports and Documents Available for Purchase should equal (.*)")]
+		public void TotalForSectionShouldEqual(string section, string value)
+		{
+			var reports = new OptionalReports();
+
+			Report.IsTrue(reports.CheckTotalForSection(section, value), "Failed to find the correct value '" + value + "' for section '" + section + "'.",
+				"Successfully found correct value '" + value + "' for section '" + section + "'.");
+		}
+
 		#endregion
 
 		#region Unsorted steps
