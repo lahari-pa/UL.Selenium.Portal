@@ -78,7 +78,7 @@ Scenario: [68423] Formulated vs Articles Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Subscription Renewal (Formulated, Enhanced, Articles)
-	Then In the Supplier Reports screen the current page should be: Subscription Renewal (Formulated, Enhanced, Articles)
+	Then In the Supplier Reports screen the current sub-page should be: Subscription Renewal (Formulated, Enhanced, Articles)
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called Subscription Renewal (Formulated Enhanced Articles).xlsx and save as 68423
