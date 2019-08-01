@@ -753,8 +753,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
 			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
 			myHome.ThenTheWercSmartHomepageShouldLoad();
-			myHome.ThenIClickOnUserItem("My Account");
 
+			//Canada supplier address
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.AddCanadaAddress("100 King St W", "Ontario", "Toronto", "ON M5X 1A9", "123-123-1234", "CANADA", "1");
 
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
