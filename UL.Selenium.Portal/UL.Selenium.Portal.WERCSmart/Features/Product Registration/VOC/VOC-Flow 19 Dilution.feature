@@ -127,7 +127,6 @@ Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 		| Based on your previous selections, the product has the following intended use: The OTC Model Rule and CARB limits for this intended use are: |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62708
 
-@tfs_design
 Scenario: [56478] VOC - CARB and OTC for Flow 19 products - Concentrate/dilution = No to Dilution checking warning message shown
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -138,11 +137,12 @@ Scenario: [56478] VOC - CARB and OTC for Flow 19 products - Concentrate/dilution
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 	Then the VOC concentration question shows a yes and a no button
 	Given in the VOC page I click Continue
 	Then For the VOC concentration question field I should see the following error: This is a required field.
 	Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: No
-	Then For the VOC page I should see the following error: Need help? Regulatory services are included in Premium Subscription. Upgrade now!,Please be sure you have selected the correct product type.  For further questions, please contact Support.
+	Then For the VOC page I should see the following error: Please be sure you have selected the correct product type. For further questions, please contact Support.
 	Given in the VOC page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56478
