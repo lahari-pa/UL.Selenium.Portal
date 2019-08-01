@@ -194,7 +194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickSection(string section)
 		{
-			IWebElement matchHeading = this.PanelHeadings.FirstOrDefault(x => x.Text == section);
+			IWebElement matchHeading = this.PanelHeadings.FirstOrDefault(x => x.Text.Contains(section));
 			IWebElement sectionEl = matchHeading?.FindElement(By.XPath("./ancestor::a[position()=1]"), 1);
 			return sectionEl != null && sectionEl.TryClick();
 		}
@@ -309,7 +309,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		#region classes
 		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit }
-
+		
 		public static Dictionary<Tab, string> MapTabs = new Dictionary<Tab, string> {
 			{ Tab.ProductType , "Product Type" },
 			{ Tab.ProductCharacteristics , "Product Characteristics" },
