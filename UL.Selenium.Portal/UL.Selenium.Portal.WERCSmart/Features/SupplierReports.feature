@@ -58,12 +58,11 @@ Scenario: [68421] Active UPCs for Products Report
 		| Case UPC        |
 	Given I click on close in the Report Download dialog
 
-@tfstestcase:68422
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Battery-Containing Products
-	Then In the Supplier Reports screen the current page should be: Battery-Containing Products
+	Then In the Supplier Reports screen the current sub-page should be: Battery-Containing Products
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called BatteryContaining Products.xlsx and save as 68422

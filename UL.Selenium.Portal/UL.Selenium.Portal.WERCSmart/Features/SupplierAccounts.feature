@@ -99,17 +99,21 @@ Scenario: Create new account with supplier settings for no private label product
 Given I create a new supplier no PLP with the following parameters and update TReVor information for: randomUser
 
 
+@TReVorId:22382
 Scenario: Create new account with supplier settings for Canada has all data
 Given I create a new supplier Canada has all data with the following parameters and update TReVor information for: randomUser
 
 
+@TReVorId:22383
 Scenario: Create new account with supplier settings for products in cart
 Given I create a new supplier Products in cart with the following parameters and update TReVor information for: randomUser
 
 
+@TReVorId:22384
 Scenario: Create new account with supplier settings for Sub Cart
 Given I create a new supplier sub cart with the following parameters and update TReVor information for: randomUser
 
 
+@TReVorId:22385
 Scenario: Create new account with supplier settings for Visual
 Given I create a new supplier Visual with the following parameters and update TReVor information for: randomUser
