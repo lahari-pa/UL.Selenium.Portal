@@ -60,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Delay.Seconds(10);
 			Report.IsTrue(NewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
 			GeneralUtilities.Wait_for_load_finish();
-			this.GivenIShouldSeeXPage(section);
+			//this.GivenIShouldSeeXPage(section);
 		}
 
 		[StepDefinition(@"the Product Editor page should be loaded")]
@@ -1821,13 +1821,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"As expected, an error message were displayed for section: " + section);
 		}
 
-		[Then(@"For every field in the table I should see the following error: (.*)")]
-		public void ThenForEveryFieldInTheTableIShouldSeeTheFollowingError(string expectedError, Table table)
+		[Then(@"For every field in the table I should (see|not see) the following error: (.*)")]
+		public void ThenForEveryFieldInTheTableIShouldSeeTheFollowingError(string condition, string expectedError, Table table)
 		{
 			Delay.Seconds(3);
+			bool see = false;
+			if (condition == "see")
+			{
+				see = true;
+			}
+			else if (condition != "not see")
+			{
+				Report.Error("Condition must be either 'see' or 'not see'!");
+				return;
+			}
 			foreach (TableRow thisRow in table.Rows)
 			{
-				this.ErrorMessagesAreShowingForItem(thisRow["Field"], "should", expectedError);
+				this.ErrorMessagesAreShowingForItem(thisRow["Field"], see ? "should" : "should not", expectedError);
 			}
 		}
 
