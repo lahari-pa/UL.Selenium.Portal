@@ -31,7 +31,7 @@ Given I create a new supplier packaging only account with the following paramete
 
 @TReVorId:22372
 Scenario: Create new account with supplier settings for LockOut
-Given I create a new supplier lockout account with the following parameters and update TReVor information for: 	AccountLockOut
+Given I create a new supplier lockout account with the following parameters and update TReVor information for: AccountLockOut
 
 @TReVorId:22368
 Scenario: Create new account with supplier settings for Canada Address only

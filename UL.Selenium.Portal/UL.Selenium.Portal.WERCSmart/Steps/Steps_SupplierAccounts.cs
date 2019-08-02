@@ -149,8 +149,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				Api.UpdateTestUsername(savedAs, account.Email);
-				Api.UpdateTestUserPassword(savedAs, account.Password);
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -236,8 +236,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				Api.UpdateTestUsername(savedAs, account.Email);
-				Api.UpdateTestUserPassword(savedAs, account.Password);
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -299,8 +299,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				Api.UpdateTestUsername(savedAs, account.Email);
-				Api.UpdateTestUserPassword(savedAs, account.Password);
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -363,7 +363,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -435,7 +435,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -561,7 +561,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -694,7 +694,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -771,7 +771,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -839,7 +839,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -907,7 +907,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -1002,13 +1002,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.StewardshipInformation("Ontario", "ON-1-1", "", "");
 			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
 
+
 			Report.Info(savedAs + " Account Created");
 			var user = TestUsers.GetUserSavedAs(savedAs);
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -1078,7 +1079,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -1162,8 +1163,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				Api.UpdateTestUsername(savedAs, account.Email);
-				Api.UpdateTestUserPassword(savedAs, account.Password);
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -1262,7 +1263,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -1329,7 +1330,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -1465,7 +1466,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -1534,7 +1535,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -1621,7 +1622,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("User found!, Updating the password in TReVor");
 				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
@@ -1682,8 +1683,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				Api.UpdateTestUsername(savedAs, account.Email);
-				Api.UpdateTestUserPassword(savedAs, account.Password);
+				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
