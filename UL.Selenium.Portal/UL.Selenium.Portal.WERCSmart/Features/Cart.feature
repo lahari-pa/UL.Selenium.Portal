@@ -20,6 +20,7 @@ Then The home screen should load
 Given I click the Shopping Cart icon in the Navigation Pane
 
 @tfs_design
+@TReVorId:22387
 Scenario: [63323] Remove single product from cart
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
