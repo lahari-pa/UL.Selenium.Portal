@@ -959,10 +959,187 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool EnterStewardshipInfo(string field, string option1, string option2, string option3)
+		{
+			GeneralUtilities.Wait_for_load_finish();
+			IWebElement matchingRow = this.containerElement.FindElement(By.XPath(".//tr[contains(td,'" + field + "')]"));
+
+			IWebElement stweardshipInput = matchingRow.FindElement(By.XPath(".//input[contains(@data-bind,'StewardNumber.field')]"));
+
+			IWebElement issueDate = matchingRow.FindElement(By.XPath(".//input[contains(@data-bind,'IssueDate.field')]"));
+
+			IWebElement expireDate = matchingRow.FindElement(By.XPath(".//input[contains(@data-bind,'ExpireDate.field')]"));
+
+			if (stweardshipInput == null)
+			{
+				Report.Failure("Not able to find Stewardship input field");
+				Report.Screenshot();
+				return false;
+			}
+			stweardshipInput.EnterText(option1);
+
+			if (issueDate == null)
+			{
+				Report.Failure("not able to find the issue date field");
+				Report.Screenshot();
+				return false;
+			}
+			option2 = DateTime.Now.ToString("yyyy-MM-dd");
+			issueDate.Clear();
+			issueDate.EnterText(option2);
+			issueDate.SendKeys(Keys.Enter);
+
+			if (expireDate == null)
+			{
+				Report.Failure("not able to find the expire date field");
+				Report.Screenshot();
+				return false;
+			}
+			int year = DateTime.Now.Year + 1;
+			int month = DateTime.Now.Month + 1;
+			int day = DateTime.Now.Day;
+			var dtExp = new DateTime(year, month, day);
+			option3 = dtExp.ToString("yyyy-MM-dd");
+			expireDate.Clear();
+			expireDate.EnterText(option3);
+			expireDate.SendKeys(Keys.Enter);
+			return true;
+		}
 
 
+		public bool StewardshipEdit_click()
+		{
+			IWebElement StwdshipEdit = this.containerElement.FindElement(By.Id("edit-stewardship"), 2);
+			Report.Info("Attempting to Click Edit Stewardship Button");
 
+			if (StwdshipEdit == null)
+			{
+				Report.Failure("Not able to find Stewardship edit field");
+				Report.Screenshot();
+				return false;
+			}
+			return StwdshipEdit.TryClick();
+		}
 
+		public bool StewardshipSave_click()
+		{
+			IWebElement StwdshipSave = this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'stewardshipNumberModel')]//a[contains(text(),'Save')]"), 2);
+			Report.Info("Attempting to Click Save on Stewardship information");
+
+			if (StwdshipSave == null)
+			{
+				Report.Failure("Not able to find Stewardship Save button");
+				Report.Screenshot();
+				return false;
+			}
+			return StwdshipSave.TryClick();
+		}
+
+		public bool Canada_Supplier_Edit_click()
+		{
+			IWebElement CanSuppEdit = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: canadaAddressModel']//a[contains(text(),'Add New')]"), 2);
+			Report.Info("Attempting to Click Edit Canada Supplier Address Button");
+
+			if (CanSuppEdit == null)
+			{
+				Report.Failure("Not able to find Canada Supplier Address add new field");
+				Report.Screenshot();
+				return false;
+			}
+			return CanSuppEdit.TryClick();
+		}
+
+		public bool Canada_Supplier_Save_click()
+		{
+			IWebElement CanSuppSave = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: canadaAddressModel']//a[contains(text(),'Save')]"), 2);
+			Report.Info("Attempting to Click Save on Stewardship information");
+
+			if (CanSuppSave == null)
+			{
+				Report.Failure("Not able to find Canada Supplier Address Save button");
+				Report.Screenshot();
+				return false;
+			}
+			return CanSuppSave.TryClick();
+		}
+
+		public bool Add_Canada_Supplier_Address(string address, string province, string city, string postalCode, string companyPhone, string country,
+			string countryCode)
+		{
+
+			IWebElement SuppAddress = this.containerElement.FindElement(By.XPath(".//input[contains(@data-bind,'supplierAddress.field')]"));
+
+			IWebElement SuppProvince = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'supplierProvince.field')]"));
+
+			IWebElement SuppCity = this.containerElement.FindElement(By.XPath(".//input[contains(@data-bind,'supplierCity.field')]"));
+
+			IWebElement SuppPostalCode = this.containerElement.FindElement(By.XPath(".//input[contains(@data-bind,'supplierZipCode.field')]"));
+
+			IWebElement SuppCompanyPhone = this.containerElement.FindElement(By.XPath(".//input[contains(@data-bind,'supplierPhone.field')]"));
+
+			IWebElement SuppCountry = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'supplierCountry.field')]"));
+
+			IWebElement SuppCountryCode = this.containerElement.FindElement(By.XPath(".//input[contains(@data-bind,'supplierCountryCode.field')]"));
+
+			Report.Info("Entering User Information");
+
+			if (SuppAddress == null)
+			{
+				Report.Failure("Not able to find address input field");
+				Report.Screenshot();
+				return false;
+			}
+			SuppAddress.EnterText(address);
+
+			if (SuppProvince == null)
+			{
+				Report.Failure("Not able to find province input field");
+				Report.Screenshot();
+				return false;
+			}
+			SuppProvince.Select(province);
+
+			if (SuppCity == null)
+			{
+				Report.Failure("Not able to find city input field");
+				Report.Screenshot();
+				return false;
+			}
+			SuppCity.EnterText(city);
+
+			if (SuppPostalCode == null)
+			{
+				Report.Failure("Not able to find postal code input field");
+				Report.Screenshot();
+				return false;
+			}
+			SuppPostalCode.EnterText(postalCode);
+
+			if (SuppCompanyPhone == null)
+			{
+				Report.Failure("Not able to find company phone input field");
+				Report.Screenshot();
+				return false;
+			}
+			SuppCompanyPhone.EnterText(companyPhone);
+
+			if (SuppCountry == null)
+			{
+				Report.Failure("Not able to find country field");
+				Report.Screenshot();
+				return false;
+			}
+			SuppCountry.Select(country);
+
+			if (SuppCountryCode == null)
+			{
+				Report.Failure("Not able to find country code input field");
+				Report.Screenshot();
+				return false;
+			}
+			SuppCountryCode.EnterText(countryCode);
+			return true;
+		}
 	}
 	class MyAccount_SubscriptionInfo : BaseObject
 	{

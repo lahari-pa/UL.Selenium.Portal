@@ -3095,6 +3095,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement productName = this.containerElement.FindElement(By.XPath(@"//*[@id='collapse1']/div/form/div[1]/div[2]/input"));
 			productName.EnterText(productType);
 		}
+
+		public bool PurchaseSummaryClickRemove(string product)
+		{
+			IWebElement remove = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table[@class='table table-hover']//tr//b[text()[contains(.,""" + product + @""")]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
+			return remove.TryClick();
+		}
 	}
 
 	public class ProductInformation

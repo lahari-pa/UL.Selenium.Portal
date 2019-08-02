@@ -21,13 +21,14 @@ Feature: Subscription
 
 @TReVorId:19117
 Scenario: [63297] Add subscription to a new supplier through data entry
+Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC63297User with the following parameters:
 | Field                | Value          |
 | Email                | User_<random>  |
 | Country              | UNITED STATES  |
-| FirstName            | Richard        |
-| LastName             | Smith          |
-| Password             | Pa4*ytuufnn    |
+| FirstName            | WERCS          |
+| LastName             | Test_Automatio |
+| Password             | Welcome1!      |
 | Address1             | Address 1      |
 | Address2             | Address 2      |
 | City                 | City Name      |
@@ -37,16 +38,16 @@ Given If not already created, I create a user: TC63297User with the following pa
 | CompanyPhone         | 123-456-7889   |
 | EmergencyPhoneNumber | 123-456-7789   |
 | SupplierType         | Manufacturer   |
-| PhoneQuestion         | PhoneQuestion   |
-| PhoneHint             | PhoneHint       |
-| MentorQuestion          | MentorQuestion    |
-| MentorHint              | MentorHint        |
+| PhoneQuestion        | PhoneQuestion  |
+| PhoneHint            | PhoneHint      |
+| MentorQuestion       | MentorQuestion |
+| MentorHint           | MentorHint     |
 | FriendQuestion       | FriendQuestion |
 | FriendHint           | FriendHint     |
-| AnimalQuestion          | AnimalQuestion    |
-| AnimalHint              | AnimalHint        |
-| CollegeQuestion       | CollegeQuestion |
-| CollegeHint           | CollegeHint     |
+| AnimalQuestion       | AnimalQuestion |
+| AnimalHint           | AnimalHint     |
+| CollegeQuestion      | CollegeQuestion|
+| CollegeHint          | CollegeHint    |
 | Pin                  | 1234           |
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -992,3 +993,55 @@ Given I click on My Account
 Then In the My Account screen I navigate to the Subscription Information page
 Then In the Subscription Information screen I confirm status is: ACTIVE
 Then In the Subscription Information screen I confirm grace period is: None
+
+
+Scenario: [94466] Subscription - Retailer count in messages
+Given I go to the WERCSmart Log in
+Given If not already created, I create a user: TC94466User with the following parameters:
+| Field                | Value                   |
+| Email                | User_<random>           |
+| Country              | UNITED STATES           |
+| FirstName            | WERCS                   |
+| LastName             | Test_Automation_Upgrade |
+| Password             | Pa4*ytuufnn             |
+| Address1             | Address 1               |
+| Address2             | Address 2               |
+| City                 | City Name               |
+| State                | Florida                 |
+| Zip                  | 999                     |
+| CompanyName          | Company 1               |
+| CompanyPhone         | 123-456-7889            |
+| EmergencyPhoneNumber | 123-456-7789            |
+| SupplierType         | Manufacturer            |
+| PhoneQuestion        | PhoneQuestion           |
+| PhoneHint            | PhoneHint               |
+| MentorQuestion       | MentorQuestion          |
+| MentorHint           | MentorHint              |
+| FriendQuestion       | FriendQuestion          |
+| FriendHint           | FriendHint              |
+| AnimalQuestion       | AnimalQuestion          |
+| AnimalHint           | AnimalHint              |
+| CollegeQuestion      | CollegeQuestion         |
+| CollegeHint          | CollegeHint             |
+| Pin                  | 1234                    |
+Given I click on My Account
+Then I click on NEW SUBSCRIPTION
+Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
+And In the Subscription Enrollment screen I confirm that under the Limited Plan I see the following items and further details
+| Item                         | Further details                                                                                                                                                                                                                                                                                              |
+| Product Registration         | Ensure your products meet the compliance requirements of over 45 retailers by submitting your product information in our secure software platform.                                                                                                                                                           |
+| Update Registration          | As regulations change, so will your reporting obligations. These changes will also require product updates. With subscription, you now have the ability to update existing product data and submit revisions for assessment at no additional charge.                                                         |
+| Add Retailer to Registration | As a WERCSmart subscriber, you will benefit from transmitting your product assessment with ease to over 45 retailers. As more retailers continue to join WERCSmart for their compliance and sustainability information, you can forward existing product registrations at any time for no additional charge. |
+| UPC Management               | Add or remove UPCs efficiently and as needed from your existing product registrations at no additional charge.                                                                                                                                                                                               |
+Then In the Subscription Enrollment screen I select the following enrollment options
+| Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
+| Up to 5 Product(s) | Up to 5 Product(s) | Up to 5 Product(s)  | Standard     | Silver                |
+Then I click on Checkout
+Then In the Payment Methods screen I select Payment Method: Credit Card
+Then In the Payment Methods screen I enter Credit Card details
+| Card Type | Card Number         | Expiration Month | Expiration Year | CVV  | Cardholder Name |
+| Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
+Then In the Payment Methods screen I click Continue
+Then In the Purchase Summary screen I click Confirm Order
+#Given I log in with email: User_ceef42822c24.kxxyxunf@mailosaur.io and password: Pa4*ytuufnn
+Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.

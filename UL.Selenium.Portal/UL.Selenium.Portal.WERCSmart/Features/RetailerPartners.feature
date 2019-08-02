@@ -8,7 +8,6 @@
 @run_RetailerPartners
 Feature: Retailer Partners
 
-@tfs_design
 Scenario: [56881] Retailer Partners - Main Page layout (existing supplier)
 	# Note: We will have a separate test case for new suppliers views of this page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -284,7 +283,6 @@ Scenario: [56926] My Data & Recipients - What are the Data Usage Tiers - tab/hea
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Retail Partners\Supplier ID\Supplier ID validation - retailer specific
 # NetProjects10\WercsSmart Portal\WERCSmart\Retail Partners\Supplier ID
 # ******* Blocked because cannot run database queries on staging, also the query appears to be wrong or the database string is.
-@TFS_design
 @TReVorId:22080
 Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New Supplier ID - Save  - DB validation is only for local
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

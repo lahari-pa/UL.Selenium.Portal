@@ -37,6 +37,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool currentlyChecked = input.Checked();
 			return input.TryClick() && input.Checked() != currentlyChecked;
 		}
+		public bool ClickFilter()
+		{
+			IWebElement button = this.containerElement.FindElement(By.XPath("//button[contains(text(), 'Filter')]"));
+			if (button == null)
+			{
+				return false;
+			}
+			return button.TryClick();
+		}
 		public int GetPage(string position)
 		{
 			if (position.ToLower() == "current")

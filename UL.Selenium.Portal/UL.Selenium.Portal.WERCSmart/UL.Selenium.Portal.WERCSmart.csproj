@@ -177,6 +177,7 @@
     <Compile Include="Selenium Classes\MyAccount.cs" />
     <Compile Include="Selenium Classes\MyIngredientsModal.cs" />
     <Compile Include="Selenium Classes\NavigationBar.cs" />
+    <Compile Include="Selenium Classes\New Product\OptionalReports.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ElectronicEquipment.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\Ingredients.cs" />
     <Compile Include="Selenium Classes\New Product\NewProduct.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Steps\Steps_SubscriptionEnrollment.cs" />
     <Compile Include="Steps\Steps_SubscriptionUpgrade.cs" />
     <Compile Include="Steps\Steps_Summary.cs" />
+    <Compile Include="Steps\Steps_SupplierAccounts.cs" />
     <Compile Include="Steps\Steps_SupplierReports.cs" />
     <Compile Include="Steps\Steps_ViewUpcs.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
@@ -449,6 +451,8 @@
     <None Include="Features\Signup.feature">
     </None>
     <None Include="Features\Subscription.feature">
+    </None>
+    <None Include="Features\SupplierAccounts.feature">
     </None>
     <None Include="Features\SupplierReports.feature">
     </None>
