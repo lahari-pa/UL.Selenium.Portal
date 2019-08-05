@@ -247,8 +247,6 @@ Scenario: [66345] Pesticide question shows in Additional Product Information for
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66345
 
-#CLF - 12/7/2018 Test is not complete because plan does not seem to be complete
-# JS - 13/03 TFS test case was edited/ compelted
 @56500
 @TReVorId:15651
 Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
@@ -275,16 +273,20 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 		| Alberta          |
 		| British Columbia |
 		| Labrador         |
-		#| Manitoba            |
 		| New Brunswick        |
 		| New Foundland        |
 		| Nova Scotia          |
 		| Ontario              |
 		| Prince Edward Island |
 		| Quebec               |
-		#| Saskatchewan        |
-		#| Northwest Territory |
 		| Yukon Territory      |
+
+Then For every field in the table I should not see the following error: This is a required field.
+| Field                |
+| Manitoba            |
+| Saskatchewan        |
+| Northwest Territory |
+
 	# Type in a Canadian Pest Control Products (PCP) Registration Number with more than 5 digits and less than 8 digits
 	Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 279255
 	Then in the Pesticide Details - Canada page I click Continue
@@ -311,7 +313,7 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 		| Yes    |
 		| No     |
 	And Section: Product's packaging includes a Poison Danger symbol should be showing an error message
-	#Given I set the Product's packaging includes a Poison Danger symbol field to: No
+#Given I set the Product's packaging includes a Poison Danger symbol field to: No
 	Given I set the radio option in section: Product's packaging includes a Poison Danger symbol to: No
 	Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
 	Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
@@ -319,15 +321,12 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 		| Alberta          |
 		| British Columbia |
 		| Labrador         |
-		#| Manitoba             |
 		| New Brunswick        |
 		| New Foundland        |
 		| Nova Scotia          |
 		| Ontario              |
 		| Prince Edward Island |
 		| Quebec               |
-		#| Saskatchewan         |
-		#| Northwest Territory  |
 		| Yukon Territory      |
 	# Confirm the Manitoba question shows N/A as already selected
 	And Manitoba should be showing the value: N/A
@@ -343,9 +342,6 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
-	#CLF - from here the test outcomes to not seem to be as predicted.
-	#I'm seeing Additional Documents -> Contact Information
-	# JS shared step 64097 added to the TFS test case
 	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
@@ -529,7 +525,7 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Given I generate a random UPC number and save as: UPC56502
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with pest control
+And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
 	And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
@@ -542,7 +538,7 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 		| Select the applicable exemption |
 	And The following radio buttons should be displayed for section: Select the applicable exemption
 		| Button                                               |
-		| Product is FIFRA 25(b) Exempt                        |
+| Product is FIFRA 25(b) Exempt.                       |
 		| Food Based Pesticides - Exempt from EPA Registration |
 		| Device based products - Exempt from EPA Registration |
 		| Pheromone Traps – Exempt from EPA Registration       |
@@ -566,7 +562,7 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 0000
-	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet Shampoo with pest control
+And I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet Shampoo with Pest Control
 	Then In the Data Acceptance page I select Yes, Agreed
 	And In the Data Acceptance page I click on the Accept button
 	Given If purchase details are showing click confirm order
@@ -581,7 +577,6 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 
 #And I Go to the State Pesticide Section of MTR/CKLT SECT0127
 #And I Confirm the Pesticide data RPDS does not show any data Heading for the RPDS reads "State Pesticide Information Group"
-#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56502
 @TReVorId:11414
 Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
