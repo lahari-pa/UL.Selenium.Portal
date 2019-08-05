@@ -223,6 +223,7 @@ Scenario: [57546] Pesticide question shows in Additional Product Information for
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57546
 
+@TReVorId:22392
 Scenario: [66344] Pesticide question shows in Additional Product Information for 3-Pest
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -234,6 +235,7 @@ Scenario: [66344] Pesticide question shows in Additional Product Information for
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66344
 
+@TReVorId:22393
 Scenario: [66345] Pesticide question shows in Additional Product Information for Flow3-VOCSCA
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

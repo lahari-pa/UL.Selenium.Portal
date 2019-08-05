@@ -20,6 +20,7 @@ Scenario: [66635] Left hand navigation - Shopping Cart navigation - Products
 	Then The home screen should load
 	Given I click the Shopping Cart icon in the Navigation Pane
 
+@TReVorId:22387
 Scenario: [63323] Remove single product from cart
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

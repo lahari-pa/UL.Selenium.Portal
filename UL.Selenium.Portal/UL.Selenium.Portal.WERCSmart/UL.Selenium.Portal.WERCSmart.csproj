@@ -412,7 +412,7 @@
     </None>
     <None Include="Features\Product Registration\Kits - Flow 13.feature">
     </None>
-    <None Include="Features\Product Registration\Lithium Battery Transport Informarion.feature">
+    <None Include="Features\Product Registration\Lithium Battery Transport Information.feature">
     </None>
     <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature">
     </None>

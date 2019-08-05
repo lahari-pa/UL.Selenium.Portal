@@ -2324,6 +2324,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Lithium Battery Characteristics");
 		}
 
+		[Given(@"I call Shared Step 103412 - Lithium Primary/Metal Battery Characteristics - any data - Happy path")]
+		public void GivenICallSharedStep_LithiumPrimaryMetalBatteryCharacteristics_AnyData_HappyPath()
+		{
+			TestReport.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Lithium Battery Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Lithium Battery Characteristics");
+			TestReport.StartStep("I set the Type of Battery field to: Battery");
+			MyNewProductSteps.SetTheSectionOptionTo("Type of Battery", "Battery");
+			TestReport.StartStep("I set the Weight of Lithium in grams (single unit) field to: 10.2");
+			MyNewProductSteps.SetTheSectionOptionTo("Weight of Lithium in grams (single unit)", "10.2");
+			TestReport.StartStep("I set the Weight of the single unit (grams) field to: 12");
+			MyNewProductSteps.SetTheSectionOptionTo("Weight of the single unit (grams)", "12");
+			TestReport.StartStep(
+				"I set the Battery is manufactured under a Quality Management Program outlined in IATA 3.9.2.6 field to: YES");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Battery is manufactured under a Quality Management Program outlined in ", "YES");
+			TestReport.StartStep("In the Lithium Battery Characteristics page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Lithium Battery Characteristics");
+		}
+
+
+
 		[StepDefinition(@"I call Shared Step 60096 \(Lithium Battery Transportation\)")]
 		public void SharedLithiumBatteryTransportation()
 		{
@@ -2342,7 +2365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep(
 				"I set the For Air transport (IATA), indicate the classification field to: Section IB");
 			MyNewProductSteps.SetTheSectionOptionTo("For Air transport (IATA), indicate the classification",
-				"Section IB");
+				"Section IA");
 			TestReport.StartStep(
 				"I set the For Canada's Transportation of Dangerous Goods (TDG), indicate the classification field to: None of the above/Not intended for shipment in Canada");
 			MyNewProductSteps.SetTheSectionOptionTo(
