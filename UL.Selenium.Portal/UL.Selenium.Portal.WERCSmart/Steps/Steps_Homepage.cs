@@ -7,6 +7,7 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using NTTQA.Selenium.Cache;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -957,6 +958,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
 			Context.AddToContext(savedAs, prodIDs);
+		}
+
+		[StepDefinition(@"I navigate to the WERCSmart site")]
+		public void INavigateToWERCSmart()
+		{
+			Report.Info("Navigating to the WERCSmart Landing Page");
+			var thisGlobalSteps = new GlobalSteps();
+			thisGlobalSteps.NavigateToLandingPage();
 		}
 	}
 }
