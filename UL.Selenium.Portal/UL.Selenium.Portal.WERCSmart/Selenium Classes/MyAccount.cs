@@ -1010,7 +1010,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			int year = DateTime.Now.Year + 1;
 			int month = DateTime.Now.Month + 1;
-			int day = DateTime.Now.Day + 1;
+			int day = DateTime.Now.Day;
 			var dtExp = new DateTime(year, month, day);
 			option3 = dtExp.ToString("yyyy-MM-dd");
 			expireDate.Clear();

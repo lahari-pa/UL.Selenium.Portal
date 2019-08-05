@@ -32,6 +32,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		private IWebElement ContinueButton => this.containerElement.WaitUntilElementClickable(By.XPath(".//a[contains(@class,'continue-button')]"), 5);
 
 		private IEnumerable<IWebElement> PanelHeadings => this.containerElement.FindElements(By.XPath(".//div[@id='pgroup']/div/div[starts-with(@class,'panel-heading')]//h3"), 2);
+		
+		private By ActivePanelHeadingLocator(string text) => By.XPath($@".//div[@id='pgroup']/div/div[@class='panel-heading']//h3[contains(text(),""{text}"")]");
 
 		private IWebElement ActivePanelHeading => this.containerElement.FindElement(By.XPath(".//div[@id='pgroup']/div/div[@class='panel-heading']//h3"), 2);
 
@@ -186,12 +188,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
-			return this.ActivePanelHeading.WaitUntilTextContains(sectionHeader, secondsToWait);
+			return this.containerElement.WaitUntilElementVisible(this.ActivePanelHeadingLocator(sectionHeader), secondsToWait) != null;
+			//return this.ActivePanelHeading.WaitUntilTextContains(sectionHeader, secondsToWait);
 		}
 
 		public bool ClickSection(string section)
 		{
-			IWebElement matchHeading = this.PanelHeadings.FirstOrDefault(x => x.WaitUntilTextContains(section, 5));
+			IWebElement matchHeading = this.PanelHeadings.FirstOrDefault(x => x.Text.Contains(section));
 			IWebElement sectionEl = matchHeading?.FindElement(By.XPath("./ancestor::a[position()=1]"), 1);
 			return sectionEl != null && sectionEl.TryClick();
 		}
@@ -306,7 +309,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		#region classes
 		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit }
-
+		
 		public static Dictionary<Tab, string> MapTabs = new Dictionary<Tab, string> {
 			{ Tab.ProductType , "Product Type" },
 			{ Tab.ProductCharacteristics , "Product Characteristics" },
