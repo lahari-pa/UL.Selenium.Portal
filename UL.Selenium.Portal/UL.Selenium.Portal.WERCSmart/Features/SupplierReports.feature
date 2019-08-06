@@ -59,6 +59,7 @@ Scenario: [68421] Active UPCs for Products Report
 	Given I click on close in the Report Download dialog
 
 @tfstestcase:68422
+@TReVorId:22388
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -75,6 +76,7 @@ Scenario: [68422] Battery-containing products report
 		| Battery Type  |
 		| Battery Mfg   |
 
+@TReVorId:22389
 Scenario: [68423] Formulated vs Articles Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane

@@ -477,6 +477,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return container.FindElements(By.XPath(".//span[contains(@data-bind,'identifier')]"), 2).Select(x => x.Text).ToList();
 		}
 
+		public bool ClickSelectAllDestinationRetailers()
+		{
+			return this.containerElement.FindElement(By.XPath(".//input[@id='chkAllRetailers']"), 1).TryCheck();
+		}
+
 		public bool UPCPackageTypeFieldExists()
 		{
 			try

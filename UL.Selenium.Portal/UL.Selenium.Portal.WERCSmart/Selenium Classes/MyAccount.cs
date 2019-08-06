@@ -38,7 +38,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetCompanyName()
 		{
-			IWebElement companyNameH3 = this.containerElement.FindElement(By.XPath("//div[@class='col-sm-3 basic-info']/h3"), 2);
+			IWebElement companyNameH3 = this.containerElement.FindElement(By.XPath(".//div[@id='basic-user-info']/h3"), 2);
 			return companyNameH3?.Text;
 		}
 
