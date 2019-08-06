@@ -523,6 +523,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In the My Account page I confirm that the subscription level is: (.*)")]
+		public void InTheMyAccountPageIConfirmThatTheSubscriptionLevelIs(string savedAs)
+		{
+			string subSavedAs = Context.GetFromContext(savedAs)?.ToString();
+			Report.IsTrue(new MyAccount().ConfirmSubscriptionLevel(subSavedAs), "Failed to find matching subscription level '" + subSavedAs + "'.",
+				"Successfully found subscription level '" + subSavedAs + "'.");
+		}
+
 		[StepDefinition(@"In the My Account screen I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		[StepDefinition(@"In the My Account page I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		public void ThenInTheMyAccountScreenINavigateToTheXPage(string nav_option)
@@ -1093,7 +1101,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		[StepDefinition(@"In Stewardship table I select the following options: (.*)  and (.*) for the (.*) field")]
-		public void StewardshipInformation(string field,string options1, string options2, string option3)
+		public void StewardshipInformation(string field, string options1, string options2, string option3)
 		{
 			GeneralUtilities.ScrollToBottomOfPage();
 			var mystwdinfo = new MyAccount_CompanyInfo();
@@ -1111,7 +1119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var canadd = new MyAccount_CompanyInfo();
 			Report.IsTrue(canadd.Canada_Supplier_Edit_click(), "failed to click edit", "successfully clicked edit");
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(canadd.Add_Canada_Supplier_Address(options1, options2, option3, options4,options5,option6,option7), "failed to enter stewardship information", "successfully entered steward information");
+			Report.IsTrue(canadd.Add_Canada_Supplier_Address(options1, options2, option3, options4, options5, option6, option7), "failed to enter stewardship information", "successfully entered steward information");
 			Report.IsTrue(canadd.Canada_Supplier_Save_click(), "failed to click save", "successfully clicked save");
 			GeneralUtilities.Wait_for_load_finish();
 		}

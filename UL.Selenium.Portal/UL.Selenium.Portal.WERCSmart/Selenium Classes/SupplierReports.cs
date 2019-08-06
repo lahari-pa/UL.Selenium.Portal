@@ -6,6 +6,7 @@ using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using NTTQA.Selenium.Reporting.Core;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -53,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//eg 1459158
-		public bool SelectKitThatContainsSpecificProduct(string searchTerm)
+		public bool SelectSpecificProduct(string searchTerm)
 		{
 			this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]")).TryClick();
 			Delay.Seconds(1);
@@ -100,6 +101,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement MatchedEntry = MatchingValues.FirstOrDefault();
 				return MatchedEntry.TryClick();
 			}
+		}
+
+		public bool SelectRandomProduct()
+		{
+			bool found = false;
+			int count = 1;
+			while (!found && count < 10)
+			{
+				Report.Info("Entering text: " + count + " into the search input");
+				if (this.SelectSpecificProduct(count.ToString()))
+				{
+					found = true;
+					return true;
+				}
+				count++;
+			}
+			Report.Info("Failed to enter text into the search input");
+			return false;
 		}
 
 		public bool SelectRetailer(string retailer)

@@ -28,5 +28,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, upcNumbers);
 		}
 
+		[StepDefinition(@"I confirm that the number of UPCs equals the number saved as: (.*)")]
+		public void ConfirmThatNumberOfUPCsEqualsNumberSavedAs(string savedAs)
+		{
+			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
+			int numUPCs = 0;
+			int.TryParse(Context.GetFromContext(savedAs)?.ToString(), out numUPCs);
+			Report.IsTrue(numUPCs == upcs.Count, "Number of UPCs did not match the number saved!",
+				"Number of UPCs matches number saved.");
+		}
+
 	}
 }

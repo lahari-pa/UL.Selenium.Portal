@@ -995,6 +995,7 @@ Then In the Subscription Information screen I confirm status is: ACTIVE
 Then In the Subscription Information screen I confirm grace period is: None
 
 
+@TReVorId:22394
 Scenario: [94466] Subscription - Retailer count in messages
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC94466User with the following parameters:
