@@ -9,7 +9,9 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -147,6 +149,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Retailer " + retailer + " was selected successfully!");
 			GeneralUtilities.Wait_for_load_finish();
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I confirm that the Data Consent Tiers information matches the information saved as: (.*)")]
+		public void ConfirmThatDataConsentTiersMatches(string savedAs)
+		{
+			string tiers = Context.GetFromContext(savedAs)?.ToString();
+			var tiersList = tiers.Split(',').ToList();
+
+			foreach (string tier in tiersList)
+			{
+				string dataTier = tier.Split('=')[0];
+				string trueFalse = tier.Split('=')[1];
+
+				Report.IsTrue(new RetailPartnersDetails().ConfirmDataTier(dataTier, trueFalse), "Failed to find status of '" + trueFalse + "' for data consent tier '" + dataTier + "'.",
+					"Successfully found status of '" + trueFalse + "' for data consent tier '" + dataTier + "'.");
+			}
+
 		}
 
 		/// <summary>
@@ -897,6 +916,101 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						"Column name is not found: " + thisRow["Column"],
 						"Column name has been found as expected: " + thisRow["Column"], false, false);
 				}
+			}
+		}
+
+		[StepDefinition(@"I save the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		public void ISaveTheFirstProductInTheExcelSpreadSheetAs(string spreadsheet, string product)
+		{
+			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
+				var newProductInformation = new ProductInformation {
+					Id = thisProduct[0],
+					Name = thisProduct[1]
+				};
+				Context.AddToContext(product, newProductInformation);
+			}
+		}
+
+		[StepDefinition(@"I save the first row in the spreadsheet saved as (.*) as (.*)")]
+		public void ISaveTheFirstRowOfTheSpreadsheetAs(string spreadsheet, string savedAs)
+		{
+			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> headers = ExcelUtils.Excel_GetRow(0);
+				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
+
+				var dictionary = new Dictionary<string, string>();
+				for (int i = 0; i < headers.Count && i < thisProduct.Count; i++)
+				{
+					dictionary[headers[i]] = thisProduct[i];
+				}
+				Context.AddToContext(savedAs, dictionary);
+			}
+		}
+
+		[StepDefinition(@"I save the number of UPCs on the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		public void ISaveTheNumberOfUPCs(string spreadsheet, string saveAs)
+		{
+			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
+				Context.AddToContext(saveAs, thisProduct[2]);
+			}
+		}
+
+		[StepDefinition(@"I save the Transparency Indicator Ratio of the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		public void ISaveTheTransparencyRatio(string spreadsheet, string saveAs)
+		{
+			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
+				Context.AddToContext(saveAs, thisProduct[3]);
+			}
+		}
+
+		[StepDefinition(@"I save the Last Submission Date of the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		public void ISaveTheLastSubmissionDate(string spreadsheet, string saveAs)
+		{
+			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
+				Context.AddToContext(saveAs, thisProduct[5]);
+			}
+		}
+
+		[StepDefinition(@"I save the Current Subscription Level of the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		public void ISaveTheCurrentSubscriptionLevel(string spreadsheet, string saveAs)
+		{
+			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
+				Context.AddToContext(saveAs, thisProduct[6]);
+			}
+		}
+
+		[StepDefinition(@"I save the Current Data Tier Consent for the Selected Retailer of the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		public void ISaveTheCurrentDataTierConsent(string spreadsheet, string saveAs)
+		{
+			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
+				Context.AddToContext(saveAs, thisProduct[7]);
 			}
 		}
 
