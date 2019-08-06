@@ -180,7 +180,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			int attempt = 0;
 			while (!this.CalenderDatePickerDisplayed(state) && attempt < 5)
 			{
-				calendarButton.ScrollElementIntoView();
+				//calendarButton.ScrollElementIntoView();
 				if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
 				{
 					break;

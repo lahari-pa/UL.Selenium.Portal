@@ -63,6 +63,7 @@ Scenario: [68421] Active UPCs for Products Report
 	And I delete the Supplier Report file saved as 68421
 
 @TReVorId:22388
+@TReVorId:22388
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
