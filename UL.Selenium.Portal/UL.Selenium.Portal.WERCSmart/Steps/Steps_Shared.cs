@@ -1944,7 +1944,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
 			/* --As per TFS70787 warning popup displays for NR  --- */
 			TestReport.StartStep("In the UPCs Warning popup I click Ok");
-			new Steps_Retailer().IfISeeUpcWarningPopupClickOk();
+			new Steps_Retailer().IfISeeUpcWarningPopupClick("Ok");
 		}
 
 		[StepDefinition(@"I call Shared Step 59042 \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]
@@ -2703,7 +2703,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 			TestReport.StartStep("In the UPCs Warning popup I click Ok");
 			var WarningPopup = new NoRetailerWarningPopup();
-			WarningPopup.ClickOk();
+			WarningPopup.ClickChoice("Ok");
 		}
 
 		[StepDefinition(@"I call Shared Step 73629 \(Product Characteristics - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
@@ -3819,7 +3819,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("In the Retailer page I click Continue");
 			new StepsNewProduct().ClickContinue();
 			TestReport.StartStep("In the UPCs Warning popup I click Ok");
-			WarningPopup.ClickOk();
+			WarningPopup.ClickChoice("Ok");
 		}
 
 		[StepDefinition(
@@ -7184,7 +7184,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			/* --As per TFS70787 warning popup displays for NR  --- */
 			//Delay.Seconds(1);
 			TestReport.StartStep("In the UPCs Warning popup I click Ok");
-			WarningPopup.ClickOk();
+			WarningPopup.ClickChoice("Ok");
 		}
 
 		[StepDefinition(
