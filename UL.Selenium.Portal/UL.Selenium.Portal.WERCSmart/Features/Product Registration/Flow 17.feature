@@ -9,6 +9,7 @@
 @wercsmart
 @DocumentAcceptance
 @RetailPartners
+@RegulatoryDocsToProvide
 @run_Flow17
 Feature: Flow 17
 
@@ -176,6 +177,7 @@ Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	Given I generate a random UPC number and save as: UPC103572
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I save the product information as: TestCase103572
 	# In the shared step below select Lithium Primary/Metal Batteries as your product type
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Primary/Metal Batteries
 	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
@@ -189,30 +191,32 @@ Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	And I choose ok in the UPCs Warning modal window
 	And I click the browse button for label: I have an Article Information Sheet and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	#I On the Regulatory Documents to Provide screen, upload a document into the Article Information Sheet (AIS) section.
-	And I Select "I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product" for the "Batteries are considered Articles under Global..." question.
-	And I Upload a document into the UN38.3 Testing Results section.
-	And I Select "I don't need a WHMIS-Compliant document for this product." for the "WHMIS-compliant label, English and French-Canadian" section.
-	And I Select Continue
+	And in Regulatory Documents to Provide I select: I don't need an OSHA-Compliant Safety Data Sheet for the: Batteries are considered Articles under Global Harmonized Standards question
+	And I click the browse button for label: Upload UN38.3 Test Document and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And in Regulatory Documents to Provide I select: Request to author for the: WHMIS-compliant Safety Data Sheet, English and French-Canadian question
+	And I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And in the Regulatory Documents page I click Continue
 	And I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
-	And I Select Continue on the Optional Reports and Documents Available for Purchase
-	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-		| Requires Table |
-		| Parameters     |
-	And I Select Continue on Comments section
+	And in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
+	And in the Comments page I click Continue
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	And I Click Home
+	And I click the Home navigation icon
 	And [Shared Step 103255 - Login to SHA with your known user account and password]
 	And I Use the shared step below to search for your battery product
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: TestCase103572)
 	And I Confirm your product is shown in the Submitted status
-	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: (.*))
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase103572)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: TestCase103572)
 	And I Confirm your product is in the Assigned status.
-	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*))
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: (.*))
+	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase103572)
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase103572)
 	And [Shared Step 79500 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only]
-	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: (.*))
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase103572)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: TestCase103572)
 	And I Confirm the product is in the completed status
 	And [Shared Step 103591 - SHA - Add Battery to BATTREF table]
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -232,16 +236,16 @@ Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	And I Click Home
 	And [Shared Step 103255 - Login to SHA with your known user account and password]
 	And I Use the shared step below to search for your BCP that you just created
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: TestCase103572)
 	And I Confirm your product is shown in the Submitted Status
-	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: (.*))
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase103572)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: TestCase103572)
 	And I Confirm your product is in the Assigned status.
-	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*))
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: (.*))
+	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase103572)
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase103572)
 	And [Shared Step 79500 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only]
-	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: (.*))
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase103572)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: TestCase103572)
 	And I Confirm the product is in the completed status
 	And [Shared Step 103592 - SHA - Remove Battery from BATTREF table]
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
