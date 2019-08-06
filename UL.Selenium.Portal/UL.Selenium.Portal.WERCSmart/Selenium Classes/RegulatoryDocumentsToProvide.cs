@@ -38,13 +38,4 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 			return elAnswer.TryClick();
 		}
 	}
-
-	static class StringExtensions
-	{
-		public static string FixSingleQuotes(this string str)
-		{
-			str.Replace("'", "\'");
-			return str;
-		}
-	}
 }
