@@ -200,6 +200,7 @@
     <Compile Include="Selenium Classes\PasswordExpired.cs" />
     <Compile Include="Selenium Classes\PaymentMethods.cs" />
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
+    <Compile Include="Selenium Classes\RegulatoryDocumentsToProvide.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
     <Compile Include="Selenium Classes\ReviewDocuments.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Steps\New Product\Product Type\Steps_AdditionalProductInformation.cs" />
     <Compile Include="Steps\New Product\Product Type\Steps_ProductCharacteristics.cs" />
     <Compile Include="Steps\New Product\Product Type\Steps_TheProduct.cs" />
+    <Compile Include="Steps\New Product\Review and Submit\Steps_RegulatoryDocumentsToProvide.cs" />
     <Compile Include="Steps\New Product\Steps_NewProduct.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
@@ -416,7 +418,7 @@
     </None>
     <None Include="Features\Product Registration\Kits - Flow 13.feature">
     </None>
-    <None Include="Features\Product Registration\Lithium Battery Transport Informarion.feature">
+    <None Include="Features\Product Registration\Lithium Battery Transport Information.feature">
     </None>
     <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature">
     </None>
@@ -480,7 +482,6 @@
   <ItemGroup>
     <Folder Include="Selenium Classes\New Product\Review and Submit\" />
     <Folder Include="Steps\New Product\Recipient and UPC Details\" />
-    <Folder Include="Steps\New Product\Review and Submit\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

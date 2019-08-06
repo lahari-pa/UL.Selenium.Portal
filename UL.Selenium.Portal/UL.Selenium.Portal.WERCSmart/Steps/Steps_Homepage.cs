@@ -399,6 +399,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I click the Home navigation icon")]
+		public void ClickTheHomeNavigationIcon()
+		{
+			try
+			{
+				Report.Info("Navigating to the Home Page");
+				var selNav = new NavigationBar();
+				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
+				var selHomepage = new Homepage();
+				Report.IsTrue(selHomepage.WaitForContainerToBeVisible(),
+					"Homepage did not load after clicking the Home icon!",
+					"Homepage successfully loaded after clicking the home icon");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I should see the following filter options below My Products")]
 		public void GivenIShouldSeeTheFollowingFilterOptionsBelowMyProducts(Table table)
 		{
