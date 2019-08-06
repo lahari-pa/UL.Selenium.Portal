@@ -133,6 +133,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Error message was showing: '{message}', as expected");
 		}
 
+		[StepDefinition(@"I should see a list style form error with text: (.*)")]
+		public void ShouldSeeAlistFormError(string error)
+		{
+			var errorActual = new NewProduct().FormError();
+			Report.IsTrue(errorActual.Contains(error), "Error was not found!", "Found error");
+		}
+
 		[StepDefinition(@"in page (.*) I should see error: (.*)")]
 		public void InPageIShouldSeeError(string page, string error)
 		{
@@ -955,6 +962,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Info("Quantity: " + upcInfo.Quantity);
 
 			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
+		}
+
+		[StepDefinition(@"I click 'Select all' under Destination Retailers in the UPC page")]
+		public void ClickSelectAllUnderDestinationRetailers()
+		{
+			Report.IsTrue(new NewProduct().ClickSelectAllDestinationRetailers(), "Failed to click Select All", "Clicked Select All");
 		}
 
 		[StepDefinition(@"the comments field should appear")]

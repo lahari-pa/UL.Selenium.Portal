@@ -8151,5 +8151,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I confirm the body text of the email matches the expected text");
 			new GlobalSteps().ThenTheBodyOfTheEmailShouldShow(expectedText);
 		}
+
+		[StepDefinition(@"I call Shared Step 75146 \(Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue\)")]
+		public void SharedStep75146_Retailer_SelectOneOrMoreThatDoNotRequireVendorIdOrAdditionalUpcInformation_ClickDone_ClickContinue()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I select a valid retailer and click DONE");
+			List<string> retailers = new SelectRetailers().GetListOfRetailers();
+			List<string> invalidRetailers = new List<string>(){ "Walmart", "O'Reilly", "Sears", "Ultra Standard", "Genuine Parts", "Staples", "Target", "Home Depot" };
+			Report.Info("Invalid retailers are: " + string.Join(", ", invalidRetailers));
+			string selectRetailer = retailers.FirstOrDefault(x => invalidRetailers.All(y => !y.Contains(x)));
+			if (selectRetailer == null)
+			{
+				Report.Failure("There were no valid retailers to select!");
+				Report.Screenshot();
+				return;
+			}
+			Report.Info("Selecting retailer: " + selectRetailer);
+			new StepsSelectRetailers().SelectTheRetailer(selectRetailer);
+			TestReport.StartStep("Click CONTINUE");
+			new StepsNewProduct().ClickContinue();
+		}
 	}
 }

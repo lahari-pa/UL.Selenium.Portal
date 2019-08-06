@@ -363,6 +363,7 @@
     </None>
     <None Include="Features\NewProduct.feature">
     </None>
+    <None Include="Features\Product Registration\Duplicate UPC.feature" />
     <None Include="Features\Product Registration\Flow 12.feature">
     </None>
     <None Include="Features\Product Registration\Flow 14.feature">
