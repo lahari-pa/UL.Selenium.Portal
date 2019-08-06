@@ -2212,6 +2212,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
+
+		[StepDefinition(@"I confirm that the Current Submission date in SHA Manager matches the date saved as: (.*)")]
+		public void IConfirmThatTheCurrentSubmissionDateMatches(string savedAs)
+		{
+			string date = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			Product product = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+			Report.IsTrue(product.CurrentSubmission.ToString() == date, "Current submission date '" + product.CurrentSubmission.ToString() + "' does not match date saved to context '" + date + "'.",
+				"Current submission date '" + product.CurrentSubmission.ToString() + "' matches date saved to context '" + date + "'.");
+		}
+
+		[StepDefinition(@"In the Authoring menu I select Power Designer Plus")]
+		public void InTheAuthoringMenuISelectPowerDesignerPlus()
+		{
+			var thisTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
+				"Failed to navigate to power designer plus", "Navigated to power designer plus");
+			Delay.Seconds(3);
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			if (!thisPowerDesignerPlus.Wait_for_load(30))
+			{
+				var thisStudioPowerDesignerPlusDesignMode =
+					new StudioPowerDesignerPlusDesignMode();
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
+				Delay.Seconds(3);
+			}
+
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+		}
 	}
 }
 

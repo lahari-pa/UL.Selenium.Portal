@@ -346,6 +346,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool ConfirmSubscriptionLevel(string subscription)
+		{
+			IWebElement subLevel = this.containerElement.FindElement(By.XPath(@"//div[@class='col-sm-3 subscription']//h3"), 2);
+			if (subLevel == null)
+			{
+				Report.Info("Failed to find subscription level element");
+				return false;
+			}
+
+			return subLevel.Text.Trim() == subscription;
+
+		}
+
 		//Accounts Navigation
 		[FindsBy(How = How.Id, Using = "myAccounts_navigation")]
 		private IWebElement _nav_accounts;

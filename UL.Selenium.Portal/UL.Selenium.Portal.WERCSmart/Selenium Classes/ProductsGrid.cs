@@ -46,7 +46,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return productRows.Count(x => x.Displayed);
 		}
 
+		public bool ConfirmNameMatches(string name)
+		{
+			return this.GetNameInFirstGridRow().Trim() == name.Trim();
+		}
+
+		public bool ConfirmProductHasRetailer(string retailer)
+		{
+			return this.GetRetailerInFirstGridRow().Trim() == retailer.Trim();
+		}
+
 		public string GetIdInFirstGridRow() => this.ProductRows.FirstOrDefault()?.FindElement(By.XPath(".//small"), 2)?.Text;
+
+		public string GetNameInFirstGridRow() => this.ProductRows.FirstOrDefault()?.FindElement(By.XPath(".//p"), 2)?.Text;
+
+		public string GetRetailerInFirstGridRow() => this.ProductRows.FirstOrDefault()?.FindElement(By.XPath(".//li/span"), 2).Text;
 
 		public List<string> GetAllFilters()
 		{

@@ -73,7 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.ThenIClickOnNewSubscription();
 			var subEnrollTable = new Table("Articles", "Enhanced Articles",
 				"Formulated Products", "Feature Plan", "Support Services Plan");
-			subEnrollTable.AddRow("None", "None", "Up to 1 Product(s)", "Limited", "General Support");
+			subEnrollTable.AddRow("Up to 400 Product(s)", "Up to 400 Product(s)", "Up to 400 Product(s)", "Standard", "Bronze");
 			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
 			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
 			myPay.ThenISelectPaymentMethodX("Credit Card");
@@ -86,7 +86,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myPay.ThenInTheThankYouScreenIClickHome();
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
-			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("1", "0", "0");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("400", "400", "400");
 
 			//My Packaging Type
 			myHome.ThenIClickOnUserItem("My Account");
