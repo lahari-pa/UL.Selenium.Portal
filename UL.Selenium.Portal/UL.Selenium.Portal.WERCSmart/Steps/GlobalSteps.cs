@@ -1298,6 +1298,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I save the username for TReVor test user: (.*) to context as: (.*)")]
+		public void SaveUsernameOfTrevorUser(string trevorSavedAs, string usernameSavedAs)
+		{
+			TestUser user = TestUsers.GetUserSavedAs(trevorSavedAs);
+			if (user != null)
+			{
+				Report.Info("Adding username context: " + user.Username);
+				Context.AddToContext(usernameSavedAs, user.Username);
+			}
+		}
+
 
 	}
 }

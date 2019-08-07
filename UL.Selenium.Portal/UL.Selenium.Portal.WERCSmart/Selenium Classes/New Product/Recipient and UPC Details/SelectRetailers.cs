@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.ExtensionMethods;
@@ -167,11 +168,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@class='modal fade in']");
 
-		public bool ClickOk()
+		public bool ClickChoice(string choice)
 		{
+			choice = Regex.Replace(choice, "([A-Z])([A-Z]+)($|[A-Z])",
+			m => m.Groups[1].Value + m.Groups[2].Value.ToLower() + m.Groups[3].Value);
+			choice = char.ToUpper(choice[0]) + choice.Substring(1);
+
 			try
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//button[contains(text(), 'Ok')]"), 2);
+				IWebElement el = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//button[contains(text(), '" + choice + "')]"), 2);
 				if (el == null)
 				{
 					return false;

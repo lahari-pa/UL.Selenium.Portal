@@ -184,6 +184,7 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 
 @TReVorId:21463
 Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
+	# Hardcoded values for Product ID. These do not exist in all environments.
 	Given I save to context name: TestCase1 and value: 1525111
 	Given I save to context name: TestCase2 and value: 1501057
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

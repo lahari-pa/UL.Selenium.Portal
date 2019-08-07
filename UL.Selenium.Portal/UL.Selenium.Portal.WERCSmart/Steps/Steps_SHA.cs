@@ -171,26 +171,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 0; i < x.Count; i++)
 			{
 				Delay.Seconds(1);
+				string value = x.Values.ElementAt(i);
+				if (x.Values.ElementAt(i).StartsWith("saved as"))
+				{
+					var savedAs = x.Values.ElementAt(i).TrimStart("saved as").Trim();
+					value = Context.GetFromContext(savedAs)?.ToString();
+					if (value == null)
+					{
+						throw new Exception("Failed to get required value from context! Saved as: " + savedAs);
+					}
+				}
 				switch (x.Keys.ElementAt(i))
 				{
 					case "Status":
-						Report.IsTrue(thisProductSearch.SelectFromStatusFilter(x.Values.ElementAt(i)),
-							"Failed to set status to: " + x.Values.ElementAt(i),
-							"Successfully set status to: " + x.Values.ElementAt(i), false, false);
+						Report.IsTrue(thisProductSearch.SelectFromStatusFilter(value),
+							"Failed to set status to: " + value,
+							"Successfully set status to: " + value, false, false);
 						break;
 					case "Client":
-						Report.IsTrue(thisProductSearch.SelectFromClientFilter(x.Values.ElementAt(i)),
-							"Failed to set client", "Successfully set client to: " + x.Values.ElementAt(i), false,
+						Report.IsTrue(thisProductSearch.SelectFromClientFilter(value),
+							"Failed to set client", "Successfully set client to: " + value, false,
 							false);
 						break;
 					case "SearchPattern":
-						Report.IsTrue(thisProductSearch.SelectFromSearchPatternFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromSearchPatternFilter(value),
 							"Failed to set search pattern",
-							"Successfully set search pattern to: " + x.Values.ElementAt(i), false, false);
+							"Successfully set search pattern to: " + value, false, false);
 						break;
 					case "ProductID":
 					case "ProductId":
-						string prodID = x.Values.ElementAt(i);
+						string prodID = value;
 						if (prodID.ToLower().Contains("savedas"))
 						{
 							string savedAsText = prodID.Replace("savedas", "").Trim();
@@ -198,39 +208,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 
 						Report.IsTrue(thisProductSearch.EnterProductID(prodID),
-							"Failed to set product id", "Successfully set product id to: " + x.Values.ElementAt(i),
+							"Failed to set product id", "Successfully set product id to: " + value,
 							false, false);
 						break;
 					case "ProductName":
-						Report.IsTrue(thisProductSearch.EnterProductName(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterProductName(value),
 							"Failed to set product name", "Successfully set product name", false, false);
 						break;
 					case "DateRange":
-						Report.IsTrue(thisProductSearch.SelectFromDateRangeFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromDateRangeFilter(value),
 							"Failed to set date range", "Successfully set date range", false, false);
 						break;
 					case "DateFrom":
-						Report.IsTrue(thisProductSearch.EnterDateFrom(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterDateFrom(value),
 							"Failed to set date range", "Successfully set date range", false, false);
 						break;
 					case "DateTo":
-						Report.IsTrue(thisProductSearch.EnterDateTo(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterDateTo(value),
 							"Failed to set date range", "Successfully set date range", false, false);
 						break;
 					case "LastActivityDate":
-						Report.IsTrue(thisProductSearch.EnterLastActivityDate(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterLastActivityDate(value),
 							"Failed to set activity date", "Successfully set activity date", false, false);
 						break;
 					case "Supplier":
-						Report.IsTrue(thisProductSearch.EnterSupplier(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterSupplier(value),
 							"Failed to set supplier", "Successfully set supplier", false, false);
 						break;
 					case "User":
-						Report.IsTrue(thisProductSearch.EnterUser(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterUser(value),
 							"Failed to set user", "Successfully set user", false, false);
 						break;
 					case "Reviewer":
-						Report.IsTrue(thisProductSearch.EnterReviewer(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterReviewer(value),
 							"Failed to set reviewer", "Successfully set reviewer", false, false);
 						break;
 					case "OnSuspended":
@@ -238,53 +248,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							"Failed to set on suspended", "Successfully set on suspended", false, false);
 						break;
 					case "RecertificationActive":
-						Report.IsTrue(thisProductSearch.CheckRecertificationActive(x.Values.ElementAt(i) == "true"),
+						Report.IsTrue(thisProductSearch.CheckRecertificationActive(value == "true"),
 							"Failed to set recertification active", "Successfully set recertification active", false,
 							false);
 						break;
 					case "GGOnlyProducts":
-						Report.IsTrue(thisProductSearch.CheckGoodGuideOnlyProducts(x.Values.ElementAt(i) == "true"),
+						Report.IsTrue(thisProductSearch.CheckGoodGuideOnlyProducts(value == "true"),
 							"Failed to set Good Guide only products", "Successfully set Good Guide only products",
 							false, false);
 						break;
 					case "ECommFlowProducts":
-						Report.IsTrue(thisProductSearch.CheckECommFlowProducts(x.Values.ElementAt(i) == "true"),
+						Report.IsTrue(thisProductSearch.CheckECommFlowProducts(value == "true"),
 							"Failed to set EComm flow products", "Successfully set EComm flow products", false, false);
 						break;
 					case "TReg":
-						Report.IsTrue(thisProductSearch.SelectFromTRegFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromTRegFilter(value),
 							"Failed to set TReg", "Successfully set TReg", false, false);
 						break;
 					case "OrderNo":
-						Report.IsTrue(thisProductSearch.EnterOrderNo(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterOrderNo(value),
 							"Failed to set order no", "Successfully set order no", false, false);
 						break;
 					case "SubmissionDate":
-						Report.IsTrue(thisProductSearch.EnterSubmissionDate(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterSubmissionDate(value),
 							"Failed to set submission date", "Successfully set submission date", false, false);
 						break;
 					case "UPC":
-						Report.IsTrue(thisProductSearch.EnterUPC(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterUPC(value),
 							"Failed to set upc", "Successfully set upc", false, false);
 						break;
 					case "ParentUPC":
-						Report.IsTrue(thisProductSearch.EnterParentUPC(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterParentUPC(value),
 							"Failed to set parent upc", "Successfully set parent upc", false, false);
 						break;
 					case "RecommendedUse":
-						Report.IsTrue(thisProductSearch.SelectFromRecommendedUseFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromRecommendedUseFilter(value),
 							"Failed to set recommended use", "Successfully set parent upc", false, false);
 						break;
 					case "FlashpointRange":
-						Report.IsTrue(thisProductSearch.SelectFromFlashPointRangeFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromFlashPointRangeFilter(value),
 							"Failed to set Flashpoint range", "Successfully set parent upc", false, false);
 						break;
 					case "PHRange":
-						Report.IsTrue(thisProductSearch.SelectFromPHRangeFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromPHRangeFilter(value),
 							"Failed to set PH range", "Successfully set PH range", false, false);
 						break;
 					case "UNNumber":
-						Report.IsTrue(thisProductSearch.EnterUNNumber(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterUNNumber(value),
 							"Failed to set un number", "Successfully set un number", false, false);
 						break;
 					default:
@@ -562,6 +572,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new StudioSHAManager().RightClickProductByID(ID), "Failed to rightclick against: " + ID,
 				"Right clicked against: " + ID);
 		}
+		
 
 		[StepDefinition(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
 		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string option)
@@ -2063,38 +2074,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(
-			@"I confirm all UPC numbers in the list saved as: (.*) are displayed in the SHA Manager Product UPC list")]
+		[StepDefinition(@"I confirm all UPC numbers in the list saved as: (.*) are displayed in the SHA Manager Product UPC list")]
 		public void ConfirmAllUpcsAreDisplayedInShaManagerProductUpcList(string savedAs)
 		{
 			try
 			{
 				// Switch to window
-				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-				Context.AddToContext("MainWindowHandle", currentHandle);
-				System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-				Report.Info("Looking for SHA Manager Product UPC window");
-				bool foundWindow = false;
-				foreach (string handle in allHandles)
-				{
-					Report.Info("Checking handle: " + handle);
-					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-					if (SeleniumBrowser.WebBrowser.FindElement(
-							By.XPath(".//div[@class='upcTableOutter']"), 2) != null)
-					{
-						Report.Success("Tab was switched successfully!");
-						Report.Screenshot();
-						foundWindow = true;
-						break;
-					}
-				}
-
-				if (!foundWindow)
-				{
-					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
-					Report.Screenshot();
-				}
-
+				this.SwitchToProductListUpcWindow();
 				// Get Displayed UPCs
 				List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
 				if (displayedUpcs == null)
@@ -2120,6 +2106,110 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure(ex.Message);
 				Report.Screenshot();
+			}
+		}
+
+		[StepDefinition(@"I save a UPC number in the SHA Manager Product UPC list to context as: (.*) with report failure: (true|false)")]
+		public void SaveUpcNumberInShaManagerProductUpcListAs(string savedAs, bool reportFailure)
+		{
+			// Switch to window
+			this.SwitchToProductListUpcWindow();
+			// Get Displayed UPCs
+			List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+			if (!displayedUpcs.Any())
+			{
+				if (reportFailure)
+				{
+					Report.Failure("No UPCs were found in the Product UPC window");
+				}
+				else
+				{
+					Report.Info("No UPCs were found in the Product UPC window");
+				}
+				Report.Screenshot();
+				Report.Info("Closing window");
+				SeleniumBrowser.WebBrowser.Close();
+				Report.Info("Returning to the main window");
+				try
+				{
+					var handle = Context.GetFromContext("MainWindowHandle").ToString();
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					// required to switch to the frame and refresh container
+					new StudioSHAManager().Wait_for_load();
+				}
+				catch (Exception ex)
+				{
+					Report.Failure("Failed to navigate back to main window using MainWindowHandle context");
+					Report.Failure("Exception: " + ex.Message);
+					throw;
+				}
+				return;
+			}
+			var upcNumber = displayedUpcs.FirstOrDefault()?.UPCNumber;
+			Report.Info("Adding UPC number: " + upcNumber + " to context as: " + savedAs);
+			Context.AddToContext(savedAs, upcNumber);
+		}
+
+		[StepDefinition(@"I switch to the Product List UPC Window")]
+		public void SwitchToProductListUpcWindow()
+		{
+			try
+			{
+				// Switch to window
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+						    By.XPath(".//div[@class='upcTableOutter']"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+					Report.Info("Switching back to main window");
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(currentHandle);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+
+		}
+
+		[StepDefinition(@"I save a UPC number for any product in the grid to context as: (.*)")]
+		public void SaveUpcNumberForAnyProduct(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			int productsToTry = new StudioSHAManager().GetProductCount();
+			Report.Info("There are " + productsToTry + " products");
+			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
+			for (int i = 0; i < productsToTry; i++)
+			{
+				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = products[i].ID;
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
+				if (Context.GetFromContext(savedAs) != null)
+				{
+					Report.Info("Saved UPC to context");
+					break;
+				}
 			}
 		}
 
