@@ -1,4 +1,5 @@
 using Castle.Core.Internal;
+using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
@@ -130,6 +131,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(errors.Contains(message),
 				$"Error message was not as expected! Expected: '{message}', but found: '{string.Join(", ", errors)}'!",
 				$"Error message was showing: '{message}', as expected");
+		}
+
+		[StepDefinition(@"I should see a list style form error with text: (.*)")]
+		public void ShouldSeeAlistFormError(string error)
+		{
+			var errorActual = new NewProduct().FormError();
+			Report.IsTrue(errorActual.Contains(error), "Error was not found!", "Found error");
 		}
 
 		[StepDefinition(@"in page (.*) I should see error: (.*)")]
@@ -954,6 +962,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Info("Quantity: " + upcInfo.Quantity);
 
 			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
+		}
+
+		[StepDefinition(@"I click 'Select all' under Destination Retailers in the UPC page")]
+		public void ClickSelectAllUnderDestinationRetailers()
+		{
+			Report.IsTrue(new NewProduct().ClickSelectAllDestinationRetailers(), "Failed to click Select All", "Clicked Select All");
 		}
 
 		[StepDefinition(@"the comments field should appear")]
@@ -2482,6 +2496,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Packaging types are showing");
 		}
 
+		[StepDefinition(@"I choose (ok|cancel) in the UPCs Warning modal window")]
+		public void ChooseInTheUPCsWarningModalWindow(string choice)
+		{
+			Report.IsTrue(new NoRetailerWarningPopup().ClickChoice(choice), "Clicked " + choice + " in UPCs Warning modal", "Unable to click " + choice + " in UPCs Warning modal");
+		}
+
 		[StepDefinition(@"In the UPC page I (should|should not) see Add new Packaging Type link")]
 		public void GivenInTheUPCPageIShouldSeeAddNewPackagingTypeLink(string shouldOrNot)
 		{
@@ -2499,7 +2519,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("input values must be either 'should' or 'should not'");
 			}
 		}
-
 		#endregion
 	}
+
+	//public class UPCWarning : SeleniumBaseObject
+	//{
+	//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
+
+	//	protected override By ContainerElementLocator => By.XPath(BasePath);
+
+	//	public bool ClickUPCWarningButton(string choice)
+	//	{
+	//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
+	//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
+
+	//		if (modalWindow is null || modalTitle is null)
+	//		{
+	//			Report.Failure("Could not locate UPC Warning modal window.");
+	//			return false;
+	//		}
+
+	//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
+	//		switch (choice)
+	//		{
+	//			case "ok":
+	//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
+	//				return deleteBtn.TryClick();
+	//			case "cancel":
+	//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
+	//				return cancelBtn.TryClick();
+	//		}
+	//		return false;
+	//	}
+	//}
 }

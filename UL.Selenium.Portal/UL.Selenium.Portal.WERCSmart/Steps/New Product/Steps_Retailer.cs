@@ -207,13 +207,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"If the UPCs Warning popup is displayed I click OK")]
-		public void IfISeeUpcWarningPopupClickOk()
+		[StepDefinition(@"If the UPCs Warning popup is displayed I click (.*)")]
+		public void IfISeeUpcWarningPopupClick(string choice)
 		{
 			var noRetailerWarning = new NoRetailerWarningPopup();
 			if (noRetailerWarning.WaitForContainerToBeVisible(10))
 			{
-				Report.IsTrue(noRetailerWarning.ClickOk(), "Failed to click OK in the UPC Warning popup!", "Successfully clicked OK in the UPC Warning popup");
+				Report.IsTrue(noRetailerWarning.ClickChoice("Ok"), "Failed to click OK in the UPC Warning popup!", "Successfully clicked OK in the UPC Warning popup");
 			}
 			else
 			{
@@ -228,7 +228,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			TestReport.StartStep("I click continue");
 			Report.IsTrue(new NewProduct().ClickContinue(false), "Failed to click continue", "Clicked continue");
 			TestReport.StartStep("I click 'OK' in the 'UPCs Warning' popup if it is displayed");
-			this.IfISeeUpcWarningPopupClickOk();
+			this.IfISeeUpcWarningPopupClick("Ok");
 		}
 
 	}
