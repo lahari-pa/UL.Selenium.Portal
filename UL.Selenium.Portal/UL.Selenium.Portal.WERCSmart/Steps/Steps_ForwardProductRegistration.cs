@@ -354,6 +354,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I select the product saved as: (.*) under the Select Products tab")]
+		public void ISelectTheProductSavedAsUnderSelectProducts(string savedAs)
+		{
+			var selForwardProductReg = new ForwardProductRegistration();
+			var info = (ProductInformation)Context.GetFromContext(savedAs);
+			if (info == null)
+			{
+				Report.Failure("Could not find product in context saved as: " + savedAs);
+				return;
+			}
+			this.EnterTextInSearchByIDOrProductNameField(info.Id);
+			Report.Screenshot();
+			Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(info.Id),
+								"Failed to select the product with ID: " + info.Id + "!",
+								"Successfully selected the product with ID: " + info.Id);
+		}
+
 		[StepDefinition(@"I confirm I am unable to select the product with ID saved as: (.*) under the Select Products tab")]
 		public void ConfirmIAmUnableToSelectProductWithIDSavedAs(string savedAs)
 		{
@@ -450,6 +467,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selForwardProductReg.ClickAddUPC(),
 				"Failed to click the Add UPC button!",
 				"Successfully clicked the Add UPC button");
+		}
+
+		[StepDefinition(@"I click the Add Case UPC button under the Select UPCs tab")]
+		public void ClickAddCaseUPCsButtonUnderSelectUPCsTab()
+		{
+			var selForwardProductReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(),
+							"Failed to click the Add UPC button!",
+							"Successfully clicked the Add UPC button");
 		}
 
 		[StepDefinition(@"I click the Add To No Retailer button under the Select UPCs tab")]
@@ -605,6 +631,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
+		}
+
+		[StepDefinition(@"In the Add Case UPC modal window I enter the following information:")]
+		public void InTheAddCaseUPCWindowIEnterTheFollowingInfo(Table table)
+		{
+			var modal = new AddCaseUPCModal();
+			TableRow row = table.Rows[0];
+			Report.IsTrue(modal.EnterCaseUPCInformation(row), "Failed to enter information into the Add Case UPC modal window.",
+				"Successfully entered information into the Add Case UPC modal window.");
+		}
+
+		[StepDefinition(@"In the Case UPC modal window I click Save")]
+		public void InTheCaseUPCModalWindowIClickSave()
+		{
+			var modal = new AddCaseUPCModal();
+			Report.IsTrue(modal.ClickSave(), "Failed to click Save in the Add Case UPC modal window.",
+			"Successfully clicked Save in the Add Case UPC modal window.");
 		}
 
 
