@@ -59,6 +59,7 @@ Scenario: [68421] Active UPCs for Products Report
 	Given I click on close in the Report Download dialog
 
 @tfstestcase:68422
+@TReVorId:22388
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -75,6 +76,7 @@ Scenario: [68422] Battery-containing products report
 		| Battery Type  |
 		| Battery Mfg   |
 
+@TReVorId:22389
 Scenario: [68423] Formulated vs Articles Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -137,12 +139,12 @@ Scenario: [73225] Kits that Contain a specific Product
 Scenario: [73228] Products that are Associated with a specific Kit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: Products that are associated with a specific kit
-	Then In the Supplier Reports screen the current page should be: Products that are associated with a specific kit
+	Given Under the Supplier Reports menu I choose: Kit Registration Details
+	Then In the Supplier Reports screen the current page should be: Kit Registration Details
 	Given In the Kits that contain a specific product I search and select product: 1500009
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called Products that are associated with a specific kit.xlsx and save as 73228
+	Given I confirm that an excel file is produced called Kit Registration Details.xlsx and save as 73228
 	Then I confirm that the excel file saved as: 73228 contains the following columns:
 		| Column              |
 		| Product in Kit      |
