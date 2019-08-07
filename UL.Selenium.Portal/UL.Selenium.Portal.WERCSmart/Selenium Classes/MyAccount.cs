@@ -984,7 +984,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			option2 = DateTime.Now.ToString("yyyy-MM-dd");
+			TimeZone tz = TimeZone.CurrentTimeZone;
+			DateTime ut = tz.ToUniversalTime(DateTime.Now);
+			var est = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+			var esttime = TimeZoneInfo.ConvertTimeFromUtc(ut, est);
+			option2 = esttime.ToString("yyyy-MM-dd");
 			issueDate.Clear();
 			issueDate.EnterText(option2);
 			issueDate.SendKeys(Keys.Enter);
@@ -995,10 +999,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			int year = DateTime.Now.Year + 1;
-			int month = DateTime.Now.Month + 1;
-			int day = DateTime.Now.Day;
-			var dtExp = new DateTime(year, month, day);
+			int year2 = DateTime.Now.Year + 1;
+			int month2 = DateTime.Now.Month + 1;
+			int day2 = DateTime.Now.Day;
+			var dtExp = new DateTime(year2, month2, day2);
 			option3 = dtExp.ToString("yyyy-MM-dd");
 			expireDate.Clear();
 			expireDate.EnterText(option3);
