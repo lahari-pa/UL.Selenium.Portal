@@ -493,6 +493,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
+
+		public bool ConfirmDataTier(string tier, string trueFalse)
+		{
+			string tierNum = tier.Trim().Split(':')[0];
+			IWebElement row = this.DataConsentTiersTable()?.FindElement(By.XPath(@"//tbody//tr//td//div[contains(text(),""" + tierNum + @""")]//..//.."));
+			if (row == null)
+			{
+				return false;
+			}
+			IWebElement checkbox = row.FindElement(By.XPath("//input[@type='checkbox']"), 2);
+			bool Checked = checkbox.Selected;
+
+			if (trueFalse == "true" && !Checked)
+			{
+				Report.Info("Failed to find correct status of '" + trueFalse + "' for data consent tier '" + tier + "'.");
+				return false;
+			}
+			if (trueFalse == "false" && Checked)
+			{
+				Report.Info("Failed to find correct status of '" + trueFalse + "' for data consent tier '" + tier + "'.");
+				return false;
+			}
+
+			Report.Info("Successfully found correct status of '" + trueFalse + "' for data consent tier '" + tier + "'.");
+			return true;
+		}
+
 	}
 
 	public class DataEntryNotification : SeleniumBaseObject

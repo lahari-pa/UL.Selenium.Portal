@@ -183,6 +183,72 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm that the product returned has the same name as the product saved as: (.*)")]
+		public void ConfirmThatProductHasSameName(string savedAs)
+		{
+			if (!Context.Contains(savedAs))
+			{
+				Report.Failure("The reference: " + savedAs + " was not found in context");
+			}
+
+			string id = "";
+			string name = "";
+
+			try
+			{
+				var product = (ProductGridItem)Context.GetFromContext(savedAs);
+				id = product.ProductId;
+				name = product.ProductName;
+			}
+			catch (Exception)
+			{
+				//do nothing
+			}
+
+			//if we didn't get the id try a different object type
+			if (id == "")
+			{
+				try
+				{
+					var product = (ProductInformation)Context.GetFromContext(savedAs);
+					id = product.Id;
+					name = product.Name;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+			}
+
+			if (id == "")
+			{
+				try
+				{
+					id = Context.GetFromContext(savedAs).ToString();
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+			}
+
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = id
+			};
+
+			Report.IsTrue(selProdGrid.ConfirmNameMatches(name), "Failed to find matching name '" + name + "'.",
+				"Successfully found matching name '" + name + "'.");
+		}
+
+		[StepDefinition(@"I confirm that the product returned has the retailer: (.*)")]
+		public void ConfirmThatProductHasRetailer(string retailer)
+		{
+			var selProdGrid = new ProductsGrid();
+			Report.IsTrue(selProdGrid.ConfirmProductHasRetailer(retailer), "Failed to find retailer '" + retailer + "' on first product returned.",
+				"Successfully found retailer '" + retailer + "' on first product returned.");
+		}
+
 		[StepDefinition(@"I clear the Search Criteria")]
 		public void ClearSearchCriteria()
 		{

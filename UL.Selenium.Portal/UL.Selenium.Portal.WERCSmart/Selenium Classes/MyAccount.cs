@@ -38,7 +38,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetCompanyName()
 		{
-			IWebElement companyNameH3 = this.containerElement.FindElement(By.XPath("//div[@class='col-sm-3 basic-info']/h3"), 2);
+			IWebElement companyNameH3 = this.containerElement.FindElement(By.XPath(".//div[@id='basic-user-info']/h3"), 2);
 			return companyNameH3?.Text;
 		}
 
@@ -344,6 +344,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Attempting to Click New Subscription Button");
 			this._btnNewSub.Click();
 			return true;
+		}
+
+		public bool ConfirmSubscriptionLevel(string subscription)
+		{
+			IWebElement subLevel = this.containerElement.FindElement(By.XPath(@"//div[@class='col-sm-3 subscription']//h3"), 2);
+			if (subLevel == null)
+			{
+				Report.Info("Failed to find subscription level element");
+				return false;
+			}
+
+			return subLevel.Text.Trim() == subscription;
+
 		}
 
 		//Accounts Navigation

@@ -5,6 +5,7 @@ using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
+using NTTQA.Selenium.UniversalFunctions;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
@@ -22,10 +23,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully chose: " + choice);
 		}
 
+		[StepDefinition(@"In the Supplier Reports screen the page title should be: (.*)")]
+		public void InTheSupplierReportsScreenThePageTitleShouldBe(string title)
+		{
+			string actual = new SupplierReports().GetCurrentTitle();
+			Report.IsTrue(actual == title, "Page title '" + title + "' is not showing as expected.",
+				"Page title '" + title + "' is showing as expected.");
+		}
+
 		[StepDefinition(@"In the Supplier Reports screen the current page should be: (.*)")]
 		public void ThenInTheSupplierReportsScreenTheCurrentPageShouldBe(string expected)
 		{
-			string actual = new SupplierReports().GetCurrentSubTitle();
+			string actual = new SupplierReports().GetCurrentTitle();
 			Report.IsTrue(actual == expected, "Title is not showing as expected",
 				"Showing subtitle: " + expected + " as expected.");
 		}
@@ -59,15 +68,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Kits that contain a specific product I search and select product: (.*)")]
 		public void GivenInTheKitsThatContainASpecificProductISearchAndSelectProduct(string productCode)
 		{
-			Report.IsTrue(new SupplierReports().SelectKitThatContainsSpecificProduct(productCode),
+			if (productCode.ToLower().Contains("saved as"))
+			{
+				try
+				{
+					ProductGridItem item = (ProductGridItem)Context
+						.GetFromContext(productCode.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
+					productCode = item.ProductId;
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to find saved item in context: " + productCode.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					throw;
+				}
+			}
+			Report.IsTrue(new SupplierReports().SelectSpecificProduct(productCode),
 				"Failed to select product: " + productCode, "Successfully selected product: " + productCode);
 		}
 
 		[StepDefinition(@"In the UPC Report for Specific Product with Retailer I search and select product: (.*)")]
 		public void GivenInTheUPCReportForSpecificProductWithRetailerISearchAndSelectProduct(string productCode)
 		{
-			Report.IsTrue(new SupplierReports().SelectKitThatContainsSpecificProduct(productCode),
+			Report.IsTrue(new SupplierReports().SelectSpecificProduct(productCode),
 				"Failed to select product: " + productCode, "Successfully selected product: " + productCode);
+		}
+
+		[StepDefinition(@"I select a random product from the drop down")]
+		public void InTheUPCReportISelectARandomProduct()
+		{
+			Report.IsTrue(new SupplierReports().SelectRandomProduct(), "Failed to select a random product",
+				"Successfully selected a random product");
 		}
 
 		[StepDefinition(@"In the Supplier Report page in the select Retailer dropdown I select: (.*)")]

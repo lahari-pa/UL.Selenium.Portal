@@ -8,6 +8,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -194,6 +195,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(regMatch.Groups[1].ToString() == numerator, "Numerator was expected to be: " + numerator + " but is: " + regMatch.Groups[1].ToString(), "As expected, numerator is: " + numerator);
 			Report.IsTrue(regMatch.Groups[2].ToString() == denominator, "Denominator was expected to be: " + denominator + " but is: " + regMatch.Groups[1].ToString(), "As expected, denominator is: " + denominator);
 
+		}
+
+		[StepDefinition(@"I confirm that the Transparency Ratio underneath Ingredients equals: (.*)")]
+		public void IConfirmThatTheTransparencyRatioEquals(string savedAs)
+		{
+			string transRatio = Context.GetFromContext(savedAs)?.ToString();
+			string pattern = @"(\d)\s\/\s(\d)";
+			Match regMatch = Regex.Match(transRatio, pattern);
+			string numerator = regMatch.Groups[1].ToString();
+			string denominator = regMatch.Groups[2].ToString();
+
+			var thisDataSummary = new DataSummary();
+			string pattern2 = @"([0123456789\.]*)\s*\/\s*([0123456789\.]*)";
+			string actualRatio = thisDataSummary.SGetTransparencyRatio();
+			Match regMatch2 = Regex.Match(actualRatio, pattern2);
+			if (!regMatch2.Success || regMatch2.Groups.Count != 3)
+			{
+				Report.Failure("Actual ratio was not as expected. It is: " + actualRatio);
+			}
+			Report.IsTrue(regMatch2.Groups[1].ToString() == numerator, "Numerator was expected to be: " + numerator + " but is: " + regMatch.Groups[1].ToString(), "As expected, numerator is: " + numerator);
+			Report.IsTrue(regMatch2.Groups[2].ToString() == denominator, "Denominator was expected to be: " + denominator + " but is: " + regMatch.Groups[1].ToString(), "As expected, denominator is: " + denominator);
 		}
 
 		[StepDefinition(@"I take a screenshot of the ingredients")]
