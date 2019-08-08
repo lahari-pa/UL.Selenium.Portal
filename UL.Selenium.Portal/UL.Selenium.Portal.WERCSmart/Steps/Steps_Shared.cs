@@ -2365,7 +2365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep(
 				"I set the For Air transport (IATA), indicate the classification field to: Section IB");
 			MyNewProductSteps.SetTheSectionOptionTo("For Air transport (IATA), indicate the classification",
-				"Section IA");
+				"Section IB");
 			TestReport.StartStep(
 				"I set the For Canada's Transportation of Dangerous Goods (TDG), indicate the classification field to: None of the above/Not intended for shipment in Canada");
 			MyNewProductSteps.SetTheSectionOptionTo(
@@ -8158,7 +8158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I select a valid retailer and click DONE");
 			List<string> retailers = new SelectRetailers().GetListOfRetailers();
-			List<string> invalidRetailers = new List<string>(){ "Walmart", "O'Reilly", "Sears", "Ultra Standard", "Genuine Parts", "Staples", "Target", "Home Depot" };
+			List<string> invalidRetailers = new List<string>() { "Walmart", "O'Reilly", "Sears", "Ultra Standard", "Genuine Parts", "Staples", "Target", "Home Depot" };
 			Report.Info("Invalid retailers are: " + string.Join(", ", invalidRetailers));
 			string selectRetailer = retailers.FirstOrDefault(x => invalidRetailers.All(y => !y.Contains(x)));
 			if (selectRetailer == null)

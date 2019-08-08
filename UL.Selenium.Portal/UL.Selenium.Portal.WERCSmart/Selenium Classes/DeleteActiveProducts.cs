@@ -4,12 +4,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class DeleteActiveProducts : BaseObject
+	class DeleteActiveProducts : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='delete-active-products-grid']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 	}
 }

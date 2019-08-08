@@ -9,8 +9,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		// Cannot have a more precise container element than this
 		public const string BasePath = "//div[@class='container-fluid']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool ClickCreateCompanyAccount =>
 			this.containerElement.FindElement(By.XPath(".//a[text()='Create Company Account']"), 2).TryClick();
