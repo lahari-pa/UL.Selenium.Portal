@@ -10,14 +10,26 @@
 @RetailPartners
 @SHA
 @run_Flow12
+@MyAccount
+
 Feature: Flow 12
 
 @TReVorId:16688
 Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
+
+	Given I click on My Account
+	Then I create a new email address
+	Then I add a new user with the following information
+		| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |
+		| User      | Mr    | User | 123-456-7889 | Saved         | Saved         | empty        | United Kingdom |
+     
+
+
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+	Given I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party)
 	Then I save the product information as: TestCase58430
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |

@@ -1123,5 +1123,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(canadd.Canada_Supplier_Save_click(), "failed to click save", "successfully clicked save");
 			GeneralUtilities.Wait_for_load_finish();
 		}
+		[StepDefinition(@"I reset the password on a user account")]
+		public void ResetUserPassword()
+		{
+
+		}
 	}
 }
