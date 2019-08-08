@@ -105,7 +105,7 @@ Scenario: [73082] UPC Report for All Products with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
-	Then In the Supplier Reports screen the current page should be: UPCs and Registrations (Retailer Specific)
+	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called UPCs and Registrations (Retailer Specific).xlsx and save as 73082
@@ -136,7 +136,7 @@ Scenario: [73225] Kits that Contain a specific Product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Kits Containing a Specific Registration
-	Then In the Supplier Reports screen the current page should be: Kits Containing a Specific Registration
+	Then In the Supplier Reports screen the current sub-page should be: Kits Containing a Specific Registration
 	Given I select a random product from the drop down
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
@@ -153,7 +153,7 @@ Scenario: [73228] Products that are Associated with a specific Kit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Kit Registration Details
-	Then In the Supplier Reports screen the current page should be: Kit Registration Details
+	Then In the Supplier Reports screen the current sub-page should be: Kit Registration Details
 	Given I select a random product from the drop down
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
@@ -171,7 +171,7 @@ Scenario: [73226] Pesticide Certificate Report
 	Then The home screen should load
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Pesticide Certificate Report
-	Then In the Supplier Reports screen the current page should be: Pesticide Certificate Report
+	Then In the Supplier Reports screen the current sub-page should be: Pesticide Certificate Report
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called Pesticide Certificate Report.xlsx and save as excel73226
@@ -191,7 +191,7 @@ Scenario: [73229] Products with VOCs
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: VOC-related Registrations
-	Then In the Supplier Reports screen the current page should be: VOC-related Registrations
+	Then In the Supplier Reports screen the current sub-page should be: VOC-related Registrations
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called VOCrelated Registrations.xlsx and save as 73229
@@ -206,7 +206,7 @@ Scenario: [73227] Products and Recommended Use Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Product Types Registered
-	Then In the Supplier Reports screen the current page should be: Product Types Registered
+	Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227
@@ -223,7 +223,7 @@ Scenario: [73230] UPC Report for Specific Product with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: UPC and Retailer (Product Specific)
-	Then In the Supplier Reports screen the current page should be: UPC and Retailer (Product Specific)
+	Then In the Supplier Reports screen the current sub-page should be: UPC and Retailer (Product Specific)
 	Given I select a random product from the drop down
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
@@ -244,7 +244,7 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Sustainability Survey Eligibility - Health & Beauty
-	Then In the Supplier Reports screen the current page should be: Sustainability Survey Eligibility - Health & Beauty
+	Then In the Supplier Reports screen the current sub-page should be: Sustainability Survey Eligibility - Health & Beauty
 	Given In the Supplier Report page in the select Retailer dropdown I select: Target
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
@@ -298,7 +298,7 @@ Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 
 	Then The home screen should load
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: California Proposition 65 - Registrations Prior to August 30, 2018
-	Then In the Supplier Reports screen the current page should be: California Proposition 65 - Registrations Prior to August 30, 2018
+	Then In the Supplier Reports screen the current sub-page should be: California Proposition 65 - Registrations Prior to August 30, 2018
 	And In the Supplier Report page I should see the report description should be showing with text: The report output will illustrate the WERCSmart registrations active, not deleted, that exist in your WERCSmart account. The output will provide information related to Active Registrations and their responses to Proposition 65 questions presented in WERCSmart before the transition to the revised Prop 65 questions in July / August of 2018. The report will include registrations not yet updated and submitted with the revised Prop 65 data
 	Given In the Supplier Reports screen I click on the Download button
 	Given I confirm that a file is downloaded with file name: California Proposition 65  Registrations Prior to August 30 2018.xlsx then close the Report Download popup. I save the file as excel76551
@@ -322,7 +322,7 @@ Scenario: [76759] Waste Classification Summary Report
 	Then The home screen should load
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Waste Classification Summary for All Registrations
-	Then In the Supplier Reports screen the current page should be: Waste Classification Summary for All Registrations
+	Then In the Supplier Reports screen the current sub-page should be: Waste Classification Summary for All Registrations
 	And In the Supplier Report page I should see the report description should be showing with text: Report will show the waste classification for each of the 50 states and other areas within the United States, as well as the Federal waste classification. For specific information about a registration's waste classification, and how the waste classification was derived, you may request an Additional Document from the My Products area for the registration you're interested in receiving details about.
 	Given In the Supplier Reports screen I click on the Download button
 	Given I confirm that a file is downloaded with file name: Waste Classification Summary for All Registrations.xlsx then close the Report Download popup. I save the file as SupplierReport76759

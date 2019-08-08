@@ -8,6 +8,7 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -22,6 +23,71 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return el.TryClick();
+		}
+
+		public bool EnterCaseUPCInformation(TableRow row)
+		{
+			if (row["UPC Number"].ToLower().Contains("saved as"))
+			{
+				try
+				{
+					string savedUPC = Context
+						.GetFromContext(row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					row["UPC Number"] = savedUPC;
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to find saved item in context: " + row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					throw;
+				}
+			}
+
+			IWebElement upcNumber = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'UPC Number')]"), 2);
+			if (upcNumber == null || !upcNumber.TryEnterText(row["UPC Number"]))
+			{
+				Report.Info("Failed to enter the UPC Number in the Add UPC modal window.");
+				return false;
+			}
+
+			IWebElement containerType = this.containerElement.FindElement(By.XPath(@"//select[contains(@data-bind,'Container Type')]"), 2);
+			if (containerType == null)
+			{
+				Report.Info("Failed to select container type from the Container Type drop down");
+				return false;
+			}
+			else
+			{
+				containerType.Select(row["Container Type"]);
+			}
+
+			IWebElement size = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'Size (Weight Ounces)')]"), 2);
+			if (size == null || !size.TryEnterText(row["Size (Weight Ounces)"]))
+			{
+				Report.Info("Failed to enter the Size (Weight Ounces) in the Add Case UPC modal window.");
+				return false;
+			}
+
+			IWebElement quantity = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'Quantity of Units within the Case')]"));
+			if (quantity == null || !quantity.TryEnterText(row["Quanity of Units within the Case"]))
+			{
+				Report.Info("Failed to enter the Quanity of Units within the Case in the Add Case UPC modal window.");
+				return false;
+			}
+
+			IWebElement transportation = this.containerElement.FindElement(By.XPath(@"//select[contains(@data-bind,'Transportation Options')]"), 2);
+			if (transportation == null)
+			{
+				Report.Info("Failed to select type from the Type drop down");
+				return false;
+			}
+			else
+			{
+				transportation.Select(row["Transportation Options"]);
+			}
+
+			Report.Info("Successfully entered all Case UPC information.");
+			return true;
 		}
 
 		public string LithiumBatteyWarning()
@@ -196,6 +262,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Error("Could not find the correct input in section: " + section);
 			return false;
+		}
+
+		public string GetErrorText()
+		{
+			string text = "";
+			IWebElement foundText = this.containerElement.FindElement(By.XPath("//ul[@class='form-error']//li"), 2);
+			if (foundText != null)
+			{
+				text = foundText.Text;
+			}
+			return text;
 		}
 	}
 

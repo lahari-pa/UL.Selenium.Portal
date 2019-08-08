@@ -633,6 +633,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
 		}
 
+		[StepDefinition(@"In the Add UPC modal window I enter the following information:")]
+		public void InTheAddUPCWindowIEnterTheFollowingInfo(Table table)
+		{
+			var modal = new AddUPCModal();
+			TableRow row = table.Rows[0];
+			Report.IsTrue(modal.EnterUPCInformation(row), "Failed to enter information into the Add Case UPC modal window.",
+							"Successfully entered information into the Add Case UPC modal window.");
+		}
+
+		[StepDefinition(@"In the UPC modal window I click Save")]
+		public void InTheUPCModalWindowIClickSave()
+		{
+			var modal = new AddUPCModal();
+			Report.IsTrue(modal.ClickSave(), "Failed to click Save in the Add Case UPC modal window.",
+			"Successfully clicked Save in the Add Case UPC modal window.");
+		}
+
+
 		[StepDefinition(@"In the Add Case UPC modal window I enter the following information:")]
 		public void InTheAddCaseUPCWindowIEnterTheFollowingInfo(Table table)
 		{

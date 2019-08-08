@@ -621,6 +621,70 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
+	class AddUPCModal : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath("//div[@class='modal-content']");
+
+		public bool EnterUPCInformation(TableRow row)
+		{
+			if (row["UPC Number"].ToLower().Contains("saved as"))
+			{
+				try
+				{
+					string savedUPC = Context
+						.GetFromContext(row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					row["UPC Number"] = savedUPC;
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to find saved item in context: " + row["UPC Number"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					throw;
+				}
+			}
+
+			IWebElement upcNumber = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'UPC Number')]"), 2);
+			if (upcNumber == null || !upcNumber.TryEnterText(row["UPC Number"]))
+			{
+				Report.Info("Failed to enter the UPC Number in the Add UPC modal window.");
+				return false;
+			}
+
+			IWebElement type = this.containerElement.FindElement(By.XPath(@"//div//label[text() = 'Type']/following-sibling::select"), 2);
+			if (type == null)
+			{
+				Report.Info("Failed to select type from the Type drop down in the Add UPC modal window.");
+				return false;
+			}
+			else
+			{
+				type.Select(row["Type"]);
+			}
+
+			IWebElement size = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'Size (Ounces)')]"), 2);
+			if (size == null || !size.TryEnterText(row["Size (Ounces)"]))
+			{
+				Report.Info("Failed to enter the Size (Ounces) in the Add UPC modal window.");
+				return false;
+			}
+
+			IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), """ + row["Retailer"] + @""")]/preceding-sibling::input"));
+			if (retailer == null || !retailer.TryCheck())
+			{
+				Report.Info("Failed to check the retailer '" + row["Retailer"] + "'.");
+				return false;
+			}
+
+			Report.Info("Successfully entered all UPC information.");
+			return true;
+		}
+
+		public bool ClickSave()
+		{
+			return this.containerElement.FindElement(By.XPath(@"//button[contains(text(), 'Save')]"), 2).TryClick();
+		}
+	}
+
 	class AddCaseUPCModal : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@class='modal-content']");
@@ -678,7 +742,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement transportation = this.containerElement.FindElement(By.XPath(@"//div//label[text() = 'Transportation Options']/following-sibling::select"), 2);
 			if (transportation == null)
 			{
-				Report.Info("Failed to select type from the Type drop down");
+				Report.Info("Failed to select transportation option from the Transportation Options drop down");
 				return false;
 			}
 			else

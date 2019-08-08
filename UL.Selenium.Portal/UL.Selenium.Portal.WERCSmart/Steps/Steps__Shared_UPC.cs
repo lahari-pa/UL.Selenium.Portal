@@ -512,5 +512,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 		}
+
+		[StepDefinition(@"I add the following Case UPC information:")]
+		public void IAddTheFollowingCaseUPCInformation(Table table)
+		{
+			var upcPage = new UPC();
+			TableRow row = table.Rows[0];
+			Report.IsTrue(upcPage.EnterCaseUPCInformation(row), "Failed to enter Case UPC information.",
+				"Successfully entered Case UPC information.");
+		}
+
+		[StepDefinition(@"I should see the following error text displayed in the UPC screen: (.*)")]
+		public void IShouldSeeTheFollowingErrorTextDisplayedInTheUPCScreen(string text)
+		{
+			var upcPage = new UPC();
+			string errorText = GeneralUtilities.StripSpecialChars(upcPage.GetErrorText());
+			text = GeneralUtilities.StripSpecialChars(text);
+			Report.IsTrue(errorText == text, "Failed to find correct error message in the UPC screen. Expected: " + text + ". But instead found: " + errorText + ".",
+				"Successfully found correct error message in the UPC screen.");
+
+		}
 	}
 }
