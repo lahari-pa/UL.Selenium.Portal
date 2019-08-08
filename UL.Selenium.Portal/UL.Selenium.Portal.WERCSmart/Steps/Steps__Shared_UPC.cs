@@ -512,5 +512,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 		}
+
+		[StepDefinition(@"I should see the following error text displayed in the UPC screen: (.*)")]
+		public void IShouldSeeTheFollowingErrorTextDisplayedInTheUPCScreen(string text)
+		{
+			var upcPage = new UPC();
+			string errorText = GeneralUtilities.StripSpecialChars(upcPage.GetErrorText());
+			text = GeneralUtilities.StripSpecialChars(text);
+			Report.IsTrue(errorText.Contains(text), "Failed to find correct error message in the UPC screen. Expected: " + text + ". But instead found: " + errorText + ".",
+				"Successfully found correct error message in the UPC screen.");
+
+		}
 	}
 }

@@ -8,6 +8,7 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -196,6 +197,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Error("Could not find the correct input in section: " + section);
 			return false;
+		}
+
+		public string GetErrorText()
+		{
+			string text = "";
+			IWebElement foundText = this.containerElement.FindElement(By.XPath("//ul[@class='form-error']//li"), 2);
+			if (foundText != null)
+			{
+				text = foundText.Text;
+			}
+			return text;
 		}
 	}
 
