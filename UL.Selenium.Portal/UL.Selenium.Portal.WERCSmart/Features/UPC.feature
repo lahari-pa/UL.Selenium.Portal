@@ -618,9 +618,9 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 		| Retailer |
 		| Amazon   |
 	Given I click the 'Add Case UPC' button
-	Given I add the following Case UPC information:
-		| UPC Number          | Container Type | Size (Weight Ounces) | Quanity of Units within the Case | Transportation Options | Retailer |
-		| saved as UPC91801_2 | Aerosol Can    | 32                   | 32                               | 4A: steel box          | AM       |
+	Given I add the following into the UPC case fields
+		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		| saved as UPC91801_2 | Aerosol Can    | 32   | 32       |                          | 4A: steel box         |
 	Given I click continue
 	Then I should see the following error text displayed in the UPC screen: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
