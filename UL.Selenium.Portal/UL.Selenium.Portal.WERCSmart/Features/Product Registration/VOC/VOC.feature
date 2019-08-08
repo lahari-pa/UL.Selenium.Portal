@@ -145,7 +145,7 @@ Then I should see an error message: Document is required: Product Label
 
 Then Toxicity Characteristic Leaching Procedure (TCLP) should not be showing any error messages
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Then I should see the Optional Reports and Documents Available for Purchase Page
 
@@ -396,7 +396,7 @@ Given in the New Product page I click Continue
 
 Then I should see an error message: Document is required: Product Label
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Then I should see the Optional Reports and Documents Available for Purchase Page
 
@@ -734,7 +734,7 @@ Then I see the following sections
 | Volatile Organic Compounds                        |
 Given in the New Product page I click Continue
 Then I should see an error message: Document is required: Product Label
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 Then I should see the Optional Reports and Documents Available for Purchase Page
 Given in the New Product page I click Continue
 Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page

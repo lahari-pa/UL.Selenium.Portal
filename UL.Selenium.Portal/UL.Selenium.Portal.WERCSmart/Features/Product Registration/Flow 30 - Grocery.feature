@@ -43,7 +43,7 @@ Given I call Shared Step 69682 (Retailer Association - Add Private Label Informa
 
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60725, container type: Aerosol Can and size: 20
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
@@ -91,7 +91,7 @@ Given I call Shared Step 69682 (Retailer Association - Add Private Label Informa
 
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60724, container type: Aerosol Can and size: 20
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
@@ -139,7 +139,7 @@ Given I call Shared Step 69682 (Retailer Association - Add Private Label Informa
 
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60723, container type: Aerosol Can and size: 20
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
@@ -186,7 +186,7 @@ Given I call Shared Step 69682 (Retailer Association - Add Private Label Informa
 
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60722, container type: Aerosol Can and size: 20
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page

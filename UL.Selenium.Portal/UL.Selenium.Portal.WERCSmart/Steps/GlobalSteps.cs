@@ -21,6 +21,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
 using NTTQA.Selenium.TReVor;
+using NTTQA.Selenium.UniversalFunctions;
 
 [assembly: Apartment(ApartmentState.STA)]
 
