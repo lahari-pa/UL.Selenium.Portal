@@ -24,8 +24,9 @@ Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 	Then I add a new user with the following information
 		| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |
 		| User      | Mr    | User | 123-456-7889 | Saved         | Saved         | empty        | United Kingdom |
-     
+    Given I reset the password on the newly created user account using the admin password
 
+	Then I log in as the current new user
 
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party

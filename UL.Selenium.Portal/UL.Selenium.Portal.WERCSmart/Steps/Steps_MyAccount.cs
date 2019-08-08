@@ -208,6 +208,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
+		[StepDefinition(@"I go to (.*) in User Grid for the the user called: (.*)")]
+		public void GivenIGoToActionInUserGridForGiven(string action,string username)
+		{
+			
+
+			Delay.Seconds(1);
+			var selMyAccount = new MyAccount();
+			var selTopMenuBar = new TopMenuBar();
+			
+						
+			Report.IsTrue(selMyAccount.ForUserClickAction(username, action),
+				"Failed to click action: " + action + " for user: " + username,
+				"Successfully clicked action: " + action + " for user: " + username);
+			Delay.Seconds(1);
+		}
+
 		[StepDefinition(@"In the UserDetails screen I save the current User as: (.*)")]
 		public void GivenInTheUserDetailsScreenISaveTheCurrentUserAs(string saveAs)
 		{
@@ -1123,10 +1139,88 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(canadd.Canada_Supplier_Save_click(), "failed to click save", "successfully clicked save");
 			GeneralUtilities.Wait_for_load_finish();
 		}
-		[StepDefinition(@"I reset the password on a user account")]
+
+
+		[StepDefinition(@"I update the password for for the selected user in the change user password popup, using the admin password: (.*)")]
+		public void IUpdateThePasswordForGivenUser(string password)
+		{
+			//maybe access admin products account here? then save this acc seperate at end
+			string oldPassword = password;
+			string newPassword = password;
+			
+			var selModal = new ModalDialog();
+			if (!Report.IsTrue(selModal.Wait_for_load(), "Expected a modal dialog to load!", "Modal dialog loaded as expected"))
+			{
+				return;
+			}
+						
+			if (selModal.LoginPasswordFieldPresent())
+			{
+				Report.Info("Entering Admin password in the input: " + oldPassword);
+				selModal.EnterLoginPassword(oldPassword);
+			}
+
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Info("Clicking Continue");
+			selModal.ClickContinue();					   			 		  
+			Report.Info("Entering new password in New Password input: " + newPassword);
+			selModal.EnterNewPassword(newPassword);
+			Report.Info("Entering new password in Verify Password input: " + newPassword);
+			selModal.EnterVerifyPassword(newPassword);
+			Report.Info("Clicking save in the Change Password popup");
+			Report.IsTrue(selModal.ClickSave(),
+				"Failed to click save in Change Password",
+				"Successfully clicked save in Change Password");
+			GeneralUtilities.Wait_for_load_finish();
+				
+			Report.Info("Clicking close in the Change Password popup");
+			Report.IsTrue(selModal.Click_Close(),
+				"Failed to click close in Change Password",
+				"Successfully clicked clse in Change Password");
+				GeneralUtilities.Wait_for_load_finish();
+					   
+
+			//if (selModal.Wait_for_close()) //save to context password for later here?  
+			//	{
+			//		Report.Info("Updating the password in TReVor Test Users");
+			//		Api.UpdateTestUserPassword(savedAs, newPassword);
+			//		return;
+			//	}
+					   //throw new Exception("Modal dialog did not close!");
+
+			
+		}
+
+
+		[StepDefinition(@"I reset the password on the newly created user account using the admin password")]
 		public void ResetUserPassword()
 		{
+			
+			string user= Context.GetFromContext("CurrentUser").ToString();
+			string resetPassword = "Welcome1";
+			Context.ScenarioContext.Add("CurrentPassword", resetPassword);
+			TestReport.UseSubSteps = true;
 
+
+
+			//var WarningUser = new TestUser();
+			//WarningUser.Username= Context.GetFromContext("CurrentUser").ToString();
+			//WarningUser.Password = "Welcome1!";
+			//Context.AddToContext("warningTestUser", WarningUser);
+
+
+
+			TestReport.StartStep($"I update the password for user: {user}");
+			var selMyAccount = new StepsMyAccount();
+			Report.Info("Clicking Reset Password for the current logged in user");
+			selMyAccount.GivenIGoToActionInUserGridForGiven("Reset Password",user);
+			Report.Info("Updating the password for test user " + user);
+			selMyAccount.IUpdateThePasswordForGivenUser("Welcome1!");
+			Report.Info("Logging out");
+			var logoutAcc = new GlobalSteps();
+			logoutAcc.GivenILogout();
+			
+			
 		}
 	}
 }
