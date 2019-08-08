@@ -10,12 +10,11 @@ using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class StudioManageGlobalMessages : BaseObject
+	class StudioManageGlobalMessages : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[(.//span[@id='ui-dialog-title-dialog-manage-global-messages'])]";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool ClickCloseButton()
 		{

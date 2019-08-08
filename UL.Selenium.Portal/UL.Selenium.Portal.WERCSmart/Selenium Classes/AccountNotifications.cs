@@ -5,13 +5,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class AccountNotifications : BaseObject
+	class AccountNotifications : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='accountNotifications']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
-
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public void Click_Close()
 		{

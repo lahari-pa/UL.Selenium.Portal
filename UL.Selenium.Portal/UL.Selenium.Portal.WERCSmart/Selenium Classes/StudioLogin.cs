@@ -7,11 +7,10 @@ using NTTQA.Selenium.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	public class StudioLogin : BaseObject
+	public class StudioLogin : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='divLogOn']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public string Username {
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtUsername']"), 2).Text;

@@ -15,12 +15,11 @@ using NTTQA.Selenium.UniversalFunctions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ForwardProductRegistration : BaseObject
+	class ForwardProductRegistration : SeleniumBaseObject
 	{
 		// Again a pretty poor/generic ID, but it's the best we have....
 		public const string BasePath = "//div[@id='dataentry']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool ErrorsExist()
 		{
@@ -462,13 +461,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public class EditUPC : BaseObject
+		public class EditUPC : SeleniumBaseObject
 		{
 			public const string BasePath =
 				"//div[contains(@class, 'modal-dialog')]//h4[contains(text(), 'Edit UPC')]/../..";
 
-			[FindsBy(How = How.XPath, Using = BasePath)]
-			protected override IWebElement containerElement { get; set; }
+			protected override By ContainerElementLocator => By.XPath(BasePath);
 
 			public string UPCNumber {
 				get
