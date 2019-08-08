@@ -1284,6 +1284,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found text '" + text + "' in modal window.");
 		}
 
+		[StepDefinition(@"I check that the alert displayed contains text: (.*)")]
+		public void ICheckThatTheAlertDisplayedContainsText(string expected)
+		{
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				Report.Info("Alert is present");
+				Report.Screenshot();
+				string text = GeneralUtilities.StripSpecialChars(SeleniumBrowser.WebBrowser.SwitchTo().Alert().Text);
+				expected = GeneralUtilities.StripSpecialChars(expected);
+				Report.IsTrue(text.Contains(expected), "Failed to find alert text: '" + expected + "'. Instead found: '" + text + "'.",
+					"Successfully found alert text: '" + expected + "'.");
+			}
+		}
+
 		[StepDefinition(@"I save the username for TReVor test user: (.*) to context as: (.*)")]
 		public void SaveUsernameOfTrevorUser(string trevorSavedAs, string usernameSavedAs)
 		{
@@ -1294,5 +1308,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Context.AddToContext(usernameSavedAs, user.Username);
 			}
 		}
+
+
 	}
 }

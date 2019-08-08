@@ -286,6 +286,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return false;
 		}
+
+		public string GetErrorText()
+		{
+			string text = "";
+			IWebElement foundText = this.containerElement.FindElement(By.XPath("//ul[@class='form-error']//li"), 2);
+			if (foundText != null)
+			{
+				text = foundText.Text;
+			}
+			return text;
+		}
 	}
 
 	public class UpcCaseInformation
