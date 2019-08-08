@@ -48,7 +48,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Confirm file is downloaded");
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 				DateTime today = DateTime.Today;
-				string path = today.Month + "-" + today.Day + "-" + today.Year + "*.xlsx";
+				string date = today.ToString("M'-'dd'-'yyyy");
+				string path = date + "*.xlsx";
 				var downloads = new DirectoryInfo(downloadsFolder);
 				while (count < 120)
 				{
