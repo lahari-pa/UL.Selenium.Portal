@@ -537,8 +537,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath(".//button[text()='Ok']"), 2).TryClick();
 		}
-
-
 	}
 
 	public class ReportDownload : SeleniumBaseObject
@@ -678,6 +676,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
+
+	public class GoToDataTierNotification : SeleniumBaseObject
+	{
+		public const string BasePath = "//div[@class='modal fade in']";
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		public bool GoToDataTiersButtonShowing()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[@class='modal-dialog modal-md']//a[contains(text(),'Go to data tiers')]"), 2).Displayed;
+		}
+
+		public bool ClickGoToDataTiers()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[@class='modal-dialog modal-md']//a[contains(text(),'Go to data tiers')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+
+	}
 
 	public class Supplier
 	{
