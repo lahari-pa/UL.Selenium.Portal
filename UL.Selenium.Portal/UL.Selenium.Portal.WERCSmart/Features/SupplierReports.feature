@@ -101,6 +101,7 @@ Scenario: [68423] Formulated vs Articles Report
 		| ULGHS Document Only |
 	And I delete the Supplier Report file saved as 68423
 
+@TReVorId:22396
 Scenario: [73082] UPC Report for All Products with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -132,6 +133,7 @@ Scenario: [73082] UPC Report for All Products with Retailer
 	Then I confirm that the excel file saved as: 73082 in column: Container Type there are no numbers
 	And I delete the Supplier Report file saved as 73082
 
+@TReVorId:22397
 Scenario: [73225] Kits that Contain a specific Product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -149,6 +151,7 @@ Scenario: [73225] Kits that Contain a specific Product
 		| Kit Name            |
 	And I delete the Supplier Report file saved as 73225
 
+@TReVorId:22400
 Scenario: [73228] Products that are Associated with a specific Kit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -166,6 +169,7 @@ Scenario: [73228] Products that are Associated with a specific Kit
 		| Kit Name            |
 	And I delete the Supplier Report file saved as 73228
 
+@TReVorId:22398
 Scenario: [73226] Pesticide Certificate Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -187,6 +191,7 @@ Scenario: [73226] Pesticide Certificate Report
 		| In Recertification                                |
 	And I delete the excel file saved as excel73226
 
+@TReVorId:22401
 Scenario: [73229] Products with VOCs
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -202,6 +207,7 @@ Scenario: [73229] Products with VOCs
 		| Product Name |
 	And I delete the excel file saved as 73229
 
+@TReVorId:22399
 Scenario: [73227] Products and Recommended Use Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -219,6 +225,7 @@ Scenario: [73227] Products and Recommended Use Report
 		| Product Name   |
 	And I delete the excel file saved as 73227
 
+@TReVorId:22402
 Scenario: [73230] UPC Report for Specific Product with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -240,6 +247,7 @@ Scenario: [73230] UPC Report for Specific Product with Retailer
 		| Status          |
 	And I delete the excel file saved as 73230
 
+@TReVorId:22403
 Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -317,6 +325,7 @@ Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 
 	And I delete the Supplier Report file saved as excel76551
 
 #TODO - this scenario is incomplete because the possibility of automating the rest of the test case needs review.
+@TReVorId:22404
 Scenario: [76759] Waste Classification Summary Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

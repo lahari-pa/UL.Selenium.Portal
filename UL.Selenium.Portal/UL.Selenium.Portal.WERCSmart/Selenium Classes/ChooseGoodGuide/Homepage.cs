@@ -5,13 +5,12 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
-	class ChooseGoodGuide_Homepage : BaseObject
+	class ChooseGoodGuide_Homepage : SeleniumBaseObject
 	{
 		// Cannot have a more precise container element than this
 		public const string BasePath = "//body";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool ClickGetStarted()
 		{

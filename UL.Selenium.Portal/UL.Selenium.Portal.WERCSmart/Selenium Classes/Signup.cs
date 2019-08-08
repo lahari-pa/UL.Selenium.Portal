@@ -9,11 +9,10 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class Signup : BaseObject
+	class Signup : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@class='login-wrapper']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public void Enter_Email(string email)
 		{

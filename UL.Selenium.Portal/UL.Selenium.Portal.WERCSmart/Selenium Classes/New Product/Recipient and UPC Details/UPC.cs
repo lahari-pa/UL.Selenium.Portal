@@ -8,6 +8,9 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using TechTalk.SpecFlow;
+using System.IO;
+using NTTQA.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -22,6 +25,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return el.TryClick();
+		}
+
+		public bool ClickSampleFileLink()
+		{
+			return this.FindElement(By.XPath("//a[@class='alert-link']")).TryClick();
 		}
 
 		public string LithiumBatteyWarning()
@@ -195,6 +203,87 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return el.TryClick();
 			}
 			Report.Error("Could not find the correct input in section: " + section);
+			return false;
+		}
+
+		internal bool VerifySampleFile(Table table, string file, string savedAs)
+		{
+			this.GetFile(file, savedAs);
+			var actualFile = Context.GetFromContext(savedAs);
+			List<string> fileData = GetFileData(savedAs, actualFile);
+
+			var tableData = new List<string>();
+			tableData.AddRange(table.Header);
+			foreach (TableRow row in table.Rows)
+			{
+				tableData.AddRange(row.Values.ToList());
+			}
+
+			if (tableData is null || fileData is null)
+			{
+				Report.Failure("Either the table is empty or the file: '" + file + "' is not being read.");
+				return false;
+			}
+
+			for (int i = 0; i < tableData.Count; i++)
+			{
+				if (tableData[i].Trim() != fileData[i].Trim())
+				{
+					Report.Info("Error: Table Data contains: " + tableData[i] + " while File Data contains: " + fileData[i] + " in row " + i);
+					return false;
+				}
+			}
+			return true;
+		}
+
+		private List<string> GetFileData(string savedAs, object actualFile)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			if (Report.IsTrue(actualFile != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + actualFile.ToString()))
+			{
+				var ExcelUtils = new ExcelUtilities(actualFile.ToString(), "Sheet1");
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
+
+				var list = new List<string>();
+
+				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
+				{
+					list.AddRange(ExcelUtils.Excel_GetRow(i));
+				}
+				Report.IsTrue(list != null, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+				return list;
+			}
+			return null;
+		}
+
+		private void GetFile(string file, string savedAs)
+		{
+			Report.Info("Confirm Excel file is downloaded with name: " + file);
+			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			Report.Info("Downloads folder: " + downloadsFolder);
+			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+			if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
+			{
+				Context.AddToContext(savedAs, dir.FirstOrDefault());
+			}
+		}
+
+		public bool DeleteFileFromDownloadsFolder(string file)
+		{
+			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			Report.Info("Deleting any existing files with name: " + file + " in the directory: " + downloadsFolder + ".");
+			string dir = Directory.GetFiles(downloadsFolder, file, SearchOption.AllDirectories).ToString();
+			if (string.IsNullOrEmpty(dir.Trim()))
+			{
+				File.Delete(dir);
+			}
+
+			if (Directory.EnumerateFiles(downloadsFolder, file, SearchOption.AllDirectories).Count() > 0)
+			{
+				return true;
+			}
 			return false;
 		}
 	}

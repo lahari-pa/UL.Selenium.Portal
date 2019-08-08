@@ -9,12 +9,11 @@ using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ConflictMinerals : BaseObject
+	class ConflictMinerals : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@class='container-fluid']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public string VerificationCode {
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='VerificationCode']"), 2).GetValue().Trim();

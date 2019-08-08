@@ -12,6 +12,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using System.Collections.ObjectModel;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.UPC;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {

@@ -163,13 +163,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 	}
 
-	class DeleteProduct : BaseObject
+	class DeleteProduct : SeleniumBaseObject
 	{
 		// Cannot have a more precise container element than this
 		public const string BasePath = "//div[contains(@role, 'dialog') and (.//span[contains(text(), 'Delete Product')])]";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool ClickDelete()
 		{
