@@ -293,6 +293,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="app.manifest" />
+    <EmbeddedResource Include="Dependencies\PDF\testdoc.pdf" />
     <None Include="Features\AdditionalProductInformation.feature">
     </None>
     <None Include="Features\API\Waste Haulers.feature">
@@ -474,6 +475,8 @@
     </None>
     <None Include="Features\[57203] Data Consent Tiers - Retailer Specific Behaviour.feature">
     </None>
+    <EmbeddedResource Include="Dependencies\Images\image1.jpg" />
+    <EmbeddedResource Include="Dependencies\Images\image2.jpg" />
     <Content Include="ReportFiles\UL.Selenium.Portal.WERCSmart.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
