@@ -45,6 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myBrand = new Steps_Brands();
 			var myRetailPartner = new StepsRetailPartners();
 			var myProductsetup = new Steps_ProductSetup();
+			var dataNotification = new GoToDataTierNotification();
 
 			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
 			myLanding.ClickTheLoginButton();
@@ -140,6 +141,110 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
 			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
 			myRetailPartner.SetDataConsentTier("Tier 4.2", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			//create a product for CVS data tier
+			myProductsetup.CreateProductConditionerForCVSAndTakeToDataSummary("product2", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("CVS");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.SetDataConsentTier("Tier 3", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			//create a product for Target data tier
+			myProductsetup.CreateProductConditionerForTargetAndTakeToDataSummary("product3", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			if (dataNotification.WaitForContainerToBeVisible(10))
+			{
+				Report.IsTrue(dataNotification.ClickGoToDataTiers(), "Failed to click Go to data tier in popup!", "Successfully clicked Go to data tier in popup");
+			}
+			else
+			{
+				Report.Info("Data Tier update required is not displayed");
+			}
+			myRetailPartner.SelectRetailer("Target");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.SetDataConsentTier("Tier 3", "on");
+			myRetailPartner.SetDataConsentTier("Tier 4.1", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			//create a product for Costco data tier
+			myProductsetup.CreateProductConditionerForCostcoAndTakeToDataSummary("product4", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Costco");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			//create a product for Dollar Tree data tier
+			myProductsetup.CreateProductConditionerForDollarTreeAndTakeToDataSummary("product5", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Dollar Tree Stores, Inc. / Greenbrier International, Inc");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			//create a product for Family Dollar data tier
+			myProductsetup.CreateProductConditionerForFamilyDollarAndTakeToDataSummary("product6", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Family Dollar");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			//create a product for Walgreens data tier
+			myProductsetup.CreateProductConditionerForWalgreensAndTakeToDataSummary("product7", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Walgreens");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			//create a product for Rite aid data tier
+			myProductsetup.CreateProductConditionerForRiteAidAndTakeToDataSummary("product8", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Rite Aid");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.SetDataConsentTier("Tier 3", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			//create a product for Amazon data tier
+			myProductsetup.CreateProductConditionerForAmazonAndTakeToDataSummary("product9", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Amazon");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.SetDataConsentTier("Tier 3", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+			//data tiers fot CT
+			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product10", "Crayon");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Canadian Tire");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
 			myRetailPartner.GivenClickTheSaveChangesButton();
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 

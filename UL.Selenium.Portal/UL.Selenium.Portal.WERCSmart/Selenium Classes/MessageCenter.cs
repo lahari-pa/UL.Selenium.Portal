@@ -8,11 +8,10 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class MessageCenter : BaseObject
+	class MessageCenter : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='msgCenterControl']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		/// <summary>
 		/// this is the title of the page Message Center

@@ -167,7 +167,9 @@
     </None>
     <None Include="Features\ULSC.feature">
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj">

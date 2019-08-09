@@ -11,12 +11,11 @@ using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class StudioJobQueue : BaseObject
+	class StudioJobQueue : SeleniumBaseObject
 	{
 		public const string BasePath = "//iframe[@id='Widget3FRAME']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool WaitForJobInformationList(int secondsToWait)
 		{

@@ -7,12 +7,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ReviewDocuments : BaseObject
+	class ReviewDocuments : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='reviewDocumentsContainer']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public List<string> GetColumnsFromDocumentsTable()
 		{
