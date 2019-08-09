@@ -10,12 +10,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ProductNotificationHistory : BaseObject
+	class ProductNotificationHistory : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='dialog-MessageCenter']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{

@@ -14,12 +14,11 @@ using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class SHADocumentList : BaseObject
+	class SHADocumentList : SeleniumBaseObject
 	{
 		public const string BasePath = "//span[@id='ui-dialog-title-dialog-documentmanagement']/../..";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{

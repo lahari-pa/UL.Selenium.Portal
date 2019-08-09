@@ -21,6 +21,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "SHA")]
 	public class Steps_SHA
 	{
+		public object REport { get; private set; }
+
 		[StepDefinition(@"I navigate to Studio")]
 		public void GivenINavigateToStudio()
 		{
@@ -572,7 +574,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new StudioSHAManager().RightClickProductByID(ID), "Failed to rightclick against: " + ID,
 				"Right clicked against: " + ID);
 		}
-		
+
 
 		[StepDefinition(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
 		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string option)
@@ -2166,7 +2168,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-						    By.XPath(".//div[@class='upcTableOutter']"), 2) != null)
+							By.XPath(".//div[@class='upcTableOutter']"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -2189,6 +2191,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 
+		}
+
+		[Given(@"I create a new file saved as: (.*) to upload using the UPCs saved as:")]
+		public void GivenICreateANewFileSavedAsToUploadUsingTheUPCsSavedAs(string savedAs, Table upcs)
+		{
+			throw new NotImplementedException();
+		}
+
+
+		// I click Sample File link and verify the Upload UPC form
+		[StepDefinition(@"I click Sample File link and verify the Upload UPC form and save it as (.*) with data:")]
+		public void ClickSampleFileAndVerifyTheUploadUPCForm(string savedAs, Table table)
+		{
+			var upc = new UPC();
+			Report.IsTrue(upc.DeleteFileFromDownloadsFolder("Sample.xlsx"), "", "");
+			Report.IsTrue(upc.ClickSampleFileLink(), "Failed to click Sample File link.", "Successfully clicked Sample File link.");
+			Report.IsTrue(upc.VerifySampleFile(table, "Sample.xlsx", savedAs), "Failed to validate Sample File", "Successfully validated Sample File");
 		}
 
 		[StepDefinition(@"I save a UPC number for any product in the grid to context as: (.*)")]

@@ -8,6 +8,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@ProductSetUp
 @ForwardProductRegistration
 @run_Walmart
 Feature: Walmart
@@ -122,12 +123,15 @@ Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
+	Given I create a product with name: Chalk and UPC: UPC73918 and take to completed using Test Case 75335 with no login step and save as: TestCase73918
+	Given I navigate to the landing page
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click Bulk Actions in the Products Grid
 	Then I should see a popup with header Bulk Actions
 	Given I click Forward Product Registration in the Bulk Actions window
 	Then I should see the header: Forward Product Registration on the Forward Product Registration window
 	And I confirm the active Forward Product Registration tab is: Select Products
-	Given I enter the text: 1 in the 'Search by WPS ID or Product Name' field
+	Given I enter the text: saved as TestCase73918 in the 'Search by WPS ID or Product Name' field
 	Given I select the first product under the Select Products tab
 	Given I click continue on the Forward Product Registration page
 	Then I confirm the active Forward Product Registration tab is: Select Retailers
@@ -137,7 +141,7 @@ Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 	Then I confirm the active Forward Product Registration tab is: Select UPCs
 	# 'Private Label' dropdown is a required field for some products
 	Given I select the first product under the Select UPCs tab
-	Given I select the Vendor option: Good HouseKeeping for the first product displayed under the Select UPCs tab
+	Given I select the Vendor option: TestBrand for the first product displayed under the Select UPCs tab
 	Given I select the first UPC in the grid under the Select UPCs tab
 	Then I confirm that: WM is displayed in the Destination Retailers column under Select UPCs
 	Given I click continue on the Forward Product Registration page

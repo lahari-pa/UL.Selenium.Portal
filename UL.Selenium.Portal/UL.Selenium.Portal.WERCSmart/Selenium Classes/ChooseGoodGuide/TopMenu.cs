@@ -8,11 +8,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
-	class TopMenu : BaseObject
+	class TopMenu : SeleniumBaseObject
 	{
 		public const string BasePath = "//header[@class='topnavbar-wrapper']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
 		public bool ClickDropDownNextToSelectBox(string selectBoxText)
 		{
 			return this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']/following-sibling::button")).TryClick();
