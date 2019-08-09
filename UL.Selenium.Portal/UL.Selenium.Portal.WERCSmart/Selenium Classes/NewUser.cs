@@ -176,6 +176,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = "//p[@id='password_error']//span")]
 		private IWebElement _pINAnswerError;
 
+		private IWebElement ClickNextButton => this.containerElement.FindElement(By.Id("carouselNext"),1);
+
+		private IWebElement ClickSuccessButton => this.containerElement.FindElement(By.XPath(@".//a[contains(@class, 'btn-success')]"), 1);
+
+
 		public string CountryErrorValue {
 			get
 			{
@@ -661,6 +666,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool ClickNext()
+		{
+			return this.ClickNextButton.TryClick();
+		}
+		public bool ClickSuccess()
+		{
+			return this.ClickSuccessButton.TryClick();
+		}
 		public void ClickCancel()
 		{
 			this._btnCancel.Click();

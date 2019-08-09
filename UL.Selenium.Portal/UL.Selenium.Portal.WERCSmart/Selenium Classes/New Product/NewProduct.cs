@@ -141,10 +141,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				if (this.ContinueButton == null)
 				{
+					Report.Error("Continue button was not found");
 					return false;
 				}
 				if (!this.ContinueButton.TryClick())
 				{
+					Report.Error("Failed to click the contiue button");
 					return false;
 				}
 				if (waitForLoadingBtnSpinner)

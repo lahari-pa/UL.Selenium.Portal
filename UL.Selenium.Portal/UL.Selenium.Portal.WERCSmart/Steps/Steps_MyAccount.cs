@@ -208,6 +208,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
+		[StepDefinition(@"I go to (.*) in User Grid for the the user called: (.*)")]
+		public void GivenIGoToActionInUserGridForGiven(string action,string username)
+		{
+			
+
+			Delay.Seconds(1);
+			var selMyAccount = new MyAccount();
+			var selTopMenuBar = new TopMenuBar();
+			
+						
+			Report.IsTrue(selMyAccount.ForUserClickAction(username, action),
+				"Failed to click action: " + action + " for user: " + username,
+				"Successfully clicked action: " + action + " for user: " + username);
+			Delay.Seconds(1);
+		}
+
 		[StepDefinition(@"In the UserDetails screen I save the current User as: (.*)")]
 		public void GivenInTheUserDetailsScreenISaveTheCurrentUserAs(string saveAs)
 		{
@@ -1122,6 +1138,140 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(canadd.Add_Canada_Supplier_Address(options1, options2, option3, options4, options5, option6, option7), "failed to enter stewardship information", "successfully entered steward information");
 			Report.IsTrue(canadd.Canada_Supplier_Save_click(), "failed to click save", "successfully clicked save");
 			GeneralUtilities.Wait_for_load_finish();
+		}
+
+
+		[StepDefinition(@"I update the password for for the selected user in the change user password popup, using the admin password: (.*)")]
+		public void IUpdateThePasswordForGivenUser(string savedAs)
+		{
+			var adminUser = TestUsers.GetUserSavedAs(savedAs);
+
+			if (adminUser == null)
+			{
+				Report.Error($"The test user: {savedAs} could not found in TReVor");
+				return;
+			}
+
+			string adminPassword = adminUser.Password;			
+			
+			
+			var selModal = new ModalDialog();
+			if (!Report.IsTrue(selModal.Wait_for_load(), "Expected a modal dialog to load!", "Modal dialog loaded as expected"))
+			{
+				return;
+			}
+						
+			if (selModal.LoginPasswordFieldPresent())
+			{
+				Report.Info("Entering Admin password in the input: " + adminPassword);
+				selModal.EnterLoginPassword(adminPassword);
+			}
+
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Info("Clicking Continue");
+			selModal.ClickContinue();					   			 		  
+			Report.Info("Entering new password in New Password input: " + adminPassword);
+			selModal.EnterNewPassword(adminPassword);
+			Report.Info("Entering new password in Verify Password input: " + adminPassword);
+			selModal.EnterVerifyPassword(adminPassword);
+			Report.Info("Clicking save in the Change Password popup");
+			Report.IsTrue(selModal.ClickSave(),
+				"Failed to click save in Change Password",
+				"Successfully clicked save in Change Password");
+			GeneralUtilities.Wait_for_load_finish();
+				
+			Report.Info("Clicking close in the Change Password popup");
+			Report.IsTrue(selModal.Click_Close(),
+				"Failed to click close in Change Password",
+				"Successfully clicked clse in Change Password");
+				GeneralUtilities.Wait_for_load_finish();		   
+
+			
+
+			
+		}
+
+
+		[StepDefinition(@"I reset the password on the newly created user account using the admin password for the account: (.*)")]
+		public void ResetUserPassword(string savedAs)
+		{
+			
+			string user= Context.GetFromContext("CurrentUser").ToString();
+			if (user==null)
+			{
+				Report.Error("The CurrentUser was not saved in context");
+				return;
+			}
+			
+			TestReport.UseSubSteps = true;		
+
+			TestReport.StartStep($"I update the password for user: {user}");
+			var selMyAccount = new StepsMyAccount();
+			Report.Info("Clicking Reset Password for the current logged in user");
+			selMyAccount.GivenIGoToActionInUserGridForGiven("Reset Password",user);
+			Report.Info("Updating the password for test user " + user);
+			selMyAccount.IUpdateThePasswordForGivenUser(savedAs);
+								
+			
+		}
+
+		[StepDefinition(@"I create a new user with the following information and set the password from the admin account: (.*)")]
+		public void CreateUserAndSetPassword(string savedAs,Table table)
+		{
+			
+			TestReport.UseSubSteps = true;
+
+			TestReport.StartStep("I add a new user");
+			Report.Info("Adding user with the following information");
+			Report.Table(table);
+			this.ThenIAddANewUserWithTheFollowingInformation(table);
+			var adminUser = TestUsers.GetUserSavedAs(savedAs);
+			var allUsers = new MyAccount().UserGrid();
+			var newUsername= Context.GetFromContext("CurrentUser").ToString();
+			var matchingUser = allUsers.FirstOrDefault(x => x.Username == newUsername);
+
+			if (matchingUser==null)
+			{
+				Report.Failure($"The User '{newUsername}' could not be found in the user grid");
+				return;
+			}
+			string email = matchingUser.Email.TrimEnd(".kxxyxunf@mailosaur.io"); 
+			string password = adminUser.Password;
+
+			
+			//User newUser = new User { Email = email, Password = password };
+			//Context.AddToContext("NewUser",newUser);
+
+			TestReport.StartStep("I reset the password for the new user to match the admin password");
+			this.ResetUserPassword(savedAs);
+
+			Table userTable = new Table("Field", "Value");
+			userTable.AddRow("Email", email);
+			userTable.AddRow("Password", password);
+			userTable.AddRow("PhoneQuestion", "PhoneQuestion");
+			userTable.AddRow("PhoneHint", "PhoneHint");
+			userTable.AddRow("MentorQuestion", "MentorQuestion ");
+			userTable.AddRow("MentorHint", "MentorHint");
+			userTable.AddRow("FriendQuestion", "FriendQuestion");
+			userTable.AddRow("FriendHint", "FriendHint");
+			userTable.AddRow("AnimalQuestion", "AnimalQuestion");
+			userTable.AddRow("AnimalHint", "AnimalHint");
+			userTable.AddRow("CollegeQuestion", "CollegeQuestion");
+			userTable.AddRow("CollegeHint", "CollegeHint");
+			userTable.AddRow("Pin", "1234");
+
+			new StepsSignup().DefineUser("NewUser", userTable);
+
+			//var testuser= (WERCSmartUser)Context.GetFromContext("NewUser");
+			
+
+			
+
+
+
+			
+
+
 		}
 	}
 }

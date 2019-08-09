@@ -8169,5 +8169,67 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("Click CONTINUE");
 			new StepsNewProduct().ClickContinue();
 		}
+		[StepDefinition(@"I call Shared Step 82831 \(The Product - Enter Product Name and Select Type of Product: (Raw Material|Mixture, Blend, Formula, Polymer or Solution from Third \(3rd, 3d\) Party)\)")]
+	
+		public void SharedStep82831_TheProduct_EnterProductNameAndType(string type)
+		{
+			TestReport.UseSubSteps = true;
+
+			var MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the The Product Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
+			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
+			char[] forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
+			var name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
+			new Steps_TheProduct().SetProductNameTo(name);
+			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			new Steps_TheProduct().SetTypeOfProductTo(type);
+			TestReport.StartStep("In the New Product page I click Continue");
+			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
+			var modal = new ModalDialog();
+			TestReport.StartStep("I verify the 'Warning' pop-up displays");
+			Report.IsTrue(modal.Wait_for_load() && modal.GetTitle().Contains("Warning"), "");
+			TestReport.StartStep("I confirm the warning message contains the expected text");
+			string actualMessage = modal.GetText();
+			if (actualMessage==null)
+			{
+				Report.Failure("The Warning Popup had no message");
+				Report.Info("Closing popup");
+				if(Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button", "Clicked OK button"))
+				{
+					Report.Info("I click Continue");
+					MyStepsNewProduct.ClickContinue();
+				}
+				
+
+				return;
+			}
+			actualMessage = actualMessage.Replace("/r/n", "");
+			if (type == "Raw Material")
+			{
+				Report.Info("Checking Raw Materials message");
+				string expectedMessage = "You are registering a formula (Raw Material). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
+				Report.IsTrue(actualMessage.Contains(expectedMessage), "The Warning message was not correct", "The Warning message was correct");
+			}
+			else if(type== "Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party")
+			{
+				Report.Info("Checking Mixture, Blend, Formula or Solution from 3rd Party message");
+				string expectedMessage = "You are registering a formula (Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
+				Report.IsTrue(actualMessage.Contains(expectedMessage), "The Warning message was not correct", "The Warning message was correct");
+			}
+			else
+			{
+				Report.Error("Product type must be Raw Material or Mixture, Blend, Formula or Solution from 3rd Party");
+				
+			}
+
+			Report.Info("Closing popup");
+			Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button","Succesfully clicked on the OK button");
+			GeneralUtilities.Wait_for_load_finish();
+
+
+
+		}
+
 	}
 }
