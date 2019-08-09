@@ -156,79 +156,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-
-		[StepDefinition(@"I log in as the current new user")]
-		public void LoginToCurrentNewUser()
+		/// <summary>
+		/// Requires a user object of type User (WercSmart.Classes.User) not TestUser (TReVor)
+		/// </summary>
+		[StepDefinition(@"I log in as the user saved as: (.*)")]
+		public void LoginToCurrentNewUser(string savedAs)
 		{
-			string email = Context.GetFromContext("CurrentUser").ToString();			
-			string password = Context.GetFromContext("CurrentPassword").ToString();
-			
+			//var newUser = (User)Context.GetFromContext(savedAs);
+			var newUser = (WERCSmartUser)Context.GetFromContext(savedAs);
 
-			Report.Info("Beginning I login with email and password");
-			var selLandingPage = new LandingPage();
-			if (!selLandingPage.WaitForContainerToBeVisible(5))
-			{
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 2) != null)
-				{
-					throw new Exception("HTTP Server error 503 was thrown!");
-				}
-				throw new Exception("Landing page did not load!");
-			}
+			//give savedAs and get the password and email
+			string email = newUser.Email;
+			string password = newUser.Password;
 
 			Report.Info("Clicking 'Log In' on the Landing Page");
-			Report.IsTrue(selLandingPage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
-			var selHomepage = new Homepage();
-			var selLogin = new Login();
-			if (!Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!"))
-			{
-				return;
-			}
-
-			Report.Info("Entering Email: '" + email + "'");
-			selLogin.EmailField = email;
-			Report.Info("Entering Password: '" + password + "'");
-			selLogin.PasswordField = password;
-			Report.Info("Clicking login");
-			Report.IsTrue(selLogin.Click_Login(), "Failed to click the log in button");
-			selLogin = new Login();
-			// check we have redirected from the log in page
-			if (!selLogin.WaitForContainerToBeInvisible())
-			{
-				if (!selLogin.Password_Error_Text().IsNullOrEmpty())
-				{
-					Report.Failure("Failed to log in - password error message was displayed");
-					Report.Screenshot();
-					return;
-				}
-				Report.Failure("Failed to log in");
-				Report.Screenshot();
-				return;
-			}
-			selHomepage = new Homepage();
-			// check for home page
-			if (selHomepage.WaitForContainerToBeVisible())
-			{
-				Report.Success("Successfully logged in!");
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Screenshot();
-				return;
-			}
-			// dismiss modal dialog if it exists
-			var modalDialog = new ModalDialog();
-			if (modalDialog.Wait_for_load(1))
-			{
-				Report.Info("Closing modal dialog");
-				modalDialog.Click_Closex();
-				selHomepage = new Homepage();
-				if (selHomepage.WaitForContainerToBeVisible())
-				{
-					Report.Success("Successfully logged in!");
-					GeneralUtilities.Wait_for_load_finish();
-					return;
-				}
-			}
-			Report.Failure("Failed to log in");
+			Report.IsTrue(new LandingPage().Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
+			new StepsLogin().GivenIPopulateTheInputFieldWith("email", email);
+			new StepsLogin().GivenIPopulateTheInputFieldWith("password", password);
 			Report.Screenshot();
+			new StepsLogin().IClickTheLoginButton();
+			Report.IsTrue(new Login().WaitForContainerToBeInvisible(), "Did not redirect from Log in page!");
+						
+
+			
 		}
 
 

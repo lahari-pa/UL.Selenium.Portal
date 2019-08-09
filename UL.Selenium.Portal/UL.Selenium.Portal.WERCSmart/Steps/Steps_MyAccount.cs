@@ -1192,22 +1192,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I reset the password on the newly created user account using the admin password")]
-		public void ResetUserPassword()
+		[StepDefinition(@"I reset the password on the newly created user account using the admin password for the account: (.*)")]
+		public void ResetUserPassword(string savedAs)
 		{
 			
 			string user= Context.GetFromContext("CurrentUser").ToString();
-			string resetPassword = "Welcome1";
-			Context.ScenarioContext.Add("CurrentPassword", resetPassword);
-			TestReport.UseSubSteps = true;
+			if (user==null)
+			{
+				Report.Error("The CurrentUser was not saved in context");
+				return;
+			}
 
+			var adminUser = TestUsers.GetUserSavedAs(savedAs);
+			if (adminUser == null)
+			{
+				Report.Error($"The test user: {savedAs} could not found in TReVor");
+				return;
+			}
 
+			string resetPassword =adminUser.Password;
 
-			//var WarningUser = new TestUser();
-			//WarningUser.Username= Context.GetFromContext("CurrentUser").ToString();
-			//WarningUser.Password = "Welcome1!";
-			//Context.AddToContext("warningTestUser", WarningUser);
+			//Context.ScenarioContext.Add("CurrentPassword", resetPassword);
 
+			TestReport.UseSubSteps = true;		
 
 
 			TestReport.StartStep($"I update the password for user: {user}");
@@ -1215,12 +1222,72 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Clicking Reset Password for the current logged in user");
 			selMyAccount.GivenIGoToActionInUserGridForGiven("Reset Password",user);
 			Report.Info("Updating the password for test user " + user);
-			selMyAccount.IUpdateThePasswordForGivenUser("Welcome1!");
-			Report.Info("Logging out");
-			var logoutAcc = new GlobalSteps();
-			logoutAcc.GivenILogout();
+			selMyAccount.IUpdateThePasswordForGivenUser(resetPassword);
+
+			//Report.Info("Logging out");
+			//var logoutAcc = new GlobalSteps();
+			//logoutAcc.GivenILogout();
 			
 			
+		}
+
+		[StepDefinition(@"I create a new user with the following information and set the password from the admin account: (.*)")]
+		public void CreateUserAndSetPassword(string savedAs,Table table)
+		{
+			
+			TestReport.UseSubSteps = true;
+
+			TestReport.StartStep("I add a new user");
+			Report.Info("Adding user with the following information");
+			Report.Table(table);
+			this.ThenIAddANewUserWithTheFollowingInformation(table);
+			var adminUser = TestUsers.GetUserSavedAs(savedAs);
+			var allUsers = new MyAccount().UserGrid();
+			var newUsername= Context.GetFromContext("CurrentUser").ToString();
+			var matchingUser = allUsers.FirstOrDefault(x => x.Username == newUsername);
+
+			if (matchingUser==null)
+			{
+				Report.Failure($"The User '{newUsername}' could not be found in the user grid");
+				return;
+			}
+			string email = matchingUser.Email.TrimEnd(".kxxyxunf@mailosaur.io"); 
+			string password = adminUser.Password;
+
+			
+			//User newUser = new User { Email = email, Password = password };
+			//Context.AddToContext("NewUser",newUser);
+
+			TestReport.StartStep("I reset the password for the new user to match the admin password");
+			this.ResetUserPassword(savedAs);
+
+			Table userTable = new Table("Field", "Value");
+			userTable.AddRow("Email", email);
+			userTable.AddRow("Password", password);
+			userTable.AddRow("PhoneQuestion", "PhoneQuestion");
+			userTable.AddRow("PhoneHint", "PhoneHint");
+			userTable.AddRow("MentorQuestion", "MentorQuestion ");
+			userTable.AddRow("MentorHint", "MentorHint");
+			userTable.AddRow("FriendQuestion", "FriendQuestion");
+			userTable.AddRow("FriendHint", "FriendHint");
+			userTable.AddRow("AnimalQuestion", "AnimalQuestion");
+			userTable.AddRow("AnimalHint", "AnimalHint");
+			userTable.AddRow("CollegeQuestion", "CollegeQuestion");
+			userTable.AddRow("CollegeHint", "CollegeHint");
+			userTable.AddRow("Pin", "1234");
+
+			new StepsSignup().DefineUser("NewUser", userTable);
+
+			//var testuser= (WERCSmartUser)Context.GetFromContext("NewUser");
+			
+
+			
+
+
+
+			
+
+
 		}
 	}
 }

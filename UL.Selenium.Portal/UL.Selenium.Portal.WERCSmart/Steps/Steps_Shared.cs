@@ -8198,7 +8198,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure("The Warning Popup had no message");
 				Report.Info("Closing popup");
-				if(Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button"))
+				if(Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button", "Clicked OK button"))
 				{
 					Report.Info("I click Continue");
 					MyStepsNewProduct.ClickContinue();
@@ -8211,13 +8211,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (type == "Raw Material")
 			{
 				Report.Info("Checking Raw Materials message");
-				string expectedMessage = "You are registering a formula (Raw Material). This is not a product registration that will results in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
+				string expectedMessage = "You are registering a formula (Raw Material). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
 				Report.IsTrue(actualMessage.Contains(expectedMessage), "The Warning message was not correct", "The Warning message was correct");
 			}
-			else if(type== "Mixture, Blend, Formula or Solution from 3rd Party")
+			else if(type== "Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party")
 			{
 				Report.Info("Checking Mixture, Blend, Formula or Solution from 3rd Party message");
-				string expectedMessage = "You are registering a formula (Mixture, Blend, Formula, or Solution from 3rd Party). This is not a product registration that will results in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details(including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
+				string expectedMessage = "You are registering a formula (Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
 				Report.IsTrue(actualMessage.Contains(expectedMessage), "The Warning message was not correct", "The Warning message was correct");
 			}
 			else
@@ -8227,11 +8227,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.Info("Closing popup");
-			if (Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button"))
-			{
-				Report.Info("I click Continue");
-				MyStepsNewProduct.ClickContinue();
-			}
+			Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button","Succesfully clicked on the OK button");
+			GeneralUtilities.Wait_for_load_finish();
+
 
 
 		}
