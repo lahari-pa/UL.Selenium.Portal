@@ -1142,11 +1142,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		[StepDefinition(@"I update the password for for the selected user in the change user password popup, using the admin password: (.*)")]
-		public void IUpdateThePasswordForGivenUser(string password)
+		public void IUpdateThePasswordForGivenUser(string savedAs)
 		{
-			//maybe access admin products account here? then save this acc seperate at end
-			string oldPassword = password;
-			string newPassword = password;
+			var adminUser = TestUsers.GetUserSavedAs(savedAs);
+
+			if (adminUser == null)
+			{
+				Report.Error($"The test user: {savedAs} could not found in TReVor");
+				return;
+			}
+
+			string adminPassword = adminUser.Password;			
+			
 			
 			var selModal = new ModalDialog();
 			if (!Report.IsTrue(selModal.Wait_for_load(), "Expected a modal dialog to load!", "Modal dialog loaded as expected"))
@@ -1156,17 +1163,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						
 			if (selModal.LoginPasswordFieldPresent())
 			{
-				Report.Info("Entering Admin password in the input: " + oldPassword);
-				selModal.EnterLoginPassword(oldPassword);
+				Report.Info("Entering Admin password in the input: " + adminPassword);
+				selModal.EnterLoginPassword(adminPassword);
 			}
 
 			GeneralUtilities.Wait_for_load_finish();
 			Report.Info("Clicking Continue");
 			selModal.ClickContinue();					   			 		  
-			Report.Info("Entering new password in New Password input: " + newPassword);
-			selModal.EnterNewPassword(newPassword);
-			Report.Info("Entering new password in Verify Password input: " + newPassword);
-			selModal.EnterVerifyPassword(newPassword);
+			Report.Info("Entering new password in New Password input: " + adminPassword);
+			selModal.EnterNewPassword(adminPassword);
+			Report.Info("Entering new password in Verify Password input: " + adminPassword);
+			selModal.EnterVerifyPassword(adminPassword);
 			Report.Info("Clicking save in the Change Password popup");
 			Report.IsTrue(selModal.ClickSave(),
 				"Failed to click save in Change Password",
@@ -1177,16 +1184,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selModal.Click_Close(),
 				"Failed to click close in Change Password",
 				"Successfully clicked clse in Change Password");
-				GeneralUtilities.Wait_for_load_finish();
-					   
+				GeneralUtilities.Wait_for_load_finish();		   
 
-			//if (selModal.Wait_for_close()) //save to context password for later here?  
-			//	{
-			//		Report.Info("Updating the password in TReVor Test Users");
-			//		Api.UpdateTestUserPassword(savedAs, newPassword);
-			//		return;
-			//	}
-					   //throw new Exception("Modal dialog did not close!");
+			
 
 			
 		}
@@ -1202,32 +1202,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("The CurrentUser was not saved in context");
 				return;
 			}
-
-			var adminUser = TestUsers.GetUserSavedAs(savedAs);
-			if (adminUser == null)
-			{
-				Report.Error($"The test user: {savedAs} could not found in TReVor");
-				return;
-			}
-
-			string resetPassword =adminUser.Password;
-
-			//Context.ScenarioContext.Add("CurrentPassword", resetPassword);
-
+			
 			TestReport.UseSubSteps = true;		
-
 
 			TestReport.StartStep($"I update the password for user: {user}");
 			var selMyAccount = new StepsMyAccount();
 			Report.Info("Clicking Reset Password for the current logged in user");
 			selMyAccount.GivenIGoToActionInUserGridForGiven("Reset Password",user);
 			Report.Info("Updating the password for test user " + user);
-			selMyAccount.IUpdateThePasswordForGivenUser(resetPassword);
-
-			//Report.Info("Logging out");
-			//var logoutAcc = new GlobalSteps();
-			//logoutAcc.GivenILogout();
-			
+			selMyAccount.IUpdateThePasswordForGivenUser(savedAs);
+								
 			
 		}
 
