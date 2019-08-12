@@ -42,7 +42,7 @@ Given I call Shared Step 69682 (Retailer Association - Add Private Label Informa
 
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60673, container type: Aerosol Can and size: 20
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 

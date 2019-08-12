@@ -712,6 +712,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In the new user form I click on Next")]
+		public void WhenInTheNewUserFormIClickOnNext()
+		{
+			Report.IsTrue(new NewUser().ClickNext(),"Failed to click next", "Succesfully clicked next");
+			
+		}
+
+		[StepDefinition(@"In the new user form I click on Success")]
+		public void WhenInTheNewUserFormIClickOnSuccess()
+		{
+			Report.IsTrue(new NewUser().ClickSuccess(), "Failed to click Success", "Succesfully clicked Success");
+
+		}
+
+
+
+
+
 		[StepDefinition(@"I should be on the (.*) page of the form")]
 		public void ThenIShouldBeOnThePageOfTheForm(string pageTitle)
 		{

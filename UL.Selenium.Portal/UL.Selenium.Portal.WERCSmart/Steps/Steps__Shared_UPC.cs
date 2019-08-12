@@ -12,6 +12,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using System.Collections.ObjectModel;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.UPC;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -511,6 +512,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("Size", size);
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
+		}
+
+		[StepDefinition(@"I should see the following error text displayed in the UPC screen: (.*)")]
+		public void IShouldSeeTheFollowingErrorTextDisplayedInTheUPCScreen(string text)
+		{
+			var upcPage = new UPC();
+			string errorText = GeneralUtilities.StripSpecialChars(upcPage.GetErrorText());
+			text = GeneralUtilities.StripSpecialChars(text);
+			Report.IsTrue(errorText.Contains(text), "Failed to find correct error message in the UPC screen. Expected: " + text + ". But instead found: " + errorText + ".",
+				"Successfully found correct error message in the UPC screen.");
+
 		}
 	}
 }

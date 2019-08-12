@@ -9,11 +9,10 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class NewUser : BaseObject
+	class NewUser : SeleniumBaseObject
 	{
 		public const string BasePath = "//body[@class='login-body']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		[FindsBy(How = How.XPath, Using = "//input[@id='regFirstName']")]
 		private IWebElement _iFirstName;
@@ -176,6 +175,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		[FindsBy(How = How.XPath, Using = "//p[@id='password_error']//span")]
 		private IWebElement _pINAnswerError;
+
+		private IWebElement ClickNextButton => this.containerElement.FindElement(By.Id("carouselNext"),1);
+
+		private IWebElement ClickSuccessButton => this.containerElement.FindElement(By.XPath(@".//a[contains(@class, 'btn-success')]"), 1);
+
 
 		public string CountryErrorValue {
 			get
@@ -662,6 +666,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool ClickNext()
+		{
+			return this.ClickNextButton.TryClick();
+		}
+		public bool ClickSuccess()
+		{
+			return this.ClickSuccessButton.TryClick();
+		}
 		public void ClickCancel()
 		{
 			this._btnCancel.Click();

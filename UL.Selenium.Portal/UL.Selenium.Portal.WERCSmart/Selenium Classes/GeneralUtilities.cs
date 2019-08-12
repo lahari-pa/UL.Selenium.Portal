@@ -6,6 +6,7 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
+using System.Text;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -149,6 +150,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-
+		public static string StripSpecialChars(string text)
+		{
+			StringBuilder sb = new StringBuilder();
+			foreach (char c in text)
+			{
+				if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
+				{
+					sb.Append(c);
+				}
+			}
+			return sb.ToString();
+		}
 	}
 }

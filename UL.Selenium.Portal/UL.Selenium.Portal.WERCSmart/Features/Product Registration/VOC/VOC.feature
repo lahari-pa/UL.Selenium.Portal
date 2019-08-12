@@ -96,7 +96,7 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 	Given in the New Product page I click Continue
 	Then I should see an error message: Document is required: Product Label
 	Then Toxicity Characteristic Leaching Procedure (TCLP) should not be showing any error messages
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given in the New Product page I click Continue
 	Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
@@ -279,7 +279,7 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 		| Volatile Organic Compounds |
 	Given in the New Product page I click Continue
 	Then I should see an error message: Document is required: Product Label
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given in the New Product page I click Continue
 	Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
@@ -569,7 +569,7 @@ Scenario: [56476] VOC checks for Personal Fragrance product
 		| Volatile Organic Compounds |
 	Given in the New Product page I click Continue
 	Then I should see an error message: Document is required: Product Label
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given in the New Product page I click Continue
 	Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page

@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		private IWebElement ContinueButton => this.containerElement.WaitUntilElementClickable(By.XPath(".//a[contains(@class,'continue-button')]"), 5);
 
 		private IEnumerable<IWebElement> PanelHeadings => this.containerElement.FindElements(By.XPath(".//div[@id='pgroup']/div/div[starts-with(@class,'panel-heading')]//h3"), 2);
-		
+
 		private By ActivePanelHeadingLocator(string text) => By.XPath($@".//div[@id='pgroup']/div/div[@class='panel-heading']//h3[contains(text(),""{text}"")]");
 
 		private IWebElement ActivePanelHeading => this.containerElement.FindElement(By.XPath(".//div[@id='pgroup']/div/div[@class='panel-heading']//h3"), 2);
@@ -141,10 +141,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				if (this.ContinueButton == null)
 				{
+					Report.Error("Continue button was not found");
 					return false;
 				}
 				if (!this.ContinueButton.TryClick())
 				{
+					Report.Error("Failed to click the contiue button");
 					return false;
 				}
 				if (waitForLoadingBtnSpinner)
@@ -309,7 +311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		#region classes
 		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit }
-		
+
 		public static Dictionary<Tab, string> MapTabs = new Dictionary<Tab, string> {
 			{ Tab.ProductType , "Product Type" },
 			{ Tab.ProductCharacteristics , "Product Characteristics" },
@@ -1802,13 +1804,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Info("Entering file name with path: " + pdfFilePath);
 			Report.IsTrue(GeneralFunctions.EnterFilename(pdfFilePath), "Failed to enter file name!", "Successfully entered file name");
 			int i = 0;
-			string viewPath = "//span[contains(text(),'Article Information Sheet')]//..//span[@class='dz-uploaded-doc']//..//a";
+			string viewPath = "//span[contains(text(),'" + section + "')]//..//span[@class='dz-uploaded-doc']//..//a";
 			IWebElement viewEl = this.containerElement.FindElement(By.XPath(viewPath), 2);
 			while ((viewEl is null || !viewEl.Displayed) && i > 10)
 			{
 				i++;
 				Delay.Seconds(1);
-				viewEl = this.containerElement.FindElement(By.XPath(viewPath), 2);
+				viewEl = this.FindElement(By.XPath(viewPath), 2);
 			}
 			return (viewEl != null && viewEl.Displayed);
 		}
@@ -3174,11 +3176,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public List<Mailosaur.Link> Links { get; set; }
 	}
 
-	class RegulatoryList : BaseObject
+	class RegulatoryList : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@class='modal fade in']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public string Heading()
 		{

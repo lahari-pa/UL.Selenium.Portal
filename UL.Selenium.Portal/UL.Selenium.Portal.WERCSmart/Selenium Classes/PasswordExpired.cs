@@ -5,11 +5,10 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class PasswordExpired : BaseObject
+	class PasswordExpired : SeleniumBaseObject
 	{
 		public const string BasePath = "//body[@class='login-body']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 
 		public string TopMessage()
@@ -22,14 +21,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//div[@class='item active']/h4"), 2)?.Text;
 		}
 
-		public string OriginalPassword
-		{
+		public string OriginalPassword {
 			get => this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2)?.Text;
 			set => this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).EnterText(value);
 		}
 
-		public string NewPassword
-		{
+		public string NewPassword {
 			get => this.containerElement.FindElement(By.XPath("//input[@id='newPassword']"), 2)?.Text;
 			set => this.containerElement.FindElement(By.XPath("//input[@id='newPassword']"), 2).EnterText(value);
 		}
