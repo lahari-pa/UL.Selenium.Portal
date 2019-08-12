@@ -92,3 +92,30 @@ And I Confirm the Product shows status: Completed for retailer: saved as retaile
 And I Confirm the Product shows status: Completed for retailer: saved as TestCase75321Retailer
 
 
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\Release Day Tests
+
+Scenario: [78414] Submit Product, Reject from Submitted in SHA, Resubmit from Portal.  SHA shows in Submitted status
+Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I Search for you product using the shared step below
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And [Shared Step 83242 - SHA - Submitted or Assigned product - Reject Submission - any subject - Save]
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm theProduct shows the"NEW Status"
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I Filter for the Product you are working with
+And I Click the "... Icon" in the Actions Column for your Product
+And I Select the 'Edit' Option
+And I Clickon the "Review and Submit Tab Heading"
+And I Click the "Comments Step Heading"
+And I Click the 'CONTINUE'
+And I Click the "Accept Button"
+And I The Purchase Summary page is shown with the Thank you message - You should NOT See a cost for the product at this step.
+And I Click on the 'HOME BUTTON'
+And I Go to SHA Manager
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm the Productshows a "Submitted Status"
