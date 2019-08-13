@@ -8267,6 +8267,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(productSubmissionRejection.Wait_for_load(30), "The Product Submission Rejection Popup did not appear", "The Product Submission Rejection Popup did appear");
 			TestReport.StartStep("Selecting the first subject from the Submission Rejection Popup");
 			Report.IsTrue(productSubmissionRejection.SelectFirstSubject(), "The Frist subject was not selected", "The Frist subject was selected succesfully");
+			TestReport.StartStep("I check that Text is now shown in the Supplier Message Area of the Popup");
+			Report.IsTrue(productSubmissionRejection.GetSupplierMessage() != null && productSubmissionRejection.GetSupplierMessage() != "", "The Supplier Message Area was empty", "Text was shown in the Supplier Message Area");
+			TestReport.StartStep("I Click save in the Product Submission Rejection Popup");
+			Report.IsTrue(productSubmissionRejection.ClickButton("Save"), "The save button was not clicked", "The save button was succesfully clicked");
+			TestReport.StartStep("");
+
+
+
 
 
 

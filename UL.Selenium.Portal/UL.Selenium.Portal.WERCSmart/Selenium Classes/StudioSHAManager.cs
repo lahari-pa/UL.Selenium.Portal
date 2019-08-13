@@ -2161,8 +2161,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement firstSubject = this.containerElement.FindElement(By.XPath("//td[./b[text()='Select Subjects']]//input[position()=1]"));
 			return firstSubject.TryClick();
 		}
-			
-				
+
+		public string GetSupplierMessage()
+		{
+			IWebElement messageField = this.containerElement.FindElement(By.XPath(".//textarea[@id='txtsubmittedRejectMessage']"));
+			return messageField.GetValue();
+		}
+
+		/// <summary>
+		/// Takes "Save" or "Cancel"
+		/// </summary>
+		/// <param name="button"></param>
+		/// <returns></returns>
+		public bool ClickButton(string button)
+		{
+			ReadOnlyCollection<IWebElement> buttonList = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]//button/span"));
+			Report.Info(buttonList.Count + " buttons found");
+			IWebElement matchingButton = buttonList.FirstOrDefault(x => x.GetValue().Trim() == button);
+			if (matchingButton == null)
+			{
+				Report.Info("no matching button was found");
+				return false;				
+			}
+			return matchingButton.TryClick();
+		}
+
+
+
+
 
 	}
 

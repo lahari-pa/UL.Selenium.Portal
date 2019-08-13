@@ -2262,6 +2262,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 		}
+		[StepDefinition(@"I Confirm the Product saved as: (.*) shows the: '(.*)' Status")]
+		public void ConfirmProductInCorrectStatus(string savedAs,string status)
+		{
+			var productStatus = new StudioSHAManager().GetproductStatus(savedAs);
+			Report.IsTrue(productStatus.StatusName == status, "The product was not in the status " + status, "The product was in the status " + status);
+
+		}
+		
+
 	}
 }
 

@@ -100,12 +100,12 @@ And I Confirm the Product shows status: Completed for retailer: saved as TestCas
 
 Scenario: [78414] Submit Product, Reject from Submitted in SHA, Resubmit from Portal.  SHA shows in Submitted status
 Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
-And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 #And I Search for you product using the shared step below
+#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
+And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase75142)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
-And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: (.*))
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
-And I Confirm theProduct shows the"NEW Status"
+And I Confirm the Product saved as: TestCase75142 shows the: 'New' Status
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I Filter for the Product you are working with
 And I Click the "... Icon" in the Actions Column for your Product
