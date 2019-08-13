@@ -7058,35 +7058,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click the option: " + aliasoption + "!",
 				"successfully clicked the option" + aliasoption);
 			List<string> data = thisStepsStudio.GetAliasSubsectionData();
-			if (data == null)
-			{
-				Report.Info("Did not find any data under Get Alias Subsection");
-				Report.Screenshot();
-			}
 			foreach (TableRow row in expected.Rows)
 			{
 				string option = row["Data"];
-				Report.Info("Checking that I see the option '" + option + "'");
 				if (row["Data"] == "date")
 				{
 					foreach (var i in data)
 					{
-						var dt2 = DateTime.ParseExact(i, "M/d/yyyy", CultureInfo.InvariantCulture);
-						Report.Success("contains a date: " +i);
+						Report.Info("Checking that I see a date:");
+						try
+						{
+							var dt2 = DateTime.ParseExact(i, "M/d/yyyy", CultureInfo.InvariantCulture);
+							Report.Success("contains a date: " +i);
+						}
+						catch (Exception ex)
+						{
+							Report.Failure(ex.Message);
+						}
 					}
 				}
-				//else
-				//{
-				//	Report.IsTrue(data.Contains(option.Trim()),
-				//		"Option was not showing as expected! Expected: '" + option + "', but found: '" +
-				//		string.Join("', '", data) + "'!",
-				//		"Option was showing: '" + option + "', as expected!");
-				//}
 				if (row["Data"] == "any")
 				{
+					Report.Info("Checking that I see random data:");
 					Report.IsTrue(data != null,
 						"Data is not showing when it was expected to!",
 						"Data is showing as expected");
+				}
+				if (row["Data"] != "date" && row["Data"] != "any")
+				{
+					Report.Info("Checking that I see option:" +option);
+					Report.IsTrue(data.Contains(option.Trim()),
+						"Option was not showing as expected! Expected: '" + option + "', but found: '" +
+						string.Join("', '", data) + "'!",
+						"Option was showing: '" + option + "', as expected!");
 				}
 			}
 		}
@@ -7822,9 +7826,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Beginning Shared Step 86015- WPS PD+ - Product Attributes - check all entries for Canada Stewardship data");
 			var steps_Shared = new Steps_Shared();
 			steps_Shared.ProductAttributes_FilterFor("CBC");
-			//var el = "";
-			//var dt =  new DateTime().ToString("MM/dd/yyyy");
-			//var dt = DateTime.Parse(el).ToString("MM/dd/yyyy");
 			var table = new Table(new string[] {
 				"Data"
 			});

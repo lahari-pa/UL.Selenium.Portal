@@ -647,7 +647,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Canada supplier address
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.AddCanadaAddress("100 King St W", "Ontario", "Toronto", "ON M5X 1A9", "123-123-1234","CANADA","1");
+			myAccount.AddCanadaAddress("100 King St W", "Ontario", "Toronto", "ON M5X 1A9", "123-123-1234", "CANADA", "1");
+
+			//select I have no stewardship numbers
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.ClickIhaveNoStewardshipNumbers();
 
 			//data tiers
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
