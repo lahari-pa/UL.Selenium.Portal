@@ -8233,6 +8233,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
+		[StepDefinition(@"I call Shared Step 83242 \(SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: (.*)\)")]
+		public void SharedStep83242_SubmittedOrAssignedProduct_RejectSubmission_AnySubject_Save(string savedAs)
+		{
+
+
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step 83242");
+			var myStudioShaManager = new StudioSHAManager();
+			var stepsSHA = new Steps_SHA();
+			var productSubmissionRejection = new StudioSHAManagerProductSubmissionRejection();
+				
+
+			if (!myStudioShaManager.Wait_for_load(30))
+			{
+				Report.Error("Studio SHA Manager is not showing");
+			}
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+
+			bool selectedID = false;
+
+			if (myStudioShaManager.SelectProductByID(id))
+			{
+				selectedID = true;				
+			}
+			
+			Report.IsTrue(selectedID, "Failed to select product with id: " + id, "Selected product with id: " + id);
+
+			TestReport.StartStep("I click the following option in the bottom menu: Reject Submission");
+			stepsSHA.IClickTheFollowingOptionInTheBottomMenu("Reject Submission");
+			Report.IsTrue(productSubmissionRejection.Wait_for_load(30), "The Product Submission Rejection Popup did not appear", "The Product Submission Rejection Popup did appear");
+			TestReport.StartStep("Selecting the first subject from the Submission Rejection Popup");
+			Report.IsTrue(productSubmissionRejection.SelectFirstSubject(), "The Frist subject was not selected", "The Frist subject was selected succesfully");
+
+
+
+		}
 
 	}
 }

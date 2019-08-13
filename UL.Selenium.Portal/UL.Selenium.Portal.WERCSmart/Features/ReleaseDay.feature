@@ -61,7 +61,7 @@ Then In the Purchase Summary screen I confirm the folling statement is shown: Th
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 And I Confirm the Product shows status: Completed for retailer: saved as retailer
-And I Confirm the Product shows status: Submitted for retailer: saved as TestCase75321Retailer
+And I Confirm the Product shows status: Submitted for retailer: saved as TestCase75321Retailer49841
 
 
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
@@ -101,10 +101,10 @@ And I Confirm the Product shows status: Completed for retailer: saved as TestCas
 Scenario: [78414] Submit Product, Reject from Submitted in SHA, Resubmit from Portal.  SHA shows in Submitted status
 Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-And I Search for you product using the shared step below
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
-And [Shared Step 83242 - SHA - Submitted or Assigned product - Reject Submission - any subject - Save]
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+#And I Search for you product using the shared step below
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
+And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: (.*))
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
 And I Confirm theProduct shows the"NEW Status"
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I Filter for the Product you are working with

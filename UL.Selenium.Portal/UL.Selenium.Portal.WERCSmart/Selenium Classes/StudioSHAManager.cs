@@ -2143,6 +2143,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return matchingButton.TryClick();
 		}
+		
+
 
 	}
+
+	class StudioSHAManagerProductSubmissionRejection : BaseObject
+	{
+
+		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool SelectFirstSubject()
+		{
+			IWebElement firstSubject = this.containerElement.FindElement(By.XPath("//td[./b[text()='Select Subjects']]//input[position()=1]"));
+			return firstSubject.TryClick();
+		}
+			
+				
+
+	}
+
+
+
+
+
 }
