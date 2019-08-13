@@ -8243,6 +8243,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myStudioShaManager = new StudioSHAManager();
 			var stepsSHA = new Steps_SHA();
 			var productSubmissionRejection = new StudioSHAManagerProductSubmissionRejection();
+			var globalSteps = new GlobalSteps();
+
 				
 
 			if (!myStudioShaManager.Wait_for_load(30))
@@ -8268,14 +8270,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("Selecting the first subject from the Submission Rejection Popup");
 			Report.IsTrue(productSubmissionRejection.SelectFirstSubject(), "The Frist subject was not selected", "The Frist subject was selected succesfully");
 			TestReport.StartStep("I check that Text is now shown in the Supplier Message Area of the Popup");
-			Report.IsTrue(productSubmissionRejection.GetSupplierMessage() != null && productSubmissionRejection.GetSupplierMessage() != "", "The Supplier Message Area was empty", "Text was shown in the Supplier Message Area");
+			Report.IsTrue(!productSubmissionRejection.GetSupplierMessage().IsNullOrEmpty(), "The Supplier Message Area was empty", "Text was shown in the Supplier Message Area");
 			TestReport.StartStep("I Click save in the Product Submission Rejection Popup");
-			Report.IsTrue(productSubmissionRejection.ClickButton("Save"), "The save button was not clicked", "The save button was succesfully clicked");
-			TestReport.StartStep("");
 
+			//Alert is dismissed by screeshot, therefore cannot use Report.IsTure
+			var saveClicked = productSubmissionRejection.ClickButton("Save");
+			if (saveClicked)
+			{
+				Report.Success("The save button was succesfully clicked");
+			}
+			else
+			{
+				Report.Failure("The save button was not clicked");
+				return;
+			}
 
+			TestReport.StartStep("I check the Product Submission Rejection Popup has been closed");
 
+			var popupClosed = productSubmissionRejection.Wait_for_load(10);
 
+			if(!popupClosed)
+			{
+				Report.Success("The Product Submission Rejection Popup was not shown");
+			}
+			else
+			{
+				Report.Failure("The Product Submission Rejection Popup was shown");
+				return;
+			}
+
+			//Report.IsFalse(productSubmissionRejection.Wait_for_load(10), "The Product Submission Rejection Popup was shown", "The Product Submission Rejection Popup was not shown");
+
+			TestReport.StartStep("I check that an alert appears with the correct message");
+			globalSteps.GivenICheckAlertTextContainsXAndDismiss("Product Message for Product ID has been created successfully"); //May need changing to account for message changing depending on product ID.
 
 
 		}

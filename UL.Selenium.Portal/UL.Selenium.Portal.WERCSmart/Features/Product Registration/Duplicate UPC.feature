@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -58,6 +58,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91076
 
+@TReVorId:23403
 Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	Given I generate a random UPC number and save as: UPC_A
 	Given I generate a random UPC number and save as: UPC_B

@@ -1233,6 +1233,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("Alert did not appear");
 			}
 			string alertText = SeleniumBrowser.Alert.GetText();
+			if(alertText == null)
+			{
+				Report.Failure("Text was not displayed");
+				return;
+			}
 			Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
 				"Alert text was as expected");
 			Report.Screenshot();

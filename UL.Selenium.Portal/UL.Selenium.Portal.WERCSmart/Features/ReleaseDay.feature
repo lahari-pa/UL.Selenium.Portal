@@ -105,9 +105,11 @@ Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted stat
 #And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
 And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase75142)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
-And I Confirm the Product saved as: TestCase75142 shows the: 'New' Status
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: New
+#And I Confirm the Product saved as: TestCase75142 shows the: 'New' Status
+Given I navigate to the landing page
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-And I Filter for the Product you are working with
+Then I filter for the product saved as: TestCase75142
 And I Click the "... Icon" in the Actions Column for your Product
 And I Select the 'Edit' Option
 And I Clickon the "Review and Submit Tab Heading"
@@ -118,4 +120,4 @@ And I The Purchase Summary page is shown with the Thank you message - You should
 And I Click on the 'HOME BUTTON'
 And I Go to SHA Manager
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
-And I Confirm the Productshows a "Submitted Status"
+And I Confirm the Product saved as: TestCase75142 shows the: 'Submitted' Status
