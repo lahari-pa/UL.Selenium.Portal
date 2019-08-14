@@ -7080,7 +7080,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (row["Data"] == "any")
 				{
 					Report.Info("Checking that I see random data:");
-					Report.IsTrue(data != null,
+					Report.IsTrue(data.Count != 0,
 						"Data is not showing when it was expected to!",
 						"Data is showing as expected");
 				}
