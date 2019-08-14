@@ -2195,7 +2195,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICreateANewFileSavedAsToUploadUsingTheUPCsSavedAs(string savedAs, Table upcs)
 		{
 			Report.IsTrue(true, "", "This is where we need to create a file.");
-			// ScenarioContext.Current.Pending();
+			// Context.ScenarioContext.Pending();
 		}
 
 		[Given(@"In the UPC document saved as: (.*), I add some duplicate UPCs")]
@@ -2203,7 +2203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(true, "", "This is where we need to append lines to a file.");
 			// Use file from "I create a new file saved as: (.*) to upload using the UPCs saved as:" and add at least one duplicate
-			// ScenarioContext.Current.Pending();
+			// Context.ScenarioContext.Pending();
 		}
 
 
