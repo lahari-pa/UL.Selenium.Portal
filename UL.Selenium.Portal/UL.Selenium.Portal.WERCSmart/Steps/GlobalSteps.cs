@@ -1238,9 +1238,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Text was not displayed");
 				return;
 			}
-			Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
-				"Alert text was as expected");
-			Report.Screenshot();
+			if(alertText.Contains(searchText))
+			{
+				Report.Info("Alert text was as expected");
+
+			}
+			else
+			{
+				Report.Failure($"Alert text was not as expected. Found: {alertText}");
+			}
+
+			//Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
+			//	"Alert text was as expected");
+
+			Report.Screenshot(true);
+
 			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 		}
 

@@ -110,7 +110,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				upcNumberField.EnterText(info.UpcNumber);
 				IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-				containsType.Select(info.ContainerType);
+				if(info.ContainerType=="<first>")
+				{
+					var firstOption = containsType.FindElement(By.XPath("./option[not(text()='Container Type')]"), 1).Text;
+
+					if (firstOption==null)
+					{
+						Report.Failure("There are no Container Types");
+						return false;
+					}
+					else
+					{
+						containsType.Select(firstOption);
+					}
+
+					
+				}
+				else
+				{
+					containsType.Select(info.ContainerType);
+				}
+				
 				string regex = @"(.*)\((.*)\)";
 				IWebElement sizeField = (from input in textInputs
 										 let match = Regex.Match(input.GetAttribute("placeholder"), regex)

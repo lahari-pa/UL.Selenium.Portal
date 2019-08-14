@@ -135,5 +135,9 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I search for the product saved as: TestCase91741
+	Given I edit the first product in results
+	Then I should see the Universal Product Code (UPC) Page
+	Given I click the 'Add Case UPC' button
+
 
 

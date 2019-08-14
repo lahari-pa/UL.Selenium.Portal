@@ -8245,7 +8245,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var productSubmissionRejection = new StudioSHAManagerProductSubmissionRejection();
 			var globalSteps = new GlobalSteps();
 
-				
+
 
 			if (!myStudioShaManager.Wait_for_load(30))
 			{
@@ -8259,9 +8259,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (myStudioShaManager.SelectProductByID(id))
 			{
-				selectedID = true;				
+				selectedID = true;
 			}
-			
+
 			Report.IsTrue(selectedID, "Failed to select product with id: " + id, "Selected product with id: " + id);
 
 			TestReport.StartStep("I click the following option in the bottom menu: Reject Submission");
@@ -8286,7 +8286,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			TestReport.StartStep("I check that an alert appears with the correct message");
-			globalSteps.GivenICheckAlertTextContainsXAndDismiss("Product Message for Product ID has been created successfully"); //May need changing to account for message changing depending on product ID.
+			globalSteps.GivenICheckAlertTextContainsXAndDismiss($"Product Message for product {id} has been created successfully."); 
 
 			TestReport.StartStep("I check the Product Submission Rejection Popup has been closed");
 			Report.IsFalse(productSubmissionRejection.Wait_for_load(10), "The Product Submission Rejection Popup was shown", "The Product Submission Rejection Popup was not shown");
