@@ -1273,5 +1273,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
+
+
+		[StepDefinition(@"In Stewardship table I select I have no stewardship Numbers")]
+		public void ClickIhaveNoStewardshipNumbers()
+		{
+			TestReport.UseSubSteps = true;
+			GeneralUtilities.ScrollToBottomOfPage();
+			var mystwdinfo = new MyAccount_CompanyInfo();
+			var clearstwdpopup = new ClearStewardshipNotification();
+			Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.IsTrue(mystwdinfo.NoStewardshipCheckbox_click(), "failed to click checkbox", "successfully clicked checkbox");
+			Report.IsTrue(clearstwdpopup.ClickClearStewardshipOption("Yes"), "failed to click Yes", "successfully clicked Yes");
+			Report.IsTrue(mystwdinfo.StewardshipSave_click(), "failed to click save", "successfully clicked save");
+			GeneralUtilities.Wait_for_load_finish();
+		}
 	}
 }

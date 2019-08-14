@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.31\lib\net461\CredentialManagement.dll</HintPath>
     <Reference Include="Flurl, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flurl.2.8.0\lib\net40\Flurl.dll</HintPath>
     </Reference>
@@ -69,6 +70,9 @@
     <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.31\lib\net461\NTTQA.Selenium.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.31\lib\net461\NTTQA.Selenium.Reporting.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.31\lib\net461\NTTQA.Selenium.TReVor.dll</HintPath>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -123,16 +127,18 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem ##### TReVor Post Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.6.0.21\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.6.0.31\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>rem ##### TReVor Pre Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.6.0.21\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.6.0.31\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"
 </PreBuildEvent>
   </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.6.0.31\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.6.0.31\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
   <Target Name="AfterUpdateFeatureFilesInProject">
     <ItemGroup>
       <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
     </ItemGroup>
   </Target>
+  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.6.0.31\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.6.0.31\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
 </Project>

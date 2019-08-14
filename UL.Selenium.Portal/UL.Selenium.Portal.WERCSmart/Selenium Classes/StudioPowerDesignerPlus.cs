@@ -1879,9 +1879,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetAliasSubsectionData()
 		{
-			return SeleniumBrowser.WebBrowser
-				.FindElements(By.CssSelector("#lbData > option"), 2).ToList()
-				.Select(x => x.GetValue()).ToList();
+			try
+			{
+				return SeleniumBrowser.WebBrowser
+					.FindElements(By.CssSelector("#lbData > option"), 2).ToList()
+					.Select(x => x.GetValue()).ToList();
+			}
+			catch (Exception)
+			{
+				return new List<string>();
+			}
 		}
 
 		public bool ClickAliasSubsectionOption(string option)
