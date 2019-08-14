@@ -112,3 +112,28 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I Click the Continue button
 	And I Confirm you are allowed to go on to next screen without errors
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase82536
+
+Scenario: [91741] Duplicate UPC is not permitted within account - New Product registration - Case UPC
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase91741
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I click the following option in the bottom menu: Search
+	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
+	Given In SHA Manager ProductSearch page I run search:
+		| Search Term | Search Value                  |
+		| Status      | Completed                     |
+		| Supplier    | QA_Automation_ProductsAccount |
+		| User        | saved as AccountUsername      |
+	Given I save a UPC number for any product in the grid to context as: ExistingUPC
+	Given I navigate to the landing page
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I search for the product saved as: TestCase91741
+
+
