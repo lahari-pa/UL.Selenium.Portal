@@ -48,7 +48,7 @@ Given I create a new supplier Stewardship only account with the following parame
 
 @TReVorId:22369
 Scenario: Create new account with supplier settings for Canada Has Address Packaging
-#Given I log in with email: User_c062d3b9f22e.kxxyxunf@mailosaur.io and password: Welcome1!
+#Given I log in with email: User_ea0759ff5975.kxxyxunf@mailosaur.io and password: Welcome1!
 Given I create a new supplier Canada has address packaging account with the following parameters and update TReVor information for: CanadaHasAddressPackaging
 
 

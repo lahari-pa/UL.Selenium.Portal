@@ -89,6 +89,51 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public List<User> UserGrid()
+		{
+			try
+			{
+				IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+
+				var listOfUsers = new List<User>();
+
+				foreach (IWebElement userRow in listOfUsersRows)
+				{
+					var thisUser = new User {
+						Username = userRow.FindElement(By.XPath(".//td[1]")).Text,
+						Email = userRow.FindElement(By.XPath(".//td[2]")).Text,
+						Role = userRow.FindElement(By.XPath(".//td[3]")).Text,
+						IsActive = userRow.FindElement(By.XPath(".//td[4]")).Text == "Yes"
+					};
+					ReadOnlyCollection<IWebElement> checkboxes = userRow.FindElements(By.XPath(".//td[5]/div[@class='checkbox']"));
+					foreach (IWebElement checkbox in checkboxes)
+					{
+						switch (checkbox.FindElement(By.XPath("./label")).Text.Trim())
+						{
+							case "Chemical Assessment":
+								thisUser.ChemicalAssessment = checkbox.FindElement(By.XPath(".//input")).Selected;
+								break;
+							case "Product Submission":
+								thisUser.ProductSubmission = checkbox.FindElement(By.XPath(".//input")).Selected;
+								break;
+							default:
+								throw new Exception(
+									"There's a checkbox other than Chemical Assessment and Product Submissions. You need to update the function SaveUserGrid");
+						}
+					}
+					listOfUsers.Add(thisUser);
+				}
+				return listOfUsers;
+
+			}
+			catch (Exception e)
+			{
+				Report.Error(e.Message);
+				return null;
+			}
+		}
+
 		//Valid Actions: Details, Deactivate, Reset Password
 		public bool ForUserClickAction(string username, string action)
 		{
@@ -142,8 +187,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Beginning User_Added_Check");
 
 			int pageNo = 1;
-
-			while (pageNo <= this.GetPage("last"))
+			int pageCount = this.GetPage("last");
+			while (pageNo <= pageCount)
 			{
 				Delay.Seconds(1.5 * Delay.SpeedFactor);
 
@@ -1023,7 +1068,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-
 		public bool StewardshipEdit_click()
 		{
 			IWebElement StwdshipEdit = this.containerElement.FindElement(By.Id("edit-stewardship"), 2);
@@ -1036,6 +1080,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			return StwdshipEdit.TryClick();
+		}
+
+		public bool NoStewardshipCheckbox_click()
+		{
+			IWebElement StwdshipChkbox = this.containerElement.FindElement(By.XPath("//div[@class='checkbox']//input"), 2);
+			Report.Info("Attempting to Click no Stewardship checkbox");
+
+			if (StwdshipChkbox == null)
+			{
+				Report.Failure("Not able to find checkbox");
+				Report.Screenshot();
+				return false;
+			}
+			return StwdshipChkbox.TryClick();
 		}
 
 		public bool StewardshipSave_click()
@@ -1946,4 +2004,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 	// My Distributors
+
+	public class ClearStewardshipNotification : SeleniumBaseObject
+	{
+		public const string BasePath = "//div[@class='modal fade in']";
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		public bool ClickClearStewardshipOption(string option)
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[@class='modal-footer']//button[contains(text(),'" + option + "')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+
+	}
 }

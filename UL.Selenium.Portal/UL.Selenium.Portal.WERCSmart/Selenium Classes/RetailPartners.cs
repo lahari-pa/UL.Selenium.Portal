@@ -335,6 +335,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return messages.Select(x => x.Text.Trim()).ToList();
 		}
 
+		
+
 		public string GetSelectedRetailer()
 		{
 			return this.containerElement.FindElement(By.XPath("//h2[@id='retailerLabel']"), 2).GetElementText();
@@ -536,6 +538,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickOK()
 		{
 			return this.containerElement.FindElement(By.XPath(".//button[text()='Ok']"), 2).TryClick();
+		}
+		public List<string> SuccessMessages()
+		{
+			IList<IWebElement> messages = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'alert-success')]"), 2);
+			if (messages.Count == 0)
+			{
+				return new List<string>();
+			}
+			return messages.Select(x => x.Text.Trim()).ToList();
 		}
 	}
 

@@ -139,6 +139,11 @@ Scenario: [74540] Target - Data Tier Warning when not all are selected
 		| Revising the Data Use Tier consents you have provided to a retailer will suspend your participation in that retailer’s programs. Product data and reports generated while you consent was in effect will remain available to the retailer, but no further product data or reports will be generated. |
 	Given I toggle the data consent tier: Tier 2.1 to: on
 	Given I click the Save Changes button
+	Then The success message in the Save Changes popup dialog should contain the following:
+		| Message                                                                                       |
+		| The information was saved correctly and the notification Email was sent to all Administrators |		
 	Given I click close on the Save Changes popup dialog
 	And I confirm that: Target requests suppliers of Cleaning and Health & Beauty products to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. is showing under the Data Consent Tiers heading
 	And I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown
+	Given I click the back arrow on the Retail Partners Details page
+	Then I should see the Retail Partners page
