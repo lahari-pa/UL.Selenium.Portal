@@ -60,6 +60,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91076
 
 	@tfs_design
+@TReVorId:23403
 Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	Given I generate a random UPC number and save as: UPC_A
 	Given I generate a random UPC number and save as: UPC_B
@@ -90,7 +91,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 		| UPC_C | 61       | 3    | 8.2                | 00CC03          | 2003            | 3456            | H0003           | 345-67-8901 | 300000007 | 223-1234,123-1232 |
 		| UPC_D | 91       | 4    | 9.06               | 00DD04          | 2004            | 5678            | I0004           | 456-78-9012 | 200000006 | 223-1234,123-1233 |
 	And In the UPC document saved as: UploadFile, I add some duplicate UPCs
-		| UPC           | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   |
+		| UPC           | Quantity | Size | Net Explosive Mass | US:ï¿½Part Number | US:ï¿½Item Number | GP:ï¿½Part Number | SP:ï¿½Part Number | TG:ï¿½DPCI    | HD:ï¿½OMSID | CT: Item Number   |
 		| Duplicate UPC | 50       | 12   | 200                | 00AA65          | 2509            | 3421            | F0991           | 023-05-0789 | 500660009 | 203-1034,120-1000 |
 	And I click the browse button for label: Upload UPCs and upload PDF: UploadFile
 	And I Confirm that the Add Multiple window openswith the UPCs that were added in the document
@@ -113,6 +114,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I Confirm you are allowed to go on to next screen without errors
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase82536
 
+@TReVorId:23406
 Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Single UPC
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

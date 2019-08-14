@@ -3248,5 +3248,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			return this.CheckBoxes[i].TryCheck();
 		}
+
+		internal Dictionary<string, string> GetData()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
