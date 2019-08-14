@@ -46,7 +46,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 		| Status      | Completed                     |
 		| Supplier    | QA_Automation_ProductsAccount |
 		| User        | saved as AccountUsername      |
-	Given I save a UPC number for any product in the grid to context as: ExistingUPC
+	Given I find a UPC number for any product in the grid and save to context as: ExistingUPC
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I search for the product saved as: TestCase91076
