@@ -81,6 +81,7 @@ And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Opt
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
+#And I save to context name: TestCase86008 and value: 1511929
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86008)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86008 and its status is: Submitted

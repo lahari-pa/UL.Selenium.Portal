@@ -9,6 +9,7 @@ using NTTQA.Selenium.UniversalFunctions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
@@ -906,14 +907,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
-		[StepDefinition(@"I call Shared Step 60567 \(Upload Product Label only\) : (.*)")]
-		public void GivenICallSharedUploadProductLabelOnly(string docPath)
+		[StepDefinition(@"I call Shared Step 60567 \(Upload Product Label only\)")]
+		public void GivenICallSharedUploadProductLabelOnly()
 		{
 			TestReport.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			TestReport.StartStep(
-				@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyStepsNewProduct.UploadPDFFile("Product Label", docPath);
+			TestReport.StartStep(@"I click the browse button for label: Product Label and upload PDF: testdoc.pdf");
+			MyStepsNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -923,10 +923,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			TestReport.StartStep("I click the browse button for label: Product Label in section: " + section +
-								 @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", section,
-				@"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep("I click the browse button for label: Product Label in section: " + section + @" and upload PDF: testdoc.pdf");
+			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", section, @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -7063,11 +7061,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (TableRow row in expected.Rows)
 			{
 				string option = row["Data"];
-				Report.Info("Checking that I see the option '" + option + "'");
-				Report.IsTrue(data.Contains(option.Trim()),
-					"Option was not showing as expected! Expected: '" + option + "', but found: '" +
-					string.Join("', '", data) + "'!",
-					"Option was showing: '" + option + "', as expected!");
+				if (row["Data"] == "date")
+				{
+					foreach (var i in data)
+					{
+						Report.Info("Checking that I see a date:");
+						try
+						{
+							var dt2 = DateTime.ParseExact(i, "M/d/yyyy", CultureInfo.InvariantCulture);
+							Report.Success("contains a date: " +i);
+						}
+						catch (Exception ex)
+						{
+							Report.Failure(ex.Message);
+						}
+					}
+				}
+				if (row["Data"] == "any")
+				{
+					Report.Info("Checking that I see random data:");
+					Report.IsTrue(data.Count != 0,
+						"Data is not showing when it was expected to!",
+						"Data is showing as expected");
+				}
+				if (row["Data"] != "date" && row["Data"] != "any")
+				{
+					Report.Info("Checking that I see option:" +option);
+					Report.IsTrue(data.Contains(option.Trim()),
+						"Option was not showing as expected! Expected: '" + option + "', but found: '" +
+						string.Join("', '", data) + "'!",
+						"Option was showing: '" + option + "', as expected!");
+				}
 			}
 		}
 
@@ -7819,21 +7843,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data"
 			});
 			table2.AddRow(new string[] {
-				"12/31/2020"
+				//"12/31/2020"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CBCDS", table2);
 			var table3 = new Table(new string[] {
 				"Data"
 			});
 			table3.AddRow(new string[] {
-				"1/1/2018"
+				//"1/1/2018"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CBCSD", table3);
 			var table4 = new Table(new string[] {
 				"Data"
 			});
 			table4.AddRow(new string[] {
-				"BC-1"
+				//"BC-1-1"
+				"any"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CBCSN", table4);
 			steps_Shared.ProductAttributes_FilterFor("CMB");
@@ -7854,21 +7881,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data"
 			});
 			table6.AddRow(new string[] {
-				"12/31/2020"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CMBDS", table6);
 			var table7 = new Table(new string[] {
 				"Data"
 			});
 			table7.AddRow(new string[] {
-				"1/1/2018"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CMBSD", table7);
 			var table8 = new Table(new string[] {
 				"Data"
 			});
 			table8.AddRow(new string[] {
-				"MB-3"
+				//"MA-1-1"
+				"any"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CMBSN", table8);
 			steps_Shared.ProductAttributes_FilterFor("CON");
@@ -7889,21 +7917,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data"
 			});
 			table10.AddRow(new string[] {
-				"12/31/2020"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CONDS", table10);
 			var table11 = new Table(new string[] {
 				"Data"
 			});
 			table11.AddRow(new string[] {
-				"1/1/2018"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CONSD", table11);
 			var table12 = new Table(new string[] {
 				"Data"
 			});
 			table12.AddRow(new string[] {
-				"ON-4"
+				//"ON-1-1"
+				"any"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CONSN", table12);
 			steps_Shared.ProductAttributes_FilterFor("CQC");
@@ -7924,21 +7953,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data"
 			});
 			table14.AddRow(new string[] {
-				"12/31/2020"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CQCDS", table14);
 			var table15 = new Table(new string[] {
 				"Data"
 			});
 			table15.AddRow(new string[] {
-				"1/1/2018"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CQCSD", table15);
 			var table16 = new Table(new string[] {
 				"Data"
 			});
 			table16.AddRow(new string[] {
-				"QA-5"
+				//"QU-1-1"
+				"any"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CQCSN", table16);
 			steps_Shared.ProductAttributes_FilterFor("CSK");
@@ -7959,21 +7989,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data"
 			});
 			table18.AddRow(new string[] {
-				"12/31/2020"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKDS", table18);
 			var table19 = new Table(new string[] {
 				"Data"
 			});
 			table19.AddRow(new string[] {
-				"1/1/2018"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKSD", table19);
 			var table20 = new TechTalk.SpecFlow.Table(new string[] {
 				"Data"
 			});
 			table20.AddRow(new string[] {
-				"SK-2"
+				//"SA-1-1"
+				"any"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKSN", table20);
 		}
@@ -8172,5 +8203,67 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("Click CONTINUE");
 			new StepsNewProduct().ClickContinue();
 		}
+		[StepDefinition(@"I call Shared Step 82831 \(The Product - Enter Product Name and Select Type of Product: (Raw Material|Mixture, Blend, Formula, Polymer or Solution from Third \(3rd, 3d\) Party)\)")]
+	
+		public void SharedStep82831_TheProduct_EnterProductNameAndType(string type)
+		{
+			TestReport.UseSubSteps = true;
+
+			var MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the The Product Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
+			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
+			char[] forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
+			var name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
+			new Steps_TheProduct().SetProductNameTo(name);
+			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			new Steps_TheProduct().SetTypeOfProductTo(type);
+			TestReport.StartStep("In the New Product page I click Continue");
+			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
+			var modal = new ModalDialog();
+			TestReport.StartStep("I verify the 'Warning' pop-up displays");
+			Report.IsTrue(modal.Wait_for_load() && modal.GetTitle().Contains("Warning"), "");
+			TestReport.StartStep("I confirm the warning message contains the expected text");
+			string actualMessage = modal.GetText();
+			if (actualMessage==null)
+			{
+				Report.Failure("The Warning Popup had no message");
+				Report.Info("Closing popup");
+				if(Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button", "Clicked OK button"))
+				{
+					Report.Info("I click Continue");
+					MyStepsNewProduct.ClickContinue();
+				}
+				
+
+				return;
+			}
+			actualMessage = actualMessage.Replace("/r/n", "");
+			if (type == "Raw Material")
+			{
+				Report.Info("Checking Raw Materials message");
+				string expectedMessage = "You are registering a formula (Raw Material). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
+				Report.IsTrue(actualMessage.Contains(expectedMessage), "The Warning message was not correct", "The Warning message was correct");
+			}
+			else if(type== "Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party")
+			{
+				Report.Info("Checking Mixture, Blend, Formula or Solution from 3rd Party message");
+				string expectedMessage = "You are registering a formula (Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
+				Report.IsTrue(actualMessage.Contains(expectedMessage), "The Warning message was not correct", "The Warning message was correct");
+			}
+			else
+			{
+				Report.Error("Product type must be Raw Material or Mixture, Blend, Formula or Solution from 3rd Party");
+				
+			}
+
+			Report.Info("Closing popup");
+			Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button","Succesfully clicked on the OK button");
+			GeneralUtilities.Wait_for_load_finish();
+
+
+
+		}
+
 	}
 }

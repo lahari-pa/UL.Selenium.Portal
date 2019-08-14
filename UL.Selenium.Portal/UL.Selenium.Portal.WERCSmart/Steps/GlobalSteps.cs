@@ -21,6 +21,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
 using NTTQA.Selenium.TReVor;
+using NTTQA.Selenium.UniversalFunctions;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -155,6 +156,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
 			}
 		}
+
+		/// <summary>
+		/// Requires a user object of type User (WercSmart.Classes.User) not TestUser (TReVor)
+		/// </summary>
+		[StepDefinition(@"I log in as the user saved as: (.*)")]
+		public void LoginToCurrentNewUser(string savedAs)
+		{
+			//var newUser = (User)Context.GetFromContext(savedAs);
+			var newUser = (WERCSmartUser)Context.GetFromContext(savedAs);
+
+			//give savedAs and get the password and email
+			string email = newUser.Email;
+			string password = newUser.Password;
+
+			Report.Info("Clicking 'Log In' on the Landing Page");
+			Report.IsTrue(new LandingPage().Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
+			new StepsLogin().GivenIPopulateTheInputFieldWith("email", email);
+			new StepsLogin().GivenIPopulateTheInputFieldWith("password", password);
+			Report.Screenshot();
+			new StepsLogin().IClickTheLoginButton();
+			Report.IsTrue(new Login().WaitForContainerToBeInvisible(), "Did not redirect from Log in page!");
+						
+
+			
+		}
+
+
+
 
 		[StepDefinition(@"I log in with email: (.*) and password: (.*)")]
 		// requires the user to be on the landing page
