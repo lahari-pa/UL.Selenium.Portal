@@ -557,6 +557,3 @@ Scenario: [87825] Summary Shows Case UPC Data
 	And I close the window that opened
 	And I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
-
-@TReVorId:23396
-@TReVorId:23397
