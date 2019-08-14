@@ -196,6 +196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 					{
 						removeButton = unselectedManufacturerTypes.FirstOrDefault().FindElement(By.XPath("../..//td[" + removeIndex.ToString() + "]//a"));
 						removeButton.Click();
+						Delay.Seconds(3);
 						modeldialog.ClickButton("YES");
 						Delay.Seconds(3);
 					}
