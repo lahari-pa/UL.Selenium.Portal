@@ -1378,6 +1378,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new DataTierDetails().ClickDownloadPdfWithHeading(option), $"Failed to click download pdf option for {option}!", $"Successfully clicked download pdf option for {option}");
 		}
 
+		[StepDefinition(@"The success message in the Save Changes popup dialog should contain the following:")]
+		public void SuccessMessagesSaveChangesPopupShouldContain(Table warning)
+		{
+			var expected = new List<string>();
+			warning.Rows.ForEach(x => expected.Add(x["Message"]));
+			List<string> displayed = new DataEntryNotification().SuccessMessages();
+			IEnumerable<string> differences = expected.Except(displayed);			
+			Report.IsTrue(!differences.Any(),
+				"The success message did not match the expected text. Displayed is: " + string.Join("; ", displayed) + ". Expected is: " + string.Join("; ", expected),
+				"The sucess message matched the expected text.");
+
+		}
 	}
 }
 
