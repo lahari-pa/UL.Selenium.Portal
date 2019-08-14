@@ -297,6 +297,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return text;
 		}
+
+		internal bool VerifyUPCsInAddMultipleWindow()
+		{
+			var addWindow = new UPCAddMultipleWindow();
+			Dictionary<string, string> data = addWindow.GetData();
+			var headings = data.Keys.ToList();
+
+			foreach (string heading in headings)
+			{
+
+			}
+			return false;
+		}
 	}
 
 	public class UpcCaseInformation

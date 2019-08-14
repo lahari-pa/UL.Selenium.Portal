@@ -58,6 +58,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91076
 
+	@tfs_design
 Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	Given I generate a random UPC number and save as: UPC_A
 	Given I generate a random UPC number and save as: UPC_B
@@ -87,10 +88,10 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 		| UPC_B | 31       | 2    | 7.94               | 00BB02          | 2002            | 2345            | G0002           | 234-56-7890 | 400000008 | 223-1234,123-1231 |
 		| UPC_C | 61       | 3    | 8.2                | 00CC03          | 2003            | 3456            | H0003           | 345-67-8901 | 300000007 | 223-1234,123-1232 |
 		| UPC_D | 91       | 4    | 9.06               | 00DD04          | 2004            | 5678            | I0004           | 456-78-9012 | 200000006 | 223-1234,123-1233 |
-	#And I Create your own document with UPCs, use the following site to get UPCs https://www.upcdatabase.com/click on the Random Item link and copy and p123-1234,123-1234aste the UPCs that appear on the textbox
-	And I In the UPC document add some duplicate UPCs, save the document
-	And I Click on the Upload UPCs button
-	And I Search for the document that contains the UPCs you will upload, click Open button
+	And In the UPC document saved as: UploadFile, I add some duplicate UPCs
+		| UPC           | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   |
+		| Duplicate UPC | 50       | 12   | 200                | 00AA65          | 2509            | 3421            | F0991           | 023-05-0789 | 500660009 | 203-1034,120-1000 |
+	And I click the browse button for label: Upload UPCs and upload PDF: UploadFile
 	And I Confirm that the Add Multiple window openswith the UPCs that were added in the document
 	And I Confirm that the size is also the same as from what is in the UPC document
 	And I Select the checkbox that next to the UPC tilte
