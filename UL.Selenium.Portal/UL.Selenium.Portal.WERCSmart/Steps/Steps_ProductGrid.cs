@@ -2141,6 +2141,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
 		}
 
+		[StepDefinition(@"I edit the product saved as: (.*)")]
+		public void EditProductSavedAs(string productSavedAs)
+		{
+			var productInformation = (ProductInformation)Context.GetFromContext(productSavedAs);
+			var editID = productInformation.Id;
+			this.EditFirstProductForRetailer(editID);
+		}
 
 	}
 }

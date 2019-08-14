@@ -24,6 +24,7 @@ Feature: Duplicate UPC
 # Created by Abbie Zullo
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\UPC
+@TReVorId:23404
 Scenario: [91076] Duplicate UPC is not permitted within account - New Product registration - single UPC
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

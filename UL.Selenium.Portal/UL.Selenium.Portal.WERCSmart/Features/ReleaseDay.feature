@@ -100,24 +100,21 @@ And I Confirm the Product shows status: Completed for retailer: saved as TestCas
 
 Scenario: [78414] Submit Product, Reject from Submitted in SHA, Resubmit from Portal.  SHA shows in Submitted status
 Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
-#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-#And I Search for you product using the shared step below
-#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
 And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase75142)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
 And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: New
-#And I Confirm the Product saved as: TestCase75142 shows the: 'New' Status
 Given I navigate to the landing page
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I filter for the product saved as: TestCase75142
-And I Click the "... Icon" in the Actions Column for your Product
-And I Select the 'Edit' Option
-And I Clickon the "Review and Submit Tab Heading"
-And I Click the "Comments Step Heading"
-And I Click the 'CONTINUE'
-And I Click the "Accept Button"
-And I The Purchase Summary page is shown with the Thank you message - You should NOT See a cost for the product at this step.
-And I Click on the 'HOME BUTTON'
-And I Go to SHA Manager
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
-And I Confirm the Product saved as: TestCase75142 shows the: 'Submitted' Status
+And I edit the product saved as: TestCase75142
+Given In the New Product page I click tab: Review and Submit
+Then I click the page heading: Comments
+And I should see the Comments Page
+Then I click continue
+And I should see the Data Acceptance Page
+And In the Data Acceptance page I click on the Accept button
+Given In the Thank You screen I confirm the following statement is shown: Thank you
+Then In the Thank You screen I click Home
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: Submitted
