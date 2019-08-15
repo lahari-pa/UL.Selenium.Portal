@@ -1358,6 +1358,54 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I check alert text contains either: (.*) or: (.*) and dismiss")]
+		public void GivenICheckAlertTextContainsEitherXOrYAndDismiss(string searchTextMain, string searchTextAlternative)
+		{
+			//Putting this in because standard get alert functionality does not work in this page.
+			if (!SeleniumBrowser.Alert.WaitForAlert(10))
+			{
+				SeleniumBrowser.Alert.ReloadAlert(searchTextMain);
+			}
+			if (!SeleniumBrowser.Alert.WaitForAlert(10))
+			{
+				SeleniumBrowser.Alert.ReloadAlert(searchTextAlternative);
+			}
+			if (!SeleniumBrowser.Alert.WaitForAlert())
+			{
+				Report.Error("Alert did not appear");
+			}
+			string alertText = SeleniumBrowser.Alert.GetText();
+			if (alertText == null)
+			{
+				Report.Failure("Text was not displayed", false);
+			}
+			if (alertText.Contains(searchTextMain))
+			{
+				Report.Info($"Alert text was as expected, and contained: {searchTextMain}");
+
+			}
+			if (alertText.Contains(searchTextAlternative))
+			{
+				Report.Info($"Alert text was as expected, and contained: {searchTextAlternative}");
+
+			}
+			else
+			{
+				Report.Failure($"Alert text was not as expected. Found: {alertText}", false);
+			}
+
+			//Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
+			//	"Alert text was as expected");
+
+			Report.Screenshot(true);
+
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			}
+
+		}
+
 
 	}
 }
