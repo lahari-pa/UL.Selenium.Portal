@@ -2291,14 +2291,66 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Power designer plus has loaded");
 		}
 		[StepDefinition(@"I Confirm the Product saved as: (.*) shows the: '(.*)' Status")]
-		public void ConfirmProductInCorrectStatus(string savedAs,string status)
+		public void ConfirmProductInCorrectStatus(string savedAs, string status)
 		{
 			var productStatus = new StudioSHAManager().GetproductStatus(savedAs);
 			Report.IsTrue(productStatus.StatusName == status, "The product was not in the status " + status, "The product was in the status " + status);
 
 		}
-		
 
+		[StepDefinition(@"I find the UPC number for: (.*) products in the grid and save them to context starting with: (.*)")]
+		public void SaveUpcNumberForXProducts(int numberOfProducts, string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			Context.AddToContext("numberOfUpcnumbers", numberOfProducts);
+			int productsToTry = new StudioSHAManager().GetProductCount();
+			Report.Info("There are " + productsToTry + " products");
+			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
+			for (int i = 0; i < productsToTry; i++)
+			{
+				int j = 1;
+
+				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = products[i].ID;
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs + j, false);
+
+				if (Context.GetFromContext(savedAs + j) != null)
+				{
+					Report.Info($"Saved UPC{j} to context");
+					j++;
+
+				}
+				if (j > numberOfProducts)
+				{
+					break;
+				}
+			}
+
+		}
+
+		[StepDefinition(@"I add the UPC numbers saved to context starting with: (.*) to the UPC bulk upload spreadsheet: (.*)")]
+		public void AddUpcNumbersToBulkUploadSpreadsheet(string savedAs, string spreadsheetSavedAs)
+		{		
+			int  numberOfProducts = (int)Context.GetFromContext("numberOfUpcnumbers");
+			
+			var spreadSheetFile = (string)Context.GetFromContext(spreadsheetSavedAs);
+			var excel = new ExcelUtilities(spreadSheetFile, "Sheet1");
+
+			for (int i = 1; i <= numberOfProducts; i++)
+			{
+				if(Context.Contains(savedAs + i))
+				{
+					var upcNumber = Context.GetFromContext(savedAs + i).ToString();
+					Report.IsTrue(excel.EditCell(i, 0, upcNumber),"Failed to edit UPC to: " + upcNumber, "Successfully edited UPC to: " + upcNumber, false, false);
+				}
+				else
+				{
+					Report.Failure("Failed to find: " + savedAs + i + " in context!", false);
+				}
+			}
+		}
 	}
 }
 
