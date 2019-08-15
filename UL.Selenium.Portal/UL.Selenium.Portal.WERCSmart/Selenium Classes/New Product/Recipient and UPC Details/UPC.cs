@@ -184,7 +184,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					else if (info.TransportationOption == "<first>")
 					{
-						var firstOption = packageField.FindElement(By.XPath("./option[not(text()='Transportation Option')]"), 1).Text;
+						var firstOption = packageField.FindElement(By.XPath("./option[not(text()='Transportation Options')]"), 1).Text;
 
 						if (firstOption == null)
 						{
@@ -193,7 +193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						}
 						else
 						{
-							containsType.Select(firstOption);
+							packageField.Select(firstOption);
 						}
 
 					}
