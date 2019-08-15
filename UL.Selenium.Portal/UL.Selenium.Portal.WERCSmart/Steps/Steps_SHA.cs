@@ -2211,6 +2211,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I save a UPC number for any product in the grid to context as: (.*)")]
+		[StepDefinition(@"I find a UPC number for any product in the grid and save to context as: (.*)")]
 		public void SaveUpcNumberForAnyProduct(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -2221,6 +2222,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
 				string id = products[i].ID;
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
+				if (Context.GetFromContext(savedAs) != null)
+				{
+					Report.Info("Saved UPC to context");
+					break;
+				}
+			}
+		}
+
+		[StepDefinition(@"I find a UPC number for any product not belonging to Supplier: (.*) in the grid and save to context as: (.*)")]
+		public void SaveUpcNumberForAnyProductNotCompany(string notSupplier, string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			int productsToTry = new StudioSHAManager().GetProductCount();
+			Report.Info("There are " + productsToTry + " products");
+			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
+			for (int i = 0; i < productsToTry; i++)
+			{
+				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = products[i].ID;
+				if (products[i].Supplier == notSupplier)
+				{
+					Report.Info("Product matches supplier: " + notSupplier + " so continuing to the next row");
+					continue;
+				}
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
 				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
 				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);

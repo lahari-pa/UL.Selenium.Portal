@@ -1068,7 +1068,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-
 		public bool StewardshipEdit_click()
 		{
 			IWebElement StwdshipEdit = this.containerElement.FindElement(By.Id("edit-stewardship"), 2);
@@ -1081,6 +1080,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			return StwdshipEdit.TryClick();
+		}
+
+		public bool NoStewardshipCheckbox_click()
+		{
+			IWebElement StwdshipChkbox = this.containerElement.FindElement(By.XPath("//div[@class='checkbox']//input"), 2);
+			Report.Info("Attempting to Click no Stewardship checkbox");
+
+			if (StwdshipChkbox == null)
+			{
+				Report.Failure("Not able to find checkbox");
+				Report.Screenshot();
+				return false;
+			}
+			return StwdshipChkbox.TryClick();
 		}
 
 		public bool StewardshipSave_click()
@@ -1991,4 +2004,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 	// My Distributors
+
+	public class ClearStewardshipNotification : SeleniumBaseObject
+	{
+		public const string BasePath = "//div[@class='modal fade in']";
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		public bool ClickClearStewardshipOption(string option)
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[@class='modal-footer']//button[contains(text(),'" + option + "')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+
+	}
 }

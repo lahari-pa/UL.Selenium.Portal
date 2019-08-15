@@ -260,7 +260,7 @@ Given I click the browse button for document type: Label in both French and Engl
 
 Given I click continue
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -327,7 +327,7 @@ Given I click the browse button for document type: Label in both French and Engl
 
 Given I click continue
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -394,7 +394,7 @@ Given I click the browse button for document type: Label in both French and Engl
 
 Given I click continue
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -461,7 +461,7 @@ Given I click the browse button for document type: Label in both French and Engl
 
 Given I click continue
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -529,7 +529,7 @@ Given I click the browse button for document type: Label in both French and Engl
 
 Given I click continue
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -596,7 +596,7 @@ Given I click the browse button for document type: Label in both French and Engl
 
 Given I click continue
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -663,7 +663,7 @@ Given I click the browse button for document type: Label in both French and Engl
 
 Given I click continue
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 

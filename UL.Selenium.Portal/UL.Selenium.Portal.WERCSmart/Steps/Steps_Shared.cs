@@ -9,6 +9,7 @@ using NTTQA.Selenium.UniversalFunctions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
@@ -906,14 +907,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
-		[StepDefinition(@"I call Shared Step 60567 \(Upload Product Label only\) : (.*)")]
-		public void GivenICallSharedUploadProductLabelOnly(string docPath)
+		[StepDefinition(@"I call Shared Step 60567 \(Upload Product Label only\)")]
+		public void GivenICallSharedUploadProductLabelOnly()
 		{
 			TestReport.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			TestReport.StartStep(
-				@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyStepsNewProduct.UploadPDFFile("Product Label", docPath);
+			TestReport.StartStep(@"I click the browse button for label: Product Label and upload PDF: testdoc.pdf");
+			MyStepsNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -923,10 +923,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			TestReport.StartStep("I click the browse button for label: Product Label in section: " + section +
-								 @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", section,
-				@"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep("I click the browse button for label: Product Label in section: " + section + @" and upload PDF: testdoc.pdf");
+			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", section, @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -7063,11 +7061,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (TableRow row in expected.Rows)
 			{
 				string option = row["Data"];
-				Report.Info("Checking that I see the option '" + option + "'");
-				Report.IsTrue(data.Contains(option.Trim()),
-					"Option was not showing as expected! Expected: '" + option + "', but found: '" +
-					string.Join("', '", data) + "'!",
-					"Option was showing: '" + option + "', as expected!");
+				if (row["Data"] == "date")
+				{
+					foreach (var i in data)
+					{
+						Report.Info("Checking that I see a date:");
+						try
+						{
+							var dt2 = DateTime.ParseExact(i, "M/d/yyyy", CultureInfo.InvariantCulture);
+							Report.Success("contains a date: " +i);
+						}
+						catch (Exception ex)
+						{
+							Report.Failure(ex.Message);
+						}
+					}
+				}
+				if (row["Data"] == "any")
+				{
+					Report.Info("Checking that I see random data:");
+					Report.IsTrue(data.Count != 0,
+						"Data is not showing when it was expected to!",
+						"Data is showing as expected");
+				}
+				if (row["Data"] != "date" && row["Data"] != "any")
+				{
+					Report.Info("Checking that I see option:" +option);
+					Report.IsTrue(data.Contains(option.Trim()),
+						"Option was not showing as expected! Expected: '" + option + "', but found: '" +
+						string.Join("', '", data) + "'!",
+						"Option was showing: '" + option + "', as expected!");
+				}
 			}
 		}
 
@@ -7819,21 +7843,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data"
 			});
 			table2.AddRow(new string[] {
-				"12/31/2020"
+				//"12/31/2020"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CBCDS", table2);
 			var table3 = new Table(new string[] {
 				"Data"
 			});
 			table3.AddRow(new string[] {
-				"1/1/2018"
+				//"1/1/2018"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CBCSD", table3);
 			var table4 = new Table(new string[] {
 				"Data"
 			});
 			table4.AddRow(new string[] {
-				"BC-1"
+				//"BC-1-1"
+				"any"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CBCSN", table4);
 			steps_Shared.ProductAttributes_FilterFor("CMB");
@@ -7854,21 +7881,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data"
 			});
 			table6.AddRow(new string[] {
-				"12/31/2020"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CMBDS", table6);
 			var table7 = new Table(new string[] {
 				"Data"
 			});
 			table7.AddRow(new string[] {
-				"1/1/2018"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CMBSD", table7);
 			var table8 = new Table(new string[] {
 				"Data"
 			});
 			table8.AddRow(new string[] {
-				"MB-3"
+				//"MA-1-1"
+				"any"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CMBSN", table8);
 			steps_Shared.ProductAttributes_FilterFor("CON");
@@ -7889,21 +7917,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data"
 			});
 			table10.AddRow(new string[] {
-				"12/31/2020"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CONDS", table10);
 			var table11 = new Table(new string[] {
 				"Data"
 			});
 			table11.AddRow(new string[] {
-				"1/1/2018"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CONSD", table11);
 			var table12 = new Table(new string[] {
 				"Data"
 			});
 			table12.AddRow(new string[] {
-				"ON-4"
+				//"ON-1-1"
+				"any"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CONSN", table12);
 			steps_Shared.ProductAttributes_FilterFor("CQC");
@@ -7924,21 +7953,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data"
 			});
 			table14.AddRow(new string[] {
-				"12/31/2020"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CQCDS", table14);
 			var table15 = new Table(new string[] {
 				"Data"
 			});
 			table15.AddRow(new string[] {
-				"1/1/2018"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CQCSD", table15);
 			var table16 = new Table(new string[] {
 				"Data"
 			});
 			table16.AddRow(new string[] {
-				"QA-5"
+				//"QU-1-1"
+				"any"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CQCSN", table16);
 			steps_Shared.ProductAttributes_FilterFor("CSK");
@@ -7959,21 +7989,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data"
 			});
 			table18.AddRow(new string[] {
-				"12/31/2020"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKDS", table18);
 			var table19 = new Table(new string[] {
 				"Data"
 			});
 			table19.AddRow(new string[] {
-				"1/1/2018"
+				"date"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKSD", table19);
 			var table20 = new TechTalk.SpecFlow.Table(new string[] {
 				"Data"
 			});
 			table20.AddRow(new string[] {
-				"SK-2"
+				//"SA-1-1"
+				"any"
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKSN", table20);
 		}
