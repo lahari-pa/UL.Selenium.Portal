@@ -8286,7 +8286,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			TestReport.StartStep("I check that an alert appears with the correct message");
-			globalSteps.GivenICheckAlertTextContainsXAndDismiss($"Product Message for product {id} has been created successfully."); 
+			globalSteps.GivenICheckAlertTextContainsXAndDismiss($"Product Message for product {id} has been created successfully."); //Changed to use correct spelling of successfully (SHA MANAGER spells as 'succesfully')
 
 			TestReport.StartStep("I check the Product Submission Rejection Popup has been closed");
 			Report.IsFalse(productSubmissionRejection.Wait_for_load(10), "The Product Submission Rejection Popup was shown", "The Product Submission Rejection Popup was not shown");

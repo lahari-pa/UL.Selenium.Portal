@@ -21,6 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	{
 
 		[StepDefinition(@"I click the 'Add Case UPC' button")]
+		[StepDefinition(@"in the UPC Window, I click the Add Case UPC button")]
 		public void ThenIClickTheAddCaseUpcButton()
 		{
 			Report.IsTrue((new UPC()).ClickAddCaseUpcButton(), "Failed to click the 'Add Case UPC' button!", "Successfully clicked the 'Add Case UPC' button");
@@ -56,6 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I should see the (.*) Page")]
+		[StepDefinition(@"in the UPC Window, I should see the (.*) Page")]
 		public void GivenIShouldSeeXPage(string page)
 		{
 			var selNewProduct = new UPC();

@@ -16,7 +16,10 @@
 @PackagingTypes
 @Brands
 @MyIngredients
+@UPC
 @SHA
+@ForwardProductRegistration
+@ProductSetUp
 @run_DuplicateUPC
 Feature: Duplicate UPC
 
@@ -48,7 +51,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I search for the product saved as: TestCase91076
 	Given I edit the first product in results
-	Then I should see the Universal Product Code (UPC) Page
+	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
 	Given I click the 'Add UPC' button
 	Given I add the following into the UPC Fields
 		| UPC Number           | Container Type    | Size | DPCI | Quantity |
@@ -113,6 +116,8 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I Confirm you are allowed to go on to next screen without errors
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase82536
 
+	@singlerun
+@TReVorId:23407
 Scenario: [91741] Duplicate UPC is not permitted within account - New Product registration - Case UPC
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -136,8 +141,16 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I search for the product saved as: TestCase91741
 	Given I edit the first product in results
-	Then I should see the Universal Product Code (UPC) Page
-	Given I click the 'Add Case UPC' button
+	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	And in the UPC Window, I click the Add Case UPC button
+	Given I add the following into the UPC case fields
+		| UPC Number           | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		| saved as ExistingUPC | <first>        | 1    | 1        |                          | <first>               |
+	Given I click 'Select all' under Destination Retailers in the UPC page
+	Given I click continue
+	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
+	And I navigate to the home page
+	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91741
 
 
 

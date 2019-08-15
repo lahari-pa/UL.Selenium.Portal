@@ -1235,8 +1235,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string alertText = SeleniumBrowser.Alert.GetText();
 			if(alertText == null)
 			{
-				Report.Failure("Text was not displayed");
-				return;
+				Report.Failure("Text was not displayed", false);
 			}
 			if(alertText.Contains(searchText))
 			{
@@ -1245,7 +1244,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Report.Failure($"Alert text was not as expected. Found: {alertText}");
+				Report.Failure($"Alert text was not as expected. Found: {alertText}", false);
 			}
 
 			//Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
@@ -1253,7 +1252,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.Screenshot(true);
 
-			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			}
+
 		}
 
 		[StepDefinition(@"I save to context name: (.*) and string value: (.*)")]

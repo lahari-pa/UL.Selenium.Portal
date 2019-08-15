@@ -182,6 +182,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						int rInt = r.Next(0, packageOptions.Count - 1);
 						packageField.Select(packageOptions[rInt]);
 					}
+					else if (info.TransportationOption == "<first>")
+					{
+						var firstOption = packageField.FindElement(By.XPath("./option[not(text()='Transportation Option')]"), 1).Text;
+
+						if (firstOption == null)
+						{
+							Report.Failure("There are no Transportation Options");
+							return false;
+						}
+						else
+						{
+							containsType.Select(firstOption);
+						}
+
+					}
+
 					else
 					{
 						packageField.Select(info.TransportationOption);
