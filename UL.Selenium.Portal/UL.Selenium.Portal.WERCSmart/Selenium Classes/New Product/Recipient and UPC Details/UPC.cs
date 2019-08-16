@@ -11,6 +11,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using TechTalk.SpecFlow;
 using System.IO;
 using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.BaseClasses;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -110,7 +111,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				upcNumberField.EnterText(info.UpcNumber);
 				IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-				containsType.Select(info.ContainerType);
+				if(info.ContainerType=="<first>")
+				{
+					var firstOption = containsType.FindElement(By.XPath("./option[not(text()='Container Type')]"), 1).Text;
+
+					if (firstOption==null)
+					{
+						Report.Failure("There are no Container Types");
+						return false;
+					}
+					else
+					{
+						containsType.Select(firstOption);
+					}
+
+					
+				}
+				else
+				{
+					containsType.Select(info.ContainerType);
+				}
+				
 				string regex = @"(.*)\((.*)\)";
 				IWebElement sizeField = (from input in textInputs
 										 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
@@ -162,6 +183,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						int rInt = r.Next(0, packageOptions.Count - 1);
 						packageField.Select(packageOptions[rInt]);
 					}
+					else if (info.TransportationOption == "<first>")
+					{
+						var firstOption = packageField.FindElement(By.XPath("./option[not(text()='Transportation Options')]"), 1).Text;
+
+						if (firstOption == null)
+						{
+							Report.Failure("There are no Transportation Options");
+							return false;
+						}
+						else
+						{
+							packageField.Select(firstOption);
+						}
+
+					}
+
 					else
 					{
 						packageField.Select(info.TransportationOption);
@@ -270,17 +307,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public bool DeleteFileFromDownloadsFolder(string file)
+		public bool DeleteFileFromDownloadsFolder(string fileName)
 		{
-			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-			Report.Info("Deleting any existing files with name: " + file + " in the directory: " + downloadsFolder + ".");
-			string dir = Directory.GetFiles(downloadsFolder, file, SearchOption.AllDirectories).ToString();
-			if (string.IsNullOrEmpty(dir.Trim()))
+			string downloadsFolder = KnownFolders.GetPath(KnownFolder.Downloads);
+			Report.Info("Deleting any existing files with name: " + fileName + " in the directory: " + downloadsFolder + ".");
+			var files = Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly);
+
+			foreach(var file in files)
 			{
-				File.Delete(dir);
+				try
+				{
+					Report.Info("Deleting: " + file);
+					File.Delete(file);
+				}
+				catch(Exception ex)
+				{
+					Report.Error("ERROR DELETING FILE: " + ex.Message);
+				}
 			}
 
-			if (Directory.EnumerateFiles(downloadsFolder, file, SearchOption.AllDirectories).Count() > 0)
+			if (!Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly).Any())
 			{
 				return true;
 			}
@@ -297,7 +343,49 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return text;
 		}
+		public bool ClickUploadUpcButton()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2); 
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.TryClick();
+		}
+		
+		
 	}
+
+	public class MultipleUPC : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath(@"//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']");
+
+		public IWebElement SelectAllUpcsButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
+		public IWebElement ContainsType => containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
+		public IWebElement NextButton => containerElement.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
+		public IWebElement SelectAllRetailersButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
+		public IWebElement FinishButton => containerElement.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
+
+		public bool ClickSelectAllUpcsButton()
+		{
+			return this.SelectAllUpcsButton.TryClick();
+		}		
+		public bool ClickNextButton()
+		{
+			return this.NextButton.TryClick();
+		}
+		public bool ClickSelectAllRetailersButton()
+		{
+			return this.SelectAllRetailersButton.TryClick();
+		}
+		public bool ClickFinishButton()
+		{
+			return this.FinishButton.TryClick();
+		}
+	}
+
+
 
 	public class UpcCaseInformation
 	{
@@ -308,4 +396,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string IndividualUpcCasePack { get; set; } = "";
 		public string TransportationOption { get; set; } = "";
 	}
+
+	
 }

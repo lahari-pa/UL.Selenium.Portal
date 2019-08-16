@@ -13,6 +13,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using System.Collections.ObjectModel;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.UPC;
+using NTTQA.Selenium.UniversalFunctions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -21,6 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	{
 
 		[StepDefinition(@"I click the 'Add Case UPC' button")]
+		[StepDefinition(@"in the UPC Window, I click the Add Case UPC button")]
 		public void ThenIClickTheAddCaseUpcButton()
 		{
 			Report.IsTrue((new UPC()).ClickAddCaseUpcButton(), "Failed to click the 'Add Case UPC' button!", "Successfully clicked the 'Add Case UPC' button");
@@ -56,6 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I should see the (.*) Page")]
+		[StepDefinition(@"in the UPC Window, I should see the (.*) Page")]
 		public void GivenIShouldSeeXPage(string page)
 		{
 			var selNewProduct = new UPC();
@@ -348,6 +351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the upc page", "The link with text: '" + labelLink + "' was found on the upc page as expected");
 		}
 
+
 		[StepDefinition(@"(.*) (should|should not) be showing the error messages on upc screen: (.*)")]
 		public void ErrorMessagesAreShowingOnUpc(string section, string should, string pipeDelimitedErrorMessages)
 		{
@@ -524,5 +528,85 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found correct error message in the UPC screen.");
 
 		}
+
+		[StepDefinition(@"I click the 'Upload UPCs' button and upload the file saved as: (.*)")]
+		public void ThenIClickTheUploadUpcsButtonAndUploadSavedAs(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			var excelFile = Context.GetFromContext(savedAs).ToString();
+
+			if (excelFile == null)
+			{
+				Report.Failure("The UPC spreadsheet could not be found");
+				return;
+			}
+
+			TestReport.StartStep("I click the 'Upload UPC' button");
+			Report.IsTrue((new UPC()).ClickUploadUpcButton(), "Failed to click the 'Upload UPC' button!", "Successfully clicked the 'Upload UPC' button");
+			TestReport.StartStep($"I Upload the file saved as {savedAs}");
+			Report.IsTrue(GeneralFunctions.EnterFilename(excelFile), "Failed to enter file name!", "Successfully entered file name");
+
+		}
+
+		[StepDefinition(@"In the Add Multiple dialog box I select all UPCs")]
+		public void InTheAddMultipleDialogBoxSelectAllUpcs()
+		{
+			Report.IsTrue(new MultipleUPC().ClickSelectAllUpcsButton(), "The select all Upcs button was not clicked successfully", "The select all Upcs button was clicked successfully");
+		}
+
+
+		[StepDefinition(@"In the Add Multiple dialog box I select the packaging type: (.*)")]
+		public void InTheAddMultipleDialogBoxSelectPackagingTypeX(string packagingType)
+
+		{
+			var containsTypeOptionBox= new MultipleUPC().ContainsType;
+				
+
+			if (packagingType == "<first>")
+			{
+				var firstOption = containsTypeOptionBox.FindElement(By.XPath("./option[not(text()='Choose...')]"), 1).Text;
+
+				if (firstOption == null)
+				{
+					Report.Failure("There are no Container Types");
+					return;
+				}
+				else
+				{
+					containsTypeOptionBox.Select(firstOption);
+				}
+
+			}
+			else
+			{
+				containsTypeOptionBox.Select(packagingType);
+			}
+		}
+
+		[StepDefinition(@"In the Add Multiple dialog box I click Next")]
+		public void InTheAddMultipleDialogBoxClickNext()
+		{
+			
+			Report.IsTrue(new MultipleUPC().ClickNextButton(), "Failed To click the Next button", "Successfully clicked the next button");
+		}
+
+		[StepDefinition(@"In the Add Multiple dialog box I select all Retailers")]
+		public void InTheAddMultipleDialogBoxSelectAllRetailers()
+		{
+			Report.IsTrue(new MultipleUPC().ClickSelectAllRetailersButton(), "The select all Retailers button was not clicked successfully", "The select all Retailers button was clicked successfully");
+		}
+
+		[StepDefinition(@"In the Add Multiple dialog box I click Finish")]
+		public void InTheAddMultipleDialogBoxClickFinish()
+		{
+
+			Report.IsTrue(new MultipleUPC().ClickFinishButton(), "Failed To click the Finish button", "Successfully clicked the Finish button");
+		}
+
+
+
+
+
+
 	}
 }
