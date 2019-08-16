@@ -1714,16 +1714,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public bool Thank_You_Text(string tyText)
+		public string Thank_You_Text()
 		{
-			Report.Info("Beginning Thank_You_Text");
-
-
-
-
-
-			Report.Success("Text Correct");
-			return true;
+			var actualText = this.containerElement.FindElement(By.XPath(".//p[not(@class)]"),15).Text;
+			return actualText;
 
 		}
 
