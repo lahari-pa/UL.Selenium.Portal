@@ -306,17 +306,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public bool DeleteFileFromDownloadsFolder(string file)
+		public bool DeleteFileFromDownloadsFolder(string fileName)
 		{
-			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-			Report.Info("Deleting any existing files with name: " + file + " in the directory: " + downloadsFolder + ".");
-			string dir = Directory.GetFiles(downloadsFolder, file, SearchOption.AllDirectories).ToString();
-			if (string.IsNullOrEmpty(dir.Trim()))
+			string downloadsFolder = KnownFolders.GetPath(KnownFolder.Downloads);
+			Report.Info("Deleting any existing files with name: " + fileName + " in the directory: " + downloadsFolder + ".");
+			var files = Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly);
+
+			foreach(var file in files)
 			{
-				File.Delete(dir);
+				try
+				{
+					Report.Info("Deleting: " + file);
+					File.Delete(file);
+				}
+				catch(Exception ex)
+				{
+					Report.Error("ERROR DELETING FILE: " + ex.Message);
+				}
 			}
 
-			if (Directory.EnumerateFiles(downloadsFolder, file, SearchOption.AllDirectories).Count() > 0)
+			if (!Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly).Any())
 			{
 				return true;
 			}
@@ -333,6 +342,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return text;
 		}
+		public bool ClickUploadUpcButton()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2); 
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.TryClick();
+		}
+		
+		
 	}
 
 	public class UpcCaseInformation
@@ -344,4 +365,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string IndividualUpcCasePack { get; set; } = "";
 		public string TransportationOption { get; set; } = "";
 	}
+
+	
 }

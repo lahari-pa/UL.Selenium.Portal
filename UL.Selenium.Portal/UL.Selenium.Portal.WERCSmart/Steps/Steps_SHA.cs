@@ -2306,9 +2306,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int productsToTry = new StudioSHAManager().GetProductCount();
 			Report.Info("There are " + productsToTry + " products");
 			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
+			int j = 1;
 			for (int i = 0; i < productsToTry; i++)
 			{
-				int j = 1;
+				
 
 				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
 				string id = products[i].ID;
@@ -2320,6 +2321,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info($"Saved UPC{j} to context");
 					j++;
+					Report.Screenshot();
+					Report.Info("Closing window");
+					SeleniumBrowser.WebBrowser.Close();
+					Report.Info("Returning to the main window");
+					try
+					{
+						var handle = Context.GetFromContext("MainWindowHandle").ToString();
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+						// required to switch to the frame and refresh container
+						new StudioSHAManager().Wait_for_load();
+					}
+					catch (Exception ex)
+					{
+						Report.Failure("Failed to navigate back to main window using MainWindowHandle context");
+						Report.Failure("Exception: " + ex.Message);
+						throw;
+					}
 
 				}
 				if (j > numberOfProducts)
@@ -2343,7 +2361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if(Context.Contains(savedAs + i))
 				{
 					var upcNumber = Context.GetFromContext(savedAs + i).ToString();
-					Report.IsTrue(excel.EditCell(i, 0, upcNumber),"Failed to edit UPC to: " + upcNumber, "Successfully edited UPC to: " + upcNumber, false, false);
+					Report.IsTrue(excel.EditCell(i, 0, upcNumber),"Failed to edit UPC"+i+" to: " + upcNumber, "Successfully edited UPC to: " + upcNumber, false, false);
 				}
 				else
 				{

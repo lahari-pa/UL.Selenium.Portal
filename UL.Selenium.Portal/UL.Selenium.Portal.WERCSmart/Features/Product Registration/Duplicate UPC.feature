@@ -212,4 +212,26 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 		| User        | saved as AccountUsername      |
 	And I find the UPC number for: 5 products in the grid and save them to context starting with: ExistingUPC
 	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100
+	Given I navigate to the landing page
+	Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I search for the product saved as: TestCase91100
+	Given I edit the first product in results
+	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	And I click the 'Upload UPCs' button and upload the file saved as: test91100
+	Then In the Add Multiple dialog box I select all UPCs
+	Then In the Add Multiple dialog box I select the packaging type: <first>
+	Given In the Add Multiple dialog box I click Next
+	And In the Add Multiple dialog box I select all Retailers
+	Then In the Add Multiple dialog box I click Finish
+	Given I click continue
+	Then I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
+	And I navigate to the home page
+	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91100
+
+
+
+	
+
+
+
 
