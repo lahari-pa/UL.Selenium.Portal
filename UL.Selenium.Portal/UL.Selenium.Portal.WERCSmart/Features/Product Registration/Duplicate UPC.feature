@@ -184,4 +184,26 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 		| saved as UPC91801_2 | Aerosol Can    | 32   | 32       |                          | 4A: steel box         |
 	Given I click continue
 	Then I should see the following error text displayed in the UPC screen: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97198
+
+Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335 with no login step and save as: TestCase91800_Product1
+	Given I navigate to the landing page
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91800_Product2
+	Given I navigate to the landing page
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I click Bulk Actions in the Products Grid
+	Given I click Forward Product Registration in the Bulk Actions window
+	Given I select the product saved as: TestCase91800_Product1 under the Select Products tab
+	Given I click continue on the Forward Product Registration page
+	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
+	Given I click continue on the Forward Product Registration page
+	Given I select the first product under the Select UPCs tab
+	Given I click the Add Case UPC button under the Select UPCs tab
+	And In the Add Case UPC modal window I enter the following information:
+		| UPC Number          | Type        | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
+		| saved as UPC91800_2 | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
+	And In the Case UPC modal window I click Save
+	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
