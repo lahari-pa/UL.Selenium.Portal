@@ -379,6 +379,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return this.containerElement.FindElement(By.XPath(".//input[@name='areStatementsTrue' and @value='" + value + "']"), 2).TryClick();
 		}
+		public bool SelectProductsRightPanel_ClickProductByID(string id)
+		{
+			IWebElement productRow = this.containerElement.FindElement(By.XPath($"//table[contains(@data-bind,'selectedProds')]//tr//td//label[contains(text(),'{id}')]"), 2);
+			if (productRow == null)
+			{
+				Report.Info("Could not find product row for product ID: " + id);
+				return false;
+			}
+			return productRow.FindElement(By.XPath("/ancestor::tr//td//input[@type='checkbox' and @class='form-check-input' and @data-bind='checked: isChecked']"), 2).TryClick();
+		}
 
 		public class SelectProducts : ForwardProductRegistration
 		{

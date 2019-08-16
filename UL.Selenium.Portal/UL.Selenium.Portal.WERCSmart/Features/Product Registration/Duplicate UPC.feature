@@ -186,6 +186,7 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91741
 
 	@singlerun
+@TReVorId:23410
 	Scenario: [91100] Duplicate UPC is not permitted within account - New Product registration - Bulk Upload
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -228,6 +229,30 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	Then I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91100
+
+	Scenario: [91157] Duplicate UPC is not permitted within account - Forward Product registration - single UPC
+	#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#Then  I click the following option in the bottom menu: Search
+	#Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
+	#And In SHA Manager ProductSearch page I run search:
+		#| Search Term | Search Value                  |
+	#	| Status      | Completed                     |
+	#	| Supplier    | QA_Automation_ProductsAccount |
+	#	| User        | saved as AccountUsername      |
+	#Then I save a UPC number for any product in the grid to context as: ExistingUPC
+	#Given I navigate to the landing page
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I click Bulk Actions in the Products Grid
+	Given I click Forward Product Registration in the Bulk Actions window
+	Then I should see the header: Forward Product Registration on the Forward Product Registration window
+	And I confirm the active Forward Product Registration tab is: Select Products
+	Then I save first selectable Product ID as: testProduct91157 under the Select Products tab
+	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
+	And I select the product with ID saved as: testProduct91157 under the right hand panel of the Select Products tab
+
+
+
+
 
 
 

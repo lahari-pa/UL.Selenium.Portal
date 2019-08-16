@@ -667,6 +667,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(modal.ClickSave(), "Failed to click Save in the Add Case UPC modal window.",
 			"Successfully clicked Save in the Add Case UPC modal window.");
 		}
+		[StepDefinition(@"I select the product with ID saved as: (.*) under the right hand panel of the Select Products tab")]
+		public void ISelectTheProductSavedAsUnderSelectProductsRightPanel(string savedAs)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			var ids = (string)Context.GetFromContext(savedAs);
+			Report.IsTrue(selForwardProdReg.SelectProductsRightPanel_ClickProductByID(ids),"The Product with ID: "+ids+" was not selected", "The Product with ID: "+ids+" was selected");		   
+			
+
+		}
 
 
 	}

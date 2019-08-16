@@ -120,3 +120,6 @@ Then In the Thank You screen I click Home
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
 And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: Submitted
+
+
+
