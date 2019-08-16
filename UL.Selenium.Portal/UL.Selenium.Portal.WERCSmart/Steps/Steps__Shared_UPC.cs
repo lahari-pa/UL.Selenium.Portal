@@ -551,27 +551,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Add Multiple dialog box I select all UPCs")]
 		public void InTheAddMultipleDialogBoxSelectAllUpcs()
 		{
-			IWebElement addMultipleDialogBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']"), 2);
-			IWebElement selectAllUpcsButton = addMultipleDialogBox.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
-			if (selectAllUpcsButton == null)
-			{
-				Report.Failure("The select all Upcs button was not found");
-				return;
-			}
-			Report.IsTrue(selectAllUpcsButton.TryClick(), "The select all Upcs button was not clicked successfully", "The select all Upcs button was clicked successfully");
-
-
+			Report.IsTrue(new MultipleUPC().ClickSelectAllUpcsButton(), "The select all Upcs button was not clicked successfully", "The select all Upcs button was clicked successfully");
 		}
+
 
 		[StepDefinition(@"In the Add Multiple dialog box I select the packaging type: (.*)")]
 		public void InTheAddMultipleDialogBoxSelectPackagingTypeX(string packagingType)
 
 		{
-			IWebElement addMultipleDialogBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']"), 2);
-			IWebElement containsType = addMultipleDialogBox.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
+			var containsTypeOptionBox= new MultipleUPC().ContainsType;
+				
+
 			if (packagingType == "<first>")
 			{
-				var firstOption = containsType.FindElement(By.XPath("./option[not(text()='Choose...')]"), 1).Text;
+				var firstOption = containsTypeOptionBox.FindElement(By.XPath("./option[not(text()='Choose...')]"), 1).Text;
 
 				if (firstOption == null)
 				{
@@ -580,54 +573,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				else
 				{
-					containsType.Select(firstOption);
+					containsTypeOptionBox.Select(firstOption);
 				}
-
 
 			}
 			else
 			{
-				containsType.Select(packagingType);
+				containsTypeOptionBox.Select(packagingType);
 			}
 		}
 
 		[StepDefinition(@"In the Add Multiple dialog box I click Next")]
 		public void InTheAddMultipleDialogBoxClickNext()
 		{
-			IWebElement addMultipleDialogBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']"), 2);
-			IWebElement nextButton = addMultipleDialogBox.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
-			if (nextButton == null)
-			{
-				Report.Failure("The Next button was not found");
-				return;
-			}
-			Report.IsTrue(nextButton.TryClick(), "Failed To click the Next button", "Successfully clicked the next button");
+			
+			Report.IsTrue(new MultipleUPC().ClickNextButton(), "Failed To click the Next button", "Successfully clicked the next button");
 		}
 
 		[StepDefinition(@"In the Add Multiple dialog box I select all Retailers")]
 		public void InTheAddMultipleDialogBoxSelectAllRetailers()
 		{
-			IWebElement addMultipleDialogBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']"), 2);
-			IWebElement selectAllRetailersButton = addMultipleDialogBox.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
-			if (selectAllRetailersButton == null)
-			{
-				Report.Failure("The select all Retailers button was not found");
-				return;
-			}
-			Report.IsTrue(selectAllRetailersButton.TryClick(), "The select all Retailers button was not clicked successfully", "The select all Retailers button was clicked successfully");
+			Report.IsTrue(new MultipleUPC().ClickSelectAllRetailersButton(), "The select all Retailers button was not clicked successfully", "The select all Retailers button was clicked successfully");
 		}
 
 		[StepDefinition(@"In the Add Multiple dialog box I click Finish")]
 		public void InTheAddMultipleDialogBoxClickFinish()
 		{
-			IWebElement addMultipleDialogBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']"), 2);
-			IWebElement FinishButton = addMultipleDialogBox.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
-			if (FinishButton == null)
-			{
-				Report.Failure("The Finish button was not found");
-				return;
-			}
-			Report.IsTrue(FinishButton.TryClick(), "Failed To click the Finish button", "Successfully clicked the Finish button");
+
+			Report.IsTrue(new MultipleUPC().ClickFinishButton(), "Failed To click the Finish button", "Successfully clicked the Finish button");
 		}
 
 

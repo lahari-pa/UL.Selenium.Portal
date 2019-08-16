@@ -11,6 +11,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using TechTalk.SpecFlow;
 using System.IO;
 using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.BaseClasses;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -355,6 +356,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		
 		
 	}
+
+	public class MultipleUPC : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath(@"//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']");
+
+		public IWebElement SelectAllUpcsButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
+		public IWebElement ContainsType => containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
+		public IWebElement NextButton => containerElement.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
+		public IWebElement SelectAllRetailersButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
+		public IWebElement FinishButton => containerElement.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
+
+		public bool ClickSelectAllUpcsButton()
+		{
+			return this.SelectAllUpcsButton.TryClick();
+		}		
+		public bool ClickNextButton()
+		{
+			return this.NextButton.TryClick();
+		}
+		public bool ClickSelectAllRetailersButton()
+		{
+			return this.SelectAllRetailersButton.TryClick();
+		}
+		public bool ClickFinishButton()
+		{
+			return this.FinishButton.TryClick();
+		}
+	}
+
+
 
 	public class UpcCaseInformation
 	{
