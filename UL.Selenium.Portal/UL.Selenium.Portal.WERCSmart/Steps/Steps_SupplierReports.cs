@@ -163,9 +163,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"If an html file is downloaded called (.*) I create a new product with UPCs and redownload the (.*) report")]
-		public void IfHTMLIsDownloadedCreateAProduct()
+		public void IfHTMLIsDownloadedCreateAProduct(string file, string report)
 		{
+			var productSetup = new Steps_ProductSetup();
+			var globalSteps = new GlobalSteps();
+			var homepage = new StepsHomepage();
 
+			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			Report.Info("Downloads folder: " + downloadsFolder);
+
+			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+
+
+			productSetup.CreateProductUsingTestCase75335("TestCase75335", "UPC75335", "Chalk");
+
+			globalSteps.NavigateToLandingPage();
+			globalSteps.LoginToWERCSmartAdmin("WERCs Product Account");
+			homepage.ClickItemInQuickLinks("Supplier Reports");
+			this.InTheSupplierReportsScreenThePageTitleShouldBe("Available Reports");
+			this.GivenUnderTheSupplierReportsMenuIChoose("UPCs (Active) for all Registrations");
+			this.ThenInTheSupplierReportsScreenTheCurrentSubPageShouldBe("UPCs (Active) for all Registrations");
+			this.GivenInTheSupplierReportsScreenIClickOnTheDownloadButton();
 		}
 	}
 }
