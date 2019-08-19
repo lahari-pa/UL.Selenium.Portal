@@ -288,6 +288,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91100
 
+@TReVorId:23406
 Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Single UPC
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
