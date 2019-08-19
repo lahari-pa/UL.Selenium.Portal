@@ -161,5 +161,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The report description text did not match the expected text. Expected: '" + expected + "'. But got: '" + displayed + "'.",
 				"The report description text was displayed as expected.");
 		}
+
+		[StepDefinition(@"If an html file is downloaded called (.*) I create a new product with UPCs and redownload the (.*) report")]
+		public void IfHTMLIsDownloadedCreateAProduct()
+		{
+
+		}
 	}
 }

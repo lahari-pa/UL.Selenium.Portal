@@ -165,7 +165,7 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I click the View button for section: Upload UN38.3 Test Document (Required)
 	Then I confirm a new window opens displaying the document url: ProductDocument
 	Given I close the window that opened
-	And I switch to the main window
+	And I switch to Data Acceptance page
 	And I switch to the Data Summary page
 	And I close the Data Summary tab
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104227
