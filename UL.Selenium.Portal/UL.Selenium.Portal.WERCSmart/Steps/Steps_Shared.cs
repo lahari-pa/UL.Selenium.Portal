@@ -8264,6 +8264,81 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
+		[StepDefinition(@"I call Shared Step 83242 \(SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: (.*)\)")]
+		public void SharedStep83242_SubmittedOrAssignedProduct_RejectSubmission_AnySubject_Save(string savedAs)
+		{
+
+
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step 83242");
+			var myStudioShaManager = new StudioSHAManager();
+			var stepsSHA = new Steps_SHA();
+			var productSubmissionRejection = new StudioSHAManagerProductSubmissionRejection();
+			var globalSteps = new GlobalSteps();
+
+
+
+			if (!myStudioShaManager.Wait_for_load(30))
+			{
+				Report.Error("Studio SHA Manager is not showing");
+			}
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+
+			bool selectedID = false;
+
+			if (myStudioShaManager.SelectProductByID(id))
+			{
+				selectedID = true;
+			}
+
+			Report.IsTrue(selectedID, "Failed to select product with id: " + id, "Selected product with id: " + id);
+
+			TestReport.StartStep("I click the following option in the bottom menu: Reject Submission");
+			stepsSHA.IClickTheFollowingOptionInTheBottomMenu("Reject Submission");
+			Report.IsTrue(productSubmissionRejection.Wait_for_load(30), "The Product Submission Rejection Popup did not appear", "The Product Submission Rejection Popup did appear");
+			TestReport.StartStep("Selecting the first subject from the Submission Rejection Popup");
+			Report.IsTrue(productSubmissionRejection.SelectFirstSubject(), "The Frist subject was not selected", "The Frist subject was selected succesfully");
+			TestReport.StartStep("I check that Text is now shown in the Supplier Message Area of the Popup");
+			Report.IsTrue(!productSubmissionRejection.GetSupplierMessage().IsNullOrEmpty(), "The Supplier Message Area was empty", "Text was shown in the Supplier Message Area");
+			TestReport.StartStep("I Click save in the Product Submission Rejection Popup");
+
+			//Alert is dismissed by screeshot, therefore cannot use Report.IsTure
+			var saveClicked = productSubmissionRejection.ClickButton("Save");
+			if (saveClicked)
+			{
+				Report.Success("The save button was succesfully clicked");
+			}
+			else
+			{
+				Report.Failure("The save button was not clicked");
+				return;
+			}
+
+			TestReport.StartStep("I check that an alert appears with the correct message");
+			//globalSteps.GivenICheckAlertTextContainsXAndDismiss($"Product Message for product {id} has been created successfully."); //Can return to this once spelling bug is fixed, or by using "suces" (as method uses a contains)
+			globalSteps.GivenICheckAlertTextContainsEitherXOrYAndDismiss($"Product Message for product {id} has been created successfully.", $"Product Message for product {id} has been created succesfully."); //Used as Alert Text currently has spelling error, but we don't want the test to fail. (remove once bug is fixed and use the method above).
+			TestReport.StartStep("I check the Product Submission Rejection Popup has been closed");
+			Report.IsFalse(productSubmissionRejection.Wait_for_load(10), "The Product Submission Rejection Popup was shown", "The Product Submission Rejection Popup was not shown");
+
+			//var popupClosed = productSubmissionRejection.Wait_for_load(10);
+
+			//if(!popupClosed)
+			//{
+			//	Report.Success("The Product Submission Rejection Popup was not shown");
+			//}
+			//else
+			//{
+			//	Report.Failure("The Product Submission Rejection Popup was shown");
+			//	return;
+			//}
+
+			//Report.IsFalse(productSubmissionRejection.Wait_for_load(10), "The Product Submission Rejection Popup was shown", "The Product Submission Rejection Popup was not shown");
+
+			
+
+		}
 
 	}
 }

@@ -143,7 +143,6 @@ Scenario: [74540] Target - Data Tier Warning when not all are selected
 		| Message                                                                                       |
 		| The information was saved correctly and the notification Email was sent to all Administrators |		
 	Given I click close on the Save Changes popup dialog
-	And I confirm that: Target requests suppliers of Cleaning and Health & Beauty products to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. is showing under the Data Consent Tiers heading
 	And I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown
 	Given I click the back arrow on the Retail Partners Details page
 	Then I should see the Retail Partners page
