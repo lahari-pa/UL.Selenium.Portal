@@ -74,6 +74,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		/// <summary>
+		/// Waits for up to 5 seconds for the 'Loading...' div to appear, and then up to the timeout for it to disappear.
+		/// </summary>
+		public bool Wait_For_Loading_Finish(int timeout = 30)
+		{
+			// wait up to 5 seconds for the loading bar to become visible
+			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(BasePath + "//div[@id='load_list']"), 5);
+			// waits up to timeout (30) seconds for the loading bar to then become invisible
+			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath(BasePath + "//div[@id='load_list']"), timeout);
+		}
 		public ProductStatus GetproductStatus(string id)
 		{
 			var thisProductStatus = new ProductStatus();

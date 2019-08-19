@@ -303,19 +303,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						throw new Exception("Invalid column name");
 				}
 			}
-
 			Report.Info("Going to click find");
 			Delay.Seconds(1);
 			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find", false, false);
-			Delay.Seconds(10);
-			Report.Info("Waiting for spinner");
-			GeneralUtilities.StudioWaitForSpinner(10);
-			thisProductSearch.Wait_for_load(10);
-			GeneralUtilities.StudioWaitForSpinner(10);
-			Report.Info("Finished waiting for spinner");
-			Delay.Seconds(10);
+			Report.Info("Waiting for loading bar");
+			new StudioSHAManager().Wait_For_Loading_Finish();
+			Report.Info("Finished waiting for loading");
+			Delay.Seconds(1);
 			Report.Screenshot();
-
 		}
 
 		[StepDefinition(
