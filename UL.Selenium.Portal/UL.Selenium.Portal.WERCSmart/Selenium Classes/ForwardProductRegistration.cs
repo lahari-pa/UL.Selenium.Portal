@@ -215,6 +215,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return retailerInput.TryCheck();
 		}
 
+		public bool SelectFirstOtherRetailer()
+		{
+			IWebElement retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//div[@class='control-indicator']"), 2);
+
+			if (retailerInput == null)
+			{
+				Report.Info("The First Retailer could not be found");
+				return false;
+			}
+			return retailerInput.TryClick();
+		}
+
 		public bool SelectRetailer(string retailer)
 		{
 			var retailers = this.containerElement.FindElements(By.XPath(@".//div[@class='col-sm-3 retailer-select' and .//span[contains(text(),""" + retailer + @""")]]"), 2).ToList();
@@ -387,7 +399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not find product row for product ID: " + id);
 				return false;
 			}
-			return productRow.FindElement(By.XPath("/ancestor::tr//td//input[@type='checkbox' and @class='form-check-input' and @data-bind='checked: isChecked']"), 2).TryClick();
+			return productRow.FindElement(By.XPath($".//ancestor::tr//td//input[@type='checkbox']"),2).TryClick();
 		}
 
 		public class SelectProducts : ForwardProductRegistration
@@ -664,6 +676,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Failed to select type from the Type drop down in the Add UPC modal window.");
 				return false;
 			}
+			else if(row["Type"]=="<first>")
+			{
+				var firstOption = type.FindElement(By.XPath("./option[not(text()='Type')]"), 1).Text;
+				if (firstOption == null)
+				{
+					Report.Failure("There are no Container Types");
+					return false;
+				}
+				else
+				{
+					type.Select(firstOption);
+				}
+			}		
+		
 			else
 			{
 				type.Select(row["Type"]);
@@ -676,12 +702,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), """ + row["Retailer"] + @""")]/preceding-sibling::input"));
-			if (retailer == null || !retailer.TryCheck())
+			if (row["Retailer"]=="Select all")
 			{
-				Report.Info("Failed to check the retailer '" + row["Retailer"] + "'.");
-				return false;
+				IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//input[@id='chkAllRetailers']"));
+				if (retailer == null || !retailer.TryCheck())
+				{
+					Report.Info("Failed to check the Select all Retailes option.");
+					return false;
+				}
 			}
+			else
+			{
+				IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), """ + row["Retailer"] + @""")]/preceding-sibling::input"));
+				if (retailer == null || !retailer.TryCheck())
+				{
+					Report.Info("Failed to check the retailer '" + row["Retailer"] + "'.");
+					return false;
+				}
+			}
+			
 
 			Report.Info("Successfully entered all UPC information.");
 			return true;
@@ -690,6 +729,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickSave()
 		{
 			return this.containerElement.FindElement(By.XPath(@"//button[contains(text(), 'Save')]"), 2).TryClick();
+		}
+		public bool ClickCancel()
+		{
+			return this.containerElement.FindElement(By.XPath(@"//button[contains(text(), 'Cancel') and @class='btn btn-default pull-left']"), 2).TryClick();
 		}
 	}
 

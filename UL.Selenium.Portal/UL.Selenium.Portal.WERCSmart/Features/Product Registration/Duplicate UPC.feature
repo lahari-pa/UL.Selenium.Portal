@@ -185,7 +185,7 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91741
 
-	@singlerun
+	
 @TReVorId:23410
 	Scenario: [91100] Duplicate UPC is not permitted within account - New Product registration - Bulk Upload
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -230,25 +230,40 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91100
 
+	@singlerun
 	Scenario: [91157] Duplicate UPC is not permitted within account - Forward Product registration - single UPC
-	#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	#Then  I click the following option in the bottom menu: Search
-	#Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
-	#And In SHA Manager ProductSearch page I run search:
-		#| Search Term | Search Value                  |
-	#	| Status      | Completed                     |
-	#	| Supplier    | QA_Automation_ProductsAccount |
-	#	| User        | saved as AccountUsername      |
-	#Then I save a UPC number for any product in the grid to context as: ExistingUPC
-	#Given I navigate to the landing page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then  I click the following option in the bottom menu: Search
+	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
+	And In SHA Manager ProductSearch page I run search:
+		| Search Term | Search Value                  |
+		| Status      | Completed                     |
+		| Supplier    | QA_Automation_ProductsAccount |
+		| User        | saved as AccountUsername      |
+	Then I save a UPC number for any product in the grid to context as: ExistingUPC
+	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then  I filter the products by: Accepted by Retailers
+	And I save the ProductID of the first Product in the grid as: testProduct91157
 	Given I click Bulk Actions in the Products Grid
 	Given I click Forward Product Registration in the Bulk Actions window
 	Then I should see the header: Forward Product Registration on the Forward Product Registration window
-	And I confirm the active Forward Product Registration tab is: Select Products
-	Then I save first selectable Product ID as: testProduct91157 under the Select Products tab
+	And I confirm the active Forward Product Registration tab is: Select Products	
 	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
 	And I select the product with ID saved as: testProduct91157 under the right hand panel of the Select Products tab
+	Given I click continue on the Forward Product Registration page
+	Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
+	And I click continue on the Forward Product Registration page
+	Given I select the first product under the Select UPCs tab
+	Given I click the Add UPC button under the Select UPCs tab
+	And In the Add UPC modal window I enter the following information:
+		| UPC Number           | Type    | Size (Ounces) | Retailer   |
+		| saved as ExistingUPC | <first> | 1             | Select all |
+	And In the UPC modal window I click Save
+	Then I check alert text contains There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. and dismiss 
+	Then In the UPC modal window I click Cancel
+	And I click the Home navigation icon and accept the alert popup 
+
 
 
 

@@ -7,6 +7,7 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using System.Text;
+using System.Linq;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -161,6 +162,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 			return sb.ToString();
+		}
+
+		public static string RemoveLineBreaks(string fullString)
+		{
+			var splitByLineBreak = fullString.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+			var trimmedList = splitByLineBreak.Select(x => x.TrimEnd(' '));
+			//List<string> trimmedList = new List<string>();
+			//splitByLineBreak.ForEach(x => trimmedList.Add(x.TrimEnd(' ')));
+			string tidyString = string.Join(" ", trimmedList);
+			return tidyString;
 		}
 	}
 }
