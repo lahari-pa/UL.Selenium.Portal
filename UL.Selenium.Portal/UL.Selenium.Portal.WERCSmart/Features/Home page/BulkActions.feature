@@ -107,6 +107,7 @@ Scenario: [76314] Forward Product - NR should Not Require UPC
 	# Confirm product has been forward properly (Message: Thank you for registering your product on WERCSmart for assessment.)
 	Given I navigate to the home page
 
+@tfs_design
 @TReVorId:22232
 Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 	Given I login as the administrator

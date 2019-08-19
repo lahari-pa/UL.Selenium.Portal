@@ -135,6 +135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click continue on the Forward Product Registration page")]
 		public void ClickContinueForwardProductRegistration()
 		{
+			Delay.Seconds(3);
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(selForwardProdReg.ClickContinue() && GeneralUtilities.Wait_for_load_finish(),
 				"Failed to click continue", "Successfully clicked continue");
