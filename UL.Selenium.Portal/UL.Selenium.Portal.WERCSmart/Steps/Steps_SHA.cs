@@ -2419,15 +2419,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		[Given(@"I create a new file called: (.*) saved as: (.*) and verify it contains the UPCs saved as:")]
-		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string fileName, string savedAs, Table table)
+		[Given(@"I edit the testdoc.xlsx, and save it as: (.*) and verify it contains the UPCs saved as:")]
+		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string savedAs, Table table)
 		{
 			var upc = new UPC();
-			Report.IsTrue(upc.DeleteFileFromDownloadsFolder(fileName), "", "");
+			Report.IsTrue(upc.DeleteFileFromDownloadsFolder("testdoc.xlsx"), "", "");
 			//Create file here
 			//var excelfile = new ExcelUtilities CreateSpreadsheet(fileName);
 
-			var utils = ExcelUtilities.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
+			//var utils = ExcelUtilities.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
+			EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination);
+
+			var utils = new ExcelUtilities(destination, "Sheet1");		
+
+
 			var headers = table.Rows.FirstOrDefault().Keys.ToList();
 			utils.AddRow(headers);
 			foreach(var row in table.Rows)
@@ -2449,7 +2454,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				utils.AddRow(vals.ToList());
 			}
 			//add all rows from table to excelfile
-			Report.IsTrue(upc.VerifySampleFile(table, fileName, savedAs), "Failed to validate File", "Successfully validated File");
+
+
+			System.IO.Directory.Move(destination, KnownFolders.GetPath(KnownFolder.Downloads)+@"\testdoc.xlsx");
+
+
+			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", savedAs), "Failed to validate File", "Successfully validated File");
 		}
 	}
 }

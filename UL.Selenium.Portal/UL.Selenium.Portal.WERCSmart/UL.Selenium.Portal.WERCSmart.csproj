@@ -294,6 +294,7 @@
     </None>
     <None Include="app.manifest" />
     <EmbeddedResource Include="Dependencies\PDF\testdoc.pdf" />
+    <EmbeddedResource Include="Dependencies\Excel\testdoc.xlsx" />
     <None Include="Features\AdditionalProductInformation.feature">
     </None>
     <None Include="Features\API\Waste Haulers.feature">

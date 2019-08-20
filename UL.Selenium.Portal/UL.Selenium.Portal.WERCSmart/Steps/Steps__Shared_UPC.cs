@@ -554,6 +554,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new MultipleUPC().ClickSelectAllUpcsButton(), "The select all Upcs button was not clicked successfully", "The select all Upcs button was clicked successfully");
 		}
 
+		[StepDefinition(@"I confirm that the Add Multiple UPC window opens")]
+		public void IConfirmThatTheAddMultipleUPCWindowOpens()
+		{
+			Report.IsTrue(new MultipleUPC().WaitForContainerToBeVisible(30), "The Add Multiple UPC windows did appear", " The Add Multiple UPC window did appear");
+		}
+
+
+
 
 		[StepDefinition(@"In the Add Multiple dialog box I select the packaging type: (.*)")]
 		public void InTheAddMultipleDialogBoxSelectPackagingTypeX(string packagingType)
@@ -602,6 +610,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(new MultipleUPC().ClickFinishButton(), "Failed To click the Finish button", "Successfully clicked the Finish button");
 		}
+
+		[StepDefinition(@"I check that the UPC Number of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckUPCNumberOfEachProductFromFile(string savedAs,string file)
+		{
+			Report.IsTrue(new UPC().ICheckUPCNumberOfEachProductFromFile(savedAs,file),"fail msg","Pass msg");  //Change messages 
+			
+		}
+
+		[StepDefinition(@"I check that the size of each product matches the excel file uploaded saved as: (.*)")]
+		public void ICheckSizeOfEachProductFromFile(string savedAs)
+		{
+		
+		}
+
+
 
 
 

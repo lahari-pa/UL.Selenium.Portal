@@ -253,7 +253,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			tableData.AddRange(table.Header);
 			foreach (TableRow row in table.Rows)
 			{
-				tableData.AddRange(row.Values.ToList());
+				var vals = row.Values.Select(x =>
+				{
+					if (Regex.IsMatch(x, "<(.*)>"))
+					{
+						var match = Regex.Match(x, "<(.*)>").Groups[1].Value;
+						if (Context.Contains(match, true))
+						{
+							return Context.GetFromContext(match).ToString();
+						}
+					}
+
+					return x;
+				});
+
+				tableData.AddRange(vals.ToList());
 			}
 
 			if (tableData is null || fileData is null)
@@ -364,8 +378,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return el.TryClick();
 		}
-		
-		
+
+		public bool ICheckUPCNumberOfEachProductFromFile(string savedas, string file)
+		{
+			this.GetFile(file, savedas);
+			var actualfile = Context.GetFromContext(savedas);
+			List<string> filedata = GetFileData(savedas, actualfile);
+
+			var multipleUPCModal = new MultipleUPC();
+
+			if (filedata is null)
+			{
+				Report.Failure("either the table is empty or the file: '" + file + "' is not being read.");
+				return false;
+			}
+
+			IList<IWebElement> upcList = multipleUPCModal.FindElements(By.XPath("//tbody[@data-bind]//tr"), 2);
+			int i = 13;
+			foreach( var item in upcList)
+			{
+				string UPCnumber= item.FindElement(By.XPath("//td//span[@data-bind='text: row.upc']"), 2).Text;
+				if(UPCnumber!= filedata[i].Trim())
+				{
+					Report.Info("error: popup contains: " + UPCnumber + "while file data contains: " + filedata[i] + " in row " + i);
+					i = i + 11;
+				}
+			}				
+			return true;
+		}
+
+
 	}
 
 	public class MultipleUPC : SeleniumBaseObject
