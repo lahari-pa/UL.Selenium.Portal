@@ -308,6 +308,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					Context.AddToContext(savedAs, dir.FirstOrDefault());
 					Report.Success("File with name: " + dir.FirstOrDefault() + " was found successfully!");
+					Report.Info("Waited for: " + counter + " seconds");
 					return;
 				}
 				Delay.Seconds(1);

@@ -2161,5 +2161,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Success("Got the first Product ID in Grid (ID: " + firstProductID + ") and saved to: " + savedAs);
 		}
 
+		[StepDefinition(@"I generate: (.*) random UPC numbers and save them starting with: (.*)")]
+		public void GivenIGenerateXRandomUPCNumberAndSaveAs(int numbersWanted,string savedAs)
+		{
+			int i = 1;
+			while (i<=numbersWanted)
+			{
+				string uPCNo = GeneralFunctions.GenerateUPCNumber();
+				Context.AddToContext(savedAs+i, uPCNo);
+				Report.Info("Generated UPC No "+i+": " + uPCNo);
+				i++;
+			}
+			
+		}
+
 	}
 }

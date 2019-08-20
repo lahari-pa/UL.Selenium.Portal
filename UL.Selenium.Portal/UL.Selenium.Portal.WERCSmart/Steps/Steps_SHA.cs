@@ -14,7 +14,7 @@ using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
-
+using System.IO;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -2418,6 +2418,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				}
 			}
+		}
+		[Given(@"I create a new file called: (.*) saved as: (.*) and verify it contains the UPCs saved as:")]
+		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string fileName, string savedAs, Table table)
+		{
+			var upc = new UPC();
+			Report.IsTrue(upc.DeleteFileFromDownloadsFolder(fileName), "", "");
+			//Create file here
+			//var excelfile = new ExcelUtilities CreateSpreadsheet(fileName);
+
+			var utils = ExcelUtilities.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
+			var headers = table.Rows.FirstOrDefault().Keys.ToList();
+			utils.AddRow(headers);
+			foreach(var row in table.Rows)
+			{
+				var vals  = row.Values.Select(x =>
+				{
+					if (Regex.IsMatch(x, "<(.*)>"))
+					{
+						var match = Regex.Match(x, "<(.*)>").Groups[1].Value;
+						if (Context.Contains(match, true))
+						{
+							return Context.GetFromContext(match).ToString();
+						}
+					}
+					
+					return x;
+				});
+
+				utils.AddRow(vals.ToList());
+			}
+			//add all rows from table to excelfile
+			Report.IsTrue(upc.VerifySampleFile(table, fileName, savedAs), "Failed to validate File", "Successfully validated File");
 		}
 	}
 }
