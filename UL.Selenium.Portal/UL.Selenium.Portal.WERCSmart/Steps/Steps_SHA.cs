@@ -2142,7 +2142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				return;
 			}
-			var upcNumber = displayedUpcs.FirstOrDefault()?.UPCNumber;
+			var upcNumber = displayedUpcs.FirstOrDefault(x => !x.UPCNumber.EndsWith("*"))?.UPCNumber;
 			Report.Info("Adding UPC number: " + upcNumber + " to context as: " + savedAs);
 			Context.AddToContext(savedAs, upcNumber);
 		}
@@ -2306,7 +2306,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int j = 1;
 			for (int i = 0; i < productsToTry; i++)
 			{
-				
+
 
 				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
 				string id = products[i].ID;
@@ -2347,22 +2347,72 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(@"I add the UPC numbers saved to context starting with: (.*) to the UPC bulk upload spreadsheet: (.*)")]
 		public void AddUpcNumbersToBulkUploadSpreadsheet(string savedAs, string spreadsheetSavedAs)
-		{		
-			int  numberOfProducts = (int)Context.GetFromContext("numberOfUpcnumbers");
-			
+		{
+			int numberOfProducts = (int)Context.GetFromContext("numberOfUpcnumbers");
+
 			var spreadSheetFile = (string)Context.GetFromContext(spreadsheetSavedAs);
 			var excel = new ExcelUtilities(spreadSheetFile, "Sheet1");
 
 			for (int i = 1; i <= numberOfProducts; i++)
 			{
-				if(Context.Contains(savedAs + i))
+				if (Context.Contains(savedAs + i))
 				{
 					var upcNumber = Context.GetFromContext(savedAs + i).ToString();
-					Report.IsTrue(excel.EditCell(i, 0, upcNumber),"Failed to edit UPC"+i+" to: " + upcNumber, "Successfully edited UPC to: " + upcNumber, false, false);
+					Report.IsTrue(excel.EditCell(i, 0, upcNumber), "Failed to edit UPC" + i + " to: " + upcNumber, "Successfully edited UPC to: " + upcNumber, false, false);
 				}
 				else
 				{
 					Report.Failure("Failed to find: " + savedAs + i + " in context!", false);
+				}
+			}
+		}
+
+		[StepDefinition(@"I find a UPC number for: (.*) products not belonging to Supplier: (.*) in the grid and save to context starting with: (.*)")]
+		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs) 
+		{
+			TestReport.UseSubSteps = true;
+			Context.AddToContext("numberOfUpcnumbers", numberOfProducts);
+			int productsToTry = new StudioSHAManager().GetProductCount();
+			Report.Info("There are " + productsToTry + " products");
+			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
+			int j = 1;
+			for (int i = 0; i < productsToTry; i++)
+			{
+				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = products[i].ID;
+				if (products[i].Supplier == notSupplier)
+				{
+					Report.Info("Product matches supplier: " + notSupplier + " so continuing to the next row");
+					continue;
+				}
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs+j, false);
+				if (Context.GetFromContext(savedAs + j) != null)
+				{
+					Report.Info($"Saved UPC{j} to context");
+					j++;
+					Report.Screenshot();
+					Report.Info("Closing window");
+					SeleniumBrowser.WebBrowser.Close();
+					Report.Info("Returning to the main window");
+					try
+					{
+						var handle = Context.GetFromContext("MainWindowHandle").ToString();
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+						// required to switch to the frame and refresh container
+						new StudioSHAManager().Wait_for_load();
+					}
+					catch (Exception ex)
+					{
+						Report.Failure("Failed to navigate back to main window using MainWindowHandle context");
+						Report.Failure("Exception: " + ex.Message);
+						throw;
+					}
+				}
+				if (j > numberOfProducts)
+				{
+					break;
 				}
 			}
 		}

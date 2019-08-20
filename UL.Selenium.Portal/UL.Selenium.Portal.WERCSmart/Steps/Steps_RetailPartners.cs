@@ -1384,7 +1384,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var expected = new List<string>();
 			warning.Rows.ForEach(x => expected.Add(x["Message"]));
 			List<string> displayed = new DataEntryNotification().SuccessMessages();
-			IEnumerable<string> differences = expected.Except(displayed);			
+			IEnumerable<string> differences = expected.Except(displayed);
 			Report.IsTrue(!differences.Any(),
 				"The success message did not match the expected text. Displayed is: " + string.Join("; ", displayed) + ". Expected is: " + string.Join("; ", expected),
 				"The sucess message matched the expected text.");

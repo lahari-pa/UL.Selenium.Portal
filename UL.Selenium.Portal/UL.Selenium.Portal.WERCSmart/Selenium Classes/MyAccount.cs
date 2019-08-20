@@ -46,37 +46,59 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
-				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
-
+				int pageNo = 1;
+				int pageCount = this.GetPage("last");
 				var listOfUsers = new List<User>();
-
-				foreach (IWebElement userRow in listOfUsersRows)
+				while (pageNo <= pageCount)
 				{
-					var thisUser = new User {
-						Username = userRow.FindElement(By.XPath(".//td[1]")).Text,
-						Email = userRow.FindElement(By.XPath(".//td[2]")).Text,
-						Role = userRow.FindElement(By.XPath(".//td[3]")).Text,
-						IsActive = userRow.FindElement(By.XPath(".//td[4]")).Text == "Yes"
-					};
-					ReadOnlyCollection<IWebElement> checkboxes = userRow.FindElements(By.XPath(".//td[5]/div[@class='checkbox']"));
-					foreach (IWebElement checkbox in checkboxes)
+					Delay.Seconds(1.5 * Delay.SpeedFactor);
+
+					IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+					ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+
+					foreach (IWebElement userRow in listOfUsersRows)
 					{
-						switch (checkbox.FindElement(By.XPath("./label")).Text.Trim())
+						var thisUser = new User {
+							Username = userRow.FindElement(By.XPath(".//td[1]")).Text,
+							Email = userRow.FindElement(By.XPath(".//td[2]")).Text,
+							Role = userRow.FindElement(By.XPath(".//td[3]")).Text,
+							IsActive = userRow.FindElement(By.XPath(".//td[4]")).Text == "Yes"
+						};
+						ReadOnlyCollection<IWebElement> checkboxes = userRow.FindElements(By.XPath(".//td[5]/div[@class='checkbox']"));
+						foreach (IWebElement checkbox in checkboxes)
 						{
-							case "Chemical Assessment":
-								thisUser.ChemicalAssessment = checkbox.FindElement(By.XPath(".//input")).Selected;
-								break;
-							case "Product Submission":
-								thisUser.ProductSubmission = checkbox.FindElement(By.XPath(".//input")).Selected;
-								break;
-							default:
-								throw new Exception(
-									"There's a checkbox other than Chemical Assessment and Product Submissions. You need to update the function SaveUserGrid");
+							switch (checkbox.FindElement(By.XPath("./label")).Text.Trim())
+							{
+								case "Chemical Assessment":
+									thisUser.ChemicalAssessment = checkbox.FindElement(By.XPath(".//input")).Selected;
+									break;
+								case "Product Submission":
+									thisUser.ProductSubmission = checkbox.FindElement(By.XPath(".//input")).Selected;
+									break;
+								default:
+									throw new Exception(
+										"There's a checkbox other than Chemical Assessment and Product Submissions. You need to update the function SaveUserGrid");
+							}
 						}
+						listOfUsers.Add(thisUser);
 					}
-					listOfUsers.Add(thisUser);
+
+					IWebElement myNext = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='Next']"), 10).FirstOrDefault();
+
+					if (myNext == null)
+					{
+						Report.Info("On Last Page");
+						Report.Screenshot();
+						break;
+					}
+					if (!myNext.TryClick())
+					{
+						throw new Exception("Failed to click move to next page");
+					}
+					pageNo++;
+
 				}
+
 				Context.AddToContext(saveAs, listOfUsers);
 				return true;
 			}
