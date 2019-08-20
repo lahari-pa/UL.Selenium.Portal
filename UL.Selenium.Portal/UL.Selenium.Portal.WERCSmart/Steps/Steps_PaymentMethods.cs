@@ -815,8 +815,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.Info("Thank You Text = " + ty_text);
 
-				Report.IsTrue(myPay.Thank_You_Text(ty_text), "Thank You Text is Incorrect",
-					"Thank You text is Correct");
+				Report.IsTrue(myPay.Thank_You_Text().Contains("Thank you"), "Displayed Text does not contain Thank you",
+					"Displayed Text contains Thank you");
 			}
 			catch (Exception ex)
 			{

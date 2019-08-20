@@ -42,6 +42,7 @@ Scenario: [68420] List of Supplier Reports
 		| VOC-related Registrations                                          |
 		| Waste Classification Summary for All Registrations                 |
 
+@tfs_design
 @TReVorId:16835
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -50,6 +51,7 @@ Scenario: [68421] Active UPCs for Products Report
 	Given Under the Supplier Reports menu I choose: UPCs (Active) for all Registrations
 	Then In the Supplier Reports screen the current sub-page should be: UPCs (Active) for all Registrations
 	Given In the Supplier Reports screen I click on the Download button
+	Given If an html file is downloaded called UPCs (Active) for all Registrations.html I create a new product with UPCs and redownload the UPCs (Active) for all Registrations report
 	Given I confirm that an excel file is produced called UPCs (Active) for all Registrations.xlsx and save as 68421
 	Then I confirm that the excel file saved as: 68421 contains the following columns:
 		| Column          |

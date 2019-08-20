@@ -328,6 +328,7 @@
     </None>
     <None Include="Features\Canadian Tire\New Product Submission\Stewardship Data in WPS Studio\StwdInWpsStudiofeature.feature">
     </None>
+    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Full Stewardship Data\AccHasFullStwdData.feature" />
     <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has No Stwd Data\AccHasNoStwdData.feature">
     </None>
     <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Partial Sewardship Data\AccHasPartialStwd.feature">
@@ -439,10 +440,13 @@
     </None>
     <None Include="Features\Product Registration\VOC\VOC.feature">
     </None>
+    <None Include="Features\Product Set Up\ProductSetUp_3rdParty.feature" />
+    <None Include="Features\Product Set Up\ProductSetUp_Chalk.feature" />
+    <None Include="Features\Product Set Up\ProductSetUp_Electronic.feature" />
+    <None Include="Features\Product Set Up\ProductSetUp_Kit.feature" />
     <None Include="Features\ProductCharacteristics.feature">
     </None>
-    <None Include="Features\ProductSetUp.feature">
-    </None>
+
     <None Include="Features\RegulatoryInformation1.feature">
     </None>
     <None Include="Features\RegulatoryInformation3.feature">

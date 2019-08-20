@@ -1227,17 +1227,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Putting this in because standard get alert functionality does not work in this page.
 			if (!SeleniumBrowser.Alert.WaitForAlert(10))
 			{
-				SeleniumBrowser.Alert.ReloadAlert(searchText);
+				try
+				{
+					SeleniumBrowser.Alert.ReloadAlert(searchText);
+				}
+				catch(Exception ex)
+				{
+					Report.Failure("Failed to reload alert. Exception: " + ex);
+					return; 
+				}
 			}
 			if (!SeleniumBrowser.Alert.WaitForAlert())
 			{
 				Report.Error("Alert did not appear");
 			}
-			string alertText = SeleniumBrowser.Alert.GetText();
-			Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
-				"Alert text was as expected");
-			Report.Screenshot();
-			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			string alertTextFull = SeleniumBrowser.Alert.GetText();
+			//string alertText = alertTextFull.Replace("\r\n", string.Empty);
+			
+
+			string alertText= GeneralUtilities.RemoveLineBreaks(alertTextFull);
+
+			if (alertText == null)
+			{
+				Report.Failure("Text was not displayed", false);
+			}
+			if(alertText.Contains(searchText))
+			{
+				Report.Info("Alert text was as expected");
+
+			}
+			else
+			{
+				Report.Failure($"Alert text was not as expected. Found: {alertText}", false);
+			}
+
+			//Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
+			//	"Alert text was as expected");
+
+			Report.Screenshot(true);
+
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			}
+
 		}
 
 		[StepDefinition(@"I save to context name: (.*) and string value: (.*)")]
@@ -1338,6 +1371,95 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I check alert text contains either: (.*) or: (.*) and dismiss")]
+		public void GivenICheckAlertTextContainsEitherXOrYAndDismiss(string searchTextMain, string searchTextAlternative)
+		{
+			//Putting this in because standard get alert functionality does not work in this page.
+			if (!SeleniumBrowser.Alert.WaitForAlert(10))
+			{
+				SeleniumBrowser.Alert.ReloadAlert(searchTextMain);
+			}
+			if (!SeleniumBrowser.Alert.WaitForAlert(10))
+			{
+				SeleniumBrowser.Alert.ReloadAlert(searchTextAlternative);
+			}
+			if (!SeleniumBrowser.Alert.WaitForAlert())
+			{
+				Report.Error("Alert did not appear");
+			}
+			string alertText = SeleniumBrowser.Alert.GetText();
+			if (alertText == null)
+			{
+				Report.Failure("Text was not displayed", false);
+			}
+			if (alertText.Contains(searchTextMain))
+			{
+				Report.Info($"Alert text was as expected, and contained: {searchTextMain}");
+
+			}
+			if (alertText.Contains(searchTextAlternative))
+			{
+				Report.Info($"Alert text was as expected, and contained: {searchTextAlternative}");
+
+			}
+			else
+			{
+				Report.Failure($"Alert text was not as expected. Found: {alertText}", false);
+			}
+
+			//Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
+			//	"Alert text was as expected");
+
+			Report.Screenshot(true);
+
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			}
+
+		}
+		
+
+		[StepDefinition("I find an existing UPC number in trevor account saved as: (.*) using feature context: (.*)")]
+		public void FindExistingUpcNumberInTrevorAccountUsingFeatureContext(string trevorSavedAs, string upcSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I look in feature context for: " + upcSavedAs);
+			if (Context.Contains(upcSavedAs, true))
+			{
+                Report.Info("Found an existing UPC in context");
+				var upc = Context.GetFromContext(upcSavedAs).ToString();
+                Report.Info("Saving UPC : " + upc + " to scenario context");
+				Context.AddToContext(upcSavedAs, upc);
+				return;
+			}
+			Report.Info("UPC did not exist in feature context");
+			// fall back to searching SHA manager
+			TestReport.StartStep("I search for a UPC in SHA Manager associated with trevor user account: " + trevorSavedAs + " and save to context as: " + upcSavedAs);
+			new Steps_SHA().NavigateToShaSaveUpcToContext(upcSavedAs, trevorSavedAs);
+			// check if SHA search was successful
+			if (Context.Contains(upcSavedAs))
+            {
+				// add to feature context
+				var upc = Context.GetFromContext(upcSavedAs).ToString();
+				Context.AddToContext(upcSavedAs, upc, true);
+				return;
+            }
+			// fall back to creating a new product
+            TestReport.StartStep("Logging in to WercSmart");
+			this.ILogInWithTheAccountSavedInTrevorAs(trevorSavedAs);
+			TestReport.StartStep("Creating a new product: Chalk");
+			new Steps_ProductSetup().GivenICreateProductUsingTestCase75335("Chalk", upcSavedAs, "ExistingUPCProduct");
+			// check if new product UPC was successful
+			if (Context.Contains(upcSavedAs))
+            {
+	            // add to feature context
+				var createdUpc = Context.GetFromContext(upcSavedAs).ToString();
+	            Context.AddToContext(upcSavedAs, createdUpc, true);
+	            return;
+            }
+            Report.Failure("Failed to get an existing UPC!");
+		}
 
 	}
 }
