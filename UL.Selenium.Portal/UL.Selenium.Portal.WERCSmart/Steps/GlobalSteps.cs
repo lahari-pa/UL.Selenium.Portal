@@ -1227,17 +1227,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Putting this in because standard get alert functionality does not work in this page.
 			if (!SeleniumBrowser.Alert.WaitForAlert(10))
 			{
-				SeleniumBrowser.Alert.ReloadAlert(searchText);
+				try
+				{
+					SeleniumBrowser.Alert.ReloadAlert(searchText);
+				}
+				catch(Exception ex)
+				{
+					Report.Failure("Failed to reload alert. Exception: " + ex);
+					return; 
+				}
 			}
 			if (!SeleniumBrowser.Alert.WaitForAlert())
 			{
 				Report.Error("Alert did not appear");
 			}
-			string alertText = SeleniumBrowser.Alert.GetText();
-			Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
-				"Alert text was as expected");
-			Report.Screenshot();
-			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			string alertTextFull = SeleniumBrowser.Alert.GetText();
+			//string alertText = alertTextFull.Replace("\r\n", string.Empty);
+			
+
+			string alertText= GeneralUtilities.RemoveLineBreaks(alertTextFull);
+
+			if (alertText == null)
+			{
+				Report.Failure("Text was not displayed", false);
+			}
+			if(alertText.Contains(searchText))
+			{
+				Report.Info("Alert text was as expected");
+
+			}
+			else
+			{
+				Report.Failure($"Alert text was not as expected. Found: {alertText}", false);
+			}
+
+			//Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
+			//	"Alert text was as expected");
+
+			Report.Screenshot(true);
+
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			}
+
 		}
 
 		[StepDefinition(@"I save to context name: (.*) and string value: (.*)")]
@@ -1337,6 +1370,55 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Context.AddToContext(usernameSavedAs, user.Username);
 			}
 		}
+
+		[StepDefinition(@"I check alert text contains either: (.*) or: (.*) and dismiss")]
+		public void GivenICheckAlertTextContainsEitherXOrYAndDismiss(string searchTextMain, string searchTextAlternative)
+		{
+			//Putting this in because standard get alert functionality does not work in this page.
+			if (!SeleniumBrowser.Alert.WaitForAlert(10))
+			{
+				SeleniumBrowser.Alert.ReloadAlert(searchTextMain);
+			}
+			if (!SeleniumBrowser.Alert.WaitForAlert(10))
+			{
+				SeleniumBrowser.Alert.ReloadAlert(searchTextAlternative);
+			}
+			if (!SeleniumBrowser.Alert.WaitForAlert())
+			{
+				Report.Error("Alert did not appear");
+			}
+			string alertText = SeleniumBrowser.Alert.GetText();
+			if (alertText == null)
+			{
+				Report.Failure("Text was not displayed", false);
+			}
+			if (alertText.Contains(searchTextMain))
+			{
+				Report.Info($"Alert text was as expected, and contained: {searchTextMain}");
+
+			}
+			if (alertText.Contains(searchTextAlternative))
+			{
+				Report.Info($"Alert text was as expected, and contained: {searchTextAlternative}");
+
+			}
+			else
+			{
+				Report.Failure($"Alert text was not as expected. Found: {alertText}", false);
+			}
+
+			//Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
+			//	"Alert text was as expected");
+
+			Report.Screenshot(true);
+
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			}
+
+		}
+		
 
 
 	}
