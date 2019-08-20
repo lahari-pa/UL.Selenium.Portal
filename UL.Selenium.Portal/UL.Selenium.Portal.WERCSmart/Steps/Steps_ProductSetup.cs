@@ -2545,6 +2545,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//// If purchase details are showing click confirm order
 			//newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 		}
+
+
+		public void TaketoProductTypeandSave(string name, string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
+			newProductSteps.SaveProductInformation(savedAs);
+		}
+
+
+		[StepDefinition(@"I create a product with sds upload and name as: (.*) then take to data acceptance and save as: (.*)")]
+		public void TakeProductWithSDSUploadToDataAcceptance(string name, string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
+			newProductSteps.SaveProductInformation(savedAs);
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
+			newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English",
+				"Yes, I certify that I have an OSHA- compliant SDS for this product and would like to upload it.");
+			newProductSteps.UploadPDFFile("OSHA SDS", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			newProductSteps.ICheckTheCheckboxWithDescription("check",
+				"I confirm that I have provided the most up-to-date, OSHA-compliant SDS in this product registration.");
+			newProductSteps.ClickContinue();
+			newProductSteps.ClickContinue();
+			newProductSteps.ClickContinue();
+			newProductSteps.ClickContinue();
+		}
 	}
 
 }

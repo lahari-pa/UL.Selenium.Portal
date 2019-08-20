@@ -503,7 +503,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Report.Info("Clicked 'delete'");
 						Delay.Seconds(5);
 						GeneralUtilities.Wait_for_load_finish();
-						Delay.Seconds(1);
+						Delay.Seconds(3);
 						Report.Info("Checking the products grid is empty");
 						row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 						return row == null;

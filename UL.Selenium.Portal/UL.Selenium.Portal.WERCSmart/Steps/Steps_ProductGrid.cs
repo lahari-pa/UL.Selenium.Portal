@@ -2142,5 +2142,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"If my products count is less than 5 then add products in my products grid")]
+		public void AddProductsInMyProductsGrid()
+		{
+			TestReport.UseSubSteps = true;
+			var selProdGrid = new ProductsGrid();
+			var newStepsProd = new Steps_ProductSetup();
+			var homePage = new StepsHomepage();
+			try
+			{
+				if (selProdGrid.ProductsCount() >= 10)
+				{
+					Report.Info("My products grid already contains more than 10 products for pagination!");
+				}
+				else
+				{
+					for (int id = 0; id <= 12; id++)
+					{
+						Report.Info("Adding product-" + (id + 1) + " in my products grid");
+						newStepsProd.TaketoProductTypeandSave("sample product-" + (id + 1), "chalkproduct");
+					}
+					homePage.ThenINavigateToTheHomePage();
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+			}
+		}
 	}
 }
