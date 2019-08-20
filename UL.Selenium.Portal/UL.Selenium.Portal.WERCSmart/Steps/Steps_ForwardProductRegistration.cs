@@ -347,6 +347,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure("Could not find product ID in context saved as: " + savedAs);
 					return;
 				}
+				 
 				this.EnterTextInSearchByIDOrProductNameField(id);
 				Report.Screenshot();
 				Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
@@ -647,8 +648,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheUPCModalWindowIClickSave()
 		{
 			var modal = new AddUPCModal();
-			Report.IsTrue(modal.ClickSave(), "Failed to click Save in the Add Case UPC modal window.",
-			"Successfully clicked Save in the Add Case UPC modal window.");
+
+			if(modal.ClickSave())
+			{
+				Report.Success("Successfully clicked Save in the Add Case UPC modal window.", false);
+			}
+			else
+			{
+				Report.Failure("Failed to click Save in the Add Case UPC modal window.", false);
+			}
+			
 		}
 
 
@@ -667,6 +676,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var modal = new AddCaseUPCModal();
 			Report.IsTrue(modal.ClickSave(), "Failed to click Save in the Add Case UPC modal window.",
 			"Successfully clicked Save in the Add Case UPC modal window.");
+		}
+		[StepDefinition(@"I select the product with ID saved as: (.*) under the right hand panel of the Select Products tab")]
+		public void ISelectTheProductSavedAsUnderSelectProductsRightPanel(string savedAs)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			var ids = (string)Context.GetFromContext(savedAs);
+			Report.IsTrue(selForwardProdReg.SelectProductsRightPanel_ClickProductByID(ids),"The Product with ID: "+ids+" was not selected", "The Product with ID: "+ids+" was selected");		   
+			
+
+		}
+
+		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer under Other Retailers")]
+		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerUnderOtherRetailers()
+		{
+			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailer(), "Failed to select the first Retailer under 'Other Retailers'", "Succesfully selected the first retailer under 'Other Retailers'");
+		}
+
+		[StepDefinition(@"In the UPC modal window I click Cancel")]
+		public void InTheUPCModalWindowIClickCancel()
+		{
+			var modal = new AddUPCModal();
+			Report.IsTrue(modal.ClickCancel(), "Failed to click Cancel in the Add UPC modal window.",
+			"Successfully clicked Cancel in the Add UPC modal window.");
 		}
 
 

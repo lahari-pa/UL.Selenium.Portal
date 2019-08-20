@@ -116,6 +116,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I Confirm you are allowed to go on to next screen without errors
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase82536
 
+@TReVorId:23398
 Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product1
@@ -242,7 +243,7 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91741
 
-@singlerun
+	
 @TReVorId:23410
 Scenario: [91100] Duplicate UPC is not permitted within account - New Product registration - Bulk Upload
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -287,6 +288,45 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91100
 
+@TReVorId:23411
+	Scenario: [91157] Duplicate UPC is not permitted within account - Forward Product registration - single UPC
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then  I click the following option in the bottom menu: Search
+	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
+	And In SHA Manager ProductSearch page I run search:
+		| Search Term | Search Value                  |
+		| Status      | Completed                     |
+		| Supplier    | QA_Automation_ProductsAccount |
+		| User        | saved as AccountUsername      |
+	Then I save a UPC number for any product in the grid to context as: ExistingUPC
+	Given I navigate to the landing page
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then  I filter the products by: Accepted by Retailers
+	And I save the ProductID of the first Product in the grid as: testProduct91157
+	Given I click Bulk Actions in the Products Grid
+	Given I click Forward Product Registration in the Bulk Actions window
+	Then I should see the header: Forward Product Registration on the Forward Product Registration window
+	And I confirm the active Forward Product Registration tab is: Select Products	
+	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
+	And I select the product with ID saved as: testProduct91157 under the right hand panel of the Select Products tab
+	Given I click continue on the Forward Product Registration page
+	Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
+	And I click continue on the Forward Product Registration page
+	Given I select the first product under the Select UPCs tab
+	Given I click the Add UPC button under the Select UPCs tab
+	And In the Add UPC modal window I enter the following information:
+		| UPC Number           | Type    | Size (Ounces) | Retailer   |
+		| saved as ExistingUPC | <first> | 1             | Select all |
+	And In the UPC modal window I click Save
+	Then I check alert text contains There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. and dismiss 
+	Then In the UPC modal window I click Cancel
+	And I click the Home navigation icon and accept the alert popup 
+
+
+
+
+
+
 @TReVorId:23406
 Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Single UPC
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -319,3 +359,50 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91077
+
+	@singlerun
+@TReVorId:23412
+	Scenario: [91101] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Bulk Upload
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase91101
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
+	And I click Sample File link and verify the Upload UPC form and save it as test91101 with data:
+		| UPC          | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   |
+		| 823973000000 | 1        | 11   | 1.22               | 11AB45          | 1001            | 1111            | A0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |
+		| 71617198008  | 2        | 22   | 2.33               | 12AB56          | 1002            | 2222            | B0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |
+		| 978959000000 | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |
+		| 688267000000 | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |
+		| 854911000000 | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I click the following option in the bottom menu: Search
+	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
+	Given In SHA Manager ProductSearch page I run search:
+		| Search Term | Search Value |
+		| Status      | Completed    |
+	Given I find a UPC number for: 5 products not belonging to Supplier: QA_Automation_ProductsAccount in the grid and save to context starting with: ExistingUPC
+	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91101
+	Given I navigate to the landing page
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)	
+	Given I search for the product saved as: TestCase91101
+	Given I edit the first product in results
+	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	And I click the 'Upload UPCs' button and upload the file saved as: test91101
+	Then In the Add Multiple dialog box I select all UPCs
+	Then In the Add Multiple dialog box I select the packaging type: <first>
+	Given In the Add Multiple dialog box I click Next
+	And In the Add Multiple dialog box I select all Retailers
+	Then In the Add Multiple dialog box I click Finish
+	Given I click continue
+	Then I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
+	And I navigate to the home page
+	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91101
+
+	
+	
+

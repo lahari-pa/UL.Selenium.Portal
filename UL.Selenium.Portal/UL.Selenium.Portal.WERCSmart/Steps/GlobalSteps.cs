@@ -1227,14 +1227,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Putting this in because standard get alert functionality does not work in this page.
 			if (!SeleniumBrowser.Alert.WaitForAlert(10))
 			{
-				SeleniumBrowser.Alert.ReloadAlert(searchText);
+				try
+				{
+					SeleniumBrowser.Alert.ReloadAlert(searchText);
+				}
+				catch(Exception ex)
+				{
+					Report.Failure("Failed to reload alert. Exception: " + ex);
+					return; 
+				}
 			}
 			if (!SeleniumBrowser.Alert.WaitForAlert())
 			{
 				Report.Error("Alert did not appear");
 			}
-			string alertText = SeleniumBrowser.Alert.GetText();
-			if(alertText == null)
+			string alertTextFull = SeleniumBrowser.Alert.GetText();
+			//string alertText = alertTextFull.Replace("\r\n", string.Empty);
+			
+
+			string alertText= GeneralUtilities.RemoveLineBreaks(alertTextFull);
+
+			if (alertText == null)
 			{
 				Report.Failure("Text was not displayed", false);
 			}
@@ -1405,6 +1418,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+		
 
 
 	}
