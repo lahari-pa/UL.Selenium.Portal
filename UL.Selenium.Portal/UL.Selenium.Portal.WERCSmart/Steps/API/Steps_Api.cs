@@ -23,7 +23,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 		[StepDefinition(@"I authenticate username: (.*), password: (.*)")]
 		public void AuthenticateTestUser(string userName, string password)
 		{
-			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate { return true; });
+			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate
+			{ return true; });
 
 			var token = "";
 			var loginUrl = TestVariables.GetVariableSavedAs("BaseApiUrl") + @"/users/login";
@@ -65,5 +66,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 
 			Report.XMLFile(Path.Combine(ReportingParameters.ReportFolder, "Test.xml"));
 		}
+
+		[Given(@"I verify the XML data saved as: {.*} matches the corresponding Excel file saved as: SupplierReport(.*)")]
+		public void GivenIVerifyTheXMLDataSavedAsReportSavedAsMatchesTheCorrespondingExcelFileSavedAsSupplierReport(string xmlSavedAs, string excelSavedAs)
+		{
+			var api = new Api();
+			Report.IsTrue(api.Compare(xmlSavedAs, excelSavedAs),"File comparison failed.","File comparison succeeded.");
+		}
+
 	}
 }
