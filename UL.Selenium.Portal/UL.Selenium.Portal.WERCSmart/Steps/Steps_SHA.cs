@@ -2210,13 +2210,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveUpcNumberForAnyProduct(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
-			int productsToTry = new StudioSHAManager().GetProductCount();
-			Report.Info("There are " + productsToTry + " products");
-			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
-			for (int i = 0; i < productsToTry; i++)
+			TestReport.StartStep("Getting all product ids from the table");
+			//int productsToTry = new StudioSHAManager().GetProductCount();
+			var ids = new StudioSHAManager().GetAllProductIds();
+			Report.Info("There are " + ids.Count + " product ids");
+			//List<Product> products = new StudioSHAManager().GetTopXProducts(10);
+			for (int i = 0; i < ids.Count; i++)
 			{
 				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
-				string id = products[i].ID;
+				string id = ids[i];
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
 				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
 				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
@@ -2363,6 +2365,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure("Failed to find: " + savedAs + i + " in context!", false);
 				}
 			}
+		}
+
+		[StepDefinition(@"I navigate to SHA Manager and save a UPC to context as: (.*) for trevor account: (.*)")]
+		public void NavigateToShaSaveUpcToContext(string upcSavedAs, string accountSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I log in to Studio and open SHA Manager");
+			new Steps_Shared().GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			TestReport.StartStep("I click Search");
+			this.IClickTheFollowingOptionInTheBottomMenu("Search");
+			TestUser user = TestUsers.GetUserSavedAs(accountSavedAs);
+			var username = "";
+			if (user != null)
+			{
+				username = user.Username;
+			}
+			var table = new Table("Search Term", "Search Value");
+			table.AddRow("Status", "Completed");
+			table.AddRow("User", username);
+			TestReport.StartStep("I run a search for status Completed and user: " + username);
+			this.GivenInSHAManagerPageIRunSearch(table);
+			TestReport.StartStep("I save the upc for any returned product as: " + upcSavedAs);
+			this.SaveUpcNumberForAnyProduct(upcSavedAs);
 		}
 	}
 }
