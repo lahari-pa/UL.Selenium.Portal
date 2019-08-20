@@ -2147,7 +2147,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				return;
 			}
-			var upcNumber = displayedUpcs.FirstOrDefault()?.UPCNumber;
+			var upcNumber = displayedUpcs.FirstOrDefault(x => !x.UPCNumber.EndsWith("*"))?.UPCNumber;
 			Report.Info("Adding UPC number: " + upcNumber + " to context as: " + savedAs);
 			Context.AddToContext(savedAs, upcNumber);
 		}
@@ -2390,7 +2390,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
 				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
-				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs+j, false);
 				if (Context.GetFromContext(savedAs + j) != null)
 				{
 					Report.Info($"Saved UPC{j} to context");

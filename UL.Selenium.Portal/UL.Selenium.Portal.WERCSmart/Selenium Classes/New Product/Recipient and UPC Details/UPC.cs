@@ -299,12 +299,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Confirm Excel file is downloaded with name: " + file);
 			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-			Report.Info("Downloads folder: " + downloadsFolder);
-			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
-			if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
+			Report.Info("Downloads folder: " + downloadsFolder);			
+			int counter = 0;
+			while(counter<=5)
 			{
-				Context.AddToContext(savedAs, dir.FirstOrDefault());
+				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+				if (dir.Any())
+				{
+					Context.AddToContext(savedAs, dir.FirstOrDefault());
+					Report.Success("File with name: " + dir.FirstOrDefault() + " was found successfully!");
+					return;
+				}
+				Delay.Seconds(1);
+				counter++;
 			}
+			Report.Failure("No file was found with name " + file);
+			
 		}
 
 		public bool DeleteFileFromDownloadsFolder(string fileName)
