@@ -42,7 +42,6 @@ Scenario: [68420] List of Supplier Reports
 		| VOC-related Registrations                                          |
 		| Waste Classification Summary for All Registrations                 |
 
-@tfs_design
 @TReVorId:16835
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -73,9 +72,8 @@ Scenario: [68421] Active UPCs for Products Report
 	And I switch to the tab with title: View UPCs
 	And I confirm that the number of normal UPCs equals the number saved as: TestCase68421UPCs
 	And I confirm that the number of Case UPCs equal the number saved as: TestCase68421CaseUPCs
+	And I delete the Supplier Report file saved as 68421
 
-#And I delete the Supplier Report file saved as 68421
-@TReVorId:22388
 @TReVorId:22388
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
