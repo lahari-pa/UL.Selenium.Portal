@@ -14,6 +14,7 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using System.Collections.ObjectModel;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.UPC;
 using NTTQA.Selenium.UniversalFunctions;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -552,6 +553,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheAddMultipleDialogBoxSelectAllUpcs()
 		{
 			Report.IsTrue(new MultipleUPC().ClickSelectAllUpcsButton(), "The select all Upcs button was not clicked successfully", "The select all Upcs button was clicked successfully");
+		
 		}
 
 		[StepDefinition(@"I confirm that the Add Multiple UPC window opens")]
@@ -612,17 +614,107 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I check that the UPC Number of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
-		public void ICheckUPCNumberOfEachProductFromFile(string savedAs,string file)
+		public void ICheckUPCNumberOfEachProductFromFile(string file,string savedAs)
 		{
-			Report.IsTrue(new UPC().ICheckUPCNumberOfEachProductFromFile(savedAs,file),"fail msg","Pass msg");  //Change messages 
+			Report.IsTrue(new MultipleUPC().CheckUPCNumberOfEachProductFromFile(file,savedAs),"The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");   
 			
 		}
 
-		[StepDefinition(@"I check that the size of each product matches the excel file uploaded saved as: (.*)")]
-		public void ICheckSizeOfEachProductFromFile(string savedAs)
+		[StepDefinition(@"I check that the Size of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckSizeOfEachProductFromFile(string file,string savedAs)
 		{
-		
+			Report.IsTrue(new MultipleUPC().CheckSizeOfEachProductFromFile(file, savedAs), "The Size shown in the Add Multiple Popup did not match the file", "The Size shown in the Add Multiple Popup matched the file");
+
 		}
+
+		[StepDefinition(@"I Check that all UPCs are selected")]
+		public void ICheckAllUPCsAreSelected()
+		{
+			Report.IsTrue(new MultipleUPC().CheckAllUPCsAreSelected(), "The Size shown in the Add Multiple Popup did not match the file", "The Size shown in the Add Multiple Popup matched the file");
+		}
+		[StepDefinition(@"I Check if all Retailers are: (Selected|Not Selected)")]
+		public void ICheckAllRetailersSelectedStatus(string status)
+		{
+			if(status=="Selected")
+			{
+				Report.IsTrue(new MultipleUPC().CheckAllRetailersSelectedStatus(), "All retailers were not selected", "All Retailers were selected");
+			}
+			if(status=="Not Selected")
+			{
+				Report.IsFalse(new MultipleUPC().CheckAllRetailersSelectedStatus(),"All Retailers were selected", "All retailers were not selected");
+			}
+		}
+
+		[StepDefinition(@"I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the called: (.*)")]
+		public void IConfirmAddMultipleUPCPopupAppearsAndValuesAreTheSame(string tableSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I confrim the Add Multiple UPC popup appears");
+			this.IConfirmThatTheAddMultipleUPCWindowOpens();
+			TestReport.StartStep("I confrim the UPC numbers are the same as the upload document");
+			var listDisplayedUPCs = new MultipleUPC().UPCUploads;
+			if (Context.Contains(tableSavedAs))
+			{
+				var tableContent= (Table)Context.GetFromContext(tableSavedAs);
+				int i = 0;
+				
+				bool successIsTrue = true;
+				foreach(var row in tableContent.Rows)
+				{
+					var upcNumber = row["UPC"];
+
+					var size = row["Size"];
+
+					var displayedSize = listDisplayedUPCs[i].Size;
+
+					if (Regex.IsMatch(upcNumber, "<(.*)>"))
+					{
+						var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
+						if (Context.Contains(match, true))
+						{
+							upcNumber= Context.GetFromContext(match).ToString();
+						}
+					}
+
+					var displayedUpcNumber = listDisplayedUPCs[i].UpcNumber;
+
+					if (displayedUpcNumber!=upcNumber)
+					{
+						Report.Failure("The Value for UPC number did not match. The displayed value was: "+displayedUpcNumber+". The UPC number in the document was: "+upcNumber+".");
+						successIsTrue = false;
+					}					
+
+					if (displayedSize != size)
+					{
+						Report.Failure("The Value for size did not match. The displayed value was: " + displayedSize + ". The Size in the document was: " + size + ".");
+						successIsTrue = false;
+					}				
+
+
+					i++;
+				}
+
+				Report.IsTrue(successIsTrue, "", "");
+				return;
+
+				
+
+				
+			}
+			Report.Failure("The table "+tableSavedAs+" was not found in context");		
+
+
+				
+		}
+			
+
+
+
+
+		
+
+
+
 
 
 

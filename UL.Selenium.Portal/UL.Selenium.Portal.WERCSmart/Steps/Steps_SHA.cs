@@ -2419,9 +2419,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		[Given(@"I edit the testdoc.xlsx, and save it as: (.*) and verify it contains the UPCs saved as:")]
-		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string savedAs, Table table)
+		[Given(@"I edit the testdoc.xlsx, and save its filepath as: (.*) and verify it contains the UPC data in the table saved as: (.*)")]
+		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string fileSavedAs,string tableSavedAs, Table table)
 		{
+			Context.AddToContext(tableSavedAs, table);
+
 			var upc = new UPC();
 			Report.IsTrue(upc.DeleteFileFromDownloadsFolder("testdoc.xlsx"), "", "");
 			//Create file here
@@ -2459,7 +2461,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			System.IO.Directory.Move(destination, KnownFolders.GetPath(KnownFolder.Downloads)+@"\testdoc.xlsx");
 
 
-			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", savedAs), "Failed to validate File", "Successfully validated File");
+			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", fileSavedAs), "Failed to validate File", "Successfully validated File");
+
+
 		}
 	}
 }

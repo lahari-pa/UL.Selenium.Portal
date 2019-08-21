@@ -12,6 +12,7 @@ using TechTalk.SpecFlow;
 using System.IO;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.BaseClasses;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -243,9 +244,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-		internal bool VerifySampleFile(Table table, string file, string savedAs)
+		internal bool VerifySampleFile(Table table, string fileName, string savedAs)
 		{
-			this.GetFile(file, savedAs);
+			this.GetFile(fileName, savedAs);
 			var actualFile = Context.GetFromContext(savedAs);
 			List<string> fileData = GetFileData(savedAs, actualFile);
 
@@ -272,7 +273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (tableData is null || fileData is null)
 			{
-				Report.Failure("Either the table is empty or the file: '" + file + "' is not being read.");
+				Report.Failure("Either the table is empty or the file: '" + fileName + "' is not being read.");
 				return false;
 			}
 
@@ -287,7 +288,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		private List<string> GetFileData(string savedAs, object actualFile)
+		public List<string> GetFileData(string savedAs, object actualFile)
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			if (Report.IsTrue(actualFile != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + actualFile.ToString()))
@@ -309,7 +310,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return null;
 		}
 
-		private void GetFile(string file, string savedAs)
+		public void GetFile(string file, string savedAs)
 		{
 			Report.Info("Confirm Excel file is downloaded with name: " + file);
 			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
@@ -379,33 +380,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return el.TryClick();
 		}
 
-		public bool ICheckUPCNumberOfEachProductFromFile(string savedas, string file)
-		{
-			this.GetFile(file, savedas);
-			var actualfile = Context.GetFromContext(savedas);
-			List<string> filedata = GetFileData(savedas, actualfile);
-
-			var multipleUPCModal = new MultipleUPC();
-
-			if (filedata is null)
-			{
-				Report.Failure("either the table is empty or the file: '" + file + "' is not being read.");
-				return false;
-			}
-
-			IList<IWebElement> upcList = multipleUPCModal.FindElements(By.XPath("//tbody[@data-bind]//tr"), 2);
-			int i = 13;
-			foreach( var item in upcList)
-			{
-				string UPCnumber= item.FindElement(By.XPath("//td//span[@data-bind='text: row.upc']"), 2).Text;
-				if(UPCnumber!= filedata[i].Trim())
-				{
-					Report.Info("error: popup contains: " + UPCnumber + "while file data contains: " + filedata[i] + " in row " + i);
-					i = i + 11;
-				}
-			}				
-			return true;
-		}
+				
 
 
 	}
@@ -418,6 +393,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public IWebElement ContainsType => containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
 		public IWebElement NextButton => containerElement.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
 		public IWebElement SelectAllRetailersButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
+		public IWebElement SelectXRetailersButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
 		public IWebElement FinishButton => containerElement.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
 
 		public bool ClickSelectAllUpcsButton()
@@ -436,6 +412,138 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.FinishButton.TryClick();
 		}
+
+		public bool CheckAllUPCsAreSelected()
+		{
+			var multipleUPCModal = new MultipleUPC();
+			IList<IWebElement> checkUPCBoxList = multipleUPCModal.FindElements(By.XPath("//td//input[@type='checkbox']"), 2);
+			IList<IWebElement> upcList = multipleUPCModal.FindElements(By.XPath("//td//span[@data-bind='text: row.upc']"), 2);
+			int i = 0;
+			foreach (var item in checkUPCBoxList)
+			{
+				if (!item.Selected)
+				{
+					Report.Info("The Checkbox Next to UPC Number: " + upcList[i] + " was not checked");
+					return false;
+				}
+				i++;
+			}
+			return true;
+		}
+
+		public bool CheckUPCNumberOfEachProductFromFile(string file, string savedAs)
+		{
+			new UPC().GetFile(file, savedAs);
+			var actualFile = Context.GetFromContext(savedAs);
+			List<string> fileData = new UPC().GetFileData(savedAs, actualFile);
+
+			var multipleUPCModal = new MultipleUPC();
+
+			if (fileData is null)
+			{
+				Report.Failure("either the table is empty or the file: '" + file + "' is not being read.");
+				return false;
+			}
+
+			IList<IWebElement> upcList = multipleUPCModal.FindElements(By.XPath("//td//span[@data-bind='text: row.upc']"), 2);
+			int i = 11;
+			foreach (var item in upcList)
+			{
+				string UPCnumber = item.Text;
+				if (UPCnumber != fileData[i].Trim())
+				{
+					Report.Info("error: popup contains: " + UPCnumber + "while file data contains: " + fileData[i] + " in row " + i);
+					return false;
+				}
+				i = i + 11;
+			}
+			return true;
+		}
+		public bool CheckSizeOfEachProductFromFile(string file, string savedAs)
+		{
+			new UPC().GetFile(file, savedAs);
+			var actualFile = Context.GetFromContext(savedAs);
+			List<string> fileData = new UPC().GetFileData(savedAs, actualFile);
+
+			var multipleUPCModal = new MultipleUPC();
+
+			if (fileData is null)
+			{
+				Report.Failure("either the table is empty or the file: '" + file + "' is not being read.");
+				return false;
+			}
+
+			IList<IWebElement> sizeList = multipleUPCModal.FindElements(By.XPath("//td//span[@data-bind='text: row.size']"), 2);
+			int i = 13;
+			foreach (var item in sizeList)
+			{
+				string sizeValue = item.Text;
+				if (sizeValue != fileData[i].Trim())
+				{
+					Report.Info("error: popup contains: " + sizeValue + "while file data contains: " + fileData[i] + " in row " + i);
+					return false;
+				}
+				i = i + 11;
+			}
+			return true;
+		}
+
+		public bool CheckAllRetailersSelectedStatus()
+		{
+			return this.SelectAllRetailersButton.Selected;
+		}
+
+		public List<KeyValuePair<int, string>> TableHeaders(IWebElement table)
+		{
+			List<KeyValuePair<int, string>> th = new List<KeyValuePair<int, string>>();
+			ReadOnlyCollection<IWebElement> listOfHeaders = table.FindElements(By.XPath(".//th"));
+			for (int i = 0; i < listOfHeaders.Count; i++)
+			{
+				th.Add(new KeyValuePair<int, string>(i + 1, listOfHeaders[i].Text));
+			}
+			return th;
+		}
+
+
+
+
+		public class UPCUpload
+		{
+			public bool IsChecked { get; set; }
+			public string UpcNumber { get; set; }
+			public string ContainerType { get; set; }
+			public string Size { get; set; }
+			public string Retailer { get; set; }
+
+		}
+		public List<UPCUpload> UPCUploads {
+
+			get
+			{
+				var listOfUPCUploads = new List<UPCUpload>();
+				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"));
+				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
+				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//tbody//tr"));
+				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "...").Key;
+				int upcNumberIndex = th.FirstOrDefault(x => x.Value == "UPC").Key;
+				int containerTypeIndex = th.FirstOrDefault(x => x.Value.Contains("Type")).Key;
+				int sizeIndex = th.FirstOrDefault(x => x.Value.Contains("Size (Ounce)")).Key;
+				int retailerIndex = th.FirstOrDefault(x => x.Value.Contains("Retailer")).Key;
+				foreach (IWebElement thisRow in listOfRows)
+				{
+					bool isChecked = thisRow.FindElement(By.XPath(".//td[" + isCheckedIndex.ToString() + "]//selected")).Selected;
+					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]")).Text;
+					string containerType = thisRow.FindElement(By.XPath(".//td[" + containerTypeIndex.ToString() + "]")).Text;
+					string size = thisRow.FindElement(By.XPath(".//td[" + sizeIndex.ToString() + "]")).Text;
+					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]")).Text;
+					listOfUPCUploads.Add(new UPCUpload() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer=retailer });
+				}
+				return listOfUPCUploads;
+			}
+			
+		}
+
+
 	}
 
 

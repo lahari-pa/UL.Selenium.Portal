@@ -424,7 +424,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 		| 978959000000 | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |
 		| 688267000000 | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |
 		| 854911000000 | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
-	And I edit the testdoc.xlsx, and save it as: Bulktest95988 and verify it contains the UPCs saved as:
+	And I edit the testdoc.xlsx, and save its filepath as: Bulktest95988 and verify it contains the UPC data in the table saved as: UPCTable95988
 		| UPC           | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   |
 		| <RandomUPC1>  | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |
 		| <RandomUPC2>  | 2        | 32   | 2.33               | 00BB02          | 2002            | 1112            | G0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |
@@ -449,31 +449,20 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest95988
 	Then I confirm that the Add Multiple UPC window opens
 	Then I check that the UPC Number of each product matches the excel file named: testdoc.xlsx uploaded saved as: Bulktest95988
+	Then I check that the Size of each product matches the excel file named: testdoc.xlsx uploaded saved as: Bulktest95988
+	Then In the Add Multiple dialog box I select all UPCs
+	Then In the Add Multiple dialog box I select the packaging type: <first>
+	Given In the Add Multiple dialog box I click Next
+	Then In the Add Multiple dialog box I select all Retailers
+	And I Check if all Retailers are: Selected
+	Then In the Add Multiple dialog box I select all Retailers
+	And I Check if all Retailers are: Not Selected
+	Then In the Add Multiple dialog box I select all Retailers
+	And I Check if all Retailers are: Selected
+	Then In the Add Multiple dialog box I click Finish
+	
 
-	Scenario: Testtest
-	Given I generate: 20 random UPC numbers and save them starting with: RandomUPC
-	And I edit the testdoc.xlsx, and save it as: Bulktest95988 and verify it contains the UPCs saved as:
-		| UPC           | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   |
-		| <RandomUPC1>  | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |
-		| <RandomUPC2>  | 2        | 32   | 2.33               | 00BB02          | 2002            | 1112            | G0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |
-		| <RandomUPC3>  | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |
-		| <RandomUPC4>  | 4        | 32   | 4.55               | 00DD04          | 2004            | 1114            | I0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |
-		| <RandomUPC5>  | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
-		| <RandomUPC6>  | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |
-		| <RandomUPC7>  | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |
-		| <RandomUPC8>  | 8        | 32   | 8.99               | 00HH08          | 2008            | 1118            | M0008           | 111-22-0008 | 100000008 | 123-1234,123-1237 |
-		| <RandomUPC9>  | 9        | 32   | 9.00               | 00II09          | 2009            | 1119            | N0009           | 111-22-0009 | 100000009 | 123-1234,123-1238 |
-		| <RandomUPC10> | 10       | 32   | 10.11              | 00JJ10          | 2010            | 1110            | O0010           | 111-22-0010 | 100000010 | 123-1234,123-1239 |
-		| <RandomUPC11> | 11       | 32   | 11.22              | 00KK11          | 2011            | 1111            | P0013           | 111-22-0011 | 100000011 | 123-1234,123-1240 |
-		| <RandomUPC12> | 12       | 32   | 12.33              | 00LL12          | 2012            | 1112            | Q0014           | 111-22-0012 | 100000012 | 123-1234,123-1241 |
-		| <RandomUPC13> | 13       | 32   | 13.44              | 00MM13          | 2013            | 1113            | R0015           | 111-22-0013 | 100000013 | 123-1234,123-1242 |
-		| <RandomUPC14> | 14       | 32   | 14.55              | 00NN14          | 2014            | 1114            | S0016           | 111-22-0014 | 100000014 | 123-1234,123-1243 |
-		| <RandomUPC15> | 15       | 32   | 15.66              | 00OO15          | 2015            | 1115            | T0015           | 111-22-0015 | 100000015 | 123-1234,123-1244 |
-		| <RandomUPC16> | 16       | 32   | 16.77              | 00PP16          | 2016            | 1116            | U0016           | 111-22-0016 | 100000016 | 123-1234,123-1245 |
-		| <RandomUPC17> | 17       | 32   | 17.88              | 00QQ17          | 2017            | 1117            | u0017           | 111-22-0017 | 100000017 | 123-1234,123-1246 |
-		| <RandomUPC18> | 18       | 32   | 18.99              | 00RR18          | 2018            | 1118            | v0018           | 111-22-0018 | 100000018 | 123-1234,123-1247 |
-		| <RandomUPC19> | 19       | 32   | 19.00              | 00SS19          | 2019            | 1119            | W0019           | 111-22-0019 | 100000019 | 123-1234,123-1248 |
-		| <RandomUPC20> | 20       | 32   | 20.11              | 00TT20          | 2020            | 1120            | X0020           | 111-22-0020 | 100000020 | 123-1234,123-1249 |
+	
 
 	
 
