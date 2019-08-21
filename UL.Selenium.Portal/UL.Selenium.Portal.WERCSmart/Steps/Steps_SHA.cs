@@ -303,19 +303,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						throw new Exception("Invalid column name");
 				}
 			}
-
 			Report.Info("Going to click find");
 			Delay.Seconds(1);
 			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find", false, false);
-			Delay.Seconds(10);
-			Report.Info("Waiting for spinner");
-			GeneralUtilities.StudioWaitForSpinner(10);
-			thisProductSearch.Wait_for_load(10);
-			GeneralUtilities.StudioWaitForSpinner(10);
-			Report.Info("Finished waiting for spinner");
-			Delay.Seconds(10);
+			Report.Info("Waiting for loading bar");
+			new StudioSHAManager().Wait_For_Loading_Finish();
+			Report.Info("Finished waiting for loading");
+			Delay.Seconds(1);
 			Report.Screenshot();
-
 		}
 
 		[StepDefinition(
@@ -2147,7 +2142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				return;
 			}
-			var upcNumber = displayedUpcs.FirstOrDefault()?.UPCNumber;
+			var upcNumber = displayedUpcs.FirstOrDefault(x => !x.UPCNumber.EndsWith("*"))?.UPCNumber;
 			Report.Info("Adding UPC number: " + upcNumber + " to context as: " + savedAs);
 			Context.AddToContext(savedAs, upcNumber);
 		}
@@ -2215,13 +2210,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveUpcNumberForAnyProduct(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
-			int productsToTry = new StudioSHAManager().GetProductCount();
-			Report.Info("There are " + productsToTry + " products");
-			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
-			for (int i = 0; i < productsToTry; i++)
+			TestReport.StartStep("Getting all product ids from the table");
+			//int productsToTry = new StudioSHAManager().GetProductCount();
+			var ids = new StudioSHAManager().GetAllProductIds();
+			Report.Info("There are " + ids.Count + " product ids");
+			//List<Product> products = new StudioSHAManager().GetTopXProducts(10);
+			for (int i = 0; i < ids.Count; i++)
 			{
 				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
-				string id = products[i].ID;
+				string id = ids[i];
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
 				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
 				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
@@ -2309,7 +2306,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int j = 1;
 			for (int i = 0; i < productsToTry; i++)
 			{
-				
+
 
 				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
 				string id = products[i].ID;
@@ -2350,24 +2347,97 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(@"I add the UPC numbers saved to context starting with: (.*) to the UPC bulk upload spreadsheet: (.*)")]
 		public void AddUpcNumbersToBulkUploadSpreadsheet(string savedAs, string spreadsheetSavedAs)
-		{		
-			int  numberOfProducts = (int)Context.GetFromContext("numberOfUpcnumbers");
-			
+		{
+			int numberOfProducts = (int)Context.GetFromContext("numberOfUpcnumbers");
+
 			var spreadSheetFile = (string)Context.GetFromContext(spreadsheetSavedAs);
 			var excel = new ExcelUtilities(spreadSheetFile, "Sheet1");
 
 			for (int i = 1; i <= numberOfProducts; i++)
 			{
-				if(Context.Contains(savedAs + i))
+				if (Context.Contains(savedAs + i))
 				{
 					var upcNumber = Context.GetFromContext(savedAs + i).ToString();
-					Report.IsTrue(excel.EditCell(i, 0, upcNumber),"Failed to edit UPC"+i+" to: " + upcNumber, "Successfully edited UPC to: " + upcNumber, false, false);
+					Report.IsTrue(excel.EditCell(i, 0, upcNumber), "Failed to edit UPC" + i + " to: " + upcNumber, "Successfully edited UPC to: " + upcNumber, false, false);
 				}
 				else
 				{
 					Report.Failure("Failed to find: " + savedAs + i + " in context!", false);
 				}
 			}
+		}
+
+		[StepDefinition(@"I find a UPC number for: (.*) products not belonging to Supplier: (.*) in the grid and save to context starting with: (.*)")]
+		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs) 
+		{
+			TestReport.UseSubSteps = true;
+			Context.AddToContext("numberOfUpcnumbers", numberOfProducts);
+			int productsToTry = new StudioSHAManager().GetProductCount();
+			Report.Info("There are " + productsToTry + " products");
+			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
+			int j = 1;
+			for (int i = 0; i < productsToTry; i++)
+			{
+				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = products[i].ID;
+				if (products[i].Supplier == notSupplier)
+				{
+					Report.Info("Product matches supplier: " + notSupplier + " so continuing to the next row");
+					continue;
+				}
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs+j, false);
+				if (Context.GetFromContext(savedAs + j) != null)
+				{
+					Report.Info($"Saved UPC{j} to context");
+					j++;
+					Report.Screenshot();
+					Report.Info("Closing window");
+					SeleniumBrowser.WebBrowser.Close();
+					Report.Info("Returning to the main window");
+					try
+					{
+						var handle = Context.GetFromContext("MainWindowHandle").ToString();
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+						// required to switch to the frame and refresh container
+						new StudioSHAManager().Wait_for_load();
+					}
+					catch (Exception ex)
+					{
+						Report.Failure("Failed to navigate back to main window using MainWindowHandle context");
+						Report.Failure("Exception: " + ex.Message);
+						throw;
+					}
+				}
+				if (j > numberOfProducts)
+				{
+					break;
+				}
+			}
+		}
+
+		[StepDefinition(@"I navigate to SHA Manager and save a UPC to context as: (.*) for trevor account: (.*)")]
+		public void NavigateToShaSaveUpcToContext(string upcSavedAs, string accountSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I log in to Studio and open SHA Manager");
+			new Steps_Shared().GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			TestReport.StartStep("I click Search");
+			this.IClickTheFollowingOptionInTheBottomMenu("Search");
+			TestUser user = TestUsers.GetUserSavedAs(accountSavedAs);
+			var username = "";
+			if (user != null)
+			{
+				username = user.Username;
+			}
+			var table = new Table("Search Term", "Search Value");
+			table.AddRow("Status", "Completed");
+			table.AddRow("User", username);
+			TestReport.StartStep("I run a search for status Completed and user: " + username);
+			this.GivenInSHAManagerPageIRunSearch(table);
+			TestReport.StartStep("I save the upc for any returned product as: " + upcSavedAs);
+			this.SaveUpcNumberForAnyProduct(upcSavedAs);
 		}
 	}
 }
