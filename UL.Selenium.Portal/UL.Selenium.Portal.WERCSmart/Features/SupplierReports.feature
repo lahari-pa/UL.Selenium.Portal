@@ -62,8 +62,19 @@ Scenario: [68421] Active UPCs for Products Report
 		| Individual UPC  |
 		| Case UPC        |
 	Given I click on close in the Report Download dialog
-	And I delete the Supplier Report file saved as 68421
+	Then I save the first product in the excel spreadsheet saved as: 68421 as TestCase68421
+	Then I save the value with the header Individual UPC on the first product in the excel spreadsheet saved as: 68421 as TestCase68421UPCs
+	Then I save the value with the header Case UPC on the first product in the excel spreadsheet saved as: 68421 as TestCase68421CaseUPCs
+	Given I navigate to the home page
+	Given I search for the product saved as: TestCase68421
+	And I confirm that the product returned has the same name as the product saved as: TestCase68421
+	Given I click Row Actions for the first product returned
+	And I click on the Row Action: View UPCs
+	And I switch to the tab with title: View UPCs
+	And I confirm that the number of normal UPCs equals the number saved as: TestCase68421UPCs
+	And I confirm that the number of Case UPCs equal the number saved as: TestCase68421CaseUPCs
 
+#And I delete the Supplier Report file saved as 68421
 @TReVorId:22388
 @TReVorId:22388
 Scenario: [68422] Battery-containing products report
@@ -270,11 +281,11 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 		| Current Subscription Level                          |
 		| Current Data Tier Consent for the Selected Retailer |
 	Then I save the first product in the excel spreadsheet saved as: 75391 as TestCase75391
-	Then I save the number of UPCs on the first product in the excel spreadsheet saved as: 75391 as TestCase75391UPCs
-	Then I save the Transparency Indicator Ratio of the first product in the excel spreadsheet saved as: 75391 as TestCase75391TransRatio
-	Then I save the Last Submission Date of the first product in the excel spreadsheet saved as: 75391 as TestCase75391Date
-	Then I save the Current Subscription Level of the first product in the excel spreadsheet saved as: 75391 as TestCase75391Subscription
-	Then I save the Current Data Tier Consent for the Selected Retailer of the first product in the excel spreadsheet saved as: 75391 as TestCase75391DataTier
+	Then I save the value with the header Quantity of Active UPCs on the first product in the excel spreadsheet saved as: 75391 as TestCase75391UPCs
+	Then I save the value with the header Transparency Indicator Ratio on the first product in the excel spreadsheet saved as: 75391 as TestCase75391TransRatio
+	Then I save the value with the header Last Submission Date on the first product in the excel spreadsheet saved as: 75391 as TestCase75391Date
+	Then I save the value with the header Current Subscription Level on the first product in the excel spreadsheet saved as: 75391 as TestCase75391Subscription
+	Then I save the value with the header Current Data Tier Consent for the Selected Retailer on the first product in the excel spreadsheet saved as: 75391 as TestCase75391DataTier
 	Given I navigate to the home page
 	Given I search for the product saved as: TestCase75391
 	And I confirm that the product returned has the same name as the product saved as: TestCase75391

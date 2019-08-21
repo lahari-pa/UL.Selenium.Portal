@@ -174,16 +174,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 
+			int i = 0;
+			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
+			while (!dir.Any() && i < 30)
+			{
+				dir = Directory.GetFiles(downloadsFolder, file, SearchOption.AllDirectories);
+				Delay.Seconds(Delay.SpeedFactor * 1);
+				i++;
+			}
 
-			productSetup.CreateProductUsingTestCase75335("TestCase75335", "UPC75335", "Chalk");
+			if (dir.Any())
+			{
+				Report.Info("Found html file. Creating new product.");
+				productSetup.CreateProductUsingTestCase75335("TestCase75335", "UPC75335", "Chalk");
 
-			globalSteps.NavigateToLandingPage();
-			globalSteps.LoginToWERCSmartAdmin("WERCs Product Account");
-			homepage.ClickItemInQuickLinks("Supplier Reports");
-			this.InTheSupplierReportsScreenThePageTitleShouldBe("Available Reports");
-			this.GivenUnderTheSupplierReportsMenuIChoose("UPCs (Active) for all Registrations");
-			this.ThenInTheSupplierReportsScreenTheCurrentSubPageShouldBe("UPCs (Active) for all Registrations");
-			this.GivenInTheSupplierReportsScreenIClickOnTheDownloadButton();
+				globalSteps.NavigateToLandingPage();
+				globalSteps.LoginToWERCSmartAdmin("WERCs Product Account");
+				homepage.ClickItemInQuickLinks("Supplier Reports");
+				this.InTheSupplierReportsScreenThePageTitleShouldBe("Available Reports");
+				this.GivenUnderTheSupplierReportsMenuIChoose(report);
+				this.ThenInTheSupplierReportsScreenTheCurrentSubPageShouldBe(report);
+				this.GivenInTheSupplierReportsScreenIClickOnTheDownloadButton();
+			}
+			else
+			{
+				Report.Info("Failed to find html file. Continuing with xlsx file.");
+			}
+
 		}
 	}
 }
