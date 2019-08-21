@@ -905,8 +905,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool GetGridNavDots()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
-			return el != null;
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+				if (el == null)
+				{
+					Report.Info("Option was not found");
+					return false;
+				}
+				return el.Displayed;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
 		}
 	}
 
