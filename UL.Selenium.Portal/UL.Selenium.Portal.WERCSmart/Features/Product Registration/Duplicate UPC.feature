@@ -409,6 +409,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+	Then I save the product information as: TestCase95988
 	And I click continue
 	And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -447,19 +448,23 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 		| <RandomUPC19> | 19       | 32   | 19.00              | 00SS19          | 2019            | 1119            | W0019           | 111-22-0019 | 100000019 | 123-1234,123-1248 |
 		| <RandomUPC20> | 20       | 32   | 20.11              | 00TT20          | 2020            | 1120            | X0020           | 111-22-0020 | 100000020 | 123-1234,123-1249 |
 	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest95988
-	Then I confirm that the Add Multiple UPC window opens
-	Then I check that the UPC Number of each product matches the excel file named: testdoc.xlsx uploaded saved as: Bulktest95988
-	Then I check that the Size of each product matches the excel file named: testdoc.xlsx uploaded saved as: Bulktest95988
+	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable95988	
 	Then In the Add Multiple dialog box I select all UPCs
+	Then I Confirm All UPCs are: Selected
 	Then In the Add Multiple dialog box I select the packaging type: <first>
 	Given In the Add Multiple dialog box I click Next
 	Then In the Add Multiple dialog box I select all Retailers
-	And I Check if all Retailers are: Selected
+	Then I Check if all Retailers are: Selected
 	Then In the Add Multiple dialog box I select all Retailers
-	And I Check if all Retailers are: Not Selected
+	Then I Check if all Retailers are: Not Selected
 	Then In the Add Multiple dialog box I select all Retailers
-	And I Check if all Retailers are: Selected
+	Then I Check if all Retailers are: Selected
 	Then In the Add Multiple dialog box I click Finish
+	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable95988
+	# Check for scoll element
+	Then I click Continue and should not see an error message
+	And I navigate to the home page
+	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95988
 	
 
 	
@@ -467,7 +472,9 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	
 
 
-	
+
+
+
 
 
 	

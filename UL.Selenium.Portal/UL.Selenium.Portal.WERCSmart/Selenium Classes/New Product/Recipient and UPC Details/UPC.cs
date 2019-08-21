@@ -13,6 +13,7 @@ using System.IO;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.BaseClasses;
 using System.Collections.ObjectModel;
+using Castle.Components.DictionaryAdapter;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -380,7 +381,43 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return el.TryClick();
 		}
 
-				
+		public class UPCNewProduct
+		{
+			public bool IsChecked { get; set; }
+			public string UpcNumber { get; set; }
+			public string ContainerType { get; set; }
+			public string Size { get; set; }
+			public string Retailer { get; set; }
+
+		}
+
+		public List<UPCNewProduct> UPCsNewProduct {
+
+			get
+			{
+				var listOfUPCNewProducts = new List<UPCNewProduct>();
+				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"));
+				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
+				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tbody//tr"));
+				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "").Key;				
+				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC Number")).Key;
+				int containerTypeIndex = th.FirstOrDefault(x => x.Value.Contains("Container Type")).Key;
+				int sizeIndex = th.FirstOrDefault(x => x.Value.Contains("Size (Weight Ounces)")).Key;
+				int retailerIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
+				foreach (IWebElement thisRow in listOfRows)
+				{
+					bool isChecked = thisRow.FindElement(By.XPath(".//td[" + isCheckedIndex.ToString() + "]//input")).Selected;
+					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]/span[contains(@data-bind,'upc')]")).Text;
+					string containerType = thisRow.FindElement(By.XPath(".//td[" + containerTypeIndex.ToString() + "]/span[contains(@data-bind,'type')]")).Text;
+					string size = thisRow.FindElement(By.XPath(".//td[" + sizeIndex.ToString() + "]/span[contains(@data-bind,'size')]")).Text;
+					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]")).Text;
+					listOfUPCNewProducts.Add(new UPCNewProduct() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer = retailer });
+				}
+				return listOfUPCNewProducts;
+			}
+
+		}
+
 
 
 	}
@@ -495,7 +532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<KeyValuePair<int, string>> TableHeaders(IWebElement table)
 		{
-			List<KeyValuePair<int, string>> th = new List<KeyValuePair<int, string>>();
+			List<KeyValuePair<int, string>> th = new EditableList<KeyValuePair<int, string>>(); //new List 
 			ReadOnlyCollection<IWebElement> listOfHeaders = table.FindElements(By.XPath(".//th"));
 			for (int i = 0; i < listOfHeaders.Count; i++)
 			{
@@ -521,22 +558,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			get
 			{
 				var listOfUPCUploads = new List<UPCUpload>();
-				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"));
+				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table[@style='overflow:auto;']"));
 				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
-				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//tbody//tr"));
-				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "...").Key;
+				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//table[@style='overflow:auto;']//tbody//tr"));
+				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "").Key;
 				int upcNumberIndex = th.FirstOrDefault(x => x.Value == "UPC").Key;
 				int containerTypeIndex = th.FirstOrDefault(x => x.Value.Contains("Type")).Key;
 				int sizeIndex = th.FirstOrDefault(x => x.Value.Contains("Size (Ounce)")).Key;
 				int retailerIndex = th.FirstOrDefault(x => x.Value.Contains("Retailer")).Key;
 				foreach (IWebElement thisRow in listOfRows)
 				{
-					bool isChecked = thisRow.FindElement(By.XPath(".//td[" + isCheckedIndex.ToString() + "]//selected")).Selected;
+					bool isChecked = thisRow.FindElement(By.XPath(".//td[" + isCheckedIndex.ToString() + "]//input")).Selected;
 					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]")).Text;
 					string containerType = thisRow.FindElement(By.XPath(".//td[" + containerTypeIndex.ToString() + "]")).Text;
 					string size = thisRow.FindElement(By.XPath(".//td[" + sizeIndex.ToString() + "]")).Text;
 					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]")).Text;
-					listOfUPCUploads.Add(new UPCUpload() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer=retailer });
+					listOfUPCUploads.Add(new UPCUpload() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer=retailer }); 
 				}
 				return listOfUPCUploads;
 			}

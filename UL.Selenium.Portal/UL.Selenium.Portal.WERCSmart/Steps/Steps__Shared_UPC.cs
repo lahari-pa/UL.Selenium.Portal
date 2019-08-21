@@ -562,6 +562,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new MultipleUPC().WaitForContainerToBeVisible(30), "The Add Multiple UPC windows did appear", " The Add Multiple UPC window did appear");
 		}
 
+		[StepDefinition(@"I confirm that the Add Multiple UPC window closes")]
+		public void IConfirmThatTheAddMultipleUPCWindowCloses()
+		{
+			Report.IsTrue(new MultipleUPC().WaitForContainerToBeInvisible(30), "The Add Multiple UPC windows did not close", " The Add Multiple UPC window was closed");
+		}
+
 
 
 
@@ -645,13 +651,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the called: (.*)")]
+		[StepDefinition(@"I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: (.*)")]
 		public void IConfirmAddMultipleUPCPopupAppearsAndValuesAreTheSame(string tableSavedAs)
 		{
 			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I confrim the Add Multiple UPC popup appears");
+			TestReport.StartStep("I confirm the Add Multiple UPC popup appears");
 			this.IConfirmThatTheAddMultipleUPCWindowOpens();
-			TestReport.StartStep("I confrim the UPC numbers are the same as the upload document");
+			TestReport.StartStep("I confirm the UPC numbers and sizes are the same as the upload document");
 			var listDisplayedUPCs = new MultipleUPC().UPCUploads;
 			if (Context.Contains(tableSavedAs))
 			{
@@ -694,24 +700,121 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					i++;
 				}
 
-				Report.IsTrue(successIsTrue, "", "");
+				Report.IsTrue(successIsTrue, "Not all Values matched the UPC upload document", "All Values matched the UPC upload document");
 				return;
-
-				
-
-				
+							
+								
 			}
+
 			Report.Failure("The table "+tableSavedAs+" was not found in context");		
 
 
 				
 		}
-			
+
+		[StepDefinition("I Confirm All UPCs are: (Selected|Not Selected)")]
+		public void IConfirmAllUpcAreSelected(string selectedStatus)
+		{
+			bool setStatus;
+			switch (selectedStatus)
+			{
+				case "Selected":
+					setStatus = true;
+					break;
+
+				case "Not Selected":
+					setStatus = false;
+					break;
+				default:
+					Report.Error("selectedStatus must be either: 'Selected' or 'Not Selected'");
+					return;
+			}
+
+
+			var listDisplayedUPCs = new MultipleUPC().UPCUploads;
+			bool successIsTrue = true;
+
+			for (int i=0; i<=listDisplayedUPCs.Count-1;i++)
+			{
+				var displayedChecked = listDisplayedUPCs[i].IsChecked;
+				if(displayedChecked!=setStatus)
+				{
+					Report.Failure("The UPC with number: " + listDisplayedUPCs[i].UpcNumber + " was not shown as " + selectedStatus + ".");
+					successIsTrue = false;
+				}
+			}
+
+			Report.IsTrue(successIsTrue, "Not all UPCS were shown as"+selectedStatus+".", "All UPCS were shown as" + selectedStatus + ".");
+			return;
+
+		}
+
+		[StepDefinition(@"I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: (.*)")]
+		public void IConfirmAddMultipleUPCPopupDisappearssAndValuesAreTheSame(string tableSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I confirm the Add Multiple UPC popup dissappears");
+			this.IConfirmThatTheAddMultipleUPCWindowCloses();
+			TestReport.StartStep("I confirm the UPC numbers and sizes are the same as the upload document");
+			var listDisplayedUPCs = new UPC().UPCsNewProduct;
+			if (Context.Contains(tableSavedAs))
+			{
+				var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+				int i = 0;
+
+				bool successIsTrue = true;
+				foreach (var row in tableContent.Rows)
+				{
+					var upcNumber = row["UPC"];
+
+					var size = row["Size"];
+
+					var displayedSize = listDisplayedUPCs[i].Size;
+
+					if (Regex.IsMatch(upcNumber, "<(.*)>"))
+					{
+						var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
+						if (Context.Contains(match, true))
+						{
+							upcNumber = Context.GetFromContext(match).ToString();
+						}
+					}
+
+					var displayedUpcNumber = listDisplayedUPCs[i].UpcNumber;
+
+					if (displayedUpcNumber != upcNumber)
+					{
+						Report.Failure("The Value for UPC number did not match. The displayed value was: " + displayedUpcNumber + ". The UPC number in the document was: " + upcNumber + ".");
+						successIsTrue = false;
+					}
+
+					if (displayedSize != size)
+					{
+						Report.Failure("The Value for size did not match. The displayed value was: " + displayedSize + ". The Size in the document was: " + size + ".");
+						successIsTrue = false;
+					}
+
+
+					i++;
+				}
+
+				Report.IsTrue(successIsTrue, "Not all Values matched the UPC upload document", "All Values matched the UPC upload document");
+				return;
+
+
+			}
+
+			Report.Failure("The table " + tableSavedAs + " was not found in context");
+
+
+
+		}
 
 
 
 
-		
+
+
 
 
 
