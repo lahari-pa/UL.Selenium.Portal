@@ -883,6 +883,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			this.containerElement.Click();
 		}
+
+		public bool SelectItemsOnPage(string option)
+		{
+			try
+			{
+				IList<IWebElement> ItemsOnPageSelect = this.containerElement.FindElements(By.XPath(".//div[@class='panel-footer clearfix']//select//option"), 2);
+				IWebElement match = ItemsOnPageSelect.FirstOrDefault(x => x.GetValue() == option);
+				if (match == null)
+				{
+					Report.Info("Option was not found");
+					return false;
+				}
+				return match.TryClick();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool GetGridNavDots()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+			return el != null;
+		}
 	}
 
 	public class ProductGridItem : ProductsGrid

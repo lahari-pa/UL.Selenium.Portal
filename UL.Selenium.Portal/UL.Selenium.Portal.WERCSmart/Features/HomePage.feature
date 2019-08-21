@@ -335,7 +335,7 @@ Scenario: [67299] Terms of Use - footer
 Scenario: [65886] My Products - Pagination
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given If my products count is less than 5 then add products in my products grid
+	Given If my products grid does not contain enough products then I add them until it displays '...' grid navigation option
 	Then The current page in the products grid is: 1
 	Given I click next in the products grid
 	Then The current page in the products grid is: 2
@@ -343,8 +343,8 @@ Scenario: [65886] My Products - Pagination
 	Then The current page in the products grid is: 1
 	Given I click ... in the products grid
 	Then I should see the products grid navigation input with up and down arrows
-	Given I type the number 15 into the products grid page navigation box and press the enter key
-	Then The current page in the products grid is: 15
+	Given I type the number 8 into the products grid page navigation box and press the enter key
+	Then The current page in the products grid is: 8
 	Given I click ... in the products grid
 	Given I enter the up arrow into the products grid page navigation input then the correct page is shown
 	Given I click ... in the products grid
