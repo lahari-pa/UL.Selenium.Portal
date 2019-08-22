@@ -446,6 +446,8 @@
     <None Include="Features\Product Set Up\ProductSetUp_Kit.feature" />
     <None Include="Features\ProductCharacteristics.feature">
     </None>
+    <None Include="Features\Product Set Up\ProductSetUp.feature">
+    </None>
     <None Include="Features\RegulatoryInformation1.feature">
     </None>
     <None Include="Features\RegulatoryInformation3.feature">
