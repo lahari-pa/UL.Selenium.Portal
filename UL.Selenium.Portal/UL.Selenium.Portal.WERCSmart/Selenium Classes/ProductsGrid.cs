@@ -48,7 +48,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmNameMatches(string name)
 		{
-			return this.GetNameInFirstGridRow().Trim() == name.Trim();
+			string match = this.GetNameInFirstGridRow().Trim();
+			// if product label, strip 'PL' from the name.
+			if (match.Contains("PL"))
+			{
+				match = match.Trim(new char[] { 'P', 'L', ' ' });
+			}
+			return match == name.Trim();
+		}
+
+		public bool ConfirmIsPrivateLabel(string pl)
+		{
+			string match = this.GetNameInFirstGridRow().Trim();
+			if (pl.ToLower().Trim() == "y")
+			{
+				if (match.Contains("PL"))
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				if (match.Contains("PL"))
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
 		}
 
 		public bool ConfirmProductHasRetailer(string retailer)

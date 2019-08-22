@@ -42,7 +42,6 @@ Scenario: [68420] List of Supplier Reports
 		| VOC-related Registrations                                          |
 		| Waste Classification Summary for All Registrations                 |
 
-@tfs_design
 @TReVorId:16835
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -51,7 +50,6 @@ Scenario: [68421] Active UPCs for Products Report
 	Given Under the Supplier Reports menu I choose: UPCs (Active) for all Registrations
 	Then In the Supplier Reports screen the current sub-page should be: UPCs (Active) for all Registrations
 	Given In the Supplier Reports screen I click on the Download button
-	Given If an html file is downloaded called UPCs (Active) for all Registrations.html I create a new product with UPCs and redownload the UPCs (Active) for all Registrations report
 	Given I confirm that an excel file is produced called UPCs (Active) for all Registrations.xlsx and save as 68421
 	Then I confirm that the excel file saved as: 68421 contains the following columns:
 		| Column          |
@@ -62,9 +60,20 @@ Scenario: [68421] Active UPCs for Products Report
 		| Individual UPC  |
 		| Case UPC        |
 	Given I click on close in the Report Download dialog
+	#data validation
+	Then I save the first product in the excel spreadsheet saved as: 68421 as TestCase68421
+	Then I save the value with the header Individual UPC on the first product in the excel spreadsheet saved as: 68421 as TestCase68421UPCs
+	Then I save the value with the header Case UPC on the first product in the excel spreadsheet saved as: 68421 as TestCase68421CaseUPCs
+	Given I navigate to the home page
+	Given I search for the product saved as: TestCase68421
+	And I confirm that the product returned has the same name as the product saved as: TestCase68421
+	Given I click Row Actions for the first product returned
+	And I click on the Row Action: View UPCs
+	And I switch to the tab with title: View UPCs
+	And I confirm that the number of normal UPCs equals the number saved as: TestCase68421UPCs
+	And I confirm that the number of Case UPCs equal the number saved as: TestCase68421CaseUPCs
 	And I delete the Supplier Report file saved as 68421
 
-@TReVorId:22388
 @TReVorId:22388
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -81,6 +90,13 @@ Scenario: [68422] Battery-containing products report
 		| Product Name  |
 		| Battery Type  |
 		| Battery Mfg   |
+	#data validation
+	Then I save the value with the header WPSID on the first product in the excel spreadsheet saved as: 68422 as TestCase68422Id
+	Then I save the value with the header Product Name on the first product in the excel spreadsheet saved as: 68422 as TestCase68422Name
+	Given I save the product with name: TestCase68422Name and id: TestCase68422Id as: TestCase68422
+	Given I navigate to the home page
+	Given I search for the product saved as: TestCase68422
+	And I confirm that the product returned has the same name as the product saved as: TestCase68422
 	And I delete the Supplier Report file saved as 68422
 
 @TReVorId:22389
@@ -101,6 +117,13 @@ Scenario: [68423] Formulated vs Articles Report
 		| Enhanced Articles   |
 		| 3rd Party Formula   |
 		| ULGHS Document Only |
+	#data validation
+	Then I save the value with the header WPSID on the first product in the excel spreadsheet saved as: 68423 as TestCase68423Id
+	Then I save the value with the header Product Name on the first product in the excel spreadsheet saved as: 68423 as TestCase68423Name
+	Given I save the product with name: TestCase68423Name and id: TestCase68423Id as: TestCase68423
+	Given I navigate to the home page
+	Given I search for the product saved as: TestCase68423
+	And I confirm that the product returned has the same name as the product saved as: TestCase68423
 	And I delete the Supplier Report file saved as 68423
 
 @TReVorId:22396
@@ -132,7 +155,31 @@ Scenario: [73082] UPC Report for All Products with Retailer
 		| Goods Not For Resale      |
 		| Registration Type         |
 		| Subscription Type         |
+	#data validation
 	Then I confirm that the excel file saved as: 73082 in column: Container Type there are no numbers
+	Then I save the value with the header WERCSmart ID on the first product in the excel spreadsheet saved as: 73082 as TestCase73082Id
+	Then I save the value with the header Product Name on the first product in the excel spreadsheet saved as: 73082 as TestCase73082Name
+	Given I save the product with name: TestCase73082Name and id: TestCase73082Id as: TestCase73082
+	Then I save the value with the header UPC on the first product in the excel spreadsheet saved as: 73082 as TestCase73082UPC
+	Then I save the value with the header Retailer on the first product in the excel spreadsheet saved as: 73082 as TestCase73082Retailer
+	Then I save the value with the header Status on the first product in the excel spreadsheet saved as: 73082 as TestCase73082Status
+	Then I save the value with the header Ounces on the first product in the excel spreadsheet saved as: 73082 as TestCase73082Ounces
+	Then I save the value with the header Unique Product Identifier on the first product in the excel spreadsheet saved as: 73082 as TestCase73082Unique
+	Then I save the value with the header ContainerType on the first product in the excel spreadsheet saved as: 73082 as TestCase73082Container
+	Then I save the value with the header Private Label on the first product in the excel spreadsheet saved as: 73082 as TestCase73082PrivateLabel
+	Then I save the value with the header Registration Type on the first product in the excel spreadsheet saved as: 73082 as TestCase73082RegistrationType
+	Then I save the value with the header Subscription Type on the first product in the excel spreadsheet saved as: 73082 as TestCase73082SubscriptionType
+	Given I navigate to the home page
+	Given I search for the product saved as: TestCase73082
+	And I confirm that the product returned has the same name as the product saved as: TestCase73082
+	Then If the product is Private Label, I ensure that product saved as: TestCase73082 shows as Private Label: TestCase73082PrivateLabel
+	Given I click Row Actions for the first product returned
+	And I click on the Row Action: View UPCs
+	And I switch to the tab with title: View UPCs
+	And I confirm that UPC: TestCase73082UPC shows in the list of UPCs
+	And I close the window that opened
+	And I confirm that the retailer listed for product saved as: TestCase73082 appears as: TestCase73082Retailer
+	# jwhitesell resume here
 	And I delete the Supplier Report file saved as 73082
 
 @TReVorId:22397
@@ -270,11 +317,11 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 		| Current Subscription Level                          |
 		| Current Data Tier Consent for the Selected Retailer |
 	Then I save the first product in the excel spreadsheet saved as: 75391 as TestCase75391
-	Then I save the number of UPCs on the first product in the excel spreadsheet saved as: 75391 as TestCase75391UPCs
-	Then I save the Transparency Indicator Ratio of the first product in the excel spreadsheet saved as: 75391 as TestCase75391TransRatio
-	Then I save the Last Submission Date of the first product in the excel spreadsheet saved as: 75391 as TestCase75391Date
-	Then I save the Current Subscription Level of the first product in the excel spreadsheet saved as: 75391 as TestCase75391Subscription
-	Then I save the Current Data Tier Consent for the Selected Retailer of the first product in the excel spreadsheet saved as: 75391 as TestCase75391DataTier
+	Then I save the value with the header Quantity of Active UPCs on the first product in the excel spreadsheet saved as: 75391 as TestCase75391UPCs
+	Then I save the value with the header Transparency Indicator Ratio on the first product in the excel spreadsheet saved as: 75391 as TestCase75391TransRatio
+	Then I save the value with the header Last Submission Date on the first product in the excel spreadsheet saved as: 75391 as TestCase75391Date
+	Then I save the value with the header Current Subscription Level on the first product in the excel spreadsheet saved as: 75391 as TestCase75391Subscription
+	Then I save the value with the header Current Data Tier Consent for the Selected Retailer on the first product in the excel spreadsheet saved as: 75391 as TestCase75391DataTier
 	Given I navigate to the home page
 	Given I search for the product saved as: TestCase75391
 	And I confirm that the product returned has the same name as the product saved as: TestCase75391
