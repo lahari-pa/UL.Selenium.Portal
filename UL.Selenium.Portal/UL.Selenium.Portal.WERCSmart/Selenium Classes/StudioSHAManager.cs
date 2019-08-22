@@ -540,29 +540,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			for (int j = 0; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
 			{
 				var rowValues = new List<string>();
-				//Report.Info("Looking at row: " + j.ToString());
-
-                // js removed - trying 10 times with a 1 second delay to get row element is unnecessary because ListOfProductRows has already been assigned above..
-				//bool gotRow = false;
-				//int counter = 0;
-				//while (!gotRow && counter < 10)
-				//{
-				//	try
-				//	{
-				//		ListOfProductRows = SeleniumBrowser.WebBrowser
-				//			.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
-				//		rowValues = ListOfProductRows[j].FindElements(By.XPath(".//td"), 2).Select(x => x.GetValue())
-				//			.ToList();
-				//		gotRow = true;
-				//	}
-				//	catch (Exception)
-				//	{
-				//		Report.Info("Try " + counter + "Failed to get row values for row " + j);
-				//	}
-
-				//	Delay.Seconds(1);
-				//	counter++;
-				//}
 				try
 				{
 					var rowColumns = ListOfProductRows[j]?.FindElements(By.XPath(".//td"), 2)?.ToList();
@@ -708,6 +685,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return ListOfProducts;
+		}
+
+		public List<Product> V2_GetTopXProducts(int topX)
+		{
+			try
+			{
+				List<Product> returnProducts = new List<Product>();
+				List<IWebElement> productRowEls = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3)?.ToList();
+				if (productRowEls == null)
+				{
+					return null;
+				}
+				string[] headers = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"), 1)
+					?.Select(x => x.GetValue().Trim()).ToArray();
+				if (headers == null)
+				{
+					return null;
+				}
+				int idIndex = Array.IndexOf(headers, "Product");
+				int nameIndex = Array.IndexOf(headers, "Name");
+
+				if (topX > productRowEls.Count)
+				{
+					topX = productRowEls.Count;
+				}
+				for (int i = 0; i < topX; i++)
+				{
+					var rowEl = productRowEls[i];
+					var rowProduct = new Product();
+					rowProduct.ID = rowEl.FindElement(By.XPath("./td"),1)?.GetValue();
+
+				}
+				return returnProducts;
+			}
+			catch (Exception)
+			{
+				return null;
+			}
 		}
 
 		public List<string> GetAllProductIds()
@@ -1964,6 +1979,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string RecertificationReason { get; set; }
 
 		public string Distributor { get; set; }
+
+		public Product GetProductFromRow(IWebElement row, string[] headings)
+		{
+			// get indices from headings
+			this.ID = "";
+			return this;
+		}
 
 	}
 

@@ -1461,5 +1461,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             Report.Failure("Failed to get an existing UPC!");
 		}
 
+		[StepDefinition("I test the element is within window method")]
+		public void TestScrollMethod()
+		{
+			var element= new Homepage().TopGridHeader("Product Information");
+			Report.IsTrue(GeneralUtilities.ElementWithinBrowserWindow(element), "Element wasn't within the window", "Element was within the window");
+			GeneralUtilities.ScrollToBottomOfPage();
+			Report.IsTrue(!GeneralUtilities.ElementWithinBrowserWindow(element), "Element was within the window", "Element was not within the window");
+		}
+
 	}
 }
