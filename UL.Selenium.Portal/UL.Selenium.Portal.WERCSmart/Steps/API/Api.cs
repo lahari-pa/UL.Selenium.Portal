@@ -65,6 +65,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 
 			return table;
 		}
+
+		internal string[] ItemSyncRequestBody(List<string> list)
+		{
+			var result = new List<string> {
+				"<upclist>"
+			};
+			foreach (string upc in list)
+			{
+				string str = "<upc gtin=\"" + upc.PadLeft(14, '0') + "\" status=\"\" >";
+				result.Add(str);
+			}
+			result.Add("</upclist>");
+
+			return result.ToArray();
+		}
 	}
 }
 

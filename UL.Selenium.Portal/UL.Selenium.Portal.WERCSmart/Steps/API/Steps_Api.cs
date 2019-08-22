@@ -40,6 +40,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			Report.IsTrue(!string.IsNullOrEmpty(token), "Failed to find a token for user: " + userName, "Successfully acquired a token for user: " + userName, false, false);
 		}
 
+		[StepDefinition(@"I save the Item Sync report as: (.*) using:")]
+		public void ThenISaveTheItemSyncReportForUPCAsItemSyncSavedAs(string savedAs, Table table)
+		{
+			var guids = new List<string>();
+			var upcs = new List<string>();
+			var combined = new List<List<string>>();
+			foreach (TableRow row in table.Rows)
+			{
+				guids.Add(row["Retailer GUID"]);
+			}
+
+			guids = (List<string>)guids.Distinct();
+
+			foreach (string guid in guids)
+			{
+				foreach (TableRow row in table.Rows)
+				{
+					if (row["Retailer GUID"] == guid)
+					{
+						upcs.Add(row["upc"]);
+					}
+					combined.Add(upcs);
+				}
+			}
+
+			string token = (string)Context.GetFromContext("ApiSavedToken");
+
+			for (int i = 0; i < guids.Count; i++)
+			{
+				string requestUrl = TestVariables.GetVariableSavedAs("BaseApiUrl") + @"/ProcessRetailerUPCList?client=" + guids[i] + "&Token=" + token;
+				string[] requestBody = new Api().ItemSyncRequestBody(combined[i]);
+
+				string xml = "";
+
+				using (var wc = new WebClient())
+				{
+					wc.Headers.Add("Content-Type", "text/xml");
+					wc.Headers.Add("Token", token);
+					xml = wc.DownloadString(requestUrl);
+					Context.AddToContext(savedAs, xml, true);
+				}
+
+				Report.IsTrue(!string.IsNullOrEmpty(token), "Failed to find a xml for GUID: " + guids[i], "Successfully acquired a report for GUID: " + guids[i], false, false);
+
+				using (var sw = new StreamWriter(Path.Combine(ReportingParameters.ReportFolder, "Test.xml")))
+				{
+					sw.Write(xml);
+					sw.Flush();
+					sw.Close();
+				}
+
+				Report.XMLFile(Path.Combine(ReportingParameters.ReportFolder, "Test " + i + ".xml"));
+			}
+		}
+
+
 		[StepDefinition(@"I save the Waste Hauler report for UPC: (.*) as: (.*)")]
 		public void GetWasteHaulerReport(string upc, string reportSavedAs)
 		{
@@ -67,11 +123,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			Report.XMLFile(Path.Combine(ReportingParameters.ReportFolder, "Test.xml"));
 		}
 
-		[Given(@"I verify the XML data saved as: {.*} matches the corresponding Excel file saved as: SupplierReport(.*)")]
-		public void GivenIVerifyTheXMLDataSavedAsReportSavedAsMatchesTheCorrespondingExcelFileSavedAsSupplierReport(string xmlSavedAs, string excelSavedAs)
+		[Given(@"I verify the XML data saved as: {.*} matches the corresponding Excel file saved as: (.*)")]
+		public void GivenIVerifyTheXMLDataSavedAsReportSavedAsMatchesTheCorrespondingExcelFileSavedAs(string xmlSavedAs, string excelSavedAs)
 		{
 			var api = new Api();
-			Report.IsTrue(api.Compare(xmlSavedAs, excelSavedAs),"File comparison failed.","File comparison succeeded.");
+			Report.IsTrue(api.Compare(xmlSavedAs, excelSavedAs), "File comparison failed.", "File comparison succeeded.");
 		}
 
 	}

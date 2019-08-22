@@ -111,11 +111,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				upcNumberField.EnterText(info.UpcNumber);
 				IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-				if(info.ContainerType=="<first>")
+				if (info.ContainerType == "<first>")
 				{
 					var firstOption = containsType.FindElement(By.XPath("./option[not(text()='Container Type')]"), 1).Text;
 
-					if (firstOption==null)
+					if (firstOption == null)
 					{
 						Report.Failure("There are no Container Types");
 						return false;
@@ -125,13 +125,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						containsType.Select(firstOption);
 					}
 
-					
+
 				}
 				else
 				{
 					containsType.Select(info.ContainerType);
 				}
-				
+
 				string regex = @"(.*)\((.*)\)";
 				IWebElement sizeField = (from input in textInputs
 										 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
@@ -299,9 +299,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Confirm Excel file is downloaded with name: " + file);
 			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-			Report.Info("Downloads folder: " + downloadsFolder);			
+			Report.Info("Downloads folder: " + downloadsFolder);
 			int counter = 0;
-			while(counter<=5)
+			while (counter <= 5)
 			{
 				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				if (dir.Any())
@@ -314,7 +314,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				counter++;
 			}
 			Report.Failure("No file was found with name " + file);
-			
 		}
 
 		public bool DeleteFileFromDownloadsFolder(string fileName)
@@ -323,14 +322,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Deleting any existing files with name: " + fileName + " in the directory: " + downloadsFolder + ".");
 			var files = Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly);
 
-			foreach(var file in files)
+			foreach (var file in files)
 			{
 				try
 				{
 					Report.Info("Deleting: " + file);
 					File.Delete(file);
 				}
-				catch(Exception ex)
+				catch (Exception ex)
 				{
 					Report.Error("ERROR DELETING FILE: " + ex.Message);
 				}
@@ -355,7 +354,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickUploadUpcButton()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2); 
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2);
 			if (el == null)
 			{
 				return false;
@@ -363,24 +362,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return el.TryClick();
 		}
-		
-		
 	}
 
 	public class MultipleUPC : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath(@"//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']");
 
-		public IWebElement SelectAllUpcsButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
-		public IWebElement ContainsType => containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
-		public IWebElement NextButton => containerElement.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
-		public IWebElement SelectAllRetailersButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
-		public IWebElement FinishButton => containerElement.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
+		public IWebElement SelectAllUpcsButton => this.containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
+		public IWebElement ContainsType => this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
+		public IWebElement NextButton => this.containerElement.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
+		public IWebElement SelectAllRetailersButton => this.containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
+		public IWebElement FinishButton => this.containerElement.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
 
 		public bool ClickSelectAllUpcsButton()
 		{
 			return this.SelectAllUpcsButton.TryClick();
-		}		
+		}
 		public bool ClickNextButton()
 		{
 			return this.NextButton.TryClick();
@@ -407,5 +404,5 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string TransportationOption { get; set; } = "";
 	}
 
-	
+
 }

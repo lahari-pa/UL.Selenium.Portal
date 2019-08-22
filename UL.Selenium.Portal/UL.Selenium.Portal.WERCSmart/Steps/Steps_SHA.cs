@@ -594,7 +594,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			bool allPassed = true;
 
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				string id = "";
 				if (thisRow["Product ID"].ToLower().Contains("saved as"))
@@ -2379,7 +2379,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I find a UPC number for: (.*) products not belonging to Supplier: (.*) in the grid and save to context starting with: (.*)")]
-		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs) 
+		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs)
 		{
 			TestReport.UseSubSteps = true;
 			Context.AddToContext("numberOfUpcnumbers", numberOfProducts);
@@ -2398,7 +2398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
 				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
-				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs+j, false);
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs + j, false);
 				if (Context.GetFromContext(savedAs + j) != null)
 				{
 					Report.Info($"Saved UPC{j} to context");

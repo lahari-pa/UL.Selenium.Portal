@@ -14,7 +14,7 @@ Scenario: Waste Hauler API Test
 #tests 106100:
 Scenario: WM Hauler Profile Logic Update
 	Given I authenticate username: test@test.pab, password: Welcome1!
-	Then I save the Waste Hauler report for UPC: {upc} as: {reportSavedAs}
+	Then I save the Waste Hauler report for UPC: 658382131593 as: APIReport106100
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I click the Supplier Reports icon in the QuickLinks Pane
