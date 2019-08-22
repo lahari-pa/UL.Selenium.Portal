@@ -225,8 +225,10 @@ Scenario: [56218] My Products grid Actions - View Navigation
 Scenario: [56219] My Products grid Actions - Documents navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
-	When I filter the products by: Assessment in Progress
-	And I click Row Actions for the most recent product returned
+	Then I create a product with sds upload and name as: product1 then take to data acceptance and save as: TC56219
+	Then I navigate to the home page
+	Given I search for the product saved as: TC56219
+	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Documents
 	And I should see Review Documents
 	Then In the Documents section I should see the following columns: Document Name, Subformat, Language, Actions
@@ -333,6 +335,7 @@ Scenario: [67299] Terms of Use - footer
 Scenario: [65886] My Products - Pagination
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
+	Given If my products grid does not contain enough products then I add them until it displays '...' grid navigation option
 	Then The current page in the products grid is: 1
 	Given I click next in the products grid
 	Then The current page in the products grid is: 2
@@ -340,8 +343,8 @@ Scenario: [65886] My Products - Pagination
 	Then The current page in the products grid is: 1
 	Given I click ... in the products grid
 	Then I should see the products grid navigation input with up and down arrows
-	Given I type the number 15 into the products grid page navigation box and press the enter key
-	Then The current page in the products grid is: 15
+	Given I type the number 8 into the products grid page navigation box and press the enter key
+	Then The current page in the products grid is: 8
 	Given I click ... in the products grid
 	Given I enter the up arrow into the products grid page navigation input then the correct page is shown
 	Given I click ... in the products grid
