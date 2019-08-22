@@ -982,8 +982,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I make a list of the duplicated UPCs and save it as: (.*) and check that they have a warning traingle next to their retailer code")]
-		public void IMakeAListOfDuplicateUPCsAndCheckForWarning()
+		[StepDefinition(@"I make a list of the duplicated UPCs and save it as: (.*) and check that they have a warning traingle next to their retailer code and save the ones that do as: (.*)")]
+		public void IMakeAListOfDuplicateUPCsAndCheckForWarning(string duplicateUPCsSavedAs, string upcsWithWarningSavedAs)
 		{
 
 			//get from context this ^ list
@@ -996,15 +996,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I make a list of the UPCS that have duplicates");
 			//method in upc.cs that checks the warning text and gets all duplicated upc numbers from it as a string and adds them to a list (savedAs)
 			List<string> duplicateUPCStrings = new List<string>(); //make =^
-			TestReport.StartStep("I confirm the UPCs wich are duplicates have have a warning trainle next to their retailer code");
+			TestReport.StartStep("I confirm the UPCs wich are duplicates have have a warning traingle next to their retailer code");
 			//get from context the list of duplicate UPCS
 			var listDisplayedUPCs = new UPC().UPCsNewProduct;
-			int i = 0;
-			foreach (var item in listDisplayedUPCs)
+			List<string> upcsWithWarnings = new List<string>();
+			foreach (var upcNum in duplicateUPCStrings)
 			{
-				string currentUPC = duplicateUPCStrings[i];
-				string item.UpcNumber[currentUPC];
+				foreach(var item in listDisplayedUPCs)
+				{
+					if(upcNum==item.UpcNumber)
+					{
+						Report.IsTrue(item.WarningIsPresent, "The warning triangle for upc duplicate UPC No. " + upcNum + " was not found next to their retailer code", "The warning triangle for upc duplicate UPC No. " + upcNum + " was found next to their retailer code");
+						if(item.WarningIsPresent)
+						{
+							upcsWithWarnings.Add(upcNum);
+						}
+						break;
+					}
+				}
 			}
+
+			Context.AddToContext(upcsWithWarningSavedAs, upcsWithWarnings);
+			
+		}
+
+		[StepDefinition(@"Using the list of duplicate UPCs saved as: (.*) I select the UPCS")]
+		public void UsingTheDuplicateUpcsSavedAsSelectUPCs()
+		{
+
 		}
 
 

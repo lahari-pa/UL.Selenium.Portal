@@ -1420,46 +1420,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 		
 
-		//[StepDefinition("I find an existing UPC number in trevor account saved as: (.*) using feature context: (.*)")]
-		//public void FindExistingUpcNumberInTrevorAccountUsingFeatureContext(string trevorSavedAs, string upcSavedAs)
-		//{
-		//	TestReport.UseSubSteps = true;
-		//	TestReport.StartStep("I look in feature context for: " + upcSavedAs);
-		//	if (Context.Contains(upcSavedAs, true))
-		//	{
-  //              Report.Info("Found an existing UPC in context");
-		//		var upc = Context.GetFromContext(upcSavedAs).ToString();
-  //              Report.Info("Saving UPC : " + upc + " to scenario context");
-		//		Context.AddToContext(upcSavedAs, upc);
-		//		return;
-		//	}
-		//	Report.Info("UPC did not exist in feature context");
-		//	// fall back to searching SHA manager
-		//	TestReport.StartStep("I search for a UPC in SHA Manager associated with trevor user account: " + trevorSavedAs + " and save to context as: " + upcSavedAs);
-		//	new Steps_SHA().NavigateToShaSaveUpcToContext(upcSavedAs, trevorSavedAs);
-		//	// check if SHA search was successful
-		//	if (Context.Contains(upcSavedAs))
-  //          {
-		//		// add to feature context
-		//		var upc = Context.GetFromContext(upcSavedAs).ToString();
-		//		Context.AddToContext(upcSavedAs, upc, true);
-		//		return;
-  //          }
-		//	// fall back to creating a new product
-  //          TestReport.StartStep("Logging in to WercSmart");
-		//	this.ILogInWithTheAccountSavedInTrevorAs(trevorSavedAs);
-		//	TestReport.StartStep("Creating a new product: Chalk");
-		//	new Steps_ProductSetup().GivenICreateProductUsingTestCase75335("Chalk", upcSavedAs, "ExistingUPCProduct");
-		//	// check if new product UPC was successful
-		//	if (Context.Contains(upcSavedAs))
-  //          {
-	 //           // add to feature context
-		//		var createdUpc = Context.GetFromContext(upcSavedAs).ToString();
-	 //           Context.AddToContext(upcSavedAs, createdUpc, true);
-	 //           return;
-  //          }
-  //          Report.Failure("Failed to get an existing UPC!");
-		//}
+		[StepDefinition("I find an existing UPC number in trevor account saved as: (.*) using feature context: (.*)")]
+		public void FindExistingUpcNumberInTrevorAccountUsingFeatureContext(string trevorSavedAs, string upcSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I look in feature context for: " + upcSavedAs);
+			if (Context.Contains(upcSavedAs, true))
+			{
+                Report.Info("Found an existing UPC in context");
+				var upc = Context.GetFromContext(upcSavedAs).ToString();
+                Report.Info("Saving UPC : " + upc + " to scenario context");
+				Context.AddToContext(upcSavedAs, upc);
+				return;
+			}
+			Report.Info("UPC did not exist in feature context");
+			// fall back to searching SHA manager
+			TestReport.StartStep("I search for a UPC in SHA Manager associated with trevor user account: " + trevorSavedAs + " and save to context as: " + upcSavedAs);
+			new Steps_SHA().NavigateToShaSaveUpcToContext(upcSavedAs, trevorSavedAs);
+			// check if SHA search was successful
+			if (Context.Contains(upcSavedAs))
+            {
+				// add to feature context
+				var upc = Context.GetFromContext(upcSavedAs).ToString();
+				Context.AddToContext(upcSavedAs, upc, true);
+				return;
+            }
+			// fall back to creating a new product
+            TestReport.StartStep("Logging in to WercSmart");
+			this.ILogInWithTheAccountSavedInTrevorAs(trevorSavedAs);
+			TestReport.StartStep("Creating a new product: Chalk");
+			new Steps_ProductSetup().GivenICreateProductUsingTestCase75335("Chalk", upcSavedAs, "ExistingUPCProduct");
+			// check if new product UPC was successful
+			if (Context.Contains(upcSavedAs))
+            {
+	            // add to feature context
+				var createdUpc = Context.GetFromContext(upcSavedAs).ToString();
+	            Context.AddToContext(upcSavedAs, createdUpc, true);
+	            return;
+            }
+            Report.Failure("Failed to get an existing UPC!");
+		}
 
 	}
 }
