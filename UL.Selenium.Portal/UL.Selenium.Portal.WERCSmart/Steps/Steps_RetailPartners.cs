@@ -919,6 +919,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I save the product with name: (.*) and id: (.*) as: (.*)")]
+		public void ISaveProductWithNameAndIDAs(string name, string id, string saveAs)
+		{
+			id = Context.GetFromContext(id)?.ToString() ?? "";
+			name = Context.GetFromContext(name)?.ToString() ?? "";
+			var newProductInformation = new ProductInformation {
+				Id = id,
+				Name = name
+			};
+			Context.AddToContext(saveAs, newProductInformation);
+		}
+
 		[StepDefinition(@"I save the first product in the excel spreadsheet saved as: (.*) as (.*)")]
 		public void ISaveTheFirstProductInTheExcelSpreadSheetAs(string spreadsheet, string product)
 		{
