@@ -38,5 +38,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Number of UPCs matches number saved.");
 		}
 
+		[StepDefinition(@"I confirm that the number of normal UPCs equals the number saved as: (.*)")]
+		public void ConfirmThatNumberOfNormalUPCsEqualsNumberSavedAs(string savedAs)
+		{
+			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().NormalUPCs();
+			int numUPCs = 0;
+			int.TryParse(Context.GetFromContext(savedAs)?.ToString(), out numUPCs);
+			Report.IsTrue(numUPCs == upcs.Count, "Number of normal UPCs did not match the number saved!",
+				"Number of normal UPCs matches number saved.");
+		}
+
+		[StepDefinition(@"I confirm that the number of Case UPCs equal the number saved as: (.*)")]
+		public void ConfirmThatNumberOfCaseUPCsEqualsNumberSavedAs(string savedAs)
+		{
+			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().CaseUPCs();
+			int numUPCs = 0;
+			int.TryParse(Context.GetFromContext(savedAs)?.ToString(), out numUPCs);
+			Report.IsTrue(numUPCs == upcs.Count, "Number of Case UPCs did not match the number saved!",
+				"Number of Case UPCs matches number saved.");
+		}
 	}
 }

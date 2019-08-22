@@ -919,6 +919,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I save the product with name: (.*) and id: (.*) as: (.*)")]
+		public void ISaveProductWithNameAndIDAs(string name, string id, string saveAs)
+		{
+			id = Context.GetFromContext(id)?.ToString() ?? "";
+			name = Context.GetFromContext(name)?.ToString() ?? "";
+			var newProductInformation = new ProductInformation {
+				Id = id,
+				Name = name
+			};
+			Context.AddToContext(saveAs, newProductInformation);
+		}
+
 		[StepDefinition(@"I save the first product in the excel spreadsheet saved as: (.*) as (.*)")]
 		public void ISaveTheFirstProductInTheExcelSpreadSheetAs(string spreadsheet, string product)
 		{
@@ -954,63 +966,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save the number of UPCs on the first product in the excel spreadsheet saved as: (.*) as (.*)")]
-		public void ISaveTheNumberOfUPCs(string spreadsheet, string saveAs)
+		[StepDefinition(@"I save the value with the header (.*) on the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		public void SaveTheValueWithHeaderAs(string header, string spreadsheet, string saveAs)
 		{
 			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
-				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
-				Context.AddToContext(saveAs, thisProduct[2]);
-			}
-		}
-
-		[StepDefinition(@"I save the Transparency Indicator Ratio of the first product in the excel spreadsheet saved as: (.*) as (.*)")]
-		public void ISaveTheTransparencyRatio(string spreadsheet, string saveAs)
-		{
-			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
-			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
-				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
-				Context.AddToContext(saveAs, thisProduct[3]);
-			}
-		}
-
-		[StepDefinition(@"I save the Last Submission Date of the first product in the excel spreadsheet saved as: (.*) as (.*)")]
-		public void ISaveTheLastSubmissionDate(string spreadsheet, string saveAs)
-		{
-			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
-			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
-				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
-				Context.AddToContext(saveAs, thisProduct[5]);
-			}
-		}
-
-		[StepDefinition(@"I save the Current Subscription Level of the first product in the excel spreadsheet saved as: (.*) as (.*)")]
-		public void ISaveTheCurrentSubscriptionLevel(string spreadsheet, string saveAs)
-		{
-			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
-			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
-				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
-				Context.AddToContext(saveAs, thisProduct[6]);
-			}
-		}
-
-		[StepDefinition(@"I save the Current Data Tier Consent for the Selected Retailer of the first product in the excel spreadsheet saved as: (.*) as (.*)")]
-		public void ISaveTheCurrentDataTierConsent(string spreadsheet, string saveAs)
-		{
-			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
-			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
-				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
-				Context.AddToContext(saveAs, thisProduct[7]);
+				string value = ExcelUtils.GetCellValue(1, header, 0);
+				Report.Info("Found value " + value + " for header " + header + ". Adding to context.");
+				Context.AddToContext(saveAs, value);
 			}
 		}
 

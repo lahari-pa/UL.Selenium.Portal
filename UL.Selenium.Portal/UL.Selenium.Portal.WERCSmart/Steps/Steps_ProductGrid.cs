@@ -2161,5 +2161,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Success("Got the first Product ID in Grid (ID: " + firstProductID + ") and saved to: " + savedAs);
 		}
 
+		[StepDefinition(@"If my products grid does not contain enough products then I add them until it displays '...' grid navigation option")]
+		public void AddProductsInMyProductsGrid()
+		{
+			TestReport.UseSubSteps = true;
+			var selProdGrid = new ProductsGrid();
+			var newStepsProd = new Steps_ProductSetup();
+			var homePage = new StepsHomepage();
+			var productsGrid = new ProductsGrid();
+			Report.Info("setting the Items on Page to '10'");
+			Report.IsTrue(productsGrid.SelectItemsOnPage("10"),"Failed to set items on page to 10", "successfully set the items on page to 10");
+			try
+			{
+				if (selProdGrid.ProductsCount() >= 10 && selProdGrid.GetGridNavDots())
+				{
+					Report.Info("My products grid already contains more than 10 products along with '...' grid navigation option for pagination!");
+				}
+				else
+				{
+					for (int id = 0; id <= 91; id++)
+					{
+						Report.Info("Adding product-" + (id + 1) + " in my products grid");
+						newStepsProd.TaketoProductTypeandSave("sample product-" + (id + 1), "chalkproduct");
+					}
+					homePage.ThenINavigateToTheHomePage();
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+			}
+		}
 	}
 }

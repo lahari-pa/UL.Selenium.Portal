@@ -74,6 +74,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		/// <summary>
+		/// Waits for up to 5 seconds for the 'Loading...' div to appear, and then up to the timeout for it to disappear.
+		/// </summary>
+		public bool Wait_For_Loading_Finish(int timeout = 30)
+		{
+			// wait up to 5 seconds for the loading bar to become visible
+			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(BasePath + "//div[@id='load_list']"), 5);
+			// waits up to timeout (30) seconds for the loading bar to then become invisible
+			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath(BasePath + "//div[@id='load_list']"), timeout);
+		}
 		public ProductStatus GetproductStatus(string id)
 		{
 			var thisProductStatus = new ProductStatus();
@@ -531,28 +541,54 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				var rowValues = new List<string>();
 				//Report.Info("Looking at row: " + j.ToString());
-				bool gotRow = false;
-				int counter = 0;
-				while (!gotRow && counter < 10)
+
+                // js removed - trying 10 times with a 1 second delay to get row element is unnecessary because ListOfProductRows has already been assigned above..
+				//bool gotRow = false;
+				//int counter = 0;
+				//while (!gotRow && counter < 10)
+				//{
+				//	try
+				//	{
+				//		ListOfProductRows = SeleniumBrowser.WebBrowser
+				//			.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
+				//		rowValues = ListOfProductRows[j].FindElements(By.XPath(".//td"), 2).Select(x => x.GetValue())
+				//			.ToList();
+				//		gotRow = true;
+				//	}
+				//	catch (Exception)
+				//	{
+				//		Report.Info("Try " + counter + "Failed to get row values for row " + j);
+				//	}
+
+				//	Delay.Seconds(1);
+				//	counter++;
+				//}
+				try
 				{
-					try
+					var rowColumns = ListOfProductRows[j]?.FindElements(By.XPath(".//td"), 2)?.ToList();
+					if (rowColumns != null)
 					{
-						ListOfProductRows = SeleniumBrowser.WebBrowser
-							.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
-						rowValues = ListOfProductRows[j].FindElements(By.XPath(".//td"), 2).Select(x => x.GetValue())
-							.ToList();
-						gotRow = true;
+						if (rowColumns.Any())
+						{
+							rowValues = rowColumns.Select(x => x.GetValue()).ToList();
+						}
+						else
+						{
+							Report.Failure("Failed to get row " + j);
+							continue;
+						}
 					}
-					catch (Exception)
+					else
 					{
-						Report.Info("Try " + counter + "Failed to get row values for row " + j);
+						Report.Failure("Failed to get row " + j);
+						continue;
 					}
-
-					Delay.Seconds(1);
-					counter++;
 				}
-
-
+				catch (Exception e)
+				{
+					Report.Failure("Failed to get row " + j + ". Exception message: " + e.Message);
+                    continue;
+				}
 				var thisProduct = new Product();
 				int addIndex = 1;
 				for (int i = 0; i < ListOfHeaders.Count(); i++)
@@ -593,7 +629,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								IWebElement status = SeleniumBrowser.WebBrowser.FindElement(
 									By.XPath("//table[@id='list']//tr[@class!='jqgfirstrow'][" + (j + 1) + "]//td[" +
 											 (i + addIndex) + "]"), 2);
-								Report.Info("Status is: " + status.GetValue());
 								if (status != null)
 								{
 									thisProduct.ColourRGB = status.GetCssValue("Color");
@@ -675,6 +710,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return ListOfProducts;
 		}
 
+		public List<string> GetAllProductIds()
+		{
+			return this.containerElement.FindElements(By.XPath(".//table[@id='list']/tbody//tr/td/span[@class]"), 2).Select(x => x.Text).ToList();
+		}
 		public bool ProductWithIDHasRedBorders(string id)
 		{
 			Delay.Seconds(3);
