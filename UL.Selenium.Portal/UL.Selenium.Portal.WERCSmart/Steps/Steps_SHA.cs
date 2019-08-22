@@ -303,19 +303,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						throw new Exception("Invalid column name");
 				}
 			}
-
 			Report.Info("Going to click find");
 			Delay.Seconds(1);
 			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find", false, false);
-			Delay.Seconds(10);
-			Report.Info("Waiting for spinner");
-			GeneralUtilities.StudioWaitForSpinner(10);
-			thisProductSearch.Wait_for_load(10);
-			GeneralUtilities.StudioWaitForSpinner(10);
-			Report.Info("Finished waiting for spinner");
-			Delay.Seconds(10);
+			Report.Info("Waiting for loading bar");
+			new StudioSHAManager().Wait_For_Loading_Finish();
+			Report.Info("Finished waiting for loading");
+			Delay.Seconds(1);
 			Report.Screenshot();
-
 		}
 
 		[StepDefinition(
@@ -2215,13 +2210,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveUpcNumberForAnyProduct(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
-			int productsToTry = new StudioSHAManager().GetProductCount();
-			Report.Info("There are " + productsToTry + " products");
-			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
-			for (int i = 0; i < productsToTry; i++)
+			TestReport.StartStep("Getting all product ids from the table");
+			//int productsToTry = new StudioSHAManager().GetProductCount();
+			var ids = new StudioSHAManager().GetAllProductIds();
+			Report.Info("There are " + ids.Count + " product ids");
+			//List<Product> products = new StudioSHAManager().GetTopXProducts(10);
+			for (int i = 0; i < ids.Count; i++)
 			{
 				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
-				string id = products[i].ID;
+				string id = ids[i];
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
 				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
 				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
