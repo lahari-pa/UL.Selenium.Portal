@@ -2415,53 +2415,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				}
 			}
-		}
-		[Given(@"I edit the testdoc.xlsx, and save its filepath as: (.*) and verify it contains the UPC data in the table saved as: (.*)")]
-		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string fileSavedAs,string tableSavedAs, Table table)
-		{
-			Context.AddToContext(tableSavedAs, table);
-
-			var upc = new UPC();
-			Report.IsTrue(upc.DeleteFileFromDownloadsFolder("testdoc.xlsx"), "", "");
-			//Create file here
-			//var excelfile = new ExcelUtilities CreateSpreadsheet(fileName);
-
-			//var utils = ExcelUtilities.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
-			EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination);
-
-			var utils = new ExcelUtilities(destination, "Sheet1");		
+		}	
 
 
-			var headers = table.Rows.FirstOrDefault().Keys.ToList();
-			utils.AddRow(headers);
-			foreach(var row in table.Rows)
-			{
-				var vals  = row.Values.Select(x =>
-				{
-					if (Regex.IsMatch(x, "<(.*)>"))
-					{
-						var match = Regex.Match(x, "<(.*)>").Groups[1].Value;
-						if (Context.Contains(match, true))
-						{
-							return Context.GetFromContext(match).ToString();
-						}
-					}
-					
-					return x;
-				});
-
-				utils.AddRow(vals.ToList());
-			}
-			//add all rows from table to excelfile
-
-
-			System.IO.Directory.Move(destination, KnownFolders.GetPath(KnownFolder.Downloads)+@"\testdoc.xlsx");
-
-
-			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", fileSavedAs), "Failed to validate File", "Successfully validated File");
-
-
-		}
 	}
 }
 

@@ -388,7 +388,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public string ContainerType { get; set; }
 			public string Size { get; set; }
 			public string Retailer { get; set; }
+			public bool WarningIsPresent { get; set; }
 
+			
 		}
 
 		public List<UPCNewProduct> UPCsNewProduct {
@@ -404,21 +406,38 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				int containerTypeIndex = th.FirstOrDefault(x => x.Value.Contains("Container Type")).Key;
 				int sizeIndex = th.FirstOrDefault(x => x.Value.Contains("Size (Weight Ounces)")).Key;
 				int retailerIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
+				int warningIsPresentIndex= th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
 				foreach (IWebElement thisRow in listOfRows)
 				{
 					bool isChecked = thisRow.FindElement(By.XPath(".//td[" + isCheckedIndex.ToString() + "]//input")).Selected;
 					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]/span[contains(@data-bind,'upc')]")).Text;
 					string containerType = thisRow.FindElement(By.XPath(".//td[" + containerTypeIndex.ToString() + "]/span[contains(@data-bind,'type')]")).Text;
 					string size = thisRow.FindElement(By.XPath(".//td[" + sizeIndex.ToString() + "]/span[contains(@data-bind,'size')]")).Text;
-					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]")).Text;
-					listOfUPCNewProducts.Add(new UPCNewProduct() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer = retailer });
+					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]//span[@data-bind='text: identifier']")).Text;
+					bool warningIsPresent = thisRow.FindElement(By.XPath(".//td[" + warningIsPresentIndex.ToString() + "]//i[@title='This UPC Number is duplicated.']")).Displayed;
+					listOfUPCNewProducts.Add(new UPCNewProduct() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer = retailer, WarningIsPresent= warningIsPresent });
 				}
 				return listOfUPCNewProducts;
 			}
 
 		}
 
+		public bool UploadUpcButton()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2);
+			if (el == null)
+			{
+				return false;
+			}
 
+			return true;
+		}
+
+		public IWebElement UPCButtonContainerGeneral => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[contains(@class,'upc-buttons')]"),2);
+		public IWebElement UPCButtonContainerTop => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[@class='upc-buttons affix-top']"), 2);
+		public IWebElement UPCButtonContainerBottom => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[@class='upc-buttons affix']"), 2);
+
+		
 
 	}
 
@@ -579,6 +598,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			
 		}
+
+		
 
 
 	}
