@@ -8340,5 +8340,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I call Shared Step 77535 \(Retailer Association - Walmart\)")]
+		public void Shared77535_RetailerAssociation_Walmart()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: Walmart");
+			new StepsSelectRetailers().SelectTheRetailer("Walmart");
+			TestReport.StartStep("I should see the Retailer Page");
+			new StepsNewProduct().GivenIShouldSeeXPage("Retailer");
+			var newProduct = new NewProduct();
+			TestReport.StartStep("I select any Vendor ID");
+			new Steps_Retailer().ISelectFirstVendorId();
+			TestReport.StartStep("In the Retailer page I click Continue");
+			new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Retailer");
+		}
+
+		[StepDefinition(@"I call Shared Step 78080 \(Regulatory Documents to Provide - Upload OSHA SDS\)")]
+		public void Shared78080_RegulatoryDocumentsToProvide_UploadOshsSds()
+		{
+			TestReport.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			TestReport.StartStep("I set the OSHA-compliant Safety Data Sheet, English field to: Yes");
+			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Yes");
+
+
+			TestReport.StartStep("In the Regulatory Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+		}
+
 	}
 }

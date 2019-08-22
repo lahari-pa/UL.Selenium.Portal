@@ -176,3 +176,55 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 # Created by Barrett, Beverly
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\Release Day Tests
+
+# Created by Aaron Caton
+
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Bulk Actions\Forward
+
+Scenario: [78048] Forwarding to Walmart - Without Authoring
+Given I generate a random UPC number and save as: UPC78048
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+# And I Enter "Deodorant - Non-Aerosol" in Type of Product smart search field
+And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-Aerosol
+And I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
+| Requires Table |
+| Parameters     |
+And I call Shared Step 60310 (Additional Product Information - Without Child question)
+And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| Requires Table |
+| Parameters     |
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+And I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+And I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
+And I click continue
+And I call Shared Step 77535 (Retailer Association - Walmart)
+And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Aerosol Can and size: 10
+And [Shared Step 78080 - Regulatory Documents to Provide - Upload OSHA SDS]
+And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+And I click continue
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Requires Table |
+| Parameters     |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And I navigate to the home page
+#And I Make a note of the product ID
+And [Shared Step 75130 - Bulk Actions - Select Forward Product Registration]
+And I Enter the ID the Search by WPS ID or Product Name smart search field
+And I Click Continue
+And I Select any retailer that is affiliated with Walmart
+And I Click Continue
+And I Select any vendor from the Select Vendor drop down
+And I Click the check box for Select UPCs
+And I Click Continue
+And I Click Continue
+And I Select the radio button for "All of the above statements are true. (Allow to proceed to UPC update or forward)."
+And I Click Continue
+And I Confirm that the following text is visible "Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise."
+And I navigate to the home page
+And [Shared Step 57079 - Sign Out of WERCSmart]
