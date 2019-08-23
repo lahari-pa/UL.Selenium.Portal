@@ -21,6 +21,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public const string BasePath = "//div[@id='dataentry']";
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
+
+		private IWebElement SelectAllUpcs => this.containerElement.FindElement(By.XPath(".//div[./h3[text()='Select UPCs']]//thead//input[@type='checkbox']"), 1);
+
+		public bool ClickSelectAllUpcs => this.SelectAllUpcs.TryClick();
+
 		public bool ErrorsExist()
 		{
 			ReadOnlyCollection<IWebElement> errors = this.containerElement.FindElements(By.XPath(".//i[contains(@class, 'exclamation')]"));
@@ -271,6 +276,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return vendor == option;
 		}
 
+		public string FirstProductSelectedVendor()
+		{
+			List<SelectProducts> products = this.GetProducts();
+			if (products.Count == 0)
+			{
+				Report.Failure("No Product rows were found in the grid");
+				Report.Screenshot();
+				return null;
+			}
+			var options = products.First().VendorOptions();
+			if (options.Any())
+			{
+				return options.First(x=>x!= "Choose...");
+			}
+			return null;
+		}
+
 		public bool SelectFirstUPC()
 		{
 			List<SelectUPCs> upcs = this.GetUPCs();
@@ -440,6 +462,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				IWebElement row = this.containerElement.FindElement(By.XPath(".//tr[@id='" + this.InternalID + "']"), 2);
 				return row.TryClick() && row.GetAttribute("class") == "active";
+			}
+
+			public List<string> VendorOptions()
+			{
+				IWebElement row = this.containerElement.FindElement(By.XPath(".//tr[@id='" + this.InternalID + "']"), 2);
+				IWebElement select = row.FindElement(By.XPath(".//select[contains(@data-bind,'vendors')]"), 2);
+				if (select == null)
+				{
+					Report.Info("The Select Vendor element could not be found!");
+					return null;
+				}
+				return select.FindElements(By.XPath("./option"), 1)?.Select(x => x.Text).ToList();
 			}
 
 

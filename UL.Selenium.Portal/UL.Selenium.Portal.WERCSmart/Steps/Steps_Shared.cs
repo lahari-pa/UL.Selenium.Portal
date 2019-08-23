@@ -20,6 +20,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -8364,8 +8365,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			TestReport.StartStep("I set the OSHA-compliant Safety Data Sheet, English field to: Yes");
 			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Yes");
-
-
+			TestReport.StartStep("I upload a PDF file to section: OSHA SDS");
+			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			TestReport.StartStep("Click the checkbox for the 'I confirm that I have provided the most up - to - date, OSHA - compliant SDS...' question");
+			MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
 			TestReport.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
