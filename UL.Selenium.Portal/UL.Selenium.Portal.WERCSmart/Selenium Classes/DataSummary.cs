@@ -295,6 +295,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool ConfirmUPCInformation(string section, string header, string value, string upc)
+		{
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"), 2);
+			table.ScrollElementIntoView();
+
+			IWebElement headerRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + header + @""")]/../.."), 2);
+			IList<IWebElement> headerValues = headerRow.FindElements(By.TagName("div"), 2);
+			int index = 0;
+			foreach (IWebElement head in headerValues)
+			{
+				if (head.Text == header)
+				{
+					break;
+				}
+				index++;
+			}
+
+			IWebElement upcRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + upc + @""")]/../.."), 2);
+			IList<IWebElement> upcValues = upcRow.FindElements(By.TagName("div"), 2);
+
+			IWebElement containerType = upcValues[index];
+			if (containerType.Text == value)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 		public string SGetProductName()
 		{
 			IWebElement productName = this.containerElement.FindElement(

@@ -206,5 +206,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(retailers.FirstOrDefault(x => x == ret) != "", "Failed to find retailer " + ret + " in list of retailers.",
 				"Successfully found retailer " + ret + " in list of retailers.");
 		}
+
+		[StepDefinition(@"I confirm that for product saved as: (.*) the value in the (.*) column of spreadsheet (.*) is: (.*)")]
+		public void IConfirmThatForProductTheValueInTheColumnIs(string savedAs, string column, string spreadsheet, string value)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string file = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + spreadsheet);
+				return;
+			}
+			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			int index = 1;
+			while (index < ExcelUtils.Excel_GetColumn(0).Count)
+			{
+				if (ExcelUtils.GetCellValue(index, 0) == product.Id)
+				{
+					break;
+				}
+				index++;
+			}
+			string cellValue = ExcelUtils.GetCellValue(index, column);
+			Report.IsTrue(cellValue.Trim() == value.Trim(), "Cell value does not match value " + value + " for column " + column + " and id " + product.Id + ". Instead found: " + cellValue.Trim(),
+				"Cell value matches value " + value + " for column " + column + " and id " + product.Id + ".");
+		}
+
+		[StepDefinition(@"I confirm that for product saved as: (.*) the UPC in the (.*) column of spreadsheet (.*) is: (.*)")]
+		public void IConfirmThatForProductTheUPCInTheColumnIs(string savedAs, string column, string spreadsheet, string upc)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string file = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			upc = Context.GetFromContext(upc)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + spreadsheet);
+				return;
+			}
+			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			int index = 1;
+			while (index < ExcelUtils.Excel_GetColumn(0).Count)
+			{
+				if (ExcelUtils.GetCellValue(index, 0) == product.Id)
+				{
+					break;
+				}
+				index++;
+			}
+			string cellValue = ExcelUtils.GetCellValue(index, column);
+			Report.IsTrue(cellValue.Trim() == upc.Trim(), "Cell value does not match UPC " + upc + " for column " + column + " and id " + product.Id + ".",
+				"Cell value matches UPC " + upc + " for column " + column + " and id " + product.Id + ".");
+
+		}
 	}
 }

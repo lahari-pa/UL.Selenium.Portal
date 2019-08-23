@@ -498,10 +498,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			*/
 		}
 
+		[StepDefinition(@"I confirm that the status of the product saved as: (.*) is: (.*)")]
+		public void IConfirmThatTheStatusOfTheProductIs(string productSavedAs, string status)
+		{
+			status = Context.GetFromContext(status)?.ToString() ?? "";
+			this.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(productSavedAs, status);
+		}
+
 		[StepDefinition(
-			@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is (red|not red) indicating a recertification")]
+					@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is (red|not red) indicating a recertification")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification(
-			string productSavedAs, string isRed)
+					string productSavedAs, string isRed)
 		{
 			Report.Info("Getting product from context: " + productSavedAs);
 			var productDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
@@ -2368,7 +2375,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I find a UPC number for: (.*) products not belonging to Supplier: (.*) in the grid and save to context starting with: (.*)")]
-		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs) 
+		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs)
 		{
 			TestReport.UseSubSteps = true;
 			Context.AddToContext("numberOfUpcnumbers", numberOfProducts);
@@ -2387,7 +2394,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
 				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
-				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs+j, false);
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs + j, false);
 				if (Context.GetFromContext(savedAs + j) != null)
 				{
 					Report.Info($"Saved UPC{j} to context");
