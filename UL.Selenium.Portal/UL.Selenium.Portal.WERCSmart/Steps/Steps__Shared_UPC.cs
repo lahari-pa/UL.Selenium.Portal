@@ -1143,13 +1143,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var upcsWithWarningHT = (Hashtable)Context.GetFromContext(upcsWithWarningSavedAs);
 
-			Hashtable warningHTcopy = upcsWithWarningHT;
-			List<IWebElement> selectionBoxes= new UPC().UPCSelectionBoxes();
-			foreach(DictionaryEntry pair in warningHTcopy)
-				{
-					
-				}
+			Hashtable warningHTcopy = upcsWithWarningHT;			
+			var selectionBoxes = new UPC().UPCSelectionBoxes;
+			ArrayList a = new ArrayList(warningHTcopy.Keys);
 
+			foreach (var box in selectionBoxes)
+			{
+				foreach (DictionaryEntry pair in warningHTcopy)
+				{
+					string upcNumber = pair.Key as string;
+					int timesDuplicated = (int)pair.Value;
+					
+					if (box.UpcNumber == upcNumber && timesDuplicated>0)
+					{
+						Report.IsTrue(box.CheckBox.TryClick(), "The check box next to duplicate UPC No. " + upcNumber + " was not checked sucessfully", "The check box next to duplicate UPC No. " + upcNumber + " was checked sucessfully");
+						warningHTcopy[upcNumber] = timesDuplicated - 1;
+						break;
+
+					}
+				}
+			}
 
 
 		}

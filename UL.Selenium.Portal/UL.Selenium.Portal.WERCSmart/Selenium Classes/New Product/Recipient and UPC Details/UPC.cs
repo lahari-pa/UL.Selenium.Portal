@@ -423,19 +423,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public List<IWebElement> UPCSelectionBoxes()
+		public class UPCBoxNumber
 		{
+			public IWebElement CheckBox { get; set; }
+			public string UpcNumber { get; set; }
+		}
 
-			var listofUPCcheckboxes = new List<IWebElement>();
-			ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tbody//tr"));
-			foreach (IWebElement thisRow in listOfRows)
+		public List<UPCBoxNumber> UPCSelectionBoxes {
+
+			get
 			{
-				IWebElement checkBox = thisRow.FindElement(By.XPath("//table[@class='table table-hover upc-table']//tbody//tr//td[1]//input]"));
-				listofUPCcheckboxes.Add(checkBox);
+
+				var listofUPCcheckboxes = new List<UPCBoxNumber>();
+				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"));
+				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
+				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tbody//tr"));
+				int checkboxIndex = th.FirstOrDefault(x => x.Value == "").Key;
+				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC Number")).Key;
+				foreach (IWebElement thisRow in listOfRows)
+				{
+					IWebElement checkBox = thisRow.FindElement(By.XPath(".//td[" + checkboxIndex.ToString() + "]//input"));
+					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]/span[contains(@data-bind,'upc')]")).Text;
+					listofUPCcheckboxes.Add(new UPCBoxNumber() { CheckBox = checkBox, UpcNumber = upcNumber});
+				}
+				return listofUPCcheckboxes;
+
 			}
-			return listofUPCcheckboxes;
 
 		}
+
+
+		
 
 		public bool UploadUpcButton()
 		{

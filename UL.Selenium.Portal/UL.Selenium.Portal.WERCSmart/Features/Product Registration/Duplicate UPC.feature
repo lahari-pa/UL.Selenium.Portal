@@ -111,6 +111,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
 	Then I make a list of the duplicated UPCs and save it as: duplicateUPCs82536 from the table saved as: UPCTable82536
 	Then I use a list of duplicated UPCs saved as: duplicateUPCs82536 and check that they have a warning traingle next to their retailer code and save the ones that do as: warningPresentList82536
+	Then Using the Hashtable of duplicate UPCs saved as: warningPresentList82536 I select the UPCS
 
 		
 
