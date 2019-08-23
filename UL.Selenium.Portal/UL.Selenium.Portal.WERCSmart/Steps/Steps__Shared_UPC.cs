@@ -982,9 +982,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I make a list of the duplicated UPCs and save it as: (.*) and check that they have a warning traingle next to their retailer code and save the ones that do as: (.*)")]
+		[StepDefinition(@"I make a list of the duplicated UPCs and save it as: (.*) from the table saved as: (.*)")]
+		public void IMakeAListOfDuplicateUPCsFromTable(string duplicatesSavedAs,string tableSavedAs)
+		{
+			var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+			List<string>UPCCheckList = new List<string>();
+			List<string> duplicateUPCList = new List<string>();
+			int i = 0;
+			foreach(var row in tableContent.Rows)
+			{
+				var upcNumber = row["UPC"];
+
+
+				if (!UPCCheckList.Contains(upcNumber))
+				{
+					UPCCheckList.Add(upcNumber);
+				}
+				else
+				{
+					duplicateUPCList.Add(upcNumber);
+				}
+
+			}
+			Context.AddToContext(duplicatesSavedAs, duplicateUPCList);
+		}
+
+		[StepDefinition(@"I use a list of duplicated UPCs saved as: (.*) and check that they have a warning traingle next to their retailer code and save the ones that do as: (.*)")]
 		public void IMakeAListOfDuplicateUPCsAndCheckForWarning(string duplicateUPCsSavedAs, string upcsWithWarningSavedAs)
 		{
+
 
 			//get from context this ^ list
 
@@ -994,12 +1020,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I confirm the Add Multiple UPC popup dissappears");
 			this.IConfirmThatTheAddMultipleUPCWindowCloses();
 			TestReport.StartStep("I make a list of the UPCS that have duplicates");
-			//method in upc.cs that checks the warning text and gets all duplicated upc numbers from it as a string and adds them to a list (savedAs)
-			List<string> duplicateUPCStrings = new List<string>(); //make =^
+			//method in upc.cs that checks the warning text and gets all duplicated upc numbers from it as a string and adds them to a list (savedAs) //doesnt work with current error message
+			//List<string> duplicateUPCStrings = new List<string>(); //make =^
 			TestReport.StartStep("I confirm the UPCs wich are duplicates have have a warning traingle next to their retailer code");
-			//get from context the list of duplicate UPCS
-			var listDisplayedUPCs = new UPC().UPCsNewProduct;
-			List<string> upcsWithWarnings = new List<string>();
+
+			var duplicateUPCStrings =(List<string>)Context.GetFromContext(duplicateUPCsSavedAs);						
+			List<UPCNewProduct> listDisplayedUPCs = new UPC().UPCsNewProduct;
+			var upcsWithWarnings = new List<string>();
 			foreach (var upcNum in duplicateUPCStrings)
 			{
 				foreach(var item in listDisplayedUPCs)
@@ -1023,7 +1050,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Using the list of duplicate UPCs saved as: (.*) I select the UPCS")]
 		public void UsingTheDuplicateUpcsSavedAsSelectUPCs()
 		{
-
+			
 		}
 
 
