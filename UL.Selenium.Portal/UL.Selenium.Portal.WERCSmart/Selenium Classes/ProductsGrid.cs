@@ -536,7 +536,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Report.Info("Clicked 'delete'");
 						Delay.Seconds(5);
 						GeneralUtilities.Wait_for_load_finish();
-						Delay.Seconds(1);
+						Delay.Seconds(3);
 						Report.Info("Checking the products grid is empty");
 						row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 						return row == null;
@@ -915,6 +915,43 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void ClickContainer()
 		{
 			this.containerElement.Click();
+		}
+
+		public bool SelectItemsOnPage(string option)
+		{
+			try
+			{
+				IList<IWebElement> ItemsOnPageSelect = this.containerElement.FindElements(By.XPath(".//div[@class='panel-footer clearfix']//select//option"), 2);
+				IWebElement match = ItemsOnPageSelect.FirstOrDefault(x => x.GetValue() == option);
+				if (match == null)
+				{
+					Report.Info("Option was not found");
+					return false;
+				}
+				return match.TryClick();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool GetGridNavDots()
+		{
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+				if (el == null)
+				{
+					Report.Info("Option was not found");
+					return false;
+				}
+				return el.Displayed;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
 		}
 	}
 
