@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.UPC;
 using NTTQA.Selenium.UniversalFunctions;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -987,24 +988,56 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var tableContent = (Table)Context.GetFromContext(tableSavedAs);
 			List<string>UPCCheckList = new List<string>();
-			List<string> duplicateUPCList = new List<string>();
+			//List<string> duplicateUPCList = new List<string>();
+
+			Hashtable duplicateUPCHashTable = new Hashtable();
+
 			int i = 0;
 			foreach(var row in tableContent.Rows)
 			{
 				var upcNumber = row["UPC"];
-
+				
+				if (Regex.IsMatch(upcNumber, "<(.*)>"))
+				{
+					var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
+					if (Context.Contains(match, true))
+					{
+						upcNumber = Context.GetFromContext(match).ToString();
+					}
+				}
 
 				if (!UPCCheckList.Contains(upcNumber))
 				{
-					UPCCheckList.Add(upcNumber);
+					 UPCCheckList.Add(upcNumber);
 				}
 				else
 				{
-					duplicateUPCList.Add(upcNumber);
+					if (duplicateUPCHashTable.ContainsKey(upcNumber))
+					{
+						int old = (int)duplicateUPCHashTable[upcNumber];
+						duplicateUPCHashTable[upcNumber] = old + 1;
+					}
+					else
+					{
+						duplicateUPCHashTable.Add(upcNumber, 1);
+					}
+					
 				}
 
+				//if (!UPCCheckList.Contains(upcNumber))
+				//{
+				//	/UPCCheckList.Add(upcNumber);
+				//	
+				//}
+				//else
+				//{
+				//	duplicateUPCList.Add(upcNumber);
+				//	
+				//}
+
 			}
-			Context.AddToContext(duplicatesSavedAs, duplicateUPCList);
+			//Context.AddToContext(duplicatesSavedAs, duplicateUPCList);
+			Context.AddToContext(duplicatesSavedAs,duplicateUPCHashTable);
 		}
 
 		[StepDefinition(@"I use a list of duplicated UPCs saved as: (.*) and check that they have a warning traingle next to their retailer code and save the ones that do as: (.*)")]
@@ -1017,40 +1050,108 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//for each item in the list, search the UPC grid for the element of the warning triangle and check if ==null or not.  (this method will take the upc number and find corrosponging location for triangle)>could be done in the class for this list (have bool warningPresent and get it using is present or false as default etc).
 
 			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I confirm the Add Multiple UPC popup dissappears");
+			TestReport.StartStep("I confirm the Add Multiple UPC popup disappears");
 			this.IConfirmThatTheAddMultipleUPCWindowCloses();
 			TestReport.StartStep("I make a list of the UPCS that have duplicates");
 			//method in upc.cs that checks the warning text and gets all duplicated upc numbers from it as a string and adds them to a list (savedAs) //doesnt work with current error message
 			//List<string> duplicateUPCStrings = new List<string>(); //make =^
 			TestReport.StartStep("I confirm the UPCs wich are duplicates have have a warning traingle next to their retailer code");
 
-			var duplicateUPCStrings =(List<string>)Context.GetFromContext(duplicateUPCsSavedAs);						
+			var duplicateUPCStrings =(Hashtable)Context.GetFromContext(duplicateUPCsSavedAs);						
 			List<UPCNewProduct> listDisplayedUPCs = new UPC().UPCsNewProduct;
-			var upcsWithWarnings = new List<string>();
-			foreach (var upcNum in duplicateUPCStrings)
+			Hashtable upcsWithWarniningHT = new Hashtable();
+
+			foreach(DictionaryEntry pair in duplicateUPCStrings)
 			{
-				foreach(var item in listDisplayedUPCs)
+				string upcNumber = pair.Key as string;
+				int timesDuplicated = (int)pair.Value;
+				int i = 1;
+
+				foreach (var item in listDisplayedUPCs)
 				{
-					if(upcNum==item.UpcNumber)
+					if(upcNumber==item.UpcNumber)
 					{
-						Report.IsTrue(item.WarningIsPresent, "The warning triangle for upc duplicate UPC No. " + upcNum + " was not found next to their retailer code", "The warning triangle for upc duplicate UPC No. " + upcNum + " was found next to their retailer code");
-						if(item.WarningIsPresent)
+						
+						Report.IsTrue(item.WarningIsPresent, "The warning triangle for upc duplicate UPC No. " + upcNumber + " appearance: "+i+"  was not found next to their retailer code", "The warning triangle for upc duplicate UPC No. " + upcNumber + " appearance: " + i + "  was found next to their retailer code");
+						i++;
+
+						if (!upcsWithWarniningHT.ContainsKey(upcNumber))
 						{
-							upcsWithWarnings.Add(upcNum);
+							upcsWithWarniningHT.Add(upcNumber, 1);
 						}
-						break;
+						else
+						{
+							int old = (int)upcsWithWarniningHT[upcNumber];
+							upcsWithWarniningHT[upcNumber] = old + 1;
+						}
+
 					}
 				}
-			}
 
-			Context.AddToContext(upcsWithWarningSavedAs, upcsWithWarnings);
-			
+			}
+			Context.AddToContext(upcsWithWarningSavedAs, upcsWithWarniningHT);
+
+
+			//foreach (var upcNum in duplicateUPCStrings)
+			//{
+			//	foreach (var item in listDisplayedUPCs)
+			//	{
+			//		if (upcNum == item.UpcNumber)
+			//		{
+			//			Report.IsTrue(item.WarningIsPresent, "The warning triangle for upc duplicate UPC No. " + upcNum + " was not found next to their retailer code", "The warning triangle for upc duplicate UPC No. " + upcNum + " was found next to their retailer code");
+			//			if (item.WarningIsPresent)
+			//			{
+			//				if (!upcsWithWarniningHT.ContainsKey(upcNum))
+			//				{
+			//					upcsWithWarniningHT.Add(upcNum, 1);
+			//				}
+			//				else
+			//				{
+			//					int old = (int)upcsWithWarniningHT[upcNum];
+			//					upcsWithWarniningHT[upcNum] = old + 1;
+			//				}
+			//			}
+
+			//		}
+			//	}
+			//}
+			//Context.AddToContext(upcsWithWarningSavedAs, upcsWithWarniningHT);
+
+			//var upcsWithWarnings = new List<string>();
+			//foreach (var upcNum in duplicateUPCStrings)
+			//{
+			//	foreach(var item in listDisplayedUPCs)
+			//	{
+			//		if(upcNum==item.UpcNumber)
+			//		{
+			//			Report.IsTrue(item.WarningIsPresent, "The warning triangle for upc duplicate UPC No. " + upcNum + " was not found next to their retailer code", "The warning triangle for upc duplicate UPC No. " + upcNum + " was found next to their retailer code");
+			//			if(item.WarningIsPresent)
+			//			{
+			//				upcsWithWarnings.Add(upcNum);
+			//			}
+
+			//		}
+			//	}
+			//}
+
+			//Context.AddToContext(upcsWithWarningSavedAs, upcsWithWarnings);
+
 		}
 
-		[StepDefinition(@"Using the list of duplicate UPCs saved as: (.*) I select the UPCS")]
-		public void UsingTheDuplicateUpcsSavedAsSelectUPCs()
+		[StepDefinition(@"Using the Hashtable of duplicate UPCs saved as: (.*) I select the UPCS")]
+		public void UsingTheDuplicateUpcsSavedAsSelectUPCs(string upcsWithWarningSavedAs)
 		{
-			
+			var upcsWithWarningHT = (Hashtable)Context.GetFromContext(upcsWithWarningSavedAs);
+
+			Hashtable warningHTcopy = upcsWithWarningHT;
+			List<IWebElement> selectionBoxes= new UPC().UPCSelectionBoxes();
+			foreach(DictionaryEntry pair in warningHTcopy)
+				{
+					
+				}
+
+
+
 		}
 
 

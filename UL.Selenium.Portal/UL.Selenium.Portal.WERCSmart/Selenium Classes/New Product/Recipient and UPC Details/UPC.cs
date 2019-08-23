@@ -419,6 +419,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				return listOfUPCNewProducts;
 			}
+			
+
+		}
+
+		public List<IWebElement> UPCSelectionBoxes()
+		{
+
+			var listofUPCcheckboxes = new List<IWebElement>();
+			ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tbody//tr"));
+			foreach (IWebElement thisRow in listOfRows)
+			{
+				IWebElement checkBox = thisRow.FindElement(By.XPath("//table[@class='table table-hover upc-table']//tbody//tr//td[1]//input]"));
+				listofUPCcheckboxes.Add(checkBox);
+			}
+			return listofUPCcheckboxes;
 
 		}
 
