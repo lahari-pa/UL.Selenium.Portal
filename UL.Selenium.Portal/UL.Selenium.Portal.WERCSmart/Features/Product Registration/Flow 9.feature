@@ -181,7 +181,8 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then I see the following sections
 		| Section                                                                                                                        |
 		| Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) |
-	Given In the Regulatory Documents to Provide Page, the document type is: Product Label for section: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)
+	#Given In the Regulatory Documents to Provide Page, the document type is: Product Label for section: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)
+	Given I confirm the document type is: Product Label for section: Upload Full Product Label (required)
 	Then I do not see the following sections
 		| Section                                   |
 		| OSHA-compliant Safety Data Sheet, English |
@@ -191,7 +192,8 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then I see the following sections
 		| Section                                           |
 		| Upload Physical Data-related Documents (Optional) |
-	Given In the Additional Documents Page, the document type is: OSHA SDS for section: Upload Physical Data-related Documents (Optional)
+	#Given In the Additional Documents Page, the document type is: OSHA SDS for section: Upload Physical Data-related Documents (Optional)
+	Given I confirm the document type is: OSHA SDS for section: Upload Physical Data-related Documents (Optional)
 	Then I see the following sections
 		| Section                                           |
 		| Toxicity Characteristic Leaching Procedure (TCLP) |
