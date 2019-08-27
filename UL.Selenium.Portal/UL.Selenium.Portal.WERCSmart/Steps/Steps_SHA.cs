@@ -1031,6 +1031,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("ID", thisProductInformation);
 		}
 
+		[StepDefinition(@"I save the first product in the grid with retailers as: (.*)")]
+		public void ISaveTheFirstProductInTheGridWithRetailersAs(string savedAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			Delay.Seconds(1);
+			string id = thisStudioSHAManager.SelectFirstProduct();
+			Report.IsTrue(id.Length > 0, "Product " + id + " has not been selected",
+							"Product " + id + " has been selected");
+			var thisProductInformation = new ProductInformation {
+				Id = id
+			};
+			Context.AddToContext("ID", thisProductInformation);
+		}
+
+
 		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I should see: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIShouldSee(string shouldSee)
 		{
@@ -2017,6 +2032,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(id != null, "No suitable id was found", "ID: " + id + " was found and saved as: " + saveAs);
 
+		}
+
+		[StepDefinition(@"I save a product which blue and has retailers as (.*)")]
+		public void GivenISaveAProductWhichIsNotRedOrOrangeAndHasRetailersAsTestCase(string saveAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			ProductInformation info = thisStudioSHAManager.ReturnProductInformationOfProductwithIsBlueAndHasClients();
+
+			if (info != null)
+			{
+				Context.AddToContext(saveAs, info);
+			}
+
+			Report.IsTrue(info != null, "No suitable id was found", "ID: " + info.Id + " was found and saved as: " + saveAs);
+
+		}
+
+
+		[StepDefinition(@"I save the retailers associated with product (.*) as (.*)")]
+		public void ISaveTheRetailersAssociatedWithTheProductAs(string productSavedAs, string retailersSavedAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			var product = (ProductInformation)Context.GetFromContext(productSavedAs);
+			List<string> retailers = thisStudioSHAManager.ReturnClientsOfProductByID(product.Id);
+			Report.IsTrue(retailers != null && retailers.Count > 0, "Failed to find list of retailers!", "Successfully found list of retailers!");
+			Context.AddToContext(retailersSavedAs, retailers);
 		}
 
 		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]

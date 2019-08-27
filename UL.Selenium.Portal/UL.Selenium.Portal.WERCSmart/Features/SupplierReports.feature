@@ -229,7 +229,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	#Create an enhanced article product - Lithium BCP (Camera w/ Battery)
+	Create an enhanced article product - Lithium BCP (Camera w/ Battery)
 	Given I navigate to the home page
 	Given I generate a random UPC number and save as: UPC108254BCP
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -258,30 +258,15 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called UPCs and Registrations (Retailer Specific).xlsx and save as 108254
-	And I confirm that for product saved as: TestCase108254Chalk the value in the Product Name column of spreadsheet 108254 is: Chalk
-	And I confirm that for product saved as: TestCase108254Chalk the UPC in the UPC column of spreadsheet 108254 is: UPC108254Chalk
-	And I confirm that for product saved as: TestCase108254Chalk the value in the Retailer column of spreadsheet 108254 is: Walgreens
-	And I confirm that for product saved as: TestCase108254Chalk the value in the Status column of spreadsheet 108254 is: Submitted
-	And I confirm that for product saved as: TestCase108254Chalk the value in the Ounces column of spreadsheet 108254 is: 12
-	And I confirm that for product saved as: TestCase108254Chalk the value in the Container Type column of spreadsheet 108254 is: Plastic Container
-	And I confirm that for product saved as: TestCase108254Chalk the value in the Registration Type column of spreadsheet 108254 is: Stationery
-	And I confirm that for product saved as: TestCase108254Chalk the value in the Subscription Type column of spreadsheet 108254 is: FORMULATED
-	And I confirm that for product saved as: TestCase108254Lightbulb the value in the Product Name column of spreadsheet 108254 is: Light Bulbs - Incandescent Bulbs
-	And I confirm that for product saved as: TestCase108254Lightbulb the UPC in the UPC column of spreadsheet 108254 is: UPC108254Lightbulb
-	And I confirm that for product saved as: TestCase108254Lightbulb the value in the Retailer column of spreadsheet 108254 is: Walgreens
-	And I confirm that for product saved as: TestCase108254Lightbulb the value in the Status column of spreadsheet 108254 is: Submitted
-	And I confirm that for product saved as: TestCase108254Lightbulb the value in the Ounces column of spreadsheet 108254 is: 12
-	And I confirm that for product saved as: TestCase108254Lightbulb the value in the Container Type column of spreadsheet 108254 is: Plastic Container
-	And I confirm that for product saved as: TestCase108254Lightbulb the value in the Registration Type column of spreadsheet 108254 is: Home Improvement
-	And I confirm that for product saved as: TestCase108254Lightbulb the value in the Subscription Type column of spreadsheet 108254 is: ARTICLES
-	And I confirm that for product saved as: TestCase108254BCP the value in the Product Name column of spreadsheet 108254 is: Camera wBattery
-	And I confirm that for product saved as: TestCase108254BCP the UPC in the UPC column of spreadsheet 108254 is: UPC108254BCP
-	And I confirm that for product saved as: TestCase108254BCP the value in the Retailer column of spreadsheet 108254 is: Walgreens
-	And I confirm that for product saved as: TestCase108254BCP the value in the Status column of spreadsheet 108254 is: Submitted
-	And I confirm that for product saved as: TestCase108254BCP the value in the Ounces column of spreadsheet 108254 is: 32
-	And I confirm that for product saved as: TestCase108254BCP the value in the Container Type column of spreadsheet 108254 is: Plastic Container
-	And I confirm that for product saved as: TestCase108254BCP the value in the Registration Type column of spreadsheet 108254 is: Battery-Containing Product
-	And I confirm that for product saved as: TestCase108254BCP the value in the Subscription Type column of spreadsheet 108254 is: ENHANCED ARTICLES
+	And I confirm that for product saved as: TestCase108254Chalk the value in each of the columns of spreadsheet 108254 is as follows:
+		| Product Name | UPC            | Retailer  | Status    | Ounces | Container Type    | Registration Type | Subscription Type |
+		| Chalk        | UPC108254Chalk | Walgreens | Submitted | 12     | Plastic Container | Stationery        | FORMULATED        |
+	And I confirm that for product saved as: TestCase108254Lightbulb the value in each of the columns of spreadsheet 108254 is as follows:
+		| Product Name                     | UPC                | Retailer  | Status    | Ounces | Container Type    | Registration Type | Subscription Type |
+		| Light Bulbs - Incandescent Bulbs | UPC108254Lightbulb | Walgreens | Submitted | 12     | Plastic Container | Home Improvement  | ARTICLES          |
+	And I confirm that for product saved as: TestCase108254BCP the value in each of the columns of spreadsheet 108254 is as follows:
+		| Product Name    | UPC          | Retailer  | Status    | Ounces | Container Type    | Registration Type          | Subscription Type |
+		| Camera wBattery | UPC108254BCP | Walgreens | Submitted | 32     | Plastic Container | Battery-Containing Product | ENHANCED ARTICLES |
 	And I delete the Supplier Report file saved as 108254
 
 @TReVorId:22397
@@ -340,6 +325,9 @@ Scenario: [73226] Pesticide Certificate Report
 		| Pesticide Certificates Expire in 31-60 Days Count |
 		| Pesticide Certificates Expire in 61-90 Days Count |
 		| In Recertification                                |
+	Then I save the value with the header WPSID on the first product in the excel spreadsheet saved as: excel73226 as TestCase73226Id
+	Then I save the value with the header Product Name on the first product in the excel spreadsheet saved as: excel73226 as TestCase73226Name
+	Given I save the product with name: TestCase73226Name and id: TestCase73226Id as: TestCase73226
 	And I delete the excel file saved as excel73226
 
 @TReVorId:22401

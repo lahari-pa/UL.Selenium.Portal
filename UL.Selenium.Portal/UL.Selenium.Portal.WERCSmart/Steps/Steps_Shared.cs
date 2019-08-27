@@ -914,6 +914,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep(@"I click the browse button for label: Product Label and upload PDF: testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Delay.Seconds(2);
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -2361,9 +2362,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I select the first option for section: For Marine transport (IMDG), indicate the classification");
 			MyNewProductSteps.SelectFirstOptionInSection("For Marine transport (IMDG), indicate the classification");
 			TestReport.StartStep(
-				"I set the For Air transport (IATA), indicate the classification field to: Section II");
-			MyNewProductSteps.SetTheSectionOptionTo("For Air transport (IATA), indicate the classification",
-				"Section II");
+				"I set the For Air transport (IATA), indicate the classification field to the first selection");
+			MyNewProductSteps.SelectFirstOptionInSection("For Air transport (IATA), indicate the classification");
 			TestReport.StartStep(
 				"I set the For Canada's Transportation of Dangerous Goods (TDG), indicate the classification field to: None of the above/Not intended for shipment in Canada");
 			MyNewProductSteps.SetTheSectionOptionTo(
@@ -7673,6 +7673,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table.AddRow(new string[] {
 				"Status",
 				status
+			});
+
+
+			TestReport.StartStep("I click Srch in the bottom menu list");
+			myStudioShaManager.ClickBottomMenuOption("Search");
+			var myStepsSha = new Steps_SHA();
+			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+			Delay.Seconds(1);
+			Report.Info("Waiting for product list");
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
+				"Product list is showing");
+
+		}
+
+		[StepDefinition(
+					@"I call Shared Step 74655 SHA with email - Search by Supplier ID saved as (.*) for specific product status: (.*) and email: (.*)")]
+		public void GivenICallSharedStepSHA74655SearchBySupplierIDSavedAsMyIDForSpecificProductStatusCompletedAndEmail(
+					string savedAs, string status, string email)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step: 74655");
+			var thisStepsSha = new Steps_SHA();
+			TestReport.StartStep("I set the status filter to All");
+			var myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.WaitForProductList(60);
+			myStudioShaManager.SelectFromStatusFilter("All");
+			GeneralUtilities.StudioWaitForSpinner();
+			myStudioShaManager.WaitForProductList(60);
+			Report.Info("Getting saved product: " + savedAs);
+
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+
+			TestReport.StartStep("I click Srch in the bottom menu list");
+
+			myStudioShaManager.ClickBottomMenuOption("Search");
+
+
+			string supplierID = Context.GetFromContext(savedAs).ToString();
+			Report.Info("Looking for supplier id: " + supplierID.ToString());
+			var table = new Table(new string[] {
+				"SearchTerm",
+				"SearchValue"
+			});
+			table.AddRow(new string[] {
+				"Supplier",
+				supplierID
+			});
+			table.AddRow(new string[] {
+				"Status",
+				status
+			});
+			table.AddRow(new string[] {
+				"User",
+				email
 			});
 
 

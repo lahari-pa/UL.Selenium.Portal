@@ -172,7 +172,28 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	And I In the Shared Step below - Select the Product with the "Accepted Status"
 	And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: (.*))
 	And I Confirm the Product now shows a "Completed" Status in Completed for ALL associated Retailers
+
 # Assigned to Barrett, Beverly
 # Created by Barrett, Beverly
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\Release Day Tests
+@tfs_design
+Scenario: [75129] Forward - Product in Submitted Status
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#TODO jwhitesell update this step so it uses the QA Products account, not a hard coded email address.
+	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: User_06e12fc25a59.kxxyxunf@mailosaur.io and saved name as: TestCase75129Supplier
+	And I call Shared Step 74655 SHA with email - Search by Supplier ID saved as TestCase75129Supplier for specific product status: Submitted and email: User_06e12fc25a59.kxxyxunf@mailosaur.io
+	And I save a product which blue and has retailers as TestCase75129
+	And I save the retailers associated with product TestCase75129 as TestCase75129Retailers
+	Given I navigate to the landing page
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I filter the products by: Assessment in Progress
+	And I filter for the product saved as: TestCase75129
+	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+	Then I should see the header: Forward Product Registration on the Forward Product Registration window
+	And I enter the text: saved as TestCase75129 in the 'Search by WPS ID or Product Name' field
+	And In the Foward Product Registration Screen I should see product: saved as TestCase75129
+	And In the Foward Product Registration Screen I Select the product: saved as TestCase75129
+	And I click continue on the Forward Product Registration page
+	And In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as TestCase75129Retailers and save as TestCase75321Retailer

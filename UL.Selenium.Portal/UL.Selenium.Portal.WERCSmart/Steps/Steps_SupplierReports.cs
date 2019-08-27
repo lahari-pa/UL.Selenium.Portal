@@ -232,6 +232,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Cell value matches value " + value + " for column " + column + " and id " + product.Id + ".");
 		}
 
+		[StepDefinition(@"I confirm that for product saved as: (.*) the value in each of the columns of spreadsheet (.*) is as follows:")]
+		public void IConfirmThatforProductSavedAsTheValueInEachOfTheColumnsIs(string savedAs, string spreadsheet, Table table)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string file = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			table.Rows[0]["UPC"] = Context.GetFromContext(table.Rows[0]["UPC"])?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + spreadsheet);
+				return;
+			}
+			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			var headers = table.Header.ToList<string>();
+			var values = table.Rows[0].Values.ToList<string>();
+			int index = 1;
+			while (index < ExcelUtils.Excel_GetColumn(0).Count)
+			{
+				if (ExcelUtils.GetCellValue(index, 0) == product.Id)
+				{
+					break;
+				}
+				index++;
+			}
+			for (int i = 0; i < table.Header.Count; i++)
+			{
+				string cellValue = ExcelUtils.GetCellValue(index, table.Header.ElementAt(i));
+				Report.IsTrue(cellValue == values[i], "Failed to match cell value " + cellValue + " to table value " + values.ElementAt(i) + ".",
+					"Successfully match cell value " + cellValue + ".");
+			}
+		}
+
 		[StepDefinition(@"I confirm that for product saved as: (.*) the UPC in the (.*) column of spreadsheet (.*) is: (.*)")]
 		public void IConfirmThatForProductTheUPCInTheColumnIs(string savedAs, string column, string spreadsheet, string upc)
 		{
