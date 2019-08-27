@@ -221,5 +221,5 @@ And I click continue on the Forward Product Registration page
 And I click continue on the Forward Product Registration page
 Given I select the true radio for the 'Are Statements True' question under the Review and Submit tab
 And I click continue on the Forward Product Registration page
-Then In the Purchase Summary screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 And I navigate to the home page
