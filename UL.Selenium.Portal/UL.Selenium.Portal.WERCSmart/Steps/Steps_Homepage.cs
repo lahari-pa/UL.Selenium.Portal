@@ -987,5 +987,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			thisGlobalSteps.NavigateToLandingPage();
 		}
+		[StepDefinition(@"I click the Home navigation icon and an alert appears")]
+		public void ThenIClickTheHomeNavigationIconAndAlertAppears(string alertAction)
+		{
+			try
+			{
+				Report.Info("Navigating to the Home Page");
+				var selNav = new NavigationBar();
+				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!", false, false);
+				SeleniumBrowser.Alert.WaitForAlert(5);
+				Report.IsTrue(SeleniumBrowser.Alert.IsAlertPresent(), "Alert is not present", "Alert was present", false, false);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 	}
 }

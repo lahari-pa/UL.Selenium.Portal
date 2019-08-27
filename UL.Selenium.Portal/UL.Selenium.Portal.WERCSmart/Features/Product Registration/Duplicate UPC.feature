@@ -111,6 +111,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	Then In the Add Multiple dialog box I select all Retailers
 	Then I Check if all Retailers are: Selected
 	Then In the Add Multiple dialog box I click Finish
+	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
 	Given I click continue
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
