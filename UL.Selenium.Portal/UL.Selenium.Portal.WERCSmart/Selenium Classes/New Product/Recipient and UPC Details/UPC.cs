@@ -470,9 +470,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public IWebElement UPCButtonContainerTop => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[@class='upc-buttons affix-top']"), 2);
 		public IWebElement UPCButtonContainerBottom => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[@class='upc-buttons affix']"), 2);
 
+		public bool ClickDeleteRowsButton()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@class,'danger')]"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.TryClick();
+		}
+
 		
 
+
+
+
+
 	}
+	public class DeleteRowsWarning:SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath(@"//div[@class='modal-dialog modal-md']//div[@class='modal-content']");
+		public IWebElement DeleteRowsWarningPopupOkButton=> containerElement.FindElement(By.XPath("//button[text()='Ok']"), 2);
+		public IWebElement DeleteRowsWarningPopupCancelButton => containerElement.FindElement(By.XPath("//button[text()='Cancel']"), 2);
+
+	}
+
 
 	public class MultipleUPC : SeleniumBaseObject
 	{
