@@ -558,7 +558,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	And I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
 
-	@singlerun
+	
 @TReVorId:23416
 	Scenario: [95988] Mass Upload UPCs Floating
 	Then I generate: 20 random UPC numbers and save them starting with: RandomUPC

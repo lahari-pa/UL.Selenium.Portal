@@ -64,12 +64,15 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91076
 
+
+@singlerun
 @TReVorId:23403
 Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+	Then I save the product information as: TestCase82536
 	And I click continue
 	And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -108,10 +111,20 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	Then In the Add Multiple dialog box I select all Retailers
 	Then I Check if all Retailers are: Selected
 	Then In the Add Multiple dialog box I click Finish
+	Given I click continue
+	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
 	Then I make a list of the duplicated UPCs and save it as: duplicateUPCs82536 from the table saved as: UPCTable82536
 	Then I use a list of duplicated UPCs saved as: duplicateUPCs82536 and check that they have a warning traingle next to their retailer code and save the ones that do as: warningPresentList82536
 	Then Using the Hashtable of duplicate UPCs saved as: warningPresentList82536 I select the UPCS
+	Then I Click Delete Rows
+	Then I Check the Delete Rows Warning Popup: appears
+	Then I Click Ok in the Delete Rows Warning Popup
+	Then I Check the Delete Rows Warning Popup: disappears
+	Then I Check all Duplicate UPCs saved as: warningPresentList82536 are no longer shown
+	Then I click Continue and should not see an error message
+	And I navigate to the home page
+	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase82536
 
 		
 

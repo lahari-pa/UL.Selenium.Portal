@@ -955,28 +955,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var chosenOption = (string)Context.GetFromContext("AddMultipleDialogFirstContainerOption");
 
 				Report.IsTrue(chosenOption == displayedOption, "The Displayed container type did not match the type selected. Selected: " + chosenOption + ". The Displayed container type was: " + displayedOption + ".", "The Contianer types was correctly populated with the selected option");
-
-				//if (containerOption!=selectedOption)
-				//{
-				//	Report.Failure("The Displayed container type did not match the type selected. Selected: "+containerOption+ ". The Displayed container type was: "+displayedOption+ ".");
-				//	return;
-				//}
-				//Report.Success("The Contianer types was correctly populated with the selected option");
-				//return;
-
+								
 			}
 			else
 			{
 
 				Report.IsTrue(packagingType == displayedOption, "The Displayed container type did not match the type selected. Selected: " + displayedOption + ". The Displayed container type was: " + displayedOption + ".", "The Contianer types was correctly populated with the selected option");
-
-				//if (packagingType!= displayedOption)
-				//{
-				//	Report.Failure("The Displayed container type did not match the type selected. Selected: " +packagingType+ ". The Displayed container type was: " +displayedOption+ ".");
-				//	return;
-				//}
-				//Report.Success("The Contianer types was correctly populated with the selected option");
-				//return;
+								
 			}
 
 
@@ -988,71 +973,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var tableContent = (Table)Context.GetFromContext(tableSavedAs);
 			List<string> UPCCheckList = new List<string>();
-			//List<string> duplicateUPCList = new List<string>();
-
-			Hashtable duplicateUPCHashTable = new Hashtable();
-
-			int i = 0;
-			foreach (var row in tableContent.Rows)
-			{
-				var upcNumber = row["UPC"];
-
-				if (Regex.IsMatch(upcNumber, "<(.*)>"))
-				{
-					var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
-					if (Context.Contains(match, true))
-					{
-						upcNumber = Context.GetFromContext(match).ToString();
-					}
-				}
-
-				if (!UPCCheckList.Contains(upcNumber))
-				{
-					UPCCheckList.Add(upcNumber);
-				}
-				else
-				{
-					if (duplicateUPCHashTable.ContainsKey(upcNumber))
-					{
-						int old = (int)duplicateUPCHashTable[upcNumber];
-						duplicateUPCHashTable[upcNumber] = old + 1;
-					}
-					else
-					{
-						duplicateUPCHashTable.Add(upcNumber, 1);
-					}
-
-				}
-
-				//if (!UPCCheckList.Contains(upcNumber))
-				//{
-				//	/UPCCheckList.Add(upcNumber);
-				//	
-				//}
-				//else
-				//{
-				//	duplicateUPCList.Add(upcNumber);
-				//	
-				//}
-
-			}
-
-
-
-
-			//Context.AddToContext(duplicatesSavedAs, duplicateUPCList);
-			Context.AddToContext(duplicateListSavedAs, duplicateUPCHashTable);
-		}
-
-
-		[StepDefinition(@"I make a list of the duplicated UPCs including unique duplicated UPCs starting with: (.*) and save it to a hashtable as: (.*) from the table saved as: (.*)")]
-		public void IMakeAListOfDuplicateUPCsFromTableIncludingUPCSStartingWithX(string exisitingDuplicateUPCsSavedAs, string duplicateListSavedAs, string tableSavedAs)
-		//Needed if duplicated UPC list included replicated upcs and Unique duplicate UPCS in combination
-		{
-			var tableContent = (Table)Context.GetFromContext(tableSavedAs);
-			List<string> UPCCheckList = new List<string>();
-			//List<string> duplicateUPCList = new List<string>();
-
+			
 			Hashtable duplicateUPCHashTable = new Hashtable();
 
 			int i = 0;
@@ -1086,17 +1007,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 
 				}
+								
+			}
+			
+			Context.AddToContext(duplicateListSavedAs, duplicateUPCHashTable);
+		}
 
-				//if (!UPCCheckList.Contains(upcNumber))
-				//{
-				//	/UPCCheckList.Add(upcNumber);
-				//	
-				//}
-				//else
-				//{
-				//	duplicateUPCList.Add(upcNumber);
-				//	
-				//}
+
+		[StepDefinition(@"I make a list of the duplicated UPCs including unique duplicated UPCs starting with: (.*) and save it to a hashtable as: (.*) from the table saved as: (.*)")]
+		public void IMakeAListOfDuplicateUPCsFromTableIncludingUPCSStartingWithX(string exisitingDuplicateUPCsSavedAs, string duplicateListSavedAs, string tableSavedAs)
+		{
+			var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+			List<string> UPCCheckList = new List<string>();
+			
+			Hashtable duplicateUPCHashTable = new Hashtable();
+
+			int i = 0;
+			foreach (var row in tableContent.Rows)
+			{
+				var upcNumber = row["UPC"];
+
+				if (Regex.IsMatch(upcNumber, "<(.*)>"))
+				{
+					var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
+					if (Context.Contains(match, true))
+					{
+						upcNumber = Context.GetFromContext(match).ToString();
+					}
+				}
+				if (!UPCCheckList.Contains(upcNumber))
+				{
+					UPCCheckList.Add(upcNumber);
+				}
+				else
+				{
+					if (duplicateUPCHashTable.ContainsKey(upcNumber))
+					{
+						int old = (int)duplicateUPCHashTable[upcNumber];
+						duplicateUPCHashTable[upcNumber] = old + 1;
+					}
+					else
+					{
+						duplicateUPCHashTable.Add(upcNumber, 2);
+					}
+
+				}				
 
 			}
 
@@ -1106,11 +1061,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var valueToAdd = Context.GetFromContext(exisitingDuplicateUPCsSavedAs + j);
 				duplicateUPCHashTable.Add(valueToAdd, 1);
 				j++;
-			}
-
-
-
-			//Context.AddToContext(duplicatesSavedAs, duplicateUPCList);
+			}			
 			Context.AddToContext(duplicateListSavedAs, duplicateUPCHashTable);
 		}
 
@@ -1120,18 +1071,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I use a list of duplicated UPCs saved as: (.*) and check that they have a warning traingle next to their retailer code and save the ones that do as: (.*)")]
 		public void IMakeAListOfDuplicateUPCsAndCheckForWarning(string duplicateUPCsSavedAs, string upcsWithWarningSavedAs)
 		{
-
-
-			//get from context this ^ list
-
-			//for each item in the list, search the UPC grid for the element of the warning triangle and check if ==null or not.  (this method will take the upc number and find corrosponging location for triangle)>could be done in the class for this list (have bool warningPresent and get it using is present or false as default etc).
-
+			 
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I confirm the Add Multiple UPC popup disappears");
 			this.IConfirmThatTheAddMultipleUPCWindowCloses();
 			TestReport.StartStep("I make a list of the UPCS that have duplicates");
-			//method in upc.cs that checks the warning text and gets all duplicated upc numbers from it as a string and adds them to a list (savedAs) //doesnt work with current error message
-			//List<string> duplicateUPCStrings = new List<string>(); //make =^
 			TestReport.StartStep("I confirm the UPCs wich are duplicates have have a warning traingle next to their retailer code");
 
 			var duplicateUPCStrings = (Hashtable)Context.GetFromContext(duplicateUPCsSavedAs);
@@ -1167,52 +1111,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 			Context.AddToContext(upcsWithWarningSavedAs, upcsWithWarniningHT);
-
-
-			//foreach (var upcNum in duplicateUPCStrings)
-			//{
-			//	foreach (var item in listDisplayedUPCs)
-			//	{
-			//		if (upcNum == item.UpcNumber)
-			//		{
-			//			Report.IsTrue(item.WarningIsPresent, "The warning triangle for upc duplicate UPC No. " + upcNum + " was not found next to their retailer code", "The warning triangle for upc duplicate UPC No. " + upcNum + " was found next to their retailer code");
-			//			if (item.WarningIsPresent)
-			//			{
-			//				if (!upcsWithWarniningHT.ContainsKey(upcNum))
-			//				{
-			//					upcsWithWarniningHT.Add(upcNum, 1);
-			//				}
-			//				else
-			//				{
-			//					int old = (int)upcsWithWarniningHT[upcNum];
-			//					upcsWithWarniningHT[upcNum] = old + 1;
-			//				}
-			//			}
-
-			//		}
-			//	}
-			//}
-			//Context.AddToContext(upcsWithWarningSavedAs, upcsWithWarniningHT);
-
-			//var upcsWithWarnings = new List<string>();
-			//foreach (var upcNum in duplicateUPCStrings)
-			//{
-			//	foreach(var item in listDisplayedUPCs)
-			//	{
-			//		if(upcNum==item.UpcNumber)
-			//		{
-			//			Report.IsTrue(item.WarningIsPresent, "The warning triangle for upc duplicate UPC No. " + upcNum + " was not found next to their retailer code", "The warning triangle for upc duplicate UPC No. " + upcNum + " was found next to their retailer code");
-			//			if(item.WarningIsPresent)
-			//			{
-			//				upcsWithWarnings.Add(upcNum);
-			//			}
-
-			//		}
-			//	}
-			//}
-
-			//Context.AddToContext(upcsWithWarningSavedAs, upcsWithWarnings);
-
+					   			
 		}
 
 		[StepDefinition(@"Using the Hashtable of duplicate UPCs saved as: (.*) I select the UPCS")]
@@ -1248,8 +1147,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				}
 			}
-
-
+			
 		}
 
 		[StepDefinition("I Click Delete Rows")]
@@ -1275,6 +1173,55 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new DeleteRowsWarning().DeleteRowsWarningPopupOkButton.TryClick(), "Failed to Click Ok", "Succesfully clicked Ok");
 		}
+		[StepDefinition("I Check all Duplicate UPCs saved as: (.*) are no longer shown")]
+		public void ICheckAllDuplicateUPCSAreNoLongerShown(string upcsWithWarningSavedAs)
+		{
+			var selectionBoxes = new UPC().UPCSelectionBoxes;			
+			List<string> UPCCheckList = new List<string>();
+			
+			Hashtable visibleUPCHashtable = new Hashtable();
+
+			foreach (var row in selectionBoxes)
+			{
+					if (visibleUPCHashtable.ContainsKey(row.UpcNumber))
+					{
+						int old = (int)visibleUPCHashtable[row.UpcNumber];
+						visibleUPCHashtable[row.UpcNumber] = old + 1;
+					}
+					else
+					{
+						visibleUPCHashtable.Add(row.UpcNumber, 1);
+					}
+				
+			}
+
+			var upcsWithWarningHT = (Hashtable)Context.GetFromContext(upcsWithWarningSavedAs);
+			Hashtable warningHTcopy = new Hashtable();
+			warningHTcopy = (Hashtable)upcsWithWarningHT.Clone();
+
+			foreach (DictionaryEntry pair in visibleUPCHashtable)
+			{
+
+				string VisibleupcNumber = pair.Key as string;
+				int VisibletimesRecorded = (int)pair.Value;
+
+				foreach (DictionaryEntry item in upcsWithWarningHT)
+				{
+					string WarningupcNumber = pair.Key as string;
+					int WarningtimesDuplicated = (int)pair.Value;
+
+					if(VisibleupcNumber==WarningupcNumber)
+					{
+						Report.IsTrue(VisibletimesRecorded == 1, "Duplicate UPCs of: "+VisibleupcNumber+" are still shown", "Duplicate UPCs of: " + VisibleupcNumber + " are no longer shown");
+					}
+				}
+
+			}
+
+
+		}
+
+		
 
 
 
