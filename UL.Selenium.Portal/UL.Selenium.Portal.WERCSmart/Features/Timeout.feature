@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -24,6 +24,7 @@
 Feature: Timeout
 
 @Timeout1
+@TReVorId:23419
 Scenario: [Timeout Test] Mass Upload UPCs Popup, Inactivity Popup can be interacted with
 Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -66,6 +67,7 @@ Then Click No on the inactivity popup
 And the landing page should load
 
 @Timeout2
+@TReVorId:23420
 Scenario: [Timeout Test] Mass Upload UPCs Popup, TimeoutFeature Works Correctly
 Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
