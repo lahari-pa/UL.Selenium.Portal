@@ -40,19 +40,6 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	#Given I click the following option in the bottom menu: Search
-	#Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
-	#Given In SHA Manager ProductSearch page I run search:
-	#	| Search Term | Search Value                  |
-	#	| Status      | Completed                     |
-	#	| Supplier    | QA_Automation_ProductsAccount |
-	#	| User        | saved as AccountUsername      |
-	#Given I find a UPC number for any product in the grid and save to context as: ExistingUPC
-	#Given I navigate to the landing page
-	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	#Given I search for the product saved as: TestCase91076
-	#Given I edit the first product in results
 	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
 	Given I click the 'Add UPC' button
 	Given I add the following into the UPC Fields
@@ -122,17 +109,6 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - Case UPC
 	Given I find an existing UPC number in trevor account saved as: PremiumSubscriptionAccount using feature context: ExistingUPC_PremiumSubscriptionAccount_1
 	Given I navigate to the landing page
-	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	#Given I click the following option in the bottom menu: Search
-	#Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
-	#	Given In SHA Manager ProductSearch page I run search:
-	#	| Search Term | Search Value                  |
-	#	| Status      | Completed                     |
-	#Given I find a UPC number for any product not belonging to Supplier: QA_Automation_ProductsAccount in the grid and save to context as: ExistingUPC
-	#Given I navigate to the landing page
-	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	#	Given I search for the product saved as: TestCase91077
-	#Given I edit the first product in results
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click Bulk Actions in the Products Grid
 	Given I click Forward Product Registration in the Bulk Actions window
@@ -231,19 +207,6 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	#Given I click the following option in the bottom menu: Search
-	#Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
-	#Given In SHA Manager ProductSearch page I run search:
-	#	| Search Term | Search Value                  |
-	#	| Status      | Completed                     |
-	#	| Supplier    | QA_Automation_ProductsAccount |
-	#	| User        | saved as AccountUsername      |
-	#Then I save a UPC number for any product in the grid to context as: ExistingUPC
-	#Given I navigate to the landing page
-	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	#Given I search for the product saved as: TestCase91741
-	#Given I edit the first product in results
 	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
 	And in the UPC Window, I click the Add Case UPC button
 	Given I add the following into the UPC case fields
@@ -254,7 +217,6 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91741
-
 	
 @TReVorId:23410
 Scenario: [91100] Duplicate UPC is not permitted within account - New Product registration - Bulk Upload
@@ -334,13 +296,10 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	Then In the UPC modal window I click Cancel
 	And I click the Home navigation icon and accept the alert popup 
 
-
-
-
-
-
 @TReVorId:23406
 Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Single UPC
+	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
+	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -350,22 +309,11 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given I click the following option in the bottom menu: Search
-	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
-	Given In SHA Manager ProductSearch page I run search:
-		| Search Term | Search Value |
-		| Status      | Completed    |
-	Given I find a UPC number for any product not belonging to Supplier: QA_Automation_ProductsAccount in the grid and save to context as: ExistingUPC
-	Given I navigate to the landing page
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I search for the product saved as: TestCase91077
-	Given I edit the first product in results
 	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
 	Given I click the 'Add UPC' button
 	Given I add the following into the UPC Fields
-		| UPC Number           | Container Type    | Size | DPCI | Quantity |
-		| saved as ExistingUPC | Plastic Container | 1    |      |          |
+		| UPC Number                            | Container Type    | Size | DPCI | Quantity |
+		| saved as ExistingUPC_ProductAccount_1 | Plastic Container | 1    |      |          |
 	Given I click 'Select all' under Destination Retailers in the UPC page
 	Given I click continue
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:

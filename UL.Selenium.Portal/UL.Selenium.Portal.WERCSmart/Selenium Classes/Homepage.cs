@@ -44,6 +44,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return parentElement.HoveringChangesColour();
 		}
 
+		public IWebElement TopGridHeader(string header) => this.containerElement.FindElement(By.XPath("./div[@id='homeHeader']//h3[contains(text(),'" + header + "')]"), 1);
+
 		public bool TopGridHeaderPresent(string header)
 		{
 			IList<IWebElement> headers = this.containerElement.FindElements(By.XPath(".//div[@id='homeHeader']//h3"), 2);

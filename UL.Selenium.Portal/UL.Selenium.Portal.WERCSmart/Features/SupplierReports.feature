@@ -229,7 +229,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Create an enhanced article product - Lithium BCP (Camera w/ Battery)
+	#Create an enhanced article product - Lithium BCP (Camera w/ Battery)
 	Given I navigate to the home page
 	Given I generate a random UPC number and save as: UPC108254BCP
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

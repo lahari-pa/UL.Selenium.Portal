@@ -209,6 +209,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully found correct value '" + value + "' for section '" + section + "'.");
 		}
 
+		[StepDefinition(@"I confirm the document type is: (.*) for section: (.*)")]
+		public void ConfirmDocumentTypeForSection(string type, string section)
+		{
+			Report.IsTrue(new NewProduct().GetDocumentTypeForSection(section) == type,
+				$"Document type for section: '{section}' did not match expected type! Expected: {type}",
+				$"Document type for section: '{section}' matched the expected type");
+		}
+
 		#endregion
 
 		#region Unsorted steps

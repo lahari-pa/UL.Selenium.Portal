@@ -198,6 +198,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SelectVendor(string value)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
+			if (value.ToLower() == "<first>")
+			{
+				value = selForwardProdReg.FirstProductSelectedVendor();
+			}
 			Report.IsTrue(selForwardProdReg.FirstProductSelectVendor(value),
 				"Failed to select vendor: " + value,
 				"Successfully selected vendor: " + value);
@@ -210,6 +214,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selForwardProdReg.SelectFirstUPC(),
 				"Failed to select the first UPC",
 				"Successfully selecte the first UPC");
+		}
+
+		[StepDefinition(@"I click the 'select all' UPCs checkbox")]
+		public void ClickSelectAllUpcsCheckbox()
+		{
+			Report.IsTrue(new ForwardProductRegistration().ClickSelectAllUpcs, "Failed to click select all UPCs", "Clicked select all UPCs");
 		}
 
 		[StepDefinition(@"I confirm that: (.*) is displayed in the Destination Retailers column under Select UPCs")]
