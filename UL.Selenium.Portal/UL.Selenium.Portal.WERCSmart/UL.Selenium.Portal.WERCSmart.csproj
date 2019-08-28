@@ -435,6 +435,7 @@
     </None>
     <None Include="Features\Product Registration\Transportation.feature">
     </None>
+    <None Include="Features\Product Registration\UPC Case Pack.feature" />
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
     </None>
     <None Include="Features\Product Registration\VOC\VOC-SCAQMD.feature">
@@ -476,7 +477,7 @@
     </None>
     <None Include="Features\UL Toys.feature">
     </None>
-    <None Include="Features\UPC.feature">
+    <None Include="Features\Product Registration\UPC.feature">
     </None>
     <None Include="Features\Walmart.feature">
     </None>
