@@ -498,10 +498,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			*/
 		}
 
+		[StepDefinition(@"I confirm that the status of the product saved as: (.*) is: (.*)")]
+		public void IConfirmThatTheStatusOfTheProductIs(string productSavedAs, string status)
+		{
+			status = Context.GetFromContext(status)?.ToString() ?? "";
+			this.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(productSavedAs, status);
+		}
+
 		[StepDefinition(
-			@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is (red|not red) indicating a recertification")]
+					@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is (red|not red) indicating a recertification")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification(
-			string productSavedAs, string isRed)
+					string productSavedAs, string isRed)
 		{
 			Report.Info("Getting product from context: " + productSavedAs);
 			var productDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
@@ -1023,6 +1030,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			};
 			Context.AddToContext("ID", thisProductInformation);
 		}
+
+		[StepDefinition(@"I save the first product in the grid with retailers as: (.*)")]
+		public void ISaveTheFirstProductInTheGridWithRetailersAs(string savedAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			Delay.Seconds(1);
+			string id = thisStudioSHAManager.SelectFirstProduct();
+			Report.IsTrue(id.Length > 0, "Product " + id + " has not been selected",
+							"Product " + id + " has been selected");
+			var thisProductInformation = new ProductInformation {
+				Id = id
+			};
+			Context.AddToContext("ID", thisProductInformation);
+		}
+
 
 		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I should see: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIShouldSee(string shouldSee)
@@ -2012,6 +2034,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I save a product which blue and has retailers as (.*)")]
+		public void GivenISaveAProductWhichIsNotRedOrOrangeAndHasRetailersAsTestCase(string saveAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			ProductInformation info = thisStudioSHAManager.ReturnProductInformationOfProductwithIsBlueAndHasClients();
+
+			if (info != null)
+			{
+				Context.AddToContext(saveAs, info);
+			}
+
+			Report.IsTrue(info != null, "No suitable id was found", "ID: " + info.Id + " was found and saved as: " + saveAs);
+
+		}
+
+
+		[StepDefinition(@"I save the retailers associated with product (.*) as (.*)")]
+		public void ISaveTheRetailersAssociatedWithTheProductAs(string productSavedAs, string retailersSavedAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			var product = (ProductInformation)Context.GetFromContext(productSavedAs);
+			List<string> retailers = thisStudioSHAManager.ReturnClientsOfProductByID(product.Id);
+			Report.IsTrue(retailers != null && retailers.Count > 0, "Failed to find list of retailers!", "Successfully found list of retailers!");
+			Context.AddToContext(retailersSavedAs, retailers);
+		}
+
 		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
 		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
 		{
@@ -2368,7 +2416,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I find a UPC number for: (.*) products not belonging to Supplier: (.*) in the grid and save to context starting with: (.*)")]
-		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs) 
+		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs)
 		{
 			TestReport.UseSubSteps = true;
 			Context.AddToContext("numberOfUpcnumbers", numberOfProducts);
@@ -2387,7 +2435,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
 				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
-				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs+j, false);
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs + j, false);
 				if (Context.GetFromContext(savedAs + j) != null)
 				{
 					Report.Info($"Saved UPC{j} to context");

@@ -2170,7 +2170,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var homePage = new StepsHomepage();
 			var productsGrid = new ProductsGrid();
 			Report.Info("setting the Items on Page to '10'");
-			Report.IsTrue(productsGrid.SelectItemsOnPage("10"),"Failed to set items on page to 10", "successfully set the items on page to 10");
+			Report.IsTrue(productsGrid.SelectItemsOnPage("10"), "Failed to set items on page to 10", "successfully set the items on page to 10");
 			try
 			{
 				if (selProdGrid.ProductsCount() >= 10 && selProdGrid.GetGridNavDots())

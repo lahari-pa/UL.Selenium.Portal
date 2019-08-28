@@ -357,7 +357,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure("Could not find product ID in context saved as: " + savedAs);
 					return;
 				}
-				 
+
 				this.EnterTextInSearchByIDOrProductNameField(id);
 				Report.Screenshot();
 				Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
@@ -610,6 +610,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as (.*) and save as (.*)")]
+		public void InTheForwardProductRegistrationScreenSelectRetailerNotInListOfRetailers(string retailers, string saveAs)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			List<string> listOfRetailers = selForwardProdReg.GetListOfOtherRetailers();
+			bool bSelected = false;
+			string selectedRetailer = "";
+			int i = 0;
+			while (i < 5 && !bSelected)
+			{
+				var rnd = new Random();
+				int index = rnd.Next(0, listOfRetailers.Count - 1);
+				try
+				{
+					if (selForwardProdReg.SelectOtherRetailer(listOfRetailers[index]))
+					{
+						selectedRetailer = listOfRetailers[index];
+						Report.Success("Selected retailer: " + selectedRetailer);
+						bSelected = true;
+					}
+				}
+				catch (Exception e)
+				{
+					Report.Info(e.Message);
+				}
+
+				i++;
+			}
+
+
+			if (bSelected)
+			{
+				Context.AddToContext(saveAs, selectedRetailer);
+			}
+			else
+			{
+				throw new Exception("Failed to select a retailer");
+			}
+		}
+
 		[Then(@"I confirm that for UPC Number (.*) the retailer is displayed as (.*)")]
 		public void ThenIConfirmThatForUPCNumberSavedAsTestCaseUPCTheRetailerIsDisplayedAsSavedAsTestCaseRetailer(string aUPCNumber, string aRetailer)
 		{
@@ -659,7 +699,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var modal = new AddUPCModal();
 
-			if(modal.ClickSave())
+			if (modal.ClickSave())
 			{
 				Report.Success("Successfully clicked Save in the Add Case UPC modal window.", false);
 			}
@@ -667,7 +707,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure("Failed to click Save in the Add Case UPC modal window.", false);
 			}
-			
+
 		}
 
 
@@ -692,8 +732,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			var ids = (string)Context.GetFromContext(savedAs);
-			Report.IsTrue(selForwardProdReg.SelectProductsRightPanel_ClickProductByID(ids),"The Product with ID: "+ids+" was not selected", "The Product with ID: "+ids+" was selected");		   
-			
+			Report.IsTrue(selForwardProdReg.SelectProductsRightPanel_ClickProductByID(ids), "The Product with ID: " + ids + " was not selected", "The Product with ID: " + ids + " was selected");
+
 
 		}
 
@@ -710,7 +750,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(modal.ClickCancel(), "Failed to click Cancel in the Add UPC modal window.",
 			"Successfully clicked Cancel in the Add UPC modal window.");
 		}
-
 
 	}
 }
