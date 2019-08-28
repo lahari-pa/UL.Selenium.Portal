@@ -147,6 +147,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found UPC information.");
 		}
 
+		[StepDefinition(@"I confirm that the Data Summary section (.*) shows the value for (.*) saved as: (.*) for UPC saved as: (.*)")]
+		public void IConfirmThatTheDataSummarySectionShowsValueSavedAs(string section, string header, string savedAs, string upc)
+		{
+			var dataSummarySheet = new DataSummary();
+			string value = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			upc = Context.GetFromContext(upc)?.ToString() ?? "";
+
+			Report.IsTrue(dataSummarySheet.ConfirmUPCInformation(section, header, value, upc), "Failed to find value " + value + " for header " + header + " in Data Summary screen.",
+					"Successfully found value " + value + " for header " + header + " in Data Summary screen.");
+		}
+
 		[StepDefinition(@"The data summary window should be showing")]
 		public void TheDataSummaryWindowShouldBeShowing()
 		{

@@ -11,6 +11,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -350,6 +351,39 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public string SelectFirstProductWithRetailers()
+		{
+			Delay.Seconds(3);
+			Report.Info("Attemping to select first product with retailers");
+			Report.Screenshot();
+			IWebElement checkbox = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath("//table[@id='list']//tr//input"))
+				.FirstOrDefault(x => x != null);
+			Report.Info("Found checkbox");
+
+			//get id no
+			IWebElement idTD = checkbox.FindElement(By.XPath("../../td[2]"), 2);
+			string id = "";
+			if (idTD == null)
+			{
+				return "";
+			}
+			else
+			{
+				id = idTD.GetValue();
+			}
+
+			Report.Info("id = " + id);
+			if (this.SelectProductByID(id))
+			{
+				return id;
+			}
+			else
+			{
+				return "";
+			}
+		}
+
 		public bool SelectProductByID(string id)
 		{
 			try
@@ -542,7 +576,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var rowValues = new List<string>();
 				//Report.Info("Looking at row: " + j.ToString());
 
-                // js removed - trying 10 times with a 1 second delay to get row element is unnecessary because ListOfProductRows has already been assigned above..
+				// js removed - trying 10 times with a 1 second delay to get row element is unnecessary because ListOfProductRows has already been assigned above..
 				//bool gotRow = false;
 				//int counter = 0;
 				//while (!gotRow && counter < 10)
@@ -587,7 +621,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				catch (Exception e)
 				{
 					Report.Failure("Failed to get row " + j + ". Exception message: " + e.Message);
-                    continue;
+					continue;
 				}
 				var thisProduct = new Product();
 				int addIndex = 1;
@@ -1090,6 +1124,86 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return null;
 
+		}
+
+		public ProductInformation ReturnProductInformationOfProductwithIsBlueAndHasClients()
+		{
+			int indexOfID = SeleniumBrowser.WebBrowser
+							.FindElements(By.XPath(
+								".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+							.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+			int indexOfName = SeleniumBrowser.WebBrowser
+										.FindElements(By.XPath(
+											".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+										.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Name");
+			int indexOfClients = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+			ReadOnlyCollection<IWebElement> idTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfID + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> nameTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfName + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> clientsTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfClients + 1).ToString() + "]"));
+
+			for (int i = 0; i < idTDs.Count; i++)
+			{
+				IWebElement thisIDTD = idTDs[i];
+				IWebElement thisNameTD = nameTDs[i];
+				IWebElement thisClientsTD = clientsTDs[i];
+				string colour = thisIDTD.FindElement(By.XPath(".//span")).GetCssValue("color").ToString();
+				if (colour == "rgba(0, 0, 255, 1)" && thisClientsTD.GetValue().Length > 0)
+				{
+					string bottomBorderColour = thisIDTD.GetCssValue("border-bottom-color");
+					string leftBorderColour = thisIDTD.GetCssValue("border-left-color");
+					string rightBorderColour = thisIDTD.GetCssValue("border-right-color");
+
+					if (!(bottomBorderColour == "rgba(205, 10, 10, 1)" && leftBorderColour == "rgba(205, 10, 10, 1)" &&
+						  rightBorderColour == "rgba(205, 10, 10, 1)"))
+					{
+						return new ProductInformation {
+							Id = thisIDTD.GetValue().Trim(),
+							Name = thisNameTD.GetValue().Trim()
+						};
+					}
+
+				}
+			}
+
+			return null;
+		}
+
+		public List<string> ReturnClientsOfProductByID(string id)
+		{
+			int indexOfID = SeleniumBrowser.WebBrowser
+							.FindElements(By.XPath(
+								".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+							.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+			int indexOfClients = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+			ReadOnlyCollection<IWebElement> idTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfID + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> clientsTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfClients + 1).ToString() + "]"));
+
+			for (int i = 0; i < idTDs.Count; i++)
+			{
+				IWebElement thisIDTD = idTDs[i];
+				IWebElement thisClientsTD = clientsTDs[i];
+				if (thisIDTD.GetValue().Trim() == id)
+				{
+					return thisClientsTD.GetValue().Split(',').ToList<string>();
+				}
+			}
+			return null;
 		}
 	}
 
@@ -2182,7 +2296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return matchingButton.TryClick();
 		}
-		
+
 
 
 	}
@@ -2220,7 +2334,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (matchingButton == null)
 			{
 				Report.Info("no matching button was found");
-				return false;				
+				return false;
 			}
 			return matchingButton.TryClick();
 		}
