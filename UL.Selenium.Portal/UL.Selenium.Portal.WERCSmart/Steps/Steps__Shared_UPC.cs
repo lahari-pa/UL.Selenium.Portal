@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using NTTQA.Selenium.Classes;
@@ -14,6 +14,8 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using System.Collections.ObjectModel;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.UPC;
 using NTTQA.Selenium.UniversalFunctions;
+using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -552,15 +554,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheAddMultipleDialogBoxSelectAllUpcs()
 		{
 			Report.IsTrue(new MultipleUPC().ClickSelectAllUpcsButton(), "The select all Upcs button was not clicked successfully", "The select all Upcs button was clicked successfully");
+
 		}
+
+		[StepDefinition(@"I confirm that the Add Multiple UPC window opens")]
+		public void IConfirmThatTheAddMultipleUPCWindowOpens()
+		{
+			Report.IsTrue(new MultipleUPC().WaitForContainerToBeVisible(30), "The Add Multiple UPC windows did appear", " The Add Multiple UPC window did appear");
+		}
+
+		[StepDefinition(@"I confirm that the Add Multiple UPC window closes")]
+		public void IConfirmThatTheAddMultipleUPCWindowCloses()
+		{
+			Report.IsTrue(new MultipleUPC().WaitForContainerToBeInvisible(30), "The Add Multiple UPC windows did not close", " The Add Multiple UPC window was closed");
+		}
+
+
 
 
 		[StepDefinition(@"In the Add Multiple dialog box I select the packaging type: (.*)")]
 		public void InTheAddMultipleDialogBoxSelectPackagingTypeX(string packagingType)
 
 		{
-			var containsTypeOptionBox= new MultipleUPC().ContainsType;
-				
+			var containsTypeOptionBox = new MultipleUPC().ContainsType;
+
+			if(containsTypeOptionBox==null)
+			{
+				Report.Failure("The Container Type Option Box was not found");
+					return;
+			}
+
 
 			if (packagingType == "<first>")
 			{
@@ -573,20 +596,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				else
 				{
+					Context.AddToContext("AddMultipleDialogFirstContainerOption", firstOption);
 					containsTypeOptionBox.Select(firstOption);
+					Report.Info("Selecting option: " +firstOption+" as the packaging type");
+					
 				}
 
 			}
 			else
 			{
 				containsTypeOptionBox.Select(packagingType);
+				Report.Info("Selecting option: " + packagingType + " as the packaging type");
+
 			}
 		}
 
 		[StepDefinition(@"In the Add Multiple dialog box I click Next")]
 		public void InTheAddMultipleDialogBoxClickNext()
 		{
-			
+
 			Report.IsTrue(new MultipleUPC().ClickNextButton(), "Failed To click the Next button", "Successfully clicked the next button");
 		}
 
@@ -603,7 +631,616 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new MultipleUPC().ClickFinishButton(), "Failed To click the Finish button", "Successfully clicked the Finish button");
 		}
 
+		[StepDefinition(@"I check that the UPC Number of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckUPCNumberOfEachProductFromFile(string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckUPCNumberOfEachProductFromFile(file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
 
+		}
+
+		[StepDefinition(@"I check that the Size of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckSizeOfEachProductFromFile(string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckSizeOfEachProductFromFile(file, savedAs), "The Size shown in the Add Multiple Popup did not match the file", "The Size shown in the Add Multiple Popup matched the file");
+
+		}
+
+		[StepDefinition(@"I Check that all UPCs are selected")]
+		public void ICheckAllUPCsAreSelected()
+		{
+			Report.IsTrue(new MultipleUPC().CheckAllUPCsAreSelected(), "The Size shown in the Add Multiple Popup did not match the file", "The Size shown in the Add Multiple Popup matched the file");
+		}
+		[StepDefinition(@"I Check if all Retailers are: (Selected|Not Selected)")]
+		public void ICheckAllRetailersSelectedStatus(string status)
+		{
+			if (status == "Selected")
+			{
+				Report.IsTrue(new MultipleUPC().CheckAllRetailersSelectedStatus(), "All retailers were not selected", "All Retailers were selected");
+			}
+			if (status == "Not Selected")
+			{
+				Report.IsFalse(new MultipleUPC().CheckAllRetailersSelectedStatus(), "All Retailers were selected", "All retailers were not selected");
+			}
+		}
+
+		[StepDefinition(@"I edit the testdoc.xlsx, and save its filepath as: (.*) and verify it contains the UPC data in the table saved as: (.*)")]
+		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string fileSavedAs, string tableSavedAs, Table table)
+		{
+			Context.AddToContext(tableSavedAs, table);
+
+			var upc = new UPC();
+			
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("testdoc.xlsx"), "", "");
+			//Create file here
+			//var excelfile = new ExcelUtilities CreateSpreadsheet(fileName);
+
+			//var utils = ExcelUtilities.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
+			if(!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination))
+			{
+				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
+				return;
+			}
+
+			
+
+			var utils = new ExcelUtilities(destination, "Sheet1");
+
+
+
+
+			var headers = table.Rows.FirstOrDefault().Keys.ToList();
+			utils.AddRow(headers);
+			foreach (var row in table.Rows)
+			{
+				var vals = row.Values.Select(x =>
+				{
+					if (Regex.IsMatch(x, "<(.*)>"))
+					{
+						var match = Regex.Match(x, "<(.*)>").Groups[1].Value;
+						if (Context.Contains(match, true))
+						{
+							return Context.GetFromContext(match).ToString();
+						}
+					}
+
+					return x;
+				});
+
+				utils.AddRow(vals.ToList());
+			}
+			//add all rows from table to excelfile
+
+
+			System.IO.Directory.Move(destination, KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
+
+
+			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", fileSavedAs), "Failed to validate File", "Successfully validated File");
+
+
+		}
+
+		[StepDefinition(@"I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: (.*)")]
+		public void IConfirmAddMultipleUPCPopupAppearsAndValuesAreTheSame(string tableSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I confirm the Add Multiple UPC popup appears");
+			this.IConfirmThatTheAddMultipleUPCWindowOpens();
+			TestReport.StartStep("I confirm the UPC numbers and sizes are the same as the upload document");
+			var listDisplayedUPCs = new MultipleUPC().UPCUploads;
+			if (Context.Contains(tableSavedAs))
+			{
+				var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+				int i = 0;
+
+				bool successIsTrue = true;
+				foreach (var row in tableContent.Rows)
+				{
+					var upcNumber = row["UPC"];
+
+					var size = row["Size"];
+
+					var displayedSize = listDisplayedUPCs[i].Size;
+
+					if (Regex.IsMatch(upcNumber, "<(.*)>"))
+					{
+						var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
+						if (Context.Contains(match, true))
+						{
+							upcNumber = Context.GetFromContext(match).ToString();
+						}
+					}
+
+					var displayedUpcNumber = listDisplayedUPCs[i].UpcNumber;
+
+					if (displayedUpcNumber != upcNumber)
+					{
+						Report.Failure("The Value for UPC number did not match. The displayed value was: " + displayedUpcNumber + ". The UPC number in the document was: " + upcNumber + ".");
+						successIsTrue = false;
+					}
+
+					if (displayedSize != size)
+					{
+						Report.Failure("The Value for size did not match. The displayed value was: " + displayedSize + ". The Size in the document was: " + size + ".");
+						successIsTrue = false;
+					}
+
+
+					i++;
+				}
+
+				Report.IsTrue(successIsTrue, "Not all Values matched the UPC upload document", "All Values matched the UPC upload document");
+				return;
+
+
+			}
+
+			Report.Failure("The table " + tableSavedAs + " was not found in context");
+
+
+
+		}
+
+		[StepDefinition("I Confirm All UPCs are: (Selected|Not Selected)")]
+		public void IConfirmAllUpcAreSelected(string selectedStatus)
+		{
+			bool setStatus;
+			switch (selectedStatus)
+			{
+				case "Selected":
+					setStatus = true;
+					break;
+
+				case "Not Selected":
+					setStatus = false;
+					break;
+				default:
+					Report.Error("selectedStatus must be either: 'Selected' or 'Not Selected'");
+					return;
+			}
+
+
+			var listDisplayedUPCs = new MultipleUPC().UPCUploads;
+			bool successIsTrue = true;
+
+			for (int i = 0; i <= listDisplayedUPCs.Count - 1; i++)
+			{
+				var displayedChecked = listDisplayedUPCs[i].IsChecked;
+				if (displayedChecked != setStatus)
+				{
+					Report.Failure("The UPC with number: " + listDisplayedUPCs[i].UpcNumber + " was not shown as " + selectedStatus + ".");
+					successIsTrue = false;
+				}
+			}
+
+			Report.IsTrue(successIsTrue, "Not all UPCS were shown as" + selectedStatus + ".", "All UPCS were shown as" + selectedStatus + ".");
+			return;
+
+		}
+
+		[StepDefinition(@"I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: (.*)")]
+		public void IConfirmAddMultipleUPCPopupDisappearssAndValuesAreTheSame(string tableSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I confirm the Add Multiple UPC popup dissappears");
+			this.IConfirmThatTheAddMultipleUPCWindowCloses();
+			TestReport.StartStep("I confirm the UPC numbers and sizes are the same as the upload document");
+			var listDisplayedUPCs = new UPC().UPCsNewProduct;
+			if (Context.Contains(tableSavedAs))
+			{
+				var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+				int i = 0;
+
+				bool successIsTrue = true;
+				foreach (var row in tableContent.Rows)
+				{
+					var upcNumber = row["UPC"];
+
+					var size = row["Size"];
+
+					var displayedSize = listDisplayedUPCs[i].Size;
+
+					if (Regex.IsMatch(upcNumber, "<(.*)>"))
+					{
+						var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
+						if (Context.Contains(match, true))
+						{
+							upcNumber = Context.GetFromContext(match).ToString();
+						}
+					}
+
+					var displayedUpcNumber = listDisplayedUPCs[i].UpcNumber;
+
+					if (displayedUpcNumber != upcNumber)
+					{
+						Report.Failure("The Value for UPC number did not match. The displayed value was: " + displayedUpcNumber + ". The UPC number in the document was: " + upcNumber + ".");
+						successIsTrue = false;
+					}
+
+					if (displayedSize != size)
+					{
+						Report.Failure("The Value for size did not match. The displayed value was: " + displayedSize + ". The Size in the document was: " + size + ".");
+						successIsTrue = false;
+					}
+
+
+					i++;
+				}
+
+				Report.IsTrue(successIsTrue, "Not all Values matched the UPC upload document", "All Values matched the UPC upload document");
+				return;
+
+
+			}
+
+			Report.Failure("The table " + tableSavedAs + " was not found in context");
+
+
+		}
+
+		[StepDefinition(@"I Confirm that the Add/Upload UPC Buttons remain stay visible when scrolling up and down the page")]
+		public void IConfirmUPCButtonsRemainVisibleWhenScrolling()
+		{
+			TestReport.UseSubSteps = true;
+			var upc = new UPC();
+			TestReport.StartStep("Looking for the UPC Buton Container anywhere on the page");
+			if (upc.UPCButtonContainerGeneral == null)
+			{
+				Report.Failure("The UPC Buttons could not be found on anywhere page");
+				Report.Screenshot();
+				return;
+			}
+			Report.Success("The UPC Button container was found");
+			Report.Screenshot();
+			bool allFound = true;
+			if (!upc.AddUpcButton())
+			{
+				Report.Failure("The Add UPC Button was not found");
+				Report.Screenshot();
+				allFound = false;
+			}
+			if (!upc.AddCaseUpcButton())
+			{
+				Report.Failure("The Add Case UPC Button was not found");
+				Report.Screenshot();
+				allFound = false;
+			}
+			if (!upc.UploadUpcButton())
+			{
+				Report.Failure("The Upload UPCs Button was not found");
+				Report.Screenshot();
+				allFound = false;
+			}
+
+			if (allFound)
+			{
+				Report.Success("The UPC Buttons (+Add UPC, + Add Case UPC, & ↑ Upload UPCs were all found");
+				Report.Screenshot();
+			}
+
+			TestReport.StartStep("I Scroll to the top of the page and check the UPC Buttons still appear");
+			GeneralUtilities.ScrollToTopOfPage();
+			bool buttonsFound = true;
+			if (upc.UPCButtonContainerTop == null)
+			{
+				Report.Failure("The UPC Buttons were not on screen");
+				Report.Screenshot();
+				buttonsFound = false;
+			}
+			TestReport.StartStep("I Scroll to the bottom of the page and check the UPC Buttons still appear");
+			GeneralUtilities.ScrollToBottomOfPage();
+			if (upc.UPCButtonContainerBottom == null)
+			{
+				Report.Failure("The UPC Buttons were not on screen");
+				Report.Screenshot();
+				buttonsFound = false;
+			}
+			TestReport.StartStep("I Scroll to the top of the page and check the UPC Buttons still appear");
+			GeneralUtilities.ScrollToTopOfPage();
+			if (upc.UPCButtonContainerTop == null)
+			{
+				Report.Failure("The UPC Buttons were not on screen");
+				Report.Screenshot();
+				buttonsFound = false;
+			}
+			TestReport.StartStep("I Scroll to the bottom of the page and check the UPC Buttons still appear");
+			GeneralUtilities.ScrollToBottomOfPage();
+			if (upc.UPCButtonContainerBottom == null)
+			{
+				Report.Failure("The UPC Buttons were not on screen");
+				Report.Screenshot();
+				buttonsFound = false;
+			}
+
+			if (!buttonsFound)
+			{
+				Report.Failure("The UPC Buttons do not remain on screen when scrolling up and down the page");
+				return;
+			}
+			Report.Success("The UPC Buttons remain on screen when scrolling up and down the page");
+
+		}
+
+		[StepDefinition(@"I Check that the type coloumn becomes populated with option: (.*)")]
+		public void ICheckTypeColoumnContiansFirstOption(string packagingType)
+		{
+			var containsTypeOptionBox = new MultipleUPC().ContainsType;
+
+
+			var displayedOption = containsTypeOptionBox.SelectedOption();
+
+			if (packagingType == "<first>")
+
+			{
+				var chosenOption = (string)Context.GetFromContext("AddMultipleDialogFirstContainerOption");
+
+				Report.IsTrue(chosenOption == displayedOption, "The Displayed container type did not match the type selected. Selected: " + chosenOption + ". The Displayed container type was: " + displayedOption + ".", "The Contianer types was correctly populated with the selected option");
+								
+			}
+			else
+			{
+
+				Report.IsTrue(packagingType == displayedOption, "The Displayed container type did not match the type selected. Selected: " + displayedOption + ". The Displayed container type was: " + displayedOption + ".", "The Contianer types was correctly populated with the selected option");
+								
+			}
+
+
+
+		}
+
+		[StepDefinition(@"I make a list of the duplicated UPCs and save it as: (.*) from the table saved as: (.*)")]
+		public void IMakeAListOfDuplicateUPCsFromTable(string duplicateListSavedAs, string tableSavedAs)
+		{
+			var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+			List<string> UPCCheckList = new List<string>();
+			
+			Hashtable duplicateUPCHashTable = new Hashtable();
+
+			int i = 0;
+			foreach (var row in tableContent.Rows)
+			{
+				var upcNumber = row["UPC"];
+
+				if (Regex.IsMatch(upcNumber, "<(.*)>"))
+				{
+					var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
+					if (Context.Contains(match, true))
+					{
+						upcNumber = Context.GetFromContext(match).ToString();
+					}
+				}
+
+				if (!UPCCheckList.Contains(upcNumber))
+				{
+					UPCCheckList.Add(upcNumber);
+				}
+				else
+				{
+					if (duplicateUPCHashTable.ContainsKey(upcNumber))
+					{
+						int old = (int)duplicateUPCHashTable[upcNumber];
+						duplicateUPCHashTable[upcNumber] = old + 1;
+					}
+					else
+					{
+						duplicateUPCHashTable.Add(upcNumber, 2);
+					}
+
+				}
+								
+			}
+			
+			Context.AddToContext(duplicateListSavedAs, duplicateUPCHashTable);
+		}
+
+
+		[StepDefinition(@"I make a list of the duplicated UPCs including unique duplicated UPCs starting with: (.*) and save it to a hashtable as: (.*) from the table saved as: (.*)")]
+		public void IMakeAListOfDuplicateUPCsFromTableIncludingUPCSStartingWithX(string exisitingDuplicateUPCsSavedAs, string duplicateListSavedAs, string tableSavedAs)
+		{
+			var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+			List<string> UPCCheckList = new List<string>();
+			
+			Hashtable duplicateUPCHashTable = new Hashtable();
+
+			int i = 0;
+			foreach (var row in tableContent.Rows)
+			{
+				var upcNumber = row["UPC"];
+
+				if (Regex.IsMatch(upcNumber, "<(.*)>"))
+				{
+					var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
+					if (Context.Contains(match, true))
+					{
+						upcNumber = Context.GetFromContext(match).ToString();
+					}
+				}
+				if (!UPCCheckList.Contains(upcNumber))
+				{
+					UPCCheckList.Add(upcNumber);
+				}
+				else
+				{
+					if (duplicateUPCHashTable.ContainsKey(upcNumber))
+					{
+						int old = (int)duplicateUPCHashTable[upcNumber];
+						duplicateUPCHashTable[upcNumber] = old + 1;
+					}
+					else
+					{
+						duplicateUPCHashTable.Add(upcNumber, 2);
+					}
+
+				}				
+
+			}
+
+			int j = 1;
+			while (Context.Contains(exisitingDuplicateUPCsSavedAs + j))
+			{
+				var valueToAdd = Context.GetFromContext(exisitingDuplicateUPCsSavedAs + j);
+				duplicateUPCHashTable.Add(valueToAdd, 1);
+				j++;
+			}			
+			Context.AddToContext(duplicateListSavedAs, duplicateUPCHashTable);
+		}
+
+
+
+
+		[StepDefinition(@"I use a list of duplicated UPCs saved as: (.*) and check that they have a warning traingle next to their retailer code and save the ones that do as: (.*)")]
+		public void IMakeAListOfDuplicateUPCsAndCheckForWarning(string duplicateUPCsSavedAs, string upcsWithWarningSavedAs)
+		{
+			 
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I confirm the Add Multiple UPC popup disappears");
+			this.IConfirmThatTheAddMultipleUPCWindowCloses();
+			TestReport.StartStep("I make a list of the UPCS that have duplicates");
+			TestReport.StartStep("I confirm the UPCs wich are duplicates have have a warning traingle next to their retailer code");
+
+			var duplicateUPCStrings = (Hashtable)Context.GetFromContext(duplicateUPCsSavedAs);
+			List<UPCNewProduct> listDisplayedUPCs = new UPC().UPCsNewProduct;
+			Hashtable upcsWithWarniningHT = new Hashtable();
+
+			foreach (DictionaryEntry pair in duplicateUPCStrings)
+			{
+				string upcNumber = pair.Key as string;
+				int timesDuplicated = (int)pair.Value;
+				int i = 1;
+
+				foreach (var item in listDisplayedUPCs)
+				{
+					if (upcNumber == item.UpcNumber)
+					{
+
+						Report.IsTrue(item.WarningIsPresent, "The warning triangle for upc duplicate UPC No. " + upcNumber + " appearance: " + i + "  was not found next to their retailer code", "The warning triangle for upc duplicate UPC No. " + upcNumber + " appearance: " + i + "  was found next to their retailer code");
+						i++;
+
+						if (!upcsWithWarniningHT.ContainsKey(upcNumber))
+						{
+							upcsWithWarniningHT.Add(upcNumber, 1);
+						}
+						else
+						{
+							int old = (int)upcsWithWarniningHT[upcNumber];
+							upcsWithWarniningHT[upcNumber] = old + 1;
+						}
+
+					}
+				}
+
+			}
+			Context.AddToContext(upcsWithWarningSavedAs, upcsWithWarniningHT);
+					   			
+		}
+
+		[StepDefinition(@"Using the Hashtable of duplicate UPCs saved as: (.*) I select the UPCS")]
+		public void UsingTheDuplicateUpcsSavedAsSelectUPCs(string upcsWithWarningSavedAs)
+		{
+			var upcsWithWarningHT = (Hashtable)Context.GetFromContext(upcsWithWarningSavedAs);
+
+			Hashtable warningHTcopy = new Hashtable();
+			warningHTcopy = (Hashtable)upcsWithWarningHT.Clone();
+			var selectionBoxes = new UPC().UPCSelectionBoxes;
+			ArrayList a = new ArrayList(warningHTcopy.Keys);
+
+			foreach (var box in selectionBoxes)
+			{
+				foreach (DictionaryEntry pair in warningHTcopy)
+				{
+					string upcNumber = pair.Key as string;
+					int timesDuplicated = (int)pair.Value;
+
+					if (box.UpcNumber == upcNumber && timesDuplicated > 1)
+					{
+						Report.IsTrue(box.CheckBox.TryClick(), "The check box next to duplicate UPC No. " + upcNumber + " was not checked sucessfully", "The check box next to duplicate UPC No. " + upcNumber + " was checked sucessfully");
+						warningHTcopy[upcNumber] = timesDuplicated - 1;
+						break;
+
+					}
+					else if ((int)upcsWithWarningHT[upcNumber] == 1)
+					{
+						var testTT = (int)upcsWithWarningHT[upcNumber];
+						Report.IsTrue(box.CheckBox.TryClick(), "The check box next to duplicate UPC No. " + upcNumber + " was not checked sucessfully", "The check box next to duplicate UPC No. " + upcNumber + " was checked sucessfully");
+						break;
+					}
+
+				}
+			}
+			
+		}
+
+		[StepDefinition("I Click Delete Rows")]
+		public void IClickDeleteRows()
+		{
+			Report.IsTrue(new UPC().ClickDeleteRowsButton(), "Failed to click Delete Rows", " Successfully clicked Delete Rows");
+		}
+		[StepDefinition("I Check the Delete Rows Warning Popup: (appears|disappears)")]
+		public void ICheckTheDeleteRowsPopupPresent(string status)
+		{
+			if (status == "appears")
+			{
+				Report.IsTrue(new DeleteRowsWarning().WaitForContainerToBeVisible(30), "The warning popup did not appear", "The warning popup appeared");
+			}
+			if (status == "disappears")
+			{
+				Report.IsTrue(new DeleteRowsWarning().WaitForContainerToBeInvisible(30), "The warning popup appeared", "The warning popup did not appear");
+			}
+		}
+
+		[StepDefinition("I Click Ok in the Delete Rows Warning Popup")]
+		public void IClickOkInTheDeleteRowsWarningPopup()
+		{
+			Report.IsTrue(new DeleteRowsWarning().DeleteRowsWarningPopupOkButton.TryClick(), "Failed to Click Ok", "Succesfully clicked Ok");
+		}
+		[StepDefinition("I Check all Duplicate UPCs saved as: (.*) are no longer shown")]
+		public void ICheckAllDuplicateUPCSAreNoLongerShown(string upcsWithWarningSavedAs)
+		{
+			var selectionBoxes = new UPC().UPCSelectionBoxes;			
+			List<string> UPCCheckList = new List<string>();
+			
+			Hashtable visibleUPCHashtable = new Hashtable();
+
+			foreach (var row in selectionBoxes)
+			{
+					if (visibleUPCHashtable.ContainsKey(row.UpcNumber))
+					{
+						int old = (int)visibleUPCHashtable[row.UpcNumber];
+						visibleUPCHashtable[row.UpcNumber] = old + 1;
+					}
+					else
+					{
+						visibleUPCHashtable.Add(row.UpcNumber, 1);
+					}
+				
+			}
+
+			var upcsWithWarningHT = (Hashtable)Context.GetFromContext(upcsWithWarningSavedAs);
+			Hashtable warningHTcopy = new Hashtable();
+			warningHTcopy = (Hashtable)upcsWithWarningHT.Clone();
+
+			foreach (DictionaryEntry pair in visibleUPCHashtable)
+			{
+
+				string VisibleupcNumber = pair.Key as string;
+				int VisibletimesRecorded = (int)pair.Value;
+
+				foreach (DictionaryEntry item in upcsWithWarningHT)
+				{
+					string WarningupcNumber = pair.Key as string;
+					int WarningtimesDuplicated = (int)pair.Value;
+
+					if(VisibleupcNumber==WarningupcNumber)
+					{
+						Report.IsTrue(VisibletimesRecorded == 1, "Duplicate UPCs of: "+VisibleupcNumber+" are still shown", "Duplicate UPCs of: " + VisibleupcNumber + " are no longer shown");
+					}
+				}
+
+			}
+
+
+		}
+
+		
 
 
 

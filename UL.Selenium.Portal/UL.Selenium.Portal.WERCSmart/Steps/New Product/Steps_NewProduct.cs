@@ -139,7 +139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ShouldSeeAlistFormError(string error)
 		{
 			var errorActual = new NewProduct().FormError();
-			Report.IsTrue(errorActual.Contains(error), "Error was not found!", "Found error");
+			Report.IsTrue(errorActual.Contains(error), "The expected error was not found! The error text found was: "+errorActual, "Found expected error");
 		}
 
 		[StepDefinition(@"in page (.*) I should see error: (.*)")]
