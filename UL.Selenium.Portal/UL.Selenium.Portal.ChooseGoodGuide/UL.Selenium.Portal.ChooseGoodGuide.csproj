@@ -166,5 +166,5 @@
       <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
     </ItemGroup>
   </Target>
-  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.6.0.41\build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.6.0.41\build\NTTQA.Selenium.TReVor.Modules.targets')" />
+  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.6.0.41\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.6.0.41\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
 </Project>
