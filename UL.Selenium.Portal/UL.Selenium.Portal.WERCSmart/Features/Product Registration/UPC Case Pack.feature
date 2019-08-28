@@ -298,69 +298,41 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 		| Amazon   |
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
-
-
 	
-@TReVorId:23416
-	Scenario: [95988] Mass Upload UPCs Floating
-	Then I generate: 20 random UPC numbers and save them starting with: RandomUPC
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
-	Then I save the product information as: TestCase95988
-	And I click continue
-	And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
-	Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	And I click continue
-	And I click Sample File link and verify the Upload UPC form and save it as test95988 with data:
-		| UPC          | Quantity | Size | Net Explosive Mass | US:Â Part Number | US:Â Item Number | GP:Â Part Number | SP:Â Part Number | TG:Â DPCI    | HD:Â OMSID | CT: Item Number   |
-		| 823973000000 | 1        | 11   | 1.22               | 11AB45          | 1001            | 1111            | A0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |
-		| 71617198008  | 2        | 22   | 2.33               | 12AB56          | 1002            | 2222            | B0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |
-		| 978959000000 | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |
-		| 688267000000 | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |
-		| 854911000000 | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
-	And I edit the testdoc.xlsx, and save its filepath as: Bulktest95988 and verify it contains the UPC data in the table saved as: UPCTable95988
-		| UPC           | Quantity | Size | Net Explosive Mass | US:Â Part Number | US:Â Item Number | GP:Â Part Number | SP:Â Part Number | TG:Â DPCI    | HD:Â OMSID | CT: Item Number   |
-		| <RandomUPC1>  | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |
-		| <RandomUPC2>  | 2        | 32   | 2.33               | 00BB02          | 2002            | 1112            | G0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |
-		| <RandomUPC3>  | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |
-		| <RandomUPC4>  | 4        | 32   | 4.55               | 00DD04          | 2004            | 1114            | I0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |
-		| <RandomUPC5>  | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
-		| <RandomUPC6>  | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |
-		| <RandomUPC7>  | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |
-		| <RandomUPC8>  | 8        | 32   | 8.99               | 00HH08          | 2008            | 1118            | M0008           | 111-22-0008 | 100000008 | 123-1234,123-1237 |
-		| <RandomUPC9>  | 9        | 32   | 9.00               | 00II09          | 2009            | 1119            | N0009           | 111-22-0009 | 100000009 | 123-1234,123-1238 |
-		| <RandomUPC10> | 10       | 32   | 10.11              | 00JJ10          | 2010            | 1110            | O0010           | 111-22-0010 | 100000010 | 123-1234,123-1239 |
-		| <RandomUPC11> | 11       | 32   | 11.22              | 00KK11          | 2011            | 1111            | P0013           | 111-22-0011 | 100000011 | 123-1234,123-1240 |
-		| <RandomUPC12> | 12       | 32   | 12.33              | 00LL12          | 2012            | 1112            | Q0014           | 111-22-0012 | 100000012 | 123-1234,123-1241 |
-		| <RandomUPC13> | 13       | 32   | 13.44              | 00MM13          | 2013            | 1113            | R0015           | 111-22-0013 | 100000013 | 123-1234,123-1242 |
-		| <RandomUPC14> | 14       | 32   | 14.55              | 00NN14          | 2014            | 1114            | S0016           | 111-22-0014 | 100000014 | 123-1234,123-1243 |
-		| <RandomUPC15> | 15       | 32   | 15.66              | 00OO15          | 2015            | 1115            | T0015           | 111-22-0015 | 100000015 | 123-1234,123-1244 |
-		| <RandomUPC16> | 16       | 32   | 16.77              | 00PP16          | 2016            | 1116            | U0016           | 111-22-0016 | 100000016 | 123-1234,123-1245 |
-		| <RandomUPC17> | 17       | 32   | 17.88              | 00QQ17          | 2017            | 1117            | u0017           | 111-22-0017 | 100000017 | 123-1234,123-1246 |
-		| <RandomUPC18> | 18       | 32   | 18.99              | 00RR18          | 2018            | 1118            | v0018           | 111-22-0018 | 100000018 | 123-1234,123-1247 |
-		| <RandomUPC19> | 19       | 32   | 19.00              | 00SS19          | 2019            | 1119            | W0019           | 111-22-0019 | 100000019 | 123-1234,123-1248 |
-		| <RandomUPC20> | 20       | 32   | 20.11              | 00TT20          | 2020            | 1120            | X0020           | 111-22-0020 | 100000020 | 123-1234,123-1249 |
-	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest95988
-	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable95988	
-	Then In the Add Multiple dialog box I select all UPCs
-	Then I Confirm All UPCs are: Selected
-	Then In the Add Multiple dialog box I select the packaging type: <first>
-	Then I Check that the type coloumn becomes populated with option: <first>
-	Given In the Add Multiple dialog box I click Next
-	Then In the Add Multiple dialog box I select all Retailers
-	Then I Check if all Retailers are: Selected
-	Then In the Add Multiple dialog box I select all Retailers
-	Then I Check if all Retailers are: Not Selected
-	Then In the Add Multiple dialog box I select all Retailers
-	Then I Check if all Retailers are: Selected
-	Then In the Add Multiple dialog box I click Finish
-	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable95988
-	Then I Confirm that the Add/Upload UPC Buttons remain stay visible when scrolling up and down the page
-	Then I click Continue and should not see an error message
-	And I navigate to the home page
-	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95988
+	
+
+
+Scenario: [87894] Forwarding - Edit existing Case UPC
+
+Given  
+
+Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completedstatus
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I Click the Accepted by Retailers Filter heading
+And I Enter the Product ID for the product you are working with and press enter
+And I Confirm the Retailer icon is shown in the green Accepted by Retailers color
+And [Shared Step 75130 - Bulk Actions - Select Forward Product Registration]
+And I In the Search by WPS ID or Product name start typing the WPS ID or product name of the product you are working with
+And I Confirm the product is shown for selection
+And I Select the product by clicking on it
+And I Click Continue
+And I Select a retailer which is not already present on the product you are working with, make sure to select a retailer that does not require additional data (such as BB, DI, KG)
+And I Click Continue
+And I Select the product in the left hand table by clicking on the product information
+And I Confirm you see the truck icon next to the Case UPC you added to your product earlier
+And I Confirm the truck icon is NOT shown next to the regular UPC you added to your productearlier
+And [Shared Step 87897 - Forwarding - Edit Existing Case UPC - confirm data shown correctly, change all data, Save, Continue]
+And I The Product Results step is shown
+And I Confirm no errors are shown for your product
+And I Click Continue
+And I The Review and Submit step is shown
+And I Select the "All of the above statements are true" radio button
+And I Click Continue
+And I Confirm the Purchase Summary page is shown with the success message shown" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  "
+And I Click Home
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm your product is shown in Accepted status for the original retailer(s) - this is because we updated UPC information so the product needs to re-feed to the original retailers
+And I Confirm your product is shown in Submitted status for the new retailer
+And [Shared Step 75309 - SHA > Select Product > UPC List]
+And [Shared Step 88419 - SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window]

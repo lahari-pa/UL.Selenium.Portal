@@ -997,5 +997,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumBrowser.Alert.WaitForAlert(5);
 			
 		}
+
+		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes and no screenshot is taken")]
+		public void ConfirmTheInactivityPopupDisplayedAfterWaitNoScreenShot(int expectedWait, int marginOfError)
+		{
+			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
+			if (!new InactivityPopup().WaitUntilDisplayed((expectedWait * 60) + (marginOfError * 60), out int actualWait))
+			{
+				Report.Failure($"The Inactivity popup did not load after {expectedWait + marginOfError} minutes!");
+				
+				return;
+			}
+			// check if pop up was displayed before 'expected wait - margin' (test lower limit)
+			Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
+				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
+				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes",false,false);
+		}
+		[StepDefinition(@"Click (Yes|No) on the inactivity popup and no screenshot is taken")]
+		public void GivenClickOnInactivityPopupNoScreenshot(string button)
+		{
+			Report.Info("Clicking " + button + " on inactivity popup");
+			var selInactivityPopup = new InactivityPopup();
+			bool clicked = false;
+			switch (button)
+			{
+				case ("Yes"):
+					clicked = selInactivityPopup.ClickYes();
+					break;
+				case ("No"):
+					clicked = selInactivityPopup.ClickNo();
+					break;
+				default:
+					Report.Error("Button parameter must be 'Yes' or 'No'!");
+					return;
+			}
+			Report.IsTrue(clicked, $"Failed to click the '{button}' button", $"Successfully clicked the '{button}' button",false,false);
+		}
 	}
 }
