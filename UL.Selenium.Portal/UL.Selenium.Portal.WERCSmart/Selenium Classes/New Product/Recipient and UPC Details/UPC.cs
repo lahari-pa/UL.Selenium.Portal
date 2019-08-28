@@ -334,31 +334,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			
 		}
 
-		public bool DeleteFileFromDownloadsFolder(string fileName)
-		{
-			string downloadsFolder = KnownFolders.GetPath(KnownFolder.Downloads);
-			Report.Info("Deleting any existing files with name: " + fileName + " in the directory: " + downloadsFolder + ".");
-			var files = Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly);
+		
 
-			foreach(var file in files)
-			{
-				try
-				{
-					Report.Info("Deleting: " + file);
-					File.Delete(file);
-				}
-				catch(Exception ex)
-				{
-					Report.Error("ERROR DELETING FILE: " + ex.Message);
-				}
-			}
-
-			if (!Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly).Any())
-			{
-				return true;
-			}
-			return false;
-		}
+		
 
 		public string GetErrorText()
 		{

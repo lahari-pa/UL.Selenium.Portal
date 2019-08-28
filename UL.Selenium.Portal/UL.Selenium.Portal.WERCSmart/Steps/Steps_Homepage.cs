@@ -988,7 +988,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisGlobalSteps.NavigateToLandingPage();
 		}
 		[StepDefinition(@"I click the Home navigation icon and an alert appears")]
-		public void ThenIClickTheHomeNavigationIconAndAlertAppears(string alertAction)
+		public void ThenIClickTheHomeNavigationIconAndAlertAppears()
 		{
 			
 				Report.Info("Navigating to the Home Page");

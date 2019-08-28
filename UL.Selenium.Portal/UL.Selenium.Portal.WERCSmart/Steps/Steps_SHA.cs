@@ -2251,7 +2251,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
         public void ClickSampleFileAndVerifyTheUploadUPCForm(string savedAs, Table table)
         {
             var upc = new UPC();
-            Report.IsTrue(upc.DeleteFileFromDownloadsFolder("Sample.xlsx"), "", "");
+            Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("Sample.xlsx"), "", "");
             Report.IsTrue(upc.ClickSampleFileLink(), "Failed to click Sample File link.", "Successfully clicked Sample File link.");
             Report.IsTrue(upc.VerifySampleFile(table, "Sample.xlsx", savedAs), "Failed to validate Sample File", "Successfully validated Sample File");
         }

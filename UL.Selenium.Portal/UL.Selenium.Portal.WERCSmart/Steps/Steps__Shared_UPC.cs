@@ -578,6 +578,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var containsTypeOptionBox = new MultipleUPC().ContainsType;
 
+			if(containsTypeOptionBox==null)
+			{
+				Report.Failure("The Container Type Option Box was not found");
+					return;
+			}
+
 
 			if (packagingType == "<first>")
 			{
@@ -592,12 +598,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Context.AddToContext("AddMultipleDialogFirstContainerOption", firstOption);
 					containsTypeOptionBox.Select(firstOption);
+					Report.Info("Selecting option: " +firstOption+" as the packaging type");
+					
 				}
 
 			}
 			else
 			{
 				containsTypeOptionBox.Select(packagingType);
+				Report.Info("Selecting option: " + packagingType + " as the packaging type");
+
 			}
 		}
 
@@ -659,14 +669,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(tableSavedAs, table);
 
 			var upc = new UPC();
-			Report.IsTrue(upc.DeleteFileFromDownloadsFolder("testdoc.xlsx"), "", "");
+			
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("testdoc.xlsx"), "", "");
 			//Create file here
 			//var excelfile = new ExcelUtilities CreateSpreadsheet(fileName);
 
 			//var utils = ExcelUtilities.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
-			EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination);
+			if(!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination))
+			{
+				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
+				return;
+			}
+
+			
 
 			var utils = new ExcelUtilities(destination, "Sheet1");
+
+
 
 
 			var headers = table.Rows.FirstOrDefault().Keys.ToList();
