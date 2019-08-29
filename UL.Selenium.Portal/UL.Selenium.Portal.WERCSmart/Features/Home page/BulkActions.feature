@@ -64,7 +64,7 @@ Scenario: [74634] Forward Product Registration - Only can select product once
 	Given I click Bulk Actions in the Products Grid
 	Then I should see a popup with header Bulk Actions
 	Given I click Forward Product Registration in the Bulk Actions window
-	Then I should see the header: Forward Product Registration on the Forward Product Registration window
+	Then I should see the header: Select Products & UPCs on the Forward Product Registration window
 	And I confirm the active Forward Product Registration tab is: Select Products
 	Given I select the product with ID saved as: ProductInProgressList74634 under the Select Products tab
 	#Given I click Bulk Actions in the Products Grid
@@ -221,7 +221,9 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-Aerosol
-	And I call Shared Step 37857 (Enter Physical Property - Solid)
+	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
+		| Secondary Physical State | Water Solubility |
+		| Flaked                   | Soluble in water |
 	And I call Shared Step 60310 (Additional Product Information - Without Child question)
 	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
