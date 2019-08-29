@@ -751,5 +751,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			"Successfully clicked Cancel in the Add UPC modal window.");
 		}
 
+		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: (.*) under Other Retailers")]  //maybe pick a specific alternative instead of avoiding all with additional data requirments
+		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerThatIsNotXUnderOtherRetailers(string presentRetailer)
+		{
+			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(presentRetailer), "Failed to select the first Retailer that is not "+presentRetailer+" under 'Other Retailers'", "Succesfully selected the first retailer that is not " + presentRetailer + "under 'Other Retailers'");
+		}
 	}
 }

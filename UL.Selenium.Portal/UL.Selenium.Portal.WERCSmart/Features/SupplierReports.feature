@@ -189,6 +189,7 @@ Scenario: [73082] UPC Report for All Products with Retailer
 	And I confirm that the status of the product saved as: TestCase73082 is: TestCase73082Status
 	And I delete the Supplier Report file saved as 73082
 
+@TReVorId:23438
 Scenario: [108254] UPC Report for All Products with Retailer - Create new products and verify in report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Create a formulated product - Chalk

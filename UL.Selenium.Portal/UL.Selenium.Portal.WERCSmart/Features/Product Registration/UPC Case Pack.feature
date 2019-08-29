@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -301,38 +301,43 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	
 	
 
-
-Scenario: [87894] Forwarding - Edit existing Case UPC
-
-Given  
+@singlerun
+@TReVorId:23444
+Scenario: [87894] Forwarding - Edit existing Case UPC 
 
 Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completedstatus
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-And I Click the Accepted by Retailers Filter heading
-And I Enter the Product ID for the product you are working with and press enter
-And I Confirm the Retailer icon is shown in the green Accepted by Retailers color
-And [Shared Step 75130 - Bulk Actions - Select Forward Product Registration]
-And I In the Search by WPS ID or Product name start typing the WPS ID or product name of the product you are working with
-And I Confirm the product is shown for selection
-And I Select the product by clicking on it
-And I Click Continue
-And I Select a retailer which is not already present on the product you are working with, make sure to select a retailer that does not require additional data (such as BB, DI, KG)
-And I Click Continue
-And I Select the product in the left hand table by clicking on the product information
-And I Confirm you see the truck icon next to the Case UPC you added to your product earlier
-And I Confirm the truck icon is NOT shown next to the regular UPC you added to your productearlier
-And [Shared Step 87897 - Forwarding - Edit Existing Case UPC - confirm data shown correctly, change all data, Save, Continue]
-And I The Product Results step is shown
-And I Confirm no errors are shown for your product
-And I Click Continue
-And I The Review and Submit step is shown
-And I Select the "All of the above statements are true" radio button
-And I Click Continue
-And I Confirm the Purchase Summary page is shown with the success message shown" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  "
-And I Click Home
-And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
-And I Confirm your product is shown in Accepted status for the original retailer(s) - this is because we updated UPC information so the product needs to re-feed to the original retailers
-And I Confirm your product is shown in Submitted status for the new retailer
-And [Shared Step 75309 - SHA > Select Product > UPC List]
-And [Shared Step 88419 - SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window]
+Then I filter the products by: Accepted by Retailers
+And I filter for the product saved as: TestCase87894
+And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+Then I should see the header: Forward Product Registration on the Forward Product Registration window
+And I enter the text: saved as TestCase87894 in the 'Search by WPS ID or Product Name' field
+And In the Foward Product Registration Screen I should see product: saved as TestCase87894
+Given I select the first product under the Select Products tab
+Given I click continue on the Forward Product Registration page
+Then I confirm the active Forward Product Registration tab is: Select Retailers
+#And I Select a retailer which is not already present on the product you are working with, make sure to select a retailer that does not require additional data (such as BB, DI, KG)
+Then In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Amazon under Other Retailers
+Given I click continue on the Forward Product Registration page
+Then I select the first product under the Select UPCs tab
+#Then I confirm that: WM is displayed in the Destination Retailers column under Select UPCs  <-- use as example for accessing this right side table on select UPCs page
+
+#And I Select the product in the left hand table by clicking on the product information
+#And I Confirm you see the truck icon next to the Case UPC you added to your product earlier
+#And I Confirm the truck icon is NOT shown next to the regular UPC you added to your productearlier
+#And [Shared Step 87897 - Forwarding - Edit Existing Case UPC - confirm data shown correctly, change all data, Save, Continue]
+#And I The Product Results step is shown
+#And I Confirm no errors are shown for your product
+#And I Click Continue
+#And I The Review and Submit step is shown
+#And I Select the "All of the above statements are true" radio button
+#And I Click Continue
+#And I Confirm the Purchase Summary page is shown with the success message shown" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  "
+#And I Click Home
+#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+#And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+#And I Confirm your product is shown in Accepted status for the original retailer(s) - this is because we updated UPC information so the product needs to re-feed to the original retailers
+#And I Confirm your product is shown in Submitted status for the new retailer
+#And [Shared Step 75309 - SHA > Select Product > UPC List]
+#And [Shared Step 88419 - SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window]

@@ -413,18 +413,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I wait for (.*) seconds")]
-		public void WhenIWaitForSeconds(int p0)
+		public void WhenIWaitForSeconds(int seconds)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " I wait for " + p0.ToString() + " seconds.");
-			try
+			for(int i = 0; i < seconds; i++)
 			{
-				Delay.Seconds(p0);
+				Delay.Seconds(1);
+				if(i % 60 == 0)
+				{
+					Report.Info("Waited for: " + i + " seconds");
+				}
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+
+			Report.Info("Waited for: " + seconds + " seconds");
 		}
 
 		[StepDefinition(@"I scroll to the (top|bottom) of the page")]

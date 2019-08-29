@@ -102,7 +102,7 @@ Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest8253
 Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
 Then In the Add Multiple dialog box I select all UPCs
 Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-Then I wait for 300 seconds
+Then I wait for 960 seconds
 And the landing page should load
 
 @Timeout3
@@ -139,7 +139,7 @@ Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can b
 	Then I check alert text contains There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. and dismiss 
 	Then In the UPC modal window I click Cancel
 	Then I click the Home navigation icon and an alert appears
-	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
+	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
 	Then Click Yes on the inactivity popup
 	Then I confirm the Inactivity pop is closed
 
@@ -178,13 +178,14 @@ Scenario: [Timeout Test] Warning Alert- Inactivity popup- TimeoutFeature Works C
 	Then I check alert text contains There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. and dismiss 
 	Then In the UPC modal window I click Cancel
 	Then I click the Home navigation icon and an alert appears
-	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-	Then I wait for 800 seconds
+	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
+	Then I wait for 960 seconds
 	And the landing page should load
 
 
 @TReVorId:23423
 Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup-Inactivity Popup can be interacted with
+	Given I wait for 120 seconds
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
@@ -209,16 +210,17 @@ Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup-Inactivity Popup c
 	And I click continue on the Forward Product Registration page
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add Case UPC button under the Select UPCs tab
-	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
+	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 	Then Click Yes on the inactivity popup and no screenshot is taken
 	Then I confirm the Inactivity pop is closed	
-	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
+	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 	Then Click No on the inactivity popup
 	And the landing page should load
 
 
 @TReVorId:23424
 Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup- TimeoutFeature Works Correctly
+	Given I wait for 120 seconds
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
@@ -244,7 +246,7 @@ Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup- TimeoutFeature Wo
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add Case UPC button under the Select UPCs tab
 	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-	Then I wait for 800 seconds
+	Then I wait for 960 seconds
 	And the landing page should load
 	
 

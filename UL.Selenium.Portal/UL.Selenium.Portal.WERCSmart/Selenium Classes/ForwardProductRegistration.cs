@@ -231,8 +231,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return retailerInput.TryClick();
 		}
+		public bool SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(string presentRetailer)
+		{
+			IWebElement retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//div[@class='control-indicator']"), 2);
 
-		public bool SelectRetailer(string retailer)
+
+			if (retailerInput == null)
+			{
+				Report.Info("The First Retailer could not be found");
+				return false;
+			}
+
+			string firstRetailerName = retailerInput.FindElement(By.XPath("//ancestor::label//span"), 2).Text; //[text()='Ahold']
+			if (firstRetailerName == presentRetailer||firstRetailerName==""||firstRetailerName==""||firstRetailerName=="") //change to add avoided retailers
+			{
+
+				IWebElement nextRetailerInput = retailerInput.FindElement(By.XPath($"//ancestor::label//span[not(text()='{presentRetailer}') and not(text()='Best Buy') and not(text()='DI') and not(text()='KG')]"), 2); //change to add accurate avoided retailers
+				return nextRetailerInput.TryClick();
+
+			}
+			return retailerInput.TryClick();
+		}
+
+
+
+
+
+			public bool SelectRetailer(string retailer)
 		{
 			var retailers = this.containerElement.FindElements(By.XPath(@".//div[@class='col-sm-3 retailer-select' and .//span[contains(text(),""" + retailer + @""")]]"), 2).ToList();
 			if (retailers.Count == 0)
