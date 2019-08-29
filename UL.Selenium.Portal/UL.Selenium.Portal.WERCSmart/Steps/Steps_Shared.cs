@@ -8430,5 +8430,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 
+		[StepDefinition(@"I call Shared Step 60515 \(VOC - Dilution - Yes to ratio - enter any values > Continue - Happy Path\)")]
+		public void Shared60515_VocDiluationYesEnterAnyValues_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I select the 'Yes' button for the 'Product Label Dilution Ratio' question");
+			new Steps_VOC_OTC_CARB().SetProductLabelDilutionRatio("Yes");
+			TestReport.StartStep("I enter the vlaue '1' for the 'VOC Content as Sold' question");
+			new Steps_VOC_OTC_CARB().SetVocContentAsSold("1");
+			TestReport.StartStep("I enter the vlaue '10' for the 'VOC Content as Used' question");
+			new Steps_VOC_OTC_CARB().SetVocContentAsUsed("10");
+			TestReport.StartStep("I click continue");
+			new NewProduct().ClickContinue();
+		}
+
 	}
 }

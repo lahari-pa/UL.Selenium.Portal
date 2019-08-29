@@ -234,29 +234,24 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 
 @TReVorId:11378
 Scenario: [65392] Ecologo Readiness - Question wording and validation of response
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
-	And I click the Register New Product icon in the Navigation Pane
-	And I should see the header New Product
-	And I Select the Create a New Registration radio button
-	And in the New Product page I click Continue
-	And I set 'Product Name' to: Floor wax stripper
-	And I set 'Type of Product' to: Floor Wax Stripper (Light or Medium Build-Up)
-	And in the New Product page I click Continue
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Floor Wax Stripper (Light or Medium Build-Up)
 	Then I save the product information as: TestCase65392
 	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Formaldehyde  | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page
+	And I set the Product is Regulated for Transport option to: Not Regulated
+	And I click continue
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-	Given I set the Does the product label specify a dilution ratio option to: Yes
-	Given I set the Enter the product's VOC content as sold option to: 1
-	Given I set the Enter the "as used" VOC content option to: 1
-	Given I click continue
+	Given I call Shared Step 60515 (VOC - Dilution - Yes to ratio - enter any values > Continue - Happy Path)
 	Given I click continue
 	And I should see the ECOLOGO Readiness Page
 	And I confirm that I see the following Ecologo statement: Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment. This report will indicate if the product is eligible to be awarded an ECOLOGO Certification, an established symbol of reduced environmental impact. Would you like to receive this assessment?
@@ -266,10 +261,11 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 		| Not at this time |
 	And in the New Product page I click Continue
 	Then I should see an error message: This is a required field.
-	# select Yes
-	#click continue
-	#no error
-	# retailer page 29206
+	Given I set the Take advantage of Premium Subscription benefits option to: Yes
+	And I should not see any error messages
+	Given I set the Take advantage of Premium Subscription benefits option to: Not at this time
+	Then I click continue
+	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I navigate to the home page
 	Then I delete the product: TestCase65392
 

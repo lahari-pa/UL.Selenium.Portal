@@ -45,6 +45,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#endregion
 
 		#region New Product general methods
+
+		public string PanelTitle { get; }
+
 		public string HeaderText => this.Header?.Text;
 
 		public string ProductId {
@@ -191,7 +194,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
 			return this.containerElement.WaitUntilElementVisible(this.ActivePanelHeadingLocator(sectionHeader), secondsToWait) != null;
-			//return this.ActivePanelHeading.WaitUntilTextContains(sectionHeader, secondsToWait);
 		}
 
 		public bool ClickSection(string section)
@@ -201,6 +203,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return sectionEl != null && sectionEl.TryClick();
 		}
 
+		/// <summary>
+		/// returns whether or not the active panel heading matches the 'PanelTitle' string for the NewProduct 'page' (step)
+		/// </summary>
+		public bool IsActivePanel => this.WaitForSection(PanelTitle);
+		
 		/// <summary>
 		/// Waits until Tab (enum: ProductType, ProductCharacteristics...) is active in the progress bar during a timeout period
 		/// Returns whether the tab is active
@@ -293,6 +300,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
 			return label.FindElement(By.XPath("../following-sibling::div//input[@type ='text']"), 2)?.GetValue();
+		}
+
+		public void EnterTextToLabelnput(string lblText, string value)
+		{
+			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
+			IWebElement input = label?.FindElement(By.XPath("../following-sibling::div//input[@type ='text']"), 2);
+			if (input != null)
+			{
+				input.EnterText(value);
+			}
+			else
+			{
+				throw new Exception("Label not found as expected.");
+			}
 		}
 
 		/// <summary>
@@ -2661,7 +2682,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
-
+		
 		// NB only works fr select/option
 		public bool SetOptionInSectionByValue(string section, string value, string text)
 		{
