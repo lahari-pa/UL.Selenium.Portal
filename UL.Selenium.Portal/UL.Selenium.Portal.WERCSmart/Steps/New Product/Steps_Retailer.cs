@@ -159,6 +159,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set the first vendor option for retailer: " + retailer);
 		}
 
+		[StepDefinition(@"In the Retailers tab, I select the first Vendor option")]
+		public void ISelectFirstVendorId()
+		{
+			Report.IsTrue(new Retailer().SelectVendorId("", true),
+				"Failed to set the first vendor option ",
+				"Successfully set the first vendor option");
+		}
+
 		[StepDefinition(@"On the Retailer page I delete the following retailers:")]
 		public void DeleteRetailers(Table table)
 		{

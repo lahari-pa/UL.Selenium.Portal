@@ -1515,6 +1515,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure("Failed to get an existing UPC!");
 		}
-
 	}
 }

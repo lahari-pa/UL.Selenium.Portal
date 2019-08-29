@@ -612,29 +612,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			for (int j = 0; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
 			{
 				var rowValues = new List<string>();
-				//Report.Info("Looking at row: " + j.ToString());
-
-				// js removed - trying 10 times with a 1 second delay to get row element is unnecessary because ListOfProductRows has already been assigned above..
-				//bool gotRow = false;
-				//int counter = 0;
-				//while (!gotRow && counter < 10)
-				//{
-				//	try
-				//	{
-				//		ListOfProductRows = SeleniumBrowser.WebBrowser
-				//			.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
-				//		rowValues = ListOfProductRows[j].FindElements(By.XPath(".//td"), 2).Select(x => x.GetValue())
-				//			.ToList();
-				//		gotRow = true;
-				//	}
-				//	catch (Exception)
-				//	{
-				//		Report.Info("Try " + counter + "Failed to get row values for row " + j);
-				//	}
-
-				//	Delay.Seconds(1);
-				//	counter++;
-				//}
 				try
 				{
 					var rowColumns = ListOfProductRows[j]?.FindElements(By.XPath(".//td"), 2)?.ToList();
@@ -905,7 +882,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			enterField.Check(set);
 			return enterField.Checked() == set;
 		}
-
+        
 		public bool ClickContinueInProcessProducts()
 		{
 			ReadOnlyCollection<IWebElement> buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='dialog-product']/..//button"));
@@ -2128,10 +2105,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-
-
-
-
 	class Product
 	{
 		public string ID { get; set; }
@@ -2157,7 +2130,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string RecertificationReason { get; set; }
 
 		public string Distributor { get; set; }
-
 	}
 
 	class SHAManagerProdcutUPC

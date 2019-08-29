@@ -8,6 +8,8 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using System.Text;
 using System.Linq;
+using NTTQA.Selenium.UniversalFunctions;
+using System.IO;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -172,6 +174,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//splitByLineBreak.ForEach(x => trimmedList.Add(x.TrimEnd(' ')));
 			string tidyString = string.Join(" ", trimmedList);
 			return tidyString;
+		}
+
+		public static bool DeleteFileFromDownloadsFolder(string fileName)
+		{
+			string downloadsFolder = KnownFolders.GetPath(KnownFolder.Downloads);
+			Report.Info("Deleting any existing files with name: " + fileName + " in the directory: " + downloadsFolder + ".");
+			var files = Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly);
+
+			foreach (var file in files)
+			{
+				try
+				{
+					Report.Info("Deleting: " + file);
+					File.Delete(file);
+				}
+				catch (Exception ex)
+				{
+					Report.Error("ERROR DELETING FILE: " + ex.Message);
+				}
+			}
+
+			if (!Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly).Any())
+			{
+				return true;
+			}
+			return false;
 		}
 	}
 
