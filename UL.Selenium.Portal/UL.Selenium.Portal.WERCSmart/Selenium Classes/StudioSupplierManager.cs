@@ -89,9 +89,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return suppliers;
 			}
 
-			ReadOnlyCollection<IWebElement> rows = searchTable.FindElements(By.XPath(".//tr[not(contains(@class, 'firstrow'))]"));
+			ReadOnlyCollection<IWebElement> rows = searchTable.FindElements(By.XPath(".//tr[not(contains(@class, 'firstrow'))]//td[2]"));
 
-			suppliers = rows.Select(x => x.GetAttribute("id")).ToList();
+			suppliers = rows.Select(x => x.GetAttribute("title")).ToList();
 
 			return suppliers;
 

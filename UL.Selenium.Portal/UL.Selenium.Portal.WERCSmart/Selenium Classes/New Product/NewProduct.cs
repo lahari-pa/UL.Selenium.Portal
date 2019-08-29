@@ -1820,14 +1820,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.IsTrue(GeneralFunctions.EnterFilename(pdfFilePath), "Failed to enter file name!", "Successfully entered file name");
 			int i = 0;
 			string viewPath = "//span[contains(text(),'" + section + "')]//..//span[@class='dz-uploaded-doc']//..//a";
-			IWebElement viewEl = this.containerElement.FindElement(By.XPath(viewPath), 2);
-			while ((viewEl is null || !viewEl.Displayed) && i > 10)
-			{
-				i++;
-				Delay.Seconds(1);
-				viewEl = this.FindElement(By.XPath(viewPath), 2);
-			}
-			return (viewEl != null && viewEl.Displayed);
+			IWebElement viewEl = this.containerElement.WaitUntilElementVisible(By.XPath(viewPath), 10);
+			return viewEl != null;
 		}
 		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)
 		public bool UploadFileForSectionAndType(string label, string section, string pdfFilePath)

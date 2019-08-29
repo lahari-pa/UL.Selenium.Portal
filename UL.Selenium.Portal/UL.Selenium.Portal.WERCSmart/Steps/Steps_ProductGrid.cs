@@ -2170,7 +2170,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var homePage = new StepsHomepage();
 			var productsGrid = new ProductsGrid();
 			Report.Info("setting the Items on Page to '10'");
-			Report.IsTrue(productsGrid.SelectItemsOnPage("10"),"Failed to set items on page to 10", "successfully set the items on page to 10");
+			Report.IsTrue(productsGrid.SelectItemsOnPage("10"), "Failed to set items on page to 10", "successfully set the items on page to 10");
 			try
 			{
 				if (selProdGrid.ProductsCount() >= 10 && selProdGrid.GetGridNavDots())
@@ -2191,6 +2191,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure(ex.Message);
 			}
+		}
+		[StepDefinition(@"I generate: (.*) random UPC numbers and save them starting with: (.*)")]
+		public void GivenIGenerateXRandomUPCNumberAndSaveAs(int numbersWanted, string savedAs)
+		{
+			int i = 1;
+			while (i <= numbersWanted)
+			{
+				string uPCNo = GeneralFunctions.GenerateUPCNumber();
+				Context.AddToContext(savedAs + i, uPCNo);
+				Report.Info("Generated UPC No " + i + ": " + uPCNo);
+				Delay.Seconds(0.5);
+				i++;
+			}
+
 		}
 	}
 }

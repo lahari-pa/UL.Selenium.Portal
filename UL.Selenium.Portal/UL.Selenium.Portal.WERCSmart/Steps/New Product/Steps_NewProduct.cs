@@ -139,7 +139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ShouldSeeAlistFormError(string error)
 		{
 			var errorActual = new NewProduct().FormError();
-			Report.IsTrue(errorActual.Contains(error), "Error was not found!", "Found error");
+			Report.IsTrue(errorActual.Contains(error), "The expected error was not found! The error text found was: "+errorActual, "Found expected error");
 		}
 
 		[StepDefinition(@"in page (.*) I should see error: (.*)")]
@@ -207,6 +207,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			Report.IsTrue(reports.CheckTotalForSection(section, value), "Failed to find the correct value '" + value + "' for section '" + section + "'.",
 				"Successfully found correct value '" + value + "' for section '" + section + "'.");
+		}
+
+		[StepDefinition(@"I confirm the document type is: (.*) for section: (.*)")]
+		public void ConfirmDocumentTypeForSection(string type, string section)
+		{
+			Report.IsTrue(new NewProduct().GetDocumentTypeForSection(section) == type,
+				$"Document type for section: '{section}' did not match expected type! Expected: {type}",
+				$"Document type for section: '{section}' matched the expected type");
 		}
 
 		#endregion

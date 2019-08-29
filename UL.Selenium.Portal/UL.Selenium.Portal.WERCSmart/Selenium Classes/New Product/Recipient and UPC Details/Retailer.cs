@@ -119,7 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		/// <summary>
 		/// Select first vendor id from dropdown
 		/// </summary>
-		public bool SelectVendorId(string item)
+		public bool SelectVendorId(string item, bool selectFirst = false)
 		{
 			try
 			{
@@ -129,6 +129,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					Report.Error("Could not find the Vendor ID select input element");
 					return false;
+				}
+				if (selectFirst)
+				{
+					var options = el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+					if (options.Count == 0)
+					{
+						Report.Info("There were no vendor options available");
+						return false;
+					}
+					Report.Info("Selecting the first vendor option");
+					string firstOption = options.First();
+					Report.Info("First vendor option is: " + firstOption);
+					el.Select(firstOption);
+					Delay.Seconds(1);
+					return el.SelectedOption() == firstOption;
 				}
 				el.Select(item);
 				Delay.Seconds(1);
