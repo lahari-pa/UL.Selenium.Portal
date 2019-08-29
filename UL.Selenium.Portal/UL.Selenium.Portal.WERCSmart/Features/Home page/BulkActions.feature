@@ -15,6 +15,7 @@
 @ReviewDocuments
 @SHA
 @SummaryPage
+@PaymentMethods
 @run_BulkActions
 Feature: BulkActions
 
@@ -173,16 +174,11 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: (.*))
 	And I Confirm the Product now shows a "Completed" Status in Completed for ALL associated Retailers
 
-# Assigned to Barrett, Beverly
-# Created by Barrett, Beverly
-# Test case can be found at the following paths:
-# NetProjects10\WercsSmart Portal\Release Day Tests
-@tfs_design
 Scenario: [75129] Forward - Product in Submitted Status
+	Given I retrieve the email address for account: WERCs Product Account and save as: TestCase75129Email
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	#TODO jwhitesell update this step so it uses the QA Products account, not a hard coded email address.
-	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: User_06e12fc25a59.kxxyxunf@mailosaur.io and saved name as: TestCase75129Supplier
-	And I call Shared Step 74655 SHA with email - Search by Supplier ID saved as TestCase75129Supplier for specific product status: Submitted and email: User_06e12fc25a59.kxxyxunf@mailosaur.io
+	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: saved as TestCase75129Email and saved name as: TestCase75129Supplier
+	And I call Shared Step 74655 SHA with email - Search by Supplier ID saved as TestCase75129Supplier for specific product status: Submitted and email: saved as TestCase75129Email
 	And I save a product which blue and has retailers as TestCase75129
 	And I save the retailers associated with product TestCase75129 as TestCase75129Retailers
 	Given I navigate to the landing page
@@ -191,9 +187,26 @@ Scenario: [75129] Forward - Product in Submitted Status
 	Given I filter the products by: Assessment in Progress
 	And I filter for the product saved as: TestCase75129
 	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-	Then I should see the header: Forward Product Registration on the Forward Product Registration window
+	Then I should see the header: Select Products & UPCs on the Forward Product Registration window
 	And I enter the text: saved as TestCase75129 in the 'Search by WPS ID or Product Name' field
 	And In the Foward Product Registration Screen I should see product: saved as TestCase75129
 	And In the Foward Product Registration Screen I Select the product: saved as TestCase75129
 	And I click continue on the Forward Product Registration page
-	And In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as TestCase75129Retailers and save as TestCase75321Retailer
+	And In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as TestCase75129Retailers and save as TestCase75129Retailer
+	And I click continue
+	And If the Private Label textbox is showing in the Select UPCs screen, I enter the value: N/A
+	And I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue and save UPC as UPC75129
+	Then I should see the header: Product Results on the Forward Product Registration window
+	And I click continue
+	And I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+	And I click continue
+	Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	Given I navigate to the home page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75129)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75129 and its status is: Submitted
+	And I confirm that retailer saved as TestCase75129Retailer appears in the list of retailers for product TestCase75129
+	And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase75129
+	And I confirm UPC number saved as: "UPC75129" is displayed in the SHA Manager Product UPC list
+	And I confirm that retailer saved as TestCase75129Retailer appears for UPC saved as UPC75129
+	And I close the window that opened

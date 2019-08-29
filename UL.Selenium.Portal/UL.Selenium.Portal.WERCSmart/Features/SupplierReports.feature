@@ -189,6 +189,7 @@ Scenario: [73082] UPC Report for All Products with Retailer
 	And I confirm that the status of the product saved as: TestCase73082 is: TestCase73082Status
 	And I delete the Supplier Report file saved as 73082
 
+@TReVorId:23438
 Scenario: [108254] UPC Report for All Products with Retailer - Create new products and verify in report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Create a formulated product - Chalk
@@ -229,7 +230,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	Create an enhanced article product - Lithium BCP (Camera w/ Battery)
+	#Create an enhanced article product - Lithium BCP (Camera w/ Battery)
 	Given I navigate to the home page
 	Given I generate a random UPC number and save as: UPC108254BCP
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

@@ -44,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// <returns></returns>
 		public string HeaderShowing()
 		{
-			return this.containerElement.FindElement(By.XPath(".//h2"), 2).Text.Trim();
+			return this.containerElement.FindElement(By.XPath(".//h3"), 2).Text.Trim();
 		}
 
 		/// <summary>
@@ -399,7 +399,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not find product row for product ID: " + id);
 				return false;
 			}
-			return productRow.FindElement(By.XPath($".//ancestor::tr//td//input[@type='checkbox']"),2).TryClick();
+			return productRow.FindElement(By.XPath($".//ancestor::tr//td//input[@type='checkbox']"), 2).TryClick();
+		}
+
+		public bool EnterPrivateLabelIfExists(string value)
+		{
+			IWebElement privateLabelInput = this.containerElement.FindElement(By.XPath(@"//label[contains(text(), 'Private Label')]/following-sibling::input"), 2);
+			if (privateLabelInput != null)
+			{
+				Report.Info("Found private label input box. Attempting to enter text.");
+				return privateLabelInput.TryEnterText(value);
+			}
+			else
+			{
+				Report.Info("Failed to find private label input box. Moving on.");
+				return true;
+			}
 		}
 
 		public class SelectProducts : ForwardProductRegistration
@@ -676,7 +691,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Failed to select type from the Type drop down in the Add UPC modal window.");
 				return false;
 			}
-			else if(row["Type"]=="<first>")
+			else if (row["Type"] == "<first>")
 			{
 				var firstOption = type.FindElement(By.XPath("./option[not(text()='Type')]"), 1).Text;
 				if (firstOption == null)
@@ -688,8 +703,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					type.Select(firstOption);
 				}
-			}		
-		
+			}
+
 			else
 			{
 				type.Select(row["Type"]);
@@ -702,7 +717,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			if (row["Retailer"]=="Select all")
+			if (row["Retailer"] == "Select all")
 			{
 				IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//input[@id='chkAllRetailers']"));
 				if (retailer == null || !retailer.TryCheck())
@@ -720,7 +735,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 				}
 			}
-			
+
 
 			Report.Info("Successfully entered all UPC information.");
 			return true;
