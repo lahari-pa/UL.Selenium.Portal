@@ -152,8 +152,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only")]
+		[StepDefinition(@"I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only")]
 		public void GivenICallSharedStep60935AdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -7069,7 +7068,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						try
 						{
 							var dt2 = DateTime.ParseExact(i, "M/d/yyyy", CultureInfo.InvariantCulture);
-							Report.Success("contains a date: " +i);
+							Report.Success("contains a date: " + i);
 						}
 						catch (Exception ex)
 						{
@@ -7086,7 +7085,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				if (row["Data"] != "date" && row["Data"] != "any")
 				{
-					Report.Info("Checking that I see option:" +option);
+					Report.Info("Checking that I see option:" + option);
 					Report.IsTrue(data.Contains(option.Trim()),
 						"Option was not showing as expected! Expected: '" + option + "', but found: '" +
 						string.Join("', '", data) + "'!",
@@ -8204,7 +8203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().ClickContinue();
 		}
 		[StepDefinition(@"I call Shared Step 82831 \(The Product - Enter Product Name and Select Type of Product: (Raw Material|Mixture, Blend, Formula, Polymer or Solution from Third \(3rd, 3d\) Party)\)")]
-	
+
 		public void SharedStep82831_TheProduct_EnterProductNameAndType(string type)
 		{
 			TestReport.UseSubSteps = true;
@@ -8225,16 +8224,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(modal.Wait_for_load() && modal.GetTitle().Contains("Warning"), "");
 			TestReport.StartStep("I confirm the warning message contains the expected text");
 			string actualMessage = modal.GetText();
-			if (actualMessage==null)
+			if (actualMessage == null)
 			{
 				Report.Failure("The Warning Popup had no message");
 				Report.Info("Closing popup");
-				if(Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button", "Clicked OK button"))
+				if (Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button", "Clicked OK button"))
 				{
 					Report.Info("I click Continue");
 					MyStepsNewProduct.ClickContinue();
 				}
-				
+
 
 				return;
 			}
@@ -8245,7 +8244,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string expectedMessage = "You are registering a formula (Raw Material). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
 				Report.IsTrue(actualMessage.Contains(expectedMessage), "The Warning message was not correct", "The Warning message was correct");
 			}
-			else if(type== "Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party")
+			else if (type == "Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party")
 			{
 				Report.Info("Checking Mixture, Blend, Formula or Solution from 3rd Party message");
 				string expectedMessage = "You are registering a formula (Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
@@ -8254,11 +8253,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Error("Product type must be Raw Material or Mixture, Blend, Formula or Solution from 3rd Party");
-				
+
 			}
 
 			Report.Info("Closing popup");
-			Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button","Succesfully clicked on the OK button");
+			Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button", "Succesfully clicked on the OK button");
 			GeneralUtilities.Wait_for_load_finish();
 
 
@@ -8336,7 +8335,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//Report.IsFalse(productSubmissionRejection.Wait_for_load(10), "The Product Submission Rejection Popup was shown", "The Product Submission Rejection Popup was not shown");
 
-			
+
 
 		}
 
