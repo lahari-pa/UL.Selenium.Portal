@@ -14,6 +14,7 @@ using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
+using TReVor.Api.Wrapper.Classes;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -48,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenILoginToStudioAsAdministrator()
 		{
 			var thisStudioLogin = new StudioLogin();
-			TestUser shaUser = TestUsers.GetUserSavedAs("SHAUser");
+			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs("SHAUser");
 			Report.Info("Entering username: " + shaUser.Username);
 			thisStudioLogin.Username = shaUser.Username;
 			Report.Info("Entering password: " + shaUser.Password);
@@ -2425,7 +2426,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_Shared().GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			TestReport.StartStep("I click Search");
 			this.IClickTheFollowingOptionInTheBottomMenu("Search");
-			TestUser user = TestUsers.GetUserSavedAs(accountSavedAs);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
 			var username = "";
 			if (user != null)
 			{

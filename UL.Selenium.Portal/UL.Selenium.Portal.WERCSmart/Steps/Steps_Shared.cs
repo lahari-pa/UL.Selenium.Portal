@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using TechTalk.SpecFlow;
+using TReVor.Api.Wrapper.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -850,7 +851,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				TestReport.StartStep("I click the 'Add UPC' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				TestReport.StartStep("I add the following into the UPC Fields");
-				string upc = Api.GetRandomUpcNumber("CVS");
+				string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
 				Report.Info("UPC number: " + upc);
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
@@ -4741,7 +4742,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<Job> ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
-			TestUser shaUser = TestUsers.GetUserSavedAs("SHAUser");
+			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs("SHAUser");
 			Job matchingJob = ListOfJobs.FirstOrDefault(x =>
 				x.RecordID == id && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
 			if (matchingJob == null)
@@ -6180,14 +6181,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, ingredient);
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57247 - Database check - find t_vendor records for specific Retailer: (.*) and Supplier: (.*)")]
+		[StepDefinition(@"I call Shared Step 57247 - Database check - find t_vendor records for specific Retailer: (.*) and Supplier: (.*)")]
 		public void ThenICallSharedStep_DatabaseCheck_FindT_VendorRecordsForSpecificSupplierAndRetailer(string retailer,
 			string supplier)
 		{
 			if (supplier == "Products Automation Account")
 			{
-				TestUser user = TestUsers.GetUserSavedAs("ProductAccount");
+				TReVorTestUsers user = TestUsers.GetUserSavedAs("ProductAccount");
 				supplier = user.Username;
 			}
 
