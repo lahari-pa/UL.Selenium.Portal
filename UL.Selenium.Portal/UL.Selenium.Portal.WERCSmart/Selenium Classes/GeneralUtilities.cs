@@ -202,4 +202,77 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 	}
+
+	public class RetailerAbbreviations
+	{
+		private Dictionary<string, string> _abbr;
+		public Dictionary<string, string> Map { get { return this._abbr; } }
+		public RetailerAbbreviations()
+		{
+			this._abbr = new Dictionary<string, string> {
+				{ "Dollar General", "DG" },
+				{ "Albertsons (includes Albertsons, LLC and New Albertson's Inc.)", "AL" },
+				{ "Northgate Market", "NM" },
+				{ "Weis", "WE" },
+				{ "Publix", "PX" },
+				{ "Ultra/Standard", "ST" },
+				{ "HEB", "HE" },
+				{ "Delhaize America (All Retail Banners)", "DA" },
+				{ "Costco", "CO" },
+				{ "HyVee", "HV" },
+				{ "Dick's Sporting Goods", "DI" },
+				{ "Sears/K-Mart", "SE" },
+				{ "New Egg", "NE" },
+				{ "Canadian Tire", "CT" },
+				{ "Tractor Supply", "TS" },
+				{ "No Retailer/No UPC Product", "NR" },
+				{ "WinCo Foods", "WC" },
+				{ "Michaels", "MI" },
+				{ "HD Supply", "HS" },
+				{ "Price Chopper", "PR" },
+				{ "The Home Depot", "HD" },
+				{ "Ahold", "AH" },
+				{ "Lowe's", "LW" },
+				{ "SuperValu", "SV" },
+				{ "CVS", "CV" },
+				{ "Genuine Parts", "GP" },
+				{ "Big Lots", "BL" },
+				{ "Staples", "SP" },
+				{ "Office Depot", "OD" },
+				{ "Meijer", "MJ" },
+				{ "Rite Aid", "RA" },
+				{ "Essendant", "US" },
+				{ "Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)", "BB" },
+				{ "Schnuck's", "SC" },
+				{ "Smart & Final", "SF" },
+				{ "Target", "TG" },
+				{ "O'Reilly", "OR" },
+				{ "Walgreens", "WG" },
+				{ "Dietary Supplements", "DS" },
+				{ "Wakefern", "WF" },
+				{ "Unified", "UF" },
+				{ "Petco", "PC" },
+				{ "Kohl's", "KO" },
+				{ "Family Dollar", "FD" },
+				{ "Harbor Freight Tools", "HF" },
+				{ "Target Canada", "TC" },
+				{ "Autozone", "AZ" },
+				{ "99 Cents", "99" },
+				{ "McLane", "ML" },
+				{ "Wal-Mart/SAM'S CLUB", "WM" },
+				{ "Kroger", "KG" },
+				{ "A&P", "AP" },
+				{ "Amazon", "AM" },
+				{ "Dollar Tree Stores, Inc. / Greenbrier International, Inc", "DT" },
+				{ "Optoro", "OP" },
+				{ "TopCo", "TP" },
+				{ "Subscription", "SB" },
+				{ "Save Mart Supermarkets", "SM" },
+				{ "Best Buy", "BE" },
+				{ "Albertsons Companies", "SW" },
+				{ "Enterprise license", "EL" }
+			};
+		}
+
+	}
 }

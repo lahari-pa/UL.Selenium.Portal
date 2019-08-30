@@ -64,7 +64,7 @@ Scenario: [74634] Forward Product Registration - Only can select product once
 	Given I click Bulk Actions in the Products Grid
 	Then I should see a popup with header Bulk Actions
 	Given I click Forward Product Registration in the Bulk Actions window
-	Then I should see the header: Forward Product Registration on the Forward Product Registration window
+	Then I should see the header: Select Products & UPCs on the Forward Product Registration window
 	And I confirm the active Forward Product Registration tab is: Select Products
 	Given I select the product with ID saved as: ProductInProgressList74634 under the Select Products tab
 	#Given I click Bulk Actions in the Products Grid
@@ -174,16 +174,11 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: (.*))
 	And I Confirm the Product now shows a "Completed" Status in Completed for ALL associated Retailers
 
-# Assigned to Barrett, Beverly
-# Created by Barrett, Beverly
-# Test case can be found at the following paths:
-# NetProjects10\WercsSmart Portal\Release Day Tests
-@tfs_design
 Scenario: [75129] Forward - Product in Submitted Status
+	Given I retrieve the email address for account: WERCs Product Account and save as: TestCase75129Email
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	#TODO jwhitesell update this step so it uses the QA Products account, not a hard coded email address.
-	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: User_06e12fc25a59.kxxyxunf@mailosaur.io and saved name as: TestCase75129Supplier
-	And I call Shared Step 74655 SHA with email - Search by Supplier ID saved as TestCase75129Supplier for specific product status: Submitted and email: User_06e12fc25a59.kxxyxunf@mailosaur.io
+	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: saved as TestCase75129Email and saved name as: TestCase75129Supplier
+	And I call Shared Step 74655 SHA with email - Search by Supplier ID saved as TestCase75129Supplier for specific product status: Submitted and email: saved as TestCase75129Email
 	And I save a product which blue and has retailers as TestCase75129
 	And I save the retailers associated with product TestCase75129 as TestCase75129Retailers
 	Given I navigate to the landing page
@@ -192,56 +187,74 @@ Scenario: [75129] Forward - Product in Submitted Status
 	Given I filter the products by: Assessment in Progress
 	And I filter for the product saved as: TestCase75129
 	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-	Then I should see the header: Forward Product Registration on the Forward Product Registration window
+	Then I should see the header: Select Products & UPCs on the Forward Product Registration window
 	And I enter the text: saved as TestCase75129 in the 'Search by WPS ID or Product Name' field
 	And In the Foward Product Registration Screen I should see product: saved as TestCase75129
 	And In the Foward Product Registration Screen I Select the product: saved as TestCase75129
 	And I click continue on the Forward Product Registration page
-	And In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as TestCase75129Retailers and save as TestCase75321Retailer
+	And In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as TestCase75129Retailers and save as TestCase75129Retailer
+	And I click continue
+	And If the Private Label textbox is showing in the Select UPCs screen, I enter the value: N/A
+	And I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue and save UPC as UPC75129
+	Then I should see the header: Product Results on the Forward Product Registration window
+	And I click continue
+	And I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+	And I click continue
+	Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	Given I navigate to the home page
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75129)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75129 and its status is: Submitted
+	And I confirm that retailer saved as TestCase75129Retailer appears in the list of retailers for product TestCase75129
+	And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase75129
+	And I confirm UPC number saved as: "UPC75129" is displayed in the SHA Manager Product UPC list
+	And I confirm that retailer saved as TestCase75129Retailer appears for UPC saved as UPC75129
+	And I close the window that opened
 
 # Created by Aaron Caton
-
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Bulk Actions\Forward
-
+@tfs_design
 @TReVorId:23440
 Scenario: [78048] Forwarding to Walmart - Without Authoring
-Given I generate a random UPC number and save as: UPC78048
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-Aerosol
-And I call Shared Step 37857 (Enter Physical Property - Solid)
-And I call Shared Step 60310 (Additional Product Information - Without Child question)
-And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Aqua          | 100     | false               | false       |            |
-And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
-And I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-And I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
-And I click continue
-And I call Shared Step 77535 (Retailer Association - Walmart)
-And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Aerosol Can and size: 10
-And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
-And I click continue
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-And I navigate to the home page
-And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-And I enter the text: saved as TestCase78048 in the 'Search by WPS ID or Product Name' field
-And In the Foward Product Registration Screen I should see product: saved as TestCase78048
-And In the Foward Product Registration Screen I Select the product: saved as TestCase78048
-And I click continue on the Forward Product Registration page
-Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
-And I click continue on the Forward Product Registration page
-Given I select the Vendor option: <first> for the first product displayed under the Select UPCs tab
-And I click the 'select all' UPCs checkbox
-And I click continue on the Forward Product Registration page
-And I click continue on the Forward Product Registration page
-Given I select the true radio for the 'Are Statements True' question under the Review and Submit tab
-And I click continue on the Forward Product Registration page
-Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
-And I navigate to the home page
+	Given I generate a random UPC number and save as: UPC78048
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-Aerosol
+	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
+		| Secondary Physical State | Water Solubility |
+		| Flaked                   | Soluble in water |
+	And I call Shared Step 60310 (Additional Product Information - Without Child question)
+	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Aqua          | 100     | false               | false       |            |
+	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+	And I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+	And I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
+	And I click continue
+	And I call Shared Step 77535 (Retailer Association - Walmart)
+	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78048, container type: Aerosol Can and size: 10
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
+	And I click continue
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And I navigate to the home page
+	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+	And I enter the text: saved as TestCase78048 in the 'Search by WPS ID or Product Name' field
+	And In the Foward Product Registration Screen I should see product: saved as TestCase78048
+	And In the Foward Product Registration Screen I Select the product: saved as TestCase78048
+	And I click continue on the Forward Product Registration page
+	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
+	And I click continue on the Forward Product Registration page
+	Given I select the Vendor option: <first> for the first product displayed under the Select UPCs tab
+	And I click the 'select all' UPCs checkbox
+	And I click continue on the Forward Product Registration page
+	And I click continue on the Forward Product Registration page
+	Given I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+	And I click continue on the Forward Product Registration page
+	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+	And I navigate to the home page

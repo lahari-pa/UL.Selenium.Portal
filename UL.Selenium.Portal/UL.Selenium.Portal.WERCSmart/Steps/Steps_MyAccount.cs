@@ -210,15 +210,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I go to (.*) in User Grid for the the user called: (.*)")]
-		public void GivenIGoToActionInUserGridForGiven(string action,string username)
+		public void GivenIGoToActionInUserGridForGiven(string action, string username)
 		{
-			
+
 
 			Delay.Seconds(1);
 			var selMyAccount = new MyAccount();
 			var selTopMenuBar = new TopMenuBar();
-			
-						
+
+
 			Report.IsTrue(selMyAccount.ForUserClickAction(username, action),
 				"Failed to click action: " + action + " for user: " + username,
 				"Successfully clicked action: " + action + " for user: " + username);
@@ -508,6 +508,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Click close in dialog")]
 		public void IClickClose()
 		{
+			Delay.Seconds(3);
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Close");
 			try
 			{
@@ -1153,15 +1154,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
-			string adminPassword = adminUser.Password;			
-			
-			
+			string adminPassword = adminUser.Password;
+
+
 			var selModal = new ModalDialog();
 			if (!Report.IsTrue(selModal.Wait_for_load(), "Expected a modal dialog to load!", "Modal dialog loaded as expected"))
 			{
 				return;
 			}
-						
+
 			if (selModal.LoginPasswordFieldPresent())
 			{
 				Report.Info("Entering Admin password in the input: " + adminPassword);
@@ -1170,7 +1171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			GeneralUtilities.Wait_for_load_finish();
 			Report.Info("Clicking Continue");
-			selModal.ClickContinue();					   			 		  
+			selModal.ClickContinue();
 			Report.Info("Entering new password in New Password input: " + adminPassword);
 			selModal.EnterNewPassword(adminPassword);
 			Report.Info("Entering new password in Verify Password input: " + adminPassword);
@@ -1180,46 +1181,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click save in Change Password",
 				"Successfully clicked save in Change Password");
 			GeneralUtilities.Wait_for_load_finish();
-				
+
 			Report.Info("Clicking close in the Change Password popup");
 			Report.IsTrue(selModal.Click_Close(),
 				"Failed to click close in Change Password",
 				"Successfully clicked clse in Change Password");
-				GeneralUtilities.Wait_for_load_finish();		   
+			GeneralUtilities.Wait_for_load_finish();
 
-			
 
-			
+
+
 		}
 
 
 		[StepDefinition(@"I reset the password on the newly created user account using the admin password for the account: (.*)")]
 		public void ResetUserPassword(string savedAs)
 		{
-			
-			string user= Context.GetFromContext("CurrentUser").ToString();
-			if (user==null)
+
+			string user = Context.GetFromContext("CurrentUser").ToString();
+			if (user == null)
 			{
 				Report.Error("The CurrentUser was not saved in context");
 				return;
 			}
-			
-			TestReport.UseSubSteps = true;		
+
+			TestReport.UseSubSteps = true;
 
 			TestReport.StartStep($"I update the password for user: {user}");
 			var selMyAccount = new StepsMyAccount();
 			Report.Info("Clicking Reset Password for the current logged in user");
-			selMyAccount.GivenIGoToActionInUserGridForGiven("Reset Password",user);
+			selMyAccount.GivenIGoToActionInUserGridForGiven("Reset Password", user);
 			Report.Info("Updating the password for test user " + user);
 			selMyAccount.IUpdateThePasswordForGivenUser(savedAs);
-								
-			
+
+
 		}
 
 		[StepDefinition(@"I create a new user with the following information and set the password from the admin account: (.*)")]
-		public void CreateUserAndSetPassword(string savedAs,Table table)
+		public void CreateUserAndSetPassword(string savedAs, Table table)
 		{
-			
+
 			TestReport.UseSubSteps = true;
 
 			TestReport.StartStep("I add a new user");
@@ -1228,18 +1229,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.ThenIAddANewUserWithTheFollowingInformation(table);
 			var adminUser = TestUsers.GetUserSavedAs(savedAs);
 			var allUsers = new MyAccount().UserGrid();
-			var newUsername= Context.GetFromContext("CurrentUser").ToString();
+			var newUsername = Context.GetFromContext("CurrentUser").ToString();
 			var matchingUser = allUsers.FirstOrDefault(x => x.Username == newUsername);
 
-			if (matchingUser==null)
+			if (matchingUser == null)
 			{
 				Report.Failure($"The User '{newUsername}' could not be found in the user grid");
 				return;
 			}
-			string email = matchingUser.Email.TrimEnd(".kxxyxunf@mailosaur.io"); 
+			string email = matchingUser.Email.TrimEnd(".kxxyxunf@mailosaur.io");
 			string password = adminUser.Password;
 
-			
+
 			//User newUser = new User { Email = email, Password = password };
 			//Context.AddToContext("NewUser",newUser);
 
@@ -1264,13 +1265,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsSignup().DefineUser("NewUser", userTable);
 
 			//var testuser= (WERCSmartUser)Context.GetFromContext("NewUser");
-			
-
-			
 
 
 
-			
+
+
+
+
 
 
 		}

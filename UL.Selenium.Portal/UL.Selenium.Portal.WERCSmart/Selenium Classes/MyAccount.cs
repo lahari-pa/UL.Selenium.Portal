@@ -275,9 +275,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Is_User_Active");
 
-			IWebElement myFirstPageNo = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='1']"), 10).FirstOrDefault();
+			IWebElement myFirstPageNo = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']//li//a[contains(text(), '1'])"), 10).FirstOrDefault();
 
-			myFirstPageNo.Click();
+			myFirstPageNo.TryClick();
 
 			int pageNo = 1;
 
@@ -346,9 +346,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Select_ActivateDeactivate(string userName, string activate)
 		{
 			Report.Info("Beginning Select_ActivateDeactivate");
-			IWebElement myFirstPageNo = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='1']"), 10).FirstOrDefault();
+			IWebElement myFirstPageNo = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']//li//a[contains(text(), '1')]"), 10).FirstOrDefault();
 
-			myFirstPageNo.Click();
+			myFirstPageNo.TryClick();
 
 			int pageNo = 1;
 
