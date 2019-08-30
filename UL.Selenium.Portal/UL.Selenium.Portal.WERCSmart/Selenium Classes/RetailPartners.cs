@@ -256,7 +256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickBackButton()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='header-with-back']//a/i"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='header-with-back']//a/i"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public bool ClickInfoButton(string text)

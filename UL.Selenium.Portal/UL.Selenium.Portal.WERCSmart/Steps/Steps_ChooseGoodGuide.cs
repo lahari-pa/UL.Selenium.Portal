@@ -12,6 +12,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.Generic;
+using TReVor.Api.Wrapper.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -527,7 +528,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisChooseGGLogin = new ConflictMinerals();
 			var myStepsGG = new Steps_ChooseGoodGuide();
 			var thisGgNewProduct = new GGNewProduct();
-			TestUser shaUser = TestUsers.GetUserSavedAs("ChooseGGUser");
+			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs("ChooseGGUser");
 			thisChooseGGLogin.EmailAddress = shaUser.Username;
 			thisChooseGGLogin.Password = shaUser.Password;
 			thisChooseGGLogin.ClickLogin();

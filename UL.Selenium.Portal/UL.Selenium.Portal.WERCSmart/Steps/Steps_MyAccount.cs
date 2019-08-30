@@ -11,6 +11,7 @@ using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using NTTQA.Selenium.TReVor;
+using TReVor.Api.Wrapper.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -968,7 +969,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IUpdateThePasswordForTrevorTestUser(string savedAs)
 		{
 			// Get user credentials from TReVor based on saved as ID
-			TestUser user = TestUsers.GetUserSavedAs(savedAs);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(savedAs);
 			if (user == null)
 			{
 				Report.Failure("Unable to find TReVor test user saved as: " + savedAs);
@@ -1038,7 +1039,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (selModal.Wait_for_close())
 				{
 					Report.Info("Updating the password in TReVor Test Users");
-					Api.UpdateTestUserPassword(savedAs, newPassword);
+					TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
 					return;
 				}
 				throw new Exception("Modal dialog did not close!");
