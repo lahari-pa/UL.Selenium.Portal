@@ -430,6 +430,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool SaveButtonExists()
+		{
+			IList<IWebElement> listSaveButtons = this.containerElement.FindElements(By.XPath(".//a[contains(@class,'save-button')]"), 2);
+
+			IWebElement el = listSaveButtons.FirstOrDefault(x => x.Displayed);
+
+			if (el == null)
+			{
+				Report.Info("Save button Not Available");
+				return false;
+			}
+			Report.Info("Save button Available");
+			return true;
+		}
+
 		public List<KeyValuePair<int, string>> TableHeaders(IWebElement table)
 		{
 			List<KeyValuePair<int, string>> th = new EditableList<KeyValuePair<int, string>>();
@@ -2969,6 +2984,43 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement remove = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table[@class='table table-hover']//tr//b[text()[contains(.,""" + product + @""")]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
 			return remove.TryClick();
+		}
+
+		public bool ExpandArrowforUPC(string upc)
+		{
+			try
+			{
+				if (upc.ToLower().Contains("saved as"))
+				{
+					upc = Context.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
+				}
+				if (upc == null)
+				{
+					Report.Failure("Could not find UPC number in context saved as: " + upc);
+					return false;
+				}
+				Report.Info("Attempting to click expand arrow for: " + upc);
+				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				IWebElement upcmatch = container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.Text.Contains(upc))
+								?? container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.GetValue().Contains(upc))
+							   ?? container.FindElements(By.XPath(".//input[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.GetValue().Contains(upc));
+				if (upcmatch == null)
+				{
+					return false;
+				}
+				if (!upcmatch.FindElement(By.XPath("./ancestor::tr[position()=1]//a[@title='Expand']"), 2).TryClick())
+				{
+					Report.Info("Failed to find arrow");
+					return false;
+				}
+				Report.Info("Successfully clicked expand arrow.");
+				Report.Screenshot();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
 		}
 	}
 

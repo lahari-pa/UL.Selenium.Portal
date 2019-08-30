@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using TechTalk.SpecFlow;
+using TReVor.Api.Wrapper.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -851,7 +852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				TestReport.StartStep("I click the 'Add UPC' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				TestReport.StartStep("I add the following into the UPC Fields");
-				string upc = Api.GetRandomUpcNumber("CVS");
+				string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
 				Report.Info("UPC number: " + upc);
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
@@ -4742,7 +4743,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<Job> ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
-			TestUser shaUser = TestUsers.GetUserSavedAs("SHAUser");
+			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs("SHAUser");
 			Job matchingJob = ListOfJobs.FirstOrDefault(x =>
 				x.RecordID == id && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
 			if (matchingJob == null)
@@ -6181,14 +6182,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, ingredient);
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57247 - Database check - find t_vendor records for specific Retailer: (.*) and Supplier: (.*)")]
+		[StepDefinition(@"I call Shared Step 57247 - Database check - find t_vendor records for specific Retailer: (.*) and Supplier: (.*)")]
 		public void ThenICallSharedStep_DatabaseCheck_FindT_VendorRecordsForSpecificSupplierAndRetailer(string retailer,
 			string supplier)
 		{
 			if (supplier == "Products Automation Account")
 			{
-				TestUser user = TestUsers.GetUserSavedAs("ProductAccount");
+				TReVorTestUsers user = TestUsers.GetUserSavedAs("ProductAccount");
 				supplier = user.Username;
 			}
 
@@ -7126,35 +7126,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 86293 - UPC - Package type shown but not required - Enter UPC, Container and size, Continue for UPC: (.*)")]
-		public void GivenICallSharedStep_UPC_PackageTypeShownButNotRequired_EnterUPCContainerAndSizeContinue(string aUPC)
+		public void GivenICallSharedStep_UPC_PackageTypeShownButNotRequired_EnterUPCContainerAndSizeContinue(string upc)
 		{
 			TestReport.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();
 			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			TestReport.StartStep("I click the 'Add UPC' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			TestReport.StartStep("I add the following into the UPC Fields");
-			/*
-			if (UPC.ToLower().Contains("saved as"))
+
+			if (upc.ToLower().Contains("saved as"))
 			{
-				UPC = Context.GetFromContext(UPC.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+				upc = Context.GetFromContext(upc.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
 					.ToString();
 			}
-			*/
+
 			//And I DO NOT select a Package Type from the drop down listPackage type should not be required for this UPC entry
 
 			var upcTable = new Table("Field", "Value");
-			upcTable.AddRow("UPCNumber", aUPC);
+			upcTable.AddRow("UPCNumber", upc);
 			upcTable.AddRow("ContainerType", "Cardboard");
 			upcTable.AddRow("Size", "40");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			Report.IsTrue(MyNewProduct.UPCPackageTypeFieldExists(), "Package Type does not display", "Package type displays as expected");
 			//And I Click Continueor Save(button shown depends on the flow you are in)
-			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
-			GeneralUtilities.Wait_for_load_finish();
-
-
+			if (MyNewProduct.SaveButtonExists())
+			{
+				TestReport.StartStep("In the Universal Product Code (UPC) page I click Save");
+				MyNewProduct.ClickSaveButton();
+			}
+			else
+			{
+				TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+				MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				GeneralUtilities.Wait_for_load_finish();
+			}
 		}
 
 		[StepDefinition(
@@ -8428,6 +8436,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
 			TestReport.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+		}
+
+
+		[StepDefinition(
+			@"I call Shared Step 87337 \(Edit UPC - data - Click Save\) for UPC as: (.*), container type: (.*) and size: (.*) and packaging type: (.*)")]
+		public void Shared87337_RemovePackgType(string upc, string containerType, string size, string pkgType)
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			TestReport.StartStep("I click expand arrow for: " + upc);
+			myNewProduct.ExpandArrowforUPC(upc);
+			TestReport.StartStep("I add the following into the UPC Fields");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc,
+					PackageType = pkgType
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to change packagaing type info!",
+					"Successfully changed packagaing type info!");
+				TestReport.StartStep("I click save");
+			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
+			MyStepsNewProduct.GivenIConfirmErrorMessageIsShownBelowField("This is a required field.", "Package Type");
 		}
 
 		[StepDefinition(@"I call Shared Step 60515 \(VOC - Dilution - Yes to ratio - enter any values > Continue - Happy Path\)")]
