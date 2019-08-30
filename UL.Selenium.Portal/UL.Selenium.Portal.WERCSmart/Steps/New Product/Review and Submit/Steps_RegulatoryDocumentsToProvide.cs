@@ -19,5 +19,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 			var regDocs = new RegulatoryDocumentsToProvide();
 			Report.IsTrue(regDocs.SetAnswerToQuestion(question, answer), string.Format("Unable to set question: {0} to answer: {1}", question, answer), string.Format("Successfully set question: {0} to answer: {1}", question, answer));
 		}
+
 	}
 }

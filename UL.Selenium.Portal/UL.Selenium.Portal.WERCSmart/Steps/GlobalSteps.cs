@@ -22,6 +22,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
 using NTTQA.Selenium.TReVor;
 using NTTQA.Selenium.UniversalFunctions;
+using TReVor.Api.Wrapper.Classes;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -125,7 +126,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void LoginToAccount(string accountSavedAs, bool attemptOnce = false)
 		{
-			TestUser user = TestUsers.GetUserSavedAs(accountSavedAs);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
 			if (new TopMenuBar().LoggedIn())
 			{
 				Report.Info("Logged in, logging out");
@@ -1041,7 +1042,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I save the TReVor test user: (.*) to context as 'TReVorTestUser'")]
 		public void ISaveTheWercSmartUserStoredInTrevorAs(string savedAs)
 		{
-			TestUser user = TestUsers.GetUserSavedAs(savedAs);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(savedAs);
 			if (user == null)
 			{
 				Report.Failure("Failed to find a user stored in TReVor: " + savedAs);
@@ -1071,7 +1072,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Logging out");
 				this.GivenILogout();
 				Report.Info("Checking I can log in with the new credentials");
-				TestUsers.RefreshTestUserCache();
+				TestUsers.RefreshUsers();
 				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				Report.Info("Logging out");
 				this.GivenILogout();
@@ -1082,13 +1083,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IUpdateThePasswordForAllTrevorTestUsersWithinCurrentBranch()
 		{
 			TestReport.UseSubSteps = true;
-			List<TestUser> users = TestUsers.GetAllUsers();
-			IEnumerable<TestUser> allUsers = users.Where(x => x.SoftwareId == GlobalParameters.EditionDetails.SoftwareId && x.BranchName == GlobalParameters.Branch);
+			List<TReVorTestUsers> users = TestUsers.Users;
+			IEnumerable<TReVorTestUsers> allUsers = users.Where(x => x.SoftwareId == GlobalParameters.EditionDetails.SoftwareId && x.BranchName == GlobalParameters.Branch);
 			var usersSavedAs = allUsers.Select(x => x.SavedAs).ToList();
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (string savedAs in usersSavedAs)
 			{
-				TestUser user = TestUsers.GetUserSavedAs(savedAs);
+				TReVorTestUsers user = TestUsers.GetUserSavedAs(savedAs);
 				if (!user.Username.Contains("@"))
 				{
 					Report.Info($"The email did not contain an '@' so continuing to the next user.");
@@ -1147,11 +1148,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							if (passwordExpired.TopHeading().Contains("Thank You"))
 							{
 								Report.Info("Updating the password in TReVor Test Users");
-								Api.UpdateTestUserPassword(savedAs, newPassword);
+								TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
 								Report.Info("Navigating to the landing page");
 								SeleniumBrowser.WebBrowser.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
 								Report.Info("Checking I can log in with the new credentials");
-								TestUsers.RefreshTestUserCache();
+								TestUsers.RefreshUsers();
 								this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
 								Report.Info("Logging out");
 								this.GivenILogout();
@@ -1197,7 +1198,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					new GlobalSteps().NavigateToLandingPage();
 				}
 				Report.Info("Checking I can log in with the new credentials");
-				TestUsers.RefreshTestUserCache();
+				TestUsers.RefreshUsers();
 				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				Report.Info("Logging out");
 				this.GivenILogout();
@@ -1363,7 +1364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save the username for TReVor test user: (.*) to context as: (.*)")]
 		public void SaveUsernameOfTrevorUser(string trevorSavedAs, string usernameSavedAs)
 		{
-			TestUser user = TestUsers.GetUserSavedAs(trevorSavedAs);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(trevorSavedAs);
 			if (user != null)
 			{
 				Report.Info("Adding username context: " + user.Username);
@@ -1460,6 +1461,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             }
             Report.Failure("Failed to get an existing UPC!");
 		}
-
 	}
 }

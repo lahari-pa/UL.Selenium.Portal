@@ -6,6 +6,7 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.Cache;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
+using TReVor.Api.Wrapper.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -232,7 +233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				throw new Exception("Log in page did not load after 30 seconds!");
 			}
-			TestUser user = TestUsers.GetUserSavedAs(accountSavedAs);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
 			if (user == null)
 			{
 				throw new Exception("The user saved as: " + accountSavedAs + " could not be located in TReVor!");
@@ -259,7 +260,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				throw new Exception("Log in page did not load after 30 seconds!");
 			}
-			TestUser user = TestUsers.GetUserSavedAs(account);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(account);
 			if (user == null)
 			{
 				throw new Exception("The user saved as: " + account + " could not be located in TReVor!");
