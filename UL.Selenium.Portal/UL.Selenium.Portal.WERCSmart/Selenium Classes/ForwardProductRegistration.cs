@@ -233,24 +233,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(string presentRetailer)
 		{
-			IWebElement retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//div[@class='control-indicator']"), 2);
+			//IWebElement retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//div[@class='control-indicator']"), 2);
 
-
-			if (retailerInput == null)
+			List <IWebElement> retailerInputs = this.containerElement.FindElements(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//label/span"), 2).ToList();
+			
+			if (!retailerInputs.Any())
 			{
-				Report.Info("The First Retailer could not be found");
+				Report.Info("No retailers could be found under 'Other Retailers'.");
 				return false;
 			}
 
-			string firstRetailerName = retailerInput.FindElement(By.XPath("//ancestor::label//span"), 2).Text; //[text()='Ahold']
-			if (firstRetailerName == presentRetailer||firstRetailerName==""||firstRetailerName==""||firstRetailerName=="") //change to add avoided retailers
+			string[] avoidRetailersArray = new string[] { presentRetailer, "Best Buy", "Dick's Sporting Goods", "Kroger" };
+
+			var retailer = retailerInputs.FirstOrDefault(x => !avoidRetailersArray.Contains(x.GetValue(true)));
+
+			if (retailer != null)
 			{
-
-				IWebElement nextRetailerInput = retailerInput.FindElement(By.XPath($"//ancestor::label//span[not(text()='{presentRetailer}') and not(text()='Best Buy') and not(text()='DI') and not(text()='KG')]"), 2); //change to add accurate avoided retailers
-				return nextRetailerInput.TryClick();
-
+				return retailer.FindElement(By.XPath(@".//preceding-sibling::input[@type='checkbox]"), 2).TryCheck();
 			}
-			return retailerInput.TryClick();
+
+			return false;
+			//string firstRetailerName = retailerInput.FindElement(By.XPath(".//ancestor::label//span"), 2).Text; //[text()='Ahold']
+			//if (firstRetailerName == presentRetailer||firstRetailerName==""||firstRetailerName==""||firstRetailerName=="") //change to add avoided retailers
+			//{
+
+			//	IWebElement nextRetailerInput = retailerInput.FindElement(By.XPath($"//ancestor::label//span[not(text()='{presentRetailer}') and not(text()='Best Buy') and not(text()='DI') and not(text()='KG')]"), 2); //change to add accurate avoided retailers
+			//	return nextRetailerInput.TryClick();
+
+			//}
+			//return retailerInput.TryClick();
 		}
 
 

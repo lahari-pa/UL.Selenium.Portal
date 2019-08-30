@@ -5,6 +5,7 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.Cache;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
+using TReVor.Api.Wrapper.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -872,7 +873,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I log into PayPal with user saved as: (.*) and click Continue")]
 		public void GivenILogInWithEmailAndPassword(string savedAs)
 		{
-			TestUser user = TestUsers.GetUserSavedAs(savedAs);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(savedAs);
 			this.GivenILogInWithEmailAndPassword(user.Username, user.Password);
 		}
 

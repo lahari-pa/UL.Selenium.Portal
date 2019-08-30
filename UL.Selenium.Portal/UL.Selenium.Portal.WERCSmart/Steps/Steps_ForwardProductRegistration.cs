@@ -756,5 +756,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(presentRetailer), "Failed to select the first Retailer that is not "+presentRetailer+" under 'Other Retailers'", "Succesfully selected the first retailer that is not " + presentRetailer + "under 'Other Retailers'");
 		}
+
+		[StepDefinition(@"I confirm that UPC information is displayed in the Destination Retailers column under the Select UPCs Table")]
+		public void ConfirmUPCInfromationInSelectUPCsTable(string value)
+		{
+
+			//Get the table
+			// for each row check every coloum has data in, if not failure but continue (check all coloummns still)
+			var selForwardProdReg = new ForwardProductRegistration();
+			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
+			if (upcs.Count == 0)
+			{
+				Report.Failure("No UPC rows were found in the grid");
+				Report.Screenshot();
+				return;
+			}
+			Report.Info("There were: " + upcs.Count + " UPCs to check");
+			if (upcs.All(x => x.UPCInfo.DestinationRetailers == value))
+			{
+				Report.Success("The Destination Retailers column was showing: " + value + " as expected");
+				Report.Screenshot();
+				return;
+			}
+			Report.Failure("The following UPCs were not showing the value: " + value + " under Destination Retailers! - " + string.Join(", ", upcs.Where(x => x.UPCInfo.DestinationRetailers != value).Select(x => x.UPCInfo.UPCNumber).ToList()));
+			Report.Screenshot();
+		}
 	}
 }

@@ -24,17 +24,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_Automation_ProductsAccount", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
 			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
@@ -47,29 +42,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myProductsetup = new Steps_ProductSetup();
 			var dataNotification = new GoToDataTierNotification();
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			myHome.ThenTheWercSmartHomepageShouldLoad();
-			myHome.ThenIClickOnUserItem("My Account");
-
 			//Subscription 
 			myAccount.ThenIClickOnNewSubscription();
 			var subEnrollTable = new Table("Articles", "Enhanced Articles",
@@ -78,8 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
 			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
 			myPay.ThenISelectPaymentMethodX("Credit Card");
-			var myCreditCardTable = new Table("Card Type", "Card Number",
-				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
+			var myCreditCardTable = new Table("Card Type", "Card Number", "Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
 			myPay.ThenIClickContinue();
@@ -166,6 +137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Data Tier update required is not displayed");
 			}
+
 			myRetailPartner.SelectRetailer("Target");
 			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
 			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
@@ -250,18 +222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//Save account and update TReVor data
 			Report.Info(savedAs + " Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
-
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -270,49 +231,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Upgrade", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_Packaging_Only", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
 			var myAccountSteps = new StepsMyAccount();
 			var myPkgType = new Steps_PackagingTypes();
 			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			myHome.ThenTheWercSmartHomepageShouldLoad();
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
+
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
 			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
@@ -337,17 +268,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
 			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
 			Report.Info(savedAs + " Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -356,60 +277,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Lockout", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_AccountLockTest", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
-			var myHome = new StepsHomepage();
-			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			myHome.ThenTheWercSmartHomepageShouldLoad();
-			Report.Info(savedAs + " Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			if (this.BasicSignup(savedAs))
 			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+				this.SaveUserToTReVor(savedAs, account);
 			}
 		}
 
@@ -419,60 +293,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "CANADA", "WERCS", "Test_Automation_Upgrade", "Welcome1!", "1425 Kingsway", "Address2", "Sudbury", "ON", "P3A 4R7", "QA_Packaging_Only", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
-			var myHome = new StepsHomepage();
-			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
-
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			if (this.BasicSignup(savedAs))
 			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
+				this.SaveUserToTReVor(savedAs, account);
 			}
 		}
 
@@ -482,70 +309,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Full_Stewardship_Only", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
-
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia","BC-1-1", "", "");
-			myAccount.StewardshipInformation("Saskatchewan","SA-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba","MA-1-1", "", "");
-			myAccount.StewardshipInformation("Ontario","ON-1-1", "", "");
-			myAccount.StewardshipInformation("Quebec","QU-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
+			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1", "", "");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
+			myAccount.StewardshipInformation("Ontario", "ON-1-1", "", "");
+			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 		[StepDefinition(@"I create a new supplier Canada has address packaging account with the following parameters and update TReVor information for: (.*)")]
@@ -553,17 +335,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_CanHasAddPkg", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
+			
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
 			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
@@ -571,33 +349,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myAccountSteps = new StepsMyAccount();
 			var myPkgType = new Steps_PackagingTypes();
 			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
 			var myRetailPartner = new StepsRetailPartners();
 			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
-
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
 			myHome.ThenIClickOnUserItem("My Account");
 
 			//Subscription 
@@ -666,17 +419,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -685,17 +428,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_Account", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
 			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
@@ -703,33 +439,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myAccountSteps = new StepsMyAccount();
 			var myPkgType = new Steps_PackagingTypes();
 			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
 			var myRetailPartner = new StepsRetailPartners();
 			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
 			myHome.ThenIClickOnUserItem("My Account");
 
 			//Subscription 
@@ -784,7 +498,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia","BC-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
 			myAccount.StewardshipInformation("Manitoba", "BC-1-1", "", "");
 
 			//data tiers
@@ -799,17 +513,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -818,51 +522,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_Account", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
 
 			//Canada supplier address
 			myHome.ThenIClickOnUserItem("My Account");
@@ -876,17 +543,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
 
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -895,9 +552,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_DataConsent", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
 			account.Email = EmailFunctions.CreateEmail(account.Email);
 			account.Identifier = savedAs;
@@ -944,17 +601,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -963,66 +610,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_NoCanadaData", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
-			var myHome = new StepsHomepage();
-			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
-
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
-			myHome.ThenIClickOnUserItem("My Account");
-
-
-			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -1031,52 +624,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_NoCanYesPkgStwdFull", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
 			var myAccountSteps = new StepsMyAccount();
 			var myPkgType = new Steps_PackagingTypes();
 			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
-			myHome.ThenIClickOnUserItem("My Account");
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
 
 			//My Packaging Type
 			myHome.ThenIClickOnUserItem("My Account");
@@ -1114,17 +673,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -1133,68 +682,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Partial_Stewardship_Only", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
+
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia","BC-1-1", "", "");
-			myAccount.StewardshipInformation("Saskatchewan","SA-1-1", "", "");
-			myAccount.StewardshipInformation("Quebec","QU-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
+			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1", "", "");
+			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -1203,49 +707,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_PremiumSubscription", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
 			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
 			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			myHome.ThenTheWercSmartHomepageShouldLoad();
+			
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
 			myHome.ThenIClickOnUserItem("My Account");
 
 			//Subscription 
@@ -1269,18 +741,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//Save account and update TReVor data
 			Report.Info(savedAs + " Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
-
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -1289,51 +750,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Partial_Stewardship_Pkg", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
 			var myAccountSteps = new StepsMyAccount();
 			var myPkgType = new Steps_PackagingTypes();
 			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
 
 			//My Packaging Type
 			myHome.ThenIClickOnUserItem("My Account");
@@ -1363,22 +791,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia","BC-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba","MA-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
 
 			//update TReVor info
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -1387,65 +805,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_NoPLP_Products", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
-			var myHome = new StepsHomepage();
-			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
 
 			//update TReVor info
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -1454,17 +823,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_CanadaAllData", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
 			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
@@ -1472,33 +834,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myAccountSteps = new StepsMyAccount();
 			var myPkgType = new Steps_PackagingTypes();
 			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
 			var myRetailPartner = new StepsRetailPartners();
 			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
 			myHome.ThenIClickOnUserItem("My Account");
 
 			//Subscription 
@@ -1571,17 +911,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -1590,67 +920,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_ProductsInCart", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
-			var myHome = new StepsHomepage();
-			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
 
 			//create a product and click accept 
 			myProductsetup.CreateProductChalkAndClickAcceptOnDataAcceptance("Product1", "Chalk");
 
-			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 
@@ -1659,51 +940,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_SubCart", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
-			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
 			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
 			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
-			var myGlobalpage = new GlobalSteps();
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			//myGlobalpage.GivenILogInWithEmailXAndPasswordY("User_c5d640f06772.kxxyxunf@mailosaur.io", "Welcome1!");
-			myHome.ThenTheWercSmartHomepageShouldLoad();
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
 			myHome.ThenIClickOnUserItem("My Account");
 
 			//Subscription 
@@ -1724,20 +972,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
 			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("10", "10", "10");
-
-
+			
 			Report.Info(savedAs + " Account Created");
-			var user = TestUsers.GetUserSavedAs(savedAs);
-			if (user != null)
-			{
-				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
-			}
-			else
-			{
-				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
-			}
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 		[StepDefinition(@"I create a new supplier Visual with the following parameters and update TReVor information for: (.*)")]
@@ -1745,61 +982,84 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
-				  "EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Lockout", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_Visual", "123-456-7889",
-				   "123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			if (this.BasicSignup(savedAs))
+			{
+				this.SaveUserToTReVor(savedAs, account);
+			}
+		}
+
+		public WERCSmartUser SaveUser(Table information, string savedAs)
+		{
+			WERCSmartUser account = information.CreateInstance<WERCSmartUser>();
 			account.Email = EmailFunctions.CreateEmail(account.Email);
 			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
-			Report.Success("Account details saved!");
-			var mySignUp = new StepsSignup();
-			var myLogin = new StepsLogin();
-			var myLanding = new StepsLandingPage();
-			var myHome = new StepsHomepage();
-			var myAccount = new StepsMyAccount();
-			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
-			var myPay = new Steps_PaymentMethods();
-			var myAccountSteps = new StepsMyAccount();
-			var myPkgType = new Steps_PackagingTypes();
-			var newProductSteps = new StepsNewProduct();
-			var myBrand = new Steps_Brands();
-			var myRetailPartner = new StepsRetailPartners();
-			var myProductsetup = new Steps_ProductSetup();
+			Context.AddToContext(savedAs, account, true);
 
-			mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenIClickOnTheNewToWercsmartLink();
-			mySignUp.ThenTheSignupPageShouldAppear();
-			mySignUp.GivenIEnterSignupEmailUser(savedAs);
-			mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-			mySignUp.GivenIClickOnSubmit();
-			mySignUp.ThenTheSignupThankYouPageShouldAppear();
-			mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-			mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
-			mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-			mySignUp.EnterPinForUser(savedAs);
-			mySignUp.WhenInTheNewUserFormIClickOnContinue();
-			myLanding.ClickTheLoginButton();
-			myLogin.GivenILoginAsUser(savedAs);
-			mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-			myHome.ThenTheWercSmartHomepageShouldLoad();
-			Report.Info(savedAs + " Created");
+			Report.Success("Account details saved!");
+			return account;
+		}
+
+		public bool BasicSignup(string savedAs)
+		{
+			try
+			{
+				var mySignUp = new StepsSignup();
+				var myLogin = new StepsLogin();
+				var myLanding = new StepsLandingPage();
+				var myHome = new StepsHomepage();
+
+				mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+				myLanding.ClickTheLoginButton();
+				myLogin.GivenIClickOnTheNewToWercsmartLink();
+				mySignUp.ThenTheSignupPageShouldAppear();
+				mySignUp.GivenIEnterSignupEmailUser(savedAs);
+				mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+				mySignUp.GivenIClickOnSubmit();
+				mySignUp.ThenTheSignupThankYouPageShouldAppear();
+				mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+				mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+				mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+				mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+				mySignUp.WhenInTheNewUserFormIClickOnContinue();
+				mySignUp.ThenIShouldBeOnThePageOfTheForm("Security Questions");
+				mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+				mySignUp.EnterPinForUser(savedAs);
+				mySignUp.WhenInTheNewUserFormIClickOnContinue();
+				myLanding.ClickTheLoginButton();
+				myLogin.GivenILoginAsUser(savedAs);
+				mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+				myHome.ThenTheWercSmartHomepageShouldLoad();
+				Report.Info(savedAs + " Created");
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
+		}
+
+		public bool SaveUserToTReVor(string savedAs, WERCSmartUser account)
+		{
 			var user = TestUsers.GetUserSavedAs(savedAs);
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(Api.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(Api.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
 				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
 			}
+
+			return true;
 		}
 	}
 }
+
+

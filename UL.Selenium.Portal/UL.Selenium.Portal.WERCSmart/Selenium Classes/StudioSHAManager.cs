@@ -1035,8 +1035,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (IWebElement row in rows)
 			{
+				var upcText = row.Text.Split(' ')[0];
+				Report.Info("UPC row text: " + upcText);
 				var thisUpc = new SHAManagerProdcutUPC {
-					UPCNumber = row.Text.Split(' ')[0]
+
+					UPCNumber = upcText
 				};
 
 				rList.Add(thisUpc);

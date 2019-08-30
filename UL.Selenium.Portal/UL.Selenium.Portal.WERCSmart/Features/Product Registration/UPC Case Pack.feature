@@ -306,6 +306,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 Scenario: [87894] Forwarding - Edit existing Case UPC 
 
 Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completedstatus
+Given I navigate to the landing page
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I filter the products by: Accepted by Retailers
 And I filter for the product saved as: TestCase87894
@@ -321,7 +322,8 @@ Then I confirm the active Forward Product Registration tab is: Select Retailers
 Then In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Amazon under Other Retailers
 Given I click continue on the Forward Product Registration page
 Then I select the first product under the Select UPCs tab
-#Then I confirm that: WM is displayed in the Destination Retailers column under Select UPCs  <-- use as example for accessing this right side table on select UPCs page
+#Then I confirm that: WM is displayed in the Destination Retailers column under Select UPCs
+#<-- use as example for accessing this right side table on select UPCs page
 
 #And I Select the product in the left hand table by clicking on the product information
 #And I Confirm you see the truck icon next to the Case UPC you added to your product earlier
