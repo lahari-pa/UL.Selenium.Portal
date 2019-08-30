@@ -1730,46 +1730,70 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             }
         }
 
-        [StepDefinition(@"In the SHA list of UPCs I should not see UPC: (.*)")]
-        public void ShaUPCList(string upc)
-        {
-            // Switch to window
-            string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-            Context.AddToContext("MainWindowHandle", currentHandle);
-            ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-            Report.Info("Looking for SHA Manager Product UPC window");
-            bool foundWindow = false;
-            foreach (string handle in allHandles)
-            {
-                Report.Info("Checking handle: " + handle);
-                SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-                if (SeleniumBrowser.WebBrowser.FindElement(
-                        By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
-                {
-                    Report.Success("Tab was switched successfully!");
-                    Report.Screenshot();
-                    foundWindow = true;
-                    break;
-                }
-            }
+		[StepDefinition(@"In the SHA list of UPCs I should (see|not see) UPC: (.*)")]
+		public void ShaUPCList(string condition,string upc)
+		{
+			try
+			{
+				// Switch to window
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
 
-            if (!foundWindow)
-            {
-                Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
-                Report.Screenshot();
-            }
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+				}
 
-            List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
-            if (upc.ToLower().Contains("saved as"))
-            {
-                upc = Context
-                    .GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
-                    .ToString();
-            }
+				List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the SHA UPC window!");
+					Report.Screenshot();
+					return;
+				}
 
-            Report.IsTrue(!displayedUpcs.Any(x => x.UPCNumber.Contains(upc)), "UPC: " + upc + " has not been deleted.",
-                "UPC: " + upc + " has been deleted as expected.");
-        }
+				if (upc.ToLower().Contains("saved as"))
+				{
+					upc = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+				}
+
+				if (condition == "see")
+				{
+					Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber.Contains(upc)), "UPC: " + upc + " does not display",
+						"UPC: " + upc + " displays as expected");
+				}
+
+				if (condition == "not see")
+				{
+					Report.IsTrue(!displayedUpcs.Any(x => x.UPCNumber.Contains(upc)), "UPC: " + upc + " has not been deleted.",
+						"UPC: " + upc + " has been deleted as expected.");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
 
         [StepDefinition(@"The recertification popup should show")]
         public void TheRecertificationPopupShouldShow()
