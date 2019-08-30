@@ -159,7 +159,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public string GetEmailForAccount(string accountSavedAs)
 		{
-			TestUser user = TestUsers.GetUserSavedAs(accountSavedAs);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
 			if (user == null)
 			{
 				string Branch = GlobalParameters.Branch;
