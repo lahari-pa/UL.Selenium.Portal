@@ -15,6 +15,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps;
 using System.Collections.ObjectModel;
+using TReVor.Api.Wrapper.Classes;
 
 namespace UL.Selenium.Portal.ULSC.Steps
 {
@@ -99,7 +100,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		public void GivenILoginToStudioAsULSCUser()
 		{
 			var thisStudioLogin = new StudioLogin();
-			TestUser ulscUser = TestUsers.GetUserSavedAs("ULSC_StudioUser");
+			TReVorTestUsers ulscUser = TestUsers.GetUserSavedAs("ULSC_StudioUser");
 			thisStudioLogin.Username = ulscUser.Username;
 			thisStudioLogin.Password = ulscUser.Password;
 			thisStudioLogin.ClickSignIn();
@@ -137,7 +138,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		public void GivenInTheULSCLoginPageIEnterUsernameAndPasswordForTheFollowingAccountTest(string accountSavedAs)
 		{
 			var thisULSCLogin = new ULSCLogin();
-			TestUser user = TestUsers.GetUserSavedAs(accountSavedAs);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
 			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
 			{
 				thisULSCLogin.Username = user.Username;
@@ -792,7 +793,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I confirm the user button in the header displays the logged in username")]
 		public void ConfirmUserButtonDisplaysLoggedInUserName()
 		{
-			TestUser user = TestUsers.GetUserSavedAs("WercsUser");
+			TReVorTestUsers user = TestUsers.GetUserSavedAs("WercsUser");
 			if (user == null)
 			{
 				Report.Failure("No ULCS WercsUser found for current branch in TReVor");
