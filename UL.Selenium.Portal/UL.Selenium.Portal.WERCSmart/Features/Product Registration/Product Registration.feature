@@ -339,8 +339,8 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	And I set the Packing Group (select) field to: III
 	Given in the New Product page I click Continue
 	# Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
-	Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
-	And I set the Product has been granted an Alternative Control Plan option to: No
+	Then The VOC OTC CARB page should be loaded
+	And I set 'Product has been granted an Alternative Control' to: No
 	And I set the HVOC (high volatile organic compound) content field to: 200
 	And I set the MVOC (microbial volatile organic compound) content field to: 200
 	Given in the New Product page I click Continue

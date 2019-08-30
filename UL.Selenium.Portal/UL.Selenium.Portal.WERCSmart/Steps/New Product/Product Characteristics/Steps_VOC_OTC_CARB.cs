@@ -15,8 +15,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 	{
         private readonly VocOtcCarb _vocOtcCarb = new VocOtcCarb();
 
-        [StepDefinition(@"The VOC OTC CARB page should be active")]
-        public void VocOtcCarbPageShouldBeActive()
+        [StepDefinition(@"The VOC OTC CARB page should be loaded")]
+        public void VocOtcCarbPageShouldBeLoaded()
         {
             Report.Info("Expected page heading is: " + this._vocOtcCarb.PanelTitle);
 	        Report.IsTrue(this._vocOtcCarb.IsActivePanel, "The VOC OTC CARB page did not load!", "The VOC OTC CARB page loaded");
@@ -82,6 +82,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 		        "Set 'VOC Content As Used' to: " + value);
 
         }
-        
+
+        [StepDefinition(@"I set 'HVOC content' to: (.*)")]
+        public void SetHvocContent(string value)
+        {
+	        this._vocOtcCarb.HvocContent = value;
+	        Delay.Seconds(1);
+	        Report.IsTrue(this._vocOtcCarb.HvocContent == value,
+		        "Failed to set 'HVOC content' to: " + value,
+				"Set 'HVOC content' to: " + value);
+		}
+
+        [StepDefinition(@"I set 'MVOC content' to: (.*)")]
+        public void SetMvocContent(string value)
+        {
+	        this._vocOtcCarb.MvocContent = value;
+	        Delay.Seconds(1);
+	        Report.IsTrue(this._vocOtcCarb.MvocContent == value,
+				"Failed to set 'MVOC content' to: " + value,
+				"Set 'MVOC content' to: " + value);
+		}
 	}
 }

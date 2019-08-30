@@ -19,10 +19,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 		private const string _vocContentAsUsedQuestion = "Product's VOC content as used";
 
+		private const string _hvocContentQuestion = "HVOC (high volatile organic compound) content as weight percent of the total formulation";
+
+		private const string _mvocContentQuestion = "MVOC (microbial volatile organic compound) content as weight percentage of the total formulation";
+
 		#endregion
 
 		public bool GrantedAlternativeControlPlan {
-			get => this.SelectedInputForLabel(_grantedAcpQuestion) == "Yes";
+			get => this.SelectedRadioForLabel(_grantedAcpQuestion) == "Yes";
 			set
 			{
 				if (value)
@@ -35,7 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		}
 
 		public bool LabelDilutionRatio {
-			get => this.SelectedInputForLabel(_labelDilutionQuestion) == "Yes";
+			get => this.SelectedRadioForLabel(_labelDilutionQuestion) == "Yes";
 			set
 			{
 				if (value)
@@ -56,6 +60,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			get => this.TextInputValueForLabel(_vocContentAsUsedQuestion);
 			set => this.EnterTextToLabelnput(_vocContentAsUsedQuestion, value);
 		}
-		
+
+		public string HvocContent {
+			get => this.TextInputValueForLabel(_hvocContentQuestion);
+			set => this.EnterTextToLabelnput(_hvocContentQuestion, value);
+		}
+
+		public string MvocContent {
+			get => this.TextInputValueForLabel(_mvocContentQuestion);
+			set => this.EnterTextToLabelnput(_mvocContentQuestion, value);
+		}
 	}
+	
 }

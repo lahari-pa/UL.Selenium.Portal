@@ -282,6 +282,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return selectedOption?.FindElement(By.XPath("../..//label/span"), 2)?.Text;
 		}
 
+		public string SelectedRadioForLabel(string lblText)
+		{
+			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
+			IWebElement selectedOption = label?.FindElements(By.XPath("../..//input[@type='radio']"), 2)?.FirstOrDefault(x => x.Selected);
+			return selectedOption?.FindElement(By.XPath("./following-sibling::span"), 2)?.Text;
+		}
+
 		public string CheckedInputForLabel(string lblText)
 		{
 			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
