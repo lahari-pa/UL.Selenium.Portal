@@ -21,6 +21,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -915,6 +916,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep(@"I click the browse button for label: Product Label and upload PDF: testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			Delay.Seconds(2);
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -2362,9 +2364,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I select the first option for section: For Marine transport (IMDG), indicate the classification");
 			MyNewProductSteps.SelectFirstOptionInSection("For Marine transport (IMDG), indicate the classification");
 			TestReport.StartStep(
-				"I set the For Air transport (IATA), indicate the classification field to: Section IB");
-			MyNewProductSteps.SetTheSectionOptionTo("For Air transport (IATA), indicate the classification",
-				"Section IB");
+				"I set the For Air transport (IATA), indicate the classification field to the first selection");
+			MyNewProductSteps.SelectFirstOptionInSection("For Air transport (IATA), indicate the classification");
 			TestReport.StartStep(
 				"I set the For Canada's Transportation of Dangerous Goods (TDG), indicate the classification field to: None of the above/Not intended for shipment in Canada");
 			MyNewProductSteps.SetTheSectionOptionTo(
@@ -7069,7 +7070,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						try
 						{
 							var dt2 = DateTime.ParseExact(i, "M/d/yyyy", CultureInfo.InvariantCulture);
-							Report.Success("contains a date: " +i);
+							Report.Success("contains a date: " + i);
 						}
 						catch (Exception ex)
 						{
@@ -7086,7 +7087,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				if (row["Data"] != "date" && row["Data"] != "any")
 				{
-					Report.Info("Checking that I see option:" +option);
+					Report.Info("Checking that I see option:" + option);
 					Report.IsTrue(data.Contains(option.Trim()),
 						"Option was not showing as expected! Expected: '" + option + "', but found: '" +
 						string.Join("', '", data) + "'!",
@@ -7125,35 +7126,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 86293 - UPC - Package type shown but not required - Enter UPC, Container and size, Continue for UPC: (.*)")]
-		public void GivenICallSharedStep_UPC_PackageTypeShownButNotRequired_EnterUPCContainerAndSizeContinue(string aUPC)
+		public void GivenICallSharedStep_UPC_PackageTypeShownButNotRequired_EnterUPCContainerAndSizeContinue(string upc)
 		{
 			TestReport.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();
 			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			TestReport.StartStep("I click the 'Add UPC' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			TestReport.StartStep("I add the following into the UPC Fields");
-			/*
-			if (UPC.ToLower().Contains("saved as"))
+
+			if (upc.ToLower().Contains("saved as"))
 			{
-				UPC = Context.GetFromContext(UPC.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+				upc = Context.GetFromContext(upc.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
 					.ToString();
 			}
-			*/
+
 			//And I DO NOT select a Package Type from the drop down listPackage type should not be required for this UPC entry
 
 			var upcTable = new Table("Field", "Value");
-			upcTable.AddRow("UPCNumber", aUPC);
+			upcTable.AddRow("UPCNumber", upc);
 			upcTable.AddRow("ContainerType", "Cardboard");
 			upcTable.AddRow("Size", "40");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			Report.IsTrue(MyNewProduct.UPCPackageTypeFieldExists(), "Package Type does not display", "Package type displays as expected");
 			//And I Click Continueor Save(button shown depends on the flow you are in)
-			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
-			GeneralUtilities.Wait_for_load_finish();
-
-
+			if (MyNewProduct.SaveButtonExists())
+			{
+				TestReport.StartStep("In the Universal Product Code (UPC) page I click Save");
+				MyNewProduct.ClickSaveButton();
+			}
+			else
+			{
+				TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+				MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				GeneralUtilities.Wait_for_load_finish();
+			}
 		}
 
 		[StepDefinition(
@@ -7687,6 +7696,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(
+					@"I call Shared Step 74655 SHA with email - Search by Supplier ID saved as (.*) for specific product status: (.*) and email: (.*)")]
+		public void GivenICallSharedStepSHA74655SearchBySupplierIDSavedAsMyIDForSpecificProductStatusCompletedAndEmail(
+					string savedAs, string status, string email)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step: 74655");
+			var thisStepsSha = new Steps_SHA();
+			TestReport.StartStep("I set the status filter to All");
+			var myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.WaitForProductList(60);
+			myStudioShaManager.SelectFromStatusFilter("All");
+			GeneralUtilities.StudioWaitForSpinner();
+			myStudioShaManager.WaitForProductList(60);
+			Report.Info("Getting saved product: " + savedAs);
+
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+
+			TestReport.StartStep("I click Srch in the bottom menu list");
+
+			myStudioShaManager.ClickBottomMenuOption("Search");
+
+
+			string supplierID = Context.GetFromContext(savedAs).ToString();
+			Report.Info("Looking for supplier id: " + supplierID.ToString());
+			var table = new Table(new string[] {
+				"SearchTerm",
+				"SearchValue"
+			});
+			table.AddRow(new string[] {
+				"Supplier",
+				supplierID
+			});
+			table.AddRow(new string[] {
+				"Status",
+				status
+			});
+			table.AddRow(new string[] {
+				"User",
+				email
+			});
+
+
+			TestReport.StartStep("I click Srch in the bottom menu list");
+			myStudioShaManager.ClickBottomMenuOption("Search");
+			var myStepsSha = new Steps_SHA();
+			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+			Delay.Seconds(1);
+			Report.Info("Waiting for product list");
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
+				"Product list is showing");
+
+		}
+
 		[StepDefinition(@"I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration")]
 		public void GivenICallSharedStep75130BulkActions_SelectForwardProductRegistration()
 		{
@@ -8204,7 +8270,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().ClickContinue();
 		}
 		[StepDefinition(@"I call Shared Step 82831 \(The Product - Enter Product Name and Select Type of Product: (Raw Material|Mixture, Blend, Formula, Polymer or Solution from Third \(3rd, 3d\) Party)\)")]
-	
+
 		public void SharedStep82831_TheProduct_EnterProductNameAndType(string type)
 		{
 			TestReport.UseSubSteps = true;
@@ -8225,16 +8291,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(modal.Wait_for_load() && modal.GetTitle().Contains("Warning"), "");
 			TestReport.StartStep("I confirm the warning message contains the expected text");
 			string actualMessage = modal.GetText();
-			if (actualMessage==null)
+			if (actualMessage == null)
 			{
 				Report.Failure("The Warning Popup had no message");
 				Report.Info("Closing popup");
-				if(Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button", "Clicked OK button"))
+				if (Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button", "Clicked OK button"))
 				{
 					Report.Info("I click Continue");
 					MyStepsNewProduct.ClickContinue();
 				}
-				
+
 
 				return;
 			}
@@ -8245,7 +8311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string expectedMessage = "You are registering a formula (Raw Material). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
 				Report.IsTrue(actualMessage.Contains(expectedMessage), "The Warning message was not correct", "The Warning message was correct");
 			}
-			else if(type== "Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party")
+			else if (type == "Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party")
 			{
 				Report.Info("Checking Mixture, Blend, Formula or Solution from 3rd Party message");
 				string expectedMessage = "You are registering a formula (Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party). This is not a product registration that will result in an assessment for Retailers. A formula registration is used within final product registrations to maintain confidentiality of proprietary ingredients throughout the registration process. Formulas may be used by other organizations within their product registrations. Due to the downstream use of Formula registrations, once a formula registration is submitted through WERCSmart, the ingredients details (including percentages) are not eligible for editing in any manner. Should the formula change, the formulator would need to register a new formula. Therefore, please be sure the information you provide is accurate before accepting the registration and submitting.";
@@ -8254,11 +8320,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Error("Product type must be Raw Material or Mixture, Blend, Formula or Solution from 3rd Party");
-				
+
 			}
 
 			Report.Info("Closing popup");
-			Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button","Succesfully clicked on the OK button");
+			Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button", "Succesfully clicked on the OK button");
 			GeneralUtilities.Wait_for_load_finish();
 
 
@@ -8336,8 +8402,66 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//Report.IsFalse(productSubmissionRejection.Wait_for_load(10), "The Product Submission Rejection Popup was shown", "The Product Submission Rejection Popup was not shown");
 
-			
 
+
+		}
+
+		[StepDefinition(@"I call Shared Step 77535 \(Retailer Association - Walmart\)")]
+		public void Shared77535_RetailerAssociation_Walmart()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: Walmart");
+			new StepsSelectRetailers().SelectTheRetailer("Walmart");
+			TestReport.StartStep("I should see the Retailer Page");
+			new StepsNewProduct().GivenIShouldSeeXPage("Retailer");
+			var newProduct = new NewProduct();
+			TestReport.StartStep("I select any Vendor ID");
+			new Steps_Retailer().ISelectFirstVendorId();
+			TestReport.StartStep("In the Retailer page I click Continue");
+			new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Retailer");
+		}
+
+		[StepDefinition(@"I call Shared Step 78080 \(Regulatory Documents to Provide - Upload OSHA SDS\)")]
+		public void Shared78080_RegulatoryDocumentsToProvide_UploadOshsSds()
+		{
+			TestReport.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			TestReport.StartStep("I set the OSHA-compliant Safety Data Sheet, English field to: Yes");
+			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Yes");
+			TestReport.StartStep("I upload a PDF file to section: OSHA SDS");
+			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			TestReport.StartStep("Click the checkbox for the 'I confirm that I have provided the most up - to - date, OSHA - compliant SDS...' question");
+			MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
+			TestReport.StartStep("In the Regulatory Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+		}
+
+
+		[StepDefinition(
+			@"I call Shared Step 87337 \(Edit UPC - data - Click Save\) for UPC as: (.*), container type: (.*) and size: (.*) and packaging type: (.*)")]
+		public void Shared87337_RemovePackgType(string upc, string containerType, string size, string pkgType)
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			TestReport.StartStep("I click expand arrow for: " + upc);
+			myNewProduct.ExpandArrowforUPC(upc);
+			TestReport.StartStep("I add the following into the UPC Fields");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc,
+					PackageType = pkgType
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to change packagaing type info!",
+					"Successfully changed packagaing type info!");
+				TestReport.StartStep("I click save");
+			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
+			MyStepsNewProduct.GivenIConfirmErrorMessageIsShownBelowField("This is a required field.", "Package Type");
 		}
 
 	}

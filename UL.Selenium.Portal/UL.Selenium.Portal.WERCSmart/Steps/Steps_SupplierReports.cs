@@ -9,6 +9,7 @@ using NTTQA.Selenium.UniversalFunctions;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -162,28 +163,131 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The report description text was displayed as expected.");
 		}
 
-		[StepDefinition(@"If an html file is downloaded called (.*) I create a new product with UPCs and redownload the (.*) report")]
-		public void IfHTMLIsDownloadedCreateAProduct(string file, string report)
+		[StepDefinition(@"If the product is Private Label, I ensure that product saved as: (.*) shows as Private Label: (.*)")]
+		public void IfProductIsPrivateLabelEnsureThatProductShowsAsPrivateLabel(string savedAs, string privateLabel)
 		{
-			var productSetup = new Steps_ProductSetup();
-			var globalSteps = new GlobalSteps();
-			var homepage = new StepsHomepage();
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string pl = Context.GetFromContext(privateLabel)?.ToString() ?? "";
+			string id = product.Id;
+			string name = product.Name;
 
-			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-			Report.Info("Downloads folder: " + downloadsFolder);
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = id
+			};
 
-			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+			Report.IsTrue(selProdGrid.ConfirmIsPrivateLabel(pl), "Failed to match Private Label tag to product!", "Successfully match Private Label tag to product.");
+		}
 
+		[StepDefinition(@"I confirm that UPC: (.*) shows in the list of UPCs")]
+		public void IConfirmThatTheUPCShowsInTheListOfUPCs(string savedAs)
+		{
+			string upc = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
 
-			productSetup.CreateProductUsingTestCase75335("TestCase75335", "UPC75335", "Chalk");
+			Report.IsTrue(upcs.FirstOrDefault(x => x.UpcNumber == upc) != null, "Failed to find UPC " + upc + " in list of UPCs.",
+				"Successfully found UPC " + upc + " in list of UPCs.");
+		}
 
-			globalSteps.NavigateToLandingPage();
-			globalSteps.LoginToWERCSmartAdmin("WERCs Product Account");
-			homepage.ClickItemInQuickLinks("Supplier Reports");
-			this.InTheSupplierReportsScreenThePageTitleShouldBe("Available Reports");
-			this.GivenUnderTheSupplierReportsMenuIChoose("UPCs (Active) for all Registrations");
-			this.ThenInTheSupplierReportsScreenTheCurrentSubPageShouldBe("UPCs (Active) for all Registrations");
-			this.GivenInTheSupplierReportsScreenIClickOnTheDownloadButton();
+		[StepDefinition(@"I confirm that the retailer listed for product saved as: (.*) appears as: (.*)")]
+		public void IConfirmThatTheRetailerForProductAppearsAs(string savedAs, string retailer)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string ret = Context.GetFromContext(retailer)?.ToString() ?? "";
+			string id = product.Id;
+			string name = product.Name;
+
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = id
+			};
+
+			ProductGridItem productElement = selProdGrid.FirstProductInGrid();
+			List<string> retailers = productElement.Retailers;
+
+			Report.IsTrue(retailers.FirstOrDefault(x => x == ret) != "", "Failed to find retailer " + ret + " in list of retailers.",
+				"Successfully found retailer " + ret + " in list of retailers.");
+		}
+
+		[StepDefinition(@"I confirm that for product saved as: (.*) the value in the (.*) column of spreadsheet (.*) is: (.*)")]
+		public void IConfirmThatForProductTheValueInTheColumnIs(string savedAs, string column, string spreadsheet, string value)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string file = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + spreadsheet);
+				return;
+			}
+			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			int index = 1;
+			while (index < ExcelUtils.Excel_GetColumn(0).Count)
+			{
+				if (ExcelUtils.GetCellValue(index, 0) == product.Id)
+				{
+					break;
+				}
+				index++;
+			}
+			string cellValue = ExcelUtils.GetCellValue(index, column);
+			Report.IsTrue(cellValue.Trim() == value.Trim(), "Cell value does not match value " + value + " for column " + column + " and id " + product.Id + ". Instead found: " + cellValue.Trim(),
+				"Cell value matches value " + value + " for column " + column + " and id " + product.Id + ".");
+		}
+
+		[StepDefinition(@"I confirm that for product saved as: (.*) the value in each of the columns of spreadsheet (.*) is as follows:")]
+		public void IConfirmThatforProductSavedAsTheValueInEachOfTheColumnsIs(string savedAs, string spreadsheet, Table table)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string file = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			table.Rows[0]["UPC"] = Context.GetFromContext(table.Rows[0]["UPC"])?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + spreadsheet);
+				return;
+			}
+			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			var headers = table.Header.ToList<string>();
+			var values = table.Rows[0].Values.ToList<string>();
+			int index = 1;
+			while (index < ExcelUtils.Excel_GetColumn(0).Count)
+			{
+				if (ExcelUtils.GetCellValue(index, 0) == product.Id)
+				{
+					break;
+				}
+				index++;
+			}
+			for (int i = 0; i < table.Header.Count; i++)
+			{
+				string cellValue = ExcelUtils.GetCellValue(index, table.Header.ElementAt(i));
+				Report.IsTrue(cellValue == values[i], "Failed to match cell value " + cellValue + " to table value " + values.ElementAt(i) + ".",
+					"Successfully match cell value " + cellValue + ".");
+			}
+		}
+
+		[StepDefinition(@"I confirm that for product saved as: (.*) the UPC in the (.*) column of spreadsheet (.*) is: (.*)")]
+		public void IConfirmThatForProductTheUPCInTheColumnIs(string savedAs, string column, string spreadsheet, string upc)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string file = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			upc = Context.GetFromContext(upc)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + spreadsheet);
+				return;
+			}
+			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			int index = 1;
+			while (index < ExcelUtils.Excel_GetColumn(0).Count)
+			{
+				if (ExcelUtils.GetCellValue(index, 0) == product.Id)
+				{
+					break;
+				}
+				index++;
+			}
+			string cellValue = ExcelUtils.GetCellValue(index, column);
+			Report.IsTrue(cellValue.Trim() == upc.Trim(), "Cell value does not match UPC " + upc + " for column " + column + " and id " + product.Id + ".",
+				"Cell value matches UPC " + upc + " for column " + column + " and id " + product.Id + ".");
+
 		}
 	}
 }

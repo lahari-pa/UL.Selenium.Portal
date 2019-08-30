@@ -300,6 +300,7 @@
     </None>
     <None Include="app.manifest" />
     <EmbeddedResource Include="Dependencies\PDF\testdoc.pdf" />
+    <EmbeddedResource Include="Dependencies\Excel\testdoc.xlsx" />
     <None Include="Features\AdditionalProductInformation.feature">
     </None>
     <None Include="Features\API\Waste Haulers.feature">
@@ -372,6 +373,8 @@
     <None Include="Features\NewProduct.feature">
     </None>
     <None Include="Features\Product Registration\Duplicate UPC.feature" />
+    <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd.feature">
+    </None>
     <None Include="Features\Product Registration\Flow 12.feature">
     </None>
     <None Include="Features\Product Registration\Flow 14.feature">
@@ -440,6 +443,7 @@
     </None>
     <None Include="Features\Product Registration\Transportation.feature">
     </None>
+    <None Include="Features\Product Registration\UPC Case Pack.feature" />
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
     </None>
     <None Include="Features\Product Registration\VOC\VOC-SCAQMD.feature">
@@ -476,11 +480,12 @@
     </None>
     <None Include="Features\TheProduct.feature">
     </None>
+    <None Include="Features\Timeout.feature" />
     <None Include="Features\UL Solution Center.feature">
     </None>
     <None Include="Features\UL Toys.feature">
     </None>
-    <None Include="Features\UPC.feature">
+    <None Include="Features\Product Registration\UPC.feature">
     </None>
     <None Include="Features\Walmart.feature">
     </None>
