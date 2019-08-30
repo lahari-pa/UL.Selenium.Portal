@@ -190,7 +190,7 @@
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ProductIncludesBattery.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\RegulatoryInformation1.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\TCLP.cs" />
-    <Compile Include="Selenium Classes\New Product\Product Characteristics\VOC_OTC_CARB.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\VocOtcCarb.cs" />
     <Compile Include="Selenium Classes\New Product\Product Type\AdditionalProductInformation.cs" />
     <Compile Include="Selenium Classes\New Product\Product Type\ProductCharacteristics.cs" />
     <Compile Include="Selenium Classes\New Product\Product Type\TheProduct.cs" />

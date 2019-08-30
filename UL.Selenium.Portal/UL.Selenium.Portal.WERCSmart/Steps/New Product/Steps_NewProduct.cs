@@ -753,25 +753,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Statement was showing: " + value + ", as expected!");
 		}
 
-		/// <summary>
-		/// select option for Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
-		/// </summary>
-		[StepDefinition(@"In the VOC - OTC - CARB tab for Product has been granted an Alternative Control Plan I select: (No|Yes)")]
-		public void GivenInTheVOC_OTC_CARBTabForProductHasBeenGrantedAnAlternativeControlPlanISelect(string noOrYes)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
-				"Product type tab is loaded.");
-
-			bool expected = (noOrYes == "Yes");
-
-			selNewProduct.AlternateControlPlan = expected;
-
-			Report.IsTrue(selNewProduct.AlternateControlPlan == expected,
-				"Failed to set Product has been granted an Alternative Control Plan to: " + noOrYes,
-				"Successfully set Product has been granted an Alternative Control Plan to: " + noOrYes);
-		}
-
 		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for Product does not contain more than grams of VOC per use I select: (.*)")]
 		public void ThenInTheProductCharacteristicsTabOfTheNewProductPageForProductDoesNotContainMoreThanGramsOfVOCPerUseISelect(string option)
 		{
@@ -795,49 +776,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenInTheProductCharacteristicsTabIEnterInTheVOCContentInGramsOzonePerGramTextField(string option)
 		{
 			Report.IsTrue(new NewProduct().VocContentInGrams(option), "Text: " + option + " was not successfully inputted into the comments field!", "Text: " + option + " was successfully inputted into the comments field!");
-		}
-
-		/// <summary>
-		/// select option for Product label specifies a dilution ratio
-		/// </summary>
-		[StepDefinition(@"In the VOC - OTC - CARB tab for Product label specifies a dilution ratio I select: (No|Yes)")]
-		public void GivenInTheVOC_OTC_CARBTabForProductLabelSpecifiesADilutionRatioISelectYes(string noOrYes)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
-				"Product type tab is loaded.");
-
-			bool expected = (noOrYes == "Yes");
-
-			selNewProduct.ProductLabelDilutionRatio = expected;
-
-			Report.IsTrue(selNewProduct.ProductLabelDilutionRatio == expected,
-				"Failed to set Product label specifies a dilution ratio to: " + noOrYes,
-				"Successfully set Product label specifies a dilution ratio to: " + noOrYes);
-		}
-
-		/// <summary>
-		/// Enter data in Product's VOC content as sold text box
-		/// </summary>
-		[StepDefinition(@"In the VOC - OTC - CARB tab, I enter: (.*) in the Product's VOC content as sold text field")]
-		public void GivenInTheVOC_OTC_CARBTabIEnterInTheProductSVOCContentAsSoldTextField(string contentAsSold)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
-				"Product type tab is loaded.");
-			selNewProduct.ProductsVocContentAsSold = contentAsSold;
-		}
-
-		/// <summary>
-		/// Enter data in Product's VOC content as used text box
-		/// </summary>
-		[StepDefinition(@"In the VOC - OTC - CARB tab, I enter: (.*) in the Product's VOC content as used text field")]
-		public void GivenInTheVOC_OTC_CARBTabIEnterInTheProductSVOCContentAsUsedTextField(string contentAsUsed)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
-				"Product type tab is loaded.");
-			selNewProduct.ProductsVocContentAsUsed = contentAsUsed;
 		}
 
 		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for When the product has a flammable propellant I select: (.*)")]

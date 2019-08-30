@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics
 {
-	public class VOC_OTC_CARB : NewProduct
+	public class VocOtcCarb : NewProduct
 	{
-		#region Label Definitions
+		#region Label constants
 		public new string PanelTitle = "Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)";
 
-		public string GrantedAcpQuestion = "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.";
+		private const string _grantedAcpQuestion = "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.";
 
 		private const string _labelDilutionQuestion = "Product label specifies a dilution ratio which results in a final VOC concentration for the product during use";
 
@@ -22,15 +22,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		#endregion
 
 		public bool GrantedAlternativeControlPlan {
-			get => this.SelectedInputForLabel(this.GrantedAcpQuestion) == "Yes";
+			get => this.SelectedInputForLabel(_grantedAcpQuestion) == "Yes";
 			set
 			{
 				if (value)
 				{
-					this.SelectRadio(this.GrantedAcpQuestion, "Yes");
+					this.SelectRadio(_grantedAcpQuestion, "Yes");
 					return;
 				}
-				this.SelectRadio(this.GrantedAcpQuestion, "No");
+				this.SelectRadio(_grantedAcpQuestion, "No");
 			}
 		}
 
@@ -56,7 +56,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			get => this.TextInputValueForLabel(_vocContentAsUsedQuestion);
 			set => this.EnterTextToLabelnput(_vocContentAsUsedQuestion, value);
 		}
-
-
+		
 	}
 }

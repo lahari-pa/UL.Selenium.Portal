@@ -13,7 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_VOC_OTC_CARB
 	{
-        private readonly VOC_OTC_CARB _vocOtcCarb = new VOC_OTC_CARB();
+        private readonly VocOtcCarb _vocOtcCarb = new VocOtcCarb();
 
         [StepDefinition(@"The VOC OTC CARB page should be active")]
         public void VocOtcCarbPageShouldBeActive()
