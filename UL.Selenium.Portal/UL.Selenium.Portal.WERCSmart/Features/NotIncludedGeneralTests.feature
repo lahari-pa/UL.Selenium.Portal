@@ -76,7 +76,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] UPC View: Continue button is hidden occasiona
 Scenario: [NOTINCLUDEDGENERALTEST] Forwarding - Edit existing Case UPC 
 
 Given I navigate to the landing page
-Then I save the randomly generated UPC: 139209230120  as: UPC87685
+Then I save the randomly generated UPC: 139209230120 as: UPC87685
 Then I save the randomly generated UPC: 872049640987 as: UPC876851
 Then I save the randomly generated UPC: 1513487 as: TestCase87894
 And I log in with the account saved in TReVor as: PremiumSubscriptionAccount
@@ -97,3 +97,7 @@ Then I select the first product under the Select UPCs tab
 Then I confirm that UPC information is displayed in the Destination Retailers column under the Select UPCs Table
 Then I Check that the Truck Icon is not present next to the UPC saved as: UPC87685
 Then I Check that the Truck Icon is present next to the UPC saved as: UPC876851
+And I call Shared Step 87897 (Forwarding - Edit Existing Case UPC: UPC876851 - confirm data shown correctly, change all data, Save, Continue)
+| Container type | Size | Quantity | Individual UPC contained in the Case Pack | Transportation option              |
+| Paper bag      | 2    | 4        | <UPC87685>                                | 4A: steel box                      |
+| Aerosol Can    | 4    | 8        | Individual UPC contained in the Case Pack | 1A1: non-removable head steel drum |

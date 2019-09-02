@@ -313,8 +313,7 @@ And I filter for the product saved as: TestCase87894
 And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 Then I should see the header: Forward Product Registration on the Forward Product Registration window
-And I enter the text: saved as TestCase87894 in the 'Search by WPS ID or Product Name' field
-And In the Foward Product Registration Screen I should see product: saved as TestCase87894
+Then I select the product with ID saved as: TestCase87894 under the Select Products tab
 Given I select the first product under the Select Products tab
 Given I click continue on the Forward Product Registration page
 Then I confirm the active Forward Product Registration tab is: Select Retailers
@@ -327,6 +326,10 @@ Then I select the first product under the Select UPCs tab
 Then I confirm that UPC information is displayed in the Destination Retailers column under the Select UPCs Table
 Then I Check that the Truck Icon is not present next to the UPC saved as: UPC87685
 Then I Check that the Truck Icon is present next to the UPC saved as: UPC876851
+And I call Shared Step 87897 (Forwarding - Edit Existing Case UPC: UPC876851 - confirm data shown correctly, change all data, Save, Continue)
+| Container type | Size | Quantity | Individual UPC contained in the Case Pack | Transportation option              |
+| Paper bag      | 2    | 4        | <UPC87685>                                | 4A: steel box                      |
+| Aerosol Can    | 4    | 8        | Individual UPC contained in the Case Pack | 1A1: non-removable head steel drum |
 
 
 #And I Select the product in the left hand table by clicking on the product information

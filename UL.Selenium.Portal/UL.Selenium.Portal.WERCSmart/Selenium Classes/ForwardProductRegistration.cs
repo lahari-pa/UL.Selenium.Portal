@@ -249,7 +249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (retailer != null)
 			{
-				return retailer.FindElement(By.XPath(@".//following-sibling::div[@class='control-indicator']"), 2).TryCheck(true);
+				return retailer.FindElement(By.XPath(@".//following-sibling::div[@class='control-indicator']"), 2).TryClick();
 			}
 
 			return false;
@@ -379,7 +379,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					currentIcon = row.FindElement(By.XPath(".//i[@class='fa fa-truck']"), 2).Displayed;
 				}
-				catch (NoSuchElementException e)
+				catch (NullReferenceException e)
 				{
 					currentIcon = false;
 				}
@@ -606,7 +606,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				get
 				{
 					IWebElement input = this.containerElement.FindElement(
-						By.XPath(".//input[@type='text' and @placeholder='Size (Ounces)']"), 2);
+						By.XPath(".//input[@type='text' and contains(@placeholder,'Size')]"), 2);
 					if (input == null)
 					{
 						Report.Info("The Size input could not be found!");
@@ -634,7 +634,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public string Type {
 				get
 				{
-					IWebElement input = this.containerElement.FindElement(By.XPath(".//select"), 2);
+					IWebElement input = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.types()')]"), 2);
 					if (input == null)
 					{
 						Report.Info("The Type select box could not be found!");
@@ -645,7 +645,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				set
 				{
-					IWebElement input = this.containerElement.FindElement(By.XPath(".//select"), 2);
+					IWebElement input = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.types()')]"), 2);
 					if (input == null)
 					{
 						Report.Error("The Type select box could not be found!");
@@ -656,6 +656,92 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					if (input.SelectedOption() != value)
 					{
 						Report.Error("Failed to select: " + value + " for Type");
+					}
+				}
+			}
+
+			public string Quantity {
+				get
+				{
+					IWebElement input = this.containerElement.FindElement(
+						By.XPath(".//input[@type='text' and @placeholder='Quantity']"), 2);
+					if (input == null)
+					{
+						Report.Info("The Quantity input could not be found!");
+						return null;
+					}
+
+					return input.GetValue();
+				}
+				set
+				{
+					IWebElement input = this.containerElement.FindElement(
+						By.XPath(".//input[@type='text' and @placeholder='Quantity']"), 2);
+					if (input == null)
+					{
+						Report.Error("The Quantity input could not be found!");
+					}
+
+					if (!input.TryEnterText(value))
+					{
+						Report.Error("Failed to enter text: " + value + " into Quantity input");
+					}
+				}
+			}
+			public string IndividualUPCContainedInTheCasePack {
+				get
+				{
+					IWebElement input = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.notPackUpcs()')]"), 2);
+					if (input == null)
+					{
+						Report.Info("The Individual UPC select box could not be found!");
+						return null;
+					}
+
+					return input.SelectedOption();
+				}
+				set
+				{
+					IWebElement input = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.notPackUpcs()')]"), 2);
+					if (input == null)
+					{
+						Report.Error("The Individual UPC select box could not be found!");
+					}
+
+					input.Select(value);
+
+					if (input.SelectedOption() != value)
+					{
+						Report.Error("Failed to select: " + value + " for Individual UPC");
+					}
+				}
+			}
+
+			public string TransportationOptions {
+				get
+				{
+					IWebElement input = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.transportOptions()')]"), 2);
+					if (input == null)
+					{
+						Report.Info("The Transportation Options select box could not be found!");
+						return null;
+					}
+
+					return input.SelectedOption();
+				}
+				set
+				{
+					IWebElement input = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.transportOptions()')]"), 2);
+					if (input == null)
+					{
+						Report.Error("The Transportation Options select box could not be found!");
+					}
+
+					input.Select(value);
+
+					if (input.SelectedOption() != value)
+					{
+						Report.Error("Failed to select: " + value + " for Transportation Option");
 					}
 				}
 			}
