@@ -761,8 +761,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmUPCInfromationInSelectUPCsTable(string value)
 		{
 
-			//Get the table
-			// for each row check every coloum has data in, if not failure but continue (check all coloummns still)
+			
 			var selForwardProdReg = new ForwardProductRegistration();
 			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
 			if (upcs.Count == 0)
@@ -772,14 +771,82 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			Report.Info("There were: " + upcs.Count + " UPCs to check");
-			if (upcs.All(x => x.UPCInfo.DestinationRetailers == value))
+			bool noGaps = true;
+			int i = 1;
+			foreach(var item in upcs)
 			{
-				Report.Success("The Destination Retailers column was showing: " + value + " as expected");
+				if(item .UPCInfo.UPCNumber==null)
+				{
+					Report.Failure("Upc number was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+				if(item.ContainerType==null)
+				{
+					Report.Failure("Container Type was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+				if(item.Size==null)
+				{
+					Report.Failure("Size was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+				if(item.UPCInfo.DestinationRetailers==null)
+				{
+					Report.Failure("Destination Retailers was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+
+			}
+
+			Report.IsTrue(noGaps, "The select UPCs table on the right side is missing UPC information", "The select UPCs table on the right side is not missing information");
+										
+		}
+
+		[StepDefinition("I Check that the Truck Icon is (present|not present) next to the UPC saved as: (.*)")]
+		public void ICheckTruckIconStatusForSavedAs(string presence,string savedAs)
+		{
+			bool presenceExpected = false;
+			switch (presence)
+			{
+				case "present":
+					presenceExpected = true;
+					break;
+				case "not present":
+					presenceExpected = false;
+					break;
+				default:
+					Report.Error("presence can only be 'present' or 'not present'");
+					return;
+
+			}
+
+			var upcNum = (string)Context.GetFromContext(savedAs);
+			var selForwardProdReg = new ForwardProductRegistration();
+			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
+			if (upcs.Count == 0)
+			{
+				Report.Failure("No UPC rows were found in the grid");
 				Report.Screenshot();
 				return;
 			}
-			Report.Failure("The following UPCs were not showing the value: " + value + " under Destination Retailers! - " + string.Join(", ", upcs.Where(x => x.UPCInfo.DestinationRetailers != value).Select(x => x.UPCInfo.UPCNumber).ToList()));
-			Report.Screenshot();
+			foreach (var item in upcs)
+			{
+				if(item.UPCInfo.UPCNumber==upcNum)
+				{
+					if(item.UPCInfo.TruckIcon==presenceExpected)
+					{
+						Report.Success("The Truck Icon was succesfully found to be "+presence+" for the UPC: "+upcNum+".");
+						return;
+					}
+					Report.Failure("The Truck Icon was incorrectly found to be " + presence + " for the UPC: " + upcNum + ".");
+					return;
+				}
+			}
+
+			Report.Failure("The UPC with number: " + upcNum + " was not found.");
+
+			
 		}
+		
 	}
 }

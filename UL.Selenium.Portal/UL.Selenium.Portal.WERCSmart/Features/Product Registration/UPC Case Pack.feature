@@ -324,6 +324,10 @@ Given I click continue on the Forward Product Registration page
 Then I select the first product under the Select UPCs tab
 #Then I confirm that: WM is displayed in the Destination Retailers column under Select UPCs
 #<-- use as example for accessing this right side table on select UPCs page
+Then I confirm that UPC information is displayed in the Destination Retailers column under the Select UPCs Table
+Then I Check that the Truck Icon is not present next to the UPC saved as: UPC87685
+Then I Check that the Truck Icon is present next to the UPC saved as: UPC876851
+
 
 #And I Select the product in the left hand table by clicking on the product information
 #And I Confirm you see the truck icon next to the Case UPC you added to your product earlier

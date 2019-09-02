@@ -235,7 +235,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			//IWebElement retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//div[@class='control-indicator']"), 2);
 
-			List <IWebElement> retailerInputs = this.containerElement.FindElements(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//label/span"), 2).ToList();
+			List <IWebElement> retailerInputs = this.containerElement.FindElements(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//label//span"), 2).ToList();
 			
 			if (!retailerInputs.Any())
 			{
@@ -249,7 +249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (retailer != null)
 			{
-				return retailer.FindElement(By.XPath(@".//preceding-sibling::input[@type='checkbox]"), 2).TryCheck();
+				return retailer.FindElement(By.XPath(@".//following-sibling::div[@class='control-indicator']"), 2).TryCheck(true);
 			}
 
 			return false;
@@ -373,10 +373,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> upcRows = this.containerElement.FindElements(By.XPath(".//div[./h3[text()='Select UPCs']]//tbody/tr"), 2);
 			foreach (IWebElement row in upcRows)
 			{
+
+				bool currentIcon = false;
+				try
+				{
+					currentIcon = row.FindElement(By.XPath(".//i[@class='fa fa-truck']"), 2).Displayed;
+				}
+				catch (NoSuchElementException e)
+				{
+					currentIcon = false;
+				}
+
 				rUPCs.Add(new SelectUPCs {
 					UPCInfo = new UPC {
 						DestinationRetailers = row.FindElement(By.XPath(".//span[@data-bind='text: identifier']"), 2)?.Text,
-						UPCNumber = row.FindElement(By.XPath(".//span[contains(@data-bind,'upcNumber.field')]"), 2)?.Text
+						UPCNumber = row.FindElement(By.XPath(".//span[contains(@data-bind,'upcNumber.field')]"), 2)?.Text,
+						TruckIcon = currentIcon
 					},
 					ContainerType = row.FindElement(By.XPath(".//span[contains(@data-bind,'typeToString')]"), 2)?.Text,
 					Size = row.FindElement(By.XPath(".//span[contains(@data-bind,'size.field')]"), 2)?.Text
@@ -519,7 +531,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			public UPC UPCInfo { get; set; }
 			public string ContainerType { get; set; }
-			public string Size { get; set; }
+			public string Size { get; set; }			
 			public bool SelectUPC()
 			{
 				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCInfo.UPCNumber + "']]/td/input")).TryClick();
@@ -539,6 +551,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			public string UPCNumber { get; set; }
 			public string DestinationRetailers { get; set; }
+			public bool TruckIcon { get; set; }
 			public bool ClickAction(string action)
 			{
 				if (action.ToLower() == "edit")
