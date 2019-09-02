@@ -23,7 +23,6 @@
 @run_UPC
 Feature: UPC
 
-@TReVorId:21457
 Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -48,7 +47,6 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 		| Size (Fluid Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87584
 
-@TReVorId:21458
 Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -73,7 +71,6 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 		| Size (Weight Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87587
 
-@TReVorId:21459
 Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -104,7 +101,6 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 		| Size (Weight Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
 
-@TReVorId:21460
 Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -133,7 +129,6 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 		| Size (Weight Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87593
 
-@TReVorId:21461
 Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as Weight (Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -159,7 +154,6 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 		| Size (Fluid Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87596
 
-@TReVorId:21462
 Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -182,7 +176,6 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 		| Size (Fluid Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
 
-@TReVorId:21463
 Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	# Hardcoded values for Product ID. These do not exist in all environments.
 	Given I save to context name: TestCase1 and value: 1525111
@@ -211,7 +204,6 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 		| Size (Fluid Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
 	  
-@TReVorId:22366
 Scenario: [87832] View Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC87832
@@ -248,7 +240,6 @@ Scenario: [87832] View Shows Case UPC Data
 		| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
 		| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
 
-@TReVorId:22365
 Scenario: [87825] Summary Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC87825

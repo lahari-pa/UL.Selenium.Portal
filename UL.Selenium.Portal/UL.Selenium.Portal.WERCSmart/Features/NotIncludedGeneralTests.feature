@@ -98,6 +98,6 @@ Then I confirm that UPC information is displayed in the Destination Retailers co
 Then I Check that the Truck Icon is not present next to the UPC saved as: UPC87685
 Then I Check that the Truck Icon is present next to the UPC saved as: UPC876851
 And I call Shared Step 87897 (Forwarding - Edit Existing Case UPC: UPC876851 - confirm data shown correctly, change all data, Save, Continue)
-| Container type | Size | Quantity | Individual UPC contained in the Case Pack | Transportation option              |
+| Container type | Size | Quantity | Individual UPC contained in the Case Pack | Transportation options              |
 | Paper bag      | 2    | 4        | <UPC87685>                                | 4A: steel box                      |
 | Aerosol Can    | 4    | 8        | Individual UPC contained in the Case Pack | 1A1: non-removable head steel drum |

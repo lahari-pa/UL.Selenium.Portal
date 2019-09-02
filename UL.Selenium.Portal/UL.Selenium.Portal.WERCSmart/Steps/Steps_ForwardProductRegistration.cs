@@ -863,15 +863,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
+			bool successState = false;
 			foreach (var item in upcs)
 			{
 				if (item.UPCInfo.UPCNumber == upcNum)
 				{
 					Report.IsTrue(item.UPCInfo.ClickAction("edit"), "Failed to click edit on UPC: " + upcNum + ".", "Succesfully clicked edit on UPC: " + upcNum + ".");
-					return;
-				}
+					successState = true;
+				}				
+
 			}
-			Report.Failure("The UPC with number: " + upcNum + " was not found.");
+			if (successState == false)
+			{
+				Report.Failure(@"The UPC with number: " + upcNum + " was not found.");
+			}
+			
+			
 			TestReport.StartStep("I check the Edit UPC popup appears");
 			editUPC.WaitForContainerToBeVisible(30);
 			
@@ -888,14 +895,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string sizeValue = row["Size"].ToString();
 			Report.IsTrue(editUPC.Size== sizeValue, "The Size did not match expected", "The Size  matched the expected value");
 
-			TestReport.StartStep("I confirm the Quanitity field is shown and is populated with the correct Case UPC");
-			string quanitityValue = row["Quanitity"].ToString();
-			Report.IsTrue(editUPC.Quantity == quanitityValue, "The Quanitity did not match expected", "The Quanitity matched the expected value");
+			TestReport.StartStep("I confirm the Quantity field is shown and is populated with the correct Case UPC");
+			string quantityValue = row["Quantity"].ToString();
+			Report.IsTrue(editUPC.Quantity == quantityValue, "The Quanitity did not match expected", "The Quanitity matched the expected value");
 
 			TestReport.StartStep("I confirm the Individual UPC field is shown and is populated with the correct Case UPC");
 			string individualUPCValue = row["Individual UPC contained in the Case Pack"].ToString();
 
-			if (Regex.IsMatch(row[""], "<(.*)>"))
+			if (Regex.IsMatch(row["Individual UPC contained in the Case Pack"], "<(.*)>"))
 			{
 				var match = Regex.Match(row["Individual UPC contained in the Case Pack"], "<(.*)>").Groups[1].Value;
 				if (Context.Contains(match, true))
@@ -919,12 +926,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string secondSizeValue = secondRow["Size"].ToString();
 			editUPC.Size = secondSizeValue;
 			TestReport.StartStep("I change the Quantity Type");
-			string secondQuanitityValue = secondRow["Quanitity"].ToString();
-			editUPC.Quantity = secondQuanitityValue;
+			string secondQuantityValue = secondRow["Quantity"].ToString();
+			editUPC.Quantity = secondQuantityValue;
 
 			TestReport.StartStep("I change the Individual UPC value");
 			string secondIndividualUPCValue = secondRow["Individual UPC contained in the Case Pack"].ToString();
-			if (Regex.IsMatch(row[""], "<(.*)>"))
+			if (Regex.IsMatch(row["Individual UPC contained in the Case Pack"], "<(.*)>"))
 			{
 				var match = Regex.Match(row["Individual UPC contained in the Case Pack"], "<(.*)>").Groups[1].Value;
 				if (Context.Contains(match, true))
@@ -934,8 +941,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			editUPC.IndividualUPCContainedInTheCasePack = secondIndividualUPCValue;
 
-			TestReport.StartStep("I change the Transportation Option");
-			string secondTransportationOptionsValue = secondRow["Transportation option"].ToString();
+			TestReport.StartStep("I change the Transportation Options");
+			string secondTransportationOptionsValue = secondRow["Transportation options"].ToString();
 			editUPC.Quantity = secondTransportationOptionsValue;
 
 			TestReport.StartStep("I Click Save in the Edit UPC popup");
