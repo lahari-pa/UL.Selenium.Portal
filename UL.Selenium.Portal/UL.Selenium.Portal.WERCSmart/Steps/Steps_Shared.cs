@@ -7583,6 +7583,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			@"I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: (.*) and saved name as: (.*)")]
 		public void GivenICallSharedStep74654SHAManager_Suppliers_SearchByEmailAddress(string email, string savedAs)
 		{
+			if (email.Contains("saved as"))
+			{
+				email = Context
+					.GetFromContext(email.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+					.ToString();
+			}
 			TestReport.UseSubSteps = true;
 			var thisStepsSha = new Steps_SHA();
 			TestReport.StartStep("Given I Click the Suppliers link on the top right of the screen");
@@ -7667,6 +7673,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepSHA74655SearchBySupplierIDSavedAsMyIDForSpecificProductStatusCompletedAndEmail(
 					string savedAs, string status, string email)
 		{
+			if (email.Contains("saved as"))
+			{
+				email = Context
+					.GetFromContext(email.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+					.ToString();
+			}
+
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Beginning shared step: 74655");
 			var thisStepsSha = new Steps_SHA();
