@@ -1063,6 +1063,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I get the product ID for the product saved as: (.*) then I use this ID in the select Products & UPCs page")]
+		public void IGetTheProducIDForSavedAsAndSearcForProduct(string savedAs)
+		{
+
+			//this.GivenISearchForTheProductSavedAs()
+		}
+
 
 	}
 }

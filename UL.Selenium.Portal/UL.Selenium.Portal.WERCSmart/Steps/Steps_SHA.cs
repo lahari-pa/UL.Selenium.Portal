@@ -315,8 +315,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             Report.Screenshot();
         }
 
-        [StepDefinition(
-            @"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
+        [StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
         public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(string productSavedAs,
             string status)
         {
