@@ -2516,6 +2516,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             this.SaveUpcNumberForAnyProduct(upcSavedAs);
 
         }
+		[StepDefinition(@"I Check that the product under the retailer: (.*) is under the status: (.*)")]
+		public void ICheckProductUnderRetailerStatus(string retailer,string expectedStatus)
+		{
+			string actualStatus = new StudioSHAManager().GetproductStatusByRetailer(retailer);
+
+			Report.IsTrue(actualStatus == expectedStatus, "The Product under retailer: " + retailer + " was not in the expected status", "The Product under retailer: " + retailer + " was in the expected status");
+		}
     }
 }
 

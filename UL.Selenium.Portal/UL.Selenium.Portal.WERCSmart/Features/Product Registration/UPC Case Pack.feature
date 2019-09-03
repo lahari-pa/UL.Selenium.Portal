@@ -314,7 +314,6 @@ And I Confirm the Products shown display the Green Colour Status - which is the 
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 Then I should see the header: Forward Product Registration on the Forward Product Registration window
 Then I select the product with ID saved as: TestCase87894 under the Select Products tab
-Given I select the first product under the Select Products tab
 Given I click continue on the Forward Product Registration page
 Then I confirm the active Forward Product Registration tab is: Select Retailers
 #And I Select a retailer which is not already present on the product you are working with, make sure to select a retailer that does not require additional data (such as BB, DI, KG)
@@ -341,6 +340,7 @@ Then In the Thank You screen I confirm the following statement is shown: Thank y
 Then In the Thank You screen I click Home
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
+Then I Check that the product under the retailer: AM is under the status: Accepted
 
 
 #And I Select the product in the left hand table by clicking on the product information

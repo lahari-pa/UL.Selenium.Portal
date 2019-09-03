@@ -2690,8 +2690,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			TestReport.StartStep("I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk");
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
-			TestReport.StartStep("I save the product information as: TestCase87685");
+
+			TestReport.StartStep("I save the product Id as: TestCaseID87685");
+			stepsNewProduct.SaveProductId("TestCaseID87685");
+			TestReport.StartStep("I save the product Id as: TestCaseID87685");
+			TestReport.StartStep("I save the product Information as: TestCase87685");
 			stepsNewProduct.SaveProductInformation("TestCase87685");
+
 			TestReport.StartStep("I call Shared Step 26897 (Product Characteristics - Solid only available - continue)");
 			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
 			TestReport.StartStep("I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)");

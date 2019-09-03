@@ -79,7 +79,7 @@ Given I navigate to the landing page
 Then I save the randomly generated UPC: 333446962121 as: UPC87685
 Then I save the randomly generated UPC: 795866162008 as: UPC876851
 Then I save the randomly generated UPC: 1513537 as: TestCase87894
-And I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+And I call Shared Step (Login to WERCSmart - Premium Account)
 Then I filter the products by: Accepted by Retailers
 And I filter for the product saved as: TestCase87894
 And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
@@ -112,4 +112,17 @@ Then In the Thank You screen I confirm the following statement is shown: Thank y
 Then In the Thank You screen I click Home
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
+#
+#
+Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87894
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] Forwarding - Edit existing Case UPC second half
+Given I navigate to the landing page
+Then I save the randomly generated UPC: 333446962121 as: UPC87685
+Then I save the randomly generated UPC: 795866162008 as: UPC876851
+Then I save the randomly generated UPC: 1513537 as: TestCase87894
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
+Then I Check that the product under the retailer: AM is under the status: Accepted
 

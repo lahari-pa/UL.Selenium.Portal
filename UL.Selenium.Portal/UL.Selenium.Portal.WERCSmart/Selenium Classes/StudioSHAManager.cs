@@ -1185,6 +1185,46 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return null;
 		}
+
+		public string GetproductStatusByRetailer(string retailer)
+		{
+			
+			Report.Info("Beginning get product status by id: " + retailer);
+			string retailerStatus = "";
+			try
+			{
+				int retailerIndex = SeleniumBrowser.WebBrowser
+					.FindElements(By.XPath(
+						"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+					.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+				var mySHAManager = new StudioSHAManager();
+				mySHAManager.Wait_for_load();
+				Product matchingProduct = mySHAManager.GetTopXProducts(2).FirstOrDefault(x => x.Clients == retailer);
+
+				if(matchingProduct==null)
+				{
+					Report.Failure("Could not find a Product with retailer: " + retailer + ".");
+					return;
+				}
+
+				IWebElement matchingTD = SeleniumBrowser.WebBrowser
+					.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (retailerIndex + 1).ToString() + "]"))
+					.FirstOrDefault(x => x.GetValue().Trim() == retailer);
+				IWebElement matchingSpan = matchingTD.FindElement(By.XPath(".//span"));
+				string colour = matchingTD.FindElement(By.XPath(".//span")).GetCssValue("color").ToString();
+
+				retailerStatus= matchingSpan.GetAttribute("class").Replace("bold", "", StringComparison.InvariantCultureIgnoreCase).Trim();
+
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+
+			return retailerStatus;
+		}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject

@@ -322,6 +322,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab")]
 		public void SelectProductByIDSavedAs(string savedAs)
 		{
+			
+
 			var selForwardProductReg = new ForwardProductRegistration();
 			if (savedAs.ToLower().Contains("list"))
 			{
@@ -352,11 +354,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
+
 				string id = Context.GetFromContext(savedAs)?.ToString();
 				if (id == null)
 				{
 					Report.Failure("Could not find product ID in context saved as: " + savedAs);
 					return;
+				}
+				if(id.Contains("ProductInformation"))
+				{
+					try
+					{
+						var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+						id = productToSearch.ProductId;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
 				}
 
 				this.EnterTextInSearchByIDOrProductNameField(id);
