@@ -391,7 +391,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						TruckIcon = currentIcon
 					},
 					ContainerType = row.FindElement(By.XPath(".//span[contains(@data-bind,'typeToString')]"), 2)?.Text,
-					Size = row.FindElement(By.XPath(".//span[contains(@data-bind,'size.field')]"), 2)?.Text
+					Size = row.FindElement(By.XPath(".//span[contains(@data-bind,'size.field')]"), 2)?.Text,
+					Quantity = row.FindElement(By.XPath(".//span[contains(@data-bind,'text: quantity.field')]"), 2)?.Text,
+					TransportationOption = row.FindElement(By.XPath(".//span[contains(@data-bind,'text: transportToString()')]"), 2)?.Text,
+					UPCContained= row.FindElement(By.XPath(".//span[contains(@data-bind,'text: upcContained.field')]"), 2)?.Text
 				});
 			}
 			return rUPCs;
@@ -531,7 +534,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			public UPC UPCInfo { get; set; }
 			public string ContainerType { get; set; }
-			public string Size { get; set; }			
+			public string Size { get; set; }
+			public string Quantity { get; set; }
+			public string TransportationOption { get; set; }
+			public string UPCContained { get; set; }
 			public bool SelectUPC()
 			{
 				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCInfo.UPCNumber + "']]/td/input")).TryClick();
@@ -552,6 +558,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public string UPCNumber { get; set; }
 			public string DestinationRetailers { get; set; }
 			public bool TruckIcon { get; set; }
+			public bool SelectUPC()
+			{
+				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCNumber + "']]/td//input[@class='checkbox']")).TryClick();
+			}
 			public bool ClickAction(string action)
 			{
 				if (action.ToLower() == "edit")
@@ -618,7 +628,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				set
 				{
 					IWebElement input = this.containerElement.FindElement(
-						By.XPath(".//input[@type='text' and @placeholder='Size (Ounces)']"), 2);
+						By.XPath(".//input[@type='text' and @placeholder='Size (Weight Ounces)']"), 2);
 					if (input == null)
 					{
 						Report.Error("The Size input could not be found!");

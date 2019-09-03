@@ -76,9 +76,9 @@ Scenario: [NOTINCLUDEDGENERALTEST] UPC View: Continue button is hidden occasiona
 Scenario: [NOTINCLUDEDGENERALTEST] Forwarding - Edit existing Case UPC 
 
 Given I navigate to the landing page
-Then I save the randomly generated UPC: 139209230120 as: UPC87685
-Then I save the randomly generated UPC: 872049640987 as: UPC876851
-Then I save the randomly generated UPC: 1513487 as: TestCase87894
+Then I save the randomly generated UPC: 333446962121 as: UPC87685
+Then I save the randomly generated UPC: 795866162008 as: UPC876851
+Then I save the randomly generated UPC: 1513537 as: TestCase87894
 And I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 Then I filter the products by: Accepted by Retailers
 And I filter for the product saved as: TestCase87894
@@ -98,6 +98,18 @@ Then I confirm that UPC information is displayed in the Destination Retailers co
 Then I Check that the Truck Icon is not present next to the UPC saved as: UPC87685
 Then I Check that the Truck Icon is present next to the UPC saved as: UPC876851
 And I call Shared Step 87897 (Forwarding - Edit Existing Case UPC: UPC876851 - confirm data shown correctly, change all data, Save, Continue)
-| Container type | Size | Quantity | Individual UPC contained in the Case Pack | Transportation options              |
-| Paper bag      | 2    | 4        | <UPC87685>                                | 4A: steel box                      |
-| Aerosol Can    | 4    | 8        | Individual UPC contained in the Case Pack | 1A1: non-removable head steel drum |
+| Container type | Size | Quantity | Individual UPC contained in the Case Pack | Transportation Options              |
+| Paper bag      | 2    | 4        | <UPC87685>                                | 4A:  steel box                      |
+| Aerosol Can    | 4    | 8        | Individual UPC contained in the Case Pack | 1A1:  non-removable head steel drum |
+Then I confirm the active Forward Product Registration tab is: Product Results
+And I confirm that NO Errors display for the Product
+And I click continue on the Forward Product Registration page
+Then I confirm the active Forward Product Registration tab is: Review & Submit
+Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+And I click continue on the Forward Product Registration page
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+Then In the Thank You screen I click Home
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
+
