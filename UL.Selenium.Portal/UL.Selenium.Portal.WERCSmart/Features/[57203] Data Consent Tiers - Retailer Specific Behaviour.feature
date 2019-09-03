@@ -12,7 +12,7 @@ Feature: [57203] Data Consent Tiers - Retailer Specific Behavior
 #Then I click the Retail Partners icon in the Navigation Pane
 @TReVorId:7870
 Scenario: [57206] Retailer specific - CVS
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: CVS
@@ -31,7 +31,7 @@ Scenario: [57206] Retailer specific - CVS
 
 @TReVorId:7871
 Scenario: [57211] Retailer specific - Costco
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: Costco
@@ -46,7 +46,7 @@ Scenario: [57211] Retailer specific - Costco
 
 @TReVorId:7872
 Scenario: [57214] Retailer specific - Dollar Tree
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: Dollar Tree
@@ -57,7 +57,7 @@ Scenario: [57214] Retailer specific - Dollar Tree
 
 @TReVorId:13887
 Scenario: [57218] Retailer specific - Family Dollar
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: Family Dollar
@@ -68,7 +68,7 @@ Scenario: [57218] Retailer specific - Family Dollar
 
 @TReVorId:7873
 Scenario: [57221] Retailer specific - Target
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: Target
@@ -81,7 +81,7 @@ Scenario: [57221] Retailer specific - Target
 
 @TReVorId:7874
 Scenario: [57223] Retailer specific - Walgreens
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: Walgreens
@@ -94,7 +94,7 @@ Scenario: [57223] Retailer specific - Walgreens
 
 @TReVorId:7875
 Scenario: [57225] Retailer specific - Walmart
-	Given I Login into WERCSmart Portal - Admin Role - NoPLProducts Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: Wal-Mart
@@ -107,7 +107,7 @@ Scenario: [57225] Retailer specific - Walmart
 
 @TReVorId:7876
 Scenario: [57229] Retailer specific - Canadian Tire
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: Canadian Tire
@@ -117,7 +117,7 @@ Scenario: [57229] Retailer specific - Canadian Tire
 
 @TReVorId:11277
 Scenario: [69112] Retailer specific - Topco
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: TopCo
@@ -125,7 +125,7 @@ Scenario: [69112] Retailer specific - Topco
 
 @TReVorId:18955
 Scenario: [74540] Target - Data Tier Warning when not all are selected
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: Target
