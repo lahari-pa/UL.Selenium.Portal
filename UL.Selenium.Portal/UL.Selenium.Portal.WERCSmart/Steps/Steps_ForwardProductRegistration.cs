@@ -363,6 +363,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				if(id.Contains("ProductInformation"))
 				{
+					Report.Info("text: 'ProductInformation' was contained in the string, searching context for product saved as: " + savedAs);
+
 					try
 					{
 						var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
@@ -786,10 +788,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered value for Private Label.");
 		}
 
-		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: (.*) under Other Retailers")]  //maybe pick a specific alternative instead of avoiding all with additional data requirments
-		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerThatIsNotXUnderOtherRetailers(string presentRetailer)
+		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: (.*) under Other Retailers and save it as: (.*)")]  //maybe pick a specific alternative instead of avoiding all with additional data requirments
+		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerThatIsNotXUnderOtherRetailers(string presentRetailer,string savedAs)
 		{
-			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(presentRetailer), "Failed to select the first Retailer that is not "+presentRetailer+" or requires additional data under 'Other Retailers'", "Succesfully selected the first retailer that is not " + presentRetailer + "  or requires additional data under 'Other Retailers'");
+			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(presentRetailer,savedAs), "Failed to select the first Retailer that is not "+presentRetailer+" or requires additional data under 'Other Retailers'", "Succesfully selected the first retailer that is not " + presentRetailer + "  or requires additional data under 'Other Retailers'");
 		}
 
 		[StepDefinition(@"I confirm that UPC information is displayed in the Destination Retailers column under the Select UPCs Table")]
@@ -882,10 +884,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"I call Shared Step 87897 \(Forwarding - Edit Existing Case UPC: (.*) - confirm data shown correctly, change all data, Save, Continue\)")]
-		public void GivenICallSharedStep87897ForwardingEditExistingCaseUpcConfirmDataShownCorrectlyChangeAllDataSaveContinue(string caseUPCNumSavedAs, Table table)
+		[StepDefinition(@"I call Shared Step 87897 \(Forwarding - Edit Existing Case UPC: (.*) - confirm data shown correctly, change all data, Save, Continue\) and save the table as: (.*)")]
+		public void GivenICallSharedStep87897ForwardingEditExistingCaseUpcConfirmDataShownCorrectlyChangeAllDataSaveContinue(string caseUPCNumSavedAs, string tableSavedAs, Table table)
 		{
 			TestReport.UseSubSteps = true;
+			Context.AddToContext(tableSavedAs, table);
 			var editUPC = new ForwardProductRegistration.EditUPC();
 			TestReport.StartStep("Selecting Edit on the UPC saved as: " + caseUPCNumSavedAs + ".");
 			var upcNum = (string)Context.GetFromContext(caseUPCNumSavedAs);

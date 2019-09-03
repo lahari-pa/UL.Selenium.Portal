@@ -8451,8 +8451,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(
-			@"I call Shared Step 87337 \(Edit UPC - data - Click Save\) for UPC as: (.*), container type: (.*) and size: (.*) and packaging type: (.*)")]
+		[StepDefinition(@"I call Shared Step 87337 \(Edit UPC - data - Click Save\) for UPC as: (.*), container type: (.*) and size: (.*) and packaging type: (.*)")]
 		public void Shared87337_RemovePackgType(string upc, string containerType, string size, string pkgType)
 		{
 			TestReport.UseSubSteps = true;
@@ -8463,18 +8462,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click expand arrow for: " + upc);
 			myNewProduct.ExpandArrowforUPC(upc);
 			TestReport.StartStep("I add the following into the UPC Fields");
-				var upcInfo = new UpcInformation {
-					ContainerType = containerType,
-					Size = size,
-					UpcNumber = upc,
-					PackageType = pkgType
-				};
-				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to change packagaing type info!",
-					"Successfully changed packagaing type info!");
-				TestReport.StartStep("I click save");
+			var upcInfo = new UpcInformation {
+				ContainerType = containerType,
+				Size = size,
+				UpcNumber = upc,
+				PackageType = pkgType
+			};
+			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to change packagaing type info!",
+				"Successfully changed packagaing type info!");
+			TestReport.StartStep("I click save");
 			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
 			MyStepsNewProduct.GivenIConfirmErrorMessageIsShownBelowField("This is a required field.", "Package Type");
 		}
 
+		[StepDefinition(@"I call Shared Step 88419 \(SHA > UPC - Confirm Case UPC fields \(No internal UPC\) > Close window\) for UPC saved as: (.*) for the retailer: (.*) using details saved in the table: (.*)")]
+		public void Shared88419_SHA_UpcList_ConfirmCaseUPCFields(string savedAs,string retailer,string tableSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I Look for the case upc saved in context, and check it is followed by an asterisk in the UPC table");
+			
+			var shaSteps = new Steps_SHA();
+			var studioSHAManger = new StudioSHAManager();
+			List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+			if (!displayedUpcs.Any())
+			{
+				Report.Failure("No UPCs were found in the Product UPC window");
+			}
+			var upcNumber = displayedUpcs.FirstOrDefault(x => x.UPCNumber.EndsWith("*"))?.UPCNumber;
+
+			Report.IsTrue(upcNumber == null && upcNumber == savedAs, "Failed to find the upc number: " + savedAs + " followed by an asterisk", "Succesfully found the upc number: " + savedAs + " followed by an asterisk");
+
+			TestReport.StartStep("I Click on the link associated with the Case UPC marked by an asterisk");
+			studioSHAManger.ClickUPCSavedAsInProducUPCTable(savedAs);
+			TestReport.StartStep("I Select the Client: " + retailer + " from the select client list");
+
+			var upcDetails = new StudioSHAManagerUPCDetails();
+			IWebElement input = upcDetails.SelectClientInput;
+
+			if (input == null)
+			{
+				Report.Info("The Select Client box could not be found!");
+				return;
+			}
+			input.Select(retailer);
+
+			TestReport.StartStep("I Check the type coloumn shows the container type selected for my product.");
+			string containerTypeAcual= upcDetails.DetailValue("Container Type");		
+			Table table = (Table)Context.GetFromContext(tableSavedAs);
+			TableRow informationRow= table.Rows[1];
+			//Now do a report is true of value in table to value of containerTypeActual
+
+
+
+
+
+
+
+		}
 	}
 }

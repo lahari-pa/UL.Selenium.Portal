@@ -231,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return retailerInput.TryClick();
 		}
-		public bool SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(string presentRetailer)
+		public bool SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(string presentRetailer,string savedAs)
 		{
 			//IWebElement retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//div[@class='control-indicator']"), 2);
 
@@ -249,7 +249,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (retailer != null)
 			{
+				string chosenRetailerName = retailer.Text;
+				Context.AddToContext(savedAs, chosenRetailerName);
 				return retailer.FindElement(By.XPath(@".//following-sibling::div[@class='control-indicator']"), 2).TryClick();
+
 			}
 
 			return false;

@@ -1087,6 +1087,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return rList;
 		}
 
+		public bool ClickUPCSavedAsInProducUPCTable(string savedAs)
+		{
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			foreach(var item in rows)
+			{
+				IWebElement linkBox = item.FindElement(By.XPath(".//a"), 2);
+
+				if(linkBox.Text.Contains(savedAs+"*"))
+				{
+					return linkBox.TryClick();
+				}
+			}
+			Report.Failure("Could not Find UPC Link for the UPC saved as: " + savedAs);
+			return false;
+		}
+
 		public bool ConfirmRetailerExistsForUPC(string retailer, string upc)
 		{
 			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
@@ -1270,6 +1286,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			
 			Report.Info("Beginning get product status by id: " + retailer);
 			string retailerStatus = "";
+			string retailerAbbr = "";
+
+			if (Regex.IsMatch(retailer, "<(.*)>"))
+			{
+				var match = Regex.Match(retailer, "<(.*)>").Groups[1].Value;
+				if (Context.Contains(match, true))
+				{
+					retailer = Context.GetFromContext(match).ToString();
+				}
+
+			}
+			var abbr = new RetailerAbbreviations();
+			abbr.Map.TryGetValue(retailer, out retailerAbbr);
 			try
 			{
 				int retailerIndex = SeleniumBrowser.WebBrowser
@@ -1279,17 +1308,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				var mySHAManager = new StudioSHAManager();
 				mySHAManager.Wait_for_load();
-				Product matchingProduct = mySHAManager.GetTopXProducts(2).FirstOrDefault(x => x.Clients == retailer);
+				Product matchingProduct = mySHAManager.GetTopXProducts(2).FirstOrDefault(x => x.Clients == retailerAbbr);
 
 				if(matchingProduct==null)
 				{
-					Report.Failure("Could not find a Product with retailer: " + retailer + ".");
-					return;
+					Report.Failure("Could not find a Product with retailer: " + retailerAbbr + ".");
+					return null;
 				}
 
 				IWebElement matchingTD = SeleniumBrowser.WebBrowser
 					.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (retailerIndex + 1).ToString() + "]"))
-					.FirstOrDefault(x => x.GetValue().Trim() == retailer);
+					.FirstOrDefault(x => x.GetValue().Trim() == retailerAbbr);
 				IWebElement matchingSpan = matchingTD.FindElement(By.XPath(".//span"));
 				string colour = matchingTD.FindElement(By.XPath(".//span")).GetCssValue("color").ToString();
 
@@ -2436,6 +2465,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 
+
+
+	}
+
+	class StudioSHAManagerUPCDetails:BaseObject
+	{
+		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public IWebElement SelectClientInput => this.containerElement.FindElement(By.XPath(".//select[contains(@id,'clients')]"), 5);
+
+		public string DetailValue(string detailType)
+
+		{
+			IList<IWebElement> row = this.containerElement.FindElements(By.XPath(".//tbody//tr//td[1]"), 2).ToList();
+
+			foreach(var item in row)
+			{
+				if(item.Text.Contains(detailType))
+
+				{
+					string valueBoxText = item.FindElement(By.XPath(".//following-sibling::td"), 2).Text;
+					return valueBoxText;					
+				}
+					
+			}
+
+			Report.Failure("The Row containing: " + detailType + " could not be found");
+			return null; 
+
+
+			
+
+
+		}
+		
 
 	}
 
