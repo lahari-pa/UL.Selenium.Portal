@@ -25,6 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 		#endregion
 
+		# region Get or set data inputs
 		public bool GrantedAlternativeControlPlan {
 			get => this.SelectedRadioForLabel(_grantedAcpQuestion) == "Yes";
 			set
@@ -70,6 +71,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			get => this.TextInputValueForLabel(_mvocContentQuestion);
 			set => this.EnterTextToLabelnput(_mvocContentQuestion, value);
 		}
+		#endregion
+
+		#region Error messages
+
+		public string VocContentAsSoldError() => this.GetErrorForSection(_vocContentAsSoldQuestion);
+
+		public string VocContentAsUsedError() => this.GetErrorForSection(_vocContentAsUsedQuestion);
+
+		#endregion
+
+
 	}
 	
 }

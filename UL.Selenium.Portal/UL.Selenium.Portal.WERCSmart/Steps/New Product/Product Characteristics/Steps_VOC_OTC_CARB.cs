@@ -15,6 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 	{
         private readonly VocOtcCarb _vocOtcCarb = new VocOtcCarb();
 
+
         [StepDefinition(@"The VOC OTC CARB page should be loaded")]
         public void VocOtcCarbPageShouldBeLoaded()
         {
@@ -102,5 +103,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 				"Failed to set 'MVOC content' to: " + value,
 				"Set 'MVOC content' to: " + value);
 		}
+
+        [Then(@"For the Product's VOC content as sold field I should see the following error: (.*)")]
+        public void ThenForTheProductSVOCContentAsSoldFieldIShouldSeeTheFollowingError(string error)
+        {
+	        string actualError = this._vocOtcCarb.VocContentAsSoldError();
+
+			if (actualError == null)
+	        {
+		        actualError = "null";
+	        }
+	        Report.IsTrue(actualError == error, "Error is not showing as expected. Expected: " + error + " but got: " + actualError,
+		        "Error is showing as expected");
+        }
+
+        [Then(@"For the Product's VOC content as used field I should see the following error: (.*)")]
+        public void ThenForTheProductSVOCContentAsUsedFieldIShouldSeeTheFollowingError(string error)
+        {
+	        string actualError = this._vocOtcCarb.VocContentAsUsedError();
+			if (actualError == null)
+	        {
+		        actualError = "null";
+	        }
+	        Report.IsTrue(actualError == error, "Error is not showing as expected. Expected: " + error + " but got: " + actualError,
+		        "Error is showing as expected");
+        }
+
+        [Then(@"For the Product's VOC content as sold field I should see not see an error")]
+        public void ThenForTheProductSVOCContentAsSoldFieldIShouldSeeNotSeeAnError()
+        {
+	        Report.IsTrue(this._vocOtcCarb.VocContentAsSoldError() == null, "Expected no error but got: " + this._vocOtcCarb.VocContentAsSoldError(),
+		        "Error is showing as expected");
+        }
+
+        [Then(@"For the Product's VOC content as used field I should see not see an error")]
+        public void ThenForTheProductSVOCContentAsUsedFieldIShouldSeeNotSeeAnError()
+        {
+	        Report.IsTrue(this._vocOtcCarb.VocContentAsUsedError() == null, "Expected no error but got: " + this._vocOtcCarb.VocContentAsUsedError(),
+		        "Error is showing as expected");
+        }
 	}
 }

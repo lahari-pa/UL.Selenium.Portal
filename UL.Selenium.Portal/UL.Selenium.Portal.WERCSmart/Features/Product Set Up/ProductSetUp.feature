@@ -34,7 +34,6 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	Then in the Ingredients page I click Continue
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-	And I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	And I should see the Additional Documents to Provide Page

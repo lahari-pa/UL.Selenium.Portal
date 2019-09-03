@@ -80,6 +80,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return els.Count == 0 ? new List<string>() : els.Select(x => x.Text).ToList();
 		}
 
+		public string GetErrorForSection(string section)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(@".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2);
+			return el?.Text;
+		}
+
 		public List<InputError> GetAllErrors()
 		{
 			string regexPattern = @"(?:optionsCaption:\s*[\'\""])(.*)[\'\""]";
@@ -1930,47 +1936,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				IList<IWebElement> errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"), 2);
 				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
-			}
-			catch (Exception)
-			{
-				return null;
-			}
-		}
-
-		public string VOCContentsAsSoldError()
-		{
-			IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-				.FirstOrDefault(x => x.Text.Contains("Product's VOC content as sold"));
-
-			if (lbl != null)
-			{
-				try
-				{
-					IWebElement error = lbl.FindElement(By.XPath("../..//input/../p//span"));
-					if (error != null)
-					{
-						return error.Text;
-					}
-					else
-					{
-						return null;
-					}
-				}
-				catch (Exception)
-				{
-					return null;
-				}
-			}
-			throw new Exception("Label not found as expected.");
-		}
-
-		public string VOCContentsAsUsedError()
-		{
-			IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Product's VOC content as used"));
-			try
-			{
-				IWebElement error = lbl.FindElement(By.XPath("../..//input/../p//span"));
-				return error?.Text;
 			}
 			catch (Exception)
 			{

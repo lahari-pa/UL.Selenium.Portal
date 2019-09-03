@@ -247,23 +247,29 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 		| Formaldehyde  | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I should see the Transportation Details 1 Page
-	And I set the Product is Regulated for Transport option to: Not Regulated
-	And I click continue
+	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 	Given I call Shared Step 60515 (VOC - Dilution - Yes to ratio - enter any values > Continue - Happy Path)
 	Given I click continue
-	And I should see the ECOLOGO Readiness Page
-	And I confirm that I see the following Ecologo statement: Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment. This report will indicate if the product is eligible to be awarded an ECOLOGO Certification, an established symbol of reduced environmental impact. Would you like to receive this assessment?
-	And I should see the following radio buttons:
-		| Button           |
-		| Yes              |
-		| Not at this time |
-	And in the New Product page I click Continue
+	Given The ECOLOGO Readiness page should be loaded
+	Given I confirm the ECOLOGO Readiness Assessment question is displayed
+	#And I confirm that I see the following Ecologo statement: Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment. This report will indicate if the product is eligible to be awarded an ECOLOGO Certification, an established symbol of reduced environmental impact. Would you like to receive this assessment?
+	Given I confirm the ECOLOGO Readiness Assessment question shows the following options:
+	| Option           |
+	| Yes              |
+	| Not at this time |
+
+	#And I should see the following radio buttons:
+	#	| Button           |
+	#	| Yes              |
+	#	| Not at this time |
+	Given I click continue
 	Then I should see an error message: This is a required field.
-	Given I set the Take advantage of Premium Subscription benefits option to: Yes
+	Given I set the ECOLOGO Readiness Assessment question to: Yes
+	#Given I set the Take advantage of Premium Subscription benefits option to: Yes
 	And I should not see any error messages
-	Given I set the Take advantage of Premium Subscription benefits option to: Not at this time
+	#Given I set the Take advantage of Premium Subscription benefits option to: Not at this time
+	Given I set the ECOLOGO Readiness Assessment question to: Not at this time
 	Then I click continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I navigate to the home page

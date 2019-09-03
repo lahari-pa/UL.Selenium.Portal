@@ -1190,14 +1190,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedConfirmVOCHeadingAndSelectNoToFirstQuestionOnly_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();
-			TestReport.StartStep("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
+			//var MyNewProduct = new StepsNewProduct();
+			//TestReport.StartStep("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
 			new Steps_VOC_OTC_CARB().VocOtcCarbPageShouldBeLoaded();
-			//MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)");
+			new Steps_VOC_OTC_CARB().VocOtcCarbPageShouldBeLoaded();
 			TestReport.StartStep("I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. field to: No");
 			new Steps_VOC_OTC_CARB().SetProductHasBeenGrantedACP("No");
-			//MyNewProduct.SetTheSectionOptionTo("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
-				//"No");
 		}
 
 		[StepDefinition(@"I call Shared Step 60468 \(VOC - CARB only required - enter value - Continue - Happy Path\)")]
