@@ -630,6 +630,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheForwardProductRegistrationScreenSelectRetailerNotInListOfRetailers(string retailers, string saveAs)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
+			var alreadySelectedRetailers = (List<string>)Context.GetFromContext(retailers);
 			List<string> listOfRetailers = selForwardProdReg.GetListOfOtherRetailers();
 			bool bSelected = false;
 			string selectedRetailer = "";
@@ -643,8 +644,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					if (selForwardProdReg.SelectOtherRetailer(listOfRetailers[index]))
 					{
 						selectedRetailer = listOfRetailers[index];
-						Report.Success("Selected retailer: " + selectedRetailer);
-						bSelected = true;
+						var abbr = new RetailerAbbreviations();
+						string selectedAbbr = "";
+						abbr.Map.TryGetValue(selectedRetailer, out selectedAbbr);
+						if (alreadySelectedRetailers.Any() && alreadySelectedRetailers.Contains(selectedAbbr))
+						{
+							Report.Info("Selected Retailer already exists. Selected another one.");
+						}
+						else
+						{
+							Report.Success("Selected retailer: " + selectedRetailer);
+							bSelected = true;
+						}
 					}
 				}
 				catch (Exception e)
@@ -765,6 +776,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var modal = new AddUPCModal();
 			Report.IsTrue(modal.ClickCancel(), "Failed to click Cancel in the Add UPC modal window.",
 			"Successfully clicked Cancel in the Add UPC modal window.");
+		}
+
+		[StepDefinition(@"If the Private Label textbox is showing in the Select UPCs screen, I enter the value: (.*)")]
+		public void IfPrivateLabelShowingIEnterValue(string value)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.EnterPrivateLabelIfExists(value), "Failed to enter value " + value + " for Private Label.",
+				"Successfully entered value for Private Label.");
 		}
 
 		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: (.*) under Other Retailers")]  //maybe pick a specific alternative instead of avoiding all with additional data requirments

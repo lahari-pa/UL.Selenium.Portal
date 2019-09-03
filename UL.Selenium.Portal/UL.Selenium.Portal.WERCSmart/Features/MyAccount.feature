@@ -96,8 +96,8 @@ Scenario: [68417] Company Information
 	Given I click on My Account
 	Given In the My Account page I navigate to the Company Information page
 	Then In the Company Information page I confirm the Company Information is correct
-		| Company Name   | Admin Name               | Email Address   | Supplier Type | Country       | Address           | City   | State | Zip Code | Country Code | Phone        |
-		| Visual Testing | Automated Visual Testing | <VisualAccount> | Manufacturer  | United States | 31 British Am Ave | Latham | NY    | 12110    | 1            | 555-555-5555 |
+		| Company Name | Admin Name                    | Email Address   | Supplier Type | Country       | Address  | City   | State | Zip Code | Country Code | Phone        |
+		| QA_Visual    | WERCS Test_Automation_Lockout | <VisualAccount> | Manufacturer  | United States | Address1 | Latham | FL    | 12205    | 1            | 123-456-7889 |
 
 # Assigned to Paulina Mata
 # Created by Larkin, Steve

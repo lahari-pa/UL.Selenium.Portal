@@ -966,6 +966,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             }
         }
 
+		[StepDefinition(@"I confirm that retailer saved as (.*) appears for UPC saved as UPC(.*)")]
+		public void IConfirmThatRetailerAppearsForUPC(string retailer, string savedAs)
+		{
+			string upc = Context.GetFromContext("UPC" + savedAs).ToString();
+			retailer = Context.GetFromContext(retailer)?.ToString() ?? "";
+
+			var studioSHAManager = new StudioSHAManager();
+
+			Report.IsTrue(studioSHAManager.ConfirmRetailerExistsForUPC(retailer, upc), "Failed to find retailer " + retailer + " in list of retailers",
+				"Successfully found retailer " + retailer + " in list of retailers.");
+		}
+
         [StepDefinition(@"I close the SHA Manager Product UPC window")]
         public void CloseSHAManagerProductUPCWindow()
         {
@@ -1046,6 +1058,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Id = id
 			};
 			Context.AddToContext("ID", thisProductInformation);
+		}
+
+		[StepDefinition(@"I confirm that retailer saved as (.*) appears in the list of retailers for product (.*)")]
+		public void IConfirmThatRetailerAppearsInListOfRetailers(string retailer, string product)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			var ProductDetails = (ProductInformation)Context.GetFromContext(product);
+			string ID = ProductDetails.Id;
+			retailer = Context.GetFromContext(retailer)?.ToString() ?? "";
+
+			string retailerAbbr = "";
+			var abbr = new RetailerAbbreviations();
+			abbr.Map.TryGetValue(retailer, out retailerAbbr);
+
+			Report.IsTrue(thisStudioSHAManager.RetailerIsInListOfRetailers(retailerAbbr, ID), "Failed to find retailer " + retailerAbbr + " in list of retailers.",
+				"Successfully found retailer " + retailerAbbr + " in list of retailers.");
 		}
 
 

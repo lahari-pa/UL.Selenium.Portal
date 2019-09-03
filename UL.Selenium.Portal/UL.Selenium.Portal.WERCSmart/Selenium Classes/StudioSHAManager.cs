@@ -460,6 +460,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool RetailerIsInListOfRetailers(string retailerAbbr, string id)
+		{
+			int indexOfID = SeleniumBrowser.WebBrowser
+										.FindElements(By.XPath(
+											".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+										.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+			int indexOfClients = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+			ReadOnlyCollection<IWebElement> idTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfID + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> clientsTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfClients + 1).ToString() + "]"));
+
+			for (int i = 0; i < idTDs.Count; i++)
+			{
+				IWebElement thisIDTD = idTDs[i];
+				if (thisIDTD.GetValue() == id)
+				{
+					IWebElement thisClientsTD = clientsTDs[i];
+					var allClients = thisClientsTD.GetValue().Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+					if (allClients.Contains(retailerAbbr))
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			return false;
+
+		}
+
 		public bool RightClickProductByID(string id)
 		{
 			Delay.Seconds(3);
@@ -1025,7 +1063,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement headerRow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']"), 2);
 			if (headerRow == null)
 			{
-				Report.Info("Could not locate 'dark back' header row");
+				Report.Info("Could not locate 'dark black' header row");
 				return null;
 			}
 
@@ -1047,6 +1085,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Report.Info($"Found {rList.Count} UPCs");
 			return rList;
+		}
+
+		public bool ConfirmRetailerExistsForUPC(string retailer, string upc)
+		{
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			IWebElement headerRow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']"), 2);
+			if (headerRow == null)
+			{
+				Report.Info("Could not locate 'dark black' header row");
+				return false;
+			}
+			var headers = headerRow.Text.Split(' ').ToList<string>();
+
+			IWebElement upcRow = null;
+			foreach (IWebElement row in rows)
+			{
+				string upcNumber = row.Text.Split(' ')[0];
+				if (upcNumber == upc)
+				{
+					upcRow = row;
+				}
+			}
+
+			if (upcRow == null)
+			{
+				Report.Info("Failed to find UPC " + upc + " in row!");
+				return false;
+			}
+
+			IWebElement retElement = upcRow.FindElement(By.XPath("//td[@title='" + retailer + "']"), 2);
+			if (retElement != null && retElement.Text != "")
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 
@@ -1130,7 +1206,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			ReadOnlyCollection<IWebElement> clientsTDs = SeleniumBrowser.WebBrowser.FindElements(
 				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfClients + 1).ToString() + "]"));
 
-			for (int i = 0; i < idTDs.Count; i++)
+			// start at a random place in the list. This solves the problem where we are always selecting the first product in the list,
+			// which then accumulates too many Retailers.
+			Random rnd = new Random();
+			for (int i = rnd.Next(idTDs.Count); i < idTDs.Count; i++)
 			{
 				IWebElement thisIDTD = idTDs[i];
 				IWebElement thisNameTD = nameTDs[i];
@@ -1180,7 +1259,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement thisClientsTD = clientsTDs[i];
 				if (thisIDTD.GetValue().Trim() == id)
 				{
-					return thisClientsTD.GetValue().Split(',').ToList<string>();
+					return thisClientsTD.GetValue().Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
 				}
 			}
 			return null;
