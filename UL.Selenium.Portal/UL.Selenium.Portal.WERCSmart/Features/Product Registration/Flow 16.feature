@@ -429,7 +429,7 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Then The home screen should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead acid battery
-	Then I save the product information as: TestCase97484
+	Then I save the product information as: TestCase97470
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Given I should see the Additional Product Information Page
 	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
@@ -453,4 +453,4 @@ Scenario: [97470] Stand alone Lead Acid Battery
 		| Gloves                        | 230                      | 55.4                    | 33.3      | Black      | Acidic | No data available | 1.44                  |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead acid battery
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97484
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97470
