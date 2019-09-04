@@ -111,6 +111,11 @@ Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Ch
 	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase78864)
 	And I call Shared Step 59066 (Go to SHA Manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78864)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase78864 and its status is: Accepted
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78864)
+	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase78864) for
+		| Retailer |
+		| CVS      |
 	#And I Confirm the product is shown in Accepted or Completed status for all retailers
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78864 and its status is: Completed
 

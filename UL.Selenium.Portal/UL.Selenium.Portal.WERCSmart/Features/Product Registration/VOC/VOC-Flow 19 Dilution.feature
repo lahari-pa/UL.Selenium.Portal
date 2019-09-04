@@ -24,10 +24,10 @@ Scenario: [62730] VOC - Flow 19 - Dilution ration - Sold = 50, Used = 45 limit c
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-	Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: Yes
-	Given I set the Product's VOC content as sold field to: 50
-	Given I set the Product's VOC content as used field to: 45
-	Given in the VOC page I click Continue
+	Given I set 'Product label dilution ratio' to: Yes
+	Given I set 'VOC Content As Sold' to: 50
+	Given I set 'VOC Content As Used' to: 45
+	Given I click continue
 	Then I should see the Volatile Organic Compound Summary Page
 	Then in the VOC Summary page I should see the following noneditable statements
 		| Statement                                                                           |
@@ -51,9 +51,12 @@ Scenario: [62728] VOC - Flow 19 - Dilution - Sold = 50, Used = 15 limit checking
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-	Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: Yes
-	Given I set the Product's VOC content as sold field to: 50
-	Given I set the Product's VOC content as used field to: 15
+	#Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: Yes
+	Given I set 'Product label dilution ratio' to: Yes
+	#Given I set the Product's VOC content as sold field to: 50
+	#Given I set the Product's VOC content as used field to: 15
+	Given I set 'VOC Content As Sold' to: 50
+	Given I set 'VOC Content As Used' to: 15
 	Given in the VOC page I click Continue
 	Then I should see the Volatile Organic Compound Summary Page
 	Then in the VOC Summary page I should see the following noneditable statements
@@ -105,12 +108,15 @@ Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-	Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: Yes
+	#Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: Yes
+	Given I set 'Product label dilution ratio' to: Yes
 	Given in the VOC page I click Continue
 	Then For the Product's VOC content as sold field I should see the following error: This is a required field.
 	Then For the Product's VOC content as used field I should see the following error: This is a required field.
-	Given I set the Product's VOC content as sold field to: 1
-	Given I set the Product's VOC content as used field to: 2
+	Given I set 'VOC Content As Sold' to: 1
+	Given I set 'VOC Content As Used' to: 2
+	#Given I set the Product's VOC content as sold field to: 1
+	#Given I set the Product's VOC content as used field to: 2
 	Then For the Product's VOC content as sold field I should see not see an error
 	Then For the Product's VOC content as used field I should see not see an error
 	Given in the VOC page I click Continue
