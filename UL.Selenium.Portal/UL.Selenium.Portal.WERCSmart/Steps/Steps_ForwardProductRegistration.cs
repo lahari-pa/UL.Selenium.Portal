@@ -1066,8 +1066,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I get the product ID for the product saved as: (.*) then I use this ID in the select Products & UPCs page")]
 		public void IGetTheProducIDForSavedAsAndSearcForProduct(string savedAs)
 		{
+			Report.Info("input value is " + savedAs + " . Looking in context for a product information with this value");
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string iD= productDetails.Id;
+			Report.IsTrue(iD.Any(), "iD was empty: "+iD, "iD contained: " + iD);
 
-			//this.GivenISearchForTheProductSavedAs()
+			Context.AddToContext("idStringSavedAs", iD);
+			new StepsForwardProductRegistration().SelectProductByIDSavedAs("idStringSavedAs");
 		}
 
 

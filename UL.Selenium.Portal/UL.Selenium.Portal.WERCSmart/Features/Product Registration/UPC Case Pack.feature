@@ -312,8 +312,9 @@ Then I filter the products by: Accepted by Retailers
 And I filter for the product saved as: TestCase87894
 And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-Then I should see the header: Forward Product Registration on the Forward Product Registration window
-Then I select the product with ID saved as: TestCase87894 under the Select Products tab
+Then I should see the header: Select Products & UPCs on the Forward Product Registration window
+#Then I select the product with ID saved as: TestCase87894 under the Select Products tab
+Then I get the product ID for the product saved as: TestCase87685 then I use this ID in the select Products & UPCs page
 Given I click continue on the Forward Product Registration page
 Then I confirm the active Forward Product Registration tab is: Select Retailers
 #And I Select a retailer which is not already present on the product you are working with, make sure to select a retailer that does not require additional data (such as BB, DI, KG)

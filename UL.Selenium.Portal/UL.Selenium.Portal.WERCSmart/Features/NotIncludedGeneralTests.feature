@@ -126,3 +126,17 @@ And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
 Then I Check that the product under the retailer: AM is under the status: Accepted
 
+Scenario: [NOTINCLUDEDGENERALTEST] Forwarding - Edit existing Case UPC -ID search testing
+Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+Given I generate a random UPC number and save as: UPC87685
+Given I generate a random UPC number and save as: UPC876851
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase87685
+Given I navigate to the home page
+Then I filter the products by: Accepted by Retailers
+And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+Then I should see the header: Select Products & UPCs on the Forward Product Registration window
+Then I get the product ID for the product saved as: TestCase87685 then I use this ID in the select Products & UPCs page
+Given I click continue on the Forward Product Registration page
+

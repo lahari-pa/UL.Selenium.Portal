@@ -8494,9 +8494,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			TestReport.StartStep("I Click on the link associated with the Case UPC marked by an asterisk");
 			studioSHAManger.ClickUPCSavedAsInProducUPCTable(savedAs);
+			TestReport.StartStep("I Check the UPC detail popup appears");
+			var upcDetails = new StudioSHAManagerUPCDetails();
+			Report.IsTrue(upcDetails.Wait_for_load(30),"The UPC details popup did not appear","The UPC details popup appeared");
 			TestReport.StartStep("I Select the Client: " + retailer + " from the select client list");
 
-			var upcDetails = new StudioSHAManagerUPCDetails();
+			
 			IWebElement input = upcDetails.SelectClientInput;
 
 			if (input == null)
@@ -8507,10 +8510,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			input.Select(retailer);
 
 			TestReport.StartStep("I Check the type coloumn shows the container type selected for my product.");
-			string containerTypeAcual= upcDetails.DetailValue("Container Type");		
+			string containerTypeActual= upcDetails.DetailValue("Container Type");		
 			Table table = (Table)Context.GetFromContext(tableSavedAs);
-			TableRow informationRow= table.Rows[1];
-			//Now do a report is true of value in table to value of containerTypeActual
+			TableRow informationRow= table.Rows[1];			
+			string expectedContainerValue =informationRow["Container type"].ToString();
+			Report.IsTrue(expectedContainerValue == containerTypeActual, "The container type coloumn did not show the value selected for the product", "The container type coloumn did show the value selected for the product");
+			TestReport.StartStep("I Check the size coloumn shows the size selected for my product.");
+			string containerSizeActual = upcDetails.DetailValue("Container Size");
+			string expectedSizeValue = informationRow["Size"].ToString();
+			Report.IsTrue(expectedSizeValue == containerSizeActual, "The container size coloumn did not show the value selected for the product", "The container size coloumn did show the value selected for the product");
+			TestReport.StartStep("I Check the Internal UPC coloumn shows the 'N/A'.");
+			string expectedInternalUPC = "N/A";
+			string internalUPCAtual = upcDetails.DetailValue("Internal UPC");
+			Report.IsTrue(expectedInternalUPC == internalUPCAtual, "The Internal UPC coloumn did not show N/A", "The Internal UPC coloumn did show N/A");
+			TestReport.StartStep("I Check the transport coloumn shows the container type selected for my product.");
+			string transportTypeActual = upcDetails.DetailValue("Code and Description for DOT Packaging");
+			string expectedTransportOption = informationRow["Transportation Options"].ToString();
+			Report.IsTrue(expectedTransportOption == transportTypeActual, "The Transportation Option coloumn did not show the value selected for the product", "The Transportation Option coloumn did show the value selected for the product");
+
+
+
+
+
 
 
 
