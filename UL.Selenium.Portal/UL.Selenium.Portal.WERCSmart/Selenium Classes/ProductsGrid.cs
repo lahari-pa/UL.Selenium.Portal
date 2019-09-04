@@ -223,6 +223,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool ClickActionsForProduct(string productId)
+		{
+			try
+			{
+				IWebElement button = this.ProductRows.FirstOrDefault()?.FindElement(By.XPath("//td//div//small[contains(text(), '" + productId + "')]/../..//following-sibling::td//div//button[contains(@class, 'ellipsis-button')]"), 1);
+				return button.TryClick();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		public bool ClickActions(int row)
 		{
 			return this.containerElement.FindElement(By.XPath(".//table//tbody//tr[" + row + "]//button[contains(@class,'ellipsis-button')]"), 2).TryClick();
@@ -357,7 +370,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			for (int i = 0; i < productRows.Count; i++)
 			{
 				IWebElement row = productRows[i];
-				if (row.FindElement(By.XPath(".//ul[@class='list-inline retailers']/li"), 2) == null)
+				IWebElement retElem = row.FindElement(By.XPath(".//ul[@class='list-inline retailers']/li"), 2);
+				if (retElem == null)
+				{
+					continue;
+				}
+
+				string borderColour = retElem.GetCssValue("border-color");
+				if (borderColour == "rgb(207, 58, 83)")
 				{
 					continue;
 				}

@@ -108,6 +108,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"I should see the (.*) Page")]
+		[StepDefinition(@"I should see the (.*) Page for the New Product")]
 		public void GivenIShouldSeeXPage(string page)
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
@@ -139,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ShouldSeeAlistFormError(string error)
 		{
 			var errorActual = new NewProduct().FormError();
-			Report.IsTrue(errorActual.Contains(error), "The expected error was not found! The error text found was: "+errorActual, "Found expected error");
+			Report.IsTrue(errorActual.Contains(error), "The expected error was not found! The error text found was: " + errorActual, "Found expected error");
 		}
 
 		[StepDefinition(@"in page (.*) I should see error: (.*)")]
