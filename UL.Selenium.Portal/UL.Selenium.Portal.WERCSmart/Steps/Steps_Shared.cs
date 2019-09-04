@@ -8483,14 +8483,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 			var shaSteps = new Steps_SHA();
 			var studioSHAManger = new StudioSHAManager();
+			Delay.Seconds(10);
+			new Steps_SHA().SwitchToProductListUpcWindow();
 			List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
 			if (!displayedUpcs.Any())
 			{
 				Report.Failure("No UPCs were found in the Product UPC window");
 			}
+			else
+			{
+				Report.Info("Made a List of the displayed UPCs");
+			}
+
 			var upcNumber = displayedUpcs.FirstOrDefault(x => x.UPCNumber.EndsWith("*"))?.UPCNumber;
 
-			Report.IsTrue(upcNumber == null && upcNumber == savedAs, "Failed to find the upc number: " + savedAs + " followed by an asterisk", "Succesfully found the upc number: " + savedAs + " followed by an asterisk");
+			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
+
+			Report.IsTrue(upcNumber == null && upcNumber == expectedUPCNum, "Failed to find the upc number: " + expectedUPCNum + " followed by an asterisk", "Succesfully found the upc number: " + expectedUPCNum + " followed by an asterisk");
 
 			TestReport.StartStep("I Click on the link associated with the Case UPC marked by an asterisk");
 			studioSHAManger.ClickUPCSavedAsInProducUPCTable(savedAs);
@@ -8504,10 +8513,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (input == null)
 			{
-				Report.Info("The Select Client box could not be found!");
+				Report.Failure("The Select Client box could not be found!");
 				return;
 			}
 			input.Select(retailer);
+			TestReport.StartStep("I wait for the UPC Details Table to Load");
+			//Wait for load on the table before continue
 
 			TestReport.StartStep("I Check the type coloumn shows the container type selected for my product.");
 			string containerTypeActual= upcDetails.DetailValue("Container Type");		

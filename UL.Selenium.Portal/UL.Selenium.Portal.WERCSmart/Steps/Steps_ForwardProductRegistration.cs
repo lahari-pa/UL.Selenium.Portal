@@ -322,7 +322,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab")]
 		public void SelectProductByIDSavedAs(string savedAs)
 		{
-			
+
 
 			var selForwardProductReg = new ForwardProductRegistration();
 			if (savedAs.ToLower().Contains("list"))
@@ -361,7 +361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure("Could not find product ID in context saved as: " + savedAs);
 					return;
 				}
-				if(id.Contains("ProductInformation"))
+				if (id.Contains("ProductInformation"))
 				{
 					Report.Info("text: 'ProductInformation' was contained in the string, searching context for product saved as: " + savedAs);
 
@@ -712,6 +712,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
+			
+		}
+
+		[StepDefinition(@"I confirm that there are NO Errors displayed for the Product")]
+		public void ThenIConfirmThatThereAreNoErrorsDisplayedForTheProduct()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(!selForwardProdReg.ErrorsDisplayed(), "Errors are showing", "Errors are not showing");
+			
 		}
 
 		[StepDefinition(@"In the Add UPC modal window I enter the following information:")]
@@ -789,15 +798,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: (.*) under Other Retailers and save it as: (.*)")]  //maybe pick a specific alternative instead of avoiding all with additional data requirments
-		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerThatIsNotXUnderOtherRetailers(string presentRetailer,string savedAs)
+		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerThatIsNotXUnderOtherRetailers(string presentRetailer, string savedAs)
 		{
-			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(presentRetailer,savedAs), "Failed to select the first Retailer that is not "+presentRetailer+" or requires additional data under 'Other Retailers'", "Succesfully selected the first retailer that is not " + presentRetailer + "  or requires additional data under 'Other Retailers'");
+			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(presentRetailer, savedAs), "Failed to select the first Retailer that is not " + presentRetailer + " or requires additional data under 'Other Retailers'", "Succesfully selected the first retailer that is not " + presentRetailer + "  or requires additional data under 'Other Retailers'");
 		}
 
 		[StepDefinition(@"I confirm that UPC information is displayed in the Destination Retailers column under the Select UPCs Table")]
 		public void ConfirmUPCInfromationInSelectUPCsTable()
 		{
-			
+
 			var selForwardProdReg = new ForwardProductRegistration();
 			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
 			if (upcs.Count == 0)
@@ -809,24 +818,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("There were: " + upcs.Count + " UPCs to check");
 			bool noGaps = true;
 			int i = 1;
-			foreach(var item in upcs)
+			foreach (var item in upcs)
 			{
-				if(item .UPCInfo.UPCNumber==null)
+				if (item.UPCInfo.UPCNumber == null)
 				{
 					Report.Failure("Upc number was not found for UPC: " + i + ".");
 					noGaps = false;
 				}
-				if(item.ContainerType==null)
+				if (item.ContainerType == null)
 				{
 					Report.Failure("Container Type was not found for UPC: " + i + ".");
 					noGaps = false;
 				}
-				if(item.Size==null)
+				if (item.Size == null)
 				{
 					Report.Failure("Size was not found for UPC: " + i + ".");
 					noGaps = false;
 				}
-				if(item.UPCInfo.DestinationRetailers==null)
+				if (item.UPCInfo.DestinationRetailers == null)
 				{
 					Report.Failure("Destination Retailers was not found for UPC: " + i + ".");
 					noGaps = false;
@@ -835,11 +844,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.IsTrue(noGaps, "The select UPCs table on the right side is missing UPC information", "The select UPCs table on the right side is not missing information");
-										
+
 		}
 
 		[StepDefinition("I Check that the Truck Icon is (present|not present) next to the UPC saved as: (.*)")]
-		public void ICheckTruckIconStatusForSavedAs(string presence,string savedAs)
+		public void ICheckTruckIconStatusForSavedAs(string presence, string savedAs)
 		{
 			bool presenceExpected = false;
 			switch (presence)
@@ -867,11 +876,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			foreach (var item in upcs)
 			{
-				if(item.UPCInfo.UPCNumber==upcNum)
+				if (item.UPCInfo.UPCNumber == upcNum)
 				{
-					if(item.UPCInfo.TruckIcon==presenceExpected)
+					if (item.UPCInfo.TruckIcon == presenceExpected)
 					{
-						Report.Success("The Truck Icon was succesfully found to be "+presence+" for the UPC: "+upcNum+".");
+						Report.Success("The Truck Icon was succesfully found to be " + presence + " for the UPC: " + upcNum + ".");
 						return;
 					}
 					Report.Failure("The Truck Icon was incorrectly found to be " + presence + " for the UPC: " + upcNum + ".");
@@ -881,7 +890,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.Failure("The UPC with number: " + upcNum + " was not found.");
 
-			
+
 		}
 
 		[StepDefinition(@"I call Shared Step 87897 \(Forwarding - Edit Existing Case UPC: (.*) - confirm data shown correctly, change all data, Save, Continue\) and save the table as: (.*)")]
@@ -908,19 +917,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.IsTrue(item.UPCInfo.SelectUPC(), "Failed to select UPC: " + upcNum + ".", "Succesfully selected the UPC: " + upcNum + ".");
 					Report.IsTrue(item.UPCInfo.ClickAction("edit"), "Failed to click edit on UPC: " + upcNum + ".", "Succesfully clicked edit on UPC: " + upcNum + ".");
 					successState = true;
-				}				
+				}
 
 			}
 			if (successState == false)
 			{
 				Report.Failure(@"The UPC with number: " + upcNum + " was not found.");
 			}
-			
-			
+
+
 			TestReport.StartStep("I check the Edit UPC popup appears");
 			editUPC.WaitForContainerToBeVisible(30);
-			
-			TestReport.StartStep("I confirm the UPC Number field is shown and is populated with the correct Case UPC");			
+
+			TestReport.StartStep("I confirm the UPC Number field is shown and is populated with the correct Case UPC");
 			Report.IsTrue(editUPC.UPCNumber == upcNum, "The UPC number did not match expected", "The UPC number matched the expected value");
 
 			TestReport.StartStep("I confirm the Container Type field is shown and is populated with the correct Case UPC");
@@ -931,7 +940,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			TestReport.StartStep("I confirm the Size field is shown and is populated with the correct Case UPC");
 			string sizeValue = row["Size"].ToString();
-			Report.IsTrue(editUPC.Size== sizeValue, "The Size did not match expected", "The Size  matched the expected value");
+			Report.IsTrue(editUPC.Size == sizeValue, "The Size did not match expected", "The Size  matched the expected value");
 
 			TestReport.StartStep("I confirm the Quantity field is shown and is populated with the correct Case UPC");
 			string quantityValue = row["Quantity"].ToString();
@@ -947,9 +956,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					individualUPCValue = Context.GetFromContext(match).ToString();
 				}
-				
+
 			}
-			
+
 			Report.IsTrue(editUPC.IndividualUPCContainedInTheCasePack == individualUPCValue, "The Individual UPC option did not match expected", "The Individual UPC option matched the expected value");
 
 			TestReport.StartStep("I confirm the Transportation Options field is shown and is populated with the correct Case UPC");
@@ -967,13 +976,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string secondSizeValue = secondRow["Size"].ToString();
 			editUPC.Size = secondSizeValue;
 			Report.IsTrue(editUPC.Size == secondSizeValue, "The Size was not changed", "The Size was changed");
-			
+
 			TestReport.StartStep("I change the Quantity Type");
 			string secondQuantityValue = secondRow["Quantity"].ToString();
 			editUPC.Quantity = secondQuantityValue;
 			Report.IsTrue(editUPC.Quantity == secondQuantityValue, "The Quanitity was not changed", "The Quanitity was changed");
 
-			
+
 			TestReport.StartStep("I change the Individual UPC value");
 			string secondIndividualUPCValue = secondRow["Individual UPC contained in the Case Pack"].ToString();
 			if (Regex.IsMatch(row["Individual UPC contained in the Case Pack"], "<(.*)>"))
@@ -993,12 +1002,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(editUPC.TransportationOptions == secondTransportationOptionsValue, "The Transportation Option was not changed", "The Transportation Option was changed");
 
 			TestReport.StartStep("I Click Save in the Edit UPC popup");
-			Report.IsTrue(editUPC.ClickButton("Save"),"Failed to click save in the edit UPC popup","Succesfully clicked save in the edit upc popup");
+			Report.IsTrue(editUPC.ClickButton("Save"), "Failed to click save in the edit UPC popup", "Succesfully clicked save in the edit upc popup");
 
 			TestReport.StartStep("I check the Edit UPC popup disappears");
-			Report.IsTrue(editUPC.WaitForContainerToBeInvisible(30),"The edit upc popup did not appear","The edit upc appeared");
+			Report.IsTrue(editUPC.WaitForContainerToBeInvisible(30), "The edit upc popup did not appear", "The edit upc appeared");
 			TestReport.StartStep("I Confirm the Case UPC is shown in the right hand table with the new selections");
-		
+
 			List<ForwardProductRegistration.SelectUPCs> upcsEdited = selForwardProdReg.GetUPCs();
 			if (upcsEdited.Count == 0)
 			{
@@ -1016,7 +1025,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					foundCaseUPC = true;
 
-					
+
 					if (item.ContainerType != secondRow["Container type"].ToString())
 					{
 						Report.Failure("Container Type did not found match");
@@ -1032,30 +1041,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Failure("Quantity did not match");
 						noIssues = false;
 					}
-					if (item.UPCContained!= null)
+					if (item.UPCContained != null)
 					{
 						Report.Failure("The Individual UPC contained in the Case Pack did not match");
 						noIssues = false;
-					}					
+					}
 					if (item.TransportationOption != secondRow["Transportation Options"].ToString())
 					{
 						string actualTransportOption = item.TransportationOption.Replace(" ", "").Trim();
-						string expectedTrasportOption= secondRow["Transportation Options"].ToString().Replace(" ", "").Trim();
-						if(actualTransportOption!=expectedTrasportOption)
+						string expectedTrasportOption = secondRow["Transportation Options"].ToString().Replace(" ", "").Trim();
+						if (actualTransportOption != expectedTrasportOption)
 						{
 							Report.Failure("The Trasnportations Option did not match");
 							noIssues = false;
-						}						
+						}
 					}
 
 					break;
-				}			
+				}
 
 			}
 			Report.IsTrue(foundCaseUPC, "The Case Upc with UPC number: " + upcNum + " was not found in the table.", "The Case Upc with UPC number: " + upcNum + " was found in the table.");
-			if(foundCaseUPC)
+			if (foundCaseUPC)
 			{
-				Report.IsTrue(noIssues, "The select UPCs table on the right side does not contain all of the new selections for the case UPC: "+upcNum+".", "The select UPCs table on the right contains all of the new selections for the case UPC: "+upcNum+".");
+				Report.IsTrue(noIssues, "The select UPCs table on the right side does not contain all of the new selections for the case UPC: " + upcNum + ".", "The select UPCs table on the right contains all of the new selections for the case UPC: " + upcNum + ".");
 			}
 
 			TestReport.StartStep("I click Continue");
@@ -1068,13 +1077,194 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("input value is " + savedAs + " . Looking in context for a product information with this value");
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string iD= productDetails.Id;
-			Report.IsTrue(iD.Any(), "iD was empty: "+iD, "iD contained: " + iD);
+			string iD = productDetails.Id;
+			Report.IsTrue(iD.Any(), "iD was empty: " + iD, "iD contained: " + iD);
 
 			Context.AddToContext("idStringSavedAs", iD);
 			new StepsForwardProductRegistration().SelectProductByIDSavedAs("idStringSavedAs");
 		}
 
+		[StepDefinition(@"I Look for an Alert every minute for a max of: (.*) minutes and when an alert is found I wait for the landing page for a max of: (.*) minutes")]
+		public void LookForAlertForXMinutesAndWaitForLandingPageForY(int alertWaitMinutes, int landingPageWaitMinutes)
+		{
 
+			bool alertAppeared = false;
+			bool landingPageAppeared = false;
+
+			for (int i = 0; i < alertWaitMinutes; i++)
+			{
+				if (SeleniumBrowser.Alert.WaitForAlert(60))
+				{
+					Report.Success("The Alert Appeared");
+					alertAppeared = true;
+					if (i == 0)
+					{
+						Report.Info("Waited for 1 minute or less before Alert appeared");
+					}
+					else
+					{
+						Report.Info("Alert appeared within: " + (i + 1) + " minutes");
+					}
+					for (int j = 0; j < landingPageWaitMinutes; j++)
+					{
+						if (new LandingPage().WaitForContainerToBeVisible(60))
+						{
+							Report.Success("The landing Page Appeared");
+							landingPageAppeared = true;
+							if (j == 0)
+							{
+								Report.Info("Waited for 1 minute or less before landing Page appeared");
+							}
+							else
+							{
+								Report.Info("landing Page appeared within: " + (j + 1) + " minutes");
+							}
+							return;
+						}
+					}
+					if (landingPageAppeared = false)
+					{
+						Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes");
+						return;
+					}
+				}
+			}
+
+			if (alertAppeared = false)
+			{
+				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for an Alert every minute for a max of: (.*) minutes")]
+		public void LookForAlertForXMinutes(int alertWaitMinutes)
+		{
+
+			bool alertAppeared = false;
+			Report.Info("Starting wait for Alert");
+			for (int i = 0; i < alertWaitMinutes; i++)
+			{
+				if (SeleniumBrowser.Alert.WaitForAlert(60))
+				{
+					Report.Success("The Alert Appeared");
+					alertAppeared = true;
+					if (i == 0)
+					{
+						Report.Info("Waited for 1 minute or less before Alert appeared");
+						return;
+					}
+					else
+					{
+						Report.Info("Alert appeared within: " + (i + 1) + " minutes");
+						return;
+					}
+				}
+			}
+
+			if (!alertAppeared)
+			{
+				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for an Alert for a max: (.*) minutes")]
+		public void LookForAlertForXMinutesTotal(int alertWaitMinutes)
+		{
+
+			bool alertAppeared = false;
+			Report.Info("Starting wait for Alert");
+			int i = 60 * alertWaitMinutes;
+			if (SeleniumBrowser.Alert.WaitForAlert(i))
+				{
+					Report.Success("The Alert Appeared");
+					alertAppeared = true;
+					return;
+				}			
+
+			if (!alertAppeared)
+			{
+				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for the Landing Page every minute for a max of: (.*) minutes")]
+		public void LookForLandingPageForXMinutes(int landingPageWaitMinutes)
+		{
+			bool landingPageAppeared = false;
+			for (int j = 0; j < landingPageWaitMinutes; j++)
+			{
+				if (new LandingPage().WaitForContainerToBeVisible(60))
+				{
+					Report.Success("The landing Page Appeared");
+					landingPageAppeared = true;
+					if (j == 0)
+					{
+						Report.Info("Waited for 1 minute or less before landing Page appeared");
+					}
+					else
+					{
+						Report.Info("landing Page appeared within: " + (j + 1) + " minutes");
+					}
+					return;
+				}
+			}
+			if (landingPageAppeared = false)
+			{
+				Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for the Landing Page for: (.*) minutes")]
+		public void LookForLandingPageForXMinutesTotal(int landingPageWaitMinutes)
+		{
+			bool landingPageAppeared = false;
+			int i = 60 * landingPageWaitMinutes;
+			if(new LandingPage().WaitForContainerToBeVisible(i))
+				{
+				Report.Success("The landing Page Appeared");
+				landingPageAppeared = true;					
+				return;
+				}
+			
+			if (landingPageAppeared == false)
+			{
+				Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for an Alert every minute for: (.*) minutes and when an alert is found I wait for the landing page for: (.*) minutes")]
+		public void LookForAlertForXMinutesAndWaitForLandingPageForYTotal(int alertWaitMinutes, int landingPageWaitMinutes)
+		{
+
+			bool alertAppeared = false;
+			bool landingPageAppeared = false;
+			int i = 60 * alertWaitMinutes;
+			int j = 60 * landingPageWaitMinutes;
+
+			
+			if (SeleniumBrowser.Alert.WaitForAlert(i))
+				{
+					Report.Success("The Alert Appeared");
+					alertAppeared = true;
+							
+					if (new LandingPage().WaitForContainerToBeVisible(j))
+						{
+							Report.Success("The landing Page Appeared");
+							landingPageAppeared = true;							
+							return;
+						}
+					
+					if (landingPageAppeared == false)
+					{
+						Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes",false);
+						return;
+					}
+				}			
+
+			if (alertAppeared == false)
+			{
+				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
+			}
+		}
 	}
 }

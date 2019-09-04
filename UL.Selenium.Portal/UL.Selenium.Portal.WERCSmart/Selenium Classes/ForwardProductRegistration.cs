@@ -31,6 +31,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			ReadOnlyCollection<IWebElement> errors = this.containerElement.FindElements(By.XPath(".//i[contains(@class, 'exclamation')]"));
 			return errors.Count > 0;
 		}
+		public bool ErrorsDisplayed()
+		{
+			bool errorsDisplayed = this.containerElement.FindElement(By.XPath(".//i[contains(@class, 'exclamation')]//ancestor::p//ancestor::div[@data-bind and @style]"),2).Displayed;
+			return errorsDisplayed;
+		}
+
 
 		public List<string> ListOfRetailers()
 		{
@@ -243,7 +249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			string[] avoidRetailersArray = new string[] { presentRetailer, "Best Buy", "Dick's Sporting Goods", "Kroger" };
+			string[] avoidRetailersArray = new string[] { presentRetailer, "Best Buy", "Dick's Sporting Goods", "Kroger","Canadian Tire"};
 
 			var retailer = retailerInputs.FirstOrDefault(x => !avoidRetailersArray.Contains(x.GetValue(true)));
 

@@ -61,10 +61,10 @@ Then In the Add Multiple dialog box I select all UPCs
 Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 Then Click Yes on the inactivity popup
 Then I confirm the Inactivity pop is closed
-Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
-Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-Then Click No on the inactivity popup
-And the landing page should load
+#Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
+#Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
+#Then Click No on the inactivity popup
+#And the landing page should load
 
 @Timeout2
 @TReVorId:23420
@@ -102,86 +102,29 @@ Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest8253
 Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
 Then In the Add Multiple dialog box I select all UPCs
 Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-Then I wait for 960 seconds
-And the landing page should load
+Then I Look for the Landing Page for: 16 minutes
+#Then I wait for 960 seconds
+#And the landing page should load
 
 @Timeout3
 @TReVorId:23421
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can be interacted with
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Then  I click the following option in the bottom menu: Search
-	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
-	And In SHA Manager ProductSearch page I run search:
-		| Search Term | Search Value                  |
-		| Status      | Completed                     |
-		| Supplier    | QA_Automation_ProductsAccount |
-		| User        | saved as AccountUsername      |
-	Then I save a UPC number for any product in the grid to context as: ExistingUPC
-	Given I navigate to the landing page
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Then  I filter the products by: Accepted by Retailers
-	And I save the ProductID of the first Product in the grid as: testProduct91157
-	Given I click Bulk Actions in the Products Grid
-	Given I click Forward Product Registration in the Bulk Actions window
-	Then I should see the header: Forward Product Registration on the Forward Product Registration window
-	And I confirm the active Forward Product Registration tab is: Select Products	
-	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
-	And I select the product with ID saved as: testProduct91157 under the right hand panel of the Select Products tab
-	Given I click continue on the Forward Product Registration page
-	Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
-	And I click continue on the Forward Product Registration page
-	Given I select the first product under the Select UPCs tab
-	Given I click the Add UPC button under the Select UPCs tab
-	And In the Add UPC modal window I enter the following information:
-		| UPC Number           | Type    | Size (Ounces) | Retailer   |
-		| saved as ExistingUPC | <first> | 1             | Select all |
-	And In the UPC modal window I click Save
-	Then I check alert text contains There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. and dismiss 
-	Then In the UPC modal window I click Cancel
-	Then I click the Home navigation icon and an alert appears
-	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
-	Then Click Yes on the inactivity popup
-	Then I confirm the Inactivity pop is closed
-
+Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
+Then I Look for an Alert for a max: 1 minutes
+Then I confirm the Inactivity pop is open but dont take a screenshot
+Then Click Yes on the inactivity popup but dont take a screenshot
+Then I confirm the Inactivity pop is closed but dont take a screenshot
+And I take a ScreenShot
 
 @Timeout4
 @TReVorId:23422
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- TimeoutFeature Works Correctly 
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Then  I click the following option in the bottom menu: Search
-	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
-	And In SHA Manager ProductSearch page I run search:
-		| Search Term | Search Value                  |
-		| Status      | Completed                     |
-		| Supplier    | QA_Automation_ProductsAccount |
-		| User        | saved as AccountUsername      |
-	Then I save a UPC number for any product in the grid to context as: ExistingUPC
-	Given I navigate to the landing page
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Then  I filter the products by: Accepted by Retailers
-	And I save the ProductID of the first Product in the grid as: testProduct91157
-	Given I click Bulk Actions in the Products Grid
-	Given I click Forward Product Registration in the Bulk Actions window
-	Then I should see the header: Forward Product Registration on the Forward Product Registration window
-	And I confirm the active Forward Product Registration tab is: Select Products	
-	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
-	And I select the product with ID saved as: testProduct91157 under the right hand panel of the Select Products tab
-	Given I click continue on the Forward Product Registration page
-	Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
-	And I click continue on the Forward Product Registration page
-	Given I select the first product under the Select UPCs tab
-	Given I click the Add UPC button under the Select UPCs tab
-	And In the Add UPC modal window I enter the following information:
-		| UPC Number           | Type    | Size (Ounces) | Retailer   |
-		| saved as ExistingUPC | <first> | 1             | Select all |
-	And In the UPC modal window I click Save
-	Then I check alert text contains There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. and dismiss 
-	Then In the UPC modal window I click Cancel
-	Then I click the Home navigation icon and an alert appears
-	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
-	Then I wait for 960 seconds
-	And the landing page should load
-
+Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
+Then I Look for an Alert every minute for: 4 minutes and when an alert is found I wait for the landing page for: 20 minutes
 
 @TReVorId:23423
 Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup-Inactivity Popup can be interacted with
@@ -211,12 +154,8 @@ Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup-Inactivity Popup c
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add Case UPC button under the Select UPCs tab
 	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-	Then Click Yes on the inactivity popup and no screenshot is taken
+	Then Click Yes on the inactivity popup
 	Then I confirm the Inactivity pop is closed	
-	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-	Then Click No on the inactivity popup
-	And the landing page should load
-
 
 @TReVorId:23424
 Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup- TimeoutFeature Works Correctly
@@ -246,9 +185,12 @@ Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup- TimeoutFeature Wo
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add Case UPC button under the Select UPCs tab
 	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-	Then I wait for 960 seconds
-	And the landing page should load
-	
+	Then I Look for the Landing Page every minute for a max of: 16 minutes
+	Then I Look for an Alert every minute for a max of: 4 minutes
+
+	#Then I wait for 960 seconds
+	#And the landing page should load
+	#
 
 
 

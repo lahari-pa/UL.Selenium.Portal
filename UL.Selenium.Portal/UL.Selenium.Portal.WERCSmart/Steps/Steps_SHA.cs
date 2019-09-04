@@ -2546,8 +2546,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Check that the product under the retailer: (.*) is under the status: (.*)")]
 		public void ICheckProductUnderRetailerStatus(string retailer,string expectedStatus)
 		{
+			Report.Info("The Status We expect is: " + expectedStatus);
 			string actualStatus = new StudioSHAManager().GetproductStatusByRetailer(retailer);
-
+			Report.Info("The Status that is actually showing is: " + actualStatus);
 			Report.IsTrue(actualStatus == expectedStatus, "The Product under retailer: " + retailer + " was not in the expected status", "The Product under retailer: " + retailer + " was in the expected status");
 		}
     }

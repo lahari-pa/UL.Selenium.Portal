@@ -1089,17 +1089,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickUPCSavedAsInProducUPCTable(string savedAs)
 		{
+			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
 			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
 			foreach(var item in rows)
 			{
 				IWebElement linkBox = item.FindElement(By.XPath(".//a"), 2);
 
-				if(linkBox.Text.Contains(savedAs+"*"))
+				if(linkBox.Text.Contains(expectedUPCNum+"*"))
 				{
 					return linkBox.TryClick();
 				}
 			}
-			Report.Failure("Could not Find UPC Link for the UPC saved as: " + savedAs);
+			Report.Failure("Could not Find UPC Link for the UPC: " + expectedUPCNum);
 			return false;
 		}
 
@@ -1283,8 +1284,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetproductStatusByRetailer(string retailer)
 		{
+
+
 			
-			Report.Info("Beginning get product status by id: " + retailer);
 			string retailerStatus = "";
 			string retailerAbbr = "";
 
@@ -1297,8 +1299,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 			}
+			Report.Info("Beginning get product status by retailer: " + retailer);
+
 			var abbr = new RetailerAbbreviations();
 			abbr.Map.TryGetValue(retailer, out retailerAbbr);
+			Report.Info("Search for Retailer with Initials: " + retailerAbbr);
 			try
 			{
 				int retailerIndex = SeleniumBrowser.WebBrowser
@@ -1309,26 +1314,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var mySHAManager = new StudioSHAManager();
 				mySHAManager.Wait_for_load();
 				Product matchingProduct = mySHAManager.GetTopXProducts(2).FirstOrDefault(x => x.Clients == retailerAbbr);
+				Report.Info("The Reatailer initials found are: "+matchingProduct.Clients);
+				Report.Info("The Status Found for the Product. The Status is: "+ matchingProduct.Status);
+				retailerStatus = matchingProduct.Status;
 
-				if(matchingProduct==null)
+				if (matchingProduct==null)
 				{
 					Report.Failure("Could not find a Product with retailer: " + retailerAbbr + ".");
 					return null;
-				}
-
-				IWebElement matchingTD = SeleniumBrowser.WebBrowser
-					.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (retailerIndex + 1).ToString() + "]"))
-					.FirstOrDefault(x => x.GetValue().Trim() == retailerAbbr);
-				IWebElement matchingSpan = matchingTD.FindElement(By.XPath(".//span"));
-				string colour = matchingTD.FindElement(By.XPath(".//span")).GetCssValue("color").ToString();
-
-				retailerStatus= matchingSpan.GetAttribute("class").Replace("bold", "", StringComparison.InvariantCultureIgnoreCase).Trim();
+				}				
 
 			}
 			catch (Exception)
 			{
 				return null;
-			}
+			}			
 
 			return retailerStatus;
 		}

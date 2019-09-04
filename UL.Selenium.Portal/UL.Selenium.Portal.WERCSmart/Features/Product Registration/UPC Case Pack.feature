@@ -331,7 +331,7 @@ And I call Shared Step 87897 (Forwarding - Edit Existing Case UPC: UPC876851 - c
 | Paper bag      | 2    | 4        | <UPC87685>                                | 4A:  steel box                      |
 | Aerosol Can    | 4    | 8        | Individual UPC contained in the Case Pack | 1A1:  non-removable head steel drum |
 Then I confirm the active Forward Product Registration tab is: Product Results
-And I confirm that NO Errors display for the Product
+And I confirm that there are NO Errors displayed for the Product
 And I click continue on the Forward Product Registration page
 Then I confirm the active Forward Product Registration tab is: Review & Submit
 Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab

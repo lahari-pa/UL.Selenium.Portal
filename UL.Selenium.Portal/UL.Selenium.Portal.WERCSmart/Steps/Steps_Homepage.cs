@@ -1033,5 +1033,73 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.IsTrue(clicked, $"Failed to click the '{button}' button", $"Successfully clicked the '{button}' button",false,false);
 		}
+
+		[StepDefinition(@"Click (Yes|No) on the inactivity popup but dont take a screenshot")]
+		public void GivenClickOnInactivityPopupNoScreenShot(string button)
+		{
+			Report.Info("Clicking " + button + " on inactivity popup");
+			var selInactivityPopup = new InactivityPopup();
+			bool clicked = false;
+			switch (button)
+			{
+				case ("Yes"):
+					clicked = selInactivityPopup.ClickYes();
+					break;
+				case ("No"):
+					clicked = selInactivityPopup.ClickNo();
+					break;
+				default:
+					Report.Error("Button parameter must be 'Yes' or 'No'!");
+					return;
+			}
+			if(clicked)
+			{
+				Report.Success($"Successfully clicked the '{button}' button");
+			}
+			if(!clicked)
+			{
+				Report.Failure($"Failed to click the '{button}' button", false);
+			}
+			
+		}
+
+		[StepDefinition(@"I confirm the Inactivity pop is closed but dont take a screenshot")]
+		public void ConfirmInactivityPopupIsClosedNoScreenShot()
+		{
+			Report.IsTrue(new InactivityPopup().WaitForContainerToBeInvisible(), "The Inactivity popup was not closed!", "The Inactivity popup was closed.",false,false);
+		}
+
+		[StepDefinition(@"I confirm the Inactivity pop is open but dont take a screenshot")]
+		public void ConfirmInactivityPopupIsOpendNoScreenShot()
+		{
+			Report.IsTrue(new InactivityPopup().WaitForContainerToBeVisible(),"The Inactivity popup was not open.", "The Inactivity popup was open", false, false);
+		}
+
+		[StepDefinition(@"I take a ScreenShot")]
+		public void ITakeAScreenShot()
+		{
+			Report.Info("I take a screenshot");
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I Check the Alert with text: (.*) has the ID: (.*)")]
+		public void ICheckAlertWithTextXHasIDY(string alertText, string expxectedAlertID)
+		{
+			try
+			{
+				Report.Info("Finding Alert with Text: "+alertText);
+				var selHomepage = new Homepage();
+				string actualID= new Homepage().GetAllAlertsAndGetAlertWithTextXAndReturnID(alertText);
+				Report.Info("Actual AlertID: " + actualID);
+				Report.Info("Expected AlertID: " + expxectedAlertID);
+				Report.IsTrue(actualID==expxectedAlertID, "The Alert ID was not as expected!", "The Alert ID was as expected!");							   		
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 	}
 }
