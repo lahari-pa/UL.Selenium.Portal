@@ -708,14 +708,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_PremiumSubscription", "123-456-7889",
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_PremiumSubscription", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_PremiumSubscription", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
 			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
 			var myPay = new Steps_PaymentMethods();
-			
+			var myAccountSteps = new StepsMyAccount();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
 			this.BasicSignup(savedAs);
 			myHome.ThenIClickOnUserItem("My Account");
@@ -738,6 +741,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
 			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("100", "100", "100");
+
+			//create a product for Dollar Tree data tier
+			myProductsetup.CreateProductConditionerForDollarTreeAndTakeToDataSummary("product5", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Dollar Tree Stores, Inc. / Greenbrier International, Inc");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			//Save account and update TReVor data
 			Report.Info(savedAs + " Created");
