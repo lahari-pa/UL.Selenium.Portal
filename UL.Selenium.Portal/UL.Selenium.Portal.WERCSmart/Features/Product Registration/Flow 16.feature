@@ -389,3 +389,68 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59275. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Carbon Zinc Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59275
+
+
+Scenario: [97484] Stand alone Lead Acid non spill-able Battery
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
+	Then I save the product information as: TestCase97484
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Given I should see the Additional Product Information Page
+	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Lead sulfate  | 50      | false               | false       |            |
+		| Aqua          | 50      | false               | false       |            |
+	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click continue
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 230                      | 55.4                    | 33.3      | Black      | Acidic | No data available | 1.44                  |
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid (Non-Spillable) Battery
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97484
+
+
+Scenario: [97470] Stand alone Lead Acid Battery
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead acid battery
+	Then I save the product information as: TestCase97484
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Given I should see the Additional Product Information Page
+	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Lead sulfate  | 50      | false               | false       |            |
+		| Aqua          | 50      | false               | false       |            |
+	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click continue
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 230                      | 55.4                    | 33.3      | Black      | Acidic | No data available | 1.44                  |
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead acid battery
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97484

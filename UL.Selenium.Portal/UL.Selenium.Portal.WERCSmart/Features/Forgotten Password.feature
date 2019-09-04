@@ -4,6 +4,7 @@
 @ForgottenPassword
 @wercsmart
 @Signup
+@UPC
 @run_ForgottenPassword
 
 Feature: Forgotten Password
@@ -56,7 +57,7 @@ Given I click on the Forgot Your Password Link
 Given I enter a email address: savedas AllRetailersProductsCompany
 And I click the continue button
 Then there should be a new email for email Address saved as: AllRetailersProductsCompany from: <SiteNotification> with the title: WERCSmart Password Reset
-And the body of the email should show: Dear WERCSmart User, We received a request to reset the password associated with your account. Please click on the link to reset your password. If you did not request to have your password reset, please contact Customer Support at +1 (877) 642-6753 immediately. If you would like to change your password in the future, please log in to your account and select Reset Password under Actions in the My Account section. Thank you! UL WERCSmart Customer Support Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).
+And the body of the email should show: Dear WERCSmart User, We received a request to reset the password associated with your account. Please click on the link to reset your password. If you did not request to have your password reset, please contact Customer Support at +1 (877) 642-6753 immediately. If you would like to change your password in the future, please log in to your account and select Reset Password under Actions in the My Account section. Thank you! UL WERCSmart Customer Support Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s);and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s). This e-mail may contain privileged or confidential information. If you are not the intended recipient: (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify the sender by reply e-mail, and then deletethis message and its attachment(s). Underwriters Laboratories Inc. and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachments.
 When I click the link in the email I get directed to security questions
 
 #pass - staging 4.10
