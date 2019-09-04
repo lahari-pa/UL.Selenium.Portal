@@ -18,6 +18,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
@@ -2431,6 +2432,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("input values must be either 'should' or 'should not'");
 			}
 		}
+
 		#endregion
 	}
 

@@ -288,11 +288,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return selectedOption?.FindElement(By.XPath("../..//label/span"), 2)?.Text;
 		}
 
+		public bool ControlLabelIsDisplayed(string lblText)
+		{
+			return this.SectionControlLabels.Any(x => x.Text.Contains(lblText));
+		}
+
 		public string SelectedRadioForLabel(string lblText)
 		{
 			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
 			IWebElement selectedOption = label?.FindElements(By.XPath("../..//input[@type='radio']"), 2)?.FirstOrDefault(x => x.Selected);
 			return selectedOption?.FindElement(By.XPath("./following-sibling::span"), 2)?.Text;
+		}
+
+		public bool SelectRadioForLabel(string lblText, string optionText)
+		{
+			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
+			IWebElement option = label?.FindElement(By.XPath($@"../..//input[@type='radio' and ./following-sibling::span[contains(text(), ""{optionText}"")]]"), 2);
+			return option.TryClick();
+		}
+
+		public List<string> RadioButtonsForLabelSection(string lblText)
+		{
+			IWebElement label = SectionControlLabels.FirstOrDefault(x => x.Text.Contains(lblText));
+            IList<IWebElement> radios = label.FindElements(By.XPath("./following-sibling::div//div[@class='radio']//span"), 2);
+			if (radios.Count == 0)
+			{
+				return new List<string>();
+			}
+			return radios.Select(x => x.Text).ToList();
 		}
 
 		public string CheckedInputForLabel(string lblText)

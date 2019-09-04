@@ -13,17 +13,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 		public string EcologoReadinessAssesmentQuestion = "Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment. This report will indicate if the product is eligible to be awarded an ECOLOGO Certification, an established symbol of reduced environmental impact. Would you like to receive this assessment?";
 
-        // Question is displayed
-        public bool EcologoReadinessQuestionDisplayed => this.SectionExists(EcologoReadinessAssesmentQuestion);
+        public bool EcologoReadinessQuestionDisplayed => this.ControlLabelIsDisplayed(this.EcologoReadinessAssesmentQuestion);
         
-		// Options for question
-		public List<string> EcologoReadinessAssesmentOptions => this.RadioButtonsInSection(EcologoReadinessAssesmentQuestion);
+		public List<string> EcologoReadinessAssesmentOptions => this.RadioButtonsForLabelSection(this.EcologoReadinessAssesmentQuestion);
 
-
-		// Set/ get question options
 		public string EcologoReadinessAssesment {
-			get => this.CheckedInputForLabel(EcologoReadinessAssesmentQuestion);
-            set => this.SelectRadio(EcologoReadinessAssesmentQuestion, value);
+			get => this.SelectedRadioForLabel(this.EcologoReadinessAssesmentQuestion);
+            set => this.SelectRadioForLabel(this.EcologoReadinessAssesmentQuestion, value);
 		}
 	}
 }

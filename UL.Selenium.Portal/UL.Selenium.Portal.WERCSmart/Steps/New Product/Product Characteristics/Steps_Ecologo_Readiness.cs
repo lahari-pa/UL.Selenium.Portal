@@ -21,37 +21,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 			Report.Info("Expected page heading is: " + this._ecologoReadiness.PanelTitle);
 			Report.IsTrue(this._ecologoReadiness.IsActivePanel, "The Ecologo Readiness page did not load!", "The Ecologo Readiness page loaded");
 		}
-
-		[StepDefinition("@I set the ECOLOGO Readiness Assessment question to: (Yes|Not at this time)")]
-		public void SetEcologoReadinessAssessmentQuestion(string value)
-		{
-            Report.Info("The label text for Ecologo Readiness Assessment question is: " + this._ecologoReadiness.EcologoReadinessAssesmentQuestion);
-            Report.Info("Setting radio to: " + value);
-			this._ecologoReadiness.EcologoReadinessAssesment = value;
-			Report.IsTrue(this._ecologoReadiness.EcologoReadinessAssesment == value, "Failed to set Ecologo Readiness question to: " + value, "Set Ecologo Readiness question to: " + value);
-		}
-
+        
 		[StepDefinition(@"I confirm the ECOLOGO Readiness Assessment question is displayed")]
 		public void ConfirmEcologoReadinessAssessmentQuestionDisplayed()
 		{
             Report.Info("The ECOLOGO Readiness Assessment question has expected text: " + this._ecologoReadiness.EcologoReadinessAssesmentQuestion);
 			Report.IsTrue(this._ecologoReadiness.EcologoReadinessQuestionDisplayed, "The ECOLOGO Readiness question was not displayed!", "The ECOLOGO Readiness question was displayed");
 		}
-		
-		[StepDefinition("@I confirm the ECOLOGO Readiness Assessment question shows the following options:")]
-		public void ConfirmEcologoReadinessQuestionOptions(Table values)
-        {
-            var expectedOptions = new List<string>();
-	        foreach (var row in values.Rows)
-	        {
-                Report.Info("Expect option: " + row["Option"]);
+
+		[StepDefinition(@"the ECOLOGO Readiness Assessment question should show the following options:")]
+		public void TestEcologoStep(Table values)
+		{
+			var expectedOptions = new List<string>();
+			foreach (var row in values.Rows)
+			{
+				Report.Info("Expect option: " + row["Option"]);
 				expectedOptions.Add(row["Option"]);
 			}
-	        Report.Info("The label text for Ecologo Readiness Assessment question is: " + this._ecologoReadiness.EcologoReadinessAssesmentQuestion);
-            Report.Info("Getting radio input labels for the question");
-	        var actualOptions = this._ecologoReadiness.EcologoReadinessAssesmentOptions;
-            Report.Info("Displayed options are: " + string.Join(", ", actualOptions));
+			Report.Info("The label text for Ecologo Readiness Assessment question is: " + new EcologoReadiness().EcologoReadinessAssesmentQuestion);
+			Report.Info("Getting radio input labels for the question");
+			var actualOptions = new EcologoReadiness().EcologoReadinessAssesmentOptions;
+			Report.Info("Displayed options are: " + string.Join(", ", actualOptions));
 			Report.IsTrue(!actualOptions.Except(expectedOptions).Any(), "The displayed options did not match the expected options!", "The displayed options matched the expected options");
+
+		}
+
+		[StepDefinition(@"I set ECOLOGO Readiness Assessment to: (Yes|Not at this time)")]
+		public void SetEcologoReadiness(string value)
+		{
+			Report.Info("The label text for Ecologo Readiness Assessment question is: " + this._ecologoReadiness.EcologoReadinessAssesmentQuestion);
+			Report.Info("Setting radio to: " + value);
+			this._ecologoReadiness.EcologoReadinessAssesment = value;
+			Report.IsTrue(this._ecologoReadiness.EcologoReadinessAssesment == value, "Failed to set Ecologo Readiness question to: " + value, "Set Ecologo Readiness question to: " + value);
+
 		}
 
 	}
