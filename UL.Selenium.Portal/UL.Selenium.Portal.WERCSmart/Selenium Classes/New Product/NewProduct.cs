@@ -45,6 +45,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#endregion
 
 		#region New Product general methods
+
+		public string PanelTitle { get; }
+
 		public string HeaderText => this.Header?.Text;
 
 		public string ProductId {
@@ -75,6 +78,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(@".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2);
 			return els.Count == 0 ? new List<string>() : els.Select(x => x.Text).ToList();
+		}
+
+		public string GetErrorForSection(string section)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(@".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2);
+			return el?.Text;
 		}
 
 		public List<InputError> GetAllErrors()
@@ -191,7 +200,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
 			return this.containerElement.WaitUntilElementVisible(this.ActivePanelHeadingLocator(sectionHeader), secondsToWait) != null;
-			//return this.ActivePanelHeading.WaitUntilTextContains(sectionHeader, secondsToWait);
 		}
 
 		public bool ClickSection(string section)
@@ -201,6 +209,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return sectionEl != null && sectionEl.TryClick();
 		}
 
+		/// <summary>
+		/// returns whether or not the active panel heading matches the 'PanelTitle' string for the NewProduct 'page' (step)
+		/// </summary>
+		public bool IsActivePanel => this.WaitForSection(PanelTitle);
+		
 		/// <summary>
 		/// Waits until Tab (enum: ProductType, ProductCharacteristics...) is active in the progress bar during a timeout period
 		/// Returns whether the tab is active
@@ -275,6 +288,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return selectedOption?.FindElement(By.XPath("../..//label/span"), 2)?.Text;
 		}
 
+		public bool ControlLabelIsDisplayed(string lblText)
+		{
+			return this.SectionControlLabels.Any(x => x.Text.Contains(lblText));
+		}
+
+		public string SelectedRadioForLabel(string lblText)
+		{
+			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
+			IWebElement selectedOption = label?.FindElements(By.XPath("../..//input[@type='radio']"), 2)?.FirstOrDefault(x => x.Selected);
+			return selectedOption?.FindElement(By.XPath("./following-sibling::span"), 2)?.Text;
+		}
+
+		public bool SelectRadioForLabel(string lblText, string optionText)
+		{
+			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
+			IWebElement option = label?.FindElement(By.XPath($@"../..//input[@type='radio' and ./following-sibling::span[contains(text(), ""{optionText}"")]]"), 2);
+			return option.TryClick();
+		}
+
+		public List<string> RadioButtonsForLabelSection(string lblText)
+		{
+			IWebElement label = SectionControlLabels.FirstOrDefault(x => x.Text.Contains(lblText));
+            IList<IWebElement> radios = label.FindElements(By.XPath("./following-sibling::div//div[@class='radio']//span"), 2);
+			if (radios.Count == 0)
+			{
+				return new List<string>();
+			}
+			return radios.Select(x => x.Text).ToList();
+		}
+
 		public string CheckedInputForLabel(string lblText)
 		{
 			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
@@ -293,6 +336,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
 			return label.FindElement(By.XPath("../following-sibling::div//input[@type ='text']"), 2)?.GetValue();
+		}
+
+		public void EnterTextToLabelnput(string lblText, string value)
+		{
+			IWebElement label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
+			IWebElement input = label?.FindElement(By.XPath("../following-sibling::div//input[@type ='text']"), 2);
+			if (input != null)
+			{
+				input.EnterText(value);
+			}
+			else
+			{
+				throw new Exception("Label not found as expected.");
+			}
 		}
 
 		/// <summary>
@@ -826,6 +883,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		/// <summary>
+		/// 'formulation third party' screen
+		/// </summary>
 		public bool SelectGrantedRadio()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Granted')]/../input"), 2);
@@ -837,6 +897,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el.TryClick();
 		}
 
+		/// <summary>
+		/// 'formulation third party' screen
+		/// </summary>
 		public bool GrantedRadioIsSelected()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Granted')]/../input"), 2);
@@ -1701,49 +1764,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 
 		/// <summary>
-		/// Product has been granted an Alternative Control Plan option
-		/// </summary>
-		public bool AlternateControlPlan {
-			get
-			{
-				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Product has been granted an Alternative Control Plan"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
-
-				if (selectOption != null)
-				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					Report.Info("Selected option is: " + selectedOption);
-					if (selectedOption.ToLower() == "yes")
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				}
-				else
-				{
-					throw new Exception("No Product has been granted an Alternative Control Plan option is selected");
-				}
-			}
-			set
-			{
-				string valueToSet = "Yes";
-				if (!value)
-				{
-					valueToSet = "No";
-				}
-
-				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Product has been granted an Alternative Control Plan"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
-				selectOption.Click();
-			}
-		}
-
-		/// <summary>
 		/// Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation radio options
 		/// </summary>
 		public string ProductDoesNotContainGramsOfVoc {
@@ -1883,86 +1903,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return colour;
 		}
 
-		/// <summary>
-		/// Product label specifies a dilution ratio option
-		/// </summary>
-		public bool ProductLabelDilutionRatio {
-			get
-			{
-				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Product label specifies a dilution ratio"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
-
-				if (selectOption != null)
-				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					Report.Info("Selected option is: " + selectedOption);
-					if (selectedOption.ToLower() == "yes")
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				}
-				else
-				{
-					throw new Exception("No Product label specifies a dilution ratio option is selected");
-				}
-			}
-			set
-			{
-				string valueToSet = "Yes";
-				if (!value)
-				{
-					valueToSet = "No";
-				}
-
-				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Product label specifies a dilution ratio"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
-				selectOption.Click();
-			}
-		}
-
-		/// <summary>
-		/// Product's VOC content as sold text box
-		/// </summary>
-		public string ProductsVocContentAsSold {
-			get
-			{
-				IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Product's VOC content as sold"));
-
-				if (lbl != null)
-				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
-					return input.Text;
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-			set
-			{
-				IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Product's VOC content as sold"));
-
-				if (lbl != null)
-				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
-					input.EnterText(value);
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-		}
 
 		public bool VOCConcentrationQuestionHasYesAndNo()
 		{
@@ -2019,85 +1959,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				IList<IWebElement> errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"), 2);
 				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
-			}
-			catch (Exception)
-			{
-				return null;
-			}
-		}
-
-		public string VOCContentsAsSoldError()
-		{
-			IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-				.FirstOrDefault(x => x.Text.Contains("Product's VOC content as sold"));
-
-			if (lbl != null)
-			{
-				try
-				{
-					IWebElement error = lbl.FindElement(By.XPath("../..//input/../p//span"));
-					if (error != null)
-					{
-						return error.Text;
-					}
-					else
-					{
-						return null;
-					}
-				}
-				catch (Exception)
-				{
-					return null;
-				}
-			}
-			throw new Exception("Label not found as expected.");
-		}
-
-		/// <summary>
-		/// Product's VOC content as used text box
-		/// </summary>
-		public string ProductsVocContentAsUsed {
-			get
-			{
-				IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Product's VOC content as used"));
-
-				if (lbl != null)
-				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
-					return input.Text;
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-			set
-			{
-				IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Product's VOC content as used"));
-
-				if (lbl != null)
-				{
-					IWebElement input = lbl.FindElement(By.XPath("../..//input"));
-					input.EnterText(value);
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-		}
-
-		public string VOCContentsAsUsedError()
-		{
-			IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Product's VOC content as used"));
-			try
-			{
-				IWebElement error = lbl.FindElement(By.XPath("../..//input/../p//span"));
-				return error?.Text;
 			}
 			catch (Exception)
 			{
@@ -2676,7 +2537,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
-
+		
 		// NB only works fr select/option
 		public bool SetOptionInSectionByValue(string section, string value, string text)
 		{
