@@ -8500,8 +8500,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
 
+			Report.IsTrue(upcNumber != null, "There were no UPC numbers containing a *", "There was a UPC number containing a *");
+			Report.IsTrue(upcNumber.Contains(expectedUPCNum), "The UPC number found did not contain the upc number: " + expectedUPCNum, "The UPC number found coontained the upc number: " + expectedUPCNum);
 			
-			Report.IsTrue(upcNumber == null && upcNumber.Contains(expectedUPCNum), "Failed to find the upc number: " + expectedUPCNum + " followed by an asterisk", "Succesfully found the upc number: " + expectedUPCNum + " followed by an asterisk");
+			Report.IsTrue(upcNumber != null && upcNumber.Contains(expectedUPCNum), "Failed to find the upc number: " + expectedUPCNum + " followed by an asterisk", "Succesfully found the upc number: " + expectedUPCNum + " followed by an asterisk");
 
 			TestReport.StartStep("I Click on the link associated with the Case UPC marked by an asterisk");
 			studioSHAManger.ClickUPCSavedAsInProducUPCTable(savedAs);
