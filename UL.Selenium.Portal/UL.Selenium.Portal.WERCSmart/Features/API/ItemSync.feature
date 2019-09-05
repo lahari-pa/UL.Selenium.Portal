@@ -36,8 +36,8 @@ Scenario: [108810]ItemSync
 		| UPC108810    | 9               |
 		| UPC2         | 9               |
 	#	Then I start the ItemSync post process
+	Given I move the product saved as 108810Product created for ItemSync from Submitted to Completed
 	Given I authenticate ItemSync username: QATest, password: c06Q3@!gRzNzqk
 	Given I save the Item Sync report as: report108810 using Retailer GUID: 16793FA3-452C-45B6-AF48-969AFDF58216 and
 		| UPC saved as | Expected Status |
 		| UPC108810    | 1               |
-	Given I move the product saved as 108810Product created for ItemSync from Submitted to Completed
