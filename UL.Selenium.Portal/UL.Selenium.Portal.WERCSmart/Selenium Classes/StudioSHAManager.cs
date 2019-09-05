@@ -2474,36 +2474,80 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override IWebElement containerElement { get; set; }		
 
-		public IWebElement SelectClientInput => this.containerElement.FindElement(By.XPath(".//select[contains(@id,'clients')]"), 5);
+		public IWebElement SelectClientInput => this.containerElement.FindElement(By.XPath(".//select[contains(@id,'clients')]"), 5);	
+		
+
+	}
+
+	class StudioSHAManagerUPCDetailsPopupTable : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class,'ui-dialog ui-widget')]");
+
+		public IWebElement UPCDetailsTable => this.containerElement.FindElement(By.XPath(".//table[@class='upcDetails']"), 30);
+
+		public IWebElement CloseButton => this.containerElement.FindElement(By.XPath(".//button"), 2);
+
+		//public bool UpcDeatilsTableLoaded()
+
+		//{
+
+		//	bool displayed = false;
+		//	try
+		//	{
+		//		displayed = this.containerElement.FindElement(By.XPath(".//table[@class='upcDetails']"), 30).Displayed;
+		//	}
+		//	catch (NullReferenceException e)
+		//	{
+		//		displayed = false;
+		//	}
+		//	return displayed;
+		//}
+
+		public bool UpcDetailsTableLoadedOrNull(int secondsToWait)
+		{
+			bool loaded = false;
+
+			for (int i=0; i<secondsToWait; i++)
+			{
+				IWebElement detailsTable = this.containerElement.FindElement(By.XPath(".//table[@class='upcDetails']"), 30);
+				
+				if (detailsTable != null)
+				{
+					loaded= true;
+					Report.Info("Table Loaded after: " + i + " seconds.");
+					return loaded;
+
+				}				
+			}
+			return loaded;
+
+
+		}
 
 		public string DetailValue(string detailType)
 
 		{
 			IList<IWebElement> row = this.containerElement.FindElements(By.XPath(".//tbody//tr//td[1]"), 2).ToList();
 
-			foreach(var item in row)
+			foreach (var item in row)
 			{
-				if(item.Text.Contains(detailType))
+				if (item.Text.Contains(detailType))
 
 				{
 					string valueBoxText = item.FindElement(By.XPath(".//following-sibling::td"), 2).Text;
-					return valueBoxText;					
+					return valueBoxText;
 				}
-					
+
 			}
 
 			Report.Failure("The Row containing: " + detailType + " could not be found");
-			return null; 
-
-
-			
-
+			return null;
 
 		}
-		
 
+		
 	}
 
 

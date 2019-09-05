@@ -8495,17 +8495,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Made a List of the displayed UPCs");
 			}
 
+
 			var upcNumber = displayedUpcs.FirstOrDefault(x => x.UPCNumber.EndsWith("*"))?.UPCNumber;
 
 			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
 
-			Report.IsTrue(upcNumber == null && upcNumber == expectedUPCNum, "Failed to find the upc number: " + expectedUPCNum + " followed by an asterisk", "Succesfully found the upc number: " + expectedUPCNum + " followed by an asterisk");
+			
+			Report.IsTrue(upcNumber == null && upcNumber.Contains(expectedUPCNum), "Failed to find the upc number: " + expectedUPCNum + " followed by an asterisk", "Succesfully found the upc number: " + expectedUPCNum + " followed by an asterisk");
 
 			TestReport.StartStep("I Click on the link associated with the Case UPC marked by an asterisk");
 			studioSHAManger.ClickUPCSavedAsInProducUPCTable(savedAs);
 			TestReport.StartStep("I Check the UPC detail popup appears");
 			var upcDetails = new StudioSHAManagerUPCDetails();
-			Report.IsTrue(upcDetails.Wait_for_load(30),"The UPC details popup did not appear","The UPC details popup appeared");
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			Report.IsTrue(upcDetails.Wait_for_load(30),"The UPC details popup did not appear","The UPC details popup appeared");	
 			TestReport.StartStep("I Select the Client: " + retailer + " from the select client list");
 
 			
@@ -8518,26 +8521,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			input.Select(retailer);
 			TestReport.StartStep("I wait for the UPC Details Table to Load");
-			//Wait for load on the table before continue
+			//Wait for load of the table before continue
+			//Report.IsTrue(upcDetailsPopup.UpcDeatilsTableLoaded(),"The UPC Details Table did not appear", "The UPC Details Table appeared");
+			Report.IsTrue(upcDetailsPopupTable.UpcDetailsTableLoadedOrNull(30), "The UPC details Table did not Appear", "The UPC details Table appeared");
 
 			TestReport.StartStep("I Check the type coloumn shows the container type selected for my product.");
-			string containerTypeActual= upcDetails.DetailValue("Container Type");		
+			string containerTypeActual= upcDetailsPopupTable.DetailValue("Container Type");		
 			Table table = (Table)Context.GetFromContext(tableSavedAs);
 			TableRow informationRow= table.Rows[1];			
 			string expectedContainerValue =informationRow["Container type"].ToString();
+			Report.Info("Container Type expected: " + expectedContainerValue);
+			Report.Info("Container Type Found: " + containerTypeActual);
 			Report.IsTrue(expectedContainerValue == containerTypeActual, "The container type coloumn did not show the value selected for the product", "The container type coloumn did show the value selected for the product");
 			TestReport.StartStep("I Check the size coloumn shows the size selected for my product.");
-			string containerSizeActual = upcDetails.DetailValue("Container Size");
+			string containerSizeActual = upcDetailsPopupTable.DetailValue("Container Size");
 			string expectedSizeValue = informationRow["Size"].ToString();
+			Report.Info("Container Size expected: " + expectedSizeValue);
+			Report.Info("Container Size Found: " + containerSizeActual);
 			Report.IsTrue(expectedSizeValue == containerSizeActual, "The container size coloumn did not show the value selected for the product", "The container size coloumn did show the value selected for the product");
 			TestReport.StartStep("I Check the Internal UPC coloumn shows the 'N/A'.");
 			string expectedInternalUPC = "N/A";
-			string internalUPCAtual = upcDetails.DetailValue("Internal UPC");
+			string internalUPCAtual = upcDetailsPopupTable.DetailValue("Internal UPC");
+			Report.Info("Internal UPC expected: " + expectedInternalUPC);
+			Report.Info("Internal UPC Found:  " + internalUPCAtual);
 			Report.IsTrue(expectedInternalUPC == internalUPCAtual, "The Internal UPC coloumn did not show N/A", "The Internal UPC coloumn did show N/A");
 			TestReport.StartStep("I Check the transport coloumn shows the container type selected for my product.");
-			string transportTypeActual = upcDetails.DetailValue("Code and Description for DOT Packaging");
+			string transportTypeActual = upcDetailsPopupTable.DetailValue("Code and Description for DOT Packaging");
 			string expectedTransportOption = informationRow["Transportation Options"].ToString();
-			Report.IsTrue(expectedTransportOption == transportTypeActual, "The Transportation Option coloumn did not show the value selected for the product", "The Transportation Option coloumn did show the value selected for the product");
+
+			string actualTransportOptionTrim = transportTypeActual.Replace(" ", "").Trim();
+			string expectedTrasportOptionTrim = expectedTransportOption.Replace(" ", "").Trim();
+
+			Report.Info("Trasnport Option expected (no spaces): " + actualTransportOptionTrim);
+			Report.Info("Trasnport Option Found (no spaces): " + expectedTrasportOptionTrim);
+			Report.IsTrue(expectedTrasportOptionTrim == actualTransportOptionTrim, "The Transportation Option coloumn did not show the value selected for the product", "The Transportation Option coloumn did show the value selected for the product");
+			TestReport.StartStep("I close the SHA Manager Product UPC details pop up");
+			Report.IsTrue(upcDetailsPopupTable.CloseButton.TryClick(), "Failed to Click Close in the UPC details popup", "Successfully clicked Click Close in the UPC details popup");
+			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30),"The UPC details popup did not close", "The UPC details popup was closed");
 
 
 

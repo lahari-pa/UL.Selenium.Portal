@@ -902,6 +902,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("Selecting Edit on the UPC saved as: " + caseUPCNumSavedAs + ".");
 			var upcNum = (string)Context.GetFromContext(caseUPCNumSavedAs);
 			var selForwardProdReg = new ForwardProductRegistration();
+		
 			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
 			if (upcs.Count == 0)
 			{
@@ -1184,6 +1185,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (!alertAppeared)
 			{
 				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for an Alert for a max: (.*) Seconds")]
+		public void LookForAlertForXSecondsTotal(int alertWaitSeconds)
+		{
+
+			bool alertAppeared = false;
+			Report.Info("Starting wait for Alert");
+			int i = alertWaitSeconds;
+			if (SeleniumBrowser.Alert.WaitForAlert(i))
+			{
+				Report.Success("The Alert Appeared");
+				alertAppeared = true;
+				return;
+			}
+
+			if (!alertAppeared)
+			{
+				Report.Failure("The Alert did not appear after: " + alertWaitSeconds + " seconds",false);
 			}
 		}
 
