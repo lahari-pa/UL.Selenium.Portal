@@ -407,6 +407,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				var myForgotPw = new ForgottenPasswordQuestions();
+				GeneralUtilities.Wait_for_load_finish();
 				Report.IsTrue(myForgotPw.Login_click(), "Failed to Click Login Button", "Login Button Clicked");
 			}
 			catch (Exception ex)
