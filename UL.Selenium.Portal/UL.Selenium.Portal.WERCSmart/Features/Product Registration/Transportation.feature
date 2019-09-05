@@ -264,7 +264,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 @TReVorId:20211
 Scenario: [65947] Transportation - Copy information from DOT for all modes - confirm data is shown in WPS Studio correctly
 #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+Given I log in with the account saved in TReVor as: ProductAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
 And I should see the Product Characteristics Page

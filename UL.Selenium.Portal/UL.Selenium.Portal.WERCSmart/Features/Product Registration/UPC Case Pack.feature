@@ -27,7 +27,7 @@ Feature: UPC Case Pack
 @TReVorId:21795
 Scenario: [87640] UPC - Case Pack Only Present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87640
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -58,7 +58,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 @TReVorId:21796
 Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87643
 	Given I generate a random UPC number and save as: UPC876431
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -92,7 +92,7 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 @TReVorId:21840
 Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Case UPC counts towards the 5 limit
 	#Given I login into the WERCSmart Portal - Administrator Role
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87650
 	Given I generate a random UPC number and save as: UPC876501
 	Given I generate a random UPC number and save as: UPC876502
@@ -150,7 +150,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 @TReVorId:21841
 Scenario: [87676] UPC - Case Pack can be removed from new product
 	#Given I login into the WERCSmart Portal - Administrator Role
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87676
 	Given I generate a random UPC number and save as: UPC876761
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -178,7 +178,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87676
 	And I close the window that opened
 	Given I navigate to the landing page
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: TestCase87676
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit
@@ -196,13 +196,13 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Then In the SHA list of UPCs I should not see UPC: saved as UPC87676
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876761
 	Given I navigate to the landing page
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87676
 
 @TReVorId:21886
 Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to Complete
 	#Given I login into the WERCSmart Portal - Administrator Role
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87685
 	Given I generate a random UPC number and save as: UPC876851
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -254,7 +254,7 @@ Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to 
 @TReVorId:21887
 Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	#Given I login into the WERCSmart Portal - Administrator Role
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87686
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -345,6 +345,7 @@ Then I Check that the product under the retailer: Amazon is under the status: Ac
 Then I Check that the product under the retailer: <ChosenRetailer87894> is under the status: Submitted
 Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87894
 Then I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: UPC876851 for the retailer: Amazon using details saved in the table: EditCaseUPCTable87894
+
 
 
 

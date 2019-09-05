@@ -1971,7 +1971,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.CreateProductAndTakeToSubmitted(savedAs, "Chalk");
 		}
 
-
+		[StepDefinition(@"I create a product and save as: (.*) and name as: (.*)")]
 		public void CreateProductConditionerAndTakeToSubmitted(string savedAs, string name)
 		{
 			TestReport.UseSubSteps = true;

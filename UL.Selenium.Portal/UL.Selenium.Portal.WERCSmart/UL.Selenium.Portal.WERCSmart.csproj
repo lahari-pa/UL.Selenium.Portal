@@ -187,6 +187,7 @@
     <Compile Include="Selenium Classes\MyIngredientsModal.cs" />
     <Compile Include="Selenium Classes\NavigationBar.cs" />
     <Compile Include="Selenium Classes\New Product\OptionalReports.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\EcologoReadiness.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ElectronicEquipment.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\Ingredients.cs" />
     <Compile Include="Selenium Classes\New Product\NewProduct.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ProductIncludesBattery.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\RegulatoryInformation1.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\TCLP.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\VocOtcCarb.cs" />
     <Compile Include="Selenium Classes\New Product\Product Type\AdditionalProductInformation.cs" />
     <Compile Include="Selenium Classes\New Product\Product Type\ProductCharacteristics.cs" />
     <Compile Include="Selenium Classes\New Product\Product Type\TheProduct.cs" />
@@ -245,10 +247,12 @@
     <Compile Include="Selenium Classes\YouTube.cs" />
     <Compile Include="Steps\API\Steps_Api.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
+    <Compile Include="Steps\New Product\Product Characteristics\Steps_Ecologo_Readiness.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_ElectronicEquipment.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_Ingredients.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_LithiumBatteryTransportation.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_RegulatoryInformation1.cs" />
+    <Compile Include="Steps\New Product\Product Characteristics\Steps_VOC_OTC_CARB.cs" />
     <Compile Include="Steps\New Product\Product Type\Steps_AdditionalProductInformation.cs" />
     <Compile Include="Steps\New Product\Product Type\Steps_ProductCharacteristics.cs" />
     <Compile Include="Steps\New Product\Product Type\Steps_TheProduct.cs" />
