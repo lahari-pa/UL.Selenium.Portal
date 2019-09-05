@@ -5,6 +5,8 @@
 @Homepage
 @SupplierReports
 @RetailPartners
+@CreateProducts
+@ProductGrid
 Feature: [API] Waste Haulers
 
 @TReVorId:22364

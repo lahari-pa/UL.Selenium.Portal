@@ -8,14 +8,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	class Steps_CreateProduct
 	{
 		[StepDefinition(@"I create an electronic product for ItemSync and save it as: (.*), with UPC: (.*)")]
-		public void GivenICreateAnElectronicProductForItemSyncAndSaveItAsForItemSync(string saveAs)
+		public void GivenICreateAnElectronicProductForItemSyncPartOne(string saveAs)
 		{
 			TestReport.UseSubSteps = true;
 			var MyStepsShared = new Steps_Shared();
 			var MyStepsNewProduct = new StepsNewProduct();
 			var MyStepsSHA = new Steps_SHA();
 			var MyStepsStudio = new Steps_Studio();
+			var MyStepsAPI = new API.Steps_Api();
 
+			//Login, start creation
 			MyStepsShared.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
 			MyStepsShared.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			MyStepsShared.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included");
@@ -33,6 +35,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsShared.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
 			MyStepsNewProduct.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			MyStepsShared.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// Product is created
+		}
+
+		[StepDefinition(@"I move the product saved as (.*) created for ItemSync from Submitted to Completed")]
+		public void GivenICreateAnElectronicProductForItemSyncPartTwo(string saveAs)
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsShared = new Steps_Shared();
+			var MyStepsSHA = new Steps_SHA();
+			var MyStepsStudio = new Steps_Studio();
+			var MyStepsAPI = new API.Steps_Api();
+
 			Report.Info("Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: " + saveAs + ")");
 			MyStepsShared.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Submitted", saveAs);
 			Report.Info("Given In the SHA manager grid I see the WPS ID I have saved as product: " + saveAs + " and its status is: Submitted");
