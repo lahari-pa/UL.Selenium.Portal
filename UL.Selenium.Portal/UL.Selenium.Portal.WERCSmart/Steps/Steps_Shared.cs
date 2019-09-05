@@ -729,37 +729,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep(string.Format("I set the {0} option to: {1}",
 				"Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
 				"No"));
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
-				"No");
-			/* CLF- 13/7/2018 This does not seem to be in the step design
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB",
-				"0");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule",
-				"0");
-				*/
+			new Steps_VOC_OTC_CARB().SetProductHasBeenGrantedACP("No");
 			TestReport.StartStep(string.Format("I set the {0} option to: {1}",
 				"Product label specifies a dilution ratio which results in a final VOC concentration for the product during use",
 				"Yes"));
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product label specifies a dilution ratio which results in a final VOC concentration for the product during use",
-				"Yes");
+			new Steps_VOC_OTC_CARB().SetProductLabelDilutionRatio("Yes");
 			TestReport.StartStep(string.Format("I set the {0} option to: {1}",
 				"Product's VOC content as used",
 				"0"));
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product's VOC content as used",
-				"0");
+			new Steps_VOC_OTC_CARB().SetVocContentAsUsed("0");
 			TestReport.StartStep(string.Format("I set the {0} option to: {1}",
 				"Product's VOC content as sold",
 				"0"));
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product's VOC content as sold",
-				"0");
-			TestReport.StartStep(
-				"I select the first option for section: Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?");
+			new Steps_VOC_OTC_CARB().SetVocContentAsSold("0");
+			TestReport.StartStep("I select the first option for section: Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?");
 			MyStepsNewProduct.SelectFirstOptionInSection(
 				"Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?");
 			TestReport.StartStep("In the VOC page I click Continue");
@@ -1203,21 +1186,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 62710 \(Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 62710 \(Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path\)")]
 		public void GivenICallSharedConfirmVOCHeadingAndSelectNoToFirstQuestionOnly_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();
-			TestReport.StartStep(
-				"I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
-			MyNewProduct.GivenIShouldSeeXPage(
-				"Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)");
-			TestReport.StartStep(
-				"I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
-				"No");
+			//var MyNewProduct = new StepsNewProduct();
+			//TestReport.StartStep("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
+			new Steps_VOC_OTC_CARB().VocOtcCarbPageShouldBeLoaded();
+			new Steps_VOC_OTC_CARB().VocOtcCarbPageShouldBeLoaded();
+			TestReport.StartStep("I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. field to: No");
+			new Steps_VOC_OTC_CARB().SetProductHasBeenGrantedACP("No");
 		}
 
 		[StepDefinition(@"I call Shared Step 60468 \(VOC - CARB only required - enter value - Continue - Happy Path\)")]
@@ -1611,15 +1589,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			TestReport.StartStep(
-				"I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
-			MyNewProduct.GivenIShouldSeeXPage(
-				"Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)");
-			TestReport.StartStep(
-				"I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
-				"No");
+			TestReport.StartStep("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
+			new Steps_VOC_OTC_CARB().VocOtcCarbPageShouldBeLoaded();
+			TestReport.StartStep("I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. field to: No");
+			new Steps_VOC_OTC_CARB().SetProductHasBeenGrantedACP("No");
 		}
 
 		[StepDefinition(@"I call Shared Step 32931 \(Liquid Core Product - select  No - Happy Path\)")]
@@ -3297,19 +3270,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			TestReport.StartStep(
-				"I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
-			MyNewProduct.GivenIShouldSeeXPage(
-				"Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)");
-			Delay.Seconds(1);
-			TestReport.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. I select: " +
+			TestReport.StartStep("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
+			new Steps_VOC_OTC_CARB().VocOtcCarbPageShouldBeLoaded();
+			TestReport.StartStep("In the Product Characteristics tab of the New Product Page for Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. I select: " +
 				table.Rows[0]["Product granted Alternative Control Plan"]);
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
-				table.Rows[0]["Product granted Alternative Control Plan"]);
-			TestReport.StartStep(
-				"In the Product Characteristics tab of the New Product Page for Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB I enter: " +
+			new Steps_VOC_OTC_CARB().SetProductHasBeenGrantedACP(table.Rows[0]["Product granted Alternative Control Plan"]);
+			TestReport.StartStep("In the Product Characteristics tab of the New Product Page for Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB I enter: " +
 				table.Rows[0]["Amount of VOC by CARB"]);
 			MyNewProduct.SetTheSectionOptionTo(
 				"Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB",
@@ -7617,6 +7583,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			@"I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: (.*) and saved name as: (.*)")]
 		public void GivenICallSharedStep74654SHAManager_Suppliers_SearchByEmailAddress(string email, string savedAs)
 		{
+			if (email.Contains("saved as"))
+			{
+				email = Context
+					.GetFromContext(email.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+					.ToString();
+			}
 			TestReport.UseSubSteps = true;
 			var thisStepsSha = new Steps_SHA();
 			TestReport.StartStep("Given I Click the Suppliers link on the top right of the screen");
@@ -7701,6 +7673,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepSHA74655SearchBySupplierIDSavedAsMyIDForSpecificProductStatusCompletedAndEmail(
 					string savedAs, string status, string email)
 		{
+			if (email.Contains("saved as"))
+			{
+				email = Context
+					.GetFromContext(email.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+					.ToString();
+			}
+
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Beginning shared step: 74655");
 			var thisStepsSha = new Steps_SHA();
@@ -8462,6 +8441,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				TestReport.StartStep("I click save");
 			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
 			MyStepsNewProduct.GivenIConfirmErrorMessageIsShownBelowField("This is a required field.", "Package Type");
+		}
+
+		[StepDefinition(@"I call Shared Step 60515 \(VOC - Dilution - Yes to ratio - enter any values > Continue - Happy Path\)")]
+		public void Shared60515_VocDiluationYesEnterAnyValues_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I select the 'Yes' button for the 'Product Label Dilution Ratio' question");
+			new Steps_VOC_OTC_CARB().SetProductLabelDilutionRatio("Yes");
+			TestReport.StartStep("I enter the vlaue '1' for the 'VOC Content as Sold' question");
+			new Steps_VOC_OTC_CARB().SetVocContentAsSold("1");
+			TestReport.StartStep("I enter the vlaue '10' for the 'VOC Content as Used' question");
+			new Steps_VOC_OTC_CARB().SetVocContentAsUsed("10");
+			TestReport.StartStep("I click continue");
+			new NewProduct().ClickContinue();
 		}
 
 	}

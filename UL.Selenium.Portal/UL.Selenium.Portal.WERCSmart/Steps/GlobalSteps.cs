@@ -68,6 +68,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I retrieve the email address for account: (.*) and save as: (.*)")]
+		public void IRetrieveTheEmailAddressForAccount(string type, string saveAs)
+		{
+			string email = "";
+			switch (type)
+			{
+				case ("WERCs Visual Account"):
+					email = this.GetEmailForAccount("VisualAccount");
+					break;
+				case ("WERCs Premium Subscription Account"):
+					email = this.GetEmailForAccount("PremiumSubscriptionAccount");
+					break;
+				case ("WERCs Product Account"):
+					email = this.GetEmailForAccount("ProductAccount");
+					break;
+				case ("WERCs ULSC Account"):
+					email = this.GetEmailForAccount("ULSCAccount");
+					break;
+				case ("NoPLProducts Account"):
+					email = this.GetEmailForAccount("NoPLProducts Account");
+					break;
+			}
+
+			if (email == "")
+			{
+				Report.Failure("Could not find email for account " + type);
+				return;
+			}
+
+			Context.AddToContext(saveAs, email);
+		}
+
+
 
 		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account)")]
 		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account)")]
@@ -124,6 +157,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
+		public string GetEmailForAccount(string accountSavedAs)
+		{
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
+			if (user == null)
+			{
+				string Branch = GlobalParameters.Branch;
+				string regexPattern = @"^.*(?=(\/))";
+				var regex = new Regex(regexPattern);
+				Match match = regex.Match(Branch);
+				if (match.Success)
+				{
+					user = TestUsers.GetUserSavedAs(accountSavedAs, "3", match.Value);
+				}
+				else
+				{
+					throw new Exception("User: " + accountSavedAs + " could not be found");
+				}
+			}
+
+			return user.Username;
+		}
+
 		public void LoginToAccount(string accountSavedAs, bool attemptOnce = false)
 		{
 			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
@@ -178,9 +233,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			new StepsLogin().IClickTheLoginButton();
 			Report.IsTrue(new Login().WaitForContainerToBeInvisible(), "Did not redirect from Log in page!");
-						
 
-			
+
+
 		}
 
 
@@ -785,7 +840,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
 				Report.Info("Expected email body text: " + bodyText);
 				Report.Info("Body of the Email was: " + emailBody);
-				string actualTrimmed = bodyDecode.Replace(" ", "");
+				//string actualTrimmed = bodyDecode.Replace(" ", "");
+				string actualTrimmed = Regex.Replace(bodyDecode, @"\r|\n| ", "");
 				string expectedTrimmed = bodyText.Replace(" ", "");
 				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
 			}
@@ -811,7 +867,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
 				Report.Info("Body of the Email was: " + emailBody);
-				string actualTrimmed = bodyDecode.Replace(" ", "");
+				string actualTrimmed = Regex.Replace(bodyDecode, @"\r|\n| ", "");
 				string expectedTrimmed = bodyText.Replace(" ", "");
 				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
 			}
@@ -1232,10 +1288,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					SeleniumBrowser.Alert.ReloadAlert(searchText);
 				}
-				catch(Exception ex)
+				catch (Exception ex)
 				{
 					Report.Failure("Failed to reload alert. Exception: " + ex);
-					return; 
+					return;
 				}
 			}
 			if (!SeleniumBrowser.Alert.WaitForAlert())
@@ -1244,15 +1300,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			string alertTextFull = SeleniumBrowser.Alert.GetText();
 			//string alertText = alertTextFull.Replace("\r\n", string.Empty);
-			
 
-			string alertText= GeneralUtilities.RemoveLineBreaks(alertTextFull);
+
+			string alertText = GeneralUtilities.RemoveLineBreaks(alertTextFull);
 
 			if (alertText == null)
 			{
 				Report.Failure("Text was not displayed", false);
 			}
-			if(alertText.Contains(searchText))
+			if (alertText.Contains(searchText))
 			{
 				Report.Info("Alert text was as expected");
 
@@ -1419,7 +1475,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
-		
+
 
 		[StepDefinition("I find an existing UPC number in trevor account saved as: (.*) using feature context: (.*)")]
 		public void FindExistingUpcNumberInTrevorAccountUsingFeatureContext(string trevorSavedAs, string upcSavedAs)
@@ -1428,9 +1484,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I look in feature context for: " + upcSavedAs);
 			if (Context.Contains(upcSavedAs, true))
 			{
-                Report.Info("Found an existing UPC in context");
+				Report.Info("Found an existing UPC in context");
 				var upc = Context.GetFromContext(upcSavedAs).ToString();
-                Report.Info("Saving UPC : " + upc + " to scenario context");
+				Report.Info("Saving UPC : " + upc + " to scenario context");
 				Context.AddToContext(upcSavedAs, upc);
 				return;
 			}
@@ -1440,26 +1496,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_SHA().NavigateToShaSaveUpcToContext(upcSavedAs, trevorSavedAs);
 			// check if SHA search was successful
 			if (Context.Contains(upcSavedAs))
-            {
+			{
 				// add to feature context
 				var upc = Context.GetFromContext(upcSavedAs).ToString();
 				Context.AddToContext(upcSavedAs, upc, true);
 				return;
-            }
+			}
 			// fall back to creating a new product
-            TestReport.StartStep("Logging in to WercSmart");
+			TestReport.StartStep("Logging in to WercSmart");
 			this.ILogInWithTheAccountSavedInTrevorAs(trevorSavedAs);
 			TestReport.StartStep("Creating a new product: Chalk");
 			new Steps_ProductSetup().GivenICreateProductUsingTestCase75335("Chalk", upcSavedAs, "ExistingUPCProduct");
 			// check if new product UPC was successful
 			if (Context.Contains(upcSavedAs))
-            {
-	            // add to feature context
+			{
+				// add to feature context
 				var createdUpc = Context.GetFromContext(upcSavedAs).ToString();
-	            Context.AddToContext(upcSavedAs, createdUpc, true);
-	            return;
-            }
-            Report.Failure("Failed to get an existing UPC!");
+				Context.AddToContext(upcSavedAs, createdUpc, true);
+				return;
+			}
+			Report.Failure("Failed to get an existing UPC!");
 		}
 	}
 }
