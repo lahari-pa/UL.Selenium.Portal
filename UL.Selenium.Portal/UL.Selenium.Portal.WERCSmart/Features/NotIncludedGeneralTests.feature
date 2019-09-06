@@ -24,6 +24,8 @@
 
 Feature: NotIncludedGeneralTests
 
+##This is a feature that is used to debug tests that you don't want included in trevor. 
+
 Scenario: [NOTINCLUDEDGENERALTEST] UPC View: Continue button is hidden occasionally from the user-- test 1
 	Then I generate: 5 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
