@@ -332,6 +332,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
+		//[Given(@"I Confirm that the Add Multiple window openswith the UPCs that were added in the document")]
+		//public void GivenIConfirmThatTheAddMultipleWindowOpenswithTheUPCsThatWereAddedInTheDocument()
+		//{
+		// Report.IsTrue(new UPC().VerifyUPCsInAddMultipleWindow(), "UPCs were unable to be verirfied.", "UPCs have been verified successfully.");
+		//}
+
+
 		[StepDefinition(@"I purchase the following additional documents:")]
 		public void ThenIPurchaseTheFollowingAdditionalDocuments(Table table)
 		{

@@ -141,7 +141,7 @@ Scenario: [74540] Target - Data Tier Warning when not all are selected
 	Given I click the Save Changes button
 	Then The success message in the Save Changes popup dialog should contain the following:
 		| Message                                                                                       |
-		| The information was saved correctly and the notification Email was sent to all Administrators |		
+		| The information was saved correctly and the notification Email was sent to all Administrators |
 	Given I click close on the Save Changes popup dialog
 	And I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown
 	Given I click the back arrow on the Retail Partners Details page
