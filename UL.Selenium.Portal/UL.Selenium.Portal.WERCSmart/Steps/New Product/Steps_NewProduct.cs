@@ -109,6 +109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"I should see the (.*) Page")]
+		[StepDefinition(@"I should see the (.*) Page for the New Product")]
 		public void GivenIShouldSeeXPage(string page)
 		{
 			if (NewProduct.WaitForContainerToBeVisible())

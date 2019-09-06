@@ -882,7 +882,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			enterField.Check(set);
 			return enterField.Checked() == set;
 		}
-        
+
 		public bool ClickContinueInProcessProducts()
 		{
 			ReadOnlyCollection<IWebElement> buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='dialog-product']/..//button"));
@@ -1260,6 +1260,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 			return null;
+		}
+
+		public bool ConfirmThereIsOneProductInTheGrid()
+		{
+			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath("//table[@id='list']//tbody//tr[not(@class='jqgfirstrow')]"));
+			return rows.Count == 1;
 		}
 	}
 

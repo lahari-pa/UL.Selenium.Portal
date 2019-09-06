@@ -113,11 +113,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				upcNumberField.EnterText(info.UpcNumber);
 				IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-				if(info.ContainerType=="<first>")
+				if (info.ContainerType == "<first>")
 				{
 					var firstOption = containsType.FindElement(By.XPath("./option[not(text()='Container Type')]"), 1).Text;
 
-					if (firstOption==null)
+					if (firstOption == null)
 					{
 						Report.Failure("There are no Container Types");
 						return false;
@@ -127,13 +127,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						containsType.Select(firstOption);
 					}
 
-					
+
 				}
 				else
 				{
 					containsType.Select(info.ContainerType);
 				}
-				
+
 				string regex = @"(.*)\((.*)\)";
 				IWebElement sizeField = (from input in textInputs
 										 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
@@ -315,9 +315,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Confirm Excel file is downloaded with name: " + file);
 			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-			Report.Info("Downloads folder: " + downloadsFolder);			
+			Report.Info("Downloads folder: " + downloadsFolder);
 			int counter = 0;
-			while(counter<=5)
+			while (counter <= 5)
 			{
 				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				if (dir.Any())
@@ -331,12 +331,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				counter++;
 			}
 			Report.Failure("No file was found with name " + file);
-			
+
 		}
 
-		
 
-		
+
+
 
 		public string GetErrorText()
 		{
@@ -350,7 +350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickUploadUpcButton()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2); 
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2);
 			if (el == null)
 			{
 				return false;
@@ -368,7 +368,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public string Retailer { get; set; }
 			public bool WarningIsPresent { get; set; }
 
-			
+
 		}
 
 		public List<UPCNewProduct> UPCsNewProduct {
@@ -379,12 +379,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"));
 				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
 				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tbody//tr"));
-				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "").Key;				
+				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "").Key;
 				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC Number")).Key;
 				int containerTypeIndex = th.FirstOrDefault(x => x.Value.Contains("Container Type")).Key;
 				int sizeIndex = th.FirstOrDefault(x => x.Value.Contains("Size (Weight Ounces)")).Key;
 				int retailerIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
-				int warningIsPresentIndex= th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
+				int warningIsPresentIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
 				foreach (IWebElement thisRow in listOfRows)
 				{
 					bool isChecked = thisRow.FindElement(By.XPath(".//td[" + isCheckedIndex.ToString() + "]//input")).Selected;
@@ -393,11 +393,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					string size = thisRow.FindElement(By.XPath(".//td[" + sizeIndex.ToString() + "]/span[contains(@data-bind,'size')]")).Text;
 					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]//span[@data-bind='text: identifier']")).Text;
 					bool warningIsPresent = thisRow.FindElement(By.XPath(".//td[" + warningIsPresentIndex.ToString() + "]//i[@title='This UPC Number is duplicated.']")).Displayed;
-					listOfUPCNewProducts.Add(new UPCNewProduct() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer = retailer, WarningIsPresent= warningIsPresent });
+					listOfUPCNewProducts.Add(new UPCNewProduct() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer = retailer, WarningIsPresent = warningIsPresent });
 				}
 				return listOfUPCNewProducts;
 			}
-			
+
 
 		}
 
@@ -422,7 +422,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					IWebElement checkBox = thisRow.FindElement(By.XPath(".//td[" + checkboxIndex.ToString() + "]//input"));
 					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]/span[contains(@data-bind,'upc')]")).Text;
-					listofUPCcheckboxes.Add(new UPCBoxNumber() { CheckBox = checkBox, UpcNumber = upcNumber});
+					listofUPCcheckboxes.Add(new UPCBoxNumber() { CheckBox = checkBox, UpcNumber = upcNumber });
 				}
 				return listofUPCcheckboxes;
 
@@ -431,7 +431,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 
-		
+
 
 		public bool UploadUpcButton()
 		{
@@ -444,7 +444,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public IWebElement UPCButtonContainerGeneral => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[contains(@class,'upc-buttons')]"),2);
+		public IWebElement UPCButtonContainerGeneral => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[contains(@class,'upc-buttons')]"), 2);
 		public IWebElement UPCButtonContainerTop => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[@class='upc-buttons affix-top']"), 2);
 		public IWebElement UPCButtonContainerBottom => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[@class='upc-buttons affix']"), 2);
 
@@ -459,17 +459,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return el.TryClick();
 		}
 
-		
+		public string GetFirstUPCInList()
+		{
+			IWebElement upcEl = this.containerElement.FindElement(By.XPath(@"//table//td//span"), 2);
+			return upcEl.Text;
+		}
+
+
 
 
 
 
 
 	}
-	public class DeleteRowsWarning:SeleniumBaseObject
+	public class DeleteRowsWarning : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath(@"//div[@class='modal-dialog modal-md']//div[@class='modal-content']");
-		public IWebElement DeleteRowsWarningPopupOkButton=> containerElement.FindElement(By.XPath("//button[text()='Ok']"), 2);
+		public IWebElement DeleteRowsWarningPopupOkButton => containerElement.FindElement(By.XPath("//button[text()='Ok']"), 2);
 		public IWebElement DeleteRowsWarningPopupCancelButton => containerElement.FindElement(By.XPath("//button[text()='Cancel']"), 2);
 
 	}
@@ -489,7 +495,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickSelectAllUpcsButton()
 		{
 			return this.SelectAllUpcsButton.TryClick();
-		}		
+		}
 		public bool ClickNextButton()
 		{
 			return this.NextButton.TryClick();
@@ -585,7 +591,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<KeyValuePair<int, string>> TableHeaders(IWebElement table)
 		{
-			List<KeyValuePair<int, string>> th = new EditableList<KeyValuePair<int, string>>(); //new List 
+			List<KeyValuePair<int, string>> th = new EditableList<KeyValuePair<int, string>>(); //new List
 			ReadOnlyCollection<IWebElement> listOfHeaders = table.FindElements(By.XPath(".//th"));
 			for (int i = 0; i < listOfHeaders.Count; i++)
 			{
@@ -626,16 +632,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					string containerType = thisRow.FindElement(By.XPath(".//td[" + containerTypeIndex.ToString() + "]")).Text;
 					string size = thisRow.FindElement(By.XPath(".//td[" + sizeIndex.ToString() + "]")).Text;
 					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]")).Text;
-					listOfUPCUploads.Add(new UPCUpload() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer=retailer }); 
+					listOfUPCUploads.Add(new UPCUpload() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer = retailer });
 				}
 				return listOfUPCUploads;
 			}
-			
+
 		}
 
 
 
-		
+
 
 
 	}
@@ -652,5 +658,5 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string TransportationOption { get; set; } = "";
 	}
 
-	
+
 }
