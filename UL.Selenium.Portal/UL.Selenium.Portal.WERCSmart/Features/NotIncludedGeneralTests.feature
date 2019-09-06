@@ -20,7 +20,7 @@
 @SHA
 @ForwardProductRegistration
 @ProductSetUp
-@run_NotIncludedGeneralTests
+@admin
 
 Feature: NotIncludedGeneralTests
 
@@ -38,6 +38,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] UPC View: Continue button is hidden occasiona
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I click continue
+
 
 
 	Scenario: [NOTINCLUDEDGENERALTEST] UPC View: Continue button is hidden occasionally from the user-- test 2

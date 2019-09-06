@@ -803,7 +803,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(presentRetailer, savedAs), "Failed to select the first Retailer that is not " + presentRetailer + " or requires additional data under 'Other Retailers'", "Succesfully selected the first retailer that is not " + presentRetailer + "  or requires additional data under 'Other Retailers'");
 		}
 
-		[StepDefinition(@"I confirm that UPC information is displayed in the Destination Retailers column under the Select UPCs Table")]
+		[StepDefinition(@"I confirm that UPC information is displayed in the Select UPCs Table")]
 		public void ConfirmUPCInfromationInSelectUPCsTable()
 		{
 
