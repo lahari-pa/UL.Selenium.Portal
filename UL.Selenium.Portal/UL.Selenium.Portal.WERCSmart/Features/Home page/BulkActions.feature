@@ -214,7 +214,6 @@ Scenario: [75129] Forward - Product in Submitted Status
 # Created by Aaron Caton
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Bulk Actions\Forward
-@tfs_design
 @TReVorId:23440
 Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Given I generate a random UPC number and save as: UPC78048

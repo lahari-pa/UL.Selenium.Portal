@@ -55,6 +55,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new MyIngredients().ClickSave(),
 				"Failed to click Save in the My Ingredients tab",
 				"Successfully clicked Save in the My Ingredients tab");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 		[StepDefinition(@"I save the current list of ingredients in My Library to context as: (.*)")]
 		public void AddMyIngredientsToContext(string savedAs)
