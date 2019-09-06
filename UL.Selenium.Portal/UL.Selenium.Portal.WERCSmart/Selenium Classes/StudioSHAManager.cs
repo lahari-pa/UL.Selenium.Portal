@@ -1314,8 +1314,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var mySHAManager = new StudioSHAManager();
 				mySHAManager.Wait_for_load();
 				Product matchingProduct = mySHAManager.GetTopXProducts(2).FirstOrDefault(x => x.Clients == retailerAbbr);
-				Report.Info("The Reatailer initials found are: "+matchingProduct.Clients);
-				Report.Info("The Status Found for the Product. The Status is: "+ matchingProduct.Status);
+				Report.Info("The Retailer initials found are: "+matchingProduct.Clients);
+				Report.Info("A Status was found for the Product. The Status is: "+ matchingProduct.Status);
 				retailerStatus = matchingProduct.Status;
 
 				if (matchingProduct==null)
