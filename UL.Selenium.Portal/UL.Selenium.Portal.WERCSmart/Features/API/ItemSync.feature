@@ -1,6 +1,5 @@
 ﻿@wercsmart
 @API
-@run_ApiWasteHaulers
 @Homepage
 @SupplierReports
 @RetailPartners

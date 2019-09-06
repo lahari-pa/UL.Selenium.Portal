@@ -140,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ShouldSeeAlistFormError(string error)
 		{
 			var errorActual = new NewProduct().FormError();
-			Report.IsTrue(errorActual.Contains(error), "The expected error was not found! The error text found was: "+errorActual, "Found expected error");
+			Report.IsTrue(errorActual.Contains(error), "The expected error was not found! The error text found was: " + errorActual, "Found expected error");
 		}
 
 		[StepDefinition(@"in page (.*) I should see error: (.*)")]
@@ -331,11 +331,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
-		[Given(@"I Confirm that the Add Multiple window openswith the UPCs that were added in the document")]
-		public void GivenIConfirmThatTheAddMultipleWindowOpenswithTheUPCsThatWereAddedInTheDocument()
-		{
-			// Report.IsTrue(new UPC().VerifyUPCsInAddMultipleWindow(), "UPCs were unable to be verirfied.", "UPCs have been verified successfully.");
-		}
+		//[Given(@"I Confirm that the Add Multiple window openswith the UPCs that were added in the document")]
+		//public void GivenIConfirmThatTheAddMultipleWindowOpenswithTheUPCsThatWereAddedInTheDocument()
+		//{
+		// Report.IsTrue(new UPC().VerifyUPCsInAddMultipleWindow(), "UPCs were unable to be verirfied.", "UPCs have been verified successfully.");
+		//}
 
 
 		[StepDefinition(@"I purchase the following additional documents:")]

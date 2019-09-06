@@ -34,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			{ return true; });
 
 			string token = "";
-			string loginUrl = "https://lookup.wercsmart.com/RequestedUPCServiceTest/api/ClientAPI"/*TestVariables.GetVariableSavedAs("ItemSyncApiEndpoint")*/;
+			string loginUrl = TestVariables.GetVariableSavedAs("ItemSyncApiEndpoint");
 
 			using (var wc = new WebClient())
 			{
@@ -90,7 +90,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			if (TestVariables.GetVariableSavedAs("ItemSyncApiEndpoint") != null)
 			{
 
-				string requestUrl = TestVariables.GetVariableSavedAs("ItemSyncApiEndpoint") /*"https://lookup.wercsmart.com/RequestedUPCServiceTest/api/ClientAPI"/*TestVariables.GetVariableSavedAs("ItemSyncApiEndpoint")*/ + "/ProcessRetailerUPCList?client=" + guid + "&Token=" + token;
+				string requestUrl = TestVariables.GetVariableSavedAs("ItemSyncApiEndpoint") + "/ProcessRetailerUPCList?client=" + guid + "&Token=" + token;
 
 				string requestBody = this.MakeRequestString(tableData);
 				string xml = string.Empty;
