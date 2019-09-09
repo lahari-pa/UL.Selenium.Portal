@@ -2034,6 +2034,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"the 'Regulatory List' window opens")]
 		public void RegulatoryListWindowOpens()
 		{
+			new RegulatoryList().WaitForContainerToBeVisible();
 			string header = new RegulatoryList().Heading();
 			if (header == null)
 			{
