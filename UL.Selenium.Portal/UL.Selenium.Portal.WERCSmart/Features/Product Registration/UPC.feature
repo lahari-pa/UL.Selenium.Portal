@@ -20,6 +20,7 @@
 @SHA
 @ForwardProductRegistration
 @ProductSetUp
+@ViewUpcs
 @run_UPC
 Feature: UPC
 
@@ -210,7 +211,7 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 		| Option              |
 		| Size (Fluid Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
-	  
+
 @TReVorId:22366
 Scenario: [87832] View Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -283,6 +284,52 @@ Scenario: [87825] Summary Shows Case UPC Data
 	And I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
 
+Scenario: [96071] Archived UPC is permitted to be added to product - New Product registration
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I generate a random UPC number and save as: UPC96071_2
+	And I filter the products by: Accepted by Retailers
+	And I save the ProductID and Name of the first Product in the grid with a retailer as: TestCase96071
+	And I click Row Actions for product saved as: TestCase96071
+	Then I click on the Row Action: Edit UPCs
+	And I save the first UPC in the list as: UPC96071
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I click the following option in the bottom menu: Search
+	And In SHA Manager ProductSearch page I run search:
+		| Search Term | Search Value      |
+		| Status      | All               |
+		| UPC         | saved as UPC96071 |
+	And In SHA Manager I confirm that there is one item in the grid
+	And I navigate to the landing page
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I filter for the product saved as: TestCase96071
+	And I click Row Actions for product saved as: TestCase96071
+	Then I click on the Row Action: Process UPC Update
+	Then I delete UPC saved as: UPC96071
+	And I click the 'Add UPC' button
+	And I enter UPC Number: saved as UPC96071_2
+	And I Select a container type from the drop down list
+	And I enter Size Value: 12
+	And In the Universal Product Code (UPC) page I click Save
+	Given In the Data Acceptance page I click on the Accept button
+	Given I navigate to the home page
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase96071_2
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	And I click the 'Add UPC' button
+	And I enter UPC Number: saved as UPC96071
+	And I Select a container type from the drop down list
+	And I enter Size Value: 12
+	Given in the Universal Product Code (UPC) page I click Continue
+	Given I should see the Regulatory Documents to Provide Page for the New Product
+	Given I navigate to the home page
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase96071_2
 @TReVorId:23416
 	Scenario: [95988] Mass Upload UPCs Floating
 	Then I generate: 20 random UPC numbers and save them starting with: RandomUPC

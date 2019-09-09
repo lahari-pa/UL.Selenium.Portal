@@ -578,10 +578,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var containsTypeOptionBox = new MultipleUPC().ContainsType;
 
-			if(containsTypeOptionBox==null)
+			if (containsTypeOptionBox == null)
 			{
 				Report.Failure("The Container Type Option Box was not found");
-					return;
+				return;
 			}
 
 
@@ -598,8 +598,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Context.AddToContext("AddMultipleDialogFirstContainerOption", firstOption);
 					containsTypeOptionBox.Select(firstOption);
-					Report.Info("Selecting option: " +firstOption+" as the packaging type");
-					
+					Report.Info("Selecting option: " + firstOption + " as the packaging type");
+
 				}
 
 			}
@@ -669,19 +669,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(tableSavedAs, table);
 
 			var upc = new UPC();
-			
+
 			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("testdoc.xlsx"), "", "");
 			//Create file here
 			//var excelfile = new ExcelUtilities CreateSpreadsheet(fileName);
 
 			//var utils = ExcelUtilities.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
-			if(!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination))
+			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination))
 			{
 				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
 				return;
 			}
 
-			
+
 
 			var utils = new ExcelUtilities(destination, "Sheet1");
 
@@ -974,13 +974,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var chosenOption = (string)Context.GetFromContext("AddMultipleDialogFirstContainerOption");
 
 				Report.IsTrue(chosenOption == displayedOption, "The Displayed container type did not match the type selected. Selected: " + chosenOption + ". The Displayed container type was: " + displayedOption + ".", "The Contianer types was correctly populated with the selected option");
-								
+
 			}
 			else
 			{
 
 				Report.IsTrue(packagingType == displayedOption, "The Displayed container type did not match the type selected. Selected: " + displayedOption + ". The Displayed container type was: " + displayedOption + ".", "The Contianer types was correctly populated with the selected option");
-								
+
 			}
 
 
@@ -992,7 +992,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var tableContent = (Table)Context.GetFromContext(tableSavedAs);
 			List<string> UPCCheckList = new List<string>();
-			
+
 			Hashtable duplicateUPCHashTable = new Hashtable();
 
 			int i = 0;
@@ -1026,9 +1026,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 
 				}
-								
+
 			}
-			
+
 			Context.AddToContext(duplicateListSavedAs, duplicateUPCHashTable);
 		}
 
@@ -1038,7 +1038,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var tableContent = (Table)Context.GetFromContext(tableSavedAs);
 			List<string> UPCCheckList = new List<string>();
-			
+
 			Hashtable duplicateUPCHashTable = new Hashtable();
 
 			int i = 0;
@@ -1070,7 +1070,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						duplicateUPCHashTable.Add(upcNumber, 2);
 					}
 
-				}				
+				}
 
 			}
 
@@ -1080,7 +1080,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var valueToAdd = Context.GetFromContext(exisitingDuplicateUPCsSavedAs + j);
 				duplicateUPCHashTable.Add(valueToAdd, 1);
 				j++;
-			}			
+			}
 			Context.AddToContext(duplicateListSavedAs, duplicateUPCHashTable);
 		}
 
@@ -1090,7 +1090,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I use a list of duplicated UPCs saved as: (.*) and check that they have a warning traingle next to their retailer code and save the ones that do as: (.*)")]
 		public void IMakeAListOfDuplicateUPCsAndCheckForWarning(string duplicateUPCsSavedAs, string upcsWithWarningSavedAs)
 		{
-			 
+
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I confirm the Add Multiple UPC popup disappears");
 			this.IConfirmThatTheAddMultipleUPCWindowCloses();
@@ -1130,7 +1130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 			Context.AddToContext(upcsWithWarningSavedAs, upcsWithWarniningHT);
-					   			
+
 		}
 
 		[StepDefinition(@"Using the Hashtable of duplicate UPCs saved as: (.*) I select the UPCS")]
@@ -1166,7 +1166,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				}
 			}
-			
+
 		}
 
 		[StepDefinition("I Click Delete Rows")]
@@ -1195,23 +1195,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I Check all Duplicate UPCs saved as: (.*) are no longer shown")]
 		public void ICheckAllDuplicateUPCSAreNoLongerShown(string upcsWithWarningSavedAs)
 		{
-			var selectionBoxes = new UPC().UPCSelectionBoxes;			
+			var selectionBoxes = new UPC().UPCSelectionBoxes;
 			List<string> UPCCheckList = new List<string>();
-			
+
 			Hashtable visibleUPCHashtable = new Hashtable();
 
 			foreach (var row in selectionBoxes)
 			{
-					if (visibleUPCHashtable.ContainsKey(row.UpcNumber))
-					{
-						int old = (int)visibleUPCHashtable[row.UpcNumber];
-						visibleUPCHashtable[row.UpcNumber] = old + 1;
-					}
-					else
-					{
-						visibleUPCHashtable.Add(row.UpcNumber, 1);
-					}
-				
+				if (visibleUPCHashtable.ContainsKey(row.UpcNumber))
+				{
+					int old = (int)visibleUPCHashtable[row.UpcNumber];
+					visibleUPCHashtable[row.UpcNumber] = old + 1;
+				}
+				else
+				{
+					visibleUPCHashtable.Add(row.UpcNumber, 1);
+				}
+
 			}
 
 			var upcsWithWarningHT = (Hashtable)Context.GetFromContext(upcsWithWarningSavedAs);
@@ -1229,9 +1229,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					string WarningupcNumber = pair.Key as string;
 					int WarningtimesDuplicated = (int)pair.Value;
 
-					if(VisibleupcNumber==WarningupcNumber)
+					if (VisibleupcNumber == WarningupcNumber)
 					{
-						Report.IsTrue(VisibletimesRecorded == 1, "Duplicate UPCs of: "+VisibleupcNumber+" are still shown", "Duplicate UPCs of: " + VisibleupcNumber + " are no longer shown");
+						Report.IsTrue(VisibletimesRecorded == 1, "Duplicate UPCs of: " + VisibleupcNumber + " are still shown", "Duplicate UPCs of: " + VisibleupcNumber + " are no longer shown");
 					}
 				}
 
@@ -1240,7 +1240,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		
+		[StepDefinition(@"I save the first UPC in the list as: (.*)")]
+		public void ISavetheFirstUPCInTheListAs(string savedAs)
+		{
+			var uPCpage = new UPC();
+			string upc = uPCpage.GetFirstUPCInList();
+			Context.AddToContext(savedAs, upc);
+			Report.IsTrue(upc != "", "Failed to find first UPC on UPC page.", "Successfully found first UPC!");
+		}
+
+		[StepDefinition(@"I delete UPC saved as: (.*)")]
+		public void IDeleteUPCSavedAs(string savedAs)
+		{
+			string upc = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (upc == "")
+			{
+				Report.Failure("Failed to find upc in context saved as " + savedAs);
+				return;
+			}
+			var uPCpage = new UPC();
+			Report.IsTrue(uPCpage.DeleteUPC(upc), "Failed to click delete for UPC " + upc + ".", "Successfully clicked delete for UPC " + upc + ".");
+
+		}
+
+		[StepDefinition(@"In the Universal Product Code \(UPC\) page I click Save")]
+		public void InTheUPCPageIClickSave()
+		{
+			var uPCpage = new UPC();
+			Report.IsTrue(uPCpage.ClickSaveButton(), "Failed to click the Save button.", "Successfully clicked the Save button.");
+		}
 
 
 

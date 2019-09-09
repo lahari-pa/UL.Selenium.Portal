@@ -310,6 +310,7 @@
     <EmbeddedResource Include="Dependencies\Excel\testdoc.xlsx" />
     <None Include="Features\AdditionalProductInformation.feature">
     </None>
+    <None Include="Features\API\ItemSync.feature" />
     <None Include="Features\API\Waste Haulers.feature">
     </None>
     <None Include="Features\Basic Tests.feature">

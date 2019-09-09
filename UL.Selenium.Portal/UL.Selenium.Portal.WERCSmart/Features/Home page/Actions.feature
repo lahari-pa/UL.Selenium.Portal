@@ -29,9 +29,9 @@ Feature: Actions
 Scenario: [73424] View UPCs - Product with UPCs
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then the WERCSmart homepage should load
-	When I filter the products by: Sending to Retailers
-	#And I save the ProductID and Name of the first Product in the grid with a retailer as: TestCase73424
-	And I save the ProductID and Name of the first Product in the grid with a retailer as Product Information, saved as: TestCase73424
+	And I create a product and save as: TestCase73424 and name as: Product73424
+	Then I navigate to the home page
+	Given I search for the product saved as: TestCase73424
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: View UPCs
 	And I switch to the tab with title: View UPCs

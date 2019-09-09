@@ -21,7 +21,6 @@
 @ForwardProductRegistration
 @ProductSetUp
 @run_UPCCasePack
-
 Feature: UPC Case Pack
 
 @TReVorId:21795
@@ -299,4 +298,3 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
 	
-
