@@ -111,12 +111,14 @@ Then I Look for the Landing Page for: 16 minutes
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can be interacted with
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
-#Then I Look for an Alert for a max: 1 minutes
-Then I Look for an Alert for a max: 10 Seconds
-Then I confirm the Inactivity pop is open but dont take a screenshot
-Then Click Yes on the inactivity popup but dont take a screenshot
-Then I confirm the Inactivity pop is closed but dont take a screenshot
+Given I wait for 1200 seconds
+#Then I Check that both an alert and inactivity prompt are on screen
+#Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
+##Then I Look for an Alert for a max: 1 minutes
+#Then I Look for an Alert for a max: 10 Seconds
+#Then I confirm the Inactivity pop is open but dont take a screenshot
+#Then Click Yes on the inactivity popup but dont take a screenshot
+#Then I confirm the Inactivity pop is closed but dont take a screenshot
 And I take a ScreenShot
 
 @Timeout4
@@ -124,12 +126,14 @@ And I take a ScreenShot
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- TimeoutFeature Works Correctly 
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-Then I Look for an Alert every minute for: 4 minutes and when an alert is found I wait for the landing page for: 20 minutes
+Given I wait for 1200 seconds
+Then I Check The landing page has loaded, and report if an Alert and Inactivity Prompt are open if it is not loaded
+#Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
+#Then I Look for an Alert every minute for: 4 minutes and when an alert is found I wait for the landing page for: 20 minutes
 
+@Timeout5
 @TReVorId:23423
 Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup-Inactivity Popup can be interacted with
-	Given I wait for 120 seconds
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
@@ -158,9 +162,9 @@ Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup-Inactivity Popup c
 	Then Click Yes on the inactivity popup
 	Then I confirm the Inactivity pop is closed	
 
+@Timeout6
 @TReVorId:23424
 Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup- TimeoutFeature Works Correctly
-	Given I wait for 120 seconds
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
 	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
@@ -185,9 +189,12 @@ Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup- TimeoutFeature Wo
 	And I click continue on the Forward Product Registration page
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add Case UPC button under the Select UPCs tab
-	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
-	Then I Look for the Landing Page every minute for a max of: 16 minutes
-	Then I Look for an Alert every minute for a max of: 4 minutes
+	Given I wait for 1200 seconds
+	Then I Check The landing page has loaded, and report if an Alert and Inactivity Prompt are open if it is not loaded
+#
+#	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
+#	Then I Look for the Landing Page every minute for a max of: 16 minutes
+#	Then I Look for an Alert every minute for a max of: 4 minutes
 
 	#Then I wait for 960 seconds
 	#And the landing page should load

@@ -8553,5 +8553,65 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
+
+		[StepDefinition("I Check The landing page has loaded, and report if an Alert and Inactivity Prompt are open if it is not loaded")]
+		public void ICheckTheLandinPageHasLoadedAndReportIfNot()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I Check the Landing page has loaded");
+
+			if(!(new LandingPage().WaitForContainerToBeVisible()))
+			{
+				Report.Failure($"The Landing page did not load", false);
+				if (!new InactivityPopup().WaitForContainerToBeVisible(10))
+				{
+					Report.Failure($"The Inactivity prompt was not on screen", false);
+				}
+				else
+				{
+					Report.Success($"The Inactivity prompt was on screen");
+				}
+				if (!SeleniumBrowser.Alert.WaitForAlert(5))
+				{
+					Report.Failure($"The Alert was not on screen", false);
+				}
+				else
+				{
+					Report.Success($"The Alert was on screen");
+				}
+				return;
+
+
+			}
+
+			Report.Success("The Landing Page was loaded");			
+		}
+
+		[StepDefinition("I Check that both an alert and inactivity prompt are on screen")]
+		public void ICheckThatBothAnAlertAndInactivityPromptAreOnScreen()
+		{
+			bool bothOnSceen = true;
+			if (!new InactivityPopup().WaitForContainerToBeVisible(10))
+			{
+				Report.Failure($"The Inactivity prompt was not on screen", false);
+				bothOnSceen = false;
+			}
+			else
+			{
+				Report.Success($"The Inactivity prompt was on screen");
+			}
+			if (!SeleniumBrowser.Alert.WaitForAlert(5))
+			{
+				Report.Failure($"The Alert was not on screen", false);
+				bothOnSceen = false;
+			}
+			else
+			{
+				Report.Success($"The Alert was on screen");
+			}
+
+			Report.IsTrue(bothOnSceen, "Both The Alert and Prompt were not on screen at the same time", " Both the Alert and Prompt were on screen at the same time");
+
+		}
 	}
 }

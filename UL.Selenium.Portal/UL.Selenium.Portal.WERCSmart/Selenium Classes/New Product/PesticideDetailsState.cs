@@ -178,25 +178,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement calendarButton = table.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td//span[@class='input-group-addon']"), 2);
 			// try a few times to click the caldendar button
 			int attempt = 0;
-			while (!this.CalenderDatePickerDisplayed(state) && attempt < 5)
+			while (!this.CalenderDatePickerDisplayed(state) && attempt < 10)
 			{
-				//calendarButton.ScrollElementIntoView();
-				if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
+				try
 				{
-					break;
+					//calendarButton.ScrollElementIntoView();
+					if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
+					{
+						break;
+					}
+
+					//calendarButton.ScrollElementIntoView();
+
+					//this.Table().SendKeys(Keys.PageUp);
+					//if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
+					//{
+					//	break;
+					//}
+					//this.Table().SendKeys(Keys.PageUp);
+					//if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
+					//{
+					//	break;
+					//}
+					Report.Info("Failed to click the calender button.Trying again...");
+					attempt++;
 				}
-				this.Table().SendKeys(Keys.PageUp);
-				if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
+				catch(Exception)
 				{
-					break;
+
 				}
-				this.Table().SendKeys(Keys.PageUp);
-				if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
-				{
-					break;
-				}
-				Report.Info("Failed to click the calender button.Trying again...");
-				attempt++;
 			}
 			if (!this.CalenderDatePickerDisplayed(state))
 			{

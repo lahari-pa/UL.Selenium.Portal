@@ -537,7 +537,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set the date to " + days + " from today: " + targetDate.Day + " " + targetDate.Month + " " + targetDate.Year + " with the calendar selector for state: " + state);
 		}
 
-		[StepDefinition(@"I confirm that the EPA table row for state: (.*) is highlighted with the color: (none|peach|light peach|)")]
+		[StepDefinition(@"I confirm that the EPA table row for state: (.*) is highlighted with the color: (none|orange|yellow)")]
 		public void EPATableRowHighlight(string state, string colour)
 		{
 			string expectedColourCode;
@@ -546,10 +546,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				case "none":
 					expectedColourCode = "rowcolor-0";
 					break;
-				case "light peach":
+				case "yellow":
 					expectedColourCode = "rowcolor-1";
 					break;
-				case "peach":
+				case "orange":
 					expectedColourCode = "rowcolor-2";
 					break;
 				default:
