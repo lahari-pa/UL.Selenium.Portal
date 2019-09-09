@@ -234,7 +234,7 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 		| saved as UPC91801_2 | Aerosol Can    | 32   | 32       |                          | 4A: steel box         |
 	Given I click continue
 	Then I should see the following error text displayed in the UPC screen: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97198
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
 
 @TReVorId:23413
 Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
