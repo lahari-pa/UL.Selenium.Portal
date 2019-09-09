@@ -330,6 +330,7 @@ Scenario: [96071] Archived UPC is permitted to be added to product - New Product
 	Given I should see the Regulatory Documents to Provide Page for the New Product
 	Given I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase96071_2
+
 @TReVorId:23416
 	Scenario: [95988] Mass Upload UPCs Floating
 	Then I generate: 20 random UPC numbers and save them starting with: RandomUPC
