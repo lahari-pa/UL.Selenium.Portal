@@ -2547,12 +2547,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 		[StepDefinition(@"I Check that the product under the retailer: (.*) is under the status: (.*)")]
-		public void ICheckProductUnderRetailerStatus(string retailer,string expectedStatus)
+		public void ICheckProductUnderRetailerStatus(string retailer, string expectedStatus)
 		{
 			string actualStatus = new StudioSHAManager().GetproductStatusByRetailer(retailer);
 			//Report.Info("The Status that is actually showing is: " + actualStatus);
 			Report.Info("The Status We expect is: " + expectedStatus);
 			Report.IsTrue(actualStatus == expectedStatus, "The Product under retailer: " + retailer + " was not in the expected status", "The Product under retailer: " + retailer + " was in the expected status");
+		}
 
 		[StepDefinition(@"In SHA Manager I confirm that there is one item in the grid")]
 		public void InSHAManagerIConfirmThatThereIsOneItemInTheGrid()
@@ -2560,7 +2561,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var sha = new StudioSHAManager();
 			Report.IsTrue(sha.ConfirmThereIsOneProductInTheGrid(), "Failed to find one product in the grid!", "Successfully found one product in the grid.");
 		}
-		}
+		
 	}
 }
 
