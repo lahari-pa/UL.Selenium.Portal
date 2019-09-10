@@ -1852,7 +1852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement activePageControl = this.containerElement.FindElement(By.XPath(".//div[@id='settings']//ul[starts-with(@class,'pagination')]/li[@class='active']/span"), 2);
 				if (activePageControl == null)
 				{
-					Report.Failure("The page control could not be found on the My Packaging Types grid");
+					Report.Info("The page control could not be found on the My Packaging Types grid");
 					return -1;
 				}
 				return int.Parse(activePageControl.Text);
@@ -1919,7 +1919,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var selMyIngredients = new MyIngredients();
 			var rList = new List<IngredientItem>();
 			selMyIngredients.ClickPage("1");
+			Delay.Seconds(1);
 			int pageNumber = selMyIngredients.GetPage("current");
+			Report.Info("Current page number : " + pageNumber);
 			int ingredientNumber = 1;
 			if (pageNumber == -1)
 			{

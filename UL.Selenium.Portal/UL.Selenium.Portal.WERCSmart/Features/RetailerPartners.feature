@@ -287,8 +287,7 @@ Scenario: [56926] My Data & Recipients - What are the Data Usage Tiers - tab/hea
 @TReVorId:22080
 Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New Supplier ID - Save  - DB validation is only for local
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I click the Retail Partners icon in the Navigation Pane
-	And I select the retailer: O'Reilly
+	Given I call Shared Step 57264 (Go To Retail Partners - Select O'Reilly)
 	And I confirm the Retailer Details Page has loaded
 	And I confirm that there is a section labeled: Your Supplier IDs
 	And The Supplier ID Table should be showing
@@ -301,7 +300,7 @@ Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New S
 	And in the Add New Supplier Dialog I click save
 	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id.
 	And in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: This is a required field.
-	And in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: WERCS QA Automated Products test steve
+	And in the Add New Supplier Dialog I select the first option in the Company or Brand Name input and save to context as: companybrand57261
 	And in the Add New Supplier Dialog I click save
 	And in the Add New Supplier Dialog I Confirm that no error shows below Company or Brand Name question
 	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id.
@@ -311,8 +310,8 @@ Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New S
 	And in the Add New Supplier Dialog I enter the following in the Supplier ID input: 654327
 	And in the Add New Supplier Dialog I click save
 	Then I confirm that in the Supplier IDS list the following row exists
-		| Supplier ID | Company or Brand Name                  |
-		| 654327      | WERCS QA Automated Products test steve |
+		| Supplier ID | Company or Brand Name       |
+		| 654327      | saved as: companybrand57261 |
 	And I call Shared Step 58828 - Delete Supplier with ID: 654327
 
 #And I call Shared Step 57247 - Database check - find t_vendor records for specific Retailer: Reilly and Supplier: Products Automation Account

@@ -8479,5 +8479,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
 		}
 
+		[StepDefinition(@"I call Shared Step 57264 \(Go To Retail Partners - Select O'Reilly\)")]
+		public void Shared57264_GoToRetailPartners_SelectOReilly()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the Retail Partners link in the left hand icon list");
+			new StepsHomepage().ClickItemInNavigationPanel("Retail Partners");
+			TestReport.StartStep("I select the retailer: O'Reilly");
+			new StepsRetailPartners().SelectRetailer("O'Reilly");
+		}
+
 	}
 }

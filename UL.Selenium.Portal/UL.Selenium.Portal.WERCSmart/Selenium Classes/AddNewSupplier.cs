@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Castle.Core.Internal;
+using iTextSharp.text;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
@@ -8,6 +11,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class AddNewSupplier : ModalDialog
 	{
+
+		private IWebElement CompanyInput => this.containerElement.FindElement(By.XPath("//select[@id='description' and ./preceding-sibling::label[text()='Company or Brand Name']]"), 2);
+
 		public bool EnterSupplierID(string supplierID)
 		{
 			IWebElement SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID']"), 2);
@@ -93,17 +99,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement companyInput = this.containerElement.FindElement(By.XPath("//select[@id='description' and ./preceding-sibling::label[text()='Company or Brand Name']]"), 2);
-				if (companyInput == null)
+				var el = this.CompanyInput;
+				if (el == null)
 				{
 					return false;
 				}
-				return companyInput.Enabled && companyInput.Displayed;
+				return el.Enabled && el.Displayed;
 			}
 			catch (Exception)
 			{
 				return false;
 			}
+		}
+
+		public List<string> CompanyOrBrandNameOptions()
+		{
+			var el = this.CompanyInput;
+			if (el == null)
+			{
+				return null;
+			}
+			var optionEls = el.FindElements(By.XPath("./option"), 1)?.Where(x => !x.GetAttribute("value").IsNullOrEmpty());
+			return optionEls.Any() ? optionEls.Select(x => x.Text).ToList() : null;
 		}
 
 		public bool SetDefault(bool bDefault)
