@@ -606,7 +606,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			//navEl.ScrollElementIntoView();
+			navEl.ScrollElementIntoView();
 			return navEl.TryClick();
 		}
 
@@ -672,7 +672,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return false;
 					}
 					Report.Info("Entering page number: " + pageNumber);
-					inputEl.EnterText(pageNumber);
+					//inputEl.EnterText(pageNumber);
+					//inputEl.Clear();
+					string text = inputEl.GetAttribute("value");
+					int textLength = text.Length;
+					int count = 0;
+					while(count<textLength)
+					{
+						inputEl.SendKeys(Keys.Delete);
+						count++;
+					}
+					inputEl.SendKeys(pageNumber);
 					return true;
 				}
 				inputEl.EnterText(pageNumber);

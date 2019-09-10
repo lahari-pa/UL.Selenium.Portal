@@ -712,7 +712,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
-			
+
 		}
 
 		[StepDefinition(@"I confirm that there are NO Errors displayed for the Product")]
@@ -720,7 +720,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(!selForwardProdReg.ErrorsDisplayed(), "Errors are showing", "Errors are not showing");
-			
+
 		}
 
 		[StepDefinition(@"In the Add UPC modal window I enter the following information:")]
@@ -902,7 +902,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("Selecting Edit on the UPC saved as: " + caseUPCNumSavedAs + ".");
 			var upcNum = (string)Context.GetFromContext(caseUPCNumSavedAs);
 			var selForwardProdReg = new ForwardProductRegistration();
-		
+
 			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
 			if (upcs.Count == 0)
 			{
@@ -1176,11 +1176,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Starting wait for Alert");
 			int i = 60 * alertWaitMinutes;
 			if (SeleniumBrowser.Alert.WaitForAlert(i))
-				{
-					Report.Success("The Alert Appeared");
-					alertAppeared = true;
-					return;
-				}			
+			{
+				Report.Success("The Alert Appeared");
+				alertAppeared = true;
+				return;
+			}
 
 			if (!alertAppeared)
 			{
@@ -1204,7 +1204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (!alertAppeared)
 			{
-				Report.Failure("The Alert did not appear after: " + alertWaitSeconds + " seconds",false);
+				Report.Failure("The Alert did not appear after: " + alertWaitSeconds + " seconds", false);
 			}
 		}
 
@@ -1240,13 +1240,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			bool landingPageAppeared = false;
 			int i = 60 * landingPageWaitMinutes;
-			if(new LandingPage().WaitForContainerToBeVisible(i))
-				{
+			if (new LandingPage().WaitForContainerToBeVisible(i))
+			{
 				Report.Success("The landing Page Appeared");
-				landingPageAppeared = true;					
+				landingPageAppeared = true;
 				return;
-				}
-			
+			}
+
 			if (landingPageAppeared == false)
 			{
 				Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes");
@@ -1262,30 +1262,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int i = 60 * alertWaitMinutes;
 			int j = 60 * landingPageWaitMinutes;
 
-			
+
 			if (SeleniumBrowser.Alert.WaitForAlert(i))
+			{
+				Report.Success("The Alert Appeared");
+				alertAppeared = true;
+
+				if (new LandingPage().WaitForContainerToBeVisible(j))
 				{
-					Report.Success("The Alert Appeared");
-					alertAppeared = true;
-							
-					if (new LandingPage().WaitForContainerToBeVisible(j))
-						{
-							Report.Success("The landing Page Appeared");
-							landingPageAppeared = true;							
-							return;
-						}
-					
-					if (landingPageAppeared == false)
-					{
-						Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes",false);
-						return;
-					}
-				}			
+					Report.Success("The landing Page Appeared");
+					landingPageAppeared = true;
+					return;
+				}
+
+				if (landingPageAppeared == false)
+				{
+					Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes", false);
+					return;
+				}
+			}
 
 			if (alertAppeared == false)
 			{
 				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
 			}
+
+
 		}
+
+		[StepDefinition(@"I select one of the following retailers: and saved the chosen retailer as: (.*)")]
+		public void ISelectOneOfTheFollowingRetailers(string retailerSavedAs, Table table)
+		{
+		foreach(var row in table.Rows)
+			{
+			var retailerName = row["Retailer"];
+			if(new ForwardProductRegistration().SelectOtherRetailer(retailerName))
+				{
+				Report.Success("The Retailer: " + retailerName + " was selected successfully");
+				Context.AddToContext(retailerSavedAs, retailerName);
+				return;
+				}					
+			}
+			Report.Failure("None of the retailers in the table could be selected");
+		}
+		
 	}
 }

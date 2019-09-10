@@ -331,9 +331,10 @@ Scenario: [67299] Terms of Use - footer
 	Given I confirm the WERCSmart Terms of Use page opened in a new tab and navigate to it
 	And I close the window that opened
 
+@singlerun
 @TReVorId:16679
 Scenario: [65886] My Products - Pagination
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given If my products grid does not contain enough products then I add them until it displays '...' grid navigation option
 	Then The current page in the products grid is: 1
@@ -349,6 +350,7 @@ Scenario: [65886] My Products - Pagination
 	Given I enter the up arrow into the products grid page navigation input then the correct page is shown
 	Given I click ... in the products grid
 	Given I enter the down arrow into the products grid page navigation input then the correct page is shown
+
 
 @TReVorId:16681
 Scenario: [68388] More Filters - Brand
