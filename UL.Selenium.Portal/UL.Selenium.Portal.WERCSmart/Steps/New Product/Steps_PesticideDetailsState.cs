@@ -553,7 +553,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					expectedColourCode = "rowcolor-2";
 					break;
 				default:
-					Report.Failure("The expected colour must be none, peach or light peach");
+					Report.Failure("The expected colour must be none, orange or yellow");
 					return;
 			}
 			// Matching on the 'code' (rowcolor-0, 1, 2) contained in the td class. Reporting the hex code for additional info.

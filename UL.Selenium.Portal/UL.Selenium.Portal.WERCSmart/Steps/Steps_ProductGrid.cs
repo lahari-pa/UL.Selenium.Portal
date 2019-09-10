@@ -2230,13 +2230,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				i++;
 			}
 
-		}
-
-		[StepDefinition(@"I save the randomly generated UPC: (.*) as: (.*)")]
-		public void SaveRandomUPCAs(string upcNumber,string savedAs)
-		{
-			Context.AddToContext(savedAs, upcNumber);
-		}
+		}		
 
 		
 	}

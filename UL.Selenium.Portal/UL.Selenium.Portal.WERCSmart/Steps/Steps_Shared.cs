@@ -22,6 +22,7 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -8622,6 +8623,187 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsHomepage().ClickItemInNavigationPanel("Retail Partners");
 			TestReport.StartStep("I select the retailer: O'Reilly");
 			new StepsRetailPartners().SelectRetailer("O'Reilly");
+		}
+
+		[StepDefinition(@"I call Shared Step 87897 \(Forwarding - Edit Existing Case UPC: (.*) - confirm data shown correctly, change all data, Save, Continue\) and save the table as: (.*)")]
+		public void GivenICallSharedStep87897ForwardingEditExistingCaseUpcConfirmDataShownCorrectlyChangeAllDataSaveContinue(string caseUPCNumSavedAs, string tableSavedAs, Table table)
+		{
+			TestReport.UseSubSteps = true;
+			Context.AddToContext(tableSavedAs, table);
+			var editUPC = new ForwardProductRegistration.EditUPC();
+			TestReport.StartStep("Selecting Edit on the UPC saved as: " + caseUPCNumSavedAs + ".");
+			var upcNum = (string)Context.GetFromContext(caseUPCNumSavedAs);
+			var selForwardProdReg = new ForwardProductRegistration();
+
+			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
+			if (upcs.Count == 0)
+			{
+				Report.Failure("No UPC rows were found in the grid");
+				Report.Screenshot();
+				return;
+			}
+			bool successState = false;
+			foreach (var item in upcs)
+			{
+				if (item.UPCInfo.UPCNumber == upcNum)
+				{
+					Report.IsTrue(item.UPCInfo.SelectUPC(), "Failed to select UPC: " + upcNum + ".", "Succesfully selected the UPC: " + upcNum + ".");
+					Report.IsTrue(item.UPCInfo.ClickAction("edit"), "Failed to click edit on UPC: " + upcNum + ".", "Succesfully clicked edit on UPC: " + upcNum + ".");
+					successState = true;
+				}
+
+			}
+			if (successState == false)
+			{
+				Report.Failure(@"The UPC with number: " + upcNum + " was not found.");
+				return;
+			}
+
+
+			TestReport.StartStep("I check the Edit UPC popup appears");
+			editUPC.WaitForContainerToBeVisible(30);
+
+			TestReport.StartStep("I confirm the UPC Number field is shown and is populated with the correct Case UPC");
+			Report.IsTrue(editUPC.UPCNumber == upcNum, "The UPC number did not match expected", "The UPC number matched the expected value");
+
+			TestReport.StartStep("I confirm the Container Type field is shown and is populated with the correct Case UPC");
+			TableRow row = table.Rows[0];
+			string containerValue = row["Container type"].ToString();
+			Report.IsTrue(editUPC.Type == containerValue, "The Container Type did not match expected", "The Container Type matched the expected value");
+
+
+			TestReport.StartStep("I confirm the Size field is shown and is populated with the correct Case UPC");
+			string sizeValue = row["Size"].ToString();
+			Report.IsTrue(editUPC.Size == sizeValue, "The Size did not match expected", "The Size  matched the expected value");
+
+			TestReport.StartStep("I confirm the Quantity field is shown and is populated with the correct Case UPC");
+			string quantityValue = row["Quantity"].ToString();
+			Report.IsTrue(editUPC.Quantity == quantityValue, "The Quanitity did not match expected", "The Quanitity matched the expected value");
+
+			TestReport.StartStep("I confirm the Individual UPC field is shown and is populated with the correct Case UPC");
+			string individualUPCValue = row["Individual UPC contained in the Case Pack"].ToString();
+
+			if (Regex.IsMatch(row["Individual UPC contained in the Case Pack"], "<(.*)>"))
+			{
+				var match = Regex.Match(row["Individual UPC contained in the Case Pack"], "<(.*)>").Groups[1].Value;
+				if (Context.Contains(match, true))
+				{
+					individualUPCValue = Context.GetFromContext(match).ToString();
+				}
+
+			}
+
+			Report.IsTrue(editUPC.IndividualUPCContainedInTheCasePack == individualUPCValue, "The Individual UPC option did not match expected", "The Individual UPC option matched the expected value");
+
+			TestReport.StartStep("I confirm the Transportation Options field is shown and is populated with the correct Case UPC");
+			string transportationOptionsValue = row["Transportation Options"].ToString();
+			Report.IsTrue(editUPC.TransportationOptions == transportationOptionsValue, "The Transportation Option did not match expected", "The Transportation Option matched the expected value");
+
+			TestReport.StartStep("I change the Container Type");
+			TableRow secondRow = table.Rows[1];
+			string secondContainerValue = secondRow["Container type"].ToString();
+			editUPC.Type = secondContainerValue;
+			Report.IsTrue(editUPC.Type == secondContainerValue, "The Container Type was not changed", "The Container Type was changed");
+
+
+			TestReport.StartStep("I change the Size Type");
+			string secondSizeValue = secondRow["Size"].ToString();
+			editUPC.Size = secondSizeValue;
+			Report.IsTrue(editUPC.Size == secondSizeValue, "The Size was not changed", "The Size was changed");
+
+			TestReport.StartStep("I change the Quantity Type");
+			string secondQuantityValue = secondRow["Quantity"].ToString();
+			editUPC.Quantity = secondQuantityValue;
+			Report.IsTrue(editUPC.Quantity == secondQuantityValue, "The Quanitity was not changed", "The Quanitity was changed");
+
+
+			TestReport.StartStep("I change the Individual UPC value");
+			string secondIndividualUPCValue = secondRow["Individual UPC contained in the Case Pack"].ToString();
+			if (Regex.IsMatch(row["Individual UPC contained in the Case Pack"], "<(.*)>"))
+			{
+				var match = Regex.Match(secondRow["Individual UPC contained in the Case Pack"], "<(.*)>").Groups[1].Value;
+				if (Context.Contains(match, true))
+				{
+					secondIndividualUPCValue = Context.GetFromContext(match).ToString();
+				}
+			}
+			editUPC.IndividualUPCContainedInTheCasePack = secondIndividualUPCValue;
+			Report.IsTrue(editUPC.IndividualUPCContainedInTheCasePack == secondIndividualUPCValue, "The Individual UPC option was not changed", "The Individual UPC option was changed");
+
+			TestReport.StartStep("I change the Transportation Options");
+			string secondTransportationOptionsValue = secondRow["Transportation Options"].ToString();
+			editUPC.TransportationOptions = secondTransportationOptionsValue;
+			Report.IsTrue(editUPC.TransportationOptions == secondTransportationOptionsValue, "The Transportation Option was not changed", "The Transportation Option was changed");
+
+			TestReport.StartStep("I Click Save in the Edit UPC popup");
+			Report.IsTrue(editUPC.ClickButton("Save"), "Failed to click save in the edit UPC popup", "Succesfully clicked save in the edit upc popup");
+
+			TestReport.StartStep("I check the Edit UPC popup disappears");
+			Report.IsTrue(editUPC.WaitForContainerToBeInvisible(30), "The edit upc popup did not appear", "The edit upc appeared");
+			TestReport.StartStep("I Confirm the Case UPC is shown in the right hand table with the new selections");
+
+			List<ForwardProductRegistration.SelectUPCs> upcsEdited = selForwardProdReg.GetUPCs();
+			if (upcsEdited.Count == 0)
+			{
+				Report.Failure("No UPC rows were found in the grid");
+				Report.Screenshot();
+				return;
+			}
+			Report.Info("There were: " + upcsEdited.Count + " UPCs to check");
+			bool noIssues = true;
+			bool foundCaseUPC = false;
+			int i = 1;
+			foreach (var item in upcsEdited)
+			{
+				if (item.UPCInfo.UPCNumber == upcNum)
+				{
+					foundCaseUPC = true;
+
+
+					if (item.ContainerType != secondRow["Container type"].ToString())
+					{
+						Report.Failure("Container Type did not found match");
+						noIssues = false;
+					}
+					if (item.Size != secondRow["Size"].ToString())
+					{
+						Report.Failure("Size did not match");
+						noIssues = false;
+					}
+					if (item.Quantity != secondRow["Quantity"].ToString())
+					{
+						Report.Failure("Quantity did not match");
+						noIssues = false;
+					}
+					if (item.UPCContained != null)
+					{
+						Report.Failure("The Individual UPC contained in the Case Pack did not match");
+						noIssues = false;
+					}
+					if (item.TransportationOption != secondRow["Transportation Options"].ToString())
+					{
+						string actualTransportOption = item.TransportationOption.Replace(" ", "").Trim();
+						string expectedTrasportOption = secondRow["Transportation Options"].ToString().Replace(" ", "").Trim();
+						if (actualTransportOption != expectedTrasportOption)
+						{
+							Report.Failure("The Trasnportations Option did not match");
+							noIssues = false;
+						}
+					}
+
+					break;
+				}
+
+			}
+			Report.IsTrue(foundCaseUPC, "The Case Upc with UPC number: " + upcNum + " was not found in the table.", "The Case Upc with UPC number: " + upcNum + " was found in the table.");
+			if (foundCaseUPC)
+			{
+				Report.IsTrue(noIssues, "The select UPCs table on the right side does not contain all of the new selections for the case UPC: " + upcNum + ".", "The select UPCs table on the right contains all of the new selections for the case UPC: " + upcNum + ".");
+			}
+
+			TestReport.StartStep("I click Continue");
+			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
+
 		}
 	}
 }

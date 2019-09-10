@@ -1517,5 +1517,208 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure("Failed to get an existing UPC!");
 		}
+
+		[StepDefinition(@"I Look for an Alert every minute for a max of: (.*) minutes and when an alert is found I wait for the landing page for a max of: (.*) minutes")]
+		public void LookForAlertForXMinutesAndWaitForLandingPageForY(int alertWaitMinutes, int landingPageWaitMinutes)
+		{
+
+			bool alertAppeared = false;
+			bool landingPageAppeared = false;
+
+			for (int i = 0; i < alertWaitMinutes; i++)
+			{
+				if (SeleniumBrowser.Alert.WaitForAlert(60))
+				{
+					Report.Success("The Alert Appeared");
+					alertAppeared = true;
+					if (i == 0)
+					{
+						Report.Info("Waited for 1 minute or less before Alert appeared");
+					}
+					else
+					{
+						Report.Info("Alert appeared within: " + (i + 1) + " minutes");
+					}
+					for (int j = 0; j < landingPageWaitMinutes; j++)
+					{
+						if (new LandingPage().WaitForContainerToBeVisible(60))
+						{
+							Report.Success("The landing Page Appeared");
+							landingPageAppeared = true;
+							if (j == 0)
+							{
+								Report.Info("Waited for 1 minute or less before landing Page appeared");
+							}
+							else
+							{
+								Report.Info("landing Page appeared within: " + (j + 1) + " minutes");
+							}
+							return;
+						}
+					}
+					if (landingPageAppeared == false)
+					{
+						Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes");
+						return;
+					}
+				}
+			}
+
+			if (alertAppeared == false)
+			{
+				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for an Alert every minute for a max of: (.*) minutes")]
+		public void LookForAlertForXMinutes(int alertWaitMinutes)
+		{
+
+			bool alertAppeared = false;
+			Report.Info("Starting wait for Alert");
+			for (int i = 0; i < alertWaitMinutes; i++)
+			{
+				if (SeleniumBrowser.Alert.WaitForAlert(60))
+				{
+					Report.Success("The Alert Appeared");
+					alertAppeared = true;
+					if (i == 0)
+					{
+						Report.Info("Waited for 1 minute or less before Alert appeared");
+						return;
+					}
+					else
+					{
+						Report.Info("Alert appeared within: " + (i + 1) + " minutes");
+						return;
+					}
+				}
+			}
+
+			if (!alertAppeared)
+			{
+				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for an Alert for a max: (.*) minutes")]
+		public void LookForAlertForXMinutesTotal(int alertWaitMinutes)
+		{
+
+			bool alertAppeared = false;
+			Report.Info("Starting wait for Alert");
+			int i = 60 * alertWaitMinutes;
+			if (SeleniumBrowser.Alert.WaitForAlert(i))
+			{
+				Report.Success("The Alert Appeared");
+				alertAppeared = true;
+				return;
+			}
+
+			if (!alertAppeared)
+			{
+				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for an Alert for a max: (.*) Seconds")]
+		public void LookForAlertForXSecondsTotal(int alertWaitSeconds)
+		{
+
+			bool alertAppeared = false;
+			Report.Info("Starting wait for Alert");
+			int i = alertWaitSeconds;
+			if (SeleniumBrowser.Alert.WaitForAlert(i))
+			{
+				Report.Success("The Alert Appeared");
+				alertAppeared = true;
+				return;
+			}
+
+			if (!alertAppeared)
+			{
+				Report.Failure("The Alert did not appear after: " + alertWaitSeconds + " seconds", false);
+			}
+		}
+
+		[StepDefinition(@"I Look for the Landing Page every minute for a max of: (.*) minutes")]
+		public void LookForLandingPageForXMinutes(int landingPageWaitMinutes)
+		{
+			bool landingPageAppeared = false;
+			for (int j = 0; j < landingPageWaitMinutes; j++)
+			{
+				if (new LandingPage().WaitForContainerToBeVisible(60))
+				{
+					Report.Success("The landing Page Appeared");
+					landingPageAppeared = true;
+					if (j == 0)
+					{
+						Report.Info("Waited for 1 minute or less before landing Page appeared");
+					}
+					else
+					{
+						Report.Info("landing Page appeared within: " + (j + 1) + " minutes");
+					}
+					return;
+				}
+			}
+			if (landingPageAppeared == false)
+			{
+				Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for the Landing Page for: (.*) minutes")]
+		public void LookForLandingPageForXMinutesTotal(int landingPageWaitMinutes)
+		{
+			bool landingPageAppeared = false;
+			int i = 60 * landingPageWaitMinutes;
+			if (new LandingPage().WaitForContainerToBeVisible(i))
+			{
+				Report.Success("The landing Page Appeared");
+				landingPageAppeared = true;
+				return;
+			}
+
+			if (landingPageAppeared == false)
+			{
+				Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes");
+			}
+		}
+
+		[StepDefinition(@"I Look for an Alert every minute for: (.*) minutes and when an alert is found I wait for the landing page for: (.*) minutes")]
+		public void LookForAlertForXMinutesAndWaitForLandingPageForYTotal(int alertWaitMinutes, int landingPageWaitMinutes)
+		{
+
+			bool alertAppeared = false;
+			bool landingPageAppeared = false;
+			int i = 60 * alertWaitMinutes;
+			int j = 60 * landingPageWaitMinutes;
+
+
+			if (SeleniumBrowser.Alert.WaitForAlert(i))
+			{
+				Report.Success("The Alert Appeared");
+				alertAppeared = true;
+
+				if (new LandingPage().WaitForContainerToBeVisible(j))
+				{
+					Report.Success("The landing Page Appeared");
+					landingPageAppeared = true;
+					return;
+				}
+
+				if (landingPageAppeared == false)
+				{
+					Report.Failure("The Landing Page did not appear after: " + landingPageWaitMinutes + " minutes", false);
+					return;
+				}
+			}
+
+			if (alertAppeared == false)
+			{
+				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
+			}
+		}
 	}
 }

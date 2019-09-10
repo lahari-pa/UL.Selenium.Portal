@@ -33,8 +33,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ErrorsDisplayed()
 		{
-			bool errorsDisplayed = this.containerElement.FindElement(By.XPath(".//i[contains(@class, 'exclamation')]//ancestor::p//ancestor::div[@data-bind and @style]"),2).Displayed;
-			return errorsDisplayed;
+			try
+			{
+				bool errorsDisplayed = this.containerElement.FindElement(By.XPath(".//i[contains(@class, 'exclamation')]//ancestor::p//ancestor::div[@data-bind and @style]"), 2).Displayed;
+				return errorsDisplayed;
+			}
+			catch(Exception)
+			{
+					return false;
+			}
 		}
 
 
@@ -216,7 +223,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectOtherRetailer(string retailer)
 		{
-			IWebElement retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//span[contains(text(),'" + retailer + "')]/../input"), 2);
+			IWebElement retailerInput = this.containerElement.FindElement(By.XPath(@".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//span[contains(text(),""" + retailer + @""")]/../input"), 2);
 
 			if (retailerInput == null)
 			{

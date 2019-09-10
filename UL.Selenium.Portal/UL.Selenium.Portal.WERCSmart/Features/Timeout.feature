@@ -111,12 +111,12 @@ Then I Look for the Landing Page for: 16 minutes
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can be interacted with
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-Given I wait for 1200 seconds
+Then I Look for an Alert for a max: 10 Seconds
+Given I wait for 880 seconds
 And I take a ScreenShot
 #Then I Check that both an alert and inactivity prompt are on screen
 #Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes and no screenshot is taken
 ##Then I Look for an Alert for a max: 1 minutes
-#Then I Look for an Alert for a max: 10 Seconds
 #Then I confirm the Inactivity pop is open but dont take a screenshot
 #Then Click Yes on the inactivity popup but dont take a screenshot
 #Then I confirm the Inactivity pop is closed but dont take a screenshot
