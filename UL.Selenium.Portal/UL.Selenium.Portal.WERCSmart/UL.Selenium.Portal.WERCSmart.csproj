@@ -380,6 +380,7 @@
     </None>
     <None Include="Features\NewProduct.feature">
     </None>
+    <None Include="Features\Product Registration\Batteries.feature" />
     <None Include="Features\Product Registration\Duplicate UPC.feature" />
     <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd.feature">
     </None>
