@@ -20,6 +20,7 @@
 @SHA
 @ForwardProductRegistration
 @ProductSetUp
+@ViewUpcs
 @run_UPC
 Feature: UPC
 
@@ -203,7 +204,7 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 		| Option              |
 		| Size (Fluid Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
-	  
+
 Scenario: [87832] View Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC87832
@@ -274,7 +275,55 @@ Scenario: [87825] Summary Shows Case UPC Data
 	And I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
 
-Scenario: [95988] Mass Upload UPCs Floating
+Scenario: [96071] Archived UPC is permitted to be added to product - New Product registration
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I generate a random UPC number and save as: UPC96071_2
+	And I filter the products by: Accepted by Retailers
+	And I save the ProductID and Name of the first Product in the grid with a retailer as: TestCase96071
+	And I click Row Actions for product saved as: TestCase96071
+	Then I click on the Row Action: Edit UPCs
+	And I save the first UPC in the list as: UPC96071
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I click the following option in the bottom menu: Search
+	And In SHA Manager ProductSearch page I run search:
+		| Search Term | Search Value      |
+		| Status      | All               |
+		| UPC         | saved as UPC96071 |
+	And In SHA Manager I confirm that there is one item in the grid
+	And I navigate to the landing page
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I filter for the product saved as: TestCase96071
+	And I click Row Actions for product saved as: TestCase96071
+	Then I click on the Row Action: Process UPC Update
+	Then I delete UPC saved as: UPC96071
+	And I click the 'Add UPC' button
+	And I enter UPC Number: saved as UPC96071_2
+	And I Select a container type from the drop down list
+	And I enter Size Value: 12
+	And In the Universal Product Code (UPC) page I click Save
+	Given In the Data Acceptance page I click on the Accept button
+	Given I navigate to the home page
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase96071_2
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	And I click the 'Add UPC' button
+	And I enter UPC Number: saved as UPC96071
+	And I Select a container type from the drop down list
+	And I enter Size Value: 12
+	Given in the Universal Product Code (UPC) page I click Continue
+	Given I should see the Regulatory Documents to Provide Page for the New Product
+	Given I navigate to the home page
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase96071_2
+
+@TReVorId:23416
+	Scenario: [95988] Mass Upload UPCs Floating
 	Then I generate: 20 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -289,14 +338,14 @@ Scenario: [95988] Mass Upload UPCs Floating
 	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I click continue
 	And I click Sample File link and verify the Upload UPC form and save it as test95988 with data:
-		| UPC          | Quantity | Size | Net Explosive Mass | US:�Part Number | US:�Item Number | GP:�Part Number | SP:�Part Number | TG:�DPCI    | HD:�OMSID | CT: Item Number   |
+		| UPC          | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   |
 		| 823973000000 | 1        | 11   | 1.22               | 11AB45          | 1001            | 1111            | A0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |
 		| 71617198008  | 2        | 22   | 2.33               | 12AB56          | 1002            | 2222            | B0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |
 		| 978959000000 | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |
 		| 688267000000 | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |
 		| 854911000000 | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
 	And I edit the testdoc.xlsx, and save its filepath as: Bulktest95988 and verify it contains the UPC data in the table saved as: UPCTable95988
-		| UPC           | Quantity | Size | Net Explosive Mass | US:�Part Number | US:�Item Number | GP:�Part Number | SP:�Part Number | TG:�DPCI    | HD:�OMSID | CT: Item Number   |
+		| UPC           | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   |
 		| <RandomUPC1>  | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |
 		| <RandomUPC2>  | 2        | 32   | 2.33               | 00BB02          | 2002            | 1112            | G0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |
 		| <RandomUPC3>  | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |

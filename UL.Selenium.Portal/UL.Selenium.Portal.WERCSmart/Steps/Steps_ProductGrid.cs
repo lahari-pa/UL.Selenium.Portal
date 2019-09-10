@@ -375,6 +375,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I click Row Actions for product saved as: (.*)")]
+		public void IClickRowActionsForTheProductSavedAs(string savedAs)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking 'Row Actions' for product saved as " + savedAs + ".");
+			try
+			{
+				var product = (ProductGridItem)Context.GetFromContext(savedAs);
+				Report.Info("Clicking 'Row Actions' for product saved as " + savedAs);
+				var selProdGrid = new ProductsGrid();
+				if (selProdGrid.ProductsCount() == 0)
+				{
+					Report.Failure("No products present! Cannot click Row Actions!");
+					return;
+				}
+				Report.Info("Found products in grid, clicking action button...");
+				Report.IsTrue(selProdGrid.ClickActionsForProduct(product.ProductId), "Failed to click Action Button!", "Successfully clicked the Action Button!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I click on the Row Action: (.*)")]
 		public void ClickRowAction(string action)
 		{

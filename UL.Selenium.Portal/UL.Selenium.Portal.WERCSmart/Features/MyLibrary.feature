@@ -155,6 +155,7 @@ Scenario: [70539] Add an Ingredient (Basic) and remove
 	Given I click: YES in the 'Remove Component from My Ingredients' pop up
 	Then I confirm My Ingredient saved as: water70539 in My Library has been removed from the grid
 	# delete TestCase70539
+	Then I navigate to the home page
 	Then I delete the product: TestCase70539
 
 @TReVorId:22228
@@ -190,6 +191,7 @@ Scenario: [70556] Add an Ingredient (Trade secret) and remove
 	Then I confirm the component name in the delete product popup matches the ingredient saved as: water70556
 	Given I click: YES in the 'Remove Component from My Ingredients' pop up
 	Then I confirm My Ingredient saved as: water70556 in My Library has been removed from the grid
+	Then I navigate to the home page
 	Then I delete the product: TestCase70556
 
 @TReVorId:22229
@@ -231,6 +233,7 @@ Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 	Then I confirm the component name in the delete product popup matches the ingredient saved as: formaldehyde70567
 	Given I click: YES in the 'Remove Component from My Ingredients' pop up
 	Then I confirm My Ingredient saved as: formaldehyde70567 in My Library has been removed from the grid
+	Then I navigate to the home page
 	Then I delete the product: TestCase70567
 
 @TReVorId:22231
@@ -261,12 +264,12 @@ Scenario: [73329] Edit Ingredient
 		| 1     | Y                        | N                  | +                  |
 		| 2     | N                        | Y                  | =                  |
 		| 3     | N                        | N                  | -                  |
-		| 4     | N                        | Y                  | +                  |
+		| 4     | N                        | Y                  | =                  |
 		| 5     | Y                        | N                  | +                  |
 		| 6     | Y                        | N                  | +                  |
 		| 7     | N                        | Y                  | =                  |
 		| 8     | N                        | N                  | -                  |
-		| 9     | N                        | Y                  | +                  |
+		| 9     | N                        | Y                  | =                  |
 		| 10    | Y                        | N                  | +                  |
 	And I click Save in the My Ingredients tab
 	Given I navigate to the home page
@@ -276,18 +279,18 @@ Scenario: [73329] Edit Ingredient
 	Given I navigate to the My Ingredients tab in the My Library page
 	And I confirm that all changes in edited ingredients: My Library Ingredients Edited were saved
 	# Repeat editing steps - check saved changes persist over mutliple operation
-	Given I edit the ingredients: My Library New Ingredients and save the edited ingredients to context as: My Library Ingredients Edited 2
+	Given I edit the ingredients: My Library Ingredients Edited and save the edited ingredients to context as: My Library Ingredients Edited 2
 		| Index | Click Publicly Disclosed | Click Trade Secret | Public Name Change |
 		| 1     | Y                        | N                  | +                  |
-		| 2     | N                        | Y                  | -                  |
+		| 2     | N                        | Y                  | +                  |
 		| 3     | Y                        | N                  | -                  |
-		| 4     | N                        | N                  | +                  |
+		| 4     | N                        | Y                  | +                  |
 		| 5     | N                        | N                  | =                  |
-		| 6     | Y                        | N                  | +                  |
-		| 7     | N                        | Y                  | +                  |
+		| 6     | Y                        | Y                  | =                  |
+		| 7     | N                        | Y                  | =                  |
 		| 8     | Y                        | N                  | -                  |
-		| 9     | N                        | Y                  | +                  |
-		| 10    | Y                        | N                  | =                  |
+		| 9     | N                        | Y                  | =                  |
+		| 10    | Y                        | Y                  | =                  |
 	And I click Save in the My Ingredients tab
 	Given I navigate to the home page
 	Then The home screen should load

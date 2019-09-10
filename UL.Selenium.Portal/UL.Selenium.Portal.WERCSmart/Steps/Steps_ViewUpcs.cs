@@ -57,5 +57,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(numUPCs == upcs.Count, "Number of Case UPCs did not match the number saved!",
 				"Number of Case UPCs matches number saved.");
 		}
+
 	}
 }

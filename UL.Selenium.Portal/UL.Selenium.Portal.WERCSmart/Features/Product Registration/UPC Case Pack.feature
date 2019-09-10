@@ -21,7 +21,6 @@
 @ForwardProductRegistration
 @ProductSetUp
 @run_UPCCasePack
-
 Feature: UPC Case Pack
 
 @TReVorId:21795
@@ -345,7 +344,6 @@ Then I Check that the product under the retailer: Amazon is under the status: Ac
 Then I Check that the product under the retailer: <ChosenRetailer87894> is under the status: Submitted
 Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87894
 Then I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: UPC876851 for the retailer: Amazon using details saved in the table: EditCaseUPCTable87894
-
 
 
 

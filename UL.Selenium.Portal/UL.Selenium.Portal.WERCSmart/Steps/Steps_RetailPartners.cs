@@ -1200,6 +1200,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Entered company or brand name value");
 		}
 
+		[StepDefinition(@"in the Add New Supplier Dialog I select the first option in the Company or Brand Name input and save to context as: (.*)")]
+		public void GivenInTheAddNewSupplierDialogISelectTheFirstOptionInTheCompanyOrBrandNameInput(string savedAs)
+		{
+			var thisAddNewSupplier = new AddNewSupplier();
+			var options = thisAddNewSupplier.CompanyOrBrandNameOptions();
+			if (options == null || !options.Any())
+			{
+				Report.Failure("No options were found in the Company or Brand Name select input!");
+				Report.Screenshot();
+				return;
+			}
+			var option = options.First();
+			Context.AddToContext(savedAs, option);
+			Report.Info("Selecting option: " + option);
+			Report.IsTrue(thisAddNewSupplier.EnterCompanyOrBrandName(option), "Failed to add company or brand name input",
+				"Entered company or brand name value");
+		}
+
+		//CompanyOrBrandNameOptions()
+
 		[StepDefinition(@"in the Add New Supplier Dialog I Confirm that no error shows below Company or Brand Name question")]
 		public void GivenInTheAddNewSupplierDialogIConfirmThatNoErrorShowsBelowCompanyOrBrandNameQuestion()
 		{
@@ -1216,7 +1236,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected no error is showing below Supplier ID question");
 		}
 
-		//| Supplier ID | Company or Brand Name |
+		/// <summary>
+		/// Requires a table with columns: | Supplier ID | Company or Brand Name |
+		/// Company or Brand Name may use 'saved as: (.*)' where (.*) is the Context savedAs string
+		/// </summary>
 		[Then(@"I confirm that in the Supplier IDS list the following row exists")]
 		public void ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(Table table)
 		{
@@ -1224,6 +1247,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			string expectedSupplierID = table.Rows[0]["Supplier ID"];
 			string expectedCompany = table.Rows[0]["Company or Brand Name"];
+			if (expectedCompany.StartsWith("saved as:"))
+			{
+				var savedAs = expectedCompany.Replace("saved as:", "").Trim();
+				expectedCompany = Context.GetFromContext(savedAs)?.ToString();
+				if (expectedCompany == null)
+				{
+					Report.Failure("Failed to get Company Brand Name from context as: " + savedAs);
+					return;
+				}
+			}
 			Supplier matchingSupplier = allSuppliers.FirstOrDefault(x => x.SupplierID == expectedSupplierID && x.CompanyOrBrandName == expectedCompany);
 
 			Report.IsTrue(matchingSupplier != null, "No matching row was found in the list",
