@@ -8456,6 +8456,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new NewProduct().ClickContinue();
 		}
 
+		[StepDefinition(@"I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: (.*)")]
+		public void Shared43587_SHAManager_CompletedProduct_AddToRecertReason20(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step: 43587");
+			var MyStepsSha = new Steps_SHA();
+
+			var productTable = new Table(new string[] {
+				"ProductID"
+			});
+			productTable.AddRow(new string[] {
+				"saved as " + savedAs
+			});
+			MyStepsSha.GivenInSHAManagerISetTheFilterForStatusTo("Completed");
+			Delay.Seconds(5);
+			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
+			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
+			MyStepsSha.ThenTheAddProductToRecertificationScreenShouldBeShowing();
+			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(20);
+			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
+		}
+
 		[StepDefinition(@"I call Shared Step 88419 \(SHA > UPC - Confirm Case UPC fields \(No internal UPC\) > Close window\) for UPC saved as: (.*) for the retailer: (.*) using details saved in the table: (.*)")]
 		public void Shared88419_SHA_UpcList_ConfirmCaseUPCFields(string savedAs,string retailer,string tableSavedAs)
 		{
