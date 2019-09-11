@@ -8828,7 +8828,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm the Unsaved Changes Alert is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
+		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
 		public void ConfirmTheUnsavedChangesAlertDisplayedAfterWait(int expectedWait, int marginOfError)
 		{
 			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
