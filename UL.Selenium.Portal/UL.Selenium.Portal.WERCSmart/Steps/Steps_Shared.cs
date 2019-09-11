@@ -8430,15 +8430,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click expand arrow for: " + upc);
 			myNewProduct.ExpandArrowforUPC(upc);
 			TestReport.StartStep("I add the following into the UPC Fields");
-				var upcInfo = new UpcInformation {
-					ContainerType = containerType,
-					Size = size,
-					UpcNumber = upc,
-					PackageType = pkgType
-				};
-				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to change packagaing type info!",
-					"Successfully changed packagaing type info!");
-				TestReport.StartStep("I click save");
+			var upcInfo = new UpcInformation {
+				ContainerType = containerType,
+				Size = size,
+				UpcNumber = upc,
+				PackageType = pkgType
+			};
+			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to change packagaing type info!",
+				"Successfully changed packagaing type info!");
+			TestReport.StartStep("I click save");
 			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
 			MyStepsNewProduct.GivenIConfirmErrorMessageIsShownBelowField("This is a required field.", "Package Type");
 		}
@@ -8455,6 +8455,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_VOC_OTC_CARB().SetVocContentAsUsed("10");
 			TestReport.StartStep("I click continue");
 			new NewProduct().ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: (.*)")]
+		public void Shared43587_SHAManager_CompletedProduct_AddToRecertReason20(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step: 43587");
+			var MyStepsSha = new Steps_SHA();
+
+			var productTable = new Table(new string[] {
+				"ProductID"
+			});
+			productTable.AddRow(new string[] {
+				"saved as " + savedAs
+			});
+			MyStepsSha.GivenInSHAManagerISetTheFilterForStatusTo("Completed");
+			Delay.Seconds(5);
+			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
+			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
+			MyStepsSha.ThenTheAddProductToRecertificationScreenShouldBeShowing();
+			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(20);
+			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
 		}
 
 		[StepDefinition(@"I call Shared Step 57264 \(Go To Retail Partners - Select O'Reilly\)")]

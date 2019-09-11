@@ -190,7 +190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				thisStudioPowerDesignerPlusDesignMode.DoubleClickDataCode(thisRow["datacode"]);
 				Delay.Seconds(1);
 				var thisGraphicEditor = new GraphicEditor();
-				Report.IsTrue(thisGraphicEditor.Wait_for_load(60), "Graphic editor has not loaded",
+				Report.IsTrue(thisGraphicEditor.Wait_for_load(90), "Graphic editor has not loaded",
 					"Graphic editor has loaded.");
 				string valueToSearchFor = "";
 
