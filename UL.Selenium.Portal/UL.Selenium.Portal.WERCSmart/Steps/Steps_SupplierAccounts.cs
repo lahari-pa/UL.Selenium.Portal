@@ -1062,8 +1062,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUsername(savedAs, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, account.Password), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{
