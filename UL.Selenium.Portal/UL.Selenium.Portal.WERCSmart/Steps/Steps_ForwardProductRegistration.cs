@@ -924,21 +924,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I select one of the following retailers: and saved the chosen retailer as: (.*)")]
-		public void ISelectOneOfTheFollowingRetailers(string retailerSavedAs, Table table)
-		{
-		foreach(var row in table.Rows)
-			{
-			var retailerName = row["Retailer"];
-			if(new ForwardProductRegistration().SelectOtherRetailer(retailerName))
-				{
-				Report.Success("The Retailer: " + retailerName + " was selected successfully");
-				Context.AddToContext(retailerSavedAs, retailerName);
-				return;
-				}					
-			}
-			Report.Failure("None of the retailers in the table could be selected");
-		}
+		
 		
 	}
 }
