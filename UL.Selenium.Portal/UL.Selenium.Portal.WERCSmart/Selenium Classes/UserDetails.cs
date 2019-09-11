@@ -184,7 +184,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			Delay.Seconds(2 * Delay.SpeedFactor);
+			Delay.Seconds(1);
+			GeneralUtilities.Wait_for_load_finish();
 
 			var myDlg = new AddUserThankYouDialog();
 			myDlg.WaitForContainerToBeVisible(60);

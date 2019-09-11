@@ -310,6 +310,7 @@
     <EmbeddedResource Include="Dependencies\Excel\testdoc.xlsx" />
     <None Include="Features\AdditionalProductInformation.feature">
     </None>
+    <None Include="Features\API\ItemSync.feature" />
     <None Include="Features\API\Waste Haulers.feature">
     </None>
     <None Include="Features\Basic Tests.feature">
@@ -379,6 +380,7 @@
     </None>
     <None Include="Features\NewProduct.feature">
     </None>
+    <None Include="Features\NotIncludedGeneralTests.feature" />
     <None Include="Features\Product Registration\Duplicate UPC.feature" />
     <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd.feature">
     </None>

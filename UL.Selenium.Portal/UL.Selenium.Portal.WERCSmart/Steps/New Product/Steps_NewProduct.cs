@@ -109,6 +109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"I should see the (.*) Page")]
+		[StepDefinition(@"I should see the (.*) Page for the New Product")]
 		public void GivenIShouldSeeXPage(string page)
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
@@ -140,7 +141,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ShouldSeeAlistFormError(string error)
 		{
 			var errorActual = new NewProduct().FormError();
-			Report.IsTrue(errorActual.Contains(error), "The expected error was not found! The error text found was: "+errorActual, "Found expected error");
+			Report.IsTrue(errorActual.Contains(error), "The expected error was not found! The error text found was: " + errorActual, "Found expected error");
 		}
 
 		[StepDefinition(@"in page (.*) I should see error: (.*)")]
@@ -331,6 +332,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
+		//[Given(@"I Confirm that the Add Multiple window openswith the UPCs that were added in the document")]
+		//public void GivenIConfirmThatTheAddMultipleWindowOpenswithTheUPCsThatWereAddedInTheDocument()
+		//{
+		// Report.IsTrue(new UPC().VerifyUPCsInAddMultipleWindow(), "UPCs were unable to be verirfied.", "UPCs have been verified successfully.");
+		//}
+
+
 		[StepDefinition(@"I purchase the following additional documents:")]
 		public void ThenIPurchaseTheFollowingAdditionalDocuments(Table table)
 		{
@@ -426,6 +434,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Context.AddToContext(savedas, prodDetails);
 			Report.Success("Product Information saved!");
 		}
+
+
+		//[StepDefinition(@"I save the product Id as: (.*)")]
+		//public void SaveProductId(string savedas)
+		//{
+		//	ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
+		//	string productID = prodDetails.Id;
+		//	Report.Info("Saving product ID: "+productID);
+		//	Context.AddToContext(savedas, productID);
+		//	Report.Success("Product ID saved!");
+		//}
 
 		[StepDefinition(@"I save the context product information as: (.*) where id is: (.*) and product name is: (.*)")]
 		public void GivenISaveTheContextProductInformationAsTestCaseWhereIdIsAndProductNameIsTest(string savedas, string id, string name)
@@ -2026,6 +2045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"the 'Regulatory List' window opens")]
 		public void RegulatoryListWindowOpens()
 		{
+			new RegulatoryList().WaitForContainerToBeVisible();
 			string header = new RegulatoryList().Heading();
 			if (header == null)
 			{
