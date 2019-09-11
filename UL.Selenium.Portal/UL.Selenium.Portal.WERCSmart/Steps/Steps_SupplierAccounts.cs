@@ -41,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myRetailPartner = new StepsRetailPartners();
 			var myProductsetup = new Steps_ProductSetup();
 			var dataNotification = new GoToDataTierNotification();
-
+			myHome.ThenIClickOnUserItem("My Account");
 			//Subscription 
 			myAccount.ThenIClickOnNewSubscription();
 			var subEnrollTable = new Table("Articles", "Enhanced Articles",

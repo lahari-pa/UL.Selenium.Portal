@@ -97,7 +97,7 @@ Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 #And I In the shared step below select nickel metal hydride as your product type
-And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): nickel metal hydride
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel Metal Hydride (NiMH) Battery
 And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 And I call Shared Step 60310 (Additional Product Information - Without Child question)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Nickel
