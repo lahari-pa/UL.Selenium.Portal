@@ -712,7 +712,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
-			
+
 		}
 
 		[StepDefinition(@"I confirm that there are NO Errors displayed for the Product")]
@@ -720,7 +720,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(!selForwardProdReg.ErrorsDisplayed(), "Errors are showing", "Errors are not showing");
-			
+
 		}
 
 		[StepDefinition(@"In the Add UPC modal window I enter the following information:")]
@@ -921,6 +921,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 			Report.Failure("None of the retailers in the table could be selected");
+
 		}
+
+		[StepDefinition(@"I select one of the following retailers: and saved the chosen retailer as: (.*)")]
+		public void ISelectOneOfTheFollowingRetailers(string retailerSavedAs, Table table)
+		{
+		foreach(var row in table.Rows)
+			{
+			var retailerName = row["Retailer"];
+			if(new ForwardProductRegistration().SelectOtherRetailer(retailerName))
+				{
+				Report.Success("The Retailer: " + retailerName + " was selected successfully");
+				Context.AddToContext(retailerSavedAs, retailerName);
+				return;
+				}					
+			}
+			Report.Failure("None of the retailers in the table could be selected");
+		}
+		
 	}
 }
