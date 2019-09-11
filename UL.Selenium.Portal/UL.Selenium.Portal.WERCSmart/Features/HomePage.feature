@@ -334,7 +334,7 @@ Scenario: [67299] Terms of Use - footer
 @singlerun
 @TReVorId:16679
 Scenario: [65886] My Products - Pagination
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given If my products grid does not contain enough products then I add them until it displays '...' grid navigation option
 	Then The current page in the products grid is: 1
