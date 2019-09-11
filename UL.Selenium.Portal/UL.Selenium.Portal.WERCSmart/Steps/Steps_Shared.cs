@@ -8827,5 +8827,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
 
 		}
+
+		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
+		public void ConfirmTheUnsavedChangesAlertDisplayedAfterWait(int expectedWait, int marginOfError)
+		{
+			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
+			if (!new InactivityPopup().WaitUntilDisplayed((expectedWait * 60) + (marginOfError * 60), out int actualWait))
+			{
+				Report.Failure($"The Inactivity popup did not load after {expectedWait + marginOfError} minutes!");
+				Report.Screenshot();
+				return;
+			}
+			// check if pop up was displayed before 'expected wait - margin' (test lower limit)
+			Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
+				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
+				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes");
+		}
 	}
 }
