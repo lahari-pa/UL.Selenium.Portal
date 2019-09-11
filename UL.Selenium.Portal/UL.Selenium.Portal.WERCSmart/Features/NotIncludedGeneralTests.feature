@@ -152,4 +152,36 @@ Then I see notifications in the Alerts Panel
 Then I Check the Alert with text: You have Products Awaiting Update! has the ID: --
 
 
+Scenario: [NOTINCLUDEDGENERALTEST] Dupe UPC tool, Creating product with one dupe upc and one non dupe upc
+
+	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
+	Given I navigate to the landing page
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase91076
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
+	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	Given I click the 'Add UPC' button
+	Given I add the following into the UPC Fields
+		| UPC Number                            | Container Type    | Size | DPCI | Quantity |
+		| saved as ExistingUPC_ProductAccount_1 | Plastic Container | 1    |      |          |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
+	Given I click 'Select all' under Destination Retailers in the UPC page
+	Given I click continue
+	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
+	And I navigate to the home page
+
+
+
+
+
 
