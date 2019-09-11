@@ -499,18 +499,18 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	Then I should see the Pesticide Details - State Registration Details Page
 	And I confirm the State Registration EPA table does not contain any Expiration data
 	Given I set the Expiration Date to be 29 days from today using the calendar selector for state: AL
-	Then I confirm that the EPA table row for state: AL is highlighted with the color: peach
+	Then I confirm that the EPA table row for state: AL is highlighted with the color: orange
 	And I confirm the Expiration Date Provided By Kelly field for state: AL is blank
 	And I confirm the 'Is Kelly Data' field for State: AL is not checked
 	Given I set the Expiration Date to be 60 days from today using the calendar selector for state: NY
-	Then I confirm that the EPA table row for state: NY is highlighted with the color: light peach
+	Then I confirm that the EPA table row for state: NY is highlighted with the color: yellow
 	Given I set the Expiration Date to be 100 days from today using the calendar selector for state: WA
 	Then I confirm that the EPA table row for state: WA is highlighted with the color: none
 	Given I click continue
 	And I should see the Transportation Details 1 Page
 	Then I click the page heading: Pesticide Details - State Registration Details
-	Then I confirm that the EPA table row for state: AL is highlighted with the color: peach
-	Then I confirm that the EPA table row for state: NY is highlighted with the color: light peach
+	Then I confirm that the EPA table row for state: AL is highlighted with the color: orange
+	Then I confirm that the EPA table row for state: NY is highlighted with the color: yellow
 	Then I confirm that the EPA table row for state: WA is highlighted with the color: none
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62799

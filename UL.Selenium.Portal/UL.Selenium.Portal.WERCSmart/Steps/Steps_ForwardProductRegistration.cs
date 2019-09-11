@@ -8,6 +8,7 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -321,6 +322,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab")]
 		public void SelectProductByIDSavedAs(string savedAs)
 		{
+
+
 			var selForwardProductReg = new ForwardProductRegistration();
 			if (savedAs.ToLower().Contains("list"))
 			{
@@ -351,11 +354,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
+
 				string id = Context.GetFromContext(savedAs)?.ToString();
 				if (id == null)
 				{
 					Report.Failure("Could not find product ID in context saved as: " + savedAs);
 					return;
+				}
+				if (id.Contains("ProductInformation"))
+				{
+					Report.Info("text: 'ProductInformation' was contained in the string, searching context for product saved as: " + savedAs);
+
+					try
+					{
+						var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+						id = productToSearch.ProductId;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
 				}
 
 				this.EnterTextInSearchByIDOrProductNameField(id);
@@ -694,6 +712,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
+			
+		}
+
+		[StepDefinition(@"I confirm that there are NO Errors displayed for the Product")]
+		public void ThenIConfirmThatThereAreNoErrorsDisplayedForTheProduct()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(!selForwardProdReg.ErrorsDisplayed(), "Errors are showing", "Errors are not showing");
+			
 		}
 
 		[StepDefinition(@"In the Add UPC modal window I enter the following information:")]
@@ -770,5 +797,130 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered value for Private Label.");
 		}
 
+		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: (.*) under Other Retailers and save it as: (.*)")]  //maybe pick a specific alternative instead of avoiding all with additional data requirments
+		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerThatIsNotXUnderOtherRetailers(string presentRetailer, string savedAs)
+		{
+			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(presentRetailer, savedAs), "Failed to select the first Retailer that is not " + presentRetailer + " or requires additional data under 'Other Retailers'", "Succesfully selected the first retailer that is not " + presentRetailer + "  or requires additional data under 'Other Retailers'");
+		}
+
+		[StepDefinition(@"I confirm that UPC information is displayed in the Select UPCs Table")]
+		public void ConfirmUPCInfromationInSelectUPCsTable()
+		{
+
+			var selForwardProdReg = new ForwardProductRegistration();
+			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
+			if (upcs.Count == 0)
+			{
+				Report.Failure("No UPC rows were found in the grid");
+				Report.Screenshot();
+				return;
+			}
+			Report.Info("There were: " + upcs.Count + " UPCs to check");
+			bool noGaps = true;
+			int i = 1;
+			foreach (var item in upcs)
+			{
+				if (item.UPCInfo.UPCNumber == null)
+				{
+					Report.Failure("Upc number was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+				if (item.ContainerType == null)
+				{
+					Report.Failure("Container Type was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+				if (item.Size == null)
+				{
+					Report.Failure("Size was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+				if (item.UPCInfo.DestinationRetailers == null)
+				{
+					Report.Failure("Destination Retailers was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+
+			}
+
+			Report.IsTrue(noGaps, "The select UPCs table on the right side is missing UPC information", "The select UPCs table on the right side is not missing information");
+
+		}
+
+		[StepDefinition("I Check that the Truck Icon is (present|not present) next to the UPC saved as: (.*)")]
+		public void ICheckTruckIconStatusForSavedAs(string presence, string savedAs)
+		{
+			bool presenceExpected = false;
+			switch (presence)
+			{
+				case "present":
+					presenceExpected = true;
+					break;
+				case "not present":					
+					break;
+				default:
+					Report.Error("presence can only be 'present' or 'not present'");
+					return;
+
+			}
+
+			var upcNum = (string)Context.GetFromContext(savedAs);
+			var selForwardProdReg = new ForwardProductRegistration();
+			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
+			if (upcs.Count == 0)
+			{
+				Report.Failure("No UPC rows were found in the grid");
+				Report.Screenshot();
+				return;
+			}
+			foreach (var item in upcs)
+			{
+				if (item.UPCInfo.UPCNumber == upcNum)
+				{
+					if (item.UPCInfo.TruckIcon == presenceExpected)
+					{
+						Report.Success("The Truck Icon was succesfully found to be " + presence + " for the UPC: " + upcNum + ".");
+						return;
+					}
+					Report.Failure("The Truck Icon was incorrectly found to be " + presence + " for the UPC: " + upcNum + ".");
+					return;
+				}
+			}
+
+			Report.Failure("The UPC with number: " + upcNum + " was not found.");
+
+
+		}
+		
+
+		[StepDefinition(@"I get the product ID for the product saved as: (.*) then I use this ID in the select Products & UPCs page")]
+		public void IGetTheProducIDForSavedAsAndSearcForProduct(string savedAs)
+		{
+			Report.Info("input value is " + savedAs + " . Looking in context for a product information with this value");
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string iD = productDetails.Id;
+			Report.IsTrue(iD.Any(), "iD was empty: " + iD, "iD contained: " + iD);
+
+			Context.AddToContext("idStringSavedAs", iD);
+			new StepsForwardProductRegistration().SelectProductByIDSavedAs("idStringSavedAs");
+		}
+		
+		[StepDefinition(@"I select one of the following retailers: and saved the chosen retailer as: (.*)")]
+		public void ISelectOneOfTheFollowingRetailers(string retailerSavedAs, Table table)
+		{
+			foreach (var row in table.Rows)
+			{
+				var retailerName = row["Retailer"];
+				if (new ForwardProductRegistration().SelectRetailer(retailerName))
+				{
+					Report.Success("The Retailer: " + retailerName + " was selected successfully");
+					Context.AddToContext(retailerSavedAs, retailerName);
+					return;
+				}				
+				Report.Failure("Could not find: " + retailerName + " in the list of retailers");
+
+			}
+			Report.Failure("None of the retailers in the table could be selected");
+		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -298,3 +298,58 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
 	
+	
+
+@singlerun
+@TReVorId:23444
+Scenario: [87894] Forwarding - Edit existing Case UPC 
+
+Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completedstatus
+Given I navigate to the landing page
+And I call Shared Step (Login to WERCSmart - Premium Account)
+Then I filter the products by: Accepted by Retailers
+And I filter for the product saved as: TestCase87894
+And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+Then I should see the header: Select Products & UPCs on the Forward Product Registration window
+#Then I select the product with ID saved as: TestCase87894 under the Select Products tab
+Then I get the product ID for the product saved as: TestCase87685 then I use this ID in the select Products & UPCs page
+Given I click continue on the Forward Product Registration page
+Then I confirm the active Forward Product Registration tab is: Select Retailers
+#And I Select a retailer which is not already present on the product you are working with, make sure to select a retailer that does not require additional data (such as BB, DI, KG)
+#Then In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Amazon under Other Retailers and save it as: ChosenRetailer87894
+Then I select one of the following retailers: and saved the chosen retailer as: ChosenRetailer87894
+| Retailer                                                                       |
+| Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops) |
+| Dick's Sporting Goods                                                          |
+| Kroger                                                                         |
+Given I click continue on the Forward Product Registration page
+Then I select the first product under the Select UPCs tab
+#Then I confirm that: WM is displayed in the Destination Retailers column under Select UPCs
+#<-- use as example for accessing this right side table on select UPCs page
+Then I confirm that UPC information is displayed in the Select UPCs Table
+Then I Check that the Truck Icon is not present next to the UPC saved as: UPC87685
+Then I Check that the Truck Icon is present next to the UPC saved as: UPC876851
+And I call Shared Step 87897 (Forwarding - Edit Existing Case UPC: UPC876851 - confirm data shown correctly, change all data, Save, Continue) and save the table as: EditCaseUPCTable87894
+| Container type | Size | Quantity | Individual UPC contained in the Case Pack | Transportation Options              |
+| Paper bag      | 2    | 4        | <UPC87685>                                | 4A:  steel box                      |
+| Aerosol Can    | 4    | 8        | Individual UPC contained in the Case Pack | 1A1:  non-removable head steel drum |
+Then I confirm the active Forward Product Registration tab is: Product Results
+And I confirm that there are NO Errors displayed for the Product
+And I click continue on the Forward Product Registration page
+Then I confirm the active Forward Product Registration tab is: Review & Submit
+Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+And I click continue on the Forward Product Registration page
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+Then In the Thank You screen I click Home
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
+Then I Check that the product under the retailer: Amazon is under the status: Accepted
+Then I Check that the product under the retailer: <ChosenRetailer87894> is under the status: Submitted
+Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87894
+Then I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: UPC876851 for the retailer: Amazon using details saved in the table: EditCaseUPCTable87894
+
+
+
+
