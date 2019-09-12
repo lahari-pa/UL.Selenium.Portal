@@ -1324,7 +1324,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Beginning get product status by retailer: " + retailer);
 
 			var abbr = new RetailerAbbreviations();
-			abbr.Map.TryGetValue(retailer, out retailerAbbr);
+			abbr.Map.TryGetValue(retailer, out retailerAbbr);			
+			var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == "shorthand").Key;
 			Report.Info("Search for Retailer with Initials: " + retailerAbbr);
 			try
 			{

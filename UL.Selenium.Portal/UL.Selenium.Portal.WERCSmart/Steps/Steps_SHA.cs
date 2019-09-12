@@ -2570,10 +2570,56 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(sha.ConfirmThereIsOneProductInTheGrid(), "Failed to find one product in the grid!", "Successfully found one product in the grid.");
 		}
 
+		[StepDefinition(@"In SHA I Search for exact UPC in (.*) Status for UPC saved as: (.*)")]
+		public void InSHAISearchForExactUPCInForUPCSavedAs(string status, string savedAs)
+		{
+
+			TestReport.UseSubSteps = true;			
+			TestReport.StartStep("I set the status filter to All");
+			var myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.WaitForProductList(60);
+			myStudioShaManager.SelectFromStatusFilter("All");
+			GeneralUtilities.StudioWaitForSpinner();
+			myStudioShaManager.WaitForProductList(60);
+			Report.Info("Getting saved product: " + savedAs);
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+			string upc = (string)Context.GetFromContext(savedAs);
+			Report.Info("Looking for id: " + upc);
+			var table = new Table(new string[] {
+				"SearchTerm",
+				"SearchValue"
+			});
+			table.AddRow(new string[] {
+				"UPC",
+				upc
+			});
+			table.AddRow(new string[] {
+				"Status",
+				status
+			});
+			
+			TestReport.StartStep("I click Srch in the bottom menu list");
+			myStudioShaManager.ClickBottomMenuOption("Search");
+			var myStepsSha = new Steps_SHA();
+			TestReport.StartStep($"I enter ID: {upc} in the UPC box, change Status drop down to All, Click find");
+			Report.Info("Searching for: " + upc);
+			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+			Delay.Seconds(1);
+			Report.Info("Waiting for product list");
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found","Product list is showing");				
+			
+
+		}
+
 		
 
 
-		
+
+
+
 	}
 }
 

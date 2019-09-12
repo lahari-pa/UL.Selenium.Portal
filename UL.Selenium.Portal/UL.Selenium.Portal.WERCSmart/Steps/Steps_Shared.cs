@@ -8895,14 +8895,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 			}
 			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButtonPresent()==expectedPresenceBool,"The Obsolete popup incorrectly "+presence+" show", "The Obsolete popup correctly " + presence + " show");
-			TestReport.StartStep("I close the SHA Manager Product UPC details pop up");
-			Report.IsTrue(upcDetailsPopupTable.CloseButton.TryClick(), "Failed to Click Close in the UPC details popup", "Successfully clicked Click Close in the UPC details popup");
-			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");
+		
 		}
 
 		[StepDefinition(@"I Search using for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx'")]
 		public void ISearchForAProductContainingDuplicateUPCSUsingSpreadSheet()
 		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Replacing the Spreadsheet with a new copy from the embedded resource");
 			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("UPCsDuplicatedwithinAccount.xlsx"), "", "");	
 						
 			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.UPCsDuplicatedwithinAccount.xlsx", out string destination))
@@ -8913,18 +8913,60 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var utils = new ExcelUtilities(destination, "Table");
 
-			List<string> UpcNumbers= utils.Excel_GetColumn(0); //includes the header (so start search at 1 not 0)
-
-			for(int i=1; i<UpcNumbers.Count-1; i++)
+			List<string> UpcNumbers= utils.Excel_GetColumn(1); //includes the header (so start search at 1 not 0)
+			
+			for (int i=1; i<UpcNumbers.Count-1; i++)
 			{
+				TestReport.StartStep($"Searching SHA for a upc found in the duplicate UPC spread sheet. Attempt: {i}");
 				string DupeUPCNumberCurrent = UpcNumbers[i];
 				//do a search for this value in sha
 				//if 2 or more products show,then save this to context then the retailer and id. (use coloums they are in and the same i value)
 				//maybe save these^ value to class (existing one?)
+				Context.AddToContext("DupeUPCNumber105970", DupeUPCNumberCurrent);
+				new Steps_SHA().InSHAISearchForExactUPCInForUPCSavedAs("All", "DupeUPCNumber105970");
+				int numProducts = new StudioSHAManager().GetProductCount();
+				TestReport.StartStep("Ensuring the upc was searched for succesfully and that it is a duplicate by checking the number of products found is 2 or more");
+				if (numProducts>1)
+				{
+					Report.Success("The UPC was searched for succesfully and multiple Products were found");
+					List<Product> productsShown= new StudioSHAManager().GetTopXProducts(1);
+					string productIDFromSHA = productsShown[0].ID;
+					var productInfo = new ProductInformation { Id = productIDFromSHA };
+					Context.AddToContext("ProductID105970", productInfo);
+
+
+					string productRetailerInitials = productsShown[0].Clients;					
+					string productRetailerInitialsFirst = productRetailerInitials.Split(',')[0];
+					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == "shorthand").Key;
+					Context.AddToContext("ProductRetailer105970", fullName);
+
+					//List<string> productIDs = utils.Excel_GetColumn(0);
+					//string productIDCurrent = productIDs[i];
+					//Context.AddToContext("ProductID105970", productIDCurrent); // perhaps get this from the top x product in case this id is gone from being obseleted
+					//List<string> productRetailers = utils.Excel_GetColumn(5);
+					//string productRetailerCurrent = productRetailers[i];
+					//Context.AddToContext("ProductRetailer105970", productRetailerCurrent);
+					//Context.AddToContext("ProductRetailer105970", productRetailerCurrent);
+					return;
+				}
+				Report.Info("The number of products found was less than 2, trying the next upc in the spreadsheet");
 			}
+			Report.Failure("None of the UPCs in the Spreadsheet showed 2 or more products when searched for in SHA");
 
 			
 
+		}
+
+		[StepDefinition(@"I close the SHA Manager Product UPC details pop up")]
+		public void ICloseTheUPCDetailsPopup()
+		{
+
+			TestReport.UseSubSteps = true;
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			TestReport.StartStep("I click the close button in the UPC details popup");
+			Report.IsTrue(upcDetailsPopupTable.CloseButton.TryClick(), "Failed to Click Close in the UPC details popup", "Successfully clicked Click Close in the UPC details popup");
+			TestReport.StartStep("I check to see if the UPC details popup has closed");
+			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");
 		}
 	}
 }
