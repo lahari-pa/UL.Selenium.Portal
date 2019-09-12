@@ -207,6 +207,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click action: " + action + " for user: " + username,
 				"Successfully clicked action: " + action + " for user: " + username);
 			Delay.Seconds(1);
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 		[StepDefinition(@"I go to (.*) in User Grid for the the user called: (.*)")]

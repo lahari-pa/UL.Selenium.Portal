@@ -435,6 +435,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Success("Product Information saved!");
 		}
 
+
+		//[StepDefinition(@"I save the product Id as: (.*)")]
+		//public void SaveProductId(string savedas)
+		//{
+		//	ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
+		//	string productID = prodDetails.Id;
+		//	Report.Info("Saving product ID: "+productID);
+		//	Context.AddToContext(savedas, productID);
+		//	Report.Success("Product ID saved!");
+		//}
+
 		[StepDefinition(@"I save the context product information as: (.*) where id is: (.*) and product name is: (.*)")]
 		public void GivenISaveTheContextProductInformationAsTestCaseWhereIdIsAndProductNameIsTest(string savedas, string id, string name)
 		{
@@ -2034,6 +2045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"the 'Regulatory List' window opens")]
 		public void RegulatoryListWindowOpens()
 		{
+			new RegulatoryList().WaitForContainerToBeVisible();
 			string header = new RegulatoryList().Heading();
 			if (header == null)
 			{
