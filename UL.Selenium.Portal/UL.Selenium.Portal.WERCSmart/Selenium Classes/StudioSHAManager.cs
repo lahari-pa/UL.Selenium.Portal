@@ -498,6 +498,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool RetailerIsArchived(string retailerAbbr, string id)
+		{
+			int indexOfID = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+
+			int indexOfClients = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+			ReadOnlyCollection<IWebElement> idTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfID + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> clientsTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfClients + 1).ToString() + "]"));
+
+			for (int i = 0; i < idTDs.Count; i++)
+			{
+				IWebElement thisIDTD = idTDs[i];
+				if (thisIDTD.GetValue() == id)
+				{
+					IWebElement thisClientsTD = clientsTDs[i];
+					var allClients = thisClientsTD.GetValue().Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+					if (allClients.Contains(retailerAbbr + "**"))
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			return false;
+		}
+
 		public bool RightClickProductByID(string id)
 		{
 			Delay.Seconds(3);
@@ -1122,6 +1160,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool ConfirmUPCArchived(string upc)
+		{
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			IWebElement upcRow = null;
+			foreach (IWebElement row in rows)
+			{
+				string upcNumber = row.Text.Split(' ')[0];
+				if (upcNumber == upc)
+				{
+					upcRow = row;
+				}
+			}
+
+			if (upcRow == null)
+			{
+				Report.Info("Failed to find UPC " + upc + " in row!");
+				return false;
+			}
+
+			string background = upcRow.GetCssValue("background-color");
+
+			return background == "rgb(235, 235, 224)";
+		}
 
 		public bool ClickProcessRecertification()
 		{

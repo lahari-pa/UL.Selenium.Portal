@@ -673,6 +673,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return containsType.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
 		}
 
+		public bool DeleteRetailer(string retailer)
+		{
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr = "";
+			abbr.Map.TryGetValue(retailer, out selectedAbbr);
+
+			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			IWebElement retailerXElem = container.FindElement(By.XPath(@"//span[contains(text(), """ + selectedAbbr + @""")]/../a"), 2);
+
+			return retailerXElem.TryClick();
+		}
+
 		public bool InputUpcInformation(UpcInformation info)
 		{
 			try
