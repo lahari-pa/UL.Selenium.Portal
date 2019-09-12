@@ -8479,11 +8479,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 88419 \(SHA > UPC - Confirm Case UPC fields \(No internal UPC\) > Close window\) for UPC saved as: (.*) for the retailer: (.*) using details saved in the table: (.*)")]
-		public void Shared88419_SHA_UpcList_ConfirmCaseUPCFields(string savedAs,string retailer,string tableSavedAs)
+		public void Shared88419_SHA_UpcList_ConfirmCaseUPCFields(string savedAs, string retailer, string tableSavedAs)
 		{
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I Look for the case upc saved in context, and check it is followed by an asterisk in the UPC table");
-			
+
 			var shaSteps = new Steps_SHA();
 			var studioSHAManger = new StudioSHAManager();
 			Delay.Seconds(10);
@@ -8505,18 +8505,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(upcNumber != null, "There were no UPC numbers containing a *", "There was a UPC number containing a *");
 			Report.IsTrue(upcNumber.Contains(expectedUPCNum), "The UPC number found did not contain the upc number: " + expectedUPCNum, "The UPC number found coontained the upc number: " + expectedUPCNum);
-			
+
 			Report.IsTrue(upcNumber != null && upcNumber.Contains(expectedUPCNum), "Failed to find the upc number: " + expectedUPCNum + " followed by an asterisk", "Succesfully found the upc number: " + expectedUPCNum + " followed by an asterisk");
 
 			TestReport.StartStep("I Click on the link associated with the Case UPC marked by an asterisk");
-			studioSHAManger.ClickUPCSavedAsInProducUPCTable(savedAs);
+			studioSHAManger.ClickCaseUPCSavedAsInProducUPCTable(savedAs);
 			TestReport.StartStep("I Check the UPC detail popup appears");
 			var upcDetails = new StudioSHAManagerUPCDetails();
 			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
-			Report.IsTrue(upcDetails.Wait_for_load(30),"The UPC details popup did not appear","The UPC details popup appeared");	
+			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");
 			TestReport.StartStep("I Select the Client: " + retailer + " from the select client list");
 
-			
+
 			IWebElement input = upcDetails.SelectClientInput;
 
 			if (input == null)
@@ -8531,10 +8531,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(upcDetailsPopupTable.UpcDetailsTableLoadedOrNull(30), "The UPC details Table did not Appear", "The UPC details Table appeared");
 
 			TestReport.StartStep("I Check the type coloumn shows the container type selected for my product.");
-			string containerTypeActual= upcDetailsPopupTable.DetailValue("Container Type");		
+			string containerTypeActual = upcDetailsPopupTable.DetailValue("Container Type");
 			Table table = (Table)Context.GetFromContext(tableSavedAs);
-			TableRow informationRow= table.Rows[1];			
-			string expectedContainerValue =informationRow["Container type"].ToString();
+			TableRow informationRow = table.Rows[1];
+			string expectedContainerValue = informationRow["Container type"].ToString();
 			Report.Info("Container Type expected: " + expectedContainerValue);
 			Report.Info("Container Type Found: " + containerTypeActual);
 			Report.IsTrue(expectedContainerValue == containerTypeActual, "The container type coloumn did not show the value selected for the product", "The container type coloumn did show the value selected for the product");
@@ -8562,8 +8562,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(expectedTrasportOptionTrim == actualTransportOptionTrim, "The Transportation Option coloumn did not show the value selected for the product", "The Transportation Option coloumn did show the value selected for the product");
 			TestReport.StartStep("I close the SHA Manager Product UPC details pop up");
 			Report.IsTrue(upcDetailsPopupTable.CloseButton.TryClick(), "Failed to Click Close in the UPC details popup", "Successfully clicked Click Close in the UPC details popup");
-			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30),"The UPC details popup did not close", "The UPC details popup was closed");
-
+			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");
+			
 
 
 
@@ -8583,7 +8583,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I Check the Landing page has loaded");
 
-			if(!(new LandingPage().WaitForContainerToBeVisible()))
+			if (!(new LandingPage().WaitForContainerToBeVisible()))
 			{
 				Report.Failure($"The Landing page did not load", false);
 				if (!new InactivityPopup().WaitForContainerToBeVisible(10))
@@ -8607,7 +8607,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 
-			Report.Success("The Landing Page was loaded");			
+			Report.Success("The Landing Page was loaded");
 		}
 
 		[StepDefinition("I Check that both an alert and inactivity prompt are on screen")]
@@ -8842,6 +8842,89 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
 				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
 				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes");
+		}
+
+		[StepDefinition(@"I check that the UPC number saved as: (.*) and under the retailer: (.*), (does|does not) show the Obsolete UPC Option in the UPC details popup")]
+		public void ICheckUPCNumberXObsoleteUPCOptionPresence(string savedAs, string retailer, string presence)
+		{
+			//For Testing the Dupe UPC Sha Tool 
+			TestReport.UseSubSteps = true;		
+
+			var shaSteps = new Steps_SHA();
+			var studioSHAManger = new StudioSHAManager();
+			Delay.Seconds(10);
+			new Steps_SHA().SwitchToProductListUpcWindow();
+			Delay.Seconds(4);
+			TestReport.StartStep($"I Click on the link associated with the UPC saved as: {savedAs}");
+			studioSHAManger.ClickUPCSavedAsInProducUPCTable(savedAs);
+			TestReport.StartStep("I Check the UPC detail popup appears");
+			var upcDetails = new StudioSHAManagerUPCDetails();
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");			
+			if (Regex.IsMatch(retailer, "<(.*)>"))
+			{
+				var match = Regex.Match(retailer, "<(.*)>").Groups[1].Value;
+				if (Context.Contains(match, true))
+				{
+					retailer = Context.GetFromContext(match).ToString();
+				}
+
+			}
+			TestReport.StartStep("I Select the Client: " + retailer + " from the select client list");
+			IWebElement input = upcDetails.SelectClientInput;
+			if (input == null)
+			{
+				Report.Failure("The Select Client box could not be found!");
+				return;
+			}
+			input.Select(retailer);
+			TestReport.StartStep("I wait for the UPC Details Table to Load");
+			Report.IsTrue(upcDetailsPopupTable.UpcDetailsTableLoadedOrNull(30), "The UPC details Table did not Appear", "The UPC details Table appeared");
+			TestReport.StartStep($"I Confirm that the Obsolete UPC button {presence} appear");
+			bool expectedPresenceBool = false;
+
+			switch (presence)
+			{
+				case "does":
+					expectedPresenceBool = true;
+					break;
+				case "does not":
+					break;
+				default:
+					Report.Error("presence must be either 'does' or 'does not'");
+					return;
+			}
+			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButtonPresent()==expectedPresenceBool,"The Obsolete popup incorrectly "+presence+" show", "The Obsolete popup correctly " + presence + " show");
+			TestReport.StartStep("I close the SHA Manager Product UPC details pop up");
+			Report.IsTrue(upcDetailsPopupTable.CloseButton.TryClick(), "Failed to Click Close in the UPC details popup", "Successfully clicked Click Close in the UPC details popup");
+			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");
+		}
+
+		[StepDefinition(@"I Search using for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx'")]
+		public void ISearchForAProductContainingDuplicateUPCSUsingSpreadSheet()
+		{
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("UPCsDuplicatedwithinAccount.xlsx"), "", "");	
+						
+			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.UPCsDuplicatedwithinAccount.xlsx", out string destination))
+			{
+				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
+				return;
+			}
+
+			var utils = new ExcelUtilities(destination, "Table");
+
+			List<string> UpcNumbers= utils.Excel_GetColumn(0); //includes the header (so start search at 1 not 0)
+
+			for(int i=1; i<UpcNumbers.Count-1; i++)
+			{
+				string DupeUPCNumberCurrent = UpcNumbers[i];
+				//do a search for this value in sha
+				//if 2 or more products show,then save this to context then the retailer and id. (use coloums they are in and the same i value)
+				//maybe save these^ value to class (existing one?)
+			}
+
+			
+
 		}
 	}
 }

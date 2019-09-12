@@ -2569,6 +2569,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var sha = new StudioSHAManager();
 			Report.IsTrue(sha.ConfirmThereIsOneProductInTheGrid(), "Failed to find one product in the grid!", "Successfully found one product in the grid.");
 		}
+
+		
+
+
 		
 	}
 }

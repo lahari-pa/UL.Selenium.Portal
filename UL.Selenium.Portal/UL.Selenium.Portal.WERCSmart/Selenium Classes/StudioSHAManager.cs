@@ -1087,7 +1087,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return rList;
 		}
 
-		public bool ClickUPCSavedAsInProducUPCTable(string savedAs)
+		public bool ClickCaseUPCSavedAsInProducUPCTable(string savedAs)
 		{
 			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
 			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
@@ -1096,6 +1096,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement linkBox = item.FindElement(By.XPath(".//a"), 2);
 
 				if(linkBox.Text.Contains(expectedUPCNum+"*"))
+				{
+					return linkBox.TryClick();
+				}
+			}
+			Report.Failure("Could not Find UPC Link for the Case UPC: " + expectedUPCNum);
+			return false;
+		}
+		public bool ClickUPCSavedAsInProducUPCTable(string savedAs)
+		{
+			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			foreach (var item in rows)
+			{
+				IWebElement linkBox = item.FindElement(By.XPath(".//a"), 2);
+
+				if (linkBox.Text.Contains(expectedUPCNum))
 				{
 					return linkBox.TryClick();
 				}
@@ -2493,7 +2509,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public IWebElement UPCDetailsTable => this.containerElement.FindElement(By.XPath(".//table[@class='upcDetails']"), 30);
 
-		public IWebElement CloseButton => this.containerElement.FindElement(By.XPath(".//button"), 2);
+		public IWebElement CloseButton => this.containerElement.FindElement(By.XPath(".//button//span[text()='Close']"), 2);
+
+		public IWebElement ObsoleteUPCButton => this.containerElement.FindElement(By.XPath(".//button//span[text()='Obsolete UPC']"), 2);
+
+
 
 		//public bool UpcDeatilsTableLoaded()
 
@@ -2552,6 +2572,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return null;
 
 		}
+
+		public bool ObsoleteUPCButtonPresent()
+		{
+			bool displayStatus = this.ObsoleteUPCButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;
+			return displayStatus;
+		}
+
+			
 
 		
 	}

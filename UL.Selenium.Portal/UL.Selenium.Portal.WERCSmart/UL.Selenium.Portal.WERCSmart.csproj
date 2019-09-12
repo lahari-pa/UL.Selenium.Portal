@@ -308,6 +308,7 @@
     <None Include="app.manifest" />
     <EmbeddedResource Include="Dependencies\PDF\testdoc.pdf" />
     <EmbeddedResource Include="Dependencies\Excel\testdoc.xlsx" />
+    <EmbeddedResource Include="Dependencies\Excel\UPCsDuplicatedwithinAccount.xlsx" />
     <None Include="Features\AdditionalProductInformation.feature">
     </None>
     <None Include="Features\API\ItemSync.feature" />

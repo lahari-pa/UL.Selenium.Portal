@@ -1720,5 +1720,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("The Alert did not appear after: " + alertWaitMinutes + " minutes");
 			}
 		}
+
+		[StepDefinition(@"I close the current window and switch to the main window")]
+		public void IClosetheCurrentWindowAndSwitchToMainWindow()
+		{
+			Report.Info("Closing window");
+			SeleniumBrowser.WebBrowser.Close();
+			Report.Info("Returning to the main window");
+			try
+			{
+				var handle = Context.GetFromContext("MainWindowHandle").ToString();
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				// required to switch to the frame and refresh container
+				new StudioSHAManager().Wait_for_load();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure("Failed to navigate back to main window using MainWindowHandle context");
+				Report.Failure("Exception: " + ex.Message);
+				throw;
+			}
+		}
 	}
 }
