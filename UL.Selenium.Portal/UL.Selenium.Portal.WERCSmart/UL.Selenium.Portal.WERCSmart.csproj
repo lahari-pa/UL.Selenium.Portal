@@ -298,6 +298,7 @@
     <Compile Include="Steps\Steps_SupplierAccounts.cs" />
     <Compile Include="Steps\Steps_SupplierReports.cs" />
     <Compile Include="Steps\Steps_ViewUpcs.cs" />
+    <Compile Include="Steps\Steps_WercSmartFreshDesk.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -380,6 +381,7 @@
     </None>
     <None Include="Features\NewProduct.feature">
     </None>
+    <None Include="Features\Product Registration\Batteries.feature" />
     <None Include="Features\NotIncludedGeneralTests.feature" />
     <None Include="Features\Product Registration\Duplicate UPC.feature" />
     <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd.feature">
