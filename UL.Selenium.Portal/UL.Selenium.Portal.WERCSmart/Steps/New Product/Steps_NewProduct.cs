@@ -2397,6 +2397,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I enter UPC Number: (.*)")]
 		public void GivenIEnterUPCNumberSavedAsUPC(string upcNumber)
 		{
+			Delay.Seconds(3);
 			Report.IsTrue(new NewProduct().InputUPCNumber(upcNumber), "Failed to enter upc number", "Entered upc number");
 		}
 
@@ -2420,6 +2421,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenIEnterSizeValue(string size)
 		{
 			Report.IsTrue(new NewProduct().InputUPCSize(size), "Failed to enter size: " + size, "Entered size: " + size);
+		}
+
+		[StepDefinition(@"I delete retailer (.*) from the UPC")]
+		public void IDeleteRetailerFromTheUPC(string retailer)
+		{
+			Report.IsTrue(new UPC().DeleteRetailer(retailer), "Failed to delete retailer " + retailer + ".",
+			"Successfully deleted retailer " + retailer + ".");
 		}
 
 		[StepDefinition(@"I Confirm the Package Type drop down list shows a Packaging type available for selection - Do not select one")]
