@@ -6,6 +6,7 @@
 @SubEnrollment
 @LandingPage
 @PaymentMethods
+@Freshdesk
 @run_MyAccount
 Feature: MyAccount
 
@@ -118,13 +119,15 @@ Scenario: [87304] Video link How to Subscribe
 Scenario: [92613] Add and Deactivate a New User from the User Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	#mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
 	Given I call Shared Step 62676 (Go To My Account)
 	Given I call Shared Step 63511 (Create New User via User Grid)
 	Given I confirm there was an email with title: Welcome to WERCSmart sent to the new user and I click the link with text: support article and video
-	#Confirm you are taken to support article and video's fresh desk link in a new tab.
-		Given I navigate to the landing page
+	Given I confirm the WERCSmart FreshDesk 'Solutions' page is loaded
+	Given I confirm there is an article displayed containing the 'WERCSmart Introductory Video'
+	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click on My Account
 	Given I Select the ... from the Actions column of the account I just created and select Deactivate
 	And I Click approve in dialog
+	And I Click close in dialog
+	Then I confirm the new user is Not Active
