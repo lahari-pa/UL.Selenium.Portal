@@ -8937,7 +8937,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					string productRetailerInitials = productsShown[0].Clients;					
 					string productRetailerInitialsFirst = productRetailerInitials.Split(',')[0];
-					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == "shorthand").Key;
+					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == productRetailerInitialsFirst).Key;
 					Context.AddToContext("ProductRetailer105970", fullName);
 
 					//List<string> productIDs = utils.Excel_GetColumn(0);
@@ -8968,5 +8968,60 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I check to see if the UPC details popup has closed");
 			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");
 		}
+
+		[StepDefinition(@"I Click the Obsolete Button and Check a Popup Appears with 'Cancel' and 'Continue' buttons and the following message: (.*)")]
+		public void IClickObsoleteAndCheckAPopUpAppearsWithButtonsAndMessageX(string expectedMessage)
+		{
+			TestReport.UseSubSteps = true;
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			var upcDetailsConfrimObsoletePopup= new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
+
+			TestReport.StartStep("I click the Obsolete UPC button in the UPC details popup");
+			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButton.TryClick(), "Failed to Click Obselete UPC in the UPC details popup", "Successfully clicked Click Obselete UPC in the UPC details popup");
+			TestReport.StartStep("I check the Confirm Obsolete UPC popup appears");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.WaitForContainerToBeVisible(10), "The Confirm Obsolete UPC popup did not appear", "The Confirm Obsolete UPC popup appeared");
+			TestReport.StartStep("I Check that there is a Cancel Button in the Confirm Obsolete UPC popup");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.CancelButtonPresent(), "The Cancel Button was not present in the Confirm Obsolete UPC popup", "The Cancel Button was present in the Confirm Obsolete UPC popup");
+			TestReport.StartStep("I Check that there is a Continue Button in the Confirm Obsolete UPC popup");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.ContinueButtonPresent(), "The Continue Button was not present in the Confirm Obsolete UPC popup", "The Continue Button was present in the Confirm Obsolete UPC popup");
+			TestReport.StartStep("I check the text in the Confirm Obsolete UPC popup matches the expected text");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.ConfirmObseleteUPCMessage(expectedMessage), "The found message did not match the expected text", "The found message matched the expected text");
+			
+		}
+
+		[StepDefinition(@"I click close in the Confirm Obsolete UPC popup, and the Confirm Obsolete UPC popup is closed and the UPC Details Popup remains on screen.")]
+		public void IClickCloseInTheConfirmObsoleteUPCPopUpAndCheckItClosesAndTheUPCDetailsPopUpRemains()
+		{
+			TestReport.UseSubSteps = true;
+			var upcDetails = new StudioSHAManagerUPCDetails();
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
+			TestReport.StartStep("I Click Cancel in the Confirm Obsolete UPC popup");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.CancelButton.TryClick(), "Failed to to click Cancel", "Successfully clicked Cancel");
+			TestReport.StartStep("I Check that the Confrim Obsolete UPC popup has gone");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.WaitForContainerToBeInvisible(10), "The Confirm Obsolete UPC popup appeared", "The Confirm Obsolete UPC popup did not appear");
+			TestReport.StartStep("I Check that the UPC details popup still appears.");
+			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");			
+
+		}
+
+		[StepDefinition(@"I click Continue in the Confirm Obsolete UPC popup, and the Confirm the Manager Validation Require Popup appears.")]
+		public void IClickContinueInTheConfirmObsoleteUPCPopUpAndCheckItTheManagerValidationPopupAppears()
+		{
+			TestReport.UseSubSteps = true;
+			var upcDetails = new StudioSHAManagerUPCDetails();
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
+			var managerValidationPopup= new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();
+			TestReport.StartStep("I Click Continue in the Confirm Obsolete UPC popup");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.ContinueButton.TryClick(), "Failed to to click Continue", "Successfully clicked Continue");
+			TestReport.StartStep("I Check that the Manager Validation Required Popup appears");
+			Report.IsTrue(managerValidationPopup.WaitForContainerToBeVisible(10), "The Manager Validation Required Popup did not appeared", "The Manager Validation Required Popup appeared");
+
+
+
+		}
+
+
 	}
 }

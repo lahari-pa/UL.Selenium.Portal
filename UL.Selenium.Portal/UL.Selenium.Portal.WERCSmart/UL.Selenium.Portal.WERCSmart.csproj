@@ -482,6 +482,7 @@
     </None>
     <None Include="Features\Signup.feature">
     </None>
+    <None Include="Features\Sprint 15.5.2.feature" />
     <None Include="Features\Subscription.feature">
     </None>
     <None Include="Features\SupplierAccounts.feature">

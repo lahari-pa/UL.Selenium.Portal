@@ -180,22 +180,11 @@ Given I click 'Select all' under Destination Retailers in the UPC page
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I navigate to the home page
 
-Scenario:  [NOTINCLUDEDGENERALTEST] Task 105970, Dupe UPC tool, Obsolete UPC Option only present on duplicate UPCs.
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then I create a product and save as: UPCTOOLTESTPRODUCT1 and name as: TestCond
-And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: UPCTOOLTESTPRODUCT1)
-Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: UPCTOOLTESTPRODUCT1
-Then I check that the UPC number saved as: UPC75335 and under the retailer: Wal-Mart/SAM'S CLUB, does not show the Obsolete UPC Option in the UPC details popup
-Then I close the SHA Manager Product UPC details pop up
-And I close the current window and switch to the main window
-And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Then I Search using for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx'
-Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: ProductID105970
-Then I check that the UPC number saved as: UPC75335 and under the retailer: <ProductRetailer105970>, does show the Obsolete UPC Option in the UPC details popup
-Then I close the SHA Manager Product UPC details pop up
 
-#Step for going through excel file saved in X as Y and checking against each value in the UPC coloum ( do search and see if 2 or more appears?)
+
+
+
+
 
 
 
