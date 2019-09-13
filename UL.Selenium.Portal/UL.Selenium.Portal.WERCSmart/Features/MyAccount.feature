@@ -31,7 +31,6 @@ Scenario: [61796] Account User Name in Header
 	Given In the UserDetails page I click Save
 	Then I should see user name: saved as ThisUser in the header next to the user icon
 
-@tfsdesign
 @TReVorId:22076
 Scenario: [63514] Add and Deactivate a New User from the User Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -114,3 +113,18 @@ Scenario: [87304] Video link How to Subscribe
 	And I confirm a new tab opens to YouTube with a video titled: WERCSmart Subscription Overview
 	And I close the window saved as: YouTube
 	And I close the window saved as: Subscription Enrollment and Management
+
+
+Scenario: [92613] Add and Deactivate a New User from the User Grid
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	#mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+	Given I call Shared Step 62676 (Go To My Account)
+	Given I call Shared Step 63511 (Create New User via User Grid)
+	Given I confirm there was an email with title: Welcome to WERCSmart sent to the new user and I click the link with text: support article and video
+	#Confirm you are taken to support article and video's fresh desk link in a new tab.
+		Given I navigate to the landing page
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I click on My Account
+	Given I Select the ... from the Actions column of the account I just created and select Deactivate
+	And I Click approve in dialog

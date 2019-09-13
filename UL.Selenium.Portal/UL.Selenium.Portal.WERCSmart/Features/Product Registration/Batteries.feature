@@ -44,22 +44,27 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 Scenario: [97489] Stand alone Magnesium Battery
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Primary/Metal Batteries
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Magnesium Battery
 And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I call Shared Step 60310 (Additional Product Information - Without Child question)
+And I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Magnesium
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And If the UPCs Warning popup is displayed I click OK
-And I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
-And I click continue
-And I click continue
-And I click continue
+Given I should see the Regulatory Documents to Provide Page
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload a PDF
+Given I click continue
+Given I call Shared Step 60567 (Upload Product Label only)
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 And I click continue
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And I should see the Data Acceptance Page
+#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase97489
 
@@ -72,20 +77,29 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel-cadmium battery
 And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I call Shared Step 60310 (Additional Product Information - Without Child question)
+And I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Nickel
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And If the UPCs Warning popup is displayed I click OK
-And I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
-And I click continue
-And I click continue
-And I click continue
+#And I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
+#And I click continue
+#And I click continue
+#And I click continue
+Given I should see the Regulatory Documents to Provide Page
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload a PDF
+Given I click continue
+Given I call Shared Step 60567 (Upload Product Label only)
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 And I click continue
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And I should see the Data Acceptance Page
+#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase97495
 
@@ -99,19 +113,28 @@ And I call Shared Step 57408 (Create a New Registration via Register New Product
 #And I In the shared step below select nickel metal hydride as your product type
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel Metal Hydride (NiMH) Battery
 And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-And I call Shared Step 60310 (Additional Product Information - Without Child question)
+And I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Nickel
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And If the UPCs Warning popup is displayed I click OK
-And I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
-And I click continue
-And I click continue
-And I click continue
+#And I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
+#And I click continue
+#And I click continue
+#And I click continue
+Given I should see the Regulatory Documents to Provide Page
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload a PDF
+Given I click continue
+Given I call Shared Step 60567 (Upload Product Label only)
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 And I click continue
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And I should see the Data Acceptance Page
+#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase97494

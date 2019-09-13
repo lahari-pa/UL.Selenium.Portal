@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
+using Mailosaur;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.UniversalFunctions;
 using NTTQA.Selenium.Reporting.Core;
@@ -392,7 +393,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 						Report.Info("User Name = " + userName);
 					}
-
 					if (emailAddress == "Saved")
 					{
 						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
@@ -401,7 +401,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 						Report.Info("Email Address = " + emailAddress);
 					}
-
+                    // adding this to allow checking for confirmation email to the new user
+					EmailFunctions.StoreCurrentInbox(emailAddress);
 					if (confirmEmail == "Saved")
 					{
 						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
@@ -1292,5 +1293,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(mystwdinfo.StewardshipSave_click(), "failed to click save", "successfully clicked save");
 			GeneralUtilities.Wait_for_load_finish();
 		}
+
+        /// <summary>
+		/// Requires a string parameter saved to context as: CurrentEmail which is called in the add a new user step
+		/// </summary>
+		[StepDefinition(@"I confirm there was an email with title: (.*) sent to the new user and I click the link with text: (.*)")]
+		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount(string emailTitle, string linkText)
+		{
+			TestReport.UseSubSteps = true;
+            TestReport.StartStep("Checking an email has been sent to the new user with title: " + emailTitle);
+			var emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
+			var email = Context.GetFromContext("CurrentEmail").ToString();
+			List<Email> differences = EmailFunctions.GetInboxDifferences(email);
+            Report.Info("Checking that email differences have been found...");
+			if (differences.FirstOrDefault() == null)
+			{
+				Report.Error("No emails found");
+				return;
+			}
+			Report.Info("Emails have been found!");
+			Email matchingEmail = differences.FirstOrDefault(x => x.From !=null && x.From.FirstOrDefault()?.Address.ToLower() == emailFrom && x.Subject.Contains(emailTitle));
+			if (matchingEmail == null)
+			{
+                Report.Failure($"No matching email from: {emailFrom} with subject: {emailTitle} was found!");
+                return;
+			}
+			var links = matchingEmail.Html.Links;
+			if(links == null || !links.Any())
+			{
+				Report.Failure("No links were found in the email!");
+				return;
+			}
+            var link = links.FirstOrDefault(x => x.Text.Contains(linkText))?.Href;
+            if (link == null)
+            {
+                Report.Failure("No link was found with text: " + linkText);
+                return;
+            }
+			Report.Info("Found a matching link in the email!");
+            TestReport.StartStep("Navigating to the link address");
+			SeleniumBrowser.Navigate(link);
+		}
+
+
 	}
 }
