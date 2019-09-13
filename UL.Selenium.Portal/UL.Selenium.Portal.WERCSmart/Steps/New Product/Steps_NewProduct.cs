@@ -2426,7 +2426,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I delete retailer (.*) from the UPC")]
 		public void IDeleteRetailerFromTheUPC(string retailer)
 		{
-			Report.IsTrue(new NewProduct().DeleteRetailer(retailer), "Failed to delete retailer " + retailer + ".",
+			Report.IsTrue(new UPC().DeleteRetailer(retailer), "Failed to delete retailer " + retailer + ".",
 			"Successfully deleted retailer " + retailer + ".");
 		}
 
