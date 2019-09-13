@@ -1129,11 +1129,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
 			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
-			foreach(var item in rows)
+			foreach (var item in rows)
 			{
 				IWebElement linkBox = item.FindElement(By.XPath(".//a"), 2);
 
-				if(linkBox.Text.Contains(expectedUPCNum+"*"))
+				if (linkBox.Text.Contains(expectedUPCNum + "*"))
 				{
 					return linkBox.TryClick();
 				}
@@ -1353,7 +1353,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 
 
-			
+
 			string retailerStatus = "";
 			string retailerAbbr = "";
 
@@ -1381,23 +1381,51 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var mySHAManager = new StudioSHAManager();
 				mySHAManager.Wait_for_load();
 				Product matchingProduct = mySHAManager.GetTopXProducts(2).FirstOrDefault(x => x.Clients == retailerAbbr);
-				Report.Info("The Retailer initials found are: "+matchingProduct.Clients);
-				Report.Info("A Status was found for the Product. The Status is: "+ matchingProduct.Status);
+				Report.Info("The Retailer initials found are: " + matchingProduct.Clients);
+				Report.Info("A Status was found for the Product. The Status is: " + matchingProduct.Status);
 				retailerStatus = matchingProduct.Status;
 
-				if (matchingProduct==null)
+				if (matchingProduct == null)
 				{
 					Report.Failure("Could not find a Product with retailer: " + retailerAbbr + ".");
 					return null;
-				}				
+				}
 
 			}
 			catch (Exception)
 			{
 				return null;
-			}			
+			}
 
 			return retailerStatus;
+		}
+
+		public bool ClickMessageCenter()
+		{
+			try
+			{
+				if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
+				{
+					SeleniumBrowser.ExitIFrame();
+					if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
+					{
+						Report.Info("Could not switch to iframe");
+						return false;
+					}
+				}
+
+				IWebElement messageCenter =
+					SeleniumBrowser.WebBrowser.FindElement(
+						By.XPath(".//div[@id='ddtopmenubar']//li//a[contains(text(), 'MessageCenter')]"), 2);
+
+				return messageCenter.TryClick();
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+				return false;
+			}
+
 		}
 
 	}
@@ -2536,15 +2564,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class StudioSHAManagerUPCDetails:BaseObject
+	class StudioSHAManagerUPCDetails : BaseObject
 	{
 		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }		
+		protected override IWebElement containerElement { get; set; }
 
-		public IWebElement SelectClientInput => this.containerElement.FindElement(By.XPath(".//select[contains(@id,'clients')]"), 5);	
-		
+		public IWebElement SelectClientInput => this.containerElement.FindElement(By.XPath(".//select[contains(@id,'clients')]"), 5);
+
 
 	}
 
@@ -2576,17 +2604,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			bool loaded = false;
 
-			for (int i=0; i<secondsToWait; i++)
+			for (int i = 0; i < secondsToWait; i++)
 			{
 				IWebElement detailsTable = this.containerElement.FindElement(By.XPath(".//table[@class='upcDetails']"), 30);
-				
+
 				if (detailsTable != null)
 				{
-					loaded= true;
+					loaded = true;
 					Report.Info("Table Loaded after: " + i + " seconds.");
 					return loaded;
 
-				}				
+				}
 			}
 			return loaded;
 
@@ -2614,7 +2642,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		
+
 	}
 
 
