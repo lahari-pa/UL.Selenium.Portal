@@ -7757,6 +7757,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I If the retailer(s) you are forwarding to requires additional data add it now
 			//And I Click Save
 			string firstUPCNo = new ForwardProductRegistration().GetUPCs().First().UPCInfo.UPCNumber;
+			Report.Info("Saving the UPC number: " + firstUPCNo + " to context as: " + saveAs);
 			Context.AddToContext(saveAs, firstUPCNo);
 			thisStepsForwardProductRegistration.SelectFirstUPC();
 			thisStepsForwardProductRegistration.ClickContinueForwardProductRegistration();
