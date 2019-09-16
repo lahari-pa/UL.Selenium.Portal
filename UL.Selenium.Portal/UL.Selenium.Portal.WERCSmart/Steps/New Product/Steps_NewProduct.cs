@@ -332,6 +332,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
+		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload a PDF")]
+		public void UploadPDFFileSectionAndTypeEmbedded(string type, string label)
+		{
+			var pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"C:\Dependencies\WERCSmart\testdoc.pdf";
+			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(type, label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
+		}
+
+		[StepDefinition(@"I click the browse button for label: (.*) and upload a PDF")]
+		public void UploadPDFFileEmbedded(string label, string pdfFile)
+		{
+			pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"C:\Dependencies\WERCSmart\testdoc.pdf";
+			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
+		}
+
 		//[Given(@"I Confirm that the Add Multiple window openswith the UPCs that were added in the document")]
 		//public void GivenIConfirmThatTheAddMultipleWindowOpenswithTheUPCsThatWereAddedInTheDocument()
 		//{
@@ -2426,7 +2440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I delete retailer (.*) from the UPC")]
 		public void IDeleteRetailerFromTheUPC(string retailer)
 		{
-			Report.IsTrue(new NewProduct().DeleteRetailer(retailer), "Failed to delete retailer " + retailer + ".",
+			Report.IsTrue(new UPC().DeleteRetailer(retailer), "Failed to delete retailer " + retailer + ".",
 			"Successfully deleted retailer " + retailer + ".");
 		}
 

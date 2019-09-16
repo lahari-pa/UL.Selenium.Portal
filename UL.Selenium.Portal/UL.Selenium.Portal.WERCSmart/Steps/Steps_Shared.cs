@@ -4,7 +4,6 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
-using NTTQA.Selenium.TReVor;
 using NTTQA.Selenium.UniversalFunctions;
 using OpenQA.Selenium;
 using System;
@@ -21,7 +20,6 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -1249,7 +1247,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheDataAcceptancePageISelectYesAgreed();
 			TestReport.StartStep("In the Data Acceptance page I click on the Accept button");
 			MyNewProduct.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
-			GeneralUtilities.StudioWaitForSpinner();
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\)")]
@@ -7758,6 +7757,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I If the retailer(s) you are forwarding to requires additional data add it now
 			//And I Click Save
 			string firstUPCNo = new ForwardProductRegistration().GetUPCs().First().UPCInfo.UPCNumber;
+			Report.Info("Saving the UPC number: " + firstUPCNo + " to context as: " + saveAs);
 			Context.AddToContext(saveAs, firstUPCNo);
 			thisStepsForwardProductRegistration.SelectFirstUPC();
 			thisStepsForwardProductRegistration.ClickContinueForwardProductRegistration();
@@ -8646,6 +8646,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I select the retailer: O'Reilly");
 			new StepsRetailPartners().SelectRetailer("O'Reilly");
 		}
+
+		[StepDefinition(@"I call Shared Step 62676 \(Go To My Account\)")]
+		public void GivenICallSharedStepGoToMyAccount()
+		{
+			TestReport.UseSubSteps = true;
+            TestReport.StartStep("Clicking Supplier Name drop down in the header");
+			Report.IsTrue(new TopMenuBar().ClickOnUserTopRight(), "Failed to click on user name in the top menu bar", "Clicked the user name in the top menu bar");
+            TestReport.StartStep("I click 'My Account'");
+			Report.IsTrue(new TopMenuBar().ClickMyAccount(), "Failed to click My Account", "Clicked My Account");
+		}
+
+		[StepDefinition(@"I call Shared Step 63511 \(Create New User via User Grid\)")]
+		public void GivenICallSharedStepCreateNewUserViaUserGrid()
+		{
+			new GlobalSteps().ThenICreateANewEmailAddress();
+            Report.Info("Creating a user with the following information:");
+            Report.Info("Name: User, Title: Mr, Role: User, Phone Number: 123 - 456 - 7889, Country: United Kingdom");
+            var table = new Table("User Name", "Title", "Role", "Phone Number", "Email Address", "Confirm Email", "Country Code", "Country");
+            table.AddRow("User", "Mr", "User", "123 - 456 - 7889", "Saved", "Saved", "empty", "United Kingdom");
+			new StepsMyAccount().ThenIAddANewUserWithTheFollowingInformation(table);
+		}
+
 
 		[StepDefinition(@"I call Shared Step 87897 \(Forwarding - Edit Existing Case UPC: (.*) - confirm data shown correctly, change all data, Save, Continue\) and save the table as: (.*)")]
 		public void GivenICallSharedStep87897ForwardingEditExistingCaseUpcConfirmDataShownCorrectlyChangeAllDataSaveContinue(string caseUPCNumSavedAs, string tableSavedAs, Table table)
