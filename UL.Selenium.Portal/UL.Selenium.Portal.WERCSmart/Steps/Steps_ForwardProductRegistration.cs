@@ -617,6 +617,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (bSelected)
 			{
+                Report.Info("Saving retailer: " + selectedRetailer + " to context as: " + saveAs);
 				Context.AddToContext(saveAs, selectedRetailer);
 			}
 			else
@@ -685,26 +686,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selForwardProdReg = new ForwardProductRegistration();
 			if (aUPCNumber.ToLower().Contains("saved as"))
 			{
-				aUPCNumber = Context
-					.GetFromContext(aUPCNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase)
-						.Trim()).ToString();
+				var upcSavedAs = aUPCNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim();
+                Report.Info("Getting UPC number from context saved as: " + upcSavedAs);
+				aUPCNumber = Context.GetFromContext(upcSavedAs)?.ToString();
+				if (aUPCNumber == null)
+				{
+					Report.Failure("Failed to get UPC number from context!");
+					return;
+				}
 			}
-
+            Report.Info("UPC Number: " + aUPCNumber);
 			if (aRetailer.ToLower().Contains("saved as"))
 			{
-				aRetailer = Context
-					.GetFromContext(aRetailer.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase)
-						.Trim()).ToString();
+				var retailerSavedAs = aRetailer.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim();
+                Report.Info("Getting Retailer from context saved as: " + retailerSavedAs);
+				aRetailer = Context.GetFromContext(retailerSavedAs)?.ToString();
+				if (aRetailer == null)
+				{
+					Report.Failure("Failed to get Retailer from context!");
+					return;
+				}
 			}
-
+            Report.Info("Retailer: " + aRetailer);
 			List<ForwardProductRegistration.ProductResults> listProductResults = selForwardProdReg.GetProductResults();
+			foreach (var productResults in listProductResults)
+			{
+				var upcs = productResults.UPCs;
+				if (upcs != null && upcs.Any())
+				{
+					if (upcs.Any(x => x.UPCNumber == aUPCNumber && x.DestinationRetailers.Contains(aRetailer)))
+					{
+                        Report.Success("UPC number: " + aUPCNumber + " displayed retailer: " + aRetailer + " as expected");
+                        Report.Screenshot();
+                        return;
+					}
+				}
+			}
+            Report.Failure("Failed to find retailer: " + aRetailer + " for UPC number: " + aUPCNumber);
+			//ForwardProductRegistration.ProductResults matchingListItem = listProductResults.FirstOrDefault(x =>
+			//	x.UPCs != null && x.UPCs.FirstOrDefault(y => y.UPCNumber!= null && y.UPCNumber == aUPCNumber).DestinationRetailers.Contains(aRetailer));
 
-			ForwardProductRegistration.ProductResults matchingListItem = listProductResults.FirstOrDefault(x =>
-				x.UPCs.FirstOrDefault(y => y.UPCNumber == aUPCNumber).DestinationRetailers.Contains(aRetailer));
-
-			Report.IsTrue(matchingListItem != null,
-				"Failed to find matching item for UPCNumber: " + aUPCNumber + " and retailer: " + aRetailer,
-				"Found matching item for UPCNumber: " + aUPCNumber + " and retailer: " + aRetailer);
+			//Report.IsTrue(matchingListItem != null,
+			//	"Failed to find matching item for UPCNumber: " + aUPCNumber + " and retailer: " + aRetailer,
+			//	"Found matching item for UPCNumber: " + aUPCNumber + " and retailer: " + aRetailer);
 		}
 
 		[StepDefinition(@"I confirm that NO Errors display for the Product")]
