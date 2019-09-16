@@ -284,6 +284,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	And I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
 
+@TReVorId:23502
 Scenario: [96071] Archived UPC is permitted to be added to product - New Product registration
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC96071_2

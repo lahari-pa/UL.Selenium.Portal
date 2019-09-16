@@ -391,6 +391,7 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59275
 
 
+@TReVorId:23505
 Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -424,6 +425,7 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97484
 
 
+@TReVorId:23504
 Scenario: [97470] Stand alone Lead Acid Battery
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
