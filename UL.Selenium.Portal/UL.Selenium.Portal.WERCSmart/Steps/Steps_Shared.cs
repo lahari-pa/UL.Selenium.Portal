@@ -8898,8 +8898,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		
 		}
 
-		[StepDefinition(@"I Search using for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx'")]
-		public void ISearchForAProductContainingDuplicateUPCSUsingSpreadSheet()
+		[StepDefinition(@"I Search using for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: (.*)")]
+		public void ISearchForAProductContainingDuplicateUPCSUsingSpreadSheet(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Replacing the Spreadsheet with a new copy from the embedded resource");
@@ -8922,8 +8922,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				//do a search for this value in sha
 				//if 2 or more products show,then save this to context then the retailer and id. (use coloums they are in and the same i value)
 				//maybe save these^ value to class (existing one?)
-				Context.AddToContext("DupeUPCNumber105970", DupeUPCNumberCurrent);
-				new Steps_SHA().InSHAISearchForExactUPCInForUPCSavedAs("All", "DupeUPCNumber105970");
+				Context.AddToContext($"DupeUPCNumber{savedAs}", DupeUPCNumberCurrent);
+				new Steps_SHA().InSHAISearchForExactUPCInForUPCSavedAs("All", $"DupeUPCNumber{savedAs}");
 				int numProducts = new StudioSHAManager().GetProductCount();
 				TestReport.StartStep("Ensuring the upc was searched for succesfully and that it is a duplicate by checking the number of products found is 2 or more");
 				if (numProducts>1)
@@ -8932,13 +8932,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					List<Product> productsShown= new StudioSHAManager().GetTopXProducts(1);
 					string productIDFromSHA = productsShown[0].ID;
 					var productInfo = new ProductInformation { Id = productIDFromSHA };
-					Context.AddToContext("ProductID105970", productInfo);
+					Context.AddToContext($"ProductID{savedAs}", productInfo);
 
 
 					string productRetailerInitials = productsShown[0].Clients;					
 					string productRetailerInitialsFirst = productRetailerInitials.Split(',')[0];
 					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == productRetailerInitialsFirst).Key;
-					Context.AddToContext("ProductRetailer105970", fullName);
+					Context.AddToContext($"ProductRetailer{savedAs}", fullName);
 
 					//List<string> productIDs = utils.Excel_GetColumn(0);
 					//string productIDCurrent = productIDs[i];
