@@ -2614,7 +2614,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		
+		[StepDefinition(@"The Manager Validation Require Popup is not shown")]
+		public void TheManagerValidationRequirePopupIsNotShown()
+		{
+			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();			
+			Report.IsTrue(managerValidationPopup.WaitForContainerToBeInvisible(10), "The Manager Validation Required Popup was shown", "The Manager Validation Required Popup was not shown");
+
+		}
+
 
 
 

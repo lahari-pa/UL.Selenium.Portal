@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -25,7 +25,9 @@
 
 Feature: Sprint 15.5.2
 
-Scenario: [Sprint15.5.2] Task 105970, Dupe UPC tool, Obsolete UPC Option only present on duplicate UPCs.
+
+@TReVorId:23498
+Scenario: [110237] UPC Details Pop-Up - Obsolete UPC Option - Visible for Dup UPC and Not visible for non dup upc
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then I create a product and save as: UPCTOOLTESTPRODUCT1 and name as: TestCond
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -40,13 +42,14 @@ Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product sav
 Then I check that the UPC number saved as: DupeUPCNumber105970 and under the retailer: <ProductRetailer105970>, does show the Obsolete UPC Option in the UPC details popup
 Then I close the SHA Manager Product UPC details pop up
 
-Scenario: [Sprint15.5.2] Task 105970, UPC Details Verification Message for Registration with Multiple UPCs - Cancel or Continue
+Scenario: [110238] UPC Details Pop-Up - Obsolete UPC Option - Verify Message - Cancel and Continue Actions
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Then I Search using for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx'
 Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: ProductID105970
 Then I check that the UPC number saved as: DupeUPCNumber105970 and under the retailer: <ProductRetailer105970>, does show the Obsolete UPC Option in the UPC details popup
 Then I Click the Obsolete Button and Check a Popup Appears with 'Cancel' and 'Continue' buttons and the following message: You have selected to remove the UPC from the registration. The Account's Administrator(s) will be notified via email of this action. Are you sure you want to proceed with this action? It cannot be reversed.
 Then I click close in the Confirm Obsolete UPC popup, and the Confirm Obsolete UPC popup is closed and the UPC Details Popup remains on screen.
+Then The Manager Validation Require Popup is not shown
 Then I Click the Obsolete Button and Check a Popup Appears with 'Cancel' and 'Continue' buttons and the following message: You have selected to remove the UPC from the registration. The Account's Administrator(s) will be notified via email of this action. Are you sure you want to proceed with this action? It cannot be reversed.
 And I click Continue in the Confirm Obsolete UPC popup, and the Confirm the Manager Validation Require Popup appears.
 
