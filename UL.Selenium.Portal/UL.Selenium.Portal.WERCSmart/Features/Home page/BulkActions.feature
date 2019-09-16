@@ -192,6 +192,7 @@ And I Confirm the Product shows status: Completed for retailer: saved as TestCas
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\Release Day Tests
 
+@TReVorId:23506
 Scenario: [75129] Forward - Product in Submitted Status
 	Given I retrieve the email address for account: WERCs Product Account and save as: TestCase75129Email
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
