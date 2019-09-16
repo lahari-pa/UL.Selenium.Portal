@@ -978,6 +978,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm that UPC number saved as: (.*) shows a grey background for Archived in the SHA Manager Product UPC list")]
+		public void IConfirmThatTheUPCNumberSavedAsShowsAGreyBackground(string savedAs)
+		{
+			string upc = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (upc == "")
+			{
+				Report.Failure("Failed to find upc saved as " + savedAs + " in context.");
+			}
+
+			var sha = new StudioSHAManager();
+
+			Report.IsTrue(sha.ConfirmUPCArchived(upc), "Failed to find UPC " + upc + " set as archived.",
+				"Successfully found upc " + upc + " set as archived.");
+
+		}
+
 		[StepDefinition(@"I confirm that retailer saved as (.*) appears for UPC saved as UPC(.*)")]
 		public void IConfirmThatRetailerAppearsForUPC(string retailer, string savedAs)
 		{
@@ -1085,6 +1101,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(thisStudioSHAManager.RetailerIsInListOfRetailers(retailerAbbr, ID), "Failed to find retailer " + retailerAbbr + " in list of retailers.",
 				"Successfully found retailer " + retailerAbbr + " in list of retailers.");
+		}
+
+		[StepDefinition(@"I confirm that the retailer (.*) is archived for product saved as: (.*)")]
+		public void IConfirmThatTheRetailerIsArchivedForProduct(string retailer, string savedAs)
+		{
+			string retailerAbbr = "";
+			var abbr = new RetailerAbbreviations();
+			abbr.Map.TryGetValue(retailer, out retailerAbbr);
+
+			var thisStudioSHAManager = new StudioSHAManager();
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string ID = ProductDetails.Id;
+
+			Report.IsTrue(thisStudioSHAManager.RetailerIsArchived(retailerAbbr, ID), "Failed to find archived retailer " + retailer,
+				"Successfully found archived retailer " + retailer);
 		}
 
 
@@ -1833,6 +1864,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 		}
+
+
 
 		[StepDefinition(@"The recertification popup should show")]
 		public void TheRecertificationPopupShouldShow()

@@ -24,6 +24,7 @@
 @run_UPC
 Feature: UPC
 
+@TReVorId:21457
 Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -48,6 +49,7 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 		| Size (Fluid Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87584
 
+@TReVorId:21458
 Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -72,6 +74,7 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 		| Size (Weight Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87587
 
+@TReVorId:21459
 Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -102,6 +105,7 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 		| Size (Weight Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
 
+@TReVorId:21460
 Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -130,6 +134,7 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 		| Size (Weight Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87593
 
+@TReVorId:21461
 Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as Weight (Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -155,6 +160,7 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 		| Size (Fluid Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87596
 
+@TReVorId:21462
 Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -177,6 +183,7 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 		| Size (Fluid Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
 
+@TReVorId:21463
 Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	# Hardcoded values for Product ID. These do not exist in all environments.
 	Given I save to context name: TestCase1 and value: 1525111
@@ -205,6 +212,7 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 		| Size (Fluid Ounces) |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
 
+@TReVorId:22366
 Scenario: [87832] View Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC87832
@@ -241,6 +249,7 @@ Scenario: [87832] View Shows Case UPC Data
 		| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
 		| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
 
+@TReVorId:22365
 Scenario: [87825] Summary Shows Case UPC Data
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC87825
@@ -322,7 +331,7 @@ Scenario: [96071] Archived UPC is permitted to be added to product - New Product
 	Given I navigate to the home page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase96071_2
 
-	Scenario: [95988] Mass Upload UPCs Floating
+Scenario: [95988] Mass Upload UPCs Floating
 	Then I generate: 20 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -366,7 +375,7 @@ Scenario: [96071] Archived UPC is permitted to be added to product - New Product
 		| <RandomUPC19> | 19       | 32   | 19.00              | 00SS19          | 2019            | 1119            | W0019           | 111-22-0019 | 100000019 | 123-1234,123-1248 |
 		| <RandomUPC20> | 20       | 32   | 20.11              | 00TT20          | 2020            | 1120            | X0020           | 111-22-0020 | 100000020 | 123-1234,123-1249 |
 	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest95988
-	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable95988	
+	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable95988
 	Then In the Add Multiple dialog box I select all UPCs
 	Then I Confirm All UPCs are: Selected
 	Then In the Add Multiple dialog box I select the packaging type: <first>
@@ -384,3 +393,63 @@ Scenario: [96071] Archived UPC is permitted to be added to product - New Product
 	Then I click Continue and should not see an error message
 	And I navigate to the home page
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95988
+
+@tfs_design
+Scenario: [109516] Archive Retailer should Archive UPC
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC109516
+	Given I generate a random UPC number and save as: UPC109516_2
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase109516
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Amazon    |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109516, container type: Paper bag and size: 2 do not click continue
+	And I click the 'Add UPC' button
+	And I enter UPC Number: saved as UPC109516_2
+	And I Select a container type from the drop down list
+	And I enter Size Value: 12
+	And I delete retailer Amazon from the UPC
+	And I click continue
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109516)
+	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109516)
+	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109516)
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109516)
+	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109516
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109516)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Accepted or Completed
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
+	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109516) for
+		| Retailer  |
+		| Amazon    |
+		| Walgreens |
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Completed
+	Given I navigate to the landing page
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I filter for the product saved as: TestCase109516
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: Archive Retailers
+	And In the Archive Retailers popup, I select the checkbox next to the retailer Walgreens
+	And In the Archive Retailers popup click on: ARCHIVE
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
+	And I confirm that the retailer Walgreens is archived for product saved as: TestCase109516
+	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase109516
+	And I confirm UPC number saved as: "UPC109516" is displayed in the SHA Manager Product UPC list
+	And I confirm UPC number saved as: "UPC109516_2" is displayed in the SHA Manager Product UPC list
+	And I confirm that UPC number saved as: UPC109516_2 shows a grey background for Archived in the SHA Manager Product UPC list
