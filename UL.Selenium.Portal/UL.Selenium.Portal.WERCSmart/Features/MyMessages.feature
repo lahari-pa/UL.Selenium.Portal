@@ -64,6 +64,7 @@ Scenario: [72586] Archive Export Report
 	Then I confirm that the text: Archived is displayed under the Status column for file saved as excel72586
 	And I delete the excel file saved as excel72586
 
+@tfs_design
 Scenario: [109503] Message Center - Suspended message stays in Message Center for entirety of processing product - Formula - Document Issue
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC109503
