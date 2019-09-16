@@ -509,5 +509,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+
+		[StepDefinition(@"I check the current page is the Ingredients page")]
+		public void ICheckTheCurrentPageIsTheIngredientsPage()
+		{
+			string panelTitle= new NewProduct().PanelTitle;
+			Report.IsTrue(panelTitle == "Ingredients", "The Current page is not the Ingredients page", "The current page is the Ingredients page");
+		}
 	}
 }
