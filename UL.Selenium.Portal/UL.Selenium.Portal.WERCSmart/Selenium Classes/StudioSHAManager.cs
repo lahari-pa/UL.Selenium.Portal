@@ -498,6 +498,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool RetailerIsArchived(string retailerAbbr, string id)
+		{
+			int indexOfID = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+
+			int indexOfClients = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+			ReadOnlyCollection<IWebElement> idTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfID + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> clientsTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfClients + 1).ToString() + "]"));
+
+			for (int i = 0; i < idTDs.Count; i++)
+			{
+				IWebElement thisIDTD = idTDs[i];
+				if (thisIDTD.GetValue() == id)
+				{
+					IWebElement thisClientsTD = clientsTDs[i];
+					var allClients = thisClientsTD.GetValue().Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+					if (allClients.Contains(retailerAbbr + "**"))
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			return false;
+		}
+
 		public bool RightClickProductByID(string id)
 		{
 			Delay.Seconds(3);
@@ -1073,8 +1111,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (IWebElement row in rows)
 			{
+				var upcText = row.Text.Split(' ')[0];
+				Report.Info("UPC row text: " + upcText);
 				var thisUpc = new SHAManagerProdcutUPC {
-					UPCNumber = row.Text.Split(' ')[0]
+
+					UPCNumber = upcText
 				};
 
 				rList.Add(thisUpc);
@@ -1082,6 +1123,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Report.Info($"Found {rList.Count} UPCs");
 			return rList;
+		}
+
+		public bool ClickUPCSavedAsInProducUPCTable(string savedAs)
+		{
+			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			foreach(var item in rows)
+			{
+				IWebElement linkBox = item.FindElement(By.XPath(".//a"), 2);
+
+				if(linkBox.Text.Contains(expectedUPCNum+"*"))
+				{
+					return linkBox.TryClick();
+				}
+			}
+			Report.Failure("Could not Find UPC Link for the UPC: " + expectedUPCNum);
+			return false;
 		}
 
 		public bool ConfirmRetailerExistsForUPC(string retailer, string upc)
@@ -1122,6 +1180,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool ConfirmUPCArchived(string upc)
+		{
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			IWebElement upcRow = null;
+			foreach (IWebElement row in rows)
+			{
+				string upcNumber = row.Text.Split(' ')[0];
+				if (upcNumber == upc)
+				{
+					upcRow = row;
+				}
+			}
+
+			if (upcRow == null)
+			{
+				Report.Info("Failed to find UPC " + upc + " in row!");
+				return false;
+			}
+
+			string background = upcRow.GetCssValue("background-color");
+
+			return background == "rgb(235, 235, 224)";
+		}
 
 		public bool ClickProcessRecertification()
 		{
@@ -1267,6 +1348,58 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath("//table[@id='list']//tbody//tr[not(@class='jqgfirstrow')]"));
 			return rows.Count == 1;
 		}
+
+		public string GetproductStatusByRetailer(string retailer)
+		{
+
+
+			
+			string retailerStatus = "";
+			string retailerAbbr = "";
+
+			if (Regex.IsMatch(retailer, "<(.*)>"))
+			{
+				var match = Regex.Match(retailer, "<(.*)>").Groups[1].Value;
+				if (Context.Contains(match, true))
+				{
+					retailer = Context.GetFromContext(match).ToString();
+				}
+
+			}
+			Report.Info("Beginning get product status by retailer: " + retailer);
+
+			var abbr = new RetailerAbbreviations();
+			abbr.Map.TryGetValue(retailer, out retailerAbbr);
+			Report.Info("Search for Retailer with Initials: " + retailerAbbr);
+			try
+			{
+				int retailerIndex = SeleniumBrowser.WebBrowser
+					.FindElements(By.XPath(
+						"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+					.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+				var mySHAManager = new StudioSHAManager();
+				mySHAManager.Wait_for_load();
+				Product matchingProduct = mySHAManager.GetTopXProducts(2).FirstOrDefault(x => x.Clients == retailerAbbr);
+				Report.Info("The Retailer initials found are: "+matchingProduct.Clients);
+				Report.Info("A Status was found for the Product. The Status is: "+ matchingProduct.Status);
+				retailerStatus = matchingProduct.Status;
+
+				if (matchingProduct==null)
+				{
+					Report.Failure("Could not find a Product with retailer: " + retailerAbbr + ".");
+					return null;
+				}				
+
+			}
+			catch (Exception)
+			{
+				return null;
+			}			
+
+			return retailerStatus;
+		}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
@@ -2400,6 +2533,88 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 
+
+	}
+
+	class StudioSHAManagerUPCDetails:BaseObject
+	{
+		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }		
+
+		public IWebElement SelectClientInput => this.containerElement.FindElement(By.XPath(".//select[contains(@id,'clients')]"), 5);	
+		
+
+	}
+
+	class StudioSHAManagerUPCDetailsPopupTable : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class,'ui-dialog ui-widget')]");
+
+		public IWebElement UPCDetailsTable => this.containerElement.FindElement(By.XPath(".//table[@class='upcDetails']"), 30);
+
+		public IWebElement CloseButton => this.containerElement.FindElement(By.XPath(".//button"), 2);
+
+		//public bool UpcDeatilsTableLoaded()
+
+		//{
+
+		//	bool displayed = false;
+		//	try
+		//	{
+		//		displayed = this.containerElement.FindElement(By.XPath(".//table[@class='upcDetails']"), 30).Displayed;
+		//	}
+		//	catch (NullReferenceException e)
+		//	{
+		//		displayed = false;
+		//	}
+		//	return displayed;
+		//}
+
+		public bool UpcDetailsTableLoadedOrNull(int secondsToWait)
+		{
+			bool loaded = false;
+
+			for (int i=0; i<secondsToWait; i++)
+			{
+				IWebElement detailsTable = this.containerElement.FindElement(By.XPath(".//table[@class='upcDetails']"), 30);
+				
+				if (detailsTable != null)
+				{
+					loaded= true;
+					Report.Info("Table Loaded after: " + i + " seconds.");
+					return loaded;
+
+				}				
+			}
+			return loaded;
+
+
+		}
+
+		public string DetailValue(string detailType)
+
+		{
+			IList<IWebElement> row = this.containerElement.FindElements(By.XPath(".//tbody//tr//td[1]"), 2).ToList();
+
+			foreach (var item in row)
+			{
+				if (item.Text.Contains(detailType))
+
+				{
+					string valueBoxText = item.FindElement(By.XPath(".//following-sibling::td"), 2).Text;
+					return valueBoxText;
+				}
+
+			}
+
+			Report.Failure("The Row containing: " + detailType + " could not be found");
+			return null;
+
+		}
+
+		
 	}
 
 

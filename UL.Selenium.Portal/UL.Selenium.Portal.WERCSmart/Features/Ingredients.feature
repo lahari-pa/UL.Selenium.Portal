@@ -6,6 +6,8 @@
 @NewProduct
 @ProductGrid
 @DataSummarySheet
+@UPC
+@SHA
 @wercsmart
 @RetailPartners
 @MyIngredients
@@ -458,3 +460,89 @@ Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80800
+
+Scenario: [109230] Ingredients - Proper ingredients and percentages are showing in Summary and Ingredients Table
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC109230
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase109230
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName        |
+		| Water         | 100     | true                | false       | Aqua (Water, Eau) |
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Chlorine      | 100     | false               | true        |            |
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Formaldehyde  | 100     | false               | false       |            |
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName             |
+		| Sodium        | 100     | true                | false       | Undisclosed Ingredient |
+	And I click continue
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109230, container type: Paper bag and size: 2 do not click continue
+	And I click continue
+	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	And in the Additional Documents to Provide page I click Continue
+	And in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I click the Summary button in the Data Acceptance window
+	Then I switch to the Data Summary page
+	And In the Data Summary page, I confirm that the Ingredients table matches the following:
+		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+		| Chlorine                | 100     | No                  | Yes           | Trade Secret           |
+		| Formaldehyde            | 100     | No                  | No            |                        |
+		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	And I close the window that opened
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
+	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109230)
+	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109230)
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109230)
+	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109230
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109230)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Accepted or Completed
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109230) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Completed
+	And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase109230
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its font is red indicating a recertification
+	Given I navigate to the landing page
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I filter for the product saved as: TestCase109230
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: View
+	Then I switch to the Data Summary page
+	And In the Data Summary page, I confirm that the Ingredients table matches the following:
+		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+		| Chlorine                | 100     | No                  | Yes           | Trade Secret           |
+		| Formaldehyde            | 100     | No                  | No            |                        |
+		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	And I close the window that opened
+	And I filter for the product saved as: TestCase109230
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: Update Required
+	Given In the New Product page I click tab: Product Characteristics
+	And I click the page heading: Ingredients
+	And I confirm that the ingredients table looks as follows:
+		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+		| Chlorine                | 100     | No                  | Yes           | Choose...              |
+		| Formaldehyde            | 100     | No                  | No            | Choose...              |
+		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	And I navigate to the home page

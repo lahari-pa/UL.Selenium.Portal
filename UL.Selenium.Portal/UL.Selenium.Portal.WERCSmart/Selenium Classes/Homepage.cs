@@ -94,6 +94,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public string GetAllAlertsAndGetAlertWithTextXAndReturnID(string alertMessage)
+		{
+			IWebElement panelContainer = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'status-panels')]//h3[contains(text(),'Alert')]/.."), 2);
+			IList<IWebElement> rows = panelContainer.FindElements(By.XPath(".//table//tr"), 2);
+			foreach(var item in rows)
+			{
+				IWebElement AlertMessageBox = item.FindElement(By.XPath(".//td[3]"), 2);
+				if (AlertMessageBox.Text==alertMessage)
+				{
+					string actualAlertID = item.FindElement(By.XPath(".//td[1]"), 2).Text;
+					return actualAlertID;
+				}
+			}
+			Report.Failure("Alert with message: " + alertMessage + " could not be found");
+			return null;
+		}
+		
+
 		public bool ClickArrowNextToProductInformation(bool expand)
 		{
 			try
@@ -267,5 +285,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).Click();
 		}
+
 	}
 }

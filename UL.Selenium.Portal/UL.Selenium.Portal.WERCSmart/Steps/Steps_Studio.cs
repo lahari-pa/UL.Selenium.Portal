@@ -203,7 +203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				thisStudioPowerDesignerPlusDesignMode.DoubleClickDataCode(thisRow["datacode"]);
 				Delay.Seconds(1);
 				var thisGraphicEditor = new GraphicEditor();
-				Report.IsTrue(thisGraphicEditor.Wait_for_load(60), "Graphic editor has not loaded",
+				Report.IsTrue(thisGraphicEditor.Wait_for_load(90), "Graphic editor has not loaded",
 					"Graphic editor has loaded.");
 				string valueToSearchFor = "";
 
@@ -384,7 +384,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (button.ToLower() == "apply")
 			{
 				Report.Info("As button was apply, waiting for spinner and alert");
-				Delay.Seconds(20);
+				Delay.Seconds(30);
 				if (!thisApplyRulesPage.WaitForSpinner(60))
 				{
 					if (SeleniumBrowser.Alert.WaitForAlert(3))

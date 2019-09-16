@@ -58,6 +58,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioLogin.ClickSignIn(), "Failed to click 'Sign In", "Clicked 'Sign In'");
 			Delay.Seconds(3);
 			var thisStudioDesktop = new StudioDesktop();
+			if(new PasswordExpireNotice().WaitForLoad())
+			{
+				Report.Info("The Password Expire Notice appeared, so clicking ignore");
+				if (!new PasswordExpireNotice().ClickButton("Ignore"))
+				{
+					Report.Failure("Failed to Click Ignore");
+				}
+			}
 			Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
 				"Studio desktop is showing as expected");
 			Report.Info("Studio desktop is loaded");
@@ -320,8 +328,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(
-			@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
+        [StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(string productSavedAs,
 			string status)
 		{
@@ -971,6 +978,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm that UPC number saved as: (.*) shows a grey background for Archived in the SHA Manager Product UPC list")]
+		public void IConfirmThatTheUPCNumberSavedAsShowsAGreyBackground(string savedAs)
+		{
+			string upc = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (upc == "")
+			{
+				Report.Failure("Failed to find upc saved as " + savedAs + " in context.");
+			}
+
+			var sha = new StudioSHAManager();
+
+			Report.IsTrue(sha.ConfirmUPCArchived(upc), "Failed to find UPC " + upc + " set as archived.",
+				"Successfully found upc " + upc + " set as archived.");
+
+		}
+
 		[StepDefinition(@"I confirm that retailer saved as (.*) appears for UPC saved as UPC(.*)")]
 		public void IConfirmThatRetailerAppearsForUPC(string retailer, string savedAs)
 		{
@@ -1078,6 +1101,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(thisStudioSHAManager.RetailerIsInListOfRetailers(retailerAbbr, ID), "Failed to find retailer " + retailerAbbr + " in list of retailers.",
 				"Successfully found retailer " + retailerAbbr + " in list of retailers.");
+		}
+
+		[StepDefinition(@"I confirm that the retailer (.*) is archived for product saved as: (.*)")]
+		public void IConfirmThatTheRetailerIsArchivedForProduct(string retailer, string savedAs)
+		{
+			string retailerAbbr = "";
+			var abbr = new RetailerAbbreviations();
+			abbr.Map.TryGetValue(retailer, out retailerAbbr);
+
+			var thisStudioSHAManager = new StudioSHAManager();
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string ID = ProductDetails.Id;
+
+			Report.IsTrue(thisStudioSHAManager.RetailerIsArchived(retailerAbbr, ID), "Failed to find archived retailer " + retailer,
+				"Successfully found archived retailer " + retailer);
 		}
 
 
@@ -1827,6 +1865,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+
+
 		[StepDefinition(@"The recertification popup should show")]
 		public void TheRecertificationPopupShouldShow()
 		{
@@ -2547,6 +2587,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.SaveUpcNumberForAnyProduct(upcSavedAs);
 
 		}
+		[StepDefinition(@"I Check that the product under the retailer: (.*) is under the status: (.*)")]
+		public void ICheckProductUnderRetailerStatus(string retailer, string expectedStatus)
+		{
+			string actualStatus = new StudioSHAManager().GetproductStatusByRetailer(retailer);
+			//Report.Info("The Status that is actually showing is: " + actualStatus);
+			Report.Info("The Status We expect is: " + expectedStatus);
+			Report.IsTrue(actualStatus == expectedStatus, "The Product under retailer: " + retailer + " was not in the expected status", "The Product under retailer: " + retailer + " was in the expected status");
+		}
 
 		[StepDefinition(@"In SHA Manager I confirm that there is one item in the grid")]
 		public void InSHAManagerIConfirmThatThereIsOneItemInTheGrid()
@@ -2554,6 +2602,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var sha = new StudioSHAManager();
 			Report.IsTrue(sha.ConfirmThereIsOneProductInTheGrid(), "Failed to find one product in the grid!", "Successfully found one product in the grid.");
 		}
+		
 	}
 }
 

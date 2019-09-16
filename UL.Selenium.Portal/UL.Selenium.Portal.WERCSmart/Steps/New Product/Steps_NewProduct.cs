@@ -333,6 +333,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
+		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload a PDF")]
+		public void UploadPDFFileSectionAndTypeEmbedded(string type, string label)
+		{
+			var pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"C:\Dependencies\WERCSmart\testdoc.pdf";
+			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(type, label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
+		}
+
+		[StepDefinition(@"I click the browse button for label: (.*) and upload a PDF")]
+		public void UploadPDFFileEmbedded(string label, string pdfFile)
+		{
+			pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"C:\Dependencies\WERCSmart\testdoc.pdf";
+			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
+		}
+
 		//[Given(@"I Confirm that the Add Multiple window openswith the UPCs that were added in the document")]
 		//public void GivenIConfirmThatTheAddMultipleWindowOpenswithTheUPCsThatWereAddedInTheDocument()
 		//{
@@ -435,6 +449,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Context.AddToContext(savedas, prodDetails);
 			Report.Success("Product Information saved!");
 		}
+
+
+		//[StepDefinition(@"I save the product Id as: (.*)")]
+		//public void SaveProductId(string savedas)
+		//{
+		//	ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
+		//	string productID = prodDetails.Id;
+		//	Report.Info("Saving product ID: "+productID);
+		//	Context.AddToContext(savedas, productID);
+		//	Report.Success("Product ID saved!");
+		//}
 
 		[StepDefinition(@"I save the context product information as: (.*) where id is: (.*) and product name is: (.*)")]
 		public void GivenISaveTheContextProductInformationAsTestCaseWhereIdIsAndProductNameIsTest(string savedas, string id, string name)
@@ -2042,6 +2067,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"the 'Regulatory List' window opens")]
 		public void RegulatoryListWindowOpens()
 		{
+			new RegulatoryList().WaitForContainerToBeVisible();
 			string header = new RegulatoryList().Heading();
 			if (header == null)
 			{
@@ -2393,6 +2419,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I enter UPC Number: (.*)")]
 		public void GivenIEnterUPCNumberSavedAsUPC(string upcNumber)
 		{
+			Delay.Seconds(3);
 			Report.IsTrue(new NewProduct().InputUPCNumber(upcNumber), "Failed to enter upc number", "Entered upc number");
 		}
 
@@ -2416,6 +2443,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenIEnterSizeValue(string size)
 		{
 			Report.IsTrue(new NewProduct().InputUPCSize(size), "Failed to enter size: " + size, "Entered size: " + size);
+		}
+
+		[StepDefinition(@"I delete retailer (.*) from the UPC")]
+		public void IDeleteRetailerFromTheUPC(string retailer)
+		{
+			Report.IsTrue(new UPC().DeleteRetailer(retailer), "Failed to delete retailer " + retailer + ".",
+			"Successfully deleted retailer " + retailer + ".");
 		}
 
 		[StepDefinition(@"I Confirm the Package Type drop down list shows a Packaging type available for selection - Do not select one")]

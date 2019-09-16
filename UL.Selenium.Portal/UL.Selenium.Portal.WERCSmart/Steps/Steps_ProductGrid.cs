@@ -1985,6 +1985,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("retailer", retailerToArchive);
 		}
 
+		[StepDefinition(@"In the Archive Retailers popup, I select the checkbox next to the retailer (.*)")]
+		public void InTheArchiveRetailersPopupSelectTheCheckboxNextToTheRetailer(string retailer)
+		{
+			var thisModalDialog = new ModalDialog();
+			Report.IsTrue(thisModalDialog.SelectRetailer(retailer), "Failed to select: " + retailer,
+				"Successfully selected: " + retailer);
+		}
+
 		[StepDefinition(@"In the Archive Retailers popup click on: (.*)")]
 		public void GivenInTheArchiveRetailersPopupClickOn(string buttonToClick)
 		{
@@ -2230,6 +2238,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				i++;
 			}
 
-		}
+		}		
+
+		
 	}
 }
