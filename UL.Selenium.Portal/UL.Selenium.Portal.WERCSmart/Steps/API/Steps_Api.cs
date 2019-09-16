@@ -66,7 +66,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			using (var wc = new WebClient())
 			{
 				wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-				var ret = wc.UploadString(loginUrl, "POST", "UserName=" + userName.Replace("@", "%40")/*rich.french%40ul.com*/+ "&Password=" + password/*Asdf123!*/);
+				var ret = wc.UploadString(loginUrl, "POST", "UserName=" + userName.Replace("@", "%40") + "&Password=" + password);
 				token = Regex.Match(ret, "\"(.*)\"").Groups[1].Value;
 				Context.AddToContext("ApiSavedToken", token, true);
 			}

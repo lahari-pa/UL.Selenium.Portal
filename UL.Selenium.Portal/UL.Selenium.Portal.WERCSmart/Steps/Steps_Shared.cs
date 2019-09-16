@@ -6310,6 +6310,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Document options panel has opened");
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
 			var table2 = new Table(new string[] {
 				"datacode",
@@ -8430,15 +8431,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click expand arrow for: " + upc);
 			myNewProduct.ExpandArrowforUPC(upc);
 			TestReport.StartStep("I add the following into the UPC Fields");
-				var upcInfo = new UpcInformation {
-					ContainerType = containerType,
-					Size = size,
-					UpcNumber = upc,
-					PackageType = pkgType
-				};
-				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to change packagaing type info!",
-					"Successfully changed packagaing type info!");
-				TestReport.StartStep("I click save");
+			var upcInfo = new UpcInformation {
+				ContainerType = containerType,
+				Size = size,
+				UpcNumber = upc,
+				PackageType = pkgType
+			};
+			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to change packagaing type info!",
+				"Successfully changed packagaing type info!");
+			TestReport.StartStep("I click save");
 			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
 			MyStepsNewProduct.GivenIConfirmErrorMessageIsShownBelowField("This is a required field.", "Package Type");
 		}
