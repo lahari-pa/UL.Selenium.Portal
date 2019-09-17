@@ -9049,6 +9049,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var ingredients = new Ingredients();
+			var selNewProduct = new UPC();
+			TestReport.StartStep("I Check I am on the Ingredients page");
+			Report.IsTrue(selNewProduct.WaitForSection("Ingredients"),
+				"The Ingredients page is not showing when it was expected to",
+				"The Ingredients page is showing as expected");
+			Report.Screenshot();
 			TestReport.StartStep($"I enter: {myIngredient} as my ingredient in the ingredients page");
 			ingredients.ClickComponentSearchPlaceholder();
 			ingredients.EnterTextSearchComponent(myIngredient);
