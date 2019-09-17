@@ -2603,6 +2603,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(sha.ConfirmThereIsOneProductInTheGrid(), "Failed to find one product in the grid!", "Successfully found one product in the grid.");
 		}
 
+		[StepDefinition(@"SHA Search for product by UPC: (.*) in all statuses")]
+		public void ThenSHASearchForProductByUPCInAllStatuses(string uPC)
+		{
+			Context.AddToContext("UPC", uPC);
+			var table = new Table("SearchTerm", "SearchValue");
+			table.AddRow("UPC", "saved as UPC");
+			new StudioSHAManager().ClickBottomMenuOption("Search");
+			this.GivenInSHAManagerPageIRunSearch(table);
+		}
+
+		[Given(@"I verify the popup message displays with the title ""(.*)""")]
+		public void GivenIVerifyThePopupMessageDisplaysWithTheTitle(string title)
+		{
+
+			Report.IsTrue(new StudioSHAManagerArchivedProduct().ArchivedUPCPopupTitle(title, out string displayedTitle),
+				"Unable to locate popup entitled " + title + ", instead found " + displayedTitle,
+				"Located popup titled " + displayedTitle);
+		}
+		[Then(@"I verify the popup data using UPC: (.*)")]
+		public void ThenIVerifyThePopupDataUsingUPC(string uPC)
+		{
+
+			//Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(
+			//	Context.GetFromContext("UPC").ToString(),
+			//	out string failedAt),
+			//	"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
+			//	"Popup contains the appropriate elements.");
+
+			Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(uPC,out string failedAt),
+				"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
+				"Popup contains the appropriate elements.");
+		}
+
+
 		[StepDefinition(@"In SHA I Search for exact UPC in (.*) Status for UPC saved as: (.*)")]
 		public void InSHAISearchForExactUPCInForUPCSavedAs(string status, string savedAs)
 		{
