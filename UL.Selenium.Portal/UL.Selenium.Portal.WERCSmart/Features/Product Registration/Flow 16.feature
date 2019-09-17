@@ -455,6 +455,7 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead acid battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97470
 
+@TReVorId:23510
 Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Error Messaging - RU000344
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
