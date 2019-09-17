@@ -199,7 +199,7 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87916)
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87916)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87913 and its status is: Accepted
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87916 and its status is: Accepted
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase87916)
 	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase87916) for
 		| Retailer |
