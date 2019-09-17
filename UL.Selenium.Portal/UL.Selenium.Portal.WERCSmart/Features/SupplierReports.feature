@@ -535,3 +535,18 @@ Scenario: [76759] Waste Classification Summary Report
 		| Wisconsin      |
 		| Wyoming        |
 	And I delete the Supplier Report file saved as SupplierReport76759
+
+Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) report
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given Under the Supplier Reports menu I choose: Subscription Renewal (Registrations Eligible for Deletion)
+	Then In the Supplier Reports screen the current sub-page should be: Subscription Renewal (Registrations Eligible for Deletion)
+	Then I Check that the Description text on the supplier report page matches: The report will provide you with the information for current, submitted registrations, regardless of current registration status (Net Yet Submitted, In Progress, Sending, Accepted, Needs Attention), that are eligible for deletion from your account. The quantity of submitted registrations directly impacts your subscription levels for Formulated, Enhanced Articles and Articles. Eligible for deletion criteria is based on order history dates. 
+	Given In the Supplier Reports screen I click on the Download button
+	Given I click on close in the Report Download dialog
+	Given I confirm that an excel file is produced called Subscription Renewal (Registrations Eligible for Deletion).xlsx and save as 68423
+
+
+
+
+

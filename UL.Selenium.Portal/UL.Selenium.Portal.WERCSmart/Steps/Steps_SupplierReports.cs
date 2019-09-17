@@ -289,5 +289,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Cell value matches UPC " + upc + " for column " + column + " and id " + product.Id + ".");
 
 		}
+		[StepDefinition(@"I Check that the Description text on the supplier report page matches: (.*)")]
+		public void ICheckThatTheDescriptionTextOnTheSupplierReportsPageIsCorrect(string expectedText)
+		{
+			Report.IsTrue(new SupplierReports().DescriptionTextMatches(expectedText),"The expected text did not match the actual text","The expected text did match the actual text");			
+		}
 	}
 }

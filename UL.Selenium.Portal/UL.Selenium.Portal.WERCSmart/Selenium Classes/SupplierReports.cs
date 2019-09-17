@@ -127,5 +127,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			selectionBox.Select(retailer);
 			return selectionBox.SelectedOption() == retailer;
 		}
+
+		public bool DescriptionTextMatches(string expectedText)
+		{
+			//first try no remove white spaces
+			string actualText = this.containerElement.FindElement(By.XPath(".//p[@data-bind='text: Description']"), 2).Text;
+			Report.Info($"The expected Text was: {expectedText}");
+			Report.Info($"The actual text found is: {actualText}");
+			if (actualText==null)
+			{
+				Report.Failure("Could not find the description text");
+				return false;
+			}
+			if(actualText==expectedText)
+			{
+				return true;
+			}
+			return false;
+
+
+		}
+		
 	}
 }

@@ -557,13 +557,7 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 Then I save the product information as: TestCase110368
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-#And I check the current page is the Ingredients page
-Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient
-
-#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		#| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName   |
-		#| Formaldehyde  | 100     | false               | false       | Formaldehyde |
-		
+Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient		
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368
 
 
