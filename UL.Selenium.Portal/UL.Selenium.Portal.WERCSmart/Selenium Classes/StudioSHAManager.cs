@@ -1368,8 +1368,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetproductStatusByRetailer(string retailer)
 		{
 
-
-
 			string retailerStatus = "";
 			string retailerAbbr = "";
 
@@ -1415,7 +1413,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return retailerStatus;
 		}
-
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
@@ -1696,6 +1693,58 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 
+
+	}
+
+	class StudioSHAManagerArchivedProduct : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath("//div[contains(@aria-labelledby,'IsArchiveProduct')]");
+
+		public bool ArchivedUPCPopupTitle(string title, out string displayedTitle) =>
+			title == (displayedTitle = this.containerElement.FindElement(By.Id("ui-dialog-title-dialog-IsArchiveProduct")).GetInnerText());
+
+		public bool VerifyPopupContents(string _UPC, out string failedAt)
+		{
+			failedAt = string.Empty;
+			IWebElement content = this.FindElement(By.XPath("//div[@id='archivedProductId']"));
+			IWebElement firstLine = content.FindElement(By.XPath("..//p"));
+			ReadOnlyCollection<IWebElement> contents = content.FindElements(By.XPath("..//p//p"));
+			ReadOnlyCollection<IWebElement> clients = content.FindElements(By.XPath("..//li"));
+
+			var listContent = new List<string>();
+
+			string firstLineString = firstLine.GetInnerText().Split('\r')[0];
+
+			listContent.Add(firstLineString);
+
+			foreach (IWebElement item in contents)
+			{
+				listContent.Add(item.GetInnerText());
+			}
+
+			var clientContent = new List<string>();
+			foreach (IWebElement client in clients)
+			{
+				clientContent.Add(client.GetInnerText());
+			}
+
+			if (!Regex.IsMatch(listContent[0], "Product .+ is Archived."))
+			{
+				failedAt += " Product is Archived. ";
+			}
+
+			if (!Regex.IsMatch(listContent[1], "Archived date .+"))
+			{
+				failedAt += " Archived date. ";
+			}
+
+			if (!Regex.IsMatch(listContent[2], "Archived by .+"))
+			{
+				failedAt += " Archived by. ";
+			}
+
+			return failedAt.Length == 0;
+		}
 	}
 
 	class ProcessProducts : BaseObject

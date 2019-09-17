@@ -482,6 +482,7 @@
     </None>
     <None Include="Features\Security Roles.feature">
     </None>
+    <None Include="Features\SHA Search.feature" />
     <None Include="Features\Signup.feature">
     </None>
     <None Include="Features\Sprint 15.5.2.feature" />

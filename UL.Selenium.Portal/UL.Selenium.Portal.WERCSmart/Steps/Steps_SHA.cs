@@ -58,7 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioLogin.ClickSignIn(), "Failed to click 'Sign In", "Clicked 'Sign In'");
 			Delay.Seconds(3);
 			var thisStudioDesktop = new StudioDesktop();
-			if(new PasswordExpireNotice().WaitForLoad())
+			if (new PasswordExpireNotice().WaitForLoad())
 			{
 				Report.Info("The Password Expire Notice appeared, so clicking ignore");
 				if (!new PasswordExpireNotice().ClickButton("Ignore"))
@@ -328,7 +328,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-        [StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
+		[StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(string productSavedAs,
 			string status)
 		{
