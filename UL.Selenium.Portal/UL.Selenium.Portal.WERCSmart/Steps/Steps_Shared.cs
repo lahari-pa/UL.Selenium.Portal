@@ -6309,6 +6309,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Document options panel has opened");
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
 			var table2 = new Table(new string[] {
 				"datacode",

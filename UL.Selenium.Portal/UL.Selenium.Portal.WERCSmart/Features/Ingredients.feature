@@ -441,6 +441,7 @@ Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor I
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase81711
 
+@TReVorId:23503
 Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -461,6 +462,7 @@ Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80800
 
+@TReVorId:23501
 Scenario: [109230] Ingredients - Proper ingredients and percentages are showing in Summary and Ingredients Table
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC109230

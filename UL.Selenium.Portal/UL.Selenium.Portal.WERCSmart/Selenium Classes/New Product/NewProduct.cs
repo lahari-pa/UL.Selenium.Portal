@@ -3123,42 +3123,4 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public IWebElement Input { get; set; }
 		public string ErrorMessage { get; set; }
 	}
-
-	//public class UPCAddMultipleWindow : SeleniumBaseObject
-	//{
-	//	const string _basePath = "//h4[text()='Add Multiple']//parent::div//parent::div[@class='modal-content']";
-
-	//	protected override By ContainerElementLocator => By.XPath(_basePath);
-
-	//	private IWebElement Title => this.containerElement.FindElement(By.XPath("//h4[text()='Add Multiple']"), 5);
-	//	private IWebElement Table => this.containerElement.FindElement(By.XPath(".//table[@class='table']"));
-	//	private ReadOnlyCollection<IWebElement> TableRows => this.Table.FindElements(By.XPath("./tr"));
-	//	private ReadOnlyCollection<IWebElement> CheckBoxes => this.Table.FindElements(By.XPath(".//input[@type='checkbox']"));
-
-
-	//	public string GetTitleText()
-	//	{
-	//		return this.Title.Text;
-	//	}
-
-	//	public IWebElement GetTableRow(int index)
-	//	{
-	//		return this.TableRows[index];
-	//	}
-
-	//	public bool SelectAllCheckboxes()
-	//	{
-	//		return this.CheckBoxes[0].TryCheck();
-	//	}
-
-	//	public bool SelectCheckBox(int i)
-	//	{
-	//		return this.CheckBoxes[i].TryCheck();
-	//	}
-
-	//	internal Dictionary<string, string> GetData()
-	//	{
-	//		throw new NotImplementedException();
-	//	}
-	//}
 }

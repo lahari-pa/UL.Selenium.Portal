@@ -116,6 +116,7 @@ Scenario: [87304] Video link How to Subscribe
 	And I close the window saved as: Subscription Enrollment and Management
 
 
+@TReVorId:23507
 Scenario: [92613] Add and Deactivate a New User from the User Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
