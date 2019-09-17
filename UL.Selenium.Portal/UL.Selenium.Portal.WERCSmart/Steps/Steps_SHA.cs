@@ -1006,6 +1006,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found retailer " + retailer + " in list of retailers.");
 		}
 
+		[StepDefinition(@"I confirm that retailer saved as: (.*) appears for UPC saved as: (.*)")]
+		public void ConfirmThatRetailerSavedAsAppearsForUPCSavedAs(string retailerSavedAs, string upcSavedAs)
+		{
+			if (!Context.Contains(upcSavedAs))
+			{
+				Report.Error("No item saved in context as: " + upcSavedAs);
+				return;
+			}
+			string upc = Context.GetFromContext(upcSavedAs).ToString();
+			if (!Context.Contains(retailerSavedAs))
+			{
+				Report.Error("No item saved in context as: " + retailerSavedAs);
+				return;
+			}
+			string retailer = Context.GetFromContext(retailerSavedAs).ToString();
+			//var abbreviationMappings = new RetailerAbbreviations().Map;
+			//if (abbreviationMappings.ContainsKey(retailer))
+			//{
+			//	// then we need to convert from full retailer name to abbreviation because the UPC page displays the abbrv
+			//	retailer = abbreviationMappings.FirstOrDefault(x => x.Key == retailer).Value;
+			//}
+			retailer = new RetailerAbbreviations().TryConvertToAbbreviation(retailer);
+			var studioSHAManager = new StudioSHAManager();
+			Report.IsTrue(studioSHAManager.ConfirmRetailerExistsForUPC(retailer, upc), "Failed to find retailer " + retailer + " in list of retailers",
+				"Successfully found retailer " + retailer + " in list of retailers.");
+		}
+
 		[StepDefinition(@"I close the SHA Manager Product UPC window")]
 		public void CloseSHAManagerProductUPCWindow()
 		{
@@ -2176,20 +2203,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 			}
-
 			var thisStudioSHAManager = new StudioSHAManager();
 			List<Product> RetailerStatuses = thisStudioSHAManager.GetTopXProducts(2);
+			var matchingStatusRows = RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
+			var abbreviationMap = new RetailerAbbreviations().Map;
+			foreach (var row in matchingStatusRows)
+			{
+				var clients = row.Clients;
+				var clientAbbreviations = clients.Split(',').Select(x => x.Trim()).ToList();
+				foreach (var abbr in clientAbbreviations)
+				{
+					if (abbreviationMap.ContainsValue(abbr) && abbreviationMap.FirstOrDefault(x => x.Value == abbr).Key == retailer)
+					{
+						Report.Success("Found product with status: " + status + " and retailer: " + retailer);
+						Report.Screenshot();
+						return;
+					}
+				}
+			}
+			Report.Failure("Failed to find product with status: " + status + " and retailer: " + retailer);
+			//var thisStepsRetailPartners = new StepsRetailPartners();
+			//var matchingClients = matchingStatusRows.Select(x => x.Clients)
+			//	.Where(o => thisStepsRetailPartners.MatchAbbreviatedRetailer(o, retailer)).ToList();
 
-			var thisStepsRetailPartners = new StepsRetailPartners();
-
-			var matchingStatusRows =
-				RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
-			var matchingClients = matchingStatusRows.Select(x => x.Clients)
-				.Where(o => thisStepsRetailPartners.MatchAbbreviatedRetailer(o, retailer)).ToList();
-
-			Report.IsTrue(matchingClients.Count != 0,
-				"No matching row was found for status: " + status + " and retailer: " + retailer,
-				"Matching row was found for status: " + status + " and retailer: " + retailer);
+			//Report.IsTrue(matchingClients.Count != 0,
+			//	"No matching row was found for status: " + status + " and retailer: " + retailer,
+			//	"Matching row was found for status: " + status + " and retailer: " + retailer);
 
 		}
 

@@ -274,5 +274,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			};
 		}
 
+		/// <summary>
+		/// If the input string exists as a key (retailer full name) then return the corresponding key (retailer abbreviation)
+		/// Otherwise return the original string
+		/// </summary>
+		public string TryConvertToAbbreviation(string input)
+		{
+			var abbreviationMappings = this.Map;
+			if (abbreviationMappings.ContainsKey(input))
+			{
+				abbreviationMappings.TryGetValue(input, out string retailer);
+				if (retailer != null)
+				{
+					return retailer;
+				}
+			}
+			return input;
+		}
 	}
 }

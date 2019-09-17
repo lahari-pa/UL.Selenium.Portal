@@ -5892,6 +5892,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
 			TestReport.StartStep("I right click the product");
 			shaSteps.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
+			// saving the current window so we can naviate back from UPC List
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
 			TestReport.StartStep("I click 'UPC List'");
 			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
 		}
