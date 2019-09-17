@@ -498,6 +498,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool RetailerIsArchived(string retailerAbbr, string id)
+		{
+			int indexOfID = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+
+			int indexOfClients = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+			ReadOnlyCollection<IWebElement> idTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfID + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> clientsTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfClients + 1).ToString() + "]"));
+
+			for (int i = 0; i < idTDs.Count; i++)
+			{
+				IWebElement thisIDTD = idTDs[i];
+				if (thisIDTD.GetValue() == id)
+				{
+					IWebElement thisClientsTD = clientsTDs[i];
+					var allClients = thisClientsTD.GetValue().Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+					if (allClients.Contains(retailerAbbr + "**"))
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			return false;
+		}
+
 		public bool RightClickProductByID(string id)
 		{
 			Delay.Seconds(3);
@@ -1091,11 +1129,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
 			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
-			foreach(var item in rows)
+			foreach (var item in rows)
 			{
 				IWebElement linkBox = item.FindElement(By.XPath(".//a"), 2);
 
-				if(linkBox.Text.Contains(expectedUPCNum+"*"))
+				if (linkBox.Text.Contains(expectedUPCNum + "*"))
 				{
 					return linkBox.TryClick();
 				}
@@ -1142,6 +1180,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool ConfirmUPCArchived(string upc)
+		{
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			IWebElement upcRow = null;
+			foreach (IWebElement row in rows)
+			{
+				string upcNumber = row.Text.Split(' ')[0];
+				if (upcNumber == upc)
+				{
+					upcRow = row;
+				}
+			}
+
+			if (upcRow == null)
+			{
+				Report.Info("Failed to find UPC " + upc + " in row!");
+				return false;
+			}
+
+			string background = upcRow.GetCssValue("background-color");
+
+			return background == "rgb(235, 235, 224)";
+		}
 
 		public bool ClickProcessRecertification()
 		{
@@ -1290,9 +1351,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetproductStatusByRetailer(string retailer)
 		{
-
-
-			
 			string retailerStatus = "";
 			string retailerAbbr = "";
 
@@ -1320,25 +1378,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var mySHAManager = new StudioSHAManager();
 				mySHAManager.Wait_for_load();
 				Product matchingProduct = mySHAManager.GetTopXProducts(2).FirstOrDefault(x => x.Clients == retailerAbbr);
-				Report.Info("The Retailer initials found are: "+matchingProduct.Clients);
-				Report.Info("A Status was found for the Product. The Status is: "+ matchingProduct.Status);
+				Report.Info("The Retailer initials found are: " + matchingProduct.Clients);
+				Report.Info("A Status was found for the Product. The Status is: " + matchingProduct.Status);
 				retailerStatus = matchingProduct.Status;
 
-				if (matchingProduct==null)
+				if (matchingProduct == null)
 				{
 					Report.Failure("Could not find a Product with retailer: " + retailerAbbr + ".");
 					return null;
-				}				
+				}
 
 			}
 			catch (Exception)
 			{
 				return null;
-			}			
+			}
 
 			return retailerStatus;
 		}
-
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
@@ -1619,6 +1676,58 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 
+
+	}
+
+	class StudioSHAManagerArchivedProduct : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath("//div[contains(@aria-labelledby,'IsArchiveProduct')]");
+
+		public bool ArchivedUPCPopupTitle(string title, out string displayedTitle) =>
+			title == (displayedTitle = this.containerElement.FindElement(By.Id("ui-dialog-title-dialog-IsArchiveProduct")).GetInnerText());
+
+		public bool VerifyPopupContents(string _UPC, out string failedAt)
+		{
+			failedAt = string.Empty;
+			IWebElement content = this.FindElement(By.XPath("//div[@id='archivedProductId']"));
+			IWebElement firstLine = content.FindElement(By.XPath("..//p"));
+			ReadOnlyCollection<IWebElement> contents = content.FindElements(By.XPath("..//p//p"));
+			ReadOnlyCollection<IWebElement> clients = content.FindElements(By.XPath("..//li"));
+
+			var listContent = new List<string>();
+
+			string firstLineString = firstLine.GetInnerText().Split('\r')[0];
+
+			listContent.Add(firstLineString);
+
+			foreach (IWebElement item in contents)
+			{
+				listContent.Add(item.GetInnerText());
+			}
+
+			var clientContent = new List<string>();
+			foreach (IWebElement client in clients)
+			{
+				clientContent.Add(client.GetInnerText());
+			}
+
+			if (!Regex.IsMatch(listContent[0], "Product .+ is Archived."))
+			{
+				failedAt += " Product is Archived. ";
+			}
+
+			if (!Regex.IsMatch(listContent[1], "Archived date .+"))
+			{
+				failedAt += " Archived date. ";
+			}
+
+			if (!Regex.IsMatch(listContent[2], "Archived by .+"))
+			{
+				failedAt += " Archived by. ";
+			}
+
+			return failedAt.Length == 0;
+		}
 	}
 
 	class ProcessProducts : BaseObject
@@ -2475,15 +2584,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class StudioSHAManagerUPCDetails:BaseObject
+	class StudioSHAManagerUPCDetails : BaseObject
 	{
 		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }		
+		protected override IWebElement containerElement { get; set; }
 
-		public IWebElement SelectClientInput => this.containerElement.FindElement(By.XPath(".//select[contains(@id,'clients')]"), 5);	
-		
+		public IWebElement SelectClientInput => this.containerElement.FindElement(By.XPath(".//select[contains(@id,'clients')]"), 5);
+
 
 	}
 
@@ -2515,17 +2624,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			bool loaded = false;
 
-			for (int i=0; i<secondsToWait; i++)
+			for (int i = 0; i < secondsToWait; i++)
 			{
 				IWebElement detailsTable = this.containerElement.FindElement(By.XPath(".//table[@class='upcDetails']"), 30);
-				
+
 				if (detailsTable != null)
 				{
-					loaded= true;
+					loaded = true;
 					Report.Info("Table Loaded after: " + i + " seconds.");
 					return loaded;
 
-				}				
+				}
 			}
 			return loaded;
 
@@ -2553,7 +2662,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		
+
 	}
 
 

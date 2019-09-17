@@ -20,6 +20,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -329,6 +330,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void UploadPDFFile(string label, string pdfFile)
 		{
 			pdfFile = EmbeddedResources.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
+		}
+
+		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload a PDF")]
+		public void UploadPDFFileSectionAndTypeEmbedded(string type, string label)
+		{
+			var pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"C:\Dependencies\WERCSmart\testdoc.pdf";
+			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(type, label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
+		}
+
+		[StepDefinition(@"I click the browse button for label: (.*) and upload a PDF")]
+		public void UploadPDFFileEmbedded(string label, string pdfFile)
+		{
+			pdfFile = EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"C:\Dependencies\WERCSmart\testdoc.pdf";
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
@@ -1006,6 +1021,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void SetRadioOptionInSectionTo(string section, string option)
 		{
 			Report.IsTrue(new NewProduct().SelectRadio(section, option), "Failed to select radio option: " + option + " in section: " + section, "Successfully set radio option: " + option);
+		}
+
+		[StepDefinition(@"I verify the error messaging in Regulatory Documents to Provide:")]
+		public void GivenIVerifyTheErrorMessagingInRegulatoryDocumentsToProvide(Table table)
+		{
+			bool response = new RegulatoryDocumentsToProvide().GetErrorForQuestion(table, out string actualMessage);
+			Report.IsTrue(response, "Found " + actualMessage + " instead of the expected message.", "Found expected message");
 		}
 
 		[StepDefinition(@"I set the (.*) field to: (.*)")]
@@ -2397,6 +2419,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I enter UPC Number: (.*)")]
 		public void GivenIEnterUPCNumberSavedAsUPC(string upcNumber)
 		{
+			Delay.Seconds(3);
 			Report.IsTrue(new NewProduct().InputUPCNumber(upcNumber), "Failed to enter upc number", "Entered upc number");
 		}
 
@@ -2420,6 +2443,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenIEnterSizeValue(string size)
 		{
 			Report.IsTrue(new NewProduct().InputUPCSize(size), "Failed to enter size: " + size, "Entered size: " + size);
+		}
+
+		[StepDefinition(@"I delete retailer (.*) from the UPC")]
+		public void IDeleteRetailerFromTheUPC(string retailer)
+		{
+			Report.IsTrue(new UPC().DeleteRetailer(retailer), "Failed to delete retailer " + retailer + ".",
+			"Successfully deleted retailer " + retailer + ".");
 		}
 
 		[StepDefinition(@"I Confirm the Package Type drop down list shows a Packaging type available for selection - Do not select one")]
@@ -2452,9 +2482,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("input values must be either 'should' or 'should not'");
 			}
 		}
-
 		#endregion
+
+
 	}
+
 
 	//public class UPCWarning : SeleniumBaseObject
 	//{
