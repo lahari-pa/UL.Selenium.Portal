@@ -65,7 +65,7 @@ Scenario: [74634] Forward Product Registration - Only can select product once
 	Given I click Bulk Actions in the Products Grid
 	Then I should see a popup with header Bulk Actions
 	Given I click Forward Product Registration in the Bulk Actions window
-	Then I should see the header: Select Products & UPCs on the Forward Product Registration window
+	And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
 	And I confirm the active Forward Product Registration tab is: Select Products
 	Given I select the product with ID saved as: ProductInProgressList74634 under the Select Products tab
 	#Given I click Bulk Actions in the Products Grid
@@ -206,7 +206,7 @@ Scenario: [75129] Forward - Product in Submitted Status
 	Given I filter the products by: Assessment in Progress
 	And I filter for the product saved as: TestCase75129
 	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-	Then I should see the header: Select Products & UPCs on the Forward Product Registration window
+	And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
 	And I enter the text: saved as TestCase75129 in the 'Search by WPS ID or Product Name' field
 	And In the Foward Product Registration Screen I should see product: saved as TestCase75129
 	And In the Foward Product Registration Screen I Select the product: saved as TestCase75129
@@ -215,7 +215,7 @@ Scenario: [75129] Forward - Product in Submitted Status
 	And I click continue
 	And If the Private Label textbox is showing in the Select UPCs screen, I enter the value: N/A
 	And I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue and save UPC as UPC75129
-	Then I should see the header: Product Results on the Forward Product Registration window
+	And I should see the subheading 3: Product Results on the Forward Product Registration window
 	And I click continue
 	And I select the true radio for the 'Are Statements True' question under the Review and Submit tab
 	And I click continue

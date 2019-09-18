@@ -1125,6 +1125,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return rList;
 		}
 
+		public bool ClickCaseUPCSavedAsInProducUPCTable(string savedAs)
+		{
+			if(!Context.Contains(savedAs))
+			{
+				Report.Failure($"The UPC saved as: {savedAs} could not be found in context");
+				return false;
+			}
+			var expectedUPCNum = Context.GetFromContext(savedAs).ToString();
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			foreach (var item in rows)
+			{
+				IWebElement linkBox = item.FindElement(By.XPath(".//a"), 2);
+
+				if (linkBox.Text.Contains(expectedUPCNum + "*"))
+				{
+					return linkBox.TryClick();
+				}
+			}
+			Report.Failure("Could not Find UPC Link for the Case UPC: " + expectedUPCNum);
+			return false;
+		}
 		public bool ClickUPCSavedAsInProducUPCTable(string savedAs)
 		{
 			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
@@ -1133,7 +1154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				IWebElement linkBox = item.FindElement(By.XPath(".//a"), 2);
 
-				if (linkBox.Text.Contains(expectedUPCNum + "*"))
+				if (linkBox.Text.Contains(expectedUPCNum))
 				{
 					return linkBox.TryClick();
 				}
@@ -1351,6 +1372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetproductStatusByRetailer(string retailer)
 		{
+
 			string retailerStatus = "";
 			string retailerAbbr = "";
 
@@ -1366,7 +1388,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Beginning get product status by retailer: " + retailer);
 
 			var abbr = new RetailerAbbreviations();
-			abbr.Map.TryGetValue(retailer, out retailerAbbr);
+			abbr.Map.TryGetValue(retailer, out retailerAbbr);			
 			Report.Info("Search for Retailer with Initials: " + retailerAbbr);
 			try
 			{
@@ -1686,7 +1708,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ArchivedUPCPopupTitle(string title, out string displayedTitle) =>
 			title == (displayedTitle = this.containerElement.FindElement(By.Id("ui-dialog-title-dialog-IsArchiveProduct")).GetInnerText());
 
-		public bool VerifyPopupContents(string _UPC, out string failedAt)
+		public bool VerifyPopupContents(string uPC, out string failedAt)
 		{
 			failedAt = string.Empty;
 			IWebElement content = this.FindElement(By.XPath("//div[@id='archivedProductId']"));
@@ -2598,11 +2620,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	class StudioSHAManagerUPCDetailsPopupTable : SeleniumBaseObject
 	{
-		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class,'ui-dialog ui-widget')]");
+		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class,'ui-dialog ui-widget') and contains(@aria-labelledby,'upcDetails')]");
 
 		public IWebElement UPCDetailsTable => this.containerElement.FindElement(By.XPath(".//table[@class='upcDetails']"), 30);
 
-		public IWebElement CloseButton => this.containerElement.FindElement(By.XPath(".//button"), 2);
+		public IWebElement CloseButton => this.containerElement.FindElement(By.XPath(".//button//span[text()='Close']"), 2);
+
+		public IWebElement ObsoleteUPCButton => this.containerElement.FindElement(By.XPath(".//button//span[text()='Obsolete UPC']"), 2);
+
+
 
 		//public bool UpcDeatilsTableLoaded()
 
@@ -2662,11 +2688,55 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool ObsoleteUPCButtonPresent()
+		{
+			bool displayStatus = this.ObsoleteUPCButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;
+			return displayStatus;
+		}		
+
+
+
 
 	}
+	class StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class,'ui-dialog ui-widget') and contains(@aria-labelledby,'confirmationObsoleteModal')]");
 
+		public IWebElement CancelButton => this.containerElement.FindElement(By.XPath(".//button[.//span[text()='Cancel']]"), 2);
+		public IWebElement ContinueButton => this.containerElement.FindElement(By.XPath(".//button[.//span[text()='Continue']]"), 2);
+		public bool ConfirmObseleteUPCMessage(string messageText)
+		{
+			string confirmObseleteUPCPopupText = this.FindElement(By.XPath(".//div[contains(@class,'dialog-content')]"), 2).Text;
+			messageText=Regex.Replace(messageText, @"\s+", string.Empty);
+			confirmObseleteUPCPopupText = Regex.Replace(confirmObseleteUPCPopupText, @"\s+", string.Empty);
+			Report.Info($"The expected message is: {messageText}");
+			Report.Info($"The found message is: {confirmObseleteUPCPopupText}");
+			return confirmObseleteUPCPopupText == messageText;
+			
+		}
 
+		public bool ContinueButtonPresent()
+		{
+			//bool displayStatus = this.ContinueButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;			
+			
+			return this.ContinueButton != null && this.ContinueButton.Displayed;
+		}
+		public bool CancelButtonPresent()
+		{
+			//bool displayStatus = this.CancelButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;
+			//return displayStatus;
+			return this.CancelButton != null && this.CancelButton.Displayed;
+		}
+	}		
 
+	
 
+	class StudioSHAManagerUPCDetailsPopupManagerValidationPopup : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class,'ui-dialog ui-widget') and contains(@aria-labelledby,'validate-pasword')]");
+
+		public string ValidationPopupHeaderText => this.FindElement(By.XPath(".//span[@class='ui-dialog-title']"), 2).Text;		
+
+	}
 
 }
