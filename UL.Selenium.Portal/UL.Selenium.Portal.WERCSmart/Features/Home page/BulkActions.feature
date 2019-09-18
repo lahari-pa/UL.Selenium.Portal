@@ -154,14 +154,13 @@ Then I should see the header: Review & Submit on the Forward Product Registratio
 Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
 And I click continue on the Forward Product Registration page
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-Then In the Purchase Summary screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 And I Confirm the Product shows status: Completed for retailer: saved as retailer
 And I Confirm the Product shows status: Submitted for retailer: saved as TestCase75321Retailer
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase75321
-#And In the SHA Manager Product UPC window I confirm that for UPC: saved as UPC75335 retailer: saved as TestCase75321Retailer is showing
 And I confirm that retailer saved as: TestCase75321Retailer appears for UPC saved as: TestCase75321UPC
 And I close the window that opened
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75321)
