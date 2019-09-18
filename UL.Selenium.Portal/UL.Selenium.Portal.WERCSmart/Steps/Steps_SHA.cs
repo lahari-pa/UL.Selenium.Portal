@@ -58,7 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioLogin.ClickSignIn(), "Failed to click 'Sign In", "Clicked 'Sign In'");
 			Delay.Seconds(3);
 			var thisStudioDesktop = new StudioDesktop();
-			if(new PasswordExpireNotice().WaitForLoad())
+			if (new PasswordExpireNotice().WaitForLoad())
 			{
 				Report.Info("The Password Expire Notice appeared, so clicking ignore");
 				if (!new PasswordExpireNotice().ClickButton("Ignore"))
@@ -328,7 +328,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-        [StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
+		[StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(string productSavedAs,
 			string status)
 		{
@@ -2641,7 +2641,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var sha = new StudioSHAManager();
 			Report.IsTrue(sha.ConfirmThereIsOneProductInTheGrid(), "Failed to find one product in the grid!", "Successfully found one product in the grid.");
 		}
-		
+
+		[StepDefinition(@"SHA Search for product by UPC: (.*) in all statuses")]
+		public void ThenSHASearchForProductByUPCInAllStatuses(string _UPC)
+		{
+			Context.AddToContext("UPC", _UPC);
+			var table = new Table("SearchTerm", "SearchValue");
+			table.AddRow("UPC", "saved as UPC");
+			new StudioSHAManager().ClickBottomMenuOption("Search");
+			this.GivenInSHAManagerPageIRunSearch(table);
+		}
+
+		[Given(@"I verify the popup message displays with the title ""(.*)""")]
+		public void GivenIVerifyThePopupMessageDisplaysWithTheTitle(string title)
+		{
+
+			Report.IsTrue(new StudioSHAManagerArchivedProduct().ArchivedUPCPopupTitle(title, out string displayedTitle),
+				"Unable to locate popup entitled " + title + ", instead found " + displayedTitle,
+				"Located popup titled " + displayedTitle);
+		}
+		[Then(@"I verify the popup data using UPC: (.*)")]
+		public void ThenIVerifyThePopupDataUsingUPC(string _UPC)
+		{
+
+			Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(
+				Context.GetFromContext("UPC").ToString(),
+				out string failedAt),
+				"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
+				"Popup contains the appropriate elements.");
+		}
+
 	}
 }
 

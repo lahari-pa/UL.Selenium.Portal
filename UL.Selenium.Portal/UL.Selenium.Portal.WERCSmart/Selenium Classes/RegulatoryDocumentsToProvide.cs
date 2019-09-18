@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
@@ -7,7 +8,7 @@ using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 {
-	class RegulatoryDocumentsToProvide : SeleniumBaseObject
+	public class RegulatoryDocumentsToProvide : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
 
@@ -36,6 +37,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 			{ return false; }
 
 			return elAnswer.TryClick();
+		}
+
+		public bool GetErrorForQuestion(Table table, out string outMessage)
+		{
+			var questions = new Dictionary<string, string>();
+			string expected = string.Empty;
+			outMessage = string.Empty;
+			foreach (TableRow row in table.Rows)
+			{
+				questions.Add(row["Question"], row["Expected Answer"]);
+			}
+			foreach (string question in questions.Keys)
+			{
+				bool correct = true;
+				IWebElement elQuestion = this.FindElement(By.XPath(string.Format("//label[contains(text(),\"{0}\")]", question)), 2);
+				string actualMessage = elQuestion.FindElement(By.XPath("..//parent::div//parent::div//p//span"), 2).GetInnerText();
+				expected = questions[question];
+
+				correct = expected.Trim() == actualMessage.Trim();
+				Report.IsTrue(correct, "Question " + question + " displayed " + actualMessage + " instead of " + expected, "Question " + question + " displayed " + expected + " as expected.");
+				if (!correct)
+				{
+					outMessage = outMessage + " :: " + question + " :: " + actualMessage;
+				}
+			}
+			return (outMessage.Length < 1);
 		}
 	}
 }

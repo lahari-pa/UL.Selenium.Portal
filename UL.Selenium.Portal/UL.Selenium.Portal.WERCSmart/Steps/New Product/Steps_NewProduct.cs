@@ -20,6 +20,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -1020,6 +1021,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void SetRadioOptionInSectionTo(string section, string option)
 		{
 			Report.IsTrue(new NewProduct().SelectRadio(section, option), "Failed to select radio option: " + option + " in section: " + section, "Successfully set radio option: " + option);
+		}
+
+		[StepDefinition(@"I verify the error messaging in Regulatory Documents to Provide:")]
+		public void GivenIVerifyTheErrorMessagingInRegulatoryDocumentsToProvide(Table table)
+		{
+			bool response = new RegulatoryDocumentsToProvide().GetErrorForQuestion(table, out string actualMessage);
+			Report.IsTrue(response, "Found " + actualMessage + " instead of the expected message.", "Found expected message");
 		}
 
 		[StepDefinition(@"I set the (.*) field to: (.*)")]
@@ -2474,9 +2482,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("input values must be either 'should' or 'should not'");
 			}
 		}
-
 		#endregion
+
+
 	}
+
 
 	//public class UPCWarning : SeleniumBaseObject
 	//{
