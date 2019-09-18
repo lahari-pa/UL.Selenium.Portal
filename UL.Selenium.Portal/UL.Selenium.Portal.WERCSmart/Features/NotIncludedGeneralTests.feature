@@ -87,7 +87,7 @@ Then I filter the products by: Accepted by Retailers
 And I filter for the product saved as: TestCase87894
 And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-Then I should see the header: Select Products & UPCs on the Forward Product Registration window
+And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
 Then I select the product with ID saved as: TestCase87894 under the Select Products tab
 Given I click continue on the Forward Product Registration page
 Then I confirm the active Forward Product Registration tab is: Select Retailers
@@ -139,7 +139,7 @@ Then I save the product information as: TestCase87685
 Given I navigate to the home page
 Then I filter the products by: Accepted by Retailers
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-Then I should see the header: Select Products & UPCs on the Forward Product Registration window
+And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
 Then I get the product ID for the product saved as: TestCase87685 then I use this ID in the select Products & UPCs page
 Given I click continue on the Forward Product Registration page
 
@@ -175,10 +175,18 @@ Scenario: [NOTINCLUDEDGENERALTEST] Dupe UPC tool, Creating product with one dupe
 	Given I add the following into the UPC Fields
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
 		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
-	Given I click 'Select all' under Destination Retailers in the UPC page
+Given I click 'Select all' under Destination Retailers in the UPC page
 	Given I click continue
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I navigate to the home page
+
+
+
+
+
+
+
+
 
 
 
