@@ -292,7 +292,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Check that the Description text on the supplier report page matches: (.*)")]
 		public void ICheckThatTheDescriptionTextOnTheSupplierReportsPageIsCorrect(string expectedText)
 		{
-			Report.IsTrue(new SupplierReports().DescriptionTextMatches(expectedText),"The expected text did not match the actual text","The expected text did match the actual text");			
+			Report.IsTrue(new SupplierReports().DescriptionTextMatches(expectedText), "The expected text did not match the actual text", "The expected text did match the actual text");
+		}
+
+		[StepDefinition(@"I Check that in the excel file saved as: (.*) the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.")]
+		public void ICheckThatInTheExcelFileSavedAsTheEligibleForDeletionDates(string savedAs)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var utils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> lastSubmissions = utils.Excel_GetColumn(2);
+				List<string> eligibleForDeletions = utils.Excel_GetColumn(2);
+				for (int i = 1; i < lastSubmissions.Count - 1; i++)
+				{
+					DateTime lastSubDate;
+					DateTime.TryParse(lastSubmissions[i], out lastSubDate);
+					DateTime expectedEligibleDate = lastSubDate.AddYears(1);
+					Report.Info($"The expected eligible for deletion date is {expectedEligibleDate}");
+
+					DateTime actualEligibleDate;
+					DateTime.TryParse(eligibleForDeletions[i], out actualEligibleDate);
+					Report.Info($"The acutal eligible for deletion date is {actualEligibleDate}");
+
+					Report.IsTrue(actualEligibleDate == expectedEligibleDate, "The Eligible for deletion date was not exactly one year from the last submission date for Item:" + i, "The Eligible for deletion date was exactly one year from the last submission date for Item:" + i);
+
+				}
+				return;
+
+			}
 		}
 	}
 }

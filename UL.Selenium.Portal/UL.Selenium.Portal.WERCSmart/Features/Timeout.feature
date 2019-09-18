@@ -190,8 +190,14 @@ Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup- TimeoutFeature Wo
 	And I click continue on the Forward Product Registration page
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add Case UPC button under the Select UPCs tab
-	Given I wait for 1200 seconds
-	Then I Check The landing page has loaded, and report if an Alert and Inactivity Prompt are open if it is not loaded
+	Given I wait for 900 seconds
+	Then I Look for an Alert for a max: 30 Seconds
+
+	#Then I Check The landing page has loaded, and report if an Alert and Inactivity Prompt are open if it is not loaded
+
+
+
+
 #
 #	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 #	Then I Look for the Landing Page every minute for a max of: 16 minutes

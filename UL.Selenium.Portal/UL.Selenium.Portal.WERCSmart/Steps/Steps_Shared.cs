@@ -8956,7 +8956,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var productInfo = new ProductInformation { Id = productIDFromSHA };
 					Context.AddToContext($"ProductID{savedAs}", productInfo);
 
-
+					
 					string productRetailerInitials = productsShown[0].Clients;					
 					string productRetailerInitialsFirst = productRetailerInitials.Split(',')[0];
 					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == productRetailerInitialsFirst).Key;
