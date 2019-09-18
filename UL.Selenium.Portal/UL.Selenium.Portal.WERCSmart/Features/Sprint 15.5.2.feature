@@ -35,9 +35,9 @@ And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for sa
 Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: NewProduct110237
 Then I check that the UPC number saved as: UPC75335 and under the retailer: Wal-Mart/SAM'S CLUB, does not show the Obsolete UPC Option in the UPC details popup
 Then I close the SHA Manager Product UPC details pop up
-And I close the current window and switch to the main window
+And I close the current window and switch to the main window in Studio
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Then I Search using for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: 110237
+Then I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: 110237
 Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: ProductID110237
 Then I check that the UPC number saved as: DupeUPCNumber110237 and under the retailer: <ProductRetailer110237>, does show the Obsolete UPC Option in the UPC details popup
 Then I close the SHA Manager Product UPC details pop up
@@ -45,7 +45,7 @@ Then I close the SHA Manager Product UPC details pop up
 @TReVorId:23500
 Scenario: [110238] UPC Details Pop-Up - Obsolete UPC Option - Verify Message - Cancel and Continue Actions
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Then I Search using for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: 110238
+Then I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: 110238
 Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: ProductID110238
 Then I check that the UPC number saved as: DupeUPCNumber110238 and under the retailer: <ProductRetailer110238>, does show the Obsolete UPC Option in the UPC details popup
 Then I Click the Obsolete Button and Check a Popup Appears with 'Cancel' and 'Continue' buttons and the following message: You have selected to remove the UPC from the registration. The Account's Administrator(s) will be notified via email of this action. Are you sure you want to proceed with this action? It cannot be reversed.

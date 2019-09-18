@@ -1721,8 +1721,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I close the current window and switch to the main window")]
-		public void IClosetheCurrentWindowAndSwitchToMainWindow()
+		[StepDefinition(@"I close the current window and switch to the main window in Studio")]
+		public void IClosetheCurrentWindowAndSwitchToMainWindowInStudio()
 		{
 			Report.Info("Closing window");
 			SeleniumBrowser.WebBrowser.Close();

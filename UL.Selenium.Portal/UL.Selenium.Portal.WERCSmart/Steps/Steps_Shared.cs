@@ -8867,14 +8867,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes");
 		}
 
+		/// <summary>
+		/// For using a retailer saved in context wrap the retailer name in '<>'
+		/// </summary>
+		/// <param name="savedAs"></param>
+		/// <param name="retailer"></param>
+		/// <param name="presence"></param>		
 		[StepDefinition(@"I check that the UPC number saved as: (.*) and under the retailer: (.*), (does|does not) show the Obsolete UPC Option in the UPC details popup")]
 		public void ICheckUPCNumberXObsoleteUPCOptionPresence(string savedAs, string retailer, string presence)
 		{
 			//For Testing the Dupe UPC Sha Tool 
 			TestReport.UseSubSteps = true;		
 
-			var shaSteps = new Steps_SHA();
 			var studioSHAManger = new StudioSHAManager();
+			var shaSteps = new Steps_SHA();
 			Delay.Seconds(10);
 			new Steps_SHA().SwitchToProductListUpcWindow();
 			Delay.Seconds(4);
@@ -8921,7 +8927,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		
 		}
 
-		[StepDefinition(@"I Search using for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: (.*)")]
+		[StepDefinition(@"I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: (.*)")]
 		public void ISearchForAProductContainingDuplicateUPCSUsingSpreadSheet(string savedAs)
 		{
 			TestReport.UseSubSteps = true;

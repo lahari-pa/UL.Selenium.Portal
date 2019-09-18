@@ -1127,7 +1127,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCaseUPCSavedAsInProducUPCTable(string savedAs)
 		{
-			var expectedUPCNum = (string)Context.GetFromContext(savedAs);
+			if(!Context.Contains(savedAs))
+			{
+				Report.Failure($"The UPC saved as: {savedAs} could not be found in context");
+				return false;
+			}
+			var expectedUPCNum = Context.GetFromContext(savedAs).ToString();
 			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
 			foreach (var item in rows)
 			{
@@ -1703,7 +1708,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ArchivedUPCPopupTitle(string title, out string displayedTitle) =>
 			title == (displayedTitle = this.containerElement.FindElement(By.Id("ui-dialog-title-dialog-IsArchiveProduct")).GetInnerText());
 
-		public bool VerifyPopupContents(string _UPC, out string failedAt)
+		public bool VerifyPopupContents(string uPC, out string failedAt)
 		{
 			failedAt = string.Empty;
 			IWebElement content = this.FindElement(By.XPath("//div[@id='archivedProductId']"));
@@ -2697,8 +2702,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class,'ui-dialog ui-widget') and contains(@aria-labelledby,'confirmationObsoleteModal')]");
 
-		public IWebElement CancelButton => this.containerElement.FindElement(By.XPath(".//button//span[text()='Cancel']"), 2);
-		public IWebElement ContinueButton => this.containerElement.FindElement(By.XPath(".//button//span[text()='Continue']"), 2);
+		public IWebElement CancelButton => this.containerElement.FindElement(By.XPath(".//button[.//span[text()='Cancel']]"), 2);
+		public IWebElement ContinueButton => this.containerElement.FindElement(By.XPath(".//button[.//span[text()='Continue']]"), 2);
 		public bool ConfirmObseleteUPCMessage(string messageText)
 		{
 			string confirmObseleteUPCPopupText = this.FindElement(By.XPath(".//div[contains(@class,'dialog-content')]"), 2).Text;
@@ -2712,16 +2717,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ContinueButtonPresent()
 		{
-			bool displayStatus = this.ContinueButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;
-			return displayStatus;
+			//bool displayStatus = this.ContinueButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;			
+			
+			return this.ContinueButton != null && this.ContinueButton.Displayed;
 		}
 		public bool CancelButtonPresent()
 		{
-			bool displayStatus = this.CancelButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;
-			return displayStatus;
-		}		
+			//bool displayStatus = this.CancelButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;
+			//return displayStatus;
+			return this.CancelButton != null && this.CancelButton.Displayed;
+		}
+	}		
 
-	}
+	
 
 	class StudioSHAManagerUPCDetailsPopupManagerValidationPopup : SeleniumBaseObject
 	{
