@@ -4409,6 +4409,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
 			// Do this by double clicking on the graphic and selecting the green check mark graphic from the available list and click save
 			var table2 = new Table(new string[] {
@@ -4872,7 +4873,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
-
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			var table2 = new Table(new string[] {
 				"datacode",
 				"value"
@@ -4897,7 +4898,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"RSQHADPF",
 				"pass"
 			});
-
 			var thisStepsStudio = new Steps_Studio();
 			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
 			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
@@ -5612,6 +5612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			var table2 = new Table(new string[] {
 				"datacode",
 				"value"
@@ -6309,8 +6310,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Document options panel has opened");
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
-			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			var table2 = new Table(new string[] {
 				"datacode",
 				"value"
@@ -7228,6 +7229,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			var table2 = new Table(new string[] {
 				"datacode",
 				"value"
