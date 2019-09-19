@@ -190,7 +190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.SetAUTHCinPowerAuthorPlus(setTo);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("refresh"), "Failed to find the refresh button.", "Successfully clicked refresh.");
-			Delay.Seconds(3);
+			Delay.Seconds(10);
 		}
 
 
