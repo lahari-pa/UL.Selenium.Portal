@@ -8944,7 +8944,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			List<string> UpcNumbers= utils.Excel_GetColumn(1); //includes the header (so start search at 1 not 0)
 			
-			for (int i=1; i<UpcNumbers.Count-1; i++)
+			for (int i=1; i<UpcNumbers.Count; i++)
 			{
 				TestReport.StartStep($"Searching SHA for a upc found in the duplicate UPC spread sheet. Attempt: {i}");
 				string DupeUPCNumberCurrent = UpcNumbers[i];

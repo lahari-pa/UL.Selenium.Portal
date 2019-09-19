@@ -298,13 +298,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Check that in the excel file saved as: (.*) the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.")]
 		public void ICheckThatInTheExcelFileSavedAsTheEligibleForDeletionDates(string savedAs)
 		{
+			
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
 				var utils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> lastSubmissions = utils.Excel_GetColumn(2);
 				List<string> eligibleForDeletions = utils.Excel_GetColumn(2);
-				for (int i = 1; i < lastSubmissions.Count - 1; i++)
+				for (int i = 1; i < lastSubmissions.Count; i++)
 				{
 					DateTime lastSubDate;
 					DateTime.TryParse(lastSubmissions[i], out lastSubDate);
