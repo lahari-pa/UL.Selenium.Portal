@@ -284,6 +284,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.Info("Date is after " + month + "/" + day + " so I expect no state error");
 				this.StepsNewProduct.NoErrorMessages();
+				this.StepsNewProduct.ClickPageHeading("Pesticide Details - State Registration Details");
 			}
 		}
 

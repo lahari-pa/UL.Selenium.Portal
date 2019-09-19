@@ -27,7 +27,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		{
 			Report.IsTrue(this.TheProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
 			this.TheProduct.ProductType = typeOfProduct;
-			Report.IsTrue(string.Equals(this.TheProduct.ProductType, typeOfProduct, StringComparison.CurrentCultureIgnoreCase), "Failed to set Type of Product to: " + typeOfProduct, "Successfully set Type of Product to: " + typeOfProduct);
+			Report.IsTrue(this.TheProduct.ProductType.Contains(typeOfProduct), "Failed to set Type of Product to: " + typeOfProduct, "Successfully set Type of Product to: " + typeOfProduct);
+		}
+
+		[StepDefinition(@"I set 'Product Line Or Brand' to: (.*)'")]
+		public void SetProductLineOrBrand(string lineOrBrand)
+		{
+			Report.IsTrue(this.TheProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
+			this.TheProduct.ProductLineOrBrand = lineOrBrand;
+			Report.IsTrue(this.TheProduct.ProductLineOrBrand == lineOrBrand, "Failed to Set Product Line or Brand", "Set Product Line or Brand");
 		}
 	}
 }

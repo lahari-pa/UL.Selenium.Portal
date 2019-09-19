@@ -444,6 +444,7 @@ Scenario: [56829] More Filters
 	And I should see an option for More Filters
 	Given I click More Filters in the products grid
 	Given I confirm the product exists with Product ID: 1501253 and Name: More Filters Test Product
+	# combinations: UPC, Brand, Retailer, Additional Programs, UPC-
 	Given I enter combinations of More Filters and should see the product ID: 1501253 only for the correct combinations
 		| Filter              | Match                   |
 		| UPC                 | 0601215310023           |
