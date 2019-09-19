@@ -44,7 +44,7 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="CredentialManagement, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\lib\net461\CredentialManagement.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\lib\net461\CredentialManagement.dll</HintPath>
     </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\EnvDTE.8.0.1\lib\net10\EnvDTE.dll</HintPath>
@@ -103,13 +103,13 @@
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\lib\net461\NTTQA.Selenium.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\lib\net461\NTTQA.Selenium.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\lib\net461\NTTQA.Selenium.Reporting.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\lib\net461\NTTQA.Selenium.Reporting.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium.TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\lib\net461\NTTQA.Selenium.TReVor.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\lib\net461\NTTQA.Selenium.TReVor.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
@@ -141,13 +141,13 @@
       <HintPath>..\packages\TestStack.White.0.13.3\lib\net40\TestStack.White.dll</HintPath>
     </Reference>
     <Reference Include="Thomas.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="Thomas.Plugin.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\lib\net461\Thomas.Plugin.Classes.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\lib\net461\Thomas.Plugin.Classes.dll</HintPath>
     </Reference>
     <Reference Include="TReVor.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="Utf8Json, Version=1.3.7.0, Culture=neutral, PublicKeyToken=8a73d3ba7e392e27, processorArchitecture=MSIL">
       <HintPath>..\packages\Utf8Json.1.3.7\lib\net45\Utf8Json.dll</HintPath>
@@ -164,6 +164,11 @@
     <Compile Include="Classes\WERCSmartUser.cs" />
     <Compile Include="Database Functions\dbRetailers.cs" />
     <Compile Include="Database Functions\dbUtils.cs" />
+    <Compile Include="Features\Product Registration\UPC Case Pack\ProductCreateAndComplete.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductCreateAndComplete.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
     <Compile Include="Selenium Classes\AddNewSupplier.cs" />
@@ -309,6 +314,7 @@
     <None Include="app.manifest" />
     <EmbeddedResource Include="Dependencies\PDF\testdoc.pdf" />
     <EmbeddedResource Include="Dependencies\Excel\testdoc.xlsx" />
+    <EmbeddedResource Include="Dependencies\Excel\UPCsDuplicatedwithinAccount.xlsx" />
     <None Include="Features\AdditionalProductInformation.feature">
     </None>
     <None Include="Features\API\ItemSync.feature" />
@@ -455,6 +461,10 @@
     <None Include="Features\Product Registration\Transportation.feature">
     </None>
     <None Include="Features\Product Registration\UPC Case Pack.feature" />
+    <None Include="Features\Product Registration\UPC Case Pack\ProductCreateAndComplete.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProductCreateAndComplete.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
     </None>
     <None Include="Features\Product Registration\VOC\VOC-SCAQMD.feature">
@@ -481,8 +491,10 @@
     </None>
     <None Include="Features\Security Roles.feature">
     </None>
+    <None Include="Features\SHA Search.feature" />
     <None Include="Features\Signup.feature">
     </None>
+    <None Include="Features\Sprint 15.5.2.feature" />
     <None Include="Features\Subscription.feature">
     </None>
     <None Include="Features\SupplierAccounts.feature">
@@ -516,11 +528,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem ##### TReVor Post Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.6.0.122\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.6.0.139\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>rem ##### TReVor Pre Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.6.0.122\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.6.0.139\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"
 </PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -533,7 +545,7 @@
     <Error Condition="!Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
-    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
+    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\build\NTTQA.Selenium.TReVor.Modules.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
@@ -543,5 +555,5 @@
       <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
     </ItemGroup>
   </Target>
-  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.6.0.122\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
+  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.6.0.139\build\NTTQA.Selenium.TReVor.Modules.targets')" />
 </Project>

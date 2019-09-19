@@ -2603,18 +2603,96 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(sha.ConfirmThereIsOneProductInTheGrid(), "Failed to find one product in the grid!", "Successfully found one product in the grid.");
 		}
 
-		[StepDefinition(@"In the SHA Manager grid I click Message Center")]
-		public void InSHAManagerIClickMessageCenter()
+		[StepDefinition(@"SHA Search for product by UPC: (.*) in all statuses")]
+		public void ThenSHASearchForProductByUPCInAllStatuses(string uPC)
 		{
-			var sha = new StudioSHAManager();
-			Report.IsTrue(sha.ClickMessageCenter(), "Failed to click Message Center", "Successfully clicked Message Center");
+			Context.AddToContext("UPC", uPC);
+			var table = new Table("SearchTerm", "SearchValue");
+			table.AddRow("UPC", "saved as UPC");
+			new StudioSHAManager().ClickBottomMenuOption("Search");
+			this.GivenInSHAManagerPageIRunSearch(table);
 		}
 
-		[StepDefinition(@"In the Message Center I go to the last page of messages")]
-		public void InTheMessageCenterIGoToTheLastPageOfMessages()
+		[Given(@"I verify the popup message displays with the title ""(.*)""")]
+		public void GivenIVerifyThePopupMessageDisplaysWithTheTitle(string title)
 		{
 
+			Report.IsTrue(new StudioSHAManagerArchivedProduct().ArchivedUPCPopupTitle(title, out string displayedTitle),
+				"Unable to locate popup entitled " + title + ", instead found " + displayedTitle,
+				"Located popup titled " + displayedTitle);
 		}
+		[Then(@"I verify the popup data using UPC: (.*)")]
+		public void ThenIVerifyThePopupDataUsingUPC(string uPC)
+		{
+
+			//Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(
+			//	Context.GetFromContext("UPC").ToString(),
+			//	out string failedAt),
+			//	"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
+			//	"Popup contains the appropriate elements.");
+
+			Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(uPC,out string failedAt),
+				"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
+				"Popup contains the appropriate elements.");
+		}
+
+
+		[StepDefinition(@"In SHA I Search for exact UPC in (.*) Status for UPC saved as: (.*)")]
+		public void InSHAISearchForExactUPCInForUPCSavedAs(string status, string savedAs)
+		{
+
+			TestReport.UseSubSteps = true;			
+			TestReport.StartStep("I set the status filter to All");
+			var myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.WaitForProductList(60);
+			myStudioShaManager.SelectFromStatusFilter("All");
+			GeneralUtilities.StudioWaitForSpinner();
+			myStudioShaManager.WaitForProductList(60);
+			Report.Info("Getting saved product: " + savedAs);
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+			string upc = (string)Context.GetFromContext(savedAs);
+			Report.Info("Looking for id: " + upc);
+			var table = new Table(new string[] {
+				"SearchTerm",
+				"SearchValue"
+			});
+			table.AddRow(new string[] {
+				"UPC",
+				upc
+			});
+			table.AddRow(new string[] {
+				"Status",
+				status
+			});
+			
+			TestReport.StartStep("I click Srch in the bottom menu list");
+			myStudioShaManager.ClickBottomMenuOption("Search");
+			var myStepsSha = new Steps_SHA();
+			TestReport.StartStep($"I enter ID: {upc} in the UPC box, change Status drop down to All, Click find");
+			Report.Info("Searching for: " + upc);
+			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+			Delay.Seconds(1);
+			Report.Info("Waiting for product list");
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found","Product list is showing");				
+			
+
+		}
+
+		[StepDefinition(@"The Manager Validation Require Popup is not shown")]
+		public void TheManagerValidationRequirePopupIsNotShown()
+		{
+			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();			
+			Report.IsTrue(managerValidationPopup.WaitForContainerToBeInvisible(10), "The Manager Validation Required Popup was shown", "The Manager Validation Required Popup was not shown");
+
+		}
+
+
+
+
+
 
 	}
 }
