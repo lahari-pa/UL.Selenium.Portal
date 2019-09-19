@@ -8963,7 +8963,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var productInfo = new ProductInformation { Id = productIDFromSHA };
 					Context.AddToContext($"ProductID{savedAs}", productInfo);
 
-
+					
 					string productRetailerInitials = productsShown[0].Clients;					
 					string productRetailerInitialsFirst = productRetailerInitials.Split(',')[0];
 					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == productRetailerInitialsFirst).Key;
@@ -9050,6 +9050,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
+
+		[StepDefinition(@"I enter: (.*) as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient")]
+		public void IEnterAnIngredientAndCheckTopOptionMatches(string myIngredient)
+		{
+			TestReport.UseSubSteps = true;
+			var ingredients = new Ingredients();
+			var selNewProduct = new UPC();
+			TestReport.StartStep("I Check I am on the Ingredients page");
+			Report.IsTrue(selNewProduct.WaitForSection("Ingredients"),
+				"The Ingredients page is not showing when it was expected to",
+				"The Ingredients page is showing as expected");
+			Report.Screenshot();
+			TestReport.StartStep($"I enter: {myIngredient} as my ingredient in the ingredients page");
+			ingredients.ClickComponentSearchPlaceholder();
+			ingredients.EnterTextSearchComponent(myIngredient);
+			TestReport.StartStep("I check my ingredient is at the top of the filter");
+			Report.IsTrue(ingredients.IngredientMatchesFirstOption(myIngredient), "The first option did not match the input option", "The first option matched the input option");
+
+		}
+
 
 
 	}

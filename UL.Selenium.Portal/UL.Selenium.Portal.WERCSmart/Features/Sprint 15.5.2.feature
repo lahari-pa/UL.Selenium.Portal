@@ -20,6 +20,7 @@
 @SHA
 @ForwardProductRegistration
 @ProductSetUp
+@NewProduct
 @run_Sprint15.5.2
 
 
@@ -53,5 +54,8 @@ Then I click close in the Confirm Obsolete UPC popup, and the Confirm Obsolete U
 Then The Manager Validation Require Popup is not shown
 Then I Click the Obsolete Button and Check a Popup Appears with 'Cancel' and 'Continue' buttons and the following message: You have selected to remove the UPC from the registration. The Account's Administrator(s) will be notified via email of this action. Are you sure you want to proceed with this action? It cannot be reversed.
 And I click Continue in the Confirm Obsolete UPC popup, and the Confirm the Manager Validation Require Popup appears.
+
+
+
 
 
