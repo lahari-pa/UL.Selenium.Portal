@@ -1097,7 +1097,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<SHAManagerProdcutUPC> GetUPCs()
 		{
 			var rList = new List<SHAManagerProdcutUPC>();
-			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[@class='DarkBack']//following-sibling::tr"), 2);
 			IWebElement headerRow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']"), 2);
 			if (headerRow == null)
 			{

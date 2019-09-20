@@ -536,6 +536,9 @@ Scenario: [76759] Waste Classification Summary Report
 		| Wyoming        |
 	And I delete the Supplier Report file saved as SupplierReport76759
 
+
+#Unable to run because the report requires a 1 year old product that is in completed status
+@tfs_design
 Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) report
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -556,11 +559,9 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 		| Number of Active UPCs  |
 	Then I Check that in the excel file saved as: 79635 the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.
 	Then I get a value for WERCSmart ID from the excel file saved as: 79635 and save it to context as: WERCSmartProduct79635
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: WERCSmartProduct79635 )
-
-
-
-
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: WERCSmartProduct79635)
+	Then I Check that for the product: WERCSmartProduct79635 the Details in SHA Manager Match the details found in the file: 79635
 	And I delete the Supplier Report file saved as 79635
 
 	#Needs Finishing (Currently Download only gets a hltml file and not a spreadsheet)

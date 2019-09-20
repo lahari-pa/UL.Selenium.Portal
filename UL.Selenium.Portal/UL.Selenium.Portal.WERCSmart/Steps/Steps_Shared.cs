@@ -9070,7 +9070,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Check that for the product: (.*) the Details in SHA Manager Match the details found in the file:(.*)")]
+		[StepDefinition(@"I Check that for the product: (.*) the Details in SHA Manager Match the details found in the file: (.*)")]
 		public void ICheckThatForTheProductXTheDetailsInSHAManagerMatchTheFile(string productInfoSavedAs, string fileSavedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -9120,11 +9120,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 						DateTime orginalCreationDate;
 						DateTime.TryParse(rowContents[4], out orginalCreationDate);
-						Report.Info($"The Last Submission Date in the File is: {rowContents[4]}");
-						Report.IsTrue(shaOriginalSubmissionDate == orginalCreationDate, "The Origninal Submission Date in SHA did not match the Original Creation Date in the file", "The Original Submission Date in SHA did match the Original Creation Date in the file");
-
+						Report.Info($"The Original Creation date in the File is: {rowContents[4]}");
+						string fileOrgDatestr = orginalCreationDate.ToString();
+						string shaOrgDatestr = shaOriginalSubmissionDate.ToString();
+						string fileOrgDateEdited=fileOrgDatestr.Replace("12:00:00 AM","").Trim();
+						Report.IsTrue(shaOrgDatestr.Contains(fileOrgDateEdited), "The Origninal Submission Date in SHA did not match the Original Creation Date in the file", "The Original Submission Date in SHA did match the Original Creation Date in the file");
 						Report.Info($"The Retailers Associated in the File is: {rowContents[5]}");
-						Report.IsTrue(shaClients == rowContents[5], "The Clients in SHA did not match the Retailers associated in the file", "The Clients in SHA matched the Retailers associated in the file");
+						Report.IsTrue(shaClients.Contains(rowContents[5]), "The Clients in SHA did not match the Retailers associated in the file", "The Clients in SHA matched the Retailers associated in the file");
 
 						
 						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");						
@@ -9138,17 +9140,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Info($"The number of UPCs displayed in the UPC Details page is: {displayedUpcs.Count}");
 						Report.IsTrue(displayedUpcs.Count.ToString() == rowContents[6], "The number of UPCS in SHA for the product did not match the Number of Active UPCs for the product in the file", "The number of UPCS in SHA for the product matched the Number of Active UPCs for the product in the file");
 						TestReport.StartStep($"Checking that the date that appears under the 'Current Submission' column in SHA Manager is exactly one year before the date that appears in the 'Eligible for Deletion' column in the file");
+						var eligibleDate = rowContents[2];
+						DateTime actualEligibleDate;
+						DateTime.TryParse(eligibleDate, out actualEligibleDate);
+						DateTime expectedEligibleDate = actualEligibleDate.AddYears(-1);
+						Report.IsTrue(shaCurrentSubmissionDate == expectedEligibleDate, "The Current Submission Date in SHA is not exactly one year before the Eligible for deletion date in the file", "The Current Submission Date in SHA is exactly one year before the Eligible for deletion date in the file");
+						return;
 
 					}
 
 				}
-			}
-			//if exit this loop means the product was not found in the spread sheet= fail?
+				Report.Failure($"The product with ID: {fileProductID} could not be found in the spreadsheet");
+				return;
+
+			}			
 
 		}
-
-
-
-
 	}
 }
