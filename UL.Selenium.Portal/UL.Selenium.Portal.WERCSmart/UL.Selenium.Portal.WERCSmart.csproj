@@ -164,11 +164,6 @@
     <Compile Include="Classes\WERCSmartUser.cs" />
     <Compile Include="Database Functions\dbRetailers.cs" />
     <Compile Include="Database Functions\dbUtils.cs" />
-    <Compile Include="Features\Product Registration\UPC Case Pack\ProductCreateAndComplete.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductCreateAndComplete.feature</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
     <Compile Include="Selenium Classes\AddNewSupplier.cs" />
@@ -462,8 +457,6 @@
     </None>
     <None Include="Features\Product Registration\UPC Case Pack.feature" />
     <None Include="Features\Product Registration\UPC Case Pack\ProductCreateAndComplete.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ProductCreateAndComplete.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
     </None>

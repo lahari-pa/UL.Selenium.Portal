@@ -157,6 +157,7 @@ Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to compl
 
 
 
+@TReVorId:23515
 Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87916
