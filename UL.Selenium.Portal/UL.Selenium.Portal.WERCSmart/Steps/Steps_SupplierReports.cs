@@ -294,34 +294,93 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new SupplierReports().DescriptionTextMatches(expectedText), "The expected text did not match the actual text", "The expected text did match the actual text");
 		}
+	
 
 		[StepDefinition(@"I Check that in the excel file saved as: (.*) the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.")]
 		public void ICheckThatInTheExcelFileSavedAsTheEligibleForDeletionDates(string savedAs)
 		{
-			
+
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
 				var utils = new ExcelUtilities(File.ToString(), "Table");
-				List<string> lastSubmissions = utils.Excel_GetColumn(2);
-				List<string> eligibleForDeletions = utils.Excel_GetColumn(2);
-				for (int i = 1; i < lastSubmissions.Count; i++)
+
+				var rows = utils.Excel_GetNoRows();
+				for (int i = 1; i < rows; i++)
 				{
+					var rowContents = utils.GetRowContents(i);
+					var productID = rowContents[0];
+					var deletionDate = rowContents[3];
 					DateTime lastSubDate;
-					DateTime.TryParse(lastSubmissions[i], out lastSubDate);
+					DateTime.TryParse(deletionDate, out lastSubDate);
 					DateTime expectedEligibleDate = lastSubDate.AddYears(1);
 					Report.Info($"The expected eligible for deletion date is {expectedEligibleDate}");
 
+					var eligibleDate = rowContents[2];
 					DateTime actualEligibleDate;
-					DateTime.TryParse(eligibleForDeletions[i], out actualEligibleDate);
+					DateTime.TryParse(eligibleDate, out actualEligibleDate);
 					Report.Info($"The acutal eligible for deletion date is {actualEligibleDate}");
 
-					Report.IsTrue(actualEligibleDate == expectedEligibleDate, "The Eligible for deletion date was not exactly one year from the last submission date for Item:" + i, "The Eligible for deletion date was exactly one year from the last submission date for Item:" + i);
+					Report.IsTrue(actualEligibleDate == expectedEligibleDate, "The Eligible for deletion date was not exactly one year from the last submission date for Item:" + i + " with productd ID:" + productID, "The Eligible for deletion date was exactly one year from the last submission date for Item:" + i + " with productd ID:" + productID);
 
 				}
-				return;
+
+				////Needs fixing, currently this does not extract the dates as they are not strings in file.
+				//List<string> lastSubmissions = utils.Excel_GetColumn(2);
+				//List<string> eligibleForDeletions = utils.Excel_GetColumn(2);
+				//for (int i = 1; i < lastSubmissions.Count; i++)
+				//{
+				//	DateTime lastSubDate;
+				//	DateTime.TryParse(lastSubmissions[i], out lastSubDate);
+				//	DateTime expectedEligibleDate = lastSubDate.AddYears(1);
+				//	Report.Info($"The expected eligible for deletion date is {expectedEligibleDate}");
+
+				//	DateTime actualEligibleDate;
+				//	DateTime.TryParse(eligibleForDeletions[i], out actualEligibleDate);
+				//	Report.Info($"The acutal eligible for deletion date is {actualEligibleDate}");
+
+				//	Report.IsTrue(actualEligibleDate == expectedEligibleDate, "The Eligible for deletion date was not exactly one year from the last submission date for Item:" + i, "The Eligible for deletion date was exactly one year from the last submission date for Item:" + i);
+
+				//}
+				//return;
+
 
 			}
+
+
 		}
+
+		[StepDefinition(@"I get a value for WERCSmart ID from the excel file saved as: (.*) and save it to context as: (.*)")]
+		public void IGetAValueForWERCSmartIDFromExcelFileAndSaveItAs(string fileSavedAs, string iDSavedAs)
+		{
+			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
+			{
+				var utils = new ExcelUtilities(File.ToString(), "Table");
+				var rows = utils.Excel_GetNoRows();
+				for (int i = 1; i < rows; i++)
+				{
+					var rowContents = utils.GetRowContents(i);
+					var productID = rowContents[0];
+					if(productID.Any())
+					{
+						Context.AddToContext(iDSavedAs, productID);
+
+						var productInfo = new ProductInformation { Id = productID };
+						Context.AddToContext(iDSavedAs, productInfo);
+
+
+						Report.Success($"Found a WERCSmart ID: {productID} and saving it to context as: {iDSavedAs}");
+						return;
+					}
+				}
+			}
+			Report.Failure($"Could not find any WERCSmart IDs in the spreadsheet saved as: {fileSavedAs}");
+		}
+
 	}
 }
+		
+	
+
+

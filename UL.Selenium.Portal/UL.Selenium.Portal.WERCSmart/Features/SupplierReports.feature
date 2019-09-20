@@ -555,6 +555,12 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 		| Retailers associated   |
 		| Number of Active UPCs  |
 	Then I Check that in the excel file saved as: 79635 the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.
+	Then I get a value for WERCSmart ID from the excel file saved as: 79635 and save it to context as: WERCSmartProduct79635
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: WERCSmartProduct79635 )
+
+
+
+
 	And I delete the Supplier Report file saved as 79635
 
 	#Needs Finishing (Currently Download only gets a hltml file and not a spreadsheet)
