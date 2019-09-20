@@ -2489,7 +2489,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				}
 			}
-
 		}
 
 		[StepDefinition(@"I add the UPC numbers saved to context starting with: (.*) to the UPC bulk upload spreadsheet: (.*)")]
@@ -2631,7 +2630,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//	"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
 			//	"Popup contains the appropriate elements.");
 
-			Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(uPC,out string failedAt),
+			Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(uPC, out string failedAt),
 				"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
 				"Popup contains the appropriate elements.");
 		}
@@ -2641,7 +2640,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InSHAISearchForExactUPCInForUPCSavedAs(string status, string savedAs)
 		{
 
-			TestReport.UseSubSteps = true;			
+			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I set the status filter to All");
 			var myStudioShaManager = new StudioSHAManager();
 			myStudioShaManager.WaitForProductList(60);
@@ -2667,7 +2666,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Status",
 				status
 			});
-			
+
 			TestReport.StartStep("I click Srch in the bottom menu list");
 			myStudioShaManager.ClickBottomMenuOption("Search");
 			var myStepsSha = new Steps_SHA();
@@ -2676,15 +2675,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 			Delay.Seconds(1);
 			Report.Info("Waiting for product list");
-			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found","Product list is showing");				
-			
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing");
+
 
 		}
 
 		[StepDefinition(@"The Manager Validation Require Popup is not shown")]
 		public void TheManagerValidationRequirePopupIsNotShown()
 		{
-			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();			
+			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();
 			Report.IsTrue(managerValidationPopup.WaitForContainerToBeInvisible(10), "The Manager Validation Required Popup was shown", "The Manager Validation Required Popup was not shown");
 
 		}

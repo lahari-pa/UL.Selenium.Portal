@@ -632,6 +632,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Generated UPC No: " + uPCNo);
 		}
 
+		[StepDefinition(@"I generate (.*) random UPC numbers and save as: (.*)")]
+		public void GivenIGenerateXRandomUPCNumbersAndSaveAs(int x, string savedAs)
+		{
+			var listOfUPCs = new List<string>();
+			for (int i = 0; i < x; i++)
+			{
+				string thisUPCName = savedAs + "_" + i.ToString();
+				this.GivenIGenerateARandomUPCNumberAndSaveAs(thisUPCName);
+				listOfUPCs.Add(thisUPCName);
+			}
+			Context.AddToContext(savedAs, listOfUPCs);
+		}
+
+		[StepDefinition(@"I delete all products in contextual list of UPCs: (.*)")]
+		public void IDeleteAllProductsInContextualListOfUPCs(string savedAs)
+		{
+			var listOfUPCs = (List<string>)Context.GetFromContext(savedAs);
+			foreach (var str in listOfUPCs)
+			{
+				this.DeleteAllProductsMatchingCriteria("UPC Number", (string)Context.GetFromContext(str));
+			}
+		}
 
 		[StepDefinition(@"I delete all products with (UPC Number): (.*)")]
 		public void DeleteAllProductsMatchingCriteria(string option, string value)
@@ -2238,8 +2260,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				i++;
 			}
 
-		}		
+		}
 
-		
+
 	}
 }

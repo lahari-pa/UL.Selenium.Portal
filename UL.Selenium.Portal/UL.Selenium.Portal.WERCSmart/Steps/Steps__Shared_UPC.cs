@@ -550,6 +550,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I click the 'Upload UPCs' button and upload the generated file saved as: (.*)")]
+		public void IClickTheUploadUPCsButtonAndUploadTheGeneratedFileSavedAs(string savedAs)
+		{
+			object file = Context.GetFromContext(savedAs);
+
+			new UPC().ClickUploadUpcButton();
+			GeneralFunctions.EnterFilename(savedAs);
+		}
+
+		[StepDefinition(@"I create the Excel file: (.*) using:")]
+		public void GivenICreateTheExcelFileUsing(string savedAs, Table table)
+		{
+			var headerList = table.Header.ToList();
+			var file = ExcelUtilities.CreateSpreadsheet(savedAs);
+			file.AddRow(headerList);
+			int x = 0, y = 0;
+			foreach (TableRow row in table.Rows)
+			{
+				var data = row.Values.ToList();
+				data[0] = (string)Context.GetFromContext(data[0]);
+				foreach (string set in data)
+				{
+					file.EditCell(x, y, set);
+					x++;
+				}
+				y++;
+			}
+			Context.AddToContext(savedAs, ExcelUtilities.CreateSpreadsheet(savedAs));
+		}
+
+
 		[StepDefinition(@"In the Add Multiple dialog box I select all UPCs")]
 		public void InTheAddMultipleDialogBoxSelectAllUpcs()
 		{
@@ -560,7 +591,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that the Add Multiple UPC window opens")]
 		public void IConfirmThatTheAddMultipleUPCWindowOpens()
 		{
-			Report.IsTrue(new MultipleUPC().WaitForContainerToBeVisible(30), "The Add Multiple UPC windows did appear", " The Add Multiple UPC window did appear");
+			Report.IsTrue(new MultipleUPC().WaitForContainerToBeVisible(30), "The Add Multiple UPC windows did not appear", "The Add Multiple UPC window did appear");
 		}
 
 		[StepDefinition(@"I confirm that the Add Multiple UPC window closes")]
@@ -1262,7 +1293,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(uPCpage.DeleteUPC(upc), "Failed to click delete for UPC " + upc + ".", "Successfully clicked delete for UPC " + upc + ".");
 
 		}
-					
+
 
 		[StepDefinition(@"In the Universal Product Code \(UPC\) page I click Save")]
 		public void InTheUPCPageIClickSave()
@@ -1271,49 +1302,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(uPCpage.ClickSaveButton(), "Failed to click the Save button.", "Successfully clicked the Save button.");
 		}
 
-	[StepDefinition(@"I call Shared Step 87829 \(UPC - Add Case UPC - All Data > Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) and Quantity: (.*) and Individual Upc Case Pack saved As: (.*) and Transportation option: (.*)")]
-	public void UPCCaseAddInformation(string upc, string containerType, string size, string quantity, string individualUpcCasePackSavedAS, string transportation)
-	{
-	TestReport.UseSubSteps = true;
-	var MyStepsNewProduct = new StepsUPC();
-	var MyStepsProduct = new StepsNewProduct();
-	string individualUpcCasePack = (string)Context.GetFromContext(individualUpcCasePackSavedAS);
-	//TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
-	//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-	TestReport.StartStep("I click the 'Add Case UPC' button");
-	MyStepsNewProduct.ThenIClickTheAddCaseUpcButton();
-	GeneralUtilities.Wait_for_load_finish();
-	TestReport.StartStep("I add the following into the UPC Fields");
-	if (upc.Contains("Equals"))
-	{
-		string upc_ = upc.Replace("Equals", "");
-		var upcInfo = new UpcCaseInformation {
-			ContainerType = containerType,
-			Size = size,
-			Quantity = quantity,
-			TransportationOption = transportation,
-			UpcNumber = upc_,
-			IndividualUpcCasePack = individualUpcCasePack
+		[StepDefinition(@"I call Shared Step 87829 \(UPC - Add Case UPC - All Data > Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) and Quantity: (.*) and Individual Upc Case Pack saved As: (.*) and Transportation option: (.*)")]
+		public void UPCCaseAddInformation(string upc, string containerType, string size, string quantity, string individualUpcCasePackSavedAS, string transportation)
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsUPC();
+			var MyStepsProduct = new StepsNewProduct();
+			string individualUpcCasePack = (string)Context.GetFromContext(individualUpcCasePackSavedAS);
+			//TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			TestReport.StartStep("I click the 'Add Case UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddCaseUpcButton();
+			GeneralUtilities.Wait_for_load_finish();
+			TestReport.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcCaseInformation {
+					ContainerType = containerType,
+					Size = size,
+					Quantity = quantity,
+					TransportationOption = transportation,
+					UpcNumber = upc_,
+					IndividualUpcCasePack = individualUpcCasePack
 
-		};
-		Report.IsTrue(new UPC().InputUpcCaseInformation(upcInfo), "Failed to input UPC Information!",
-			"Successfully inputted UPC information!");
-	}
-	else
-	{
-		var upcTable = new Table("Field", "Value");
-		upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
-		upcTable.AddRow("ContainerType", containerType);
-		upcTable.AddRow("Size", size);
-		upcTable.AddRow("Quantity", quantity);
-		upcTable.AddRow("TransportationOption", transportation);
-		upcTable.AddRow("IndividualUpcCasePack", individualUpcCasePack);
-		MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
-	}
+				};
+				Report.IsTrue(new UPC().InputUpcCaseInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				upcTable.AddRow("Quantity", quantity);
+				upcTable.AddRow("TransportationOption", transportation);
+				upcTable.AddRow("IndividualUpcCasePack", individualUpcCasePack);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
 
-	TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
-	MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
-}
+			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+		}
 
 
 
