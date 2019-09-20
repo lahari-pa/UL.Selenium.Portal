@@ -19,13 +19,16 @@ Feature: Kits - Flow 13
 # Waiting for this test to be finished ^^^
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+@tfs_design
 @TReVorId:18948
 Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru to Submitted status in SHA
 	#Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
-	Given I navigate to the landing page
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
-	Given I navigate to the landing page
+	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
+	#Given I navigate to the landing page
+	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
+	#Given I navigate to the landing page
+	Given I save product 1516287 to context as 77862_KitProduct1
+	Given I save product 1516289 to context as 77862_KitProduct2
 	Given I generate a random UPC number and save as: UPC77862
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -39,6 +42,9 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 	And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
 	And I call Shared Step 42759 (Portal - UPC Page - add 1 UPC)
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	# And I The Product Comments step is shown - click Continue
 	#And I should see the Product Comments Page
 	And the comments field should appear

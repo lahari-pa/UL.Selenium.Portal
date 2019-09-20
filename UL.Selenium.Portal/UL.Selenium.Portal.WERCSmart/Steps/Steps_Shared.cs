@@ -8566,7 +8566,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I close the SHA Manager Product UPC details pop up");
 			Report.IsTrue(upcDetailsPopupTable.CloseButton.TryClick(), "Failed to Click Close in the UPC details popup", "Successfully clicked Click Close in the UPC details popup");
 			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");
-			
+
 
 
 
@@ -8654,9 +8654,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepGoToMyAccount()
 		{
 			TestReport.UseSubSteps = true;
-            TestReport.StartStep("Clicking Supplier Name drop down in the header");
+			TestReport.StartStep("Clicking Supplier Name drop down in the header");
 			Report.IsTrue(new TopMenuBar().ClickOnUserTopRight(), "Failed to click on user name in the top menu bar", "Clicked the user name in the top menu bar");
-            TestReport.StartStep("I click 'My Account'");
+			TestReport.StartStep("I click 'My Account'");
 			Report.IsTrue(new TopMenuBar().ClickMyAccount(), "Failed to click My Account", "Clicked My Account");
 		}
 
@@ -8664,10 +8664,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepCreateNewUserViaUserGrid()
 		{
 			new GlobalSteps().ThenICreateANewEmailAddress();
-            Report.Info("Creating a user with the following information:");
-            Report.Info("Name: User, Title: Mr, Role: User, Phone Number: 123 - 456 - 7889, Country: United Kingdom");
-            var table = new Table("User Name", "Title", "Role", "Phone Number", "Email Address", "Confirm Email", "Country Code", "Country");
-            table.AddRow("User", "Mr", "User", "123 - 456 - 7889", "Saved", "Saved", "empty", "United Kingdom");
+			Report.Info("Creating a user with the following information:");
+			Report.Info("Name: User, Title: Mr, Role: User, Phone Number: 123 - 456 - 7889, Country: United Kingdom");
+			var table = new Table("User Name", "Title", "Role", "Phone Number", "Email Address", "Confirm Email", "Country Code", "Country");
+			table.AddRow("User", "Mr", "User", "123 - 456 - 7889", "Saved", "Saved", "empty", "United Kingdom");
 			new StepsMyAccount().ThenIAddANewUserWithTheFollowingInformation(table);
 		}
 
@@ -8874,12 +8874,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// </summary>
 		/// <param name="savedAs"></param>
 		/// <param name="retailer"></param>
-		/// <param name="presence"></param>		
+		/// <param name="presence"></param>
 		[StepDefinition(@"I check that the UPC number saved as: (.*) and under the retailer: (.*), (does|does not) show the Obsolete UPC Option in the UPC details popup")]
 		public void ICheckUPCNumberXObsoleteUPCOptionPresence(string savedAs, string retailer, string presence)
 		{
-			//For Testing the Dupe UPC Sha Tool 
-			TestReport.UseSubSteps = true;		
+			//For Testing the Dupe UPC Sha Tool
+			TestReport.UseSubSteps = true;
 
 			var studioSHAManger = new StudioSHAManager();
 			var shaSteps = new Steps_SHA();
@@ -8891,7 +8891,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I Check the UPC detail popup appears");
 			var upcDetails = new StudioSHAManagerUPCDetails();
 			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
-			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");			
+			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");
 			if (Regex.IsMatch(retailer, "<(.*)>"))
 			{
 				var match = Regex.Match(retailer, "<(.*)>").Groups[1].Value;
@@ -8925,8 +8925,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Error("presence must be either 'does' or 'does not'");
 					return;
 			}
-			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButtonPresent()==expectedPresenceBool,"The Obsolete popup incorrectly "+presence+" show", "The Obsolete popup correctly " + presence + " show");
-		
+			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButtonPresent() == expectedPresenceBool, "The Obsolete popup incorrectly " + presence + " show", "The Obsolete popup correctly " + presence + " show");
+
 		}
 
 		[StepDefinition(@"I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: (.*)")]
@@ -8934,8 +8934,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Replacing the Spreadsheet with a new copy from the embedded resource");
-			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("UPCsDuplicatedwithinAccount.xlsx"), "", "");	
-						
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("UPCsDuplicatedwithinAccount.xlsx"), "", "");
+
 			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.UPCsDuplicatedwithinAccount.xlsx", out string destination))
 			{
 				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
@@ -8944,9 +8944,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var utils = new ExcelUtilities(destination, "Table");
 
-			List<string> UpcNumbers= utils.Excel_GetColumn(1); //includes the header (so start search at 1 not 0)
-			
-			for (int i=1; i<UpcNumbers.Count-1; i++)
+			List<string> UpcNumbers = utils.Excel_GetColumn(1); //includes the header (so start search at 1 not 0)
+
+			for (int i = 1; i < UpcNumbers.Count - 1; i++)
 			{
 				TestReport.StartStep($"Searching SHA for a upc found in the duplicate UPC spread sheet. Attempt: {i}");
 				string DupeUPCNumberCurrent = UpcNumbers[i];
@@ -8957,16 +8957,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new Steps_SHA().InSHAISearchForExactUPCInForUPCSavedAs("All", $"DupeUPCNumber{savedAs}");
 				int numProducts = new StudioSHAManager().GetProductCount();
 				TestReport.StartStep("Ensuring the upc was searched for succesfully and that it is a duplicate by checking the number of products found is 2 or more");
-				if (numProducts>1)
+				if (numProducts > 1)
 				{
 					Report.Success("The UPC was searched for succesfully and multiple Products were found");
-					List<Product> productsShown= new StudioSHAManager().GetTopXProducts(1);
+					List<Product> productsShown = new StudioSHAManager().GetTopXProducts(1);
 					string productIDFromSHA = productsShown[0].ID;
 					var productInfo = new ProductInformation { Id = productIDFromSHA };
 					Context.AddToContext($"ProductID{savedAs}", productInfo);
 
 
-					string productRetailerInitials = productsShown[0].Clients;					
+					string productRetailerInitials = productsShown[0].Clients;
 					string productRetailerInitialsFirst = productRetailerInitials.Split(',')[0];
 					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == productRetailerInitialsFirst).Key;
 					Context.AddToContext($"ProductRetailer{savedAs}", fullName);
@@ -8984,7 +8984,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure("None of the UPCs in the Spreadsheet showed 2 or more products when searched for in SHA");
 
-			
+
 
 		}
 
@@ -9005,7 +9005,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
-			var upcDetailsConfrimObsoletePopup= new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
+			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
 
 			TestReport.StartStep("I click the Obsolete UPC button in the UPC details popup");
 			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButton.TryClick(), "Failed to Click Obselete UPC in the UPC details popup", "Successfully clicked Click Obselete UPC in the UPC details popup");
@@ -9017,7 +9017,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.ContinueButtonPresent(), "The Continue Button was not present in the Confirm Obsolete UPC popup", "The Continue Button was present in the Confirm Obsolete UPC popup");
 			TestReport.StartStep("I check the text in the Confirm Obsolete UPC popup matches the expected text");
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.ConfirmObseleteUPCMessage(expectedMessage), "The found message did not match the expected text", "The found message matched the expected text");
-			
+
 		}
 
 		[StepDefinition(@"I click close in the Confirm Obsolete UPC popup, and the Confirm Obsolete UPC popup is closed and the UPC Details Popup remains on screen.")]
@@ -9032,7 +9032,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I Check that the Confrim Obsolete UPC popup has gone");
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.WaitForContainerToBeInvisible(10), "The Confirm Obsolete UPC popup appeared", "The Confirm Obsolete UPC popup did not appear");
 			TestReport.StartStep("I Check that the UPC details popup still appears.");
-			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");			
+			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");
 
 		}
 
@@ -9043,7 +9043,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var upcDetails = new StudioSHAManagerUPCDetails();
 			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
 			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
-			var managerValidationPopup= new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();
+			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();
 			TestReport.StartStep("I Click Continue in the Confirm Obsolete UPC popup");
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.ContinueButton.TryClick(), "Failed to to click Continue", "Successfully clicked Continue");
 			TestReport.StartStep("I Check that the Manager Validation Required Popup appears");

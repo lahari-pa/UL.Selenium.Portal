@@ -471,10 +471,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I wait for (.*) seconds")]
 		public void WhenIWaitForSeconds(int seconds)
 		{
-			for(int i = 0; i < seconds; i++)
+			for (int i = 0; i < seconds; i++)
 			{
 				Delay.Seconds(1);
-				if(i % 60 == 0)
+				if (i % 60 == 0)
 				{
 					Report.Info("Waited for: " + i + " seconds");
 				}
@@ -1740,6 +1740,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Exception: " + ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I save product (.*) to context as (.*)")]
+		public void TEMP_DELETE_ME_ISaveProductToContext(string product, string saveAs)
+		{
+			var info = new ProductInformation();
+			info.Id = product;
+			info.Name = "Chalk";
+			Context.AddToContext(saveAs, info);
+
 		}
 	}
 }
