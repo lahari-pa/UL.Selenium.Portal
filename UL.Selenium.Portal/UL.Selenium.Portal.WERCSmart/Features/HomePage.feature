@@ -444,7 +444,10 @@ Scenario: [56829] More Filters
 	Then The home screen should load
 
 	Given I search for product by name: Kit Product 56829 and save the first ID as: Kit_56829
-	And I create a Kit product for retailer Walmart and save details as: Kit_56929
+	And I create a Kit product and save details as: Kit_56929
+	And I navigate to the landing page
+	And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
 	And I should see an option for More Filters
 	Given I click More Filters in the products grid
 	Given I confirm the product exists with Product ID: <Kit_56829> and Name: Kit Product 56829

@@ -217,6 +217,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Emergency Road kit", $"Kit Product {savedAs}");
 			//And I call Shared Step 77872(Additional Product Information - Kit flow - US only, Direct Ship(yes), Continue)
 			newProductSteps.SaveProductInformation($"Kit_{savedAs}");
+
+			// fix
 			sharedSteps.Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
 			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
@@ -245,11 +247,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 65080 (Login to Studio and Open SHA manager)
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
-			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", $"Kit_{savedAs}");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Submitted");
 			//And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
-			shaSteps.ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(savedAs);
+			shaSteps.ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct($"Kit_{savedAs}");
 
 		}
 
@@ -269,6 +271,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Saving top product to context");
 				Context.AddToContext(savedAs, productElement.ProductId);
 			}
+			selProdGrid.ProductIdField = string.Empty;
 		}
 	}
 }
