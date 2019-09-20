@@ -1,6 +1,7 @@
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
@@ -175,6 +176,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			if (Context.Contains($"Kit_{savedAs}"))
 			{
+				// search for UPC and save to context as UPC__{savedAs}
+				var id = Context.GetFromContext($"Kit_{savedAs}");
 				return;
 			}
 			TestReport.UseSubSteps = true;
@@ -240,6 +243,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
 			shaSteps.ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(savedAs);
 
+		}
+
+		[StepDefinition(@"I search for product by name: (.*) and save the first ID as: (.*)")]
+		public void SearchProductAndSave(string name, string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Searching for product: " + name);
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = name
+			};
+			GeneralUtilities.Wait_for_load_finish();
+			TestReport.StartStep("Saving the top product as: " + savedAs);
+			ProductGridItem productElement = selProdGrid.FirstProductInGrid();
+			if (productElement != null)
+			{
+				Report.Info("Saving top product to context");
+				Context.AddToContext(savedAs, productElement.ProductId);
+			}
 		}
 	}
 }
