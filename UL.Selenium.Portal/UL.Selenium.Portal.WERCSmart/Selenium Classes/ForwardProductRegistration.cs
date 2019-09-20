@@ -62,7 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// <returns></returns>
 		public string HeaderShowing()
 		{
-			return this.containerElement.FindElement(By.XPath(".//h3"), 2).Text.Trim();
+			return this.containerElement.FindElement(By.XPath(".//h2"), 2).Text.Trim();
 		}
 
 		/// <summary>

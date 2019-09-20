@@ -309,6 +309,7 @@
     <None Include="app.manifest" />
     <EmbeddedResource Include="Dependencies\PDF\testdoc.pdf" />
     <EmbeddedResource Include="Dependencies\Excel\testdoc.xlsx" />
+    <EmbeddedResource Include="Dependencies\Excel\UPCsDuplicatedwithinAccount.xlsx" />
     <None Include="Features\AdditionalProductInformation.feature">
     </None>
     <None Include="Features\API\ItemSync.feature" />
@@ -455,6 +456,8 @@
     <None Include="Features\Product Registration\Transportation.feature">
     </None>
     <None Include="Features\Product Registration\UPC Case Pack.feature" />
+    <None Include="Features\Product Registration\UPC Case Pack\ProductCreateAndComplete.feature">
+    </None>
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
     </None>
     <None Include="Features\Product Registration\VOC\VOC-SCAQMD.feature">
@@ -484,6 +487,7 @@
     <None Include="Features\SHA Search.feature" />
     <None Include="Features\Signup.feature">
     </None>
+    <None Include="Features\Sprint 15.5.2.feature" />
     <None Include="Features\Subscription.feature">
     </None>
     <None Include="Features\SupplierAccounts.feature">
