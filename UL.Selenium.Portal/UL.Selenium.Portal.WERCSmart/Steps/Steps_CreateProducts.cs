@@ -165,13 +165,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I create a kit component in completed status")]
+		public void CreateKitComponentInCompletedStatus()
+		{
+
+		}
+
 		/// <summary>
 		/// Generates a random UPC and saves as UPC_{savedAs}
 		/// brand = 'TestBrand' (should always exist in products account)
 		/// retailer = Walmart/ SAM's club
 		/// Saves product information (id) as: Kit_{savedAs}
 		/// </summary>
-		[StepDefinition(@"I create a Kit product for retailer Walmart and save details as: Kit_(.*)")]
+		[StepDefinition(@"I create a Kit product and save details as: Kit_(.*)")]
 		public void CreateAKitProduct(string savedAs)
 		{
 			if (Context.Contains($"Kit_{savedAs}"))
@@ -189,13 +195,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (!Context.Contains($"{savedAs}_KitProduct1"))
 			{ 
 				TestReport.StartStep("Beginning create kit 1");
-				new Steps_ProductSetup().CreateProductUsingTestCase75335Walmart($"KitProduct1_{savedAs}");
+				//new Steps_ProductSetup().CreateProductUsingTestCase75335Walmart($"KitProduct1_{savedAs}");
+				new Steps_ProductSetup().CreateProductUsingTestCase75335($"KitProduct1_{savedAs}", "KitProduct1");
 				thisGlobalSteps.NavigateToLandingPage();
 			}
 			if (!Context.Contains($"{savedAs}_KitProduct2"))
 			{
 				TestReport.StartStep("Beginning create kit 2");
-				new Steps_ProductSetup().CreateProductUsingTestCase75335Walmart($"KitProduct2_{savedAs}");
+				//new Steps_ProductSetup().CreateProductUsingTestCase75335Walmart($"KitProduct2_{savedAs}");
+				new Steps_ProductSetup().CreateProductUsingTestCase75335($"KitProduct2_{savedAs}", "KitProduct2");
 				thisGlobalSteps.NavigateToLandingPage();
 			}
 			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
