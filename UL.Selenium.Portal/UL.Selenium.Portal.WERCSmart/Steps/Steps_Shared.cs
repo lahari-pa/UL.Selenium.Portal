@@ -5281,7 +5281,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep(
 				"I select the Yes button for the 'Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.' question");
 			newProductSteps.SetTheSectionOptionTo(
-				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.",
+				"Product is shipped directly by supplier to the consumer.",
 				"Yes");
 			TestReport.StartStep("I click continue");
 			newProductSteps.ClickContinue();

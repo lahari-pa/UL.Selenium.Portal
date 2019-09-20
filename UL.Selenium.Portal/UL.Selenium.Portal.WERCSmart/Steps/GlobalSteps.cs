@@ -1741,15 +1741,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-
-		[StepDefinition(@"I save product (.*) to context as (.*)")]
-		public void TEMP_DELETE_ME_ISaveProductToContext(string product, string saveAs)
-		{
-			var info = new ProductInformation();
-			info.Id = product;
-			info.Name = "Chalk";
-			Context.AddToContext(saveAs, info);
-
-		}
 	}
 }
