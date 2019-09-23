@@ -190,6 +190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.SetAUTHCinPowerAuthorPlus(setTo);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("refresh"), "Failed to find the refresh button.", "Successfully clicked refresh.");
+			Delay.Seconds(10);
 		}
 
 
@@ -201,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var thisStudioPowerDesignerPlusDesignMode =
 					new StudioPowerDesignerPlusDesignMode();
 				thisStudioPowerDesignerPlusDesignMode.DoubleClickDataCode(thisRow["datacode"]);
-				Delay.Seconds(1);
+				Delay.Seconds(3);
 				var thisGraphicEditor = new GraphicEditor();
 				Report.IsTrue(thisGraphicEditor.Wait_for_load(90), "Graphic editor has not loaded",
 					"Graphic editor has loaded.");

@@ -439,8 +439,11 @@
     </None>
     <None Include="Features\Product Registration\Ingredients\TransparencyRationCalculation.feature">
     </None>
-    <None Include="Features\Product Registration\Kits - Flow 13.feature">
+    <None Include="Features\Product Registration\Kits - Flow 13\Kits - Flow 13.feature">
     </None>
+    <None Include="Features\Product Registration\Kits - Flow 13\Kit Child Products And Transport Options.feature" />
+    <None Include="Features\Product Registration\Kits - Flow 13\Kit Direct Ship Vendor.feature" />
+    <None Include="Features\Product Registration\Kits - Flow 13\Kit Document Merge.feature" />
     <None Include="Features\Product Registration\Lithium Battery Transport Information.feature">
     </None>
     <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature">
@@ -456,6 +459,8 @@
     <None Include="Features\Product Registration\Transportation.feature">
     </None>
     <None Include="Features\Product Registration\UPC Case Pack.feature" />
+    <None Include="Features\Product Registration\UPC Case Pack\ProductCreateAndComplete.feature">
+    </None>
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
     </None>
     <None Include="Features\Product Registration\VOC\VOC-SCAQMD.feature">

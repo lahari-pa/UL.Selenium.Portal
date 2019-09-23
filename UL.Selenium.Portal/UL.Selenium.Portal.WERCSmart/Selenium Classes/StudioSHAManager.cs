@@ -1418,6 +1418,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return retailerStatus;
 		}
+		public bool ClickMessageCenter()
+		{
+			try
+			{
+				if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
+				{
+					SeleniumBrowser.ExitIFrame();
+					if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
+					{
+						Report.Info("Could not switch to iframe");
+						return false;
+					}
+				}
+
+				IWebElement messageCenter =
+					SeleniumBrowser.WebBrowser.FindElement(
+						By.XPath(".//div[@id='ddtopmenubar']//li//a[contains(text(), 'MessageCenter')]"), 2);
+
+				return messageCenter.TryClick();
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+				return false;
+			}
+
+		}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
