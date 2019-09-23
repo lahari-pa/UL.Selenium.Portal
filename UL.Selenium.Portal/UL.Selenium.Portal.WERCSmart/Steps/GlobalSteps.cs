@@ -1504,6 +1504,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			// fall back to creating a new product
 			TestReport.StartStep("Logging in to WercSmart");
+			new GlobalSteps().NavigateToLandingPage();
 			this.ILogInWithTheAccountSavedInTrevorAs(trevorSavedAs);
 			TestReport.StartStep("Creating a new product: Chalk");
 			new Steps_ProductSetup().GivenICreateProductUsingTestCase75335("Chalk", upcSavedAs, "ExistingUPCProduct");

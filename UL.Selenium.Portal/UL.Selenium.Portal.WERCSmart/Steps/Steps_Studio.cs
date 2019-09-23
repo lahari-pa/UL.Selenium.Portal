@@ -272,6 +272,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InApplyRulesPageIClickOnTheFollowingApplyRadioButton(string button)
 		{
 			var thisApplyRulesPage = new ApplyRulesPage();
+			Delay.Seconds(3);
 			Report.IsTrue(thisApplyRulesPage.SetApplyOption(button), "Failed to click " + button + " button",
 				"Clicked " + button);
 		}
