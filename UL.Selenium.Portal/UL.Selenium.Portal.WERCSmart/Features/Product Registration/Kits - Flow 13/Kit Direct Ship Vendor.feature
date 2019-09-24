@@ -13,7 +13,6 @@
 @SummaryPage
 @ProductSetUp
 @run_KitsFlow13DirectShipVendor
-
 Feature: Kit Direct Ship Vendor
 
 # Needs two products in completed status with SOLD set to US only. test case #75335
@@ -42,6 +41,7 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 	And I call Shared Step 42759 (Portal - UPC Page - add 1 UPC)
 	# And I The Product Comments step is shown - click Continue
 	#And I should see the Product Comments Page
+	And in the Additional Documents to Provide page I click Continue
 	And the comments field should appear
 	And I click continue
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
