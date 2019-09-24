@@ -645,8 +645,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				if (button.FindElement(By.XPath(".//img"), 1) != null)
 				{
-					button.Click();
-					button.Click();
+					//button.Click();
+					//button.Click();
+					button.DoubleClick();
 					return true;
 				}
 				Report.Error("Image was not found: " + code);

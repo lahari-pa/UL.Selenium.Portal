@@ -402,7 +402,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	And I confirm that all ingredients in the table are selected
 	And I click the 'Delete' button in the Ingredients table
 	And I confirm the 'Remove selected components' popup is displayed with message: Are you sure you want to remove all selected components?
-	And in the modal dialog I click the "Yes" button
+	And in the modal dialog I click the "YES" button
 	And I confirm there are a total of: 0 ingredients in the table
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase84528
