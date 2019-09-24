@@ -124,7 +124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickLiveHelp()
 		{
-			return this.containerElement.FindElement(By.XPath(".//a[(.//i[@id='live-help'])]"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[contains(@class,'live-help')]"), 2).TryClick();
 		}
 
 		public bool LoggedIn()

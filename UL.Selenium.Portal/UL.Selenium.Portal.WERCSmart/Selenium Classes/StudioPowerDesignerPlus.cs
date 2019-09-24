@@ -1199,14 +1199,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-			if (base.Wait_for_load(30))
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"),2);
+			if (frame != null)
 			{
-				return true;
-			}
+				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				if (base.Wait_for_load(30))
+				{
+					return true;
+				}
 
+			}
 			return false;
 		}
 
