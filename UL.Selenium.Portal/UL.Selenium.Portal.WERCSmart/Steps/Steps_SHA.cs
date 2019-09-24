@@ -2236,7 +2236,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				// Confirm match
 				var upcNumbers = (List<string>)Context.GetFromContext(savedAs);
-				Report.IsTrue(displayedUpcs.All(x => upcNumbers.Contains(x.UPCNumber)),
+				Report.IsTrue(displayedUpcs.Any(x => upcNumbers.Contains(x.UPCNumber)),
 					"Not all UPCs saved as: " + savedAs + " were displayed! Expected: " +
 					string.Join(", ", upcNumbers) + ". but got: " +
 					string.Join(", ", displayedUpcs.Select(x => x.UPCNumber).ToList()));
