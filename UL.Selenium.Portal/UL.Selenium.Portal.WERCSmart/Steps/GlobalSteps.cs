@@ -471,10 +471,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I wait for (.*) seconds")]
 		public void WhenIWaitForSeconds(int seconds)
 		{
-			for(int i = 0; i < seconds; i++)
+			for (int i = 0; i < seconds; i++)
 			{
 				Delay.Seconds(1);
-				if(i % 60 == 0)
+				if (i % 60 == 0)
 				{
 					Report.Info("Waited for: " + i + " seconds");
 				}
