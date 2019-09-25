@@ -8946,7 +8946,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			List<string> UpcNumbers = utils.Excel_GetColumn(1); //includes the header (so start search at 1 not 0)
 
-			for (int i = 1; i < UpcNumbers.Count - 1; i++)
+			for (int i=1; i<UpcNumbers.Count; i++)
 			{
 				TestReport.StartStep($"Searching SHA for a upc found in the duplicate UPC spread sheet. Attempt: {i}");
 				string DupeUPCNumberCurrent = UpcNumbers[i];
@@ -8965,7 +8965,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var productInfo = new ProductInformation { Id = productIDFromSHA };
 					Context.AddToContext($"ProductID{savedAs}", productInfo);
 
-
+					
 					string productRetailerInitials = productsShown[0].Clients;
 					string productRetailerInitialsFirst = productRetailerInitials.Split(',')[0];
 					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == productRetailerInitialsFirst).Key;
@@ -9053,6 +9053,110 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I enter: (.*) as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient")]
+		public void IEnterAnIngredientAndCheckTopOptionMatches(string myIngredient)
+		{
+			TestReport.UseSubSteps = true;
+			var ingredients = new Ingredients();
+			var selNewProduct = new UPC();
+			TestReport.StartStep("I Check I am on the Ingredients page");
+			Report.IsTrue(selNewProduct.WaitForSection("Ingredients"),
+				"The Ingredients page is not showing when it was expected to",
+				"The Ingredients page is showing as expected");
+			Report.Screenshot();
+			TestReport.StartStep($"I enter: {myIngredient} as my ingredient in the ingredients page");
+			ingredients.ClickComponentSearchPlaceholder();
+			ingredients.EnterTextSearchComponent(myIngredient);
+			TestReport.StartStep("I check my ingredient is at the top of the filter");
+			Report.IsTrue(ingredients.IngredientMatchesFirstOption(myIngredient), "The first option did not match the input option", "The first option matched the input option");
 
+		}
+
+		[StepDefinition(@"I Check that for the product: (.*) the Details in SHA Manager Match the details found in the file: (.*)")]
+		public void ICheckThatForTheProductXTheDetailsInSHAManagerMatchTheFile(string productInfoSavedAs, string fileSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I Find the details in SHA manager for the product on screen.");
+			List<Product> productsShown = new StudioSHAManager().GetTopXProducts(1);
+			if (!productsShown.Any())
+			{
+				Report.Failure("Could not find any products");
+				return;
+			}
+			string shaProductID = productsShown[0].ID;
+			Report.Info($"The product found has ID: {shaProductID}");
+			var productInfo = (ProductInformation)Context.GetFromContext(productInfoSavedAs);
+			string fileProductID = productInfo.Id;
+
+			if (!Report.IsTrue(shaProductID == fileProductID, "The product found in SHA did not match the one searched from file", "The product found in SHA did match the one searched from file"))
+			{
+				return;
+			}
+			string shaProductName = productsShown[0].Name;
+			Report.Info($"The product in SHA has Name: {shaProductName}");
+			DateTime shaCurrentSubmissionDate = productsShown[0].CurrentSubmission;
+			Report.Info($"The product in SHA has a Current Submission Date of: {shaCurrentSubmissionDate}");
+			DateTime shaOriginalSubmissionDate = productsShown[0].OriginalSubmission;
+			Report.Info($"The product in SHA has a Original Submission Date of: {shaOriginalSubmissionDate}");
+			string shaClients = productsShown[0].Clients;
+
+			TestReport.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
+			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
+			{
+				var utils = new ExcelUtilities(File.ToString(), "Table");
+				var rows = utils.Excel_GetNoRows();
+				for (int i = 1; i < rows; i++)
+				{
+					var rowContents = utils.GetRowContents(i);
+					var productID = rowContents[0];
+					if (productID == fileProductID)
+					{
+						Report.Info($"The Product Name in the File is: {rowContents[1]}");
+						Report.IsTrue(shaProductName==rowContents[1],"The product names did not match","The product names matched!");
+
+						DateTime lastSubDate;
+						DateTime.TryParse(rowContents[3], out lastSubDate);
+						Report.Info($"The Last Submission Date in the File is: {rowContents[3]}");
+						Report.IsTrue(shaCurrentSubmissionDate == lastSubDate, "The Current Submission Date in SHA did not match the Last Submission date in the file", "The Current Submission Date in SHA did match the Last Submission date in the file");
+
+						DateTime orginalCreationDate;
+						DateTime.TryParse(rowContents[4], out orginalCreationDate);
+						Report.Info($"The Original Creation date in the File is: {rowContents[4]}");
+						string fileOrgDatestr = orginalCreationDate.ToString();
+						string shaOrgDatestr = shaOriginalSubmissionDate.ToString();
+						string fileOrgDateEdited=fileOrgDatestr.Replace("12:00:00 AM","").Trim();
+						Report.IsTrue(shaOrgDatestr.Contains(fileOrgDateEdited), "The Origninal Submission Date in SHA did not match the Original Creation Date in the file", "The Original Submission Date in SHA did match the Original Creation Date in the file");
+						Report.Info($"The Retailers Associated in the File is: {rowContents[5]}");
+						Report.IsTrue(shaClients.Contains(rowContents[5]), "The Clients in SHA did not match the Retailers associated in the file", "The Clients in SHA matched the Retailers associated in the file");
+
+						
+						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");						
+						this.Shared75309_SHA_SelectProduct_UpcList(productInfoSavedAs);
+						var studioSHAManger = new StudioSHAManager();
+						var shaSteps = new Steps_SHA();
+						Delay.Seconds(10);
+						new Steps_SHA().SwitchToProductListUpcWindow();
+						Delay.Seconds(4);
+						List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+						Report.Info($"The number of UPCs displayed in the UPC Details page is: {displayedUpcs.Count}");
+						Report.IsTrue(displayedUpcs.Count.ToString() == rowContents[6], "The number of UPCS in SHA for the product did not match the Number of Active UPCs for the product in the file", "The number of UPCS in SHA for the product matched the Number of Active UPCs for the product in the file");
+						TestReport.StartStep($"Checking that the date that appears under the 'Current Submission' column in SHA Manager is exactly one year before the date that appears in the 'Eligible for Deletion' column in the file");
+						var eligibleDate = rowContents[2];
+						DateTime actualEligibleDate;
+						DateTime.TryParse(eligibleDate, out actualEligibleDate);
+						DateTime expectedEligibleDate = actualEligibleDate.AddYears(-1);
+						Report.IsTrue(shaCurrentSubmissionDate == expectedEligibleDate, "The Current Submission Date in SHA is not exactly one year before the Eligible for deletion date in the file", "The Current Submission Date in SHA is exactly one year before the Eligible for deletion date in the file");
+						return;
+
+					}
+
+				}
+				Report.Failure($"The product with ID: {fileProductID} could not be found in the spreadsheet");
+				return;
+
+			}			
+
+		}
 	}
 }

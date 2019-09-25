@@ -548,3 +548,16 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 		| Formaldehyde            | 100     | No                  | No            | Choose...              |
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I navigate to the home page
+
+Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Option
+
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Then I save the product information as: TestCase110368
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient		
+And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368
+
+
