@@ -566,6 +566,7 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 
 	#Needs Finishing (Currently Download only gets a hltml file and not a spreadsheet)
 
+@TReVorId:23523
 Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- Check for correct description text
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
