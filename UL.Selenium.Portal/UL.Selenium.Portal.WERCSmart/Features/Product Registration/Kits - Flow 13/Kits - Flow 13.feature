@@ -15,6 +15,7 @@
 @run_KitsFlow13
 Feature: Kits - Flow 13
 
+@TReVorId:20213
 Scenario: [58753] Hair Color Kit - RU000724
 	Given I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct1
 	Given I navigate to the landing page

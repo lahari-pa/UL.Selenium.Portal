@@ -757,6 +757,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool ClickSectionsTab()
+		{
+			try
+			{
+				IWebElement sectionsTabButton = this.containerElement.FindElement(By.XPath("//div[@class='panel-title' and text()='Sections']"), 2);
+				return sectionsTabButton.TryClick();
+			}
+			catch(Exception)
+			{
+				Report.Failure("The sections tab button could not found");
+				return false;
+			}
+		}
+
+
 		public bool DoubleClickCategoryToEdit(string category)
 		{
 			IList<IWebElement> listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
