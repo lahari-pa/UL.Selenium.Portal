@@ -18,7 +18,7 @@
 @run_MyMessages
 Feature: MyMessages
 
-@TReVorId:18977
+@ScenarioId:1038
 Scenario: [72582] Active Export Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

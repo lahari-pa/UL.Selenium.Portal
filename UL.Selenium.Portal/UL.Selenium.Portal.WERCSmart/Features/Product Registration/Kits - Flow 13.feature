@@ -23,7 +23,6 @@ Feature: Kits - Flow 13
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 
-@TReVorId:18948
 Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru to Submitted status in SHA
 #Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
 Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
@@ -56,7 +55,6 @@ And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for sa
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77862 and its status is: Submitted
 And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
 
-@TReVorId:20212
 Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to Submitted
 #Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
 Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
@@ -90,7 +88,7 @@ And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for sa
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77837 and its status is: Submitted
 And I Confirm the Product ID: TestCase77837 is not highlited yellow indicating that this is not an e-comm/direct ship product
 
-@TReVorId:20213
+@ScenarioId:1095
 Scenario: [58753] Hair Color Kit - RU000724
 Given I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct1
 Given I navigate to the landing page
@@ -115,7 +113,6 @@ And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 #And I The Purchase summary step is shown with the success message
 
 #Call create product to COMPLETED steps (one is regulated for transport, one is not regulated for transport)
-@TReVorId:20254
 Scenario: [63521] Kit Product - One or more inputs is regulated for transport - Transportation step does NOT shows Not regulated option
 Given I login into the WERCSmart Portal - Administrator Role
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -247,7 +244,6 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 
 @77857
-@TReVorId:21835
 Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM only
 #Given I save to context name: 77862_KitProduct1 and value: 1549414
 #Given I save to context name: 77862_KitProduct2 and value: 1549415
@@ -307,7 +303,6 @@ And In the Product Attribute Screen confirm that no records are found
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 @77858
-@TReVorId:21867
 Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM only
 #Given I save to context name: 77862_KitProduct1 and value: 1552743
 #Given I save to context name: 77862_KitProduct2 and value: 1552746
@@ -361,7 +356,6 @@ And In the Product Attribute Screen I Select the first entry in the table with c
 And I Confirm the Data area of the screen shows WM.com DSV submission
 
 @73949
-@TReVorId:22067
 Scenario: [73949] Kit - Document merge - US only
 Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
 Given I navigate to the landing page
@@ -411,7 +405,6 @@ And I Click Cancel on the Document List window pop up
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Document merge
 
 @73950
-@TReVorId:22068
 Scenario: [73950] Kit Document merge - Canada only
 #Given I Use Test case 78865 to create a new product which is for NR and Canada only, and get it to completed status.  You will need to run this twice as you need two products to add to the kit.
 Given I create a product with name: Kit product 1 and take to completed using Test Case 78865 and save as: 73950_KitProduct1

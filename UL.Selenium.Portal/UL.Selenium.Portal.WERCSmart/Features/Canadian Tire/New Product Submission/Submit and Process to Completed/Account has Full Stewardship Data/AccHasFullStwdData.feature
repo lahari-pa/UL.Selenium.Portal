@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -17,7 +17,7 @@ Feature: AccHasFullStwdData
 
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
-@TReVorId:21464
+@ScenarioId:1424
 Scenario: [86187] Create a new simple product SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product  - submit thru to Completed status
 	#Given [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
 	Given I login into the WERCSmart Portal - Canada has all data account
@@ -71,7 +71,7 @@ Scenario: [86187] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Product set up and process to specific statuses
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
-@TReVorId:21868
+@ScenarioId:1421
 Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Chalk) and submit thru to Completed status
 	#Given I call Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)
 	Given I login into the WERCSmart Portal - Canada has all data account
@@ -119,7 +119,7 @@ Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Ch
 	#And I Confirm the product is shown in Accepted or Completed status for all retailers
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78864 and its status is: Completed
 
-@TReVorId:22063
+@ScenarioId:1423
 Scenario: [85286] Create a new product SOLD = Canada, Private Label = Yes, NR product - Submission and process thru to completed
 	#Given I call Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
 	Given I login into the WERCSmart Portal - Canada has all data account
@@ -159,7 +159,7 @@ Scenario: [85286] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Product set up and process to specific statuses
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
-@TReVorId:22070
+@ScenarioId:1422
 Scenario: [78865] Create a new product SOLD = Canada only , PL = No, NR product - submit thru to Completed status (HGHS only)
 	Given I login into the WERCSmart Portal - Canada has all data account
 	Given I generate a random UPC number and save as: UPC78865

@@ -25,7 +25,7 @@ Feature: Actions
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Actions\View UPCs
-@TReVorId:22123
+@ScenarioId:1207
 Scenario: [73424] View UPCs - Product with UPCs
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then the WERCSmart homepage should load
@@ -42,7 +42,7 @@ Scenario: [73424] View UPCs - Product with UPCs
 	And I confirm all UPC numbers in the list saved as: TestCase73424UPCs are displayed in the SHA Manager Product UPC list
 	And I close the window that opened
 
-@TReVorId:11377
+@ScenarioId:1206
 Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section

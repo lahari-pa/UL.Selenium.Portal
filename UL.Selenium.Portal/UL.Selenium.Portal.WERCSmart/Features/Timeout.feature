@@ -24,7 +24,6 @@
 Feature: Timeout
 
 @Timeout1
-@TReVorId:23419
 Scenario: [Timeout Test] Mass Upload UPCs Popup, Inactivity Popup can be interacted with
 Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -67,7 +66,7 @@ Then I confirm the Inactivity pop is closed
 #And the landing page should load
 
 @Timeout2
-@TReVorId:23420
+@ScenarioId:1438
 Scenario: [Timeout Test] Mass Upload UPCs Popup, TimeoutFeature Works Correctly 
 Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -107,7 +106,7 @@ Then I Look for the Landing Page for: 16 minutes
 #And the landing page should load
 
 @Timeout3
-@TReVorId:23421
+@ScenarioId:1439
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can be interacted with
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
@@ -123,7 +122,7 @@ And I take a ScreenShot
 
 
 @Timeout4
-@TReVorId:23422
+@ScenarioId:1437
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- TimeoutFeature Works Correctly 
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
@@ -133,7 +132,7 @@ Then I Check The landing page has loaded, and report if an Alert and Inactivity 
 #Then I Look for an Alert every minute for: 4 minutes and when an alert is found I wait for the landing page for: 20 minutes
 
 @Timeout5
-@TReVorId:23423
+@ScenarioId:1435
 Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup-Inactivity Popup can be interacted with
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search
@@ -164,7 +163,7 @@ Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup-Inactivity Popup c
 	Then I confirm the Inactivity pop is closed	
 
 @Timeout6
-@TReVorId:23424
+@ScenarioId:1436
 Scenario: [Timeout Test] Add Case UPC Popup- Inactivity popup- TimeoutFeature Works Correctly
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then  I click the following option in the bottom menu: Search

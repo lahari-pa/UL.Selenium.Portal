@@ -44,7 +44,7 @@ Then The element: forgotten password should display text: Forgot your Password?
 Then The element: login button should display text: Login
 
 
-@TReVorId:6881
+@ScenarioId:461
 Scenario: [50830] Validation - Error Messages
 
 Then I ensure that the email input field is not populated
@@ -62,7 +62,7 @@ Given on the Login page I log in as test user: ProductAccount
 Then the WERCSmart homepage should load
 
 
-@TReVorId:6685
+@ScenarioId:462
 Scenario: [50831] Account Lockout
 
 Given I popupate the email input field with credentials for account: AccountLockOut

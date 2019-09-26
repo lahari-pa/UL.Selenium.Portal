@@ -13,7 +13,7 @@
 @run_Flow8
 Feature: Flow 8
 
-@TReVorId:11647
+@ScenarioId:717
 Scenario: [57295] Absorbent solid - Automotive(RU000939) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -42,7 +42,7 @@ Scenario: [57295] Absorbent solid - Automotive(RU000939) - 8-S
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Absorbent Solid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57295
 
-@TReVorId:11654
+@ScenarioId:718
 Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -71,7 +71,7 @@ Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Automotive Accessories containing Gel (Seat Cushions, etc.)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57332
 
-@TReVorId:11677
+@ScenarioId:722
 Scenario: [58184] Craft kits containing clays or plasters(RU000299) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -100,7 +100,7 @@ Scenario: [58184] Craft kits containing clays or plasters(RU000299) - 8-S
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Craft kits containing clays or plasters
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58184
 
-@TReVorId:11682
+@ScenarioId:723
 Scenario: [58187] Matches (RU000317) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -130,7 +130,7 @@ Scenario: [58187] Matches (RU000317) - 8-S
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58187
 
 #check RU number and name
-@TReVorId:11696
+@ScenarioId:727
 Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -159,7 +159,7 @@ Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engines for Model Rockets
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58293
 
-@TReVorId:11699
+@ScenarioId:728
 Scenario: [58297] Fireworks (RU000330) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -234,7 +234,7 @@ Scenario: [58297] Fireworks (RU000330) - 8-S
 #Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine (motor) oil for Auto or Boat
 #
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
-@TReVorId:11672
+@ScenarioId:721
 Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -292,7 +292,7 @@ Scenario: [57344] Artists Solvent-Thinner - 8-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Artist's Solvent/Thinner
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57344
 
-@TReVorId:11686
+@ScenarioId:724
 Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -323,7 +323,7 @@ Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Antibiotic, Liquid or Cream, Non-Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58210
 
-@TReVorId:11690
+@ScenarioId:725
 Scenario: [58282] Dental Whitening Gel - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -353,7 +353,7 @@ Scenario: [58282] Dental Whitening Gel - 8-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Dental whitening gel
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58282
 
-@TReVorId:11693
+@ScenarioId:726
 Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -382,7 +382,7 @@ Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Toothpaste - Whitening
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58285
 
-@TReVorId:11702
+@ScenarioId:729
 Scenario: [58390] Paint,Model - RU000333
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -410,7 +410,7 @@ Scenario: [58390] Paint,Model - RU000333
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Paint, Model
 
-@TReVorId:13898
+@ScenarioId:730
 Scenario: [58401] Correction Fluid(RU000201) - 8L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -440,7 +440,7 @@ Scenario: [58401] Correction Fluid(RU000201) - 8L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Correction fluid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58401
 
-@TReVorId:13895
+@ScenarioId:719
 Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -470,7 +470,7 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Craft kits containing paints and glues
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57339
 
-@TReVorId:16682
+@ScenarioId:731
 Scenario: [58810] Helium Tank(RU000340) - 8G
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -500,7 +500,7 @@ Scenario: [58810] Helium Tank(RU000340) - 8G
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Helium tank
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58810
 
-@TReVorId:16685
+@ScenarioId:732
 Scenario: [58815] Lighters(RU000000) - 8G
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -530,7 +530,7 @@ Scenario: [58815] Lighters(RU000000) - 8G
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lighters
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58815
 
-@TReVorId:16668
+@ScenarioId:716
 Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -560,7 +560,7 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine (motor) oil for Auto or Boat
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
 
-@TReVorId:18960
+@ScenarioId:720
 Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	Given I generate a random UPC number and save as: UPC57709
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -590,7 +590,7 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Training aid repellant
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57709
 
-@TReVorId:18963
+@ScenarioId:733
 Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
