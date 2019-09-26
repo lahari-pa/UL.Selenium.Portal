@@ -343,6 +343,58 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool Is_User_In_Grid(string userName)
+		{
+			Report.Info("Beginning Is_User_Active");
+
+			IWebElement myFirstPageNo = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']//li//a[contains(text(), '1'])"), 10).FirstOrDefault();
+
+			myFirstPageNo.TryClick();
+
+			int pageNo = 1;
+
+			while (pageNo < 10)
+			{
+				Delay.Seconds(1.5 * Delay.SpeedFactor);
+
+				IWebElement myPageNumber = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/span[@class='current']"), 10).FirstOrDefault();
+
+				Report.Info("Searching on Page " + myPageNumber.Text + " For User: " + userName);
+
+				IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+				ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+
+				foreach (IWebElement userRow in listOfUsersRows)
+				{
+					string myUsername = userRow.FindElement(By.XPath(".//td[1]")).Text;
+
+					if (myUsername == userName)
+					{
+						Report.Info("The User I just created was found in the Grid");
+						return true;
+					}
+					Report.Info("Row Not Found");
+				}
+
+				IWebElement myNext = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='Next']"), 10).FirstOrDefault();
+
+				if (myNext == null)
+				{
+					Report.Info("On Last Page");
+					Report.Screenshot();
+					break;
+				}
+				Report.Info("User Not Found On Page " + myPageNumber.Text + ", Navigating to Next Page");
+				myNext.Click();
+				pageNo++;
+			}
+			Report.Info("User: " + userName + " was not found in the Grid");
+			Report.Screenshot();
+			return false;
+
+
+		}
+
 		public bool Select_ActivateDeactivate(string userName, string activate)
 		{
 			Report.Info("Beginning Select_ActivateDeactivate");
@@ -661,6 +713,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath(".//ul[@role='tablist']//a[text()='" + filter + "']"), 2).TryClick();
 		}
+
+		public bool IClickOnAccountActiveFilter()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[@class='accepted']"), 2).TryClick();
+		}
+
+		public bool IClickOnAccountInActiveFilter()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[@class='not-submitted']"), 2).TryClick();
+		}
+
 
 		public bool DivisionGridShowing()
 		{
