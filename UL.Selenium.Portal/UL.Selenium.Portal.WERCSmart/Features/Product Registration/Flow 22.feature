@@ -12,7 +12,7 @@
 Feature: Flow 22
 
 @tfsdesign
-@TReVorId:11618
+@ScenarioId:691
 Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -110,7 +110,7 @@ Scenario: [60546] Glass Coating - Aerosol - RU001037
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Glass Coating - Aerosol
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60546
 
-@TReVorId:11663
+@ScenarioId:692
 Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol - RU001043
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

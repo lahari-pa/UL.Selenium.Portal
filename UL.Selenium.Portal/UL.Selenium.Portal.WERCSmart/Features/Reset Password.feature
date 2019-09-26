@@ -18,7 +18,7 @@ Given I update the password for the following TReVor test users:
 
 @TrevorUsers
 @JacobRun
-@TReVorId:22135
+@ScenarioId:1105
 Scenario: Reset password for TReVor test user accounts
 
 Given I update the password for all TReVor Test Users within the current branch

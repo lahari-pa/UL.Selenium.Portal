@@ -23,7 +23,7 @@
 @run_UPCCasePack
 Feature: UPC Case Pack
 
-@TReVorId:21795
+@ScenarioId:1455
 Scenario: [87640] UPC - Case Pack Only Present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -54,7 +54,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87640
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
-@TReVorId:21796
+@ScenarioId:1454
 Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -88,7 +88,7 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87643
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876431
 
-@TReVorId:21840
+@ScenarioId:1456
 Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Case UPC counts towards the 5 limit
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -146,7 +146,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876502
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876503
 
-@TReVorId:21841
+@ScenarioId:1457
 Scenario: [87676] UPC - Case Pack can be removed from new product
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -198,7 +198,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87676
 
-@TReVorId:21886
+@ScenarioId:1458
 Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to Complete
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -250,7 +250,7 @@ Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Completed
 
-@TReVorId:21887
+@ScenarioId:1459
 Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -301,7 +301,6 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	
 
 @singlerun
-@TReVorId:23444
 Scenario: [87894] Forwarding - Edit existing Case UPC 
 
 Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completedstatus

@@ -10,7 +10,7 @@
 @run_MyAccount
 Feature: MyAccount
 
-@TReVorId:22223
+@ScenarioId:734
 Scenario: [61796] Account User Name in Header
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -32,7 +32,6 @@ Scenario: [61796] Account User Name in Header
 	Given In the UserDetails page I click Save
 	Then I should see user name: saved as ThisUser in the header next to the user icon
 
-@TReVorId:22076
 Scenario: [63514] Add and Deactivate a New User from the User Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -52,7 +51,7 @@ Scenario: [63514] Add and Deactivate a New User from the User Grid
 	Then I Select the ... from the Actions column of the account I just created and select Deactivate
 	And I Click approve in dialog
 
-@TReVorId:22078
+@ScenarioId:735
 Scenario: [64874] Division Area - no divisions set up
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	And I navigate to My Account
@@ -61,7 +60,7 @@ Scenario: [64874] Division Area - no divisions set up
 	And In the My Account page I navigate to the Company Information page
 	Then In the Company Information screen I should see 0 Division Accounts
 
-@TReVorId:13901
+@ScenarioId:736
 Scenario: [65887] Pagination
 	#CLF 25/6/2019 Changed login account to one that has enough products to page through
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -74,7 +73,6 @@ Scenario: [65887] Pagination
 	Given I click previous in the My Account user grid
 	Then The My Account user grid is currently on page number: 1
 
-@TReVorId:22224
 Scenario: [70511] Pagination (...) need an account with six pages of users
 	#CLF 25/6/2019 Changed login account to one that has enough products to page through
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -90,7 +88,7 @@ Scenario: [70511] Pagination (...) need an account with six pages of users
 	Given I click ... in the My Account user grid
 	Given I enter the down arrow into the user grid page navigation box then the correct page is shown
 
-@TReVorId:16677
+@ScenarioId:737
 Scenario: [68417] Company Information
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Given I click on My Account
@@ -103,7 +101,7 @@ Scenario: [68417] Company Information
 # Created by Larkin, Steve
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\My Account\Subscription Information
-@TReVorId:21429
+@ScenarioId:738
 Scenario: [87304] Video link How to Subscribe
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I click on My Account
@@ -116,7 +114,7 @@ Scenario: [87304] Video link How to Subscribe
 	And I close the window saved as: Subscription Enrollment and Management
 
 
-@TReVorId:23507
+@ScenarioId:739
 Scenario: [92613] Add and Deactivate a New User from the User Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

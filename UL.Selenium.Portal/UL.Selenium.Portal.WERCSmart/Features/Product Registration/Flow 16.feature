@@ -11,7 +11,7 @@
 @run_Flow16
 Feature: Flow 16
 
-@TReVorId:11525
+@ScenarioId:680
 Scenario: [59273] Alkaline Battery - RU000344
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -48,7 +48,7 @@ Scenario: [59273] Alkaline Battery - RU000344
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alkaline battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
-@TReVorId:11527
+@ScenarioId:681
 Scenario: [59274] Battery Containing Mercury - RU000729
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -86,7 +86,7 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Battery Containing Mercury
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59274
 
-@TReVorId:11532
+@ScenarioId:683
 Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -123,7 +123,7 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid Battery - No Acid Included
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
 
-@TReVorId:11534
+@ScenarioId:684
 Scenario: [59277] Magnesium Battery - RU000728
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -160,7 +160,7 @@ Scenario: [59277] Magnesium Battery - RU000728
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Magnesium Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59277
 
-@TReVorId:11536
+@ScenarioId:685
 Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -198,7 +198,7 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel Metal Hydride (NiMH) Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59278
 
-@TReVorId:11538
+@ScenarioId:686
 Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -236,7 +236,7 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel-cadmium battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59279
 
-@TReVorId:11539
+@ScenarioId:687
 Scenario: [59280] Silver Battery - RU000698
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -275,7 +275,7 @@ Scenario: [59280] Silver Battery - RU000698
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Silver Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59280
 
-@TReVorId:11540
+@ScenarioId:688
 Scenario: [59281] Water-Charged Cell - RU001543
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -314,7 +314,7 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Water-Charged Cell
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59281
 
-@TReVorId:11541
+@ScenarioId:689
 Scenario: [59282] Zinc Air - RU001205
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -352,7 +352,7 @@ Scenario: [59282] Zinc Air - RU001205
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Zinc Air
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59282
 
-@TReVorId:11529
+@ScenarioId:682
 Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -391,7 +391,6 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59275
 
 @TReVorId:23505
-@TReVorId:23505
 Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -425,7 +424,7 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97484
 
 @TReVorId:23504
-@TReVorId:23504
+@ScenarioId:690
 Scenario: [97470] Stand alone Lead Acid Battery
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -457,7 +456,7 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead acid battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97470
 
-@TReVorId:23510
+@ScenarioId:679
 Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Error Messaging - RU000344
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
