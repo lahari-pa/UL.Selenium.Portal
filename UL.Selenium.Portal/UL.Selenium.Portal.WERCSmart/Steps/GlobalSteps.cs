@@ -471,10 +471,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I wait for (.*) seconds")]
 		public void WhenIWaitForSeconds(int seconds)
 		{
-			for(int i = 0; i < seconds; i++)
+			for (int i = 0; i < seconds; i++)
 			{
 				Delay.Seconds(1);
-				if(i % 60 == 0)
+				if (i % 60 == 0)
 				{
 					Report.Info("Waited for: " + i + " seconds");
 				}
@@ -1504,6 +1504,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			// fall back to creating a new product
 			TestReport.StartStep("Logging in to WercSmart");
+			new GlobalSteps().NavigateToLandingPage();
 			this.ILogInWithTheAccountSavedInTrevorAs(trevorSavedAs);
 			TestReport.StartStep("Creating a new product: Chalk");
 			new Steps_ProductSetup().GivenICreateProductUsingTestCase75335("Chalk", upcSavedAs, "ExistingUPCProduct");

@@ -190,7 +190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.SetAUTHCinPowerAuthorPlus(setTo);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("refresh"), "Failed to find the refresh button.", "Successfully clicked refresh.");
-			Delay.Seconds(3);
+			Delay.Seconds(10);
 		}
 
 
@@ -273,6 +273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InApplyRulesPageIClickOnTheFollowingApplyRadioButton(string button)
 		{
 			var thisApplyRulesPage = new ApplyRulesPage();
+			Delay.Seconds(3);
 			Report.IsTrue(thisApplyRulesPage.SetApplyOption(button), "Failed to click " + button + " button",
 				"Clicked " + button);
 		}
