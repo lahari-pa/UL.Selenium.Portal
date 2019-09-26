@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -15,7 +15,7 @@
 
 Feature: ProductSetUp_3rdParty
 
-@TReVorId:20216
+@ScenarioId:1418
 Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include generic component)- thru to Completed (includes adding WPSxxxxxx component)
 	Given I generate a random UPC number and save as: UPC79428
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -74,7 +74,7 @@ Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include gen
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase79428)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase79428 and its status is: Completed
 
-@TReVorId:20229
+@ScenarioId:1420
 Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic component) - thru to Completed (includes adding WPSxxxxxx component)
 	Given I generate a random UPC number and save as: UPC80768
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -121,7 +121,7 @@ Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80768)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80768 and its status is: Completed
 
-@TReVorId:20230
+@ScenarioId:1419
 Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include generic component) - thru to Completed (includes adding WPSxxxxxx component)
 	Given I generate a random UPC number and save as: UPC80763
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -177,7 +177,6 @@ Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include gen
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80763)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80763 and its status is: Completed
 
-@TReVorId:21326
 Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing
 	Given I generate a random UPC number and save as: UPC80821
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

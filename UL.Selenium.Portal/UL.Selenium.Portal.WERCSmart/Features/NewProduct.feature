@@ -13,7 +13,7 @@
 
 Feature: New Product
 
-@TReVorId:19124
+@ScenarioId:1113
 Scenario: [31343] New Product screen navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -28,7 +28,7 @@ And I should see the following radio buttons:
 #TODO: create another test case for ULSC options in New product screen
 
 
-@TReVorId:19125
+@ScenarioId:1114
 Scenario: [31344] New Product Screen validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -38,7 +38,7 @@ When I click continue
 Then I should see an error message: This is a required field.
 
 
-@TReVorId:19126
+@ScenarioId:1115
 Scenario: [82750] Copy from an Existing Registration validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section

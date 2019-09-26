@@ -12,7 +12,7 @@
 
 Feature: CVS RCL
 
-@TReVorId:16789
+@ScenarioId:1028
 Scenario: [74208] CVS merchandising category and verification
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -121,7 +121,7 @@ Then What is the CVS merchandising category for this product? should be showing 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74208
 
-@TReVorId:16809
+@ScenarioId:1029
 Scenario: [74253] CVS marketed or labeled for infants question and verification
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -170,7 +170,7 @@ Then Is this product specifically designed, marketed or labeled for infants, bab
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74253
 
-@TReVorId:16810
+@ScenarioId:1030
 Scenario: [74254] CVS topically used product and verification
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -221,7 +221,7 @@ Then Is this a topically used product which includes but is not limited to liqui
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74254
 
-@TReVorId:16811
+@ScenarioId:1031
 Scenario: [74255] CVS microbeads product and verification
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -274,7 +274,7 @@ Then Product contains microbeads should be showing the error messages: This is a
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74255
 
-@TReVorId:16806
+@ScenarioId:1032
 Scenario: [74256] CVS Refer to your Product Label and verification
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -340,7 +340,7 @@ Given I click continue
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74256
 
-@TReVorId:16812
+@ScenarioId:1033
 Scenario: [74257] CVS product intended to be rinsed off after use and verification
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -395,7 +395,7 @@ Then Is this product intended to be rinsed off after use? should be showing the 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74257
 
-@TReVorId:16813
+@ScenarioId:1034
 Scenario: [74259] CVS product intended to be ingested and verification
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -454,7 +454,7 @@ Then Is this product intended to be ingested? should be showing the error messag
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74259
 
-@TReVorId:16814
+@ScenarioId:1035
 Scenario: [74260] CVS Is this product a personal care sanitizer and verification
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -515,7 +515,7 @@ Then Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, B
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74260
 
-@TReVorId:16807
+@ScenarioId:1026
 Scenario: [74188] CVS Store Brand Associations and verification
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -609,7 +609,7 @@ Then What is the CVS Store Brand associated to this product? should be showing t
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74188
 
-@TReVorId:16808
+@ScenarioId:1027
 Scenario: [74207] Product Development Manager (PDM) and verification
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -667,7 +667,7 @@ Then Who is the Product Development Manager (PDM) for this product? should be sh
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74207
 
-@TReVorId:16816
+@ScenarioId:1037
 Scenario: [74270] CVS RCL - Page should not show if Product does NOT have CVS Selected but has an eligible UPC
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -715,7 +715,6 @@ And I should see the Regulatory Documents to Provide Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74270
 
-@TReVorId:16817
 Scenario: [74272] CVS RCL - Page is NOT shown if Product has CVS selected with a UPC that does not start 050428
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -763,7 +762,7 @@ And I should see the Regulatory Documents to Provide Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74272
 
-@TReVorId:16815
+@ScenarioId:1036
 Scenario: [74261] CVS Brand Registration section and validation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -11,7 +11,7 @@
 @run_Flow24_Deodorant
 Feature: Flow 24 - Deodorant
 
-@TReVorId:11424
+@ScenarioId:667
 Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

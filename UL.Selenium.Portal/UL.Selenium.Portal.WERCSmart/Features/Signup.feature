@@ -16,7 +16,6 @@ Feature: Sign Up
 Background:
 	Given I go to the WERCSmart Log in
 
-@TReVorId:7943
 Scenario: [53069] Signup - Account Creation - Happy Path
 	Given I define the user: SignupUser with the following parameters:
 		| Field                | Value                   |
@@ -68,7 +67,7 @@ Scenario: [53069] Signup - Account Creation - Happy Path
 	Then I should see username for user saved as: SignupUser in the right corner
 
 #pass - staging 4.10
-@TReVorId:7941
+@ScenarioId:463
 Scenario: [52998] Signup - Emails Do Not Match
 	Given I click on the New to WERCSmart Link
 	Then the signup page should appear
@@ -87,7 +86,7 @@ Scenario: [52998] Signup - Emails Do Not Match
 		| Email and confirm email fields do not match |
 
 #pass - staging 4.10
-@TReVorId:7942
+@ScenarioId:464
 Scenario: [53000] Signup - Copy and Paste Email Address
 	Given I click on the New to WERCSmart Link
 	Then the signup page should appear
@@ -97,7 +96,7 @@ Scenario: [53000] Signup - Copy and Paste Email Address
 	Then I should see popup error: You cannot paste text into this textbox!
 	Given In the popup error I click on Cancel
 
-@TReVorId:7944
+@ScenarioId:465
 Scenario: [57737] New Account - Required fields
 	Given I define the user: SignupUser2 with the following parameters:
 		| Field                | Value           |
