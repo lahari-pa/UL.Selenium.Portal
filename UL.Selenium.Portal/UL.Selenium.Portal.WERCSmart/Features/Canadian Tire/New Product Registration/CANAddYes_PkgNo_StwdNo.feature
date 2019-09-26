@@ -15,7 +15,7 @@
 Feature: Account Canada Address(Yes) Packagetype(No) Stewardship(No)
 
 
-@TReVorId:22137
+@ScenarioId:1248
 Scenario: [85315] Account has Canada address only - SOLD = US and Canada, PL = No, packaging type is required
 
 Given I log in with the account saved in TReVor as: Canada Address Only
@@ -32,7 +32,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85315
 
 
-@TReVorId:22141
+@ScenarioId:1249
 Scenario: [85735] Account has Canada address only - SOLD = US and Canada, PL = YES, packaging type is required
 
 Given I log in with the account saved in TReVor as: Canada Address Only
@@ -49,7 +49,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85735
 
 
-@TReVorId:22142
+@ScenarioId:1250
 Scenario: [85736] Account has Canada address only - SOLD = Canada only, PL = No, packaging type is required
 
 Given I log in with the account saved in TReVor as: Canada Address Only
@@ -66,7 +66,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85736
 
 
-@TReVorId:22143
+@ScenarioId:1251
 Scenario: [85737] Account has Canada address only - SOLD = Canada only, PL = YES, packaging type is required
 
 Given I log in with the account saved in TReVor as: Canada Address Only
@@ -83,7 +83,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85737
 
 
-@TReVorId:22144
+@ScenarioId:1252
 Scenario: [85738] Account has Canada address only - SOLD = US only, PL = No, packaging type is NOT required
 
 Given I log in with the account saved in TReVor as: Canada Address Only
@@ -101,7 +101,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85738
 
 
-@TReVorId:22145
+@ScenarioId:1253
 Scenario: [85739] Account has Canada address only - SOLD = US only, PL = YES, packaging type is NOT required
 
 Given I log in with the account saved in TReVor as: Canada Address Only

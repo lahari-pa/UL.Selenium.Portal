@@ -15,7 +15,7 @@ Feature: Product Registration
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 #Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 #Then The home screen should load
-@TReVorId:22077
+@ScenarioId:486
 Scenario: Create a new product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -25,7 +25,7 @@ Scenario: Create a new product
 	Given I click the Register New Product icon in the Navigation Pane
 	When I click continue
 
-@TReVorId:22124
+@ScenarioId:483
 Scenario: [63705] New Product - BCP
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -101,7 +101,7 @@ Scenario: [63705] New Product - BCP
 	Given I navigate to the home page
 	Then I delete the product: TestCase63705
 
-@TReVorId:22125
+@ScenarioId:484
 Scenario: [63724] Add New product - Single Battery Product
 	# UPC: 630509616084
 	# DPCI: 087-06-680
@@ -165,7 +165,6 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given in the New Product page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63724
 
-@TReVorId:11276
 Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -232,7 +231,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I navigate to the home page
 	Then I delete the product: TestCase65441
 
-@TReVorId:11378
+@ScenarioId:485
 Scenario: [65392] Ecologo Readiness - Question wording and validation of response
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -403,7 +402,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	Then I delete the product: TestCase67661
 
 @jacob
-@TReVorId:22350
+@ScenarioId:482
 Scenario: [105352] Product Comments screen Max input length
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section

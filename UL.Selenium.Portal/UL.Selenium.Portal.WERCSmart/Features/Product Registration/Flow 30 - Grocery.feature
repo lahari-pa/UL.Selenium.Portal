@@ -12,7 +12,7 @@
 @run_Flow30_Grocery
 Feature: [64735] Flow 30 - Grocery
 
-@TReVorId:11670
+@ScenarioId:714
 Scenario: [60725] Baked Goods, Crackers - RU001449
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -40,7 +40,7 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baked Goods, Crackers
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60725
 
-@TReVorId:11660
+@ScenarioId:713
 Scenario: [60724] Condiments, Sauces - RU001454
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -68,7 +68,7 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Condiments, Sauces
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60724
 
-@TReVorId:11639
+@ScenarioId:712
 Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -124,7 +124,7 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nut Butters
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60722
 
-@TReVorId:11680
+@ScenarioId:715
 Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens and Harbor Freight
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section

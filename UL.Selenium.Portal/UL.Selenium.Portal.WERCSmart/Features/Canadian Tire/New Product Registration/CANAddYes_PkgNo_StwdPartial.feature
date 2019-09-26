@@ -15,7 +15,7 @@
 Feature: Account Canada Address(Yes) Package types(No) Stewardship(Partial)
 
 
-@TReVorId:22198
+@ScenarioId:1254
 Scenario: [85784] Account all Canada data - Partial stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
 Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
 Given I generate a random UPC number and save as: UPC85784
@@ -32,7 +32,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85784
 
 
-@TReVorId:22200
+@ScenarioId:1255
 Scenario: [85785] Account Canada Address and Partial stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
 Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
 Given I generate a random UPC number and save as: UPC85785
@@ -49,7 +49,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85785
 
 
-@TReVorId:22204
+@ScenarioId:1256
 Scenario: [85786] Account Canada address and Partial stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
 Given I generate a random UPC number and save as: UPC85786
@@ -71,7 +71,7 @@ And I Confirm This is a required field. error message is shown below the Package
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85786
 
 
-@TReVorId:22206
+@ScenarioId:1257
 Scenario: [85787] Account Canada address and - Partial stewardship, SOLD = Canada Only, PL = NO, Packaging type IS required
 Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -94,7 +94,7 @@ And I Confirm This is a required field. error message is shown below the Package
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85787
 
 
-@TReVorId:22210
+@ScenarioId:1258
 Scenario: [85788] Account all Canada address and Partial stewardship, SOLD = US & Canada, PL = YES, Packaging type IS required
 Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
 Given I generate a random UPC number and save as: UPC85788
@@ -116,7 +116,7 @@ And I Confirm This is a required field. error message is shown below the Package
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85788
 
 
-@TReVorId:22213
+@ScenarioId:1259
 Scenario: [85789] Account Canada address and Partial stewardship, SOLD = US & Canada, PL = NO, Packaging type IS required
 Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

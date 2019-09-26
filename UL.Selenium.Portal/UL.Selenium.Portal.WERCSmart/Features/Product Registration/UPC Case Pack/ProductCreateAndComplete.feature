@@ -24,7 +24,7 @@
 
 Feature: Product Create and Process to Completed
 
-@TReVorId:23492
+@ScenarioId:1503
 Scenario: [87913] Create Electronic (Answering machine, no battery included) - With Case UPC process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87913
@@ -65,7 +65,7 @@ Scenario: [87913] Create Electronic (Answering machine, no battery included) - W
 	#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
 
-@TReVorId:23493
+@ScenarioId:1504
 Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to  Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87914
@@ -106,7 +106,6 @@ Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87914 and its status is: Completed
 
 
-@TReVorId:23494
 @tfs_design
 Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to completed
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -157,7 +156,7 @@ Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to compl
 
 
 
-@TReVorId:23515
+@ScenarioId:1505
 Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87916
