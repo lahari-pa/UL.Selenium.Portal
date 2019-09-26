@@ -645,8 +645,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				if (button.FindElement(By.XPath(".//img"), 1) != null)
 				{
-					button.Click();
-					button.Click();
+					//button.Click();
+					//button.Click();
+					button.DoubleClick();
 					return true;
 				}
 				Report.Error("Image was not found: " + code);
@@ -755,6 +756,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			}
 		}
+
+		public bool ClickSectionsTab()
+		{
+			try
+			{
+				IWebElement sectionsTabButton = this.containerElement.FindElement(By.XPath("//div[@class='panel-title' and text()='Sections']"), 2);
+				return sectionsTabButton.TryClick();
+			}
+			catch(Exception)
+			{
+				Report.Failure("The sections tab button could not found");
+				return false;
+			}
+		}
+
 
 		public bool DoubleClickCategoryToEdit(string category)
 		{
@@ -1199,14 +1215,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-			if (base.Wait_for_load(30))
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"),2);
+			if (frame != null)
 			{
-				return true;
-			}
+				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				if (base.Wait_for_load(30))
+				{
+					return true;
+				}
 
+			}
 			return false;
 		}
 
