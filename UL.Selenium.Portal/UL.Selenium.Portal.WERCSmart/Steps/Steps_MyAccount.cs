@@ -1335,6 +1335,55 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.Navigate(link);
 		}
 
+		[StepDefinition(@"I Select the Active filter")]
+		public void ISelectTheActiveFilter()
+		{
+			Report.IsTrue(new MyAccount().IClickOnAccountActiveFilter(), "Failed to select the Active Filter", "Successfully selected the Active Filter");
+		}
+
+		[StepDefinition(@"I Select the Inactive filter")]
+		public void ISelectTheInActiveFilter()
+		{
+			Report.IsTrue(new MyAccount().IClickOnAccountInActiveFilter(), "Failed to select the Inactive Filter", "Successfully selected the Inactive Filter");
+		}
+
+		[StepDefinition(@"I Confirm that you (See|Don't See) the user you just created in the grid")]
+		public void IConfirmThatYouSeeTheUserJustCreatedInGrid(string presence)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm that you "+presence+" the new user I just created is in the Gird");
+			try
+			{
+				var selMyAccount = new MyAccount();
+
+				string userName = string.Empty;
+
+				if (Context.ScenarioContext.ContainsKey("CurrentUser"))
+				{
+					userName = Context.ScenarioContext["CurrentUser"].ToString();
+				}
+				if (presence=="See")
+				{
+					Report.IsTrue(selMyAccount.Is_User_In_Grid(userName), "The User just created was Not Found In the Grid", "The User just created was found in the Grid");
+				}
+				if (presence == "Don't See")
+				{
+					Report.IsFalse(selMyAccount.Is_User_In_Grid(userName), "The User just created was found in the Grid", "The User just created was Not Found In the Grid");
+				}
+				
+
+				
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+			
+
 
 	}
 }
