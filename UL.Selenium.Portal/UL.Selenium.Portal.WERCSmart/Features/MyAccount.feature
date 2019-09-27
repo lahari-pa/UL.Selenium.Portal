@@ -130,3 +130,19 @@ Scenario: [92613] Add and Deactivate a New User from the User Grid
 	And I Click approve in dialog
 	And I Click close in dialog
 	Then I confirm the new user is Not Active
+
+Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I call Shared Step 62676 (Go To My Account)
+	Given I call Shared Step 63511 (Create New User via User Grid)
+	And I Select the Active filter
+	And I Confirm that you See the user you just created in the grid
+	And I confirm the new user is Active
+	Given I Select the ... from the Actions column of the account I just created and select Deactivate
+	And I Click approve in dialog
+	And I Click close in dialog	
+	And I Confirm that you Don't See the user you just created in the grid
+	And I Select the Inactive filter
+	And I Confirm that you See the user you just created in the grid
+	And I confirm the new user is Not Active
+	
