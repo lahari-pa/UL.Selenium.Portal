@@ -700,6 +700,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition("I Save the email for the TReVor: (.*) Test user as: (.*)")]
+		public void ISaveTheEmailForTheTReVorTestUserAs(string userSavedAs, string emailSaveAs)
+		{
+			
+			try
+			{
+				
+				TReVorTestUsers user = TestUsers.GetUserSavedAs(userSavedAs);
+				if (user == null)
+				{
+					Report.Failure("Failed to find a user stored in TReVor: " + userSavedAs);
+					return;
+				}
+
+				Report.Success($"Found the User stored as {userSavedAs} in Trevor");
+				Report.Info($"Saving the Email: {user.Username} to context");
+				Context.AddToContext(emailSaveAs, user.Username);
+				
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		/// <summary>
 		/// Creating and saving an email address to be used in other steps within a test case
 		/// </summary>
@@ -774,7 +800,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					email = NTTQA.Selenium.SpecFlow.Context.GetFromContext(savedAs).ToString();
 				}
-
+				
 				if (EmailFunctions.WaitForInboxDifferences(email))
 				{
 					List<Mailosaur.Email> differences = EmailFunctions.GetInboxDifferences(email);

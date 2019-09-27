@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
@@ -20,7 +21,6 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
-using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -8224,8 +8224,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 				}
 			}
-			expectedText += "For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team";
+			expectedText += " For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team";
 			TestReport.StartStep("I confirm the administrator receieved an email with subject 'WERCSmart Data Use Tier Consents Changed for Wal-Mart/Sam's Club'");
+			Delay.Seconds(5);
 			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", "WERCSmart Data Use Tier Consents Changed for Wal-Mart/SAM'S CLUB");
 			TestReport.StartStep("I confirm the body text of the email matches the expected text");
 			new GlobalSteps().ThenTheBodyOfTheEmailShouldShow(expectedText);
