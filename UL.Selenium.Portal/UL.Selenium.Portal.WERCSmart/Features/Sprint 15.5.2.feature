@@ -26,7 +26,7 @@
 Feature: Sprint 15.5.2
 
 
-@TReVorId:23498
+@ScenarioId:1507
 Scenario: [110237] UPC Details Pop-Up - Obsolete UPC Option - Visible for Dup UPC and Not visible for non dup upc
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then I create a product and save as: NewProduct110237 and name as: TestCond
@@ -42,7 +42,7 @@ Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product sav
 Then I check that the UPC number saved as: DupeUPCNumber110237 and under the retailer: <ProductRetailer110237>, does show the Obsolete UPC Option in the UPC details popup
 Then I close the SHA Manager Product UPC details pop up
 
-@TReVorId:23500
+@ScenarioId:1508
 Scenario: [110238] UPC Details Pop-Up - Obsolete UPC Option - Verify Message - Cancel and Continue Actions
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Then I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: 110238

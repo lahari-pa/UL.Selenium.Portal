@@ -22,7 +22,7 @@
 @ProductSetUp
 Feature: Edit UPC Account has partial Stewardship information 
 
-@TReVorId:23425
+@ScenarioId:1472
 Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Canadian Tire, Packing type is required
 	Given I generate a random UPC number and save as: UPC86257
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -43,7 +43,7 @@ Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Ca
 	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase86257
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86257
 
-@TReVorId:23437
+@ScenarioId:1473
 Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86258
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -65,7 +65,6 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86258
 
 
-@TReVorId:23439
 Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not Canadian Tire, package type is not required
 	Given I generate a random UPC number and save as: UPC86259
 	Given I generate a random UPC number and save as: UPC_862591
@@ -89,7 +88,7 @@ Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not 
 	Then In the SHA list of UPCs I should see UPC: saved as UPC862591
 
 
-@TReVorId:23441
+@ScenarioId:1474
 Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86260
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -111,7 +110,7 @@ Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86260
 
 
-@TReVorId:23442
+@ScenarioId:1477
 Scenario: [86462] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Canadian Tire - Package type required
 	Given I generate a random UPC number and save as: UPC86462
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
@@ -133,7 +132,7 @@ Scenario: [86462] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86462
 
 
-@TReVorId:23443
+@ScenarioId:1478
 Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT CT - Package type not required
 	Given I generate a random UPC number and save as: UPC86463
 	Given I generate a random UPC number and save as: UPC864631
@@ -157,7 +156,7 @@ Scenario: [86463] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer NOT C
 	Then In the SHA list of UPCs I should see UPC: saved as UPC864631
 
 
-@TReVorId:23509
+@ScenarioId:1476
 Scenario: [86264] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer Canadian Tire  - Package type required
 	Given I generate a random UPC number and save as: UPC86264
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
@@ -179,7 +178,7 @@ Scenario: [86264] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer Canad
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86264
 
 
-@TReVorId:23508
+@ScenarioId:1475
 	Scenario: [86261] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Canadian Tire, Packing type is required
 	Given I generate a random UPC number and save as: UPC86261
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging

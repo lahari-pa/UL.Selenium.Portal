@@ -14,7 +14,7 @@
 Feature: Flow 17
 
 @tfsdesign
-@TReVorId:11596
+@ScenarioId:701
 Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -49,7 +49,7 @@ Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithium Primary/Metal Batteries
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60017
 
-@TReVorId:11597
+@ScenarioId:702
 Scenario: [60018] Lithium Ion Battery - RU000345
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -85,7 +85,7 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: LITHIUM ION BATTERIES
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60018
 
-@TReVorId:22337
+@ScenarioId:699
 Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -124,7 +124,7 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Given I click continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104222
 
-@TReVorId:22340
+@ScenarioId:700
 Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

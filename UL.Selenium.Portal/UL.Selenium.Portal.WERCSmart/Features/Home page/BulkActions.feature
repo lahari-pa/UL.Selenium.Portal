@@ -20,7 +20,7 @@
 @run_BulkActions
 Feature: BulkActions
 
-@TReVorId:18968
+@ScenarioId:1086
 Scenario: [56223] Bulk Actions - Forward Product Registration navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -30,7 +30,7 @@ Scenario: [56223] Bulk Actions - Forward Product Registration navigation
 	And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
 
 #This test cases uses the ULSC account
-@TReVorId:18970
+@ScenarioId:1087
 Scenario: [56224] Bulk Actions - Sync Products to WERCSLink navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
 	Then the WERCSmart homepage should load
@@ -40,7 +40,7 @@ Scenario: [56224] Bulk Actions - Sync Products to WERCSLink navigation
 	Then I click on the cancel button on the ULSC Sync popup
 	And I should see the Subheading Alerts in the main window
 
-@TReVorId:18972
+@ScenarioId:1088
 Scenario: [56225] Bulk Actions - Accept Documents navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -48,7 +48,7 @@ Scenario: [56225] Bulk Actions - Accept Documents navigation
 	And I click Accept Documents in the Bulk Actions window
 	And I should see the header: Document Acceptance on the Document Acceptance window
 
-@TReVorId:18973
+@ScenarioId:1089
 Scenario: [56227] Bulk Actions  Delete Products navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
@@ -56,7 +56,7 @@ Scenario: [56227] Bulk Actions  Delete Products navigation
 	And I click Delete Products in the Bulk Actions window
 	And I should see the header: Delete Active Products on the Delete Active Product window
 
-@TReVorId:18399
+@ScenarioId:1090
 Scenario: [74634] Forward Product Registration - Only can select product once
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -80,7 +80,7 @@ Scenario: [74634] Forward Product Registration - Only can select product once
 	And I confirm I am unable to select the product with ID saved as: ProductInProgressList74634 under the Select Products tab
 	Given I click the Home navigation icon and accept the alert popup
 
-@TReVorId:18974
+@ScenarioId:1093
 Scenario: [76314] Forward Product - NR should Not Require UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -110,7 +110,6 @@ Scenario: [76314] Forward Product - NR should Not Require UPC
 	Given I navigate to the home page
 
 @tfs_design
-@TReVorId:22232
 Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 	Given I login as the administrator
 	Then The home screen should load
@@ -129,6 +128,7 @@ Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 	Given I close the window that opened
 	Given I navigate to the home page
 
+@ScenarioId:1092
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
 Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
 Given I navigate to the landing page
@@ -192,7 +192,7 @@ And I Confirm the Product shows status: Completed for retailer: saved as TestCas
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\Release Day Tests
 
-@TReVorId:23506
+@ScenarioId:1091
 Scenario: [75129] Forward - Product in Submitted Status
 	Given I retrieve the email address for account: WERCs Product Account and save as: TestCase75129Email
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -233,7 +233,7 @@ Scenario: [75129] Forward - Product in Submitted Status
 # Created by Aaron Caton
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Bulk Actions\Forward
-@TReVorId:23440
+@ScenarioId:1094
 Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Given I generate a random UPC number and save as: UPC78048
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

@@ -11,7 +11,7 @@
 @run_LithiumBatteryTransportInformation
 Feature: Lithium Battery Transport Information
 
-@TReVorId:18966
+@ScenarioId:1069
 Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -75,7 +75,7 @@ Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Batt
 	Then The home screen should load
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65512
 
-@TReVorId:18967
+@ScenarioId:1070
 Scenario: [65516] BCP - Contains Lithium Ion packaged with product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -139,7 +139,7 @@ Scenario: [65516] BCP - Contains Lithium Ion packaged with product - Lithium Bat
 	Then The home screen should load
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65516
 
-@TReVorId:22281
+@ScenarioId:1071
 Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -203,7 +203,7 @@ Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium 
 	Then The home screen should load
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65520
 
-@TReVorId:22282
+@ScenarioId:1072
 Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load

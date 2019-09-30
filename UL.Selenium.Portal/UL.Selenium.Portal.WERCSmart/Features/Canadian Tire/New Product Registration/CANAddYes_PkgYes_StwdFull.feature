@@ -15,7 +15,7 @@
 
 Feature: Account Canada Address(Yes) Package types (Yes) Stewardship (FULL)
 
-@TReVorId:22140
+@ScenarioId:1230
 Scenario: [85329] Account has all Canada data - ALL stewardship, SOLD = US & Canada, PL = NO, Packaging type IS NOT required
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC85329
@@ -40,7 +40,7 @@ Then The alert message is not displayed with text: STOP! When selecting authorin
 Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85329
 
-@TReVorId:22152
+@ScenarioId:1231
 Scenario: [85750] Account has all Canada data - ALL stewardship, SOLD = US & Canada, PL = YES, Packaging type IS required
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC85750
@@ -62,7 +62,7 @@ And I click continue
 And I Confirm This is a required field. error message is shown below the Package Type field
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85750
 
-@TReVorId:22153
+@ScenarioId:1232
 Scenario: [85751] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = NO, Packaging type IS NOT required
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC85750
@@ -89,7 +89,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Registration\4. Account Canada address(Yes), Package type (Yes), Stewardship (FULL)
-@TReVorId:22074
+@ScenarioId:1233
 Scenario: [85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 	#Given [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
 	Given I login into the WERCSmart Portal - Canada has all data account
@@ -115,7 +115,7 @@ Scenario: [85752] Account has all Canada data - ALL stewardship, SOLD = Canada O
 	And I Confirm This is a required field. error message is shown below the Package Type field
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85752
 
-@TReVorId:22160
+@ScenarioId:1234
 Scenario: [85753] Account has all Canada data - ALL stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC85753
@@ -131,7 +131,7 @@ And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not 
 Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85753
 
-@TReVorId:22164
+@ScenarioId:1235
 Scenario: [85754] Account has all Canada data - ALL stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC85754
