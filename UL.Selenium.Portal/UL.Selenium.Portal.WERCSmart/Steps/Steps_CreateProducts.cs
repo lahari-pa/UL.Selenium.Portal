@@ -183,7 +183,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (Context.Contains($"Kit_{savedAs}"))
 			{
 				// search for UPC and save to context as UPC__{savedAs}
-				var id = Context.GetFromContext($"Kit_{savedAs}");
+				//var id = Context.GetFromContext($"Kit_{savedAs}");
+				// search
+				new StepsProductGrid().GivenISearchForTheProductSavedAs(savedAs);
+				// row action - view upcs
+				new StepsProductGrid().WhenIClickRowActionsForTheFirstProductReturned();
+				new StepsProductGrid().ClickRowAction("View UPCs");
+				new GlobalSteps().SwitchToTabWithTitle("View UPCs");
+				// save upc
+				new Steps_ViewUpcs().SaveFirstUpcToContext($"UPC_{savedAs}");
+				// switch tab
+				new GlobalSteps().ThenCloseTheWindowThatOpened();
 				return;
 			}
 			TestReport.UseSubSteps = true;
@@ -214,6 +224,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
 			//And I In the shared step below use any of the kit product types -these are* Cosmetic Products in a kit(RU000777)*Hair Care kit(RU000723)*Hair Color Kit(RU000724)*Emergency Road kit(RU000718)*Automotive Care Products(RU000124)*Personal Care kit(RU001034)
 			//And I call Shared Step 57500(The Product - Enter name, select product type - Continue - Happy Path): (.*)
+
+			// add brand
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Emergency Road kit", $"Kit Product {savedAs}");
 			//And I call Shared Step 77872(Additional Product Information - Kit flow - US only, Direct Ship(yes), Continue)
 			newProductSteps.SaveProductInformation($"Kit_{savedAs}");
