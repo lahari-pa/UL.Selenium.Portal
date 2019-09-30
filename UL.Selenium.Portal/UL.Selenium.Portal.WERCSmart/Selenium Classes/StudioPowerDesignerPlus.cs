@@ -757,6 +757,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool IsSectionsTabOpen()
+		{
+			IWebElement tabElement = this.containerElement.FindElement(By.Id("sectionPanel"));
+			if (tabElement.GetAttribute("class").Contains("open"))
+			{
+				Report.Info("The Sections Tab was open");
+				return true;
+			}
+			Report.Info("The Sections Tab was not open");
+			return false;
+			
+		}
+		
 		public bool ClickSectionsTab()
 		{
 			try
@@ -764,7 +777,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement sectionsTabButton = this.containerElement.FindElement(By.XPath("//div[@class='panel-title' and text()='Sections']"), 2);
 				return sectionsTabButton.TryClick();
 			}
-			catch(Exception)
+			catch (Exception)
 			{
 				Report.Failure("The sections tab button could not found");
 				return false;

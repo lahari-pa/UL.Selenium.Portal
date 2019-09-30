@@ -1246,13 +1246,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.SelectRandomFormat(), "Failed to select ranodm format",
 				"Selected random format");
 		}
-		[StepDefinition(@"In Power Designer I click on the 'Sections' side tab")]
+		[StepDefinition(@"In Power Designer I click on the 'Sections' side tab if it is closed")]
 		public void InPowerDesignerIClickOnTheSectionsSideTab()
 		{
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
+			if(selStudioPowerDesignerPlus.IsSectionsTabOpen())
+			{
+				Report.Success("The sections tab was already Open");
+				return;
+			}
 			Report.IsTrue(selStudioPowerDesignerPlus.ClickSectionsTab(), "Failed to click on Sections Tab", "Succesfully clicked on the sections tab");
+			Report.IsTrue(selStudioPowerDesignerPlus.IsSectionsTabOpen(), "The sections tab was not opened", "The sections tab was opened");	
+								
+						
 		}
+
+		
 	}
 }
