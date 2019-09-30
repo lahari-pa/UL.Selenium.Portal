@@ -1366,7 +1366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			//And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
-			//	sharedSteps.SharedRegulatoryInformation2_Microbeads_No();
+			sharedSteps.SharedRegulatoryInformation2_Microbeads_No();
 			//And I should see the Additional Documents to Provide Page
 			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
 			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate(Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
@@ -1410,6 +1410,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 			//And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80821)
 			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
+			//And In Power Designer I click on the 'Sections' side tab
+			studioSteps.InPowerDesignerIClickOnTheSectionsSideTab();
 			//And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 			studioSteps.GivenInPowerDesignerIClickOnSection("left", "[SECT0077] Walmart Transportation Information");
 			//And In Power Designer I double click on category: Water Soluble?

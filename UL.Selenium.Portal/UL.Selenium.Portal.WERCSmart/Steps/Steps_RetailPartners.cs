@@ -877,7 +877,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (cancelOrSave == "cancel")
 			{
 				Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
-					"Successfully clicked cancel");
+					"Successfully clicked cancel",false,false);
 			}
 			else
 			{

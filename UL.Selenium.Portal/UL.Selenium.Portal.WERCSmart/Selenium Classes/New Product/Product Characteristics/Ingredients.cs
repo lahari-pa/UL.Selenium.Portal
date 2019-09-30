@@ -885,5 +885,53 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					" Public name enabled: " + this.PublicNameEnabled + " Selected: " + this.Selected.ToString();
 			}
 		}
+
+		public bool IngredientMatchesFirstOption(string inputOption)
+		{
+			IWebElement resultMatch;
+			IList < IWebElement > results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+			if (!results.Any())
+			{
+				Report.Info("No results were returned on search");
+				return false;
+			}
+			int j = 0;
+			bool resultFound = false;
+			while (!resultFound && j < 10)
+			{
+				resultFound = results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) != null;
+				Delay.Seconds(1);
+				results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+				j++;
+			}
+			if (!resultFound)
+			{
+				return false;
+			}
+			// Find every result row returned which match the CAS we are looking for, exluding the 'loading' row which appears at the bottom
+			IEnumerable<IWebElement> matchingCasResults = results.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='component-name']"), 2).Text.Trim().StartsWith(inputOption.Trim()));
+			if (!matchingCasResults.Any())
+			{
+				return false;
+			}
+			resultMatch = matchingCasResults.FirstOrDefault();
+			string firstOption = resultMatch.FindElement(By.XPath(".//span[@class='component-name']"), 2)?.Text;
+			Report.Info($"First option was {firstOption}");
+			Report.Info($"Input option was {inputOption}");
+			
+			if(firstOption==inputOption)
+			{
+				Report.Success("The first option matched the input option");
+				return true;
+			}
+			else
+			{
+				Report.Failure("The first option did not match the input option");
+				return false;
+			}
+
+			
+
+		}
 	}
 }

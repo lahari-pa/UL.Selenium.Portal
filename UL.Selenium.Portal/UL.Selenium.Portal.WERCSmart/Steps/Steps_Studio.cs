@@ -202,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var thisStudioPowerDesignerPlusDesignMode =
 					new StudioPowerDesignerPlusDesignMode();
 				thisStudioPowerDesignerPlusDesignMode.DoubleClickDataCode(thisRow["datacode"]);
-				Delay.Seconds(3);
+				Delay.Seconds(15);
 				var thisGraphicEditor = new GraphicEditor();
 				Report.IsTrue(thisGraphicEditor.Wait_for_load(90), "Graphic editor has not loaded",
 					"Graphic editor has loaded.");
@@ -273,6 +273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InApplyRulesPageIClickOnTheFollowingApplyRadioButton(string button)
 		{
 			var thisApplyRulesPage = new ApplyRulesPage();
+			Delay.Seconds(3);
 			Report.IsTrue(thisApplyRulesPage.SetApplyOption(button), "Failed to click " + button + " button",
 				"Clicked " + button);
 		}
@@ -1244,6 +1245,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Power designer plus has loaded");
 			Report.IsTrue(thisPowerDesignerPlus.SelectRandomFormat(), "Failed to select ranodm format",
 				"Selected random format");
+		}
+		[StepDefinition(@"In Power Designer I click on the 'Sections' side tab")]
+		public void InPowerDesignerIClickOnTheSectionsSideTab()
+		{
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
+				"Studio power designer is open");
+			Report.IsTrue(selStudioPowerDesignerPlus.ClickSectionsTab(), "Failed to click on Sections Tab", "Succesfully clicked on the sections tab");
 		}
 	}
 }

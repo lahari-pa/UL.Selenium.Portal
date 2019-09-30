@@ -271,7 +271,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				newProductIngredients.ClickSelectIngredient(row["Name"]);
 			}
 			List<Ingredients.Ingredient> ingredients = newProductIngredients.GetIngredients();
-			Report.IsTrue(ingredients.Where(x => ingredientsToAction.Contains(x.ComponentName)).All(x => x.Selected != actionSelect), $"Not all of the ingredients were successfully {doSelect}ed", $"All of the listed ingredients were successfully {doSelect}ed");
+			Report.IsTrue(ingredients.Where(x => ingredientsToAction.Contains(x.ComponentName)).All(x => x.Selected == actionSelect), $"Not all of the ingredients were successfully {doSelect}ed", $"All of the listed ingredients were successfully {doSelect}ed");
 		}
 
 		[StepDefinition("I confirm the following ingredients are (selected|unselected):")]
