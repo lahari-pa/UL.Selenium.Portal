@@ -11,7 +11,7 @@ Given I save the current emails in the inbox for address saved as: ProductAccoun
 	Given I log in with the account saved in TReVor as: ProductAccount
 
 
-@TReVorId:22221
+@ScenarioId:475
 Scenario: [56942] Data Consent Tiers - Walmart
 Given I click on My Account
 Then I save the administrator Company Name as: ProductAccountCompany

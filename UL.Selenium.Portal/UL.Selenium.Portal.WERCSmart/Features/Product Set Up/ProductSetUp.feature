@@ -14,7 +14,7 @@
 @run_ProductSetUp
 Feature:  Product set up and process to specific statuses (Suite ID: 75359)
 
-@TReVorId:20244
+@ScenarioId:1074
 Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -63,7 +63,7 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80089)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80089 and its status is: Completed
 
-@TReVorId:20280
+@ScenarioId:1073
 Scenario: [75410] Product from Completed status to Recertification
 	Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410
 	#Scenario: Test
@@ -116,7 +116,6 @@ Scenario: [75410] Product from Completed status to Recertification
 		| saved as TestCase75410 | false  | Recertification of Product by WERCSmart Customer |
 	And I Close the Product Recertification History pop up
 
-@TReVorId:20299
 Scenario: [84507] Recertification > Process recertification > Process multiple products
 	Given I create a product with name: 8450712 and take to completed using Test Case 84108 and save as: TestCase845072
 	Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845072

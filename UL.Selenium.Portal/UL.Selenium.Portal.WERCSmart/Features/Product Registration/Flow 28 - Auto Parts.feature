@@ -14,7 +14,7 @@
 Feature: [64733] Flow 28 - Auto Parts
 
 
-@TReVorId:11619
+@ScenarioId:711
 Scenario: [60673] Gasoline Container, Portable - RU001419
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -15,7 +15,7 @@
 Feature: Account Canada Address(No), Package Type (No), Stewardship (FULL)
 
 
-@TReVorId:22186
+@ScenarioId:1263
 Scenario: [85847] Account Full Stewardship only, SOLD = US Only, PL = YES, Packaging type IS NOT required
 Given I log in with the account saved in TReVor as: fullstwrdshiponly
 Given I generate a random UPC number and save as: UPC85847
@@ -32,7 +32,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85847
 
 
-@TReVorId:22188
+@ScenarioId:1264
 Scenario: [85848] Account Full Stewardship only,  SOLD = US Only, PL = NO, Packaging type IS NOT required
 Given I log in with the account saved in TReVor as: fullstwrdshiponly
 Given I generate a random UPC number and save as: UPC85848
@@ -49,7 +49,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85848
 
 
-@TReVorId:22190
+@ScenarioId:1265
 Scenario: [85849] Account Full Stewardship only, SOLD = Canada Only, PL = YES, Packaging type IS required
 Given I log in with the account saved in TReVor as: fullstwrdshiponly
 Given I generate a random UPC number and save as: UPC85849
@@ -71,7 +71,7 @@ And I Confirm This is a required field. error message is shown below the Package
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85849
 
 
-@TReVorId:22192
+@ScenarioId:1266
 Scenario: [85850] Account Full Stewardship only, SOLD = Canada Only, PL = NO, Packaging type IS NOT required
 Given I log in with the account saved in TReVor as: fullstwrdshiponly
 Given I generate a random UPC number and save as: UPC85850
@@ -96,7 +96,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@TReVorId:22194
+@ScenarioId:1267
 Scenario: [85851] Account No Canada address - Package and stewardship, SOLD = US and Canada, PL = No, Packaging is NOT required
 Given I log in with the account saved in TReVor as: fullstwrdshiponly
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -121,7 +121,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85851
 
 
-@TReVorId:22196
+@ScenarioId:1268
 Scenario: [85852] Account Full Stewardship only, SOLD US and Canada, PL = Yes, Packaging is required
 Given I log in with the account saved in TReVor as: fullstwrdshiponly
 Given I generate a random UPC number and save as: UPC85852

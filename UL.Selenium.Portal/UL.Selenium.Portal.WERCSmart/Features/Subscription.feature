@@ -19,7 +19,6 @@
 
 Feature: Subscription
 
-@TReVorId:19117
 Scenario: [63297] Add subscription to a new supplier through data entry
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC63297User with the following parameters:
@@ -295,7 +294,7 @@ Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC63297User
 
 
-@TReVorId:19118
+@ScenarioId:1079
 Scenario: [59245] Add subscription to a new supplier from My account
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC59245User with the following parameters:
@@ -442,7 +441,6 @@ Then In the My Account page I navigate to the Order History page
 Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC59245User
 
-@TReVorId:19119
 Scenario: [67822] New subscription to a new supplier from My account - Visual Checks
 #This test requires a new master account in  wercsmart without any subscription
 Given I go to the WERCSmart Log in
@@ -584,7 +582,7 @@ Then I should see Estimated Annual Cost per Product of: $0.00
 Then I should see Proceed button disabled
 
 
-@TReVorId:19120
+@ScenarioId:1084
 Scenario: [79577] PayPal flow through My Account
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -610,7 +608,7 @@ Then In the Purchase Summary screen I confirm the Prices and Payment section con
 Then In the Purchase Summary screen I confirm the following statement is shown: By clicking "Confirm Order" you will be enrolled in our subscription plan.
 
 
-@TReVorId:22351
+@ScenarioId:1078
 Scenario: [105063] Upgrade Subscription Message
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC105063User with the following parameters:
@@ -694,7 +692,7 @@ Then In the Thank You screen I check the Header is correct
 Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
 
 
-@TReVorId:22352
+@ScenarioId:1080
 Scenario: [62727] Upgrade Subscription through My Account 
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC62727User with the following parameters:
@@ -790,7 +788,7 @@ Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC62727User
 
 
-@TReVorId:22353
+@ScenarioId:1081
 Scenario: [63224] Upgrade subscription through data entry 
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC63224User with the following parameters:
@@ -885,7 +883,7 @@ Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: TC63224User
 
 
-@TReVorId:22354
+@ScenarioId:1082
 Scenario: [73388] Grace period through new account 
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC73388User with the following parameters:
@@ -935,7 +933,7 @@ Then In the Subscription Information screen I confirm status is: ACTIVE
 Then In the Subscription Information screen I confirm grace period is: None
 
 
-@TReVorId:22355
+@ScenarioId:1083
 Scenario: [73394] Grace period through My Account 
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC73394User with the following parameters:
@@ -995,7 +993,7 @@ Then In the Subscription Information screen I confirm status is: ACTIVE
 Then In the Subscription Information screen I confirm grace period is: None
 
 
-@TReVorId:22394
+@ScenarioId:1085
 Scenario: [94466] Subscription - Retailer count in messages
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC94466User with the following parameters:
