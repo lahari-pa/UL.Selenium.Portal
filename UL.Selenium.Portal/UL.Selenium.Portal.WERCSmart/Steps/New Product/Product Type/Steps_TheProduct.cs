@@ -1,6 +1,7 @@
 ﻿using System;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
+using NUnit.Framework.Internal;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
@@ -36,6 +37,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 			Report.IsTrue(this.TheProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
 			this.TheProduct.ProductLineOrBrand = lineOrBrand;
 			Report.IsTrue(this.TheProduct.ProductLineOrBrand == lineOrBrand, "Failed to Set Product Line or Brand", "Set Product Line or Brand");
+		}
+
+		[StepDefinition(@"I set Product Name to: (.*) Type of Product to: (.*) and Product Line Or Brand to: (.*)")]
+		public void SetProductNameProductTypeProductLine(string name, string type, string brand)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Setting Product Name to: " + name);
+			this.SetProductNameTo(name);
+			TestReport.StartStep("Setting Product Line or Brand to: " + brand);
+			this.SetProductLineOrBrand(brand);
+			TestReport.StartStep("Setting Type of Product to: " + type);
+			this.SetTypeOfProductTo(type);
+
 		}
 	}
 }
