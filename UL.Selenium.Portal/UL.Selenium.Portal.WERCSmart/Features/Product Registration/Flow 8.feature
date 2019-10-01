@@ -657,6 +657,9 @@ Scenario: [Jacob] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC U
 		| Amazon   |
 	Then I click Done on Select Retailers window
 	Then I click continue
+	Given I click Sample File link and verify the Upload UPC form and save it as testJacob using:
+		| UPC | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI | HD: OMSID | CT: Item Number |
+		| UPC | 1        | 1    | 1                  | 1               | 1               | 1               | 1               | 1        | 1         | 1               |
 	Given I create the Excel file: TestJacob using:
 		| UPC         | Quantity | Size | Net Explosive Mass | US: Part Number | GP: Part Number | SP:Part Number | TG: DPCI    | HD: OMSID | CT: Item Number    |
 		| UPC_Jacob_1 | 1        | 11   | N/A                | 1001            | 1111            | A0001          | 111-22-0001 | 100000001 | 123-1234, 123-1230 |

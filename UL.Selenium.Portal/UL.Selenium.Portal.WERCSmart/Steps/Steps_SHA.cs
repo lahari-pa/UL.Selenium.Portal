@@ -2290,7 +2290,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			var upcNumber = displayedUpcs.FirstOrDefault(x => !x.UPCNumber.EndsWith("*"))?.UPCNumber;
-			if(upcNumber== null)
+			if (upcNumber == null)
 			{
 				if (reportFailure)
 				{
@@ -2372,7 +2372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		// I click Sample File link and verify the Upload UPC form
-		[StepDefinition(@"I click Sample File link and verify the Upload UPC form and save it as (.*) with data:")]
+		[StepDefinition(@"I click Sample File link and verify the Upload UPC form and save it as (.*)")]
 		public void ClickSampleFileAndVerifyTheUploadUPCForm(string savedAs, Table table)
 		{
 			var upc = new UPC();
