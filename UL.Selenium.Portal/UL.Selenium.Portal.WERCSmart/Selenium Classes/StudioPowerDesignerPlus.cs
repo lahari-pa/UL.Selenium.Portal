@@ -757,6 +757,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		//public bool IsSectionActive(string section)
+		//{
+		//	IWebElement tabElement = this.containerElement.FindElement(By.Id(section));
+		//	if (tabElement.GetAttribute("class").Contains("selected"))
+		//	{
+		//		Report.Info("The Section was Active");
+		//		return true;
+		//	}
+		//	Report.Info("The Section was not Active");
+		//	return false;
+		//}
+		public bool IsSectionActive(string section)
+		{
+			
+			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
+			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
+			IWebElement parentElement = matchingSection.FindElement(By.XPath("//parent::li"), 2);
+
+			if (parentElement.GetAttribute("class").Contains("selected"))
+			{
+				Report.Info("The Section was Active");
+				return true;
+			}
+			Report.Info("The Section was not Active");
+			return false;
+		}
+
 		public bool IsSectionsTabOpen()
 		{
 			IWebElement tabElement = this.containerElement.FindElement(By.Id("sectionPanel"));

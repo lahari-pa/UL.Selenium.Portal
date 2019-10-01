@@ -924,12 +924,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInPowerDesignerIClickOnSection(string click, string section)
 		{
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
-			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
-				"Studio power designer is open");
-			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection(section, click),
-				"Failed to " + click + " click section: " + section,
-				"Successfully " + click + " clicked " + section);
-			Delay.Seconds(3);
+			if(click=="right"||!selStudioPowerDesignerPlus.IsSectionActive(section))
+			{
+				Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
+								"Studio power designer is open");
+				Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection(section, click),
+					"Failed to " + click + " click section: " + section,
+					"Successfully " + click + " clicked " + section);
+				Delay.Seconds(3);
+				return;
+			}
+			Report.Success("The Section was already active");
+			
 
 		}
 
