@@ -364,9 +364,11 @@
     </None>
     <None Include="Features\Home page\Actions.feature">
     </None>
+    <None Include="Features\Home page\Alerts.feature" />
     <None Include="Features\Home page\BulkActions.feature">
     </None>
-    <None Include="Features\HomePage.feature">
+    <None Include="Features\Home page\Filters.feature" />
+    <None Include="Features\Home page\HomePage.feature">
     </None>
     <None Include="Features\Ingredients.feature">
     </None>
