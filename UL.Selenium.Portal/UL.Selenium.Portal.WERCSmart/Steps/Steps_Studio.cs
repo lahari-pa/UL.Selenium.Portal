@@ -936,7 +936,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Success("The Section was already active");
 			
-
 		}
 
 		[StepDefinition(@"In Power Designer I double click on category: (.*)")]
@@ -1083,6 +1082,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
+			var selStepsStudio = new Steps_Studio();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 		}
 
 		[StepDefinition(@"I check whether the current environment is Staging or Production and if it is I skip the next three steps")]

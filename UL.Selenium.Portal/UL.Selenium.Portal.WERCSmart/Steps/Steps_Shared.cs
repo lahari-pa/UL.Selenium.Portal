@@ -4320,6 +4320,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
 			Delay.Seconds(3);
+			var selStepsStudio = new Steps_Studio();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+
 		}
 
 		[StepDefinition(@"I call Shared Step 78801 \(Additional Documents to Provide - VOC and Product Label\)")]
@@ -5207,6 +5211,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.IConfirmTheSelectedSubformatInThePdPlusPopupIs("CKLT / Checklist");
 			TestReport.StartStep("I click continue");
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
+			Delay.Seconds(3);
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left","[SECT0755] Chemical Product Checklist");
 		}
 
 		[StepDefinition(
