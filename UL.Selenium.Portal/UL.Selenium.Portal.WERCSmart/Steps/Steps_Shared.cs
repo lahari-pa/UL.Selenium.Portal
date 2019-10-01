@@ -24,7 +24,7 @@ using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
-	[Binding]
+	[Binding, Scope(Tag = "Shared")]
 	public class Steps_Shared
 	{
 		// For additional details on SpecFlow step definitions see http://go.specflow.org/doc-stepdef
@@ -4320,6 +4320,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
 			Delay.Seconds(3);
+
 		}
 
 		[StepDefinition(@"I call Shared Step 78801 \(Additional Documents to Provide - VOC and Product Label\)")]
