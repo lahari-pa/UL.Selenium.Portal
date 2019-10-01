@@ -9162,5 +9162,72 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}			
 
 		}
+
+		[StepDefinition(
+			@"I call Shared Step 89286 - Additional Product Information - US and Canada - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP\(YES\), GNFR \(NO\), Continue")]
+		public void
+			USandCanadaPLPYes()
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			var MyNewProduct = new NewProduct();
+			//And I Un-check the United States check box for the "Select countries the product may be sold in" question
+			//List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns",
+				"No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+
+		}
+
+		[StepDefinition(
+			@"I call Shared Step - Additional Product Information - canada only - With marketed for use by a Child - Direct Ship - Private Label questions only")]
+		public void
+			CanadaOnlyNoPL()
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			List<string> countrySold = myNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				myNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			if (myNewProduct.SectionExists(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo(
+					"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)",
+					"No");
+			}
+
+			if (myNewProduct.SectionExists("Product is shipped directly by supplier to the consumer."))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.",
+					"No");
+			}
+
+			if (myNewProduct.SectionExists("Product is a Retailer's Private Label or Brand"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			}
+
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
 	}
 }
