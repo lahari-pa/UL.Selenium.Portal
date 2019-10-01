@@ -634,7 +634,7 @@ Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Single Purpose Cleaner
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase75840
 
-Scenario: [Jacob] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC Upload
+Scenario: [110324] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC Upload
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Then I generate 7 random UPC numbers and save as: UPC_Jacob
