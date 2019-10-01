@@ -737,6 +737,8 @@ Given I navigate to the home page
 #
 #Given I delete all products with UPC Number: saved as UPC74272
 
+Given I generate a random UPC number and save as: UPC74272
+
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
@@ -753,9 +755,13 @@ Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65
 
 Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call Shared Step 74201 (Select Retailers - CVS)
+#Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 10
+#Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 10
+
+And I call Shared Step  (Select Retailers CVS and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+
+And I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no retailer data needed) - Continue for UPC: saved as UPC74272, container type: Plastic Container and size: 40
 
 Then I should not see the CVS RCL Page
 

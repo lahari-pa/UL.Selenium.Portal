@@ -196,6 +196,7 @@ Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM
 	#And I Confirm that your product is shown in the Recertification status with the red font no longer shown
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77858 and its status is: Recertification
 	And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase77858
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase77858)
 	And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
 	And I call Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT
 	And In the Product Attribute Screen confirm that no records are found
