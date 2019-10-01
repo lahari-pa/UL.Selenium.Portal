@@ -9164,6 +9164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void
 			USandCanadaPLPYes()
 		{
+			TestReport.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
@@ -9192,6 +9193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void
 			CanadaOnlyNoPL()
 		{
+			TestReport.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var myNewProduct = new NewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
