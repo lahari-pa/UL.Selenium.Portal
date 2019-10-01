@@ -1,3 +1,4 @@
+@Shared
 @RetailPartners
 @Homepage
 @LandingPage

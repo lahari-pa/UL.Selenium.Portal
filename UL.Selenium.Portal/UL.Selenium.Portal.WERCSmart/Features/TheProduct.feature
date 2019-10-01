@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
