@@ -958,7 +958,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I select one of the following retailers that is not in the list saved as: (.*) from the table: and saved the chosen retailer as: (.*)")]
+		[StepDefinition(@"I select one of the following retailers from the table: that is also not in the list saved as: (.*) and save the chosen retailer as: (.*)")]
 		public void ISelectOneOfTheFollowingRetailersThatIsNotX(string existingRetailer,string retailerSavedAs, Table table)
 		{
 			foreach (var row in table.Rows)
