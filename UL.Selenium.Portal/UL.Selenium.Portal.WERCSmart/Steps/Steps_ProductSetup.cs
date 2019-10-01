@@ -1366,7 +1366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			//And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
-			//	sharedSteps.SharedRegulatoryInformation2_Microbeads_No();
+			sharedSteps.SharedRegulatoryInformation2_Microbeads_No();
 			//And I should see the Additional Documents to Provide Page
 			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
 			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate(Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
@@ -1410,6 +1410,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 			//And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80821)
 			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
+			//And In Power Designer I click on the 'Sections' side tab
+			studioSteps.InPowerDesignerIClickOnTheSectionsSideTab();
 			//And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 			studioSteps.GivenInPowerDesignerIClickOnSection("left", "[SECT0077] Walmart Transportation Information");
 			//And In Power Designer I double click on category: Water Soluble?
@@ -1484,7 +1486,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			//And I call Shared Step 67823(Login to WERCSmart - Products Automation Account)
-			sharedSteps.Shared68210_LoginToWercSmart_PremiumAccount();
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
 
 			// Generate UPC number and delete duplicates
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC77862");
@@ -2690,7 +2692,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			TestReport.StartStep("I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk");
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
-					
+
 			TestReport.StartStep("I save the product Information as: TestCase87685");
 			stepsNewProduct.SaveProductInformation("TestCase87685");
 
@@ -2751,7 +2753,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsSHA.ConfirmCaseUpc("not see", "saved as UPC87685");
 			TestReport.StartStep("I wait 10 seconds");
 			Delay.Seconds(10);
-			TestReport.StartStep("In the list of UPCs I should see case pack indicatior for UPC: saved as UPC876851");			
+			TestReport.StartStep("In the list of UPCs I should see case pack indicatior for UPC: saved as UPC876851");
 			stepsSHA.ConfirmCaseUpc("see", "saved as UPC876851");
 			TestReport.StartStep("I close the window saved as: SHAManagerProductUPC");
 			globalSteps.SwitchBackToMainWindow("SHAManagerProductUPC");
@@ -2836,7 +2838,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Canadian Tire");
 			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
-			sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as "+upc, "Metal Container","5");
+			sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as " + upc, "Metal Container", "5");
 			sharedSteps.ThenICallSharedStep78884RegulatoryDocumentsToProvide_CanadaOnly_RequestAuthoringUploadLabel_Continue();
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
@@ -3313,7 +3315,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk");
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk");
 
-			TestReport.StartStep("I save the product Information as: "+ savedAs);
+			TestReport.StartStep("I save the product Information as: " + savedAs);
 			stepsNewProduct.SaveProductInformation(savedAs);
 
 			TestReport.StartStep("I call Shared Step 26897 (Product Characteristics - Solid only available - continue)");
@@ -3337,7 +3339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//stepsSharedUPC.UPCCaseInformation("876851", "Paper bag", "2", "4", "4A: steel box");
 
 			TestReport.StartStep("I call Shared Step 87829 (UPC - Add Case UPC - All Data > Continue) for UPC: saved as UPC (.*), container type: (.*) and size: (.*) and Quantity: (.*) and Individual Upc Case Pack saved As: (.*) and Transportation option: (.*)");
-			stepsSharedUPC.UPCCaseAddInformation("876851", "Paper bag", "2", "4","", "<first>");
+			stepsSharedUPC.UPCCaseAddInformation("876851", "Paper bag", "2", "4", "", "<first>");
 
 
 			TestReport.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");

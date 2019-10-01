@@ -30,6 +30,7 @@ Feature: Release Day
 
 @singlerun
 @ScenarioId:1160
+@ScenarioId:1160
 Scenario: [78414] Submit Product, Reject from Submitted in SHA, Resubmit from Portal.  SHA shows in Submitted status
 Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase75142)

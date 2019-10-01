@@ -962,7 +962,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				// Confirm match
 				string upc = Context.GetFromContext("UPC" + savedAs).ToString();
-				Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber == upc),
+				Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber.Contains(upc)),
 					$@"UPC number ""{upc}"" did not appear on the Product UPC list! UPC numbers were: {string.Join(", ", displayedUpcs)}",
 					$@"UPC number: ""{upc}"" appeared on the Product UPC list as expected");
 			}
