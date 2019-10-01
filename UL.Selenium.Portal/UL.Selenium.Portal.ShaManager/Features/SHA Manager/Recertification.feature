@@ -1,3 +1,4 @@
+@Shared
 @wercsmart
 @SHA
 @NewProduct
