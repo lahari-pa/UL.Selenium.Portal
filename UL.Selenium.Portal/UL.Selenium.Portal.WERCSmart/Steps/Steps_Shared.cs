@@ -5213,7 +5213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
 			Delay.Seconds(3);
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left","[SECT0755] Chemical Product Checklist");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 		}
 
 		[StepDefinition(
@@ -7491,8 +7491,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 96169 - SHA Manager - Select Product - Actions - Advanced Reporting for saved as: (.*)")]
-		public void ICallSharedStep96169SHAManager_SelectProduct_Actions_AdvancedReporting(string savedAs)
+			@"I call Shared Step 96169 - SHA Manager - Select Product - Actions - (.*) for saved as: (.*)")]
+		public void ICallSharedStep96169SHAManager_SelectProduct_Actions(string reportType, string savedAs)
 		{
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Select product");
@@ -7507,7 +7507,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(myStudioShaManager.SelectProductByID(id), "Failed to select product with id: " + id,
 				"Selected product with id: " + id);
 			TestReport.StartStep("Click Advanced Reporting");
-			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
+			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption(reportType),
 				"Failed to click document management", "Clicked document management");
 
 		}
@@ -8609,7 +8609,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
-				
+
 
 		[StepDefinition(@"I call Shared Step 57264 \(Go To Retail Partners - Select O'Reilly\)")]
 		public void Shared57264_GoToRetailPartners_SelectOReilly()
@@ -8822,8 +8822,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click Continue");
 			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
 
-		}		
-						
+		}
+
 
 		[StepDefinition(
 			@"I call Shared Step 89286 - Additional Product Information - US and Canada - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP\(YES\), GNFR \(NO\), Continue")]
