@@ -7484,9 +7484,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 78879 - Additional Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP \(NO\), GNFR \(NO\), Continue")]
+			@"I call Shared Step 96169 - SHA Manager - Select Product - Actions - Advanced Reporting for saved as: (.*)")]
+		public void ICallSharedStep96169SHAManager_SelectProduct_Actions_AdvancedReporting(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Select product");
+			var myStudioShaManager = new StudioSHAManager();
+			if (!myStudioShaManager.Wait_for_load(30))
+			{
+				Report.Error("Studio SHA Manager is not showing");
+			}
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			Report.IsTrue(myStudioShaManager.SelectProductByID(id), "Failed to select product with id: " + id,
+				"Selected product with id: " + id);
+			TestReport.StartStep("Click Advanced Reporting");
+			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
+				"Failed to click document management", "Clicked document management");
+
+		}
+
+		[StepDefinition(
+					@"I call Shared Step 78879 - Additional Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP \(NO\), GNFR \(NO\), Continue")]
 		public void
-			ThenICallSharedStep78879AdditionalProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue()
+					ThenICallSharedStep78879AdditionalProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue()
 		{
 			var MyNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -8946,7 +8968,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			List<string> UpcNumbers = utils.Excel_GetColumn(1); //includes the header (so start search at 1 not 0)
 
-			for (int i=1; i<UpcNumbers.Count; i++)
+			for (int i = 1; i < UpcNumbers.Count; i++)
 			{
 				TestReport.StartStep($"Searching SHA for a upc found in the duplicate UPC spread sheet. Attempt: {i}");
 				string DupeUPCNumberCurrent = UpcNumbers[i];
@@ -8965,7 +8987,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var productInfo = new ProductInformation { Id = productIDFromSHA };
 					Context.AddToContext($"ProductID{savedAs}", productInfo);
 
-					
+
 					string productRetailerInitials = productsShown[0].Clients;
 					string productRetailerInitialsFirst = productRetailerInitials.Split(',')[0];
 					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == productRetailerInitialsFirst).Key;
@@ -9113,7 +9135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					if (productID == fileProductID)
 					{
 						Report.Info($"The Product Name in the File is: {rowContents[1]}");
-						Report.IsTrue(shaProductName==rowContents[1],"The product names did not match","The product names matched!");
+						Report.IsTrue(shaProductName == rowContents[1], "The product names did not match", "The product names matched!");
 
 						DateTime lastSubDate;
 						DateTime.TryParse(rowContents[3], out lastSubDate);
@@ -9125,13 +9147,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Info($"The Original Creation date in the File is: {rowContents[4]}");
 						string fileOrgDatestr = orginalCreationDate.ToString();
 						string shaOrgDatestr = shaOriginalSubmissionDate.ToString();
-						string fileOrgDateEdited=fileOrgDatestr.Replace("12:00:00 AM","").Trim();
+						string fileOrgDateEdited = fileOrgDatestr.Replace("12:00:00 AM", "").Trim();
 						Report.IsTrue(shaOrgDatestr.Contains(fileOrgDateEdited), "The Origninal Submission Date in SHA did not match the Original Creation Date in the file", "The Original Submission Date in SHA did match the Original Creation Date in the file");
 						Report.Info($"The Retailers Associated in the File is: {rowContents[5]}");
 						Report.IsTrue(shaClients.Contains(rowContents[5]), "The Clients in SHA did not match the Retailers associated in the file", "The Clients in SHA matched the Retailers associated in the file");
 
-						
-						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");						
+
+						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");
 						this.Shared75309_SHA_SelectProduct_UpcList(productInfoSavedAs);
 						var studioSHAManger = new StudioSHAManager();
 						var shaSteps = new Steps_SHA();
@@ -9155,7 +9177,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure($"The product with ID: {fileProductID} could not be found in the spreadsheet");
 				return;
 
-			}			
+			}
 
 		}
 
