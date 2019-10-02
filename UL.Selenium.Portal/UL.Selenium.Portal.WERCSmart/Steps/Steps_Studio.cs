@@ -924,13 +924,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInPowerDesignerIClickOnSection(string click, string section)
 		{
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
-			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
-				"Studio power designer is open");
-			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection(section, click),
-				"Failed to " + click + " click section: " + section,
-				"Successfully " + click + " clicked " + section);
-			Delay.Seconds(3);
-
+			if(click=="right"||!selStudioPowerDesignerPlus.IsSectionActive(section))
+			{
+				Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
+								"Studio power designer is open");
+				Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection(section, click),
+					"Failed to " + click + " click section: " + section,
+					"Successfully " + click + " clicked " + section);
+				Delay.Seconds(3);
+				return;
+			}
+			Report.Success("The Section was already active");
+			
 		}
 
 		[StepDefinition(@"In Power Designer I double click on category: (.*)")]
@@ -1077,6 +1082,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
+			var selStepsStudio = new Steps_Studio();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 		}
 
 		[StepDefinition(@"I check whether the current environment is Staging or Production and if it is I skip the next three steps")]
@@ -1246,13 +1254,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.SelectRandomFormat(), "Failed to select ranodm format",
 				"Selected random format");
 		}
-		[StepDefinition(@"In Power Designer I click on the 'Sections' side tab")]
+		[StepDefinition(@"In Power Designer I click on the 'Sections' side tab if it is closed")]
 		public void InPowerDesignerIClickOnTheSectionsSideTab()
 		{
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
+			if(selStudioPowerDesignerPlus.IsSectionsTabOpen())
+			{
+				Report.Success("The sections tab was already Open");
+				return;
+			}
 			Report.IsTrue(selStudioPowerDesignerPlus.ClickSectionsTab(), "Failed to click on Sections Tab", "Succesfully clicked on the sections tab");
+			Report.IsTrue(selStudioPowerDesignerPlus.IsSectionsTabOpen(), "The sections tab was not opened", "The sections tab was opened");	
+								
+						
 		}
+
+		
 	}
 }
