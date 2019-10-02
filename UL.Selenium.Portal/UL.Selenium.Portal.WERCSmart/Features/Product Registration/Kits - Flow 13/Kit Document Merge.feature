@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -18,7 +18,7 @@
 Feature: Kit Document Merge
 
 @73949
-@TReVorId:22067
+@ScenarioId:1510
 Scenario: [73949] Kit - Document merge - US only
 	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
 	Given I navigate to the landing page
@@ -65,7 +65,6 @@ Scenario: [73949] Kit - Document merge - US only
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Document merge
 @73950
-@TReVorId:22068
 Scenario: [73950] Kit Document merge - Canada only
 	#Given I Use Test case 78865 to create a new product which is for NR and Canada only, and get it to completed status.  You will need to run this twice as you need two products to add to the kit.
 	Given I create a product with name: Kit product 1 and take to completed using Test Case 78865 and save as: 73950_KitProduct1
