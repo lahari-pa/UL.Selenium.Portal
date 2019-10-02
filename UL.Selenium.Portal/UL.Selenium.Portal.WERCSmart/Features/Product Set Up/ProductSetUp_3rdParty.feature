@@ -238,8 +238,6 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	#Scenario: test
-	#Given I save to context name: TestCase80821 and value: 1525198
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80821)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Submitted
