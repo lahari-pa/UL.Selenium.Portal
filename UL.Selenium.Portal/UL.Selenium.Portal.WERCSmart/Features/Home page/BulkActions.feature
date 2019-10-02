@@ -211,7 +211,12 @@ Scenario: [75129] Forward - Product in Submitted Status
 	And In the Foward Product Registration Screen I should see product: saved as TestCase75129
 	And In the Foward Product Registration Screen I Select the product: saved as TestCase75129
 	And I click continue on the Forward Product Registration page
-	And In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as TestCase75129Retailers and save as TestCase75129Retailer
+	#And In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as TestCase75129Retailers and save as TestCase75129Retailer
+	Then I select one of the following retailers from the table: that is also not in the list saved as: TestCase75129Retailers  and save the chosen retailer as: TestCase75129Retailer
+	| Retailer                                                                       |
+	| Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops) |
+	| Dick's Sporting Goods                                                          |
+	| Kroger                                                                         |
 	And I click continue
 	And If the Private Label textbox is showing in the Select UPCs screen, I enter the value: N/A
 	And I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue and save UPC as UPC75129

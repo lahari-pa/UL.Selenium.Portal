@@ -1,0 +1,93 @@
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using NTTQA.Selenium.SpecFlow;
+using System.Collections.ObjectModel;
+
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
+{
+	class SHAAdvancedReporting : SeleniumBaseObject
+	{
+		public const string BasePath = "//span[@id='ui-dialog-title-dialog-AdvancedReports']/../..";
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		public bool Wait_for_load(int secondsToWait = 60)
+		{
+			for (int i = 0; i < secondsToWait; i++)
+			{
+				IWebElement popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+				if (popupEditor != null)
+				{
+					return true;
+				}
+
+				Delay.Seconds(1);
+			}
+
+			return false;
+
+		}
+
+		public bool WaitForPreparingReportPopup()
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+
+			int counter = 0;
+			while (counter < 10)
+			{
+				Report.Info("Checking to see if Preparing Report popup has disappeared. Try " + counter + ".");
+				IWebElement popup = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//div//div//span[contains(text(), 'Preparing report...')]/../.."), 2);
+				if (popup.GetCssValue("display") == "none")
+				{
+					Report.Info("Exiting iFrame");
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					return true;
+				}
+				Delay.Seconds(10);
+				counter++;
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return false;
+		}
+
+		public bool ClickReport(string report)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement reportButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table//td[contains(text(), """ + report + @""")]"), 2);
+
+			bool canClick = reportButton.TryClick();
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return canClick;
+		}
+
+		public bool ClickSubmit()
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement submitButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//form[@id='panel']//input"), 2);
+
+			bool canClick = submitButton.TryClick();
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return canClick;
+		}
+	}
+}

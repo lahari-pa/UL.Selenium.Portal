@@ -361,6 +361,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
 						"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
 						"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+
+					
+
 					// Click Continue
 					//TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
 					//new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Pesticide Details - State Registration Details");
@@ -401,7 +404,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Info("Entering date of (month/date): " + dt.Month + "/ " + dt.Day + " (NOT Nov 30)");
 				Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
 					"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
-					"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+					"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);				
+
+
 				// Click Continue
 				TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
 				new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Pesticide Details - State Registration Details");

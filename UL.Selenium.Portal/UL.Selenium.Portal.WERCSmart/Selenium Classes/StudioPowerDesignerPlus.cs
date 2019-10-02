@@ -50,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath),1);
 			if (base.Wait_for_load(secondsToWait))
 			{
 				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
@@ -757,6 +757,47 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		//public bool IsSectionActive(string section)
+		//{
+		//	IWebElement tabElement = this.containerElement.FindElement(By.Id(section));
+		//	if (tabElement.GetAttribute("class").Contains("selected"))
+		//	{
+		//		Report.Info("The Section was Active");
+		//		return true;
+		//	}
+		//	Report.Info("The Section was not Active");
+		//	return false;
+		//}
+		public bool IsSectionActive(string section)
+		{
+			
+			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
+			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
+			IWebElement parentElement = matchingSection.FindElement(By.XPath(".//parent::li"), 2);
+			
+
+			if (parentElement.GetAttribute("class").Contains("selected"))
+			{
+				Report.Info("The Section was Active");
+				return true;
+			}
+			Report.Info("The Section was not Active");
+			return false;
+		}
+
+		public bool IsSectionsTabOpen()
+		{
+			IWebElement tabElement = this.containerElement.FindElement(By.Id("sectionPanel"));
+			if (tabElement.GetAttribute("class").Contains("open"))
+			{
+				Report.Info("The Sections Tab was open");
+				return true;
+			}
+			Report.Info("The Sections Tab was not open");
+			return false;
+			
+		}
+		
 		public bool ClickSectionsTab()
 		{
 			try
@@ -764,7 +805,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement sectionsTabButton = this.containerElement.FindElement(By.XPath("//div[@class='panel-title' and text()='Sections']"), 2);
 				return sectionsTabButton.TryClick();
 			}
-			catch(Exception)
+			catch (Exception)
 			{
 				Report.Failure("The sections tab button could not found");
 				return false;

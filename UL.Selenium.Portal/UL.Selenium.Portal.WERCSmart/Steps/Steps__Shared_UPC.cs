@@ -550,37 +550,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click the 'Upload UPCs' button and upload the generated file saved as: (.*)")]
-		public void IClickTheUploadUPCsButtonAndUploadTheGeneratedFileSavedAs(string savedAs)
-		{
-			object file = Context.GetFromContext(savedAs);
-
-			new UPC().ClickUploadUpcButton();
-			GeneralFunctions.EnterFilename(savedAs);
-		}
-
-		[StepDefinition(@"I create the Excel file: (.*) using:")]
-		public void GivenICreateTheExcelFileUsing(string savedAs, Table table)
-		{
-			var headerList = table.Header.ToList();
-			var file = ExcelUtilities.CreateSpreadsheet(savedAs);
-			file.AddRow(headerList);
-			int x = 0, y = 0;
-			foreach (TableRow row in table.Rows)
-			{
-				var data = row.Values.ToList();
-				data[0] = (string)Context.GetFromContext(data[0]);
-				foreach (string set in data)
-				{
-					file.EditCell(x, y, set);
-					x++;
-				}
-				y++;
-			}
-			Context.AddToContext(savedAs, ExcelUtilities.CreateSpreadsheet(savedAs));
-		}
-
-
 		[StepDefinition(@"In the Add Multiple dialog box I select all UPCs")]
 		public void InTheAddMultipleDialogBoxSelectAllUpcs()
 		{
@@ -591,7 +560,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that the Add Multiple UPC window opens")]
 		public void IConfirmThatTheAddMultipleUPCWindowOpens()
 		{
-			Report.IsTrue(new MultipleUPC().WaitForContainerToBeVisible(30), "The Add Multiple UPC windows did not appear", "The Add Multiple UPC window did appear");
+			Report.IsTrue(new MultipleUPC().WaitForContainerToBeVisible(30), "The Add Multiple UPC windows did appear", " The Add Multiple UPC window did appear");
 		}
 
 		[StepDefinition(@"I confirm that the Add Multiple UPC window closes")]
@@ -1346,7 +1315,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
-
+		[StepDefinition(@"In the Destination Retailers input field I input the value: (.*)")]
+		public void InTheDestinationRetailersInputFieldIInputTheValue(string value)
+		{
+			var uPCpage = new UPC();
+			Report.IsTrue(uPCpage.EnterDPCI(value), "Failed to enter DPCI", "Successfully entered DPCI");
+		}
 
 
 	}
