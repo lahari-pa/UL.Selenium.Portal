@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
@@ -20,7 +21,6 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
-using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -4320,6 +4320,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
 			Delay.Seconds(3);
+			var selStepsStudio = new Steps_Studio();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+
 		}
 
 		[StepDefinition(@"I call Shared Step 78801 \(Additional Documents to Provide - VOC and Product Label\)")]
@@ -5207,6 +5211,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.IConfirmTheSelectedSubformatInThePdPlusPopupIs("CKLT / Checklist");
 			TestReport.StartStep("I click continue");
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
+			Delay.Seconds(3);
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left","[SECT0755] Chemical Product Checklist");
 		}
 
 		[StepDefinition(
@@ -8246,8 +8253,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 				}
 			}
-			expectedText += "For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team";
+			expectedText += " For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team";
 			TestReport.StartStep("I confirm the administrator receieved an email with subject 'WERCSmart Data Use Tier Consents Changed for Wal-Mart/Sam's Club'");
+			Delay.Seconds(5);
 			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", "WERCSmart Data Use Tier Consents Changed for Wal-Mart/SAM'S CLUB");
 			TestReport.StartStep("I confirm the body text of the email matches the expected text");
 			new GlobalSteps().ThenTheBodyOfTheEmailShouldShow(expectedText);
@@ -8601,66 +8609,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
-
-		[StepDefinition("I Check The landing page has loaded, and report if an Alert and Inactivity Prompt are open if it is not loaded")]
-		public void ICheckTheLandinPageHasLoadedAndReportIfNot()
-		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I Check the Landing page has loaded");
-
-			if (!(new LandingPage().WaitForContainerToBeVisible()))
-			{
-				Report.Failure($"The Landing page did not load", false);
-				if (!new InactivityPopup().WaitForContainerToBeVisible(10))
-				{
-					Report.Failure($"The Inactivity prompt was not on screen", false);
-				}
-				else
-				{
-					Report.Success($"The Inactivity prompt was on screen");
-				}
-				if (!SeleniumBrowser.Alert.WaitForAlert(5))
-				{
-					Report.Failure($"The Alert was not on screen", false);
-				}
-				else
-				{
-					Report.Success($"The Alert was on screen");
-				}
-				return;
-
-
-			}
-
-			Report.Success("The Landing Page was loaded");
-		}
-
-		[StepDefinition("I Check that both an alert and inactivity prompt are on screen")]
-		public void ICheckThatBothAnAlertAndInactivityPromptAreOnScreen()
-		{
-			bool bothOnSceen = true;
-			if (!new InactivityPopup().WaitForContainerToBeVisible(10))
-			{
-				Report.Failure($"The Inactivity prompt was not on screen", false);
-				bothOnSceen = false;
-			}
-			else
-			{
-				Report.Success($"The Inactivity prompt was on screen");
-			}
-			if (!SeleniumBrowser.Alert.WaitForAlert(5))
-			{
-				Report.Failure($"The Alert was not on screen", false);
-				bothOnSceen = false;
-			}
-			else
-			{
-				Report.Success($"The Alert was on screen");
-			}
-
-			Report.IsTrue(bothOnSceen, "Both The Alert and Prompt were not on screen at the same time", " Both the Alert and Prompt were on screen at the same time");
-
-		}
+				
 
 		[StepDefinition(@"I call Shared Step 57264 \(Go To Retail Partners - Select O'Reilly\)")]
 		public void Shared57264_GoToRetailPartners_SelectOReilly()
@@ -8873,313 +8822,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click Continue");
 			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
 
-		}
-
-		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
-		public void ConfirmTheUnsavedChangesAlertDisplayedAfterWait(int expectedWait, int marginOfError)
-		{
-			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
-			if (!new InactivityPopup().WaitUntilDisplayed((expectedWait * 60) + (marginOfError * 60), out int actualWait))
-			{
-				Report.Failure($"The Inactivity popup did not load after {expectedWait + marginOfError} minutes!");
-				Report.Screenshot();
-				return;
-			}
-			// check if pop up was displayed before 'expected wait - margin' (test lower limit)
-			Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
-				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
-				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes");
-		}
-
-		/// <summary>
-		/// For using a retailer saved in context wrap the retailer name in '<>'
-		/// </summary>
-		/// <param name="savedAs"></param>
-		/// <param name="retailer"></param>
-		/// <param name="presence"></param>
-		[StepDefinition(@"I check that the UPC number saved as: (.*) and under the retailer: (.*), (does|does not) show the Obsolete UPC Option in the UPC details popup")]
-		public void ICheckUPCNumberXObsoleteUPCOptionPresence(string savedAs, string retailer, string presence)
-		{
-			//For Testing the Dupe UPC Sha Tool
-			TestReport.UseSubSteps = true;
-
-			var studioSHAManger = new StudioSHAManager();
-			var shaSteps = new Steps_SHA();
-			Delay.Seconds(10);
-			new Steps_SHA().SwitchToProductListUpcWindow();
-			Delay.Seconds(4);
-			TestReport.StartStep($"I Click on the link associated with the UPC saved as: {savedAs}");
-			studioSHAManger.ClickUPCSavedAsInProducUPCTable(savedAs);
-			TestReport.StartStep("I Check the UPC detail popup appears");
-			var upcDetails = new StudioSHAManagerUPCDetails();
-			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
-			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");
-			if (Regex.IsMatch(retailer, "<(.*)>"))
-			{
-				var match = Regex.Match(retailer, "<(.*)>").Groups[1].Value;
-				if (Context.Contains(match, true))
-				{
-					retailer = Context.GetFromContext(match).ToString();
-				}
-
-			}
-			TestReport.StartStep("I Select the Client: " + retailer + " from the select client list");
-			IWebElement input = upcDetails.SelectClientInput;
-			if (input == null)
-			{
-				Report.Failure("The Select Client box could not be found!");
-				return;
-			}
-			input.Select(retailer);
-			TestReport.StartStep("I wait for the UPC Details Table to Load");
-			Report.IsTrue(upcDetailsPopupTable.UpcDetailsTableLoadedOrNull(30), "The UPC details Table did not Appear", "The UPC details Table appeared");
-			TestReport.StartStep($"I Confirm that the Obsolete UPC button {presence} appear");
-			bool expectedPresenceBool = false;
-
-			switch (presence)
-			{
-				case "does":
-					expectedPresenceBool = true;
-					break;
-				case "does not":
-					break;
-				default:
-					Report.Error("presence must be either 'does' or 'does not'");
-					return;
-			}
-			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButtonPresent() == expectedPresenceBool, "The Obsolete popup incorrectly " + presence + " show", "The Obsolete popup correctly " + presence + " show");
-
-		}
-
-		[StepDefinition(@"I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: (.*)")]
-		public void ISearchForAProductContainingDuplicateUPCSUsingSpreadSheet(string savedAs)
-		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("Replacing the Spreadsheet with a new copy from the embedded resource");
-			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("UPCsDuplicatedwithinAccount.xlsx"), "", "");
-
-			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.UPCsDuplicatedwithinAccount.xlsx", out string destination))
-			{
-				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
-				return;
-			}
-
-			var utils = new ExcelUtilities(destination, "Table");
-
-			List<string> UpcNumbers = utils.Excel_GetColumn(1); //includes the header (so start search at 1 not 0)
-
-			for (int i = 1; i < UpcNumbers.Count; i++)
-			{
-				TestReport.StartStep($"Searching SHA for a upc found in the duplicate UPC spread sheet. Attempt: {i}");
-				string DupeUPCNumberCurrent = UpcNumbers[i];
-				//do a search for this value in sha
-				//if 2 or more products show,then save this to context then the retailer and id. (use coloums they are in and the same i value)
-				//maybe save these^ value to class (existing one?)
-				Context.AddToContext($"DupeUPCNumber{savedAs}", DupeUPCNumberCurrent);
-				new Steps_SHA().InSHAISearchForExactUPCInForUPCSavedAs("All", $"DupeUPCNumber{savedAs}");
-				int numProducts = new StudioSHAManager().GetProductCount();
-				TestReport.StartStep("Ensuring the upc was searched for succesfully and that it is a duplicate by checking the number of products found is 2 or more");
-				if (numProducts > 1)
-				{
-					Report.Success("The UPC was searched for succesfully and multiple Products were found");
-					List<Product> productsShown = new StudioSHAManager().GetTopXProducts(1);
-					string productIDFromSHA = productsShown[0].ID;
-					var productInfo = new ProductInformation { Id = productIDFromSHA };
-					Context.AddToContext($"ProductID{savedAs}", productInfo);
-
-
-					string productRetailerInitials = productsShown[0].Clients;
-					string productRetailerInitialsFirst = productRetailerInitials.Split(',')[0];
-					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == productRetailerInitialsFirst).Key;
-					Context.AddToContext($"ProductRetailer{savedAs}", fullName);
-
-					//List<string> productIDs = utils.Excel_GetColumn(0);
-					//string productIDCurrent = productIDs[i];
-					//Context.AddToContext("ProductID105970", productIDCurrent); // perhaps get this from the top x product in case this id is gone from being obseleted
-					//List<string> productRetailers = utils.Excel_GetColumn(5);
-					//string productRetailerCurrent = productRetailers[i];
-					//Context.AddToContext("ProductRetailer105970", productRetailerCurrent);
-					//Context.AddToContext("ProductRetailer105970", productRetailerCurrent);
-					return;
-				}
-				Report.Info("The number of products found was less than 2, trying the next upc in the spreadsheet");
-			}
-			Report.Failure("None of the UPCs in the Spreadsheet showed 2 or more products when searched for in SHA");
-
-
-
-		}
-
-		[StepDefinition(@"I close the SHA Manager Product UPC details pop up")]
-		public void ICloseTheUPCDetailsPopup()
-		{
-
-			TestReport.UseSubSteps = true;
-			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
-			TestReport.StartStep("I click the close button in the UPC details popup");
-			Report.IsTrue(upcDetailsPopupTable.CloseButton.TryClick(), "Failed to Click Close in the UPC details popup", "Successfully clicked Click Close in the UPC details popup");
-			TestReport.StartStep("I check to see if the UPC details popup has closed");
-			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");
-		}
-
-		[StepDefinition(@"I Click the Obsolete Button and Check a Popup Appears with 'Cancel' and 'Continue' buttons and the following message: (.*)")]
-		public void IClickObsoleteAndCheckAPopUpAppearsWithButtonsAndMessageX(string expectedMessage)
-		{
-			TestReport.UseSubSteps = true;
-			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
-			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
-
-			TestReport.StartStep("I click the Obsolete UPC button in the UPC details popup");
-			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButton.TryClick(), "Failed to Click Obselete UPC in the UPC details popup", "Successfully clicked Click Obselete UPC in the UPC details popup");
-			TestReport.StartStep("I check the Confirm Obsolete UPC popup appears");
-			Report.IsTrue(upcDetailsConfrimObsoletePopup.WaitForContainerToBeVisible(10), "The Confirm Obsolete UPC popup did not appear", "The Confirm Obsolete UPC popup appeared");
-			TestReport.StartStep("I Check that there is a Cancel Button in the Confirm Obsolete UPC popup");
-			Report.IsTrue(upcDetailsConfrimObsoletePopup.CancelButtonPresent(), "The Cancel Button was not present in the Confirm Obsolete UPC popup", "The Cancel Button was present in the Confirm Obsolete UPC popup");
-			TestReport.StartStep("I Check that there is a Continue Button in the Confirm Obsolete UPC popup");
-			Report.IsTrue(upcDetailsConfrimObsoletePopup.ContinueButtonPresent(), "The Continue Button was not present in the Confirm Obsolete UPC popup", "The Continue Button was present in the Confirm Obsolete UPC popup");
-			TestReport.StartStep("I check the text in the Confirm Obsolete UPC popup matches the expected text");
-			Report.IsTrue(upcDetailsConfrimObsoletePopup.ConfirmObseleteUPCMessage(expectedMessage), "The found message did not match the expected text", "The found message matched the expected text");
-
-		}
-
-		[StepDefinition(@"I click close in the Confirm Obsolete UPC popup, and the Confirm Obsolete UPC popup is closed and the UPC Details Popup remains on screen.")]
-		public void IClickCloseInTheConfirmObsoleteUPCPopUpAndCheckItClosesAndTheUPCDetailsPopUpRemains()
-		{
-			TestReport.UseSubSteps = true;
-			var upcDetails = new StudioSHAManagerUPCDetails();
-			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
-			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
-			TestReport.StartStep("I Click Cancel in the Confirm Obsolete UPC popup");
-			Report.IsTrue(upcDetailsConfrimObsoletePopup.CancelButton.TryClick(), "Failed to to click Cancel", "Successfully clicked Cancel");
-			TestReport.StartStep("I Check that the Confrim Obsolete UPC popup has gone");
-			Report.IsTrue(upcDetailsConfrimObsoletePopup.WaitForContainerToBeInvisible(10), "The Confirm Obsolete UPC popup appeared", "The Confirm Obsolete UPC popup did not appear");
-			TestReport.StartStep("I Check that the UPC details popup still appears.");
-			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");
-
-		}
-
-		[StepDefinition(@"I click Continue in the Confirm Obsolete UPC popup, and the Confirm the Manager Validation Require Popup appears.")]
-		public void IClickContinueInTheConfirmObsoleteUPCPopUpAndCheckItTheManagerValidationPopupAppears()
-		{
-			TestReport.UseSubSteps = true;
-			var upcDetails = new StudioSHAManagerUPCDetails();
-			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
-			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
-			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();
-			TestReport.StartStep("I Click Continue in the Confirm Obsolete UPC popup");
-			Report.IsTrue(upcDetailsConfrimObsoletePopup.ContinueButton.TryClick(), "Failed to to click Continue", "Successfully clicked Continue");
-			TestReport.StartStep("I Check that the Manager Validation Required Popup appears");
-			Report.IsTrue(managerValidationPopup.WaitForContainerToBeVisible(10), "The Manager Validation Required Popup did not appeared", "The Manager Validation Required Popup appeared");
-
-
-
-		}
-
-		[StepDefinition(@"I enter: (.*) as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient")]
-		public void IEnterAnIngredientAndCheckTopOptionMatches(string myIngredient)
-		{
-			TestReport.UseSubSteps = true;
-			var ingredients = new Ingredients();
-			var selNewProduct = new UPC();
-			TestReport.StartStep("I Check I am on the Ingredients page");
-			Report.IsTrue(selNewProduct.WaitForSection("Ingredients"),
-				"The Ingredients page is not showing when it was expected to",
-				"The Ingredients page is showing as expected");
-			Report.Screenshot();
-			TestReport.StartStep($"I enter: {myIngredient} as my ingredient in the ingredients page");
-			ingredients.ClickComponentSearchPlaceholder();
-			ingredients.EnterTextSearchComponent(myIngredient);
-			TestReport.StartStep("I check my ingredient is at the top of the filter");
-			Report.IsTrue(ingredients.IngredientMatchesFirstOption(myIngredient), "The first option did not match the input option", "The first option matched the input option");
-
-		}
-
-		[StepDefinition(@"I Check that for the product: (.*) the Details in SHA Manager Match the details found in the file: (.*)")]
-		public void ICheckThatForTheProductXTheDetailsInSHAManagerMatchTheFile(string productInfoSavedAs, string fileSavedAs)
-		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I Find the details in SHA manager for the product on screen.");
-			List<Product> productsShown = new StudioSHAManager().GetTopXProducts(1);
-			if (!productsShown.Any())
-			{
-				Report.Failure("Could not find any products");
-				return;
-			}
-			string shaProductID = productsShown[0].ID;
-			Report.Info($"The product found has ID: {shaProductID}");
-			var productInfo = (ProductInformation)Context.GetFromContext(productInfoSavedAs);
-			string fileProductID = productInfo.Id;
-
-			if (!Report.IsTrue(shaProductID == fileProductID, "The product found in SHA did not match the one searched from file", "The product found in SHA did match the one searched from file"))
-			{
-				return;
-			}
-			string shaProductName = productsShown[0].Name;
-			Report.Info($"The product in SHA has Name: {shaProductName}");
-			DateTime shaCurrentSubmissionDate = productsShown[0].CurrentSubmission;
-			Report.Info($"The product in SHA has a Current Submission Date of: {shaCurrentSubmissionDate}");
-			DateTime shaOriginalSubmissionDate = productsShown[0].OriginalSubmission;
-			Report.Info($"The product in SHA has a Original Submission Date of: {shaOriginalSubmissionDate}");
-			string shaClients = productsShown[0].Clients;
-
-			TestReport.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
-			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
-			{
-				var utils = new ExcelUtilities(File.ToString(), "Table");
-				var rows = utils.Excel_GetNoRows();
-				for (int i = 1; i < rows; i++)
-				{
-					var rowContents = utils.GetRowContents(i);
-					var productID = rowContents[0];
-					if (productID == fileProductID)
-					{
-						Report.Info($"The Product Name in the File is: {rowContents[1]}");
-						Report.IsTrue(shaProductName == rowContents[1], "The product names did not match", "The product names matched!");
-
-						DateTime lastSubDate;
-						DateTime.TryParse(rowContents[3], out lastSubDate);
-						Report.Info($"The Last Submission Date in the File is: {rowContents[3]}");
-						Report.IsTrue(shaCurrentSubmissionDate == lastSubDate, "The Current Submission Date in SHA did not match the Last Submission date in the file", "The Current Submission Date in SHA did match the Last Submission date in the file");
-
-						DateTime orginalCreationDate;
-						DateTime.TryParse(rowContents[4], out orginalCreationDate);
-						Report.Info($"The Original Creation date in the File is: {rowContents[4]}");
-						string fileOrgDatestr = orginalCreationDate.ToString();
-						string shaOrgDatestr = shaOriginalSubmissionDate.ToString();
-						string fileOrgDateEdited = fileOrgDatestr.Replace("12:00:00 AM", "").Trim();
-						Report.IsTrue(shaOrgDatestr.Contains(fileOrgDateEdited), "The Origninal Submission Date in SHA did not match the Original Creation Date in the file", "The Original Submission Date in SHA did match the Original Creation Date in the file");
-						Report.Info($"The Retailers Associated in the File is: {rowContents[5]}");
-						Report.IsTrue(shaClients.Contains(rowContents[5]), "The Clients in SHA did not match the Retailers associated in the file", "The Clients in SHA matched the Retailers associated in the file");
-
-
-						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");
-						this.Shared75309_SHA_SelectProduct_UpcList(productInfoSavedAs);
-						var studioSHAManger = new StudioSHAManager();
-						var shaSteps = new Steps_SHA();
-						Delay.Seconds(10);
-						new Steps_SHA().SwitchToProductListUpcWindow();
-						Delay.Seconds(4);
-						List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
-						Report.Info($"The number of UPCs displayed in the UPC Details page is: {displayedUpcs.Count}");
-						Report.IsTrue(displayedUpcs.Count.ToString() == rowContents[6], "The number of UPCS in SHA for the product did not match the Number of Active UPCs for the product in the file", "The number of UPCS in SHA for the product matched the Number of Active UPCs for the product in the file");
-						TestReport.StartStep($"Checking that the date that appears under the 'Current Submission' column in SHA Manager is exactly one year before the date that appears in the 'Eligible for Deletion' column in the file");
-						var eligibleDate = rowContents[2];
-						DateTime actualEligibleDate;
-						DateTime.TryParse(eligibleDate, out actualEligibleDate);
-						DateTime expectedEligibleDate = actualEligibleDate.AddYears(-1);
-						Report.IsTrue(shaCurrentSubmissionDate == expectedEligibleDate, "The Current Submission Date in SHA is not exactly one year before the Eligible for deletion date in the file", "The Current Submission Date in SHA is exactly one year before the Eligible for deletion date in the file");
-						return;
-
-					}
-
-				}
-				Report.Failure($"The product with ID: {fileProductID} could not be found in the spreadsheet");
-				return;
-
-			}
-
-		}
+		}		
+						
 
 		[StepDefinition(
 			@"I call Shared Step 89286 - Additional Product Information - US and Canada - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP\(YES\), GNFR \(NO\), Continue")]

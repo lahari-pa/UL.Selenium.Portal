@@ -640,6 +640,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int i = 0;
 			while (i < 5 && !bSelected)
 			{
+				//When Choosing Random, often selects a retailer wich requires extra details which are not given.
+
 				var rnd = new Random();
 				int index = rnd.Next(0, listOfRetailers.Count - 1);
 				try
@@ -935,20 +937,68 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (var row in table.Rows)
 			{
 				var retailerName = row["Retailer"];
+				if (Regex.IsMatch(retailerName, "<(.*)>"))
+				{
+					var match = Regex.Match(retailerName, "<(.*)>").Groups[1].Value;
+					if (Context.Contains(match, true))
+					{
+						retailerName = Context.GetFromContext(match).ToString();
+					}
+				}
 				if (new ForwardProductRegistration().SelectRetailer(retailerName))
 				{
 					Report.Success("The Retailer: " + retailerName + " was selected successfully");
 					Context.AddToContext(retailerSavedAs, retailerName);
 					return;
 				}				
-				Report.Failure("Could not find: " + retailerName + " in the list of retailers");
+				Report.Info("Could not find: " + retailerName + " in the list of retailers");
 
 			}
 			Report.Failure("None of the retailers in the table could be selected");
 
 		}
 
-		
-		
+		[StepDefinition(@"I select one of the following retailers from the table: that is also not in the list saved as: (.*) and save the chosen retailer as: (.*)")]
+		public void ISelectOneOfTheFollowingRetailersThatIsNotX(string existingRetailer,string retailerSavedAs, Table table)
+		{
+			foreach (var row in table.Rows)
+			{
+				var retailerName = row["Retailer"];
+				if (Regex.IsMatch(retailerName, "<(.*)>"))
+				{
+					var match = Regex.Match(retailerName, "<(.*)>").Groups[1].Value;
+					if (Context.Contains(match, true))
+					{
+						retailerName = Context.GetFromContext(match).ToString();
+					}
+				}
+				var alreadySelectedRetailers = (List<string>)Context.GetFromContext(existingRetailer);
+				var abbr = new RetailerAbbreviations();
+				string selectedAbbr = "";
+				abbr.Map.TryGetValue(retailerName, out selectedAbbr);
+				if (alreadySelectedRetailers.Any() && alreadySelectedRetailers.Contains(selectedAbbr))
+				{
+					Report.Info("Selected Retailer already exists. Selected another one.");
+				}			
+
+
+				if (!alreadySelectedRetailers.Contains(selectedAbbr))
+				{
+					if (new ForwardProductRegistration().SelectRetailer(retailerName))
+					{
+						Report.Success("The Retailer: " + retailerName + " was selected successfully");
+						Context.AddToContext(retailerSavedAs, retailerName);
+						return;
+					}
+					Report.Info("Could not find: " + retailerName + " in the list of retailers");
+				}				
+
+			}
+			Report.Failure("None of the retailers in the table could be selected");
+
+		}
+
+
+
 	}
 }

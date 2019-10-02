@@ -6,7 +6,8 @@
 Feature: Data Consent Tiers
 
 Background:
-Given I create an email AllRetailersProductsCompany and save it as ProductAccountEmail
+#Given I create an email AllRetailersProductsCompany and save it as ProductAccountEmail
+Given I Save the email for the TReVor: ProductAccount Test user as: ProductAccountEmail
 Given I save the current emails in the inbox for address saved as: ProductAccountEmail
 	Given I log in with the account saved in TReVor as: ProductAccount
 
