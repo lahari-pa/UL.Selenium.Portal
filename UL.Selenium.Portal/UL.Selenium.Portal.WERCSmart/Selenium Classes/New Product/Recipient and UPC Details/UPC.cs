@@ -478,6 +478,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return retailerXElem.TryClick();
 		}
 
+		public bool EnterDPCI(string value)
+		{
+			IWebElement input = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
+			return input.TryEnterText(value);
+		}
+
 
 
 

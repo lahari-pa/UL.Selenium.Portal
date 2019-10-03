@@ -98,7 +98,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				Report.Error("Failed to find the text input for Expiration date on the state row: " + state);
 				return false;
-			}
+			}			
+
 			input.Clear();
 			input.EnterText(value);
 			input.SendKeys(Keys.Enter);

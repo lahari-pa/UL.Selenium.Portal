@@ -877,7 +877,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (cancelOrSave == "cancel")
 			{
 				Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
-					"Successfully clicked cancel",false,false);
+					"Successfully clicked cancel", false, false);
 			}
 			else
 			{
@@ -909,6 +909,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				var expectedColumns = new List<string>();
+				foreach (TableRow thisRow in table.Rows)
+				{
+					expectedColumns.Add(thisRow["Column"]);
+				}
+
+				int unexpectedCount = 0;
+				if (expectedColumns.Count < ColumnTitles.Count)
+				{
+					Report.Info("Found unexpected columns!");
+					foreach (string ColumnTitle in ColumnTitles)
+					{
+						if (!expectedColumns.Contains(ColumnTitle))
+						{
+							unexpectedCount++;
+							Report.Info("Found unexpected column title: " + ColumnTitle + ".");
+						}
+					}
+					Report.Failure("Found " + unexpectedCount + " unexpected columns.");
+				}
 
 				foreach (TableRow thisRow in table.Rows)
 				{
