@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -25,6 +25,7 @@
 @run_Sprint16
 Feature: Sprint 16
 
+@ScenarioId:1513
 Scenario: [105329] PM Monthly Status Report - Target
 	Given I generate a random UPC number and save as: UPC105329
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @run_EditUPCAccParStwd
 @Login
