@@ -9,13 +9,16 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using System.Collections.ObjectModel;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "RetailPartners")]
 	class StepsRetailPartners
 	{
-		[Given(@"If I see the retail partners page I set all data consent tiers to true for all retailers in the top section")]
+		[StepDefinition(@"If I see the retail partners page I set all data consent tiers to true for all retailers in the top section")]
 		public void GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection()
 		{
 			var selRetailPartners = new RetailPartners();
@@ -42,31 +45,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					GeneralUtilities.Wait_for_load_finish();
 					Report.Screenshot();
 
-					RetailParntersDetails thisRetailParntersDetails = new RetailParntersDetails();
-					List<string> DataConsentTiers = thisRetailParntersDetails.GetAllDataConsentTiers();
+					var thisRetailPartnersDetails = new RetailPartnersDetails();
+					List<string> DataConsentTiers = thisRetailPartnersDetails.GetAllDataConsentTiers();
 
 					foreach (string DCT in DataConsentTiers)
 					{
-						thisRetailParntersDetails.SetDataConsentTier(DCT, true);
+						thisRetailPartnersDetails.SetDataConsentTier(DCT, true);
 					}
 
 					this.GivenClickTheSaveChangesButton();
 					this.ClickCloseOnSavePopupDialog();
 
-					thisRetailParntersDetails.ClickBackButton();
+					thisRetailPartnersDetails.ClickBackButton();
 
 					GeneralUtilities.Wait_for_load_finish();
 					if (!selRetailPartners.Wait_for_load(10))
 					{
 						throw new Exception("Retail partners page has not loaded.");
 					}
-
 				}
-
 				//navigate to the home screen
-				NavigationBar myNavBar = new NavigationBar();
+				var myNavBar = new NavigationBar();
 				myNavBar.Click_Icon("Home");
-
 			}
 
 		}
@@ -74,15 +74,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I toggle the data consent tier: (.*) to: (on|off)")]
 		public void SetDataConsentTier(string dct, string onOff)
 		{
-			var selRetailParntersDetails = new RetailParntersDetails();
-			var toggle = onOff == "on";
-			Report.IsTrue(selRetailParntersDetails.SetDataConsentTier(dct, toggle), "failed to toggle the data consent tier: " + dct + " to: " + onOff, "Successfully toggled the data consent tier: " + dct + " to: " + onOff);
+			var selRetailPartnersDetails = new RetailPartnersDetails();
+			bool toggle = onOff == "on";
+			Report.IsTrue(selRetailPartnersDetails.SetDataConsentTier(dct, toggle), "failed to toggle the data consent tier: " + dct + " to: " + onOff, "Successfully toggled the data consent tier: " + dct + " to: " + onOff);
 		}
 
 		[StepDefinition(@"I (should|should not) see the following subheading (.*)")]
 		public void ThenIShouldSeeTheFollowingSubheading(string should, string subheading)
 		{
-			var expected = should == "should";
+			bool expected = should == "should";
 
 			var selRetailPartners = new RetailPartners();
 
@@ -91,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw new Exception("Page failed to load!");
 			}
 
-			var subHeadingsShowing = selRetailPartners.SubHeadingsShowing();
+			List<string> subHeadingsShowing = selRetailPartners.SubHeadingsShowing();
 			Report.IsTrue(subHeadingsShowing.Contains(subheading.Trim()) == expected,
 				"Subheading " + (expected ? "was not" : "was") + " showing as expected! Expected: '" + subheading + "', but found: '" + string.Join("', '", subHeadingsShowing) + "'!",
 				"Subheading " + (expected ? "was" : "was not") + " showing: '" + subheading + "', as expected!");
@@ -114,7 +114,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 
-				var headingShowing = selRetailPartners.HeaderShowing();
+				string headingShowing = selRetailPartners.HeaderShowing();
 				Report.IsTrue(headingShowing.Trim() == heading.Trim(),
 					"Header was not showing as expected! Expected: '" + heading + "', but found: '" + headingShowing + "'!",
 					"Header was showing: '" + heading + "', as expected!");
@@ -130,7 +130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the retailer heading: (.*)")]
 		public void CorrectRetailerShowing(string retailer)
 		{
-			Report.IsTrue(new RetailParntersDetails().GetSelectedRetailer().Trim() == retailer.Trim(), "Retailer: " + retailer + " was not showing!", "Retailer: " + retailer + " was showing as expected!");
+			Report.IsTrue(new RetailPartnersDetails().GetSelectedRetailer().Trim() == retailer.Trim(), "Retailer: " + retailer + " was not showing!", "Retailer: " + retailer + " was showing as expected!");
 		}
 
 		[StepDefinition(@"I select the retailer: (.*)")]
@@ -151,17 +151,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
+		[StepDefinition(@"I confirm that the Data Consent Tiers information matches the information saved as: (.*)")]
+		public void ConfirmThatDataConsentTiersMatches(string savedAs)
+		{
+			string tiers = Context.GetFromContext(savedAs)?.ToString();
+			var tiersList = tiers.Split(',').ToList();
+
+			foreach (string tier in tiersList)
+			{
+				string dataTier = tier.Split('=')[0];
+				string trueFalse = tier.Split('=')[1];
+
+				Report.IsTrue(new RetailPartnersDetails().ConfirmDataTier(dataTier, trueFalse), "Failed to find status of '" + trueFalse + "' for data consent tier '" + dataTier + "'.",
+					"Successfully found status of '" + trueFalse + "' for data consent tier '" + dataTier + "'.");
+			}
+
+		}
+
+		/// <summary>
+		/// The retail partner details is in Data Consent Tiers section.
+		/// It is the section of text above 'What are the Data Usage Tiers?'
+		/// eg: Lowe's requires suppliers of products to grant Tier 1 at this time.
+		/// </summary>
+		[StepDefinition(@"Retail partner details should be showing text: (.*)")]
+		public void RetailPartnersDetailShouldBeShowing(string text)
+		{
+			string showing = new RetailPartnersDetails().GetDCDescription();
+			Report.IsTrue(showing == text.Trim(), "Text was not showing: " + text.Trim() + ". Instead found: " + showing, "Text was showing: " + text.Trim() + ", as expected!");
+		}
+
+
 		[StepDefinition(@"Section: (.*) should be showing text: (.*)")]
 		public void SectionShouldBeShowingText(string section, string text)
 		{
-			var showing = new RetailParntersDetails().GetSectionText(section).Trim();
+			string showing = new RetailPartnersDetails().GetSectionText(section).Trim();
 			Report.IsTrue(showing == text.Trim(), "Text was not showing: " + text.Trim() + ". Instead found: " + showing, "Text was showing: " + text.Trim() + ", as expected!");
 		}
 
 		[StepDefinition(@"I should see the button: (.*) in section: (.*)")]
 		public void ButtonsShowingInSection(string button, string section)
 		{
-			var buttons = new RetailParntersDetails().GetButtons(section);
+			List<string> buttons = new RetailPartnersDetails().GetButtons(section);
 			Report.Info("Buttons showing: " + string.Join(", ", buttons));
 			Report.IsTrue(buttons.Contains(button.Trim()), "Failed to find the button: " + button + "!", "Succesfully found the button: " + button);
 		}
@@ -169,7 +199,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that there is a section labeled: (.*)")]
 		public void ConfirmHeadingShowing(string header)
 		{
-			Report.IsTrue(new RetailParntersDetails().HeaderShowing(header),
+			Report.IsTrue(new RetailPartnersDetails().HeaderShowing(header),
 				"Header '" + header + "' was not showing on page!",
 				"Header '" + header + "' was showing, as expected!");
 		}
@@ -178,7 +208,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SupplierIdShowingCorrectly(string shouldornot)
 		{
 			bool expected = shouldornot == "should";
-			Report.IsTrue(new RetailParntersDetails().SupplierIDTableShowing() == expected, (expected ? "Expected" : "Did not expect") + " the Supplier ID table to be showing!", "The Supplier ID " + (expected ? "was" : "was not") + " table showing, as expected!");
+			Report.IsTrue(new RetailPartnersDetails().SupplierIDTableShowing() == expected, (expected ? "Expected" : "Did not expect") + " the Supplier ID table to be showing!", "The Supplier ID " + (expected ? "was" : "was not") + " table showing, as expected!");
 		}
 
 		[StepDefinition(@"I confirm that under the pie chart I see the label: (.*)")]
@@ -189,14 +219,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Confirming that the pie chart has legend containing: " + legendLabel);
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 
 				if (!selRetailDetails.Wait_for_load(10))
 				{
 					throw new Exception("Page failed to load!");
 				}
 
-				var legendShowing = selRetailDetails.GetChartLegend();
+				string legendShowing = selRetailDetails.GetChartLegend();
 				Report.IsTrue(legendShowing.EndsWith(legendLabel),
 					"Legend was showing: '" + legendShowing + "', but expected to end with: '" + legendLabel + "'",
 					"Legend was showing: '" + legendShowing + "', as expected!");
@@ -212,13 +242,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The pie chart should be showing on the retailer details page")]
 		public void PieChartShowing()
 		{
-			Report.IsTrue(new RetailParntersDetails().PieChartShowing(), "Pie Chart was not visible!", "Pie chart was visible, as exoected!");
+			Report.IsTrue(new RetailPartnersDetails().PieChartShowing(), "Pie Chart was not visible!", "Pie chart was visible, as exoected!");
 		}
 
 		[StepDefinition(@"The pie chart footer text should contain: (.*)")]
 		public void PieChartFooterTextShowingAsExpected(string text)
 		{
-			var showing = new RetailParntersDetails().GetPieChartFooterText();
+			string showing = new RetailPartnersDetails().GetPieChartFooterText();
 			Report.Info("Text found was: " + showing);
 			Report.IsTrue(showing.Contains(text), "Showing text did not contain: " + text + "!", "Displayed text successfully contained: " + text);
 		}
@@ -226,7 +256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I see a percentage number in the middle of the pie chart")]
 		public void PercentageMiddleOfPieChart()
 		{
-			var percentage = new RetailParntersDetails().ChartCentrePercentage();
+			string percentage = new RetailPartnersDetails().ChartCentrePercentage();
 			Report.IsTrue(!percentage.IsNullOrEmpty(),
 				"There was no percentage showing in the middle of the pie chart",
 				"The percentage: " + percentage + " was displayed in the middle of the pie chart");
@@ -235,8 +265,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that the color of the pie chart for the Retailer selected is Green")]
 		public void ColorOfPieChartForSelectedRetailerGreen()
 		{
-			var selRetailPartnersDetails = new RetailParntersDetails();
-			var testChartFill = selRetailPartnersDetails.ChartRetailerFill();
+			var selRetailPartnersDetails = new RetailPartnersDetails();
+			string testChartFill = selRetailPartnersDetails.ChartRetailerFill();
 			Report.IsTrue(testChartFill == "#9ac36c",
 				"The pie chart fill for the retailer was not green. The hex code displayed is: " + testChartFill,
 				"The pie chart fill for the retailer was green as expected. The hex code displayed is: " + testChartFill);
@@ -245,9 +275,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the percentage in the pie chart legend statement matches the percentage shown in the middle of the pie chart")]
 		public void PieChartLegendPercentageMatchesPieChartPercentage()
 		{
-			var selRetailPartnersDetails = new RetailParntersDetails();
-			var chartPercentage = selRetailPartnersDetails.ChartCentrePercentage();
-			var chartLegend = selRetailPartnersDetails.GetChartLegend();
+			var selRetailPartnersDetails = new RetailPartnersDetails();
+			string chartPercentage = selRetailPartnersDetails.ChartCentrePercentage();
+			string chartLegend = selRetailPartnersDetails.GetChartLegend();
 			Report.IsTrue(chartLegend.Contains(chartPercentage),
 				"The percentage showing in the pie chart legend does not match the percentage within the pie chart",
 				"The percentage showing in the pie chart legend matches the percentage within the pie chart as expected");
@@ -261,14 +291,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Confirming that '" + tierInformation + "' is showing under the Data Consent Tiers heading");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 
 				if (!selRetailDetails.Wait_for_load(10))
 				{
 					throw new Exception("Page failed to load!");
 				}
 
-				var tierInfoShowing = selRetailDetails.GetTierInformation();
+				string tierInfoShowing = selRetailDetails.GetTierInformation();
 				Report.IsTrue(tierInfoShowing == tierInformation,
 					"Tier information was showing: '" + tierInfoShowing + "', but was expected to show: '" + tierInformation + "'",
 					"Tier information was showing: '" + tierInformation + "', as expected!");
@@ -289,14 +319,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Confirming that '" + info + "' is showing under the Data Consent Tiers heading");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 
 				if (!selRetailDetails.Wait_for_load(10))
 				{
 					throw new Exception("Page failed to load!");
 				}
 
-				var infoShowing = selRetailDetails.DoesNotRequireDataConsentInfo().Replace("\r\n", " ");
+				string infoShowing = selRetailDetails.DoesNotRequireDataConsentInfo().Replace("\r\n", " ");
 				Report.IsTrue(infoShowing == info,
 					"Tier information was showing: '" + infoShowing + "', but was expected to show: '" + info + "'",
 					"Tier information was showing: '" + info + "', as expected!");
@@ -317,7 +347,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Clicking 'More Information' Hyperlink");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 
 				if (!selRetailDetails.Wait_for_load(10))
 				{
@@ -331,8 +361,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Context.AddToContext("MainWindowHandle", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
 
-				var windowHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-				var newTab = windowHandles.FirstOrDefault(x => x != SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				ReadOnlyCollection<string> windowHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				string newTab = windowHandles.FirstOrDefault(x => x != SeleniumBrowser.WebBrowser.CurrentWindowHandle);
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(newTab);
 				Report.Success("Window switched successfully!");
 				Report.Screenshot();
@@ -352,7 +382,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("I " + should + " see the More Information hyperlink");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 
 				if (!selRetailDetails.Wait_for_load(10))
 				{
@@ -377,7 +407,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Click the Products in Scope button");
 
-			var selRetailDetails = new RetailParntersDetails();
+			var selRetailDetails = new RetailPartnersDetails();
 
 			if (!selRetailDetails.Wait_for_load(10))
 			{
@@ -387,9 +417,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 			Report.Info("Downloads folder: " + downloadsFolder);
 
-			var dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 
-			foreach (var file_ in dir)
+			foreach (string file_ in dir)
 			{
 				File.Delete(file_);
 			}
@@ -426,7 +456,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Confirm " + filetype + " file is downloaded with name: " + file);
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 				Report.Info("Downloads folder: " + downloadsFolder);
-				var dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
 				{
 					Context.AddToContext(savedAs, dir.FirstOrDefault());
@@ -444,17 +474,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenConfirmTheExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
-			var File = Context.GetFromContext(savedAs);
+			object File = Context.GetFromContext(savedAs);
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
-				var FirstRow = ExcelUtils.Excel_GetRow(0);
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
 				bool Data = false;
 				for (int i = 1; i < ExcelUtils.Excel_GetNoRows(); i++)
 				{
-					var RowData = ExcelUtils.Excel_GetRow(i);
+					List<string> RowData = ExcelUtils.Excel_GetRow(i);
 					Report.Info("Row " + i + " had " + FirstRow[0] + ": " + RowData[0] + " and " + FirstRow[1] + ": " + RowData[1]);
 					Data = true;
 				}
@@ -468,7 +498,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
-			var file = Context.GetFromContext(savedAs);
+			object file = Context.GetFromContext(savedAs);
 			if (Report.IsTrue(file != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + file.ToString(), false, false))
 			{
 				if (Report.IsTrue(File.ReadAllText(file.ToString()) != "", "File: " + file + " did not contain any content!", "File was not empty", false, false))
@@ -485,8 +515,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Ensure the Data Consent Tier Sliders are set");
-				var selRetailDetails = new RetailParntersDetails();
-				foreach (var row in expected.Rows)
+				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
 				{
 					Report.Info("Setting Tier " + row["Tier"] + " to be in the " + row["State"] + " position");
 					Report.IsTrue(selRetailDetails.SetDataConsentTier("Tier " + row["Tier"], row["State"] == "On"),
@@ -504,8 +534,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the Data Consent Tier: (.*) should be set to: (on|off)")]
 		public void DataConsentTierShouldBeSetTo(string tier, string onOff)
 		{
-			var toggle = onOff == "on";
-			Report.IsTrue(new RetailParntersDetails().GetDataConsentTier(tier) == toggle,
+			bool toggle = onOff == "on";
+			Report.IsTrue(new RetailPartnersDetails().GetDataConsentTier(tier) == toggle,
 				"The Data Consent Tier: " + tier + " was not set to: " + onOff,
 				"The Data Consent Tier: " + tier + " was set to " + onOff);
 		}
@@ -517,19 +547,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Ensure Tier " + tier + " " + (should == "should" ? "is" : "is not") + " editable");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 				bool currentState = selRetailDetails.GetDataConsentTier(tier);
 
 				Report.Info("Current state is " + (currentState ? "On" : "Off"));
 				Report.Info("Setting state to be: " + (!currentState ? "On" : "Off"));
 				selRetailDetails.SetDataConsentTier(tier, !currentState);
 				Report.Info("Option clicked");
-				var newCurrentState = selRetailDetails.GetDataConsentTier(tier);
+				bool newCurrentState = selRetailDetails.GetDataConsentTier(tier);
 				if (should == "should")
 				{
 					Report.IsTrue(newCurrentState != currentState,
 						"Expected to able to edit Tier " + tier + ", but this was not the case!",
 						"Tier " + tier + " was edited successfully!");
+					Report.Info("Turning the Data Tier back to the original state");
+					Report.IsTrue(selRetailDetails.SetDataConsentTier(tier, currentState), "Failed to set the tier '" + tier + "' to: " + currentState, "Successfully set the tier " + tier + " to: " + currentState);
 				}
 				else
 				{
@@ -553,7 +585,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Check that the Save Changes button " + shown + " shown");
 
-				var selRetailDetails = new RetailParntersDetails();
+				var selRetailDetails = new RetailPartnersDetails();
 				bool buttonShowing = selRetailDetails.SaveChangesButtonShowing();
 
 				Report.IsTrue(buttonShowing == (shown == "is"),
@@ -572,7 +604,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenClickTheSaveChangesButton()
 		{
 			Report.Info("Click the Save Changes button");
-			var selRetailDetails = new RetailParntersDetails();
+			var selRetailDetails = new RetailPartnersDetails();
 			Report.IsTrue(selRetailDetails.ClickSaveChanges(), "Failed to click 'Save Changes'", "Successfully clicked 'Save Changes'");
 		}
 
@@ -591,7 +623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"if the save button is visible, I save changes and close the popup dialog")]
 		public void ClickSaveClosePopupIfVisible()
 		{
-			var selRetailDetails = new RetailParntersDetails();
+			var selRetailDetails = new RetailPartnersDetails();
 			if (selRetailDetails.SaveChangesButtonShowing())
 			{
 				Report.Info("The save button was visible, so saving changes.");
@@ -619,8 +651,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var expected = new List<string>();
 			warning.Rows.ForEach(x => expected.Add(x["Message"]));
-			var displayed = new RetailParntersDetails().WarningMessages();
-			var differences = expected.Except(displayed);
+			List<string> displayed = new RetailPartnersDetails().WarningMessages();
+			IEnumerable<string> differences = expected.Except(displayed);
 			Report.IsTrue(!differences.Any(),
 				"The warning message did not match the expected text. Displayed is: " + string.Join("; ", displayed) + ". Expected is: " + string.Join("; ", expected),
 				"The warning message matched the expected text.");
@@ -634,8 +666,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Correct warning message is showing");
 
-				var selRetailDetails = new RetailParntersDetails();
-				var showing = selRetailDetails.WarningMessage();
+				var selRetailDetails = new RetailPartnersDetails();
+				string showing = selRetailDetails.WarningMessage();
 
 				Report.Info("Message was showing: " + showing);
 				Report.Info("Expected was: " + expected);
@@ -653,7 +685,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown")]
 		public void ThenConfirmTheNoteMessageBelowTheDataConsentTiersHeadingIsNotShown()
 		{
-			var displayed = new RetailParntersDetails().WarningMessages();
+			List<string> displayed = new RetailPartnersDetails().WarningMessages();
 			Report.IsTrue(!displayed.Any(x => x.Contains("NOTE")),
 				"The NOTE error message was displayed under the Data Cosent Tiers Heading",
 				"The NOTE error message was not diplayed under the Data Consent Tiers Heading");
@@ -668,16 +700,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check that the following retailers are showing:")]
 		public void RetailersAreCorrectlyShowing(Table expected)
 		{
-			var showing = new RetailPartners().GetAllAvailableRetailers();
+			List<string> showing = new RetailPartners().GetAllAvailableRetailers();
 			var retList = new List<string>();
-			foreach (var show in showing)
+			foreach (string show in showing)
 			{
 				string[] parts1 = show.Split('/');
 				string[] parts2 = parts1[parts1.Length - 1].Split('?');
 				string filename = parts2[0];
 				retList.Add(Path.GetFileNameWithoutExtension(filename).ToUpper());
 			}
-			foreach (var row in expected.Rows)
+			foreach (TableRow row in expected.Rows)
 			{
 				Report.IsTrue(retList.Contains(row["Code"]), "Failed to find retailer: " + row["Retailer"], "Successfully found a retailer: " + row["Retailer"], false, false);
 			}
@@ -708,14 +740,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void RetailerLogoIsNotShownThenRetailerNameIsShown()
 		{
 			var selRetailPartners = new RetailPartners();
-			var allRetailers = selRetailPartners.GetAllAvailableRetailers();
-			var count = allRetailers.Count;
+			List<string> allRetailers = selRetailPartners.GetAllAvailableRetailers();
+			int count = allRetailers.Count;
 			for (int i = 1; i <= count; i++)
 			{
 				//string[] parts = allRetailers[i - 1].Split('/');
 				//var filename = parts[parts.Length - 1].Split('?')[0];
 				//var retailerCode = Path.GetFileNameWithoutExtension(filename).ToUpper();
-				var retailerName = selRetailPartners.AllRetailerNames()[i - 1];
+				string retailerName = selRetailPartners.AllRetailerNames()[i - 1];
 				if (!selRetailPartners.RetailerImageDisplayed(i))
 				{
 					Report.IsTrue(selRetailPartners.RetailerTextDisplayed(i),
@@ -738,7 +770,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the back arrow next to CVS")]
 		public void GivenIClickTheBackArrowNextToCVS()
 		{
-			Report.IsTrue(new RetailParntersDetails().ClickBackButton(), "Failed to click the back arrow",
+			Report.IsTrue(new RetailPartnersDetails().ClickBackButton(), "Failed to click the back arrow",
 				"Successfully clicked the back arrow");
 		}
 
@@ -752,16 +784,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the Retailer Detail page")]
 		public void ThenIShouldSeeTheRetailerDetailPage()
 		{
-			Report.IsTrue(new RetailParntersDetails().Wait_for_load(60), "Retailer detail page is not showing as expected",
+			Report.IsTrue(new RetailPartnersDetails().Wait_for_load(60), "Retailer detail page is not showing as expected",
 				"Retailer detail page is showing as expected");
 		}
 
 		[StepDefinition(@"I check that in the Supplier ID table the following columns are showing:")]
 		public void ThenICheckThatInTheSupplierIDTableTheFollowingColumnsAreShowing(Table supplierIDTable)
 		{
-			List<string> SupplierIDHeaders = new RetailParntersDetails().GetSupplierIDTableHeaders().OrderBy(x => x).ToList();
+			var SupplierIDHeaders = new RetailPartnersDetails().GetSupplierIDTableHeaders().OrderBy(x => x).ToList();
 
-			List<string> ExpectedSupplierIDHeaders = supplierIDTable.Rows.Select(row => row["Column name"].Trim()).OrderBy(x => x).ToList();
+			var ExpectedSupplierIDHeaders = supplierIDTable.Rows.Select(row => row["Column name"].Trim()).OrderBy(x => x).ToList();
 
 			bool passed = true;
 
@@ -781,24 +813,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I click on the Add new Supplier ID link")]
+		[StepDefinition(@"I click on the Add new Supplier ID link")]
 		public void GivenIClickOnTheAddNewSupplierIDLink()
 		{
-			Report.IsTrue(new RetailParntersDetails().ClickAddSupplierId(), "Failed to click add supplier id link",
+			Report.IsTrue(new RetailPartnersDetails().ClickAddSupplierId(), "Failed to click add supplier id link",
 				"Successfully clicked add supplier id link");
 		}
 
-		[Then(@"I confirm the pop up shows the heading: (.*)")]
+		[StepDefinition(@"I confirm the pop up shows the heading: (.*)")]
 		public void ThenIConfirmThePopUpShowsTheHeading(string title)
 		{
-			var actualTitle = new ModalDialog().GetTitle();
+			string actualTitle = new ModalDialog().GetTitle();
 			Report.IsTrue(actualTitle == title, "Title is " + actualTitle + " but should be: " + title,
 				"Title is showing as expected: " + title);
 		}
 		[StepDefinition(@"I click the back arrow on the Retail Partners Details page")]
 		public void ClickTheBackArrowRetailPartnersDetails()
 		{
-			Report.IsTrue(new RetailParntersDetails().ClickBackButton(), "Failed to click the back arrow",
+			Report.IsTrue(new RetailPartnersDetails().ClickBackButton(), "Failed to click the back arrow",
 				"Successfully clicked the back arrow");
 			GeneralUtilities.Wait_for_load_finish();
 		}
@@ -845,7 +877,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (cancelOrSave == "cancel")
 			{
 				Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
-					"Successfully clicked cancel");
+					"Successfully clicked cancel", false, false);
 			}
 			else
 			{
@@ -862,21 +894,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Dialog has closed as expected");
 		}
 
-		[Given(@"I confirm in the browser popup")]
+		[StepDefinition(@"I confirm in the browser popup")]
 		public void GivenIConfirmInTheBrowserPopup()
 		{
 			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 		}
 
-		[Then(@"I confirm that the excel file saved as: (.*) contains the following columns:")]
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columns:")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
-			var File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				var expectedColumns = new List<string>();
+				foreach (TableRow thisRow in table.Rows)
+				{
+					expectedColumns.Add(thisRow["Column"]);
+				}
+
+				int unexpectedCount = 0;
+				if (expectedColumns.Count < ColumnTitles.Count)
+				{
+					Report.Info("Found unexpected columns!");
+					foreach (string ColumnTitle in ColumnTitles)
+					{
+						if (!expectedColumns.Contains(ColumnTitle))
+						{
+							unexpectedCount++;
+							Report.Info("Found unexpected column title: " + ColumnTitle + ".");
+						}
+					}
+					Report.Failure("Found " + unexpectedCount + " unexpected columns.");
+				}
 
 				foreach (TableRow thisRow in table.Rows)
 				{
@@ -884,6 +937,66 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						"Column name is not found: " + thisRow["Column"],
 						"Column name has been found as expected: " + thisRow["Column"], false, false);
 				}
+			}
+		}
+
+		[StepDefinition(@"I save the product with name: (.*) and id: (.*) as: (.*)")]
+		public void ISaveProductWithNameAndIDAs(string name, string id, string saveAs)
+		{
+			id = Context.GetFromContext(id)?.ToString() ?? "";
+			name = Context.GetFromContext(name)?.ToString() ?? "";
+			var newProductInformation = new ProductInformation {
+				Id = id,
+				Name = name
+			};
+			Context.AddToContext(saveAs, newProductInformation);
+		}
+
+		[StepDefinition(@"I save the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		public void ISaveTheFirstProductInTheExcelSpreadSheetAs(string spreadsheet, string product)
+		{
+			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
+				var newProductInformation = new ProductInformation {
+					Id = thisProduct[0],
+					Name = thisProduct[1]
+				};
+				Context.AddToContext(product, newProductInformation);
+			}
+		}
+
+		[StepDefinition(@"I save the first row in the spreadsheet saved as (.*) as (.*)")]
+		public void ISaveTheFirstRowOfTheSpreadsheetAs(string spreadsheet, string savedAs)
+		{
+			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> headers = ExcelUtils.Excel_GetRow(0);
+				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
+
+				var dictionary = new Dictionary<string, string>();
+				for (int i = 0; i < headers.Count && i < thisProduct.Count; i++)
+				{
+					dictionary[headers[i]] = thisProduct[i];
+				}
+				Context.AddToContext(savedAs, dictionary);
+			}
+		}
+
+		[StepDefinition(@"I save the value with the header (.*) on the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		public void SaveTheValueWithHeaderAs(string header, string spreadsheet, string saveAs)
+		{
+			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				string value = ExcelUtils.GetCellValue(1, header, 0);
+				Report.Info("Found value " + value + " for header " + header + ". Adding to context.");
+				Context.AddToContext(saveAs, value);
 			}
 		}
 
@@ -901,13 +1014,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new KeyValuePair<string, string>("WM-SC","Shoes.com")
 			};
 			var retailerNames = retailerInfo.Select(x => x.Value).ToList();
-			foreach (var retailer in retailerInfo)
+			foreach (KeyValuePair<string, string> retailer in retailerInfo)
 			{
 				TestReport.UseSubSteps = false;
 				TestReport.StartStep("Clicking the retailer: " + retailer.Value + " should navigate to the Wal-Mart/SAM'S CLUB Retail Partners Details page with all 7 affiliates shown under <retailer> & You");
 				TestReport.UseSubSteps = true;
 				var selRetailPartners = new RetailPartners();
-				var selRetailPartnersDetails = new RetailParntersDetails();
+				var selRetailPartnersDetails = new RetailPartnersDetails();
 				TestReport.StartStep("Clicking on the logo for the retailer: " + retailer.Value + " in the Retail Partners page");
 				Report.IsTrue(selRetailPartners.ClickRetailerLogo(retailer.Key),
 					"Failed to click on the logo for retailer: " + retailer.Value,
@@ -917,7 +1030,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"The selected retailer on Retail Partner Details page was not 'Wal-Mart/SAM'S CLUB'",
 					"The selected retailer on Retail Partner Details page was 'Wal-Mart/SAM'S CLUB' as expected");
 				TestReport.StartStep("I confirm that under the <Retailer> & You heading all 7 Wal-Mart affiliate retailers are displayed");
-				var actualRetailers = selRetailPartnersDetails.WalmartRegistrationsRetailers();
+				List<string> actualRetailers = selRetailPartnersDetails.WalmartRegistrationsRetailers();
 				Report.IsTrue(!actualRetailers.Except(retailerNames).Any() && actualRetailers.Count == retailerNames.Count,
 					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'")),
 					"The actual list of retailers showing under '<Retailer> & You matched the expected list");
@@ -928,7 +1041,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"I confirm that the excel file saved as: (.*) in column: (.*) there are no numbers")]
 		public void ThenIConfirmThatTheExcelFileSavedAsInColumnThereAreNoNumbers(string savedAs, string columnName)
 		{
-			var File = Context.GetFromContext(savedAs);
+			object File = Context.GetFromContext(savedAs);
 			bool AllPassed = true;
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
@@ -960,7 +1073,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I delete the excel file saved as (.*)")]
 		public void DeleteExcelFile(string savedAs)
 		{
-			var file = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (file.IsNullOrEmpty())
 			{
 				Report.Failure("Could not find file saved as: " + savedAs);
@@ -973,13 +1086,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the ""(.*)"" information button in the Retail Partners Details screen")]
 		public void ClickInformationButtonInDataTierDetails(string button)
 		{
-			Report.IsTrue(new RetailParntersDetails().ClickInfoButton(button), $"Failed to click the {button} button!", $"Successfully clicked the {button} button");
+			Report.IsTrue(new RetailPartnersDetails().ClickInfoButton(button), $"Failed to click the {button} button!", $"Successfully clicked the {button} button");
 		}
 
 		[StepDefinition(@"I confirm the ""(.*)"" information button is displayed on the Retail Partners Details screen")]
 		public void ConfirmTheInfoButtonIsDisplayedOnRetailPartnersDetails(string button)
 		{
-			Report.IsTrue(new RetailParntersDetails().InfoButton(button) != null,
+			Report.IsTrue(new RetailPartnersDetails().InfoButton(button) != null,
 				$@"The ""{button}"" button was not displayed!",
 				$@"The ""{button}"" was dipslayed as expected");
 		}
@@ -995,7 +1108,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var expectedTabs = new List<string>();
 			tabs.Rows.ForEach(x => expectedTabs.Add(x["Tab"]));
-			var displayedTabs = new DataTierDetails().AllTabs();
+			List<string> displayedTabs = new DataTierDetails().AllTabs();
 			Report.IsTrue(expectedTabs.All(x => displayedTabs.Contains(x)) && expectedTabs.Count == displayedTabs.Count,
 				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"))}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"))}""",
 				"The displayed tabs matched the expected tabs.");
@@ -1010,11 +1123,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the text displayed in the Data Tier Details popup matches for each section:")]
 		public void ConfirmTheTextDisplayedinDataTierDetialsPopupContains(Table paragraphText)
 		{
-			var displayedParagraphs_ = new DataTierDetails().TabParagraphs();
-			foreach (var row in paragraphText.Rows)
+			List<KeyValuePair<string, string>> displayedParagraphs_ = new DataTierDetails().TabParagraphs();
+			foreach (TableRow row in paragraphText.Rows)
 			{
-				var expectedSection = row["Section"];
-				var expectedText = row["Text"];
+				string expectedSection = row["Section"];
+				string expectedText = row["Text"];
 				Report.IsTrue(displayedParagraphs_.Any(x => x.Key == expectedSection && x.Value.Contains(expectedText)),
 					$"Did not find expected text in section: {expectedSection}! Expected: {expectedText}",
 					$"Found the expected text in section: {expectedSection}. Text: {expectedText}");
@@ -1024,7 +1137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Data Tier Details subheading reads: (.*)")]
 		public void ConfirmTheDataTierDetailsSubheadingReads(string expectedSubheading)
 		{
-			var actualSubHeading = new DataTierDetails().SubHeading().Trim();
+			string actualSubHeading = new DataTierDetails().SubHeading().Trim();
 			Report.IsTrue(expectedSubheading.Trim() == actualSubHeading,
 				$"The Data Tier Details subheading did not match the expected text! Expected: '{expectedSubheading}'. Actual: '{actualSubHeading}'",
 				"The Data Tier Details subheading matched the expected text");
@@ -1033,13 +1146,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Retailer Details Page has loaded")]
 		public void IConfirmTheRetailerDetailsPageHasLoaded()
 		{
-			Report.IsTrue(new RetailParntersDetails().Wait_for_load(), "The Retailer Details page was not loaded!", "The Retailer Details page was loaded as expected");
+			Report.IsTrue(new RetailPartnersDetails().Wait_for_load(), "The Retailer Details page was not loaded!", "The Retailer Details page was loaded as expected");
 		}
 
 		[StepDefinition(@"I confirm the Data Consent Tiers table is displayed")]
 		public void ConfirmTheDataConsentTiersTableIsDisplayed()
 		{
-			Report.IsTrue(new RetailParntersDetails().DataConsentTiersTable() != null,
+			Report.IsTrue(new RetailPartnersDetails().DataConsentTiersTable() != null,
 				"The Data Consent Tiers table was not displayed!",
 				"The Data Consent Tiers table was displayed as expected.");
 		}
@@ -1047,9 +1160,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that row: (.*) of the Data Consent Tiers table displays: ""(.*)""")]
 		public void ConfirmThatRowOfTheDataConsentTiersTableDisplaysText(string row, string text)
 		{
-			var selRetailPartnersDetails = new RetailParntersDetails();
-			var tierRows = selRetailPartnersDetails.GetAllDataConsentTiers();
-			if (int.TryParse(row, out var rowNum))
+			var selRetailPartnersDetails = new RetailPartnersDetails();
+			List<string> tierRows = selRetailPartnersDetails.GetAllDataConsentTiers();
+			if (int.TryParse(row, out int rowNum))
 			{
 				if (tierRows.Count < rowNum)
 				{
@@ -1067,7 +1180,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: (.*)")]
 		public void GivenIConfirmAnErrorShowsBelowTheSupplierIDQuestion(string expectedError)
 		{
-			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			var thisAddNewSupplier = new AddNewSupplier();
 			string actualError = thisAddNewSupplier.GetSupplierError();
 			if (actualError == null)
 			{
@@ -1081,7 +1194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: (.*)")]
 		public void GivenIConfirmAnErrorShowsBelowTheCompanyQuestion(string expectedError)
 		{
-			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			var thisAddNewSupplier = new AddNewSupplier();
 			string actualError = thisAddNewSupplier.GetCompanyNameError();
 			if (actualError == null)
 			{
@@ -1095,7 +1208,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Supplier ID input: (.*)")]
 		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput(string supplierIDInput)
 		{
-			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			var thisAddNewSupplier = new AddNewSupplier();
 			Report.IsTrue(thisAddNewSupplier.EnterSupplierID(supplierIDInput), "Failed to add supplier ID input",
 				"Entered supplier ID value");
 		}
@@ -1103,15 +1216,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: (.*)")]
 		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput(string companyInput)
 		{
-			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			var thisAddNewSupplier = new AddNewSupplier();
 			Report.IsTrue(thisAddNewSupplier.EnterCompanyOrBrandName(companyInput), "Failed to add company or brand name input",
 				"Entered company or brand name value");
 		}
 
+		[StepDefinition(@"in the Add New Supplier Dialog I select the first option in the Company or Brand Name input and save to context as: (.*)")]
+		public void GivenInTheAddNewSupplierDialogISelectTheFirstOptionInTheCompanyOrBrandNameInput(string savedAs)
+		{
+			var thisAddNewSupplier = new AddNewSupplier();
+			var options = thisAddNewSupplier.CompanyOrBrandNameOptions();
+			if (options == null || !options.Any())
+			{
+				Report.Failure("No options were found in the Company or Brand Name select input!");
+				Report.Screenshot();
+				return;
+			}
+			var option = options.First();
+			Context.AddToContext(savedAs, option);
+			Report.Info("Selecting option: " + option);
+			Report.IsTrue(thisAddNewSupplier.EnterCompanyOrBrandName(option), "Failed to add company or brand name input",
+				"Entered company or brand name value");
+		}
+
+		//CompanyOrBrandNameOptions()
+
 		[StepDefinition(@"in the Add New Supplier Dialog I Confirm that no error shows below Company or Brand Name question")]
 		public void GivenInTheAddNewSupplierDialogIConfirmThatNoErrorShowsBelowCompanyOrBrandNameQuestion()
 		{
-			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			var thisAddNewSupplier = new AddNewSupplier();
 			Report.IsTrue(!thisAddNewSupplier.CompanyNameErrorExists(), "Company or brand name error is incorrectly showing",
 				"As expected no error is showing below Company or Brand name question");
 		}
@@ -1119,19 +1252,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add New Supplier Dialog I Confirm that no error shows below Supplier ID question")]
 		public void GivenInTheAddNewSupplierDialogIConfirmThatNoErrorShowsBelowSupplierIDQuestion()
 		{
-			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			var thisAddNewSupplier = new AddNewSupplier();
 			Report.IsTrue(!thisAddNewSupplier.SupplierIDErrorExists(), "Supplier ID error is incorrectly showing",
 				"As expected no error is showing below Supplier ID question");
 		}
 
-		//| Supplier ID | Company or Brand Name |
+		/// <summary>
+		/// Requires a table with columns: | Supplier ID | Company or Brand Name |
+		/// Company or Brand Name may use 'saved as: (.*)' where (.*) is the Context savedAs string
+		/// </summary>
 		[Then(@"I confirm that in the Supplier IDS list the following row exists")]
 		public void ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(Table table)
 		{
-			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
+			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
 
 			string expectedSupplierID = table.Rows[0]["Supplier ID"];
 			string expectedCompany = table.Rows[0]["Company or Brand Name"];
+			if (expectedCompany.StartsWith("saved as:"))
+			{
+				var savedAs = expectedCompany.Replace("saved as:", "").Trim();
+				expectedCompany = Context.GetFromContext(savedAs)?.ToString();
+				if (expectedCompany == null)
+				{
+					Report.Failure("Failed to get Company Brand Name from context as: " + savedAs);
+					return;
+				}
+			}
 			Supplier matchingSupplier = allSuppliers.FirstOrDefault(x => x.SupplierID == expectedSupplierID && x.CompanyOrBrandName == expectedCompany);
 
 			Report.IsTrue(matchingSupplier != null, "No matching row was found in the list",
@@ -1140,7 +1286,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add New Supplier Dialog I click save")]
 		public void GivenInTheAddNewSupplierDialogIClickSave()
 		{
-			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			var thisAddNewSupplier = new AddNewSupplier();
 			thisAddNewSupplier.ClickSave();
 			Delay.Seconds(2);
 		}
@@ -1150,9 +1296,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I find the Supplier ID for (.*) in the SupplierID table and save as (.*)")]
 		public void GivenIFindTheSupplierIDForSupplierInTheSupplierIDTable(string supplier, string saveAs)
 		{
-			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
-			Regex regex = new Regex(@"\d+");
-			List<string> potentialRootStrings = new List<string>();
+			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
+			var regex = new Regex(@"\d+");
+			var potentialRootStrings = new List<string>();
 			foreach (Supplier thisSupplier in allSuppliers)
 			{
 				MatchCollection matches = Regex.Matches(thisSupplier.SupplierID, @"\d{5}1");
@@ -1167,7 +1313,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			string foundRootString = "";
-			foreach (var thisRootString in potentialRootStrings)
+			foreach (string thisRootString in potentialRootStrings)
 			{
 				if (allSuppliers.Select(x => x.SupplierID).ToList().Contains(thisRootString + "2") &&
 					allSuppliers.Select(x => x.SupplierID).ToList().Contains(thisRootString + "3"))
@@ -1205,7 +1351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Confirm the Is Active column for SupplierID saved as (.*) (shows|does not show) a green check mark")]
 		public void GivenIConfirmTheIsActiveColumnForSupplierIDSavedAsSupplierIDShowsAGreenCheckMark(string savedAs, string showsDoesNotShow)
 		{
-			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
+			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
 			string SupplierId = Context.GetFromContext(savedAs).ToString();
 			if (showsDoesNotShow == "shows")
 			{
@@ -1224,7 +1370,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public bool MatchAbbreviatedRetailer(string abbreviation, string retailerToMatch)
 		{
-			List<string>abbreviationList = abbreviation.Split(',').Select(x => x.Trim()).ToList();
+			var abbreviationList = abbreviation.Split(',').Select(x => x.Trim()).ToList();
 			string capitalLetters = string.Concat(retailerToMatch.Where(c => c >= 'A' && c <= 'Z'));
 
 
@@ -1235,7 +1381,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					if (capitalLetters.Substring(0, abbrv.Length) == abbrv)
 					{
 						Report.Info("Retailer to match has been abbreviated to: " +
-						            capitalLetters.Substring(0, abbrv.Length) + " and a match has been found");
+									capitalLetters.Substring(0, abbrv.Length) + " and a match has been found");
 						return true;
 					}
 				}
@@ -1251,6 +1397,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new DataTierDetails().ClickDownloadPdfWithHeading(option), $"Failed to click download pdf option for {option}!", $"Successfully clicked download pdf option for {option}");
 		}
 
+		[StepDefinition(@"The success message in the Save Changes popup dialog should contain the following:")]
+		public void SuccessMessagesSaveChangesPopupShouldContain(Table warning)
+		{
+			var expected = new List<string>();
+			warning.Rows.ForEach(x => expected.Add(x["Message"]));
+			List<string> displayed = new DataEntryNotification().SuccessMessages();
+			IEnumerable<string> differences = expected.Except(displayed);
+			Report.IsTrue(!differences.Any(),
+				"The success message did not match the expected text. Displayed is: " + string.Join("; ", displayed) + ". Expected is: " + string.Join("; ", expected),
+				"The sucess message matched the expected text.");
+
+		}
 	}
 }
 

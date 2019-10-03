@@ -5,8 +5,11 @@ using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
+using NTTQA.Selenium.UniversalFunctions;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using System.Collections.Generic;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -14,31 +17,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	class Steps_SupplierReports
 	{
 
-		[Given(@"Under the Supplier Reports menu I choose: (.*)")]
+		[StepDefinition(@"Under the Supplier Reports menu I choose: (.*)")]
 		public void GivenUnderTheSupplierReportsMenuIChoose(string choice)
 		{
 			Report.IsTrue(new SupplierReports().SelectReport(choice), "Failed to choose: " + choice,
 				"Successfully chose: " + choice);
 		}
 
-		[Then(@"In the Supplier Reports screen the current page should be: (.*)")]
-		public void ThenInTheSupplierReportsScreenTheCurrentPageShouldBe(string title)
+		[StepDefinition(@"In the Supplier Reports screen the page title should be: (.*)")]
+		public void InTheSupplierReportsScreenThePageTitleShouldBe(string title)
 		{
-			Report.IsTrue(new SupplierReports().GetCurrentTitle() == title, "Title is not showing as expected",
-				"Showing title: " + title + " as expected.");
+			string actual = new SupplierReports().GetCurrentTitle();
+			Report.IsTrue(actual == title, "Page title '" + title + "' is not showing as expected.",
+				"Page title '" + title + "' is showing as expected.");
 		}
 
-		[Given(@"In the Supplier Reports screen I click on the Download button")]
+		[StepDefinition(@"In the Supplier Reports screen the current page should be: (.*)")]
+		public void ThenInTheSupplierReportsScreenTheCurrentPageShouldBe(string expected)
+		{
+			string actual = new SupplierReports().GetCurrentTitle();
+			Report.IsTrue(actual == expected, "Title is not showing as expected",
+				"Showing subtitle: " + expected + " as expected.");
+		}
+
+		[StepDefinition(@"In the Supplier Reports screen the current sub-page should be: (.*)")]
+		public void ThenInTheSupplierReportsScreenTheCurrentSubPageShouldBe(string subtitle)
+		{
+			Report.IsTrue(new SupplierReports().GetCurrentSubTitle() == subtitle, "Subtitle is not showing as expected",
+				"Showing subtitle: " + subtitle + " as expected.");
+		}
+
+		[StepDefinition(@"In the Supplier Reports screen I click on the Download button")]
 		public void GivenInTheSupplierReportsScreenIClickOnTheDownloadButton()
 		{
 			Report.IsTrue(new SupplierReports().ClickDownload(), "Failed to click download button",
 				"Successfully clicked download button.");
 		}
 
-		[Given(@"under the supplier Reports menu I should see the following options")]
+		[StepDefinition(@"under the supplier Reports menu I should see the following options")]
 		public void GivenUnderTheSupplierReportsMenuIShouldSeeTheFollowingOptions(Table table)
 		{
-			var SupplierReports = new SupplierReports().GetReportList();
+			List<string> SupplierReports = new SupplierReports().GetReportList();
 
 			foreach (TableRow thisRow in table.Rows)
 			{
@@ -47,21 +66,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"In the Kits that contain a specific product I search and select product: (.*)")]
+		[StepDefinition(@"In the Kits that contain a specific product I search and select product: (.*)")]
 		public void GivenInTheKitsThatContainASpecificProductISearchAndSelectProduct(string productCode)
 		{
-			Report.IsTrue(new SupplierReports().SelectKitThatContainsSpecificProduct(productCode),
+			if (productCode.ToLower().Contains("saved as"))
+			{
+				try
+				{
+					ProductGridItem item = (ProductGridItem)Context
+						.GetFromContext(productCode.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
+					productCode = item.ProductId;
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to find saved item in context: " + productCode.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					throw;
+				}
+			}
+			Report.IsTrue(new SupplierReports().SelectSpecificProduct(productCode),
 				"Failed to select product: " + productCode, "Successfully selected product: " + productCode);
 		}
 
-		[Given(@"In the UPC Report for Specific Product with Retailer I search and select product: (.*)")]
+		[StepDefinition(@"In the UPC Report for Specific Product with Retailer I search and select product: (.*)")]
 		public void GivenInTheUPCReportForSpecificProductWithRetailerISearchAndSelectProduct(string productCode)
 		{
-			Report.IsTrue(new SupplierReports().SelectKitThatContainsSpecificProduct(productCode),
+			Report.IsTrue(new SupplierReports().SelectSpecificProduct(productCode),
 				"Failed to select product: " + productCode, "Successfully selected product: " + productCode);
 		}
 
-		[Given(@"In the Supplier Report page in the select Retailer dropdown I select: (.*)")]
+		[StepDefinition(@"I select a random product from the drop down")]
+		public void InTheUPCReportISelectARandomProduct()
+		{
+			Report.IsTrue(new SupplierReports().SelectRandomProduct(), "Failed to select a random product",
+				"Successfully selected a random product");
+		}
+
+		[StepDefinition(@"In the Supplier Report page in the select Retailer dropdown I select: (.*)")]
 		public void GivenInTheSupplierReportPageInTheSelectRetailerDropdownISelect(string retailer)
 		{
 			Report.IsTrue(new SupplierReports().SelectRetailer(retailer),
@@ -74,12 +114,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selReportDownload = new ReportDownload();
 			if (selReportDownload.Wait_for_load())
 			{
-				var count = 0;
+				int count = 0;
 				Report.Info("Confirm file is downloaded with name: " + file);
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 				while (count < 120)
 				{
-					var dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+					string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 					if (dir.Any())
 					{
 						Report.Success("File with name: " + dir.FirstOrDefault() + " was found in the download directory");
@@ -104,7 +144,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I delete the Supplier Report file saved as (.*)")]
 		public void DeleteExcelFile(string savedAs)
 		{
-			var file = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (file.IsNullOrEmpty())
 			{
 				Report.Failure("Could not find file saved as: " + savedAs);
@@ -117,10 +157,230 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Report page I should see the report description should be showing with text: (.*)")]
 		public void SupplierReportPageIShoudSeeDescription(string expected)
 		{
-			var displayed = new SupplierReports().GetCurrentSubText();
+			string displayed = new SupplierReports().GetCurrentSubText();
 			Report.IsTrue(expected == displayed,
 				"The report description text did not match the expected text. Expected: '" + expected + "'. But got: '" + displayed + "'.",
 				"The report description text was displayed as expected.");
 		}
+
+		[StepDefinition(@"If the product is Private Label, I ensure that product saved as: (.*) shows as Private Label: (.*)")]
+		public void IfProductIsPrivateLabelEnsureThatProductShowsAsPrivateLabel(string savedAs, string privateLabel)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string pl = Context.GetFromContext(privateLabel)?.ToString() ?? "";
+			string id = product.Id;
+			string name = product.Name;
+
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = id
+			};
+
+			Report.IsTrue(selProdGrid.ConfirmIsPrivateLabel(pl), "Failed to match Private Label tag to product!", "Successfully match Private Label tag to product.");
+		}
+
+		[StepDefinition(@"I confirm that UPC: (.*) shows in the list of UPCs")]
+		public void IConfirmThatTheUPCShowsInTheListOfUPCs(string savedAs)
+		{
+			string upc = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
+
+			Report.IsTrue(upcs.FirstOrDefault(x => x.UpcNumber == upc) != null, "Failed to find UPC " + upc + " in list of UPCs.",
+				"Successfully found UPC " + upc + " in list of UPCs.");
+		}
+
+		[StepDefinition(@"I confirm that the retailer listed for product saved as: (.*) appears as: (.*)")]
+		public void IConfirmThatTheRetailerForProductAppearsAs(string savedAs, string retailer)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string ret = Context.GetFromContext(retailer)?.ToString() ?? "";
+			string id = product.Id;
+			string name = product.Name;
+
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = id
+			};
+
+			ProductGridItem productElement = selProdGrid.FirstProductInGrid();
+			List<string> retailers = productElement.Retailers;
+
+			Report.IsTrue(retailers.FirstOrDefault(x => x == ret) != "", "Failed to find retailer " + ret + " in list of retailers.",
+				"Successfully found retailer " + ret + " in list of retailers.");
+		}
+
+		[StepDefinition(@"I confirm that for product saved as: (.*) the value in the (.*) column of spreadsheet (.*) is: (.*)")]
+		public void IConfirmThatForProductTheValueInTheColumnIs(string savedAs, string column, string spreadsheet, string value)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string file = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + spreadsheet);
+				return;
+			}
+			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			int index = 1;
+			while (index < ExcelUtils.Excel_GetColumn(0).Count)
+			{
+				if (ExcelUtils.GetCellValue(index, 0) == product.Id)
+				{
+					break;
+				}
+				index++;
+			}
+			string cellValue = ExcelUtils.GetCellValue(index, column);
+			Report.IsTrue(cellValue.Trim() == value.Trim(), "Cell value does not match value " + value + " for column " + column + " and id " + product.Id + ". Instead found: " + cellValue.Trim(),
+				"Cell value matches value " + value + " for column " + column + " and id " + product.Id + ".");
+		}
+
+		[StepDefinition(@"I confirm that for product saved as: (.*) the value in each of the columns of spreadsheet (.*) is as follows:")]
+		public void IConfirmThatforProductSavedAsTheValueInEachOfTheColumnsIs(string savedAs, string spreadsheet, Table table)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string file = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			table.Rows[0]["UPC"] = Context.GetFromContext(table.Rows[0]["UPC"])?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + spreadsheet);
+				return;
+			}
+			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			var headers = table.Header.ToList<string>();
+			var values = table.Rows[0].Values.ToList<string>();
+			int index = 1;
+			while (index < ExcelUtils.Excel_GetColumn(0).Count)
+			{
+				if (ExcelUtils.GetCellValue(index, 0) == product.Id)
+				{
+					break;
+				}
+				index++;
+			}
+			for (int i = 0; i < table.Header.Count; i++)
+			{
+				string cellValue = ExcelUtils.GetCellValue(index, table.Header.ElementAt(i));
+				Report.IsTrue(cellValue == values[i], "Failed to match cell value " + cellValue + " to table value " + values.ElementAt(i) + ".",
+					"Successfully match cell value " + cellValue + ".");
+			}
+		}
+
+		[StepDefinition(@"I confirm that for product saved as: (.*) the UPC in the (.*) column of spreadsheet (.*) is: (.*)")]
+		public void IConfirmThatForProductTheUPCInTheColumnIs(string savedAs, string column, string spreadsheet, string upc)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			string file = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
+			upc = Context.GetFromContext(upc)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + spreadsheet);
+				return;
+			}
+			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			int index = 1;
+			while (index < ExcelUtils.Excel_GetColumn(0).Count)
+			{
+				if (ExcelUtils.GetCellValue(index, 0) == product.Id)
+				{
+					break;
+				}
+				index++;
+			}
+			string cellValue = ExcelUtils.GetCellValue(index, column);
+			Report.IsTrue(cellValue.Trim() == upc.Trim(), "Cell value does not match UPC " + upc + " for column " + column + " and id " + product.Id + ".",
+				"Cell value matches UPC " + upc + " for column " + column + " and id " + product.Id + ".");
+
+		}
+		[StepDefinition(@"I Check that the Description text on the supplier report page matches: (.*)")]
+		public void ICheckThatTheDescriptionTextOnTheSupplierReportsPageIsCorrect(string expectedText)
+		{
+			Report.IsTrue(new SupplierReports().DescriptionTextMatches(expectedText), "The expected text did not match the actual text", "The expected text did match the actual text");
+		}
+	
+
+		[StepDefinition(@"I Check that in the excel file saved as: (.*) the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.")]
+		public void ICheckThatInTheExcelFileSavedAsTheEligibleForDeletionDates(string savedAs)
+		{
+
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var utils = new ExcelUtilities(File.ToString(), "Table");
+
+				var rows = utils.Excel_GetNoRows();
+				for (int i = 1; i < rows; i++)
+				{
+					var rowContents = utils.GetRowContents(i);
+					var productID = rowContents[0];
+					var deletionDate = rowContents[3];
+					DateTime lastSubDate;
+					DateTime.TryParse(deletionDate, out lastSubDate);
+					DateTime expectedEligibleDate = lastSubDate.AddYears(1);
+					Report.Info($"The expected eligible for deletion date is {expectedEligibleDate}");
+
+					var eligibleDate = rowContents[2];
+					DateTime actualEligibleDate;
+					DateTime.TryParse(eligibleDate, out actualEligibleDate);
+					Report.Info($"The acutal eligible for deletion date is {actualEligibleDate}");
+
+					Report.IsTrue(actualEligibleDate == expectedEligibleDate, "The Eligible for deletion date was not exactly one year from the last submission date for Item:" + i + " with productd ID:" + productID, "The Eligible for deletion date was exactly one year from the last submission date for Item:" + i + " with productd ID:" + productID);
+
+				}
+
+				////Needs fixing, currently this does not extract the dates as they are not strings in file.
+				//List<string> lastSubmissions = utils.Excel_GetColumn(2);
+				//List<string> eligibleForDeletions = utils.Excel_GetColumn(2);
+				//for (int i = 1; i < lastSubmissions.Count; i++)
+				//{
+				//	DateTime lastSubDate;
+				//	DateTime.TryParse(lastSubmissions[i], out lastSubDate);
+				//	DateTime expectedEligibleDate = lastSubDate.AddYears(1);
+				//	Report.Info($"The expected eligible for deletion date is {expectedEligibleDate}");
+
+				//	DateTime actualEligibleDate;
+				//	DateTime.TryParse(eligibleForDeletions[i], out actualEligibleDate);
+				//	Report.Info($"The acutal eligible for deletion date is {actualEligibleDate}");
+
+				//	Report.IsTrue(actualEligibleDate == expectedEligibleDate, "The Eligible for deletion date was not exactly one year from the last submission date for Item:" + i, "The Eligible for deletion date was exactly one year from the last submission date for Item:" + i);
+
+				//}
+				//return;
+
+
+			}
+
+
+		}
+
+		[StepDefinition(@"I get a value for WERCSmart ID from the excel file saved as: (.*) and save it to context as: (.*)")]
+		public void IGetAValueForWERCSmartIDFromExcelFileAndSaveItAs(string fileSavedAs, string iDSavedAs)
+		{
+			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
+			{
+				var utils = new ExcelUtilities(File.ToString(), "Table");
+				var rows = utils.Excel_GetNoRows();
+				for (int i = 1; i < rows; i++)
+				{
+					var rowContents = utils.GetRowContents(i);
+					var productID = rowContents[0];
+					if(productID.Any())
+					{
+						Context.AddToContext(iDSavedAs, productID);
+
+						var productInfo = new ProductInformation { Id = productID };
+						Context.AddToContext(iDSavedAs, productInfo);
+
+
+						Report.Success($"Found a WERCSmart ID: {productID} and saving it to context as: {iDSavedAs}");
+						return;
+					}
+				}
+			}
+			Report.Failure($"Could not find any WERCSmart IDs in the spreadsheet saved as: {fileSavedAs}");
+		}
+
 	}
 }
+		
+	
+
+

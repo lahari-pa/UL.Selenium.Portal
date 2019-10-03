@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -11,7 +12,7 @@
 @run_Flow9
 Feature: Flow 9
 
-@TReVorId:11512
+@ScenarioId:668
 Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -46,7 +47,7 @@ Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58072
 
 @newproductstepstest
-@TReVorId:11522
+@ScenarioId:676
 Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -68,7 +69,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I confirm there are 1 Publicly Disclosed ingredients in the Total section
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
 
-@TReVorId:11515
+@ScenarioId:671
 Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -88,7 +89,7 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
 	Given I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
@@ -100,7 +101,7 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I navigate to the home page
 	Then I delete the product: TestCase58078
 
-@tfs_design
+@ScenarioId:672
 Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -120,7 +121,8 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Save Mart Supermarkets
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58079, container type: Plastic bag and size: 8
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60567 (Upload Product Label only)
+	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -131,7 +133,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I navigate to the home page
 	Then I delete the product: TestCase58079
 
-@TReVorId:11513
+@ScenarioId:669
 Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -154,7 +156,7 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58073, container type: Plastic bag and size: 8
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
@@ -163,7 +165,7 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear - Gel Insert
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58073
 
-@TReVorId:11523
+@ScenarioId:678
 Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking SDS step shows only product label and Additional documents to provide shows SDS as optional)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -180,7 +182,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then I see the following sections
 		| Section                                                                                                                        |
 		| Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) |
-	Given In the Regulatory Documents to Provide Page, the document type is: Product Label for section: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)
+	Given I confirm the document type is: Product Label for section: Upload Full Product Label (required)
 	Then I do not see the following sections
 		| Section                                   |
 		| OSHA-compliant Safety Data Sheet, English |
@@ -190,7 +192,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then I see the following sections
 		| Section                                           |
 		| Upload Physical Data-related Documents (Optional) |
-	Given In the Additional Documents Page, the document type is: OSHA SDS for section: Upload Physical Data-related Documents (Optional)
+	Given I confirm the document type is: OSHA SDS for section: Upload Physical Data-related Documents (Optional)
 	Then I see the following sections
 		| Section                                           |
 		| Toxicity Characteristic Leaching Procedure (TCLP) |
@@ -198,7 +200,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63325
 
-@TReVorId:11519
+@ScenarioId:674
 Scenario: [58091] Latex Gloves - RU000151
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -217,7 +219,7 @@ Scenario: [58091] Latex Gloves - RU000151
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58091, container type: Plastic Container and size: 37
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
@@ -228,7 +230,7 @@ Scenario: [58091] Latex Gloves - RU000151
 	Given I navigate to the home page
 	Then I delete the product: TestCase58091
 
-@tfs_design
+@ScenarioId:670
 Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -236,8 +238,9 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I delete all products with UPC Number: saved as UPC58075
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplement for Infants - Liquid
+	Then I save the product information as: TestCase58075
 	Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
-	Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Aqua          | 65      | false               | false       |            |
@@ -246,18 +249,21 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 		| Vitamin E     | 5       | false               | false       |            |
 	# Added in 57637 to make test run. Consult Aaron (WERCS)
 	#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58075, container type: Plastic Container and size: 100
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60533 (Additional Documents to Provide - Flash Point and Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60567 (Upload Product Label only)
+	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance    | Odor  | Odor Threshold    | Partition Coefficient |
 		| Apron                         | 250                      | 11.11                   | 4.288     | Yellow-orange | Lemon | No data available | 3.354                 |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58075. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I navigate to the home page
+	Then I delete the product: TestCase58075
 
-@tfs_design
+@ScenarioId:673
 Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -274,19 +280,21 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 		| Vitamin A     | 10      | false               | false       |            |
 		| Citric acid   | 25      | false               | false       |            |
 	# Added in 57637 to make test run. Ask Wercs testers
-	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Petco
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58089, container type: Plastic Container and size: 100
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60567 (Upload Product Label only)
+	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor  | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 510                      | 15                      | 30.5      | Yellow     | Lemon | No data available | 10.0                  |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58089. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I navigate to the home page
+	Then I delete the product: TestCase58089
 
-@TReVorId:11521
+@ScenarioId:675
 Scenario: [58097] Ingredient Search in Registration
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -325,7 +333,7 @@ Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58094, container type: Plastic Container and size: 100
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
@@ -355,7 +363,7 @@ Scenario: [58081] Nutritional Supplement - Solid - RU000619
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58081, container type: Plastic Container and size: 5.2621
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
@@ -364,7 +372,7 @@ Scenario: [58081] Nutritional Supplement - Solid - RU000619
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 @upctest
-@TReVorId:22066
+@ScenarioId:677
 Scenario: [58604] Condom - RU000937
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -384,7 +392,7 @@ Scenario: [58604] Condom - RU000937
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58604, container type: Plastic Container and size: 6
-	Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I call Shared Step 60567 (Upload Product Label only)
 	# Needed 'Additional Documents to Provide' Page step
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue

@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -12,7 +13,7 @@
 Feature: Flow 4-A
 
 ## Changed to Engine Degreaser - Aerosol from Air Freshener-Dual Purpose/Disinfectant-Aerosol 06/18/2019
-@TReVorId:20285
+@ScenarioId:1004
 Scenario: [74825] Flow 4-A - Engine Degreaser - Aerosol - RU000647
 	Given I generate a random UPC number and save as: UPC74825
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

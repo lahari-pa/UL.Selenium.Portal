@@ -8,6 +8,12 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using TechTalk.SpecFlow;
+using System.IO;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.BaseClasses;
+using System.Collections.ObjectModel;
+using Castle.Components.DictionaryAdapter;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -15,13 +21,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		public bool ClickAddCaseUpcButton()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
 			if (el == null)
 			{
 				return false;
 			}
 
 			return el.TryClick();
+		}
+
+		public bool ClickSampleFileLink()
+		{
+			return this.FindElement(By.XPath("//a[@class='alert-link']")).TryClick();
 		}
 
 		public string LithiumBatteyWarning()
@@ -38,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetUPCOptions()
 		{
-			var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			var rList = new List<string>();
 			if (container != null)
 			{
@@ -55,7 +66,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AddCaseUpcButton()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -67,7 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AddUpcButton()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -80,15 +91,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-				var textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
-				var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
+				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
 					try
 					{
-						var savedUPC = Context
+						string savedUPC = Context
 							.GetFromContext(info.UpcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 							.ToString();
 						info.UpcNumber = savedUPC;
@@ -101,13 +112,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				}
 				upcNumberField.EnterText(info.UpcNumber);
-				var containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-				containsType.Select(info.ContainerType);
-				var regex = @"(.*)\((.*)\)";
-				var sizeField = (from input in textInputs
-								 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
-								 where match.Success && match.Groups[1].Value.StartsWith("Size") && match.Groups[2].Value.Contains("Ounces")
-								 select input).FirstOrDefault();
+				IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+				if (info.ContainerType == "<first>")
+				{
+					var firstOption = containsType.FindElement(By.XPath("./option[not(text()='Container Type')]"), 1).Text;
+
+					if (firstOption == null)
+					{
+						Report.Failure("There are no Container Types");
+						return false;
+					}
+					else
+					{
+						containsType.Select(firstOption);
+					}
+
+
+				}
+				else
+				{
+					containsType.Select(info.ContainerType);
+				}
+
+				string regex = @"(.*)\((.*)\)";
+				IWebElement sizeField = (from input in textInputs
+										 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
+										 where match.Success && match.Groups[1].Value.StartsWith("Size") && match.Groups[2].Value.Contains("Ounces")
+										 select input).FirstOrDefault();
 				if (sizeField == null)
 				{
 					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
@@ -117,26 +148,59 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				if (info.Quantity.Length > 0)
 				{
-					var quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity of Units within the Case']"), 2);
+					IWebElement quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity of Units within the Case']"), 2);
 					quantityField.EnterText(info.Quantity);
+				}
+
+				if (info.IndividualUpcCasePack.ToLower().Contains("saved as"))
+				{
+					try
+					{
+						var savedUPC = Context
+							.GetFromContext(info.IndividualUpcCasePack.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+							.ToString();
+						info.IndividualUpcCasePack = savedUPC;
+					}
+					catch (Exception e)
+					{
+						Report.Info("Failed to find saved item in context: " + info.IndividualUpcCasePack.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+						throw;
+					}
+
 				}
 
 				if (info.IndividualUpcCasePack.Length > 0)
 				{
-					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'upcContained.field')]"), 2);
+					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'upcContained.field')]"), 2);
 					packageField.Select(info.IndividualUpcCasePack);
 				}
 
 				if (info.TransportationOption.Length > 0)
 				{
-					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'transport.field')]"), 2);
+					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'transport.field')]"), 2);
 					if (info.TransportationOption.ToLower().Contains("random"))
 					{
-						List<string> packageOptions = packageField.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
-						Random r = new Random();
+						var packageOptions = packageField.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
+						var r = new Random();
 						int rInt = r.Next(0, packageOptions.Count - 1);
 						packageField.Select(packageOptions[rInt]);
 					}
+					else if (info.TransportationOption == "<first>")
+					{
+						var firstOption = packageField.FindElement(By.XPath("./option[not(text()='Transportation Options')]"), 1).Text;
+
+						if (firstOption == null)
+						{
+							Report.Failure("There are no Transportation Options");
+							return false;
+						}
+						else
+						{
+							packageField.Select(firstOption);
+						}
+
+					}
+
 					else
 					{
 						packageField.Select(info.TransportationOption);
@@ -162,17 +226,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetUPCErrorsForSection(string section)
 		{
-			var xPath = @"(.//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//label[@class='sr-only'][contains(text(),""" + section + @""")])] | " +
+			string xPath = @"(.//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//label[@class='sr-only'][contains(text(),""" + section + @""")])] | " +
 						@".//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//select[@class='form-control']//option[contains(text(),""" + section + @""")])])";
-			var el = this.containerElement.FindElements(By.XPath(xPath), 10);
+			IList<IWebElement> el = this.containerElement.FindElements(By.XPath(xPath), 10);
 			return el.Count == 0 ? new List<string>() : el.Select(x => x.Text).ToList();
 		}
 
 
 		public bool SelectRadio(string section, string value)
 		{
-			var xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
-			var el = this.containerElement.FindElement(By.XPath(xPath), 2);
+			string xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 2);
 			if (el != null)
 			{
 				return el.TryClick();
@@ -180,7 +244,425 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Error("Could not find the correct input in section: " + section);
 			return false;
 		}
+
+		internal bool VerifySampleFile(Table table, string fileName, string savedAs)
+		{
+			this.GetFile(fileName, savedAs);
+			var actualFile = Context.GetFromContext(savedAs);
+			List<string> fileData = GetFileData(savedAs, actualFile);
+
+			var tableData = new List<string>();
+			tableData.AddRange(table.Header);
+			foreach (TableRow row in table.Rows)
+			{
+				var vals = row.Values.Select(x =>
+				{
+					if (Regex.IsMatch(x, "<(.*)>"))
+					{
+						var match = Regex.Match(x, "<(.*)>").Groups[1].Value;
+						if (Context.Contains(match, true))
+						{
+							return Context.GetFromContext(match).ToString();
+						}
+					}
+
+					return x;
+				});
+
+				tableData.AddRange(vals.ToList());
+			}
+
+			if (tableData is null || fileData is null)
+			{
+				Report.Failure("Either the table is empty or the file: '" + fileName + "' is not being read.");
+				return false;
+			}
+
+			for (int i = 0; i < tableData.Count; i++)
+			{
+				if (tableData[i].Trim() != fileData[i].Trim())
+				{
+					Report.Info("Error: Table Data contains: " + tableData[i] + " while File Data contains: " + fileData[i] + " in row " + i);
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public List<string> GetFileData(string savedAs, object actualFile)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			if (Report.IsTrue(actualFile != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + actualFile.ToString()))
+			{
+				var ExcelUtils = new ExcelUtilities(actualFile.ToString(), "Sheet1");
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
+
+				var list = new List<string>();
+
+				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
+				{
+					list.AddRange(ExcelUtils.Excel_GetRow(i));
+				}
+				Report.IsTrue(list != null, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+				return list;
+			}
+			return null;
+		}
+
+		public void GetFile(string file, string savedAs)
+		{
+			Report.Info("Confirm Excel file is downloaded with name: " + file);
+			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			Report.Info("Downloads folder: " + downloadsFolder);
+			int counter = 0;
+			while (counter <= 5)
+			{
+				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+				if (dir.Any())
+				{
+					Context.AddToContext(savedAs, dir.FirstOrDefault());
+					Report.Success("File with name: " + dir.FirstOrDefault() + " was found successfully!");
+					Report.Info("Waited for: " + counter + " seconds");
+					return;
+				}
+				Delay.Seconds(1);
+				counter++;
+			}
+			Report.Failure("No file was found with name " + file);
+
+		}
+
+
+
+
+
+		public string GetErrorText()
+		{
+			string text = "";
+			IWebElement foundText = this.containerElement.FindElement(By.XPath("//ul[@class='form-error']//li"), 2);
+			if (foundText != null)
+			{
+				text = foundText.Text;
+			}
+			return text;
+		}
+		public bool ClickUploadUpcButton()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.TryClick();
+		}
+
+		public class UPCNewProduct
+		{
+			public bool IsChecked { get; set; }
+			public string UpcNumber { get; set; }
+			public string ContainerType { get; set; }
+			public string Size { get; set; }
+			public string Retailer { get; set; }
+			public bool WarningIsPresent { get; set; }
+
+
+		}
+
+		public List<UPCNewProduct> UPCsNewProduct {
+
+			get
+			{
+				var listOfUPCNewProducts = new List<UPCNewProduct>();
+				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"));
+				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
+				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tbody//tr"));
+				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "").Key;
+				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC Number")).Key;
+				int containerTypeIndex = th.FirstOrDefault(x => x.Value.Contains("Container Type")).Key;
+				int sizeIndex = th.FirstOrDefault(x => x.Value.Contains("Size (Weight Ounces)")).Key;
+				int retailerIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
+				int warningIsPresentIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
+				foreach (IWebElement thisRow in listOfRows)
+				{
+					bool isChecked = thisRow.FindElement(By.XPath(".//td[" + isCheckedIndex.ToString() + "]//input")).Selected;
+					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]/span[contains(@data-bind,'upc')]")).Text;
+					string containerType = thisRow.FindElement(By.XPath(".//td[" + containerTypeIndex.ToString() + "]/span[contains(@data-bind,'type')]")).Text;
+					string size = thisRow.FindElement(By.XPath(".//td[" + sizeIndex.ToString() + "]/span[contains(@data-bind,'size')]")).Text;
+					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]//span[@data-bind='text: identifier']")).Text;
+					bool warningIsPresent = thisRow.FindElement(By.XPath(".//td[" + warningIsPresentIndex.ToString() + "]//i[@title='This UPC Number is duplicated.']")).Displayed;
+					listOfUPCNewProducts.Add(new UPCNewProduct() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer = retailer, WarningIsPresent = warningIsPresent });
+				}
+				return listOfUPCNewProducts;
+			}
+
+
+		}
+
+		public class UPCBoxNumber
+		{
+			public IWebElement CheckBox { get; set; }
+			public string UpcNumber { get; set; }
+		}
+
+		public List<UPCBoxNumber> UPCSelectionBoxes {
+
+			get
+			{
+
+				var listofUPCcheckboxes = new List<UPCBoxNumber>();
+				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"));
+				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
+				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tbody//tr"));
+				int checkboxIndex = th.FirstOrDefault(x => x.Value == "").Key;
+				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC Number")).Key;
+				foreach (IWebElement thisRow in listOfRows)
+				{
+					IWebElement checkBox = thisRow.FindElement(By.XPath(".//td[" + checkboxIndex.ToString() + "]//input"));
+					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]/span[contains(@data-bind,'upc')]")).Text;
+					listofUPCcheckboxes.Add(new UPCBoxNumber() { CheckBox = checkBox, UpcNumber = upcNumber });
+				}
+				return listofUPCcheckboxes;
+
+			}
+
+		}
+
+
+
+
+		public bool UploadUpcButton()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public IWebElement UPCButtonContainerGeneral => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[contains(@class,'upc-buttons')]"), 2);
+		public IWebElement UPCButtonContainerTop => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[@class='upc-buttons affix-top']"), 2);
+		public IWebElement UPCButtonContainerBottom => containerElement.FindElement(By.XPath("//div[@class='col-md-12 formulation-grid upc-grid']//div[@class='upc-buttons affix']"), 2);
+
+		public bool ClickDeleteRowsButton()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@class,'danger')]"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.TryClick();
+		}
+
+		public string GetFirstUPCInList()
+		{
+			IWebElement upcEl = this.containerElement.FindElement(By.XPath(@"//table//td//span"), 2);
+			return upcEl.Text;
+		}
+
+
+		public bool DeleteRetailer(string retailer)
+		{
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr = "";
+			abbr.Map.TryGetValue(retailer, out selectedAbbr);
+
+			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			IWebElement retailerXElem = container.FindElement(By.XPath(@"//span[contains(text(), """ + selectedAbbr + @""")]/../a"), 2);
+
+			return retailerXElem.TryClick();
+		}
+
+		public bool EnterDPCI(string value)
+		{
+			IWebElement input = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
+			return input.TryEnterText(value);
+		}
+
+
+
+
 	}
+	public class DeleteRowsWarning : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath(@"//div[@class='modal-dialog modal-md']//div[@class='modal-content']");
+		public IWebElement DeleteRowsWarningPopupOkButton => containerElement.FindElement(By.XPath("//button[text()='Ok']"), 2);
+		public IWebElement DeleteRowsWarningPopupCancelButton => containerElement.FindElement(By.XPath("//button[text()='Cancel']"), 2);
+
+	}
+
+
+	public class MultipleUPC : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath(@"//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']");
+
+		public IWebElement SelectAllUpcsButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
+		public IWebElement ContainsType => containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
+		public IWebElement NextButton => containerElement.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
+		public IWebElement SelectAllRetailersButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
+		public IWebElement SelectXRetailersButton => containerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
+		public IWebElement FinishButton => containerElement.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
+
+		public bool ClickSelectAllUpcsButton()
+		{
+			return this.SelectAllUpcsButton.TryClick();
+		}
+		public bool ClickNextButton()
+		{
+			return this.NextButton.TryClick();
+		}
+		public bool ClickSelectAllRetailersButton()
+		{
+			return this.SelectAllRetailersButton.TryClick();
+		}
+		public bool ClickFinishButton()
+		{
+			return this.FinishButton.TryClick();
+		}
+
+		public bool CheckAllUPCsAreSelected()
+		{
+			var multipleUPCModal = new MultipleUPC();
+			IList<IWebElement> checkUPCBoxList = multipleUPCModal.FindElements(By.XPath("//td//input[@type='checkbox']"), 2);
+			IList<IWebElement> upcList = multipleUPCModal.FindElements(By.XPath("//td//span[@data-bind='text: row.upc']"), 2);
+			int i = 0;
+			foreach (var item in checkUPCBoxList)
+			{
+				if (!item.Selected)
+				{
+					Report.Info("The Checkbox Next to UPC Number: " + upcList[i] + " was not checked");
+					return false;
+				}
+				i++;
+			}
+			return true;
+		}
+
+		public bool CheckUPCNumberOfEachProductFromFile(string file, string savedAs)
+		{
+			new UPC().GetFile(file, savedAs);
+			var actualFile = Context.GetFromContext(savedAs);
+			List<string> fileData = new UPC().GetFileData(savedAs, actualFile);
+
+			var multipleUPCModal = new MultipleUPC();
+
+			if (fileData is null)
+			{
+				Report.Failure("either the table is empty or the file: '" + file + "' is not being read.");
+				return false;
+			}
+
+			IList<IWebElement> upcList = multipleUPCModal.FindElements(By.XPath("//td//span[@data-bind='text: row.upc']"), 2);
+			int i = 11;
+			foreach (var item in upcList)
+			{
+				string UPCnumber = item.Text;
+				if (UPCnumber != fileData[i].Trim())
+				{
+					Report.Info("error: popup contains: " + UPCnumber + "while file data contains: " + fileData[i] + " in row " + i);
+					return false;
+				}
+				i = i + 11;
+			}
+			return true;
+		}
+		public bool CheckSizeOfEachProductFromFile(string file, string savedAs)
+		{
+			new UPC().GetFile(file, savedAs);
+			var actualFile = Context.GetFromContext(savedAs);
+			List<string> fileData = new UPC().GetFileData(savedAs, actualFile);
+
+			var multipleUPCModal = new MultipleUPC();
+
+			if (fileData is null)
+			{
+				Report.Failure("either the table is empty or the file: '" + file + "' is not being read.");
+				return false;
+			}
+
+			IList<IWebElement> sizeList = multipleUPCModal.FindElements(By.XPath("//td//span[@data-bind='text: row.size']"), 2);
+			int i = 13;
+			foreach (var item in sizeList)
+			{
+				string sizeValue = item.Text;
+				if (sizeValue != fileData[i].Trim())
+				{
+					Report.Info("error: popup contains: " + sizeValue + "while file data contains: " + fileData[i] + " in row " + i);
+					return false;
+				}
+				i = i + 11;
+			}
+			return true;
+		}
+
+		public bool CheckAllRetailersSelectedStatus()
+		{
+			return this.SelectAllRetailersButton.Selected;
+		}
+
+		public List<KeyValuePair<int, string>> TableHeaders(IWebElement table)
+		{
+			List<KeyValuePair<int, string>> th = new EditableList<KeyValuePair<int, string>>(); //new List
+			ReadOnlyCollection<IWebElement> listOfHeaders = table.FindElements(By.XPath(".//th"));
+			for (int i = 0; i < listOfHeaders.Count; i++)
+			{
+				th.Add(new KeyValuePair<int, string>(i + 1, listOfHeaders[i].Text));
+			}
+			return th;
+		}
+
+
+
+
+		public class UPCUpload
+		{
+			public bool IsChecked { get; set; }
+			public string UpcNumber { get; set; }
+			public string ContainerType { get; set; }
+			public string Size { get; set; }
+			public string Retailer { get; set; }
+
+		}
+		public List<UPCUpload> UPCUploads {
+
+			get
+			{
+				var listOfUPCUploads = new List<UPCUpload>();
+				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table[@style='overflow:auto;']"));
+				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
+				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//table[@style='overflow:auto;']//tbody//tr"));
+				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "").Key;
+				int upcNumberIndex = th.FirstOrDefault(x => x.Value == "UPC").Key;
+				int containerTypeIndex = th.FirstOrDefault(x => x.Value.Contains("Type")).Key;
+				int sizeIndex = th.FirstOrDefault(x => x.Value.Contains("Size (Ounce)")).Key;
+				int retailerIndex = th.FirstOrDefault(x => x.Value.Contains("Retailer")).Key;
+				foreach (IWebElement thisRow in listOfRows)
+				{
+					bool isChecked = thisRow.FindElement(By.XPath(".//td[" + isCheckedIndex.ToString() + "]//input")).Selected;
+					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]")).Text;
+					string containerType = thisRow.FindElement(By.XPath(".//td[" + containerTypeIndex.ToString() + "]")).Text;
+					string size = thisRow.FindElement(By.XPath(".//td[" + sizeIndex.ToString() + "]")).Text;
+					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]")).Text;
+					listOfUPCUploads.Add(new UPCUpload() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer = retailer });
+				}
+				return listOfUPCUploads;
+			}
+
+		}
+
+
+
+
+
+
+	}
+
+
 
 	public class UpcCaseInformation
 	{
@@ -191,4 +673,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string IndividualUpcCasePack { get; set; } = "";
 		public string TransportationOption { get; set; } = "";
 	}
+
+
 }

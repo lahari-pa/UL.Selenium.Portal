@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using ICSharpCode.SharpZipLib.Tar;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
@@ -8,99 +9,70 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class LandingPage : BaseObject
+	class LandingPage : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@class='navbar navbar-default']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//div[@class='navbar navbar-default']");
 
-		public void Click_Login()
+		private IWebElement Login => this.containerElement.FindElement(By.XPath("//a[@id='loginButton']"), 1);
+
+		private IWebElement SignUp => this.containerElement.FindElement(By.XPath("//ul[@class='nav navbar-nav']//a[contains(text(),'Sign Up')]"), 1);
+
+		private IWebElement NavigationBar => this.containerElement.FindElement(By.XPath(".//ul[@class='nav navbar-nav']"), 1);
+
+		public bool Click_Login()
 		{
-			var loginButton = this.containerElement.FindElement(By.XPath(".//a[@id='loginButton']"), 2);
-			if (loginButton == null)
-			{ loginButton = this.containerElement.FindElement(By.XPath(".//a[contains (@href, 'ssologin')]"), 2); };
-			loginButton.Click();
-			var selLogin = new Login();
-			selLogin.Wait_for_load();
-			Delay.Seconds(Delay.SpeedFactor * 1);
+			IWebElement loginButton = this.Login ?? this.containerElement.FindElement(By.XPath(".//a[contains (@href, 'ssologin')]"), 2);
+			return loginButton.TryClick() && new Login().WaitForContainerToBeVisible();
 		}
 
-		public void Click_Signup()
-		{
-			var navigationElements = this.containerElement.FindElements(By.XPath(".//ul[@class='nav navbar-nav']//a"), 2);
-			navigationElements.FirstOrDefault(x => x.Text.Trim() == "Sign Up").Click();
-		}
+		public bool Click_SignUp() => this.SignUp.TryClick();
 
 		public List<string> NavigationOptionsAvailable()
 		{
-			var elements = this.containerElement.FindElements(By.XPath(".//ul[@class='nav navbar-nav']//a"), 2);
-			return elements.Select(x => x.Text.Trim()).ToList();
+			IList<IWebElement> els = this.NavigationBar.FindElements(By.XPath(".//a"), 1);
+			return els.Any() ? els.Select(x => x.Text.Trim()).ToList() : new List<string>();
 		}
 
 		public bool SelectOption(string option)
 		{
-			var optionLink = this.containerElement.FindElements(By.XPath(".//ul[@class='nav navbar-nav']//a"), 2).FirstOrDefault(x => x.GetValue().Trim() == option.Trim());
-			if (optionLink == null)
-			{ return false; }
-			optionLink.Click();
-			return true;
+			IWebElement optionLink = this.NavigationBar.FindElements(By.XPath(".//a"), 2).FirstOrDefault(x => x.GetValue().Trim() == option.Trim());
+			return optionLink != null && optionLink.TryClick();
 		}
 
 
 	}
 
-	class LandingPageFooter : BaseObject
+	class LandingPageFooter : SeleniumBaseObject
 	{
-		public const string BasePath = "//footer/div[@class='container']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
-		public bool ClickGetStartedNow()
-		{
-			return this.containerElement.FindElement(By.XPath(".//a[text()='Get started now']"), 2).TryClick();
-		}
+		protected override By ContainerElementLocator => By.XPath("//footer/div[@class='container']");
 
-		public bool ClickTermsOfUse()
-		{
-			return this.containerElement.FindElement(By.XPath(".//a[contains(text(),'Terms')]"), 2).TryClick();
-		}
+		public bool ClickGetStartedNow() => this.containerElement.FindElement(By.XPath(".//a[text()='Get started now']"), 2).TryClick();
+
+		public bool ClickTermsOfUse() => this.containerElement.FindElement(By.XPath(".//a[contains(text(),'Terms')]"), 2).TryClick();
 	}
 
-	class ManufacturersInfo : BaseObject
+	class ManufacturersInfo : SeleniumBaseObject
 	{
-		public const string BasePath = "//body[@class='manufacturers']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//body[@class='manufacturers']");
 	}
 
-	class RetailersInfo : BaseObject
+	class RetailersInfo : SeleniumBaseObject
 	{
-		public const string BasePath = "//body[@class='retailers']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//body[@class='retailers']");
 	}
 
-	class SubscriptionInfo : BaseObject
+	class SubscriptionInfo : SeleniumBaseObject
 	{
-		public const string BasePath = "//body[@class='subscription-options']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//body[@class='subscription-options']");
 	}
 
 
-	class ServerErrorDialog : BaseObject
+	class ServerErrorDialog : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[contains(@class, 'in')]//h4[@id='myModalLabel']/../..";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//div[contains(@class, 'in')]//h4[@id='myModalLabel']/../..");
 
-		public string Error_Text()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class='modal-body']"), 2).Text;
-		}
+		public string Error_Text() => this.containerElement.FindElement(By.XPath(".//div[@class='modal-body']"), 2)?.Text;
 
-		public bool ClickClose()
-		{
-			return this.containerElement.FindElement(By.XPath(".//button[@class='btn btn-default']"), 2).TryClick();
-		}
+		public bool ClickClose() => this.containerElement.FindElement(By.XPath(".//button[@class='btn btn-default']"), 2).TryClick();
 	}
 }

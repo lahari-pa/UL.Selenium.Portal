@@ -9,56 +9,49 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		// Cannot have a more precise container element than this
 		public const string BasePath = "//div[@class='container-fluid']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
-		public bool ClickCreateCompanyAccount()
-		{
-			return this.containerElement.FindElement(By.XPath(".//a[text()='Create Company Account']"), 2).TryClick();
-		}
+		public bool ClickCreateCompanyAccount =>
+			this.containerElement.FindElement(By.XPath(".//a[text()='Create Company Account']"), 2).TryClick();
 
 		public string Email {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).GetValue(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).GetValue();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).EnterText(value);
 		}
 
-		public bool ClickNext()
-		{
-			return this.containerElement.FindElement(By.XPath(".//input[@id='cmdNext']"), 2).TryClick();
-		}
+		public bool ClickNext =>
+			this.containerElement.FindElement(By.XPath(".//input[@id='cmdNext']"), 2).TryClick();
 
-		public bool ClickCancel()
-		{
-			return this.containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"), 2).TryClick();
-		}
+		public new bool ClickCancel =>
+			this.containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"), 2).TryClick();
 
 		public string WhatCityWereYouBornIn {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).Text.Trim(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).Text.Trim();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).EnterText(value);
 		}
 
 		public string WhatWasTheModelOfYourFirstCar {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).Text.Trim(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).Text.Trim();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).EnterText(value);
 		}
 
 		public string WhatIsYourFavouriteSport {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).Text.Trim(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).Text.Trim();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).EnterText(value);
 		}
 		public string WhatIsYourFavouriteFoodOrDrink {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).Text.Trim(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).Text.Trim();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).EnterText(value);
 		}
 
 		public string WhatIsYourFavouriteVacationDestination {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).Text.Trim(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).Text.Trim();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).EnterText(value);
 		}
 
 		public string EnterSecurePassword {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).Text.Trim(); }
-			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).Text.Trim();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).EnterText(value);
 		}
 	}
 }

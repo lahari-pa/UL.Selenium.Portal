@@ -7,6 +7,7 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -43,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Beginning Sub_Heading_Correct");
 
 			IWebElement myHeader = this.containerElement
-				.FindElements(By.XPath(".//div[@class='main-wrapper has-title payment-methods']/h2[text()='Select your payment method']"), 10).FirstOrDefault();
+				.FindElements(By.XPath(".//div[@class='main-wrapper has-title payment-methods']/h2"), 10).FirstOrDefault();
 
 			if (myHeader == null)
 			{
@@ -72,9 +73,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Select_Payment_Method: " + payment_method);
 			this.RefindContainerElement();
-			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div"), 2).ToList();
+			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div"), 2).ToList();
 
-			foreach (var method in allProducts)
+			foreach (IWebElement method in allProducts)
 			{
 				Report.Info("Payment Method = " + method.Text);
 
@@ -97,9 +98,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Delay.Seconds(2 * Delay.SpeedFactor);
 
-			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div")).ToList();
+			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div")).ToList();
 
-			foreach (var method in allProducts)
+			foreach (IWebElement method in allProducts)
 			{
 				Report.Info("Payment Method = " + method.Text);
 
@@ -120,11 +121,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Credit_Card_Default");
 
-			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//h4[@class='card-title']")).ToList();
+			var allProducts = this.containerElement.FindElements(By.XPath(".//h4[@class='card-title']")).ToList();
 
 			IWebElement myCard = null;
 
-			foreach (var method in allProducts)
+			foreach (IWebElement method in allProducts)
 			{
 				if (method.Text.Trim().Replace("\r\n", " ").Contains("Credit Card"))
 				{
@@ -155,6 +156,41 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool ClickMakeDefault(string user)
+		{
+			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='card payment-method']")).ToList();
+
+			IWebElement myCard = null;
+
+			foreach (var method in allProducts)
+			{
+				if (method.Text.Trim().Replace("\r\n", " ").Contains(user))
+				{
+					Report.Success("Payment Method for user found");
+					myCard = method;
+					break;
+				}
+				Report.Info("Payment Method for user doesn't match!");
+			}
+
+			if (myCard == null)
+			{
+				Report.Info("Failed to Find Credit Card Payment Method for user");
+				Report.Screenshot();
+				return false;
+			}
+
+			IWebElement myMakeDefault = myCard.FindElement(By.XPath(".//a[@class='btn btn-default btn-xs']"), 2);
+
+			if (myMakeDefault == null)
+			{
+				Report.Info("Not able to find make default option for user");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("found make default for user");
+			return myMakeDefault.TryClick();
+		}
 
 		public bool Credit_Card_Fields_Check(List<string> myList)
 		{
@@ -178,7 +214,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement _lbl_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-creditCardHolderName']"), 2);
 
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -266,7 +302,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement _err_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-creditCardHolderName']"), 2);
 
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -412,7 +448,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement _lbl_bank_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankName']"), 2);
 			IWebElement _lbl_acc_holder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankAccountName']"), 2);
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -500,7 +536,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement _err_bank_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankName']"), 2);
 			IWebElement _err_acc_holder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankAccountName']"), 2);
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -647,27 +683,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-2 address-panel']")]
 		private IWebElement _tbl_addresses;
 
-		public string Get_Contact_Info()
+		public List<string> Get_Contact_Info()
 		{
 			Report.Info("Beginning Get_Contact_Info");
+			//IWebElement myContact = this._tbl_addresses.FindElements(By.XPath("div[1]/div"), 10).FirstOrDefault();
 
-			IWebElement myContact = this._tbl_addresses.FindElements(By.XPath("div[1]/div"), 10).FirstOrDefault();
-
-			if (myContact == null)
+			//if (myContact == null)
+			//{
+			//	Report.Info("Failed to Find Contact Information");
+			//	Report.Screenshot();
+			//	return "";
+			//}
+			//Report.Info("Contact Information Found");
+			//return myContact.Text;
+			IList<IWebElement> myContact = this._tbl_addresses.FindElements(By.XPath("div[1]/div"), 10);
+			if (myContact != null)
 			{
-				Report.Info("Failed to Find Contact Information");
-				Report.Screenshot();
-				return "";
+				return myContact.Select(x => x.GetValue()).ToList();
 			}
-			Report.Info("Contact Information Found");
-			return myContact.Text;
+			return new List<string>();
 		}
 
 		public bool Confirm_Contact_Info(string company_name, string first_name, string last_name, string email_address)
 		{
 			Report.Info("Beginning Confirm_Contact_Info");
 
-			string myInfo = this.Get_Contact_Info();
+			List<string> myInfo = this.Get_Contact_Info();
 
 			if (!myInfo.Contains(company_name))
 			{
@@ -703,29 +744,41 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 
-		public string Get_Billing_Address()
+		public List<string> Get_Billing_Address()
 		{
 			Report.Info("Beginning Get_Billing_Address");
 
+			//IWebElement myBill = this.containerElement.FindElements(By.XPath(".//div/h3[text()='Billing Address']"), 10).FirstOrDefault();
+
+			//IWebElement myAddress = myBill.FindElements(By.XPath("../div"), 10).FirstOrDefault();
+
+			//if (myAddress == null)
+			//{
+			//	Report.Info("Failed to Find Billing Address");
+			//	Report.Screenshot();
+			//	return "";
+			//}
+			//Report.Info("Billing Address Found");
+			//return myAddress.Text;
 			IWebElement myBill = this.containerElement.FindElements(By.XPath(".//div/h3[text()='Billing Address']"), 10).FirstOrDefault();
-
-			IWebElement myAddress = myBill.FindElements(By.XPath("../div"), 10).FirstOrDefault();
-
-			if (myAddress == null)
+			if (myBill == null)
 			{
-				Report.Info("Failed to Find Billing Address");
-				Report.Screenshot();
-				return "";
+				Report.Info("Failed to Find Billing Address heading");
+				return null;
 			}
-			Report.Info("Billing Address Found");
-			return myAddress.Text;
+			IList<IWebElement> myAddress = myBill.FindElements(By.XPath("../div"), 10);
+			if (myAddress != null)
+			{
+				return myAddress.Select(x => x.GetValue()).ToList();
+			}
+			return new List<string>();
 		}
 
-		public bool Confirm_Billing_Address(string address_one, string address_two, string city, string state_code, string zip_code, string country, string phone_no)
+		public bool Confirm_Billing_Address(string address_one, string address_two, string city_state_zip, string country, string phone_no)
 		{
 			Report.Info("Beginning Confirm_Billing_Address");
 
-			string myInfo = this.Get_Billing_Address();
+			List<string> myInfo = this.Get_Billing_Address();
 
 			if (!myInfo.Contains(address_one))
 			{
@@ -741,27 +794,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			Report.Info("Address Two Correct: " + address_two);
-			if (!myInfo.Contains(city))
+			if (!myInfo.Contains(city_state_zip))
 			{
-				Report.Info("City Incorrect: " + city);
+				Report.Info("City Incorrect: " + city_state_zip);
 				Report.Screenshot();
 				return false;
 			}
-			Report.Info("City Correct: " + city);
-			if (!myInfo.Contains(state_code))
-			{
-				Report.Info("State Code Incorrect: " + state_code);
-				Report.Screenshot();
-				return false;
-			}
-			Report.Info("State Code Correct: " + state_code);
-			if (!myInfo.Contains(zip_code))
-			{
-				Report.Info("Zip Code Incorrect: " + zip_code);
-				Report.Screenshot();
-				return false;
-			}
-			Report.Info("Zip Code Correct: " + zip_code);
+			Report.Info("City Correct: " + city_state_zip);
+			//if (!myInfo.Contains(state_code))
+			//{
+			//	Report.Info("State Code Incorrect: " + state_code);
+			//	Report.Screenshot();
+			//	return false;
+			//}
+			//Report.Info("State Code Correct: " + state_code);
+			//if (!myInfo.Contains(zip_code))
+			//{
+			//	Report.Info("Zip Code Incorrect: " + zip_code);
+			//	Report.Screenshot();
+			//	return false;
+			//}
+			//Report.Info("Zip Code Correct: " + zip_code);
 			if (!myInfo.Contains(country))
 			{
 				Report.Info("Country Incorrect: " + country);
@@ -769,7 +822,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			Report.Info("Country Correct: " + country);
-			Report.Info("Zip Code Correct: " + zip_code);
 			if (!myInfo.Contains(phone_no))
 			{
 				Report.Info("Phone Number Incorrect: " + phone_no);
@@ -794,8 +846,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		//Add a New Payment Method
+		public bool Add_A_New_Payment_Method(string payment_method)
+		{
+			Report.Info("Beginning Select_Payment_Method: " + payment_method);
+			this.RefindContainerElement();
+			List<IWebElement> paymentOptions = this.containerElement.FindElements(By.XPath("//ul[@class='list-inline']//button"), 2).ToList();
 
+			foreach (var method in paymentOptions)
+			{
+				Report.Info("Payment Method = " + method.Text);
 
+				if (method.Text == payment_method)
+				{
+					Report.Success("Payment Method Found");
+					return method.TryClick();
+				}
+
+				Report.Info("Payment Method Doesn't Match");
+			}
+			Report.Info("Failed to Find Payment Method");
+			return false;
+		}
 
 	}
 
@@ -922,7 +994,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement myFieldHeader = null;
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -1237,7 +1309,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement myFieldHeader = null;
 
-			foreach (var field in myList)
+			foreach (string field in myList)
 			{
 				Report.Info("Field = " + field);
 				switch (field)
@@ -1376,6 +1448,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Subscription_Billing_Header_Correct()
 		{
 			Report.Info("Beginning Subscription_Billing_Header_Correct");
+
+			if (!this.Exists)
+			{
+				Report.Info("Not on Purchase Summary Page");
+				Report.Screenshot();
+				return false;
+			}
 
 			IWebElement myHeader = this.containerElement
 				.FindElements(By.XPath(".//div/h3[text()='Subscription Billing']"), 10).FirstOrDefault();
@@ -1582,7 +1661,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetRowsBelowProduct()
 		{
-			var headerRows = SeleniumBrowser.WebBrowser.FindElements(
+			ReadOnlyCollection<IWebElement> headerRows = SeleniumBrowser.WebBrowser.FindElements(
 				By.XPath("//h3[contains(text(),'Product Billing')]/..//table/tbody/tr/td/b"));
 
 			if (headerRows.Count > 1)
@@ -1591,7 +1670,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			else
 			{
-				var subRows = SeleniumBrowser.WebBrowser.FindElements(
+				ReadOnlyCollection<IWebElement> subRows = SeleniumBrowser.WebBrowser.FindElements(
 					By.XPath("//h3[contains(text(),'Product Billing')]/..//table/tbody/tr/td[2]"));
 				return subRows.Select(x => x.GetValue()).ToList();
 
@@ -1608,6 +1687,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ThankYou_Header_Correct()
 		{
 			Report.Info("Beginning ThankYou_Header_Correct");
+
+			if (!this.Exists)
+			{
+				Report.Info("Not on Thank you Page");
+				Report.Screenshot();
+				return false;
+			}
 
 			IWebElement myHeader = this.containerElement
 				.FindElements(By.XPath(".//div[@class='header-with-back']/h2[text()=' Thank You']"), 10).FirstOrDefault();
@@ -1628,16 +1714,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public bool Thank_You_Text(string tyText)
+		public string Thank_You_Text()
 		{
-			Report.Info("Beginning Thank_You_Text");
-
-
-
-
-
-			Report.Success("Text Correct");
-			return true;
+			var actualText = this.containerElement.FindElement(By.XPath(".//p[not(@class)]"),15).Text;
+			return actualText;
 
 		}
 
@@ -1648,7 +1728,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Home_click()
 		{
 			Report.Info("Attempting to Click Home Button");
-			var el = this.containerElement.FindElement(By.XPath(".//a[text()='Home']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[text()='Home']"), 2);
 			return el.TryClick();
 		}
 
@@ -1663,8 +1743,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 		public string EmailField {
-			get { return this.containerElement.FindElement(By.Id("email"), 2).Text; }
-			set { this.containerElement.FindElement(By.Id("email"), 2).EnterText(value); }
+			get => this.containerElement.FindElement(By.Id("email"), 2).Text;
+			set => this.containerElement.FindElement(By.Id("email"), 2).EnterText(value);
 		}
 
 
@@ -1685,7 +1765,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string PasswordField {
-			get { return this.containerElement.FindElement(By.Id("password"), 2).Text; }
+			get => this.containerElement.FindElement(By.Id("password"), 2).Text;
 			set
 			{
 				IWebElement pw = this.containerElement.FindElement(By.Id("password"), 2);
@@ -1724,7 +1804,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool WaitForSpinner()
 		{
-			var spinner = this._spinnerFinder.FindElement(By.XPath("//div[@class='spinWrap']"), 2);
+			IWebElement spinner = this._spinnerFinder.FindElement(By.XPath("//div[@class='spinWrap']"), 2);
 			if (spinner == null)
 			{
 				return true;
@@ -1758,5 +1838,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
+	public class Add_Credit_Card_Popup : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath("//div[@id='add-ccach-modal']//div[@class='modal-content']");
 
+		private IWebElement SaveButton => this.containerElement.FindElement(By.Id("save-pm"), 1);
+
+		public bool Click_Save()
+		{
+			Report.Info("Attempting to Click Save Button");
+			return this.SaveButton.TryClick();
+		}
+
+	}
 }

@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -13,7 +14,7 @@
 Feature: Flow 15
 
 
-@TReVorId:11592
+@ScenarioId:698
 Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -34,7 +35,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58760
 
-@TReVorId:11586
+@ScenarioId:697
 Scenario: [58759] Servers, Small-Scale - RU001183
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -49,7 +50,7 @@ Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
 | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
 | Alkaline     | <any>        | 4                               | 2                                  |
-Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58759, container type: Plastic Container and size: 10.00

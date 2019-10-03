@@ -6,12 +6,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	public class StudioDesktop : BaseObject
+	public class StudioDesktop : SeleniumBaseObject
 	{
 		public const string BasePath = "//iframe[@id='dashboard']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		//events, announcements, regulatory, technical
 		public bool ClickSection(string section)
@@ -23,5 +22,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 
+
+		
+
+
+	}
+
+	public class PasswordExpireNotice:StudioDesktop
+	{
+
+		public bool WaitForLoad()
+		{
+			var el = SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='modal-title' and text()='Password Expiration Notice']"), 2);
+			return el != null;
+		}
+
+		public bool ClickButton(string buttonName)
+		{
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath($".//button[text()='{buttonName}']"), 2).TryClick();
+		}
 	}
 }

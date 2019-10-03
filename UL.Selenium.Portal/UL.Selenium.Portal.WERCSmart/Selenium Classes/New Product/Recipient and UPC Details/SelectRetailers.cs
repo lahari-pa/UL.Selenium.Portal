@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.ExtensionMethods;
@@ -12,15 +13,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	class SelectRetailers : NewProduct
 	{
-		//public const string BasePath = "//div[@id='select-retailers-dialog']";
-		//[FindsBy(How = How.XPath, Using = BasePath)]
-		//protected override IWebElement containerElement { get; set; }
-
 		protected override By ContainerElementLocator => By.XPath("//div[@id='select-retailers-dialog']");
 
 		public bool SelectRetailer(string retailer)
 		{
-			var retailerInput = this.containerElement.FindElements(By.XPath("//label/span")).FirstOrDefault(x => x.Text.Trim() == retailer).FindElement(By.XPath("../input"), 2);
+			IWebElement retailerInput = this.containerElement.FindElements(By.XPath("//label/span")).FirstOrDefault(x => x.Text.Trim() == retailer).FindElement(By.XPath("../input"), 2);
 			if (retailerInput != null && retailerInput.TryClick())
 			{
 				return retailerInput.Selected;
@@ -31,15 +28,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectRetailerContains(string retailer)
 		{
-			var retailers = this.containerElement.FindElements(By.XPath("//label/span"));
-			var matchingRetailer = retailers.FirstOrDefault(x => x.Text.Trim().ToLower().Contains(retailer));
+			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//label/span"));
+			IWebElement matchingRetailer = retailers.FirstOrDefault(x => x.Text.Trim().ToLower().Contains(retailer));
 
 			if (matchingRetailer == null)
 			{
 				Report.Info("No matching retailer was found");
 				return false;
 			}
-			var retailerInput = matchingRetailer.FindElement(By.XPath("../input"), 2);
+			IWebElement retailerInput = matchingRetailer.FindElement(By.XPath("../input"), 2);
 			if (retailerInput != null && retailerInput.TryClick())
 			{
 				return retailerInput.Selected;
@@ -51,7 +48,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		// This is required for selecting the 'Walmart affiliate' retailers, which all have the same name/span text (Wal-Mart/SAM'S CLUB)
 		public bool SelectRetailerByLogo(string retailerCode)
 		{
-			var el = this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col-sm-3')]/div[starts-with(@class,'control')]"), 2).FirstOrDefault(x => x.GetCssValue("background-image").ToLower().Contains(retailerCode.ToLower()));
+			IWebElement el = this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col-sm-3')]/div[starts-with(@class,'control')]"), 2).FirstOrDefault(x => x.GetCssValue("background-image").ToLower().Contains(retailerCode.ToLower()));
 			if (el == null)
 			{
 				return false;
@@ -71,7 +68,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool DoneButton()
 		{
-			var el = this.containerElement.FindElement(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -116,7 +113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickRetailerOption(string option)
 		{
-			var toggleEl = this.containerElement.FindElement(By.XPath(".//a[@class='small-link' and contains(@data-bind,'toggleRetailerListView')]"), 2);
+			IWebElement toggleEl = this.containerElement.FindElement(By.XPath(".//a[@class='small-link' and contains(@data-bind,'toggleRetailerListView')]"), 2);
 			switch (option.ToLower())
 			{
 				case "list view":
@@ -161,23 +158,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public List<string> UnselectedRetailers()
 		{
-			var checkboxes = this.containerElement.FindElements(By.XPath(".//label[@class='checkbox']/input"), 2);
+			IList<IWebElement> checkboxes = this.containerElement.FindElements(By.XPath(".//label[@class='checkbox']/input"), 2);
 			return checkboxes.All(x => x.Checked()) ? new List<string>() :
 				checkboxes.Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span"), 2)?.Text).ToList();
 		}
 	}
 
-	class NoRetailerWarningPopup : BaseObject
+	class NoRetailerWarningPopup : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@class='modal fade in']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//div[@class='modal fade in']");
 
-		public bool ClickOk()
+		public bool ClickChoice(string choice)
 		{
+			choice = Regex.Replace(choice, "([A-Z])([A-Z]+)($|[A-Z])",
+			m => m.Groups[1].Value + m.Groups[2].Value.ToLower() + m.Groups[3].Value);
+			choice = char.ToUpper(choice[0]) + choice.Substring(1);
+
 			try
 			{
-				var el = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//button[contains(text(), 'Ok')]"), 2);
+				IWebElement el = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//button[contains(text(), '" + choice + "')]"), 2);
 				if (el == null)
 				{
 					return false;

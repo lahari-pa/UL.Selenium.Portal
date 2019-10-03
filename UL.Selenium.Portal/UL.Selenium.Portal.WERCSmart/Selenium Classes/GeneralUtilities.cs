@@ -6,6 +6,10 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
+using System.Text;
+using System.Linq;
+using NTTQA.Selenium.UniversalFunctions;
+using System.IO;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -15,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+				IList<IWebElement> spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
 				while (spinner.Any(x => x.Displayed))
 				{
 					Delay.Seconds(Delay.SpeedFactor * 1);
@@ -36,7 +40,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				for (int i = 0; i < maxSecondsToWait; i++)
 				{
-					var spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+					IList<IWebElement> spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
 					if (!spinner.Any(x => x.Displayed))
 					{
 						return true;
@@ -56,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			// wait up to 2 seconds for the loading bar to become visible
 			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//body[contains(@class,'pace-running')]"), 2);
 			// waits up to 30 seconds for the loading bar to then become invisible
-			return  SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 30);
+			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 30);
 		}
 
 		public static bool Loading_Active()
@@ -111,10 +115,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public static List<string> CvsUpcs()
 		{
 			var web = new HtmlWeb();
-			var document = web.Load(@"https://www.upcitemdb.com/info-cvs");
-			var nodes = document.DocumentNode.SelectNodes(@"//a[@name='upclist']//following-sibling::div//ul//li//div[@class='rImage']/a");
+			HtmlDocument document = web.Load(@"https://www.upcitemdb.com/info-cvs");
+			HtmlNodeCollection nodes = document.DocumentNode.SelectNodes(@"//a[@name='upclist']//following-sibling::div//ul//li//div[@class='rImage']/a");
 			var upcValues = nodes.Select(x => x.InnerText).ToList();
-			 return upcValues;
+			return upcValues;
 		}
 
 		public static bool TrySelect(IWebElement el, string optionValue, bool ignoreWhitespace = false)
@@ -130,10 +134,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					el.Select(optionValue);
 					return el.SelectedOption() == optionValue;
 				}
-				var options = el.FindElements(By.XPath("./option"), 1);
-				foreach (var thisOptionEl in options)
+				IList<IWebElement> options = el.FindElements(By.XPath("./option"), 1);
+				foreach (IWebElement thisOptionEl in options)
 				{
-					var thisOptionValue = thisOptionEl.GetValue();
+					string thisOptionValue = thisOptionEl.GetValue();
 					if (thisOptionValue.Replace(" ", string.Empty) != optionValue.Replace(" ", string.Empty))
 					{
 						continue;
@@ -149,6 +153,143 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public static string StripSpecialChars(string text)
+		{
+			StringBuilder sb = new StringBuilder();
+			foreach (char c in text)
+			{
+				if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
+				{
+					sb.Append(c);
+				}
+			}
+			return sb.ToString();
+		}
 
+		public static string RemoveLineBreaks(string fullString)
+		{
+			var splitByLineBreak = fullString.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+			var trimmedList = splitByLineBreak.Select(x => x.TrimEnd(' '));
+			//List<string> trimmedList = new List<string>();
+			//splitByLineBreak.ForEach(x => trimmedList.Add(x.TrimEnd(' ')));
+			string tidyString = string.Join(" ", trimmedList);
+			return tidyString;
+		}
+
+		public static bool DeleteFileFromDownloadsFolder(string fileName)
+		{
+			string downloadsFolder = KnownFolders.GetPath(KnownFolder.Downloads);
+			Report.Info("Deleting any existing files with name: " + fileName + " in the directory: " + downloadsFolder + ".");
+			var files = Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly);
+
+			foreach (var file in files)
+			{
+				try
+				{
+					Report.Info("Deleting: " + file);
+					File.Delete(file);
+				}
+				catch (Exception ex)
+				{
+					Report.Error("ERROR DELETING FILE: " + ex.Message);
+				}
+			}
+
+			if (!Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly).Any())
+			{
+				return true;
+			}
+			return false;
+		}
+	}
+
+	public class RetailerAbbreviations
+	{
+		private Dictionary<string, string> _abbr;
+		public Dictionary<string, string> Map { get { return this._abbr; } }
+		public RetailerAbbreviations()
+		{
+			this._abbr = new Dictionary<string, string> {
+				{ "Dollar General", "DG" },
+				{ "Albertsons (includes Albertsons, LLC and New Albertson's Inc.)", "AL" },
+				{ "Northgate Market", "NM" },
+				{ "Weis", "WE" },
+				{ "Publix", "PX" },
+				{ "Ultra/Standard", "ST" },
+				{ "HEB", "HE" },
+				{ "Delhaize America (All Retail Banners)", "DA" },
+				{ "Costco", "CO" },
+				{ "HyVee", "HV" },
+				{ "Dick's Sporting Goods", "DI" },
+				{ "Sears/K-Mart", "SE" },
+				{ "New Egg", "NE" },
+				{ "Canadian Tire", "CT" },
+				{ "Tractor Supply", "TS" },
+				{ "No Retailer/No UPC Product", "NR" },
+				{ "WinCo Foods", "WC" },
+				{ "Michaels", "MI" },
+				{ "HD Supply", "HS" },
+				{ "Price Chopper", "PR" },
+				{ "The Home Depot", "HD" },
+				{ "Ahold", "AH" },
+				{ "Lowe's", "LW" },
+				{ "SuperValu", "SV" },
+				{ "CVS", "CV" },
+				{ "Genuine Parts", "GP" },
+				{ "Big Lots", "BL" },
+				{ "Staples", "SP" },
+				{ "Office Depot", "OD" },
+				{ "Meijer", "MJ" },
+				{ "Rite Aid", "RA" },
+				{ "Essendant", "US" },
+				{ "Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)", "BB" },
+				{ "Schnuck's", "SC" },
+				{ "Smart & Final", "SF" },
+				{ "Target", "TG" },
+				{ "O'Reilly", "OR" },
+				{ "Walgreens", "WG" },
+				{ "Dietary Supplements", "DS" },
+				{ "Wakefern", "WF" },
+				{ "Unified", "UF" },
+				{ "Petco", "PC" },
+				{ "Kohl's", "KO" },
+				{ "Family Dollar", "FD" },
+				{ "Harbor Freight Tools", "HF" },
+				{ "Target Canada", "TC" },
+				{ "Autozone", "AZ" },
+				{ "99 Cents", "99" },
+				{ "McLane", "ML" },
+				{ "Wal-Mart/SAM'S CLUB", "WM" },
+				{ "Kroger", "KG" },
+				{ "A&P", "AP" },
+				{ "Amazon", "AM" },
+				{ "Dollar Tree Stores, Inc. / Greenbrier International, Inc", "DT" },
+				{ "Optoro", "OP" },
+				{ "TopCo", "TP" },
+				{ "Subscription", "SB" },
+				{ "Save Mart Supermarkets", "SM" },
+				{ "Best Buy", "BE" },
+				{ "Albertsons Companies", "SW" },
+				{ "Enterprise license", "EL" }
+			};
+		}
+
+		/// <summary>
+		/// If the input string exists as a key (retailer full name) then return the corresponding key (retailer abbreviation)
+		/// Otherwise return the original string
+		/// </summary>
+		public string TryConvertToAbbreviation(string input)
+		{
+			var abbreviationMappings = this.Map;
+			if (abbreviationMappings.ContainsKey(input))
+			{
+				abbreviationMappings.TryGetValue(input, out string retailer);
+				if (retailer != null)
+				{
+					return retailer;
+				}
+			}
+			return input;
+		}
 	}
 }

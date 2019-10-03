@@ -5,18 +5,16 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ShoppingCart : BaseObject
+	class ShoppingCart : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='shoppingCart']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 	}
 
-	class EmptyCart : BaseObject
+	class EmptyCart : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[starts-with(@class,'modal fade in')]";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool ClickClose()
 		{

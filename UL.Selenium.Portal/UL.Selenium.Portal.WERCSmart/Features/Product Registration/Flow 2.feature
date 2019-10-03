@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -13,7 +14,7 @@
 Feature: Flow 2
 
 
-@TReVorId:16741
+@ScenarioId:1011
 Scenario: [57367] Spill Clean Up Agent (Mitigation Agent)- RU000957 - 2S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -70,7 +71,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57367
 
 
-@TReVorId:18954
+@ScenarioId:1012
 Scenario: [57403] Septic System Maintainer (RU000174) - 2LS - 2S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -125,7 +126,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@TReVorId:16750
+@ScenarioId:1013
 Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -189,7 +190,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@TReVorId:17102
+@ScenarioId:1014
 Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -246,7 +247,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57646
 
 
-@TReVorId:16849
+@ScenarioId:1015
 Scenario: [57648] Trap and/or Bait Station - (RU000208) - 4S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -300,7 +301,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57648
 
 
-@TReVorId:17103
+@ScenarioId:1016
 Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -351,7 +352,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57649
 
 
-@TReVorId:17104
+@ScenarioId:1017
 Scenario: [57708] Aquarium Maintenance chemicals (RU000327) - 2LS -2L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -410,7 +411,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57708
 
 
-@TReVorId:18957
+@ScenarioId:1018
 Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -466,7 +467,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57731
 
 
-@TReVorId:18959
+@ScenarioId:1019
 Scenario: [57910] Septic System Maintainer (RU000174) - 2LS - 2L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -525,7 +526,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 2
 @71274
-@TReVorId:21913
+@ScenarioId:1020
 Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

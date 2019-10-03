@@ -1,4 +1,5 @@
-﻿@LandingPage
+﻿@Shared
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -172,7 +173,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60775, container type: Aerosol Can and size: 20
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page

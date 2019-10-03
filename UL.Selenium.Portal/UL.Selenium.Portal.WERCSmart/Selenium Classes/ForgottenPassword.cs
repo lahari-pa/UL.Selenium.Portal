@@ -13,19 +13,18 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ForgottenPassword : BaseObject
+	class ForgottenPassword : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@class='login-wrapper']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		/// <summary>
 		/// Gets the Continue button
 		/// </summary>
 		public void Click_Continue()
 		{
-			var btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselContinue']"), 2);
+			IWebElement btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselContinue']"), 2);
 			btn.Click();
 		}
 
@@ -34,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public void Click_Cancel()
 		{
-			var btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
+			IWebElement btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
 			btn.Click();
 		}
 
@@ -91,7 +90,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		///</summary>
 		public string ForgotPasswordSuccessMessage()
 		{
-			var text = this.containerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
+			string text = this.containerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
 			int i = 0;
 			while (text == "" && i < 10)
 			{
@@ -120,21 +119,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class ForgottenPasswordQuestions : BaseObject
+	class ForgottenPasswordQuestions : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@class='login-wrapper register']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
-		//Question 1
-		[FindsBy(How = How.Id, Using = "secQuestion1")]
-		private IWebElement _txtQuestionOne;
+		private IWebElement QuestionOne => this.containerElement.FindElement(By.Id("secQuestion1"), 1);
 
 		public bool Enter_Answer_One(string answerText)
 		{
 			Report.Info("Entering Answer One: " + answerText);
-			this._txtQuestionOne.EnterText(answerText);
+			this.QuestionOne.EnterText(answerText);
 			return true;
 		}
 

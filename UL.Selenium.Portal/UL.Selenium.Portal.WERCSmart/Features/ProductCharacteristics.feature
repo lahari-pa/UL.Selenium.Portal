@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -13,7 +14,7 @@
 
 Feature: Product Characteristics
 
-@TReVorId:20231
+@ScenarioId:1155
 Scenario: [31834] Product Characteristics - Solid only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -30,7 +31,7 @@ And I should see following statement: When mixed with an equal amount of water, 
 And I should see following statement: Select the best Water Solubility description
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31834
 
-@TReVorId:20232
+@ScenarioId:1156
 Scenario: [31837] Product Characteristics - Solid only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -45,7 +46,7 @@ And Select the best Water Solubility description should be showing the error mes
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31837
 
 
-@TReVorId:20233
+@ScenarioId:1153
 Scenario: [31827] Product Characteristics - Liquid only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -66,7 +67,7 @@ And I should see following statement: Flash Point (in Celsius)
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31827
 
 
-@TReVorId:20234
+@ScenarioId:1154
 Scenario: [31833] Product Characteristics - Liquid only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -85,7 +86,7 @@ And Select the best Water Solubility description should be showing the error mes
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31833
 
 
-@TReVorId:20235
+@ScenarioId:1149
 Scenario: [31786] Product Characteristics - Aerosol only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -108,7 +109,7 @@ And The following radio buttons should be displayed for section: When the produc
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31786
 
 
-@TReVorId:20236
+@ScenarioId:1150
 Scenario: [31789] Product Characteristics - Aerosol only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -123,7 +124,7 @@ And When the product has a flammable propellant, or contains ingredients with a 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31789
 
 
-@TReVorId:20288
+@ScenarioId:1151
 Scenario: [31804] Product Characteristics - Gas only navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -140,7 +141,7 @@ And I should see following statement: Select the best Water Solubility descripti
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31804
 
 
-@TReVorId:20289
+@ScenarioId:1152
 Scenario: [31826] Product Characteristics - Gas only validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -154,7 +155,7 @@ And Select the best Water Solubility description should be showing the error mes
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31826
 
 
-@TReVorId:20290
+@ScenarioId:1157
 Scenario: [85157] Product Characteristics - All navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -174,7 +175,7 @@ And I should see following statement: Select the best Water Solubility descripti
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85157
 
 
-@TReVorId:20291
+@ScenarioId:1158
 Scenario: [85158] Product Characteristics - All validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load

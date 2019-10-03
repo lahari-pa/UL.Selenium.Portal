@@ -17,8 +17,8 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public bool Wait_For_Load(int secondsToWait = 30)
 		{
-			var counter = 0;
-			var loaded = false;
+			int counter = 0;
+			bool loaded = false;
 			while (counter < secondsToWait && !loaded)
 			{
 				this.RefreshContainer();
@@ -35,7 +35,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			{
 				return this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'grid-stack-item-content')]"), 2).FirstOrDefault();
 			}
-			var match = this.containerElement.FindElements(By.XPath(".//div[@class='panel-title']"), 2)
+			IWebElement match = this.containerElement.FindElements(By.XPath(".//div[@class='panel-title']"), 2)
 				?.FirstOrDefault(x => x.Text == title);
 			return match?.FindElement(By.XPath("./ancestor::div[starts-with(@class,'grid-stack-item-content')][1]"), 2);
 		}
@@ -53,35 +53,35 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 
 		public bool ClickWidgetDropDownMenuToggle(string widgetTitle)
 		{
-			var xPath = ".//div[@class='panel-title' and text()='" + widgetTitle + "']/../..//button[@class='btn btn-default dropdown-toggle']";
+			string xPath = ".//div[@class='panel-title' and text()='" + widgetTitle + "']/../..//button[@class='btn btn-default dropdown-toggle']";
 			return this.containerElement.FindElement(By.XPath(xPath), 2).TryClick();
 		}
 
 		public bool WidgetDropDownMenuToggleDisplayed(string widgetTitle)
 		{
-			var xPath = ".//div[@class='panel-title' and text()='" + widgetTitle + "']/../..//button[@class='btn btn-default dropdown-toggle']";
+			string xPath = ".//div[@class='panel-title' and text()='" + widgetTitle + "']/../..//button[@class='btn btn-default dropdown-toggle']";
 			return this.containerElement.FindElement(By.XPath(xPath), 2) != null;
 		}
 
 		public bool RemoveDropDownItemDisplayed(string widgetTitle)
 		{
-			var container = this.WidgetContainer(widgetTitle);
+			IWebElement container = this.WidgetContainer(widgetTitle);
 			if (container == null)
 			{
 				return false;
 			}
-			var el = container.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
+			IWebElement el = container.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
 			return el != null && el.Displayed;
 		}
 
 		public bool ClickRemoveDropDownItem(string widgetTitle)
 		{
-			var container = this.WidgetContainer(widgetTitle);
+			IWebElement container = this.WidgetContainer(widgetTitle);
 			if (container == null)
 			{
 				return false;
 			}
-			var el = container.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
+			IWebElement el = container.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
 			return el.TryClick();
 		}
 
@@ -89,7 +89,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		{
 			var rMessageCenter = new MessageCenter();
 			// get element with title 'Message Center'
-			var container = this.WidgetContainer("Message Center");
+			IWebElement container = this.WidgetContainer("Message Center");
 			if (container == null)
 			{
 				return null;
@@ -106,7 +106,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		{
 			var rSubscriptionStatus = new SubscriptionStatus();
 			// get element with title 'Subscription Status'
-			var container = this.WidgetContainer("Subscription Status");
+			IWebElement container = this.WidgetContainer("Subscription Status");
 			if (container == null)
 			{
 				return null;
@@ -119,12 +119,12 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		public WidgetGraph GetGraph(DashboardWidget widget)
 		{
 			var rGraph = new WidgetGraph();
-			var container = this.WidgetContainer(widget.Title);
+			IWebElement container = this.WidgetContainer(widget.Title);
 			if (container == null)
 			{
 				return null;
 			}
-			var gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
+			IList<IWebElement> gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
 			if (gEls.Count == 0)
 			{
 				return null;
@@ -148,12 +148,12 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		public WidgetGraph GetGraph(string widgetName)
 		{
 			var rGraph = new WidgetGraph();
-			var container = this.WidgetContainer(widgetName);
+			IWebElement container = this.WidgetContainer(widgetName);
 			if (container == null)
 			{
 				return null;
 			}
-			var gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
+			IList<IWebElement> gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
 			if (gEls.Count == 0)
 			{
 				return null;

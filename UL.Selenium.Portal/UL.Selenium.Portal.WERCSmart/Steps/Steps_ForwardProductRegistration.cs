@@ -8,6 +8,7 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -27,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Info("Checking that Forward Product Registration window appears");
 				var selForwardProductRegistration = new ForwardProductRegistration();
-				var showing = selForwardProductRegistration.HeaderShowing();
+				string showing = selForwardProductRegistration.HeaderShowing();
 				Report.IsTrue(showing == headerExpected.Trim(),
 					"Forward Product Registration header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
 					"Forward Product Registration header was showing '" + headerExpected + "', as expected!");
@@ -53,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Info("Checking that Forward Product Registration window appears");
 				var selForwardProductRegistration = new ForwardProductRegistration();
-				var showing = selForwardProductRegistration.SubHeadings3Showing();
+				List<string> showing = selForwardProductRegistration.SubHeadings3Showing();
 				Report.IsTrue(showing.Contains(subheaderExpected.Trim()),
 					"Forward Product Registration subheader3 was not as expected! Expected: '" + subheaderExpected + "', but found: '" + string.Join("', '", showing) + "' instead!",
 					"Forward Product Registration header was showing '" + subheaderExpected + "', as expected!");
@@ -79,7 +80,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Info("Checking that Forward Product Registration window appears");
 				var selForwardProductRegistration = new ForwardProductRegistration();
-				var showing = selForwardProductRegistration.SubHeadings4Showing();
+				List<string> showing = selForwardProductRegistration.SubHeadings4Showing();
 				Report.IsTrue(showing.Contains(subheaderExpected.Trim()),
 					"Forward Product Registration subheader 4 was not as expected! Expected: '" + subheaderExpected + "', but found: '" + string.Join("', '", showing) + "' instead!",
 					"Forward Product Registration header was showing '" + subheaderExpected + "', as expected!");
@@ -135,6 +136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click continue on the Forward Product Registration page")]
 		public void ClickContinueForwardProductRegistration()
 		{
+			Delay.Seconds(3);
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(selForwardProdReg.ClickContinue() && GeneralUtilities.Wait_for_load_finish(),
 				"Failed to click continue", "Successfully clicked continue");
@@ -181,7 +183,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ActiveTabIsCorrect(string expectedTab)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
-			var actualTab = selForwardProdReg.ActiveTab();
+			string actualTab = selForwardProdReg.ActiveTab();
 			if (actualTab == null)
 			{
 				Report.Failure("Could not find an active tab in the Forward Product Registration page");
@@ -197,6 +199,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SelectVendor(string value)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
+			if (value.ToLower() == "<first>")
+			{
+				value = selForwardProdReg.FirstProductSelectedVendor();
+			}
 			Report.IsTrue(selForwardProdReg.FirstProductSelectVendor(value),
 				"Failed to select vendor: " + value,
 				"Successfully selected vendor: " + value);
@@ -211,11 +217,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully selecte the first UPC");
 		}
 
+		[StepDefinition(@"I click the 'select all' UPCs checkbox")]
+		public void ClickSelectAllUpcsCheckbox()
+		{
+			Report.IsTrue(new ForwardProductRegistration().ClickSelectAllUpcs, "Failed to click select all UPCs", "Clicked select all UPCs");
+		}
+
 		[StepDefinition(@"I confirm that: (.*) is displayed in the Destination Retailers column under Select UPCs")]
 		public void ConfirmDestinationRetailersColumnSelectUPCs(string value)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
-			var upcs = selForwardProdReg.GetUPCs();
+			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
 			if (upcs.Count == 0)
 			{
 				Report.Failure("No UPC rows were found in the grid");
@@ -237,7 +249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmDestinationRetailersColumnProductResults(string value)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
-			var prodResults = selForwardProdReg.GetProductResults();
+			List<ForwardProductRegistration.ProductResults> prodResults = selForwardProdReg.GetProductResults();
 			if (prodResults.Count == 0)
 			{
 				Report.Failure("No product rows were found on the Product Results page!");
@@ -264,8 +276,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				int counter = 0;
 				while (counter < 120)
 				{
-					var disabled = selForwardProdReg.SelectProducts_ProductCheckboxIsDisabled();
-					var loadingActive = GeneralUtilities.Loading_Active();
+					bool disabled = selForwardProdReg.SelectProducts_ProductCheckboxIsDisabled();
+					bool loadingActive = GeneralUtilities.Loading_Active();
 					if (disabled && loadingActive)
 					{
 						counter++;
@@ -297,7 +309,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveSelectableProductID(string savedAs)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
-			var id = selForwardProdReg.SelectProducts_FirstProductID();
+			string id = selForwardProdReg.SelectProducts_FirstProductID();
 			if (id == null)
 			{
 				Report.Failure("Could not find the product ID for the first selectable product!");
@@ -310,6 +322,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab")]
 		public void SelectProductByIDSavedAs(string savedAs)
 		{
+
+
 			var selForwardProductReg = new ForwardProductRegistration();
 			if (savedAs.ToLower().Contains("list"))
 			{
@@ -320,7 +334,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 				bool clicked = false;
-				foreach (var id_ in ids)
+				foreach (string id_ in ids)
 				{
 					Report.Info("Attempting to select product with id: " + id_);
 					this.EnterTextInSearchByIDOrProductNameField(id_);
@@ -340,18 +354,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				var id = Context.GetFromContext(savedAs)?.ToString();
+
+				string id = Context.GetFromContext(savedAs)?.ToString();
 				if (id == null)
 				{
 					Report.Failure("Could not find product ID in context saved as: " + savedAs);
 					return;
 				}
+				if (id.Contains("ProductInformation"))
+				{
+					Report.Info("text: 'ProductInformation' was contained in the string, searching context for product saved as: " + savedAs);
+
+					try
+					{
+						var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+						id = productToSearch.ProductId;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+				}
+
 				this.EnterTextInSearchByIDOrProductNameField(id);
 				Report.Screenshot();
 				Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
 					"Failed to select the product with ID: " + id + "!",
 					"Successfully selected the product with ID: " + id);
 			}
+		}
+
+		[StepDefinition(@"I select the product saved as: (.*) under the Select Products tab")]
+		public void ISelectTheProductSavedAsUnderSelectProducts(string savedAs)
+		{
+			var selForwardProductReg = new ForwardProductRegistration();
+			var info = (ProductInformation)Context.GetFromContext(savedAs);
+			if (info == null)
+			{
+				Report.Failure("Could not find product in context saved as: " + savedAs);
+				return;
+			}
+			this.EnterTextInSearchByIDOrProductNameField(info.Id);
+			Report.Screenshot();
+			Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(info.Id),
+								"Failed to select the product with ID: " + info.Id + "!",
+								"Successfully selected the product with ID: " + info.Id);
 		}
 
 		[StepDefinition(@"I confirm I am unable to select the product with ID saved as: (.*) under the Select Products tab")]
@@ -367,7 +414,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 
-				foreach (var id_ in ids)
+				foreach (string id_ in ids)
 				{
 					bool isChecked_ = selForwardProductReg.SelectProducts_ProductIsChecked(id_);
 					Report.Info("Product with ID: " + id_ + " is " + (isChecked_ ? "selected" : "not selected"));
@@ -383,7 +430,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				var id = Context.GetFromContext(savedAs)?.ToString();
+				string id = Context.GetFromContext(savedAs)?.ToString();
 				if (id == null)
 				{
 					Report.Failure("Could not find product ID in context saved as: " + savedAs);
@@ -416,7 +463,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure("Could not find product ID in context saved as: " + savedAs);
 					return;
 				}
-				foreach (var id_ in ids)
+				foreach (string id_ in ids)
 				{
 					Report.Info("Clicking product checkbox with ID: " + id_);
 					if (selForwardProductReg.SelectProducts_ClickProductByID_(id_))
@@ -429,7 +476,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				var id = Context.GetFromContext(savedAs)?.ToString();
+				string id = Context.GetFromContext(savedAs)?.ToString();
 				if (id == null)
 				{
 					Report.Failure("Could not find product ID in context saved as: " + savedAs);
@@ -450,6 +497,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selForwardProductReg.ClickAddUPC(),
 				"Failed to click the Add UPC button!",
 				"Successfully clicked the Add UPC button");
+		}
+
+		[StepDefinition(@"I click the Add Case UPC button under the Select UPCs tab")]
+		public void ClickAddCaseUPCsButtonUnderSelectUPCsTab()
+		{
+			var selForwardProductReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(),
+							"Failed to click the Add UPC button!",
+							"Successfully clicked the Add UPC button");
 		}
 
 		[StepDefinition(@"I click the Add To No Retailer button under the Select UPCs tab")]
@@ -518,7 +574,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheForwardProductRegistrationScreenISelectARetailerUnderOtherRetailersAndSaveAs(string saveAs)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
-			var listOfRetailers = selForwardProdReg.GetListOfOtherRetailers();
+			List<string> listOfRetailers = selForwardProdReg.GetListOfOtherRetailers();
 
 			string alreadySelectedRetailer = "CVS";
 
@@ -528,7 +584,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 
-			var itemToRemove = listOfRetailers.SingleOrDefault(r => r == alreadySelectedRetailer);
+			string itemToRemove = listOfRetailers.SingleOrDefault(r => r == alreadySelectedRetailer);
 			if (itemToRemove != null)
 			{
 				listOfRetailers.Remove(itemToRemove);
@@ -537,17 +593,74 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			bool bSelected = false;
 			string selectedRetailer = "";
 			int i = 0;
-			while (i<5 && !bSelected)
+			while (i < 5 && !bSelected)
 			{
-				Random rnd = new Random();
+				var rnd = new Random();
 				int index = rnd.Next(0, listOfRetailers.Count - 1);
 				try
 				{
-					if(selForwardProdReg.SelectOtherRetailer(listOfRetailers[index]))
+					if (selForwardProdReg.SelectOtherRetailer(listOfRetailers[index]))
 					{
 						selectedRetailer = listOfRetailers[index];
 						Report.Success("Selected retailer: " + selectedRetailer);
 						bSelected = true;
+					}
+				}
+				catch (Exception e)
+				{
+					Report.Info(e.Message);
+				}
+
+				i++;
+			}
+
+
+			if (bSelected)
+			{
+                Report.Info("Saving retailer: " + selectedRetailer + " to context as: " + saveAs);
+				Context.AddToContext(saveAs, selectedRetailer);
+			}
+			else
+			{
+				throw new Exception("Failed to select a retailer");
+			}
+
+
+
+		}
+
+		[StepDefinition(@"In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as (.*) and save as (.*)")]
+		public void InTheForwardProductRegistrationScreenSelectRetailerNotInListOfRetailers(string retailers, string saveAs)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			var alreadySelectedRetailers = (List<string>)Context.GetFromContext(retailers);
+			List<string> listOfRetailers = selForwardProdReg.GetListOfOtherRetailers();
+			bool bSelected = false;
+			string selectedRetailer = "";
+			int i = 0;
+			while (i < 5 && !bSelected)
+			{
+				//When Choosing Random, often selects a retailer wich requires extra details which are not given.
+
+				var rnd = new Random();
+				int index = rnd.Next(0, listOfRetailers.Count - 1);
+				try
+				{
+					if (selForwardProdReg.SelectOtherRetailer(listOfRetailers[index]))
+					{
+						selectedRetailer = listOfRetailers[index];
+						var abbr = new RetailerAbbreviations();
+						string selectedAbbr = "";
+						abbr.Map.TryGetValue(selectedRetailer, out selectedAbbr);
+						if (alreadySelectedRetailers.Any() && alreadySelectedRetailers.Contains(selectedAbbr))
+						{
+							Report.Info("Selected Retailer already exists. Selected another one.");
+						}
+						else
+						{
+							Report.Success("Selected retailer: " + selectedRetailer);
+							bSelected = true;
+						}
 					}
 				}
 				catch (Exception e)
@@ -567,45 +680,323 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				throw new Exception("Failed to select a retailer");
 			}
-
-
-
 		}
 
 		[Then(@"I confirm that for UPC Number (.*) the retailer is displayed as (.*)")]
-		public void ThenIConfirmThatForUPCNumberSavedAsTestCaseUPCTheRetailerIsDisplayedAsSavedAsTestCaseRetailer(string UPCNumber, string Retailer)
+		public void ThenIConfirmThatForUPCNumberSavedAsTestCaseUPCTheRetailerIsDisplayedAsSavedAsTestCaseRetailer(string aUPCNumber, string aRetailer)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
-			if (UPCNumber.ToLower().Contains("saved as"))
+			if (aUPCNumber.ToLower().Contains("saved as"))
 			{
-				UPCNumber = Context
-					.GetFromContext(UPCNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase)
-						.Trim()).ToString();
+				var upcSavedAs = aUPCNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim();
+                Report.Info("Getting UPC number from context saved as: " + upcSavedAs);
+				aUPCNumber = Context.GetFromContext(upcSavedAs)?.ToString();
+				if (aUPCNumber == null)
+				{
+					Report.Failure("Failed to get UPC number from context!");
+					return;
+				}
 			}
-
-			if (Retailer.ToLower().Contains("saved as"))
+            Report.Info("UPC Number: " + aUPCNumber);
+			if (aRetailer.ToLower().Contains("saved as"))
 			{
-				Retailer = Context
-					.GetFromContext(Retailer.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase)
-						.Trim()).ToString();
+				var retailerSavedAs = aRetailer.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim();
+                Report.Info("Getting Retailer from context saved as: " + retailerSavedAs);
+				aRetailer = Context.GetFromContext(retailerSavedAs)?.ToString();
+				if (aRetailer == null)
+				{
+					Report.Failure("Failed to get Retailer from context!");
+					return;
+				}
 			}
-
-			var listProductResults = selForwardProdReg.GetProductResults();
-
-			var matchingListItem = listProductResults.FirstOrDefault(x =>
-				x.UPCs.FirstOrDefault(y => y.UPCNumber == UPCNumber).DestinationRetailers.Contains(Retailer));
-
-			Report.IsTrue(matchingListItem != null,
-				"Failed to find matching item for UPCNumber: " + UPCNumber + " and retailer: " + Retailer,
-				"Found matching item for UPCNumber: " + UPCNumber + " and retailer: " + Retailer);
+            Report.Info("Retailer: " + aRetailer);
+			//        var abbreviationMappings = new RetailerAbbreviations().Map;
+			//        if (abbreviationMappings.ContainsKey(aRetailer))
+			//        {
+			//// then we need to convert from full retailer name to abbreviation because the UPC page displays the abbrv
+			////aRetailer = abbreviationMappings.FirstOrDefault(x => x.Key == aRetailer).Value;
+			//abbreviationMappings.TryGetValue(aRetailer, out string retailer);
+			//if (retailer != null)
+			//{
+			//	aRetailer = retailer;
+			//}
+			//        }
+			aRetailer = new RetailerAbbreviations().TryConvertToAbbreviation(aRetailer);
+			Report.Info("Retailer: " + aRetailer);
+			List<ForwardProductRegistration.ProductResults> listProductResults = selForwardProdReg.GetProductResults();
+			foreach (var productResults in listProductResults)
+			{
+				var upcs = productResults.UPCs;
+				if (upcs != null && upcs.Any())
+				{
+					if (upcs.Any(x => x.UPCNumber == aUPCNumber && x.DestinationRetailers.Contains(aRetailer)))
+					{
+                        Report.Success("UPC number: " + aUPCNumber + " displayed retailer: " + aRetailer + " as expected");
+                        Report.Screenshot();
+                        return;
+					}
+				}
+			}
+            Report.Failure("Failed to find retailer: " + aRetailer + " for UPC number: " + aUPCNumber);
 		}
 
-		[StepDefinition(@"I confirm that NO Errors display for the Product")]
-		public void ThenIConfirmThatNOErrorsDisplayForTheProduct()
+		[StepDefinition(@"I confirm that there are NO Errors displayed for the Product")]
+		public void ThenIConfirmThatThereAreNoErrorsDisplayedForTheProduct()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
-			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
+			Report.IsTrue(!selForwardProdReg.ErrorsDisplayed(), "Errors are showing", "Errors are not showing");
+
 		}
+
+		[StepDefinition(@"In the Add UPC modal window I enter the following information:")]
+		public void InTheAddUPCWindowIEnterTheFollowingInfo(Table table)
+		{
+			var modal = new AddUPCModal();
+			TableRow row = table.Rows[0];
+			Report.IsTrue(modal.EnterUPCInformation(row), "Failed to enter information into the Add Case UPC modal window.",
+							"Successfully entered information into the Add Case UPC modal window.");
+		}
+
+		[StepDefinition(@"In the UPC modal window I click Save")]
+		public void InTheUPCModalWindowIClickSave()
+		{
+			var modal = new AddUPCModal();
+
+			if (modal.ClickSave())
+			{
+				Report.Success("Successfully clicked Save in the Add Case UPC modal window.", false);
+			}
+			else
+			{
+				Report.Failure("Failed to click Save in the Add Case UPC modal window.", false);
+			}
+
+		}
+
+
+		[StepDefinition(@"In the Add Case UPC modal window I enter the following information:")]
+		public void InTheAddCaseUPCWindowIEnterTheFollowingInfo(Table table)
+		{
+			var modal = new AddCaseUPCModal();
+			TableRow row = table.Rows[0];
+			Report.IsTrue(modal.EnterCaseUPCInformation(row), "Failed to enter information into the Add Case UPC modal window.",
+				"Successfully entered information into the Add Case UPC modal window.");
+		}
+
+		[StepDefinition(@"In the Case UPC modal window I click Save")]
+		public void InTheCaseUPCModalWindowIClickSave()
+		{
+			var modal = new AddCaseUPCModal();
+			Report.IsTrue(modal.ClickSave(), "Failed to click Save in the Add Case UPC modal window.",
+			"Successfully clicked Save in the Add Case UPC modal window.");
+		}
+		[StepDefinition(@"I select the product with ID saved as: (.*) under the right hand panel of the Select Products tab")]
+		public void ISelectTheProductSavedAsUnderSelectProductsRightPanel(string savedAs)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			var ids = (string)Context.GetFromContext(savedAs);
+			Report.IsTrue(selForwardProdReg.SelectProductsRightPanel_ClickProductByID(ids), "The Product with ID: " + ids + " was not selected", "The Product with ID: " + ids + " was selected");
+
+
+		}
+
+		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer under Other Retailers")]
+		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerUnderOtherRetailers()
+		{
+			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailer(), "Failed to select the first Retailer under 'Other Retailers'", "Succesfully selected the first retailer under 'Other Retailers'");
+		}
+
+		[StepDefinition(@"In the UPC modal window I click Cancel")]
+		public void InTheUPCModalWindowIClickCancel()
+		{
+			var modal = new AddUPCModal();
+			Report.IsTrue(modal.ClickCancel(), "Failed to click Cancel in the Add UPC modal window.",
+			"Successfully clicked Cancel in the Add UPC modal window.");
+		}
+
+		[StepDefinition(@"If the Private Label textbox is showing in the Select UPCs screen, I enter the value: (.*)")]
+		public void IfPrivateLabelShowingIEnterValue(string value)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.EnterPrivateLabelIfExists(value), "Failed to enter value " + value + " for Private Label.",
+				"Successfully entered value for Private Label.");
+		}
+
+		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: (.*) under Other Retailers and save it as: (.*)")]  //maybe pick a specific alternative instead of avoiding all with additional data requirments
+		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerThatIsNotXUnderOtherRetailers(string presentRetailer, string savedAs)
+		{
+			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(presentRetailer, savedAs), "Failed to select the first Retailer that is not " + presentRetailer + " or requires additional data under 'Other Retailers'", "Succesfully selected the first retailer that is not " + presentRetailer + "  or requires additional data under 'Other Retailers'");
+		}
+
+		[StepDefinition(@"I confirm that UPC information is displayed in the Select UPCs Table")]
+		public void ConfirmUPCInfromationInSelectUPCsTable()
+		{
+
+			var selForwardProdReg = new ForwardProductRegistration();
+			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
+			if (upcs.Count == 0)
+			{
+				Report.Failure("No UPC rows were found in the grid");
+				Report.Screenshot();
+				return;
+			}
+			Report.Info("There were: " + upcs.Count + " UPCs to check");
+			bool noGaps = true;
+			int i = 1;
+			foreach (var item in upcs)
+			{
+				if (item.UPCInfo.UPCNumber == null)
+				{
+					Report.Failure("Upc number was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+				if (item.ContainerType == null)
+				{
+					Report.Failure("Container Type was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+				if (item.Size == null)
+				{
+					Report.Failure("Size was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+				if (item.UPCInfo.DestinationRetailers == null)
+				{
+					Report.Failure("Destination Retailers was not found for UPC: " + i + ".");
+					noGaps = false;
+				}
+
+			}
+
+			Report.IsTrue(noGaps, "The select UPCs table on the right side is missing UPC information", "The select UPCs table on the right side is not missing information");
+
+		}
+
+		[StepDefinition("I Check that the Truck Icon is (present|not present) next to the UPC saved as: (.*)")]
+		public void ICheckTruckIconStatusForSavedAs(string presence, string savedAs)
+		{
+			bool presenceExpected = false;
+			switch (presence)
+			{
+				case "present":
+					presenceExpected = true;
+					break;
+				case "not present":					
+					break;
+				default:
+					Report.Error("presence can only be 'present' or 'not present'");
+					return;
+
+			}
+
+			var upcNum = (string)Context.GetFromContext(savedAs);
+			var selForwardProdReg = new ForwardProductRegistration();
+			List<ForwardProductRegistration.SelectUPCs> upcs = selForwardProdReg.GetUPCs();
+			if (upcs.Count == 0)
+			{
+				Report.Failure("No UPC rows were found in the grid");
+				Report.Screenshot();
+				return;
+			}
+			foreach (var item in upcs)
+			{
+				if (item.UPCInfo.UPCNumber == upcNum)
+				{
+					if (item.UPCInfo.TruckIcon == presenceExpected)
+					{
+						Report.Success("The Truck Icon was succesfully found to be " + presence + " for the UPC: " + upcNum + ".");
+						return;
+					}
+					Report.Failure("The Truck Icon was incorrectly found to be " + presence + " for the UPC: " + upcNum + ".");
+					return;
+				}
+			}
+
+			Report.Failure("The UPC with number: " + upcNum + " was not found.");
+
+
+		}
+		
+
+		[StepDefinition(@"I get the product ID for the product saved as: (.*) then I use this ID in the select Products & UPCs page")]
+		public void IGetTheProducIDForSavedAsAndSearcForProduct(string savedAs)
+		{
+			Report.Info("input value is " + savedAs + " . Looking in context for a product information with this value");
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string iD = productDetails.Id;
+			Report.IsTrue(iD.Any(), "iD was empty: " + iD, "iD contained: " + iD);
+
+			Context.AddToContext("idStringSavedAs", iD);
+			new StepsForwardProductRegistration().SelectProductByIDSavedAs("idStringSavedAs");
+		}
+		
+		[StepDefinition(@"I select one of the following retailers: and saved the chosen retailer as: (.*)")]
+		public void ISelectOneOfTheFollowingRetailers(string retailerSavedAs, Table table)
+		{
+			foreach (var row in table.Rows)
+			{
+				var retailerName = row["Retailer"];
+				if (Regex.IsMatch(retailerName, "<(.*)>"))
+				{
+					var match = Regex.Match(retailerName, "<(.*)>").Groups[1].Value;
+					if (Context.Contains(match, true))
+					{
+						retailerName = Context.GetFromContext(match).ToString();
+					}
+				}
+				if (new ForwardProductRegistration().SelectRetailer(retailerName))
+				{
+					Report.Success("The Retailer: " + retailerName + " was selected successfully");
+					Context.AddToContext(retailerSavedAs, retailerName);
+					return;
+				}				
+				Report.Info("Could not find: " + retailerName + " in the list of retailers");
+
+			}
+			Report.Failure("None of the retailers in the table could be selected");
+
+		}
+
+		[StepDefinition(@"I select one of the following retailers from the table: that is also not in the list saved as: (.*) and save the chosen retailer as: (.*)")]
+		public void ISelectOneOfTheFollowingRetailersThatIsNotX(string existingRetailer,string retailerSavedAs, Table table)
+		{
+			foreach (var row in table.Rows)
+			{
+				var retailerName = row["Retailer"];
+				if (Regex.IsMatch(retailerName, "<(.*)>"))
+				{
+					var match = Regex.Match(retailerName, "<(.*)>").Groups[1].Value;
+					if (Context.Contains(match, true))
+					{
+						retailerName = Context.GetFromContext(match).ToString();
+					}
+				}
+				var alreadySelectedRetailers = (List<string>)Context.GetFromContext(existingRetailer);
+				var abbr = new RetailerAbbreviations();
+				string selectedAbbr = "";
+				abbr.Map.TryGetValue(retailerName, out selectedAbbr);
+				if (alreadySelectedRetailers.Any() && alreadySelectedRetailers.Contains(selectedAbbr))
+				{
+					Report.Info("Selected Retailer already exists. Selected another one.");
+				}			
+
+
+				if (!alreadySelectedRetailers.Contains(selectedAbbr))
+				{
+					if (new ForwardProductRegistration().SelectRetailer(retailerName))
+					{
+						Report.Success("The Retailer: " + retailerName + " was selected successfully");
+						Context.AddToContext(retailerSavedAs, retailerName);
+						return;
+					}
+					Report.Info("Could not find: " + retailerName + " in the list of retailers");
+				}				
+
+			}
+			Report.Failure("None of the retailers in the table could be selected");
+
+		}
+
 
 
 	}

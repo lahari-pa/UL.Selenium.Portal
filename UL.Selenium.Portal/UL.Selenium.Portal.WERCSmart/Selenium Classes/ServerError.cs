@@ -5,12 +5,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ServerError : BaseObject
+	class ServerError : SeleniumBaseObject
 	{
 		public const string BasePath = "//h4[@id='myModalLabel']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 
 		public void Click_Close()
@@ -20,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetErrorMessage()
 		{
-			var errorMessageContainer = this.containerElement.FindElement(By.XPath("../..//div[@class='modal-body']"), 2);
+			IWebElement errorMessageContainer = this.containerElement.FindElement(By.XPath("../..//div[@class='modal-body']"), 2);
 			if (errorMessageContainer != null)
 			{
 				return errorMessageContainer.GetValue();

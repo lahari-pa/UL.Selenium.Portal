@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -13,7 +14,7 @@
 
 Feature: Additional Product Information
 
-@TReVorId:20281
+@ScenarioId:1162
 Scenario: [31352] Additional Product Information - navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -30,7 +31,7 @@ And I should see following statement: Product is shipped directly by supplier to
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31352
 
 
-@TReVorId:20282
+@ScenarioId:1163
 Scenario: [31359] Additional Product Information - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -46,7 +47,7 @@ And Product is shipped directly by supplier to the consumer.  Retailer sells onl
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31359
 
 
-@TReVorId:20283
+@ScenarioId:1164
 Scenario: [85242] Additional Product Information with marketed child question- navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -62,7 +63,7 @@ And I should see following statement: Product is shipped directly by supplier to
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85242
 
 
-@TReVorId:20284
+@ScenarioId:1165
 Scenario: [85244] Additional Product Information with marketed child question- validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -77,7 +78,7 @@ And Product is shipped directly by supplier to the consumer.  Retailer sells onl
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85244
 
 
-@TReVorId:21302
+@ScenarioId:1166
 Scenario: [85367] Which one best describes your product question- navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -98,7 +99,7 @@ And I should see following statement: Product is shipped directly by supplier to
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85367
 
 
-@TReVorId:21303
+@ScenarioId:1167
 Scenario: [85368] Which one best describes your product question- validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -113,7 +114,7 @@ And Product is shipped directly by supplier to the consumer.  Retailer sells onl
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85368
 
 
-@TReVorId:21304
+@ScenarioId:1168
 Scenario: [85488] Private Label and Goods Not for Resale question - navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -131,7 +132,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-@TReVorId:21305
+@ScenarioId:1169
 Scenario: [85489] Private Label and Goods Not for Resale question - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load

@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -19,7 +20,7 @@ Feature: Product Documents
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Product Documents
 
 @59322
-@TReVorId:21842
+@ScenarioId:1317
 Scenario: [59322] Upload document - VOC exemption letter & VOC product label
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -59,7 +60,7 @@ And I call Shared Step 42214 (Delete a Product from the Product grid) to delete 
 
 
 
-@TReVorId:22261
+@ScenarioId:1315
 Scenario: [59320] Upload Document - IFRA certificate
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -89,7 +90,7 @@ And I call Shared Step 73956 (Go to Summary and verify data) with product type: 
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59320
 
 
-@TReVorId:22262
+@ScenarioId:1316
 Scenario: [59321] Upload Document - GRAS certificate
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

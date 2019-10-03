@@ -34,15 +34,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			var ingredientsContext = new List<MyIngredients.IngredientItem>();
 			var selMyIngredients = new MyIngredients();
-			var allIngredients = selMyIngredients.IngredientsLibrary();
-			foreach (var row in ingredients.Rows)
+			List<MyIngredients.IngredientItem> allIngredients = selMyIngredients.IngredientsLibrary();
+			foreach (TableRow row in ingredients.Rows)
 			{
 				TestReport.StartStep("I add the ingredient: " + row["Chemical Name"] + " to My Library");
 				Report.Info("I enter the text: " + row["Chemical Name"] + " into the My Ingredients search field");
 				this.EnterTextInSearch(row["Chemical Name"]);
 				Report.Info("I select '" + row["Chemical Name"] + "' from the smart search results");
 				this.SelectSearchResult(row["Chemical Name"], row["CAS"]);
-				var allIngredientsUpdate = selMyIngredients.IngredientsLibrary();
+				List<MyIngredients.IngredientItem> allIngredientsUpdate = selMyIngredients.IngredientsLibrary();
 				ingredientsContext.Add(allIngredientsUpdate.First(r => allIngredients.All(p => r.Index != p.Index)));
 				allIngredients = allIngredientsUpdate;
 			}
@@ -55,6 +55,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new MyIngredients().ClickSave(),
 				"Failed to click Save in the My Ingredients tab",
 				"Successfully clicked Save in the My Ingredients tab");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 		[StepDefinition(@"I save the current list of ingredients in My Library to context as: (.*)")]
 		public void AddMyIngredientsToContext(string savedAs)
@@ -80,7 +81,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int ingredientNumber = 1;
 			while (pageNumber <= lastPageNumber && pageNumber != -1)
 			{
-				var rowCount = selMyIngredients.IngredientCount();
+				int rowCount = selMyIngredients.IngredientCount();
 				for (int i = 1; i <= rowCount; i++)
 				{
 					rList.Add(selMyIngredients.GetIngredient(i, ingredientNumber));
@@ -135,7 +136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			var savedIngredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
-			var actualName = new MyIngredientsModal().IngredientToRemove();
+			string actualName = new MyIngredientsModal().IngredientToRemove();
 			Report.IsTrue(actualName.Contains(savedIngredient.ChemicalName.Trim()),
 				"The 'Remove Component from My Ingredients' dialog message did not contain the Chemical name: " + savedIngredient.ChemicalName,
 				"The 'Remove Component from My Ingredients' dialog message contained the Chemical name: " + savedIngredient.ChemicalName + " as expected");
@@ -160,7 +161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			var savedIngredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
 			TestReport.StartStep("Adding current list of ingredients to context");
-			var currentIngredients = new MyIngredients().IngredientsLibrary();
+			List<MyIngredients.IngredientItem> currentIngredients = new MyIngredients().IngredientsLibrary();
 			TestReport.StartStep("Checking the ingredient I originally added has now been removed from the grid");
 			Report.IsTrue(!currentIngredients.Contains(savedIngredient),
 				"The removed ingredient: " + savedIngredient.ChemicalName + " was still showing in the ingredients grid at position: " + savedIngredient.Index,
@@ -235,13 +236,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			var ingredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext(savedAs);
-			var ingredient = ingredients.FirstOrDefault(x => x.Index == int.Parse(index));
+			MyIngredients.IngredientItem ingredient = ingredients.FirstOrDefault(x => x.Index == int.Parse(index));
 			var selMyIngredients = new MyIngredients();
 			Report.IsTrue(selMyIngredients.ClickSelect(ingredient),
 				"Failed to click the input checkbox to select ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index,
 				"Successfully clicked the input checkbox to select ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index);
 			Delay.Seconds(1);
-			var selected = select == "select";
+			bool selected = select == "select";
 			Report.IsTrue(selMyIngredients.Selected(ingredient) == selected,
 				"The selected checkbox was not successfully " + select + "ed.",
 				"The selected checkbox was successfully " + select + "ed.");
@@ -259,10 +260,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var ingredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext(savedAs);
 			var selMyIngredients = new MyIngredients();
 			//| Index | Click Publicly Disclosed | Click Trade Secret | Public Name Index |
-			var index = "";
-			var publicNameChange = "";
+			string index = "";
+			string publicNameChange = "";
 			var contextList = new List<MyIngredients.IngredientItem>();
-			foreach (var row in ingredientFields.Rows)
+			foreach (TableRow row in ingredientFields.Rows)
 			{
 				index = row["Index"];
 				if (index == null || !index.All(char.IsDigit))
@@ -274,7 +275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure("The ingredient index: " + index + " exceeded the ingredients count (index out of range)");
 					continue;
 				}
-				var ingredient = ingredients[int.Parse(index) - 1];
+				MyIngredients.IngredientItem ingredient = ingredients[int.Parse(index) - 1];
 				if (ingredient == null)
 				{
 					Report.Failure("The ingredient to edit at index: " + index + " did not exist in the saved list of ingredients: " + savedAs);
@@ -290,9 +291,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					ingredient.PublicallyDisclosed = !ingredient.PublicallyDisclosed;
 				}
 				// Get all Public Name options, pick at index. if out of range, pick first.
-				var options = selMyIngredients.PublicNameOptions(ingredient);
-				var selectedOption = selMyIngredients.PublicName(ingredient);
-				var optionIndex = options.IndexOf(selectedOption);
+				List<string> options = selMyIngredients.PublicNameOptions(ingredient);
+				string selectedOption = selMyIngredients.PublicName(ingredient);
+				int optionIndex = options.IndexOf(selectedOption);
 				publicNameChange = row["Public Name Change"];
 				if (publicNameChange != null && (string.Equals(publicNameChange, "+") || string.Equals(publicNameChange, "-") || string.Equals(publicNameChange, "=")))
 				{
@@ -331,15 +332,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			var expectedIngredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext(savedAs);
 			var selMyIngredients = new MyIngredients();
-			var actualIngredients = selMyIngredients.IngredientsLibrary();
+			List<MyIngredients.IngredientItem> actualIngredients = selMyIngredients.IngredientsLibrary();
 			Report.Info("Comparing current My Library ingredients against saved edited list.");
 			Report.Info("Found " + actualIngredients.Count + " ingredients");
-			foreach (var ingredient in expectedIngredients)
+			foreach (MyIngredients.IngredientItem ingredient in expectedIngredients)
 			{
 				selMyIngredients.ClickPage(ingredient.Page.ToString());
-				var publicallyDisclosedMatch = ingredient.PublicallyDisclosed == expectedIngredients.First(e => e.Index == ingredient.Index).PublicallyDisclosed;
-				var tradeSecretMatch = ingredient.TradeSecret == expectedIngredients.First(e => e.Index == ingredient.Index).TradeSecret;
-				var publicNameMatch = ingredient.PublicName == expectedIngredients.First(e => e.Index == ingredient.Index).PublicName;
+				bool publicallyDisclosedMatch = ingredient.PublicallyDisclosed == expectedIngredients.First(e => e.Index == ingredient.Index).PublicallyDisclosed;
+				bool tradeSecretMatch = ingredient.TradeSecret == expectedIngredients.First(e => e.Index == ingredient.Index).TradeSecret;
+				bool publicNameMatch = ingredient.PublicName == expectedIngredients.First(e => e.Index == ingredient.Index).PublicName;
 				if (publicallyDisclosedMatch && tradeSecretMatch && publicNameMatch)
 				{
 					Report.Success("Ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index + " was successfully saved and matched the edited state. Publicly Disclosed = " + ingredient.PublicallyDisclosed + ". Trade Secret = " + ingredient.TradeSecret + ". Public Name = " + ingredient.PublicName);
@@ -378,7 +379,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var ingredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext(savedAs);
 			var selMyIngredients = new MyIngredients();
 			var selMyIngredientsModal = new MyIngredientsModal();
-			foreach (var ingredient in ingredients)
+			foreach (MyIngredients.IngredientItem ingredient in ingredients)
 			{
 				Report.IsTrue(selMyIngredients.ClickSelect(ingredient),
 					"Failed to click select for ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index,
@@ -411,7 +412,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the current active page number in the My Ingredients grid is: (.*)")]
 		public void ConfirmPageNumber(string expectedPage)
 		{
-			var actualPage = new MyIngredients().GetPage("current").ToString();
+			string actualPage = new MyIngredients().GetPage("current").ToString();
 			Report.IsTrue(string.Equals(expectedPage, actualPage),
 				"The current active page did not match the expected value. Active page was: " + actualPage + ". Expected page was: " + expectedPage,
 				"The current active page matched the expected value: " + actualPage);
@@ -430,8 +431,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ingredients = ingredients.Where(i => i.Page == int.Parse(page)).OrderBy(i => i.Index).ToList();
 			for (int i = 1; i <= ingredients.Count; i++)
 			{
-				var ingredient = ingredients[i - 1];
-				var showingingredient = selMyIngredients.GetIngredient(i, ingredient.Index);
+				MyIngredients.IngredientItem ingredient = ingredients[i - 1];
+				MyIngredients.IngredientItem showingingredient = selMyIngredients.GetIngredient(i, ingredient.Index);
 				bool match = showingingredient.ChemicalName == ingredient.ChemicalName && showingingredient.PublicallyDisclosed == ingredient.PublicallyDisclosed && showingingredient.TradeSecret == showingingredient.TradeSecret && showingingredient.PublicName == ingredient.PublicName;
 				Report.IsTrue(match,
 					"Ingredient at row: " + ingredient.Row + " on page: " + page + " did not match the expected ingredient",
@@ -448,7 +449,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that the smart search results contain a chemical with CAS: (.*) and Name: (.*)")]
 		public void SmartSearchResultsContainChemical(string cas, string name)
 		{
-			var searchResults = new MyIngredients().SearchResults();
+			List<MyIngredients.SearchResult> searchResults = new MyIngredients().SearchResults();
 			Report.IsTrue(searchResults.Any(x => x.CAS == cas && x.Name == name),
 				"No search results were returned with CAS: " + cas + " and name: " + name + " in the top " + searchResults.Count + " results.",
 				"There was a search result with CAS: " + cas + " and name: " + name + " returned as expected");
@@ -457,14 +458,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The Formulation 3rd Party Step is shown")]
 		public void TheFormulationThirdPartyStepIsShown()
 		{
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 			Report.IsTrue(thisNewProduct.ThirdPartyScreenAppears(), "The third party screen has not appeared", "The third party step is shown as expected");
 		}
 
 		[StepDefinition(@"In the Formulation 3rd Party screen I set Accept to (true|false)")]
 		public void InTheFormulationThirdPartySCreenISetAcceptTo(string trueOrFalse)
 		{
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 
 			if (thisNewProduct.AcceptRadioIsSelected() == (trueOrFalse.ToLower() == "true"))
 			{
@@ -480,7 +481,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Formulation 3rd Party screen I set Granted to (true|false)")]
 		public void InTheFormulationThirdPartySCreenISetGrantedTo(string trueOrFalse)
 		{
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 
 			if (thisNewProduct.GrantedRadioIsSelected() == (trueOrFalse.ToLower() == "true"))
 			{
@@ -496,7 +497,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Formulation 3rd Party screen I set Decline to (true|false)")]
 		public void InTheFormulationThirdPartySCreenISetDeclinedTo(string trueOrFalse)
 		{
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 
 			if (thisNewProduct.DeclinedRadioIsSelected() == (trueOrFalse.ToLower() == "true"))
 			{
@@ -507,6 +508,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(thisNewProduct.SelectDeclinedRadio(), "Failed to set declined radio", "Set declined radio to: " + trueOrFalse);
 			}
 
+		}
+
+		[StepDefinition(@"I check the current page is the Ingredients page")]
+		public void ICheckTheCurrentPageIsTheIngredientsPage()
+		{
+			//string panelTitle= new NewProduct().PanelTitle;
+			//Report.IsTrue(panelTitle == "Ingredients", "The Current page is not the Ingredients page", "The current page is the Ingredients page");
+			
 		}
 	}
 }

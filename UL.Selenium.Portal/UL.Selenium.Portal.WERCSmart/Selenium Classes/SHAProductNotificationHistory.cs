@@ -10,18 +10,17 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ProductNotificationHistory : BaseObject
+	class ProductNotificationHistory : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='dialog-MessageCenter']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+				IWebElement popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
 				if (popupEditor != null)
 				{
 					return true;
@@ -37,8 +36,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//Close, Export
 		public bool ClickButton(string button)
 		{
-			var varButtons = this.containerElement.FindElements(By.XPath("..//button/span"), 2);
-			var matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
+			IList<IWebElement> varButtons = this.containerElement.FindElements(By.XPath("..//button/span"), 2);
+			IWebElement matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
 			if (matchingButton == null)
 			{
 				Report.Info("Failed to find button: " + button);
@@ -61,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Selecting item: " + value + " in column: " + columnHeader);
 			List<string> rawHeaders = this.GetHeaders();
-			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
+			var headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			int indexOfHeader = 0;
 			for (int i = 0; i < headers.Count; i++)
 			{
@@ -77,7 +76,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				.ToList();
 
 			var sValues = listOfColumnItems.Select(x => x.GetValue().Trim()).ToList();
-			var matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
+			IWebElement matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
 
 			if (matchingItem == null)
 			{
@@ -104,7 +103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<Notification> GetNotifications()
 		{
 			List<string> rawHeaders = this.GetHeaders();
-			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
+			var headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			int indexOfSupplierName = 0;
 			int indexOfType = 0;
 			int indexOfSubtype = 0;
@@ -149,22 +148,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			var selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='tblViewNotificationHistory']//tr"), 2);
-			List<Notification> listOfNotifications = new List<Notification>();
+			IList<IWebElement> selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='tblViewNotificationHistory']//tr"), 2);
+			var listOfNotifications = new List<Notification>();
 			if (selectedRows == null)
 			{
 				Report.Info("No rows are showing");
 				return listOfNotifications;
 			}
 
-			foreach (var thisRow in selectedRows)
+			foreach (IWebElement thisRow in selectedRows)
 			{
-				Notification thisNotification = new Notification();
-				thisNotification.SupplierName = thisRow.FindElement(By.XPath(".//td[" + indexOfSupplierName + "]"), 2).GetValue().Trim();
-				thisNotification.Type = thisRow.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue().Trim();
-				thisNotification.SubType = thisRow.FindElement(By.XPath(".//td[" + indexOfSubtype + "]"), 2).GetValue().Trim();
-				thisNotification.Active = thisRow.FindElement(By.XPath(".//td[" + indexOfActive + "]"), 2).GetValue().Trim();
-				thisNotification.ActionBy = thisRow.FindElement(By.XPath(".//td[" + indexOfActionBy + "]"), 2).GetValue().Trim();
+				var thisNotification = new Notification {
+					SupplierName = thisRow.FindElement(By.XPath(".//td[" + indexOfSupplierName + "]"), 2).GetValue().Trim(),
+					Type = thisRow.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue().Trim(),
+					SubType = thisRow.FindElement(By.XPath(".//td[" + indexOfSubtype + "]"), 2).GetValue().Trim(),
+					Active = thisRow.FindElement(By.XPath(".//td[" + indexOfActive + "]"), 2).GetValue().Trim(),
+					ActionBy = thisRow.FindElement(By.XPath(".//td[" + indexOfActionBy + "]"), 2).GetValue().Trim()
+				};
 				string rD = thisRow.FindElement(By.XPath(".//td[" + indexOfNotificationDate + "]"), 2).GetValue().Trim();
 				if (rD.Trim().Length > 0)
 				{
@@ -181,7 +181,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickTopItem()
 		{
-			var selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='tblViewNotificationHistory']//tr"), 2);
+			IList<IWebElement> selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='tblViewNotificationHistory']//tr"), 2);
 			if (selectedRows.Count == 0)
 			{
 				Report.Info("No items have been found to click");
@@ -193,7 +193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool OrderNotificationsByDate(string ascendingOrDescending)
 		{
-			var notificationSortDateHeader = SeleniumBrowser.WebBrowser
+			IWebElement notificationSortDateHeader = SeleniumBrowser.WebBrowser
 				.FindElement(
 					By.XPath(
 						"//div[@id='dialog-MessageCenter']//table//th[@id='tblViewNotificationHistory_NotificationDate']//span[@class='s-ico']/span[not(contains(@class, 'disabled'))]"),
@@ -231,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var notificationDetailDiv = this.containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']"), 2);
+				IList<IWebElement> notificationDetailDiv = this.containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']"), 2);
 				if (notificationDetailDiv != null)
 				{
 					return true;
@@ -248,9 +248,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Error("Notification details screen is not showing");
 				return null;
 			}
-			var notificationDetailsTableRows = this.containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']//table//tr"), 2);
+			IList<IWebElement> notificationDetailsTableRows = this.containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']//table//tr"), 2);
 
-			Notification thisNotification = new Notification();
+			var thisNotification = new Notification();
 			thisNotification.ProductID = notificationDetailsTableRows
 				.FirstOrDefault(x => x.FindElement(By.XPath("./td[1]")).GetValue().Contains("Product ID"))
 				.FindElement(By.XPath("./td[2]")).GetValue();
@@ -277,8 +277,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickButtonInNotificationDetails(string button)
 		{
-			var varButtons = this.containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']/../..//button/span"), 2);
-			var matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
+			IList<IWebElement> varButtons = this.containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']/../..//button/span"), 2);
+			IWebElement matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
 			if (matchingButton == null)
 			{
 				Report.Info("Failed to find button: " + button);

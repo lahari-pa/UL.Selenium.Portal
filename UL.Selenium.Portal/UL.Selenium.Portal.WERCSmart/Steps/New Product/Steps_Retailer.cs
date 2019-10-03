@@ -159,6 +159,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set the first vendor option for retailer: " + retailer);
 		}
 
+		[StepDefinition(@"In the Retailers tab, I select the first Vendor option")]
+		public void ISelectFirstVendorId()
+		{
+			Report.IsTrue(new Retailer().SelectVendorId("", true),
+				"Failed to set the first vendor option ",
+				"Successfully set the first vendor option");
+		}
+
 		[StepDefinition(@"On the Retailer page I delete the following retailers:")]
 		public void DeleteRetailers(Table table)
 		{
@@ -207,14 +215,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"If the UPCs Warning popup is displayed I click OK")]
-		public void IfISeeUpcWarningPopupClickOk()
+		[StepDefinition(@"If the UPCs Warning popup is displayed I click (.*)")]
+		public void IfISeeUpcWarningPopupClick(string choice)
 		{
 			var noRetailerWarning = new NoRetailerWarningPopup();
-			if (noRetailerWarning.Wait_for_load(10))
+			if (noRetailerWarning.WaitForContainerToBeVisible(10))
 			{
-				Report.IsTrue(noRetailerWarning.ClickOk(), "Failed to click OK in the UPC Warning popup!", "Successfully clicked OK in the UPC Warning popup");
+				Report.IsTrue(noRetailerWarning.ClickChoice("Ok"), "Failed to click OK in the UPC Warning popup!", "Successfully clicked OK in the UPC Warning popup");
+			}
+			else
+			{
+				Report.Info("The UPC Warning popup was not displayed");
 			}
 		}
+
+		[StepDefinition(@"I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'")]
+		public void ClickContinueDismissNoUpcPopup()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click continue");
+			Report.IsTrue(new NewProduct().ClickContinue(false), "Failed to click continue", "Clicked continue");
+			TestReport.StartStep("I click 'OK' in the 'UPCs Warning' popup if it is displayed");
+			this.IfISeeUpcWarningPopupClick("Ok");
+		}
+
 	}
 }

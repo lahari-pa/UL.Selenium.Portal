@@ -7,12 +7,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class MyIngredientsModal : BaseObject
+	class MyIngredientsModal : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[contains(@class, 'modal-dialog') and not(ancestor::div[@id='select-retailers-dialog' or @id='LogOutModal']) and (.//parent::div[contains(@style,'display: block')])]";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool Click_OK()
 		{
@@ -40,8 +39,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var rIngredients = new List<MyIngredients.IngredientItem>();
 			int count = 1;
-			var rows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
-			foreach (var row in rows)
+			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
+			foreach (IWebElement row in rows)
 			{
 				rIngredients.Add(new MyIngredients.IngredientItem() {
 					Index = count,
@@ -56,7 +55,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			while (this.Click_Next())
 			{
 				rows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
-				foreach (var row in rows)
+				foreach (IWebElement row in rows)
 				{
 					rIngredients.Add(new MyIngredients.IngredientItem() {
 						Index = count,

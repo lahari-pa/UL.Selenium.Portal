@@ -3,6 +3,7 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -26,15 +27,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that the following table headings are displayed:")]
 		public void ConfirmTheFollowingTableHeadingsAreDisplayed(Table table)
 		{
-			foreach (var row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
-				var heading = row["Heading"];
+				string heading = row["Heading"];
 				if (heading == null)
 				{
 					Report.Failure("The table step parameter must contain the column: 'Heading'");
 					return;
 				}
-				var actualHeadings = new PackagingType().TableHeadings();
+				List<string> actualHeadings = new PackagingType().TableHeadings();
 				Report.IsTrue(actualHeadings.Contains(heading), "The table heading: " + heading + " was not displayed!", "The table heading: " + heading + " was displayed as expected");
 
 			}
@@ -62,12 +63,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that the Packaging Type saved as: (.*) (appears|does not appear) in the My Packaging Types grid")]
 		public void PackagingTypeSavedAsAppearsInGrid(string savedAs, string appearsOrNot)
 		{
-			var appears = appearsOrNot == "appears";
+			bool appears = appearsOrNot == "appears";
 			var packagingType = new MyPackagingTypes.PackagingTypeItem {
 				ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString(),
 				Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString()
 			};
-			var reverseAppears = appears ? "does not appear" : "appears";
+			string reverseAppears = appears ? "does not appear" : "appears";
 			Report.IsTrue(new MyPackagingTypes().PackagingTypeInGrid(appears, packagingType),
 				"The saved Packaging Type with name: " + packagingType.Name + " and ID: " + packagingType.ID + " " + reverseAppears + " in the My Packaging Types grid",
 				"The saved Packaging Type  with name: " + packagingType.Name + " and ID: " + packagingType.ID + " " + appearsOrNot + " in the My Packaging Types grid as expected");
@@ -99,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClickOptionInDeleteProductPopUp(string button)
 		{
 			var delDialog = new DeleteDialog();
-			delDialog.Wait_for_load();
+			delDialog.WaitForContainerToBeVisible();
 			if (button.ToLower() == "delete")
 			{
 				Report.IsTrue(delDialog.ClickDelete(),
@@ -131,7 +132,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString()
 			};
 			var delDialog = new DeleteDialog();
-			var itemText = delDialog.ItemRemovedText();
+			string itemText = delDialog.ItemRemovedText();
 			TestReport.StartStep("I confirm the name for the saved Packaging Group appears in the popup");
 			Report.IsTrue(itemText.Contains(packagingType.Name),
 				"The Packaging Group Name " + packagingType.Name + " did not appear in the Delete Product Pop Up dialog",
@@ -164,13 +165,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					packagingType.ID, packagingType.Name));
 		}
 
-		[Given(@"Save the top packaging id as (.*) if there are no packaging types listed add a new packing type as follows")]
+		[StepDefinition(@"Save the top packaging id as (.*) if there are no packaging types listed add a new packing type as follows")]
 		public void GivenSaveTheTopPackagingIdAsMPIIfThereAreNoPackackingTypesListedAddANewPackingTypeAsFollows(string saveAs, Table table)
 		{
-			StepsMyAccount myAccountSteps = new StepsMyAccount();
-			StepsNewProduct newProductSteps = new StepsNewProduct();
+			var myAccountSteps = new StepsMyAccount();
+			var newProductSteps = new StepsNewProduct();
 
-			MyPackagingTypes thisMyAccount_MyLibrary = new MyPackagingTypes();
+			var thisMyAccount_MyLibrary = new MyPackagingTypes();
 
 			/*
 			MyPackagingTypes.PackagingTypeItem thisPTI = thisMyAccount_MyLibrary.GetRandomPackagingTypeInGrid();

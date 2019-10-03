@@ -4,6 +4,7 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -27,9 +28,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//My Wercs, UL Secure Connect, Authoring, Management, Distribution, System, Window, Help
 		public bool ClickTopMenuItem(string item)
 		{
-			var navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
+			IWebElement navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
 			navBar.ScrollElementIntoView();
-			var ListOfOptions = this.containerElement.FindElements(By.XPath(".//li//a"));
+			ReadOnlyCollection<IWebElement> ListOfOptions = this.containerElement.FindElements(By.XPath(".//li//a"));
 			return ListOfOptions.FirstOrDefault(x => x.Text.Trim().ToLower() == item.Trim().ToLower()).TryClick();
 
 		}
@@ -37,13 +38,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickSubMenu(string menuItem, string submenuItem)
 		{
 
-			var navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
+			IWebElement navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
 			navBar.ScrollElementIntoView();
-			var ListOfOptions = this.containerElement.FindElements(By.XPath(".//li//a"));
-			var topMenuItem = ListOfOptions.FirstOrDefault(x => x.Text.Trim().ToLower() == menuItem.Trim().ToLower());
+			ReadOnlyCollection<IWebElement> ListOfOptions = this.containerElement.FindElements(By.XPath(".//li//a"));
+			IWebElement topMenuItem = ListOfOptions.FirstOrDefault(x => x.Text.Trim().ToLower() == menuItem.Trim().ToLower());
 			if (topMenuItem.TryClick())
 			{
-				var ListOfSubMenuOptions = topMenuItem.FindElements(By.XPath(".//following-sibling::ul/li/a"));
+				ReadOnlyCollection<IWebElement> ListOfSubMenuOptions = topMenuItem.FindElements(By.XPath(".//following-sibling::ul/li/a"));
 				return ListOfSubMenuOptions.FirstOrDefault(x => x.Text.Trim().ToLower() == submenuItem.Trim().ToLower()).TryClick();
 			}
 			return false;

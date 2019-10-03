@@ -13,6 +13,12 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using System.Collections.ObjectModel;
+using TReVor.Api.Wrapper.Classes;
+using System.IO;
+using Castle.Core.Internal;
+
+
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -20,31 +26,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "SHA")]
 	public class Steps_SHA
 	{
-		[Given(@"I navigate to Studio")]
+		public object REport { get; private set; }
+
+		[StepDefinition(@"I navigate to Studio")]
 		public void GivenINavigateToStudio()
 		{
-			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
 			if (handles.Count == 0)
 			{
 				((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.open();");
 			}
+
 			SeleniumBrowser.WebBrowser.SwitchTo().Window(SeleniumBrowser.WebBrowser.WindowHandles.Last());
 			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("SHAUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
-		[Given(@"I navigate to Portal")]
+		[StepDefinition(@"I navigate to Portal")]
 		public void GivenINavigateToPortal()
 		{
 			SeleniumBrowser.WebBrowser.Url = GlobalParameters.TestUrl;
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
-		[Given(@"I login to Studio as Administrator")]
+		[StepDefinition(@"I login to Studio as Administrator")]
 		public void GivenILoginToStudioAsAdministrator()
 		{
-			StudioLogin thisStudioLogin = new StudioLogin();
-			var shaUser = TestUsers.GetUserSavedAs("SHAUser");
+			var thisStudioLogin = new StudioLogin();
+			TReVorTestUsers shaUser = TestUsers.GetUserSavedAs("SHAUser");
 			Report.Info("Entering username: " + shaUser.Username);
 			thisStudioLogin.Username = shaUser.Username;
 			Report.Info("Entering password: " + shaUser.Password);
@@ -52,18 +61,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Clicking 'sign in'");
 			Report.IsTrue(thisStudioLogin.ClickSignIn(), "Failed to click 'Sign In", "Clicked 'Sign In'");
 			Delay.Seconds(3);
-			StudioDesktop thisStudioDesktop = new StudioDesktop();
+			var thisStudioDesktop = new StudioDesktop();
+			if (new PasswordExpireNotice().WaitForLoad())
+			{
+				Report.Info("The Password Expire Notice appeared, so clicking ignore");
+				if (!new PasswordExpireNotice().ClickButton("Ignore"))
+				{
+					Report.Failure("Failed to Click Ignore");
+				}
+			}
 			Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
 				"Studio desktop is showing as expected");
 			Report.Info("Studio desktop is loaded");
-			StudioTopMenu thisStudioTopMenu = new StudioTopMenu();
+			var thisStudioTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
 
-		[Given(@"I click top menu item: (.*) and submenu item: (.*)")]
+		[StepDefinition(@"I click top menu item: (.*) and submenu item: (.*)")]
 		public void GivenIClickTopMenuItemAndSubMenuItem(string menuItem, string submenuItem)
 		{
-			StudioTopMenu thisTopMenu = new StudioTopMenu();
+			var thisTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisTopMenu.Wait_for_load(30), "Top menu has not loaded", "Top menu has loaded");
 
 			if (submenuItem.Length == 0)
@@ -79,18 +96,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"In SHA Manager Page I click top menu item: (.*)")]
+		[StepDefinition(@"In SHA Manager Page I click top menu item: (.*)")]
 		public void GivenInSHAManagerPageIClickTopMenuItem(string menuItem)
 		{
-			StudioSHAManager thisShaManager = new StudioSHAManager();
+			var thisShaManager = new StudioSHAManager();
 			Report.IsTrue(thisShaManager.ClickTopMenuItem(menuItem), "Failed to click: " + menuItem,
 				"Successfully clicked: " + menuItem);
 		}
 
-		[Given(@"In SHA Manager Page I click sub menu item: (.*)")]
+		[StepDefinition(@"In SHA Manager Page I click sub menu item: (.*)")]
 		public void GivenInSHAManagerPageIClickSubMenuItem(string menuItem)
 		{
-			StudioSHAManager thisShaManager = new StudioSHAManager();
+			var thisShaManager = new StudioSHAManager();
 			for (int i = 0; i < 5; i++)
 			{
 				Report.Info("Attempt " + i.ToString());
@@ -106,17 +123,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Failed to click: " + menuItem);
 		}
 
-		[Given(@"In the the Manage Global Messages dialog I add and save the following messages:")]
+		[StepDefinition(@"In the the Manage Global Messages dialog I add and save the following messages:")]
 		public void GivenIAddTheFollowingMessages(Table table)
 		{
-			StudioManageGlobalMessages thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
+			var thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
 			Report.IsTrue(thisStudioManageGlobalMessages.Wait_for_load(),
 				"Manage Global Messages dialog is not showing", "Manage global messages dialog is showing");
-			List<Message> ListOfMessages = new List<Message>();
+			var ListOfMessages = new List<Message>();
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
-				Message thisMessage = new Message();
-				thisMessage.Title = thisRow["Title"];
+				var thisMessage = new Message {
+					Title = thisRow["Title"]
+				};
 
 				if (thisRow["Message"] == "generated")
 				{
@@ -138,18 +156,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("Messages", ListOfMessages);
 		}
 
-		[Given(@"I close the Manage Global Messages dialog")]
+		[StepDefinition(@"I close the Manage Global Messages dialog")]
 		public void GivenICloseTheManageGlobalMessagesDialog()
 		{
-			StudioManageGlobalMessages thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
+			var thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
 			Report.IsTrue(thisStudioManageGlobalMessages.ClickCloseButton(), "Failed to close messages dialog",
 				"Successfully closed messages dialog");
 		}
 
-		[Given(@"In SHA Manager Page I select status: (.*)")]
+		[StepDefinition(@"In SHA Manager Page I select status: (.*)")]
 		public void GivenInSHAManagerPageISelectStatus(string status)
 		{
-			StudioSHAManager thisShaManager = new StudioSHAManager();
+			var thisShaManager = new StudioSHAManager();
 			Report.IsTrue(thisShaManager.SelectFromStatusFilter(status), "Failed to select status: " + status,
 				"Successfully selected status: " + status);
 		}
@@ -161,33 +179,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In SHA Manager ProductSearch page I run search:")]
 		public void GivenInSHAManagerPageIRunSearch(TechTalk.SpecFlow.Table table)
 		{
-			StudioSHAManagerProductSearch thisProductSearch = new StudioSHAManagerProductSearch();
+			var thisProductSearch = new StudioSHAManagerProductSearch();
 			Report.IsTrue(thisProductSearch.Wait_for_load(60), "Product search page has not loaded",
 				"Product search page has loaded as expected", false, false);
 			var x = table.Rows.ToDictionary(r => r[0], r => r[1]);
 			for (int i = 0; i < x.Count; i++)
 			{
 				Delay.Seconds(1);
+				string value = x.Values.ElementAt(i);
+				if (x.Values.ElementAt(i).StartsWith("saved as"))
+				{
+					var savedAs = x.Values.ElementAt(i).TrimStart("saved as").Trim();
+					value = Context.GetFromContext(savedAs)?.ToString();
+					if (value == null)
+					{
+						throw new Exception("Failed to get required value from context! Saved as: " + savedAs);
+					}
+				}
 				switch (x.Keys.ElementAt(i))
 				{
 					case "Status":
-						Report.IsTrue(thisProductSearch.SelectFromStatusFilter(x.Values.ElementAt(i)),
-							"Failed to set status to: " + x.Values.ElementAt(i),
-							"Successfully set status to: " + x.Values.ElementAt(i), false, false);
+						Report.IsTrue(thisProductSearch.SelectFromStatusFilter(value),
+							"Failed to set status to: " + value,
+							"Successfully set status to: " + value, false, false);
 						break;
 					case "Client":
-						Report.IsTrue(thisProductSearch.SelectFromClientFilter(x.Values.ElementAt(i)),
-							"Failed to set client", "Successfully set client to: " + x.Values.ElementAt(i), false,
+						Report.IsTrue(thisProductSearch.SelectFromClientFilter(value),
+							"Failed to set client", "Successfully set client to: " + value, false,
 							false);
 						break;
 					case "SearchPattern":
-						Report.IsTrue(thisProductSearch.SelectFromSearchPatternFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromSearchPatternFilter(value),
 							"Failed to set search pattern",
-							"Successfully set search pattern to: " + x.Values.ElementAt(i), false, false);
+							"Successfully set search pattern to: " + value, false, false);
 						break;
 					case "ProductID":
 					case "ProductId":
-						string prodID = x.Values.ElementAt(i);
+						string prodID = value;
 						if (prodID.ToLower().Contains("savedas"))
 						{
 							string savedAsText = prodID.Replace("savedas", "").Trim();
@@ -195,39 +223,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 
 						Report.IsTrue(thisProductSearch.EnterProductID(prodID),
-							"Failed to set product id", "Successfully set product id to: " + x.Values.ElementAt(i),
+							"Failed to set product id", "Successfully set product id to: " + value,
 							false, false);
 						break;
 					case "ProductName":
-						Report.IsTrue(thisProductSearch.EnterProductName(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterProductName(value),
 							"Failed to set product name", "Successfully set product name", false, false);
 						break;
 					case "DateRange":
-						Report.IsTrue(thisProductSearch.SelectFromDateRangeFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromDateRangeFilter(value),
 							"Failed to set date range", "Successfully set date range", false, false);
 						break;
 					case "DateFrom":
-						Report.IsTrue(thisProductSearch.EnterDateFrom(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterDateFrom(value),
 							"Failed to set date range", "Successfully set date range", false, false);
 						break;
 					case "DateTo":
-						Report.IsTrue(thisProductSearch.EnterDateTo(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterDateTo(value),
 							"Failed to set date range", "Successfully set date range", false, false);
 						break;
 					case "LastActivityDate":
-						Report.IsTrue(thisProductSearch.EnterLastActivityDate(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterLastActivityDate(value),
 							"Failed to set activity date", "Successfully set activity date", false, false);
 						break;
 					case "Supplier":
-						Report.IsTrue(thisProductSearch.EnterSupplier(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterSupplier(value),
 							"Failed to set supplier", "Successfully set supplier", false, false);
 						break;
 					case "User":
-						Report.IsTrue(thisProductSearch.EnterUser(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterUser(value),
 							"Failed to set user", "Successfully set user", false, false);
 						break;
 					case "Reviewer":
-						Report.IsTrue(thisProductSearch.EnterReviewer(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterReviewer(value),
 							"Failed to set reviewer", "Successfully set reviewer", false, false);
 						break;
 					case "OnSuspended":
@@ -235,82 +263,82 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							"Failed to set on suspended", "Successfully set on suspended", false, false);
 						break;
 					case "RecertificationActive":
-						Report.IsTrue(thisProductSearch.CheckRecertificationActive(x.Values.ElementAt(i) == "true"),
+						Report.IsTrue(thisProductSearch.CheckRecertificationActive(value == "true"),
 							"Failed to set recertification active", "Successfully set recertification active", false,
 							false);
 						break;
 					case "GGOnlyProducts":
-						Report.IsTrue(thisProductSearch.CheckGoodGuideOnlyProducts(x.Values.ElementAt(i) == "true"),
+						Report.IsTrue(thisProductSearch.CheckGoodGuideOnlyProducts(value == "true"),
 							"Failed to set Good Guide only products", "Successfully set Good Guide only products",
 							false, false);
 						break;
 					case "ECommFlowProducts":
-						Report.IsTrue(thisProductSearch.CheckECommFlowProducts(x.Values.ElementAt(i) == "true"),
+						Report.IsTrue(thisProductSearch.CheckECommFlowProducts(value == "true"),
 							"Failed to set EComm flow products", "Successfully set EComm flow products", false, false);
 						break;
 					case "TReg":
-						Report.IsTrue(thisProductSearch.SelectFromTRegFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromTRegFilter(value),
 							"Failed to set TReg", "Successfully set TReg", false, false);
 						break;
 					case "OrderNo":
-						Report.IsTrue(thisProductSearch.EnterOrderNo(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterOrderNo(value),
 							"Failed to set order no", "Successfully set order no", false, false);
 						break;
 					case "SubmissionDate":
-						Report.IsTrue(thisProductSearch.EnterSubmissionDate(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterSubmissionDate(value),
 							"Failed to set submission date", "Successfully set submission date", false, false);
 						break;
 					case "UPC":
-						Report.IsTrue(thisProductSearch.EnterUPC(x.Values.ElementAt(i)),
+						if (value.Contains("saved as"))
+						{
+							value = Context
+								.GetFromContext(value.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+								.ToString();
+						}
+						Report.IsTrue(thisProductSearch.EnterUPC(value),
 							"Failed to set upc", "Successfully set upc", false, false);
 						break;
 					case "ParentUPC":
-						Report.IsTrue(thisProductSearch.EnterParentUPC(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterParentUPC(value),
 							"Failed to set parent upc", "Successfully set parent upc", false, false);
 						break;
 					case "RecommendedUse":
-						Report.IsTrue(thisProductSearch.SelectFromRecommendedUseFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromRecommendedUseFilter(value),
 							"Failed to set recommended use", "Successfully set parent upc", false, false);
 						break;
 					case "FlashpointRange":
-						Report.IsTrue(thisProductSearch.SelectFromFlashPointRangeFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromFlashPointRangeFilter(value),
 							"Failed to set Flashpoint range", "Successfully set parent upc", false, false);
 						break;
 					case "PHRange":
-						Report.IsTrue(thisProductSearch.SelectFromPHRangeFilter(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.SelectFromPHRangeFilter(value),
 							"Failed to set PH range", "Successfully set PH range", false, false);
 						break;
 					case "UNNumber":
-						Report.IsTrue(thisProductSearch.EnterUNNumber(x.Values.ElementAt(i)),
+						Report.IsTrue(thisProductSearch.EnterUNNumber(value),
 							"Failed to set un number", "Successfully set un number", false, false);
 						break;
 					default:
 						throw new Exception("Invalid column name");
 				}
 			}
-
 			Report.Info("Going to click find");
 			Delay.Seconds(1);
 			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find", false, false);
-			Delay.Seconds(10);
-			Report.Info("Waiting for spinner");
-			GeneralUtilities.StudioWaitForSpinner(10);
-			thisProductSearch.Wait_for_load(10);
-			GeneralUtilities.StudioWaitForSpinner(10);
-			Report.Info("Finished waiting for spinner");
-			Delay.Seconds(10);
+			Report.Info("Waiting for loading bar");
+			new StudioSHAManager().Wait_For_Loading_Finish();
+			Report.Info("Finished waiting for loading");
+			Delay.Seconds(1);
 			Report.Screenshot();
-
 		}
 
-		[StepDefinition(
-			@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
+		[StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(string productSavedAs,
 			string status)
 		{
 
 			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
-			var ID = ProductDetails.Id;
+			string ID = ProductDetails.Id;
 			Report.Info("Searching for id: " + ID + " and status: " + status);
 
 			//rerun search until status is as expected or give up
@@ -324,9 +352,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				thisStudioManager.Wait_for_load();
 				thisStudioManager.ClickBottomMenuOption("Search");
 
-				Steps_SHA myStepsSha = new Steps_SHA();
+				var myStepsSha = new Steps_SHA();
 
-				TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+				var table = new Table(new string[] {
 					"SearchTerm",
 					"SearchValue"
 				});
@@ -341,17 +369,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 
 				Delay.Seconds(2);
-				StudioSHAManager mySHAManager = new StudioSHAManager();
+				var mySHAManager = new StudioSHAManager();
 				mySHAManager.WaitForProductList(10);
 
-				var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+				Product topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
 				if (topProductnew != null)
 				{
 					if (topProductnew.ID == ID)
 					{
 						if (status.ToLower() == "accepted or completed")
 						{
-							if (topProductnew.Status.ToLower() == "accepted" | topProductnew.Status.ToLower() == "completed")
+							if (topProductnew.Status.ToLower() == "accepted" |
+								topProductnew.Status.ToLower() == "completed")
 							{
 								found = true;
 							}
@@ -365,6 +394,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									found = true;
 								}
 							}
+
 							if (topProductnew.Status.ToLower() == status.ToLower())
 							{
 								found = true;
@@ -372,6 +402,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 					}
 				}
+
 				counter++;
 			}
 
@@ -485,6 +516,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			*/
 		}
 
+		[StepDefinition(@"I confirm that the status of the product saved as: (.*) is: (.*)")]
+		public void IConfirmThatTheStatusOfTheProductIs(string productSavedAs, string status)
+		{
+			status = Context.GetFromContext(status)?.ToString() ?? "";
+			this.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(productSavedAs, status);
+		}
+
 		[StepDefinition(
 			@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is (red|not red) indicating a recertification")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification(
@@ -498,9 +536,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
-			var id = productDetails.Id;
+			string id = productDetails.Id;
 			Report.Info("Product ID: " + id);
-			var topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+			Product topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
 			if (topProduct == null || topProduct.ID != id)
 			{
 				var myStudioShaManager = new StudioSHAManager();
@@ -516,7 +554,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				mySHAManager.WaitForProductList(10);
 			}
 
-			var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+			Product topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
 			if (topProductnew != null)
 			{
 				Report.Info("Found top product");
@@ -547,29 +585,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"In the SHA manager grid I right click against product saved as: (.*)")]
+		[StepDefinition(@"In the SHA manager grid I right click against product saved as: (.*)")]
 		public void GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(string savedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var ID = ProductDetails.Id;
+			string ID = ProductDetails.Id;
 
 			Report.IsTrue(new StudioSHAManager().RightClickProductByID(ID), "Failed to rightclick against: " + ID,
 				"Right clicked against: " + ID);
 		}
 
-		[Given(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
-		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string Option)
+
+		[StepDefinition(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
+		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string option)
 		{
-			RightClickProductMenu thisContextMenu = new RightClickProductMenu();
-			Report.IsTrue(thisContextMenu.SelectOption(Option), "Failed to select option: " + Option,
-				"Selected option: " + Option);
+			var thisContextMenu = new RightClickProductMenu();
+			Report.IsTrue(thisContextMenu.SelectOption(option), "Failed to select option: " + option,
+				"Selected option: " + option);
 		}
 
-		[Given(@"In the Product Recertification History popup I should see the following entry")]
+		[StepDefinition(@"In the Product Recertification History popup I should see the following entry")]
 		public void GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(Table table)
 		{
-			ProductRecertificationHistory thisProductRecertificationHistory = new ProductRecertificationHistory();
+			var thisProductRecertificationHistory = new ProductRecertificationHistory();
 			thisProductRecertificationHistory.Wait_for_load(30);
+			thisProductRecertificationHistory.WaitForTableLoad();
 			Report.Screenshot();
 			List<Product> ListOfRecertificationProducts = thisProductRecertificationHistory.GetProducts();
 			Report.Info("Found " + ListOfRecertificationProducts.Count.ToString() + " recertification products");
@@ -631,20 +671,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							DateTime now = DateTime.Now;
 							DateTime yesterday = now.AddDays(-1);
 							DateTime tommorrow = now.AddDays(+1);
-							if (thisProduct.RecertificationDate > yesterday && thisProduct.RecertificationDate <= tommorrow)
+							if (thisProduct.RecertificationDate > yesterday &&
+								thisProduct.RecertificationDate <= tommorrow)
 							{
 								Report.Info("Recertification date: " + thisRow["Date"]);
 							}
 							else
 							{
-								Report.Info("Recertification date did not match. Expected date between " + yesterday.ToString() + " and " + tommorrow.ToString() + " but got: " +
+								Report.Info("Recertification date did not match. Expected date between " +
+											yesterday.ToString() + " and " + tommorrow.ToString() + " but got: " +
 											thisProduct.RecertificationDate.ToString());
 								allPassed = false;
 							}
 						}
 						else
 						{
-							DateTime expected = Convert.ToDateTime(thisRow["Date"]);
+							var expected = Convert.ToDateTime(thisRow["Date"]);
 
 							if (thisProduct.RecertificationDate == expected)
 							{
@@ -677,7 +719,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm there is no product entry listed with Recertification Reason: (.*)")]
 		public void IDoNotSeeAnEntryWithRecertificationReason(string reason)
 		{
-			var recertificationProducts = new ProductRecertificationHistory().GetProducts();
+			List<Product> recertificationProducts = new ProductRecertificationHistory().GetProducts();
 			Report.IsTrue(recertificationProducts.All(x => x.RecertificationReason != reason),
 				"There was a product with Recertification Reason: " + reason + " which was not expected!",
 				"As expected there were no products in the list with Recerficiation Reason: " + reason);
@@ -687,15 +729,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			@"I Confirm the Product ID: (.*) is highlited yellow indicating that this is an e-comm/direct ship product")]
 		public void ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(string id)
 		{
-			StudioSHAManager selStudioShaManager = new StudioSHAManager();
+			var selStudioShaManager = new StudioSHAManager();
 
 			if (!int.TryParse(id, out int n))
 			{
-				ProductInformation thisProdInfo = (ProductInformation)Context.GetFromContext(id);
+				var thisProdInfo = (ProductInformation)Context.GetFromContext(id);
 				id = thisProdInfo.Id;
 			}
+
 			Report.Info("Waiting for id to change colour");
-			Report.IsTrue(selStudioShaManager.WaitForIDToBeStatus(id, 120, "N/A", "kit eCommProduct", false, "rgba(254, 255, 160, 1)"),
+			Report.IsTrue(
+				selStudioShaManager.WaitForIDToBeStatus(id, 120, "N/A", "kit eCommProduct", false,
+					"rgba(254, 255, 160, 1)"),
 				"ID has not turned required colour", "ID is required colour");
 		}
 
@@ -717,8 +762,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 
-			StudioSHAManager selStudioShaManager = new StudioSHAManager();
-			var colour = selStudioShaManager.ProductHighlight(id);
+			var selStudioShaManager = new StudioSHAManager();
+			string colour = selStudioShaManager.ProductHighlight(id);
 			if (colour == null)
 			{
 				Report.Failure("Unable to get product status for product id: " + id);
@@ -731,7 +776,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product was not highlighted yellow background as expected");
 		}
 
-		[Given(@"In SHA Manager I select the following products:")]
+		[StepDefinition(@"In SHA Manager I select the following products:")]
 		public void GivenInSHAManagerISelectTheFollowingProducts(Table table)
 		{
 			string ID = "";
@@ -744,7 +789,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					ID = ProductDetails.Id;
 				}
 
-				StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+				var thisStudioSHAManager = new StudioSHAManager();
 				Report.IsTrue(thisStudioSHAManager.SelectProductByID(ID), "Failed to select: " + ID, "Selected: " + ID);
 			}
 
@@ -754,20 +799,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInSHAManagerISelectTheProduct(string savedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var id = ProductDetails?.Id;
+			string id = ProductDetails?.Id;
 			if (id == null)
 			{
 				throw new Exception("Could not find product saved to context as: " + savedAs);
 			}
 
-			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			var thisStudioSHAManager = new StudioSHAManager();
 			thisStudioSHAManager.SelectProductByID(id);
 		}
 
 		[StepDefinition(@"I Click the Process Recertification button")]
 		public void GivenIClickTheProcessRecertificationButton()
 		{
-			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			var thisStudioSHAManager = new StudioSHAManager();
 			Report.IsTrue(thisStudioSHAManager.ClickProcessRecertification(), "Failed to click process recertification",
 				"Clicked process recertification");
 		}
@@ -775,7 +820,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Confirm the Recertification pop up is shown")]
 		public void GivenIConfirmTheRecertificationPopUpIsShown()
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(thisRecertificationPopup.WaitForLoad(60), "Recertification popup is not showing",
 				"Recertification popup is showing");
 		}
@@ -783,7 +828,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Uncheck the Auto Assign Regulatory Specialist to Product check box")]
 		public void GivenIUncheckTheAutoAssignRegulatorySpecialistToProductCheckBox()
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(thisRecertificationPopup.SetAutoAssignRegulatorySpecialistToProduct(false),
 				"Failed to uncheck the Auto Assign Regulatory Specialist to Product check box",
 				"Unchecked the Auto Assign Regulatory Specialist to Product check box");
@@ -792,7 +837,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Select (.*) from the drop down list for Select Regulatory Specialist")]
 		public void GivenISelectFromTheDropDownListForRegulatorySpecialist(string specialist)
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(thisRecertificationPopup.SelectRegulatorySpecialist(specialist),
 				"Failed to select: " + specialist,
 				"Selected: " + specialist);
@@ -801,7 +846,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Recertification popup I click (.*)")]
 		public void GivenInTheRecertificationPopupIClick(string button)
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(thisRecertificationPopup.ClickButton(button), "Failed to click " + button,
 				"Clicked " + button);
 		}
@@ -809,7 +854,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Recertification popup the (.*) button will no longer be shown")]
 		public void GivenInTheRecertificationPopupTheButtonWillNoLongerBeShown(string button)
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(!thisRecertificationPopup.ButtonExists(button), "Button is showing which should not be",
 				"As expected button is not showing");
 		}
@@ -817,7 +862,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Recertification popup I wait for all processing to be completed")]
 		public void GivenInTheRecertificationPopupIWaitForAllProcessingToBeCompleted()
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(thisRecertificationPopup.WaitForProcessing(120), "Processing has not completed as expected",
 				"Processing has completed as expected");
 		}
@@ -826,13 +871,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheRecertificationPopupIShouldSeeTheFollowingProductsAsSuccessfullyAssigned(
 			TechTalk.SpecFlow.Table productsExpected)
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			bool passedAll = true;
 			List<string> processedInfo = thisRecertificationPopup.GetProcessingMessages();
 
 			string ID = "";
 			string expectedString = "";
-			List<ProductInformation> ListOfProducts = new List<ProductInformation>();
+			var ListOfProducts = new List<ProductInformation>();
 			foreach (TechTalk.SpecFlow.TableRow thisProduct in productsExpected.Rows)
 			{
 				if (thisProduct["ProductID"].ToLower().Contains("saved as"))
@@ -845,7 +890,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				expectedString = "Product: " + ID + " succesfully assigned";
 
-				var match = processedInfo.FirstOrDefault(x => x.Contains(expectedString));
+				string match = processedInfo.FirstOrDefault(x => x.Contains(expectedString));
 				if (match == null)
 				{
 					Report.Info("No match was found for: " + expectedString);
@@ -865,7 +910,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Recertification popup I click on close")]
 		public void GivenInTheRecertificationPopupIClickOnClose()
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(thisRecertificationPopup.CloseDialog(), "Clicking on close has not worked as expected",
 				"Clicking on close has woked as expected");
 		}
@@ -873,7 +918,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Confirm the Recertification pop up is closed")]
 		public void GivenIConfirmTheRecertificationPopUpIsClosed()
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(!thisRecertificationPopup.WaitForLoad(1), "Recertification popup is not closed",
 				"Recertification popup is closed");
 		}
@@ -885,17 +930,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				// Switch to window
-				var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 				Context.AddToContext("MainWindowHandle", currentHandle);
-				var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 				Report.Info("Looking for SHA Manager Product UPC window");
 				bool foundWindow = false;
-				foreach (var handle in allHandles)
+				foreach (string handle in allHandles)
 				{
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-							By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -911,7 +956,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				// Get Displayed UPCs
-				var displayedUpcs = new StudioSHAManager().GetUPCs();
+				List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
 				if (displayedUpcs == null)
 				{
 					Report.Failure("Unable to fetch UPC Information from the Product UPC window!");
@@ -920,8 +965,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				// Confirm match
-				var upc = Context.GetFromContext("UPC" + savedAs).ToString();
-				Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber == upc),
+				string upc = Context.GetFromContext("UPC" + savedAs).ToString();
+				Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber.Contains(upc)),
 					$@"UPC number ""{upc}"" did not appear on the Product UPC list! UPC numbers were: {string.Join(", ", displayedUpcs)}",
 					$@"UPC number: ""{upc}"" appeared on the Product UPC list as expected");
 			}
@@ -937,6 +982,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm that UPC number saved as: (.*) shows a grey background for Archived in the SHA Manager Product UPC list")]
+		public void IConfirmThatTheUPCNumberSavedAsShowsAGreyBackground(string savedAs)
+		{
+			string upc = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			Report.Info($"Getting UPC From Context, Found:");
+			if (upc == "")
+			{
+				Report.Failure("Failed to find upc saved as " + savedAs + " in context.");
+			}
+
+			var sha = new StudioSHAManager();
+
+			Report.IsTrue(sha.ConfirmUPCArchived(upc), "Failed to find UPC " + upc + " set as archived.",
+				"Successfully found upc " + upc + " set as archived.");
+
+		}
+
+		[StepDefinition(@"I confirm that retailer saved as (.*) appears for UPC saved as UPC(.*)")]
+		public void IConfirmThatRetailerAppearsForUPC(string retailer, string savedAs)
+		{
+			string upc = Context.GetFromContext("UPC" + savedAs).ToString();
+			retailer = Context.GetFromContext(retailer)?.ToString() ?? "";
+
+			var studioSHAManager = new StudioSHAManager();
+
+			Report.IsTrue(studioSHAManager.ConfirmRetailerExistsForUPC(retailer, upc), "Failed to find retailer " + retailer + " in list of retailers",
+				"Successfully found retailer " + retailer + " in list of retailers.");
+		}
+
+		[StepDefinition(@"I confirm that retailer saved as: (.*) appears for UPC saved as: (.*)")]
+		public void ConfirmThatRetailerSavedAsAppearsForUPCSavedAs(string retailerSavedAs, string upcSavedAs)
+		{
+			if (!Context.Contains(upcSavedAs))
+			{
+				Report.Error("No item saved in context as: " + upcSavedAs);
+				return;
+			}
+			string upc = Context.GetFromContext(upcSavedAs).ToString();
+			if (!Context.Contains(retailerSavedAs))
+			{
+				Report.Error("No item saved in context as: " + retailerSavedAs);
+				return;
+			}
+			string retailer = Context.GetFromContext(retailerSavedAs).ToString();
+			//var abbreviationMappings = new RetailerAbbreviations().Map;
+			//if (abbreviationMappings.ContainsKey(retailer))
+			//{
+			//	// then we need to convert from full retailer name to abbreviation because the UPC page displays the abbrv
+			//	retailer = abbreviationMappings.FirstOrDefault(x => x.Key == retailer).Value;
+			//}
+			retailer = new RetailerAbbreviations().TryConvertToAbbreviation(retailer);
+			var studioSHAManager = new StudioSHAManager();
+			Report.IsTrue(studioSHAManager.ConfirmRetailerExistsForUPC(retailer, upc), "Failed to find retailer " + retailer + " in list of retailers",
+				"Successfully found retailer " + retailer + " in list of retailers.");
+		}
+
 		[StepDefinition(@"I close the SHA Manager Product UPC window")]
 		public void CloseSHAManagerProductUPCWindow()
 		{
@@ -946,7 +1047,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I edit My Toolbar to add the following options")]
 		public void GivenIEditMyToolbarToAddTheFollowingOptions(Table table)
 		{
-			Steps_Studio thisStepsStudio = new Steps_Studio();
+			var thisStepsStudio = new Steps_Studio();
 			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("My Toolbar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table);
@@ -957,7 +1058,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the following option in the bottom menu: (.*)")]
 		public void IClickTheFollowingOptionInTheBottomMenu(string option)
 		{
-			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			var myStudioShaManager = new StudioSHAManager();
 			Report.IsTrue(myStudioShaManager.ClickBottomMenuOption(option), "Failed to click option: " + option,
 				"Clicked option: " + option);
 		}
@@ -966,8 +1067,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Suspended dialog I Select the following clients: (.*)")]
 		public void GivenInTheSuspendedDialogISelectTheFollowingClients(string clientsList)
 		{
-			List<string> clients = clientsList.Split(',').Select(x => x.Trim()).ToList();
-			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			var clients = clientsList.Split(',').Select(x => x.Trim()).ToList();
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			thisStudioSHAManagerProductSuspend.Wait_for_load(30);
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectClients(clients),
 				"Failed to select clients: " + clientsList, "Selected: " + clientsList);
@@ -976,7 +1077,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Suspended dialog in the Select Regulatory Specialist drop down I choose: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSelectRegulatorySpecialistDropDownIChoose(string regulatorySpecialist)
 		{
-			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectRegulatorySpecialist(regulatorySpecialist),
 				"Failed to select regulatory specialist: " + regulatorySpecialist, "Selected: " + regulatorySpecialist);
 
@@ -985,7 +1086,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Suspended dialog in the Select Subject drop down I choose: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSelectSubjectDropDownIChoose(string subject)
 		{
-			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectSubject(subject),
 				"Failed to select subject: " + subject, "Selected: " + subject);
 		}
@@ -993,20 +1094,67 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In SHA Manager I select the first product")]
 		public void GivenInSHAManagerISelectTheProduct()
 		{
-			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			var thisStudioSHAManager = new StudioSHAManager();
 			Delay.Seconds(1);
 			string id = thisStudioSHAManager.SelectFirstProduct();
 			Report.IsTrue(id.Length > 0, "Product " + id + " has not been selected",
 				"Product " + id + " has been selected");
-			ProductInformation thisProductInformation = new ProductInformation();
-			thisProductInformation.Id = id;
+			var thisProductInformation = new ProductInformation {
+				Id = id
+			};
 			Context.AddToContext("ID", thisProductInformation);
 		}
+
+		[StepDefinition(@"I save the first product in the grid with retailers as: (.*)")]
+		public void ISaveTheFirstProductInTheGridWithRetailersAs(string savedAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			Delay.Seconds(1);
+			string id = thisStudioSHAManager.SelectFirstProduct();
+			Report.IsTrue(id.Length > 0, "Product " + id + " has not been selected",
+							"Product " + id + " has been selected");
+			var thisProductInformation = new ProductInformation {
+				Id = id
+			};
+			Context.AddToContext("ID", thisProductInformation);
+		}
+
+		[StepDefinition(@"I confirm that retailer saved as (.*) appears in the list of retailers for product (.*)")]
+		public void IConfirmThatRetailerAppearsInListOfRetailers(string retailer, string product)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			var ProductDetails = (ProductInformation)Context.GetFromContext(product);
+			string ID = ProductDetails.Id;
+			retailer = Context.GetFromContext(retailer)?.ToString() ?? "";
+
+			string retailerAbbr = "";
+			var abbr = new RetailerAbbreviations();
+			abbr.Map.TryGetValue(retailer, out retailerAbbr);
+
+			Report.IsTrue(thisStudioSHAManager.RetailerIsInListOfRetailers(retailerAbbr, ID), "Failed to find retailer " + retailerAbbr + " in list of retailers.",
+				"Successfully found retailer " + retailerAbbr + " in list of retailers.");
+		}
+
+		[StepDefinition(@"I confirm that the retailer (.*) is archived for product saved as: (.*)")]
+		public void IConfirmThatTheRetailerIsArchivedForProduct(string retailer, string savedAs)
+		{
+			string retailerAbbr = "";
+			var abbr = new RetailerAbbreviations();
+			abbr.Map.TryGetValue(retailer, out retailerAbbr);
+
+			var thisStudioSHAManager = new StudioSHAManager();
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string ID = ProductDetails.Id;
+
+			Report.IsTrue(thisStudioSHAManager.RetailerIsArchived(retailerAbbr, ID), "Failed to find archived retailer " + retailer,
+				"Successfully found archived retailer " + retailer);
+		}
+
 
 		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I should see: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIShouldSee(string shouldSee)
 		{
-			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 
 			string actualMessage = thisStudioSHAManagerProductSuspend.GetSupplierMessage();
 			Report.Screenshot();
@@ -1014,14 +1162,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
 
 			RegexOptions options = RegexOptions.None;
-			Regex regex = new Regex("[ ]{2,}", options);
+			var regex = new Regex("[ ]{2,}", options);
 			actualMessage = regex.Replace(actualMessage, " ");
 
 			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
 						" expected message length is: " + shouldSee.Trim().Length);
 			if (actualMessage.Trim() != shouldSee.Trim())
 			{
-				StringBuilder builder = new StringBuilder();
+				var builder = new StringBuilder();
 				char[] ar1 = actualMessage.ToArray();
 				for (int i = 0; i < ar1.Length; i++)
 				{
@@ -1045,7 +1193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I add the following text: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIAddTheFollowingText(string textToAdd)
 		{
-			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.AddSupplierMessage(textToAdd),
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
@@ -1053,7 +1201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I enter the following text: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIEnterTheFollowingText(string textToAdd)
 		{
-			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.EnterSupplierMessage(textToAdd),
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
@@ -1062,19 +1210,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I should see: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIShouldSee(string shouldSee)
 		{
-			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			string actualMessage = thisStudioSHAManagerProductSuspend.GetInternalProductNote();
 			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
 
 			RegexOptions options = RegexOptions.None;
-			Regex regex = new Regex("[ ]{2,}", options);
+			var regex = new Regex("[ ]{2,}", options);
 			actualMessage = regex.Replace(actualMessage, " ");
 
 			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
 						" expected message length is: " + shouldSee.Trim().Length);
 			if (actualMessage.Trim() != shouldSee.Trim())
 			{
-				StringBuilder builder = new StringBuilder();
+				var builder = new StringBuilder();
 				char[] ar1 = actualMessage.ToArray();
 				for (int i = 0; i < ar1.Length; i++)
 				{
@@ -1098,7 +1246,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I add the following text: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIAddTheFollowingText(string textToAdd)
 		{
-			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.AddInternalProductNote(textToAdd),
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
@@ -1106,7 +1254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I enter the following text: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIEnterTheFollowingText(string textToAdd)
 		{
-			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.EnterInternalProductNote(textToAdd),
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
@@ -1115,7 +1263,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheSuspendedDialogIClick(string button)
 		{
 			Delay.Seconds(1);
-			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.ClickButton(button),
 				"Failed to click button: " + button, "Clicked button: " + button);
 		}
@@ -1127,15 +1275,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.TableRow(table.Rows[0]);
 			Report.Info("Getting displayed notifications");
 			var thisProductNotificationHistory = new ProductNotificationHistory();
-			var notifications = thisProductNotificationHistory.GetNotifications();
-			for (var i = 0; i < notifications.Count; i++)
+			List<Notification> notifications = thisProductNotificationHistory.GetNotifications();
+			for (int i = 0; i < notifications.Count; i++)
 			{
-				var notification = notifications[i];
-				Report.Info("Notification" + i+1 + ". Type = '" + notification.Type + "'. Notification Date = '" + notification.NotificationDate + "'. Subject = '" +  notification.Subject + ".");
+				Notification notification = notifications[i];
+				Report.Info("Notification" + i + 1 + ". Type = '" + notification.Type + "'. Notification Date = '" +
+							notification.NotificationDate + "'. Subject = '" + notification.Subject + ".");
 			}
+
 			if (table.ContainsColumn("Type"))
 			{
-				var type = table.Rows[0]["Type"];
+				string type = table.Rows[0]["Type"];
 				Report.Info("Expected Type: " + type);
 				notifications = notifications.Where(x => x.Type.ToLower() == type.ToLower()).ToList();
 				if (!notifications.Any())
@@ -1144,28 +1294,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Screenshot();
 					return;
 				}
+
 				Report.Info("Found a notification with the expected Type");
 			}
+
 			if (table.ContainsColumn("Notification Date"))
 			{
-				var expectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+				string expectedDate = DateTime.Now.ToString("yyyy-MM-dd");
 				if (table.Rows[0]["Notification Date"].ToLower() != "today")
 				{
 					expectedDate = Convert.ToDateTime(table.Rows[0]["Notification Date"]).ToString("yyyy-MM-dd");
 				}
+
 				Report.Info("Expected Date: " + expectedDate);
-				notifications = notifications.Where(x => x.NotificationDate.ToString("yyyy-MM-dd") == expectedDate).ToList();
+				notifications = notifications.Where(x => x.NotificationDate.ToString("yyyy-MM-dd") == expectedDate)
+					.ToList();
 				if (!notifications.Any())
 				{
 					Report.Failure("No notifications of date: " + expectedDate + " were found");
 					Report.Screenshot();
 					return;
 				}
+
 				Report.Info("Found a notification with the expected Date");
 			}
+
 			if (table.ContainsColumn("Subject"))
 			{
-				var subject = table.Rows[0]["Subject"];
+				string subject = table.Rows[0]["Subject"];
 				Report.Info("Expected Subject: " + subject);
 				notifications = notifications.Where(x => x.Subject == subject).ToList();
 				if (!notifications.Any())
@@ -1174,8 +1330,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Screenshot();
 					return;
 				}
+
 				Report.Info("Found a notification with the expected Subject");
 			}
+
 			Report.Success("The expected row was displayed");
 			Report.Screenshot();
 		}
@@ -1183,7 +1341,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Notification History Screen I click on the most recent notification")]
 		public void ThenInTheNotificationHistoryScreenIClickOnTheMostRecentNotification()
 		{
-			ProductNotificationHistory thisProductNotificationHistory = new ProductNotificationHistory();
+			var thisProductNotificationHistory = new ProductNotificationHistory();
 			thisProductNotificationHistory.OrderNotificationsByDate("desc");
 			Delay.Seconds(1);
 			Report.IsTrue(thisProductNotificationHistory.ClickTopItem(), "Failed to click most recent notification",
@@ -1195,7 +1353,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Then(@"In the Notification History Detail Screen I confirm that details are as follows")]
 		public void ThenInTheNotificationHistoryDetailScreenIConfirmThatDetailsAreAsFollows(Table table)
 		{
-			ProductNotificationHistory thisProductNotificationHistory = new ProductNotificationHistory();
+			var thisProductNotificationHistory = new ProductNotificationHistory();
 			Notification thisNotification = thisProductNotificationHistory.GetNotificationDetails();
 
 			if (table.ContainsColumn("Subject"))
@@ -1227,14 +1385,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
 
 				RegexOptions options = RegexOptions.None;
-				Regex regex = new Regex("[ ]{2,}", options);
+				var regex = new Regex("[ ]{2,}", options);
 				actualMessage = regex.Replace(actualMessage, " ");
 
 				Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
 							" expected message length is: " + shouldSee.Trim().Length);
 				if (actualMessage.Trim() != shouldSee.Trim())
 				{
-					StringBuilder builder = new StringBuilder();
+					var builder = new StringBuilder();
 					char[] ar1 = actualMessage.ToArray();
 					for (int i = 0; i < ar1.Length; i++)
 					{
@@ -1258,10 +1416,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Given(@"In SHA Manager I set the filter for status to : (.*)")]
+		[StepDefinition(@"In SHA Manager I set the filter for status to : (.*)")]
 		public void GivenInSHAManagerISetTheFilterForStatusTo(string status)
 		{
-			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			var myStudioShaManager = new StudioSHAManager();
 			TestReport.StartStep("I set the status filter to " + status);
 			myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter(status);
@@ -1289,12 +1447,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[Given(@"I verify the product saved as: (.*) displays in red with a red box around it")]
+		[StepDefinition(@"I verify the product saved as: (.*) displays in red with a red box around it")]
 		public void GivenIVerifyTheProductDisplaysInRedWithARedBoxAroundIt(string savedAs)
 		{
-			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			var myStudioShaManager = new StudioSHAManager();
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var ID = ProductDetails.Id;
+			string ID = ProductDetails.Id;
 			Report.IsTrue(myStudioShaManager.ProductWithIDHasRedBorders(ID), "Product does not have red borders",
 				"Product has red borders");
 
@@ -1303,14 +1461,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Notification History Detail Screen I click on: (.*)")]
 		public void ThenInTheNotificationHistoryDetailScreenIClickOn(string button)
 		{
-			ProductNotificationHistory thisProductNotificationHistory = new ProductNotificationHistory();
+			var thisProductNotificationHistory = new ProductNotificationHistory();
 			thisProductNotificationHistory.ClickButtonInNotificationDetails(button);
 		}
 
 		[StepDefinition(@"In SHA Manager grid I click the following top menu item: (.*)")]
 		public void GivenInSHAManagerGridIClickTheFollowingTopMenuItem(string item)
 		{
-			StudioSHAManager thiStudioShaManager = new StudioSHAManager();
+			var thiStudioShaManager = new StudioSHAManager();
 			switch (item)
 			{
 				case "Add to Recertification":
@@ -1342,7 +1500,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The Add Product to Recertification screen should be showing")]
 		public void ThenTheAddProductToRecertificationScreenShouldBeShowing()
 		{
-			AddProductToRecertificationDialog thisAddProductToRecertificationDialog =
+			var thisAddProductToRecertificationDialog =
 				new AddProductToRecertificationDialog();
 			Report.IsTrue(thisAddProductToRecertificationDialog.Wait_for_load(30),
 				"Add Product to Recertification screen has failed to load",
@@ -1352,11 +1510,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add Product to Recertification screen only the following Reasons are selected:")]
 		public void ThenInTheAddProductToRecertificationScreenOnlyTheFollowingReasonsAreSelected(Table table)
 		{
-			AddProductToRecertificationDialog thisAddProductToRecertificationDialog =
+			var thisAddProductToRecertificationDialog =
 				new AddProductToRecertificationDialog();
 			List<string> selectedReasons = thisAddProductToRecertificationDialog.GetSelectedReasons();
 			string pattern = @"^\d.0?";
-			Regex regex = new Regex(pattern);
+			var regex = new Regex(pattern);
 			bool matched = false;
 			bool matchedAll = true;
 			foreach (TableRow thisRow in table.Rows)
@@ -1400,7 +1558,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheAddProductToRecertificationScreenOnlyTheFollowingAllowUsersCheckboxesAreSelected(
 			Table table)
 		{
-			AddProductToRecertificationDialog thisAddProductToRecertificationDialog =
+			var thisAddProductToRecertificationDialog =
 				new AddProductToRecertificationDialog();
 			List<string> selectedCheckboxes =
 				thisAddProductToRecertificationDialog.GetListOfAllowUserCheckboxesChecked();
@@ -1414,7 +1572,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The SHA Manager UPC List screen should show")]
 		public void ThenTheSHAManagerUPCListScreenShouldShow()
 		{
-			StudioSHAManagerProductUPC newStudioSHAManagerProductUPC = new StudioSHAManagerProductUPC();
+			var newStudioSHAManagerProductUPC = new StudioSHAManagerProductUPC();
 			Report.IsTrue(newStudioSHAManagerProductUPC.Wait_for_load(30), "UPC List is not showing",
 				"UPC List is showing");
 		}
@@ -1423,19 +1581,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the top (\d*) products all have PH Range of: (.*)")]
 		public void GivenIConfirmTheTopProductsAllHavePHRangeOf(int n, string phRange)
 		{
-			StudioSHAManager thisStudioShaManager = new StudioSHAManager();
+			var thisStudioShaManager = new StudioSHAManager();
 			List<Product> productList = thisStudioShaManager.GetTopXProducts(n);
-			Steps_Shared sharedSteps = new Steps_Shared();
-			Steps_Studio studioSteps = new Steps_Studio();
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+			var sharedSteps = new Steps_Shared();
+			var studioSteps = new Steps_Studio();
+			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			Report.Info("Checking each product");
 			int counter = 1;
 			foreach (Product thisProduct in productList)
 			{
 
-				ProductInformation thisPI = new ProductInformation();
-				thisPI.Id = thisProduct.ID;
+				var thisPI = new ProductInformation {
+					Id = thisProduct.ID
+				};
 				Context.AddToContext(thisProduct.ID, thisPI);
 				if (counter == 1)
 				{
@@ -1453,7 +1612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				//studioSteps.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 				TestReport.StartStep("I check the PH value");
 				studioSteps.GivenInPowerDesignerIDoubleClickOnCategory("pH value");
-				ValueEditor thisValueEditor = new ValueEditor();
+				var thisValueEditor = new ValueEditor();
 				string currentValue = thisValueEditor.GetSelectedValue();
 				double phValue = Convert.ToDouble(currentValue);
 				double lowerlimit = 0.0;
@@ -1501,7 +1660,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In SHA Manager (\d*) record is found")]
 		public void GivenInSHAManagerRecordIsFound(int recordCount)
 		{
-			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			var myStudioShaManager = new StudioSHAManager();
 			myStudioShaManager.WaitForProductList(60);
 			Delay.Seconds(10);
 			GeneralUtilities.StudioWaitForSpinner();
@@ -1519,7 +1678,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In SHA Manager for the top record the values are as follows")]
 		public void GivenInSHAManagerForTheTopRecordTheValuesAreAsFollows(Table table)
 		{
-			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			var myStudioShaManager = new StudioSHAManager();
 			Product myProduct = myStudioShaManager.GetTopXProducts(1).FirstOrDefault();
 			var x = table.Rows.ToDictionary(r => r[0], r => r[1]);
 			Report.Info("Checking " + x.Count + " attributes");
@@ -1540,6 +1699,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						{
 							expectedValue = x.Values.ElementAt(i);
 						}
+
 						Report.IsTrue(myProduct.ID == expectedValue,
 							"Product id was not as expected. Expected " + expectedValue + " but got: " + myProduct.ID,
 							"Product id was as expected: " + expectedValue);
@@ -1554,13 +1714,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						{
 							expectedValue = x.Values.ElementAt(i);
 						}
+
 						Report.IsTrue(myProduct.Name == expectedValue,
-							"Product name was not as expected. Expected " + expectedValue + " but got: " + myProduct.Name,
+							"Product name was not as expected. Expected " + expectedValue + " but got: " +
+							myProduct.Name,
 							"Product name was as expected " + expectedValue);
 						break;
 					case "Distributor":
 						Report.IsTrue(myProduct.Distributor == x.Values.ElementAt(i),
-							"Product distributor was not as expected. Expected: " + x.Values.ElementAt(i) + " but got: " + myProduct.Distributor,
+							"Product distributor was not as expected. Expected: " + x.Values.ElementAt(i) +
+							" but got: " + myProduct.Distributor,
 							"Product distributor was as expected: " + x.Values.ElementAt(i));
 						break;
 
@@ -1573,7 +1736,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Add Product to Recertification Screen I select reason number: (\d+)")]
 		public void InAddProductToRecertificationScreenSelectReasonByNumber(int number)
 		{
-			AddProductToRecertificationDialog thisAddProductToRecertificationDialog =
+			var thisAddProductToRecertificationDialog =
 				new AddProductToRecertificationDialog();
 			Report.IsTrue(thisAddProductToRecertificationDialog.SelectReasonByNumber(number),
 				"Failed to select reason number: " + number.ToString(),
@@ -1584,7 +1747,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Add Product to Recertification Screen I click button: (.*)")]
 		public void InAddProductToRecertificationScreenIClickButton(string button)
 		{
-			AddProductToRecertificationDialog thisAddProductToRecertificationDialog =
+			var thisAddProductToRecertificationDialog =
 				new AddProductToRecertificationDialog();
 			Report.IsTrue(thisAddProductToRecertificationDialog.ClickButton(button),
 				"Failed to click button: " + button,
@@ -1598,16 +1761,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				// Switch to window
-				var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 				Context.AddToContext("MainWindowHandle", currentHandle);
-				var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 				Report.Info("Looking for SHA Manager Product UPC window");
 				bool foundWindow = false;
-				foreach (var handle in allHandles)
+				foreach (string handle in allHandles)
 				{
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-					if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -1625,7 +1789,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				// Get Displayed UPCs
-				var displayedUpcs = new StudioSHAManager().GetUPCs();
+				List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
 				if (displayedUpcs == null)
 				{
 					Report.Failure("Unable to fetch UPC Information from the Product UPC window!");
@@ -1640,6 +1804,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 						.ToString();
 				}
+
 				Report.Screenshot();
 				if (condition == "see")
 				{
@@ -1647,6 +1812,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						$@"UPC did not appear Case Pack Indicator on the Product UPC list! UPC numbers were: {string.Join(", ", displayedUpcs)}",
 						$@"UPC appeared with Case Pack Indicator on the Product UPC list as expected");
 				}
+
 				if (condition == "not see")
 				{
 					Report.IsFalse(displayedUpcs.Any(x => x.UPCNumber.Contains(upc + "*")),
@@ -1666,50 +1832,77 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the SHA list of UPCs I should not see UPC: (.*)")]
-		public void ShaUPCList(string upc)
+		[StepDefinition(@"In the SHA list of UPCs I should (see|not see) UPC: (.*)")]
+		public void ShaUPCList(string condition, string upc)
 		{
-			// Switch to window
-			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			Context.AddToContext("MainWindowHandle", currentHandle);
-			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			Report.Info("Looking for SHA Manager Product UPC window");
-			bool foundWindow = false;
-			foreach (var handle in allHandles)
+			try
 			{
-				Report.Info("Checking handle: " + handle);
-				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-				if (SeleniumBrowser.WebBrowser.FindElement(
-						By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+				// Switch to window
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
 				{
-					Report.Success("Tab was switched successfully!");
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
 					Report.Screenshot();
-					foundWindow = true;
-					break;
+				}
+
+				List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the SHA UPC window!");
+					Report.Screenshot();
+					return;
+				}
+
+				if (upc.ToLower().Contains("saved as"))
+				{
+					upc = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+				}
+
+				if (condition == "see")
+				{
+					Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber.Contains(upc)), "UPC: " + upc + " does not display",
+						"UPC: " + upc + " displays as expected");
+				}
+
+				if (condition == "not see")
+				{
+					Report.IsTrue(!displayedUpcs.Any(x => x.UPCNumber.Contains(upc)), "UPC: " + upc + " has not been deleted.",
+						"UPC: " + upc + " has been deleted as expected.");
 				}
 			}
-
-			if (!foundWindow)
+			catch (Exception ex)
 			{
-				Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+				Report.Failure(ex.Message);
 				Report.Screenshot();
 			}
-			var displayedUpcs = new StudioSHAManager().GetUPCs();
-			if (upc.ToLower().Contains("saved as"))
-			{
-				upc = Context
-					.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
-					.ToString();
-			}
-
-			Report.IsTrue(!displayedUpcs.Any(x => x.UPCNumber.Contains(upc)), "UPC: " + upc + " has not been deleted.",
-				"UPC: " + upc + " has been deleted as expected.");
 		}
+
+
 
 		[StepDefinition(@"The recertification popup should show")]
 		public void TheRecertificationPopupShouldShow()
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(thisRecertificationPopup.WaitForLoad(30), "Recertification popup is not showing",
 				"Recertification popup is showing");
 		}
@@ -1717,23 +1910,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the recertification popup I set auto assign checkbox to: (true|false)")]
 		public void SetAutoAssignCheckbox(string trueOrFalse)
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
-			Report.IsTrue(thisRecertificationPopup.SetAutoAssignRegulatorySpecialistToProduct(trueOrFalse.ToLower() == "true"), "Failed to set set auto assign to: " + trueOrFalse,
+			var thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(
+				thisRecertificationPopup.SetAutoAssignRegulatorySpecialistToProduct(trueOrFalse.ToLower() == "true"),
+				"Failed to set set auto assign to: " + trueOrFalse,
 				"Set auto assign to: " + trueOrFalse);
 		}
 
 		[StepDefinition(@"In the recertification popup I select Regulatory Specialist: (.*)")]
 		public void SetSpecialist(string specialist)
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
-			Report.IsTrue(thisRecertificationPopup.SelectRegulatorySpecialist(specialist), "Failed to select: " + specialist,
+			var thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(thisRecertificationPopup.SelectRegulatorySpecialist(specialist),
+				"Failed to select: " + specialist,
 				"Selected: " + specialist);
 		}
 
 		[StepDefinition(@"In the recertification popup I click button: (.*)")]
 		public void ClickButton(string button)
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(thisRecertificationPopup.ClickButton("button"), "Failed to click button: " + button,
 				"Clicked button: " + button);
 		}
@@ -1741,7 +1937,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Recertification popup I click close button")]
 		public void GivenInTheRecertificationPopupIClickCloseButton()
 		{
-			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			var thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(!thisRecertificationPopup.CloseDialog(), "Dialog has not closed as expected",
 				"Dialog has closed as expected");
 			Delay.Seconds(3);
@@ -1750,7 +1946,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Product Attribute Screen I Confirm the screen shows CNTXT present")]
 		public void GivenInTheProductAttributeScreenIConfirmTheScreenShowsCNTXTPresent()
 		{
-			StudioProductAttributeScreen thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
+			var thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
 			Report.IsTrue(thiStudioProductAttributeScreen.ResultsAreFound(), "No results have been found",
 				"Showing as expected");
 		}
@@ -1758,7 +1954,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Product Attribute Screen I Select the first entry in the table with code: (.*)")]
 		public void GivenInTheProductAttributeScreenISelectFirstEntryWithCodeInTheTable(string code)
 		{
-			StudioProductAttributeScreen thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
+			var thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
 			Report.IsTrue(thiStudioProductAttributeScreen.SelectItemByCode(code), "Failed to select: " + code,
 				"Selected item: " + code);
 		}
@@ -1766,25 +1962,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Confirm the Data area of the screen shows (.*)")]
 		public void GivenIConfirmTheDataAreaOfTheScreenShows(string expectedData)
 		{
-			StudioProductAttributeScreen thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
+			var thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
 			List<string> dataItems = thiStudioProductAttributeScreen.GetDataText();
 			Report.IsTrue(dataItems.Contains(expectedData), "Data item " + expectedData + " not showing as expected",
 				"Data item " + expectedData + " showing as expected");
 		}
 
-		[Given(@"In the SHA Manager Grid I run a search for product saved as: (.*) and its status is: (.*)")]
-		public void GivenInTheSHAManagerGridIRunASearchForProductSavedAsTestCaseAndItsStatusIs(string savedAs, string status)
+		[StepDefinition(@"In the SHA Manager Grid I run a search for product saved as: (.*) and its status is: (.*)")]
+		public void GivenInTheSHAManagerGridIRunASearchForProductSavedAsTestCaseAndItsStatusIs(string savedAs,
+			string status)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var ID = ProductDetails.Id;
+			string ID = ProductDetails.Id;
 			Report.Info("Searching for id: " + ID + " and status: " + status);
-			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			var myStudioShaManager = new StudioSHAManager();
 
 			myStudioShaManager.ClickBottomMenuOption("Search");
 
-			Steps_SHA myStepsSha = new Steps_SHA();
+			var myStepsSha = new Steps_SHA();
 
-			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+			var table = new Table(new string[] {
 				"SearchTerm",
 				"SearchValue"
 			});
@@ -1799,14 +1996,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 
 			Delay.Seconds(2);
-			StudioSHAManager mySHAManager = new StudioSHAManager();
+			var mySHAManager = new StudioSHAManager();
 			mySHAManager.WaitForProductList(10);
 		}
 
 		[StepDefinition(@"In the Product Attribute Screen confirm that no records are found")]
 		public void GivenInTheProductAttributeScreenConfirmThatNoRecordsAreFound()
 		{
-			StudioProductAttributeScreen thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
+			var thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
 			Report.IsTrue(thiStudioProductAttributeScreen.ResultsAreFound(), "Results are showing",
 				"As expected results are not showing");
 		}
@@ -1819,24 +2016,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx\.pdf - where xxxxxxx is the product id of product saved as: (.*)")]
-		public void GivenIConfirmTheFilenameColumnShowsAnEntryForXxxxxxx_Pdf_WhereXxxxxxxIsTheProductIdOfProductSavedAsTestCase(string savedAs)
+		[StepDefinition(
+			@"In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx\.pdf - where xxxxxxx is the product id of product saved as: (.*)")]
+		public void
+			GivenIConfirmTheFilenameColumnShowsAnEntryForXxxxxxx_Pdf_WhereXxxxxxxIsTheProductIdOfProductSavedAsTestCase(
+				string savedAs)
 		{
 			List<string> Documents = new SHADocumentList().GetPDFNames();
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var ID = ProductDetails.Id;
+			string ID = ProductDetails.Id;
 			string expectedFilename = ID + @".pdf";
 			Report.Info("Searching for " + expectedFilename);
 			Report.IsTrue(Documents.FirstOrDefault(x => x.Contains(expectedFilename)) != null,
 				"Filename: " + expectedFilename + " is not showing as expected. Filenames showing are: " +
-				String.Join(",", Documents), "Filename: " + expectedFilename + " is showing as expected");
+				string.Join(",", Documents), "Filename: " + expectedFilename + " is showing as expected");
 		}
 
 		[StepDefinition(@"In the Document List popup I Double click on the filename for product saved as: (.*)")]
 		public void GivenInTheDocumentListPopupIDoubleClickOnTheFilenameForProductSavedAsTestCase(string savedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var ID = ProductDetails.Id;
+			string ID = ProductDetails.Id;
 			string expectedFilename = ID + @".pdf";
 			Report.IsTrue(new SHADocumentList().DoubleClickPDF(expectedFilename),
 				"Failed to double click filename: " + expectedFilename, "Clicked filename: " + expectedFilename);
@@ -1849,19 +2049,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to double click button: " + button, "Clicked button: " + button);
 		}
 
-		[StepDefinition(@"I should see a new tabbed document with the pdf containing product code saved as: (.*) and NGHS / English twice")]
+		[StepDefinition(
+			@"I should see a new tabbed document with the pdf containing product code saved as: (.*) and NGHS / English twice")]
 		public void ThenIShouldSeeANewTabbedDocumentWithThePdfContainingProductCodeSavedAsTestCase(string savedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			var ID = ProductDetails.Id;
-			SHADocumentList thisSHADocument = new SHADocumentList();
+			string ID = ProductDetails.Id;
+			var thisSHADocument = new SHADocumentList();
 			Delay.Seconds(3);
 			string docURL = thisSHADocument.DocumentWindowOpen();
 			if (docURL != null)
 			{
 				string pdfText = thisSHADocument.DocumentText(docURL);
 				Report.IsTrue(pdfText.Contains(ID), "PDF does not contain: " + ID, "PDF contains " + ID);
-				Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2, "PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
+				Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2,
+					"PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
 			}
 			else
 			{
@@ -1880,13 +2082,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				i += pattern.Length;
 				count++;
 			}
+
 			return count;
 		}
 
 		[StepDefinition(@"I click on the Suppliers link on the top right of the screen")]
 		public void IClickOnSuppliersLink()
 		{
-			StudioSHAManager thisShaManager = new StudioSHAManager();
+			var thisShaManager = new StudioSHAManager();
 			Report.IsTrue(thisShaManager.ClickSuppliersButton(), "Failed to click suppliers button",
 				"Clicked suppliers button");
 		}
@@ -1894,7 +2097,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The Supplier Manager popup appears")]
 		public void TheSupplierManagerPopupAppears()
 		{
-			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
+			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.Wait_for_load(30), "StudioSupplierManager has not opened",
 				"StudioSupplierManager has opened");
 		}
@@ -1902,23 +2105,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
 		{
-			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
-			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm), "Failed to enter search term: " + searchTerm,
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm),
+				"Failed to enter search term: " + searchTerm,
 				"Entered search term: " + searchTerm);
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I select radio button: (.*)")]
 		public void InSupplierManagerPopupISelectRadioButton(string button)
 		{
-			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
-			Report.IsTrue(thisStudioSupplierManager.SelectSupplierSearchTypeRadio(button), "Failed to select radio button: " + button,
+			var thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.SelectSupplierSearchTypeRadio(button),
+				"Failed to select radio button: " + button,
 				"Selected radio button: " + button);
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I click on the search button")]
 		public void InSupplierManagerPopupIClickOnTheSearchButton()
 		{
-			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
+			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.ClickSearchButton(), "Failed to click search button",
 				"Clicked search button");
 		}
@@ -1926,12 +2131,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
 		public void InSupplierManagerPopupISaveFirstSupplierNameAs(string saveAs)
 		{
-			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
+			var thisStudioSupplierManager = new StudioSupplierManager();
 			string name = thisStudioSupplierManager.GetSupplierNames().FirstOrDefault();
 			if (name != null)
 			{
 				Context.AddToContext(saveAs, name);
 			}
+
 			Report.IsTrue(name != null, "No name was found",
 				"Name: " + name + " was saved as: " + saveAs);
 		}
@@ -1939,7 +2145,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Manager Popup I click on the close button")]
 		public void InSupplierManagerPopupIClickOnTheCloseButton()
 		{
-			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
+			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.ClickClose(), "Failed to click close button",
 				"Clicked close button");
 		}
@@ -1947,15 +2153,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save a product id which blue and has retailers as (.*)")]
 		public void GivenISaveAProductIdWhichIsNotRedOrOrangeAndHasRetailersAsTestCase(string saveAs)
 		{
-			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			var thisStudioSHAManager = new StudioSHAManager();
 			string id = thisStudioSHAManager.ReturnIDOfProductWhichIsBlueAndHasClients();
 
 			if (id != null)
 			{
 				Context.AddToContext(saveAs, id);
 			}
+
 			Report.IsTrue(id != null, "No suitable id was found", "ID: " + id + " was found and saved as: " + saveAs);
 
+		}
+
+		[StepDefinition(@"I save a product which blue and has retailers as (.*)")]
+		public void GivenISaveAProductWhichIsNotRedOrOrangeAndHasRetailersAsTestCase(string saveAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			ProductInformation info = thisStudioSHAManager.ReturnProductInformationOfProductwithIsBlueAndHasClients();
+
+			if (info != null)
+			{
+				Context.AddToContext(saveAs, info);
+			}
+
+			Report.IsTrue(info != null, "No suitable id was found", "ID: " + info.Id + " was found and saved as: " + saveAs);
+
+		}
+
+
+		[StepDefinition(@"I save the retailers associated with product (.*) as (.*)")]
+		public void ISaveTheRetailersAssociatedWithTheProductAs(string productSavedAs, string retailersSavedAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			var product = (ProductInformation)Context.GetFromContext(productSavedAs);
+			List<string> retailers = thisStudioSHAManager.ReturnClientsOfProductByID(product.Id);
+			Report.IsTrue(retailers != null && retailers.Count > 0, "Failed to find list of retailers!", "Successfully found list of retailers!");
+			Context.AddToContext(retailersSavedAs, retailers);
 		}
 
 		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
@@ -1975,47 +2208,935 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 			}
-			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			var thisStudioSHAManager = new StudioSHAManager();
 			List<Product> RetailerStatuses = thisStudioSHAManager.GetTopXProducts(2);
+			var matchingStatusRows = RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
+			var abbreviationMap = new RetailerAbbreviations().Map;
+			foreach (var row in matchingStatusRows)
+			{
+				var clients = row.Clients;
+				var clientAbbreviations = clients.Split(',').Select(x => x.Trim()).ToList();
+				foreach (var abbr in clientAbbreviations)
+				{
+					if (abbreviationMap.ContainsValue(abbr) && abbreviationMap.FirstOrDefault(x => x.Value == abbr).Key == retailer)
+					{
+						Report.Success("Found product with status: " + status + " and retailer: " + retailer);
+						Report.Screenshot();
+						return;
+					}
+				}
+			}
+			Report.Failure("Failed to find product with status: " + status + " and retailer: " + retailer);
+			//var thisStepsRetailPartners = new StepsRetailPartners();
+			//var matchingClients = matchingStatusRows.Select(x => x.Clients)
+			//	.Where(o => thisStepsRetailPartners.MatchAbbreviatedRetailer(o, retailer)).ToList();
 
-			StepsRetailPartners thisStepsRetailPartners = new StepsRetailPartners();
-
-			List<Product> matchingStatusRows = RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
-			var matchingClients = matchingStatusRows.Select(x=>x.Clients).Where(o=>thisStepsRetailPartners.MatchAbbreviatedRetailer(o, retailer)).ToList();
-
-			Report.IsTrue(matchingClients.Count != 0,
-				"No matching row was found for status: " + status + " and retailer: " + retailer,
-				"Matching row was found for status: " + status + " and retailer: " + retailer);
+			//Report.IsTrue(matchingClients.Count != 0,
+			//	"No matching row was found for status: " + status + " and retailer: " + retailer,
+			//	"Matching row was found for status: " + status + " and retailer: " + retailer);
 
 		}
 
-		[StepDefinition(@"In the SHA Manager Product UPC window I confirm that for UPC: (.*) retailer: (.*) is showing")]
-		public void GivenInTheSHAManagerProductUPCWindowIConfirmThatForUPCRetailerIsShowing(string UPC, string retailer)
+		[StepDefinition(@"I should see a new tabbed document whose URL contains DocumentID")]
+		public void ThenIShouldSeeANewTabbedDocumentWhoseURLContainsDocumentID()
 		{
-			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
-			Report.IsTrue(new StudioSHAManagerProductUPC().Wait_for_load(30),
-				"SHA Manager Product UPC window is not open", "SHA Manager Product UPC window is open");
+			Delay.Seconds(30);
+			ReadOnlyCollection<string> allWindowHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 
-			List<SHAManagerProdcutUPC> ListOfUPCS = thisStudioSHAManager.GetUPCs();
-
-			if (UPC.ToLower().Contains("saved as"))
+			foreach (string thisWindowHandle in allWindowHandles)
 			{
-				UPC = Context.GetFromContext(UPC.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
-					.ToString();
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(thisWindowHandle);
+				Delay.Seconds(2);
+				string currentURL = SeleniumBrowser.WebBrowser.Url;
+				Report.Info("URL:" + currentURL);
+				Report.Screenshot();
+				if (SeleniumBrowser.WebBrowser.Url.ToLower().Contains("documentid"))
+				{
+					string regexPattern = @"DocumentID=(.*)";
+					Match match = new Regex(regexPattern).Match(currentURL);
+					if (match.Success)
+					{
+						Report.Info("Document id is: " + match.Groups[1].Value);
+					}
+				}
 			}
-
-			if (retailer.ToLower().Contains("saved as"))
-			{
-				retailer = Context.GetFromContext(retailer.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
-					.ToString();
-			}
-
-			var matchingUPCRow = ListOfUPCS.FirstOrDefault(x => x.UPCNumber == UPC && x.Retailers.Contains(retailer));
-
-			Report.IsTrue(matchingUPCRow != null,
-				"No matching UPC row has been found for UPC: " + UPC + " and retailer: " + retailer,
-				"Matching UPC has been found for UPC: " + UPC + " and retailer: " + retailer);
 		}
+
+		[StepDefinition(@"I confirm all UPC numbers in the list saved as: (.*) are displayed in the SHA Manager Product UPC list")]
+		public void ConfirmAllUpcsAreDisplayedInShaManagerProductUpcList(string savedAs)
+		{
+			try
+			{
+				// Switch to window
+				this.SwitchToProductListUpcWindow();
+				// Get Displayed UPCs
+				List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the Product UPC window!");
+					Report.Screenshot();
+					return;
+				}
+
+				// Confirm match
+				var upcNumbers = (List<string>)Context.GetFromContext(savedAs);
+				Report.IsTrue(displayedUpcs.All(x => upcNumbers.Contains(x.UPCNumber)),
+					"Not all UPCs saved as: " + savedAs + " were displayed! Expected: " +
+					string.Join(", ", upcNumbers) + ". but got: " +
+					string.Join(", ", displayedUpcs.Select(x => x.UPCNumber).ToList()));
+			}
+			catch (NoSuchWindowException)
+			{
+				Report.Failure("Failed to switch to the SHA Manager Product UPC window!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
+
+		[StepDefinition(@"I save a UPC number in the SHA Manager Product UPC list to context as: (.*) with report failure: (true|false)")]
+		public void SaveUpcNumberInShaManagerProductUpcListAs(string savedAs, bool reportFailure)
+		{
+			// Switch to window
+			this.SwitchToProductListUpcWindow();
+			// Get Displayed UPCs
+			List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+			if (!displayedUpcs.Any())
+			{
+				if (reportFailure)
+				{
+					Report.Failure("No UPCs were found in the Product UPC window");
+				}
+				else
+				{
+					Report.Info("No UPCs were found in the Product UPC window");
+				}
+				Report.Screenshot();
+				Report.Info("Closing window");
+				SeleniumBrowser.WebBrowser.Close();
+				Report.Info("Returning to the main window");
+				try
+				{
+					var handle = Context.GetFromContext("MainWindowHandle").ToString();
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					// required to switch to the frame and refresh container
+					new StudioSHAManager().Wait_for_load();
+				}
+				catch (Exception ex)
+				{
+					Report.Failure("Failed to navigate back to main window using MainWindowHandle context");
+					Report.Failure("Exception: " + ex.Message);
+					throw;
+				}
+				return;
+			}
+			var upcNumber = displayedUpcs.FirstOrDefault(x => !x.UPCNumber.EndsWith("*"))?.UPCNumber;
+			if (upcNumber == null)
+			{
+				if (reportFailure)
+				{
+					Report.Failure("No Non Case UPCs were found in the Product UPC window");
+				}
+				else
+				{
+					Report.Info("No Non Case UPCs were found in the Product UPC window");
+				}
+				Report.Screenshot();
+				Report.Info("Closing window");
+				SeleniumBrowser.WebBrowser.Close();
+				Report.Info("Returning to the main window");
+				try
+				{
+					var handle = Context.GetFromContext("MainWindowHandle").ToString();
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					// required to switch to the frame and refresh container
+					new StudioSHAManager().Wait_for_load();
+				}
+				catch (Exception ex)
+				{
+					Report.Failure("Failed to navigate back to main window using MainWindowHandle context");
+					Report.Failure("Exception: " + ex.Message);
+					throw;
+				}
+				return;
+			}
+			Report.Info("Adding UPC number: " + upcNumber + " to context as: " + savedAs);
+			Context.AddToContext(savedAs, upcNumber);
+		}
+
+		[StepDefinition(@"I switch to the Product List UPC Window")]
+		public void SwitchToProductListUpcWindow()
+		{
+			try
+			{
+				// Switch to window
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//div[@class='upcTableOutter']"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+					Report.Info("Switching back to main window");
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(currentHandle);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+
+		}
+
+		[Given(@"I create a new file saved as: (.*) to upload using the UPCs saved as:")]
+		public void GivenICreateANewFileSavedAsToUploadUsingTheUPCsSavedAs(string savedAs, Table upcs)
+		{
+			throw new NotImplementedException();
+		}
+
+
+		// I click Sample File link and verify the Upload UPC form
+		[StepDefinition(@"I click Sample File link and verify the Upload UPC form and save it as (.*) with data:")]
+		public void ClickSampleFileAndVerifyTheUploadUPCForm(string savedAs, Table table)
+		{
+			var upc = new UPC();
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("Sample.xlsx"), "", "");
+			Report.IsTrue(upc.ClickSampleFileLink(), "Failed to click Sample File link.", "Successfully clicked Sample File link.");
+			Report.IsTrue(upc.VerifySampleFile(table, "Sample.xlsx", savedAs), "Failed to validate Sample File", "Successfully validated Sample File");
+		}
+
+		[StepDefinition(@"I save a UPC number for any product in the grid to context as: (.*)")]
+		[StepDefinition(@"I find a UPC number for any product in the grid and save to context as: (.*)")]
+		public void SaveUpcNumberForAnyProduct(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Getting all product ids from the table");
+			//int productsToTry = new StudioSHAManager().GetProductCount();
+			var ids = new StudioSHAManager().GetAllProductIds();
+			Report.Info("There are " + ids.Count + " product ids");
+			//List<Product> products = new StudioSHAManager().GetTopXProducts(10);
+			for (int i = 0; i < ids.Count; i++)
+			{
+				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = ids[i];
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
+				if (Context.GetFromContext(savedAs) != null)
+				{
+					Report.Info("Saved UPC to context");
+					break;
+				}
+			}
+		}
+
+		[StepDefinition(@"I find a UPC number for any product not belonging to Supplier: (.*) in the grid and save to context as: (.*)")]
+		public void SaveUpcNumberForAnyProductNotCompany(string notSupplier, string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			int productsToTry = new StudioSHAManager().GetProductCount();
+			Report.Info("There are " + productsToTry + " products");
+			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
+			for (int i = 0; i < productsToTry; i++)
+			{
+				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = products[i].ID;
+				if (products[i].Supplier == notSupplier)
+				{
+					Report.Info("Product matches supplier: " + notSupplier + " so continuing to the next row");
+					continue;
+				}
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
+				if (Context.GetFromContext(savedAs) != null)
+				{
+					Report.Info("Saved UPC to context");
+					break;
+				}
+			}
+		}
+
+		[StepDefinition(@"I confirm that the Current Submission date in SHA Manager matches the date saved as: (.*)")]
+		public void IConfirmThatTheCurrentSubmissionDateMatches(string savedAs)
+		{
+			string date = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			Product product = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+			Report.IsTrue(product.CurrentSubmission.ToString() == date, "Current submission date '" + product.CurrentSubmission.ToString() + "' does not match date saved to context '" + date + "'.",
+				"Current submission date '" + product.CurrentSubmission.ToString() + "' matches date saved to context '" + date + "'.");
+		}
+
+		[StepDefinition(@"In the Authoring menu I select Power Designer Plus")]
+		public void InTheAuthoringMenuISelectPowerDesignerPlus()
+		{
+			var thisTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
+				"Failed to navigate to power designer plus", "Navigated to power designer plus");
+			Delay.Seconds(3);
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			if (!thisPowerDesignerPlus.Wait_for_load(30))
+			{
+				var thisStudioPowerDesignerPlusDesignMode =
+					new StudioPowerDesignerPlusDesignMode();
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
+				Delay.Seconds(3);
+			}
+
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+		}
+		[StepDefinition(@"I Confirm the Product saved as: (.*) shows the: '(.*)' Status")]
+		public void ConfirmProductInCorrectStatus(string savedAs, string status)
+		{
+			var productStatus = new StudioSHAManager().GetproductStatus(savedAs);
+			Report.IsTrue(productStatus.StatusName == status, "The product was not in the status " + status, "The product was in the status " + status);
+
+		}
+
+		[StepDefinition(@"I find the UPC number for: (.*) products in the grid and save them to context starting with: (.*)")]
+		public void SaveUpcNumberForXProducts(int numberOfProducts, string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			Context.AddToContext("numberOfUpcnumbers", numberOfProducts);
+			int productsToTry = new StudioSHAManager().GetProductCount();
+			Report.Info("There are " + productsToTry + " products");
+			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
+			int j = 1;
+			for (int i = 0; i < productsToTry; i++)
+			{
+
+
+				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = products[i].ID;
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs + j, false);
+
+				if (Context.GetFromContext(savedAs + j) != null)
+				{
+					Report.Info($"Saved UPC{j} to context");
+					j++;
+					Report.Screenshot();
+					Report.Info("Closing window");
+					SeleniumBrowser.WebBrowser.Close();
+					Report.Info("Returning to the main window");
+					try
+					{
+						var handle = Context.GetFromContext("MainWindowHandle").ToString();
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+						// required to switch to the frame and refresh container
+						new StudioSHAManager().Wait_for_load();
+					}
+					catch (Exception ex)
+					{
+						Report.Failure("Failed to navigate back to main window using MainWindowHandle context");
+						Report.Failure("Exception: " + ex.Message);
+						throw;
+					}
+
+				}
+				if (j > numberOfProducts)
+				{
+					break;
+				}
+			}
+
+		}
+
+		[StepDefinition(@"I add the UPC numbers saved to context starting with: (.*) to the UPC bulk upload spreadsheet: (.*)")]
+		public void AddUpcNumbersToBulkUploadSpreadsheet(string savedAs, string spreadsheetSavedAs)
+		{
+			int numberOfProducts = (int)Context.GetFromContext("numberOfUpcnumbers");
+
+			var spreadSheetFile = (string)Context.GetFromContext(spreadsheetSavedAs);
+			var excel = new ExcelUtilities(spreadSheetFile, "Sheet1");
+
+			for (int i = 1; i <= numberOfProducts; i++)
+			{
+				if (Context.Contains(savedAs + i))
+				{
+					var upcNumber = Context.GetFromContext(savedAs + i).ToString();
+					Report.IsTrue(excel.EditCell(i, 0, upcNumber), "Failed to edit UPC" + i + " to: " + upcNumber, "Successfully edited UPC to: " + upcNumber, false, false);
+				}
+				else
+				{
+					Report.Failure("Failed to find: " + savedAs + i + " in context!", false);
+				}
+			}
+		}
+
+		[StepDefinition(@"I find a UPC number for: (.*) products not belonging to Supplier: (.*) in the grid and save to context starting with: (.*)")]
+		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			Context.AddToContext("numberOfUpcnumbers", numberOfProducts);
+			int productsToTry = new StudioSHAManager().GetProductCount();
+			Report.Info("There are " + productsToTry + " products");
+			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
+			int j = 1;
+			for (int i = 0; i < productsToTry; i++)
+			{
+				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				string id = products[i].ID;
+				if (products[i].Supplier == notSupplier)
+				{
+					Report.Info("Product matches supplier: " + notSupplier + " so continuing to the next row");
+					continue;
+				}
+				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs + j, false);
+				if (Context.GetFromContext(savedAs + j) != null)
+				{
+					Report.Info($"Saved UPC{j} to context");
+					j++;
+					Report.Screenshot();
+					Report.Info("Closing window");
+					SeleniumBrowser.WebBrowser.Close();
+					Report.Info("Returning to the main window");
+					try
+					{
+						var handle = Context.GetFromContext("MainWindowHandle").ToString();
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+						// required to switch to the frame and refresh container
+						new StudioSHAManager().Wait_for_load();
+					}
+					catch (Exception ex)
+					{
+						Report.Failure("Failed to navigate back to main window using MainWindowHandle context");
+						Report.Failure("Exception: " + ex.Message);
+						throw;
+					}
+				}
+				if (j > numberOfProducts)
+				{
+					break;
+				}
+			}
+		}
+
+		[StepDefinition(@"I navigate to SHA Manager and save a UPC to context as: (.*) for trevor account: (.*)")]
+		public void NavigateToShaSaveUpcToContext(string upcSavedAs, string accountSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I log in to Studio and open SHA Manager");
+			new Steps_Shared().GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			TestReport.StartStep("I click Search");
+			this.IClickTheFollowingOptionInTheBottomMenu("Search");
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
+			var username = "";
+			if (user != null)
+			{
+				username = user.Username;
+			}
+			var table = new Table("Search Term", "Search Value");
+			table.AddRow("Status", "Completed");
+			table.AddRow("User", username);
+			TestReport.StartStep("I run a search for status Completed and user: " + username);
+			this.GivenInSHAManagerPageIRunSearch(table);
+			TestReport.StartStep("I save the upc for any returned product as: " + upcSavedAs);
+			this.SaveUpcNumberForAnyProduct(upcSavedAs);
+
+		}
+		[StepDefinition(@"I Check that the product under the retailer: (.*) is under the status: (.*)")]
+		public void ICheckProductUnderRetailerStatus(string retailer, string expectedStatus)
+		{
+			string actualStatus = new StudioSHAManager().GetproductStatusByRetailer(retailer);
+			//Report.Info("The Status that is actually showing is: " + actualStatus);
+			Report.Info("The Status We expect is: " + expectedStatus);
+			Report.IsTrue(actualStatus == expectedStatus, "The Product under retailer: " + retailer + " was not in the expected status", "The Product under retailer: " + retailer + " was in the expected status");
+		}
+
+		[StepDefinition(@"In SHA Manager I confirm that there is one item in the grid")]
+		public void InSHAManagerIConfirmThatThereIsOneItemInTheGrid()
+		{
+			var sha = new StudioSHAManager();
+			Report.IsTrue(sha.ConfirmThereIsOneProductInTheGrid(), "Failed to find one product in the grid!", "Successfully found one product in the grid.");
+		}
+
+		[StepDefinition(@"SHA Search for product by UPC: (.*) in all statuses")]
+		public void ThenSHASearchForProductByUPCInAllStatuses(string uPC)
+		{
+			Context.AddToContext("UPC", uPC);
+			var table = new Table("SearchTerm", "SearchValue");
+			table.AddRow("UPC", "saved as UPC");
+			new StudioSHAManager().ClickBottomMenuOption("Search");
+			this.GivenInSHAManagerPageIRunSearch(table);
+		}
+
+		[Given(@"I verify the popup message displays with the title ""(.*)""")]
+		public void GivenIVerifyThePopupMessageDisplaysWithTheTitle(string title)
+		{
+
+			Report.IsTrue(new StudioSHAManagerArchivedProduct().ArchivedUPCPopupTitle(title, out string displayedTitle),
+				"Unable to locate popup entitled " + title + ", instead found " + displayedTitle,
+				"Located popup titled " + displayedTitle);
+		}
+		[Then(@"I verify the popup data using UPC: (.*)")]
+		public void ThenIVerifyThePopupDataUsingUPC(string uPC)
+		{
+
+			//Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(
+			//	Context.GetFromContext("UPC").ToString(),
+			//	out string failedAt),
+			//	"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
+			//	"Popup contains the appropriate elements.");
+
+			Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(uPC, out string failedAt),
+				"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
+				"Popup contains the appropriate elements.");
+		}
+
+
+		[StepDefinition(@"In SHA I Search for exact UPC in (.*) Status for UPC saved as: (.*)")]
+		public void InSHAISearchForExactUPCInForUPCSavedAs(string status, string savedAs)
+		{
+
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I set the status filter to All");
+			var myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.WaitForProductList(60);
+			myStudioShaManager.SelectFromStatusFilter("All");
+			GeneralUtilities.StudioWaitForSpinner();
+			myStudioShaManager.WaitForProductList(60);
+			Report.Info("Getting saved product: " + savedAs);
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+			string upc = (string)Context.GetFromContext(savedAs);
+			Report.Info("Looking for id: " + upc);
+			var table = new Table(new string[] {
+				"SearchTerm",
+				"SearchValue"
+			});
+			table.AddRow(new string[] {
+				"UPC",
+				upc
+			});
+			table.AddRow(new string[] {
+				"Status",
+				status
+			});
+
+			TestReport.StartStep("I click Srch in the bottom menu list");
+			myStudioShaManager.ClickBottomMenuOption("Search");
+			var myStepsSha = new Steps_SHA();
+			TestReport.StartStep($"I enter ID: {upc} in the UPC box, change Status drop down to All, Click find");
+			Report.Info("Searching for: " + upc);
+			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+			Delay.Seconds(1);
+			Report.Info("Waiting for product list");
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing");
+
+
+		}
+
+		[StepDefinition(@"The Manager Validation Require Popup is not shown")]
+		public void TheManagerValidationRequirePopupIsNotShown()
+		{
+			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();
+			Report.IsTrue(managerValidationPopup.WaitForContainerToBeInvisible(10), "The Manager Validation Required Popup was shown", "The Manager Validation Required Popup was not shown");
+
+		}
+
+		[StepDefinition(@"In the Advanced Reporting popup I select report (.*)")]
+		public void InTheAdvancedReportingPopupISelectReport(string report)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
+		}
+		/// <summary>
+		/// For using a retailer saved in context wrap the retailer name in '<>'
+		/// </summary>
+		/// <param name="savedAs"></param>
+		/// <param name="retailer"></param>
+		/// <param name="presence"></param>
+		[StepDefinition(@"I check that the UPC number saved as: (.*) and under the retailer: (.*), (does|does not) show the Obsolete UPC Option in the UPC details popup")]
+		public void ICheckUPCNumberXObsoleteUPCOptionPresence(string savedAs, string retailer, string presence)
+		{
+			//For Testing the Dupe UPC Sha Tool
+			TestReport.UseSubSteps = true;
+
+			var studioSHAManger = new StudioSHAManager();
+			var shaSteps = new Steps_SHA();
+			Delay.Seconds(10);
+			new Steps_SHA().SwitchToProductListUpcWindow();
+			Delay.Seconds(4);
+			TestReport.StartStep($"I Click on the link associated with the UPC saved as: {savedAs}");
+			studioSHAManger.ClickUPCSavedAsInProducUPCTable(savedAs);
+			TestReport.StartStep("I Check the UPC detail popup appears");
+			var upcDetails = new StudioSHAManagerUPCDetails();
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");
+			if (Regex.IsMatch(retailer, "<(.*)>"))
+			{
+				var match = Regex.Match(retailer, "<(.*)>").Groups[1].Value;
+				if (Context.Contains(match, true))
+				{
+					retailer = Context.GetFromContext(match).ToString();
+				}
+
+			}
+			TestReport.StartStep("I Select the Client: " + retailer + " from the select client list");
+			IWebElement input = upcDetails.SelectClientInput;
+			if (input == null)
+			{
+				Report.Failure("The Select Client box could not be found!");
+				return;
+			}
+			input.Select(retailer);
+			TestReport.StartStep("I wait for the UPC Details Table to Load");
+			Report.IsTrue(upcDetailsPopupTable.UpcDetailsTableLoadedOrNull(30), "The UPC details Table did not Appear", "The UPC details Table appeared");
+			TestReport.StartStep($"I Confirm that the Obsolete UPC button {presence} appear");
+			bool expectedPresenceBool = false;
+
+			switch (presence)
+			{
+				case "does":
+					expectedPresenceBool = true;
+					break;
+				case "does not":
+					break;
+				default:
+					Report.Error("presence must be either 'does' or 'does not'");
+					return;
+			}
+			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButtonPresent() == expectedPresenceBool, "The Obsolete popup incorrectly " + presence + " show", "The Obsolete popup correctly " + presence + " show");
+
+		}
+
+		[StepDefinition(@"I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: (.*)")]
+		public void ISearchForAProductContainingDuplicateUPCSUsingSpreadSheet(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Replacing the Spreadsheet with a new copy from the embedded resource");
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("UPCsDuplicatedwithinAccount.xlsx"), "", "");
+
+			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.UPCsDuplicatedwithinAccount.xlsx", out string destination))
+			{
+				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
+				return;
+			}
+
+			var utils = new ExcelUtilities(destination, "Table");
+
+			List<string> UpcNumbers = utils.Excel_GetColumn(1); //includes the header (so start search at 1 not 0)
+
+			for (int i = 1; i < UpcNumbers.Count; i++)
+			{
+				TestReport.StartStep($"Searching SHA for a upc found in the duplicate UPC spread sheet. Attempt: {i}");
+				string DupeUPCNumberCurrent = UpcNumbers[i];
+				//do a search for this value in sha
+				//if 2 or more products show,then save this to context then the retailer and id. (use coloums they are in and the same i value)
+				//maybe save these^ value to class (existing one?)
+				Context.AddToContext($"DupeUPCNumber{savedAs}", DupeUPCNumberCurrent);
+				new Steps_SHA().InSHAISearchForExactUPCInForUPCSavedAs("All", $"DupeUPCNumber{savedAs}");
+				int numProducts = new StudioSHAManager().GetProductCount();
+				TestReport.StartStep("Ensuring the upc was searched for succesfully and that it is a duplicate by checking the number of products found is 2 or more");
+				if (numProducts > 1)
+				{
+					Report.Success("The UPC was searched for succesfully and multiple Products were found");
+					List<Product> productsShown = new StudioSHAManager().GetTopXProducts(1);
+					string productIDFromSHA = productsShown[0].ID;
+					var productInfo = new ProductInformation { Id = productIDFromSHA };
+					Context.AddToContext($"ProductID{savedAs}", productInfo);
+
+
+					string productRetailerInitials = productsShown[0].Clients;
+					string productRetailerInitialsFirst = productRetailerInitials.Split(',')[0];
+					var fullName = new RetailerAbbreviations().Map.FirstOrDefault(x => x.Value == productRetailerInitialsFirst).Key;
+					Context.AddToContext($"ProductRetailer{savedAs}", fullName);
+
+					//List<string> productIDs = utils.Excel_GetColumn(0);
+					//string productIDCurrent = productIDs[i];
+					//Context.AddToContext("ProductID105970", productIDCurrent); // perhaps get this from the top x product in case this id is gone from being obseleted
+					//List<string> productRetailers = utils.Excel_GetColumn(5);
+					//string productRetailerCurrent = productRetailers[i];
+					//Context.AddToContext("ProductRetailer105970", productRetailerCurrent);
+					//Context.AddToContext("ProductRetailer105970", productRetailerCurrent);
+					return;
+				}
+				Report.Info("The number of products found was less than 2, trying the next upc in the spreadsheet");
+			}
+			Report.Failure("None of the UPCs in the Spreadsheet showed 2 or more products when searched for in SHA");
+
+
+
+		}
+
+		[StepDefinition(@"I close the SHA Manager Product UPC details pop up")]
+		public void ICloseTheUPCDetailsPopup()
+		{
+
+			TestReport.UseSubSteps = true;
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			TestReport.StartStep("I click the close button in the UPC details popup");
+			Report.IsTrue(upcDetailsPopupTable.CloseButton.TryClick(), "Failed to Click Close in the UPC details popup", "Successfully clicked Click Close in the UPC details popup");
+			TestReport.StartStep("I check to see if the UPC details popup has closed");
+			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");
+		}
+
+		[StepDefinition(@"I Click the Obsolete Button and Check a Popup Appears with 'Cancel' and 'Continue' buttons and the following message: (.*)")]
+		public void IClickObsoleteAndCheckAPopUpAppearsWithButtonsAndMessageX(string expectedMessage)
+		{
+			TestReport.UseSubSteps = true;
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
+
+			TestReport.StartStep("I click the Obsolete UPC button in the UPC details popup");
+			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButton.TryClick(), "Failed to Click Obselete UPC in the UPC details popup", "Successfully clicked Click Obselete UPC in the UPC details popup");
+			TestReport.StartStep("I check the Confirm Obsolete UPC popup appears");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.WaitForContainerToBeVisible(10), "The Confirm Obsolete UPC popup did not appear", "The Confirm Obsolete UPC popup appeared");
+			TestReport.StartStep("I Check that there is a Cancel Button in the Confirm Obsolete UPC popup");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.CancelButtonPresent(), "The Cancel Button was not present in the Confirm Obsolete UPC popup", "The Cancel Button was present in the Confirm Obsolete UPC popup");
+			TestReport.StartStep("I Check that there is a Continue Button in the Confirm Obsolete UPC popup");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.ContinueButtonPresent(), "The Continue Button was not present in the Confirm Obsolete UPC popup", "The Continue Button was present in the Confirm Obsolete UPC popup");
+			TestReport.StartStep("I check the text in the Confirm Obsolete UPC popup matches the expected text");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.ConfirmObseleteUPCMessage(expectedMessage), "The found message did not match the expected text", "The found message matched the expected text");
+
+		}
+
+		[StepDefinition(@"I click close in the Confirm Obsolete UPC popup, and the Confirm Obsolete UPC popup is closed and the UPC Details Popup remains on screen.")]
+		public void IClickCloseInTheConfirmObsoleteUPCPopUpAndCheckItClosesAndTheUPCDetailsPopUpRemains()
+		{
+			TestReport.UseSubSteps = true;
+			var upcDetails = new StudioSHAManagerUPCDetails();
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
+			TestReport.StartStep("I Click Cancel in the Confirm Obsolete UPC popup");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.CancelButton.TryClick(), "Failed to to click Cancel", "Successfully clicked Cancel");
+			TestReport.StartStep("I Check that the Confrim Obsolete UPC popup has gone");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.WaitForContainerToBeInvisible(10), "The Confirm Obsolete UPC popup appeared", "The Confirm Obsolete UPC popup did not appear");
+			TestReport.StartStep("I Check that the UPC details popup still appears.");
+			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");
+
+		}
+
+		[StepDefinition(@"I click Continue in the Confirm Obsolete UPC popup, and the Confirm the Manager Validation Require Popup appears.")]
+		public void IClickContinueInTheConfirmObsoleteUPCPopUpAndCheckItTheManagerValidationPopupAppears()
+		{
+			TestReport.UseSubSteps = true;
+			var upcDetails = new StudioSHAManagerUPCDetails();
+			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
+			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
+			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();
+			TestReport.StartStep("I Click Continue in the Confirm Obsolete UPC popup");
+			Report.IsTrue(upcDetailsConfrimObsoletePopup.ContinueButton.TryClick(), "Failed to to click Continue", "Successfully clicked Continue");
+			TestReport.StartStep("I Check that the Manager Validation Required Popup appears");
+			Report.IsTrue(managerValidationPopup.WaitForContainerToBeVisible(10), "The Manager Validation Required Popup did not appeared", "The Manager Validation Required Popup appeared");
+
+
+
+		}
+		
+		[StepDefinition(@"In the Advanced Reporting popup I click Submit")]
+		public void InTheAdvancedReportingPopupIClickSubmit()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickSubmit(), "Failed to click submit", "Successfully clicked submit");
+		}
+
+		[StepDefinition(@"I Check that for the product: (.*) the Details in SHA Manager Match the details found in the file: (.*)")]
+		public void ICheckThatForTheProductXTheDetailsInSHAManagerMatchTheFile(string productInfoSavedAs, string fileSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I Find the details in SHA manager for the product on screen.");
+			List<Product> productsShown = new StudioSHAManager().GetTopXProducts(1);
+			if (!productsShown.Any())
+			{
+				Report.Failure("Could not find any products");
+				return;
+			}
+			string shaProductID = productsShown[0].ID;
+			Report.Info($"The product found has ID: {shaProductID}");
+			var productInfo = (ProductInformation)Context.GetFromContext(productInfoSavedAs);
+			string fileProductID = productInfo.Id;
+
+			if (!Report.IsTrue(shaProductID == fileProductID, "The product found in SHA did not match the one searched from file", "The product found in SHA did match the one searched from file"))
+			{
+				return;
+			}
+			string shaProductName = productsShown[0].Name;
+			Report.Info($"The product in SHA has Name: {shaProductName}");
+			DateTime shaCurrentSubmissionDate = productsShown[0].CurrentSubmission;
+			Report.Info($"The product in SHA has a Current Submission Date of: {shaCurrentSubmissionDate}");
+			DateTime shaOriginalSubmissionDate = productsShown[0].OriginalSubmission;
+			Report.Info($"The product in SHA has a Original Submission Date of: {shaOriginalSubmissionDate}");
+			string shaClients = productsShown[0].Clients;
+			var shrdStep = new Steps_Shared();
+			string dog = "DOGY";
+			
+			TestReport.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
+			string file = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!file.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + file))
+			{
+				var utils = new ExcelUtilities(file.ToString(), "Table");
+				var rows = utils.Excel_GetNoRows();
+				for (int i = 1; i < rows; i++)
+				{
+					var rowContents = utils.GetRowContents(i);
+					var productID = rowContents[0];
+					if (productID == fileProductID)
+					{
+						Report.Info($"The Product Name in the File is: {rowContents[1]}");
+						Report.IsTrue(shaProductName == rowContents[1], "The product names did not match", "The product names matched!");
+
+						DateTime lastSubDate;
+						DateTime.TryParse(rowContents[3], out lastSubDate);
+						Report.Info($"The Last Submission Date in the File is: {rowContents[3]}");
+						Report.IsTrue(shaCurrentSubmissionDate == lastSubDate, "The Current Submission Date in SHA did not match the Last Submission date in the file", "The Current Submission Date in SHA did match the Last Submission date in the file");
+
+						DateTime orginalCreationDate;
+						DateTime.TryParse(rowContents[4], out orginalCreationDate);
+						Report.Info($"The Original Creation date in the File is: {rowContents[4]}");
+						string fileOrgDatestr = orginalCreationDate.ToString();
+						string shaOrgDatestr = shaOriginalSubmissionDate.ToString();
+						string fileOrgDateEdited = fileOrgDatestr.Replace("12:00:00 AM", "").Trim();
+						Report.IsTrue(shaOrgDatestr.Contains(fileOrgDateEdited), "The Origninal Submission Date in SHA did not match the Original Creation Date in the file", "The Original Submission Date in SHA did match the Original Creation Date in the file");
+						Report.Info($"The Retailers Associated in the File is: {rowContents[5]}");
+						Report.IsTrue(shaClients.Contains(rowContents[5]), "The Clients in SHA did not match the Retailers associated in the file", "The Clients in SHA matched the Retailers associated in the file");
+
+
+						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");						
+						new Steps_Shared().Shared75309_SHA_SelectProduct_UpcList(productInfoSavedAs);
+						var studioSHAManger = new StudioSHAManager();
+						var shaSteps = new Steps_SHA();
+						Delay.Seconds(10);
+						new Steps_SHA().SwitchToProductListUpcWindow();
+						Delay.Seconds(4);
+						List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+						Report.Info($"The number of UPCs displayed in the UPC Details page is: {displayedUpcs.Count}");
+						Report.IsTrue(displayedUpcs.Count.ToString() == rowContents[6], "The number of UPCS in SHA for the product did not match the Number of Active UPCs for the product in the file", "The number of UPCS in SHA for the product matched the Number of Active UPCs for the product in the file");
+						TestReport.StartStep($"Checking that the date that appears under the 'Current Submission' column in SHA Manager is exactly one year before the date that appears in the 'Eligible for Deletion' column in the file");
+						var eligibleDate = rowContents[2];
+						DateTime actualEligibleDate;
+						DateTime.TryParse(eligibleDate, out actualEligibleDate);
+						DateTime expectedEligibleDate = actualEligibleDate.AddYears(-1);
+						Report.IsTrue(shaCurrentSubmissionDate == expectedEligibleDate, "The Current Submission Date in SHA is not exactly one year before the Eligible for deletion date in the file", "The Current Submission Date in SHA is exactly one year before the Eligible for deletion date in the file");
+						return;
+
+					}
+
+				}
+				Report.Failure($"The product with ID: {fileProductID} could not be found in the spreadsheet");
+				return;
+
+			}
+
+		}
+
+		[StepDefinition(@"I wait for the Advanced Reporting Preparing Report popup to disappear")]
+		public void WaitForAdvancedReportingPopupToDisappear()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.WaitForPreparingReportPopup(), "Failed to wait for Preparing Report popup", "Successfully waited for Preparing Report popup");
+		}
+
+		[StepDefinition(@"I search in the excel spreadsheet saved as: (.*) for product saved as: (.*) and save its information as: (.*)")]
+		public void ISearchInTheExcelSpreadsheetForProductAndSaveItsInformation(string excel, string product, string saveAs)
+		{
+			var prodInfo = (ProductInformation)Context.GetFromContext(product);
+			object File = Context.GetFromContext(excel);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + excel + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				List<string> allProducts = ExcelUtils.Excel_GetColumn(0);
+				if (!allProducts.Contains(prodInfo.Id))
+				{
+					Report.Failure("Failed to find WPSID " + prodInfo.Id + " in WPSID column of excel spreadsheet!");
+				}
+				else
+				{
+					int index = allProducts.IndexOf(prodInfo.Id);
+					List<string> foundProductInfo = ExcelUtils.Excel_GetRow(index);
+					var dict = new Dictionary<string, string>();
+					for (int i = 0; i < ColumnTitles.Count; i++)
+					{
+						dict[ColumnTitles[i]] = foundProductInfo[i];
+					}
+					Context.AddToContext(saveAs, dict);
+					Report.IsTrue(foundProductInfo.Contains(prodInfo.Id), "Failed to select proper row in the spreadsheet", "Successfully selected proper row in spreadsheet");
+				}
+			}
+		}
+
+		[StepDefinition(@"I confirm that the following information is present in the excel info saved as: (.*):")]
+		public void IConfirmThatTheFollowingInformationIsPresentInTheExcelInfoSavedAs(string savedAs, Table table)
+		{
+			var excelInfo = (Dictionary<string, string>)Context.GetFromContext(savedAs);
+			var prodInfo = (ProductInformation)Context.GetFromContext(table.Rows[0]["WPSID"]);
+			string upc = Context.GetFromContext(table.Rows[0]["UPC"])?.ToString() ?? "";
+
+			Report.IsTrue(excelInfo["WPSID"] == prodInfo.Id, "Failed to match WPSID " + prodInfo.Id + " to information from excel spreadsheet. Excel: " + excelInfo["WPSID"],
+				"Successfully matched WPSID " + prodInfo.Id + " to information from excel spreadsheet.");
+
+			Report.IsTrue(excelInfo["UPC"] == upc, "Failed to find upc " + upc + " in excel spreadsheet information. Instead found: " + excelInfo["UPC"],
+				"Successfully found upc " + upc + " in excel spreadsheet information.");
+
+			Report.IsTrue(excelInfo["DPCI"] == table.Rows[0]["DPCI"], "Failed to match DPCI " + table.Rows[0]["DPCI"] + " to excel information. Excel: " + excelInfo["DPCI"],
+				"Successfully matched DPCI " + table.Rows[0]["DPCI"] + " to information in excel spreadsheet.");
+
+			Report.IsTrue(excelInfo["Product Name"] == prodInfo.Name, "Failed to match Product Name " + prodInfo.Name + " to excel information. Excel: " + excelInfo["Product Name"],
+				"Successfully matched Product Name " + prodInfo.Name + " to information in excel spreadsheet.");
+
+			Report.IsTrue(excelInfo["Supplier"] == table.Rows[0]["Supplier"], "Failed to match Supplier " + table.Rows[0]["Supplier"] + " to excel information. Excel: " + excelInfo["Supplier"],
+				"Successfully matched Supplier " + table.Rows[0]["Supplier"] + " to information in excel spreadsheet.");
+
+			Report.IsTrue(excelInfo["Status"] == table.Rows[0]["Status"], "Failed to match Status " + table.Rows[0]["Status"] + " to excel information. Excel: " + excelInfo["Status"],
+				"Successfully matched Status " + table.Rows[0]["Status"] + " to information in excel spreadsheet.");
+
+			if (table.Rows[0]["UPC Status"] == "value")
+			{
+				Report.IsTrue(excelInfo["UPC Status"] != "", "Failed to find a value in the UPC Status column", "Successfully found a value of " + excelInfo["UPC Status"] + " in the UPC Status column.");
+			}
+			else
+			{
+				Report.IsTrue(excelInfo["UPC Status"] == table.Rows[0]["UPC Status"], "Failed to match UPC Status " + table.Rows[0]["UPC Status"] + " to excel information. Excel: " + excelInfo["UPC Status"],
+					"Successfully matched UPC Status " + table.Rows[0]["UPC Status"] + " to information in excel spreadsheet.");
+			}
+
+			if (table.Rows[0]["Product Activity Date"] == "today")
+			{
+				var date = Convert.ToDateTime(excelInfo["Product Activity Date"]);
+				DateTime today = DateTime.Today;
+
+				Report.IsTrue(date.Day == today.Day && date.Month == today.Month && date.Year == today.Year,
+					"Failed to match date to today's date. Instead found: " + excelInfo["Product Activity Date"],
+					"Successfully matched Product Activity Date to today's date.");
+			}
+			else
+			{
+				Report.IsTrue(excelInfo["Product Activity Date"] == table.Rows[0]["Product Activity Date"], "Failed to match Product Activity Date " + table.Rows[0]["Product Activity Date"] + " to excel information. Excel: " + excelInfo["Product Activity Date"],
+					"Successfully matched Product Activity Date " + table.Rows[0]["Product Activity Date"] + " to information in excel spreadsheet.");
+			}
+		}
+
 
 	}
 }
+
+

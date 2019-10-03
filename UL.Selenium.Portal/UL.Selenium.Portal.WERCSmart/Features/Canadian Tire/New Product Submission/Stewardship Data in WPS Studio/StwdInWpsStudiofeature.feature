@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -15,7 +16,7 @@
 
 Feature: Stewardship Data in WPS Studio
 
-@TReVorId:22263
+@ScenarioId:1318
 Scenario: [85982] SOLD = Canada Only, PL = No - Stewardship Information in WPS Studio
 Given I generate a random UPC number and save as: UPC85982
 Given I login into the WERCSmart Portal - Canada has all data account
@@ -54,7 +55,7 @@ And In Power Designer Plus page in My Toolbar tab I click on the product attribu
 Given I call Shared Step 86015 - WPS PD+ -  Product attributes - check all entries for Canada Stewardship data
 
 
-@TReVorId:22272
+@ScenarioId:1319
 Scenario: [86008] Sold = Canada, PL = Yes - Stewardship information in WPS Studio
 Given I generate a random UPC number and save as: UPC86008
 Given I login into the WERCSmart Portal - Canada has all data account
@@ -81,6 +82,7 @@ And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Opt
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
+#And I save to context name: TestCase86008 and value: 1511929
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86008)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86008 and its status is: Submitted
@@ -95,7 +97,7 @@ Given I call Shared Step 86015 - WPS PD+ -  Product attributes - check all entri
 
 
 
-@TReVorId:22273
+@ScenarioId:1320
 Scenario: [86017] Sold = US & Canada, PL = Yes - Stewardship information in WPS Studio
 Given I generate a random UPC number and save as: UPC86017
 Given I login into the WERCSmart Portal - Canada has all data account
@@ -137,7 +139,7 @@ Given I call Shared Step 86015 - WPS PD+ -  Product attributes - check all entri
 
 
 
-@TReVorId:22274
+@ScenarioId:1321
 Scenario: [86019] Sold = US & Canada, PL = No - Stewardship information in WPS Studio
 Given I generate a random UPC number and save as: UPC86019
 Given I login into the WERCSmart Portal - Canada has all data account

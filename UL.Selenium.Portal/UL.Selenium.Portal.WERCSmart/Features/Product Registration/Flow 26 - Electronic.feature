@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -14,7 +15,7 @@
 Feature: [64732] Flow 26 - Electronic
 
 
-@TReVorId:11617
+@ScenarioId:710
 Scenario: [60671] Computer (Combination of Monitor + Desktop) - RU001177
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

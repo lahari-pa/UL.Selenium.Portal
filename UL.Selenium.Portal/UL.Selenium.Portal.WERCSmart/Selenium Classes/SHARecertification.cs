@@ -8,18 +8,17 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class SHARecertification : BaseObject
+	class SHARecertification : SeleniumBaseObject
 	{
 		public const string BasePath = "//span[@id='ui-dialog-title-dialog-recertification']/../..";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+				IWebElement popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
 				if (popupEditor != null)
 				{
 					return true;
@@ -35,8 +34,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//Continue Cancel
 		public bool ClickButton(string button)
 		{
-			var varButtons = this.containerElement.FindElements(By.XPath(".//button/span"), 2);
-			var matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
+			System.Collections.Generic.IList<IWebElement> varButtons = this.containerElement.FindElements(By.XPath(".//button/span"), 2);
+			IWebElement matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
 			if (matchingButton == null)
 			{
 				Report.Info("Failed to find button: " + button);
@@ -48,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectRegulatorySpecialist(string name)
 		{
-			var regulatorySpecialist = this.containerElement.FindElement(By.XPath(".//select[@id='regUsers']"), 2);
+			IWebElement regulatorySpecialist = this.containerElement.FindElement(By.XPath(".//select[@id='regUsers']"), 2);
 			if (regulatorySpecialist == null)
 			{
 				Report.Info("Could not find regulatory specialist select");
@@ -61,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SetAutoAssign(bool set)
 		{
-			var autoAssign = this.containerElement.FindElement(By.XPath(".//input[@id='chkAutoAssignUserRecert']"), 2);
+			IWebElement autoAssign = this.containerElement.FindElement(By.XPath(".//input[@id='chkAutoAssignUserRecert']"), 2);
 			if (autoAssign == null)
 			{
 				Report.Info("Could not find auto assign checkbox");

@@ -7,6 +7,7 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using NTTQA.Selenium.Cache;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -17,21 +18,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the WERCSmart homepage should be loaded")]
 		public void ThenTheWercSmartHomepageShouldLoad()
 		{
-			try
-			{
-				Report.Info("Making sure that the WERCSmart homepage is loaded");
-				var selHomepage = new Homepage();
-
-
-				Report.IsTrue(selHomepage.Wait_for_load(), "WERCSmart Homepage failed to load!", "WERCSmart homepage loaded successfully!");
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(new Homepage().WaitForContainerToBeVisible(), "WERCSmart Homepage failed to load!", "WERCSmart homepage loaded successfully!");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Screenshot();
 		}
 
 
@@ -44,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.Info("Staying on the homepage with no activity until the inactivity popup appears");
 				var selInactivityPopup = new InactivityPopup();
-
+				selInactivityPopup.WaitForContainerToBeVisible(900);
 				while (!selInactivityPopup.IsVisible())
 				{
 					Delay.Seconds(Delay.SpeedFactor * 1);
@@ -59,32 +48,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
+		public void ConfirmTheInactivityPopupDisplayedAfterWait(int expectedWait, int marginOfError)
+		{
+			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
+			if (!new InactivityPopup().WaitUntilDisplayed((expectedWait * 60) + (marginOfError * 60), out int actualWait))
+			{
+				Report.Failure($"The Inactivity popup did not load after {expectedWait + marginOfError} minutes!");
+				Report.Screenshot();
+				return;
+			}
+			// check if pop up was displayed before 'expected wait - margin' (test lower limit)
+			Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
+				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
+				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes");
+		}
+
+		[StepDefinition(@"I confirm the Inactivity pop is closed")]
+		public void ConfirmInactivityPopupIsClosed()
+		{
+			Report.IsTrue(new InactivityPopup().WaitForContainerToBeInvisible(), "The Inactivity popup was not closed!", "The Inactivity popup was closed.");
+		}
+
 		[StepDefinition(@"Click (Yes|No) on the inactivity popup")]
 		public void GivenClickOnInactivityPopup(string button)
 		{
-			try
+			Report.Info("Clicking " + button + " on inactivity popup");
+			var selInactivityPopup = new InactivityPopup();
+			bool clicked = false;
+			switch (button)
 			{
-				Report.Info("Clicking " + button + " on inactivity popup");
-				var selInactivityPopup = new InactivityPopup();
-
-				switch (button)
-				{
-					case ("Yes"):
-						selInactivityPopup.ClickYes();
-						break;
-					default:
-						selInactivityPopup.ClickNo();
-						break;
-				}
-
-				Report.Success(button + " was clicked successfully!");
-				Report.Screenshot();
+				case ("Yes"):
+					clicked = selInactivityPopup.ClickYes();
+					break;
+				case ("No"):
+					clicked = selInactivityPopup.ClickNo();
+					break;
+				default:
+					Report.Error("Button parameter must be 'Yes' or 'No'!");
+					return;
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(clicked, $"Failed to click the '{button}' button", $"Successfully clicked the '{button}' button");
 		}
 
 
@@ -201,14 +205,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							var selProdGrid = new ProductsGrid();
 							switch (item.ToLower())
 							{
-								case ("subheading your products"):
-									Report.IsTrue(selProdGrid.HeaderShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+								case ("subheading my products"):
+									Report.IsTrue(selProdGrid.HeadingShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
 									break;
 							}
 							break;
 						}
 				}
-				Report.Screenshot();
 			}
 			catch (Exception ex)
 			{
@@ -233,7 +236,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking if " + dialog + " dialog is visible");
 				var selHomepage = new Homepage();
-				var showing = false;
+				bool showing = false;
 				switch (dialog)
 				{
 					case ("Product Information"):
@@ -275,7 +278,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking contents of Pie Chart Legend");
 				var selHomepage = new Homepage();
-				foreach (var row in table.Rows)
+				foreach (TableRow row in table.Rows)
 				{
 					Report.IsTrue(selHomepage.EntryShowingInPieChartLegend(row["State"], row["Colour"]), "Legend entry was not showing correctly!", "Entry was showing correctly in the legend!");
 				}
@@ -368,9 +371,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Navigating to the Home Page");
 				var selNav = new NavigationBar();
-				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
+				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!",false,false);
 				// Screenshot throws exception while an alert is open - selenium utils needs updating
 				//Report.Screenshot();
+				SeleniumBrowser.Alert.WaitForAlert(5);
 				if (alertAction == "accept")
 				{
 					Report.Info("Accepting the pop up alert");
@@ -384,7 +388,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				GeneralUtilities.Wait_for_load_finish();
 				var selHomepage = new Homepage();
-				Report.IsTrue(selHomepage.Wait_for_load(),
+				Report.IsTrue(selHomepage.WaitForContainerToBeVisible(),
+					"Homepage did not load after clicking the Home icon!",
+					"Homepage successfully loaded after clicking the home icon");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I click the Home navigation icon")]
+		public void ClickTheHomeNavigationIcon()
+		{
+			try
+			{
+				Report.Info("Navigating to the Home Page");
+				var selNav = new NavigationBar();
+				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
+				var selHomepage = new Homepage();
+				Report.IsTrue(selHomepage.WaitForContainerToBeVisible(),
 					"Homepage did not load after clicking the Home icon!",
 					"Homepage successfully loaded after clicking the home icon");
 			}
@@ -402,7 +426,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking 'My Products' Filter Options");
 				var selProdGrid = new ProductsGrid();
-				foreach (var row in table.Rows)
+				foreach (TableRow row in table.Rows)
 				{
 					Report.IsTrue(selProdGrid.FilterOptionShowingCorrectly(row["Options"], row["Colour"]), "Filter option: '" + row["Options"] + "' was not showing correctly!", "Filter option: '" + row["Options"] + "' was showing correctly!");
 				}
@@ -463,7 +487,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void TheFollowingAreShowingInThe(string lookingfor, string area, TechTalk.SpecFlow.Table expected)
 		{
-			foreach (var row in expected.Rows)
+			foreach (TableRow row in expected.Rows)
 			{
 				switch (area)
 				{
@@ -518,19 +542,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"there should be products available in the Products Grid")]
 		public void ThenThereShouldBeProductsAvailableInTheProductsTable()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Products Present In Products Grid");
-			try
-			{
-				Report.Info("Checking that there are products available in the Products Grid");
-				var selProdGrid = new ProductsGrid();
-				Report.IsTrue(selProdGrid.ProductsPresent(), "Products were not present in the grid!", "There were products present in the grid, as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(new ProductsGrid().ProductsPresent(), "Products were not present in the grid!", "There were products present in the grid, as expected!");
 		}
 
 		[StepDefinition(@"I click on the Notification Icon")]
@@ -610,7 +622,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//	}
 		//}
 
-		[Then(@"Confirm that freshdesk opens in another tab")]
+		[StepDefinition(@"Confirm that freshdesk opens in another tab")]
 		public void ConfirmThatFreshdeskOpensInAnotherTab()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that freshdesk opens in another tab");
@@ -685,7 +697,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the Empty Cart pop up message reads: (.*)")]
 		public void EmptyCartPopUpText(string value)
 		{
-			var actualMessage = new EmptyCart().BodyMessage();
+			string actualMessage = new EmptyCart().BodyMessage();
 			Report.IsTrue(actualMessage == value,
 				"The Empty Cart pop up message text did not match the expected value. Expected: '" + value + "'. Actual: '" + actualMessage + "'",
 				"The Emoty Cart pop up message text matched the expected value: '" + value + "'");
@@ -768,7 +780,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Info("Checking that Cart is Empty window appears");
 				var selCartEmpty = new CartIsEmptyDialog();
-				var showing = selCartEmpty.HeaderShowing();
+				string showing = selCartEmpty.HeaderShowing();
 				Report.IsTrue(showing == headerExpected.Trim(),
 					"Cart is Empty header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
 					"Cart is Empty header was showing '" + headerExpected + "', as expected!");
@@ -796,7 +808,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Checking order of states in the Pie Chart Legend");
 				var selHomepage = new Homepage();
-				var ListOfStates = selHomepage.PieChartLegendItems();
+				List<string> ListOfStates = selHomepage.PieChartLegendItems();
 				var ExpectedStates = table.Rows.Select(x => x["State"]).ToList();
 				int i = 0;
 				foreach (string expectedState in ExpectedStates)
@@ -815,14 +827,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Given(@"I should see the following filters in the following order under My products:")]
+		[StepDefinition(@"I should see the following filters in the following order under My products:")]
 		public void GivenIShouldSeeTheFollowingFiltersInTheFollowingOrderUnderMyProducts(Table table)
 		{
 			try
 			{
 				Report.Info("Checking order of states in the Pie Chart Legend");
 				var selProductsGrid = new ProductsGrid();
-				var ListOfFilters = selProductsGrid.GetAllFilters();
+				List<string> ListOfFilters = selProductsGrid.GetAllFilters();
 				var ExpectedFilters = table.Rows.Select(x => x["Filter"]).ToList();
 				int i = 0;
 				foreach (string expectedFilter in ExpectedFilters)
@@ -841,11 +853,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"In the announcements area I should see my saved messages")]
+		[StepDefinition(@"In the announcements area I should see my saved messages")]
 		public void ThenInTheAnnouncementsAreaIShouldSeeMySavedMessages()
 		{
-			Homepage myHomepage = new Homepage();
-			List<Message> ListOfMessages = (List<Message>)Context.GetFromContext("Messages");
+			var myHomepage = new Homepage();
+			var ListOfMessages = (List<Message>)Context.GetFromContext("Messages");
 			List<string> MessagesOnHomepage = myHomepage.GetAnnouncements();
 			foreach (string thisMessage in ListOfMessages.Select(x => x.MessageBody).ToList())
 			{
@@ -878,65 +890,69 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected, message count is showing as: " + ActualMessageCount.ToString());
 		}
 
-		[Given(@"I click on the Live Help button on the upper right")]
+		[StepDefinition(@"I click on the Live Help button on the upper right")]
 		public void GivenIClickOnTheLiveHelpButtonOnTheUpperRight()
 		{
-			TopMenuBar myTopMenuBar = new TopMenuBar();
+			var myTopMenuBar = new TopMenuBar();
 			Report.IsTrue(myTopMenuBar.ClickLiveHelp(), "Failed to click live help", "Clicked live help");
 		}
 
-		[Then(@"I should see the Live Help dialog")]
+		[StepDefinition(@"I should see the Live Help dialog")]
 		public void ThenIShouldSeeTheLiveHelpDialog()
 		{
 			Report.IsTrue(new LiveHelp().Wait_for_load(), "Live Help dialog is not showing",
 				"Live Help dialog is showing as expected");
 		}
 
-		[Then(@"In the Live Help dialog I should see the following text: (.*)")]
-		public void ThenInTheLiveHelpDialogIShouldSeeTheFollowingText(string expectedText)
+		[StepDefinition(@"In the Live Help dialog I should see a small icon with three lines in the upper left hand corner")]
+		public void ThenIShouldSeeThreeLinesIcon()
 		{
-			string actualText = new LiveHelp().GetFormText().Trim().Replace(System.Environment.NewLine, " ");
-
-			Report.Info("ActualText length = " + actualText.Length.ToString());
-			Report.Info("ExpectedText length = " + expectedText.Trim().Length.ToString());
-			int i = 0;
-			if (actualText != expectedText.Trim())
-			{
-				foreach (char thisChar in expectedText.ToCharArray().ToList())
-				{
-					if (i + 2 < actualText.Length)
-					{
-						Report.Info("Expecting: " + thisChar.ToString() + " and getting: " + actualText[i]);
-					}
-					else
-					{
-						break;
-					}
-					i++;
-				}
-			}
-
-			Report.IsTrue(actualText == expectedText.Trim(), "Expected: " + expectedText + " but got: " + actualText,
-				"Text is showing as expected: " + expectedText);
+			Report.IsTrue(new LiveHelp().VerifyThreeLinesIcon(), "Three lines icon is not present in the upper left hand corner",
+				"Three lines icon is present in the upper left hand corner");
 		}
 
-		[Given(@"In the Live Help dialog I enter name: (.*)")]
-		public void GivenInTheLiveHelpDialogIEnterName(string name)
+		[StepDefinition(@"In the Live Help dialog I should see an x in the upper right hand corner")]
+		public void ThenIShouldSeeAnXInTheUpperRightHandCorner()
 		{
-			LiveHelp myLiveHelp = new LiveHelp();
-			Report.IsTrue(myLiveHelp.EnterName(name), "Failed to enter name: " + name,
-				"Successfully entered name: " + name);
+			Report.IsTrue(new LiveHelp().VerifyX(), "X is not present in the upper right hand corner",
+				"X is present in the upper right hand corner");
 		}
 
-		[Given(@"In the Live Help dialog I enter email: (.*)")]
-		public void GivenInTheLiveHelpDialogIEnterEmail(string email)
+		[StepDefinition(@"In the Live Help dialog I should see the text 'Inbox' at the top of the chat window")]
+		public void ThenIShouldSeeInbox()
 		{
-			LiveHelp myLiveHelp = new LiveHelp();
-			Report.IsTrue(myLiveHelp.EnterEmail(email), "Failed to enter email: " + email,
-				"Successfully entered email: " + email);
+			Report.IsTrue(new LiveHelp().VerifyInboxText(), "Inbox text is not present", "Inbox text is present");
 		}
 
-		[Given(@"In the Live Help dialog I click on the x to close")]
+		[StepDefinition(@"In the Live Help dialog I should see the following text in the message area: (.*)")]
+		public void ThenIShouldSeeTheFollowingTextInTheMessageArea(string message)
+		{
+			Report.IsTrue(new LiveHelp().VerifyMessageText(message), "Text is not present in the message area: " + message,
+				"Text is present in the message area: " + message);
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the following text in the lower part of the chat window: (.*)")]
+		public void ThenIShouldSeeTheFollowingTextInTheLowerPartOfTheChatWindow(string text)
+		{
+			Report.IsTrue(new LiveHelp().VerifyLowerText(text), "Text '" + text + "' does not appear in the lower part of the message area",
+				"Text appears correctly in the lower part of the chat window: " + text);
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the following placeholder text in the text entry field: (.*)")]
+		public void ThenIShouldSeeTheFollowingPlaceholder(string text)
+		{
+			Report.IsTrue(new LiveHelp().VerifyPlaceholder(text), "Placeholder '" + text + "' does not appear in the text entry area",
+				"Placeholder appears correctly in the text entry area: " + text);
+		}
+
+		[StepDefinition(@"In the Live Help dialog I should see the (.*) icon in the lower right hand corner")]
+		public void ThenIShouldSeeTheIconInTheLowerRightHandCorner(string icon)
+		{
+			Report.IsTrue(new LiveHelp().VerifyIcon(icon), icon + " icon not found in the lower right hand corner",
+				icon + " icon found in the lower right hand corner");
+		}
+
+		[StepDefinition(@"In the Live Help dialog I click on the x to close")]
 		public void GivenInTheLiveHelpDialogIClickOnTheXToClose()
 		{
 			Report.IsTrue(new LiveHelp().ClickCloseX(), "Failed to click x to close", "Clicked x to close");
@@ -945,10 +961,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the hover over text is as expected for the following navigation icons")]
 		public void HoverOverIconsAndConfirmTheTitleAppears(Table icons)
 		{
-			foreach (var row in icons.Rows)
+			foreach (TableRow row in icons.Rows)
 			{
-				var icon = row["Icon"];
-				var text = row["Text"];
+				string icon = row["Icon"];
+				string text = row["Text"];
 				Report.IsTrue(new NavigationBar().IconTextDisplayedOnHover(icon, text),
 					"Title text: " + text + " did not appear on hover for icon: " + icon,
 					"Title text: " + text + " appeared on hover for icon: " + icon + " as expected", false, false);
@@ -959,9 +975,131 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveListOfIDsDisplayedOnThePageAs(string savedAs)
 		{
 			var selProductsGrid = new ProductsGrid();
-			var prodIDs = selProductsGrid.AllIDsInGrid();
+			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
 			Context.AddToContext(savedAs, prodIDs);
+		}
+
+		[StepDefinition(@"I navigate to the WERCSmart site")]
+		public void INavigateToWERCSmart()
+		{
+			Report.Info("Navigating to the WERCSmart Landing Page");
+			var thisGlobalSteps = new GlobalSteps();
+			thisGlobalSteps.NavigateToLandingPage();
+		}
+		[StepDefinition(@"I click the Home navigation icon and an alert appears")]
+		public void ThenIClickTheHomeNavigationIconAndAlertAppears()
+		{
+			
+				Report.Info("Navigating to the Home Page");
+				var selNav = new NavigationBar();
+				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!", false, false);
+				SeleniumBrowser.Alert.WaitForAlert(5);
+			
+		}
+
+		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes and no screenshot is taken")]
+		public void ConfirmTheInactivityPopupDisplayedAfterWaitNoScreenShot(int expectedWait, int marginOfError)
+		{
+			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
+			if (!new InactivityPopup().WaitUntilDisplayed((expectedWait * 60) + (marginOfError * 60), out int actualWait))
+			{
+				Report.Failure($"The Inactivity popup did not load after {expectedWait + marginOfError} minutes!");
+				
+				return;
+			}
+			// check if pop up was displayed before 'expected wait - margin' (test lower limit)
+			Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
+				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
+				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes",false,false);
+		}
+		[StepDefinition(@"Click (Yes|No) on the inactivity popup and no screenshot is taken")]
+		public void GivenClickOnInactivityPopupNoScreenshot(string button)
+		{
+			Report.Info("Clicking " + button + " on inactivity popup");
+			var selInactivityPopup = new InactivityPopup();
+			bool clicked = false;
+			switch (button)
+			{
+				case ("Yes"):
+					clicked = selInactivityPopup.ClickYes();
+					break;
+				case ("No"):
+					clicked = selInactivityPopup.ClickNo();
+					break;
+				default:
+					Report.Error("Button parameter must be 'Yes' or 'No'!");
+					return;
+			}
+			Report.IsTrue(clicked, $"Failed to click the '{button}' button", $"Successfully clicked the '{button}' button",false,false);
+		}
+
+		[StepDefinition(@"Click (Yes|No) on the inactivity popup but dont take a screenshot")]
+		public void GivenClickOnInactivityPopupNoScreenShot(string button)
+		{
+			Report.Info("Clicking " + button + " on inactivity popup");
+			var selInactivityPopup = new InactivityPopup();
+			bool clicked = false;
+			switch (button)
+			{
+				case ("Yes"):
+					clicked = selInactivityPopup.ClickYes();
+					break;
+				case ("No"):
+					clicked = selInactivityPopup.ClickNo();
+					break;
+				default:
+					Report.Error("Button parameter must be 'Yes' or 'No'!");
+					return;
+			}
+			if(clicked)
+			{
+				Report.Success($"Successfully clicked the '{button}' button");
+			}
+			if(!clicked)
+			{
+				Report.Failure($"Failed to click the '{button}' button", false);
+			}
+			
+		}
+
+		[StepDefinition(@"I confirm the Inactivity pop is closed but dont take a screenshot")]
+		public void ConfirmInactivityPopupIsClosedNoScreenShot()
+		{
+			Report.IsTrue(new InactivityPopup().WaitForContainerToBeInvisible(), "The Inactivity popup was not closed!", "The Inactivity popup was closed.",false,false);
+		}
+
+		[StepDefinition(@"I confirm the Inactivity pop is open but dont take a screenshot")]
+		public void ConfirmInactivityPopupIsOpendNoScreenShot()
+		{
+			Report.IsTrue(new InactivityPopup().WaitForContainerToBeVisible(),"The Inactivity popup was not open.", "The Inactivity popup was open", false, false);
+		}
+
+		[StepDefinition(@"I take a ScreenShot")]
+		public void ITakeAScreenShot()
+		{
+			Report.Info("I take a screenshot");
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I Check the Alert with text: (.*) has the ID: (.*)")]
+		public void ICheckAlertWithTextXHasIDY(string alertText, string expxectedAlertID)
+		{
+			try
+			{
+				Report.Info("Finding Alert with Text: "+alertText);
+				var selHomepage = new Homepage();
+				string actualID= new Homepage().GetAllAlertsAndGetAlertWithTextXAndReturnID(alertText);
+				Report.Info("Actual AlertID: " + actualID);
+				Report.Info("Expected AlertID: " + expxectedAlertID);
+				Report.IsTrue(actualID==expxectedAlertID, "The Alert ID was not as expected!", "The Alert ID was as expected!");							   		
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 		}
 	}
 }

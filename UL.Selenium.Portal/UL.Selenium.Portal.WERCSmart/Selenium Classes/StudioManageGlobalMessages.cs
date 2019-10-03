@@ -6,15 +6,15 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class StudioManageGlobalMessages : BaseObject
+	class StudioManageGlobalMessages : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[(.//span[@id='ui-dialog-title-dialog-manage-global-messages'])]";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool ClickCloseButton()
 		{
@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var allButtons = this.containerElement.FindElements(By.XPath(".//table[contains(@class, 'navtable')]//td/div"));
+				ReadOnlyCollection<IWebElement> allButtons = this.containerElement.FindElements(By.XPath(".//table[contains(@class, 'navtable')]//td/div"));
 
 				return allButtons.FirstOrDefault(x => x.Text.ToLower().Trim() == action.ToLower()).TryClick();
 			}
@@ -56,27 +56,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					i++;
 				}
 				Report.Info("Setting Title to: " + thisMessage.Title);
-				var titleEl = this.containerElement.FindElement(By.XPath("//input[@name='Title']"), 2);
+				IWebElement titleEl = this.containerElement.FindElement(By.XPath("//input[@name='Title']"), 2);
 				titleEl.EnterText(thisMessage.Title);
 				Delay.Seconds(1);
 				Report.IsTrue(titleEl.GetValue() == thisMessage.Title, "Failed to set title!", "Successfully set title");
 				Report.Info("Setting Message to: " + thisMessage.MessageBody);
-				var messageEl = this.containerElement.FindElement(By.XPath("//input[@name='Message']"), 2);
+				IWebElement messageEl = this.containerElement.FindElement(By.XPath("//input[@name='Message']"), 2);
 				messageEl.EnterText(thisMessage.MessageBody);
 				Delay.Seconds(1);
 				Report.IsTrue(messageEl.GetValue() == thisMessage.MessageBody, "Failed to set message!", "Successfully set message");
 				Report.Info("Setting Type to: " + thisMessage.Type);
-				var typeEl = this.containerElement.FindElement(By.XPath("//select[@name='Type']"), 2);
+				IWebElement typeEl = this.containerElement.FindElement(By.XPath("//select[@name='Type']"), 2);
 				typeEl.Select(thisMessage.Type);
 				Delay.Seconds(1);
 				Report.IsTrue(typeEl.SelectedOption() == thisMessage.Type, "Failed to set type!", "Successfully set type");
 				Report.Info("Setting Active to: " + thisMessage.Active);
-				var activeEl = this.containerElement.FindElement(By.XPath("//input[@name='Active']"), 2);
+				IWebElement activeEl = this.containerElement.FindElement(By.XPath("//input[@name='Active']"), 2);
 				activeEl.Check(thisMessage.Active);
 				Delay.Seconds(1);
 				Report.IsTrue(activeEl.Checked() == thisMessage.Active, "Failed to set active!", "Successfully set active");
 				Report.Info("Setting Level to: " + thisMessage.Level);
-				var levelEl = this.containerElement.FindElement(By.XPath("//select[@name='Level']"), 2);
+				IWebElement levelEl = this.containerElement.FindElement(By.XPath("//select[@name='Level']"), 2);
 				levelEl.Select(thisMessage.Level);
 				Delay.Seconds(1);
 				Report.IsTrue(levelEl.SelectedOption() == thisMessage.Level, "Failed to set level!", "Successfully set level");

@@ -5,6 +5,8 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -19,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Delay.Seconds(2);
 			Report.Info("Wait for dashboard page");
-			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
 			{
 				urls = SeleniumBrowser.WebBrowser.WindowHandles;
@@ -34,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			foreach (var handle in urls)
+			foreach (string handle in urls)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Dashboard"))
 				{
@@ -169,9 +171,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickMainPageLink(string linkTitle)
 		{
-			var allLinks = this.containerElement.FindElements(By.XPath(".//a[not(ancestor::ul)]"));
+			ReadOnlyCollection<IWebElement> allLinks = this.containerElement.FindElements(By.XPath(".//a[not(ancestor::ul)]"));
 
-			var matchingLink = allLinks.FirstOrDefault(x => x.GetAttribute("title").ToLower() == linkTitle.ToLower());
+			IWebElement matchingLink = allLinks.FirstOrDefault(x => x.GetAttribute("title").ToLower() == linkTitle.ToLower());
 
 			if (matchingLink == null)
 			{
@@ -184,13 +186,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AnyServicesGrid()
 		{
-			var els = this.containerElement.FindElements(By.XPath("//div[starts-with(@class,'well well-sm brand')]"), 2);
+			IList<IWebElement> els = this.containerElement.FindElements(By.XPath("//div[starts-with(@class,'well well-sm brand')]"), 2);
 			return els != null && els.Any();
 		}
 
 		public bool StatusCheckPageDisplayed(string title)
 		{
-			var el = this.containerElement.FindElement(By.XPath("//div[@id='status-check-page']//h2[contains(text(),'" + title + "')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='status-check-page']//h2[contains(text(),'" + title + "')]"), 2);
 			return el != null && el.Displayed;
 		}
 

@@ -8,67 +8,69 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class LiveHelp : BaseObject
+	class LiveHelp : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@id='lc_chat_layout']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		private const string _basePath = "//div[@class='h-conv ember-view']";
 
-		public bool EnterName(string name)
+		protected override By ContainerElementLocator => By.XPath(_basePath);
+
+		public bool Wait_for_load()
 		{
-			try
-			{
-				var NameInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='lc_chat_name']"));
-				NameInput.TryClick();
-				if (NameInput == null)
-				{
-					Report.Error("Failed to find name");
-				}
-				else
-				{
-					NameInput.EnterText(name);
-					return this.GetName() == name;
-				}
-			}
-			catch (Exception)
-			{
-				return false;
-			}
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"), 5);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			return base.WaitForContainerToBeVisible();
+		}
 
+		public bool VerifyThreeLinesIcon()
+		{
+			return this.containerElement.FindElement(By.XPath(".//span[@class='ic-chat']//i"), 2) != null;
+		}
+
+		public bool VerifyX()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i"), 2) != null;
+		}
+
+		public bool VerifyInboxText()
+		{
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[@class='list-title ']"), 2);
+			return elem != null && elem.Text == "Inbox";
+		}
+
+		public bool VerifyMessageText(string message)
+		{
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@class='h-message-text']"), 2);
+			return elem != null && elem.Text == message;
+		}
+
+		public bool VerifyLowerText(string text)
+		{
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//a[@class='product']"), 2);
+			return elem != null && elem.Text == text;
+		}
+
+		public bool VerifyPlaceholder(string text)
+		{
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@id='app-conversation-editor']"), 2);
+			return elem != null && elem.GetAttribute("data-placeholder") == text;
+		}
+
+		public bool VerifyIcon(string icon)
+		{
+			if (icon == "paperclip")
+			{
+				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_attachment']"), 2) != null;
+			}
+			if (icon == "smiley")
+			{
+				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_smiley']"), 2) != null;
+			}
 			return false;
-
-		}
-
-		public string GetName()
-		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='lc_chat_name']")).GetValue();
-		}
-
-		public bool EnterEmail(string email)
-		{
-			SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='lc_chat_email']")).EnterText(email);
-			return this.GetEmail() == email;
-		}
-
-		public string GetEmail()
-		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='lc_chat_email']")).GetValue();
-		}
-
-		public bool ClickSubmit()
-		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='lc_precaht_submit']")).TryClick();
-		}
-
-		public string GetFormText()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[@id='lc_prechat_form']/p")).GetValue().Trim();
-
 		}
 
 		public bool ClickCloseX()
 		{
-			return this.containerElement.FindElement(By.XPath(".//span[@id='lc-close']")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i"), 2).TryClick();
 		}
 
 

@@ -1,4 +1,5 @@
-﻿@LandingPage
+@Shared
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -20,6 +21,8 @@ Feature: Account has Stewardship information
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\Forwarding\Account has Stewardship information\Select Existing UPC - no edit
 
 #Coralie 7 Dec 2018 blocked because cannot currently develop 86187
+@ScenarioId:1402
+@tfs_design
 Scenario: [87217] US & Canada - PL = Yes, Retailer is NOT Canadian Tire, no error re package type on forward
 Given I For this test case you will need a product which has SOLD = US and Canada, PL = Yes and is in completed status for Canadian Tire, use Test case 86187 to create a product in this status.
 And [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]

@@ -19,8 +19,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void AddIngredients(Table ingredientInformation)
 		{
 			var newProductIngredients = new Ingredients();
-			var Ingredients = ingredientInformation.CreateSet<Ingredients.Ingredient>();
-			foreach (var item in Ingredients)
+			IEnumerable<Ingredients.Ingredient> Ingredients = ingredientInformation.CreateSet<Ingredients.Ingredient>();
+			foreach (Ingredients.Ingredient item in Ingredients)
 			{
 				Report.IsTrue(newProductIngredients.AddIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
 			}
@@ -99,14 +99,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm the (Publicly Disclosed|Trade Secret) checkbox is: (checked|unchecked) for ingredient: (.*)")]
 		public void IngredientsConfirmCheckboxState(string option, string checkState, string chemicalName)
 		{
-			var ingredients = new Ingredients().GetIngredients();
-			var thisIngredient = ingredients.First(x => x.ComponentName == chemicalName);
+			List<Ingredients.Ingredient> ingredients = new Ingredients().GetIngredients();
+			Ingredients.Ingredient thisIngredient = ingredients.First(x => x.ComponentName == chemicalName);
 			if (thisIngredient == null)
 			{
 				Report.Failure("Could not find ingredient with name: " + chemicalName + "!");
 				return;
 			}
-			var expectChecked = false;
+			bool expectChecked = false;
 			if (checkState == "checked")
 			{
 				expectChecked = true;
@@ -134,22 +134,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ClickPubliclyDisclosedIngredientSavedAs(string savedAs)
 		{
 			var newProductIngredients = new Ingredients();
-			var ingredients = newProductIngredients.GetIngredients();
-			var ingredientSavedAs = Context.GetFromContext(savedAs);
+			List<Ingredients.Ingredient> ingredients = newProductIngredients.GetIngredients();
+			object ingredientSavedAs = Context.GetFromContext(savedAs);
 			if (ingredientSavedAs == null)
 			{
 				Report.Failure("Could not find ingredient in context saved as: " + savedAs);
 				return;
 			}
 			var ingredient = (Ingredients.Ingredient)ingredientSavedAs;
-			var targetIngredient = ingredients.First(x => x.CASNumber == ingredient.CASNumber && x.ComponentName == ingredient.ComponentName);
+			Ingredients.Ingredient targetIngredient = ingredients.First(x => x.CASNumber == ingredient.CASNumber && x.ComponentName == ingredient.ComponentName);
 			if (targetIngredient == null)
 			{
 				Report.Failure("Could not find the ingredient on the page which matched the target ingredient: " + ingredient.ComponentName + "(" + ingredient.CASNumber + ")");
 				Report.Screenshot();
 				return;
 			}
-			var disclosed = targetIngredient.PublicallyDisclosed;
+			bool disclosed = targetIngredient.PublicallyDisclosed;
 			Report.Info("Setting Publicly Disclosed as: " + (disclosed ? "false" : "true"));
 			Report.IsTrue(newProductIngredients.SetIngredientPubliclyDisclosed(ingredient.ComponentName, !disclosed),
 				"Failed to set Publicly Disclosed checkbox to: " + (disclosed ? "false" : "true"),
@@ -242,7 +242,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm that all ingredients in the table are selected")]
 		public void ConfirmAllIngredientsAreSelected()
 		{
-			var ingredients = new Ingredients().GetIngredients();
+			List<Ingredients.Ingredient> ingredients = new Ingredients().GetIngredients();
 			var notSelected = ingredients.Where(x => !x.Selected).ToList();
 			Report.IsTrue(ingredients.All(x => x.Selected), "Not all of the ingredients were selected! => " + string.Join(", ", notSelected.Select(x => x.ComponentName)), "All of the ingredients in the table were selected as expected");
 		}
@@ -266,18 +266,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					Report.Failure("Invalid step parameter specified! Must be 'select' or 'deselect'!");
 					return;
 			}
-			foreach (var row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
 				newProductIngredients.ClickSelectIngredient(row["Name"]);
 			}
-			var ingredients = newProductIngredients.GetIngredients();
-			Report.IsTrue(ingredients.Where(x => ingredientsToAction.Contains(x.ComponentName)).All(x => x.Selected != actionSelect), $"Not all of the ingredients were successfully {doSelect}ed", $"All of the listed ingredients were successfully {doSelect}ed");
+			List<Ingredients.Ingredient> ingredients = newProductIngredients.GetIngredients();
+			Report.IsTrue(ingredients.Where(x => ingredientsToAction.Contains(x.ComponentName)).All(x => x.Selected == actionSelect), $"Not all of the ingredients were successfully {doSelect}ed", $"All of the listed ingredients were successfully {doSelect}ed");
 		}
 
 		[StepDefinition("I confirm the following ingredients are (selected|unselected):")]
 		public void ConfirmIngredientsAreSelectedDeselected(string expectSelected, Table table)
 		{
-			var ingredients = new Ingredients().GetIngredients();
+			List<Ingredients.Ingredient> ingredients = new Ingredients().GetIngredients();
 			var ingredientsToCheck = new List<string>();
 			table.Rows.ForEach(x => ingredientsToCheck.Add(x["Name"]));
 			if (expectSelected == "selected")
@@ -304,8 +304,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Screenshot();
 				return;
 			}
-			var actualText = selModal.GetText();
-			var header = selModal.GetTitle();
+			string actualText = selModal.GetText();
+			string header = selModal.GetTitle();
 			if (Report.IsTrue(header.Trim() == "Remove selected components?", "The Remove selected components popup was not displayed!"))
 			{
 				Report.IsTrue(actualText == expectedText, $"The 'Remove selected components?' popup did not display the correct message! Expected: '{expectedText}' but found: '{actualText}'", "The 'Remove selected components?' popup was displayed correctly");
@@ -316,7 +316,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmIngredientsCount(string total)
 		{
 
-			var ingredients = new Ingredients().GetIngredients();
+			List<Ingredients.Ingredient> ingredients = new Ingredients().GetIngredients();
 			if (!int.TryParse(total, out int expectedCount))
 			{
 				Report.Failure("Specifiied parameter must be parsable to an int!");
@@ -349,7 +349,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"The ingredients error message should be showing: (.*)")]
 		public void IngredientsErrorMessageShowingCorrectText(string text)
 		{
-			var showing = new Ingredients().GetIngredientErrorMessage();
+			string showing = new Ingredients().GetIngredientErrorMessage();
 			Report.IsTrue(showing.Trim() == text.Trim(),
 				$"Ingredients error message was not as expected. Expected: {text.Trim()} but found {showing.Trim()}",
 				$"Ingredients error message was showing {text.Trim()} as expected!");
@@ -365,8 +365,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing(string numerator, string denominator)
 		{
 			var newProductIngredients = new Ingredients();
-			var actualNumerator = newProductIngredients.TransparencyScoreNumerator();
-			var actualDenominator = newProductIngredients.TransparencyScoreDenominator();
+			string actualNumerator = newProductIngredients.TransparencyScoreNumerator();
+			string actualDenominator = newProductIngredients.TransparencyScoreDenominator();
 			if (numerator.ToLower().Contains("saved as"))
 			{
 				numerator = Context.GetFromContext(numerator.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim()).ToString();
@@ -382,7 +382,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a (warning|success|danger|info)")]
 		public void IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed(string flag)
 		{
-			var status = new Ingredients().TransparencyScoreStatus();
+			string status = new Ingredients().TransparencyScoreStatus();
 			//orange is warning, red is danger, green is success, blue is info
 			if (flag == "warning")
 			{
@@ -420,7 +420,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the ingredients table the ingredients should be in the following order")]
 		public void ThenInTheIngredientsTableTheIngredientsShouldBeInTheFollowingOrder(Table table)
 		{
-			var listOfIngedients = new Ingredients().GetIngredients();
+			List<Ingredients.Ingredient> listOfIngedients = new Ingredients().GetIngredients();
 			if (listOfIngedients.Count == 0)
 			{
 				Report.Failure("There were no ingredients showing in the table!");
@@ -428,7 +428,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				return;
 			}
 			int i = 0;
-			foreach (var thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				Report.IsTrue(listOfIngedients[i].ComponentName.Contains(thisRow["Name"]),
 					"Expected to see: " + thisRow["Name"] + " but got: " + listOfIngedients[i].ComponentName,
@@ -450,7 +450,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void InTheIngredientsPageISearchForAndSelectProductSavedAs(string savedAs)
 		{
 			var newProductIngredients = new Ingredients();
-			var id = "";
+			string id = "";
 			if (Context.Contains(savedAs))
 			{
 				var thisProduct = (ProductInformation)Context.GetFromContext(savedAs);
@@ -474,8 +474,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void SearchForAndSelectComponentIngredients(string identifier, string value, string savedAs)
 		{
 			var newProductIngredients = new Ingredients();
-			var thisCas = "";
-			var thisName = "";
+			string thisCas = "";
+			string thisName = "";
 			switch (identifier)
 			{
 				case "name":
@@ -512,7 +512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("Unable to find ingredient in context saved as: " + savedAs);
 				return;
 			}
-			var actualText = newProductIngredients.IngredientGenericWarningPopoverText(ingredient, "Sustainability Hint");
+			string actualText = newProductIngredients.IngredientGenericWarningPopoverText(ingredient, "Sustainability Hint");
 			if (actualText == null)
 			{
 				Report.Failure("No Sustainability Hint message was found for ingredient saved as: " + savedAs + "!");
@@ -533,7 +533,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("Unable to find ingredient in context saved as: " + savedAs);
 				return;
 			}
-			var actualText = newProductIngredients.IngredientGenericWarningPopoverText(ingredient, "Sustainability Hint");
+			string actualText = newProductIngredients.IngredientGenericWarningPopoverText(ingredient, "Sustainability Hint");
 			if (expectDisplayed == "is displayed")
 			{
 				Report.IsTrue(actualText != null, "");
@@ -575,8 +575,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm that you cannot add a new component to the formulation")]
 		public void ThenIConfirmThatYouCannotAddANewComponentToTheFormulation()
 		{
-			NewProduct thisNewProduct = new NewProduct();
-			TechTalk.SpecFlow.Table component = new TechTalk.SpecFlow.Table(new string[] {
+			var thisNewProduct = new NewProduct();
+			var component = new Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage",
@@ -593,10 +593,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			string CASNo = "";
 			if (component.Rows.First()["CASNumber"].Contains("WPS"))
 			{
-				string casSavedAs = "";
 				if (Context.Contains(component.Rows.First()["CASNumber"].Split(' ')[2].Trim()))
 				{
-					ProductInformation CASProd =
+					var CASProd =
 						(ProductInformation)Context.GetFromContext(component.Rows.First()["CASNumber"].Split(' ')[2]
 							.Trim());
 					CASNo = "WPS" + CASProd.Id;
@@ -671,22 +670,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm that for the first component an error is shown below the Public Name drop down which reads: (.*)")]
-		public void ThenIConfirmThatForTheFirstComponentAnErrorIsShownBelowThePublicNameDropDownWhichReads(string expectedError)
+		[StepDefinition(@"I change the percent field to (.*)")]
+		public void IChangeThePercentFieldTo(string value)
 		{
 			var newProductIngredients = new Ingredients();
-			if (!newProductIngredients.Exists)
-			{
-				Report.Failure("Ingredients page is not showing as expected. Navigating to it....");
-				new StepsNewProduct().ClickPageHeading("Ingredients");
-			}
 			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
 			if (ListOfIngredients.Count == 0)
 			{
 				Report.Failure("No ingredients have been found to edit");
 			}
-			var firstIngredientName = ListOfIngredients[0].ComponentName;
-			var actualErrorMessage = newProductIngredients.GetPublicNameErrorMessage(firstIngredientName);
+			string firstIngredientName = ListOfIngredients[0].ComponentName;
+			Report.IsTrue(newProductIngredients.SetPercentageValue(firstIngredientName, value), "Could not set percentage value to " + value, "Successfully set percentage value to " + value);
+		}
+
+		[StepDefinition(@"I confirm that for the first component an error is shown below the Public Name drop down which reads: (.*)")]
+		public void ThenIConfirmThatForTheFirstComponentAnErrorIsShownBelowThePublicNameDropDownWhichReads(string expectedError)
+		{
+			if (!new Ingredients().WaitForContainerToBeVisible())
+			{
+				Report.Failure("Ingredients page is not showing as expected. Navigating to it....");
+				new StepsNewProduct().ClickPageHeading("Ingredients");
+			}
+			List<Ingredients.Ingredient> ListOfIngredients = new Ingredients().GetIngredients();
+			if (ListOfIngredients.Count == 0)
+			{
+				Report.Failure("No ingredients have been found to edit");
+			}
+			string firstIngredientName = ListOfIngredients[0].ComponentName;
+			string actualErrorMessage = new Ingredients().GetPublicNameErrorMessage(firstIngredientName);
 			Report.IsTrue(actualErrorMessage == expectedError,
 				"Expected error message: " + expectedError + " but got: '" + actualErrorMessage + "'",
 				"Error is showing as expected" + expectedError);
@@ -701,8 +712,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.Failure("No ingredients have been found to edit");
 			}
-			var firstIngredientName = ListOfIngredients[0].ComponentName;
-			var actualErrorMessage = newProductIngredients.GetPublicNameErrorMessage(firstIngredientName);
+			string firstIngredientName = ListOfIngredients[0].ComponentName;
+			string actualErrorMessage = newProductIngredients.GetPublicNameErrorMessage(firstIngredientName);
 			Report.IsTrue(actualErrorMessage == "",
 				"Expected no error message but got: '" + actualErrorMessage + "'",
 				"As expected, no error is showing");
@@ -719,7 +730,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.Failure("No ingredients have been found to edit");
 			}
-			var firstIngredientName = ListOfIngredients[0].ComponentName;
+			string firstIngredientName = ListOfIngredients[0].ComponentName;
 			if (firstOrSecond.ToLower() == "second")
 			{
 				firstIngredientName = ListOfIngredients[1].ComponentName;
@@ -727,7 +738,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			if (option.ToLower() == "<random>")
 			{
-				var availableOptions = newProductIngredients.GetIngredientPublicNameOptions(firstIngredientName);
+				List<string> availableOptions = newProductIngredients.GetIngredientPublicNameOptions(firstIngredientName);
 				var filtered = availableOptions.Where(i => i != "Choose..." && i != "Undisclosed Ingredient").ToList();
 				if (!filtered.Any())
 				{
@@ -744,6 +755,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Context.AddToContext(saveAs, option);
 			Report.Info("Added to context name: " + saveAs + " value: " + option);
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I confirm that the ingredients table looks as follows:")]
+		public void IConfirmThatTheIngredientsTableLooksAsFollows(Table table)
+		{
+			var newProductIngredients = new Ingredients();
+			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
+			foreach (TableRow row in table.Rows)
+			{
+				Ingredients.Ingredient ingredient = ListOfIngredients.Find(x => x.ComponentName == row["CAS Number/ChemicalName"]);
+
+				Report.IsTrue(ingredient.Percent == row["Percent"], "Failed to match percentage for ingredient " + ingredient.ComponentName + ". Expected: " + row["Percent"] + ". Actual: " + ingredient.Percent + ".",
+					"Successfully matched percentage for ingredient " + ingredient.ComponentName);
+
+				if (ingredient.PublicallyDisclosed)
+				{
+					Report.IsTrue(row["Publicly Disclosed?"] == "Yes", "Failed to match value for Publicly Disclosed for Ingredient " + ingredient.ComponentName + ". Expected: " + row["Publicly Disclosed?"] + ". Actual: " + ingredient.PublicallyDisclosed.ToString() + ".",
+						"Successfully matched value for Publicly Disclosed for Ingredient " + ingredient.ComponentName + ".");
+				}
+				else
+				{
+					Report.IsTrue(row["Publicly Disclosed?"] == "No", "Failed to match value for Publicly Disclosed for Ingredient " + ingredient.ComponentName + ". Expected: " + row["Publicly Disclosed?"] + ". Actual: " + ingredient.PublicallyDisclosed.ToString() + ".",
+						"Successfully matched value for Publicly Disclosed for Ingredient " + ingredient.ComponentName + ".");
+				}
+
+				if (ingredient.TradeSecret)
+				{
+					Report.IsTrue(row["Trade Secret?"] == "Yes", "Failed to match value for Trade Secret for Ingredient " + ingredient.ComponentName + ". Expected: " + row["Trade Secret?"] + ". Actual: " + ingredient.TradeSecret.ToString(),
+						"Successfully matched value for Trade Secret for Ingredient " + ingredient.ComponentName + ".");
+				}
+				else
+				{
+					Report.IsTrue(row["Trade Secret?"] == "No", "Failed to match value for Trade Secret for Ingredient " + ingredient.ComponentName + ". Expected: " + row["Trade Secret?"] + ". Actual: " + ingredient.TradeSecret.ToString(),
+						 "Successfully matched value for Trade Secret for Ingredient " + ingredient.ComponentName + ".");
+				}
+
+				Report.IsTrue(row["INCI Name"] == ingredient.PublicName, "Failed to match INCI Name for Ingredient " + ingredient.ComponentName + ". Expected: " + row["INCI Name"] + ". Actual: " + ingredient.PublicName + ".",
+					"Successfully matched INCI Name for Ingredient " + ingredient.ComponentName + ".");
+
+			}
 		}
 
 	}

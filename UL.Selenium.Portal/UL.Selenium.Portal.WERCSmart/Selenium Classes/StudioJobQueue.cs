@@ -7,15 +7,15 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class StudioJobQueue : BaseObject
+	class StudioJobQueue : SeleniumBaseObject
 	{
 		public const string BasePath = "//iframe[@id='Widget3FRAME']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool WaitForJobInformationList(int secondsToWait)
 		{
@@ -23,10 +23,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			//get all iframes, try them on by one for the table
 			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-			var iframes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//iframe[@id]"));
+			ReadOnlyCollection<IWebElement> iframes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//iframe[@id]"));
 			var iframeIds = iframes.Select(x => x.GetAttribute("id")).ToList();
 
-			foreach (var iframeId in iframeIds)
+			foreach (string iframeId in iframeIds)
 			{
 				SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame(iframeId);
@@ -48,16 +48,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<Job> GetFirstXJobs(int firstX)
 		{
 			Report.Info("Get first " + firstX.ToString() + " jobs.");
-			var tableRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='jobListGrid-grid']//tr[not(@class='jqgfirstrow')]"), 10);
+			IList<IWebElement> tableRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='jobListGrid-grid']//tr[not(@class='jqgfirstrow')]"), 10);
 			Report.Info("Found " + tableRows.Count.ToString() + " rows");
-			List<Job> listOfJobs = new List<Job>();
+			var listOfJobs = new List<Job>();
 			for (int i = 0; i < Math.Min(tableRows.Count, firstX); i++)
 			{
 				//Report.Info("Adding job: " + i.ToString());
 				try
 				{
-					Job myJob = new Job();
-					var rowTDs = tableRows[0].FindElements(By.XPath(".//td"));
+					var myJob = new Job();
+					ReadOnlyCollection<IWebElement> rowTDs = tableRows[0].FindElements(By.XPath(".//td"));
 					myJob.RecordID = rowTDs[2].GetValue();
 					myJob.Class = rowTDs[3].GetValue();
 					myJob.Method = rowTDs[4].GetValue();
@@ -95,9 +95,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Beginning click job queue menu option: " + option);
 			try
 			{
-				var ListJobOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//ul[@id='jobListSelector']/li/span"));
+				ReadOnlyCollection<IWebElement> ListJobOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//ul[@id='jobListSelector']/li/span"));
 
-				var matchingOption = ListJobOptions.FirstOrDefault(x => x.GetValue().Trim() == option);
+				IWebElement matchingOption = ListJobOptions.FirstOrDefault(x => x.GetValue().Trim() == option);
 
 				if (matchingOption == null)
 				{

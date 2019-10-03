@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -14,7 +15,7 @@
 Feature: [64733] Flow 28 - Auto Parts
 
 
-@TReVorId:11619
+@ScenarioId:711
 Scenario: [60673] Gasoline Container, Portable - RU001419
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -42,7 +43,7 @@ Given I call Shared Step 69682 (Retailer Association - Add Private Label Informa
 
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60673, container type: Aerosol Can and size: 20
 
-Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only)
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 

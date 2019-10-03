@@ -6,6 +6,7 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.Cache;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
+using TReVor.Api.Wrapper.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -27,7 +28,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I click on the New to WERCSmart Link")]
 		public void GivenIClickOnTheNewToWercsmartLink()
 		{
-			Report.IsTrue(new Login().Click_New_To_WercSmart(), "Failed to click 'New Tt WercSmart' link", "Clicked 'New to WERCSmart' link");
+			Report.IsTrue(new Login().Click_New_To_WercSmart(), "Failed to click 'New Tt WercSmart' link",
+				"Clicked 'New to WERCSmart' link");
 		}
 
 		[StepDefinition(@"From the Language drop down I select (.*)")]
@@ -178,10 +180,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (text.Contains("saved as"))
 			{
-				var savedAsValue = Context.GetFromContext(text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+				object savedAsValue = Context.GetFromContext(text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 				if (savedAsValue == null)
 				{
-					throw new Exception("User saved as: " + text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim() +" was not found in context.");
+					throw new Exception("User saved as: " + text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim() + " was not found in context.");
 				}
 				var savedUser = (WERCSmartUser)savedAsValue;
 				switch (inputField)
@@ -212,11 +214,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ShouldSeeAServerErrorWithMessage(string expectedMessage)
 		{
 			var selServerError = new ServerErrorDialog();
-			if (!selServerError.Wait_for_load(10))
+			if (!selServerError.WaitForContainerToBeVisible(10))
 			{
 				throw new Exception("Server Error Dialog did not appear!");
 			}
-			var actualText = selServerError.Error_Text();
+			string actualText = selServerError.Error_Text();
 			Report.Info("Expecting to see a server error with message: '" + expectedMessage + "'");
 			Report.Info("Actual error text was: '" + actualText + "'");
 			Report.IsTrue(actualText.Trim() == expectedMessage.Trim(), "Message text did not match! Expected: '" + expectedMessage + "', but got: '" + actualText + "'!", "Message text matched successfully!");
@@ -231,12 +233,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				throw new Exception("Log in page did not load after 30 seconds!");
 			}
-			var user = TestUsers.GetUserSavedAs(accountSavedAs);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
 			if (user == null)
 			{
 				throw new Exception("The user saved as: " + accountSavedAs + " could not be located in TReVor!");
 			}
-			var value = "";
+			string value = "";
 			switch (inputField)
 			{
 				case ("email"):
@@ -258,7 +260,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				throw new Exception("Log in page did not load after 30 seconds!");
 			}
-			var user = TestUsers.GetUserSavedAs(account);
+			TReVorTestUsers user = TestUsers.GetUserSavedAs(account);
 			if (user == null)
 			{
 				throw new Exception("The user saved as: " + account + " could not be located in TReVor!");

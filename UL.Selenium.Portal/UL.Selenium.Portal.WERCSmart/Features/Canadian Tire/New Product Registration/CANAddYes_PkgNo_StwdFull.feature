@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -15,7 +16,7 @@
 Feature: Account Canada Address(Yes) Package types(No) Stewardship(Full)
 
 
-@TReVorId:22138
+@ScenarioId:1224
 Scenario: [85685] Account has Canada address and FULL stewardship data - SOLD = US and Canada, PL = No, Packaging is NOT required
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC85685
@@ -38,7 +39,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85685
 
 
-@TReVorId:22148
+@ScenarioId:1225
 Scenario: [85698] Account has Canada address and FULL stewardship data - SOLD US and Canada, PL = Yes, Packaging is required
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC85698
@@ -60,7 +61,7 @@ And I Confirm This is a required field. error message is shown below the Package
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85698
 
 
-@TReVorId:22150
+@ScenarioId:1226
 Scenario: [85778] Account Canada address - All stewardship, SOLD = US Only, PL = YES, Packaging type IS NOT required
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC85778
@@ -77,7 +78,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85778
 
 
-@TReVorId:22156
+@ScenarioId:1227
 Scenario: [85779] Account Canada address - All stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC85779
@@ -94,7 +95,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85779
 
 
-@TReVorId:22159
+@ScenarioId:1228
 Scenario: [85780] Account has  Canada address - ALL stewardship, SOLD = Canada Only, PL = NO, Packaging type IS NOT required
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC85780
@@ -118,7 +119,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85780
 
 
-@TReVorId:22163
+@ScenarioId:1229
 Scenario: [85781] Account has Canada address - ALL stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 Given I login into the WERCSmart Portal - Canada has all data account
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

@@ -6,15 +6,15 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ModalDialog : BaseObject
+	class ModalDialog : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[contains(@class, 'modal-dialog') and not(ancestor::div[@id='select-retailers-dialog' or @id='LogOutModal']) and (.//parent::div[contains(@style,'display: block')])]";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool Click_OK()
 		{
@@ -49,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var CancelButton = this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+				IWebElement CancelButton = this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 					.FirstOrDefault(x => x.Text == "CANCEL");
 				return (CancelButton.Enabled && CancelButton.Displayed);
 			}
@@ -62,8 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetText()
 		{
-			return this.containerElement.FindElements(By.XPath("//div[@class='modal-body']")).FirstOrDefault(x => x.Displayed)
-				.Text;
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-body']")).FirstOrDefault(x => x.Displayed)?.Text;
 		}
 
 		public List<string> GetAllText()
@@ -73,13 +72,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetTitle()
 		{
-			return this.containerElement.FindElements(By.XPath("//*[@class='modal-title']")).FirstOrDefault(x => x.Displayed)
-				.Text;
+			return this.containerElement.FindElements(By.XPath("//*[@class='modal-title']")).FirstOrDefault(x => x.Displayed)?.Text;
 		}
 
 		public void EnterLoginPassword(string password)
 		{
 			this.containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2).EnterText(password);
+		}
+
+		public bool LoginPasswordFieldPresent()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2);
+			return el != null && el.Displayed;
 		}
 
 		public void EnterNewPassword(string password)
@@ -104,8 +108,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				.FirstOrDefault(x => x.Text.ToLower() == "save").TryClick();
 		}
 
+		public bool ClickApprove()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+				.FirstOrDefault(x => x.Text.ToLower() == "approve").TryClick();
+		}
+
 		public bool ClickButton(string button)
 		{
+			
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2).FirstOrDefault(x => x.Text == button).TryClick();
 		}
 
@@ -117,10 +128,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetRetailers()
 		{
-			var retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+			ReadOnlyCollection<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
 
-			List<string> retailerList = new List<string>();
-			foreach (var retailer in retailers)
+			var retailerList = new List<string>();
+			foreach (IWebElement retailer in retailers)
 			{
 				retailerList.Add(retailer.GetValue());
 			}
@@ -130,18 +141,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectRetailer(string retailer)
 		{
-			var retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+			ReadOnlyCollection<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
 
-			var matchingRetailer = retailers.FirstOrDefault(x => x.GetValue() == retailer);
+			IWebElement matchingRetailer = retailers.FirstOrDefault(x => x.GetValue() == retailer);
 
 			if (matchingRetailer == null)
 			{
-				Report.Info("Could not find matching retailer. Retailers found were: " + String.Join(",", this.GetRetailers()));
+				Report.Info("Could not find matching retailer. Retailers found were: " + string.Join(",", this.GetRetailers()));
 				return false;
 			}
 			else
 			{
-				var retailerCheckbox = matchingRetailer.FindElement(By.XPath("..//input"), 2);
+				IWebElement retailerCheckbox = matchingRetailer.FindElement(By.XPath("..//input"), 2);
 				if (retailerCheckbox == null)
 				{
 					Report.Info(("Found retailer but could not find checkbox"));

@@ -2,6 +2,7 @@ using System;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
@@ -279,12 +280,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (costText == "Estimated Annual Cost")
 			{
 				myCurrentCost = this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[1]/div/p/strong"), 2);
-				ScenarioContext.Current.Add("CurrentEstCost", myCurrentCost.Text);
+				Context.ScenarioContext.Add("CurrentEstCost", myCurrentCost.Text);
 			}
 			if (costText == "Estimated Annual Cost per Product")
 			{
 				myCurrentCost = this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[2]/div/p/strong"), 2);
-				ScenarioContext.Current.Add("CurrentPerCost", myCurrentCost.Text);
+				Context.ScenarioContext.Add("CurrentPerCost", myCurrentCost.Text);
 			}
 
 			if (myCurrentCost == null)
@@ -338,7 +339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 				}
 				Report.Info("New " + costText + " = " + myNewCost.Text);
-				string myCurrent = ScenarioContext.Current["CurrentEstCost"].ToString();
+				string myCurrent = Context.ScenarioContext["CurrentEstCost"].ToString();
 				if (myNewCost.Text == myCurrent)
 				{
 					Report.Info(costText + " Has Not Changed");
@@ -359,7 +360,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 				}
 				Report.Info("New " + costText + " = " + myNewCost.Text);
-				string myCurrent = ScenarioContext.Current["CurrentPerCost"].ToString();
+				string myCurrent = Context.ScenarioContext["CurrentPerCost"].ToString();
 				if (myNewCost.Text == myCurrent)
 				{
 					Report.Info(costText + " Has Not Changed");

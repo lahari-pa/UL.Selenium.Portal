@@ -31,14 +31,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='Sign Out']"), 2) != null;
 		}
 
-		public void ClickOnUserTopRight()
+		public bool ClickOnUserTopRight()
 		{
-			this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2).Click();
+			return this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2).TryClick();
 		}
 
-		public void ClickOnHelpTopRight()
+		public bool ClickOnHelpTopRight()
 		{
-			this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle live-help')]"), 2).Click();
+			return this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle live-help')]"), 2).TryClick();
 		}
 
 		public bool ClickSignOut()
@@ -116,7 +116,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetCurrentUser()
 		{
 			Report.Info("Beginning get current user");
-			var ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
+			IWebElement ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
 			ddt.ScrollElementIntoView();
 			return ddt.GetValue();
 
@@ -124,14 +124,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickLiveHelp()
 		{
-			return this.containerElement.FindElement(By.XPath(".//a[(.//i[@id='live-help'])]"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[contains(@class,'live-help')]"), 2).TryClick();
 		}
 
 		public bool LoggedIn()
 		{
 			try
 			{
-				var ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
+				IWebElement ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
 				if (ddt == null)
 				{
 					return false;

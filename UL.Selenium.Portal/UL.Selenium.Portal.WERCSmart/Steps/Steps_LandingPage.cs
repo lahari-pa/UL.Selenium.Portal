@@ -18,169 +18,87 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I go to the WERCSmart Log in")]
 		public void ClickTheLoginButton()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click the WERCSmart login button");
-			try
+			Report.Info("Beginning to click the Login button");
+			var selHomepage = new LandingPage();
+			if (!selHomepage.WaitForContainerToBeVisible())
 			{
-				Report.Info("Beginning to click the Login button");
-				var selHomepage = new LandingPage();
-				if (!selHomepage.Wait_for_load(1))
-				{
-					Report.Info("Not on the Homepage, navigating...");
-					SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
-					Report.IsTrue(selHomepage.Wait_for_load(30), "Homepage failed to load!", "Homepage loaded successfully!");
-				}
-
-				selHomepage.Click_Login();
-				Report.Screenshot();
-				Report.Success("Login button clicked!");
+				Report.Info("Not on the Homepage, navigating...");
+				SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
+				Report.IsTrue(selHomepage.WaitForContainerToBeVisible(), "Homepage failed to load!", "Homepage loaded successfully!");
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(selHomepage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
 		}
 
 		[StepDefinition(@"I select the Sign Up link")]
 		public void ClickSignUpLink()
 		{
-			Report.Info("Beginning to click the Login button");
-			var selHomepage = new LandingPage();
-			selHomepage.Click_Signup();
-			Report.Screenshot();
-			Report.Success("Signup button clicked!");
+			Report.IsTrue(new LandingPage().Click_SignUp(), "Failed to click Sign Up", "Successfully clicked Sign Up");
 		}
 
 		[StepDefinition(@"the login page should (appear|dissappear)")]
 		public void LoginPageAppears(string appear)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Login page should " + appear);
-			try
-			{
-				Report.Info("Checking that the login page has " + appear + "ed.");
-				var selLogin = new Login();
-				Report.Screenshot();
-				Report.IsTrue(selLogin.Wait_for_load(1) == (appear == "appear"), "Login page did not " + appear + "!", "Login page " + appear + "ed successfully!");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(new Login().WaitForContainerToBeVisible() == (appear == "appear"), "Login page did not " + appear + "!", "Login page " + appear + "ed successfully!");
 		}
 
 		[StepDefinition("I click outside of the login popup")]
 		public void ClickOutisdeOfLoginPopup()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click outside the login popup");
-			try
-			{
-				Report.Info("Clicking outside of the login popup");
-				var selLogin = new Login();
-				selLogin.ClickOutside();
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Clicking outside of the login popup");
+			new Login().ClickOutside();
+			Report.Info("Clicked outside of the login popup");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I should see the following menu options in the header:")]
 		public void NavigationOptionShowing(Table expected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the following menu options in the header");
-			try
+			System.Collections.Generic.List<string> optionsAvailable = new LandingPage().NavigationOptionsAvailable();
+			foreach (TableRow row in expected.Rows)
 			{
-				var selHomepage = new LandingPage();
-				var optionsAvailable = selHomepage.NavigationOptionsAvailable();
-
-				foreach (var row in expected.Rows)
-				{
-					string option = row["Option"];
-					Report.Info("Expecting to see menu option: '" + option + "' available on the landing page");
-					Report.IsTrue(optionsAvailable.Contains(option),
-						"Option: '" + option + "' was not available in the list of navigation options!",
-						"Option: '" + option + "' was showing in the list of navigation options");
-				}
-
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
+				string option = row["Option"];
+				Report.Info("Expecting to see menu option: '" + option + "' available on the landing page");
+				Report.IsTrue(optionsAvailable.Contains(option),
+					"Option: '" + option + "' was not available in the list of navigation options!",
+					"Option: '" + option + "' was showing in the list of navigation options");
 			}
 		}
 
 		[StepDefinition(@"I select the (Manufacturers|Retailers|Subscription) link")]
 		public void SelectNavigationOption(string option)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Select " + option);
-			try
-			{
-				Report.Info("Selecting option: " + option);
-				var selHomepage = new LandingPage();
-				Report.IsTrue(selHomepage.SelectOption(option),
-					"Failed to select option: " + option + "!",
-					"Succesfully selected option: " + option + "!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(new LandingPage().SelectOption(option),
+				"Failed to select option: " + option + "!",
+				"Successfully selected option: " + option + "!");
 		}
 
 		[StepDefinition(@"I confirm I am taken to the (Manufacturers|Retailers|Subscription) page")]
 		public void ConfirmNavigation(string option)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm you are taken to the " + option + " page");
-			try
+			switch (option)
 			{
-				Report.Info("Checking that the correct page has loaded successfully");
-				bool result = false;
-				switch (option)
-				{
-					case ("Manufacturers"):
-						result = new ManufacturersInfo().Wait_for_load();
-						break;
-					case ("Retailers"):
-						result = new RetailersInfo().Wait_for_load();
-						break;
-					case ("Subscription"):
-						result = new SubscriptionInfo().Wait_for_load();
-						break;
-				}
-
-				Report.IsTrue(result, "Failed to navigate to the " + option + " page!", "Successfully navigated to the " + option + " page!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
+				case ("Manufacturers"):
+					Report.IsTrue(new ManufacturersInfo().WaitForContainerToBeVisible(),
+						"Failed to navigate to the " + option + " page!", "Successfully navigated to the " + option + " page!");
+					break;
+				case ("Retailers"):
+					Report.IsTrue(new RetailersInfo().WaitForContainerToBeVisible(),
+						"Failed to navigate to the " + option + " page!", "Successfully navigated to the " + option + " page!");
+					break;
+				case ("Subscription"):
+					Report.IsTrue(new SubscriptionInfo().WaitForContainerToBeVisible(),
+						"Failed to navigate to the " + option + " page!", "Successfully navigated to the " + option + " page!");
+					break;
+				default:
+					Report.Error("No valid option was selected. Expected 'Manufacturers', 'Retailers' or 'Subscription' " + option);
+					break;
 			}
 		}
 
 		[StepDefinition(@"the landing page should load")]
 		public void LandingPageLoads()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Landing Page should load");
-			try
-			{
-				Report.Info("Expecting the Landing Page to load");
-				var selHomepage = new LandingPage();
-				Report.IsTrue(selHomepage.Wait_for_load(), "Landing page did not load!", "Landing page loaded successfully!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(new LandingPage().WaitForContainerToBeVisible(), "Landing page did not load!", "Landing page loaded successfully!");
 		}
 
 		[StepDefinition(@"I click the Get Started Now link")]
@@ -192,8 +110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the Terms of Use link in the Landing Page footer")]
 		public void ClickTermsOfUse()
 		{
-			var selLandingPageFooter = new LandingPageFooter();
-			Report.IsTrue(selLandingPageFooter.ClickTermsOfUse(), "Failed to click Terms of Use", "Successfully clicked Terms of Use");
+			Report.IsTrue(new LandingPageFooter().ClickTermsOfUse(), "Failed to click Terms of Use", "Successfully clicked Terms of Use");
 		}
 
 		[StepDefinition(@"I confirm the WERCSmart Terms of Use page has loaded")]
@@ -202,6 +119,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h1[contains(text(),'Terms of Use')]"), 30) != null,
 				"The WERCSmart Terms of Use Page did not load after 30 seconds!",
 				"The WERCSmart Terms of Use Page loaded as expected");
+		}
+
+		[StepDefinition("I Check The landing page has loaded, and report if an Alert and Inactivity Prompt are open if it is not loaded")]
+		public void ICheckTheLandinPageHasLoadedAndReportIfNot()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I Check the Landing page has loaded");
+
+			if (!(new LandingPage().WaitForContainerToBeVisible()))
+			{
+				Report.Failure($"The Landing page did not load", false);
+				if (!new InactivityPopup().WaitForContainerToBeVisible(10))
+				{
+					Report.Failure($"The Inactivity prompt was not on screen", false);
+				}
+				else
+				{
+					Report.Success($"The Inactivity prompt was on screen");
+				}
+				if (!SeleniumBrowser.Alert.WaitForAlert(5))
+				{
+					Report.Failure($"The Alert was not on screen", false);
+				}
+				else
+				{
+					Report.Success($"The Alert was on screen");
+				}
+				return;
+
+
+			}
+
+			Report.Success("The Landing Page was loaded");
 		}
 	}
 }

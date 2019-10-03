@@ -18,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public int StateRowsCount()
 		{
-			var epaTable = this.Table();
+			IWebElement epaTable = this.Table();
 			if (epaTable == null)
 			{
 				Report.Error("The State Pesticide Registration table could not be found");
@@ -26,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return -1;
 			}
 
-			var rowInputs = epaTable.FindElements(By.XPath(@".//tr/td/input"), 2);
+			IList<IWebElement> rowInputs = epaTable.FindElements(By.XPath(@".//tr/td/input"), 2);
 			if (rowInputs.Count == 0)
 			{
 				Report.Info("There were no State Pesticide Registration rows visible on the Pesticide State Registration Details page");
@@ -42,14 +42,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var epaTable = this.Table();
+				IWebElement epaTable = this.Table();
 				if (epaTable == null)
 				{
 					Report.Info("The State Pesticide Registration table could not be found");
 					Report.Screenshot();
 					return false;
 				}
-				var rowInputs = epaTable.FindElements(By.XPath(@".//tr/td/input"), 2);
+				IList<IWebElement> rowInputs = epaTable.FindElements(By.XPath(@".//tr/td/input"), 2);
 				if (rowInputs.Count == 0)
 				{
 					Report.Info("There were no State Pesticide Registration rows visible!");
@@ -57,9 +57,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return false;
 				}
 				Report.Info("Found " + rowInputs.Count + " rows in the State Pesticide Registration table");
-				var currentRow = rowInputs[row];
+				IWebElement currentRow = rowInputs[row];
 				currentRow.ScrollElementIntoView();
-				var rowText = currentRow.GetAttribute("value");
+				string rowText = currentRow.GetAttribute("value");
 				Delay.Seconds(1);
 				return rowText.EndsWith("-edited");
 			}
@@ -72,14 +72,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickEpaKellyServicesLink()
 		{
-			var links = this.containerElement.FindElements(By.XPath(@".//div[@class='panel-heading']/following-sibling::div//span[contains(text(),'Update WERCSmart data with EPA data through Kelly Services')]"));
+			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> links = this.containerElement.FindElements(By.XPath(@".//div[@class='panel-heading']/following-sibling::div//span[contains(text(),'Update WERCSmart data with EPA data through Kelly Services')]"));
 			if (links == null || links.Count == 0)
 			{
 				Report.Info("No (span) links showing with text 'Update WERCSmart data...'");
 				Report.Screenshot();
 				return false;
 			}
-			var clicked = links.First().TryClick();
+			bool clicked = links.First().TryClick();
 			GeneralUtilities.Wait_for_load_finish();
 			//this.RefreshContainer();
 			return clicked;
@@ -87,18 +87,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool EditExpirationDate(string value, string state)
 		{
-			var row = this.StateRegistrationRow(state);
+			IWebElement row = this.StateRegistrationRow(state);
 			if (row == null)
 			{
 				Report.Error("Failed to located State Registration table row for state: " + state);
 				return false;
 			}
-			var input = row.FindElement(By.XPath("./td/div/input"), 2);
+			IWebElement input = row.FindElement(By.XPath("./td/div/input"), 2);
 			if (input == null)
 			{
 				Report.Error("Failed to find the text input for Expiration date on the state row: " + state);
 				return false;
-			}
+			}			
+
 			input.Clear();
 			input.EnterText(value);
 			input.SendKeys(Keys.Enter);
@@ -107,13 +108,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool EditRegistrationNumber(string value, string state)
 		{
-			var row = this.StateRegistrationRow(state);
+			IWebElement row = this.StateRegistrationRow(state);
 			if (row == null)
 			{
 				Report.Error("Failed to located State Registration table row for state: " + state);
 				return false;
 			}
-			var input = row.FindElement(By.XPath("./td/input"), 2);
+			IWebElement input = row.FindElement(By.XPath("./td/input"), 2);
 			input.Clear();
 			input.EnterText(value);
 			return input.GetValue() == value;
@@ -121,14 +122,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string ExpirationDate(string state)
 		{
-			var epaTable = this.Table();
+			IWebElement epaTable = this.Table();
 			if (epaTable == null)
 			{
 				Report.Info("The State Pesticide Registration Table could not be found");
 				Report.Screenshot();
 				return null;
 			}
-			var expirationDateInput = epaTable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/div/input[@type='text']"), 2);
+			IWebElement expirationDateInput = epaTable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/div/input[@type='text']"), 2);
 			if (expirationDateInput == null)
 			{
 				Report.Info("Failed to find a match on the State text: '" + state + "'");
@@ -141,7 +142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string GetPesticideRegKellyExpirationDate(string state)
 		{
-			var EPATable = this.Table();
+			IWebElement EPATable = this.Table();
 			if (EPATable == null)
 			{
 				Report.Failure("The State Pesticide Registration Table could not be found");
@@ -149,7 +150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return null;
 			}
 
-			var kellyExpirationDateInput = EPATable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/following-sibling::td/label"), 2);
+			IWebElement kellyExpirationDateInput = EPATable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/following-sibling::td/label"), 2);
 			if (kellyExpirationDateInput == null)
 			{
 				Report.Failure("Failed to find a match on the State text: '" + state + "'");
@@ -162,41 +163,51 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CalenderDatePickerDisplayed(string state)
 		{
-			var calendar = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//div[@class='datepicker-days']"), 2);
+			IWebElement calendar = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//div[@class='datepicker-days']"), 2);
 			return calendar != null && calendar.Displayed;
 		}
 
 		public bool SelectExpirationDateFromCalendar(string state, DateTime date)
 		{
-			var table = this.Table();
+			IWebElement table = this.Table();
 			if (table == null)
 			{
 				Report.Failure("The State Pesticide Registration Table could not be found");
 				Report.Screenshot();
 				return false;
 			}
-			var calendarButton = table.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td//span[@class='input-group-addon']"), 2);
+			IWebElement calendarButton = table.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td//span[@class='input-group-addon']"), 2);
 			// try a few times to click the caldendar button
-			var attempt = 0;
-			while (!this.CalenderDatePickerDisplayed(state) && attempt < 5)
+			int attempt = 0;
+			while (!this.CalenderDatePickerDisplayed(state) && attempt < 10)
 			{
-				calendarButton.ScrollElementIntoView();
-				if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
+				try
 				{
-					break;
+					//calendarButton.ScrollElementIntoView();
+					if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
+					{
+						break;
+					}
+
+					//calendarButton.ScrollElementIntoView();
+
+					//this.Table().SendKeys(Keys.PageUp);
+					//if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
+					//{
+					//	break;
+					//}
+					//this.Table().SendKeys(Keys.PageUp);
+					//if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
+					//{
+					//	break;
+					//}
+					Report.Info("Failed to click the calender button.Trying again...");
+					attempt++;
 				}
-				this.Table().SendKeys(Keys.PageUp);
-				if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
+				catch(Exception)
 				{
-					break;
+
 				}
-				this.Table().SendKeys(Keys.PageUp);
-				if (calendarButton.TryClick() && this.CalenderDatePickerDisplayed(state))
-				{
-					break;
-				}
-				Report.Info("Failed to click the calender button.Trying again...");
-				attempt++;
 			}
 			if (!this.CalenderDatePickerDisplayed(state))
 			{
@@ -214,7 +225,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//		return false;
 			//	}
 			//}
-			if (!this.GetCalendarActiveDate(out var startMonth, out var startYear))
+			if (!this.GetCalendarActiveDate(out string startMonth, out string startYear))
 			{
 				Report.Failure("Failed to get active date from calendar date selector!");
 				Report.Screenshot();
@@ -227,8 +238,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//	Report.Screenshot();
 			//	return false;
 			//}
-			var activeYear = int.Parse(startYear);
-			var activeMonth = DateTime.ParseExact(startMonth, "MMMM", CultureInfo.CurrentCulture).Month;
+			int activeYear = int.Parse(startYear);
+			int activeMonth = DateTime.ParseExact(startMonth, "MMMM", CultureInfo.CurrentCulture).Month;
 			// Fail test if target date preceeds the default Month Year on the calendar
 			if (date.Year < activeYear || date.Year == activeYear && date.Month < activeMonth)
 			{
@@ -242,7 +253,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				// Click next month
 				SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//th[@class='next']"), 2).TryClick();
 				//activeDate = this.CalendarActiveDate();
-				if (!this.GetCalendarActiveDate(out var month, out var year))
+				if (!this.GetCalendarActiveDate(out string month, out string year))
 				{
 					Report.Failure("Failed to get active date from calendar date selector!");
 					Report.Screenshot();
@@ -257,8 +268,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool GetCalendarActiveDate(out string month, out string year)
 		{
-			var calendarTable = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]"), 2);
-			var datePicker = calendarTable?.FindElement(By.XPath(".//th[@class='datepicker-switch']"), 2);
+			IWebElement calendarTable = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]"), 2);
+			IWebElement datePicker = calendarTable?.FindElement(By.XPath(".//th[@class='datepicker-switch']"), 2);
 			var dates = datePicker?.Text.Split(' ').Select(x => x.Trim()).ToList();
 			month = "";
 			year = "";
@@ -273,7 +284,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string TableRowClassColour(string state)
 		{
-			var epaRow = this.Table().FindElement(By.XPath(".//tr[.//div[text()='" + state + "']]"), 2);
+			IWebElement epaRow = this.Table().FindElement(By.XPath(".//tr[.//div[text()='" + state + "']]"), 2);
 			if (epaRow == null)
 			{
 				Report.Failure("Unable to locate EPA table row for state: " + state);
@@ -284,13 +295,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				epaRow.ScrollElementIntoView();
 			}
-			var colourCode = epaRow.GetAttribute("class");
+			string colourCode = epaRow.GetAttribute("class");
 			return colourCode?.Replace("rpds-", "");
 		}
 
 		public string TableRowBackgroundHex(string state)
 		{
-			var epaRow = this.Table().FindElement(By.XPath(".//tr[.//div[text()='" + state + "']]"), 2);
+			IWebElement epaRow = this.Table().FindElement(By.XPath(".//tr[.//div[text()='" + state + "']]"), 2);
 			if (epaRow == null)
 			{
 				Report.Failure("Unable to locate EPA table row for state: " + state);
@@ -303,7 +314,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			var rStatePest = new List<StatePesticideRegistration>();
 			Delay.Seconds(3);
-			var epaTable = this.Table();
+			IWebElement epaTable = this.Table();
 			if (epaTable == null)
 			{
 				Report.Failure("The EPA Registration Table could not be found");
@@ -317,7 +328,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				"Expiration Date provided by Kelly",
 				"Is Kelly Data"
 			};
-			var headings = this.TableColumnHeadings();
+			List<string> headings = this.TableColumnHeadings();
 			if (!expectedHeadings.All(x => headings.Contains(x)))
 			{
 				Report.Error("The table headings did not match those expected! => " + string.Join(", ", expectedHeadings));
@@ -326,18 +337,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			var rows = epaTable.FindElements(By.XPath(".//tbody/tr")).ToList();
 			Report.Info("Getting state data for: " + rows.Count + " rows");
-			foreach (var thisRow in rows)
+			foreach (IWebElement thisRow in rows)
 			{
-				var state = thisRow.FindElement(By.XPath($".//td[position() = {headings.IndexOf(expectedHeadings[1]) + 1}]//div")).Text;
-				var expirationDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[2]) + 1}]//input")).GetValue();
-				var registrationNumberEl = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[0]) + 1}]//input"));
-				var registrationNumber = registrationNumberEl.GetValue();
+				string state = thisRow.FindElement(By.XPath($".//td[position() = {headings.IndexOf(expectedHeadings[1]) + 1}]//div")).Text;
+				string expirationDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[2]) + 1}]//input")).GetValue();
+				IWebElement registrationNumberEl = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[0]) + 1}]//input"));
+				string registrationNumber = registrationNumberEl.GetValue();
 				if (registrationNumber.Length == 0)
 				{
 					registrationNumber = registrationNumberEl.GetAttribute("placeholder");
 				}
-				var kellyDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[3]) + 1}]//label"))?.Text;
-				var isKellyData = thisRow.FindElements(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[4]) + 1}]//div")).Count == 1;
+				string kellyDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[3]) + 1}]//label"))?.Text;
+				bool isKellyData = thisRow.FindElements(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[4]) + 1}]//div")).Count == 1;
 				rStatePest.Add(new StatePesticideRegistration() {
 					State = state,
 					ExpirationDate = expirationDate,

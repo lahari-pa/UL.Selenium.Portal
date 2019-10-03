@@ -8,6 +8,7 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -73,9 +74,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				string sEmail = EmailFunctions.CreateEmail("<random>");
-				User newUser = new User();
-				newUser.Email = sEmail;
-				ScenarioContext.Current.Add(savedAs, newUser);
+				var newUser = new User {
+					Email = sEmail
+				};
+				Context.ScenarioContext.Add(savedAs, newUser);
 			}
 			catch (Exception ex)
 			{
@@ -116,8 +118,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					try
 					{
 						var selForgotten = new ForgottenPassword();
-						var expectedErrorMessages = errorMessages.Split(',');
-						var actualErrorMessages = selForgotten.GetErrors();
+						string[] expectedErrorMessages = errorMessages.Split(',');
+						System.Collections.Generic.List<string> actualErrorMessages = selForgotten.GetErrors();
 						foreach (string expectedErrorMessage in expectedErrorMessages)
 						{
 							Report.IsTrue(actualErrorMessages.Contains(expectedErrorMessage), "Expected Error message: " + expectedErrorMessage + " is not showing.", "Expected error message: " + expectedErrorMessage + " is showing.");
@@ -227,8 +229,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Checking whether there is a link the email which allows Password Reset");
-				Email matchingEmail = (Email)ScenarioContext.Current["Matching"];
-				var myLink = matchingEmail.Html.Links[0].Href;
+				var matchingEmail = (Email)Context.ScenarioContext["Matching"];
+				string myLink = matchingEmail.Html.Links[0].Href;
 				Report.Info("Found a link: '" + myLink + "' in the email!");
 				Context.AddToContext("EmailLink", myLink);
 			}
@@ -249,11 +251,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				//IWebElement myLink = IWebElement;
 
-				Email matchingEmail = (Email)ScenarioContext.Current["Matching"];
+				var matchingEmail = (Email)Context.ScenarioContext["Matching"];
 				//var myLink = matchingEmail.Html.Links[0].Href;
 				var myLink = matchingEmail.Html.Links.ToList();
 
-				foreach (var link in myLink)
+				foreach (Link link in myLink)
 				{
 					var myFp = new ForgottenPassword();
 
@@ -285,7 +287,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(5);
 				Report.Info("Expecting confirmation message " + confirmMessage);
 				var selForgotpasswordconfirm = new ForgottenPassword();
-				var showing = selForgotpasswordconfirm.ForgotPasswordSuccessMessage();
+				string showing = selForgotpasswordconfirm.ForgotPasswordSuccessMessage();
 				Report.IsTrue(confirmMessage == showing, "Success message showing " + showing, "Success message was showing correctly");
 			}
 			catch (Exception ex)
@@ -388,7 +390,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(myForgotPw.New_Password_Form(newPw, verifyPw), "Failed to Enter New Password and Verify",
 					"New Password Entered and Verified");
 
-				ScenarioContext.Current.Add("NewPassword", newPw);
+				Context.ScenarioContext.Add("NewPassword", newPw);
 
 			}
 			catch (Exception ex)
@@ -405,6 +407,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				var myForgotPw = new ForgottenPasswordQuestions();
+				GeneralUtilities.Wait_for_load_finish();
 				Report.IsTrue(myForgotPw.Login_click(), "Failed to Click Login Button", "Login Button Clicked");
 			}
 			catch (Exception ex)

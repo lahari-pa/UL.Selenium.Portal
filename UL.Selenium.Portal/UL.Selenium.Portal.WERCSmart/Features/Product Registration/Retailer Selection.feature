@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -12,7 +13,7 @@
 
 Feature: Retailer Selection
 
-@TReVorId:18949
+@ScenarioId:1075
 Scenario: [78933] Select Retailers - Show List View
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -61,7 +62,7 @@ Then The selected retailers on the Retailer page should be:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78933
 
 
-@TReVorId:18950
+@ScenarioId:1076
 Scenario: [78936] Select Retailers - Show Logo Tile View
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -104,7 +105,7 @@ Then The selected retailers on the Retailer page should be:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78936
 
 
-@TReVorId:18952
+@ScenarioId:1077
 Scenario: [78937] Select Retailers - Select All
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
