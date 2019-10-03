@@ -1,4 +1,5 @@
-﻿@SHA
+@Shared
+@SHA
 @LandingPage
 @Login
 @Homepage

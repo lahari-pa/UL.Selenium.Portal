@@ -1011,6 +1011,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found retailer " + retailer + " in list of retailers.");
 		}
 
+		[StepDefinition(@"I confirm that retailer saved as: (.*) appears for UPC saved as: (.*)")]
+		public void ConfirmThatRetailerSavedAsAppearsForUPCSavedAs(string retailerSavedAs, string upcSavedAs)
+		{
+			if (!Context.Contains(upcSavedAs))
+			{
+				Report.Error("No item saved in context as: " + upcSavedAs);
+				return;
+			}
+			string upc = Context.GetFromContext(upcSavedAs).ToString();
+			if (!Context.Contains(retailerSavedAs))
+			{
+				Report.Error("No item saved in context as: " + retailerSavedAs);
+				return;
+			}
+			string retailer = Context.GetFromContext(retailerSavedAs).ToString();
+			//var abbreviationMappings = new RetailerAbbreviations().Map;
+			//if (abbreviationMappings.ContainsKey(retailer))
+			//{
+			//	// then we need to convert from full retailer name to abbreviation because the UPC page displays the abbrv
+			//	retailer = abbreviationMappings.FirstOrDefault(x => x.Key == retailer).Value;
+			//}
+			retailer = new RetailerAbbreviations().TryConvertToAbbreviation(retailer);
+			var studioSHAManager = new StudioSHAManager();
+			Report.IsTrue(studioSHAManager.ConfirmRetailerExistsForUPC(retailer, upc), "Failed to find retailer " + retailer + " in list of retailers",
+				"Successfully found retailer " + retailer + " in list of retailers.");
+		}
+
 		[StepDefinition(@"I close the SHA Manager Product UPC window")]
 		public void CloseSHAManagerProductUPCWindow()
 		{
@@ -2181,20 +2208,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 			}
-
 			var thisStudioSHAManager = new StudioSHAManager();
 			List<Product> RetailerStatuses = thisStudioSHAManager.GetTopXProducts(2);
+			var matchingStatusRows = RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
+			var abbreviationMap = new RetailerAbbreviations().Map;
+			foreach (var row in matchingStatusRows)
+			{
+				var clients = row.Clients;
+				var clientAbbreviations = clients.Split(',').Select(x => x.Trim()).ToList();
+				foreach (var abbr in clientAbbreviations)
+				{
+					if (abbreviationMap.ContainsValue(abbr) && abbreviationMap.FirstOrDefault(x => x.Value == abbr).Key == retailer)
+					{
+						Report.Success("Found product with status: " + status + " and retailer: " + retailer);
+						Report.Screenshot();
+						return;
+					}
+				}
+			}
+			Report.Failure("Failed to find product with status: " + status + " and retailer: " + retailer);
+			//var thisStepsRetailPartners = new StepsRetailPartners();
+			//var matchingClients = matchingStatusRows.Select(x => x.Clients)
+			//	.Where(o => thisStepsRetailPartners.MatchAbbreviatedRetailer(o, retailer)).ToList();
 
-			var thisStepsRetailPartners = new StepsRetailPartners();
-
-			var matchingStatusRows =
-				RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
-			var matchingClients = matchingStatusRows.Select(x => x.Clients)
-				.Where(o => thisStepsRetailPartners.MatchAbbreviatedRetailer(o, retailer)).ToList();
-
-			Report.IsTrue(matchingClients.Count != 0,
-				"No matching row was found for status: " + status + " and retailer: " + retailer,
-				"Matching row was found for status: " + status + " and retailer: " + retailer);
+			//Report.IsTrue(matchingClients.Count != 0,
+			//	"No matching row was found for status: " + status + " and retailer: " + retailer,
+			//	"Matching row was found for status: " + status + " and retailer: " + retailer);
 
 		}
 
@@ -2295,7 +2334,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			var upcNumber = displayedUpcs.FirstOrDefault(x => !x.UPCNumber.EndsWith("*"))?.UPCNumber;
-			if(upcNumber== null)
+			if (upcNumber == null)
 			{
 				if (reportFailure)
 				{
@@ -2665,7 +2704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//	"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
 			//	"Popup contains the appropriate elements.");
 
-			Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(uPC,out string failedAt),
+			Report.IsTrue(new StudioSHAManagerArchivedProduct().VerifyPopupContents(uPC, out string failedAt),
 				"Popup does not appear to contain the appropriate elements. Failed when looking for " + failedAt,
 				"Popup contains the appropriate elements.");
 		}
@@ -2675,7 +2714,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InSHAISearchForExactUPCInForUPCSavedAs(string status, string savedAs)
 		{
 
-			TestReport.UseSubSteps = true;			
+			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I set the status filter to All");
 			var myStudioShaManager = new StudioSHAManager();
 			myStudioShaManager.WaitForProductList(60);
@@ -2701,7 +2740,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Status",
 				status
 			});
-			
+
 			TestReport.StartStep("I click Srch in the bottom menu list");
 			myStudioShaManager.ClickBottomMenuOption("Search");
 			var myStepsSha = new Steps_SHA();
@@ -2710,19 +2749,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 			Delay.Seconds(1);
 			Report.Info("Waiting for product list");
-			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found","Product list is showing");				
-			
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing");
+
 
 		}
 
 		[StepDefinition(@"The Manager Validation Require Popup is not shown")]
 		public void TheManagerValidationRequirePopupIsNotShown()
 		{
-			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();			
+			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();
 			Report.IsTrue(managerValidationPopup.WaitForContainerToBeInvisible(10), "The Manager Validation Required Popup was shown", "The Manager Validation Required Popup was not shown");
 
 		}
 
+		[StepDefinition(@"In the Advanced Reporting popup I select report (.*)")]
+		public void InTheAdvancedReportingPopupISelectReport(string report)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
+		}
 		/// <summary>
 		/// For using a retailer saved in context wrap the retailer name in '<>'
 		/// </summary>
@@ -2906,6 +2951,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
+		
+		[StepDefinition(@"In the Advanced Reporting popup I click Submit")]
+		public void InTheAdvancedReportingPopupIClickSubmit()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickSubmit(), "Failed to click submit", "Successfully clicked submit");
+		}
 
 		[StepDefinition(@"I Check that for the product: (.*) the Details in SHA Manager Match the details found in the file: (.*)")]
 		public void ICheckThatForTheProductXTheDetailsInSHAManagerMatchTheFile(string productInfoSavedAs, string fileSavedAs)
@@ -2996,7 +3048,92 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I wait for the Advanced Reporting Preparing Report popup to disappear")]
+		public void WaitForAdvancedReportingPopupToDisappear()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.WaitForPreparingReportPopup(), "Failed to wait for Preparing Report popup", "Successfully waited for Preparing Report popup");
+		}
 
+		[StepDefinition(@"I search in the excel spreadsheet saved as: (.*) for product saved as: (.*) and save its information as: (.*)")]
+		public void ISearchInTheExcelSpreadsheetForProductAndSaveItsInformation(string excel, string product, string saveAs)
+		{
+			var prodInfo = (ProductInformation)Context.GetFromContext(product);
+			object File = Context.GetFromContext(excel);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + excel + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				List<string> allProducts = ExcelUtils.Excel_GetColumn(0);
+				if (!allProducts.Contains(prodInfo.Id))
+				{
+					Report.Failure("Failed to find WPSID " + prodInfo.Id + " in WPSID column of excel spreadsheet!");
+				}
+				else
+				{
+					int index = allProducts.IndexOf(prodInfo.Id);
+					List<string> foundProductInfo = ExcelUtils.Excel_GetRow(index);
+					var dict = new Dictionary<string, string>();
+					for (int i = 0; i < ColumnTitles.Count; i++)
+					{
+						dict[ColumnTitles[i]] = foundProductInfo[i];
+					}
+					Context.AddToContext(saveAs, dict);
+					Report.IsTrue(foundProductInfo.Contains(prodInfo.Id), "Failed to select proper row in the spreadsheet", "Successfully selected proper row in spreadsheet");
+				}
+			}
+		}
+
+		[StepDefinition(@"I confirm that the following information is present in the excel info saved as: (.*):")]
+		public void IConfirmThatTheFollowingInformationIsPresentInTheExcelInfoSavedAs(string savedAs, Table table)
+		{
+			var excelInfo = (Dictionary<string, string>)Context.GetFromContext(savedAs);
+			var prodInfo = (ProductInformation)Context.GetFromContext(table.Rows[0]["WPSID"]);
+			string upc = Context.GetFromContext(table.Rows[0]["UPC"])?.ToString() ?? "";
+
+			Report.IsTrue(excelInfo["WPSID"] == prodInfo.Id, "Failed to match WPSID " + prodInfo.Id + " to information from excel spreadsheet. Excel: " + excelInfo["WPSID"],
+				"Successfully matched WPSID " + prodInfo.Id + " to information from excel spreadsheet.");
+
+			Report.IsTrue(excelInfo["UPC"] == upc, "Failed to find upc " + upc + " in excel spreadsheet information. Instead found: " + excelInfo["UPC"],
+				"Successfully found upc " + upc + " in excel spreadsheet information.");
+
+			Report.IsTrue(excelInfo["DPCI"] == table.Rows[0]["DPCI"], "Failed to match DPCI " + table.Rows[0]["DPCI"] + " to excel information. Excel: " + excelInfo["DPCI"],
+				"Successfully matched DPCI " + table.Rows[0]["DPCI"] + " to information in excel spreadsheet.");
+
+			Report.IsTrue(excelInfo["Product Name"] == prodInfo.Name, "Failed to match Product Name " + prodInfo.Name + " to excel information. Excel: " + excelInfo["Product Name"],
+				"Successfully matched Product Name " + prodInfo.Name + " to information in excel spreadsheet.");
+
+			Report.IsTrue(excelInfo["Supplier"] == table.Rows[0]["Supplier"], "Failed to match Supplier " + table.Rows[0]["Supplier"] + " to excel information. Excel: " + excelInfo["Supplier"],
+				"Successfully matched Supplier " + table.Rows[0]["Supplier"] + " to information in excel spreadsheet.");
+
+			Report.IsTrue(excelInfo["Status"] == table.Rows[0]["Status"], "Failed to match Status " + table.Rows[0]["Status"] + " to excel information. Excel: " + excelInfo["Status"],
+				"Successfully matched Status " + table.Rows[0]["Status"] + " to information in excel spreadsheet.");
+
+			if (table.Rows[0]["UPC Status"] == "value")
+			{
+				Report.IsTrue(excelInfo["UPC Status"] != "", "Failed to find a value in the UPC Status column", "Successfully found a value of " + excelInfo["UPC Status"] + " in the UPC Status column.");
+			}
+			else
+			{
+				Report.IsTrue(excelInfo["UPC Status"] == table.Rows[0]["UPC Status"], "Failed to match UPC Status " + table.Rows[0]["UPC Status"] + " to excel information. Excel: " + excelInfo["UPC Status"],
+					"Successfully matched UPC Status " + table.Rows[0]["UPC Status"] + " to information in excel spreadsheet.");
+			}
+
+			if (table.Rows[0]["Product Activity Date"] == "today")
+			{
+				var date = Convert.ToDateTime(excelInfo["Product Activity Date"]);
+				DateTime today = DateTime.Today;
+
+				Report.IsTrue(date.Day == today.Day && date.Month == today.Month && date.Year == today.Year,
+					"Failed to match date to today's date. Instead found: " + excelInfo["Product Activity Date"],
+					"Successfully matched Product Activity Date to today's date.");
+			}
+			else
+			{
+				Report.IsTrue(excelInfo["Product Activity Date"] == table.Rows[0]["Product Activity Date"], "Failed to match Product Activity Date " + table.Rows[0]["Product Activity Date"] + " to excel information. Excel: " + excelInfo["Product Activity Date"],
+					"Successfully matched Product Activity Date " + table.Rows[0]["Product Activity Date"] + " to information in excel spreadsheet.");
+			}
+		}
 
 
 	}

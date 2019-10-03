@@ -215,6 +215,7 @@
     <Compile Include="Selenium Classes\RetailPartners.cs" />
     <Compile Include="Selenium Classes\ReviewDocuments.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
+    <Compile Include="Selenium Classes\SHAAdvancedReporting.cs" />
     <Compile Include="Selenium Classes\SHADocumentList.cs" />
     <Compile Include="Selenium Classes\SHAProductNotificationHistory.cs" />
     <Compile Include="Selenium Classes\SHAProductRecertificationHistory.cs" />
@@ -364,9 +365,11 @@
     </None>
     <None Include="Features\Home page\Actions.feature">
     </None>
+    <None Include="Features\Home page\Alerts.feature" />
     <None Include="Features\Home page\BulkActions.feature">
     </None>
-    <None Include="Features\HomePage.feature">
+    <None Include="Features\Home page\Filters.feature" />
+    <None Include="Features\Home page\HomePage.feature">
     </None>
     <None Include="Features\Ingredients.feature">
     </None>
@@ -493,6 +496,7 @@
     <None Include="Features\Signup.feature">
     </None>
     <None Include="Features\Sprint 15.5.2.feature" />
+    <None Include="Features\Sprint 16.feature" />
     <None Include="Features\Subscription.feature">
     </None>
     <None Include="Features\SupplierAccounts.feature">

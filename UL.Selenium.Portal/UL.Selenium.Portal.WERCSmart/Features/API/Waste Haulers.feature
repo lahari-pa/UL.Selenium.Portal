@@ -1,3 +1,4 @@
+@Shared
 @wercsmart
 @API
 @run_ApiWasteHaulers

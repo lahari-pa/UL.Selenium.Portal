@@ -63,6 +63,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ClickPageHeading(string section)
 		{
 			Delay.Seconds(10);
+            //if current section == section return
+            if(NewProduct.ActivePanelHeadingText() == section)
+            {
+                Report.Info("The panel: " + section + " is already active");
+                return;
+            }
 			Report.IsTrue(NewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
 			GeneralUtilities.Wait_for_load_finish();
 			//this.GivenIShouldSeeXPage(section);
@@ -2071,7 +2077,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			// if subscription upgrade - Proceed ?
 			var MyStepsPaymentMethods = new Steps_PaymentMethods();
 			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
-			GeneralUtilities.StudioWaitForSpinner();
+			GeneralUtilities.Wait_for_load_finish();
 			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 		}
 

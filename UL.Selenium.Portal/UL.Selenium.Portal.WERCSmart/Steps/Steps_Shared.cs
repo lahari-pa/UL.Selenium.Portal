@@ -24,7 +24,7 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
-	[Binding]
+	[Binding, Scope(Tag = "Shared")]
 	public class Steps_Shared
 	{
 		// For additional details on SpecFlow step definitions see http://go.specflow.org/doc-stepdef
@@ -4397,8 +4397,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.StartStep("Beginning shared step 75347");
 			TestReport.UseSubSteps = true;
-			TestReport.StartStep(
-				"I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQAHDPF data codes to show the Green check mark graphic");
+			TestReport.StartStep("I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQAHDPF data codes to show the Green check mark graphic");
 			Report.Info("In power tools workspace I set edit to true");
 			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
@@ -4413,6 +4412,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			new Steps_Studio().GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
 			// Do this by double clicking on the graphic and selecting the green check mark graphic from the available list and click save
@@ -5213,7 +5213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
 			Delay.Seconds(3);
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left","[SECT0755] Chemical Product Checklist");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 		}
 
 		[StepDefinition(
@@ -5900,6 +5900,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
 			TestReport.StartStep("I right click the product");
 			shaSteps.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
+			// saving the current window so we can naviate back from UPC List
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
 			TestReport.StartStep("I click 'UPC List'");
 			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
 		}
@@ -7491,9 +7494,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 78879 - Additional Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP \(NO\), GNFR \(NO\), Continue")]
+			@"I call Shared Step 96169 - SHA Manager - Select Product - Actions - (.*) for saved as: (.*)")]
+		public void ICallSharedStep96169SHAManager_SelectProduct_Actions(string reportType, string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Select product");
+			var myStudioShaManager = new StudioSHAManager();
+			if (!myStudioShaManager.Wait_for_load(30))
+			{
+				Report.Error("Studio SHA Manager is not showing");
+			}
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+			Report.IsTrue(myStudioShaManager.SelectProductByID(id), "Failed to select product with id: " + id,
+				"Selected product with id: " + id);
+			TestReport.StartStep("Click Advanced Reporting");
+			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption(reportType),
+				"Failed to click document management", "Clicked document management");
+
+		}
+
+		[StepDefinition(
+					@"I call Shared Step 78879 - Additional Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP \(NO\), GNFR \(NO\), Continue")]
 		public void
-			ThenICallSharedStep78879AdditionalProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue()
+					ThenICallSharedStep78879AdditionalProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue()
 		{
 			var MyNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -8587,7 +8612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
-				
+
 
 		[StepDefinition(@"I call Shared Step 57264 \(Go To Retail Partners - Select O'Reilly\)")]
 		public void Shared57264_GoToRetailPartners_SelectOReilly()
@@ -8800,8 +8825,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click Continue");
 			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
 
-		}		
-						
+		}
+
 
 		[StepDefinition(
 			@"I call Shared Step 89286 - Additional Product Information - US and Canada - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP\(YES\), GNFR \(NO\), Continue")]
