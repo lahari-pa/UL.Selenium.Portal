@@ -730,46 +730,50 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<ProductGridItem> GetAllProducts(bool firstPage = false)
 		{
+			Report.Info("Getting all products in the grid");
 			var rList = new List<ProductGridItem>();
 			string lastPageText = this.LastPage();
 			if (!int.TryParse(lastPageText, out int lastPage))
 			{
+				Report.Error("Failed to get last page as an int!");
 				return null;
 			}
-
+			Report.Info("There are " + lastPage + " pages of products");
 			string activeText = this.ActivePage();
 			if (!int.TryParse(activeText, out int activePage))
 			{
+				Report.Error("Failed to get current page as an int!");
 				return null;
 			}
-
-			if (firstPage)
-			{
-
-			}
-
 			while (activePage <= lastPage)
 			{
 				Report.Info("Getting products on page: " + activePage);
-				int productCount = this.ProductsCount();
-				Report.Info("There are " + productCount + " products on this page");
-				for (int i = 1; i <= productCount; i++)
+				try
 				{
-					ProductGridItem thisProduct = this.ProductInRow(i);
-					rList.Add(thisProduct);
+					int productCount = this.ProductsCount();
+					for (int i = 1; i <= productCount; i++)
+					{
+						ProductGridItem thisProduct = this.ProductInRow(i);
+						rList.Add(thisProduct);
+					}
+					if (!this.NextDisabled() && this.GridNavigation("next"))
+					{
+						GeneralUtilities.Wait_for_load_finish();
+						activePage++;
+						continue;
+					}
+					if (activePage != lastPage)
+					{
+						Report.Error("Next is disabled but not on the last page of the products grid!");
+					}
+					break;
 				}
-
-				if (!this.NextDisabled() && this.GridNavigation("next"))
+				catch(Exception e)
 				{
-					Report.Info("Getting produts from the next page");
-					GeneralUtilities.Wait_for_load_finish();
-					activePage++;
-					continue;
+					Report.Error(e);
+					throw;
 				}
-
-				break;
 			}
-
 			Report.Info("Returning to the first page in the products grid");
 			this.ClickPage("1");
 			GeneralUtilities.Wait_for_load_finish();
