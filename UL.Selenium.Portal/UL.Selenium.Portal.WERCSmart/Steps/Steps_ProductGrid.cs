@@ -1875,7 +1875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmAllProductsInGridContainTextInRetailersColumn(string retailer)
 		{
 			List<ProductGridItem> allProducts = new ProductsGrid().GetAllProducts();
-			var idsFail = allProducts.Where(x => !x.Retailers.Contains(retailer) && !x.Retailers.Contains("All")).Select(x => x.ProductId).ToList();
+			var idsFail = allProducts.Where(x => !x.Retailers.Contains(retailer) && !x.Retailers.Contains($"{retailer}**") && !x.Retailers.Contains("All")).Select(x => x.ProductId).ToList();
 			Report.IsTrue(idsFail.Count == 0,
 				$@"Not all products in the grid contained either ""{retailer}"" or ""All"". Product Ids: {string.Join(", ", idsFail.Select(x => $"'{x}'").ToList())}",
 				$@"All products in the grid contained either ""{retailer}"" or ""All""");
