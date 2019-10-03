@@ -1,4 +1,5 @@
-﻿@Login
+﻿@Shared
+@Login
 @UlSolutionCenter
 @Homepage
 @ProductGrid

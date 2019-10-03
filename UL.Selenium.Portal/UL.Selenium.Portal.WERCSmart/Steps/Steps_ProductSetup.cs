@@ -313,7 +313,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			thisGlobalSteps.NavigateToLandingPage();
 			// Log in to administrator role
-			Report.Info("Starting Shared Step 67823 Login To WERCSmart_ProductsAutomationAccount");
+			TestReport.StartStep("Starting Shared Step 67823 Login To WERCSmart_ProductsAutomationAccount");
 			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
 			//thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
 			// Generate UPC number and delete duplicates
@@ -322,43 +322,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Removing all refernces to the UPC generated");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75335");
 			// 57408 (Create a New Registration via Register New Product icon)
-			Report.Info("Create a New Registration via Register New Product icon");
+			TestReport.StartStep("Create a New Registration via Register New Product icon");
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			// 57500 (The Product- Enter name, select product type - Continue - Happy Path)
-			Report.Info("The Product- Enter name, select product type - Continue - Happy Path");
+			TestReport.StartStep("The Product- Enter name, select product type - Continue - Happy Path");
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
 			// 26897 (Product Characteristics - Solid only available - continue)
-			Report.Info("Product Characteristics - Solid only available - continue");
+			TestReport.StartStep("Product Characteristics - Solid only available - continue");
 			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
 			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-			Report.Info("Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path");
+			TestReport.StartStep("Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path");
 			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-			Report.Info("(Ingredients - add any chemical) with name: Sodium hydroxide");
+			TestReport.StartStep("(Ingredients - add any chemical) with name: Sodium hydroxide");
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-			Report.Info("Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
+			TestReport.StartStep("Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			// 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: CVS
-			Report.Info("(Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS");
+			TestReport.StartStep("(Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS");
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("CVS");
 
 			Context.AddToContext("retailer", "CVS");
 			// 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40
-			Report.Info("(Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40");
+			TestReport.StartStep("(Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40");
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75335",
 				"Metal Container", "40");
 			// 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-			Report.Info("Regulatory Documents to Provide - US only - request authoring - Happy Path");
+			TestReport.StartStep("Regulatory Documents to Provide - US only - request authoring - Happy Path");
 			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
 			// Click continue
 			newProductSteps.ClickContinue();
 			// Click continue
 			newProductSteps.ClickContinue();
 			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-			Report.Info("Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path");
+			TestReport.StartStep("Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path");
 			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
 				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
 				"Partition Coefficient");
@@ -367,13 +367,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 					sdsTable);
 			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
-			Report.Info("Comments - Happy Path");
+			TestReport.StartStep("Comments - Happy Path");
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
-			Report.Info("Data Acceptance - Click Accept - Happy Path");
+			TestReport.StartStep("Data Acceptance - Click Accept - Happy Path");
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
 			// If purchase details are showing click confirm order
-			Report.Info("If purchase details are showing click confirm order");
+			TestReport.StartStep("If purchase details are showing click confirm order");
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			// 65080 (Login to Studio and Open SHA manager)
 			//********************
@@ -382,8 +382,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.Info(
-				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
+			TestReport.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Submitted");
@@ -391,8 +390,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.Info(
-				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned");
+			TestReport.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
@@ -400,26 +398,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
-			Report.Info(
-				"75347 (WPS) Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase75335");
+			TestReport.StartStep("75347 (WPS) Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase75335");
 			sharedSteps.GivenICallSharedWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTNGHSAndSBCS(savedAs);
 			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
-			Report.Info("WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved");
+			TestReport.StartStep("WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved");
 			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
 			// 59066(Go to SHA Manager)
-			Report.Info("Go to SHA Manager");
+			TestReport.StartStep("Go to SHA Manager");
 			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.Info(
-				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Accepted");
+			TestReport.StartStep("the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Accepted");
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Accepted");
-			Report.Info("49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase75335)");
+			TestReport.StartStep("49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase75335)");
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", savedAs);
-			Report.Info("(SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)");
+			TestReport.StartStep("(SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)");
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.Info("51664 (SHA - Accepted); Product - set Retailers to Completed for saved as: TestCase75335)");
+			TestReport.StartStep("51664 (SHA - Accepted); Product - set Retailers to Completed for saved as: TestCase75335)");
 			var table4 = new Table(new string[] {
 				"Retailer"
 			});
@@ -427,10 +423,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"CVS"
 			});
 			sharedSteps.GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(savedAs, table4);
-			Report.Info("(SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)");
+			TestReport.StartStep("(SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)");
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.Info(
-				"In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed");
+			TestReport.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed");
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);

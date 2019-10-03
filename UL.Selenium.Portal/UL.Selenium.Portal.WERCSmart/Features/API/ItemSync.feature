@@ -1,4 +1,5 @@
-﻿@wercsmart
+﻿@Shared
+@wercsmart
 @API
 @Homepage
 @SupplierReports

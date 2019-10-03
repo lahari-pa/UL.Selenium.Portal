@@ -8,23 +8,22 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class LiveHelp : BaseObject
+	class LiveHelp : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@class='h-conv ember-view']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		private const string _basePath = "//div[@class='h-conv ember-view']";
+
+		protected override By ContainerElementLocator => By.XPath(_basePath);
 
 		public bool Wait_for_load()
 		{
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"), 5);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-			return base.Wait_for_load(30);
+			return base.WaitForContainerToBeVisible();
 		}
 
 		public bool VerifyThreeLinesIcon()
 		{
-			return this.containerElement.FindElement(By.XPath(".//span[@class='ic-chat']//i"), 5) != null;
+			return this.containerElement.FindElement(By.XPath(".//span[@class='ic-chat']//i"), 2) != null;
 		}
 
 		public bool VerifyX()
@@ -62,14 +61,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_attachment']"), 2) != null;
 			}
-			else if (icon == "smiley")
+			if (icon == "smiley")
 			{
 				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_smiley']"), 2) != null;
 			}
-			else
-			{
-				return false;
-			}
+			return false;
 		}
 
 		public bool ClickCloseX()

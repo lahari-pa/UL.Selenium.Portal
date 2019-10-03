@@ -24,7 +24,7 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
-	[Binding]
+	[Binding, Scope(Tag = "Shared")]
 	public class Steps_Shared
 	{
 		// For additional details on SpecFlow step definitions see http://go.specflow.org/doc-stepdef
@@ -4397,8 +4397,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.StartStep("Beginning shared step 75347");
 			TestReport.UseSubSteps = true;
-			TestReport.StartStep(
-				"I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQAHDPF data codes to show the Green check mark graphic");
+			TestReport.StartStep("I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQAHDPF data codes to show the Green check mark graphic");
 			Report.Info("In power tools workspace I set edit to true");
 			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
@@ -4413,6 +4412,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			new Steps_Studio().GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
 			// Do this by double clicking on the graphic and selecting the green check mark graphic from the available list and click save
@@ -5900,6 +5900,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
 			TestReport.StartStep("I right click the product");
 			shaSteps.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
+			// saving the current window so we can naviate back from UPC List
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
 			TestReport.StartStep("I click 'UPC List'");
 			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
 		}

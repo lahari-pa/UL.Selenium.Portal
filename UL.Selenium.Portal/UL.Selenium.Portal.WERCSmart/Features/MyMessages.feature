@@ -1,3 +1,4 @@
+@Shared
 @wercsmart
 @Login
 @UlSolutionCenter

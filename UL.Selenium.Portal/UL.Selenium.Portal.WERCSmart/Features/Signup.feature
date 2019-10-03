@@ -1,3 +1,4 @@
+@Shared
 @SubEnrollment
 @LandingPage
 @PaymentMethods
