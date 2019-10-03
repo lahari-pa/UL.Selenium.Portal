@@ -30,5 +30,3 @@ And there should be products available in the Products Grid
 Given I search for the first product in the table
 
 Then I should see the product returned in the search results
-
-Then the WERCSmart homepage should load
