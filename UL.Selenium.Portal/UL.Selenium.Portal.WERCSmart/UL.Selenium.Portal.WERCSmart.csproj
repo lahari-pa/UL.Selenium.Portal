@@ -318,6 +318,7 @@
     </None>
     <None Include="Features\Basic Tests.feature">
     </None>
+    <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd2.feature" />
     <None Include="Features\Canadian Tire\Forwarding\AccountHasStewardship.feature">
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\1 Account has no Canada Data.feature">
