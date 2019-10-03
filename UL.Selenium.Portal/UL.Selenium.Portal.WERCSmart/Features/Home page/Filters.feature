@@ -78,62 +78,6 @@ Scenario: [68413] More Filters - Retailer
 	Given I click More Filters in the products grid
 	And I confirm the filter with label: "Retailer" is displayed and default option: "All Retailers"
 	And I confirm retailers list based on environment
-	#And I should see the following options for the Retailer filter
-	#| Option                 |
-	#| Ahold                  |
-	#| Albertsons Companies   |
-	#| Amazon                 |
-	#| Autozone               |
-	#| Bed Bath and Beyond    |
-	#| Canadian Tire          |
-	#| Costco                 |
-	#| CVS                    |
-	#| Delhaize               |
-	#| Dick's Sporting Goods  |
-	#| Dollar General         |
-	#| Dollar Tree            |
-	#| Essendant              |
-	#| Family Dollar          |
-	#| Genuine Parts          |
-	#| Harbor Freight Tools   |
-	#| HD Supply              |
-	#| HyVee                  |
-	#| Kohl's                 |
-	#| Kroger                 |
-	#| Lowes                  |
-	#| McLane                 |
-	#| Meijer                 |
-	#| Michaels               |
-	#| New Egg                |
-	#| Northgate Market       |
-	#| Office Depot           |
-	#| O'Reilly Auto Parts    |
-	#| Petco                  |
-	#| Price Chopper          |
-	#| Publix                 |
-	#| Rite Aid               |
-	#| Save Mart Supermarkets |
-	#| Schnucks               |
-	#| Sears K Mart           |
-	#| Smart & Final          |
-	#| Staples                |
-	#| SuperValue             |
-	#| Target                 |
-	#| The Home Depot         |
-	#| Topco                  |
-	#| Tractor Value Supply   |
-	#| Ultra Standard         |
-	#| Unified                |
-	#| Wakefren               |
-	#| Walgreens              |
-	#| BONBONS                |
-	#| Walmart.com            |
-	#| Hayneedle              |
-	#| Jet                    |
-	#| MODCLOTH               |
-	#| Moosejaw               |
-	#| Shoes.com              |
-	#| Walmart                |
-	#| Winco Foods            |
 	And I select the Wal-Mart/SAM'S CLUB option in the Retailer More Filters drop down
+	And I Select the check box next to Show Archived Retailers
 	And I confirm all products in the grid contain either the the text "WM" or "All" under the 'Retailers' column
