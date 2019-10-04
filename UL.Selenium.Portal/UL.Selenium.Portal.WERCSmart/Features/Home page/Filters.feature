@@ -41,14 +41,13 @@ Scenario: [68388] More Filters - Brand
 
 @morefilters
 Scenario: [56829] More Filters
-	# Consider creating the test product from scratch every time? nb kit 13 58753
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-		Given I search for product by name: Kit Product 56829 and save the first ID as: Kit_56829
+	Given I search for product by name: Kit Product 56829 and save the first grid item as: Kit_56829
 	And I create a Kit product and save details as: Kit_56929
 	And I navigate to the landing page
 	And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-		And I should see an option for More Filters
+	And I should see an option for More Filters
 	Given I click More Filters in the products grid
 	Given I confirm the product exists with Product ID: <Kit_56829> and Name: Kit Product 56829
 	Given I enter combinations of More Filters and should see the product ID: <Kit_56829> only for the correct combinations

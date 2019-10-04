@@ -5905,6 +5905,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			TestReport.StartStep("I click 'UPC List'");
 			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+			Delay.Seconds(3);
 		}
 
 		[StepDefinition(@"I call Shared Step 55637 \(SHA - Process UPC Update for Specific product\) saved as: (.*)")]

@@ -11,6 +11,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
+using Castle.Core.Internal;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -1165,15 +1166,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmRetailerExistsForUPC(string retailer, string upc)
 		{
-			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
-			IWebElement headerRow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']"), 2);
+			IWebElement headerRow = SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//tr[@class='DarkBack']"), 10);
 			if (headerRow == null)
 			{
-				Report.Info("Could not locate 'dark black' header row");
+				Report.Error("Could not locate 'dark black' header row");
 				return false;
 			}
-			var headers = headerRow.Text.Split(' ').ToList<string>();
-
+			IList<IWebElement> rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			if (!rows.Any())
+			{
+				Report.Failure("No UPC rows were found!");
+				return false;
+			}
 			IWebElement upcRow = null;
 			foreach (IWebElement row in rows)
 			{
@@ -1183,22 +1187,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					upcRow = row;
 				}
 			}
-
 			if (upcRow == null)
 			{
 				Report.Info("Failed to find UPC " + upc + " in row!");
 				return false;
 			}
-
-			IWebElement retElement = upcRow.FindElement(By.XPath("//td[@title='" + retailer + "']"), 2);
-			if (retElement != null && retElement.Text != "")
+			IWebElement retElement = upcRow.FindElement(By.XPath(@".//td[@title=""" + retailer + @"""]"), 2);
+			if (retElement == null)
 			{
-				return true;
+				Report.Info("Could not find retailer column");
 			}
-			else
-			{
-				return false;
-			}
+			return retElement != null && !retElement.Text.IsNullOrEmpty();
 		}
 
 		public bool ConfirmUPCArchived(string upc)
