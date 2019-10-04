@@ -61,12 +61,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+			GeneralUtilities.StudioWaitForSpinner(30);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickApplyRulesButton(),
 				"Failed to click apply rules button",
 				"Clicked apply rules button");
 			var thisApplyRulesPage = new ApplyRulesPage();
 			Report.IsTrue(thisApplyRulesPage.Wait_for_load(60), "Apply rules page has failed to load",
 				"Apply rules page has loaded");
+			
 		}
 
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on document queue button")]
