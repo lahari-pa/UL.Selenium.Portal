@@ -53,14 +53,14 @@ Scenario: [56829] More Filters
 	Given I enter combinations of More Filters and should see the product ID: <Kit_56829> only for the correct combinations
 		| Filter              | Match               |
 		| UPC                 | <UPC_56829>         |
-		| Brand               | Test Brand          |
-		| Retailer            | Walmart/ SAM's Club |
+		| Brand               | TestBrand           |
+		| Retailer            | Wal-Mart/SAM'S CLUB |
 		| Additional Programs | Kit Registrations   |
 	Given I enter combinations of Status and More Filters and should see the product ID: <Kit_56829> only for the correct combinations
 		| Filter              | Match                  |
 		| Status              | Assessment in Progress |
-		| Brand               | Test Brand             |
-		| Retailer            | Walmart/ SAM's Club    |
+		| Brand               | TestBrand              |
+		| Retailer            | Wal-Mart/SAM'S CLUB    |
 		| Additional Programs | Kit Registrations      |
 	Given I click More Filters in the products grid
 	Then the 'More Filters' options are not displayed

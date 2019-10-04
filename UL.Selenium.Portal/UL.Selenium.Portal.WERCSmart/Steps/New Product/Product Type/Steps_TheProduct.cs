@@ -49,6 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 			this.SetProductLineOrBrand(brand);
 			TestReport.StartStep("Setting Type of Product to: " + type);
 			this.SetTypeOfProductTo(type);
+			new StepsNewProduct().ClickContinue();
 
 		}
 	}

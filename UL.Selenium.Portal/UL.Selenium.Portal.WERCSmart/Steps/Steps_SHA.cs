@@ -1025,6 +1025,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("No item saved in context as: " + retailerSavedAs);
 				return;
 			}
+
+			if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='upcTableOutter']"), 5) ==null)
+			{
+				Report.Failure("View UPC table was not displayed");
+				return;
+			}
 			Report.Info("UPC is: " + upc);
 			string retailer = Context.GetFromContext(retailerSavedAs).ToString();
 			//retailer = new RetailerAbbreviations().TryConvertToAbbreviation(retailer);
