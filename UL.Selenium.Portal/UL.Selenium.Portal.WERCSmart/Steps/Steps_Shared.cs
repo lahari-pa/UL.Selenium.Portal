@@ -8285,12 +8285,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("Click CONTINUE");
 			new StepsNewProduct().ClickContinue();
 		}
-		[StepDefinition(@"I call Shared Step 82831 \(The Product - Enter Product Name and Select Type of Product: (Raw Material|Mixture, Blend, Formula, Polymer or Solution from Third \(3rd, 3d\) Party)\)")]
 
+		[StepDefinition(@"I call Shared Step 82831 \(The Product - Enter Product Name and Select Type of Product: (Raw material|Mixture, Blend, Formula, Polymer or Solution from Third \(3rd, 3d\) Party)\)")]
 		public void SharedStep82831_TheProduct_EnterProductNameAndType(string type)
 		{
 			TestReport.UseSubSteps = true;
-
 			var MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the The Product Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
@@ -8304,7 +8303,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
 			var modal = new ModalDialog();
 			TestReport.StartStep("I verify the 'Warning' pop-up displays");
-			Report.IsTrue(modal.Wait_for_load() && modal.GetTitle().Contains("Warning"), "");
+			if (!Report.IsTrue(modal.WaitForContainerToBeVisible(10) && modal.GetTitle().Contains("Warning"), "Warning pop up was not displayed!", "Warning popup was displayed"))
+			{
+				return;
+			}
 			TestReport.StartStep("I confirm the warning message contains the expected text");
 			string actualMessage = modal.GetText();
 			if (actualMessage == null)
@@ -8316,8 +8318,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("I click Continue");
 					MyStepsNewProduct.ClickContinue();
 				}
-
-
 				return;
 			}
 			actualMessage = actualMessage.Replace("/r/n", "");
@@ -8336,15 +8336,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Error("Product type must be Raw Material or Mixture, Blend, Formula or Solution from 3rd Party");
-
 			}
-
 			Report.Info("Closing popup");
 			Report.IsTrue(modal.ClickButton("OK"), "Failed to click OK button", "Succesfully clicked on the OK button");
 			GeneralUtilities.Wait_for_load_finish();
-
-
-
 		}
 		[StepDefinition(@"I call Shared Step 83242 \(SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: (.*)\)")]
 		public void SharedStep83242_SubmittedOrAssignedProduct_RejectSubmission_AnySubject_Save(string savedAs)
