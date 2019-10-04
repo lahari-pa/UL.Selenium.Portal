@@ -58,5 +58,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Number of Case UPCs matches number saved.");
 		}
 
+		[StepDefinition(@"I save the first UPC associated to the product as: (.*)")]
+		public void SaveFirstUpcToContext(string savedAs)
+		{
+			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
+			if (!upcs.Any())
+			{
+				Report.Failure("No UPC numbers were found!");
+				return;
+			}
+			Report.Info("UPC number: " + upcs.First());
+			Context.AddToContext(savedAs, upcs.First());
+		}
+
 	}
 }

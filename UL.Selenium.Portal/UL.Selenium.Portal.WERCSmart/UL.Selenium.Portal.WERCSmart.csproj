@@ -318,6 +318,7 @@
     </None>
     <None Include="Features\Basic Tests.feature">
     </None>
+    <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd2.feature" />
     <None Include="Features\Canadian Tire\Forwarding\AccountHasStewardship.feature">
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\1 Account has no Canada Data.feature">
@@ -365,9 +366,11 @@
     </None>
     <None Include="Features\Home page\Actions.feature">
     </None>
+    <None Include="Features\Home page\Alerts.feature" />
     <None Include="Features\Home page\BulkActions.feature">
     </None>
-    <None Include="Features\HomePage.feature">
+    <None Include="Features\Home page\Filters.feature" />
+    <None Include="Features\Home page\HomePage.feature">
     </None>
     <None Include="Features\Ingredients.feature">
     </None>

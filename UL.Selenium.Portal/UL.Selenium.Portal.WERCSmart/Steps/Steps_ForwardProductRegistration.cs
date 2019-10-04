@@ -22,23 +22,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the header: (.*) on the Forward Product Registration window")]
 		public void CorrectHeaderShowing(string headerExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Forward Product Registration window should appear");
-			try
-			{
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Info("Checking that Forward Product Registration window appears");
-				var selForwardProductRegistration = new ForwardProductRegistration();
-				string showing = selForwardProductRegistration.HeaderShowing();
-				Report.IsTrue(showing == headerExpected.Trim(),
-					"Forward Product Registration header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
-					"Forward Product Registration header was showing '" + headerExpected + "', as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Info("Checking that Forward Product Registration window appears");
+			var selForwardProductRegistration = new ForwardProductRegistration();
+			string showing = selForwardProductRegistration.HeaderShowing();
+			Report.IsTrue(showing == headerExpected.Trim(),
+				"Forward Product Registration header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
+				"Forward Product Registration header was showing '" + headerExpected + "', as expected!");
+			Report.Screenshot();
 		}
 
 		/// <summary>
@@ -710,6 +701,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
             Report.Info("Retailer: " + aRetailer);
+			//        var abbreviationMappings = new RetailerAbbreviations().Map;
+			//        if (abbreviationMappings.ContainsKey(aRetailer))
+			//        {
+			//// then we need to convert from full retailer name to abbreviation because the UPC page displays the abbrv
+			////aRetailer = abbreviationMappings.FirstOrDefault(x => x.Key == aRetailer).Value;
+			//abbreviationMappings.TryGetValue(aRetailer, out string retailer);
+			//if (retailer != null)
+			//{
+			//	aRetailer = retailer;
+			//}
+			//        }
+			aRetailer = new RetailerAbbreviations().TryConvertToAbbreviation(aRetailer);
+			Report.Info("Retailer: " + aRetailer);
 			List<ForwardProductRegistration.ProductResults> listProductResults = selForwardProdReg.GetProductResults();
 			foreach (var productResults in listProductResults)
 			{
@@ -725,20 +729,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
             Report.Failure("Failed to find retailer: " + aRetailer + " for UPC number: " + aUPCNumber);
-			//ForwardProductRegistration.ProductResults matchingListItem = listProductResults.FirstOrDefault(x =>
-			//	x.UPCs != null && x.UPCs.FirstOrDefault(y => y.UPCNumber!= null && y.UPCNumber == aUPCNumber).DestinationRetailers.Contains(aRetailer));
-
-			//Report.IsTrue(matchingListItem != null,
-			//	"Failed to find matching item for UPCNumber: " + aUPCNumber + " and retailer: " + aRetailer,
-			//	"Found matching item for UPCNumber: " + aUPCNumber + " and retailer: " + aRetailer);
-		}
-
-		[StepDefinition(@"I confirm that NO Errors display for the Product")]
-		public void ThenIConfirmThatNOErrorsDisplayForTheProduct()
-		{
-			var selForwardProdReg = new ForwardProductRegistration();
-			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
-
 		}
 
 		[StepDefinition(@"I confirm that there are NO Errors displayed for the Product")]

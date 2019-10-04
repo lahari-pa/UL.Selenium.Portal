@@ -1,4 +1,5 @@
-﻿@wercsmart
+@Shared
+@wercsmart
 @run_ULToys
 @ConflictMinerals
 @WERCSmart_ChooseGoodGuide

@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -181,7 +182,7 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	Given I generate a random UPC number and save as: UPC80821
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw material
 	Then I save the product information as: TestCase80821
 	And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808211
 		| CASNumber | ComponentName | Percentage | Publicly Disclosed | Public Name            |
@@ -189,8 +190,8 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a success
 	And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808212
-		| CASNumber  | ComponentName | Percentage | Publicly Disclosed | Public Name            |
-		| 37334-84-2 | Cellolyn 21   | 15         | No                 | Undisclosed Ingredient |
+		| CASNumber  | ComponentName | Percentage | Publicly Disclosed |
+		| 37334-84-2 | Cellolyn 21   | 15         | No                 |
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 2
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 	And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing808213
@@ -204,8 +205,8 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 4
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 	And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808215
-		| CASNumber | ComponentName    | Percentage | Publicly Disclosed | Public Name            |
-		| FLAVOR    | 611 Grape Flavor | 10         | No                 | Undisclosed Ingredient |
+		| CASNumber | ComponentName    | Percentage | Publicly Disclosed |
+		| FLAVOR    | 611 Grape Flavor | 10         | No                 |
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 5
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 	And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808216
@@ -230,15 +231,13 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	And I should see the Additional Documents to Provide Page
 	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-	Then in the Additional documents page I click Continue
-	Then in the Product aliases page I click Continue
+	Then in the Additional Documents to Provide page I click Continue
+	Then in the Product Aliases page I click Continue
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-	#Scenario: test
-	#Given I save to context name: TestCase80821 and value: 1525198
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80821)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Submitted
