@@ -436,6 +436,7 @@ Scenario: [58579] Live Help - Chat Feature
 	Then In the Live Help dialog I should see the smiley icon in the lower right hand corner
 	Given In the Live Help dialog I click on the x to close
 
+@ScenarioId:1514
 Scenario: [56829] More Filters
 	# Consider creating the test product from scratch every time? nb kit 13 58753
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
