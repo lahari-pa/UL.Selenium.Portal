@@ -284,8 +284,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InApplyRulesPageIClickOnTheSingleRulesEllipsisButton()
 		{
 			var thisApplyRulesPage = new ApplyRulesPage();
-			Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis",
-				"Clicked single rules ellipsis");
+			Delay.Seconds(3);
+			int i = 0;
+			bool successClick = false;
+			while (i < 5||!successClick)
+			{
+				if (thisApplyRulesPage.ClickSingleRuleEllipsis())
+				{
+					Report.Success("Clicked single rules ellipsis");
+					successClick = true;
+				}
+				else
+				{
+					Report.Info("Failed to click single rules ellipsis");
+
+				}
+				Delay.Seconds(2);
+				i++;
+			}
+			//Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis",
+			//	"Clicked single rules ellipsis");
 			Delay.Seconds(3);
 			var thisSelectRulesPage = new SelectRulesPage();
 			Report.IsTrue(thisSelectRulesPage.Wait_for_load(120), "Select rules page has not loaded",

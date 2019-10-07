@@ -17,6 +17,7 @@ Feature: Sign Up
 Background:
 	Given I go to the WERCSmart Log in
 
+@ScenarioId:1531
 Scenario: [53069] Signup - Account Creation - Happy Path
 	Given I define the user: SignupUser with the following parameters:
 		| Field                | Value                   |

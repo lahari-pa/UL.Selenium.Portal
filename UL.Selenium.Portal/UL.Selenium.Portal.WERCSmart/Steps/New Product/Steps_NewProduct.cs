@@ -2499,6 +2499,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("input values must be either 'should' or 'should not'");
 			}
 		}
+
+		[StepDefinition(@"In the Regulatory Documents to Provide Page I check that all input fields are shown as red")]
+		public void InTheRegulatoryDocumentsToProvidePageICheckThatAllInputFieldsAreRed()
+		{
+
+		}
+
+
 		#endregion
 
 

@@ -686,7 +686,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					Report.Info("The Num input was not displayed. Clicking the '...' navigation element");
 					this.GridNavigation("...");
-					inputEl = this.GridNavigationInput();
+					inputEl = this.GridNavigationInput();					
 					if (inputEl == null)
 					{
 						return false;
