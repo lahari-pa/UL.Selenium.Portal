@@ -59,16 +59,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see the (.*) Page")]
-		[StepDefinition(@"in the UPC Window, I should see the (.*) Page")]
-		public void GivenIShouldSeeXPage(string page)
-		{
-			var selNewProduct = new UPC();
-			Report.IsTrue(selNewProduct.WaitForSection(page),
-				page + " is not showing when it was expected to",
-				page + " is showing as expected");
-			Report.Screenshot();
-		}
+		//[StepDefinition(@"I should see the (.*) Page")]
+		//[StepDefinition(@"in the UPC Window, I should see the (.*) Page")]
+		//public void GivenIShouldSeeXPage(string page)
+		//{
+		//	var selNewProduct = new UPC();
+		//	Report.IsTrue(selNewProduct.WaitForSection(page),
+		//		page + " is not showing when it was expected to",
+		//		page + " is showing as expected");
+		//	Report.Screenshot();
+		//}
 
 		[StepDefinition(@"I add the following into the UPC case fields")]
 		public void ThenIAddTheFollowingIntoTheUpcFields(Table table)

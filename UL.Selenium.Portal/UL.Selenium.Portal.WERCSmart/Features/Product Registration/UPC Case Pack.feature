@@ -299,8 +299,6 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
 	
-	
-
 @singlerun
 Scenario: [87894] Forwarding - Edit existing Case UPC 
 
@@ -350,6 +348,52 @@ Then I Check that the product under the retailer: <ChosenRetailer87894> is under
 Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87894
 Then I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: UPC876851 for the retailer: Amazon using details saved in the table: EditCaseUPCTable87894
 
+Scenario: [87835] View UPCs shows Case UPC Data
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#And I In the shared step below select "Chalk" as you Product Type
+#And I Make a note of the WPS ID shown at the top of the screen
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer |
+|          |
+And [Shared Step 87647 - UPC - Add UPC, Container, Size, Packing type if shown, DO NOT CLICK CONTINUE]
+And [Shared Step 87829 - UPC - Add Case UPC - All Data > Continue]
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+And I should see the Additional Documents to Provide Page
+And I click continue
+And I should see the Optional Reports and Documents Available for Purchase Page
+And I click continue
+#And I Confirm the "Optional Reports and Documents Available for Purchase" step is shown- Click Continue
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 
-
-
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I navigate to the home page
+And I search for the product saved as: TestCase87835
+And I click Row Actions for the first product returned
+And I click on the Row Action: View UPCs
+And I Confirm you see the Case UPC Number
+And I Confirm the truck icon is shown next to the Case UPC Number (this indicates we have a Case UPC)
+And I Confirm you see the UPC Number you selected as the Individual UPC contained in the Case Pack shown under the Associated UPC column for the Case UPC
+And I Confirm you see the Container Type shown for the Case UPC
+And I Confirm that you see a value in the Size column for the Case UPC
+And I Confirm that you see a value in theQuantity column for the Case UPC
+And I Confirm that you see the entry you selected for the Transportation Options shown in the Transport column for the Case UPC
+And I Confirm that the Retailer column shows the retailer you selected for the Case UPC
+And I Confirm that the regular UPC Number is shownin the UPC Number column
+And I Confirm that the regular UPC row does not show the truck icon next to the regular UPC number
+And I Confirm that the UPC number shown in the UPC Number column for the regular UPC matches the UPC number shown in the Associated UPC column for the Case UPC
+And I Confirm that the Associated column for the regular UPC is blank
+And I Confirm that the Container Type shown for the regular UPC shows the option you selected on the UPC step
+And I Confirm that you see a value in the Size column for the regular UPC
+And I Confirm that the Quantity and Transport columns for the regular UPC are blank
+And I Confirm that the Retailer column shows the retailer you selected for the regular UPC
+And I Close the summary view tab and return to the WERCSmart page
+And I Close the View UPC window and return to the WERCSmart screen
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: (.*)
