@@ -26,6 +26,7 @@ Feature: Flow 12
 @ScenarioId:793
 Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+# create a new account
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Raw material)
 Then I save the product information as: TestCase58430
