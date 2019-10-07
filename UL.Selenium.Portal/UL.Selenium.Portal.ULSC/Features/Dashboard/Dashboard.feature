@@ -21,14 +21,14 @@ Feature: Dashboard
 # Test case can be found at the following paths:
 # NetProjects10\PowerUnity\2. WERCSLink - Dashboard
 # NetProjects10\WercsSmart Portal\ULSC - UL Secure Connect\2. ULSC - Dashboard
-@TReVorId:22180
+@ScenarioId:1517
 Scenario: [52975] Layout
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 And I call Shared Step 29148 - Login to ULSC as an Administrator User
 And I should see the WERCSLink dashboard
 And I Confirm the Layout shows a header, left hand navigation, Message center and KPI areas
 
-@TReVorId:22181
+@ScenarioId:1518
 Scenario: [52977] Header
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 Given I call Shared Step 29148 - Login to ULSC as an Administrator User
@@ -54,7 +54,7 @@ Then I confirm a new tab opens with url: https://psi.ul.com/en/
 # Test case can be found at the following paths:
 # NetProjects10\PowerUnity\2. WERCSLink - Dashboard
 # NetProjects10\WercsSmart Portal\ULSC - UL Secure Connect\2. ULSC - Dashboard
-@TReVorId:22182
+@ScenarioId:1519
 Scenario: [52987] Navigation pane
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 Given I call Shared Step 29148 - Login to ULSC as an Administrator User
@@ -112,7 +112,7 @@ And I should see the WERCSLink dashboard
 # NetProjects10\PowerUnity\2. WERCSLink - Dashboard
 # NetProjects10\WercsSmart Portal\ULSC - UL Secure Connect\2. ULSC - Dashboard
 
-@TReVorId:22183
+@ScenarioId:1520
 Scenario: [52993] Message Center - layout
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 Given I call Shared Step 29148 - Login to ULSC as an Administrator User
@@ -144,7 +144,7 @@ And I confirm the following widget panels are displayed on the Dashboard page:
 # Test case can be found at the following paths:
 # NetProjects10\PowerUnity\2. WERCSLink - Dashboard
 # NetProjects10\WercsSmart Portal\ULSC - UL Secure Connect\2. ULSC - Dashboard
-@TReVorId:22184
+@ScenarioId:1521
 Scenario: [52995] KPIs - Defaults
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 Given I call Shared Step 29148 - Login to ULSC as an Administrator User
