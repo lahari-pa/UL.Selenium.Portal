@@ -302,6 +302,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(2);
 				i++;
 			}
+			if (successClick==false)
+			{
+				Report.Failure("Failed to click single rules ellipsis after 5 tries");
+			}
 			//Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis",
 			//	"Clicked single rules ellipsis");
 			Delay.Seconds(3);
