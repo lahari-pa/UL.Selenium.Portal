@@ -880,68 +880,68 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = false;
 		}
 
-		[StepDefinition(@"I Check there is an new email for user: (.*) from: (.*) with the title: (.*) and I download the attachment")]
-		public void ICheckThereIsANewEmailForEmamilWithSpecifiedFromAndTitleAndDownloadAttachment(string shouldOrNot, string savedAs, string emailFrom, string title)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
-			try
-			{
-				if (emailFrom.ToLower() == "<sitenotification>")
-				{
-					emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
-				}
+		//[StepDefinition(@"I Check there is an new email for user: (.*) from: (.*) with the title: (.*) and I download the attachment")]
+		//public void ICheckThereIsANewEmailForEmamilWithSpecifiedFromAndTitleAndDownloadAttachment(string shouldOrNot, string savedAs, string emailFrom, string title)
+		//{
+		//	TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
+		//	try
+		//	{
+		//		if (emailFrom.ToLower() == "<sitenotification>")
+		//		{
+		//			emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
+		//		}
 
-				Report.Info("Expecting email from: " + emailFrom);
+		//		Report.Info("Expecting email from: " + emailFrom);
 
-				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
-				if (user == null)
-				{
-					Report.Error("Failed to find a WERCSmart User saved as: " + savedAs);
-				}
+		//		var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+		//		if (user == null)
+		//		{
+		//			Report.Error("Failed to find a WERCSmart User saved as: " + savedAs);
+		//		}
 
-				Report.Info("Checking for email differences");
+		//		Report.Info("Checking for email differences");
 
-				Delay.Seconds(60);
-				if (EmailFunctions.WaitForInboxDifferences(user.Email))
-				{
-					this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
-				}
-				else
-				{
-					if (shouldOrNot == "should not")
-					{
-						Report.Success("As expected, no email has been received");
-					}
-					else
-					{
-						// Try once more just in case there is a delay in recieving the email
-						Report.Info("Email did not arrive on first attempt, so trying again...");
-						int i = 0;
-						while (i < 5)
-						{
-							Report.Info("Attempt: " + (i + 1));
-							if (EmailFunctions.WaitForInboxDifferences(user.Email))
-							{
-								this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
-								return;
-							}
+		//		Delay.Seconds(60);
+		//		if (EmailFunctions.WaitForInboxDifferences(user.Email))
+		//		{
+		//			this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
+		//		}
+		//		else
+		//		{
+		//			if (shouldOrNot == "should not")
+		//			{
+		//				Report.Success("As expected, no email has been received");
+		//			}
+		//			else
+		//			{
+		//				// Try once more just in case there is a delay in recieving the email
+		//				Report.Info("Email did not arrive on first attempt, so trying again...");
+		//				int i = 0;
+		//				while (i < 5)
+		//				{
+		//					Report.Info("Attempt: " + (i + 1));
+		//					if (EmailFunctions.WaitForInboxDifferences(user.Email))
+		//					{
+		//						this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
+		//						return;
+		//					}
 
-							i++;
-						}
+		//					i++;
+		//				}
 
-						throw new Exception("Expected email did not arrive");
-					}
+		//				throw new Exception("Expected email did not arrive");
+		//			}
 
-				}
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		Report.Failure(ex.Message);
+		//		throw;
+		//	}
 
-			//EmailFunctions.
-		}
+		//	//EmailFunctions.
+		//}
 
 	}
 }
