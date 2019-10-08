@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 @Shared
->>>>>>> eed28dce320a96c907b121242ef0e7aa9dd7e89b
 @LandingPage
 @Login
 @Homepage
@@ -65,3 +62,30 @@ Scenario: [105329] PM Monthly Status Report - Target
 	And I confirm that the following information is present in the excel info saved as: ExcelInfo105329:
 		| WPSID          | UPC       | DPCI                                | Product Name   | Supplier                      | Status | UPC Status | Product Activity Date |
 		| TestCase105329 | UPC105329 | 123-11-1234,125-22-1254,123-33-2589 | Shampoo Liquid | QA_Automation_ProductsAccount | New    | value      | today                 |
+
+@ScenarioId:1530
+Scenario:[96226] Daily Report - Registration Traffic
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And In SHA Manager - Select Actions - Advanced Reporting
+	Given In the Advanced Reporting popup I select report Daily Report - Registration Traffic
+	Then I enter start date 01-01-2019 and end date 01-02-2019 for Advanced Reporting
+	Then In the Advanced Reporting popup I click Submit
+	#And I verify the Preparing Report popup displays
+	Given I confirm that an excel file is produced called Daily Report - Registration Traffic.xls and save as 96226
+	Then I confirm that the excel file saved as: 96226 contains the following columns:
+		| Column                         |
+		| New                            |
+		| Forward                        |
+		| UPC Additions                  |
+		| Pest Updates                   |
+		| Recertified                    |
+		| Updated                        |
+		| Rejected                       |
+		| Suspended                      |
+		| Published (Auto or Manual)     |
+		| SDS Authoring - NGHS           |
+		| SDS Authoring - Other          |
+		| SDS Authoring - Add'l Language |
+		| UPCs Completed to Retail       |
+		| Product IDs Complete to Retail |
+	And I verify the file saved as: 96226 contains integers in all fields on the first data row

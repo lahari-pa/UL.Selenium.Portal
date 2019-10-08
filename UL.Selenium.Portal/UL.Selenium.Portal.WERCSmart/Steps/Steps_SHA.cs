@@ -1026,7 +1026,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
-			if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='upcTableOutter']"), 5) ==null)
+			if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='upcTableOutter']"), 5) == null)
 			{
 				Report.Failure("View UPC table was not displayed");
 				return;
@@ -2687,7 +2687,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenInSHAManagerPageIRunSearch(table);
 		}
 
-		[Given(@"I verify the popup message displays with the title ""(.*)""")]
+		[StepDefinition(@"I verify the popup message displays with the title ""(.*)""")]
 		public void GivenIVerifyThePopupMessageDisplaysWithTheTitle(string title)
 		{
 
@@ -2695,7 +2695,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Unable to locate popup entitled " + title + ", instead found " + displayedTitle,
 				"Located popup titled " + displayedTitle);
 		}
-		[Then(@"I verify the popup data using UPC: (.*)")]
+
+		[StepDefinition(@"I verify the file saved as: (.*) contains integers in all fields on the first data row")]
+		public void ThenIVerifyTheFileSavedAsContainsIntegersInAllFieldsOnTheFirstDataRow(string savedAs)
+		{
+
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var colCount = ExcelUtils.Excel_GetNoColumns();
+				List<string> RowData = ExcelUtils.Excel_GetRow(1);
+
+				Report.IsTrue(colCount == RowData.Count,
+					FailureMessage: "The number of Columns, " + colCount + " does not equal the number of datapoints, " + RowData.Count,
+					SuccessMessage: "The number of Columns matches the number of datapoints as expected");
+
+				foreach (string data in RowData)
+				{
+					Report.IsTrue(int.TryParse(data, out int result),
+						FailureMessage: "Report contains unexpected non-integer value " + data,
+						ShowSuccessScreenshot: false);
+				}
+			}
+		}
+
+		[StepDefinition(@"In SHA Manager - Select Actions - (.*)")]
+		public void ICallSharedStep96169SHAManager_SelectProduct_Actions(string actionType)
+		{
+			var myStudioShaManager = new StudioSHAManager();
+			if (!myStudioShaManager.Wait_for_load(30))
+			{
+				Report.Error("Studio SHA Manager is not showing");
+			}
+
+			TestReport.StartStep("Click " + actionType);
+			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption(actionType),
+				"Failed to click " + actionType, "Clicked " + actionType);
+		}
+
+
+		[StepDefinition(@"I verify the popup data using UPC: (.*)")]
 		public void ThenIVerifyThePopupDataUsingUPC(string uPC)
 		{
 
@@ -2769,6 +2810,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
 		}
+
+		[Then(@"I enter start date (.*) and end date (.*) for Advanced Reporting")]
+		public void ThenIEnterStartAndEndDatesForAdvancedReporting(string startDate, string endDate)
+		{
+			Report.Info("Attempting to enter start (" + startDate + ") and end (" + endDate + ") dates");
+			Report.IsTrue(new AdvancedReportingDateForm().EnterStartEndDates(startDate, endDate),
+				FailureMessage: "Failed to update the date fields",
+				SuccessMessage: "Successfully updated the date fields");
+		}
+
+		[Then(@"I verify the (.*) popup displays")]
+		public void ThenIVerifyThePreparingReportPopupDisplays(string expectedTitle)
+		{
+			Report.IsTrue(new SHAAdvancedReporting().VerifyPopupTitle(expectedTitle, out string output),
+				FailureMessage: "Popup title is not displaying " + expectedTitle + "; instead it displays " + output,
+				SuccessMessage: "Popup displays title " + expectedTitle + " as expected");
+		}
+
 		/// <summary>
 		/// For using a retailer saved in context wrap the retailer name in '<>'
 		/// </summary>
@@ -2952,7 +3011,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
-		
+
 		[StepDefinition(@"In the Advanced Reporting popup I click Submit")]
 		public void InTheAdvancedReportingPopupIClickSubmit()
 		{
@@ -2989,7 +3048,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string shaClients = productsShown[0].Clients;
 			var shrdStep = new Steps_Shared();
 			string dog = "DOGY";
-			
+
 			TestReport.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
 			string file = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!file.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + file))
@@ -3021,7 +3080,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.IsTrue(shaClients.Contains(rowContents[5]), "The Clients in SHA did not match the Retailers associated in the file", "The Clients in SHA matched the Retailers associated in the file");
 
 
-						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");						
+						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");
 						new Steps_Shared().Shared75309_SHA_SelectProduct_UpcList(productInfoSavedAs);
 						var studioSHAManger = new StudioSHAManager();
 						var shaSteps = new Steps_SHA();

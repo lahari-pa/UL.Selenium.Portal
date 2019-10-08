@@ -1019,7 +1019,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					SeleniumBrowser.ExitIFrame();
 					if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
 					{
-						Report.Info("Couuld not switch to iframe");
+						Report.Info("Could not switch to iframe");
 						return false;
 					}
 				}

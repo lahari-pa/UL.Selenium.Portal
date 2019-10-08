@@ -11,6 +11,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
+using System;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -88,6 +89,51 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
 
 			return canClick;
+		}
+
+		public bool VerifyPopupTitle(string title, out string output)
+		{
+			IWebElement actualTitle = this.FindElement(By.Id("ui-dialog-title-preparing-file-modal"), 10);
+			output = actualTitle.Text;
+			return output == title;
+		}
+	}
+
+	class AdvancedReportingDateForm : SeleniumBaseObject
+	{
+
+		public const string BasePath = "//*[@id='panel']";
+
+		IWebElement Field { get; set; }
+
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		public bool EnterStartEndDates(string start, string end)
+		{
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			ReadOnlyCollection<IWebElement> fields = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input"));
+
+			if (fields.Count < 2)
+			{
+				Report.Info("The Date fields were unable to be located.");
+				return false;
+			}
+
+			Report.IsTrue(this.ReplaceAllTextInElementWith(start, fields[0]), "");
+			this.ReplaceAllTextInElementWith(end, fields[1]);
+
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return true;
+		}
+
+		private bool ReplaceAllTextInElementWith(string replace, IWebElement element)
+		{
+			this.Field = element;
+			string fieldText = this.Field.GetInnerText();
+			this.Field.JsEnterText(replace);
+			return !(fieldText == this.Field.GetInnerText());
 		}
 	}
 }

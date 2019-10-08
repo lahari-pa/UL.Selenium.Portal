@@ -7513,7 +7513,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("Click Advanced Reporting");
 			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption(reportType),
 				"Failed to click document management", "Clicked document management");
-
 		}
 
 		[StepDefinition(
