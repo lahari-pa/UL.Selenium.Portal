@@ -71,5 +71,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, upcs.First());
 		}
 
+		[StepDefinition(@"I confirm the UPC number saved as: (.*) is displayed as a Case UPC")]
+		public void ConfirmUpcNumberIsDisplayedAsCaseUpc(string savedAs)
+		{
+			if (!Context.Contains(savedAs))
+			{
+				return;
+			}
+			var upc = Context.GetFromContext(savedAs);
+			var caseUpcs = new ViewUpcs().CaseUPCs();
+			Report.IsTrue(caseUpcs.Any(x => x.UpcNumber == upc), "");
+
+		}
+
+		[StepDefinition(@"I save all UPC information on the 'View UPCs' page as: (.*)")]
+		public void SaveAllViewUpcInformationAs(string savedAs)
+		{
+
+		}
 	}
 }

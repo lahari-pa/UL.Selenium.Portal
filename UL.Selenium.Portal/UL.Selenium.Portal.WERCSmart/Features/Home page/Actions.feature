@@ -30,6 +30,7 @@ Feature: Actions
 Scenario: [73424] View UPCs - Product with UPCs
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then the WERCSmart homepage should load
+	# search for product with name 'Product73424' in submitted status?
 	And I create a product and save as: TestCase73424 and name as: Product73424
 	Then I navigate to the home page
 	Given I search for the product saved as: TestCase73424
