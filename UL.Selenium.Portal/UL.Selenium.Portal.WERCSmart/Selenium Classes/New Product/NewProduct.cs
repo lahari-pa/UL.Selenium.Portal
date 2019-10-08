@@ -3017,6 +3017,104 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
+
+		public bool CheckAllInputFieldsAreRed()
+		{
+			bool allFieldsRed = true;
+
+			//try doing all 3 using list
+			IWebElement infoBox1 = this.containerElement.FindElement(By.XPath(".//div[@class='dropzone']"), 2);
+			string infobox1colourStr = infoBox1.GetCssValue("background-color");
+
+			//Ilist? or use normal with ToList() but it breaks?
+			IList<IWebElement> infoBoxes = this.containerElement.FindElements(By.XPath(".//div[@class='dropzone']"), 2);
+			List<string> infoBoxColors = new List<string>();
+			foreach (var item in infoBoxes)
+			{
+				infoBoxColors.Add(item.GetCssValue("background-color"));
+			}
+
+			//if list contains anything that is not (color code for the red background) = false otherwise = true
+
+			//if (infoBoxColors.Find(x => x.Contains("TEST")))
+			//{
+
+			//}
+
+			foreach (var item in infoBoxes)
+			{
+
+				//string boxHeader = item.FindElement(By.XPath("//parent::div//preceding-sibling::span"), 2);
+
+				if (item.GetCssValue("background-color") == "#fff0f0") //may need to find correct expect colour code as string by debug
+				{
+					Report.Success("The Colour of the Input field was red"); //give text above field also?
+				}
+				else
+				{
+					Report.Failure("The colour of the Input field was not red"); //give text above field also?
+					allFieldsRed = false;
+				}
+
+
+
+			}
+			return allFieldsRed;
+
+		}
+
+		public bool CheckInputFieldXIsColor(string expectedColor, string fieldName)
+		{
+			bool fieldIsCorrectColor = false;
+
+			Report.Info($"Looking at the input field with label {fieldName}");
+
+			Report.Info($"Exepcted Color is: {expectedColor}");
+
+			IWebElement inputField;
+			IWebElement parentContainer;
+
+
+			string expectedColorCode;
+			
+
+			switch (expectedColor)
+			{
+				case "Green":
+					expectedColorCode = "rgba(240, 255, 240, 1)";
+					parentContainer = this.containerElement.FindElement(By.XPath($".//div[@data-bind='visible: DocumentID().length > 0' and .//span[contains(text(),'{fieldName}')]]"), 2);
+					inputField = parentContainer.FindElement(By.XPath(".//div[@class='ws-dropzone-container']"), 2);
+					break;
+
+				case "Red":
+					expectedColorCode = "rgba(255, 240, 240, 1)";
+					parentContainer = this.containerElement.FindElement(By.XPath($".//div[@data-bind='visible: DocumentID().length == 0' and .//span[contains(text(),'{fieldName}')]]"), 2);
+					inputField	= parentContainer.FindElement(By.XPath(".//div[@class='dropzone']"), 2);
+					
+					break;
+				default:
+					Report.Error("expectedColor must be either: 'Red' or 'Green'");
+					return false;
+
+
+			}
+
+			string inputFieldColor = inputField.GetCssValue("background-color");
+
+			if (expectedColorCode == inputFieldColor)
+			{
+				Report.Success($"The color of the input field was the color {expectedColor} as expected");
+				fieldIsCorrectColor = true;
+			}
+			else
+			{
+				Report.Failure($"The color of the input field was not the expected color of {expectedColor}");
+			}
+
+
+			return fieldIsCorrectColor;
+
+		}
 	}
 
 	public class ProductInformation

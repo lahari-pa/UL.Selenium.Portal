@@ -230,6 +230,9 @@ Scenario: [NOTINCLUDEDGENERALTEST] Lithium Battery Product-no regularotry docume
 	Given I click continue
 	Then If the UPCs Warning popup is displayed I click OK
 	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Red
+	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Green
 
 
 
