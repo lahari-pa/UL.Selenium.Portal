@@ -62,7 +62,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 					outMessage = outMessage + " :: " + question + " :: " + actualMessage;
 				}
 			}
+			
 			return (outMessage.Length < 1);
 		}
+
+		
 	}
 }
