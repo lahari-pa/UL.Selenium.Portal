@@ -234,6 +234,8 @@ Scenario: [NOTINCLUDEDGENERALTEST] Lithium Battery Product-no regularotry docume
 	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Green
 
+Scenario: [NOTINCLUDEDGENERALTEST] SHA LOGIN CHECKER
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 
 
 
