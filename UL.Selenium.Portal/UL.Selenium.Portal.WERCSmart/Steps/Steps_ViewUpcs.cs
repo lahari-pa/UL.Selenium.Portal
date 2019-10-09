@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Castle.Core.Internal;
 using Microsoft.Web.Administration;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
@@ -123,7 +124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Success("The Case UPC Number was displayed");
 				Report.Screenshot();
 				TestReport.StartStep("I confirm the truck icon is shown next to the Case UPC Number (this indicates we have a Case UPC) ");
-				Report.IsTrue(matchingUpc.TruckIcon, "The truck icon was not shown next to the Case UPC number", "The truck icon was displayed by Case UPC Number");
+				Report.IsTrue(matchingUpc.TruckIcon, $"The truck icon was not shown next to the Case UPC number: {thisUpc}!", $"The truck icon was displayed by Case UPC Number: {thisUpc}");
 				TestReport.StartStep("I Confirm you see the UPC Number you selected as the Individual UPC contained in the Case Pack shown under the Associated UPC column for the Case UPC");
 				var associatedUpc = row["Associated UPC"];
 				if (GeneralUtilities.TryRegexContext(associatedUpc, out var associatedResult))
@@ -166,8 +167,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Success("The Case UPC Number was displayed");
                 Report.Screenshot();
                 TestReport.StartStep("I Confirm that the regular UPC row does not show the truck icon");
-                Report.IsTrue(!matchingUpc.TruckIcon, "The truck icon was shown next to the regular UPC number!", "The truck icon was not displayed by the regular UPC Number");
-
+                Report.IsTrue(!matchingUpc.TruckIcon, $"The truck icon was shown next to the regular UPC number: {thisUpc}!", $"The truck icon was not displayed by the regular UPC Number: {thisUpc}");
+				TestReport.StartStep("I Confirm that the Associated column for the regular UPC is blank");
+				Report.IsTrue(matchingUpc.AssociatedUpc.IsNullOrEmpty(), "The Associated UPC column was not blank!", "The Associated UPC column was blank");
+				TestReport.StartStep("I Confirm that I see the value I entered in the Container Type column for the regular UPC");
+				Report.IsTrue(matchingUpc.ContainerType == row["Container Type"], $"The Container Type column did not match expected value for the regular UPC: {thisUpc}! Expected: {row["Container Type"]} but got: {matchingUpc.ContainerType}", $"The Container Type column matched the expected value for the regular UPC: {thisUpc}");
+				TestReport.StartStep("I Confirm that I see the value I entered in the Size column for the regular UPC");
+				Report.IsTrue(matchingUpc.SizeOunces == row["Size Ounces"], $"The Size (Ounces) column did not match expected value for the regular UPC: {thisUpc}! Expected: {row["Size Ounces"]} but got: {matchingUpc.SizeOunces}", $"The Size (Ounces) column matched the expected value for the regular UPC: {thisUpc}");
+				TestReport.StartStep("I Confirm that the Quantity and Transport columns for the regular UPC are blank");
+				Report.IsTrue(matchingUpc.Transport.IsNullOrEmpty() && matchingUpc.Quantity.IsNullOrEmpty(), $"Transport and Quanity columns were not empty for the regular UPC! Displayed were Transport: {matchingUpc.Transport}, Quantity: {matchingUpc.Quantity}", "Transport and Quantity columns were empty for the regular UPC");
+				TestReport.StartStep("I Confirm that the Retailer column shows the retailer you selected for the regular UPC");
+				Report.IsTrue(matchingUpc.Retailers.Contains(row["Retailer"]), "Retailers column did not contain retailer: " + row["Retailer"] + "!", "Retailers column contained retailer: " + row["Retailer"]);
 			}
 		}
 	}
