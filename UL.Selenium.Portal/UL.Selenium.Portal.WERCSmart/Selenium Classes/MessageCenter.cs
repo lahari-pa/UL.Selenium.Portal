@@ -147,6 +147,65 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Type = tableRow.FindElement(By.XPath(".//span[starts-with(@data-bind,'text: Type')]"), 2).Text
 			};
 		}
+
+		public bool SetMoreFiltersToExpanded()
+		{
+
+			IWebElement moreFiltersButtonCollapsed= this.containerElement.FindElement(By.XPath(".//a[@class= 'btn btn-primary collapsed' and .//span[contains(text(),'More Filters')]]"), 2);
+			if(moreFiltersButtonCollapsed==null)
+			{
+				Report.Failure("Could not find the Collapsed More Filters Button");
+				return false;
+			}
+
+			if (this.containerElement.FindElement(By.XPath("//a[contains(@class, 'btn') and .//span[contains(text(),'More Filters')]]"), 2).TryClick())
+			{
+				Report.Success("The More Filters Button was clicked Successfully");
+				IWebElement moreFiltersButtonExpanded = this.containerElement.FindElement(By.XPath("//a[@class='btn btn-primary' and .//span[contains(text(),'More Filters')]]"), 2);
+
+				if (moreFiltersButtonExpanded==null)
+				{
+					Report.Failure("Could not find the expanded more Filters button");
+					return false;
+				}
+				else
+				{
+					Report.Success("The More Filters Button was Expanded Successfully");
+					return true;
+				}
+
+			}
+			else
+			{
+				Report.Failure("Failed to click the More Filters Button");
+				return false;
+			}
+		}
+
+		public bool SelectTypeFromList (string type)
+		{
+			IWebElement typeContainer = this.containerElement.FindElement(By.XPath(".//select[@class='form-control' and contains(@data-bind,'options: messagetypeOptions.types')]"), 2);
+			if (typeContainer==null)
+			{
+				Report.Failure("Could not find the Type Filter container");
+				return false;
+			}
+			typeContainer.Select(type);
+			string chosenOption=typeContainer.SelectedOption();
+			if(type==chosenOption)
+			{
+				Report.Success($"The type: {type} was selected successfully");
+				return true;
+			}
+			else
+			{
+				Report.Failure($"The type: {type} was not successfully selected");
+				return false;
+			}
+		}
+
+
+
 		public class Message
 		{
 			public string WPSID { get; set; }
