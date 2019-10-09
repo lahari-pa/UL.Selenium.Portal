@@ -2499,6 +2499,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("input values must be either 'should' or 'should not'");
 			}
 		}
+
+		[StepDefinition(@"In the Regulatory Documents to Provide Page I check that the input field with label: (.*) is shown as (Red|Green)")]
+		public void InTheRegulatoryDocumentsToProvidePageICheckThatAllInputFieldsAreRed(string fieldName,string expectedColor)
+		{
+			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected","The input field color was as expected");
+		}
+
+
 		#endregion
 
 

@@ -1657,6 +1657,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int i = alertWaitSeconds;
 			if (SeleniumBrowser.Alert.WaitForAlert(i))
 			{
+				
 				Report.Success("The Alert Appeared");
 				alertAppeared = true;
 				return;
