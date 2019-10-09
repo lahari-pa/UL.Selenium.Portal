@@ -174,5 +174,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
+
+		[StepDefinition(@"I Click the More Filters Button to expand the option")]
+		public void IClickTheMoreFiltersButtonToExpandTheOption()
+		{
+			Report.IsTrue(new MessageCenter().SetMoreFiltersToExpanded(), "Failed to expand the More Filters section", "Successfully expanded the more filters section");
+		}
+
+		[StepDefinition("I Select the (.*) message Type in the type filter")]
+		public void ISelectXMessageTypeFromFilter(string type)
+		{
+			Report.IsTrue(new MessageCenter().SelectTypeFromList(type), "Failed to select: " + type + " in the type filter", "Successfully selected: " + type + " in the type filter");
+		}
+
+		[StepDefinition(@"I Enter WPSID saved as: (.*) into the WPSID search box")]
+		public void IEnterWPSIDSavedAsIntoTheSearchBox(string savedAs)
+		{
+			Report.IsTrue(new MessageCenter().EnterWPSIDIntoFilter(savedAs), "Failed to enter the WPSID into the search box", "Successfully entered the WPSID into the search box");
+		}
+
+		[StepDefinition(@"I Check that only the 1 message I have filtered for is showing")]
+		public void ICheckThatOnlyThe1MessageIHaveFilteredForIsShowing(string savedAs)
+		{
+			Report.IsTrue(new MessageCenter().CheckOnly1MessageAndCorrectWPSID(savedAs), "Failed to find only the 1 message we filtered for", "successfully found only the 1 message we filtered for");
+
+		}
+
+
 	}
 }

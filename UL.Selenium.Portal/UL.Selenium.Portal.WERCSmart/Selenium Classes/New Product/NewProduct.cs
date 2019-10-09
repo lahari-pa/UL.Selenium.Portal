@@ -14,6 +14,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
 
+
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	public class NewProduct : SeleniumBaseObject

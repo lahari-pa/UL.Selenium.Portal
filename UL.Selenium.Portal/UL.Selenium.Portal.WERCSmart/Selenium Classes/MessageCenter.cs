@@ -5,6 +5,8 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using NTTQA.Selenium.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -203,6 +205,61 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
+
+		public bool EnterWPSIDIntoFilter(string savedAs)
+		{
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+
+			string value = productDetails.Id;
+
+			IWebElement searchBox = this.containerElement.FindElement(By.XPath(".//input[@data-bind='value: wpsId.field']"), 2);
+			if (searchBox==null)
+			{
+				Report.Failure("Could not find the WPSID Search Box");
+				return false;
+			}
+			searchBox.EnterText(value);
+			return searchBox.GetAttribute("value") == value;
+		}
+
+		public bool CheckOnly1MessageAndCorrectWPSID(string savedAs)
+		{
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+
+			string iD = productDetails.Id;
+
+			IWebElement messageTable = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover products-table']"), 2);
+
+			if(messageTable==null)
+			{
+				Report.Failure("Could not find the Message table");
+				return false;
+			}
+
+			List<IWebElement> tableRows = messageTable.FindElements(By.XPath(".//table[@class='table table-hover products-table']"), 2).ToList();
+
+			if(tableRows.Count>1)
+			{
+				Report.Failure("There was too many Messages found in the table");
+				return false;
+			}
+			string foundID=tableRows[0].FindElement(By.XPath(".//span[contains(@data-bind,'ProductID')]"), 2).Text;
+			if(foundID!=iD)
+			{
+				Report.Failure($"The Message found was not for the correct WPSID. The WPSID searched for was: {iD} and the one found was: {foundID}");
+				return false;
+			}
+			else
+			{
+				Report.Success($"The Message found was for the correct WPSID. The WPSID searched for was: {iD} and the one found was: {foundID}");
+				return true;
+			}
+
+
+
+		}
+
 
 
 

@@ -239,6 +239,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] SHA LOGIN CHECKER
 
 Scenario: [NOTINCLUDEDGENERALTEST] Registration Suspension: Email Notification Message Does not contain blurb
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I save the current emails in the inbox for address saved as: ProductAccountEmail
 	Given I generate a random UPC number and save as: UPC109503
 	Then The home screen should load
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
