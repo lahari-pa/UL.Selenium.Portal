@@ -287,7 +287,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 			int i = 0;
 			bool successClick = false;
-			while (i < 5||!successClick)
+			while (i < 5 && !successClick)
 			{
 				if (thisApplyRulesPage.ClickSingleRuleEllipsis())
 				{
@@ -302,7 +302,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(2);
 				i++;
 			}
-			if (successClick==false)
+			if (!successClick)
 			{
 				Report.Failure("Failed to click single rules ellipsis after 5 tries");
 			}
