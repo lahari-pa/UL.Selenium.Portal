@@ -81,17 +81,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIClickTopMenuItemAndSubMenuItem(string menuItem, string submenuItem)
 		{
 			var thisTopMenu = new StudioTopMenu();
-			Report.IsTrue(thisTopMenu.Wait_for_load(30), "Top menu has not loaded", "Top menu has loaded");
+			Report.IsTrue(thisTopMenu.Wait_for_load(30), "Top menu has not loaded", "Top menu has loaded", ShowSuccessScreenshot: false);
 
 			if (submenuItem.Length == 0)
 			{
 				Report.IsTrue(thisTopMenu.ClickTopMenuItem(menuItem), "Failed to click: " + menuItem,
-					"Successfully clicked: " + menuItem);
+					"Successfully clicked: " + menuItem, ShowSuccessScreenshot: false);
 			}
 			else
 			{
 				Report.IsTrue(thisTopMenu.ClickSubMenu(menuItem, submenuItem), "Failed to click: " + menuItem,
-					"Successfully clicked: " + menuItem);
+					"Successfully clicked: " + menuItem, ShowSuccessScreenshot: false);
 			}
 
 		}
@@ -402,118 +402,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 					}
 				}
-
 				counter++;
 			}
-
-			Report.IsTrue(found, "Expected: id=" + ID + " and status " + status, "Statuses match");
-			/*
-			string setStatus = status;
-			if (status.ToLower() == "accepted or completed")
-			{
-				setStatus = "Accepted";
-			}
-			if (status.ToLower() == "submitted or ghs submitted")
-			{
-				setStatus = "Submitted";
-			}
-
-			while (counter < 10)
-			{
-				if (status.ToLower() == "accepted or completed")
-				{
-					if (setStatus == "Accepted")
-					{
-						setStatus = "Completed";
-					}
-					else
-					{
-						setStatus = "Accepted";
-					}
-				}
-
-				if (status.ToLower() == "submitted or ghs submitted")
-				{
-					if (setStatus == "Submitted")
-					{
-						setStatus = "GHS Submitted";
-					}
-					else
-					{
-						setStatus = "Submitted";
-					}
-				}
-
-
-				var thisStudioManager = new StudioSHAManager();
-				thisStudioManager.Wait_for_load();
-				Product topProduct = thisStudioManager.GetTopXProducts(1).FirstOrDefault();
-
-				if (topProduct == null || !(topProduct.Status == setStatus && topProduct.ID == ID))
-				{
-					string filterStatus = setStatus;
-					if (filterStatus == "GHS Submitted")
-					{
-						filterStatus = "Submitted";
-					}
-					StudioSHAManager myStudioShaManager = new StudioSHAManager();
-
-					myStudioShaManager.ClickBottomMenuOption("Search");
-
-					Steps_SHA myStepsSha = new Steps_SHA();
-
-					TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
-						"SearchTerm",
-						"SearchValue"
-					});
-					table.AddRow(new string[] {
-						"ProductID",
-						ID
-					});
-					table.AddRow(new string[] {
-						"Status",
-						filterStatus
-					});
-					myStepsSha.GivenInSHAManagerPageIRunSearch(table);
-
-					Delay.Seconds(2);
-					StudioSHAManager mySHAManager = new StudioSHAManager();
-					mySHAManager.WaitForProductList(10);
-					counter++;
-				}
-				else
-				{
-					break;
-				}
-
-				var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
-				if (topProductnew != null)
-				{
-					if (status.ToLower() == "accepted or completed")
-					{
-						if (topProductnew.Status.ToLower() == "accepted" | topProductnew.Status.ToLower() == "accepted")
-						{
-							Report.IsTrue(topProductnew.ID == ID,
-								"Expected: id=" + ID + " and status " + status + " but got: " + topProductnew.ID + " and " +
-								topProductnew.Status, "Statuses match");
-								break;
-						}
-					}
-					else
-					{
-						Report.IsTrue(topProductnew.ID == ID && topProductnew.Status == setStatus,
-							"Expected: id=" + ID + " and status " + status + " but got: " + topProductnew.ID + " and " +
-							topProductnew.Status, "Statuses match");
-					}
-
-				}
-				else
-				{
-					Report.Info("No products found");
-				}
-
-			}
-			*/
+			Report.IsTrue(found, "Expected: id=" + ID + " and status " + status, "Statuses match", ShowSuccessScreenshot: false);
 		}
 
 		[StepDefinition(@"I confirm that the status of the product saved as: (.*) is: (.*)")]
@@ -2492,7 +2383,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheAuthoringMenuISelectPowerDesignerPlus()
 		{
 			var thisTopMenu = new StudioTopMenu();
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
 			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
 				"Failed to navigate to power designer plus", "Navigated to power designer plus");
 			Delay.Seconds(3);
@@ -2751,7 +2642,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 			Delay.Seconds(1);
 			Report.Info("Waiting for product list");
-			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing");
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing", ShowSuccessScreenshot:false);
 
 
 		}

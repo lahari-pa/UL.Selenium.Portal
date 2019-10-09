@@ -532,7 +532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void NavigateToPowerDesignerPlus()
 		{
 			var thisTopMenu = new StudioTopMenu();
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
 			thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus");
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",

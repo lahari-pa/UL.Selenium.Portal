@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Web.Administration;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -87,7 +89,86 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save all UPC information on the 'View UPCs' page as: (.*)")]
 		public void SaveAllViewUpcInformationAs(string savedAs)
 		{
+			var upcs = new ViewUpcs().Upcs();
+			if (upcs is null)
+			{
+				Report.Error("No UPC data was displayed!");
+				return;
+			}
+			Context.AddToContext(savedAs, upcs);
+		}
 
+		/// <summary>
+		/// Requires a table with columns: | UPC Number | Container Type | Size Ounces | Retailers | Associated UPC | Quantity | Transport |
+		/// </summary>
+		[StepDefinition(@"I verify the Case UPC data is correct in the View UPCs window:")]
+		public void VerifyCaseUpcData(Table table)
+		{
+			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
+			foreach (var row in table.Rows)
+			{
+				var thisUpc = row["UPC Number"];
+				if (GeneralUtilities.TryRegexContext(thisUpc, out var result))
+				{
+					thisUpc = result.ToString();
+				}
+				var matchingUpc = upcs.FirstOrDefault(x => x.UpcNumber == thisUpc);
+				TestReport.StartStep("I confirm that I see the Case UPC Number");
+				Report.Info("Expected Case UPC: " + thisUpc);
+				if (matchingUpc == null)
+				{
+					Report.Failure("The Case UPC Number was not displayed!");
+					continue;
+				}
+				Report.Success("The Case UPC Number was displayed");
+				Report.Screenshot();
+				TestReport.StartStep("I confirm the truck icon is shown next to the Case UPC Number (this indicates we have a Case UPC) ");
+				Report.IsTrue(matchingUpc.TruckIcon, "The truck icon was not shown next to the Case UPC number", "The truck icon was displayed by Case UPC Number");
+				TestReport.StartStep("I Confirm you see the UPC Number you selected as the Individual UPC contained in the Case Pack shown under the Associated UPC column for the Case UPC");
+				var associatedUpc = row["Associated UPC"];
+				if (GeneralUtilities.TryRegexContext(associatedUpc, out var associatedResult))
+				{
+					associatedUpc = associatedResult.ToString();
+				}
+				Report.IsTrue(matchingUpc.AssociatedUpc == associatedUpc, "The Associated UPC value did not match the entered Individual UPC " + associatedUpc, "The Associated UPC value matched the entered Individual UPC");
+				TestReport.StartStep("I Confirm that I see the value I entered in the Container Type column for the Case UPC");
+				Report.IsTrue(matchingUpc.ContainerType == row["Container Type"], $"The Container Type column did not match expected value for the Case UPC: {thisUpc}! Expected: {row["Container Type"]} but got: {matchingUpc.ContainerType}", $"The Container Type column matched the expected value for the Case UPC: {thisUpc}");
+				TestReport.StartStep("I Confirm that I see the value I entered in the Size column for the Case UPC");
+				Report.IsTrue(matchingUpc.SizeOunces == row["Size Ounces"], $"The Size (Ounces) column did not match expected value for the Case UPC: {thisUpc}! Expected: {row["Size Ounces"]} but got: {matchingUpc.SizeOunces}", $"The Size (Ounces) column matched the expected value for the Case UPC: {thisUpc}");
+				TestReport.StartStep("I Confirm that I see the value I entered in the Quantity column for the Case UPC");
+				Report.IsTrue(matchingUpc.Quantity == row["Quantity"], $"The Quantity column did not match expected value for the Case UPC: {thisUpc}! Expected: {row["Quantity"]} but got: {matchingUpc.Quantity}", $"The Quantity column matched the expected value for the Case UPC: {thisUpc}");
+				TestReport.StartStep("I Confirm that I see the value I entered in Transportation Options for the Case UPC");
+				Report.IsTrue(matchingUpc.Transport == row["Transport"], $"The Transport column did not match expected value for the Case UPC: {thisUpc}! Expected: {row["Transport"]} but got: {matchingUpc.Transport}", $"The Transport column matched the expected value for the Case UPC: {thisUpc}");
+				TestReport.StartStep("I Confirm that the Retailer column shows the retailer you selected for the Case UPC");
+				Report.IsTrue(matchingUpc.Retailers.Contains(row["Retailer"]), "Retailers column did not contain retailer: " + row["Retailer"] + "!", "Retailers column contained retailer: "+ row["Retailer"]);
+			}
+		}
+
+		[StepDefinition(@"I verify the Regular UPC data is correct in the View UPCs window:")]
+		public void VerifyRegularUpcData(Table table)
+		{
+			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
+			foreach (var row in table.Rows)
+			{
+				var thisUpc = row["UPC Number"];
+				if (GeneralUtilities.TryRegexContext(thisUpc, out var result))
+				{
+					thisUpc = result.ToString();
+				}
+				var matchingUpc = upcs.FirstOrDefault(x => x.UpcNumber == thisUpc);
+				TestReport.StartStep("I confirm that I see the Regular UPC Number in the UPC Number column");
+				Report.Info("Expected Case UPC: " + thisUpc);
+				if (matchingUpc == null)
+				{
+					Report.Failure("The Case UPC Number was not displayed!");
+					continue;
+				}
+				Report.Success("The Case UPC Number was displayed");
+                Report.Screenshot();
+                TestReport.StartStep("I Confirm that the regular UPC row does not show the truck icon");
+                Report.IsTrue(!matchingUpc.TruckIcon, "The truck icon was shown next to the regular UPC number!", "The truck icon was not displayed by the regular UPC Number");
+
+			}
 		}
 	}
 }

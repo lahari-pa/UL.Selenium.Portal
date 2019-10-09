@@ -10,6 +10,8 @@ using System.Text;
 using System.Linq;
 using NTTQA.Selenium.UniversalFunctions;
 using System.IO;
+using System.Text.RegularExpressions;
+using NTTQA.Selenium.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -198,6 +200,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (!Directory.GetFiles(downloadsFolder, "*" + fileName, SearchOption.TopDirectoryOnly).Any())
 			{
 				return true;
+			}
+			return false;
+		}
+
+		public static bool TryRegexContext(string input, out object result)
+		{
+			result = null;
+			if (Regex.IsMatch(input, "<(.*)>"))
+			{
+				var match = Regex.Match(input, "<(.*)>").Groups[1].Value;
+				if (Context.Contains(match, true))
+				{
+					result = Context.GetFromContext(match);
+					return true;
+				}
 			}
 			return false;
 		}

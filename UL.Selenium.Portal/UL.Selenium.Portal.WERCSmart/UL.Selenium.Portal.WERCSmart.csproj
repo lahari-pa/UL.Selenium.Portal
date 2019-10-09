@@ -364,8 +364,9 @@
     </None>
     <None Include="Features\Forgotten Password.feature">
     </None>
-    <None Include="Features\Home page\Actions.feature">
+    <None Include="Features\Home page\Actions\Actions.feature">
     </None>
+    <None Include="Features\Home page\Actions\EditUPCs.feature" />
     <None Include="Features\Home page\Alerts.feature" />
     <None Include="Features\Home page\BulkActions.feature">
     </None>

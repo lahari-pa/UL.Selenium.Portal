@@ -379,23 +379,29 @@ And I search for the product saved as: TestCase87835
 And I click Row Actions for the first product returned
 And I click on the Row Action: View UPCs
 And I switch to the tab with title: View UPCs
-# save all UPCS as: (.*)
+And I verify the Case UPC data is correct in the View UPCs window:
+| UPC Number   | Container Type    | Size Ounces | Retailer | Associated UPC | Quantity | Transport     |
+| <UPC87835-2> | Plastic Container | 1           | AM       | <UPC87835>     | 1        | 4A: steel box |
 
-And I confirm the UPC number saved as: UPC87835-2 is displayed as a Case UPC
-And I Confirm you see the UPC Number you selected as the Individual UPC contained in the Case Pack shown under the Associated UPC column for the Case UPC
-And I Confirm you see the Container Type shown for the Case UPC
-And I Confirm that you see a value in the Size column for the Case UPC
-And I Confirm that you see a value in theQuantity column for the Case UPC
-And I Confirm that you see the entry you selected for the Transportation Options shown in the Transport column for the Case UPC
-And I Confirm that the Retailer column shows the retailer you selected for the Case UPC
+And I verify the Regular UPC data is correct in the View UPCs window:
+| UPC Number | Container Type | Size Ounces | Retailer |
+| <UPC87835> | Paper bag      | 2           | AM       |
 
-And I Confirm that the regular UPC Number is shownin the UPC Number column
-And I Confirm that the regular UPC row does not show the truck icon next to the regular UPC number
-And I Confirm that the UPC number shown in the UPC Number column for the regular UPC matches the UPC number shown in the Associated UPC column for the Case UPC
-And I Confirm that the Associated column for the regular UPC is blank
-And I Confirm that the Container Type shown for the regular UPC shows the option you selected on the UPC step
-And I Confirm that you see a value in the Size column for the regular UPC
-And I Confirm that the Quantity and Transport columns for the regular UPC are blank
-And I Confirm that the Retailer column shows the retailer you selected for the regular UPC
+#And I Confirm you see the UPC Number you selected as the Individual UPC contained in the Case Pack shown under the Associated UPC column for the Case UPC
+#And I Confirm you see the Container Type shown for the Case UPC
+#And I Confirm that you see a value in the Size column for the Case UPC
+#And I Confirm that you see a value in theQuantity column for the Case UPC
+#And I Confirm that you see the entry you selected for the Transportation Options shown in the Transport column for the Case UPC
+#And I Confirm that the Retailer column shows the retailer you selected for the Case UPC
+#
+#And I Confirm that the regular UPC Number is shownin the UPC Number column
+#And I Confirm that the regular UPC row does not show the truck icon next to the regular UPC number
+#And I Confirm that the UPC number shown in the UPC Number column for the regular UPC matches the UPC number shown in the Associated UPC column for the Case UPC
+#And I Confirm that the Associated column for the regular UPC is blank
+#And I Confirm that the Container Type shown for the regular UPC shows the option you selected on the UPC step
+#And I Confirm that you see a value in the Size column for the regular UPC
+#And I Confirm that the Quantity and Transport columns for the regular UPC are blank
+#And I Confirm that the Retailer column shows the retailer you selected for the regular UPC
+
 And I close the window that opened
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835
