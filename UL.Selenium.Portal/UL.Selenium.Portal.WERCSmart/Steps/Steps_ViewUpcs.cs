@@ -109,10 +109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (var row in table.Rows)
 			{
 				var thisUpc = row["UPC Number"];
-				if (GeneralUtilities.TryRegexContext(thisUpc, out var result))
-				{
-					thisUpc = result.ToString();
-				}
+				thisUpc = Context.GetFromContextRegex(thisUpc)?.ToString() ?? thisUpc;
 				var matchingUpc = upcs.FirstOrDefault(x => x.UpcNumber == thisUpc);
 				TestReport.StartStep("I confirm that I see the Case UPC Number");
 				Report.Info("Expected Case UPC: " + thisUpc);
@@ -127,10 +124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(matchingUpc.TruckIcon, $"The truck icon was not shown next to the Case UPC number: {thisUpc}!", $"The truck icon was displayed by Case UPC Number: {thisUpc}");
 				TestReport.StartStep("I Confirm you see the UPC Number you selected as the Individual UPC contained in the Case Pack shown under the Associated UPC column for the Case UPC");
 				var associatedUpc = row["Associated UPC"];
-				if (GeneralUtilities.TryRegexContext(associatedUpc, out var associatedResult))
-				{
-					associatedUpc = associatedResult.ToString();
-				}
+				associatedUpc = Context.GetFromContextRegex(associatedUpc)?.ToString() ?? associatedUpc;
 				Report.IsTrue(matchingUpc.AssociatedUpc == associatedUpc, "The Associated UPC value did not match the entered Individual UPC " + associatedUpc, "The Associated UPC value matched the entered Individual UPC");
 				TestReport.StartStep("I Confirm that I see the value I entered in the Container Type column for the Case UPC");
 				Report.IsTrue(matchingUpc.ContainerType == row["Container Type"], $"The Container Type column did not match expected value for the Case UPC: {thisUpc}! Expected: {row["Container Type"]} but got: {matchingUpc.ContainerType}", $"The Container Type column matched the expected value for the Case UPC: {thisUpc}");
@@ -152,19 +146,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (var row in table.Rows)
 			{
 				var thisUpc = row["UPC Number"];
-				if (GeneralUtilities.TryRegexContext(thisUpc, out var result))
+				if (Context.GetFromContextRegex(thisUpc, out var result))
 				{
 					thisUpc = result.ToString();
 				}
 				var matchingUpc = upcs.FirstOrDefault(x => x.UpcNumber == thisUpc);
 				TestReport.StartStep("I confirm that I see the Regular UPC Number in the UPC Number column");
-				Report.Info("Expected Case UPC: " + thisUpc);
+				Report.Info("Expected regular UPC: " + thisUpc);
 				if (matchingUpc == null)
 				{
-					Report.Failure("The Case UPC Number was not displayed!");
+					Report.Failure("The regular UPC Number was not displayed!");
 					continue;
 				}
-				Report.Success("The Case UPC Number was displayed");
+				Report.Success("The regular UPC Number was displayed");
                 Report.Screenshot();
                 TestReport.StartStep("I Confirm that the regular UPC row does not show the truck icon");
                 Report.IsTrue(!matchingUpc.TruckIcon, $"The truck icon was shown next to the regular UPC number: {thisUpc}!", $"The truck icon was not displayed by the regular UPC Number: {thisUpc}");

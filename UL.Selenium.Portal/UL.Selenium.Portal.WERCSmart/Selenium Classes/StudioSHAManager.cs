@@ -1369,25 +1369,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return rows.Count == 1;
 		}
 
-		public string GetproductStatusByRetailer(string retailer)
+		public string GetProductStatusByRetailer(string retailer)
 		{
 
 			string retailerStatus = "";
 			string retailerAbbr = "";
-
-			if (Regex.IsMatch(retailer, "<(.*)>"))
+			if (Context.GetFromContextRegex(retailer, out var result))
 			{
-				var match = Regex.Match(retailer, "<(.*)>").Groups[1].Value;
-				if (Context.Contains(match, true))
-				{
-					retailer = Context.GetFromContext(match).ToString();
-				}
-
+				Report.Info("Getting retailer from context: " + retailer);
+				retailer = result.ToString();
 			}
 			Report.Info("Beginning get product status by retailer: " + retailer);
 
 			var abbr = new RetailerAbbreviations();
-			abbr.Map.TryGetValue(retailer, out retailerAbbr);			
+			if (!abbr.Map.TryGetValue(retailer, out retailerAbbr))
+			{
+				Report.Error("Failed to get retailer abbreviation for full name: " + retailer);
+				return null;
+			}
 			Report.Info("Search for Retailer with Initials: " + retailerAbbr);
 			try
 			{
@@ -1410,8 +1409,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
+				Report.Error(ex.Message);
 				return null;
 			}
 

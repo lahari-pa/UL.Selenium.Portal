@@ -381,9 +381,9 @@ And I click on the Row Action: View UPCs
 And I switch to the tab with title: View UPCs
 And I verify the Case UPC data is correct in the View UPCs window:
 | UPC Number   | Container Type    | Size Ounces | Retailer | Associated UPC | Quantity | Transport     |
-| <UPC87835-2> | Plastic Container | 1           | AM       | <UPC87835>     | 1        | 4A: steel box |
+| %UPC87835-2% | Plastic Container | 1           | AM       | %UPC87835%     | 1        | 4A: steel box |
 And I verify the Regular UPC data is correct in the View UPCs window:
 | UPC Number | Container Type | Size Ounces | Retailer |
-| <UPC87835> | Paper bag      | 2           | AM       |
+| %UPC87835% | Paper bag      | 2           | AM       |
 And I close the window that opened
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835

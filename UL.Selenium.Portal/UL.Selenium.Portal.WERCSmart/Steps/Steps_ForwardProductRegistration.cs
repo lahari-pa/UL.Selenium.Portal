@@ -927,13 +927,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (var row in table.Rows)
 			{
 				var retailerName = row["Retailer"];
-				if (Regex.IsMatch(retailerName, "<(.*)>"))
+				if (Context.GetFromContextRegex(retailerName, out var result))
 				{
-					var match = Regex.Match(retailerName, "<(.*)>").Groups[1].Value;
-					if (Context.Contains(match, true))
-					{
-						retailerName = Context.GetFromContext(match).ToString();
-					}
+					Report.Info("Getting retailer from context: " + retailerName);
+					retailerName = result.ToString();
 				}
 				if (new ForwardProductRegistration().SelectRetailer(retailerName))
 				{
@@ -942,10 +939,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}				
 				Report.Info("Could not find: " + retailerName + " in the list of retailers");
-
 			}
 			Report.Failure("None of the retailers in the table could be selected");
-
 		}
 
 		[StepDefinition(@"I select one of the following retailers from the table: that is also not in the list saved as: (.*) and save the chosen retailer as: (.*)")]
@@ -954,13 +949,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (var row in table.Rows)
 			{
 				var retailerName = row["Retailer"];
-				if (Regex.IsMatch(retailerName, "<(.*)>"))
+				if (Context.GetFromContextRegex(retailerName, out var result))
 				{
-					var match = Regex.Match(retailerName, "<(.*)>").Groups[1].Value;
-					if (Context.Contains(match, true))
-					{
-						retailerName = Context.GetFromContext(match).ToString();
-					}
+					Report.Info("Getting retailer from context: " + retailerName);
+					retailerName = result.ToString();
 				}
 				var alreadySelectedRetailers = (List<string>)Context.GetFromContext(existingRetailer);
 				var abbr = new RetailerAbbreviations();

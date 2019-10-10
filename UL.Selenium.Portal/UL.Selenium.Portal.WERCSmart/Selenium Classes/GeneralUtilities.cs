@@ -12,6 +12,7 @@ using NTTQA.Selenium.UniversalFunctions;
 using System.IO;
 using System.Text.RegularExpressions;
 using NTTQA.Selenium.SpecFlow;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -204,20 +205,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-		public static bool TryRegexContext(string input, out object result)
+		public static string[] RowValuesFromContext(this TableRow row)
 		{
-			result = null;
-			if (Regex.IsMatch(input, "<(.*)>"))
+			var vals = row.Values.Select(x =>
 			{
-				var match = Regex.Match(input, "<(.*)>").Groups[1].Value;
-				if (Context.Contains(match, true))
+				if (Context.GetFromContextRegex(x, out var result))
 				{
-					result = Context.GetFromContext(match);
-					return true;
+					return result.ToString();
 				}
-			}
-			return false;
+				return x;
+			});
+			return vals.ToArray();
 		}
+
+		public static Table TableValuesFromContext(this Table table)
+		{
+			var newTable = new Table(table.Header.ToArray());
+			foreach (var row in table.Rows)
+			{
+				newTable.AddRow(row.RowValuesFromContext());
+			}
+			return newTable;
+		}
+
 	}
 
 	public class RetailerAbbreviations
