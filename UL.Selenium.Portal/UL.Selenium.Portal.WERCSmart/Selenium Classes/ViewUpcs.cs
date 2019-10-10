@@ -65,31 +65,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							break;
 					}
 				}
-				//int upcNumberIndex = Array.IndexOf(this.HeadingTitles, "UPC Number");
-				//if (upcNumberIndex != -1)
-				//{
-				//	thisUpc.UpcNumber = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2)?.Text;
-				//}
-				//int associatedUpcIndex = Array.IndexOf(this.HeadingTitles, "Associated UPC");
-				//if (associatedUpcIndex != -1)
-				//{
-				//	thisUpc.AssociatedUpc = row.FindElement(By.XPath(""), 2)?.Text;
-				//}
-				//int containerTypeIndex = Array.IndexOf(this.HeadingTitles, "Container Type");
-				//if (containerTypeIndex != -1)
-				//{
-				//	thisUpc.ContainerType = row.FindElement(By.XPath($"./td[position()={containerTypeIndex + 1}]/ div"), 2)?.Text;
-				//}
-				//int sizeIndex = Array.IndexOf(this.HeadingTitles, "Size (Ounces)");
-				//if (sizeIndex != -1)
-				//{
-				//	thisUpc.SizeOunces = row.FindElement(By.XPath($"./td[position()={sizeIndex + 1}]/ div"), 2)?.Text;
-				//}
-				//int retailersIndex = Array.IndexOf(this.HeadingTitles, "Retailers");
-				//if (retailersIndex != -1)
-				//{
-				//	thisUpc.Retailers = row.FindElement(By.XPath($"./td[position()={retailersIndex + 1}]/ div"), 2)?.Text.Split(',').Select(x => x.Trim()).ToList();
-				//}
 				rList.Add(thisUpc);
 			}
 			return rList;
@@ -98,85 +73,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<ProductUpc> NormalUPCs()
 		{
 			return this.Upcs().Where(x => !x.TruckIcon).ToList();
-			//var rList = new List<ProductUpc>();
-			//foreach (IWebElement row in this.UpcRows)
-			//{
-			//	var thisUpc = new ProductUpc();
-			//	int upcNumberIndex = Array.IndexOf(this.HeadingTitles, "UPC Number");
-			//	if (upcNumberIndex != -1)
-			//	{
-			//		IWebElement upc = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2);
-			//		IWebElement truck = upc.FindElement(By.XPath(@"//i[@class='fa fa-truck']"), 2);
-			//		if (truck == null)
-			//		{
-			//			thisUpc.UpcNumber = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2)?.Text;
-			//		}
-			//		else
-			//		{
-			//			continue;
-			//		}
-
-			//	}
-			//	int containerTypeIndex = Array.IndexOf(this.HeadingTitles, "Container Type");
-			//	if (containerTypeIndex != -1)
-			//	{
-			//		thisUpc.ContainerType = row.FindElement(By.XPath($"./td[position()={containerTypeIndex + 1}]/ div"), 2)?.Text;
-			//	}
-			//	int sizeIndex = Array.IndexOf(this.HeadingTitles, "Size (Ounces)");
-			//	if (sizeIndex != -1)
-			//	{
-			//		thisUpc.SizeOunces = row.FindElement(By.XPath($"./td[position()={sizeIndex + 1}]/ div"), 2)?.Text;
-			//	}
-			//	int retailersIndex = Array.IndexOf(this.HeadingTitles, "Retailers");
-			//	if (retailersIndex != -1)
-			//	{
-			//		thisUpc.Retailers = row.FindElement(By.XPath($"./td[position()={retailersIndex + 1}]/ div"), 2)?.Text.Split(',').Select(x => x.Trim()).ToList();
-			//	}
-			//	rList.Add(thisUpc);
-			//}
-			//return rList;
 		}
 
 		public List<ProductUpc> CaseUPCs()
 		{
 			return this.Upcs().Where(x => x.TruckIcon).ToList();
-			//var rList = new List<ProductUpc>();
-			//foreach (IWebElement row in this.UpcRows)
-			//{
-			//	var thisUpc = new ProductUpc();
-			//	int upcNumberIndex = Array.IndexOf(this.HeadingTitles, "UPC Number");
-			//	if (upcNumberIndex != -1)
-			//	{
-			//		IWebElement upc = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2);
-			//		IWebElement truck = upc.FindElement(By.XPath(@"//i[@class='fa fa-truck']"), 2);
-			//		if (truck != null)
-			//		{
-			//			thisUpc.UpcNumber = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2)?.Text;
-			//		}
-			//		else
-			//		{
-			//			continue;
-			//		}
-
-			//	}
-			//	int containerTypeIndex = Array.IndexOf(this.HeadingTitles, "Container Type");
-			//	if (containerTypeIndex != -1)
-			//	{
-			//		thisUpc.ContainerType = row.FindElement(By.XPath($"./td[position()={containerTypeIndex + 1}]/ div"), 2)?.Text;
-			//	}
-			//	int sizeIndex = Array.IndexOf(this.HeadingTitles, "Size (Ounces)");
-			//	if (sizeIndex != -1)
-			//	{
-			//		thisUpc.SizeOunces = row.FindElement(By.XPath($"./td[position()={sizeIndex + 1}]/ div"), 2)?.Text;
-			//	}
-			//	int retailersIndex = Array.IndexOf(this.HeadingTitles, "Retailers");
-			//	if (retailersIndex != -1)
-			//	{
-			//		thisUpc.Retailers = row.FindElement(By.XPath($"./td[position()={retailersIndex + 1}]/ div"), 2)?.Text.Split(',').Select(x => x.Trim()).ToList();
-			//	}
-			//	rList.Add(thisUpc);
-			//}
-			//return rList;
 		}
 
 		public class ProductUpc
