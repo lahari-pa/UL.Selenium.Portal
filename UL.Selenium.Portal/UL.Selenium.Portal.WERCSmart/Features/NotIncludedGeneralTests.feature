@@ -240,6 +240,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] SHA LOGIN CHECKER
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 
 Scenario: [NOTINCLUDEDGENERALTEST] Registration Suspension: Email Notification Message Does not contain blurb
+	#This is the scenario for Ticket 102604 (move to correct location and add TFS ID)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I Save the email for the TReVor: ProductAccount Test user as: ProductAccountEmail
 	Given I save the current emails in the inbox for address saved as: ProductAccountEmail
@@ -307,6 +308,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Suspend a Product - Formula - Document Issue 
 	| Contact the Help Desk Hub via a ticket.  If you registered the product, a ticket is already created in your My Ticket area of the Hub (post a reply to the existing ticket).                                                                                    |
 	| If you recertify the data, accept the revisions allowing data transfer.  The assessment will proceed.                                                                                                                                                           |
 	| Be aware:  If no response within ten (10) days will result in registration cancellation and the assessment will not proceed to the retailer.  You may contact the Help Desk for reinstatement of the assessment as needed, but the hold remains until resolved. |                                                                                                                                               
+
 
 
 

@@ -36,6 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+
 		[StepDefinition(@"Under the Confirm Email text box the following errors should appear")]
 		public void ThenUnderTheConfirmEmailTextBoxTheFollowingErrorsShouldAppear(Table table)
 		{
@@ -881,11 +882,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		//This step is currently unfinished, but is not used anywhere. Awaiting functionality to download attachements from mailosaur
-		[StepDefinition(@"I Check there is an new email for user: (.*) from: (.*) with the title: (.*) and I download the attachment")]
-		public void ICheckThereIsANewEmailForEmamilWithSpecifiedFromAndTitleAndDownloadAttachment(string shouldOrNot, string savedAs, string emailFrom, string title)
+		[StepDefinition(@"there is a new email for user: (.*) from: (.*) with the title: (.*) and it should contain no attachments with the file name: (.*)")]
+		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitleWithNoAttachments(string savedAs, string emailFrom, string title,string fileName)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
+			string shouldOrNot = "should";
 			try
 			{
 				if (emailFrom.ToLower() == "<sitenotification>")
@@ -907,6 +908,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (EmailFunctions.WaitForInboxDifferences(user.Email))
 				{
 					this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
+					var email = (Email)Context.GetFromContext("Matching");
+					bool attachmentsPresent = email.Attachments.Any(x => x.FileName.Contains(fileName));
+					if (!Report.IsTrue(!attachmentsPresent, "There was attachments containingpresent in the email", "There was not attachments in the email"))
+					{
+						List<string> attachmentList = email.Attachments.Select(x => x.FileName).ToList();
+						Report.Info("The attachments were as follows: " + string.Join(",", attachmentList));
+
+					}
+
 				}
 				else
 				{
@@ -941,9 +951,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
-
-			//EmailFunctions.
 		}
+
+
 
 	}
 }
