@@ -20,9 +20,11 @@
 @MyIngredients
 @UPC
 @SHA
+@Studio
 @ForwardProductRegistration
 @ProductSetUp
 @admin
+@run_NotIncludedGeneralTests
 
 Feature: NotIncludedGeneralTests
 
@@ -280,7 +282,32 @@ Scenario: [NOTINCLUDEDGENERALTEST] Registration Suspension: Email Notification M
 	| If you recertify the data, accept the revisions allowing data transfer.  The assessment will proceed.                                                                                                                                                           |
 	| Be aware:  If no response within ten (10) days will result in registration cancellation and the assessment will not proceed to the retailer.  You may contact the Help Desk for reinstatement of the assessment as needed, but the hold remains until resolved. |                                                                                                                                               
 
-	
+#This test will not work as the email will not be sent to products account (selecting product from differnt user)
+Scenario: [NOTINCLUDEDGENERALTEST] Suspend a Product - Formula - Document Issue - Check Email does not contain Blurb
+
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I Save the email for the TReVor: ProductAccount Test user as: ProductAccountEmail
+	Given I save the current emails in the inbox for address saved as: ProductAccountEmail
+	Then In SHA Manager I set the filter for status to : Assigned
+	And In SHA Manager I select the first product
+	And I click the following option in the bottom menu: Suspended
+	And In the Suspended dialog I Select the following clients: All
+	And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: Automated QASha
+	And In the Suspended dialog in the Select Subject drop down I choose: Formula – Document Issue
+	And In the Suspended dialog in the Supplier Message field I should see: The composition data provided does not match information listed on the document. You may either provide a corrected document, or correct the composition data to resolve this issue.
+	And In the Suspended dialog in the Supplier Message field I add the following text: supplier message input
+	And In the Suspended dialog in the Internal Product Note field I should see: The composition data provided does not match information listed on the document. You may either provide a corrected document, or correct the composition data to resolve this issue.
+	And In the Suspended dialog in the Internal Product Note field I add the following text: internal product note input
+	And In the Suspended dialog I click Save
+	And I close alert
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for saved as: ID)
+	Then I Check there should be a new suspension notification email for user: ProductAccountEmail for the Product saved as: ID with the suspension subject of: Formula – Document Issue and check it does not contain text from the table:
+	| SearchText                                                                                                                                                                                                                                                      |
+	| Use the “Recertification” link available on the registration to correct the issue; or                                                                                                                                                                           |
+	| Contact the Help Desk Hub via a ticket.  If you registered the product, a ticket is already created in your My Ticket area of the Hub (post a reply to the existing ticket).                                                                                    |
+	| If you recertify the data, accept the revisions allowing data transfer.  The assessment will proceed.                                                                                                                                                           |
+	| Be aware:  If no response within ten (10) days will result in registration cancellation and the assessment will not proceed to the retailer.  You may contact the Help Desk for reinstatement of the assessment as needed, but the hold remains until resolved. |                                                                                                                                               
+
 
 
 
