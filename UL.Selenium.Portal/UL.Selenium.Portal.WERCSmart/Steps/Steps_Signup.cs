@@ -640,8 +640,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Attempting to navigate to the link...");
 				SeleniumBrowser.Navigate(mylink);
 				Report.Success("Navigated to the link!");
-				var userCreatonPage = new NewUser();
-				Report.IsTrue(userCreatonPage.Wait_for_load(30), "New User Creation page did not load!", "User creation page loaded as expected!");
+				var userCreationPage = new NewUser();
+				Report.IsTrue(userCreationPage.Wait_for_load(30), "New User Creation page did not load!", "User creation page loaded as expected!");
 			}
 			catch (Exception ex)
 			{
@@ -722,13 +722,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the new user form I click on Success")]
 		public void WhenInTheNewUserFormIClickOnSuccess()
 		{
-			Report.IsTrue(new NewUser().ClickSuccess(), "Failed to click Success", "Succesfully clicked Success");
-
+			if (!new NewUser().ThankYou())
+			{
+				Report.Failure("Thank You page did not load");
+				return;
+			}
+			Report.IsTrue(new NewUser().ClickSuccess(), "Failed to click Success", "Successfully clicked Success");
+			GeneralUtilities.Wait_for_load_finish();
 		}
-
-
-
-
 
 		[StepDefinition(@"I should be on the (.*) page of the form")]
 		public void ThenIShouldBeOnThePageOfTheForm(string pageTitle)
@@ -748,9 +749,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-
-
-
+		
 		[StepDefinition(@"If terms of use page appears I accept")]
 		public void GivenIfTermsOfUsePageAppearsIAccept()
 		{
