@@ -239,6 +239,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] SHA LOGIN CHECKER
 
 Scenario: [NOTINCLUDEDGENERALTEST] Registration Suspension: Email Notification Message Does not contain blurb
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I Save the email for the TReVor: ProductAccount Test user as: ProductAccountEmail
 	Given I save the current emails in the inbox for address saved as: ProductAccountEmail
 	Given I generate a random UPC number and save as: UPC109503
 	Then The home screen should load
@@ -269,13 +270,17 @@ Scenario: [NOTINCLUDEDGENERALTEST] Registration Suspension: Email Notification M
 	And In the Suspended dialog I Select the following clients: All
 	And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: Automated QASha
 	And In the Suspended dialog in the Select Subject drop down I choose: Formula – Document Issue
-	And In the Suspended dialog in the Supplier Message field I add the following text: supplier message input
-	And In the Suspended dialog in the Internal Product Note field I add the following text: internal product note input
 	And In the Suspended dialog I click Save
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109503)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109503 and its status is: Suspended
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then I click the My Messages icon in the Navigation Pane
+	Then I Check there should be a new suspension notification email for user: ProductAccountEmail for the Product saved as: TestCase109503 with the suspension subject of: Formula – Document Issue and check it does not contain text from the table:
+	| SearchText                                                                                                                                                                                                                                                      |
+	| Use the “Recertification” link available on the registration to correct the issue; or                                                                                                                                                                           |
+	| Contact the Help Desk Hub via a ticket.  If you registered the product, a ticket is already created in your My Ticket area of the Hub (post a reply to the existing ticket).                                                                                    |
+	| If you recertify the data, accept the revisions allowing data transfer.  The assessment will proceed.                                                                                                                                                           |
+	| Be aware:  If no response within ten (10) days will result in registration cancellation and the assessment will not proceed to the retailer.  You may contact the Help Desk for reinstatement of the assessment as needed, but the hold remains until resolved. |                                                                                                                                               
+
+	
 
 
 
