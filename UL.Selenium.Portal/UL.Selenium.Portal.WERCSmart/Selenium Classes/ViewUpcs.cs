@@ -9,6 +9,7 @@ using Castle.Core.Internal;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
+using NTTQA.Selenium.Reporting.Core;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -139,6 +140,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				rList.Add(thisUpc);
 			}
 			return rList;
+		}
+
+		public bool DoesUPCHeadingsContain(string headingName)
+		{
+			
+			var newList = this.HeadingTitles;
+			if (newList.Contains(headingName))
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Did not find the Heading name: "+headingName+". Heading names found are as follows: "+ string.Join(",", newList));
+				return false;
+			}
+
+						
 		}
 
 		public class ProductUpc

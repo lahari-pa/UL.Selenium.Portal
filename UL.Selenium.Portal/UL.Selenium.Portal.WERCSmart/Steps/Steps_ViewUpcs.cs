@@ -71,5 +71,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, upcs.First());
 		}
 
+		[StepDefinition(@"I navigate the the View UPC tab and Check that the Produt UPCs table contains the coloumn labeled 'UPC Name'")]
+		public void INavigateToTheViewUPCTabAndCheckForUPCNameColoumn()
+		{
+			new GlobalSteps().SwitchToTabWithTitle("View UPCs");
+
+			Report.IsTrue(new ViewUpcs().DoesUPCHeadingsContain("UPC Name"),"Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");				   
+
+
+			new GlobalSteps().ThenCloseTheWindowThatOpened();
+		}
 	}
 }
