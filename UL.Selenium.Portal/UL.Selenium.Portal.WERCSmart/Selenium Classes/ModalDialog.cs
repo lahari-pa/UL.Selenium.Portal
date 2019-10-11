@@ -34,6 +34,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				.FirstOrDefault(x => x.Text.ToLower() == "close").TryClick();
 		}
 
+		public bool Click_Continue()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+				.FirstOrDefault(x => x.Text == "CONTINUE").TryClick();
+		}
+
 		public bool Click_Skip()
 		{
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)

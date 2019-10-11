@@ -363,9 +363,23 @@ Scenario: [NOTINCLUDEDGENERALTEST] View UPCs- Check that UPC name coloumn exists
 	Then I navigate the the View UPC tab and Check that the Produt UPCs table contains the coloumn labeled 'UPC Name'
 
 
+Scenario: [NOTINCLUDEDGENERALTEST] Rejected Registration - Edit -  Message is displayed about Rejected Registrations and SDS Restrictions
 
-
-
+	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+	And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase75142)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
+	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: New
+	Given I navigate to the landing page
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then I filter for the product saved as: TestCase75142
+	And I edit the product saved as: TestCase75142
+	Then I confirm the Rejected Registration popup displays the warning: Please be aware that rejected registrations will not permit any changes to the Safety Data Sheet (SDS) option. Upon rejection, if you want to change your Safety Data Sheet selection (i.e. Select Authoring instead of providing a Document, you will need to DELETE the rejected registration and create a new registration to submit, with your proper selection.
+	Given in the modal dialog I click cancel
+	Then I confirm the Rejected Registration popup has closed
+	And I edit the product saved as: TestCase75142
+	Then I confirm the Rejected Registration popup displays the warning: Please be aware that rejected registrations will not permit any changes to the Safety Data Sheet (SDS) option. Upon rejection, if you want to change your Safety Data Sheet selection (i.e. Select Authoring instead of providing a Document, you will need to DELETE the rejected registration and create a new registration to submit, with your proper selection.
+	Given in the modal dialog I click Continue
+	And I should see the The Product Page
 
 
 
