@@ -1026,7 +1026,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
-			if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='upcTableOutter']"), 5) ==null)
+			if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='upcTableOutter']"), 5) == null)
 			{
 				Report.Failure("View UPC table was not displayed");
 				return;
@@ -2953,7 +2953,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
-		
+
 		[StepDefinition(@"In the Advanced Reporting popup I click Submit")]
 		public void InTheAdvancedReportingPopupIClickSubmit()
 		{
@@ -2990,7 +2990,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string shaClients = productsShown[0].Clients;
 			var shrdStep = new Steps_Shared();
 			string dog = "DOGY";
-			
+
 			TestReport.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
 			string file = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!file.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + file))
@@ -3137,7 +3137,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I select the Product Registrations Published report from Advanced Reporting in SHA")]
+		public void ISelectProductRegistrationPublishedReportFromAdvancedReportingInSHA()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Click Advanced Reporting");
+			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
+				"Failed to click document management", "Clicked document management");
+			var shaReport = new SHAAdvancedReporting();
+			string report = "Product Registrations Published";
+			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
+			Delay.Seconds(2);
+			
+			
+		}
+		[StepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Product Registrations Published report then I click Submit")]
+		public void IEnterAStartDateForTheProductRegistrationPublishedReportClickSubmit(string startDate,string endDate)
+		{
+			TestReport.UseSubSteps = true;
+			var shaReport = new SHAAdvancedReporting();
+			TestReport.StartStep("I enter an Start Date");
+			shaReport.EnterStartDate(startDate);
+			TestReport.StartStep("I enter an End Date");
+			shaReport.EnterEndDate(endDate);
+			TestReport.StartStep("I Click Submit");
+			shaReport.ClickSubmit();
 
+		}
+
+		[StepDefinition(@"I Check that the Description Text for the Report: (.*) is shown as: (.*)")]
+		public void ICheckThatTheDescriptionForTheReportIsShowAS(string reportName,string reportText)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			
+			Report.IsTrue(shaReport.ReportDescriptionIsCorrect(reportName,reportText), "The Description was not as expected", "The Descripton was as expected");
+
+
+		}
 	}
 }
 

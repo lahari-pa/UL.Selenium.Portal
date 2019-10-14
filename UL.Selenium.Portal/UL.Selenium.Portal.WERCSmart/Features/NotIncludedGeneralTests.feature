@@ -25,6 +25,7 @@
 @ProductSetUp
 @admin
 @ViewUpcs
+@Solutions
 @run_NotIncludedGeneralTests
 
 Feature: NotIncludedGeneralTests
@@ -381,7 +382,74 @@ Scenario: [NOTINCLUDEDGENERALTEST] Rejected Registration - Edit -  Message is di
 	Given in the modal dialog I click Continue
 	And I should see the The Product Page
 
+Scenario: [NOTINCLUDEDGENERALTEST] Advanced Reporting - Registrations Published report -
+	#For 92210 Ticket Should be 98534
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the Product Registrations Published report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Product Registrations Published report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#For below step need an actual file for headers
+	Then I confirm that the excel file saved as: 105329 contains the following columns:
+		| Column              |
+		| WPSID               |
+		| Product Name        |
+		| WMDRUM              |
+		| WMCAD               |
+		| WMBC                |
+		| PYST                |
+		| PYSTM               |
+		| FPF                 |
+		| PH                  |
+		| RU                  |
+		| EPAN                |
+		| CAWC                |
+		| WSWC                |
+		| UNM                 |
+		| HCM                 |
+		| PSNDWM              |
+		| HCDWM               |
+		| DVID                |
+		| PSNV                |
+		| HCW                 |
+		| UNIFFC              |
+		| BATT                |
+		| BATTT               |
+		| CHEMICAL            |
+		| KIT                 |
+		| OTC                 |
+		| TGWAST              |
+		| MPIND               |
+		| DOTPG               |
+		| DERGN               |
+		| INTFC               |
+		| CASEC               |
+		| CASECD              |
+		| DOTBMP              |
+		| IMDGBMP             |
+		| CATEST              |
+		| WATEST              |
+		| CNTXT               |
+		| Last Published Date |
+		| Published By        |
+		| Recert              |
+		| Product_status      |
+		| GHS                 |
 
+Scenario: [NOTINCLUDEDGENERALTEST] UL Solutions: Navigator Logo has TradeMark Symbol
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Then the WERCSmart homepage should load
+	Then I click the UL Solution Center icon in the Navigation Pane
+	Then I confirm that the UL Solution Center page is loaded
+	Then I confirm the following sections are displayed in the UL Solution Center page:
+		| Sections  |
+		| Navigator |
+	#Then do Image Comparison here 
+
+		              
 
 
 
