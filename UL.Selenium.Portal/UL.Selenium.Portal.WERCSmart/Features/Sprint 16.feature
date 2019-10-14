@@ -95,7 +95,7 @@ Scenario:[96174] Daily Report - WERCSmart Additional Reports Published
 	And In SHA Manager - Select Actions - Advanced Reporting
 	And In the Advanced Reporting popup I select report Daily Report - WERCSmart Additional Reports Published
 	And Verify Daily Report - WERCSmart Additional Reports Published Advanced Report description reads: Internal Use Only.  The output will display the quantity of reports published by the system in relation to a WERCSmart User's request for added report.  Maximum date range is 30 days.
-	Then I enter start date 08-01-2019 and end date 80-30-2019 for Advanced Reporting
+	Then I enter start date 08-01-2019 and end date 08-30-2019 for Advanced Reporting
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Then I confirm that an excel file is produced called Daily Report - Wercsmart Additional Reports Published.xls and save as 96174
 	And I confirm that the excel file saved as: 96174 contains the following columns:
