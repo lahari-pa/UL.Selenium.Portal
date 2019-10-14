@@ -97,11 +97,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			output = actualTitle.Text;
 			return output == title;
 		}
+
+		internal bool CheckReportDescription(string report, string description, out string actualDescription)
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement container = frame.FindElement(By.XPath(@"//*[@id='gbox_listAdvancedReports']"));
+			string path = @"//*[@id='listAdvancedReports']//td[contains(text(),'" + report + "')]//..//td[@aria-describedby='listAdvancedReports_Description']";
+
+			IWebElement tableDescription = container.FindElement(By.XPath(path), 2);
+			actualDescription = tableDescription.Text.Trim();
+
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return actualDescription == description;
+		}
 	}
 
 	class AdvancedReportingDateForm : SeleniumBaseObject
 	{
-
 		public const string BasePath = "//*[@id='panel']";
 
 		IWebElement Field { get; set; }
@@ -120,10 +133,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			Report.IsTrue(this.ReplaceAllTextInElementWith(start, fields[0]), "");
-			this.ReplaceAllTextInElementWith(end, fields[1]);
+			Report.IsTrue(this.ReplaceAllTextInElementWith(start, fields[0]), "Start Date field was not able to be updated", "Start Date field was updated successfully");
+			Report.IsTrue(this.ReplaceAllTextInElementWith(end, fields[1]), "End Date field was not able to be updated", "End Date field was updated successfully");
+
+			fields[0].TryClick();
+			fields[1].TryClick();
+			fields[2].TryClick();
 
 			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+
 
 			return true;
 		}
@@ -133,7 +152,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.Field = element;
 			string fieldText = this.Field.GetInnerText();
 			this.Field.JsEnterText(replace);
-			return !(fieldText == this.Field.GetInnerText());
+			return !(replace == this.Field.GetInnerText());
 		}
 	}
 }

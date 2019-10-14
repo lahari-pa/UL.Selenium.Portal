@@ -68,9 +68,8 @@ Scenario:[96226] Daily Report - Registration Traffic
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And In SHA Manager - Select Actions - Advanced Reporting
 	Given In the Advanced Reporting popup I select report Daily Report - Registration Traffic
-	Then I enter start date 01-01-2019 and end date 01-02-2019 for Advanced Reporting
-	Then In the Advanced Reporting popup I click Submit
-	#And I verify the Preparing Report popup displays
+	Then I enter start date 08-01-2019 and end date 09-01-2019 for Advanced Reporting
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Daily Report - Registration Traffic.xls and save as 96226
 	Then I confirm that the excel file saved as: 96226 contains the following columns:
 		| Column                         |
@@ -83,9 +82,28 @@ Scenario:[96226] Daily Report - Registration Traffic
 		| Rejected                       |
 		| Suspended                      |
 		| Published (Auto or Manual)     |
-		| SDS Authoring - NGHS           |
+		| SDS Authoring- NGHS            |
 		| SDS Authoring - Other          |
 		| SDS Authoring - Add'l Language |
 		| UPCs Completed to Retail       |
 		| Product IDs Complete to Retail |
 	And I verify the file saved as: 96226 contains integers in all fields on the first data row
+
+@ScenarioId:1548
+Scenario:[96174] Daily Report - WERCSmart Additional Reports Published
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And In SHA Manager - Select Actions - Advanced Reporting
+	And In the Advanced Reporting popup I select report Daily Report - WERCSmart Additional Reports Published
+	And Verify Daily Report - WERCSmart Additional Reports Published Advanced Report description reads: Internal Use Only.  The output will display the quantity of reports published by the system in relation to a WERCSmart User's request for added report.  Maximum date range is 30 days.
+	Then I enter start date 08-01-2019 and end date 80-30-2019 for Advanced Reporting
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Then I confirm that an excel file is produced called Daily Report - Wercsmart Additional Reports Published.xls and save as 96174
+	And I confirm that the excel file saved as: 96174 contains the following columns:
+		| Column                  |
+		| Subformat               |
+		| Description             |
+		| Fee                     |
+		| Additional Language Fee |
+		| Language                |
+		| Reports Published       |
+	And I verify the file saved as: 96174 against the specific requirements for Daily Report - WERCSmart Additional Reports Published

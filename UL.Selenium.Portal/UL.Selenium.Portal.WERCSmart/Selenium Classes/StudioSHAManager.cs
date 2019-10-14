@@ -1444,7 +1444,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
-
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject

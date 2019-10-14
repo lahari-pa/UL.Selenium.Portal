@@ -17,9 +17,7 @@ using System.Collections.ObjectModel;
 using TReVor.Api.Wrapper.Classes;
 using System.IO;
 using Castle.Core.Internal;
-
-
-
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -2705,21 +2703,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
-				var colCount = ExcelUtils.Excel_GetNoColumns();
+				int colCount = ExcelUtils.Excel_GetNoColumns();
 				List<string> RowData = ExcelUtils.Excel_GetRow(1);
 
 				Report.IsTrue(colCount == RowData.Count,
-					FailureMessage: "The number of Columns, " + colCount + " does not equal the number of datapoints, " + RowData.Count,
+					FailureMessage: "The number of Columns, " + colCount + " does not equal the number of datapoints. Expected " + RowData.Count,
 					SuccessMessage: "The number of Columns matches the number of datapoints as expected");
 
 				foreach (string data in RowData)
 				{
 					Report.IsTrue(int.TryParse(data, out int result),
-						FailureMessage: "Report contains unexpected non-integer value " + data,
+						"Report contains unexpected non-integer value " + data,
 						ShowSuccessScreenshot: false);
 				}
 			}
 		}
+
+		[StepDefinition(@"Verify (.*) Advanced Report description reads: (.*)")]
+		public void GivenVerifyAdvancedReportDescriptionReads(string report, string description)
+		{
+			var myStudioShaManager = new StudioSHAManager();
+			if (!myStudioShaManager.Wait_for_load(30))
+			{
+				Report.Error("Studio SHA Manager is not showing");
+			}
+
+			Report.IsTrue(new SHAAdvancedReporting().CheckReportDescription(report, description, out string actualDescription),
+				"Description: \'" + actualDescription + "\' does not match expected \'" + description + "\'",
+				"Description matches expected");
+		}
+
 
 		[StepDefinition(@"In SHA Manager - Select Actions - (.*)")]
 		public void ICallSharedStep96169SHAManager_SelectProduct_Actions(string actionType)
@@ -3195,7 +3208,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-
+		[StepDefinition(@"I verify the file saved as: (.*) against the specific requirements for Daily Report - WERCSmart Additional Reports Published")]
+		public void ThenIVerifyTheFileSavedAsAgainstTheSpecificRequirementsForDailyReport_WERCSmartAdditionalReportsPublished(string savedAs)
+		{
+			Report.IsTrue(new DailyReportWERCSmartAdditionalReportsPublished().VerifyFile(savedAs), "Report did not match expectations", "Report conforms to stated spec");
+		}
 	}
 }
 
