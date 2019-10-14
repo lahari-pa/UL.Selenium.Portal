@@ -2312,8 +2312,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Dollar Tree Stores, Inc. / Greenbrier International, Inc");
 			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
-			var upcTable = new Table("UPCNumber", "ContainerType", "Size");
-			upcTable.AddRow("saved as UPC75335", "Metal Container", "40");
+			var upcTable = new Table("UPCNumber", "ContainerType", "Size","UPCName");
+			upcTable.AddRow("saved as UPC75335", "Metal Container", "40","UPC Place Holder");
 			newProductSteps.ThenIClickTheAddUpcButton();
 			newProductSteps.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			newProductSteps.ClickContinue();
