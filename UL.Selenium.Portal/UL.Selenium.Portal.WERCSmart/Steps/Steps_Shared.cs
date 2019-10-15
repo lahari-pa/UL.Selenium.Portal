@@ -799,8 +799,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
 					Size = size,
-					UpcNumber = upc_,
-					UPCName="PlaceHolder UPC Name For:"+upc_
+					UpcNumber = upc_,					
 				};
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
@@ -810,8 +809,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var upcTable = new Table("Field", "Value");				
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
-				upcTable.AddRow("Size", size);
-				upcTable.AddRow("UPCName", "PlaceHolder UPC Name");
+				upcTable.AddRow("Size", size);				
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 

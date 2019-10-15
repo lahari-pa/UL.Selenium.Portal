@@ -314,23 +314,15 @@ Scenario: [NOTINCLUDEDGENERALTEST] Suspend a Product - Formula - Document Issue 
 
 
 	#For 106877 Sprint ticket
-Scenario: [NOTINCLUDEDGENERALTEST] View UPCs- Check that UPC name coloumn exists
+Scenario: [NOTINCLUDEDGENERALTEST] View UPCs- Check that UPC name coloumn exists in View UPC Screen and View Details Screen
 
-	Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completedstatus
+	Given I Submit a new product which has a Case UPC and a regular UPC
 	Given I navigate to the landing page
 	And I call Shared Step (Login to WERCSmart - Premium Account)
-	Then I filter the products by: Accepted by Retailers
 	And I filter for the product saved as: TestCase87685
 	And I click Row Actions for the first product returned
-	And I should see the following Actions options
-		| Option    |
-		| Submit    |
-		| Edit      |
-		| Delete    |
-		| View UPCs |
 	Then I click on the Row Action: View UPCs
 	Then I navigate the the View UPC tab and Check that the Produt UPCs table contains the coloumn labeled 'UPC Name'
-	Given I navigate to the landing page
 	
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -350,16 +342,8 @@ Scenario: [NOTINCLUDEDGENERALTEST] View UPCs- Check that UPC name coloumn exists
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I navigate to the landing page
-
-	Then I filter the products by: Accepted by Retailers
 	And I filter for the product saved as: TestCase109503
 	And I click Row Actions for the first product returned
-	And I should see the following Actions options
-		| Option    |
-		| Submit    |
-		| Edit      |
-		| Delete    |
-		| View UPCs |
 	Then I click on the Row Action: View UPCs
 	Then I navigate the the View UPC tab and Check that the Produt UPCs table contains the coloumn labeled 'UPC Name'
 
