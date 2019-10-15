@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.Web.Administration;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+
+
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -83,17 +87,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
 
-		[StepDefinition(@"I navigate to the View tab for product saved as: (.*) and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'")]
-		public void INavigateToTheViewTabAndCheckForUPCNameColoumn(string savedAs)
+		[StepDefinition(@"the View UPC page loads with no errors")]
+		public void TheViewUPCPageLoadsWithNoErrors()
 		{
-			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string tabtitle = productDetails.Name + " (" + productDetails.Id + ")";
-			new GlobalSteps().SwitchToTabWithTitle(tabtitle);			
+			var upcviewpg= new ViewUpcs();
+			Report.IsTrue(GeneralUtilities.WaitForSpinnerToDisappear(upcviewpg.LoadingSpinner()),
+				"The View UPC page did not complete loading",
+				"The View UPC page completed loading");
 
-			Report.IsTrue(new SummaryPage().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
-
-
-			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
 
 

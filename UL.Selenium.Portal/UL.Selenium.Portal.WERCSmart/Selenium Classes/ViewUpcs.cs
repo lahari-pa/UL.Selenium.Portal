@@ -159,6 +159,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						
 		}
 
+		public IWebElement LoadingSpinner()
+		{
+			return this.containerElement.FindElement(By.XPath(@".//span[contains(@data-bind,""dataEntry.pname() === 'undefined (undefined)"") and contains(text(),'Loading')]"), 2);
+		}
+
 		public class ProductUpc
 		{
 			public string UpcNumber { get; set; }

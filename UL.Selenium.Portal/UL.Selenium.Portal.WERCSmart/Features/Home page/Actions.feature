@@ -20,6 +20,7 @@
 @PaymentMethods
 @ProductSetUp
 @ViewUpcs
+@
 Feature: Actions
 
 # Assigned to Amanda Coutant
@@ -347,3 +348,76 @@ Scenario: [64532] Remove UPC Update - Remove
 	Then I confirm the Rejected Registration popup displays the warning: Please be aware that rejected registrations will not permit any changes to the Safety Data Sheet (SDS) option. Upon rejection, if you want to change your Safety Data Sheet selection (i.e. Select Authoring instead of providing a Document, you will need to DELETE the rejected registration and create a new registration to submit, with your proper selection.
 	Given in the Rejected Registration modal dialog I click Continue
 	And I should see the The Product Page
+
+Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
+
+	Given I Submit a new product which has a Case UPC and a regular UPC
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	And I filter for the product saved as: TestCase87685
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View UPCs
+	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'	
+	Given I generate a random UPC number and save as: UPC109503
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase109503
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
+	Given I click continue
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then If purchase details are showing click confirm order
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)	
+	And I filter for the product saved as: TestCase109503
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View UPCs
+	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+
+	
+
+
+Scenario: [112939] View - UPC name column exists in the Product UPCs table
+
+	Given I Submit a new product which has a Case UPC and a regular UPC
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	And I filter for the product saved as: TestCase87685
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View
+	Then I navigate to the View tab for product saved as: TestCase87685 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+	Given I generate a random UPC number and save as: UPC109503
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase109503
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
+	Given I click continue
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then If purchase details are showing click confirm order
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)	
+	And I filter for the product saved as: TestCase109503
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View
+	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'

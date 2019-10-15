@@ -1859,5 +1859,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"the text of the email should show: (.*)")]
+		public void ThenTheTextOfTheEmailShouldShow(string bodyText)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
+			try
+			{
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				string emailText = email.Text.ToString();
+				string actualTrimmed = Regex.Replace(emailText, @"\r|\n| ", "");					
+				string expectedTrimmed = Regex.Replace(bodyText, @"\r|\n| ", "");
+				Report.Info("Expected email body text: " + expectedTrimmed);
+				Report.Info("Body of the Email was: " + actualTrimmed);
+				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 	}
 }

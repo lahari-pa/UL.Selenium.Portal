@@ -284,6 +284,8 @@ Scenario: [NOTINCLUDEDGENERALTEST] Registration Suspension: Email Notification M
 	| Contact the Help Desk Hub via a ticket.  If you registered the product, a ticket is already created in your My Ticket area of the Hub (post a reply to the existing ticket).                                                                                    |
 	| If you recertify the data, accept the revisions allowing data transfer.  The assessment will proceed.                                                                                                                                                           |
 	| Be aware:  If no response within ten (10) days will result in registration cancellation and the assessment will not proceed to the retailer.  You may contact the Help Desk for reinstatement of the assessment as needed, but the hold remains until resolved. |                                                                                                                                               
+	Then the text of the email should show: To resolve this issue, please log into WERCSmart.  Using either the RESOLVE option in the ALERT area on the Home Page, or using the RESOLVE option available for the registration in My Messages, update the necessary data or documentation.  Once the registration is revised, you may accept the updates which will transfer the registration back to the Assessment team for processing. Please be aware that if you do not update and resubmit the registration data within ten (10) days this may result in your registration being cancelled and the assessment will not proceed to your Retailer(s).  You may contact support for assistance as needed.  Thank you for your prompt attention to this matter. The WERCSmart Assessment Team
+
 
 #This test will not work as the email will not be sent to products account (selecting product from differnt user)
 Scenario: [NOTINCLUDEDGENERALTEST] Suspend a Product - Formula - Document Issue - Check Email does not contain Blurb
@@ -313,49 +315,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Suspend a Product - Formula - Document Issue 
 
 
 
-	#For 106877 Sprint ticket
-Scenario: [NOTINCLUDEDGENERALTEST] View UPCs- Check that UPC name coloumn exists in View UPC Screen and View Details Screen
-
-	Given I Submit a new product which has a Case UPC and a regular UPC
-	Given I navigate to the landing page
-	And I call Shared Step (Login to WERCSmart - Premium Account)
-	And I filter for the product saved as: TestCase87685
-	And I click Row Actions for the first product returned
-	Then I click on the Row Action: View UPCs
-	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
-
-	And I click Row Actions for the first product returned
-	Then I click on the Row Action: View
-	Then I navigate to the View tab for product saved as: TestCase87685 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
-
-	Given I generate a random UPC number and save as: UPC109503
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-	Then I save the product information as: TestCase109503
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer  |
-		| Walgreens |
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
-	Given I click continue
-	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Then If purchase details are showing click confirm order
 	
-	And I filter for the product saved as: TestCase109503
-	And I click Row Actions for the first product returned
-	Then I click on the Row Action: View UPCs
-	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
-
-	And I click Row Actions for the first product returned
-	Then I click on the Row Action: View
-	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
 
 
 Scenario: [NOTINCLUDEDGENERALTEST] Rejected Registration - Edit -  Message is displayed about Rejected Registrations and SDS Restrictions

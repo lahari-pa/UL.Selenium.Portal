@@ -101,6 +101,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.ScenarioContext.Pending();
 		}
 
+		[StepDefinition(@"I navigate to the View tab for product saved as: (.*) and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'")]
+		public void INavigateToTheViewTabAndCheckForUPCNameColoumn(string savedAs)
+		{
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string tabtitle = productDetails.Name + " (" + productDetails.Id + ")";
+			new GlobalSteps().SwitchToTabWithTitle(tabtitle);
+			new Steps_Summary().TheSummaryPageLoadsWithNoErrors();
+
+			Report.IsTrue(new SummaryPage().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
+
+
+			new GlobalSteps().ThenCloseTheWindowThatOpened();
+		}
 
 	}
 }
