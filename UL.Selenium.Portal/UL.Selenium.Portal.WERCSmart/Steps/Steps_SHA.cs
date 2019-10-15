@@ -2675,6 +2675,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(sha.ConfirmThereIsOneProductInTheGrid(), "Failed to find one product in the grid!", "Successfully found one product in the grid.");
 		}
 
+		[StepDefinition("SHA Search for Archived UPC. This uses environment variable for know archived product")]
+		public void SHASearchForArchived()
+		{
+			string upc = TestVariables.GetVariableSavedAs("Archived UPC");
+			this.ThenSHASearchForProductByUPCInAllStatuses(upc);
+		}
+
+
 		[StepDefinition(@"SHA Search for product by UPC: (.*) in all statuses")]
 		public void ThenSHASearchForProductByUPCInAllStatuses(string uPC)
 		{
@@ -2688,11 +2696,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I verify the popup message displays with the title ""(.*)""")]
 		public void GivenIVerifyThePopupMessageDisplaysWithTheTitle(string title)
 		{
-
 			Report.IsTrue(new StudioSHAManagerArchivedProduct().ArchivedUPCPopupTitle(title, out string displayedTitle),
 				"Unable to locate popup entitled " + title + ", instead found " + displayedTitle,
 				"Located popup titled " + displayedTitle);
 		}
+
+		[StepDefinition(@"I close the Archived Product popup")]
+		public void ICloseTheArchivedProductPopup() => Report.IsTrue(new StudioSHAManagerArchivedProduct().ClosePopup(), "Popup was not closed", "Popup closed successfully");
 
 		[StepDefinition(@"I verify the file saved as: (.*) contains integers in all fields on the first data row")]
 		public void ThenIVerifyTheFileSavedAsContainsIntegersInAllFieldsOnTheFirstDataRow(string savedAs)

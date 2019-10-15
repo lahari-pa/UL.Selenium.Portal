@@ -1776,6 +1776,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return failedAt.Length == 0;
 		}
+
+		internal bool ClosePopup() =>
+			this.containerElement.FindElement(By.XPath("//*[@aria-labelledby='ui-dialog-title-dialog-IsArchiveProduct']//span[@class='ui-button-text']")).TryClick();
 	}
 
 	class ProcessProducts : BaseObject
