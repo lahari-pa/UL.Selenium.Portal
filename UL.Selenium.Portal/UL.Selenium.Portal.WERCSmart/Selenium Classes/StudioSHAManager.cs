@@ -28,52 +28,53 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//get the window
 			StudioUtilites.SwitchToWindow("Wercs Studio");
 			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-			IWebElement frame =
-				SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='Widget1']//iframe"));
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='Widget1']//iframe"), 10);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 10);
 			return base.Wait_for_load(30);
 		}
 
 		public bool WaitForProductList(int secondsToWait)
 		{
-			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
+			//SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
 			Report.Info("Beginning wait for product list");
-			if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
-			{
-				SeleniumBrowser.ExitIFrame();
-				if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
-				{
-					Report.Error("Could not switch to iframe");
-				}
-			}
+			//if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
+			//{
+			//	SeleniumBrowser.ExitIFrame();
+			//	if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
+			//	{
+			//		Report.Error("Could not switch to iframe");
+			//	}
+			//}
+            Delay.Seconds(2);
+			var tableVisible = this.containerElement.WaitUntilElementVisible(By.XPath("//table[@id='list']"), secondsToWait);
+			return tableVisible != null;
+			//for (int i = 0; i < secondsToWait; i++)
+			//{
+			//	try
+			//	{
+			//		IWebElement table = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']"), 60);
+			//		if (table != null)
+			//		{
+			//			if (table.Displayed || table.FindElements(By.XPath(".//tr")).Count == 1)
+			//			{
+			//				return true;
+			//			}
+			//		}
+			//	}
+			//	catch (Exception e)
+			//	{
+			//		Report.Error("Caught error" + e.Message);
+			//		continue;
+			//		//do nothing
+			//	}
 
-			for (int i = 0; i < secondsToWait; i++)
-			{
-				try
-				{
-					IWebElement table = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']"), 60);
-					if (table != null)
-					{
-						if (table.Displayed || table.FindElements(By.XPath(".//tr")).Count == 1)
-						{
-							return true;
-						}
-					}
-				}
-				catch (Exception e)
-				{
-					Report.Error("Caught error" + e.Message);
-					continue;
-					//do nothing
-				}
+			//	Delay.Seconds(1);
+			//	i++;
+			//}
 
-				Delay.Seconds(1);
-				i++;
-			}
-
-			Report.Info($"Product list was not loaded after {secondsToWait} seconds!");
-			return false;
+			//Report.Info($"Product list was not loaded after {secondsToWait} seconds!");
+			//return false;
 		}
 
 		/// <summary>
@@ -82,9 +83,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Wait_For_Loading_Finish(int timeout = 30)
 		{
 			// wait up to 5 seconds for the loading bar to become visible
-			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(BasePath + "//div[@id='load_list']"), 5);
+			this.containerElement.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 5);
 			// waits up to timeout (30) seconds for the loading bar to then become invisible
-			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath(BasePath + "//div[@id='load_list']"), timeout);
+			return this.containerElement.WaitUntilElementInvisible(By.XPath("//div[@id='load_list']"), timeout);
 		}
 		public ProductStatus GetproductStatus(string id)
 		{

@@ -3828,11 +3828,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click Menu: 'My Wercs' and Submenu: 'SHA'");
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			var thisStudioShaManager = new StudioSHAManager();
+			Report.IsTrue(thisStudioShaManager.Wait_for_load(60), "SHA Manager did not load", "SHA Manager loaded");
+            Delay.Seconds(2);
+			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(60), "Loading did not finish");
 			Report.Info("I confirm the product list is loaded");
 			Report.Info("Waiting for product list to be loaded....");
-			Delay.Seconds(1);
-			Report.IsTrue(thisStudioShaManager.WaitForProductList(120), "Product list is not showing",
-				"Product list is showing");
+			Delay.Seconds(2);
+			Report.IsTrue(thisStudioShaManager.WaitForProductList(30), "Product list is not showing",
+				"Product list is showing", ShowSuccessScreenshot: false);
 		}
 
 		[StepDefinition(@"I call Shared Step 59728 \(Go to Manage Global Messages\)")]
@@ -4089,7 +4092,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
-			myStudioShaManager.WaitForProductList(60);
+			Report.IsTrue(myStudioShaManager.WaitForProductList(60), "Product list was not loaded", "Product list loaded", ShowSuccessScreenshot: false);
 			Report.Info("Getting saved product: " + savedAs);
 			if (!Context.Contains(savedAs))
 			{
@@ -8888,6 +8891,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 85328 \(Login to WERCSmart - Canada - Address \(Yes\), Packaging \(Yes\), Stewardship \(Full\)\)")]
+		public void Shared85328()
+		{
+            new GlobalSteps().ILogInWithTheAccountSavedInTrevorAs("CanadaHasAllData");
+		}
+
+		[StepDefinition(@"I call Shared Step 86824 \(Forwarding - Select Existing UPC, Click Continue, No error for Package type\)")]
+		public void Shared86824()
+		{
+			TestReport.UseSubSteps = true;
+            TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
+			new StepsForwardProductRegistration().SelectFirstUPC();
+            TestReport.StartStep("I click continue");
+			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
 		}
 	}
 }

@@ -142,6 +142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully selected the first returned product");
 			Delay.Seconds(2);
 		}
+
 		[StepDefinition(@"I select the first product under the Select UPCs tab")]
 		public void SelectTheFirstProductSelectUPCs()
 		{
@@ -205,7 +206,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(selForwardProdReg.SelectFirstUPC(),
 				"Failed to select the first UPC",
-				"Successfully selecte the first UPC");
+				"Successfully selected the first UPC");
 		}
 
 		[StepDefinition(@"I click the 'select all' UPCs checkbox")]

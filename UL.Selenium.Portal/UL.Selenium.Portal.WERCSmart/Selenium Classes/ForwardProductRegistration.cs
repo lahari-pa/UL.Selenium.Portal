@@ -496,6 +496,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement privateLabelInput = this.containerElement.FindElement(By.XPath(@"//label[contains(text(), 'Private Label')]/following-sibling::input"), 2);
 			if (privateLabelInput != null)
 			{
+				privateLabelInput.TryClick();
 				Report.Info("Found private label input box. Attempting to enter text.");
 				return privateLabelInput.TryEnterText(value);
 			}
