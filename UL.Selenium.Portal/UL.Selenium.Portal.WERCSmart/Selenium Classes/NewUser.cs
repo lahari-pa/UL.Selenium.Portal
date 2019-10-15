@@ -179,8 +179,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement ClickNextButton => this.containerElement.FindElement(By.Id("carouselNext"),1);
 
 		private IWebElement ClickSuccessButton => this.containerElement.FindElement(By.XPath(@".//a[contains(@class, 'btn-success')]"), 1);
-
-
+		
 		public string CountryErrorValue {
 			get
 			{
@@ -677,6 +676,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void ClickCancel()
 		{
 			this._btnCancel.Click();
+		}
+
+		public bool ThankYou()
+		{
+			return this.containerElement.WaitUntilElementVisible(By.XPath(".//h3[text()='Thank You']"), 5) != null;
 		}
 
 		public string CurrentPageTitle()

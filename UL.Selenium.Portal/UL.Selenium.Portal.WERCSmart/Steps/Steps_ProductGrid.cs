@@ -644,6 +644,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
 			Report.Info("Generated UPC No: " + uPCNo);
+			Delay.Seconds(2);
+
 		}
 
 

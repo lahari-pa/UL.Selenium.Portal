@@ -229,10 +229,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// add brand
 			//sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Hair Color Kit", $"Kit Product {savedAs}");
 
-			new Steps_TheProduct().SetProductNameProductTypeProductLine($"Kit Product {savedAs}", "Hair Color Kit", "Test Brand");
+			new Steps_TheProduct().SetProductNameProductTypeProductLine($"Kit Product {savedAs}", "Hair Color Kit", "TestBrand");
 			//And I call Shared Step 77872(Additional Product Information - Kit flow - US only, Direct Ship(yes), Continue)
 			newProductSteps.SaveProductInformation($"Kit_{savedAs}");
-
 			// fix
 			sharedSteps.Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
 			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -270,7 +269,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I search for product by name: (.*) and save the first ID as: (.*)")]
+		[StepDefinition(@"I search for product by name: (.*) and save the first grid item as: (.*)")]
 		public void SearchProductAndSave(string name, string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -279,12 +278,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ProductIdField = name
 			};
 			GeneralUtilities.Wait_for_load_finish();
-			TestReport.StartStep("Saving the top product as: " + savedAs);
 			ProductGridItem productElement = selProdGrid.FirstProductInGrid();
 			if (productElement != null)
 			{
-				Report.Info("Saving top product to context");
-				Context.AddToContext(savedAs, productElement.ProductId);
+				TestReport.StartStep("Saving the top product as: " + savedAs);
+				Context.AddToContext(savedAs, productElement);
+				Report.Info("Saved product to context");
+			}
+			else
+			{
+				Report.Info("No Product was found by name: " + name);
 			}
 			selProdGrid.ProductIdField = string.Empty;
 		}

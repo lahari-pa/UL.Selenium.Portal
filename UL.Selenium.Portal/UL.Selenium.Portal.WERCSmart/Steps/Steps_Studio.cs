@@ -61,12 +61,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+			GeneralUtilities.StudioWaitForSpinner(30);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickApplyRulesButton(),
 				"Failed to click apply rules button",
 				"Clicked apply rules button");
 			var thisApplyRulesPage = new ApplyRulesPage();
 			Report.IsTrue(thisApplyRulesPage.Wait_for_load(60), "Apply rules page has failed to load",
 				"Apply rules page has loaded");
+			
 		}
 
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on document queue button")]
@@ -282,8 +284,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InApplyRulesPageIClickOnTheSingleRulesEllipsisButton()
 		{
 			var thisApplyRulesPage = new ApplyRulesPage();
-			Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis",
-				"Clicked single rules ellipsis");
+			Delay.Seconds(3);
+			int i = 0;
+			bool successClick = false;
+			while (i < 5 && !successClick)
+			{
+				if (thisApplyRulesPage.ClickSingleRuleEllipsis())
+				{
+					Report.Success("Clicked single rules ellipsis");
+					successClick = true;
+				}
+				else
+				{
+					Report.Info("Failed to click single rules ellipsis");
+
+				}
+				Delay.Seconds(2);
+				i++;
+			}
+			if (!successClick)
+			{
+				Report.Failure("Failed to click single rules ellipsis after 5 tries");
+			}
+			//Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis",
+			//	"Clicked single rules ellipsis");
 			Delay.Seconds(3);
 			var thisSelectRulesPage = new SelectRulesPage();
 			Report.IsTrue(thisSelectRulesPage.Wait_for_load(120), "Select rules page has not loaded",

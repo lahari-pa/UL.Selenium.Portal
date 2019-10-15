@@ -1025,14 +1025,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("No item saved in context as: " + retailerSavedAs);
 				return;
 			}
+
+			if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='upcTableOutter']"), 5) ==null)
+			{
+				Report.Failure("View UPC table was not displayed");
+				return;
+			}
+			Report.Info("UPC is: " + upc);
 			string retailer = Context.GetFromContext(retailerSavedAs).ToString();
-			//var abbreviationMappings = new RetailerAbbreviations().Map;
-			//if (abbreviationMappings.ContainsKey(retailer))
-			//{
-			//	// then we need to convert from full retailer name to abbreviation because the UPC page displays the abbrv
-			//	retailer = abbreviationMappings.FirstOrDefault(x => x.Key == retailer).Value;
-			//}
-			retailer = new RetailerAbbreviations().TryConvertToAbbreviation(retailer);
+			//retailer = new RetailerAbbreviations().TryConvertToAbbreviation(retailer);
+			Report.Info("Retailer is: " + retailer);
 			var studioSHAManager = new StudioSHAManager();
 			Report.IsTrue(studioSHAManager.ConfirmRetailerExistsForUPC(retailer, upc), "Failed to find retailer " + retailer + " in list of retailers",
 				"Successfully found retailer " + retailer + " in list of retailers.");

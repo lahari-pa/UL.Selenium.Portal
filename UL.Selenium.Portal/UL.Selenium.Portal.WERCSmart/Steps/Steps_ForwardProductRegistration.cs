@@ -22,23 +22,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the header: (.*) on the Forward Product Registration window")]
 		public void CorrectHeaderShowing(string headerExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Forward Product Registration window should appear");
-			try
-			{
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Info("Checking that Forward Product Registration window appears");
-				var selForwardProductRegistration = new ForwardProductRegistration();
-				string showing = selForwardProductRegistration.HeaderShowing();
-				Report.IsTrue(showing == headerExpected.Trim(),
-					"Forward Product Registration header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
-					"Forward Product Registration header was showing '" + headerExpected + "', as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Info("Checking that Forward Product Registration window appears");
+			var selForwardProductRegistration = new ForwardProductRegistration();
+			string showing = selForwardProductRegistration.HeaderShowing();
+			Report.IsTrue(showing == headerExpected.Trim(),
+				"Forward Product Registration header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
+				"Forward Product Registration header was showing '" + headerExpected + "', as expected!");
+			Report.Screenshot();
 		}
 
 		/// <summary>
