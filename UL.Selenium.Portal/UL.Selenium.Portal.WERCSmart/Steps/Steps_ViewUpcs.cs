@@ -8,6 +8,7 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -71,7 +72,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, upcs.First());
 		}
 
-		[StepDefinition(@"I navigate the the View UPC tab and Check that the Produt UPCs table contains the coloumn labeled 'UPC Name'")]
+		[StepDefinition(@"I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'")]
 		public void INavigateToTheViewUPCTabAndCheckForUPCNameColoumn()
 		{
 			new GlobalSteps().SwitchToTabWithTitle("View UPCs");
@@ -81,5 +82,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
+
+		[StepDefinition(@"I navigate to the View tab for product saved as: (.*) and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'")]
+		public void INavigateToTheViewTabAndCheckForUPCNameColoumn(string savedAs)
+		{
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string tabtitle = productDetails.Name + " (" + productDetails.Id + ")";
+			new GlobalSteps().SwitchToTabWithTitle(tabtitle);			
+
+			Report.IsTrue(new SummaryPage().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
+
+
+			new GlobalSteps().ThenCloseTheWindowThatOpened();
+		}
+
+
+
 	}
+
 }

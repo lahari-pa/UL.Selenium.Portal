@@ -6,6 +6,7 @@ using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using NTTQA.Selenium.Reporting.Core;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -119,6 +120,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public IWebElement LoadingSpinner()
 		{
 			return this.containerElement.FindElement(By.XPath(@".//span[contains(@data-bind,""dataEntry.pname() === 'undefined (undefined)"") and contains(text(),'Loading')]"), 2);
+		}
+
+		private List<IWebElement> UpcHeadings => this.containerElement.FindElements(By.XPath(".//h2[contains(text(),'UPC')]//ancestor::div[@class='summary-question-container']/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
+
+		private string[] UPCHeadingTitles => this.UpcHeadings.Select(x => x.FindElement(By.XPath("./div"), 2).Text).ToArray();
+
+		public bool DoesUPCHeadingsContain(string headingName)
+		{
+
+			var newList = this.UPCHeadingTitles;
+			if (newList.Contains(headingName))
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Did not find the Heading name: " + headingName + ". Heading names found are as follows: " + string.Join(",", newList));
+				return false;
+			}
+			
 		}
 	}
 

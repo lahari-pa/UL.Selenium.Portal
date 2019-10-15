@@ -322,8 +322,13 @@ Scenario: [NOTINCLUDEDGENERALTEST] View UPCs- Check that UPC name coloumn exists
 	And I filter for the product saved as: TestCase87685
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: View UPCs
-	Then I navigate the the View UPC tab and Check that the Produt UPCs table contains the coloumn labeled 'UPC Name'
-	
+	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View
+	Then I navigate to the View tab for product saved as: TestCase87685 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+
+	Given I generate a random UPC number and save as: UPC109503
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase109503
@@ -341,11 +346,16 @@ Scenario: [NOTINCLUDEDGENERALTEST] View UPCs- Check that UPC name coloumn exists
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given I navigate to the landing page
+	Then If purchase details are showing click confirm order
+	
 	And I filter for the product saved as: TestCase109503
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: View UPCs
-	Then I navigate the the View UPC tab and Check that the Produt UPCs table contains the coloumn labeled 'UPC Name'
+	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View
+	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
 
 
 Scenario: [NOTINCLUDEDGENERALTEST] Rejected Registration - Edit -  Message is displayed about Rejected Registrations and SDS Restrictions
@@ -431,7 +441,30 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then I confirm the following sections are displayed in the UL Solution Center page:
 		| Sections  |
 		| Navigator |
-	#Then do Image Comparison here 
+	#Then do Image Comparison here
+
+Scenario: [NOTINCLUDEDGENERALTEST] product submit upc info entry
+Given I generate a random UPC number and save as: UPC109503
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase109503
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
+	Given I click continue
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
+
 
 		              
 
