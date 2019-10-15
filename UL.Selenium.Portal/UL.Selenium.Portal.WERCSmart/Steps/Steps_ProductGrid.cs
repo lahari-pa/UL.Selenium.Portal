@@ -193,7 +193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ProductIdField = product
 			};
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(selProdGrid.ProductsCount()> 0, "No products were returned for ID: '" + product + "'!", "Product was returned!");
+			Report.IsTrue(selProdGrid.ProductsCount() > 0, "No products were returned for ID: '" + product + "'!", "Product was returned!");
 		}
 
 
@@ -648,7 +648,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I generate (.*) random UPC numbers and save as: (.*)")]
+		[StepDefinition(@"I generate (.*) random UPC numbers and save all to list named: (.*)")]
 		public void GivenIGenerateXRandomUPCNumbersAndSaveAs(int x, string savedAs)
 		{
 			var listOfUPCs = new List<string>();

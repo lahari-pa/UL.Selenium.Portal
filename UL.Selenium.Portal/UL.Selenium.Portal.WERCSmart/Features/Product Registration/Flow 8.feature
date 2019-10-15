@@ -638,7 +638,7 @@ Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 Scenario: [110324] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC Upload
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Then I generate 7 random UPC numbers and save as: UPC_Jacob
+	Then I generate 7 random UPC numbers and save all to list named: UPC_Jacob
 	Then I delete all products in contextual list of UPCs: UPC_Jacob
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fireworks

@@ -371,8 +371,6 @@
     <None Include="Features\Home page\BulkActions.feature">
     </None>
     <None Include="Features\Home page\Filters.feature" />
-    <None Include="Features\Home page\HomePage.feature">
-    </None>
     <None Include="Features\Ingredients.feature">
     </None>
     <None Include="Features\LandingPage.feature">
@@ -443,8 +441,6 @@
     <None Include="Features\Product Registration\Flow 9.feature">
     </None>
     <None Include="Features\Product Registration\Ingredients\TransparencyRationCalculation.feature">
-    </None>
-    <None Include="Features\Product Registration\Kits - Flow 13\Kits - Flow 13.feature">
     </None>
     <None Include="Features\Product Registration\Kits - Flow 13\Kit Child Products And Transport Options.feature" />
     <None Include="Features\Product Registration\Kits - Flow 13\Kit Direct Ship Vendor.feature" />

@@ -2824,7 +2824,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
 		}
 
-		[Then(@"I enter start date (.*) and end date (.*) for Advanced Reporting")]
+		[StepDefinition(@"In the Advanced Reporting popup I verify I (can|cannot) select report (.*)")]
+		public void GivenInTheAdvancedReportingPopupIVerifyICannotSelectReport(string option, string reportName)
+		{
+			bool expected = option == "can";
+			Report.IsTrue(new SHAAdvancedReporting().VerifyReportSelectable(reportName, expected),
+				"Report was unexpectadly located",
+				"Report is not available, as expected");
+		}
+
+		[StepDefinition(@"Verify no Advanced Report exists with description reading: (.*)")]
+		public void GivenVerifyNoAdvancedReportExistsWithDescriptionReading(string reportDescription)
+		{
+			Report.IsTrue(new SHAAdvancedReporting().ReportDescriptionNotAvailable(reportDescription),
+				"",
+				"");
+		}
+
+
+		[StepDefinition(@"I enter start date (.*) and end date (.*) for Advanced Reporting")]
 		public void ThenIEnterStartAndEndDatesForAdvancedReporting(string startDate, string endDate)
 		{
 			Report.Info("Attempting to enter start (" + startDate + ") and end (" + endDate + ") dates");
@@ -2833,7 +2851,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SuccessMessage: "Successfully updated the date fields");
 		}
 
-		[Then(@"I verify the (.*) popup displays")]
+		[StepDefinition(@"I verify the (.*) popup displays")]
 		public void ThenIVerifyThePreparingReportPopupDisplays(string expectedTitle)
 		{
 			Report.IsTrue(new SHAAdvancedReporting().VerifyPopupTitle(expectedTitle, out string output),

@@ -111,6 +111,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return actualDescription == description;
 		}
+
+		internal bool VerifyReportSelectable(string reportName, bool expected)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement reportButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table//td[contains(text(), """ + reportName + @""")]"), 2);
+
+			bool canClick = reportButton.TryClick();
+
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return canClick == expected;
+		}
+
+		internal bool ReportDescriptionNotAvailable(string reportDescription)
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement container = frame.FindElement(By.XPath(@"//*[@id='gbox_listAdvancedReports']"));
+			string path = @"//*[@id='listAdvancedReports']//td[contains(text(),'" + reportDescription + "')]//..//td[@aria-describedby='listAdvancedReports_Description']";
+
+			IWebElement tableDescription = container.FindElement(By.XPath(path), 2);
+
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return tableDescription == null;
+		}
 	}
 
 	class AdvancedReportingDateForm : SeleniumBaseObject
