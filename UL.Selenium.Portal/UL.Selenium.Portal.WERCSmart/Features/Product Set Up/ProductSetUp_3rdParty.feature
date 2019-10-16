@@ -178,6 +178,7 @@ Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include gen
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80763)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80763 and its status is: Completed
 
+@ScenarioId:1562
 Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing
 	Given I generate a random UPC number and save as: UPC80821
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
