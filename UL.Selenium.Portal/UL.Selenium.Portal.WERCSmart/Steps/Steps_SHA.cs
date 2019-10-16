@@ -1350,7 +1350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//| Subject | Message| Notification Date |
-		[Then(@"In the Notification History Detail Screen I confirm that details are as follows")]
+		[StepDefinition(@"In the Notification History Detail Screen I confirm that details are as follows")]
 		public void ThenInTheNotificationHistoryDetailScreenIConfirmThatDetailsAreAsFollows(Table table)
 		{
 			var thisProductNotificationHistory = new ProductNotificationHistory();
@@ -2408,7 +2408,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Given(@"I create a new file saved as: (.*) to upload using the UPCs saved as:")]
+		[StepDefinition(@"I create a new file saved as: (.*) to upload using the UPCs saved as:")]
 		public void GivenICreateANewFileSavedAsToUploadUsingTheUPCsSavedAs(string savedAs, Table upcs)
 		{
 			throw new NotImplementedException();

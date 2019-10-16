@@ -870,7 +870,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[Then(@"A Summary page should open in a new browser tab")]
+		[StepDefinition(@"A Summary page should open in a new browser tab")]
 		public void ThenASummaryPageShouldOpenInANewBrowserTab()
 		{
 			var OpenBrowsers =
@@ -900,7 +900,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[Then(@"I should not seen an Accept button")]
+		[StepDefinition(@"I should not seen an Accept button")]
 		public void ThenIShouldNotSeenAnAcceptButton()
 		{
 			var thisSummaryPage = new SummaryPage();
@@ -948,7 +948,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Current product count is: " + currentProductCount.ToString());
 		}
 
-		[Then(@"the number of items in the pie chart should be one less than the figure I saved")]
+		[StepDefinition(@"the number of items in the pie chart should be one less than the figure I saved")]
 		public void ThenTheNumberOfItemsInThePieChartShouldBeOneLessThanTheFigureISaved()
 		{
 			var myHomepage = new Homepage();

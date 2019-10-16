@@ -10,14 +10,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "ReviewDocuments")]
 	class Steps_ReviewDocuments
 	{
-		[Then(@"I should see Review Documents")]
+		[StepDefinition(@"I should see Review Documents")]
 		public void ThenIShouldSeeReviewDocuments()
 		{
 			Report.IsTrue(new ReviewDocuments().Wait_for_load(), "Review documents pages is not showing",
 				"Review documents page is showing");
 		}
 
-		[Then(@"In the Documents section I should see the following columns: (.*)")]
+		[StepDefinition(@"In the Documents section I should see the following columns: (.*)")]
 		public void ThenInTheDocumentsSectionIShouldSeeTheFollowingColumns(string columns)
 		{
 			var newReviewDocs = new ReviewDocuments();
@@ -37,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(newReviewDocs.ClickViewInFirstSupplierUploadedDoc(), "Failed to click view link", "Clicked view link");
 		}
 
-		[Then(@"a document should open")]
+		[StepDefinition(@"a document should open")]
 		public void ThenADocumentShouldOpen()
 		{
 			Report.Screenshot();
