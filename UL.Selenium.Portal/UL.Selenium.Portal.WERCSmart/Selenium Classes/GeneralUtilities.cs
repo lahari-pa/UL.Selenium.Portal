@@ -10,6 +10,8 @@ using System.Text;
 using System.Linq;
 using NTTQA.Selenium.UniversalFunctions;
 using System.IO;
+using System.Net;
+using System.Drawing;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -201,6 +203,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return false;
 		}
+
+		public static Bitmap CreateBitmapFromURL(string url)
+		{
+			WebClient myClient = new WebClient();
+			Stream myStream = myClient.OpenRead(url);
+			return new Bitmap(myStream);
+		}
+
+		public static Bitmap CreateBitmapFromFile(string file)
+		{
+			return new Bitmap(file);
+		}
+
+		public static bool CompareBitmaps(Bitmap bitmap1, Bitmap bitmap2)
+		{
+			return GeneralFunctions.CompareImages(bitmap1, bitmap2);
+		}
 	}
 
 	public class RetailerAbbreviations
@@ -291,5 +310,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return input;
 		}
+
+		
+
+
+
+
+		
+
 	}
+
 }

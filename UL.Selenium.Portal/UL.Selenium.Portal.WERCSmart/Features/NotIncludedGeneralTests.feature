@@ -241,51 +241,6 @@ Scenario: [NOTINCLUDEDGENERALTEST] Lithium Battery Product-no regularotry docume
 Scenario: [NOTINCLUDEDGENERALTEST] SHA LOGIN CHECKER
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 
-Scenario: [NOTINCLUDEDGENERALTEST] Registration Suspension: Email Notification Message Does not contain blurb
-	#This is the scenario for Ticket 102604 (move to correct location and add TFS ID)
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I Save the email for the TReVor: ProductAccount Test user as: ProductAccountEmail
-	Given I save the current emails in the inbox for address saved as: ProductAccountEmail
-	Given I generate a random UPC number and save as: UPC109503
-	Then The home screen should load
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-	Then I save the product information as: TestCase109503
-	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer  |
-		| Walgreens |
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
-	Given I click continue
-	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109503)
-	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109503)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase109503)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109503 and its status is: Assigned
-	And In SHA Manager I select the first product
-	And I click the following option in the bottom menu: Suspended
-	And In the Suspended dialog I Select the following clients: All
-	And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: Automated QASha
-	And In the Suspended dialog in the Select Subject drop down I choose: Formula – Document Issue
-	And In the Suspended dialog I click Save
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109503)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109503 and its status is: Suspended
-	Then I Check there should be a new suspension notification email for user: ProductAccountEmail for the Product saved as: TestCase109503 with the suspension subject of: Formula – Document Issue and check it does not contain text from the table:
-	| SearchText                                                                                                                                                                                                                                                      |
-	| Use the “Recertification” link available on the registration to correct the issue; or                                                                                                                                                                           |
-	| Contact the Help Desk Hub via a ticket.  If you registered the product, a ticket is already created in your My Ticket area of the Hub (post a reply to the existing ticket).                                                                                    |
-	| If you recertify the data, accept the revisions allowing data transfer.  The assessment will proceed.                                                                                                                                                           |
-	| Be aware:  If no response within ten (10) days will result in registration cancellation and the assessment will not proceed to the retailer.  You may contact the Help Desk for reinstatement of the assessment as needed, but the hold remains until resolved. |                                                                                                                                               
-	Then the text of the email should show: To resolve this issue, please log into WERCSmart.  Using either the RESOLVE option in the ALERT area on the Home Page, or using the RESOLVE option available for the registration in My Messages, update the necessary data or documentation.  Once the registration is revised, you may accept the updates which will transfer the registration back to the Assessment team for processing. Please be aware that if you do not update and resubmit the registration data within ten (10) days this may result in your registration being cancelled and the assessment will not proceed to your Retailer(s).  You may contact support for assistance as needed.  Thank you for your prompt attention to this matter. The WERCSmart Assessment Team
-
 
 #This test will not work as the email will not be sent to products account (selecting product from differnt user)
 Scenario: [NOTINCLUDEDGENERALTEST] Suspend a Product - Formula - Document Issue - Check Email does not contain Blurb
@@ -312,10 +267,8 @@ Scenario: [NOTINCLUDEDGENERALTEST] Suspend a Product - Formula - Document Issue 
 	| Contact the Help Desk Hub via a ticket.  If you registered the product, a ticket is already created in your My Ticket area of the Hub (post a reply to the existing ticket).                                                                                    |
 	| If you recertify the data, accept the revisions allowing data transfer.  The assessment will proceed.                                                                                                                                                           |
 	| Be aware:  If no response within ten (10) days will result in registration cancellation and the assessment will not proceed to the retailer.  You may contact the Help Desk for reinstatement of the assessment as needed, but the hold remains until resolved. |                                                                                                                                               
-
-
-
 	
+
 
 
 Scenario: [NOTINCLUDEDGENERALTEST] Rejected Registration - Edit -  Message is displayed about Rejected Registrations and SDS Restrictions
@@ -425,6 +378,22 @@ And I call Shared Step 57408 (Create a New Registration via Register New Product
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 
+Scenario: [NOTINCLUDEDGENERALTEST] UL Solution Center - Shows Updated Navigator Logo
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I click the UL Solution Center icon in the QuickLinks Pane
+	Then I confirm that the UL Solution Center page is loaded
+	Then I Confirm the Navigator heading is displayed next to an icon
+	#Check Icon is updated version
+	And I Confirm the information statement for section: Navigator reads: Navigator highlights the main chemical regulatory requirements for over 50 countries around the world. These summaries compile the most important information all in one place, offering easy to understand explanations of complex topics, paired with links to laws and helpful resources. Summaries are authored and updated by our global regulatory specialists, whose primary responsibility is the monitoring and reporting of regulations in their given country.
+	And I confirm the Learn More button is displayed for section: Navigator
+	Given I click the Learn More button for section: Navigator
+	Given I switch to the Navigator information tab
+	Then I check that the current URL contains: https://msc.ul.com/en/products/navigator/
+
+Scenario: [NOTINCLUDEDGENERALTEST] Pub to completed then run report
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed and save the product as: (.*)
+	
 
 		              
 

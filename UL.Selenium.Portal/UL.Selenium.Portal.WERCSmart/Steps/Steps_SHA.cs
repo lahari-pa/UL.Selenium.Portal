@@ -1080,6 +1080,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheSuspendedDialogInTheSelectRegulatorySpecialistDropDownIChoose(string regulatorySpecialist)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			if(regulatorySpecialist== "SHA Regulatory Specialist")
+			{
+				regulatorySpecialist= TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
+			}
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectRegulatorySpecialist(regulatorySpecialist),
 				"Failed to select regulatory specialist: " + regulatorySpecialist, "Selected: " + regulatorySpecialist);
 

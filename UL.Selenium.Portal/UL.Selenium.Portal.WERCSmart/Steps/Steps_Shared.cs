@@ -4380,7 +4380,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.ClickProcessProductData();
 			Report.IsTrue(myStudioShaManager.SetAutoAssignRegulatorySpecialisttoProduct(false),
 				"Failed to deselect Auto assign regulatory specialist", "Deselected auto assign regulatory specialist");
-			Report.IsTrue(myStudioShaManager.SelectRegulatorySpecialist("Automated QASha"),
+			var regSpec = TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
+			if(regSpec==null)
+			{
+				Report.Info("Failed to find SHA Regulatory Specialist in context, defaulting to: Automated QASha");
+				regSpec = "Automated QASha";
+			}
+			Report.Info($"The Regulatory Specialist that will be selected is: {regSpec}");
+				
+			Report.IsTrue(myStudioShaManager.SelectRegulatorySpecialist(regSpec),
 				"Failed to select regulatory specialist", "Selected regulatory specialist");
 			Report.IsTrue(myStudioShaManager.ClickContinueInProcessProducts(), "Failed to click continue",
 				"Clicked continue");
