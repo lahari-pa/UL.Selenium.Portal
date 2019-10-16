@@ -54,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			Report.IsTrue(!string.IsNullOrEmpty(token), "Failed to find a token for user: " + userName, "Successfully acquired a token for user: " + userName, false, false);
 		}
 
-		[Given(@"I authenticate WasteHauler username: (.*), password: (.*)")]
+		[StepDefinition(@"I authenticate WasteHauler username: (.*), password: (.*)")]
 		public void GivenIAuthenticateWasteHaulerUsername(string userName, string password)
 		{
 			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate

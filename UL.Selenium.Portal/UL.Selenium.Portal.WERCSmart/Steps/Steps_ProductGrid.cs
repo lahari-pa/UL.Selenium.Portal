@@ -193,7 +193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ProductIdField = product
 			};
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(selProdGrid.ProductsCount()> 0, "No products were returned for ID: '" + product + "'!", "Product was returned!");
+			Report.IsTrue(selProdGrid.ProductsCount() > 0, "No products were returned for ID: '" + product + "'!", "Product was returned!");
 		}
 
 
@@ -648,6 +648,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I generate (.*) random UPC numbers and save all to list named: (.*)")]
+		public void GivenIGenerateXRandomUPCNumbersAndSaveAs(int x, string savedAs)
+		{
+			var listOfUPCs = new List<string>();
+			for (int i = 0; i < x; i++)
+			{
+				string thisUPCName = savedAs + "_" + i.ToString();
+				this.GivenIGenerateARandomUPCNumberAndSaveAs(thisUPCName);
+				listOfUPCs.Add(thisUPCName);
+			}
+			Context.AddToContext(savedAs, listOfUPCs);
+		}
+
+		[StepDefinition(@"I delete all products in contextual list of UPCs: (.*)")]
+		public void IDeleteAllProductsInContextualListOfUPCs(string savedAs)
+		{
+			var listOfUPCs = (List<string>)Context.GetFromContext(savedAs);
+			foreach (var str in listOfUPCs)
+			{
+				this.DeleteAllProductsMatchingCriteria("UPC Number", (string)Context.GetFromContext(str));
+			}
+		}
 
 		[StepDefinition(@"I delete all products with (UPC Number): (.*)")]
 		public void DeleteAllProductsMatchingCriteria(string option, string value)
@@ -848,7 +870,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[Then(@"A Summary page should open in a new browser tab")]
+		[StepDefinition(@"A Summary page should open in a new browser tab")]
 		public void ThenASummaryPageShouldOpenInANewBrowserTab()
 		{
 			var OpenBrowsers =
@@ -878,7 +900,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[Then(@"I should not seen an Accept button")]
+		[StepDefinition(@"I should not seen an Accept button")]
 		public void ThenIShouldNotSeenAnAcceptButton()
 		{
 			var thisSummaryPage = new SummaryPage();
@@ -926,7 +948,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Current product count is: " + currentProductCount.ToString());
 		}
 
-		[Then(@"the number of items in the pie chart should be one less than the figure I saved")]
+		[StepDefinition(@"the number of items in the pie chart should be one less than the figure I saved")]
 		public void ThenTheNumberOfItemsInThePieChartShouldBeOneLessThanTheFigureISaved()
 		{
 			var myHomepage = new Homepage();
@@ -2288,8 +2310,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				i++;
 			}
 
-		}		
+		}
 
-		
+
 	}
 }
