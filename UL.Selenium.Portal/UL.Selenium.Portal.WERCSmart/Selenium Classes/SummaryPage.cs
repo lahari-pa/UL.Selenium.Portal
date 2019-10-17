@@ -141,6 +141,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			
 		}
+		private List<IWebElement> IngredientHeadings => this.containerElement.FindElements(By.XPath(".//h2[contains(text(),'Ingredients')]//ancestor::div[@class='summary-question-container']/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
+
+		private string[] IngredientHeadingTitles => this.IngredientHeadings.Select(x => x.FindElement(By.XPath("./div"), 2).Text).ToArray();
+
+		public bool DoesIngredientHeadingsContain(string headingName)
+		{
+
+			var newList = this.IngredientHeadingTitles;
+			if (newList.Contains(headingName))
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Did not find the Heading name: " + headingName + ". Heading names found are as follows: " + string.Join(",", newList));
+				return false;
+			}
+
+		}
+
 	}
 
 	class SummaryDocument
