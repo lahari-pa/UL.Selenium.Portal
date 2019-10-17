@@ -63,8 +63,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						}
 
 						Report.Success("Found window containing title: " + popupTitle);
-						Report.Screenshot();
-
 						return true;
 					}
 				}

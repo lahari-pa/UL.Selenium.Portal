@@ -1037,13 +1037,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter combinations of More Filters and should see the product ID: (.*) only for the correct combinations")]
 		public void EnterCombinationsOfMoreFilters(string id, Table moreFilters)
 		{
-			if (Regex.IsMatch(id, "<(.*)>"))
+			if (Context.GetFromContextRegex(id, out var result))
 			{
-				var savedAs = Regex.Match(id, "<(.*)>").Groups[1].ToString();
-				if (Context.Contains(savedAs))
-				{
-					id = Context.GetFromContext(savedAs).ToString();
-				}
+				Report.Info("Getting ID from context: " + id);
+				id = result.ToString();
 			}
 			TestReport.UseSubSteps = true;
 			var selProductsGrid = new ProductsGrid();
@@ -1051,6 +1048,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var filters = new List<KeyValuePair<string, string>>();
 			foreach (TableRow row in moreFilters.Rows)
 			{
+				if (Context.GetFromContextRegex(row["Match"], out var matchResult))
+				{
+					row["Match"] = matchResult.ToString();
+				}
 				filters.Add(new KeyValuePair<string, string>(
 					row["Filter"],
 					row["Match"]));
@@ -1083,24 +1084,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							KeyValuePair<string, string> filter = filtersToDo[l];
 							string filterType = filter.Key;
 							List<string> options = new List<string>();
-							string upc = "";
+							string upc = filter.Value;
 							if (filterType == "UPC")
 							{
-								if (Regex.IsMatch(filter.Value, "<(.*)>"))
+								if (Context.GetFromContextRegex(filter.Value, out var upcResult))
 								{
-									var savedAsUpc = Regex.Match(filter.Value, "<(.*)>").Groups[1].ToString();
-									if (Context.Contains(savedAsUpc))
-									{
-										upc = Context.GetFromContext(savedAsUpc).ToString();
-									}
+									Report.Info("Getting UPC from context: " + upc);
+									upc = upcResult.ToString();
 								}
+								Report.Info("UPC: " + upc);
 								options.Add(upc);
 							}
 							else
 							{
 								options = selMoreFilters.Options(filterType);
 							}
-							//List<string> options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
 							string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 							switch (filterType)
 							{
@@ -1155,7 +1153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						KeyValuePair<string, string> filter = filtersToDo[l];
 						string filterType = filter.Key;
-						List<string> options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
+						List<string> options = filterType == "UPC" ? new List<string> { filter.Value } : selMoreFilters.Options(filterType);
 						string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 						switch (filterType)
 						{
@@ -1205,7 +1203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						KeyValuePair<string, string> filter = filters[l];
 						string filterType = filter.Key;
-						List<string> options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
+						List<string> options = filterType == "UPC" ? new List<string> { filter.Value } : selMoreFilters.Options(filterType);
 						string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 						switch (filterType)
 						{
@@ -1243,14 +1241,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the product exists with Product ID: (.*) and Name: (.*)")]
 		public void ProductExistsWithIDAndName(string id, string name)
 		{
-			if (Regex.IsMatch(id, "<(.*)>"))
+			if (Context.GetFromContextRegex(id, out var result))
 			{
-				var savedAs = Regex.Match(id, "<(.*)>").Groups[1].ToString();
-				if (Context.Contains(savedAs))
-				{
-					id = Context.GetFromContext(savedAs).ToString();
-				}
+				Report.Info("Getting ID from context: " + id);
+				id = result.ToString();
 			}
+			Report.Info("Product ID: " + id);
 			var selProdGrid = new ProductsGrid {
 				ProductIdField = id
 			};

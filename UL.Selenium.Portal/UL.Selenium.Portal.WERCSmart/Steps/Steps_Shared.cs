@@ -4124,7 +4124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(1);
 				Report.Info("Waiting for product list");
 				Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
-					"Product list is showing");
+					"Product list is showing", ShowSuccessScreenshot: false);
 				if (!myStudioShaManager.TopRowProductsTableMatchesId(id))
 				{
 					counter++;
@@ -4143,7 +4143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var thisTopMenu = new StudioTopMenu();
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
 			TestReport.StartStep("I click System > Job Queue");
 			thisTopMenu.ClickSubMenu("System", "Job Queue");
 			Delay.Seconds(5);
@@ -4152,10 +4152,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I confirm there is an entry for UserName = SHAMANAGER, Date Started = Current Date, Class = Wercs.Core.BLLPortal.ImportProcessRules");
 			var thisStudioJobQueue = new StudioJobQueue();
 			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
-				"Job queue has loaded");
+				"Job queue has loaded", ShowSuccessScreenshot: false);
 			GeneralUtilities.StudioWaitForSpinner();
 			Report.IsTrue(thisStudioJobQueue.ClickJobQueueMenuItem("Job Queue"), "Failed to navigate to job queue",
-				"Navigated to job queue");
+				"Navigated to job queue", ShowSuccessScreenshot: false);
 			GeneralUtilities.StudioWaitForSpinner();
 			thisStudioJobQueue = new StudioJobQueue();
 			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
@@ -4278,7 +4278,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			var thisTopMenu = new StudioTopMenu();
 			TestReport.StartStep("I click the Authoring menu option and Select Power Designer Plus");
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
 			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
 				"Failed to navigate to power designer plus", "Navigated to power designer plus");
 			Report.Screenshot();
@@ -4699,7 +4699,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 			var thisTopMenu = new StudioTopMenu();
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
 			thisTopMenu.ClickSubMenu("System", "Job Queue");
 			GeneralUtilities.StudioWaitForSpinner();
 			Delay.Seconds(5);
@@ -4724,7 +4724,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Success("Found job with id: " + id.ToString() + " as expected");
-				Report.Screenshot();
 				//Wait for job to not appear in the list
 				for (int i = 0; i < 120; i++)
 				{
@@ -5946,9 +5945,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I select regulatory specialist: Automated QASha");
 			Report.IsTrue(processUI.SelectRegulatorySpecialist("Automated QASha"),
 				"Failed to select regulatory specialist: Automated QASha",
-				"Successfully selected regulatory specialist: Automated QASha");
+				"Successfully selected regulatory specialist: Automated QASha", ShowSuccessScreenshot: false);
 			TestReport.StartStep("I click continue");
-			Report.IsTrue(processUI.ClickContinue(), "Failed to click continue!", "Successfully clicked continue");
+			Report.IsTrue(processUI.ClickContinue(), "Failed to click continue!", "Successfully clicked continue", ShowSuccessScreenshot: false);
 			TestReport.StartStep("I click Find in the Product Search popup");
 			Delay.Seconds(5);
 			var productSearch = new StudioSHAManagerProductSearch();
@@ -5959,11 +5958,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.IsTrue(productSearch.ClickButton("Find"), "Failed to click Find in product search",
-				"Successfully clicked Find in product search");
+				"Successfully clicked Find in product search", ShowSuccessScreenshot: false);
 			TestReport.StartStep("I close the Process Products pop up");
 			processUI = new ProcessUIDialog();
 			Report.IsTrue(processUI.ClickClose(), "Failed to close the Process Products popup",
-				"Successfully closed the Process Products popup");
+				"Successfully closed the Process Products popup", ShowSuccessScreenshot: false);
 			TestReport.StartStep("I confirm the product saved as is shown in the Accepted status");
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Accepted");

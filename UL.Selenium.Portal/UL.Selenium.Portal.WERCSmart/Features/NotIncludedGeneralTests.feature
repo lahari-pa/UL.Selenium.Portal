@@ -167,7 +167,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Dupe UPC tool, Creating product with one dupe
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	Then I should see the Universal Product Code (UPC) Page
 	Given I click the 'Add UPC' button
 	Given I add the following into the UPC Fields
 		| UPC Number                            | Container Type    | Size | DPCI | Quantity |
