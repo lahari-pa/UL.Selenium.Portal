@@ -167,6 +167,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
     <Compile Include="Selenium Classes\AddNewSupplier.cs" />
+    <Compile Include="Selenium Classes\AdvancedReportsRules\DailyReportWERCSmartAdditionalReportsPublished.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\AccountCreation.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\GGNewProduct.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\Homepage.cs" />

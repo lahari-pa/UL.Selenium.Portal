@@ -983,7 +983,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"The remaining characters counter displays: (.*)/500")]
 		public void ThenTheRemainingCharactersCounterDisplays(int charRemain)
 		{
-			ScenarioContext.Current.Pending();
+			Context.ScenarioContext.Pending();
 		}
 
 
