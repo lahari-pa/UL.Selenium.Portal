@@ -63,12 +63,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ClickPageHeading(string section)
 		{
 			Delay.Seconds(10);
-            //if current section == section return
-            if(NewProduct.ActivePanelHeadingText() == section)
-            {
-                Report.Info("The panel: " + section + " is already active");
-                return;
-            }
+			//if current section == section return
+			if (NewProduct.ActivePanelHeadingText() == section)
+			{
+				Report.Info("The panel: " + section + " is already active");
+				return;
+			}
 			Report.IsTrue(NewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
 			GeneralUtilities.Wait_for_load_finish();
 			//this.GivenIShouldSeeXPage(section);
@@ -813,7 +813,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Enter in VOC content in grams ozone per gram text field
 		/// </summary>
-		[Then(@"In the product Characteristics tab, I enter: (.*) in the VOC content in grams ozone per gram text field")]
+		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the VOC content in grams ozone per gram text field")]
 		public void ThenInTheProductCharacteristicsTabIEnterInTheVOCContentInGramsOzonePerGramTextField(string option)
 		{
 			Report.IsTrue(new NewProduct().VocContentInGrams(option), "Text: " + option + " was not successfully inputted into the comments field!", "Text: " + option + " was successfully inputted into the comments field!");
@@ -979,6 +979,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
+
+		[StepDefinition(@"The remaining characters counter displays: (.*)/500")]
+		public void ThenTheRemainingCharactersCounterDisplays(int charRemain)
+		{
+			ScenarioContext.Current.Pending();
+		}
+
 
 		[StepDefinition(@"The Data Acceptance page should appear")]
 		public void ThenTheDataAcceptancePageShouldApprear()
@@ -1662,13 +1669,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			//	namesAsList.Add(item.Name);
 			//}
 			Report.IsTrue(!productLineOptions.Select(x => x.Name).ToList().Except(activeBrands).Any() && productLineOptions.Count == activeBrands.Count,
-				"The 'Product Line or Brand' drop down options were not limited exclusively to saved active brands. The options showing were: " + string.Join(", ", productLineOptions.Select(x=>x.Name).ToList()),
+				"The 'Product Line or Brand' drop down options were not limited exclusively to saved active brands. The options showing were: " + string.Join(", ", productLineOptions.Select(x => x.Name).ToList()),
 				"The 'Product Line or Brand' drop down options were limited exclusively to saved active brands as expected. The options showing were: " + string.Join(", ", productLineOptions.Select(x => x.Name).ToList()));
 
-			
-			
 
-			
+
+
+
 		}
 
 		[StepDefinition(@"In the Create the kit page I search for and select: (.*)")]
@@ -1721,7 +1728,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Question is not showing as expected", "Question is showing or not as expected");
 		}
 
-		[Then(@"a (Danger & Warning|Warning) popup dialog should appear with the message: (.*)")]
+		[StepDefinition(@"a (Danger & Warning|Warning) popup dialog should appear with the message: (.*)")]
 		public void ThenAWarningPopupDialogShouldAppearWithTheMessage(string title, string message)
 		{
 			var thisModalDialog = new ModalDialog();
@@ -1734,7 +1741,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Delay.Seconds(1);
 		}
 
-		[Then(@"I should see an alert with title: (.*) subtitle: (.*) Text: (.*)")]
+		[StepDefinition(@"I should see an alert with title: (.*) subtitle: (.*) Text: (.*)")]
 		public void ThenIShouldSeeAnAlertWithTitleSubtitleText(string title, string subtitle, string text)
 		{
 			var thisNewProduct = new NewProduct();
@@ -1744,7 +1751,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(thisAlert.Text == text, "Text is not as expected. Expected " + text + " but got: " + thisAlert.Text, "Text matches");
 		}
 
-		[Then(@"on the Neonicotinoid Warning Page I should see a link with text: (.*) which links to page: (.*)")]
+		[StepDefinition(@"on the Neonicotinoid Warning Page I should see a link with text: (.*) which links to page: (.*)")]
 		public void ThenOnTheNeonicotinoidWarningPageIShouldSeeALinkWithTextWhichLinksToPage(string linkText, string link)
 		{
 			var thisNewProduct = new NewProduct();
@@ -1816,7 +1823,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					, ingredient.PublicName, ingredient.ChemicalName, ingredient.Index));
 		}
 
-		[Then(@"Field exists: (.*)")]
+		[StepDefinition(@"Field exists: (.*)")]
 		public void ThenFieldExists(string field)
 		{
 
@@ -1844,7 +1851,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"As expected, an error message were displayed for section: " + section);
 		}
 
-		[Then(@"For every field in the table I should (see|not see) the following error: (.*)")]
+		[StepDefinition(@"For every field in the table I should (see|not see) the following error: (.*)")]
 		public void ThenForEveryFieldInTheTableIShouldSeeTheFollowingError(string condition, string expectedError, Table table)
 		{
 			Delay.Seconds(3);
@@ -1864,7 +1871,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[Then(@"For every field in the table I call Shared Step 56494 expecting error: (.*)")]
+		[StepDefinition(@"For every field in the table I call Shared Step 56494 expecting error: (.*)")]
 		public void ThenForEveryFieldInTheTableICallSharedStep56494ExpecingError(string error, Table table)
 		{
 			var thisStepShared = new Steps_Shared();
@@ -1946,7 +1953,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"All options in the PDM drop down contained the domain CVSHealth.com as expected");
 		}
 
-		[Then(@"in the VOC Summary page I should see the following noneditable statements")]
+		[StepDefinition(@"in the VOC Summary page I should see the following noneditable statements")]
 		public void ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(Table table)
 		{
 			List<string> VOCSummaryStatements = new NewProduct().GetVOCSummaryStatements();
@@ -1958,14 +1965,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[Then(@"the VOC concentration question shows a yes and a no button")]
+		[StepDefinition(@"the VOC concentration question shows a yes and a no button")]
 		public void ThenTheVOCConcentrationQuestionShowsAYesAndANoButton()
 		{
 			Report.IsTrue(new NewProduct().VOCConcentrationQuestionHasYesAndNo(), "Expected VOC Concentration to have yes and no",
 				"VOC concentration has yes and no");
 		}
 
-		[Then(@"For the VOC concentration question field I should see the following error: (.*)")]
+		[StepDefinition(@"For the VOC concentration question field I should see the following error: (.*)")]
 		public void ThenForTheVOCConcentrationQuestionFieldIShouldSeeTheFollowingError(string error)
 		{
 			string actualError = new NewProduct().VOCConcentrationError();
@@ -1977,7 +1984,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Error is showing as expected");
 		}
 
-		[Then(@"For the VOC page I should see the following error: (.*)")]
+		[StepDefinition(@"For the VOC page I should see the following error: (.*)")]
 		public void ThenForTheVOCPageIShouldSeeTheFollowingError(string error)
 		{
 			List<string> actualErrors = new NewProduct().DisplayedAlerts();
@@ -2045,7 +2052,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				count++;
 			}
 		}
-		[Then(@"The alert message (is|is not) displayed with text: (.*)")]
+		[StepDefinition(@"The alert message (is|is not) displayed with text: (.*)")]
 		public void AlertMessageDisplayed(string displayed, string alert)
 		{
 			bool expectDisplayed = false;
@@ -2501,9 +2508,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"In the Regulatory Documents to Provide Page I check that the input field with label: (.*) is shown as (Red|Green)")]
-		public void InTheRegulatoryDocumentsToProvidePageICheckThatAllInputFieldsAreRed(string fieldName,string expectedColor)
+		public void InTheRegulatoryDocumentsToProvidePageICheckThatAllInputFieldsAreRed(string fieldName, string expectedColor)
 		{
-			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected","The input field color was as expected");
+			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 		}
 
 
