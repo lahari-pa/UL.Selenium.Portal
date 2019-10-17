@@ -91,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.IsTrue(thisTopMenu.ClickSubMenu(menuItem, submenuItem), "Failed to click: " + menuItem,
-					"Successfully clicked: " + menuItem, ShowSuccessScreenshot: false);
+					"Successfully clicked: " + submenuItem, ShowSuccessScreenshot: false);
 			}
 
 		}

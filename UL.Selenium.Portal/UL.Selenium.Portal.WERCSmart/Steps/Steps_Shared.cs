@@ -3828,12 +3828,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click Menu: 'My Wercs' and Submenu: 'SHA'");
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			var thisStudioShaManager = new StudioSHAManager();
-			Report.IsTrue(thisStudioShaManager.Wait_for_load(60), "SHA Manager did not load", "SHA Manager loaded");
-            Delay.Seconds(2);
-			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(60), "Loading did not finish");
+			Delay.Seconds(3);
+			Report.IsTrue(thisStudioShaManager.SwitchToFrame(), "Failed to switch to IFrame", ShowSuccessScreenshot: false);
+			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(60), "Loading did not finish", ShowSuccessScreenshot: false);
 			Report.Info("I confirm the product list is loaded");
 			Report.Info("Waiting for product list to be loaded....");
-			Delay.Seconds(2);
 			Report.IsTrue(thisStudioShaManager.WaitForProductList(30), "Product list is not showing",
 				"Product list is showing", ShowSuccessScreenshot: false);
 		}
@@ -4089,10 +4088,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("Beginning shared step: 49841");
 			TestReport.StartStep("I set the status filter to All");
 			var myStudioShaManager = new StudioSHAManager();
-			myStudioShaManager.WaitForProductList(60);
+			//myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
-			Report.IsTrue(myStudioShaManager.WaitForProductList(60), "Product list was not loaded", "Product list loaded", ShowSuccessScreenshot: false);
+			//Report.IsTrue(myStudioShaManager.WaitForProductList(60), "Product list was not loaded", "Product list loaded", ShowSuccessScreenshot: false);
 			Report.Info("Getting saved product: " + savedAs);
 			if (!Context.Contains(savedAs))
 			{
