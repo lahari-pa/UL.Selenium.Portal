@@ -23,6 +23,7 @@
 @Studio
 @ForwardProductRegistration
 @ProductSetUp
+@SupplierReports
 @admin
 @ViewUpcs
 @Solutions
@@ -393,6 +394,29 @@ Scenario: [NOTINCLUDEDGENERALTEST] UL Solution Center - Shows Updated Navigator 
 Scenario: [NOTINCLUDEDGENERALTEST] Pub to completed then run report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed and save the product as: (.*)
+
+Scenario: [NOTINCLUDEDGENERALTEST] Completed product test 1
+
+	Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64528
+	Given I navigate to the landing page
+
+Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) Report correctly displays case pack individual UPC
+#For Ticket 108160
+#add product with indv upc and case pack upc to this and get both upc as saved as
+	Given I Submit a new product which has a Case UPC and a regular UPC
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	#Should be able to remove the wait but check first
+	Then I wait for 30 seconds
+	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
+	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
+	Given In the Supplier Reports screen I click on the Download button
+	Given I click on close in the Report Download dialog
+	Given I confirm that an excel file is produced called UPCs and Registrations (Retailer Specific).xlsx and save as 73082
+	Then I confirm that in the excel file saved as: 73082 for the UPC saved as: UPC876851 there is a 'Y' in the Case Pack column and an Individual UPC listed as: UPC87685
+	And I delete the Supplier Report file saved as 73082
+
 	
 
 		              
