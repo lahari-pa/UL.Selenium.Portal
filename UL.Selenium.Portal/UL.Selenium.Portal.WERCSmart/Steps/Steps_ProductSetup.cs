@@ -2313,7 +2313,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			retailerTable.AddRow("Dollar Tree Stores, Inc. / Greenbrier International, Inc");
 			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
 			var upcTable = new Table("UPCNumber", "ContainerType", "Size");
-			upcTable.AddRow("saved as UPC75335", "Metal Container", "40", "UPC Place Holder");
+			upcTable.AddRow("saved as UPC75335", "Metal Container", "40");
 			newProductSteps.ThenIClickTheAddUpcButton();
 			newProductSteps.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			newProductSteps.ClickContinue();

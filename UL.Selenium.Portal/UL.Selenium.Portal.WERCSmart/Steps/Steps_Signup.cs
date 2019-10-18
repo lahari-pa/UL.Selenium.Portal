@@ -910,7 +910,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 					var email = (Email)Context.GetFromContext("Matching");
 					bool attachmentsPresent = email.Attachments.Any(x => x.FileName.Contains(fileName));
-					if (!Report.IsTrue(!attachmentsPresent, "There was attachments containingpresent in the email", "There was not attachments in the email"))
+					if (!Report.IsTrue(!attachmentsPresent, "There was attachments present in the email", "There was not attachments in the email"))
 					{
 						List<string> attachmentList = email.Attachments.Select(x => x.FileName).ToList();
 						Report.Info("The attachments were as follows: " + string.Join(",", attachmentList));

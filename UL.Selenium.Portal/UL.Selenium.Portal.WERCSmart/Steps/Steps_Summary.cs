@@ -109,7 +109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new GlobalSteps().SwitchToTabWithTitle(tabtitle);
 			new Steps_Summary().TheSummaryPageLoadsWithNoErrors();
 
-			Report.IsTrue(new SummaryPage().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
+			Report.IsTrue(new SummaryPage().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Successfully found the Heading name 'UPC Name'");
 
 
 			new GlobalSteps().ThenCloseTheWindowThatOpened();

@@ -387,6 +387,7 @@ Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 	
 
 
+@ScenarioId:1591
 Scenario: [112939] View - UPC name column exists in the Product UPCs table
 
 	Given I Submit a new product which has a Case UPC and a regular UPC
