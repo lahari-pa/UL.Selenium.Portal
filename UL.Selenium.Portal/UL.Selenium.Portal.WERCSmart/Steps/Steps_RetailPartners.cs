@@ -11,7 +11,8 @@ using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
-
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1409,6 +1410,92 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The success message did not match the expected text. Displayed is: " + string.Join("; ", displayed) + ". Expected is: " + string.Join("; ", expected),
 				"The sucess message matched the expected text.");
 
+		}
+
+		[StepDefinition(@"I create a new supplier products account: (.*) and create a product with retailer CVS")]
+		public void CreateNewSupplierProductsAccountAndCreateAProductWithRetailerCVS(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_Automation_ProductsAccount", "123-456-7889",
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = new StepsSupplierAccounts().SaveUser(subCompanyInfo, savedAs);
+			new StepsSupplierAccounts().BasicSignup(savedAs);
+
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var dataNotification = new GoToDataTierNotification();
+			myHome.ThenIClickOnUserItem("My Account");
+			//Subscription 
+			myAccount.ThenIClickOnNewSubscription();
+			var subEnrollTable = new Table("Articles", "Enhanced Articles",
+				"Formulated Products", "Feature Plan", "Support Services Plan");
+			subEnrollTable.AddRow("Up to 400 Product(s)", "Up to 400 Product(s)", "Up to 400 Product(s)", "Standard", "Bronze");
+			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
+			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
+			myPay.ThenISelectPaymentMethodX("Credit Card");
+			var myCreditCardTable = new Table("Card Type", "Card Number", "Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
+			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
+			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+			myPay.ThenIClickContinue();
+			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+			myPay.ThenInTheThankYouScreenIClickHome();
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("400", "400", "400");
+
+			//My Packaging Type
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
+			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
+			newProductSteps.GivenIShouldSeeXPage("Packaging Type");
+			newProductSteps.SetTheSectionOptionTo("Package Type Name", "myPkg");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
+			myPkgType.SavePackagingTypeDetails("MyPkg1");
+			myPkgType.ClickAddRowBillOfMaterials();
+			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container or any packaging", "No");
+			newProductSteps.SetTheSectionOptionTo("Do you have a CONEG Certificate", "No");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container contain", "None of the above");
+			newProductSteps.SetTheSectionOptionTo("Packaging Component Recyclable", "21");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
+			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
+
+			//My Brands
+			myAccount.ClickTabMyLibrary("My Brands");
+			myAccount.ClickAddNewMyLibrary("My Brands");
+			myBrand.EnterBrandNameExpandedRow("TestBrand");
+			myBrand.ClickSaveMyBrandsGrid();
+			myBrand.ActiveValueIsYesForLastBrand("Yes");
+							
+
+			//create a product for CVS data tier
+			myProductsetup.CreateProductConditionerForCVSAndTakeToDataSummary("product2", "Conditioner");
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("CVS");
+			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			myRetailPartner.SetDataConsentTier("Tier 3", "on");
+			myRetailPartner.GivenClickTheSaveChangesButton();
+			myRetailPartner.ClickCloseOnSavePopupDialog();
 		}
 	}
 }

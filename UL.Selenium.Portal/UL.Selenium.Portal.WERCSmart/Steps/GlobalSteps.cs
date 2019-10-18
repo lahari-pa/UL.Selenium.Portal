@@ -1880,5 +1880,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I create a upc number for CVS")]
+		public void CreateCVSUPC()
+		{
+			string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+		}
+
 	}
 }
