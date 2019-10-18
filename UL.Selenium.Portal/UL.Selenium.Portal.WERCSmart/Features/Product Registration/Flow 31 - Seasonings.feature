@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -57,7 +58,7 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Given I generate a random UPC number and save as: UPC60738
 	Given I delete all products with UPC Number: saved as UPC60738
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts (liquid)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts (Liquid)
 	Then I save the product information as: TestCase60738
 	Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
 	Given I call Shared Step 60756 (Additional Product Information with Country and every option)

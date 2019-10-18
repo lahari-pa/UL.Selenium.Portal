@@ -985,6 +985,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					{
 						Report.Info("Problems with maximising");
 					}
+					Delay.Seconds(5);
 					if (!GeneralUtilities.StudioWaitForSpinner(120))
 					{
 						throw new Exception("Spinner is still showing");

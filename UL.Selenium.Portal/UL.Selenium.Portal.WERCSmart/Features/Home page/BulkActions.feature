@@ -1,3 +1,4 @@
+@Shared
 @wercsmart
 @Login
 @UlSolutionCenter
@@ -128,6 +129,7 @@ Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 	Given I close the window that opened
 	Given I navigate to the home page
 
+@test75321
 @ScenarioId:1092
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
 Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
@@ -145,39 +147,27 @@ And I click continue on the Forward Product Registration page
 And In the Forward Product Registration Screen I select a retailer under Other Retailers and save as TestCase75321Retailer
 And I click continue on the Forward Product Registration page
 And I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue and save UPC as TestCase75321UPC
-Then I should see the header: Product Results on the Forward Product Registration window
+Then I should see the subheading 3: Product Results on the Forward Product Registration window
 Then I confirm that for UPC Number saved as TestCase75321UPC the retailer is displayed as saved as TestCase75321Retailer
-And I confirm that NO Errors display for the Product
+And I confirm that there are NO Errors displayed for the Product
 And I click continue on the Forward Product Registration page
-Then I should see the header: Review & Submit on the Forward Product Registration window
+Then I should see the subheading 3: Review & Submit on the Forward Product Registration window
 Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
 And I click continue on the Forward Product Registration page
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-Then In the Purchase Summary screen I confirm the folling statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 And I Confirm the Product shows status: Completed for retailer: saved as retailer
-And I Confirm the Product shows status: Submitted for retailer: saved as TestCase75321Retailer49841
+And I Confirm the Product shows status: Submitted for retailer: saved as TestCase75321Retailer
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase75321
-And In the SHA Manager Product UPC window I confirm that for UPC: saved as UPC75335 retailer: saved as TestCase75321Retailer is showing
-And I close the window that opened
+And I confirm that retailer saved as: TestCase75321Retailer appears for UPC saved as: TestCase75321UPC
+And I close the current window and switch to the main window in Studio
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75321)
-#And I In the shared step below search for the Product you are working with
-
-#Scenario: 2Test75321
-#Given I save to context name: TestCase75321 and value: 1555642
-#Given I add to context name: UPC75335 and value: 0625828223600
-#Given I add to context name: TestCase75321Retailer and value: Harbor Freight Tools
-#Given I add to context name: retailer and value: CVS
-#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
-#And I Confirm the Product shows the ORIGINAL RETAILER(s) with a "Completed Status" (see the Clients column)
 And I Confirm the Product shows status: Completed for retailer: saved as retailer
-#And I Confirm the Product shows theNEW RETAILER(s) with an "Accepted Status" (see the Clients column)
-#Note: if you selected a retailer that does not have a feed associated to it you will see the product in Completed status for this retailer)
 And I Confirm the Product shows status: Accepted for retailer: saved as TestCase75321Retailer
-#And I In the Shared Step below - Select the Product with the "Accepted Status"
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75321) for
 | Retailer                       |
 | saved as TestCase75321Retailer |
@@ -212,7 +202,7 @@ Scenario: [75129] Forward - Product in Submitted Status
 	And In the Foward Product Registration Screen I Select the product: saved as TestCase75129
 	And I click continue on the Forward Product Registration page
 	#And In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as TestCase75129Retailers and save as TestCase75129Retailer
-	Then I select one of the following retailers from the table: that is also not in the list saved as: TestCase75129Retailers  and save the chosen retailer as: TestCase75129Retailer
+	Then I select one of the following retailers from the table: that is also not in the list saved as: TestCase75129Retailers and save the chosen retailer as: TestCase75129Retailer
 	| Retailer                                                                       |
 	| Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops) |
 	| Dick's Sporting Goods                                                          |

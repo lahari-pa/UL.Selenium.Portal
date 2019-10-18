@@ -339,7 +339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetSelectedRetailer()
 		{
-			return this.containerElement.FindElement(By.XPath("//h2[@id='retailerLabel']"), 2).GetElementText();
+			return this.containerElement.FindElement(By.XPath("//h2[@id='retailerLabel']"), 2)?.Text;
 		}
 
 		public List<string> GetButtons(string section)

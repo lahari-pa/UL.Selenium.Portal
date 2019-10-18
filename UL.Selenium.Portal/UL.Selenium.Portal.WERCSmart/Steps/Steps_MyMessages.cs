@@ -157,7 +157,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I confirm that the exported excel file saved as: (.*) contains the following columns:")]
+		[StepDefinition(@"I confirm that the exported excel file saved as: (.*) contains the following columns:")]
 		public void ThenIConfirmThatTheExportedExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";

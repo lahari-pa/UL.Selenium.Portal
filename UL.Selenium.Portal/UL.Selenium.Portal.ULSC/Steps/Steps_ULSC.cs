@@ -660,7 +660,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			//}
 		}
 
-		[Then(@"I Confirm New window opens with the error message: (.*)")]
+		[StepDefinition(@"I Confirm New window opens with the error message: (.*)")]
 		public void GivenIConfirmNewWindowOpensWithErrorMessages(string errorMessage)
 		{
 			Delay.Seconds(30);

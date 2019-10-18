@@ -1,6 +1,10 @@
 using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -160,6 +164,132 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Completed");
 
 
+		}
+
+		[StepDefinition(@"I create a kit component in completed status")]
+		public void CreateKitComponentInCompletedStatus()
+		{
+
+		}
+
+		/// <summary>
+		/// Generates a random UPC and saves as UPC_{savedAs}
+		/// brand = 'TestBrand' (should always exist in products account)
+		/// retailer = Walmart/ SAM's club
+		/// Saves product information (id) as: Kit_{savedAs}
+		/// </summary>
+		[StepDefinition(@"I create a Kit product and save details as: Kit_(.*)")]
+		public void CreateAKitProduct(string savedAs)
+		{
+			if (Context.Contains($"Kit_{savedAs}"))
+			{
+				// search for UPC and save to context as UPC__{savedAs}
+				//var id = Context.GetFromContext($"Kit_{savedAs}");
+				// search
+				new StepsProductGrid().GivenISearchForTheProductSavedAs(savedAs);
+				// row action - view upcs
+				new StepsProductGrid().WhenIClickRowActionsForTheFirstProductReturned();
+				new StepsProductGrid().ClickRowAction("View UPCs");
+				new GlobalSteps().SwitchToTabWithTitle("View UPCs");
+				// save upc
+				new Steps_ViewUpcs().SaveFirstUpcToContext($"UPC_{savedAs}");
+				// switch tab
+				new GlobalSteps().ThenCloseTheWindowThatOpened();
+				return;
+			}
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			if (!Context.Contains($"{savedAs}_KitProduct1"))
+			{ 
+				TestReport.StartStep("Beginning create kit 1");
+				//new Steps_ProductSetup().CreateProductUsingTestCase75335Walmart($"KitProduct1_{savedAs}");
+				new Steps_ProductSetup().CreateProductUsingTestCase75335($"KitProduct1_{savedAs}", "KitProduct1");
+				thisGlobalSteps.NavigateToLandingPage();
+			}
+			if (!Context.Contains($"{savedAs}_KitProduct2"))
+			{
+				TestReport.StartStep("Beginning create kit 2");
+				//new Steps_ProductSetup().CreateProductUsingTestCase75335Walmart($"KitProduct2_{savedAs}");
+				new Steps_ProductSetup().CreateProductUsingTestCase75335($"KitProduct2_{savedAs}", "KitProduct2");
+				thisGlobalSteps.NavigateToLandingPage();
+			}
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			// Generate UPC number and delete duplicates
+			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs($"UPC_{savedAs}");
+			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", $"saved as UPC_{savedAs}");
+			//And I call Shared Step 57753(Create a New Registration via Register New Product(expanded menu))
+			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
+			//And I In the shared step below use any of the kit product types -these are* Cosmetic Products in a kit(RU000777)*Hair Care kit(RU000723)*Hair Color Kit(RU000724)*Emergency Road kit(RU000718)*Automotive Care Products(RU000124)*Personal Care kit(RU001034)
+			//And I call Shared Step 57500(The Product - Enter name, select product type - Continue - Happy Path): (.*)
+
+			// add brand
+			//sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Hair Color Kit", $"Kit Product {savedAs}");
+
+			new Steps_TheProduct().SetProductNameProductTypeProductLine($"Kit Product {savedAs}", "Hair Color Kit", "TestBrand");
+			//And I call Shared Step 77872(Additional Product Information - Kit flow - US only, Direct Ship(yes), Continue)
+			newProductSteps.SaveProductInformation($"Kit_{savedAs}");
+			// fix
+			sharedSteps.Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
+			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			//And I In the shared step below add the two completed products that you are working with
+			//And I call Shared Step 31427(Create the Kit - Adding two products: product 1: (.*) and product 2: (.*))
+			sharedSteps.Shared31427_CreateTheKit_AddingTwoProducts($"KitProduct1_{savedAs}", $"KitProduct2_{savedAs}");
+			//And I call Shared Step 57506(Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+			sharedSteps.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
+			//And I call Shared Step 62536(Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+			sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
+			//And I call Shared Step 77845(Retailer - Select WM, Done, Select Vendor ID, Continue)
+			sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
+			//And I call Shared Step 42759(Portal - UPC Page - add 1 UPC)
+			sharedSteps.Shared42759a_Portal_UpcPage_AddUpcSavedAs($"UPC_{savedAs}");
+			//And I click continue
+			newProductSteps.ClickContinue();
+			//And the comments field should appear
+			newProductSteps.ThenTheCommentsFieldShouldAppear();
+			//And I click continue
+			newProductSteps.ClickContinue();
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			//And I Click Home
+			// 65080 (Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", $"Kit_{savedAs}");
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Submitted");
+			//And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
+			shaSteps.ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct($"Kit_{savedAs}");
+
+		}
+
+		[StepDefinition(@"I search for product by name: (.*) and save the first grid item as: (.*)")]
+		public void SearchProductAndSave(string name, string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Searching for product: " + name);
+			var selProdGrid = new ProductsGrid {
+				ProductIdField = name
+			};
+			GeneralUtilities.Wait_for_load_finish();
+			ProductGridItem productElement = selProdGrid.FirstProductInGrid();
+			if (productElement != null)
+			{
+				TestReport.StartStep("Saving the top product as: " + savedAs);
+				Context.AddToContext(savedAs, productElement);
+				Report.Info("Saved product to context");
+			}
+			else
+			{
+				Report.Info("No Product was found by name: " + name);
+			}
+			selProdGrid.ProductIdField = string.Empty;
 		}
 	}
 }

@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -14,41 +15,46 @@
 
 Feature: Flow 12
 
+
+#Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
+#
+## Created by Aaron Caton
+#
+## Test case can be found at the following paths:
+## NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 12
+## NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
 @ScenarioId:793
 Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I click on My Account
-	Then I create a new email address
-	Then I create a new user with the following information and set the password from the admin account: ProductAccount
-		| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |
-		| User      | Mr    | User | 123-456-7889 | Saved         | Saved         | empty        | United Kingdom |    
-	Then I logout
-	Then I log in as the user saved as: NewUser
-	Then If terms of use page appears I accept
-	And I enter the following into the Security Questions window for user saved as: NewUser
-	And I enter the pin for user saved as: NewUser
-	When In the new user form I click on Next
-	Then In the new user form I click on Success
-		#Given I enter the following into the Security Questions window for user saved as:
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
-	Given I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party)
-	Then I save the product information as: TestCase58430
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Sodium chloride | 33.33   | false               | false       |            |
-		| Copper sulfate  | 11.67   | false               | false       |            |
-		| Nitric acid     | 55      | false               | false       |            |
-	Given I call Shared Step 48948 (Formulation > 3rd Party - Select all)
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
-	Given I call Shared Step 60933 (Additional Documents to Provide - Product Label and OSHA SDS only)
-	Given in the Product's Aliases page I click Continue
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58430. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 58610 (Confirm Restrict Use - Restrict)
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I click on My Account
+Then I create a new email address
+Then I create a new user with the following information and set the password from the admin account: ProductAccount
+| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |
+| User      | Mr    | User | 123-456-7889 | Saved         | Saved         | empty        | United Kingdom |    
+Then I logout
+Then I log in as the user saved as: NewUser
+Then If terms of use page appears I accept
+And I enter the following into the Security Questions window for user saved as: NewUser
+And I enter the pin for user saved as: NewUser
+When In the new user form I click on Next
+Then In the new user form I click on Success
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Raw material)
+Then I save the product information as: TestCase58430
+And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Sodium chloride | 33.33   | false               | false       |            |
+| Copper sulfate  | 11.67   | false               | false       |            |
+| Nitric acid     | 55      | false               | false       |            |
+And I call Shared Step 48948 (Formulation > 3rd Party - Select all)
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+And I click continue
+And I click continue
+And I click continue
+And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
+And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 
 @ScenarioId:794
 Scenario: [58605] Suppository (no laxative) -  RU001151

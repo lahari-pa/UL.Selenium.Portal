@@ -1,3 +1,4 @@
+@Shared
 @Login
 @Homepage
 @Signup

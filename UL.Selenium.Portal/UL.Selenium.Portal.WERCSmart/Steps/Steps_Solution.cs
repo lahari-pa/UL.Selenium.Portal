@@ -130,18 +130,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				SeleniumBrowser.WebBrowser.WaitForPageLoad();
-				foreach (string url in urls)
+				var currentUrl = SeleniumBrowser.WebBrowser.Url;
+				Report.Info("Checking URL: " + currentUrl);
+				if (urls.Any(x => currentUrl.Contains(x)))
 				{
-					if (SeleniumBrowser.WebBrowser.Url.Contains(url))
-					{
-						Report.Success("Successfully Switch to Tab: " + url + "!");
-						Report.Screenshot();
-						return;
-					}
+					Report.Success("Successfully Switch to Tab: " + sectionTab + "!");
+					Report.Screenshot();
+					return;
 				}
+				//foreach (string url in urls)
+				//{
+				//	if (currentUrl.Contains(url))
+				//	{
+				//		Report.Success("Successfully Switch to Tab: " + sectionTab + "!");
+				//		Report.Screenshot();
+				//		return;
+				//	}
+				//}
 			}
 			Report.Failure("Failed to find tab with url: " + string.Join(", ", urls));
-			Report.Screenshot();
 		}
 	}
 }

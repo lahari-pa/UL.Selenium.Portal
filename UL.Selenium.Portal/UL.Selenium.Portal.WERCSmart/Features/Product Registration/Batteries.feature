@@ -1,3 +1,4 @@
+@Shared
 @NewProduct
 @Homepage
 @wercsmart

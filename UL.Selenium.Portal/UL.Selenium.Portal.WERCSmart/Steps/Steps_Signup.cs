@@ -640,8 +640,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Attempting to navigate to the link...");
 				SeleniumBrowser.Navigate(mylink);
 				Report.Success("Navigated to the link!");
-				var userCreatonPage = new NewUser();
-				Report.IsTrue(userCreatonPage.Wait_for_load(30), "New User Creation page did not load!", "User creation page loaded as expected!");
+				var userCreationPage = new NewUser();
+				Report.IsTrue(userCreationPage.Wait_for_load(30), "New User Creation page did not load!", "User creation page loaded as expected!");
 			}
 			catch (Exception ex)
 			{
@@ -722,13 +722,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the new user form I click on Success")]
 		public void WhenInTheNewUserFormIClickOnSuccess()
 		{
-			Report.IsTrue(new NewUser().ClickSuccess(), "Failed to click Success", "Succesfully clicked Success");
-
+			if (!new NewUser().ThankYou())
+			{
+				Report.Failure("Thank You page did not load");
+				return;
+			}
+			Report.IsTrue(new NewUser().ClickSuccess(), "Failed to click Success", "Successfully clicked Success");
+			GeneralUtilities.Wait_for_load_finish();
 		}
-
-
-
-
 
 		[StepDefinition(@"I should be on the (.*) page of the form")]
 		public void ThenIShouldBeOnThePageOfTheForm(string pageTitle)
@@ -748,9 +749,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-
-
-
+		
 		[StepDefinition(@"If terms of use page appears I accept")]
 		public void GivenIfTermsOfUsePageAppearsIAccept()
 		{
@@ -878,6 +877,71 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.EnterPinForUser(savedAs);
 			this.WhenInTheNewUserFormIClickOnContinue();
 			TestReport.UseSubSteps = false;
+		}
+
+
+		//This step is currently unfinished, but is not used anywhere. Awaiting functionality to download attachements from mailosaur
+		[StepDefinition(@"I Check there is an new email for user: (.*) from: (.*) with the title: (.*) and I download the attachment")]
+		public void ICheckThereIsANewEmailForEmamilWithSpecifiedFromAndTitleAndDownloadAttachment(string shouldOrNot, string savedAs, string emailFrom, string title)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
+			try
+			{
+				if (emailFrom.ToLower() == "<sitenotification>")
+				{
+					emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
+				}
+
+				Report.Info("Expecting email from: " + emailFrom);
+
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+				if (user == null)
+				{
+					Report.Error("Failed to find a WERCSmart User saved as: " + savedAs);
+				}
+
+				Report.Info("Checking for email differences");
+
+				Delay.Seconds(60);
+				if (EmailFunctions.WaitForInboxDifferences(user.Email))
+				{
+					this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
+				}
+				else
+				{
+					if (shouldOrNot == "should not")
+					{
+						Report.Success("As expected, no email has been received");
+					}
+					else
+					{
+						// Try once more just in case there is a delay in recieving the email
+						Report.Info("Email did not arrive on first attempt, so trying again...");
+						int i = 0;
+						while (i < 5)
+						{
+							Report.Info("Attempt: " + (i + 1));
+							if (EmailFunctions.WaitForInboxDifferences(user.Email))
+							{
+								this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
+								return;
+							}
+
+							i++;
+						}
+
+						throw new Exception("Expected email did not arrive");
+					}
+
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+
+			//EmailFunctions.
 		}
 
 	}
