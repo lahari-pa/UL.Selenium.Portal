@@ -65,6 +65,7 @@ Scenario: [73949] Kit - Document merge - US only
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Document merge
 @73950
+@ScenarioId:5946
 Scenario: [73950] Kit Document merge - Canada only
 	#Given I Use Test case 78865 to create a new product which is for NR and Canada only, and get it to completed status.  You will need to run this twice as you need two products to add to the kit.
 	Given I create a product with name: Kit product 1 and take to completed using Test Case 78865 and save as: 73950_KitProduct1
