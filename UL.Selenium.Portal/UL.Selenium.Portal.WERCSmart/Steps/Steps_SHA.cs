@@ -2983,7 +2983,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"The product in SHA has a Original Submission Date of: {shaOriginalSubmissionDate}");
 			string shaClients = productsShown[0].Clients;
 			var shrdStep = new Steps_Shared();
-			string dog = "DOGY";
+			
 
 			TestReport.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
 			string file = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -3019,9 +3019,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");
 						new Steps_Shared().Shared75309_SHA_SelectProduct_UpcList(productInfoSavedAs);
 						var studioSHAManger = new StudioSHAManager();
-						var shaSteps = new Steps_SHA();
+						
 						Delay.Seconds(10);
-						new Steps_SHA().SwitchToProductListUpcWindow();
+						this.SwitchToProductListUpcWindow();
 						Delay.Seconds(4);
 						List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
 						Report.Info($"The number of UPCs displayed in the UPC Details page is: {displayedUpcs.Count}");
@@ -3135,7 +3135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIVerifyTheFileSavedAsAgainstTheSpecificRequirementsForDailyReport_WERCSmartAdditionalReportsPublished(string savedAs)
 		{
 			Report.IsTrue(new DailyReportWERCSmartAdditionalReportsPublished().VerifyFile(savedAs), "Report did not match expectations", "Report conforms to stated spec");
-		}
+		
 			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
 				"Failed to click document management", "Clicked document management");
 			var shaReport = new SHAAdvancedReporting();
@@ -3167,7 +3167,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(shaReport.ReportDescriptionIsCorrect(reportName,reportText), "The Description was not as expected", "The Descripton was as expected");
 
 		}
+
+	[StepDefinition(@"I select the Product Registrations Published report from Advanced Reporting in SHA")]
+		public void ISelectProductRegistrationPublishedReportFromAdvancedReportingInSHA()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Click Advanced Reporting");
+			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
+				"Failed to click document management", "Clicked document management");
+			var shaReport = new SHAAdvancedReporting();
+			string report = "Product Registrations Published";
+			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
+			Delay.Seconds(2);
+			
+			
+		}
+		
 	}
+
 }
 
 

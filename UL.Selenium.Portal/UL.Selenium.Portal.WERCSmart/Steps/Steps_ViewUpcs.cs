@@ -179,20 +179,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(matchingUpc.Retailers.Contains(row["Retailer"]), "Retailers column did not contain retailer: " + row["Retailer"] + "!", "Retailers column contained retailer: " + row["Retailer"]);
 			}
 		}
-		}
-
 		[StepDefinition(@"the View UPC page loads with no errors")]
 		public void TheViewUPCPageLoadsWithNoErrors()
 		{
-			var upcviewpg= new ViewUpcs();
+			var upcviewpg = new ViewUpcs();
 			Report.IsTrue(GeneralUtilities.WaitForSpinnerToDisappear(upcviewpg.LoadingSpinner()),
 				"The View UPC page did not complete loading",
 				"The View UPC page completed loading");
 
 		}
 
+		[StepDefinition(@"I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'")]
+		public void INavigateToTheViewUPCTabAndCheckForUPCNameColoumn()
+		{
+			new GlobalSteps().SwitchToTabWithTitle("View UPCs");
+
+			Report.IsTrue(new ViewUpcs().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
 
 
+			new GlobalSteps().ThenCloseTheWindowThatOpened();
+		}
 	}
+
+		
+
+
+
+	
 
 }
