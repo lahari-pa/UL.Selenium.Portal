@@ -12,6 +12,8 @@ using NTTQA.Selenium.UniversalFunctions;
 using System.IO;
 using System.Text.RegularExpressions;
 using NTTQA.Selenium.SpecFlow;
+using System.Net;
+using System.Drawing;
 using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -318,5 +320,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return input;
 		}
+
+		
+
+
+
+
+		
+
 	}
+
 }

@@ -952,6 +952,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Info("DPCI: " + upcInfo.Dpci);
 			Report.Info("Quantity: " + upcInfo.Quantity);
 
+			if(upcInfo.UPCName.IsNullOrEmpty())
+			{
+				Report.Info("UPCName:" + upcInfo.UPCName);
+			}			
+
 			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
 		}
 

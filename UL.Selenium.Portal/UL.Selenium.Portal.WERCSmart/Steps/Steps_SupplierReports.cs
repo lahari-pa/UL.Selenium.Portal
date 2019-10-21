@@ -378,6 +378,92 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure($"Could not find any WERCSmart IDs in the spreadsheet saved as: {fileSavedAs}");
 		}
 
+		[Then(@"I confirm that in the excel file saved as: (.*) for the UPC saved as: (.*) there is a 'Y' in the Case Pack column and an Individual UPC listed as: (.*)")]
+		public void IConfirmThatForTheExcelFileSavedAsThereIsAYinCasePackColumnAndIndvUPC(string savedAs, string casePackUPCSavedAs, string indvUPCSavedAs)
+		{
+			object File = Context.GetFromContext(savedAs);
+			string casePackUPC = (string)Context.GetFromContext(casePackUPCSavedAs);
+			string indvUPC = (string)Context.GetFromContext(indvUPCSavedAs);
+			bool AllPassed = true;
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				//get the index of column
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+				int columnUPCIndex = 0;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == "UPC")
+					{
+						columnUPCIndex = i;
+					}
+				}
+
+				List<string> upcRowItems = ExcelUtils.Excel_GetColumn(columnUPCIndex);
+				int y = 0;
+				bool foundUPC = false;
+				Report.Info($"Looking for Case Pack UPC: {casePackUPC} in the spreadsheet");
+
+				foreach (string thisItem in upcRowItems)
+				{
+					Report.Info($"Checking Row: {y + 1}");
+					if (thisItem == casePackUPC)
+					{
+						Report.Success("Found the CasePack UPC in the spreadsheet");
+						foundUPC = true;
+						break;
+						//should exit from the foreach here
+					}
+					Report.Info($"Row did not contain the Case pack upc");
+					y++;
+				}
+				if (foundUPC==false)
+				{
+					Report.Failure("Unable to find the CasePack UPC in the SpreadSheet");
+					return;
+				}
+
+				int columnCasePackIndex = 0;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == "Case Pack")
+					{
+						columnCasePackIndex = i;
+					}
+				}
+				List<string> casePackRowItems = ExcelUtils.Excel_GetColumn(columnCasePackIndex);
+				if(casePackRowItems[y]!="Y")
+				{
+					Report.Failure($"The Case pack column for Case pack UPC: {casePackUPC} did not contain a 'Y'");
+					return;
+				}
+				Report.Success($"The Case pack column for Case pack UPC: {casePackUPC} did contain a 'Y'");
+
+				int columnCasePackInvUPCIndex = 0;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == "Case Pack Individual UPC")
+					{
+						columnCasePackInvUPCIndex = i;
+					}
+				}
+				List<string> casePackInvUPCRowItems = ExcelUtils.Excel_GetColumn(columnCasePackInvUPCIndex);
+				Report.Info($"The Individual Case Pack field contains: {casePackInvUPCRowItems[y]}");
+				if (casePackInvUPCRowItems[y] != indvUPC)
+				{
+					Report.Failure($"The Case pack Indiviudal UPC column for Case pack UPC: {casePackUPC} did not contain the UPC: {indvUPC}");
+					return;
+				}
+				Report.Success($"The Case pack Indiviudal UPC column for Case pack UPC: {casePackUPC} did contain the UPC: {indvUPC}");
+
+
+			}
+
+
+			
+		}
+
 	}
 }
 		

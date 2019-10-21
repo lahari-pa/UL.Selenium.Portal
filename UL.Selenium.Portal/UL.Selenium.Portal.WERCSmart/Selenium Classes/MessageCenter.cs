@@ -5,6 +5,8 @@ using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using NTTQA.Selenium.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -147,6 +149,120 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Type = tableRow.FindElement(By.XPath(".//span[starts-with(@data-bind,'text: Type')]"), 2).Text
 			};
 		}
+
+		public bool SetMoreFiltersToExpanded()
+		{
+
+			IWebElement moreFiltersButtonCollapsed= this.containerElement.FindElement(By.XPath(".//a[@class= 'btn btn-primary collapsed' and .//span[contains(text(),'More Filters')]]"), 2);
+			if(moreFiltersButtonCollapsed==null)
+			{
+				Report.Failure("Could not find the Collapsed More Filters Button");
+				return false;
+			}
+
+			if (this.containerElement.FindElement(By.XPath("//a[contains(@class, 'btn') and .//span[contains(text(),'More Filters')]]"), 2).TryClick())
+			{
+				Report.Success("The More Filters Button was clicked Successfully");
+				IWebElement moreFiltersButtonExpanded = this.containerElement.FindElement(By.XPath("//a[@class='btn btn-primary' and .//span[contains(text(),'More Filters')]]"), 2);
+
+				if (moreFiltersButtonExpanded==null)
+				{
+					Report.Failure("Could not find the expanded more Filters button");
+					return false;
+				}
+				else
+				{
+					Report.Success("The More Filters Button was Expanded Successfully");
+					return true;
+				}
+
+			}
+			else
+			{
+				Report.Failure("Failed to click the More Filters Button");
+				return false;
+			}
+		}
+
+		public bool SelectTypeFromList (string type)
+		{
+			IWebElement typeContainer = this.containerElement.FindElement(By.XPath(".//select[@class='form-control' and contains(@data-bind,'options: messagetypeOptions.types')]"), 2);
+			if (typeContainer==null)
+			{
+				Report.Failure("Could not find the Type Filter container");
+				return false;
+			}
+			typeContainer.Select(type);
+			string chosenOption=typeContainer.SelectedOption();
+			if(type==chosenOption)
+			{
+				Report.Success($"The type: {type} was selected successfully");
+				return true;
+			}
+			else
+			{
+				Report.Failure($"The type: {type} was not successfully selected");
+				return false;
+			}
+		}
+
+		public bool EnterWPSIDIntoFilter(string savedAs)
+		{
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+
+			string value = productDetails.Id;
+
+			IWebElement searchBox = this.containerElement.FindElement(By.XPath(".//input[@data-bind='value: wpsId.field']"), 2);
+			if (searchBox==null)
+			{
+				Report.Failure("Could not find the WPSID Search Box");
+				return false;
+			}
+			searchBox.EnterText(value);
+			return searchBox.GetAttribute("value") == value;
+		}
+
+		public bool CheckOnly1MessageAndCorrectWPSID(string savedAs)
+		{
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+
+			string iD = productDetails.Id;
+
+			IWebElement messageTable = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover products-table']"), 2);
+
+			if(messageTable==null)
+			{
+				Report.Failure("Could not find the Message table");
+				return false;
+			}
+
+			List<IWebElement> tableRows = messageTable.FindElements(By.XPath(".//table[@class='table table-hover products-table']"), 2).ToList();
+
+			if(tableRows.Count>1)
+			{
+				Report.Failure("There was too many Messages found in the table");
+				return false;
+			}
+			string foundID=tableRows[0].FindElement(By.XPath(".//span[contains(@data-bind,'ProductID')]"), 2).Text;
+			if(foundID!=iD)
+			{
+				Report.Failure($"The Message found was not for the correct WPSID. The WPSID searched for was: {iD} and the one found was: {foundID}");
+				return false;
+			}
+			else
+			{
+				Report.Success($"The Message found was for the correct WPSID. The WPSID searched for was: {iD} and the one found was: {foundID}");
+				return true;
+			}
+
+
+
+		}
+
+
+
+
 		public class Message
 		{
 			public string WPSID { get; set; }

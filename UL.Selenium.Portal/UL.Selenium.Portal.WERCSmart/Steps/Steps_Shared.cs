@@ -799,17 +799,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
 					Size = size,
-					UpcNumber = upc_
+					UpcNumber = upc_,					
 				};
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
 			}
 			else
 			{
-				var upcTable = new Table("Field", "Value");
+				var upcTable = new Table("Field", "Value");				
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
-				upcTable.AddRow("Size", size);
+				upcTable.AddRow("Size", size);				
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
@@ -4380,7 +4380,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.ClickProcessProductData();
 			Report.IsTrue(myStudioShaManager.SetAutoAssignRegulatorySpecialisttoProduct(false),
 				"Failed to deselect Auto assign regulatory specialist", "Deselected auto assign regulatory specialist");
-			Report.IsTrue(myStudioShaManager.SelectRegulatorySpecialist("Automated QASha"),
+			var regSpec = TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
+			if(regSpec==null)
+			{
+				Report.Info("Failed to find SHA Regulatory Specialist in context, defaulting to: Automated QASha");
+				regSpec = "Automated QASha";
+			}
+			Report.Info($"The Regulatory Specialist that will be selected is: {regSpec}");
+				
+			Report.IsTrue(myStudioShaManager.SelectRegulatorySpecialist(regSpec),
 				"Failed to select regulatory specialist", "Selected regulatory specialist");
 			Report.IsTrue(myStudioShaManager.ClickContinueInProcessProducts(), "Failed to click continue",
 				"Clicked continue");

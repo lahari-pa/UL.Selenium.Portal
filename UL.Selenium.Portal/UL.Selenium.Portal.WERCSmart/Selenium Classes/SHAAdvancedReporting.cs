@@ -77,11 +77,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return canClick;
 		}
 
+		public bool ClickReportNoSwitchBack(string report)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement reportButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table//td[contains(text(), """ + report + @""")]"), 2);
+
+			bool canClick = reportButton.TryClick();
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return canClick;
+		}
+
 		public bool ClickSubmit()
 		{
 			Report.Info("Switching to iFrame");
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement submitButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//form[@id='panel']//input"), 2);
+			IWebElement submitButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//form[@id='panel']//input[@name='Submit']"), 2);
 
 			bool canClick = submitButton.TryClick();
 

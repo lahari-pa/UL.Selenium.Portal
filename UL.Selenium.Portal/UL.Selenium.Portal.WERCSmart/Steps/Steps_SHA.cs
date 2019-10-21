@@ -969,6 +969,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheSuspendedDialogInTheSelectRegulatorySpecialistDropDownIChoose(string regulatorySpecialist)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			if(regulatorySpecialist== "SHA Regulatory Specialist")
+			{
+				regulatorySpecialist= TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
+			}
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectRegulatorySpecialist(regulatorySpecialist),
 				"Failed to select regulatory specialist: " + regulatorySpecialist, "Selected: " + regulatorySpecialist);
 
@@ -3131,6 +3135,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIVerifyTheFileSavedAsAgainstTheSpecificRequirementsForDailyReport_WERCSmartAdditionalReportsPublished(string savedAs)
 		{
 			Report.IsTrue(new DailyReportWERCSmartAdditionalReportsPublished().VerifyFile(savedAs), "Report did not match expectations", "Report conforms to stated spec");
+		}
+			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
+				"Failed to click document management", "Clicked document management");
+			var shaReport = new SHAAdvancedReporting();
+			string report = "Product Registrations Published";
+			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
+			Delay.Seconds(2);
+			
+			
+		}
+		[StepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Product Registrations Published report then I click Submit")]
+		public void IEnterAStartDateForTheProductRegistrationPublishedReportClickSubmit(string startDate,string endDate)
+		{
+			TestReport.UseSubSteps = true;
+			var shaReport = new SHAAdvancedReporting();
+			TestReport.StartStep("I enter an Start Date");
+			shaReport.EnterStartDate(startDate);
+			TestReport.StartStep("I enter an End Date");
+			shaReport.EnterEndDate(endDate);
+			TestReport.StartStep("I Click Submit");
+			shaReport.ClickSubmit();
+
+		}
+
+		[StepDefinition(@"I Check that the Description Text for the Report: (.*) is shown as: (.*)")]
+		public void ICheckThatTheDescriptionForTheReportIsShowAS(string reportName,string reportText)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			
+			Report.IsTrue(shaReport.ReportDescriptionIsCorrect(reportName,reportText), "The Description was not as expected", "The Descripton was as expected");
+
 		}
 	}
 }
