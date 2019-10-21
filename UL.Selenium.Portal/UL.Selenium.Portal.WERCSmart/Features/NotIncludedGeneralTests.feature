@@ -417,12 +417,12 @@ Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) Re
 	Then I confirm that in the excel file saved as: 73082 for the UPC saved as: UPC876851 there is a 'Y' in the Case Pack column and an Individual UPC listed as: UPC87685
 	And I delete the Supplier Report file saved as 73082
 
-Scenario: [NOTINCLUDEDGENERALTEST] CVS Revision to Data Tier Consent Requirements
-
+Scenario: [NOTINCLUDEDGENERALTEST] TESTCVS Revision to Data Tier Consent Requirements
+Then I create a upc number for CVS
 Given I create a new supplier products account: ProductAccountTEST and create a product with retailer CVS
 
-Scenario: [NOTINCLUDEDGENERALTEST] 2CVS Revision to Data Tier Consent Requirements
-Then I create a upc number for CVS
+Scenario: [NOTINCLUDEDGENERALTEST] CVS Revision to Data Tier Consent Requirements
+
 Given I create a new supplier products account: ProductAccountTEST and create a product with retailer CVS
 
 	
