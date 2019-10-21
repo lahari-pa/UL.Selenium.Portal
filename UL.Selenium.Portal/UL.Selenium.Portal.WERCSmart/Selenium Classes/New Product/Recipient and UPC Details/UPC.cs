@@ -255,19 +255,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			tableData.AddRange(table.Header);
 			foreach (TableRow row in table.Rows)
 			{
-				var vals = row.Values.Select(x =>
-				{
-					if (Regex.IsMatch(x, "<(.*)>"))
-					{
-						var match = Regex.Match(x, "<(.*)>").Groups[1].Value;
-						if (Context.Contains(match, true))
-						{
-							return Context.GetFromContext(match).ToString();
-						}
-					}
-
-					return x;
-				});
+				var vals = row.RowValuesFromContext();
 
 				tableData.AddRange(vals.ToList());
 			}
@@ -476,6 +464,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement retailerXElem = container.FindElement(By.XPath(@"//span[contains(text(), """ + selectedAbbr + @""")]/../a"), 2);
 
 			return retailerXElem.TryClick();
+		}
+
+		public bool EnterDPCI(string value)
+		{
+			IWebElement input = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
+			return input.TryEnterText(value);
 		}
 
 

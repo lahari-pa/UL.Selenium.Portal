@@ -62,7 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Page header is showing as expected: " + actualHeader);
 		}
 
-		[Then(@"In the Subscription Enrollment screen I confirm that I see the following subheadings:")]
+		[StepDefinition(@"In the Subscription Enrollment screen I confirm that I see the following subheadings:")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatISeeTheFollowingSubheadings(Table table)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -75,7 +75,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"In the Subscription Enrollment screen I confirm that I see the following Plans")]
+		[StepDefinition(@"In the Subscription Enrollment screen I confirm that I see the following Plans")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatISeeTheFollowingPlans(Table table)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -144,7 +144,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Then(@"on the Agency Service Agreement popup clicking Close closes the popup")]
+		[StepDefinition(@"on the Agency Service Agreement popup clicking Close closes the popup")]
 		public void ThenOnTheAgencyServiceAgreementPopupClickingCloseClosesThePopup()
 		{
 			var MyASA = new AgencyServiceAgreementDlg();
@@ -152,7 +152,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Then(@"Agency Service Agreement popup contains the following text: (.*)")]
+		[StepDefinition(@"Agency Service Agreement popup contains the following text: (.*)")]
 		public void ThenAgencyServiceAgreementPopupContainsTheFollowingText(string text)
 		{
 			var MyASA = new AgencyServiceAgreementDlg();
@@ -196,7 +196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I should see following statement at the bottom (.*)")]
+		[StepDefinition(@"I should see following statement at the bottom (.*)")]
 		public void ThenIShouldSeeFollowingStatementAtTheBottom(string statement)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -207,7 +207,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Text is showing as expected: " + actualText);
 		}
 
-		[Then(@"I should see Estimated Annual Cost of: (.*)")]
+		[StepDefinition(@"I should see Estimated Annual Cost of: (.*)")]
 		public void ThenIShouldSeeEstimatedAnnualCostOf(string cost)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -216,7 +216,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Cost is showing as expected: " + cost);
 		}
 
-		[Then(@"I should see Estimated Annual Cost per Product of:(.*)")]
+		[StepDefinition(@"I should see Estimated Annual Cost per Product of:(.*)")]
 		public void ThenIShouldSeeEstimatedAnnualCostPerProductOf(string cost)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -233,7 +233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Then(@"In the Subscription Enrollment screen I confirm that I (do|do not) see the following Plans:")]
+		[StepDefinition(@"In the Subscription Enrollment screen I confirm that I (do|do not) see the following Plans:")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatIDoOrNotSeeTheFollowingPlans(string doOrNot, Table table)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -341,7 +341,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Then(@"In the Subscription Enrollment screen I confirm that you see (.*) dropdown")]
+		[StepDefinition(@"In the Subscription Enrollment screen I confirm that you see (.*) dropdown")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatYouSeeDropdown(string dropdown)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -395,7 +395,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"In the Subscription Enrollment screen I confirm that when you hover over \(i\) for (.*) you see following (heading|statement): (.*)")]
+		[StepDefinition(@"In the Subscription Enrollment screen I confirm that when you hover over \(i\) for (.*) you see following (heading|statement): (.*)")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatWhenYouHoverOverIForYouSeeFollowing(string hoverOverItem, string headerOrText, string expectedValue)
 		{
 			var MySE = new SubscriptionEnrollment();

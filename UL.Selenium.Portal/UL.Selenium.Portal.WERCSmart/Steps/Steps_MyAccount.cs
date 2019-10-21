@@ -97,7 +97,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I should see company username: (.*)")]
+		[StepDefinition(@"I should see company username: (.*)")]
 		public void ThenIShouldSeeCompanyUsername(string companyName)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see company username: " + companyName);
@@ -161,7 +161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"In the User Grid the user saved as: (.*) has been replaced by: (.*)")]
+		[StepDefinition(@"In the User Grid the user saved as: (.*) has been replaced by: (.*)")]
 		public void ThenInTheUserGridTheSavedUserNameHasBeenReplacedBy(string savedAs, string replacedBy)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the User Grid the saved user name (" + savedAs + ") has been replaced by: " + replacedBy);
@@ -401,7 +401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 						Report.Info("Email Address = " + emailAddress);
 					}
-                    // adding this to allow checking for confirmation email to the new user
+					// adding this to allow checking for confirmation email to the new user
 					EmailFunctions.StoreCurrentInbox(emailAddress);
 					if (confirmEmail == "Saved")
 					{
@@ -1294,44 +1294,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-        /// <summary>
+		/// <summary>
 		/// Requires a string parameter saved to context as: CurrentEmail which is called in the add a new user step
 		/// </summary>
 		[StepDefinition(@"I confirm there was an email with title: (.*) sent to the new user and I click the link with text: (.*)")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount(string emailTitle, string linkText)
 		{
 			TestReport.UseSubSteps = true;
-            TestReport.StartStep("Checking an email has been sent to the new user with title: " + emailTitle);
+			TestReport.StartStep("Checking an email has been sent to the new user with title: " + emailTitle);
 			var emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
 			var email = Context.GetFromContext("CurrentEmail").ToString();
 			List<Email> differences = EmailFunctions.GetInboxDifferences(email);
-            Report.Info("Checking that email differences have been found...");
+			Report.Info("Checking that email differences have been found...");
 			if (differences.FirstOrDefault() == null)
 			{
 				Report.Error("No emails found");
 				return;
 			}
 			Report.Info("Emails have been found!");
-			Email matchingEmail = differences.FirstOrDefault(x => x.From !=null && x.From.FirstOrDefault()?.Address.ToLower() == emailFrom && x.Subject.Contains(emailTitle));
+			Email matchingEmail = differences.FirstOrDefault(x => x.From != null && x.From.FirstOrDefault()?.Address.ToLower() == emailFrom && x.Subject.Contains(emailTitle));
 			if (matchingEmail == null)
 			{
-                Report.Failure($"No matching email from: {emailFrom} with subject: {emailTitle} was found!");
-                return;
+				Report.Failure($"No matching email from: {emailFrom} with subject: {emailTitle} was found!");
+				return;
 			}
 			var links = matchingEmail.Html.Links;
-			if(links == null || !links.Any())
+			if (links == null || !links.Any())
 			{
 				Report.Failure("No links were found in the email!");
 				return;
 			}
-            var link = links.FirstOrDefault(x => x.Text.Contains(linkText))?.Href;
-            if (link == null)
-            {
-                Report.Failure("No link was found with text: " + linkText);
-                return;
-            }
+			var link = links.FirstOrDefault(x => x.Text.Contains(linkText))?.Href;
+			if (link == null)
+			{
+				Report.Failure("No link was found with text: " + linkText);
+				return;
+			}
 			Report.Info("Found a matching link in the email!");
-            TestReport.StartStep("Navigating to the link address");
+			TestReport.StartStep("Navigating to the link address");
 			SeleniumBrowser.Navigate(link);
 		}
 
@@ -1350,7 +1350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Confirm that you (See|Don't See) the user you just created in the grid")]
 		public void IConfirmThatYouSeeTheUserJustCreatedInGrid(string presence)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm that you "+presence+" the new user I just created is in the Gird");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm that you " + presence + " the new user I just created is in the Gird");
 			try
 			{
 				var selMyAccount = new MyAccount();
@@ -1361,7 +1361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					userName = Context.ScenarioContext["CurrentUser"].ToString();
 				}
-				if (presence=="See")
+				if (presence == "See")
 				{
 					Report.IsTrue(selMyAccount.Is_User_In_Grid(userName), "The User just created was Not Found In the Grid", "The User just created was found in the Grid");
 				}
@@ -1369,9 +1369,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.IsFalse(selMyAccount.Is_User_In_Grid(userName), "The User just created was found in the Grid", "The User just created was Not Found In the Grid");
 				}
-				
 
-				
+
+
 
 			}
 			catch (Exception ex)
@@ -1382,7 +1382,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-			
+
 
 
 	}

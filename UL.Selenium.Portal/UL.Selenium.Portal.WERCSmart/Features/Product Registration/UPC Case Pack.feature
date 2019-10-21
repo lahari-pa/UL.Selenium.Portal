@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -20,6 +21,7 @@
 @SHA
 @ForwardProductRegistration
 @ProductSetUp
+@ViewUpcs
 @run_UPCCasePack
 Feature: UPC Case Pack
 
@@ -298,8 +300,6 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
 	
-	
-
 @singlerun
 Scenario: [87894] Forwarding - Edit existing Case UPC 
 
@@ -349,6 +349,41 @@ Then I Check that the product under the retailer: <ChosenRetailer87894> is under
 Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87894
 Then I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: UPC876851 for the retailer: Amazon using details saved in the table: EditCaseUPCTable87894
 
-
-
-
+@ScenarioId:1535
+Scenario: [87835] View UPCs shows Case UPC Data
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I generate a random UPC number and save as: UPC87835
+Given I generate a random UPC number and save as: UPC87835-2
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer |
+| Amazon   |
+Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87835, container type: Paper bag and size: 2 do not click continue
+And I call Shared Step 87829 (UPC - Add Case UPC - All Data > Continue) for UPC: saved as UPC87835-2, container type: Plastic Container and size: 1 and Quantity: 1 and Individual Upc Case Pack saved As: UPC87835 and Transportation option: 4A: steel box
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+And I should see the Additional Documents to Provide Page
+And I click continue
+And I should see the Optional Reports and Documents Available for Purchase Page
+And I click continue
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I navigate to the home page
+And I search for the product saved as: TestCase87835
+And I click Row Actions for the first product returned
+And I click on the Row Action: View UPCs
+And I switch to the tab with title: View UPCs
+And I verify the Case UPC data is correct in the View UPCs window:
+| UPC Number   | Container Type    | Size Ounces | Retailer | Associated UPC | Quantity | Transport     |
+| %UPC87835-2% | Plastic Container | 1           | AM       | %UPC87835%     | 1        | 4A: steel box |
+And I verify the Regular UPC data is correct in the View UPCs window:
+| UPC Number | Container Type | Size Ounces | Retailer |
+| %UPC87835% | Paper bag      | 2           | AM       |
+And I close the window that opened
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835

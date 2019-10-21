@@ -1,3 +1,4 @@
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -40,7 +41,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	Then  I should see the Universal Product Code (UPC) Page
 	Given I click the 'Add UPC' button
 	Given I add the following into the UPC Fields
 		| UPC Number                            | Container Type    | Size | DPCI | Quantity |
@@ -53,6 +54,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 
 
 @singlerun
+@ScenarioId:1547
 Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -76,13 +78,13 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 		| 854911000000 | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
 	And I edit the testdoc.xlsx, and save its filepath as: Bulktest82536 and verify it contains the UPC data in the table saved as: UPCTable82536
 		| UPC           | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   |
-		| <RandomUPC1>  | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |
-		| <RandomUPC1>  | 2        | 32   | 2.33               | 00BB02          | 2002            | 1112            | G0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |
-		| <RandomUPC2>  | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |
-		| <RandomUPC2>  | 4        | 32   | 4.55               | 00DD04          | 2004            | 1114            | I0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |
-		| <RandomUPC3>  | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
-		| <RandomUPC4>  | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |
-		| <RandomUPC5>  | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |
+		| %RandomUPC1%  | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |
+		| %RandomUPC1%  | 2        | 32   | 2.33               | 00BB02          | 2002            | 1112            | G0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |
+		| %RandomUPC2%  | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |
+		| %RandomUPC2%  | 4        | 32   | 4.55               | 00DD04          | 2004            | 1114            | I0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |
+		| %RandomUPC3%  | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |
+		| %RandomUPC4%  | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |
+		| %RandomUPC5%  | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |
 	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest82536
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
 	Then In the Add Multiple dialog box I select all UPCs
@@ -271,7 +273,7 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	Then  I should see the Universal Product Code (UPC) Page
 	And in the UPC Window, I click the Add Case UPC button
 	Given I add the following into the UPC case fields
 		| UPC Number                            | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
@@ -314,7 +316,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase91100
 	Given I edit the first product in results
-	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	Then  I should see the Universal Product Code (UPC) Page
 	And I click the 'Upload UPCs' button and upload the file saved as: test91100
 	Then In the Add Multiple dialog box I select all UPCs
 	Then In the Add Multiple dialog box I select the packaging type: <first>
@@ -373,7 +375,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	Then  I should see the Universal Product Code (UPC) Page
 	Given I click the 'Add UPC' button
 	Given I add the following into the UPC Fields
 		| UPC Number                            | Container Type    | Size | DPCI | Quantity |
@@ -415,7 +417,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)	
 	Given I search for the product saved as: TestCase91101
 	Given I edit the first product in results
-	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	Then  I should see the Universal Product Code (UPC) Page
 	And I click the 'Upload UPCs' button and upload the file saved as: test91101
 	Then In the Add Multiple dialog box I select all UPCs
 	Then In the Add Multiple dialog box I select the packaging type: <first>

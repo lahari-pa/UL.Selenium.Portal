@@ -28,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 
 		public string ProductLineOrBrand {
 			get => this.ProductLineInput.SelectedOption();
-			set => this.ProductLineInput.SelectByValue(value);
+			set => this.ProductLineInput.Select(value);
 		}
 
 		public string ProductType {

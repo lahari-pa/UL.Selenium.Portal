@@ -835,21 +835,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[Then(@"I confirm the pop up shows the Supplier ID heading and data entry field")]
+		[StepDefinition(@"I confirm the pop up shows the Supplier ID heading and data entry field")]
 		public void ThenIConfirmThePopUpShowsTheSupplierIDHeadingAndDataEntryField()
 		{
 			Report.IsTrue(new AddNewSupplier().EnterSupplierIDExists(), "Supplier ID field does not exist as expected",
 				"Supplier ID field exists as expected");
 		}
 
-		[Then(@"I confirm the pop up shows the Company or Brand Name heading and data entry field")]
+		[StepDefinition(@"I confirm the pop up shows the Company or Brand Name heading and data entry field")]
 		public void ThenIConfirmThePopUpShowsTheCompanyOrBrandNameHeadingAndDataEntryField()
 		{
 			Report.IsTrue(new AddNewSupplier().EnterCompanyOrBrandNameExists(), "Company or brand name field does not exist as expected",
 				"Company or brand name exists as expected");
 		}
 
-		[Then(@"I confirm the pop up shows the Is Default Heading and check box")]
+		[StepDefinition(@"I confirm the pop up shows the Is Default Heading and check box")]
 		public void ThenIConfirmThePopUpShowsTheIsDefaultHeadingAndCheckBox()
 		{
 			Report.IsTrue(new AddNewSupplier().IsDefaultExists(), "Is Default field does not exist as expected",
@@ -857,7 +857,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Then(@"I confirm the pop up shows a Save button")]
+		[StepDefinition(@"I confirm the pop up shows a Save button")]
 		public void ThenIConfirmThePopUpShowsASaveButton()
 		{
 			Report.IsTrue(new AddNewSupplier().SaveButtonExists(), "Save button does not exist as expected",
@@ -877,7 +877,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (cancelOrSave == "cancel")
 			{
 				Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
-					"Successfully clicked cancel",false,false);
+					"Successfully clicked cancel", false, false);
 			}
 			else
 			{
@@ -886,7 +886,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I confirm the Add New Supplier ID pop up closes")]
+		[StepDefinition(@"I confirm the Add New Supplier ID pop up closes")]
 		public void ThenIConfirmTheAddNewSupplierIDPopUpCloses()
 		{
 			Delay.Seconds(1);
@@ -909,6 +909,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				var expectedColumns = new List<string>();
+				foreach (TableRow thisRow in table.Rows)
+				{
+					expectedColumns.Add(thisRow["Column"]);
+				}
+
+				int unexpectedCount = 0;
+				if (expectedColumns.Count < ColumnTitles.Count)
+				{
+					Report.Info("Found unexpected columns!");
+					foreach (string ColumnTitle in ColumnTitles)
+					{
+						if (!expectedColumns.Contains(ColumnTitle))
+						{
+							unexpectedCount++;
+							Report.Info("Found unexpected column title: " + ColumnTitle + ".");
+						}
+					}
+					Report.Failure("Found " + unexpectedCount + " unexpected columns.");
+				}
 
 				foreach (TableRow thisRow in table.Rows)
 				{
@@ -1017,7 +1038,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I confirm that the excel file saved as: (.*) in column: (.*) there are no numbers")]
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) in column: (.*) there are no numbers")]
 		public void ThenIConfirmThatTheExcelFileSavedAsInColumnThereAreNoNumbers(string savedAs, string columnName)
 		{
 			object File = Context.GetFromContext(savedAs);
@@ -1240,7 +1261,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// Requires a table with columns: | Supplier ID | Company or Brand Name |
 		/// Company or Brand Name may use 'saved as: (.*)' where (.*) is the Context savedAs string
 		/// </summary>
-		[Then(@"I confirm that in the Supplier IDS list the following row exists")]
+		[StepDefinition(@"I confirm that in the Supplier IDS list the following row exists")]
 		public void ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(Table table)
 		{
 			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();

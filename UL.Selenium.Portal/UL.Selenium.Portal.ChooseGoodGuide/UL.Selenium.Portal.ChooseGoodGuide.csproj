@@ -107,7 +107,7 @@
       <HintPath>..\packages\SpecFlow.2.4.1\lib\net45\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="Thomas.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.7.0.163\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.7.0.145\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="Thomas.Plugin.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.7.0.163\lib\net461\Thomas.Plugin.Classes.dll</HintPath>

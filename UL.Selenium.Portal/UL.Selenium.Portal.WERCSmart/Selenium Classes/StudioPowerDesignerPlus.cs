@@ -773,7 +773,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			
 			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
 			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
-			IWebElement parentElement = matchingSection.FindElement(By.XPath("//parent::li"), 2);
+			IWebElement parentElement = matchingSection.FindElement(By.XPath(".//parent::li"), 2);
+			
 
 			if (parentElement.GetAttribute("class").Contains("selected"))
 			{
@@ -984,6 +985,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					{
 						Report.Info("Problems with maximising");
 					}
+					Delay.Seconds(5);
 					if (!GeneralUtilities.StudioWaitForSpinner(120))
 					{
 						throw new Exception("Spinner is still showing");

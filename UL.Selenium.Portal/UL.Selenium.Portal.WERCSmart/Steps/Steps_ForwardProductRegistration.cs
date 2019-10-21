@@ -22,23 +22,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the header: (.*) on the Forward Product Registration window")]
 		public void CorrectHeaderShowing(string headerExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Forward Product Registration window should appear");
-			try
-			{
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Info("Checking that Forward Product Registration window appears");
-				var selForwardProductRegistration = new ForwardProductRegistration();
-				string showing = selForwardProductRegistration.HeaderShowing();
-				Report.IsTrue(showing == headerExpected.Trim(),
-					"Forward Product Registration header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
-					"Forward Product Registration header was showing '" + headerExpected + "', as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Info("Checking that Forward Product Registration window appears");
+			var selForwardProductRegistration = new ForwardProductRegistration();
+			string showing = selForwardProductRegistration.HeaderShowing();
+			Report.IsTrue(showing == headerExpected.Trim(),
+				"Forward Product Registration header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
+				"Forward Product Registration header was showing '" + headerExpected + "', as expected!");
+			Report.Screenshot();
 		}
 
 		/// <summary>
@@ -617,7 +608,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (bSelected)
 			{
-                Report.Info("Saving retailer: " + selectedRetailer + " to context as: " + saveAs);
+				Report.Info("Saving retailer: " + selectedRetailer + " to context as: " + saveAs);
 				Context.AddToContext(saveAs, selectedRetailer);
 			}
 			else
@@ -682,14 +673,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I confirm that for UPC Number (.*) the retailer is displayed as (.*)")]
+		[StepDefinition(@"I confirm that for UPC Number (.*) the retailer is displayed as (.*)")]
 		public void ThenIConfirmThatForUPCNumberSavedAsTestCaseUPCTheRetailerIsDisplayedAsSavedAsTestCaseRetailer(string aUPCNumber, string aRetailer)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			if (aUPCNumber.ToLower().Contains("saved as"))
 			{
 				var upcSavedAs = aUPCNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim();
-                Report.Info("Getting UPC number from context saved as: " + upcSavedAs);
+				Report.Info("Getting UPC number from context saved as: " + upcSavedAs);
 				aUPCNumber = Context.GetFromContext(upcSavedAs)?.ToString();
 				if (aUPCNumber == null)
 				{
@@ -697,11 +688,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-            Report.Info("UPC Number: " + aUPCNumber);
+			Report.Info("UPC Number: " + aUPCNumber);
 			if (aRetailer.ToLower().Contains("saved as"))
 			{
 				var retailerSavedAs = aRetailer.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim();
-                Report.Info("Getting Retailer from context saved as: " + retailerSavedAs);
+				Report.Info("Getting Retailer from context saved as: " + retailerSavedAs);
 				aRetailer = Context.GetFromContext(retailerSavedAs)?.ToString();
 				if (aRetailer == null)
 				{
@@ -709,7 +700,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-            Report.Info("Retailer: " + aRetailer);
+			Report.Info("Retailer: " + aRetailer);
+			//        var abbreviationMappings = new RetailerAbbreviations().Map;
+			//        if (abbreviationMappings.ContainsKey(aRetailer))
+			//        {
+			//// then we need to convert from full retailer name to abbreviation because the UPC page displays the abbrv
+			////aRetailer = abbreviationMappings.FirstOrDefault(x => x.Key == aRetailer).Value;
+			//abbreviationMappings.TryGetValue(aRetailer, out string retailer);
+			//if (retailer != null)
+			//{
+			//	aRetailer = retailer;
+			//}
+			//        }
+			aRetailer = new RetailerAbbreviations().TryConvertToAbbreviation(aRetailer);
+			Report.Info("Retailer: " + aRetailer);
 			List<ForwardProductRegistration.ProductResults> listProductResults = selForwardProdReg.GetProductResults();
 			foreach (var productResults in listProductResults)
 			{
@@ -718,27 +722,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					if (upcs.Any(x => x.UPCNumber == aUPCNumber && x.DestinationRetailers.Contains(aRetailer)))
 					{
-                        Report.Success("UPC number: " + aUPCNumber + " displayed retailer: " + aRetailer + " as expected");
-                        Report.Screenshot();
-                        return;
+						Report.Success("UPC number: " + aUPCNumber + " displayed retailer: " + aRetailer + " as expected");
+						Report.Screenshot();
+						return;
 					}
 				}
 			}
-            Report.Failure("Failed to find retailer: " + aRetailer + " for UPC number: " + aUPCNumber);
-			//ForwardProductRegistration.ProductResults matchingListItem = listProductResults.FirstOrDefault(x =>
-			//	x.UPCs != null && x.UPCs.FirstOrDefault(y => y.UPCNumber!= null && y.UPCNumber == aUPCNumber).DestinationRetailers.Contains(aRetailer));
-
-			//Report.IsTrue(matchingListItem != null,
-			//	"Failed to find matching item for UPCNumber: " + aUPCNumber + " and retailer: " + aRetailer,
-			//	"Found matching item for UPCNumber: " + aUPCNumber + " and retailer: " + aRetailer);
-		}
-
-		[StepDefinition(@"I confirm that NO Errors display for the Product")]
-		public void ThenIConfirmThatNOErrorsDisplayForTheProduct()
-		{
-			var selForwardProdReg = new ForwardProductRegistration();
-			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
-
+			Report.Failure("Failed to find retailer: " + aRetailer + " for UPC number: " + aUPCNumber);
 		}
 
 		[StepDefinition(@"I confirm that there are NO Errors displayed for the Product")]
@@ -882,7 +872,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				case "present":
 					presenceExpected = true;
 					break;
-				case "not present":					
+				case "not present":
 					break;
 				default:
 					Report.Error("presence can only be 'present' or 'not present'");
@@ -917,7 +907,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
-		
+
 
 		[StepDefinition(@"I get the product ID for the product saved as: (.*) then I use this ID in the select Products & UPCs page")]
 		public void IGetTheProducIDForSavedAsAndSearcForProduct(string savedAs)
@@ -930,47 +920,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("idStringSavedAs", iD);
 			new StepsForwardProductRegistration().SelectProductByIDSavedAs("idStringSavedAs");
 		}
-		
+
 		[StepDefinition(@"I select one of the following retailers: and saved the chosen retailer as: (.*)")]
 		public void ISelectOneOfTheFollowingRetailers(string retailerSavedAs, Table table)
 		{
 			foreach (var row in table.Rows)
 			{
 				var retailerName = row["Retailer"];
-				if (Regex.IsMatch(retailerName, "<(.*)>"))
+				if (Context.GetFromContextRegex(retailerName, out var result))
 				{
-					var match = Regex.Match(retailerName, "<(.*)>").Groups[1].Value;
-					if (Context.Contains(match, true))
-					{
-						retailerName = Context.GetFromContext(match).ToString();
-					}
+					Report.Info("Getting retailer from context: " + retailerName);
+					retailerName = result.ToString();
 				}
 				if (new ForwardProductRegistration().SelectRetailer(retailerName))
 				{
 					Report.Success("The Retailer: " + retailerName + " was selected successfully");
 					Context.AddToContext(retailerSavedAs, retailerName);
 					return;
-				}				
+				}
 				Report.Info("Could not find: " + retailerName + " in the list of retailers");
-
 			}
 			Report.Failure("None of the retailers in the table could be selected");
-
 		}
 
 		[StepDefinition(@"I select one of the following retailers from the table: that is also not in the list saved as: (.*) and save the chosen retailer as: (.*)")]
-		public void ISelectOneOfTheFollowingRetailersThatIsNotX(string existingRetailer,string retailerSavedAs, Table table)
+		public void ISelectOneOfTheFollowingRetailersThatIsNotX(string existingRetailer, string retailerSavedAs, Table table)
 		{
 			foreach (var row in table.Rows)
 			{
 				var retailerName = row["Retailer"];
-				if (Regex.IsMatch(retailerName, "<(.*)>"))
+				if (Context.GetFromContextRegex(retailerName, out var result))
 				{
-					var match = Regex.Match(retailerName, "<(.*)>").Groups[1].Value;
-					if (Context.Contains(match, true))
-					{
-						retailerName = Context.GetFromContext(match).ToString();
-					}
+					Report.Info("Getting retailer from context: " + retailerName);
+					retailerName = result.ToString();
 				}
 				var alreadySelectedRetailers = (List<string>)Context.GetFromContext(existingRetailer);
 				var abbr = new RetailerAbbreviations();
@@ -979,7 +961,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (alreadySelectedRetailers.Any() && alreadySelectedRetailers.Contains(selectedAbbr))
 				{
 					Report.Info("Selected Retailer already exists. Selected another one.");
-				}			
+				}
 
 
 				if (!alreadySelectedRetailers.Contains(selectedAbbr))
@@ -991,7 +973,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						return;
 					}
 					Report.Info("Could not find: " + retailerName + " in the list of retailers");
-				}				
+				}
 
 			}
 			Report.Failure("None of the retailers in the table could be selected");

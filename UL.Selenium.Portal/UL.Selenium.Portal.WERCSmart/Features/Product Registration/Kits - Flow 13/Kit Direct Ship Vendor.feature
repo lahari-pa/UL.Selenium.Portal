@@ -1,4 +1,5 @@
-﻿@LandingPage
+﻿@Shared
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -118,7 +119,7 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 	#Given I save to context name: TestCase77857 and value: 1549382
 	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I navigate to the landing page
-	And I call Shared Step 68210 (Login to WERCSmart - Premium Account)
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I filter for the product saved as: TestCase77857
 	#And I confirm that product saved: TestCase77857 is shown with the retailer icons shown in red indicating a recertification is active
@@ -140,6 +141,7 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 	#And I Confirm that your product is shown in the Recertification status with the red font no longer shown
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77857 and its status is: Recertification
 	And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase77857
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase77857)
 	And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
 	And I call Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT
 	And In the Product Attribute Screen confirm that no records are found
@@ -195,6 +197,7 @@ Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM
 	#And I Confirm that your product is shown in the Recertification status with the red font no longer shown
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77858 and its status is: Recertification
 	And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase77858
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase77858)
 	And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
 	And I call Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT
 	And In the Product Attribute Screen confirm that no records are found

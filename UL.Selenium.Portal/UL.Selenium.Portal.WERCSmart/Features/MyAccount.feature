@@ -1,3 +1,4 @@
+@Shared
 @Homepage
 @Login
 @Signup
@@ -131,6 +132,7 @@ Scenario: [92613] Add and Deactivate a New User from the User Grid
 	And I Click close in dialog
 	Then I confirm the new user is Not Active
 
+@ScenarioId:1515
 Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 62676 (Go To My Account)
