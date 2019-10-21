@@ -59,16 +59,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see the (.*) Page")]
-		[StepDefinition(@"in the UPC Window, I should see the (.*) Page")]
-		public void GivenIShouldSeeXPage(string page)
-		{
-			var selNewProduct = new UPC();
-			Report.IsTrue(selNewProduct.WaitForSection(page),
-				page + " is not showing when it was expected to",
-				page + " is showing as expected");
-			Report.Screenshot();
-		}
+		//[StepDefinition(@"I should see the (.*) Page")]
+		//[StepDefinition(@"in the UPC Window, I should see the (.*) Page")]
+		//public void GivenIShouldSeeXPage(string page)
+		//{
+		//	var selNewProduct = new UPC();
+		//	Report.IsTrue(selNewProduct.WaitForSection(page),
+		//		page + " is not showing when it was expected to",
+		//		page + " is showing as expected");
+		//	Report.Screenshot();
+		//}
 
 		[StepDefinition(@"I add the following into the UPC case fields")]
 		public void ThenIAddTheFollowingIntoTheUpcFields(Table table)
@@ -667,56 +667,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string fileSavedAs, string tableSavedAs, Table table)
 		{
 			Context.AddToContext(tableSavedAs, table);
-
 			var upc = new UPC();
-
 			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("testdoc.xlsx"), "", "");
 			//Create file here
 			//var excelfile = new ExcelUtilities CreateSpreadsheet(fileName);
-
 			//var utils = ExcelUtilities.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
 			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination))
 			{
 				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
 				return;
 			}
-
-
-
 			var utils = new ExcelUtilities(destination, "Sheet1");
-
-
-
-
 			var headers = table.Rows.FirstOrDefault().Keys.ToList();
 			utils.AddRow(headers);
 			foreach (var row in table.Rows)
 			{
-				var vals = row.Values.Select(x =>
-				{
-					if (Regex.IsMatch(x, "<(.*)>"))
-					{
-						var match = Regex.Match(x, "<(.*)>").Groups[1].Value;
-						if (Context.Contains(match, true))
-						{
-							return Context.GetFromContext(match).ToString();
-						}
-					}
-
-					return x;
-				});
-
+				var vals = row.RowValuesFromContext();
 				utils.AddRow(vals.ToList());
 			}
 			//add all rows from table to excelfile
-
-
 			System.IO.Directory.Move(destination, KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
-
-
 			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", fileSavedAs), "Failed to validate File", "Successfully validated File");
-
-
 		}
 
 		[StepDefinition(@"I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: (.*)")]
@@ -740,16 +711,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var size = row["Size"];
 
 					var displayedSize = listDisplayedUPCs[i].Size;
-
-					if (Regex.IsMatch(upcNumber, "<(.*)>"))
-					{
-						var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
-						if (Context.Contains(match, true))
-						{
-							upcNumber = Context.GetFromContext(match).ToString();
-						}
-					}
-
+					upcNumber = Context.GetFromContextRegex(upcNumber)?.ToString() ?? upcNumber;
+					Report.Info("UPC number: " + upcNumber);
 					var displayedUpcNumber = listDisplayedUPCs[i].UpcNumber;
 
 					if (displayedUpcNumber != upcNumber)
@@ -839,14 +802,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					var displayedSize = listDisplayedUPCs[i].Size;
 
-					if (Regex.IsMatch(upcNumber, "<(.*)>"))
-					{
-						var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
-						if (Context.Contains(match, true))
-						{
-							upcNumber = Context.GetFromContext(match).ToString();
-						}
-					}
+					upcNumber = Context.GetFromContextRegex(upcNumber)?.ToString() ?? upcNumber;
 
 					var displayedUpcNumber = listDisplayedUPCs[i].UpcNumber;
 
@@ -1000,13 +956,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var upcNumber = row["UPC"];
 
-				if (Regex.IsMatch(upcNumber, "<(.*)>"))
+				if (Context.GetFromContextRegex(upcNumber, out var result))
 				{
-					var match = Regex.Match(upcNumber, "<(.*)>").Groups[1].Value;
-					if (Context.Contains(match, true))
-					{
-						upcNumber = Context.GetFromContext(match).ToString();
-					}
+					upcNumber = result.ToString();
 				}
 
 				if (!UPCCheckList.Contains(upcNumber))

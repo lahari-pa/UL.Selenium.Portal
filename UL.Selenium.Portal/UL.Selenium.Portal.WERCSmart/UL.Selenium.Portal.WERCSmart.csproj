@@ -167,6 +167,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
     <Compile Include="Selenium Classes\AddNewSupplier.cs" />
+    <Compile Include="Selenium Classes\AdvancedReportsRules\DailyReportWERCSmartAdditionalReportsPublished.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\AccountCreation.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\GGNewProduct.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\Homepage.cs" />
@@ -364,8 +365,9 @@
     </None>
     <None Include="Features\Forgotten Password.feature">
     </None>
-    <None Include="Features\Home page\Actions.feature">
+    <None Include="Features\Home page\Actions\Actions.feature">
     </None>
+    <None Include="Features\Home page\Actions\EditUPCs.feature" />
     <None Include="Features\Home page\Alerts.feature" />
     <None Include="Features\Home page\BulkActions.feature">
     </None>
@@ -450,6 +452,10 @@
     <None Include="Features\Product Registration\Kits - Flow 13\Kit Document Merge.feature" />
     <None Include="Features\Product Registration\Lithium Battery Transport Information.feature">
     </None>
+    <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation 5.feature" />
+    <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation 4.feature" />
+    <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation 3.feature" />
+    <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation 2.feature" />
     <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature">
     </None>
     <None Include="Features\Product Registration\Pesticides\Pesticides.feature">

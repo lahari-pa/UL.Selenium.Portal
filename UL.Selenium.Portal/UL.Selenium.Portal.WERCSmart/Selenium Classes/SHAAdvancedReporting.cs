@@ -11,6 +11,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
+using System;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -88,6 +89,96 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
 
 			return canClick;
+		}
+
+		public bool VerifyPopupTitle(string title, out string output)
+		{
+			IWebElement actualTitle = this.FindElement(By.Id("ui-dialog-title-preparing-file-modal"), 10);
+			output = actualTitle.Text;
+			return output == title;
+		}
+
+		internal bool CheckReportDescription(string report, string description, out string actualDescription)
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement container = frame.FindElement(By.XPath(@"//*[@id='gbox_listAdvancedReports']"));
+			string path = @"//*[@id='listAdvancedReports']//td[contains(text(),'" + report + "')]//..//td[@aria-describedby='listAdvancedReports_Description']";
+
+			IWebElement tableDescription = container.FindElement(By.XPath(path), 2);
+			actualDescription = tableDescription.Text.Trim();
+
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return actualDescription == description;
+		}
+
+		internal bool VerifyReportSelectable(string reportName, bool expected)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement reportButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table//td[contains(text(), """ + reportName + @""")]"), 2);
+
+			bool canClick = reportButton.TryClick();
+
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return canClick == expected;
+		}
+
+		internal bool ReportDescriptionNotAvailable(string reportDescription)
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement container = frame.FindElement(By.XPath(@"//*[@id='gbox_listAdvancedReports']"));
+			string path = @"//*[@id='listAdvancedReports']//td[contains(text(),'" + reportDescription + "')]//..//td[@aria-describedby='listAdvancedReports_Description']";
+
+			IWebElement tableDescription = container.FindElement(By.XPath(path), 2);
+
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return tableDescription == null;
+		}
+	}
+
+	class AdvancedReportingDateForm : SeleniumBaseObject
+	{
+		public const string BasePath = "//*[@id='panel']";
+
+		IWebElement Field { get; set; }
+
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		public bool EnterStartEndDates(string start, string end)
+		{
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			ReadOnlyCollection<IWebElement> fields = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input"));
+
+			if (fields.Count < 2)
+			{
+				Report.Info("The Date fields were unable to be located.");
+				return false;
+			}
+
+			Report.IsTrue(this.ReplaceAllTextInElementWith(start, fields[0]), "Start Date field was not able to be updated", "Start Date field was updated successfully");
+			Report.IsTrue(this.ReplaceAllTextInElementWith(end, fields[1]), "End Date field was not able to be updated", "End Date field was updated successfully");
+
+			fields[0].TryClick();
+			fields[1].TryClick();
+			fields[2].TryClick();
+
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+
+
+			return true;
+		}
+
+		private bool ReplaceAllTextInElementWith(string replace, IWebElement element)
+		{
+			this.Field = element;
+			string fieldText = this.Field.GetInnerText();
+			this.Field.JsEnterText(replace);
+			return !(replace == this.Field.GetInnerText());
 		}
 	}
 }

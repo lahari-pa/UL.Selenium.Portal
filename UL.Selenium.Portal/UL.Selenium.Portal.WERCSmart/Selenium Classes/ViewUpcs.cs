@@ -34,25 +34,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			foreach (IWebElement row in this.UpcRows)
 			{
 				var thisUpc = new ProductUpc();
-				int upcNumberIndex = Array.IndexOf(this.HeadingTitles, "UPC Number");
-				if (upcNumberIndex != -1)
+				for (int i=0; i< this.HeadingTitles.Count(); i++)
 				{
-					thisUpc.UpcNumber = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2)?.Text;
-				}
-				int containerTypeIndex = Array.IndexOf(this.HeadingTitles, "Container Type");
-				if (containerTypeIndex != -1)
-				{
-					thisUpc.ContainerType = row.FindElement(By.XPath($"./td[position()={containerTypeIndex + 1}]/ div"), 2)?.Text;
-				}
-				int sizeIndex = Array.IndexOf(this.HeadingTitles, "Size (Ounces)");
-				if (sizeIndex != -1)
-				{
-					thisUpc.SizeOunces = row.FindElement(By.XPath($"./td[position()={sizeIndex + 1}]/ div"), 2)?.Text;
-				}
-				int retailersIndex = Array.IndexOf(this.HeadingTitles, "Retailers");
-				if (retailersIndex != -1)
-				{
-					thisUpc.Retailers = row.FindElement(By.XPath($"./td[position()={retailersIndex + 1}]/ div"), 2)?.Text.Split(',').Select(x => x.Trim()).ToList();
+					var heading = this.HeadingTitles[i];
+					var colEl = row.FindElement(By.XPath($"./td[position()={i + 1}]/ div"), 2);
+					var colVal = colEl?.Text;
+					switch (heading)
+					{
+						case "UPC Number":
+							thisUpc.UpcNumber = colVal;
+							thisUpc.TruckIcon = colEl.FindElement(By.XPath("./i[@class='fa fa-truck']"), 1) != null;
+							break;
+						case "Associated UPC":
+							thisUpc.AssociatedUpc = colVal;
+							break;
+						case "Container Type":
+							thisUpc.ContainerType = colVal;
+							break;
+						case "Size (Ounces)":
+							thisUpc.SizeOunces = colVal;
+							break;
+						case "Quantity":
+							thisUpc.Quantity = colVal;
+							break;
+						case "Transport":
+							thisUpc.Transport = colVal;
+							break;
+						case "Retailers":
+							thisUpc.Retailers = colVal.Split(',').Select(x => x.Trim()).ToList();
+							break;
+					}
 				}
 				rList.Add(thisUpc);
 			}
@@ -61,84 +72,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<ProductUpc> NormalUPCs()
 		{
-			var rList = new List<ProductUpc>();
-			foreach (IWebElement row in this.UpcRows)
-			{
-				var thisUpc = new ProductUpc();
-				int upcNumberIndex = Array.IndexOf(this.HeadingTitles, "UPC Number");
-				if (upcNumberIndex != -1)
-				{
-					IWebElement upc = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2);
-					IWebElement truck = upc.FindElement(By.XPath(@"//i[@class='fa fa-truck']"), 2);
-					if (truck == null)
-					{
-						thisUpc.UpcNumber = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2)?.Text;
-					}
-					else
-					{
-						continue;
-					}
-
-				}
-				int containerTypeIndex = Array.IndexOf(this.HeadingTitles, "Container Type");
-				if (containerTypeIndex != -1)
-				{
-					thisUpc.ContainerType = row.FindElement(By.XPath($"./td[position()={containerTypeIndex + 1}]/ div"), 2)?.Text;
-				}
-				int sizeIndex = Array.IndexOf(this.HeadingTitles, "Size (Ounces)");
-				if (sizeIndex != -1)
-				{
-					thisUpc.SizeOunces = row.FindElement(By.XPath($"./td[position()={sizeIndex + 1}]/ div"), 2)?.Text;
-				}
-				int retailersIndex = Array.IndexOf(this.HeadingTitles, "Retailers");
-				if (retailersIndex != -1)
-				{
-					thisUpc.Retailers = row.FindElement(By.XPath($"./td[position()={retailersIndex + 1}]/ div"), 2)?.Text.Split(',').Select(x => x.Trim()).ToList();
-				}
-				rList.Add(thisUpc);
-			}
-			return rList;
+			return this.Upcs().Where(x => !x.TruckIcon).ToList();
 		}
 
 		public List<ProductUpc> CaseUPCs()
 		{
-			var rList = new List<ProductUpc>();
-			foreach (IWebElement row in this.UpcRows)
-			{
-				var thisUpc = new ProductUpc();
-				int upcNumberIndex = Array.IndexOf(this.HeadingTitles, "UPC Number");
-				if (upcNumberIndex != -1)
-				{
-					IWebElement upc = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2);
-					IWebElement truck = upc.FindElement(By.XPath(@"//i[@class='fa fa-truck']"), 2);
-					if (truck != null)
-					{
-						thisUpc.UpcNumber = row.FindElement(By.XPath($"./td[position()={upcNumberIndex + 1}]/ div"), 2)?.Text;
-					}
-					else
-					{
-						continue;
-					}
-
-				}
-				int containerTypeIndex = Array.IndexOf(this.HeadingTitles, "Container Type");
-				if (containerTypeIndex != -1)
-				{
-					thisUpc.ContainerType = row.FindElement(By.XPath($"./td[position()={containerTypeIndex + 1}]/ div"), 2)?.Text;
-				}
-				int sizeIndex = Array.IndexOf(this.HeadingTitles, "Size (Ounces)");
-				if (sizeIndex != -1)
-				{
-					thisUpc.SizeOunces = row.FindElement(By.XPath($"./td[position()={sizeIndex + 1}]/ div"), 2)?.Text;
-				}
-				int retailersIndex = Array.IndexOf(this.HeadingTitles, "Retailers");
-				if (retailersIndex != -1)
-				{
-					thisUpc.Retailers = row.FindElement(By.XPath($"./td[position()={retailersIndex + 1}]/ div"), 2)?.Text.Split(',').Select(x => x.Trim()).ToList();
-				}
-				rList.Add(thisUpc);
-			}
-			return rList;
+			return this.Upcs().Where(x => x.TruckIcon).ToList();
 		}
 
 		public class ProductUpc
@@ -151,6 +90,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			public List<string> Retailers { get; set; }
 
+			public string AssociatedUpc { get; set; }
+
+			public string Quantity { get; set; }
+
+			public string Transport { get; set; }
+
+			public bool TruckIcon { get; set; }
 
 		}
 	}

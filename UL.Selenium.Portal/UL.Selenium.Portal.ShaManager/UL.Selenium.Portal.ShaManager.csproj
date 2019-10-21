@@ -130,7 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\SHA Manager\Home Page\HomePage.feature" />
     <None Include="Features\SHA Manager\Home Page\Suspended.feature">
     </None>
     <None Include="Features\SHA Manager\LowerOptions.feature">

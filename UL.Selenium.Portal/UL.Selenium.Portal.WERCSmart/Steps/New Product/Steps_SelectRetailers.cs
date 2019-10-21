@@ -36,6 +36,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Retailers were shown in " + viewType + " view with checkboxes");
 		}
 
+		[StepDefinition(@"I click Done on Select Retailers window")]
+		public void IClickDoneButtonOnSelectRetailersWindow()
+		{
+			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done button.", "Successfully clicked Done button.");
+		}
+
 		[StepDefinition(@"I select the following retailers in the Select Retailers popup list view:")]
 		public void SelectRetailersInListView(Table retailers)
 		{
