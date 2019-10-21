@@ -120,14 +120,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 						string.Format("UPC {0} returned {1} as expected", key, reportData[key]), false, false);
 				}
 
-				using (var sw = new StreamWriter(Path.Combine(ReportingParameters.ReportFolder, "Test.xml")))
+				using (var sw = new StreamWriter(Path.Combine(ReportSettings.ReportingParameters.ReportFolder, "Test.xml")))
 				{
 					sw.Write(xml);
 					sw.Flush();
 					sw.Close();
 				}
 
-				Report.XMLFile(Path.Combine(ReportingParameters.ReportFolder, "Test.xml"));
+				Report.XMLFile(Path.Combine(ReportSettings.ReportingParameters.ReportFolder, "Test.xml"));
 
 				foreach (string str in doc.GetElementsByTagName("gtin"))
 				{
@@ -172,14 +172,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			Report.IsTrue(!string.IsNullOrEmpty(token), "Failed to find a xml for UPC: " + upc, "Successfully acquired a report for UPC: " + upc, false, false);
 			Report.Info("Response includes data: " + !string.IsNullOrEmpty(xml));
 
-			using (var sw = new StreamWriter(Path.Combine(ReportingParameters.ReportFolder, "Test.xml")))
+			using (var sw = new StreamWriter(Path.Combine(ReportSettings.ReportingParameters.ReportFolder, "Test.xml")))
 			{
 				sw.Write(xml);
 				sw.Flush();
 				sw.Close();
 			}
 
-			Report.XMLFile(Path.Combine(ReportingParameters.ReportFolder, "Test.xml"));
+			Report.XMLFile(Path.Combine(ReportSettings.ReportingParameters.ReportFolder, "Test.xml"));
 		}
 
 		[StepDefinition(@"I verify that data was returned as expected from file saved as: (.*)")]
