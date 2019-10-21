@@ -54,6 +54,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 
 
 @singlerun
+@ScenarioId:1547
 Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

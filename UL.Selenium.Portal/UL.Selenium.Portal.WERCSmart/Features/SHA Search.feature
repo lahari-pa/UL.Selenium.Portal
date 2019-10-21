@@ -12,6 +12,7 @@ Feature: SHA Search
 	Limited to functions which only search SHA Manager
 
 @SHASearch
+@ScenarioId:1574
 Scenario: [110399] SHA Manager - Search UPC for Archived Registration - Verify Popup
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then SHA Search for product by UPC: 0046442718103 in all statuses

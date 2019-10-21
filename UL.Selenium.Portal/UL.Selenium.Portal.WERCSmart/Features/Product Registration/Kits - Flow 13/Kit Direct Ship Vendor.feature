@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -20,7 +20,6 @@ Feature: Kit Direct Ship Vendor
 # Waiting for this test to be finished ^^^
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@TReVorId:18948
 Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru to Submitted status in SHA
 	#Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
 	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
@@ -54,7 +53,7 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77862 and its status is: Submitted
 	And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
 
-@TReVorId:20212
+@ScenarioId:5943
 Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to Submitted
 	#Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
 	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77837_KitProduct1
@@ -93,7 +92,6 @@ Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to 
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 @77857
-@TReVorId:21835
 Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM only
 	#Given I save to context name: 77862_KitProduct1 and value: 1549414
 	#Given I save to context name: 77862_KitProduct2 and value: 1549415
@@ -151,7 +149,6 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 @77858
-@TReVorId:21867
 Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM only
 	#Given I save to context name: 77862_KitProduct1 and value: 1552743
 	#Given I save to context name: 77862_KitProduct2 and value: 1552746
