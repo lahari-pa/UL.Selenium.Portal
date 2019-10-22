@@ -4124,7 +4124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(1);
 				Report.Info("Waiting for product list");
 				Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
-					"Product list is showing");
+					"Product list is showing", ShowSuccessScreenshot: false);
 				if (!myStudioShaManager.TopRowProductsTableMatchesId(id))
 				{
 					counter++;
@@ -4143,7 +4143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var thisTopMenu = new StudioTopMenu();
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
 			TestReport.StartStep("I click System > Job Queue");
 			thisTopMenu.ClickSubMenu("System", "Job Queue");
 			Delay.Seconds(5);
@@ -4152,10 +4152,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I confirm there is an entry for UserName = SHAMANAGER, Date Started = Current Date, Class = Wercs.Core.BLLPortal.ImportProcessRules");
 			var thisStudioJobQueue = new StudioJobQueue();
 			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
-				"Job queue has loaded");
+				"Job queue has loaded", ShowSuccessScreenshot: false);
 			GeneralUtilities.StudioWaitForSpinner();
 			Report.IsTrue(thisStudioJobQueue.ClickJobQueueMenuItem("Job Queue"), "Failed to navigate to job queue",
-				"Navigated to job queue");
+				"Navigated to job queue", ShowSuccessScreenshot: false);
 			GeneralUtilities.StudioWaitForSpinner();
 			thisStudioJobQueue = new StudioJobQueue();
 			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
@@ -4278,7 +4278,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			var thisTopMenu = new StudioTopMenu();
 			TestReport.StartStep("I click the Authoring menu option and Select Power Designer Plus");
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
 			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
 				"Failed to navigate to power designer plus", "Navigated to power designer plus");
 			Report.Screenshot();
@@ -4699,7 +4699,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 			var thisTopMenu = new StudioTopMenu();
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
 			thisTopMenu.ClickSubMenu("System", "Job Queue");
 			GeneralUtilities.StudioWaitForSpinner();
 			Delay.Seconds(5);
@@ -4724,7 +4724,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Success("Found job with id: " + id.ToString() + " as expected");
-				Report.Screenshot();
 				//Wait for job to not appear in the list
 				for (int i = 0; i < 120; i++)
 				{
@@ -5411,9 +5410,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.");
 			newProductSteps.CheckDisplayedSections("only see", sections);
 			TestReport.StartStep(
-				"I select the No button for the 'Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.' question");
+				"I select the No button for the 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' question");
 			newProductSteps.SetTheSectionOptionTo(
-				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"Product is shipped directly by supplier to the consumer.",
 				"No");
 			TestReport.StartStep("I click continue");
 			newProductSteps.ClickContinue();
@@ -5946,9 +5945,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I select regulatory specialist: Automated QASha");
 			Report.IsTrue(processUI.SelectRegulatorySpecialist("Automated QASha"),
 				"Failed to select regulatory specialist: Automated QASha",
-				"Successfully selected regulatory specialist: Automated QASha");
+				"Successfully selected regulatory specialist: Automated QASha", ShowSuccessScreenshot: false);
 			TestReport.StartStep("I click continue");
-			Report.IsTrue(processUI.ClickContinue(), "Failed to click continue!", "Successfully clicked continue");
+			Report.IsTrue(processUI.ClickContinue(), "Failed to click continue!", "Successfully clicked continue", ShowSuccessScreenshot: false);
 			TestReport.StartStep("I click Find in the Product Search popup");
 			Delay.Seconds(5);
 			var productSearch = new StudioSHAManagerProductSearch();
@@ -5959,11 +5958,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Report.IsTrue(productSearch.ClickButton("Find"), "Failed to click Find in product search",
-				"Successfully clicked Find in product search");
+				"Successfully clicked Find in product search", ShowSuccessScreenshot: false);
 			TestReport.StartStep("I close the Process Products pop up");
 			processUI = new ProcessUIDialog();
 			Report.IsTrue(processUI.ClickClose(), "Failed to close the Process Products popup",
-				"Successfully closed the Process Products popup");
+				"Successfully closed the Process Products popup", ShowSuccessScreenshot: false);
 			TestReport.StartStep("I confirm the product saved as is shown in the Accepted status");
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Accepted");
@@ -7562,6 +7561,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
 				"No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns",
+				"No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(
+					@"I call Shared Step 62681 - Additional Product Information - Canada, No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
+		public void
+					ThenICallSharedStep62681AdditionalProductInformation_CanadaNoDSVNoPLPNoGNFRContinue_HappyPath()
+		{
+			var MyNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns",
 				"No");
