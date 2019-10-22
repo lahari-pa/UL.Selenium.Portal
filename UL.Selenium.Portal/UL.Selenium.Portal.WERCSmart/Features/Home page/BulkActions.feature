@@ -162,6 +162,7 @@ And I Confirm the Product shows status: Completed for retailer: saved as retaile
 And I Confirm the Product shows status: Submitted for retailer: saved as TestCase75321Retailer
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase75321
+And I confirm the Product UPC window has opened
 And I confirm that retailer saved as: TestCase75321Retailer appears for UPC saved as: TestCase75321UPC
 And I close the current window and switch to the main window in Studio
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75321)
