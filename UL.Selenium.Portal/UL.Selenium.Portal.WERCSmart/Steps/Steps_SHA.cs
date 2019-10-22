@@ -2706,7 +2706,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 			Delay.Seconds(1);
 			Report.Info("Waiting for product list");
-			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing", ShowSuccessScreenshot:false);
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing", ShowSuccessScreenshot: false);
 
 
 		}

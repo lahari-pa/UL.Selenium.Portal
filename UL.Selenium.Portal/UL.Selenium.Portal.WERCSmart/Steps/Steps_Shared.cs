@@ -5412,9 +5412,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.");
 			newProductSteps.CheckDisplayedSections("only see", sections);
 			TestReport.StartStep(
-				"I select the No button for the 'Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.' question");
+				"I select the No button for the 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' question");
 			newProductSteps.SetTheSectionOptionTo(
-				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"Product is shipped directly by supplier to the consumer.",
 				"No");
 			TestReport.StartStep("I click continue");
 			newProductSteps.ClickContinue();
@@ -7563,6 +7563,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
 				"No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns",
+				"No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(
+					@"I call Shared Step 62681 - Additional Product Information - Canada, No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
+		public void
+					ThenICallSharedStep62681AdditionalProductInformation_CanadaNoDSVNoPLPNoGNFRContinue_HappyPath()
+		{
+			var MyNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns",
 				"No");
