@@ -1412,7 +1412,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a new supplier products account: (.*) and create a product with retailer CVS")]
+		[StepDefinition(@"I create a new supplier products account: (.*) and create a new brand in that account")]
 		public void CreateNewSupplierProductsAccountAndCreateAProductWithRetailerCVS(string savedAs)
 		{
 			Report.Info("Setting up account for user: '" + savedAs + "'");
@@ -1484,19 +1484,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myBrand.EnterBrandNameExpandedRow("TestBrand");
 			myBrand.ClickSaveMyBrandsGrid();
 			myBrand.ActiveValueIsYesForLastBrand("Yes");
-							
+
 
 			//create a product for CVS data tier
 			myProductsetup.CreateProductConditionerForCVSAndTakeToDataSummary("product2", "Conditioner");
 			myHome.ClickItemInNavigationPanel("Retail Partners");
 			myRetailPartner.SelectRetailer("CVS");
 			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
-			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
-			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
-			myRetailPartner.SetDataConsentTier("Tier 3", "on");
-			myRetailPartner.GivenClickTheSaveChangesButton();
-			myRetailPartner.ClickCloseOnSavePopupDialog();
+
+
 		}
+
+		
+
+		
 	}
 }
 

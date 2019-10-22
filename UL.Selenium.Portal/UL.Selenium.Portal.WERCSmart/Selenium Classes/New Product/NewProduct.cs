@@ -681,7 +681,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
 				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
-				IWebElement upcNameField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Name')]/..//input"), 2);
+				IWebElement ProductNameOnlabel = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/..//input"), 2);
 
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
@@ -700,42 +700,48 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				}
 				upcNumberField.EnterText(info.UpcNumber);
-
-				if (upcNameField.Text.IsNullOrEmpty())
+				if (ProductNameOnlabel != null)
 				{
-					upcNameField.EnterText("UPCName PlaceHolder");
-					Report.Failure("The UPC Name Field was empty, entered PlaceHolder text");
-				}
-				else
-				{
-					Report.Info("The Field was not empty, Checking for UPCName in the table");
-					if(!info.UPCName.IsNullOrEmpty())
+					if (ProductNameOnlabel.Text.IsNullOrEmpty())
 					{
-						if (info.UPCName.ToLower().Contains("saved as"))
-						{
-							try
-							{
-								string savedUPC = Context
-									.GetFromContext(info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
-									.ToString();
-								info.UPCName = savedUPC;
-							}
-							catch (Exception e)
-							{
-								Report.Info("Failed to find saved item in context: " + info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
-								throw;
-							}
-
-						}
-
-						upcNumberField.EnterText(info.UPCName);
+						ProductNameOnlabel.EnterText("UPCName PlaceHolder");
+						Report.Failure("The UPC Name Field was empty, entered PlaceHolder text");
 					}
 					else
 					{
-						Report.Info("UPC Name was not found in the table, leaving default UPC Name");
+						Report.Info("The Field was not empty, Checking for UPCName in the table");
+						if (!info.UPCName.IsNullOrEmpty())
+						{
+							if (info.UPCName.ToLower().Contains("saved as"))
+							{
+								try
+								{
+									string savedUPC = Context
+										.GetFromContext(info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+										.ToString();
+									info.UPCName = savedUPC;
+								}
+								catch (Exception e)
+								{
+									Report.Info("Failed to find saved item in context: " + info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+									throw;
+								}
+
+							}
+
+							upcNumberField.EnterText(info.UPCName);
+						}
+						else
+						{
+							Report.Info("UPC Name was not found in the table, leaving default UPC Name");
+						}
+
 					}
-					
-				}			
+				}
+				else
+				{
+					Report.Failure("The UPC Name field was not present");
+				}
 				
 
 

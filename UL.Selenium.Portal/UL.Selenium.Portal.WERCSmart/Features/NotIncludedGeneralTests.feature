@@ -24,6 +24,7 @@
 @ForwardProductRegistration
 @ProductSetUp
 @SupplierReports
+@CreateProducts
 @admin
 @ViewUpcs
 @Solutions
@@ -419,13 +420,19 @@ Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) Re
 
 Scenario: [NOTINCLUDEDGENERALTEST] TESTCVS Revision to Data Tier Consent Requirements
 Then I create a upc number for CVS
-Given I create a new supplier products account: ProductAccountTEST and create a product with retailer CVS
+Given I create a new supplier products account: (.*) and create a new brand in that account
 
 Scenario: [NOTINCLUDEDGENERALTEST] CVS Revision to Data Tier Consent Requirements
 
-Given I create a new supplier products account: ProductAccountTEST and create a product with retailer CVS
+Given I create a new supplier products account: (.*) and create a new brand in that account
 
-	
+
+Scenario: [NOTINCLUDEDGENERALTEST] NoProductsAcc - CVS Revision to Data Tier Consent Requirements health and beauty
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
+
 
 		              
 

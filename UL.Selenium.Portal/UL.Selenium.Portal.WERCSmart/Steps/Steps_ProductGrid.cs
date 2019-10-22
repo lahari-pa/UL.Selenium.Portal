@@ -2351,6 +2351,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
+		[StepDefinition(@"In the Products Grid I delete All products")]
+		public void InTheProductsGridIDeleteAllProducts()
+		{
+			Report.IsTrue(new ProductsGrid().DeleteAllPresentRows(), "Failed to delete all products!", "All matching products deleted successfully!");
+		}
+
 
 
 	}
