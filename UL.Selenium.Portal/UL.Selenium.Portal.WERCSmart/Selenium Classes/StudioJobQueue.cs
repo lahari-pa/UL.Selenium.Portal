@@ -23,7 +23,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			//get all iframes, try them on by one for the table
 			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-			ReadOnlyCollection<IWebElement> iframes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//iframe[@id]"));
+			IList<IWebElement> iframes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//iframe[@id]"), 1);
 			var iframeIds = iframes.Select(x => x.GetAttribute("id")).ToList();
 
 			foreach (string iframeId in iframeIds)
@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame(iframeId);
 				try
 				{
-					if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='jobListGrid-grid']")) != null)
+					if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='jobListGrid-grid']"), 10) != null)
 					{
 						return true;
 					}
