@@ -256,13 +256,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			string[] avoidRetailersArray = new string[] { presentRetailer, "Best Buy", "Dick's Sporting Goods", "Kroger","Canadian Tire"};
+			string[] avoidRetailersArray = new string[] { presentRetailer, "Best Buy", "Dick's Sporting Goods", "Kroger","Canadian Tire", "Albertsons Companies" };
 
 			var retailer = retailerInputs.FirstOrDefault(x => !avoidRetailersArray.Contains(x.GetValue(true)));
 
 			if (retailer != null)
 			{
 				string chosenRetailerName = retailer.Text;
+				Report.Info("Selecting retailer: " + chosenRetailerName);
 				Context.AddToContext(savedAs, chosenRetailerName);
 				return retailer.FindElement(By.XPath(@".//following-sibling::div[@class='control-indicator']"), 2).TryClick();
 
@@ -496,6 +497,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement privateLabelInput = this.containerElement.FindElement(By.XPath(@"//label[contains(text(), 'Private Label')]/following-sibling::input"), 2);
 			if (privateLabelInput != null)
 			{
+				privateLabelInput.TryClick();
 				Report.Info("Found private label input box. Attempting to enter text.");
 				return privateLabelInput.TryEnterText(value);
 			}

@@ -89,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.IsTrue(thisTopMenu.ClickSubMenu(menuItem, submenuItem), "Failed to click: " + menuItem,
-					"Successfully clicked: " + menuItem, ShowSuccessScreenshot: false);
+					"Successfully clicked: " + submenuItem, ShowSuccessScreenshot: false);
 			}
 
 		}
@@ -914,12 +914,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("No item saved in context as: " + retailerSavedAs);
 				return;
 			}
-
-			if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='upcTableOutter']"), 5) == null)
-			{
-				Report.Failure("View UPC table was not displayed");
-				return;
-			}
+            //SeleniumBrowser.WebBrowser.WaitForPageLoad();
+   //         Delay.Seconds(5);
+			//if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='upcTableOutter']"), 10) ==null)
+			//{
+			//	Report.Failure("View UPC table was not displayed");
+			//	return;
+			//}
 			Report.Info("UPC is: " + upc);
 			string retailer = Context.GetFromContext(retailerSavedAs).ToString();
 			//retailer = new RetailerAbbreviations().TryConvertToAbbreviation(retailer);
@@ -3124,6 +3125,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(excelInfo["Product Activity Date"] == table.Rows[0]["Product Activity Date"], "Failed to match Product Activity Date " + table.Rows[0]["Product Activity Date"] + " to excel information. Excel: " + excelInfo["Product Activity Date"],
 					"Successfully matched Product Activity Date " + table.Rows[0]["Product Activity Date"] + " to information in excel spreadsheet.");
+			}
+		}
+
+		[StepDefinition(@"I confirm the Product UPC window has opened")]
+		public void ConfirmProductUpcWindowOpened()
+		{
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			Report.Info("Looking for SHA Manager Product UPC window");
+			bool foundWindow = false;
+			foreach (string handle in allHandles)
+			{
+				Report.Info("Checking handle: " + handle);
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(
+					    By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+				{
+					Report.Success("Tab was switched successfully!");
+					Report.Screenshot();
+					var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+					Context.AddToContext("SHAManagerProductUPC", currentHandle);
+					foundWindow = true;
+					break;
+				}
+			}
+			if (!foundWindow)
+			{
+				Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+				Report.Screenshot();
 			}
 		}
 
