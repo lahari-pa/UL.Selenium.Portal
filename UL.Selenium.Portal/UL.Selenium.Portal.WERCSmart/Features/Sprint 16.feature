@@ -16,10 +16,12 @@
 @PackagingTypes
 @Brands
 @MyIngredients
+@SupplierReports
 @UPC
 @SHA
 @ForwardProductRegistration
 @ProductSetUp
+@MyMessages
 @run_Sprint16
 Feature: Sprint 16
 
@@ -138,17 +140,45 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Then I should see the Comments Page for the New Product
 	And The remaining characters counter displays: 500/500
-	Given I enter the following into the comments field: comments
+	Given I append the following into the comments field: comments
 	And The remaining characters counter displays: 492/500
-	Then I enter the following into the comments field: comments
-	And The remaining characters counter displays: 486/500
-	And I enter the following into the comments field: comments
-	And The remaining characters counter displays: 478/500
-	And I enter the following into the comments field: comments
+	Then I append the following into the comments field: comments
+	And The remaining characters counter displays: 484/500
+	And I append the following into the comments field: comments
+	And The remaining characters counter displays: 476/500
+	And I append the following into the comments field: comments
+	And The remaining characters counter displays: 468/500
+	And I enter 500 characters into the comments field
+	And The remaining characters counter displays: 0/500
+	And I enter 502 characters into the comments field
+	And The remaining characters counter displays: 0/500
 	Then in the Comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Suppository, Medicinal
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58605
-#Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC Error Details
-#	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-#	And I click the Supplier Reports link in the expanded navigation side menu
-#	Then Under the Supplier Reports menu I choose: UPC Error Details
+
+@ScenarioId:5947
+Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC Error Details
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I click the Supplier Reports icon in the QuickLinks Pane
+	Then Under the Supplier Reports menu I choose: UPC Error Details
+	Then in UPC Error Details WPSID box I enter product ID: 1389844
+	Then In the Supplier Reports screen I click on the Download button
+	Then I confirm an excel file is downloaded then close the Report Download popup. I save the file as 113004
+	Then I confirm that the exported excel file saved as: 113004 contains the following columns:
+		| Column                       |
+		| WPSID                        |
+		| Product Name                 |
+		| Individual UPC               |
+		| Case-Pack UPC                |
+		| UPC Name                     |
+		| Not Completed OMSID's        |
+		| Green Good Housekeeping      |
+		| Green Seal                   |
+		| EPA Safer Choice             |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Made Safe                    |
+		| NSF Sustainability Certified |
+	Then I delete the excel file saved as 113004

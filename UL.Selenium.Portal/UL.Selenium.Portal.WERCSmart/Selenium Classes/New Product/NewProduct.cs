@@ -758,7 +758,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el != null;
 		}
 
-		public bool InputCommentAreaText(string text)
+		public bool InputCommentAreaText(string text, bool append = false)
 		{
 			try
 			{
@@ -768,7 +768,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 
 				IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
-				el.EnterText(text);
+				if (append)
+				{
+					el.SendKeys(text);
+				}
+				else
+				{
+					el.EnterText(text);
+				}
 				return true;
 			}
 			catch (Exception)
@@ -1432,6 +1439,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
+		}
+
+		internal bool CommentsAreaContains(string contents)
+		{
+			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"));
+
+			return contents == commentBox.Text;
+		}
+
+		internal bool CommentsCharactersRemaining(int expected, int maximum, out int remainDisplayed)
+		{
+			IWebElement maxCharacters = this.FindElement(By.XPath("//span[@data-bind='text: maxLength']"));
+			IWebElement charactersRemain = this.FindElement(By.XPath("//span[@data-bind='text: maxLength() - field.field().length']"), 2);
+			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"));
+
+			Report.IsTrue(int.TryParse(maxCharacters.Text, out int maxDisplayed),
+				"Maximum Characters is displaying " + maxCharacters.Text + " which cannot be parsed into an integer",
+				"The maximum allowed caharacters is able to be represented as an integer: " + maxDisplayed);
+			Report.IsTrue(int.TryParse(charactersRemain.Text, out remainDisplayed),
+				"Remaining Characters is displaying " + charactersRemain.Text + " which cannot be parsed into an integer",
+				"The maximum allowed caharacters is able to be represented as an integer: " + remainDisplayed);
+
+			return remainDisplayed == expected;
 		}
 
 		// ========= Add Ingredient Functions ========= //
@@ -3018,7 +3048,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
-		
+
 
 		public bool CheckInputFieldXIsColor(string expectedColor, string fieldName)
 		{
@@ -3033,9 +3063,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 
 			string expectedColorCode;
-			
 
-			List <IWebElement> parentContainers = this.containerElement.FindElements(By.XPath($".//div[contains(@data-bind,'visible: DocumentID().length') and .//span[contains(text(),'{fieldName}')]]"), 2).ToList();
+
+			List<IWebElement> parentContainers = this.containerElement.FindElements(By.XPath($".//div[contains(@data-bind,'visible: DocumentID().length') and .//span[contains(text(),'{fieldName}')]]"), 2).ToList();
 			parentContainer = parentContainers.FirstOrDefault(x => x.Displayed);
 			if (parentContainer == null)
 			{
@@ -3044,7 +3074,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			inputField = parentContainer.FindElement(By.XPath(".//div[contains(@class,'dropzone')]"), 2);
-			if(inputField==null)
+			if (inputField == null)
 			{
 				Report.Failure("Could not find input field element");
 				return false;
@@ -3062,7 +3092,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					expectedColorCode = "rgba(255, 240, 240, 1)";
 					//parentContainer = this.containerElement.FindElement(By.XPath($".//div[@data-bind='visible: DocumentID().length == 0' and .//span[contains(text(),'{fieldName}')]]"), 2);
 					//inputField	= parentContainer.FindElement(By.XPath(".//div[@class='dropzone']"), 2);
-					
+
 					break;
 				default:
 					Report.Error("expectedColor must be either: 'Red' or 'Green'");
@@ -3072,7 +3102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			string inputFieldColor = inputField.GetCssValue("background-color");
-			
+
 			if (expectedColorCode == inputFieldColor)
 			{
 				Report.Success($"The color of the input field was the color {expectedColor} as expected");
