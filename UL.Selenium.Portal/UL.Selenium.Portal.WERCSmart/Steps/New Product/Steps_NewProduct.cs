@@ -1010,7 +1010,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-
 		[StepDefinition(@"The Data Acceptance page should appear")]
 		public void ThenTheDataAcceptancePageShouldApprear()
 		{

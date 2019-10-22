@@ -10,6 +10,9 @@ using System.Text;
 using System.Linq;
 using NTTQA.Selenium.UniversalFunctions;
 using System.IO;
+using System.Text.RegularExpressions;
+using NTTQA.Selenium.SpecFlow;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -202,6 +205,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+<<<<<<< HEAD
 		public static string GenerateRandomString(int charCount)
 		{
 			var rand = new Random();
@@ -222,6 +226,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return str;
 		}
+=======
+		public static string[] RowValuesFromContext(this TableRow row)
+		{
+			var vals = row.Values.Select(x =>
+			{
+				if (Context.GetFromContextRegex(x, out var result))
+				{
+					return result.ToString();
+				}
+				return x;
+			});
+			return vals.ToArray();
+		}
+
+		public static Table TableValuesFromContext(this Table table)
+		{
+			var newTable = new Table(table.Header.ToArray());
+			foreach (var row in table.Rows)
+			{
+				newTable.AddRow(row.RowValuesFromContext());
+			}
+			return newTable;
+		}
+
+>>>>>>> ae028cdb2078786203cf93ed1b521cf6b8997504
 	}
 
 	public class RetailerAbbreviations
