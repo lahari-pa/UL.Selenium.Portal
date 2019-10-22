@@ -25,11 +25,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 30)
 		{
-			//get the window
-			StudioUtilites.SwitchToWindow("Wercs Studio");
-			this.SwitchToFrame();
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 10);
-			return base.Wait_for_load(30);
+			try
+			{
+				StudioUtilites.SwitchToWindow("Wercs Studio");
+				this.SwitchToFrame();
+				this.containerElement = SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(BasePath), secondsToWait);
+				return this.containerElement != null && base.Wait_for_load(secondsToWait);
+			}
+			catch
+			{
+				return false;
+			}
+
 		}
 
 		public bool SwitchToFrame()
@@ -37,27 +44,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-				//IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='Widget1']//iframe"), 10);
-				//SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-				return SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
+				return SeleniumBrowser.SwitchToIFrame("Widget1FRAME") || (SeleniumBrowser.ExitIFrame() && SeleniumBrowser.SwitchToIFrame("Widget1FRAME"));
 			}
 			catch (Exception ex)
 			{
 				Report.Error("Failed to switch frame. Exception was thrown: " + ex.Message);
 				return false;
 			}
-			//SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-			//if (SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
-			//{
-			//	return true;
-			//}
-			//SeleniumBrowser.ExitIFrame();
-			//if (SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
-			//{
-			//	return true;
-			//}
-			//Report.Error("Could not switch to iframe");
-			//return false;
 		}
 
 		public bool WaitForProductList(int secondsToWait)
@@ -73,10 +66,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public bool Wait_For_Loading_Finish(int timeout = 30)
 		{
-			// wait up to 5 seconds for the loading bar to become visible
-			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 5);
-			// waits up to timeout (30) seconds for the loading bar to then become invisible
-			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//div[@id='load_list']"), timeout);
+			try
+			{
+				// wait up to 5 seconds for the loading bar to become visible
+				SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 5);
+				// waits up to timeout (30) seconds for the loading bar to then become invisible
+				return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//div[@id='load_list']"), timeout);
+			}
+			catch(Exception ex)
+			{
+				Report.Error("Failed to wait for load to finish. Exception was thrown: " + ex.Message);
+				return false;
+			}
 		}
 		public ProductStatus GetproductStatus(string id)
 		{

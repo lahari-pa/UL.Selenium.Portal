@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -44,6 +44,7 @@ Then I check that the UPC number saved as: DupeUPCNumber110237 and under the ret
 Then I close the SHA Manager Product UPC details pop up
 
 
+@ScenarioId:1584
 Scenario: [110238] UPC Details Pop-Up - Obsolete UPC Option - Verify Message - Cancel and Continue Actions
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Then I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: 110238

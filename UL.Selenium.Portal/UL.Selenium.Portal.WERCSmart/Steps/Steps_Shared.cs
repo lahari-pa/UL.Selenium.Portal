@@ -3828,7 +3828,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click Menu: 'My Wercs' and Submenu: 'SHA'");
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			var thisStudioShaManager = new StudioSHAManager();
-			Delay.Seconds(3);
+			Delay.Seconds(5);
 			Report.IsTrue(thisStudioShaManager.SwitchToFrame(), "Failed to switch to IFrame", ShowSuccessScreenshot: false);
 			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(60), "Loading did not finish", ShowSuccessScreenshot: false);
 			Report.Info("I confirm the product list is loaded");
