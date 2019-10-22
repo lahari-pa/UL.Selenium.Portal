@@ -205,7 +205,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-<<<<<<< HEAD
 		public static string GenerateRandomString(int charCount)
 		{
 			var rand = new Random();
@@ -226,7 +225,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return str;
 		}
-=======
+
 		public static string[] RowValuesFromContext(this TableRow row)
 		{
 			var vals = row.Values.Select(x =>
@@ -249,8 +248,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return newTable;
 		}
-
->>>>>>> ae028cdb2078786203cf93ed1b521cf6b8997504
 	}
 
 	public class RetailerAbbreviations

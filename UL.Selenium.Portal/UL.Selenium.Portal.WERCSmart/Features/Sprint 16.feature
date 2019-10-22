@@ -161,10 +161,11 @@ Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC E
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I click the Supplier Reports icon in the QuickLinks Pane
 	Then Under the Supplier Reports menu I choose: UPC Error Details
-	Then in UPC Error Details WPSID box I enter product ID: 1389844
+	Then in UPC Error Details WPSID box I enter product ID: 1506182
 	Then In the Supplier Reports screen I click on the Download button
-	Then I confirm an excel file is downloaded then close the Report Download popup. I save the file as 113004
-	Then I confirm that the exported excel file saved as: 113004 contains the following columns:
+	Then I wait for 3 seconds
+	Then I confirm that an excel file is produced called UPC Error Details.xlsx and save as 113004
+	Then I confirm that sheet named Table in the exported excel file saved as: 113004 contains the following columns:
 		| Column                       |
 		| WPSID                        |
 		| Product Name                 |
@@ -182,3 +183,9 @@ Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC E
 		| Made Safe                    |
 		| NSF Sustainability Certified |
 	Then I delete the excel file saved as 113004
+
+@ScenarioId:5958
+Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registration
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+#Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+#Then I create new registration
