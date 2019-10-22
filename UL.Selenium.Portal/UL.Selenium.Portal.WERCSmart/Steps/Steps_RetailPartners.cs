@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
+
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "RetailPartners")]
@@ -1415,6 +1416,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier products account: (.*) and create a new brand in that account")]
 		public void CreateNewSupplierProductsAccountAndCreateAProductWithRetailerCVS(string savedAs)
 		{
+			//delete this step
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
@@ -1495,9 +1497,76 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		
+		[StepDefinition(@"I navigate to the Data Consent Tiers Page for CVS")]
+		public void INavigateToTheDataConentTiersPageForCVS()
+		{
 
-		
+			var myHome = new StepsHomepage();
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			this.SelectRetailer("CVS");
+			this.ConfirmHeadingShowing("Data Consent Tiers");
+		}
+
+		//[StepDefinition(@"I Check that The expected data tiers for CVS are present in the Data Consent Tiers Section")]
+		//public void ICheckThatTheGivenDataTiersArePresent()
+		//{
+		//	var retailerPartnerDetails = new RetailPartnersDetails();
+
+		//	List<string> tiersPresent = retailerPartnerDetails.GetAllDataConsentTiers();
+
+		//	List<string> expectedTiers = retailerPartnerDetails.ExpectedCVSDataTiers();
+
+		//	foreach (var item in expectedTiers)
+		//	{
+				
+		//		Report.IsTrue(tiersPresent.Any(x => x.Contains(item)), "The Data Consent Tiers found did not include the tier: " + item, "The Data Consent Tiers found did include the tier: " + item);
+		//	}
+
+			
+		//}
+
+		[StepDefinition(@"I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section")]
+		public void ICheckThatTheGivenDataTiersAreOnlyOnesPresent()
+		{
+			var retailerPartnerDetails = new RetailPartnersDetails();
+
+			List<string> tiersPresent = retailerPartnerDetails.GetAllDataConsentTiers();
+
+			List<string> expectedTiers = retailerPartnerDetails.ExpectedCVSDataTiers();
+
+			//foreach (var item in expectedTiers)
+			//{
+
+			//	Report.IsTrue(tiersPresent.Any(x => x.Contains(item)), "The Data Consent Tiers found did not include the tier: " + item, "The Data Consent Tiers found did include the tier: " + item);
+			//}
+
+			
+
+			string test= tiersPresent.FirstOrDefault(x => !expectedTiers.Any());
+
+			//^TEST THIS WORKS, work best if this was a list of ones not in expected etc
+
+			var diff = tiersPresent.Except(expectedTiers);
+			Report.IsTrue(diff.Any(), "The Data Consent Tiers found did match. The found differences were: "+ string.Join(",", diff), "The Data Consent Tiers were an exact match");
+			
+		}
+
+		[StepDefinition(@"I Check that the data consent tiers available for selection only include Tier 1")]
+		public void ICheckThatTheDataConsentTiersAvailableForSelectionOnlyIncludeTier1()
+		{
+			var retailerPartnerDetails = new RetailPartnersDetails();
+
+			List<string> tiersPresent = retailerPartnerDetails.GetAllDataConsentTiers();
+
+			
+			
+		}
+
+
+
+
+
+
 	}
 }
 

@@ -204,7 +204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
 			if (!Context.Contains($"{savedAs}_KitProduct1"))
-			{ 
+			{
 				TestReport.StartStep("Beginning create kit 1");
 				//new Steps_ProductSetup().CreateProductUsingTestCase75335Walmart($"KitProduct1_{savedAs}");
 				new Steps_ProductSetup().CreateProductUsingTestCase75335($"KitProduct1_{savedAs}", "KitProduct1");
@@ -263,7 +263,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", $"Kit_{savedAs}");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Submitted");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Submitted");
 			//And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
 			shaSteps.ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct($"Kit_{savedAs}");
 
@@ -303,10 +303,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
 			var name = "Conditioner";
-			
+
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
-			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();			
-			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Conditioner", name);			
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Conditioner", name);
 			newProductSteps.SaveProductInformation(savedAs);
 			sharedSteps.SharedProductCharacteristics_LiquidOnlyAvailable_EnterAllData_Continue();
 			sharedSteps.SharedAdditionalProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR();
@@ -323,5 +323,66 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 		}
+
+		[StepDefinition(@"For CVS I create a product of type: Toys \(RUCC0388\), save it as: (.*) and leave it in New Status")]
+		public void ForCVSICreateProductOfTypeToysAndLeaveAsNew(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Fireworks");
+			newProductSteps.SaveProductInformation(savedAs);
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+
+			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
+			table63804.AddRow("No", "No", "No", "No");
+
+			sharedSteps.ICallSharedStepAdditionalProductInformationEnterOptions(table63804);
+
+			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			table57570.AddRow("Propane", "100", "false", "false","");
+
+			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_YesToProp();
+			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
+			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+			Report.Info("(Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			//go back to homepage (products grid)
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
+
+
+
+
+
+			//sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
+			//sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
+			//newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			//newProductSteps.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+
+			//Table table59663 = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
+			//table59663.AddRow("Gloves", "501.827328","10.00001","10.28","Brown","Orange", "No data available", "41.3005");
+
+			//sharedSteps.ICallSharedSafetyDataSheetAuthoring_AdditionalDataOptional(table59663);
+			//sharedSteps.GivenICallSharedCommentsHappyPath("testdata");
+			//sharedSteps.SharedGoToSummaryAndVerifyData("Fireworks");
+
+
+
+
+
+
+
+		}
 	}
 }
+
