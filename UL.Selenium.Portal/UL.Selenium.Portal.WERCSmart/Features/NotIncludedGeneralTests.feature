@@ -462,15 +462,15 @@ Then In the Products Grid I delete All products
 Then For CVS I create a product of type: Toys (RUCC0388), save it as: CVSToysProduct1 and leave it in New Status
 Then I navigate to the Data Consent Tiers Page for CVS
 And I Check that the data consent tiers available for selection only include Tier 1
-Then I click the Products in Scope button and confirm that a file is not produced called (.*)
+Then I click the Products in Scope button and confirm that a file is not produced called CV_Report_DataUsageTier_<Date>.xlsx
 Then I navigate to the Homepage and then In the Products Grid I delete All products
 
-Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHDProduct1 and leave it in New Status
+Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
 Then I navigate to the Data Consent Tiers Page for CVS
 And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
-When I click the Products in Scope button and confirm that an excel file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSExcelFile
-
-
+When I click the Products in Scope button and confirm that an excel file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSHBExcelFile
+Then I confirm that the excel file saved as: CVSHBExcelFile contains the WPSID for the Product saved as: CVSHBProduct1
+Then I delete the Supplier Report file saved as CVSHBExcelFile
 Then I navigate to the Homepage and then In the Products Grid I delete All products
 
 Then For CVS I create a product of type: Artist Supply (RUCC0384), save it as: CVSArtistProduct1 and leave it in New Status
