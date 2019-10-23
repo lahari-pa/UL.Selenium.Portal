@@ -453,7 +453,123 @@ Scenario: [NOTINCLUDEDGENERALTEST] DebugNoProductsAcc - CVS Revision to Data Tie
 
 Given I log in with the account saved in TReVor as: NoProductsAccount
 Then In the Products Grid I delete All products
-Then For CVS I create a product of type: Toys (RUCC0388), save it as: CVSToyProduct1 and leave it in New Status 
+Then For CVS I create a product of type: Toys (RUCC0388), save it as: CVSToyProduct1 and leave it in New Status
+
+Scenario: [NOTINCLUDEDGENERALTEST] TicketNoProductsAcc - CVS Revision to Data Tier Consent Requirements health and beauty
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Toys (RUCC0388), save it as: CVSToysProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that the data consent tiers available for selection only include Tier 1
+Then I click the Products in Scope button and confirm that a file is not produced called (.*)
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHDProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that an excel file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSExcelFile
+
+
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Artist Supply (RUCC0384), save it as: CVSArtistProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+
+Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Home Improvement (RUCC0394), save it as: CVSHomeProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Lawn & Garden (RUCC0395), save it as: CVSLawnGardenProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Miscellaneous (RUCC0400), save it as: CVSMiscProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Nutritional (RUCC0592), save it as: CVSNutritionalProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Over-the-Counter (RUCC1002), save it as: CVSOTCProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Pet Care (RUCC0387), save it as: CVSPetCare1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Photography (RUCC0735), save it as: CVSPhotopraphy1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Sporting Goods (RUCC0386), save it as: CVSSportingGoods1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Stationery (RUCC0385), save it as: CVSStationery1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Battery (RUCC0733), save it as: CVSBattery1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Grocery (RUCC0389), save it as: CVSGrocery1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPharmacy1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] Retailer specific - CVS
+#Mayve just updated 57206
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+	Then I click the Retail Partners icon in the Navigation Pane
+	When I select the retailer: CVS
+	Then I confirm that there is a section labeled: CVS
+	And I confirm that under the pie chart I see the label: % of your product portfolio is associated with CVS
+
+
+	#Update to match new description text
+
+	And I confirm that: CVS requires suppliers of all store branded products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
+	When I click the More Information hyperlink
+	Then I check that the current URL contains: https://login.ulscm.com/RPUI/cvsportal
+	And I close the window that opened
+	# Test originally wanted "https://labworks.ul.com/Pages/RCL.aspx", but redirects to a different link when clicked, so modified accordingly!
+	When I click the Products in Scope button and confirm that an excel file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSExcelFile
+	And I confirm the excel file saved as CVSExcelFile can be opened and contains data
+	Then I delete the Supplier Report file saved as CVSExcelFile
+	Given I click on close in the Report Download dialog
+	And I click the back arrow next to CVS
+	Then I should see the Retail Partners page
+
+
 
 
 		              

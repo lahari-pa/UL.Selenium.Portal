@@ -1518,11 +1518,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		//	foreach (var item in expectedTiers)
 		//	{
-				
+
 		//		Report.IsTrue(tiersPresent.Any(x => x.Contains(item)), "The Data Consent Tiers found did not include the tier: " + item, "The Data Consent Tiers found did include the tier: " + item);
 		//	}
 
-			
+
 		//}
 
 		[StepDefinition(@"I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section")]
@@ -1540,21 +1540,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//	Report.IsTrue(tiersPresent.Any(x => x.Contains(item)), "The Data Consent Tiers found did not include the tier: " + item, "The Data Consent Tiers found did include the tier: " + item);
 			//}
 
-			
-
-			string test= tiersPresent.FirstOrDefault(x => !expectedTiers.Any());
-			Report.IsTrue(test!=null, "The Data Consent Tiers found did match. The found differences were: " + test, "The Data Consent Tiers were an exact match");
 
 
-			List<string> testItems= tiersPresent.FindAll(x => !expectedTiers.Any());
+			string test = tiersPresent.FirstOrDefault(x => !expectedTiers.Any());
+			Report.IsTrue(test != null, "The Data Consent Tiers found did match. The found differences were: " + test, "The Data Consent Tiers were an exact match");
+
+
+			List<string> testItems = tiersPresent.FindAll(x => !expectedTiers.Any());
 			Report.IsTrue(test != null, "The Data Consent Tiers found did match. The found differences were: " + string.Join(",", testItems), "The Data Consent Tiers were an exact match");
 
 
 			//^TEST THIS WORKS, work best if this was a list of ones not in expected etc
 
 			var diff = tiersPresent.Except(expectedTiers);
-			Report.IsTrue(diff.Any(), "The Data Consent Tiers found did match. The found differences were: "+ string.Join(",", test), "The Data Consent Tiers were an exact match");
-			
+			Report.IsTrue(diff.Any(), "The Data Consent Tiers found did match. The found differences were: " + string.Join(",", diff), "The Data Consent Tiers were an exact match");
+
 		}
 
 		[StepDefinition(@"I Check that the data consent tiers available for selection only include Tier 1")]
@@ -1562,17 +1562,109 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var retailerPartnerDetails = new RetailPartnersDetails();
 
+			string tier1 = "Tier 1: Regulatory Support";
+
 			List<string> tiersPresent = retailerPartnerDetails.GetAllDataConsentTiers();
 
-			
-			
+			List<string> tierdiff = tiersPresent.FindAll(x => !x.Contains(tier1));
+
+			Report.IsTrue(tierdiff.Any(), "The Data Consent Tiers found included more than Tier 1. The found differences were: " + string.Join(",", tierdiff), "The Data Consent Tiers found only included Tier 1");
+
+
 		}
 
+		[Then(@"I confirm that the excel file saved as: (.*) contains the WPSID for the Product saved as: (.*)")]
+		public void IConfirmTheExcelFileSavedAsContainsProductSavedAs(string fileSavedAs, string productSavedAS)
+		{
+			object File = Context.GetFromContext(fileSavedAs);
 
 
+			if (!Context.Contains(productSavedAS))
+			{
+				Report.Failure($"Could not the product saved as: {productSavedAS} in context");
+				return;
+			}
+
+			var wsProduct = (ProductInformation)Context.GetFromContext(productSavedAS);
+			string iD = wsProduct.Id;
+
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				//get the index of column
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+				int wPSIDColumnIndex = 0;
+				bool wPSIDColumnFound = false;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == "WPS ID")
+					{
+						wPSIDColumnIndex = i;
+						wPSIDColumnFound = true;
+					}
+				}
+				if(!wPSIDColumnFound)
+				{
+					Report.Failure("The column: WPS ID could not be found in the spreadsheet");
+					return;
+				}
+				List<string> wPSIDColumnContents = ExcelUtils.Excel_GetColumn(wPSIDColumnIndex);
+				foreach( var item in wPSIDColumnContents)
+				{
+					if(item ==iD)
+					{
+						Report.Success($"Succesfully found the WPSID in the excel file");
+						return;
+					}
+				}
+				Report.Failure($"The WPSID: {iD} was not found in the column 'WPS ID'");				
+
+			}
+					   			 		  		  
+		}
+
+		[StepDefinition(@"I click the Products in Scope button and confirm that a file is not produced called (.*)")]
+		public void ThenClickTheProductsInScopeButtonBelowTheMoreInformationHyperlinkAndNotFileProduced(string filetype, string file)
+		{
+			Report.Info("Click the Products in Scope button");
+
+			var selRetailDetails = new RetailPartnersDetails();
+
+			if (!selRetailDetails.Wait_for_load(10))
+			{
+				throw new Exception("Page failed to load!");
+			}
+
+			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			Report.Info("Downloads folder: " + downloadsFolder);
+
+			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+
+			foreach (string file_ in dir)
+			{
+				File.Delete(file_);
+			}
 
 
+			selRetailDetails.ClickProductsInScope();
+			Report.Success("Clicked Products in Scope button!");
+			Report.Screenshot();
 
+			dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+
+			int i = 0;
+			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
+			while (!dir.Any() && i < 30)
+			{
+				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				Delay.Seconds(Delay.SpeedFactor * 1);
+				i++;
+			}
+
+			Report.IsTrue(!dir.Any(), "A File with name: " + dir.FirstOrDefault() + " was found", "No File was found");				
+			
+		}
 	}
 }
 

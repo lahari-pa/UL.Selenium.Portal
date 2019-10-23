@@ -536,10 +536,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> ExpectedCVSDataTiers()
 		{			
 			var expectedCVSTiers = new List<string>();
-			expectedCVSTiers.Add("Tier 1");
-			expectedCVSTiers.Add("Tier 2.1");
-			expectedCVSTiers.Add("Tier 2.1");
-			expectedCVSTiers.Add("Tier 4.1");			
+			expectedCVSTiers.Add("Tier 1: Regulatory Support");
+			expectedCVSTiers.Add("Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports");
+			expectedCVSTiers.Add("Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency");
+			expectedCVSTiers.Add("Tier 4.1: Publicly Disclose Supplemental Reports");			
 			return expectedCVSTiers;
 		}
 
