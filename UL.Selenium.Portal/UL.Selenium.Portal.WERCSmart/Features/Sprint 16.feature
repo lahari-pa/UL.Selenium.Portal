@@ -161,6 +161,7 @@ Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC E
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I click the Supplier Reports icon in the QuickLinks Pane
 	Then Under the Supplier Reports menu I choose: UPC Error Details
+	# Sprint 1 - 1506182, Sprint 2 - 1505712, QA - 1520299, Staging - 1593242, TReVor var request sent
 	Then in UPC Error Details WPSID box I enter product ID: 1506182
 	Then In the Supplier Reports screen I click on the Download button
 	Then I wait for 3 seconds
@@ -186,6 +187,35 @@ Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC E
 
 @ScenarioId:5958
 Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registration
+	Given I generate a random UPC number and save as: UPC113706
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-#Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-#Then I create new registration
+	Given I delete all products with UPC Number: %UPC113706%
+	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: Product113706
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+	And I add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| chalk         | 20      | false               | false       |            |
+		| water         | 15      | false               | false       |            |
+		| RED           | 5.0     | false               | false       |            |
+		| Clothianidin  | 25.0    | false               | false       |            |
+	Then I click the Publicly Disclosed checkbox for ingredient: Chalk
+	And I verify the Transparency Score displays 25%
+	Then I click the Publicly Disclosed checkbox for ingredient: Water
+	And I verify the Transparency Score displays 50%
+	Then I click the Publicly Disclosed checkbox for ingredient: RED 4
+	And I verify the Transparency Score displays 75%
+	Then I click the Publicly Disclosed checkbox for ingredient: Clothianidin
+	And I verify the Transparency Score displays 100%
+	Then I add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| CLOTURIN      | 20      | false               | false       |            |
+	And I verify the Transparency Score displays 80%
+	Then I add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Dosulepin     | 20      | true                | false       |            |
+	And I verify the Transparency Score displays 83.33%
+	Then I click the Home navigation icon to return to the home screen
+	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Product113706
