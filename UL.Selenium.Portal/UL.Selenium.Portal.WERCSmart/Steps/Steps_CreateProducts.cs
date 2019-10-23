@@ -541,14 +541,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsSelectretailers = new StepsSelectRetailers();
 
 
-			
+
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Candle and/or Wax");
 			newProductSteps.SaveProductInformation(savedAs);
 			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
 			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			table57570.AddRow("Sodium chloride", "100", "false", "false","");
+			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
@@ -562,6 +562,118 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
+		}
+		[StepDefinition(@"For CVS I create a product of type: Nutritional \(RUCC0592\), save it as: (.*) and leave it in New Status")]
+		public void ForCVSICreateProductOfTypeNutritionalAndLeaveAsNew(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var stepsIngredients = new StepsIngredients();
+			var stepsProductChar = new Steps_ProductCharacteristics();
+			var stepsSelectretailers = new StepsSelectRetailers();
+
+
+
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Candle and/or Wax");
+			newProductSteps.SaveProductInformation(savedAs);
+
+			Table table37857 = new Table("Secondary Physical State", "Water Solubility");
+			table37857.AddRow("Grainy", "Soluble in hot water");
+			sharedSteps.GivenICallSharedEnterPhysicalProperty_SolidParameters(table37857);
+			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
+
+			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
+			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			//go back to homepage (products grid)
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
+
+
+		}
+		[StepDefinition(@"For CVS I create a product of type: Over-the-Counter \(RUCC1002\), save it as: (.*) and leave it in New Status")]
+		public void ForCVSICreateProductOfTypeOTCAndLeaveAsNew(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var stepsIngredients = new StepsIngredients();
+			var stepsProductChar = new Steps_ProductCharacteristics();
+			var stepsSelectretailers = new StepsSelectRetailers();
+
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Latex gloves");
+			newProductSteps.SaveProductInformation(savedAs);
+
+			sharedSteps.GivenICallSharedEnterPhysicalProperty_Solid();
+			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
+
+			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
+			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			//go back to homepage (products grid)
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
+
+
+		}
+
+		[StepDefinition(@"For CVS I create a product of type: Pet Care \(RUCC0387\), save it as: (.*) and leave it in New Status")]
+		public void ForCVSICreateProductOfTypePetCareAndLeaveAsNew(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var stepsIngredients = new StepsIngredients();
+			var stepsProductChar = new Steps_ProductCharacteristics();
+			var stepsSelectretailers = new StepsSelectRetailers();
+
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Aquarium maintenance chemicals");
+			newProductSteps.SaveProductInformation(savedAs);
+
+
+			Table table74760 = new Table("Primary Physical State", "Secondary Physical Stat", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			table74760.AddRow("Liquid","Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
+
+			sharedSteps.ICallSharedProductCharacteristics_MoreThanOneState_SelectLiquidAndEnterOtherOptions(table74760);
+			sharedSteps.GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath();
+			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
+
+			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
+			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			//go back to homepage (products grid)
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
 
 		}
