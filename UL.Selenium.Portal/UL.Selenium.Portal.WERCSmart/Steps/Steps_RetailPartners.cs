@@ -1543,11 +1543,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 
 			string test= tiersPresent.FirstOrDefault(x => !expectedTiers.Any());
+			Report.IsTrue(test!=null, "The Data Consent Tiers found did match. The found differences were: " + test, "The Data Consent Tiers were an exact match");
+
+
+			List<string> testItems= tiersPresent.FindAll(x => !expectedTiers.Any());
+			Report.IsTrue(test != null, "The Data Consent Tiers found did match. The found differences were: " + string.Join(",", testItems), "The Data Consent Tiers were an exact match");
+
 
 			//^TEST THIS WORKS, work best if this was a list of ones not in expected etc
 
 			var diff = tiersPresent.Except(expectedTiers);
-			Report.IsTrue(diff.Any(), "The Data Consent Tiers found did match. The found differences were: "+ string.Join(",", diff), "The Data Consent Tiers were an exact match");
+			Report.IsTrue(diff.Any(), "The Data Consent Tiers found did match. The found differences were: "+ string.Join(",", test), "The Data Consent Tiers were an exact match");
 			
 		}
 

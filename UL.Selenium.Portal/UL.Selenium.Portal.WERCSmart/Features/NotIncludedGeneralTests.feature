@@ -427,7 +427,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] CVS Revision to Data Tier Consent Requirement
 Given I create a new supplier products account: (.*) and create a new brand in that account
 
 
-Scenario: [NOTINCLUDEDGENERALTEST] NoProductsAcc - CVS Revision to Data Tier Consent Requirements - Toys Don't require Consent Tiers
+Scenario: [NOTINCLUDEDGENERALTEST] TOYNoProductsAcc - CVS Revision to Data Tier Consent Requirements - Toys Don't require Consent Tiers
 
 Given I log in with the account saved in TReVor as: NoProductsAccount
 Then In the Products Grid I delete All products
@@ -437,13 +437,13 @@ And I Check that The expected data tiers for CVS are present in the Data Consent
 Then I navigate to the Homepage and then In the Products Grid I delete All products
 
 
-Scenario: [NOTINCLUDEDGENERALTEST] NoProductsAcc - CVS Revision to Data Tier Consent Requirements health and beauty
+Scenario: [NOTINCLUDEDGENERALTEST] HBNoProductsAcc - CVS Revision to Data Tier Consent Requirements health and beauty
 
 Given I log in with the account saved in TReVor as: NoProductsAccount
 Then In the Products Grid I delete All products
 Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
 Then I navigate to the Data Consent Tiers Page for CVS
-And I Check that The expected data tiers for CVS are present in the Data Consent Tiers Section
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
 Then I navigate to the Homepage and then In the Products Grid I delete All products
 Then For CVS I create a product of type: Toys (RUCC0388), save it as: CVSToyProduct1 and leave it in New Status 
 

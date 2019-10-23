@@ -345,7 +345,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedStepAdditionalProductInformationEnterOptions(table63804);
 
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			table57570.AddRow("Propane", "100", "false", "false","");
+			table57570.AddRow("Propane", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_YesToProp();
@@ -361,24 +361,206 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
 
+		}
+
+
+		[StepDefinition(@"For CVS I create a product of type: Artist Supply \(RUCC0384\), save it as: (.*) and leave it in New Status")]
+		public void ForCVSICreateProductOfTypeArtistSupplyAndLeaveAsNew(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var stepsIngredients = new StepsIngredients();
+
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Artist's Solvent/Thinner");
+			newProductSteps.SaveProductInformation(savedAs);
+
+			Table table73629 = new Table("Secondary Physical Stat", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Appreciable");
+
+			sharedSteps.ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(table73629);
+			sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
+
+			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			tableIngredients.AddRow("Water", "100", "false", "false", "");
+
+			stepsIngredients.AddIngredients(tableIngredients);
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
+			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			//go back to homepage (products grid)
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
 
 
-			//sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
-			//sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
-			//newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
-			//newProductSteps.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+		}
 
-			//Table table59663 = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
-			//table59663.AddRow("Gloves", "501.827328","10.00001","10.28","Brown","Orange", "No data available", "41.3005");
+		[StepDefinition(@"For CVS I create a product of type: Cleaning Supply \(RUCC0397\), save it as: (.*) and leave it in New Status")]
+		public void ForCVSICreateProductOfTypeCleaningSupplyAndLeaveAsNew(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var stepsIngredients = new StepsIngredients();
+			var stepsProductChar = new Steps_ProductCharacteristics();
 
-			//sharedSteps.ICallSharedSafetyDataSheetAuthoring_AdditionalDataOptional(table59663);
-			//sharedSteps.GivenICallSharedCommentsHappyPath("testdata");
-			//sharedSteps.SharedGoToSummaryAndVerifyData("Fireworks");
 
 
 
 
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Abrasive");
+			newProductSteps.SaveProductInformation(savedAs);
+			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
+			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
+			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
+			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			tableIngredients.AddRow("Formaldehyde", "100", "false", "false", "");
+
+			stepsIngredients.AddIngredients(tableIngredients);
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			//go back to homepage (products grid)
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
+
+
+		}
+
+		[StepDefinition(@"For CVS I create a product of type: Home Improvement \(RUCC0394\), save it as: (.*) and leave it in New Status")]
+		public void ForCVSICreateProductOfTypeHomeImprovmentAndLeaveAsNew(string savedAs)
+		{
+
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var stepsIngredients = new StepsIngredients();
+			var stepsProductChar = new Steps_ProductCharacteristics();
+
+
+			//productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC108254Lightbulb");
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Light Bulbs - Incandescent Bulbs");
+			newProductSteps.SaveProductInformation(savedAs);
+			sharedSteps.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			sharedSteps.GivenICallSharedStepAnswerElectronicEquipmentQuestions_WithoutCathodeRay_NoToAll();
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			//go back to homepage (products grid)
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
+
+
+		}
+		[StepDefinition(@"For CVS I create a product of type: Lawn & Garden \(RUCC0395\), save it as: (.*) and leave it in New Status")]
+		public void ForCVSICreateProductOfTypeLawnGardenAndLeaveAsNew(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var stepsIngredients = new StepsIngredients();
+			var stepsProductChar = new Steps_ProductCharacteristics();
+
+
+			//productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC108254Lightbulb");
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Charcoal Lighter Material");
+			newProductSteps.SaveProductInformation(savedAs);
+			Table table73629 = new Table("Secondary Physical Stat", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
+
+			sharedSteps.ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(table73629);
+			Table table63804 = new Table("Classified using OSHA (US) Globally Harmonized Standards (GHS)", "Shipped directly by supplier", "Private Label or Brand", "Good Not for resale");
+			table63804.AddRow("No", "No", "No", "No");
+
+			sharedSteps.ICallSharedStepAdditionalProductInformationEnterOptions(table63804);
+
+			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			table57570.AddRow("Butane", "100", "false", "false", "");
+
+			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
+
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			sharedSteps.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
+
+			sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			//go back to homepage (products grid)
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
+
+
+		}
+		[StepDefinition(@"For CVS I create a product of type: Miscellaneous \(RUCC0400\), save it as: (.*) and leave it in New Status")]
+		public void ForCVSICreateProductOfTypeMiscAndLeaveAsNew(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var stepsIngredients = new StepsIngredients();
+			var stepsProductChar = new Steps_ProductCharacteristics();
+			var stepsSelectretailers = new StepsSelectRetailers();
+
+
+			
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Candle and/or Wax");
+			newProductSteps.SaveProductInformation(savedAs);
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			table57570.AddRow("Sodium chloride", "100", "false", "false","");
+
+			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
+			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
+			//stepsSelectretailers.GivenIShouldSeeTheSelectRetailersPopUp();
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("CVS");
+			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			//go back to homepage (products grid)
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
 
 
