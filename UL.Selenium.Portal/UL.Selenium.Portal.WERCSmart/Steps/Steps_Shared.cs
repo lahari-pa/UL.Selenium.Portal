@@ -8912,5 +8912,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
+
+		[StepDefinition(@"I save product (.*) to context as (.*)")]
+		public void ISaveProductToContextAs(string product, string savedAs)
+		{
+			string name = "Chalk";
+			string id = product;
+
+			var info = new ProductInformation {
+				Name = name,
+				Id = id
+			};
+
+			Context.AddToContext(savedAs, info);
+		}
 	}
 }
