@@ -943,6 +943,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columns: and they are in the correct order.")]
+		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumnsAndAreInTheCorrectOrder(string savedAs, Table table)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				var expectedColumns = new List<string>();
+				foreach (TableRow thisRow in table.Rows)
+				{
+					expectedColumns.Add(thisRow["Column"]);
+				}							   	
+
+				if (Math.Abs(expectedColumns.Count - ColumnTitles.Count)!=0)
+				{
+					Report.Failure("Found " + Math.Abs(expectedColumns.Count-ColumnTitles.Count) + " unexpected columns.");
+				}
+				
+				for (int i = 1; i > expectedColumns.Count; i++)
+				{
+					Report.Info($"The expected column at postion: {i} is: {expectedColumns[i]} and the coloum found was {ColumnTitles[i]}");
+					Report.IsTrue(expectedColumns[i] == ColumnTitles[i], "The Column headings did not match", "The Column headings matched");				
+
+				}
+
+				//foreach (TableRow thisRow in table.Rows)
+				//{
+				//	Report.IsTrue(ColumnTitles.Contains(thisRow["Column"]),
+				//		"Column name is not found: " + thisRow["Column"],
+				//		"Column name has been found as expected: " + thisRow["Column"], false, false);
+				//}
+			}
+		}
+
 		[StepDefinition(@"I save the product with name: (.*) and id: (.*) as: (.*)")]
 		public void ISaveProductWithNameAndIDAs(string name, string id, string saveAs)
 		{

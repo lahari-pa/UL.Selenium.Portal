@@ -302,6 +302,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
+			var selectRetailers = new StepsSelectRetailers();
 			var name = "Conditioner";
 
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
@@ -318,6 +319,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("CVS");
 			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+
+
+		
+
+
+
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -333,6 +340,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
+			var selectRetailers = new StepsSelectRetailers();
 
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Fireworks");
@@ -351,10 +359,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_YesToProp();
 			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
 			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
-			Report.Info("(Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS");
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -426,6 +433,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
+			var selectRetailers = new StepsSelectRetailers();
 
 
 
@@ -450,9 +458,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
 			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -473,6 +481,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
+			var selectRetailers = new StepsSelectRetailers();
 
 
 			//productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC108254Lightbulb");
@@ -482,9 +491,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.GivenICallSharedStepAnswerElectronicEquipmentQuestions_WithoutCathodeRay_NoToAll();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -503,6 +512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
+			var selectRetailers = new StepsSelectRetailers();
 
 
 			//productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC108254Lightbulb");
@@ -527,9 +537,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
 
 			sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -549,6 +559,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var stepsSelectretailers = new StepsSelectRetailers();
+			var selectRetailers = new StepsSelectRetailers();
 
 
 
@@ -564,9 +575,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
 			//stepsSelectretailers.GivenIShouldSeeTheSelectRetailersPopUp();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -585,6 +596,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var stepsSelectretailers = new StepsSelectRetailers();
+			var selectRetailers = new StepsSelectRetailers();
 
 
 
@@ -602,9 +614,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -624,6 +636,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var stepsSelectretailers = new StepsSelectRetailers();
+			var selectRetailers = new StepsSelectRetailers();
 
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Latex gloves");
@@ -637,9 +650,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -660,6 +673,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var stepsSelectretailers = new StepsSelectRetailers();
+			var selectRetailers = new StepsSelectRetailers();
 
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Aquarium maintenance chemicals");
@@ -677,9 +691,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -700,6 +714,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var stepsSelectretailers = new StepsSelectRetailers();
+			var selectRetailers = new StepsSelectRetailers();
 
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Photograph Coating - Aerosol");
@@ -722,9 +737,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -744,6 +759,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var stepsSelectretailers = new StepsSelectRetailers();
+			var selectRetailers = new StepsSelectRetailers();
 
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Lighters");
@@ -763,9 +779,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
 			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -785,6 +801,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
+			var selectRetailers = new StepsSelectRetailers();
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
 			newProductSteps.SaveProductInformation(savedAs);
@@ -793,9 +810,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
 
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -816,6 +833,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var stepsSelectretailers = new StepsSelectRetailers();
+			var selectRetailers = new StepsSelectRetailers();
 
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Lithium ion batteries");
@@ -831,9 +849,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_TSCACEPANotProp();
 			sharedSteps.SharedLithiumBatteryCharacteristics_AnyData();
 			sharedSteps.SharedLithiumBatteryTransportation();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -856,16 +874,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var stepsSelectretailers = new StepsSelectRetailers();
-
+			var selectRetailers = new StepsSelectRetailers();
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Cereals");
 			newProductSteps.SaveProductInformation(savedAs);
 			sharedSteps.GivenICallSharedStepSelectPrimaryPhysicalProperty_Solid_WithIngredients();
 			sharedSteps.GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes();
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -889,6 +907,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsIngredients = new StepsIngredients();
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var stepsSelectretailers = new StepsSelectRetailers();
+			var selectRetailers = new StepsSelectRetailers();
 
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)");
@@ -902,9 +921,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			sharedSteps.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
 			sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();

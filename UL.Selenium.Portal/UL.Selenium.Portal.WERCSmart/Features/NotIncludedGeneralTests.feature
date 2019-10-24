@@ -458,6 +458,7 @@ Then For CVS I create a product of type: Toys (RUCC0388), save it as: CVSToyProd
 
 @AndrewCVSRun
 Scenario: [NOTINCLUDEDGENERALTEST] TicketNoProductsAcc - CVS Revision to Data Tier Consent Requirements health and beauty
+#For ticket 105950
 
 Given I log in with the account saved in TReVor as: NoProductsAccount
 Then In the Products Grid I delete All products
@@ -624,6 +625,40 @@ When I click the Products in Scope button and confirm that a file is produced ca
 Then I confirm that the excel file saved as: CVSArtistExcelFile contains the WPSID for the Product saved as: CVSArtistProduct1
 Then I delete the Supplier Report file saved as CVSArtistExcelFile
 Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106898
+
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the Product Registrations Published report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Product Registrations Published report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#For below step need an actual file for headers
+		#Update Colum headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns:
+		| Column              |
+		| UPC Name            |
+
+		
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106921
+
+	Then I select the Product Registrations Published report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
+	#Enter WPSID
+	#CHOOSE RETAILER
+
+
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Product Registrations Published report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#Update Colum headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
+		| Column              |
+		| UPC Name            |
+
+
 
 
 
