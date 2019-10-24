@@ -374,12 +374,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
 			var stepsIngredients = new StepsIngredients();
+			var selectRetailers = new StepsSelectRetailers();
 
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Artist's Solvent/Thinner");
 			newProductSteps.SaveProductInformation(savedAs);
 
-			Table table73629 = new Table("Secondary Physical Stat", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Appreciable");
 
 			sharedSteps.ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(table73629);
@@ -393,9 +394,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
 			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
-			var retailerTable = new Table("Retailer");
-			retailerTable.AddRow("CVS");
-			sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+
+			//var retailerTable = new Table("Retailer");
+			//retailerTable.AddRow("CVS");
+			//sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
+
+
+
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
+
+
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
@@ -499,7 +509,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Charcoal Lighter Material");
 			newProductSteps.SaveProductInformation(savedAs);
-			Table table73629 = new Table("Secondary Physical Stat", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			Table table73629 = new Table("Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table73629.AddRow("Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
 
 			sharedSteps.ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(table73629);
@@ -656,7 +666,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 
 
-			Table table74760 = new Table("Primary Physical State", "Secondary Physical Stat", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius", "Flash Point Testing Method Used", "Select the best Water Solubility description");
+			Table table74760 = new Table("Primary Physical State", "Secondary Physical State", "Specific Gravity", "pH", "Boiling Point (in Celsius)", "Flash Point (in Celsius)", "Flash Point Testing Method Used", "Select the best Water Solubility description");
 			table74760.AddRow("Liquid", "Liquid", "2", "2", "2", "66", "Closed cup method", "Very soluble");
 
 			sharedSteps.ICallSharedProductCharacteristics_MoreThanOneState_SelectLiquidAndEnterOtherOptions(table74760);

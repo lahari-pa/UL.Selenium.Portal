@@ -1532,28 +1532,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			List<string> tiersPresent = retailerPartnerDetails.GetAllDataConsentTiers();
 
-			List<string> expectedTiers = retailerPartnerDetails.ExpectedCVSDataTiers();
-
-			//foreach (var item in expectedTiers)
-			//{
-
-			//	Report.IsTrue(tiersPresent.Any(x => x.Contains(item)), "The Data Consent Tiers found did not include the tier: " + item, "The Data Consent Tiers found did include the tier: " + item);
-			//}
+			List<string> expectedTiers = retailerPartnerDetails.ExpectedCVSDataTiers();		
 
 
-
-			string test = tiersPresent.FirstOrDefault(x => !expectedTiers.Any());
-			Report.IsTrue(test != null, "The Data Consent Tiers found did match. The found differences were: " + test, "The Data Consent Tiers were an exact match");
-
-
-			List<string> testItems = tiersPresent.FindAll(x => !expectedTiers.Any());
-			Report.IsTrue(test != null, "The Data Consent Tiers found did match. The found differences were: " + string.Join(",", testItems), "The Data Consent Tiers were an exact match");
-
-
-			//^TEST THIS WORKS, work best if this was a list of ones not in expected etc
-
-			var diff = tiersPresent.Except(expectedTiers);
-			Report.IsTrue(diff.Any(), "The Data Consent Tiers found did match. The found differences were: " + string.Join(",", diff), "The Data Consent Tiers were an exact match");
+			//List<string> testItems = tiersPresent.FindAll(x => !expectedTiers.Contains(x));
+			//Report.IsTrue(testItems.Count==0, "The Data Consent Tiers found did not match. The found differences were: " + string.Join(",", testItems), "The Data Consent Tiers were an exact match");
+						
+			
+			var diffFound = new List<string>();
+			foreach (var item in tiersPresent)
+			{
+				if(!expectedTiers.Contains(item))
+				{
+					diffFound.Add(item);
+				}
+			}
+			Report.IsTrue(diffFound.Count == 0, "The Data Consent Tiers found did not match. The found differences were: " + string.Join(",", diffFound), "The Data Consent Tiers were an exact match");
+			
+			//var diff = tiersPresent.Except(expectedTiers);
+			//Report.IsTrue(diff.Any(), "The Data Consent Tiers found did not match. The found differences were: " + string.Join(",", diff), "The Data Consent Tiers were an exact match");
 
 		}
 
@@ -1602,6 +1599,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						wPSIDColumnIndex = i;
 						wPSIDColumnFound = true;
+						break;
 					}
 				}
 				if(!wPSIDColumnFound)
@@ -1625,7 +1623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I click the Products in Scope button and confirm that a file is not produced called (.*)")]
-		public void ThenClickTheProductsInScopeButtonBelowTheMoreInformationHyperlinkAndNotFileProduced(string filetype, string file)
+		public void ThenClickTheProductsInScopeButtonBelowTheMoreInformationHyperlinkAndNotFileProduced(string file)
 		{
 			Report.Info("Click the Products in Scope button");
 
@@ -1664,6 +1662,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(!dir.Any(), "A File with name: " + dir.FirstOrDefault() + " was found", "No File was found");				
 			
+		}
+
+		[StepDefinition(@"I click the Products in Scope button and confirm that a file is produced called (.*) and save as (.*)")]
+		public void ThenClickTheProductsInScopeButtonAndCheckForFile(string file, string savedAs)
+		{
+			Report.Info("Click the Products in Scope button");
+
+			var selRetailDetails = new RetailPartnersDetails();
+
+			if (!selRetailDetails.Wait_for_load(10))
+			{
+				throw new Exception("Page failed to load!");
+			}
+
+			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			Report.Info("Downloads folder: " + downloadsFolder);
+
+			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+
+			foreach (string file_ in dir)
+			{
+				File.Delete(file_);
+			}
+
+
+			selRetailDetails.ClickProductsInScope();
+			Report.Success("Clicked Products in Scope button!");
+			Report.Screenshot();
+
+			dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+
+			int i = 0;
+			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
+			while (!dir.Any() && i < 30)
+			{
+				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				Delay.Seconds(Delay.SpeedFactor * 1);
+				i++;
+			}
+
+			if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
+			{
+				Context.AddToContext(savedAs, dir.FirstOrDefault());
+			}
+
+			this.GivenIClickOnCloseInTheReportDownloadDialog();
+
 		}
 	}
 }
