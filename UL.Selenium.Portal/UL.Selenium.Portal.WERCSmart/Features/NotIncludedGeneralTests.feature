@@ -647,23 +647,24 @@ Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	#For below step need an actual file to get name etc
-	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
-	#For below step need an actual file for headers
-		#Update Colum headings
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329	
+	#Update Colum headings
 	Then I confirm that the excel file saved as: 105329 contains the following columns:
 		| Column              |
 		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+
 
 		
 Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106921
+	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
-	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
-	#Enter WPSID
-	#CHOOSE RETAILER
-
-
-	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	Then I select the: UPC Details for Registration - Specific Retailer report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: UPC Details for Registration - Specific Retailer is shown as: Internal Use Only.  UPCs are listed for a chosen Retailer and include any additional UPC data such as Case Pack, Net Explosive Mass, and other details.
+	Then In The advanced reporting screen I enter WPSID saved as: TestCase75142
+	Then In The advanced reporting screen I choose retailer: CVS
+	Then In the Advanced Reporting popup I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	#Change to Correct File Name
 	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
@@ -671,6 +672,8 @@ Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106921
 	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
 		| Column              |
 		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
 
 
 Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106890
@@ -685,6 +688,92 @@ Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106890
 	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
 		| Column              |
 		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106922
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: UPCs Added Yesterday report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: UPCs Added Yesterday is shown as: UPCs Added Yesterday
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#Update Column headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106924
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: VOC Monthly Report - Walmart report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: VOC Monthly Report - Walmart is shown as: Walmart Monthly VOC Report
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329	
+	#Update Colum headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns:
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106931
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: WalMart DSV Products Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: WalMart DSV Products Report is shown as: WalMart DSV Products Report
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#Update Column headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+		
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106932
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: WM Slotting Code Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: WM Slotting Code Report is shown as: WM Slotting Code Report
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329	
+	#Update Colum headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns:
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+	
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 107365
+
+	Then I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA
+	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: WM Slotting Code Report is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 1073651
+
+	#Addcheck that for the product saved as X that cert is Y in the 9 coloumn etc (pass table in for headers and check is Y)
+	Then I confirm that the excel file saved as: 1073651 contains the following columns:
+		| Column              |
+		| UPC Name            |
+
+	Then I delete the Advanced Report file saved as 1073651
+
+	#Then repeat for the other 3 reports
+
+
+
+
+
 
 	
 

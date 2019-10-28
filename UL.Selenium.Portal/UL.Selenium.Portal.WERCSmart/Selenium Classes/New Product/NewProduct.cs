@@ -557,6 +557,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return this.containerElement.FindElement(By.XPath(".//input[@id='chkAllRetailers']"), 1).TryCheck();
 		}
 
+		public bool SelectAllCertifications()
+		{
+			bool checkTrue = true;
+			IList<IWebElement> listofCert = this.containerElement.FindElements(By.XPath(".//div[@data-bind='with: upc']//div"), 1);
+			foreach(var item in listofCert)
+			{
+				item.TryCheck();
+				string textTitle=item.Text;
+				if(!item.TryCheck())
+				{
+					checkTrue = false;
+					Report.Info($"Failed to check the certification with title: {textTitle}");
+				}
+				else
+				{
+					Report.Info($"Successfully checked the certification with title: {textTitle}");
+				}
+			}
+
+
+
+			return this.containerElement.FindElement(By.XPath(".//input[@id='chkAllRetailers']"), 1).TryCheck();
+		}
+
 		public bool UPCPackageTypeFieldExists()
 		{
 			try
