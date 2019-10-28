@@ -3145,7 +3145,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 			
 		}
-		[StepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Product Registrations Published report then I click Submit")]
+		[StepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Advanced report then I click Submit")]
 		public void IEnterAStartDateForTheProductRegistrationPublishedReportClickSubmit(string startDate,string endDate)
 		{
 			TestReport.UseSubSteps = true;
@@ -3168,15 +3168,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-	[StepDefinition(@"I select the Product Registrations Published report from Advanced Reporting in SHA")]
-		public void ISelectProductRegistrationPublishedReportFromAdvancedReportingInSHA()
+	[StepDefinition(@"I select the: (.*) report from Advanced Reporting in SHA")]
+		public void ISelectProductRegistrationPublishedReportFromAdvancedReportingInSHA(string report)
 		{
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Click Advanced Reporting");
 			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
 				"Failed to click document management", "Clicked document management");
-			var shaReport = new SHAAdvancedReporting();
-			string report = "Product Registrations Published";
+			var shaReport = new SHAAdvancedReporting();			
 			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
 			Delay.Seconds(2);
 			

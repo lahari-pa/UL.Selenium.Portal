@@ -293,9 +293,9 @@ Scenario: [NOTINCLUDEDGENERALTEST] Rejected Registration - Edit -  Message is di
 Scenario: [NOTINCLUDEDGENERALTEST] Advanced Reporting - Registrations Published report -
 	#For 92210 Ticket Should be 98534
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Then I select the Product Registrations Published report from Advanced Reporting in SHA
+	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
-	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Product Registrations Published report then I click Submit
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	#For below step need an actual file to get name etc
 	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
@@ -626,12 +626,25 @@ Then I confirm that the excel file saved as: CVSArtistExcelFile contains the WPS
 Then I delete the Supplier Report file saved as CVSArtistExcelFile
 Then I navigate to the Homepage and then In the Products Grid I delete All products
 
+Scenario: [NOTINCLUDEDGENERALTEST] LawnCVS Product Creation Debug scenario
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Lawn & Garden (RUCC0395), save it as: CVSLawnGardenProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSLawnGardenExcelFile
+Then I confirm that the excel file saved as: CVSLawnGardenExcelFile contains the WPSID for the Product saved as: CVSLawnGardenProduct1
+Then I delete the Supplier Report file saved as CVSLawnGardenExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+
 Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106898
 
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Then I select the Product Registrations Published report from Advanced Reporting in SHA
+	Then I select the: PM Walmart Monthly WMQC Report report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
-	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Product Registrations Published report then I click Submit
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	#For below step need an actual file to get name etc
 	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
@@ -643,20 +656,38 @@ Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 
 		
 Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106921
-
-	Then I select the Product Registrations Published report from Advanced Reporting in SHA
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
 	#Enter WPSID
 	#CHOOSE RETAILER
 
 
-	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Product Registrations Published report then I click Submit
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
 	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
-	#Update Colum headings
+	#Update Column headings
 	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
 		| Column              |
 		| UPC Name            |
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106890
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#Update Column headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
+		| Column              |
+		| UPC Name            |
+
+	
+
 
 
 
