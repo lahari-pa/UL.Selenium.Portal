@@ -1747,6 +1747,71 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenIClickOnCloseInTheReportDownloadDialog();
 
 		}
+
+
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has a 'Y' in the columns:")]
+		public void ThenIConfirmThatTheExcelFileSavedAsContainsWPSIDAndYInColumns(string fileSavedAs,string wpsidSavedAs, Table table)
+		{
+			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				int wpsIDColumnIndex = 0;
+				for (int j = 0; j < ColumnTitles.Count; j++)
+				{
+					if (ColumnTitles[j] == "WPS ID")
+					{
+						wpsIDColumnIndex = j;
+					}
+				}
+				string wpsidStr = ((ProductInformation)Context.GetFromContext(wpsidSavedAs)).Id;
+				List<string> wpsidItems = ExcelUtils.Excel_GetColumn(wpsIDColumnIndex);
+				int wantedWpsidPosition = 0;
+				bool foundWpsid = false;
+				foreach(var wpsidItem in wpsidItems)
+				{
+					if(wpsidItem!= wpsidStr)
+					{
+						wantedWpsidPosition++;
+					}
+					else
+					{
+						Report.Success($"The WPSID was found at position: {wantedWpsidPosition}");
+						foundWpsid = true;
+						break;
+					}
+				}
+				if(!foundWpsid)
+				{
+					Report.Failure("Could not find the WPSID in the SpreadSheet");
+					return;
+				}				
+
+				foreach (TableRow row in table.Rows)
+				{
+					string currentRow = row["Column"];
+					int columnUPCIndex = 0;
+					for (int i = 0; i < ColumnTitles.Count; i++)
+					{
+						if (ColumnTitles[i] == currentRow)
+						{
+							columnUPCIndex = i;
+						}
+					}
+					
+					List<string> upcRowItems = ExcelUtils.Excel_GetColumn(columnUPCIndex);					
+					Report.Info($"Looking for a 'Y' for WPSID: {wpsidStr} in the Column: {currentRow}");
+					string actualValue = upcRowItems[wantedWpsidPosition];
+					Report.Info($"actual value was: {actualValue}");
+					Report.IsTrue(actualValue == "Y", "The actual value was not 'Y'", "The actual value was 'Y'");	
+
+				}
+				
+			}
+		}
 	}
 }
 

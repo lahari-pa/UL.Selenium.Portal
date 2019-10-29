@@ -589,6 +589,13 @@ Then I confirm that the excel file saved as: CVSPharmacyExcelFile contains the W
 Then I delete the Supplier Report file saved as CVSPharmacyExcelFile
 Then I navigate to the Homepage and then In the Products Grid I delete All products
 
+Scenario: [NOTINCLUDEDGENERALTEST] Daily Report - Data Tier Consent - CVS Updated Updated Data Tier Consent Requirements
+#105950 linked
+#Blocked so currently use screenshot from DB for ticket test
+#Create a product that requires tier 4.1 then Check report reflects 4.1 need
+#Method for opening the report, checking for retailer X and checking the tier coloum Y contains at least one 
+	
+
 
 Scenario: [NOTINCLUDEDGENERALTEST] Retailer specific - CVS
 #Mayve just updated 57206
@@ -640,7 +647,6 @@ Then I navigate to the Homepage and then In the Products Grid I delete All produ
 
 
 Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106898
-
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: PM Walmart Monthly WMQC Report report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
@@ -676,7 +682,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106921
 
 
 
-Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106890
+Scenario: [NOTINCLUDEDGENERALTEST] 96172
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
@@ -746,7 +752,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106932
 	#For below step need an actual file to get name etc
 	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329	
 	#Update Colum headings
-	Then I confirm that the excel file saved as: 105329 contains the following columns:
+	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
 		| Column              |
 		| UPC Name            |
 	Then I delete the Advanced Report file saved as 105329
@@ -755,20 +761,73 @@ Scenario: [NOTINCLUDEDGENERALTEST] Ticket 107365
 
 	Then I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
-	Then I Check that the Description Text for the Report: WM Slotting Code Report is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
+	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	#For below step need an actual file to get name etc
+	#Change File Name
 	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 1073651
 
-	#Addcheck that for the product saved as X that cert is Y in the 9 coloumn etc (pass table in for headers and check is Y)
-	Then I confirm that the excel file saved as: 1073651 contains the following columns:
-		| Column              |
-		| UPC Name            |
+	#Update the column names below ( for checking Y only include the new headers)
 
+	Then I confirm that the excel file saved as: 1073651 contains the following columns: and they are in the correct order.
+		| Column   |
+		| UPC Name |
+	Then I confirm that the excel file saved as: 1073651 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
+		| Column   |
+		| UPC Name |
 	Then I delete the Advanced Report file saved as 1073651
 
-	#Then repeat for the other 3 reports
+	Then I select the: UPC Details for Registration - Specific Retailer report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: UPC Details for Registration - Specific Retailer is shown as: Internal Use Only.  UPCs are listed for a chosen Retailer and include any additional UPC data such as Case Pack, Net Explosive Mass, and other details.
+	Then In The advanced reporting screen I enter WPSID saved as: TestCase75142
+	Then In The advanced reporting screen I choose retailer: Wal-Mart/SAM'S CLUB
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 1073652
+	#Update Column headings
+	Then I confirm that the excel file saved as: 1073652 contains the following columns: and they are in the correct order.
+		| Column   |
+		| UPC Name |
+	Then I confirm that the excel file saved as: 1073652 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
+		| Column   |
+		| UPC Name |
+	Then I delete the Advanced Report file saved as 1073652
+
+	Then I select the: WalMart DSV Products Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: WalMart DSV Products Report is shown as: WalMart DSV Products Report
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 1073653
+	#Update Column headings
+	Then I confirm that the excel file saved as: 1073653 contains the following columns: and they are in the correct order.
+		| Column   |
+		| UPC Name |
+	Then I confirm that the excel file saved as: 1073653 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
+		| Column   |
+		| UPC Name |
+	Then I delete the Advanced Report file saved as 1073653
+
+	Then I select the: WM Slotting Code Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: WM Slotting Code Report is shown as: WM Slotting Code Report
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 1073654	
+	#Update Colum headings
+	Then I confirm that the excel file saved as: 1073654 contains the following columns:
+		| Column              |
+		| UPC Name            |
+	Then I confirm that the excel file saved as: 1073654 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
+		| Column   |
+		| UPC Name |
+	Then I delete the Advanced Report file saved as 1073654
+
+
+
+	
 
 
 
