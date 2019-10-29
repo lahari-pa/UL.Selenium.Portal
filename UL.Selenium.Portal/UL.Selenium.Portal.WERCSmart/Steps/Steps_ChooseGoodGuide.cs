@@ -216,7 +216,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new MyProducts().ClickFilter(), "Failed to click filter button", "Successfully clicked on filter");
 		}
 
-		[Then(@"in the GoodGuide My Products page I (should|should not) see product with (.*): (.*)")]
+		[StepDefinition(@"in the GoodGuide My Products page I (should|should not) see product with (.*): (.*)")]
 		public void ThenInTheGoodGuideMyProductsPageIShouldSeeProductWithItemValue(string shouldOrNot, string columnName, string value)
 		{
 			if (value.ToLower().Contains("saved as"))
@@ -239,7 +239,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Then(@"in the GoodGuide My Products page I delete product with (.*): (.*)")]
+		[StepDefinition(@"in the GoodGuide My Products page I delete product with (.*): (.*)")]
 		public void ThenInTheGoodGuideMyProductsPageIDeleteProductWithItemValue(string columnName, string value)
 		{
 			var thisMyProducts = new MyProducts();

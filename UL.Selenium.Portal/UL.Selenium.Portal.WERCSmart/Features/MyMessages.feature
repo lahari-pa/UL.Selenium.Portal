@@ -97,7 +97,7 @@ Scenario: [109503] Message Center - Suspended message stays in Message Center fo
 	And I click the following option in the bottom menu: Suspended
 	And In the Suspended dialog I Select the following clients: All
 	And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: Automated QASha
-	And In the Suspended dialog in the Select Subject drop down I choose: Formula - Document Issue
+	And In the Suspended dialog in the Select Subject drop down I choose: Formula – Document Issue
 	And In the Suspended dialog in the Supplier Message field I add the following text: supplier message input
 	And In the Suspended dialog in the Internal Product Note field I add the following text: internal product note input
 	And In the Suspended dialog I click Save

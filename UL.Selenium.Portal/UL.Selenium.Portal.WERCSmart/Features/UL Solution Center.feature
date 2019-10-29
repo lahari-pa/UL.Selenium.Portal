@@ -132,6 +132,7 @@ Scenario: [102411] UL Solution Center shows correct entries - Navigator section
 	Given I click the UL Solution Center icon in the QuickLinks Pane
 	Then I confirm that the UL Solution Center page is loaded
 	Then I Confirm the Navigator heading is displayed next to an icon
+	Then I find the Navigator section logo and check that it appears as expected
 	And I Confirm the information statement for section: Navigator reads: Navigator highlights the main chemical regulatory requirements for over 50 countries around the world. These summaries compile the most important information all in one place, offering easy to understand explanations of complex topics, paired with links to laws and helpful resources. Summaries are authored and updated by our global regulatory specialists, whose primary responsibility is the monitoring and reporting of regulations in their given country.
 	And I confirm the Learn More button is displayed for section: Navigator
 	Given I click the Learn More button for section: Navigator

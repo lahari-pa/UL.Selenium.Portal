@@ -10,6 +10,11 @@ using System.Text;
 using System.Linq;
 using NTTQA.Selenium.UniversalFunctions;
 using System.IO;
+using System.Text.RegularExpressions;
+using NTTQA.Selenium.SpecFlow;
+using System.Net;
+using System.Drawing;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -201,6 +206,47 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return false;
 		}
+
+		public static string[] RowValuesFromContext(this TableRow row)
+		{
+			var vals = row.Values.Select(x =>
+			{
+				if (Context.GetFromContextRegex(x, out var result))
+				{
+					return result.ToString();
+				}
+				return x;
+			});
+			return vals.ToArray();
+		}
+
+		public static Table TableValuesFromContext(this Table table)
+		{
+			var newTable = new Table(table.Header.ToArray());
+			foreach (var row in table.Rows)
+			{
+				newTable.AddRow(row.RowValuesFromContext());
+			}
+			return newTable;
+		}
+
+		public static Bitmap CreateBitmapFromURL(string url)
+		{
+			WebClient myClient = new WebClient();
+			Stream myStream = myClient.OpenRead(url);
+			return new Bitmap(myStream);
+		}
+
+		public static Bitmap CreateBitmapFromFile(string file)
+		{
+			return new Bitmap(file);
+		}
+
+		public static bool CompareBitmaps(Bitmap bitmap1, Bitmap bitmap2)
+		{
+			return GeneralFunctions.CompareImages(bitmap1, bitmap2);
+		}
+
 	}
 
 	public class RetailerAbbreviations
@@ -291,5 +337,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return input;
 		}
+
+		
+
+
+
+
+
+
+
+
 	}
+
 }
