@@ -973,16 +973,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(np.CommentErrorDisplayed(expected, out string actual), "The error text was " + actual + ", but expected " + expected, "The error text was " + actual + " as expected.");
 		}
 
+		[StepDefinition(@"I append the following into the comments field: (.*)")]
+		public void ThenIAppendTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
+		{
+			Report.IsTrue(new NewProduct().InputCommentAreaText(text, append: true), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
 
-		[StepDefinition(@"The remaining characters counter displays: (.*)/500")]
-		public void ThenTheRemainingCharactersCounterDisplays(int charRemain)
+		[StepDefinition(@"The remaining characters counter displays: (.*)/(.*)")]
+		public void ThenTheRemainingCharactersCounterDisplays(int charRemainExpected, int charMax)
 		{
-			Context.ScenarioContext.Pending();
+			Report.IsTrue(new NewProduct().CommentsCharactersRemaining(charRemainExpected, charMax, out int remainDisplay),
+				"Remaining characters expected: " + charRemainExpected + " but found: " + remainDisplay,
+				"Remaining characters is: " + remainDisplay + " as expected");
+		}
+
+
+		[Then(@"I enter (.*) characters into the comments field")]
+		public void ThenIEnterCharactersIntoTheCommentsField(int charCount)
+		{
+			string str = GeneralUtilities.GenerateRandomString(charCount);
+
+			this.ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(str);
+		}
+
+		[Then(@"I verify the comments field contains: (.*)")]
+		public void ThenIVerifyTheCommentsFieldContains(string contents)
+		{
+			Report.IsTrue(new NewProduct().CommentsAreaContains(contents), "Comments area contains: " + contents + " but expected: " + contents, "Comments area contents match expectation");
 		}
 
 

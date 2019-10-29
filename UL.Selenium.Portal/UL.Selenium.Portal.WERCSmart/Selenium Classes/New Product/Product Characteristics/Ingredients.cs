@@ -889,7 +889,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool IngredientMatchesFirstOption(string inputOption)
 		{
 			IWebElement resultMatch;
-			IList < IWebElement > results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+			IList<IWebElement> results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 			if (!results.Any())
 			{
 				Report.Info("No results were returned on search");
@@ -918,8 +918,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			string firstOption = resultMatch.FindElement(By.XPath(".//span[@class='component-name']"), 2)?.Text;
 			Report.Info($"First option was {firstOption}");
 			Report.Info($"Input option was {inputOption}");
-			
-			if(firstOption==inputOption)
+
+			if (firstOption == inputOption)
 			{
 				Report.Success("The first option matched the input option");
 				return true;
@@ -930,8 +930,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
-			
 
+
+		}
+
+		internal bool TransparencyScorePercent(float p0, out float trScore)
+		{
+			IWebElement transparency = this.FindElement(By.XPath("//*[@id='transparency-score']/span"), 2);
+			if (!float.TryParse(transparency.Text.Remove(transparency.Text.Length - 1), out trScore))
+			{
+				Report.Failure("Transparency score could not be evaluated to an integer value. Displayed value is: " + transparency.Text);
+				return false;
+			}
+			return trScore == p0;
 		}
 	}
 }

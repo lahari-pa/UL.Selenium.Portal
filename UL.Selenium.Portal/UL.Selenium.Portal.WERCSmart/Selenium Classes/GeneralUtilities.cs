@@ -205,6 +205,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public static string GenerateRandomString(int charCount)
+		{
+			var rand = new Random();
+			char[] chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+			string str = string.Empty;
+			for (int i = 0; i < charCount; i++)
+			{
+				float caps = rand.Next(0, 1);
+				char insert = chars[rand.Next(1, chars.Count())];
+				if (caps > .5)
+				{
+					string temp = insert.ToString().ToUpper();
+					insert = Convert.ToChar(temp);
+				}
+				str = str + insert;
+			}
+
+			return str;
+		}
+
 		public static string[] RowValuesFromContext(this TableRow row)
 		{
 			var vals = row.Values.Select(x =>
@@ -227,7 +248,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return newTable;
 		}
-
 	}
 
 	public class RetailerAbbreviations
