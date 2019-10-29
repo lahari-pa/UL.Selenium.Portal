@@ -708,7 +708,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 				else
 				{
-					Report.Info("The Field was not empty, Checking for UPCName in the table");
+					Report.Info("The UPC Name Field was not empty, Checking for UPCName in the table");
 					if(!info.UPCName.IsNullOrEmpty())
 					{
 						if (info.UPCName.ToLower().Contains("saved as"))

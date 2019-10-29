@@ -150,29 +150,76 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			};
 		}
 
+		//public bool SetMoreFiltersToExpandedOld()
+		//{
+
+		//	IWebElement moreFiltersButtonCollapsed= this.containerElement.FindElement(By.XPath(".//a[@class= 'btn btn-primary collapsed' and .//span[contains(text(),'More Filters')]]"), 2);
+		//	if(moreFiltersButtonCollapsed==null)
+		//	{
+		//		Report.Failure("Could not find the Collapsed More Filters Button");
+		//		return false;
+		//	}
+
+		//	if (this.containerElement.FindElement(By.XPath("//a[contains(@class, 'btn') and .//span[contains(text(),'More Filters')]]"), 2).TryClick())
+		//	{
+		//		Report.Success("The More Filters Button was clicked Successfully");
+		//		IWebElement moreFiltersButtonExpanded = this.containerElement.FindElement(By.XPath("//a[@class='btn btn-primary' and .//span[contains(text(),'More Filters')]]"), 2);
+
+		//		if (moreFiltersButtonExpanded==null)
+		//		{
+		//			Report.Failure("Could not find the expanded more Filters button");
+		//			return false;
+		//		}
+		//		else
+		//		{
+		//			Report.Success("The More Filters Button was Expanded Successfully");
+		//			return true;
+		//		}
+
+		//	}
+		//	else
+		//	{
+		//		Report.Failure("Failed to click the More Filters Button");
+		//		return false;
+		//	}
+		//}
+
+		private IWebElement MoreFiltersButton => this.containerElement.FindElement(By.XPath(".//a[@id='filter-toggle']"), 2);
+
 		public bool SetMoreFiltersToExpanded()
 		{
 
-			IWebElement moreFiltersButtonCollapsed= this.containerElement.FindElement(By.XPath(".//a[@class= 'btn btn-primary collapsed' and .//span[contains(text(),'More Filters')]]"), 2);
-			if(moreFiltersButtonCollapsed==null)
+			IWebElement moreFiltersButton = this.MoreFiltersButton;
+
+			if (moreFiltersButton == null)
 			{
 				Report.Failure("Could not find the Collapsed More Filters Button");
 				return false;
 			}
+			
+			bool filterExpandedBool;
+			bool.TryParse(moreFiltersButton.GetAttribute("aria-expanded"), out filterExpandedBool);
 
-			if (this.containerElement.FindElement(By.XPath("//a[contains(@class, 'btn') and .//span[contains(text(),'More Filters')]]"), 2).TryClick())
+			if(filterExpandedBool)
+			{
+				Report.Success("The More Filters Section button was already expanded");
+				return true;
+			}
+
+
+			if (moreFiltersButton.TryClick())
 			{
 				Report.Success("The More Filters Button was clicked Successfully");
-				IWebElement moreFiltersButtonExpanded = this.containerElement.FindElement(By.XPath("//a[@class='btn btn-primary' and .//span[contains(text(),'More Filters')]]"), 2);
+				bool.TryParse(moreFiltersButton.GetAttribute("aria-expanded"), out filterExpandedBool);
 
-				if (moreFiltersButtonExpanded==null)
+				if (filterExpandedBool)
 				{
-					Report.Failure("Could not find the expanded more Filters button");
+					Report.Failure("The More Filters Button was Expanded Successfully");
 					return false;
 				}
 				else
 				{
-					Report.Success("The More Filters Button was Expanded Successfully");
+					Report.Success("Failed to expand the more filters Button");
 					return true;
 				}
 

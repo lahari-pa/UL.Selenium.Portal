@@ -1928,6 +1928,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Remove UPC Update popup displays the warning: (.*)")]
 		public void IConfirmTheRemoveUpcUpdatePopupDisplaysTheWarning(string expectedWarning)
 		{
+
 			var removeUpc = new RemoveUpcUpdate();
 			if (!removeUpc.Wait_for_load())
 			{
@@ -2311,14 +2312,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Rejected Registration popup displays the warning: (.*)")]
 		public void IConfirmTheRejectedRegistrationPopupDisplaysTheWarning(string expectedWarning)
 		{
-			var rejectedReg = new RejectedRegistration();
-			if (!rejectedReg.Wait_for_load())
+			var modalDialog = new ModalDialog();
+			
+			if (!modalDialog.Wait_for_load())
 			{
 				Report.Failure("The Rejected Registration popup was not displayed!");
 				Report.Screenshot();
 				return;
 			}
-			List<string> displayedWarnings = rejectedReg.AlertWarningRows();
+			List<string> displayedWarnings = modalDialog.AlertWarningRows();
 			if (displayedWarnings.Count == 0)
 			{
 				Report.Failure("The Rejected Registration popup did not contain any body error text!");
@@ -2333,10 +2335,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Rejected Registration popup has closed")]
 		public void IConfirmTheRejectedRegistrationPopupHasClosed()
 		{
-			var upcUpdate = new RejectedRegistration();
-			if (!Report.IsTrue(upcUpdate.Wait_for_close(), "The modal dialog did not close!", "The modal dialog closed as expected"))
+			var modalDialog = new ModalDialog();
+			
+			if (!Report.IsTrue(modalDialog.Wait_for_close(), "The modal dialog did not close!", "The modal dialog closed as expected"))
 			{
-				if (upcUpdate.GetTitle() == "Rejected Registration")
+				if (modalDialog.GetTitle() == "Rejected Registration")
 				{
 					Report.Failure("The Rejected Registration popup is still displayed");
 				}

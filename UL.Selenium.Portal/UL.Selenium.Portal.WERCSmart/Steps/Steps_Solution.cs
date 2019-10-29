@@ -154,7 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Failed to find tab with url: " + string.Join(", ", urls));
 		}
 
-		[StepDefinition(@"I find the Navigator section logo and check that is appears as expected")]
+		[StepDefinition(@"I find the Navigator section logo and check that it appears as expected")]
 		public void IFindTheLogoForSectionIsAsExepcted()
 		{
 

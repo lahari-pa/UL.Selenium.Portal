@@ -100,8 +100,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public IWebElement LoadingSpinner()
 		{
-			return this.containerElement.FindElement(By.XPath(@".//span[contains(@data-bind,""dataEntry.pname() === 'undefined (undefined)"") and contains(text(),'Loading')]"), 2);
+			//span[contains(@data-bind,"visible: dataEntry.pname() === 'undefined (undefined)'") and contains(text(),'Loading')]
+			return this.containerElement.FindElement(By.XPath(@".//span[contains(text(),'Loading')]//i[contains(@class,'fa fa-spinner fa-pulse')]"), 2);
 		}
+
 
 		public class ProductUpc
 		{
