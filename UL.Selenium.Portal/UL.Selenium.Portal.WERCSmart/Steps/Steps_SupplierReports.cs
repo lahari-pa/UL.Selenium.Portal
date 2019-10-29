@@ -10,6 +10,7 @@ using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using NTTQA.Selenium.Cache;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -350,9 +351,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"in UPC Error Details WPSID box I enter product ID: (.*)")]
-		public void ThenInUPCErrorDetailsWPSIDBoxIEnterProductID(string wpsid)
+		[StepDefinition(@"in UPC Error Details WPSID box I enter product ID for the UPC Error Details report")]
+		public void ThenInUPCErrorDetailsWPSIDBoxIEnterProductID()
 		{
+			string wpsid = TestVariables.GetVariableSavedAs("UPC Error Product ID");
 			Report.IsTrue(new SupplierReports().EnterWPSID(wpsid), "Unable to enter WPSID " + wpsid, "Successfully entered WPSID " + wpsid);
 		}
 
