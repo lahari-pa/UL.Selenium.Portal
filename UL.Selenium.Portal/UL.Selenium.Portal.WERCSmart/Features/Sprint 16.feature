@@ -256,33 +256,3 @@ Scenario:[114216] TR (Transparency Value) - Display as Percentage
 	And I select the first Public Name dropdown option for ingredient: Clothianidin
 	Then in the Ingredients page I click Continue
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Product113706
-#Scenario:[114469] Special characters not allowed in email address for WERCSmart Account
-#	Given I should not be able to create a WERCSmart account with the following parameters:
-#		| parameter            | value |
-#		| Identifier           |       |
-#		| Email                |       |
-#		| Password             |       |
-#		| Country              |       |
-#		| FirstName            |       |
-#		| LastName             |       |
-#		| Address1             |       |
-#		| Address2             |       |
-#		| City                 |       |
-#		| State                |       |
-#		| Zip                  |       |
-#		| CompanyName          |       |
-#		| CompanyPhone         |       |
-#		| CountryCode          |       |
-#		| EmergencyPhoneNumber |       |
-#		| SupplierType         |       |
-#		| PhoneQuestion        |       |
-#		| PhoneHint            |       |
-#		| MentorQuestion       |       |
-#		| MentorHint           |       |
-#		| FriendQuestion       |       |
-#		| FriendHint           |       |
-#		| AnimalQuestion       |       |
-#		| AnimalHint           |       |
-#		| CollegeQuestion      |       |
-#		| CollegeHint          |       |
-#		| Pin                  |       |
