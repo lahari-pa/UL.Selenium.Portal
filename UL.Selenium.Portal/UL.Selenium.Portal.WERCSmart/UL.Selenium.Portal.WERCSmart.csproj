@@ -275,6 +275,7 @@
     <Compile Include="Steps\Steps_CreateProducts.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
     <Compile Include="Steps\Steps_DocumentAcceptance.cs" />
+    <Compile Include="Steps\Steps_FileOps.cs" />
     <Compile Include="Steps\Steps_ForgottenPassword.cs" />
     <Compile Include="Steps\Steps_ForwardProductRegistration.cs" />
     <Compile Include="Steps\Steps_Homepage.cs" />

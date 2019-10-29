@@ -91,6 +91,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return canClick;
 		}
 
+		public bool ClickClose()
+		{
+			IWebElement closeButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//div[@id='dialog-AdvancedReports']/following-sibling::div[contains(@class, 'ui-dialog-buttonpane')]//span"));
+
+			bool canClick = closeButton.TryClick();
+
+			return canClick;
+		}
+
 		public bool VerifyPopupTitle(string title, out string output)
 		{
 			IWebElement actualTitle = this.FindElement(By.Id("ui-dialog-title-preparing-file-modal"), 10);
@@ -180,5 +189,55 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.Field.JsEnterText(replace);
 			return !(replace == this.Field.GetInnerText());
 		}
+	}
+
+	class AdvancedReportingDropDownForm : SeleniumBaseObject
+	{
+		public const string BasePath = "//*[@id='panel']";
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		public bool SelectOption(string option)
+		{
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select"));
+
+			if (select != null)
+			{
+				select.Select(option);
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return true;
+			}
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return false;
+		}
+
+		public bool ClickSubmit()
+		{
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement submit = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input"));
+			if (submit.TryClick())
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return true;
+			}
+			else
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return false;
+			}
+
+		}
+	}
+
+	class AdvancedReportingRetailerProductsInRecert
+	{
+		public string WPSID { get; set; }
+
+		public string ProductName { get; set; }
+
+		public string Supplier { get; set; }
+
+		public string RecertificationDate { get; set; }
 	}
 }

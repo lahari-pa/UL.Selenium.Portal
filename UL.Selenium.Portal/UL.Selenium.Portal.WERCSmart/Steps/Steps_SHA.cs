@@ -914,8 +914,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("No item saved in context as: " + retailerSavedAs);
 				return;
 			}
-            //SeleniumBrowser.WebBrowser.WaitForPageLoad();
-   //         Delay.Seconds(5);
+			//SeleniumBrowser.WebBrowser.WaitForPageLoad();
+			//         Delay.Seconds(5);
 			//if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='upcTableOutter']"), 10) ==null)
 			//{
 			//	Report.Failure("View UPC table was not displayed");
@@ -2083,6 +2083,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(retailersSavedAs, retailers);
 		}
 
+		[StepDefinition(@"I confirm that the list of retailers associated with product (.*) includes retailer (.*)")]
+		public void IConfirmThatTheListOfRetailersAssociatedWithProductIncludesRetailer(string productSavedAs, string retailer)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			var product = (ProductInformation)Context.GetFromContext(productSavedAs);
+			List<string> retailers = thisStudioSHAManager.ReturnClientsOfProductByID(product.Id);
+			Report.IsTrue(retailers.Contains(retailer), "Failed to find retailer " + retailer + " in list of retailers.", "Successfully found retailer " + retailer + ".");
+		}
+
 		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
 		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
 		{
@@ -2650,6 +2659,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click " + actionType, "Clicked " + actionType);
 		}
 
+		[StepDefinition(@"I close the Advanced Reporting popup")]
+		public void ICloseTheAdvancedReportingPopup()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickClose(), "Failed to click close on Advanced Reporting popup", "Successfully clicked close on Advanced Reporting popup");
+		}
+
 
 		[StepDefinition(@"I verify the popup data using UPC: (.*)")]
 		public void ThenIVerifyThePopupDataUsingUPC(string uPC)
@@ -2741,6 +2757,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new SHAAdvancedReporting().ReportDescriptionNotAvailable(reportDescription),
 				"",
 				"");
+		}
+
+		[StepDefinition(@"In the Advanced Reporting Retailer Products in Recertification report dropdown I select retailer: (.*)")]
+		public void InTheAdvancedReportingRetailerProductsInREcertificationReportDropdownISelectRetailer(string retailer)
+		{
+			var dropDownForm = new AdvancedReportingDropDownForm();
+			Report.Info("Attempting to select " + retailer + " from drop down");
+			Report.IsTrue(dropDownForm.SelectOption(retailer), "Failed to select retailer " + retailer, "Successfully selected retailer " + retailer);
+		}
+
+		[StepDefinition(@"In the Advanced Reporting Retailer Products in Recertification report dropdown I click submit")]
+		public void InTheAdvancedReportingRetailerProductsInRecertificationReportDropdownIClickSubmit()
+		{
+			var dropDownForm = new AdvancedReportingDropDownForm();
+			Report.Info("Attempting to click submit");
+			Report.IsTrue(dropDownForm.ClickSubmit(), "Failed to click submit", "Successfully clicked submit");
 		}
 
 
@@ -3139,7 +3171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Checking handle: " + handle);
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				if (SeleniumBrowser.WebBrowser.FindElement(
-					    By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+						By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 				{
 					Report.Success("Tab was switched successfully!");
 					Report.Screenshot();
