@@ -77,11 +77,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return canClick;
 		}
 
+		public bool ClickReportNoSwitchBack(string report)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement reportButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table//td[contains(text(), """ + report + @""")]"), 2);
+
+			bool canClick = reportButton.TryClick();
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return canClick;
+		}
+
 		public bool ClickSubmit()
 		{
 			Report.Info("Switching to iFrame");
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement submitButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//form[@id='panel']//input"), 2);
+			IWebElement submitButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//form[@id='panel']//input[@name='Submit']"), 2);
 
 			bool canClick = submitButton.TryClick();
 
@@ -137,6 +151,76 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return tableDescription == null;
 		}
+
+		public bool EnterEndDate(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement endDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='End Date']//ancestor::td//following-sibling::td//input"), 2);
+			if (endDateField == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			endDateField.JsEnterText(value);
+			Delay.Seconds(1);
+			Report.Screenshot();
+
+			bool matching = false;
+
+			if (endDateField.GetValue() == value)
+			{
+				matching = true;
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return matching;
+		}
+
+		public bool EnterStartDate(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement startDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='Start Date']//ancestor::td//following-sibling::td//input"), 2);
+			if (startDateField == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			startDateField.JsEnterText(value);
+			Delay.Seconds(1);
+			Report.Screenshot();
+			bool matching = false;
+
+			if (startDateField.GetValue() == value)
+			{
+				matching = true;
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return matching;
+
+
+		}
+
+		public bool ReportDescriptionIsCorrect(string reportName, string expectedText)
+		{
+			Report.Info($"Finding the Report Descritpion for: {reportName}");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement descriptionTextFoundEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath($@"//td[text()='{reportName}']//following-sibling::td"), 2);
+			string descriptionTextFoundStr = descriptionTextFoundEl.Text;
+			Report.Info($"Expected Text: {expectedText}");
+			Report.Info($"Found Text: {descriptionTextFoundStr}");
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return descriptionTextFoundStr == expectedText;
+
+
+		}
 	}
 
 	class AdvancedReportingDateForm : SeleniumBaseObject
@@ -180,5 +264,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.Field.JsEnterText(replace);
 			return !(replace == this.Field.GetInnerText());
 		}
+
+		
 	}
 }
