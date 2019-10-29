@@ -214,6 +214,7 @@ Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registrat
 	Then I click the Home navigation icon
 	Given I delete all products with UPC Number: saved as UPC113706
 
+@ScenarioId:5971
 Scenario:[114216] TR (Transparency Value) - Display as Percentage
 	Given I generate a random UPC number and save as: UPC113706
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
