@@ -162,7 +162,7 @@ Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC E
 	And I click the Supplier Reports icon in the QuickLinks Pane
 	Then Under the Supplier Reports menu I choose: UPC Error Details
 	# Sprint 1 - 1506182, Sprint 2 - 1505712, QA - 1520299, Staging - 1593242, TReVor var request sent
-	Then in UPC Error Details WPSID box I enter product ID: 1506182
+	Then in UPC Error Details WPSID box I enter product ID for the UPC Error Details report
 	Then In the Supplier Reports screen I click on the Download button
 	Then I wait for 3 seconds
 	Then I confirm that an excel file is produced called UPC Error Details.xlsx and save as 113004
@@ -189,7 +189,35 @@ Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC E
 Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registration
 	Given I generate a random UPC number and save as: UPC113706
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I delete all products with UPC Number: %UPC113706%
+	Given I delete all products with UPC Number: saved as UPC113706
+	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: Product113706
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Chalk         | 80.5    | false               | false       |            |
+		| Water         | 15      | false               | false       |            |
+		| RED           | 5.0     | false               | false       |            |
+		| Clothianidin  | 25.0    | false               | false       |            |
+	Then in the Ingredients page I click Continue
+	Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then In the 'Select Retailers' window I select the retailer: Target
+	Then in the Retailer page I click Continue
+	And I should see the Universal Product Code (UPC) Page
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC113706, container type: Cardboard and size: 5
+	And I enter 123-44-5555 in the DPCI field of the UPC page
+	And in the UPC page I click Continue
+	And I should see an error message on the Product Name on Label field which reads: Error
+	And I should see the following error text displayed in the UPC screen: Please fix UPC errors
+	Then I click the Home navigation icon
+	Given I delete all products with UPC Number: saved as UPC113706
+
+Scenario:[114216] TR (Transparency Value) - Display as Percentage
+	Given I generate a random UPC number and save as: UPC113706
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I delete all products with UPC Number: saved as UPC113706
 	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: Product113706
@@ -197,8 +225,8 @@ Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registrat
 	And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
 	And I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| chalk         | 20      | false               | false       |            |
-		| water         | 15      | false               | false       |            |
+		| Chalk         | 20      | false               | false       |            |
+		| Water         | 15      | false               | false       |            |
 		| RED           | 5.0     | false               | false       |            |
 		| Clothianidin  | 25.0    | false               | false       |            |
 	Then I click the Publicly Disclosed checkbox for ingredient: Chalk
@@ -215,7 +243,47 @@ Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registrat
 	And I verify the Transparency Score displays 80%
 	Then I add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Dosulepin     | 20      | true                | false       |            |
+		| Dosulepin     | 20      | true                | false       | Dosulepin  |
 	And I verify the Transparency Score displays 83.33%
-	Then I click the Home navigation icon to return to the home screen
+	Then in the Ingredients page I click Continue
+	And for ingredient: Chalk I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+	And for ingredient: Water I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+	And for ingredient: RED 4 I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+	And for ingredient: Clothianidin I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+	And I select the first Public Name dropdown option for ingredient: Chalk
+	And I select the first Public Name dropdown option for ingredient: Water
+	And I select the first Public Name dropdown option for ingredient: RED 4
+	And I select the first Public Name dropdown option for ingredient: Clothianidin
+	Then in the Ingredients page I click Continue
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Product113706
+
+Scenario:[114469] Special characters not allowed in email address for WERCSmart Account
+	Given I should not be able to create a WERCSmart account with the following parameters:
+		| parameter            | value |
+		| Identifier           |       |
+		| Email                |       |
+		| Password             |       |
+		| Country              |       |
+		| FirstName            |       |
+		| LastName             |       |
+		| Address1             |       |
+		| Address2             |       |
+		| City                 |       |
+		| State                |       |
+		| Zip                  |       |
+		| CompanyName          |       |
+		| CompanyPhone         |       |
+		| CountryCode          |       |
+		| EmergencyPhoneNumber |       |
+		| SupplierType         |       |
+		| PhoneQuestion        |       |
+		| PhoneHint            |       |
+		| MentorQuestion       |       |
+		| MentorHint           |       |
+		| FriendQuestion       |       |
+		| FriendHint           |       |
+		| AnimalQuestion       |       |
+		| AnimalHint           |       |
+		| CollegeQuestion      |       |
+		| CollegeHint          |       |
+		| Pin                  |       |
