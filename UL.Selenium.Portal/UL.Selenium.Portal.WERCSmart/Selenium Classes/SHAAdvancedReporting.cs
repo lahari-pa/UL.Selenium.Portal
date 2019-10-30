@@ -254,7 +254,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(2);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			//IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//span[text()='Retailer']/ancestor::td/following-sibling::td//div//select"), 2);
 			if (retailerOption == null)
 			{
 				Report.Info("Failed to select Retailer from the Retialer Options drop down");

@@ -740,19 +740,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedStepConfirmVOCSCAQMDStepTitleConfirmACPQuestionShown_SelectNo_HappyPath();
 			sharedSteps.GivenICallSharedStepVOC_AEROQuestionOzoneEnterValue_ClickContinue_HappyPath("0.5");
 			newProduct.ClickContinue();
-			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
-
-			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Aerosol Can", "40");
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
+
+
+
+			//Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			//table57570.AddRow("Sodium chloride", "100", "false", "false", "");
+
+			//sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
+			//sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
+			//sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
+			//Report.Info("Then I select a retailer");
+			//selectRetailers.SelectTheRetailer("CVS");
+			//newProductSteps.ClickContinue();
+			//sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			////go back to homepage (products grid)
+			//new StepsHomepage().ThenINavigateToTheHomePage();
+			//new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
 		}
 

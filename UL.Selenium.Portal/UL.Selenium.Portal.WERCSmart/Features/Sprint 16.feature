@@ -412,6 +412,7 @@ Scenario: [114732] WM Slotting Code Report
 	Then I delete the Advanced Report file saved as 114732
 
 
+@ScenarioId:5973
 Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 
 	Then I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA

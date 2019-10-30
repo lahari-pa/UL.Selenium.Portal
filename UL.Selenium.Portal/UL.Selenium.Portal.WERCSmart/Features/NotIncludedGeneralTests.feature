@@ -401,7 +401,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Completed product test 1
 	Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64528
 	Given I navigate to the landing page
 
-Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) Report correctly displays case pack individual UPC
+Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) - Report correctly displays case pack individual UPC
 #For Ticket 108160
 #add product with indv upc and case pack upc to this and get both upc as saved as
 	Given I Submit a new product which has a Case UPC and a regular UPC
@@ -622,16 +622,17 @@ Scenario: [NOTINCLUDEDGENERALTEST] Retailer specific - CVS
 	And I click the back arrow next to CVS
 	Then I should see the Retail Partners page
 
+
 Scenario: [NOTINCLUDEDGENERALTEST] CVS Product Creation Debug scenario
 
 Given I log in with the account saved in TReVor as: NoProductsAccount
 Then In the Products Grid I delete All products
-Then For CVS I create a product of type: Artist Supply (RUCC0384), save it as: CVSArtistProduct1 and leave it in New Status
+Then For CVS I create a product of type: Photography (RUCC0735), save it as: CVSPhotopraphyProduct1 and leave it in New Status
 Then I navigate to the Data Consent Tiers Page for CVS
 And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
-When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSArtistExcelFile
-Then I confirm that the excel file saved as: CVSArtistExcelFile contains the WPSID for the Product saved as: CVSArtistProduct1
-Then I delete the Supplier Report file saved as CVSArtistExcelFile
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSPetCareExcelFile
+Then I confirm that the excel file saved as: CVSPetCareExcelFile contains the WPSID for the Product saved as: CVSPhotopraphyProduct1
+Then I delete the Supplier Report file saved as CVSPetCareExcelFile
 Then I navigate to the Homepage and then In the Products Grid I delete All products
 
 Scenario: [NOTINCLUDEDGENERALTEST] LawnCVS Product Creation Debug scenario

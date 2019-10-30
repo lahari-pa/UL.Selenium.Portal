@@ -3507,15 +3507,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			TestReport.StartStep("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
-			TestReport.StartStep("I call Shared Step 75146");
+			sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
 
-			Table retailerTable = new Table("Retailer");
-			retailerTable.AddRow("Walmart");
+			//TestReport.StartStep("I call Shared Step 75146");
 
-			sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
-			TestReport.StartStep("In the upc screen I add the UPC: saved as UPC75142, container type: Metal Container and size: 40, then select all certifications");		
+			//Table retailerTable = new Table("Retailer");
+			//retailerTable.AddRow("Walmart");
 
-
+			//sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
+			TestReport.StartStep("In the upc screen I add the UPC: saved as UPC75142, container type: Metal Container and size: 40, then select all certifications");	
 			stepsNewProduct.InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications("75142", "Metal Container", "40");
 
 			TestReport.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");

@@ -560,12 +560,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool SelectAllCertifications()
 		{
 			bool checkTrue = true;
-			IList<IWebElement> listofCert = this.containerElement.FindElements(By.XPath(".//div[@data-bind='with: upc']//div"), 1);
+			IList<IWebElement> listofCert = this.containerElement.FindElements(By.XPath(".//div[@data-bind='with: upc']//div//input"), 1);
 			foreach(var item in listofCert)
 			{
-				item.TryCheck();
+				//IWebElement inputbox= item.FindElement(By.XPath(".//"))
+				bool clicked=item.TryClick();
 				string textTitle=item.Text;
-				if(!item.TryCheck())
+				if(!clicked)
 				{
 					checkTrue = false;
 					Report.Info($"Failed to check the certification with title: {textTitle}");
