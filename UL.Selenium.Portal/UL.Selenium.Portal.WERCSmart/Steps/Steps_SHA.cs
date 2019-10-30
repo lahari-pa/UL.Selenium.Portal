@@ -3212,6 +3212,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			File.Delete(file);
 		}
 
+		[StepDefinition(@"I Click close in the Advanced Reporting Popup")]
+		public void ClickCloseInAdvancedReports()
+		{
+			Report.IsTrue(new SHAAdvancedReporting().CloseButton.TryClick(), "Failed to click the close button", "Successfully click the close button");
+		}
+
 
 	}
 

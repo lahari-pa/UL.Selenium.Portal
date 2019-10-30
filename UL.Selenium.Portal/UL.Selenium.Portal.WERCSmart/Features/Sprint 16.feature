@@ -152,3 +152,233 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 #	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 #	And I click the Supplier Reports link in the expanded navigation side menu
 #	Then Under the Supplier Reports menu I choose: UPC Error Details
+
+Scenario: [98534] Advanced Reporting - Registrations Published report -
+	#Update 98534 in TFS
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 98534
+	#For below step need an actual file for headers
+	Then I confirm that the excel file saved as: 98534 contains the following columns:
+		| Column              |
+		| WPSID               |
+		| Product Name        |
+		| WMDRUM              |
+		| WMCAD               |
+		| WMBC                |
+		| PYST                |
+		| PYSTM               |
+		| FPF                 |
+		| PH                  |
+		| RU                  |
+		| EPAN                |
+		| CAWC                |
+		| WSWC                |
+		| UNM                 |
+		| HCM                 |
+		| PSNDWM              |
+		| HCDWM               |
+		| DVID                |
+		| PSNV                |
+		| HCW                 |
+		| UNIFFC              |
+		| BATT                |
+		| BATTT               |
+		| CHEMICAL            |
+		| KIT                 |
+		| OTC                 |
+		| TGWAST              |
+		| MPIND               |
+		| DOTPG               |
+		| DERGN               |
+		| INTFC               |
+		| CASEC               |
+		| CASECD              |
+		| DOTBMP              |
+		| IMDGBMP             |
+		| CATEST              |
+		| WATEST              |
+		| CNTXT               |
+		| Last Published Date |
+		| Published By        |
+		| Recert              |
+		| Product_status      |
+		| GHS                 |
+		| ALL                 |
+		| BATYPE              |
+		| LBAT                |
+		| BATTPACK            |
+		| BATTWT              |
+		| BATTLIGM            |
+		| BATCT               |
+		| CELLNUM             |
+		| BATTNUM             |
+		| NUMB                |
+	Then I delete the Advanced Report file saved as 98534
+
+Scenario: [96172] Data Quality Review for Walmart
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 96172
+	#Update Column headings
+	Then I confirm that the excel file saved as: 96172 contains the following columns: and they are in the correct order.
+		| Column                                       |
+		| WPS ID                                       |
+		| Product Name                                 |
+		| SHA Status                                   |
+		| Supplier Name                                |
+		| Supplier Type (eg. Manufacturer/Distributor) |
+		| Active or Inactive                           |
+		| Last Published Date                          |
+		| Last Activity Date                           |
+		| CNTXT and ECOMM                              |
+		| RU Code                                      |
+		| RU Phrase                                    |
+		| RUCC Code                                    |
+		| RUCC Phrase                                  |
+		| WMDRUM                                       |
+		| WMBC                                         |
+		| WMCAD                                        |
+		| WMBCCA                                       |
+		| WMBCWA                                       |
+		| STSWM                                        |
+		| CWWM                                         |
+		| WAWN                                         |
+		| RIWN                                         |
+		| PYSTM                                        |
+		| BATT                                         |
+		| BATTT                                        |
+		| CHEMICAL                                     |
+		| KIT                                          |
+		| PPHARMA                                      |
+		| LBLTYP                                       |
+		| DCQAPF                                       |
+		| DCQAR                                        |
+		| DCQAOR                                       |
+		| RSQAPF                                       |
+		| DPQAPF                                       |
+		| DPQAOR                                       |
+		| DPQAORR                                      |
+		| PSNDWM                                       |
+		| PSNCD                                        |
+		| PSNPD                                        |
+		| PSNH                                         |
+		| PSNP                                         |
+		| PSNV                                         |
+		| PSNW                                         |
+		| BATTWT                                       |
+		| BATLIGM                                      |
+		| BATCT                                        |
+		| CELLNUM                                      |
+		| WMPI                                         |
+		| NUMB                                         |
+		| EMS                                          |
+		| UNIFFC                                       |
+		| UPC                                          |
+		| UPC Name                                     |
+		| Slotting Code                                |
+		| WMTQA                                        |
+		| DOT UN                                       |
+		| DOT HazClass                                 |
+		| DOT Packing Group                            |
+		| Ltd Qty (Y/N)                                |
+		| IATA UN                                      |
+		| IATA HazClass                                |
+		| IATA Packing Group                           |
+	Then I delete the Advanced Report file saved as 96172
+	Then I Click close in the Advanced Reporting Popup
+
+Scenario: [96733] UPC Details for Registration - Specific Retailer
+	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: UPC Details for Registration - Specific Retailer report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: UPC Details for Registration - Specific Retailer is shown as: Internal Use Only.  UPCs are listed for a chosen Retailer and include any additional UPC data such as Case Pack, Net Explosive Mass, and other details.
+	Then In The advanced reporting screen I enter WPSID saved as: TestCase75142
+	Then In The advanced reporting screen I choose retailer: CVS
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 96733
+	#Update Column headings
+	Then I confirm that the excel file saved as: 96733 contains the following columns: and they are in the correct order.
+		| Column                         |
+		| UPC                            |
+		| WPSID                          |
+		| Product Name                   |
+		| UPC Name                       |
+		| Product Status                 |
+		| Retailer Name                  |
+		| UPC to Retailer                |
+		| UPC Status                     |
+		| UPC Active Date                |
+		| UPC Fed                        |
+		| Net Explosive Mass             |
+		| SDS Authoring - Container Type |
+		| SDS Authoring - UPCASE         |
+		| UPDGT                          |
+		| PYSTM                          |
+		| UPICC                          |
+		| UPIQC                          |
+		| UPDV                           |
+		| UPFV                           |
+		| UPDUM                          |
+		| UPFUM                          |
+		| DOT UN                         |
+		| DOT HazClass                   |
+		| DOT Packing Group              |
+		| Ltd Qty (Y/N)                  |
+		| IATA UN                        |
+		| IATA HazClass                  |
+		| IATA Packing Group             |
+	Then I delete the Advanced Report file saved as 96733
+	Then I Click close in the Advanced Reporting Popup
+
+Scenario: [114727] PM Walmart Monthly WMQC Report
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: PM Walmart Monthly WMQC Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 114727	
+	#Update Colum headings
+	Then I confirm that the excel file saved as: 114727 contains the following columns:
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 114727
+
+Scenario: [114728] UPCs Added Yesterday
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: UPCs Added Yesterday report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: UPCs Added Yesterday is shown as: UPCs Added Yesterday
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 114728
+	#Update Column headings
+	Then I confirm that the excel file saved as: 114728 contains the following columns: and they are in the correct order.
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 114728
+
+Scenario: [114729] VOC Monthly Report - Walmart
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: VOC Monthly Report - Walmart report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: VOC Monthly Report - Walmart is shown as: Walmart Monthly VOC Report
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 114729	
+	#Update Colum headings
+	Then I confirm that the excel file saved as: 114729 contains the following columns:
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 114729

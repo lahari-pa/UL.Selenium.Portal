@@ -271,6 +271,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 		}
+		public IWebElement CloseButton => this.FindElement(By.XPath(".//button//span[text()='Close']"), 2);
+		
+		
+
+
+
+
 	}
 
 	class AdvancedReportingDateForm : SeleniumBaseObject
