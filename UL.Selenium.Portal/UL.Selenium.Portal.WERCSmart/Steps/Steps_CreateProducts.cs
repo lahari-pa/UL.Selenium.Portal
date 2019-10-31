@@ -950,8 +950,90 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I create a CA Cleaning Compliant product, select ingredient type and functional purpose then save it as: (.*) and progress it to submitted")]
+		public void CreateCACleaningCompliantProductSelectIngredientTypeAndFunctionalPurposeAndProgressToSubmitted(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var stepsIngredients = new StepsIngredients();
+			var stepsProductChar = new Steps_ProductCharacteristics();
+			var selectRetailers = new StepsSelectRetailers();
 
-		
+
+
+
+
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Abrasive");
+			newProductSteps.SaveProductInformation(savedAs);
+			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
+			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
+			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+
+			//Create new version of this step to Answer CA cleaning question 
+			sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
+
+
+
+			//Create Updated/New version for CA cleaning product ingredient entry.
+			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			tableIngredients.AddRow("Formaldehyde", "100", "false", "false", "");
+			stepsIngredients.AddIngredients(tableIngredients);
+
+
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("CVS");
+			newProductSteps.ClickContinue();
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+
+			//add remaining steps in to get to submitted
+			//below not yet tested for this product type
+
+
+			TestReport.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
+			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
+			TestReport.StartStep("in the Additional Documents to Provide page I click Continue");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			TestReport.StartStep("in the Optional Reports and Documents Available for Purchase page I click Continue");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+			TestReport.StartStep("I call Shared Step 57884");
+
+			Table additionalData = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
+			additionalData.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(additionalData);
+			TestReport.StartStep("I call Shared Step 57883");
+			sharedSteps.GivenICallSharedCommentsHappyPath(@"User added Comments Text 57863. !""£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.");
+			TestReport.StartStep("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)");
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			TestReport.StartStep("If purchase details are showing click confirm order");
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+
+
+
+
+
+
+			//go back to homepage (products grid)
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
+
+
+		}
+
+
+
 	}
 
 }

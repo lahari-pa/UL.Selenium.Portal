@@ -115,5 +115,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
 
+		[StepDefinition(@"I Switch to the View tab for product saved as: (.*)")]
+		public void INavigateToTheViewTabForProductSavedAs(string savedAs)
+		{
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string tabtitle = productDetails.Name + " (" + productDetails.Id + ")";
+			new GlobalSteps().SwitchToTabWithTitle(tabtitle);
+			new Steps_Summary().TheSummaryPageLoadsWithNoErrors();
+		}
+
+		[StepDefinition(@"I Check that the Summary page Ingredients table contains the coloumns labeled:")]
+		public void INavigateToTheViewTabAndCheckForIngredientsColumnsFromATable(Table table)
+		{
+
+			foreach (TableRow row in table.Rows)
+			{
+				string headingName = row["Heading"];
+
+				Report.IsTrue(new SummaryPage().DoesIngredientHeadingsContain(headingName), "Failed to find the Heading name: " + headingName, "Successfully found the Heading name: " + headingName);
+			}
+			
+		}
+		[StepDefinition(@"I Check that the Ingredients table on the Summary page for the ingredient: (.*) contains only the following Ingredient Types:")]
+		public void ICheckThatTheIngredientsTableForIngredientXContainsOnlyYTypes(string ingredient, Table table)
+		{
+			Report.IsTrue(new SummaryPage().IngredientTypesMatch(ingredient, table), "The Ingredient Types were not an exact match", "The ingredient Types were an exact match");
+		}
+
+		[StepDefinition(@"I Check that the Ingredients table on the Summary page for the ingredient: (.*) contains only the following Functional Purposes saved as: (.*)")]
+		public void ICheckThatTheIngredientsTableForIngredientXContainsOnlyYPurposes(string ingredient, string listSavedAs)
+		{
+			var chosenPurposes = (List<string>)Context.GetFromContext(listSavedAs);
+			Report.IsTrue(new SummaryPage().FunctionalPurposesMatch(ingredient, chosenPurposes), "The Functional Purposes were not an exact match", "The Functional Purposes were an exact match");
+		}
+
 	}
 }

@@ -17,6 +17,7 @@
 @ReviewDocuments
 @SHA
 @SummaryPage
+@CreateProducts
 @PaymentMethods
 @ProductSetUp
 @ViewUpcs
@@ -235,7 +236,35 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 Scenario: [114944] View/Summary - Ingredients table contains details (Functional Purpose and Ingredient Type)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
-	#Then create a cleaning product with functional and ingredient types
-	#filter for product in grid and go to view/summary screen 
+	#Then create a cleaning product with functional and ingredient types	
+	#need to add CA cleaning qs and ingredients page entry into below step
+	#add 3 ingredients, one with just 1 , another with more than 1, and one with all selected (then test all 3 in summary page)
+	Then I create a CA Cleaning Compliant product, select ingredient type and functional purpose then save it as: TestCase114944 and progress it to submitted
+	Given I navigate to the landing page
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	And I filter for the product saved as: TestCase114944
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View
+	Then I Switch to the View tab for product saved as: TestCase114944
+	And I Check that the Summary page Ingredients table contains the coloumns labeled:
+	| Heading            |
+	| Ingredient Type    |
+	| Functional Purpose |
+	#update this table below with ingredient types selected
+	Then I Check that the Ingredients table on the Summary page for the ingredient: Formaldehyde contains only the following Ingredient Types:
+	| Ingredient Type            |
+	| Fragrance                  |
+	| Intentionally Added        |
+	| Non-functional Byproduct   |
+	| Non-functional Contaminant |
+
+	Then I Check that the Ingredients table on the Summary page for the ingredient: Formaldehyde contains only the following Functional Purposes saved as:
+	
+	
+	#check for product saved as: that the functional (from table) are listed
+	#check for product saved as: that the ingredient types (from table) are listed
+
+
+
 
 
