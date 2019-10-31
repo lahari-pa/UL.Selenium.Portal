@@ -572,6 +572,7 @@ Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- C
 
 
 
+@ScenarioId:5976
 Scenario: [114764] UPCs and Registrations (Retailer Specific) - Report correctly displays case pack individual UPC
 #For Ticket 108160
 	Given I Submit a new product which has a Case UPC and a regular UPC
