@@ -1,3 +1,4 @@
+using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
@@ -978,14 +979,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
 
 			//Create new version of this step to Answer CA cleaning question 
-			sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
-
-
+			//sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
+			this.AdditionalProductInformation_YesToCACleaning();
+			newProductSteps.ClickContinue();
 
 			//Create Updated/New version for CA cleaning product ingredient entry.
-			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			tableIngredients.AddRow("Formaldehyde", "100", "false", "false", "");
-			stepsIngredients.AddIngredients(tableIngredients);
+			Table tableIngredients1 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			tableIngredients1.AddRow("Formaldehyde", "25", "false", "false", "");
+			stepsIngredients.AddIngredients(tableIngredients1);
+
+			Table tableIngredients2 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			tableIngredients2.AddRow("Water", "25", "false", "false", "");
+			stepsIngredients.AddIngredients(tableIngredients2);
+
+			Table tableIngredients3 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			tableIngredients3.AddRow("Sodium chloride", "25", "false", "false", "");
+			stepsIngredients.AddIngredients(tableIngredients3);
+
+			Table tableIngredients4 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+			tableIngredients4.AddRow("Butane", "25", "false", "false", "");
+			stepsIngredients.AddIngredients(tableIngredients4);
+			Table tableFunctionalPurpose1 = new Table("Functional Purpose");
+			tableFunctionalPurpose1.AddRow("NA");
+			Table tableFunctionalPurpose2 = new Table("Functional Purpose");
+			tableFunctionalPurpose2.AddRow("Abrasive");
+			Table tableFunctionalPurpose3 = new Table("Functional Purpose");
+			tableFunctionalPurpose3.AddRow("Abrasive");
+			tableFunctionalPurpose3.AddRow("Adhesive");
+			tableFunctionalPurpose3.AddRow("Antifreeze");
+			Table tableFunctionalPurpose4 = new Table("Functional Purpose");
+			tableFunctionalPurpose4.AddRow("Select All");
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Formaldehyde", "Fragrance",tableFunctionalPurpose1);
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Water", "Intentionally Added", tableFunctionalPurpose2);
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Sodium chloride", "Non-functional Byproduct", tableFunctionalPurpose3);
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Butane", "Non-functional Contaminant", tableFunctionalPurpose4);
 
 
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
@@ -1031,6 +1058,65 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
+
+		[StepDefinition(@"In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer\)")]
+		public void AdditionalProductInformation_YesToCACleaning()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			if (myNewProduct.SectionExists(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo(
+					"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)",
+					"No");
+			}
+
+			if (myNewProduct.SectionExists(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)")
+			)
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo(
+					"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+					"No");
+			}
+
+			if (myNewProduct.SectionExists("Product is shipped directly by supplier to the consumer."))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.",
+					"No");
+			}
+
+			if (myNewProduct.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"Yes");
+			}
+
+
+
+			if (myNewProduct.SectionExists("Product is a Retailer's Private Label or Brand"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			}
+
+			if (myNewProduct.SectionExists(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)")
+			)
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo(
+					"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+					"No");
+			}
+
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+
 
 
 

@@ -146,7 +146,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private string[] IngredientHeadingTitles => this.IngredientHeadings.Select(x => x.FindElement(By.XPath("./div"), 2).Text).ToArray();
 
-		public List<string> IngredientTypes(string ingredient)
+		public string IngredientType(string ingredient)
 		{
 			//find row for ingredient want, then add all values from ingreident types column to list
 			IWebElement ingredientRow = this.containerElement.FindElement(By.XPath($".//h2[contains(text(),'Ingredients')]//ancestor::div[@class='summary-question-container']//tr[.//div[text()='{ingredient}']]"), 2);
@@ -173,45 +173,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement correctIngredientTypeCell = ingredientRow.FindElement(By.XPath($".//td[{i}]"),2);
 
-			List<IWebElement> ingredientTypeEls = correctIngredientTypeCell.FindElements(By.XPath($".//div//div"), 2).ToList();
-			var ingredientTypeStrings = new List<string>();
 
-			foreach( var el in ingredientTypeEls)
-			{
-				ingredientTypeStrings.Add(el.Text);
-			}
-			return ingredientTypeStrings;
+
+			string displayedType = correctIngredientTypeCell.FindElement(By.XPath($".//div"), 2).Text;
+			return displayedType;
+
+			
+
+			
 
 		}
 
-		public bool IngredientTypesMatch(string ingredient,Table table)
+		public bool IngredientTypesMatch(string ingredient,string type)
 		{
-			var tableToList = new List<string>();
-			foreach(TableRow row in table.Rows)
+			
+			string actualType = this.IngredientType(ingredient);
+			if(type=="NA")
 			{
-				tableToList.Add(row["Ingredient Type"]);
+				return (actualType == null);
 			}
-			List<string> actualTypes = this.IngredientTypes(ingredient);
-
-			var diffFound = new List<string>();
-
-			foreach (var item in actualTypes)
-			{
-				if (!tableToList.Contains(item))
-				{
-					diffFound.Add(item);
-					Report.Info($"Found difference: {item}");
-				}
-			}
-
-			if(diffFound.Count==0)
-			{
-				return true;
-			}
-			return false;
-
-
-
+			return (actualType == type);
 
 		}
 

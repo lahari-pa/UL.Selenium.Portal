@@ -250,15 +250,14 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 	| Heading            |
 	| Ingredient Type    |
 	| Functional Purpose |
-	#update this table below with ingredient types selected
-	Then I Check that the Ingredients table on the Summary page for the ingredient: Formaldehyde contains only the following Ingredient Types:
-	| Ingredient Type            |
-	| Fragrance                  |
-	| Intentionally Added        |
-	| Non-functional Byproduct   |
-	| Non-functional Contaminant |
-
-	Then I Check that the Ingredients table on the Summary page for the ingredient: Formaldehyde contains only the following Functional Purposes saved as:
+	Then I Check that the Ingredients table on the Summary page for the ingredient: Formaldehyde contains the Ingredient Type: Fragrance
+	Then I Check that the Ingredients table on the Summary page for the ingredient: Water contains the Ingredient Type: Intentionally Added
+	Then I Check that the Ingredients table on the Summary page for the ingredient: Sodium chloride contains the Ingredient Type: Non-functional Byproduct
+	Then I Check that the Ingredients table on the Summary page for the ingredient: Butane contains the Ingredient Type: Non-functional Contaminant	
+	Then I Check that the Ingredients table on the Summary page for the ingredient: Formaldehyde contains only the following Functional Purposes saved as: FunctionalPurposesList
+	Then I Check that the Ingredients table on the Summary page for the ingredient: Water contains only the following Functional Purposes saved as: WaterFunctionalPurposesList
+	Then I Check that the Ingredients table on the Summary page for the ingredient: Sodium chloride contains only the following Functional Purposes saved as: Sodium chlorideFunctionalPurposesList
+	Then I Check that the Ingredients table on the Summary page for the ingredient: Butane contains only the following Functional Purposes saved as: ButaneFunctionalPurposesList
 	
 	
 	#check for product saved as: that the functional (from table) are listed

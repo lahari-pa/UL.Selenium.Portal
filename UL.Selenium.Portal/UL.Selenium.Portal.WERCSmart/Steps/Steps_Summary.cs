@@ -136,10 +136,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			
 		}
-		[StepDefinition(@"I Check that the Ingredients table on the Summary page for the ingredient: (.*) contains only the following Ingredient Types:")]
-		public void ICheckThatTheIngredientsTableForIngredientXContainsOnlyYTypes(string ingredient, Table table)
+		[StepDefinition(@"I Check that the Ingredients table on the Summary page for the ingredient: (.*) contains the Ingredient Type: (.*)")]
+		public void ICheckThatTheIngredientsTableForIngredientXContainsOnlyYTypes(string ingredient, string type)
 		{
-			Report.IsTrue(new SummaryPage().IngredientTypesMatch(ingredient, table), "The Ingredient Types were not an exact match", "The ingredient Types were an exact match");
+			Report.IsTrue(new SummaryPage().IngredientTypesMatch(ingredient, type), "The Ingredient Type wwas not a match", "The ingredient Type was a match");
 		}
 
 		[StepDefinition(@"I Check that the Ingredients table on the Summary page for the ingredient: (.*) contains only the following Functional Purposes saved as: (.*)")]
