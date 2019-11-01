@@ -1812,6 +1812,113 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				
 			}
 		}
+
+
+
+
+
+
+
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains CVS products with tiers 2.1, 2.2 and 4.1 granted")]
+		public void ThenIConfirmThatTheExcelFileSavedAsContainsCVSProductsWithTiers(string fileSavedAs)
+		{
+			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				int retailerColumnIndex = 0;
+				for (int j = 0; j < ColumnTitles.Count; j++)
+				{
+					if (ColumnTitles[j] == "Client")
+					{
+						retailerColumnIndex = j;
+					}
+				}
+				int column21Index = 0;
+				for (int t = 0; t < ColumnTitles.Count; t++)
+				{
+					if (ColumnTitles[t] == "2.1 Granted")
+					{
+						column21Index = t;
+					}
+				}
+				int column22Index = 0;
+				for (int y = 0; y < ColumnTitles.Count; y++)
+				{
+					if (ColumnTitles[y] == "2.2 Granted")
+					{
+						column22Index = y;
+					}
+				}
+				int column41Index = 0;
+				for (int x = 0; x < ColumnTitles.Count; x++)
+				{
+					if (ColumnTitles[x] == "4.1 Granted")
+					{
+						column41Index = x;
+					}
+				}
+
+				string checkedRetailer = "CV";
+				List<string> displayedRetailers = ExcelUtils.Excel_GetColumn(retailerColumnIndex);
+				int wantedRetailerPosition = 0;
+				bool foundRetailer = false;
+				foreach (var activeRetailer in displayedRetailers)
+				{
+					if (activeRetailer != checkedRetailer)
+					{
+						wantedRetailerPosition++;
+					}
+					else
+					{
+						Report.Success($"The retailer was found at position: {wantedRetailerPosition}");
+						foundRetailer = true;
+						break;
+					}
+				}
+				if (!foundRetailer)
+				{
+					Report.Failure("Could not find the retailer in the SpreadSheet");
+					return;
+				}
+
+				List<string> cvsRow= ExcelUtils.Excel_GetRow(wantedRetailerPosition);
+				bool tiersListedCorrectly = true;
+
+				if(cvsRow[column21Index]!="0")
+				{
+
+				}
+
+
+
+				//foreach (TableRow row in table.Rows)
+				//{
+				//	string currentRow = row["Column"];
+				//	int columnUPCIndex = 0;
+				//	for (int i = 0; i < ColumnTitles.Count; i++)
+				//	{
+				//		if (ColumnTitles[i] == currentRow)
+				//		{
+				//			columnUPCIndex = i;
+				//		}
+				//	}
+
+				//	List<string> upcRowItems = ExcelUtils.Excel_GetColumn(columnUPCIndex);
+				//	Report.Info($"Looking for a 'Y' for WPSID: {checkedRetailer} in the Column: {currentRow}");
+				//	string actualValue = upcRowItems[wantedRetailerPosition];
+				//	Report.Info($"actual value was: {actualValue}");
+				//	Report.IsTrue(actualValue == "Y", "The actual value was not 'Y'", "The actual value was 'Y'");
+
+				//}
+
+			}
+		}
+
+
 	}
 }
 

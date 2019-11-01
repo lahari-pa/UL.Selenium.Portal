@@ -594,7 +594,10 @@ Scenario: [NOTINCLUDEDGENERALTEST] Daily Report - Data Tier Consent - CVS Update
 #105950 linked
 #Blocked so currently use screenshot from DB for ticket test
 #Create a product that requires tier 4.1 then Check report reflects 4.1 need
-#Method for opening the report, checking for retailer X and checking the tier coloum Y contains at least one 
+#Method for opening the report, checking for retailer X and checking the tier coloum Y contains at least one
+
+
+
 	
 
 
