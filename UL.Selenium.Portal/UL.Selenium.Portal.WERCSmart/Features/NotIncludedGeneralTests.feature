@@ -20,9 +20,14 @@
 @MyIngredients
 @UPC
 @SHA
+@Studio
 @ForwardProductRegistration
 @ProductSetUp
+@SupplierReports
 @admin
+@ViewUpcs
+@Solutions
+@run_NotIncludedGeneralTests
 
 Feature: NotIncludedGeneralTests
 
@@ -234,10 +239,195 @@ Scenario: [NOTINCLUDEDGENERALTEST] Lithium Battery Product-no regularotry docume
 	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Green
 
+Scenario: [NOTINCLUDEDGENERALTEST] SHA LOGIN CHECKER
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+
+#This test will not work as the email will not be sent to products account (selecting product from differnt user)
+Scenario: [NOTINCLUDEDGENERALTEST] Suspend a Product - Formula - Document Issue - Check Email does not contain Blurb
+
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I Save the email for the TReVor: ProductAccount Test user as: ProductAccountEmail
+	Given I save the current emails in the inbox for address saved as: ProductAccountEmail
+	Then In SHA Manager I set the filter for status to : Assigned
+	And In SHA Manager I select the first product
+	And I click the following option in the bottom menu: Suspended
+	And In the Suspended dialog I Select the following clients: All
+	And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: Automated QASha
+	And In the Suspended dialog in the Select Subject drop down I choose: Formula – Document Issue
+	And In the Suspended dialog in the Supplier Message field I should see: The composition data provided does not match information listed on the document. You may either provide a corrected document, or correct the composition data to resolve this issue.
+	And In the Suspended dialog in the Supplier Message field I add the following text: supplier message input
+	And In the Suspended dialog in the Internal Product Note field I should see: The composition data provided does not match information listed on the document. You may either provide a corrected document, or correct the composition data to resolve this issue.
+	And In the Suspended dialog in the Internal Product Note field I add the following text: internal product note input
+	And In the Suspended dialog I click Save
+	And I close alert
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for saved as: ID)
+	Then I Check there should be a new suspension notification email for user: ProductAccountEmail for the Product saved as: ID with the suspension subject of: Formula – Document Issue and check it does not contain text from the table:
+	| SearchText                                                                                                                                                                                                                                                      |
+	| Use the “Recertification” link available on the registration to correct the issue; or                                                                                                                                                                           |
+	| Contact the Help Desk Hub via a ticket.  If you registered the product, a ticket is already created in your My Ticket area of the Hub (post a reply to the existing ticket).                                                                                    |
+	| If you recertify the data, accept the revisions allowing data transfer.  The assessment will proceed.                                                                                                                                                           |
+	| Be aware:  If no response within ten (10) days will result in registration cancellation and the assessment will not proceed to the retailer.  You may contact the Help Desk for reinstatement of the assessment as needed, but the hold remains until resolved. |                                                                                                                                               
+	
 
 
 
+Scenario: [NOTINCLUDEDGENERALTEST] Rejected Registration - Edit -  Message is displayed about Rejected Registrations and SDS Restrictions
 
+	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+	And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase75142)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
+	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: New
+	Given I navigate to the landing page
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then I filter for the product saved as: TestCase75142
+	And I edit the product saved as: TestCase75142
+	Then I confirm the Rejected Registration popup displays the warning: Please be aware that rejected registrations will not permit any changes to the Safety Data Sheet (SDS) option. Upon rejection, if you want to change your Safety Data Sheet selection (i.e. Select Authoring instead of providing a Document, you will need to DELETE the rejected registration and create a new registration to submit, with your proper selection.
+	Given in the modal dialog I click cancel
+	Then I confirm the Rejected Registration popup has closed
+	And I edit the product saved as: TestCase75142
+	Then I confirm the Rejected Registration popup displays the warning: Please be aware that rejected registrations will not permit any changes to the Safety Data Sheet (SDS) option. Upon rejection, if you want to change your Safety Data Sheet selection (i.e. Select Authoring instead of providing a Document, you will need to DELETE the rejected registration and create a new registration to submit, with your proper selection.
+	Given in the modal dialog I click Continue
+	And I should see the The Product Page
+
+Scenario: [NOTINCLUDEDGENERALTEST] Advanced Reporting - Registrations Published report -
+	#For 92210 Ticket Should be 98534
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the Product Registrations Published report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Product Registrations Published report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#For below step need an actual file for headers
+	Then I confirm that the excel file saved as: 105329 contains the following columns:
+		| Column              |
+		| WPSID               |
+		| Product Name        |
+		| WMDRUM              |
+		| WMCAD               |
+		| WMBC                |
+		| PYST                |
+		| PYSTM               |
+		| FPF                 |
+		| PH                  |
+		| RU                  |
+		| EPAN                |
+		| CAWC                |
+		| WSWC                |
+		| UNM                 |
+		| HCM                 |
+		| PSNDWM              |
+		| HCDWM               |
+		| DVID                |
+		| PSNV                |
+		| HCW                 |
+		| UNIFFC              |
+		| BATT                |
+		| BATTT               |
+		| CHEMICAL            |
+		| KIT                 |
+		| OTC                 |
+		| TGWAST              |
+		| MPIND               |
+		| DOTPG               |
+		| DERGN               |
+		| INTFC               |
+		| CASEC               |
+		| CASECD              |
+		| DOTBMP              |
+		| IMDGBMP             |
+		| CATEST              |
+		| WATEST              |
+		| CNTXT               |
+		| Last Published Date |
+		| Published By        |
+		| Recert              |
+		| Product_status      |
+		| GHS                 |
+
+Scenario: [NOTINCLUDEDGENERALTEST] UL Solutions: Navigator Logo has TradeMark Symbol
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	Then the WERCSmart homepage should load
+	Then I click the UL Solution Center icon in the Navigation Pane
+	Then I confirm that the UL Solution Center page is loaded
+	Then I confirm the following sections are displayed in the UL Solution Center page:
+		| Sections  |
+		| Navigator |
+	#Then do Image Comparison here
+
+Scenario: [NOTINCLUDEDGENERALTEST] product submit upc info entry
+Given I generate a random UPC number and save as: UPC109503
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase109503
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
+	Given I click continue
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] UL Solution Center - Shows Updated Navigator Logo
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I click the UL Solution Center icon in the QuickLinks Pane
+	Then I confirm that the UL Solution Center page is loaded
+	Then I Confirm the Navigator heading is displayed next to an icon
+	#Check Icon is updated version
+	And I Confirm the information statement for section: Navigator reads: Navigator highlights the main chemical regulatory requirements for over 50 countries around the world. These summaries compile the most important information all in one place, offering easy to understand explanations of complex topics, paired with links to laws and helpful resources. Summaries are authored and updated by our global regulatory specialists, whose primary responsibility is the monitoring and reporting of regulations in their given country.
+	And I confirm the Learn More button is displayed for section: Navigator
+	Given I click the Learn More button for section: Navigator
+	Given I switch to the Navigator information tab
+	Then I check that the current URL contains: https://msc.ul.com/en/products/navigator/
+
+Scenario: [NOTINCLUDEDGENERALTEST] Pub to completed then run report
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I create a Chalk product which has a Case UPC and a regular UPC, process to completed and save the product as: (.*)
+
+Scenario: [NOTINCLUDEDGENERALTEST] Completed product test 1
+
+	Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64528
+	Given I navigate to the landing page
+
+Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) Report correctly displays case pack individual UPC
+#For Ticket 108160
+#add product with indv upc and case pack upc to this and get both upc as saved as
+	Given I Submit a new product which has a Case UPC and a regular UPC
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	#Should be able to remove the wait but check first
+	Then I wait for 30 seconds
+	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
+	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
+	Given In the Supplier Reports screen I click on the Download button
+	Given I click on close in the Report Download dialog
+	Given I confirm that an excel file is produced called UPCs and Registrations (Retailer Specific).xlsx and save as 73082
+	Then I confirm that in the excel file saved as: 73082 for the UPC saved as: UPC876851 there is a 'Y' in the Case Pack column and an Individual UPC listed as: UPC87685
+	And I delete the Supplier Report file saved as 73082
+
+Scenario: [NOTINCLUDEDGENERALTEST] CVS Revision to Data Tier Consent Requirements
+
+Given I create a new supplier products account: ProductAccountTEST and create a product with retailer CVS
+
+Scenario: [NOTINCLUDEDGENERALTEST] 2CVS Revision to Data Tier Consent Requirements
+Then I create a upc number for CVS
+Given I create a new supplier products account: ProductAccountTEST and create a product with retailer CVS
+
+	
+
+		              
 
 
 

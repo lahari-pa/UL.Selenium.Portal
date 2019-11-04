@@ -12,6 +12,8 @@ using NTTQA.Selenium.UniversalFunctions;
 using System.IO;
 using System.Text.RegularExpressions;
 using NTTQA.Selenium.SpecFlow;
+using System.Net;
+using System.Drawing;
 using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -246,8 +248,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 			}
-			return true;
 
+			return true;
+		}
+		public static Bitmap CreateBitmapFromURL(string url)
+		{
+			WebClient myClient = new WebClient();
+			Stream myStream = myClient.OpenRead(url);
+			return new Bitmap(myStream);
+		}
+
+		public static Bitmap CreateBitmapFromFile(string file)
+		{
+			return new Bitmap(file);
+		}
+
+		public static bool CompareBitmaps(Bitmap bitmap1, Bitmap bitmap2)
+		{
+			return GeneralFunctions.CompareImages(bitmap1, bitmap2);
 		}
 
 		public static bool CheckCBAOrder(List<string> list)
@@ -363,5 +381,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return input;
 		}
 
+
+
+
+
+
+
+
+
+
 	}
+
 }
