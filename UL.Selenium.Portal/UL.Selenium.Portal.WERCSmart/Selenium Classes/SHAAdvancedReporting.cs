@@ -161,7 +161,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return tableDescription == null;
 		}
 
-<<<<<<< HEAD
 		public bool ConfirmReportNamesAlphebeticalOrder(string order)
 		{
 			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
@@ -302,7 +301,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Failure("Found unexpected parameter " + active);
 					return false;
 			}
-=======
+		}
+
 		public bool EnterEndDate(string value)
 		{
 			Report.Info("Switching to iFrame");
@@ -370,8 +370,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
 			return descriptionTextFoundStr == expectedText;
 
-
->>>>>>> 41ea5984fb588cf3ab3d7121d831050209329796
 		}
 	}
 
@@ -417,7 +415,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return !(replace == this.Field.GetInnerText());
 		}
 
-		
+
 	}
 
 	class AdvancedReportingDropDownForm : SeleniumBaseObject
