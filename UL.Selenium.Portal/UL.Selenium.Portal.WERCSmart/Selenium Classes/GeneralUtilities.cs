@@ -228,6 +228,50 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return newTable;
 		}
 
+		public static bool CheckABCOrder(List<string> list)
+		{
+			var sortedList = new List<string>();
+			foreach (string item in list)
+			{
+				sortedList.Add(item);
+			}
+
+			sortedList.Sort();
+
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (sortedList[i] != list[i])
+				{
+					return false;
+				}
+
+			}
+			return true;
+
+		}
+
+		public static bool CheckCBAOrder(List<string> list)
+		{
+			var sortedList = new List<string>();
+			foreach (string item in list)
+			{
+				sortedList.Add(item);
+			}
+
+			sortedList.Sort();
+			sortedList.Reverse();
+
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (sortedList[i] != list[i])
+				{
+					return false;
+				}
+
+			}
+			return true;
+		}
+
 	}
 
 	public class RetailerAbbreviations
@@ -318,5 +362,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return input;
 		}
+
 	}
 }

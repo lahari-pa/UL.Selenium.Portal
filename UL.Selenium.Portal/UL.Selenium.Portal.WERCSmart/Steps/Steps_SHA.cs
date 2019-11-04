@@ -2666,6 +2666,71 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(shaReport.ClickClose(), "Failed to click close on Advanced Reporting popup", "Successfully clicked close on Advanced Reporting popup");
 		}
 
+		[StepDefinition(@"I confirm that the Report Names are listed in (abc|cba) order")]
+		public void IConfirmThatTheReportsAreListedInOrder(string order)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ConfirmReportNamesAlphebeticalOrder(order), "Failed to find Report Names in abc order.", "Successfully found Report Names in abc order.");
+		}
+
+		[StepDefinition(@"I confirm that the report descriptions are listed in (abc|cba) order")]
+		public void IConfirmThatTheReportDescriptionsAreListedInCBAOrder(string order)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ConfirmReportDescriptionsAlphabeticalOrder(order), "Failed to find Report Descriptions in abc order.", "Successfully found Report Descriptions in abc order.");
+		}
+
+		[StepDefinition(@"I confirm that the (up|down) arrow next to Report Name is (active|inactive)")]
+		public void IConfirmThatTheDownArrowNextToReportNameIs(string upDown, string isActive)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			if (upDown == "up")
+			{
+				Report.IsTrue(shaReport.CheckIfReportNameUpArrowActive(isActive), "Failed to find the up arrow as " + isActive, "Successfully found that the up arrow is " + isActive);
+			}
+			else if (upDown == "down")
+			{
+				Report.IsTrue(shaReport.CheckIfReportNameDownArrowActive(isActive), "Failed to find the down arrow as " + isActive, "Successfully found that the down arrow is " + isActive);
+			}
+			else
+			{
+				Report.Failure("Unexpected parameter found!");
+			}
+
+		}
+
+		[StepDefinition(@"I confirm that the (up|down) arrow next to Report Description is (active|inactive)")]
+		public void IConfirmThatTheUpDownArrowNextToReportDescriptionIs(string upDown, string isActive)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			if (upDown == "up")
+			{
+				Report.IsTrue(shaReport.CheckIfReportDescriptionUpArrowActive(isActive), "Failed to find the up arrow as " + isActive, "Successfully found that the up arrow is " + isActive);
+			}
+			else if (upDown == "down")
+			{
+				Report.IsTrue(shaReport.CheckIfReportDescriptionDownArrowActive(isActive), "Failed to find the down arrow as " + isActive, "Successfully found that the down arrow is " + isActive);
+			}
+			else
+			{
+				Report.Failure("Unexpected parameter found!");
+			}
+		}
+
+		[StepDefinition(@"I click on the Report Name column")]
+		public void IClickOnTheReportNameColumn()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickReportNameHeader(), "Failed to click report name header", "Successfully clicked report name header");
+		}
+
+		[StepDefinition(@"I click on the Report Description column")]
+		public void IClickOnTheReportDescriptionColumn()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickReportDescriptionHeader(), "Failed to click report description header", "Successfully clicked report description header");
+		}
+
 
 		[StepDefinition(@"I verify the popup data using UPC: (.*)")]
 		public void ThenIVerifyThePopupDataUsingUPC(string uPC)
@@ -2783,6 +2848,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new AdvancedReportingDateForm().EnterStartEndDates(startDate, endDate),
 				FailureMessage: "Failed to update the date fields",
 				SuccessMessage: "Successfully updated the date fields");
+		}
+
+		[StepDefinition(@"In the 3rd Party Formula Use in Registrations text box I enter the CAS Number without the WPS for ingredient: (.*)")]
+		public void InThe3rdPartyFormulaUseInRegistrationsIEnterTheCASNumber(string savedAs)
+		{
+			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Could not find ingredient saved as " + savedAs + " in context");
+				return;
+			}
+			string CAS = "";
+			if (ingredient.CASNumber.Contains("WPS"))
+			{
+				CAS = ingredient.CASNumber.TrimStart("WPS");
+			}
+			else
+			{
+				CAS = ingredient.CASNumber;
+			}
+			var input = new AdvancedReportingTextInput();
+			Report.Info("Attempting to enter CAS number in the input text field");
+			Report.IsTrue(input.EnterText(CAS), "Failed to enter the CAS number into the text input field.", "Successfully entered the CAS Number into the text input field.");
+		}
+
+		[StepDefinition(@"In the Advanced Reporting 3rd Party Formula Use in Registrations report I click submit")]
+		public void InThe3rdPartyFormulaUseInRegistrationsReportIClickSubmit()
+		{
+			var input = new AdvancedReportingTextInput();
+			Report.IsTrue(input.ClickSubmit(), "Failed to click submit.", "Successfully clicked submit.");
 		}
 
 		[StepDefinition(@"I verify the (.*) popup displays")]

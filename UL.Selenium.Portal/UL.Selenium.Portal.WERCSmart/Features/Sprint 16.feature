@@ -154,6 +154,7 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 #	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 #	And I click the Supplier Reports link in the expanded navigation side menu
 #	Then Under the Supplier Reports menu I choose: UPC Error Details
+#Incomplete: waiting for bug 114335 to resolve to complete.
 @tfs_design
 @ScenarioId:5961
 Scenario: [78452] Retailer Products in Recertification Report
@@ -175,4 +176,49 @@ Scenario: [78452] Retailer Products in Recertification Report
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProdInfo78452)
 	And I confirm that the list of retailers associated with product ProdInfo78452 includes retailer WM
 	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProdInfo78452
-#Incomplete: waiting for bug 114335 to resolve to complete.
+
+#Incomplete: waiting for bug 111856 to complete.
+@tfs_design
+@ScenarioId:5974
+Scenario: [87182] 3rd Party Formula Use in Registrations
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I enter text: WPS in the component search box
+	And I select the component search result with CAS matching text: WPS and save ingredient as: Ingredient87182
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And In SHA Manager - Select Actions - Advanced Reporting
+	And In the Advanced Reporting popup I select report 3rd Party Formula Use in Registrations
+	And In the 3rd Party Formula Use in Registrations text box I enter the CAS Number without the WPS for ingredient: Ingredient87182
+	And In the Advanced Reporting 3rd Party Formula Use in Registrations report I click submit
+	Then I confirm that an excel file is produced called 3rd Party Formula Use in Registrations.xls and save as excel87182
+	And I confirm that the excel file saved as: excel87182 contains the following columns:
+		| Column              |
+		| WPSID               |
+		| Supplier Name       |
+		| Contact Email       |
+		| Last Order Date     |
+		| Last Published Date |
+		| Status              |
+	And I save the information for the first record in 3rd Party Formula Use in Registrations excel spreadsheet saved as: excel87182 as: TestCase87182 and ProdInfo87182
+	And I close the Advanced Reporting popup
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProdInfo87182)
+
+@ScenarioId:5975
+Scenario: [71099] Advanced Reporting - Column Sorting
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And In SHA Manager - Select Actions - Advanced Reporting
+	And I confirm that the Report Names are listed in abc order
+	And I click on the Report Name column
+	And I confirm that the Report Names are listed in cba order
+	And I confirm that the down arrow next to Report Name is active
+	And I click on the Report Name column
+	And I confirm that the Report Names are listed in abc order
+	And I confirm that the up arrow next to Report Name is active
+	And I click on the Report Description column
+	And I confirm that the report descriptions are listed in cba order
+	And I confirm that the up arrow next to Report Description is active
+	And I close the Advanced Reporting popup
