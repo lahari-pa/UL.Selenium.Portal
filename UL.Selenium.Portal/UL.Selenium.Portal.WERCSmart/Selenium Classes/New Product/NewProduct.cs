@@ -3158,6 +3158,84 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return fieldIsCorrectColor;
 
 		}
+
+		public bool FinalDomesticDistributor(string text)
+		{
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Who is the Final Domestic Distributor (if any) of the product ']/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+		public bool CompanyTollFreePhoneNumber(string text)
+		{
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Toll-Free Phone Number')]/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
+		public bool CompanyWebAddress(string text)
+		{
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Company Web Address')]/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
+		public string ProductGTINBrickCode {
+			get
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'GTIN')]/..//following-sibling::div//select"), 2);
+				return el.SelectedOption();
+			}
+			set
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'GTIN')]/..//following-sibling::div//select"), 2);
+				el.Select(value);
+			}
+		}
+
+
+
 	}
 
 	public class ProductInformation

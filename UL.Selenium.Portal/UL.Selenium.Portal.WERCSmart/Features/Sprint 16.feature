@@ -479,10 +479,10 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Daily Report - Data Tier Consent.xlsx and save as 115163
 	#Update Column headings
-	Then I confirm that the excel file saved as: 115163 contains the following columns: and they are in the correct order.
+	Then I confirm that the excel file saved as: 115163 contains the following columns:
 		| Column              |
 		| UPC Name            |
-	#Then I check that for CVS there is at least one product showing tier 2.1,2.2 and 4.1 (does this need to be only these tiers (e.g no tier 3s?)
+	Then I confirm that the excel file saved as: 115163 contains CVS products with tiers 2.1, 2.2 and 4.1 granted 	
 	Then I delete the Advanced Report file saved as 115163
 	
 

@@ -1886,34 +1886,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				List<string> cvsRow= ExcelUtils.Excel_GetRow(wantedRetailerPosition);
-				bool tiersListedCorrectly = true;
+				bool tiersListedCorrectly = true;				
 
-				if(cvsRow[column21Index]!="0")
-				{
-
-				}
-
+				Report.IsTrue(cvsRow[column21Index] != "0", "The Tier 2.1 Granted Column For CVS did not contain products", "The Tier 2.1 Granted Column For CVS contained products");
+				Report.IsTrue(cvsRow[column22Index] != "0", "The Tier 2.2 Granted Column For CVS did not contain products", "The Tier 2.2 Granted Column For CVS contained products");
+				Report.IsTrue(cvsRow[column41Index] != "0", "The Tier 4.2 Granted Column For CVS did not contain products", "The Tier 4.1 Granted Column For CVS contained products");
 
 
-				//foreach (TableRow row in table.Rows)
-				//{
-				//	string currentRow = row["Column"];
-				//	int columnUPCIndex = 0;
-				//	for (int i = 0; i < ColumnTitles.Count; i++)
-				//	{
-				//		if (ColumnTitles[i] == currentRow)
-				//		{
-				//			columnUPCIndex = i;
-				//		}
-				//	}
-
-				//	List<string> upcRowItems = ExcelUtils.Excel_GetColumn(columnUPCIndex);
-				//	Report.Info($"Looking for a 'Y' for WPSID: {checkedRetailer} in the Column: {currentRow}");
-				//	string actualValue = upcRowItems[wantedRetailerPosition];
-				//	Report.Info($"actual value was: {actualValue}");
-				//	Report.IsTrue(actualValue == "Y", "The actual value was not 'Y'", "The actual value was 'Y'");
-
-				//}
 
 			}
 		}

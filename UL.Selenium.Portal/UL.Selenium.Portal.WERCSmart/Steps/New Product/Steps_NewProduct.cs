@@ -2556,6 +2556,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
+		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Final Domestic Distributor")]
+		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField(string text)
+		{
+			Report.IsTrue(new NewProduct().FinalDomesticDistributor(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
+		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company's Toll-Free Phone Number")]
+		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInTollFreePhoneNumberTextField(string text)
+		{
+			Report.IsTrue(new NewProduct().CompanyTollFreePhoneNumber(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
+		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company Web Address")]
+		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInCompanyWebAddressTextField(string text)
+		{
+			Report.IsTrue(new NewProduct().CompanyWebAddress(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+		
+
+		[StepDefinition(@"I set the Product's GTIN Brick Code to: (.*)")]
+		public void ThenISetTheProductsGTINBrickCodeTo(string description)
+		{
+			var thisNewProduct = new NewProduct();
+			new NewProduct().ProductGTINBrickCode = description;
+			Report.IsTrue(thisNewProduct.ProductGTINBrickCode == description, "Failed to set the Product's GTIN Brick Code to be: " + description, "Successfully set the Product's GTIN Brick Code to be: " + description);
+		}
+
+
 
 		#endregion
 

@@ -21,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement placeholderEl = this.containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 2);
 				placeholderEl.TryClick();
 				IWebElement clickResult;
-				IWebElement inputEl = this.containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+				IWebElement inputEl = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'component-search')]//input[@class='select2-search__field']"), 2);
 				// If the ingredient has a CAS number assigned, search by that string
 				if (!string.IsNullOrEmpty(ingredient.CASNumber))
 				{
@@ -939,7 +939,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool ISelectIngredientType(string ingredienName, string ingredientType)
 		{
 			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredienName}']]"), 2);
-			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath("//td//select[contains(@data-bind,'ingredientType')]"), 2);
+			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'ingredientType')]"), 2);
 			if(ingredientTypeBox==null)
 			{
 				Report.Failure("Could not find the Ingredient Type Input Box");
@@ -959,7 +959,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool ISelectFunctionalPurpose(string ingredienName, Table table)
 		{
 			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredienName}']]"), 2);
-			IWebElement functionalPurposeBox = wantedRow.FindElement(By.XPath("//td//select[contains(@data-bind,'functionalPurpose')]"), 2);
+			IWebElement functionalPurposeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'functionalPurpose')]"), 2);
 			if (functionalPurposeBox == null)
 			{
 				Report.Failure("Could not find the Functional Purpose Input Box");

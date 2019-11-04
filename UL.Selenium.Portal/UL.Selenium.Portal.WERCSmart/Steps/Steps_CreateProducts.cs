@@ -981,6 +981,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Create new version of this step to Answer CA cleaning question 
 			//sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
 			this.AdditionalProductInformation_YesToCACleaning();
+			this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
+
 			newProductSteps.ClickContinue();
 
 			//Create Updated/New version for CA cleaning product ingredient entry.
@@ -1028,6 +1030,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//add remaining steps in to get to submitted
 			//below not yet tested for this product type
 
+			sharedSteps.SharedCVSPharmacy_YesIWishToContinue();
 
 			TestReport.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
 			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
@@ -1114,6 +1117,61 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			TestReport.StartStep("In the Additional Product Information page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details")]
+		public void InTheCACleaningProductDisclosureScreenChooseHappyPath()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+	
+			MyStepsNewProduct.GivenIShouldSeeXPage("California Cleaning Product Disclosure");
+			Delay.Seconds(1);
+
+			if (myNewProduct.SectionExists("Who is publicly identified on the product label as responsible for the product?"))
+			{
+				MyStepsNewProduct.SetRadioOptionInSectionTo("Who is publicly identified on the product label as responsible for the product?", "Manufacturer");
+			}
+
+			if (myNewProduct.SectionExists("Who is the Final Domestic Distributor (if any) of the product"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField("Company Name");
+			}
+
+			if (myNewProduct.SectionExists("Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?", "No");
+			}
+
+			if (myNewProduct.SectionExists("Company's Toll-Free Phone Number"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInTollFreePhoneNumberTextField("11111111111");
+			}
+
+			if (myNewProduct.SectionExists("Company Web Address"))
+			{
+				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInCompanyWebAddressTextField("http://TestWebsitePlaceholderName.com");
+			}
+
+			if (myNewProduct.SectionExists("Select the product's GTIN Brick Code"))
+			{
+				MyStepsNewProduct.ThenISetTheProductsGTINBrickCodeTo("[10000424] Laundry Detergents");
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		}
 
 
