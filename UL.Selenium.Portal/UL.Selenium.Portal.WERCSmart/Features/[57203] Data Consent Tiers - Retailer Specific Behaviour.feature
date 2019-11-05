@@ -163,7 +163,7 @@ Scenario: [115256] CVS - Uses Updated Data Tier Consent Requirements (Excluded C
 
 	@singleRun
 Scenario: [115255] CVS - Uses Updated Data Tier Consent Requirements (Included Categories)
-
+#need to chunk together steps so shorted scenario specflow
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then In the Products Grid I delete All products
 	Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status

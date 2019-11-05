@@ -1161,17 +1161,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
+		}
 
-
-
-
-
-
-
-
-
-
-
+		[StepDefinition(@"CVS Pharmacy - No, Later Date")]
+		public void SharedCVSPharmacy_YesIWishToContinue()
+		{
+			TestReport.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I confirm the CVS Pharmacy section appears");
+			selNewProductSteps.GivenIShouldSeeXPage("CVS Own Brand Registration");
+			TestReport.StartStep(
+				"I set the Continue? option to: Yes, I wish to continue registration");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Continue?",
+				"Yes, I wish to continue registration");
+			TestReport.StartStep("I click continue");
+			selNewProductSteps.ClickContinue();
 		}
 
 
