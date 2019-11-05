@@ -11,6 +11,7 @@ Feature: [57203] Data Consent Tiers - Retailer Specific Behavior
 #Background:
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 #Then I click the Retail Partners icon in the Navigation Pane
+@ScenarioId:5990
 Scenario: [57206] Retailer specific - CVS
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
