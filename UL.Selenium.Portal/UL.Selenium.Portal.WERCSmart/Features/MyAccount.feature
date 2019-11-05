@@ -147,4 +147,20 @@ Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 	And I Select the Inactive filter
 	And I Confirm that you See the user you just created in the grid
 	And I confirm the new user is Not Active
-	
+
+
+@ScenarioId:1590
+Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	And I navigate to My Account
+	And In the My Account page I navigate to the Company Information page
+	And In Stewardship table click edit
+	And I add following stewardship information
+		| Province         | Stewardship   |
+		| British Columbia | BC-1-1        |
+		| Saskatchewan     | SA-1-1        |
+	And In Stewardship table I click: Cancel
+	And In Stewardship number popup body text should be: If you cancel, any changes will be lost. Continue?
+	And In Stewardship number popup heading should be: Are you sure you wish to cancel?
+	And In Stewardship number popup I Click: Yes
+	And I confirm that I do not see any stewardship information

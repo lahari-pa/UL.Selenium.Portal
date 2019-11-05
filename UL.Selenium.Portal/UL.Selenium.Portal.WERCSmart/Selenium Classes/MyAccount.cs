@@ -1102,7 +1102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public bool EnterStewardshipInfo(string field, string option1, string option2, string option3)
+		public bool EnterStewardshipInfo(string field, string option1)
 		{
 			GeneralUtilities.Wait_for_load_finish();
 			IWebElement matchingRow = this.containerElement.FindElement(By.XPath(".//tr[contains(td,'" + field + "')]"));
@@ -1131,7 +1131,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			DateTime ut = tz.ToUniversalTime(DateTime.Now);
 			var est = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
 			var esttime = TimeZoneInfo.ConvertTimeFromUtc(ut, est);
-			option2 = esttime.ToString("yyyy-MM-dd");
+			var option2 = esttime.ToString("yyyy-MM-dd");
 			issueDate.Clear();
 			issueDate.EnterText(option2);
 			issueDate.SendKeys(Keys.Enter);
@@ -1146,7 +1146,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int month2 = DateTime.Now.Month + 1;
 			int day2 = DateTime.Now.Day;
 			var dtExp = new DateTime(year2, month2, day2);
-			option3 = dtExp.ToString("yyyy-MM-dd");
+			var option3 = dtExp.ToString("yyyy-MM-dd");
 			expireDate.Clear();
 			expireDate.EnterText(option3);
 			expireDate.SendKeys(Keys.Enter);
@@ -1181,9 +1181,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return StwdshipChkbox.TryClick();
 		}
 
-		public bool StewardshipSave_click()
+		//public bool StewardshipSave_click()
+		//{
+		//	IWebElement StwdshipSave = this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'stewardshipNumberModel')]//a[contains(text(),'Save')]"), 2);
+		//	Report.Info("Attempting to Click Save on Stewardship information");
+
+		//	if (StwdshipSave == null)
+		//	{
+		//		Report.Failure("Not able to find Stewardship Save button");
+		//		Report.Screenshot();
+		//		return false;
+		//	}
+		//	return StwdshipSave.TryClick();
+		//}
+
+		public bool StewardshipSaveOrCancel_Click(string option)
 		{
-			IWebElement StwdshipSave = this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'stewardshipNumberModel')]//a[contains(text(),'Save')]"), 2);
+			IWebElement StwdshipSave = this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'stewardshipNumberModel')]//a[contains(text(),'" + option + "')]"), 2);
 			Report.Info("Attempting to Click Save on Stewardship information");
 
 			if (StwdshipSave == null)
@@ -1193,6 +1207,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			return StwdshipSave.TryClick();
+		}
+
+		public List<string> StewardshipFieldsNoData()
+		{
+			string xPath = @".//input[contains(@data-bind,'StewardNumber.field')] | " +
+						@".//input[contains(@data-bind,'IssueDate.field')] | " +
+						@".//input[contains(@data-bind,'ExpireDate.field')]";
+			return this.containerElement.FindElements(By.XPath(xPath), 2).Select(x => x.GetValue().Trim()).ToList();
 		}
 
 		public bool Canada_Supplier_Edit_click()
@@ -1206,6 +1228,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
+			
 			return CanSuppEdit.TryClick();
 		}
 
@@ -1301,6 +1324,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 	}
+
 	class MyAccount_SubscriptionInfo : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "SubscriptionInfoContainer")]
@@ -2103,5 +2127,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//div[@class='modal-footer']//button[contains(text(),'" + option + "')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
+		public string Get_PopupBodyText()
+		{
+			Report.Info("Beginning to get information");
+
+			IWebElement popUpBody = this.containerElement.FindElement(By.XPath(".//div[@class='modal-body']//p"), 2);
+
+			if (popUpBody == null)
+			{
+				Report.Info("Failed to find popup body");
+				Report.Screenshot();
+				return "";
+			}
+			Report.Info("Information Found: " + popUpBody.Text);
+			return popUpBody.Text;
+		}
+
+		public string Get_Popupheading()
+		{
+			Report.Info("Beginning to get information");
+
+			IWebElement popUpHeading = this.containerElement.FindElement(By.XPath(".//h3[@class='modal-title']"), 2);
+
+			if (popUpHeading == null)
+			{
+				Report.Info("Failed to find heading");
+				Report.Screenshot();
+				return "";
+			}
+			Report.Info("Information Found: " + popUpHeading.Text);
+			return popUpHeading.Text;
+		}
 	}
 }
