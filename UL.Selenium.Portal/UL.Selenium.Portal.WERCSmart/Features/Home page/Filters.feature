@@ -50,10 +50,10 @@ Scenario: [56829] More Filters
 	And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	And I should see an option for More Filters
 	Given I click More Filters in the products grid
-	Given I confirm the product exists with Product ID: <Kit_56829> and Name: Kit Product 56829
-	Given I enter combinations of More Filters and should see the product ID: <Kit_56829> only for the correct combinations
+	Given I confirm the product exists with Product ID: %Kit_56829% and Name: Kit Product 56829
+	Given I enter combinations of More Filters and should see the product ID: %Kit_56829% only for the correct combinations
 		| Filter              | Match               |
-		| UPC                 | <UPC_56829>         |
+		| UPC                 | %UPC_56829%         |
 		| Brand               | TestBrand           |
 		| Retailer            | Wal-Mart/SAM'S CLUB |
 		| Additional Programs | Kit Registrations   |

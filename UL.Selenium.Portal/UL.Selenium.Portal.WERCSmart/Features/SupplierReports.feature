@@ -144,6 +144,7 @@ Scenario: [73082] UPC Report for All Products with Retailer
 		| Product Name              |
 		| Brand                     |
 		| UPC                       |
+		| UPC Name                  |
 		| Retailer                  |
 		| Status                    |
 		| Ounces                    |
@@ -533,7 +534,6 @@ Scenario: [76759] Waste Classification Summary Report
 		| Wyoming        |
 	And I delete the Supplier Report file saved as SupplierReport76759
 
-
 #Unable to run because the report requires a 1 year old product that is in completed status
 @tfs_design
 Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) report
@@ -541,10 +541,10 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Subscription Renewal (Registrations Eligible for Deletion)
 	Then In the Supplier Reports screen the current sub-page should be: Subscription Renewal (Registrations Eligible for Deletion)
-	Then I Check that the Description text on the supplier report page matches: The report will provide you with the information for current, submitted registrations, regardless of current registration status (Net Yet Submitted, In Progress, Sending, Accepted, Needs Attention), that are eligible for deletion from your account. The quantity of submitted registrations directly impacts your subscription levels for Formulated, Enhanced Articles and Articles. Eligible for deletion criteria is based on order history dates. 
+	Then I Check that the Description text on the supplier report page matches: The report will provide you with the information for current, submitted registrations, regardless of current registration status (Net Yet Submitted, In Progress, Sending, Accepted, Needs Attention), that are eligible for deletion from your account. The quantity of submitted registrations directly impacts your subscription levels for Formulated, Enhanced Articles and Articles. Eligible for deletion criteria is based on order history dates.
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called Subscription Renewal (Registrations Eligible for Deletion).xlsx and save as 79635	
+	Given I confirm that an excel file is produced called Subscription Renewal (Registrations Eligible for Deletion).xlsx and save as 79635
 	Then I confirm that the excel file saved as: 79635 contains the following columns:
 		| Column                 |
 		| WERCSmart ID           |
@@ -561,16 +561,11 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 	Then I Check that for the product: WERCSmartProduct79635 the Details in SHA Manager Match the details found in the file: 79635
 	And I delete the Supplier Report file saved as 79635
 
-	#Needs Finishing (Currently Download only gets a hltml file and not a spreadsheet)
-
+#Needs Finishing (Currently Download only gets a hltml file and not a spreadsheet)
 @ScenarioId:976
 Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- Check for correct description text
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Subscription Renewal (Registrations Eligible for Deletion)
 	Then In the Supplier Reports screen the current sub-page should be: Subscription Renewal (Registrations Eligible for Deletion)
-	Then I Check that the Description text on the supplier report page matches: The report will provide you with the information for current, submitted registrations, regardless of current registration status (Net Yet Submitted, In Progress, Sending, Accepted, Needs Attention), that are eligible for deletion from your account. The quantity of submitted registrations directly impacts your subscription levels for Formulated, Enhanced Articles and Articles. Eligible for deletion criteria is based on order history dates. 
-
-
-
-
+	Then I Check that the Description text on the supplier report page matches: The report will provide you with the information for current, submitted registrations, regardless of current registration status (Net Yet Submitted, In Progress, Sending, Accepted, Needs Attention), that are eligible for deletion from your account. The quantity of submitted registrations directly impacts your subscription levels for Formulated, Enhanced Articles and Articles. Eligible for deletion criteria is based on order history dates.

@@ -25,55 +25,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 30)
 		{
-			//get the window
-			StudioUtilites.SwitchToWindow("Wercs Studio");
-			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-			IWebElement frame =
-				SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='Widget1']//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-			return base.Wait_for_load(30);
+			try
+			{
+				StudioUtilites.SwitchToWindow("Wercs Studio");
+				this.SwitchToFrame();
+				this.containerElement = SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(BasePath), secondsToWait);
+				return this.containerElement != null && base.Wait_for_load(secondsToWait);
+			}
+			catch
+			{
+				return false;
+			}
+
+		}
+
+		public bool SwitchToFrame()
+		{
+			try
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
+				return SeleniumBrowser.SwitchToIFrame("Widget1FRAME") || (SeleniumBrowser.ExitIFrame() && SeleniumBrowser.SwitchToIFrame("Widget1FRAME"));
+			}
+			catch (Exception ex)
+			{
+				Report.Error("Failed to switch frame. Exception was thrown: " + ex.Message);
+				return false;
+			}
 		}
 
 		public bool WaitForProductList(int secondsToWait)
 		{
-			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
 			Report.Info("Beginning wait for product list");
-			if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
-			{
-				SeleniumBrowser.ExitIFrame();
-				if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
-				{
-					Report.Error("Could not switch to iframe");
-				}
-			}
-
-			for (int i = 0; i < secondsToWait; i++)
-			{
-				try
-				{
-					IWebElement table = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']"), 60);
-					if (table != null)
-					{
-						if (table.Displayed || table.FindElements(By.XPath(".//tr")).Count == 1)
-						{
-							return true;
-						}
-					}
-				}
-				catch (Exception e)
-				{
-					Report.Error("Caught error" + e.Message);
-					continue;
-					//do nothing
-				}
-
-				Delay.Seconds(1);
-				i++;
-			}
-
-			Report.Info($"Product list was not loaded after {secondsToWait} seconds!");
-			return false;
+            Delay.Seconds(2);
+			var tableVisible = this.containerElement.WaitUntilElementVisible(By.XPath("//table[@id='list']"), secondsToWait);
+			return tableVisible != null || this.containerElement.FindElements(By.XPath("//table[@id='list']//tr"),1).Count == 1;
 		}
 
 		/// <summary>
@@ -81,10 +66,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public bool Wait_For_Loading_Finish(int timeout = 30)
 		{
-			// wait up to 5 seconds for the loading bar to become visible
-			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(BasePath + "//div[@id='load_list']"), 5);
-			// waits up to timeout (30) seconds for the loading bar to then become invisible
-			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath(BasePath + "//div[@id='load_list']"), timeout);
+			try
+			{
+				// wait up to 5 seconds for the loading bar to become visible
+				SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 5);
+				// waits up to timeout (30) seconds for the loading bar to then become invisible
+				return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//div[@id='load_list']"), timeout);
+			}
+			catch(Exception ex)
+			{
+				Report.Error("Failed to wait for load to finish. Exception was thrown: " + ex.Message);
+				return false;
+			}
 		}
 		public ProductStatus GetproductStatus(string id)
 		{
@@ -1019,7 +1012,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					SeleniumBrowser.ExitIFrame();
 					if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
 					{
-						Report.Info("Couuld not switch to iframe");
+						Report.Info("Could not switch to iframe");
 						return false;
 					}
 				}
@@ -1128,7 +1121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCaseUPCSavedAsInProducUPCTable(string savedAs)
 		{
-			if(!Context.Contains(savedAs))
+			if (!Context.Contains(savedAs))
 			{
 				Report.Failure($"The UPC saved as: {savedAs} could not be found in context");
 				return false;
@@ -1369,25 +1362,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return rows.Count == 1;
 		}
 
-		public string GetproductStatusByRetailer(string retailer)
+		public string GetProductStatusByRetailer(string retailer)
 		{
 
 			string retailerStatus = "";
 			string retailerAbbr = "";
-
-			if (Regex.IsMatch(retailer, "<(.*)>"))
+			if (Context.GetFromContextRegex(retailer, out var result))
 			{
-				var match = Regex.Match(retailer, "<(.*)>").Groups[1].Value;
-				if (Context.Contains(match, true))
-				{
-					retailer = Context.GetFromContext(match).ToString();
-				}
-
+				Report.Info("Getting retailer from context: " + retailer);
+				retailer = result.ToString();
 			}
 			Report.Info("Beginning get product status by retailer: " + retailer);
 
 			var abbr = new RetailerAbbreviations();
-			abbr.Map.TryGetValue(retailer, out retailerAbbr);			
+			if (!abbr.Map.TryGetValue(retailer, out retailerAbbr))
+			{
+				Report.Error("Failed to get retailer abbreviation for full name: " + retailer);
+				return null;
+			}
 			Report.Info("Search for Retailer with Initials: " + retailerAbbr);
 			try
 			{
@@ -1410,8 +1402,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
+				Report.Error(ex.Message);
 				return null;
 			}
 
@@ -1444,7 +1437,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
-
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
@@ -1777,6 +1769,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return failedAt.Length == 0;
 		}
+
+		internal bool ClosePopup() =>
+			this.containerElement.FindElement(By.XPath("//*[@aria-labelledby='ui-dialog-title-dialog-IsArchiveProduct']//span[@class='ui-button-text']")).TryClick();
 	}
 
 	class ProcessProducts : BaseObject
@@ -2719,7 +2714,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			bool displayStatus = this.ObsoleteUPCButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;
 			return displayStatus;
-		}		
+		}
 
 
 
@@ -2734,18 +2729,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ConfirmObseleteUPCMessage(string messageText)
 		{
 			string confirmObseleteUPCPopupText = this.FindElement(By.XPath(".//div[contains(@class,'dialog-content')]"), 2).Text;
-			messageText=Regex.Replace(messageText, @"\s+", string.Empty);
+			messageText = Regex.Replace(messageText, @"\s+", string.Empty);
 			confirmObseleteUPCPopupText = Regex.Replace(confirmObseleteUPCPopupText, @"\s+", string.Empty);
 			Report.Info($"The expected message is: {messageText}");
 			Report.Info($"The found message is: {confirmObseleteUPCPopupText}");
 			return confirmObseleteUPCPopupText == messageText;
-			
+
 		}
 
 		public bool ContinueButtonPresent()
 		{
-			//bool displayStatus = this.ContinueButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;			
-			
+			//bool displayStatus = this.ContinueButton.FindElement(By.XPath(".//ancestor::button"), 2).Displayed;
+
 			return this.ContinueButton != null && this.ContinueButton.Displayed;
 		}
 		public bool CancelButtonPresent()
@@ -2754,15 +2749,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//return displayStatus;
 			return this.CancelButton != null && this.CancelButton.Displayed;
 		}
-	}		
+	}
 
-	
+
 
 	class StudioSHAManagerUPCDetailsPopupManagerValidationPopup : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath(".//div[contains(@class,'ui-dialog ui-widget') and contains(@aria-labelledby,'validate-pasword')]");
 
-		public string ValidationPopupHeaderText => this.FindElement(By.XPath(".//span[@class='ui-dialog-title']"), 2).Text;		
+		public string ValidationPopupHeaderText => this.FindElement(By.XPath(".//span[@class='ui-dialog-title']"), 2).Text;
 
 	}
 

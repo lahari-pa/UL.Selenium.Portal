@@ -149,7 +149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.LoginToAccount(accountSavedAs);
 		}
 
-		[Then(@"The home screen should load")]
+		[StepDefinition(@"The home screen should load")]
 		public void ThenTheHomeScreenShouldLoad()
 		{
 			var selHomepage = new Homepage();
@@ -703,10 +703,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I Save the email for the TReVor: (.*) Test user as: (.*)")]
 		public void ISaveTheEmailForTheTReVorTestUserAs(string userSavedAs, string emailSaveAs)
 		{
-			
+
 			try
 			{
-				
+
 				TReVorTestUsers user = TestUsers.GetUserSavedAs(userSavedAs);
 				if (user == null)
 				{
@@ -717,7 +717,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Success($"Found the User stored as {userSavedAs} in Trevor");
 				Report.Info($"Saving the Email: {user.Username} to context");
 				Context.AddToContext(emailSaveAs, user.Username);
-				
+
 			}
 			catch (Exception ex)
 			{
@@ -800,7 +800,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					email = NTTQA.Selenium.SpecFlow.Context.GetFromContext(savedAs).ToString();
 				}
-				
+
 				if (EmailFunctions.WaitForInboxDifferences(email))
 				{
 					List<Mailosaur.Email> differences = EmailFunctions.GetInboxDifferences(email);
@@ -1657,7 +1657,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int i = alertWaitSeconds;
 			if (SeleniumBrowser.Alert.WaitForAlert(i))
 			{
-				
+
 				Report.Success("The Alert Appeared");
 				alertAppeared = true;
 				return;

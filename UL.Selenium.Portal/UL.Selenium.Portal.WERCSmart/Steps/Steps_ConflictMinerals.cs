@@ -36,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Then(@"the Conflict Minerals page should load")]
+		[StepDefinition(@"the Conflict Minerals page should load")]
 		public void ThenTheConflictMineralsPageShouldLoad()
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -211,7 +211,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Success("Successfully accepted the terms of use!");
 		}
 
-		[Then(@"in the Conflict Minerals I should see the dashboard")]
+		[StepDefinition(@"in the Conflict Minerals I should see the dashboard")]
 		public void ThenInTheConflictMineralsIShouldSeeTheDashboard()
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -219,7 +219,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Dashboard page has not loaded", "Dashboard page has loaded");
 		}
 
-		[Then(@"in the Conflict Minerals I should see company name in the header: (.*)")]
+		[StepDefinition(@"in the Conflict Minerals I should see company name in the header: (.*)")]
 		public void ThenInTheConflictMineralsIShouldSeeCompanyNameInTheHeader(string companyName)
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -265,7 +265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[Then(@"if an error message shows I retry entering password: (.*) and clicking on login")]
+		[StepDefinition(@"if an error message shows I retry entering password: (.*) and clicking on login")]
 		public void ThenIfAnErrorMessageShowsIRetryEnteringPasswordAndClickingOnLogin(string password)
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -300,7 +300,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Email has not arrived as expected", "Email has arrived as expected");
 		}
 
-		[Then(@"I confirm that I have received a CARP account email to account: (.*)")]
+		[StepDefinition(@"I confirm that I have received a CARP account email to account: (.*)")]
 		public void ThenIConfirmThatIHaveReceivedACARPAccountEmailToAccount(string emailToFind)
 		{
 			if (emailToFind.ToLower().Contains("saved as"))

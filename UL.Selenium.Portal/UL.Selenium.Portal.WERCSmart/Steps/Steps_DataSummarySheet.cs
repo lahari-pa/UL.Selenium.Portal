@@ -238,7 +238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[Then(@"In the Data Summary window the (first|second) component should have Public Name: (.*) and Publicly Disclosed: (Yes|No)")]
+		[StepDefinition(@"In the Data Summary window the (first|second) component should have Public Name: (.*) and Publicly Disclosed: (Yes|No)")]
 		public void ThenInTheDataSummaryWindowTheSecondComponentShouldHavePublicNameAndPubliclyDisclosed(string firstOrSecond, string publicName, string publiclyDisclosed)
 		{
 			var thisDataSummary = new DataSummary();
