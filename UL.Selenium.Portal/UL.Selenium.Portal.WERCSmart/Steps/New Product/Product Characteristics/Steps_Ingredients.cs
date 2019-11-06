@@ -9,6 +9,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using NTTQA.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -468,6 +469,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var newProductIngredients = new Ingredients();
 			newProductIngredients.ClickComponentSearchPlaceholder();
 			Report.IsTrue(newProductIngredients.EnterTextSearchComponent(value), $"Failed to enter text '{value}' in the component search box!", $"Successully entered text '{value}' in the component search box");
+			Delay.Seconds(3);
 		}
 
 		[StepDefinition(@"I select the component search result with (name|CAS) matching text: (.*) and save ingredient as: (.*)")]
@@ -795,6 +797,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					"Successfully matched INCI Name for Ingredient " + ingredient.ComponentName + ".");
 
 			}
+		}
+
+		[StepDefinition(@"In the Ingredients page I start typing (.*) and select the first component in the list and set its percent to (.*)")]
+		public void InTheIngredientsPageIStartTypingAndSelectTheFirstComponentInTheListAndSetItsPercentTo(string text, string percent)
+		{
+			var newProductIngredients = new Ingredients();
 		}
 
 	}

@@ -98,20 +98,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.Error($@"The page title did not match expected! Expected ""{page}""");
 			}
-			string pageTitle = NewProduct.HeaderText;
 			Report.Info("Clicking Continue");
 			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
-			if (pageTitle == "The Product")
+			if (page == "The Product" && NewProduct.HeaderText == "The Product")
 			{
+                Report.Info("The active page is still 'The Product' after clicking continue");
+                Report.Info("Checking for Raw Materials Warning pop up");
 				var thisModalDialog = new ModalDialog();
-				if (!thisModalDialog.Exists || thisModalDialog.GetTitle() != "Warning")
+				if (!thisModalDialog.WaitForContainerToBeVisible() || thisModalDialog.GetTitle() != "Warning")
 				{
+                    Report.Failure("Failed to click continue to the next page!");
 					return;
 				}
-				if (thisModalDialog.GetText().Contains("You are registering a formula (Raw material)"))
-				{
-					Report.IsTrue(thisModalDialog.Click_OK(), "Failed to click OK in the modal", "Clicked OK in the modal");
-				}
+				Report.IsTrue(thisModalDialog.Click_OK(), "Failed to click OK in the modal", "Clicked OK in the modal");
 			}
 		}
 

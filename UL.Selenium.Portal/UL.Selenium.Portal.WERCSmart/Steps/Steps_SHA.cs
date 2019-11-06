@@ -89,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.IsTrue(thisTopMenu.ClickSubMenu(menuItem, submenuItem), "Failed to click: " + menuItem,
-					"Successfully clicked: " + menuItem, ShowSuccessScreenshot: false);
+					"Successfully clicked: " + submenuItem, ShowSuccessScreenshot: false);
 			}
 
 		}
@@ -914,12 +914,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("No item saved in context as: " + retailerSavedAs);
 				return;
 			}
-
-			if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='upcTableOutter']"), 5) == null)
-			{
-				Report.Failure("View UPC table was not displayed");
-				return;
-			}
+			//SeleniumBrowser.WebBrowser.WaitForPageLoad();
+			//         Delay.Seconds(5);
+			//if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='upcTableOutter']"), 10) ==null)
+			//{
+			//	Report.Failure("View UPC table was not displayed");
+			//	return;
+			//}
 			Report.Info("UPC is: " + upc);
 			string retailer = Context.GetFromContext(retailerSavedAs).ToString();
 			//retailer = new RetailerAbbreviations().TryConvertToAbbreviation(retailer);
@@ -2086,6 +2087,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(retailersSavedAs, retailers);
 		}
 
+		[StepDefinition(@"I confirm that the list of retailers associated with product (.*) includes retailer (.*)")]
+		public void IConfirmThatTheListOfRetailersAssociatedWithProductIncludesRetailer(string productSavedAs, string retailer)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			var product = (ProductInformation)Context.GetFromContext(productSavedAs);
+			List<string> retailers = thisStudioSHAManager.ReturnClientsOfProductByID(product.Id);
+			Report.IsTrue(retailers.Contains(retailer), "Failed to find retailer " + retailer + " in list of retailers.", "Successfully found retailer " + retailer + ".");
+		}
+
 		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
 		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
 		{
@@ -2653,6 +2663,78 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click " + actionType, "Clicked " + actionType);
 		}
 
+		[StepDefinition(@"I close the Advanced Reporting popup")]
+		public void ICloseTheAdvancedReportingPopup()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickClose(), "Failed to click close on Advanced Reporting popup", "Successfully clicked close on Advanced Reporting popup");
+		}
+
+		[StepDefinition(@"I confirm that the Report Names are listed in (abc|cba) order")]
+		public void IConfirmThatTheReportsAreListedInOrder(string order)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ConfirmReportNamesAlphebeticalOrder(order), "Failed to find Report Names in abc order.", "Successfully found Report Names in abc order.");
+		}
+
+		[StepDefinition(@"I confirm that the report descriptions are listed in (abc|cba) order")]
+		public void IConfirmThatTheReportDescriptionsAreListedInCBAOrder(string order)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ConfirmReportDescriptionsAlphabeticalOrder(order), "Failed to find Report Descriptions in abc order.", "Successfully found Report Descriptions in abc order.");
+		}
+
+		[StepDefinition(@"I confirm that the (up|down) arrow next to Report Name is (active|inactive)")]
+		public void IConfirmThatTheDownArrowNextToReportNameIs(string upDown, string isActive)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			if (upDown == "up")
+			{
+				Report.IsTrue(shaReport.CheckIfReportNameUpArrowActive(isActive), "Failed to find the up arrow as " + isActive, "Successfully found that the up arrow is " + isActive);
+			}
+			else if (upDown == "down")
+			{
+				Report.IsTrue(shaReport.CheckIfReportNameDownArrowActive(isActive), "Failed to find the down arrow as " + isActive, "Successfully found that the down arrow is " + isActive);
+			}
+			else
+			{
+				Report.Failure("Unexpected parameter found!");
+			}
+
+		}
+
+		[StepDefinition(@"I confirm that the (up|down) arrow next to Report Description is (active|inactive)")]
+		public void IConfirmThatTheUpDownArrowNextToReportDescriptionIs(string upDown, string isActive)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			if (upDown == "up")
+			{
+				Report.IsTrue(shaReport.CheckIfReportDescriptionUpArrowActive(isActive), "Failed to find the up arrow as " + isActive, "Successfully found that the up arrow is " + isActive);
+			}
+			else if (upDown == "down")
+			{
+				Report.IsTrue(shaReport.CheckIfReportDescriptionDownArrowActive(isActive), "Failed to find the down arrow as " + isActive, "Successfully found that the down arrow is " + isActive);
+			}
+			else
+			{
+				Report.Failure("Unexpected parameter found!");
+			}
+		}
+
+		[StepDefinition(@"I click on the Report Name column")]
+		public void IClickOnTheReportNameColumn()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickReportNameHeader(), "Failed to click report name header", "Successfully clicked report name header");
+		}
+
+		[StepDefinition(@"I click on the Report Description column")]
+		public void IClickOnTheReportDescriptionColumn()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickReportDescriptionHeader(), "Failed to click report description header", "Successfully clicked report description header");
+		}
+
 
 		[StepDefinition(@"I verify the popup data using UPC: (.*)")]
 		public void ThenIVerifyThePopupDataUsingUPC(string uPC)
@@ -2709,7 +2791,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 			Delay.Seconds(1);
 			Report.Info("Waiting for product list");
-			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing", ShowSuccessScreenshot:false);
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing", ShowSuccessScreenshot: false);
 
 
 		}
@@ -2746,6 +2828,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"");
 		}
 
+		[StepDefinition(@"In the Advanced Reporting Retailer Products in Recertification report dropdown I select retailer: (.*)")]
+		public void InTheAdvancedReportingRetailerProductsInREcertificationReportDropdownISelectRetailer(string retailer)
+		{
+			var dropDownForm = new AdvancedReportingDropDownForm();
+			Report.Info("Attempting to select " + retailer + " from drop down");
+			Report.IsTrue(dropDownForm.SelectOption(retailer), "Failed to select retailer " + retailer, "Successfully selected retailer " + retailer);
+		}
+
+		[StepDefinition(@"In the Advanced Reporting Retailer Products in Recertification report dropdown I click submit")]
+		public void InTheAdvancedReportingRetailerProductsInRecertificationReportDropdownIClickSubmit()
+		{
+			var dropDownForm = new AdvancedReportingDropDownForm();
+			Report.Info("Attempting to click submit");
+			Report.IsTrue(dropDownForm.ClickSubmit(), "Failed to click submit", "Successfully clicked submit");
+		}
+
 
 		[StepDefinition(@"I enter start date (.*) and end date (.*) for Advanced Reporting")]
 		public void ThenIEnterStartAndEndDatesForAdvancedReporting(string startDate, string endDate)
@@ -2754,6 +2852,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new AdvancedReportingDateForm().EnterStartEndDates(startDate, endDate),
 				FailureMessage: "Failed to update the date fields",
 				SuccessMessage: "Successfully updated the date fields");
+		}
+
+		[StepDefinition(@"In the 3rd Party Formula Use in Registrations text box I enter the CAS Number without the WPS for ingredient: (.*)")]
+		public void InThe3rdPartyFormulaUseInRegistrationsIEnterTheCASNumber(string savedAs)
+		{
+			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Could not find ingredient saved as " + savedAs + " in context");
+				return;
+			}
+			string CAS = "";
+			if (ingredient.CASNumber.Contains("WPS"))
+			{
+				CAS = ingredient.CASNumber.TrimStart("WPS");
+			}
+			else
+			{
+				CAS = ingredient.CASNumber;
+			}
+			var input = new AdvancedReportingTextInput();
+			Report.Info("Attempting to enter CAS number in the input text field");
+			Report.IsTrue(input.EnterText(CAS), "Failed to enter the CAS number into the text input field.", "Successfully entered the CAS Number into the text input field.");
+		}
+
+		[StepDefinition(@"In the Advanced Reporting 3rd Party Formula Use in Registrations report I click submit")]
+		public void InThe3rdPartyFormulaUseInRegistrationsReportIClickSubmit()
+		{
+			var input = new AdvancedReportingTextInput();
+			Report.IsTrue(input.ClickSubmit(), "Failed to click submit.", "Successfully clicked submit.");
 		}
 
 		[StepDefinition(@"I verify the (.*) popup displays")]
@@ -3128,6 +3256,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(excelInfo["Product Activity Date"] == table.Rows[0]["Product Activity Date"], "Failed to match Product Activity Date " + table.Rows[0]["Product Activity Date"] + " to excel information. Excel: " + excelInfo["Product Activity Date"],
 					"Successfully matched Product Activity Date " + table.Rows[0]["Product Activity Date"] + " to information in excel spreadsheet.");
+			}
+		}
+
+		[StepDefinition(@"I confirm the Product UPC window has opened")]
+		public void ConfirmProductUpcWindowOpened()
+		{
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			Report.Info("Looking for SHA Manager Product UPC window");
+			bool foundWindow = false;
+			foreach (string handle in allHandles)
+			{
+				Report.Info("Checking handle: " + handle);
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(
+						By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+				{
+					Report.Success("Tab was switched successfully!");
+					Report.Screenshot();
+					var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+					Context.AddToContext("SHAManagerProductUPC", currentHandle);
+					foundWindow = true;
+					break;
+				}
+			}
+			if (!foundWindow)
+			{
+				Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+				Report.Screenshot();
 			}
 		}
 
