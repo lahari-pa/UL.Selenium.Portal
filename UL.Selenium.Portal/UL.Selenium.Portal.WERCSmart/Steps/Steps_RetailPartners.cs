@@ -1886,7 +1886,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				List<string> cvsRow= ExcelUtils.Excel_GetRow(wantedRetailerPosition);
-				bool tiersListedCorrectly = true;				
+				//bool tiersListedCorrectly = true;				
 
 				Report.IsTrue(cvsRow[column21Index] != "0", "The Tier 2.1 Granted Column For CVS did not contain products", "The Tier 2.1 Granted Column For CVS contained products");
 				Report.IsTrue(cvsRow[column22Index] != "0", "The Tier 2.2 Granted Column For CVS did not contain products", "The Tier 2.2 Granted Column For CVS contained products");
@@ -1895,6 +1895,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			}
+		
+			
+		}
+
+		[StepDefinition(@"I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: (.*) and check that is shows the expected product saved as: (.*)")]
+		public void INavigateToTheCVSRetailerPageThenCheckThatItContainsExpectedTiersAndProductsInScopeAsExpected(string fileSavedAs, string productSavedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I navigate to the Data Consent Tiers Page for CVS");
+			this.INavigateToTheDataConentTiersPageForCVS();
+			TestReport.StartStep("I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section");
+			this.ICheckThatTheGivenDataTiersAreOnlyOnesPresent();
+			TestReport.StartStep($"Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as {fileSavedAs}");
+			this.ThenClickTheProductsInScopeButtonAndCheckForFile("CV_Report_DataUsageTier_<Date>.xlsx", fileSavedAs);
+			TestReport.StartStep($"I confirm that the excel file saved as: {fileSavedAs} contains the WPSID for the Product saved as: {productSavedAs}");
+			this.IConfirmTheExcelFileSavedAsContainsProductSavedAs(fileSavedAs, productSavedAs);
+			TestReport.StartStep($"I delete the Supplier Report file saved as {fileSavedAs}");
+			new Steps_SupplierReports().DeleteExcelFile(fileSavedAs);
+			TestReport.StartStep($"I navigate to the Homepage and then In the Products Grid I delete All products");
+			new StepsProductGrid().INavigateToTheHomepageThenInTheProductsGridIDeleteAllProducts();
+
 		}
 
 
