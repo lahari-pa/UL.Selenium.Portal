@@ -222,6 +222,8 @@ Scenario: [71099] Advanced Reporting - Column Sorting
 	And I confirm that the report descriptions are listed in cba order
 	And I confirm that the up arrow next to Report Description is active
 	And I close the Advanced Reporting popup
+
+@ScenarioId:5979
 Scenario: [96172] Data Quality Review for Walmart
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
@@ -486,6 +488,73 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 		| UPC Name            |
 	Then I confirm that the excel file saved as: 115163 contains CVS products with tiers 2.1, 2.2 and 4.1 granted 	
 	Then I delete the Advanced Report file saved as 115163
-	
+
+
+	@ScenarioId:5978
+Scenario: [98534] Advanced Reporting - Registrations Published report -
+	#Update 98534 in TFS
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called Product Registrations Published.xlsx and save as 98534
+	Then I confirm that the excel file saved as: 98534 contains the following columns:
+		| Column              |
+		| WPSID               |
+		| Product Name        |
+		| WMDRUM              |
+		| WMCAD               |
+		| WMBC                |
+		| PYST                |
+		| PYSTM               |
+		| FPF                 |
+		| PH                  |
+		| RU                  |
+		| EPAN                |
+		| CAWC                |
+		| WSWC                |
+		| UNM                 |
+		| HCM                 |
+		| PSNDWM              |
+		| HCDWM               |
+		| DVID                |
+		| PSNV                |
+		| HCW                 |
+		| UNIFFC              |
+		| BATT                |
+		| BATTT               |
+		| CHEMICAL            |
+		| KIT                 |
+		| OTC                 |
+		| TGWAST              |
+		| MPIND               |
+		| DOTPG               |
+		| DERGN               |
+		| INTFC               |
+		| CASEC               |
+		| CASECD              |
+		| DOTBMP              |
+		| IMDGBMP             |
+		| CATEST              |
+		| WATEST              |
+		| CNTXT               |
+		| Last Published Date |
+		| Published By        |
+		| Recert              |
+		| Product_status      |
+		| GHS                 |
+		| ALL                 |
+		| BATYPE              |
+		| LBAT                |
+		| BATTPACK            |
+		| BATTWT              |
+		| BATTLIGM            |
+		| BATCT               |
+		| CELLNUM             |
+		| BATTNUM             |
+		| NUMB                |
+	Then I delete the Advanced Report file saved as 98534
+
 
 
