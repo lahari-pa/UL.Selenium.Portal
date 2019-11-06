@@ -1198,11 +1198,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool StewardshipSaveOrCancel_Click(string option)
 		{
 			IWebElement StwdshipSave = this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'stewardshipNumberModel')]//a[contains(text(),'" + option + "')]"), 2);
-			Report.Info("Attempting to Click Save on Stewardship information");
+			Report.Info("Attempting to Click option on Stewardship information");
 
 			if (StwdshipSave == null)
 			{
-				Report.Failure("Not able to find Stewardship Save button");
+				Report.Failure("Not able to find option");
 				Report.Screenshot();
 				return false;
 			}
@@ -2115,48 +2115,4 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 	// My Distributors
-
-	public class ClearStewardshipNotification : SeleniumBaseObject
-	{
-		public const string BasePath = "//div[@class='modal fade in']";
-
-		protected override By ContainerElementLocator => By.XPath(BasePath);
-
-		public bool ClickClearStewardshipOption(string option)
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class='modal-footer']//button[contains(text(),'" + option + "')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
-		}
-
-		public string Get_PopupBodyText()
-		{
-			Report.Info("Beginning to get information");
-
-			IWebElement popUpBody = this.containerElement.FindElement(By.XPath(".//div[@class='modal-body']//p"), 2);
-
-			if (popUpBody == null)
-			{
-				Report.Info("Failed to find popup body");
-				Report.Screenshot();
-				return "";
-			}
-			Report.Info("Information Found: " + popUpBody.Text);
-			return popUpBody.Text;
-		}
-
-		public string Get_Popupheading()
-		{
-			Report.Info("Beginning to get information");
-
-			IWebElement popUpHeading = this.containerElement.FindElement(By.XPath(".//h3[@class='modal-title']"), 2);
-
-			if (popUpHeading == null)
-			{
-				Report.Info("Failed to find heading");
-				Report.Screenshot();
-				return "";
-			}
-			Report.Info("Information Found: " + popUpHeading.Text);
-			return popUpHeading.Text;
-		}
-	}
 }

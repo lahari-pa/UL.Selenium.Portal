@@ -8,6 +8,7 @@
 @LandingPage
 @PaymentMethods
 @Freshdesk
+@RetailPartners
 @run_MyAccount
 Feature: MyAccount
 
@@ -160,7 +161,7 @@ Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
 		| British Columbia | BC-1-1        |
 		| Saskatchewan     | SA-1-1        |
 	And In Stewardship table I click: Cancel
-	And In Stewardship number popup body text should be: If you cancel, any changes will be lost. Continue?
-	And In Stewardship number popup heading should be: Are you sure you wish to cancel?
-	And In Stewardship number popup I Click: Yes
+	And I confirm the pop up shows the heading: Are you sure you wish to cancel?
+	And I confirm that I see the following text in the modal window popup: If you cancel, any changes will be lost. Continue?
+	And in the modal dialog I click Yes
 	And I confirm that I do not see any stewardship information

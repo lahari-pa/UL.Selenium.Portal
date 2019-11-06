@@ -1284,12 +1284,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			GeneralUtilities.ScrollToBottomOfPage();
+			var modaldialog = new ModalDialog();
 			var mystwdinfo = new MyAccount_CompanyInfo();
-			var clearstwdpopup = new ClearStewardshipNotification();
 			Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
 			GeneralUtilities.Wait_for_load_finish();
 			Report.IsTrue(mystwdinfo.NoStewardshipCheckbox_click(), "failed to click checkbox", "successfully clicked checkbox");
-			Report.IsTrue(clearstwdpopup.ClickClearStewardshipOption("Yes"), "failed to click Yes", "successfully clicked Yes");
+			Report.IsTrue(modaldialog.Click_Yes(), "failed to click Yes", "successfully clicked Yes");
+
 			Report.IsTrue(mystwdinfo.StewardshipSaveOrCancel_Click("Save"), "failed to click save", "successfully clicked save");
 			GeneralUtilities.Wait_for_load_finish();
 		}
@@ -1403,60 +1404,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.ScrollToBottomOfPage();
 				var mystwdinfo = new MyAccount_CompanyInfo();
 				Report.IsTrue(mystwdinfo.StewardshipSaveOrCancel_Click(option), "failed to click option", "successfully clicked option");
-				GeneralUtilities.Wait_for_load_finish();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"In Stewardship number popup body text should be: (.*)")]
-		public void StewardshipNumberPopupBodyText(string option)
-		{
-			try
-			{
-				GeneralUtilities.ScrollToBottomOfPage();
-				var mystwdinfo = new MyAccount_CompanyInfo();
-				var clearstwdpopup = new ClearStewardshipNotification();
-				Report.IsTrue(clearstwdpopup.Get_PopupBodyText().Contains(option), "failed to find body text", "successfully found body text");
-				GeneralUtilities.Wait_for_load_finish();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"In Stewardship number popup heading should be: (.*)")]
-		public void StewardshipNumberPopupHeading(string option)
-		{
-			try
-			{
-				GeneralUtilities.ScrollToBottomOfPage();
-				var mystwdinfo = new MyAccount_CompanyInfo();
-				var clearstwdpopup = new ClearStewardshipNotification();
-				Report.IsTrue(clearstwdpopup.Get_Popupheading().Contains(option), "failed to find heading", "successfully found heading");
-				GeneralUtilities.Wait_for_load_finish();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"In Stewardship number popup I Click: (.*)")]
-		public void StewardshipNumberPopupYesNo(string option)
-		{
-			try
-			{
-				GeneralUtilities.ScrollToBottomOfPage();
-				var mystwdinfo = new MyAccount_CompanyInfo();
-				var clearstwdpopup = new ClearStewardshipNotification();
-				Report.IsTrue(clearstwdpopup.ClickClearStewardshipOption(option), "failed to click option", "successfully clicked option");
 				GeneralUtilities.Wait_for_load_finish();
 			}
 			catch (Exception ex)
