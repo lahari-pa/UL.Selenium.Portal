@@ -522,6 +522,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool DataTierPresent(string tierName)
+		{
+			IList<IWebElement> dataConsentRows = this.DataConsentTiersTable()?.FindElements(By.XPath(".//tbody//tr"), 2);
+			IWebElement correctRow = dataConsentRows?.FirstOrDefault(x => x.FindElement(By.XPath(".//td[1]"), 2).Text.StartsWith(tierName));
+			if (correctRow == null)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public List<string> ExpectedCVSDataTiers()
+		{			
+			var expectedCVSTiers = new List<string>();
+			expectedCVSTiers.Add("Tier 1: Regulatory Support");
+			expectedCVSTiers.Add("Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports");
+			expectedCVSTiers.Add("Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency");
+			expectedCVSTiers.Add("Tier 4.1: Publicly Disclose Supplemental Reports");			
+			return expectedCVSTiers;
+		}
+
+		
 	}
 
 	public class DataEntryNotification : SeleniumBaseObject

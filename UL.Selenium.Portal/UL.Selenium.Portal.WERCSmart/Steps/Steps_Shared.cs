@@ -8896,5 +8896,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
+
+
 	}
 }

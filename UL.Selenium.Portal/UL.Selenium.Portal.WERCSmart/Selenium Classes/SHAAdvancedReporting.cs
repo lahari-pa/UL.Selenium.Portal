@@ -221,6 +221,64 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 		}
+
+		public bool EnterWPSID(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement startDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			if (startDateField == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			startDateField.JsEnterText(value);
+			Delay.Seconds(1);
+			Report.Screenshot();
+			bool matching = false;
+
+			if (startDateField.GetValue() == value)
+			{
+				matching = true;
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return matching;
+
+		}
+
+		public bool ChooseRetailer(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			//IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//span[text()='Retailer']/ancestor::td/following-sibling::td//div//select"), 2);
+			if (retailerOption == null)
+			{
+				Report.Info("Failed to select Retailer from the Retialer Options drop down");
+				return false;
+			}
+			else
+			{
+				
+				retailerOption.Select(value);				
+				return retailerOption.SelectedOption() == value;
+			}
+
+
+
+
+		}
+		public IWebElement CloseButton => this.FindElement(By.XPath(".//button//span[text()='Close']"), 2);
+		
+		
+
+
+
+
 	}
 
 	class AdvancedReportingDateForm : SeleniumBaseObject

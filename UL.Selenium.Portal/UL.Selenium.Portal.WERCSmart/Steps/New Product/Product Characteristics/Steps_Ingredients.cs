@@ -797,5 +797,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"On the Ingredients page for the Ingredient: (.*) I add Ingredient Type: (.*) and Functional Purpose:")]
+		public void OnTheIngredientsPageSelectTypeAndPurpose(string ingredientName, string ingredientType, Table table)
+		{
+			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
+			Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, table), "Failed to Select The Functional Purposes", "Successfully selected the Functional purposes");
+
+		}
+
+
+
+		
+
 	}
 }
