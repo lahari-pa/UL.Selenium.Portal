@@ -473,7 +473,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 				}
 				// Avoiding null reference exception on .GetValue() - "Loading more results" row at the bottom (no span with component-name)
-				IEnumerable<IWebElement> matchingNameResults = results.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='component-name']"), 2).Text.Trim() == ingredient.ComponentName.Trim());
+				IEnumerable<IWebElement> matchingNameResults = results.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='component-name']"), 2).Text.Trim().Contains(ingredient.ComponentName.Trim()));
 				if (!matchingNameResults.Any())
 				{
 					return false;
@@ -891,7 +891,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool IngredientMatchesFirstOption(string inputOption)
 		{
 			IWebElement resultMatch;
-			IList < IWebElement > results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+			IList<IWebElement> results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 			if (!results.Any())
 			{
 				Report.Info("No results were returned on search");
@@ -920,8 +920,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			string firstOption = resultMatch.FindElement(By.XPath(".//span[@class='component-name']"), 2)?.Text;
 			Report.Info($"First option was {firstOption}");
 			Report.Info($"Input option was {inputOption}");
-			
-			if(firstOption==inputOption)
+
+			if (firstOption == inputOption)
 			{
 				Report.Success("The first option matched the input option");
 				return true;
@@ -932,7 +932,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
-			
+
 
 		}
 

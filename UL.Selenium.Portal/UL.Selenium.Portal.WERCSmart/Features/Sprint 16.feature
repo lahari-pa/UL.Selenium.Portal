@@ -18,6 +18,7 @@
 @MyIngredients
 @UPC
 @SHA
+@FileOps
 @ForwardProductRegistration
 @ProductSetUp
 @run_Sprint16
@@ -148,78 +149,79 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 	Then in the Comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Suppository, Medicinal
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58605
+
 #Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC Error Details
 #	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 #	And I click the Supplier Reports link in the expanded navigation side menu
 #	Then Under the Supplier Reports menu I choose: UPC Error Details
-
-@ScenarioId:5978
-Scenario: [98534] Advanced Reporting - Registrations Published report -
-	#Update 98534 in TFS
+#Incomplete: waiting for bug 114335 to resolve to complete.
+@tfs_design
+@ScenarioId:5961
+Scenario: [78452] Retailer Products in Recertification Report
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
-	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
-	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And In SHA Manager - Select Actions - Advanced Reporting
+	And In the Advanced Reporting popup I select report Retailer Products in Recertification
+	And In the Advanced Reporting Retailer Products in Recertification report dropdown I select retailer: Wal-Mart/SAM'S CLUB
+	And In the Advanced Reporting Retailer Products in Recertification report dropdown I click submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
-	Given I confirm that an excel file is produced called Product Registrations Published.xlsx and save as 98534
-	Then I confirm that the excel file saved as: 98534 contains the following columns:
+	Then I confirm that an excel file is produced called Retailer Products in Recertification.xls and save as excel78452
+	And I confirm that the excel file saved as: excel78452 contains the following columns:
+		| Column               |
+		| WPSID                |
+		| Product Name         |
+		| Supplier             |
+		| Recertification Date |
+	And I save the information for the first record in Retailer Product in Recert excel spreadsheet saved as: excel78452 as: TestCase78452 and ProdInfo78452
+	And I close the Advanced Reporting popup
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProdInfo78452)
+	And I confirm that the list of retailers associated with product ProdInfo78452 includes retailer WM
+	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProdInfo78452
+
+#Incomplete: waiting for bug 111856 to complete.
+@tfs_design
+@ScenarioId:5974
+Scenario: [87182] 3rd Party Formula Use in Registrations
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I enter text: WPS in the component search box
+	And I select the component search result with CAS matching text: WPS and save ingredient as: Ingredient87182
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And In SHA Manager - Select Actions - Advanced Reporting
+	And In the Advanced Reporting popup I select report 3rd Party Formula Use in Registrations
+	And In the 3rd Party Formula Use in Registrations text box I enter the CAS Number without the WPS for ingredient: Ingredient87182
+	And In the Advanced Reporting 3rd Party Formula Use in Registrations report I click submit
+	Then I confirm that an excel file is produced called 3rd Party Formula Use in Registrations.xls and save as excel87182
+	And I confirm that the excel file saved as: excel87182 contains the following columns:
 		| Column              |
 		| WPSID               |
-		| Product Name        |
-		| WMDRUM              |
-		| WMCAD               |
-		| WMBC                |
-		| PYST                |
-		| PYSTM               |
-		| FPF                 |
-		| PH                  |
-		| RU                  |
-		| EPAN                |
-		| CAWC                |
-		| WSWC                |
-		| UNM                 |
-		| HCM                 |
-		| PSNDWM              |
-		| HCDWM               |
-		| DVID                |
-		| PSNV                |
-		| HCW                 |
-		| UNIFFC              |
-		| BATT                |
-		| BATTT               |
-		| CHEMICAL            |
-		| KIT                 |
-		| OTC                 |
-		| TGWAST              |
-		| MPIND               |
-		| DOTPG               |
-		| DERGN               |
-		| INTFC               |
-		| CASEC               |
-		| CASECD              |
-		| DOTBMP              |
-		| IMDGBMP             |
-		| CATEST              |
-		| WATEST              |
-		| CNTXT               |
+		| Supplier Name       |
+		| Contact Email       |
+		| Last Order Date     |
 		| Last Published Date |
-		| Published By        |
-		| Recert              |
-		| Product_status      |
-		| GHS                 |
-		| ALL                 |
-		| BATYPE              |
-		| LBAT                |
-		| BATTPACK            |
-		| BATTWT              |
-		| BATTLIGM            |
-		| BATCT               |
-		| CELLNUM             |
-		| BATTNUM             |
-		| NUMB                |
-	Then I delete the Advanced Report file saved as 98534
+		| Status              |
+	And I save the information for the first record in 3rd Party Formula Use in Registrations excel spreadsheet saved as: excel87182 as: TestCase87182 and ProdInfo87182
+	And I close the Advanced Reporting popup
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProdInfo87182)
 
-@ScenarioId:5979
+@ScenarioId:5975
+Scenario: [71099] Advanced Reporting - Column Sorting
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And In SHA Manager - Select Actions - Advanced Reporting
+	And I confirm that the Report Names are listed in abc order
+	And I click on the Report Name column
+	And I confirm that the Report Names are listed in cba order
+	And I confirm that the down arrow next to Report Name is active
+	And I click on the Report Name column
+	And I confirm that the Report Names are listed in abc order
+	And I confirm that the up arrow next to Report Name is active
+	And I click on the Report Description column
+	And I confirm that the report descriptions are listed in cba order
+	And I confirm that the up arrow next to Report Description is active
+	And I close the Advanced Reporting popup
 Scenario: [96172] Data Quality Review for Walmart
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA

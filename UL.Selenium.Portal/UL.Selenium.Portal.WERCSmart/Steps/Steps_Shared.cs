@@ -3828,11 +3828,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click Menu: 'My Wercs' and Submenu: 'SHA'");
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			var thisStudioShaManager = new StudioSHAManager();
+			Delay.Seconds(5);
+			Report.IsTrue(thisStudioShaManager.SwitchToFrame(), "Failed to switch to IFrame", ShowSuccessScreenshot: false);
+			Report.IsTrue(thisStudioShaManager.Wait_For_Loading_Finish(60), "Loading did not finish", ShowSuccessScreenshot: false);
 			Report.Info("I confirm the product list is loaded");
 			Report.Info("Waiting for product list to be loaded....");
-			Delay.Seconds(1);
-			Report.IsTrue(thisStudioShaManager.WaitForProductList(120), "Product list is not showing",
-				"Product list is showing");
+			Report.IsTrue(thisStudioShaManager.WaitForProductList(30), "Product list is not showing",
+				"Product list is showing", ShowSuccessScreenshot: false);
 		}
 
 		[StepDefinition(@"I call Shared Step 59728 \(Go to Manage Global Messages\)")]
@@ -4086,10 +4088,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("Beginning shared step: 49841");
 			TestReport.StartStep("I set the status filter to All");
 			var myStudioShaManager = new StudioSHAManager();
-			myStudioShaManager.WaitForProductList(60);
+			//myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
-			myStudioShaManager.WaitForProductList(60);
+			//Report.IsTrue(myStudioShaManager.WaitForProductList(60), "Product list was not loaded", "Product list loaded", ShowSuccessScreenshot: false);
 			Report.Info("Getting saved product: " + savedAs);
 			if (!Context.Contains(savedAs))
 			{
@@ -5418,9 +5420,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.");
 			newProductSteps.CheckDisplayedSections("only see", sections);
 			TestReport.StartStep(
-				"I select the No button for the 'Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.' question");
+				"I select the No button for the 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' question");
 			newProductSteps.SetTheSectionOptionTo(
-				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"Product is shipped directly by supplier to the consumer.",
 				"No");
 			TestReport.StartStep("I click continue");
 			newProductSteps.ClickContinue();
@@ -7579,6 +7581,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(
+					@"I call Shared Step 62681 - Additional Product Information - Canada, No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
+		public void
+					ThenICallSharedStep62681AdditionalProductInformation_CanadaNoDSVNoPLPNoGNFRContinue_HappyPath()
+		{
+			var MyNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns",
+				"No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
 		[StepDefinition(@"I call Shared Step 94674 \(Additional Product Information - RU Wine\)")]
 		public void CallSharedStep9674_AdditionalProductInformation_RuWine()
 		{
@@ -8895,6 +8921,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 85328 \(Login to WERCSmart - Canada - Address \(Yes\), Packaging \(Yes\), Stewardship \(Full\)\)")]
+		public void Shared85328()
+		{
+			new GlobalSteps().ILogInWithTheAccountSavedInTrevorAs("CanadaHasAllData");
+		}
+
+		[StepDefinition(@"I call Shared Step 86824 \(Forwarding - Select Existing UPC, Click Continue, No error for Package type\)")]
+		public void Shared86824()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
+			new StepsForwardProductRegistration().SelectFirstUPC();
+			TestReport.StartStep("I click continue");
+			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
+		}
+
+		[StepDefinition(@"I save product (.*) to context as (.*)")]
+		public void ISaveProductToContextAs(string product, string savedAs)
+		{
+			string name = "Chalk";
+			string id = product;
+
+			var info = new ProductInformation {
+				Name = name,
+				Id = id
+			};
+
+			Context.AddToContext(savedAs, info);
 		}
 
 
