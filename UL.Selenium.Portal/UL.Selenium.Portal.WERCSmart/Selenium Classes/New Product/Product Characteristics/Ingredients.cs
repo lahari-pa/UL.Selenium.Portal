@@ -962,7 +962,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement functionalPurposeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'functionalPurpose')]"), 2);
 			if (functionalPurposeBox == null)
 			{
-				Report.Failure("Could not find the Functional Purpose Input Box");
+				Report.Info("Could not find the Functional Purpose Input Box");
 				return false;
 			}
 			bool selectedOptionSuccessfull = true;			
@@ -987,7 +987,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 					if (!allOptionsStr.Any())
 					{
-						Report.Failure("Could not find any Functional purpose options to select");
+						Report.Info("Could not find any Functional purpose options to select");
 						return false;
 					}
 					foreach(var option in allOptionsStr)
@@ -1002,11 +1002,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						functionalPurposeBox.Select(option);
 						if (currentlySelectedOptionsStr.Contains("×" + option))
 						{
-							Report.Success($"The correct Purpose was selectd.");
+							Report.Info($"The correct Purpose was selectd.");
 						}
 						else
 						{
-							Report.Failure("Failed to select the correct Purpose");
+							Report.Info("Failed to select the correct Purpose");
 							selectedOptionSuccessfull = false;
 						}
 
@@ -1029,11 +1029,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if( selectedOptionsStr.Contains("×"+optionToSelect))
 				{
-					Report.Success($"The correct Purpose was selectd.");
+					Report.Info($"The correct Purpose was selected.");
 				}
 				else
 				{
-					Report.Failure("Failed to select the correct Purpose");
+					Report.Info("Failed to select the correct Purpose");
 					selectedOptionSuccessfull = false;
 				}	
 				
