@@ -20,7 +20,6 @@ Feature: Kit Direct Ship Vendor
 # Waiting for this test to be finished ^^^
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-@ScenarioId:6005
 Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru to Submitted status in SHA
 	#Given I For this test case you will need two input products in completed status which have SOLD set to US only and make sure to add Walmart as the retailer for these products.  Use the test case 75335 to create these products - test case is linked to this one.Note: these input products do not have to be direct ship vendor products
 	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
@@ -52,7 +51,7 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77862)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77862 and its status is: Submitted
-	And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
+	And I Confirm the Product ID: saved as TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
 
 @ScenarioId:5943
 Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to Submitted
@@ -68,7 +67,7 @@ Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to 
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit
-	And I call Shared Step 77883 (Additional Product Information - Kit flow - US only, Direct Ship (No), Continue)
+	Given I call Shared Step 60648 (Additional Product Information - US, No (Direct Ship), No (PL), No (GNFR))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	#And I In the shared step below add the two completed products that you are working with
 	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 77837_KitProduct1 and product 2: 77837_KitProduct2)
@@ -86,7 +85,7 @@ Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to 
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77837)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77837 and its status is: Submitted
-	And I Confirm the Product ID: TestCase77837 is not highlited yellow indicating that this is not an e-comm/direct ship product
+	And I Confirm the Product ID: saved as TestCase77837 is not highlited yellow indicating that this is not an e-comm/direct ship product
 
 # Assigned to Barrett, Beverly
 # Created by Barrett, Beverly
