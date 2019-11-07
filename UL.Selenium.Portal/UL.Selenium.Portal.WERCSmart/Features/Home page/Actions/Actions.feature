@@ -239,7 +239,6 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 	Then the WERCSmart homepage should load
 	#Then create a cleaning product with functional and ingredient types	
 	#need to add CA cleaning qs and ingredients page entry into below step
-	#add 3 ingredients, one with just 1 , another with more than 1, and one with all selected (then test all 3 in summary page)
 	Then I create a CA Cleaning Compliant product, select ingredient type and functional purpose then save it as: TestCase114944 and progress it to submitted
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -251,14 +250,21 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 	| Heading            |
 	| Ingredient Type    |
 	| Functional Purpose |
-	Then I Check that the Ingredients table on the Summary page for the ingredient: Formaldehyde contains the Ingredient Type: Fragrance
-	Then I Check that the Ingredients table on the Summary page for the ingredient: Water contains the Ingredient Type: Intentionally Added
-	Then I Check that the Ingredients table on the Summary page for the ingredient: Sodium chloride contains the Ingredient Type: Non-functional Byproduct
-	Then I Check that the Ingredients table on the Summary page for the ingredient: Butane contains the Ingredient Type: Non-functional Contaminant	
-	Then I Check that the Ingredients table on the Summary page for the ingredient: Formaldehyde contains only the following Functional Purposes saved as: FunctionalPurposesList
-	Then I Check that the Ingredients table on the Summary page for the ingredient: Water contains only the following Functional Purposes saved as: WaterFunctionalPurposesList
-	Then I Check that the Ingredients table on the Summary page for the ingredient: Sodium chloride contains only the following Functional Purposes saved as: Sodium chlorideFunctionalPurposesList
-	Then I Check that the Ingredients table on the Summary page for the ingredient: Butane contains only the following Functional Purposes saved as: ButaneFunctionalPurposesList
+	Then For the following ingredients I check that the Ingredients table on the summary page contains only the Ingredient Types and Functional Purposes listed:
+	| Ingredient      | Ingredient Type            | Functional Purpose                    |
+	| Formaldehyde    | Fragrance                  | FormaldehydeFunctionalPurposesList    |
+	| Water           | Intentionally Added        | WaterFunctionalPurposesList           |
+	| Sodium chloride | Non-functional Byproduct   | Sodium chlorideFunctionalPurposesList |
+	| Butane          | Non-functional Contaminant | ButaneFunctionalPurposesList          |
+
+	#Then I Check that the Ingredients table on the Summary page for the ingredient: Formaldehyde contains the Ingredient Type: Fragrance
+	#Then I Check that the Ingredients table on the Summary page for the ingredient: Water contains the Ingredient Type: Intentionally Added
+	#Then I Check that the Ingredients table on the Summary page for the ingredient: Sodium chloride contains the Ingredient Type: Non-functional Byproduct
+	#Then I Check that the Ingredients table on the Summary page for the ingredient: Butane contains the Ingredient Type: Non-functional Contaminant	
+	#Then I Check that the Ingredients table on the Summary page for the ingredient: Formaldehyde contains only the following Functional Purposes saved as: FormaldehydeFunctionalPurposesList
+	#Then I Check that the Ingredients table on the Summary page for the ingredient: Water contains only the following Functional Purposes saved as: WaterFunctionalPurposesList
+	#Then I Check that the Ingredients table on the Summary page for the ingredient: Sodium chloride contains only the following Functional Purposes saved as: Sodium chlorideFunctionalPurposesList
+	#Then I Check that the Ingredients table on the Summary page for the ingredient: Butane contains only the following Functional Purposes saved as: ButaneFunctionalPurposesList
 	
 	
 	#check for product saved as: that the functional (from table) are listed
