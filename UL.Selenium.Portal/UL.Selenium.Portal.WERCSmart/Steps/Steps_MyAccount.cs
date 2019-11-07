@@ -1381,6 +1381,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I Create new users in the My Account page via the user Grid until there are atleast: (.*) pages present")]
+		public void ICreateXNewUsersInTheMyAccountPageViaTheUserGrid(int noPages)
+		{
+			
+			var myAccount = new MyAccount();
+			Report.Info($"There are currently a total of { myAccount.GetHighestPageNo()}");
+			if (myAccount.GetHighestPageNo()< noPages)
+			{
+				while (myAccount.GetHighestPageNo()< noPages)
+				{
+					new Steps_Shared().GivenICallSharedStepCreateNewUserViaUserGrid();
+				}
+				Report.IsTrue(myAccount.GetHighestPageNo() >= noPages, "The total number of pages was not atleast 2", "The total number of pages was atleast 2");
+				
+			}
+			else
+			{
+				Report.Success("The Current Number of total pages was atleast 2, no new users where created.");
+			}
+
+		}
+		
+
 
 
 

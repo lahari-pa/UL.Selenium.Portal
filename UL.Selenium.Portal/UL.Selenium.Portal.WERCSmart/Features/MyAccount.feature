@@ -68,6 +68,7 @@ Scenario: [65887] Pagination
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I navigate to the MyAccount page
+	Then I Create new users in the My Account page via the user Grid until there are atleast: 2 pages present
 	Then The My Account user grid is currently on page number: 1
 	Given I click next in the My Account user grid
 	Then The My Account user grid is currently on page number: 2
