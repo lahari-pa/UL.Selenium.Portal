@@ -1,4 +1,5 @@
 @Shared
+@NewProduct
 @LandingPage
 @Login
 @Homepage
@@ -166,7 +167,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Dupe UPC tool, Creating product with one dupe
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	Then in the UPC Window, I should see the Universal Product Code (UPC) Page
+	Then I should see the Universal Product Code (UPC) Page
 	Given I click the 'Add UPC' button
 	Given I add the following into the UPC Fields
 		| UPC Number                            | Container Type    | Size | DPCI | Quantity |
@@ -180,6 +181,58 @@ Given I click 'Select all' under Destination Retailers in the UPC page
 	Given I click continue
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I navigate to the home page
+
+Scenario: [NOTINCLUDEDGENERALTEST] ADAPTED VERSION OF Lithium Battery UN38.3 Regulatory Documents to Provide FOR ADDING COLOUR OF INPUT FIELDS CHECK
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Primary/Metal Batteries
+	Then I save the product information as: TestCase104222
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Lithium hydroxide  | 6.7     | false               | false       |            |
+		| Graphite           | 33.2    | false               | false       |            |
+		| Ethylene carbonate | 60.1    | false               | false       |            |
+	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+	Given I call Shared Step 73282 (Lithium Battery Characteristics - Weight in Grams)
+	Given I call Shared Step 60096 (Lithium Battery Transportation)
+	Then I should see the Retailer Page Page for the New Product
+	And The selected retailers on the Retailer page should be:
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+	Given I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'
+	Given in the Regulatory Documents to Provide page I click Continue
+
+Scenario: [NOTINCLUDEDGENERALTEST] Lithium Battery Product-no regularotry documents provided 
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC60018
+	Given I delete all products with UPC Number: saved as UPC60018
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium ion batteries
+	Then I save the product information as: TestCase60018
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Lithium hydroxide  | 6.7     | false               | false       |            |
+		| Graphite           | 33.2    | false               | false       |            |
+		| Ethylene carbonate | 60.1    | false               | false       |            |
+	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+	Given I call Shared Step 54799 (Lithium Battery Characteristics - any data - Happy path)
+	Given I call Shared Step 60096 (Lithium Battery Transportation)
+	Then I should see the Retailer Page Page for the New Product
+	And The selected retailers on the Retailer page should be:
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+	Given I click continue
+	Then If the UPCs Warning popup is displayed I click OK
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Red
+	And I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Green
 
 
 

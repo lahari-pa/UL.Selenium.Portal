@@ -835,21 +835,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[Then(@"I confirm the pop up shows the Supplier ID heading and data entry field")]
+		[StepDefinition(@"I confirm the pop up shows the Supplier ID heading and data entry field")]
 		public void ThenIConfirmThePopUpShowsTheSupplierIDHeadingAndDataEntryField()
 		{
 			Report.IsTrue(new AddNewSupplier().EnterSupplierIDExists(), "Supplier ID field does not exist as expected",
 				"Supplier ID field exists as expected");
 		}
 
-		[Then(@"I confirm the pop up shows the Company or Brand Name heading and data entry field")]
+		[StepDefinition(@"I confirm the pop up shows the Company or Brand Name heading and data entry field")]
 		public void ThenIConfirmThePopUpShowsTheCompanyOrBrandNameHeadingAndDataEntryField()
 		{
 			Report.IsTrue(new AddNewSupplier().EnterCompanyOrBrandNameExists(), "Company or brand name field does not exist as expected",
 				"Company or brand name exists as expected");
 		}
 
-		[Then(@"I confirm the pop up shows the Is Default Heading and check box")]
+		[StepDefinition(@"I confirm the pop up shows the Is Default Heading and check box")]
 		public void ThenIConfirmThePopUpShowsTheIsDefaultHeadingAndCheckBox()
 		{
 			Report.IsTrue(new AddNewSupplier().IsDefaultExists(), "Is Default field does not exist as expected",
@@ -857,7 +857,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[Then(@"I confirm the pop up shows a Save button")]
+		[StepDefinition(@"I confirm the pop up shows a Save button")]
 		public void ThenIConfirmThePopUpShowsASaveButton()
 		{
 			Report.IsTrue(new AddNewSupplier().SaveButtonExists(), "Save button does not exist as expected",
@@ -871,22 +871,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Cancel button exists as expected");
 		}
 
-		[StepDefinition(@"in the modal dialog I click (cancel|save)")]
-		public void GivenInTheModalDialogIClickButton(string cancelOrSave)
+		[StepDefinition(@"in the modal dialog I click (cancel|save|Yes|No)")]
+		public void GivenInTheModalDialogIClickButton(string type)
 		{
-			if (cancelOrSave == "cancel")
+			//if (cancelOrSave == "cancel")
+			//{
+			//	Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
+			//		"Successfully clicked cancel", false, false);
+			//}
+			//else
+			//{
+			//	Report.IsTrue(new ModalDialog().ClickSave(), "Failed to click save button",
+			//		"Successfully clicked save");
+			//}
+			switch (type)
 			{
-				Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
-					"Successfully clicked cancel", false, false);
-			}
-			else
-			{
-				Report.IsTrue(new ModalDialog().ClickSave(), "Failed to click save button",
-					"Successfully clicked save");
+				case ("cancel"):
+					Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
+						"Successfully clicked cancel", false, false);
+					break;
+				case ("save"):
+					Report.IsTrue(new ModalDialog().ClickSave(), "Failed to click save button",
+						"Successfully clicked save", false, false);
+					break;
+				case ("Yes"):
+					Report.IsTrue(new ModalDialog().Click_Yes(), "Failed to click yes button",
+						"Successfully clicked yes", false, false);
+					break;
+				case ("No"):
+					Report.IsTrue(new ModalDialog().Click_No(), "Failed to click no button",
+						"Successfully no cancel", false, false);
+					break;
+				default:
+					Report.Failure("Invalid input parameter used! Valid options:'cancel|save|Yes|No'");
+					return;
 			}
 		}
 
-		[Then(@"I confirm the Add New Supplier ID pop up closes")]
+		[StepDefinition(@"I confirm the Add New Supplier ID pop up closes")]
 		public void ThenIConfirmTheAddNewSupplierIDPopUpCloses()
 		{
 			Delay.Seconds(1);
@@ -1038,7 +1060,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I confirm that the excel file saved as: (.*) in column: (.*) there are no numbers")]
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) in column: (.*) there are no numbers")]
 		public void ThenIConfirmThatTheExcelFileSavedAsInColumnThereAreNoNumbers(string savedAs, string columnName)
 		{
 			object File = Context.GetFromContext(savedAs);
@@ -1261,7 +1283,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// Requires a table with columns: | Supplier ID | Company or Brand Name |
 		/// Company or Brand Name may use 'saved as: (.*)' where (.*) is the Context savedAs string
 		/// </summary>
-		[Then(@"I confirm that in the Supplier IDS list the following row exists")]
+		[StepDefinition(@"I confirm that in the Supplier IDS list the following row exists")]
 		public void ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(Table table)
 		{
 			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();

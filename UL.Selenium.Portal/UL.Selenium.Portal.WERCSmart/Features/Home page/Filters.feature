@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @wercsmart
 @run_Filters
 @Login
@@ -40,28 +40,28 @@ Scenario: [68388] More Filters - Brand
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase68388
 
 @morefilters
+@ScenarioId:5956
 Scenario: [56829] More Filters
-	# Consider creating the test product from scratch every time? nb kit 13 58753
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-		Given I search for product by name: Kit Product 56829 and save the first ID as: Kit_56829
+	Given I search for product by name: Kit Product 56829 and save the first grid item as: Kit_56829
 	And I create a Kit product and save details as: Kit_56929
 	And I navigate to the landing page
 	And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-		And I should see an option for More Filters
+	And I should see an option for More Filters
 	Given I click More Filters in the products grid
-	Given I confirm the product exists with Product ID: <Kit_56829> and Name: Kit Product 56829
-	Given I enter combinations of More Filters and should see the product ID: <Kit_56829> only for the correct combinations
+	Given I confirm the product exists with Product ID: %Kit_56829% and Name: Kit Product 56829
+	Given I enter combinations of More Filters and should see the product ID: %Kit_56829% only for the correct combinations
 		| Filter              | Match               |
-		| UPC                 | <UPC_56829>         |
-		| Brand               | Test Brand          |
-		| Retailer            | Walmart/ SAM's Club |
+		| UPC                 | %UPC_56829%         |
+		| Brand               | TestBrand           |
+		| Retailer            | Wal-Mart/SAM'S CLUB |
 		| Additional Programs | Kit Registrations   |
 	Given I enter combinations of Status and More Filters and should see the product ID: <Kit_56829> only for the correct combinations
 		| Filter              | Match                  |
 		| Status              | Assessment in Progress |
-		| Brand               | Test Brand             |
-		| Retailer            | Walmart/ SAM's Club    |
+		| Brand               | TestBrand              |
+		| Retailer            | Wal-Mart/SAM'S CLUB    |
 		| Additional Programs | Kit Registrations      |
 	Given I click More Filters in the products grid
 	Then the 'More Filters' options are not displayed

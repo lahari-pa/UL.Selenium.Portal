@@ -193,7 +193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ProductIdField = product
 			};
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(selProdGrid.ProductsCount()> 0, "No products were returned for ID: '" + product + "'!", "Product was returned!");
+			Report.IsTrue(selProdGrid.ProductsCount() > 0, "No products were returned for ID: '" + product + "'!", "Product was returned!");
 		}
 
 
@@ -644,8 +644,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
 			Report.Info("Generated UPC No: " + uPCNo);
+			Delay.Seconds(2);
+
 		}
 
+		[StepDefinition(@"I generate (.*) random UPC numbers and save all to list named: (.*)")]
+		public void GivenIGenerateXRandomUPCNumbersAndSaveAs(int x, string savedAs)
+		{
+			var listOfUPCs = new List<string>();
+			for (int i = 0; i < x; i++)
+			{
+				string thisUPCName = savedAs + "_" + i.ToString();
+				this.GivenIGenerateARandomUPCNumberAndSaveAs(thisUPCName);
+				listOfUPCs.Add(thisUPCName);
+			}
+			Context.AddToContext(savedAs, listOfUPCs);
+		}
+
+		[StepDefinition(@"I delete all products in contextual list of UPCs: (.*)")]
+		public void IDeleteAllProductsInContextualListOfUPCs(string savedAs)
+		{
+			var listOfUPCs = (List<string>)Context.GetFromContext(savedAs);
+			foreach (var str in listOfUPCs)
+			{
+				this.DeleteAllProductsMatchingCriteria("UPC Number", (string)Context.GetFromContext(str));
+			}
+		}
 
 		[StepDefinition(@"I delete all products with (UPC Number): (.*)")]
 		public void DeleteAllProductsMatchingCriteria(string option, string value)
@@ -846,7 +870,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[Then(@"A Summary page should open in a new browser tab")]
+		[StepDefinition(@"A Summary page should open in a new browser tab")]
 		public void ThenASummaryPageShouldOpenInANewBrowserTab()
 		{
 			var OpenBrowsers =
@@ -876,7 +900,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[Then(@"I should not seen an Accept button")]
+		[StepDefinition(@"I should not seen an Accept button")]
 		public void ThenIShouldNotSeenAnAcceptButton()
 		{
 			var thisSummaryPage = new SummaryPage();
@@ -924,7 +948,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Current product count is: " + currentProductCount.ToString());
 		}
 
-		[Then(@"the number of items in the pie chart should be one less than the figure I saved")]
+		[StepDefinition(@"the number of items in the pie chart should be one less than the figure I saved")]
 		public void ThenTheNumberOfItemsInThePieChartShouldBeOneLessThanTheFigureISaved()
 		{
 			var myHomepage = new Homepage();
@@ -1013,13 +1037,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter combinations of More Filters and should see the product ID: (.*) only for the correct combinations")]
 		public void EnterCombinationsOfMoreFilters(string id, Table moreFilters)
 		{
-			if (Regex.IsMatch(id, "<(.*)>"))
+			if (Context.GetFromContextRegex(id, out var result))
 			{
-				var savedAs = Regex.Match(id, "<(.*)>").Groups[1].ToString();
-				if (Context.Contains(savedAs))
-				{
-					id = Context.GetFromContext(savedAs).ToString();
-				}
+				Report.Info("Getting ID from context: " + id);
+				id = result.ToString();
 			}
 			TestReport.UseSubSteps = true;
 			var selProductsGrid = new ProductsGrid();
@@ -1027,6 +1048,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var filters = new List<KeyValuePair<string, string>>();
 			foreach (TableRow row in moreFilters.Rows)
 			{
+				if (Context.GetFromContextRegex(row["Match"], out var matchResult))
+				{
+					row["Match"] = matchResult.ToString();
+				}
 				filters.Add(new KeyValuePair<string, string>(
 					row["Filter"],
 					row["Match"]));
@@ -1059,24 +1084,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							KeyValuePair<string, string> filter = filtersToDo[l];
 							string filterType = filter.Key;
 							List<string> options = new List<string>();
-							string upc = "";
+							string upc = filter.Value;
 							if (filterType == "UPC")
 							{
-								if (Regex.IsMatch(filter.Value, "<(.*)>"))
+								if (Context.GetFromContextRegex(filter.Value, out var upcResult))
 								{
-									var savedAsUpc = Regex.Match(filter.Value, "<(.*)>").Groups[1].ToString();
-									if (Context.Contains(savedAsUpc))
-									{
-										upc = Context.GetFromContext(savedAsUpc).ToString();
-									}
+									Report.Info("Getting UPC from context: " + upc);
+									upc = upcResult.ToString();
 								}
+								Report.Info("UPC: " + upc);
 								options.Add(upc);
 							}
 							else
 							{
 								options = selMoreFilters.Options(filterType);
 							}
-							//List<string> options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
 							string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 							switch (filterType)
 							{
@@ -1131,7 +1153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						KeyValuePair<string, string> filter = filtersToDo[l];
 						string filterType = filter.Key;
-						List<string> options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
+						List<string> options = filterType == "UPC" ? new List<string> { filter.Value } : selMoreFilters.Options(filterType);
 						string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 						switch (filterType)
 						{
@@ -1181,7 +1203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						KeyValuePair<string, string> filter = filters[l];
 						string filterType = filter.Key;
-						List<string> options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
+						List<string> options = filterType == "UPC" ? new List<string> { filter.Value } : selMoreFilters.Options(filterType);
 						string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 						switch (filterType)
 						{
@@ -1219,14 +1241,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the product exists with Product ID: (.*) and Name: (.*)")]
 		public void ProductExistsWithIDAndName(string id, string name)
 		{
-			if (Regex.IsMatch(id, "<(.*)>"))
+			if (Context.GetFromContextRegex(id, out var result))
 			{
-				var savedAs = Regex.Match(id, "<(.*)>").Groups[1].ToString();
-				if (Context.Contains(savedAs))
-				{
-					id = Context.GetFromContext(savedAs).ToString();
-				}
+				Report.Info("Getting ID from context: " + id);
+				id = result.ToString();
 			}
+			Report.Info("Product ID: " + id);
 			var selProdGrid = new ProductsGrid {
 				ProductIdField = id
 			};
@@ -2286,8 +2306,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				i++;
 			}
 
-		}		
+		}
 
-		
+
 	}
 }

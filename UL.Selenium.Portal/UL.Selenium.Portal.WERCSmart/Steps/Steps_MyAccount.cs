@@ -97,7 +97,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"I should see company username: (.*)")]
+		[StepDefinition(@"I should see company username: (.*)")]
 		public void ThenIShouldSeeCompanyUsername(string companyName)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see company username: " + companyName);
@@ -161,7 +161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[Then(@"In the User Grid the user saved as: (.*) has been replaced by: (.*)")]
+		[StepDefinition(@"In the User Grid the user saved as: (.*) has been replaced by: (.*)")]
 		public void ThenInTheUserGridTheSavedUserNameHasBeenReplacedBy(string savedAs, string replacedBy)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the User Grid the saved user name (" + savedAs + ") has been replaced by: " + replacedBy);
@@ -401,7 +401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 						Report.Info("Email Address = " + emailAddress);
 					}
-                    // adding this to allow checking for confirmation email to the new user
+					// adding this to allow checking for confirmation email to the new user
 					EmailFunctions.StoreCurrentInbox(emailAddress);
 					if (confirmEmail == "Saved")
 					{
@@ -1120,15 +1120,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In Stewardship table I select the following options: (.*)  and (.*) for the (.*) field")]
-		public void StewardshipInformation(string field, string options1, string options2, string option3)
+		[StepDefinition(@"In Stewardship table I select the following options for field: (.*) and stewardship as: (.*) and Issue date: (.*) and Expire Date: (.*)")]
+		public void StewardshipInformation(string field, string options1)
 		{
 			GeneralUtilities.ScrollToBottomOfPage();
 			var mystwdinfo = new MyAccount_CompanyInfo();
 			Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(mystwdinfo.EnterStewardshipInfo(field, options1, options2, option3), "failed to enter stewardship information", "successfully entered steward information");
-			Report.IsTrue(mystwdinfo.StewardshipSave_click(), "failed to click save", "successfully clicked save");
+			Report.IsTrue(mystwdinfo.EnterStewardshipInfo(field, options1), "failed to enter stewardship information", "successfully entered steward information");
+			Report.IsTrue(mystwdinfo.StewardshipSaveOrCancel_Click("Save"), "failed to click save", "successfully clicked save");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
@@ -1284,54 +1284,55 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			GeneralUtilities.ScrollToBottomOfPage();
+			var modaldialog = new ModalDialog();
 			var mystwdinfo = new MyAccount_CompanyInfo();
-			var clearstwdpopup = new ClearStewardshipNotification();
 			Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
 			GeneralUtilities.Wait_for_load_finish();
 			Report.IsTrue(mystwdinfo.NoStewardshipCheckbox_click(), "failed to click checkbox", "successfully clicked checkbox");
-			Report.IsTrue(clearstwdpopup.ClickClearStewardshipOption("Yes"), "failed to click Yes", "successfully clicked Yes");
-			Report.IsTrue(mystwdinfo.StewardshipSave_click(), "failed to click save", "successfully clicked save");
+			Report.IsTrue(modaldialog.Click_Yes(), "failed to click Yes", "successfully clicked Yes");
+
+			Report.IsTrue(mystwdinfo.StewardshipSaveOrCancel_Click("Save"), "failed to click save", "successfully clicked save");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-        /// <summary>
+		/// <summary>
 		/// Requires a string parameter saved to context as: CurrentEmail which is called in the add a new user step
 		/// </summary>
 		[StepDefinition(@"I confirm there was an email with title: (.*) sent to the new user and I click the link with text: (.*)")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount(string emailTitle, string linkText)
 		{
 			TestReport.UseSubSteps = true;
-            TestReport.StartStep("Checking an email has been sent to the new user with title: " + emailTitle);
+			TestReport.StartStep("Checking an email has been sent to the new user with title: " + emailTitle);
 			var emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
 			var email = Context.GetFromContext("CurrentEmail").ToString();
 			List<Email> differences = EmailFunctions.GetInboxDifferences(email);
-            Report.Info("Checking that email differences have been found...");
+			Report.Info("Checking that email differences have been found...");
 			if (differences.FirstOrDefault() == null)
 			{
 				Report.Error("No emails found");
 				return;
 			}
 			Report.Info("Emails have been found!");
-			Email matchingEmail = differences.FirstOrDefault(x => x.From !=null && x.From.FirstOrDefault()?.Address.ToLower() == emailFrom && x.Subject.Contains(emailTitle));
+			Email matchingEmail = differences.FirstOrDefault(x => x.From != null && x.From.FirstOrDefault()?.Address.ToLower() == emailFrom && x.Subject.Contains(emailTitle));
 			if (matchingEmail == null)
 			{
-                Report.Failure($"No matching email from: {emailFrom} with subject: {emailTitle} was found!");
-                return;
+				Report.Failure($"No matching email from: {emailFrom} with subject: {emailTitle} was found!");
+				return;
 			}
 			var links = matchingEmail.Html.Links;
-			if(links == null || !links.Any())
+			if (links == null || !links.Any())
 			{
 				Report.Failure("No links were found in the email!");
 				return;
 			}
-            var link = links.FirstOrDefault(x => x.Text.Contains(linkText))?.Href;
-            if (link == null)
-            {
-                Report.Failure("No link was found with text: " + linkText);
-                return;
-            }
+			var link = links.FirstOrDefault(x => x.Text.Contains(linkText))?.Href;
+			if (link == null)
+			{
+				Report.Failure("No link was found with text: " + linkText);
+				return;
+			}
 			Report.Info("Found a matching link in the email!");
-            TestReport.StartStep("Navigating to the link address");
+			TestReport.StartStep("Navigating to the link address");
 			SeleniumBrowser.Navigate(link);
 		}
 
@@ -1350,7 +1351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Confirm that you (See|Don't See) the user you just created in the grid")]
 		public void IConfirmThatYouSeeTheUserJustCreatedInGrid(string presence)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm that you "+presence+" the new user I just created is in the Gird");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm that you " + presence + " the new user I just created is in the Gird");
 			try
 			{
 				var selMyAccount = new MyAccount();
@@ -1361,7 +1362,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					userName = Context.ScenarioContext["CurrentUser"].ToString();
 				}
-				if (presence=="See")
+				if (presence == "See")
 				{
 					Report.IsTrue(selMyAccount.Is_User_In_Grid(userName), "The User just created was Not Found In the Grid", "The User just created was found in the Grid");
 				}
@@ -1369,10 +1370,59 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.IsFalse(selMyAccount.Is_User_In_Grid(userName), "The User just created was found in the Grid", "The User just created was Not Found In the Grid");
 				}
-				
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
-				
+		[StepDefinition(@"In Stewardship table click edit")]
+		public void StewardshipTableEditClick()
+		{
+			try
+			{
+				GeneralUtilities.ScrollToBottomOfPage();
+				var mystwdinfo = new MyAccount_CompanyInfo();
+				Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 
+		}
+
+		[StepDefinition(@"In Stewardship table I click: (.*)")]
+		public void StewardshipSaveorCancel(string option)
+		{
+			try
+			{
+				GeneralUtilities.ScrollToBottomOfPage();
+				var mystwdinfo = new MyAccount_CompanyInfo();
+				Report.IsTrue(mystwdinfo.StewardshipSaveOrCancel_Click(option), "failed to click option", "successfully clicked option");
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm that I do not see any stewardship information")]
+		public void NoStewardshipData()
+		{
+			try
+			{
+				GeneralUtilities.ScrollToBottomOfPage();
+				var mystwdinfo = new MyAccount_CompanyInfo();
+				var stwdinfo = mystwdinfo.StewardshipFieldsNoData();
+				Report.IsTrue(stwdinfo.FirstOrDefault().IsNullOrEmpty(),
+					"Can see Stewardship information", "Stewardship information is not available as expected");
 			}
 			catch (Exception ex)
 			{
@@ -1382,8 +1432,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-			
-
-
+		[StepDefinition(@"I add following stewardship information")]
+		public void AddStewardshipInformation(Table table)
+		{
+			try
+			{
+				GeneralUtilities.ScrollToBottomOfPage();
+				var mystwdinfo = new MyAccount_CompanyInfo();
+				//Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
+				GeneralUtilities.Wait_for_load_finish();
+				foreach (TableRow row in table.Rows)
+				{
+					Report.IsTrue(mystwdinfo.EnterStewardshipInfo(row["Province"], row["Stewardship"]), "failed to enter stewardship information", "successfully entered steward information");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 	}
 }

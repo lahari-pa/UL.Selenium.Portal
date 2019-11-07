@@ -985,6 +985,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					{
 						Report.Info("Problems with maximising");
 					}
+					Delay.Seconds(5);
 					if (!GeneralUtilities.StudioWaitForSpinner(120))
 					{
 						throw new Exception("Spinner is still showing");
@@ -2149,9 +2150,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"), 10);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 10);
 			if (base.Wait_for_load(30))
 			{
 				return true;

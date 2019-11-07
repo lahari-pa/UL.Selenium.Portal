@@ -704,7 +704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[When(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
-		[Then(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
+		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		public void ClickItemInNavigationPanel(string item)
@@ -990,12 +990,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the Home navigation icon and an alert appears")]
 		public void ThenIClickTheHomeNavigationIconAndAlertAppears()
 		{
-			
+
 				Report.Info("Navigating to the Home Page");
 				var selNav = new NavigationBar();
 				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!", false, false);
 				SeleniumBrowser.Alert.WaitForAlert(5);
-			
+
 		}
 
 		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes and no screenshot is taken")]
@@ -1005,7 +1005,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (!new InactivityPopup().WaitUntilDisplayed((expectedWait * 60) + (marginOfError * 60), out int actualWait))
 			{
 				Report.Failure($"The Inactivity popup did not load after {expectedWait + marginOfError} minutes!");
-				
+
 				return;
 			}
 			// check if pop up was displayed before 'expected wait - margin' (test lower limit)
@@ -1060,7 +1060,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure($"Failed to click the '{button}' button", false);
 			}
-			
+
 		}
 
 		[StepDefinition(@"I confirm the Inactivity pop is closed but dont take a screenshot")]
@@ -1092,7 +1092,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string actualID= new Homepage().GetAllAlertsAndGetAlertWithTextXAndReturnID(alertText);
 				Report.Info("Actual AlertID: " + actualID);
 				Report.Info("Expected AlertID: " + expxectedAlertID);
-				Report.IsTrue(actualID==expxectedAlertID, "The Alert ID was not as expected!", "The Alert ID was as expected!");							   		
+				Report.IsTrue(actualID==expxectedAlertID, "The Alert ID was not as expected!", "The Alert ID was as expected!");
 
 			}
 			catch (Exception ex)

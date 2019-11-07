@@ -17,7 +17,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	{
 		[StepDefinition(@"I click on the Forgot Your Password Link")]
 		[When(@"I click on the Forgot Your Password Link")]
-		[Then(@"I click on the Forgot Your Password Link")]
+		[StepDefinition(@"I click on the Forgot Your Password Link")]
 		[StepDefinition(@"I click on the Forgot Your Password Link")]
 		public void GivenIClickOnTheForgotYourPasswordLink()
 		{
