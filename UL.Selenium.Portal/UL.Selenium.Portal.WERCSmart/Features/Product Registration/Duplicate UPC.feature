@@ -295,7 +295,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	And I click Sample File link and verify the Upload UPC form and save it as test91100 with data:
+	And I click Sample File link and verify the Upload UPC form and save it as test91100
 		| UPC          | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   |
 		| 823973000000 | 1        | 11   | 1.22               | 11AB45          | 1001            | 1111            | A0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |
 		| 71617198008  | 2        | 22   | 2.33               | 12AB56          | 1002            | 2222            | B0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |
