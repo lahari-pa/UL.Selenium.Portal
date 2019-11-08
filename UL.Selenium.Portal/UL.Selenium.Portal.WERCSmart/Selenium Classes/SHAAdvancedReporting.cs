@@ -423,13 +423,81 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 		public IWebElement CloseButton => this.FindElement(By.XPath(".//button//span[text()='Close']"), 2);
-		
-		
+
+		public bool EnterUPCSize(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");			
+			IWebElement upcSizeField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//*[text()='UPC Size']/parent::td//following-sibling::td//input"), 2);
+			if (upcSizeField == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			upcSizeField.JsEnterText(value);
+			Delay.Seconds(1);
+			Report.Screenshot();
+			bool matching = false;
+
+			if (upcSizeField.GetValue() == value)
+			{
+				matching = true;
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return matching;
+
+		}
+
+		public bool ClickContainsAlcohol()
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement containsAlcoholBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//*[text()='Contains Alcohol']/parent::td//following-sibling::td//input"), 2);
+			if (containsAlcoholBox == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			bool selected=containsAlcoholBox.TryClick();
+			Delay.Seconds(1);
+			Report.Screenshot();			
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return selected;
+		}
+
+		public bool ClickIncludesWater()
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement containsWater = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//*[text()='Includes 7732-18-5 / Water']/parent::td//following-sibling::td//input"), 2);
+			if (containsWater == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			bool selected = containsWater.TryClick();
+			Delay.Seconds(1);
+			Report.Screenshot();
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return selected;
+		}
 
 
 
 
 	}
+
+	
+
 
 	class AdvancedReportingDateForm : SeleniumBaseObject
 	{
