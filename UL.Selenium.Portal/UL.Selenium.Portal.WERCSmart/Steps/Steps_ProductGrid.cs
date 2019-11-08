@@ -2354,6 +2354,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
+		[StepDefinition(@"In the Products Grid I delete All products")]
+		public void InTheProductsGridIDeleteAllProducts()
+		{
+			Report.IsTrue(new ProductsGrid().DeleteAllPresentRows(), "Failed to delete all products!", "All matching products deleted successfully!");
+		}
+
+		[StepDefinition(@"I navigate to the Homepage and then In the Products Grid I delete All products")]
+		public void INavigateToTheHomepageThenInTheProductsGridIDeleteAllProducts()
+		{
+
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
+			Report.IsTrue(new ProductsGrid().DeleteAllPresentRows(), "Failed to delete all products!", "All matching products deleted successfully!");
+		}
+
+
+
 
 
 	}

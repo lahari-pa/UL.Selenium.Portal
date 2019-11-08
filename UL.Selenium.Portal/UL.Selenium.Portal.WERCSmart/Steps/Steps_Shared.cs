@@ -8926,17 +8926,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 85328 \(Login to WERCSmart - Canada - Address \(Yes\), Packaging \(Yes\), Stewardship \(Full\)\)")]
 		public void Shared85328()
 		{
-            new GlobalSteps().ILogInWithTheAccountSavedInTrevorAs("CanadaHasAllData");
+			new GlobalSteps().ILogInWithTheAccountSavedInTrevorAs("CanadaHasAllData");
 		}
 
 		[StepDefinition(@"I call Shared Step 86824 \(Forwarding - Select Existing UPC, Click Continue, No error for Package type\)")]
 		public void Shared86824()
 		{
 			TestReport.UseSubSteps = true;
-            TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
+			TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
 			new StepsForwardProductRegistration().SelectFirstUPC();
-            TestReport.StartStep("I click continue");
+			TestReport.StartStep("I click continue");
 			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
 		}
+
+		[StepDefinition(@"I save product (.*) to context as (.*)")]
+		public void ISaveProductToContextAs(string product, string savedAs)
+		{
+			string name = "Chalk";
+			string id = product;
+
+			var info = new ProductInformation {
+				Name = name,
+				Id = id
+			};
+
+			Context.AddToContext(savedAs, info);
+		}
+
+
 	}
 }
