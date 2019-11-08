@@ -557,6 +557,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return this.containerElement.FindElement(By.XPath(".//input[@id='chkAllRetailers']"), 1).TryCheck();
 		}
 
+		public bool SelectAllCertifications()
+		{
+			bool checkTrue = true;
+			IList<IWebElement> listofCert = this.containerElement.FindElements(By.XPath(".//div[@data-bind='with: upc']//div//input"), 1);
+			foreach(var item in listofCert)
+			{
+				//IWebElement inputbox= item.FindElement(By.XPath(".//"))
+				bool clicked=item.TryClick();
+				string textTitle=item.Text;
+				if(!clicked)
+				{
+					checkTrue = false;
+					Report.Info($"Failed to check the certification with title: {textTitle}");
+				}
+				else
+				{
+					Report.Info($"Successfully checked the certification with title: {textTitle}");
+				}
+			}
+
+
+
+			return this.containerElement.FindElement(By.XPath(".//input[@id='chkAllRetailers']"), 1).TryCheck();
+		}
+
 		public bool UPCPackageTypeFieldExists()
 		{
 			try
@@ -681,7 +706,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
 				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
-				IWebElement upcNameField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Name')]/..//input"), 2);
+				IWebElement ProductNameOnlabel = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/..//input"), 2);
 
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
@@ -700,42 +725,48 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				}
 				upcNumberField.EnterText(info.UpcNumber);
-
-				if (upcNameField.Text.IsNullOrEmpty())
+				if (ProductNameOnlabel != null)
 				{
-					upcNameField.EnterText("UPCName PlaceHolder");
-					Report.Failure("The UPC Name Field was empty, entered PlaceHolder text");
-				}
-				else
-				{
-					Report.Info("The UPC Name Field was not empty, Checking for UPCName in the table");
-					if(!info.UPCName.IsNullOrEmpty())
+					if (ProductNameOnlabel.Text.IsNullOrEmpty())
 					{
-						if (info.UPCName.ToLower().Contains("saved as"))
-						{
-							try
-							{
-								string savedUPC = Context
-									.GetFromContext(info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
-									.ToString();
-								info.UPCName = savedUPC;
-							}
-							catch (Exception e)
-							{
-								Report.Info("Failed to find saved item in context: " + info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
-								throw;
-							}
-
-						}
-
-						upcNumberField.EnterText(info.UPCName);
+						ProductNameOnlabel.EnterText("UPCName PlaceHolder");
+						Report.Failure("The UPC Name Field was empty, entered PlaceHolder text");
 					}
 					else
 					{
-						Report.Info("UPC Name was not found in the table, leaving default UPC Name");
+						Report.Info("The Field was not empty, Checking for UPCName in the table");
+						if (!info.UPCName.IsNullOrEmpty())
+						{
+							if (info.UPCName.ToLower().Contains("saved as"))
+							{
+								try
+								{
+									string savedUPC = Context
+										.GetFromContext(info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+										.ToString();
+									info.UPCName = savedUPC;
+								}
+								catch (Exception e)
+								{
+									Report.Info("Failed to find saved item in context: " + info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+									throw;
+								}
+
+							}
+
+							upcNumberField.EnterText(info.UPCName);
+						}
+						else
+						{
+							Report.Info("UPC Name was not found in the table, leaving default UPC Name");
+						}
+
 					}
-					
-				}			
+				}
+				else
+				{
+					Report.Failure("The UPC Name field was not present");
+				}
 				
 
 
@@ -3127,6 +3158,84 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return fieldIsCorrectColor;
 
 		}
+
+		public bool FinalDomesticDistributor(string text)
+		{
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Who is the Final Domestic Distributor (if any) of the product ']/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+		public bool CompanyTollFreePhoneNumber(string text)
+		{
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Toll-Free Phone Number')]/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
+		public bool CompanyWebAddress(string text)
+		{
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Company Web Address')]/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
+		public string ProductGTINBrickCode {
+			get
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'GTIN')]/..//following-sibling::div//select"), 2);
+				return el.SelectedOption();
+			}
+			set
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'GTIN')]/..//following-sibling::div//select"), 2);
+				el.Select(value);
+			}
+		}
+
+
+
 	}
 
 	public class ProductInformation

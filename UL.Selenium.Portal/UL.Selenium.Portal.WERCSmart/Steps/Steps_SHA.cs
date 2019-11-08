@@ -970,9 +970,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheSuspendedDialogInTheSelectRegulatorySpecialistDropDownIChoose(string regulatorySpecialist)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
-			if(regulatorySpecialist== "SHA Regulatory Specialist")
+			if (regulatorySpecialist == "SHA Regulatory Specialist")
 			{
-				regulatorySpecialist= TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
+				regulatorySpecialist = TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
 			}
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectRegulatorySpecialist(regulatorySpecialist),
 				"Failed to select regulatory specialist: " + regulatorySpecialist, "Selected: " + regulatorySpecialist);
@@ -3111,7 +3111,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"The product in SHA has a Original Submission Date of: {shaOriginalSubmissionDate}");
 			string shaClients = productsShown[0].Clients;
 			var shrdStep = new Steps_Shared();
-			
+
 
 			TestReport.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
 			string file = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -3147,7 +3147,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");
 						new Steps_Shared().Shared75309_SHA_SelectProduct_UpcList(productInfoSavedAs);
 						var studioSHAManger = new StudioSHAManager();
-						
+
 						Delay.Seconds(10);
 						this.SwitchToProductListUpcWindow();
 						Delay.Seconds(4);
@@ -3291,18 +3291,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIVerifyTheFileSavedAsAgainstTheSpecificRequirementsForDailyReport_WERCSmartAdditionalReportsPublished(string savedAs)
 		{
 			Report.IsTrue(new DailyReportWERCSmartAdditionalReportsPublished().VerifyFile(savedAs), "Report did not match expectations", "Report conforms to stated spec");
-		
+
 			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
 				"Failed to click document management", "Clicked document management");
 			var shaReport = new SHAAdvancedReporting();
 			string report = "Product Registrations Published";
 			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
 			Delay.Seconds(2);
-			
-			
+
+
 		}
-		[StepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Product Registrations Published report then I click Submit")]
-		public void IEnterAStartDateForTheProductRegistrationPublishedReportClickSubmit(string startDate,string endDate)
+		[StepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Advanced report then I click Submit")]
+		public void IEnterAStartDateForTheProductRegistrationPublishedReportClickSubmit(string startDate, string endDate)
 		{
 			TestReport.UseSubSteps = true;
 			var shaReport = new SHAAdvancedReporting();
@@ -3316,29 +3316,75 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I Check that the Description Text for the Report: (.*) is shown as: (.*)")]
-		public void ICheckThatTheDescriptionForTheReportIsShowAS(string reportName,string reportText)
+		public void ICheckThatTheDescriptionForTheReportIsShowAS(string reportName, string reportText)
 		{
 			var shaReport = new SHAAdvancedReporting();
-			
-			Report.IsTrue(shaReport.ReportDescriptionIsCorrect(reportName,reportText), "The Description was not as expected", "The Descripton was as expected");
+
+			Report.IsTrue(shaReport.ReportDescriptionIsCorrect(reportName, reportText), "The Description was not as expected", "The Descripton was as expected");
 
 		}
 
-	[StepDefinition(@"I select the Product Registrations Published report from Advanced Reporting in SHA")]
-		public void ISelectProductRegistrationPublishedReportFromAdvancedReportingInSHA()
+		[StepDefinition(@"I select the: (.*) report from Advanced Reporting in SHA")]
+		public void ISelectProductRegistrationPublishedReportFromAdvancedReportingInSHA(string report)
 		{
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Click Advanced Reporting");
 			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
 				"Failed to click document management", "Clicked document management");
 			var shaReport = new SHAAdvancedReporting();
-			string report = "Product Registrations Published";
 			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
 			Delay.Seconds(2);
-			
-			
+
+
 		}
-		
+
+		[StepDefinition(@"In The advanced reporting screen I enter WPSID saved as: (.*)")]
+		public void InTheAdvancedReportingScreenIEnterWPSIDSavedAs(string savedAs)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			var product = new ProductInformation();
+			if (Context.Contains(savedAs))
+			{
+				product = (ProductInformation)Context.GetFromContext(savedAs);
+			}
+			else
+			{
+				Report.Failure($"Could not find WPSID savedAs: {savedAs} in context");
+				return;
+			}
+			
+			string wpsid = product.Id;
+			Report.IsTrue(shaReport.EnterWPSID(wpsid), "Failed to enter WPSID: " + wpsid, "Successfully entered WPSID: " + wpsid);
+
+		}
+
+		[StepDefinition(@"In The advanced reporting screen I choose retailer: (.*)")]
+		public void InTheAdvancedReportingScreenIChooseRetailer(string retailer)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ChooseRetailer(retailer), "Failed to choose retailer: " + retailer, "Successfully selected the retailer: " + retailer);
+		}
+
+		[StepDefinition(@"I delete the Advanced Report file saved as (.*)")]
+		public void DeleteExcelFile(string savedAs)
+		{
+			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + savedAs);
+				return;
+			}
+			Report.Info("Deleting file: " + file);
+			File.Delete(file);
+		}
+
+		[StepDefinition(@"I Click close in the Advanced Reporting Popup")]
+		public void ClickCloseInAdvancedReports()
+		{
+			Report.IsTrue(new SHAAdvancedReporting().CloseButton.TryClick(), "Failed to click the close button", "Successfully click the close button");
+		}
+
+
 	}
 
 }

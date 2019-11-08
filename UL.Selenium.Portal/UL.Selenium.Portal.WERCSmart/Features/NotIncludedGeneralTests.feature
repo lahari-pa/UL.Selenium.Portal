@@ -24,7 +24,7 @@
 @ForwardProductRegistration
 @ProductSetUp
 @SupplierReports
-@admin
+@CreateProducts
 @ViewUpcs
 @Solutions
 @run_NotIncludedGeneralTests
@@ -292,10 +292,11 @@ Scenario: [NOTINCLUDEDGENERALTEST] Rejected Registration - Edit -  Message is di
 
 Scenario: [NOTINCLUDEDGENERALTEST] Advanced Reporting - Registrations Published report -
 	#For 92210 Ticket Should be 98534
+	#Update 98534 in TFS
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Then I select the Product Registrations Published report from Advanced Reporting in SHA
+	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
-	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Product Registrations Published report then I click Submit
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	#For below step need an actual file to get name etc
 	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
@@ -400,7 +401,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Completed product test 1
 	Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64528
 	Given I navigate to the landing page
 
-Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) Report correctly displays case pack individual UPC
+Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) - Report correctly displays case pack individual UPC
 #For Ticket 108160
 #add product with indv upc and case pack upc to this and get both upc as saved as
 	Given I Submit a new product which has a Case UPC and a regular UPC
@@ -417,15 +418,445 @@ Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) Re
 	Then I confirm that in the excel file saved as: 73082 for the UPC saved as: UPC876851 there is a 'Y' in the Case Pack column and an Individual UPC listed as: UPC87685
 	And I delete the Supplier Report file saved as 73082
 
+Scenario: [NOTINCLUDEDGENERALTEST] TESTCVS Revision to Data Tier Consent Requirements
+Then I create a upc number for CVS
+Given I create a new supplier products account: (.*) and create a new brand in that account
+
 Scenario: [NOTINCLUDEDGENERALTEST] CVS Revision to Data Tier Consent Requirements
 
-Given I create a new supplier products account: ProductAccountTEST and create a product with retailer CVS
+Given I create a new supplier products account: (.*) and create a new brand in that account
 
-Scenario: [NOTINCLUDEDGENERALTEST] 2CVS Revision to Data Tier Consent Requirements
-Then I create a upc number for CVS
-Given I create a new supplier products account: ProductAccountTEST and create a product with retailer CVS
+
+Scenario: [NOTINCLUDEDGENERALTEST] TOYNoProductsAcc - CVS Revision to Data Tier Consent Requirements - Toys Don't require Consent Tiers
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] HBNoProductsAcc - CVS Revision to Data Tier Consent Requirements health and beauty
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+Then For CVS I create a product of type: Toys (RUCC0388), save it as: CVSToyProduct1 and leave it in New Status 
+
+#now create all other products
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] DebugNoProductsAcc - CVS Revision to Data Tier Consent Requirements health and beauty
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Toys (RUCC0388), save it as: CVSToyProduct1 and leave it in New Status
+
+
+@AndrewCVSRun
+Scenario: [NOTINCLUDEDGENERALTEST] TicketNoProductsAcc - CVS Revision to Data Tier Consent Requirements health and beauty
+#For ticket 105950
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Toys (RUCC0388), save it as: CVSToysProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that the data consent tiers available for selection only include Tier 1
+Then I click the Products in Scope button and confirm that a file is not produced called CV_Report_DataUsageTier_<Date>.xlsx
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSHBExcelFile
+Then I confirm that the excel file saved as: CVSHBExcelFile contains the WPSID for the Product saved as: CVSHBProduct1
+Then I delete the Supplier Report file saved as CVSHBExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Artist Supply (RUCC0384), save it as: CVSArtistProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSArtistExcelFile
+Then I confirm that the excel file saved as: CVSArtistExcelFile contains the WPSID for the Product saved as: CVSArtistProduct1
+Then I delete the Supplier Report file saved as CVSArtistExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+
+Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSCleaningExcelFile
+Then I confirm that the excel file saved as: CVSCleaningExcelFile contains the WPSID for the Product saved as: CVSCleaningProduct1
+Then I delete the Supplier Report file saved as CVSCleaningExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Home Improvement (RUCC0394), save it as: CVSHomeProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSHomeExcelFile
+Then I confirm that the excel file saved as: CVSHomeExcelFile contains the WPSID for the Product saved as: CVSHomeProduct1
+Then I delete the Supplier Report file saved as CVSHomeExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Lawn & Garden (RUCC0395), save it as: CVSLawnGardenProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSLawnGardenExcelFile
+Then I confirm that the excel file saved as: CVSLawnGardenExcelFile contains the WPSID for the Product saved as: CVSLawnGardenProduct1
+Then I delete the Supplier Report file saved as CVSLawnGardenExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Miscellaneous (RUCC0400), save it as: CVSMiscProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSMiscExcelFile
+Then I confirm that the excel file saved as: CVSMiscExcelFile contains the WPSID for the Product saved as: CVSMiscProduct1
+Then I delete the Supplier Report file saved as CVSMiscExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Nutritional (RUCC0592), save it as: CVSNutritionalProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSNutritionalExcelFile
+Then I confirm that the excel file saved as: CVSNutritionalExcelFile contains the WPSID for the Product saved as: CVSNutritionalProduct1
+Then I delete the Supplier Report file saved as CVSNutritionalExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Over-the-Counter (RUCC1002), save it as: CVSOTCProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSOTCExcelFile
+Then I confirm that the excel file saved as: CVSOTCExcelFile contains the WPSID for the Product saved as: CVSOTCProduct1
+Then I delete the Supplier Report file saved as CVSOTCExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Pet Care (RUCC0387), save it as: CVSPetCareProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSPetCareExcelFile
+Then I confirm that the excel file saved as: CVSPetCareExcelFile contains the WPSID for the Product saved as: CVSPetCareProduct1
+Then I delete the Supplier Report file saved as CVSPetCareExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Photography (RUCC0735), save it as: CVSPhotopraphyProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSPhotopraphyExcelFile
+Then I confirm that the excel file saved as: CVSPhotopraphyExcelFile contains the WPSID for the Product saved as: CVSPhotopraphyProduct1
+Then I delete the Supplier Report file saved as CVSPhotopraphyExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Sporting Goods (RUCC0386), save it as: CVSSportingGoodsProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSSportingGoodsExcelFile
+Then I confirm that the excel file saved as: CVSSportingGoodsExcelFile contains the WPSID for the Product saved as: CVSSportingGoodsProduct1
+Then I delete the Supplier Report file saved as CVSSportingGoodsExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Stationery (RUCC0385), save it as: CVSStationeryProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSStationeryExcelFile
+Then I confirm that the excel file saved as: CVSStationeryExcelFile contains the WPSID for the Product saved as: CVSStationeryProduct1
+Then I delete the Supplier Report file saved as CVSStationeryExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Battery (RUCC0733), save it as: CVSBatteryProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSBatteryExcelFile
+Then I confirm that the excel file saved as: CVSBatteryExcelFile contains the WPSID for the Product saved as: CVSBatteryProduct1
+Then I delete the Supplier Report file saved as CVSBatteryExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Grocery (RUCC0389), save it as: CVSGroceryProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSGroceryExcelFile
+Then I confirm that the excel file saved as: CVSGroceryExcelFile contains the WPSID for the Product saved as: CVSGroceryProduct1
+Then I delete the Supplier Report file saved as CVSGroceryExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPharmacyProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSPharmacyExcelFile
+Then I confirm that the excel file saved as: CVSPharmacyExcelFile contains the WPSID for the Product saved as: CVSPharmacyProduct1
+Then I delete the Supplier Report file saved as CVSPharmacyExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Scenario: [NOTINCLUDEDGENERALTEST] Daily Report - Data Tier Consent - CVS Updated Updated Data Tier Consent Requirements
+#105950 linked
+#Blocked so currently use screenshot from DB for ticket test
+#Create a product that requires tier 4.1 then Check report reflects 4.1 need
+#Method for opening the report, checking for retailer X and checking the tier coloum Y contains at least one
+
+
 
 	
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] Retailer specific - CVS
+#Mayve just updated 57206
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+	Then I click the Retail Partners icon in the Navigation Pane
+	When I select the retailer: CVS
+	Then I confirm that there is a section labeled: CVS
+	And I confirm that under the pie chart I see the label: % of your product portfolio is associated with CVS
+
+
+	#Update to match new description text
+
+	And I confirm that: CVS requires suppliers of all store branded products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
+	When I click the More Information hyperlink
+	Then I check that the current URL contains: https://login.ulscm.com/RPUI/cvsportal
+	And I close the window that opened
+	# Test originally wanted "https://labworks.ul.com/Pages/RCL.aspx", but redirects to a different link when clicked, so modified accordingly!
+	When I click the Products in Scope button and confirm that an excel file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSExcelFile
+	And I confirm the excel file saved as CVSExcelFile can be opened and contains data
+	Then I delete the Supplier Report file saved as CVSExcelFile
+	Given I click on close in the Report Download dialog
+	And I click the back arrow next to CVS
+	Then I should see the Retail Partners page
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] CVS Product Creation Debug scenario
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Photography (RUCC0735), save it as: CVSPhotopraphyProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSPetCareExcelFile
+Then I confirm that the excel file saved as: CVSPetCareExcelFile contains the WPSID for the Product saved as: CVSPhotopraphyProduct1
+Then I delete the Supplier Report file saved as CVSPetCareExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+Scenario: [NOTINCLUDEDGENERALTEST] LawnCVS Product Creation Debug scenario
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Lawn & Garden (RUCC0395), save it as: CVSLawnGardenProduct1 and leave it in New Status
+Then I navigate to the Data Consent Tiers Page for CVS
+And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSLawnGardenExcelFile
+Then I confirm that the excel file saved as: CVSLawnGardenExcelFile contains the WPSID for the Product saved as: CVSLawnGardenProduct1
+Then I delete the Supplier Report file saved as CVSLawnGardenExcelFile
+Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106898
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: PM Walmart Monthly WMQC Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329	
+	#Update Colum headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns:
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+
+
+		
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106921
+	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: UPC Details for Registration - Specific Retailer report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: UPC Details for Registration - Specific Retailer is shown as: Internal Use Only.  UPCs are listed for a chosen Retailer and include any additional UPC data such as Case Pack, Net Explosive Mass, and other details.
+	Then In The advanced reporting screen I enter WPSID saved as: TestCase75142
+	Then In The advanced reporting screen I choose retailer: CVS
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#Update Column headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] 96172
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#Update Column headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106922
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: UPCs Added Yesterday report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: UPCs Added Yesterday is shown as: UPCs Added Yesterday
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#Update Column headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+
+
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106924
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: VOC Monthly Report - Walmart report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: VOC Monthly Report - Walmart is shown as: Walmart Monthly VOC Report
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329	
+	#Update Colum headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns:
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106931
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: WalMart DSV Products Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: WalMart DSV Products Report is shown as: WalMart DSV Products Report
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	#Update Column headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+
+		
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 106932
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: WM Slotting Code Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: WM Slotting Code Report is shown as: WM Slotting Code Report
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329	
+	#Update Colum headings
+	Then I confirm that the excel file saved as: 105329 contains the following columns: and they are in the correct order.
+		| Column              |
+		| UPC Name            |
+	Then I delete the Advanced Report file saved as 105329
+	
+Scenario: [NOTINCLUDEDGENERALTEST] Ticket 107365
+
+	Then I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA
+	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	#Change File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 1073651
+
+	#Update the column names below ( for checking Y only include the new headers)
+
+	Then I confirm that the excel file saved as: 1073651 contains the following columns: and they are in the correct order.
+		| Column   |
+		| UPC Name |
+	Then I confirm that the excel file saved as: 1073651 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
+		| Column   |
+		| UPC Name |
+	Then I delete the Advanced Report file saved as 1073651
+
+	Then I select the: UPC Details for Registration - Specific Retailer report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: UPC Details for Registration - Specific Retailer is shown as: Internal Use Only.  UPCs are listed for a chosen Retailer and include any additional UPC data such as Case Pack, Net Explosive Mass, and other details.
+	Then In The advanced reporting screen I enter WPSID saved as: TestCase75142
+	Then In The advanced reporting screen I choose retailer: Wal-Mart/SAM'S CLUB
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 1073652
+	#Update Column headings
+	Then I confirm that the excel file saved as: 1073652 contains the following columns: and they are in the correct order.
+		| Column   |
+		| UPC Name |
+	Then I confirm that the excel file saved as: 1073652 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
+		| Column   |
+		| UPC Name |
+	Then I delete the Advanced Report file saved as 1073652
+
+	Then I select the: WalMart DSV Products Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: WalMart DSV Products Report is shown as: WalMart DSV Products Report
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#Change to Correct File Name
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 1073653
+	#Update Column headings
+	Then I confirm that the excel file saved as: 1073653 contains the following columns: and they are in the correct order.
+		| Column   |
+		| UPC Name |
+	Then I confirm that the excel file saved as: 1073653 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
+		| Column   |
+		| UPC Name |
+	Then I delete the Advanced Report file saved as 1073653
+
+	Then I select the: WM Slotting Code Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: WM Slotting Code Report is shown as: WM Slotting Code Report
+	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	#For below step need an actual file to get name etc
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 1073654	
+	#Update Colum headings
+	Then I confirm that the excel file saved as: 1073654 contains the following columns:
+		| Column              |
+		| UPC Name            |
+	Then I confirm that the excel file saved as: 1073654 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
+		| Column   |
+		| UPC Name |
+	Then I delete the Advanced Report file saved as 1073654
+
+Scenario: [CVSTESTINGDEBUG] CERIAL
+
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Grocery (RUCC0389), save it as: CVSGroceryProduct1 and leave it in New Status
+	Then I navigate to the Data Consent Tiers Page for CVS
+	And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
+	When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSGroceryExcelFile
+	Then I confirm that the excel file saved as: CVSGroceryExcelFile contains the WPSID for the Product saved as: CVSGroceryProduct1
+	Then I delete the Supplier Report file saved as CVSGroceryExcelFile
+	Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+
+
+	
+
+
+
+
+
+
+	
+
+
+
+
+
 
 		              
 

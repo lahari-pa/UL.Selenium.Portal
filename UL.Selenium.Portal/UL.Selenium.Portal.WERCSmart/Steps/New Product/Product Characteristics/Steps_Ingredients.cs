@@ -805,5 +805,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var newProductIngredients = new Ingredients();
 		}
 
+		[StepDefinition(@"On the Ingredients page for the Ingredient: (.*) I add Ingredient Type: (.*) and Functional Purpose:")]
+		public void OnTheIngredientsPageSelectTypeAndPurpose(string ingredientName, string ingredientType, Table table)
+		{
+			Report.Info($"Attempting to select the ingredient type: {ingredientType} for the Ingredient: {ingredientName}");
+			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
+			Report.Info($"Attempting to Select the Functional Purposes from the table.");
+			var selectedOptionsStr = new List<string>();
+			foreach (TableRow row in table.Rows)
+			{
+				if(Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"]), "Failed to Select The Functional Purpose:"+ row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
+				{
+					selectedOptionsStr.Add(row["Functional Purpose"]);
+				}
+
+			}
+			Context.AddToContext(ingredientName + "FunctionalPurposesList", selectedOptionsStr);
+		}
+
+		[StepDefinition(@"On the Ingredients page for the Ingredient: (.*) I add Ingredient Type: (.*) and All Functional Purposes")]
+		public void OnTheIngredientsPageSelectTypeAndAllPurpose(string ingredientName, string ingredientType)
+		{
+			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
+			Report.IsTrue(new Ingredients().ISelectAllFunctionalPurpose(ingredientName), "Failed to Select All The Functional Purpose options", "Successfully selected  All The Functional Purpose options");
+
+		}
+
+
+
+
+
 	}
 }
