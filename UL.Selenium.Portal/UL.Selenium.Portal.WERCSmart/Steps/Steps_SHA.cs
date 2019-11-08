@@ -3342,7 +3342,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheAdvancedReportingScreenIEnterWPSIDSavedAs(string savedAs)
 		{
 			var shaReport = new SHAAdvancedReporting();
-			ProductInformation product = (ProductInformation)Context.GetFromContext(savedAs);
+			var product = new ProductInformation();
+			if (Context.Contains(savedAs))
+			{
+				product = (ProductInformation)Context.GetFromContext(savedAs);
+			}
+			else
+			{
+				Report.Failure($"Could not find WPSID savedAs: {savedAs} in context");
+				return;
+			}
+			
 			string wpsid = product.Id;
 			Report.IsTrue(shaReport.EnterWPSID(wpsid), "Failed to enter WPSID: " + wpsid, "Successfully entered WPSID: " + wpsid);
 
