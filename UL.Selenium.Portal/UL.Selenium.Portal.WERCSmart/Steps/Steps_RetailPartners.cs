@@ -1830,16 +1830,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 
 				int retailerColumnIndex = 0;
-				bool retailerColumnFound = false;
+				bool columnRetailerFound = false;
 				for (int j = 0; j < ColumnTitles.Count; j++)
 				{
 					if (ColumnTitles[j] == "Client")
 					{
 						retailerColumnIndex = j;
-						retailerColumnFound = true;
+						columnRetailerFound = true;
 					}
 				}
-				if(!retailerColumnFound)
+				if(!columnRetailerFound)
 				{
 					return;
 				}
