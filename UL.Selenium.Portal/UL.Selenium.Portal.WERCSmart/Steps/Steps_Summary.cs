@@ -149,5 +149,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new SummaryPage().FunctionalPurposesMatch(ingredient, chosenPurposes), "The Functional Purposes were not an exact match", "The Functional Purposes were an exact match");
 		}
 
+		[StepDefinition(@"For the following ingredients I check that the Ingredients table on the summary page contains only the Ingredient Types and Functional Purposes listed:")]
+		public void ForTheFollowingIngredientsICheckThatTheIngredientsTableOnTheSummaryPageContainsOnlyTheIngredientsTypesAndFunctionalPurposesListed(Table table)
+		{
+
+			foreach(TableRow row in table.Rows)
+			{
+				this.ICheckThatTheIngredientsTableForIngredientXContainsOnlyYTypes(row["Ingredient"], row["Ingredient Type"]);
+				this.ICheckThatTheIngredientsTableForIngredientXContainsOnlyYPurposes(row["Ingredient"], row["Functional Purpose"]);
+			}
+
+		}
 	}
 }

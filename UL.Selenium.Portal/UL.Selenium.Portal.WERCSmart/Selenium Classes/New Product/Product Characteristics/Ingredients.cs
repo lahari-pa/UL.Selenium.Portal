@@ -956,89 +956,94 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
-		public bool ISelectFunctionalPurpose(string ingredienName, Table table)
+		public bool ISelectAllFunctionalPurpose(string ingredientName)
 		{
-			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredienName}']]"), 2);
+			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
 			IWebElement functionalPurposeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'functionalPurpose')]"), 2);
 			if (functionalPurposeBox == null)
 			{
-				Report.Failure("Could not find the Functional Purpose Input Box");
+				Report.Info("Could not find the Functional Purpose Input Box");
 				return false;
 			}
-			bool selectedOptionSuccessfull = true;			
-			
-			
-			foreach (TableRow row in table.Rows)
+			bool selectedOptionSuccessfull = true;
+			List<IWebElement> allOptions = functionalPurposeBox.FindElements(By.XPath(".//option[not(text()='Choose...')]"), 2).ToList();
+			var allOptionsStr = new List<string>();
+			foreach (var el in allOptions)
 			{
-				if (row["Functional Purpose"] == "NA")
+				allOptionsStr.Add(el.Text);
+			}
+			Context.AddToContext(ingredientName + "FunctionalPurposesList", allOptionsStr);
+
+			if (!allOptionsStr.Any())
+			{
+				Report.Info("Could not find any Functional purpose options to select");
+				return false;
+			}
+			foreach (var option in allOptionsStr)
+			{
+				List<IWebElement> currentlySelectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
+
+				var currentlySelectedOptionsStr = new List<string>();
+				foreach (var item in currentlySelectedOptionsEl)
+				{
+					currentlySelectedOptionsStr.Add(item.Text);
+				}
+				functionalPurposeBox.Select(option);
+				if (currentlySelectedOptionsStr.Contains("×" + option))
+				{
+					Report.Info($"The correct Purpose was selectd.");
+				}
+				else
+				{
+					Report.Info("Failed to select the correct Purpose");
+					selectedOptionSuccessfull = false;
+				}
+				
+			}
+			return selectedOptionSuccessfull;
+
+
+		}
+
+		public bool ISelectFunctionalPurpose(string ingredientName, string functionalPurpose)
+		{
+			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement functionalPurposeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'functionalPurpose')]"), 2);
+			if (functionalPurposeBox == null)
+			{
+				Report.Info("Could not find the Functional Purpose Input Box");
+				return false;
+			}
+			bool selectedOptionSuccessfull = true;
+			var selectedOptionsStr = new List<string>();
+
+				if (functionalPurpose == "NA")
 				{
 					Report.Info("The Option to Choose was set to NA, No Funcional Purpose will be selected");
-					break;
-				}
-					if (row["Functional Purpose"] == "Select All")
-				{
-					List<IWebElement> allOptions = functionalPurposeBox.FindElements(By.XPath(".//option[not(text()='Choose...')]"), 2).ToList();
-					var allOptionsStr = new List<string>();
-					foreach(var el in allOptions)
-					{
-						allOptionsStr.Add(el.Text);
-					}
-					Context.AddToContext(ingredienName+"FunctionalPurposesList",allOptionsStr);
+					return selectedOptionSuccessfull = true;
+				
+				}							
 
-					if (!allOptionsStr.Any())
-					{
-						Report.Failure("Could not find any Functional purpose options to select");
-						return false;
-					}
-					foreach(var option in allOptionsStr)
-					{
-						List<IWebElement> currentlySelectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
-						
-						var currentlySelectedOptionsStr = new List<string>();
-						foreach (var item in currentlySelectedOptionsEl)
-						{
-							currentlySelectedOptionsStr.Add(item.Text);
-						}
-						functionalPurposeBox.Select(option);
-						if (currentlySelectedOptionsStr.Contains("×" + option))
-						{
-							Report.Success($"The correct Purpose was selectd.");
-						}
-						else
-						{
-							Report.Failure("Failed to select the correct Purpose");
-							selectedOptionSuccessfull = false;
-						}
-
-					}
-
-					break;
-
-				}
-				string optionToSelect = row["Functional Purpose"];
-
-				functionalPurposeBox.Select(optionToSelect);
+				functionalPurposeBox.Select(functionalPurpose);
 
 				List<IWebElement> selectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
-				var selectedOptionsStr = new List<string>();
+				
 
 				foreach (var item in selectedOptionsEl)
 				{
 					selectedOptionsStr.Add(item.Text);
 				}
 
-				if( selectedOptionsStr.Contains("×"+optionToSelect))
+				if( selectedOptionsStr.Contains("×"+ functionalPurpose))
 				{
-					Report.Success($"The correct Purpose was selectd.");
+					Report.Info($"The correct Purpose was selected.");
 				}
 				else
 				{
-					Report.Failure("Failed to select the correct Purpose");
+					Report.Info("Failed to select the correct Purpose");
 					selectedOptionSuccessfull = false;
-				}	
-				
-			}
-			return selectedOptionSuccessfull;
+				}			
+				return selectedOptionSuccessfull;
 		}
 	}
 }

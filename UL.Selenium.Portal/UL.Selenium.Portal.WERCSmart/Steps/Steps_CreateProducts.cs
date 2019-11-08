@@ -1103,12 +1103,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tableFunctionalPurpose3.AddRow("Abrasive");
 			tableFunctionalPurpose3.AddRow("Adhesive");
 			tableFunctionalPurpose3.AddRow("Antifreeze");
-			Table tableFunctionalPurpose4 = new Table("Functional Purpose");
-			tableFunctionalPurpose4.AddRow("Select All");
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Formaldehyde", "Fragrance",tableFunctionalPurpose1);
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Water", "Intentionally Added", tableFunctionalPurpose2);
 			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Sodium chloride", "Non-functional Byproduct", tableFunctionalPurpose3);
-			stepsIngredients.OnTheIngredientsPageSelectTypeAndPurpose("Butane", "Non-functional Contaminant", tableFunctionalPurpose4);
+			stepsIngredients.OnTheIngredientsPageSelectTypeAndAllPurpose("Butane", "Non-functional Contaminant");
 
 
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");

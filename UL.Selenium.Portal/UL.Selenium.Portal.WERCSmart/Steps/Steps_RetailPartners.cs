@@ -1830,36 +1830,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 
 				int retailerColumnIndex = 0;
+				bool columnRetailerFound = false;
 				for (int j = 0; j < ColumnTitles.Count; j++)
 				{
 					if (ColumnTitles[j] == "Client")
 					{
 						retailerColumnIndex = j;
+						columnRetailerFound = true;
 					}
 				}
+				if(!columnRetailerFound)
+				{
+					return;
+				}
+
 				int column21Index = 0;
+				bool Column21Found = false;
 				for (int t = 0; t < ColumnTitles.Count; t++)
 				{
 					if (ColumnTitles[t] == "2.1 Granted")
 					{
 						column21Index = t;
+						Column21Found = true;
 					}
 				}
+				if (!Column21Found)
+				{
+					return;
+				}
+
+				bool Column22Found = false;
 				int column22Index = 0;
 				for (int y = 0; y < ColumnTitles.Count; y++)
 				{
 					if (ColumnTitles[y] == "2.2 Granted")
 					{
 						column22Index = y;
+						Column22Found = true;
 					}
 				}
+				if (!Column22Found)
+				{
+					return;
+				}
+
+				bool Column41Found = false;
 				int column41Index = 0;
 				for (int x = 0; x < ColumnTitles.Count; x++)
 				{
 					if (ColumnTitles[x] == "4.1 Granted")
 					{
 						column41Index = x;
+						Column41Found = true;
 					}
+				}
+				if (!Column41Found)
+				{
+					return;
 				}
 
 				string checkedRetailer = "CV";
@@ -1917,6 +1944,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsProductGrid().INavigateToTheHomepageThenInTheProductsGridIDeleteAllProducts();
 
 		}
+
+		
 
 
 	}
