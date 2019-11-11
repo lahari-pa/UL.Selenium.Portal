@@ -308,13 +308,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(2);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement endDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='End Date']//ancestor::td//following-sibling::td//input"), 2);
+			IWebElement endDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='End Date']//ancestor::td[1]//following-sibling::td//input"), 2);
 			if (endDateField == null)
 			{
 				Report.Info("Could not find the input element!");
 				return false;
 			}
-			endDateField.JsEnterText(value);
+			if(value=="NA")
+			{
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return true;
+			}
+
+			endDateField.TryClick();
+			endDateField.EnterText(value);
+			//endDateField.JsEnterText(value);
 			Delay.Seconds(1);
 			Report.Screenshot();
 
@@ -341,7 +350,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not find the input element!");
 				return false;
 			}
-			startDateField.JsEnterText(value);
+
+			startDateField.TryClick();
+			startDateField.EnterText(value);
+			//startDateField.JsEnterText(value);			
 			Delay.Seconds(1);
 			Report.Screenshot();
 			bool matching = false;

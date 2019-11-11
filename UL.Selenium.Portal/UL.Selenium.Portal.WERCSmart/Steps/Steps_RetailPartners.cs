@@ -1945,7 +1945,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) includes the column: (.*) between: (.*) and (.*)")]
+		public void ThenIConfirmThatTheExcelFileSavedAsIncludesheFollowingColumnsAndAreInTheCorrectOrder(string savedAs, string focusColumn, string column1, string column2)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+			
+				int y = 0;
+				foreach(var item in ColumnTitles)
+				{
+					if(item==column1)
+					{
+						break;
+					}
+					y++;
+				}
+
+				Report.IsTrue(ColumnTitles[y + 1] == focusColumn && ColumnTitles[y + 2] == column2, "The Column was not found between the 2 specified columns", "The Column was found between the 2 specified columns");
+							
+			}
+		}
+
+
 
 
 	}

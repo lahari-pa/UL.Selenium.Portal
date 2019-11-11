@@ -842,9 +842,22 @@ Scenario: [CVSTESTINGDEBUG] CERIAL
 	Then I delete the Supplier Report file saved as CVSGroceryExcelFile
 	Then I navigate to the Homepage and then In the Products Grid I delete All products
 
+Scenario: [CVSTESTINGBATT] Battery
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Battery (RUCC0733), save it as: CVSBatteryProduct1 and leave it in New Status
+Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSBatteryExcelFile and check that is shows the expected product saved as: CVSBatteryProduct1
 
 
-	
+Scenario: [CVSTESTINGPHAR] Pharm
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPharmacyProduct1 and leave it in New Status
+Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPharmacyExcelFile and check that is shows the expected product saved as: CVSPharmacyProduct1
+
+
 
 
 

@@ -2,11 +2,13 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
+using System.Collections.Generic;
 using TestStack.White.UIItems.TabItems;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
+using Castle.Core.Internal;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -965,7 +967,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			this.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40", "1");
+			//sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
@@ -1269,6 +1272,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Yes, I wish to continue registration");
 			TestReport.StartStep("I click continue");
 			selNewProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I Enter Universal Product Code details for a CVS Product, container type: (.*), size: (.*), Quantity (.*)")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly(string containerType,string size, string quantity)
+		{
+			TestReport.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			for (int i = 0; i < 100; i++)
+			{
+				Report.Info("Entering UPC information. Attempt: " + (i + 1));
+				TestReport.StartStep("I click the 'Add UPC' button");
+				stepsNewProduct.ThenIClickTheAddUpcButton();
+				TestReport.StartStep("I add the following into the UPC Fields");
+				string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+				Report.Info("UPC number: " + upc);
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc,
+					Quantity= quantity					
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+				TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				GeneralUtilities.Wait_for_load_finish();
+				// not returning...
+				if (new NewProduct().FormError().IsNullOrEmpty())
+				{
+					return;
+				}
+				// delete upc that failed
+				stepsNewProduct.GivenIDeleteUPC(upc);
+				Report.Info("An error was showing! on click continue! Attempting a different UPC");
+			}
 		}
 
 
