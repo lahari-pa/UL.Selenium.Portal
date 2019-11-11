@@ -152,13 +152,15 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.170\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
+      "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.170\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"
+    </PostBuildEvent>
+    <PostBuildEvent>
       "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.169\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.170\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"
+      "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.170\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"
       "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.169\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"
     </PreBuildEvent>
   </PropertyGroup>
