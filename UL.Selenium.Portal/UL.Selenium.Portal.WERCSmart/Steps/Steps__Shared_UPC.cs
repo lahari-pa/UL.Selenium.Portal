@@ -1274,6 +1274,100 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(uPCpage.EnterDPCI(value), "Failed to enter DPCI", "Successfully entered DPCI");
 		}
 
+		[StepDefinition(@"Set all additional product information options to (.*)")]
+		public void GivenSetUnderadgeChildToNo(string yesOrNoOption)
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			if (myNewProduct.CountryofOriginExists())
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			}
+			if (myNewProduct.SectionExists(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo(
+					"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)",
+					yesOrNoOption);
+			}
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)", yesOrNoOption);
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.", yesOrNoOption);
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", yesOrNoOption);
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use",
+				yesOrNoOption);
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
 
+		
+		[StepDefinition(@"I call Shared Step 292066 \\\(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\\\)")]
+		public void GivenICallSharedStepRetailer_SelectNoRetailer_ClickDone_ClickContinue_HappyPath()
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var WarningPopup = new NoRetailerWarningPopup();
+			new SelectRetailers().ClickSelectAll();
+			SelectRetailers selectRetailers = new SelectRetailers();
+			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
+			TestReport.StartStep("In the Retailer page I click Continue");
+			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
+			/* --As per TFS70787 warning popup displays for NR  --- */
+			//TestReport.StartStep("In the UPCs Warning popup I click Ok");
+			new Steps_Retailer().IfISeeUpcWarningPopupClick("Ok");
+		}
+
+		[StepDefinition(@"I select all retailers in table")]
+		public void GivenIUnderDestinationRetailersInTheUPCPage(Table table)
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.SelectAllRetailersInTable(table), "Failed to select all retailers in table", "Succeeded to select all retailers in table");
+		}
+
+		[StepDefinition(@"I fill in the UPC data")]
+		public void FillInUPCData()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.FillInUPCData(), "Failed to fill in UPC data", "Succeeded to fill in UPC data");
+		}
+
+		[StepDefinition(@"I remove randomly selected retailers")]
+		public void GivenIRemoveRetailers()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.RemoveRandomRetailers(), "Failed to remove random retailers", "Succeeded to remove random retailers");
+		}
+
+		[StepDefinition(@"I click the 'Restore Selected' button")]
+		public void ClickRestoreRetailersButton()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.ClickRestoreSelectedRetailersButton(), "Failed to click 'Restore Selected' button in removed retailers pop-up", "Successfully clicked 'Restore Selected' button in removed retailers pop-up");
+			Report.IsTrue(NewProductClassObject.CheckIfListOfAddedRetailersAreInAlphabeticalOrder(), "The added retailers are not sorted in alphabetical order", "The added retailers are sorted in alphabetical order");
+		}
+
+		[StepDefinition(@"I click the 'Add Retailers' button")]
+		public void GivenIClickAddRetailers()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.ClickAddRetailersButton(), "Failed to click 'Add Retailers' button", "Successfully clicked 'Add Retailers' button");
+			Report.IsTrue(NewProductClassObject.CheckIfListOfRemovedRetailersAreInAlphabeticalOrder(), "The removed retailers are not sorted in alphabetical order", "The removed retailers are sorted in alphabetical order");
+		}
+
+		[StepDefinition(@"I randomly select retailers to restore")]
+		public void GivenISelectRandomRetailersToAdd()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.AddRandomRetailersThatWereRemoved(), "Failed to add random retailers", "Succeeded to add random retailers");
+		}
+
+		[StepDefinition(@"I click 'Select All' to add all removed retailers")]
+		public void RestoreEverySingleDeletedRetailer()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.ClickSelectAllInRemovedRetailersBox(), "Failed to click 'Select All' in removed retailers pop-up box", "Successfully clicked 'Select All' in removed retailers pop-up box");
+		}
 	}
 }

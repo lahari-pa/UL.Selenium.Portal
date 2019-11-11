@@ -454,3 +454,53 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And I confirm UPC number saved as: "UPC109516" is displayed in the SHA Manager Product UPC list
 	And I confirm UPC number saved as: "UPC109516_2" is displayed in the SHA Manager Product UPC list
 	And I confirm that UPC number saved as: UPC109516_2 shows a grey background for Archived in the SHA Manager Product UPC list
+
+
+
+@ScenarioId:6025
+Scenario: [84510] Select Retailers in UPC screen
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+
+And I should see the Additional Product Information Page
+And I should see following statement: Select countries the product may be sold in
+And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
+And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
+And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
+Given Set all additional product information options to No
+Given I click continue
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Propane       | 100     | false               | false       |            |
+
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+And I select all retailers in table
+| Supplier       |
+| Amazon         |
+| Autozone       |
+| Best Buy       |
+| Costco         |
+| CVS            |
+| Dollar General |
+| Family Dollar  |
+| Kohl's         |
+| McLane         |
+
+Given I click the 'Add UPC' button
+Given I fill in the UPC data
+Given I remove randomly selected retailers
+
+Given I click the 'Add Retailers' button
+Given I randomly select retailers to restore
+Given I click the 'Restore Selected' button
+
+Given I click the 'Add Retailers' button
+Given I click 'Select All' to add all removed retailers
+Given I click the 'Restore Selected' button

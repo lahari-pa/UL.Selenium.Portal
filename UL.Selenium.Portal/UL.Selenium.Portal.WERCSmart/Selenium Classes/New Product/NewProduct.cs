@@ -13,6 +13,9 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using Gherkin.Ast;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -3086,6 +3089,172 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return fieldIsCorrectColor;
 
+		}
+
+		public bool ClickRestoreSelectedRetailersButton()
+		{
+			IWebElement RestoreSelectedRetailersButton = this.containerElement.FindElement(By.XPath("//a[@data-bind='click: restoreSelectedRetailers']"), 2);
+			return RestoreSelectedRetailersButton.TryClick();
+		}
+
+		public bool ClickSelectAllInRemovedRetailersBox()
+		{
+			IWebElement SelectAllRemovedRetailersButton = this.containerElement.FindElement(By.XPath("//input[@data-bind='click: checkAllRemoved; checked: allRemovedRetailersChecked']"), 2);
+			return SelectAllRemovedRetailersButton.TryClick();
+		}
+
+		public bool FillInUPCData()
+		{
+			IWebElement UPCTextBox = this.containerElement.FindElement(By.XPath("//input[@data-bind='textInput: upcNumber.field']"), 2);
+			bool EnteredProductUPC = Report.IsTrue(UPCTextBox.TryEnterText("0749624731128"), "Failed to enter product UPC", "Successfully entered product UPC");
+
+			IWebElement ContainerTypeTextBox = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+			ContainerTypeTextBox.Select("Paper bag");
+
+			IWebElement SizeTextBox = this.containerElement.FindElement(By.XPath("//input[@placeholder='Size (Weight Ounces)']"), 2);
+			bool EnteredProductWeight = Report.IsTrue(SizeTextBox.TryEnterText("5"), "Failed to enter product weight in ounces", "Successfully enter product weight in ounces");
+
+			if (EnteredProductUPC && EnteredProductWeight)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool RemoveRandomRetailers()
+		{
+			IList<IWebElement> deleteButtons = this.containerElement.FindElements(By.XPath("//span[@data-bind='text: identifier']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
+			Random random = new Random();
+			int numOfLoops = random.Next(2, deleteButtons.Count);
+
+			for (int i = 0; i <= numOfLoops; i++)
+			{
+				int ran = random.Next(0, deleteButtons.Count);
+				IWebElement deleteButton = deleteButtons[ran];
+				bool RemoveSelectedRetailer = Report.IsTrue(deleteButton.TryClick(), "Failed to remove selected retailer", "Successfully removed selected retailer");
+				if (!RemoveSelectedRetailer)
+				{
+					return false;
+				}
+			}
+
+			return true;
+
+		}
+
+		public bool ClickAddRetailersButton()
+		{
+			IWebElement AddRetailersButton = this.containerElement.FindElement(By.XPath("//a[@id='ddAddRetailers']"), 2);
+			return AddRetailersButton.TryClick();
+		}
+
+		public bool CheckIfListOfRemovedRetailersAreInAlphabeticalOrder()
+		{
+			IList<IWebElement> RemovedRetailers = this.containerElement.FindElements(By.XPath("//a[@data-bind='text: name, click: $parent.restoreRetailer.bind($parent)']"), 2);
+			List<string> RemovedRetailerNames = new List<string>();
+			foreach (IWebElement element in RemovedRetailers)
+			{
+				RemovedRetailerNames.Add(element.Text);
+			}
+
+			bool sorted = true;
+			for (int i = 0; i < RemovedRetailerNames.Count(); i++)
+			{
+				for (int j = i + 1; j < RemovedRetailerNames.Count(); j++)
+				{
+					if (RemovedRetailerNames[i].CompareTo(RemovedRetailerNames[j]) == 1)
+					{
+						sorted = false;
+					}
+				}
+			}
+
+			return sorted;
+		}
+
+		public bool CheckIfListOfAddedRetailersAreInAlphabeticalOrder()
+		{
+			IList<IWebElement> AddedRetailers = this.containerElement.FindElements(By.XPath("//span[@data-bind='text: identifier']"), 2);
+			List<string> AddedRetailersNames = new List<string>();
+			foreach (IWebElement element in AddedRetailers)
+			{
+				AddedRetailersNames.Add(element.Text);
+			}
+
+			bool sorted = true;
+			for (int i = 0; i < AddedRetailersNames.Count(); i++)
+			{
+				for (int j = i + 1; j < AddedRetailersNames.Count(); j++)
+				{
+					if (AddedRetailersNames[i].CompareTo(AddedRetailersNames[j]) == 1)
+					{
+						sorted = false;
+					}
+				}
+			}
+
+			return sorted;
+		}
+
+		public bool AddRandomRetailersThatWereRemoved()
+		{
+
+			IList<IWebElement> CheckBoxes = this.containerElement.FindElements(By.XPath("//ul[@aria-labelledby='ddAddRetailers']//input[@type='checkbox']"), 2);
+			for (int i = 0; i < CheckBoxes.Count; i++)
+			{
+				if (CheckBoxes[i].Text.Contains("Select All"))
+				{
+					CheckBoxes.RemoveAt(i);
+				}
+			}
+
+			Random random = new Random();
+			int numOfLoops = random.Next(1, CheckBoxes.Count-1);
+			for (int i = 0; i <= numOfLoops; i++)
+			{
+				int ran = random.Next(1, CheckBoxes.Count);
+				IWebElement CheckBox = CheckBoxes[ran];
+				bool SelectedCheckboxForRetailer = Report.IsTrue(CheckBox.TryClick(), "Failed to select checkbox for retailer", "Successfully selected checkbox for retailer");
+
+				if (!SelectedCheckboxForRetailer)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool SelectAllRetailersThatWereRemoved()
+		{
+			IWebElement RestoreRetailersButton = this.containerElement.FindElement(By.XPath("//ul[@aria-labelledby='ddAddRetailers']//input[@id='chkAllRemovedRetailers']"), 2);
+			return Report.IsTrue(RestoreRetailersButton.TryClick(), "Failed to click 'Restore Retailers' button", "Successfully clicked 'Restore Retailers' button");
+
+		}
+
+		public bool SelectAllRetailersInTable(Table table)
+		{
+			IWebElement DoneButton = this.containerElement.FindElement(By.XPath("//a[@data-bind='click: closePopup']"), 2);
+			var stepsNewProduct = new StepsNewProduct();
+
+			foreach (TechTalk.SpecFlow.TableRow row in table.Rows)
+			{
+
+				TestReport.UseSubSteps = true;
+				var stepsRetailer = new Retailer();
+				TestReport.StartStep("In the Select Retailers popup I select the retailer: " + (row["Supplier"]));
+				new StepsSelectRetailers().SelectTheRetailer((row["Supplier"]));
+				TestReport.StartStep("I enter private label as 'This Private Label'");
+				stepsRetailer.EnterPrivateLabelName("This Private Label");
+				TestReport.StartStep("I click continue");
+
+			}
+
+			bool DoneButtonClicked = Report.IsTrue(DoneButton.TryClick(), "Failed to click 'Done' button", "Successfully clicked 'Done' button");
+			stepsNewProduct.ClickContinue();
+
+			return DoneButtonClicked;
 		}
 	}
 
