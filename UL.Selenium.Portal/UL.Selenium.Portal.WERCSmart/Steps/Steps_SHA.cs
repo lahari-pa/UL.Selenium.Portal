@@ -970,9 +970,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheSuspendedDialogInTheSelectRegulatorySpecialistDropDownIChoose(string regulatorySpecialist)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
-			if(regulatorySpecialist== "SHA Regulatory Specialist")
+			if (regulatorySpecialist == "SHA Regulatory Specialist")
 			{
-				regulatorySpecialist= TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
+				regulatorySpecialist = TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
 			}
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectRegulatorySpecialist(regulatorySpecialist),
 				"Failed to select regulatory specialist: " + regulatorySpecialist, "Selected: " + regulatorySpecialist);
@@ -2670,6 +2670,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(shaReport.ClickClose(), "Failed to click close on Advanced Reporting popup", "Successfully clicked close on Advanced Reporting popup");
 		}
 
+		[StepDefinition(@"In Advanced Reporting I confirm I see a table called (.*)")]
+		public void InAdvancedReportingIConfirmISeeATableCalled(string tableName)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ConfirmTableName(tableName), "Failed to find table called " + tableName, "Successfully found table called " + tableName);
+		}
+
+		[StepDefinition(@"In Advanced Reporting I confirm I see column header (.*)")]
+		public void InAdvancedReportingIConfirmISeeColumnHeader(string header)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ConfirmHeader(header), "Failed to find header called " + header, "Successfully found header called " + header);
+		}
+
+		[StepDefinition(@"I verify that the following options are available in the Report List table:")]
+		public void IVerifyThatTheFollowingOptionsAreAvailableInTheReportListTable(Table table)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			foreach (TableRow row in table.Rows)
+			{
+				Report.IsTrue(shaReport.ConfirmAdvancedReportingOptions(row["Report Name"], row["Report Description"]),
+					"Failed to find correct name '" + row["Report Name"] + "' or description '" + row["Report Description"] + "'.",
+					"Successfully found name '" + row["Report Name"] + "' and description '" + row["Report Description"] + "'.");
+			}
+		}
+
 		[StepDefinition(@"I confirm that the Report Names are listed in (abc|cba) order")]
 		public void IConfirmThatTheReportsAreListedInOrder(string order)
 		{
@@ -3111,7 +3137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"The product in SHA has a Original Submission Date of: {shaOriginalSubmissionDate}");
 			string shaClients = productsShown[0].Clients;
 			var shrdStep = new Steps_Shared();
-			
+
 
 			TestReport.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
 			string file = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -3147,7 +3173,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");
 						new Steps_Shared().Shared75309_SHA_SelectProduct_UpcList(productInfoSavedAs);
 						var studioSHAManger = new StudioSHAManager();
-						
+
 						Delay.Seconds(10);
 						this.SwitchToProductListUpcWindow();
 						Delay.Seconds(4);
@@ -3291,18 +3317,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIVerifyTheFileSavedAsAgainstTheSpecificRequirementsForDailyReport_WERCSmartAdditionalReportsPublished(string savedAs)
 		{
 			Report.IsTrue(new DailyReportWERCSmartAdditionalReportsPublished().VerifyFile(savedAs), "Report did not match expectations", "Report conforms to stated spec");
-		
+
 			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
 				"Failed to click document management", "Clicked document management");
 			var shaReport = new SHAAdvancedReporting();
 			string report = "Product Registrations Published";
 			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
 			Delay.Seconds(2);
-			
-			
+
+
 		}
 		[StepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Product Registrations Published report then I click Submit")]
-		public void IEnterAStartDateForTheProductRegistrationPublishedReportClickSubmit(string startDate,string endDate)
+		public void IEnterAStartDateForTheProductRegistrationPublishedReportClickSubmit(string startDate, string endDate)
 		{
 			TestReport.UseSubSteps = true;
 			var shaReport = new SHAAdvancedReporting();
@@ -3316,15 +3342,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I Check that the Description Text for the Report: (.*) is shown as: (.*)")]
-		public void ICheckThatTheDescriptionForTheReportIsShowAS(string reportName,string reportText)
+		public void ICheckThatTheDescriptionForTheReportIsShowAS(string reportName, string reportText)
 		{
 			var shaReport = new SHAAdvancedReporting();
-			
-			Report.IsTrue(shaReport.ReportDescriptionIsCorrect(reportName,reportText), "The Description was not as expected", "The Descripton was as expected");
+
+			Report.IsTrue(shaReport.ReportDescriptionIsCorrect(reportName, reportText), "The Description was not as expected", "The Descripton was as expected");
 
 		}
 
-	[StepDefinition(@"I select the Product Registrations Published report from Advanced Reporting in SHA")]
+		[StepDefinition(@"I select the Product Registrations Published report from Advanced Reporting in SHA")]
 		public void ISelectProductRegistrationPublishedReportFromAdvancedReportingInSHA()
 		{
 			TestReport.UseSubSteps = true;
@@ -3335,10 +3361,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string report = "Product Registrations Published";
 			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
 			Delay.Seconds(2);
-			
-			
+
+
 		}
-		
+
 	}
 
 }

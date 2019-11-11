@@ -12,6 +12,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
 using System;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -112,6 +113,64 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool canClick = closeButton.TryClick();
 
 			return canClick;
+		}
+
+		public bool ConfirmTableName(string tableName)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement tableTitle = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[@class='ui-jqgrid-title']"), 2);
+			string text = tableTitle.Text;
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return text == tableName;
+		}
+
+		public bool ConfirmHeader(string header)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IList<IWebElement> foundHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@"//tr[@class='ui-jqgrid-labels']//th[@id!='listAdvancedReports_Id']"), 2);
+			var headerTextList = new List<string>();
+			foreach (IWebElement foundHeader in foundHeaders)
+			{
+				headerTextList.Add(foundHeader.Text.Trim());
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return headerTextList.Contains(header);
+		}
+
+		public bool ConfirmAdvancedReportingOptions(string name, string desc)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+
+			IList<IWebElement> foundNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[2]"), 2);
+			var dict = new Dictionary<string, string>();
+			foreach (IWebElement foundName in foundNames)
+			{
+				IWebElement foundDescription = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[text()='" + foundName.Text.Trim() + @"']/following-sibling::td"), 2);
+				if (foundDescription != null)
+				{
+					dict.Add(foundName.Text.Trim(), foundDescription.Text.Trim());
+				}
+				else
+				{
+					Report.Failure("Could not find description element for report name element " + foundName.Text.Trim());
+					return false;
+				}
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			if (!(dict.ContainsKey(name) && dict[name] == desc))
+			{
+				return false;
+			}
+
+			return true;
 		}
 
 		public bool VerifyPopupTitle(string title, out string output)
