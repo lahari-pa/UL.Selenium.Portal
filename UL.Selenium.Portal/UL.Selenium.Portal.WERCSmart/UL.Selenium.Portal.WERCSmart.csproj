@@ -303,6 +303,7 @@
     <Compile Include="Steps\Steps_ViewUpcs.cs" />
     <Compile Include="Steps\Steps_WercSmartFreshDesk.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
+    <Compile Include="Steps\TestCreatingSupplierAccount.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

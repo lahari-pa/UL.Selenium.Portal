@@ -272,6 +272,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return el.Count == 0 ? new List<string>() : el.Select(x => x.Text).ToList();
 		}
 
+		public bool GetUPCErrorForSection(string section, string expectedMessage, out string displayedMessage)
+		{
+			string xPath = @"(.//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//label[@class='sr-only'][contains(text(),""" + section + @""")])] | " +
+						@".//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//select[@class='form-control']//option[contains(text(),""" + section + @""")])])";
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
+			if (el == null)
+			{
+				displayedMessage = "** No error message was displayed in section " + section + " **";
+				return false;
+			}
+			else
+			{
+				displayedMessage = el.Text;
+				return expectedMessage == displayedMessage;
+			}
+		}
+
 
 		public bool SelectRadio(string section, string value)
 		{

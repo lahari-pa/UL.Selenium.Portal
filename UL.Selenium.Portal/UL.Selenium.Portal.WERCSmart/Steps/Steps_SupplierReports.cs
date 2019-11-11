@@ -10,6 +10,7 @@ using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using NTTQA.Selenium.Cache;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -294,7 +295,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new SupplierReports().DescriptionTextMatches(expectedText), "The expected text did not match the actual text", "The expected text did match the actual text");
 		}
-	
+
 
 		[StepDefinition(@"I Check that in the excel file saved as: (.*) the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.")]
 		public void ICheckThatInTheExcelFileSavedAsTheEligibleForDeletionDates(string savedAs)
@@ -350,6 +351,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"in UPC Error Details WPSID box I enter product ID for the UPC Error Details report")]
+		public void ThenInUPCErrorDetailsWPSIDBoxIEnterProductID()
+		{
+			string wpsid = TestVariables.GetVariableSavedAs("UPC Error Product ID");
+			Report.IsTrue(new SupplierReports().EnterWPSID(wpsid), "Unable to enter WPSID " + wpsid, "Successfully entered WPSID " + wpsid);
+		}
+
+
 		[StepDefinition(@"I get a value for WERCSmart ID from the excel file saved as: (.*) and save it to context as: (.*)")]
 		public void IGetAValueForWERCSmartIDFromExcelFileAndSaveItAs(string fileSavedAs, string iDSavedAs)
 		{
@@ -362,7 +371,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					var rowContents = utils.GetRowContents(i);
 					var productID = rowContents[0];
-					if(productID.Any())
+					if (productID.Any())
 					{
 						Context.AddToContext(iDSavedAs, productID);
 
@@ -466,7 +475,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 	}
 }
-		
-	
+
+
 
 

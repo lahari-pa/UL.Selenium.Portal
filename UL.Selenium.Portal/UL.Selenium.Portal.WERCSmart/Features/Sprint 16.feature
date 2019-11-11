@@ -16,11 +16,13 @@
 @PackagingTypes
 @Brands
 @MyIngredients
+@SupplierReports
 @UPC
 @SHA
 @FileOps
 @ForwardProductRegistration
 @ProductSetUp
+@MyMessages
 @run_Sprint16
 Feature: Sprint 16
 
@@ -139,13 +141,18 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Then I should see the Comments Page for the New Product
 	And The remaining characters counter displays: 500/500
-	Given I enter the following into the comments field: comments
+	Given I append the following into the comments field: comments
 	And The remaining characters counter displays: 492/500
-	Then I enter the following into the comments field: comments
-	And The remaining characters counter displays: 486/500
-	And I enter the following into the comments field: comments
-	And The remaining characters counter displays: 478/500
-	And I enter the following into the comments field: comments
+	Then I append the following into the comments field: comments
+	And The remaining characters counter displays: 484/500
+	And I append the following into the comments field: comments
+	And The remaining characters counter displays: 476/500
+	And I append the following into the comments field: comments
+	And The remaining characters counter displays: 468/500
+	And I enter 500 characters into the comments field
+	And The remaining characters counter displays: 0/500
+	And I enter 502 characters into the comments field
+	And The remaining characters counter displays: 0/500
 	Then in the Comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Suppository, Medicinal
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58605
@@ -558,3 +565,105 @@ Scenario: [98534] Advanced Reporting - Registrations Published report -
 
 
 
+
+@ScenarioId:5947
+Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC Error Details
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I click the Supplier Reports icon in the QuickLinks Pane
+	Then Under the Supplier Reports menu I choose: UPC Error Details
+	# Sprint 1 - 1506182, Sprint 2 - 1505712, QA - 1520299, Staging - 1593242, TReVor var request sent
+	Then in UPC Error Details WPSID box I enter product ID for the UPC Error Details report
+	Then In the Supplier Reports screen I click on the Download button
+	Then I wait for 3 seconds
+	Then I confirm that an excel file is produced called UPC Error Details.xlsx and save as 113004
+	Then I confirm that sheet named Table in the exported excel file saved as: 113004 contains the following columns:
+		| Column                       |
+		| WPSID                        |
+		| Product Name                 |
+		| Individual UPC               |
+		| Case-Pack UPC                |
+		| UPC Name                     |
+		| Not Completed OMSID's        |
+		| Green Good Housekeeping      |
+		| Green Seal                   |
+		| EPA Safer Choice             |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Made Safe                    |
+		| NSF Sustainability Certified |
+	Then I delete the excel file saved as 113004
+
+@ScenarioId:5958
+Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registration
+	Given I generate a random UPC number and save as: UPC113706
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I delete all products with UPC Number: saved as UPC113706
+	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: Product113706
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Chalk         | 80.5    | false               | false       |            |
+		| Water         | 15      | false               | false       |            |
+		| RED           | 5.0     | false               | false       |            |
+		| Clothianidin  | 25.0    | false               | false       |            |
+	Then in the Ingredients page I click Continue
+	Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then In the 'Select Retailers' window I select the retailer: Target
+	Then in the Retailer page I click Continue
+	And I should see the Universal Product Code (UPC) Page
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC113706, container type: Cardboard and size: 5
+	And I enter 123-44-5555 in the DPCI field of the UPC page
+	And in the UPC page I click Continue
+	And I should see an error message on the Product Name on Label field which reads: Error
+	And I should see the following error text displayed in the UPC screen: Please fix UPC errors
+	Then I click the Home navigation icon
+	Given I delete all products with UPC Number: saved as UPC113706
+
+@ScenarioId:5971
+Scenario:[114216] TR (Transparency Value) - Display as Percentage
+	Given I generate a random UPC number and save as: UPC113706
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I delete all products with UPC Number: saved as UPC113706
+	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: Product113706
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+	And I add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Chalk         | 20      | false               | false       |            |
+		| Water         | 15      | false               | false       |            |
+		| RED           | 5.0     | false               | false       |            |
+		| Clothianidin  | 25.0    | false               | false       |            |
+	Then I click the Publicly Disclosed checkbox for ingredient: Chalk
+	And I verify the Transparency Score displays 25%
+	Then I click the Publicly Disclosed checkbox for ingredient: Water
+	And I verify the Transparency Score displays 50%
+	Then I click the Publicly Disclosed checkbox for ingredient: RED 4
+	And I verify the Transparency Score displays 75%
+	Then I click the Publicly Disclosed checkbox for ingredient: Clothianidin
+	And I verify the Transparency Score displays 100%
+	Then I add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| CLOTURIN      | 20      | false               | false       |            |
+	And I verify the Transparency Score displays 80%
+	Then I add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Dosulepin     | 20      | true                | false       | Dosulepin  |
+	And I verify the Transparency Score displays 83.33%
+	Then in the Ingredients page I click Continue
+	And for ingredient: Chalk I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+	And for ingredient: Water I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+	And for ingredient: RED 4 I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+	And for ingredient: Clothianidin I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+	And I select the first Public Name dropdown option for ingredient: Chalk
+	And I select the first Public Name dropdown option for ingredient: Water
+	And I select the first Public Name dropdown option for ingredient: RED 4
+	And I select the first Public Name dropdown option for ingredient: Clothianidin
+	Then in the Ingredients page I click Continue
+	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Product113706
