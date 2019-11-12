@@ -503,6 +503,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return selected;
 		}
 
+		public bool ChooseRecpientCode(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			//IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			IWebElement recipientOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//span[text()='WERCSmart Retail Recipient Code']/ancestor::td/following-sibling::td//div//select"), 2);
+			if (recipientOption == null)
+			{
+				Report.Info("Failed to select The Recipient Code from the Options drop down menu");
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return false;
+			}
+			else
+			{
+
+				recipientOption.Select(value);
+				var selectedOption = recipientOption.SelectedOption();
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return selectedOption==value;
+			}
+
+
+
+
+		}
 
 
 

@@ -700,5 +700,14 @@ Scenario: [98534] Advanced Reporting - Registrations Published report -
 		| NUMB                |
 	Then I delete the Advanced Report file saved as 98534
 
-
-
+@ScenarioId:6039
+Scenario: [115446] Products Fed to Retailers
+	#will need to create a product first? May have issues in automation, ask Ammanda
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Products Fed to Retailers report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Products Fed to Retailers is shown as: Internal Use Only.  Products that successfully transferred registration assessment information to Retailers with an outline of the data provided.  Users can select specific retailers and a date range to generate the report.  Further filtering of data output can be done via UPC sizes, percentage of water and/or alcohol.
+	Then In The advanced reporting screen I Click Option: Includes Water
+	Then In The advanced reporting screen I Click Option: Contains Alcohol
+	Then I enter UPC Size: 1 in the advanced reporting popup
+	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM	
+	Then I enter start Date: 01-01-2019 and end Date: 11-11-2019 for the Advanced report then I click Submit
