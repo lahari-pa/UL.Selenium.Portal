@@ -132,6 +132,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				.FirstOrDefault(x => x.Text == "YES").TryClick();
 		}
 
+		public bool Click_No()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+				.FirstOrDefault(x => x.Text == "NO").TryClick();
+		}
+
 		public List<string> GetRetailers()
 		{
 			ReadOnlyCollection<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));

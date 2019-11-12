@@ -874,18 +874,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Cancel button exists as expected");
 		}
 
-		[StepDefinition(@"in the modal dialog I click (cancel|save)")]
-		public void GivenInTheModalDialogIClickButton(string cancelOrSave)
+		[StepDefinition(@"in the modal dialog I click (cancel|save|Yes|No)")]
+		public void GivenInTheModalDialogIClickButton(string type)
 		{
-			if (cancelOrSave == "cancel")
+			//if (cancelOrSave == "cancel")
+			//{
+			//	Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
+			//		"Successfully clicked cancel", false, false);
+			//}
+			//else
+			//{
+			//	Report.IsTrue(new ModalDialog().ClickSave(), "Failed to click save button",
+			//		"Successfully clicked save");
+			//}
+			switch (type)
 			{
-				Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
-					"Successfully clicked cancel", false, false);
-			}
-			else
-			{
-				Report.IsTrue(new ModalDialog().ClickSave(), "Failed to click save button",
-					"Successfully clicked save");
+				case ("cancel"):
+					Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
+						"Successfully clicked cancel", false, false);
+					break;
+				case ("save"):
+					Report.IsTrue(new ModalDialog().ClickSave(), "Failed to click save button",
+						"Successfully clicked save", false, false);
+					break;
+				case ("Yes"):
+					Report.IsTrue(new ModalDialog().Click_Yes(), "Failed to click yes button",
+						"Successfully clicked yes", false, false);
+					break;
+				case ("No"):
+					Report.IsTrue(new ModalDialog().Click_No(), "Failed to click no button",
+						"Successfully no cancel", false, false);
+					break;
+				default:
+					Report.Failure("Invalid input parameter used! Valid options:'cancel|save|Yes|No'");
+					return;
 			}
 		}
 
