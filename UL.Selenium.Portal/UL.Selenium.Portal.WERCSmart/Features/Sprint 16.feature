@@ -493,12 +493,28 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Data Quality Review for Walmart.xls and save as 1147331
 	#Update the column names below ( for checking Y only include the new headers)
-	Then I confirm that the excel file saved as: 1147331 contains the following columns: and they are in the correct order.
-		| Column   |
-		| UPC Name |
+	Then I confirm that the excel file saved as: 1147331 includes the following columns:
+		| Column                       |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Green Seal                   |
+		| Green Good Housekeeping      |
+		| EPA Safer Choice             |
+		| Made Safe                    |
+		| NSF Sustainability Certified |
 	Then I confirm that the excel file saved as: 1147331 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
-		| Column   |
-		| UPC Name |
+		| Column                       |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Green Seal                   |
+		| Green Good Housekeeping      |
+		| EPA Safer Choice             |
+		| Made Safe                    |
+		| NSF Sustainability Certified |
 	Then I delete the Advanced Report file saved as 1147331
 
 	Then I select the: UPC Details for Registration - Specific Retailer report from Advanced Reporting in SHA
@@ -509,12 +525,28 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called UPC Details for Registration - Specific Retailer.xlsx and save as 1147332
 	#Update Column headings
-	Then I confirm that the excel file saved as: 1147332 contains the following columns: and they are in the correct order.
-		| Column   |
-		| UPC Name |
+	Then I confirm that the excel file saved as: 1147332 includes the following columns:
+		| Column                       |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Green Seal                   |
+		| Green Good Housekeeping      |
+		| EPA Safer Choice             |
+		| Made Safe                    |
+		| NSF Sustainability Certified |		
 	Then I confirm that the excel file saved as: 1147332 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
-		| Column   |
-		| UPC Name |
+		| Column                       |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Green Seal                   |
+		| Green Good Housekeeping      |
+		| EPA Safer Choice             |
+		| Made Safe                    |
+		| NSF Sustainability Certified |
 	Then I delete the Advanced Report file saved as 1147332
 
 	Then I select the: WalMart DSV Products Report report from Advanced Reporting in SHA
@@ -523,12 +555,28 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WalMart DSV Products Report.xlsx and save as 1147333
 	#Update Column headings
-	Then I confirm that the excel file saved as: 1147333 contains the following columns: and they are in the correct order.
-		| Column   |
-		| UPC Name |
+	Then I confirm that the excel file saved as: 1147333 includes the following columns:
+		| Column                       |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Green Seal                   |
+		| Green Good Housekeeping      |
+		| EPA Safer Choice             |
+		| Made Safe                    |
+		| NSF Sustainability Certified |
 	Then I confirm that the excel file saved as: 1147333 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
-		| Column   |
-		| UPC Name |
+		| Column                       |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Green Seal                   |
+		| Green Good Housekeeping      |
+		| EPA Safer Choice             |
+		| Made Safe                    |
+		| NSF Sustainability Certified |
 	Then I delete the Advanced Report file saved as 1147333
 
 	Then I select the: WM Slotting Code Report report from Advanced Reporting in SHA
@@ -537,12 +585,28 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WM Slotting Code Report.xlsx and save as 1147334	
 	#Update Colum headings
-	Then I confirm that the excel file saved as: 1147334 contains the following columns:
-		| Column              |
-		| UPC Name            |
+	Then I confirm that the excel file saved as: 1147334 includes the following columns:
+		| Column                       |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Green Seal                   |
+		| Green Good Housekeeping      |
+		| EPA Safer Choice             |
+		| Made Safe                    |
+		| NSF Sustainability Certified |
 	Then I confirm that the excel file saved as: 1147334 contains the WPSID saved as: TestCase75142 and has a 'Y' in the columns:
-		| Column   |
-		| UPC Name |
+		| Column                       |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Green Seal                   |
+		| Green Good Housekeeping      |
+		| EPA Safer Choice             |
+		| Made Safe                    |
+		| NSF Sustainability Certified |
 	Then I delete the Advanced Report file saved as 1147334
 
 @ScenarioId:6019

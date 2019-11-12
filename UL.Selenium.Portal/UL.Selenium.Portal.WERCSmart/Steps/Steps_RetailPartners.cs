@@ -1986,6 +1986,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) includes the following columns:")]
+		public void ThenIConfirmThatTheExcelFileSavedAsIncludesTheFollowingColumns(string savedAs, Table table)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));				
+
+				foreach (TableRow thisRow in table.Rows)
+				{
+					Report.IsTrue(ColumnTitles.Contains(thisRow["Column"]),
+						"Column name is not found: " + thisRow["Column"],
+						"Column name has been found as expected: " + thisRow["Column"], false, false);
+				}
+			}
+		}
+
 
 
 
