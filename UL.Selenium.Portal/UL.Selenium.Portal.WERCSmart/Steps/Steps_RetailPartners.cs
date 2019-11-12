@@ -962,9 +962,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (Math.Abs(expectedColumns.Count - ColumnTitles.Count)!=0)
 				{
 					Report.Failure("Found " + Math.Abs(expectedColumns.Count-ColumnTitles.Count) + " unexpected columns.");
-				}
-				
-				for (int i = 1; i > expectedColumns.Count; i++)
+				}				
+
+				for (int i = 1; i < expectedColumns.Count; i++)
 				{
 					Report.Info($"The expected column at postion: {i} is: {expectedColumns[i]} and the coloum found was {ColumnTitles[i]}");
 					Report.IsTrue(expectedColumns[i] == ColumnTitles[i], "The Column headings did not match", "The Column headings matched");				
@@ -1819,7 +1819,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains CVS products with tiers 2.1, 2.2 and 4.1 granted")]
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains CVS products with tiers 2.1, 2.2, 3 and 4.1 granted")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsCVSProductsWithTiers(string fileSavedAs)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -1874,6 +1874,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 
+				bool Column3Found = false;
+				int column3Index = 0;
+				for (int y = 0; y < ColumnTitles.Count; y++)
+				{
+					if (ColumnTitles[y] == "3 Granted")
+					{
+						column3Index = y;
+						Column3Found = true;
+					}
+				}
+				if (!Column22Found)
+				{
+					return;
+				}
+
 				bool Column41Found = false;
 				int column41Index = 0;
 				for (int x = 0; x < ColumnTitles.Count; x++)
@@ -1917,6 +1932,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.IsTrue(cvsRow[column21Index] != "0", "The Tier 2.1 Granted Column For CVS did not contain products", "The Tier 2.1 Granted Column For CVS contained products");
 				Report.IsTrue(cvsRow[column22Index] != "0", "The Tier 2.2 Granted Column For CVS did not contain products", "The Tier 2.2 Granted Column For CVS contained products");
+				Report.IsTrue(cvsRow[column3Index] != "0", "The Tier 3 Granted Column For CVS did not contain products", "The Tier 3 Granted Column For CVS contained products");
 				Report.IsTrue(cvsRow[column41Index] != "0", "The Tier 4.2 Granted Column For CVS did not contain products", "The Tier 4.1 Granted Column For CVS contained products");
 
 

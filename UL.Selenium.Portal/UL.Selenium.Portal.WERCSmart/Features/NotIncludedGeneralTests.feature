@@ -858,7 +858,18 @@ Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPha
 Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPharmacyExcelFile and check that is shows the expected product saved as: CVSPharmacyProduct1
 
 
-
+Scenario: [CVSTIERS] Daily Report -  CVS TIERS CHECK
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Daily Report - Data Tier Consent report from Advanced Reporting in SHA
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called Daily Report - Data Tier Consent.xls and save as 115163
+	#Update Column headings
+	Then I confirm that the excel file saved as: 115163 contains the following columns:
+		| Column              |
+		| UPC Name            |
+	Then I confirm that the excel file saved as: 115163 contains CVS products with tiers 2.1, 2.2 and 4.1 granted 	
+	Then I delete the Advanced Report file saved as 115163
 
 
 

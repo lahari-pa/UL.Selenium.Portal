@@ -382,7 +382,54 @@ Scenario: [114729] VOC Monthly Report - Walmart
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called VOC Monthly Report - Walmart.xls and save as 114729	
 	#Update Colum headings
-	Then I confirm that the excel file saved as: 114729 includes the column: UPC Name between: Product Name and UPC
+	#Then I confirm that the excel file saved as: 114729 includes the column: UPC Name between: Product Name and UPC
+	Then I confirm that the excel file saved as: 114729 contains the following columns: and they are in the correct order.
+		| Column       |
+		| WPS ID       |
+		| Product Name |
+		| UPC Name     |
+		| UPC          |
+		| Supplier     |
+		| Email        |
+		| Package Size |
+		| Package Type |
+		| RU           |
+		| SCAQWM       |
+		| F_SCAQMSG    |
+		| CARBWM       |
+		| F_CARBMSG    |
+		| OTCWM        |
+		| F_OTCMSG     |
+		| F_AEROWM     |
+		| F_AEROMSG    |
+		| F_VOCLN      |
+		| F_VOCIN      |
+		| F_VOCOTC     |
+		| F_VOCCARB    |
+		| F_VOCAERO    |
+		| VCNWM        |
+		| VADEWM       |
+		| VAMDWM       |
+		| VAZMCWM      |
+		| VCTWM        |
+		| VDCWM        |
+		| VDEWM        |
+		| VILWM        |
+		| VINWM        |
+		| VMAWM        |
+		| VMDWM        |
+		| VMEWM        |
+		| VMIWM        |
+		| VNHWM        |
+		| VNJWM        |
+		| VNYWM        |
+		| VOHWM        |
+		| VPAWM        |
+		| VRIWM        |
+		| VTXWM        |
+		| VUTWM        |
+		| VVAWM        |
+		| VVTWN        |      
 	Then I delete the Advanced Report file saved as 114729
 
 @ScenarioId:5982
@@ -482,9 +529,18 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 	Given I confirm that an excel file is produced called Daily Report - Data Tier Consent.xls and save as 115163
 	#Update Column headings
 	Then I confirm that the excel file saved as: 115163 contains the following columns:
-		| Column              |
-		| UPC Name            |
-	Then I confirm that the excel file saved as: 115163 contains CVS products with tiers 2.1, 2.2 and 4.1 granted 	
+		| Column            |
+		| Client            |
+		| Eligible Accounts |
+		| 1 Granted         |
+		| 2.1 Granted       |
+		| 2.2 Granted       |
+		| 3 Granted         |
+		| 4.1 Granted       |
+		| 4.2 Granted       |
+		| Revoked           |
+		| No Action         |		
+	Then I confirm that the excel file saved as: 115163 contains CVS products with tiers 2.1, 2.2, 3 and 4.1 granted 	
 	Then I delete the Advanced Report file saved as 115163
 
 
