@@ -381,7 +381,6 @@ Scenario: [114729] VOC Monthly Report - Walmart
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called VOC Monthly Report - Walmart.xls and save as 114729	
-	#Update Colum headings
 	#Then I confirm that the excel file saved as: 114729 includes the column: UPC Name between: Product Name and UPC
 	Then I confirm that the excel file saved as: 114729 contains the following columns: and they are in the correct order.
 		| Column       |
@@ -440,8 +439,8 @@ Scenario: [114731] WalMart DSV Products Report
 	Then In the Advanced Reporting popup I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear	
 	Given I confirm that an excel file is produced called WalMart DSV Products Report.xls and save as 114731
-	#Update Column headings
-	Then I confirm that the excel file saved as: 114731 includes the column: UPC Name between: Product Name and Supplier
+	#Update to Use Column Headings step below once get report
+	Then I confirm that the excel file saved as: 114731 includes the column: UPC Name between: Product Name and Supplier		
 	Then I delete the Advanced Report file saved as 114731
 
 @ScenarioId:5983
@@ -452,8 +451,35 @@ Scenario: [114732] WM Slotting Code Report
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WM Slotting Code Report.xls and save as 114732	
-	#Update Colum headings
-	Then I confirm that the excel file saved as: 114732 includes the column: UPC Name between: F_UPC and Supplier
+	#Then I confirm that the excel file saved as: 114732 includes the column: UPC Name between: F_UPC and Supplier
+	Then I confirm that the excel file saved as: 114732 contains the following columns: and they are in the correct order.
+		| Column                       |
+		| F_PRODUCT                    |
+		| F_NAME                       |
+		| F_UPC                        |
+		| UPC Name                     |
+		| Supplier                     |
+		| Vendor ID                    |
+		| Packaging Size               |
+		| Packaging Type               |
+		| UNIFFC                       |
+		| Slotting Code                |
+		| FPF                          |
+		| Total Alcohol Content        |
+		| SGB                          |
+		| Total Water Content          |
+		| WS                           |
+		| RU Name                      |
+		| RUCC Name                    |
+		| Green Good Housekeeping      |
+		| Green Seal                   |
+		| EPA Safer Choice             |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Made Safe                    |
+		| NSF Sustainability Certified |	
 	Then I delete the Advanced Report file saved as 114732
 
 
