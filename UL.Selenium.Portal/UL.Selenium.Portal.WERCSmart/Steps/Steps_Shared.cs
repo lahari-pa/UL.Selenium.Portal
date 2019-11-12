@@ -166,6 +166,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 90477 - Additional Product Information - US, \(NO\) Retailer's PL")]
+		public void ICallSharedStep90477AdditionalProductInformation_US_NoRetailersPL()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 60726 \(Additional Product Information - Country and Private Label or Brand - Yes\)")]
 		public void GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes()
@@ -799,17 +810,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
 					Size = size,
-					UpcNumber = upc_,					
+					UpcNumber = upc_,
 				};
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
 			}
 			else
 			{
-				var upcTable = new Table("Field", "Value");				
+				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
-				upcTable.AddRow("Size", size);				
+				upcTable.AddRow("Size", size);
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
@@ -4383,13 +4394,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(myStudioShaManager.SetAutoAssignRegulatorySpecialisttoProduct(false),
 				"Failed to deselect Auto assign regulatory specialist", "Deselected auto assign regulatory specialist");
 			var regSpec = TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
-			if(regSpec==null)
+			if (regSpec == null)
 			{
 				Report.Info("Failed to find SHA Regulatory Specialist in context, defaulting to: Automated QASha");
 				regSpec = "Automated QASha";
 			}
 			Report.Info($"The Regulatory Specialist that will be selected is: {regSpec}");
-				
+
 			Report.IsTrue(myStudioShaManager.SelectRegulatorySpecialist(regSpec),
 				"Failed to select regulatory specialist", "Selected regulatory specialist");
 			Report.IsTrue(myStudioShaManager.ClickContinueInProcessProducts(), "Failed to click continue",
