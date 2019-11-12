@@ -320,11 +320,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myAccount = new StepsMyAccount();
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
-			myAccount.StewardshipInformation("Ontario", "ON-1-1", "", "");
-			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
+			myAccount.StewardshipInformation("Ontario", "ON-1-1");
+			myAccount.StewardshipInformation("Quebec", "QU-1-1");
 			Report.Info(savedAs + " Account Created");
 
 			this.SaveUserToTReVor(savedAs, account);
@@ -498,8 +498,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "BC-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Manitoba", "BC-1-1");
 
 			//data tiers
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
@@ -539,8 +539,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
 
 			Report.Info(savedAs + " Account Created");
 			this.SaveUserToTReVor(savedAs, account);
@@ -665,11 +665,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship data
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
-			myAccount.StewardshipInformation("Ontario", "ON-1-1", "", "");
-			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
+			myAccount.StewardshipInformation("Ontario", "ON-1-1");
+			myAccount.StewardshipInformation("Quebec", "QU-1-1");
 
 
 			Report.Info(savedAs + " Account Created");
@@ -694,9 +694,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1", "", "");
-			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1");
+			myAccount.StewardshipInformation("Quebec", "QU-1-1");
 			Report.Info(savedAs + " Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
@@ -804,8 +804,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
 
 			//update TReVor info
 			Report.Info(savedAs + " Account Created");
@@ -906,11 +906,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
-			myAccount.StewardshipInformation("Ontario", "ON-1-1", "", "");
-			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
+			myAccount.StewardshipInformation("Ontario", "ON-1-1");
+			myAccount.StewardshipInformation("Quebec", "QU-1-1");
 
 			//data tiers
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
