@@ -19,6 +19,7 @@
 @Brands
 @MyIngredients
 @UPC
+@ProductSetUp
 @SHA
 @Studio
 @ForwardProductRegistration
@@ -870,6 +871,11 @@ Scenario: [CVSTIERS] Daily Report -  CVS TIERS CHECK
 		| UPC Name            |
 	Then I confirm that the excel file saved as: 115163 contains CVS products with tiers 2.1, 2.2 and 4.1 granted 	
 	Then I delete the Advanced Report file saved as 115163
+
+Scenario: [ProductProccess] WM CHALK COMPLETED
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Then I create a Chalk product for WalMart and Proccess it to completed and save it as: WMCHALKTEST1
 
 
 

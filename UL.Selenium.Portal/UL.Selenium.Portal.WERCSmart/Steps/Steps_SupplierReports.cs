@@ -464,6 +464,101 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
+		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) does not contains: (.*) in any rows.")]
+		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnDoesNotContain(string savedAs, string column, string failValue)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				int wantedColumnIndex = 0;
+				bool wantedColumnFound = false;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == column)
+					{
+						wantedColumnIndex = i;
+						wantedColumnFound = true;
+						break;
+					}
+				}
+				if (!wantedColumnFound)
+				{
+					Report.Failure($"The column: {column} could not be found in the spreadsheet");
+					return;
+				}
+				List<string> wantedColumnContents = ExcelUtils.Excel_GetColumn(wantedColumnIndex);
+				bool failValueNotFound = true;
+				int y = 0;
+				foreach (var item in wantedColumnContents)
+				{
+					if (item ==failValue)
+					{
+						Report.Failure($"The Value {failValue} was found in the column {column} for the entry at postition: {y}");
+						failValueNotFound = false;
+						
+					}
+					y++;
+				}
+				Report.IsTrue(failValueNotFound, "The unwanted value was found in the search column", "The unwanted value was not found in the search column");
+				
+
+
+
+			}
+		}
+
+
+		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) only contains: (.*) in all rows.")]
+		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnOnlyContains(string savedAs, string column, string wantedValue)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				int wantedColumnIndex = 0;
+				bool wantedColumnFound = false;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == column)
+					{
+						wantedColumnIndex = i;
+						wantedColumnFound = true;
+						break;
+					}
+				}
+				if (!wantedColumnFound)
+				{
+					Report.Failure($"The column: {column} could not be found in the spreadsheet");
+					return;
+				}
+				List<string> wantedColumnContents = ExcelUtils.Excel_GetColumn(wantedColumnIndex);
+				bool wantedValueFound = true;
+				int y = 0;
+				foreach (var item in wantedColumnContents)
+				{
+					if (item != wantedValue && item!=column)
+					{
+						Report.Failure($"The Value {wantedValue} was not found in the column {column} for the entry at postition: {y}");
+						wantedValueFound = false;
+
+					}
+					y++;
+				}
+				Report.IsTrue(wantedValueFound, "The wanted value was not found in all rows of the search column", "The wanted value was the only value found in all rows of the search column");
+
+
+
+
+			}
+		}
+
 	}
 }
 		

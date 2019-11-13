@@ -9,6 +9,7 @@
 @DataSummarySheet
 @RetailPartners
 @SummaryPage
+@SupplierReports
 @PaymentMethods
 @SubEnrollment
 @WERCSmart_Signup
@@ -702,12 +703,135 @@ Scenario: [98534] Advanced Reporting - Registrations Published report -
 
 @ScenarioId:6039
 Scenario: [115446] Products Fed to Retailers
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Products Fed to Retailers report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Products Fed to Retailers is shown as: Internal Use Only.  Products that successfully transferred registration assessment information to Retailers with an outline of the data provided.  Users can select specific retailers and a date range to generate the report.  Further filtering of data output can be done via UPC sizes, percentage of water and/or alcohol.
+	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM	
+	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 115446
+	Then I confirm that the excel file saved as: 115446 contains the following columns:
+	| Column              |
+	| WPSID               |
+	| Product Name        |
+	| F_UPC               |
+	| UPC Size            |
+	| WMDRUM              |
+	| WMCAD               |
+	| WMBC                |
+	| PYST                |
+	| PYSTM               |
+	| FPF                 |
+	| PH                  |
+	| RU                  |
+	| EPAN                |
+	| CAWC                |
+	| WSWC                |
+	| UNM                 |
+	| HCM                 |
+	| PSNDWM              |
+	| HCDWM               |
+	| DVID                |
+	| PSNV                |
+	| HCW                 |
+	| UNIFFC              |
+	| BATT                |
+	| BATTT               |
+	| ALL                 |
+	| BATYPE              |
+	| LBAT                |
+	| BATTPACK            |
+	| BATTLIGM            |
+	| BATCT               |
+	| CELLNUM             |
+	| BATTNUM             |
+	| NUMB                |
+	| CHEMICAL            |
+	| KIT                 |
+	| OTC                 |
+	| TGWAST              |
+	| MPIND               |
+	| DOTPG               |
+	| DERGN               |
+	| INTFC               |
+	| CASEC               |
+	| CASECD              |
+	| DOTBMP              |
+	| IMDGBMP             |
+	| CATEST              |
+	| WATEST              |
+	| CNTXT               |
+	| Last Published Date |
+	| Published By        |
+	| Recert              |
+	| Product_status      |
+	| GHS                 |
+	| CT 2.1              |
+	| CT 2.2              |
+	| CO 2.1              |
+	| CO 2.2              |
+	| CV 2.1              |
+	| CV 2.2              |
+	| CV 3                |
+	| DT 2.1              |
+	| DT 2.2              |
+	| RA 2.1              |
+	| RA 2.2              |
+	| RA 3                |
+	| TG 2.1              |
+	| TG 2.2              |
+	| TG 3                |
+	| TG 4.1              |
+	| WM 2.1              |
+	| WM 2.2              |
+	| WM 4.2              |
+	| Water %             |
+	| Alcohol %           |	
+	Then I delete the Advanced Report file saved as 115446
+
+
+@ScenarioId:6048
+Scenario: [116340] Products Fed to Retailers - Filters
 	#will need to create a product first? May have issues in automation, ask Ammanda
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: Products Fed to Retailers report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Products Fed to Retailers is shown as: Internal Use Only.  Products that successfully transferred registration assessment information to Retailers with an outline of the data provided.  Users can select specific retailers and a date range to generate the report.  Further filtering of data output can be done via UPC sizes, percentage of water and/or alcohol.
+	Then In The advanced reporting screen I Click Option: Includes Water	
+	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM	
+	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340	
+	Then For the excel file saved as: 116340 I check that the column with heading name: Water % does not contains: 0 in any rows.
+	Then I delete the Advanced Report file saved as 116340
+
+	Then I select the: Products Fed to Retailers report from Advanced Reporting in SHA
+	Then In The advanced reporting screen I Click Option: Contains Alcohol
+	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM	
+	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340	
+	Then For the excel file saved as: 116340 I check that the column with heading name: Alcohol % does not contains: 0 in any rows.
+	Then I delete the Advanced Report file saved as 116340
+
+	Then I select the: Products Fed to Retailers report from Advanced Reporting in SHA
+	Then I enter UPC Size: 1 in the advanced reporting popup
+	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM	
+	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340	
+	Then For the excel file saved as: 116340 I check that the column with heading name: UPC Size only contains: 1 in all rows.
+	Then I delete the Advanced Report file saved as 116340
+
+	Then I select the: Products Fed to Retailers report from Advanced Reporting in SHA
 	Then In The advanced reporting screen I Click Option: Includes Water
 	Then In The advanced reporting screen I Click Option: Contains Alcohol
 	Then I enter UPC Size: 1 in the advanced reporting popup
 	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM	
-	Then I enter start Date: 01-01-2019 and end Date: 11-11-2019 for the Advanced report then I click Submit
+	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Then For the excel file saved as: 116340 I check that the column with heading name: Water % does not contains: 0 in any rows.
+	Then For the excel file saved as: 116340 I check that the column with heading name: Alcohol % does not contains: 0 in any rows.
+	Then For the excel file saved as: 116340 I check that the column with heading name: UPC Size only contains: 1 in all rows.
+	Then I delete the Advanced Report file saved as 116340
+
+

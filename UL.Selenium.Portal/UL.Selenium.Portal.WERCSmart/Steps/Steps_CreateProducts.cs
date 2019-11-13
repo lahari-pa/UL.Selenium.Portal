@@ -1228,7 +1228,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.SetRadioOptionInSectionTo("Who is publicly identified on the product label as responsible for the product?", "Manufacturer");
 			}
 
-			if (myNewProduct.SectionExists("Who is the Final Domestic Distributor (if any) of the product"))
+			if (myNewProduct.SectionExists("Who is the Final Domestic Distributor (if any) of the product?"))
 			{
 				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField("Company Name");
 			}

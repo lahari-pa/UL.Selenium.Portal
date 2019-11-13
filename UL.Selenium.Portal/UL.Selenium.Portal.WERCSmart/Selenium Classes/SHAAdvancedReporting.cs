@@ -395,7 +395,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not find the input element!");
 				return false;
 			}
-			startDateField.JsEnterText(value);
+
+			startDateField.TryClick();
+			startDateField.EnterText(value);
+			//endDateField.JsEnterText(value);
 			Delay.Seconds(1);
 			Report.Screenshot();
 			bool matching = false;
@@ -447,9 +450,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not find the input element!");
 				return false;
 			}
-			upcSizeField.JsEnterText(value);
+
+			upcSizeField.TryClick();
+			upcSizeField.EnterText(value);
+			//endDateField.JsEnterText(value);
 			Delay.Seconds(1);
 			Report.Screenshot();
+
 			bool matching = false;
 
 			if (upcSizeField.GetValue() == value)
