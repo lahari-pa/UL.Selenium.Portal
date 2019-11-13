@@ -477,3 +477,5 @@ Scenario: [105352] Product Comments screen Max input length
 	Then I close the Data Summary tab
 	Given I navigate to the home page
 	Then I delete the product: TestCase105352
+
+

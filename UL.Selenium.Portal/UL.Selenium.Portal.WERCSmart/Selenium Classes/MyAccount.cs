@@ -478,6 +478,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+
 		//Accounts Navigation
 		[FindsBy(How = How.Id, Using = "myAccounts_navigation")]
 		private IWebElement _nav_accounts;
@@ -1389,6 +1390,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//UPGRADE Button
 		[FindsBy(How = How.XPath, Using = ".//div/a[text()='Upgrade']")]
 		private IWebElement _btnUpgrade;
+
+		public bool ConfirmThatInTheMiddleOfThePageYouSeeTheUpgradeButton()
+		{
+			Report.Info("Beginning ConfirmThatInTheMiddleOfThePageYouSeeTheUpgradeButton");
+			if(this._btnUpgrade == null)
+			{
+				Report.Info("Upgrade Button was not Found!");
+				return false;
+			}
+			Report.Info("Upgrade Button Found!");
+			return true;
+		}
 
 		public bool Upgrade_click()
 		{

@@ -157,3 +157,45 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845072 and its status is: Assigned
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase845072)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845073 and its status is: Assigned
+
+
+Scenario: [96663] Forward NR Product - Completed Status to two retailers
+NetProjects10\WercsSmart Portal\WERCSmart\Product set up and process to specific statuses
+Given I If you are using this test case then you already have a product you are working with which you made using test case 96661
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And [Shared Step 75130 - Bulk Actions - Select Forward Product Registration]
+And I With the 'Selected Products Tab' selected by default
+And I In the "Search by WPS ID or Product Name" start typing the WPS ID or Product Name of the Product you are working with
+And I Confirm the Product is shown for selection
+And I Select the product by clicking on it
+And I Click 'CONTINUE'
+And I Select two Retailers
+And I Click 'CONTINUE'
+And [Shared Step 84195 - Forwarding - Add a new UPC - Save - Select UPC and Continue]
+And I The 'Product Results Tab' is selected
+And I Confirm that the UPC Number displays the recently selected "Retailer"(Step 17)
+And I Confirm that NO Errors display for the Product
+And I Click 'CONTINUE'
+And I The 'Review and Submit' step is shown
+And I Select the "All of the above statements are true" Radio Button
+And I Click 'CONTINUE'
+And I Confirm the Purchase Summary page is shown with the success message shown" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  "
+And I Click on the 'HOME BUTTON'
+And I In SHA Manager
+And I In the shared step below search for your product using the WPS ID you noted earlier
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm the Product shows a "Completed Status" for the Original Retailer(see Clients column) - should show NR
+And I Confirm the Productshows a "Submitted Status" for the recently selected Retailer (see clients column)The Retailers you selected in step 8
+And [Shared Step 75309 - SHA > Select Product > UPC List]
+And I With the SHA Manager Product UPC window open - Click on the 'maximize' icon to expand the view of the window
+And I Confirm the recently added Retailer(s)is (are) shown against the UPC you selected
+And I Confirm the UPC status shown is 2
+And I Close the SHA Manager Product UPC window
+And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: (.*))
+And I In the shared step below search for the Product you are working with
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm the Product shows the ORIGINAL RETAILER(s) with a "Completed Status" (see the Clients column)
+And I Confirm the Product shows theNEW RETAILER(s) with an "Accepted Status" (see the Clients column)Note: if you selected a retailer that does not have a feed associated to it you will see the product in Completed status for this retailer)
+And I In the Shared Step below - Select the Product with the "Accepted Status"
+And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: (.*))
+And I Confirm the Product now shows a "Completed" Status in Completed forALL associated Retailers

@@ -174,5 +174,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(matchingUpc.Retailers.Contains(row["Retailer"]), "Retailers column did not contain retailer: " + row["Retailer"] + "!", "Retailers column contained retailer: " + row["Retailer"]);
 			}
 		}
+
+		[StepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
+		public void ThenIConfirmTheUPCDuplicateWarningIconIsVisible()
+		{
+			Report.IsTrue(new UPC().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
+		}
+
 	}
 }

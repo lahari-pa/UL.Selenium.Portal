@@ -303,7 +303,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 @singlerun
 Scenario: [87894] Forwarding - Edit existing Case UPC 
 
-Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completedstatus
+Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status
 Given I navigate to the landing page
 And I call Shared Step (Login to WERCSmart - Premium Account)
 Then I filter the products by: Accepted by Retailers
@@ -387,3 +387,129 @@ And I verify the Regular UPC data is correct in the View UPCs window:
 | %UPC87835% | Paper bag      | 2           | AM       |
 And I close the window that opened
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835
+
+@ScenarioId:5997
+Scenario: [87687] UPC - Case Pack, recertification by WERCSmart user - remove Case pack add regular UPC
+# I Use Test case 87686 to create a product which has a Case pack UPC for 1 or more retailers and which is in Completed status.
+Given I create a product with name: Chalk using Test Case 87686 which has a Case pack UPC for 1 or more retailers and which is in Completed status and save as: TestCase87687
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+# I Filter for the product you are using
+Then I filter for the product saved as: TestCase87687
+# I Confirm the product is shown in Completed status - green color on the retailer icons
+Then For product saved as: TestCase87687 the status is: Completed
+# I Click the ... icon in the Actions column for your product
+# I Click Update Data
+And I click Row Actions for the first product returned
+And I click on the Row Action: Update Data
+And I An Update Registration window will pop-up  - Click on the 'YES' Button
+And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step
+And I Select the "No, Continue editing data" Radio Button and click 'SAVE'
+And I The "The Product" step will be shown
+And I Click the 'Recipient and UPC Details Tab Heading'
+And I Click the Universal Product Code (UPC) Step heading
+And [Shared Step 87689 - UPC - Select UPC, Delete]
+And I call Shared Step 42759 (Portal - UPC Page - add 1 UPC)
+And I Click the 'Data Acceptance Step Heading'
+And I Click 'ACCEPT'
+And I You will see the Purchase Summary page - depending on your subscription you will either see the Thank You message or you will see you product details and the Confirm order button.  If the confirm order button is shown Click it.
+Then I navigate to the home page
+# I Filter for your product and confirm the retailers shown are shown in the orange Assessment in progress color
+Then For product saved as: TestCase87687 the status is: Assessment
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+# I Use the shared step below to search for your product ID
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm your product is shown in the Recertification status without the red recertification font color
+And [Shared Step 75309 - SHA > Select Product > UPC List]
+And I Confirm the Case Pack UPC is shown with the grey background indicating the UPC has been archived
+And I Confirm the new regular UPC is shown with a white background indicating the UPC is active
+And I Confirm the case pack indicator (an * next to the UPC number) is not shown for the regular UPC
+And I Close the UPC pop up
+
+
+@ScenarioId:6008
+Scenario: [87691] UPC - Case Pack, Recertification by WERCSmart User - Remove Case Pack Leaving Only Regular UPC
+Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status
+# TestCase87685
+Given I navigate to the landing page
+#
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+# I Filter for the Product you are using
+Then I filter for the product saved as: TestCase87685
+# I Confirm the Product is shown in Completed status - green color on the Retailer Icons
+Then For product saved as: TestCase87685 the status is: Completed
+# I Click the ... icon in the Actions column for your product
+Then I click Row Actions for the first product returned
+# I Click 'Update Data'
+Then I click on the Row Action: Update Data
+# I The 'Update Registration' pop-up launches stating the following:  "Update allows you to edit and resubmit your changes to the registration.  Did you want to update the registration and resubmit for a revised Assessment? "Product Name and Product ID"
+Then I should see the Update Registration popup
+Then I should see an error message: Update allows you to edit and resubmit your changes to the registration.  Did you want to update the registration and resubmit for a revised Assessment? "Product Name and Product ID
+
+And I Click 'YES'
+And I Transitions to the 'Product Type Tab Heading'
+And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step - Select the "No, continue editing data" Radio Button
+And I Click 'SAVE'
+And I The "The Product" step will be shown
+And I Click the 'Recipient and UPC Details' Tab Heading
+And I Click the 'Universal Product Code (UPC)' Step Heading
+And I Confirm both the "Case UPC" and the 'Regular UPC" are shown
+And I In the shared step below select the Case UPC for deletion
+And [Shared Step 87689 - UPC - Select UPC, Delete]
+And I Confirm the 'CASE UPC' IS NO LONGER shown
+And I Confirm the 'Regular UPC' is still shown
+And I Click 'SAVE'
+And I Click the 'Data Acceptance' step heading
+And I Click on the 'ACCEPT BUTTON'
+And I You will see the Purchase Summary Page - depending on your subscription you will either see the Thank You message or you will see you product details and the Confirm order button.
+And I If the 'CONFIRM ORDER BUTTON' - Click on it
+And I On the left-navigation - Click on the 'Home Icon'
+And I Filter for your Product and CONFIRM the Retailers shown are shown in the 'Orange Assessment in Progress' color
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I Use the shared step below to search for your product ID
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm your Product is shown in the 'Recertification Status' without the red recertification font color
+And [Shared Step 75309 - SHA > Select Product > UPC List]
+And I Confirm the 'Case Pack UPC' is shown with the row highlighted in grey - this shows the UPC has been archived/removed
+And I Confirm the 'Regular UPC' is shown and has a white background
+And I Confirm the 'Case Pack Indicator (*) -  IS NOT SHOWN for the Regular UPC
+And I Close the UPC pop up
+And I Your Product continues to display under the Product List grid
+And I Confirm the 'Clients Column' shows the Retailers associated with your Product
+And I Confirm that the Clients listed DO NOT HAVE '2 Asterisks (*)'  shown next to them
+
+Scenario: [87895] Forwarding - Add new Case Pack UPC
+NetProjects10\WercsSmart Portal\WERCSmart\UPC Case Pack\Forwarding
+Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC,  processed to completedstatus
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I Click the Accepted by Retailers Filter heading
+And I Enter the Product ID for the Product you are working with and press enter
+And I Confirm the Retailer icon is shown in the green Accepted by Retailers color
+And [Shared Step 75130 - Bulk Actions - Select Forward Product Registration]
+And I In the Search by WPS ID or Product name start typing the WPS ID or product name of the product you are working with
+And I Confirm the Product is shown for selection
+And I Select the Product by clicking on it
+And I Click 'CONTINUE'
+And I Select a Retailer other than Canadian Tire, make sure to select a Retailer that does not require additional data (such as BB, DI, KG)
+And I Click 'CONTINUE'
+And I Select the Product in the left hand table by clicking on the Product information
+And [Shared Step 89156 - Forwarding > Add Case UPC > Add all data (including individual UPC)  > Save]
+And I Confirm the Case UPC you added is shown in the right hand side table
+And I Select the new Case UPC by checking the check box next to the UPC information in the right hand side table
+And I Click 'CONTINUE'
+And I Confirm 'The Product Results' step is shown
+And I Confirm NO ERRORS are shown for your Product
+And I Confirm that for the 'Destination Retailers Column'  - you see the recently selected Retailer (Step # 11)
+And I Click 'CONTINUE'
+And I The 'Review and Submit' step is shown
+And I Select the "All of the above statements are true" Radio Button
+And I Click 'CONTINUE'
+And I Confirm the Purchase Summary page is shown with the success message shown" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  "
+And I Click 'HOME'
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm your Product is shown in Completed Status for the original retailer(s)
+And I Confirm your Product is shown in Submitted status for the new retailer
+And [Shared Step 75309 - SHA > Select Product > UPC List]
+And [Shared Step 88419 - SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window]
+

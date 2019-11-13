@@ -562,3 +562,34 @@ Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check t
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368
 
 
+# Assigned to Larkin, Steve
+# Created by Larkin, Steve
+
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
+
+@ScenarioId:5988
+Scenario: [87295] Third Party Ingredients - Informational Message
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+#: I In the shared step below use soap (Bar, Liquid) for body  as your product type
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid)
+Then I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Then I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+# WPS1347337 - Soap
+#: I Start typing in the component box "WPS" Note the numeric value appended to WPS
+#: I Select one of the"WPS" options from the drop down for example "WPS1171264"
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName                    |
+		| WPS1347337    | 100     | true                | false       | Soap Purple Z New by Keystone |
+		And I click continue
+Then a Warning popup dialog should appear with the message: Your product registration contains a 3rd-Party Formula that needs to be updated for it to be included in chemical-policy or sustainability assessments conducted by retailers or in GoodGuide ratings. We have sent a notification to your 3rd-Party Formulator requesting that the ingredient's Data Use Tier consent, and the public disclosure status of its ingredients, be updated. Please continue with this product registration, but note that the chemical-policy or sustainability assessment results may change if, and when, your 3rd-Party Formulator authorizes its ingredient to be included in such programs.
+Then I save the product information as: TestCase87295
+# I ingredients add
+# I Access Code Validation popup appears...
+# I Enter the WPS(with numbers) into theempty Code: field
+# I Press the VALIDATE button
+# I Enter 100 percent into the Enter percent
+# I Press Continue
+Then I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87295

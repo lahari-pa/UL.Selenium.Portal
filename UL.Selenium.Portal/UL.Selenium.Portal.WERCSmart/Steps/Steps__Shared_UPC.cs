@@ -1274,6 +1274,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(uPCpage.EnterDPCI(value), "Failed to enter DPCI", "Successfully entered DPCI");
 		}
 
-
+		[StepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
+		public void ThenIConfirmTheUPCDuplicateWarningIconIsVisible()
+		{
+			Report.IsTrue(new UPC().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
+		}
 	}
 }

@@ -121,8 +121,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Completed");
 		}
 
-		[StepDefinition(
-			@"I create a product with name: (.*) and take to completed using Test Case 75335 and save as: (.*)")]
+		[StepDefinition(@"I create a new product which has SOLD = US only, PL = No and is in completed status for One or more retailers and save the product as: (.*)")]
+		public void GivenICreateANewProductWhichHasSOLDUSOnlyPLNoAndIsInCompletedStatusForOneOrMoreRetailersAndSaveTheProductAs(string savedAs)
+		{
+			new Steps_ProductSetup().GivenICreateProductUsingTestCase75335(savedAs, "Chalk");
+		}
+
+		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75335 and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335(string name, string savedAs)
 		{
 			this.CreateProductUsingTestCase75335(savedAs, name);
@@ -133,6 +138,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			this.CreateProductUsingTestCase75335(savedAs, "Chalk");
 		}
+
+		
+
 
 		[StepDefinition(@"I create a product with name: (.*) and UPC: (.*) and take to completed using Test Case 75335 with no login step and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335(string name, string upc, string savedAs)
@@ -626,6 +634,100 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure("Failed to create product and process through to completed.");
 			}
+		}
+
+		[StepDefinition(@"I create a product with name: (.*) using Test Case 87686 which has a Case pack UPC for 1 or more retailers and which is in Completed status and save as: (.*)")]
+		public void GivenICreateAProductUsingTestCaseWhichHasACasePackUPCForOrMoreRetailersAndWhichIsInCompletedStatus_(string name, string savedAs)
+		{
+			if (Context.Contains("Chalk"))
+			{
+				Context.AddToContext("Chalk", "false");
+			}
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var stepsSharedUPC = new StepsUPC();
+			var stepsStudio = new Steps_Studio();
+
+			thisGlobalSteps.NavigateToLandingPage();
+			// Log in to administrator role
+			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
+			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC87686");
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(name);
+			newProductSteps.SaveProductInformation(savedAs);
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium Hydroxide");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			var retailerTable = new Table(new string[] {
+				"Retailer"});
+			retailerTable.AddRow(new string[] {
+				"Amazon"});
+			sharedSteps
+				.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(
+					retailerTable);
+			stepsSharedUPC.UPCCaseAddInformation("87686", "Paper bag", "2", "4", "UPC87685", "4A: steel box");
+			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
+			//Given in the Additional Documents to Provide page I click Continue
+			newProductSteps.ClickContinue();
+			//Given in the Optional Reports and Dcouments Available For Purchase page I click Continue
+			newProductSteps.ClickContinue();
+			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
+			sdsTable.AddRow("Mask", "300", "1.005", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
+			//	And I call Shared Step 57883(Comments - Happy Path) and enter the comment: test
+			sharedSteps.GivenICallSharedCommentsHappyPath("test");
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			// 65080 (Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Submitted");
+			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87686)
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Assigned
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Assigned");
+			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase87686)
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			//# Note: In Staging and Production - Electronic products are automatically published by the ImportProcessRules so if you are running in either of these sites you can skip to step 28
+			//And I check whether the current environment is Staging or Production and if it is I skip the next three steps
+			stepsStudio.GivenICheckWhetherTheCurrentEnvironmentIsStagingOrProductionAndIfItIsISkipTheNextThreeSteps();
+			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: X)
+			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
+			//And I call Shared Step 79500(WPS Studio - PD + -set all data and publish using rule and doc queue -CKLT and SBCS only) for product saved as: TestCase87686
+			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(
+				savedAs);
+
+			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase87686)
+			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
+			// 59066(Go to SHA Manager)
+			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			Report.Info(
+				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Accepted or Completed");
 		}
 
 		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
@@ -2662,9 +2764,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.ClickContinue();
 			newProductSteps.ClickContinue();
 			newProductSteps.ClickContinue();
+
 		}
 
-		[StepDefinition(@"I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completedstatus")]
+		[StepDefinition(@"I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status")]
 		public void IUseTestCase87685ToCreateAProductWhichHasACaseUPCAndARegularUPCProcessedToCompletedStatus()
 		{
 			TestReport.UseSubSteps = true;
@@ -2784,29 +2887,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase87685");
 			TestReport.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Completed");
 			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase87685", "Completed");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 		}
 

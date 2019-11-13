@@ -141,3 +141,34 @@ Given I click Done in the Select Retailers popup
 Then the selected retailers on the Retailer page should match the retailer list saved as AllSelectRetailers78937
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78937
+
+
+@ScenarioId:6010
+Scenario: [96708] Beverage RU - No Walmart
+Given I generate a random UPC number and save as: UPC96708
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+# And I Enter "Juice and Juice Drinks" in Type of Product smart search field
+And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Juice and Juice Drinks
+
+Then I save the product information as: TestCase96708
+
+# I Record the entry you select for Water Solubility
+#: WAS NOT USED
+
+And I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue)
+
+# [Shared Step 90477 - Additional Product Information - US, (NO) Retailer's PL]  
+Then I call Shared Step 69687 (Additional Product Information - US, No(PL))
+# I think this was the step that was needed.
+
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+And I call Shared Step 49818 (Beverage Regulatory Details)
+
+# I Confirm on the Select Retailer popup that Walmart is not available.
+# I Close popup
+Then I check that Walmart and all of its affiliates are not available
+
+Then I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase96708
+# Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase96708

@@ -8,6 +8,7 @@
 @LandingPage
 @PaymentMethods
 @Freshdesk
+@subUpgrade
 @run_MyAccount
 Feature: MyAccount
 
@@ -147,4 +148,6 @@ Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 	And I Select the Inactive filter
 	And I Confirm that you See the user you just created in the grid
 	And I confirm the new user is Not Active
-	
+
+
+
