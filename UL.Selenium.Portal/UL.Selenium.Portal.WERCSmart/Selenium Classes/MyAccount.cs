@@ -1277,7 +1277,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public bool EnterStewardshipInfo(string field, string option1, string option2, string option3)
+		public bool EnterStewardshipInfo(string field, string option1)
 		{
 			GeneralUtilities.Wait_for_load_finish();
 			IWebElement matchingRow = this.containerElement.FindElement(By.XPath(".//tr[contains(td,'" + field + "')]"));
@@ -1306,7 +1306,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			DateTime ut = tz.ToUniversalTime(DateTime.Now);
 			var est = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
 			var esttime = TimeZoneInfo.ConvertTimeFromUtc(ut, est);
-			option2 = esttime.ToString("yyyy-MM-dd");
+			var option2 = esttime.ToString("yyyy-MM-dd");
 			issueDate.Clear();
 			issueDate.EnterText(option2);
 			issueDate.SendKeys(Keys.Enter);
@@ -1321,7 +1321,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int month2 = DateTime.Now.Month + 1;
 			int day2 = DateTime.Now.Day;
 			var dtExp = new DateTime(year2, month2, day2);
-			option3 = dtExp.ToString("yyyy-MM-dd");
+			var option3 = dtExp.ToString("yyyy-MM-dd");
 			expireDate.Clear();
 			expireDate.EnterText(option3);
 			expireDate.SendKeys(Keys.Enter);
@@ -1356,18 +1356,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return StwdshipChkbox.TryClick();
 		}
 
-		public bool StewardshipSave_click()
+		//public bool StewardshipSave_click()
+		//{
+		//	IWebElement StwdshipSave = this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'stewardshipNumberModel')]//a[contains(text(),'Save')]"), 2);
+		//	Report.Info("Attempting to Click Save on Stewardship information");
+
+		//	if (StwdshipSave == null)
+		//	{
+		//		Report.Failure("Not able to find Stewardship Save button");
+		//		Report.Screenshot();
+		//		return false;
+		//	}
+		//	return StwdshipSave.TryClick();
+		//}
+
+		public bool StewardshipSaveOrCancel_Click(string option)
 		{
-			IWebElement StwdshipSave = this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'stewardshipNumberModel')]//a[contains(text(),'Save')]"), 2);
-			Report.Info("Attempting to Click Save on Stewardship information");
+			IWebElement StwdshipSave = this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'stewardshipNumberModel')]//a[contains(text(),'" + option + "')]"), 2);
+			Report.Info("Attempting to Click option on Stewardship information");
 
 			if (StwdshipSave == null)
 			{
-				Report.Failure("Not able to find Stewardship Save button");
+				Report.Failure("Not able to find option");
 				Report.Screenshot();
 				return false;
 			}
 			return StwdshipSave.TryClick();
+		}
+
+		public List<string> StewardshipFieldsNoData()
+		{
+			string xPath = @".//input[contains(@data-bind,'StewardNumber.field')] | " +
+						@".//input[contains(@data-bind,'IssueDate.field')] | " +
+						@".//input[contains(@data-bind,'ExpireDate.field')]";
+			return this.containerElement.FindElements(By.XPath(xPath), 2).Select(x => x.GetValue().Trim()).ToList();
 		}
 
 		public bool Canada_Supplier_Edit_click()
@@ -1381,6 +1403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
+			
 			return CanSuppEdit.TryClick();
 		}
 
@@ -1476,6 +1499,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 	}
+
 	class MyAccount_SubscriptionInfo : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "SubscriptionInfoContainer")]
@@ -2266,17 +2290,4 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 	// My Distributors
-
-	public class ClearStewardshipNotification : SeleniumBaseObject
-	{
-		public const string BasePath = "//div[@class='modal fade in']";
-
-		protected override By ContainerElementLocator => By.XPath(BasePath);
-
-		public bool ClickClearStewardshipOption(string option)
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class='modal-footer']//button[contains(text(),'" + option + "')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
-		}
-
-	}
 }
