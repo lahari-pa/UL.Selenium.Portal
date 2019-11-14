@@ -10,6 +10,7 @@
 @wercsmart
 @RetailPartners
 @run_RetailerSelection
+@UPC
 
 Feature: Retailer Selection
 
@@ -141,3 +142,38 @@ Given I click Done in the Select Retailers popup
 Then the selected retailers on the Retailer page should match the retailer list saved as AllSelectRetailers78937
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78937
+
+
+@ScenarioId:6055
+Scenario: [85276] Select Retailers - Errors highlighted
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+
+And I should see the Additional Product Information Page
+And I should see following statement: Select countries the product may be sold in
+And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
+And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
+And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
+Given I set all additional product information options to No
+Given I click continue
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Propane       | 100     | false               | false       |            |
+
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Given I click the Select all retailers option in the Select Retailers popup
+Then all retailers are selected in the Select Retailers window
+Given I click Done in the Select Retailers popup
+Given I click continue
+Then I confirm I see error messages for the following retailers
+| Retailer            |
+| O'Reilly            |
+| Sears/K-Mart        |
+| Wal-Mart/SAM'S CLUB |

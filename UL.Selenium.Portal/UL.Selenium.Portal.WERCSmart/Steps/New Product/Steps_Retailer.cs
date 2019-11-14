@@ -13,6 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_Retailer
 	{
+
 		[StepDefinition(@"the selected retailers on the Retailer page should match the retailer list saved as (.*)")]
 		public void SelectedRetailersOnRetailerPageShouldMatchSavedAs(string savedAs)
 		{
@@ -239,5 +240,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			this.IfISeeUpcWarningPopupClick("Ok");
 		}
 
+		[StepDefinition(@"I confirm I see error messages for the following retailers")]
+		public void ThenIConfirmISeeErrorMessagesForTheFollowingRetailers(Table table)
+		{
+			SelectRetailers SelectRetailersObject = new SelectRetailers();
+			Report.IsTrue(SelectRetailersObject.CheckIfRetailersInTableDisplayErrorMessage(table), "One or more of the retailers did not display an error message", "All of the retailers displayed an error message");
+		}
 	}
 }

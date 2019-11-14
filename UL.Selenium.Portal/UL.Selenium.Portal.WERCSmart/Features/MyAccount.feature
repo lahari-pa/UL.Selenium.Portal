@@ -148,3 +148,51 @@ Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 	And I Confirm that you See the user you just created in the grid
 	And I confirm the new user is Not Active
 	
+@ScenarioId:6057
+Scenario: [85513] My Account - Edit Stewardship Numbers - Save button
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then the WERCSmart homepage should load
+Given I call Shared Step 62676 (Go To My Account)
+And In the My Account page I navigate to the Company Information page
+Then I click on the 'Edit' link
+Then I fill in Stweardship Numbers information
+| Stewardship | Issue Date | Expire Date |
+| test1       | 2019-01-30 | 2020-01-30  |
+| test1       | 2019-01-30 | 2020-01-30  |
+| test1       | 2019-01-30 | 2020-01-30  |
+| test1       | 2019-01-30 | 2020-01-30  |
+| test1       | 2019-01-30 | 2020-01-30  |
+Then I save Stewardship Numbers information
+Then I confirm that the data saved in the Stewardshp Numbers section is correct
+| Stewardship | Issue Date | Expire Date |
+| test1       | 2019-01-30 | 2020-01-30  |
+| test1       | 2019-01-30 | 2020-01-30  |
+| test1       | 2019-01-30 | 2020-01-30  |
+| test1       | 2019-01-30 | 2020-01-30  |
+| test1       | 2019-01-30 | 2020-01-30  |
+
+
+@Philip
+@ScenarioId:6056
+Scenario: [85258] My Account - Stewardship Numbers - table display validation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then the WERCSmart homepage should load
+Given I call Shared Step 62676 (Go To My Account)
+And In the My Account page I navigate to the Company Information page
+Then I check that a heading with the name: Stewardship Numbers exists
+Then I check if there is a table in the Stewardship Numbers section
+Then I find out how many rows are in a table
+Then I check if column names match
+| Name        |
+| Province    |
+| Stewardship |
+| Issue Date  |
+| Expire Date |
+Then I check province names
+| Name             |
+| British Columbia |
+| Saskatchewan     |
+| Manitoba         |
+| Ontario          |
+| Quebec           |
+Then I check if 'Edit' button exists in the Stewardship Numbers section

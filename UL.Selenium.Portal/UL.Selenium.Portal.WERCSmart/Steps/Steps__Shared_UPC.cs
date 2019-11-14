@@ -1274,7 +1274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(uPCpage.EnterDPCI(value), "Failed to enter DPCI", "Successfully entered DPCI");
 		}
 
-		[StepDefinition(@"Set all additional product information options to (.*)")]
+		[StepDefinition(@"I set all additional product information options to (.*)")]
 		public void GivenSetUnderadgeChildToNo(string yesOrNoOption)
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -1326,14 +1326,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(NewProductClassObject.SelectAllRetailersInTable(table), "Failed to select all retailers in table", "Succeeded to select all retailers in table");
 		}
 
-		[StepDefinition(@"I fill in the UPC data")]
-		public void FillInUPCData()
+		[StepDefinition(@"I fill in the UPC data; UPC:(.*), Product Type:(.*), Product Weight:(.*)")]
+		public void FillInUPCData(string productUPC, string productType, string productWeight)
 		{
 			NewProduct NewProductClassObject = new NewProduct();
-			Report.IsTrue(NewProductClassObject.FillInUPCData(), "Failed to fill in UPC data", "Succeeded to fill in UPC data");
+			Report.IsTrue(NewProductClassObject.FillInUPCData(productUPC, productType, productWeight), "Failed to fill in UPC data", "Succeeded to fill in UPC data");
 		}
 
-		[StepDefinition(@"I remove randomly selected retailers")]
+	   [StepDefinition(@"I remove randomly selected retailers")]
 		public void GivenIRemoveRetailers()
 		{
 			NewProduct NewProductClassObject = new NewProduct();

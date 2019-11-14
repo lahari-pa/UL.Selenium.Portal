@@ -418,9 +418,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-
-
-
 		public bool UploadUpcButton()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2);
@@ -473,7 +470,114 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 
+		public bool CheckForAlertWithThisTextInUPCPage(string alertText)
+		{
+			IList<IWebElement> AlertMessagesWithSpanTag = this.FindElements(By.XPath("//span[@data-bind='text: $data']"), 2);
+			IList<IWebElement> AlertMessagesWithliTag = this.FindElements(By.XPath("//li[@data-bind='visible:$.trim($data).length > 0, text: $data']"), 2);
 
+			if (alertText == "No error")
+			{
+				if ((AlertMessagesWithSpanTag.Count() == 0) && (AlertMessagesWithliTag.Count() == 0))
+				{
+					return true;
+				}
+			}
+
+			foreach (IWebElement element in AlertMessagesWithSpanTag)
+			{
+				if (element.Text == alertText)
+				{
+					return true;
+				}
+			}
+
+			foreach (IWebElement element in AlertMessagesWithliTag)
+			{
+				if (element.Text == alertText)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool ClickContinueButtonInUPCPage()
+		{
+			IWebElement ContinueButton = this.FindElement(By.XPath("//a[@class='btn btn-success pull-right continue-button next-button']"), 2);
+			return ContinueButton.TryClick();
+		}
+
+		public bool ClickYesOrNoForUPCWarningPopUp(string yesOrNoButton, string savedAs)
+		{
+			if (yesOrNoButton == "YES")
+			{
+				IList<IWebElement> ListOfRemainingAbreviatedRetailerNames = this.FindElements(By.XPath("//span[@data-bind='text: identifier']"), 2);
+				List<string> ListOfRemainingRetailerNamesInTextForm = new List<string>();
+
+				foreach (IWebElement element in ListOfRemainingAbreviatedRetailerNames)
+				{
+					ListOfRemainingRetailerNamesInTextForm.Add(element.Text);
+				}
+
+				string strOfRemainingRetailerNames = string.Join(",", ListOfRemainingRetailerNamesInTextForm);
+				Context.AddToContext("ListOfRemainingRetailerNamesInTextForm", strOfRemainingRetailerNames);
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Context.AddToContext("ProductID", id);
+
+				IWebElement YesButton = this.FindElement(By.XPath("//div[@class='modal fade in']//button[@data-dismiss='modal' and text()='No']/following-sibling::button"), 2);
+				return YesButton.TryClick();
+
+			}
+			else if (yesOrNoButton == "NO")
+			{
+
+				IWebElement NoButton = this.FindElement(By.XPath("//div[@class='modal fade in']//button[@data-dismiss='modal' and text()='No']"), 2);
+				return NoButton.TryClick();
+
+			}
+
+			return false;
+		}
 
 	}
 	public class DeleteRowsWarning : SeleniumBaseObject

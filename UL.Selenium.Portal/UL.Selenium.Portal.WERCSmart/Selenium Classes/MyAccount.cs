@@ -11,6 +11,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using System.Collections.ObjectModel;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -897,6 +898,180 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this._subscriptioncontainer.FindElement(By.XPath(".//a[./small[contains(text(),'How to Subscribe')]]"), 2).TryClick();
 		}
+
+		public bool ClickOnEditButtonInCompanyInformationPageInStewardshipNumbersSection()
+		{
+			IWebElement EditButton = this.FindElement(By.XPath("//a[@id='edit-stewardship']"), 2);
+			return EditButton.TryClick();
+		}
+
+		public bool FillInStewardshipData(Table table)
+		{
+			IList<IWebElement> Textboxes = this.FindElements(By.XPath("//table[@class='table table-bordered']//input[@type='text']"), 2);
+			List<string> StewardshipList = new List<string>();
+			List<string> IssueDateList = new List<string>();
+			List<string> ExpireDateList = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				StewardshipList.Add(row["Stewardship"]);
+				IssueDateList.Add(row["Issue Date"]);
+				ExpireDateList.Add(row["Expire Date"]);
+			}
+
+			int k = 0;
+			int textboxesPerRow = 3;
+			for (int i = 0; i < Textboxes.Count() - 1; i += textboxesPerRow)
+			{
+				Textboxes[i].TryEnterText(StewardshipList[k]);
+				Textboxes[i + 1].TryEnterText(IssueDateList[k]);
+				Textboxes[i + 2].TryEnterText(ExpireDateList[k]);
+				k++;
+			}
+
+			return true;
+		}
+
+		public bool ClickSaveButtonForStewardshipNumbers()
+		{
+			IList<IWebElement> TableErrors = this.FindElements(By.XPath("//div[@class='info-cont last']//tbody//span[@data-bind='text: $data']"), 2);
+			IWebElement SaveButton = this.FindElement(By.XPath("//div[@data-bind='with: stewardshipNumberModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
+
+			if (TableErrors.Count() > 0)
+			{
+				Report.Info("Save button was not clicked becuase there was an error displayed for the information being saved");
+				return false;
+			}
+
+			return SaveButton.TryClick();
+		}
+
+		public bool CheckStewardshipNumbersTableDataAfterItHasBeenSaved(Table table)
+		{
+			System.Threading.Thread.Sleep(5000);
+			IList<IWebElement> TableData = this.FindElements(By.XPath("//table[@class='table table-bordered']//input[@type='text']/preceding-sibling::p"), 2);
+			List<string> StewardshipList = new List<string>();
+			List<string> IssueDateList = new List<string>();
+			List<string> ExpireDateList = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				StewardshipList.Add(row["Stewardship"]);
+				IssueDateList.Add(row["Issue Date"]);
+				ExpireDateList.Add(row["Expire Date"]);
+			}
+
+			int k = 0;
+			int textboxesPerRow = 3;
+			for (int i = 0; i < TableData.Count() - 1; i += textboxesPerRow)
+			{
+
+				if (!((TableData[i].Text == StewardshipList[k]) &&
+					(TableData[i + 1].Text == IssueDateList[k]) &&
+					(TableData[i + 2].Text == ExpireDateList[k])))
+				{
+					return false;
+				}
+
+				k++;
+			}
+
+			return true;
+		}
+
+		public bool SearchForHeadingInCompanyInformationPageWithName(string headingName)
+		{
+			IWebElement heading = this.FindElement(By.XPath("//*[text()='Stewardship Numbers']"), 2);
+
+			if (heading != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool CheckForTableInCompanyInformationPageInStewardshipNumbersSection()
+		{
+			IWebElement table = this.FindElement(By.XPath("//*[text()='Stewardship Numbers']/following-sibling::div//table"), 2);
+
+			if (table != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public int CheckNumberOfColumnsInTableInCompanyInformationPageInStewardshipNumbersSection()
+		{
+			IList<IWebElement> tableColumns = this.FindElements(By.XPath("//*[text()='Stewardship Numbers']/following-sibling::div//table//th"), 2);
+
+			return tableColumns.Count();
+		}
+
+		public bool CheckIfColumnNamesMatchInCompanyInformationPageInStewardshipNumbersSection(Table table)
+		{
+			IList<IWebElement> columnNames = this.FindElements(By.XPath("//*[text()='Stewardship Numbers']/following-sibling::div//table//th"), 2);
+
+			foreach (TableRow row in table.Rows)
+			{
+				bool foundMatch = false;
+
+				foreach (IWebElement element in columnNames)
+				{
+					if (row["Name"] == element.Text)
+					{
+						foundMatch = true;
+					}
+				}
+
+				if (!foundMatch)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection(Table table)
+		{
+			IList<IWebElement> provinceNames = this.FindElements(By.XPath("//*[text()='Stewardship Numbers']/following-sibling::div//table//tbody//td[1]"), 2);
+
+			foreach (TableRow row in table.Rows)
+			{
+				bool foundMatch = false;
+
+				foreach (IWebElement element in provinceNames)
+				{
+					if (row["Name"] == element.Text)
+					{
+						foundMatch = true;
+					}
+				}
+
+				if (!foundMatch)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckForEditButtonCheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection()
+		{
+			IWebElement EditButton = this.FindElement(By.XPath("//a[@id='edit-stewardship']"), 2);
+
+			if (EditButton != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 	}
 	class MyAccount_CompanyInfo : BaseObject
 	{

@@ -9,6 +9,7 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using NTTQA.Selenium.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -986,6 +987,55 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return false;
 			}
+		}
+
+		public bool ConfirmRetailersMatchInMyProductsSection(string savedAs)
+		{
+			System.Threading.Thread.Sleep(5000);
+			string strOfRemainingRetailerNames = Context.GetFromContext("ListOfRemainingRetailerNamesInTextForm").ToString();
+			List<string> ListOfRemainingRetailerNames = strOfRemainingRetailerNames.Split(',').ToList();
+
+			string id = Context.GetFromContext(savedAs).ToString();
+			var ProductID = Context.GetFromContext("ProductID");
+
+			IList<IWebElement> ListOfDisplayedAbreviatedRetailerNames = this.FindElements(By.XPath("//small[text()='" + ProductID + "']/../../following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td//span[@data-bind='text: Identifier']"), 2);
+			Report.Info("ListOfRemainingAbreviatedRetailerNames: " + ListOfRemainingRetailerNames.Count() + ", ListOfDisplayedAbreviatedRetailerNames: " + ListOfDisplayedAbreviatedRetailerNames.Count() + ", ProductID: " + ProductID);
+
+			if (ListOfRemainingRetailerNames.Count() != ListOfDisplayedAbreviatedRetailerNames.Count())
+			{
+				return false;
+			}
+			else
+			{
+
+				foreach (string RetailerName in ListOfRemainingRetailerNames)
+				{
+					bool foundMatch = false;
+
+					foreach (IWebElement DisplayedRetailerName in ListOfDisplayedAbreviatedRetailerNames)
+					{
+						if (RetailerName == DisplayedRetailerName.Text)
+						{
+							foundMatch = true;
+						}
+					}
+
+					if (!foundMatch)
+					{
+						return false;
+					}
+
+				}
+
+			}
+
+			return true;
+		}
+
+		public bool ConfirmYouWouldLikeToDeleteButton()
+		{
+			IWebElement ConfirmYouWouldLikeToDeleteButton = this.FindElement(By.XPath("//div[@class='modal-footer']//button[@data-bind='click: function(){ resolve(false); }, text: noText']"), 2);
+			return ConfirmYouWouldLikeToDeleteButton.TryClick();
 		}
 	}
 
