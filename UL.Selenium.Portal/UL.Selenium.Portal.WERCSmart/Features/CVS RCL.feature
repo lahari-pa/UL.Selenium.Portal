@@ -716,6 +716,7 @@ And I should see the Regulatory Documents to Provide Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74270
 
+@ScenarioId:6032
 Scenario: [74272] CVS RCL - Page is NOT shown if Product has CVS selected with a UPC that does not start 050428
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

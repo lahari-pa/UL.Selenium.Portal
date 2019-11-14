@@ -1434,7 +1434,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
-		
+
+		[StepDefinition(@"I confirm that I do not see any stewardship information")]
+		public void NoStewardshipData()
+		{
+			try
+			{
+				GeneralUtilities.ScrollToBottomOfPage();
+				var mystwdinfo = new MyAccount_CompanyInfo();
+				var stwdinfo = mystwdinfo.StewardshipFieldsNoData();
+				Report.IsTrue(stwdinfo.FirstOrDefault().IsNullOrEmpty(),
+					"Can see Stewardship information", "Stewardship information is not available as expected");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 
 
