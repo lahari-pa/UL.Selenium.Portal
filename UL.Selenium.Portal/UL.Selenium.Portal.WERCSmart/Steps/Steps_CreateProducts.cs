@@ -1126,6 +1126,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//below not yet tested for this product type
 
 			sharedSteps.SharedCVSPharmacy_YesIWishToContinue();
+			new StepsNewProduct().SetTheSectionOptionTo("What is the CVS Store Brand associated to this product?", "CVS Health (CVS Pharmacy)");
+			new StepsNewProduct().SetTheSectionOptionTo("Who is the Product Development Manager (PDM) for this product?", "Lacross, Elizabeth A. Elizabeth.LaCross@CVSHealth.com");
+			new StepsNewProduct().SetTheSectionOptionTo("What is the CVS merchandising category for this product?", "Facial Care");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product specifically designed, marketed or labeled for infants, babies, or children?", "No");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels?", "Yes");
+			new StepsNewProduct().SetTheSectionOptionTo("Product contains microbeads", "No");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product intended to be rinsed off after use?","No");
+			new StepsNewProduct().SetTheSectionOptionTo("Refer to your Product Label. Select the options that appear on the label.", "None of the Above");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product intended to be ingested?", "No");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)?", "No");
+			new StepsNewProduct().ClickContinue();
 
 			TestReport.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
 			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();

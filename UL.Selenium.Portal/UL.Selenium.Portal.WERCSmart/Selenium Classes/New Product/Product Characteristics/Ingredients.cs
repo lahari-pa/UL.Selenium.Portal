@@ -981,6 +981,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			foreach (var option in allOptionsStr)
 			{
+				functionalPurposeBox.Select(option);
 				List<IWebElement> currentlySelectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
 
 				var currentlySelectedOptionsStr = new List<string>();
@@ -988,7 +989,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					currentlySelectedOptionsStr.Add(item.Text);
 				}
-				functionalPurposeBox.Select(option);
+				
 				if (currentlySelectedOptionsStr.Contains("×" + option))
 				{
 					Report.Info($"The correct Purpose was selectd.");

@@ -3555,6 +3555,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
+			TestReport.StartStep("I generate a random UPC number and save as: UPC75142");
+			new StepsProductGrid().GivenIGenerateARandomUPCNumberAndSaveAs("UPC75142");
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
 			newProductSteps.SaveProductInformation(savedAs);
@@ -3573,14 +3575,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I set the Vendor as: Testing");
 			//new Steps_Retailer().ISelectVendorId("Testing");
 			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Walmart");
-			new Retailer().EnterPrivateLabelName("This Private Label");
+			new Retailer().SelectPrivateLabelName("Great Value");
 			TestReport.StartStep("I click continue");
-			newProductSteps.ClickContinue();		
+			newProductSteps.ClickContinue();
+			TestReport.StartStep("In the upc screen I add the UPC: saved as UPC75142, container type: Metal Container and size: 40, then select all certifications");
+			new StepsNewProduct().InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications("75142", "Metal Container", "40");
 
 
 
-
-			sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as UPC86259", "Metal Container", "5");
+			//sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as UPC86259", "Metal Container", "5");
 			sharedSteps.ThenICallSharedStep78868_RegulatoryDocumentsToProvide_USAndCanada_RequestAuthoringForBoth();
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
