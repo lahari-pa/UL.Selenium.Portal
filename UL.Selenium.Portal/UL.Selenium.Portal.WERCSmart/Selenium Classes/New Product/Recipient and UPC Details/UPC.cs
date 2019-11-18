@@ -87,6 +87,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+
+
 		public bool InputUpcCaseInformation(UpcCaseInformation info)
 		{
 			try
@@ -472,8 +474,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return input.TryEnterText(value);
 		}
 
+		public bool ExpandFirstUPC()
+		{
+			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
+			IWebElement expandArrow = this.containerElement.FindElement(By.XPath("//form//table[contains(@class,'upc-table')]//a[@title='Expand']"));
+			return expandArrow.TryClick();
+		}
 
+		public string GetValueOfRetailerFieldInActiveRow(string retailerID, string field)
+		{
+			IWebElement retailerField = this.containerElement.FindElement(By.XPath($"//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]/following-sibling::input"));
+			return retailerField.GetValue();
+		}
 
+		public string GetExpandedUPC()
+		{
+			IWebElement upcField = this.containerElement.FindElement(By.XPath($"//label[contains(text(),'UPC Number')]/following-sibling::input"));
+			return upcField.GetValue();
+		}
 
 	}
 	public class DeleteRowsWarning : SeleniumBaseObject
@@ -581,6 +599,100 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				if (sizeValue != fileData[i].Trim())
 				{
 					Report.Info("error: popup contains: " + sizeValue + "while file data contains: " + fileData[i] + " in row " + i);
+					return false;
+				}
+				i = i + 11;
+			}
+			return true;
+		}
+
+		public bool CheckValueOfEachProductFromFile(string value, string file, string savedAs)
+		{
+			new UPC().GetFile(file, savedAs);
+			var actualFile = Context.GetFromContext(savedAs);
+			List<string> fileData = new UPC().GetFileData(savedAs, actualFile);
+
+			var multipleUPCModal = new MultipleUPC();
+
+			if (fileData is null)
+			{
+				Report.Failure("either the table is empty or the file: '" + file + "' is not being read.");
+				return false;
+			}
+
+			string valueDataBindString = "";
+			int offset = 0;
+			switch (value.ToLower())
+			{
+				case "upc":
+					valueDataBindString = "row.upc";
+					break;
+
+				case "size":
+					valueDataBindString = "row.size";
+					offset = 2;
+					break;
+			}
+
+			IList<IWebElement> upcList = multipleUPCModal.FindElements(By.XPath($"//td//span[@data-bind='text: {valueDataBindString}']"), 2);
+			int i = 11 + offset;
+			foreach (var item in upcList)
+			{
+				string UPCnumber = item.Text;
+				if (UPCnumber != fileData[i].Trim())
+				{
+					Report.Info("error: popup contains: " + UPCnumber + "while file data contains: " + fileData[i] + " in row " + i);
+					return false;
+				}
+				i = i + 11;
+			}
+			return true;
+		}
+
+		public bool CheckValueOfEachEssendantProductFromFile(string value, string file, string savedAs)
+		{
+			new UPC().GetFile(file, savedAs);
+			object actualFile = Context.GetFromContext(savedAs);
+			List<string> fileData = new UPC().GetFileData(savedAs, actualFile);
+
+			var multipleUPCModal = new MultipleUPC();
+
+			if (fileData is null)
+			{
+				Report.Failure("either the table is empty or the file: '" + file + "' is not being read.");
+				return false;
+			}
+
+			string valueDataBindString = "";
+			int offset = 0;
+			switch (value.ToLower())
+			{
+				case "item no.":
+					valueDataBindString = "row.getAdditionalDataValue(identifier(), 1)";
+					offset = 5;
+					break;
+				case "part no.":
+					valueDataBindString = "row.getAdditionalDataValue(identifier(), 0)";
+					offset = 4;
+					break;
+			}
+			var headerTextList = multipleUPCModal.FindElements(By.XPath($"//div[@class='col-md-8 upc-list-container']//th"), 2).Select(x => x.Text).ToList<string>();
+			int retailerIndex = headerTextList.IndexOf("Essendant");
+
+			if(retailerIndex == -1)
+			{
+				Report.Info("error: retailer not in header" );
+				return false;
+			}
+
+			IList<IWebElement> valueList = multipleUPCModal.FindElements(By.XPath($"//td[{retailerIndex+1}]//span[@data-bind='text: {valueDataBindString}']"), 2);
+			int i = 11 + offset;
+			foreach (IWebElement item in valueList)
+			{
+				string valueString = item.Text;
+				if (valueString != fileData[i].Trim())
+				{
+					Report.Info("error: popup contains: " + valueString + "while file data contains: " + fileData[i] + " in row " + i);
 					return false;
 				}
 				i = i + 11;

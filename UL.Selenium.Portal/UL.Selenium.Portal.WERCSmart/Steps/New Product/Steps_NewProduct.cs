@@ -2512,10 +2512,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 		}
 
+		[StepDefinition(@"In the Recipient and Product Details tab, I Expand the first UPC")]
+		public void IExpandFirstUPC()
+		{
+			Report.IsTrue(new UPC().ExpandFirstUPC(), "Failure, failed to expand first UPC", "Success, expanded the first UPC");
+		}
+
+		[StepDefinition(@"I check that (Item Number|Part Number) for Essendant UPC item 1 (should|should not) match the UPC Upload document saved in the Table called: (.*)")]
+		public void ICheckNumberForEssendantAgainstUPCUploadTable(string field, string present, string tableSavedAs)
+		{
+			bool showing = present == "should";
+
+			if (Context.Contains(tableSavedAs))
+			{
+				string upcTableFieldName = "";
+				switch (field)
+				{
+					case "Item Number":
+						upcTableFieldName = "US: Item Number";
+						break;
+					case "Part Number":
+						upcTableFieldName = "US: Part Number";
+						break;
+				}
+
+				var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+				string firstUPC = new UPC().GetExpandedUPC();
+				string value = "";
+				string test = "";
+				foreach (TableRow row in tableContent.Rows)
+				{
+					
+					test = (string)Context.GetFromContext($"{row["UPC"].ToString().Trim('%')}");
+					if (test == firstUPC)
+					{
+						value = row[upcTableFieldName];
+					}
+				}
+
+				
+				string fieldValue = new UPC().GetValueOfRetailerFieldInActiveRow("US", field);
+				Report.IsTrue(!((value == fieldValue) ^ showing), $"Failure, table {field}: {value} and website {field}: {fieldValue} {present} match and do not.", $"Success, table {field}: {value} and website {field}: {fieldValue} {present} match and do.");
+			}
+		}
 
 		#endregion
-
-
 	}
 
 
