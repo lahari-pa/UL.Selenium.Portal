@@ -12,6 +12,7 @@ using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using System.Collections.ObjectModel;
 using TechTalk.SpecFlow;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RetailerAbbreviations;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -1020,7 +1021,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				foreach (IWebElement element in columnNames)
 				{
-					if (row["Name"] == element.Text)
+					if (row["Column Name"] == element.Text)
 					{
 						foundMatch = true;
 					}
@@ -1045,7 +1046,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				foreach (IWebElement element in provinceNames)
 				{
-					if (row["Name"] == element.Text)
+					if (row["Province Name"] == element.Text)
 					{
 						foundMatch = true;
 					}
@@ -1070,6 +1071,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return false;
+		}
+
+		public bool ClickOnEditButtonInCompanyInformationPageInBillingAddressSection()
+		{
+			System.Threading.Thread.Sleep(5000);
+			IWebElement EditButton = this.FindElement(By.XPath("//div[@data-bind='with: billingAddressModel']//a[text()='Edit']"), 2);
+			return EditButton.TryClick();
 		}
 
 	}
@@ -1497,6 +1505,74 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			SuppCountryCode.EnterText(countryCode);
 			return true;
+		}
+
+		public bool SelectAStateAsAnOptionInCompanyInformationPageBillingAddressSection(string state)
+		{
+			IWebElement StateOption = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: billingAddressModel']//select[@class='form-control'][@tabindex='2']//option[text()='" + state + "']"), 2);
+			return StateOption.TryClick();
+		}
+
+		public bool ClickSaveButtonInCompanyInformationPageBillingAddressSection()
+		{
+			IWebElement SaveButton = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: billingAddressModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
+			return SaveButton.TryClick();
+		}
+
+		public bool ClickEditButtonAsAnOptionInCompanyInformationPageShippingAddressSection()
+		{
+			IWebElement EditButton = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: shippingAddressModel']//a[text()='Edit']"), 2);
+			return EditButton.TryClick();
+		}
+
+		public bool SelectAStateAsAnOptionInCompanyInformationPageShippingAddressSection(string state)
+		{
+			IWebElement StateOption = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: shippingAddressModel']//select[@class='form-control'][@tabindex='2']//option[text()='" + state + "']"), 2);
+			return StateOption.TryClick();
+		}
+
+		public bool ClickSaveButtonAsAnOptionInCompanyInformationPageShippingAddressSection()
+		{
+			IWebElement SaveButton = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: shippingAddressModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
+			return SaveButton.TryClick();
+		}
+
+		public bool FindStateWithNameInBillingAddressSection(string state)
+		{
+			System.Threading.Thread.Sleep(5000);
+			var abbr = new StateAbbreviations();
+			string selectedAbbr = "";
+			abbr.Map.TryGetValue(state, out selectedAbbr);
+
+			IWebElement stateText = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: billingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
+
+			if (stateText.Text == selectedAbbr)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public bool FindStateWithNameInShippingAddressSection(string state)
+		{
+			System.Threading.Thread.Sleep(5000);
+			var abbr = new StateAbbreviations();
+			string selectedAbbr = "";
+			abbr.Map.TryGetValue(state, out selectedAbbr);
+
+			IWebElement stateText = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: shippingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
+
+			if (stateText.Text == selectedAbbr)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 

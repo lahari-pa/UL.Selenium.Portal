@@ -1431,7 +1431,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on the 'Edit' link")]
+		[StepDefinition(@"I click on the 'Edit' button in Company information in the Stewardship Numbers section")]
 		public void ThenIClickOnTheLink()
 		{
 			MyAccount MyAccountObject = new MyAccount();
@@ -1474,21 +1474,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(MyAccountObject.CheckForTableInCompanyInformationPageInStewardshipNumbersSection(), "Failed to find a table", "Successfully found a table");
 		}
 
-		[StepDefinition(@"I find out how many rows are in a table")]
+		[StepDefinition(@"I find out how many rows are in the table in the Stewardship Numbers section")]
 		public void ThenIFindOutHowManyRowsAreInATable()
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.Info("The nuumber of columns in the table is: " + MyAccountObject.CheckNumberOfColumnsInTableInCompanyInformationPageInStewardshipNumbersSection());
 		}
 
-		[StepDefinition(@"I check if column names match")]
+		[StepDefinition(@"I check if the Stewardship Numbers table columns names match the following column names")]
 		public void ThenICheckIfColumnNamesMatch(Table table)
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.CheckIfColumnNamesMatchInCompanyInformationPageInStewardshipNumbersSection(table), "Column names do not match", "Column names match");
 		}
 
-		[StepDefinition(@"I check province names")]
+		[StepDefinition(@"I check if the Stewardship Numbers table province names match the following province names")]
 		public void ThenICheckProvinceNames(Table table)
 		{
 			MyAccount MyAccountObject = new MyAccount();

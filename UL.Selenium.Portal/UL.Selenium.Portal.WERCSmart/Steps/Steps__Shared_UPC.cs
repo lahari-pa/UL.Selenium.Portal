@@ -1319,7 +1319,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_Retailer().IfISeeUpcWarningPopupClick("Ok");
 		}
 
-		[StepDefinition(@"I select all retailers in table")]
+		[StepDefinition(@"I select the following retailers in the 'Select Retailers' window")]
 		public void GivenIUnderDestinationRetailersInTheUPCPage(Table table)
 		{
 			NewProduct NewProductClassObject = new NewProduct();

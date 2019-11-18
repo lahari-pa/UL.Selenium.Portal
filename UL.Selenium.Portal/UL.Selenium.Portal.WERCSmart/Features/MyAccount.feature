@@ -172,7 +172,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 Then the WERCSmart homepage should load
 Given I call Shared Step 62676 (Go To My Account)
 And In the My Account page I navigate to the Company Information page
-Then I click on the 'Edit' link
+Then I click on the 'Edit' button in Company information in the Stewardship Numbers section
 Then I fill in Stweardship Numbers information
 | Stewardship | Issue Date | Expire Date |
 | test1       | 2019-01-30 | 2020-01-30  |
@@ -190,7 +190,6 @@ Then I confirm that the data saved in the Stewardshp Numbers section is correct
 | test1       | 2019-01-30 | 2020-01-30  |
 
 
-@Philip
 @ScenarioId:6056
 Scenario: [85258] My Account - Stewardship Numbers - table display validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -199,18 +198,37 @@ Given I call Shared Step 62676 (Go To My Account)
 And In the My Account page I navigate to the Company Information page
 Then I check that a heading with the name: Stewardship Numbers exists
 Then I check if there is a table in the Stewardship Numbers section
-Then I find out how many rows are in a table
-Then I check if column names match
-| Name        |
-| Province    |
-| Stewardship |
-| Issue Date  |
-| Expire Date |
-Then I check province names
-| Name             |
+Then I find out how many rows are in the table in the Stewardship Numbers section
+Then I check if the Stewardship Numbers table columns names match the following column names
+| Column Name   |
+| Province      |
+| Stewardship   |
+| Issue Date    |
+| Expire Date   |
+Then I check if the Stewardship Numbers table province names match the following province names
+| Province Name    |
 | British Columbia |
 | Saskatchewan     |
 | Manitoba         |
 | Ontario          |
 | Quebec           |
 Then I check if 'Edit' button exists in the Stewardship Numbers section
+
+
+@ScenarioId:6063
+Scenario: [97846] - Company Information - Verify the 'State' drop-down is Available
+And I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then the WERCSmart homepage should load
+Given I call Shared Step 62676 (Go To My Account)
+And In the My Account page I navigate to the Company Information page
+Then I click on the 'Edit' button in Company information in the Billing Address section
+Then I select the state: Alabama in the Billing Address section
+Then I click the 'Save' button in the Billing Address section
+Then I confirm that the correct state: Alabama has been saved in the Billing Address
+Then I click on the 'Edit' button in Company information in the Shipping Address section
+Then I select the state: Wyoming in the Shipping Address section
+Then I click the 'Save' button in the Shipping Address section
+Then I confirm that the correct state: Wyoming has been saved in the Shipping Address
+Then I click the User Icon
+And I click on Sign Out

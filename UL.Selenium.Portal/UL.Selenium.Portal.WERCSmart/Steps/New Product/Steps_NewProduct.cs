@@ -86,6 +86,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
 		}
 
+		[StepDefinition(@"I click continue in the (.*) page")]
+		public void ClickContinueInASpecificPage(string pageName)
+		{
+			if ((pageName == "New Product") ||
+				(pageName == "The Product") ||
+				(pageName == "Product Characteristics") ||
+				(pageName == "Additional Product Information") ||
+				(pageName == "Ingredients") ||
+				(pageName == "Regulatory Information 1") ||
+				(pageName == "Retailer") ||
+				(pageName == "Regulatory Information 3") ||
+				(pageName == "Universal Product Code (UPC)") ||
+				(pageName == "Regulatory Documents to Provide") ||
+				(pageName == "Additional Documents to Provide") ||
+				(pageName == "Optional Reports and Documents Available for Purchase") ||
+				(pageName == "Safety Data Sheet Authoring - Additional Data (Optional)") ||
+				(pageName == "Comments"))
+			{
+				Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue' in the " + pageName + " page", "Clicked 'Continue' successfully in the " + pageName + " page");
+			}
+		}
+
 		[StepDefinition(@"in the (.*) page I click Continue")]
 		public void GivenInTheNewProductPageIClickContinue(string page)
 		{

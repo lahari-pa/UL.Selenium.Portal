@@ -579,6 +579,56 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool CheckForErrorUnderneathIndividualUPCContainedInCasePackField()
+		{
+			IWebElement IndividualUPCContainerFieldError = this.FindElement(By.XPath("//option[text()='Individual UPC contained in the Case Pack']/../following-sibling::p//span[text()='This is a required field.']"), 2);
+			if (IndividualUPCContainerFieldError != null)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public bool ClickAddCaseUPCButton()
+		{
+			IWebElement AddCaseUPCButton = this.FindElement(By.XPath("//button[text()='Add Case UPC ']"), 2);
+
+			return AddCaseUPCButton.TryClick();
+		}
+
+		public bool CheckIfTextfieldsWithPlaceholdersDisplayTheError(Table table)
+		{
+
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement TextField = this.FindElement(By.XPath("//*[@placeholder='" + row["Placeholder"] + "']/..//span[text()='This is a required field.']"), 2);
+				if (TextField == null)
+				{
+					Report.Info("Third");
+					return false;
+				}
+			}
+			Report.Info("Fourth");
+			return true;
+		}
+
+		public bool CheckIfDropDownsWithDefaultOptionDisplayTheError(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement TextField = this.FindElement(By.XPath("//option[text()='" + row["Default Option"] + "']/../following-sibling::p//span[text()='This is a required field.']"), 2);
+				if (TextField == null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 	}
 	public class DeleteRowsWarning : SeleniumBaseObject
 	{
