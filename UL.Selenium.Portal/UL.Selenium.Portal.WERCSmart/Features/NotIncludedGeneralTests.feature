@@ -877,6 +877,9 @@ Scenario: [ProductProccess] WM CHALK COMPLETED
 	Then The home screen should load
 	Then I create a Chalk product for WalMart and Proccess it to completed and save it as: WMCHALKTEST1
 
+Scenario: [SHALOADING] SHA LOADING DEBUG
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
 
 
 
