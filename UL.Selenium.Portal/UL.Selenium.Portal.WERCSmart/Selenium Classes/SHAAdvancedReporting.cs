@@ -429,8 +429,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			else
 			{
 				
-				retailerOption.Select(value);				
-				return retailerOption.SelectedOption() == value;
+				retailerOption.Select(value);
+				string selectedOption = retailerOption.SelectedOption();
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return selectedOption == value;
 			}
 
 
