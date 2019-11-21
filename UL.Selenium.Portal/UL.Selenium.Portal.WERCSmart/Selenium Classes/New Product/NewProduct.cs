@@ -3296,7 +3296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
 				IWebElement ProductNameOnlabel = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/..//input"), 2);
-				IWebElement partNameTextField = container.FindElement(By.XPath(".//label[contains(text(),'Part Number')]/.."), 2);
+				IWebElement partNameTextField = container.FindElement(By.XPath(".//label[contains(text(),'Part Number')]/..//input"), 2);
 				IWebElement productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
 
 				string productNameDataBind = productNameOnlabelObj.GetAttribute("class");

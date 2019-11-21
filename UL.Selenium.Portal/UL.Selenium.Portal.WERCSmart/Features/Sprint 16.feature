@@ -498,6 +498,7 @@ Scenario: [114732] WM Slotting Code Report
 @ScenarioId:5973
 Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 
+	#Update so product goes to published? For walmart slotting code report. 
 	Then I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.

@@ -1355,14 +1355,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProductSteps = new StepsNewProduct();
 			TestReport.StartStep("I Click Add Part Number in the UPC screen");
 			newProductSteps.ThenIClickTheAddPartNumber();
-			this.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly(containerType,size,packagingType,partNumber);
+			this.IEnterUPCDetailsAndPartNumberIntoTheUPCScreen(containerType,size,packagingType,partNumber);
 			TestReport.StartStep("I should see the Regulatory Documents to Provide Page");
 			new StepsNewProduct().GivenIShouldSeeXPage("Regulatory Documents to Provide");
 		}
 
 
 		[StepDefinition(@"I enter UPC details, container type: (.*), size: (.*) and packaging type: (.*) then I enter Part Number: (.*)")]
-		public void GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly(string containerType,string size, string packagingType, string partNumber)
+		public void IEnterUPCDetailsAndPartNumberIntoTheUPCScreen(string containerType,string size, string packagingType, string partNumber)
 		{
 			TestReport.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
@@ -1371,16 +1371,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 0; i < 100; i++)
 			{
 				Report.Info("Entering UPC information. Attempt: " + (i + 1));
-				TestReport.StartStep("I click the 'Add UPC' button");
-				stepsNewProduct.ThenIClickTheAddUpcButton();
 				TestReport.StartStep("I add the following into the UPC Fields");
 				string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
 				Report.Info("UPC number: " + upc);
-				var upcInfo = new UpcInformation {
-					ContainerType = containerType,
-					Size = size,
-					PackageType = packagingType
-				};
+
+				var upcInfo = new UpcInformation();
+				if (packagingType=="NA")
+				{
+
+					upcInfo.ContainerType = containerType;
+					upcInfo.Size = size;
+										
+				}
+				else
+				{
+					upcInfo.ContainerType = containerType;
+					upcInfo.Size = size;
+					upcInfo.PackageType = packagingType;
+
+				}
+
 				Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo,partNumber), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
 				TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
