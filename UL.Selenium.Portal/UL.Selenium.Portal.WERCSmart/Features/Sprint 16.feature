@@ -312,35 +312,46 @@ Scenario: [96733] UPC Details for Registration - Specific Retailer
 	And I wait for the Advanced Reporting Preparing Report popup to disappear	
 	Given I confirm that an excel file is produced called UPC Details for Registration - Specific Retailer.xls and save as 96733
 	Then I confirm that the excel file saved as: 96733 contains the following columns:	
-		| Column                         |
-		| UPC                            |
-		| WPSID                          |
-		| Product Name                   |
-		| UPC Name                       |
-		| Product Status                 |
-		| Retailer Name                  |
-		| UPC to Retailer                |
-		| UPC Status                     |
-		| UPC Active Date                |
-		| UPC Fed                        |
-		| Net Explosive Mass             |
-		| SDS Authoring - Container Type |
-		| SDS Authoring - UPCASE         |
-		| UPDGT                          |
-		| PYSTM                          |
-		| UPICC                          |
-		| UPIQC                          |
-		| UPDV                           |
-		| UPFV                           |
-		| UPDUM                          |
-		| UPFUM                          |
-		| DOT UN                         |
-		| DOT HazClass                   |
-		| DOT Packing Group              |
-		| Ltd Qty (Y/N)                  |
-		| IATA UN                        |
-		| IATA HazClass                  |
-		| IATA Packing Group             |
+		| Column                       |
+		| UPC                          |
+		| WPSID                        |
+		| Product Name                 |
+		| UPC Name                     |
+		| Product Status               |
+		| Retailer Name                |
+		| UPC to Retailer              |
+		| UPC Status                   |
+		| UPC Active Date              |
+		| UPC Fed                      |
+		| Net Explosive Mass           |
+		| Container Type               |
+		| UPCASE                       |
+		| UPDGC                        |
+		| UPDGT                        |
+		| PYSTM                        |
+		| UPICC                        |
+		| UPIQC                        |
+		| UPDV                         |
+		| UPFV                         |
+		| UPDUM                        |
+		| UPFUM                        |
+		| DOT UN                       |
+		| Green Good Housekeeping      |
+		| Green Seal                   |
+		| EPA Safer Choice             |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Made Safe                    |
+		| NSF Sustainability Certified |
+		| DOT UN                       |
+		| DOT HazClass                 |
+		| DOT Packing Group            |
+		| Ltd Qty (Y/N)                |
+		| IATA UN                      |
+		| IATA HazClass                |
+		| IATA Packing Group           |
 	Then I delete the Advanced Report file saved as 96733
 	Then I Click close in the Advanced Reporting Popup
 

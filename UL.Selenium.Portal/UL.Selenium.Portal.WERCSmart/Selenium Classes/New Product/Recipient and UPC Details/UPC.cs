@@ -185,7 +185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 							}
 
-							upcNumberField.EnterText(info.UPCName);
+							upcNameField.EnterText(info.UPCName);
 						}
 						else
 						{

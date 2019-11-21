@@ -880,6 +880,21 @@ Scenario: [ProductProccess] WM CHALK COMPLETED
 Scenario: [SHALOADING] SHA LOADING DEBUG
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 
+Scenario: [NOTINCLUDEDGENERALTEST] UPC: Part Number for staples check
+
+#For TFS ticket 116739
+#login
+#create a product e.g chalk
+#select staples
+#enter PartNumber + details
+#press continue and check next page loads
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then For Staples I create a product of type a product and progress to the UPC screen
+Then I enter Container type: Metal Container, Size 40, Packaging type: spring fling packaging and Part number: ABC123 then click continue in the UPC screen
+
+
+
+
 
 
 
