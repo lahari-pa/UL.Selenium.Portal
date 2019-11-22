@@ -322,8 +322,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			endDateField.TryClick();
-			endDateField.EnterText(value);
-			//endDateField.JsEnterText(value);
+			//endDateField.EnterText(value);
+			endDateField.JsEnterText(value);
+			endDateField.SendKeys(Keys.Return);
 			Delay.Seconds(1);
 			Report.Screenshot();
 
@@ -342,7 +343,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnterStartDate(string value)
 		{
 			Report.Info("Switching to iFrame");
-			Delay.Seconds(2);
+			Delay.Seconds(5);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement startDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='Start Date']//ancestor::td//following-sibling::td//input"), 2);
 			if (startDateField == null)
@@ -352,7 +353,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			startDateField.TryClick();
-			startDateField.EnterText(value);
+			startDateField.JsEnterText(value);
+			startDateField.SendKeys(Keys.Return);
+			//startDateField.EnterText(value);
 			//startDateField.JsEnterText(value);			
 			Delay.Seconds(1);
 			Report.Screenshot();
@@ -387,7 +390,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnterWPSID(string value)
 		{
 			Report.Info("Switching to iFrame");
-			Delay.Seconds(2);
+			Delay.Seconds(4);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement startDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
 			if (startDateField == null)
