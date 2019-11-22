@@ -14,6 +14,7 @@
 @SHA
 @MyAccount
 @NewProduct
+@ProductSetUp
 @UPC
 Feature: Supplier Reports
 
@@ -569,3 +570,22 @@ Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- C
 	Given Under the Supplier Reports menu I choose: Subscription Renewal (Registrations Eligible for Deletion)
 	Then In the Supplier Reports screen the current sub-page should be: Subscription Renewal (Registrations Eligible for Deletion)
 	Then I Check that the Description text on the supplier report page matches: The report will provide you with the information for current, submitted registrations, regardless of current registration status (Net Yet Submitted, In Progress, Sending, Accepted, Needs Attention), that are eligible for deletion from your account. The quantity of submitted registrations directly impacts your subscription levels for Formulated, Enhanced Articles and Articles. Eligible for deletion criteria is based on order history dates.
+
+
+
+@ScenarioId:5976
+Scenario: [114764] UPCs and Registrations (Retailer Specific) - Report correctly displays case pack individual UPC
+#For Ticket 108160
+	Given I Submit a new product which has a Case UPC and a regular UPC
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	#Should be able to remove the wait but check first
+	Then I wait for 30 seconds
+	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
+	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
+	Given In the Supplier Reports screen I click on the Download button
+	Given I click on close in the Report Download dialog
+	Given I confirm that an excel file is produced called UPCs and Registrations (Retailer Specific).xlsx and save as 73082
+	Then I confirm that in the excel file saved as: 73082 for the UPC saved as: UPC876851 there is a 'Y' in the Case Pack column and an Individual UPC listed as: UPC87685
+	And I delete the Supplier Report file saved as 73082

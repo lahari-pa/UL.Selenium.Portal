@@ -951,6 +951,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Info("DPCI: " + upcInfo.Dpci);
 			Report.Info("Quantity: " + upcInfo.Quantity);
 
+			if(upcInfo.UPCName.IsNullOrEmpty())
+			{
+				Report.Info("UPCName:" + upcInfo.UPCName);
+			}			
+
 			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
 		}
 
@@ -973,16 +978,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(np.CommentErrorDisplayed(expected, out string actual), "The error text was " + actual + ", but expected " + expected, "The error text was " + actual + " as expected.");
 		}
 
+		[StepDefinition(@"I append the following into the comments field: (.*)")]
+		public void ThenIAppendTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
+		{
+			Report.IsTrue(new NewProduct().InputCommentAreaText(text, append: true), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
 		[StepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
 
-		[StepDefinition(@"The remaining characters counter displays: (.*)/500")]
-		public void ThenTheRemainingCharactersCounterDisplays(int charRemain)
+		[StepDefinition(@"The remaining characters counter displays: (.*)/(.*)")]
+		public void ThenTheRemainingCharactersCounterDisplays(int charRemainExpected, int charMax)
 		{
-			Context.ScenarioContext.Pending();
+			Report.IsTrue(new NewProduct().CommentsCharactersRemaining(charRemainExpected, charMax, out int remainDisplay),
+				"Remaining characters expected: " + charRemainExpected + " but found: " + remainDisplay,
+				"Remaining characters is: " + remainDisplay + " as expected");
+		}
+
+
+		[Then(@"I enter (.*) characters into the comments field")]
+		public void ThenIEnterCharactersIntoTheCommentsField(int charCount)
+		{
+			string str = GeneralUtilities.GenerateRandomString(charCount);
+
+			this.ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(str);
+		}
+
+		[Then(@"I verify the comments field contains: (.*)")]
+		public void ThenIVerifyTheCommentsFieldContains(string contents)
+		{
+			Report.IsTrue(new NewProduct().CommentsAreaContains(contents), "Comments area contains: " + contents + " but expected: " + contents, "Comments area contents match expectation");
 		}
 
 
@@ -2511,6 +2539,72 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 		}
+
+
+		[StepDefinition(@"In the UPC screen I add a UPC: saved as UPC(.*), container type: (.*) and size: (.*), then I select all certifications")]
+		public void InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications(string upc,string containerType, string size)
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			TestReport.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			TestReport.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_,
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+			Report.IsTrue(new NewProduct().SelectAllCertifications(),"Failed to select all certifications","Successfully selected all certifications");
+
+			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Final Domestic Distributor")]
+		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField(string text)
+		{
+			Report.IsTrue(new NewProduct().FinalDomesticDistributor(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
+		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company's Toll-Free Phone Number")]
+		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInTollFreePhoneNumberTextField(string text)
+		{
+			Report.IsTrue(new NewProduct().CompanyTollFreePhoneNumber(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
+		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company Web Address")]
+		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInCompanyWebAddressTextField(string text)
+		{
+			Report.IsTrue(new NewProduct().CompanyWebAddress(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+		
+
+		[StepDefinition(@"I set the Product's GTIN Brick Code to: (.*)")]
+		public void ThenISetTheProductsGTINBrickCodeTo(string description)
+		{
+			var thisNewProduct = new NewProduct();
+			new NewProduct().ProductGTINBrickCode = description;
+			Report.IsTrue(thisNewProduct.ProductGTINBrickCode == description, "Failed to set the Product's GTIN Brick Code to be: " + description, "Successfully set the Product's GTIN Brick Code to be: " + description);
+		}
+
 
 
 		#endregion

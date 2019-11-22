@@ -6,6 +6,9 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using NTTQA.Selenium.UniversalFunctions;
+using System;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -149,6 +152,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				//}
 			}
 			Report.Failure("Failed to find tab with url: " + string.Join(", ", urls));
+		}
+
+		[StepDefinition(@"I find the Navigator section logo and check that it appears as expected")]
+		public void IFindTheLogoForSectionIsAsExepcted()
+		{
+
+			string url = new UlSolutionCenter().GetSectionLogoUrl("Navigator");
+			Bitmap actualBitmap = GeneralUtilities.CreateBitmapFromURL(url);
+			EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Images.NAVIGATOR-LOGO TM.png", out string filePath);
+			if(filePath==null)
+			{
+				Report.Failure("Failed to extract dependency file");
+				return;
+			}
+
+			Bitmap expectBitmap = GeneralUtilities.CreateBitmapFromFile(filePath);
+			bool imagesAreSame = false;
+			try
+			{
+				imagesAreSame = GeneralFunctions.CompareImages(expectBitmap, actualBitmap);
+				Report.IsTrue(imagesAreSame, "The Navigator Logo was not as expected", "The Navigator Logo was as expected");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure($"The Navigator Logo was not as expected: {ex.Message}");
+			}
+			
 		}
 	}
 }

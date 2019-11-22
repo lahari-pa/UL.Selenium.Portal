@@ -14,6 +14,7 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.BaseClasses;
 using System.Collections.ObjectModel;
 using Castle.Components.DictionaryAdapter;
+using Castle.Core.Internal;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -94,6 +95,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
 				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+				IWebElement upcNameField = container.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/..//input"), 2);
 
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
@@ -112,6 +114,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				}
 				upcNumberField.EnterText(info.UpcNumber);
+
+
+				if (upcNameField.Text.IsNullOrEmpty())
+				{
+					upcNameField.EnterText("UPCName PlaceHolder");
+					Report.Failure("The UPC Name Field was empty, entered PlaceHolder text");
+				}
+				else
+				{
+					Report.Info("The Field was not empty, Checking for UPCName in the table");
+					if (!info.UPCName.IsNullOrEmpty())
+					{
+						if (info.UPCName.ToLower().Contains("saved as"))
+						{
+							try
+							{
+								string savedUPC = Context
+									.GetFromContext(info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+									.ToString();
+								info.UPCName = savedUPC;
+							}
+							catch (Exception e)
+							{
+								Report.Info("Failed to find saved item in context: " + info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+								throw;
+							}
+
+						}
+
+						upcNumberField.EnterText(info.UPCName);
+					}
+					else
+					{
+						Report.Info("UPC Name was not found in the table, leaving default UPC Name");
+					}
+
+				}
+
 				IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
 				if (info.ContainerType == "<first>")
 				{
@@ -230,6 +270,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						@".//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//select[@class='form-control']//option[contains(text(),""" + section + @""")])])";
 			IList<IWebElement> el = this.containerElement.FindElements(By.XPath(xPath), 10);
 			return el.Count == 0 ? new List<string>() : el.Select(x => x.Text).ToList();
+		}
+
+		public bool GetUPCErrorForSection(string section, string expectedMessage, out string displayedMessage)
+		{
+			string xPath = @"(.//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//label[@class='sr-only'][contains(text(),""" + section + @""")])] | " +
+						@".//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//select[@class='form-control']//option[contains(text(),""" + section + @""")])])";
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
+			if (el == null)
+			{
+				displayedMessage = "** No error message was displayed in section " + section + " **";
+				return false;
+			}
+			else
+			{
+				displayedMessage = el.Text;
+				return expectedMessage == displayedMessage;
+			}
 		}
 
 
@@ -660,6 +717,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string Quantity { get; set; } = "";
 		public string IndividualUpcCasePack { get; set; } = "";
 		public string TransportationOption { get; set; } = "";
+		public string UPCName { get; set; } = "";
 	}
 
 
