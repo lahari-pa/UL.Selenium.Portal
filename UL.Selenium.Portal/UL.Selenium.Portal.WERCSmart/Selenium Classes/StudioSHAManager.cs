@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -2179,6 +2179,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				IWebElement statusSelect = this.containerElement.FindElement(By.XPath(".//select[@id='txtHoldSubject']"));
+				if(option.Contains("�"))
+				{
+					string updatedOption= option.Replace("�", "–");
+					statusSelect.Select(updatedOption);
+					return statusSelect.SelectedOption() == updatedOption;
+				}
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
