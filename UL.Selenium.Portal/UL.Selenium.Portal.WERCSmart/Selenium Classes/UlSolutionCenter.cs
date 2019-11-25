@@ -96,6 +96,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return rList;
 			}
 		}
+
+		public string GetSectionLogoUrl(string section)
+		{
+			string urlending = this.containerElement.FindElement(By.XPath($".//img[@alt='{section}' and @src]"), 2).GetAttribute("src");
+			return urlending;
+		}
+
+
 	}
 	public class UlSection : UlSolutionCenter
 	{
@@ -108,4 +116,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(@".//div[@class='col-md-6' and .//h3[text()=""" + this.Header + @"""]]//a[@role='button' and text()='Learn More']"), 2).TryClick();
 		}
 	}
+
+
+
 }

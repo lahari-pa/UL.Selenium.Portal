@@ -12,6 +12,8 @@ using NTTQA.Selenium.UniversalFunctions;
 using System.IO;
 using System.Text.RegularExpressions;
 using NTTQA.Selenium.SpecFlow;
+using System.Net;
+using System.Drawing;
 using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -248,6 +250,67 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return newTable;
 		}
+
+		public static bool CheckABCOrder(List<string> list)
+		{
+			var sortedList = new List<string>();
+			foreach (string item in list)
+			{
+				sortedList.Add(item);
+			}
+
+			sortedList.Sort();
+
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (sortedList[i] != list[i])
+				{
+					return false;
+				}
+
+			}
+
+			return true;
+		}
+		public static Bitmap CreateBitmapFromURL(string url)
+		{
+			WebClient myClient = new WebClient();
+			Stream myStream = myClient.OpenRead(url);
+			return new Bitmap(myStream);
+		}
+
+		public static Bitmap CreateBitmapFromFile(string file)
+		{
+			return new Bitmap(file);
+		}
+
+		public static bool CompareBitmaps(Bitmap bitmap1, Bitmap bitmap2)
+		{
+			return GeneralFunctions.CompareImages(bitmap1, bitmap2);
+		}
+
+		public static bool CheckCBAOrder(List<string> list)
+		{
+			var sortedList = new List<string>();
+			foreach (string item in list)
+			{
+				sortedList.Add(item);
+			}
+
+			sortedList.Sort();
+			sortedList.Reverse();
+
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (sortedList[i] != list[i])
+				{
+					return false;
+				}
+
+			}
+			return true;
+		}
+
 	}
 
 	public class RetailerAbbreviations
@@ -338,5 +401,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return input;
 		}
+
+
+
+
+
+
+
+
+
+
 	}
+
 }

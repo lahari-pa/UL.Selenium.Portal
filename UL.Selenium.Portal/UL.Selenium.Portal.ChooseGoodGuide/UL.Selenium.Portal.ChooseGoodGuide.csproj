@@ -152,13 +152,15 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-      "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.170\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.170\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
     </PostBuildEvent>
     <PostBuildEvent>
-      "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.169\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"
-    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
+    <PostBuildEvent>
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.170\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"
+      "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.170\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"
+    </PostBuildEvent>
     <PreBuildEvent>
       "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.170\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"
       "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.169\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"
@@ -173,7 +175,6 @@
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
     <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.7.0.170\build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.7.0.170\build\NTTQA.Selenium.TReVor.Modules.targets'))" />
-    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.7.0.169\build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.7.0.169\build\NTTQA.Selenium.TReVor.Modules.targets'))" />
   </Target>
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
   <Target Name="AfterUpdateFeatureFilesInProject">
@@ -182,5 +183,4 @@
     </ItemGroup>
   </Target>
   <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.7.0.170\build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.7.0.170\build\NTTQA.Selenium.TReVor.Modules.targets')" />
-  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.7.0.169\build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.7.0.169\build\NTTQA.Selenium.TReVor.Modules.targets')" />
 </Project>
