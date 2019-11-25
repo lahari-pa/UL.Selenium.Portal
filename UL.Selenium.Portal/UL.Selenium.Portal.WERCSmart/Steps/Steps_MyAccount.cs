@@ -1522,5 +1522,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"I call a Shared Step to create a new password: (.*)")]
+		public void ThenICallSharedStepToCreateANewPassword(string password)
+		{
+			ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
+			MyAccount MyAccountObject = new MyAccount();
+
+			FP.New_Password_Form(password, password);
+
+			bool passwordResetInWERCS = Report.IsTrue(MyAccountObject.ClickSaveInChangeUserPasswordWindow(), "Failed to click save", "Successfully clicked save");
+
+			Report.IsTrue(MyAccountObject.ClickCloseInChangeUserPasswordWindow(), "Failed to click close", "Successfully clicked close");
+
+			if (passwordResetInWERCS)
+			{
+
+				var user = TestUsers.GetUserSavedAs("PasswordResetAccount");
+				if (user == null)
+				{
+					Report.Info("TReVor user does not exist");
+				}
+				else
+				{
+					Report.Info("TReVor user does exist");
+				}
+
+				if (Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, password), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
+				{
+					user.Password = password;
+				}
+
+			}
+		}
+
+		[StepDefinition(@"I pass the following data to the Stweardship Numbers table")]
+		public void ThenPassTableStweardshipNumbersInformation(Table table)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			MyAccountObject.ClickOnEditButtonInCompanyInformationPageInStewardshipNumbersSection();
+			Report.IsTrue(MyAccountObject.FillInStewardshipData(table), "Failed to fill in Stewardship table data", "Successfully filled in Stewardship table data");
+		}
+
+		[StepDefinition(@"I save the Stewardship Numbers data")]
+		public void ThenISaveTheStewardshipNumbersData()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.ClickSaveButtonForStewardshipNumbers(), "Failed to click save", "Successfully clicked save");
+		}
+
+		[StepDefinition(@"I look for the error: (.*) in the row with the province: (.*)")]
+		public void GivenICallSharedStepMyAccountStewardshipNumbersDateValidation(string error, string province)
+		{
+
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.ConfirmErrorInStewardshipInfoTable(error, province), "An error has not been found in the row with Province: " + province + ", and it should've been, Error: " + error, "An error has been found in the row with Province: " + province + ", which is correct, Error: " + error);
+
+		}
 	}
 }

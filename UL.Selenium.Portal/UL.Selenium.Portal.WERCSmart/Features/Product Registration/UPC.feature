@@ -554,7 +554,7 @@ Given I fill in the UPC data; UPC:111111111111, Product Type:Paper bag, Product 
 When I click continue
 Then I check for the appropriate alert: Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit
 
-Given I fill in the UPC data; UPC:0633321424912, Product Type:Paper bag, Product Weight:5
+Given I fill in the UPC data; UPC:8992696405585, Product Type:Paper bag, Product Weight:5
 When I click continue
 Then I check for the appropriate alert: No error
 

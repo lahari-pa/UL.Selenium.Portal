@@ -472,8 +472,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckForAlertWithThisTextInUPCPage(string alertText)
 		{
-			IList<IWebElement> AlertMessagesWithSpanTag = this.FindElements(By.XPath("//span[@data-bind='text: $data']"), 2);
-			IList<IWebElement> AlertMessagesWithliTag = this.FindElements(By.XPath("//li[@data-bind='visible:$.trim($data).length > 0, text: $data']"), 2);
+			IList<IWebElement> AlertMessagesWithSpanTag = this.FindElements(By.XPath(".//span[@data-bind='text: $data']"), 2);
+			IList<IWebElement> AlertMessagesWithliTag = this.FindElements(By.XPath(".//li[@data-bind='visible:$.trim($data).length > 0, text: $data']"), 2);
 
 			if (alertText == "No error")
 			{
@@ -504,7 +504,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickContinueButtonInUPCPage()
 		{
-			IWebElement ContinueButton = this.FindElement(By.XPath("//a[@class='btn btn-success pull-right continue-button next-button']"), 2);
+			IWebElement ContinueButton = this.FindElement(By.XPath(".//a[@class='btn btn-success pull-right continue-button next-button']"), 2);
 			return ContinueButton.TryClick();
 		}
 
@@ -512,7 +512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			if (yesOrNoButton == "YES")
 			{
-				IList<IWebElement> ListOfRemainingAbreviatedRetailerNames = this.FindElements(By.XPath("//span[@data-bind='text: identifier']"), 2);
+				IList<IWebElement> ListOfRemainingAbreviatedRetailerNames = this.FindElements(By.XPath(".//span[@data-bind='text: identifier']"), 2);
 				List<string> ListOfRemainingRetailerNamesInTextForm = new List<string>();
 
 				foreach (IWebElement element in ListOfRemainingAbreviatedRetailerNames)
@@ -564,14 +564,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				Context.AddToContext("ProductID", id);
 
-				IWebElement YesButton = this.FindElement(By.XPath("//div[@class='modal fade in']//button[@data-dismiss='modal' and text()='No']/following-sibling::button"), 2);
+				IWebElement YesButton = this.FindElement(By.XPath(".//div[@class='modal fade in']//button[@data-dismiss='modal' and text()='No']/following-sibling::button"), 2);
 				return YesButton.TryClick();
 
 			}
 			else if (yesOrNoButton == "NO")
 			{
 
-				IWebElement NoButton = this.FindElement(By.XPath("//div[@class='modal fade in']//button[@data-dismiss='modal' and text()='No']"), 2);
+				IWebElement NoButton = this.FindElement(By.XPath(".//div[@class='modal fade in']//button[@data-dismiss='modal' and text()='No']"), 2);
 				return NoButton.TryClick();
 
 			}
@@ -581,7 +581,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckForErrorUnderneathIndividualUPCContainedInCasePackField()
 		{
-			IWebElement IndividualUPCContainerFieldError = this.FindElement(By.XPath("//option[text()='Individual UPC contained in the Case Pack']/../following-sibling::p//span[text()='This is a required field.']"), 2);
+			IWebElement IndividualUPCContainerFieldError = this.FindElement(By.XPath(".//option[text()='Individual UPC contained in the Case Pack']/../following-sibling::p//span[text()='This is a required field.']"), 2);
 			if (IndividualUPCContainerFieldError != null)
 			{
 				return true;
@@ -594,32 +594,39 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickAddCaseUPCButton()
 		{
-			IWebElement AddCaseUPCButton = this.FindElement(By.XPath("//button[text()='Add Case UPC ']"), 2);
+			IWebElement AddCaseUPCButton = this.FindElement(By.XPath(".//button[text()='Add Case UPC ']"), 2);
 
 			return AddCaseUPCButton.TryClick();
 		}
 
-		public bool CheckIfTextfieldsWithPlaceholdersDisplayTheError(Table table)
+		public void CheckIfTextfieldsWithPlaceholdersDisplayTheError(Table table)
 		{
+			List<string> ListOfTextFieldsThatDisplayedTheError = new List<string>();
 
 			foreach (TableRow row in table.Rows)
 			{
-				IWebElement TextField = this.FindElement(By.XPath("//*[@placeholder='" + row["Placeholder"] + "']/..//span[text()='This is a required field.']"), 2);
+				IWebElement TextField = this.FindElement(By.XPath(".//*[@placeholder='" + row["Placeholder"] + "']/..//span[text()='This is a required field.']"), 2);
 				if (TextField == null)
 				{
-					Report.Info("Third");
-					return false;
+					ListOfTextFieldsThatDisplayedTheError.Add(row["Placeholder"]);
 				}
 			}
-			Report.Info("Fourth");
-			return true;
+
+			if (ListOfTextFieldsThatDisplayedTheError.Count() > 0)
+			{
+				Report.Failure("The following textfields: " + ListOfTextFieldsThatDisplayedTheError.ToString() + " did not display the error messages they were supposed to.");
+				return;
+			}
+
+			Report.Success("All textfields in the table displayed their proper error messages");
+			return;
 		}
 
 		public bool CheckIfDropDownsWithDefaultOptionDisplayTheError(Table table)
 		{
 			foreach (TableRow row in table.Rows)
 			{
-				IWebElement TextField = this.FindElement(By.XPath("//option[text()='" + row["Default Option"] + "']/../following-sibling::p//span[text()='This is a required field.']"), 2);
+				IWebElement TextField = this.FindElement(By.XPath(".//option[text()='" + row["Default Option"] + "']/../following-sibling::p//span[text()='This is a required field.']"), 2);
 				if (TextField == null)
 				{
 					return false;

@@ -45,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.LoginToAccount("ProductAccount");
 		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account)")]
+		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account|Password Reset)")]
 		public void LoginToWERCSmartAdmin(string type)
 		{
 			switch (type)
@@ -64,6 +64,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				case ("NoPLProducts Account"):
 					this.LoginToAccount("NoPLProducts Account");
+					break;
+				case ("Password Reset"):
+					this.LoginToAccount("PasswordResetAccount");
 					break;
 			}
 		}
@@ -182,6 +185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void LoginToAccount(string accountSavedAs, bool attemptOnce = false)
 		{
 			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
+			
 			if (new TopMenuBar().LoggedIn())
 			{
 				Report.Info("Logged in, logging out");

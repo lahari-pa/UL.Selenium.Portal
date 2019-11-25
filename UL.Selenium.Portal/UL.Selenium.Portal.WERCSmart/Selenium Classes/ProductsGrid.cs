@@ -989,32 +989,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public bool ConfirmRetailersMatchInMyProductsSection(string savedAs)
+		public void ConfirmRetailersMatchInMyProductsSection(string savedAs)
 		{
-			System.Threading.Thread.Sleep(5000);
-			string strOfRemainingRetailerNames = Context.GetFromContext("ListOfRemainingRetailerNamesInTextForm").ToString();
-			List<string> ListOfRemainingRetailerNames = strOfRemainingRetailerNames.Split(',').ToList();
+			Delay.Seconds(5);
+			string strVersionOfRemainingRetailerNames = Context.GetFromContext("ListOfRemainingRetailerNamesInTextForm").ToString();
+			List<string> ListOfRemainingRetailerNamesFromTheUPCPage = strVersionOfRemainingRetailerNames.Split(',').ToList();
 
-			string id = Context.GetFromContext(savedAs).ToString();
+			List<string> ListOfRetailersThatWereSupposedToDisplayButDidNot = new List<string>();
+
 			var ProductID = Context.GetFromContext("ProductID");
+			IList<IWebElement> ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid = this.FindElements(By.XPath("//small[text()='" + ProductID + "']/../../following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td//span[@data-bind='text: Identifier']"), 2);
 
-			IList<IWebElement> ListOfDisplayedAbreviatedRetailerNames = this.FindElements(By.XPath("//small[text()='" + ProductID + "']/../../following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td//span[@data-bind='text: Identifier']"), 2);
-			Report.Info("ListOfRemainingAbreviatedRetailerNames: " + ListOfRemainingRetailerNames.Count() + ", ListOfDisplayedAbreviatedRetailerNames: " + ListOfDisplayedAbreviatedRetailerNames.Count() + ", ProductID: " + ProductID);
 
-			if (ListOfRemainingRetailerNames.Count() != ListOfDisplayedAbreviatedRetailerNames.Count())
-			{
-				return false;
-			}
-			else
-			{
-
-				foreach (string RetailerName in ListOfRemainingRetailerNames)
+				foreach (string RetailerName in ListOfRemainingRetailerNamesFromTheUPCPage)
 				{
 					bool foundMatch = false;
 
-					foreach (IWebElement DisplayedRetailerName in ListOfDisplayedAbreviatedRetailerNames)
+					foreach (IWebElement DisplayedRetailerName in ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid)
 					{
-						if (RetailerName == DisplayedRetailerName.Text)
+						if (RetailerName == DisplayedRetailerName.GetValue())
 						{
 							foundMatch = true;
 						}
@@ -1022,14 +1015,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					if (!foundMatch)
 					{
-						return false;
+						ListOfRetailersThatWereSupposedToDisplayButDidNot.Add(RetailerName);
 					}
 
 				}
 
+			if (ListOfRetailersThatWereSupposedToDisplayButDidNot.Count() > 0)
+			{
+				Report.Failure("The following retailers: " + ListOfRetailersThatWereSupposedToDisplayButDidNot.ToString() + " did not show in the Product Grid but were supposed to.");
+				return;
 			}
 
-			return true;
+			Report.Success("All retailers that were supposed to show up in the Product Grid did.");
+			return;
 		}
 
 		public bool ConfirmYouWouldLikeToDeleteButton()

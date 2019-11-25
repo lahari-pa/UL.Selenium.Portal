@@ -3093,25 +3093,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickRestoreSelectedRetailersButton()
 		{
-			IWebElement RestoreSelectedRetailersButton = this.containerElement.FindElement(By.XPath("//a[@data-bind='click: restoreSelectedRetailers']"), 2);
+			IWebElement RestoreSelectedRetailersButton = this.containerElement.FindElement(By.XPath(".//a[@data-bind='click: restoreSelectedRetailers']"), 2);
 			return RestoreSelectedRetailersButton.TryClick();
 		}
 
 		public bool ClickSelectAllInRemovedRetailersBox()
 		{
-			IWebElement SelectAllRemovedRetailersButton = this.containerElement.FindElement(By.XPath("//input[@data-bind='click: checkAllRemoved; checked: allRemovedRetailersChecked']"), 2);
+			IWebElement SelectAllRemovedRetailersButton = this.containerElement.FindElement(By.XPath(".//input[@data-bind='click: checkAllRemoved; checked: allRemovedRetailersChecked']"), 2);
 			return SelectAllRemovedRetailersButton.TryClick();
 		}
 
 		public bool FillInUPCData(string productUPC, string productType, string productWeight)
 		{
-			IWebElement UPCTextBox = this.containerElement.FindElement(By.XPath("//input[@data-bind='textInput: upcNumber.field']"), 2);
+			IWebElement UPCTextBox = this.containerElement.FindElement(By.XPath(".//input[@data-bind='textInput: upcNumber.field']"), 2);
 			bool EnteredProductUPC = Report.IsTrue(UPCTextBox.TryEnterText(productUPC), "Failed to enter product UPC", "Successfully entered product UPC");
 
 			IWebElement ContainerTypeTextBox = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
 			ContainerTypeTextBox.Select(productType);
 
-			IWebElement SizeTextBox = this.containerElement.FindElement(By.XPath("//input[@placeholder='Size (Weight Ounces)']"), 2);
+			IWebElement SizeTextBox = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Size (Weight Ounces)']"), 2);
 			bool EnteredProductWeight = Report.IsTrue(SizeTextBox.TryEnterText(productWeight), "Failed to enter product weight in ounces", "Successfully enter product weight in ounces");
 
 			if (EnteredProductUPC && EnteredProductWeight)
@@ -3124,7 +3124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool RemoveRandomRetailers()
 		{
-			IList<IWebElement> deleteButtons = this.containerElement.FindElements(By.XPath("//span[@data-bind='text: identifier']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
+			IList<IWebElement> deleteButtons = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
 			List<int> listOfAlreadyRemovedButtonIndexes = new List<int>();
 			Random random = new Random();
 			int numOfLoops = random.Next(2, deleteButtons.Count-1);
@@ -3155,7 +3155,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool AddRandomRetailersThatWereRemoved()
 		{
 
-			IList<IWebElement> CheckBoxes = this.containerElement.FindElements(By.XPath("//ul[@aria-labelledby='ddAddRetailers']//input[@type='checkbox']"), 2);
+			IList<IWebElement> CheckBoxes = this.containerElement.FindElements(By.XPath(".//ul[@aria-labelledby='ddAddRetailers']//input[@type='checkbox']"), 2);
 			List<int> listOfAlreadyClickedCheckBoxIndexes = new List<int>();
 
 			for (int i = 0; i < CheckBoxes.Count; i++)
@@ -3193,14 +3193,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectAllRetailersThatWereRemoved()
 		{
-			IWebElement RestoreRetailersButton = this.containerElement.FindElement(By.XPath("//ul[@aria-labelledby='ddAddRetailers']//input[@id='chkAllRemovedRetailers']"), 2);
+			IWebElement RestoreRetailersButton = this.containerElement.FindElement(By.XPath(".//ul[@aria-labelledby='ddAddRetailers']//input[@id='chkAllRemovedRetailers']"), 2);
 			return Report.IsTrue(RestoreRetailersButton.TryClick(), "Failed to click 'Restore Retailers' button", "Successfully clicked 'Restore Retailers' button");
 
 		}
 
 		public bool SelectAllRetailersInTable(Table table)
 		{
-			IWebElement DoneButton = this.containerElement.FindElement(By.XPath("//a[@data-bind='click: closePopup']"), 2);
+			IWebElement DoneButton = this.containerElement.FindElement(By.XPath(".//a[@data-bind='click: closePopup']"), 2);
 			var stepsNewProduct = new StepsNewProduct();
 
 			foreach (TechTalk.SpecFlow.TableRow row in table.Rows)
@@ -3223,56 +3223,41 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickAddRetailersButton()
 		{
-			IWebElement AddRetailersButton = this.containerElement.FindElement(By.XPath("//a[@id='ddAddRetailers']"), 2);
+			IWebElement AddRetailersButton = this.containerElement.FindElement(By.XPath(".//a[@id='ddAddRetailers']"), 2);
 			return AddRetailersButton.TryClick();
 		}
 
 		public bool CheckIfListOfRemovedRetailersAreInAlphabeticalOrder()
 		{
-			IList<IWebElement> RemovedRetailers = this.containerElement.FindElements(By.XPath("//a[@data-bind='text: name, click: $parent.restoreRetailer.bind($parent)']"), 2);
+			IList<IWebElement> RemovedRetailers = this.containerElement.FindElements(By.XPath(".//a[@data-bind='text: name, click: $parent.restoreRetailer.bind($parent)']"), 2);
 			List<string> RemovedRetailerNames = new List<string>();
 			foreach (IWebElement element in RemovedRetailers)
 			{
 				RemovedRetailerNames.Add(element.Text);
 			}
 
-			bool sorted = true;
-			for (int i = 0; i < RemovedRetailerNames.Count(); i++)
-			{
-				for (int j = i + 1; j < RemovedRetailerNames.Count(); j++)
-				{
-					if (RemovedRetailerNames[i].CompareTo(RemovedRetailerNames[j]) == 1)
-					{
-						sorted = false;
-					}
-				}
-			}
+			var expectedList = RemovedRetailerNames.OrderBy(x => x).ToList();
 
-			return sorted;
+			return Report.IsTrue(expectedList.SequenceEqual(RemovedRetailerNames),
+			"List of added retailers was not sorted as expected. Found: " + string.Join(",", RemovedRetailerNames),
+			"Added retailer names are in order");
+
 		}
 
 		public bool CheckIfListOfAddedRetailersAreInAlphabeticalOrder()
 		{
-			IList<IWebElement> AddedRetailers = this.containerElement.FindElements(By.XPath("//span[@data-bind='text: identifier']"), 2);
+			IList<IWebElement> AddedRetailers = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']"), 2);
 			List<string> AddedRetailersNames = new List<string>();
 			foreach (IWebElement element in AddedRetailers)
 			{
 				AddedRetailersNames.Add(element.Text);
 			}
 
-			bool sorted = true;
-			for (int i = 0; i < AddedRetailersNames.Count(); i++)
-			{
-				for (int j = i + 1; j < AddedRetailersNames.Count(); j++)
-				{
-					if (AddedRetailersNames[i].CompareTo(AddedRetailersNames[j]) == 1)
-					{
-						sorted = false;
-					}
-				}
-			}
+			var expectedList = AddedRetailersNames.OrderBy(x => x).ToList();
 
-			return sorted;
+			return Report.IsTrue(expectedList.SequenceEqual(AddedRetailersNames),
+			"List of added retailers was not sorted as expected. Found: " + string.Join(",", AddedRetailersNames),
+			"Added retailer names are in order");
 		}
 
 	}

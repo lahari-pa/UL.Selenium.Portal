@@ -165,10 +165,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				checkboxes.Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span"), 2)?.Text).ToList();
 		}
 		
-		public bool CheckIfRetailersInTableDisplayErrorMessage(Table table)
+		public void CheckIfRetailersInTableDisplayErrorMessage(Table table)
 		{
-			IList<IWebElement> AllRetailerErrorMessages = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//span[@data-bind='html: $data']/../../../preceding-sibling::td[1]"), 2);
-		
+			IList<IWebElement> AllRetailerErrorMessages = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//span[@data-bind='html: $data']/../../../preceding-sibling::td[1]"), 2);
+			List<string> ReatilersThatDidNotDisplayErrorMessages = new List<string>();
+
 			foreach (TableRow row in table.Rows)
 			{
 				bool foundMatch = false;
@@ -183,12 +184,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (!foundMatch)
 				{
-					return false;
+					ReatilersThatDidNotDisplayErrorMessages.Add(row["Retailer"]);
 				}
 
 			}
 
-			return true;
+			if (ReatilersThatDidNotDisplayErrorMessages.Count() > 0)
+			{
+				Report.Failure("The following retailers: " + ReatilersThatDidNotDisplayErrorMessages.ToString() + " did not display the error messages they were supposed to.");
+				return;
+			}
+
+			Report.Success("All retailers in the table displayed their proper error messages");
+			return;
 		}
 	}
 

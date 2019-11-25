@@ -210,7 +210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmTheRetailersAreRemoved(string savedAs)
 		{
 			ProductsGrid ProductsGridObject = new ProductsGrid();
-			Report.IsTrue(ProductsGridObject.ConfirmRetailersMatchInMyProductsSection(savedAs), "Failed to remove the retailers", "Successfully removed the retailers");
+			ProductsGridObject.ConfirmRetailersMatchInMyProductsSection(savedAs);
 		}
 	}
 }

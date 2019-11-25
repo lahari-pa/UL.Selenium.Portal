@@ -902,13 +902,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickOnEditButtonInCompanyInformationPageInStewardshipNumbersSection()
 		{
-			IWebElement EditButton = this.FindElement(By.XPath("//a[@id='edit-stewardship']"), 2);
+			IWebElement EditButton = this.containerElement.FindElement(By.XPath(".//a[@id='edit-stewardship']"), 2);
 			return EditButton.TryClick();
 		}
 
 		public bool FillInStewardshipData(Table table)
 		{
-			IList<IWebElement> Textboxes = this.FindElements(By.XPath("//table[@class='table table-bordered']//input[@type='text']"), 2);
+			IList<IWebElement> Textboxes = this.containerElement.FindElements(By.XPath(".//table[@class='table table-bordered']//input[@type='text']"), 2);
 			List<string> StewardshipList = new List<string>();
 			List<string> IssueDateList = new List<string>();
 			List<string> ExpireDateList = new List<string>();
@@ -935,22 +935,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSaveButtonForStewardshipNumbers()
 		{
-			IList<IWebElement> TableErrors = this.FindElements(By.XPath("//div[@class='info-cont last']//tbody//span[@data-bind='text: $data']"), 2);
-			IWebElement SaveButton = this.FindElement(By.XPath("//div[@data-bind='with: stewardshipNumberModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
-
-			if (TableErrors.Count() > 0)
-			{
-				Report.Info("Save button was not clicked becuase there was an error displayed for the information being saved");
-				return false;
-			}
+			IWebElement SaveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@data-bind='with: stewardshipNumberModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
 
 			return SaveButton.TryClick();
 		}
 
 		public bool CheckStewardshipNumbersTableDataAfterItHasBeenSaved(Table table)
 		{
-			System.Threading.Thread.Sleep(5000);
-			IList<IWebElement> TableData = this.FindElements(By.XPath("//table[@class='table table-bordered']//input[@type='text']/preceding-sibling::p"), 2);
+			Delay.Seconds(5);
+			IList<IWebElement> TableData = this.containerElement.FindElements(By.XPath(".//table[@class='table table-bordered']//input[@type='text']/preceding-sibling::p"), 2);
 			List<string> StewardshipList = new List<string>();
 			List<string> IssueDateList = new List<string>();
 			List<string> ExpireDateList = new List<string>();
@@ -982,7 +975,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SearchForHeadingInCompanyInformationPageWithName(string headingName)
 		{
-			IWebElement heading = this.FindElement(By.XPath("//*[text()='Stewardship Numbers']"), 2);
+			IWebElement heading = this.FindElement(By.XPath(".//*[text()='Stewardship Numbers']"), 2);
 
 			if (heading != null)
 			{
@@ -994,7 +987,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckForTableInCompanyInformationPageInStewardshipNumbersSection()
 		{
-			IWebElement table = this.FindElement(By.XPath("//*[text()='Stewardship Numbers']/following-sibling::div//table"), 2);
+			IWebElement table = this.FindElement(By.XPath(".//*[text()='Stewardship Numbers']/following-sibling::div//table"), 2);
 
 			if (table != null)
 			{
@@ -1006,14 +999,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public int CheckNumberOfColumnsInTableInCompanyInformationPageInStewardshipNumbersSection()
 		{
-			IList<IWebElement> tableColumns = this.FindElements(By.XPath("//*[text()='Stewardship Numbers']/following-sibling::div//table//th"), 2);
+			IList<IWebElement> tableColumns = this.FindElements(By.XPath(".//*[text()='Stewardship Numbers']/following-sibling::div//table//th"), 2);
 
 			return tableColumns.Count();
 		}
 
 		public bool CheckIfColumnNamesMatchInCompanyInformationPageInStewardshipNumbersSection(Table table)
 		{
-			IList<IWebElement> columnNames = this.FindElements(By.XPath("//*[text()='Stewardship Numbers']/following-sibling::div//table//th"), 2);
+			IList<IWebElement> columnNames = this.FindElements(By.XPath(".//*[text()='Stewardship Numbers']/following-sibling::div//table//th"), 2);
 
 			foreach (TableRow row in table.Rows)
 			{
@@ -1038,7 +1031,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection(Table table)
 		{
-			IList<IWebElement> provinceNames = this.FindElements(By.XPath("//*[text()='Stewardship Numbers']/following-sibling::div//table//tbody//td[1]"), 2);
+			IList<IWebElement> provinceNames = this.FindElements(By.XPath(".//*[text()='Stewardship Numbers']/following-sibling::div//table//tbody//td[1]"), 2);
 
 			foreach (TableRow row in table.Rows)
 			{
@@ -1063,7 +1056,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckForEditButtonCheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection()
 		{
-			IWebElement EditButton = this.FindElement(By.XPath("//a[@id='edit-stewardship']"), 2);
+			IWebElement EditButton = this.FindElement(By.XPath(".//a[@id='edit-stewardship']"), 2);
 
 			if (EditButton != null)
 			{
@@ -1075,9 +1068,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickOnEditButtonInCompanyInformationPageInBillingAddressSection()
 		{
-			System.Threading.Thread.Sleep(5000);
-			IWebElement EditButton = this.FindElement(By.XPath("//div[@data-bind='with: billingAddressModel']//a[text()='Edit']"), 2);
+			Delay.Seconds(5);
+			IWebElement EditButton = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: billingAddressModel']//a[text()='Edit']"), 2);
 			return EditButton.TryClick();
+		}
+
+		public bool ClickSaveInChangeUserPasswordWindow()
+		{
+			IWebElement SaveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[text()='Change User Password']/../following-sibling::div/following-sibling::div//a[text()='Save']"), 2);
+			return SaveButton.TryClick();
+		}
+
+		public bool ClickCloseInChangeUserPasswordWindow()
+		{
+			IWebElement CloseButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[text()='Change User Password']/../following-sibling::div/following-sibling::div//button[text()='Close']"), 2);
+			return CloseButton.TryClick();
 		}
 
 	}
@@ -1509,42 +1514,42 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectAStateAsAnOptionInCompanyInformationPageBillingAddressSection(string state)
 		{
-			IWebElement StateOption = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: billingAddressModel']//select[@class='form-control'][@tabindex='2']//option[text()='" + state + "']"), 2);
+			IWebElement StateOption = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: billingAddressModel']//select[@class='form-control'][@tabindex='2']//option[text()='" + state + "']"), 2);
 			return StateOption.TryClick();
 		}
 
 		public bool ClickSaveButtonInCompanyInformationPageBillingAddressSection()
 		{
-			IWebElement SaveButton = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: billingAddressModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
+			IWebElement SaveButton = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: billingAddressModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
 			return SaveButton.TryClick();
 		}
 
 		public bool ClickEditButtonAsAnOptionInCompanyInformationPageShippingAddressSection()
 		{
-			IWebElement EditButton = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: shippingAddressModel']//a[text()='Edit']"), 2);
+			IWebElement EditButton = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: shippingAddressModel']//a[text()='Edit']"), 2);
 			return EditButton.TryClick();
 		}
 
 		public bool SelectAStateAsAnOptionInCompanyInformationPageShippingAddressSection(string state)
 		{
-			IWebElement StateOption = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: shippingAddressModel']//select[@class='form-control'][@tabindex='2']//option[text()='" + state + "']"), 2);
+			IWebElement StateOption = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: shippingAddressModel']//select[@class='form-control'][@tabindex='2']//option[text()='" + state + "']"), 2);
 			return StateOption.TryClick();
 		}
 
 		public bool ClickSaveButtonAsAnOptionInCompanyInformationPageShippingAddressSection()
 		{
-			IWebElement SaveButton = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: shippingAddressModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
+			IWebElement SaveButton = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: shippingAddressModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
 			return SaveButton.TryClick();
 		}
 
 		public bool FindStateWithNameInBillingAddressSection(string state)
 		{
-			System.Threading.Thread.Sleep(5000);
+			Delay.Seconds(5);
 			var abbr = new StateAbbreviations();
 			string selectedAbbr = "";
 			abbr.Map.TryGetValue(state, out selectedAbbr);
 
-			IWebElement stateText = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: billingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
+			IWebElement stateText = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: billingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
 
 			if (stateText.Text == selectedAbbr)
 			{
@@ -1558,12 +1563,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool FindStateWithNameInShippingAddressSection(string state)
 		{
-			System.Threading.Thread.Sleep(5000);
+			Delay.Seconds(5);
 			var abbr = new StateAbbreviations();
 			string selectedAbbr = "";
 			abbr.Map.TryGetValue(state, out selectedAbbr);
 
-			IWebElement stateText = this.containerElement.FindElement(By.XPath("//div[@data-bind='with: shippingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
+			IWebElement stateText = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: shippingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
 
 			if (stateText.Text == selectedAbbr)
 			{
@@ -1572,6 +1577,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			else
 			{
 				return false;
+			}
+		}
+
+		public bool ConfirmErrorInStewardshipInfoTable(string error, string province)
+		{
+			Delay.Seconds(5);
+			IWebElement ErrorMessage = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//td[text()='" + province + "']/following-sibling::td//span[text()='" + error + "']"), 2);
+
+			if (error == "No Error")
+			{
+				if (ErrorMessage == null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				if (ErrorMessage == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
 			}
 		}
 	}
@@ -2347,6 +2381,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			edited.Add(publicName.SelectedOption() == ingredient.PublicName);
 			return edited.All(e => e);
 		}
+
 		public class SearchResult
 		{
 			public string Name { get; set; }

@@ -999,7 +999,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenICheckIfTheFollowingTextfieldsDisplayTheErrorThisIsARequiredField(Table table)
 		{
 			UPC UPCObject = new UPC();
-			Report.IsTrue(UPCObject.CheckIfTextfieldsWithPlaceholdersDisplayTheError(table), "At least one textfield did not display an error", "All the textfields displayed their errors");
+			UPCObject.CheckIfTextfieldsWithPlaceholdersDisplayTheError(table);
 		}
 
 		[StepDefinition(@"I check if the dropdowns with the following default options display the error 'This is a required field.' bottom")]

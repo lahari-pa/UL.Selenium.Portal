@@ -244,7 +244,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIConfirmISeeErrorMessagesForTheFollowingRetailers(Table table)
 		{
 			SelectRetailers SelectRetailersObject = new SelectRetailers();
-			Report.IsTrue(SelectRetailersObject.CheckIfRetailersInTableDisplayErrorMessage(table), "One or more of the retailers did not display an error message", "All of the retailers displayed an error message");
+			SelectRetailersObject.CheckIfRetailersInTableDisplayErrorMessage(table);
 		}
 	}
 }
