@@ -382,7 +382,26 @@ Scenario: [114728] UPCs Added Yesterday
 	#Update Column headings
 	Then I confirm that the excel file saved as: 114728 contains the following columns: and they are in the correct order.
 		| Column              |
+		| WPSID               |
+		| UPC                 |
 		| UPC Name            |
+		| Packaging Type      |
+		| Packaging Size      |
+		| Product Name        |
+		| Supplier            |
+		| Status              |
+		| Last Date Published |
+		| Published By        |
+		| DOTUN               |
+		| DOTPG               |
+		| IATAUN              |
+		| IATAPG              |
+		| IATAQ               |
+		| UNM                 |
+		| PGM                 |
+		| MODELQ              |
+		| MODECC              |
+		
 	Then I delete the Advanced Report file saved as 114728
 
 @ScenarioId:5981
@@ -390,7 +409,7 @@ Scenario: [114729] VOC Monthly Report - Walmart
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: VOC Monthly Report - Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: VOC Monthly Report - Walmart is shown as: Walmart Monthly VOC Report
-	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called VOC Monthly Report - Walmart.xls and save as 114729	
 	#Then I confirm that the excel file saved as: 114729 includes the column: UPC Name between: Product Name and UPC
@@ -460,7 +479,7 @@ Scenario: [114732] WM Slotting Code Report
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: WM Slotting Code Report report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: WM Slotting Code Report is shown as: WM Slotting Code Report
-	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WM Slotting Code Report.xls and save as 114732	
 	#Then I confirm that the excel file saved as: 114732 includes the column: UPC Name between: F_UPC and Supplier
@@ -653,7 +672,7 @@ Scenario: [98534] Advanced Reporting - Registrations Published report -
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
-	Then I enter start Date: 01-01-2019 and end Date: 11-11-2019 for the Advanced report then I click Submit
+	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Product Registrations Published.xls and save as 98534
 	Then I confirm that the excel file saved as: 98534 contains the following columns:

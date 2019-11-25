@@ -322,9 +322,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			endDateField.TryClick();
-			//endDateField.EnterText(value);
-			endDateField.JsEnterText(value);
-			endDateField.SendKeys(Keys.Return);
+			endDateField.EnterText(value);
+
+			//endDateField.JsEnterText(value);
+			//endDateField.SendKeys(Keys.Return);
 			Delay.Seconds(1);
 			Report.Screenshot();
 
@@ -353,10 +354,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			startDateField.TryClick();
-			startDateField.JsEnterText(value);
-			startDateField.SendKeys(Keys.Return);
-			//startDateField.EnterText(value);
-			//startDateField.JsEnterText(value);			
+			//startDateField.JsEnterText(value);
+			//startDateField.SendKeys(Keys.Return);
+
+			startDateField.EnterText(value);
+
+			//startDateField.JsEnterText(value);
+			
 			Delay.Seconds(1);
 			Report.Screenshot();
 			bool matching = false;

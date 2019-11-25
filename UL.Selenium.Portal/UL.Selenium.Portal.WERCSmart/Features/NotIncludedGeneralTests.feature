@@ -895,6 +895,8 @@ Then I enter Container type: Metal Container, Size 40, Packaging type: spring fl
 
 Scenario: [UPCSTEPPARTNUMBER] Part Num Staples
 
+#101023 test case link to 116739 and finish
+
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk

@@ -240,17 +240,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		
 		public bool FunctionalPurposesMatch(string ingredient, List<string> chosenPurposes)
 		{
 			
 			List<string> actualPurposes = this.FunctionalPurposes(ingredient);
 
 			var diffFound = new List<string>();
-			if (actualPurposes.Count==0 && chosenPurposes.Contains("NA"))
+			Report.Info($"The Number of found Functional Purposes was:{actualPurposes.Count()}");			
+			if(actualPurposes.Count == 1)
 			{
-				Report.Info("There were Functional purposes found as expected");
+				if (actualPurposes[0]=="" && chosenPurposes.Contains("NA"))
+				{
+					Report.Info("There were Functional purposes found as expected");
 					return true;
+				}
 			}
+			
 			foreach (var item in actualPurposes)
 			{
 				if (!chosenPurposes.Contains(item))
