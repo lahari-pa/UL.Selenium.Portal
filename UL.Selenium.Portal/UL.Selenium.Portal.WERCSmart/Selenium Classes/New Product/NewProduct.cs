@@ -247,6 +247,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return tabEl.FindElement(By.XPath("../../a"), 5).TryClick();
 		}
 
+		public bool IsActiveTab(Tab tab)
+		{
+			string tabName = MapTabs[tab];
+			IWebElement active = this.ProgressBar?.FindElement(By.XPath($".//div[contains(@class, 'in-progress active') and ./span[text()='{tabName}']]"), 2);
+			return active != null;
+		}
+
 		public ProductInformation GetCurrentProductInformation()
 		{
 			return new ProductInformation { Id = this.ProductId, Name = this.ProductName };

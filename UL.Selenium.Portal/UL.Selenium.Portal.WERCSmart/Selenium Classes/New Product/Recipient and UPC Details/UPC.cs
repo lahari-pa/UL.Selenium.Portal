@@ -470,26 +470,47 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterDPCI(string value)
 		{
-			IWebElement input = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
+			IWebElement input = this.containerElement.FindElement(By.XPath(".//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
 			return input.TryEnterText(value);
 		}
 
-		public bool ExpandFirstUPC()
+		public bool ClickFirstUPCTab()
 		{
 			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
-			IWebElement expandArrow = this.containerElement.FindElement(By.XPath("//form//table[contains(@class,'upc-table')]//a[@title='Expand']"));
-			return expandArrow.TryClick();
+			IWebElement expandArrowLink = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']"));
+			return expandArrowLink.TryClick();
+		}
+
+		public bool IsFirstUPCTabOpen()
+		{ 
+			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
+			IWebElement expandArrow = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']//em"));
+			return expandArrow.GetAttribute("class").Contains("down");
 		}
 
 		public string GetValueOfRetailerFieldInActiveRow(string retailerID, string field)
 		{
-			IWebElement retailerField = this.containerElement.FindElement(By.XPath($"//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]/following-sibling::input"));
+			IWebElement retailerField = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]/following-sibling::input"));
 			return retailerField.GetValue();
+		}
+
+		public string GetTextOfRetailerLabelInActiveRow(string retailerID, string field)
+		{
+			IWebElement labelText = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]"),2);
+			if (labelText == null)
+			{
+				Report.Info($"error: {field} label for retailer {retailerID} does not exist");
+				return "";
+			}
+			else
+			{
+				return labelText.Text;
+			}
 		}
 
 		public string GetExpandedUPC()
 		{
-			IWebElement upcField = this.containerElement.FindElement(By.XPath($"//label[contains(text(),'UPC Number')]/following-sibling::input"));
+			IWebElement upcField = this.containerElement.FindElement(By.XPath($".//label[contains(text(),'UPC Number')]/following-sibling::input"));
 			return upcField.GetValue();
 		}
 
@@ -591,7 +612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			IList<IWebElement> sizeList = multipleUPCModal.FindElements(By.XPath("//td//span[@data-bind='text: row.size']"), 2);
+			IList<IWebElement> sizeList = multipleUPCModal.FindElements(By.XPath(".//td//span[@data-bind='text: row.size']"), 2);
 			int i = 13;
 			foreach (var item in sizeList)
 			{
@@ -634,8 +655,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					break;
 			}
 
-			IList<IWebElement> upcList = multipleUPCModal.FindElements(By.XPath($"//td//span[@data-bind='text: {valueDataBindString}']"), 2);
-			int i = 11 + offset;
+			IList<IWebElement> upcList = multipleUPCModal.FindElements(By.XPath($".//td//span[@data-bind='text: {valueDataBindString}']"), 2);
+			int i = 21 + offset;
 			foreach (var item in upcList)
 			{
 				string UPCnumber = item.Text;
@@ -644,12 +665,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info("error: popup contains: " + UPCnumber + "while file data contains: " + fileData[i] + " in row " + i);
 					return false;
 				}
-				i = i + 11;
+				i = i + 21;
 			}
 			return true;
 		}
 
-		public bool CheckValueOfEachEssendantProductFromFile(string value, string file, string savedAs)
+		public bool CheckValueOfEachRetailerProductFromFile(string value, string retailer, string file, string savedAs)
 		{
 			new UPC().GetFile(file, savedAs);
 			object actualFile = Context.GetFromContext(savedAs);
@@ -663,30 +684,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			string valueDataBindString = "";
+			string spanDataBind = "";
 			int offset = 0;
-			switch (value.ToLower())
+			switch (value)
 			{
-				case "item no.":
-					valueDataBindString = "row.getAdditionalDataValue(identifier(), 1)";
-					offset = 5;
+				case "Item Number":
+					spanDataBind = "text: row.getAdditionalDataValue(identifier(), 1)";
 					break;
-				case "part no.":
-					valueDataBindString = "row.getAdditionalDataValue(identifier(), 0)";
-					offset = 4;
+				case "Part Number":
+					spanDataBind = "text: row.getAdditionalDataValue(identifier(), 0)";
+					break;
+				case "DPCI":
+					spanDataBind = value;
+					break;
+				case "OMSID":
+					spanDataBind = value;
 					break;
 			}
-			var headerTextList = multipleUPCModal.FindElements(By.XPath($"//div[@class='col-md-8 upc-list-container']//th"), 2).Select(x => x.Text).ToList<string>();
-			int retailerIndex = headerTextList.IndexOf("Essendant");
+			var headerTextList = multipleUPCModal.FindElements(By.XPath($".//div[@class='col-md-8 upc-list-container']//th"), 2).Select(x => x.Text).ToList<string>();
+			int retailerIndex = headerTextList.IndexOf($"{retailer}");
 
-			if(retailerIndex == -1)
+			if (retailerIndex == -1)
 			{
-				Report.Info("error: retailer not in header" );
+				Report.Info("error: retailer not in header");
 				return false;
 			}
 
-			IList<IWebElement> valueList = multipleUPCModal.FindElements(By.XPath($"//td[{retailerIndex+1}]//span[@data-bind='text: {valueDataBindString}']"), 2);
-			int i = 11 + offset;
+			string retailerAbbr = new RetailerAbbreviations().TryConvertToAbbreviation($"{retailer}");
+			offset = fileData.FindIndex(x => x.Equals($"{retailerAbbr}: {value}"));
+
+			IList<IWebElement> valueList = multipleUPCModal.FindElements(By.XPath($".//td[{retailerIndex + 1}]//span[@data-bind='{spanDataBind}']"), 2);
+			int i = 21 + offset;
+
+			if (valueList.Count == 0)
+			{
+				Report.Info($"error: value {value} does not exist for retailer {retailer}");
+				return false;
+			}
+
 			foreach (IWebElement item in valueList)
 			{
 				string valueString = item.Text;
@@ -695,7 +730,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info("error: popup contains: " + valueString + "while file data contains: " + fileData[i] + " in row " + i);
 					return false;
 				}
-				i = i + 11;
+				i = i + 21;
 			}
 			return true;
 		}

@@ -59,6 +59,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"In the New Product page I (should|should not) be on tab: (Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)")]
+		public void GivenInTheNewProductPageICpmfirmActiveTab(string present, string tabName)
+		{
+			try
+			{
+				bool showing = present == "should";
+				NewProduct.Tab tab = NewProduct.MapTabs.FirstOrDefault(x => x.Value == tabName).Key;
+				Report.IsTrue(!(NewProduct.IsActiveTab(tab) ^ showing), $"Failed, {present} be on tab {tabName}.", $"Success, {present} be on tab {tabName}.");
+			}
+			catch (NullReferenceException)
+			{
+				Report.Failure("The parameter 'tab' did not match a valid tab title");
+				throw;
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I click the page heading: (.*)")]
 		public void ClickPageHeading(string section)
 		{
@@ -2512,29 +2533,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 		}
 
-		[StepDefinition(@"In the Recipient and Product Details tab, I Expand the first UPC")]
-		public void IExpandFirstUPC()
+		[StepDefinition(@"In the Recipient and Product Details tab, I (expand|collapse) the first UPC")]
+		public void IExpandFirstUPC(string expandOrCollapse)
 		{
-			Report.IsTrue(new UPC().ExpandFirstUPC(), "Failure, failed to expand first UPC", "Success, expanded the first UPC");
+			bool isOpen = new UPC().IsFirstUPCTabOpen();
+			bool expand = expandOrCollapse == "expand";
+			if (!(isOpen ^ expand))
+			{
+				Report.Info("First UPC tab is already in desired state");
+				return;
+			}
+			else
+			{
+				Report.IsTrue(new UPC().ClickFirstUPCTab(), "Failure, failed to expand first UPC", "Success, expanded the first UPC");
+			}
 		}
 
-		[StepDefinition(@"I check that (Item Number|Part Number) for Essendant UPC item 1 (should|should not) match the UPC Upload document saved in the Table called: (.*)")]
-		public void ICheckNumberForEssendantAgainstUPCUploadTable(string field, string present, string tableSavedAs)
+		[StepDefinition(@"I check that (Item Number|Part Number|DPCI|OMSID) for retailer (.*) UPC item 1 (should|should not) match the UPC Upload document saved in the Table called: (.*)")]
+		public void ICheckNumberForRetailerAgainstUPCUploadTable(string field, string retailer,string present, string tableSavedAs)
 		{
 			bool showing = present == "should";
 
 			if (Context.Contains(tableSavedAs))
 			{
-				string upcTableFieldName = "";
-				switch (field)
-				{
-					case "Item Number":
-						upcTableFieldName = "US: Item Number";
-						break;
-					case "Part Number":
-						upcTableFieldName = "US: Part Number";
-						break;
-				}
+				string retailerAbbr = new RetailerAbbreviations().TryConvertToAbbreviation($"{retailer}");
+				string upcTableFieldName = $"{retailerAbbr}: {field}";
 
 				var tableContent = (Table)Context.GetFromContext(tableSavedAs);
 				string firstUPC = new UPC().GetExpandedUPC();
@@ -2551,9 +2574,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 
 				
-				string fieldValue = new UPC().GetValueOfRetailerFieldInActiveRow("US", field);
+				string fieldValue = new UPC().GetValueOfRetailerFieldInActiveRow($"{retailerAbbr}", field);
 				Report.IsTrue(!((value == fieldValue) ^ showing), $"Failure, table {field}: {value} and website {field}: {fieldValue} {present} match and do not.", $"Success, table {field}: {value} and website {field}: {fieldValue} {present} match and do.");
 			}
+		}
+
+		[StepDefinition(@"I confirm that (Item Number|Part Number|DPCI|OMSID) label text for retailer (.*) UPC item 1 matches: (.*)")]
+		public void IConfirmLabelTextForRetailerMatches(string field, string retailer, string expectedText)
+		{
+			string retailerAbbr = new RetailerAbbreviations().TryConvertToAbbreviation($"{retailer}");
+			string fieldValue = new UPC().GetTextOfRetailerLabelInActiveRow($"{retailerAbbr}", field);
+			Report.IsTrue(expectedText == fieldValue, $"Failure, expected text for {field}: {expectedText} and actual website text for {field}: {fieldValue} do not match.", $"Success, expected text for {field} and actual website text for {field} match.");
 		}
 
 		#endregion
