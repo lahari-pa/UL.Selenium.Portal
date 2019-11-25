@@ -1,6 +1,7 @@
 @Shared
 @LandingPage
 @Login
+@SHA
 @Homepage
 @Signup
 @wercsmart

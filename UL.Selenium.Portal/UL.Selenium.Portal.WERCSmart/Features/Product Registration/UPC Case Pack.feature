@@ -53,7 +53,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87640)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87640 and its status is: Submitted
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87640
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87640
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
 @ScenarioId:1454
@@ -86,7 +86,7 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87643)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87643 and its status is: Submitted
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87643
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87643
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87643
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876431
 
@@ -141,7 +141,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87650)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87650 and its status is: Submitted
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87650
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87650
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC876504
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC87650
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876501
@@ -175,7 +175,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87676 and its status is: New
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87676
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87676
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87676
 	And I close the window that opened
 	Given I navigate to the landing page
@@ -193,7 +193,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87676
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87676
 	Then In the SHA list of UPCs I should not see UPC: saved as UPC87676
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876761
 	Given I navigate to the landing page
@@ -231,7 +231,7 @@ Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Submitted
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87685
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87685
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC87685
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC876851
 	And I close the window saved as: SHAManagerProductUPC
@@ -282,7 +282,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Submitted
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
 	#Changed from UPC List to UPC Retailer and Feed in Sprint 16
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87686
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87686
 	And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87686
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87686)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87686)
@@ -346,7 +346,7 @@ Scenario: [87894] Forwarding - Edit existing Case UPC
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87894)
 	Then I Check that the product under the retailer: Amazon is under the status: Accepted
 	Then I Check that the product under the retailer: <ChosenRetailer87894> is under the status: Submitted
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87894
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87894
 	Then I call Shared Step 88419 (SHA > UPC - Confirm Case UPC fields (No internal UPC) > Close window) for UPC saved as: UPC876851 for the retailer: Amazon using details saved in the table: EditCaseUPCTable87894
 
 @ScenarioId:1535
