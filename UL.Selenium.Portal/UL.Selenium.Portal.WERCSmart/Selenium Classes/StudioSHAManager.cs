@@ -542,7 +542,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//IWebElement matchingTD = SeleniumBrowser.WebBrowser
 			//	.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
 			//	.FirstOrDefault(x => x.GetValue().Trim() == id);
-			IWebElement matchingTD2 = this.containerElement.FindElement(By.XPath(".//table[@id='list']//tr//td[@aria-describedby='list_Product' and @title = '" + id + "'//span]"), 5);
+			IWebElement matchingTD2 = this.containerElement.FindElement(By.XPath(".//table[@id='list']//tr//td[@aria-describedby='list_Product' and @title = '" + id + "']//span"), 5);
 			if (matchingTD2 != null)
 			{
 				Report.Info("Found matching cell");
