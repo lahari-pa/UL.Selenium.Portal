@@ -151,6 +151,7 @@ Scenario: [74540] Target - Data Tier Warning when not all are selected
 	Given I click the back arrow on the Retail Partners Details page
 	Then I should see the Retail Partners page
 
+@ScenarioId:6036
 Scenario: [115256] CVS - Uses Updated Data Tier Consent Requirements (Excluded Categories)
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then In the Products Grid I delete All products
@@ -162,6 +163,7 @@ Scenario: [115256] CVS - Uses Updated Data Tier Consent Requirements (Excluded C
 
 
 	@singleRun
+@ScenarioId:6035
 Scenario: [115255] CVS - Uses Updated Data Tier Consent Requirements (Included Categories)
 
 	Given I log in with the account saved in TReVor as: NoProductsAccount

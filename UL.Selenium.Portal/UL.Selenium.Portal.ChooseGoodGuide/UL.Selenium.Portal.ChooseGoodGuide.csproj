@@ -153,7 +153,6 @@
   <PropertyGroup>
     <PostBuildEvent>
 "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.170\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
-    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
