@@ -167,6 +167,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 90477 - Additional Product Information - US, \(NO\) Retailer's PL")]
+		public void ICallSharedStep90477AdditionalProductInformation_US_NoRetailersPL()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 60726 \(Additional Product Information - Country and Private Label or Brand - Yes\)")]
 		public void GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes()
@@ -800,7 +811,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
 					Size = size,
-					UpcNumber = upc_
+					UpcNumber = upc_,
 				};
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
@@ -4383,7 +4394,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStudioShaManager.ClickProcessProductData();
 			Report.IsTrue(myStudioShaManager.SetAutoAssignRegulatorySpecialisttoProduct(false),
 				"Failed to deselect Auto assign regulatory specialist", "Deselected auto assign regulatory specialist");
-			Report.IsTrue(myStudioShaManager.SelectRegulatorySpecialist("Automated QASha"),
+			var regSpec = TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
+			if (regSpec == null)
+			{
+				Report.Info("Failed to find SHA Regulatory Specialist in context, defaulting to: Automated QASha");
+				regSpec = "Automated QASha";
+			}
+			Report.Info($"The Regulatory Specialist that will be selected is: {regSpec}");
+
+			Report.IsTrue(myStudioShaManager.SelectRegulatorySpecialist(regSpec),
 				"Failed to select regulatory specialist", "Selected regulatory specialist");
 			Report.IsTrue(myStudioShaManager.ClickContinueInProcessProducts(), "Failed to click continue",
 				"Clicked continue");
@@ -8919,16 +8938,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 85328 \(Login to WERCSmart - Canada - Address \(Yes\), Packaging \(Yes\), Stewardship \(Full\)\)")]
 		public void Shared85328()
 		{
-            new GlobalSteps().ILogInWithTheAccountSavedInTrevorAs("CanadaHasAllData");
+			new GlobalSteps().ILogInWithTheAccountSavedInTrevorAs("CanadaHasAllData");
 		}
 
 		[StepDefinition(@"I call Shared Step 86824 \(Forwarding - Select Existing UPC, Click Continue, No error for Package type\)")]
 		public void Shared86824()
 		{
 			TestReport.UseSubSteps = true;
-            TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
+			TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
 			new StepsForwardProductRegistration().SelectFirstUPC();
-            TestReport.StartStep("I click continue");
+			TestReport.StartStep("I click continue");
 			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
 		}
 

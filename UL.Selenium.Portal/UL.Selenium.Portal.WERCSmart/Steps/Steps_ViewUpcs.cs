@@ -8,10 +8,12 @@ using Castle.Core.Internal;
 using Microsoft.Web.Administration;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -213,4 +215,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ProductsGridObject.ConfirmRetailersMatchInMyProductsSection(savedAs);
 		}
 	}
+
+		
+
+
+
+	
+
 }

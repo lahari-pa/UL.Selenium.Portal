@@ -101,6 +101,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.ScenarioContext.Pending();
 		}
 
+		[StepDefinition(@"I navigate to the View tab for product saved as: (.*) and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'")]
+		public void INavigateToTheViewTabAndCheckForUPCNameColoumn(string savedAs)
+		{
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string tabtitle = productDetails.Name + " (" + productDetails.Id + ")";
+			new GlobalSteps().SwitchToTabWithTitle(tabtitle);
+			new Steps_Summary().TheSummaryPageLoadsWithNoErrors();
 
+			Report.IsTrue(new SummaryPage().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Successfully found the Heading name 'UPC Name'");
+
+
+			new GlobalSteps().ThenCloseTheWindowThatOpened();
+		}
+
+		[StepDefinition(@"I Switch to the View tab for product saved as: (.*)")]
+		public void INavigateToTheViewTabForProductSavedAs(string savedAs)
+		{
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string tabtitle = productDetails.Name + " (" + productDetails.Id + ")";
+			new GlobalSteps().SwitchToTabWithTitle(tabtitle);
+			new Steps_Summary().TheSummaryPageLoadsWithNoErrors();
+		}
+
+		[StepDefinition(@"I Check that the Summary page Ingredients table contains the coloumns labeled:")]
+		public void INavigateToTheViewTabAndCheckForIngredientsColumnsFromATable(Table table)
+		{
+
+			foreach (TableRow row in table.Rows)
+			{
+				string headingName = row["Heading"];
+
+				Report.IsTrue(new SummaryPage().DoesIngredientHeadingsContain(headingName), "Failed to find the Heading name: " + headingName, "Successfully found the Heading name: " + headingName);
+			}
+			
+		}
+		[StepDefinition(@"I Check that the Ingredients table on the Summary page for the ingredient: (.*) contains the Ingredient Type: (.*)")]
+		public void ICheckThatTheIngredientsTableForIngredientXContainsOnlyYTypes(string ingredient, string type)
+		{
+			Report.IsTrue(new SummaryPage().IngredientTypesMatch(ingredient, type), "The Ingredient Type wwas not a match", "The ingredient Type was a match");
+		}
+
+		[StepDefinition(@"I Check that the Ingredients table on the Summary page for the ingredient: (.*) contains only the following Functional Purposes saved as: (.*)")]
+		public void ICheckThatTheIngredientsTableForIngredientXContainsOnlyYPurposes(string ingredient, string listSavedAs)
+		{
+			var chosenPurposes = (List<string>)Context.GetFromContext(listSavedAs);
+			Report.IsTrue(new SummaryPage().FunctionalPurposesMatch(ingredient, chosenPurposes), "The Functional Purposes were not an exact match", "The Functional Purposes were an exact match");
+		}
+
+		[StepDefinition(@"For the following ingredients I check that the Ingredients table on the summary page contains only the Ingredient Types and Functional Purposes listed:")]
+		public void ForTheFollowingIngredientsICheckThatTheIngredientsTableOnTheSummaryPageContainsOnlyTheIngredientsTypesAndFunctionalPurposesListed(Table table)
+		{
+
+			foreach(TableRow row in table.Rows)
+			{
+				this.ICheckThatTheIngredientsTableForIngredientXContainsOnlyYTypes(row["Ingredient"], row["Ingredient Type"]);
+				this.ICheckThatTheIngredientsTableForIngredientXContainsOnlyYPurposes(row["Ingredient"], row["Functional Purpose"]);
+			}
+
+		}
 	}
 }

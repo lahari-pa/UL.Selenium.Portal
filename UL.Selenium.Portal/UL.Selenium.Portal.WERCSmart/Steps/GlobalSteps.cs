@@ -1818,5 +1818,79 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
 				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes");
 		}
+
+		[StepDefinition(@"I Check there should be a new suspension notification email for user: (.*) for the Product saved as: (.*) with the suspension subject of: (.*) and check it does not contain text from the table:")]
+		public void ICheckThereIsANewEmailForUserXFromYAndSpecificTitle(string emailSavedAs,string productSavedAs, string subject, Table stringTable)
+		{
+			TestReport.UseSubSteps = true;
+			var productDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
+			string productID = productDetails.Id;
+			string emailSuspensionTitle = "Notification - Product "+productID+" - "+subject;
+						
+			TestReport.StartStep($"I confirm the administrator receieved an email with subject '{emailSuspensionTitle}'");
+			Delay.Seconds(5);
+			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", emailSuspensionTitle);
+			TestReport.StartStep("I confirm the body text of the email does not contain the blurb text");
+			new GlobalSteps().ThenTheTextOfTheEmailShouldNotShow(stringTable);
+
+			//do 2 x checks for the 2 differnt bullet points of the blurp text or one string and find format that works (e.g white space removal etc)
+		}
+
+		[StepDefinition(@"the text of the email should not show: (.*)")]
+		public void ThenTheTextOfTheEmailShouldNotShow(Table stringTable)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
+			try
+			{
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				string emailText = email.Text.ToString();
+				string actualTrimmed = Regex.Replace(emailText, @"\r|\n| ", "");
+
+				foreach (var row in stringTable.Rows)
+				{
+					string checkText = row["SearchText"];
+					string expectedTrimmed = checkText.Replace(" ", "");
+					Report.Info("Text that should not be present: " + checkText);
+					Report.Info("Body of the Email was: " + emailText);
+					Report.IsTrue(!actualTrimmed.Contains(expectedTrimmed), "Body text did contain the given text", "Body text did not contain the given text");
+				}
+					   	
+																
+			
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"the text of the email should show: (.*)")]
+		public void ThenTheTextOfTheEmailShouldShow(string bodyText)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
+			try
+			{
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				string emailText = email.Text.ToString();
+				string actualTrimmed = Regex.Replace(emailText, @"\r|\n| ", "");					
+				string expectedTrimmed = Regex.Replace(bodyText, @"\r|\n| ", "");
+				Report.Info("Expected email body text: " + expectedTrimmed);
+				Report.Info("Body of the Email was: " + actualTrimmed);
+				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I create a upc number for CVS")]
+		public void CreateCVSUPC()
+		{
+			string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+		}
+
 	}
 }

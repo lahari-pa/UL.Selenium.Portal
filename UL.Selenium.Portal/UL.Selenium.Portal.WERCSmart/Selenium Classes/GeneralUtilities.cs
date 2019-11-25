@@ -12,6 +12,8 @@ using NTTQA.Selenium.UniversalFunctions;
 using System.IO;
 using System.Text.RegularExpressions;
 using NTTQA.Selenium.SpecFlow;
+using System.Net;
+using System.Drawing;
 using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -205,6 +207,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public static string GenerateRandomString(int charCount)
+		{
+			var rand = new Random();
+			char[] chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+			string str = string.Empty;
+			for (int i = 0; i < charCount; i++)
+			{
+				float caps = rand.Next(0, 1);
+				char insert = chars[rand.Next(1, chars.Count())];
+				if (caps > .5)
+				{
+					string temp = insert.ToString().ToUpper();
+					insert = Convert.ToChar(temp);
+				}
+				str = str + insert;
+			}
+
+			return str;
+		}
+
 		public static string[] RowValuesFromContext(this TableRow row)
 		{
 			var vals = row.Values.Select(x =>
@@ -226,6 +249,66 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				newTable.AddRow(row.RowValuesFromContext());
 			}
 			return newTable;
+		}
+
+		public static bool CheckABCOrder(List<string> list)
+		{
+			var sortedList = new List<string>();
+			foreach (string item in list)
+			{
+				sortedList.Add(item);
+			}
+
+			sortedList.Sort();
+
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (sortedList[i] != list[i])
+				{
+					return false;
+				}
+
+			}
+
+			return true;
+		}
+		public static Bitmap CreateBitmapFromURL(string url)
+		{
+			WebClient myClient = new WebClient();
+			Stream myStream = myClient.OpenRead(url);
+			return new Bitmap(myStream);
+		}
+
+		public static Bitmap CreateBitmapFromFile(string file)
+		{
+			return new Bitmap(file);
+		}
+
+		public static bool CompareBitmaps(Bitmap bitmap1, Bitmap bitmap2)
+		{
+			return GeneralFunctions.CompareImages(bitmap1, bitmap2);
+		}
+
+		public static bool CheckCBAOrder(List<string> list)
+		{
+			var sortedList = new List<string>();
+			foreach (string item in list)
+			{
+				sortedList.Add(item);
+			}
+
+			sortedList.Sort();
+			sortedList.Reverse();
+
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (sortedList[i] != list[i])
+				{
+					return false;
+				}
+
+			}
+			return true;
 		}
 
 	}
@@ -382,5 +465,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return input;
 		}
+
+
+
+
+
+
+
+
+
+
 	}
+
 }
