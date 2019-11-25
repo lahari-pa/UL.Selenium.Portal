@@ -12,6 +12,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
 using System;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -77,11 +78,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return canClick;
 		}
 
+		public bool ClickReportNoSwitchBack(string report)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement reportButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table//td[contains(text(), """ + report + @""")]"), 2);
+
+			bool canClick = reportButton.TryClick();
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			return canClick;
+		}
+
 		public bool ClickSubmit()
 		{
 			Report.Info("Switching to iFrame");
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement submitButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//form[@id='panel']//input"), 2);
+			IWebElement submitButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//form[@id='panel']//input[@name='Submit']"), 2);
 
 			bool canClick = submitButton.TryClick();
 
@@ -89,6 +104,73 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
 
 			return canClick;
+		}
+
+		public bool ClickClose()
+		{
+			IWebElement closeButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//div[@id='dialog-AdvancedReports']/following-sibling::div[contains(@class, 'ui-dialog-buttonpane')]//span"));
+
+			bool canClick = closeButton.TryClick();
+
+			return canClick;
+		}
+
+		public bool ConfirmTableName(string tableName)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement tableTitle = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[@class='ui-jqgrid-title']"), 2);
+			string text = tableTitle.Text;
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return text == tableName;
+		}
+
+		public bool ConfirmHeader(string header)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IList<IWebElement> foundHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@"//tr[@class='ui-jqgrid-labels']//th[@id!='listAdvancedReports_Id']"), 2);
+			var headerTextList = new List<string>();
+			foreach (IWebElement foundHeader in foundHeaders)
+			{
+				headerTextList.Add(foundHeader.Text.Trim());
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return headerTextList.Contains(header);
+		}
+
+		public bool ConfirmAdvancedReportingOptions(string name, string desc)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+
+			IList<IWebElement> foundNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[2]"), 2);
+			var dict = new Dictionary<string, string>();
+			foreach (IWebElement foundName in foundNames)
+			{
+				IWebElement foundDescription = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[text()='" + foundName.Text.Trim() + @"']/following-sibling::td"), 2);
+				if (foundDescription != null)
+				{
+					dict.Add(foundName.Text.Trim(), foundDescription.Text.Trim());
+				}
+				else
+				{
+					Report.Failure("Could not find description element for report name element " + foundName.Text.Trim());
+					return false;
+				}
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			if (!(dict.ContainsKey(name) && dict[name] == desc))
+			{
+				return false;
+			}
+
+			return true;
 		}
 
 		public bool VerifyPopupTitle(string title, out string output)
@@ -137,6 +219,275 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return tableDescription == null;
 		}
+
+		public bool ConfirmReportNamesAlphebeticalOrder(string order)
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IList<IWebElement> namesElems = frame.FindElements(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[2]"), 2).ToList();
+			var names = new List<string>();
+			foreach (IWebElement nameElem in namesElems)
+			{
+				names.Add(nameElem.Text);
+			}
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			switch (order)
+			{
+				case "abc":
+					return GeneralUtilities.CheckABCOrder(names);
+				case "cba":
+					return GeneralUtilities.CheckCBAOrder(names);
+				default:
+					return false;
+			}
+
+		}
+
+		public bool ConfirmReportDescriptionsAlphabeticalOrder(string order)
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IList<IWebElement> namesElems = frame.FindElements(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[3]"), 2).ToList();
+			var names = new List<string>();
+			foreach (IWebElement nameElem in namesElems)
+			{
+				names.Add(nameElem.Text);
+			}
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			switch (order)
+			{
+				case "abc":
+					return GeneralUtilities.CheckABCOrder(names);
+				case "cba":
+					return GeneralUtilities.CheckCBAOrder(names);
+				default:
+					return false;
+			}
+		}
+
+		public bool ClickReportNameHeader()
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+
+			IWebElement reportNameHeader = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Name']"), 2);
+			bool canClick = reportNameHeader.TryClick();
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return canClick;
+		}
+
+		public bool ClickReportDescriptionHeader()
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement reportNameHeader = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Description']"), 2);
+			bool canClick = reportNameHeader.TryClick();
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return canClick;
+		}
+
+		public bool CheckIfReportNameUpArrowActive(string active)
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement upArrow = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Name']//span//span[1]"), 2);
+			bool isActive = upArrow.GetAttribute("class").Contains("ui-state-disabled");
+			switch (active)
+			{
+				case "active":
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					return !isActive;
+				case "inactive":
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					return isActive;
+				default:
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					Report.Failure("Found unexpected parameter " + active);
+					return false;
+			}
+		}
+
+		public bool CheckIfReportNameDownArrowActive(string active)
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement downArrow = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Name']//span//span[2]"), 2);
+			bool isActive = downArrow.GetAttribute("class").Contains("ui-state-disabled");
+			switch (active)
+			{
+				case "active":
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					return !isActive;
+				case "inactive":
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					return isActive;
+				default:
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					Report.Failure("Found unexpected parameter " + active);
+					return false;
+			}
+		}
+
+		public bool CheckIfReportDescriptionUpArrowActive(string active)
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement upArrow = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Description']//span//span[1]"), 2);
+			bool isActive = upArrow.GetAttribute("class").Contains("ui-state-disabled");
+			switch (active)
+			{
+				case "active":
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					return !isActive;
+				case "inactive":
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					return isActive;
+				default:
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					Report.Failure("Found unexpected parameter " + active);
+					return false;
+			}
+		}
+
+		public bool CheckIfReportDescriptionDownArrowActive(string active)
+		{
+			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement downArrow = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Description']//span//span[2]"), 2);
+			bool isActive = downArrow.GetAttribute("class").Contains("ui-state-disabled");
+			switch (active)
+			{
+				case "active":
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					return !isActive;
+				case "inactive":
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					return isActive;
+				default:
+					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					Report.Failure("Found unexpected parameter " + active);
+					return false;
+			}
+		}
+
+		public bool EnterEndDate(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement endDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='End Date']//ancestor::td//following-sibling::td//input"), 2);
+			if (endDateField == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			endDateField.JsEnterText(value);
+			Delay.Seconds(1);
+			Report.Screenshot();
+
+			bool matching = false;
+
+			if (endDateField.GetValue() == value)
+			{
+				matching = true;
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return matching;
+		}
+
+		public bool EnterStartDate(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement startDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='Start Date']//ancestor::td//following-sibling::td//input"), 2);
+			if (startDateField == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			startDateField.JsEnterText(value);
+			Delay.Seconds(1);
+			Report.Screenshot();
+			bool matching = false;
+
+			if (startDateField.GetValue() == value)
+			{
+				matching = true;
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return matching;
+
+
+		}
+
+		public bool ReportDescriptionIsCorrect(string reportName, string expectedText)
+		{
+			Report.Info($"Finding the Report Descritpion for: {reportName}");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement descriptionTextFoundEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath($@"//td[text()='{reportName}']//following-sibling::td"), 2);
+			string descriptionTextFoundStr = descriptionTextFoundEl.Text;
+			Report.Info($"Expected Text: {expectedText}");
+			Report.Info($"Found Text: {descriptionTextFoundStr}");
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return descriptionTextFoundStr == expectedText;
+
+		}
+
+		public bool EnterWPSID(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement startDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			if (startDateField == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			startDateField.JsEnterText(value);
+			Delay.Seconds(1);
+			Report.Screenshot();
+			bool matching = false;
+
+			if (startDateField.GetValue() == value)
+			{
+				matching = true;
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return matching;
+
+		}
+
+		public bool ChooseRetailer(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			//IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//span[text()='Retailer']/ancestor::td/following-sibling::td//div//select"), 2);
+			if (retailerOption == null)
+			{
+				Report.Info("Failed to select Retailer from the Retialer Options drop down");
+				return false;
+			}
+			else
+			{
+				
+				retailerOption.Select(value);				
+				return retailerOption.SelectedOption() == value;
+			}
+
+
+
+
+		}
+		public IWebElement CloseButton => this.FindElement(By.XPath(".//button//span[text()='Close']"), 2);
+		
+		
+
+
+
+
 	}
 
 	class AdvancedReportingDateForm : SeleniumBaseObject
@@ -180,5 +531,100 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.Field.JsEnterText(replace);
 			return !(replace == this.Field.GetInnerText());
 		}
+
+
+	}
+
+	class AdvancedReportingDropDownForm : SeleniumBaseObject
+	{
+		public const string BasePath = "//*[@id='panel']";
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		public bool SelectOption(string option)
+		{
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select"));
+
+			if (select != null)
+			{
+				select.Select(option);
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return true;
+			}
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return false;
+		}
+
+		public bool ClickSubmit()
+		{
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement submit = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input"));
+			if (submit.TryClick())
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return true;
+			}
+			else
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return false;
+			}
+
+		}
+	}
+
+	class AdvancedReportingTextInput : SeleniumBaseObject
+	{
+		public const string BasePath = "//*[@id='panel']";
+
+		protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		public bool EnterText(string text)
+		{
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement textInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='text']"));
+			bool canEnterText = textInput.TryEnterText(text);
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return canEnterText;
+		}
+
+		public bool ClickSubmit()
+		{
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement submit = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='submit']"));
+			if (submit.TryClick())
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return true;
+			}
+			else
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return false;
+			}
+
+		}
+	}
+
+	class AdvancedReportingRetailerProductsInRecert
+	{
+		public string WPSID { get; set; }
+
+		public string ProductName { get; set; }
+
+		public string Supplier { get; set; }
+
+		public string RecertificationDate { get; set; }
+	}
+
+	class AdvancedReporting3rdParty
+	{
+		public string WPSID { get; set; }
+		public string SupplierName { get; set; }
+		public string ContactEmail { get; set; }
+		public string LastOrderDate { get; set; }
+		public string LastPublishedDate { get; set; }
+		public string Status { get; set; }
 	}
 }

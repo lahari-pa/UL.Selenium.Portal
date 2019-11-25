@@ -276,6 +276,7 @@
     <Compile Include="Steps\Steps_CreateProducts.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
     <Compile Include="Steps\Steps_DocumentAcceptance.cs" />
+    <Compile Include="Steps\Steps_FileOps.cs" />
     <Compile Include="Steps\Steps_ForgottenPassword.cs" />
     <Compile Include="Steps\Steps_ForwardProductRegistration.cs" />
     <Compile Include="Steps\Steps_Homepage.cs" />
@@ -303,6 +304,7 @@
     <Compile Include="Steps\Steps_ViewUpcs.cs" />
     <Compile Include="Steps\Steps_WercSmartFreshDesk.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
+    <Compile Include="Steps\TestCreatingSupplierAccount.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -526,6 +528,7 @@
     </None>
     <EmbeddedResource Include="Dependencies\Images\image1.jpg" />
     <EmbeddedResource Include="Dependencies\Images\image2.jpg" />
+    <EmbeddedResource Include="Dependencies\Images\NAVIGATOR-LOGO TM.png" />
     <Content Include="ReportFiles\UL.Selenium.Portal.WERCSmart.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
