@@ -411,6 +411,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"In the Access Code Validation popup I enter WPS value for product (.*)")]
+		public void InTheAccessCodeValidationPopupIEnterWPSValueForProduct(string savedAs)
+		{
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			//TODO jwhitesell CONTINUE HERE 11/22!
+		}
+
 		[StepDefinition(@"In the ingredients table I click (CAS Number|Chemical Name|Percent|Publicly Disclosed|Trade Secret|Public Name) to order")]
 		public void WhenInTheIngredientsTableIClickCASNumberChemicalNameToOrder(string orderBy)
 		{
@@ -814,7 +821,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var selectedOptionsStr = new List<string>();
 			foreach (TableRow row in table.Rows)
 			{
-				if(Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"]), "Failed to Select The Functional Purpose:"+ row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
+				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"]), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
 				{
 					selectedOptionsStr.Add(row["Functional Purpose"]);
 				}

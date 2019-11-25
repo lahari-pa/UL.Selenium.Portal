@@ -561,12 +561,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			bool checkTrue = true;
 			IList<IWebElement> listofCert = this.containerElement.FindElements(By.XPath(".//div[@data-bind='with: upc']//div//input"), 1);
-			foreach(var item in listofCert)
+			foreach (var item in listofCert)
 			{
 				//IWebElement inputbox= item.FindElement(By.XPath(".//"))
-				bool clicked=item.TryClick();
-				string textTitle=item.Text;
-				if(!clicked)
+				bool clicked = item.TryClick();
+				string textTitle = item.Text;
+				if (!clicked)
 				{
 					checkTrue = false;
 					Report.Info($"Failed to check the certification with title: {textTitle}");
@@ -767,7 +767,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					Report.Failure("The UPC Name field was not present");
 				}
-				
+
 
 
 				if (info.ContainerType.ToLower() != "none")
@@ -951,6 +951,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectAcceptRadio()
 		{
+			SeleniumBrowser.ScrollToTopOfPage();
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Accept')]/../input"), 2);
 			if (el == null)
 			{
