@@ -159,6 +159,7 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	Then a document should open
 	Given I close the document
 
+@ScenarioId:6114
 Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 
 	Given I Submit a new product which has a Case UPC and a regular UPC
