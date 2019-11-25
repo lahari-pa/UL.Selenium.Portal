@@ -13,7 +13,7 @@
 @run_TransparencyRationCalculation
 Feature: Transparency Ration Calculation
 
-@TReVorId:21355
+@ScenarioId:6047
 Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd party product included in formulation
 	#For this test case you will need to have a specific 3rd party formulation product to add to your formulated products ingredients list.
 	#Use test case 80821 to create this third party product and get it to completed status.

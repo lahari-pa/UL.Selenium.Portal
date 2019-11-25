@@ -950,7 +950,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.Info("Found unexpected column title: " + ColumnTitle + ".");
 						}
 					}
-					Report.Failure("Found " + unexpectedCount + " unexpected columns.");
+					Report.Failure("Found " + unexpectedCount + " unexpected columns.", false);
 				}
 
 				foreach (TableRow thisRow in table.Rows)

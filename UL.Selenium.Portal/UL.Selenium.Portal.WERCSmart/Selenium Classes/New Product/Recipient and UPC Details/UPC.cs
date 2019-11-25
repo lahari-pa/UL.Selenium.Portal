@@ -339,9 +339,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-
-
-
+		internal bool DeleteValueInField(string field)
+		{
+			string str = "//input[@placeholder='" + field + "']";
+			IWebElement el = this.FindElement(By.XPath(str));
+			bool thing = el.TryEnterText("");
+			return thing;
+		}
 
 		public string GetErrorText()
 		{
@@ -485,14 +489,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterDPCI(string value)
 		{
-			IWebElement input = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
+			IWebElement input = this.containerElement.WaitUntilElementVisible(By.XPath("//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 10);
 			return input.TryEnterText(value);
 		}
-
-
-
-
 	}
+
 	public class DeleteRowsWarning : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath(@"//div[@class='modal-dialog modal-md']//div[@class='modal-content']");

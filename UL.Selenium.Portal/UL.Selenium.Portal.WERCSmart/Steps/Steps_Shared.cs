@@ -5892,6 +5892,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
 		}
 
+		// Option is now called "UPC Retailer and Feed"
+		[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC Retailer and Feed\) for product saved as: (.*)")]
 		[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC List\) for product saved as: (.*)")]
 		public void Shared75309_SHA_SelectProduct_UpcList(string savedAs)
 		{
@@ -5904,8 +5906,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// saving the current window so we can naviate back from UPC List
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			TestReport.StartStep("I click 'UPC List'");
-			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+			TestReport.StartStep("I click 'UPC Retailer and Feed'");
+			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
 			Delay.Seconds(5);
 		}
 
@@ -8918,16 +8920,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 85328 \(Login to WERCSmart - Canada - Address \(Yes\), Packaging \(Yes\), Stewardship \(Full\)\)")]
 		public void Shared85328()
 		{
-            new GlobalSteps().ILogInWithTheAccountSavedInTrevorAs("CanadaHasAllData");
+			new GlobalSteps().ILogInWithTheAccountSavedInTrevorAs("CanadaHasAllData");
 		}
 
 		[StepDefinition(@"I call Shared Step 86824 \(Forwarding - Select Existing UPC, Click Continue, No error for Package type\)")]
 		public void Shared86824()
 		{
 			TestReport.UseSubSteps = true;
-            TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
+			TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
 			new StepsForwardProductRegistration().SelectFirstUPC();
-            TestReport.StartStep("I click continue");
+			TestReport.StartStep("I click continue");
 			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
 		}
 	}

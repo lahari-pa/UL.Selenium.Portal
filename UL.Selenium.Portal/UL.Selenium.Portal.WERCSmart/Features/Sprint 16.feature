@@ -49,13 +49,14 @@ Scenario: [105329] PM Monthly Status Report - Target
 	Given In the Advanced Reporting popup I select report PM Monthly Status Report - Target
 	And In the Advanced Reporting popup I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
-	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xlsx and save as 105329
+	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xls and save as 105329
 	Then I confirm that the excel file saved as: 105329 contains the following columns:
 		| Column                |
 		| WPSID                 |
 		| UPC                   |
 		| DPCI                  |
 		| Product Name          |
+		| UPC Name              |
 		| Supplier              |
 		| Status                |
 		| UPC Status            |
@@ -90,6 +91,7 @@ Scenario:[96226] Daily Report - Registration Traffic
 		| UPCs Completed to Retail       |
 		| Product IDs Complete to Retail |
 	And I verify the file saved as: 96226 contains integers in all fields on the first data row
+	Then I delete the excel file saved as 96226
 
 @ScenarioId:1548
 Scenario:[96174] Daily Report - WERCSmart Additional Reports Published
@@ -109,6 +111,7 @@ Scenario:[96174] Daily Report - WERCSmart Additional Reports Published
 		| Language                |
 		| Reports Published       |
 	And I verify the file saved as: 96174 against the specific requirements for Daily Report - WERCSmart Additional Reports Published
+	Then I delete the excel file saved as 96174
 
 @ScenarioId:1568
 Scenario:[112754] SHA Manager: Advanced Reports: Obsolete Report: Obsoleted Products
@@ -158,7 +161,7 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 
 @ScenarioId:5947
 Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC Error Details
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: Error Report User
 	And I click the Supplier Reports icon in the QuickLinks Pane
 	Then Under the Supplier Reports menu I choose: UPC Error Details
 	# Sprint 1 - 1506182, Sprint 2 - 1505712, QA - 1520299, Staging - 1593242, TReVor var request sent
@@ -207,21 +210,25 @@ Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registrat
 	Then in the Retailer page I click Continue
 	And I should see the Universal Product Code (UPC) Page
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC113706, container type: Cardboard and size: 5
-	And I enter 123-44-5555 in the DPCI field of the UPC page
-	And in the UPC page I click Continue
-	And I should see an error message on the Product Name on Label field which reads: Error
+	And In the New Product page I click tab: Recipient and UPC Details
+	And I click the page heading: Universal Product Code (UPC)
+	And I expand UPC details for UPC saved as UPC113706
+	And I delete the value in the Product Name on Label field
+	#And I enter 123-44-5555 in the DPCI field of the UPC page
+	And In the Universal Product Code (UPC) page I click Save
+	And I should see an error message on the Product Name on Label field which reads: This is a required field.
 	And I should see the following error text displayed in the UPC screen: Please fix UPC errors
 	Then I click the Home navigation icon
 	Given I delete all products with UPC Number: saved as UPC113706
 
 @ScenarioId:5971
 Scenario:[114216] TR (Transparency Value) - Display as Percentage
-	Given I generate a random UPC number and save as: UPC113706
+	Given I generate a random UPC number and save as: UPC114216
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I delete all products with UPC Number: saved as UPC113706
+	Given I delete all products with UPC Number: saved as UPC114216
 	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-	Then I save the product information as: Product113706
+	Then I save the product information as: Product114216
 	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	And I call Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
 	And I add the following ingredients:
@@ -256,4 +263,4 @@ Scenario:[114216] TR (Transparency Value) - Display as Percentage
 	And I select the first Public Name dropdown option for ingredient: RED 4
 	And I select the first Public Name dropdown option for ingredient: Clothianidin
 	Then in the Ingredients page I click Continue
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Product113706
+	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Product114216
