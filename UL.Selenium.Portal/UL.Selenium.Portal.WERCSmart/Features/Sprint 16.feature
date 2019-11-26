@@ -446,8 +446,7 @@ Scenario: [114727] PM Walmart Monthly WMQC Report
 	Then I select the: PM Walmart Monthly WMQC Report report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
-	And I wait for the Advanced Reporting Preparing Report popup to disappear
-	#For below step need an actual file to get name etc
+	And I wait for the Advanced Reporting Preparing Report popup to disappear	
 	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xls and save as 114727	
 	#Update Colum headings
 	Then I confirm that the excel file saved as: 114727 contains the following columns:
@@ -461,10 +460,8 @@ Scenario: [114728] UPCs Added Yesterday
 	Then I select the: UPCs Added Yesterday report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: UPCs Added Yesterday is shown as: UPCs Added Yesterday
 	Then In the Advanced Reporting popup I click Submit
-	And I wait for the Advanced Reporting Preparing Report popup to disappear
-	#Change to Correct File Name
-	Given I confirm that an excel file is produced called UPCs Added Yesterday.xls and save as 114728
-	#Update Column headings
+	And I wait for the Advanced Reporting Preparing Report popup to disappear	
+	Given I confirm that an excel file is produced called UPCs Added Yesterday.xls and save as 114728	
 	Then I confirm that the excel file saved as: 114728 contains the following columns: and they are in the correct order.
 		| Column   |
 		| WPSID               |
@@ -600,7 +597,7 @@ Scenario: [114732] WM Slotting Code Report
 
 @ScenarioId:5973
 Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
-	#Update so product goes to published? For walmart slotting code report. 
+	#Update so product goes to published For walmart slotting code report. 
 	Then I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
@@ -638,7 +635,6 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 	Then In the Advanced Reporting popup I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called UPC Details for Registration - Specific Retailer.xlsx and save as 1147332
-	#Update Column headings
 	Then I confirm that the excel file saved as: 1147332 includes the following columns:
 		| Column                       |
 		| Cradle To Cradle             |
@@ -667,7 +663,6 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 	Then In the Advanced Reporting popup I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WalMart DSV Products Report.xlsx and save as 1147333
-	#Update Column headings
 	Then I confirm that the excel file saved as: 1147333 includes the following columns:
 		| Column                       |
 		| Cradle To Cradle             |
@@ -696,7 +691,6 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WM Slotting Code Report.xlsx and save as 1147334
-	#Update Colum headings
 	Then I confirm that the excel file saved as: 1147334 includes the following columns:
 		| Column                       |
 		| Cradle To Cradle             |
@@ -728,7 +722,6 @@ Scenario: [115163] Daily Report - Data Tier Consent - Includes Updated CVS Requi
 	Then In the Advanced Reporting popup I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Daily Report - Data Tier Consent.xls and save as 115163
-	#Update Column headings
 	Then I confirm that the excel file saved as: 115163 contains the following columns:
 		| Column            |
 		| Client            |

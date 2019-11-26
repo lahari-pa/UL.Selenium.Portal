@@ -890,7 +890,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] UPC: Part Number for staples check
 #enter PartNumber + details
 #press continue and check next page loads
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then For Staples I create a product of type a product and progress to the UPC screen
+Then For Staples I create a product of RUCC Stationery and progress it to the UPC screen
 Then I enter Container type: Metal Container, Size 40, Packaging type: spring fling packaging and Part number: ABC123 then click continue in the UPC screen
 
 Scenario: [UPCSTEPPARTNUMBER] Part Num Staples
