@@ -42,7 +42,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool WaitForPreparingReportPopup()
 		{
 			Report.Info("Switching to iFrame");
-			//SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
 
 			int counter = 0;
 			while (counter < 20)
@@ -482,8 +482,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			else
 			{
-				
-				retailerOption.Select(value);				
+
+				retailerOption.Select(value);
 				return retailerOption.SelectedOption() == value;
 			}
 
@@ -492,8 +492,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 		public IWebElement CloseButton => this.FindElement(By.XPath(".//button//span[text()='Close']"), 2);
-		
-		
+
+
 
 
 
