@@ -11,6 +11,7 @@
 @RetailPartners
 @SummaryPage
 @UPC
+@SHA
 @run_Flow8
 Feature: Flow 8
 
@@ -635,14 +636,14 @@ Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Single Purpose Cleaner
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase75840
 
-Scenario: [110324] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC Upload
+Scenario: [117894] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC Upload
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Then I generate 7 random UPC numbers and save all to list named: UPC_Jacob
 	Then I delete all products in contextual list of UPCs: UPC_Jacob
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fireworks
-	Then I save the product information as: TestCase58297
+	Then I save the product information as: TestCase117894
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
 		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -658,19 +659,36 @@ Scenario: [110324] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC 
 		| Amazon   |
 	Then I click Done on Select Retailers window
 	Then I click continue
-	Given I click Sample File link and verify the Upload UPC form and save it as testJacob using:
-		| UPC | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI | HD: OMSID | CT: Item Number |
-		| UPC | 1        | 1    | 1                  | 1               | 1               | 1               | 1               | 1        | 1         | 1               |
-	Given I create the Excel file: TestJacob using:
-		| UPC         | Quantity | Size | Net Explosive Mass | US: Part Number | GP: Part Number | SP:Part Number | TG: DPCI    | HD: OMSID | CT: Item Number    |
-		| UPC_Jacob_1 | 1        | 11   | N/A                | 1001            | 1111            | A0001          | 111-22-0001 | 100000001 | 123-1234, 123-1230 |
-		| UPC_Jacob_2 | 2        | 12   | 1.230              | 1002            | 2222            | A0002          | 111-22-0002 | 100000002 | 123-1234, 123-1231 |
-		| UPC_Jacob_3 | 3        | 13   | 1.23               | 1003            | 3333            | A0003          | 111-22-0003 | 100000003 | 123-1234, 123-1232 |
-		| UPC_Jacob_4 | 4        | 14   | 2                  | 1004            | 4444            | A0004          | 111-22-0004 | 100000004 | 123-1234, 123-1233 |
-		| UPC_Jacob_5 | 5        | 15   | 2.1                | 1005            | 5555            | A0005          | 111-22-0005 | 100000005 | 123-1234, 123-1234 |
-		| UPC_Jacob_6 | 6        | 16   | -1                 | 1006            | 6666            | A0006          | 111-22-0006 | 100000006 | 123-1234, 123-1235 |
-		| UPC_Jacob_7 | 7        | 17   | NA                 | 1007            | 7777            | A0007          | 111-22-0007 | 100000007 | 123-1234, 123-1236 |
-	Then I click the 'Upload UPCs' button and upload the generated file saved as: TestJacob
+	#The following step fails due to a copy error in the table headings introducing a non-readable character after the colon in certain fields
+	And I click Sample File link and verify the Upload UPC form and save it as test117894
+         | UPC          | Name | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
+         | 823973000000 |      | 1        | 11   | 1.22               | 11AB45          | 1001            | 1111            | A0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 | Yes                     |            |                  |                  |            | Yes          |            |          | Yes                          |
+         | 71617198008  |      | 2        | 22   | 2.33               | 12AB56          | 1002            | 2222            | B0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |                         | Yes        |                  |                  |            |              | Yes        |          |                              |
+         | 978959000000 |      | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
+         | 688267000000 |      | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
+         | 854911000000 |      | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
+	
+	And I edit the testdoc.xlsx, and save its filepath as: Bulktest117894 and verify it contains the UPC data in the table saved as: UPCTable117894
+		| UPC           | Name      | Quantity | Size | Net Explosive Mass | US: Part Number | GP: Part Number | SP:Part Number | TG: DPCI    | HD: OMSID | CT: Item Number    | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
+		| %UPC_Jacob_1% | Firework1 | 1        | 11   | N/A                | 1001            | 1111            | A0001          | 111-22-0001 | 100000001 | 123-1234, 123-1230 |                         |            |                  |                  |            |              |            |          |                              |
+		| %UPC_Jacob_2% | Firework2 | 2        | 12   | 1.230              | 1002            | 2222            | A0002          | 111-22-0002 | 100000002 | 123-1234, 123-1231 |                         |            |                  |                  |            |              |            |          |                              |
+		| %UPC_Jacob_3% | Firework3 | 3        | 13   | 1.23               | 1003            | 3333            | A0003          | 111-22-0003 | 100000003 | 123-1234, 123-1232 |                         |            |                  |                  |            |              |            |          |                              |
+		| %UPC_Jacob_4% | Firework4 | 4        | 14   | 2                  | 1004            | 4444            | A0004          | 111-22-0004 | 100000004 | 123-1234, 123-1233 |                         |            |                  |                  |            |              |            |          |                              |
+		| %UPC_Jacob_5% | Firework5 | 5        | 15   | 2.1                | 1005            | 5555            | A0005          | 111-22-0005 | 100000005 | 123-1234, 123-1234 |                         |            |                  |                  |            |              |            |          |                              |
+		| %UPC_Jacob_6% | Firework6 | 6        | 16   | -1                 | 1006            | 6666            | A0006          | 111-22-0006 | 100000006 | 123-1234, 123-1235 |                         |            |                  |                  |            |              |            |          |                              |
+		| %UPC_Jacob_0% | Firework7 | 7        | 17   | NA                 | 1007            | 7777            | A0007          | 111-22-0007 | 100000007 | 123-1234, 123-1236 |                         |            |                  |                  |            |              |            |          |                              |
+	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest117894
+	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable117894
+	Then In the Add Multiple dialog box I select all UPCs
+	Then I Confirm All UPCs are: Selected
+	Then In the Add Multiple dialog box I select the packaging type: <first>
+	Then I Check that the type coloumn becomes populated with option: <first>
+	Given In the Add Multiple dialog box I click Next
+	Then In the Add Multiple dialog box I select all Retailers
+	Then I Check if all Retailers are: Selected
+	Then In the Add Multiple dialog box I click Finish
+	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable117894
+	Then I click Continue and should not see an error message
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -679,4 +697,5 @@ Scenario: [110324] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC 
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fireworks
+	Then I navigate to the home page
 	Then I delete all products in contextual list of UPCs: UPC_Jacob
