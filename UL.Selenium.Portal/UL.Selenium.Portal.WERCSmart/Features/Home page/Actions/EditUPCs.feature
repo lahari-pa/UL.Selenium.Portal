@@ -21,6 +21,7 @@
 @ProductSetUp
 @ViewUpcs
 
+
 Feature: EditUPCs
 
 @tfs_design
@@ -190,3 +191,23 @@ Scenario: [64532] Remove UPC Update - Remove
 	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64532
 	And I confirm there is no product entry listed with Recertification Reason: 2.0 Specific UPC Update
 	Given I Close the Product Recertification History pop up
+
+@ScenarioId:1566
+	Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is displayed about Rejected Registrations and SDS Restrictions
+
+	Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
+	And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submission - any subject - Save for the product saved as: TestCase75142)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
+	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: New
+	Given I navigate to the landing page
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Then I filter for the product saved as: TestCase75142
+	And I edit the product saved as: TestCase75142
+	Then I confirm the Rejected Registration popup displays the warning: Please be aware that rejected registrations will not permit any changes to the Safety Data Sheet (SDS) option. Upon rejection, if you want to change your Safety Data Sheet selection (i.e. Select Authoring instead of providing a Document, you will need to DELETE the rejected registration and create a new registration to submit, with your proper selection.
+	Given in the modal dialog I click cancel
+	Then I confirm the Rejected Registration popup has closed
+	And I edit the product saved as: TestCase75142
+	Then I confirm the Rejected Registration popup displays the warning: Please be aware that rejected registrations will not permit any changes to the Safety Data Sheet (SDS) option. Upon rejection, if you want to change your Safety Data Sheet selection (i.e. Select Authoring instead of providing a Document, you will need to DELETE the rejected registration and create a new registration to submit, with your proper selection.
+	Given in the Rejected Registration modal dialog I click Continue
+	And I should see the The Product Page
+

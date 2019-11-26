@@ -23,6 +23,8 @@ Scenario: [73949] Kit - Document merge - US only
 	Given I navigate to the landing page
 	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
 	Given I navigate to the landing page
+	#Given I save product 1520182 to context as 73949_KitProduct1
+	#Given I save product 1520183 to context as 73949_KitProduct2
 	Given I generate a random UPC number and save as: UPC73949
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))

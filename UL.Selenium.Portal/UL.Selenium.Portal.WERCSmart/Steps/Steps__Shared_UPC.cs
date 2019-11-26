@@ -195,6 +195,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
 				upcTable.AddRow("Size", size);
+				
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 		}
@@ -1274,6 +1275,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(uPCpage.EnterDPCI(value), "Failed to enter DPCI", "Successfully entered DPCI");
 		}
 
+		[StepDefinition(@"I enter (.*) in the DPCI field of the UPC page")]
+		public void GivenIEnterInTheDPCIFieldOfTheUPCPage(string dpci)
+		{
+			Report.IsTrue(new UPC().EnterDPCI(dpci), "DPCI number " + dpci + " was not entered", "DPCI is successfully set to " + dpci);
+		}
 
+		[StepDefinition(@"I should see an error message on the (.*) field which reads: (.*)")]
+		public void GivenIShouldSeeAnErrorMessageOnTheProductNameOnLabelField(string section, string expectedMessage)
+		{
+			Report.IsTrue(new UPC().GetUPCErrorForSection(section, expectedMessage, out string displayedMessage),
+			  "Error message displayed is " + displayedMessage + " but expected " + expectedMessage,
+			  "Error Message displayed in section: " + section + "is displayed as: " + expectedMessage + " as expected");
+		}
 	}
 }
