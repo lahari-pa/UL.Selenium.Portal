@@ -326,9 +326,10 @@ Scenario: [96172] Data Quality Review for Walmart
 		| SHA Status                                   |
 		| Supplier Name                                |
 		| Supplier Type (eg. Manufacturer/Distributor) |
-		| Active or Inactive                           |
+		| Subscription                                 |
 		| Last Published Date                          |
 		| Last Activity Date                           |
+		| RECERT Status                                |
 		| CNTXT and ECOMM                              |
 		| RU Code                                      |
 		| RU Phrase                                    |
@@ -350,6 +351,14 @@ Scenario: [96172] Data Quality Review for Walmart
 		| KIT                                          |
 		| PPHARMA                                      |
 		| LBLTYP                                       |
+		| EPWM                                         |
+		| ARSOL                                        |
+		| UNIFFC                                       |
+		| NFPAH                                        |
+		| NFPAF                                        |
+		| NFPAI                                        |
+		| NFPAP                                        |
+		| NFPAG                                        |
 		| DCQAPF                                       |
 		| DCQAR                                        |
 		| DCQAOR                                       |
@@ -383,6 +392,16 @@ Scenario: [96172] Data Quality Review for Walmart
 		| IATA UN                                      |
 		| IATA HazClass                                |
 		| IATA Packing Group                           |
+		| Green Good Housekeeping      |
+		| Green Seal                   |
+		| EPA Safer Choice             |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |		
+		| Made Safe                    |
+		| NSF Sustainability Certified |
+
 	Then I delete the Advanced Report file saved as 96172
 	Then I Click close in the Advanced Reporting Popup
 
