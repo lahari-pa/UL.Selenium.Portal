@@ -11,6 +11,7 @@
 @RetailPartners
 @SummaryPage
 @PaymentMethods
+@CreateProducts
 @SubEnrollment
 @WERCSmart_Signup
 @MyAccount
@@ -454,3 +455,32 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And I confirm UPC number saved as: "UPC109516" is displayed in the SHA Manager Product UPC list
 	And I confirm UPC number saved as: "UPC109516_2" is displayed in the SHA Manager Product UPC list
 	And I confirm that UPC number saved as: UPC109516_2 shows a grey background for Archived in the SHA Manager Product UPC list
+
+Scenario: [101023] UPC Step - Add Part Number
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase105352
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: Staples
+And in the New Product page I click Continue
+Then I enter Container type: Metal Container, Size 40, Packaging type: NA and Part number: ABC123 then click continue in the UPC screen
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Then I should see the Data Acceptance Page	
+Given I click the Summary button in the Data Acceptance window
+Given I switch to the Data Summary page
+Then I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: Chalk
+Given I close the Data Summary tab
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase105352

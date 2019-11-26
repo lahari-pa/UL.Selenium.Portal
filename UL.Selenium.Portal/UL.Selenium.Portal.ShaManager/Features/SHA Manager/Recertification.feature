@@ -132,13 +132,13 @@ Scenario: [113092] Registration Suspension -  Suspension Email Notification Mess
 	And I click the following option in the bottom menu: Suspended
 	And In the Suspended dialog I Select the following clients: All
 	And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: SHA Regulatory Specialist
-	And In the Suspended dialog in the Select Subject drop down I choose: Formula ñ Document Issue
+	And In the Suspended dialog in the Select Subject drop down I choose: Formula ‚Äì Document Issue
 	And In the Suspended dialog I click Save
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109503)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109503 and its status is: Suspended
-	Then I Check there should be a new suspension notification email for user: ProductAccountEmail for the Product saved as: TestCase109503 with the suspension subject of: Formula ñ Document Issue and check it does not contain text from the table:
+	Then I Check there should be a new suspension notification email for user: ProductAccountEmail for the Product saved as: TestCase109503 with the suspension subject of: Formula ‚Äì Document Issue and check it does not contain text from the table:
 	| SearchText                                                                                                                                                                                                                                                      |
-	| Use the ìRecertificationî link available on the registration to correct the issue; or                                                                                                                                                                           |
+	| Use the ‚ÄúRecertification‚Äù link available on the registration to correct the issue; or                                                                                                                                                                           |
 	| Contact the Help Desk Hub via a ticket.  If you registered the product, a ticket is already created in your My Ticket area of the Hub (post a reply to the existing ticket).                                                                                    |
 	| If you recertify the data, accept the revisions allowing data transfer.  The assessment will proceed.                                                                                                                                                           |
 	| Be aware:  If no response within ten (10) days will result in registration cancellation and the assessment will not proceed to the retailer.  You may contact the Help Desk for reinstatement of the assessment as needed, but the hold remains until resolved. |                                                                                                                                               

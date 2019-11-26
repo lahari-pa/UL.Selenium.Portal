@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -68,8 +68,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
+				//Delay.Seconds(15);
 				// wait up to 5 seconds for the loading bar to become visible
-				SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 5);
+				SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 20);
 				// waits up to timeout (30) seconds for the loading bar to then become invisible
 				return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//div[@id='load_list']"), timeout);
 			}
@@ -2178,6 +2179,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				IWebElement statusSelect = this.containerElement.FindElement(By.XPath(".//select[@id='txtHoldSubject']"));
+				if(option.Contains("�"))
+				{
+					string updatedOption= option.Replace("�", "–");
+					statusSelect.Select(updatedOption);
+					return statusSelect.SelectedOption() == updatedOption;
+				}
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}

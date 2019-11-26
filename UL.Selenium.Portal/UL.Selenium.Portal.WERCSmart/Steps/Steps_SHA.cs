@@ -3410,6 +3410,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new SHAAdvancedReporting().CloseButton.TryClick(), "Failed to click the close button", "Successfully click the close button");
 		}
 
+		[StepDefinition(@"In The advanced reporting screen I Click Option: (Includes Water|Contains Alcohol)")]
+		public void InTheAdvancedReportingScreenClickOption(string optionChoice)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			if(optionChoice=="Includes Water")
+			{
+				Report.IsTrue(shaReport.ClickIncludesWater(), "Failed to Click Option: " + optionChoice, "Successfully Clicked Option: " + optionChoice);
+			}
+			if(optionChoice=="Contains Alcohol")
+			{
+				Report.IsTrue(shaReport.ClickContainsAlcohol(), "Failed to Click Option: " + optionChoice, "Successfully Clicked Option: " + optionChoice);
+			}
+		}
+
+		[StepDefinition(@"I enter UPC Size: (.*) in the advanced reporting popup")]
+		public void IEnterUPCSizeInTheAdvancedReportingPopup(string size)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			TestReport.StartStep("I enter UPC Size");
+			shaReport.EnterUPCSize(size);
+			
+		}
+
+		[StepDefinition(@"In The advanced reporting screen I choose WERCSmart Retail Recipient Code: (.*)")]
+		public void InTheAdvancedReportingScreenIChooseRetailRecipientCode(string recipient)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ChooseRecpientCode(recipient), "Failed to choose recipient: " + recipient, "Successfully selected the recipient: " + recipient);
+		}
+
+
+
+
+
+
 	}
 
 }
