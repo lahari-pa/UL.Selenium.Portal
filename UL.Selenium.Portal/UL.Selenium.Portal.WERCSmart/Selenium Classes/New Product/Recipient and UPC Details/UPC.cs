@@ -88,6 +88,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+
+
 		public bool InputUpcCaseInformation(UpcCaseInformation info)
 		{
 			try
@@ -525,7 +527,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterDPCI(string value)
 		{
-			IWebElement input = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
+			IWebElement input = this.containerElement.FindElement(By.XPath(".//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
 			return input.TryEnterText(value);
 		}
 
@@ -537,10 +539,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public bool IsFirstUPCTabOpen()
-		{
+		{ 
 			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
 			IWebElement expandArrow = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']//em"));
 			return expandArrow.GetAttribute("class").Contains("down");
+		}
+
+		public string GetExpandedUPC()
+		{
+			IWebElement upcField = this.containerElement.FindElement(By.XPath($".//label[contains(text(),'UPC Number')]/following-sibling::input"));
+			return upcField.GetValue();
 		}
 
 		public string GetValueOfRetailerFieldInActiveRow(string retailerID, string field)
@@ -551,7 +559,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetTextOfRetailerLabelInActiveRow(string retailerID, string field)
 		{
-			IWebElement labelText = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]"), 2);
+			IWebElement labelText = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]"),2);
 			if (labelText == null)
 			{
 				Report.Info($"error: {field} label for retailer {retailerID} does not exist");
@@ -562,13 +570,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return labelText.Text;
 			}
 		}
-
-		public string GetExpandedUPC()
-		{
-			IWebElement upcField = this.containerElement.FindElement(By.XPath($".//label[contains(text(),'UPC Number')]/following-sibling::input"));
-			return upcField.GetValue();
-		}
-
 
 	}
 	public class DeleteRowsWarning : SeleniumBaseObject
@@ -668,7 +669,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			IList<IWebElement> sizeList = multipleUPCModal.FindElements(By.XPath("//td//span[@data-bind='text: row.size']"), 2);
+			IList<IWebElement> sizeList = multipleUPCModal.FindElements(By.XPath(".//td//span[@data-bind='text: row.size']"), 2);
 			int i = 13;
 			foreach (var item in sizeList)
 			{

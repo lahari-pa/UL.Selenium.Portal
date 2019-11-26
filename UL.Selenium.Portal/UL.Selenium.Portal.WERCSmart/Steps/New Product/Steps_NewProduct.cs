@@ -2681,8 +2681,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		#endregion
-
-
 	}
 
 
