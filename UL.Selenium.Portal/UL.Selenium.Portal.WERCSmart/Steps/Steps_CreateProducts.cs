@@ -2,11 +2,13 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
+using System.Collections.Generic;
 using TestStack.White.UIItems.TabItems;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
+using Castle.Core.Internal;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -965,7 +967,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			this.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40", "1");
+			//sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
@@ -1123,6 +1126,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//below not yet tested for this product type
 
 			sharedSteps.SharedCVSPharmacy_YesIWishToContinue();
+			new StepsNewProduct().SetTheSectionOptionTo("What is the CVS Store Brand associated to this product?", "CVS Health (CVS Pharmacy)");
+			new StepsNewProduct().SetTheSectionOptionTo("Who is the Product Development Manager (PDM) for this product?", "Lacross, Elizabeth A. Elizabeth.LaCross@CVSHealth.com");
+			new StepsNewProduct().SetTheSectionOptionTo("What is the CVS merchandising category for this product?", "Facial Care");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product specifically designed, marketed or labeled for infants, babies, or children?", "No");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels?", "Yes");
+			new StepsNewProduct().SetTheSectionOptionTo("Product contains microbeads", "No");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product intended to be rinsed off after use?","No");
+			new StepsNewProduct().SetTheSectionOptionTo("Refer to your Product Label. Select the options that appear on the label.", "None of the Above");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product intended to be ingested?", "No");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)?", "No");
+			new StepsNewProduct().ClickContinue();
 
 			TestReport.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
 			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
@@ -1225,7 +1239,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.SetRadioOptionInSectionTo("Who is publicly identified on the product label as responsible for the product?", "Manufacturer");
 			}
 
-			if (myNewProduct.SectionExists("Who is the Final Domestic Distributor (if any) of the product"))
+			if (myNewProduct.SectionExists("Who is the Final Domestic Distributor (if any) of the product?"))
 			{
 				MyStepsNewProduct.GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField("Company Name");
 			}
@@ -1269,6 +1283,128 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Yes, I wish to continue registration");
 			TestReport.StartStep("I click continue");
 			selNewProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I Enter Universal Product Code details for a CVS Product, container type: (.*), size: (.*), Quantity (.*)")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly(string containerType,string size, string quantity)
+		{
+			TestReport.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			for (int i = 0; i < 100; i++)
+			{
+				Report.Info("Entering UPC information. Attempt: " + (i + 1));
+				TestReport.StartStep("I click the 'Add UPC' button");
+				stepsNewProduct.ThenIClickTheAddUpcButton();
+				TestReport.StartStep("I add the following into the UPC Fields");
+				string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+				Report.Info("UPC number: " + upc);
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc,
+					Quantity= quantity					
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+				TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				GeneralUtilities.Wait_for_load_finish();
+				// not returning...
+				if (new NewProduct().FormError().IsNullOrEmpty())
+				{
+					return;
+				}
+				// delete upc that failed
+				stepsNewProduct.GivenIDeleteUPC(upc);
+				Report.Info("An error was showing! on click continue! Attempting a different UPC");
+			}
+		}
+
+		[StepDefinition(@"For Staples I create a product of type a product and progress to the UPC screen")]
+		public void ForStaplesICreateANewProductAndCheckThatICanSuccessfullyEnterAPartNumber()
+
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var selectRetailers = new StepsSelectRetailers();
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			sharedSteps.ICallSharedAdditionalProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
+
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("Staples");
+			newProductSteps.ClickContinue();
+	
+
+		}
+
+		[StepDefinition(@"I enter Container type: (.*), Size (.*), Packaging type: (.*) and Part number: (.*) then click continue in the UPC screen")]
+		public void IEnterContainerTypeSizePackagingTypeAndPartNumberThenClickContinue(string containerType, string size, string packagingType, string partNumber)
+		{
+			TestReport.UseSubSteps = true;
+			var newProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I Click Add Part Number in the UPC screen");
+			newProductSteps.ThenIClickTheAddPartNumber();
+			this.IEnterUPCDetailsAndPartNumberIntoTheUPCScreen(containerType,size,packagingType,partNumber);
+			TestReport.StartStep("I should see the Regulatory Documents to Provide Page");
+			new StepsNewProduct().GivenIShouldSeeXPage("Regulatory Documents to Provide");
+		}
+
+
+		[StepDefinition(@"I enter UPC details, container type: (.*), size: (.*) and packaging type: (.*) then I enter Part Number: (.*)")]
+		public void IEnterUPCDetailsAndPartNumberIntoTheUPCScreen(string containerType,string size, string packagingType, string partNumber)
+		{
+			TestReport.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			for (int i = 0; i < 100; i++)
+			{
+				Report.Info("Entering UPC information. Attempt: " + (i + 1));
+				TestReport.StartStep("I add the following into the UPC Fields");
+				string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+				Report.Info("UPC number: " + upc);
+
+				var upcInfo = new UpcInformation();
+				if (packagingType=="NA")
+				{
+
+					upcInfo.ContainerType = containerType;
+					upcInfo.Size = size;
+										
+				}
+				else
+				{
+					upcInfo.ContainerType = containerType;
+					upcInfo.Size = size;
+					upcInfo.PackageType = packagingType;
+
+				}
+
+				Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo,partNumber), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+				TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				GeneralUtilities.Wait_for_load_finish();
+				// not returning...
+				if (new NewProduct().FormError().IsNullOrEmpty())
+				{
+					return;
+				}
+				// delete upc that failed
+				stepsNewProduct.GivenIDeleteUPC(upc);
+				Report.Info("An error was showing! on click continue! Attempting a different UPC");
+			}
 		}
 
 

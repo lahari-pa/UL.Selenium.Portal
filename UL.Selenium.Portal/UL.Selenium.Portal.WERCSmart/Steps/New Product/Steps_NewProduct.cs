@@ -2605,6 +2605,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(thisNewProduct.ProductGTINBrickCode == description, "Failed to set the Product's GTIN Brick Code to be: " + description, "Successfully set the Product's GTIN Brick Code to be: " + description);
 		}
 
+		[StepDefinition(@"I click the 'Add Part Number' button")]
+		public void ThenIClickTheAddPartNumber()
+		{
+			Report.IsTrue((new NewProduct()).ClickAddPartNumber(), "Failed to click the 'Add Part Number' button!", "Successfully clicked the 'Add Part Number' button");
+		}
+
+
+
 
 
 		#endregion

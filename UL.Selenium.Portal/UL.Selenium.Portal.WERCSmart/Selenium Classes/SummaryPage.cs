@@ -223,24 +223,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement correctIngredientTypeCell = functionalRow.FindElement(By.XPath($".//td[{i}]"), 2);
 
-			List<IWebElement> ingredientTypeEls = correctIngredientTypeCell.FindElements(By.XPath($".//div//div"), 2).ToList();
+			//List<IWebElement> ingredientTypeEls = correctIngredientTypeCell.FindElements(By.XPath($".//div//div"), 2).ToList();
+
+			string ingredientTypeEls = correctIngredientTypeCell.FindElement(By.XPath($".//div"), 2).Text;
+			string replacedStr = ingredientTypeEls.Replace("\r\n", "");			
+			string finalStr = replacedStr.TrimEnd(',');
+			List<string> result = finalStr.Split(new char[] { ',' }).ToList();
+
 			var ingredientTypeStrings = new List<string>();
 
-			foreach (var el in ingredientTypeEls)
+			foreach (var el in result)
 			{
-				ingredientTypeStrings.Add(el.Text);
+				ingredientTypeStrings.Add(el);
 			}
 			return ingredientTypeStrings;
 
 		}
 
+		
 		public bool FunctionalPurposesMatch(string ingredient, List<string> chosenPurposes)
 		{
 			
 			List<string> actualPurposes = this.FunctionalPurposes(ingredient);
 
 			var diffFound = new List<string>();
-
+			Report.Info($"The Number of found Functional Purposes was:{actualPurposes.Count()}");			
+			if(actualPurposes.Count == 1)
+			{
+				if (actualPurposes[0]=="" && chosenPurposes.Contains("NA"))
+				{
+					Report.Info("There were Functional purposes found as expected");
+					return true;
+				}
+			}
+			
 			foreach (var item in actualPurposes)
 			{
 				if (!chosenPurposes.Contains(item))

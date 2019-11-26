@@ -158,6 +158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Successfully found value " + value + " for header " + header + " in Data Summary screen.");
 		}
 
+
 		[StepDefinition(@"The data summary window should be showing")]
 		public void TheDataSummaryWindowShouldBeShowing()
 		{
@@ -307,6 +308,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Successfully matched INCI Name for Ingredient " + ingredient.ComponentName + ".");
 
 			}
+		}
+
+
+		[StepDefinition(@"I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: (.*)")]
+		public void IConfirmThatTheDataSummarySectionShowsValueSavedAs(string value)
+		{
+			var dataSummarySheet = new DataSummary();			
+			string upc = "PART NUMBER";
+			string header = "UPC Name";
+			string section = $"Provide the product's UPC(s), including container type and size (ounces)";
+			Report.IsTrue(dataSummarySheet.ConfirmUPCInformation(section, header, value, upc), "Failed to find value " + value + " for header " + header + " in Data Summary screen.",
+					"Successfully found value " + value + " for header " + header + " in Data Summary screen.");
 		}
 
 	}

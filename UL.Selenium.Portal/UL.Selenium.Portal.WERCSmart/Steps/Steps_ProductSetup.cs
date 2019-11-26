@@ -3544,6 +3544,89 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					   			 		  		  		 	   		
 		}
+
+		[StepDefinition(@"I create a Chalk product for WalMart and Proccess it to completed and save it as: (.*)")]
+		public void ICreateAChalkProductForWalmartAndProccessItToCompleted(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			TestReport.StartStep("I generate a random UPC number and save as: UPC75142");
+			new StepsProductGrid().GivenIGenerateARandomUPCNumberAndSaveAs("UPC75142");
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
+			newProductSteps.SaveProductInformation(savedAs);
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			sharedSteps.ThenICallSharedStep85284_AdditionalProductInformation_USCanadaChildNoOSHANoDSVNoPLPYESGNFRNoContinue();
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
+			//sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
+			
+			var retailerSelectionSteps = new StepsSelectRetailers();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I should see the Select Retailers Popup");
+			retailerSelectionSteps.GivenIShouldSeeTheSelectRetailersPopUp();
+			TestReport.StartStep("I select the retailer: Wal-Mart/SAM'S CLUB and click Done");
+			new StepsSelectRetailers().SelectTheRetailer("Walmart");
+			TestReport.StartStep("I set the Vendor as: Testing");
+			//new Steps_Retailer().ISelectVendorId("Testing");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Walmart");
+			new Retailer().SelectPrivateLabelName("Great Value");
+			TestReport.StartStep("I click continue");
+			newProductSteps.ClickContinue();
+			TestReport.StartStep("In the upc screen I add the UPC: saved as UPC75142, container type: Metal Container and size: 40, then select all certifications");
+			new StepsNewProduct().InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications("75142", "Metal Container", "40");
+
+
+
+			//sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as UPC86259", "Metal Container", "5");
+			sharedSteps.ThenICallSharedStep78868_RegulatoryDocumentsToProvide_USAndCanada_RequestAuthoringForBoth();
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Optional Reports and Documents Available for Purchase");
+			sharedSteps.GivenICallSharedStep64097_AdditionalDocuments_ContactInformation_AddAnyNameAddressPhoneAndEmergencyPhone_HappyPath();
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
+			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
+			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Submitted");
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Assigned");
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
+			sharedSteps.GivenICallSharedWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTNGHSAndSBCS(savedAs);
+			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
+			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Accepted");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", savedAs);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			var table4 = new Table(new string[] {
+				"Retailer"
+			});
+			table4.AddRow(new string[] {
+				"Amazon"
+			});
+			sharedSteps.GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(savedAs, table4);
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+				"Completed");
+		}
 	}
 
 }
