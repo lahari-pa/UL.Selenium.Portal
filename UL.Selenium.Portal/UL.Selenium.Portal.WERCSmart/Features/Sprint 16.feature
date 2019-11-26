@@ -312,7 +312,8 @@ Scenario: [26815] Advanced Report Options
 
 @ScenarioId:5979
 Scenario: [96172] Data Quality Review for Walmart
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
+	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)	
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
@@ -930,7 +931,7 @@ Scenario: [116340] Products Fed to Retailers - Filters
 	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM	
 	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
-	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340	
+	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340
 	Then For the excel file saved as: 116340 I check that the column with heading name: Water % does not contains: 0 in any rows.
 	Then I delete the Advanced Report file saved as 116340
 
