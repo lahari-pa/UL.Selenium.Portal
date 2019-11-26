@@ -1322,8 +1322,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"For Staples I create a product of type a product and progress to the UPC screen")]
-		public void ForStaplesICreateANewProductAndCheckThatICanSuccessfullyEnterAPartNumber()
+		[StepDefinition(@"For Staples I create a product of RUCC Stationery and progress it to the UPC screen")]
+		public void ForStaplesICreateANewStationeryProductAndProgressItToTheUPCScreen()
 
 		{
 			TestReport.UseSubSteps = true;
