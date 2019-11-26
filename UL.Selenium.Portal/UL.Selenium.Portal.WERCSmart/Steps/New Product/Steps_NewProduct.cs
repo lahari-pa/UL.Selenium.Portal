@@ -59,6 +59,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"In the New Product page I (should|should not) be on tab: (Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)")]
+		public void GivenInTheNewProductPageICpmfirmActiveTab(string present, string tabName)
+		{
+			try
+			{
+				bool showing = present == "should";
+				NewProduct.Tab tab = NewProduct.MapTabs.FirstOrDefault(x => x.Value == tabName).Key;
+				Report.IsTrue(!(NewProduct.IsActiveTab(tab) ^ showing), $"Failed, {present} be on tab {tabName}.", $"Success, {present} be on tab {tabName}.");
+			}
+			catch (NullReferenceException)
+			{
+				Report.Failure("The parameter 'tab' did not match a valid tab title");
+				throw;
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I click the page heading: (.*)")]
 		public void ClickPageHeading(string section)
 		{
@@ -2607,9 +2628,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 
+				var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+				string firstUPC = new UPC().GetExpandedUPC();
+				string value = "";
+				string test = "";
+				foreach (TableRow row in tableContent.Rows)
+				{
+					
+					test = (string)Context.GetFromContext($"{row["UPC"].ToString().Trim('%')}");
+					if (test == firstUPC)
+					{
+						value = row[upcTableFieldName];
+					}
+				}
+
+				
+				string fieldValue = new UPC().GetValueOfRetailerFieldInActiveRow($"{retailerAbbr}", field);
+				Report.IsTrue(!((value == fieldValue) ^ showing), $"Failure, table {field}: {value} and website {field}: {fieldValue} {present} match and do not.", $"Success, table {field}: {value} and website {field}: {fieldValue} {present} match and do.");
+			}
+		}
+
+		[StepDefinition(@"I confirm that (Item Number|Part Number|DPCI|OMSID) label text for retailer (.*) UPC item 1 matches: (.*)")]
+		public void IConfirmLabelTextForRetailerMatches(string field, string retailer, string expectedText)
+		{
+			string retailerAbbr = new RetailerAbbreviations().TryConvertToAbbreviation($"{retailer}");
+			string fieldValue = new UPC().GetTextOfRetailerLabelInActiveRow($"{retailerAbbr}", field);
+			Report.IsTrue(expectedText == fieldValue, $"Failure, expected text for {field}: {expectedText} and actual website text for {field}: {fieldValue} do not match.", $"Success, expected text for {field} and actual website text for {field} match.");
+		}
+
 		#endregion
-
-
 	}
 
 
