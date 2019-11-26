@@ -732,9 +732,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				}
 				upcNumberField.EnterText(info.UpcNumber);
-				if (ProductNameOnlabel != null)
+
+
+				IWebElement productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
+
+				string productNameDataBind=productNameOnlabelObj.GetAttribute("class");
+				if(productNameDataBind!=null)
 				{
-					if (ProductNameOnlabel.Text.IsNullOrEmpty())
+					if (!productNameDataBind.Contains("form-group has-success"))
 					{
 						ProductNameOnlabel.EnterText("UPCName PlaceHolder");
 						Report.Failure("The UPC Name Field was empty, entered PlaceHolder text");
@@ -761,19 +766,61 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 							}
 
-							upcNumberField.EnterText(info.UPCName);
+							ProductNameOnlabel.EnterText(info.UPCName);
 						}
 						else
 						{
 							Report.Info("UPC Name was not found in the table, leaving default UPC Name");
 						}
-
 					}
 				}
 				else
 				{
 					Report.Failure("The UPC Name field was not present");
 				}
+
+				//if (ProductNameOnlabel != null)
+				//{
+				//	if (ProductNameOnlabel.Text.IsNullOrEmpty())
+				//	{
+				//		ProductNameOnlabel.EnterText("UPCName PlaceHolder");
+				//		Report.Failure("The UPC Name Field was empty, entered PlaceHolder text");
+				//	}
+				//	else
+				//	{
+				//		Report.Info("The Field was not empty, Checking for UPCName in the table");
+				//		if (!info.UPCName.IsNullOrEmpty())
+				//		{
+				//			if (info.UPCName.ToLower().Contains("saved as"))
+				//			{
+				//				try
+				//				{
+				//					string savedUPC = Context
+				//						.GetFromContext(info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+				//						.ToString();
+				//					info.UPCName = savedUPC;
+				//				}
+				//				catch (Exception e)
+				//				{
+				//					Report.Info("Failed to find saved item in context: " + info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+				//					throw;
+				//				}
+
+				//			}
+
+				//			upcNumberField.EnterText(info.UPCName);
+				//		}
+				//		else
+				//		{
+				//			Report.Info("UPC Name was not found in the table, leaving default UPC Name");
+				//		}
+
+				//	}
+				//}
+				//else
+				//{
+				//	Report.Failure("The UPC Name field was not present");
+				//}
 				
 
 
@@ -3200,7 +3247,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Who is the Final Domestic Distributor (if any) of the product ']/../following-sibling::div//input"), 2);
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Who is the Final Domestic Distributor (if any) of the product?']/../following-sibling::div//input"), 2);
 
 				if (el != null)
 				{
@@ -3268,6 +3315,120 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'GTIN')]/..//following-sibling::div//select"), 2);
 				el.Select(value);
+			}
+		}
+
+		public bool ClickAddPartNumber()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'PartNumber')]"), 2);
+			return el != null && el.TryClick();
+		}
+
+
+
+		public bool InputPartNumberInformation(UpcInformation info,string partNumber)
+		{
+			try
+			{
+				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
+				IWebElement ProductNameOnlabel = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/..//input"), 2);
+				IWebElement partNameTextField = container.FindElement(By.XPath(".//label[contains(text(),'Part Number')]/..//input"), 2);
+				IWebElement productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
+
+				string productNameDataBind = productNameOnlabelObj.GetAttribute("class");
+				if (productNameDataBind != null)
+				{
+					if (!productNameDataBind.Contains("form-group has-success"))
+					{
+						ProductNameOnlabel.EnterText("UPCName PlaceHolder");
+						Report.Failure("The UPC Name Field was empty, entered PlaceHolder text");
+					}
+					else
+					{
+						Report.Info("The Field was not empty, Checking for UPCName in the table");
+						if (!info.UPCName.IsNullOrEmpty())
+						{
+							if (info.UPCName.ToLower().Contains("saved as"))
+							{
+								try
+								{
+									string savedUPC = Context
+										.GetFromContext(info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+										.ToString();
+									info.UPCName = savedUPC;
+								}
+								catch (Exception e)
+								{
+									Report.Info("Failed to find saved item in context: " + info.UPCName.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+									throw;
+								}
+
+							}
+
+							ProductNameOnlabel.EnterText(info.UPCName);
+						}
+						else
+						{
+							Report.Info("UPC Name was not found in the table, leaving default UPC Name");
+						}
+					}
+				}
+				else
+				{
+					Report.Failure("The UPC Name field was not present");
+				}
+
+				
+
+
+
+				if (info.ContainerType.ToLower() != "none")
+				{
+					IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+					containsType.Select(info.ContainerType);
+				}
+
+				string regex = @"(.*)\((.*)\)";
+				IWebElement sizeField = (from input in textInputs
+										 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
+										 where match.Success && match.Groups[1].Value.StartsWith("Size") && match.Groups[2].Value.Contains("Ounces")
+										 select input).FirstOrDefault();
+				if (sizeField == null)
+				{
+					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
+					return false;
+				}
+				sizeField.EnterText(info.Size);
+				if (info.Dpci.Length > 0)
+				{
+					IWebElement dpciField = container.FindElement(By.XPath(".//input[contains(@data-bind,'value.field')]"), 2);
+					dpciField.EnterText(info.Dpci);
+				}
+				if (info.Quantity.Length > 0)
+				{
+					IWebElement quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity']"), 2);
+					quantityField.EnterText(info.Quantity);
+				}
+
+				if (info.PackageType.Length > 0)
+				{
+					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					packageField.Select(info.PackageType);
+				}
+
+				if (partNameTextField == null)
+				{
+					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
+					return false;
+				}
+				partNameTextField.EnterText(partNumber);
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Report.Info(ex.Message);
+				return false;
 			}
 		}
 
