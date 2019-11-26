@@ -1421,16 +1421,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"There are currently a total of { myAccount.GetHighestPageNo()}");
 			if (myAccount.GetHighestPageNo()< noPages)
 			{
-				while (myAccount.GetHighestPageNo()< noPages)
+				int i = 0;
+				int remainingPages = noPages - myAccount.GetHighestPageNo();
+				int limit = remainingPages * 10;
+				Report.Info($"Limiting the max number of new users that I will create to: {limit}");
+
+				while (myAccount.GetHighestPageNo()< noPages && i<limit)
 				{
 					new Steps_Shared().GivenICallSharedStepCreateNewUserViaUserGrid();
+					i++;
 				}
-				Report.IsTrue(myAccount.GetHighestPageNo() >= noPages, "The total number of pages was not atleast 2", "The total number of pages was atleast 2");
+				if (i < limit)
+				{
+					Report.Info($"The New user limit was not reached");
+				}
+				else
+				{
+					Report.Info($"The New user limit was reached");
+				}
+
+				Report.Info($"The Highest Page Number is currently: {myAccount.GetHighestPageNo()}");
+				Report.IsTrue(myAccount.GetHighestPageNo() >= noPages, "The total number of pages was not atleast:"+noPages, "The total number of pages was atleast:" + noPages);
 				
 			}
 			else
 			{
-				Report.Success("The Current Number of total pages was atleast 2, no new users where created.");
+				Report.Success($"The Current Number of total pages was atleast {noPages}, no new users where created.");
 			}
 
 		}

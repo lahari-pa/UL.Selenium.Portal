@@ -228,15 +228,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string ingredientTypeEls = correctIngredientTypeCell.FindElement(By.XPath($".//div"), 2).Text;
 			string replacedStr = ingredientTypeEls.Replace("\r\n", "");			
 			string finalStr = replacedStr.TrimEnd(',');
-			List<string> result = finalStr.Split(new char[] { ',' }).ToList();
-
-			var ingredientTypeStrings = new List<string>();
-
-			foreach (var el in result)
-			{
-				ingredientTypeStrings.Add(el);
-			}
-			return ingredientTypeStrings;
+			List<string> result = finalStr.Split(new char[] { ',' }).ToList();			
+			return result;
 
 		}
 
