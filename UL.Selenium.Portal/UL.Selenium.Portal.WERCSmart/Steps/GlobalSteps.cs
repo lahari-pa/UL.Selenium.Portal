@@ -1410,19 +1410,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Report.Info("Saving current window to context as MainWindowHandle");
+			
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-			foreach (string handle in allHandles)
+			int i = 1;
+			Report.Info("Attempting up to 10 times to find wanted tab");
+			while (i < 11)
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-				string currentTitle = SeleniumBrowser.WebBrowser.Title;
-				if (currentTitle == title)
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				foreach (string handle in allHandles)
 				{
-					Report.Success("Tab with title was loaded");
-					Report.Screenshot();
-					return;
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					string currentTitle = SeleniumBrowser.WebBrowser.Title;
+					if (currentTitle == title)
+					{
+						Report.Success("Tab with title was loaded");
+						Report.Screenshot();
+						return;
+					}
 				}
+				Report.Info($"Did not find the tab:{title} on attempt: {i}");
+				Delay.Seconds(1);
+				i++;
+
 			}
+
 			throw new Exception("Failed to find window with title: " + title);
 		}
 

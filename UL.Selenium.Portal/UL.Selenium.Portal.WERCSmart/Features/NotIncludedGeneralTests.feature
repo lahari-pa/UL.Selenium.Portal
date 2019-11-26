@@ -19,6 +19,7 @@
 @Brands
 @MyIngredients
 @UPC
+@ProductSetUp
 @SHA
 @Studio
 @ForwardProductRegistration
@@ -815,6 +816,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Ticket 107365
 		| UPC Name |
 	Then I delete the Advanced Report file saved as 1073653
 
+	
 	Then I select the: WM Slotting Code Report report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: WM Slotting Code Report is shown as: WM Slotting Code Report
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
@@ -842,9 +844,186 @@ Scenario: [CVSTESTINGDEBUG] CERIAL
 	Then I delete the Supplier Report file saved as CVSGroceryExcelFile
 	Then I navigate to the Homepage and then In the Products Grid I delete All products
 
+Scenario: [CVSTESTINGBATT] Battery
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Battery (RUCC0733), save it as: CVSBatteryProduct1 and leave it in New Status
+Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSBatteryExcelFile and check that is shows the expected product saved as: CVSBatteryProduct1
 
 
-	
+Scenario: [CVSTESTINGPHAR] Pharm
+
+Given I log in with the account saved in TReVor as: NoProductsAccount
+Then In the Products Grid I delete All products
+Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPharmacyProduct1 and leave it in New Status
+Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPharmacyExcelFile and check that is shows the expected product saved as: CVSPharmacyProduct1
+
+
+Scenario: [CVSTIERS] Daily Report -  CVS TIERS CHECK
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Daily Report - Data Tier Consent report from Advanced Reporting in SHA
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called Daily Report - Data Tier Consent.xls and save as 115163
+	#Update Column headings
+	Then I confirm that the excel file saved as: 115163 contains the following columns:
+		| Column              |
+		| UPC Name            |
+	Then I confirm that the excel file saved as: 115163 contains CVS products with tiers 2.1, 2.2 and 4.1 granted 	
+	Then I delete the Advanced Report file saved as 115163
+
+Scenario: [ProductProccess] WM CHALK COMPLETED
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Then I create a Chalk product for WalMart and Proccess it to completed and save it as: WMCHALKTEST1
+
+Scenario: [SHALOADING] SHA LOADING DEBUG
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+Scenario: [NOTINCLUDEDGENERALTEST] UPC: Part Number for staples check
+
+#For TFS ticket 116739
+#login
+#create a product e.g chalk
+#select staples
+#enter PartNumber + details
+#press continue and check next page loads
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then For Staples I create a product of RUCC Stationery and progress it to the UPC screen
+Then I enter Container type: Metal Container, Size 40, Packaging type: spring fling packaging and Part number: ABC123 then click continue in the UPC screen
+
+Scenario: [UPCSTEPPARTNUMBER] Part Num Staples
+
+#101023 test case link to 116739 and finish
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase105352
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: Staples
+And in the New Product page I click Continue
+Then I enter Container type: Metal Container, Size 40, Packaging type: NA and Part number: ABC123 then click continue in the UPC screen
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Then I should see the Data Acceptance Page	
+Given I click the Summary button in the Data Acceptance window
+Given I switch to the Data Summary page
+Then I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: Chalk
+Given I close the Data Summary tab
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase105352
+
+
+
+#Then I confirm that the Data Summary section Provide the product's UPC(s), including container type and size (ounces) shows the value for Container Type saved as: TestCase73082Container for UPC saved as: TestCase73082UPC
+#check this below works and add scenario correctly. (also spp of "Prouct" fix)
+#Then I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: Chalk
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#And I Click 'CONTINUE' on the 'Optional Reports and Documents Available for Purchase' Page
+#And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+#| Requires Table |
+#| Parameters     |
+#And I Click 'CONTINUE' in the 'COMMENTS' step shown
+#And I With the Data Acceptance step shown - Click the 'Summary Button'
+#And I Confirm the Summary View for your product shows in a new tab window
+#And I Scroll down until you see the UPC question, Confirm you see PART NUMBER below the UPC Number heading
+#
+#
+#And I Close the Summary View window and return to the Data Acceptance step in WERCSmart window
+#And I On the left-navigation - Click the 'HOME ICON'
+#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: (.*)
+#Given I click continue
+#Then I should see the Data Acceptance Page	
+#Given I click the Summary button in the Data Acceptance window
+#Given I switch to the Data Summary page
+#Then Product Name should be showing value: Super Packaging Type 1 (TM)
+#Given I close the Data Summary tab
+
+
+
+
+Scenario: [UPCCOLUMNS] UPCCOLUMNS after grid
+
+	Given I Submit a new product which has a Case UPC and a regular UPC
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	And I filter for the product saved as: TestCase87685
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View UPCs
+	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'	
+	Given I generate a random UPC number and save as: UPC109503
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase109503
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
+	Given I click continue
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then If purchase details are showing click confirm order
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)	
+	And I filter for the product saved as: TestCase109503
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View UPCs
+	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+
+Scenario: [UPCCOLUMNS] View - UPC name column exists in the Product UPCs table
+
+	Given I Submit a new product which has a Case UPC and a regular UPC
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	And I filter for the product saved as: TestCase87685
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View
+	Then I navigate to the View tab for product saved as: TestCase87685 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+	Given I generate a random UPC number and save as: UPC109503
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase109503
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
+	Given I click continue
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then If purchase details are showing click confirm order
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)	
+	And I filter for the product saved as: TestCase109503
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View
+	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+
+
 
 
 

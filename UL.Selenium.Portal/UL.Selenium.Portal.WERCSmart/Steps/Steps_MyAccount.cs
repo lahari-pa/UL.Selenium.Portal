@@ -1413,6 +1413,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I Create new users in the My Account page via the user Grid until there are atleast: (.*) pages present")]
+		public void ICreateXNewUsersInTheMyAccountPageViaTheUserGrid(int noPages)
+		{
+			
+			var myAccount = new MyAccount();
+			Report.Info($"There are currently a total of { myAccount.GetHighestPageNo()}");
+			if (myAccount.GetHighestPageNo()< noPages)
+			{
+				int i = 0;
+				int remainingPages = noPages - myAccount.GetHighestPageNo();
+				int limit = remainingPages * 10;
+				Report.Info($"Limiting the max number of new users that I will create to: {limit}");
+
+				while (myAccount.GetHighestPageNo()< noPages && i<limit)
+				{
+					new Steps_Shared().GivenICallSharedStepCreateNewUserViaUserGrid();
+					i++;
+				}
+				if (i < limit)
+				{
+					Report.Info($"The New user limit was not reached");
+				}
+				else
+				{
+					Report.Info($"The New user limit was reached");
+				}
+
+				Report.Info($"The Highest Page Number is currently: {myAccount.GetHighestPageNo()}");
+				Report.IsTrue(myAccount.GetHighestPageNo() >= noPages, "The total number of pages was not atleast:"+noPages, "The total number of pages was atleast:" + noPages);
+				
+			}
+			else
+			{
+				Report.Success($"The Current Number of total pages was atleast {noPages}, no new users where created.");
+			}
+
+		}
+
 		[StepDefinition(@"I confirm that I do not see any stewardship information")]
 		public void NoStewardshipData()
 		{
@@ -1501,6 +1539,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.CheckForEditButtonCheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection(), "Edit button does exist in the Stewardship Numbers section", "Edit button exists in the Stewardship Numbers section");
 		}
+
 
 		[StepDefinition(@"I add following stewardship information")]
 		public void AddStewardshipInformation(Table table)

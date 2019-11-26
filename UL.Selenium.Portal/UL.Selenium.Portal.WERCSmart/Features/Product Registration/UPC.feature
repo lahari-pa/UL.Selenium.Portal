@@ -11,6 +11,7 @@
 @RetailPartners
 @SummaryPage
 @PaymentMethods
+@CreateProducts
 @SubEnrollment
 @WERCSmart_Signup
 @MyAccount

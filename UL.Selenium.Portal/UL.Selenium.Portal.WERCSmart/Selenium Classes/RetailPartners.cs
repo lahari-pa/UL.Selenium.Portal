@@ -535,7 +535,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> ExpectedCVSDataTiers()
 		{
-			return new List<string> {"Tier 1: Regulatory Support", "Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports", "Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency", "Tier 4.1: Publicly Disclose Supplemental Reports"};
+			return new List<string> {"Tier 1: Regulatory Support", "Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports", "Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency", "Tier 3: Supplemental Reports", "Tier 4.1: Publicly Disclose Supplemental Reports"};
 					
 		}
 

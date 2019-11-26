@@ -367,13 +367,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(2);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement endDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='End Date']//ancestor::td//following-sibling::td//input"), 2);
+			IWebElement endDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='End Date']//ancestor::td[1]//following-sibling::td//input"), 2);
 			if (endDateField == null)
 			{
 				Report.Info("Could not find the input element!");
 				return false;
 			}
-			endDateField.JsEnterText(value);
+			if(value=="NA")
+			{
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return true;
+			}
+
+			endDateField.TryClick();
+			endDateField.EnterText(value);
+
+			//endDateField.JsEnterText(value);
+			//endDateField.SendKeys(Keys.Return);
 			Delay.Seconds(1);
 			Report.Screenshot();
 
@@ -392,7 +403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnterStartDate(string value)
 		{
 			Report.Info("Switching to iFrame");
-			Delay.Seconds(2);
+			Delay.Seconds(5);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement startDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='Start Date']//ancestor::td//following-sibling::td//input"), 2);
 			if (startDateField == null)
@@ -400,7 +411,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not find the input element!");
 				return false;
 			}
-			startDateField.JsEnterText(value);
+
+			startDateField.TryClick();
+			//startDateField.JsEnterText(value);
+			//startDateField.SendKeys(Keys.Return);
+
+			startDateField.EnterText(value);
+
+			//startDateField.JsEnterText(value);
+			
 			Delay.Seconds(1);
 			Report.Screenshot();
 			bool matching = false;
@@ -434,7 +453,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnterWPSID(string value)
 		{
 			Report.Info("Switching to iFrame");
-			Delay.Seconds(2);
+			Delay.Seconds(4);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement startDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
 			if (startDateField == null)
@@ -442,7 +461,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not find the input element!");
 				return false;
 			}
-			startDateField.JsEnterText(value);
+
+			startDateField.TryClick();
+			startDateField.EnterText(value);
+			//endDateField.JsEnterText(value);
 			Delay.Seconds(1);
 			Report.Screenshot();
 			bool matching = false;
@@ -473,8 +495,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			else
 			{
 				
-				retailerOption.Select(value);				
-				return retailerOption.SelectedOption() == value;
+				retailerOption.Select(value);
+				string selectedOption = retailerOption.SelectedOption();
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return selectedOption == value;
 			}
 
 
@@ -482,13 +507,113 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 		public IWebElement CloseButton => this.FindElement(By.XPath(".//button//span[text()='Close']"), 2);
-		
-		
 
+		public bool EnterUPCSize(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");			
+			IWebElement upcSizeField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//*[text()='UPC Size']/parent::td//following-sibling::td//input"), 2);
+			if (upcSizeField == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+
+			upcSizeField.TryClick();
+			upcSizeField.EnterText(value);
+			//endDateField.JsEnterText(value);
+			Delay.Seconds(1);
+			Report.Screenshot();
+
+			bool matching = false;
+
+			if (upcSizeField.GetValue() == value)
+			{
+				matching = true;
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return matching;
+
+		}
+
+		public bool ClickContainsAlcohol()
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement containsAlcoholBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//*[text()='Contains Alcohol']/parent::td//following-sibling::td//input"), 2);
+			if (containsAlcoholBox == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			bool selected=containsAlcoholBox.TryClick();
+			Delay.Seconds(1);
+			Report.Screenshot();			
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return selected;
+		}
+
+		public bool ClickIncludesWater()
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement containsWater = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//*[text()='Includes 7732-18-5 / Water']/parent::td//following-sibling::td//input"), 2);
+			if (containsWater == null)
+			{
+				Report.Info("Could not find the input element!");
+				return false;
+			}
+			bool selected = containsWater.TryClick();
+			Delay.Seconds(1);
+			Report.Screenshot();
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return selected;
+		}
+
+		public bool ChooseRecpientCode(string value)
+		{
+			Report.Info("Switching to iFrame");
+			Delay.Seconds(2);
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			//IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			IWebElement recipientOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//span[text()='WERCSmart Retail Recipient Code']/ancestor::td/following-sibling::td//div//select"), 2);
+			if (recipientOption == null)
+			{
+				Report.Info("Failed to select The Recipient Code from the Options drop down menu");
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return false;
+			}
+			else
+			{
+
+				recipientOption.Select(value);
+				var selectedOption = recipientOption.SelectedOption();
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return selectedOption==value;
+			}
+
+
+
+
+		}
 
 
 
 	}
+
+	
+
 
 	class AdvancedReportingDateForm : SeleniumBaseObject
 	{

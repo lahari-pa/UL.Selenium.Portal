@@ -213,6 +213,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ProductsGrid ProductsGridObject = new ProductsGrid();
 			ProductsGridObject.ConfirmRetailersMatchInMyProductsSection(savedAs);
+			new GlobalSteps().SwitchToTabWithTitle("View UPCs");
+			this.TheViewUPCPageLoadsWithNoErrors();
+			Report.IsTrue(new ViewUpcs().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
+			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
 	}
 
