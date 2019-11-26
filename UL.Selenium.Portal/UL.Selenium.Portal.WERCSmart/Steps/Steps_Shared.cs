@@ -5910,7 +5910,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
 		}
 
-		[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC List\) for product saved as: (.*)")]
+		// Option is now called "UPC Retailer and Feed"
+		[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC Retailer and Feed\) for product saved as: (.*)")]
+		//[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC List\) for product saved as: (.*)")]
 		public void Shared75309_SHA_SelectProduct_UpcList(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -5922,8 +5924,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// saving the current window so we can naviate back from UPC List
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			TestReport.StartStep("I click 'UPC List'");
-			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+			TestReport.StartStep("I click 'UPC Retailer and Feed'");
+			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
 			Delay.Seconds(5);
 		}
 

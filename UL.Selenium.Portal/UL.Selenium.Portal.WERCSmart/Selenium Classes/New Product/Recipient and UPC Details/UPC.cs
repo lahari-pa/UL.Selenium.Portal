@@ -435,9 +435,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-
-
-
+		internal bool DeleteValueInField(string field)
+		{
+			string str = "//input[@placeholder='" + field + "']";
+			IWebElement el = this.FindElement(By.XPath(str));
+			bool thing = el.TryEnterText("");
+			return thing;
+		}
 
 		public string GetErrorText()
 		{
@@ -584,21 +588,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement input = this.containerElement.FindElement(By.XPath(".//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
 			return input.TryEnterText(value);
 		}
-
 		public bool ClickFirstUPCTab()
 		{
 			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
 			IWebElement expandArrowLink = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']"));
 			return expandArrowLink.TryClick();
 		}
-
 		public bool IsFirstUPCTabOpen()
 		{ 
 			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
 			IWebElement expandArrow = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']//em"));
 			return expandArrow.GetAttribute("class").Contains("down");
 		}
-
 		public string GetExpandedUPC()
 		{
 			IWebElement upcField = this.containerElement.FindElement(By.XPath($".//label[contains(text(),'UPC Number')]/following-sibling::input"));
@@ -624,8 +625,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return labelText.Text;
 			}
 		}
-
 	}
+
 	public class DeleteRowsWarning : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath(@"//div[@class='modal-dialog modal-md']//div[@class='modal-content']");

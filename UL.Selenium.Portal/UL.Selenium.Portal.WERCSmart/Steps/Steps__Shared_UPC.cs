@@ -249,6 +249,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Warning message was showing: " + message + ", as expected!");
 		}
 
+		[Given(@"I expand UPC details for UPC saved as (.*)")]
+		public void GivenIExpandUPCDetails(string upc)
+		{
+			var upcToGet = Context.GetFromContext(upc).ToString();
+			new UPC().ExpandArrowforUPC(upcToGet);
+		}
+
+
 		[StepDefinition(@"I should see maximum upc limit message: (.*)")]
 		public void MaximumUpcLimitMessage(string message)
 		{
@@ -260,6 +268,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Warning message was not as expected! Expected: " + message + ", but found: " + found + "!",
 				"Warning message was showing: " + message + ", as expected!");
 		}
+
+
+		[Given(@"I delete the value in the (.*) field")]
+		public void GivenIDeleteTheValueInTheUPCNameField(string field)
+		{
+			Report.IsTrue(new UPC().DeleteValueInField(field), "Unable to remove data from " + field + " field", "Deleted value in field " + field);
+		}
+
 
 		[StepDefinition(@"I should (see|not see) the following UPC buttons:")]
 		public void UpcButtonsDisplay(string condition, Table expected)

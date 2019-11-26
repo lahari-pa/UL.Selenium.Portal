@@ -2746,7 +2746,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase87685", "Submitted");
 			TestReport.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)");
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase87685");
-			TestReport.StartStep("I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87685");
+			TestReport.StartStep("I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87685");
 			sharedSteps.Shared75309_SHA_SelectProduct_UpcList("TestCase87685");
 			TestReport.StartStep("In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC87685");
 			stepsSHA.ConfirmCaseUpc("not see", "saved as UPC87685");
@@ -3491,7 +3491,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsProductGrid = new StepsProductGrid();
 			var stepsNewProduct = new StepsNewProduct();
 			var stepsSHA = new Steps_SHA();
-			
+
 
 
 
@@ -3523,7 +3523,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//retailerTable.AddRow("Walmart");
 
 			//sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
-			TestReport.StartStep("In the upc screen I add the UPC: saved as UPC75142, container type: Metal Container and size: 40, then select all certifications");	
+			TestReport.StartStep("In the upc screen I add the UPC: saved as UPC75142, container type: Metal Container and size: 40, then select all certifications");
 			stepsNewProduct.InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications("75142", "Metal Container", "40");
 
 			TestReport.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
@@ -3550,7 +3550,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: Submitted");
 			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase75142", "Submitted");
 
-					   			 		  		  		 	   		
+
 		}
 
 		[StepDefinition(@"I create a Chalk product for WalMart and Proccess it to completed and save it as: (.*)")]
