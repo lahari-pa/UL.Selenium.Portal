@@ -980,7 +980,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Ing" + savedAs + "1", table34);
 
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1
-			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
+			// stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
+			stepsNewProductIngredients.ThenIVerifyTheTransparencyScoreDisplays((float)100.00);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a success
 			stepsNewProductIngredients
 				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("success");
@@ -1005,7 +1006,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
 					"Ing" + savedAs + "2", table35);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 2
-			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
+			//stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
+			stepsNewProductIngredients.ThenIVerifyTheTransparencyScoreDisplays((float)50.00);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 			stepsNewProductIngredients
 				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -1025,7 +1027,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName(
 				"Ing" + savedAs + "5", table36);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 3
-			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "3");
+			//stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "3");
+			stepsNewProductIngredients.ThenIVerifyTheTransparencyScoreDisplays((float)33.33);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 			stepsNewProductIngredients
 				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -1045,7 +1048,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName(
 				"Ing" + savedAs + "6", table37);
 			//Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 4
-			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
+			//stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
+			stepsNewProductIngredients.ThenIVerifyTheTransparencyScoreDisplays((float)25.00);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 			stepsNewProductIngredients
 				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
@@ -1070,7 +1074,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
 					"Ing" + savedAs + "7", table38);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 5
-			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
+			//stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
+			stepsNewProductIngredients.ThenIVerifyTheTransparencyScoreDisplays((float)20.00);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 			stepsNewProductIngredients
 				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
@@ -1095,7 +1100,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
 					"Ing" + savedAs + "8", table39);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 6
-			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
+			//stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
+			stepsNewProductIngredients.ThenIVerifyTheTransparencyScoreDisplays((float)33.33);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 			stepsNewProductIngredients
 				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -1116,7 +1122,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName(
 				"Ing" + savedAs + "9", table40);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 7
-			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
+			//stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
+			stepsNewProductIngredients.ThenIVerifyTheTransparencyScoreDisplays((float)28.57);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 			stepsNewProductIngredients
 				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
@@ -1141,7 +1148,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
 					"Ing" + savedAs + "10", table41);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 3 and denominator: 8
-			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
+			//stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
+			stepsNewProductIngredients.ThenIVerifyTheTransparencyScoreDisplays((float)37.50);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 			stepsNewProductIngredients
 				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
