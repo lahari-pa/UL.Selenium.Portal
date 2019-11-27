@@ -947,3 +947,10 @@ Scenario: [UPCCOLUMNS] View - UPC name column exists in the Product UPCs table
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: View
 	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+
+Scenario: [CVSQA] CVS DATA TIERS IN QA DEBUG
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products	
+	Then For CVS I create a product of type: Artist Supply (RUCC0384), save it as: CVSArtistProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSArtistExcelFile and check that is shows the expected product saved as: CVSArtistProduct1
+	

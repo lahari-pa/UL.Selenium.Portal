@@ -316,7 +316,8 @@ Scenario: [26815] Advanced Report Options
 
 @ScenarioId:5979
 Scenario: [96172] Data Quality Review for Walmart
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
+	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)	
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
@@ -329,9 +330,10 @@ Scenario: [96172] Data Quality Review for Walmart
 		| SHA Status                                   |
 		| Supplier Name                                |
 		| Supplier Type (eg. Manufacturer/Distributor) |
-		| Active or Inactive                           |
+		| Subscription                                 |
 		| Last Published Date                          |
 		| Last Activity Date                           |
+		| RECERT Status                                |
 		| CNTXT and ECOMM                              |
 		| RU Code                                      |
 		| RU Phrase                                    |
@@ -353,6 +355,14 @@ Scenario: [96172] Data Quality Review for Walmart
 		| KIT                                          |
 		| PPHARMA                                      |
 		| LBLTYP                                       |
+		| EPWM                                         |
+		| ARSOL                                        |
+		| UNIFFC                                       |
+		| NFPAH                                        |
+		| NFPAF                                        |
+		| NFPAI                                        |
+		| NFPAP                                        |
+		| NFPAG                                        |
 		| DCQAPF                                       |
 		| DCQAR                                        |
 		| DCQAOR                                       |
@@ -386,6 +396,15 @@ Scenario: [96172] Data Quality Review for Walmart
 		| IATA UN                                      |
 		| IATA HazClass                                |
 		| IATA Packing Group                           |
+		| Green Good Housekeeping                      |
+		| Green Seal                                   |
+		| EPA Safer Choice                             |
+		| Cradle To Cradle                             |
+		| UL EcoLogo                                   |
+		| EWG Verified                                 |
+		| Green Tick                                   |
+		| Made Safe                                    |
+		| NSF Sustainability Certified                 |
 	Then I delete the Advanced Report file saved as 96172
 	Then I Click close in the Advanced Reporting Popup
 
@@ -467,10 +486,10 @@ Scenario: [114728] UPCs Added Yesterday
 	And I wait for the Advanced Reporting Preparing Report popup to disappear	
 	Given I confirm that an excel file is produced called UPCs Added Yesterday.xls and save as 114728	
 	Then I confirm that the excel file saved as: 114728 contains the following columns: and they are in the correct order.
-		| Column   |
+		| Column              |
 		| WPSID               |
 		| UPC                 |
-		| UPC Name |
+		| UPC Name            |
 		| Packaging Type      |
 		| Packaging Size      |
 		| Product Name        |
@@ -556,8 +575,34 @@ Scenario: [114731] WalMart DSV Products Report
 	Then In the Advanced Reporting popup I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WalMart DSV Products Report.xls and save as 114731
-	#Update to Use Column Headings step below once get report
-	Then I confirm that the excel file saved as: 114731 includes the column: UPC Name between: Product Name and Supplier		
+	#Then I confirm that the excel file saved as: 114731 includes the column: UPC Name between: Product Name and Supplier
+	Then I confirm that the excel file saved as: 114731 contains the following columns:	
+		| Column                       |
+		| WPSID                        |
+		| UPC                          |
+		| Product Name                 |
+		| UPC Name                     |
+		| Supplier                     |
+		| Contact Name                 |
+		| Contact E-Mail               |
+		| Contact Phone                |
+		| City                         |
+		| State                        |
+		| Country                      |
+		| Formulated                   |
+		| Retailer Status              |
+		| Last Activity Date           |
+		| Last Published Date          |
+		| Last Submitted Date          |
+		| Green Good Housekeeping      |
+		| Green Seal                   |
+		| EPA Safer Choice             |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Made Safe                    |
+		| NSF Sustainability Certified |	
 	Then I delete the Advanced Report file saved as 114731
 
 @ScenarioId:5983
@@ -601,8 +646,8 @@ Scenario: [114732] WM Slotting Code Report
 
 @ScenarioId:5973
 Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
-	#Update so product goes to published For walmart slotting code report. 
 	Then I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA
+	#Then I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Completed status in SHA
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
@@ -662,6 +707,7 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 		| Made Safe                    |
 		| NSF Sustainability Certified |
 	Then I delete the Advanced Report file saved as 1147332
+	Then I move the product saved as 1147332 from Submitted to Completed Status
 	Then I select the: WalMart DSV Products Report report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: WalMart DSV Products Report is shown as: WalMart DSV Products Report
 	Then In the Advanced Reporting popup I click Submit
@@ -934,7 +980,7 @@ Scenario: [116340] Products Fed to Retailers - Filters
 	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM	
 	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
-	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340	
+	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340
 	Then For the excel file saved as: 116340 I check that the column with heading name: Water % does not contains: 0 in any rows.
 	Then I delete the Advanced Report file saved as 116340
 
