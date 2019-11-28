@@ -834,7 +834,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			sharedSteps.GivenICallSharedStepTransportationDetails_YesOnlyOption_SelectIMDGFullyRegulated_Continue_HappyPath();
 			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
-			sharedSteps.GivenICallSharedStepConfirmVOCSCAQMDStepTitleConfirmACPQuestionShown_SelectNo_HappyPath();
+			sharedSteps.GivenICallSharedVolatileOrganicCompoundsVOCForOTCAndCARB_No();
+			//sharedSteps.GivenICallSharedStepConfirmVOCSCAQMDStepTitleConfirmACPQuestionShown_SelectNo_HappyPath();
 			sharedSteps.GivenICallSharedStepVOC_AEROQuestionOzoneEnterValue_ClickContinue_HappyPath("0.5");
 			newProduct.ClickContinue();
 			Report.Info("Then I select a retailer");

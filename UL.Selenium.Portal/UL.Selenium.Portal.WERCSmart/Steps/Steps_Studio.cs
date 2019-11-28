@@ -22,6 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
+			Delay.Seconds(5);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("publish"),
 				"Failed to click publish tool bar option", "Clicked publish tool bar option");
 
