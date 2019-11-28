@@ -4495,11 +4495,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Now going to wait for spinner");
 			if (!GeneralUtilities.StudioWaitForSpinner(30))
 			{
+				Report.Info("Spinner is showing, looking for alert");
 				if (SeleniumBrowser.Alert.WaitForAlert())
 				{
 					Report.Info("Spinner is still showing but alert is there.");
 				}
 			}
+			Report.Info("Spinner is no longer showing");
 
 			TestReport.StartStep("I confirm CKLT, NGHS and SBCS are not shown in the pop up message and click OK");
 			var table4 = new Table(new string[] {

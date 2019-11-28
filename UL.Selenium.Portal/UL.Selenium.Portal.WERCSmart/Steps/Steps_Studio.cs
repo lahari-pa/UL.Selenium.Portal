@@ -134,12 +134,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
+				Report.Info($"Alert Text was found as {alertText} on the first try");
 			}
 			catch (Exception)
 			{
 				try
 				{
 					alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
+					Report.Info($"Alert Text was found as {alertText} on the second try");
 				}
 				catch (Exception ex)
 				{
