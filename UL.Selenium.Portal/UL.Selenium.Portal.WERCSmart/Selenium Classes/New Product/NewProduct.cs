@@ -870,10 +870,42 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			var rList = new List<string>();
-			if (container != null)
+			for(int i=2;i<6;i++)
 			{
-				rList = container.FindElement(By.XPath(".//th[@class='col-xs-5']")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
-			}
+				if (container != null)
+				{
+					//rList = container.FindElement(By.XPath(".//th[@class='col-xs-5']")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
+					//rList = container.FindElement(By.XPath(".//th[not(@class='col-xs-1')]")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
+					var tempList = new List<string>();
+					try
+					{
+						tempList = container.FindElement(By.XPath($".//th[@class='col-xs-{i}']")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
+						if (tempList.IsNullOrEmpty())
+						{
+							Report.Info("There was no header text found for that column");
+						}
+						else
+						{
+							foreach (var item in tempList)
+							{
+								rList.Add(item);
+							}
+						}
+					}
+					catch
+					{
+						Report.Info($"Column with @class='col-xs-{i}' does not exist");
+					}					
+					
+					
+				}
+				else
+				{
+					Report.Info("The Container element was null");
+				}
+				
+			}			
+
 			return rList;
 		}
 
