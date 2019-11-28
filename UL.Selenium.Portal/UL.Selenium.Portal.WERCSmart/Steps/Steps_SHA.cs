@@ -914,8 +914,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("No item saved in context as: " + retailerSavedAs);
 				return;
 			}
-            //SeleniumBrowser.WebBrowser.WaitForPageLoad();
-   //         Delay.Seconds(5);
+			//SeleniumBrowser.WebBrowser.WaitForPageLoad();
+			//         Delay.Seconds(5);
 			//if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='upcTableOutter']"), 10) ==null)
 			//{
 			//	Report.Failure("View UPC table was not displayed");
@@ -970,6 +970,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheSuspendedDialogInTheSelectRegulatorySpecialistDropDownIChoose(string regulatorySpecialist)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			if (regulatorySpecialist == "SHA Regulatory Specialist")
+			{
+				regulatorySpecialist = TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
+			}
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectRegulatorySpecialist(regulatorySpecialist),
 				"Failed to select regulatory specialist: " + regulatorySpecialist, "Selected: " + regulatorySpecialist);
 
@@ -2083,6 +2087,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(retailersSavedAs, retailers);
 		}
 
+		[StepDefinition(@"I confirm that the list of retailers associated with product (.*) includes retailer (.*)")]
+		public void IConfirmThatTheListOfRetailersAssociatedWithProductIncludesRetailer(string productSavedAs, string retailer)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			var product = (ProductInformation)Context.GetFromContext(productSavedAs);
+			List<string> retailers = thisStudioSHAManager.ReturnClientsOfProductByID(product.Id);
+			Report.IsTrue(retailers.Contains(retailer), "Failed to find retailer " + retailer + " in list of retailers.", "Successfully found retailer " + retailer + ".");
+		}
+
 		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
 		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
 		{
@@ -2332,7 +2345,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
 				string id = ids[i];
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
-				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
 				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
 				if (Context.GetFromContext(savedAs) != null)
 				{
@@ -2359,7 +2372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					continue;
 				}
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
-				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
 				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs, false);
 				if (Context.GetFromContext(savedAs) != null)
 				{
@@ -2423,7 +2436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
 				string id = products[i].ID;
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
-				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
 				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs + j, false);
 
 				if (Context.GetFromContext(savedAs + j) != null)
@@ -2497,7 +2510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					continue;
 				}
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
-				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
 				this.SaveUpcNumberInShaManagerProductUpcListAs(savedAs + j, false);
 				if (Context.GetFromContext(savedAs + j) != null)
 				{
@@ -2650,6 +2663,104 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click " + actionType, "Clicked " + actionType);
 		}
 
+		[StepDefinition(@"I close the Advanced Reporting popup")]
+		public void ICloseTheAdvancedReportingPopup()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickClose(), "Failed to click close on Advanced Reporting popup", "Successfully clicked close on Advanced Reporting popup");
+		}
+
+		[StepDefinition(@"In Advanced Reporting I confirm I see a table called (.*)")]
+		public void InAdvancedReportingIConfirmISeeATableCalled(string tableName)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ConfirmTableName(tableName), "Failed to find table called " + tableName, "Successfully found table called " + tableName);
+		}
+
+		[StepDefinition(@"In Advanced Reporting I confirm I see column header (.*)")]
+		public void InAdvancedReportingIConfirmISeeColumnHeader(string header)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ConfirmHeader(header), "Failed to find header called " + header, "Successfully found header called " + header);
+		}
+
+		[StepDefinition(@"I verify that the following options are available in the Report List table:")]
+		public void IVerifyThatTheFollowingOptionsAreAvailableInTheReportListTable(Table table)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			foreach (TableRow row in table.Rows)
+			{
+				Report.IsTrue(shaReport.ConfirmAdvancedReportingOptions(row["Report Name"], row["Report Description"]),
+					"Failed to find correct name '" + row["Report Name"] + "' or description '" + row["Report Description"] + "'.",
+					"Successfully found name '" + row["Report Name"] + "' and description '" + row["Report Description"] + "'.");
+			}
+		}
+
+		[StepDefinition(@"I confirm that the Report Names are listed in (abc|cba) order")]
+		public void IConfirmThatTheReportsAreListedInOrder(string order)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ConfirmReportNamesAlphebeticalOrder(order), "Failed to find Report Names in abc order.", "Successfully found Report Names in abc order.");
+		}
+
+		[StepDefinition(@"I confirm that the report descriptions are listed in (abc|cba) order")]
+		public void IConfirmThatTheReportDescriptionsAreListedInCBAOrder(string order)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ConfirmReportDescriptionsAlphabeticalOrder(order), "Failed to find Report Descriptions in abc order.", "Successfully found Report Descriptions in abc order.");
+		}
+
+		[StepDefinition(@"I confirm that the (up|down) arrow next to Report Name is (active|inactive)")]
+		public void IConfirmThatTheDownArrowNextToReportNameIs(string upDown, string isActive)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			if (upDown == "up")
+			{
+				Report.IsTrue(shaReport.CheckIfReportNameUpArrowActive(isActive), "Failed to find the up arrow as " + isActive, "Successfully found that the up arrow is " + isActive);
+			}
+			else if (upDown == "down")
+			{
+				Report.IsTrue(shaReport.CheckIfReportNameDownArrowActive(isActive), "Failed to find the down arrow as " + isActive, "Successfully found that the down arrow is " + isActive);
+			}
+			else
+			{
+				Report.Failure("Unexpected parameter found!");
+			}
+
+		}
+
+		[StepDefinition(@"I confirm that the (up|down) arrow next to Report Description is (active|inactive)")]
+		public void IConfirmThatTheUpDownArrowNextToReportDescriptionIs(string upDown, string isActive)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			if (upDown == "up")
+			{
+				Report.IsTrue(shaReport.CheckIfReportDescriptionUpArrowActive(isActive), "Failed to find the up arrow as " + isActive, "Successfully found that the up arrow is " + isActive);
+			}
+			else if (upDown == "down")
+			{
+				Report.IsTrue(shaReport.CheckIfReportDescriptionDownArrowActive(isActive), "Failed to find the down arrow as " + isActive, "Successfully found that the down arrow is " + isActive);
+			}
+			else
+			{
+				Report.Failure("Unexpected parameter found!");
+			}
+		}
+
+		[StepDefinition(@"I click on the Report Name column")]
+		public void IClickOnTheReportNameColumn()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickReportNameHeader(), "Failed to click report name header", "Successfully clicked report name header");
+		}
+
+		[StepDefinition(@"I click on the Report Description column")]
+		public void IClickOnTheReportDescriptionColumn()
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickReportDescriptionHeader(), "Failed to click report description header", "Successfully clicked report description header");
+		}
+
 
 		[StepDefinition(@"I verify the popup data using UPC: (.*)")]
 		public void ThenIVerifyThePopupDataUsingUPC(string uPC)
@@ -2743,6 +2854,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"");
 		}
 
+		[StepDefinition(@"In the Advanced Reporting Retailer Products in Recertification report dropdown I select retailer: (.*)")]
+		public void InTheAdvancedReportingRetailerProductsInREcertificationReportDropdownISelectRetailer(string retailer)
+		{
+			var dropDownForm = new AdvancedReportingDropDownForm();
+			Report.Info("Attempting to select " + retailer + " from drop down");
+			Report.IsTrue(dropDownForm.SelectOption(retailer), "Failed to select retailer " + retailer, "Successfully selected retailer " + retailer);
+		}
+
+		[StepDefinition(@"In the Advanced Reporting Retailer Products in Recertification report dropdown I click submit")]
+		public void InTheAdvancedReportingRetailerProductsInRecertificationReportDropdownIClickSubmit()
+		{
+			var dropDownForm = new AdvancedReportingDropDownForm();
+			Report.Info("Attempting to click submit");
+			Report.IsTrue(dropDownForm.ClickSubmit(), "Failed to click submit", "Successfully clicked submit");
+		}
+
 
 		[StepDefinition(@"I enter start date (.*) and end date (.*) for Advanced Reporting")]
 		public void ThenIEnterStartAndEndDatesForAdvancedReporting(string startDate, string endDate)
@@ -2751,6 +2878,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new AdvancedReportingDateForm().EnterStartEndDates(startDate, endDate),
 				FailureMessage: "Failed to update the date fields",
 				SuccessMessage: "Successfully updated the date fields");
+		}
+
+		[StepDefinition(@"In the 3rd Party Formula Use in Registrations text box I enter the CAS Number without the WPS for ingredient: (.*)")]
+		public void InThe3rdPartyFormulaUseInRegistrationsIEnterTheCASNumber(string savedAs)
+		{
+			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Could not find ingredient saved as " + savedAs + " in context");
+				return;
+			}
+			string CAS = "";
+			if (ingredient.CASNumber.Contains("WPS"))
+			{
+				CAS = ingredient.CASNumber.TrimStart("WPS");
+			}
+			else
+			{
+				CAS = ingredient.CASNumber;
+			}
+			var input = new AdvancedReportingTextInput();
+			Report.Info("Attempting to enter CAS number in the input text field");
+			Report.IsTrue(input.EnterText(CAS), "Failed to enter the CAS number into the text input field.", "Successfully entered the CAS Number into the text input field.");
+		}
+
+		[StepDefinition(@"In the Advanced Reporting 3rd Party Formula Use in Registrations report I click submit")]
+		public void InThe3rdPartyFormulaUseInRegistrationsReportIClickSubmit()
+		{
+			var input = new AdvancedReportingTextInput();
+			Report.IsTrue(input.ClickSubmit(), "Failed to click submit.", "Successfully clicked submit.");
 		}
 
 		[StepDefinition(@"I verify the (.*) popup displays")]
@@ -2980,7 +3137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"The product in SHA has a Original Submission Date of: {shaOriginalSubmissionDate}");
 			string shaClients = productsShown[0].Clients;
 			var shrdStep = new Steps_Shared();
-			string dog = "DOGY";
+
 
 			TestReport.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
 			string file = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -3016,9 +3173,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");
 						new Steps_Shared().Shared75309_SHA_SelectProduct_UpcList(productInfoSavedAs);
 						var studioSHAManger = new StudioSHAManager();
-						var shaSteps = new Steps_SHA();
+
 						Delay.Seconds(10);
-						new Steps_SHA().SwitchToProductListUpcWindow();
+						this.SwitchToProductListUpcWindow();
 						Delay.Seconds(4);
 						List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
 						Report.Info($"The number of UPCs displayed in the UPC Details page is: {displayedUpcs.Count}");
@@ -3139,7 +3296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Checking handle: " + handle);
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				if (SeleniumBrowser.WebBrowser.FindElement(
-					    By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+						By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
 				{
 					Report.Success("Tab was switched successfully!");
 					Report.Screenshot();
@@ -3160,8 +3317,136 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIVerifyTheFileSavedAsAgainstTheSpecificRequirementsForDailyReport_WERCSmartAdditionalReportsPublished(string savedAs)
 		{
 			Report.IsTrue(new DailyReportWERCSmartAdditionalReportsPublished().VerifyFile(savedAs), "Report did not match expectations", "Report conforms to stated spec");
+
+			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
+				"Failed to click document management", "Clicked document management");
+			var shaReport = new SHAAdvancedReporting();
+			string report = "Product Registrations Published";
+			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
+			Delay.Seconds(2);
+
+
 		}
+		[StepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Advanced report then I click Submit")]
+		public void IEnterAStartDateForTheProductRegistrationPublishedReportClickSubmit(string startDate, string endDate)
+		{
+			TestReport.UseSubSteps = true;
+			var shaReport = new SHAAdvancedReporting();
+			TestReport.StartStep("I enter an Start Date");
+			shaReport.EnterStartDate(startDate);
+			TestReport.StartStep("I enter an End Date");
+			shaReport.EnterEndDate(endDate);
+			TestReport.StartStep("I Click Submit");
+			shaReport.ClickSubmit();
+
+		}
+
+		[StepDefinition(@"I Check that the Description Text for the Report: (.*) is shown as: (.*)")]
+		public void ICheckThatTheDescriptionForTheReportIsShowAS(string reportName, string reportText)
+		{
+			var shaReport = new SHAAdvancedReporting();
+
+			Report.IsTrue(shaReport.ReportDescriptionIsCorrect(reportName, reportText), "The Description was not as expected", "The Descripton was as expected");
+
+		}
+
+		[StepDefinition(@"I select the: (.*) report from Advanced Reporting in SHA")]
+		public void ISelectProductRegistrationPublishedReportFromAdvancedReportingInSHA(string report)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Click Advanced Reporting");
+			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
+				"Failed to click document management", "Clicked document management");
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
+			Delay.Seconds(2);
+
+
+		}
+
+		[StepDefinition(@"In The advanced reporting screen I enter WPSID saved as: (.*)")]
+		public void InTheAdvancedReportingScreenIEnterWPSIDSavedAs(string savedAs)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			var product = new ProductInformation();
+			if (Context.Contains(savedAs))
+			{
+				product = (ProductInformation)Context.GetFromContext(savedAs);
+			}
+			else
+			{
+				Report.Failure($"Could not find WPSID savedAs: {savedAs} in context");
+				return;
+			}
+
+			string wpsid = product.Id;
+			Report.IsTrue(shaReport.EnterWPSID(wpsid), "Failed to enter WPSID: " + wpsid, "Successfully entered WPSID: " + wpsid);
+
+		}
+
+		[StepDefinition(@"In The advanced reporting screen I choose retailer: (.*)")]
+		public void InTheAdvancedReportingScreenIChooseRetailer(string retailer)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ChooseRetailer(retailer), "Failed to choose retailer: " + retailer, "Successfully selected the retailer: " + retailer);
+		}
+
+		[StepDefinition(@"I delete the Advanced Report file saved as (.*)")]
+		public void DeleteExcelFile(string savedAs)
+		{
+			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + savedAs);
+				return;
+			}
+			Report.Info("Deleting file: " + file);
+			File.Delete(file);
+		}
+
+		[StepDefinition(@"I Click close in the Advanced Reporting Popup")]
+		public void ClickCloseInAdvancedReports()
+		{
+			Report.IsTrue(new SHAAdvancedReporting().CloseButton.TryClick(), "Failed to click the close button", "Successfully click the close button");
+		}
+
+		[StepDefinition(@"In The advanced reporting screen I Click Option: (Includes Water|Contains Alcohol)")]
+		public void InTheAdvancedReportingScreenClickOption(string optionChoice)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			if(optionChoice=="Includes Water")
+			{
+				Report.IsTrue(shaReport.ClickIncludesWater(), "Failed to Click Option: " + optionChoice, "Successfully Clicked Option: " + optionChoice);
+			}
+			if(optionChoice=="Contains Alcohol")
+			{
+				Report.IsTrue(shaReport.ClickContainsAlcohol(), "Failed to Click Option: " + optionChoice, "Successfully Clicked Option: " + optionChoice);
+			}
+		}
+
+		[StepDefinition(@"I enter UPC Size: (.*) in the advanced reporting popup")]
+		public void IEnterUPCSizeInTheAdvancedReportingPopup(string size)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			TestReport.StartStep("I enter UPC Size");
+			shaReport.EnterUPCSize(size);
+			
+		}
+
+		[StepDefinition(@"In The advanced reporting screen I choose WERCSmart Retail Recipient Code: (.*)")]
+		public void InTheAdvancedReportingScreenIChooseRetailRecipientCode(string recipient)
+		{
+			var shaReport = new SHAAdvancedReporting();
+			Report.IsTrue(shaReport.ChooseRecpientCode(recipient), "Failed to choose recipient: " + recipient, "Successfully selected the recipient: " + recipient);
+		}
+
+
+
+
+
+
 	}
+
 }
 
 

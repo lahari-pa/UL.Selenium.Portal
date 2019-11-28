@@ -178,3 +178,62 @@ Scenario: [57737] New Account - Required fields
 # Then In the MascotQuestion entry error I see error message: This is a required field.
 # Then In the FriendQuestion entry error I see error message: This is a required field.
 # Then In the PINQuestion entry error I see error message: This is a required field.
+
+@ScenarioId:1561
+Scenario: [112431] Signup - Account Creation - New user Email does not contain outdated PDF Attachment
+	Given I define the user: SignupUser with the following parameters:
+		| Field                | Value                   |
+		| Email                | User_<random>           |
+		| Country              | UNITED STATES           |
+		| FirstName            | Richard                 |
+		| LastName             | Smith                   |
+		| Password             | Pa4*ytuufnn             |
+		| Address1             | Address 1               |
+		| Address2             | Address 2               |
+		| City                 | City Name               |
+		| State                | Florida                 |
+		| Zip                  | 999                     |
+		| CompanyName          | Wercs QA Automated test |
+		| CompanyPhone         | 123-456-7889            |
+		| EmergencyPhoneNumber | 123-456-7789            |
+		| SupplierType         | Manufacturer            |
+		| PhoneQuestion        | PhoneQuestion           |
+		| PhoneHint            | PhoneHint               |
+		| MentorQuestion       | MentorQuestion          |
+		| MentorHint           | MentorHint              |
+		| FriendQuestion       | FriendQuestion          |
+		| FriendHint           | FriendHint              |
+		| AnimalQuestion       | AnimalQuestion          |
+		| AnimalHint           | AnimalHint              |
+		| CollegeQuestion      | CollegeQuestion         |
+		| CollegeHint          | CollegeHint             |
+		| Pin                  | 1234                    |
+	Given I save the current emails in the inbox for user saved as: SignupUser
+	Given I click on the New to WERCSmart Link
+	Then the signup page should appear
+	Given I enter signup email for user: SignupUser
+	And I confirm signup email for user: SignupUser
+	And I click on submit
+	Then the signup thank you page should appear
+	Then there should be a new email for user: SignupUser from: <SiteNotification> with the title: Link to create WERCSmart Account
+	Then the email should contain a link to set up the WERCSmart account
+	When I click on the link I should see the WERCSmart new account page
+	And I enter the information into the new user form for user saved as: SignupUser
+	And In the new user form I click on continue
+	Then I should be on the Security Questions page of the form
+	And I enter the following into the Security Questions window for user saved as: SignupUser
+	And I enter the pin for user saved as: SignupUser
+	When In the new user form I click on continue
+	Given I go to the WERCSmart Log in
+	Given I login as user: SignupUser
+	Given If terms of use page appears I accept
+	Then the WERCSmart homepage should load
+	Then I should see username for user saved as: SignupUser in the right corner
+	Then there is a new email for user: SignupUser from: <SiteNotification> with the title: Welcome to WERCSmart! Thank you for creating an account! and it should contain no attachments with the file name: WERCSmartSupplierFAQ2017
+
+
+
+
+
+
+

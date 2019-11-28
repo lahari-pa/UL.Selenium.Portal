@@ -184,3 +184,18 @@ Scenario: [63684] Walmart Private label product
 	Given I search for the product saved as: TestCase63684
 	Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
+
+@ScenarioId:6031
+Scenario: [96705] Light Bulbs - No Walmart
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Light Emitting Diodes (LED)
+	Then I save the product information as: TestCase96705
+	Then I call Shared Step 90477 - Additional Product Information - US, (NO) Retailer's PL
+	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
+	Then In the 'Select retailers' window I should not see the following retailers:
+		| Retailer            |
+		| Wal-Mart/SAM'S CLUB |
+	Given I click Close in the Select Retailers popup
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase96705
