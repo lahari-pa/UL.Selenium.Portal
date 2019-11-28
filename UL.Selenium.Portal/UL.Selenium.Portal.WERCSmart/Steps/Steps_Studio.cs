@@ -63,6 +63,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 			GeneralUtilities.StudioWaitForSpinner(30);
+			Delay.Seconds(5);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickApplyRulesButton(),
 				"Failed to click apply rules button",
 				"Clicked apply rules button");
@@ -107,6 +108,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Selecting checkbox: " + checkbox);
 			var thisCurrentDocument = new CurrentDocument();
+			Delay.Seconds(10);
+			Report.Info("Attempting to click checkbox");
 			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load", "Current document loaded");
 			Report.IsTrue(thisCurrentDocument.SetCheckBox(checkbox, true), "Failed to set checkbox: " + checkbox, "Set checkbox: " + checkbox);
 			Report.Screenshot();

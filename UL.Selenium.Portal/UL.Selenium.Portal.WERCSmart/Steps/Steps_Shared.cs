@@ -4485,6 +4485,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
 			TestReport.StartStep("Select the Authorize Formula and Attributes for publishing check box ");
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			Report.Info("Now waiting for spinner...");
+			Delay.Seconds(5);
 			GeneralUtilities.StudioWaitForSpinner();
 			TestReport.StartStep("Select the Apply to all subformats check box ");
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
@@ -4518,7 +4520,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
 			TestReport.StartStep("I close the current document pop up");
-			thisStepsStudio.GivenICloseCurrentDocument();
+			thisStepsStudio.GivenICloseCurrentDocument();			
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("My Toolbar");
 			TestReport.StartStep("I select the Apply Rules icon from the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
 			TestReport.StartStep("I select the Single rule radio button");
