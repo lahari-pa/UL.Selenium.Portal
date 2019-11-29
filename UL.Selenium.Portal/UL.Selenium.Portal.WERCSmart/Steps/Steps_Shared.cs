@@ -1137,6 +1137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
 			TestReport.UseSubSteps = true;
+			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
@@ -1151,6 +1152,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
+			TestReport.StartStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}
 			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			TestReport.StartStep(

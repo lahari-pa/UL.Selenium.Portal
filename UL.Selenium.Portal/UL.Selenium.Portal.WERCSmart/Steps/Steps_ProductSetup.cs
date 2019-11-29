@@ -3402,7 +3402,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Ingredients page is not showing when it was expected to",
 				"The Ingredients page is showing as expected");
 			Report.Screenshot();
-			TestReport.StartStep($"I enter: {myIngredient} as my ingredient in the ingredients page");
+			TestReport.StartStep($"I enter: {myIngredient} as the ingredient in the ingredients page");
 			ingredients.ClickComponentSearchPlaceholder();
 			ingredients.EnterTextSearchComponent(myIngredient);
 			TestReport.StartStep("I check my ingredient is at the top of the filter");
