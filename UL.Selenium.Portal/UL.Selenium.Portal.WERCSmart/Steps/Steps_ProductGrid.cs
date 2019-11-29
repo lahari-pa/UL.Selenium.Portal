@@ -2370,6 +2370,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I save the ProductID of the first Product in the grid no in recertification as: (.*)")]
+		public void SaveFirstProductIDInGridNotRecert(string savedAs)
+		{
+			Report.Info("Saving the ID of First Product as " + savedAs);
+			var selProdGrid = new ProductsGrid();
+			ProductGridItem productElement = selProdGrid.FirstProductNotRecertInGrid();
+			string firstProductID = productElement.ProductId;
+
+			Context.AddToContext(savedAs, firstProductID);
+			Report.Success("Got the first Product ID in Grid (ID: " + firstProductID + ") and saved to: " + savedAs);
+		}
+
+
 
 
 
