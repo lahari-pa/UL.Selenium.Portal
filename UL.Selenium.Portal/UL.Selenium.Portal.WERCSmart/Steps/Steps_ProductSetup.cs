@@ -1365,7 +1365,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Then in the Ingredients page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			//And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
-			sharedSteps.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
+			sharedSteps.SharedFormulation3rdParty_SelectAll();
+			//sharedSteps.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
 			//And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			//And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
