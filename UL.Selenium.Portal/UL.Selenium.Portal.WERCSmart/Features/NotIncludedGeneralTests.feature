@@ -762,13 +762,8 @@ Scenario: [NOTINCLUDEDGENERALTEST] Ticket 107365
 Scenario: [CVSTESTINGDEBUG] CERIAL
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then In the Products Grid I delete All products
-	Then For CVS I create a product of type: Grocery (RUCC0389), save it as: CVSGroceryProduct1 and leave it in New Status
-	Then I navigate to the Data Consent Tiers Page for CVS
-	And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
-	When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSGroceryExcelFile
-	Then I confirm that the excel file saved as: CVSGroceryExcelFile contains the WPSID for the Product saved as: CVSGroceryProduct1
-	Then I delete the Supplier Report file saved as CVSGroceryExcelFile
-	Then I navigate to the Homepage and then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSCleaningExcelFile and check that is shows the expected product saved as: CVSCleaningProduct1
 
 Scenario: [CVSTESTINGBATT] Battery
 
