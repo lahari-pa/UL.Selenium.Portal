@@ -481,7 +481,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string ID = ProductDetails.Id;
 
 			Report.IsTrue(new StudioSHAManager().RightClickProductByID(ID), "Failed to rightclick against: " + ID,
-				"Right clicked against: " + ID);
+				"Right clicked against: " + ID, ShowSuccessScreenshot: false);
 		}
 
 

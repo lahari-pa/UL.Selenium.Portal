@@ -1087,3 +1087,89 @@ Scenario: [IngredientsTableCheck] Non Cleaning Ingredients Table navigate back
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I navigate to the home page
 
+Scenario: [DOTPACKING] UPC Details For Registration - Specific Retailer - DOT Packing Group Data
+
+	Given I log in with the account saved in TReVor as: ProductAccount
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	And I should see the Product Characteristics Page
+	Then I save the product information as: TestCase65947
+	And The following options should be displayed for section: Primary Physical State
+	| Option |
+	| Liquid |
+	| Solid  |
+	And I set the Primary Physical State option to: Liquid
+	And I set the Secondary Physical State option to: Liquid
+	And I set the Specific Gravity option to: 10
+	And I set the pH option to: 10.5
+	And I set the Boiling Point (in Celsius) option to: 120
+	And I set the Flash Point (in Celsius) option to: 23
+	And I set the Flash Point Testing Method Used option to: Closed cup method
+	And I set the Select the best Water Solubility description option to: Insoluble
+	And I click continue
+	And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I set the Select all modes of transport that you've classified the product for field to: IMDG
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: IMDG
+	And I set the Select all modes of transport that you've classified the product for field to: IATA
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: IATA
+	And I set the Select all modes of transport that you've classified the product for field to: TDG
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: TDG
+	And I click continue
+	And I should see the U. S. Department of Transportation (DOT) Classification Page
+	And I set the UN Number field to: UN2762	
+	And I set the Technical Name field to: Technical Name UN2762	
+	And I set the Packing Group (select) field to: II
+	And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	And I click continue
+	And I should see the International Air Transport (IATA) Classification Page
+	And I check the checkbox with description: Copy information from my U.S. Department of Transportation data		
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	And I click continue
+	And I should see the International Marine (IMDG) Classification Page
+	And I check the checkbox with description: Copy information from my U.S. Department of Transportation data	
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	And I click continue
+	And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
+	And I check the checkbox with description: Copy information from my U.S. Department of Transportation data	
+	And I click continue
+	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
+	Given I click continue
+	#And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	And I should see the Additional Documents to Provide Page
+	And I click continue
+	And I should see the Optional Reports and Documents Available for Purchase Page
+	And I click continue
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase65947 and its status is: Submitted
+	Then I select the: UPC Details for Registration - Specific Retailer report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: UPC Details for Registration - Specific Retailer is shown as: Internal Use Only.  UPCs are listed for a chosen Retailer and include any additional UPC data such as Case Pack, Net Explosive Mass, and other details.
+	Then In The advanced reporting screen I enter WPSID saved as: TestCase65947
+	Then In The advanced reporting screen I choose retailer: CVS
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called UPC Details for Registration - Specific Retailer.xls and save as 96733
+	Then I confirm that the excel file saved as: 96733 contains the WPSID saved as: TestCase65947 and has: II in the column: DOT Packing Group
+	Then I delete the Advanced Report file saved as 96733
+	Then I Click close in the Advanced Reporting Popup
