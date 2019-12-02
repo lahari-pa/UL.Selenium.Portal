@@ -248,6 +248,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return tabEl.FindElement(By.XPath("../../a"), 5).TryClick();
 		}
 
+		public bool IsActiveTab(Tab tab)
+		{
+			string tabName = MapTabs[tab];
+			IWebElement active = this.ProgressBar?.FindElement(By.XPath($".//div[contains(@class, 'in-progress active') and ./span[text()='{tabName}']]"), 2);
+			return active != null;
+		}
+
 		public ProductInformation GetCurrentProductInformation()
 		{
 			return new ProductInformation { Id = this.ProductId, Name = this.ProductName };
@@ -863,10 +870,42 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			var rList = new List<string>();
-			if (container != null)
+			for(int i=2;i<6;i++)
 			{
-				rList = container.FindElement(By.XPath(".//th[@class='col-xs-5']")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
-			}
+				if (container != null)
+				{
+					//rList = container.FindElement(By.XPath(".//th[@class='col-xs-5']")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
+					//rList = container.FindElement(By.XPath(".//th[not(@class='col-xs-1')]")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
+					var tempList = new List<string>();
+					try
+					{
+						tempList = container.FindElement(By.XPath($".//th[@class='col-xs-{i}']")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
+						if (tempList.IsNullOrEmpty())
+						{
+							Report.Info("There was no header text found for that column");
+						}
+						else
+						{
+							foreach (var item in tempList)
+							{
+								rList.Add(item);
+							}
+						}
+					}
+					catch
+					{
+						Report.Info($"Column with @class='col-xs-{i}' does not exist");
+					}					
+					
+					
+				}
+				else
+				{
+					Report.Info("The Container element was null");
+				}
+				
+			}			
+
 			return rList;
 		}
 
@@ -876,7 +915,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el != null;
 		}
 
-		public bool InputCommentAreaText(string text)
+		public bool InputCommentAreaText(string text, bool append = false)
 		{
 			try
 			{
@@ -886,7 +925,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 
 				IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
-				el.EnterText(text);
+				if (append)
+				{
+					el.SendKeys(text);
+				}
+				else
+				{
+					el.EnterText(text);
+				}
 				return true;
 			}
 			catch (Exception)
@@ -1550,6 +1596,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
+		}
+
+		internal bool CommentsAreaContains(string contents)
+		{
+			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"));
+
+			return contents == commentBox.Text;
+		}
+
+		internal bool CommentsCharactersRemaining(int expected, int maximum, out int remainDisplayed)
+		{
+			IWebElement maxCharacters = this.FindElement(By.XPath("//span[@data-bind='text: maxLength']"));
+			IWebElement charactersRemain = this.FindElement(By.XPath("//span[@data-bind='text: maxLength() - field.field().length']"), 2);
+			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"));
+
+			Report.IsTrue(int.TryParse(maxCharacters.Text, out int maxDisplayed),
+				"Maximum Characters is displaying " + maxCharacters.Text + " which cannot be parsed into an integer",
+				"The maximum allowed caharacters is able to be represented as an integer: " + maxDisplayed);
+			Report.IsTrue(int.TryParse(charactersRemain.Text, out remainDisplayed),
+				"Remaining Characters is displaying " + charactersRemain.Text + " which cannot be parsed into an integer",
+				"The maximum allowed caharacters is able to be represented as an integer: " + remainDisplayed);
+
+			return remainDisplayed == expected;
 		}
 
 		// ========= Add Ingredient Functions ========= //
@@ -3136,7 +3205,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
-		
+
 
 		public bool CheckInputFieldXIsColor(string expectedColor, string fieldName)
 		{
@@ -3151,9 +3220,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 
 			string expectedColorCode;
-			
 
-			List <IWebElement> parentContainers = this.containerElement.FindElements(By.XPath($".//div[contains(@data-bind,'visible: DocumentID().length') and .//span[contains(text(),'{fieldName}')]]"), 2).ToList();
+
+			List<IWebElement> parentContainers = this.containerElement.FindElements(By.XPath($".//div[contains(@data-bind,'visible: DocumentID().length') and .//span[contains(text(),'{fieldName}')]]"), 2).ToList();
 			parentContainer = parentContainers.FirstOrDefault(x => x.Displayed);
 			if (parentContainer == null)
 			{
@@ -3162,7 +3231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			inputField = parentContainer.FindElement(By.XPath(".//div[contains(@class,'dropzone')]"), 2);
-			if(inputField==null)
+			if (inputField == null)
 			{
 				Report.Failure("Could not find input field element");
 				return false;
@@ -3180,7 +3249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					expectedColorCode = "rgba(255, 240, 240, 1)";
 					//parentContainer = this.containerElement.FindElement(By.XPath($".//div[@data-bind='visible: DocumentID().length == 0' and .//span[contains(text(),'{fieldName}')]]"), 2);
 					//inputField	= parentContainer.FindElement(By.XPath(".//div[@class='dropzone']"), 2);
-					
+
 					break;
 				default:
 					Report.Error("expectedColor must be either: 'Red' or 'Green'");
@@ -3190,7 +3259,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			string inputFieldColor = inputField.GetCssValue("background-color");
-			
+
 			if (expectedColorCode == inputFieldColor)
 			{
 				Report.Success($"The color of the input field was the color {expectedColor} as expected");

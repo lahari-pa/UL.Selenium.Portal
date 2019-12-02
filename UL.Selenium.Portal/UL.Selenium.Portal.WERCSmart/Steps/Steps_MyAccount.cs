@@ -1120,15 +1120,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In Stewardship table I select the following options: (.*)  and (.*) for the (.*) field")]
-		public void StewardshipInformation(string field, string options1, string options2, string option3)
+		[StepDefinition(@"In Stewardship table I select the following options for field: (.*) and stewardship as: (.*) and Issue date: (.*) and Expire Date: (.*)")]
+		public void StewardshipInformation(string field, string options1)
 		{
 			GeneralUtilities.ScrollToBottomOfPage();
 			var mystwdinfo = new MyAccount_CompanyInfo();
 			Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(mystwdinfo.EnterStewardshipInfo(field, options1, options2, option3), "failed to enter stewardship information", "successfully entered steward information");
-			Report.IsTrue(mystwdinfo.StewardshipSave_click(), "failed to click save", "successfully clicked save");
+			Report.IsTrue(mystwdinfo.EnterStewardshipInfo(field, options1), "failed to enter stewardship information", "successfully entered steward information");
+			Report.IsTrue(mystwdinfo.StewardshipSaveOrCancel_Click("Save"), "failed to click save", "successfully clicked save");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
@@ -1284,13 +1284,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			GeneralUtilities.ScrollToBottomOfPage();
+			var modaldialog = new ModalDialog();
 			var mystwdinfo = new MyAccount_CompanyInfo();
-			var clearstwdpopup = new ClearStewardshipNotification();
 			Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
 			GeneralUtilities.Wait_for_load_finish();
 			Report.IsTrue(mystwdinfo.NoStewardshipCheckbox_click(), "failed to click checkbox", "successfully clicked checkbox");
-			Report.IsTrue(clearstwdpopup.ClickClearStewardshipOption("Yes"), "failed to click Yes", "successfully clicked Yes");
-			Report.IsTrue(mystwdinfo.StewardshipSave_click(), "failed to click save", "successfully clicked save");
+			Report.IsTrue(modaldialog.Click_Yes(), "failed to click Yes", "successfully clicked Yes");
+
+			Report.IsTrue(mystwdinfo.StewardshipSaveOrCancel_Click("Save"), "failed to click save", "successfully clicked save");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
@@ -1369,10 +1370,97 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.IsFalse(selMyAccount.Is_User_In_Grid(userName), "The User just created was found in the Grid", "The User just created was Not Found In the Grid");
 				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
+		[StepDefinition(@"In Stewardship table click edit")]
+		public void StewardshipTableEditClick()
+		{
+			try
+			{
+				GeneralUtilities.ScrollToBottomOfPage();
+				var mystwdinfo = new MyAccount_CompanyInfo();
+				Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 
+		}
 
+		[StepDefinition(@"In Stewardship table I click: (.*)")]
+		public void StewardshipSaveorCancel(string option)
+		{
+			try
+			{
+				GeneralUtilities.ScrollToBottomOfPage();
+				var mystwdinfo = new MyAccount_CompanyInfo();
+				Report.IsTrue(mystwdinfo.StewardshipSaveOrCancel_Click(option), "failed to click option", "successfully clicked option");
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
+		[StepDefinition(@"I Create new users in the My Account page via the user Grid until there are atleast: (.*) pages present")]
+		public void ICreateXNewUsersInTheMyAccountPageViaTheUserGrid(int noPages)
+		{
+			
+			var myAccount = new MyAccount();
+			Report.Info($"There are currently a total of { myAccount.GetHighestPageNo()}");
+			if (myAccount.GetHighestPageNo()< noPages)
+			{
+				int i = 0;
+				int remainingPages = noPages - myAccount.GetHighestPageNo();
+				int limit = remainingPages * 10;
+				Report.Info($"Limiting the max number of new users that I will create to: {limit}");
+
+				while (myAccount.GetHighestPageNo()< noPages && i<limit)
+				{
+					new Steps_Shared().GivenICallSharedStepCreateNewUserViaUserGrid();
+					i++;
+				}
+				if (i < limit)
+				{
+					Report.Info($"The New user limit was not reached");
+				}
+				else
+				{
+					Report.Info($"The New user limit was reached");
+				}
+
+				Report.Info($"The Highest Page Number is currently: {myAccount.GetHighestPageNo()}");
+				Report.IsTrue(myAccount.GetHighestPageNo() >= noPages, "The total number of pages was not atleast:"+noPages, "The total number of pages was atleast:" + noPages);
+				
+			}
+			else
+			{
+				Report.Success($"The Current Number of total pages was atleast {noPages}, no new users where created.");
+			}
+
+		}
+
+		[StepDefinition(@"I confirm that I do not see any stewardship information")]
+		public void NoStewardshipData()
+		{
+			try
+			{
+				GeneralUtilities.ScrollToBottomOfPage();
+				var mystwdinfo = new MyAccount_CompanyInfo();
+				var stwdinfo = mystwdinfo.StewardshipFieldsNoData();
+				Report.IsTrue(stwdinfo.FirstOrDefault().IsNullOrEmpty(),
+					"Can see Stewardship information", "Stewardship information is not available as expected");
 			}
 			catch (Exception ex)
 			{
@@ -1383,7 +1471,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-
-
+		[StepDefinition(@"I add following stewardship information")]
+		public void AddStewardshipInformation(Table table)
+		{
+			try
+			{
+				GeneralUtilities.ScrollToBottomOfPage();
+				var mystwdinfo = new MyAccount_CompanyInfo();
+				//Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
+				GeneralUtilities.Wait_for_load_finish();
+				foreach (TableRow row in table.Rows)
+				{
+					Report.IsTrue(mystwdinfo.EnterStewardshipInfo(row["Province"], row["Stewardship"]), "failed to enter stewardship information", "successfully entered steward information");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 	}
 }

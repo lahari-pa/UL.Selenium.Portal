@@ -4,10 +4,10 @@
 @Homepage
 @Signup
 @wercsmart
-@NewProduct
 @ProductGrid
 @DataSummarySheet
 @wercsmart
+@NewProduct
 @RetailPartners
 @run_EPAState
 
@@ -25,6 +25,7 @@ Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 Given I call Shared Step 81468 (Product Characteristics - Solid only available - without secondary physical state)
 #Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
 Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+#Given In the Additional Product Information - Pesticide shown, US only, Yes to CA Cleaning Disclosure, select No for everything else - Happy Path
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Given I call Shared Step 63226 (Pesticide Date - Yes registered - Enter EPA Number not on Kelly - Click Continue - Happy path)

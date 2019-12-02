@@ -835,5 +835,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 
+		[StepDefinition(@"I verify the Transparency Score displays (.*)%")]
+		public void ThenIVerifyTheTransparencyScoreDisplays(float p0)
+		{
+			Report.IsTrue(new Ingredients().TransparencyScorePercent(p0, out float trScore),
+				"Transparency score was displayed as: " + trScore + " expected: " + p0,
+				"Transparecy score was displayed as: " + trScore + " as expected");
+		}
+
+
 	}
 }

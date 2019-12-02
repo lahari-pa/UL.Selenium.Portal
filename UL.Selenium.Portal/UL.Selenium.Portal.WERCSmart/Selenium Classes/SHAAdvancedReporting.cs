@@ -12,6 +12,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
 using System;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -44,18 +45,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
 
 			int counter = 0;
-			while (counter < 10)
+			while (counter < 20)
 			{
 				Report.Info("Checking to see if Preparing Report popup has disappeared. Try " + counter + ".");
-				IWebElement popup = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//div//div//span[contains(text(), 'Preparing report...')]/../.."), 2);
-				if (popup.GetCssValue("display") == "none")
+				IWebElement popup = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//div//div//span[contains(text(), 'Preparing report...')]/../.."), 10);
+				if (popup != null)
 				{
-					Report.Info("Exiting iFrame");
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
-					return true;
+					if (popup.GetCssValue("display") == "none")
+					{
+						Report.Info("Exiting iFrame");
+						SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+						return true;
+					}
+					Delay.Seconds(10);
+					counter++;
 				}
-				Delay.Seconds(10);
-				counter++;
+				else
+				{
+					Delay.Seconds(10);
+					counter++;
+					if (counter >= 3)
+					{ return true; }
+				}
 			}
 
 			Report.Info("Exiting iFrame");
@@ -95,7 +106,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Switching to iFrame");
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement submitButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//form[@id='panel']//input[@name='Submit']"), 2);
+			IWebElement submitButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//input[@name='Submit']"), 2);
 
 			bool canClick = submitButton.TryClick();
 
@@ -112,6 +123,64 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool canClick = closeButton.TryClick();
 
 			return canClick;
+		}
+
+		public bool ConfirmTableName(string tableName)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement tableTitle = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[@class='ui-jqgrid-title']"), 2);
+			string text = tableTitle.Text;
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return text == tableName;
+		}
+
+		public bool ConfirmHeader(string header)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IList<IWebElement> foundHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@"//tr[@class='ui-jqgrid-labels']//th[@id!='listAdvancedReports_Id']"), 2);
+			var headerTextList = new List<string>();
+			foreach (IWebElement foundHeader in foundHeaders)
+			{
+				headerTextList.Add(foundHeader.Text.Trim());
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			return headerTextList.Contains(header);
+		}
+
+		public bool ConfirmAdvancedReportingOptions(string name, string desc)
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+
+			IList<IWebElement> foundNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[2]"), 2);
+			var dict = new Dictionary<string, string>();
+			foreach (IWebElement foundName in foundNames)
+			{
+				IWebElement foundDescription = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[text()='" + foundName.Text.Trim() + @"']/following-sibling::td"), 2);
+				if (foundDescription != null)
+				{
+					dict.Add(foundName.Text.Trim(), foundDescription.Text.Trim());
+				}
+				else
+				{
+					Report.Failure("Could not find description element for report name element " + foundName.Text.Trim());
+					return false;
+				}
+			}
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+
+			if (!(dict.ContainsKey(name) && dict[name] == desc))
+			{
+				return false;
+			}
+
+			return true;
 		}
 
 		public bool VerifyPopupTitle(string title, out string output)
@@ -435,7 +504,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			else
 			{
-				
+
 				retailerOption.Select(value);
 				string selectedOption = retailerOption.SelectedOption();
 				Report.Info("Exiting iFrame");
@@ -568,22 +637,43 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnterStartEndDates(string start, string end)
 		{
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			ReadOnlyCollection<IWebElement> fields = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input"));
 
-			if (fields.Count < 2)
+			IWebElement startDate = this.FindElement(By.XPath("//span[contains(text(),'Start Date')]//..//..//input"), 2);
+			IWebElement endDate = this.containerElement.FindElement(By.XPath("//span[contains(text(),'End Date')]//..//..//input"), 2);
+			IWebElement submitBtn = this.FindElement(By.XPath("//input[@name='Submit']"), 2);
+
+			if (startDate == null || endDate == null)
 			{
 				Report.Info("The Date fields were unable to be located.");
 				return false;
 			}
 
-			Report.IsTrue(this.ReplaceAllTextInElementWith(start, fields[0]), "Start Date field was not able to be updated", "Start Date field was updated successfully");
-			Report.IsTrue(this.ReplaceAllTextInElementWith(end, fields[1]), "End Date field was not able to be updated", "End Date field was updated successfully");
+			if (submitBtn == null)
+			{
+				Report.Info("Submit button was unable to be located.");
+				return false;
+			}
 
-			fields[0].TryClick();
-			fields[1].TryClick();
-			fields[2].TryClick();
+			Report.IsTrue(startDate.TryEnterText(start), "Start date was not able to be changed", "Start date entered: " + start);
+			Report.IsTrue(endDate.TryEnterText(end), "End date was not able to be changed", "End date entered: " + end);
+			Report.IsTrue(submitBtn.TryClick(), "Submit button was not clicked", "Submit button clicked");
 
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			//ReadOnlyCollection<IWebElement> fields = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input"));
+
+			//if (fields.Count < 2)
+			//{
+			//	Report.Info("The Date fields were unable to be located.");
+			//	return false;
+			//}
+
+			//Report.IsTrue(this.ReplaceAllTextInElementWith(start, fields[0]), "Start Date field was not able to be updated", "Start Date field was updated successfully");
+			//Report.IsTrue(this.ReplaceAllTextInElementWith(end, fields[1]), "End Date field was not able to be updated", "End Date field was updated successfully");
+
+			//fields[1].TryClick();
+			//fields[2].TryClick();
+			//fields[3].TryClick();
+
+			//SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
 
 
 

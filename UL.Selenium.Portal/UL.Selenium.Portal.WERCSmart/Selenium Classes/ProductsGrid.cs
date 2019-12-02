@@ -987,6 +987,60 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
+
+		public ProductGridItem FirstProductNotRecertInGrid()
+		{
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			{
+				Report.Error("No rows have been found!");
+				return null;
+			}
+			Delay.Seconds(5);
+
+			//IWebElement productRow = this.containerElement.FindElement(By.XPath(".//tbody//tr//li[@class and not(@class='update')]//ancestor::tr"), 2);
+			IWebElement productRow = this.containerElement.FindElement(By.XPath(".//tbody//tr[.//li[@class and not(@class='update')]]"), 2);
+
+
+			if (productRow == null || !productRow.Displayed)
+			{
+				return null;
+			}
+			string productId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
+			string dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
+			var retailers = new List<string>();
+			var retailersAbrv = new List<string>();
+			IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
+
+			foreach (IWebElement retailerLi in retailersLi)
+			{
+				IWebElement retailerLiButton = retailerLi.FindElement(By.XPath("./button"), 2);
+				if (!retailerLi.GetAttribute("title").IsNullOrEmpty())
+				{
+					retailers.Add(retailerLi.GetAttribute("title")?.Trim());
+				}
+				else if (retailerLiButton != null && !retailerLiButton.GetAttribute("title").IsNullOrEmpty())
+				{
+					retailers.Add(retailerLiButton.GetAttribute("title")?.Trim());
+				}
+				else
+				{
+					retailers.Add(retailerLi.GetAttribute("data-original-title")?.Trim());
+				}
+				retailersAbrv.Add(retailerLi.Text.Trim());
+			}
+			IWebElement labelBrandTag = productRow.FindElement(By.XPath(".//div/p/span"), 2);
+			var productElement = new ProductGridItem() {
+				ProductId = productId,
+				ProductName = labelBrandTag != null ?
+					productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
+					productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
+				DateCreated = dateCreated,
+				Retailers = retailers,
+				RetailerAbrv = retailersAbrv,
+				NameLabel = labelBrandTag?.Text
+			};
+			return productElement;
+		}
 	}
 
 	public class ProductGridItem : ProductsGrid
