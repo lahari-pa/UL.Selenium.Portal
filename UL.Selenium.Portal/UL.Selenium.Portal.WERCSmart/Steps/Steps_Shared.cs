@@ -8965,6 +8965,132 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, info);
 		}
 
+		[StepDefinition(
+@"I filter subformat (.*) and open checklist (.*)")]
+		public void IFilertSubformatAndOpenChecklist(string subformat, string checkList)
+		{
+
+			if (Context.Contains("ElectronicProduct"))
+			{
+				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
+				{
+					Report.Info("Skipping step because this is an electronic product");
+					return;
+				}
+
+			}
+
+			TestReport.UseSubSteps = true;
+			var thisTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
+			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
+				"Failed to navigate to power designer plus", "Navigated to power designer plus");
+			Report.Screenshot();
+			Delay.Seconds(3);
+
+			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			if (!thisPowerDesignerPlus.Wait_for_load(30))
+			{
+				var thisStudioPowerDesignerPlusDesignMode =
+					new StudioPowerDesignerPlusDesignMode();
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
+				Delay.Seconds(3);
+			}
+
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+			Report.Info("Setting power designer plus options...");
+			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
+				"Set language option");
+			Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter(subformat), "Failed to set subformat option",
+				"Set subformat option");
+			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("CKLT", "MTR"), "Failed to set format option",
+				"Set format option");
+			TestReport.StartStep("I click the Edit Existing product radio button if not already selected");
+			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
+				"Set action option");
+
+			string WERCSmartIDFromContext = Context.GetFromContext("WERCSmart ID").ToString();
+			Report.IsTrue(thisPowerDesignerPlus.EnterSourceProduct(WERCSmartIDFromContext), $"Failed to enter {WERCSmartIDFromContext} into the Select Source Product field!", $"Successfully entered {WERCSmartIDFromContext} into the Select Source Product field");
+
+			thisPowerDesignerPlus.ClickRefreshButton();
+			Delay.Seconds(3);
+
+			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
+			TestReport.StartStep("I click Continue");
+			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
+				"Clicked continue button");
+			Delay.Seconds(3);
+			var selStepsStudio = new Steps_Studio();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkList);
+
+		}
+
+		[StepDefinition(@"I check if the excel data matches the checklist data")]
+		public void CheckExcelDataAgainstCheckListData()
+		{
+
+			SHAWasteClassification SHA = new SHAWasteClassification();
+
+			SHA.GetDataFromTable();
+
+			Dictionary<string, string> ExcelDictionaryDataFromContext = (Dictionary<string, string>)Context.GetFromContext("ExcelDictionaryData");
+
+			string ExcelEPAType, ExcelEPACode;
+
+			if (ExcelDictionaryDataFromContext.ContainsKey("EPA Type"))
+			{
+				ExcelEPAType = ExcelDictionaryDataFromContext["EPA Type"];
+			}
+			else
+			{
+				ExcelEPAType = "None";
+			}
+
+			if (ExcelDictionaryDataFromContext.ContainsKey("EPA Code"))
+			{
+				ExcelEPACode = ExcelDictionaryDataFromContext["EPA Code"];
+			}
+			else
+			{
+				ExcelEPACode = "NON-RCRA";
+			}
+
+
+			Report.IsTrue(ExcelEPAType == SHA.CheckListEPAType, "The excel EPA Type: " + ExcelEPAType + ", does not match the checklist EPA Type: " + SHA.CheckListEPAType, "The excel EPA Type: " + ExcelEPAType + ", does match the checklist EPA Type: " + SHA.CheckListEPAType);
+
+			Report.IsTrue(ExcelEPACode == SHA.CheckListEPACode, "The excel EPA Code: " + ExcelEPACode + ", does not match the checklist EPA Code: " + SHA.CheckListEPACode, "The excel EPA Code: " + ExcelEPACode + ", does match the checklist EPA Code: " + SHA.CheckListEPACode);
+
+
+			foreach (KeyValuePair<string, string> entry in ExcelDictionaryDataFromContext)
+			{
+
+				Dictionary<string, List<string>> CheckListDictionaryData = SHA.GetStateData(entry.Key);
+
+				if (CheckListDictionaryData.ContainsKey(entry.Key) && ExcelDictionaryDataFromContext.ContainsKey(entry.Key))
+				{
+
+					foreach (string elementTextValue in CheckListDictionaryData[entry.Key])
+					{
+
+						if (ExcelDictionaryDataFromContext.ContainsKey(entry.Key))
+						{
+
+							Report.IsTrue(ExcelDictionaryDataFromContext[entry.Key] == elementTextValue,
+								"The excel waste code does not match the checklist waste code: " + ExcelDictionaryDataFromContext[entry.Key] + " != " + elementTextValue + ", for state: " + entry.Key,
+								"The excel waste code matches the checklist waste code: " + ExcelDictionaryDataFromContext[entry.Key] + " == " + elementTextValue + ", for state: " + entry.Key);
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
 
 	}
 }

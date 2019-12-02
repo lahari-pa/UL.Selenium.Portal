@@ -1471,6 +1471,78 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
+		[StepDefinition(@"I click on the 'Edit' button in Company information in the Stewardship Numbers section")]
+		public void ThenIClickOnTheLink()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.ClickOnEditButtonInCompanyInformationPageInStewardshipNumbersSection(), "Failed to click on 'Edit' button", "Successfully clicked 'Edit' button");
+		}
+
+		[StepDefinition(@"I fill in Stweardship Numbers information")]
+		public void ThenIFillInStweardshipNumbersInformation(Table table)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.FillInStewardshipData(table), "Failed to fill in Stewardship table data", "Successfully filled in Stewardship table data");
+		}
+
+		[StepDefinition(@"I save Stewardship Numbers information")]
+		public void ThenISaveStewardshipNumbersInformation()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.ClickSaveButtonForStewardshipNumbers(), "Failed to save Stewardship table data", "Successfully saved Stewardship table data");
+		}
+
+		[StepDefinition(@"I confirm that the data saved in the Stewardshp Numbers section is correct")]
+		public void ThenIConfirmThatTheDataSavedIsCorrect(Table table)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.CheckStewardshipNumbersTableDataAfterItHasBeenSaved(table), "Table data was not correct", "Table data was correct");
+		}
+
+
+		[StepDefinition(@"I check that a heading with the name: (.*) exists")]
+		public void ThenICheckThatAHeadingWithTheNameStewardshipNumbersExists(string headingName)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.SearchForHeadingInCompanyInformationPageWithName(headingName), "Heading with name: " + headingName + ", was not found", "Heading with name: " + headingName + ", was found");
+		}
+
+		[StepDefinition(@"I check if there is a table in the Stewardship Numbers section")]
+		public void ThenICheckIfThereIsATableInTheStewardshipNumbersSection()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.CheckForTableInCompanyInformationPageInStewardshipNumbersSection(), "Failed to find a table", "Successfully found a table");
+		}
+
+		[StepDefinition(@"I find out how many rows are in the table in the Stewardship Numbers section")]
+		public void ThenIFindOutHowManyRowsAreInATable()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.Info("The nuumber of columns in the table is: " + MyAccountObject.CheckNumberOfColumnsInTableInCompanyInformationPageInStewardshipNumbersSection());
+		}
+
+		[StepDefinition(@"I check if the Stewardship Numbers table columns names match the following column names")]
+		public void ThenICheckIfColumnNamesMatch(Table table)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.CheckIfColumnNamesMatchInCompanyInformationPageInStewardshipNumbersSection(table), "Column names do not match", "Column names match");
+		}
+
+		[StepDefinition(@"I check if the Stewardship Numbers table province names match the following province names")]
+		public void ThenICheckProvinceNames(Table table)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.CheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection(table), "Province names do not match", "Province names match");
+		}
+
+		[StepDefinition(@"I check if 'Edit' button exists in the Stewardship Numbers section")]
+		public void ThenICheckIfButtonExistsInTheStewardshipNumbersSection()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.CheckForEditButtonCheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection(), "Edit button does exist in the Stewardship Numbers section", "Edit button exists in the Stewardship Numbers section");
+		}
+
+
 		[StepDefinition(@"I add following stewardship information")]
 		public void AddStewardshipInformation(Table table)
 		{
@@ -1490,6 +1562,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I call a Shared Step to create a new password: (.*)")]
+		public void ThenICallSharedStepToCreateANewPassword(string password)
+		{
+			ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
+			MyAccount MyAccountObject = new MyAccount();
+
+			FP.New_Password_Form(password, password);
+
+			bool passwordResetInWERCS = Report.IsTrue(MyAccountObject.ClickSaveInChangeUserPasswordWindow(), "Failed to click save", "Successfully clicked save");
+
+			Report.IsTrue(MyAccountObject.ClickCloseInChangeUserPasswordWindow(), "Failed to click close", "Successfully clicked close");
+
+			if (passwordResetInWERCS)
+			{
+
+				var user = TestUsers.GetUserSavedAs("PasswordResetAccount");
+				if (user == null)
+				{
+					Report.Info("TReVor user does not exist");
+				}
+				else
+				{
+					Report.Info("TReVor user does exist");
+				}
+
+				if (Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, password), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
+				{
+					user.Password = password;
+				}
+
+			}
+		}
+
+		[StepDefinition(@"I pass the following data to the Stweardship Numbers table")]
+		public void ThenPassTableStweardshipNumbersInformation(Table table)
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			MyAccountObject.ClickOnEditButtonInCompanyInformationPageInStewardshipNumbersSection();
+			Report.IsTrue(MyAccountObject.FillInStewardshipData(table), "Failed to fill in Stewardship table data", "Successfully filled in Stewardship table data");
+		}
+
+		[StepDefinition(@"I save the Stewardship Numbers data")]
+		public void ThenISaveTheStewardshipNumbersData()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.ClickSaveButtonForStewardshipNumbers(), "Failed to click save", "Successfully clicked save");
+		}
+
+		[StepDefinition(@"I look for the error: (.*) in the row with the province: (.*)")]
+		public void GivenICallSharedStepMyAccountStewardshipNumbersDateValidation(string error, string province)
+		{
+
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.ConfirmErrorInStewardshipInfoTable(error, province), "An error has not been found in the row with Province: " + province + ", and it should've been, Error: " + error, "An error has been found in the row with Province: " + province + ", which is correct, Error: " + error);
+
 		}
 	}
 }

@@ -947,5 +947,61 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(newProduct.PurchaseSummaryClickRemove(product), "Failed to click Remove for product '" + product + "'.",
 				"Successfully clicked Remove for product '" + product + "'.");
 		}
+
+		[StepDefinition(@"I click on the 'Edit' button in Company information in the Billing Address section")]
+		public void ThenIClickOnTheLinkInCompanyInformationInTheBillingAddressSection()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.ClickOnEditButtonInCompanyInformationPageInBillingAddressSection(), "Failed to click on 'Edit' button", "Successfully clicked 'Edit' button");
+		}
+
+		[StepDefinition(@"I select the state: (.*) in the Billing Address section")]
+		public void ThenISelectAStateInTheBillingAddressSection(string state)
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.SelectAStateAsAnOptionInCompanyInformationPageBillingAddressSection(state), "Failed to select state: " + state, "Successfully selected state: " + state);
+		}
+
+		[StepDefinition(@"I click the 'Save' button in the Billing Address section")]
+		public void ThenIClickTheSaveButtonInTheBillingAddressSeciton()
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.ClickSaveButtonInCompanyInformationPageBillingAddressSection(), "Failed to click on 'Save' button", "Successfully clicked 'Save' button");
+		}
+
+		[StepDefinition(@"I click on the 'Edit' button in Company information in the Shipping Address section")]
+		public void ThenIClickOnTheLinkInCompanyInformationInTheShippingAddressSection()
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.ClickEditButtonAsAnOptionInCompanyInformationPageShippingAddressSection(), "Failed to click on 'Edit' button", "Successfully clicked 'Edit' button");
+		}
+
+		[StepDefinition(@"I select the state: (.*) in the Shipping Address section")]
+		public void ThenISelectAStateInTheShippingAddressSection(string state)
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.SelectAStateAsAnOptionInCompanyInformationPageShippingAddressSection(state), "Failed to select state: " + state, "Successfully selected state: " + state);
+		}
+
+		[StepDefinition(@"I click the 'Save' button in the Shipping Address section")]
+		public void ThenIClickTheSaveButtonInTheShippingAddressSeciton()
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.ClickSaveButtonAsAnOptionInCompanyInformationPageShippingAddressSection(), "Failed to click on 'Save' button", "Successfully clicked 'Save' button");
+		}
+
+		[StepDefinition(@"I confirm that the correct state: (.*) has been saved in the Billing Address")]
+		public void ThenIConfirmThatTheCorrectStateHasBeenSavedInTheBillingAddress(string stateName)
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.FindStateWithNameInBillingAddressSection(stateName), "The state was not confirmed", "The state was confirmed");
+		}
+
+		[StepDefinition(@"I confirm that the correct state: (.*) has been saved in the Shipping Address")]
+		public void ThenIConfirmThatTheCorrectStateHasBeenSavedInTheShippingAddress(string stateName)
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.FindStateWithNameInShippingAddressSection(stateName), "The state was not confirmed", "The state was confirmed");
+		}
 	}
 }

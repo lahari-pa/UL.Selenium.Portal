@@ -45,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.LoginToAccount("ProductAccount");
 		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account)")]
+		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account|Password Reset)")]
 		public void LoginToWERCSmartAdmin(string type)
 		{
 			switch (type)
@@ -64,6 +64,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				case ("NoPLProducts Account"):
 					this.LoginToAccount("NoPLProducts Account");
+					break;
+				case ("Password Reset"):
+					this.LoginToAccount("PasswordResetAccount");
 					break;
 			}
 		}
@@ -247,9 +250,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Beginning I login with email and password");
 			var selLandingPage = new LandingPage();
-			if (!selLandingPage.WaitForContainerToBeVisible(5))
+			if (!selLandingPage.WaitForContainerToBeVisible(8))
 			{
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 2) != null)
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 8) != null)
 				{
 					throw new Exception("HTTP Server error 503 was thrown!");
 				}
@@ -260,7 +263,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;
-			while ((!selHomepage.WaitForContainerToBeVisible(1) || !selTopMenuBar.Wait_for_load(1)) && i < 4)
+			while ((!selHomepage.WaitForContainerToBeVisible(2) || !selTopMenuBar.Wait_for_load(3)) && i < 4)
 			{
 				Report.Info("========== Login Attempt: " + i + " ==========");
 				var selLogin = new Login();

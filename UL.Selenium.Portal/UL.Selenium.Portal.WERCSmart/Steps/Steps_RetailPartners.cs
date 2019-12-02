@@ -965,6 +965,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I get the excel row data file saved as: (.*) and save the data to context")]
+		public void GrabExcelRowDataAndSaveItToContext(string savedAs)
+		{
+
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
+				List<string> SecondRow = ExcelUtils.Excel_GetRow(3);
+
+				Dictionary<string, string> excelData = new Dictionary<string, string>();
+				for (int i = 0; i < SecondRow.Count; i++)
+				{
+					if ((SecondRow[i] != "-") && (SecondRow[i] != null))
+					{
+						Context.AddToContext(FirstRow[i], SecondRow[i]);
+						excelData.Add(FirstRow[i], SecondRow[i]);
+					}
+
+				}
+				Context.AddToContext("ExcelDictionaryData", excelData);
+
+			}
+		}
+
 		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columns: and they are in the correct order.")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumnsAndAreInTheCorrectOrder(string savedAs, Table table)
 		{

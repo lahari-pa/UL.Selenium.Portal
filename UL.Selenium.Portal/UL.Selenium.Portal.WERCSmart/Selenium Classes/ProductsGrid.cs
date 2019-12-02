@@ -9,6 +9,7 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using NTTQA.Selenium.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -986,6 +987,53 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return false;
 			}
+		}
+
+		public void ConfirmRetailersMatchInMyProductsSection(string savedAs)
+		{
+			Delay.Seconds(5);
+			string strVersionOfRemainingRetailerNames = Context.GetFromContext("ListOfRemainingRetailerNamesInTextForm").ToString();
+			List<string> ListOfRemainingRetailerNamesFromTheUPCPage = strVersionOfRemainingRetailerNames.Split(',').ToList();
+
+			List<string> ListOfRetailersThatWereSupposedToDisplayButDidNot = new List<string>();
+
+			var ProductID = Context.GetFromContext("ProductID");
+			IList<IWebElement> ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid = this.FindElements(By.XPath("//small[text()='" + ProductID + "']/../../following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td//span[@data-bind='text: Identifier']"), 2);
+
+
+			foreach (string RetailerName in ListOfRemainingRetailerNamesFromTheUPCPage)
+			{
+				bool foundMatch = false;
+
+				foreach (IWebElement DisplayedRetailerName in ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid)
+				{
+					if (RetailerName == DisplayedRetailerName.GetValue())
+					{
+						foundMatch = true;
+					}
+				}
+
+				if (!foundMatch)
+				{
+					ListOfRetailersThatWereSupposedToDisplayButDidNot.Add(RetailerName);
+				}
+
+			}
+
+			if (ListOfRetailersThatWereSupposedToDisplayButDidNot.Count() > 0)
+			{
+				Report.Failure("The following retailers: " + ListOfRetailersThatWereSupposedToDisplayButDidNot.ToString() + " did not show in the Product Grid but were supposed to.");
+				return;
+			}
+
+			Report.Success("All retailers that were supposed to show up in the Product Grid did.");
+			return;
+		}
+
+		public bool ConfirmYouWouldLikeToDeleteButton()
+		{
+			IWebElement ConfirmYouWouldLikeToDeleteButton = this.FindElement(By.XPath("//div[@class='modal-footer']//button[@data-bind='click: function(){ resolve(false); }, text: noText']"), 2);
+			return ConfirmYouWouldLikeToDeleteButton.TryClick();
 		}
 	}
 

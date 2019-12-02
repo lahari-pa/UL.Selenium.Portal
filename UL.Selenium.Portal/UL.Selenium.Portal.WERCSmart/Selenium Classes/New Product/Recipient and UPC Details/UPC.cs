@@ -588,18 +588,187 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement input = this.containerElement.FindElement(By.XPath(".//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
 			return input.TryEnterText(value);
 		}
+
+		public bool CheckForAlertWithThisTextInUPCPage(string alertText)
+		{
+			IList<IWebElement> AlertMessagesWithSpanTag = this.FindElements(By.XPath(".//span[@data-bind='text: $data']"), 2);
+			IList<IWebElement> AlertMessagesWithliTag = this.FindElements(By.XPath(".//li[@data-bind='visible:$.trim($data).length > 0, text: $data']"), 2);
+
+			if (alertText == "No error")
+			{
+				if ((AlertMessagesWithSpanTag.Count() == 0) && (AlertMessagesWithliTag.Count() == 0))
+				{
+					return true;
+				}
+			}
+
+			foreach (IWebElement element in AlertMessagesWithSpanTag)
+			{
+				if (element.Text == alertText)
+				{
+					return true;
+				}
+			}
+
+			foreach (IWebElement element in AlertMessagesWithliTag)
+			{
+				if (element.Text == alertText)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool ClickContinueButtonInUPCPage()
+		{
+			IWebElement ContinueButton = this.FindElement(By.XPath(".//a[@class='btn btn-success pull-right continue-button next-button']"), 2);
+			return ContinueButton.TryClick();
+		}
+
+		public bool ClickYesOrNoForUPCWarningPopUp(string yesOrNoButton, string savedAs)
+		{
+			if (yesOrNoButton == "YES")
+			{
+				IList<IWebElement> ListOfRemainingAbreviatedRetailerNames = this.FindElements(By.XPath(".//span[@data-bind='text: identifier']"), 2);
+				List<string> ListOfRemainingRetailerNamesInTextForm = new List<string>();
+
+				foreach (IWebElement element in ListOfRemainingAbreviatedRetailerNames)
+				{
+					ListOfRemainingRetailerNamesInTextForm.Add(element.Text);
+				}
+
+				string strOfRemainingRetailerNames = string.Join(",", ListOfRemainingRetailerNamesInTextForm);
+				Context.AddToContext("ListOfRemainingRetailerNamesInTextForm", strOfRemainingRetailerNames);
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Context.AddToContext("ProductID", id);
+
+				IWebElement YesButton = this.FindElement(By.XPath(".//div[@class='modal fade in']//button[@data-dismiss='modal' and text()='No']/following-sibling::button"), 2);
+				return YesButton.TryClick();
+
+			}
+			else if (yesOrNoButton == "NO")
+			{
+
+				IWebElement NoButton = this.FindElement(By.XPath(".//div[@class='modal fade in']//button[@data-dismiss='modal' and text()='No']"), 2);
+				return NoButton.TryClick();
+
+			}
+
+			return false;
+		}
+
 		public bool ClickFirstUPCTab()
 		{
 			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
 			IWebElement expandArrowLink = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']"));
 			return expandArrowLink.TryClick();
 		}
+
 		public bool IsFirstUPCTabOpen()
-		{ 
+		{
 			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
 			IWebElement expandArrow = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']//em"));
 			return expandArrow.GetAttribute("class").Contains("down");
 		}
+
+		public bool CheckForErrorUnderneathIndividualUPCContainedInCasePackField()
+		{
+			IWebElement IndividualUPCContainerFieldError = this.FindElement(By.XPath(".//option[text()='Individual UPC contained in the Case Pack']/../following-sibling::p//span[text()='This is a required field.']"), 2);
+			if (IndividualUPCContainerFieldError != null)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public bool ClickAddCaseUPCButton()
+		{
+			IWebElement AddCaseUPCButton = this.FindElement(By.XPath(".//button[text()='Add Case UPC ']"), 2);
+
+			return AddCaseUPCButton.TryClick();
+		}
+
+		public void CheckIfTextfieldsWithPlaceholdersDisplayTheError(Table table)
+		{
+			List<string> ListOfTextFieldsThatDisplayedTheError = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement TextField = this.FindElement(By.XPath(".//*[@placeholder='" + row["Placeholder"] + "']/..//span[text()='This is a required field.']"), 2);
+				if (TextField == null)
+				{
+					ListOfTextFieldsThatDisplayedTheError.Add(row["Placeholder"]);
+				}
+			}
+
+			if (ListOfTextFieldsThatDisplayedTheError.Count() > 0)
+			{
+				Report.Failure("The following textfields: " + ListOfTextFieldsThatDisplayedTheError.ToString() + " did not display the error messages they were supposed to.");
+				return;
+			}
+
+			Report.Success("All textfields in the table displayed their proper error messages");
+			return;
+		}
+
+		public bool CheckIfDropDownsWithDefaultOptionDisplayTheError(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement TextField = this.FindElement(By.XPath(".//option[text()='" + row["Default Option"] + "']/../following-sibling::p//span[text()='This is a required field.']"), 2);
+				if (TextField == null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		public string GetExpandedUPC()
 		{
 			IWebElement upcField = this.containerElement.FindElement(By.XPath($".//label[contains(text(),'UPC Number')]/following-sibling::input"));
