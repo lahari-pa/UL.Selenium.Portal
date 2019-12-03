@@ -468,13 +468,36 @@ Scenario: [114727] PM Walmart Monthly WMQC Report
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: PM Walmart Monthly WMQC Report report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
-	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	Then I enter start Date: 08-08-2019 and end Date: Future for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear	
-	Given I confirm that an excel file is produced called PM Monthly Status Report - Target.xls and save as 114727	
+	Given I confirm that an excel file is produced called PM Walmart Monthly WMQC Report.xls and save as 114727	
 	#Update Colum headings
 	Then I confirm that the excel file saved as: 114727 contains the following columns:
-		| Column   |
-		| UPC Name |
+		| Column          |
+		| WPS_ID          |
+		| UPC             |
+		| Product Name    |
+		| UPC Name        |
+		| Status          |
+		| Supplier Name   |
+		| Retailer        |
+		| Recommended Use |
+		| WMQC2           |
+		| WMQC3           |
+		| WMQC5           |
+		| WMQC7           |
+		| WMQC8D          |
+		| WMQC9D          |
+		| WMQC4           |
+		| WMQC6           |
+		| WMQC8           |
+		| WMQC9           |
+		| WMQC13          |
+		| WMCK            |
+		| WMQC10          |
+		| WMQC11          |
+		| WMQC14          |
+		| INITSUB         |
 	Then I delete the Advanced Report file saved as 114727
 
 @ScenarioId:5980
@@ -505,8 +528,7 @@ Scenario: [114728] UPCs Added Yesterday
 		| UNM                 |
 		| PGM                 |
 		| MODELQ              |
-		| MODECC              |
-		
+		| MODECC              |		
 	Then I delete the Advanced Report file saved as 114728
 
 @ScenarioId:5981
