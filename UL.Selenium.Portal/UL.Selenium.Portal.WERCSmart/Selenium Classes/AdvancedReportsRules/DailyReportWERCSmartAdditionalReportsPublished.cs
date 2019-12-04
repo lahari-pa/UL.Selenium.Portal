@@ -34,11 +34,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules
 			{"CRLA",new Records(description:"Critical List Analysis / Inventory Status Report",fee:"25",addLangFee:"-2")},
 			{"DGHS",new Records(description:"Vietnam  GHS SDS",fee:"275",addLangFee:"125")},
 			{"EGHS",new Records(description:"European GHS SDS",fee:"275",addLangFee:"-2")},
-			{"HGHS",new Records(description:"Canada GHS SDS",fee:"275",addLangFee:"125")},
+			{"HGHS",new Records(description:"Canada GHS SDS",fee:"275",addLangFee:"125.00")},
 			{"IGHS",new Records(description:"Indonesia  GHS SDS",fee:"275",addLangFee:"125")},
 			{"JGHS",new Records(description:"Japan GHS SDS",fee:"275",addLangFee:"125")},
 			{"KGHS",new Records(description:"Korea GHS SDS",fee:"275",addLangFee:"125")},
-			{"NGHS",new Records(description:"North American Combined GHS SDS",fee:"275",addLangFee:"125")},
+			{"NGHS",new Records(description:"North American Combined GHS SDS",fee:"275",addLangFee:"125.00")},
 			{"PDRR",new Records(description:"Product Development Regulatory Report",fee:"50",addLangFee:"-2")},
 			{"SGHS",new Records(description:"Singapore GHS SDS",fee:"275",addLangFee:"125")},
 			{"TFRE",new Records(description:"Transportation Classification",fee:"0",addLangFee:"-2")},
@@ -79,20 +79,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), /*Maybe? Will need access to actual file to determine sheet name*/"Table");
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 
-				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
+				for (int i = 1; i < ExcelUtils.Excel_GetNoRows(); i++)
 				{
 					List<string> row = ExcelUtils.Excel_GetRow(i);
-
 					List<string> errorRecords = ValidateData(row);
 
 					if (errorRecords.Count > 0)
 					{
 						errorRecords.Add(i.ToString());
+						results.Add(errorRecords);
 					}
-
-					results.Add(errorRecords);
 				}
 			}
 			ProcessOutput(results);
@@ -106,24 +104,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules
 			string subformat = row[0];
 			_reportData.TryGetValue(subformat, out Records rec);
 
-			if (rec.Description != row[1])
+			if (rec is null)
 			{
-				errorReport.Add("Description " + row[1] + " is invalid");
+				row.Add(" :: Not defined");
+				errorReport.AddRange(row);
 			}
-
-			if (rec.Fee != row[2])
+			else
 			{
-				errorReport.Add("Fee " + row[2] + " is invalid");
-			}
+				SeleniumBrowser.ScrollToTopOfPage();
 
-			if (rec.AdditionalLanguageFee != row[3])
-			{
-				errorReport.Add("Additional Language Fee " + row[3] + " is invalid");
-			}
+				if (rec.Description != row[1])
+				{
+					errorReport.Add("Description " + row[0] + " :: " + row[1] + " is invalid");
+				}
 
-			if (!int.TryParse(row[4], out int unused))
-			{
-				errorReport.Add("Reports Published field " + row[4] + " is not an integer");
+				if (rec.Fee != row[2])
+				{
+					errorReport.Add("Fee " + row[0] + " :: " + row[2] + " is invalid");
+				}
+
+				if (rec.AdditionalLanguageFee != row[3])
+				{
+					errorReport.Add("Additional Language Fee " + row[0] + " :: " + row[3] + " is invalid");
+				}
+
+				if (!float.TryParse(row[5], out float unused))
+				{
+					errorReport.Add("Reports Published field " + row[0] + " :: " + row[5] + " is not an integer");
+				}
 			}
 
 			return errorReport;

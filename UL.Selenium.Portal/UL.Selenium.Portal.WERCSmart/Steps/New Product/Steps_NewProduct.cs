@@ -2680,6 +2680,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(expectedText == fieldValue, $"Failure, expected text for {field}: {expectedText} and actual website text for {field}: {fieldValue} do not match.", $"Success, expected text for {field} and actual website text for {field} match.");
 		}
 
+		[StepDefinition(@"I click the 'Add Part Number' button")]
+		public void ThenIClickTheAddPartNumber()
+		{
+			Report.IsTrue((new NewProduct()).ClickAddPartNumber(), "Failed to click the 'Add Part Number' button!", "Successfully clicked the 'Add Part Number' button");
+		}
+
 		#endregion
 	}
 

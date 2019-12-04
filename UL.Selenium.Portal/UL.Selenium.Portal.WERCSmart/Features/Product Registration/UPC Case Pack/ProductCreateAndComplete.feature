@@ -22,7 +22,6 @@
 @ForwardProductRegistration
 @ProductSetUp
 @run_ProductCreateAndComplete
-
 Feature: Product Create and Process to Completed
 
 @ScenarioId:1503
@@ -62,10 +61,9 @@ Scenario: [87913] Create Electronic (Answering machine, no battery included) - W
 		| Amazon   |
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87913)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87913 and its status is: Completed
-	#Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87913
-	#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
-
+#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
+#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 @ScenarioId:1504
 Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to  Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -76,8 +74,8 @@ Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to
 	Given I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 48367 (Product Includes Battery > any type)
-	| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
-	| Alkaline     | <any>        | 6                               | 6                                  |
+		| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+		| Alkaline     | <any>        | 6                               | 6                                  |
 	Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	#Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
@@ -105,7 +103,6 @@ Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to
 		| Amazon   |
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87914)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87914 and its status is: Completed
-
 
 @tfs_design
 Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to completed
@@ -155,8 +152,6 @@ Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to compl
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87915)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87915 and its status is: Completed
 
-
-
 @ScenarioId:1505
 Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -166,14 +161,14 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 	Then I save the product information as: TestCase87916
 	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	Given I call Shared Step 74981 (Product Characteristics - gas)
-	| Secondary Physical State      | Select the best Water Solubility description         |
-	| Compressed gas                | Low                                                  |
+		| Secondary Physical State | Select the best Water Solubility description |
+		| Compressed gas           | Low                                          |
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
-	| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier  | Private Label or Brand | Good Not for resale |
-	| No                                                             | No                            | No                         | No              |
+		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+		| No                                                             | No                           | No                     | No                  |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-	| Cocoa butter  | 100     | false               | false       |            |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Cocoa butter  | 100     | false               | false       |            |
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
@@ -183,8 +178,8 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-	| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -207,10 +202,9 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 		| Amazon   |
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87916)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87916 and its status is: Completed
-	#Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87913
-	#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
-
+#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
+#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87917
@@ -223,8 +217,8 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	#| Secondary Physical State      | Select the best Water Solubility description         |
 	#| Compressed gas                | Low                                                  |
 	Given I call Shared Step 63804 (Additional Product Information - enter options)
-	| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier  | Private Label or Brand | Good Not for resale |
-	| No                                                             | No                            | No                         | No              |
+		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+		| No                                                             | No                           | No                     | No                  |
 	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	#| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	#| Cocoa butter  | 100     | false               | false       |            |
@@ -282,11 +276,9 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 		| Amazon   |
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87917)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87917 and its status is: Completed
-	#Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87913
-	#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
-
-
+#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
+#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87922
@@ -303,8 +295,8 @@ Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Com
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-	| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -327,10 +319,9 @@ Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Com
 		| Amazon   |
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87922)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87922 and its status is: Completed
-	#Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87913
-	#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
-
+#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
+#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 @ScenarioId:6073
 Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -349,8 +340,8 @@ Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-	| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -373,5 +364,5 @@ Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 		| Amazon   |
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87923)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87923 and its status is: Completed
-	#Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87913
-	#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
+#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
+#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
