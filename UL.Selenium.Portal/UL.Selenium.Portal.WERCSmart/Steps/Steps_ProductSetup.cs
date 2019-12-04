@@ -664,7 +664,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			//sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
 			//And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
 			//Given I set the  field to: I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and would like to upload it

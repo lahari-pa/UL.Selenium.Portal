@@ -1306,47 +1306,148 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
-			var pdEditPage = new PDEditPage();
+			var valueEdit = new ValueEditor();
 			TestReport.StartStep("I Select the Catagory Titled: Inquiry Date");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");
-			//Report.IsTrue(studioPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
-			//"Power designer plus has loaded");
-			Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
+			//Report.IsTrue(studioPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			//Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
 			TestReport.StartStep("I Click on 'Select Current Date'");
-			pdEditPage.SelectCurrentDate();
+			valueEdit.SelectCurrentDate();
 			Delay.Seconds(1);
-			TestReport.StartStep("Clicking Next Until I see the section: WMQC3 Response Date");
-			pdEditPage.IClickNextUntilISeeSection("WMQC3 Response Date");
+			valueEdit.ClickSaveButton();
+			//valueEdit.ClickButton("Save");
+
+			Delay.Seconds(1);
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Response Date");	
+			//TestReport.StartStep("Clicking Next Until I see the section: WMQC3 Response Date");
+			//valueEdit.IClickNextUntilISeeSection("WMQC3 Response Date");
 			//I Press Next Until section heading is X  (create method)
-			Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
 			TestReport.StartStep("I Click on 'Select Current Date'");
-			pdEditPage.SelectCurrentDate();
+			valueEdit.SelectCurrentDate();
 			Delay.Seconds(1);
-			TestReport.StartStep("Clicking Next Until I see the section: WMQC3 Response Date");
-			pdEditPage.IClickNextUntilISeeSection("WMQC4 Type of Inquiry/Concern");
-			Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			//valueEdit.ClickButton("Save");
+			valueEdit.ClickSaveButton();
+
+			Delay.Seconds(1);
+			//TestReport.StartStep("Clicking Next Until I see the section: WMQC3 Response Date");
+			//valueEdit.IClickNextUntilISeeSection("WMQC4 Type of Inquiry/Concern");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Type of Inquiry/Concern");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			TestReport.StartStep("Clicking the first available option in the list");
-			pdEditPage.SelectTopOption();
+			valueEdit.SelectTopOption();
 			Delay.Seconds(1);
-			TestReport.StartStep("Clicking Next Until I see the section: WMQC5 Brief Description of Issue");
-			pdEditPage.IClickNextUntilISeeSection("WMQC5 Brief Description of Issue");
-			Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+
+
+			Delay.Seconds(1);
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Brief Description of Issue");
+			//TestReport.StartStep("Clicking Next Until I see the section: WMQC5 Brief Description of Issue");
+			//valueEdit.IClickNextUntilISeeSection("WMQC5 Brief Description of Issue");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
-			pdEditPage.EnterValueIntoField("Test");
+			valueEdit.EnterValueIntoField("Test");
 			Delay.Seconds(1);
+			valueEdit.ClickButton("Save");
+
+			Delay.Seconds(1);
+
 			TestReport.StartStep("Clicking Next Until I see the section: WMQC6 Revision Required?");
-			pdEditPage.IClickNextUntilISeeSection("WMQC6 Revision Required?");
-			Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			valueEdit.IClickNextUntilISeeSection("WMQC6 Revision Required?");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC7 Justification");
+			valueEdit.IClickNextUntilISeeSection("WMQC7 Justification");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.EnterValueIntoField("Test");
+			Delay.Seconds(1);
+
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC8 Root Cause (if Revision Required)");
+			valueEdit.IClickNextUntilISeeSection("WMQC8 Root Cause (if Revision Required)");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC8D Root Cause Details (if Revision Required)");
+			valueEdit.IClickNextUntilISeeSection("WMQC8D Root Cause Details (if Revision Required)");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.EnterValueIntoField("Test");
+			Delay.Seconds(1);
+
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC9 Corrective Action (if Revision Required)");
+			valueEdit.IClickNextUntilISeeSection("WMQC9 Corrective Action (if Revision Required)");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC9D Corrective Action Details (if Revision Required)");
+			valueEdit.IClickNextUntilISeeSection("WMQC9D Corrective Action Details (if Revision Required)");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.EnterValueIntoField("Test");
+			Delay.Seconds(1);
+
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC10 Additional Information");
+			valueEdit.IClickNextUntilISeeSection("WMQC10 Additional Information");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.EnterValueIntoField("Test");
+			Delay.Seconds(1);
+
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC11 Regulatory/IT Contact");
+			valueEdit.IClickNextUntilISeeSection("WMQC11 Regulatory/IT Contact");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.EnterValueIntoField("Test");
+			Delay.Seconds(1);
+
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC12 Approving Manager");
+			valueEdit.IClickNextUntilISeeSection("WMQC12 Approving Manager");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.EnterValueIntoField("Test");
+			Delay.Seconds(1);
+
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC13 Inquiry Submitted By:");
+			valueEdit.IClickNextUntilISeeSection("WMQC13 Inquiry Submitted By:");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+		}
+
+		[StepDefinition(@"In Power Designer I ensure SECT2318 is the Active Section")]
+		public void InPDIEnsureSECT2318IsActive()
+		{
+			string click = "left";
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			//method that checks header of section on screen text == SECTI2318 ...
+			// if matches return, if not click.
+			if(new StudioPowerDesignerPlusDesignMode().ActiveSectionMatches("[SECT2318]"))
+			{
+				Report.Success("The Section was already active");
+				return;
+			}
+			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
+								"Studio power designer is open");
+			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection("[SECT2318] WALMART QC RESPONSE FORM", click),
+				"Failed to " + click + " click section: " + "[SECT2318] WALMART QC RESPONSE FORM",
+				"Successfully " + click + " clicked " + "[SECT2318] WALMART QC RESPONSE FORM");
+			Delay.Seconds(3);
+			return;
 
 
-
-
-
-
-
+			
 
 		}
 
-		
+
 	}
 }
