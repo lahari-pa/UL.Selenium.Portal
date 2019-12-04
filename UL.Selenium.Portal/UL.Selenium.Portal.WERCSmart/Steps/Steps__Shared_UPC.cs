@@ -948,8 +948,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Check that the type coloumn becomes populated with option: (.*)")]
-		public void ICheckTypeColoumnContiansFirstOption(string packagingType)
+		[StepDefinition(@"I Check that the type column becomes populated with option: (.*)")]
+		public void ICheckTypeColumnContiansFirstOption(string packagingType)
 		{
 			var containsTypeOptionBox = new MultipleUPC().ContainsType;
 
