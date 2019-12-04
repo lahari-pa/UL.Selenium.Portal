@@ -996,6 +996,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el.Selected;
 		}
 
+		public bool FieldValueRadioIsSelected(string field, string value)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath($".//label[text()='{field}']/../..//span[text()='{value}']/../input"), 2);
+			if (el == null)
+			{
+				Report.Info($"Section {field} does not have input {value}");
+				return false;
+			}
+
+			return el.Selected;
+		}
+
+		public bool SelectFieldValueRadio(string field, string value)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath($".//label[text()='{field}']/../..//span[text()='{value}']/../input"), 2);
+			if (el == null)
+			{
+				Report.Info($"Section {field} does not have input {value}");
+				return false;
+			}
+
+			return el.TryClick();
+		}
+
 		public bool SelectDeclinedRadio()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Declined')]/../input"), 2);
@@ -2501,6 +2525,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SectionExists(string section)
 		{
+			/*
 			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
 						section + @""")]) and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
@@ -2510,6 +2535,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
 						section + @""")])] | " +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
+						section + @""")]) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+						*/
+
+			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" +
+						section + @""")]) and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" +
+						section + @""")]) and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" +
+						section + @""")]) and @type='text'] | " +
+						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" +
+						section + @""")])] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" +
 						section + @""")]) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 2);
@@ -2560,11 +2597,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetOptionInSection(string section, string value)
 		{
+			/*
 			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
 						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
 						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+						*/
+
+			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
+						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
 
@@ -2670,7 +2715,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public List<string> SelectedOptionsForSection(string section)
 		{
-			IList<IWebElement> matchingElements = this.containerElement.FindElements(By.XPath(@".//div[contains(@class,'form-group') and .//label[starts-with(text(),""" + section + @""")]]//*[name()='input' or name()='select']"), 2);
+			IList<IWebElement> matchingElements = this.containerElement.FindElements(By.XPath(@".//div[contains(@class,'form-group') and .//label[contains(text(),""" + section + @""")]]//*[name()='input' or name()='select']"), 2);
 			if (matchingElements.Count == 0)
 			{
 				return new List<string>();

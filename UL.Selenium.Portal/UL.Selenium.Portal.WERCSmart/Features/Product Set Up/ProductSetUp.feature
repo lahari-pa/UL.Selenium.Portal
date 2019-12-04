@@ -22,7 +22,8 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: TestCase80089
 	And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	#And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 	And call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: Ing800891
 		| CASNumber | ComponentName | Percentage |
 		| 100-41-4  | Ethylbenzene  | 35         |
@@ -117,6 +118,7 @@ Scenario: [75410] Product from Completed status to Recertification
 		| saved as TestCase75410 | false  | Recertification of Product by WERCSmart Customer |
 	And I Close the Product Recertification History pop up
 
+@ScenarioId:6186
 Scenario: [84507] Recertification > Process recertification > Process multiple products
 	Given I create a product with name: 8450712 and take to completed using Test Case 84108 and save as: TestCase845072
 	Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845072

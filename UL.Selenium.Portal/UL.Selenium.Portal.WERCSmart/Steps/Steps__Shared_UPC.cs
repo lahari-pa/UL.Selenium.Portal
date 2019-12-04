@@ -646,6 +646,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I check that the (UPC|Type|Size|Retailer) of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckValueOfEachProductFromFile(string value, string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachProductFromFile(value, file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
+
+		}
+
+		[StepDefinition(@"I check that the (Item Number|Part Number|DPCI|OMSID) of each (.*) product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckValueOfEachRetailerProductFromFile(string value, string retailer, string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachRetailerProductFromFile(value, retailer,file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
+
+		}
+
 		[StepDefinition(@"I Check that all UPCs are selected")]
 		public void ICheckAllUPCsAreSelected()
 		{

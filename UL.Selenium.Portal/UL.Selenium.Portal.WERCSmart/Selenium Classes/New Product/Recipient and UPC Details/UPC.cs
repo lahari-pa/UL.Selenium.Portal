@@ -327,7 +327,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			for (int i = 0; i < tableData.Count; i++)
 			{
-				if (tableData[i].Trim() != fileData[i].Trim())
+				//if (tableData[i].Trim() != fileData[i].Trim())
+				string t1 = tableData[i];
+				string t2 = fileData[i];
+				t1 = Regex.Replace(t1, @"\s+", "");
+				t2 = Regex.Replace(t2, @"\s+", "");
+				if (t1 != t2)
 				{
 					Report.Info("Error: Table Data contains: " + tableData[i] + " while File Data contains: " + fileData[i] + " in row " + i);
 					return false;
