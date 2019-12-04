@@ -1301,6 +1301,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						
 		}
 
+		[StepDefinition(@"In PD+ I Fill the section WALMART QC RESPONCE FORM with junk data")]
+		public void InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I Select the Catagory Titled: Inquiry Date");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");
+
+
+
+
+
+		}
+
 		
 	}
 }

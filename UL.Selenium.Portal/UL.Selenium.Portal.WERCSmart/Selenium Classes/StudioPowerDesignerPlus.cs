@@ -871,6 +871,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return thisValueEditor.GetSelectedValue();
 
 		}
+
+		//public bool SelectCurrentDate()
+		//{
+		//	IWebElement selectCurrentDateButton = this.containerElement.FindElement(By.XPath(".//)
+		//}
 	}
 
 	class GraphicEditor : BaseObject
