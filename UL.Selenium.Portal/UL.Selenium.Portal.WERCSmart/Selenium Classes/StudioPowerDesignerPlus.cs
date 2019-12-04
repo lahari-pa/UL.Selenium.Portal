@@ -871,11 +871,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return thisValueEditor.GetSelectedValue();
 
 		}
-
-		//public bool SelectCurrentDate()
-		//{
-		//	IWebElement selectCurrentDateButton = this.containerElement.FindElement(By.XPath(".//)
-		//}
+		
 	}
 
 	class GraphicEditor : BaseObject
@@ -1218,6 +1214,91 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
+
+		public IWebElement EditPopupBox => this.containerElement.FindElement(By.XPath(".//div[@id='koPopup']"), 2);
+
+		public bool IClickNextUntilISeeSection(string sectionName)
+		{
+			IWebElement nextButton = this.containerElement.FindElement(By.XPath(".//input[@name='edit-next-ko']"), 2);
+			while(this.EditPopupBox.GetAttribute("display")=="block")
+			{
+				string currentSectionName = this.EditPopupBox.FindElement(By.XPath(".//div[@class='pull-left']"), 2).Text;
+				if(currentSectionName==sectionName)
+				{
+					Report.Info($"The section name found matched the expected section name:{sectionName}");
+					return true;
+				}
+				else
+				{
+					try
+					{
+						Report.Info("Clicking the Next button");
+						nextButton.TryClick();
+						new PDEditPage().Wait_for_load(30);
+					}
+					catch (Exception)
+					{
+						return false;
+					}
+				}
+
+			}
+			return false;
+		}
+
+		public bool SelectCurrentDate()
+		{
+
+			Delay.Seconds(2);
+			try
+			{
+				IWebElement selectCurrentDateButton = this.containerElement.FindElement(By.XPath(".//input[@value='Select Current Date']"), 2);
+				return selectCurrentDateButton.TryClick();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool SelectTopOption()
+		{
+			Delay.Seconds(2);
+			try
+			{
+				IWebElement topOption = this.EditPopupBox.FindElement(By.XPath(".//tbody[@id='sortable-list2']//tr"), 2);
+				return topOption.TryDoubleClick();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool EnterValueIntoField(string value)
+		{
+			Delay.Seconds(2);
+			try
+			{
+				IWebElement newValueBox = this.EditPopupBox.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
+				newValueBox.EnterText(value);
+				//IWebElement oldvalueBox = this.EditPopupBox.FindElement(By.XPath(".//textarea[@id='oldValue']"))
+				Report.Info($"The Text entered was: {newValueBox.Text}");
+				if (newValueBox.Text==value)
+				{
+					return true;
+				}
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+
+
+
 
 	}
 

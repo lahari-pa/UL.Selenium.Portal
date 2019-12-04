@@ -1305,8 +1305,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData()
 		{
 			TestReport.UseSubSteps = true;
+			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var pdEditPage = new PDEditPage();
 			TestReport.StartStep("I Select the Catagory Titled: Inquiry Date");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");
+			//Report.IsTrue(studioPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+			//"Power designer plus has loaded");
+			Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
+			TestReport.StartStep("I Click on 'Select Current Date'");
+			pdEditPage.SelectCurrentDate();
+			Delay.Seconds(1);
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC3 Response Date");
+			pdEditPage.IClickNextUntilISeeSection("WMQC3 Response Date");
+			//I Press Next Until section heading is X  (create method)
+			Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
+			TestReport.StartStep("I Click on 'Select Current Date'");
+			pdEditPage.SelectCurrentDate();
+			Delay.Seconds(1);
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC3 Response Date");
+			pdEditPage.IClickNextUntilISeeSection("WMQC4 Type of Inquiry/Concern");
+			Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Clicking the first available option in the list");
+			pdEditPage.SelectTopOption();
+			Delay.Seconds(1);
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC5 Brief Description of Issue");
+			pdEditPage.IClickNextUntilISeeSection("WMQC5 Brief Description of Issue");
+			Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			pdEditPage.EnterValueIntoField("Test");
+			Delay.Seconds(1);
+			TestReport.StartStep("Clicking Next Until I see the section: WMQC6 Revision Required?");
+			pdEditPage.IClickNextUntilISeeSection("WMQC6 Revision Required?");
+			Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+
+
+
 
 
 

@@ -4371,6 +4371,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selStepsStudio = new Steps_Studio();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT2318] WALMART QC RESPONSE FORM");
+
+
 			//Now select the first field that needs entering (inquiry date)
 			//One step that fill entire section with junk data
 
