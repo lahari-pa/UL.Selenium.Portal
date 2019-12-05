@@ -850,6 +850,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Transparecy score was displayed as: " + trScore + " as expected");
 		}
 
+		[StepDefinition(@"I add the following CA Cleaning ingredients:")]
+		public void IAddTheFollowingCACleaningIngredients(Table table)
+		{
+			var newProductIngredients = new Ingredients();
+			IEnumerable<Ingredients.CACleaningIngredient> Ingredients = table.CreateSet<Ingredients.CACleaningIngredient>();
+			foreach (Ingredients.CACleaningIngredient item in Ingredients)
+			{
+				Report.IsTrue(newProductIngredients.AddCACleaningIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
+			}
+		}
+
 
 	}
 }

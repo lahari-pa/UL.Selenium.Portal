@@ -231,6 +231,63 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public bool AddCACleaningIngredient(CACleaningIngredient ingredient)
+		{
+			bool pass = false;
+
+			var genericIngParts = new Ingredient {
+				ComponentName = ingredient.ComponentName,
+				CASNumber = ingredient.CASNumber,
+				Percent = ingredient.Percent,
+				PublicallyDisclosed = ingredient.PublicallyDisclosed,
+				TradeSecret = ingredient.TradeSecret,
+				PublicName = ingredient.PublicName
+			};
+			this.AddIngredient(genericIngParts);
+
+			pass = this.ISelectIngredientType(ingredient.ComponentName, ingredient.IngredientType);
+
+			if (!pass)
+			{
+				Report.Info("Failed to set Ingredient Type");
+				return false;
+			}
+
+			var tableFunctionalPurpose = new Table("Functional Purpose");
+			string[] funcPurposes = ingredient.FunctionalPurpose.Split(',');
+			foreach (string funcPurpose in funcPurposes)
+			{
+				pass = this.ISelectFunctionalPurpose(ingredient.ComponentName, funcPurpose.Trim());
+				if (!pass)
+				{
+					Report.Info("Failed to set Functional Purpose");
+					return false;
+				}
+			}
+
+			if (ingredient.Clean)
+			{
+				pass = this.SelectClean(ingredient.ComponentName);
+				if (!pass)
+				{
+					Report.Info("Failed to set Clean checkbox");
+					return false;
+				}
+			}
+
+			if (ingredient.Certified)
+			{
+				pass = this.SelectCertified(ingredient.ComponentName);
+				if (!pass)
+				{
+					Report.Info("Failed to set Certified checkbox");
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		public int IngredientRowCount()
 		{
 			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//td[@class='component-name']]"), 2);
@@ -888,6 +945,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public class CACleaningIngredient
+		{
+			public string ComponentName { get; set; } = "";
+			public string CASNumber { get; set; } = "";
+			public string Percent { get; set; } = "";
+			public bool PublicallyDisclosed { get; set; } = false;
+			public bool TradeSecret { get; set; } = false;
+			public string PublicName { get; set; } = "";
+			public string IngredientType { get; set; } = "";
+			public string FunctionalPurpose { get; set; } = "";
+			public bool Clean { get; set; } = false;
+			public bool Certified { get; set; } = false;
+			public bool TradeSecretEnabled { get; set; } = false;
+			public bool PublicDisclosureEnabled { get; set; } = false;
+			public bool PublicNameEnabled { get; set; } = false;
+			public bool Selected { get; set; } = false;
+		}
+
 		public bool IngredientMatchesFirstOption(string inputOption)
 		{
 			IWebElement resultMatch;
@@ -940,13 +1015,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredienName}']]"), 2);
 			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'ingredientType')]"), 2);
-			if(ingredientTypeBox==null)
+			if (ingredientTypeBox == null)
 			{
 				Report.Failure("Could not find the Ingredient Type Input Box");
 				return false;
 			}
 			ingredientTypeBox.Select(ingredientType);
-			if(ingredientTypeBox.SelectedOption()== ingredientType)
+			if (ingredientTypeBox.SelectedOption() == ingredientType)
 			{
 				Report.Info($"The correct Type was selectd. The Option selected was: {ingredientTypeBox.SelectedOption()}");
 				return true;
@@ -998,7 +1073,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Info("Failed to select the correct Purpose");
 					selectedOptionSuccessfull = false;
 				}
-				
+
 			}
 			return selectedOptionSuccessfull;
 
@@ -1017,33 +1092,60 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			bool selectedOptionSuccessfull = true;
 			var selectedOptionsStr = new List<string>();
 
-				if (functionalPurpose == "NA")
-				{
-					Report.Info("The Option to Choose was set to NA, No Funcional Purpose will be selected");
-					return selectedOptionSuccessfull = true;
-				
-				}							
+			if (functionalPurpose == "NA")
+			{
+				Report.Info("The Option to Choose was set to NA, No Funcional Purpose will be selected");
+				return selectedOptionSuccessfull = true;
 
-				functionalPurposeBox.Select(functionalPurpose);
+			}
 
-				List<IWebElement> selectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
-				
+			functionalPurposeBox.Select(functionalPurpose);
 
-				foreach (var item in selectedOptionsEl)
-				{
-					selectedOptionsStr.Add(item.Text);
-				}
+			List<IWebElement> selectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
 
-				if( selectedOptionsStr.Contains("×"+ functionalPurpose))
-				{
-					Report.Info($"The correct Purpose was selected.");
-				}
-				else
-				{
-					Report.Info("Failed to select the correct Purpose");
-					selectedOptionSuccessfull = false;
-				}			
-				return selectedOptionSuccessfull;
+
+			foreach (var item in selectedOptionsEl)
+			{
+				selectedOptionsStr.Add(item.Text);
+			}
+
+			if (selectedOptionsStr.Contains("×" + functionalPurpose))
+			{
+				Report.Info($"The correct Purpose was selected.");
+			}
+			else
+			{
+				Report.Info("Failed to select the correct Purpose");
+				selectedOptionSuccessfull = false;
+			}
+			return selectedOptionSuccessfull;
+		}
+
+		public bool SelectClean(string ingredientName)
+		{
+			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement cleanCheckbox = wantedRow.FindElement(By.XPath(".//td//input[contains(@data-bind,'caClean')]"), 2);
+			if (cleanCheckbox == null)
+			{
+				Report.Info("Could not find the Clean Check Box");
+				return false;
+			}
+
+			return cleanCheckbox.TryClick();
+
+		}
+
+		public bool SelectCertified(string ingredientName)
+		{
+			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement certifiedCheckBox = wantedRow.FindElement(By.XPath(".//td//input[contains(@data-bind,'caCertified')]"), 2);
+			if (certifiedCheckBox == null)
+			{
+				Report.Info("Could not find the Certified Check Box");
+				return false;
+			}
+
+			return certifiedCheckBox.TryClick();
 		}
 
 		internal bool TransparencyScorePercent(float p0, out float trScore)
