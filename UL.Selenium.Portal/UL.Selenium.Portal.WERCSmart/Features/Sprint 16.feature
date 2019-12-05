@@ -357,7 +357,6 @@ Scenario: [96172] Data Quality Review for Walmart
 		| LBLTYP                                       |
 		| EPWM                                         |
 		| ARSOL                                        |
-		| UNIFFC                                       |
 		| NFPAH                                        |
 		| NFPAF                                        |
 		| NFPAI                                        |
@@ -819,60 +818,65 @@ Scenario: [98534] Advanced Reporting - Registrations Published report -
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Product Registrations Published.xls and save as 98534
 	Then I confirm that the excel file saved as: 98534 contains the following columns:
-		| Column              |
-		| WPSID               |
-		| Product Name        |
-		| WMDRUM              |
-		| WMCAD               |
-		| WMBC                |
-		| PYST                |
-		| PYSTM               |
-		| FPF                 |
-		| PH                  |
-		| RU                  |
-		| EPAN                |
-		| CAWC                |
-		| WSWC                |
-		| UNM                 |
-		| HCM                 |
-		| PSNDWM              |
-		| HCDWM               |
-		| DVID                |
-		| PSNV                |
-		| HCW                 |
-		| UNIFFC              |
-		| BATT                |
-		| BATTT               |
-		| CHEMICAL            |
-		| KIT                 |
-		| OTC                 |
-		| TGWAST              |
-		| MPIND               |
-		| DOTPG               |
-		| DERGN               |
-		| INTFC               |
-		| CASEC               |
-		| CASECD              |
-		| DOTBMP              |
-		| IMDGBMP             |
-		| CATEST              |
-		| WATEST              |
-		| CNTXT               |
-		| Last Published Date |
-		| Published By        |
-		| Recert              |
-		| Product_status      |
-		| GHS                 |
-		| ALL                 |
-		| BATYPE              |
-		| LBAT                |
-		| BATTPACK            |
-		| BATTWT              |
-		| BATTLIGM            |
-		| BATCT               |
-		| CELLNUM             |
-		| BATTNUM             |
-		| NUMB                |
+		| Column                |
+		| WPSID                 |
+		| Product Name          |
+		| WMDRUM                |
+		| WMCAD                 |
+		| WMBC                  |
+		| PYST                  |
+		| PYSTM                 |
+		| FPF                   |
+		| PH                    |
+		| RU                    |
+		| EPAN                  |
+		| CAWC                  |
+		| WSWC                  |
+		| UNM                   |
+		| HCM                   |
+		| PSNDWM                |
+		| HCDWM                 |
+		| DVID                  |
+		| PSNV                  |
+		| HCW                   |
+		| UNIFFC                |
+		| BATT                  |
+		| BATTT                 |
+		| CHEMICAL              |
+		| KIT                   |
+		| OTC                   |
+		| TGWAST                |
+		| MPIND                 |
+		| DOTPG                 |
+		| DERGN                 |
+		| INTFC                 |
+		| CASEC                 |
+		| CASECD                |
+		| DOTBMP                |
+		| IMDGBMP               |
+		| CATEST                |
+		| WATEST                |
+		| CNTXT                 |
+		| Last Published Date   |
+		| Published By          |
+		| Total Water Content   |
+		| Total Alcohol Content |
+		| RCRA                  |
+		| RCRAEX                |
+		| Max UPC Size          |
+		| Recert                |
+		| Product_status        |
+		| GHS                   |
+		| ALL                   |
+		| BATYPE                |
+		| LBAT                  |
+		| BATTPACK              |
+		| BATTWT                |
+		| BATTLIGM              |
+		| BATCT                 |
+		| CELLNUM               |
+		| BATTNUM               |
+		| NUMB                  |
 	Then I delete the Advanced Report file saved as 98534
 
 @ScenarioId:5947
