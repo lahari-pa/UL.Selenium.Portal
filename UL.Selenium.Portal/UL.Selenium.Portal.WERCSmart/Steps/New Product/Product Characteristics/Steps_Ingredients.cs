@@ -411,13 +411,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the Access Code Validation popup I enter WPS value for product (.*)")]
-		public void InTheAccessCodeValidationPopupIEnterWPSValueForProduct(string savedAs)
-		{
-			var product = (ProductInformation)Context.GetFromContext(savedAs);
-			//TODO jwhitesell CONTINUE HERE 11/22!
-		}
-
 		[StepDefinition(@"In the ingredients table I click (CAS Number|Chemical Name|Percent|Publicly Disclosed|Trade Secret|Public Name) to order")]
 		public void WhenInTheIngredientsTableIClickCASNumberChemicalNameToOrder(string orderBy)
 		{

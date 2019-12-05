@@ -34,7 +34,6 @@ Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd
 	#And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 0
 	And I verify the Transparency Score displays 0.00%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
-	And In the Access Code Validation popup I enter WPS value for product TestCase80854Component
 	And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808212
 		| CASNumber                          | Percentage | Publicly Disclosed | Public Name            |
 		| WPS SavedAs TestCase80854Component | 15         | Yes                | Undisclosed Ingredient |
