@@ -5281,8 +5281,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.IConfirmTheSelectedSubformatInThePdPlusPopupIs("CKLT / Checklist");
 			TestReport.StartStep("I click continue");
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
-			Delay.Seconds(3);
-			var selStepsStudio = new Steps_Studio();
+			Delay.Seconds(3);			
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			selStepsStudio.InPDIEnsureSECT2318IsActive();
 			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
