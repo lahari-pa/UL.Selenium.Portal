@@ -795,6 +795,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return labelText.Text;
 			}
 		}
+
+		public string GetExpandedUPC()
+		{
+			IWebElement upcField = this.containerElement.FindElement(By.XPath($".//label[contains(text(),'UPC Number')]/following-sibling::input"));
+			return upcField.GetValue();
+		}
+
 	}
 
 	public class DeleteRowsWarning : SeleniumBaseObject
