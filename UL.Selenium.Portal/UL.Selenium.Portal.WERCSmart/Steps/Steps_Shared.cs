@@ -4369,8 +4369,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked continue button");
 			Delay.Seconds(3);
 			var selStepsStudio = new Steps_Studio();
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			//selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT2318] WALMART QC RESPONSE FORM");
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();			
 			selStepsStudio.InPDIEnsureSECT2318IsActive();
 			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			
@@ -4474,6 +4473,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			var selStepsStudio = new Steps_Studio();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.InPDIEnsureSECT2318IsActive();
+			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			new Steps_Studio().GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
@@ -5278,6 +5282,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click continue");
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
 			Delay.Seconds(3);
+			var selStepsStudio = new Steps_Studio();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.InPDIEnsureSECT2318IsActive();
+			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 		}

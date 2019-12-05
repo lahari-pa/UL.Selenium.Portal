@@ -832,7 +832,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			matchingCategory.Click();
 			matchingCategory.Click();
 			
-			Delay.Seconds(5);
+			Delay.Seconds(2);
 			Report.Screenshot();
 			IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
 			if (editScreen != null)
@@ -3627,6 +3627,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
+
+		public IWebElement NewValueBox=> this.containerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
 
 		public bool EnterValueIntoField(string value)
 		{
