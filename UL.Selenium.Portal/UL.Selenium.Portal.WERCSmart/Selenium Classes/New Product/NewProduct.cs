@@ -569,12 +569,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			bool checkTrue = true;
 			IList<IWebElement> listofCert = this.containerElement.FindElements(By.XPath(".//div[@data-bind='with: upc']//div//input"), 1);
-			foreach(var item in listofCert)
+			foreach (var item in listofCert)
 			{
 				//IWebElement inputbox= item.FindElement(By.XPath(".//"))
-				bool clicked=item.TryClick();
-				string textTitle=item.Text;
-				if(!clicked)
+				bool clicked = item.TryClick();
+				string textTitle = item.Text;
+				if (!clicked)
 				{
 					checkTrue = false;
 					Report.Info($"Failed to check the certification with title: {textTitle}");
@@ -737,8 +737,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				IWebElement productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
 
-				string productNameDataBind=productNameOnlabelObj.GetAttribute("class");
-				if(productNameDataBind!=null)
+				string productNameDataBind = productNameOnlabelObj.GetAttribute("class");
+				if (productNameDataBind != null)
 				{
 					if (!productNameDataBind.Contains("form-group has-success"))
 					{
@@ -822,7 +822,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				//{
 				//	Report.Failure("The UPC Name field was not present");
 				//}
-				
+
 
 
 				if (info.ContainerType.ToLower() != "none")
@@ -3244,27 +3244,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
-		public bool FinalDomesticDistributor(string text)
-		{
-			try
-			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Who is the Final Domestic Distributor (if any) of the product?']/../following-sibling::div//input"), 2);
-
-				if (el != null)
-				{
-					el.EnterText(text);
-					return true;
-				}
-
-				return false;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-
-		}
-
 		public bool ClickRestoreSelectedRetailersButton()
 		{
 			IWebElement RestoreSelectedRetailersButton = this.containerElement.FindElement(By.XPath(".//a[@data-bind='click: restoreSelectedRetailers']"), 2);
@@ -3301,7 +3280,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IList<IWebElement> deleteButtons = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
 			List<int> listOfAlreadyRemovedButtonIndexes = new List<int>();
 			Random random = new Random();
-			int numOfLoops = random.Next(3, deleteButtons.Count - 1);
+			int numOfLoops = random.Next(2, deleteButtons.Count - 1);
 
 			for (int i = 0; i <= numOfLoops; i++)
 			{
@@ -3341,7 +3320,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			Random random = new Random();
-			int numOfLoops = random.Next(1, CheckBoxes.Count - 2);
+			int numOfLoops = random.Next(1, CheckBoxes.Count - 1);
 			for (int i = 0; i <= numOfLoops; i++)
 			{
 				int ran = random.Next(1, CheckBoxes.Count);
@@ -3434,7 +3413,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			"Added retailer names are in order");
 		}
 
-	public bool CompanyTollFreePhoneNumber(string text)
+		public bool CompanyTollFreePhoneNumber(string text)
 		{
 			try
 			{
@@ -3497,7 +3476,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 
 
-		public bool InputPartNumberInformation(UpcInformation info,string partNumber)
+		public bool InputPartNumberInformation(UpcInformation info, string partNumber)
 		{
 			try
 			{
@@ -3550,7 +3529,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Failure("The UPC Name field was not present");
 				}
 
-				
+
 
 
 
@@ -3602,8 +3581,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
-
-
 
 	}
 
@@ -3712,4 +3689,5 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public IWebElement Input { get; set; }
 		public string ErrorMessage { get; set; }
 	}
+
 }
