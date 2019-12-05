@@ -771,7 +771,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return true;
 		}
-
+		///SHABAHABA
 		public string GetValueOfRetailerFieldInActiveRow(string retailerID, string field)
 		{
 			IWebElement retailerField = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]/following-sibling::input"));
