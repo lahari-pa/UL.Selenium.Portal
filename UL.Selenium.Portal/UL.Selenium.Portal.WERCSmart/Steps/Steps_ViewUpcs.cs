@@ -218,6 +218,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ViewUpcs().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
 			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
+
+		[StepDefinition(@"the View UPC page loads with no errors")]
+		public void TheViewUPCPageLoadsWithNoErrors()
+		{
+			var upcviewpg = new ViewUpcs();
+			Report.IsTrue(GeneralUtilities.WaitForSpinnerToDisappear(upcviewpg.LoadingSpinner()),
+				"The View UPC page did not complete loading",
+				"The View UPC page completed loading");
+
+		}
 	}
 
 		

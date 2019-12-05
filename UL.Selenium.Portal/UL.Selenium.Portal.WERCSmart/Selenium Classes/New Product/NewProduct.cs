@@ -3639,6 +3639,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool FinalDomesticDistributor(string text)
+		{
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Who is the Final Domestic Distributor (if any) of the product?']/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
 	}
 
 	public class ProductInformation
