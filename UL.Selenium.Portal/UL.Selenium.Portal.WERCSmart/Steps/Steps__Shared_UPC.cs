@@ -249,6 +249,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Warning message was showing: " + message + ", as expected!");
 		}
 
+		[Given(@"I expand UPC details for UPC saved as (.*)")]
+		public void GivenIExpandUPCDetails(string upc)
+		{
+			var upcToGet = Context.GetFromContext(upc).ToString();
+			new UPC().ExpandArrowforUPC(upcToGet);
+		}
+
+
 		[StepDefinition(@"I should see maximum upc limit message: (.*)")]
 		public void MaximumUpcLimitMessage(string message)
 		{
@@ -260,6 +268,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Warning message was not as expected! Expected: " + message + ", but found: " + found + "!",
 				"Warning message was showing: " + message + ", as expected!");
 		}
+
+
+		[Given(@"I delete the value in the (.*) field")]
+		public void GivenIDeleteTheValueInTheUPCNameField(string field)
+		{
+			Report.IsTrue(new UPC().DeleteValueInField(field), "Unable to remove data from " + field + " field", "Deleted value in field " + field);
+		}
+
 
 		[StepDefinition(@"I should (see|not see) the following UPC buttons:")]
 		public void UpcButtonsDisplay(string condition, Table expected)
@@ -647,6 +663,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I check that the (UPC|Type|Size|Retailer) of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckValueOfEachProductFromFile(string value, string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachProductFromFile(value, file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
+
+		}
+
+		[StepDefinition(@"I check that the (Item Number|Part Number|DPCI|OMSID) of each (.*) product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckValueOfEachRetailerProductFromFile(string value, string retailer, string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachRetailerProductFromFile(value, retailer,file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
+
+		}
+
 		[StepDefinition(@"I Check that all UPCs are selected")]
 		public void ICheckAllUPCsAreSelected()
 		{
@@ -918,8 +948,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Check that the type coloumn becomes populated with option: (.*)")]
-		public void ICheckTypeColoumnContiansFirstOption(string packagingType)
+		[StepDefinition(@"I Check that the type column becomes populated with option: (.*)")]
+		public void ICheckTypeColumnContiansFirstOption(string packagingType)
 		{
 			var containsTypeOptionBox = new MultipleUPC().ContainsType;
 

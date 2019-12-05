@@ -954,7 +954,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.Info("Found unexpected column title: " + ColumnTitle + ".");
 						}
 					}
-					Report.Failure("Found " + unexpectedCount + " unexpected columns.");
+					Report.Failure("Found " + unexpectedCount + " unexpected columns.", false);
 				}
 
 				foreach (TableRow thisRow in table.Rows)
@@ -1742,13 +1742,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
 			while (!dir.Any() && i < 30)
 			{
-				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				
+				dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}
 
-			Report.IsTrue(!dir.Any(), "A File with name: " + dir.FirstOrDefault() + " was found", "No File was found");				
-			
+			Report.IsTrue(!dir.Any(), "A File with name: " + dir.FirstOrDefault() + " was found", "No File was found");
+						
+			Report.Info("Downloads folder: " + downloadsFolder);			
+
+			foreach (string file_ in dir)
+			{
+				Report.Info($"Deleteing the file with name: {file_}");
+				File.Delete(file_);
+			}
+
 		}
 
 		[StepDefinition(@"I click the Products in Scope button and confirm that a file is produced called (.*) and save as (.*)")]
@@ -1770,6 +1779,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			foreach (string file_ in dir)
 			{
+				Report.Info($"Deleteing the file with name: {file_}");
 				File.Delete(file_);
 			}
 
@@ -1784,7 +1794,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
 			while (!dir.Any() && i < 30)
 			{
-				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				
+				dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}
@@ -2056,8 +2067,69 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has: (.*) in the column: (.*)")]
+		public void ThenIConfirmThatTheExcelFileSavedAsContainsUPCNumberAndYInColumns(string fileSavedAs, string wpsidSavedAs, string containsValue, string searchColumn)
+		{
+			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				int wpsIDColumnIndex = 0;
+				for (int j = 0; j < ColumnTitles.Count; j++)
+				{
+					if (ColumnTitles[j] == "WPSID")
+					{
+						wpsIDColumnIndex = j;
+					}
+				}
+				string wpsidStr = ((ProductInformation)Context.GetFromContext(wpsidSavedAs)).Id;
+				List<string> wpsidItems = ExcelUtils.Excel_GetColumn(wpsIDColumnIndex);
+				int wantedWpsidPosition = 0;
+				bool foundWpsid = false;
+				foreach (var wpsidItem in wpsidItems)
+				{
+					if (wpsidItem != wpsidStr)
+					{
+						wantedWpsidPosition++;
+					}
+					else
+					{
+						Report.Success($"The WPSID was found at position: {wantedWpsidPosition}");
+						foundWpsid = true;
+						break;
+					}
+				}
+				if (!foundWpsid)
+				{
+					Report.Failure("Could not find the WPSID in the SpreadSheet");
+					return;
+				}			
+					
+					int columnUPCIndex = 0;
+					for (int i = 0; i < ColumnTitles.Count; i++)
+					{
+						if (ColumnTitles[i] == searchColumn)
+						{
+							columnUPCIndex = i;
+						}
+					}
+
+					List<string> upcRowItems = ExcelUtils.Excel_GetColumn(columnUPCIndex);
+					Report.Info($"Looking for {containsValue} for WPSID: {wpsidStr} in the Column: {searchColumn}");
+					string actualValue = upcRowItems[wantedWpsidPosition];
+					Report.Info($"actual value was: {actualValue}");
+					Report.IsTrue(actualValue == containsValue, "The actual value was not: " +containsValue, "The actual value was: "+containsValue);
+
+				}
+			}
+		}
 
 
-	}
+
+
+	
 }
 

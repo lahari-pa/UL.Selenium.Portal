@@ -381,7 +381,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			for (int i = 0; i < tableData.Count; i++)
 			{
-				if (tableData[i].Trim() != fileData[i].Trim())
+				//if (tableData[i].Trim() != fileData[i].Trim())
+				string t1 = tableData[i];
+				string t2 = fileData[i];
+				t1 = Regex.Replace(t1, @"\s+", "");
+				t2 = Regex.Replace(t2, @"\s+", "");
+				if (t1 != t2)
 				{
 					Report.Info("Error: Table Data contains: " + tableData[i] + " while File Data contains: " + fileData[i] + " in row " + i);
 					return false;
@@ -435,9 +440,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-
-
-
+		internal bool DeleteValueInField(string field)
+		{
+			string str = "//input[@placeholder='" + field + "']";
+			IWebElement el = this.FindElement(By.XPath(str));
+			bool thing = el.TryEnterText("");
+			return thing;
+		}
 
 		public string GetErrorText()
 		{
@@ -647,12 +656,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					//do nothing
 				}
-		public bool ClickFirstUPCTab()
-		{
-			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
-			IWebElement expandArrowLink = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']"));
-			return expandArrowLink.TryClick();
-		}
 
 				//if we didn't get the id try a different object type
 				if (id == "")
@@ -668,12 +671,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 
 				}
-		public bool IsFirstUPCTabOpen()
-		{ 
-			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
-			IWebElement expandArrow = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']//em"));
-			return expandArrow.GetAttribute("class").Contains("down");
-		}
 
 				if (id == "")
 				{
@@ -704,7 +701,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-		public bool CheckForErrorUnderneathIndividualUPCContainedInCasePackField()
+        public bool ClickFirstUPCTab()
+        {
+            //new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
+            IWebElement expandArrowLink = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']"));
+            return expandArrowLink.TryClick();
+        }
+
+        public bool IsFirstUPCTabOpen()
+        {
+            //new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
+            IWebElement expandArrow = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']//em"));
+            return expandArrow.GetAttribute("class").Contains("down");
+        }
+
+        public bool CheckForErrorUnderneathIndividualUPCContainedInCasePackField()
 		{
 			IWebElement IndividualUPCContainerFieldError = this.FindElement(By.XPath(".//option[text()='Individual UPC contained in the Case Pack']/../following-sibling::p//span[text()='This is a required field.']"), 2);
 			if (IndividualUPCContainerFieldError != null)
@@ -780,8 +791,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return labelText.Text;
 			}
 		}
-
 	}
+
 	public class DeleteRowsWarning : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath(@"//div[@class='modal-dialog modal-md']//div[@class='modal-content']");

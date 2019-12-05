@@ -171,7 +171,7 @@ Scenario: [115255] CVS - Uses Updated Data Tier Consent Requirements (Included C
 	Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
 	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSHBExcelFile and check that is shows the expected product saved as: CVSHBProduct1
 	Then For CVS I create a product of type: Artist Supply (RUCC0384), save it as: CVSArtistProduct1 and leave it in New Status
-	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSArtistExcelFile and check that is shows the expected product saved as: CVSHBProduct1
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSArtistExcelFile and check that is shows the expected product saved as: CVSArtistProduct1
 	Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
 	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSCleaningExcelFile and check that is shows the expected product saved as: CVSCleaningProduct1
 	Then For CVS I create a product of type: Home Improvement (RUCC0394), save it as: CVSHomeProduct1 and leave it in New Status

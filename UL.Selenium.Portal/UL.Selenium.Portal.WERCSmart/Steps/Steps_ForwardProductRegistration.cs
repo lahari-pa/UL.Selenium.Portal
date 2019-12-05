@@ -1009,5 +1009,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(UPCObject.CheckIfDropDownsWithDefaultOptionDisplayTheError(table), "At least one dropdown did not display an error", "All the dropdowns displayed their errors");
 		}
 
+
+
 	}
 }

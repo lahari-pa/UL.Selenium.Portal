@@ -423,7 +423,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 		}
@@ -460,7 +460,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -499,11 +499,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
 			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
 
-			//var retailerTable = new Table("Retailer");
-			//retailerTable.AddRow("CVS");
-			//sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
-
-
+			
 
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
@@ -511,7 +507,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -545,7 +541,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
-			sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
+			this.AdditionalProductInformation_YesToCACleaning();
+			this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
+			newProductSteps.ClickContinue();			
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			tableIngredients.AddRow("Formaldehyde", "100", "false", "false", "");
 
@@ -559,7 +557,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -580,8 +578,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var selectRetailers = new StepsSelectRetailers();
 
-
-			//productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC108254Lightbulb");
+					
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Light Bulbs - Incandescent Bulbs");
 			newProductSteps.SaveProductInformation(savedAs);
@@ -592,7 +589,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -612,7 +609,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selectRetailers = new StepsSelectRetailers();
 
 
-			//productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC108254Lightbulb");
+			
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Charcoal Lighter Material");
 			newProductSteps.SaveProductInformation(savedAs);
@@ -643,7 +640,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -674,14 +670,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			//sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
-			//stepsSelectretailers.GivenIShouldSeeTheSelectRetailersPopUp();
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();			
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -714,13 +707,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			//sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();			
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -750,13 +741,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			//sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();			
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -801,7 +790,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -834,7 +822,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			sharedSteps.GivenICallSharedStepTransportationDetails_YesOnlyOption_SelectIMDGFullyRegulated_Continue_HappyPath();
 			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
-			sharedSteps.GivenICallSharedStepConfirmVOCSCAQMDStepTitleConfirmACPQuestionShown_SelectNo_HappyPath();
+			sharedSteps.GivenICallSharedVolatileOrganicCompoundsVOCForOTCAndCARB_No();			
 			sharedSteps.GivenICallSharedStepVOC_AEROQuestionOzoneEnterValue_ClickContinue_HappyPath("0.5");
 			newProduct.ClickContinue();
 			Report.Info("Then I select a retailer");
@@ -843,22 +831,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Aerosol Can", "40");
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
-
-
-
-			//Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			//table57570.AddRow("Sodium chloride", "100", "false", "false", "");
-
-			//sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			//sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			//sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
-			//Report.Info("Then I select a retailer");
-			//selectRetailers.SelectTheRetailer("CVS");
-			//newProductSteps.ClickContinue();
-			//sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			////go back to homepage (products grid)
-			//new StepsHomepage().ThenINavigateToTheHomePage();
-			//new GlobalSteps().ThenTheHomeScreenShouldLoad();
+		
 
 		}
 
@@ -1221,8 +1194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-			TestReport.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			
 		}
 
 		[StepDefinition(@"In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details")]

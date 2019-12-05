@@ -514,6 +514,91 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @ScenarioId:6058
 Scenario: [87628] Universal Product Code (UPC) Step - Add Case UPC - Case UPC field validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+<<<<<<< HEAD
+=======
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase105352
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: Staples
+And in the New Product page I click Continue
+Then I enter Container type: Metal Container, Size 40, Packaging type: NA and Part number: ABC123 then click continue in the UPC screen
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+Then I should see the Data Acceptance Page	
+Given I click the Summary button in the Data Acceptance window
+Given I switch to the Data Summary page
+Then I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: Chalk
+Given I close the Data Summary tab
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase105352
+
+@ScenarioId:6025
+Scenario: [84510] Select Retailers in UPC screen
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+Then I save the product information as: TestCase84510
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+
+And I should see the Additional Product Information Page
+And I should see following statement: Select countries the product may be sold in
+And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
+And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
+And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
+Given I set all additional product information options to No
+Given I click continue in the Additional Product Information page
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Propane       | 100     | false               | false       |            |
+
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+And I select the following retailers in the 'Select Retailers' window
+| Retailer       |
+| Amazon         |
+| Autozone       |
+| Best Buy       |
+| Costco         |
+| CVS            |
+| Dollar General |
+| Family Dollar  |
+| Kohl's         |
+| McLane         |
+
+Given I click the 'Add UPC' button
+Given I fill in the UPC data; UPC:0370030621897, Product Type:Paper bag, Product Weight:5
+Given I remove randomly selected retailers
+
+Given I click the 'Add Retailers' button
+Given I randomly select retailers to restore
+Given I click the 'Restore Selected' button
+
+Given I click the 'Add Retailers' button
+Given I click 'Select All' to add all removed retailers
+Given I click the 'Restore Selected' button
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84510
+
+
+
+@ScenarioId:6058
+Scenario: [87628] Universal Product Code (UPC) Step - Add Case UPC - Case UPC field validation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+>>>>>>> e8de8e661810559d936b90303171d7dad0c9d050
 Then the WERCSmart homepage should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -555,7 +640,11 @@ Given I fill in the UPC data; UPC:111111111111, Product Type:Paper bag, Product 
 When I click continue
 Then I check for the appropriate alert: Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit
 
+<<<<<<< HEAD
 Given I fill in the UPC data; UPC:8992696405585, Product Type:Paper bag, Product Weight:5
+=======
+Given I fill in the UPC data; UPC:0727506002788, Product Type:Paper bag, Product Weight:5
+>>>>>>> e8de8e661810559d936b90303171d7dad0c9d050
 When I click continue
 Then I check for the appropriate alert: No error
 
