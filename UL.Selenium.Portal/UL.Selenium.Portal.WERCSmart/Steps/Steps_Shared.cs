@@ -1137,6 +1137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
 			TestReport.UseSubSteps = true;
+			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep(
 				"Select countries the product may be sold in should be showing the value: United States");
@@ -1151,6 +1152,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
+			TestReport.StartStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}
 			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			TestReport.StartStep(
@@ -1377,6 +1384,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepAdditionalProductInformation_USPesticideNoNoOSHANoDSVNoPLNoGNFRWithoutChildQuestion()
 		{
 			TestReport.UseSubSteps = true;
+			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I set any option for: 'Which one best describes your product'");
 			// Step says 'any' but prefer setting not pesticide because some tests didn't account for Pesticides page appearing later.
@@ -1401,6 +1409,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
+			TestReport.StartStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}
 			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			TestReport.StartStep(
@@ -1418,6 +1432,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
+			var myNewProductClass = new NewProduct();
 			var MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Additional Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
@@ -1435,6 +1450,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
+			TestReport.StartStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}			
 			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			TestReport.StartStep(
@@ -2604,6 +2625,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SharedFormulation3rdParty_SelectAll()
 		{
 			TestReport.UseSubSteps = true;
+			var myNewProductClass = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Formulation > 3rd Party Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Formulation > 3rd Party");
@@ -2616,6 +2638,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Consent to Tier 2 Data Uses",
 				"Granted"));
 			MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 2 Data Uses", "Granted");
+			if(myNewProductClass.SectionExists("Consent to Tier 4.1 Derived Results"))
+			{
+				TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Consent to Tier 4.1 Derived Results",
+				"Granted"));
+				MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 4.1 Derived Results", "Granted");
+			}
 			TestReport.StartStep("in the Formulation > 3rd Party page I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Formulation > 3rd Party");
 		}
@@ -3403,6 +3432,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSEverythingElseNo_Continue()
 		{
 			var MyNewProduct = new StepsNewProduct();
+			var myNewProductClass = new NewProduct();
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I should see the Additional Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
@@ -3420,6 +3450,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
+			TestReport.StartStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}
 			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			TestReport.StartStep(
@@ -4486,6 +4522,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
 			TestReport.StartStep("Select the Authorize Formula and Attributes for publishing check box ");
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			Report.Info("Now waiting for spinner...");
+			Delay.Seconds(5);
 			GeneralUtilities.StudioWaitForSpinner();
 			TestReport.StartStep("Select the Apply to all subformats check box ");
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
@@ -4494,11 +4532,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Now going to wait for spinner");
 			if (!GeneralUtilities.StudioWaitForSpinner(30))
 			{
+				Report.Info("Spinner is showing, looking for alert");
 				if (SeleniumBrowser.Alert.WaitForAlert())
 				{
 					Report.Info("Spinner is still showing but alert is there.");
 				}
 			}
+			Report.Info("Spinner is no longer showing");
 
 			TestReport.StartStep("I confirm CKLT, NGHS and SBCS are not shown in the pop up message and click OK");
 			var table4 = new Table(new string[] {
@@ -4519,7 +4559,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
 			TestReport.StartStep("I close the current document pop up");
-			thisStepsStudio.GivenICloseCurrentDocument();
+			thisStepsStudio.GivenICloseCurrentDocument();			
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("My Toolbar");
 			TestReport.StartStep("I select the Apply Rules icon from the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
 			TestReport.StartStep("I select the Single rule radio button");

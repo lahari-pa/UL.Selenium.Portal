@@ -216,8 +216,7 @@ Scenario: [75129] Forward - Product in Submitted Status
 	Given I navigate to the home page
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75129)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75129 and its status is: Submitted
-	And I confirm that retailer saved as TestCase75129Retailer appears in the list of retailers for product TestCase75129
+	Then I Confirm the Product shows status: Submitted for retailer: saved as TestCase75129Retailer
 	And I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase75129
 	And I confirm UPC number saved as: "UPC75129" is displayed in the SHA Manager Product UPC list
 	And I confirm that retailer saved as TestCase75129Retailer appears for UPC saved as UPC75129

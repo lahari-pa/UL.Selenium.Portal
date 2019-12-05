@@ -5,6 +5,7 @@
 @Signup
 @wercsmart
 @NewProduct
+@ProductSetUp
 @ProductGrid
 @DataSummarySheet
 @UPC

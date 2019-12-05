@@ -22,6 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
+			Delay.Seconds(5);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("publish"),
 				"Failed to click publish tool bar option", "Clicked publish tool bar option");
 
@@ -62,6 +63,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 			GeneralUtilities.StudioWaitForSpinner(30);
+			Delay.Seconds(5);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickApplyRulesButton(),
 				"Failed to click apply rules button",
 				"Clicked apply rules button");
@@ -106,6 +108,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Selecting checkbox: " + checkbox);
 			var thisCurrentDocument = new CurrentDocument();
+			Delay.Seconds(10);
+			Report.Info("Attempting to click checkbox");
 			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load", "Current document loaded");
 			Report.IsTrue(thisCurrentDocument.SetCheckBox(checkbox, true), "Failed to set checkbox: " + checkbox, "Set checkbox: " + checkbox);
 			Report.Screenshot();
@@ -130,12 +134,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
+				Report.Info($"Alert Text was found as {alertText} on the first try");
 			}
 			catch (Exception)
 			{
 				try
 				{
 					alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
+					Report.Info($"Alert Text was found as {alertText} on the second try");
 				}
 				catch (Exception ex)
 				{
