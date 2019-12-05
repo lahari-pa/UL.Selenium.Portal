@@ -953,7 +953,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.Info("Found unexpected column title: " + ColumnTitle + ".");
 						}
 					}
-					Report.Failure("Found " + unexpectedCount + " unexpected columns.");
+					Report.Failure("Found " + unexpectedCount + " unexpected columns.", false);
 				}
 
 				foreach (TableRow thisRow in table.Rows)
@@ -984,9 +984,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (Math.Abs(expectedColumns.Count - ColumnTitles.Count)!=0)
 				{
 					Report.Failure("Found " + Math.Abs(expectedColumns.Count-ColumnTitles.Count) + " unexpected columns.");
-				}
-				
-				for (int i = 1; i > expectedColumns.Count; i++)
+				}				
+
+				for (int i = 1; i < expectedColumns.Count; i++)
 				{
 					Report.Info($"The expected column at postion: {i} is: {expectedColumns[i]} and the coloum found was {ColumnTitles[i]}");
 					Report.IsTrue(expectedColumns[i] == ColumnTitles[i], "The Column headings did not match", "The Column headings matched");				
@@ -1714,13 +1714,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
 			while (!dir.Any() && i < 30)
 			{
-				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				
+				dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}
 
-			Report.IsTrue(!dir.Any(), "A File with name: " + dir.FirstOrDefault() + " was found", "No File was found");				
-			
+			Report.IsTrue(!dir.Any(), "A File with name: " + dir.FirstOrDefault() + " was found", "No File was found");
+						
+			Report.Info("Downloads folder: " + downloadsFolder);			
+
+			foreach (string file_ in dir)
+			{
+				Report.Info($"Deleteing the file with name: {file_}");
+				File.Delete(file_);
+			}
+
 		}
 
 		[StepDefinition(@"I click the Products in Scope button and confirm that a file is produced called (.*) and save as (.*)")]
@@ -1742,6 +1751,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			foreach (string file_ in dir)
 			{
+				Report.Info($"Deleteing the file with name: {file_}");
 				File.Delete(file_);
 			}
 
@@ -1756,7 +1766,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
 			while (!dir.Any() && i < 30)
 			{
-				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				
+				dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}
@@ -1841,7 +1852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains CVS products with tiers 2.1, 2.2 and 4.1 granted")]
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains CVS products with tiers 2.1, 2.2, 3 and 4.1 granted")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsCVSProductsWithTiers(string fileSavedAs)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -1896,6 +1907,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 
+				bool Column3Found = false;
+				int column3Index = 0;
+				for (int y = 0; y < ColumnTitles.Count; y++)
+				{
+					if (ColumnTitles[y] == "3 Granted")
+					{
+						column3Index = y;
+						Column3Found = true;
+					}
+				}
+				if (!Column22Found)
+				{
+					return;
+				}
+
 				bool Column41Found = false;
 				int column41Index = 0;
 				for (int x = 0; x < ColumnTitles.Count; x++)
@@ -1939,6 +1965,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.IsTrue(cvsRow[column21Index] != "0", "The Tier 2.1 Granted Column For CVS did not contain products", "The Tier 2.1 Granted Column For CVS contained products");
 				Report.IsTrue(cvsRow[column22Index] != "0", "The Tier 2.2 Granted Column For CVS did not contain products", "The Tier 2.2 Granted Column For CVS contained products");
+				Report.IsTrue(cvsRow[column3Index] != "0", "The Tier 3 Granted Column For CVS did not contain products", "The Tier 3 Granted Column For CVS contained products");
 				Report.IsTrue(cvsRow[column41Index] != "0", "The Tier 4.2 Granted Column For CVS did not contain products", "The Tier 4.1 Granted Column For CVS contained products");
 
 
@@ -1967,9 +1994,114 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) includes the column: (.*) between: (.*) and (.*)")]
+		public void ThenIConfirmThatTheExcelFileSavedAsIncludesheFollowingColumnsAndAreInTheCorrectOrder(string savedAs, string focusColumn, string column1, string column2)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+			
+				int y = 0;
+				foreach(var item in ColumnTitles)
+				{
+					if(item==column1)
+					{
+						break;
+					}
+					y++;
+				}
+
+				Report.IsTrue(ColumnTitles[y + 1] == focusColumn && ColumnTitles[y + 2] == column2, "The Column was not found between the 2 specified columns", "The Column was found between the 2 specified columns");
+							
+			}
+		}
+
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) includes the following columns:")]
+		public void ThenIConfirmThatTheExcelFileSavedAsIncludesTheFollowingColumns(string savedAs, Table table)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));				
+
+				foreach (TableRow thisRow in table.Rows)
+				{
+					Report.IsTrue(ColumnTitles.Contains(thisRow["Column"]),
+						"Column name is not found: " + thisRow["Column"],
+						"Column name has been found as expected: " + thisRow["Column"], false, false);
+				}
+			}
+		}
 
 
-	}
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has: (.*) in the column: (.*)")]
+		public void ThenIConfirmThatTheExcelFileSavedAsContainsUPCNumberAndYInColumns(string fileSavedAs, string wpsidSavedAs, string containsValue, string searchColumn)
+		{
+			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				int wpsIDColumnIndex = 0;
+				for (int j = 0; j < ColumnTitles.Count; j++)
+				{
+					if (ColumnTitles[j] == "WPSID")
+					{
+						wpsIDColumnIndex = j;
+					}
+				}
+				string wpsidStr = ((ProductInformation)Context.GetFromContext(wpsidSavedAs)).Id;
+				List<string> wpsidItems = ExcelUtils.Excel_GetColumn(wpsIDColumnIndex);
+				int wantedWpsidPosition = 0;
+				bool foundWpsid = false;
+				foreach (var wpsidItem in wpsidItems)
+				{
+					if (wpsidItem != wpsidStr)
+					{
+						wantedWpsidPosition++;
+					}
+					else
+					{
+						Report.Success($"The WPSID was found at position: {wantedWpsidPosition}");
+						foundWpsid = true;
+						break;
+					}
+				}
+				if (!foundWpsid)
+				{
+					Report.Failure("Could not find the WPSID in the SpreadSheet");
+					return;
+				}			
+					
+					int columnUPCIndex = 0;
+					for (int i = 0; i < ColumnTitles.Count; i++)
+					{
+						if (ColumnTitles[i] == searchColumn)
+						{
+							columnUPCIndex = i;
+						}
+					}
+
+					List<string> upcRowItems = ExcelUtils.Excel_GetColumn(columnUPCIndex);
+					Report.Info($"Looking for {containsValue} for WPSID: {wpsidStr} in the Column: {searchColumn}");
+					string actualValue = upcRowItems[wantedWpsidPosition];
+					Report.Info($"actual value was: {actualValue}");
+					Report.IsTrue(actualValue == containsValue, "The actual value was not: " +containsValue, "The actual value was: "+containsValue);
+
+				}
+			}
+		}
+
+
+
+
+	
 }
 

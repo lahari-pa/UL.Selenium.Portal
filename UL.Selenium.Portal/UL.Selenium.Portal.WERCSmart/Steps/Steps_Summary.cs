@@ -7,6 +7,7 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using NTTQA.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -118,6 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Switch to the View tab for product saved as: (.*)")]
 		public void INavigateToTheViewTabForProductSavedAs(string savedAs)
 		{
+			Delay.Seconds(20);
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string tabtitle = productDetails.Name + " (" + productDetails.Id + ")";
 			new GlobalSteps().SwitchToTabWithTitle(tabtitle);

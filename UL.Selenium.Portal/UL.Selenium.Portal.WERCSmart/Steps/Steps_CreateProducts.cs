@@ -2,11 +2,13 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
+using System.Collections.Generic;
 using TestStack.White.UIItems.TabItems;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
+using Castle.Core.Internal;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -421,7 +423,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 		}
@@ -458,7 +460,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -497,11 +499,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
 			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
 
-			//var retailerTable = new Table("Retailer");
-			//retailerTable.AddRow("CVS");
-			//sharedSteps.ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(retailerTable);
-
-
+			
 
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
@@ -509,7 +507,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -543,7 +541,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
-			sharedSteps.GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel();
+			this.AdditionalProductInformation_YesToCACleaning();
+			this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
+			newProductSteps.ClickContinue();			
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			tableIngredients.AddRow("Formaldehyde", "100", "false", "false", "");
 
@@ -557,7 +557,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -578,8 +578,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var stepsProductChar = new Steps_ProductCharacteristics();
 			var selectRetailers = new StepsSelectRetailers();
 
-
-			//productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC108254Lightbulb");
+					
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Light Bulbs - Incandescent Bulbs");
 			newProductSteps.SaveProductInformation(savedAs);
@@ -590,7 +589,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -610,7 +609,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selectRetailers = new StepsSelectRetailers();
 
 
-			//productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC108254Lightbulb");
+			
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Charcoal Lighter Material");
 			newProductSteps.SaveProductInformation(savedAs);
@@ -641,7 +640,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -672,14 +670,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			//sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
-			//stepsSelectretailers.GivenIShouldSeeTheSelectRetailersPopUp();
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();			
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -712,13 +707,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			//sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();			
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -748,13 +741,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			//sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
+			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();			
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");			
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -799,7 +790,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
@@ -832,7 +822,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			sharedSteps.GivenICallSharedStepTransportationDetails_YesOnlyOption_SelectIMDGFullyRegulated_Continue_HappyPath();
 			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
-			sharedSteps.GivenICallSharedStepConfirmVOCSCAQMDStepTitleConfirmACPQuestionShown_SelectNo_HappyPath();
+			sharedSteps.GivenICallSharedVolatileOrganicCompoundsVOCForOTCAndCARB_No();			
 			sharedSteps.GivenICallSharedStepVOC_AEROQuestionOzoneEnterValue_ClickContinue_HappyPath("0.5");
 			newProduct.ClickContinue();
 			Report.Info("Then I select a retailer");
@@ -841,22 +831,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Aerosol Can", "40");
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
-
-
-
-			//Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
-			//table57570.AddRow("Sodium chloride", "100", "false", "false", "");
-
-			//sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			//sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			//sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
-			//Report.Info("Then I select a retailer");
-			//selectRetailers.SelectTheRetailer("CVS");
-			//newProductSteps.ClickContinue();
-			//sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
-			////go back to homepage (products grid)
-			//new StepsHomepage().ThenINavigateToTheHomePage();
-			//new GlobalSteps().ThenTheHomeScreenShouldLoad();
+		
 
 		}
 
@@ -965,7 +940,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+			new StepsUPC().GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40", "1");
+			//sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
 			//go back to homepage (products grid)
 			new StepsHomepage().ThenINavigateToTheHomePage();
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
@@ -1123,6 +1099,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//below not yet tested for this product type
 
 			sharedSteps.SharedCVSPharmacy_YesIWishToContinue();
+			new StepsNewProduct().SetTheSectionOptionTo("What is the CVS Store Brand associated to this product?", "CVS Health (CVS Pharmacy)");
+			new StepsNewProduct().SetTheSectionOptionTo("Who is the Product Development Manager (PDM) for this product?", "Lacross, Elizabeth A. Elizabeth.LaCross@CVSHealth.com");
+			new StepsNewProduct().SetTheSectionOptionTo("What is the CVS merchandising category for this product?", "Facial Care");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product specifically designed, marketed or labeled for infants, babies, or children?", "No");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels?", "Yes");
+			new StepsNewProduct().SetTheSectionOptionTo("Product contains microbeads", "No");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product intended to be rinsed off after use?","No");
+			new StepsNewProduct().SetTheSectionOptionTo("Refer to your Product Label. Select the options that appear on the label.", "None of the Above");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product intended to be ingested?", "No");
+			new StepsNewProduct().SetTheSectionOptionTo("Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)?", "No");
+			new StepsNewProduct().ClickContinue();
 
 			TestReport.StartStep("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)");
 			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
@@ -1207,8 +1194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-			TestReport.StartStep("In the Additional Product Information page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			
 		}
 
 		[StepDefinition(@"In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details")]
@@ -1269,7 +1255,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Yes, I wish to continue registration");
 			TestReport.StartStep("I click continue");
 			selNewProductSteps.ClickContinue();
+		}		
+
+		[StepDefinition(@"For Staples I create a product of RUCC Stationery and progress it to the UPC screen")]
+		public void ForStaplesICreateANewStationeryProductAndProgressItToTheUPCScreen()
+
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var selectRetailers = new StepsSelectRetailers();
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Chalk");
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			sharedSteps.ICallSharedAdditionalProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue();
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
+
+			Report.Info("Then I select a retailer");
+			selectRetailers.SelectTheRetailer("Staples");
+			newProductSteps.ClickContinue();
+	
+
 		}
+
+		
 
 
 

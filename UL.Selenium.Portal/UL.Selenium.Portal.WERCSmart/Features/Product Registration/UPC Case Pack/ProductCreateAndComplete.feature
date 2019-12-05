@@ -63,7 +63,7 @@ Scenario: [87913] Create Electronic (Answering machine, no battery included) - W
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87913)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87913 and its status is: Completed
 
-#Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87913
+#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 @ScenarioId:1504
 Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to  Completed
@@ -204,7 +204,7 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87916)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87916 and its status is: Completed
 
-#Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87913
+#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -278,7 +278,7 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87917)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87917 and its status is: Completed
 
-#Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87913
+#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -321,7 +321,7 @@ Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Com
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87922)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87922 and its status is: Completed
 
-#Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87913
+#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 @ScenarioId:6073
 Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
@@ -366,7 +366,6 @@ Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87923)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87923 and its status is: Completed
 
-#Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 @ScenarioId:6151
 Scenario: [118139] CA Cleaning - Process Product to Completed

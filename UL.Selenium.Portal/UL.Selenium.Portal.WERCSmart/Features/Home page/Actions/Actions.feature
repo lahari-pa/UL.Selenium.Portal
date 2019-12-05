@@ -42,7 +42,7 @@ Scenario: [73424] View UPCs - Product with UPCs
 	And I save the UPCs associated to the product as: TestCase73424UPCs
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73424)
-	And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase73424
+	And I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase73424
 	And I confirm all UPC numbers in the list saved as: TestCase73424UPCs are displayed in the SHA Manager Product UPC list
 	And I close the window that opened
 
@@ -161,14 +161,13 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 
 @ScenarioId:6114
 Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
-
 	Given I Submit a new product which has a Case UPC and a regular UPC
 	Given I navigate to the landing page
 	And I call Shared Step (Login to WERCSmart - Premium Account)
 	And I filter for the product saved as: TestCase87685
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: View UPCs
-	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'	
+	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
 	Given I generate a random UPC number and save as: UPC109503
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -189,18 +188,14 @@ Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then If purchase details are showing click confirm order
 	Given I navigate to the landing page
-	And I call Shared Step (Login to WERCSmart - Premium Account)	
+	And I call Shared Step (Login to WERCSmart - Premium Account)
 	And I filter for the product saved as: TestCase109503
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: View UPCs
 	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
 
-	
-
-
 @ScenarioId:1591
 Scenario: [112939] View - UPC name column exists in the Product UPCs table
-
 	Given I Submit a new product which has a Case UPC and a regular UPC
 	Given I navigate to the landing page
 	And I call Shared Step (Login to WERCSmart - Premium Account)
@@ -228,7 +223,7 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Then If purchase details are showing click confirm order
 	Given I navigate to the landing page
-	And I call Shared Step (Login to WERCSmart - Premium Account)	
+	And I call Shared Step (Login to WERCSmart - Premium Account)
 	And I filter for the product saved as: TestCase109503
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: View
@@ -247,19 +242,12 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 	Then I click on the Row Action: View
 	Then I Switch to the View tab for product saved as: TestCase114944
 	And I Check that the Summary page Ingredients table contains the coloumns labeled:
-	| Heading            |
-	| Ingredient Type    |
-	| Functional Purpose |
+		| Heading            |
+		| Ingredient Type    |
+		| Functional Purpose |
 	Then For the following ingredients I check that the Ingredients table on the summary page contains only the Ingredient Types and Functional Purposes listed:
-	| Ingredient      | Ingredient Type            | Functional Purpose                    |
-	| Formaldehyde    | Fragrance                  | FormaldehydeFunctionalPurposesList    |
-	| Water           | Intentionally Added        | WaterFunctionalPurposesList           |
-	| Sodium chloride | Non-functional Byproduct   | Sodium chlorideFunctionalPurposesList |
-	| Butane          | Non-functional Contaminant | ButaneFunctionalPurposesList          |
-
-	
-
-
-
-
-
+		| Ingredient      | Ingredient Type            | Functional Purpose                    |
+		| Formaldehyde    | Fragrance                  | FormaldehydeFunctionalPurposesList    |
+		| Water           | Intentionally Added        | WaterFunctionalPurposesList           |
+		| Sodium chloride | Non-functional Byproduct   | Sodium chlorideFunctionalPurposesList |
+		| Butane          | Non-functional Contaminant | ButaneFunctionalPurposesList          |

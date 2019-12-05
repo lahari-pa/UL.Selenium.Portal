@@ -363,7 +363,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 						"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
 						"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
 
-					
+
 
 					// Click Continue
 					//TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
@@ -405,7 +405,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Info("Entering date of (month/date): " + dt.Month + "/ " + dt.Day + " (NOT Nov 30)");
 				Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
 					"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
-					"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);				
+					"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
 
 
 				// Click Continue
@@ -422,7 +422,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ExpirationDate_CurrentYear_NotAugust31th(string state)
 		{
 			var table = new Table("State", "Month", "Day", "Increment year?");
-			table.AddRow(state, "8", "1", "no");
+			table.AddRow(state, "1", "8", "no");
 			this.EnterEpaRegistrationDateCurrentYear(table);
 		}
 

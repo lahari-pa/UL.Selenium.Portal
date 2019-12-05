@@ -59,6 +59,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"In the New Product page I (should|should not) be on tab: (Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)")]
+		public void GivenInTheNewProductPageICpmfirmActiveTab(string present, string tabName)
+		{
+			try
+			{
+				bool showing = present == "should";
+				NewProduct.Tab tab = NewProduct.MapTabs.FirstOrDefault(x => x.Value == tabName).Key;
+				Report.IsTrue(!(NewProduct.IsActiveTab(tab) ^ showing), $"Failed, {present} be on tab {tabName}.", $"Success, {present} be on tab {tabName}.");
+			}
+			catch (NullReferenceException)
+			{
+				Report.Failure("The parameter 'tab' did not match a valid tab title");
+				throw;
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I click the page heading: (.*)")]
 		public void ClickPageHeading(string section)
 		{
@@ -2605,11 +2626,105 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(thisNewProduct.ProductGTINBrickCode == description, "Failed to set the Product's GTIN Brick Code to be: " + description, "Successfully set the Product's GTIN Brick Code to be: " + description);
 		}
 
+		[StepDefinition(@"In the Recipient and Product Details tab, I (expand|collapse) the first UPC")]
+		public void IExpandFirstUPC(string expandOrCollapse)
+		{
+			bool isOpen = new UPC().IsFirstUPCTabOpen();
+			bool expand = expandOrCollapse == "expand";
+			if (!(isOpen ^ expand))
+			{
+				Report.Info("First UPC tab is already in desired state");
+				return;
+			}
+			else
+			{
+				Report.IsTrue(new UPC().ClickFirstUPCTab(), $"Failure, failed to {expandOrCollapse} first UPC", $"Success, succeeded to {expandOrCollapse} the first UPC");
+			}
+		}
 
+		[StepDefinition(@"I check that (Item Number|Part Number|DPCI|OMSID) for retailer (.*) UPC item 1 (should|should not) match the UPC Upload document saved in the Table called: (.*)")]
+		public void ICheckNumberForRetailerAgainstUPCUploadTable(string field, string retailer, string present, string tableSavedAs)
+		{
+			bool showing = present == "should";
+
+			if (Context.Contains(tableSavedAs))
+			{
+				string retailerAbbr = new RetailerAbbreviations().TryConvertToAbbreviation($"{retailer}");
+				string upcTableFieldName = $"{retailerAbbr}: {field}";
+
+				var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+				string firstUPC = new UPC().GetExpandedUPC();
+				string value = "";
+				string test = "";
+				foreach (TableRow row in tableContent.Rows)
+				{
+
+					test = (string)Context.GetFromContext($"{row["UPC"].ToString().Trim('%')}");
+					if (test == firstUPC)
+					{
+						value = row[upcTableFieldName];
+					}
+				}
+
+
+				string fieldValue = new UPC().GetValueOfRetailerFieldInActiveRow($"{retailerAbbr}", field);
+				Report.IsTrue(!((value == fieldValue) ^ showing), $"Failure, table {field}: {value} and website {field}: {fieldValue} {present} match and do not.", $"Success, table {field}: {value} and website {field}: {fieldValue} {present} match and do.");
+			}
+		}
+
+		[StepDefinition(@"I confirm that (Item Number|Part Number|DPCI|OMSID) label text for retailer (.*) UPC item 1 matches: (.*)")]
+		public void IConfirmLabelTextForRetailerMatches(string field, string retailer, string expectedText)
+		{
+			string retailerAbbr = new RetailerAbbreviations().TryConvertToAbbreviation($"{retailer}");
+			string fieldValue = new UPC().GetTextOfRetailerLabelInActiveRow($"{retailerAbbr}", field);
+			Report.IsTrue(expectedText == fieldValue, $"Failure, expected text for {field}: {expectedText} and actual website text for {field}: {fieldValue} do not match.", $"Success, expected text for {field} and actual website text for {field} match.");
+		}
+
+		[StepDefinition(@"I click the 'Add Part Number' button")]
+		public void ThenIClickTheAddPartNumber()
+		{
+			Report.IsTrue((new NewProduct()).ClickAddPartNumber(), "Failed to click the 'Add Part Number' button!", "Successfully clicked the 'Add Part Number' button");
+		}
+
+		[StepDefinition(@"In the Additional Product Information - Pesticide shown, US only, Yes to CA Cleaning Disclosure, select No for everything else - Happy Path")]
+		public void	GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
+		{
+			TestReport.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			var myNewProductClass = new NewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep(
+				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			TestReport.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			TestReport.StartStep("I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field to: Yes ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"Yes");
+			}
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
 
 		#endregion
-
-
 	}
 
 
