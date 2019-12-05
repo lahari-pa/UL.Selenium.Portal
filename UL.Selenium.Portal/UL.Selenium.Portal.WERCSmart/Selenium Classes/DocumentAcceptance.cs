@@ -225,18 +225,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return output.ToString();
 		}
 
-		public class MyProductsItem : DocumentAcceptance
-		{
-			public string WPSID { get; set; }
-			public string ProductName { get; set; }
-			public string PageNumber { get; set; }
-
-			public bool Click()
-			{
-				return this.containerElement.FindElement(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr[./td[contains(@data-bind, 'ProductID') and text()='" + this.WPSID + "']]"), 2).TryClick();
-			}
-		}
-
 		public bool ConfirmDocumentAcceptancePageIsShowing()
 		{
 			IWebElement DocumentAcceptancePageTitle = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='page-inner-header affix-top']//h2[text()='Document Acceptance']"), 2);
@@ -247,6 +235,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			else
 			{
 				return true;
+			}
+		}
+
+		public class MyProductsItem : DocumentAcceptance
+		{
+			public string WPSID { get; set; }
+			public string ProductName { get; set; }
+			public string PageNumber { get; set; }
+
+			public bool Click()
+			{
+				return this.containerElement.FindElement(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr[./td[contains(@data-bind, 'ProductID') and text()='" + this.WPSID + "']]"), 2).TryClick();
 			}
 		}
 

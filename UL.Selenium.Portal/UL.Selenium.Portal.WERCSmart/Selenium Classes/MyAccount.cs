@@ -1086,6 +1086,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 	}
+
 	class MyAccount_CompanyInfo : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "companyInfoContainer")]

@@ -12,7 +12,9 @@ using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -177,6 +179,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(matchingUpc.Retailers.Contains(row["Retailer"]), "Retailers column did not contain retailer: " + row["Retailer"] + "!", "Retailers column contained retailer: " + row["Retailer"]);
 			}
 		}
+		[StepDefinition(@"the View UPC page loads with no errors")]
+		public void TheViewUPCPageLoadsWithNoErrors()
+		{
+			var upcviewpg = new ViewUpcs();
+			Report.IsTrue(GeneralUtilities.WaitForSpinnerToDisappear(upcviewpg.LoadingSpinner()),
+				"The View UPC page did not complete loading",
+				"The View UPC page completed loading");
+
+		}
+
+		[StepDefinition(@"I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'")]
+		public void INavigateToTheViewUPCTabAndCheckForUPCNameColoumn()
+		{
+			new GlobalSteps().SwitchToTabWithTitle("View UPCs");
+			this.TheViewUPCPageLoadsWithNoErrors();
+			Report.IsTrue(new ViewUpcs().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
+			new GlobalSteps().ThenCloseTheWindowThatOpened();
+		}
 
 		[StepDefinition(@"I check for the appropriate alert: (.*)")]
 		public void GivenICheckForTheAppropriateAlert(string alertText)
@@ -218,16 +238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ViewUpcs().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
 			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
-
-		[StepDefinition(@"the View UPC page loads with no errors")]
-		public void TheViewUPCPageLoadsWithNoErrors()
-		{
-			var upcviewpg = new ViewUpcs();
-			Report.IsTrue(GeneralUtilities.WaitForSpinnerToDisappear(upcviewpg.LoadingSpinner()),
-				"The View UPC page did not complete loading",
-				"The View UPC page completed loading");
-
-		}
+	
 	}
 
 		

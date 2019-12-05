@@ -166,8 +166,8 @@ Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
 	And I confirm that I see the following text in the modal window popup: If you cancel, any changes will be lost. Continue?
 	And in the modal dialog I click Yes
 	And I confirm that I do not see any stewardship information
-	
-@ScenarioId:6057
+
+	@ScenarioId:6057
 Scenario: [85513] My Account - Edit Stewardship Numbers - Save button
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then the WERCSmart homepage should load
@@ -241,7 +241,7 @@ Given I Login into WERCSmart Portal - Admin Role - Password Reset
 Then the WERCSmart homepage should load
 Given I call Shared Step 62676 (Go To My Account)
 Given I go to Reset Password in User Grid for the current user
-Then I call a Shared Step to create a new password: Welcome16!
+Then I call a Shared Step to create a new password: Welcome18!
 Then I click the User Icon
 And I click on Sign Out
 Given I Login into WERCSmart Portal - Admin Role - Password Reset

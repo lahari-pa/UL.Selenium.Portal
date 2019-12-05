@@ -143,7 +143,6 @@ Then the selected retailers on the Retailer page should match the retailer list 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78937
 
-
 @ScenarioId:6055
 Scenario: [85276] Select Retailers - Errors highlighted
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

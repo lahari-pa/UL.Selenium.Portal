@@ -1001,24 +1001,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid = this.FindElements(By.XPath("//small[text()='" + ProductID + "']/../../following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td//span[@data-bind='text: Identifier']"), 2);
 
 
-				foreach (string RetailerName in ListOfRemainingRetailerNamesFromTheUPCPage)
+			foreach (string RetailerName in ListOfRemainingRetailerNamesFromTheUPCPage)
+			{
+				bool foundMatch = false;
+
+				foreach (IWebElement DisplayedRetailerName in ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid)
 				{
-					bool foundMatch = false;
-
-					foreach (IWebElement DisplayedRetailerName in ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid)
+					if (RetailerName == DisplayedRetailerName.GetValue())
 					{
-						if (RetailerName == DisplayedRetailerName.GetValue())
-						{
-							foundMatch = true;
-						}
+						foundMatch = true;
 					}
-
-					if (!foundMatch)
-					{
-						ListOfRetailersThatWereSupposedToDisplayButDidNot.Add(RetailerName);
-					}
-
 				}
+
+				if (!foundMatch)
+				{
+					ListOfRetailersThatWereSupposedToDisplayButDidNot.Add(RetailerName);
+				}
+
+			}
 
 			if (ListOfRetailersThatWereSupposedToDisplayButDidNot.Count() > 0)
 			{

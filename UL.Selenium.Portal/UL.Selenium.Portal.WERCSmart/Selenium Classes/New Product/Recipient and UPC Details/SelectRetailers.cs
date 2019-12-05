@@ -164,7 +164,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return checkboxes.All(x => x.Checked()) ? new List<string>() :
 				checkboxes.Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span"), 2)?.Text).ToList();
 		}
-		
+
+
 		public void CheckIfRetailersInTableDisplayErrorMessage(Table table)
 		{
 			IList<IWebElement> AllRetailerErrorMessages = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//span[@data-bind='html: $data']/../../../preceding-sibling::td[1]"), 2);

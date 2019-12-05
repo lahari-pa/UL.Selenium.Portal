@@ -540,6 +540,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+
+
+
 		public bool UploadUpcButton()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'upc-dropzone')]//button"), 2);
@@ -590,7 +593,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement input = this.containerElement.FindElement(By.XPath(".//label[contains(text(), 'DPCI Number')]/following-sibling::input"), 2);
 			return input.TryEnterText(value);
 		}
-
 
 		public bool CheckForAlertWithThisTextInUPCPage(string alertText)
 		{
@@ -760,10 +762,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckIfDropDownsWithDefaultOptionDisplayTheError(Table table)
 		{
-			if ("" == "")
-			{
-
-			}
 			foreach (TableRow row in table.Rows)
 			{
 				IWebElement TextField = this.FindElement(By.XPath(".//option[text()='" + row["Default Option"] + "']/../following-sibling::p//span[text()='This is a required field.']"), 2);
@@ -775,7 +773,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return true;
 		}
-		///SHABAHABA
+
+		public string GetExpandedUPC()
+		{
+			IWebElement upcField = this.containerElement.FindElement(By.XPath($".//label[contains(text(),'UPC Number')]/following-sibling::input"));
+			return upcField.GetValue();
+		}
+
 		public string GetValueOfRetailerFieldInActiveRow(string retailerID, string field)
 		{
 			IWebElement retailerField = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]/following-sibling::input"));
@@ -794,12 +798,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return labelText.Text;
 			}
-		}
-
-		public string GetExpandedUPC()
-		{
-			IWebElement upcField = this.containerElement.FindElement(By.XPath($".//label[contains(text(),'UPC Number')]/following-sibling::input"));
-			return upcField.GetValue();
 		}
 
 	}

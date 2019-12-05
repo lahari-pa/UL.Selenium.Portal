@@ -13,7 +13,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_Retailer
 	{
-
 		[StepDefinition(@"the selected retailers on the Retailer page should match the retailer list saved as (.*)")]
 		public void SelectedRetailersOnRetailerPageShouldMatchSavedAs(string savedAs)
 		{
@@ -246,5 +245,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			SelectRetailers SelectRetailersObject = new SelectRetailers();
 			SelectRetailersObject.CheckIfRetailersInTableDisplayErrorMessage(table);
 		}
+
 	}
 }

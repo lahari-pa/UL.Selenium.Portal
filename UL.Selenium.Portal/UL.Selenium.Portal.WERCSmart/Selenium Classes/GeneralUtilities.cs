@@ -316,7 +316,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	public class RetailerAbbreviations
 	{
 		private Dictionary<string, string> _abbr;
-
 		public Dictionary<string, string> Map { get { return this._abbr; } }
 		public RetailerAbbreviations()
 		{
@@ -448,6 +447,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
+
 		/// <summary>
 		/// If the input string exists as a key (retailer full name) then return the corresponding key (retailer abbreviation)
 		/// Otherwise return the original string

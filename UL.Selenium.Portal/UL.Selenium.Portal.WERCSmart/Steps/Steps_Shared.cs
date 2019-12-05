@@ -9008,10 +9008,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
         }
 
-        [StepDefinition(
-        @"I filter subformat (.*) and open checklist (.*)")]
-        public void IFilertSubformatAndOpenChecklist(string subformat, string checkList)
-        {
+		[StepDefinition(
+		@"I filter subformat (.*) and open checklist (.*)")]
+		public void IFilertSubformatAndOpenChecklist(string subformat, string checkList)
+		{
 
             if (Context.Contains("ElectronicProduct"))
             {

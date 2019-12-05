@@ -1540,7 +1540,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(MyAccountObject.CheckForEditButtonCheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection(), "Edit button does exist in the Stewardship Numbers section", "Edit button exists in the Stewardship Numbers section");
 		}
 
-
 		[StepDefinition(@"I add following stewardship information")]
 		public void AddStewardshipInformation(Table table)
 		{

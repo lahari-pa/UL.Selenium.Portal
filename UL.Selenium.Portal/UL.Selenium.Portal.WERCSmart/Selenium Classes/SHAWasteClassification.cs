@@ -37,14 +37,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				this.CheckListEPACode = USEPAWasteNumber.Text;
 			}
-			
+
 		}
 
 		public Dictionary<string, List<string>> GetStateData(string state)
 		{
 			this.StateCode = new Dictionary<string, List<string>>();
-	
-			IList <IWebElement> StateElements = this.FindElements(By.XPath("//table[@class='CanvasSS     XTABLE        ']//span[contains(text(),\"" + state + " Waste Code\")]/../../..//following-sibling::td[@align='Center']/font/span"));
+
+			IList<IWebElement> StateElements = this.FindElements(By.XPath("//table[@class='CanvasSS     XTABLE        ']//span[contains(text(),\"" + state + " Waste Code\")]/../../..//following-sibling::td[@align='Center']/font/span"));
 
 			List<string> listOfStateElements = new List<string>();
 
