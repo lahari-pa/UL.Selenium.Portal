@@ -20,6 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "RetailPartners")]
 	class StepsRetailPartners
 	{
+
 		[StepDefinition(@"If I see the retail partners page I set all data consent tiers to true for all retailers in the top section")]
 		public void GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection()
 		{

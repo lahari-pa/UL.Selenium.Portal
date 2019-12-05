@@ -2382,6 +2382,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			edited.Add(publicName.SelectedOption() == ingredient.PublicName);
 			return edited.All(e => e);
 		}
+
 		public class SearchResult
 		{
 			public string Name { get; set; }

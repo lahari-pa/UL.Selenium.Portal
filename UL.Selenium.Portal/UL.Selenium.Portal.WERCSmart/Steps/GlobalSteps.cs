@@ -185,11 +185,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void LoginToAccount(string accountSavedAs, bool attemptOnce = false)
 		{
 			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
+			
 			if (new TopMenuBar().LoggedIn())
 			{
 				Report.Info("Logged in, logging out");
 				Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out");
 			}
+			
 			if (user == null)
 			{
 				string Branch = GlobalParameters.Branch;
@@ -214,6 +216,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
 			}
+			
 		}
 
 		/// <summary>
@@ -285,13 +288,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 				var modalDialog = new ModalDialog();
-				if (modalDialog.Wait_for_load(1))
+				if (modalDialog.WaitForContainerToBeVisible(4))
 				{
 					modalDialog.Click_Closex();
 					Delay.Seconds(Delay.SpeedFactor * 1);
 
 					selHomepage = new Homepage();
-					if (selHomepage.WaitForContainerToBeVisible(10))
+					if (selHomepage.WaitForContainerToBeVisible(15))
 					{
 						Report.Success("Successfully logged in!");
 						GeneralUtilities.Wait_for_load_finish();
