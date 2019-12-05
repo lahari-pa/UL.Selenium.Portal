@@ -760,6 +760,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckIfDropDownsWithDefaultOptionDisplayTheError(Table table)
 		{
+			if ("" == "")
+			{
+
+			}
 			foreach (TableRow row in table.Rows)
 			{
 				IWebElement TextField = this.FindElement(By.XPath(".//option[text()='" + row["Default Option"] + "']/../following-sibling::p//span[text()='This is a required field.']"), 2);
