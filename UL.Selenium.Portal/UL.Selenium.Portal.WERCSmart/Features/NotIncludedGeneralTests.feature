@@ -762,13 +762,8 @@ Scenario: [NOTINCLUDEDGENERALTEST] Ticket 107365
 Scenario: [CVSTESTINGDEBUG] CERIAL
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then In the Products Grid I delete All products
-	Then For CVS I create a product of type: Grocery (RUCC0389), save it as: CVSGroceryProduct1 and leave it in New Status
-	Then I navigate to the Data Consent Tiers Page for CVS
-	And I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section
-	When I click the Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSGroceryExcelFile
-	Then I confirm that the excel file saved as: CVSGroceryExcelFile contains the WPSID for the Product saved as: CVSGroceryProduct1
-	Then I delete the Supplier Report file saved as CVSGroceryExcelFile
-	Then I navigate to the Homepage and then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSCleaningExcelFile and check that is shows the expected product saved as: CVSCleaningProduct1
 
 Scenario: [CVSTESTINGBATT] Battery
 
@@ -947,3 +942,148 @@ Scenario: [UPCCOLUMNS] View - UPC name column exists in the Product UPCs table
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: View
 	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+
+Scenario: [CVSQA] CVS DATA TIERS IN QA DEBUG
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products	
+	Then For CVS I create a product of type: Artist Supply (RUCC0384), save it as: CVSArtistProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSArtistExcelFile and check that is shows the expected product saved as: CVSArtistProduct1
+
+
+Scenario: [IngredientsTableCheck] Non Cleaning Product Ingredients Check
+
+	Given I generate a random UPC number and save as: UPC56214
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase56214
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName   |
+	| Propane       | 25      | false               | false       |              |
+	| Water         | 25      | false               | false       | Water        |
+	| Formaldehyde  | 25      | true                | false       | Formaldehyde |
+	| Sodium        | 25      | false               | true        |              |
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+
+	# then go back to the table page and check contains same as above data.  (navigate to the .. page etc)
+
+
+
+
+	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)	
+	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test
+	And I should see the Data Acceptance Page
+	Given I click the Summary button in the Data Acceptance window
+	Then I switch to the Data Summary page
+	And I close the window that opened
+	And I navigate to the home page
+
+
+
+
+
+Scenario: [IngredientsTableCheck] Non Cleaning Ingredients Table navigate back
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC109230
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase109230
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName        |
+		| Water         | 100     | true                | false       | Aqua (Water, Eau) |
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Chlorine      | 100     | false               | true        |            |
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Formaldehyde  | 100     | false               | false       |            |
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName             |
+		| Sodium        | 100     | true                | false       | Undisclosed Ingredient |
+	And I click continue
+	Then I should see the Regulatory Information 1 Page for the New Product
+	Given In the New Product page I click tab: Product Characteristics
+	And I click the page heading: Ingredients
+	And I confirm that the ingredients table looks as follows:
+		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+		| Chlorine                | 100     | No                  | Yes           | Choose...              |
+		| Formaldehyde            | 100     | No                  | No            | Choose...              |
+		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	And I click continue
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109230, container type: Paper bag and size: 2 do not click continue
+	And I click continue
+	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	And in the Additional Documents to Provide page I click Continue
+	And in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I click the Summary button in the Data Acceptance window
+	Then I switch to the Data Summary page
+	And In the Data Summary page, I confirm that the Ingredients table matches the following:
+		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+		| Chlorine                | 100     | No                  | Yes           | Trade Secret           |
+		| Formaldehyde            | 100     | No                  | No            |                        |
+		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	And I close the window that opened
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
+	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109230)
+	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109230)
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109230)
+	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109230
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109230)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Accepted or Completed
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109230) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Completed
+	And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase109230
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its font is red indicating a recertification
+	Given I navigate to the landing page
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I filter for the product saved as: TestCase109230
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: View
+	Then I switch to the Data Summary page
+	And In the Data Summary page, I confirm that the Ingredients table matches the following:
+		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+		| Chlorine                | 100     | No                  | Yes           | Trade Secret           |
+		| Formaldehyde            | 100     | No                  | No            |                        |
+		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	And I close the window that opened
+	And I filter for the product saved as: TestCase109230
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: Update Required
+	Given In the New Product page I click tab: Product Characteristics
+	And I click the page heading: Ingredients
+	And I confirm that the ingredients table looks as follows:
+		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
+		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
+		| Chlorine                | 100     | No                  | Yes           | Choose...              |
+		| Formaldehyde            | 100     | No                  | No            | Choose...              |
+		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
+	And I navigate to the home page
+

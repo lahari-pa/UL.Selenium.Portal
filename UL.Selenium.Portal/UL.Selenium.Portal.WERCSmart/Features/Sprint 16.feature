@@ -316,7 +316,8 @@ Scenario: [26815] Advanced Report Options
 
 @ScenarioId:5979
 Scenario: [96172] Data Quality Review for Walmart
-	Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
+	#Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct2
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)	
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
@@ -329,9 +330,10 @@ Scenario: [96172] Data Quality Review for Walmart
 		| SHA Status                                   |
 		| Supplier Name                                |
 		| Supplier Type (eg. Manufacturer/Distributor) |
-		| Active or Inactive                           |
+		| Subscription                                 |
 		| Last Published Date                          |
 		| Last Activity Date                           |
+		| RECERT Status                                |
 		| CNTXT and ECOMM                              |
 		| RU Code                                      |
 		| RU Phrase                                    |
@@ -353,6 +355,14 @@ Scenario: [96172] Data Quality Review for Walmart
 		| KIT                                          |
 		| PPHARMA                                      |
 		| LBLTYP                                       |
+		| EPWM                                         |
+		| ARSOL                                        |
+		| UNIFFC                                       |
+		| NFPAH                                        |
+		| NFPAF                                        |
+		| NFPAI                                        |
+		| NFPAP                                        |
+		| NFPAG                                        |
 		| DCQAPF                                       |
 		| DCQAR                                        |
 		| DCQAOR                                       |
@@ -386,6 +396,15 @@ Scenario: [96172] Data Quality Review for Walmart
 		| IATA UN                                      |
 		| IATA HazClass                                |
 		| IATA Packing Group                           |
+		| Green Good Housekeeping                      |
+		| Green Seal                                   |
+		| EPA Safer Choice                             |
+		| Cradle To Cradle                             |
+		| UL EcoLogo                                   |
+		| EWG Verified                                 |
+		| Green Tick                                   |
+		| Made Safe                                    |
+		| NSF Sustainability Certified                 |
 	Then I delete the Advanced Report file saved as 96172
 	Then I Click close in the Advanced Reporting Popup
 
@@ -467,10 +486,10 @@ Scenario: [114728] UPCs Added Yesterday
 	And I wait for the Advanced Reporting Preparing Report popup to disappear	
 	Given I confirm that an excel file is produced called UPCs Added Yesterday.xls and save as 114728	
 	Then I confirm that the excel file saved as: 114728 contains the following columns: and they are in the correct order.
-		| Column   |
+		| Column              |
 		| WPSID               |
 		| UPC                 |
-		| UPC Name |
+		| UPC Name            |
 		| Packaging Type      |
 		| Packaging Size      |
 		| Product Name        |
@@ -556,8 +575,33 @@ Scenario: [114731] WalMart DSV Products Report
 	Then In the Advanced Reporting popup I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WalMart DSV Products Report.xls and save as 114731
-	#Update to Use Column Headings step below once get report
-	Then I confirm that the excel file saved as: 114731 includes the column: UPC Name between: Product Name and Supplier		
+	Then I confirm that the excel file saved as: 114731 contains the following columns:	
+		| Column                       |
+		| WPSID                        |
+		| UPC                          |
+		| Product Name                 |
+		| UPC Name                     |
+		| Supplier                     |
+		| Contact Name                 |
+		| Contact E-Mail               |
+		| Contact Phone                |
+		| City                         |
+		| State                        |
+		| Country                      |
+		| Formulated                   |
+		| Retailer Status              |
+		| Last Activity Date           |
+		| Last Published Date          |
+		| Last Submitted Date          |
+		| Green Good Housekeeping      |
+		| Green Seal                   |
+		| EPA Safer Choice             |
+		| Cradle To Cradle             |
+		| UL EcoLogo                   |
+		| EWG Verified                 |
+		| Green Tick                   |
+		| Made Safe                    |
+		| NSF Sustainability Certified |	
 	Then I delete the Advanced Report file saved as 114731
 
 @ScenarioId:5983
@@ -568,7 +612,6 @@ Scenario: [114732] WM Slotting Code Report
 	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WM Slotting Code Report.xls and save as 114732	
-	#Then I confirm that the excel file saved as: 114732 includes the column: UPC Name between: F_UPC and Supplier
 	Then I confirm that the excel file saved as: 114732 contains the following columns: and they are in the correct order.
 		| Column                       |
 		| F_PRODUCT                    |
@@ -601,14 +644,13 @@ Scenario: [114732] WM Slotting Code Report
 
 @ScenarioId:5973
 Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
-	#Update so product goes to published For walmart slotting code report. 
 	Then I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA
+	#Then I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Completed status in SHA
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Data Quality Review for Walmart.xls and save as 1147331
-	#Update the column names below ( for checking Y only include the new headers)
 	Then I confirm that the excel file saved as: 1147331 includes the following columns:
 		| Column                       |
 		| Cradle To Cradle             |
@@ -662,6 +704,7 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 		| Made Safe                    |
 		| NSF Sustainability Certified |
 	Then I delete the Advanced Report file saved as 1147332
+	Then I move the product saved as 1147332 from Submitted to Completed Status
 	Then I select the: WalMart DSV Products Report report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: WalMart DSV Products Report is shown as: WalMart DSV Products Report
 	Then In the Advanced Reporting popup I click Submit
@@ -934,7 +977,7 @@ Scenario: [116340] Products Fed to Retailers - Filters
 	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM	
 	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
-	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340	
+	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340
 	Then For the excel file saved as: 116340 I check that the column with heading name: Water % does not contains: 0 in any rows.
 	Then I delete the Advanced Report file saved as 116340
 
@@ -1044,3 +1087,92 @@ Scenario:[114216] TR (Transparency Value) - Display as Percentage
 	And I select the first Public Name dropdown option for ingredient: Clothianidin
 	Then in the Ingredients page I click Continue
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Product114216
+
+	
+Scenario: [118221] UPC Details for Registration - Specific Retailer - DOT Packing Group Data
+
+	Given I log in with the account saved in TReVor as: ProductAccount
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	And I should see the Product Characteristics Page
+	Then I save the product information as: TestCase65947
+	And The following options should be displayed for section: Primary Physical State
+	| Option |
+	| Liquid |
+	| Solid  |
+	And I set the Primary Physical State option to: Liquid
+	And I set the Secondary Physical State option to: Liquid
+	And I set the Specific Gravity option to: 10
+	And I set the pH option to: 10.5
+	And I set the Boiling Point (in Celsius) option to: 120
+	And I set the Flash Point (in Celsius) option to: 23
+	And I set the Flash Point Testing Method Used option to: Closed cup method
+	And I set the Select the best Water Solubility description option to: Insoluble
+	And I click continue
+	And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I set the Select all modes of transport that you've classified the product for field to: IMDG
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: IMDG
+	And I set the Select all modes of transport that you've classified the product for field to: IATA
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: IATA
+	And I set the Select all modes of transport that you've classified the product for field to: TDG
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: TDG
+	And I click continue
+	And I should see the U. S. Department of Transportation (DOT) Classification Page
+	And I set the UN Number field to: UN2762	
+	And I set the Technical Name field to: Technical Name UN2762	
+	And I set the Packing Group (select) field to: II
+	And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	And I click continue
+	And I should see the International Air Transport (IATA) Classification Page
+	And I check the checkbox with description: Copy information from my U.S. Department of Transportation data		
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	And I click continue
+	And I should see the International Marine (IMDG) Classification Page
+	And I check the checkbox with description: Copy information from my U.S. Department of Transportation data	
+	And I select the first option in section: Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	And I click continue
+	And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
+	And I check the checkbox with description: Copy information from my U.S. Department of Transportation data	
+	And I click continue
+	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
+	Given I click continue
+	#And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	And I should see the Additional Documents to Provide Page
+	And I click continue
+	And I should see the Optional Reports and Documents Available for Purchase Page
+	And I click continue
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase65947 and its status is: Submitted
+	Then I select the: UPC Details for Registration - Specific Retailer report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: UPC Details for Registration - Specific Retailer is shown as: Internal Use Only.  UPCs are listed for a chosen Retailer and include any additional UPC data such as Case Pack, Net Explosive Mass, and other details.
+	Then In The advanced reporting screen I enter WPSID saved as: TestCase65947
+	Then In The advanced reporting screen I choose retailer: CVS
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called UPC Details for Registration - Specific Retailer.xls and save as 96733
+	Then I confirm that the excel file saved as: 96733 contains the WPSID saved as: TestCase65947 and has: II in the column: DOT Packing Group
+	Then I delete the Advanced Report file saved as 96733
+	Then I Click close in the Advanced Reporting Popup
+

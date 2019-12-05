@@ -33,7 +33,8 @@ Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include gen
 		| CASNumber | ComponentName | Percentage |
 		| 50-00-0   | Formaldehyde  | 30         |
 	Then in the Ingredients page I click Continue
-	And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
+	#And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
+	Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 	And I should see the Additional Documents to Provide Page
