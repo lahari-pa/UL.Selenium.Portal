@@ -389,6 +389,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
 				return true;
 			}
+			if(value== "Future")
+			{
+				string endDatePreset = endDateField.GetValue();
+
+				Report.Info($"The Present End date found was: {endDatePreset}");
+				string endDatePresetYear = endDatePreset.Remove(0, 6);
+				Report.Info($"The Present End Year String was: {endDatePresetYear}");
+				int endDateYearInt = Convert.ToInt32(endDatePresetYear);
+				Report.Info($"The Present End Year was: {endDateYearInt}");
+				int endDateYearPlusOne = endDateYearInt + 1;
+				Report.Info($"The Present End Year plus one was: {endDateYearPlusOne}");
+				string monthAndDay = endDatePreset.Replace(endDatePresetYear, "");
+				Report.Info($"The Present Month and Day was: {monthAndDay}");
+				string newDate = monthAndDay + Convert.ToString(endDateYearPlusOne);
+				Report.Info($"The New Date to enter is: {newDate}");
+
+				endDateField.TryClick();
+				endDateField.EnterText(newDate);
+				
+				Delay.Seconds(1);
+				Report.Screenshot();
+
+				bool matchingFutureDate = false;
+
+				if (endDateField.GetValue() == newDate)
+				{
+					matchingFutureDate = true;
+				}
+
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return matchingFutureDate;
+
+			}
 
 			endDateField.TryClick();
 			endDateField.EnterText(value);

@@ -774,8 +774,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
 			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
 			IWebElement parentElement = matchingSection.FindElement(By.XPath(".//parent::li"), 2);
-			
 
+			Report.Info($"The class found was: {parentElement.GetAttribute("class")}");
 			if (parentElement.GetAttribute("class").Contains("selected"))
 			{
 				Report.Info("The Section was Active");
@@ -831,6 +831,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			matchingCategory.Click();
 			matchingCategory.Click();
+			
 			Delay.Seconds(5);
 			Report.Screenshot();
 			IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
@@ -871,6 +872,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return thisValueEditor.GetSelectedValue();
 
 		}
+
+		public bool ActiveSectionMatches(string value)
+		{
+			Delay.Seconds(2);
+
+			try
+			{
+				string sectionActiveName = this.containerElement.FindElement(By.XPath(".//table[@usg='SECTHEADER']//td//span"), 2).Text;
+				Report.Info($"The Active Section name found was: {sectionActiveName}");
+				return sectionActiveName == value;
+
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 	}
 
 	class GraphicEditor : BaseObject
@@ -1212,7 +1231,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-		}
+		}		
+
+
 
 	}
 
@@ -3529,6 +3550,127 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return oldValue.GetValue();
 			}
 		}
+
+		public IWebElement EditPopupBox => this.containerElement.FindElement(By.XPath(".//div[@id='koPopup']"), 2);
+
+		public bool IClickNextUntilISeeSection(string sectionName)
+		{
+			try
+			{
+				IWebElement displayedElement = this.containerElement.FindElement(By.XPath(".//input[@name='edit-next-ko']"), 2);
+				//if(this.containerElement.GetAttribute("style").Contains("none"))
+				//{
+					
+				//}
+				while (!this.containerElement.GetAttribute("style").Contains("none"))
+				{
+					string currentSectionName = this.containerElement.FindElement(By.XPath(".//div[@class='pull-left']"), 2).Text;
+					if (currentSectionName == sectionName)
+					{
+						Report.Info($"The section name found matched the expected section name:{sectionName}");
+						return true;
+					}
+					else
+					{
+						try
+						{
+							Report.Info("Clicking the Next button");
+							this.ClickButton("Next");
+							new ValueEditor().Wait_for_load(30);
+						}
+						catch (Exception)
+						{
+							return false;
+						}
+					}
+
+				}
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool SelectCurrentDate()
+		{
+
+			Delay.Seconds(2);
+			try
+			{
+				Report.Info("Switching to iFrame");
+				Delay.Seconds(2);
+				SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmEditDate");
+				IWebElement selectCurrentDateButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@value='Select Current Date']"), 2);
+				bool success= selectCurrentDateButton.TryClick();
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return success;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool SelectTopOption()
+		{
+			Delay.Seconds(2);
+			try
+			{
+				IWebElement topOption = this.containerElement.FindElement(By.XPath(".//tbody[@id='sortable-list2']//tr"), 2);
+				return topOption.TryDoubleClick();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool EnterValueIntoField(string value)
+		{
+			Delay.Seconds(2);
+			try
+			{
+				IWebElement newValueBox = this.containerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
+				newValueBox.EnterText(value);
+				//IWebElement oldvalueBox = this.EditPopupBox.FindElement(By.XPath(".//textarea[@id='oldValue']"))
+				Report.Info($"The Text entered was: {newValueBox.Text}");
+				if (newValueBox.Text == value)
+				{
+					return true;
+				}
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool ClickSaveButton()
+		{
+			IList<IWebElement> varButtons = this.containerElement.FindElements(By.XPath(".//input[@type='button' and @title='Save']"), 2);
+			
+			foreach(var item in varButtons)
+			{
+				if (item.TryClick())
+				{
+					Report.Info("Succesfully clicked SAVE");
+					return true;
+				}
+				Report.Info("Did not Click Save, Trying again");
+
+			}
+			return false;
+
+
+
+			
+		}
+
+
 	}
 
 	class AssignReassignProducts : BaseObject
