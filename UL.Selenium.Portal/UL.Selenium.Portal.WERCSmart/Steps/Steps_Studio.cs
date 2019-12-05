@@ -1312,32 +1312,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
 			var valueEdit = new ValueEditor();
 			TestReport.StartStep("I Select the Catagory Titled: Inquiry Date");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");
-			//Report.IsTrue(studioPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
-			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			//Report.IsTrue(pdEditPage.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");			
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");			
 			TestReport.StartStep("I Click on 'Select Current Date'");
 			valueEdit.SelectCurrentDate();
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			//valueEdit.ClickButton("Save");
-
 			Delay.Seconds(1);
 			TestReport.StartStep("I Double Click on the section with name: Response Date");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Response Date");	
-			//TestReport.StartStep("Clicking Next Until I see the section: WMQC3 Response Date");
-			//valueEdit.IClickNextUntilISeeSection("WMQC3 Response Date");
-			//I Press Next Until section heading is X  (create method)
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Response Date");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
 			TestReport.StartStep("I Click on 'Select Current Date'");
 			valueEdit.SelectCurrentDate();
-			Delay.Seconds(1);
-			//valueEdit.ClickButton("Save");
+			Delay.Seconds(1);			
 			valueEdit.ClickSaveButton();
 
-			Delay.Seconds(1);
-			//TestReport.StartStep("Clicking Next Until I see the section: WMQC3 Response Date");
-			//valueEdit.IClickNextUntilISeeSection("WMQC4 Type of Inquiry/Concern");
+			Delay.Seconds(1);			
 			TestReport.StartStep("I Double Click on the section with name: Type of Inquiry/Concern");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Type of Inquiry/Concern");
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
@@ -1348,9 +1339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Delay.Seconds(1);
 			TestReport.StartStep("I Double Click on the section with name: Brief Description of Issue");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Brief Description of Issue");
-			//TestReport.StartStep("Clicking Next Until I see the section: WMQC5 Brief Description of Issue");
-			//valueEdit.IClickNextUntilISeeSection("WMQC5 Brief Description of Issue");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Brief Description of Issue");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
@@ -1439,9 +1428,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InPDIEnsureSECT2318IsActive()
 		{
 			string click = "left";
-			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
-			//method that checks header of section on screen text == SECTI2318 ...
-			// if matches return, if not click.
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();			
 			if(new StudioPowerDesignerPlusDesignMode().ActiveSectionMatches("[SECT2318]"))
 			{
 				Report.Success("The Section was already active");

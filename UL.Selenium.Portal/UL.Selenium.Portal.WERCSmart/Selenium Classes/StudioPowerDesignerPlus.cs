@@ -3557,11 +3557,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement displayedElement = this.containerElement.FindElement(By.XPath(".//input[@name='edit-next-ko']"), 2);
-				//if(this.containerElement.GetAttribute("style").Contains("none"))
-				//{
-					
-				//}
+				IWebElement displayedElement = this.containerElement.FindElement(By.XPath(".//input[@name='edit-next-ko']"), 2);				
 				while (!this.containerElement.GetAttribute("style").Contains("none"))
 				{
 					string currentSectionName = this.containerElement.FindElement(By.XPath(".//div[@class='pull-left']"), 2).Text;
@@ -3636,8 +3632,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				IWebElement newValueBox = this.containerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
-				newValueBox.EnterText(value);
-				//IWebElement oldvalueBox = this.EditPopupBox.FindElement(By.XPath(".//textarea[@id='oldValue']"))
+				newValueBox.EnterText(value);				
 				Report.Info($"The Text entered was: {newValueBox.Text}");
 				if (newValueBox.Text == value)
 				{
