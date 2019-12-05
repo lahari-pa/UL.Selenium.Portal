@@ -575,7 +575,6 @@ Scenario: [114731] WalMart DSV Products Report
 	Then In the Advanced Reporting popup I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WalMart DSV Products Report.xls and save as 114731
-	#Then I confirm that the excel file saved as: 114731 includes the column: UPC Name between: Product Name and Supplier
 	Then I confirm that the excel file saved as: 114731 contains the following columns:	
 		| Column                       |
 		| WPSID                        |
@@ -613,7 +612,6 @@ Scenario: [114732] WM Slotting Code Report
 	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WM Slotting Code Report.xls and save as 114732	
-	#Then I confirm that the excel file saved as: 114732 includes the column: UPC Name between: F_UPC and Supplier
 	Then I confirm that the excel file saved as: 114732 contains the following columns: and they are in the correct order.
 		| Column                       |
 		| F_PRODUCT                    |
@@ -653,7 +651,6 @@ Scenario: [114733] Advanced Reports - UPC-Level Certifications: Walmart SOW 15
 	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Data Quality Review for Walmart.xls and save as 1147331
-	#Update the column names below ( for checking Y only include the new headers)
 	Then I confirm that the excel file saved as: 1147331 includes the following columns:
 		| Column                       |
 		| Cradle To Cradle             |

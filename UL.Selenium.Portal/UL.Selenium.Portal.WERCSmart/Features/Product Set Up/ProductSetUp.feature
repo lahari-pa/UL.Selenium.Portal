@@ -117,6 +117,7 @@ Scenario: [75410] Product from Completed status to Recertification
 		| saved as TestCase75410 | false  | Recertification of Product by WERCSmart Customer |
 	And I Close the Product Recertification History pop up
 
+@ScenarioId:6186
 Scenario: [84507] Recertification > Process recertification > Process multiple products
 	Given I create a product with name: 8450712 and take to completed using Test Case 84108 and save as: TestCase845072
 	Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845072

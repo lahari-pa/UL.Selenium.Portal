@@ -341,8 +341,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	Then I save a UPC number for any product in the grid to context as: ExistingUPC
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Then  I filter the products by: Accepted by Retailers
-	#And I save the ProductID of the first Product in the grid as: testProduct91157
+	Then  I filter the products by: Accepted by Retailers	
 	And I save the ProductID of the first Product in the grid no in recertification as: testProduct91157
 	Given I click Bulk Actions in the Products Grid
 	Given I click Forward Product Registration in the Bulk Actions window

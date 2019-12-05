@@ -1365,8 +1365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Then in the Ingredients page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			//And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
-			sharedSteps.SharedFormulation3rdParty_SelectAll();
-			//sharedSteps.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
+			sharedSteps.SharedFormulation3rdParty_SelectAll();			
 			//And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			//And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
@@ -3672,13 +3671,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
-
-			//TestReport.StartStep("I call Shared Step 75146");
-
-			//Table retailerTable = new Table("Retailer");
-			//retailerTable.AddRow("Walmart");
-
-			//sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
+			
 			TestReport.StartStep("In the upc screen I add the UPC: saved as UPC75142, container type: Metal Container and size: 40, then select all certifications");
 			stepsNewProduct.InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications("75142", "Metal Container", "40");
 
@@ -3699,12 +3692,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
 			TestReport.StartStep("If purchase details are showing click confirm order");
 			stepsNewProduct.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
-			//TestReport.StartStep("I call Shared Step 65080 (Login to Studio and Open SHA manager)");
-			//sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
-			//TestReport.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)");
-			//sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase75142");
-			//TestReport.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: Submitted");
-			//stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase75142", "Submitted");
+			
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase75142");
 			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs("TestCase75142",

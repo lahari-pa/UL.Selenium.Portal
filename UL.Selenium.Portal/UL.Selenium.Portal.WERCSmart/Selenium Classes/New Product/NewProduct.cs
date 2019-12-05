@@ -874,8 +874,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				if (container != null)
 				{
-					//rList = container.FindElement(By.XPath(".//th[@class='col-xs-5']")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
-					//rList = container.FindElement(By.XPath(".//th[not(@class='col-xs-1')]")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
+					
 					var tempList = new List<string>();
 					try
 					{

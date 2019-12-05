@@ -346,7 +346,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				string pubDisSummary = this.containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
 				string pubDisSummaryInt = pubDisSummary.Replace("%","");
 				double percentFoundAsDouble = Convert.ToDouble(pubDisSummaryInt);
-
 				double percentExpectedAsDouble = Convert.ToDouble(pubDisExpected) / Convert.ToDouble(totalExpected)*100;
 
 				Report.Info($"Percent Found was: {percentFoundAsDouble}");
@@ -357,15 +356,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return true;
 				}
 				return false;
-
-
-				//string[] summaryActual = pubDisSummary.Split(new[] { " / " }, StringSplitOptions.None);
-				//Report.Info("Public Disclosure Total was showing as: " + summaryActual[0] + " out of a total " + summaryActual[1] + " ingredients");
-				//if (summaryActual[0] == pubDisExpected && summaryActual[1] == totalExpected)
-				//{
-				//	return true;
-				//}
-				//return false;
+				
 			}
 			catch (Exception)
 			{
