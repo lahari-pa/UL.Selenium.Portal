@@ -28,9 +28,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click publish tool bar option", "Clicked publish tool bar option");
 
 			var thisCurrentDocument = new CurrentDocument();
+			Delay.Seconds(3);
 			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load",
 				"Current document loaded");
-
 			Delay.Seconds(3);
 		}
 
