@@ -168,7 +168,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
-
+		
 		[StepDefinition(@"I call Shared Step 87647 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) do not click continue")]
 		public void EnterUPCInfoDoNotClickContinue(string upc, string containerType, string size)
 		{
@@ -200,7 +200,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 		}
-
+		
 
 		[StepDefinition(@"I call Shared Step 87658 \(Enter Universal Product Code \(UPC\)\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*) do not click continue")]
 		public void UpcWithQuantityDoNotClickContinue(string upc, string containerType,
@@ -400,7 +400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-
+		
 		[StepDefinition(@"I call Shared Step 87647 \(UPC - Confirm Package type Link and field shown and required \) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
 		public void EnterUPCInfoConfirmPackagingTypeLinkAndError(string upc, string containerType, string size)
 		{
@@ -449,7 +449,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Successfully found the error message");
 			}
 		}
-
+		
 
 		[StepDefinition(@"I call Shared Step 85909 \(UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
 		public void EnterUPCInfoConfirmPackagingTypeLinkdoesNotExists(string upc, string containerType, string size)
@@ -660,6 +660,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICheckSizeOfEachProductFromFile(string file, string savedAs)
 		{
 			Report.IsTrue(new MultipleUPC().CheckSizeOfEachProductFromFile(file, savedAs), "The Size shown in the Add Multiple Popup did not match the file", "The Size shown in the Add Multiple Popup matched the file");
+
+		}
+
+		[StepDefinition(@"I check that the (UPC|Type|Size|Retailer) of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckValueOfEachProductFromFile(string value, string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachProductFromFile(value, file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
+
+		}
+
+		[StepDefinition(@"I check that the (Item Number|Part Number|DPCI|OMSID) of each (.*) product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckValueOfEachRetailerProductFromFile(string value, string retailer, string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachRetailerProductFromFile(value, retailer,file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
 
 		}
 
@@ -934,8 +948,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Check that the type coloumn becomes populated with option: (.*)")]
-		public void ICheckTypeColoumnContiansFirstOption(string packagingType)
+		[StepDefinition(@"I Check that the type column becomes populated with option: (.*)")]
+		public void ICheckTypeColumnContiansFirstOption(string packagingType)
 		{
 			var containsTypeOptionBox = new MultipleUPC().ContainsType;
 
