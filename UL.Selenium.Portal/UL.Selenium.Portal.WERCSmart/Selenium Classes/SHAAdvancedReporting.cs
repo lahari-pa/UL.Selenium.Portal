@@ -372,6 +372,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		/// <summary>
+		/// Takes a date in the format: MM-DD-YYYY or values of 'NA' for using the current date or 'Future' for a date that is exactly 1 year in the future. 
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
 		public bool EnterEndDate(string value)
 		{
 			Report.Info("Switching to iFrame");
