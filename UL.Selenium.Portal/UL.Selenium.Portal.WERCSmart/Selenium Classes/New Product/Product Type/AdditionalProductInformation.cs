@@ -203,5 +203,46 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 
 			}
 		}
+
+		public bool IsCaliforniaCleaning {
+			get
+			{
+				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("California's Cleaning Product"))
+					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
+
+				if (selectOption != null)
+				{
+					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
+					if (selectedOption.ToLower() == "yes")
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				else
+				{
+					throw new Exception("No California Cleaning Product value is selected");
+				}
+			}
+			set
+			{
+				string valueToSet = "Yes";
+				if (!value)
+				{
+					valueToSet = "No";
+				}
+
+				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("California's Cleaning Product"))
+					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
+				selectOption.Click();
+
+
+			}
+		}
 	}
 }

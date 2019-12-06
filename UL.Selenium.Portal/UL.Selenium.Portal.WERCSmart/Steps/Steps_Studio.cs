@@ -149,6 +149,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 
+			if(alertText == null)
+			{
+				alertText = "";
+			}
+
 			Report.Info("Alert is showing as: " + alertText);
 			string regExPattern = @"\s[ABCDEFGHIJKLMNOPQRSTUVWZYZ1234567890]{3,7}[\,\\r]?";
 			MatchCollection mc = Regex.Matches(alertText, regExPattern);
