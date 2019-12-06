@@ -193,7 +193,7 @@ Scenario: [88918] United Stationers Item Number Added in Sample Spread Sheet
 	Then In the Add Multiple dialog box I select all UPCs
 	Then I Confirm All UPCs are: Selected
 	Then In the Add Multiple dialog box I select the packaging type: <first>
-	Then I Check that the type coloumn becomes populated with option: <first>
+	Then I Check that the type column becomes populated with option: <first>
 	Given In the Add Multiple dialog box I click Next
 	Then In the Add Multiple dialog box I select all Retailers
 	Then I Check if all Retailers are: Selected
@@ -262,7 +262,7 @@ Scenario: [90001] Labels for Input Fields in UPC Screen
 	Then In the Add Multiple dialog box I select all UPCs
 	Then I Confirm All UPCs are: Selected
 	Then In the Add Multiple dialog box I select the packaging type: <first>
-	Then I Check that the type coloumn becomes populated with option: <first>
+	Then I Check that the type column becomes populated with option: <first>
 	Given In the Add Multiple dialog box I click Next
 	Then In the Add Multiple dialog box I select all Retailers
 	Then I Check if all Retailers are: Selected
