@@ -812,40 +812,58 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-
 		public bool DoubleClickCategoryToEdit(string category)
 		{
-			IList<IWebElement> listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
-			var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
-			IWebElement matchingCategory = listOfCategories.FirstOrDefault(x => x.GetValue() == category);
-			if (matchingCategory == null)
-			{
-				Report.Info("Category was not found");
-				return false;
-			}
-			var action = new Actions(SeleniumBrowser.WebBrowser);
-			action.MoveToElement(matchingCategory).Build().Perform();
-			matchingCategory.TryClick();
-			Delay.Seconds(1);
-			//nb, double click does not work so using 2 clicks
 
-			matchingCategory.Click();
-			matchingCategory.Click();
-			
-			Delay.Seconds(2);
-			Report.Screenshot();
-			IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
-			if (editScreen != null)
+		    int i = 0;
+			while (i < 5)
 			{
-				return true;
-			}
-			else
-			{
-				Report.Info("Popup was not found.");
-			}
+				try
+				{
+					IList<IWebElement> listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
+					var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
+					IWebElement matchingCategory = listOfCategories.FirstOrDefault(x => x.GetValue() == category);
+					if (matchingCategory == null)
+					{
+						Report.Info("Category was not found");
+						return false;
+					}
+					Report.Info("Matching Category was found");
+					var action = new Actions(SeleniumBrowser.WebBrowser);
+					action.MoveToElement(matchingCategory).Build().Perform();
+					matchingCategory.TryClick();
+					Delay.Seconds(1);
+					//nb, double click does not work so using 2 clicks
 
+					matchingCategory.Click();
+					matchingCategory.Click();
 
+					Delay.Seconds(2);
+					Report.Screenshot();
+					IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
+					if (editScreen != null)
+					{
+						return true;
+					}
+					else
+					{
+						Report.Info("Popup was not found.");
+					}
+
+					return false;
+
+				}
+				catch (Exception ex)
+				{
+					Report.Info("listOfCatergories threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the list of categories with title: {category} if the number of attempts has not exceeded 5");
+								
+				}
+			}
 			return false;
+	
 		}
 
 		public string GetCategoryValue(string category)
