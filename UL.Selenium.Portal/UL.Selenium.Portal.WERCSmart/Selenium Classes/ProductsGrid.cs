@@ -679,40 +679,55 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool NumToGridNavigationInput(string pageNumber)
 		{
-			try
+			int i = 0;
+			while (i<5)
 			{
-				IWebElement inputEl = this.GridNavigationInput();
-				if (inputEl == null)
+				try
 				{
-					Report.Info("The Num input was not displayed. Clicking the '...' navigation element");
-					this.GridNavigation("...");
-					inputEl = this.GridNavigationInput();					
+					IWebElement inputEl = this.GridNavigationInput();
 					if (inputEl == null)
 					{
-						return false;
+						Report.Info("The Num input was not displayed. Clicking the '...' navigation element");
+						this.GridNavigation("...");
+						inputEl = this.GridNavigationInput();
+						if (inputEl == null)
+						{
+							return false;
+						}
+						Report.Info("Entering page number: " + pageNumber);
+						//inputEl.EnterText(pageNumber);
+						//inputEl.Clear();
+						string text = inputEl.GetAttribute("value");
+						int textLength = text.Length;
+						int count = 0;
+						while (count < textLength)
+						{
+							inputEl.SendKeys(Keys.Delete);
+							count++;
+						}
+						inputEl.SendKeys(pageNumber);
+						return true;
 					}
-					Report.Info("Entering page number: " + pageNumber);
-					//inputEl.EnterText(pageNumber);
-					//inputEl.Clear();
-					string text = inputEl.GetAttribute("value");
-					int textLength = text.Length;
-					int count = 0;
-					while(count<textLength)
-					{
-						inputEl.SendKeys(Keys.Delete);
-						count++;
-					}
-					inputEl.SendKeys(pageNumber);
+					inputEl.EnterText(pageNumber);
 					return true;
 				}
-				inputEl.EnterText(pageNumber);
-				return true;
+				catch (StaleElementReferenceException ex)
+				{
+					Report.Info("inputEl threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the inputEl again if the number of attempts has not exceeded 5");
+
+				}
+				catch (Exception ex)
+				{
+					Report.Info("Exception: " + ex.Message);
+					return false;
+				}
+
 			}
-			catch (Exception ex)
-			{
-				Report.Info("Exception: " + ex.Message);
-				return false;
-			}
+			return false;
+			
 
 		}
 
