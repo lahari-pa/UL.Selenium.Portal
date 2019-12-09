@@ -1383,6 +1383,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional documents");
 			//Then in the Product aliases page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Product aliases");
+			//Then in the Use Restrict page I select Do Not Restrict
+			newProductSteps.DoNotRestrictUse_Restrict();
+			//In the Sustainability page I click Continue
+			newProductSteps.ClickContinue();
 			//And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			//And I call Shared Step 58610 (Confirm Restrict Use - Restrict)

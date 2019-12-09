@@ -2724,6 +2724,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
+		[StepDefinition(@"In the Restict Use page I select Do Not Restict")]
+		public void DoNotRestrictUse_Restrict()
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var restrictUse = new Table("Section");
+			restrictUse.AddRow("Do you want to restrict searchable access to your registered formula?");
+			MyStepsNewProduct.CheckDisplayedSections("see", restrictUse);
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Do you want to restrict searchable access to your registered formula?",
+				"Do Not Restrict – Formula is searchable in WERCSmart and does not require an access code"));
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Do you want to restrict searchable access to your registered formula?",
+				"– Formula is searchable in WERCSmart and does not require an access code");
+			TestReport.StartStep("in the Restrict Use page I click continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
+		}
 		#endregion
 	}
 
