@@ -20,16 +20,9 @@ Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Odor Remover/Eliminator - Aerosol
 	Then I save the product information as: TestCase57922
 	Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
-	#Given I call Shared Step 118091 (Additional Product Information - enter options)
-	#	| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | California Cleaning | Private Label or Brand | Good Not for resale |
-	#	| No                                                             | No                           | No                  | No                     | No                  |
-	Given I call Shared Step - (Additional Product Information - enter options)
-		| Section                                                        | Value |
-		| classified using OSHA (US) Globally Harmonized Standards (GHS) | No    |
-		| shipped directly by supplier                                   | No    |
-		| California's Cleaning                                          | No    |
-		| Private Label or Brand                                         | No    |
-		| Goods Not for Resale                                           | No    |
+	Given I call Shared Step 63804 (Additional Product Information - enter options)
+		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale | California's Cleaning Product Right to Know Act |
+		| No                                                             | No                           | No                     | No                  | No                                              |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -59,9 +52,9 @@ Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Penetrants
 	Then I save the product information as: TestCase57924
 	Given I call Shared Step 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
-	Given I call Shared Step 118091 (Additional Product Information - enter options)
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | California Cleaning | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                  | No                     | No                  |
+	Given I call Shared Step 63804 (Additional Product Information - enter options)
+		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale | California's Cleaning Product Right to Know Act |
+		| No                                                             | No                           | No                     | No                  | No                                              |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -93,9 +86,9 @@ Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
 	Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
 		| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
-	Given I call Shared Step 118091 (Additional Product Information - enter options)
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | California Cleaning | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                  | No                     | No                  |
+	Given I call Shared Step 63804 (Additional Product Information - enter options)
+		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale | California's Cleaning Product Right to Know Act |
+		| No                                                             | No                           | No                     | No                  | No                                              |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
@@ -125,9 +118,9 @@ Scenario: [57927] Floor Wax - Wood (RU000790) 4LS - 4S
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax - Wood
 	Then I save the product information as: TestCase57927
 	Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
-	Given I call Shared Step 118091 (Additional Product Information - enter options)
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | California Cleaning | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                  | No                     | No                  |
+	Given I call Shared Step 63804 (Additional Product Information - enter options)
+		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale | California's Cleaning Product Right to Know Act |
+		| No                                                             | No                           | No                     | No                  | No                                              |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
