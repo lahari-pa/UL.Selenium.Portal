@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using Castle.Core.Internal;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -812,40 +813,63 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-
 		public bool DoubleClickCategoryToEdit(string category)
 		{
-			IList<IWebElement> listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
-			var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
-			IWebElement matchingCategory = listOfCategories.FirstOrDefault(x => x.GetValue() == category);
-			if (matchingCategory == null)
-			{
-				Report.Info("Category was not found");
-				return false;
-			}
-			var action = new Actions(SeleniumBrowser.WebBrowser);
-			action.MoveToElement(matchingCategory).Build().Perform();
-			matchingCategory.TryClick();
-			Delay.Seconds(1);
-			//nb, double click does not work so using 2 clicks
 
-			matchingCategory.Click();
-			matchingCategory.Click();
-			
-			Delay.Seconds(2);
-			Report.Screenshot();
-			IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
-			if (editScreen != null)
+		    int i = 0;
+			while (i < 5)
 			{
-				return true;
-			}
-			else
-			{
-				Report.Info("Popup was not found.");
-			}
+				try
+				{
+					IList<IWebElement> listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
+					var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
+					IWebElement matchingCategory = listOfCategories.FirstOrDefault(x => x.GetValue() == category);
+					if (matchingCategory == null)
+					{
+						Report.Info("Category was not found");
+						return false;
+					}
+					Report.Info("Matching Category was found");
+					var action = new Actions(SeleniumBrowser.WebBrowser);
+					action.MoveToElement(matchingCategory).Build().Perform();
+					matchingCategory.TryClick();
+					Delay.Seconds(1);
+					//nb, double click does not work so using 2 clicks
 
+					matchingCategory.Click();
+					matchingCategory.Click();
 
+					Delay.Seconds(2);
+					Report.Screenshot();
+					IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
+					if (editScreen != null)
+					{
+						return true;
+					}
+					else
+					{
+						Report.Info("Popup was not found.");
+					}
+
+					return false;
+
+				}
+				catch (StaleElementReferenceException ex)
+				{
+					Report.Info("listOfCatergories threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the list of categories with title: {category} if the number of attempts has not exceeded 5");
+								
+				}
+				catch (Exception ex)
+				{
+					Report.Info($"Threw an expection of type:{ex.Message}");
+					return false;
+				}
+			}
 			return false;
+	
 		}
 
 		public string GetCategoryValue(string category)
@@ -1036,16 +1060,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//Putting this in because standard get alert functionality does not work in this page.
 			if (!SeleniumBrowser.Alert.WaitForAlert(10))
 			{
+				Report.Info("Alert was not found, reloading alert...");
 				SeleniumBrowser.Alert.ReloadAlert(searchText);
 			}
 			if (!SeleniumBrowser.Alert.WaitForAlert())
 			{
 				return null;
 			}
-			string alertText = SeleniumBrowser.Alert.GetText();
-			Report.Screenshot();
-			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
-			return alertText;
+			
+			try
+			{
+				string alertText = SeleniumBrowser.Alert.GetText();
+				int i = 2;
+				while(alertText.IsNullOrEmpty()|| i<6)
+				{
+					Report.Info($"No Text Was Found In the Alert, Trying again");
+					Report.Info($"Looking for alert text. Attempt: {i}");
+					alertText = SeleniumBrowser.Alert.GetText();					
+					i++;
+				}
+				if(alertText.IsNullOrEmpty() && i==6)
+				{
+					Report.Info("The Alert Text was still found to be empty after 5 total attempts");
+				}
+				Report.Screenshot();
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				return alertText;
+
+			}
+			catch(Exception ex)
+			{
+				Report.Info($"An exeption with message: {ex.Message} was thrown");
+				throw;
+
+			}			
 		}
 
 		public bool SetCheckBox(string name, bool setChecked)

@@ -3148,6 +3148,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			if (myNewProduct.SectionExists(
+				"Cleaning products must comply with California's Cleaning Product Right to Know Act.")
+			)
+			{
+				TestReport.StartStep(
+					"Cleaning products must comply with California's Cleaning Product Right to Know Act." +
+					table.Rows[0]["California's Cleaning Product Right to Know Act"]);
+				MyStepsNewProduct.SetTheSectionOptionTo(
+					"Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					table.Rows[0]["California's Cleaning Product Right to Know Act"]);
+			}
+
+			if (myNewProduct.SectionExists(
 				"Product is a Retailer's Private Label or Brand"))
 			{
 				TestReport.StartStep(
