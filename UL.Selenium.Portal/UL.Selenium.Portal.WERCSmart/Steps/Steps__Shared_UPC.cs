@@ -119,6 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("Size", size);
 				upcTable.AddRow("Quantity", quantity);
 				upcTable.AddRow("TransportationOption", transportation);
+				upcTable.AddRow("UPCName", "DefaultProductName");
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 

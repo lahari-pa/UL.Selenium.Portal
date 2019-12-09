@@ -192,6 +192,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And In the Additional Information Page the check box for: United States should be: checked
 	And I set 'Product has been classified using OSHA' to: No
 	And I set 'Product is shipped directly' to: No
+	And I set 'California's Cleaning Product' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
 	Given in the New Product page I click Continue
