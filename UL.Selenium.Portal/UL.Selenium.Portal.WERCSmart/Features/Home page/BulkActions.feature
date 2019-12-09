@@ -166,6 +166,16 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	And I confirm that retailer saved as: TestCase75321Retailer appears for UPC saved as: TestCase75321UPC
 	And I close the current window and switch to the main window in Studio
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75321)
+
+
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75321)
+	And I call Shared Step 49742 - WPS - Check In Product saved as: TestCase75321
+	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase75321
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75321)
+	And I call Shared Step 59066 (Go to SHA Manager)
+
+
+
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 	And I Confirm the Product shows status: Completed for retailer: saved as retailer
 	And I Confirm the Product shows status: Accepted for retailer: saved as TestCase75321Retailer

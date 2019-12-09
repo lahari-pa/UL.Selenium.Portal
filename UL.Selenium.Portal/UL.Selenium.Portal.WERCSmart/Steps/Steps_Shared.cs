@@ -8372,7 +8372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			expectedText += " For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team";
 			TestReport.StartStep("I confirm the administrator receieved an email with subject 'WERCSmart Data Use Tier Consents Changed for Wal-Mart/Sam's Club'");
-			Delay.Seconds(5);
+			Delay.Seconds(8);
 			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", "WERCSmart Data Use Tier Consents Changed for Wal-Mart/SAM'S CLUB");
 			TestReport.StartStep("I confirm the body text of the email matches the expected text");
 			new GlobalSteps().ThenTheBodyOfTheEmailShouldShow(expectedText);
