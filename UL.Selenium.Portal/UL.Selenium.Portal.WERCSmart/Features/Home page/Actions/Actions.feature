@@ -20,6 +20,7 @@
 @CreateProducts
 @PaymentMethods
 @ProductSetUp
+@UPC
 @ViewUpcs
 Feature: Actions
 
