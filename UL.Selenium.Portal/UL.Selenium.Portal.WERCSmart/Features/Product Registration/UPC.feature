@@ -456,6 +456,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And I confirm UPC number saved as: "UPC109516_2" is displayed in the SHA Manager Product UPC list
 	And I confirm that UPC number saved as: UPC109516_2 shows a grey background for Archived in the SHA Manager Product UPC list
 
+@ScenarioId:6236
 Scenario: [101023] UPC Step - Add Part Number
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -501,7 +502,7 @@ And I should see following statement: Product is marketed for use by, or on, a c
 And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 Given I set all additional product information options to No
-Given I click continue in the Additional Product Information page
+Given in the Additional Product Information page I click Continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -523,7 +524,7 @@ And I select the following retailers in the 'Select Retailers' window
 | McLane         |
 
 Given I click the 'Add UPC' button
-Given I fill in the UPC data; UPC:0370030621897, Product Type:Paper bag, Product Weight:5
+Given I fill in the UPC data; UPC:0786987894855, Product Type:Paper bag, Product Weight:5
 Given I remove randomly selected retailers
 
 Given I click the 'Add Retailers' button
@@ -552,7 +553,7 @@ And I should see following statement: Product is marketed for use by, or on, a c
 And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 Given I set all additional product information options to No
-Given I click continue in the Additional Product Information page
+Given in the Additional Product Information page I click Continue
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
@@ -586,7 +587,7 @@ Given I fill in the UPC data; UPC:0727506002788, Product Type:Paper bag, Product
 When I click continue
 Then I check for the appropriate alert: No error
 
-Given I click continue in the Universal Product Code (UPC) page
+Given in the Universal Product Code (UPC) page I click Continue
 Then I check if the Regulatory Documents page is shown
 Then I navigate to the home page
 
@@ -670,7 +671,7 @@ And I should see following statement: Product is marketed for use by, or on, a c
 And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 Given I set all additional product information options to No
-Given I click continue in the Additional Product Information page
+Given in the Additional Product Information page I click Continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -683,7 +684,7 @@ And I select the following retailers in the 'Select Retailers' window
 | CVS      |
 
 Given I click Add Case UPC
-And I click continue in the Universal Product Code (UPC) page
+Given in the Universal Product Code (UPC) page I click Continue
 
 Then I check if the textfields with the following placeholders display the error 'This is a required field.' bottom
 | Placeholder                       |

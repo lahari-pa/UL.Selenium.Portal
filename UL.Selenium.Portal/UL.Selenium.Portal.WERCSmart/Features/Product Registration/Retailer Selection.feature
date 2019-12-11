@@ -158,7 +158,7 @@ And I should see following statement: Product is marketed for use by, or on, a c
 And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 Given I set all additional product information options to No
-Given I click continue in the Additional Product Information page
+Given in the Additional Product Information page I click Continue
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -170,7 +170,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 Given I click the Select all retailers option in the Select Retailers popup
 Then all retailers are selected in the Select Retailers window
 Given I click Done in the Select Retailers popup
-Given I click continue in the Retailer page
+Given in the Additional Product Information page I click Continue
 Then I confirm I see error messages for the following retailers
 | Retailer            |
 | O'Reilly            |
