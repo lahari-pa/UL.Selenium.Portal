@@ -20,16 +20,16 @@ Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Odor Remover/Eliminator - Aerosol
 	Then I save the product information as: TestCase57922
 	Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
-	#Given I call Shared Step 118091 (Additional Product Information - enter options)
-	#	| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | California Cleaning | Private Label or Brand | Good Not for resale |
-	#	| No                                                             | No                           | No                  | No                     | No                  |
-	Given I call Shared Step - (Additional Product Information - enter options)
-		| Section                                                        | Value |
-		| classified using OSHA (US) Globally Harmonized Standards (GHS) | No    |
-		| shipped directly by supplier                                   | No    |
-		| California's Cleaning                                          | No    |
-		| Private Label or Brand                                         | No    |
-		| Goods Not for Resale                                           | No    |
+	Given I call Shared Step 63804 (Additional Product Information - enter options)
+		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+		| No                                                             | No                           | No                     | No                  |
+	#Given I call Shared Step - (Additional Product Information - enter options)
+	#	| Section                                                        | Value |
+	#	| classified using OSHA (US) Globally Harmonized Standards (GHS) | No    |
+	#	| shipped directly by supplier                                   | No    |
+	#	| California's Cleaning                                          | No    |
+	#	| Private Label or Brand                                         | No    |
+	#	| Goods Not for Resale                                           | No    |
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
