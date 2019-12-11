@@ -4375,6 +4375,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             Delay.Seconds(3);
             var selStepsStudio = new Steps_Studio();
             selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.InPDIEnsureSECT2318IsActive();
+			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			
+
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
             selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 
         }
@@ -4473,6 +4478,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
                 "Successfully set edit to true");
             thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			var selStepsStudio = new Steps_Studio();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.InPDIEnsureSECT2318IsActive();
+			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
             new Steps_Studio().GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
             new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
             // Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
@@ -5283,6 +5293,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
             Delay.Seconds(3);
             selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.InPDIEnsureSECT2318IsActive();
+			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
             selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
         }
 
@@ -8670,20 +8683,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             string expectedContainerValue = informationRow["Container type"].ToString();
             Report.Info("Container Type expected: " + expectedContainerValue);
             Report.Info("Container Type Found: " + containerTypeActual);
-            Report.IsTrue(expectedContainerValue == containerTypeActual, "The container type coloumn did not show the value selected for the product", "The container type coloumn did show the value selected for the product");
-            TestReport.StartStep("I Check the size coloumn shows the size selected for my product.");
+			Report.IsTrue(expectedContainerValue == containerTypeActual, "The container type column did not show the value selected for the product", "The container type column did show the value selected for the product");
+			TestReport.StartStep("I Check the size column shows the size selected for my product.");
             string containerSizeActual = upcDetailsPopupTable.DetailValue("Container Size");
             string expectedSizeValue = informationRow["Size"].ToString();
             Report.Info("Container Size expected: " + expectedSizeValue);
             Report.Info("Container Size Found: " + containerSizeActual);
-            Report.IsTrue(expectedSizeValue == containerSizeActual, "The container size coloumn did not show the value selected for the product", "The container size coloumn did show the value selected for the product");
-            TestReport.StartStep("I Check the Internal UPC coloumn shows the 'N/A'.");
+			Report.IsTrue(expectedSizeValue == containerSizeActual, "The container size column did not show the value selected for the product", "The container size column did show the value selected for the product");
+			TestReport.StartStep("I Check the Internal UPC column shows the 'N/A'.");
             string expectedInternalUPC = "N/A";
             string internalUPCAtual = upcDetailsPopupTable.DetailValue("Internal UPC");
             Report.Info("Internal UPC expected: " + expectedInternalUPC);
             Report.Info("Internal UPC Found:  " + internalUPCAtual);
-            Report.IsTrue(expectedInternalUPC == internalUPCAtual, "The Internal UPC coloumn did not show N/A", "The Internal UPC coloumn did show N/A");
-            TestReport.StartStep("I Check the transport coloumn shows the container type selected for my product.");
+			Report.IsTrue(expectedInternalUPC == internalUPCAtual, "The Internal UPC column did not show N/A", "The Internal UPC column did show N/A");
+			TestReport.StartStep("I Check the transport column shows the container type selected for my product.");
             string transportTypeActual = upcDetailsPopupTable.DetailValue("Code and Description for DOT Packaging");
             string expectedTransportOption = informationRow["Transportation Options"].ToString();
 
@@ -8692,7 +8705,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
             Report.Info("Trasnport Option expected (no spaces): " + actualTransportOptionTrim);
             Report.Info("Trasnport Option Found (no spaces): " + expectedTrasportOptionTrim);
-            Report.IsTrue(expectedTrasportOptionTrim == actualTransportOptionTrim, "The Transportation Option coloumn did not show the value selected for the product", "The Transportation Option coloumn did show the value selected for the product");
+			Report.IsTrue(expectedTrasportOptionTrim == actualTransportOptionTrim, "The Transportation Option column did not show the value selected for the product", "The Transportation Option column did show the value selected for the product");
             TestReport.StartStep("I close the SHA Manager Product UPC details pop up");
             Report.IsTrue(upcDetailsPopupTable.CloseButton.TryClick(), "Failed to Click Close in the UPC details popup", "Successfully clicked Click Close in the UPC details popup");
             Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");

@@ -119,6 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("Size", size);
 				upcTable.AddRow("Quantity", quantity);
 				upcTable.AddRow("TransportationOption", transportation);
+				upcTable.AddRow("UPCName", "DefaultProductName");
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
@@ -168,7 +169,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
-
+		
 		[StepDefinition(@"I call Shared Step 87647 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) do not click continue")]
 		public void EnterUPCInfoDoNotClickContinue(string upc, string containerType, string size)
 		{
@@ -200,7 +201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 		}
-
+		
 
 		[StepDefinition(@"I call Shared Step 87658 \(Enter Universal Product Code \(UPC\)\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*) do not click continue")]
 		public void UpcWithQuantityDoNotClickContinue(string upc, string containerType,
@@ -400,7 +401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-
+		
 		[StepDefinition(@"I call Shared Step 87647 \(UPC - Confirm Package type Link and field shown and required \) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
 		public void EnterUPCInfoConfirmPackagingTypeLinkAndError(string upc, string containerType, string size)
 		{
@@ -449,7 +450,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Successfully found the error message");
 			}
 		}
-
+		
 
 		[StepDefinition(@"I call Shared Step 85909 \(UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
 		public void EnterUPCInfoConfirmPackagingTypeLinkdoesNotExists(string upc, string containerType, string size)
