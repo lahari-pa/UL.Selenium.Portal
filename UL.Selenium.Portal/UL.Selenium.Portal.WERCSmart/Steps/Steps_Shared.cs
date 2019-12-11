@@ -24,13 +24,13 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
-    [Binding, Scope(Tag = "Shared")]
-    public class Steps_Shared
-    {
+	[Binding, Scope(Tag = "Shared")]
+	public class Steps_Shared
+	{
 
-        // For additional details on SpecFlow step definitions see http://go.specflow.org/doc-stepdef
+		// For additional details on SpecFlow step definitions see http://go.specflow.org/doc-stepdef
 
-        [StepDefinition(@"I call Shared Step 57408 \(Create a New Registration via Register New Product icon\)")]
+		[StepDefinition(@"I call Shared Step 57408 \(Create a New Registration via Register New Product icon\)")]
         public void GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon()
         {
             TestReport.UseSubSteps = true;
@@ -9385,5 +9385,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
             }
         }
-    }
+
+		[StepDefinition(@"I enter (.*) in the DPCI field of the UPC page")]
+		public void GivenIEnterInTheDPCIFieldOfTheUPCPage(string dpci)
+		{
+			Report.IsTrue(new UPC().EnterDPCI(dpci), "DPCI number " + dpci + " was not entered", "DPCI is successfully set to " + dpci);
+		}
+
+		[StepDefinition(@"I should see an error message on the (.*) field which reads: (.*)")]
+		public void GivenIShouldSeeAnErrorMessageOnTheProductNameOnLabelField(string section, string expectedMessage)
+		{
+			Report.IsTrue(new UPC().GetUPCErrorForSection(section, expectedMessage, out string displayedMessage),
+			  "Error message displayed is " + displayedMessage + " but expected " + expectedMessage,
+			  "Error Message displayed in section: " + section + "is displayed as: " + expectedMessage + " as expected");
+		}
+	}
 }
