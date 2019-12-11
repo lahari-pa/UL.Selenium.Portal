@@ -172,6 +172,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				// Click the element we have identified as the best match
 				if (clickResult.TryClick())
 				{
+					// If access code validation use default '1234'
+					IWebElement validationModal = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//div[@class='modal-content']"), 2);
+					if(validationModal != null)
+					{
+						IWebElement inputValidation = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//input[@type='text']"), 2);
+						inputValidation.EnterText("1234");
+						IWebElement buttonValidation = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//button[text()='Validate']"), 2);
+						buttonValidation.TryClick();
+					}
 					// So we have now selected the element, so we need to try and get the first 'new' entry which contains this CAS Number, and hasn't had the Percentage field filled
 					bool success = true;
 					IList<IWebElement> rows = this.containerElement.FindElements(
@@ -1055,7 +1064,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		internal bool TransparencyScorePercent(float p0, out float trScore)
 		{
-			IWebElement transparency = this.FindElement(By.XPath("//*[@id='transparency-score']/span"), 2);
+			IWebElement transparency = this.FindElement(By.XPath(".//*[@id='transparency-score']/span"), 2);
 			if (!float.TryParse(transparency.Text.Remove(transparency.Text.Length - 1), out trScore))
 			{
 				Report.Failure("Transparency score could not be evaluated to an integer value. Displayed value is: " + transparency.Text);

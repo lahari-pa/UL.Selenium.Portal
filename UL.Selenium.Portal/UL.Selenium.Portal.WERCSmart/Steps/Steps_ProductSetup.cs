@@ -1172,7 +1172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Then in the Additional documents page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional documents");
 			//Then in the Product aliases page I click Continue
-			newProductSteps.GivenInTheNewProductPageIClickContinue("Product aliases");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Formulation Names");
 			//And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			//And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
@@ -1381,7 +1381,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Then in the Additional documents page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional documents");
 			//Then in the Product aliases page I click Continue
-			newProductSteps.GivenInTheNewProductPageIClickContinue("Product aliases");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Formulation Names");
 			//And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			//And I call Shared Step 58610 (Confirm Restrict Use - Restrict)

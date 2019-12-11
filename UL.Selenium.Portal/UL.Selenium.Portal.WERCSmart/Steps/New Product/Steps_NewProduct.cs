@@ -2680,6 +2680,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(expectedText == fieldValue, $"Failure, expected text for {field}: {expectedText} and actual website text for {field}: {fieldValue} do not match.", $"Success, expected text for {field} and actual website text for {field} match.");
 		}
 
+		[StepDefinition(@"I confirm that (Item Number|Part Number|DPCI|OMSID) for retailer (.*) UPC (should|should not) be required")]
+		public void IConfirmValueForRetailerIsRequired(string field, string retailer, string present)
+		{
+			bool showing = present == "should";
+			string retailerAbbr = new RetailerAbbreviations().TryConvertToAbbreviation($"{retailer}");
+			bool isRequired = new UPC().IsRequiredValueOfRetailerInActiveRow($"{retailerAbbr}", field);
+			Report.IsTrue(!(showing ^ isRequired), $"Failure, {field} {present} be required but showed the opposite.", $"Success, {field} {present} be required.");
+		}
+
 		[StepDefinition(@"I click the 'Add Part Number' button")]
 		public void ThenIClickTheAddPartNumber()
 		{
