@@ -3152,6 +3152,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             }
 
             if (myNewProduct.SectionExists(
+				"Cleaning products must comply with California's Cleaning Product Right to Know Act.")
+			)
+			{
+				TestReport.StartStep(
+					"Cleaning products must comply with California's Cleaning Product Right to Know Act." +
+					table.Rows[0]["California's Cleaning Product Right to Know Act"]);
+				MyStepsNewProduct.SetTheSectionOptionTo(
+					"Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					table.Rows[0]["California's Cleaning Product Right to Know Act"]);
+			}
+
+			if (myNewProduct.SectionExists(
                 "Product is a Retailer's Private Label or Brand"))
             {
                 TestReport.StartStep(
@@ -8372,7 +8384,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             }
             expectedText += " For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team";
             TestReport.StartStep("I confirm the administrator receieved an email with subject 'WERCSmart Data Use Tier Consents Changed for Wal-Mart/Sam's Club'");
-            Delay.Seconds(5);
+			Delay.Seconds(8);
             new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", "WERCSmart Data Use Tier Consents Changed for Wal-Mart/SAM'S CLUB");
             TestReport.StartStep("I confirm the body text of the email matches the expected text");
             new GlobalSteps().ThenTheBodyOfTheEmailShouldShow(expectedText);
