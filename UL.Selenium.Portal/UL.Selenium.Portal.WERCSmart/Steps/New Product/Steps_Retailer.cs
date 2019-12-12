@@ -239,5 +239,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			this.IfISeeUpcWarningPopupClick("Ok");
 		}
 
+		[StepDefinition(@"I confirm I see error messages for the following retailers")]
+		public void ThenIConfirmISeeErrorMessagesForTheFollowingRetailers(Table table)
+		{
+			SelectRetailers SelectRetailersObject = new SelectRetailers();
+			SelectRetailersObject.CheckIfRetailersInTableDisplayErrorMessage(table);
+		}
+
 	}
 }

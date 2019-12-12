@@ -86,6 +86,7 @@ Scenario: [52998] Signup - Emails Do Not Match
 	Then Under the Enter Email text box the following errors should appear
 		| Error text                                  |
 		| Email and confirm email fields do not match |
+	Then I click Cancel on the Sign Up screen
 
 #pass - staging 4.10
 @ScenarioId:464

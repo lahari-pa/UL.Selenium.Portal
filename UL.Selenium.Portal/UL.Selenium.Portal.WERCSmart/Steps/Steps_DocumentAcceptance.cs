@@ -120,5 +120,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			string documentText = selDocumentsAcceptance.DocumentText(address);
 		}
+
+		[StepDefinition(@"I confirm that the Document Acceptance page is showing")]
+		public void ThenIConfirmThatTheDocumentAcceptancePageIsShowing()
+		{
+			DocumentAcceptance EM = new DocumentAcceptance();
+			Report.IsTrue(EM.ConfirmDocumentAcceptancePageIsShowing(), "Failed to confirm that 'Document Acceptance' page is showing", "Successfully confirmed that 'Document Acceptance' page is showing");
+		}
 	}
 }

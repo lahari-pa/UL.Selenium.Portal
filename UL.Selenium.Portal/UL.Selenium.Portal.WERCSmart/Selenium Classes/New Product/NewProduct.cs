@@ -13,7 +13,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
-
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -568,12 +569,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			bool checkTrue = true;
 			IList<IWebElement> listofCert = this.containerElement.FindElements(By.XPath(".//div[@data-bind='with: upc']//div//input"), 1);
-			foreach(var item in listofCert)
+			foreach (var item in listofCert)
 			{
 				//IWebElement inputbox= item.FindElement(By.XPath(".//"))
-				bool clicked=item.TryClick();
-				string textTitle=item.Text;
-				if(!clicked)
+				bool clicked = item.TryClick();
+				string textTitle = item.Text;
+				if (!clicked)
 				{
 					checkTrue = false;
 					Report.Info($"Failed to check the certification with title: {textTitle}");
@@ -736,8 +737,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				IWebElement productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
 
-				string productNameDataBind=productNameOnlabelObj.GetAttribute("class");
-				if(productNameDataBind!=null)
+				string productNameDataBind = productNameOnlabelObj.GetAttribute("class");
+				if (productNameDataBind != null)
 				{
 					if (!productNameDataBind.Contains("form-group has-success"))
 					{
@@ -821,7 +822,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				//{
 				//	Report.Failure("The UPC Name field was not present");
 				//}
-				
+
 
 
 				if (info.ContainerType.ToLower() != "none")
@@ -3298,26 +3299,175 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
-		public bool FinalDomesticDistributor(string text)
+		public bool ClickRestoreSelectedRetailersButton()
 		{
-			try
-			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Who is the Final Domestic Distributor (if any) of the product?']/../following-sibling::div//input"), 2);
+			IWebElement RestoreSelectedRetailersButton = this.containerElement.FindElement(By.XPath(".//a[@data-bind='click: restoreSelectedRetailers']"), 2);
+			return RestoreSelectedRetailersButton.TryClick();
+		}
 
-				if (el != null)
+		public bool ClickSelectAllInRemovedRetailersBox()
+		{
+			IWebElement SelectAllRemovedRetailersButton = this.containerElement.FindElement(By.XPath(".//input[@data-bind='click: checkAllRemoved; checked: allRemovedRetailersChecked']"), 2);
+			return SelectAllRemovedRetailersButton.TryClick();
+		}
+
+		public bool FillInUPCData(string productUPC, string productType, string productWeight)
+		{
+			IWebElement UPCTextBox = this.containerElement.FindElement(By.XPath(".//input[@data-bind='textInput: upcNumber.field']"), 2);
+			bool EnteredProductUPC = Report.IsTrue(UPCTextBox.TryEnterText(productUPC), "Failed to enter product UPC", "Successfully entered product UPC");
+
+			IWebElement ContainerTypeTextBox = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+			ContainerTypeTextBox.Select(productType);
+
+			IWebElement SizeTextBox = this.containerElement.FindElement(By.XPath(".//input[@placeholder='Size (Weight Ounces)']"), 2);
+			bool EnteredProductWeight = Report.IsTrue(SizeTextBox.TryEnterText(productWeight), "Failed to enter product weight in ounces", "Successfully enter product weight in ounces");
+
+			if (EnteredProductUPC && EnteredProductWeight)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool RemoveRandomRetailers()
+		{
+			IList<IWebElement> deleteButtons = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
+			List<int> listOfAlreadyRemovedButtonIndexes = new List<int>();
+			Random random = new Random();
+			int numOfLoops = random.Next(2, deleteButtons.Count - 1);
+
+			for (int i = 0; i <= numOfLoops; i++)
+			{
+				int ran = random.Next(0, deleteButtons.Count);
+				if (!listOfAlreadyRemovedButtonIndexes.Contains(ran))
 				{
-					el.EnterText(text);
-					return true;
+					IWebElement deleteButton = deleteButtons[ran];
+					listOfAlreadyRemovedButtonIndexes.Add(ran);
+					bool RemoveSelectedRetailer = Report.IsTrue(deleteButton.TryClick(), "Failed to remove selected retailer", "Successfully removed selected retailer");
+					if (!RemoveSelectedRetailer)
+					{
+						return false;
+					}
 				}
+				else
+				{
+					i -= 1;
+				}
+			}
 
-				return false;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
+			return true;
 
 		}
+
+		public bool AddRandomRetailersThatWereRemoved()
+		{
+
+			IList<IWebElement> CheckBoxes = this.containerElement.FindElements(By.XPath(".//ul[@aria-labelledby='ddAddRetailers']//input[@type='checkbox']"), 2);
+			List<int> listOfAlreadyClickedCheckBoxIndexes = new List<int>();
+
+			for (int i = 0; i < CheckBoxes.Count; i++)
+			{
+				if (CheckBoxes[i].Text.Contains("Select All"))
+				{
+					CheckBoxes.RemoveAt(i);
+				}
+			}
+
+			Random random = new Random();
+			int numOfLoops = random.Next(1, CheckBoxes.Count - 1);
+			for (int i = 0; i <= numOfLoops; i++)
+			{
+				int ran = random.Next(1, CheckBoxes.Count);
+				if (!listOfAlreadyClickedCheckBoxIndexes.Contains(ran))
+				{
+					IWebElement CheckBox = CheckBoxes[ran];
+					listOfAlreadyClickedCheckBoxIndexes.Add(ran);
+					bool SelectedCheckboxForRetailer = Report.IsTrue(CheckBox.TryClick(), "Failed to select checkbox for retailer", "Successfully selected checkbox for retailer");
+
+					if (!SelectedCheckboxForRetailer)
+					{
+						return false;
+					}
+				}
+				else
+				{
+					i -= 1;
+				}
+			}
+
+			return true;
+		}
+
+		public bool SelectAllRetailersThatWereRemoved()
+		{
+			IWebElement RestoreRetailersButton = this.containerElement.FindElement(By.XPath(".//ul[@aria-labelledby='ddAddRetailers']//input[@id='chkAllRemovedRetailers']"), 2);
+			return Report.IsTrue(RestoreRetailersButton.TryClick(), "Failed to click 'Restore Retailers' button", "Successfully clicked 'Restore Retailers' button");
+
+		}
+
+		public bool SelectAllRetailersInTable(Table table)
+		{
+			IWebElement DoneButton = this.containerElement.FindElement(By.XPath(".//a[@data-bind='click: closePopup']"), 2);
+			var stepsNewProduct = new StepsNewProduct();
+
+			foreach (TechTalk.SpecFlow.TableRow row in table.Rows)
+			{
+
+				TestReport.UseSubSteps = true;
+				var stepsRetailer = new Retailer();
+				TestReport.StartStep("In the Select Retailers popup I select the retailer: " + (row["Retailer"]));
+				new StepsSelectRetailers().SelectTheRetailer((row["Retailer"]));
+				TestReport.StartStep("I enter private label as 'This Private Label'");
+				stepsRetailer.EnterPrivateLabelName("This Private Label");
+
+			}
+
+			bool DoneButtonClicked = Report.IsTrue(DoneButton.TryClick(), "Failed to click 'Done' button", "Successfully clicked 'Done' button");
+			stepsNewProduct.ClickContinue();
+
+			return DoneButtonClicked;
+		}
+
+		public bool ClickAddRetailersButton()
+		{
+			IWebElement AddRetailersButton = this.containerElement.FindElement(By.XPath(".//a[@id='ddAddRetailers']"), 2);
+			return AddRetailersButton.TryClick();
+		}
+
+		public bool CheckIfListOfRemovedRetailersAreInAlphabeticalOrder()
+		{
+			IList<IWebElement> RemovedRetailers = this.containerElement.FindElements(By.XPath(".//a[@data-bind='text: name, click: $parent.restoreRetailer.bind($parent)']"), 2);
+			List<string> RemovedRetailerNames = new List<string>();
+			foreach (IWebElement element in RemovedRetailers)
+			{
+				RemovedRetailerNames.Add(element.Text);
+			}
+
+			var expectedList = RemovedRetailerNames.OrderBy(x => x).ToList();
+
+			return Report.IsTrue(expectedList.SequenceEqual(RemovedRetailerNames),
+			"List of added retailers was not sorted as expected. Found: " + string.Join(",", RemovedRetailerNames),
+			"Added retailer names are in order");
+
+		}
+
+		public bool CheckIfListOfAddedRetailersAreInAlphabeticalOrder()
+		{
+			IList<IWebElement> AddedRetailers = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']"), 2);
+			List<string> AddedRetailersNames = new List<string>();
+			foreach (IWebElement element in AddedRetailers)
+			{
+				AddedRetailersNames.Add(element.Text);
+			}
+
+			var expectedList = AddedRetailersNames.OrderBy(x => x).ToList();
+
+			return Report.IsTrue(expectedList.SequenceEqual(AddedRetailersNames),
+			"List of added retailers was not sorted as expected. Found: " + string.Join(",", AddedRetailersNames),
+			"Added retailer names are in order");
+		}
+
 		public bool CompanyTollFreePhoneNumber(string text)
 		{
 			try
@@ -3381,7 +3531,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 
 
-		public bool InputPartNumberInformation(UpcInformation info,string partNumber)
+		public bool InputPartNumberInformation(UpcInformation info, string partNumber)
 		{
 			try
 			{
@@ -3434,7 +3584,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Failure("The UPC Name field was not present");
 				}
 
-				
+
 
 
 
@@ -3487,8 +3637,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool FinalDomesticDistributor(string text)
+		{
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Who is the Final Domestic Distributor (if any) of the product?']/../following-sibling::div//input"), 2);
 
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
 
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
 	}
 
 	public class ProductInformation
@@ -3596,4 +3764,5 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public IWebElement Input { get; set; }
 		public string ErrorMessage { get; set; }
 	}
+
 }

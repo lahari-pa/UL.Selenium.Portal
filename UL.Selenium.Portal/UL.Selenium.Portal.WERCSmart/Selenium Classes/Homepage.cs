@@ -242,6 +242,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
+
+		public bool ClickResolveButton()
+		{
+			IWebElement ResolveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='panel panel-default messaging']//p[contains(text(), 'AGHS document')]/../../following-sibling::td//a[text()='Resolve ']"), 2);
+			return ResolveButton.TryClick();
+		}
+
 	}
 
 

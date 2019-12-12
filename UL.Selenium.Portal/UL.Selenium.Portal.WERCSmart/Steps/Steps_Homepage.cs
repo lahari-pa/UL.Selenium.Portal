@@ -1102,5 +1102,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"I click the 'Resolve' button that is associated to the AGHS alert in the 'Alerts' window")]
+		public void GivenIClickTheButtonThatIsAssociatedToTheAGHSAlertInTheWindow()
+		{
+			Homepage HomePageObject = new Homepage();
+			Report.IsTrue(HomePageObject.ClickResolveButton(), "Failed to click 'Resolve' button", "Successfully clicked 'Resolve' button");
+		}
 	}
 }

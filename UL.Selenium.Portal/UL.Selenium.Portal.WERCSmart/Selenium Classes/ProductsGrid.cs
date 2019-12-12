@@ -9,6 +9,7 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using NTTQA.Selenium.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -679,40 +680,55 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool NumToGridNavigationInput(string pageNumber)
 		{
-			try
+			int i = 0;
+			while (i<5)
 			{
-				IWebElement inputEl = this.GridNavigationInput();
-				if (inputEl == null)
+				try
 				{
-					Report.Info("The Num input was not displayed. Clicking the '...' navigation element");
-					this.GridNavigation("...");
-					inputEl = this.GridNavigationInput();					
+					IWebElement inputEl = this.GridNavigationInput();
 					if (inputEl == null)
 					{
-						return false;
+						Report.Info("The Num input was not displayed. Clicking the '...' navigation element");
+						this.GridNavigation("...");
+						inputEl = this.GridNavigationInput();
+						if (inputEl == null)
+						{
+							return false;
+						}
+						Report.Info("Entering page number: " + pageNumber);
+						//inputEl.EnterText(pageNumber);
+						//inputEl.Clear();
+						string text = inputEl.GetAttribute("value");
+						int textLength = text.Length;
+						int count = 0;
+						while (count < textLength)
+						{
+							inputEl.SendKeys(Keys.Delete);
+							count++;
+						}
+						inputEl.SendKeys(pageNumber);
+						return true;
 					}
-					Report.Info("Entering page number: " + pageNumber);
-					//inputEl.EnterText(pageNumber);
-					//inputEl.Clear();
-					string text = inputEl.GetAttribute("value");
-					int textLength = text.Length;
-					int count = 0;
-					while(count<textLength)
-					{
-						inputEl.SendKeys(Keys.Delete);
-						count++;
-					}
-					inputEl.SendKeys(pageNumber);
+					inputEl.EnterText(pageNumber);
 					return true;
 				}
-				inputEl.EnterText(pageNumber);
-				return true;
+				catch (StaleElementReferenceException ex)
+				{
+					Report.Info("inputEl threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the inputEl again if the number of attempts has not exceeded 5");
+
+				}
+				catch (Exception ex)
+				{
+					Report.Info("Exception: " + ex.Message);
+					return false;
+				}
+
 			}
-			catch (Exception ex)
-			{
-				Report.Info("Exception: " + ex.Message);
-				return false;
-			}
+			return false;
+			
 
 		}
 
@@ -986,6 +1002,53 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return false;
 			}
+		}
+
+		public void ConfirmRetailersMatchInMyProductsSection(string savedAs)
+		{
+			Delay.Seconds(5);
+			string strVersionOfRemainingRetailerNames = Context.GetFromContext("ListOfRemainingRetailerNamesInTextForm").ToString();
+			List<string> ListOfRemainingRetailerNamesFromTheUPCPage = strVersionOfRemainingRetailerNames.Split(',').ToList();
+
+			List<string> ListOfRetailersThatWereSupposedToDisplayButDidNot = new List<string>();
+
+			var ProductID = Context.GetFromContext("ProductID");
+			IList<IWebElement> ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid = this.FindElements(By.XPath("//small[text()='" + ProductID + "']/../../following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td//span[@data-bind='text: Identifier']"), 2);
+
+
+			foreach (string RetailerName in ListOfRemainingRetailerNamesFromTheUPCPage)
+			{
+				bool foundMatch = false;
+
+				foreach (IWebElement DisplayedRetailerName in ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid)
+				{
+					if (RetailerName == DisplayedRetailerName.GetValue())
+					{
+						foundMatch = true;
+					}
+				}
+
+				if (!foundMatch)
+				{
+					ListOfRetailersThatWereSupposedToDisplayButDidNot.Add(RetailerName);
+				}
+
+			}
+
+			if (ListOfRetailersThatWereSupposedToDisplayButDidNot.Count() > 0)
+			{
+				Report.Failure("The following retailers: " + ListOfRetailersThatWereSupposedToDisplayButDidNot.ToString() + " did not show in the Product Grid but were supposed to.");
+				return;
+			}
+
+			Report.Success("All retailers that were supposed to show up in the Product Grid did.");
+			return;
+		}
+
+		public bool ConfirmYouWouldLikeToDeleteButton()
+		{
+			IWebElement ConfirmYouWouldLikeToDeleteButton = this.FindElement(By.XPath("//div[@class='modal-footer']//button[@data-bind='click: function(){ resolve(false); }, text: noText']"), 2);
+			return ConfirmYouWouldLikeToDeleteButton.TryClick();
 		}
 
 		public ProductGridItem FirstProductNotRecertInGrid()

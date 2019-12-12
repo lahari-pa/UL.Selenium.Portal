@@ -123,12 +123,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
 			if (page == "The Product" && NewProduct.HeaderText == "The Product")
 			{
-                Report.Info("The active page is still 'The Product' after clicking continue");
-                Report.Info("Checking for Raw Materials Warning pop up");
+				Report.Info("The active page is still 'The Product' after clicking continue");
+				Report.Info("Checking for Raw Materials Warning pop up");
 				var thisModalDialog = new ModalDialog();
 				if (!thisModalDialog.WaitForContainerToBeVisible() || thisModalDialog.GetTitle() != "Warning")
 				{
-                    Report.Failure("Failed to click continue to the next page!");
+					Report.Failure("Failed to click continue to the next page!");
 					return;
 				}
 				Report.IsTrue(thisModalDialog.Click_OK(), "Failed to click OK in the modal", "Clicked OK in the modal");
@@ -2598,26 +2598,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 			GeneralUtilities.Wait_for_load_finish();
 		}
-
-		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Final Domestic Distributor")]
-		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField(string text)
-		{
-			Report.IsTrue(new NewProduct().FinalDomesticDistributor(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
-		}
-
-		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company's Toll-Free Phone Number")]
-		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInTollFreePhoneNumberTextField(string text)
-		{
-			Report.IsTrue(new NewProduct().CompanyTollFreePhoneNumber(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
-		}
-
-		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company Web Address")]
-		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInCompanyWebAddressTextField(string text)
-		{
-			Report.IsTrue(new NewProduct().CompanyWebAddress(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
-		}
 		
-
 		[StepDefinition(@"I set the Product's GTIN Brick Code to: (.*)")]
 		public void ThenISetTheProductsGTINBrickCodeTo(string description)
 		{
@@ -2733,7 +2714,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
+		[StepDefinition(@"In the Restict Use page I select Do Not Restict")]
+		public void DoNotRestrictUse_Restrict()
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var restrictUse = new Table("Section");
+			restrictUse.AddRow("Do you want to restrict searchable access to your registered formula?");
+			MyStepsNewProduct.CheckDisplayedSections("see", restrictUse);
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Do you want to restrict searchable access to your registered formula?",
+				"Do Not Restrict – Formula is searchable in WERCSmart and does not require an access code"));
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Do you want to restrict searchable access to your registered formula?",
+				"– Formula is searchable in WERCSmart and does not require an access code");
+			TestReport.StartStep("in the Restrict Use page I click continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
+		}
 		#endregion
+
+		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Final Domestic Distributor")]
+		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField(string text)
+		{
+			Report.IsTrue(new NewProduct().FinalDomesticDistributor(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
+		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company's Toll-Free Phone Number")]
+		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInTollFreePhoneNumberTextField(string text)
+		{
+			Report.IsTrue(new NewProduct().CompanyTollFreePhoneNumber(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
+		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company Web Address")]
+		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInCompanyWebAddressTextField(string text)
+		{
+			Report.IsTrue(new NewProduct().CompanyWebAddress(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
 	}
 
 
