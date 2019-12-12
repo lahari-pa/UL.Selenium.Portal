@@ -456,6 +456,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And I confirm UPC number saved as: "UPC109516_2" is displayed in the SHA Manager Product UPC list
 	And I confirm that UPC number saved as: UPC109516_2 shows a grey background for Archived in the SHA Manager Product UPC list
 
+@ScenarioId:6236
 Scenario: [101023] UPC Step - Add Part Number
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

@@ -25,6 +25,7 @@
 @ForwardProductRegistration
 @ProductSetUp
 @MyMessages
+@Portal_ShaManager
 @run_Advanced_Reporting
 Feature: Advanced Reporting
 
