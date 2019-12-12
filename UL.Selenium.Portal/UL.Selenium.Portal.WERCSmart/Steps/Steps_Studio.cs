@@ -9,6 +9,7 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using NTTQA.Selenium.ExtensionMethods;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -22,13 +23,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
+			Delay.Seconds(5);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("publish"),
 				"Failed to click publish tool bar option", "Clicked publish tool bar option");
 
 			var thisCurrentDocument = new CurrentDocument();
+			Delay.Seconds(3);
 			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load",
 				"Current document loaded");
-
 			Delay.Seconds(3);
 		}
 
@@ -62,6 +64,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
 			GeneralUtilities.StudioWaitForSpinner(30);
+			Delay.Seconds(5);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickApplyRulesButton(),
 				"Failed to click apply rules button",
 				"Clicked apply rules button");
@@ -106,6 +109,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Selecting checkbox: " + checkbox);
 			var thisCurrentDocument = new CurrentDocument();
+			Delay.Seconds(10);
+			Report.Info("Attempting to click checkbox");
 			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load", "Current document loaded");
 			Report.IsTrue(thisCurrentDocument.SetCheckBox(checkbox, true), "Failed to set checkbox: " + checkbox, "Set checkbox: " + checkbox);
 			Report.Screenshot();
@@ -130,17 +135,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
+				Report.Info($"Alert Text was found as {alertText} on the first try");
 			}
 			catch (Exception)
 			{
 				try
 				{
 					alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
+					Report.Info($"Alert Text was found as {alertText} on the second try");
 				}
 				catch (Exception ex)
 				{
 					Report.Error("Failed to get alert text: " + ex.Message);
 				}
+			}
+
+			if(alertText == null)
+			{
+				alertText = "";
 			}
 
 			Report.Info("Alert is showing as: " + alertText);
@@ -1108,6 +1120,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked continue button");
 			var selStepsStudio = new Steps_Studio();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.InPDIEnsureSECT2318IsActive();
+			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 		}
 
@@ -1295,6 +1310,148 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						
 		}
 
-		
+		[StepDefinition(@"In PD+ I Fill the section WALMART QC RESPONCE FORM with junk data")]
+		public void InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData()
+		{
+			TestReport.UseSubSteps = true;
+			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var valueEdit = new ValueEditor();
+			TestReport.StartStep("I Select the Catagory Titled: Inquiry Date");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");			
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");			
+			TestReport.StartStep("I Click on 'Select Current Date'");
+			valueEdit.SelectCurrentDate();
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			//valueEdit.ClickButton("Save");
+			Delay.Seconds(1);
+			TestReport.StartStep("I Double Click on the section with name: Response Date");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Response Date");			
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
+			TestReport.StartStep("I Click on 'Select Current Date'");
+			valueEdit.SelectCurrentDate();
+			Delay.Seconds(1);			
+			valueEdit.ClickSaveButton();
+
+			Delay.Seconds(1);			
+			TestReport.StartStep("I Double Click on the section with name: Type of Inquiry/Concern");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Type of Inquiry/Concern");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+
+			Delay.Seconds(1);
+			TestReport.StartStep("I Double Click on the section with name: Brief Description of Issue");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Brief Description of Issue");			
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			//valueEdit.EnterValueIntoField("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+
+			Delay.Seconds(1);
+			TestReport.StartStep("I Double Click on the section with name: Revision Required?");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Revision Required?");			
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+
+			TestReport.StartStep("I Double Click on the section with name: Justification");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Justification");			
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+
+			TestReport.StartStep("I Double Click on the section with name: Root Cause (if Revision Required)");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Root Cause (if Revision Required)");			
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			
+
+
+			TestReport.StartStep("I Double Click on the section with name: Corrective Action (if Revision Required)");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Corrective Action (if Revision Required)");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);			
+
+
+			TestReport.StartStep("I Double Click on the section with name: Additional Information");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Additional Information");			
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+
+			TestReport.StartStep("I Double Click on the section with name: Regulatory/IT Contact");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Regulatory/IT Contact");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+
+			TestReport.StartStep("I Double Click on the section with name: Approving Manager");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Approving Manager");
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+
+			TestReport.StartStep("I Double Click on the section with name: Inquiry Submitted By:");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Submitted By:");			
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			TestReport.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+		}
+
+		[StepDefinition(@"In Power Designer I ensure SECT2318 is the Active Section")]
+		public void InPDIEnsureSECT2318IsActive()
+		{
+			string click = "left";
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();			
+			if(new StudioPowerDesignerPlusDesignMode().ActiveSectionMatches("[SECT2318]"))
+			{
+				Report.Success("The Section was already active");
+				return;
+			}
+			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
+								"Studio power designer is open");
+			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection("[SECT2318] WALMART QC RESPONSE FORM", click),
+				"Failed to " + click + " click section: " + "[SECT2318] WALMART QC RESPONSE FORM",
+				"Successfully " + click + " clicked " + "[SECT2318] WALMART QC RESPONSE FORM");
+			Delay.Seconds(3);
+			return;
+
+
+			
+
+		}
+
+
 	}
 }

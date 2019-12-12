@@ -59,6 +59,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 				"Successfully set product has been classified using OSHA value to: " + noOrYes);
 		}
 
+		[StepDefinition(@"I set 'California's Cleaning Product' to: (No|Yes)")]
+		public void SetCaliforniaCleaningProductTo(string noOrYes)
+		{
+			Report.IsTrue(this.AdditionalProductInformation.WaitForTab(NewProduct.Tab.ProductType), "Product Type has not loaded", "Product Type tab is loaded.");
+			bool expected = (noOrYes == "Yes");
+			this.AdditionalProductInformation.IsCaliforniaCleaning = expected;
+			Report.IsTrue(this.AdditionalProductInformation.IsCaliforniaCleaning == expected,
+				"Failed to set California Cleaning value to: " + noOrYes,
+				"Successfully set California Cleaning value to: " + noOrYes);
+		}
+
 		[StepDefinition(@"In the Additional Information Page the check box for: (.*) should be: (checked|unchecked)")]
 		public void GivenInTheAdditionalInformationPageTheCheckBoxXShouldBeCheckedOrUnchecked(string country, string checkedOrUnchecked)
 		{

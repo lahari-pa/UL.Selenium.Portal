@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @wercsmart
 @run_Alerts
 @Login
@@ -25,6 +25,7 @@ Feature: Alerts
 
 #Design => Ready
 @tfs_design
+@ScenarioId:6078
 Scenario: [56280] Document is created and is ready for review
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then clicking on the top Alert should direct me to the My Messages page

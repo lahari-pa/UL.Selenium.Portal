@@ -16,6 +16,7 @@ using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.UPC;
 using NTTQA.Selenium.UniversalFunctions;
 using System.Text.RegularExpressions;
 using System.Collections;
+using Castle.Core.Internal;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -118,6 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("Size", size);
 				upcTable.AddRow("Quantity", quantity);
 				upcTable.AddRow("TransportationOption", transportation);
+				upcTable.AddRow("UPCName", "DefaultProductName");
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
@@ -167,7 +169,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
-
+		
 		[StepDefinition(@"I call Shared Step 87647 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) do not click continue")]
 		public void EnterUPCInfoDoNotClickContinue(string upc, string containerType, string size)
 		{
@@ -195,10 +197,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
 				upcTable.AddRow("Size", size);
+				
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 		}
-
+		
 
 		[StepDefinition(@"I call Shared Step 87658 \(Enter Universal Product Code \(UPC\)\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*) do not click continue")]
 		public void UpcWithQuantityDoNotClickContinue(string upc, string containerType,
@@ -247,6 +250,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Warning message was showing: " + message + ", as expected!");
 		}
 
+		[Given(@"I expand UPC details for UPC saved as (.*)")]
+		public void GivenIExpandUPCDetails(string upc)
+		{
+			var upcToGet = Context.GetFromContext(upc).ToString();
+			new UPC().ExpandArrowforUPC(upcToGet);
+		}
+
+
 		[StepDefinition(@"I should see maximum upc limit message: (.*)")]
 		public void MaximumUpcLimitMessage(string message)
 		{
@@ -258,6 +269,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Warning message was not as expected! Expected: " + message + ", but found: " + found + "!",
 				"Warning message was showing: " + message + ", as expected!");
 		}
+
+
+		[Given(@"I delete the value in the (.*) field")]
+		public void GivenIDeleteTheValueInTheUPCNameField(string field)
+		{
+			Report.IsTrue(new UPC().DeleteValueInField(field), "Unable to remove data from " + field + " field", "Deleted value in field " + field);
+		}
+
 
 		[StepDefinition(@"I should (see|not see) the following UPC buttons:")]
 		public void UpcButtonsDisplay(string condition, Table expected)
@@ -382,7 +401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-
+		
 		[StepDefinition(@"I call Shared Step 87647 \(UPC - Confirm Package type Link and field shown and required \) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
 		public void EnterUPCInfoConfirmPackagingTypeLinkAndError(string upc, string containerType, string size)
 		{
@@ -431,7 +450,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Successfully found the error message");
 			}
 		}
-
+		
 
 		[StepDefinition(@"I call Shared Step 85909 \(UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
 		public void EnterUPCInfoConfirmPackagingTypeLinkdoesNotExists(string upc, string containerType, string size)
@@ -642,6 +661,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICheckSizeOfEachProductFromFile(string file, string savedAs)
 		{
 			Report.IsTrue(new MultipleUPC().CheckSizeOfEachProductFromFile(file, savedAs), "The Size shown in the Add Multiple Popup did not match the file", "The Size shown in the Add Multiple Popup matched the file");
+
+		}
+
+		[StepDefinition(@"I check that the (UPC|Type|Size|Retailer) of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckValueOfEachProductFromFile(string value, string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachProductFromFile(value, file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
+
+		}
+
+		[StepDefinition(@"I check that the (Item Number|Part Number|DPCI|OMSID) of each (.*) product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckValueOfEachRetailerProductFromFile(string value, string retailer, string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachRetailerProductFromFile(value, retailer,file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
 
 		}
 
@@ -916,8 +949,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Check that the type coloumn becomes populated with option: (.*)")]
-		public void ICheckTypeColoumnContiansFirstOption(string packagingType)
+		[StepDefinition(@"I Check that the type column becomes populated with option: (.*)")]
+		public void ICheckTypeColumnContiansFirstOption(string packagingType)
 		{
 			var containsTypeOptionBox = new MultipleUPC().ContainsType;
 
@@ -1274,6 +1307,114 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(uPCpage.EnterDPCI(value), "Failed to enter DPCI", "Successfully entered DPCI");
 		}
 
+		[StepDefinition(@"I enter (.*) in the DPCI field of the UPC page")]
+		public void GivenIEnterInTheDPCIFieldOfTheUPCPage(string dpci)
+		{
+			Report.IsTrue(new UPC().EnterDPCI(dpci), "DPCI number " + dpci + " was not entered", "DPCI is successfully set to " + dpci);
+		}
 
+		[StepDefinition(@"I should see an error message on the (.*) field which reads: (.*)")]
+		public void GivenIShouldSeeAnErrorMessageOnTheProductNameOnLabelField(string section, string expectedMessage)
+		{
+			Report.IsTrue(new UPC().GetUPCErrorForSection(section, expectedMessage, out string displayedMessage),
+			  "Error message displayed is " + displayedMessage + " but expected " + expectedMessage,
+			  "Error Message displayed in section: " + section + "is displayed as: " + expectedMessage + " as expected");
+		}
+
+		[StepDefinition(@"I Enter Universal Product Code details for a CVS Product, container type: (.*), size: (.*), Quantity (.*)")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly(string containerType, string size, string quantity)
+		{
+			TestReport.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			for (int i = 0; i < 100; i++)
+			{
+				Report.Info("Entering UPC information. Attempt: " + (i + 1));
+				TestReport.StartStep("I click the 'Add UPC' button");
+				stepsNewProduct.ThenIClickTheAddUpcButton();
+				TestReport.StartStep("I add the following into the UPC Fields");
+				string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+				Report.Info("UPC number: " + upc);
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc,
+					Quantity = quantity
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+				TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				GeneralUtilities.Wait_for_load_finish();
+				// not returning...
+				if (new NewProduct().FormError().IsNullOrEmpty())
+				{
+					return;
+				}
+				// delete upc that failed
+				stepsNewProduct.GivenIDeleteUPC(upc);
+				Report.Info("An error was showing! on click continue! Attempting a different UPC");
+			}
+		}
+
+		[StepDefinition(@"I enter Container type: (.*), Size (.*), Packaging type: (.*) and Part number: (.*) then click continue in the UPC screen")]
+		public void IEnterContainerTypeSizePackagingTypeAndPartNumberThenClickContinue(string containerType, string size, string packagingType, string partNumber)
+		{
+			TestReport.UseSubSteps = true;
+			var newProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I Click Add Part Number in the UPC screen");
+			newProductSteps.ThenIClickTheAddPartNumber();
+			this.IEnterUPCDetailsAndPartNumberIntoTheUPCScreen(containerType, size, packagingType, partNumber);
+			TestReport.StartStep("I should see the Regulatory Documents to Provide Page");
+			new StepsNewProduct().GivenIShouldSeeXPage("Regulatory Documents to Provide");
+		}
+
+
+		[StepDefinition(@"I enter UPC details, container type: (.*), size: (.*) and packaging type: (.*) then I enter Part Number: (.*)")]
+		public void IEnterUPCDetailsAndPartNumberIntoTheUPCScreen(string containerType, string size, string packagingType, string partNumber)
+		{
+			TestReport.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			for (int i = 0; i < 100; i++)
+			{
+				Report.Info("Entering UPC information. Attempt: " + (i + 1));
+				TestReport.StartStep("I add the following into the UPC Fields");
+				string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+				Report.Info("UPC number: " + upc);
+
+				var upcInfo = new UpcInformation();
+				if (packagingType == "NA")
+				{
+
+					upcInfo.ContainerType = containerType;
+					upcInfo.Size = size;
+
+				}
+				else
+				{
+					upcInfo.ContainerType = containerType;
+					upcInfo.Size = size;
+					upcInfo.PackageType = packagingType;
+
+				}
+
+				Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo, partNumber), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+				TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				GeneralUtilities.Wait_for_load_finish();
+				// not returning...
+				if (new NewProduct().FormError().IsNullOrEmpty())
+				{
+					return;
+				}
+				// delete upc that failed
+				stepsNewProduct.GivenIDeleteUPC(upc);
+				Report.Info("An error was showing! on click continue! Attempting a different UPC");
+			}
+		}
 	}
 }

@@ -2,8 +2,11 @@
 @RetailPartners
 @Homepage
 @LandingPage
+@ProductGrid
 @Login
+@SupplierReports
 @ForgottenPassword
+@CreateProducts
 @wercsmart
 @run_DataConsentTiers_RetailerSpecific
 Feature: [57203] Data Consent Tiers - Retailer Specific Behavior
@@ -19,7 +22,7 @@ Scenario: [57206] Retailer specific - CVS
 	When I select the retailer: CVS
 	Then I confirm that there is a section labeled: CVS
 	And I confirm that under the pie chart I see the label: % of your product portfolio is associated with CVS
-	And I confirm that: CVS requires suppliers of all store branded products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
+	And I confirm that: CVS requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2, Tier 3 and Tier 4.1 permissions: Artists/Hobby, Automotive Care, Cleaning Supplies, Health & Beauty, Home Improvement, Lawn and Garden, Miscellaneous, Nutritional Supplements, Over-the-Counter (OTC), Pet Care, Photography, Sporting Goods, Stationery and Pharmacy is showing under the Data Consent Tiers heading
 	When I click the More Information hyperlink
 	Then I check that the current URL contains: https://login.ulscm.com/RPUI/cvsportal
 	And I close the window that opened
@@ -147,3 +150,58 @@ Scenario: [74540] Target - Data Tier Warning when not all are selected
 	And I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown
 	Given I click the back arrow on the Retail Partners Details page
 	Then I should see the Retail Partners page
+
+@ScenarioId:6036
+Scenario: [115256] CVS - Uses Updated Data Tier Consent Requirements (Excluded Categories)
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Toys (RUCC0388), save it as: CVSToysProduct1 and leave it in New Status
+	Then I navigate to the Data Consent Tiers Page for CVS
+	And I Check that the data consent tiers available for selection only include Tier 1
+	Then I click the Products in Scope button and confirm that a file is not produced called CV_Report_DataUsageTier_<Date>.xlsx
+	Then I navigate to the Homepage and then In the Products Grid I delete All products
+
+
+	@singleRun
+@ScenarioId:6035
+Scenario: [115255] CVS - Uses Updated Data Tier Consent Requirements (Included Categories)
+
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSHBExcelFile and check that is shows the expected product saved as: CVSHBProduct1
+	Then For CVS I create a product of type: Artist Supply (RUCC0384), save it as: CVSArtistProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSArtistExcelFile and check that is shows the expected product saved as: CVSArtistProduct1
+	Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSCleaningExcelFile and check that is shows the expected product saved as: CVSCleaningProduct1
+	Then For CVS I create a product of type: Home Improvement (RUCC0394), save it as: CVSHomeProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSHomeExcelFile and check that is shows the expected product saved as: CVSHomeProduct1
+	Then For CVS I create a product of type: Lawn & Garden (RUCC0395), save it as: CVSLawnGardenProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSLawnGardenExcelFile and check that is shows the expected product saved as: CVSLawnGardenProduct1
+ 	Then For CVS I create a product of type: Miscellaneous (RUCC0400), save it as: CVSMiscProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSMiscExcelFile and check that is shows the expected product saved as: CVSMiscProduct1
+	Then For CVS I create a product of type: Nutritional (RUCC0592), save it as: CVSNutritionalProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSNutritionalExcelFile and check that is shows the expected product saved as: CVSNutritionalProduct1
+	Then For CVS I create a product of type: Over-the-Counter (RUCC1002), save it as: CVSOTCProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSOTCExcelFile and check that is shows the expected product saved as: CVSOTCProduct1
+	Then For CVS I create a product of type: Pet Care (RUCC0387), save it as: CVSPetCareProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPetCareExcelFile and check that is shows the expected product saved as: CVSPetCareProduct1
+	Then For CVS I create a product of type: Photography (RUCC0735), save it as: CVSPhotopraphyProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPhotopraphyExcelFile and check that is shows the expected product saved as: CVSPhotopraphyProduct1
+	Then For CVS I create a product of type: Sporting Goods (RUCC0386), save it as: CVSSportingGoodsProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSSportingGoodsExcelFile and check that is shows the expected product saved as: CVSSportingGoodsProduct1
+	Then For CVS I create a product of type: Stationery (RUCC0385), save it as: CVSStationeryProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSStationeryExcelFile and check that is shows the expected product saved as: CVSStationeryProduct1
+	Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPharmacyProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPharmacyExcelFile and check that is shows the expected product saved as: CVSPharmacyProduct1
+	
+	
+
+	#Then For CVS I create a product of type: Battery (RUCC0733), save it as: CVSBatteryProduct1 and leave it in New Status
+	#Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSBatteryExcelFile and check that is shows the expected product saved as: CVSBatteryProduct1
+	#Cannot create Grocery Products for cvs, waiting on dev response
+	#Then For CVS I create a product of type: Grocery (RUCC0389), save it as: CVSGroceryProduct1 and leave it in New Status
+	#Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSGroceryExcelFile and check that is shows the expected product saved as: CVSGroceryProduct1
+	
+	
+

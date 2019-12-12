@@ -21,7 +21,7 @@
 @SHA
 @ForwardProductRegistration
 @ProductSetUp
-Feature: Edit UPC Account has partial Stewardship information 
+Feature: Edit UPC Account has partial Stewardship information
 
 @ScenarioId:1472
 Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Canadian Tire, Packing type is required
@@ -41,7 +41,7 @@ Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Ca
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86257)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86257 and its status is: Recertification
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase86257
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86257
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86257
 
 @ScenarioId:1473
@@ -62,10 +62,10 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86258)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86258 and its status is: Recertification
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase86258
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86258
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86258
 
-
+@ScenarioId:6228
 Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not Canadian Tire, package type is not required
 	Given I generate a random UPC number and save as: UPC86259
 	Given I generate a random UPC number and save as: UPC_862591
@@ -85,9 +85,8 @@ Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not 
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86259)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86259 and its status is: Recertification
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase86259
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86259
 	Then In the SHA list of UPCs I should see UPC: saved as UPC862591
-
 
 @ScenarioId:1474
 Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Canadian Tire - Package type required
@@ -107,8 +106,5 @@ Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86260)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86260 and its status is: Recertification
-	Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase86260
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase86260
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86260
-
-
-

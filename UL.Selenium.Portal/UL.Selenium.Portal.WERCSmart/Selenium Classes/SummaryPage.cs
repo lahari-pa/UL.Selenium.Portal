@@ -6,6 +6,8 @@ using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using NTTQA.Selenium.Reporting.Core;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -120,6 +122,171 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath(@".//span[contains(@data-bind,""dataEntry.pname() === 'undefined (undefined)"") and contains(text(),'Loading')]"), 2);
 		}
+
+		private List<IWebElement> UpcHeadings => this.containerElement.FindElements(By.XPath(".//h2[contains(text(),'UPC')]//ancestor::div[@class='summary-question-container']/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
+
+		private string[] UPCHeadingTitles => this.UpcHeadings.Select(x => x.FindElement(By.XPath("./div"), 2).Text).ToArray();
+
+		public bool DoesUPCHeadingsContain(string headingName)
+		{
+
+			var newList = this.UPCHeadingTitles;
+			if (newList.Contains(headingName))
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Did not find the Heading name: " + headingName + ". Heading names found are as follows: " + string.Join(",", newList));
+				return false;
+			}
+			
+		}
+		private List<IWebElement> IngredientHeadings => this.containerElement.FindElements(By.XPath(".//h2[contains(text(),'Ingredients')]//ancestor::div[@class='summary-question-container']/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
+
+		private string[] IngredientHeadingTitles => this.IngredientHeadings.Select(x => x.FindElement(By.XPath("./div"), 2).Text).ToArray();
+
+		public string IngredientType(string ingredient)
+		{
+			//find row for ingredient want, then add all values from ingreident types column to list
+			IWebElement ingredientRow = this.containerElement.FindElement(By.XPath($".//h2[contains(text(),'Ingredients')]//ancestor::div[@class='summary-question-container']//tr[.//div[text()='{ingredient}']]"), 2);
+			var newList = this.IngredientHeadingTitles;
+			int i = 1;
+			bool foundColumn = false;
+			foreach(var item in newList)
+			{
+				if(item== "Ingredient Type")
+				{
+					Report.Info($"The Ingredient Type column was in position {i} in the table");
+					foundColumn = true;
+					break;
+ 
+				}
+				i++;
+
+			}
+			if (!foundColumn)
+			{
+				Report.Failure("Was not able to find the column Ingredient Type in the Ingredients table");
+				return null;
+			}
+
+			IWebElement correctIngredientTypeCell = ingredientRow.FindElement(By.XPath($".//td[{i}]"),2);
+
+
+
+			string displayedType = correctIngredientTypeCell.FindElement(By.XPath($".//div"), 2).Text;
+			return displayedType;
+
+			
+
+			
+
+		}
+
+		public bool IngredientTypesMatch(string ingredient,string type)
+		{
+			
+			string actualType = this.IngredientType(ingredient);
+			if(type=="NA")
+			{
+				return (actualType == null);
+			}
+			return (actualType == type);
+
+		}
+
+		public List<string>FunctionalPurposes(string ingredient)
+		{
+			//find row for ingredient want, then add all values from ingreident types column to list
+			IWebElement functionalRow = this.containerElement.FindElement(By.XPath($".//h2[contains(text(),'Ingredients')]//ancestor::div[@class='summary-question-container']//tr[.//div[text()='{ingredient}']]"), 2);
+			var newList = this.IngredientHeadingTitles;
+			int i = 1;
+			bool foundColumn = false;
+			foreach (var item in newList)
+			{
+				if (item == "Functional Purpose")
+				{
+					Report.Info($"The Functional Purpose column was in position {i} in the table");
+					foundColumn = true;
+					break;
+
+				}
+				i++;
+
+			}
+			if (!foundColumn)
+			{
+				Report.Failure("Was not able to find the column Functional Purpose in the Ingredients table");
+				return null;
+			}
+
+			IWebElement correctIngredientTypeCell = functionalRow.FindElement(By.XPath($".//td[{i}]"), 2);
+
+			//List<IWebElement> ingredientTypeEls = correctIngredientTypeCell.FindElements(By.XPath($".//div//div"), 2).ToList();
+
+			string ingredientTypeEls = correctIngredientTypeCell.FindElement(By.XPath($".//div"), 2).Text;
+			string replacedStr = ingredientTypeEls.Replace("\r\n", "");			
+			string finalStr = replacedStr.TrimEnd(',');
+			List<string> result = finalStr.Split(new char[] { ',' }).ToList();			
+			return result;
+
+		}
+
+		
+		public bool FunctionalPurposesMatch(string ingredient, List<string> chosenPurposes)
+		{
+			
+			List<string> actualPurposes = this.FunctionalPurposes(ingredient);
+
+			var diffFound = new List<string>();
+			Report.Info($"The Number of found Functional Purposes was:{actualPurposes.Count()}");			
+			if(actualPurposes.Count == 1)
+			{
+				if (actualPurposes[0]=="" && chosenPurposes.Contains("NA"))
+				{
+					Report.Info("There were Functional purposes found as expected");
+					return true;
+				}
+			}
+			
+			foreach (var item in actualPurposes)
+			{
+				if (!chosenPurposes.Contains(item))
+				{
+					diffFound.Add(item);
+					Report.Info($"Found difference: {item}");
+				}
+			}
+
+			if (diffFound.Count == 0)
+			{
+				return true;
+			}
+			return false;
+
+
+
+
+		}
+		public bool DoesIngredientHeadingsContain(string headingName)
+		{
+
+			var newList = this.IngredientHeadingTitles;
+			if (newList.Contains(headingName))
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Did not find the Heading name: " + headingName + ". Heading names found are as follows: " + string.Join(",", newList));
+				return false;
+			}
+
+		}
+		
+		
+
 	}
 
 	class SummaryDocument

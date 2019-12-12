@@ -86,6 +86,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnterTextToSearchField(string value)
 		{
 			IWebElement searchEl = this.containerElement.FindElement(By.XPath(".//input[@type='text' and contains(@placeholder,'Start typing Product name or WPSID')]"), 2);
+			if(searchEl==null)
+			{
+				Report.Info("The search box element was not found");
+				return false;
+			}
+			Report.Info("Attempting to enter text into the search field...");
 			searchEl.EnterText(value);
 			return searchEl.GetAttribute("value") == value && GeneralUtilities.Wait_for_load_finish();
 		}

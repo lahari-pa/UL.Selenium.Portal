@@ -248,5 +248,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			string xPath = ".//a[@class='btn delete-selected']/i";
 			return this.containerElement.FindElement(By.XPath(xPath), 2).TryClick();
 		}
+
+		
 	}
 }

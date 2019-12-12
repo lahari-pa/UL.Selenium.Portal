@@ -7,6 +7,8 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
+using NTTQA.Selenium.SpecFlow;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -19,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement placeholderEl = this.containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 2);
 				placeholderEl.TryClick();
 				IWebElement clickResult;
-				IWebElement inputEl = this.containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+				IWebElement inputEl = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'component-search')]//input[@class='select2-search__field']"), 2);
 				// If the ingredient has a CAS number assigned, search by that string
 				if (!string.IsNullOrEmpty(ingredient.CASNumber))
 				{
@@ -342,13 +344,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				string totalExpected = this.IngredientRowCount().ToString();
 				string pubDisExpected = total;
 				string pubDisSummary = this.containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
-				string[] summaryActual = pubDisSummary.Split(new[] { " / " }, StringSplitOptions.None);
-				Report.Info("Public Disclosure Total was showing as: " + summaryActual[0] + " out of a total " + summaryActual[1] + " ingredients");
-				if (summaryActual[0] == pubDisExpected && summaryActual[1] == totalExpected)
+				string pubDisSummaryInt = pubDisSummary.Replace("%","");
+				double percentFoundAsDouble = Convert.ToDouble(pubDisSummaryInt);
+				double percentExpectedAsDouble = Convert.ToDouble(pubDisExpected) / Convert.ToDouble(totalExpected)*100;
+
+				Report.Info($"Percent Found was: {percentFoundAsDouble}");
+				Report.Info($"Percent Expected is: {percentExpectedAsDouble}");
+
+				if(percentFoundAsDouble==percentExpectedAsDouble)
 				{
 					return true;
 				}
 				return false;
+				
 			}
 			catch (Exception)
 			{
@@ -471,7 +479,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 				}
 				// Avoiding null reference exception on .GetValue() - "Loading more results" row at the bottom (no span with component-name)
-				IEnumerable<IWebElement> matchingNameResults = results.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='component-name']"), 2).Text.Trim() == ingredient.ComponentName.Trim());
+				IEnumerable<IWebElement> matchingNameResults = results.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='component-name']"), 2).Text.Trim().Contains(ingredient.ComponentName.Trim()));
 				if (!matchingNameResults.Any())
 				{
 					return false;
@@ -889,7 +897,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool IngredientMatchesFirstOption(string inputOption)
 		{
 			IWebElement resultMatch;
-			IList < IWebElement > results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+			IList<IWebElement> results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 			if (!results.Any())
 			{
 				Report.Info("No results were returned on search");
@@ -918,8 +926,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			string firstOption = resultMatch.FindElement(By.XPath(".//span[@class='component-name']"), 2)?.Text;
 			Report.Info($"First option was {firstOption}");
 			Report.Info($"Input option was {inputOption}");
-			
-			if(firstOption==inputOption)
+
+			if (firstOption == inputOption)
 			{
 				Report.Success("The first option matched the input option");
 				return true;
@@ -930,8 +938,130 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
-			
 
+
+		}
+
+		public bool ISelectIngredientType(string ingredienName, string ingredientType)
+		{
+			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredienName}']]"), 2);
+			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'ingredientType')]"), 2);
+			if(ingredientTypeBox==null)
+			{
+				Report.Failure("Could not find the Ingredient Type Input Box");
+				return false;
+			}
+			ingredientTypeBox.Select(ingredientType);
+			if(ingredientTypeBox.SelectedOption()== ingredientType)
+			{
+				Report.Info($"The correct Type was selectd. The Option selected was: {ingredientTypeBox.SelectedOption()}");
+				return true;
+			}
+			Report.Info($"Failed to select the correct Type. The Option selected was: {ingredientTypeBox.SelectedOption()}");
+			return false;
+
+		}
+
+		public bool ISelectAllFunctionalPurpose(string ingredientName)
+		{
+			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement functionalPurposeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'functionalPurpose')]"), 2);
+			if (functionalPurposeBox == null)
+			{
+				Report.Info("Could not find the Functional Purpose Input Box");
+				return false;
+			}
+			bool selectedOptionSuccessfull = true;
+			List<IWebElement> allOptions = functionalPurposeBox.FindElements(By.XPath(".//option[not(text()='Choose...')]"), 2).ToList();
+			var allOptionsStr = new List<string>();
+			foreach (var el in allOptions)
+			{
+				allOptionsStr.Add(el.Text);
+			}
+			Context.AddToContext(ingredientName + "FunctionalPurposesList", allOptionsStr);
+
+			if (!allOptionsStr.Any())
+			{
+				Report.Info("Could not find any Functional purpose options to select");
+				return false;
+			}
+			foreach (var option in allOptionsStr)
+			{
+				functionalPurposeBox.Select(option);
+				List<IWebElement> currentlySelectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
+
+				var currentlySelectedOptionsStr = new List<string>();
+				foreach (var item in currentlySelectedOptionsEl)
+				{
+					currentlySelectedOptionsStr.Add(item.Text);
+				}
+				
+				if (currentlySelectedOptionsStr.Contains("×" + option))
+				{
+					Report.Info($"The correct Purpose was selectd.");
+				}
+				else
+				{
+					Report.Info("Failed to select the correct Purpose");
+					selectedOptionSuccessfull = false;
+				}
+				
+			}
+			return selectedOptionSuccessfull;
+
+
+		}
+
+		public bool ISelectFunctionalPurpose(string ingredientName, string functionalPurpose)
+		{
+			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement functionalPurposeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'functionalPurpose')]"), 2);
+			if (functionalPurposeBox == null)
+			{
+				Report.Info("Could not find the Functional Purpose Input Box");
+				return false;
+			}
+			bool selectedOptionSuccessfull = true;
+			var selectedOptionsStr = new List<string>();
+
+				if (functionalPurpose == "NA")
+				{
+					Report.Info("The Option to Choose was set to NA, No Funcional Purpose will be selected");
+					return selectedOptionSuccessfull = true;
+				
+				}							
+
+				functionalPurposeBox.Select(functionalPurpose);
+
+				List<IWebElement> selectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
+				
+
+				foreach (var item in selectedOptionsEl)
+				{
+					selectedOptionsStr.Add(item.Text);
+				}
+
+				if( selectedOptionsStr.Contains("×"+ functionalPurpose))
+				{
+					Report.Info($"The correct Purpose was selected.");
+				}
+				else
+				{
+					Report.Info("Failed to select the correct Purpose");
+					selectedOptionSuccessfull = false;
+				}			
+				return selectedOptionSuccessfull;
+		}
+
+		internal bool TransparencyScorePercent(float p0, out float trScore)
+		{
+			IWebElement transparency = this.FindElement(By.XPath("//*[@id='transparency-score']/span"), 2);
+			if (!float.TryParse(transparency.Text.Remove(transparency.Text.Length - 1), out trScore))
+			{
+				Report.Failure("Transparency score could not be evaluated to an integer value. Displayed value is: " + transparency.Text);
+				return false;
+			}
+			return trScore == p0;
 		}
 	}
 }

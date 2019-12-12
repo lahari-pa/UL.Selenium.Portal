@@ -39,7 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyMessageText(string message)
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@class='h-message-text']"), 2);
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@class='h-message-text ']"), 2);
 			return elem != null && elem.Text == message;
 		}
 

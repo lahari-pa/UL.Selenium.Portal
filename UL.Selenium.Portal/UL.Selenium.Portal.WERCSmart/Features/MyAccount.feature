@@ -8,6 +8,7 @@
 @LandingPage
 @PaymentMethods
 @Freshdesk
+@RetailPartners
 @run_MyAccount
 Feature: MyAccount
 
@@ -68,6 +69,7 @@ Scenario: [65887] Pagination
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I navigate to the MyAccount page
+	Then I Create new users in the My Account page via the user Grid until there are atleast: 2 pages present
 	Then The My Account user grid is currently on page number: 1
 	Given I click next in the My Account user grid
 	Then The My Account user grid is currently on page number: 2
@@ -147,4 +149,20 @@ Scenario: [90197] Active and Inactive Filter on Your Company User Accounts grid
 	And I Select the Inactive filter
 	And I Confirm that you See the user you just created in the grid
 	And I confirm the new user is Not Active
-	
+
+
+@ScenarioId:1590
+Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+	And I navigate to My Account
+	And In the My Account page I navigate to the Company Information page
+	And In Stewardship table click edit
+	And I add following stewardship information
+		| Province         | Stewardship   |
+		| British Columbia | BC-1-1        |
+		| Saskatchewan     | SA-1-1        |
+	And In Stewardship table I click: Cancel
+	And I confirm the pop up shows the heading: Are you sure you wish to cancel?
+	And I confirm that I see the following text in the modal window popup: If you cancel, any changes will be lost. Continue?
+	And in the modal dialog I click Yes
+	And I confirm that I do not see any stewardship information
