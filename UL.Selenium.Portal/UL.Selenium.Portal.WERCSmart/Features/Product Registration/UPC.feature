@@ -485,3 +485,218 @@ Then I confirm that the Prouct UPC Table shows in the UPC Number column the valu
 Given I close the Data Summary tab
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase105352
+
+@ScenarioId:6025
+Scenario: [84510] Select Retailers in UPC screen
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+Then I save the product information as: TestCase84510
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+
+And I should see the Additional Product Information Page
+And I should see following statement: Select countries the product may be sold in
+And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
+And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
+And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
+Given I set all additional product information options to No
+Given in the Additional Product Information page I click Continue
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Propane       | 100     | false               | false       |            |
+
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+And I select the following retailers in the 'Select Retailers' window
+| Retailer       |
+| Amazon         |
+| Autozone       |
+| Best Buy       |
+| Costco         |
+| CVS            |
+| Dollar General |
+| Family Dollar  |
+| Kohl's         |
+| McLane         |
+
+Given I click the 'Add UPC' button
+Given I fill in the UPC data; UPC:0786987894855, Product Type:Paper bag, Product Weight:5
+Given I remove randomly selected retailers
+
+Given I click the 'Add Retailers' button
+Given I randomly select retailers to restore
+Given I click the 'Restore Selected' button
+
+Given I click the 'Add Retailers' button
+Given I click 'Select All' to add all removed retailers
+Given I click the 'Restore Selected' button
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84510
+
+
+
+@ScenarioId:6058
+Scenario: [87628] Universal Product Code (UPC) Step - Add Case UPC - Case UPC field validation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then the WERCSmart homepage should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Then I save the product information as: TestCase87628
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+And I should see the Additional Product Information Page
+And I should see following statement: Select countries the product may be sold in
+And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
+And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
+And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
+Given I set all additional product information options to No
+Given in the Additional Product Information page I click Continue
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Propane       | 100     | false               | false       |            |
+
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+And I select the following retailers in the 'Select Retailers' window
+| Retailer       |
+| Amazon         |
+
+Given I click the 'Add UPC' button
+
+Given I fill in the UPC data; UPC:ABCDEF, Product Type:Paper bag, Product Weight:5
+When I click continue
+Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
+Given I check for the appropriate alert: This field must be a number
+
+Given I fill in the UPC data; UPC:12345, Product Type:Paper bag, Product Weight:5
+When I click continue
+Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
+
+Given I fill in the UPC data; UPC:12345678910111213, Product Type:Paper bag, Product Weight:5
+When I click continue
+Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
+
+Given I fill in the UPC data; UPC:111111111111, Product Type:Paper bag, Product Weight:5
+When I click continue
+Then I check for the appropriate alert: Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit
+
+Given I fill in the UPC data; UPC:0727506002788, Product Type:Paper bag, Product Weight:5
+When I click continue
+Then I check for the appropriate alert: No error
+
+Given in the Universal Product Code (UPC) page I click Continue
+Then I check if the Regulatory Documents page is shown
+Then I navigate to the home page
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
+
+
+
+@tfs_design
+@ScenarioId:6054
+Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when Continuing
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+Then I save the product information as: TestCase87305
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+
+And I should see the Additional Product Information Page
+And I should see following statement: Select countries the product may be sold in
+And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
+And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
+And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
+Given I set all additional product information options to No
+Given I click continue
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Propane       | 100     | false               | false       |            |
+
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+And I select the following retailers in the 'Select Retailers' window
+| Retailer       |
+| Amazon         |
+| Autozone       |
+| Best Buy       |
+| Costco         |
+| CVS            |
+| Dollar General |
+
+Given I click the 'Add UPC' button
+Given I fill in the UPC data; UPC:0667539048202, Product Type:Paper bag, Product Weight:5
+Given I remove randomly selected retailers
+Given I click the 'Add Retailers' button
+Then I click continue
+Then I click NO for the UPCs Warning! popup TestCase87305
+Then I click continue
+Then I click YES for the UPCs Warning! popup TestCase87305
+Given I should see the Regulatory Documents to Provide Page
+Given I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
+Then I click continue
+Then I click continue
+Then I click continue
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+|                           |                       |                    |           | Black     | Odorless              | No data available | 10                    |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given If purchase details are showing click confirm order
+#And I navigate to the home page
+#Given I search for the product saved as: TestCase87305
+Then I confirm the retailers are removed TestCase87305
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87305
+
+
+
+@ScenarioId:6064
+Scenario: [87598]- Universal Product Code (UPC) Step - Add Case UPC - fields required
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Then I save the product information as: TestCase87598
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+
+And I should see the Additional Product Information Page
+And I should see following statement: Select countries the product may be sold in
+And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
+And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
+And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
+Given I set all additional product information options to No
+Given in the Additional Product Information page I click Continue
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Propane       | 100     | false               | false       |            |
+
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+And I select the following retailers in the 'Select Retailers' window
+| Retailer |
+| Amazon   |
+| CVS      |
+
+Given I click Add Case UPC
+Given in the Universal Product Code (UPC) page I click Continue
+
+Then I check if the textfields with the following placeholders display the error 'This is a required field.' bottom
+| Placeholder                       |
+| UPC Number                        |
+| Size (Weight Ounces)              |
+| Quantity of Units within the Case |
+
+Then I check if the dropdowns with the following default options display the error 'This is a required field.' bottom
+| Default Option         |
+| Container Type         |
+| Transportation Options |
+
+Then I confirm no error is shown below the Individual UPC contained in the Case Pack field 
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87598

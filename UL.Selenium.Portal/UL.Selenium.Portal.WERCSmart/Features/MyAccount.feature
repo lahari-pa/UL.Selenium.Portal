@@ -166,3 +166,390 @@ Scenario: [85512] My Account - Edit Stewardship Numbers - Cancel button
 	And I confirm that I see the following text in the modal window popup: If you cancel, any changes will be lost. Continue?
 	And in the modal dialog I click Yes
 	And I confirm that I do not see any stewardship information
+
+	@ScenarioId:6057
+Scenario: [85513] My Account - Edit Stewardship Numbers - Save button
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then the WERCSmart homepage should load
+Given I call Shared Step 62676 (Go To My Account)
+And In the My Account page I navigate to the Company Information page
+Then I click on the 'Edit' button in Company information in the Stewardship Numbers section
+Then I fill in Stweardship Numbers information
+| Stewardship | Issue Date | Expire Date |
+| test123       | 2019-01-30 | 2020-01-30  |
+| test123       | 2019-01-30 | 2020-01-30  |
+| test123       | 2019-01-30 | 2020-01-30  |
+| test123       | 2019-01-30 | 2020-01-30  |
+| test123       | 2019-01-30 | 2020-01-30  |
+Then I save Stewardship Numbers information
+Then I confirm that the data saved in the Stewardshp Numbers section is correct
+| Stewardship | Issue Date | Expire Date |
+| test123       | 2019-01-30 | 2020-01-30  |
+| test123       | 2019-01-30 | 2020-01-30  |
+| test123       | 2019-01-30 | 2020-01-30  |
+| test123       | 2019-01-30 | 2020-01-30  |
+| test123       | 2019-01-30 | 2020-01-30  |
+
+
+@ScenarioId:6056
+Scenario: [85258] My Account - Stewardship Numbers - table display validation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then the WERCSmart homepage should load
+Given I call Shared Step 62676 (Go To My Account)
+And In the My Account page I navigate to the Company Information page
+Then I check that a heading with the name: Stewardship Numbers exists
+Then I check if there is a table in the Stewardship Numbers section
+Then I find out how many rows are in the table in the Stewardship Numbers section
+Then I check if the Stewardship Numbers table columns names match the following column names
+| Column Name   |
+| Province      |
+| Stewardship   |
+| Issue Date    |
+| Expire Date   |
+Then I check if the Stewardship Numbers table province names match the following province names
+| Province Name    |
+| British Columbia |
+| Saskatchewan     |
+| Manitoba         |
+| Ontario          |
+| Quebec           |
+Then I check if 'Edit' button exists in the Stewardship Numbers section
+
+
+@ScenarioId:6063
+Scenario: [97846] - Company Information - Verify the 'State' drop-down is Available
+And I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then the WERCSmart homepage should load
+Given I call Shared Step 62676 (Go To My Account)
+And In the My Account page I navigate to the Company Information page
+Then I click on the 'Edit' button in Company information in the Billing Address section
+Then I select the state: Alabama in the Billing Address section
+Then I click the 'Save' button in the Billing Address section
+Then I confirm that the correct state: Alabama has been saved in the Billing Address
+Then I click on the 'Edit' button in Company information in the Shipping Address section
+Then I select the state: Wyoming in the Shipping Address section
+Then I click the 'Save' button in the Shipping Address section
+Then I confirm that the correct state: Wyoming has been saved in the Shipping Address
+Then I click the User Icon
+And I click on Sign Out
+
+
+@ScenarioId:6069
+Scenario: [53694] - User Role - Reset Password
+Given I Login into WERCSmart Portal - Admin Role - Password Reset
+Then the WERCSmart homepage should load
+Given I call Shared Step 62676 (Go To My Account)
+Given I go to Reset Password in User Grid for the current user
+Then I call a Shared Step to create a new password: Welcome22!
+Then I click the User Icon
+And I click on Sign Out
+Given I Login into WERCSmart Portal - Admin Role - Password Reset
+
+
+@ScenarioId:6137
+#When running this, update the date 2019-12-09 to whatever the current date is
+#Update the date in the above sentence to avoid future confusion
+Scenario: [87349] - My Account - Edit Stewardship Numbers - Date validation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then the WERCSmart homepage should load
+Given I call Shared Step 62676 (Go To My Account)
+And In the My Account page I navigate to the Company Information page
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| testingCurrentRow | 2020-12-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be prior to current date. in the row with the province: British Columbia
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| testingCurrentRow | 2019-12-08 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: No Error in the row with the province: British Columbia
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| testingCurrentRow | 2019-12-08 | 2019-12-08  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be later than current date. in the row with the province: British Columbia
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| testingCurrentRow | 2019-12-08 | 2019-12-08  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be later than current date. in the row with the province: British Columbia
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| testingCurrentRow | 2019-12-08 | 2020-12-09  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: No Error in the row with the province: British Columbia
+
+
+
+
+
+
+
+
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2020-12-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be prior to current date. in the row with the province: Saskatchewan
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: No Error in the row with the province: Saskatchewan
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| testingCurrentRow | 2019-12-08 | 2019-12-08  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be later than current date. in the row with the province: Saskatchewan
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| testingCurrentRow | 2019-12-08 | 2019-12-08  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be later than current date. in the row with the province: Saskatchewan
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| testingCurrentRow | 2019-12-08 | 2020-12-09  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: No Error in the row with the province: Saskatchewan
+
+
+
+
+
+
+
+
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2020-12-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be prior to current date. in the row with the province: Manitoba
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: No Error in the row with the province: Manitoba
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2019-12-08  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be later than current date. in the row with the province: Manitoba
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2019-12-08  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be later than current date. in the row with the province: Manitoba
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2020-12-09  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: No Error in the row with the province: Manitoba
+
+
+
+
+
+
+
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2020-12-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be prior to current date. in the row with the province: Ontario
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-19 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2020-12-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: No Error in the row with the province: Ontario
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2019-12-08  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be later than current date. in the row with the province: Ontario
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2019-12-08  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be later than current date. in the row with the province: Ontario
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship       | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2020-12-09  |
+| test              | 2019-01-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: No Error in the row with the province: Ontario
+
+
+
+
+
+
+
+
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2020-12-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be prior to current date. in the row with the province: Quebec
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship | Issue Date | Expire Date |
+| test              | 2019-01-19 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2020-12-30 | 2020-01-30  |
+Then I save the Stewardship Numbers data
+Given I look for the error: No Error in the row with the province: Quebec
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2019-12-08  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be later than current date. in the row with the province: Quebec
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2019-12-08  |
+Then I save the Stewardship Numbers data
+Given I look for the error: Date must be later than current date. in the row with the province: Quebec
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship | Issue Date | Expire Date |
+| test              | 2019-01-30 | 2019-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| test              | 2019-01-30 | 2020-01-30  |
+| testingCurrentRow | 2019-12-08 | 2020-12-09  |
+Then I save the Stewardship Numbers data
+Given I look for the error: No Error in the row with the province: Quebec
+
+
+
+
+
+
+
+
+
+Then I pass the following data to the Stweardship Numbers table
+| Stewardship | Issue Date | Expire Date |
+|             |            |             |
+|             |            |             |
+|             |            |             |
+|             |            |             |
+|             |            |             |
+Then I save the Stewardship Numbers data

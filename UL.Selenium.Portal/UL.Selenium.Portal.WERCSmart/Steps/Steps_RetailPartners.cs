@@ -20,6 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "RetailPartners")]
 	class StepsRetailPartners
 	{
+
 		[StepDefinition(@"If I see the retail partners page I set all data consent tiers to true for all retailers in the top section")]
 		public void GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection()
 		{
@@ -962,6 +963,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						"Column name is not found: " + thisRow["Column"],
 						"Column name has been found as expected: " + thisRow["Column"], false, false);
 				}
+			}
+		}
+
+		[StepDefinition(@"I get the excel row data file saved as: (.*) and save the data to context")]
+		public void GrabExcelRowDataAndSaveItToContext(string savedAs)
+		{
+
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
+				List<string> SecondRow = ExcelUtils.Excel_GetRow(3);
+
+				Dictionary<string, string> excelData = new Dictionary<string, string>();
+				for (int i = 0; i < SecondRow.Count; i++)
+				{
+					if ((SecondRow[i] != "-") && (SecondRow[i] != null))
+					{
+						Context.AddToContext(FirstRow[i], SecondRow[i]);
+						excelData.Add(FirstRow[i], SecondRow[i]);
+					}
+
+				}
+				Context.AddToContext("ExcelDictionaryData", excelData);
+
 			}
 		}
 

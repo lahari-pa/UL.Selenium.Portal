@@ -20,6 +20,7 @@
 @PaymentMethods
 @ProductSetUp
 @CreateProducts
+@Homepage
 Feature: Home Page
 
 #pass - staging 4.10
