@@ -13,8 +13,7 @@ using System.IO;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.BaseClasses;
 using System.Collections.ObjectModel;
-using Castle.Components.DictionaryAdapter;
-using Castle.Core.Internal;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -859,7 +858,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<KeyValuePair<int, string>> TableHeaders(IWebElement table)
 		{
-			List<KeyValuePair<int, string>> th = new EditableList<KeyValuePair<int, string>>(); //new List
+			List<KeyValuePair<int, string>> th = new List<KeyValuePair<int, string>>(); //new List
 			ReadOnlyCollection<IWebElement> listOfHeaders = table.FindElements(By.XPath(".//th"));
 			for (int i = 0; i < listOfHeaders.Count; i++)
 			{

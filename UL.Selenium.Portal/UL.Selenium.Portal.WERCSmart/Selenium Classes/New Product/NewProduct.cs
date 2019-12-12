@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Components.DictionaryAdapter;
-using Castle.Core.Internal;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
@@ -13,7 +11,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
-
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -491,7 +489,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public List<KeyValuePair<int, string>> TableHeaders(IWebElement table)
 		{
-			List<KeyValuePair<int, string>> th = new EditableList<KeyValuePair<int, string>>();
+			List<KeyValuePair<int, string>> th = new List<KeyValuePair<int, string>>();
 			ReadOnlyCollection<IWebElement> listOfHeaders = table.FindElements(By.XPath(".//th"));
 			for (int i = 0; i < listOfHeaders.Count; i++)
 			{

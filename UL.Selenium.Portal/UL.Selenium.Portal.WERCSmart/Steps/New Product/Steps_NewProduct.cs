@@ -1,4 +1,3 @@
-using Castle.Core.Internal;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
@@ -21,6 +20,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -938,7 +938,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void CheckRadioButtonsInSectionAndOrder(string shouldOrNot, string section, Table expected)
 		{
 			var expectedRadioButtons = new List<string>();
-			expected.Rows.ForEach(x => expectedRadioButtons.Add(x["Button"]));
+			expected.Rows.Cast<TableRow>().ToList().ForEach(x => expectedRadioButtons.Add(x["Button"]));
 			List<string> radioButtonsShowing = new NewProduct().RadioButtonsInSection(section);
 
 			if (shouldOrNot == "should")
@@ -1936,7 +1936,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var expectedOptions = new List<string>();
 			var differences = new List<string>();
-			expected.Rows.ForEach(x => expectedOptions.Add(x["Option"]));
+			expected.Rows.Cast<TableRow>().ToList().ForEach(x => expectedOptions.Add(x["Option"]));
 			var expectedOptionsLower = expectedOptions.Select(x => x.ToLower()).ToList();
 			List<string> displayedOptions = new NewProduct().GetAllOptionsForSection(section);
 			var displayedOptionsLower = displayedOptions.Select(x => x.ToLower()).ToList();
@@ -2088,7 +2088,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			TestReport.UseSubSteps = true;
 			var expectedParagraphs = new List<string>();
-			paragraphText.Rows.ForEach(x => expectedParagraphs.Add(x["Paragraph"]));
+			paragraphText.Rows.Cast<TableRow>().ToList().ForEach(x => expectedParagraphs.Add(x["Paragraph"]));
 			List<string> actualParagraphs = new NewProduct().AllAdditionalStatementParagraphs();
 			int count = 1;
 			foreach (string para in actualParagraphs)

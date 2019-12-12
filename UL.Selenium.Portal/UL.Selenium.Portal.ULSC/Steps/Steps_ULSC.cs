@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
@@ -714,7 +713,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		public void ConfirmWidgetPanelsDisplayedOnTheDashboard(string displayed, Table table)
 		{
 			var expectedWidgets = new List<string>();
-			table.Rows.ForEach(x => expectedWidgets.Add(x["Widget"]));
+			table.Rows.Cast<TableRow>().ToList().ForEach(x => expectedWidgets.Add(x["Widget"]));
 			Report.Info("Expected widgets are: " + string.Join(", ", expectedWidgets));
 			List<string> actualWidgets = new Dashboard().WidgetTitles();
 			Report.Info("Actual widgets are: " + string.Join(", ", actualWidgets));

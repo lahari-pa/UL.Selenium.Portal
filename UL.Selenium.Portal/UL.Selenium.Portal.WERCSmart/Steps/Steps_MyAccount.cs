@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
 using Mailosaur;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.UniversalFunctions;
@@ -863,7 +862,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selMyLibrary = new MyAccount_MyLibrary();
 			var tabsExpected = new List<string>();
-			tabs.Rows.ForEach(x => tabsExpected.Add(x["Tab"]));
+			tabs.Rows.Cast<TableRow>().ToList().ForEach(x => tabsExpected.Add(x["Tab"]));
 			List<string> tabsDisplayed = selMyLibrary.AllTabs();
 			Report.IsTrue(!tabsDisplayed.Except(tabsExpected).Any() && tabsDisplayed.Count == tabsExpected.Count,
 				"The displayed tabs did not match the list of expected tabs. Displayed was: " + string.Join(", ", tabsDisplayed),

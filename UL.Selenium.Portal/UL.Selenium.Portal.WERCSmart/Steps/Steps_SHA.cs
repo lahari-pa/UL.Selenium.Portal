@@ -16,8 +16,8 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
 using TReVor.Api.Wrapper.Classes;
 using System.IO;
-using Castle.Core.Internal;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
