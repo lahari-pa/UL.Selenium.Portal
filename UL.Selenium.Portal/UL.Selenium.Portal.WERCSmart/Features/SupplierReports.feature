@@ -533,7 +533,13 @@ Scenario: [76759] Waste Classification Summary Report
 		| West Virginia  |
 		| Wisconsin      |
 		| Wyoming        |
+	Then I get the excel row data file saved as: SupplierReport76759 and save the data to context
 	And I delete the Supplier Report file saved as SupplierReport76759
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then In the Authoring menu I select Power Designer Plus
+	Then I filter subformat SWST and open checklist [SECT0150] Waste Checklist
+	Then I check if the excel data matches the checklist data
+	Then I close the window that opened
 
 #Unable to run because the report requires a 1 year old product that is in completed status
 @tfs_design
