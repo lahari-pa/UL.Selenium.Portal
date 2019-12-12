@@ -196,7 +196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Get transparency percentage and save as (.*)")]
 		public void GetTransparencyPercentageAndSaveAs(string saveAs)
 		{
-			decimal transparencyPercentage = new DataSummary().GetTransparencyPercentage();
+			double transparencyPercentage = new DataSummary().GetTransparencyPercentage();
 			if (transparencyPercentage > -1)
 			{
 				Context.AddToContext(saveAs, transparencyPercentage);

@@ -173,13 +173,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (clickResult.TryClick())
 				{
 					// If access code validation use default '1234'
-					IWebElement validationModal = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//div[@class='modal-content']"), 2);
-					if(validationModal != null)
+					var validationModal = new ModalDialog();
+					if(validationModal.WaitForContainerToBeVisible(5))
 					{
-						IWebElement inputValidation = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//input[@type='text']"), 2);
-						inputValidation.EnterText("1234");
-						IWebElement buttonValidation = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//button[text()='Validate']"), 2);
-						buttonValidation.TryClick();
+						bool test1 = validationModal.EnterValidation("1234");
+						bool test2 = validationModal.Click_Validate();
 					}
 					// So we have now selected the element, so we need to try and get the first 'new' entry which contains this CAS Number, and hasn't had the Percentage field filled
 					bool success = true;

@@ -501,7 +501,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public decimal GetTransparencyPercentage()
+		public double GetTransparencyPercentage()
 		{
 			try
 			{
@@ -532,7 +532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return -1;
 				}
 				string calcRatio = regMatch.Groups[1].ToString();
-				decimal test = Convert.ToDecimal(calcRatio);
+				double test = Convert.ToDouble(calcRatio);
 				return test;
 			}
 			catch (Exception e)
