@@ -276,8 +276,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Rejected Registration - Edit -  Message is di
 	And I should see the The Product Page
 
 Scenario: [NOTINCLUDEDGENERALTEST] Advanced Reporting - Registrations Published report -
-	#For 92210 Ticket Should be 98534
-	#Update 98534 in TFS
+
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
