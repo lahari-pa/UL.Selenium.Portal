@@ -2683,23 +2683,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
         }
 
-        [StepDefinition(@"I call Shared Step 58610 \(Confirm Restrict Use - Restrict\)")]
-        public void SharedConfirmRestrictUse_Restrict()
-        {
-            TestReport.UseSubSteps = true;
-            var MyStepsNewProduct = new StepsNewProduct();
-            var restrictUse = new Table("Section");
-            restrictUse.AddRow("Do you want to restrict searchable access to your registered formula?");
-            MyStepsNewProduct.CheckDisplayedSections("see", restrictUse);
-            TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-                "Do you want to restrict searchable access to your registered formula?",
-                "Restrict - Customers should contact my organization for an access code"));
-            MyStepsNewProduct.SetTheSectionOptionTo(
-                "Do you want to restrict searchable access to your registered formula?",
-                " - Customers should contact my organization for an access code");
-            TestReport.StartStep("in the Restrict Use page I click continue");
-            MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
-        }
+		[StepDefinition(@"I call Shared Step 58610 \(Confirm Restrict Use - Restrict\)")]
+		public void SharedConfirmRestrictUse_Restrict()
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var restrictUse = new Table("Section");
+			restrictUse.AddRow("Do you want to restrict searchable access to your registered formula?");
+			MyStepsNewProduct.CheckDisplayedSections("see", restrictUse);
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Do you want to restrict searchable access to your registered formula?",
+				"Restrict - Customers should contact my organization for an access code"));
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Do you want to restrict searchable access to your registered formula?",
+				" - Customers should contact my organization for an access code");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Access Code",
+				"1234"));
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Access Code",
+				"1234");
+			TestReport.StartStep("in the Restrict Use page I click continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
+		}
 
         [StepDefinition(@"I call Shared Step 63219 \(Retailer Association - Select No Retailer - Click continue\)")]
         public void SharedRetailerAssociatedion_SelectNoRetailer_ClickContinue()
@@ -5514,17 +5520,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             newProductSteps.ClickContinue();
         }
 
-        [StepDefinition(
-            @"I call Shared Step 79491 \(Formulation > 3rd Party - Accept formulation - Decline Tier 2 - Continue\)")]
-        public void ThenICallSharedStep79491FormulationRdParty_AcceptFormulation_DeclineTier_Continue()
-        {
-            TestReport.UseSubSteps = true;
-            var thisMyIngredients = new Steps_MyIngredients();
-            thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
-            thisMyIngredients.InTheFormulationThirdPartySCreenISetDeclinedTo("true");
-            var thisStepsNewProduct = new StepsNewProduct();
-            thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
-        }
+		[StepDefinition(
+			@"I call Shared Step 79491 \(Formulation > 3rd Party - Accept formulation - Decline Tier 2 - Continue\)")]
+		public void ThenICallSharedStep79491FormulationRdParty_AcceptFormulation_DeclineTier_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			var thisMyIngredients = new Steps_MyIngredients();
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
+			//thisMyIngredients.InTheFormulationThirdPartySCreenISetDeclinedTo("true");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Declined");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 4.1 Derived Results", "Declined");
+			var thisStepsNewProduct = new StepsNewProduct();
+			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
+		}
 
         [StepDefinition(
             @"call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: (.*)")]
@@ -6158,27 +6166,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
         }
 
-        [StepDefinition(
-            @"I call Shared Step 80780 - My Products - Filter for product - View - Note transparency ratio - close summary for product saved as: (.*)")]
-        public void GivenICallSharedStep_MyProducts_FilterForProduct_View_NoteTransparencyRatio_CloseSummary(
-            string savedAs)
-        {
-            TestReport.UseSubSteps = true;
-            TestReport.StartStep("I filter for the product: " + savedAs);
-            var thisStepsProductGrid = new StepsProductGrid();
-            var thisStepsDataSummarySheet = new StepsDataSummarySheet();
-            var myGlobalSteps = new GlobalSteps();
+		[StepDefinition(
+			@"I call Shared Step 80780 - My Products - Filter for product - View - Note transparency percentage - close summary for product saved as: (.*)")]
+		public void GivenICallSharedStep_MyProducts_FilterForProduct_View_NoteTransparencyRatio_CloseSummary(
+			string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I filter for the product: " + savedAs);
+			var thisStepsProductGrid = new StepsProductGrid();
+			var thisStepsDataSummarySheet = new StepsDataSummarySheet();
+			var myGlobalSteps = new GlobalSteps();
 
             thisStepsProductGrid.GivenISearchForTheProductSavedAs(savedAs);
             thisStepsProductGrid.WhenIClickRowActionsForTheFirstProductReturned();
 
-            thisStepsProductGrid.ClickRowAction("View");
-            TestReport.StartStep("I switch to the Data Summary page");
-            myGlobalSteps.SwitchToDataSumaryTab();
-            thisStepsDataSummarySheet.GetIngredientsFromDataSummaryWindowAndAddToProductSavedAs(savedAs);
-            thisStepsDataSummarySheet.GetTransparencyRatioAndSaveAs("TransparencyRatio");
-            TestReport.StartStep("I close the Data Summary tab");
-            myGlobalSteps.CloseDataSummaryTab();
+			thisStepsProductGrid.ClickRowAction("View");
+			TestReport.StartStep("I switch to the Data Summary page");
+			myGlobalSteps.SwitchToDataSumaryTab();
+			thisStepsDataSummarySheet.GetIngredientsFromDataSummaryWindowAndAddToProductSavedAs(savedAs);
+			thisStepsDataSummarySheet.GetTransparencyPercentageAndSaveAs("TransparencyPercentage");
+			TestReport.StartStep("I close the Data Summary tab");
+			myGlobalSteps.CloseDataSummaryTab();
 
 
             //Scroll till you see the Ingredients list - make a note of the transparency ratio shown

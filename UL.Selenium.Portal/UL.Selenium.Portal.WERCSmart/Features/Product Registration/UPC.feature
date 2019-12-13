@@ -700,3 +700,30 @@ Then I check if the dropdowns with the following default options display the err
 Then I confirm no error is shown below the Individual UPC contained in the Case Pack field 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87598
+
+@ScenarioId:6226
+Scenario: [115334] Target - Add UPC - DPCI - is no longer required
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase115334
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer       |
+		| Target         |
+	Then I click Done on Select Retailers window
+	Then I click continue
+	And I click the 'Add UPC' button
+	Then I click continue
+	Then I confirm that DPCI label text for retailer Target UPC item 1 matches: DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.
+	Then I confirm that DPCI for retailer Target UPC should not be required
+	Then I generate a random UPC number and save as: UPC#115334_1
+	And I enter UPC Number: saved as UPC#115334_1
+	And I Select a container type from the drop down list
+	And I enter Size Value: 12
+	Then I click Continue and should not see an error message
+	And In the New Product page I should be on tab: Review and Submit
+	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase115334

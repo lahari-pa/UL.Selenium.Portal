@@ -800,6 +800,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+
+		public bool IsRequiredValueOfRetailerInActiveRow(string retailerID, string field)
+		{
+			IWebElement isRequiredLabel = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]//..//p[@class='form-error']"), 2);
+			return isRequiredLabel.Displayed;
+		}
 	}
 
 	public class DeleteRowsWarning : SeleniumBaseObject
