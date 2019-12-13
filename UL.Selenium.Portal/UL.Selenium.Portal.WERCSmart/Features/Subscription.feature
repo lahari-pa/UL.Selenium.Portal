@@ -1046,7 +1046,7 @@ Then In the Purchase Summary screen I click Confirm Order
 #Given I log in with email: User_ceef42822c24.kxxyxunf@mailosaur.io and password: Pa4*ytuufnn
 Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
 
-Scenario: [119192] Check drop downs in the subscription page are working
+Scenario: [119192] Subscription - Articles/Enhanced Articles/Formulated Products Drop Down Menus - Show/Select Options
 
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I click on My Account
