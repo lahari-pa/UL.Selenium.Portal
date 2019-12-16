@@ -205,6 +205,7 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 
 #Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87913
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
+@ScenarioId:6263
 Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87917
