@@ -1037,6 +1037,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectAcceptRadio()
 		{
+			SeleniumBrowser.ScrollToTopOfPage();
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//span[contains(text(), 'Accept')]/../input"), 2);
 			if (el == null)
 			{
