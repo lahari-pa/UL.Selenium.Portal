@@ -16,7 +16,7 @@ using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.UPC;
 using NTTQA.Selenium.UniversalFunctions;
 using System.Text.RegularExpressions;
 using System.Collections;
-using Castle.Core.Internal;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {

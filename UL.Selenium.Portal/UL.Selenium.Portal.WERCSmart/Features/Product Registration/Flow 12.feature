@@ -53,6 +53,8 @@ And I click continue
 And I click continue
 And I click continue
 And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+And I should see the Sustainability Page
+Given in the Sustainability page I click Continue
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 

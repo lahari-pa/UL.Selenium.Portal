@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
 using NTTQA.Selenium.Reporting.Core;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
@@ -176,7 +176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmDisplayedColumnsInEPATable(Table columns)
 		{
 			var expectedColumns = new List<string>();
-			columns.Rows.ForEach(x => expectedColumns.Add(x["Column Heading"]));
+			columns.Rows.Cast<TableRow>().ToList().ForEach(x => expectedColumns.Add(x["Column Heading"]));
 			var actualColumns = new NewProduct().TableColumnHeadings();
 			Report.IsTrue(expectedColumns.All(x => actualColumns.Contains(x)),
 				"The expected columns were not displayed in the EPA table. Expected: " + string.Join(", ", expectedColumns) + ". Actual: " + string.Join(", ", actualColumns),

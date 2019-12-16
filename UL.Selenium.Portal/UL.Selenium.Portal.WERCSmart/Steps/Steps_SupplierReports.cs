@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
@@ -11,6 +10,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using NTTQA.Selenium.Cache;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {

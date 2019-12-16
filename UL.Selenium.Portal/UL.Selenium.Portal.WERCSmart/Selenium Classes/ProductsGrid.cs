@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
@@ -9,7 +8,7 @@ using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
-using NTTQA.Selenium.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

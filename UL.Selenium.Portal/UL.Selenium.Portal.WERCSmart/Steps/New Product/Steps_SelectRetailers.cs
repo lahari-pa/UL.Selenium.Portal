@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
@@ -47,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var retailersToSelect = new List<string>();
 			var selSelectRetailers = new SelectRetailers();
-			retailers.Rows.ForEach(x => retailersToSelect.Add(x["Retailer"]));
+			retailers.Rows.Cast<TableRow>().ToList().ForEach(x => retailersToSelect.Add(x["Retailer"]));
 			foreach (string retailer in retailersToSelect)
 			{
 				Report.IsTrue(selSelectRetailers.SelectRetailerFromListView(retailer), "Failed to select retailer: " + retailer + " from the Select Retailers list view", "Successfully selected the retailer: " + retailer + " from the Select Retailers list view");
@@ -174,7 +173,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var selSelectRetailers = new SelectRetailers();
 			var expectedSelected = new List<string>();
-			retailers.Rows.ForEach(x => expectedSelected.Add(x["Retailer"]));
+			retailers.Rows.Cast<TableRow>().ToList().ForEach(x => expectedSelected.Add(x["Retailer"]));
 			List<string> actualSelected = selSelectRetailers.SelectedRetailers();
 			Report.IsTrue(expectedSelected.All(x => actualSelected.Contains(x)),
 				"Not all of the expected retailers were selected!",

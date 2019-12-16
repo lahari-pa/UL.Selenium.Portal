@@ -319,6 +319,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selForwardProductReg = new ForwardProductRegistration();
 			if (savedAs.ToLower().Contains("list"))
 			{
+				Report.Info($"Saved as contains the word list.");
 				var ids = (List<string>)Context.GetFromContext(savedAs);
 				if (ids == null)
 				{
@@ -346,7 +347,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-
+				Report.Info($"Saved as does not contain the word list.");
 				string id = Context.GetFromContext(savedAs)?.ToString();
 				if (id == null)
 				{

@@ -246,7 +246,7 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	Given I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 	Given I click continue
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87917, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
+	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87917, container type: Aerosol Can and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
 	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87917, container type: Aerosol Can and size: 33
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
@@ -291,7 +291,7 @@ Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Com
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87922, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
+	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87922, container type: Aerosol Can and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue

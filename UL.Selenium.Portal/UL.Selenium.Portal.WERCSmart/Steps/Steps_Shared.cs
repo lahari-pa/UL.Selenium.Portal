@@ -1,4 +1,3 @@
-using Castle.Core.Internal;
 using NTTQA.Selenium.Cache;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
@@ -13,6 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;

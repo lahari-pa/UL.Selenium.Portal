@@ -3,12 +3,10 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using System.Collections.Generic;
-using TestStack.White.UIItems.TabItems;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
-using Castle.Core.Internal;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -542,8 +540,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
-			this.AdditionalProductInformation_YesToCACleaning();
-			this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
+			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotCACleaningNotPLPNotGNFR_Continue();
+
 			newProductSteps.ClickContinue();			
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			tableIngredients.AddRow("Formaldehyde", "100", "false", "false", "");
