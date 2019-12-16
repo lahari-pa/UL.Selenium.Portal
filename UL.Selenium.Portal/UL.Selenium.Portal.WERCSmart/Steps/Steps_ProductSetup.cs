@@ -1383,14 +1383,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional documents");
 			//Then in the Product aliases page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Product aliases");
+			//TestReport.StartStep($"Selecting No in the Restrict Use Page");
 			//Then in the Use Restrict page I select Do Not Restrict
-			newProductSteps.DoNotRestrictUse_Restrict();
+			//And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+			//newProductSteps.DoNotRestrictUse_Restrict();
+			sharedSteps.SharedConfirmRestrictUse_Restrict();			
 			//In the Sustainability page I click Continue
 			newProductSteps.ClickContinue();
 			//And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
-			//And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
-			sharedSteps.SharedConfirmRestrictUse_Restrict();
+			
 			//And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 			sharedSteps.SharedGoToSummaryAndVerifyData("Raw material");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)

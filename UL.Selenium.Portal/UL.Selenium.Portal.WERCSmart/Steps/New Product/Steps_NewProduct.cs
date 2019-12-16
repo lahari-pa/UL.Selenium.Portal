@@ -2728,6 +2728,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void DoNotRestrictUse_Restrict()
 		{
 			TestReport.UseSubSteps = true;
+			Report.Info("Selecting No in the Restrict Use section");
 			var MyStepsNewProduct = new StepsNewProduct();
 			var restrictUse = new Table("Section");
 			restrictUse.AddRow("Do you want to restrict searchable access to your registered formula?");
