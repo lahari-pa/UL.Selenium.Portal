@@ -235,7 +235,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			bool pass = false;
 
-			var genericIngParts = new Ingredient {
+			var ing = new Ingredient {
 				ComponentName = ingredient.ComponentName,
 				CASNumber = ingredient.CASNumber,
 				Percent = ingredient.Percent,
@@ -243,7 +243,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				TradeSecret = ingredient.TradeSecret,
 				PublicName = ingredient.PublicName
 			};
-			this.AddIngredient(genericIngParts);
+			this.AddIngredient(ing);
 
 			pass = this.ISelectIngredientType(ingredient.ComponentName, ingredient.IngredientType);
 
@@ -401,19 +401,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				string totalExpected = this.IngredientRowCount().ToString();
 				string pubDisExpected = total;
 				string pubDisSummary = this.containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
-				string pubDisSummaryInt = pubDisSummary.Replace("%","");
+				string pubDisSummaryInt = pubDisSummary.Replace("%", "");
 				double percentFoundAsDouble = Convert.ToDouble(pubDisSummaryInt);
-				double percentExpectedAsDouble = Convert.ToDouble(pubDisExpected) / Convert.ToDouble(totalExpected)*100;
+				double percentExpectedAsDouble = Convert.ToDouble(pubDisExpected) / Convert.ToDouble(totalExpected) * 100;
 
 				Report.Info($"Percent Found was: {percentFoundAsDouble}");
 				Report.Info($"Percent Expected is: {percentExpectedAsDouble}");
 
-				if(percentFoundAsDouble==percentExpectedAsDouble)
+				if (percentFoundAsDouble == percentExpectedAsDouble)
 				{
 					return true;
 				}
 				return false;
-				
+
 			}
 			catch (Exception)
 			{
@@ -951,22 +951,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
-		public class CACleaningIngredient
+		public class CACleaningIngredient : Ingredient
 		{
-			public string ComponentName { get; set; } = "";
-			public string CASNumber { get; set; } = "";
-			public string Percent { get; set; } = "";
-			public bool PublicallyDisclosed { get; set; } = false;
-			public bool TradeSecret { get; set; } = false;
-			public string PublicName { get; set; } = "";
 			public string IngredientType { get; set; } = "";
 			public string FunctionalPurpose { get; set; } = "";
 			public bool Clean { get; set; } = false;
 			public bool Certified { get; set; } = false;
-			public bool TradeSecretEnabled { get; set; } = false;
-			public bool PublicDisclosureEnabled { get; set; } = false;
-			public bool PublicNameEnabled { get; set; } = false;
-			public bool Selected { get; set; } = false;
 		}
 
 		public bool IngredientMatchesFirstOption(string inputOption)
@@ -1070,7 +1060,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					currentlySelectedOptionsStr.Add(item.Text);
 				}
-				
+
 				if (currentlySelectedOptionsStr.Contains("×" + option))
 				{
 					Report.Info($"The correct Purpose was selectd.");

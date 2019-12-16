@@ -367,6 +367,7 @@ Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87923 and its status is: Completed
 
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
+@tfs_design
 @ScenarioId:6151
 Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
