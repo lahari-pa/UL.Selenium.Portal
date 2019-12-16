@@ -501,7 +501,79 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public double GetTransparencyPercentage()
+		{
+			try
+			{
+				IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
 
+				if (ingredientsTable == null)
+				{
+					Report.Error("Failed to find ingredients table");
+					return -1;
+				}
 
+				var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr")).ToList();
+
+				if (ingredientsRows.Count == 0)
+				{
+					Report.Info("There are no ingredients in the able");
+					return -1;
+				}
+
+				IWebElement ratioRow = ingredientsRows[(ingredientsRows.Count - 1)];
+				string sRatio = ratioRow.FindElements(By.XPath(".//td"))[2].GetValue();
+				Report.Info("Percentage: " + sRatio);
+
+				string pattern = @"(\d+\.\d\d)";
+				Match regMatch = Regex.Match(sRatio, pattern);
+				if (!regMatch.Success || regMatch.Groups.Count != 2)
+				{
+					return -1;
+				}
+				string calcRatio = regMatch.Groups[1].ToString();
+				double test = Convert.ToDouble(calcRatio);
+				return test;
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+				return -1;
+			}
+
+		}
+
+		public string SGetTransparencyPercentage()
+		{
+			try
+			{
+				IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+
+				if (ingredientsTable == null)
+				{
+					Report.Error("Failed to find ingredients table");
+					return null;
+				}
+
+				var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr")).ToList();
+
+				if (ingredientsRows.Count == 0)
+				{
+					Report.Info("There are no ingredients in the able");
+					return null;
+				}
+
+				IWebElement ratioRow = ingredientsRows[(ingredientsRows.Count - 1)];
+				string sRatio = ratioRow.FindElements(By.XPath(".//td"))[2].GetValue();
+				Report.Info("Percentage is: " + sRatio);
+				return sRatio.Trim();
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+				return null;
+			}
+
+		}
 	}
 }

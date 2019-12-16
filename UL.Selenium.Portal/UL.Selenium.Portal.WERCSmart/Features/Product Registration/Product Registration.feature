@@ -166,6 +166,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given in the New Product page I click Continue
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63724
 
+@ScenarioId:6225
 Scenario: [65441] Delete a UPC from the UPC Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -191,6 +192,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And In the Additional Information Page the check box for: United States should be: checked
 	And I set 'Product has been classified using OSHA' to: No
 	And I set 'Product is shipped directly' to: No
+	And I set 'California's Cleaning Product' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
 	Given in the New Product page I click Continue

@@ -21,6 +21,7 @@
 @PaymentMethods
 @ProductSetUp
 @ViewUpcs
+@UPC
 Feature: Actions
 
 # Assigned to Amanda Coutant

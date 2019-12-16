@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using Castle.Core.Internal;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -774,8 +775,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
 			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
 			IWebElement parentElement = matchingSection.FindElement(By.XPath(".//parent::li"), 2);
-			
 
+			Report.Info($"The class found was: {parentElement.GetAttribute("class")}");
 			if (parentElement.GetAttribute("class").Contains("selected"))
 			{
 				Report.Info("The Section was Active");
@@ -812,39 +813,63 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-
 		public bool DoubleClickCategoryToEdit(string category)
 		{
-			IList<IWebElement> listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
-			var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
-			IWebElement matchingCategory = listOfCategories.FirstOrDefault(x => x.GetValue() == category);
-			if (matchingCategory == null)
-			{
-				Report.Info("Category was not found");
-				return false;
-			}
-			var action = new Actions(SeleniumBrowser.WebBrowser);
-			action.MoveToElement(matchingCategory).Build().Perform();
-			matchingCategory.TryClick();
-			Delay.Seconds(1);
-			//nb, double click does not work so using 2 clicks
 
-			matchingCategory.Click();
-			matchingCategory.Click();
-			Delay.Seconds(5);
-			Report.Screenshot();
-			IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
-			if (editScreen != null)
+		    int i = 0;
+			while (i < 5)
 			{
-				return true;
-			}
-			else
-			{
-				Report.Info("Popup was not found.");
-			}
+				try
+				{
+					IList<IWebElement> listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
+					var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
+					IWebElement matchingCategory = listOfCategories.FirstOrDefault(x => x.GetValue() == category);
+					if (matchingCategory == null)
+					{
+						Report.Info("Category was not found");
+						return false;
+					}
+					Report.Info("Matching Category was found");
+					var action = new Actions(SeleniumBrowser.WebBrowser);
+					action.MoveToElement(matchingCategory).Build().Perform();
+					matchingCategory.TryClick();
+					Delay.Seconds(1);
+					//nb, double click does not work so using 2 clicks
 
+					matchingCategory.Click();
+					matchingCategory.Click();
 
+					Delay.Seconds(2);
+					Report.Screenshot();
+					IList<IWebElement> editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
+					if (editScreen != null)
+					{
+						return true;
+					}
+					else
+					{
+						Report.Info("Popup was not found.");
+					}
+
+					return false;
+
+				}
+				catch (StaleElementReferenceException ex)
+				{
+					Report.Info("listOfCatergories threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the list of categories with title: {category} if the number of attempts has not exceeded 5");
+								
+				}
+				catch (Exception ex)
+				{
+					Report.Info($"Threw an expection of type:{ex.Message}");
+					return false;
+				}
+			}
 			return false;
+	
 		}
 
 		public string GetCategoryValue(string category)
@@ -871,6 +896,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return thisValueEditor.GetSelectedValue();
 
 		}
+
+		public bool ActiveSectionMatches(string value)
+		{
+			Delay.Seconds(2);
+
+			try
+			{
+				string sectionActiveName = this.containerElement.FindElement(By.XPath(".//table[@usg='SECTHEADER']//td//span"), 2).Text;
+				Report.Info($"The Active Section name found was: {sectionActiveName}");
+				return sectionActiveName == value;
+
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 	}
 
 	class GraphicEditor : BaseObject
@@ -1017,16 +1060,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//Putting this in because standard get alert functionality does not work in this page.
 			if (!SeleniumBrowser.Alert.WaitForAlert(10))
 			{
+				Report.Info("Alert was not found, reloading alert...");
 				SeleniumBrowser.Alert.ReloadAlert(searchText);
 			}
 			if (!SeleniumBrowser.Alert.WaitForAlert())
 			{
 				return null;
 			}
-			string alertText = SeleniumBrowser.Alert.GetText();
-			Report.Screenshot();
-			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
-			return alertText;
+			
+			try
+			{
+				string alertText = SeleniumBrowser.Alert.GetText();
+				int i = 2;
+				while(alertText.IsNullOrEmpty()|| i<6)
+				{
+					Report.Info($"No Text Was Found In the Alert, Trying again");
+					Report.Info($"Looking for alert text. Attempt: {i}");
+					alertText = SeleniumBrowser.Alert.GetText();					
+					i++;
+				}
+				if(alertText.IsNullOrEmpty() && i==6)
+				{
+					Report.Info("The Alert Text was still found to be empty after 5 total attempts");
+				}
+				Report.Screenshot();
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				return alertText;
+
+			}
+			catch(Exception ex)
+			{
+				Report.Info($"An exeption with message: {ex.Message} was thrown");
+				throw;
+
+			}			
 		}
 
 		public bool SetCheckBox(string name, bool setChecked)
@@ -1212,7 +1279,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-		}
+		}		
+
+
 
 	}
 
@@ -3341,11 +3410,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info("Trying to select with double click");
 					listOfColumnItems = this.containerElement
 						.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
-
 					matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
-					//matchingItem.TryClick();
-					Delay.Seconds(1);
-					matchingItem.DoubleClick();
+					matchingItem.TryClick();
+					Delay.Seconds(4);
+					var selectedItem = this.containerElement
+						.FindElement(By.XPath(".//tbody[@id='sortable-list2']/tr[contains(@class,'Selected')]"), 2);
+					bool test = selectedItem.TryDoubleClick();
 					Delay.Seconds(2);
 					var listOfSelectedColumnItems = this.containerElement
 						.FindElements(By.XPath(".//table[@id='tblPicked']//tr/td[" + indexOfHeader + "]"), 2).ToList();
@@ -3529,6 +3599,124 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return oldValue.GetValue();
 			}
 		}
+
+		public IWebElement EditPopupBox => this.containerElement.FindElement(By.XPath(".//div[@id='koPopup']"), 2);
+
+		public bool IClickNextUntilISeeSection(string sectionName)
+		{
+			try
+			{
+				IWebElement displayedElement = this.containerElement.FindElement(By.XPath(".//input[@name='edit-next-ko']"), 2);				
+				while (!this.containerElement.GetAttribute("style").Contains("none"))
+				{
+					string currentSectionName = this.containerElement.FindElement(By.XPath(".//div[@class='pull-left']"), 2).Text;
+					if (currentSectionName == sectionName)
+					{
+						Report.Info($"The section name found matched the expected section name:{sectionName}");
+						return true;
+					}
+					else
+					{
+						try
+						{
+							Report.Info("Clicking the Next button");
+							this.ClickButton("Next");
+							new ValueEditor().Wait_for_load(30);
+						}
+						catch (Exception)
+						{
+							return false;
+						}
+					}
+
+				}
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool SelectCurrentDate()
+		{
+
+			Delay.Seconds(2);
+			try
+			{
+				Report.Info("Switching to iFrame");
+				Delay.Seconds(2);
+				SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmEditDate");
+				IWebElement selectCurrentDateButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@value='Select Current Date']"), 2);
+				bool success= selectCurrentDateButton.TryClick();
+				Report.Info("Exiting iFrame");
+				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				return success;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool SelectTopOption()
+		{
+			Delay.Seconds(2);
+			try
+			{
+				IWebElement topOption = this.containerElement.FindElement(By.XPath(".//tbody[@id='sortable-list2']//tr"), 2);
+				return topOption.TryDoubleClick();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public IWebElement NewValueBox=> this.containerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
+
+		public bool EnterValueIntoField(string value)
+		{
+			Delay.Seconds(2);
+			try
+			{
+				IWebElement newValueBox = this.containerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
+				newValueBox.EnterText(value);				
+				Report.Info($"The Text entered was: {newValueBox.Text}");
+				if (newValueBox.Text == value)
+				{
+					return true;
+				}
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool ClickSaveButton()
+		{
+			IList<IWebElement> varButtons = this.containerElement.FindElements(By.XPath(".//input[@type='button' and @title='Save']"), 2);
+			
+			foreach(var item in varButtons)
+			{
+				if (item.TryClick())
+				{
+					Report.Info("Succesfully clicked SAVE");
+					return true;
+				}
+				Report.Info("Did not Click Save, Trying again");
+
+			}
+			return false;
+
+
+
+			
+		}
+
+
 	}
 
 	class AssignReassignProducts : BaseObject

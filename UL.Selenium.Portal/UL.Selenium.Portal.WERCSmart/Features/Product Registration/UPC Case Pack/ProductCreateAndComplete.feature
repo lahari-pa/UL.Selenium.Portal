@@ -336,7 +336,7 @@ Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87922, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
+	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87923, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue

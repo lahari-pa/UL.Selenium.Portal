@@ -252,7 +252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				if (buttonToClick.TryClick())
 				{
-					System.Threading.Thread.Sleep(5000);
+					Delay.Seconds(5);
 
 					if (GeneralFunctions.EnterFilename(filePath))
 					{
@@ -494,7 +494,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				buttonToClick.ScrollElementIntoView();
 				if (buttonToClick.TryClick())
 				{
-					System.Threading.Thread.Sleep(5000);
+					Delay.Seconds(5);
 
 					if (GeneralFunctions.EnterFilename(filePath))
 					{

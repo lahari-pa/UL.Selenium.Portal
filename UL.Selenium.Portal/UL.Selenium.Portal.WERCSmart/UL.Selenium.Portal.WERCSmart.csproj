@@ -222,6 +222,7 @@
     <Compile Include="Selenium Classes\SHAProductNotificationHistory.cs" />
     <Compile Include="Selenium Classes\SHAProductRecertificationHistory.cs" />
     <Compile Include="Selenium Classes\SHARecertification.cs" />
+    <Compile Include="Selenium Classes\SHAWasteClassification.cs" />
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />
     <Compile Include="Selenium Classes\StudioDesktop.cs" />

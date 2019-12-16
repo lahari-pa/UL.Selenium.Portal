@@ -1766,7 +1766,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Screenshot();
 					return;
 				}
+				Report.Info($"The list of displayed UPCs was: {string.Join(",", displayedUpcs)}");
 
+				Report.Info($"Checking if the UPC needed is saved in context");
 				if (upc.ToLower().Contains("saved as"))
 				{
 					upc = Context
@@ -1774,6 +1776,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						.ToString();
 				}
 
+				Report.Info($"Checking the UPC presence against the required condition: ({condition})");
 				if (condition == "see")
 				{
 					Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber.Contains(upc)), "UPC: " + upc + " does not display",
