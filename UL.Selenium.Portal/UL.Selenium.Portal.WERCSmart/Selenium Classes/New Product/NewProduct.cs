@@ -13,6 +13,7 @@ using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
