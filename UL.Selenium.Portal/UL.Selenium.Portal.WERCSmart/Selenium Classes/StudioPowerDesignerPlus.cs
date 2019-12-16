@@ -3410,11 +3410,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info("Trying to select with double click");
 					listOfColumnItems = this.containerElement
 						.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
-
 					matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
-					//matchingItem.TryClick();
-					Delay.Seconds(1);
-					matchingItem.DoubleClick();
+					matchingItem.TryClick();
+					Delay.Seconds(4);
+					var selectedItem = this.containerElement
+						.FindElement(By.XPath(".//tbody[@id='sortable-list2']/tr[contains(@class,'Selected')]"), 2);
+					bool test = selectedItem.TryDoubleClick();
 					Delay.Seconds(2);
 					var listOfSelectedColumnItems = this.containerElement
 						.FindElements(By.XPath(".//table[@id='tblPicked']//tr/td[" + indexOfHeader + "]"), 2).ToList();
