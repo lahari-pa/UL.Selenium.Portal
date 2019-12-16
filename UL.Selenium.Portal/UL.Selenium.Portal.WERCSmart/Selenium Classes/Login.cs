@@ -32,6 +32,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement PasswordHeader => this.containerElement.FindElement(By.XPath("//label[@for='loginPassword']"), 5);
 
+		private IWebElement LoginError => this.containerElement.FindElement(By.XPath("//div[@id='accountNotifications']//p"), 5);
+
+
 		public void ClickOutside()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath("//div[contains(@class,'panel-body')]"), 2);
@@ -135,6 +138,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string Password_Error_Text()
 		{
 			return this.PasswordError?.FindElement(By.XPath(".//span"), 2)?.Text;
+		}
+
+		public string IncorrectLoginDetails_Error_Text()
+		{
+			return this.LoginError?.FindElement(By.XPath(".//span"), 2)?.Text;
 		}
 
 	}
