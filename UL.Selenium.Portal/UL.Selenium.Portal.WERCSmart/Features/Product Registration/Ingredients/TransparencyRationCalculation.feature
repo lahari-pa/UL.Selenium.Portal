@@ -18,7 +18,7 @@ Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd
 	#For this test case you will need to have a specific 3rd party formulation product to add to your formulated products ingredients list.
 	#Use test case 80821 to create this third party product and get it to completed status.
 	#You will need to know the WPSxxxxxxx ID associated to the 3rd party product
-	Given I save to context name: TestCase80854Component and value: 1527357
+	Given I save to context name: TestCase80854Component and value: 1529101
 	#Given I create a product with name: 80854 and take to completed using Test Case 80821 and save as: TestCase80854Component
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	#Use the shared step below to confirm the Transparency ratio for the third party product you are working with
