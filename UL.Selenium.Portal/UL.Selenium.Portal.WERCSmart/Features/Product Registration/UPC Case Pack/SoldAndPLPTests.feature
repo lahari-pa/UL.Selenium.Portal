@@ -69,7 +69,6 @@ Scenario: [87957] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87957 and its status is: Completed
 
 @ScenarioId:6259
-@ScenarioId:6259
 Scenario: [87959] SOLD = US only, PL Yes, Create Liquid (Bubble Solution) with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87959
