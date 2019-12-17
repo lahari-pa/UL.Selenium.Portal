@@ -168,7 +168,26 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75321)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 	And I Confirm the Product shows status: Completed for retailer: saved as retailer
+	And I Confirm the Product shows status: Assigned for retailer: saved as TestCase75321Retailer
+	#now to pd+
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75321)
+	Then I call Shared Step 49742 - WPS - Check In Product saved as: TestCase75321
+	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase75321	
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75321)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75321 and its status is: Accepted	
+	#Need/Find a step that checks the product by ID has retailers (multiple).
 	And I Confirm the Product shows status: Accepted for retailer: saved as TestCase75321Retailer
+	#Step below retailers are saved in context(x2) Check/make work.
+	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75321) for
+	#	| Retailer |
+	#	| SAVEDAS  |
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Completed
+	#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
+	#And I Confirm the Product shows status: Completed for retailer: saved as retailer
+	#And I Confirm the Product shows status: Accepted for retailer: saved as TestCase75321Retailer
 	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75321) for
 		| Retailer                       |
 		| saved as TestCase75321Retailer |
