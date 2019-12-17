@@ -269,27 +269,3 @@ Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lit
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65523
 
 
-@ScenarioId:5993
-Scenario: [74944] BCP - Contains Lithium Primary packaged with the product - Lithium Battery Transportation step - question validations
-
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-# I In the shared step below select "Cameraw/Battery" as your product type
-Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
-Then I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
-Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-# I In the shared step below select "The battery is shipped with but not included in my product" for Indicate how battery is packaged and  for the Battery Type select"Lithium Primary" from the drop down list
-Then I should see the Product Includes Battery Page
-And I call Shared Step 48367 (Product Includes Battery > any type) : Setting how the battery is packaged option to The battery is shipped with but not included in my product
-| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As |
-| Lithium Ion  | <any>        | 4                               | 4                                  | lithium  |
-Then I save the product information as: TestCase74944
-Then I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
-Then I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
-Then I click continue
-Then For U.S. Department of Transportation (DOT), indicate the transport classification should be showing the error messages: This is a required field.
-Then For Marine transport (IMDG), indicate the classification should be showing the error messages: This is a required field.
-Then For Air transport (IATA), indicate the classification should be showing the error messages: This is a required field.
-Then For Canada's Transportation of Dangerous Goods (TDG), indicate the classification should be showing the error messages: This is a required field.
-Then I navigate to the home page
-Then I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74944
