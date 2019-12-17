@@ -1017,12 +1017,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CheckDataAcceptanceProblemMessageHasAppeared(string message)
 		{
 			Report.Info("Beginning CheckDataAcceptanceProblemMessageHasAppeared");
-			string UPCTextWarning = this.containerElement.FindElement(By.XPath("//div[contains(text(), '" + message + "')]"), 1).Text;
-			if(UPCTextWarning == null)
+			var element = this.containerElement.FindElement(By.XPath("//div[contains(text(), '" + message + "')]"), 1);
+			if(element == null)
 			{
 				Report.Info("Check Data Acceptance Problem Message returns null");
 				return false;
 			}
+			var UPCTextWarning = element.Text;
+
 			if (UPCTextWarning == "")
 			{
 				Report.Info("Check Data Acceptance Problem Message returns an empty string");
@@ -1059,13 +1061,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CheckFixAllErrorsMessageIsNotVisible()
 		{
 			Report.Info("Beginning CheckFixAllErrorsMessageIsNotVisible");
-			var fixAllErrorsMessage = this.containerElement.FindElement(By.XPath("//div[contains(@data-bind, 'visible: $root.isAllValid() === false')]"), 1).Text;
-			if (fixAllErrorsMessage == null)
+			var element = this.containerElement.FindElement(By.XPath("//div[contains(@data-bind, 'visible: $root.isAllValid() === false')]"), 1);
+			if (element == null)
 			{
 				Report.Info("fixAllErrorsMessage returned a null value!");
 				return false;
 			}
 
+			var fixAllErrorsMessage = element.Text;
 			if (fixAllErrorsMessage == "")
 			{
 				Report.Info("fixAllErrorsMessage returned a empty value!");
