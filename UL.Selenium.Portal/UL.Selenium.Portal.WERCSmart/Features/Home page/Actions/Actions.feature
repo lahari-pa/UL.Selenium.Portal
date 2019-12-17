@@ -17,9 +17,11 @@
 @ReviewDocuments
 @SHA
 @SummaryPage
+@CreateProducts
 @PaymentMethods
 @ProductSetUp
 @ViewUpcs
+@UPC
 Feature: Actions
 
 # Assigned to Amanda Coutant
@@ -41,7 +43,7 @@ Scenario: [73424] View UPCs - Product with UPCs
 	And I save the UPCs associated to the product as: TestCase73424UPCs
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73424)
-	And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase73424
+	And I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase73424
 	And I confirm all UPC numbers in the list saved as: TestCase73424UPCs are displayed in the SHA Manager Product UPC list
 	And I close the window that opened
 
@@ -158,3 +160,95 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	Then a document should open
 	Given I close the document
 
+@ScenarioId:6114
+Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
+	Given I Submit a new product which has a Case UPC and a regular UPC
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	And I filter for the product saved as: TestCase87685
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View UPCs
+	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+	Given I generate a random UPC number and save as: UPC109503
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase109503
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
+	Given I click continue
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then If purchase details are showing click confirm order
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	And I filter for the product saved as: TestCase109503
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View UPCs
+	Then I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+
+@ScenarioId:1591
+Scenario: [112939] View - UPC name column exists in the Product UPCs table
+	Given I Submit a new product which has a Case UPC and a regular UPC
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	And I filter for the product saved as: TestCase87685
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View
+	Then I navigate to the View tab for product saved as: TestCase87685 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+	Given I generate a random UPC number and save as: UPC109503
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase109503
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109503, container type: Paper bag and size: 2 do not click continue
+	Given I click continue
+	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then If purchase details are showing click confirm order
+	Given I navigate to the landing page
+	And I call Shared Step (Login to WERCSmart - Premium Account)
+	And I filter for the product saved as: TestCase109503
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View
+	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
+
+@ScenarioId:5984
+Scenario: [114944] View/Summary - Ingredients table contains details (Functional Purpose and Ingredient Type)
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then the WERCSmart homepage should load
+	#Then create a cleaning product with functional and ingredient types, step below needs checking in Sprint site once back up
+	Then I create a CA Cleaning Compliant product, select ingredient type and functional purpose then save it as: TestCase114944 and progress it to submitted
+	Given I navigate to the landing page
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	And I filter for the product saved as: TestCase114944
+	And I click Row Actions for the first product returned
+	Then I click on the Row Action: View
+	Then I Switch to the View tab for product saved as: TestCase114944
+	And I Check that the Summary page Ingredients table contains the coloumns labeled:
+		| Heading            |
+		| Ingredient Type    |
+		| Functional Purpose |
+	Then For the following ingredients I check that the Ingredients table on the summary page contains only the Ingredient Types and Functional Purposes listed:
+		| Ingredient      | Ingredient Type            | Functional Purpose                    |
+		| Formaldehyde    | Fragrance                  | FormaldehydeFunctionalPurposesList    |
+		| Water           | Intentionally Added        | WaterFunctionalPurposesList           |
+		| Sodium chloride | Non-functional Byproduct   | Sodium chlorideFunctionalPurposesList |
+		| Butane          | Non-functional Contaminant | ButaneFunctionalPurposesList          |

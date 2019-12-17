@@ -981,6 +981,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I click Add Case UPC")]
+		public void GivenIClickAddCaseUPC()
+		{
+			UPC UPCObject = new UPC();
+			Report.IsTrue(UPCObject.ClickAddCaseUPCButton(), "Failed to click the 'Add Case UPC' button", "Successfully clicked the 'Add Case UPC' button");
+		}
+
+		[StepDefinition(@"I confirm no error is shown below the Individual UPC contained in the Case Pack field")]
+		public void ThenIConfirmNoErrorIsShownBelowTheIndividualUPCContainedInTheCasePackField()
+		{
+			UPC UPCObject = new UPC();
+			Report.IsFalse(UPCObject.CheckForErrorUnderneathIndividualUPCContainedInCasePackField(), "The error message was found", "The error message was not found");
+		}
+
+		[StepDefinition(@"I check if the textfields with the following placeholders display the error 'This is a required field.' bottom")]
+		public void ThenICheckIfTheFollowingTextfieldsDisplayTheErrorThisIsARequiredField(Table table)
+		{
+			UPC UPCObject = new UPC();
+			UPCObject.CheckIfTextfieldsWithPlaceholdersDisplayTheError(table);
+		}
+
+		[StepDefinition(@"I check if the dropdowns with the following default options display the error 'This is a required field.' bottom")]
+		public void ThenICheckIfTheFollowingDropdownsDisplayTheErrorThisIsARequiredField_(Table table)
+		{
+			UPC UPCObject = new UPC();
+			Report.IsTrue(UPCObject.CheckIfDropDownsWithDefaultOptionDisplayTheError(table), "At least one dropdown did not display an error", "All the dropdowns displayed their errors");
+		}
+
 
 
 	}

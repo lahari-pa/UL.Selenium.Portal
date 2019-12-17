@@ -371,7 +371,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Navigating to the Home Page");
 				var selNav = new NavigationBar();
-				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!",false,false);
+				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!", false, false);
 				// Screenshot throws exception while an alert is open - selenium utils needs updating
 				//Report.Screenshot();
 				SeleniumBrowser.Alert.WaitForAlert(5);
@@ -735,6 +735,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successfully clicked the {item} link in the expanded navigation menu");
 		}
 
+
 		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
 		public void ClickItemInQuickLinks(string item)
 		{
@@ -743,7 +744,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Selecting " + item + " in the Navigation Pane");
 				var selHomePageNavBar = new NavigationBar();
-				Report.IsTrue(selHomePageNavBar.Click_Icon(item), "Failed to click item: '" + item + "'!", "Successfully clicked item: '" + item + "'!");
+				Report.IsTrue(selHomePageNavBar.Click_Icon(item), "Failed to click item: '" + item + "'!", "Successfully clicked item: '" + item + "'!", ShowSuccessScreenshot: false);
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Screenshot();
 			}
@@ -991,10 +992,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIClickTheHomeNavigationIconAndAlertAppears()
 		{
 
-				Report.Info("Navigating to the Home Page");
-				var selNav = new NavigationBar();
-				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!", false, false);
-				SeleniumBrowser.Alert.WaitForAlert(5);
+			Report.Info("Navigating to the Home Page");
+			var selNav = new NavigationBar();
+			Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!", false, false);
+			SeleniumBrowser.Alert.WaitForAlert(5);
 
 		}
 
@@ -1011,7 +1012,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// check if pop up was displayed before 'expected wait - margin' (test lower limit)
 			Report.IsTrue(actualWait >= (expectedWait * 60) - (marginOfError * 60),
 				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
-				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes",false,false);
+				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes", false, false);
 		}
 		[StepDefinition(@"Click (Yes|No) on the inactivity popup and no screenshot is taken")]
 		public void GivenClickOnInactivityPopupNoScreenshot(string button)
@@ -1031,7 +1032,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Error("Button parameter must be 'Yes' or 'No'!");
 					return;
 			}
-			Report.IsTrue(clicked, $"Failed to click the '{button}' button", $"Successfully clicked the '{button}' button",false,false);
+			Report.IsTrue(clicked, $"Failed to click the '{button}' button", $"Successfully clicked the '{button}' button", false, false);
 		}
 
 		[StepDefinition(@"Click (Yes|No) on the inactivity popup but dont take a screenshot")]
@@ -1052,11 +1053,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Error("Button parameter must be 'Yes' or 'No'!");
 					return;
 			}
-			if(clicked)
+			if (clicked)
 			{
 				Report.Success($"Successfully clicked the '{button}' button");
 			}
-			if(!clicked)
+			if (!clicked)
 			{
 				Report.Failure($"Failed to click the '{button}' button", false);
 			}
@@ -1066,13 +1067,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Inactivity pop is closed but dont take a screenshot")]
 		public void ConfirmInactivityPopupIsClosedNoScreenShot()
 		{
-			Report.IsTrue(new InactivityPopup().WaitForContainerToBeInvisible(), "The Inactivity popup was not closed!", "The Inactivity popup was closed.",false,false);
+			Report.IsTrue(new InactivityPopup().WaitForContainerToBeInvisible(), "The Inactivity popup was not closed!", "The Inactivity popup was closed.", false, false);
 		}
 
 		[StepDefinition(@"I confirm the Inactivity pop is open but dont take a screenshot")]
 		public void ConfirmInactivityPopupIsOpendNoScreenShot()
 		{
-			Report.IsTrue(new InactivityPopup().WaitForContainerToBeVisible(),"The Inactivity popup was not open.", "The Inactivity popup was open", false, false);
+			Report.IsTrue(new InactivityPopup().WaitForContainerToBeVisible(), "The Inactivity popup was not open.", "The Inactivity popup was open", false, false);
 		}
 
 		[StepDefinition(@"I take a ScreenShot")]
@@ -1087,12 +1088,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			try
 			{
-				Report.Info("Finding Alert with Text: "+alertText);
+				Report.Info("Finding Alert with Text: " + alertText);
 				var selHomepage = new Homepage();
-				string actualID= new Homepage().GetAllAlertsAndGetAlertWithTextXAndReturnID(alertText);
+				string actualID = new Homepage().GetAllAlertsAndGetAlertWithTextXAndReturnID(alertText);
 				Report.Info("Actual AlertID: " + actualID);
 				Report.Info("Expected AlertID: " + expxectedAlertID);
-				Report.IsTrue(actualID==expxectedAlertID, "The Alert ID was not as expected!", "The Alert ID was as expected!");
+				Report.IsTrue(actualID == expxectedAlertID, "The Alert ID was not as expected!", "The Alert ID was as expected!");
 
 			}
 			catch (Exception ex)
@@ -1100,6 +1101,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I click the 'Resolve' button that is associated to the AGHS alert in the 'Alerts' window")]
+		public void GivenIClickTheButtonThatIsAssociatedToTheAGHSAlertInTheWindow()
+		{
+			Homepage HomePageObject = new Homepage();
+			Report.IsTrue(HomePageObject.ClickResolveButton(), "Failed to click 'Resolve' button", "Successfully clicked 'Resolve' button");
 		}
 	}
 }

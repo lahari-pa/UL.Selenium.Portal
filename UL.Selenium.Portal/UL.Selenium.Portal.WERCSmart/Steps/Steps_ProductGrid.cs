@@ -1928,6 +1928,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Remove UPC Update popup displays the warning: (.*)")]
 		public void IConfirmTheRemoveUpcUpdatePopupDisplaysTheWarning(string expectedWarning)
 		{
+
 			var removeUpc = new RemoveUpcUpdate();
 			if (!removeUpc.Wait_for_load())
 			{
@@ -2307,6 +2308,82 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+
+		[StepDefinition(@"I confirm the Rejected Registration popup displays the warning: (.*)")]
+		public void IConfirmTheRejectedRegistrationPopupDisplaysTheWarning(string expectedWarning)
+		{
+			var modalDialog = new ModalDialog();
+			
+			if (!modalDialog.Wait_for_load())
+			{
+				Report.Failure("The Rejected Registration popup was not displayed!");
+				Report.Screenshot();
+				return;
+			}
+			List<string> displayedWarnings = modalDialog.AlertWarningRows();
+			if (displayedWarnings.Count == 0)
+			{
+				Report.Failure("The Rejected Registration popup did not contain any body error text!");
+				Report.Screenshot();
+				return;
+			}
+			Report.IsTrue(displayedWarnings.Contains(expectedWarning),
+				$@"The expected warning: ""{expectedWarning}"" was not displayed in the Rejected Registration popup! Displayed warnings: {string.Join(", ", displayedWarnings.Select(x => $@"""{x}""").ToList())}",
+				$@"The warning: ""{expectedWarning}"" was displayed as expected on the Rejected Registration popup");
+		}
+
+		[StepDefinition(@"I confirm the Rejected Registration popup has closed")]
+		public void IConfirmTheRejectedRegistrationPopupHasClosed()
+		{
+			var modalDialog = new ModalDialog();
+			
+			if (!Report.IsTrue(modalDialog.Wait_for_close(), "The modal dialog did not close!", "The modal dialog closed as expected"))
+			{
+				if (modalDialog.GetTitle() == "Rejected Registration")
+				{
+					Report.Failure("The Rejected Registration popup is still displayed");
+				}
+			}
+		}
+
+		[StepDefinition(@"in the Rejected Registration modal dialog I click Continue")]
+		public void GivenInTheModalDialogIClickButton()
+		{
+
+			Report.IsTrue(new ModalDialog().Click_Continue(), "Failed to click the Continue button","Successfully clicked Continue");
+			
+		}
+
+		[StepDefinition(@"In the Products Grid I delete All products")]
+		public void InTheProductsGridIDeleteAllProducts()
+		{
+			Report.IsTrue(new ProductsGrid().DeleteAllPresentRows(), "Failed to delete all products!", "All matching products deleted successfully!");
+		}
+
+		[StepDefinition(@"I navigate to the Homepage and then In the Products Grid I delete All products")]
+		public void INavigateToTheHomepageThenInTheProductsGridIDeleteAllProducts()
+		{
+
+			new StepsHomepage().ThenINavigateToTheHomePage();
+			new GlobalSteps().ThenTheHomeScreenShouldLoad();
+			Report.IsTrue(new ProductsGrid().DeleteAllPresentRows(), "Failed to delete all products!", "All matching products deleted successfully!");
+		}
+
+
+		[StepDefinition(@"I save the ProductID of the first Product in the grid no in recertification as: (.*)")]
+		public void SaveFirstProductIDInGridNotRecert(string savedAs)
+		{
+			Report.Info("Saving the ID of First Product as " + savedAs);
+			var selProdGrid = new ProductsGrid();
+			ProductGridItem productElement = selProdGrid.FirstProductNotRecertInGrid();
+			string firstProductID = productElement.ProductId;
+
+			Context.AddToContext(savedAs, firstProductID);
+			Report.Success("Got the first Product ID in Grid (ID: " + firstProductID + ") and saved to: " + savedAs);
+		}
+
+
+
 
 
 	}

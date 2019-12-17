@@ -312,7 +312,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Full_Stewardship_Only", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			
+
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
 			this.BasicSignup(savedAs);
 
@@ -320,11 +320,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myAccount = new StepsMyAccount();
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
-			myAccount.StewardshipInformation("Ontario", "ON-1-1", "", "");
-			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
+			myAccount.StewardshipInformation("Ontario", "ON-1-1");
+			myAccount.StewardshipInformation("Quebec", "QU-1-1");
 			Report.Info(savedAs + " Account Created");
 
 			this.SaveUserToTReVor(savedAs, account);
@@ -338,10 +338,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_CanHasAddPkg", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			
+
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
 			this.BasicSignup(savedAs);
-			
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
 			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
@@ -498,8 +498,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "BC-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Manitoba", "BC-1-1");
 
 			//data tiers
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
@@ -539,8 +539,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
 
 			Report.Info(savedAs + " Account Created");
 			this.SaveUserToTReVor(savedAs, account);
@@ -665,11 +665,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship data
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
-			myAccount.StewardshipInformation("Ontario", "ON-1-1", "", "");
-			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
+			myAccount.StewardshipInformation("Ontario", "ON-1-1");
+			myAccount.StewardshipInformation("Quebec", "QU-1-1");
 
 
 			Report.Info(savedAs + " Account Created");
@@ -694,9 +694,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1", "", "");
-			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1");
+			myAccount.StewardshipInformation("Quebec", "QU-1-1");
 			Report.Info(savedAs + " Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
@@ -766,7 +766,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Partial_Stewardship_Pkg", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
 			var myAccountSteps = new StepsMyAccount();
@@ -804,8 +804,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
 
 			//update TReVor info
 			Report.Info(savedAs + " Account Created");
@@ -839,7 +839,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_Automation_CanadaAllData", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
-			
+
 			var myHome = new StepsHomepage();
 			var myAccount = new StepsMyAccount();
 			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
@@ -906,11 +906,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Stewardship information
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
-			myAccount.StewardshipInformation("British Columbia", "BC-1-1", "", "");
-			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1", "", "");
-			myAccount.StewardshipInformation("Manitoba", "MA-1-1", "", "");
-			myAccount.StewardshipInformation("Ontario", "ON-1-1", "", "");
-			myAccount.StewardshipInformation("Quebec", "QU-1-1", "", "");
+			myAccount.StewardshipInformation("British Columbia", "BC-1-1");
+			myAccount.StewardshipInformation("Saskatchewan", "SA-1-1");
+			myAccount.StewardshipInformation("Manitoba", "MA-1-1");
+			myAccount.StewardshipInformation("Ontario", "ON-1-1");
+			myAccount.StewardshipInformation("Quebec", "QU-1-1");
 
 			//data tiers
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
@@ -985,7 +985,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
 			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("10", "10", "10");
-			
+
 			Report.Info(savedAs + " Account Created");
 			this.SaveUserToTReVor(savedAs, account);
 		}
@@ -1072,6 +1072,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			return true;
 		}
+
+		[Given(@"I (should|should not) be able to create a WERCSmart account with the following special character in the email: (.*)")]
+		public void GivenIShouldNotBeAbleToCreateAWERCSmartAccountWithTheFollowingParameters(string specialChar)
+		{
+			Report.IsTrue(new TestCreatingSupplierAccount(specialChar).TryCreateSupplier(), "", "");
+		}
+
 	}
 }
 

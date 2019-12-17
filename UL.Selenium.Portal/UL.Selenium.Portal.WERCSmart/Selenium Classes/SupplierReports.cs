@@ -7,15 +7,15 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using NTTQA.Selenium.Reporting.Core;
+using System;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class SupplierReports : BaseObject
+	class SupplierReports : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[contains(@class, 'main-wrapper')]";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool SelectReport(string report)
 		{
@@ -134,19 +134,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string actualText = this.containerElement.FindElement(By.XPath(".//p[@data-bind='text: Description']"), 2).Text;
 			Report.Info($"The expected Text was: {expectedText}");
 			Report.Info($"The actual text found is: {actualText}");
-			if (actualText==null)
+			if (actualText == null)
 			{
 				Report.Failure("Could not find the description text");
 				return false;
 			}
-			if(actualText==expectedText)
+			if (actualText == expectedText)
 			{
 				return true;
 			}
 			return false;
-
-
 		}
-		
+
+		internal bool EnterWPSID(string wpsid)
+		{
+			this.FindElement(By.XPath("//*[@id='panel']//span[@role='combobox']"), 2).TryClick();
+			this.FindElement(By.XPath("//input[@class='select2-search__field']"), 2).TryEnterText(wpsid);
+			return this.FindElement(By.XPath("//*[@class='select2-results__option select2-results__option--highlighted']"), 2).TryClick();
+		}
+
+
 	}
 }

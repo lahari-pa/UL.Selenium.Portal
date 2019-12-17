@@ -9,6 +9,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using NTTQA.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -468,6 +469,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var newProductIngredients = new Ingredients();
 			newProductIngredients.ClickComponentSearchPlaceholder();
 			Report.IsTrue(newProductIngredients.EnterTextSearchComponent(value), $"Failed to enter text '{value}' in the component search box!", $"Successully entered text '{value}' in the component search box");
+			Delay.Seconds(3);
 		}
 
 		[StepDefinition(@"I select the component search result with (name|CAS) matching text: (.*) and save ingredient as: (.*)")]
@@ -796,6 +798,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			}
 		}
+
+		[StepDefinition(@"In the Ingredients page I start typing (.*) and select the first component in the list and set its percent to (.*)")]
+		public void InTheIngredientsPageIStartTypingAndSelectTheFirstComponentInTheListAndSetItsPercentTo(string text, string percent)
+		{
+			var newProductIngredients = new Ingredients();
+		}
+
+		[StepDefinition(@"On the Ingredients page for the Ingredient: (.*) I add Ingredient Type: (.*) and Functional Purpose:")]
+		public void OnTheIngredientsPageSelectTypeAndPurpose(string ingredientName, string ingredientType, Table table)
+		{
+			Report.Info($"Attempting to select the ingredient type: {ingredientType} for the Ingredient: {ingredientName}");
+			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
+			Report.Info($"Attempting to Select the Functional Purposes from the table.");
+			var selectedOptionsStr = new List<string>();
+			foreach (TableRow row in table.Rows)
+			{
+				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"]), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
+				{
+					selectedOptionsStr.Add(row["Functional Purpose"]);
+				}
+
+			}
+			Context.AddToContext(ingredientName + "FunctionalPurposesList", selectedOptionsStr);
+		}
+
+		[StepDefinition(@"On the Ingredients page for the Ingredient: (.*) I add Ingredient Type: (.*) and All Functional Purposes")]
+		public void OnTheIngredientsPageSelectTypeAndAllPurpose(string ingredientName, string ingredientType)
+		{
+			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
+			Report.IsTrue(new Ingredients().ISelectAllFunctionalPurpose(ingredientName), "Failed to Select All The Functional Purpose options", "Successfully selected  All The Functional Purpose options");
+
+		}
+
+
+
+
+
+		[StepDefinition(@"I verify the Transparency Score displays (.*)%")]
+		public void ThenIVerifyTheTransparencyScoreDisplays(float p0)
+		{
+			Report.IsTrue(new Ingredients().TransparencyScorePercent(p0, out float trScore),
+				"Transparency score was displayed as: " + trScore + " expected: " + p0,
+				"Transparecy score was displayed as: " + trScore + " as expected");
+		}
+
+		[StepDefinition(@"I add the following CA Cleaning ingredients:")]
+		public void IAddTheFollowingCACleaningIngredients(Table table)
+		{
+			var newProductIngredients = new Ingredients();
+			IEnumerable<Ingredients.CACleaningIngredient> Ingredients = table.CreateSet<Ingredients.CACleaningIngredient>();
+			foreach (Ingredients.CACleaningIngredient item in Ingredients)
+			{
+				Report.IsTrue(newProductIngredients.AddCACleaningIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
+			}
+		}
+
 
 	}
 }

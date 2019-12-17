@@ -11,6 +11,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
+using System;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -90,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string DocumentText(string address)
 		{
-			var reader = new PdfReader(address);
+			var reader = new PdfReader(new Uri(address));
 			var output = new StringWriter();
 			for (int i = 1; i <= reader.NumberOfPages; i++)
 			{

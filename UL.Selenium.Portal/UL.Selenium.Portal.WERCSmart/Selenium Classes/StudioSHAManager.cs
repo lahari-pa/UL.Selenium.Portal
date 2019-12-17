@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -56,9 +56,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool WaitForProductList(int secondsToWait)
 		{
 			Report.Info("Beginning wait for product list");
-            Delay.Seconds(2);
+			Delay.Seconds(2);
 			var tableVisible = this.containerElement.WaitUntilElementVisible(By.XPath("//table[@id='list']"), secondsToWait);
-			return tableVisible != null || this.containerElement.FindElements(By.XPath("//table[@id='list']//tr"),1).Count == 1;
+			return tableVisible != null || this.containerElement.FindElements(By.XPath("//table[@id='list']//tr"), 1).Count == 1;
 		}
 
 		/// <summary>
@@ -68,12 +68,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
+				Delay.Seconds(15);
 				// wait up to 5 seconds for the loading bar to become visible
-				SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 5);
+				SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//div[@id='load_list']"), 20);
 				// waits up to timeout (30) seconds for the loading bar to then become invisible
 				return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//div[@id='load_list']"), timeout);
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Report.Error("Failed to wait for load to finish. Exception was thrown: " + ex.Message);
 				return false;
@@ -542,7 +543,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//IWebElement matchingTD = SeleniumBrowser.WebBrowser
 			//	.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
 			//	.FirstOrDefault(x => x.GetValue().Trim() == id);
-			IWebElement matchingTD2 = this.containerElement.FindElement(By.XPath(".//table[@id='list']//tr//td[@aria-describedby='list_Product' and @title = '" + id + "']"), 1);
+			IWebElement matchingTD2 = this.containerElement.FindElement(By.XPath(".//table[@id='list']//tr//td[@aria-describedby='list_Product' and @title = '" + id + "']//span"), 5);
 			if (matchingTD2 != null)
 			{
 				Report.Info("Found matching cell");
@@ -2178,6 +2179,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				IWebElement statusSelect = this.containerElement.FindElement(By.XPath(".//select[@id='txtHoldSubject']"));
+				if(option.Contains("�"))
+				{
+					string updatedOption= option.Replace("�", "–");
+					statusSelect.Select(updatedOption);
+					return statusSelect.SelectedOption() == updatedOption;
+				}
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
