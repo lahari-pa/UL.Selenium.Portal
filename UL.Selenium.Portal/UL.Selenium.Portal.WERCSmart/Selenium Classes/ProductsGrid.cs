@@ -681,7 +681,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool NumToGridNavigationInput(string pageNumber)
 		{
 			int i = 0;
-			while (i<5)
+			while (i < 5)
 			{
 				try
 				{
@@ -728,7 +728,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			}
 			return false;
-			
+
 
 		}
 
@@ -784,7 +784,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					break;
 				}
-				catch(Exception e)
+				catch (Exception e)
 				{
 					Report.Error(e);
 					throw;
@@ -1330,7 +1330,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	}
 
 
-	
+
 
 
 
