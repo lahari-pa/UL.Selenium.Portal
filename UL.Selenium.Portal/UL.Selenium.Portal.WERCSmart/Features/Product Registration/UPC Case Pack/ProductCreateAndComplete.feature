@@ -211,6 +211,7 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 	#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
 
+@ScenarioId:6263
 Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87917
@@ -259,7 +260,7 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"ï¿½$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Aerosol
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -331,6 +332,7 @@ Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Com
 	#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
 
+@ScenarioId:6073
 Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87923
