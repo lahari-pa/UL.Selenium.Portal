@@ -721,9 +721,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							{
 								Report.Info("There was a problem with getting status colour: " + e.Message);
 							}
-
+							Report.Info($"Finished looking at status");
 							break;
 						case "Original Submission":
+							Report.Info($"Starting on: Original Submission");
 							string pOS = rowValues[i].Trim();
 							if (pOS.Length > 0)
 							{
@@ -732,6 +733,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 							break;
 						case "Current Submission":
+							Report.Info($"Starting on: Current Submission");
 							string pCS = rowValues[i].Trim();
 							if (pCS.Length > 0)
 							{
@@ -740,6 +742,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 							break;
 						case "Last ActivityDate":
+							Report.Info($"Starting on: Last ActivityDate");
 							string pAD = rowValues[i].Trim();
 							if (pAD.Length > 0)
 							{
@@ -748,6 +751,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 							break;
 						case "Due Date":
+							Report.Info($"Starting on: Due Date");
 							string pDD = rowValues[i].Trim();
 							if (pDD.Length > 0)
 							{
@@ -756,27 +760,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 							break;
 						case "Reviewer":
+							Report.Info($"Starting on: Reviewer");
 							thisProduct.Reviewer = rowValues[i].Trim();
 							break;
 						case "SDS":
+							Report.Info($"Starting on: SDS");
 							thisProduct.SDS = rowValues[i].Trim() == "Yes";
 							break;
 						case "Canada SDS":
+							Report.Info($"Starting on: Canada SDS");
 							thisProduct.CanadaSDS = rowValues[i].Trim() == "Yes";
 							break;
 						case "Clients":
+							Report.Info($"Starting on: Clients");
 							thisProduct.Clients = rowValues[i].Trim();
 							break;
 						case "T. Reg":
+							Report.Info($"Starting on: T. Reg");
 							thisProduct.TReg = rowValues[i].Trim() == "Yes";
 							break;
 						case "Last Pub Date":
+							Report.Info($"Starting on: Last Pub Date");
 							thisProduct.LastPubDate = rowValues[i].Trim();
 							break;
 						case "GHS":
+							Report.Info($"Starting on: GHS");
 							thisProduct.GHS = rowValues[i].Trim();
 							break;
 						case "Refeed":
+							Report.Info($"Starting on: Refeed");
 							thisProduct.Refeed = rowValues[i].Trim() == "Yes";
 							break;
 						default:
