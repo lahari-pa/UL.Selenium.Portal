@@ -5022,6 +5022,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             Report.Info("Going to do publishing");
             thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
             thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			Delay.Seconds(3);
             GeneralUtilities.StudioWaitForSpinner();
             thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
             GeneralUtilities.StudioWaitForSpinner();
