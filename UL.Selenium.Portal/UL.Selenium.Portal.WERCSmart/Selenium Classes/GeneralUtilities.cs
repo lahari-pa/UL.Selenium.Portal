@@ -463,6 +463,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return retailer;
 				}
 			}
+			Report.Info($"Failed to find the input retailer: {input} in the Retailer abbreviations list");
 			return input;
 		}
 

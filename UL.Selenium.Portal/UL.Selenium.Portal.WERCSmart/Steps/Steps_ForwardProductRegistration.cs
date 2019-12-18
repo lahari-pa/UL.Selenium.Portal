@@ -703,7 +703,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-			Report.Info("Retailer: " + aRetailer);
+			Report.Info("The Retailer found in context is: " + aRetailer);
 			//        var abbreviationMappings = new RetailerAbbreviations().Map;
 			//        if (abbreviationMappings.ContainsKey(aRetailer))
 			//        {
@@ -716,7 +716,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//}
 			//        }
 			aRetailer = new RetailerAbbreviations().TryConvertToAbbreviation(aRetailer);
-			Report.Info("Retailer: " + aRetailer);
+			Report.Info("The Retailer from context after trying to convert to abbreviation is: " + aRetailer);
 			List<ForwardProductRegistration.ProductResults> listProductResults = selForwardProdReg.GetProductResults();
 			foreach (var productResults in listProductResults)
 			{
