@@ -92,7 +92,8 @@ Scenario: [76314] Forward Product - NR should Not Require UPC
 	Given I click Forward Product Registration in the Bulk Actions window
 	Then I should see the header: Forward Product Registration on the Forward Product Registration window
 	And I confirm the active Forward Product Registration tab is: Select Products
-	Given I select the product with ID saved as: ProductInProgressList76314 under the Select Products tab
+	#Given I select the product with ID saved as: ProductInProgressList76314 under the Select Products tab
+	Then I select the first non Kit product from the list of IDs saved as: ProductInProgressList76314 under the Select Products tab
 	Given I click continue on the Forward Product Registration page
 	Then I confirm the active Forward Product Registration tab is: Select Retailers
 	Given in the Select Retailers tab under Forward Product Registration I select the retailer: No Retailer/No UPC Product
@@ -191,6 +192,7 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75321) for
 		| Retailer                       |
 		| saved as TestCase75321Retailer |
+		| saved as retailer              |
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 	And I Confirm the Product shows status: Completed for retailer: saved as retailer
 	And I Confirm the Product shows status: Completed for retailer: saved as TestCase75321Retailer

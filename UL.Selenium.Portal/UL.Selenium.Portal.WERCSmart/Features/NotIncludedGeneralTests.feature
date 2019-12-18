@@ -1125,3 +1125,11 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 	And I Confirm the Product shows status: Completed for retailer: saved as retailer
 	And I Confirm the Product shows status: Accepted for retailer: saved as TestCase75321Retailer
+
+
+	Scenario: [CVSTIERSCLEANING] CVS - CLEANING TEST
+
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSCleaningExcelFile and check that is shows the expected product saved as: CVSCleaningProduct1
