@@ -1063,13 +1063,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Alert was not found, reloading alert...");
 				SeleniumBrowser.Alert.ReloadAlert(searchText);
 			}
+			Report.Info("Checking if the Alert Has Loaded");
 			if (!SeleniumBrowser.Alert.WaitForAlert())
 			{
+				Report.Info("The Alert was not Found");
 				return null;
 			}
 			
 			try
 			{
+				Report.Info("Alert Found, Trying to get the Text of the Alert");
 				string alertText = SeleniumBrowser.Alert.GetText();
 				int i = 2;
 				while(alertText.IsNullOrEmpty()|| i<6)
