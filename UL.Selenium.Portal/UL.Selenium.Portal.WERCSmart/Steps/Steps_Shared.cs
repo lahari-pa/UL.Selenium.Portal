@@ -1173,7 +1173,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             MyNewProduct.ContinueInTheProductRegistration();
         }
 
-        [StepDefinition(
+		[StepDefinition(@"I call Shared Step 57401 \(Additional Product Information - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
+		public void GivenICallSharedAdditionalProductInformation_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			var myNewProductClass = new NewProduct();
+			var MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			TestReport.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			TestReport.StartStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			TestReport.StartStep("I click Continue in the product registration");
+			MyNewProduct.ContinueInTheProductRegistration();
+		}
+
+		[StepDefinition(
             @"I call Shared Step 57881 \(Regulatory Documents to Provide - US only - request authoring - Happy Path\)")]
         public void GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath()
         {
@@ -4917,7 +4950,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             TestReport.UseSubSteps = true;
             var thisMyIngredients = new Steps_MyIngredients();
             thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
-            //thisMyIngredients.InTheFormulationThirdPartySCreenISetGrantedTo("true");
+			Delay.Seconds(3);
             thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Granted");
             thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 4.1 Derived Results", "Granted");
             var thisStepsNewProduct = new StepsNewProduct();
@@ -9117,6 +9150,208 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			};
 
 			Context.AddToContext(savedAs, info);
+		}
+
+		[StepDefinition(@"I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing and save as: (.*)")]
+		public void ICallSharedStep80821_CreateA3rdPartyProduct(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			var stepsProdGrid = new StepsProductGrid();
+			var stepsNewProd = new StepsNewProduct();
+			var stepsIngredients = new StepsIngredients();
+			var stepsSHA = new Steps_SHA();
+			var stepsStudio = new Steps_Studio();
+
+			TestReport.StartStep("I generate a random UPC number and save as: UPC80821");
+			stepsProdGrid.GivenIGenerateARandomUPCNumberAndSaveAs("UPC80821");
+
+			TestReport.StartStep("I log into WercSmart - Products Automation Account");
+			this.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+
+			TestReport.StartStep("Create a New Registration via Register New Product (expanded menu)");
+			this.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
+
+			TestReport.StartStep("The Product - Enter Product Name and select Type of Product");
+			this.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Raw material");
+
+			TestReport.StartStep("I save the product information as");
+			stepsNewProd.SaveProductInformation(savedAs);
+
+			var ing1 = new Table("CASNumber", "ComponentName", "Percentage", "Publicly Disclosed", "Public Name");
+			ing1.AddRow("100-41-4", "Ethylbenzene", "25", "Yes", "Undisclosed Ingredient");
+			TestReport.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808211");
+			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808211", ing1);
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a success");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("success");
+
+			var ing2 = new Table("CASNumber", "ComponentName", "Percentage", "Publicly Disclosed");
+			ing2.AddRow("37334-84-2", "Cellolyn 21", "15", "No");
+			TestReport.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808212");
+			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808212", ing2);
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 2");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+
+			var ing3 = new Table("CASNumber", "ComponentName", "Percentage");
+			ing3.AddRow("RR-38384-6", "FRAGRANCE-HERBAL", "10");
+			TestReport.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
+			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808213", ing3);
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 3");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "3");
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+
+			var ing4 = new Table("CASNumber", "ComponentName", "Percentage");
+			ing4.AddRow("RR-38213-8", "FRAGRANCE-BANANA", "10");
+			TestReport.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
+			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808214", ing4);
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 4");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
+
+			var ing5 = new Table("CASNumber", "ComponentName", "Percentage", "Publicly Disclosed");
+			ing5.AddRow("FLAVOR", "611 Grape Flavor", "10", "No");
+			TestReport.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808215");
+			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808215", ing5);
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 5");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
+
+			var ing6 = new Table("CASNumber", "ComponentName", "Percentage", "Publicly Disclosed", "Public Name");
+			ing6.AddRow("NA519", "Black Cherry - Natural Flavor", "10", "Yes", "Undisclosed Ingredient");
+			TestReport.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808216");
+			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808216", ing6);
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 6");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+
+			var ing7 = new Table("CASNumber", "ComponentName", "Percentage");
+			ing7.AddRow("FRAGRANCE", "Fragrance - Birch Branch: Skin Irrit. 2, Eye Irrit. 2A, Skin Sens. 1, Repro Tox 2, Acute Aquatic 2, Chronic Acute 2", "10");
+			TestReport.StartStep("Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name");
+			this.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing808217", ing7);
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 7");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+
+			var ing8 = new Table("CASNumber", "ComponentName", "Percentage", "Publicly Disclosed", "Public Name");
+			ing8.AddRow("7732-18-5", "Water", "10", "Yes", "Undisclosed Ingredient");
+			TestReport.StartStep("Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808218");
+			this.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName("Ing808218", ing8);
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 3 and denominator: 8");
+			stepsIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
+			TestReport.StartStep("In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning");
+			stepsIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+
+			TestReport.StartStep("In the Ingredients page I click continue");
+			stepsNewProd.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+			TestReport.StartStep("Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue");
+			this.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
+
+			TestReport.StartStep("Enter Regulatory Information - Not Prop 65");
+			this.GivenICallSharedEnterRegulatoryInformation_NotProp();
+
+			TestReport.StartStep("Regulatory Information 2 - Microbeads - No");
+			this.SharedRegulatoryInformation2_Microbeads_No();
+
+			TestReport.StartStep("I should see the Additional Documents to Provide Page");
+			stepsNewProd.GivenIShouldSeeXPage("Additional Documents to Provide");
+
+			TestReport.StartStep("(Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\\Dependencies\\WERCSmart\\testdoc.pdf");
+			this.ICallSharedBrowseForFileSelectClickOpen("IFRA Certificate (Perfumery Products)", "C:\\Dependencies\\WERCSmart\\testdoc.pdf");
+
+			TestReport.StartStep("(Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\\Dependencies\\WERCSmart\\testdoc.pdf");
+			this.ICallSharedBrowseForFileSelectClickOpen("GRAS Certificate (Flavor Products)", "C:\\Dependencies\\WERCSmart\\testdoc.pdf");
+
+			TestReport.StartStep("in the Additional Documents to Provide page I click Continue");
+			stepsNewProd.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+
+			TestReport.StartStep("in the Product Aliases page I click Continue");
+			stepsNewProd.GivenInTheNewProductPageIClickContinue("Product Aliases");
+
+			TestReport.StartStep("(Comments - Happy Path) and enter the comment: test");
+			this.GivenICallSharedCommentsHappyPath("test");
+
+			TestReport.StartStep("Confirm Restrict Use - Restrict");
+			this.SharedConfirmRestrictUse_Restrict();
+
+			TestReport.StartStep("(Go to Summary and verify data) with product type: Raw material");
+			this.SharedGoToSummaryAndVerifyData("Raw material");
+
+			TestReport.StartStep("Data Acceptance - Click Accept - Happy Path");
+			this.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+
+			TestReport.StartStep("If purchase details are showing click confirm order");
+			stepsNewProd.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+
+			TestReport.StartStep("Login to Studio and Open SHA manager");
+			this.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+
+			TestReport.StartStep("SHA - Search for exact WPS ID in All Status for saved as: " + savedAs);
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+
+			TestReport.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: " + savedAs + " and its status is: Submitted");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Submitted");
+
+			TestReport.StartStep("SHA Manager - Submitted - Select product > process product data for product saved as: " + savedAs);
+			this.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+
+			TestReport.StartStep("SHA - Search for exact WPS ID in All Status for saved as: " + savedAs);
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+
+			TestReport.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: " + savedAs + " and its status is: Assigned");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Assigned");
+
+			TestReport.StartStep("WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: " + savedAs);
+			this.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			TestReport.StartStep("WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: " + savedAs);
+			this.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
+
+			TestReport.StartStep("In Power Designer I left click on section: [SECT0077] Walmart Transportation Information");
+			stepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0077] Walmart Transportation Information");
+
+			TestReport.StartStep("In Power Designer I double click on category: Water Soluble?");
+			stepsStudio.GivenInPowerDesignerIDoubleClickOnCategory("Water Soluble?");
+
+			TestReport.StartStep("In Power Designer the phrase selector screen should open");
+			stepsStudio.ThenInPowerDesignerThePhraseSelectorScreenShouldOpen();
+
+			var table = new Table("Text");
+			table.AddRow("Y");
+			TestReport.StartStep("In the phrase selector screen I select phrases");
+			stepsStudio.ThenInThePhraseSelectorScreenISelectPhrases(table);
+
+			TestReport.StartStep("In the phrase selector screen I click button: Save");
+			stepsStudio.ThenInThePhraseSelectorScreenIClickButton("Save");
+
+			var table2 = new Table("Component CAS", "Component ID", "Chemical Name");
+			table2.AddRow("saved as " + savedAs, "MIXTURE", "AAA WERCS Test Raw Material");
+			TestReport.StartStep("WPS Studio - PD+ - Create Component for 3rd party product");
+			this.GivenICallSharedStep79501WPSStudio_PD_CreateComponentForRdPartyProduct(table2);
+
+			TestReport.StartStep("I click on home to navigate back to editing specific product saved as " + savedAs);
+			stepsStudio.GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(savedAs);
+
+			TestReport.StartStep("WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only for product saved as: " + savedAs);
+			this.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(savedAs);
+
+			TestReport.StartStep("Go to SHA Manager");
+			this.GivenICallSharedStep59066GoToSHAManager();
+
+			TestReport.StartStep("SHA - Search for exact WPS ID in All Status for saved as: " + savedAs);
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+
+			TestReport.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: " + savedAs + " and its status is: Completed");
+			stepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Completed");
+
 		}
 
 		[StepDefinition(@"I call Shared Step 118064 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path\)")]

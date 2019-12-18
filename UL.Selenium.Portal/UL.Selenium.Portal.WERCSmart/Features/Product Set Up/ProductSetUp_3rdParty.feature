@@ -13,7 +13,6 @@
 @Studio
 @ProductSetUp
 @run_ProductSetUp3rdParty
-
 Feature: ProductSetUp_3rdParty
 
 @ScenarioId:1418

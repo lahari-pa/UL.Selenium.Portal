@@ -646,7 +646,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisGlobalSteps.NavigateToLandingPage();
 			// Log in to administrator role
 			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
-			thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
+			//thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
+			TestReport.StartStep("Starting Shared Step 67823 Login To WERCSmart_ProductsAutomationAccount");
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
 			// Generate UPC number and delete duplicates
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC84108");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC84108");
@@ -659,8 +661,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SaveProductInformation(savedAs);
 			//And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
-			//And I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+			//And I call Shared Step 57401 (Additional Product Information - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+			sharedSteps.GivenICallSharedAdditionalProductInformation_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
 			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -669,14 +671,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
 			//Given I set the  field to: I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and would like to upload it
-			newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English",
-				"I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) or Battery Data Sheet (BDS) and would like to upload it");
+			//newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English",
+				//"I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) or Battery Data Sheet (BDS) and would like to upload it");
 			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 			sharedSteps.ICallSharedBrowseForFileSelectClickOpen(
-				"Technical Data Sheet (TDS) or Battery Data Sheet (BDS)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
-			//And I check the checkbox with description: I confirm that I have provided the most up-to-date, TDS/BDS in this product registration
-			newProductSteps.ICheckTheCheckboxWithDescription("check",
-				"I confirm that I have provided the most up-to-date, TDS/BDS in this product registration");
+				"Technical Data Sheet (TDS), Battery Data Sheet (BDS)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			newProductSteps.SetRadioOptionInSectionTo("Batteries are considered Articles under Global Harmonized Standards",
+				"I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.");
+			newProductSteps.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
+				"I don't need a WHMIS Compliant SDS");
 			//Given in the Regulatory Documents to Provide page I click Continue
 			newProductSteps.ClickContinue();
 			//Given in the Additional Documents to Provide page I click Continue

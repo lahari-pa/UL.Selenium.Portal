@@ -814,7 +814,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var selectedOptionsStr = new List<string>();
 			foreach (TableRow row in table.Rows)
 			{
-				if(Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"]), "Failed to Select The Functional Purpose:"+ row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
+				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"]), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
 				{
 					selectedOptionsStr.Add(row["Functional Purpose"]);
 				}
@@ -841,6 +841,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new Ingredients().TransparencyScorePercent(p0, out float trScore),
 				"Transparency score was displayed as: " + trScore + " expected: " + p0,
 				"Transparecy score was displayed as: " + trScore + " as expected");
+		}
+
+		[StepDefinition(@"I add the following CA Cleaning ingredients:")]
+		public void IAddTheFollowingCACleaningIngredients(Table table)
+		{
+			var newProductIngredients = new Ingredients();
+			IEnumerable<Ingredients.CACleaningIngredient> Ingredients = table.CreateSet<Ingredients.CACleaningIngredient>();
+			foreach (Ingredients.CACleaningIngredient item in Ingredients)
+			{
+				Report.IsTrue(newProductIngredients.AddCACleaningIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
+			}
 		}
 
 
