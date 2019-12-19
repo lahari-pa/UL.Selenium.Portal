@@ -638,6 +638,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			Report.Info("Got list of headers");
+			Report.Info($"The list of headers found was a follow: {string.Join(",", ListOfHeaders)}");
 			var ListOfProducts = new List<Product>();
 			//get all columns
 			ListOfProductRows = SeleniumBrowser.WebBrowser
@@ -785,6 +786,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							break;
 						case "GHS":
 							Report.Info($"Starting on: GHS");
+							Report.Info($"value of I was: {i}");
+
 							thisProduct.GHS = rowValues[i].Trim();
 							break;
 						case "Refeed":
