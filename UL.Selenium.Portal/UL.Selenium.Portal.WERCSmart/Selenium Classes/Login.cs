@@ -107,6 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			get => this.PasswordInput?.Text;
 			set
 			{
+				//this.PasswordInput.TryEnterText(value);
 				this.PasswordInput.TryEnterText(value);
 				this.PasswordInput.SendKeys(Keys.Tab);
 			}

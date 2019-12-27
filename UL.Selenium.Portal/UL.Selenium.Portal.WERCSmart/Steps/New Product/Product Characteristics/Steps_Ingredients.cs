@@ -843,6 +843,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Transparecy score was displayed as: " + trScore + " as expected");
 		}
 
-
+		[StepDefinition(@"for ingredient: (.*) Public Name displayed: (.*)")]
+		public void ForIngredientIDisplayPublicName(string ingredient, string publicName)
+		{
+			string test = new Ingredients().GetIngredientPublicName(ingredient);
+			Report.IsTrue(test == publicName, "Failed to display public name for ingredient: " + ingredient + " as: " + publicName + ", actually displayed: " + test, "Successfully displayed public name for ingredient: " + ingredient + " as: " + publicName);
+		}
+		[StepDefinition(@"for ingredient: (.*) Percentage displayed: (.*)")]
+		public void ForIngredientIDisplayPercentage(string ingredient, string percentage)
+		{
+			string test = new Ingredients().GetIngredientPercentage(ingredient);
+			Report.IsTrue(test == percentage, "Failed to display percentage for ingredient: " + ingredient + " as: " + percentage + ", actually displayed: " + test, "Successfully displayed percentage for ingredient: " + ingredient + " as: " + percentage);
+		}
 	}
 }
