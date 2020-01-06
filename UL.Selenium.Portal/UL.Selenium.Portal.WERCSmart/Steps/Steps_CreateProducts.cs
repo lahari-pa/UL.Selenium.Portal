@@ -555,7 +555,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
 			this.AdditionalProductInformation_YesToCACleaning();
-			this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
+			// Commented out for CA Cleaning, uncomment when question is returned
+			//this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
 			newProductSteps.ClickContinue();			
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			tableIngredients.AddRow("Formaldehyde", "100", "false", "false", "");
