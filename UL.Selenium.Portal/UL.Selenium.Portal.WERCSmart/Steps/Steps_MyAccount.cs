@@ -12,6 +12,7 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using NTTQA.Selenium.TReVor;
 using TReVor.Api.Wrapper.Classes;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1560,13 +1561,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I call a Shared Step to create a new password: (.*)")]
-		public void ThenICallSharedStepToCreateANewPassword(string password)
+		[StepDefinition(@"I call a Shared Step to create a new password for the account saved as: (.*)")]
+		public void ThenICallSharedStepToCreateANewPassword(string accountSavedAs)
 		{
 			ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
 			MyAccount MyAccountObject = new MyAccount();
 
-			FP.New_Password_Form(password, password);
+			//Need to make sure password is not one of the last 10 used
+			//Grab the saved password for the account in TReVor
+			//Check that it follows the format of WelcomeXX! or WelcomeX!
+			//If Does then increase the X value by 1
+			//If not set password to default Weclome1!
+			//Do this all in a loop of 10 tries
+
+			TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
+			string newPassword = "Welcome1!";
+			string currentPassword = currentUser.Password;
+			
+			string pattern = @"Welcome(\d+)!";
+			Regex rg = new Regex(pattern);
+			Match match = rg.Match(currentPassword);
+			if(match.Success)
+			{
+				Report.Info("The Password found in TReVor matched the expected format");
+				string intStr = match.Groups[1].Value;
+			}
+			else
+			{
+				Report.Info("The password found in TReVor did not match the expected format, setting the new password to use the correct format.");
+			}
+
+			string password="Welcome1!";
+
+			FP.New_Password_Form(newPassword, newPassword);
 
 			bool passwordResetInWERCS = Report.IsTrue(MyAccountObject.ClickSaveInChangeUserPasswordWindow(), "Failed to click save", "Successfully clicked save");
 

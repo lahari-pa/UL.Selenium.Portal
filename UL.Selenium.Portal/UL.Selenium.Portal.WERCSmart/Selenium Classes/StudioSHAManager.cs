@@ -762,6 +762,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							break;
 						case "Reviewer":
 							Report.Info($"Starting on: Reviewer");
+							Report.Info($"value of I was: {i}");
+							Report.Info($"Row Value at I was: {rowValues[i]}");
 							thisProduct.Reviewer = rowValues[i].Trim();
 							break;
 						case "SDS":
@@ -787,7 +789,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						case "GHS":
 							Report.Info($"Starting on: GHS");
 							Report.Info($"value of I was: {i}");
-
+							Report.Info($"Row Values is a list of strings containing the following values: {string.Join(",", rowValues)}");
+							Report.Info($"Row Value at I was: {rowValues[i]}");
 							thisProduct.GHS = rowValues[i].Trim();
 							break;
 						case "Refeed":

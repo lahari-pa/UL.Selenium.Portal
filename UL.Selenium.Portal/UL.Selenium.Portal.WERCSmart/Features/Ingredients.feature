@@ -551,6 +551,7 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I navigate to the home page
 
+@ScenarioId:6314
 Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Option
 
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

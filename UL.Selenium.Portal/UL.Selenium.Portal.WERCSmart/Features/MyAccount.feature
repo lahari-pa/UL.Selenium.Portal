@@ -241,7 +241,8 @@ Given I Login into WERCSmart Portal - Admin Role - Password Reset
 Then the WERCSmart homepage should load
 Given I call Shared Step 62676 (Go To My Account)
 Given I go to Reset Password in User Grid for the current user
-Then I call a Shared Step to create a new password: Welcome22!
+#Then I call a Shared Step to create a new password: Welcome22!
+Then I call a Shared Step to create a new password for the account saved as: PasswordResetAccount
 Then I click the User Icon
 And I click on Sign Out
 Given I Login into WERCSmart Portal - Admin Role - Password Reset
