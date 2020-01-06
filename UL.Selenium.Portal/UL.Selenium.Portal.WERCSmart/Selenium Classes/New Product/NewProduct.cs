@@ -3658,6 +3658,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 		}
+
+		public string LookForAlertWithTextInTheWarningPopupInTheIngredientsPage(string alertMessage)
+		{
+			IWebElement alert = this.containerElement.FindElement(By.XPath("//div[@class='alert alert-warning']//li"), 2);
+			return alert.Text;
+		}
+
+		public bool CloseWarningPopupInTheIngredientsPage()
+		{
+			IWebElement closeButton = this.containerElement.FindElement(By.XPath("//button[@data-bind='click: function(){ resolve(true); }, text: okText']"), 2);
+			return closeButton.TryClick();
+		}
+
+		public bool CheckForErrorInTheFollowingFieldsInTheLithiumBatteryTransportationSection(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement field = this.containerElement.FindElement(By.XPath("//label[contains(text(), \"" + row["Field"] + "\")]/../following-sibling::div//span[text()='This is a required field.']"), 2);
+
+				if (field == null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
 	}
 
 	public class ProductInformation

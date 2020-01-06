@@ -7800,7 +7800,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             thisStepsSha.InSupplierManagerPopupIEnterSearchTerm(email);
 
             TestReport.StartStep("I Select the 'Email' Radio Button");
-            thisStepsSha.InSupplierManagerPopupISelectRadioButton("E-Mail");
+            thisStepsSha.InSupplierManagerPopupISelectRadioButton("Vendor");
 
             TestReport.StartStep("I click on the search button");
             thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
