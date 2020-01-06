@@ -1575,7 +1575,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Do this all in a loop of 10 tries
 
 			TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
-			string newPassword = "Welcome1!";
+			
 			string currentPassword = currentUser.Password;
 			
 			string pattern = @"Welcome(\d+)!";
@@ -1585,21 +1585,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("The Password found in TReVor matched the expected format");
 				string intStr = match.Groups[1].Value;
+				int passNumber = Convert.ToInt32(intStr);
+				if (passNumber<99)
+				{
+					passNumber++;
+				}
+				else
+				{
+					passNumber = 1;
+				}
+				string updatedPassword = "Welcome" + passNumber.ToString() + "!";
+				Context.AddToContext("contextPassword", updatedPassword);
 			}
 			else
 			{
-				Report.Info("The password found in TReVor did not match the expected format, setting the new password to use the correct format.");
+				Report.Info("The password found in TReVor did not match the expected format, setting the new password to use the correct format.");				 
+				string newPassword = "Welcome1!";
+				Context.AddToContext("contextPassword", newPassword);
+				
+			}		
+			int i = 0;
+			bool acceptedPass = false;
+
+			//here is where we loop before clicking close check that the "too recent password" popup is not present, if it is, click close in that popup and try +1 to the number (if number =99 set it to 1)
+			while (i<10 && acceptedPass==false)
+			{
+				var contextPassword = (string)Context.GetFromContext("contextPassword");
+				FP.New_Password_Form(contextPassword, contextPassword);
+				bool passwordResetInWERCS = Report.IsTrue(MyAccountObject.ClickSaveInChangeUserPasswordWindow(), "Failed to click save", "Successfully clicked save");
+				//check that the popup does not appear
+				//if it does then add 1 to password and save it over contextPassword in the context (if not show error update acceptedPass to true)
+				//close the error popup
+				i++;
 			}
+			if(acceptedPass==false)
+			{
 
-			string password="Welcome1!";
+			}			
 
-			FP.New_Password_Form(newPassword, newPassword);
-
-			bool passwordResetInWERCS = Report.IsTrue(MyAccountObject.ClickSaveInChangeUserPasswordWindow(), "Failed to click save", "Successfully clicked save");
+			
 
 			Report.IsTrue(MyAccountObject.ClickCloseInChangeUserPasswordWindow(), "Failed to click close", "Successfully clicked close");
 
-			if (passwordResetInWERCS)
+
+			var finalPassword = (string)Context.GetFromContext("contextPassword");
+			if (acceptedPass)
 			{
 
 				var user = TestUsers.GetUserSavedAs("PasswordResetAccount");
@@ -1612,9 +1642,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("TReVor user does exist");
 				}
 
-				if (Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, password), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
+				if (Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
 				{
-					user.Password = password;
+					user.Password = finalPassword;
 				}
 
 			}
