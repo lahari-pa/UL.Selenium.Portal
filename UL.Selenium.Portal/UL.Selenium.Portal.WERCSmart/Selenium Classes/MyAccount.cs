@@ -1085,6 +1085,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return CloseButton.TryClick();
 		}
 
+		public bool PasswordTooRecentPopupPresent()
+		{
+			IWebElement tooRecentPopup = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]"), 2);
+			return tooRecentPopup != null;
+		}
+
+		public bool ClickCloseInPasswordTooRecentPopup()
+		{
+			IWebElement tooRecentPopupClose = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]//button[text()='Close']"), 2);
+			return tooRecentPopupClose.TryClick();
+		}
+
 	}
 
 	class MyAccount_CompanyInfo : BaseObject
