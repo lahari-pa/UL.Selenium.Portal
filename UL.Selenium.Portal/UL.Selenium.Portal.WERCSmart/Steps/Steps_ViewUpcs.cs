@@ -179,6 +179,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(matchingUpc.Retailers.Contains(row["Retailer"]), "Retailers column did not contain retailer: " + row["Retailer"] + "!", "Retailers column contained retailer: " + row["Retailer"]);
 			}
 		}
+
+		[StepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
+		public void ThenIConfirmTheUPCDuplicateWarningIconIsVisible()
+		{
+			Report.IsTrue(new UPC().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
+		}
+
 		[StepDefinition(@"the View UPC page loads with no errors")]
 		public void TheViewUPCPageLoadsWithNoErrors()
 		{
@@ -238,7 +245,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ViewUpcs().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
 			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
-	
+
+		[StepDefinition(@"I save the first UPC number associated to the product as: (.*)")]
+		public void SaveFirstUpcNumberToContext(string savedAs)
+		{
+			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
+			if (!upcs.Any())
+			{
+				Report.Failure("No UPC numbers were found!");
+				return;
+			}
+			Report.Info("UPC number: " + upcs[0].UpcNumber);
+			Context.AddToContext(savedAs, upcs[0].UpcNumber);
+		}
 	}
 
 		

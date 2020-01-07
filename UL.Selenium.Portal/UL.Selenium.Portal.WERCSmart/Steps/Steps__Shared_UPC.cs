@@ -1332,7 +1332,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				yesOrNoOption);
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
-
+		[StepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
+		public void ThenIConfirmTheUPCDuplicateWarningIconIsVisible()
+		{
+			Report.IsTrue(new UPC().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
+		}
 		
 		[StepDefinition(@"I call Shared Step 292066 \\\(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\\\)")]
 		public void GivenICallSharedStepRetailer_SelectNoRetailer_ClickDone_ClickContinue_HappyPath()

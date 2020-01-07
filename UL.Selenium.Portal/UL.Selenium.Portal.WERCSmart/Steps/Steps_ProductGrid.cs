@@ -1036,10 +1036,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter combinations of More Filters and should see the product ID: (.*) only for the correct combinations")]
 		public void EnterCombinationsOfMoreFilters(string id, Table moreFilters)
 		{
-			if (Context.GetFromContextRegex(id, out var result))
+			var test = Context.GetFromContext(id);
+			//if (Context.GetFromContextRegex(id, out var result))
+			if(test != null)
 			{
 				Report.Info("Getting ID from context: " + id);
-				id = result.ToString();
+				id = test.ToString();
 			}
 			TestReport.UseSubSteps = true;
 			var selProductsGrid = new ProductsGrid();
@@ -1240,7 +1242,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the product exists with Product ID: (.*) and Name: (.*)")]
 		public void ProductExistsWithIDAndName(string id, string name)
 		{
-			if (Context.GetFromContextRegex(id, out var result))
+			var result = Context.GetFromContext(id);
+			//if (Context.GetFromContextRegex(id, out var result))
+			if (result != null)
 			{
 				Report.Info("Getting ID from context: " + id);
 				id = result.ToString();
@@ -1261,6 +1265,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter combinations of Status and More Filters and should see the product ID: (.*) only for the correct combinations")]
 		public void EnterCombinationsOfStatusAndMoreFilters(string id, Table statusAndFilters)
 		{
+			var test = Context.GetFromContext(id);
+			//if (Context.GetFromContextRegex(id, out var result))
+			if (test != null)
+			{
+				Report.Info("Getting ID from context: " + id);
+				id = test.ToString();
+			}
+
 			var selProductsGrid = new ProductsGrid();
 			var selMoreFilters = new MoreFilters();
 			var filters = new List<KeyValuePair<string, string>>();

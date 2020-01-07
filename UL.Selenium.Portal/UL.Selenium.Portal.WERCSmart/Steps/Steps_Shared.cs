@@ -517,6 +517,59 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
         /// Requires a table with headings: | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
         /// </summary>
         /// <param name="table"></param>
+		[StepDefinition(@"I call Shared Step 48367 \(Product Includes Battery > any type\) : Setting how the battery is packaged option to (.*)")]
+		public void GivenICallSharedProductIncludesBatteryAnyType(string option, Table table)
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.SelectFirstOptionInSection("Indicate how battery is packaged");
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I set the Indicate how battery is packaged field to: Installed in the product");
+			MyStepsNewProduct.SetTheSectionOptionTo("Indicate how battery is packaged", option);
+			TestReport.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Number of batteries per package | How many batteries are required to run |");
+			try
+			{
+				var listOfBatteries = new List<Battery>();
+				foreach (TableRow thisRow in table.Rows)
+				{
+					if (!int.TryParse(thisRow["Number of batteries per package"], out int batteriesPerPackage))
+					{
+						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
+						throw new Exception("'Number of batteries per package' column of the step table must be an integer value");
+					}
+					if (!int.TryParse(thisRow["How many batteries required to run"], out int batteriesRequired))
+					{
+						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
+						throw new Exception("'How many batteries required to run' column of the step table must be an integer value");
+					}
+					var thisBattery = new Battery {
+						BatteryType = thisRow["Battery Type"],
+						Manufacturer = thisRow["Manufacturer"],
+						NumberPerPackage = batteriesPerPackage,
+						RequiredToRun = batteriesRequired
+					};
+					listOfBatteries.Add(thisBattery);
+				}
+				var productIncludesBattery = new ProductIncludesBattery();
+				if (listOfBatteries.Any())
+				{
+					// setter adds a table row for each battery in the list and enters data into each column
+					productIncludesBattery.Batteries = listOfBatteries;
+					productIncludesBattery.DeleteEmptyBatteryRows();
+				}
+				else
+				{
+					Report.Error("There were no batteries to add");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+			TestReport.StartStep("In the Product Includes Battery page I click continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Includes Battery");
+		}
+
         [StepDefinition(@"I call Shared Step 48367 \(Product Includes Battery > any type\)")]
         public void GivenICallSharedProductIncludesBatteryAnyType(Table table)
         {
@@ -570,6 +623,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             TestReport.StartStep("In the Product Includes Battery page I click continue");
             MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Includes Battery");
         }
+
+
 
         [StepDefinition(@"I call Shared Step 57589 \(Enter Pesticide Data - United States \(without EPA number\)\)")]
         public void GivenICallSharedStepEnterPesticideData_UnitedStatesWithoutEPANumber()
@@ -796,8 +851,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
         // Enter '_CVS' or '_cvs' for upc variable to use a upc number for retailer CVS from (required for some test cases eg. CVS RCL feature)
         [StepDefinition(
             @"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
-        public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc,
-            string containerType, string size)
+		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc, string containerType, string size)
         {
             TestReport.UseSubSteps = true;
             var MyStepsNewProduct = new StepsNewProduct();
@@ -871,6 +925,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
                 Report.Info("An error was showing! on click continue! Attempting a different UPC");
             }
         }
+		// UPC: CVS binding text used for using a UPC from the list of valid CVS UPCs from upcitemdb.com
+		[StepDefinition(
+			@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*), size: (.*), Do not click continue")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly_NotContinue(string upc,
+			string containerType, string size)
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			TestReport.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			TestReport.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+		
+		}
+
 
 
         [StepDefinition(
@@ -3906,7 +3996,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             MyNewProduct.ThenFieldExists("WHMIS-compliant label, English and French-Canadian");
             TestReport.StartStep("I upload a PDF file in the WHMIS Label section");
             MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
-                "Request to author");
+                "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
             MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
             TestReport.StartStep("I click continue");
             MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
@@ -7800,7 +7890,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             thisStepsSha.InSupplierManagerPopupIEnterSearchTerm(email);
 
             TestReport.StartStep("I Select the 'Email' Radio Button");
-            thisStepsSha.InSupplierManagerPopupISelectRadioButton("E-Mail");
+            thisStepsSha.InSupplierManagerPopupISelectRadioButton("Vendor");
 
             TestReport.StartStep("I click on the search button");
             thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
@@ -9071,6 +9161,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
             new StepsForwardProductRegistration().SelectFirstUPC();
             TestReport.StartStep("I click continue");
+			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
+		}
+
+		[StepDefinition(@"I call Shared Step 86002 \(Forwarding - PLP - Select Product: (.*) & UPCs step - Edit existing UPC Confirm\)")]
+		public void Shared86002(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I select the product saved as: " + savedAs);
+			new StepsForwardProductRegistration().SelectProductByIDSavedAs(savedAs);
+			TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
+			new StepsForwardProductRegistration().SelectFirstUPC();
+			TestReport.StartStep("I click continue");
+			new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
+		}
+
+		[StepDefinition(@"I call Shared Step 86004 \(Forwarding - Not PLP - Select Product: (.*) & UPCs step - Edit existing UPC Confirm Package Type not shown\)")]
+		public void Shared86004(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I select the product saved as: " + savedAs);
+			new StepsForwardProductRegistration().SelectProductByIDSavedAs(savedAs);
+			TestReport.StartStep("I select the check box next to existing UPC in the right hand side of the table");
+			new StepsForwardProductRegistration().SelectFirstUPC();
+			TestReport.StartStep("I click continue");
             new StepsForwardProductRegistration().ClickContinueForwardProductRegistration();
         }
 

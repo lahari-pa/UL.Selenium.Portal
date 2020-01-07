@@ -41,6 +41,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath("//div[contains(text(), 'Lithium battery registrations')]"), 2).Text;
 		}
 
+		public bool CheckIfUPCDuplicateWarningAppears()
+		{
+			Report.Info("Beginning CheckIfUPCDuplicateWarningAppears");
+			var UPCWarning = this.containerElement.FindElement(By.XPath("//i[contains(@title, 'UPC')]"), 2);
+			if(UPCWarning == null)
+			{
+				Report.Info("UPCWarning returns null");
+				return false;
+			}
+			return true;
+		}
+
 		public string MaximumLimitUpcWarning()
 		{
 			//this.RefreshContainer();
