@@ -141,6 +141,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				try
 				{
+					Report.Info("First Try of getting the Alert text failed, exeption was caught. Trying to find alert text again.");
 					alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
 					Report.Info($"Alert Text was found as {alertText} on the second try");
 				}

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
 using NTTQA.Selenium.UniversalFunctions;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
@@ -10,6 +9,7 @@ using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using NTTQA.Selenium.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -254,7 +254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var newProductIngredients = new Ingredients();
 			bool actionSelect;
 			var ingredientsToAction = new List<string>();
-			table.Rows.ForEach(x => ingredientsToAction.Add(x["Name"]));
+			table.Rows.Cast<TableRow>().ToList().ForEach(x => ingredientsToAction.Add(x["Name"]));
 			switch (doSelect)
 			{
 				case "select":
@@ -280,7 +280,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			List<Ingredients.Ingredient> ingredients = new Ingredients().GetIngredients();
 			var ingredientsToCheck = new List<string>();
-			table.Rows.ForEach(x => ingredientsToCheck.Add(x["Name"]));
+			table.Rows.Cast<TableRow>().ToList().ForEach(x => ingredientsToCheck.Add(x["Name"]));
 			if (expectSelected == "selected")
 			{
 				Report.IsTrue(ingredients.Where(x => ingredientsToCheck.Contains(x.ComponentName)).All(x => x.Selected), "Not all of the listed ingredients were selected as was expected! => " + string.Join(", ", ingredientsToCheck), "All of the listed ingredients were selected as expected");

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using TechTalk.SpecFlow;
@@ -54,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		public void PrimaryPhysicalOptionsShowingCorrectly(Table table)
 		{
 			var expected = new List<string>();
-			table.Rows.ForEach(x => expected.Add(x["State"]));
+			table.Rows.Cast<TableRow>().ToList().ForEach(x => expected.Add(x["State"]));
 			List<string> found = new NewProduct().ListOfPrimaryPhysicalStates();
 			Report.Info("Primary Physical States found: " + string.Join(", ", found));
 			foreach (string state in expected)

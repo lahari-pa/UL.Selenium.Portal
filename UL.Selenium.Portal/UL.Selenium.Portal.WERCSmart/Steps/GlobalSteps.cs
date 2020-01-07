@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Castle.Core.Internal;
 using NTTQA.Selenium.Cache;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
@@ -1144,7 +1143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var usersSavedAs = new List<string>();
 			TestReport.UseSubSteps = true;
-			users.Rows.ForEach(x => usersSavedAs.Add(x["User"]));
+			users.Rows.Cast<TableRow>().ToList().ForEach(x => usersSavedAs.Add(x["User"]));
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (string savedAs in usersSavedAs)
 			{

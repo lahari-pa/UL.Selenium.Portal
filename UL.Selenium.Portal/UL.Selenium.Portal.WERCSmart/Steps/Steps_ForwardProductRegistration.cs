@@ -9,6 +9,7 @@ using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Text.RegularExpressions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -319,6 +320,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selForwardProductReg = new ForwardProductRegistration();
 			if (savedAs.ToLower().Contains("list"))
 			{
+				Report.Info($"Saved as contains the word list.");
 				var ids = (List<string>)Context.GetFromContext(savedAs);
 				if (ids == null)
 				{
@@ -346,7 +348,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-
+				Report.Info($"Saved as does not contain the word list.");
 				string id = Context.GetFromContext(savedAs)?.ToString();
 				if (id == null)
 				{
@@ -701,7 +703,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-			Report.Info("Retailer: " + aRetailer);
+			Report.Info("The Retailer found in context is: " + aRetailer);
 			//        var abbreviationMappings = new RetailerAbbreviations().Map;
 			//        if (abbreviationMappings.ContainsKey(aRetailer))
 			//        {
@@ -714,7 +716,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//}
 			//        }
 			aRetailer = new RetailerAbbreviations().TryConvertToAbbreviation(aRetailer);
-			Report.Info("Retailer: " + aRetailer);
+			Report.Info("The Retailer from context after trying to convert to abbreviation is: " + aRetailer);
 			List<ForwardProductRegistration.ProductResults> listProductResults = selForwardProdReg.GetProductResults();
 			foreach (var productResults in listProductResults)
 			{
@@ -1007,6 +1009,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			UPC UPCObject = new UPC();
 			Report.IsTrue(UPCObject.CheckIfDropDownsWithDefaultOptionDisplayTheError(table), "At least one dropdown did not display an error", "All the dropdowns displayed their errors");
+		}
+
+		[StepDefinition(@"I select the first non Kit product from the list of IDs saved as: (.*) under the Select Products tab")]
+		public void SelectNonKitProductByIDSavedAs(string savedAs)
+		{
+			
+				var selForwardProductReg = new ForwardProductRegistration();
+				Report.Info($"Attempting to select the first product from the list saved as: {savedAs} that is not a kit product");
+				var ids = (List<string>)Context.GetFromContext(savedAs);
+				if (ids == null)
+				{
+					Report.Failure("Could not find product IDs in context saved as: " + savedAs);
+					return;
+				}
+				bool clicked = false;
+				foreach (string id_ in ids)
+				{
+					Report.Info("Attempting to select product with id: " + id_);
+					this.EnterTextInSearchByIDOrProductNameField(id_);
+					if(selForwardProductReg.GetTopProductNameFromSelectProductList().IsNullOrEmpty())
+					{
+						Report.Info($"No Product Name was found for the product with id: {id_}");
+						
+					}
+					else
+					{
+						if(selForwardProductReg.GetTopProductNameFromSelectProductList().ToLower().Contains("kit"))
+						{
+							Report.Info($"The Product Name for id: {id_} contained the word kit. Moving onto the next ID in the list saved as: {savedAs}");
+						}
+						else
+						{
+							if (selForwardProductReg.SelectProducts_ClickProductByID(id_))
+							{
+							Report.Success("Successfully selected product with ID: " + id_);
+							Report.Screenshot();
+							clicked = true;
+							break;
+							}
+						}
+						
+					}	
+
+					
+				}
+				if (!clicked)
+				{
+					Report.Failure("Failed to select any of the products with ID in the list saved as: " + savedAs);
+					Report.Screenshot();
+				}
+			
+			
 		}
 
 
