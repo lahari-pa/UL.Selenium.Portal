@@ -76,12 +76,14 @@ Scenario: [65887] Pagination
 	Given I click previous in the My Account user grid
 	Then The My Account user grid is currently on page number: 1
 
+@ScenarioId:6339
 Scenario: [70511] Pagination (...) need an account with six pages of users
 	#CLF 25/6/2019 Changed login account to one that has enough products to page through
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click on My Account
-	Given I check that there are at least 6 pages of users. If not this test will not work.
+	#Given I check that there are at least 6 pages of users. If not this test will not work.
+	Then I Create new users in the My Account page via the user Grid until there are atleast: 9 pages present
 	Given I click ... in the My Account user grid
 	Given I see the user grid page navigation input with up and down arrows
 	Given I type the number 2 into the user grid page navigation box and press the enter key

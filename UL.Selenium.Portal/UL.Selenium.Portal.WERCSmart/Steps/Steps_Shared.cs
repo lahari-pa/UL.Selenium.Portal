@@ -8768,11 +8768,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
         [StepDefinition(@"I call Shared Step 63511 \(Create New User via User Grid\)")]
         public void GivenICallSharedStepCreateNewUserViaUserGrid()
         {
-            new GlobalSteps().ThenICreateANewEmailAddress();
+            new GlobalSteps().ThenICreateANewRandomEmailAddress();
             Report.Info("Creating a user with the following information:");
             Report.Info("Name: User, Title: Mr, Role: User, Phone Number: 123 - 456 - 7889, Country: United Kingdom");
             var table = new Table("User Name", "Title", "Role", "Phone Number", "Email Address", "Confirm Email", "Country Code", "Country");
-            table.AddRow("User", "Mr", "User", "123 - 456 - 7889", "Saved", "Saved", "empty", "United Kingdom");
+            table.AddRow("Random", "Mr", "User", "123 - 456 - 7889", "Saved", "Saved", "empty", "United Kingdom");
             new StepsMyAccount().ThenIAddANewUserWithTheFollowingInformation(table);
         }
 

@@ -389,10 +389,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						userName = userName + "_" + System.DateTime.Now.ToString("HHmmddMMyy");
 
-						Context.ScenarioContext.Add("CurrentUser", userName);
+						Context.AddToContext("CurrentUser", userName);
 
 						Report.Info("User Name = " + userName);
 					}
+					if (userName == "Random") 
+					{
+						string randomstr = Context.ScenarioContext["CurrentEmail"].ToString().Replace(".kxxyxunf@mailosaur.io", "");
+						userName = "User_" + randomstr;
+						Context.AddToContext("CurrentUser", userName);
+						Report.Info("User Name = " + userName);
+					}
+
+
 					if (emailAddress == "Saved")
 					{
 						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
