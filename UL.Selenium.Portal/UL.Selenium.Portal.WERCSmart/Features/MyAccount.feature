@@ -8,6 +8,7 @@
 @LandingPage
 @PaymentMethods
 @Freshdesk
+@subUpgrade
 @RetailPartners
 @run_MyAccount
 Feature: MyAccount

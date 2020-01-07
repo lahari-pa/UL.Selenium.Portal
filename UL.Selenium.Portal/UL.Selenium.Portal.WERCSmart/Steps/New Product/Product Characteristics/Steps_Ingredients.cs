@@ -855,5 +855,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
+		[StepDefinition(@"for ingredient: (.*) Public Name displayed: (.*)")]
+		public void ForIngredientIDisplayPublicName(string ingredient, string publicName)
+		{
+			string displayName = new Ingredients().GetIngredientPublicName(ingredient);
+			Report.IsTrue(displayName == publicName, "Failed to display public name for ingredient: " + ingredient + " as: " + publicName + ", actually displayed: " + displayName, "Successfully displayed public name for ingredient: " + ingredient + " as: " + publicName);
+		}
+		[StepDefinition(@"for ingredient: (.*) Percentage displayed: (.*)")]
+		public void ForIngredientIDisplayPercentage(string ingredient, string percentage)
+		{
+			string displayPercentage = new Ingredients().GetIngredientPercentage(ingredient);
+			Report.IsTrue(displayPercentage == percentage, "Failed to display percentage for ingredient: " + ingredient + " as: " + percentage + ", actually displayed: " + displayPercentage, "Successfully displayed percentage for ingredient: " + ingredient + " as: " + percentage);
+		}
 	}
 }

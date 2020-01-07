@@ -45,19 +45,19 @@ Scenario: [56829] More Filters
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I search for product by name: Kit Product 56829 and save the first grid item as: Kit_56829
-	And I create a Kit product and save details as: Kit_56929
+	And I create a Kit product and save details as: Kit_56829
 	And I navigate to the landing page
 	And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	And I should see an option for More Filters
 	Given I click More Filters in the products grid
-	Given I confirm the product exists with Product ID: %Kit_56829% and Name: Kit Product 56829
-	Given I enter combinations of More Filters and should see the product ID: %Kit_56829% only for the correct combinations
+	Given I confirm the product exists with Product ID: Kit_56829_ID and Name: Kit Product 56829
+	Given I enter combinations of More Filters and should see the product ID: Kit_56829_ID only for the correct combinations
 		| Filter              | Match               |
-		| UPC                 | %UPC_56829%         |
+		| UPC                 | %Kit_56829_UPC%         |
 		| Brand               | TestBrand           |
 		| Retailer            | Wal-Mart/SAM'S CLUB |
 		| Additional Programs | Kit Registrations   |
-	Given I enter combinations of Status and More Filters and should see the product ID: <Kit_56829> only for the correct combinations
+	Given I enter combinations of Status and More Filters and should see the product ID: Kit_56829_ID only for the correct combinations
 		| Filter              | Match                  |
 		| Status              | Assessment in Progress |
 		| Brand               | TestBrand              |

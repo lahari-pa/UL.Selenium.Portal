@@ -15,6 +15,8 @@ using NTTQA.Selenium.SpecFlow;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using TechTalk.SpecFlow;
+using TReVor.Api.Wrapper.Classes;
+using NTTQA.Selenium.Cache;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -670,6 +672,55 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return upcNumberField.GetValue() == upcNumber;
 		}
 
+		public bool InputZeroBufferUPCNumber(string upcNumber)
+		{
+			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+			if (upcNumber.ToLower().Contains("saved as"))
+			{
+				try
+				{
+					string savedUPC = Context
+						.GetFromContext(upcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					upcNumber = "0" + savedUPC;
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to find saved item in context: " + upcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					throw;
+				}
+
+			}
+			upcNumberField.EnterText(upcNumber);
+			return upcNumberField.GetValue() == upcNumber;
+		}
+		public bool InputZeroBufferUPCDuplicateNumber(string upcNumber)
+		{
+			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+			if (upcNumber.ToLower().Contains("saved as"))
+			{
+				try
+				{
+					string savedUPC = Context
+						.GetFromContext(upcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					upcNumber = "00" + savedUPC;
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to find saved item in context: " + upcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					throw;
+				}
+
+			}
+			upcNumberField.EnterText(upcNumber);
+			return upcNumberField.GetValue() == upcNumber;
+		}
+
 		public bool InputUPCSize(string size)
 		{
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
@@ -963,6 +1014,111 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return el.Displayed;
 		}
+		public bool CheckDataAcceptanceProblemMessageHasAppeared(string message)
+		{
+			Report.Info("Beginning CheckDataAcceptanceProblemMessageHasAppeared");
+			var element = this.containerElement.FindElement(By.XPath("//div[contains(text(), '" + message + "')]"), 1);
+			if(element == null)
+			{
+				Report.Info("Check Data Acceptance Problem Message returns null");
+				return false;
+			}
+			var UPCTextWarning = element.Text;
+
+			if (UPCTextWarning == "")
+			{
+				Report.Info("Check Data Acceptance Problem Message returns an empty string");
+				return false;
+			}
+			return true;
+		}
+
+		public bool CheckDataAcceptanceSelectOptionWarningIsVisible()
+		{
+			Report.Info("Beginning CheckDataAcceptanceSelectOptionWarningIsVisible");
+			IWebElement SelectWarning = this.containerElement.FindElement(By.XPath("//span[contains(@data-bind, 'html: $data')]"), 1);
+			if (SelectWarning == null)
+			{
+				Report.Info("SelectWarning returns a null");
+				return false;
+			}
+			Report.Info("SelectWarning found!");
+			return true;
+		}
+		public bool CheckDataAcceptanceSelectOptionWarningIsNotVisible()
+		{
+			Report.Info("Beginning CheckDataAcceptanceSelectOptionWarningIsNotVisible");
+			IWebElement SelectWarning = this.containerElement.FindElement(By.XPath("//span[contains(@data-bind, 'html: $data')]"), 1);
+			if (SelectWarning == null)
+			{
+				Report.Info("SelectWarning was not found!");
+				return true;
+			}
+			Report.Info("SelectWarning was found!");
+			return false;
+		}
+
+		public bool CheckFixAllErrorsMessageIsNotVisible()
+		{
+			Report.Info("Beginning CheckFixAllErrorsMessageIsNotVisible");
+			var element = this.containerElement.FindElement(By.XPath("//div[contains(@data-bind, 'visible: $root.isAllValid() === false')]"), 1);
+			if (element == null)
+			{
+				Report.Info("fixAllErrorsMessage returned a null value!");
+				return false;
+			}
+
+			var fixAllErrorsMessage = element.Text;
+			if (fixAllErrorsMessage == "")
+			{
+				Report.Info("fixAllErrorsMessage returned a empty value!");
+				return false;
+			}
+			if(fixAllErrorsMessage == "visible: $root.isAllValid()")
+			{
+				Report.Info("fixAllErrorsMessage is visible!");
+				return false;
+			}
+			Report.Info("fixAllErrorsMessage is not visible");
+			return true;
+		}
+
+		public string GetUserEmailAddress(string accountSavedAs)
+		{
+			Report.Info("Beginning GetUserEmailAddress");
+			TReVorTestUsers user = new TReVorTestUsers();
+			user = TestUsers.GetUserSavedAs(accountSavedAs);
+			string usrEmail = user.Username;
+			return usrEmail;
+
+		}
+		public string CheckDataAcceptanceEmailIsPopulated()
+		{
+			Report.Info("Beginning CheckDataAcceptanceProblemMessageHasAppeared");
+			var EmailField = this.containerElement.FindElement(By.XPath("//input[@id= 'email']"), 2);
+			var dataBindContents = EmailField.GetValue();
+			// needs work
+			if (dataBindContents == "")
+			{
+				Report.Info("Check Data Acceptance Problem Message returns an empty string");
+				return dataBindContents;
+			}
+			Report.Info("Check Data Acceptance Problem Message string: " + dataBindContents);
+			return dataBindContents;
+		}
+
+		public bool CheckEmailAddressAgainstDataAcceptanceEmail(string usrEmail, string dataAcceptanceEmail)
+		{
+			if(usrEmail == dataAcceptanceEmail)
+			{
+				Report.Info("The user email address: " + usrEmail + " matches the email displayed in the data acceptance form: " + dataAcceptanceEmail);
+				return true;
+			}
+			Report.Info("The user email address: " + usrEmail + " does not match the email displayed in the data acceptance form: " + dataAcceptanceEmail);
+			return false;
+
+		}
+
 
 		public List<string> Get3rdPartyPageAlerts()
 		{
@@ -3148,7 +3304,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				string xPath = @"(//label[starts-with(text(),""" + section + @""")]))";
+				string xPath = @"(//label[contains(text(),""" + section + @""")]))";
 				SeleniumBrowser.WebBrowser.FindElement(By.XPath(xPath), 2).TryClick();
 			}
 			catch (Exception)
@@ -3230,7 +3386,54 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool CheckIfUPCDuplicateWarningAppears()
+		{
+			Report.Info("Beginning CheckIfUPCDuplicateWarningAppears");
+			IWebElement UPCWarning = this.containerElement.FindElement(By.XPath("//i[contains(@title, 'UPC')]"), 2);
+			if (UPCWarning == null)
+			{
+				Report.Info("UPCWarning returns null");
+				return false;
+			}
+			Report.Info("UPCWarning found!");
+			return true;
+		}
 
+		public bool CheckWarningMessageHasAppeared(string warning)
+		{
+			Report.Info("Beginning CheckIfUPCDuplicateWarningAppears");
+			string UPCTextWarning = this.containerElement.FindElement(By.XPath("//p[contains(text(), '" + warning + "')]"), 2).Text;
+			if (UPCTextWarning == "")
+			{
+				Report.Info("UPCTextWarning returns an empty string");
+				return false;
+			}
+			return true;
+		}
+
+		public bool CheckUPCTableIsHighlightedRed()
+		{
+			Report.Info("Beginning CheckUPCTableIsHighlightedRed");
+			var table_BG = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']/child::tbody/child::tr/child::td"), 1);
+			if (table_BG == null)
+			{
+				Report.Info("UPC Table returns a null value!");
+				return false;
+			}
+			var B_Col = table_BG.GetCssValue("background-color");
+			if (B_Col == "")
+			{
+				Report.Info("UPC Table returns an empty string");
+				return false;
+			}
+			if (B_Col == "rgba(242, 222, 222, 1)")
+			{
+				Report.Info("UPC Table is highlighted Red!");
+				return true;
+			}
+			return false;
+
+		}
 
 		public bool CheckInputFieldXIsColor(string expectedColor, string fieldName)
 		{
