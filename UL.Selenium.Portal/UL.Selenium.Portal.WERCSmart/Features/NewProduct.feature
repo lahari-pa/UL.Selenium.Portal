@@ -50,6 +50,7 @@ When I click continue
 Then I should see an error message: This is a required field.
 
 
+@ScenarioId:6336
 Scenario: [87295] 3rd party Ingredients - Informational Message
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -58,8 +59,7 @@ Scenario: [87295] 3rd party Ingredients - Informational Message
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: WPS
-	Then I check for the following alert message in the warning popup in the 'Ingredients' Page: Your product registration contains a 3rd-Party Formula that needs to be updated for it to be included in chemical-policy or sustainability assessments conducted by retailers or in GoodGuide ratings. We have sent a notification to your 3rd-Party Formulator requesting that the ingredient's Data Use Tier consent, and the public disclosure status of its ingredients, be updated. Please continue with this product registration, but note that the chemical-policy or sustainability assessment results may change if, and when, your 3rd-Party Formulator authorizes its ingredient to be included in such programs.
-	And I close the warning popup in the 'Ingredients' Page
+	Then a Warning popup dialog should appear with the message: Your product registration contains a 3rd-Party Formula that needs to be updated for it to be included in chemical-policy or sustainability assessments conducted by retailers or in GoodGuide ratings. We have sent a notification to your 3rd-Party Formulator requesting that the ingredient's Data Use Tier consent, and the public disclosure status of its ingredients, be updated. Please continue with this product registration, but note that the chemical-policy or sustainability assessment results may change if, and when, your 3rd-Party Formulator authorizes its ingredient to be included in such programs.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87295
 
 

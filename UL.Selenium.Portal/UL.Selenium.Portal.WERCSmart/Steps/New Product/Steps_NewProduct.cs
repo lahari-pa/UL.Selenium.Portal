@@ -2751,20 +2751,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().CompanyWebAddress(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
 
-		[StepDefinition(@"I check for the following alert message in the warning popup in the 'Ingredients' Page: (.*)")]
-		public void LookForAlertWithTextInTheWarningPopupInTheIngredientsPage(string message)
-		{
-			var NewProductObject = new NewProduct();
-			Report.IsTrue(NewProductObject.LookForAlertWithTextInTheWarningPopupInTheIngredientsPage(message) == message, "Failed to find a warning with the text: \"" + message + "\"", "Successfully found a warning with the text: \"" + message + "\"");
-		}
-
-		[StepDefinition(@"I close the warning popup in the 'Ingredients' Page")]
-		public void CloseWarningPopupInTheIngredientsPage()
-		{
-			var NewProductObject = new NewProduct();
-			Report.IsTrue(NewProductObject.CloseWarningPopupInTheIngredientsPage(), "Failed to close the warning popup", "Successfully closed the warning popup");
-		}
-
 		[StepDefinition(@"I check for an error in the following fields in the 'Lithium Battery Transportation' Section")]
 		public void GivenICheckForAnErrorInTheFollowingFields(Table table)
 		{
