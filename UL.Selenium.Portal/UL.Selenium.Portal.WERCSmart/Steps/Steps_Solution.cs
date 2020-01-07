@@ -132,7 +132,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (string handle in allHandles)
 			{
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-				SeleniumBrowser.WebBrowser.WaitForPageLoad();
+				SeleniumBrowser.WebBrowser.WaitForPageLoad(10);
 				var currentUrl = SeleniumBrowser.WebBrowser.Url;
 				Report.Info("Checking URL: " + currentUrl);
 				if (urls.Any(x => currentUrl.Contains(x)))

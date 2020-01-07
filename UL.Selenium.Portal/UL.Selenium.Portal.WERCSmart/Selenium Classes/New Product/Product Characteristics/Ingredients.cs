@@ -936,13 +936,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string GetIngredientPublicName(string chemicalName)
 		{
-			IWebElement publicNameOption = this.IngredientRow(chemicalName)?.FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
-			return publicNameOption.GetAttribute("title");
+			try
+			{
+				IWebElement publicNameOption = this.IngredientRow(chemicalName)?.FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
+				return publicNameOption.GetAttribute("title");
+			}
+			catch (Exception)
+			{
+				return "";
+			}
 		}
 		public string GetIngredientPercentage(string chemicalName)
 		{
-			IWebElement percentage = this.IngredientRow(chemicalName)?.FindElement(By.XPath(".//td[contains(@class,'percent-comp')]//input[@class='form-control percent-comp']"), 2);
-			return percentage.GetValue();
+			try
+			{
+				IWebElement percentage = this.IngredientRow(chemicalName)?.FindElement(By.XPath(".//td[contains(@class,'percent-comp')]//input[@class='form-control percent-comp']"), 2);
+				return percentage.GetValue();
+			}
+			catch (Exception)
+			{
+				return "";
+			}
 		}
 
 

@@ -1386,10 +1386,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional documents");
 			//Then in the Product aliases page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Formulation Names");
-			//And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
-			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			//And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 			sharedSteps.SharedConfirmRestrictUse_Restrict();
+			//And I click continue
+			newProductSteps.ClickContinue();
+			//And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment");
 			//And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 			sharedSteps.SharedGoToSummaryAndVerifyData("Raw material");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
