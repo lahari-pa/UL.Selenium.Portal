@@ -3304,7 +3304,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				string xPath = @"(//label[starts-with(text(),""" + section + @""")]))";
+				string xPath = @"(//label[contains(text(),""" + section + @""")]))";
 				SeleniumBrowser.WebBrowser.FindElement(By.XPath(xPath), 2).TryClick();
 			}
 			catch (Exception)

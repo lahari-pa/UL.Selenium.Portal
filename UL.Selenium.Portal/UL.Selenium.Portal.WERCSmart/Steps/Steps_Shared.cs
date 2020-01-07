@@ -3996,7 +3996,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             MyNewProduct.ThenFieldExists("WHMIS-compliant label, English and French-Canadian");
             TestReport.StartStep("I upload a PDF file in the WHMIS Label section");
             MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
-                "Request to author");
+                "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
             MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
             TestReport.StartStep("I click continue");
             MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");

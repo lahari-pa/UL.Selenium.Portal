@@ -469,6 +469,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			Report.Info("Saving product: " + prodDetails.Id + ",  " + prodDetails.Name);
 			Context.AddToContext(savedas, prodDetails);
+			string idname = $"{savedas}_ID";
+			Context.AddToContext(idname, prodDetails.Id);
 			Report.Success("Product Information saved!");
 		}
 

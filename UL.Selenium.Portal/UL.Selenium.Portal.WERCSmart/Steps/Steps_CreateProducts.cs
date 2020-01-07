@@ -8,6 +8,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
+using UL.Selenium.Portal.WERCSmart.Steps;
 using Castle.Core.Internal;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -224,8 +225,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
 			// Generate UPC number and delete duplicates
-			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs($"UPC_{savedAs}");
-			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", $"saved as UPC_{savedAs}");
+			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs($"Kit_{savedAs}_UPC");
+			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", $"saved as Kit_{savedAs}_UPC");
 			//And I call Shared Step 57753(Create a New Registration via Register New Product(expanded menu))
 			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
 			//And I In the shared step below use any of the kit product types -these are* Cosmetic Products in a kit(RU000777)*Hair Care kit(RU000723)*Hair Color Kit(RU000724)*Emergency Road kit(RU000718)*Automotive Care Products(RU000124)*Personal Care kit(RU001034)
@@ -251,7 +252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I call Shared Step 77845(Retailer - Select WM, Done, Select Vendor ID, Continue)
 			sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
 			//And I call Shared Step 42759(Portal - UPC Page - add 1 UPC)
-			sharedSteps.Shared42759a_Portal_UpcPage_AddUpcSavedAs($"UPC_{savedAs}");
+			sharedSteps.Shared42759a_Portal_UpcPage_AddUpcSavedAs($"Kit_{savedAs}_UPC");
 			//And I click continue
 			newProductSteps.ClickContinue();
 			//And the comments field should appear
@@ -268,7 +269,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", $"Kit_{savedAs}");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Submitted");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs($"Kit_{savedAs}", "Submitted");
 			//And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
 			shaSteps.ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct($"Kit_{savedAs}");
 
@@ -289,6 +290,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				TestReport.StartStep("Saving the top product as: " + savedAs);
 				Context.AddToContext(savedAs, productElement);
 				Report.Info("Saved product to context");
+
+				Context.AddToContext($"{savedAs}_ID", productElement.ProductId);
+				Report.Info("Saved product ID to context");
+
+				var SPG = new StepsProductGrid();
+				SPG.IClickRowActionsForTheProductSavedAs(savedAs);
+				SPG.ClickRowAction("View UPCs");
+				new GlobalSteps().SwitchToTabWithTitle("View UPCs");
+				new Steps_ViewUpcs().SaveFirstUpcNumberToContext($"{savedAs}_UPC");
+				new GlobalSteps().SwitchToTabWithTitle("WERCSmart Version 2.0");
+				Report.Info("Saved UPC number to context");
 			}
 			else
 			{
@@ -648,7 +660,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
 			this.AdditionalProductInformation_YesToCACleaning();
-			this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
+			// Commented out for CA Cleaning, uncomment when question is returned
+			//this.InTheCACleaningProductDisclosureScreenChooseHappyPath();
 			newProductSteps.ClickContinue();			
 			Table tableIngredients = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			tableIngredients.AddRow("Formaldehyde", "100", "false", "false", "");

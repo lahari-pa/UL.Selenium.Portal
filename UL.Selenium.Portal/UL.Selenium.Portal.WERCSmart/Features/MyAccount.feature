@@ -77,6 +77,7 @@ Scenario: [65887] Pagination
 	Given I click previous in the My Account user grid
 	Then The My Account user grid is currently on page number: 1
 
+@ScenarioId:6339
 Scenario: [70511] Pagination (...) need an account with six pages of users
 	#CLF 25/6/2019 Changed login account to one that has enough products to page through
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
