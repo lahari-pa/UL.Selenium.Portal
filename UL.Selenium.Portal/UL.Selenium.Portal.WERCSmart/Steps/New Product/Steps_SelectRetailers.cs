@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -164,7 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			Report.Success("Walmart and all of its affiliates are not available");
 			Report.Screenshot();
-			TestReport.StartStep("In the Retailer page I click Done");
+			Report.StartStep("In the Retailer page I click Done");
 			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click 'Done' in the Select Retailers window",
 				"Successfully clicked 'Done' in the Select Retailers window");
 		}

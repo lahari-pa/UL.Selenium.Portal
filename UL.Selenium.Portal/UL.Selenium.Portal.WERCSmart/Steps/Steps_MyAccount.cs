@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
 using Mailosaur;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using NTTQA.Selenium.TReVor;
 using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -22,7 +23,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see username for user saved as: (.*) in the right corner")]
 		public void ThenIShouldSeeUsernameForUserSavedAsInTheRightCorner(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + savedAs + " in the top right corner");
+			Report.StartStep(ReportSettings.StepCounter + " - I should see username: " + savedAs + " in the top right corner");
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
@@ -48,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see user name: (.*) in the header next to the user icon")]
 		public void ThenIShouldSeeUserNameInTheHeaderNextToTheUserIcon(string username)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + username + " in the top right corner");
+			Report.StartStep(ReportSettings.StepCounter + " - I should see username: " + username + " in the top right corner");
 			try
 			{
 				if (username.ToLower().Contains("saved as"))
@@ -82,7 +83,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see username: (.*) in the right corner")]
 		public void ThenIShouldSeeUsernameInTheRightCorner(string username)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + username + " in the top right corner");
+			Report.StartStep(ReportSettings.StepCounter + " - I should see username: " + username + " in the top right corner");
 			try
 			{
 				var thisTopMenuBar = new TopMenuBar();
@@ -100,7 +101,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see company username: (.*)")]
 		public void ThenIShouldSeeCompanyUsername(string companyName)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see company username: " + companyName);
+			Report.StartStep(ReportSettings.StepCounter + " - I should see company username: " + companyName);
 			try
 			{
 				var myMyAccount = new MyAccount();
@@ -147,7 +148,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save all the users in the User Grid")]
 		public void GivenISaveAllTheUsersInTheUserGrid()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I save all the users in the User Grid");
+			Report.StartStep(ReportSettings.StepCounter + " - I save all the users in the User Grid");
 			try
 			{
 				var selMyAccount = new MyAccount();
@@ -164,7 +165,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the User Grid the user saved as: (.*) has been replaced by: (.*)")]
 		public void ThenInTheUserGridTheSavedUserNameHasBeenReplacedBy(string savedAs, string replacedBy)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the User Grid the saved user name (" + savedAs + ") has been replaced by: " + replacedBy);
+			Report.StartStep(ReportSettings.StepCounter + " - In the User Grid the saved user name (" + savedAs + ") has been replaced by: " + replacedBy);
 			try
 			{
 				Delay.Seconds(20);
@@ -230,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the UserDetails screen I save the current User as: (.*)")]
 		public void GivenInTheUserDetailsScreenISaveTheCurrentUserAs(string saveAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails screen I save the current User as: " + saveAs);
+			Report.StartStep(ReportSettings.StepCounter + " - In the UserDetails screen I save the current User as: " + saveAs);
 			try
 			{
 				var myUserDetails = new UserDetails();
@@ -259,7 +260,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the UserDetails page I set Name to be: (.*)")]
 		public void GivenInTheUserDetailsPageISetNameToBe(string name)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails page I set Name to be: " + name);
+			Report.StartStep(ReportSettings.StepCounter + " - In the UserDetails page I set Name to be: " + name);
 
 			try
 			{
@@ -290,7 +291,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the UserDetails page I click (.*)")]
 		public void GivenInTheUserDetailsPageIClick(string buttonToClickText)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails page I click " + buttonToClickText);
+			Report.StartStep(ReportSettings.StepCounter + " - In the UserDetails page I click " + buttonToClickText);
 			try
 			{
 				var myUserDetails = new UserDetails();
@@ -312,7 +313,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Save in My Account")]
 		public void GivenIClickSaveInMyAccount()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Save in My Account");
+			Report.StartStep(ReportSettings.StepCounter + " - I click Save in My Account");
 
 
 			try
@@ -329,7 +330,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the heading: (.*) on the My Account page")]
 		public void CorrectHeadingShowing(string headingExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the heading " + headingExpected);
+			Report.StartStep(ReportSettings.StepCounter + " - I should see the heading " + headingExpected);
 			try
 			{
 				Report.Info("Checking that I see the heading: '" + headingExpected + "'");
@@ -350,7 +351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the subheading: (.*) on the My Account page")]
 		public void CorrectSubHeadingShowing(string subheadingExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the heading " + subheadingExpected);
+			Report.StartStep(ReportSettings.StepCounter + " - I should see the heading " + subheadingExpected);
 			try
 			{
 				Report.Info("Checking that I see the heading: '" + subheadingExpected + "'");
@@ -371,7 +372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I add a new user with the following information")]
 		public void ThenIAddANewUserWithTheFollowingInformation(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I add a new user with the following information");
+			Report.StartStep(ReportSettings.StepCounter + " - I add a new user with the following information");
 			try
 			{
 				foreach (TableRow thisRow in table.Rows)
@@ -402,7 +403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Info("Email Address = " + emailAddress);
 					}
 					// adding this to allow checking for confirmation email to the new user
-					EmailFunctions.StoreCurrentInbox(emailAddress);
+					MailosaurFunctions.StoreCurrentInbox(emailAddress);
 					if (confirmEmail == "Saved")
 					{
 						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
@@ -444,7 +445,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the new user is (Not Active|Active)")]
 		public void ThenIConfirmTheNewUserIsX(string active)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the new user is " + active);
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the new user is " + active);
 			try
 			{
 				var selMyAccount = new MyAccount();
@@ -469,7 +470,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Select the ... from the Actions column of the account I just created and select (Deactivate|Activate)")]
 		public void IClickDeactivateFromTheActionsColumn(string activate)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I select the ... from the Actions column");
+			Report.StartStep(ReportSettings.StepCounter + " - I select the ... from the Actions column");
 			try
 			{
 				var selMyAccount = new MyAccount();
@@ -493,7 +494,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Click approve in dialog")]
 		public void IClickApprove()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Approve");
+			Report.StartStep(ReportSettings.StepCounter + " - I click Approve");
 			try
 			{
 				var modal = new ModalDialog();
@@ -511,7 +512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IClickClose()
 		{
 			Delay.Seconds(3);
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Close");
+			Report.StartStep(ReportSettings.StepCounter + " - I click Close");
 			try
 			{
 				var modal = new ModalDialog();
@@ -528,7 +529,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on NEW SUBSCRIPTION")]
 		public void ThenIClickOnNewSubscription()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click on NEW SUBSCRIPTION");
+			Report.StartStep(ReportSettings.StepCounter + " - I click on NEW SUBSCRIPTION");
 			try
 			{
 				var selMyAccount = new MyAccount();
@@ -563,7 +564,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Subscription Information screen I confirm the Status has the correct information: (.*) Formulated, (.*) Articles, (.*) Enhanced Articles")]
 		public void ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles(string form_no, string art_no, string en_art_no)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Subscription Information screen I confirm the Status has the correct information: " + form_no + " Formulated, " + art_no + " Articles, " + en_art_no + " Enhanced Articles");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Subscription Information screen I confirm the Status has the correct information: " + form_no + " Formulated, " + art_no + " Articles, " + en_art_no + " Enhanced Articles");
 			try
 			{
 				var selMyAccount = new MyAccount_SubscriptionInfo();
@@ -581,7 +582,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Subscription Information screen I confirm the Subscription History table has the correct information")]
 		public void ThenInTheSubscriptionInformationScreenIConfirmTheSubscriptionHistoryTableHasTheCorrectInformation(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Subscription Information screen I confirm the Subscription History table has the correct information");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Subscription Information screen I confirm the Subscription History table has the correct information");
 			try
 			{
 				var selMyAccount = new MyAccount_SubscriptionInfo();
@@ -627,7 +628,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Order History screen I select (Subscription|WERCSmart)")]
 		public void ThenInTheOrderHistoryScreenISelectX(string radio_option)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Order History screen I select  " + radio_option);
+			Report.StartStep(ReportSettings.StepCounter + " - In the Order History screen I select  " + radio_option);
 			try
 			{
 				var selMyAccount = new MyAccount_OrderHistory();
@@ -645,7 +646,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: (.*)")]
 		public void ThenInTheOrderHistoryScreenIGetTheInvoiceNumberAndDateAndConfirmTheInvoiceEmailHasArrivedForUserSavedAs(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: " + savedAs);
+			Report.StartStep(ReportSettings.StepCounter + " - In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: " + savedAs);
 			try
 			{
 				var myOrder = new MyAccount_OrderHistory();
@@ -748,7 +749,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			for (int i = 0; i < Convert.ToInt32(userCount); i++)
 			{
 				string myDate = DateTime.Now.ToString("HHmmssddMMyy");
-				string myEmail = EmailFunctions.CreateEmail(myDate);
+				string myEmail = MailosaurFunctions.CreateEmail(myDate);
 				if (myEmail == "")
 				{
 					throw new Exception("Failed to Create a New Email Address");
@@ -831,14 +832,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				? selMyAccount.CurrentPageUserGridNavPageInput()
 				: Context.GetFromContext("Page Navigation Value").ToString();
 
-			TestReport.StartStep(GlobalParameters.StepCount + " - I enter the " + direction + " arrow into the page navigation box");
+			Report.StartStep(ReportSettings.StepCounter + " - I enter the " + direction + " arrow into the page navigation box");
 			Report.Info("Entering the " + direction + " arrow key to the user grid page navigation input");
 			selMyAccount.KeyToUserGridNavPageInput(direction);
 			Report.Info("Pressing the enter key");
 			selMyAccount.KeyToUserGridNavPageInput("enter");
 			string iteration = direction == "up" ? "increased" : "decreased";
-			GlobalParameters.StepCount++;
-			TestReport.StartStep(GlobalParameters.StepCount + " - I confirm the page number has " + iteration + " by 1");
+			ReportSettings.StepCounter++;
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the page number has " + iteration + " by 1");
 			int currentPage = Convert.ToInt32(selMyAccount.UserAccountsActivePage());
 			int difference = direction == "up" ? 1 : -1;
 			Report.IsTrue(currentPage == Convert.ToInt32(pageNavigationValue) + difference,
@@ -1041,7 +1042,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (selModal.Wait_for_close())
 				{
 					Report.Info("Updating the password in TReVor Test Users");
-					TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
+					TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
 					return;
 				}
 				throw new Exception("Modal dialog did not close!");
@@ -1207,9 +1208,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 
-			TestReport.StartStep($"I update the password for user: {user}");
+			Report.StartStep($"I update the password for user: {user}");
 			var selMyAccount = new StepsMyAccount();
 			Report.Info("Clicking Reset Password for the current logged in user");
 			selMyAccount.GivenIGoToActionInUserGridForGiven("Reset Password", user);
@@ -1223,11 +1224,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void CreateUserAndSetPassword(string savedAs, Table table)
 		{
 
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 
-			TestReport.StartStep("I add a new user");
+			Report.StartStep("I add a new user");
 			Report.Info("Adding user with the following information");
-			Report.Table(table);
+			SpecFlowReporting.Table(table);
 			this.ThenIAddANewUserWithTheFollowingInformation(table);
 			var adminUser = TestUsers.GetUserSavedAs(savedAs);
 			var allUsers = new MyAccount().UserGrid();
@@ -1246,7 +1247,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//User newUser = new User { Email = email, Password = password };
 			//Context.AddToContext("NewUser",newUser);
 
-			TestReport.StartStep("I reset the password for the new user to match the admin password");
+			Report.StartStep("I reset the password for the new user to match the admin password");
 			this.ResetUserPassword(savedAs);
 
 			Table userTable = new Table("Field", "Value");
@@ -1282,7 +1283,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Stewardship table I select I have no stewardship Numbers")]
 		public void ClickIhaveNoStewardshipNumbers()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			GeneralUtilities.ScrollToBottomOfPage();
 			var modaldialog = new ModalDialog();
 			var mystwdinfo = new MyAccount_CompanyInfo();
@@ -1301,11 +1302,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm there was an email with title: (.*) sent to the new user and I click the link with text: (.*)")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount(string emailTitle, string linkText)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("Checking an email has been sent to the new user with title: " + emailTitle);
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Checking an email has been sent to the new user with title: " + emailTitle);
 			var emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
 			var email = Context.GetFromContext("CurrentEmail").ToString();
-			List<Email> differences = EmailFunctions.GetInboxDifferences(email);
+			List<Email> differences = MailosaurFunctions.GetInboxDifferences(email);
 			Report.Info("Checking that email differences have been found...");
 			if (differences.FirstOrDefault() == null)
 			{
@@ -1332,7 +1333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			Report.Info("Found a matching link in the email!");
-			TestReport.StartStep("Navigating to the link address");
+			Report.StartStep("Navigating to the link address");
 			SeleniumBrowser.Navigate(link);
 		}
 
@@ -1351,7 +1352,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Confirm that you (See|Don't See) the user you just created in the grid")]
 		public void IConfirmThatYouSeeTheUserJustCreatedInGrid(string presence)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm that you " + presence + " the new user I just created is in the Gird");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm that you " + presence + " the new user I just created is in the Gird");
 			try
 			{
 				var selMyAccount = new MyAccount();
@@ -1582,7 +1583,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("TReVor user does exist");
 				}
 
-				if (Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, password), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
+				if (Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, password), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
 				{
 					user.Password = password;
 				}

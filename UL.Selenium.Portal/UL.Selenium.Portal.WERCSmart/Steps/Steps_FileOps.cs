@@ -1,8 +1,7 @@
-﻿using NTTQA.Selenium.Cache;
 using OpenQA.Selenium;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.SpecFlow;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.Reporting.Functions;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -10,6 +9,7 @@ using System.Collections.ObjectModel;
 using TReVor.Api.Wrapper.Classes;
 using System.IO;
 using Castle.Core.Internal;
+using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -21,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ISaveTheInformationForTheFirstRecordInTheExcelSpreadSheetAs(string excel, string savedAs, string savedAs2)
 		{
 			string file = Context.GetFromContext(excel)?.ToString() ?? "";
-			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			var ExcelUtils = new ExcelFunctions(file.ToString(), "Table");
 			if (file.IsNullOrEmpty())
 			{
 				Report.Failure("Could not find file saved as: " + excel);
@@ -53,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ISaveTheInformationForTheFirstRecordIn3rdPartyExcelAs(string excel, string savedAs, string savedAs2)
 		{
 			string file = Context.GetFromContext(excel)?.ToString() ?? "";
-			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			var ExcelUtils = new ExcelFunctions(file.ToString(), "Table");
 			if (file.IsNullOrEmpty())
 			{
 				Report.Failure("Could not find file saved as: " + excel);

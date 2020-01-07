@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 

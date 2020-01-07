@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using NTTQA.Selenium.ExtensionMethods;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -566,7 +568,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void NavigateToPowerDesignerPlus()
 		{
 			var thisTopMenu = new StudioTopMenu();
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
 			thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus");
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
@@ -1129,8 +1131,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check whether the current environment is Staging or Production and if it is I skip the next three steps")]
 		public void GivenICheckWhetherTheCurrentEnvironmentIsStagingOrProductionAndIfItIsISkipTheNextThreeSteps()
 		{
-			if (GlobalParameters.SiteType == "Staging" || GlobalParameters.SiteType == "Local Production" ||
-				GlobalParameters.SiteType == "Production")
+			if (TReVorSettings.SoftwareBranch == "Staging" || TReVorSettings.SoftwareBranch == "Local Production" ||
+				TReVorSettings.SoftwareBranch == "Production")
 			{
 				Report.Info("Setting context of electronic product");
 				Context.AddToContext("ElectronicProduct", "true");
@@ -1313,68 +1315,68 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In PD+ I Fill the section WALMART QC RESPONCE FORM with junk data")]
 		public void InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
 			var valueEdit = new ValueEditor();
-			TestReport.StartStep("I Select the Catagory Titled: Inquiry Date");
+			Report.StartStep("I Select the Catagory Titled: Inquiry Date");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");			
-			TestReport.StartStep("I Click on 'Select Current Date'");
+			Report.StartStep("I Click on 'Select Current Date'");
 			valueEdit.SelectCurrentDate();
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			//valueEdit.ClickButton("Save");
 			Delay.Seconds(1);
-			TestReport.StartStep("I Double Click on the section with name: Response Date");
+			Report.StartStep("I Double Click on the section with name: Response Date");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Response Date");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
-			TestReport.StartStep("I Click on 'Select Current Date'");
+			Report.StartStep("I Click on 'Select Current Date'");
 			valueEdit.SelectCurrentDate();
 			Delay.Seconds(1);			
 			valueEdit.ClickSaveButton();
 
 			Delay.Seconds(1);			
-			TestReport.StartStep("I Double Click on the section with name: Type of Inquiry/Concern");
+			Report.StartStep("I Double Click on the section with name: Type of Inquiry/Concern");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Type of Inquiry/Concern");
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			TestReport.StartStep("Clicking the first available option in the list");
+			Report.StartStep("Clicking the first available option in the list");
 			valueEdit.SelectTopOption();
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 
 			Delay.Seconds(1);
-			TestReport.StartStep("I Double Click on the section with name: Brief Description of Issue");
+			Report.StartStep("I Double Click on the section with name: Brief Description of Issue");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Brief Description of Issue");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
 			//valueEdit.EnterValueIntoField("Test");
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 
 			Delay.Seconds(1);
-			TestReport.StartStep("I Double Click on the section with name: Revision Required?");
+			Report.StartStep("I Double Click on the section with name: Revision Required?");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Revision Required?");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			TestReport.StartStep("Clicking the first available option in the list");
+			Report.StartStep("Clicking the first available option in the list");
 			valueEdit.SelectTopOption();
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
 
-			TestReport.StartStep("I Double Click on the section with name: Justification");
+			Report.StartStep("I Double Click on the section with name: Justification");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Justification");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
 
-			TestReport.StartStep("I Double Click on the section with name: Root Cause (if Revision Required)");
+			Report.StartStep("I Double Click on the section with name: Root Cause (if Revision Required)");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Root Cause (if Revision Required)");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			TestReport.StartStep("Clicking the first available option in the list");
+			Report.StartStep("Clicking the first available option in the list");
 			valueEdit.SelectTopOption();
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
@@ -1382,47 +1384,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 
 
-			TestReport.StartStep("I Double Click on the section with name: Corrective Action (if Revision Required)");
+			Report.StartStep("I Double Click on the section with name: Corrective Action (if Revision Required)");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Corrective Action (if Revision Required)");
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			TestReport.StartStep("Clicking the first available option in the list");
+			Report.StartStep("Clicking the first available option in the list");
 			valueEdit.SelectTopOption();
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);			
 
 
-			TestReport.StartStep("I Double Click on the section with name: Additional Information");
+			Report.StartStep("I Double Click on the section with name: Additional Information");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Additional Information");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
 
-			TestReport.StartStep("I Double Click on the section with name: Regulatory/IT Contact");
+			Report.StartStep("I Double Click on the section with name: Regulatory/IT Contact");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Regulatory/IT Contact");
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
 
-			TestReport.StartStep("I Double Click on the section with name: Approving Manager");
+			Report.StartStep("I Double Click on the section with name: Approving Manager");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Approving Manager");
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			TestReport.StartStep("Entering the value: 'Test' Into the New Value box");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
 
-			TestReport.StartStep("I Double Click on the section with name: Inquiry Submitted By:");
+			Report.StartStep("I Double Click on the section with name: Inquiry Submitted By:");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Submitted By:");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
-			TestReport.StartStep("Clicking the first available option in the list");
+			Report.StartStep("Clicking the first available option in the list");
 			valueEdit.SelectTopOption();
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using BoDi;
 using Castle.Core.Internal;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.ExtensionMethods;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Extensions;
 using OpenQA.Selenium;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Reporting.Functions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

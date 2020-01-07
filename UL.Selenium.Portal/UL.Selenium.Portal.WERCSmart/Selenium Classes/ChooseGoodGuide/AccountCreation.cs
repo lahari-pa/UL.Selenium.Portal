@@ -1,4 +1,4 @@
-using NTTQA.Selenium.ExtensionMethods;
+using UL.Automation.Selenium.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 

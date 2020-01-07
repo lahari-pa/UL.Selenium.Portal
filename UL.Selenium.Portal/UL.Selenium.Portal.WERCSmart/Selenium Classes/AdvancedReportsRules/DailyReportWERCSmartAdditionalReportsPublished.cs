@@ -1,9 +1,10 @@
-﻿using Castle.Core.Internal;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using Castle.Core.Internal;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using System;
 using System.Collections.Generic;
+using UL.Automation.Utilities.Functions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules
 {
@@ -79,7 +80,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 
 				for (int i = 1; i < ExcelUtils.Excel_GetNoRows(); i++)
 				{
