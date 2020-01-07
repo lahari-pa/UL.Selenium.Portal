@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.UniversalFunctions;
 using NTTQA.Selenium.Reporting.Core;
@@ -454,7 +453,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			var expectedActions = new List<string>();
-			table.Rows.ForEach(x => expectedActions.Add(x["Option"]));
+			table.Rows.Cast<TableRow>().ToList().ForEach(x => expectedActions.Add(x["Option"]));
 			switch (seeCondition)
 			{
 				case "see":
@@ -1366,7 +1365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			List<string> displayedOptions = new MoreFilters().Options(filter);
 			var expectedOptions = new List<string>();
-			table.Rows.ForEach(x => expectedOptions.Add(x["Option"]));
+			table.Rows.Cast<TableRow>().ToList().ForEach(x => expectedOptions.Add(x["Option"]));
 			Report.IsTrue(expectedOptions.All(x => displayedOptions.Contains(x)) && expectedOptions.Count == displayedOptions.Count,
 				$"The displayed options for filter {filter} did not match the expected options! Expected: {string.Join(", ", expectedOptions.Select(x => $"'{x}'").ToList())}. Actual: {string.Join(", ", displayedOptions.Select(x => $"'{x}'").ToList())}",
 				$"The displayed options for filter: {filter}' matched the expected options.");

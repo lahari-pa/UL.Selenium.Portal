@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
@@ -260,7 +259,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void PercentageMiddleOfPieChart()
 		{
 			string percentage = new RetailPartnersDetails().ChartCentrePercentage();
-			Report.IsTrue(!percentage.IsNullOrEmpty(),
+			Report.IsTrue(!string.IsNullOrEmpty(percentage),
 				"There was no percentage showing in the middle of the pie chart",
 				"The percentage: " + percentage + " was displayed in the middle of the pie chart");
 		}
@@ -654,7 +653,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void WarningMessagesRetailPartnersShouldContain(Table warning)
 		{
 			var expected = new List<string>();
-			warning.Rows.ForEach(x => expected.Add(x["Message"]));
+			warning.Rows.Cast<TableRow>().ToList().ForEach(x => expected.Add(x["Message"]));
 			List<string> displayed = new RetailPartnersDetails().WarningMessages();
 			IEnumerable<string> differences = expected.Except(displayed);
 			Report.IsTrue(!differences.Any(),
@@ -930,7 +929,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
@@ -997,7 +996,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumnsAndAreInTheCorrectOrder(string savedAs, Table table)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
@@ -1046,7 +1045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ISaveTheFirstProductInTheExcelSpreadSheetAs(string spreadsheet, string product)
 		{
 			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
@@ -1062,7 +1061,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ISaveTheFirstRowOfTheSpreadsheetAs(string spreadsheet, string savedAs)
 		{
 			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> headers = ExcelUtils.Excel_GetRow(0);
@@ -1081,7 +1080,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveTheValueWithHeaderAs(string header, string spreadsheet, string saveAs)
 		{
 			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				string value = ExcelUtils.GetCellValue(1, header, 0);
@@ -1164,7 +1163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void DeleteExcelFile(string savedAs)
 		{
 			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
-			if (file.IsNullOrEmpty())
+			if (string.IsNullOrEmpty(file))
 			{
 				Report.Failure("Could not find file saved as: " + savedAs);
 				return;
@@ -1197,7 +1196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void DataTierDetailsPopUpShowsTheFollowingTabs(Table tabs)
 		{
 			var expectedTabs = new List<string>();
-			tabs.Rows.ForEach(x => expectedTabs.Add(x["Tab"]));
+			tabs.Rows.Cast<TableRow>().ToList().ForEach(x => expectedTabs.Add(x["Tab"]));
 			List<string> displayedTabs = new DataTierDetails().AllTabs();
 			Report.IsTrue(expectedTabs.All(x => displayedTabs.Contains(x)) && expectedTabs.Count == displayedTabs.Count,
 				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"))}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"))}""",
@@ -1491,7 +1490,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SuccessMessagesSaveChangesPopupShouldContain(Table warning)
 		{
 			var expected = new List<string>();
-			warning.Rows.ForEach(x => expected.Add(x["Message"]));
+			warning.Rows.Cast<TableRow>().ToList().ForEach(x => expected.Add(x["Message"]));
 			List<string> displayed = new DataEntryNotification().SuccessMessages();
 			IEnumerable<string> differences = expected.Except(displayed);
 			Report.IsTrue(!differences.Any(),
@@ -1814,7 +1813,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsWPSIDAndYInColumns(string fileSavedAs,string wpsidSavedAs, Table table)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
@@ -1884,7 +1883,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsCVSProductsWithTiers(string fileSavedAs)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
@@ -2026,7 +2025,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatTheExcelFileSavedAsIncludesheFollowingColumnsAndAreInTheCorrectOrder(string savedAs, string focusColumn, string column1, string column2)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
@@ -2051,7 +2050,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatTheExcelFileSavedAsIncludesTheFollowingColumns(string savedAs, Table table)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
@@ -2071,7 +2070,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsUPCNumberAndYInColumns(string fileSavedAs, string wpsidSavedAs, string containsValue, string searchColumn)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
-			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);

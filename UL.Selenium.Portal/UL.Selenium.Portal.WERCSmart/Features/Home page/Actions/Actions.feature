@@ -20,6 +20,7 @@
 @CreateProducts
 @PaymentMethods
 @ProductSetUp
+@UPC
 @ViewUpcs
 @UPC
 Feature: Actions
@@ -230,6 +231,8 @@ Scenario: [112939] View - UPC name column exists in the Product UPCs table
 	Then I click on the Row Action: View
 	Then I navigate to the View tab for product saved as: TestCase109503 and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'
 
+@tfs_design
+@CACleaning
 @ScenarioId:5984
 Scenario: [114944] View/Summary - Ingredients table contains details (Functional Purpose and Ingredient Type)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

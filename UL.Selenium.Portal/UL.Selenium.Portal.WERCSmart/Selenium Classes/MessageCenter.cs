@@ -143,9 +143,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return new Message();
 			}
 			return new Message() {
-				WPSID = tableRow.FindElement(By.XPath(".//span[@data-bind='text: ProductID']"), 2).Text,
+				WPSID = tableRow.FindElement(By.XPath(".//span[contains(@data-bind,'text: ProductID')]"), 2).Text,
 				ModificationDate = tableRow.FindElement(By.XPath(".//span[starts-with(@data-bind,'text: new Date')]"), 2).Text,
-				Name = tableRow.FindElement(By.XPath(".//span[@data-bind='text: ProductName']"), 2).Text,
+				Name = tableRow.FindElement(By.XPath(".//span[contains(@data-bind,'text: ProductName')]"), 2).Text,
 				Type = tableRow.FindElement(By.XPath(".//span[starts-with(@data-bind,'text: Type')]"), 2).Text
 			};
 		}

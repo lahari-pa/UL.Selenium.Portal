@@ -514,6 +514,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public string GetTopProductNameFromSelectProductList()
+		{
+			IWebElement productNameElement = this.containerElement.FindElement(By.XPath(".//tbody/tr[.//label]//td//label[@data-bind='text: name']"), 2);
+			if (productNameElement == null)
+			{
+				Report.Info("Could not find the element for the ProductName");
+				return null;
+			}
+			return productNameElement.Text;
+		}
+
+
 		public class SelectProducts : ForwardProductRegistration
 		{
 			public string ID { get; set; }

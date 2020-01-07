@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
@@ -38,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void SelectedRetailersShouldBe(Table retailers)
 		{
 			var expectedRetailers = new List<string>();
-			retailers.Rows.ForEach(x => expectedRetailers.Add(x["Retailer"]));
+			retailers.Rows.Cast<TableRow>().ToList().ForEach(x => expectedRetailers.Add(x["Retailer"]));
 			var actualRetailers = new Retailer().SelectedRetailers();
 			Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
 		}
@@ -172,7 +171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var selRetailer = new Retailer();
 			var deleteRetailers = new List<string>();
-			table.Rows.ForEach(x => deleteRetailers.Add(x["Retailer"]));
+			table.Rows.Cast<TableRow>().ToList().ForEach(x => deleteRetailers.Add(x["Retailer"]));
 			foreach (var retailer in deleteRetailers)
 			{
 				Report.Info("Clicking the select checkbox for retailer: " + retailer);

@@ -1,9 +1,9 @@
-﻿using Castle.Core.Internal;
-using NTTQA.Selenium.Classes;
+﻿using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using System;
 using System.Collections.Generic;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules
 {

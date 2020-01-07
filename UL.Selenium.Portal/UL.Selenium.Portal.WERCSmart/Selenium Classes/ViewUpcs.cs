@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using BoDi;
-using Castle.Core.Internal;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
