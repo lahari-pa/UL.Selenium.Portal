@@ -2831,8 +2831,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().CompanyWebAddress(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
-	}
 
+		[StepDefinition(@"I check for an error in the following fields in the 'Lithium Battery Transportation' Section")]
+		public void GivenICheckForAnErrorInTheFollowingFields(Table table)
+		{
+
+			var NewProductObject = new NewProduct();
+			Report.IsTrue(NewProductObject.CheckForErrorInTheFollowingFieldsInTheLithiumBatteryTransportationSection(table), "Failed to find an error in at least one of the fields", "Successfully found errors in all of the fields");
+
+		}
+	}
 
 	//public class UPCWarning : SeleniumBaseObject
 	//{
