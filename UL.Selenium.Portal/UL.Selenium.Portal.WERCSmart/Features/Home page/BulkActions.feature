@@ -268,3 +268,4 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I click continue on the Forward Product Registration page
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page
+
