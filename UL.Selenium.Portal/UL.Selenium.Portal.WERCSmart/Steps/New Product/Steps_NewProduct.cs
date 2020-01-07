@@ -1,5 +1,4 @@
 using Castle.Core.Internal;
-using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
@@ -9,16 +8,13 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using iTextSharp.text.pdf.parser;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 
@@ -1041,6 +1037,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().DataAcceptanceScreenAppears(), "Data Acceptance page did not appear!", "As expected, Data Acceptance page loaded successfully!");
 		}
 
+		[StepDefinition(@"I confirm following statement displays under Data Acceptance: (.*)")]
+		public void ThenIConfirmFollowingStatementDisplaysUnder_(string message)
+		{
+			Report.IsTrue(new NewProduct().CheckDataAcceptanceProblemMessageHasAppeared(message), "Failed to confirm following statement displays under Data Acceptance: " + message, "Succesfully confirmed following statement displays under Data Acceptance: " + message);
+		}
+
+
 		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
 		public void GivenInTheDataAcceptancePageISelectYesAgreed()
 		{
@@ -1106,6 +1109,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Delay.Seconds(1);
 		}
 
+		[StepDefinition(@"I set the (.*) option to: (.*) and save entry")]
+		public void SetTheSectionOptionToAndSaveEntry(string section, string option)
+		{
+			var thisNewProduct = new NewProduct();
+			if (!thisNewProduct.WaitForContainerToBeVisible(3))
+			{
+				Report.Failure("The new product page is not showing");
+			}
+			Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
+				"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
+				"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+			Delay.Seconds(1);
+			Context.AddToContext(section, option);;
+			Report.Info(option + " is saved to context as: " + section);
+
+		}
 		// JS a solution specifically for Transportation page where you have nested checkbox sections eg. DOT, IATA
 		[StepDefinition(@"I select option: (.*) under section: (.*) and subsection: (.*)")]
 		public void SetTheOptionSubOptionTo(string option, string section, string subSection)
@@ -2495,6 +2514,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().InputUPCNumber(upcNumber), "Failed to enter upc number", "Entered upc number");
 		}
 
+		[StepDefinition(@"I enter Zero Buffer UPC Number: (.*)")]
+		public void GivenIEnterZeroBufferUPCNumberSavedAsUPC(string upcNumber)
+		{
+			Delay.Seconds(3);
+			Report.IsTrue(new NewProduct().InputZeroBufferUPCNumber(upcNumber), "Failed to enter Zero Buffer UPC number", "Entered Zero Buffer UPC number");
+		}
+		[StepDefinition(@"I enter Zero Buffer Duplicate UPC Number: (.*)")]
+		public void GivenIEnterZeroBufferDuplicateUPCNumberSavedAsUPC(string upcNumber)
+		{
+			Delay.Seconds(3);
+			Report.IsTrue(new NewProduct().InputZeroBufferUPCDuplicateNumber(upcNumber), "Failed to enter Zero Buffer Duplicate UPC number", "Entered Zero Buffer Duplicate UPC number");
+		}
+
 		[StepDefinition(@"I Select a container type from the drop down list")]
 		public void GivenISelectAContainerTypeFromTheDropDownList()
 		{
@@ -2561,6 +2593,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 		}
 
+		[StepDefinition(@"I confirm a warning message is shown above the UPC table that reads: (.*)")]
+		public void ThenIConfirmAWarningMessageIsShownAboveTheUPCTableThatReads_(string warning)
+		{
+			Report.IsTrue(new NewProduct().CheckWarningMessageHasAppeared(warning), "Failed to confirm a warning message is shown above the UPC table that reads: " + warning, "Successfully confirmed a warning message is shown above the UPC table that reads:" + warning);
+		}
 
 		[StepDefinition(@"In the UPC screen I add a UPC: saved as UPC(.*), container type: (.*) and size: (.*), then I select all certifications")]
 		public void InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications(string upc,string containerType, string size)
@@ -2731,8 +2768,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			TestReport.StartStep("in the Restrict Use page I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
 		}
-		#endregion
+		[StepDefinition(@"I confirm the UPC table area is shown in red highlight")]
+		public void ThenIConfirmTheUPCTableAreaIsShownInRedHighlight()
+		{
+			Report.IsTrue(new NewProduct().CheckUPCTableIsHighlightedRed(), "Failed to confirm the UPC table area is shown in red highlight", "Successfully confirmed the UPC table area is shown in red highlight");
+		}
 
+
+		[StepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
+		public void ThenIConfirmTheUPCDuplicateWarningIconIsVisible()
+		{
+			Report.IsTrue(new NewProduct().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
+		}
+
+		[StepDefinition(@"I check that the Select Option warning is visible")]
+		public void ThenICheckThatTheSelectAtLeastOneOfTheseOptionsWarningIsVisible()
+		{
+			Report.IsTrue(new NewProduct().CheckDataAcceptanceSelectOptionWarningIsVisible(), "Failed to find the Select Option Warning!", "Successfully found the Select Option Warning!");
+		}
+		[StepDefinition(@"I check that the Select Option warning is not visible")]
+		public void ThenICheckThatTheSelectAtLeastOneOfTheseOptionsWarningIsNotVisible()
+		{
+			Report.IsTrue(new NewProduct().CheckDataAcceptanceSelectOptionWarningIsNotVisible(), "Failed to not the Select Option Warning!", "Successfully did not find the Select Option Warning!");
+		}
+
+		[StepDefinition(@"I check that there are no error messages present on the Data Acceptance Screen")]
+		public void ThenICheckThatThereAreNoErrorMessagesPresentOnTheDataAcceptanceScreen()
+		{
+			Report.IsTrue(new NewProduct().CheckFixAllErrorsMessageIsNotVisible(), "Failed to check that there are no error messages present on the Data Acceptance Screen", "Successfully checked that there are no error messages present on the Data Acceptance Screen");
+		}
+
+		[StepDefinition(@"I confirm the email registered: (.*) is populated in the field under the Statement")]
+		public void ThenIConfirmTheEmailRegisteredWERCSmart_ProductsAutomationAccountIsPopulatedInTheFieldUnderTheStatement(string accountSavedAs)
+		{
+			var newProduct = new NewProduct();
+			//Get email address from account, check against displayed email.
+
+			string email = newProduct.GetUserEmailAddress(accountSavedAs);
+
+			string dataAcceptanceEmail = newProduct.CheckDataAcceptanceEmailIsPopulated();
+
+			Report.IsTrue(new NewProduct().CheckEmailAddressAgainstDataAcceptanceEmail(email, dataAcceptanceEmail), "Failed to check user email: " + email + " against: " + dataAcceptanceEmail, "Successfully checked user email: " + email + " against: " + dataAcceptanceEmail);
+		}
+
+		#endregion
 		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Final Domestic Distributor")]
 		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField(string text)
 		{

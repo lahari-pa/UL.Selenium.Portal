@@ -303,7 +303,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 
 @singlerun
 Scenario: [87894] Forwarding - Edit existing Case UPC
-	Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completedstatus
+Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status
 	Given I navigate to the landing page
 	And I call Shared Step (Login to WERCSmart - Premium Account)
 	Then I filter the products by: Accepted by Retailers
@@ -387,3 +387,4 @@ Scenario: [87835] View UPCs shows Case UPC Data
 		| %UPC87835% | Paper bag      | 2           | AM       |
 	And I close the window that opened
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835
+

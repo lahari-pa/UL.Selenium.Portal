@@ -1566,16 +1566,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
 			MyAccount MyAccountObject = new MyAccount();
-
 			FP.New_Password_Form(password, password);
-
 			bool passwordResetInWERCS = Report.IsTrue(MyAccountObject.ClickSaveInChangeUserPasswordWindow(), "Failed to click save", "Successfully clicked save");
-
 			Report.IsTrue(MyAccountObject.ClickCloseInChangeUserPasswordWindow(), "Failed to click close", "Successfully clicked close");
 
 			if (passwordResetInWERCS)
 			{
-
 				var user = TestUsers.GetUserSavedAs("PasswordResetAccount");
 				if (user == null)
 				{
