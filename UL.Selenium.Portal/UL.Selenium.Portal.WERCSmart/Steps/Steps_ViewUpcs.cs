@@ -13,7 +13,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 
 
@@ -179,6 +179,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(matchingUpc.Retailers.Contains(row["Retailer"]), "Retailers column did not contain retailer: " + row["Retailer"] + "!", "Retailers column contained retailer: " + row["Retailer"]);
 			}
 		}
+
+		[StepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
+		public void ThenIConfirmTheUPCDuplicateWarningIconIsVisible()
+		{
+			Report.IsTrue(new UPC().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
+		}
+
 		[StepDefinition(@"the View UPC page loads with no errors")]
 		public void TheViewUPCPageLoadsWithNoErrors()
 		{
@@ -197,6 +204,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ViewUpcs().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
 			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
+
+		[StepDefinition(@"I check for the appropriate alert: (.*)")]
+		public void GivenICheckForTheAppropriateAlert(string alertText)
+		{
+			UPC UPCObject = new UPC();
+			Report.IsTrue(UPCObject.CheckForAlertWithThisTextInUPCPage(alertText), "The appropriate alert: " + alertText + ", was not shown", "The appropriate alert: " + alertText + ", was shown");
+		}
+
+		[StepDefinition(@"I check if the Regulatory Documents page is shown")]
+		public void ThenICheckIfTheRegulatoryDocumentsPageIsShown()
+		{
+			TestReport.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+		}
+
+		[StepDefinition(@"I click (.*) for the UPCs Warning! popup (.*)")]
+		public void ThenIClickNOForTheUPCsWarning(string yesOrNoButton, string savedAs)
+		{
+			UPC UPCObject = new UPC();
+			Report.IsTrue(UPCObject.ClickYesOrNoForUPCWarningPopUp(yesOrNoButton, savedAs), "Failed to click " + yesOrNoButton + " for the UPC warning pop up", "Successfully clicked " + yesOrNoButton + " for the UPC warning pop up");
+		}
+
+		[StepDefinition(@"I confirm I would like to delete product")]
+		public void ThenIConfirmIWouldLikeToDeleteProduct()
+		{
+			ProductsGrid ProductsGridObject = new ProductsGrid();
+			Report.IsTrue(ProductsGridObject.ConfirmYouWouldLikeToDeleteButton(), "Failed to delete the product", "Successfully deleted the product");
+		}
+
+		[StepDefinition(@"I confirm the retailers are removed (.*)")]
+		public void ThenIConfirmTheRetailersAreRemoved(string savedAs)
+		{
+			ProductsGrid ProductsGridObject = new ProductsGrid();
+			ProductsGridObject.ConfirmRetailersMatchInMyProductsSection(savedAs);
+			new GlobalSteps().SwitchToTabWithTitle("View UPCs");
+			this.TheViewUPCPageLoadsWithNoErrors();
+			Report.IsTrue(new ViewUpcs().DoesUPCHeadingsContain("UPC Name"), "Failed to find the Heading name 'UPC Name'", "Succesfully found the Heading name 'UPC Name'");
+			new GlobalSteps().ThenCloseTheWindowThatOpened();
+		}
+	
 	}
 
 		

@@ -478,6 +478,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"In the Formulation 3rd Party screen I set (.*) to (.*)")]
+		public void InTheFormulationThirdPartySCreenISetFieldTo(string field, string value)
+		{
+			var thisNewProduct = new NewProduct();
+
+
+			if (thisNewProduct.FieldValueRadioIsSelected(field, value))
+			{
+				Report.Success($"{field} is already set to: {value}");
+			}
+			else
+			{
+				Report.IsTrue(thisNewProduct.SelectFieldValueRadio(field, value), $"Failed to set {field} to {value}", $"Set {field} to: {value}");
+			}
+
+		}
+
 		[StepDefinition(@"In the Formulation 3rd Party screen I set Granted to (true|false)")]
 		public void InTheFormulationThirdPartySCreenISetGrantedTo(string trueOrFalse)
 		{

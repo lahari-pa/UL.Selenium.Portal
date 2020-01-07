@@ -119,6 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("Size", size);
 				upcTable.AddRow("Quantity", quantity);
 				upcTable.AddRow("TransportationOption", transportation);
+				upcTable.AddRow("UPCName", "DefaultProductName");
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
@@ -168,7 +169,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 		}
 
-
 		[StepDefinition(@"I call Shared Step 87647 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) do not click continue")]
 		public void EnterUPCInfoDoNotClickContinue(string upc, string containerType, string size)
 		{
@@ -200,7 +200,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 		}
-
 
 		[StepDefinition(@"I call Shared Step 87658 \(Enter Universal Product Code \(UPC\)\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*) do not click continue")]
 		public void UpcWithQuantityDoNotClickContinue(string upc, string containerType,
@@ -400,7 +399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-
+		
 		[StepDefinition(@"I call Shared Step 87647 \(UPC - Confirm Package type Link and field shown and required \) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
 		public void EnterUPCInfoConfirmPackagingTypeLinkAndError(string upc, string containerType, string size)
 		{
@@ -449,7 +448,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Successfully found the error message");
 			}
 		}
-
+		
 
 		[StepDefinition(@"I call Shared Step 85909 \(UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
 		public void EnterUPCInfoConfirmPackagingTypeLinkdoesNotExists(string upc, string containerType, string size)
@@ -660,6 +659,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICheckSizeOfEachProductFromFile(string file, string savedAs)
 		{
 			Report.IsTrue(new MultipleUPC().CheckSizeOfEachProductFromFile(file, savedAs), "The Size shown in the Add Multiple Popup did not match the file", "The Size shown in the Add Multiple Popup matched the file");
+
+		}
+
+		[StepDefinition(@"I check that the (UPC|Type|Size|Retailer) of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckValueOfEachProductFromFile(string value, string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachProductFromFile(value, file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
+
+		}
+
+		[StepDefinition(@"I check that the (Item Number|Part Number|DPCI|OMSID) of each (.*) product matches the excel file named: (.*) uploaded saved as: (.*)")]
+		public void ICheckValueOfEachRetailerProductFromFile(string value, string retailer, string file, string savedAs)
+		{
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachRetailerProductFromFile(value, retailer,file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
 
 		}
 
@@ -934,8 +947,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Check that the type coloumn becomes populated with option: (.*)")]
-		public void ICheckTypeColoumnContiansFirstOption(string packagingType)
+		[StepDefinition(@"I Check that the type column becomes populated with option: (.*)")]
+		public void ICheckTypeColumnContiansFirstOption(string packagingType)
 		{
 			var containsTypeOptionBox = new MultipleUPC().ContainsType;
 
@@ -1292,18 +1305,104 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(uPCpage.EnterDPCI(value), "Failed to enter DPCI", "Successfully entered DPCI");
 		}
 
-		[StepDefinition(@"I enter (.*) in the DPCI field of the UPC page")]
-		public void GivenIEnterInTheDPCIFieldOfTheUPCPage(string dpci)
+		[StepDefinition(@"I set all additional product information options to (.*)")]
+		public void GivenSetUnderadgeChildToNo(string yesOrNoOption)
 		{
-			Report.IsTrue(new UPC().EnterDPCI(dpci), "DPCI number " + dpci + " was not entered", "DPCI is successfully set to " + dpci);
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			if (myNewProduct.CountryofOriginExists())
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			}
+			if (myNewProduct.SectionExists(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo(
+					"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)",
+					yesOrNoOption);
+			}
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)", yesOrNoOption);
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.", yesOrNoOption);
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", yesOrNoOption);
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use",
+				yesOrNoOption);
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+		[StepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
+		public void ThenIConfirmTheUPCDuplicateWarningIconIsVisible()
+		{
+			Report.IsTrue(new UPC().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
+		}
+		
+		[StepDefinition(@"I call Shared Step 292066 \\\(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\\\)")]
+		public void GivenICallSharedStepRetailer_SelectNoRetailer_ClickDone_ClickContinue_HappyPath()
+		{
+			TestReport.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var WarningPopup = new NoRetailerWarningPopup();
+			new SelectRetailers().ClickSelectAll();
+			SelectRetailers selectRetailers = new SelectRetailers();
+			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
+			TestReport.StartStep("In the Retailer page I click Continue");
+			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
+			/* --As per TFS70787 warning popup displays for NR  --- */
+			//TestReport.StartStep("In the UPCs Warning popup I click Ok");
+			new Steps_Retailer().IfISeeUpcWarningPopupClick("Ok");
 		}
 
-		[StepDefinition(@"I should see an error message on the (.*) field which reads: (.*)")]
-		public void GivenIShouldSeeAnErrorMessageOnTheProductNameOnLabelField(string section, string expectedMessage)
+		[StepDefinition(@"I select the following retailers in the 'Select Retailers' window")]
+		public void GivenIUnderDestinationRetailersInTheUPCPage(Table table)
 		{
-			Report.IsTrue(new UPC().GetUPCErrorForSection(section, expectedMessage, out string displayedMessage),
-			  "Error message displayed is " + displayedMessage + " but expected " + expectedMessage,
-			  "Error Message displayed in section: " + section + "is displayed as: " + expectedMessage + " as expected");
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.SelectAllRetailersInTable(table), "Failed to select all retailers in table", "Succeeded to select all retailers in table");
+		}
+
+		[StepDefinition(@"I fill in the UPC data; UPC:(.*), Product Type:(.*), Product Weight:(.*)")]
+		public void FillInUPCData(string productUPC, string productType, string productWeight)
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.FillInUPCData(productUPC, productType, productWeight), "Failed to fill in UPC data", "Succeeded to fill in UPC data");
+		}
+
+	   [StepDefinition(@"I remove randomly selected retailers")]
+		public void GivenIRemoveRetailers()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.RemoveRandomRetailers(), "Failed to remove random retailers", "Succeeded to remove random retailers");
+		}
+
+		[StepDefinition(@"I click the 'Restore Selected' button")]
+		public void ClickRestoreRetailersButton()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.ClickRestoreSelectedRetailersButton(), "Failed to click 'Restore Selected' button in removed retailers pop-up", "Successfully clicked 'Restore Selected' button in removed retailers pop-up");
+			Report.IsTrue(NewProductClassObject.CheckIfListOfAddedRetailersAreInAlphabeticalOrder(), "The added retailers are not sorted in alphabetical order", "The added retailers are sorted in alphabetical order");
+		}
+
+		[StepDefinition(@"I click the 'Add Retailers' button")]
+		public void GivenIClickAddRetailers()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.ClickAddRetailersButton(), "Failed to click 'Add Retailers' button", "Successfully clicked 'Add Retailers' button");
+			Report.IsTrue(NewProductClassObject.CheckIfListOfRemovedRetailersAreInAlphabeticalOrder(), "The removed retailers are not sorted in alphabetical order", "The removed retailers are sorted in alphabetical order");
+		}
+
+		[StepDefinition(@"I randomly select retailers to restore")]
+		public void GivenISelectRandomRetailersToAdd()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.AddRandomRetailersThatWereRemoved(), "Failed to add random retailers", "Succeeded to add random retailers");
+		}
+
+		[StepDefinition(@"I click 'Select All' to add all removed retailers")]
+		public void RestoreEverySingleDeletedRetailer()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.ClickSelectAllInRemovedRetailersBox(), "Failed to click 'Select All' in removed retailers pop-up box", "Successfully clicked 'Select All' in removed retailers pop-up box");
 		}
 
 		[StepDefinition(@"I Enter Universal Product Code details for a CVS Product, container type: (.*), size: (.*), Quantity (.*)")]
