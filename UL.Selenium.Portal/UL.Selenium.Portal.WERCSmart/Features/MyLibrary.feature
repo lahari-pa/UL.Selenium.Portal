@@ -236,6 +236,7 @@ Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 	Then I navigate to the home page
 	Then I delete the product: TestCase70567
 
+@ScenarioId:6351
 Scenario: [73329] Edit Ingredient
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -285,11 +286,11 @@ Scenario: [73329] Edit Ingredient
 		| 3     | Y                        | N                  | -                  |
 		| 4     | N                        | Y                  | +                  |
 		| 5     | N                        | N                  | =                  |
-		| 6     | Y                        | Y                  | =                  |
+		| 6     | Y                        | N                  | =                  |
 		| 7     | N                        | Y                  | =                  |
 		| 8     | Y                        | N                  | -                  |
 		| 9     | N                        | Y                  | =                  |
-		| 10    | Y                        | Y                  | =                  |
+		| 10    | Y                        | N                  | =                  |
 	And I click Save in the My Ingredients tab
 	Given I navigate to the home page
 	Then The home screen should load
