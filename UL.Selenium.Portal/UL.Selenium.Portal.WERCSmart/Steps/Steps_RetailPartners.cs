@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
+using UL.Automation.Reporting;
+using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
@@ -104,7 +106,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the following heading (.*)")]
 		public void ThenIShouldSeeTheFollowingHeading(string heading)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that the heading " + heading + " is showing");
+			Report.StartStep(ReportSettings.StepCounter + " - Checking that the heading " + heading + " is showing");
 			try
 			{
 				Report.Info("Checking that the heading " + heading + " is showing");
@@ -216,7 +218,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that under the pie chart I see the label: (.*)")]
 		public void ConfirmPieChartLegend(string legendLabel)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirming that the pie chart has legend containing: " + legendLabel);
+			Report.StartStep(ReportSettings.StepCounter + " - Confirming that the pie chart has legend containing: " + legendLabel);
 			try
 			{
 				Report.Info("Confirming that the pie chart has legend containing: " + legendLabel);
@@ -288,7 +290,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that: (.*) is showing under the Data Consent Tiers heading")]
 		public void ThenConfirmYouSeeUnderTheDataConsentTiersHeading(string tierInformation)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirming that '" + tierInformation + "' is showing under the Data Consent Tiers heading");
+			Report.StartStep(ReportSettings.StepCounter + " - Confirming that '" + tierInformation + "' is showing under the Data Consent Tiers heading");
 			try
 			{
 				Report.Info("Confirming that '" + tierInformation + "' is showing under the Data Consent Tiers heading");
@@ -316,7 +318,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[When(@"I confirm that: (.*) is showing under the Data Consent Tiers")]
 		public void ThenConfirmFollwoingInformationDisplays(string info)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirming that '" + info + "' is showing under the Data Consent Tiers heading");
+			Report.StartStep(ReportSettings.StepCounter + " - Confirming that '" + info + "' is showing under the Data Consent Tiers heading");
 			try
 			{
 				Report.Info("Confirming that '" + info + "' is showing under the Data Consent Tiers heading");
@@ -344,7 +346,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the More Information hyperlink")]
 		public void ClickMoreInformation()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking 'More Information' Hyperlink");
+			Report.StartStep(ReportSettings.StepCounter + " - Clicking 'More Information' Hyperlink");
 			try
 			{
 				Report.Info("Clicking 'More Information' Hyperlink");
@@ -379,7 +381,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I (should|should not) see the More Information hyperlink")]
 		public void MoreInformation(string should)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I " + should + " see the More Information hyperlink");
+			Report.StartStep(ReportSettings.StepCounter + " - I " + should + " see the More Information hyperlink");
 			try
 			{
 				Report.Info("I " + should + " see the More Information hyperlink");
@@ -452,7 +454,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that an (excel|html) file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string filetype, string file, string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm Excel File is downloaded with name: " + file);
+			Report.StartStep(ReportSettings.StepCounter + " - Confirm Excel File is downloaded with name: " + file);
 			try
 			{
 				Delay.Seconds(10);
@@ -480,7 +482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			object File = Context.GetFromContext(savedAs);
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
 				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
@@ -499,7 +501,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the html file saved as (.*) can be opened and contains text: (.*)")]
 		public void CheckingDownloadedHTMLFile(string savedAs, string text)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			Report.StartStep(ReportSettings.StepCounter + " - Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			object file = Context.GetFromContext(savedAs);
 			if (Report.IsTrue(file != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + file.ToString(), false, false))
@@ -514,7 +516,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I ensure the Data Consent Tier Sliders are set as follows:")]
 		public void DataConsentTiersSet(Table expected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Ensure the Data Consent Tier Sliders are set");
+			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier Sliders are set");
 			try
 			{
 				Report.Info("Ensure the Data Consent Tier Sliders are set");
@@ -545,7 +547,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I (should|should not) be able to edit Tier (.*)")]
 		public void DataUsageTierEditing(string should, string tier)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Ensure Tier " + tier + " " + (should == "should" ? "is" : "is not") + " editable");
+			Report.StartStep(ReportSettings.StepCounter + " - Ensure Tier " + tier + " " + (should == "should" ? "is" : "is not") + " editable");
 			try
 			{
 				Report.Info("Ensure Tier " + tier + " " + (should == "should" ? "is" : "is not") + " editable");
@@ -583,7 +585,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the save changes button (is|is not) shown")]
 		public void ThenConfirmTheSaveChangesButtonIsShown(string shown)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Check that the Save Changes button " + shown + " shown");
+			Report.StartStep(ReportSettings.StepCounter + " - Check that the Save Changes button " + shown + " shown");
 			try
 			{
 				Report.Info("Check that the Save Changes button " + shown + " shown");
@@ -664,7 +666,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void ThenTheFollowingWarningMessageShouldBeShowing(string expected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Correct warning message is showing");
+			Report.StartStep(ReportSettings.StepCounter + " - Correct warning message is showing");
 			try
 			{
 				Report.Info("Correct warning message is showing");
@@ -931,7 +933,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 
@@ -972,7 +974,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 
 				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
 				List<string> SecondRow = ExcelUtils.Excel_GetRow(3);
@@ -998,7 +1000,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 
@@ -1047,7 +1049,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
 				var newProductInformation = new ProductInformation {
 					Id = thisProduct[0],
@@ -1063,7 +1065,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> headers = ExcelUtils.Excel_GetRow(0);
 				List<string> thisProduct = ExcelUtils.Excel_GetRow(1);
 
@@ -1082,7 +1084,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + spreadsheet + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				string value = ExcelUtils.GetCellValue(1, header, 0);
 				Report.Info("Found value " + value + " for header " + header + ". Adding to context.");
 				Context.AddToContext(saveAs, value);
@@ -1105,20 +1107,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var retailerNames = retailerInfo.Select(x => x.Value).ToList();
 			foreach (KeyValuePair<string, string> retailer in retailerInfo)
 			{
-				TestReport.UseSubSteps = false;
-				TestReport.StartStep("Clicking the retailer: " + retailer.Value + " should navigate to the Wal-Mart/SAM'S CLUB Retail Partners Details page with all 7 affiliates shown under <retailer> & You");
-				TestReport.UseSubSteps = true;
+				ReportSettings.UseSubSteps = false;
+				Report.StartStep("Clicking the retailer: " + retailer.Value + " should navigate to the Wal-Mart/SAM'S CLUB Retail Partners Details page with all 7 affiliates shown under <retailer> & You");
+				ReportSettings.UseSubSteps = true;
 				var selRetailPartners = new RetailPartners();
 				var selRetailPartnersDetails = new RetailPartnersDetails();
-				TestReport.StartStep("Clicking on the logo for the retailer: " + retailer.Value + " in the Retail Partners page");
+				Report.StartStep("Clicking on the logo for the retailer: " + retailer.Value + " in the Retail Partners page");
 				Report.IsTrue(selRetailPartners.ClickRetailerLogo(retailer.Key),
 					"Failed to click on the logo for retailer: " + retailer.Value,
 					"Successfully clicked on the logo for retailer: " + retailer.Value);
-				TestReport.StartStep("I confirm that the Wal-mart/SAM'S CLUB Details page is shown");
+				Report.StartStep("I confirm that the Wal-mart/SAM'S CLUB Details page is shown");
 				Report.IsTrue(selRetailPartnersDetails.GetSelectedRetailer() == "Wal-Mart/SAM'S CLUB",
 					"The selected retailer on Retail Partner Details page was not 'Wal-Mart/SAM'S CLUB'",
 					"The selected retailer on Retail Partner Details page was 'Wal-Mart/SAM'S CLUB' as expected");
-				TestReport.StartStep("I confirm that under the <Retailer> & You heading all 7 Wal-Mart affiliate retailers are displayed");
+				Report.StartStep("I confirm that under the <Retailer> & You heading all 7 Wal-Mart affiliate retailers are displayed");
 				List<string> actualRetailers = selRetailPartnersDetails.WalmartRegistrationsRetailers();
 				Report.IsTrue(!actualRetailers.Except(retailerNames).Any() && actualRetailers.Count == retailerNames.Count,
 					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'")),
@@ -1134,7 +1136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			bool AllPassed = true;
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				//get the index of column
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
@@ -1673,7 +1675,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File.ToString()))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				//get the index of column
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
@@ -1815,7 +1817,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 
@@ -1885,7 +1887,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 
@@ -2005,18 +2007,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: (.*) and check that is shows the expected product saved as: (.*)")]
 		public void INavigateToTheCVSRetailerPageThenCheckThatItContainsExpectedTiersAndProductsInScopeAsExpected(string fileSavedAs, string productSavedAs)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I navigate to the Data Consent Tiers Page for CVS");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I navigate to the Data Consent Tiers Page for CVS");
 			this.INavigateToTheDataConentTiersPageForCVS();
-			TestReport.StartStep("I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section");
+			Report.StartStep("I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section");
 			this.ICheckThatTheGivenDataTiersAreOnlyOnesPresent();
-			TestReport.StartStep($"Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as {fileSavedAs}");
+			Report.StartStep($"Products in Scope button and confirm that a file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as {fileSavedAs}");
 			this.ThenClickTheProductsInScopeButtonAndCheckForFile("CV_Report_DataUsageTier_<Date>.xlsx", fileSavedAs);
-			TestReport.StartStep($"I confirm that the excel file saved as: {fileSavedAs} contains the WPSID for the Product saved as: {productSavedAs}");
+			Report.StartStep($"I confirm that the excel file saved as: {fileSavedAs} contains the WPSID for the Product saved as: {productSavedAs}");
 			this.IConfirmTheExcelFileSavedAsContainsProductSavedAs(fileSavedAs, productSavedAs);
-			TestReport.StartStep($"I delete the Supplier Report file saved as {fileSavedAs}");
+			Report.StartStep($"I delete the Supplier Report file saved as {fileSavedAs}");
 			new Steps_SupplierReports().DeleteExcelFile(fileSavedAs);
-			TestReport.StartStep($"I navigate to the Homepage and then In the Products Grid I delete All products");
+			Report.StartStep($"I navigate to the Homepage and then In the Products Grid I delete All products");
 			new StepsProductGrid().INavigateToTheHomepageThenInTheProductsGridIDeleteAllProducts();
 
 		}
@@ -2027,7 +2029,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 			
@@ -2052,7 +2054,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));				
 
@@ -2072,7 +2074,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 

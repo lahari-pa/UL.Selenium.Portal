@@ -5,11 +5,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
-using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -19,9 +18,11 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
-using NTTQA.Selenium.TReVor;
-using NTTQA.Selenium.UniversalFunctions;
+using UL.Automation.Utilities.Functions;
 using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -33,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[BeforeFeature(Order = 1)]
 		public static void SetTestURL()
 		{
-			GlobalParameters.TestUrl = TestVariables.GetVariableSavedAs("TestURL");
+			SeleniumBrowser.BaseTestUrl = TestVariables.GetVariableSavedAs("TestURL");
 		}
 
 
@@ -164,7 +165,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
 			if (user == null)
 			{
-				string Branch = GlobalParameters.Branch;
+				string Branch = TReVorSettings.SoftwareBranch;
 				string regexPattern = @"^.*(?=(\/))";
 				var regex = new Regex(regexPattern);
 				Match match = regex.Match(Branch);
@@ -193,7 +194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 			if (user == null)
 			{
-				string Branch = GlobalParameters.Branch;
+				string Branch = TReVorSettings.SoftwareBranch;
 				string regexPattern = @"^.*(?=(\/))";
 				var regex = new Regex(regexPattern);
 				Match match = regex.Match(Branch);
@@ -411,15 +412,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
 
-			string myEmail = EmailFunctions.CreateEmail(myDate);
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(saveAs, myEmail);
+			string myEmail = MailosaurFunctions.CreateEmail(myDate);
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(saveAs, myEmail);
 			Report.Info("Saved email: " + myEmail);
 		}
 
 		[StepDefinition(@"If not already created, I create a user: (.*) with the following parameters:")]
 		public void GivenIfNotAlreadyCreatedICreateAUserXWithTheFollowingParameters(string savedAs, Table parameters)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- If not already created, I create a user: '" + savedAs + "'");
+			Report.StartStep(ReportSettings.StepCounter + "- If not already created, I create a user: '" + savedAs + "'");
 
 			if (savedAs == "New_Sub")
 			{
@@ -433,9 +434,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("Setting up account details for user: '" + savedAs + "'");
 					WERCSmartUser account = parameters.CreateInstance<WERCSmartUser>();
-					account.Email = EmailFunctions.CreateEmail(account.Email);
+					account.Email = MailosaurFunctions.CreateEmail(account.Email);
 					account.Identifier = savedAs;
-					NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+					UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(savedAs, account, true);
 					Report.Success("Account details saved!");
 
 					var mySignUp = new StepsSignup();
@@ -512,11 +513,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I navigate to the landing page")]
 		public void NavigateToLandingPage()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Navigate to landing page");
+			Report.StartStep(ReportSettings.StepCounter + " - Navigate to landing page");
 			try
 			{
 				Report.Info("Navigating to the landing page");
-				SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
+				SeleniumBrowser.Navigate(SeleniumBrowser.BaseTestUrl);
 				Delay.Seconds(1);
 				ReadOnlyCollection<string> allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
 				if (SeleniumBrowser.Alert.IsAlertPresent())
@@ -552,10 +553,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						SeleniumBrowser.WebBrowser.SwitchTo().Window(windowHandle);
 
-						if (SeleniumBrowser.GetActiveTabURL().Contains(GlobalParameters.TestUrl))
+						if (SeleniumBrowser.GetActiveTabURL().Contains(SeleniumBrowser.BaseTestUrl))
 						{
 							Report.Info("Current url: " + SeleniumBrowser.GetActiveTabURL());
-							SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
+							SeleniumBrowser.Navigate(SeleniumBrowser.BaseTestUrl);
 							Report.Success("Successfully navigated to the landing page!");
 							Report.Screenshot();
 							return;
@@ -602,7 +603,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I navigate to the URL: (.*)")]
 		public void NavigateToTheUrl(string url)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Navigate to URL: " + url);
+			Report.StartStep(ReportSettings.StepCounter + " - Navigate to URL: " + url);
 			try
 			{
 				Report.Info("Navigating to the URL: " + url);
@@ -620,7 +621,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check that the current URL contains: (.*)")]
 		public void CurrentUrlContains(string url)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that the current URL contains: " + url);
+			Report.StartStep(ReportSettings.StepCounter + " - Checking that the current URL contains: " + url);
 			try
 			{
 				Report.Info("Checking that the current URL contains: " + url);
@@ -641,10 +642,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the window that opened")]
 		public void ThenCloseTheWindowThatOpened()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Closing current window");
+			Report.StartStep(ReportSettings.StepCounter + " - Closing current window");
 			try
 			{
-				object mainWindowHandle = NTTQA.Selenium.SpecFlow.Context.GetFromContext("MainWindowHandle");
+				object mainWindowHandle = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle");
 				if (mainWindowHandle == null)
 				{
 					throw new Exception("No Main Window Handle found in context!");
@@ -667,10 +668,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"UNDER DEVELOPMENT")]
 		public void Underdevelopment()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - UNDER DEVELOPMENT");
+			Report.StartStep(ReportSettings.StepCounter + " - UNDER DEVELOPMENT");
 			try
 			{
-				Report.Warn("AREA UNDER DEVELOPMENT");
+				Report.Warning("AREA UNDER DEVELOPMENT");
 				Report.Failure("AREA UNDER DEVELOPMENT");
 				var selBulkActions = new BulkActions();
 				if (selBulkActions.WaitForContainerToBeVisible(5))
@@ -690,12 +691,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save the current emails in the inbox for address saved as: (.*)")]
 		public void GivenISaveTheCurrentEmailsInTheInboxForRandom(string savedas)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I save the current emails in this inbox so I can locate the new one when it arrives");
+			Report.StartStep(ReportSettings.StepCounter + "- I save the current emails in this inbox so I can locate the new one when it arrives");
 			try
 			{
-				string emailAddress = NTTQA.Selenium.SpecFlow.Context.GetFromContext(savedas).ToString();
+				string emailAddress = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedas).ToString();
 				Report.Info("Storing inbox for address: " + emailAddress);
-				EmailFunctions.StoreCurrentInbox(emailAddress);
+				MailosaurFunctions.StoreCurrentInbox(emailAddress);
 				Report.Success("Inbox stored successfully!");
 			}
 			catch (Exception ex)
@@ -739,11 +740,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create an email (.*) and save it as (.*)")]
 		public void CreateAndSaveNewEmailAddress(string createdEmail, string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I created an email and saved to use in other locations");
+			Report.StartStep(ReportSettings.StepCounter + "- I created an email and saved to use in other locations");
 			try
 			{
-				string email = EmailFunctions.CreateEmail(createdEmail);
-				NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, email);
+				string email = MailosaurFunctions.CreateEmail(createdEmail);
+				UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(savedAs, email);
 				Report.Info("Email address created: " + email);
 			}
 			catch (Exception ex)
@@ -757,18 +758,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new email address")]
 		public void ThenICreateANewEmailAddress()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " I create a new email address");
+			Report.StartStep(ReportSettings.StepCounter + " I create a new email address");
 			try
 			{
 				string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
 
-				string myEmail = EmailFunctions.CreateEmail(myDate);
+				string myEmail = MailosaurFunctions.CreateEmail(myDate);
 
 				if (myEmail == "")
 				{
 					throw new Exception("Failed to Create a New Email Address");
 				}
 				Context.ScenarioContext.Add("CurrentEmail", myEmail);
+				Report.Success("Email Address Created and Saved in Scenario Context");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I create a new random email address")]
+		public void ThenICreateANewRandomEmailAddress()
+		{
+			Report.StartStep(ReportSettings.StepCounter + " I create a new email address");
+			try
+			{
+				
+				string myEmail = MailosaurFunctions.CreateEmail("<random>");
+
+				if (myEmail == "")
+				{
+					throw new Exception("Failed to Create a New Email Address");
+				}
+				Context.AddToContext("CurrentEmail", myEmail);
 				Report.Success("Email Address Created and Saved in Scenario Context");
 			}
 			catch (Exception ex)
@@ -787,7 +811,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
+			Report.StartStep(ReportSettings.StepCounter + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
 			{
 				if (emailFrom.ToLower() == "<sitenotification>")
@@ -798,17 +822,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string email = string.Empty;
 				if (savedAs == "ForgotPW_SecQs")
 				{
-					var user = (WERCSmartUser)NTTQA.Selenium.SpecFlow.Context.GetFromContext(savedAs);
+					var user = (WERCSmartUser)UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs);
 					email = user.Email;
 				}
 				else
 				{
-					email = NTTQA.Selenium.SpecFlow.Context.GetFromContext(savedAs).ToString();
+					email = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
 				}
 
-				if (EmailFunctions.WaitForInboxDifferences(email))
+				if (MailosaurFunctions.WaitForInboxDifferences(email))
 				{
-					List<Mailosaur.Email> differences = EmailFunctions.GetInboxDifferences(email);
+					List<Mailosaur.Email> differences = MailosaurFunctions.GetInboxDifferences(email);
 					Report.Info("Found " + differences.Count() + " emails");
 
 					Mailosaur.Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
@@ -832,7 +856,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 					}
 
-					NTTQA.Selenium.SpecFlow.Context.AddToContext("Matching", matchingEmail);
+					UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("Matching", matchingEmail);
 				}
 				else
 				{
@@ -861,11 +885,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the body of the email should show: (.*)")]
 		public void ThenTheBodyOfTheEmailShouldShow(string bodyText)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
+			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
 			try
 			{
 				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
-				string emailBody = EmailFunctions.getEmailBody(email);
+				string emailBody = MailosaurFunctions.GetEmailBody(email);
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
@@ -890,11 +914,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the body of the email should contain: (.*)")]
 		public void ThenTheBodyOfTheEmailShouldContainX(string bodyText)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
+			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
 			try
 			{
 				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
-				string emailBody = EmailFunctions.getEmailBody(email);
+				string emailBody = MailosaurFunctions.GetEmailBody(email);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
 				Report.Info("Body of the Email was: " + emailBody);
@@ -915,7 +939,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the back button in the browser")]
 		public void GivenIClickOnBackButtonInBrowser()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
+			Report.StartStep(ReportSettings.StepCounter + " " + MethodBase.GetCurrentMethod().Name);
 			try
 			{
 				SeleniumBrowser.WebBrowser.Navigate().Back();
@@ -934,12 +958,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I switch to the tab: (.*)")]
 		public void SwitchToTheTab(string url)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Switch to Tab: " + url);
+			Report.StartStep(ReportSettings.StepCounter + " - Switch to Tab: " + url);
 			try
 			{
 				Report.Info("Switch to Tab: " + url);
 				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-				NTTQA.Selenium.SpecFlow.Context.AddToContext("MainWindowHandle", currentHandle);
+				UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 				System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 				foreach (string handle in allHandles)
 				{
@@ -966,13 +990,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveTheCurrentWindowAs(string savedAs)
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, currentHandle);
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(savedAs, currentHandle);
 		}
 
 		[StepDefinition(@"I close the window saved as: (.*)")]
 		public void SwitchBackToMainWindow(string savedAs)
 		{
-			string handleToClose = NTTQA.Selenium.SpecFlow.Context.GetFromContext(savedAs)?.ToString();
+			string handleToClose = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs)?.ToString();
 			if (handleToClose == null)
 			{
 				Report.Failure("Unable to find window saved as: " + savedAs + " in context to close!");
@@ -997,7 +1021,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SwitchToDataSumaryTab()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -1018,7 +1042,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenISwitchToDataAcceptancePage()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -1036,7 +1060,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void CloseDataSummaryTab()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			string mainHandle = NTTQA.Selenium.SpecFlow.Context.GetFromContext("MainWindowHandle").ToString();
+			string mainHandle = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle").ToString();
 			SeleniumBrowser.WebBrowser.Close();
 			SeleniumBrowser.WebBrowser.SwitchTo().Window(mainHandle);
 		}
@@ -1083,7 +1107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SwitchToTermsOfUseTab()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -1119,10 +1143,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I delete Products with the UPC number if one has been created for this test")]
 		public void DeleteProductWithUPCNumberIfOneHasBeenGenerated()
 		{
-			string testCaseId = GlobalParameters.TestCaseId;
-			if (testCaseId != null && NTTQA.Selenium.SpecFlow.Context.GetFromContext($"UPC{testCaseId}") != null)
+			string testCaseId = TReVorSettings.TestCaseId;
+			if (testCaseId != null && UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext($"UPC{testCaseId}") != null)
 			{
-				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", NTTQA.Selenium.SpecFlow.Context.GetFromContext($"UPC{testCaseId}").ToString());
+				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext($"UPC{testCaseId}").ToString());
 			}
 		}
 
@@ -1135,19 +1159,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Failed to find a user stored in TReVor: " + savedAs);
 				return;
 			}
-			NTTQA.Selenium.SpecFlow.Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
 		}
 
 		[StepDefinition(@"I update the password for the following TReVor test users:")]
 		public void IUpdateThePasswordForTheFollowingTrevorTestUsers(Table users)
 		{
 			var usersSavedAs = new List<string>();
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			users.Rows.Cast<TableRow>().ToList().ForEach(x => usersSavedAs.Add(x["User"]));
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (string savedAs in usersSavedAs)
 			{
-				TestReport.StartStep($"I update the password for user: {savedAs}");
+				Report.StartStep($"I update the password for user: {savedAs}");
 				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				var selMyAccount = new StepsMyAccount();
 				Report.Info("Navigating to My Account from the homepage");
@@ -1169,9 +1193,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I update the password for all TReVor Test Users within the current branch")]
 		public void IUpdateThePasswordForAllTrevorTestUsersWithinCurrentBranch()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			List<TReVorTestUsers> users = TestUsers.Users;
-			IEnumerable<TReVorTestUsers> allUsers = users.Where(x => x.SoftwareId == GlobalParameters.EditionDetails.SoftwareId && x.BranchName == GlobalParameters.Branch);
+			IEnumerable<TReVorTestUsers> allUsers = users.Where(x => x.SoftwareId == TReVorSettings.EditionInformation.SoftwareId && x.BranchName == TReVorSettings.SoftwareBranch);
 			var usersSavedAs = allUsers.Select(x => x.SavedAs).ToList();
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (string savedAs in usersSavedAs)
@@ -1187,7 +1211,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info($"We do not need to update the PayPal password");
 					continue;
 				}
-				TestReport.StartStep($"I update the password for user: {savedAs}");
+				Report.StartStep($"I update the password for user: {savedAs}");
 				//this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				this.LoginToAccount(savedAs, true);
 				string alert = new RetailPartners().WarningMessage();
@@ -1235,7 +1259,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							if (passwordExpired.TopHeading().Contains("Thank You"))
 							{
 								Report.Info("Updating the password in TReVor Test Users");
-								TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
+								TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(savedAs, newPassword);
 								Report.Info("Navigating to the landing page");
 								SeleniumBrowser.WebBrowser.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
 								Report.Info("Checking I can log in with the new credentials");
@@ -1352,7 +1376,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
 			//	"Alert text was as expected");
 
-			Report.Screenshot(true);
+			Report.Screenshot();
 
 			if (SeleniumBrowser.Alert.IsAlertPresent())
 			{
@@ -1364,7 +1388,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save to context name: (.*) and string value: (.*)")]
 		public void GivenISaveToContextNameAndStringValue(string name, string value)
 		{
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, value);
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(name, value);
 		}
 
 		[StepDefinition(@"I move the mouse pointer by an offset of (.*) in x and (.*) in y")]
@@ -1509,7 +1533,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
 			//	"Alert text was as expected");
 
-			Report.Screenshot(true);
+			Report.Screenshot();
 
 			if (SeleniumBrowser.Alert.IsAlertPresent())
 			{
@@ -1522,8 +1546,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I find an existing UPC number in trevor account saved as: (.*) using feature context: (.*)")]
 		public void FindExistingUpcNumberInTrevorAccountUsingFeatureContext(string trevorSavedAs, string upcSavedAs)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I look in feature context for: " + upcSavedAs);
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I look in feature context for: " + upcSavedAs);
 			if (Context.Contains(upcSavedAs, true))
 			{
 				Report.Info("Found an existing UPC in context");
@@ -1534,7 +1558,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Info("UPC did not exist in feature context");
 			// fall back to searching SHA manager
-			TestReport.StartStep("I search for a UPC in SHA Manager associated with trevor user account: " + trevorSavedAs + " and save to context as: " + upcSavedAs);
+			Report.StartStep("I search for a UPC in SHA Manager associated with trevor user account: " + trevorSavedAs + " and save to context as: " + upcSavedAs);
 			new Steps_SHA().NavigateToShaSaveUpcToContext(upcSavedAs, trevorSavedAs);
 			// check if SHA search was successful
 			if (Context.Contains(upcSavedAs))
@@ -1545,10 +1569,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			// fall back to creating a new product
-			TestReport.StartStep("Logging in to WercSmart");
+			Report.StartStep("Logging in to WercSmart");
 			new GlobalSteps().NavigateToLandingPage();
 			this.ILogInWithTheAccountSavedInTrevorAs(trevorSavedAs);
-			TestReport.StartStep("Creating a new product: Chalk");
+			Report.StartStep("Creating a new product: Chalk");
 			new Steps_ProductSetup().GivenICreateProductUsingTestCase75335("Chalk", upcSavedAs, "ExistingUPCProduct");
 			// check if new product UPC was successful
 			if (Context.Contains(upcSavedAs))
@@ -1832,15 +1856,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Check there should be a new suspension notification email for user: (.*) for the Product saved as: (.*) with the suspension subject of: (.*) and check it does not contain text from the table:")]
 		public void ICheckThereIsANewEmailForUserXFromYAndSpecificTitle(string emailSavedAs,string productSavedAs, string subject, Table stringTable)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var productDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
 			string productID = productDetails.Id;
 			string emailSuspensionTitle = "Notification - Product "+productID+" - "+subject;
 						
-			TestReport.StartStep($"I confirm the administrator receieved an email with subject '{emailSuspensionTitle}'");
+			Report.StartStep($"I confirm the administrator receieved an email with subject '{emailSuspensionTitle}'");
 			Delay.Seconds(5);
 			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", emailSuspensionTitle);
-			TestReport.StartStep("I confirm the body text of the email does not contain the blurb text");
+			Report.StartStep("I confirm the body text of the email does not contain the blurb text");
 			new GlobalSteps().ThenTheTextOfTheEmailShouldNotShow(stringTable);
 
 			//do 2 x checks for the 2 differnt bullet points of the blurp text or one string and find format that works (e.g white space removal etc)
@@ -1849,7 +1873,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the text of the email should not show: (.*)")]
 		public void ThenTheTextOfTheEmailShouldNotShow(Table stringTable)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
+			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
 			try
 			{
 				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
@@ -1878,7 +1902,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the text of the email should show: (.*)")]
 		public void ThenTheTextOfTheEmailShouldShow(string bodyText)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
+			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
 			try
 			{
 				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
@@ -1899,7 +1923,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a upc number for CVS")]
 		public void CreateCVSUPC()
 		{
-			string upc = TReVorDetails.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
+			string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
 		}
 
 	}

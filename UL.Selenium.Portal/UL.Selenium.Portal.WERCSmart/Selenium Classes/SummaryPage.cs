@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.ExtensionMethods;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Reporting.Functions;
 using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -59,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return matchingAnswer.GetValue();
 				}
 			}
-			NTTQA.Selenium.Reporting.Core.Report.Info("No suitable answer was found");
+			Report.Info("No suitable answer was found");
 			return null;
 		}
 

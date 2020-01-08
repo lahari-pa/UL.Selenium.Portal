@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using NTTQA.Selenium.UniversalFunctions;
+using UL.Automation.Utilities.Functions;
 using System;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps

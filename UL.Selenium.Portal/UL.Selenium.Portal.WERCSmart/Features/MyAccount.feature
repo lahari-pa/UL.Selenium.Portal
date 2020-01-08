@@ -83,7 +83,8 @@ Scenario: [70511] Pagination (...) need an account with six pages of users
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click on My Account
-	Given I check that there are at least 6 pages of users. If not this test will not work.
+	#Given I check that there are at least 6 pages of users. If not this test will not work.
+	Then I Create new users in the My Account page via the user Grid until there are atleast: 9 pages present
 	Given I click ... in the My Account user grid
 	Given I see the user grid page navigation input with up and down arrows
 	Given I type the number 2 into the user grid page navigation box and press the enter key
@@ -243,7 +244,8 @@ Given I Login into WERCSmart Portal - Admin Role - Password Reset
 Then the WERCSmart homepage should load
 Given I call Shared Step 62676 (Go To My Account)
 Given I go to Reset Password in User Grid for the current user
-Then I call a Shared Step to create a new password: Welcome22!
+#Then I call a Shared Step to create a new password: Welcome22!
+Then I call a Shared Step to create a new password for the account saved as: PasswordResetAccount
 Then I click the User Icon
 And I click on Sign Out
 Given I Login into WERCSmart Portal - Admin Role - Password Reset

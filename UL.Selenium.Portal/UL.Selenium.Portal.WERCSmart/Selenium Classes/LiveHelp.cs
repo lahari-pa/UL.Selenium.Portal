@@ -1,8 +1,8 @@
 using System;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyInboxText()
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[@class='list-title ']"), 2);
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[contains(@class,'list-title')]"), 2);
 			return elem != null && elem.Text == "Inbox";
 		}
 

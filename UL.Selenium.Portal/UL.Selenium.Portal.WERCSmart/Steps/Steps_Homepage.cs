@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting;
+using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using NTTQA.Selenium.Cache;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -320,7 +321,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 
 				// ===== NEED TO KNOW WHERE THIS GOES BEFORE DOING THE NEXT PART ===== //
-				Report.Warn("Functionality does not work - change this when it does!");
+				Report.Warning("Functionality does not work - change this when it does!");
 
 			}
 			catch (Exception ex)
@@ -336,7 +337,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				// ===== NEED TO KNOW WHERE THIS GOES BEFORE DOING THE NEXT PART ===== //
-				Report.Warn("Functionality does not work - change this when it does!");
+				Report.Warning("Functionality does not work - change this when it does!");
 			}
 			catch (Exception ex)
 			{
@@ -514,7 +515,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the User Icon")]
 		public void ThenIClickTheUserIcon()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
+			Report.StartStep(ReportSettings.StepCounter + " " + MethodBase.GetCurrentMethod().Name);
 			try
 			{
 				Report.Info("Clicking the User Icon");
@@ -548,7 +549,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on the Notification Icon")]
 		public void GivenIClickOnTheNotificationIcon()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click on Notification Icon");
+			Report.StartStep(ReportSettings.StepCounter + " - Click on Notification Icon");
 			try
 			{
 				Report.Info("Clicking on Notification Icon");
@@ -567,7 +568,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the Notification page should appear")]
 		public void ThenTheNotificationPageShouldAppear()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Notification Page Should Appear");
+			Report.StartStep(ReportSettings.StepCounter + " - Notification Page Should Appear");
 			try
 			{
 				Report.Info("Checking that the Notification Page appears");
@@ -600,7 +601,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//[Then(@"Confirm that freshdesk opens in another tab")]
 		//public void ThenConfirmThatFreshdeskOpensInAnotherTab()
 		//{
-		//	TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that freshdesk opens in another tab");
+		//	Report.StartStep(ReportSettings.StepCounter + " - Confirm that freshdesk opens in another tab");
 		//	Delay.Seconds(5);
 		//	try
 		//	{
@@ -625,9 +626,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Confirm that freshdesk opens in another tab")]
 		public void ConfirmThatFreshdeskOpensInAnotherTab()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that freshdesk opens in another tab");
+			Report.StartStep(ReportSettings.StepCounter + " - Confirm that freshdesk opens in another tab");
 			Delay.Seconds(5);
-			if (GlobalParameters.SiteType == "Development")
+			if (TReVorSettings.SoftwareBranch == "Development")
 			{
 				string freshdeskUrl = @"https://wercsmarttest.freshdesk.com/support/solutions";
 				List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
@@ -639,7 +640,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumBrowser.CloseTabWithURL(freshdeskUrl);
 				Delay.Seconds(3);
 			}
-			if (GlobalParameters.SiteType == "Staging")
+			if (TReVorSettings.SoftwareBranch == "Staging")
 			{
 				string freshdeskUrl = @"https://wercsmarttest.freshdesk.com/support/solutions";
 				List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
@@ -651,7 +652,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumBrowser.CloseTabWithURL(freshdeskUrl);
 				Delay.Seconds(3);
 			}
-			if (GlobalParameters.SiteType == "Production")
+			if (TReVorSettings.SoftwareBranch == "Production")
 			{
 				string freshdeskUrl = @"https://wercsmart.freshdesk.com/en/support/solutions";
 				List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
@@ -663,7 +664,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumBrowser.CloseTabWithURL(freshdeskUrl);
 				Delay.Seconds(3);
 			}
-			if (GlobalParameters.SiteType == "Local Production")
+			if (TReVorSettings.SoftwareBranch == "Local Production")
 			{
 				string freshdeskUrl = @"https://wercsmarttest.freshdesk.com/support/solutions";
 				List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
@@ -739,12 +740,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
 		public void ClickItemInQuickLinks(string item)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Selecting " + item + " in the Navigation Pane");
+			Report.StartStep(ReportSettings.StepCounter + " - Selecting " + item + " in the Navigation Pane");
 			try
 			{
 				Report.Info("Selecting " + item + " in the Navigation Pane");
 				var selHomePageNavBar = new NavigationBar();
-				Report.IsTrue(selHomePageNavBar.Click_Icon(item), "Failed to click item: '" + item + "'!", "Successfully clicked item: '" + item + "'!", ShowSuccessScreenshot: false);
+				Report.IsTrue(selHomePageNavBar.Click_Icon(item), "Failed to click item: '" + item + "'!", "Successfully clicked item: '" + item + "'!", showSuccessScreenshot: false);
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Screenshot();
 			}
@@ -761,7 +762,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on the close button on Cart is Empty")]
 		public void ClickCloseOnCartisEmpty()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the close button");
+			Report.StartStep(ReportSettings.StepCounter + " - I click the close button");
 			var selCartEmpty = new CartIsEmptyDialog();
 			selCartEmpty.ClickClose();
 
@@ -775,7 +776,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the header: (.*) on the Cart is Empty window")]
 		public void CorrectHeaderShowing(string headerExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Cart is Empty window should appear");
+			Report.StartStep(ReportSettings.StepCounter + " - Cart is Empty window should appear");
 			try
 			{
 				GeneralUtilities.Wait_for_load_finish();

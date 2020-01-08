@@ -1,7 +1,7 @@
 using System;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.ULSC.Selenium_Classes
@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			}
 			catch (Exception ex)
 			{
-				Report.Error(ex);
+				Report.Error(ex.Message);
 				return false;
 			}
 		}

@@ -1,4 +1,4 @@
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Reporting.Functions;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
