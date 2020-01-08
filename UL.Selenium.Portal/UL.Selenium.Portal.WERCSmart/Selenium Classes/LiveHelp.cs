@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyInboxText()
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[@class='list-title ']"), 2);
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[contains(@class,'list-title')]"), 2);
 			return elem != null && elem.Text == "Inbox";
 		}
 

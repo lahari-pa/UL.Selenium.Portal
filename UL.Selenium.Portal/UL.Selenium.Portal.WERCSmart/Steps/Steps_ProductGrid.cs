@@ -777,6 +777,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selProductsGrid = new ProductsGrid();
 			string pageNavigationValue = selProductsGrid.CurrentPageGridNavigationInput();
+			if(pageNavigationValue==null)
+			{
+				Report.Info("The Navigation Input was not showing");
+			}
 			TestReport.StartStep(GlobalParameters.StepCount + " - I enter the " + direction + " arrow into the page navigation box");
 			Report.Info("Entering the " + direction + " arrow key to the products grid page navigation input");
 			selProductsGrid.KeyToGridNavigationInput(direction);

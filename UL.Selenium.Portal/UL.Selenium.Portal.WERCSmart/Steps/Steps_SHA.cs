@@ -1766,11 +1766,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Screenshot();
 					return;
 				}
-				Report.Info($"The list of displayed UPCs was: {string.Join(",", displayedUpcs)}");
+				Report.Info($"The list of displayed UPCs was: {string.Join(", ", displayedUpcs.Select(x => x.UPCNumber).ToList())}");
 
 				Report.Info($"Checking if the UPC needed is saved in context");
+
 				if (upc.ToLower().Contains("saved as"))
 				{
+					Report.Info("The UPC Input value contained the text 'saved as'");
 					upc = Context
 						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 						.ToString();

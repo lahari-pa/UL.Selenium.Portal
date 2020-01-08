@@ -614,7 +614,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
 					break;
 				case "...":
-					navEl = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+					//navEl = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+					navEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
 					break;
 				default:
 					Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
@@ -626,9 +627,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not locate the navigation button element for: " + navOption);
 				return false;
 			}
+			if (navOption=="...")
+			{
+				Delay.Seconds(1);
+				navEl.ScrollElementIntoView();
+				Delay.Seconds(1);
+				navEl.ClickLocation();				
+				if (this.GridNavigationInput() == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
 
+			}
+
+			Delay.Seconds(1);
 			navEl.ScrollElementIntoView();
-			return navEl.TryClick();
+			Delay.Seconds(1);
+			return navEl.TryClick();		
+						
 		}
 
 		public bool NextDisabled()
@@ -737,7 +757,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement inputEl = this.GridNavigationInput();
 			if (inputEl == null)
 			{
-				Report.Failure("The navigation input box could not be found");
+				Report.Error("The navigation input box could not be found");
 				return null;
 			}
 

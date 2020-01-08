@@ -12,6 +12,7 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using NTTQA.Selenium.TReVor;
 using TReVor.Api.Wrapper.Classes;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -388,10 +389,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						userName = userName + "_" + System.DateTime.Now.ToString("HHmmddMMyy");
 
-						Context.ScenarioContext.Add("CurrentUser", userName);
+						Context.AddToContext("CurrentUser", userName);
 
 						Report.Info("User Name = " + userName);
 					}
+					if (userName == "Random") 
+					{
+						string randomstr = Context.ScenarioContext["CurrentEmail"].ToString().Replace(".kxxyxunf@mailosaur.io", "");
+						userName = "User_" + randomstr;
+						Context.AddToContext("CurrentUser", userName);
+						Report.Info("User Name = " + userName);
+					}
+
+
 					if (emailAddress == "Saved")
 					{
 						if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
@@ -1560,18 +1570,127 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I call a Shared Step to create a new password: (.*)")]
-		public void ThenICallSharedStepToCreateANewPassword(string password)
+		[StepDefinition(@"I call a Shared Step to create a new password for the account saved as: (.*)")]
+		public void ThenICallSharedStepToCreateANewPassword(string accountSavedAs)
 		{
 			ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
 			MyAccount MyAccountObject = new MyAccount();
-			FP.New_Password_Form(password, password);
-			bool passwordResetInWERCS = Report.IsTrue(MyAccountObject.ClickSaveInChangeUserPasswordWindow(), "Failed to click save", "Successfully clicked save");
+			//Need to make sure password is not one of the last 10 used
+			//Grab the saved password for the account in TReVor
+			//Check that it follows the format of WelcomeXX! or WelcomeX!
+			//If Does then increase the X value by 1
+			//If not set password to default Weclome1!
+			//Do this all in a loop of 10 tries
+
+			TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
+			
+			string currentPassword = currentUser.Password;
+			
+			string pattern = @"Welcome(\d+)!";
+			Regex rg = new Regex(pattern);
+			Match match = rg.Match(currentPassword);
+			if(match.Success)
+			{
+				Report.Info("The Password found in TReVor matched the expected format");
+				string intStr = match.Groups[1].Value;
+				int passNumber = Convert.ToInt32(intStr);
+				if (passNumber<99)
+				{
+					passNumber++;
+				}
+				else
+				{
+					passNumber = 1;
+				}
+				string updatedPassword = "Welcome" + passNumber.ToString() + "!";
+				Context.AddToContext("contextPassword", updatedPassword);
+			}
+			else
+			{
+				Report.Info("The password found in TReVor did not match the expected format, setting the new password to use the correct format.");				 
+				string newPassword = "Welcome1!";
+				Context.AddToContext("contextPassword", newPassword);
+				
+			}		
+			int i = 0;
+			bool acceptedPass = false;
+			//here is where we loop before clicking close check that the "too recent password" popup is not present, if it is, click close in that popup and try +1 to the number (if number =99 set it to 1)
+			while (i<10 && acceptedPass==false)
+			{
+				var contextPassword = (string)Context.GetFromContext("contextPassword");
+				FP.New_Password_Form(contextPassword, contextPassword);
+				bool passwordResetInWERCS = Report.IsTrue(MyAccountObject.ClickSaveInChangeUserPasswordWindow(), "Failed to click save", "Successfully clicked save");
+				bool popupOpen = false;
+				int y = 0;
+				while (popupOpen == false && y < 5)
+				{
+					popupOpen = MyAccountObject.PasswordTooRecentPopupPresent();
+					Delay.Seconds(1);
+					y++;
+				}
+
+				if (!MyAccountObject.PasswordTooRecentPopupPresent())
+				{
+					Report.Info("There was no popup present with the message 'This password was used too recently.'");
+					acceptedPass = true;
+					
+				}
+				else
+				{
+					Report.Info("There was a popup present with the message 'This password was used too recently.'");
+					Report.Info("Attempting to Close the Popup");
+					MyAccountObject.ClickCloseInPasswordTooRecentPopup();
+					bool popupClosed = false;
+					int j = 0;
+					while (popupClosed == false && j<5)
+					{
+						if(!MyAccountObject.PasswordTooRecentPopupPresent())
+						{
+							popupClosed = true;
+							Report.Info("The Password Too Recent Popup was closed successfully");
+						}
+						else
+						{
+							Report.Info("The Password Too Recent Popup was still showing");
+							Delay.Seconds(1);
+						}
+						j++;
+					}
+					if(!popupClosed)
+					{
+						Report.Failure("The Password Too Recent Popup was still showing after 5 seconds");
+						return;
+					}
+					Report.Info("Attempting to add '1' to the Password");
+					var basePassword = (string)Context.GetFromContext("contextPassword");
+					string passwordNumberStr = basePassword.Replace("Welcome", "").TrimEnd("!");
+					int passwordNumberInt = Convert.ToInt32(passwordNumberStr);
+					if(passwordNumberInt==99)
+					{
+						passwordNumberInt = 0;
+					}
+					int passwordNumberIncreased = passwordNumberInt+1;
+					string increasedPasswordFull= "Welcome" + passwordNumberIncreased.ToString() + "!";
+					Context.AddToContext("contextPassword", increasedPasswordFull);
+					i++;
+
+
+				}			
+				
+			}
+			if(acceptedPass==false)
+			{
+				Report.Failure("The Password was still showing as Too recent even after increasing the value 10 times");
+				return;
+			}	
+			
 			Report.IsTrue(MyAccountObject.ClickCloseInChangeUserPasswordWindow(), "Failed to click close", "Successfully clicked close");
 
-			if (passwordResetInWERCS)
+
+			var finalPassword = (string)Context.GetFromContext("contextPassword");
+			if (acceptedPass)
 			{
-				var user = TestUsers.GetUserSavedAs("PasswordResetAccount");
+				var user = TestUsers.GetUserSavedAs(accountSavedAs);
 				if (user == null)
 				{
 					Report.Info("TReVor user does not exist");
@@ -1581,10 +1700,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("TReVor user does exist");
 				}
 
-				if (Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, password), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
+				if (Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
 				{
-					user.Password = password;
+					TestUsers.RefreshUsers();
+					user.Password = finalPassword;
 				}
+				TestUsers.RefreshUsers();
 
 			}
 		}

@@ -778,6 +778,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I create a new random email address")]
+		public void ThenICreateANewRandomEmailAddress()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " I create a new email address");
+			try
+			{
+				
+				string myEmail = EmailFunctions.CreateEmail("<random>");
+
+				if (myEmail == "")
+				{
+					throw new Exception("Failed to Create a New Email Address");
+				}
+				Context.AddToContext("CurrentEmail", myEmail);
+				Report.Success("Email Address Created and Saved in Scenario Context");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		//[StepDefinition(@"in the received email I should see the title: (.*)")]
 		//public void ThenInTheReceivedEmailIShouldSeeTheTitleWERCSmartPasswordReset(string expectedTitle)
 		//{
