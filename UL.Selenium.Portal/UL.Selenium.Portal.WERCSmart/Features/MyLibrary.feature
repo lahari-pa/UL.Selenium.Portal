@@ -306,6 +306,7 @@ Scenario: [73328] Pagination functionality
 	Given I click on My Account
 	Given In the My Account page I navigate to the My Library page
 	Given I navigate to the My Ingredients tab in the My Library page
+	Then I ensure that there are enough Ingredients in the My Ingredients page to enable pagination
 	And I save the current list of ingredients in My Library to context as: My Library Ingredients Pagination
 	Then I confirm the navigation button is enabled in the My Ingredients grid
 	Given I click the Next button in the My Ingredients grid navigation

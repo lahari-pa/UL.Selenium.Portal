@@ -2469,6 +2469,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			edited.Add(publicName.SelectedOption() == ingredient.PublicName);
 			return edited.All(e => e);
 		}
+		public int GetHighestPageNo()
+		{
+			IList<IWebElement> pageNumbers = this.containerElement.FindElements(By.XPath(".//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+			var intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
+			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
+
+		}
 
 		public class SearchResult
 		{

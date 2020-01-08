@@ -1133,3 +1133,25 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Then In the Products Grid I delete All products
 	Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
 	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSCleaningExcelFile and check that is shows the expected product saved as: CVSCleaningProduct1
+
+	Scenario: [IngredientCreate] Create Ingredient
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I click on My Account
+	Given In the My Account page I navigate to the My Library page
+	Given I navigate to the My Ingredients tab in the My Library page
+	And I save the current list of ingredients in My Library to context as: My Library Ingredients
+
+	Given I enter the text: wat into the My Ingredients search field
+	And I select the smart search result with name: Water and CAS: 7732-18-5
+	Given I enter the text: wat into the My Ingredients search field
+	And I select the smart search result with name: Water and CAS: 7732-18-5
+	Given I enter the text: wat into the My Ingredients search field
+	And I select the smart search result with name: Water and CAS: 7732-18-5
+	Given I enter the text: wat into the My Ingredients search field
+	And I select the smart search result with name: Water and CAS: 7732-18-5
+	Given I enter the text: wat into the My Ingredients search field
+	And I select the smart search result with name: Water and CAS: 7732-18-5
+	Given I click Save in the My Ingredients tab	
+	Given I click the WERCSmart logo
+	Then The home screen should load
