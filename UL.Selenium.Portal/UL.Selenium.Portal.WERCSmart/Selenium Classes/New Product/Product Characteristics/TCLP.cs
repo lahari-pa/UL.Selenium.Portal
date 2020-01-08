@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics

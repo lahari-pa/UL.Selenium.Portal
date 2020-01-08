@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using TechTalk.SpecFlow;
 using System.IO;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.BaseClasses;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
@@ -411,7 +411,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			if (Report.IsTrue(actualFile != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + actualFile.ToString()))
 			{
-				var ExcelUtils = new ExcelUtilities(actualFile.ToString(), "Sheet1");
+				var ExcelUtils = new ExcelFunctions(actualFile.ToString(), "Sheet1");
 				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
 				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");

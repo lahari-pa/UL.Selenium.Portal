@@ -1,8 +1,8 @@
 using System;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 

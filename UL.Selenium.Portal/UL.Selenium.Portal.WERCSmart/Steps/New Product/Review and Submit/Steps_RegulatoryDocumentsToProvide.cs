@@ -1,5 +1,5 @@
-﻿using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;

@@ -1,9 +1,9 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.Remoting.Messaging;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 

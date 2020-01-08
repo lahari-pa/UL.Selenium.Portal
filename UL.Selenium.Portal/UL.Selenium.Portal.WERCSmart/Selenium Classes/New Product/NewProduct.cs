@@ -2,20 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.Selenium.Functions;
+using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
-using NTTQA.Selenium.Cache;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -2176,7 +2178,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return false;
 				}
 				el.TryClick();
-				GeneralFunctions.EnterFilename("C:\\Dependencies\\WERCSmart\\testdoc.pdf");
+				UploadDialog.UploadFile("C:\\Dependencies\\WERCSmart\\testdoc.pdf");
 				return true;
 			}
 			catch (Exception)
@@ -2204,7 +2206,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			Delay.Seconds(2);
 			Report.Info("Entering file name with path: " + pdfFilePath);
-			Report.IsTrue(GeneralFunctions.EnterFilename(pdfFilePath), "Failed to enter file name!", "Successfully entered file name");
+			Report.IsTrue(UploadDialog.UploadFile(pdfFilePath), "Failed to enter file name!", "Successfully entered file name");
 			int i = 0;
 			string viewPath = "//span[contains(text(),'" + section + "')]//..//span[@class='dz-uploaded-doc']//..//a";
 			IWebElement viewEl = this.containerElement.WaitUntilElementVisible(By.XPath(viewPath), 10);
@@ -2231,7 +2233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
-			GeneralFunctions.EnterFilename(pdfFilePath);
+			UploadDialog.UploadFile(pdfFilePath);
 
 			int i = 0;
 			while (this.containerElement.FindElement(By.XPath(".//span[contains(text(),'" + section + "')]//parent::div//a[text()='Remove']"), 2) == null && i < 10)
@@ -3617,11 +3619,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			foreach (TechTalk.SpecFlow.TableRow row in table.Rows)
 			{
 
-				TestReport.UseSubSteps = true;
+				ReportSettings.UseSubSteps = true;
 				var stepsRetailer = new Retailer();
-				TestReport.StartStep("In the Select Retailers popup I select the retailer: " + (row["Retailer"]));
+				Report.StartStep("In the Select Retailers popup I select the retailer: " + (row["Retailer"]));
 				new StepsSelectRetailers().SelectTheRetailer((row["Retailer"]));
-				TestReport.StartStep("I enter private label as 'This Private Label'");
+				Report.StartStep("I enter private label as 'This Private Label'");
 				stepsRetailer.EnterPrivateLabelName("This Private Label");
 
 			}

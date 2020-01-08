@@ -1,16 +1,17 @@
 using System;
 using System.Linq;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using UL.Automation.Selenium.Functions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
@@ -254,7 +255,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				{
 					Delay.Seconds(5);
 
-					if (GeneralFunctions.EnterFilename(filePath))
+					if (UploadDialog.UploadFile(filePath))
 					{
 						return true;
 					}
@@ -496,7 +497,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				{
 					Delay.Seconds(5);
 
-					if (GeneralFunctions.EnterFilename(filePath))
+					if (UploadDialog.UploadFile(filePath))
 					{
 						return true;
 					}

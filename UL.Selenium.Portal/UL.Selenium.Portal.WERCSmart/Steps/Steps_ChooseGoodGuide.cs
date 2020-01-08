@@ -1,11 +1,10 @@
 using System;
 using System.Text.RegularExpressions;
 using Mailosaur;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -13,6 +12,9 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.Generic;
 using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -378,7 +380,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				case ("Email"):
 					{
-						value = EmailFunctions.CreateEmail(value);
+						value = MailosaurFunctions.CreateEmail(value);
 						Context.AddToContext("AccountEmailAddress", value);
 						accountCreation.Email = value;
 						Report.IsTrue(accountCreation.Email == value, "Failed to enter the email address: " + value, "Successfully entered the email address: " + value);
@@ -494,10 +496,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			bool passed = EmailFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
+			bool passed = MailosaurFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
 			if (!passed)
 			{
-				passed = EmailFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
+				passed = MailosaurFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
 			}
 			Report.IsTrue(passed, "Email has not arrived as expected", "Email has arrived as expected");
 		}
@@ -540,11 +542,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 68883\(Login to ChooseGoodGuide\)")]
 		public void LoginToChooseGG()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var myStepsGG = new Steps_ChooseGoodGuide();
-			TestReport.StartStep("I navigate to ChooseGoodGuide");
+			Report.StartStep("I navigate to ChooseGoodGuide");
 			myStepsGG.GivenINavigateToChooseGoodGuide();
-			TestReport.StartStep("I log in to ChooseGoodGuide as administrator");
+			Report.StartStep("I log in to ChooseGoodGuide as administrator");
 			myStepsGG.GivenILoginToChooseGoodGuideAsAdministrator();
 		}
 	}

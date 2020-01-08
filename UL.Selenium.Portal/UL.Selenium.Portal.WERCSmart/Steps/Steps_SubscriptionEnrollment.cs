@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -19,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Subscription Enrollment screen I select the following enrollment options")]
 		public void ThenISelectTheFollowingEnrollmentOptions(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I select enrollment options");
+			Report.StartStep(ReportSettings.StepCounter + " - I select enrollment options");
 			try
 			{
 				var mySub = new SubscriptionEnrollment();
@@ -447,7 +448,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I cancel the Enrollment dialog, confirm correct page opens and Proceed")]
 		public void ThenICancelTheEnrollmentDialogConfirmCorrectPageOpensAndProceed()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I cancel the Enrollment dialog, confirm correct page opens and Proceed");
+			Report.StartStep(ReportSettings.StepCounter + " - I cancel the Enrollment dialog, confirm correct page opens and Proceed");
 			try
 			{
 				var mySub = new SubscriptionEnrollment();
@@ -479,7 +480,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the chosen options and body text are correct")]
 		public void ThenIConfirmTheChosenOptionsAndBodyTextAreCorrect(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the chosen options and body text are correct");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the chosen options and body text are correct");
 			try
 			{
 				var mySubDlg = new SubscriptionEnrollmentDlg();
@@ -509,7 +510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on (Checkout|Cancel)")]
 		public void ThenIClickOnX(string button)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click on " + button);
+			Report.StartStep(ReportSettings.StepCounter + " - I click on " + button);
 			try
 			{
 				var mySub = new SubscriptionEnrollment();

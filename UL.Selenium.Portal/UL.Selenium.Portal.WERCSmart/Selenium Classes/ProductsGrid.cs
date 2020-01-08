@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using NTTQA.Selenium.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -806,7 +806,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				catch(Exception e)
 				{
-					Report.Error(e);
+					Report.Error(e.Message);
 					throw;
 				}
 			}

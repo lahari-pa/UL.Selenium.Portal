@@ -1,5 +1,5 @@
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
@@ -82,13 +82,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString(),
 				Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString()
 			};
-			TestReport.StartStep("I click 'Actions' (...) for the created Package Type");
+			Report.StartStep("I click 'Actions' (...) for the created Package Type");
 			Report.IsTrue(selPackagingTypes.ClickActions(packagingType),
 				string.Format("Failed to click 'Actions' (...) for Packaging Type with ID '{0}' and name '{1}'",
 					packagingType.ID, packagingType.Name),
 				string.Format("Successfully clicked 'Actions' (...) for Packaging Type with ID '{0}' and name '{1}'",
 					packagingType.ID, packagingType.Name));
-			TestReport.StartStep("I click delete for the created Package Type");
+			Report.StartStep("I click delete for the created Package Type");
 			Report.IsTrue(selPackagingTypes.ClickDelete(),
 				string.Format("Failed to click delete for Packaging Type with ID '{0}' and name '{1}'",
 					packagingType.ID, packagingType.Name),
@@ -133,11 +133,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			};
 			var delDialog = new DeleteDialog();
 			string itemText = delDialog.ItemRemovedText();
-			TestReport.StartStep("I confirm the name for the saved Packaging Group appears in the popup");
+			Report.StartStep("I confirm the name for the saved Packaging Group appears in the popup");
 			Report.IsTrue(itemText.Contains(packagingType.Name),
 				"The Packaging Group Name " + packagingType.Name + " did not appear in the Delete Product Pop Up dialog",
 				"The Packaging Group Name " + packagingType.Name + " appeared in the Delete Product Pop Up dialog as expected");
-			TestReport.StartStep("I confirm the ID for the saved Packaging Group appears in the popup");
+			Report.StartStep("I confirm the ID for the saved Packaging Group appears in the popup");
 			Report.IsTrue(itemText.Contains(packagingType.ID),
 				"The Packaging Group ID " + packagingType.ID + " did not appear in the Delete Product Pop Up dialog",
 				"The Packaging Group ID " + packagingType.ID + " appeared in the Delete Product Pop Up dialog as expected");
@@ -151,13 +151,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString(),
 				Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString()
 			};
-			TestReport.StartStep("I click 'Actions' (...) for the created Package Type");
+			Report.StartStep("I click 'Actions' (...) for the created Package Type");
 			Report.IsTrue(selPackagingTypes.ClickActions(packagingType),
 				string.Format("Failed to click 'Actions' (...) for Packaging Type with ID '{0}' and name '{1}'",
 					packagingType.ID, packagingType.Name),
 				string.Format("Successfully clicked 'Actions' (...) for Packaging Type with ID '{0}' and name '{1}'",
 					packagingType.ID, packagingType.Name));
-			TestReport.StartStep("I click 'edit' for the created Package Type");
+			Report.StartStep("I click 'edit' for the created Package Type");
 			Report.IsTrue(selPackagingTypes.ClickEdit(),
 				string.Format("Failed to click 'edit' for Packaging Type with ID '{0}' and name '{1}'",
 					packagingType.ID, packagingType.Name),

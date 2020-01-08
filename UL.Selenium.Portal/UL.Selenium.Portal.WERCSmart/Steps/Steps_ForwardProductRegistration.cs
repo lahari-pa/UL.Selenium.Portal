@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Text.RegularExpressions;
+using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -40,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the subheading 3: (.*) on the Forward Product Registration window")]
 		public void CorrectSubHeader3Showing(string subheaderExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Forward Product Registration window should appear");
+			Report.StartStep(ReportSettings.StepCounter + " - Forward Product Registration window should appear");
 			try
 			{
 				GeneralUtilities.Wait_for_load_finish();
@@ -66,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the subheading 4: (.*) on the Forward Product Registration window")]
 		public void CorrectSubHeader4Showing(string subheaderExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Forward Product Registration window should appear");
+			Report.StartStep(ReportSettings.StepCounter + " - Forward Product Registration window should appear");
 			try
 			{
 				GeneralUtilities.Wait_for_load_finish();
@@ -88,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should be sent to the Product Registration page with retailers list displayed")]
 		public void ThenIShouldBeSentToTheProductRegistrationPageWithRetailersListDisplayed()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Forward Product Registration window should appear");
+			Report.StartStep(ReportSettings.StepCounter + " - Forward Product Registration window should appear");
 			try
 			{
 				GeneralUtilities.Wait_for_load_finish();
@@ -446,8 +447,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab and the checkbox is disabled while the page is working")]
 		public void SelectProductWithIDSavedAsSelectProductAndCheckboxIsDisabled(string savedAs)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I select the product with ID saved as: " + savedAs + " under the Select Products tab");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I select the product with ID saved as: " + savedAs + " under the Select Products tab");
 			var selForwardProductReg = new ForwardProductRegistration();
 			if (savedAs.ToLower().Contains("list"))
 			{
@@ -462,7 +463,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Clicking product checkbox with ID: " + id_);
 					if (selForwardProductReg.SelectProducts_ClickProductByID_(id_))
 					{
-						TestReport.StartStep("I confirm the checkbox is disabled while the page is working");
+						Report.StartStep("I confirm the checkbox is disabled while the page is working");
 						this.ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
 						break;
 					}
@@ -478,7 +479,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Report.Info("Clicking product checkbox with ID: " + id);
 				selForwardProductReg.SelectProducts_ClickProductByID_(id);
-				TestReport.StartStep("I confirm the checkbox is disabled while the page is working");
+				Report.StartStep("I confirm the checkbox is disabled while the page is working");
 				this.ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
 			}
 

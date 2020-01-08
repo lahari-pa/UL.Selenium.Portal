@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -46,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				OpenBrowsers = SeleniumBrowser.GetTabURLs();
 
-				if (OpenBrowsers.Select(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()) && x.Contains("documentId"))
+				if (OpenBrowsers.Select(x => x.ToLower().Contains(SeleniumBrowser.BaseTestUrl.ToLower()) && x.Contains("documentId"))
 						.Count() > 0)
 				{
 					break;
@@ -56,8 +56,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			OpenBrowsers = SeleniumBrowser.GetTabURLs();
 
-			Report.IsTrue(OpenBrowsers.Select(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()) && x.Contains("documentId")).Count() > 0,
-				"No document is found", "Document has been found as expected: " + OpenBrowsers.FirstOrDefault(x => x.Contains(GlobalParameters.TestUrl) && x.Contains("documentId")));
+			Report.IsTrue(OpenBrowsers.Select(x => x.ToLower().Contains(SeleniumBrowser.BaseTestUrl.ToLower()) && x.Contains("documentId")).Count() > 0,
+				"No document is found", "Document has been found as expected: " + OpenBrowsers.FirstOrDefault(x => x.Contains(SeleniumBrowser.BaseTestUrl) && x.Contains("documentId")));
 
 		}
 
@@ -67,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs();
 			Report.Info("Open browsers: " + string.Join(",", OpenBrowsers));
 			string url =
-				OpenBrowsers.FirstOrDefault(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()) && x.Contains("documentId"));
+				OpenBrowsers.FirstOrDefault(x => x.ToLower().Contains(SeleniumBrowser.BaseTestUrl.ToLower()) && x.Contains("documentId"));
 			SeleniumBrowser.SwitchToTabWithURL(url);
 			Report.Screenshot();
 			Report.Info("Closing browser with url: " + url);

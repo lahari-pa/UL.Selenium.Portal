@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting;
+using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
@@ -18,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see an option for (More Filters|Product ID/Name|Bulk Actions)")]
 		public void GivenIShouldSeeAnOptionFor(string field)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that option " + field + " is present");
+			Report.StartStep(ReportSettings.StepCounter + " - Checking that option " + field + " is present");
 			try
 			{
 				Report.Info("Checking that option " + field + " is present");
@@ -48,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"the Product Grid should have the following headers:")]
 		public void GivenTheProductGridShouldHaveTheFollowingHeaders(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking Product Grid Headers");
+			Report.StartStep(ReportSettings.StepCounter + " - Checking Product Grid Headers");
 			try
 			{
 				Report.Info("Checking Product Grid Headers");
@@ -67,7 +69,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I can navigate between pages using the pagniation buttons at the bottom of the grid")]
 		public void GivenICanNavigateBetweenPagesUsingThePagniationButtonsAtTheBottomOfTheGrid()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking Pagniation");
+			Report.StartStep(ReportSettings.StepCounter + " - Checking Pagniation");
 			try
 			{
 				Report.Info("Checking Pagniation");
@@ -95,7 +97,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I search for the first product in the table")]
 		public void GivenISearchForTheFirstProductInTheTable()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Searching for First Product In Grid");
+			Report.StartStep(ReportSettings.StepCounter + " - Searching for First Product In Grid");
 			try
 			{
 				Report.Info("Searching for First Product In Grid");
@@ -120,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I search for the product saved as: (.*)")]
 		public void GivenISearchForTheProductSavedAs(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Searching for Product Saved as " + savedAs);
+			Report.StartStep(ReportSettings.StepCounter + " - Searching for Product Saved as " + savedAs);
 			try
 			{
 				Report.Info("Searching for Product Saved as " + savedAs);
@@ -366,7 +368,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Row Actions for the most recent product returned")]
 		public void WhenIClickRowActionsForTheFirstProductReturned()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking 'Row Actions' for first product returned");
+			Report.StartStep(ReportSettings.StepCounter + " - Clicking 'Row Actions' for first product returned");
 			try
 			{
 				Report.Info("Clicking 'Row Actions' for first product returned");
@@ -391,7 +393,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Row Actions for product saved as: (.*)")]
 		public void IClickRowActionsForTheProductSavedAs(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking 'Row Actions' for product saved as " + savedAs + ".");
+			Report.StartStep(ReportSettings.StepCounter + " - Clicking 'Row Actions' for product saved as " + savedAs + ".");
 			try
 			{
 				var product = (ProductGridItem)Context.GetFromContext(savedAs);
@@ -416,7 +418,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on the Row Action: (.*)")]
 		public void ClickRowAction(string action)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking on Row Action: " + action);
+			Report.StartStep(ReportSettings.StepCounter + " - Clicking on Row Action: " + action);
 			try
 			{
 				Report.Info("Clicking on Row Action: " + action);
@@ -480,7 +482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Bulk Actions in the Products Grid")]
 		public void GivenIClickBulkActionsInTheProductsGrid()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking Bulk Actions in Products Grid");
+			Report.StartStep(ReportSettings.StepCounter + " - Clicking Bulk Actions in Products Grid");
 			try
 			{
 				Report.Info("Clicking Bulk Actions in Products Grid");
@@ -499,7 +501,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see a popup with header Bulk Actions")]
 		public void ThenIShouldSeeAPopupWithHeaderBulkActions()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking Bulk Actions popup appears");
+			Report.StartStep(ReportSettings.StepCounter + " - Checking Bulk Actions popup appears");
 			try
 			{
 				Report.Info("Checking Bulk Actions popup appears");
@@ -517,7 +519,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the following options available in the Bulk Actions window")]
 		public void ThenIShouldSeeTheFollowingOptionsAvailableInTheBulkActionsWindow(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking Bulk Actions Options");
+			Report.StartStep(ReportSettings.StepCounter + " - Checking Bulk Actions Options");
 			try
 			{
 
@@ -546,7 +548,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on the close button on Bulk Actions")]
 		public void ClickCloseOnBulkActions()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the close button");
+			Report.StartStep(ReportSettings.StepCounter + " - I click the close button");
 			var selBulkActions = new BulkActions();
 			selBulkActions.ClickClose();
 
@@ -559,7 +561,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on the cancel button on the ULSC Sync popup")]
 		public void ClickCancelUlscSyncPopup()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the cancel button");
+			Report.StartStep(ReportSettings.StepCounter + " - I click the cancel button");
 			var selUlscSyncPopup = new SyncUlscProductsDialog();
 			selUlscSyncPopup.ClickCancel();
 
@@ -573,7 +575,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the header: (.*) on the Sync Products to ULSC window")]
 		public void CorrectHeaderShowing(string headerExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Sync Products to ULSC window should appear");
+			Report.StartStep(ReportSettings.StepCounter + " - Sync Products to ULSC window should appear");
 			try
 			{
 				GeneralUtilities.Wait_for_load_finish();
@@ -627,12 +629,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs, string keepOrDelete)
 		{
 			bool delete = keepOrDelete == "delete";
-			TestReport.UseSubSteps = delete;
-			TestReport.StartStep("I generate a random UPC number and save as: " + savedAs);
+			ReportSettings.UseSubSteps = delete;
+			Report.StartStep("I generate a random UPC number and save as: " + savedAs);
 			this.GivenIGenerateARandomUPCNumberAndSaveAs(savedAs);
 			if (delete)
 			{
-				TestReport.StartStep("I delete all products with UPC Number: saved as " + savedAs);
+				Report.StartStep("I delete all products with UPC Number: saved as " + savedAs);
 				this.DeleteAllProductsMatchingCriteria("UPC Number", "saved as " + savedAs);
 			}
 		}
@@ -781,14 +783,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("The Navigation Input was not showing");
 			}
-			TestReport.StartStep(GlobalParameters.StepCount + " - I enter the " + direction + " arrow into the page navigation box");
+			Report.StartStep(ReportSettings.StepCounter + " - I enter the " + direction + " arrow into the page navigation box");
 			Report.Info("Entering the " + direction + " arrow key to the products grid page navigation input");
 			selProductsGrid.KeyToGridNavigationInput(direction);
 			Report.Info("Pressing the enter key");
 			selProductsGrid.KeyToGridNavigationInput("enter");
 			string iteration = direction == "up" ? "increased" : "decreased";
-			GlobalParameters.StepCount++;
-			TestReport.StartStep(GlobalParameters.StepCount + " - I confirm the page number has " + iteration + " by 1");
+			ReportSettings.StepCounter++;
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the page number has " + iteration + " by 1");
 			int currentPage = Convert.ToInt32(selProductsGrid.ActivePage());
 			int difference = direction == "up" ? 1 : -1;
 			Report.IsTrue(currentPage == Convert.ToInt32(pageNavigationValue) + difference,
@@ -877,11 +879,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenASummaryPageShouldOpenInANewBrowserTab()
 		{
 			var OpenBrowsers =
-				SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()))
+				SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(SeleniumBrowser.BaseTestUrl.ToLower()))
 					.ToList();
 			for (int i = 0; i < 30; i++)
 			{
-				OpenBrowsers = SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()))
+				OpenBrowsers = SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(SeleniumBrowser.BaseTestUrl.ToLower()))
 					.ToList();
 				if (OpenBrowsers.Count > 1)
 				{
@@ -915,11 +917,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICloseTheBrowserTabWithTheSummaryPage()
 		{
 			var OpenBrowsers =
-				SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()))
+				SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(SeleniumBrowser.BaseTestUrl.ToLower()))
 					.ToList();
 			for (int i = 0; i < 30; i++)
 			{
-				OpenBrowsers = SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()))
+				OpenBrowsers = SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(SeleniumBrowser.BaseTestUrl.ToLower()))
 					.ToList();
 				if (OpenBrowsers.Count > 1)
 				{
@@ -1047,7 +1049,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Getting ID from context: " + id);
 				id = test.ToString();
 			}
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var selProductsGrid = new ProductsGrid();
 			var selMoreFilters = new MoreFilters();
 			var filters = new List<KeyValuePair<string, string>>();
@@ -1062,7 +1064,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					row["Match"]));
 			}
 			// Cycles through every possible combination of 2 filters
-			TestReport.StartStep("I enter combinations of 2 filters selected");
+			Report.StartStep("I enter combinations of 2 filters selected");
 			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
 			int N = 4;
 			int Q = 2;
@@ -1139,7 +1141,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 			}
-			TestReport.StartStep("I enter combinations of 3 filters selected");
+			Report.StartStep("I enter combinations of 3 filters selected");
 			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
 			// Cycles through every combination of 3 filters
 			Q = 3;
@@ -1191,7 +1193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					z = k % 2 == 0 || k == 0 ? z * -1 : z;
 				}
 			}
-			TestReport.StartStep("I enter combinations of 4 filters selected");
+			Report.StartStep("I enter combinations of 4 filters selected");
 			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
 			// Cycles through every combination of 4 filters
 			Q = 4;
@@ -1378,11 +1380,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm retailers list based on environment")]
 		public void SeeFollowingOptionsMoreFilters()
 		{
-			if (GlobalParameters.SiteType == "Development")
+			if (TReVorSettings.SoftwareBranch == "Development")
 			{
-				TestReport.UseSubSteps = true;
+				ReportSettings.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
-				TestReport.StartStep("I should only see the following retailers");
+				Report.StartStep("I should only see the following retailers");
 				var produtTable = new TechTalk.SpecFlow.Table(new string[] {
 				"Option"
 			});
@@ -1553,11 +1555,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
 			}
-			if (GlobalParameters.SiteType == "Staging")
+			if (TReVorSettings.SoftwareBranch == "Staging")
 			{
-				TestReport.UseSubSteps = true;
+				ReportSettings.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
-				TestReport.StartStep("I should only see the following retailers");
+				Report.StartStep("I should only see the following retailers");
 				var produtTable = new Table(new string[] {
 				"Option"
 			});
@@ -1713,11 +1715,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
 			}
-			if (GlobalParameters.SiteType == "Local Production")
+			if (TReVorSettings.SoftwareBranch == "Local Production")
 			{
-				TestReport.UseSubSteps = true;
+				ReportSettings.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
-				TestReport.StartStep("I should only see the following retailers");
+				Report.StartStep("I should only see the following retailers");
 				var produtTable = new Table(new string[] {
 				"Option"
 			});
@@ -2281,7 +2283,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"If my products grid does not contain enough products then I add them until it displays '...' grid navigation option")]
 		public void AddProductsInMyProductsGrid()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var selProdGrid = new ProductsGrid();
 			var newStepsProd = new Steps_ProductSetup();
 			var homePage = new StepsHomepage();

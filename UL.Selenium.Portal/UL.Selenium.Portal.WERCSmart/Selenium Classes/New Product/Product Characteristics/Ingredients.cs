@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
@@ -1093,7 +1093,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					currentlySelectedOptionsStr.Add(item.Text);
 				}
 
-				if (currentlySelectedOptionsStr.Contains("×" + option))
+				if (currentlySelectedOptionsStr.Contains("ï¿½" + option))
 				{
 					Report.Info($"The correct Purpose was selectd.");
 				}
@@ -1138,7 +1138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				selectedOptionsStr.Add(item.Text);
 			}
 
-			if (selectedOptionsStr.Contains("×" + functionalPurpose))
+			if (selectedOptionsStr.Contains("ï¿½" + functionalPurpose))
 			{
 				Report.Info($"The correct Purpose was selected.");
 			}

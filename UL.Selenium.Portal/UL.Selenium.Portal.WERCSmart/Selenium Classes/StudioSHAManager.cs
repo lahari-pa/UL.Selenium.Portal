@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -1045,7 +1045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							string.Join(",", ListOfTopMenuOptions.Select(x => x.GetValue(true)).ToList()));
 				if (menuOption != null)
 				{
-					return menuOption.TryClick(ClickFunctionality.ClickType.JavaScript);
+					return menuOption.TryClick(ClickExtensions.ClickType.JavaScript);
 				}
 				else
 				{

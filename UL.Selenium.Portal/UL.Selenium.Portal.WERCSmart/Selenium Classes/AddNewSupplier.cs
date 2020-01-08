@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using iTextSharp.text;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
 using OpenQA.Selenium;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
