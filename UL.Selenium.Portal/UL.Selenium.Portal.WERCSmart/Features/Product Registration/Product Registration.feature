@@ -107,9 +107,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	# UPC: 630509616084
 	# DPCI: 087-06-680
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
-	Then The home screen should load
-	Given I delete all products with UPC Number: 012345678905
+	Given I generate a random UPC number and save as: UPC63724
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
 	Then I save the product information as: TestCase63724
@@ -132,12 +130,12 @@ Scenario: [63724] Add New product - Single Battery Product
 	And in the New Product page I click Continue
 	Given I click the 'Add UPC' button
 	Then I add the following into the UPC Fields
-		| Field         | Value        |
-		| UPCNumber     | 012345678905 |
-		| ContainerType | Aerosol Can  |
-		| Size          | 20           |
-		| DPCI          | 087-16-0238  |
-		| Quantity      | 12           |
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC63724 |
+		| ContainerType | Aerosol Can       |
+		| Size          | 20                |
+		| DPCI          | 087-16-0238       |
+		| Quantity      | 12                |
 	#Regulatory Documents to Provide - US only _ request authoring - Happy Path
 	Given in the New Product page I click Continue
 	And I should see the Regulatory Documents to Provide Page
@@ -192,7 +190,8 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And In the Additional Information Page the check box for: United States should be: checked
 	And I set 'Product has been classified using OSHA' to: No
 	And I set 'Product is shipped directly' to: No
-	And I set 'California's Cleaning Product' to: No
+	# CA Cleaning question commented out, uncomment when CA Cleaning is re-added
+	#And I set 'California's Cleaning Product' to: No
 	And I set 'Product is a Retailers Private Label or Brand' to: No
 	And I set 'Product is solely for the Retailer's use' to: No
 	Given in the New Product page I click Continue
