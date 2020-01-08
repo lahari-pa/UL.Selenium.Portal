@@ -792,6 +792,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Report.Info($"Row Values is a list of strings containing the following values: {string.Join(",", rowValues)}");
 							Report.Info($"Row Value at I was: {rowValues[i]}");
 							thisProduct.GHS = rowValues[i].Trim();
+							Report.Info($"Row value added for GHS");
 							break;
 						case "Refeed":
 							Report.Info($"Starting on: Refeed");
