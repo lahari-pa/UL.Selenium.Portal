@@ -1083,7 +1083,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Delay.Seconds(2);
 					i++;
 				}
-				if(alertText.IsNullOrEmpty() && i==6)
+				if(alertText.IsNullOrEmpty() && i==11)
 				{
 					Report.Info("The Alert Text was still found to be empty after 5 total attempts");
 				}
