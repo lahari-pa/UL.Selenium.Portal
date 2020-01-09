@@ -156,6 +156,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if(alertText == null)
 			{
 				alertText = "";
+				Report.Failure("The alertText was Null. Setting to empty but Alert text was expected!");
+				
 			}
 
 			Report.Info("Alert is showing as: " + alertText);

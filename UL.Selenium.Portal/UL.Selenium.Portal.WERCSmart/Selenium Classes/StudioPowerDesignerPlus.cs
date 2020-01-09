@@ -1075,12 +1075,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Alert Found, Trying to get the Text of the Alert");
 				string alertText = SeleniumBrowser.Alert.GetText();
 				int i = 2;
-				while(alertText.IsNullOrEmpty()|| i<6)
+				while(alertText.IsNullOrEmpty()|| i<11)
 				{
 					Report.Info($"No Text Was Found In the Alert, Trying again");
 					Report.Info($"Looking for alert text. Attempt: {i}");
 					alertText = SeleniumBrowser.Alert.GetText();
-					Delay.Seconds(1);
+					Delay.Seconds(2);
 					i++;
 				}
 				if(alertText.IsNullOrEmpty() && i==6)
