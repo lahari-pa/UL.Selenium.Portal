@@ -6766,8 +6766,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             Report.Screenshot();
             Report.StartStep("I click Process Documents");
             thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
-            Delay.Seconds(2);
-            Report.Screenshot();
+            Delay.Seconds(5);
+            //Report.Screenshot();
+			Report.Info("Now waiting for spinner");
             GeneralUtilities.StudioWaitForSpinner(60);
             Report.StartStep(
                 "I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
@@ -7892,7 +7893,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             thisStepsSha.InSupplierManagerPopupIEnterSearchTerm(email);
 
             Report.StartStep("I Select the 'Email' Radio Button");
-            thisStepsSha.InSupplierManagerPopupISelectRadioButton("Vendor");
+            thisStepsSha.InSupplierManagerPopupISelectRadioButton("E-Mail");
 
             Report.StartStep("I click on the search button");
             thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
