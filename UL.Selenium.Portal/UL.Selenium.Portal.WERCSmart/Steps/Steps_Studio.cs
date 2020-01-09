@@ -133,7 +133,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(2);
 			var thisCurrentDocument = new CurrentDocument();
 			Report.Info("Get alert text");
-			string alertText = "";
+			string alertText= null;
 			try
 			{
 				alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
