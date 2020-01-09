@@ -1085,7 +1085,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				if(alertText.IsNullOrEmpty() && i==11)
 				{
-					Report.Info("The Alert Text was still found to be empty after 5 total attempts");
+					Report.Info("The Alert Text was still found to be empty after 10 total attempts");
 				}
 				Report.Screenshot();
 				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
