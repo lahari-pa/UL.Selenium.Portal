@@ -720,6 +720,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure($"Context did not contain the Product saved as: {savedas}");
 			}
+			else
+			{
+				Report.Info("Found in Context");
+			}
 			var obj = Context.GetFromContext(savedas);
 			Report.Info("Attempting to convert Product to type ProductInformation");
 			var Product = (ProductInformation)obj;

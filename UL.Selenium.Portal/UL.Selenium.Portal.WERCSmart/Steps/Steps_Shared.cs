@@ -87,7 +87,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             Report.StartStep("In the New Product page I click Continue");
             MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
             ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
-            Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
+			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
+
+			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
         }
 
         [StepDefinition(@"I call Shared Step 60779 \(Enter Liquid - Cooking Oil - Non-Aerosol\)")]
