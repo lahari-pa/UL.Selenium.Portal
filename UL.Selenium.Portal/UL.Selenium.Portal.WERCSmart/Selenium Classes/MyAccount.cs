@@ -2,16 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using System.Collections.ObjectModel;
 using TechTalk.SpecFlow;
+using UL.Automation.Utilities;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RetailerAbbreviations;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -262,11 +263,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					break;
 				}
 				Report.Info("User Not Found On Page " + myPageNumber.Text + ", Navigating to Next Page");
+				myNext.ScrollElementIntoView();
 				if (!myNext.TryClick())
 				{
 					throw new Exception("Failed to click move to next page");
 				}
 				pageNo++;
+				Delay.Seconds(1);
 			}
 			Report.Info("User: " + userName + " Has Not Been Created");
 			Report.Screenshot();
@@ -479,6 +482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return subLevel.Text.Trim() == subscription;
 
 		}
+
 
 		//Accounts Navigation
 		[FindsBy(How = How.Id, Using = "myAccounts_navigation")]
@@ -701,7 +705,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Invoice_Email_Arrived: " + invoice_no);
 
-			if (!EmailFunctions.CheckEmailHasArrived("Invoice " + invoice_no + " is attached", email_address))
+			if (!MailosaurFunctions.CheckEmailHasArrived("Invoice " + invoice_no + " is attached", email_address))
 			{
 				Report.Info("Invoice Email has Not Arrived");
 				return false;
@@ -853,7 +857,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public void NumToUserGridNavPageInput(string pageNumber)
+		public void NumToUserGridNavPageInput2(string pageNumber)
 		{
 			IWebElement inputEl = this.UserGridNavPageInput();
 			if (inputEl == null)
@@ -863,6 +867,62 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			inputEl.EnterText(pageNumber);
 		}
+
+
+		public void NumToUserGridNavPageInput(string pageNumber)
+		{
+			int i = 0;
+			while (i < 5)
+			{
+				try
+				{
+					IWebElement inputEl = this.UserGridNavPageInput();
+					if (inputEl == null)
+					{
+						Report.Info("The Num input was not displayed. Clicking the '...' navigation element");
+						this.UserGridNavigation("...");
+						inputEl = this.UserGridNavPageInput();
+						if (inputEl == null)
+						{
+							return; 
+						}
+						Report.Info("Entering page number: " + pageNumber);
+						//inputEl.EnterText(pageNumber);
+						//inputEl.Clear();
+						string text = inputEl.GetAttribute("value");
+						int textLength = text.Length;
+						int count = 0;
+						while (count < textLength)
+						{
+							inputEl.SendKeys(Keys.Delete);
+							count++;
+						}
+						inputEl.SendKeys(pageNumber);
+						return;
+					}
+					inputEl.EnterText(pageNumber);
+					return;
+				}
+				catch (StaleElementReferenceException ex)
+				{
+					Report.Info("inputEl threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the inputEl again if the number of attempts has not exceeded 5");
+
+				}
+				catch (Exception ex)
+				{
+					Report.Info("Exception: " + ex.Message);
+					return;
+				}
+
+			}
+			return;
+
+
+		}
+	
 
 		public string CurrentPageUserGridNavPageInput()
 		{
@@ -936,7 +996,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickSaveButtonForStewardshipNumbers()
 		{
 			IWebElement SaveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@data-bind='with: stewardshipNumberModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
-
+			
 			return SaveButton.TryClick();
 		}
 
@@ -1083,6 +1143,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IWebElement CloseButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[text()='Change User Password']/../following-sibling::div/following-sibling::div//button[text()='Close']"), 2);
 			return CloseButton.TryClick();
+		}
+
+		public bool PasswordTooRecentPopupPresent()
+		{
+			IWebElement tooRecentPopup = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]"), 2);
+			return tooRecentPopup != null;
+		}
+
+		public bool ClickCloseInPasswordTooRecentPopup()
+		{
+			IWebElement tooRecentPopupClose = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]//button[text()='Close']"), 2);
+			return tooRecentPopupClose.TryClick();
 		}
 
 	}
@@ -1699,6 +1771,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//UPGRADE Button
 		[FindsBy(How = How.XPath, Using = ".//div/a[text()='Upgrade']")]
 		private IWebElement _btnUpgrade;
+
+		public bool ConfirmThatInTheMiddleOfThePageYouSeeTheUpgradeButton()
+		{
+			Report.Info("Beginning ConfirmThatInTheMiddleOfThePageYouSeeTheUpgradeButton");
+			if(this._btnUpgrade == null)
+			{
+				Report.Info("Upgrade Button was not Found!");
+				return false;
+			}
+			Report.Info("Upgrade Button Found!");
+			return true;
+		}
 
 		public bool Upgrade_click()
 		{

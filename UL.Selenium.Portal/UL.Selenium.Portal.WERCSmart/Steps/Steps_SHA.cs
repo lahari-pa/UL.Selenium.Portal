@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Cache;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
 using TReVor.Api.Wrapper.Classes;
 using System.IO;
-using Castle.Core.Internal;
+using UL.Automation.Reporting;
+using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -43,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I navigate to Portal")]
 		public void GivenINavigateToPortal()
 		{
-			SeleniumBrowser.WebBrowser.Url = GlobalParameters.TestUrl;
+			SeleniumBrowser.WebBrowser.Url = SeleniumBrowser.BaseTestUrl;
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
@@ -79,17 +80,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIClickTopMenuItemAndSubMenuItem(string menuItem, string submenuItem)
 		{
 			var thisTopMenu = new StudioTopMenu();
-			Report.IsTrue(thisTopMenu.Wait_for_load(30), "Top menu has not loaded", "Top menu has loaded", ShowSuccessScreenshot: false);
+			Report.IsTrue(thisTopMenu.Wait_for_load(30), "Top menu has not loaded", "Top menu has loaded", showSuccessScreenshot: false);
 
 			if (submenuItem.Length == 0)
 			{
 				Report.IsTrue(thisTopMenu.ClickTopMenuItem(menuItem), "Failed to click: " + menuItem,
-					"Successfully clicked: " + menuItem, ShowSuccessScreenshot: false);
+					"Successfully clicked: " + menuItem, showSuccessScreenshot: false);
 			}
 			else
 			{
 				Report.IsTrue(thisTopMenu.ClickSubMenu(menuItem, submenuItem), "Failed to click: " + menuItem,
-					"Successfully clicked: " + submenuItem, ShowSuccessScreenshot: false);
+					"Successfully clicked: " + submenuItem, showSuccessScreenshot: false);
 			}
 
 		}
@@ -402,7 +403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				counter++;
 			}
-			Report.IsTrue(found, "Expected: id=" + ID + " and status " + status, "Statuses match", ShowSuccessScreenshot: false);
+			Report.IsTrue(found, "Expected: id=" + ID + " and status " + status, "Statuses match", showSuccessScreenshot: false);
 		}
 
 		[StepDefinition(@"I confirm that the status of the product saved as: (.*) is: (.*)")]
@@ -481,7 +482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string ID = ProductDetails.Id;
 
 			Report.IsTrue(new StudioSHAManager().RightClickProductByID(ID), "Failed to rightclick against: " + ID,
-				"Right clicked against: " + ID, ShowSuccessScreenshot: false);
+				"Right clicked against: " + ID, showSuccessScreenshot: false);
 		}
 
 
@@ -1168,7 +1169,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Notification History Screen I confirm that one of the rows is as follows:")]
 		public void ThenInTheNotificationHistoryScreenIConfirmThatOneOfTheRowsIsAsFollows(Table table)
 		{
-			Report.TableRow(table.Rows[0]);
+			SpecFlowReporting.TableRow(table.Rows[0]);
 			Report.Info("Getting displayed notifications");
 			var thisProductNotificationHistory = new ProductNotificationHistory();
 			List<Notification> notifications = thisProductNotificationHistory.GetNotifications();
@@ -1316,7 +1317,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInSHAManagerISetTheFilterForStatusTo(string status)
 		{
 			var myStudioShaManager = new StudioSHAManager();
-			TestReport.StartStep("I set the status filter to " + status);
+			Report.StartStep("I set the status filter to " + status);
 			myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter(status);
 			Report.Info("Status has been set");
@@ -1503,10 +1504,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					thisStudioPowerDesignerPlusDesignMode.QuickSearch(thisProduct.ID);
 				}
 
-				TestReport.StartStep("Looking at id: " + thisProduct.ID);
+				Report.StartStep("Looking at id: " + thisProduct.ID);
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60);
 				//studioSteps.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
-				TestReport.StartStep("I check the PH value");
+				Report.StartStep("I check the PH value");
 				studioSteps.GivenInPowerDesignerIDoubleClickOnCategory("pH value");
 				var thisValueEditor = new ValueEditor();
 				string currentValue = thisValueEditor.GetSelectedValue();
@@ -1766,11 +1767,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Screenshot();
 					return;
 				}
-				Report.Info($"The list of displayed UPCs was: {string.Join(",", displayedUpcs)}");
+				Report.Info($"The list of displayed UPCs was: {string.Join(", ", displayedUpcs.Select(x => x.UPCNumber).ToList())}");
 
 				Report.Info($"Checking if the UPC needed is saved in context");
+
 				if (upc.ToLower().Contains("saved as"))
 				{
+					Report.Info("The UPC Input value contained the text 'saved as'");
 					upc = Context
 						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 						.ToString();
@@ -2339,15 +2342,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I find a UPC number for any product in the grid and save to context as: (.*)")]
 		public void SaveUpcNumberForAnyProduct(string savedAs)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("Getting all product ids from the table");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Getting all product ids from the table");
 			//int productsToTry = new StudioSHAManager().GetProductCount();
 			var ids = new StudioSHAManager().GetAllProductIds();
 			Report.Info("There are " + ids.Count + " product ids");
 			//List<Product> products = new StudioSHAManager().GetTopXProducts(10);
 			for (int i = 0; i < ids.Count; i++)
 			{
-				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				Report.StartStep("Saving any UPCs for product on row " + (i + 1));
 				string id = ids[i];
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
 				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
@@ -2363,13 +2366,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I find a UPC number for any product not belonging to Supplier: (.*) in the grid and save to context as: (.*)")]
 		public void SaveUpcNumberForAnyProductNotCompany(string notSupplier, string savedAs)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			int productsToTry = new StudioSHAManager().GetProductCount();
 			Report.Info("There are " + productsToTry + " products");
 			List<Product> products = new StudioSHAManager().GetTopXProducts(productsToTry);
 			for (int i = 0; i < productsToTry; i++)
 			{
-				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				Report.StartStep("Saving any UPCs for product on row " + (i + 1));
 				string id = products[i].ID;
 				if (products[i].Supplier == notSupplier)
 				{
@@ -2400,7 +2403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheAuthoringMenuISelectPowerDesignerPlus()
 		{
 			var thisTopMenu = new StudioTopMenu();
-			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", ShowSuccessScreenshot: false);
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
 			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
 				"Failed to navigate to power designer plus", "Navigated to power designer plus");
 			Delay.Seconds(3);
@@ -2428,7 +2431,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I find the UPC number for: (.*) products in the grid and save them to context starting with: (.*)")]
 		public void SaveUpcNumberForXProducts(int numberOfProducts, string savedAs)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			Context.AddToContext("numberOfUpcnumbers", numberOfProducts);
 			int productsToTry = new StudioSHAManager().GetProductCount();
 			Report.Info("There are " + productsToTry + " products");
@@ -2438,7 +2441,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 
 
-				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				Report.StartStep("Saving any UPCs for product on row " + (i + 1));
 				string id = products[i].ID;
 				Report.IsTrue(new StudioSHAManager().RightClickProductByID(id), "Failed to right click product", "Right clicked product");
 				this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
@@ -2480,7 +2483,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int numberOfProducts = (int)Context.GetFromContext("numberOfUpcnumbers");
 
 			var spreadSheetFile = (string)Context.GetFromContext(spreadsheetSavedAs);
-			var excel = new ExcelUtilities(spreadSheetFile, "Sheet1");
+			var excel = new ExcelFunctions(spreadSheetFile, "Sheet1");
 
 			for (int i = 1; i <= numberOfProducts; i++)
 			{
@@ -2499,7 +2502,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I find a UPC number for: (.*) products not belonging to Supplier: (.*) in the grid and save to context starting with: (.*)")]
 		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			Context.AddToContext("numberOfUpcnumbers", numberOfProducts);
 			int productsToTry = new StudioSHAManager().GetProductCount();
 			Report.Info("There are " + productsToTry + " products");
@@ -2507,7 +2510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int j = 1;
 			for (int i = 0; i < productsToTry; i++)
 			{
-				TestReport.StartStep("Saving any UPCs for product on row " + (i + 1));
+				Report.StartStep("Saving any UPCs for product on row " + (i + 1));
 				string id = products[i].ID;
 				if (products[i].Supplier == notSupplier)
 				{
@@ -2549,10 +2552,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I navigate to SHA Manager and save a UPC to context as: (.*) for trevor account: (.*)")]
 		public void NavigateToShaSaveUpcToContext(string upcSavedAs, string accountSavedAs)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I log in to Studio and open SHA Manager");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I log in to Studio and open SHA Manager");
 			new Steps_Shared().GivenICallShared65080LoginToStudioAndOpenSHAManager();
-			TestReport.StartStep("I click Search");
+			Report.StartStep("I click Search");
 			this.IClickTheFollowingOptionInTheBottomMenu("Search");
 			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
 			var username = "";
@@ -2563,9 +2566,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var table = new Table("Search Term", "Search Value");
 			table.AddRow("Status", "Completed");
 			table.AddRow("User", username);
-			TestReport.StartStep("I run a search for status Completed and user: " + username);
+			Report.StartStep("I run a search for status Completed and user: " + username);
 			this.GivenInSHAManagerPageIRunSearch(table);
-			TestReport.StartStep("I save the upc for any returned product as: " + upcSavedAs);
+			Report.StartStep("I save the upc for any returned product as: " + upcSavedAs);
 			this.SaveUpcNumberForAnyProduct(upcSavedAs);
 
 		}
@@ -2622,19 +2625,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				int colCount = ExcelUtils.Excel_GetNoColumns();
 				List<string> RowData = ExcelUtils.Excel_GetRow(1);
 
 				Report.IsTrue(colCount == RowData.Count,
-					FailureMessage: "The number of Columns, " + colCount + " does not equal the number of datapoints. Expected " + RowData.Count,
-					SuccessMessage: "The number of Columns matches the number of datapoints as expected");
+					failureMessage: "The number of Columns, " + colCount + " does not equal the number of datapoints. Expected " + RowData.Count,
+					successMessage: "The number of Columns matches the number of datapoints as expected");
 
 				foreach (string data in RowData)
 				{
 					Report.IsTrue(int.TryParse(data, out int result),
 						"Report contains unexpected non-integer value " + data,
-						ShowSuccessScreenshot: false);
+						showSuccessScreenshot: false);
 				}
 			}
 		}
@@ -2663,7 +2666,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("Studio SHA Manager is not showing");
 			}
 
-			TestReport.StartStep("Click " + actionType);
+			Report.StartStep("Click " + actionType);
 			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption(actionType),
 				"Failed to click " + actionType, "Clicked " + actionType);
 		}
@@ -2787,8 +2790,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InSHAISearchForExactUPCInForUPCSavedAs(string status, string savedAs)
 		{
 
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I set the status filter to All");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I set the status filter to All");
 			var myStudioShaManager = new StudioSHAManager();
 			myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter("All");
@@ -2814,15 +2817,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				status
 			});
 
-			TestReport.StartStep("I click Srch in the bottom menu list");
+			Report.StartStep("I click Srch in the bottom menu list");
 			myStudioShaManager.ClickBottomMenuOption("Search");
 			var myStepsSha = new Steps_SHA();
-			TestReport.StartStep($"I enter ID: {upc} in the UPC box, change Status drop down to All, Click find");
+			Report.StartStep($"I enter ID: {upc} in the UPC box, change Status drop down to All, Click find");
 			Report.Info("Searching for: " + upc);
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 			Delay.Seconds(1);
 			Report.Info("Waiting for product list");
-			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing", ShowSuccessScreenshot: false);
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing", showSuccessScreenshot: false);
 
 
 		}
@@ -2881,8 +2884,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Attempting to enter start (" + startDate + ") and end (" + endDate + ") dates");
 			Report.IsTrue(new AdvancedReportingDateForm().EnterStartEndDates(startDate, endDate),
-				FailureMessage: "Failed to update the date fields",
-				SuccessMessage: "Successfully updated the date fields");
+				failureMessage: "Failed to update the date fields",
+				successMessage: "Successfully updated the date fields");
 		}
 
 		[StepDefinition(@"In the 3rd Party Formula Use in Registrations text box I enter the CAS Number without the WPS for ingredient: (.*)")]
@@ -2919,8 +2922,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIVerifyThePreparingReportPopupDisplays(string expectedTitle)
 		{
 			Report.IsTrue(new SHAAdvancedReporting().VerifyPopupTitle(expectedTitle, out string output),
-				FailureMessage: "Popup title is not displaying " + expectedTitle + "; instead it displays " + output,
-				SuccessMessage: "Popup displays title " + expectedTitle + " as expected");
+				failureMessage: "Popup title is not displaying " + expectedTitle + "; instead it displays " + output,
+				successMessage: "Popup displays title " + expectedTitle + " as expected");
 		}
 
 		/// <summary>
@@ -2933,16 +2936,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICheckUPCNumberXObsoleteUPCOptionPresence(string savedAs, string retailer, string presence)
 		{
 			//For Testing the Dupe UPC Sha Tool
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 
 			var studioSHAManger = new StudioSHAManager();
 			var shaSteps = new Steps_SHA();
 			Delay.Seconds(10);
 			new Steps_SHA().SwitchToProductListUpcWindow();
 			Delay.Seconds(4);
-			TestReport.StartStep($"I Click on the link associated with the UPC saved as: {savedAs}");
+			Report.StartStep($"I Click on the link associated with the UPC saved as: {savedAs}");
 			studioSHAManger.ClickUPCSavedAsInProducUPCTable(savedAs);
-			TestReport.StartStep("I Check the UPC detail popup appears");
+			Report.StartStep("I Check the UPC detail popup appears");
 			var upcDetails = new StudioSHAManagerUPCDetails();
 			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
 			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");
@@ -2955,7 +2958,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 			}
-			TestReport.StartStep("I Select the Client: " + retailer + " from the select client list");
+			Report.StartStep("I Select the Client: " + retailer + " from the select client list");
 			IWebElement input = upcDetails.SelectClientInput;
 			if (input == null)
 			{
@@ -2963,9 +2966,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			input.Select(retailer);
-			TestReport.StartStep("I wait for the UPC Details Table to Load");
+			Report.StartStep("I wait for the UPC Details Table to Load");
 			Report.IsTrue(upcDetailsPopupTable.UpcDetailsTableLoadedOrNull(30), "The UPC details Table did not Appear", "The UPC details Table appeared");
-			TestReport.StartStep($"I Confirm that the Obsolete UPC button {presence} appear");
+			Report.StartStep($"I Confirm that the Obsolete UPC button {presence} appear");
 			bool expectedPresenceBool = false;
 
 			switch (presence)
@@ -2986,8 +2989,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: (.*)")]
 		public void ISearchForAProductContainingDuplicateUPCSUsingSpreadSheet(string savedAs)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("Replacing the Spreadsheet with a new copy from the embedded resource");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Replacing the Spreadsheet with a new copy from the embedded resource");
 			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder("UPCsDuplicatedwithinAccount.xlsx"), "", "");
 
 			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.UPCsDuplicatedwithinAccount.xlsx", out string destination))
@@ -2996,13 +2999,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
-			var utils = new ExcelUtilities(destination, "Table");
+			var utils = new ExcelFunctions(destination, "Table");
 
 			List<string> UpcNumbers = utils.Excel_GetColumn(1); //includes the header (so start search at 1 not 0)
 
 			for (int i = 1; i < UpcNumbers.Count; i++)
 			{
-				TestReport.StartStep($"Searching SHA for a upc found in the duplicate UPC spread sheet. Attempt: {i}");
+				Report.StartStep($"Searching SHA for a upc found in the duplicate UPC spread sheet. Attempt: {i}");
 				string DupeUPCNumberCurrent = UpcNumbers[i];
 				//do a search for this value in sha
 				//if 2 or more products show,then save this to context then the retailer and id. (use coloums they are in and the same i value)
@@ -3010,7 +3013,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Context.AddToContext($"DupeUPCNumber{savedAs}", DupeUPCNumberCurrent);
 				new Steps_SHA().InSHAISearchForExactUPCInForUPCSavedAs("All", $"DupeUPCNumber{savedAs}");
 				int numProducts = new StudioSHAManager().GetProductCount();
-				TestReport.StartStep("Ensuring the upc was searched for succesfully and that it is a duplicate by checking the number of products found is 2 or more");
+				Report.StartStep("Ensuring the upc was searched for succesfully and that it is a duplicate by checking the number of products found is 2 or more");
 				if (numProducts > 1)
 				{
 					Report.Success("The UPC was searched for succesfully and multiple Products were found");
@@ -3046,30 +3049,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICloseTheUPCDetailsPopup()
 		{
 
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
-			TestReport.StartStep("I click the close button in the UPC details popup");
+			Report.StartStep("I click the close button in the UPC details popup");
 			Report.IsTrue(upcDetailsPopupTable.CloseButton.TryClick(), "Failed to Click Close in the UPC details popup", "Successfully clicked Click Close in the UPC details popup");
-			TestReport.StartStep("I check to see if the UPC details popup has closed");
+			Report.StartStep("I check to see if the UPC details popup has closed");
 			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");
 		}
 
 		[StepDefinition(@"I Click the Obsolete Button and Check a Popup Appears with 'Cancel' and 'Continue' buttons and the following message: (.*)")]
 		public void IClickObsoleteAndCheckAPopUpAppearsWithButtonsAndMessageX(string expectedMessage)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
 			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
 
-			TestReport.StartStep("I click the Obsolete UPC button in the UPC details popup");
+			Report.StartStep("I click the Obsolete UPC button in the UPC details popup");
 			Report.IsTrue(upcDetailsPopupTable.ObsoleteUPCButton.TryClick(), "Failed to Click Obselete UPC in the UPC details popup", "Successfully clicked Click Obselete UPC in the UPC details popup");
-			TestReport.StartStep("I check the Confirm Obsolete UPC popup appears");
+			Report.StartStep("I check the Confirm Obsolete UPC popup appears");
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.WaitForContainerToBeVisible(10), "The Confirm Obsolete UPC popup did not appear", "The Confirm Obsolete UPC popup appeared");
-			TestReport.StartStep("I Check that there is a Cancel Button in the Confirm Obsolete UPC popup");
+			Report.StartStep("I Check that there is a Cancel Button in the Confirm Obsolete UPC popup");
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.CancelButtonPresent(), "The Cancel Button was not present in the Confirm Obsolete UPC popup", "The Cancel Button was present in the Confirm Obsolete UPC popup");
-			TestReport.StartStep("I Check that there is a Continue Button in the Confirm Obsolete UPC popup");
+			Report.StartStep("I Check that there is a Continue Button in the Confirm Obsolete UPC popup");
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.ContinueButtonPresent(), "The Continue Button was not present in the Confirm Obsolete UPC popup", "The Continue Button was present in the Confirm Obsolete UPC popup");
-			TestReport.StartStep("I check the text in the Confirm Obsolete UPC popup matches the expected text");
+			Report.StartStep("I check the text in the Confirm Obsolete UPC popup matches the expected text");
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.ConfirmObseleteUPCMessage(expectedMessage), "The found message did not match the expected text", "The found message matched the expected text");
 
 		}
@@ -3077,15 +3080,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click close in the Confirm Obsolete UPC popup, and the Confirm Obsolete UPC popup is closed and the UPC Details Popup remains on screen.")]
 		public void IClickCloseInTheConfirmObsoleteUPCPopUpAndCheckItClosesAndTheUPCDetailsPopUpRemains()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var upcDetails = new StudioSHAManagerUPCDetails();
 			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
 			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
-			TestReport.StartStep("I Click Cancel in the Confirm Obsolete UPC popup");
+			Report.StartStep("I Click Cancel in the Confirm Obsolete UPC popup");
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.CancelButton.TryClick(), "Failed to to click Cancel", "Successfully clicked Cancel");
-			TestReport.StartStep("I Check that the Confrim Obsolete UPC popup has gone");
+			Report.StartStep("I Check that the Confrim Obsolete UPC popup has gone");
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.WaitForContainerToBeInvisible(10), "The Confirm Obsolete UPC popup appeared", "The Confirm Obsolete UPC popup did not appear");
-			TestReport.StartStep("I Check that the UPC details popup still appears.");
+			Report.StartStep("I Check that the UPC details popup still appears.");
 			Report.IsTrue(upcDetails.Wait_for_load(30), "The UPC details popup did not appear", "The UPC details popup appeared");
 
 		}
@@ -3093,14 +3096,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Continue in the Confirm Obsolete UPC popup, and the Confirm the Manager Validation Require Popup appears.")]
 		public void IClickContinueInTheConfirmObsoleteUPCPopUpAndCheckItTheManagerValidationPopupAppears()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var upcDetails = new StudioSHAManagerUPCDetails();
 			var upcDetailsPopupTable = new StudioSHAManagerUPCDetailsPopupTable();
 			var upcDetailsConfrimObsoletePopup = new StudioSHAManagerUPCDetailsPopupObselteUPCConfrimrationPopup();
 			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();
-			TestReport.StartStep("I Click Continue in the Confirm Obsolete UPC popup");
+			Report.StartStep("I Click Continue in the Confirm Obsolete UPC popup");
 			Report.IsTrue(upcDetailsConfrimObsoletePopup.ContinueButton.TryClick(), "Failed to to click Continue", "Successfully clicked Continue");
-			TestReport.StartStep("I Check that the Manager Validation Required Popup appears");
+			Report.StartStep("I Check that the Manager Validation Required Popup appears");
 			Report.IsTrue(managerValidationPopup.WaitForContainerToBeVisible(10), "The Manager Validation Required Popup did not appeared", "The Manager Validation Required Popup appeared");
 
 
@@ -3117,8 +3120,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Check that for the product: (.*) the Details in SHA Manager Match the details found in the file: (.*)")]
 		public void ICheckThatForTheProductXTheDetailsInSHAManagerMatchTheFile(string productInfoSavedAs, string fileSavedAs)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I Find the details in SHA manager for the product on screen.");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I Find the details in SHA manager for the product on screen.");
 			List<Product> productsShown = new StudioSHAManager().GetTopXProducts(1);
 			if (!productsShown.Any())
 			{
@@ -3144,11 +3147,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var shrdStep = new Steps_Shared();
 
 
-			TestReport.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
+			Report.StartStep($"Checking that the details found in SHA, match those found in the file saved as: {fileSavedAs}");
 			string file = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!file.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + file))
 			{
-				var utils = new ExcelUtilities(file.ToString(), "Table");
+				var utils = new ExcelFunctions(file.ToString(), "Table");
 				var rows = utils.Excel_GetNoRows();
 				for (int i = 1; i < rows; i++)
 				{
@@ -3175,7 +3178,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.IsTrue(shaClients.Contains(rowContents[5]), "The Clients in SHA did not match the Retailers associated in the file", "The Clients in SHA matched the Retailers associated in the file");
 
 
-						//TestReport.StartStep($"I right click on the product with ID: {fileProductID}");
+						//Report.StartStep($"I right click on the product with ID: {fileProductID}");
 						new Steps_Shared().Shared75309_SHA_SelectProduct_UpcList(productInfoSavedAs);
 						var studioSHAManger = new StudioSHAManager();
 
@@ -3185,7 +3188,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
 						Report.Info($"The number of UPCs displayed in the UPC Details page is: {displayedUpcs.Count}");
 						Report.IsTrue(displayedUpcs.Count.ToString() == rowContents[6], "The number of UPCS in SHA for the product did not match the Number of Active UPCs for the product in the file", "The number of UPCS in SHA for the product matched the Number of Active UPCs for the product in the file");
-						TestReport.StartStep($"Checking that the date that appears under the 'Current Submission' column in SHA Manager is exactly one year before the date that appears in the 'Eligible for Deletion' column in the file");
+						Report.StartStep($"Checking that the date that appears under the 'Current Submission' column in SHA Manager is exactly one year before the date that appears in the 'Eligible for Deletion' column in the file");
 						var eligibleDate = rowContents[2];
 						DateTime actualEligibleDate;
 						DateTime.TryParse(eligibleDate, out actualEligibleDate);
@@ -3217,7 +3220,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			object File = Context.GetFromContext(excel);
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + excel + "!", "File was found: " + File.ToString()))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				List<string> allProducts = ExcelUtils.Excel_GetColumn(0);
 				if (!allProducts.Contains(prodInfo.Id))
@@ -3335,13 +3338,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Advanced report then I click Submit")]
 		public void IEnterAStartDateForTheProductRegistrationPublishedReportClickSubmit(string startDate, string endDate)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var shaReport = new SHAAdvancedReporting();
-			TestReport.StartStep("I enter an Start Date");
+			Report.StartStep("I enter an Start Date");
 			shaReport.EnterStartDate(startDate);
-			TestReport.StartStep("I enter an End Date");
+			Report.StartStep("I enter an End Date");
 			shaReport.EnterEndDate(endDate);
-			TestReport.StartStep("I Click Submit");
+			Report.StartStep("I Click Submit");
 			shaReport.ClickSubmit();
 
 		}
@@ -3358,8 +3361,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I select the: (.*) report from Advanced Reporting in SHA")]
 		public void ISelectProductRegistrationPublishedReportFromAdvancedReportingInSHA(string report)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("Click Advanced Reporting");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Click Advanced Reporting");
 			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Advanced Reporting"),
 				"Failed to click document management", "Clicked document management");
 			var shaReport = new SHAAdvancedReporting();
@@ -3433,7 +3436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IEnterUPCSizeInTheAdvancedReportingPopup(string size)
 		{
 			var shaReport = new SHAAdvancedReporting();
-			TestReport.StartStep("I enter UPC Size");
+			Report.StartStep("I enter UPC Size");
 			shaReport.EnterUPCSize(size);
 
 		}
@@ -3448,7 +3451,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I move the product saved as (.*) from Submitted to Completed Status")]
 		public void IMoveTheProductSavedAsFromSubmittedToCompletedStatus(string saveAs)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var MyStepsShared = new Steps_Shared();
 			var MyStepsSHA = new Steps_SHA();
 			var MyStepsStudio = new Steps_Studio();

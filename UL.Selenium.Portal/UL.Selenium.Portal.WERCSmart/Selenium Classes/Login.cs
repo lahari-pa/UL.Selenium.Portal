@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
@@ -31,6 +31,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement EmailHeader => this.containerElement.FindElement(By.XPath("//label[@for='loginEmail']"), 5);
 
 		private IWebElement PasswordHeader => this.containerElement.FindElement(By.XPath("//label[@for='loginPassword']"), 5);
+
+		private IWebElement LoginError => this.containerElement.FindElement(By.XPath("//div[@id='accountNotifications']//p"), 5);
+
 
 		public void ClickOutside()
 		{
@@ -107,6 +110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			get => this.PasswordInput?.Text;
 			set
 			{
+				//this.PasswordInput.TryEnterText(value);
 				this.PasswordInput.TryEnterText(value);
 				this.PasswordInput.SendKeys(Keys.Tab);
 			}
@@ -135,6 +139,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string Password_Error_Text()
 		{
 			return this.PasswordError?.FindElement(By.XPath(".//span"), 2)?.Text;
+		}
+
+		public string IncorrectLoginDetails_Error_Text()
+		{
+			return this.LoginError?.FindElement(By.XPath(".//span"), 2)?.Text;
 		}
 
 	}

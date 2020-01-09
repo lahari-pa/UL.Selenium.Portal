@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using NTTQA.Selenium.Classes;
+using UL.Automation.Selenium.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -254,7 +254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var newProductIngredients = new Ingredients();
 			bool actionSelect;
 			var ingredientsToAction = new List<string>();
-			table.Rows.ForEach(x => ingredientsToAction.Add(x["Name"]));
+			table.Rows.Cast<TableRow>().ToList().ForEach(x => ingredientsToAction.Add(x["Name"]));
 			switch (doSelect)
 			{
 				case "select":
@@ -280,7 +280,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			List<Ingredients.Ingredient> ingredients = new Ingredients().GetIngredients();
 			var ingredientsToCheck = new List<string>();
-			table.Rows.ForEach(x => ingredientsToCheck.Add(x["Name"]));
+			table.Rows.Cast<TableRow>().ToList().ForEach(x => ingredientsToCheck.Add(x["Name"]));
 			if (expectSelected == "selected")
 			{
 				Report.IsTrue(ingredients.Where(x => ingredientsToCheck.Contains(x.ComponentName)).All(x => x.Selected), "Not all of the listed ingredients were selected as was expected! => " + string.Join(", ", ingredientsToCheck), "All of the listed ingredients were selected as expected");
@@ -506,7 +506,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: (.*) with hover over text: (.*)")]
 		public void ConfirmSustainabilityHintMatchesText(string savedAs, string text)
 		{
-			TestReport.StartStep($"I confirm that a Sustainability Hint button is displayed under ingredient saved as: {savedAs} with the correct hover over text");
+			Report.StartStep($"I confirm that a Sustainability Hint button is displayed under ingredient saved as: {savedAs} with the correct hover over text");
 			var newProductIngredients = new Ingredients();
 			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
 			if (ingredient == null)
@@ -855,5 +855,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
+		[StepDefinition(@"for ingredient: (.*) Public Name displayed: (.*)")]
+		public void ForIngredientIDisplayPublicName(string ingredient, string publicName)
+		{
+			string displayName = new Ingredients().GetIngredientPublicName(ingredient);
+			Report.IsTrue(displayName == publicName, "Failed to display public name for ingredient: " + ingredient + " as: " + publicName + ", actually displayed: " + displayName, "Successfully displayed public name for ingredient: " + ingredient + " as: " + publicName);
+		}
+		[StepDefinition(@"for ingredient: (.*) Percentage displayed: (.*)")]
+		public void ForIngredientIDisplayPercentage(string ingredient, string percentage)
+		{
+			string displayPercentage = new Ingredients().GetIngredientPercentage(ingredient);
+			Report.IsTrue(displayPercentage == percentage, "Failed to display percentage for ingredient: " + ingredient + " as: " + percentage + ", actually displayed: " + displayPercentage, "Successfully displayed percentage for ingredient: " + ingredient + " as: " + percentage);
+		}
 	}
 }

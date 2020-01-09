@@ -1,4 +1,4 @@
-﻿namespace UL.Selenium.Portal.WERCSmart.Classes
+namespace UL.Selenium.Portal.WERCSmart.Classes
 {
 	public class WERCSmartUser
 	{

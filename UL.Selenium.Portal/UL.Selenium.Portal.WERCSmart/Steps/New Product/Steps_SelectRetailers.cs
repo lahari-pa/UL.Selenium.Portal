@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -47,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var retailersToSelect = new List<string>();
 			var selSelectRetailers = new SelectRetailers();
-			retailers.Rows.ForEach(x => retailersToSelect.Add(x["Retailer"]));
+			retailers.Rows.Cast<TableRow>().ToList().ForEach(x => retailersToSelect.Add(x["Retailer"]));
 			foreach (string retailer in retailersToSelect)
 			{
 				Report.IsTrue(selSelectRetailers.SelectRetailerFromListView(retailer), "Failed to select retailer: " + retailer + " from the Select Retailers list view", "Successfully selected the retailer: " + retailer + " from the Select Retailers list view");
@@ -164,7 +163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			Report.Success("Walmart and all of its affiliates are not available");
 			Report.Screenshot();
-			TestReport.StartStep("In the Retailer page I click Done");
+			Report.StartStep("In the Retailer page I click Done");
 			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click 'Done' in the Select Retailers window",
 				"Successfully clicked 'Done' in the Select Retailers window");
 		}
@@ -174,7 +173,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var selSelectRetailers = new SelectRetailers();
 			var expectedSelected = new List<string>();
-			retailers.Rows.ForEach(x => expectedSelected.Add(x["Retailer"]));
+			retailers.Rows.Cast<TableRow>().ToList().ForEach(x => expectedSelected.Add(x["Retailer"]));
 			List<string> actualSelected = selSelectRetailers.SelectedRetailers();
 			Report.IsTrue(expectedSelected.All(x => actualSelected.Contains(x)),
 				"Not all of the expected retailers were selected!",

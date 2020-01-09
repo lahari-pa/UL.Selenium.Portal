@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -934,6 +934,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public string GetIngredientPublicName(string chemicalName)
+		{
+			try
+			{
+				IWebElement publicNameOption = this.IngredientRow(chemicalName)?.FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
+				return publicNameOption.GetAttribute("title");
+			}
+			catch (Exception)
+			{
+				return "";
+			}
+		}
+		public string GetIngredientPercentage(string chemicalName)
+		{
+			try
+			{
+				IWebElement percentage = this.IngredientRow(chemicalName)?.FindElement(By.XPath(".//td[contains(@class,'percent-comp')]//input[@class='form-control percent-comp']"), 2);
+				return percentage.GetValue();
+			}
+			catch (Exception)
+			{
+				return "";
+			}
+		}
+
 
 		public class Ingredient
 		{
@@ -1068,7 +1093,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					currentlySelectedOptionsStr.Add(item.Text);
 				}
 
-				if (currentlySelectedOptionsStr.Contains("×" + option))
+				if (currentlySelectedOptionsStr.Contains("ï¿½" + option))
 				{
 					Report.Info($"The correct Purpose was selectd.");
 				}
@@ -1113,7 +1138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				selectedOptionsStr.Add(item.Text);
 			}
 
-			if (selectedOptionsStr.Contains("×" + functionalPurpose))
+			if (selectedOptionsStr.Contains("ï¿½" + functionalPurpose))
 			{
 				Report.Info($"The correct Purpose was selected.");
 			}

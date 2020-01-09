@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
-using NTTQA.Selenium.TReVor;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
@@ -556,9 +556,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12308", "QA_DataConsent", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Email = MailosaurFunctions.CreateEmail(account.Email);
 			account.Identifier = savedAs;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext(savedAs, account, true);
 			Report.Success("Account details saved!");
 			var mySignUp = new StepsSignup();
 			var myLogin = new StepsLogin();
@@ -1009,7 +1009,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public WERCSmartUser SaveUser(Table information, string savedAs)
 		{
 			WERCSmartUser account = information.CreateInstance<WERCSmartUser>();
-			account.Email = EmailFunctions.CreateEmail(account.Email);
+			account.Email = MailosaurFunctions.CreateEmail(account.Email);
 			account.Identifier = savedAs;
 			Context.AddToContext(savedAs, account, true);
 
@@ -1062,8 +1062,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(TReVorDetails.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password), "Not able to update password", "Successfully updated password");
+				Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email), "Not able to update username", "Successfully updated username");
+				Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password), "Not able to update password", "Successfully updated password");
 			}
 			else
 			{

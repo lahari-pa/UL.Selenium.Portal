@@ -1045,3 +1045,45 @@ Then In the Payment Methods screen I click Continue
 Then In the Purchase Summary screen I click Confirm Order
 #Given I log in with email: User_ceef42822c24.kxxyxunf@mailosaur.io and password: Pa4*ytuufnn
 Then In the Thank You screen I confirm the following statement is shown: You have successfully upgraded your subscription plan. Thank you for relying on UL to provide over 45 retailers with critical product information they need in order to on-board your products and keep employees, consumers, and the environment safe.
+
+Scenario: [119192] Subscription - Articles/Enhanced Articles/Formulated Products Drop Down Menus - Show/Select Options
+
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I click on My Account
+	Then I click on NEW SUBSCRIPTION
+	Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
+	Then In the Subscription Enrollment screen I confirm that I see the following subheadings:
+	| Subheading                                                          |
+	| 1 Select the range of your products, articles and enhanced articles |
+	| 2 Select the feature plan                                           |
+	| 3 Select the Support Services Plan                                  |
+	Then In the Subscription Enrollment screen I confirm that you see Formulated Products dropdown
+	And I check that the following are showing in the Formulated Products dropdown:
+	| Item                  |
+	| Choose...             |
+	| Up to 150 Product(s)    |
+	| Up to 200 Product(s)    |
+	| Up to 300 Product(s)    |	
+	And The Formulated Products popup should have header: What Are Formulated Products?
+	And The Formulated Products popup should have content: During the WERCSmart registration process, information about ingredients (e.g., water, ethanol, phosphoric acid) are collected.
+	Then In the Subscription Enrollment screen I confirm that the option showing in the Formulated Products dropdown is: Up to 150 Product(s)
+	Then In the Subscription Enrollment screen I confirm that you see Articles dropdown
+	And I check that the following are showing in the Articles dropdown:
+	| Item                  |
+	| Choose...             |
+	| Up to 15 Product(s)    |
+	| Up to 20 Product(s)    |
+	| Up to 25 Product(s)    |
+	And The Articles popup should have header: What Are Articles?
+	And The Articles popup should have content: According to OSHA regulation 1910.1200, an article is “a manufactured item other than a fluid or particle: (i) which is formed to a specific shape or design during manufacture; (ii) which has end-use function(s) dependent in whole or in part upon its shape or design during end-use; and (iii) which under normal conditions of use does not release more than very small quantities, e.g., minute or trace amounts of a hazardous chemical (as determined under paragraph (d) of this section), and does not pose a physical hazard or health risk to employees.”
+	Then In the Subscription Enrollment screen I confirm that the option showing in the Articles dropdown is: Up to 15 Product(s)
+	Then In the Subscription Enrollment screen I confirm that you see Enhanced Articles dropdown
+	And I check that the following are showing in the Enhanced Articles dropdown:
+	| Item                  |
+	| Choose...             |
+	| Up to 3 Product(s)    |
+	| Up to 5 Product(s)    |
+	| Up to 7 Product(s)    |	
+	And The Enhanced Articles popup should have header: What Are Enhanced Articles?
+	And The Enhanced Articles popup should have content: Beverage registrations or products that include a lithium battery when sold to the consumer (lithium ion or lithium metal) are considered Enhanced Articles for the purpose of WERCSmart registration.
+	Then In the Subscription Enrollment screen I confirm that the option showing in the Enhanced Articles dropdown is: Up to 3 Product(s)

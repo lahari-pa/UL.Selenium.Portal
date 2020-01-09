@@ -1,8 +1,9 @@
-﻿using System;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using System;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using NUnit.Framework.Internal;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 
@@ -42,12 +43,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		[StepDefinition(@"I set Product Name to: (.*) Type of Product to: (.*) and Product Line Or Brand to: (.*)")]
 		public void SetProductNameProductTypeProductLine(string name, string type, string brand)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("Setting Product Name to: " + name);
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Setting Product Name to: " + name);
 			this.SetProductNameTo(name);
-			TestReport.StartStep("Setting Product Line or Brand to: " + brand);
+			Report.StartStep("Setting Product Line or Brand to: " + brand);
 			this.SetProductLineOrBrand(brand);
-			TestReport.StartStep("Setting Type of Product to: " + type);
+			Report.StartStep("Setting Type of Product to: " + type);
 			this.SetTypeOfProductTo(type);
 			new StepsNewProduct().ClickContinue();
 

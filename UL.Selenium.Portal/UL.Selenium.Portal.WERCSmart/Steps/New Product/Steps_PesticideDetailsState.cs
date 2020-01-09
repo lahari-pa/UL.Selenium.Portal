@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -191,7 +192,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			if (state.Length != 2)
 			{
-				Report.Warn("Expecting a state provided in the form: AZ, IL, NY etc.");
+				Report.Warning("Expecting a state provided in the form: AZ, IL, NY etc.");
 			}
 			if (check == "is")
 			{
@@ -346,8 +347,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					throw new Exception("'Use Next Year' parameter did not match expected text (yes/ no OR true/ false)");
 				}
 				var pesticideDetailsState = new PesticideDetailsState();
-				TestReport.UseSubSteps = true;
-				TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+				ReportSettings.UseSubSteps = true;
+				Report.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
 				int year = DateTime.Now.Year;
 				if (int.TryParse(month, out int monthNum) && int.TryParse(day, out int dateNum))
 				{
@@ -366,7 +367,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 					// Click Continue
-					//TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
+					//Report.StartStep("I click continue in the Pesticide Details - State Registration page");
 					//new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Pesticide Details - State Registration Details");
 				}
 				else
@@ -382,8 +383,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void EnterEpaRegistrationDateNextYear(string month, string date, string state, bool addYear = false)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
 			int year = DateTime.Now.Year;
 			if (int.TryParse(month, out int monthNum) && int.TryParse(date, out int dateNum))
 			{
@@ -409,7 +410,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 				// Click Continue
-				TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
+				Report.StartStep("I click continue in the Pesticide Details - State Registration page");
 				new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Pesticide Details - State Registration Details");
 			}
 			else
@@ -449,8 +450,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				string month = row["Month"];
 				string state = row["State"];
 				var pesticideDetailsState = new PesticideDetailsState();
-				TestReport.UseSubSteps = true;
-				TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select date for the current year plus " + addYear);
+				ReportSettings.UseSubSteps = true;
+				Report.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select date for the current year plus " + addYear);
 				int year = DateTime.Now.Year + addYearNum;
 				DateTime dt;
 				if (int.TryParse(month, out int monthNum) && int.TryParse(day, out int dayNum))

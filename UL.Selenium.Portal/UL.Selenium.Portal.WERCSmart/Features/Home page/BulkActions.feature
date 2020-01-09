@@ -92,7 +92,8 @@ Scenario: [76314] Forward Product - NR should Not Require UPC
 	Given I click Forward Product Registration in the Bulk Actions window
 	Then I should see the header: Forward Product Registration on the Forward Product Registration window
 	And I confirm the active Forward Product Registration tab is: Select Products
-	Given I select the product with ID saved as: ProductInProgressList76314 under the Select Products tab
+	#Given I select the product with ID saved as: ProductInProgressList76314 under the Select Products tab
+	Then I select the first non Kit product from the list of IDs saved as: ProductInProgressList76314 under the Select Products tab
 	Given I click continue on the Forward Product Registration page
 	Then I confirm the active Forward Product Registration tab is: Select Retailers
 	Given in the Select Retailers tab under Forward Product Registration I select the retailer: No Retailer/No UPC Product
@@ -168,10 +169,19 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75321)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 	And I Confirm the Product shows status: Completed for retailer: saved as retailer
+	And I Confirm the Product shows status: Assigned for retailer: saved as TestCase75321Retailer
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75321)
+	Then I call Shared Step 49742 - WPS - Check In Product saved as: TestCase75321
+	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase75321	
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75321)
+	Given I call Shared Step 59066 (Go to SHA Manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75321 and its status is: Accepted	
 	And I Confirm the Product shows status: Accepted for retailer: saved as TestCase75321Retailer
 	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75321) for
 		| Retailer                       |
 		| saved as TestCase75321Retailer |
+		| saved as retailer              |
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
 	And I Confirm the Product shows status: Completed for retailer: saved as retailer
 	And I Confirm the Product shows status: Completed for retailer: saved as TestCase75321Retailer
@@ -268,3 +278,4 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I click continue on the Forward Product Registration page
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page
+

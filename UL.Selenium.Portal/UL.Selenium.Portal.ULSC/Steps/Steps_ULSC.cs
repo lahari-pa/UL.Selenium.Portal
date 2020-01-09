@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Cache;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.ULSC.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -16,6 +14,8 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps;
 using System.Collections.ObjectModel;
 using TReVor.Api.Wrapper.Classes;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Reporting;
 
 namespace UL.Selenium.Portal.ULSC.Steps
 {
@@ -26,7 +26,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I should see the following option (.*)")]
 		public void ThenIShouldSeeTheFollowingOption(string option)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount, "Checking that the option " + option + " is showing");
+			Report.StartStep(ReportSettings.StepCounter +  " - Checking that the option " + option + " is showing");
 			try
 			{
 				var selUlSolutionCenter = new UlSolutionCenter();
@@ -56,7 +56,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		//[StepDefinition(@"I click the Learn More button")]
 		//public void ClickLearnMorebutton()
 		//{
-		//	TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking 'Learn More button'");
+		//	Report.StartStep(ReportSettings.StepCounter + " - Clicking 'Learn More button'");
 		//	try
 		//	{
 		//		Report.Info("Clicking 'Learn More button'");
@@ -644,7 +644,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.Info("Navigating to: " + url);
 			SeleniumBrowser.WebBrowser.Url = url;
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
-			//var Branch = GlobalParameters.Branch;
+			//var Branch = TReVorSettings.SoftwareBranch;
 			//string regexPattern = @"^.*(?=(\/))";
 			//Regex regex = new Regex(regexPattern);
 			//Match match = regex.Match(Branch);
@@ -714,7 +714,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		public void ConfirmWidgetPanelsDisplayedOnTheDashboard(string displayed, Table table)
 		{
 			var expectedWidgets = new List<string>();
-			table.Rows.ForEach(x => expectedWidgets.Add(x["Widget"]));
+			table.Rows.Cast<TableRow>().ToList().ForEach(x => expectedWidgets.Add(x["Widget"]));
 			Report.Info("Expected widgets are: " + string.Join(", ", expectedWidgets));
 			List<string> actualWidgets = new Dashboard().WidgetTitles();
 			Report.Info("Actual widgets are: " + string.Join(", ", actualWidgets));
@@ -741,16 +741,16 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I Confirm the Layout shows a header, left hand navigation, Message center and KPI areas")]
 		public void ConfirmDashboardLayout_Header_LeftHandNavigation_MessageCenter_KPIAreas()
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I confirm the WERCSLink header is displayed");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I confirm the WERCSLink header is displayed");
 			this.GivenIConfirmThatTheWERCSLinkHeaderAppearsAtTheTopLeft();
-			TestReport.StartStep("I confirm the left hand navigation is displayed under WercsLink");
+			Report.StartStep("I confirm the left hand navigation is displayed under WercsLink");
 			this.ConfirmLeftHandNavigationDisplayed();
-			TestReport.StartStep("I confirm the Message widget panel is displayed on the Dashboard:");
+			Report.StartStep("I confirm the Message widget panel is displayed on the Dashboard:");
 			var table = new Table("Widget");
 			table.AddRow("Message Center");
 			this.ConfirmWidgetPanelsDisplayedOnTheDashboard("displayed", table);
-			TestReport.StartStep("I confirm the KPI widget panels are displayed on the Dashboard");
+			Report.StartStep("I confirm the KPI widget panels are displayed on the Dashboard");
 			var kpiTitles = new List<string> { "Products By Retailer and Status", "RUs by Category", "Products by Recertification Reason", "Products by RU", "RUs by Category by Retailer", "Subscription Status" };
 			table = new Table("Widget");
 			foreach (string title in kpiTitles)

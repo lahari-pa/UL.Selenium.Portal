@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Collections.ObjectModel;
-using Castle.Core.Internal;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -638,6 +638,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			Report.Info("Got list of headers");
+			Report.Info($"The list of headers found was a follow: {string.Join(",", ListOfHeaders)}");
 			var ListOfProducts = new List<Product>();
 			//get all columns
 			ListOfProductRows = SeleniumBrowser.WebBrowser
@@ -721,9 +722,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							{
 								Report.Info("There was a problem with getting status colour: " + e.Message);
 							}
-
+							Report.Info($"Finished looking at status");
 							break;
 						case "Original Submission":
+							Report.Info($"Starting on: Original Submission");
 							string pOS = rowValues[i].Trim();
 							if (pOS.Length > 0)
 							{
@@ -732,6 +734,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 							break;
 						case "Current Submission":
+							Report.Info($"Starting on: Current Submission");
 							string pCS = rowValues[i].Trim();
 							if (pCS.Length > 0)
 							{
@@ -740,6 +743,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 							break;
 						case "Last ActivityDate":
+							Report.Info($"Starting on: Last ActivityDate");
 							string pAD = rowValues[i].Trim();
 							if (pAD.Length > 0)
 							{
@@ -748,6 +752,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 							break;
 						case "Due Date":
+							Report.Info($"Starting on: Due Date");
 							string pDD = rowValues[i].Trim();
 							if (pDD.Length > 0)
 							{
@@ -756,27 +761,41 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 							break;
 						case "Reviewer":
+							Report.Info($"Starting on: Reviewer");
+							Report.Info($"value of I was: {i}");
+							Report.Info($"Row Value at I was: {rowValues[i]}");
 							thisProduct.Reviewer = rowValues[i].Trim();
 							break;
 						case "SDS":
+							Report.Info($"Starting on: SDS");
 							thisProduct.SDS = rowValues[i].Trim() == "Yes";
 							break;
 						case "Canada SDS":
+							Report.Info($"Starting on: Canada SDS");
 							thisProduct.CanadaSDS = rowValues[i].Trim() == "Yes";
 							break;
 						case "Clients":
+							Report.Info($"Starting on: Clients");
 							thisProduct.Clients = rowValues[i].Trim();
 							break;
 						case "T. Reg":
+							Report.Info($"Starting on: T. Reg");
 							thisProduct.TReg = rowValues[i].Trim() == "Yes";
 							break;
 						case "Last Pub Date":
+							Report.Info($"Starting on: Last Pub Date");
 							thisProduct.LastPubDate = rowValues[i].Trim();
 							break;
 						case "GHS":
+							Report.Info($"Starting on: GHS");
+							Report.Info($"value of I was: {i}");
+							Report.Info($"Row Values is a list of strings containing the following values: {string.Join(",", rowValues)}");
+							Report.Info($"Row Value at I was: {rowValues[i]}");
 							thisProduct.GHS = rowValues[i].Trim();
+							Report.Info($"Row value added for GHS");
 							break;
 						case "Refeed":
+							Report.Info($"Starting on: Refeed");
 							thisProduct.Refeed = rowValues[i].Trim() == "Yes";
 							break;
 						default:
@@ -1026,7 +1045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							string.Join(",", ListOfTopMenuOptions.Select(x => x.GetValue(true)).ToList()));
 				if (menuOption != null)
 				{
-					return menuOption.TryClick(ClickFunctionality.ClickType.JavaScript);
+					return menuOption.TryClick(ClickExtensions.ClickType.JavaScript);
 				}
 				else
 				{
