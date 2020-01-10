@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CredentialManagement, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\lib\net461\CredentialManagement.dll</HintPath>
+    </Reference>
     <Reference Include="Flurl, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flurl.2.8.0\lib\net40\Flurl.dll</HintPath>
     </Reference>
@@ -73,6 +76,15 @@
     <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="NTTQA.Selenium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\lib\net461\NTTQA.Selenium.dll</HintPath>
+    </Reference>
+    <Reference Include="NTTQA.Selenium.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\lib\net461\NTTQA.Selenium.Reporting.dll</HintPath>
+    </Reference>
+    <Reference Include="NTTQA.Selenium.TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\lib\net461\NTTQA.Selenium.TReVor.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -95,13 +107,13 @@
       <HintPath>..\packages\SpecFlow.2.4.1\lib\net45\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="Thomas.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.0.0.60\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\lib\net461\Thomas.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="Thomas.Plugin.Classes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.0.0.60\lib\net461\Thomas.Plugin.Classes.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\lib\net461\Thomas.Plugin.Classes.dll</HintPath>
     </Reference>
     <Reference Include="TReVor.Api.Wrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UL.Automation.TReVor.SpecFlow.0.0.60\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
+      <HintPath>..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\lib\net461\TReVor.Api.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="UL.Automation.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Reporting.SpecFlow.0.0.56\lib\net461\UL.Automation.Reporting.dll</HintPath>
@@ -167,18 +179,14 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>rem ##### UL.Automation.Vanessa Post-Build Events #####
-"$(SolutionDir)packages\UL.Automation.TReVor.SpecFlow.0.0.60\tools\PostBuild\UL.Automation.Vanessa.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
+    <PostBuildEvent>rem ##### TReVor Post Build Events #####
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.176\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" --solutionPath "$(SolutionPath)" --projectPath "$(ProjectPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>rem ##### UL.Automation.Vanessa Pre-Build Events #####
-"$(SolutionDir)packages\UL.Automation.TReVor.SpecFlow.0.0.60\tools\PostBuild\UL.Automation.Vanessa.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"</PreBuildEvent>
+    <PreBuildEvent>rem ##### TReVor Pre Build Events #####
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.7.0.176\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build --solutionPath "$(SolutionPath)") --projectPath "$(ProjectPath)"
+</PreBuildEvent>
   </PropertyGroup>
-  <Target Name="AfterUpdateFeatureFilesInProject">
-    <ItemGroup>
-      <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
-    </ItemGroup>
-  </Target>
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -192,11 +200,18 @@
     <Error Condition="!Exists('..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.TReVor.SpecFlow.0.0.60\build\UL.Automation.TReVor.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.TReVor.SpecFlow.0.0.60\build\UL.Automation.TReVor.SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\build\NTTQA.Selenium.TReVor.Modules.targets'))" />
   </Target>
   <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
+  <Target Name="AfterUpdateFeatureFilesInProject">
+    <ItemGroup>
+      <Compile Include="**\*.feature.cs" Exclude="@(Compile)" />
+    </ItemGroup>
+  </Target>
   <Import Project="..\packages\UL.Automation.Reporting.SpecFlow.0.0.56\build\UL.Automation.Reporting.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Reporting.SpecFlow.0.0.56\build\UL.Automation.Reporting.SpecFlow.targets')" />
   <Import Project="..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets')" />
   <Import Project="..\packages\UL.Automation.TReVor.SpecFlow.0.0.60\build\UL.Automation.TReVor.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.TReVor.SpecFlow.0.0.60\build\UL.Automation.TReVor.SpecFlow.targets')" />
   <Import Project="..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets')" />
+  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.7.0.176\build\NTTQA.Selenium.TReVor.Modules.targets')" />
 </Project>
