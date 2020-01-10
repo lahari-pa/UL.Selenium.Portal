@@ -4519,9 +4519,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             Delay.Seconds(3);
 			Report.Info("Now going to click the sections side tab if its not open");
             var selStepsStudio = new Steps_Studio();
-            //selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			//selStepsStudio.InPDIEnsureSECT2318IsActive();
-			//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+            selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.InPDIEnsureSECT2318IsActive();
+			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			
 
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
