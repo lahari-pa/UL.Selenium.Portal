@@ -4517,6 +4517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
                 "Clicked continue button");
             Delay.Seconds(3);
+			Report.Info("Now going to click the sections side tab if its not open");
             var selStepsStudio = new Steps_Studio();
             //selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			//selStepsStudio.InPDIEnsureSECT2318IsActive();
