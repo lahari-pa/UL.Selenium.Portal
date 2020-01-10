@@ -60,16 +60,16 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 	Then I should see the Pesticide Details - State Registration Details Page
 	Then I confirm that there is data populated in the Expiration Date Column for some States
 	Then I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
-	Then I edit the Expiration Date to: 2019-12-01 for the State: NY on the Pesticide State Registration Details page
+	Then I edit the Expiration Date to: 2020-12-01 for the State: NY on the Pesticide State Registration Details page
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
 	Given in the Pesticide Details - State Registration Details page I click Continue
 	Given I click the page heading: Pesticide Details - U.S.
 	Then I should see the Pesticide Details - U.S. Page
 	Given in the Pesticide Details - U.S. page I click Continue
 	Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
-	Then I confirm the Expiration Date field for state: NY is showing the value: 2019-12-01
+	Then I confirm the Expiration Date field for state: NY is showing the value: 2020-12-01
 	Given I click the Update Wercs Smart data with EPA data through Kelly Services link
-	Then I confirm the Expiration Date field for state: NY is showing the value: 2019-12-01
+	Then I confirm the Expiration Date field for state: NY is showing the value: 2020-12-01
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62849
 
@@ -268,12 +268,12 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Then in the Pesticide Details - Canada page I click Continue
 	# JS TFS test case changed to remove Manitoba, Saskatchewan and Northwest Territory from expected fields with error
 	Then For every field in the table I should see the following error: This is a required field.
-		| Field            |
-		| Provide Canada   |
-		| Product          |
-		| Alberta          |
-		| British Columbia |
-		| Labrador         |
+		| Field                |
+		| Provide Canada       |
+		| Product              |
+		| Alberta              |
+		| British Columbia     |
+		| Labrador             |
 		| New Brunswick        |
 		| New Foundland        |
 		| Nova Scotia          |
@@ -282,11 +282,11 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 		| Quebec               |
 		| Yukon Territory      |
 
-Then For every field in the table I should not see the following error: This is a required field.
-| Field                |
-| Manitoba            |
-| Saskatchewan        |
-| Northwest Territory |
+	Then For every field in the table I should not see the following error: This is a required field.
+		| Field               |
+		| Manitoba            |
+		| Saskatchewan        |
+		| Northwest Territory |
 
 	# Type in a Canadian Pest Control Products (PCP) Registration Number with more than 5 digits and less than 8 digits
 	Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 279255
@@ -314,14 +314,14 @@ Then For every field in the table I should not see the following error: This is 
 		| Yes    |
 		| No     |
 	And Section: Product's packaging includes a Poison Danger symbol should be showing an error message
-#Given I set the Product's packaging includes a Poison Danger symbol field to: No
-	Given I set the radio option in section: Product's packaging includes a Poison Danger symbol to: No
+	Given I set the Product's packaging includes a Poison Danger symbol field to: No
 	Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
+	Given I set the Alberta field to: Choose...
 	Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
-		| Field            |
-		| Alberta          |
-		| British Columbia |
-		| Labrador         |
+		| Field                |
+		| Alberta              |
+		| British Columbia     |
+		| Labrador             |
 		| New Brunswick        |
 		| New Foundland        |
 		| Nova Scotia          |

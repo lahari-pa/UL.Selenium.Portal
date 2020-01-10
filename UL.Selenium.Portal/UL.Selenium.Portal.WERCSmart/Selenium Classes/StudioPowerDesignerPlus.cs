@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
-using Castle.Core.Internal;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -1063,20 +1063,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Alert was not found, reloading alert...");
 				SeleniumBrowser.Alert.ReloadAlert(searchText);
 			}
+			Report.Info("Checking if the Alert Has Loaded");
 			if (!SeleniumBrowser.Alert.WaitForAlert())
 			{
+				Report.Info("The Alert was not Found");
 				return null;
 			}
 			
 			try
 			{
+				Report.Info("Alert Found, Trying to get the Text of the Alert");
 				string alertText = SeleniumBrowser.Alert.GetText();
 				int i = 2;
 				while(alertText.IsNullOrEmpty()|| i<6)
 				{
 					Report.Info($"No Text Was Found In the Alert, Trying again");
 					Report.Info($"Looking for alert text. Attempt: {i}");
-					alertText = SeleniumBrowser.Alert.GetText();					
+					alertText = SeleniumBrowser.Alert.GetText();
+					Delay.Seconds(1);
 					i++;
 				}
 				if(alertText.IsNullOrEmpty() && i==6)

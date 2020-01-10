@@ -1,12 +1,13 @@
 using System;
 using System.Reflection;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -35,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"From the Language drop down I select (.*)")]
 		public void WhenFromTheLanguageDropDownISelect(string language)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
+			Report.StartStep(ReportSettings.StepCounter + " " + MethodBase.GetCurrentMethod().Name);
 			try
 			{
 
@@ -86,7 +87,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I ensure that the (email|password) input field is not populated")]
 		public void ThenIEnsureThatTheInputFieldIsNotPopulated(string inputField)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " I ensure that the " + inputField + " input field is not populated");
+			Report.StartStep(ReportSettings.StepCounter + " I ensure that the " + inputField + " input field is not populated");
 			try
 			{
 				var selLogin = new Login();
@@ -267,7 +268,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			this.GivenIPopulateTheInputFieldWith("email", user.Username);
 			this.GivenIPopulateTheInputFieldWith("password", user.Password);
-			TestReport.StartStep("I click the login button");
+			Report.StartStep("I click the login button");
 			this.IClickTheLoginButton();
 			Report.IsTrue(new Login().WaitForContainerToBeInvisible(), "Did not redirect from log in page after 30 seconds!");
 		}

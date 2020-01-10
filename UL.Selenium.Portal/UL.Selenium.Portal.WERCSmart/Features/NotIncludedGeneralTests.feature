@@ -276,8 +276,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Rejected Registration - Edit -  Message is di
 	And I should see the The Product Page
 
 Scenario: [NOTINCLUDEDGENERALTEST] Advanced Reporting - Registrations Published report -
-	#For 92210 Ticket Should be 98534
-	#Update 98534 in TFS
+
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
@@ -1087,3 +1086,50 @@ Scenario: [IngredientsTableCheck] Non Cleaning Ingredients Table navigate back
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I navigate to the home page
 
+@AssignedDebug
+Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
+	Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
+	Given I navigate to the landing page
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I filter the products by: Accepted by Retailers
+	And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+	And I filter for the product saved as: TestCase75321
+	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+	Then I should see the header: Forward Product Registration on the Forward Product Registration window
+	And I enter the text: saved as TestCase75321 in the 'Search by WPS ID or Product Name' field
+	And In the Foward Product Registration Screen I should see product: saved as TestCase75321
+	And In the Foward Product Registration Screen I Select the product: saved as TestCase75321
+	And I click continue on the Forward Product Registration page
+	And In the Forward Product Registration Screen I select a retailer under Other Retailers and save as TestCase75321Retailer
+	And I click continue on the Forward Product Registration page
+	And I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue and save UPC as TestCase75321UPC
+	Then I should see the subheading 3: Product Results on the Forward Product Registration window
+	Then I confirm that for UPC Number saved as TestCase75321UPC the retailer is displayed as saved as TestCase75321Retailer
+	And I confirm that there are NO Errors displayed for the Product
+	And I click continue on the Forward Product Registration page
+	Then I should see the subheading 3: Review & Submit on the Forward Product Registration window
+	Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+	And I click continue on the Forward Product Registration page
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
+	And I Confirm the Product shows status: Completed for retailer: saved as retailer
+	And I Confirm the Product shows status: Submitted for retailer: saved as TestCase75321Retailer
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
+	And I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase75321
+	And I confirm the Product UPC window has opened
+	And I confirm that retailer saved as: TestCase75321Retailer appears for UPC saved as: TestCase75321UPC
+	And I close the current window and switch to the main window in Studio
+	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75321)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
+	And I Confirm the Product shows status: Completed for retailer: saved as retailer
+	And I Confirm the Product shows status: Accepted for retailer: saved as TestCase75321Retailer
+
+
+	Scenario: [CVSTIERSCLEANING] CVS - CLEANING TEST
+
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSCleaningExcelFile and check that is shows the expected product saved as: CVSCleaningProduct1

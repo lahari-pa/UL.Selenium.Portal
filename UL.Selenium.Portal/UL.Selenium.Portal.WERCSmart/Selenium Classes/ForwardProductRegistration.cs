@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using TechTalk.SpecFlow;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using System;
-using NTTQA.Selenium.UniversalFunctions;
+using UL.Automation.Utilities.Functions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -513,6 +513,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return true;
 			}
 		}
+
+		public string GetTopProductNameFromSelectProductList()
+		{
+			IWebElement productNameElement = this.containerElement.FindElement(By.XPath(".//tbody/tr[.//label]//td//label[@data-bind='text: name']"), 2);
+			if (productNameElement == null)
+			{
+				Report.Info("Could not find the element for the ProductName");
+				return null;
+			}
+			return productNameElement.Text;
+		}
+
 
 		public class SelectProducts : ForwardProductRegistration
 		{

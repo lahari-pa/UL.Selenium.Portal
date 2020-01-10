@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Reporting.Functions;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;

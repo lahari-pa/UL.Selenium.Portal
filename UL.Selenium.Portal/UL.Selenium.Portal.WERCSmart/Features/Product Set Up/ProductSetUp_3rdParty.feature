@@ -271,3 +271,5 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80821)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Completed
+
+

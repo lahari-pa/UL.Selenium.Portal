@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Castle.Core.Internal;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
+using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -106,7 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			object file = Context.GetFromContext(savedAs);
 			if (Report.IsTrue(file != null, "No matching file was found saved as: " + savedAs, "Found file saved as: " + savedAs))
 			{
-				var ExcelUtils = new ExcelUtilities(file.ToString(), "Messages");
+				var ExcelUtils = new ExcelFunctions(file.ToString(), "Messages");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 				int columnIndex = ColumnTitles.FindIndex(x => x == column);
@@ -147,7 +148,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var myMessages = (List<MessageCenter.Message>)Context.GetFromContext(messagesSavedAs);
 				if (Report.IsTrue(myMessages != null, "No matching messages saved as: " + messagesSavedAs, "Found message saved as: " + messagesSavedAs, false, false))
 				{
-					var excelUtils = new ExcelUtilities(file.ToString(), "Messages");
+					var excelUtils = new ExcelFunctions(file.ToString(), "Messages");
 					int fileRowCount = excelUtils.Excel_GetNoRows() - 1;
 					int messageCount = myMessages.Count;
 					Report.IsTrue(fileRowCount == messageCount,
@@ -163,7 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Messages");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Messages");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 				foreach (TableRow thisRow in table.Rows)
@@ -208,7 +209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), sheetName);
+				var ExcelUtils = new ExcelFunctions(File.ToString(), sheetName);
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 				foreach (TableRow thisRow in table.Rows)

@@ -2,11 +2,12 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Mailosaur;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
+using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -296,7 +297,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			Report.IsTrue(EmailFunctions.CheckEmailHasArrived("Signup Confirmation", emailToFind),
+			Report.IsTrue(MailosaurFunctions.CheckEmailHasArrived("Signup Confirmation", emailToFind),
 				"Email has not arrived as expected", "Email has arrived as expected");
 		}
 
@@ -309,7 +310,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			Report.IsTrue(EmailFunctions.CheckEmailHasArrived("New CARP Account Created", emailToFind),
+			Report.IsTrue(MailosaurFunctions.CheckEmailHasArrived("New CARP Account Created", emailToFind),
 				"Email has not arrived as expected", "Email has arrived as expected");
 		}
 
@@ -324,7 +325,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			for (int i = 0; i < 30; i++)
 			{
-				if (EmailFunctions.CheckEmailHasArrived("New Verification Code", emailToFind))
+				if (MailosaurFunctions.CheckEmailHasArrived("New Verification Code", emailToFind))
 				{
 					Report.Success("Verification code has been found");
 					return;
@@ -368,7 +369,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			IOrderedEnumerable<Email> ListOfEmails = EmailFunctions.GetAllEmailsForEmailEmailAddress(emailToFind)
+			IOrderedEnumerable<Email> ListOfEmails = MailosaurFunctions.GetAllEmailsForEmailEmailAddress(emailToFind)
 				.OrderByDescending(y => y.CreationDate);
 			Email thisEmail = ListOfEmails.FirstOrDefault(x => x.Subject.Contains("New Verification Code"));
 

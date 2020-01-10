@@ -13,6 +13,7 @@
 @CreateProducts
 @ForwardProductRegistration
 @PaymentMethods
+@ProductSetUp
 @run_AccountHasStewardshipInfo
 
 Feature: Account has Stewardship information

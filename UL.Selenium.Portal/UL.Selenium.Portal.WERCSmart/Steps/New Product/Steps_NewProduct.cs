@@ -1,26 +1,24 @@
-using Castle.Core.Internal;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
-using NTTQA.Selenium.UniversalFunctions;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.Utilities.Functions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using iTextSharp.text.pdf.parser;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using UL.Automation.Reporting;
+using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -252,7 +250,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"the product saved as: (.*) should be visible in editor")]
 		public void CorrectProductVisibleInEditor(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Product saved as " + savedAs + " is visible in editor");
+			Report.StartStep(ReportSettings.StepCounter + " - Product saved as " + savedAs + " is visible in editor");
 			try
 			{
 				Report.Info("Checking that the product saved as " + savedAs + " is visible in editor");
@@ -276,7 +274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I create a shell product with name (.*) saved as (.*)")]
 		public void CreateShellProduct(string name, string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Creating shell product with name " + name + ", saved as " + savedAs);
+			Report.StartStep(ReportSettings.StepCounter + " - Creating shell product with name " + name + ", saved as " + savedAs);
 			try
 			{
 				Report.Info("Creating shell product with name " + name + ", saved as " + savedAs);
@@ -424,7 +422,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I should see the statement (.*)")]
 		public void CorrectInitialStatementShouldAppear(string statement)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the statement " + statement);
+			Report.StartStep(ReportSettings.StepCounter + " - I should see the statement " + statement);
 			try
 			{
 				Report.Info("Checking that I see the statement '" + statement + "'");
@@ -445,7 +443,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I Select the Create a New Registration radio button")]
 		public void GivenISelectTheCreateANewRegistrationRadioButton()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I Select the Create a New Registration radio button");
+			Report.StartStep(ReportSettings.StepCounter + " - I Select the Create a New Registration radio button");
 			try
 			{
 				var selNewProduct = new NewProduct();
@@ -473,6 +471,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			Report.Info("Saving product: " + prodDetails.Id + ",  " + prodDetails.Name);
 			Context.AddToContext(savedas, prodDetails);
+			string idname = $"{savedas}_ID";
+			Context.AddToContext(idname, prodDetails.Id);
 			Report.Success("Product Information saved!");
 		}
 
@@ -701,7 +701,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, I enter: (.*) in the Provide Special Permit numbers text field")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIEnterInTheProvideSpecialPermitNumbersTextField(string permitNumber)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + permitNumber + " in the Specific Gravity text field");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Product Characteristics tab, I enter: " + permitNumber + " in the Specific Gravity text field");
 			try
 			{
 				var selNewProduct = new NewProduct();
@@ -867,7 +867,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I should see the radio button: (.*)")]
 		public void ShouldSeeTheRadioButton(string button)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the radio button " + button);
+			Report.StartStep(ReportSettings.StepCounter + " - I should see the radio button " + button);
 			try
 			{
 				Report.Info("Checking that I see the radio button '" + button + "'");
@@ -938,7 +938,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void CheckRadioButtonsInSectionAndOrder(string shouldOrNot, string section, Table expected)
 		{
 			var expectedRadioButtons = new List<string>();
-			expected.Rows.ForEach(x => expectedRadioButtons.Add(x["Button"]));
+			expected.Rows.Cast<TableRow>().ToList().ForEach(x => expectedRadioButtons.Add(x["Button"]));
 			List<string> radioButtonsShowing = new NewProduct().RadioButtonsInSection(section);
 
 			if (shouldOrNot == "should")
@@ -1041,6 +1041,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().DataAcceptanceScreenAppears(), "Data Acceptance page did not appear!", "As expected, Data Acceptance page loaded successfully!");
 		}
 
+		[StepDefinition(@"I confirm following statement displays under Data Acceptance: (.*)")]
+		public void ThenIConfirmFollowingStatementDisplaysUnder_(string message)
+		{
+			Report.IsTrue(new NewProduct().CheckDataAcceptanceProblemMessageHasAppeared(message), "Failed to confirm following statement displays under Data Acceptance: " + message, "Succesfully confirmed following statement displays under Data Acceptance: " + message);
+		}
+
+
 		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
 		public void GivenInTheDataAcceptancePageISelectYesAgreed()
 		{
@@ -1106,6 +1113,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Delay.Seconds(1);
 		}
 
+		[StepDefinition(@"I set the (.*) option to: (.*) and save entry")]
+		public void SetTheSectionOptionToAndSaveEntry(string section, string option)
+		{
+			var thisNewProduct = new NewProduct();
+			if (!thisNewProduct.WaitForContainerToBeVisible(3))
+			{
+				Report.Failure("The new product page is not showing");
+			}
+			Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
+				"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
+				"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+			Delay.Seconds(1);
+			Context.AddToContext(section, option);;
+			Report.Info(option + " is saved to context as: " + section);
+
+		}
 		// JS a solution specifically for Transportation page where you have nested checkbox sections eg. DOT, IATA
 		[StepDefinition(@"I select option: (.*) under section: (.*) and subsection: (.*)")]
 		public void SetTheOptionSubOptionTo(string option, string section, string subSection)
@@ -1633,7 +1656,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var newProduct = new NewProduct();
 			foreach (string section in elements)
 			{
-				TestReport.StartStep("I set the " + elements + " option to: No");
+				Report.StartStep("I set the " + elements + " option to: No");
 				Report.IsTrue(newProduct.SetOptionInSection(section, "No"),
 					"Failed to set the input to 'No' in section: '" + section + "'",
 					"Successfully set the input to 'No' in section: '" + section + "'");
@@ -1936,7 +1959,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var expectedOptions = new List<string>();
 			var differences = new List<string>();
-			expected.Rows.ForEach(x => expectedOptions.Add(x["Option"]));
+			expected.Rows.Cast<TableRow>().ToList().ForEach(x => expectedOptions.Add(x["Option"]));
 			var expectedOptionsLower = expectedOptions.Select(x => x.ToLower()).ToList();
 			List<string> displayedOptions = new NewProduct().GetAllOptionsForSection(section);
 			var displayedOptionsLower = displayedOptions.Select(x => x.ToLower()).ToList();
@@ -2071,13 +2094,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm the page heading shows the CVS Logo with the title 'CVS Own Brand Registration' below the logo")]
 		public void CVSOwnBrandRegistrationPageIsDisplayedWithLogo()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var selNewProduct = new NewProduct();
-			TestReport.StartStep("I confirm the CVS Logo is displayed in the page heading");
+			Report.StartStep("I confirm the CVS Logo is displayed in the page heading");
 			Report.IsTrue(selNewProduct.SectionLogoDisplayed("cvs-pharmacy"),
 				"The CVS logo was not displayed in the page header!",
 				"The CVS logo was displayed in the page header");
-			TestReport.StartStep("I confirm the title of the page heading is 'CVS Own Brand Registration'");
+			Report.StartStep("I confirm the title of the page heading is 'CVS Own Brand Registration'");
 			Report.IsTrue(selNewProduct.WaitForSection("CVS Own Brand Registration"),
 				"The page header was not 'CVS Own Brand Registration'!",
 				"The page header was 'CVS Own Brand Registration' as expected");
@@ -2086,14 +2109,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"The displayed message text is comprised of the following paragraphs")]
 		public void MessageTextContainsParagraphs(Table paragraphText)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var expectedParagraphs = new List<string>();
-			paragraphText.Rows.ForEach(x => expectedParagraphs.Add(x["Paragraph"]));
+			paragraphText.Rows.Cast<TableRow>().ToList().ForEach(x => expectedParagraphs.Add(x["Paragraph"]));
 			List<string> actualParagraphs = new NewProduct().AllAdditionalStatementParagraphs();
 			int count = 1;
 			foreach (string para in actualParagraphs)
 			{
-				TestReport.StartStep("Checking paragraph: " + count + " matches expected text");
+				Report.StartStep("Checking paragraph: " + count + " matches expected text");
 				Report.IsTrue(para.Trim() == expectedParagraphs[count - 1],
 					"Paragraph " + count + " did not match the expected text: '" + para + "'",
 					"Paragraph " + count + " matched the expected text: '" + para + "'");
@@ -2295,7 +2318,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmThatANewTabOpensAndNavigateToIt()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			NTTQA.Selenium.SpecFlow.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -2402,7 +2425,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I select the first option in the 'Product Line or Brand' drop down and save as Brand{TestCaseId}")]
 		public void SelectFirstOptionInBrandDropDown()
 		{
-			string testCaseId = GlobalParameters.TestCaseId;
+			string testCaseId = TReVorSettings.TestCaseId;
 			if (testCaseId == null)
 			{
 				throw new Exception("Unable to locate a test case ID in global parameters which is required!");
@@ -2495,6 +2518,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().InputUPCNumber(upcNumber), "Failed to enter upc number", "Entered upc number");
 		}
 
+		[StepDefinition(@"I enter Zero Buffer UPC Number: (.*)")]
+		public void GivenIEnterZeroBufferUPCNumberSavedAsUPC(string upcNumber)
+		{
+			Delay.Seconds(3);
+			Report.IsTrue(new NewProduct().InputZeroBufferUPCNumber(upcNumber), "Failed to enter Zero Buffer UPC number", "Entered Zero Buffer UPC number");
+		}
+		[StepDefinition(@"I enter Zero Buffer Duplicate UPC Number: (.*)")]
+		public void GivenIEnterZeroBufferDuplicateUPCNumberSavedAsUPC(string upcNumber)
+		{
+			Delay.Seconds(3);
+			Report.IsTrue(new NewProduct().InputZeroBufferUPCDuplicateNumber(upcNumber), "Failed to enter Zero Buffer Duplicate UPC number", "Entered Zero Buffer Duplicate UPC number");
+		}
+
 		[StepDefinition(@"I Select a container type from the drop down list")]
 		public void GivenISelectAContainerTypeFromTheDropDownList()
 		{
@@ -2561,17 +2597,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 		}
 
+		[StepDefinition(@"I confirm a warning message is shown above the UPC table that reads: (.*)")]
+		public void ThenIConfirmAWarningMessageIsShownAboveTheUPCTableThatReads_(string warning)
+		{
+			Report.IsTrue(new NewProduct().CheckWarningMessageHasAppeared(warning), "Failed to confirm a warning message is shown above the UPC table that reads: " + warning, "Successfully confirmed a warning message is shown above the UPC table that reads:" + warning);
+		}
 
 		[StepDefinition(@"In the UPC screen I add a UPC: saved as UPC(.*), container type: (.*) and size: (.*), then I select all certifications")]
 		public void InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications(string upc,string containerType, string size)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			Report.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			TestReport.StartStep("I click the 'Add UPC' button");
+			Report.StartStep("I click the 'Add UPC' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
-			TestReport.StartStep("I add the following into the UPC Fields");
+			Report.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
 			{
 				string upc_ = upc.Replace("Equals", "");
@@ -2594,7 +2635,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			Report.IsTrue(new NewProduct().SelectAllCertifications(),"Failed to select all certifications","Successfully selected all certifications");
 
-			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 			GeneralUtilities.Wait_for_load_finish();
 		}
@@ -2679,60 +2720,103 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the Additional Product Information - Pesticide shown, US only, Yes to CA Cleaning Disclosure, select No for everything else - Happy Path")]
 		public void	GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			var myNewProductClass = new NewProduct();
-			TestReport.StartStep("I should see the Additional Product Information Page");
+			Report.StartStep("I should see the Additional Product Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			TestReport.StartStep(
+			Report.StartStep(
 				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
 				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			TestReport.StartStep(
+			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
 				"No");
-			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			Report.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
-			TestReport.StartStep("I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field to: Yes ");
+			Report.StartStep("I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field to: Yes ");
 			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
 			{
 				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
 					"Yes");
 			}
-			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			TestReport.StartStep(
+			Report.StartStep(
 				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			Report.StartStep("In the Additional Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
 		[StepDefinition(@"In the Restict Use page I select Do Not Restict")]
 		public void DoNotRestrictUse_Restrict()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
+			Report.Info("Selecting No in the Restrict Use section");
 			var MyStepsNewProduct = new StepsNewProduct();
 			var restrictUse = new Table("Section");
 			restrictUse.AddRow("Do you want to restrict searchable access to your registered formula?");
 			MyStepsNewProduct.CheckDisplayedSections("see", restrictUse);
-			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Do you want to restrict searchable access to your registered formula?",
-				"Do Not Restrict – Formula is searchable in WERCSmart and does not require an access code"));
+				"Do Not Restrict ï¿½ Formula is searchable in WERCSmart and does not require an access code"));
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Do you want to restrict searchable access to your registered formula?",
-				"– Formula is searchable in WERCSmart and does not require an access code");
-			TestReport.StartStep("in the Restrict Use page I click continue");
+				"ï¿½ Formula is searchable in WERCSmart and does not require an access code");
+			Report.StartStep("in the Restrict Use page I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
 		}
-		#endregion
+		[StepDefinition(@"I confirm the UPC table area is shown in red highlight")]
+		public void ThenIConfirmTheUPCTableAreaIsShownInRedHighlight()
+		{
+			Report.IsTrue(new NewProduct().CheckUPCTableIsHighlightedRed(), "Failed to confirm the UPC table area is shown in red highlight", "Successfully confirmed the UPC table area is shown in red highlight");
+		}
 
+
+		[StepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
+		public void ThenIConfirmTheUPCDuplicateWarningIconIsVisible()
+		{
+			Report.IsTrue(new NewProduct().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
+		}
+
+		[StepDefinition(@"I check that the Select Option warning is visible")]
+		public void ThenICheckThatTheSelectAtLeastOneOfTheseOptionsWarningIsVisible()
+		{
+			Report.IsTrue(new NewProduct().CheckDataAcceptanceSelectOptionWarningIsVisible(), "Failed to find the Select Option Warning!", "Successfully found the Select Option Warning!");
+		}
+		[StepDefinition(@"I check that the Select Option warning is not visible")]
+		public void ThenICheckThatTheSelectAtLeastOneOfTheseOptionsWarningIsNotVisible()
+		{
+			Report.IsTrue(new NewProduct().CheckDataAcceptanceSelectOptionWarningIsNotVisible(), "Failed to not the Select Option Warning!", "Successfully did not find the Select Option Warning!");
+		}
+
+		[StepDefinition(@"I check that there are no error messages present on the Data Acceptance Screen")]
+		public void ThenICheckThatThereAreNoErrorMessagesPresentOnTheDataAcceptanceScreen()
+		{
+			Report.IsTrue(new NewProduct().CheckFixAllErrorsMessageIsNotVisible(), "Failed to check that there are no error messages present on the Data Acceptance Screen", "Successfully checked that there are no error messages present on the Data Acceptance Screen");
+		}
+
+		[StepDefinition(@"I confirm the email registered: (.*) is populated in the field under the Statement")]
+		public void ThenIConfirmTheEmailRegisteredWERCSmart_ProductsAutomationAccountIsPopulatedInTheFieldUnderTheStatement(string accountSavedAs)
+		{
+			var newProduct = new NewProduct();
+			//Get email address from account, check against displayed email.
+
+			string email = newProduct.GetUserEmailAddress(accountSavedAs);
+
+			string dataAcceptanceEmail = newProduct.CheckDataAcceptanceEmailIsPopulated();
+
+			Report.IsTrue(new NewProduct().CheckEmailAddressAgainstDataAcceptanceEmail(email, dataAcceptanceEmail), "Failed to check user email: " + email + " against: " + dataAcceptanceEmail, "Successfully checked user email: " + email + " against: " + dataAcceptanceEmail);
+		}
+
+		#endregion
 		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Final Domestic Distributor")]
 		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField(string text)
 		{
@@ -2750,8 +2834,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Report.IsTrue(new NewProduct().CompanyWebAddress(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
-	}
 
+		[StepDefinition(@"I check for an error in the following fields in the 'Lithium Battery Transportation' Section")]
+		public void GivenICheckForAnErrorInTheFollowingFields(Table table)
+		{
+
+			var NewProductObject = new NewProduct();
+			Report.IsTrue(NewProductObject.CheckForErrorInTheFollowingFieldsInTheLithiumBatteryTransportationSection(table), "Failed to find an error in at least one of the fields", "Successfully found errors in all of the fields");
+
+		}
+	}
 
 	//public class UPCWarning : SeleniumBaseObject
 	//{

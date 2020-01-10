@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -10,17 +10,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Web.Administration;
 using Newtonsoft.Json;
-using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.Reporting.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 
 
 using System.Globalization;
 using Newtonsoft.Json.Converters;
 using System.Xml;
-using NTTQA.Selenium.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.API
 {
@@ -120,14 +120,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 						string.Format("UPC {0} returned {1} as expected", key, reportData[key]), false, false);
 				}
 
-				using (var sw = new StreamWriter(Path.Combine(ReportSettings.ReportingParameters.ReportFolder, "Test.xml")))
+				using (var sw = new StreamWriter(Path.Combine(Path.GetDirectoryName(ReportSettings.ReportFile), "Test.xml")))
 				{
 					sw.Write(xml);
 					sw.Flush();
 					sw.Close();
 				}
 
-				Report.XMLFile(Path.Combine(ReportSettings.ReportingParameters.ReportFolder, "Test.xml"));
+				Report.File(Path.Combine(Path.GetDirectoryName(ReportSettings.ReportFile), "Test.xml"));
 
 				foreach (string str in doc.GetElementsByTagName("gtin"))
 				{
@@ -172,14 +172,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			Report.IsTrue(!string.IsNullOrEmpty(token), "Failed to find a xml for UPC: " + upc, "Successfully acquired a report for UPC: " + upc, false, false);
 			Report.Info("Response includes data: " + !string.IsNullOrEmpty(xml));
 
-			using (var sw = new StreamWriter(Path.Combine(ReportSettings.ReportingParameters.ReportFolder, "Test.xml")))
+			using (var sw = new StreamWriter(Path.Combine(Path.GetDirectoryName(ReportSettings.ReportFile), "Test.xml")))
 			{
 				sw.Write(xml);
 				sw.Flush();
 				sw.Close();
 			}
 
-			Report.XMLFile(Path.Combine(ReportSettings.ReportingParameters.ReportFolder, "Test.xml"));
+			Report.File(Path.Combine(Path.GetDirectoryName(ReportSettings.ReportFile), "Test.xml"));
 		}
 
 		[StepDefinition(@"I verify that data was returned as expected from file saved as: (.*)")]

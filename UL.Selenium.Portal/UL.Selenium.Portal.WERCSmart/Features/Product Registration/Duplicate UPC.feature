@@ -311,13 +311,14 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 		| Supplier    | QA_Automation_ProductsAccount |
 		| User        | saved as AccountUsername      |
 	And I find the UPC number for: 5 products in the grid and save them to context starting with: ExistingUPC
-	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100
+	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100 with data:
 	Given I navigate to the landing page
 	Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase91100
 	Given I edit the first product in results
 	Then  I should see the Universal Product Code (UPC) Page
-	And I click the 'Upload UPCs' button and upload the file saved as: test91100
+	And I click the 'Upload UPCs' button and upload the file saved as: test91100 with data:
+	Then I confirm that the Add Multiple UPC window opens
 	Then In the Add Multiple dialog box I select all UPCs
 	Then In the Add Multiple dialog box I select the packaging type: <first>
 	Given In the Add Multiple dialog box I click Next
@@ -412,13 +413,14 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 		| Search Term | Search Value |
 		| Status      | Completed    |
 	Given I find a UPC number for: 5 products not belonging to Supplier: QA_Automation_ProductsAccount in the grid and save to context starting with: ExistingUPC
-	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91101
+	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91101 with data:
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)	
 	Given I search for the product saved as: TestCase91101
 	Given I edit the first product in results
 	Then  I should see the Universal Product Code (UPC) Page
-	And I click the 'Upload UPCs' button and upload the file saved as: test91101
+	And I click the 'Upload UPCs' button and upload the file saved as: test91101 with data:
+	Then I confirm that the Add Multiple UPC window opens
 	Then In the Add Multiple dialog box I select all UPCs
 	Then In the Add Multiple dialog box I select the packaging type: <first>
 	Given In the Add Multiple dialog box I click Next

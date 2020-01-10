@@ -53,6 +53,9 @@ And I click continue
 And I click continue
 And I click continue
 And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+And I should see the Sustainability Page
+Given in the Sustainability page I click Continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Reporting.Functions;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
@@ -49,11 +49,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmDataForEPARegistrationIsComplete(string epaNumber)
 		{
 			var epaRegistrations = new PesticideDetailsUS().EPARegistrationData;
-			TestReport.StartStep("I confirm that the EPA Registration No column of the table shows the EPA number previously entered");
+			Report.StartStep("I confirm that the EPA Registration No column of the table shows the EPA number previously entered");
 			Report.IsTrue(epaRegistrations.Any(x => x.EPANumber == epaNumber),
 				"The EPA Registration No. column did not contain an entry with the manually entered value: " + epaNumber,
 				"As expected the EPA Registration No. column contains an entry with the manually entered value: " + epaNumber);
-			TestReport.StartStep("I confirm that data is present in the Active Ingredient column for EPA registration: " + epaNumber);
+			Report.StartStep("I confirm that data is present in the Active Ingredient column for EPA registration: " + epaNumber);
 			var editedEPA = epaRegistrations.FirstOrDefault(x => x.EPANumber == epaNumber);
 			if (editedEPA == null)
 			{
@@ -66,7 +66,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					"There was no data in the Active Ingredient field for EPA Number: " + epaNumber,
 					"As expected there was data: '" + editedEPA.ActiveIngredient + "' in the Active Ingredient field for EPA Number: " + epaNumber);
 			}
-			TestReport.StartStep("I confirm that data is present in the Percent of Active Ingredient column for EPA registration: " + epaNumber);
+			Report.StartStep("I confirm that data is present in the Percent of Active Ingredient column for EPA registration: " + epaNumber);
 			if (editedEPA == null)
 			{
 				Report.Failure("There were no rows in the EPA Registration table with the user added EPA Number: " + epaNumber);
@@ -78,7 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					"There was no data in the Percentage Active Ingredient field for EPA Number: " + epaNumber,
 					"As expected there was data: '" + editedEPA.PercentActiveIngredient + "' in the Percentage Active Ingredient field for EPA Number: " + epaNumber);
 			}
-			TestReport.StartStep("I confirm that the Active Ingredient and Percent of Active Ingredient columns are un-editable");
+			Report.StartStep("I confirm that the Active Ingredient and Percent of Active Ingredient columns are un-editable");
 			if (editedEPA == null)
 			{
 				Report.Failure("There were no rows in the EPA Registration table with the user added EPA Number: " + epaNumber);
@@ -176,7 +176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmDisplayedColumnsInEPATable(Table columns)
 		{
 			var expectedColumns = new List<string>();
-			columns.Rows.ForEach(x => expectedColumns.Add(x["Column Heading"]));
+			columns.Rows.Cast<TableRow>().ToList().ForEach(x => expectedColumns.Add(x["Column Heading"]));
 			var actualColumns = new NewProduct().TableColumnHeadings();
 			Report.IsTrue(expectedColumns.All(x => actualColumns.Contains(x)),
 				"The expected columns were not displayed in the EPA table. Expected: " + string.Join(", ", expectedColumns) + ". Actual: " + string.Join(", ", actualColumns),
