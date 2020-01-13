@@ -397,6 +397,7 @@ Scenario: [95988] Mass Upload UPCs Floating
 	And I navigate to the home page
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95988
 
+@ScenarioId:6375
 Scenario: [109516] Archive Retailer should Archive UPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC109516
