@@ -122,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickButton(string button)
 		{
-			
+
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2).FirstOrDefault(x => x.Text == button).TryClick();
 		}
 
@@ -149,6 +149,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return retailerList;
+		}
+
+		public bool ConfirmPackageTypeNotShown()
+		{
+			IWebElement packageType = this.containerElement.FindElement(By.XPath("//label[text()='Packaging Type']"), 2);
+			if (packageType == null)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public bool SelectRetailer(string retailer)
@@ -187,7 +200,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnterValidation(string code)
 		{
 			IWebElement inputValidation = this.containerElement.FindElement(By.XPath(".//input[@type='text']"), 2);
-			if(inputValidation == null)
+			if (inputValidation == null)
 			{
 				return false;
 			}

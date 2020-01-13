@@ -211,6 +211,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully selected the first UPC");
 		}
 
+		[StepDefinition(@"I select Edit for the first UPC in Select UPCs tab")]
+		public void SelectEditForFirstUPC()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SelectEditForFirstUPC(),
+				"Failed to select Edit for the first UPC",
+				"Successfully selected Edit for the first UPC");
+		}
+
+		[StepDefinition(@"I confirm that Package Type is not shown")]
+		public void ConfirmPackageTypeNotShown()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ConfirmPackageTypeNotShown(),
+				"The Package Type is erroneously shown!",
+				"The Package Type is correctly not shown.");
+		}
+
 		[StepDefinition(@"I click the 'select all' UPCs checkbox")]
 		public void ClickSelectAllUpcsCheckbox()
 		{
@@ -362,8 +380,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					try
 					{
-						var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-						id = productToSearch.ProductId;
+						var productToSearch = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productToSearch.Id;
 					}
 					catch (Exception)
 					{
@@ -377,6 +395,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Failed to select the product with ID: " + id + "!",
 					"Successfully selected the product with ID: " + id);
 			}
+		}
+
+		[StepDefinition("I select the product with ID saved as: (.*) under the select UPCs tab")]
+		public void SelectProductInSelectUPCsSavedAs(string savedAs)
+		{
+			string id = Context.GetFromContext(savedAs)?.ToString();
+			if (id == null)
+			{
+				Report.Failure("Could not find product ID in context saved as: " + savedAs);
+				return;
+			}
+			if (id.Contains("ProductInformation"))
+			{
+				Report.Info("text: 'ProductInformation' was contained in the string, searching context for product saved as: " + savedAs);
+
+				try
+				{
+					var productToSearch = (ProductInformation)Context.GetFromContext(savedAs);
+					id = productToSearch.Id;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+			}
+
+			this.SelectTheFirstProductSelectUPCs();
 		}
 
 		[StepDefinition(@"I select the product saved as: (.*) under the Select Products tab")]
@@ -1015,53 +1060,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I select the first non Kit product from the list of IDs saved as: (.*) under the Select Products tab")]
 		public void SelectNonKitProductByIDSavedAs(string savedAs)
 		{
-			
-				var selForwardProductReg = new ForwardProductRegistration();
-				Report.Info($"Attempting to select the first product from the list saved as: {savedAs} that is not a kit product");
-				var ids = (List<string>)Context.GetFromContext(savedAs);
-				if (ids == null)
+
+			var selForwardProductReg = new ForwardProductRegistration();
+			Report.Info($"Attempting to select the first product from the list saved as: {savedAs} that is not a kit product");
+			var ids = (List<string>)Context.GetFromContext(savedAs);
+			if (ids == null)
+			{
+				Report.Failure("Could not find product IDs in context saved as: " + savedAs);
+				return;
+			}
+			bool clicked = false;
+			foreach (string id_ in ids)
+			{
+				Report.Info("Attempting to select product with id: " + id_);
+				this.EnterTextInSearchByIDOrProductNameField(id_);
+				if (selForwardProductReg.GetTopProductNameFromSelectProductList().IsNullOrEmpty())
 				{
-					Report.Failure("Could not find product IDs in context saved as: " + savedAs);
-					return;
+					Report.Info($"No Product Name was found for the product with id: {id_}");
+
 				}
-				bool clicked = false;
-				foreach (string id_ in ids)
+				else
 				{
-					Report.Info("Attempting to select product with id: " + id_);
-					this.EnterTextInSearchByIDOrProductNameField(id_);
-					if(selForwardProductReg.GetTopProductNameFromSelectProductList().IsNullOrEmpty())
+					if (selForwardProductReg.GetTopProductNameFromSelectProductList().ToLower().Contains("kit"))
 					{
-						Report.Info($"No Product Name was found for the product with id: {id_}");
-						
+						Report.Info($"The Product Name for id: {id_} contained the word kit. Moving onto the next ID in the list saved as: {savedAs}");
 					}
 					else
 					{
-						if(selForwardProductReg.GetTopProductNameFromSelectProductList().ToLower().Contains("kit"))
+						if (selForwardProductReg.SelectProducts_ClickProductByID(id_))
 						{
-							Report.Info($"The Product Name for id: {id_} contained the word kit. Moving onto the next ID in the list saved as: {savedAs}");
-						}
-						else
-						{
-							if (selForwardProductReg.SelectProducts_ClickProductByID(id_))
-							{
 							Report.Success("Successfully selected product with ID: " + id_);
 							Report.Screenshot();
 							clicked = true;
 							break;
-							}
 						}
-						
-					}	
+					}
 
-					
 				}
-				if (!clicked)
-				{
-					Report.Failure("Failed to select any of the products with ID in the list saved as: " + savedAs);
-					Report.Screenshot();
-				}
-			
-			
+
+
+			}
+			if (!clicked)
+			{
+				Report.Failure("Failed to select any of the products with ID in the list saved as: " + savedAs);
+				Report.Screenshot();
+			}
+
+
 		}
 
 
