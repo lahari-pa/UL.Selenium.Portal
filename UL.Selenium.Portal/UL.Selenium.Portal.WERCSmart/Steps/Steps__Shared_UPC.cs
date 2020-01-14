@@ -1503,5 +1503,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("An error was showing! on click continue! Attempting a different UPC");
 			}
 		}
+
+		[StepDefinition(@"I Check that in the UPC screen, under the Transportation Column to option (.*) is checked")]
+		public void ICheckThatInTheUPCScreenUnderTransportationColumnOptionXisChecked(string option)
+		{
+			Report.Info($"Starting the check of the selected status of option: {option}");
+			bool status= new NewProduct().CheckTransportationOptionXIsChecked(option);
+			Report.IsTrue(status, "The option:" + option + " was not correctly selected", "The option:" + option + " was correctly selected");
+
+		}
+	
 	}
 }

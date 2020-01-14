@@ -428,7 +428,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("As button was apply, waiting for spinner and alert");
 				Delay.Seconds(30);
-				if (!thisApplyRulesPage.WaitForSpinner(60))
+				if (!thisApplyRulesPage.WaitForSpinner(120))
 				{
 					if (SeleniumBrowser.Alert.WaitForAlert(3))
 					{

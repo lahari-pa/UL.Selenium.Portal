@@ -29,6 +29,7 @@
 @run_Suppliers
 Feature: Suppliers
 
+@tfs_design
 Scenario: [74786] Data Tier Consent Tab Layout
 
 
