@@ -1199,5 +1199,45 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	#Check error step
 	#go to home delete product
 
+	Scenario: [Mode7] Mode 7 - Scenario 23 UPC Transportation
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
+	Then I save the product information as: TestCase97484
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Given I should see the Additional Product Information Page
+	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Water         | 100     | false               | false       |            |		
+	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page
+	And The following options should be displayed exclusively for section: Product is Regulated for Transport
+	| Option                               |
+	| Yes                                  |
+	| No, due to an exemption or exception |
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: IMDG
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: IMDG
+	And I click continue
+	And I set the UN Number field to: UN2650
+	And I click continue	
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 55   |      |          |
+	Given I Check that in the UPC screen, under the Transportation Column to option IMDG is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
+	Given I click continue
 
 
+
+	
+
+
+	
