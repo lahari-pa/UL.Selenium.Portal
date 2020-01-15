@@ -3506,6 +3506,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
+		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
+		public void InTheSupplierManagerPopupICheckThatColumnXContainsAllValues(string column, Table table)
+		{
+			//convert table to list here
+			Report.Info("Converting the table to a List");
+			List<string> expectedValues = new List<string>();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				expectedValues.Add(thisRow["Expected Value"]);
+			}
+			Report.IsTrue(new StudioSupplierManager().DataConsentTableIsPresent(), "The Data Consent Tier table was not showing", "The Data Consent Tier table was showing");
+			Report.IsTrue(new StudioSupplierManager().ColumnContains(column,expectedValues),"The column: "+column+" did not contain all the expected values", "The column: " + column + " did contain all the expected values");
+			
+
+
+		}
+
+		[StepDefinition(@"In the supplier manager popup I check that Data Tier Consent Table contains the following columns headings:")]
+		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsHeaders(Table table)
+		{
+			Report.Info("Converting the table to a List");
+			List<string> expectedValues = new List<string>();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				expectedValues.Add(thisRow["Expected Headers"]);
+			}
+			Report.IsTrue(new StudioSupplierManager().DataConsentTiersTableContainsHeaders(expectedValues),"The Headers were not as expected", "The headers were as expected");
+
+		}
+
+
+
 
 
 

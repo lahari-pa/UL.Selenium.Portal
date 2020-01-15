@@ -7,6 +7,7 @@ using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -155,6 +156,159 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool ColumnContains(string columnTitle,List<string> expectedValues)
+		{
+			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<string> tableHeaderStrings = new List<string>();
+			
+			foreach (var item in tableHeaders)
+			{
+				tableHeaderStrings.Add(item.Text);
+			}
+
+			if (columnTitle == "Retailer")
+			{
+				columnTitle = "";
+			}
+			int i = 1;
+			int titlePosition;
+			bool titleFound = false;
+			foreach(var title in tableHeaderStrings)
+			{
+				if(title==columnTitle)
+				{
+					titlePosition = i;
+					titleFound = true;
+					break;
+				}
+				i++;
+			}
+			if(titleFound==false)
+			{
+				return false;
+			}
+
+			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
+			List<string> tableRowStrings = new List<string>();
+			foreach(var row in tableRows)
+			{
+				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+				tableRowStrings.Add(rowText);
+			}
+			var differenceQuery1 = expectedValues.Except(tableRowStrings);
+			var differnceQuery2 = tableRowStrings.Except(expectedValues);
+			var resultingDiff = differenceQuery1.Concat(differnceQuery2).ToList();
+
+			return resultingDiff.Count()==0;
+
+			//int y = 0;
+			//foreach(var row in tableRows)
+			//{
+			//	string rowText=row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+			//	Report.Info($"Found the row text: {rowText} for postion: {i}");
+			//	if(expectedValues.Contains(rowText))
+			//	{
+			//		Report.Info($"This was an expected value");
+			//		y++;
+			//		Report.Info($"Total of the expected values found is now: {y}");
+			//	}
+			//}
+			//return expectedValues.Count == y;
+		}
+
+		public bool ColumnIncludes(string columnTitle, List<string> expectedValues)
+		{
+			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<string> tableHeaderStrings = new List<string>();
+
+			foreach (var item in tableHeaders)
+			{
+				tableHeaderStrings.Add(item.Text);
+			}
+			
+			if (columnTitle == "Retailer")
+			{
+				columnTitle = "";
+			}
+			int i = 1;
+			int titlePosition;
+			bool titleFound = false;
+			Report.Info($"Looking for the postion of column with title: {columnTitle}");
+			foreach (var title in tableHeaderStrings)
+			{
+				if (title == columnTitle)
+				{
+					titlePosition = i;
+					titleFound = true;
+					Report.Info($"The title was found at position: {i}");
+					break;
+				}
+			}
+			if (titleFound == false)
+			{
+				Report.Info("The title was not found in the table");
+				return false;
+			}
+			Report.Info("Starting to look for differences in the column and the expected values");
+			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
+			List<string> tableRowStrings = new List<string>();
+			foreach (var row in tableRows)
+			{
+				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+				tableRowStrings.Add(rowText);
+			}
+			var differenceQuery1 = expectedValues.Except(tableRowStrings);
+			//need to return correctly to indicate this is no difference etc
+			return differenceQuery1.IsNullOrEmpty(); 			
+
+		}
+
+		public bool DataConsentTableIsPresent()
+		{
+			IWebElement dataTierTable = this.containerElement.WaitUntilElementVisible(By.XPath($"//div[@id='dialog-supplier-manager']//table[@class='DataTierConsentGrid']"), 30);
+			if (dataTierTable == null)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public bool DataConsentTiersTableContainsHeaders(List<string> expectedHeaders)
+		{
+
+			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<string> tableHeaderStrings = new List<string>();
+			foreach (var item in tableHeaders)
+			{
+				tableHeaderStrings.Add(item.Text);
+			}
+			int i = 0;
+			bool headersCorrect = true;
+			if(expectedHeaders.Count!=tableHeaderStrings.Count)
+			{
+				Report.Info("The number of headers found did not match the expected number of headers");
+				return false;
+			}
+			foreach(var item in tableHeaderStrings)
+			{
+				Report.Info($"The header found was: {item}");
+				Report.Info($"The header expected was: {expectedHeaders[i]}");
+				if (item!=expectedHeaders[i])
+				{
+					headersCorrect = false;
+					Report.Info($"The header found was not as expected");
+				}
+				else
+				{
+					Report.Info($"The header was as expected");
+				}
+				i++;
+			}
+			return headersCorrect;
+
+
+
+		}
 
 	}
 }
