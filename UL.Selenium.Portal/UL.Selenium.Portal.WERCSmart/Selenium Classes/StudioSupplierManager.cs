@@ -109,5 +109,52 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return closeButton.TryClick();
 		}
 
+		public bool ClickFirstSupplier()
+		{
+			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath(".//table[@id='listSupplierInfo']//tr[not(@class='jqgfirstrow')]"), 2);
+			return firstSupplier.TryClick();
+		}
+
+		public bool ClickCategory(string category)
+		{
+			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();			
+			
+			IWebElement foundCategory = categories.First(x => x.Text == category);
+			if(foundCategory==null)
+			{
+				Report.Info($"Did not find the category: {category}");
+				return false;
+			}
+			Report.Info($"Found the category: {category}, attempting to click the category");
+			return foundCategory.TryClick();
+	
+			
+		}
+
+		public IWebElement CategoryHeaders => this.containerElement.FindElement(By.XPath($".//ul[contains(@class,'ui-tabs-nav')]"), 2);
+
+		public bool CheckCategoriesPresent()
+		{
+			IWebElement categoryHeaders = this.containerElement.WaitUntilElementVisible(By.XPath($"//div[@id='dialog-supplier-manager']//ul[contains(@class,'ui-tabs-nav')]"), 30);
+			if(categoryHeaders==null)
+			{
+				return false;
+			}
+			return true;
+
+		}
+
+		public bool CategoryIsActive(string category)
+		{
+			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();
+			IWebElement foundCategory = categories.First(x => x.Text == category);
+			if(foundCategory.GetAttribute("class").Contains("active"))
+			{
+				return true;
+			}
+			return false;
+		}
+
+
 	}
 }

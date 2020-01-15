@@ -3420,11 +3420,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheAdvancedReportingScreenClickOption(string optionChoice)
 		{
 			var shaReport = new SHAAdvancedReporting();
-			if(optionChoice=="Includes Water")
+			if (optionChoice == "Includes Water")
 			{
 				Report.IsTrue(shaReport.ClickIncludesWater(), "Failed to Click Option: " + optionChoice, "Successfully Clicked Option: " + optionChoice);
 			}
-			if(optionChoice=="Contains Alcohol")
+			if (optionChoice == "Contains Alcohol")
 			{
 				Report.IsTrue(shaReport.ClickContainsAlcohol(), "Failed to Click Option: " + optionChoice, "Successfully Clicked Option: " + optionChoice);
 			}
@@ -3436,7 +3436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var shaReport = new SHAAdvancedReporting();
 			Report.StartStep("I enter UPC Size");
 			shaReport.EnterUPCSize(size);
-			
+
 		}
 
 		[StepDefinition(@"In The advanced reporting screen I choose WERCSmart Retail Recipient Code: (.*)")]
@@ -3482,6 +3482,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Given In the SHA manager grid I see the WPS ID I have saved as product: " + saveAs + " and its status is: Completed");
 			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Completed");
 		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I click on the first supplier returned")]
+		public void InTheSupplierManagerPopupIClickOnFirstSupplier()
+		{
+			Report.Info("Attempting to click on the first supplier returned in the supplier manager popup");
+			Report.IsTrue(new StudioSupplierManager().ClickFirstSupplier(), "Failed to click the first supplier", "Successfully clicked the first supplier");
+			Report.Info("Waiting until the Category headers appear");
+			Report.IsTrue(new StudioSupplierManager().CheckCategoriesPresent(), "The category headers were not present", "The category headers were present");
+
+
+		}
+
+		
+
+		[StepDefinition(@"In The Supplier Manager popup I click on the category: (.*)")]
+		public void InTheSupplierManagerPopupIClickCategory(string category)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep($"Starting to attempt to click the catagory: {category}");
+			Report.IsTrue(new StudioSupplierManager().ClickCategory(category),"Failed to click the category","Successfully clicked the category");
+			Report.IsTrue(new StudioSupplierManager().CategoryIsActive(category), "The Category was not active", "The Category was active");
+			
+		}
+
 
 
 
