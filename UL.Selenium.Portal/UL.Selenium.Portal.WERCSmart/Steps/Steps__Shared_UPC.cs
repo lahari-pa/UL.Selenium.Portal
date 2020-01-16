@@ -1512,6 +1512,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(status, "The option:" + option + " was not correctly selected", "The option:" + option + " was correctly selected");
 
 		}
+
+		
 	
 	}
 }

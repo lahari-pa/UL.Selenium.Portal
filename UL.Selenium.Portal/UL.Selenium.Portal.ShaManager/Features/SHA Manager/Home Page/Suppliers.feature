@@ -29,7 +29,7 @@
 @run_Suppliers
 Feature: Suppliers
 
-@tfs_design
+
 Scenario: [74786] Data Tier Consent Tab Layout
 
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -77,7 +77,6 @@ Then In the Supplier Manager popup I check that in The Data Tier Consent Table t
 
 
 
-#Check that the column titled "Date", see date in mm-dd-yyyy in column ( regex on xx-xx-xxxx, and check first xx is less than 13 always.)
 
 
 

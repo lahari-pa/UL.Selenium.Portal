@@ -1170,7 +1170,6 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: 2-Methyl-1-butene
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -1196,8 +1195,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option IMDG is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
 	Given I click continue
-	#Check error step
-	#go to home delete product
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 	Scenario: [Mode7] Mode 7 - Scenario 23 UPC Transportation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -1230,8 +1229,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option IMDG is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
 	Given I click continue
-	#Check error step
-	#go to home delete product
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 	Scenario: [Mode7] Mode 7 - Scenario 9 UPC Transportation
 	#This scenario needs updating to a differnt scenario (one that takes haz class of 2.x, but first need to to ask about "subsidery haz class"?
@@ -1271,6 +1270,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option IMDG is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
 	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 	Scenario: [Mode6] Mode 6 - Scenario 3 UPC Transportation
 
@@ -1311,6 +1312,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option DOT is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
 	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 	Scenario: [Mode6] Mode 6 - Scenario 28 UPC Trasnportation
 
@@ -1352,8 +1355,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option DOT is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
 	Given I click continue
-	#Check error step
-	#go to home delete product
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 	Scenario: [Mode6] Mode 6 - Scenario 15 UPC Transportation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -1386,8 +1389,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option DOT is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
 	Given I click continue
-	#Check error step
-	#go to home delete product
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 
 	Scenario: [Mode4x5] Mode 4x5 - Scenario 4 UPC Transportation
@@ -1430,6 +1433,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option IATA is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with consumer commodity is checked
 	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 	Scenario: [Mode4x5] Mode 4x5 - Scenario 15 UPC Trasnportation
 
@@ -1463,8 +1468,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option IATA is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with consumer commodity is checked
 	Given I click continue
-	#Check error step
-	#go to home delete product
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 
 	Scenario: [Mode4x5] Mode 4x5 - Scenario 20 UPC Trasnportation
@@ -1499,8 +1504,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option IATA is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
 	Given I click continue
-	#Check error step
-	#go to home delete product
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 
 	Scenario: [Mode4x5] Mode 4x5 - Scenario 25 UPC Transportation
@@ -1534,8 +1539,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option IATA is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with consumer commodity is checked
 	Given I click continue
-	#Check error step
-	#go to home delete product
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 	
 	Scenario: [Mode4x5] Mode 4x5 - Scenario 35 UPC Transportation
@@ -1569,7 +1574,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Given I Check that in the UPC screen, under the Transportation Column to option IATA is checked
 	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with consumer commodity is checked
 	Given I click continue
-	#Check error step
-	#go to home delete product
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
 
 	
