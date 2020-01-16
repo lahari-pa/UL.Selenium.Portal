@@ -8,6 +8,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using System.Net.Mail;
+using System;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -309,6 +313,131 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 		}
+
+		public bool EmailColumnContainsEmailAddresses()
+		{
+			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<string> tableHeaderStrings = new List<string>();
+
+			foreach (var item in tableHeaders)
+			{
+				tableHeaderStrings.Add(item.Text);
+			}
+
+
+			int i = 1;
+			int titlePosition;
+			bool titleFound = false;
+			foreach (var title in tableHeaderStrings)
+			{
+				if (title == "Email")
+				{
+					titlePosition = i;
+					titleFound = true;
+					break;
+				}
+				i++;
+			}
+			if (titleFound == false)
+			{
+				return false;
+			}
+			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
+			List<string> tableRowStrings = new List<string>();
+			foreach (var row in tableRows)
+			{
+				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+				tableRowStrings.Add(rowText);
+			}
+			bool emailValid = true;
+			int y = 1;
+			foreach (var email in tableRowStrings)
+			{
+				if (string.IsNullOrWhiteSpace(email))
+				{
+					Report.Info($"The email in row: {y} was returned as blank");
+					emailValid = false;
+				}
+				try
+				{
+					MailAddress m = new MailAddress(email);
+					Report.Info($"The email in row: {y} was a valid email address");
+
+				}
+				catch
+				{
+					Report.Info($"The email in row: {y} was not a vaid email address");
+					emailValid = false;
+				}
+				y++;
+					
+			}
+
+			return emailValid;
+		}
+
+		public bool DateColumnContainsValidmmddyyyy()
+		{
+			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<string> tableHeaderStrings = new List<string>();
+
+			foreach (var item in tableHeaders)
+			{
+				tableHeaderStrings.Add(item.Text);
+			}
+
+
+			int i = 1;
+			int titlePosition;
+			bool titleFound = false;
+			foreach (var title in tableHeaderStrings)
+			{
+				if (title == "Date")
+				{
+					titlePosition = i;
+					titleFound = true;
+					break;
+				}
+				i++;
+			}
+			if (titleFound == false)
+			{
+				return false;
+			}
+			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
+			List<string> tableRowStrings = new List<string>();
+			foreach (var row in tableRows)
+			{
+				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+				tableRowStrings.Add(rowText);
+			}
+			bool dateValid = true;
+			foreach (var date in tableRowStrings)
+			{
+
+				string pattern = @"^(0?[1-9]|1[012])[\-](0?[1-9]|[12][0-9]|3[01])[\-](19|20)\d\d$";
+				Regex rg = new Regex(pattern);
+				Match match = rg.Match(date);
+				if (match.Success)
+				{
+					Report.Info($"The date: {date} is in the valid format of mm-dd-yyyy");
+				}
+				else
+				{
+					Report.Info($"The date: {date} was not is the valid format of mm-dd-yyyy");
+					dateValid = false;
+				}
+				
+				//issue is that does not handle M-D-YYY
+				//DateTime checkDate;
+				//bool isValid = DateTime.TryParseExact(date,"MM-dd-yyyy",CultureInfo.InvariantCulture,DateTimeStyles.None,out checkDate);
+
+			}
+			return dateValid;
+		}
+
+		
+
 
 	}
 }

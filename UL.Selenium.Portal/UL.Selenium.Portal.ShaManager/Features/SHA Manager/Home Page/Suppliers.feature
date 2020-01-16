@@ -62,6 +62,22 @@ Then In the supplier manager popup I check that Data Tier Consent Table contains
 | Name             |
 | Email            |
 | Date             |
+Then In The Supplier Manager popup I check that the column: Name contains all values found in the table:
+| Expected Value |
+| Richard Smith  |
+| Richard Smith  |
+| Richard Smith  |
+| Richard Smith  |
+| Richard Smith  |
+| Richard Smith  |
+| Richard Smith  |
+| Richard Smith  |
+Then In the Supplier Manager popup I check that in The Data Tier Consent Table the email column contains only valid email addresses
+Then In the Supplier Manager popup I check that in The Data Tier Consent Table the date column contains dates that are in the format mm-dd-yyyy
+
+
+
+#Check that the column titled "Date", see date in mm-dd-yyyy in column ( regex on xx-xx-xxxx, and check first xx is less than 13 always.)
 
 
 

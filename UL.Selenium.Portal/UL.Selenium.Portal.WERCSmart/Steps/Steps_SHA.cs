@@ -3519,8 +3519,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new StudioSupplierManager().DataConsentTableIsPresent(), "The Data Consent Tier table was not showing", "The Data Consent Tier table was showing");
 			Report.IsTrue(new StudioSupplierManager().ColumnContains(column,expectedValues),"The column: "+column+" did not contain all the expected values", "The column: " + column + " did contain all the expected values");
 			
-
-
 		}
 
 		[StepDefinition(@"In the supplier manager popup I check that Data Tier Consent Table contains the following columns headings:")]
@@ -3533,6 +3531,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				expectedValues.Add(thisRow["Expected Headers"]);
 			}
 			Report.IsTrue(new StudioSupplierManager().DataConsentTiersTableContainsHeaders(expectedValues),"The Headers were not as expected", "The headers were as expected");
+
+		}
+
+		[StepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the email column contains only valid email addresses")]
+		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsOnlyValidEmailAddress()
+		{
+			Report.IsTrue(new StudioSupplierManager().EmailColumnContainsEmailAddresses(), "The columns contained non valid email addresses", "The column contained only valid email addresses");
+						
+		}
+
+		[StepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the date column contains dates that are in the format mm-dd-yyyy")]
+		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsOnlyDatesInFormatmmddyyyy()
+		{
+			Report.IsTrue(new StudioSupplierManager().DateColumnContainsValidmmddyyyy(), "The Date column contained at least one non valid date", "The Date column contained only valid dates");
 
 		}
 
