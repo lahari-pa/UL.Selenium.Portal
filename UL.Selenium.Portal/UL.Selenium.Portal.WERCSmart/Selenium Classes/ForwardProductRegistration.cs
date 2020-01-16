@@ -468,6 +468,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath("//button[@id='add-new-row-btn' and contains(@data-bind,'addNewPackRow')]"), 2).TryClick();
 		}
 
+		
+
+
 		public bool ClickAddToNoRetailer()
 		{
 			return this.containerElement.FindElement(By.XPath(".//button[@id='add-new-row-btn' and contains(@data-bind,'addToNoRetailer')]"), 2).TryClick();
@@ -969,6 +972,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	class AddCaseUPCModal : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@class='modal-content']");
+		//div[@class='modal-content' and //div[@class='modal-body']//div//div//div[@class='col-sm-6']//div//label[text()='Individual UPC contained in the Case Pack']]
 
 		public bool EnterCaseUPCInformation(TableRow row)
 		{
@@ -1045,6 +1049,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickSave()
 		{
 			return this.containerElement.FindElement(By.XPath(@"//button[contains(text(), 'Save')]"), 2).TryClick();
+		}
+
+		public bool WaitForAddCaseUPCPopup()
+		{
+			return this.WaitForContainerToBeVisible(30);
 		}
 	}
 }

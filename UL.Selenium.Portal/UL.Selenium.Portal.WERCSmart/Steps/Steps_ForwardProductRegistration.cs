@@ -1064,6 +1064,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
+		[StepDefinition(@"I wait for the Add Case UPC popup to appear")]
+		public void IWaitForTheAddCaseUPCPopupToAppear()
+		{
+			Report.IsTrue(new AddCaseUPCModal().WaitForAddCaseUPCPopup(), "The Add Case UPC modal did not appear", "The Add case upc modal appeared");
+		}
 
 
 	}
