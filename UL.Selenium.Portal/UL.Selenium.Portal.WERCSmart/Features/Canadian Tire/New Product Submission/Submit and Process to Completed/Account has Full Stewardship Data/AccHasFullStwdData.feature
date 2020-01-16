@@ -145,6 +145,7 @@ Scenario: [85286] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85286)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase85286)
 	#And I Confirm your product is shown in the Submitted status.Note this may take a few minutes for the Zuora process to process your product, if it is not shown in Submitted wait a minute or two and re-search for your product
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase85286)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85286)
