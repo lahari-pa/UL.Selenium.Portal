@@ -1136,7 +1136,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 
 	#================================================================= DOT ==========================================================================#
 
-	Scenario: [#####] Mode 1 - 6 - If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
+	Scenario: [] Mode 1 - 6 - If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
 		# If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1198,7 +1198,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 		Then I should see the following error text displayed in the UPC screen: 1
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase10006
 
-	Scenario: [######] Mode 1 - 3 - If physical state is Aerosol and DOT UN is 3159 and UPC Size is > 33.814 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and DOT Special Permit is “14188” or 20464” then populate UPCTERR with “1”
+	Scenario: [] Mode 1 - 3 - If physical state is Aerosol and DOT UN is 3159 and UPC Size is > 33.814 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and DOT Special Permit is “14188” or 20464” then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
@@ -1253,7 +1253,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 		Then I should see the following error text displayed in the UPC screen: 1
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase10003
 
-	Scenario: [######]  Mode 1 - 21 – If DOT Hazard Class is 5.2 and physical state is Solid and UPC > 3.381 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and Proper Shipping name is Type B or C then populate UPCTERR with “1”
+	Scenario: []  Mode 1 - 21 – If DOT Hazard Class is 5.2 and physical state is Solid and UPC > 3.381 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and Proper Shipping name is Type B or C then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
@@ -1312,7 +1312,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 
 #================================================================== IATA + DOT =====================================================================#
 
-	Scenario: [######]  Mode 2/3 - 2 – If IATA Hazard Class is 2.1 or 2.2 and IATA UN is 1950 and IATA Subsidiary Hazard is 6.1 and UPC Size > 4.058 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
+	Scenario: []  Mode 2/3 - 2 – If IATA Hazard Class is 2.1 or 2.2 and IATA UN is 1950 and IATA Subsidiary Hazard is 6.1 and UPC Size > 4.058 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
@@ -1380,7 +1380,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 
 
 
-	Scenario: [######]  Mode 2/3 - 16 – If IATA Hazard Class is 5.1 and Packing group is II and physical state is liquid and UPC Size > 3.381 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
+	Scenario: []  Mode 2/3 - 16 – If IATA Hazard Class is 5.1 and Packing group is II and physical state is liquid and UPC Size > 3.381 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -1455,7 +1455,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase20016
 
 
-	Scenario: [######]  Mode 2/3 - 34 – If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and DOT is Consumer Commodity at the UPC level then populate UPCTERR with “1”
+	Scenario: []  Mode 2/3 - 34 – If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and DOT is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -1531,7 +1531,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 
 #======================================================================== IATA ======================================================================
 
-	Scenario: [######]  Mode 4/5 - 5 – If IATA Hazard Class is 2.2 and IATA UN is 1950 and UPC Size > 27.728 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
+	Scenario: []  Mode 4/5 - 5 – If IATA Hazard Class is 2.2 and IATA UN is 1950 and UPC Size > 27.728 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
@@ -1586,7 +1586,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 		Then I should see the following error text displayed in the UPC screen: 1
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase40005
 
-	Scenario: Mode 4/5 - 21 - If IATA Hazard Class is 6.1 and Packing group is III and physical state is liquid and UPC Size > 16.907 oz and IATA is Limited Quantity at the UPC level then populate UPCTERR with “1”
+	Scenario: [] Mode 4/5 - 21 - If IATA Hazard Class is 6.1 and Packing group is III and physical state is liquid and UPC Size > 16.907 oz and IATA is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -1648,7 +1648,7 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 		Then I should see the following error text displayed in the UPC screen: 1
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase40021
 
-	Scenario: Mode 4/5 - 34 - If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
+	Scenario: [] Mode 4/5 - 34 - If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
