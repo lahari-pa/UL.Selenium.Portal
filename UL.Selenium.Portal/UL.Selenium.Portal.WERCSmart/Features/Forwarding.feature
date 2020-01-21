@@ -15,6 +15,7 @@
 @ProductSetUp
 @ViewUpcs
 @Shared
+@run_Forwarding
 Feature: Forwarding
 
 @ScenarioId:6325

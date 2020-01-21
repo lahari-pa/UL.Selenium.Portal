@@ -181,6 +181,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			Report.StartStep("I click the 'Add UPC' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Delay.Seconds(3);
 			Report.StartStep("I add the following into the UPC Fields");
 			if (upc.Contains("Equals"))
 			{
@@ -199,7 +200,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
 				upcTable.AddRow("Size", size);
-				
+
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 		}
@@ -402,7 +403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		
+
 		[StepDefinition(@"I call Shared Step 87647 \(UPC - Confirm Package type Link and field shown and required \) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
 		public void EnterUPCInfoConfirmPackagingTypeLinkAndError(string upc, string containerType, string size)
 		{
@@ -451,7 +452,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Successfully found the error message");
 			}
 		}
-		
+
 
 		[StepDefinition(@"I call Shared Step 85909 \(UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
 		public void EnterUPCInfoConfirmPackagingTypeLinkdoesNotExists(string upc, string containerType, string size)
@@ -675,7 +676,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check that the (Item Number|Part Number|DPCI|OMSID) of each (.*) product matches the excel file named: (.*) uploaded saved as: (.*)")]
 		public void ICheckValueOfEachRetailerProductFromFile(string value, string retailer, string file, string savedAs)
 		{
-			Report.IsTrue(new MultipleUPC().CheckValueOfEachRetailerProductFromFile(value, retailer,file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
+			Report.IsTrue(new MultipleUPC().CheckValueOfEachRetailerProductFromFile(value, retailer, file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
 
 		}
 
@@ -1340,7 +1341,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new UPC().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
 		}
-		
+
 		[StepDefinition(@"I call Shared Step 292066 \\\(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\\\)")]
 		public void GivenICallSharedStepRetailer_SelectNoRetailer_ClickDone_ClickContinue_HappyPath()
 		{
@@ -1371,11 +1372,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(NewProductClassObject.FillInUPCData(productUPC, productType, productWeight), "Failed to fill in UPC data", "Succeeded to fill in UPC data");
 		}
 
-	   [StepDefinition(@"I remove randomly selected retailers")]
+		[StepDefinition(@"I remove randomly selected retailers")]
 		public void GivenIRemoveRetailers()
 		{
 			NewProduct NewProductClassObject = new NewProduct();
 			Report.IsTrue(NewProductClassObject.RemoveRandomRetailers(), "Failed to remove random retailers", "Succeeded to remove random retailers");
+		}
+
+		[StepDefinition(@"I remove the following retailers")]
+		public void IRemoveTheFollowingRetailers(Table table)
+		{
+			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.RemoveRetailers(table), "Failed to remove the retailers", "Successfully removed retailers");
 		}
 
 		[StepDefinition(@"I click the 'Restore Selected' button")]
@@ -1399,6 +1407,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			NewProduct NewProductClassObject = new NewProduct();
 			Report.IsTrue(NewProductClassObject.AddRandomRetailersThatWereRemoved(), "Failed to add random retailers", "Succeeded to add random retailers");
+		}
+
+		[StepDefinition(@"I select the following Retailers to restore")]
+		public void ISelectTheFollowingRetailerToRestore(Table table)
+		{
+			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.AddRetailersThatWereRemoved(table), "Failed to add random retailers", "Succeeded to add random retailers");
+
 		}
 
 		[StepDefinition(@"I click 'Select All' to add all removed retailers")]
@@ -1502,6 +1518,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				stepsNewProduct.GivenIDeleteUPC(upc);
 				Report.Info("An error was showing! on click continue! Attempting a different UPC");
 			}
+		}
+
+		[StepDefinition(@"I expand the chevron for UPC saved as (.*)")]
+		public void IExpandTheChevronforUPCSavedAs(string savedAs)
+		{
+			string upc = Context.GetFromContext(savedAs)?.ToString();
+			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.SelectChevronForUPC(upc), "Failed to select chevron for upc " + upc, "Successfully selected chevron!");
 		}
 	}
 }

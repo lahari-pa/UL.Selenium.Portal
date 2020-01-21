@@ -380,8 +380,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmPackageTypeNotShown()
 		{
-			var modal = new ModalDialog();
-			return modal.ConfirmPackageTypeNotShown();
+			var editUPCs = new EditUPC();
+			return editUPCs.ConfirmPackageTypeNotShown();
 		}
 
 		public bool SelectUPCByNumber(string aUPCNumber)
@@ -890,6 +890,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				return matchingButton.TryClick();
 
+			}
+
+			public bool ConfirmPackageTypeNotShown()
+			{
+				IWebElement packageType = this.containerElement.FindElement(By.XPath("//label[text()='Packaging Type']"), 2);
+				if (packageType == null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
 		}
 

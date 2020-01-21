@@ -397,33 +397,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition("I select the product with ID saved as: (.*) under the select UPCs tab")]
-		public void SelectProductInSelectUPCsSavedAs(string savedAs)
-		{
-			string id = Context.GetFromContext(savedAs)?.ToString();
-			if (id == null)
-			{
-				Report.Failure("Could not find product ID in context saved as: " + savedAs);
-				return;
-			}
-			if (id.Contains("ProductInformation"))
-			{
-				Report.Info("text: 'ProductInformation' was contained in the string, searching context for product saved as: " + savedAs);
-
-				try
-				{
-					var productToSearch = (ProductInformation)Context.GetFromContext(savedAs);
-					id = productToSearch.Id;
-				}
-				catch (Exception)
-				{
-					//do nothing
-				}
-			}
-
-			this.SelectTheFirstProductSelectUPCs();
-		}
-
 		[StepDefinition(@"I select the product saved as: (.*) under the Select Products tab")]
 		public void ISelectTheProductSavedAsUnderSelectProducts(string savedAs)
 		{

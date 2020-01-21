@@ -151,19 +151,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return retailerList;
 		}
 
-		public bool ConfirmPackageTypeNotShown()
-		{
-			IWebElement packageType = this.containerElement.FindElement(By.XPath("//label[text()='Packaging Type']"), 2);
-			if (packageType == null)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
 		public bool SelectRetailer(string retailer)
 		{
 			ReadOnlyCollection<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
