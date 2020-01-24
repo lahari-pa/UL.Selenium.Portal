@@ -376,6 +376,7 @@
     </None>
     <None Include="Features\Forgotten Password.feature">
     </None>
+    <None Include="Features\Forwarding.feature" />
     <None Include="Features\Home page\Actions\Actions.feature">
     </None>
     <None Include="Features\Home page\Actions\EditUPCs.feature" />

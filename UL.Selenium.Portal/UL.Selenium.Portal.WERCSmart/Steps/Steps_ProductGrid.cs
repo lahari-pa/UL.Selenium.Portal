@@ -644,8 +644,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
-			Report.Info("Generated UPC No: " + uPCNo);
-			Delay.Seconds(2);
+			//Report.Info("Generated UPC No: " + uPCNo);
+			//Delay.Seconds(2);
+			Report.Info(uPCNo);
+			Delay.Seconds(1);
 
 		}
 
@@ -660,6 +662,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				listOfUPCs.Add(thisUPCName);
 			}
 			Context.AddToContext(savedAs, listOfUPCs);
+		}
+
+		[StepDefinition(@"I create a new excel document called (.*) and save as (.*)")]
+		public void ICreateANewExcelDocumentCalledAndSaveAs(string excelName, string saveAs)
+		{
+			var excel = ExcelFunctions.CreateSpreadsheet(excelName);
+			Context.AddToContext(saveAs, excel);
+		}
+
+		[StepDefinition(@"I save the list of UPCs saved as (.*) to excel spreadsheet saved as (.*)")]
+		public void ISaveTheListOfUPCsSavedAsToExcelSpreadsheetSavedAs(string listSavedAs, string excelSavedAs)
+		{
+			var listOfUPCs = (List<string>)Context.GetFromContext(listSavedAs);
+			var excel = (ExcelFunctions)Context.GetFromContext(excelSavedAs);
+			foreach (string upc in listOfUPCs)
+			{
+				var tinyList = new List<string> {
+					upc
+				};
+				excel.AddRow(tinyList);
+			}
 		}
 
 		[StepDefinition(@"I delete all products in contextual list of UPCs: (.*)")]
@@ -779,7 +802,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selProductsGrid = new ProductsGrid();
 			string pageNavigationValue = selProductsGrid.CurrentPageGridNavigationInput();
-			if(pageNavigationValue==null)
+			if (pageNavigationValue == null)
 			{
 				Report.Info("The Navigation Input was not showing");
 			}
@@ -1044,7 +1067,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var test = Context.GetFromContext(id);
 			//if (Context.GetFromContextRegex(id, out var result))
-			if(test != null)
+			if (test != null)
 			{
 				Report.Info("Getting ID from context: " + id);
 				id = test.ToString();
@@ -2330,7 +2353,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IConfirmTheRejectedRegistrationPopupDisplaysTheWarning(string expectedWarning)
 		{
 			var modalDialog = new ModalDialog();
-			
+
 			if (!modalDialog.Wait_for_load())
 			{
 				Report.Failure("The Rejected Registration popup was not displayed!");
@@ -2353,7 +2376,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IConfirmTheRejectedRegistrationPopupHasClosed()
 		{
 			var modalDialog = new ModalDialog();
-			
+
 			if (!Report.IsTrue(modalDialog.Wait_for_close(), "The modal dialog did not close!", "The modal dialog closed as expected"))
 			{
 				if (modalDialog.GetTitle() == "Rejected Registration")
@@ -2367,8 +2390,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheModalDialogIClickButton()
 		{
 
-			Report.IsTrue(new ModalDialog().Click_Continue(), "Failed to click the Continue button","Successfully clicked Continue");
-			
+			Report.IsTrue(new ModalDialog().Click_Continue(), "Failed to click the Continue button", "Successfully clicked Continue");
+
 		}
 
 		[StepDefinition(@"In the Products Grid I delete All products")]
