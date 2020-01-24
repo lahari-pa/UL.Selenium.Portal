@@ -22,7 +22,6 @@ Background:
 
 @33001
 #The ULSC Account does not seem to be successfully linked
-@TReVorId:22178
 Scenario: [33001] Navigation links - ULSC - Data Management
 Given I navigate to WERCSmart
 Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
@@ -35,7 +34,6 @@ And I Confirm New window opens with the Studio Data Management window open (Welc
 And I close the tab with the Data Management page
 
 @32996
-@TReVorId:22177
 Scenario: [32996] ULSC - Data Management - User does not have access to Studio
 Given I navigate to WERCSmart
 Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
@@ -45,7 +43,7 @@ Then I click the ULSC - Data Management icon in the QuickLinks Pane
 And I Confirm New window opens with the error message: Your WERCSmart email address has either not been configured or licensed to access ULSC. Please contact your ULSC representative to learn more.
 
 
-@TReVorId:22176
+@ScenarioId:6449
 Scenario: [23327] WERCSLink - WERCSmart - My Products Page Shows OK
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 And I call Shared Step 29148 - Login to ULSC as an Administrator User
