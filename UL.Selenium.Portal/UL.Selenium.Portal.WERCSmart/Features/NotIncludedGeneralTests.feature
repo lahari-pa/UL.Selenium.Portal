@@ -1134,70 +1134,578 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 	Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
 	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSCleaningExcelFile and check that is shows the expected product saved as: CVSCleaningProduct1
 
-	Scenario: [IngredientCreate] Create Ingredient
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I click on My Account
-	Given In the My Account page I navigate to the My Library page
-	Given I navigate to the My Ingredients tab in the My Library page
-	And I save the current list of ingredients in My Library to context as: My Library Ingredients
+	#================================================================= DOT ==========================================================================#
 
-	Given I enter the text: wat into the My Ingredients search field
-	And I select the smart search result with name: Water and CAS: 7732-18-5
-	Given I enter the text: wat into the My Ingredients search field
-	And I select the smart search result with name: Water and CAS: 7732-18-5
-	Given I enter the text: wat into the My Ingredients search field
-	And I select the smart search result with name: Water and CAS: 7732-18-5
-	Given I enter the text: wat into the My Ingredients search field
-	And I select the smart search result with name: Water and CAS: 7732-18-5
-	Given I enter the text: wat into the My Ingredients search field
-	And I select the smart search result with name: Water and CAS: 7732-18-5
-	Given I click Save in the My Ingredients tab	
-	Given I click the WERCSmart logo
-	Then The home screen should load
+	Scenario: [] Mode 1 - 6 - If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
+		# If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+		Then I save the product information as: TestCase10006
+		And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I set the Boiling Point (in Celsius) field to: 100
+		And I set the Flash Point (in Celsius) field to: 50
+		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
+		| Option            |
+		| Closed cup method |
+		And I set the Flash Point Testing Method Used field to: Closed cup method
+		And I set the Select the best Water Solubility description field to: Insoluble
+		And I click continue
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: 1-Pentene
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| DOT                              |
+		| Shipping with limited quantity   |
+		| Shipping with consumer commodity |
+		And I click continue
 
-	Scenario: [Mode7] Mode 7 - Scenario 4 UPC Trasnportation
+		# U. S. Department of Transportation (DOT) Classification Page
+		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		And I set the UN Number field to: UN1108
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 3
+		And I set the Packing Group (select) field to: I
+		And I set the Product has a boiling point of option to: The UN# classification assigned to this product has a specific Packaging Group required.
+		Given in the New Product page I click Continue
 
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
-	And I set the Boiling Point (in Celsius) field to: 1
-	And I set the Flash Point (in Celsius) field to: 1
-	And The following options should be displayed exclusively for section: Flash Point Testing Method Used
-	| Option            |
-	| Closed cup method |
-	And I set the Flash Point Testing Method Used field to: Closed cup method
-	And I set the Select the best Water Solubility description field to: Insoluble
-	And I click continue
-	#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: 2-Methyl-1-butene
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I should see the Transportation Details 1 Page
-	And The following options should be displayed exclusively for section: Product is Regulated for Transport
-	| Option                               |
-	| Yes                                  |
-	| No, due to an exemption or exception |
-	And I set the Product is Regulated for Transport field to: Yes
-	And I set the Select all modes of transport that you've classified the product for field to: IMDG
-	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: IMDG
-	And I click continue
-	And I set the UN Number field to: UN2459
-	And I click continue
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer  |
-		| Walgreens |
-	Given I click the 'Add UPC' button
-	Then I generate a random UPC number and save as: RandomUPC91076
-	Given I add the following into the UPC Fields
-		| UPC Number              | Container Type    | Size | DPCI | Quantity |
-		| saved as RandomUPC91076 | Plastic Container | 55   |      |          |
-	Given I Check that in the UPC screen, under the Transportation Column to option IMDG is checked
-	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
-	Given I click continue
-	#Check error step
-	#go to home delete product
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC10006
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC10006 |
+		| ContainerType | Glass Container   |
+		| Size          | 66                |
+		And in the New Product page I click Continue
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase10006
+
+	Scenario: [] Mode 1 - 3 - If physical state is Aerosol and DOT UN is 3159 and UPC Size is > 33.814 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and DOT Special Permit is “14188” or 20464” then populate UPCTERR with “1”
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
+		Then I save the product information as: TestCase10003
+		And I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| DOT                              |
+		| Shipping with limited quantity   |
+		| Shipping with consumer commodity |
+		#And in the Product Characteristics tab of the New Product Page, I enter: 14188 in the Provide Special Permit numbers text field
+		And I set the Provide Special Permit numbers (if applicable) field to: 14188
+		# 20464 || 14188 
+		And I click continue
+
+		# U. S. Department of Transportation (DOT) Classification Page
+		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		And I set the UN Number field to: UN3159
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 2.2
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC10003
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC10003 |
+		| ContainerType | Aerosol Can       |
+		| Size          | 32                |
+		And in the New Product page I click Continue
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase10003
+
+	Scenario: []  Mode 1 - 21 – If DOT Hazard Class is 5.2 and physical state is Solid and UPC > 3.381 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and Proper Shipping name is Type B or C then populate UPCTERR with “1”
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
+		Then I save the product information as: TestCase10021
+		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+		#Transportation Details Page
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| DOT                              |
+		| Shipping with limited quantity   |
+		| Shipping with consumer commodity |
+		And I click continue
+
+		# U. S. Department of Transportation (DOT) Classification Page
+		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		And I set the UN Number field to: UN3102
+		And I set the Proper Shipping Name field to: Organic peroxide type B, solid
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 5.2
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC10021
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC10021 |
+		| ContainerType | Glass Container   |
+		| Size          | 7                 |
+		And in the New Product page I click Continue
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase10021
+
+
+#================================================================== IATA + DOT =====================================================================#
+
+	Scenario: []  Mode 2/3 - 2 – If IATA Hazard Class is 2.1 or 2.2 and IATA UN is 1950 and IATA Subsidiary Hazard is 6.1 and UPC Size > 4.058 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
+		Then I save the product information as: TestCase20002
+		And I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| IATA                             |
+		| Shipping with limited quantity   |
+		| Shipping with consumer commodity |
+		| DOT                              |
+		| Shipping with limited quantity   |
+
+		And I click continue
+
+		# U. S. Department of Transportation (DOT) Classification Page
+		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		And I set the UN Number field to: UN1950
+		And I set the Proper Shipping Name field to: Aerosols
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 2.2
+		And I set the Packing Group (select) field to: None
+		Given in the New Product page I click Continue
+
+		# International Air Transport (IATA) Classification Page
+		Then I should see the International Air Transport (IATA) Classification Page
+		And I set the UN Number field to: UN1950
+		And I set the Proper Shipping Name field to: Aerosols, flammable, containing substances in Division 6.1, Packing Group III
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 2.1
+		And I set the Packing Group (select) field to: None
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC20002
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC20002 |
+		| ContainerType | Aerosol Can       |
+		| Size          | 9                 |
+		And in the New Product page I click Continue
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase20002
 
 
 
+	Scenario: []  Mode 2/3 - 16 – If IATA Hazard Class is 5.1 and Packing group is II and physical state is liquid and UPC Size > 3.381 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+		Then I save the product information as: TestCase20016
+		And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I set the Boiling Point (in Celsius) field to: 200
+		And I set the Flash Point (in Celsius) field to: 100
+		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
+		| Option                   |
+		| Closed cup method        |
+		| Open cup method          |
+		| Not applicable/available |
+		And I set the Flash Point Testing Method Used field to: Closed cup method
+		And I set the Select the best Water Solubility description field to: Insoluble
+		And I click continue
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Ammonium dichromate
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| IATA                             |
+		| Shipping with limited quantity   |
+		| DOT                              |
+		| Shipping with limited quantity   |
+		And I click continue
+
+		# U. S. Department of Transportation (DOT) Classification Page
+		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		And I set the UN Number field to: UN1439
+		And I set the Proper Shipping Name field to: Ammonium dichromate
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 5.1
+		And I set the Packing Group (select) field to: II
+		Given in the New Product page I click Continue
+
+		# International Air Transport (IATA) Classification Page
+		Then I should see the International Air Transport (IATA) Classification Page
+		And I set the UN Number field to: UN1439
+		And I set the Proper Shipping Name field to: Ammonium dichromate
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 5.1
+		And I set the Packing Group (select) field to: II
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC20016
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC20016 |
+		| ContainerType | Glass Container   |
+		| Size          | 7                 |
+		And in the New Product page I click Continue
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase20016
+
+
+	Scenario: []  Mode 2/3 - 34 – If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and DOT is Consumer Commodity at the UPC level then populate UPCTERR with “1”
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+		Then I save the product information as: TestCase20034
+		And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I set the Boiling Point (in Celsius) field to: 200
+		And I set the Flash Point (in Celsius) field to: 100
+		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
+		| Option                   |
+		| Closed cup method        |
+		| Open cup method          |
+		| Not applicable/available |
+		And I set the Flash Point Testing Method Used field to: Closed cup method
+		And I set the Select the best Water Solubility description field to: Insoluble
+		And I click continue
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzaldehyde
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| IATA                             |
+		| Shipping with limited quantity   |
+		| DOT                              |
+		| Shipping with limited quantity   |
+		And I click continue
+
+		# U. S. Department of Transportation (DOT) Classification Page
+		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		And I set the UN Number field to: UN1990
+		And I set the Proper Shipping Name field to: Benzaldehyde
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 9
+		And I set the Packing Group (select) field to: III
+		Given in the New Product page I click Continue
+
+		# International Air Transport (IATA) Classification Page
+		Then I should see the International Air Transport (IATA) Classification Page
+		And I set the UN Number field to: UN1990
+		And I set the Proper Shipping Name field to: Benzaldehyde
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 9
+		And I set the Packing Group (select) field to: III
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC20034
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC20034 |
+		| ContainerType | Glass Container   |
+		| Size          | 32                |
+		And in the New Product page I click Continue
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase20034
+
+
+#======================================================================== IATA ======================================================================
+
+	Scenario: []  Mode 4/5 - 5 – If IATA Hazard Class is 2.2 and IATA UN is 1950 and UPC Size > 27.728 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
+		Then I save the product information as: TestCase40005
+		#And I call Shared Step 57454 (Product Characteristics - Aerosol & Gas available - Select Aerosol - Continue - Happy Path)
+		And I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| IATA                             |
+		| Shipping with consumer commodity |
+
+		And I click continue
+
+		# International Air Transport (IATA) Classification Page
+		Then I should see the International Air Transport (IATA) Classification Page
+		And I set the UN Number field to: UN1950
+		And I set the Proper Shipping Name field to: Aerosols, non-flammable
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 2.2
+		#And I set the Packing Group (select) field to: None
+		#And I set the Product has a boiling point of option to: The UN# classification assigned to this product has a specific Packaging Group required.
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC40005
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC40005 |
+		| ContainerType | Aerosol Can       |
+		| Size          | 55                 |
+		And in the New Product page I click Continue
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase40005
+
+	Scenario: [] Mode 4/5 - 21 - If IATA Hazard Class is 6.1 and Packing group is III and physical state is liquid and UPC Size > 16.907 oz and IATA is Limited Quantity at the UPC level then populate UPCTERR with “1”
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+		Then I save the product information as: TestCase40021
+		And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I set the Boiling Point (in Celsius) field to: 200
+		And I set the Flash Point (in Celsius) field to: 100
+		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
+		| Option                   |
+		| Closed cup method        |
+		| Open cup method          |
+		| Not applicable/available |
+		And I set the Flash Point Testing Method Used field to: Closed cup method
+		And I set the Select the best Water Solubility description field to: Insoluble
+		And I click continue
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Acridine
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| IATA                             |
+		| Shipping with limited quantity   |
+		And I click continue
+
+		# International Air Transport (IATA) Classification Page
+		Then I should see the International Air Transport (IATA) Classification Page
+		And I set the UN Number field to: UN2713
+		And I set the Proper Shipping Name field to: Acridine
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 6.1
+		And I set the Packing Group (select) field to: III
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC40021
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC40021 |
+		| ContainerType | Glass Container   |
+		| Size          | 32                |
+		And in the New Product page I click Continue
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase40021
+
+	Scenario: [] Mode 4/5 - 34 - If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+		Then I save the product information as: TestCase40021
+		And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+		And I set the Boiling Point (in Celsius) field to: 200
+		And I set the Flash Point (in Celsius) field to: 100
+		And The following options should be displayed exclusively for section: Flash Point Testing Method Used
+		| Option                   |
+		| Closed cup method        |
+		| Open cup method          |
+		| Not applicable/available |
+		And I set the Flash Point Testing Method Used field to: Closed cup method
+		And I set the Select the best Water Solubility description field to: Insoluble
+		And I click continue
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzaldehyde
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| IATA                             |
+		| Shipping with consumer commodity |
+		And I click continue
+
+		# International Air Transport (IATA) Classification Page
+		Then I should see the International Air Transport (IATA) Classification Page
+		And I set the UN Number field to: UN1990
+		And I set the Proper Shipping Name field to: Benzaldehyde
+		And I set the Technical Name (if applicable) field to: My Safe Product
+		And I set the Hazard Class (select) field to: 9
+		And I set the Packing Group (select) field to: III
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC40021
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC40021 |
+		| ContainerType | Glass Container   |
+		| Size          | 32                |
+		And in the New Product page I click Continue
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase40021
