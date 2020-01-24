@@ -3937,6 +3937,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return true;
 		}
+
+		public bool CheckTransportationOptionXIsChecked(string option)
+		{
+			Report.Info($"Checking that the Option {option} is checked");
+			IWebElement optionInput = this.containerElement.FindElement(By.XPath($".//span[text()='{option}']//preceding-sibling::input"), 2);			
+			return optionInput.Checked();
+		}
 	}
 
 	public class ProductInformation

@@ -738,7 +738,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I delete the product: (.*)")]
 		public void ThenIDeleteTheProduct(string savedas)
 		{
-			var Product = (ProductInformation)Context.GetFromContext(savedas);
+			Report.Info("Attempting to get product from context");
+			if(!Context.Contains(savedas))
+			{
+				Report.Failure($"Context did not contain the Product saved as: {savedas}");
+			}
+			else
+			{
+				Report.Info("Found in Context");
+			}
+			var obj = Context.GetFromContext(savedas);
+			Report.Info("Attempting to convert Product to type ProductInformation");
+			var Product = (ProductInformation)obj;
 			Report.Info("Attempting to delete: " + Product.Name);
 			var ProductGrid = new ProductsGrid {
 				ProductIdField = Product.Id

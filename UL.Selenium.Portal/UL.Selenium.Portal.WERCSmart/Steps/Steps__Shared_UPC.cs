@@ -1527,5 +1527,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var NewProductClassObject = new NewProduct();
 			Report.IsTrue(NewProductClassObject.SelectChevronForUPC(upc), "Failed to select chevron for upc " + upc, "Successfully selected chevron!");
 		}
+
+		[StepDefinition(@"I Check that in the UPC screen, under the Transportation Column to option (.*) is checked")]
+		public void ICheckThatInTheUPCScreenUnderTransportationColumnOptionXisChecked(string option)
+		{
+			Report.Info($"Starting the check of the selected status of option: {option}");
+			bool status= new NewProduct().CheckTransportationOptionXIsChecked(option);
+			Report.IsTrue(status, "The option:" + option + " was not correctly selected", "The option:" + option + " was correctly selected");
+
+		}
+	
 	}
 }

@@ -876,7 +876,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IConfirmThatTheUPCNumberSavedAsShowsAGreyBackground(string savedAs)
 		{
 			string upc = Context.GetFromContext(savedAs)?.ToString() ?? "";
-			Report.Info($"Getting UPC From Context, Found:");
+			Report.Info($"Getting UPC From Context, Found: {upc}");
 			if (upc == "")
 			{
 				Report.Failure("Failed to find upc saved as " + savedAs + " in context.");

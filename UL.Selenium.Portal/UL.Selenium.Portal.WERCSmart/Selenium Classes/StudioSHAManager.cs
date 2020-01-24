@@ -1234,6 +1234,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			string background = upcRow.GetCssValue("background-color");
 
+			Report.Info($"The css value was found to be: {background}");
+			string backgroundColourTest = upcRow.GetAttribute("background-color");
+			Report.Info($"The string for the attribute 'background-color' was found to be: {backgroundColourTest}");
+
 			return background == "rgb(235, 235, 224)";
 		}
 
