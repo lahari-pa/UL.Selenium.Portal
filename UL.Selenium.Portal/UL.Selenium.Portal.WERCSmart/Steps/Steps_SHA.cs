@@ -1924,6 +1924,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GivenIConfirmTheFilenameColumnShowsAnEntryForXxxxxxx_Pdf_WhereXxxxxxxIsTheProductIdOfProductSavedAsTestCase(
 				string savedAs)
 		{
+			Report.Info("Waiting for document list");
+			Delay.Seconds(8);
 			List<string> Documents = new SHADocumentList().GetPDFNames();
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string ID = ProductDetails.Id;
@@ -3420,11 +3422,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheAdvancedReportingScreenClickOption(string optionChoice)
 		{
 			var shaReport = new SHAAdvancedReporting();
-			if(optionChoice=="Includes Water")
+			if (optionChoice == "Includes Water")
 			{
 				Report.IsTrue(shaReport.ClickIncludesWater(), "Failed to Click Option: " + optionChoice, "Successfully Clicked Option: " + optionChoice);
 			}
-			if(optionChoice=="Contains Alcohol")
+			if (optionChoice == "Contains Alcohol")
 			{
 				Report.IsTrue(shaReport.ClickContainsAlcohol(), "Failed to Click Option: " + optionChoice, "Successfully Clicked Option: " + optionChoice);
 			}
@@ -3436,7 +3438,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var shaReport = new SHAAdvancedReporting();
 			Report.StartStep("I enter UPC Size");
 			shaReport.EnterUPCSize(size);
-			
+
 		}
 
 		[StepDefinition(@"In The advanced reporting screen I choose WERCSmart Retail Recipient Code: (.*)")]

@@ -58,9 +58,9 @@ Scenario: [73949] Kit - Document merge - US only
 	#CLF 21/03/2019 Commenting out below because I cannot get the pdf document
 	Then I should see a new tabbed document with the pdf containing product code saved as: TestCase73949 and NGHS / English twice
 	Then I should see a new tabbed document whose URL contains DocumentID
-	And I close the window that opened
-	And I Click Cancel on the Document List window pop up
 
+#And I close the window that opened
+#And I Click Cancel on the Document List window pop up
 # Assigned to Barrett, Beverly
 # Created by Barrett, Beverly
 # Test case can be found at the following paths:

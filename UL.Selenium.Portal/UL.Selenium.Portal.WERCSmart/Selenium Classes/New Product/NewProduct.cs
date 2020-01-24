@@ -551,6 +551,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public bool SelectChevronForUPC(string upc)
+		{
+			IWebElement chevron = this.containerElement.FindElement(By.XPath("//span[text()='" + upc + "']/../preceding-sibling::td/a/em[@class='fa fa-chevron-right']"), 2);
+			if (chevron == null)
+			{
+				Report.Info("Failed to find chevron element on the page");
+				return false;
+			}
+			bool canClick = chevron.TryClick();
+			if (!canClick)
+			{
+				Report.Info("Failed to click the chevron for upc " + upc);
+				return false;
+			}
+			return true;
+		}
+
 		public List<string> GetAllUPCs()
 		{
 			IWebElement container = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
@@ -923,11 +940,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			var rList = new List<string>();
-			for(int i=2;i<6;i++)
+			for (int i = 2; i < 6; i++)
 			{
 				if (container != null)
 				{
-					
+
 					var tempList = new List<string>();
 					try
 					{
@@ -947,16 +964,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					catch
 					{
 						Report.Info($"Column with @class='col-xs-{i}' does not exist");
-					}					
-					
-					
+					}
+
+
 				}
 				else
 				{
 					Report.Info("The Container element was null");
 				}
-				
-			}			
+
+			}
 
 			return rList;
 		}
@@ -1019,7 +1036,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			Report.Info("Beginning CheckDataAcceptanceProblemMessageHasAppeared");
 			var element = this.containerElement.FindElement(By.XPath("//div[contains(text(), '" + message + "')]"), 1);
-			if(element == null)
+			if (element == null)
 			{
 				Report.Info("Check Data Acceptance Problem Message returns null");
 				return false;
@@ -1075,7 +1092,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Info("fixAllErrorsMessage returned a empty value!");
 				return false;
 			}
-			if(fixAllErrorsMessage == "visible: $root.isAllValid()")
+			if (fixAllErrorsMessage == "visible: $root.isAllValid()")
 			{
 				Report.Info("fixAllErrorsMessage is visible!");
 				return false;
@@ -1110,7 +1127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckEmailAddressAgainstDataAcceptanceEmail(string usrEmail, string dataAcceptanceEmail)
 		{
-			if(usrEmail == dataAcceptanceEmail)
+			if (usrEmail == dataAcceptanceEmail)
 			{
 				Report.Info("The user email address: " + usrEmail + " matches the email displayed in the data acceptance form: " + dataAcceptanceEmail);
 				return true;
@@ -3565,6 +3582,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public bool RemoveRetailers(Table table)
+		{
+			foreach (TechTalk.SpecFlow.TableRow row in table.Rows)
+			{
+				string retailer = row["Retailer"];
+				IWebElement deleteButton = this.containerElement.FindElement(By.XPath(".//span[@data-bind='text: identifier' and text()='" + retailer + "']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
+				if (deleteButton == null)
+				{
+					Report.Info("Failed to find delete button for retailer " + retailer + "!");
+					return false;
+				}
+				bool canClick = deleteButton.TryClick();
+				if (!canClick)
+				{
+					Report.Info("Failed to click the delete button for retailer " + retailer + "!");
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		public bool AddRandomRetailersThatWereRemoved()
 		{
 
@@ -3601,6 +3640,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 			}
 
+			return true;
+		}
+
+		public bool AddRetailersThatWereRemoved(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				string retailer = row["Retailer"];
+				IWebElement elem = this.containerElement.FindElement(By.XPath("//a[text()='" + retailer + "']/preceding-sibling::input"), 2);
+				if (elem == null)
+				{
+					Report.Info("Could not find the correct checkbox element on the page");
+					return false;
+				}
+				bool canClick = elem.TryClick();
+				if (canClick == false)
+				{
+					Report.Info("Could not click on checkbox element");
+					return false;
+				}
+			}
 			return true;
 		}
 

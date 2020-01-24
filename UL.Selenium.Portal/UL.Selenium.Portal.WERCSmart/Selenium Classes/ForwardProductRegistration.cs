@@ -38,9 +38,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				bool errorsDisplayed = this.containerElement.FindElement(By.XPath(".//i[contains(@class, 'exclamation')]//ancestor::p//ancestor::div[@data-bind and @style]"), 2).Displayed;
 				return errorsDisplayed;
 			}
-			catch(Exception)
+			catch (Exception)
 			{
-					return false;
+				return false;
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnterTextToSearchField(string value)
 		{
 			IWebElement searchEl = this.containerElement.FindElement(By.XPath(".//input[@type='text' and contains(@placeholder,'Start typing Product name or WPSID')]"), 2);
-			if(searchEl==null)
+			if (searchEl == null)
 			{
 				Report.Info("The search box element was not found");
 				return false;
@@ -250,19 +250,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return retailerInput.TryClick();
 		}
-		public bool SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(string presentRetailer,string savedAs)
+		public bool SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(string presentRetailer, string savedAs)
 		{
 			//IWebElement retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//div[@class='control-indicator']"), 2);
 
-			List <IWebElement> retailerInputs = this.containerElement.FindElements(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//label//span"), 2).ToList();
-			
+			List<IWebElement> retailerInputs = this.containerElement.FindElements(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//label//span"), 2).ToList();
+
 			if (!retailerInputs.Any())
 			{
 				Report.Info("No retailers could be found under 'Other Retailers'.");
 				return false;
 			}
 
-			string[] avoidRetailersArray = new string[] { presentRetailer, "Best Buy", "Dick's Sporting Goods", "Kroger","Canadian Tire", "Albertsons Companies" };
+			string[] avoidRetailersArray = new string[] { presentRetailer, "Best Buy", "Dick's Sporting Goods", "Kroger", "Canadian Tire", "Albertsons Companies" };
 
 			var retailer = retailerInputs.FirstOrDefault(x => !avoidRetailersArray.Contains(x.GetValue(true)));
 
@@ -291,7 +291,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 
-			public bool SelectRetailer(string retailer)
+		public bool SelectRetailer(string retailer)
 		{
 			var retailers = this.containerElement.FindElements(By.XPath(@".//div[@class='col-sm-3 retailer-select' and .//span[contains(text(),""" + retailer + @""")]]"), 2).ToList();
 			if (retailers.Count == 0)
@@ -347,7 +347,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var options = products.First().VendorOptions();
 			if (options.Any())
 			{
-				return options.First(x=>x!= "Choose...");
+				return options.First(x => x != "Choose...");
 			}
 			return null;
 		}
@@ -363,6 +363,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Info("Selecting UPC: " + upcs.First().UPCInfo.UPCNumber);
 			return upcs.First().SelectUPC();
+		}
+
+		public bool SelectEditForFirstUPC()
+		{
+			List<SelectUPCs> upcs = this.GetUPCs();
+			if (upcs.Count == 0)
+			{
+				Report.Failure("No UPC rows were found in the grid");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Selecting Edit for first UPC: " + upcs.First().UPCInfo.UPCNumber);
+			return upcs.First().ClickEditForUPC();
+		}
+
+		public bool ConfirmPackageTypeNotShown()
+		{
+			var editUPCs = new EditUPC();
+			return editUPCs.ConfirmPackageTypeNotShown();
 		}
 
 		public bool SelectUPCByNumber(string aUPCNumber)
@@ -417,7 +436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Size = row.FindElement(By.XPath(".//span[contains(@data-bind,'size.field')]"), 2)?.Text,
 					Quantity = row.FindElement(By.XPath(".//span[contains(@data-bind,'text: quantity.field')]"), 2)?.Text,
 					TransportationOption = row.FindElement(By.XPath(".//span[contains(@data-bind,'text: transportToString()')]"), 2)?.Text,
-					UPCContained= row.FindElement(By.XPath(".//span[contains(@data-bind,'text: upcContained.field')]"), 2)?.Text
+					UPCContained = row.FindElement(By.XPath(".//span[contains(@data-bind,'text: upcContained.field')]"), 2)?.Text
 				});
 			}
 			return rUPCs;
@@ -592,6 +611,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public bool SelectUPC()
 			{
 				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCInfo.UPCNumber + "']]/td/input")).TryClick();
+			}
+			public bool ClickEditForUPC()
+			{
+				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCInfo.UPCNumber + "']]/td/a")).TryClick();
+
 			}
 
 		}
@@ -866,6 +890,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				return matchingButton.TryClick();
 
+			}
+
+			public bool ConfirmPackageTypeNotShown()
+			{
+				IWebElement packageType = this.containerElement.FindElement(By.XPath("//label[text()='Packaging Type']"), 2);
+				if (packageType == null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
 		}
 
