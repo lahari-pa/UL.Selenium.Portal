@@ -4516,9 +4516,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 			Report.Info("Now going to click the sections side tab if its not open");
 			var selStepsStudio = new Steps_Studio();
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.InPDIEnsureSECT2318IsActive();
-			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			//selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			//selStepsStudio.InPDIEnsureSECT2318IsActive();
+			//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 
 
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
@@ -4622,9 +4622,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
 			var selStepsStudio = new Steps_Studio();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.InPDIEnsureSECT2318IsActive();
-			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			//selStepsStudio.InPDIEnsureSECT2318IsActive();
+			//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			//selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			new Steps_Studio().GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
@@ -5432,9 +5432,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I click continue");
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
 			Delay.Seconds(3);
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.InPDIEnsureSECT2318IsActive();
-			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			//selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			//selStepsStudio.InPDIEnsureSECT2318IsActive();
+			//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 		}
