@@ -28,7 +28,6 @@
 @run_Sprint16
 Feature: Sprint 16
 
-
 @ScenarioId:1568
 Scenario:[112754] SHA Manager: Advanced Reports: Obsolete Report: Obsoleted Products
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -80,8 +79,6 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 #	And I click the Supplier Reports link in the expanded navigation side menu
 #	Then Under the Supplier Reports menu I choose: UPC Error Details
 #Incomplete: waiting for bug 114335 to resolve to complete.
-
-
 @ScenarioId:5947
 Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC Error Details
 	Given I log in with the account saved in TReVor as: Error Report User
@@ -110,5 +107,3 @@ Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC E
 		| Made Safe                    |
 		| NSF Sustainability Certified |
 	Then I delete the excel file saved as 113004
-
-

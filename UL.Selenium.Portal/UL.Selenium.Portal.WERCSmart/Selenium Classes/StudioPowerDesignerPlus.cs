@@ -51,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath),1);
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
 				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
@@ -771,7 +771,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//}
 		public bool IsSectionActive(string section)
 		{
-			
+
 			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
 			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
 			IWebElement parentElement = matchingSection.FindElement(By.XPath(".//parent::li"), 2);
@@ -796,9 +796,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Info("The Sections Tab was not open");
 			return false;
-			
+
 		}
-		
+
 		public bool ClickSectionsTab()
 		{
 			try
@@ -816,7 +816,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool DoubleClickCategoryToEdit(string category)
 		{
 
-		    int i = 0;
+			int i = 0;
 			while (i < 5)
 			{
 				try
@@ -860,7 +860,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					i++;
 					Delay.Seconds(1);
 					Report.Info($"Attempting to Find the list of categories with title: {category} if the number of attempts has not exceeded 5");
-								
+
 				}
 				catch (Exception ex)
 				{
@@ -869,7 +869,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 			return false;
-	
+
 		}
 
 		public string GetCategoryValue(string category)
@@ -1069,35 +1069,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("The Alert was not Found");
 				return null;
 			}
-			
+
 			try
 			{
 				Report.Info("Alert Found, Trying to get the Text of the Alert");
 				string alertText = SeleniumBrowser.Alert.GetText();
 				int i = 2;
-				while(alertText.IsNullOrEmpty()|| i<6)
+				while(alertText.IsNullOrEmpty()|| i<11)
 				{
 					Report.Info($"No Text Was Found In the Alert, Trying again");
 					Report.Info($"Looking for alert text. Attempt: {i}");
 					alertText = SeleniumBrowser.Alert.GetText();
-					Delay.Seconds(1);
+					Delay.Seconds(2);
 					i++;
 				}
-				if(alertText.IsNullOrEmpty() && i==6)
+				if(alertText.IsNullOrEmpty() && i==11)
 				{
-					Report.Info("The Alert Text was still found to be empty after 5 total attempts");
+					Report.Info("The Alert Text was still found to be empty after 10 total attempts");
 				}
-				Report.Screenshot();
+				//Report.Screenshot();
 				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 				return alertText;
 
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Report.Info($"An exeption with message: {ex.Message} was thrown");
 				throw;
 
-			}			
+			}
 		}
 
 		public bool SetCheckBox(string name, bool setChecked)
@@ -1283,7 +1283,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-		}		
+		}
 
 
 
@@ -1330,7 +1330,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"),2);
+			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"), 2);
 			if (frame != null)
 			{
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
@@ -3610,7 +3610,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement displayedElement = this.containerElement.FindElement(By.XPath(".//input[@name='edit-next-ko']"), 2);				
+				IWebElement displayedElement = this.containerElement.FindElement(By.XPath(".//input[@name='edit-next-ko']"), 2);
 				while (!this.containerElement.GetAttribute("style").Contains("none"))
 				{
 					string currentSectionName = this.containerElement.FindElement(By.XPath(".//div[@class='pull-left']"), 2).Text;
@@ -3652,7 +3652,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Delay.Seconds(2);
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmEditDate");
 				IWebElement selectCurrentDateButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@value='Select Current Date']"), 2);
-				bool success= selectCurrentDateButton.TryClick();
+				bool success = selectCurrentDateButton.TryClick();
 				Report.Info("Exiting iFrame");
 				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
 				return success;
@@ -3677,7 +3677,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public IWebElement NewValueBox=> this.containerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
+		public IWebElement NewValueBox => this.containerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
 
 		public bool EnterValueIntoField(string value)
 		{
@@ -3685,7 +3685,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				IWebElement newValueBox = this.containerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
-				newValueBox.EnterText(value);				
+				newValueBox.EnterText(value);
 				Report.Info($"The Text entered was: {newValueBox.Text}");
 				if (newValueBox.Text == value)
 				{
@@ -3702,8 +3702,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickSaveButton()
 		{
 			IList<IWebElement> varButtons = this.containerElement.FindElements(By.XPath(".//input[@type='button' and @title='Save']"), 2);
-			
-			foreach(var item in varButtons)
+
+			foreach (var item in varButtons)
 			{
 				if (item.TryClick())
 				{
@@ -3717,7 +3717,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 
-			
+
 		}
 
 

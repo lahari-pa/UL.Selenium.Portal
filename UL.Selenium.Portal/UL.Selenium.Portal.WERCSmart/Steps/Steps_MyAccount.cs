@@ -1575,13 +1575,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenICallSharedStepToCreateANewPassword(string accountSavedAs)
 		{
 			ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
-			MyAccount MyAccountObject = new MyAccount();
-			//Need to make sure password is not one of the last 10 used
-			//Grab the saved password for the account in TReVor
-			//Check that it follows the format of WelcomeXX! or WelcomeX!
-			//If Does then increase the X value by 1
-			//If not set password to default Weclome1!
-			//Do this all in a loop of 10 tries
+			MyAccount MyAccountObject = new MyAccount();		
 
 			TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
 			
@@ -1734,5 +1728,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(MyAccount_CompanyInfoObject.ConfirmErrorInStewardshipInfoTable(error, province), "An error has not been found in the row with Province: " + province + ", and it should've been, Error: " + error, "An error has been found in the row with Province: " + province + ", which is correct, Error: " + error);
 
 		}
+
+		
 	}
 }

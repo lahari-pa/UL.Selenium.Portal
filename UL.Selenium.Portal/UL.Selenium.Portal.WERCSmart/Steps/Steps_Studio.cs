@@ -113,9 +113,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisCurrentDocument = new CurrentDocument();
 			Delay.Seconds(10);
 			Report.Info("Attempting to click checkbox");
-			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load", "Current document loaded");
-			Report.IsTrue(thisCurrentDocument.SetCheckBox(checkbox, true), "Failed to set checkbox: " + checkbox, "Set checkbox: " + checkbox);
-			Report.Screenshot();
+			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load", "Current document loaded", showSuccessScreenshot:false);
+			Report.IsTrue(thisCurrentDocument.SetCheckBox(checkbox, true), "Failed to set checkbox: " + checkbox, "Set checkbox: " + checkbox, showSuccessScreenshot: false);
+			//Report.Screenshot();
 		}
 
 		[StepDefinition(@"I close Current Document")]
@@ -133,7 +133,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(2);
 			var thisCurrentDocument = new CurrentDocument();
 			Report.Info("Get alert text");
-			string alertText = "";
+			string alertText= null;
 			try
 			{
 				alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
@@ -156,6 +156,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if(alertText == null)
 			{
 				alertText = "";
+				Report.Failure("The alertText was Null. Setting to empty but Alert text was expected!");
+				
 			}
 
 			Report.Info("Alert is showing as: " + alertText);
@@ -426,7 +428,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("As button was apply, waiting for spinner and alert");
 				Delay.Seconds(30);
-				if (!thisApplyRulesPage.WaitForSpinner(60))
+				if (!thisApplyRulesPage.WaitForSpinner(120))
 				{
 					if (SeleniumBrowser.Alert.WaitForAlert(3))
 					{
@@ -539,7 +541,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisDocumentQueuePage = new DocumentQueuePage();
 			thisDocumentQueuePage.Wait_for_load();
 			Report.IsTrue(thisDocumentQueuePage.ClickProcessDocuments(), "Failed to click process documents",
-				"Clicked process documents");
+				"Clicked process documents",showSuccessScreenshot: false);
 		}
 
 		[StepDefinition(@"In document queue filter page I click on clone selected row")]

@@ -535,5 +535,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.IsTrue(panelTitle == "Ingredients", "The Current page is not the Ingredients page", "The current page is the Ingredients page");
 			
 		}
+
+		[StepDefinition(@"I ensure that there are enough Ingredients in the My Ingredients page to enable pagination")]
+		public void ThenIEnsureThatThereAreEnoughIngredientsInTheMyIngredietnsPageToEnablePagination()
+		{
+			var myIngredients = new MyIngredients();
+			Report.Info("Getting the total number of pages in the My Ingredietns Tab");
+			int currentTotalPages= myIngredients.GetHighestPageNo();
+			Report.Info($"The total number of pages was: {currentTotalPages}");
+
+			if (currentTotalPages < 3)
+			{
+				Report.Info($"The total number of pages was less than 3, adding more ingredients until there are atleast 3 pages");
+				int maxIngredientsToMake = 11 * (3 - currentTotalPages);
+				int i = 0;
+				Report.Info($"There are currently: {currentTotalPages} need to add: {3 - currentTotalPages} more pages to have at least 3 total pages. Adding up to a total of: {maxIngredientsToMake} ingredients.");
+				Report.Info($"Starting to add water ingredients to the my Ingredients list, checking the highest page number after each ingredient is added");
+				while (myIngredients.GetHighestPageNo() < 3 && i < maxIngredientsToMake)
+				{
+					Report.Info("Adding a new Water Ingredient to  My Ingredients");
+					myIngredients.AddIngredientToMyIngredients("Water", "7732-18-5");
+				}				
+				Report.Info($"The total number of pages now is {myIngredients.GetHighestPageNo()}");
+			}
+			Report.Info("Checking if the current total number of pages is atleast 3");
+			Report.IsTrue(myIngredients.GetHighestPageNo() > 1, "The total number of pages was not at least 3", "The total number of pages was at least 3");
+
+
+		}
 	}
 }

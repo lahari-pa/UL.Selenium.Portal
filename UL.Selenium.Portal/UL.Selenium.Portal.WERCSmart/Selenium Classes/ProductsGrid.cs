@@ -605,49 +605,74 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Navigating in the products grid with action - " + navOption);
 			IWebElement navEl;
-			switch (navOption)
+			int i = 0;
+			while (i < 6)
 			{
-				case "next":
-					navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
-					break;
-				case "previous":
-					navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
-					break;
-				case "...":
-					//navEl = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
-					navEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
-					break;
-				default:
-					Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
-					return false;
-			}
-
-			if (navEl == null)
-			{
-				Report.Info("Could not locate the navigation button element for: " + navOption);
-				return false;
-			}
-			if (navOption=="...")
-			{
-				Delay.Seconds(1);
-				navEl.ScrollElementIntoView();
-				Delay.Seconds(1);
-				navEl.ClickLocation();				
-				if (this.GridNavigationInput() == null)
+				try
 				{
+					switch (navOption)
+					{
+						case "next":
+							navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
+							break;
+						case "previous":
+							navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
+							break;
+						case "...":
+							//navEl = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+							navEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+							break;
+						default:
+							Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
+							return false;
+					}
+
+					if (navEl == null)
+					{
+						Report.Info("Could not locate the navigation button element for: " + navOption);
+						return false;
+					}
+					if (navOption == "...")
+					{
+						Report.Info("Attempting to click the '...' button, after scrolling it into view");
+						Delay.Seconds(1);
+						navEl.ScrollElementIntoView();
+						Delay.Seconds(1);
+						navEl.ClickLocation();
+						if (this.GridNavigationInput() == null)
+						{
+							return false;
+						}
+						else
+						{
+							return true;
+						}
+
+					}
+
+					Delay.Seconds(1);
+					navEl.ScrollElementIntoView();
+					Delay.Seconds(1);
+					bool clickSuccess = navEl.TryClick();
+					Delay.Seconds(1);
+					return clickSuccess;
+				}
+				catch (StaleElementReferenceException ex)
+				{
+					Report.Info("navEl threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the navEl: {navOption} if the number of attempts has not exceeded 5");
+
+				}
+				catch (Exception ex)
+				{
+					Report.Info($"Threw an expection of type:{ex.Message}");
 					return false;
 				}
-				else
-				{
-					return true;
-				}
-
 			}
+			return false;
 
-			Delay.Seconds(1);
-			navEl.ScrollElementIntoView();
-			Delay.Seconds(1);
-			return navEl.TryClick();		
 						
 		}
 
@@ -701,7 +726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool NumToGridNavigationInput(string pageNumber)
 		{
 			int i = 0;
-			while (i<5)
+			while (i < 5)
 			{
 				try
 				{
@@ -748,7 +773,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			}
 			return false;
-			
+
 
 		}
 
@@ -804,7 +829,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					break;
 				}
-				catch(Exception e)
+				catch (Exception e)
 				{
 					Report.Error(e.Message);
 					throw;
@@ -1350,7 +1375,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	}
 
 
-	
+
 
 
 
