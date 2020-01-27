@@ -995,11 +995,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSaveButtonForStewardshipNumbers()
 		{
-			//Data entry in automation causes the datepickers to stay open, Automation does not click save if date pickers are open, so first need to click off the date pickers to close them. Clicking the title in this case fixes the issue.
-			IWebElement titleObject = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@data-bind='with: stewardshipNumberModel']//h3"), 2);
-			titleObject.Click();
+			//Data entry in automation causes the datepickers to stay open, Automation does not click save if date pickers are open, so first need to click off the date pickers to close them. Clicking the container in this case fixes the issue.
+			this.containerElement.Click();			
 			IWebElement SaveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@data-bind='with: stewardshipNumberModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
-			
 			return SaveButton.TryClick();
 		}
 
@@ -2374,6 +2372,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.ClickPage(ingredient.Page.ToString());
 			return this.containerElement.FindElement(By.XPath(".//tbody/tr[" + ingredient.Row + "]//input[@data-bind='checked: isChecked']"), 2).TryClick();
 		}
+
+		public bool AddIngredientToMyIngredients(string ingredientName,string cas)
+		{
+			this.EnterTextSearch(ingredientName);
+			return this.ClickSearchResult(ingredientName, cas);
+		}
+
 		public List<IngredientItem> IngredientsLibrary()
 		{
 			var selMyIngredients = new MyIngredients();
@@ -2476,6 +2481,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
 
 		}
+
+		
 
 		public class SearchResult
 		{

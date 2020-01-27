@@ -1924,6 +1924,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GivenIConfirmTheFilenameColumnShowsAnEntryForXxxxxxx_Pdf_WhereXxxxxxxIsTheProductIdOfProductSavedAsTestCase(
 				string savedAs)
 		{
+			Report.Info("Waiting for document list");
+			Delay.Seconds(8);
 			List<string> Documents = new SHADocumentList().GetPDFNames();
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string ID = ProductDetails.Id;

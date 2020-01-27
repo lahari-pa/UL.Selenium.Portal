@@ -205,7 +205,7 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	Then  I filter the products by: Accepted by Retailers	
 	And I save the ProductID of the first Product in the grid no in recertification as: testProduct91157
 	Given I click Bulk Actions in the Products Grid
-	Given I click Forward Product Registration in the Bulk Actions window
+	Given I click Forward Product Registration in the Bulk Actions window	
 	Then I should see the header: Forward Product Registration on the Forward Product Registration window
 	And I confirm the active Forward Product Registration tab is: Select Products	
 	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
