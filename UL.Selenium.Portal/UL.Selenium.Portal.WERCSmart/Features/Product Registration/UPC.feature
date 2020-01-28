@@ -686,6 +686,8 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 	And In the New Product page I should be on tab: Review and Submit
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase115334
 
+#JWhitesell - holding off on finishing this one so I can work on sprint scenarios for sprint 17.
+@tfs_design
 @ScenarioId:6399
 Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an order history record
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
