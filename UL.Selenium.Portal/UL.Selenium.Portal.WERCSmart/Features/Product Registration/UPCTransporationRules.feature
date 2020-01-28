@@ -49,7 +49,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: 2-Methyl-1-butene
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -78,39 +78,67 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 
 @ScenarioId:6424
 	Scenario: Mode 7 - Scenario 23 UPC Transportation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
-	Then I save the product information as: Mode7S23
-	Then I save the product information as: TestCase97484
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | false       |            |		
-	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	And I should see the Transportation Details 1 Page	
-	And I set the Product is Regulated for Transport field to: Yes
-	And I set the Select all modes of transport that you've classified the product for field to: IMDG
-	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: IMDG
-	And I click continue
-	And I set the UN Number field to: UN2650
-	And I click continue	
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer  |
-		| Walgreens |
-	Given I click the 'Add UPC' button
-	Then I generate a random UPC number and save as: RandomUPC91076
-	Given I add the following into the UPC Fields
-		| UPC Number              | Container Type    | Size | DPCI | Quantity |
-		| saved as RandomUPC91076 | Plastic Container | 55   |      | 1        |
-	Then I Check that in the UPC screen, under the Transportation Column the Catagory IMDG is checked
-	Then I Check that in the UPC screen, under the Transportation Column for Catagory IMDG the option Shipping with limited quantity is checked	
-	Given I click continue
-	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode7S23
+	
+
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
+		Then I save the product information as: Mode1S21
+		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+		#Transportation Details Page
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| IMDG                             |
+		| Shipping with limited quantity |
+		And I click continue
+
+		Then I should see the International Marine (IMDG) Classification Page
+		And I set the UN Number field to: UN2650	
+		And I set the Hazard Class (select) field to: 6.1
+		And I set the Packing Group (select) field to: II
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC10021
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC10021 |
+		| ContainerType | Glass Container   |
+		| Size          | 55                 |
+		Then I Check that in the UPC screen, under the Transportation Column the Catagory IMDG is checked
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory IMDG the option Shipping with limited quantity is checked	
+		And in the New Product page I click Continue
+		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S21
+
+
+
+
+
+
 	
 
 @ScenarioId:6422
@@ -196,40 +224,65 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode6S28
 
 @ScenarioId:6420
-	Scenario: Mode 6 - Scenario 15 UPC Transportation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
-	Then I save the product information as: Mode6S15
-	Then I save the product information as: TestCase97484
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Ammonium dichromate | 100     | false               | false       |            |		
-	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	And I should see the Transportation Details 1 Page	
-	And I set the Product is Regulated for Transport field to: Yes
-	And I set the Select all modes of transport that you've classified the product for field to: DOT
-	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
-	And I click continue
-	And I set the UN Number field to: UN1439
-	And I click continue	
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer  |
-		| Walgreens |
-	Given I click the 'Add UPC' button
-	Then I generate a random UPC number and save as: RandomUPC91076
-	Given I add the following into the UPC Fields
-		| UPC Number              | Container Type    | Size | DPCI | Quantity |
-		| saved as RandomUPC91076 | Plastic Container | 55   |      | 1        |
-	Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
-	Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked	
-	Given I click continue
-	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode6S15
+	Scenario: Mode 6 - Scenario 15 UPC Transportation	
+
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
+		Then I save the product information as: Mode1S21
+		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+		#Transportation Details Page
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                         |
+		| DOT                            |
+		| Shipping with limited quantity |
+		And I click continue
+
+		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		And I set the UN Number field to: UN1439
+		
+		And I set the Hazard Class (select) field to: 5.1
+		And I set the Packing Group (select) field to: II
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC10021
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC10021 |
+		| ContainerType | Glass Container   |
+		| Size          | 55                 |
+		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked	
+		And in the New Product page I click Continue
+		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S21
+
+
+
 
 
 @ScenarioId:6419
@@ -354,74 +407,137 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 
 @ScenarioId:6417
 	Scenario: Mode 4x5 - Scenario 25 UPC Transportation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
-	Then I save the product information as: Mode45S25	
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| water  | 100     | false               | false       |            |		
-	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	And I should see the Transportation Details 1 Page	
-	And I set the Product is Regulated for Transport field to: Yes
-	And I set the Select all modes of transport that you've classified the product for field to: IATA
-	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: IATA
-	And I click continue
-	And I set the UN Number field to: UN1579
-	And I click continue	
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer  |
-		| Walgreens |
-	Given I click the 'Add UPC' button
-	Then I generate a random UPC number and save as: RandomUPC91076
-	Given I add the following into the UPC Fields
-		| UPC Number              | Container Type    | Size | DPCI | Quantity |
-		| saved as RandomUPC91076 | Plastic Container | 55   |      | 1        |
-	Then I Check that in the UPC screen, under the Transportation Column the Catagory IATA is checked
-	Then I Check that in the UPC screen, under the Transportation Column for Catagory IATA the option Shipping with consumer commodity is checked	
-	Given I click continue
-	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S25
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
+		Then I save the product information as: Mode1S21
+		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+		#Transportation Details Page
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| IATA                             |
+		| Shipping with consumer commodity |
+		And I click continue
+
+		Then I should see the International Air Transport (IATA) Classification Page
+		And I set the UN Number field to: UN2716	
+		And I set the Hazard Class (select) field to: 6.1
+		And I set the Packing Group (select) field to: III
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC10021
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC10021 |
+		| ContainerType | Glass Container   |
+		| Size          | 55                 |
+		Then I Check that in the UPC screen, under the Transportation Column the Catagory IATA is checked
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory IATA the option Shipping with consumer commodity is checked	
+		And in the New Product page I click Continue
+		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S21
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
 @ScenarioId:6418
 	Scenario: Mode 4x5 - Scenario 35 UPC Transportation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
-	Then I save the product information as: Mode45S35
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Given I should see the Additional Product Information Page
-	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Benzaldehyde  | 100     | false               | false       |            |		
-	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	And I should see the Transportation Details 1 Page	
-	And I set the Product is Regulated for Transport field to: Yes
-	And I set the Select all modes of transport that you've classified the product for field to: IATA
-	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: IATA
-	And I click continue
-	And I set the UN Number field to: UN1990
-	And I click continue	
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer  |
-		| Walgreens |
-	Given I click the 'Add UPC' button
-	Then I generate a random UPC number and save as: RandomUPC91076
-	Given I add the following into the UPC Fields
-		| UPC Number              | Container Type    | Size | DPCI | Quantity |
-		| saved as RandomUPC91076 | Plastic Container | 55   |      | 1        |
-	Then I Check that in the UPC screen, under the Transportation Column the Catagory IATA is checked
-	Then I Check that in the UPC screen, under the Transportation Column for Catagory IATA the option Shipping with consumer commodity is checked	
-	Given I click continue
-	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S35
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
+		Then I save the product information as: Mode1S21
+		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+		#Transportation Details Page
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| IATA                             |
+		| Shipping with consumer commodity |
+		And I click continue
+
+		Then I should see the International Air Transport (IATA) Classification Page
+		And I set the UN Number field to: UN1990	
+		And I set the Hazard Class (select) field to: 9		
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC10021
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC10021 |
+		| ContainerType | Glass Container   |
+		| Size          | 55                 |
+		Then I Check that in the UPC screen, under the Transportation Column the Catagory IATA is checked
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory IATA the option Shipping with consumer commodity is checked	
+		And in the New Product page I click Continue
+		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S21
+
+
+
+
+
+
+
+
+
 
 	Scenario: Mode 1 - 6 - If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
 		# If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
@@ -539,7 +655,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		| Field         | Value             |
 		| UPCNumber     | saved as UPC10003 |
 		| ContainerType | Aerosol Can       |
-		| Size          | 32                |
+		| Size          | 55                |
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
 		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked	
@@ -701,7 +817,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		And I click continue
 		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Ammonium dichromate
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: water15
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
 		And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -791,10 +907,10 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		And I set the Product is Regulated for Transport field to: Yes
 		And I set the below options for field: Select all modes of transport that you've classified the product for
 		| Option                           |
-		| IATA                             |
-		| Shipping with limited quantity   |
 		| DOT                              |
-		| Shipping with limited quantity   |
+		| Shipping with consumer commodity |
+		| IATA                             |
+		| Shipping with consumer commodity |
 		And I click continue
 
 		# U. S. Department of Transportation (DOT) Classification Page
@@ -830,10 +946,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		| Size          | 32                |
 
 		Then I Check that in the UPC screen, under the Transportation Column the Catagory DOT is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with limited quantity is checked
-		Then I Check that in the UPC screen, under the Transportation Column the Catagory IATA is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory IATA the option Shipping with limited quantity is checked
-		
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory DOT the option Shipping with consumer commodity is checked		
 		And in the New Product page I click Continue
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S34
@@ -1027,6 +1140,62 @@ Scenario:  Mode 4/5 - 34 - If IATA Hazard Class is 9 and Packing Group is II or 
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S34
 
+
+@ScenarioId:6482
+Scenario: v2Mode 4x5 S 25 v2
+		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
+		Then I save the product information as: Mode1S21
+		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+		#Transportation Details Page
+		And I should see the Transportation Details 1 Page
+		And The following options should be displayed exclusively for section: Product is Regulated for Transport
+		| Option                               |
+		| Yes                                  |
+		| No, due to an exemption or exception |
+		| Not Regulated                        |
+		And I set the Product is Regulated for Transport field to: Yes
+		And I set the below options for field: Select all modes of transport that you've classified the product for
+		| Option                           |
+		| IATA                             |
+		| Shipping with consumer commodity |
+		And I click continue
+
+		Then I should see the International Air Transport (IATA) Classification Page
+		And I set the UN Number field to: UN2716	
+		And I set the Hazard Class (select) field to: 6.1
+		And I set the Packing Group (select) field to: III
+		Given in the New Product page I click Continue
+
+		# Retailers Page
+		Then In the 'Select Retailers' window I select the retailer: Walgreens
+		And I should see the Retailer Page
+		Given in the New Product page I click Continue
+
+		# Universal Product Code (UPC) Page
+		And I should see the Universal Product Code (UPC) Page
+		Then I generate a random UPC number and save as: UPC10021
+		Given I click the 'Add UPC' button
+
+		#Andrews step to check transportation column is generated correctly
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC10021 |
+		| ContainerType | Glass Container   |
+		| Size          | 55                 |
+		Then I Check that in the UPC screen, under the Transportation Column the Catagory IATA is checked
+		Then I Check that in the UPC screen, under the Transportation Column for Catagory IATA the option Shipping with consumer commodity is checked	
+		And in the New Product page I click Continue
+		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S21
 
 
 
