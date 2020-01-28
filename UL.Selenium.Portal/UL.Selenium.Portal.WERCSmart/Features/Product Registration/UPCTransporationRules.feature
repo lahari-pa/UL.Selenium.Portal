@@ -817,7 +817,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		And I click continue
 		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
 		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: water15
+		And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
 		And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -907,16 +907,15 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		And I set the Product is Regulated for Transport field to: Yes
 		And I set the below options for field: Select all modes of transport that you've classified the product for
 		| Option                           |
-		| DOT                              |
-		| Shipping with consumer commodity |
 		| IATA                             |
 		| Shipping with consumer commodity |
+		| DOT                              |
+		| Shipping with consumer commodity |		
 		And I click continue
 
 		# U. S. Department of Transportation (DOT) Classification Page
 		Then I should see the U. S. Department of Transportation (DOT) Classification Page
-		And I set the UN Number field to: UN1990
-		And I set the Proper Shipping Name field to: Benzaldehyde
+		And I set the UN Number field to: UN1990		
 		And I set the Technical Name (if applicable) field to: My Safe Product
 		And I set the Hazard Class (select) field to: 9
 		And I set the Packing Group (select) field to: III
@@ -1046,8 +1045,7 @@ Scenario:  Mode 4/5 - 21 - If IATA Hazard Class is 6.1 and Packing group is III 
 
 		# International Air Transport (IATA) Classification Page
 		Then I should see the International Air Transport (IATA) Classification Page
-		And I set the UN Number field to: UN2713
-		And I set the Proper Shipping Name field to: Acridine
+		And I set the UN Number field to: UN2713		
 		And I set the Technical Name (if applicable) field to: My Safe Product
 		And I set the Hazard Class (select) field to: 6.1
 		And I set the Packing Group (select) field to: III
@@ -1111,8 +1109,7 @@ Scenario:  Mode 4/5 - 34 - If IATA Hazard Class is 9 and Packing Group is II or 
 
 		# International Air Transport (IATA) Classification Page
 		Then I should see the International Air Transport (IATA) Classification Page
-		And I set the UN Number field to: UN1990
-		And I set the Proper Shipping Name field to: Benzaldehyde
+		And I set the UN Number field to: UN1990		
 		And I set the Technical Name (if applicable) field to: My Safe Product
 		And I set the Hazard Class (select) field to: 9
 		And I set the Packing Group (select) field to: III
