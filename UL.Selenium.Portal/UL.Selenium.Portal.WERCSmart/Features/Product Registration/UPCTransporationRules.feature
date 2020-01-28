@@ -1138,61 +1138,6 @@ Scenario:  Mode 4/5 - 34 - If IATA Hazard Class is 9 and Packing Group is II or 
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S34
 
 
-@ScenarioId:6482
-Scenario: v2Mode 4x5 S 25 v2
-		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
-		Then I save the product information as: Mode1S21
-		And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-		Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
-		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-
-		#Transportation Details Page
-		And I should see the Transportation Details 1 Page
-		And The following options should be displayed exclusively for section: Product is Regulated for Transport
-		| Option                               |
-		| Yes                                  |
-		| No, due to an exemption or exception |
-		| Not Regulated                        |
-		And I set the Product is Regulated for Transport field to: Yes
-		And I set the below options for field: Select all modes of transport that you've classified the product for
-		| Option                           |
-		| IATA                             |
-		| Shipping with consumer commodity |
-		And I click continue
-
-		Then I should see the International Air Transport (IATA) Classification Page
-		And I set the UN Number field to: UN2716	
-		And I set the Hazard Class (select) field to: 6.1
-		And I set the Packing Group (select) field to: III
-		Given in the New Product page I click Continue
-
-		# Retailers Page
-		Then In the 'Select Retailers' window I select the retailer: Walgreens
-		And I should see the Retailer Page
-		Given in the New Product page I click Continue
-
-		# Universal Product Code (UPC) Page
-		And I should see the Universal Product Code (UPC) Page
-		Then I generate a random UPC number and save as: UPC10021
-		Given I click the 'Add UPC' button
-
-		#Andrews step to check transportation column is generated correctly
-
-		Then I add the following into the UPC Fields
-		| Field         | Value             |
-		| UPCNumber     | saved as UPC10021 |
-		| ContainerType | Glass Container   |
-		| Size          | 55                 |
-		Then I Check that in the UPC screen, under the Transportation Column the Catagory IATA is checked
-		Then I Check that in the UPC screen, under the Transportation Column for Catagory IATA the option Shipping with consumer commodity is checked	
-		And in the New Product page I click Continue
-		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
-		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S21
 
 
 
