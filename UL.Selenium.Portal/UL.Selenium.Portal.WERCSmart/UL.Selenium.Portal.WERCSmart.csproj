@@ -172,6 +172,11 @@
     <Compile Include="Classes\WERCSmartUser.cs" />
     <Compile Include="Database Functions\dbRetailers.cs" />
     <Compile Include="Database Functions\dbUtils.cs" />
+    <Compile Include="Features\Product Registration\Distributor.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Distributor.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
     <Compile Include="Selenium Classes\AddNewSupplier.cs" />
@@ -198,6 +203,7 @@
     <Compile Include="Selenium Classes\MyAccount.cs" />
     <Compile Include="Selenium Classes\MyIngredientsModal.cs" />
     <Compile Include="Selenium Classes\NavigationBar.cs" />
+    <Compile Include="Selenium Classes\New Product\Distributor.cs" />
     <Compile Include="Selenium Classes\New Product\OptionalReports.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\EcologoReadiness.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ElectronicEquipment.cs" />
@@ -271,6 +277,7 @@
     <Compile Include="Steps\New Product\Product Type\Steps_ProductCharacteristics.cs" />
     <Compile Include="Steps\New Product\Product Type\Steps_TheProduct.cs" />
     <Compile Include="Steps\New Product\Review and Submit\Steps_RegulatoryDocumentsToProvide.cs" />
+    <Compile Include="Steps\New Product\Steps_Distributor.cs" />
     <Compile Include="Steps\New Product\Steps_NewProduct.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
@@ -402,6 +409,10 @@
     </None>
     <None Include="Features\Product Registration\Batteries.feature" />
     <None Include="Features\NotIncludedGeneralTests.feature" />
+    <None Include="Features\Product Registration\Distributor.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Distributor.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Product Registration\Duplicate UPC.feature" />
     <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd.feature">
     </None>
