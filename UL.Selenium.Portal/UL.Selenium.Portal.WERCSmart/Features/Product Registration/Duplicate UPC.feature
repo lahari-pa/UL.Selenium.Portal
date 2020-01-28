@@ -177,9 +177,7 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click Bulk Actions in the Products Grid
-	Given I click Forward Product Registration in the Bulk Actions window
-		| UPC Number                                        | Container Type    | Size | DPCI | Quantity |
-		| saved as ExistingUPC_PremiumSubscriptionAccount_1 | Plastic Container | 1    |      |          |
+	Given I click Forward Product Registration in the Bulk Actions window	
 	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
 	Given I click continue on the Forward Product Registration page
 	Given I select the first product under the Select UPCs tab

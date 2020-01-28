@@ -87,6 +87,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
+			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
+
 			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
 		}
 
@@ -4512,6 +4514,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
 			Delay.Seconds(3);
+			Report.Info("Now going to click the sections side tab if its not open");
 			var selStepsStudio = new Steps_Studio();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			selStepsStudio.InPDIEnsureSECT2318IsActive();
@@ -4821,8 +4824,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			Report.StartStep("I click Process Documents");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
-			Delay.Seconds(2);
-			Report.Screenshot();
+            Delay.Seconds(4);
+            //Report.Screenshot();
 			GeneralUtilities.StudioWaitForSpinner(60);
 			Report.StartStep(
 				"I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
@@ -6757,8 +6760,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			Report.StartStep("I click Process Documents");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
-			Delay.Seconds(2);
-			Report.Screenshot();
+            Delay.Seconds(5);
+            //Report.Screenshot();
+			Report.Info("Now waiting for spinner");
 			GeneralUtilities.StudioWaitForSpinner(60);
 			Report.StartStep(
 				"I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
@@ -7883,7 +7887,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsSha.InSupplierManagerPopupIEnterSearchTerm(email);
 
 			Report.StartStep("I Select the 'Email' Radio Button");
-			thisStepsSha.InSupplierManagerPopupISelectRadioButton("Vendor");
+            thisStepsSha.InSupplierManagerPopupISelectRadioButton("E-Mail");
 
 			Report.StartStep("I click on the search button");
 			thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();

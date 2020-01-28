@@ -163,8 +163,8 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	#And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-		| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
+		#| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		#| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
 	Then in the Comments page I click Continue
 	Given I click the Summary button in the Data Acceptance window
 	And I switch to the Data Summary page
