@@ -147,6 +147,7 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	And I click continue on the Forward Product Registration page
 	And In the Forward Product Registration Screen I select a retailer under Other Retailers and save as TestCase75321Retailer
 	And I click continue on the Forward Product Registration page
+	Then If there is the option to select a vendor for the product with ID: saved as TestCase75321, I select the first option
 	And I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue and save UPC as TestCase75321UPC
 	Then I should see the subheading 3: Product Results on the Forward Product Registration window
 	Then I confirm that for UPC Number saved as TestCase75321UPC the retailer is displayed as saved as TestCase75321Retailer

@@ -211,14 +211,17 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
 	And I select the product with ID saved as: testProduct91157 under the right hand panel of the Select Products tab
 	Given I click continue on the Forward Product Registration page
-	Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
-	And I click continue on the Forward Product Registration page
+
+	#Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
+	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
+
+	And I click continue on the Forward Product Registration page	
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add Case UPC button under the Select UPCs tab
 	Then I wait for the Add Case UPC popup to appear
 	And In the Add Case UPC modal window I enter the following information:
 		| UPC Number          | Type        | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
-		| saved as UPC91801_2 | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
+		| saved as ExistingUPC | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
 	And In the Case UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. 
 	

@@ -368,6 +368,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				if (product.ID == wantedID)
 				{
 					wantedProduct = product;
+					foundProduct = true;
+					break;
 				}
 			}
 			if (foundProduct == false)
@@ -384,7 +386,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Info("The select vendor option was found");
 			return true;
-
 		
 		}
 
@@ -1112,7 +1113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	class AddCaseUPCModal : SeleniumBaseObject
 	{
-		protected override By ContainerElementLocator => By.XPath("//div[@class='modal-content' and //div[@class='modal-body']//div//div//div[@class='col-sm-6']//div//label[text()='Individual UPC contained in the Case Pack']]");
+		protected override By ContainerElementLocator => By.XPath("//div[@class='modal-content' and .//div[@class='modal-body']//div//div//div[@class='col-sm-6']//div//label[text()='Individual UPC contained in the Case Pack']]");
 		
 
 		public bool EnterCaseUPCInformation(TableRow row)
