@@ -352,6 +352,109 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return null;
 		}
 
+		public bool GivenProductCheckVendorSelect(string wantedID)
+		{
+			List<SelectProducts> products = this.GetProducts();
+			if (products.Count == 0)
+			{
+				Report.Failure("No Product rows were found in the grid");
+				Report.Screenshot();
+				return false;
+			}
+			bool foundProduct = false;
+			SelectProducts wantedProduct = new SelectProducts();
+			foreach (var product in products)
+			{
+				if (product.ID == wantedID)
+				{
+					wantedProduct = product;
+				}
+			}
+			if (foundProduct == false)
+			{
+				Report.Failure($"There was no Product with ID: {wantedID} found");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Checking to see if the product found has the option to select a vendor");
+			if(wantedProduct.SelectVendor ==null)
+			{
+				Report.Info("The Select Vendor option was not found");
+				return false;
+			}
+			Report.Info("The select vendor option was found");
+			return true;
+
+		
+		}
+
+
+
+		public bool GivenProductSelectVendor (string wantedID,string option)
+		{
+			List<SelectProducts> products = this.GetProducts();
+			if (products.Count == 0)
+			{
+				Report.Failure("No Product rows were found in the grid");
+				Report.Screenshot();
+				return false;
+			}
+			bool foundProduct = false;
+			SelectProducts wantedProduct = new SelectProducts();
+			foreach (var product in products)
+			{
+				if (product.ID == wantedID)
+				{
+					wantedProduct = product;
+				}
+			}
+			if (foundProduct == false)
+			{
+				Report.Failure($"There was no Product with ID: {wantedID} found");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Selecting vendor: " + option + " for the first product in the grid");
+			wantedProduct.SelectVendor = option;
+			Delay.Seconds(1);
+			string vendor = wantedProduct.SelectVendor;
+			return vendor == option;
+		}
+
+
+
+		public string GivenProductFirstAvailableVendor(string wantedID)
+		{
+			List<SelectProducts> products = this.GetProducts();
+			if (products.Count == 0)
+			{
+				Report.Failure("No Product rows were found in the grid");
+				Report.Screenshot();
+				return null;
+			}
+			bool foundProduct = false;
+			SelectProducts wantedProduct = new SelectProducts();
+			foreach(var product in products)
+			{
+				if(product.ID==wantedID)
+				{
+					wantedProduct = product;
+				}
+			}
+			if(foundProduct==false)
+			{
+				Report.Failure($"There was no Product with ID: {wantedID} found");
+				Report.Screenshot();
+				return null;
+			}
+			var options = wantedProduct.VendorOptions();
+			if (options.Any())
+			{
+				return options.First(x => x != "Choose...");
+			}
+			return null;
+		}
+
 		public bool SelectFirstUPC()
 		{
 			List<SelectUPCs> upcs = this.GetUPCs();
@@ -599,6 +702,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				return select.FindElements(By.XPath("./option"), 1)?.Select(x => x.Text).ToList();
 			}
+
 
 
 		}

@@ -1088,6 +1088,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new AddCaseUPCModal().WaitForAddCaseUPCPopup(), "The Add Case UPC modal did not appear", "The Add case upc modal appeared");
 		}
 
+		[StepDefinition(@"If there is the option to select a vendor for the product with ID: (.*), I select: (.*)")]
+		public void IfThereIsTheOptionToSelectVendorISelect(string productID, string vendorOption)
+		{
+			Report.Info("Checking to see if there is the option to select a Vendor");
+		}
+
 
 	}
 }
