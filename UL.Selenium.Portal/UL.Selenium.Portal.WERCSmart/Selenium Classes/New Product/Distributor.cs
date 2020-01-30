@@ -19,17 +19,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	class Distributor : NewProduct
 	{
+
+		private IWebElement DistSearchInput => SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='table-search col-sm-4']//input[@id='inputGroup']"), 2);
+
 		public string SearchIdNameField {
-			get => SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='table-search col-sm-4']//input[@id='inputGroup']"), 2).GetValue();
+			get
+			{
+				IWebElement el = this.DistSearchInput;
+				if (el != null)
+				{
+					return el.GetValue();
+				}
+
+				return "";
+			}
 			set
 			{
-				IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='table-search col-sm-4']//input[@id='inputGroup']"), 2);
-				el.EnterText(value);
-				el.SendKeys(Keys.Return);
-				GeneralUtilities.Wait_for_load_finish();
+				IWebElement el = this.DistSearchInput;
+				if (el != null)
+				{
+					el.EnterText(value);
+					el.SendKeys(Keys.Return);
+					GeneralUtilities.Wait_for_load_finish();
+				}
 			}
 		}
-
 
 		public int ProductsInMyDistCount()
 		{

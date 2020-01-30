@@ -32,7 +32,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			//Report.UseSubSteps = true;
 			var thisNewProduct = new NewProduct();
 			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[contains(@id,'DistributorUPC')]"), 2);
-			IWebElement el2 = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[contains(@class,'btn btn-success pull-right continue-button next-button')]"), 2);
 			if (!thisNewProduct.WaitForContainerToBeVisible(3))
 			{
 				Report.Failure("The new product page is not showing");
@@ -109,7 +108,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 				catch (Exception)
 				{
-
+					Report.Info("Not able to get id from context!");
 				}
 			}
 
