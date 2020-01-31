@@ -3941,8 +3941,128 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CheckTransportationOptionXIsChecked(string option)
 		{
 			Report.Info($"Checking that the Option {option} is checked");
-			IWebElement optionInput = this.containerElement.FindElement(By.XPath($".//span[text()='{option}']//preceding-sibling::input"), 2);			
+			IWebElement optionInput = this.containerElement.FindElement(By.XPath($".//span[text()='{option}']//preceding-sibling::input"), 2);
 			return optionInput.Checked();
+		}
+
+		public bool TransportationColumnExists()
+		{
+			Report.Info("Checking to see if Transportation column exists");
+			IWebElement transportation = this.containerElement.FindElement(By.XPath(@"//table//tr//th[contains(text(), 'Transportation')]"), 2);
+			return transportation != null;
+		}
+
+		public bool CheckTransportationOption(string option, string transLevel)
+		{
+			bool pass = true;
+			Report.Info("Check to ensure that " + option + " is listed as " + transLevel);
+			IWebElement optionInput = this.containerElement.FindElement(By.XPath($".//span[text()='{option}']//preceding-sibling::input"), 2);
+			if (optionInput == null || !optionInput.Checked())
+			{
+				pass = false;
+			}
+			IWebElement transLevelInput = this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//span[text()='" + option + "']/../div//span[text()='" + transLevel + "']//preceding-sibling::input"), 2);
+			if (transLevelInput == null || !transLevelInput.Checked())
+			{
+				pass = false;
+			}
+			return pass;
+		}
+
+		public bool CanCheckTransportationOption(string option, string transLevel)
+		{
+			Report.Info("Checking if you can check level " + transLevel + " for option " + option + ".");
+			IWebElement transLevelInput = this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//span[text()='" + option + "']/../div//span[text()='" + transLevel + "']//preceding-sibling::input"), 2);
+
+			if (transLevelInput.Checked())
+			{
+				return true;
+			}
+
+			transLevelInput.TryClick();
+
+			if (transLevelInput.Checked())
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool CannotSelectMultipleExceptions()
+		{
+			IWebElement exception1 = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(A)')]/preceding-sibling::input"), 2);
+			IWebElement exception2 = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(I)(B)')]/preceding-sibling::input"), 2);
+			IWebElement exception3 = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(II)(A)')]/preceding-sibling::input"), 2);
+			IWebElement exception4 = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(II)(B)')]/preceding-sibling::input"), 2);
+
+			if (exception1 == null)
+			{
+				Report.Info("Could not find element for exception '173.150(g)(1)(A)'");
+				return false;
+			}
+			if (exception2 == null)
+			{
+				Report.Info("Could not find element for exception '173.150(g)(1)(I)(B)'");
+				return false;
+			}
+			if (exception3 == null)
+			{
+				Report.Info("Could not find element for exception '173.150(g)(1)(II)(A)'");
+				return false;
+			}
+			if (exception4 == null)
+			{
+				Report.Info("Could not find element for exception '173.150(g)(1)(II)(B)'");
+				return false;
+			}
+
+			exception1.TryClick();
+			exception2.TryClick();
+
+			if (exception1.Checked())
+			{
+				Report.Info("User is incorrectly allowed to select more than one option");
+				return false;
+			}
+
+			exception3.TryClick();
+
+			if (exception1.Checked() || exception2.Checked())
+			{
+				Report.Info("User is incorrectly allowed to select more than one option");
+				return false;
+			}
+
+			exception4.TryClick();
+
+			if (exception1.Checked() || exception2.Checked() || exception3.Checked())
+			{
+				Report.Info("User is incorrectly allowed to select more than one option");
+				return false;
+			}
+
+			exception1.TryClick();
+
+			if (exception4.Checked() || exception2.Checked() || exception3.Checked())
+			{
+				Report.Info("User is incorrectly allowed to select more than one option");
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool UPCTransportationCheckboxPresent(string option)
+		{
+			IWebElement optionInput = this.containerElement.FindElement(By.XPath($".//span[text()='{option}']//preceding-sibling::input"), 2);
+			return optionInput != null;
+		}
+
+		public bool SelectUPCTransportationOptionAtLevel(string option, string transLevel)
+		{
+			IWebElement transLevelInput = this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//span[text()='" + option + "']/../div//span[text()='" + transLevel + "']//preceding-sibling::input"), 2);
+			return transLevelInput.TryClick();
 		}
 	}
 
