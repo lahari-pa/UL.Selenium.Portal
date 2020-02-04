@@ -1743,6 +1743,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"U. S. Department of Transportation (DOT) Classification");
 		}
 
+		[StepDefinition(@"I enter UN1993 - Select data - Continue - Happy Path")]
+		public void EnterUN1993_SelectData_Continue_HappyPath()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the UN Number field to: UN1993");
+			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1993");
+			Delay.Seconds(2);
+			Report.StartStep("I select the first option in section: Proper Shipping Name");
+			MyNewProduct.SelectFirstOptionInSection("Proper Shipping Name");
+			Delay.Seconds(2);
+			Report.StartStep("I select the first option in section: Hazard Class (select)");
+			MyNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
+			Delay.Seconds(2);
+			Report.StartStep("I select the first option in section: Packing Group (select)");
+			MyNewProduct.SelectFirstOptionInSection("Packing Group (select)");
+			Report.StartStep(
+				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue(
+				"U. S. Department of Transportation (DOT) Classification");
+		}
+
+
 		[StepDefinition(@"I call Shared Step 49621 \(Volatile Organic Compounds \(VOC\) for OTC and CARB - No\)")]
 		public void GivenICallSharedVolatileOrganicCompoundsVOCForOTCAndCARB_No()
 		{
@@ -4824,8 +4847,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			Report.StartStep("I click Process Documents");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
-            Delay.Seconds(4);
-            //Report.Screenshot();
+			Delay.Seconds(4);
+			//Report.Screenshot();
 			GeneralUtilities.StudioWaitForSpinner(60);
 			Report.StartStep(
 				"I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
@@ -6760,8 +6783,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 			Report.StartStep("I click Process Documents");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
-            Delay.Seconds(5);
-            //Report.Screenshot();
+			Delay.Seconds(5);
+			//Report.Screenshot();
 			Report.Info("Now waiting for spinner");
 			GeneralUtilities.StudioWaitForSpinner(60);
 			Report.StartStep(
@@ -7887,7 +7910,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsSha.InSupplierManagerPopupIEnterSearchTerm(email);
 
 			Report.StartStep("I Select the 'Email' Radio Button");
-            thisStepsSha.InSupplierManagerPopupISelectRadioButton("E-Mail");
+			thisStepsSha.InSupplierManagerPopupISelectRadioButton("E-Mail");
 
 			Report.StartStep("I click on the search button");
 			thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();

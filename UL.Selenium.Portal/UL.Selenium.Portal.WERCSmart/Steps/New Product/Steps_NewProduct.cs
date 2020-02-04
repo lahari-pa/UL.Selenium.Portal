@@ -972,10 +972,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Info("DPCI: " + upcInfo.Dpci);
 			Report.Info("Quantity: " + upcInfo.Quantity);
 
-			if(upcInfo.UPCName.IsNullOrEmpty())
+			if (upcInfo.UPCName.IsNullOrEmpty())
 			{
 				Report.Info("UPCName:" + upcInfo.UPCName);
-			}			
+			}
 
 			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
 		}
@@ -1141,7 +1141,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
 				"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
 			Delay.Seconds(1);
-			Context.AddToContext(section, option);;
+			Context.AddToContext(section, option);
+			;
 			Report.Info(option + " is saved to context as: " + section);
 
 		}
@@ -2620,7 +2621,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"In the UPC screen I add a UPC: saved as UPC(.*), container type: (.*) and size: (.*), then I select all certifications")]
-		public void InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications(string upc,string containerType, string size)
+		public void InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications(string upc, string containerType, string size)
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -2649,13 +2650,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 
-			Report.IsTrue(new NewProduct().SelectAllCertifications(),"Failed to select all certifications","Successfully selected all certifications");
+			Report.IsTrue(new NewProduct().SelectAllCertifications(), "Failed to select all certifications", "Successfully selected all certifications");
 
 			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
 			GeneralUtilities.Wait_for_load_finish();
 		}
-		
+
 		[StepDefinition(@"I set the Product's GTIN Brick Code to: (.*)")]
 		public void ThenISetTheProductsGTINBrickCodeTo(string description)
 		{
@@ -2734,7 +2735,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"In the Additional Product Information - Pesticide shown, US only, Yes to CA Cleaning Disclosure, select No for everything else - Happy Path")]
-		public void	GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
+		public void GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();

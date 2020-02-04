@@ -1532,10 +1532,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICheckThatInTheUPCScreenUnderTransportationColumnOptionXisChecked(string option)
 		{
 			Report.Info($"Starting the check of the selected status of option: {option}");
-			bool status= new NewProduct().CheckTransportationOptionXIsChecked(option);
+			bool status = new NewProduct().CheckTransportationOptionXIsChecked(option);
 			Report.IsTrue(status, "The option:" + option + " was not correctly selected", "The option:" + option + " was correctly selected");
 
 		}
-	
+
+		[StepDefinition(@"I ensure that there is a column in the Add UPC table called Transportation")]
+		public void IEnsureThatThereIsAColumnInTheAddUPCTableCalledTransportation()
+		{
+			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.TransportationColumnExists(), "Failed to find Transportation column", "Successfully found Transportation column");
+		}
+
+		[StepDefinition(@"I ensure that (DOT|IATA|IMDG|TDG) is listed as (Shipping with limited quantity|Shipping with consumer commodity|Shipping fully regulated)")]
+		public void IEnsureThatOptionIsListedAs(string option, string transLevel)
+		{
+			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.CheckTransportationOption(option, transLevel), "Failed to find the correct Transportation option for " + option + ".",
+				"Successfully found correct Transportation option for " + option + ".");
+		}
+
+		[StepDefinition(@"I ensure that I cannot select (DOT|IATA|IMDG|TDG) at (Shipping with limited quantity|Shipping with consumer commodity|Shipping fully regulated)")]
+		public void IEnsureThatICannotSelectOptionAtLevel(string option, string transLevel)
+		{
+			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(!NewProductClassObject.CanCheckTransportationOption(option, transLevel), "Failed to find checkbox unselectable for option " + option + ".",
+				"Successfully found checkbox unselectable for " + option + ".");
+		}
+
+		[StepDefinition(@"I ensure that I can only select one exception in the UPC Transportation column")]
+		public void IEnsureThatICanOnlySelectOneExceptionInTheTransportationColumn()
+		{
+			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.ExceptionsArePresent(), "Failed! Exceptions are not present!", "Successfully found exceptions.");
+			Report.IsTrue(NewProductClassObject.CannotSelectMultipleExceptions(), "Failed! You can select more than one option.",
+				"Successfully found that you can only select one option");
+		}
+
+		[StepDefinition(@"I ensure that the (DOT|IATA|IMDG|TDG) checkbox is not present in the UPC Transportation column")]
+		public void IEnsureThatTheOptionCheckboxIsNotPresentInTheUPCTransportationColumn(string option)
+		{
+			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(!NewProductClassObject.UPCTransportationCheckboxPresent(option), "Failed! Found " + option + " checkbox.",
+				"Successfully did not find " + option + "checkbox.");
+		}
+
+		[StepDefinition(@"At the UPC level, I set (DOT|IATA|IMDG|TDG) to (Shipping with limited quantity|Shipping with consumer commodity|Shipping fully regulated)")]
+		public void AtTheUPCLevelISetOptionToLevel(string option, string transLevel)
+		{
+			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.SelectUPCTransportationOptionAtLevel(option, transLevel), "Failed to select " + option + " at " + transLevel + ".",
+				"Successfully selected " + option + " at " + transLevel + ".");
+		}
 	}
 }

@@ -5,19 +5,19 @@
 @UPC
 @ForwardProductRegistration
 @PaymentMethods
+@SummaryPage
 @run_UPCTransportation
 Feature: UPCTransportation
 
-@tfs_design
 Scenario: [122305] UPC Transportation options are present if product-level options are present
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I generate a random UPC number and save as: RandomUPC
+	Given I generate a random UPC number and save as: UPC112305
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Given I save the product information as: TestCase122305
 	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -26,22 +26,26 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
 	Given I click continue
-	Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols, 2.1, None, add technical name, Click Continue)
+	Given I enter UN1993 - Select data - Continue - Happy Path
 	Given I should see the International Air Transport (IATA) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 	Given I click continue
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer  |
 		| Walgreens |
-	# Check for UPC Transport column
-	# Ensure that IATA and DOT are selected at Limited Quantity
-	# Ensure that you cannot downgrade DOT to Consumer Commodity
-	# Ensure that you cannot downgrade IATA to Consumer Commodity
-	# Ensure that you can select only one exception in the UPC Transportation column
-	# Ensure that IMDG and TDG options are not present
-	# Upgrade DOT to Fully Regulated
-	# Upgrade IATA to Fully Regulated
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPCRandomUPC, container type: Plastic Container and size: 2
+	Then I click Done on Select Retailers window
+	Then I click continue
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC112305, container type: Plastic Container and size: 2 do not click continue
+	Given I ensure that there is a column in the Add UPC table called Transportation
+	Given I ensure that DOT is listed as Shipping with limited quantity
+	Given I ensure that IATA is listed as Shipping with limited quantity
+	Given I ensure that I cannot select DOT at Shipping with consumer commodity
+	Given I ensure that I cannot select IATA at Shipping with consumer commodity
+	Given I ensure that the IMDG checkbox is not present in the UPC Transportation column
+	Given I ensure that the TDG checkbox is not present in the UPC Transportation column
+	Given At the UPC level, I set DOT to Shipping fully regulated
+	Given At the UPC level, I set IATA to Shipping fully regulated
+	Given I click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -51,9 +55,11 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
-	# Ensure that at the product-level, DOT and IATA are set to Limited Quantity
-	# Ensure that in the UPC table, you see a Transportation column
-	# Ensure that in the Transportation column in the UPC table, you see DOT and IATA listed as Fully Regulated
+	Given In the section 'Select all modes of transport that you've classified the product for', I see DOT listed at Shipping with limited quantity
+	Given In the section 'Select all modes of transport that you've classified the product for', I see IATA listed at Shipping with limited quantity
+	Given I ensure that the UPC table displays a column called 'UPC Transportation'
+	Given In the Summary screen UPC table, I ensure that DOT is listed as Shipping fully regulated
+	Given In the Summary screen UPC table, I ensure that IATA is listed as Shipping fully regulated
 	Given I close the window that opened
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122305
@@ -186,3 +192,30 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I select the true radio for the 'Are Statements True' question under the Review and Submit tab
 	Given I click continue on the Forward Product Registration page
 	Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+
+Scenario: [122940] UPC Transporation - Data Entry - Exceptions
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC122940
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+	Given I save the product information as: TestCase122940
+	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I should see the Transportation Details 1 Page
+	Given I set the Product is Regulated for Transport field to: Yes
+	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+	Given I click continue
+	Given I enter UN1993 - Select data - Continue - Happy Path
+	Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer  |
+		| Walgreens |
+	Given I click Done on Select Retailers window
+	Given I click continue
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC122940, container type: Plastic Container and size: 2 do not click continue
+	Given I ensure that I can only select one exception in the UPC Transportation column
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122940
