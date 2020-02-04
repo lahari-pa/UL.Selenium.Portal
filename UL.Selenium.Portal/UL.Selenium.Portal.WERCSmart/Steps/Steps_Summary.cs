@@ -136,7 +136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.IsTrue(new SummaryPage().DoesIngredientHeadingsContain(headingName), "Failed to find the Heading name: " + headingName, "Successfully found the Heading name: " + headingName);
 			}
-			
+
 		}
 		[StepDefinition(@"I Check that the Ingredients table on the Summary page for the ingredient: (.*) contains the Ingredient Type: (.*)")]
 		public void ICheckThatTheIngredientsTableForIngredientXContainsOnlyYTypes(string ingredient, string type)
@@ -155,12 +155,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ForTheFollowingIngredientsICheckThatTheIngredientsTableOnTheSummaryPageContainsOnlyTheIngredientsTypesAndFunctionalPurposesListed(Table table)
 		{
 
-			foreach(TableRow row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
 				this.ICheckThatTheIngredientsTableForIngredientXContainsOnlyYTypes(row["Ingredient"], row["Ingredient Type"]);
 				this.ICheckThatTheIngredientsTableForIngredientXContainsOnlyYPurposes(row["Ingredient"], row["Functional Purpose"]);
 			}
 
+		}
+
+		[StepDefinition(@"In the section 'Select all modes of transport that you've classified the product for', I see (DOT|IATA|IMDG|TDG) listed at (Shipping with limited quantity|Shipping with consumer commodity|Shipping fully regulated)")]
+		public void InTheSectionSelectAllModesISeeOptionListedAtLevel(string option, string transLevel)
+		{
+			Report.IsTrue(new SummaryPage().CheckProductLevelTransportation(option, transLevel), "Failed to find option " + option + " listed in the summary screen as " + transLevel + ".",
+				"Successfully found option " + option + " listed in the summary screen as " + transLevel + ".");
+		}
+
+		[StepDefinition(@"I ensure that the UPC table displays a column called '(.*)'")]
+		public void IEnsureThatTheProviceProductUPCTableDisplaysAColumnCalled(string colName)
+		{
+			Report.IsTrue(new SummaryPage().DoesUPCHeadingsContain(colName), "Failed to find column name " + colName + " in UPC Table",
+				"Successfully found column name " + colName + " in UPC Table.");
+		}
+
+		[StepDefinition(@"In the Summary screen UPC table, I ensure that (DOT|IATA|IMDG|TDG) is listed as (Shipping with limited quantity|Shipping with consumer commodity|Shipping fully regulated)")]
+		public void InTheSummaryScreenUPCTableIEnsureThatOptionsIsListedAsLevel(string option, string level)
+		{
+			Report.IsTrue(new SummaryPage().DoesUPCTransportationColumnContain(option, level), "Failed to find option " + option + " at level " + level + " in the UPC Transportation column.",
+				"Successfully found option " + option + " at level " + level + " in the UPC Transportation column.");
 		}
 	}
 }

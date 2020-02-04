@@ -140,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Did not find the Heading name: " + headingName + ". Heading names found are as follows: " + string.Join(",", newList));
 				return false;
 			}
-			
+
 		}
 		private List<IWebElement> IngredientHeadings => this.containerElement.FindElements(By.XPath(".//h2[contains(text(),'Ingredients')]//ancestor::div[@class='summary-question-container']/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
 
@@ -153,14 +153,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var newList = this.IngredientHeadingTitles;
 			int i = 1;
 			bool foundColumn = false;
-			foreach(var item in newList)
+			foreach (var item in newList)
 			{
-				if(item== "Ingredient Type")
+				if (item == "Ingredient Type")
 				{
 					Report.Info($"The Ingredient Type column was in position {i} in the table");
 					foundColumn = true;
 					break;
- 
+
 				}
 				i++;
 
@@ -171,24 +171,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return null;
 			}
 
-			IWebElement correctIngredientTypeCell = ingredientRow.FindElement(By.XPath($".//td[{i}]"),2);
+			IWebElement correctIngredientTypeCell = ingredientRow.FindElement(By.XPath($".//td[{i}]"), 2);
 
 
 
 			string displayedType = correctIngredientTypeCell.FindElement(By.XPath($".//div"), 2).Text;
 			return displayedType;
 
-			
 
-			
+
+
 
 		}
 
-		public bool IngredientTypesMatch(string ingredient,string type)
+		public bool IngredientTypesMatch(string ingredient, string type)
 		{
-			
+
 			string actualType = this.IngredientType(ingredient);
-			if(type=="NA")
+			if (type == "NA")
 			{
 				return (actualType == null);
 			}
@@ -196,7 +196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public List<string>FunctionalPurposes(string ingredient)
+		public List<string> FunctionalPurposes(string ingredient)
 		{
 			//find row for ingredient want, then add all values from ingreident types column to list
 			IWebElement functionalRow = this.containerElement.FindElement(By.XPath($".//h2[contains(text(),'Ingredients')]//ancestor::div[@class='summary-question-container']//tr[.//div[text()='{ingredient}']]"), 2);
@@ -226,30 +226,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//List<IWebElement> ingredientTypeEls = correctIngredientTypeCell.FindElements(By.XPath($".//div//div"), 2).ToList();
 
 			string ingredientTypeEls = correctIngredientTypeCell.FindElement(By.XPath($".//div"), 2).Text;
-			string replacedStr = ingredientTypeEls.Replace("\r\n", "");			
+			string replacedStr = ingredientTypeEls.Replace("\r\n", "");
 			string finalStr = replacedStr.TrimEnd(',');
-			List<string> result = finalStr.Split(new char[] { ',' }).ToList();			
+			List<string> result = finalStr.Split(new char[] { ',' }).ToList();
 			return result;
 
 		}
 
-		
+
 		public bool FunctionalPurposesMatch(string ingredient, List<string> chosenPurposes)
 		{
-			
+
 			List<string> actualPurposes = this.FunctionalPurposes(ingredient);
 
 			var diffFound = new List<string>();
-			Report.Info($"The Number of found Functional Purposes was:{actualPurposes.Count()}");			
-			if(actualPurposes.Count == 1)
+			Report.Info($"The Number of found Functional Purposes was:{actualPurposes.Count()}");
+			if (actualPurposes.Count == 1)
 			{
-				if (actualPurposes[0]=="" && chosenPurposes.Contains("NA"))
+				if (actualPurposes[0] == "" && chosenPurposes.Contains("NA"))
 				{
 					Report.Info("There were Functional purposes found as expected");
 					return true;
 				}
 			}
-			
+
 			foreach (var item in actualPurposes)
 			{
 				if (!chosenPurposes.Contains(item))
@@ -284,8 +284,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
-		
-		
+
+		public bool CheckProductLevelTransportation(string option, string transLevel)
+		{
+			IWebElement header = this.containerElement.FindElement(By.XPath(@"//h3[contains(text(), 'Select all modes of transport')]//following-sibling::p[contains(text(), '" + option + "')]//following-sibling::p[position()=1 and contains(text(), '" + transLevel + "')]"), 2);
+			return header != null;
+		}
+
+		public bool DoesUPCTransportationColumnContain(string option, string level)
+		{
+			IWebElement elem = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), ""Provide the product's UPC(s)"")]//following-sibling::table//td//div//div[contains(text(), '" + option + "')]//following-sibling::div[position()=1 and contains(text(), '" + level + "')]"), 2);
+			return elem != null;
+		}
+
+
+
 
 	}
 
