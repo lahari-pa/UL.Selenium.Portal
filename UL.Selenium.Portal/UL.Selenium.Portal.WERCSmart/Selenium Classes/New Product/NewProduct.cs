@@ -47,6 +47,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		private IWebElement LabelContains(string lblContains) => this.containerElement.FindElement(By.XPath($@".//label[contains(text(),""{lblContains}"")]"), 1);
 
 		private IWebElement BoldElementContains(string bContains) => this.containerElement.FindElement(By.XPath($@".//b[contains(text(),""{bContains}"")]"), 1);
+
+		private IWebElement TransLevelInput(string option, string transLevel) => this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//span[text()='" + option + "']/../div//span[text()='" + transLevel + "']//preceding-sibling::input"), 2);
+
+		private IWebElement Exception1 => this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(A)')]/preceding-sibling::input"), 2);
+		private IWebElement Exception2 => this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(I)(B)')]/preceding-sibling::input"), 2);
+		private IWebElement Exception3 => this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(II)(A)')]/preceding-sibling::input"), 2);
+		private IWebElement Exception4 => this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(II)(B)')]/preceding-sibling::input"), 2);
+
 		#endregion
 
 		#region New Product general methods
@@ -3961,8 +3969,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				pass = false;
 			}
-			IWebElement transLevelInput = this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//span[text()='" + option + "']/../div//span[text()='" + transLevel + "']//preceding-sibling::input"), 2);
-			if (transLevelInput == null || !transLevelInput.Checked())
+			if (this.TransLevelInput(option, transLevel) == null || !this.TransLevelInput(option, transLevel).Checked())
 			{
 				pass = false;
 			}
@@ -3972,7 +3979,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CanCheckTransportationOption(string option, string transLevel)
 		{
 			Report.Info("Checking if you can check level " + transLevel + " for option " + option + ".");
-			IWebElement transLevelInput = this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//span[text()='" + option + "']/../div//span[text()='" + transLevel + "']//preceding-sibling::input"), 2);
+			IWebElement transLevelInput = this.TransLevelInput(option, transLevel);
 
 			if (transLevelInput.Checked())
 			{
@@ -3989,62 +3996,62 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
-		public bool CannotSelectMultipleExceptions()
+		public bool ExceptionsArePresent()
 		{
-			IWebElement exception1 = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(A)')]/preceding-sibling::input"), 2);
-			IWebElement exception2 = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(I)(B)')]/preceding-sibling::input"), 2);
-			IWebElement exception3 = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(II)(A)')]/preceding-sibling::input"), 2);
-			IWebElement exception4 = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), '173.150(g)(1)(II)(B)')]/preceding-sibling::input"), 2);
-
-			if (exception1 == null)
+			if (this.Exception1 == null)
 			{
 				Report.Info("Could not find element for exception '173.150(g)(1)(A)'");
 				return false;
 			}
-			if (exception2 == null)
+			if (this.Exception2 == null)
 			{
 				Report.Info("Could not find element for exception '173.150(g)(1)(I)(B)'");
 				return false;
 			}
-			if (exception3 == null)
+			if (this.Exception3 == null)
 			{
 				Report.Info("Could not find element for exception '173.150(g)(1)(II)(A)'");
 				return false;
 			}
-			if (exception4 == null)
+			if (this.Exception4 == null)
 			{
 				Report.Info("Could not find element for exception '173.150(g)(1)(II)(B)'");
 				return false;
 			}
 
-			exception1.TryClick();
-			exception2.TryClick();
+			return true;
+		}
 
-			if (exception1.Checked())
+		public bool CannotSelectMultipleExceptions()
+		{
+			this.Exception1.TryClick();
+			this.Exception2.TryClick();
+
+			if (this.Exception1.Checked())
 			{
 				Report.Info("User is incorrectly allowed to select more than one option");
 				return false;
 			}
 
-			exception3.TryClick();
+			this.Exception3.TryClick();
 
-			if (exception1.Checked() || exception2.Checked())
+			if (this.Exception1.Checked() || this.Exception2.Checked())
 			{
 				Report.Info("User is incorrectly allowed to select more than one option");
 				return false;
 			}
 
-			exception4.TryClick();
+			this.Exception4.TryClick();
 
-			if (exception1.Checked() || exception2.Checked() || exception3.Checked())
+			if (this.Exception1.Checked() || this.Exception2.Checked() || this.Exception3.Checked())
 			{
 				Report.Info("User is incorrectly allowed to select more than one option");
 				return false;
 			}
 
-			exception1.TryClick();
+			this.Exception1.TryClick();
 
-			if (exception4.Checked() || exception2.Checked() || exception3.Checked())
+			if (this.Exception4.Checked() || this.Exception2.Checked() || this.Exception3.Checked())
 			{
 				Report.Info("User is incorrectly allowed to select more than one option");
 				return false;
@@ -4061,8 +4068,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectUPCTransportationOptionAtLevel(string option, string transLevel)
 		{
-			IWebElement transLevelInput = this.containerElement.FindElement(By.XPath(@"//div[@id='dataentry']//span[text()='" + option + "']/../div//span[text()='" + transLevel + "']//preceding-sibling::input"), 2);
-			return transLevelInput.TryClick();
+			return this.TransLevelInput(option, transLevel).TryClick();
 		}
 	}
 
