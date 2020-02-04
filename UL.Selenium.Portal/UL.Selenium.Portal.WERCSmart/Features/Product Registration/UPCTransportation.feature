@@ -43,24 +43,6 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I ensure that I cannot select IATA at Shipping with consumer commodity
 	Given I ensure that the IMDG checkbox is not present in the UPC Transportation column
 	Given I ensure that the TDG checkbox is not present in the UPC Transportation column
-	Given At the UPC level, I set DOT to Shipping fully regulated
-	Given At the UPC level, I set IATA to Shipping fully regulated
-	Given I click continue
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
-		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
-	Given I click the Summary button in the Data Acceptance window
-	Given I switch to the Data Summary page
-	Given In the section 'Select all modes of transport that you've classified the product for', I see DOT listed at Shipping with limited quantity
-	Given In the section 'Select all modes of transport that you've classified the product for', I see IATA listed at Shipping with limited quantity
-	Given I ensure that the UPC table displays a column called 'UPC Transportation'
-	Given In the Summary screen UPC table, I ensure that DOT is listed as Shipping fully regulated
-	Given In the Summary screen UPC table, I ensure that IATA is listed as Shipping fully regulated
-	Given I close the window that opened
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122305
 
@@ -219,3 +201,51 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I ensure that I can only select one exception in the UPC Transportation column
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122940
+
+Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulated at the UPC Level
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC122971
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+	Given I save the product information as: TestCase122971
+	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I should see the Transportation Details 1 Page
+	Given I set the Product is Regulated for Transport field to: Yes
+	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
+	Given I click continue
+	Given I enter UN1993 - Select data - Continue - Happy Path
+	Given I should see the International Air Transport (IATA) Classification Page
+	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+	Given I click continue
+	Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer  |
+		| Walgreens |
+	Given I click Done on Select Retailers window
+	Given I click continue
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC122971, container type: Plastic Container and size: 2 do not click continue
+	Given At the UPC level, I set DOT to Shipping fully regulated
+	Given At the UPC level, I set IATA to Shipping fully regulated
+	Given I click continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
+		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I click the Summary button in the Data Acceptance window
+	Given I switch to the Data Summary page
+	Given In the section 'Select all modes of transport that you've classified the product for', I see DOT listed at Shipping with limited quantity
+	Given In the section 'Select all modes of transport that you've classified the product for', I see IATA listed at Shipping with limited quantity
+	Given I ensure that the UPC table displays a column called 'UPC Transportation'
+	Given In the Summary screen UPC table, I ensure that DOT is listed as Shipping fully regulated
+	Given In the Summary screen UPC table, I ensure that IATA is listed as Shipping fully regulated
+	Given I close the window that opened
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122971
