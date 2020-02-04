@@ -1564,6 +1564,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IEnsureThatICanOnlySelectOneExceptionInTheTransportationColumn()
 		{
 			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.ExceptionsArePresent(), "Failed! Exceptions are not present!", "Successfully found exceptions.");
 			Report.IsTrue(NewProductClassObject.CannotSelectMultipleExceptions(), "Failed! You can select more than one option.",
 				"Successfully found that you can only select one option");
 		}
