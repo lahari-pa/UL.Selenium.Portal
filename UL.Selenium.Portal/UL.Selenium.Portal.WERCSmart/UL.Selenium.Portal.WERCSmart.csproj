@@ -485,6 +485,7 @@
     </None>
     <None Include="Features\Product Registration\UPC Case Pack\SoldAndPLPTests.feature">
     </None>
+    <None Include="Features\Product Registration\UPCTransportation.feature" />
     <None Include="Features\Product Registration\UPCTransporationRules.feature" />
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
     </None>
