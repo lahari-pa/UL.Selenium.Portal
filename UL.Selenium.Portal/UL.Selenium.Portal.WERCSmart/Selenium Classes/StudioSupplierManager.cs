@@ -136,7 +136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			
 		}
 
-		public IWebElement CategoryHeaders => this.containerElement.FindElement(By.XPath($".//ul[contains(@class,'ui-tabs-nav')]"), 2);
+		public IWebElement CategoryHeaders => this.containerElement.WaitUntilElementVisible(By.XPath($".//ul[contains(@class,'ui-tabs-nav')]"), 2);
 
 		public bool CheckCategoriesPresent()
 		{
@@ -153,18 +153,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();
 			IWebElement foundCategory = categories.First(x => x.Text == category);
+			if(foundCategory==null)
+			{
+				Report.Info("Did not find the catagory, the element was null");
+				return false;
+			}
 			if(foundCategory.GetAttribute("class").Contains("active"))
 			{
 				return true;
 			}
 			return false;
 		}
+		
 
-		public bool ColumnContains(string columnTitle,List<string> expectedValues)
+		public List<string>ColumnValues(string columnTitle)
 		{
 			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
 			List<string> tableHeaderStrings = new List<string>();
-			
+
 			foreach (var item in tableHeaders)
 			{
 				tableHeaderStrings.Add(item.Text);
@@ -175,67 +181,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				columnTitle = "";
 			}
 			int i = 1;
-			int titlePosition;
-			bool titleFound = false;
-			foreach(var title in tableHeaderStrings)
-			{
-				if(title==columnTitle)
-				{
-					titlePosition = i;
-					titleFound = true;
-					break;
-				}
-				i++;
-			}
-			if(titleFound==false)
-			{
-				return false;
-			}
-
-			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
-			List<string> tableRowStrings = new List<string>();
-			foreach(var row in tableRows)
-			{
-				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
-				tableRowStrings.Add(rowText);
-			}
-			var differenceQuery1 = expectedValues.Except(tableRowStrings);
-			var differnceQuery2 = tableRowStrings.Except(expectedValues);
-			var resultingDiff = differenceQuery1.Concat(differnceQuery2).ToList();
-
-			return resultingDiff.Count()==0;
-
-			//int y = 0;
-			//foreach(var row in tableRows)
-			//{
-			//	string rowText=row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
-			//	Report.Info($"Found the row text: {rowText} for postion: {i}");
-			//	if(expectedValues.Contains(rowText))
-			//	{
-			//		Report.Info($"This was an expected value");
-			//		y++;
-			//		Report.Info($"Total of the expected values found is now: {y}");
-			//	}
-			//}
-			//return expectedValues.Count == y;
-		}
-
-		public bool ColumnIncludes(string columnTitle, List<string> expectedValues)
-		{
-			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
-			List<string> tableHeaderStrings = new List<string>();
-
-			foreach (var item in tableHeaders)
-			{
-				tableHeaderStrings.Add(item.Text);
-			}
-			
-			if (columnTitle == "Retailer")
-			{
-				columnTitle = "";
-			}
-			int i = 1;
-			int titlePosition;
+			int titlePosition = 0;
 			bool titleFound = false;
 			Report.Info($"Looking for the postion of column with title: {columnTitle}");
 			foreach (var title in tableHeaderStrings)
@@ -244,27 +190,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					titlePosition = i;
 					titleFound = true;
-					Report.Info($"The title was found at position: {i}");
+					Report.Info($"The title was found at position: {titlePosition}");
 					break;
 				}
+				i++;
+
 			}
 			if (titleFound == false)
 			{
 				Report.Info("The title was not found in the table");
-				return false;
+				return null;
 			}
 			Report.Info("Starting to look for differences in the column and the expected values");
 			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
 			List<string> tableRowStrings = new List<string>();
 			foreach (var row in tableRows)
 			{
-				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+				string rowText = row.FindElement(By.XPath($".//td[{titlePosition}]"), 2).Text;
 				tableRowStrings.Add(rowText);
 			}
-			var differenceQuery1 = expectedValues.Except(tableRowStrings);
-			//need to return correctly to indicate this is no difference etc
-			return differenceQuery1.IsNullOrEmpty(); 			
+			return tableRowStrings;
+		}
 
+		public bool ColumnContains(string columnTitle, List<string> expectedValues)
+		{
+			var differenceQuery1 = expectedValues.Except(this.ColumnValues(columnTitle));
+			var differnceQuery2 = this.ColumnValues(columnTitle).Except(expectedValues);
+			var resultingDiff = differenceQuery1.Concat(differnceQuery2).ToList();
+			return resultingDiff.Count() == 0;
+		}
+
+		public bool ColumnIncludes(string columnTitle, List<string> expectedValues)
+		{
+			var differenceQuery1 = expectedValues.Except(this.ColumnValues(columnTitle));			
+			return differenceQuery1.IsNullOrEmpty(); 			
 		}
 
 		public bool DataConsentTableIsPresent()
@@ -428,9 +387,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					dateValid = false;
 				}
 				
-				//issue is that does not handle M-D-YYY
-				//DateTime checkDate;
-				//bool isValid = DateTime.TryParseExact(date,"MM-dd-yyyy",CultureInfo.InvariantCulture,DateTimeStyles.None,out checkDate);
 
 			}
 			return dateValid;

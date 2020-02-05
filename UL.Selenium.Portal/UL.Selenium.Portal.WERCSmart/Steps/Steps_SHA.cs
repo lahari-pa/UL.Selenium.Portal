@@ -3504,6 +3504,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep($"Starting to attempt to click the catagory: {category}");
 			Report.IsTrue(new StudioSupplierManager().ClickCategory(category),"Failed to click the category","Successfully clicked the category");
+			Report.StartStep($"Checking that the catagory: {category} is active");
 			Report.IsTrue(new StudioSupplierManager().CategoryIsActive(category), "The Category was not active", "The Category was active");
 			
 		}
@@ -3511,7 +3512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
 		public void InTheSupplierManagerPopupICheckThatColumnXContainsAllValues(string column, Table table)
 		{
-			//convert table to list here
+			
 			Report.Info("Converting the table to a List");
 			List<string> expectedValues = new List<string>();
 			foreach (TableRow thisRow in table.Rows)
