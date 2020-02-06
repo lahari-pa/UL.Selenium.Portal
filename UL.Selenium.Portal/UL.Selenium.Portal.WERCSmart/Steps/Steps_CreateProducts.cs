@@ -909,8 +909,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
 			sharedSteps.GivenICallSharedStepEnterPesticideData_UnitedStatesWithoutEPANumber();
-			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
-			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			//sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
+			//sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+
+
 
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
@@ -991,8 +998,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
-			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			//sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
+			//sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
