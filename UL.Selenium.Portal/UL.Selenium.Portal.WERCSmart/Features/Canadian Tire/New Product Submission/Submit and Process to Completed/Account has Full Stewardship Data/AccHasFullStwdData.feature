@@ -294,6 +294,7 @@ Scenario: [86171] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86171 and its status is: Completed
 
 
+@ScenarioId:6556
 Scenario: [86170] Create a new product SOLD = Canada, Private Label = Yes, CT retailer product - Submission and process thru to completed
 	Given I generate a random UPC number and save as: UPC86170
 	Given I login into the WERCSmart Portal - Canada has all data account

@@ -275,39 +275,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EmailColumnContainsEmailAddresses()
 		{
-			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
-			List<string> tableHeaderStrings = new List<string>();
-
-			foreach (var item in tableHeaders)
-			{
-				tableHeaderStrings.Add(item.Text);
-			}
-
-
-			int i = 1;
-			int titlePosition;
-			bool titleFound = false;
-			foreach (var title in tableHeaderStrings)
-			{
-				if (title == "Email")
-				{
-					titlePosition = i;
-					titleFound = true;
-					break;
-				}
-				i++;
-			}
-			if (titleFound == false)
-			{
-				return false;
-			}
-			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
-			List<string> tableRowStrings = new List<string>();
-			foreach (var row in tableRows)
-			{
-				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
-				tableRowStrings.Add(rowText);
-			}
+			
+			var tableRowStrings = this.ColumnValues("Email");
 			bool emailValid = true;
 			int y = 1;
 			foreach (var email in tableRowStrings)
@@ -337,39 +306,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool DateColumnContainsValidmmddyyyy()
 		{
-			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
-			List<string> tableHeaderStrings = new List<string>();
-
-			foreach (var item in tableHeaders)
-			{
-				tableHeaderStrings.Add(item.Text);
-			}
-
-
-			int i = 1;
-			int titlePosition;
-			bool titleFound = false;
-			foreach (var title in tableHeaderStrings)
-			{
-				if (title == "Date")
-				{
-					titlePosition = i;
-					titleFound = true;
-					break;
-				}
-				i++;
-			}
-			if (titleFound == false)
-			{
-				return false;
-			}
-			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
-			List<string> tableRowStrings = new List<string>();
-			foreach (var row in tableRows)
-			{
-				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
-				tableRowStrings.Add(rowText);
-			}
+			var tableRowStrings = this.ColumnValues("Date");
 			bool dateValid = true;
 			foreach (var date in tableRowStrings)
 			{
