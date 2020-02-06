@@ -294,6 +294,7 @@ Scenario: [86171] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86171 and its status is: Completed
 
 
+@ScenarioId:6556
 Scenario: [86170] Create a new product SOLD = Canada, Private Label = Yes, CT retailer product - Submission and process thru to completed
 	Given I generate a random UPC number and save as: UPC86170
 	Given I login into the WERCSmart Portal - Canada has all data account
@@ -330,6 +331,9 @@ Scenario: [86170] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase86170)
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86170)
+	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase86187) for
+		| Retailer      |
+		| Canadian Tire |
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86170 and its status is: Completed
 
 

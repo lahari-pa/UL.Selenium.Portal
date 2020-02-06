@@ -613,10 +613,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsIngredients.AddIngredients(tableIngredients);
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
-			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
-			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
 
-			
+			//sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
+			//sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+
 
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");

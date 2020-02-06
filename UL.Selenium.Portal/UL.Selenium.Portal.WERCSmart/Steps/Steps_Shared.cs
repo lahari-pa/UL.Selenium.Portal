@@ -920,6 +920,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					return;
 				}
+				if(new NewProduct().FormError().Contains("UPC failing Transportation Rules."))
+				{
+					Report.Failure($"The Product created is failing the UPC Transporation Rules. An error was seen.");
+					Report.Screenshot();
+					return;
+				}
 				// delete upc that failed
 				stepsNewProduct.GivenIDeleteUPC(upc);
 				Report.Info("An error was showing! on click continue! Attempting a different UPC");

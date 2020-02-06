@@ -1555,5 +1555,11 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 
 #======================================================================== IATA ======================================================================
 
+
+Scenario: [StagingRegressionFixes] CVS Artists supply to to new
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products	
+	Then For CVS I create a product of type: Artist Supply (RUCC0384), save it as: CVSArtistProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSArtistExcelFile and check that is shows the expected product saved as: CVSArtistProduct1
 	
 	
