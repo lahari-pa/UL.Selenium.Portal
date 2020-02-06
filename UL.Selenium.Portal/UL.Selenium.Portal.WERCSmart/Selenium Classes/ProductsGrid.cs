@@ -1106,48 +1106,79 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(5);
 
 			//IWebElement productRow = this.containerElement.FindElement(By.XPath(".//tbody//tr//li[@class and not(@class='update')]//ancestor::tr"), 2);
-			IWebElement productRow = this.containerElement.FindElement(By.XPath(".//tbody//tr[.//li[@class and not(@class='update')]]"), 2);
-
-
-			if (productRow == null || !productRow.Displayed)
+			List<IWebElement> productRows = this.containerElement.FindElements(By.XPath(".//tbody//tr[.//li[@class and not(@class='update')]]"), 2).ToList();
+			//get all rows in a list of webelements
+			//if the first one does not have the archeived tag then go
+			//if not try second row in list and so on
+			//checking the archieved tag -			
+			
+			foreach(var row in productRows)
 			{
-				return null;
-			}
-			string productId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
-			string dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
-			var retailers = new List<string>();
-			var retailersAbrv = new List<string>();
-			IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
+				bool notArchieved = false;
+				List<IWebElement> retailersymbolEL = row.FindElements(By.XPath(".//td[5]//ul//li"), 2).ToList();
+				foreach (var el in retailersymbolEL)
+				{
+					string classFound = el.GetAttribute("class");
+					Report.Info($"The class for the el was: {classFound}");
+					if (el.GetAttribute("class").Contains("archived"))
+					{
+						notArchieved = false;
+						Report.Info("One of the retailers was archived for the product moving to the next row.");
+						break;
+					}
+				}
+				if(!notArchieved)
+				{
 
-			foreach (IWebElement retailerLi in retailersLi)
-			{
-				IWebElement retailerLiButton = retailerLi.FindElement(By.XPath("./button"), 2);
-				if (!retailerLi.GetAttribute("title").IsNullOrEmpty())
-				{
-					retailers.Add(retailerLi.GetAttribute("title")?.Trim());
-				}
-				else if (retailerLiButton != null && !retailerLiButton.GetAttribute("title").IsNullOrEmpty())
-				{
-					retailers.Add(retailerLiButton.GetAttribute("title")?.Trim());
-				}
-				else
-				{
-					retailers.Add(retailerLi.GetAttribute("data-original-title")?.Trim());
-				}
-				retailersAbrv.Add(retailerLi.Text.Trim());
+					Report.Info($"The product did not contain any archived retailers, using this product");
+					IWebElement productRow = row;
+					if (productRow == null || !productRow.Displayed)
+					{
+						return null;
+					}
+					string productId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
+					string dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
+					var retailers = new List<string>();
+					var retailersAbrv = new List<string>();
+					IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
+
+					foreach (IWebElement retailerLi in retailersLi)
+					{
+						IWebElement retailerLiButton = retailerLi.FindElement(By.XPath("./button"), 2);
+						if (!retailerLi.GetAttribute("title").IsNullOrEmpty())
+						{
+							retailers.Add(retailerLi.GetAttribute("title")?.Trim());
+						}
+						else if (retailerLiButton != null && !retailerLiButton.GetAttribute("title").IsNullOrEmpty())
+						{
+							retailers.Add(retailerLiButton.GetAttribute("title")?.Trim());
+						}
+						else
+						{
+							retailers.Add(retailerLi.GetAttribute("data-original-title")?.Trim());
+						}
+						retailersAbrv.Add(retailerLi.Text.Trim());
+					}
+					IWebElement labelBrandTag = productRow.FindElement(By.XPath(".//div/p/span"), 2);
+					var productElement = new ProductGridItem() {
+						ProductId = productId,
+						ProductName = labelBrandTag != null ?
+							productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
+							productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
+						DateCreated = dateCreated,
+						Retailers = retailers,
+						RetailerAbrv = retailersAbrv,
+						NameLabel = labelBrandTag?.Text
+					};
+					return productElement;
+				}					
 			}
-			IWebElement labelBrandTag = productRow.FindElement(By.XPath(".//div/p/span"), 2);
-			var productElement = new ProductGridItem() {
-				ProductId = productId,
-				ProductName = labelBrandTag != null ?
-					productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
-					productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
-				DateCreated = dateCreated,
-				Retailers = retailers,
-				RetailerAbrv = retailersAbrv,
-				NameLabel = labelBrandTag?.Text
-			};
-			return productElement;
+			Report.Info($"All Products Found had either archieved retailers or were in recertification");
+			return null;
+
+
+
+			
 		}
 	}
 

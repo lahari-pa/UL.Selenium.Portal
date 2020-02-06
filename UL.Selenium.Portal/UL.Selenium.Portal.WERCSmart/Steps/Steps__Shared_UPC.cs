@@ -1528,12 +1528,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(NewProductClassObject.SelectChevronForUPC(upc), "Failed to select chevron for upc " + upc, "Successfully selected chevron!");
 		}
 
-		[StepDefinition(@"I Check that in the UPC screen, under the Transportation Column to option (.*) is checked")]
-		public void ICheckThatInTheUPCScreenUnderTransportationColumnOptionXisChecked(string option)
+		[StepDefinition(@"I Check that in the UPC screen, under the Transportation Column the Catagory (.*) is checked")]
+		public void ICheckThatInTheUPCScreenUnderTransportationColumnCatagoryXisChecked(string option)
 		{
 			Report.Info($"Starting the check of the selected status of option: {option}");
-			bool status = new NewProduct().CheckTransportationOptionXIsChecked(option);
-			Report.IsTrue(status, "The option:" + option + " was not correctly selected", "The option:" + option + " was correctly selected");
+			bool status= new NewProduct().CheckTransportationCatagoryXIsChecked(option);
+			Report.IsTrue(status, "The Catagory:" + option + " was not correctly selected", "The option:" + option + " was correctly selected");
+
+		}
+
+
+		[StepDefinition(@"I Check that in the UPC screen, under the Transportation Column for Catagory (.*) the option (.*) is checked")]
+		public void ICheckThatInTheUPCScreenUnderTransportationColumnCatagoryXisCheckedForCatagoryY(string catagory, string option)
+		{
+			Report.Info($"Starting the check of the selected status of option: {option} for cataogry: {catagory}");
+			bool status = new NewProduct().CheckTransportationOptionXIsCheckedForCatagoryY(catagory,option);
+			Report.IsTrue(status, "The option:" + option + " was not correctly selected under the catagory: "+catagory, "The option:" + option + " was correctly selected  under the catagory: " + catagory);
 
 		}
 

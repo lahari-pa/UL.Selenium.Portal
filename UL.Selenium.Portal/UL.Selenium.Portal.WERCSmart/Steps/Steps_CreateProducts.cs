@@ -191,7 +191,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				// search for UPC and save to context as UPC__{savedAs}
 				//var id = Context.GetFromContext($"Kit_{savedAs}");
 				// search
-				new StepsProductGrid().GivenISearchForTheProductSavedAs(savedAs);
+				new StepsProductGrid().GivenISearchForTheProductSavedAs("Kit_"+savedAs);
 				// row action - view upcs
 				new StepsProductGrid().WhenIClickRowActionsForTheFirstProductReturned();
 				new StepsProductGrid().ClickRowAction("View UPCs");
