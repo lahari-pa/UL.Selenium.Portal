@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -172,6 +172,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				// Click the element we have identified as the best match
 				if (clickResult.TryClick())
 				{
+					// If access code validation use default '1234'
+					var validationModal = new ModalDialog();
+					if(validationModal.WaitForContainerToBeVisible(5))
+					{
+						bool test1 = validationModal.EnterValidation("1234");
+						bool test2 = validationModal.Click_Validate();
+					}
 					// So we have now selected the element, so we need to try and get the first 'new' entry which contains this CAS Number, and hasn't had the Percentage field filled
 					bool success = true;
 					IList<IWebElement> rows = this.containerElement.FindElements(
@@ -229,6 +236,63 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
+		}
+
+		public bool AddCACleaningIngredient(CACleaningIngredient ingredient)
+		{
+			bool pass = false;
+
+			var ing = new Ingredient {
+				ComponentName = ingredient.ComponentName,
+				CASNumber = ingredient.CASNumber,
+				Percent = ingredient.Percent,
+				PublicallyDisclosed = ingredient.PublicallyDisclosed,
+				TradeSecret = ingredient.TradeSecret,
+				PublicName = ingredient.PublicName
+			};
+			this.AddIngredient(ing);
+
+			pass = this.ISelectIngredientType(ingredient.ComponentName, ingredient.IngredientType);
+
+			if (!pass)
+			{
+				Report.Info("Failed to set Ingredient Type");
+				return false;
+			}
+
+			var tableFunctionalPurpose = new Table("Functional Purpose");
+			string[] funcPurposes = ingredient.FunctionalPurpose.Split(',');
+			foreach (string funcPurpose in funcPurposes)
+			{
+				pass = this.ISelectFunctionalPurpose(ingredient.ComponentName, funcPurpose.Trim());
+				if (!pass)
+				{
+					Report.Info("Failed to set Functional Purpose");
+					return false;
+				}
+			}
+
+			if (ingredient.Clean)
+			{
+				pass = this.SelectClean(ingredient.ComponentName);
+				if (!pass)
+				{
+					Report.Info("Failed to set Clean checkbox");
+					return false;
+				}
+			}
+
+			if (ingredient.Certified)
+			{
+				pass = this.SelectCertified(ingredient.ComponentName);
+				if (!pass)
+				{
+					Report.Info("Failed to set Certified checkbox");
+					return false;
+				}
+			}
+
+			return true;
 		}
 
 		public int IngredientRowCount()
@@ -344,19 +408,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				string totalExpected = this.IngredientRowCount().ToString();
 				string pubDisExpected = total;
 				string pubDisSummary = this.containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
-				string pubDisSummaryInt = pubDisSummary.Replace("%","");
+				string pubDisSummaryInt = pubDisSummary.Replace("%", "");
 				double percentFoundAsDouble = Convert.ToDouble(pubDisSummaryInt);
-				double percentExpectedAsDouble = Convert.ToDouble(pubDisExpected) / Convert.ToDouble(totalExpected)*100;
+				double percentExpectedAsDouble = Convert.ToDouble(pubDisExpected) / Convert.ToDouble(totalExpected) * 100;
 
 				Report.Info($"Percent Found was: {percentFoundAsDouble}");
 				Report.Info($"Percent Expected is: {percentExpectedAsDouble}");
 
-				if(percentFoundAsDouble==percentExpectedAsDouble)
+				if (percentFoundAsDouble == percentExpectedAsDouble)
 				{
 					return true;
 				}
 				return false;
-				
+
 			}
 			catch (Exception)
 			{
@@ -870,6 +934,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public string GetIngredientPublicName(string chemicalName)
+		{
+			try
+			{
+				IWebElement publicNameOption = this.IngredientRow(chemicalName)?.FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
+				return publicNameOption.GetAttribute("title");
+			}
+			catch (Exception)
+			{
+				return "";
+			}
+		}
+		public string GetIngredientPercentage(string chemicalName)
+		{
+			try
+			{
+				IWebElement percentage = this.IngredientRow(chemicalName)?.FindElement(By.XPath(".//td[contains(@class,'percent-comp')]//input[@class='form-control percent-comp']"), 2);
+				return percentage.GetValue();
+			}
+			catch (Exception)
+			{
+				return "";
+			}
+		}
+
 
 		public class Ingredient
 		{
@@ -892,6 +981,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					this.TradeSecretEnabled + " Public disclosure enabled: " + this.PublicDisclosureEnabled +
 					" Public name enabled: " + this.PublicNameEnabled + " Selected: " + this.Selected.ToString();
 			}
+		}
+
+		public class CACleaningIngredient : Ingredient
+		{
+			public string IngredientType { get; set; } = "";
+			public string FunctionalPurpose { get; set; } = "";
+			public bool Clean { get; set; } = false;
+			public bool Certified { get; set; } = false;
 		}
 
 		public bool IngredientMatchesFirstOption(string inputOption)
@@ -946,13 +1043,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredienName}']]"), 2);
 			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'ingredientType')]"), 2);
-			if(ingredientTypeBox==null)
+			if (ingredientTypeBox == null)
 			{
 				Report.Failure("Could not find the Ingredient Type Input Box");
 				return false;
 			}
 			ingredientTypeBox.Select(ingredientType);
-			if(ingredientTypeBox.SelectedOption()== ingredientType)
+			if (ingredientTypeBox.SelectedOption() == ingredientType)
 			{
 				Report.Info($"The correct Type was selectd. The Option selected was: {ingredientTypeBox.SelectedOption()}");
 				return true;
@@ -995,8 +1092,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					currentlySelectedOptionsStr.Add(item.Text);
 				}
-				
-				if (currentlySelectedOptionsStr.Contains("×" + option))
+
+				if (currentlySelectedOptionsStr.Contains("ï¿½" + option))
 				{
 					Report.Info($"The correct Purpose was selectd.");
 				}
@@ -1005,7 +1102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Info("Failed to select the correct Purpose");
 					selectedOptionSuccessfull = false;
 				}
-				
+
 			}
 			return selectedOptionSuccessfull;
 
@@ -1024,38 +1121,65 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			bool selectedOptionSuccessfull = true;
 			var selectedOptionsStr = new List<string>();
 
-				if (functionalPurpose == "NA")
-				{
-					Report.Info("The Option to Choose was set to NA, No Funcional Purpose will be selected");
-					return selectedOptionSuccessfull = true;
-				
-				}							
+			if (functionalPurpose == "NA")
+			{
+				Report.Info("The Option to Choose was set to NA, No Funcional Purpose will be selected");
+				return selectedOptionSuccessfull = true;
 
-				functionalPurposeBox.Select(functionalPurpose);
+			}
 
-				List<IWebElement> selectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
-				
+			functionalPurposeBox.Select(functionalPurpose);
 
-				foreach (var item in selectedOptionsEl)
-				{
-					selectedOptionsStr.Add(item.Text);
-				}
+			List<IWebElement> selectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
 
-				if( selectedOptionsStr.Contains("×"+ functionalPurpose))
-				{
-					Report.Info($"The correct Purpose was selected.");
-				}
-				else
-				{
-					Report.Info("Failed to select the correct Purpose");
-					selectedOptionSuccessfull = false;
-				}			
-				return selectedOptionSuccessfull;
+
+			foreach (var item in selectedOptionsEl)
+			{
+				selectedOptionsStr.Add(item.Text);
+			}
+
+			if (selectedOptionsStr.Contains("ï¿½" + functionalPurpose))
+			{
+				Report.Info($"The correct Purpose was selected.");
+			}
+			else
+			{
+				Report.Info("Failed to select the correct Purpose");
+				selectedOptionSuccessfull = false;
+			}
+			return selectedOptionSuccessfull;
+		}
+
+		public bool SelectClean(string ingredientName)
+		{
+			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement cleanCheckbox = wantedRow.FindElement(By.XPath(".//td//input[contains(@data-bind,'caClean')]"), 2);
+			if (cleanCheckbox == null)
+			{
+				Report.Info("Could not find the Clean Check Box");
+				return false;
+			}
+
+			return cleanCheckbox.TryClick();
+
+		}
+
+		public bool SelectCertified(string ingredientName)
+		{
+			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			IWebElement certifiedCheckBox = wantedRow.FindElement(By.XPath(".//td//input[contains(@data-bind,'caCertified')]"), 2);
+			if (certifiedCheckBox == null)
+			{
+				Report.Info("Could not find the Certified Check Box");
+				return false;
+			}
+
+			return certifiedCheckBox.TryClick();
 		}
 
 		internal bool TransparencyScorePercent(float p0, out float trScore)
 		{
-			IWebElement transparency = this.FindElement(By.XPath("//*[@id='transparency-score']/span"), 2);
+			IWebElement transparency = this.FindElement(By.XPath(".//*[@id='transparency-score']/span"), 2);
 			if (!float.TryParse(transparency.Text.Remove(transparency.Text.Length - 1), out trScore))
 			{
 				Report.Failure("Transparency score could not be evaluated to an integer value. Displayed value is: " + transparency.Text);

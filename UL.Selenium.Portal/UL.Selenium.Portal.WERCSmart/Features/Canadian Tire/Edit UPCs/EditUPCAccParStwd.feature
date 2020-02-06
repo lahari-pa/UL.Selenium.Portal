@@ -66,9 +66,10 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86258
 
 @ScenarioId:6228
+@ScenarioId:6228
 Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not Canadian Tire, package type is not required
 	Given I generate a random UPC number and save as: UPC86259
-	Given I generate a random UPC number and save as: UPC_862591
+	Given I generate a random UPC number and save as: UPC862591
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	Given I create a Chalk product and take to completed using Test Case 86114 and save as: TestCase86259
 	Given I navigate to the landing page
@@ -77,7 +78,7 @@ Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not 
 	Given I search for the product saved as: TestCase86259
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit UPCs
-	Then I call Shared Step 86293 - UPC - Package type shown but not required - Enter UPC, Container and size, Continue for UPC: saved as UPC_862591
+	Then I call Shared Step 86293 - UPC - Package type shown but not required - Enter UPC, Container and size, Continue for UPC: saved as UPC862591
 	#Given I call Shared Step 87337 (Edit UPC - data - Click Save) for UPC as: saved as UPC86259, container type: Cardboard and size: 2 and packaging type: Package Type
 	##And I Select a package type from the drop down list
 	#And I click Save in The Product Page

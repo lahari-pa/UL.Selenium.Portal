@@ -1,14 +1,16 @@
 using Mailosaur;
-using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using UL.Automation.Reporting;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -21,7 +23,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] The signup page should appear")]
 		public void ThenTheSignupPageShouldAppear()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- the signup page should appear");
+			Report.StartStep(ReportSettings.StepCounter + "- the signup page should appear");
 			try
 			{
 				Report.Info("Checking that the signup page has loaded...");
@@ -40,7 +42,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Under the Confirm Email text box the following errors should appear")]
 		public void ThenUnderTheConfirmEmailTextBoxTheFollowingErrorsShouldAppear(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Under the Confirm Email text box the following errors should appear");
+			Report.StartStep(ReportSettings.StepCounter + "- Under the Confirm Email text box the following errors should appear");
 			try
 			{
 				var selSignup = new Signup();
@@ -69,7 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"Under the Enter Email text box the following errors should appear")]
 		public void ThenUnderTheEnterEmailTextBoxTheFollowingErrorsShouldAppear(TechTalk.SpecFlow.Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Under the Enter Email text box the following errors should appear");
+			Report.StartStep(ReportSettings.StepCounter + "- Under the Enter Email text box the following errors should appear");
 			try
 			{
 				var selSignup = new Signup();
@@ -99,12 +101,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I define the user: (.*) with the following parameters:")]
 		public void DefineUser(string savedAs, Table parameters)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Set up user saved as: '" + savedAs + "'");
+			Report.StartStep(ReportSettings.StepCounter + "- Set up user saved as: '" + savedAs + "'");
 			try
 			{
 				Report.Info("Setting up account details for user: '" + savedAs + "'");
 				WERCSmartUser account = parameters.CreateInstance<WERCSmartUser>();
-				account.Email = EmailFunctions.CreateEmail(account.Email);
+				account.Email = MailosaurFunctions.CreateEmail(account.Email);
 				account.Identifier = savedAs;
 				Context.AddToContext(savedAs, account, true);
 				Report.Success("Account details saved!");
@@ -119,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Cancel on the Sign Up screen")]
 		public void ClickCancel()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click Cancel on the Sign Up screen");
+			Report.StartStep(ReportSettings.StepCounter + " - Click Cancel on the Sign Up screen");
 
 			try
 			{
@@ -141,7 +143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I enter signup email for user: (.*)")]
 		public void GivenIEnterSignupEmailUser(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter sign up email for user: " + savedAs);
+			Report.StartStep(ReportSettings.StepCounter + "- Enter sign up email for user: " + savedAs);
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
@@ -160,7 +162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter signup email: (.*)")]
 		public void GivenIEnterSignupEmail(string email)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter sign up email: " + email);
+			Report.StartStep(ReportSettings.StepCounter + "- Enter sign up email: " + email);
 			try
 			{
 				var selSignup = new Signup();
@@ -177,7 +179,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I paste into signup email: (.*)")]
 		public void WhenIPasteIntoSignupEmail(string email)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Paste in sign up email: " + email);
+			Report.StartStep(ReportSettings.StepCounter + "- Paste in sign up email: " + email);
 			try
 			{
 				var selSignup = new Signup();
@@ -195,7 +197,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm signup email: (.*)")]
 		public void GivenIConfirmSignup(string email)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter confirm sign up email: " + email);
+			Report.StartStep(ReportSettings.StepCounter + "- Enter confirm sign up email: " + email);
 			try
 			{
 				var selSignup = new Signup();
@@ -212,7 +214,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I copy the current value of the signup email")]
 		public void GivenICopyTheCurrentValueOfTheSignupEmail()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I copy the current value of the signup email");
+			Report.StartStep(ReportSettings.StepCounter + "- I copy the current value of the signup email");
 			try
 			{
 				var selSignup = new Signup();
@@ -229,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I paste into confirm email: (.*)")]
 		public void WhenIPasteIntoConfirmEmail(string email)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Paste in confirm email: " + email);
+			Report.StartStep(ReportSettings.StepCounter + "- Paste in confirm email: " + email);
 			try
 			{
 				var selSignup = new Signup();
@@ -245,7 +247,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the (.*) entry error I see error message: (.*)")]
 		public void ThenInTheEntryErrorISeeErrorMessage(string input, string errorMessage)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- In the " + input + " entry error I see error message: " + errorMessage);
+			Report.StartStep(ReportSettings.StepCounter + "- In the " + input + " entry error I see error message: " + errorMessage);
 			try
 			{
 				var thisNewUser = new NewUser();
@@ -373,7 +375,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I confirm signup email for user: (.*)")]
 		public void GivenIConfirmSignupEmailUser(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter confirm sign up email for user: " + savedAs);
+			Report.StartStep(ReportSettings.StepCounter + "- Enter confirm sign up email for user: " + savedAs);
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
@@ -393,7 +395,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on submit")]
 		public void GivenIClickOnSubmit()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Click on submit");
+			Report.StartStep(ReportSettings.StepCounter + "- Click on submit");
 			try
 			{
 				Delay.Seconds(1);
@@ -425,7 +427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] The signup thank you page should appear")]
 		public void ThenTheSignupThankYouPageShouldAppear()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- The signup thank you page should appear");
+			Report.StartStep(ReportSettings.StepCounter + "- The signup thank you page should appear");
 			try
 			{
 				Report.Info("Expecting a signup page to appear");
@@ -453,12 +455,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I save the current emails in the inbox for user saved as: (.*)")]
 		public void GivenISaveTheCurrentEmailsInTheInboxFor(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I save the current emails in this inbox so I can locate the new one when it arrives");
+			Report.StartStep(ReportSettings.StepCounter + "- I save the current emails in this inbox so I can locate the new one when it arrives");
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				Report.Info("Storing inbox for address: " + user.Email);
-				EmailFunctions.StoreCurrentInbox(user.Email);
+				MailosaurFunctions.StoreCurrentInbox(user.Email);
 				Report.Success("Inbox stored successfully!");
 			}
 			catch (Exception ex)
@@ -472,7 +474,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] There (should|should not) be a new email for user: (.*) from: (.*) with the title: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
+			Report.StartStep(ReportSettings.StepCounter + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
 			{
 				if (emailFrom.ToLower() == "<sitenotification>")
@@ -491,7 +493,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Checking for email differences");
 
 				Delay.Seconds(60);
-				if (EmailFunctions.WaitForInboxDifferences(user.Email))
+				if (MailosaurFunctions.WaitForInboxDifferences(user.Email))
 				{
 					this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 				}
@@ -509,7 +511,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						while (i < 5)
 						{
 							Report.Info("Attempt: " + (i + 1));
-							if (EmailFunctions.WaitForInboxDifferences(user.Email))
+							if (MailosaurFunctions.WaitForInboxDifferences(user.Email))
 							{
 								this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 								return;
@@ -533,7 +535,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		// No StepDefinition?
 		public void CheckForEmailDifferences(WERCSmartUser user, string emailFrom, string title, bool should = true)
 		{
-			List<Email> differences = EmailFunctions.GetInboxDifferences(user.Email);
+			List<Email> differences = MailosaurFunctions.GetInboxDifferences(user.Email);
 
 			Report.Info("Checking that differences have been found...");
 			if (differences.FirstOrDefault() == null)
@@ -572,7 +574,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] The email should contain a link to set up the WERCSmart account")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a link the email which sets up the WERCSmart account");
+			Report.StartStep(ReportSettings.StepCounter + "- Checking whether there is a link the email which sets up the WERCSmart account");
 			try
 			{
 				var matchingEmail = (Email)Context.ScenarioContext["Matching"];
@@ -590,7 +592,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see popup error: (.*)")]
 		public void ThenIShouldSeePopupError(string expectedError)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I should see popup error: " + expectedError);
+			Report.StartStep(ReportSettings.StepCounter + "- I should see popup error: " + expectedError);
 			try
 			{
 				Delay.Seconds(2);
@@ -611,7 +613,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the popup error I click on Cancel")]
 		public void GivenInThePopupErrorIClickOnCancel()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- In the popup error I click on Cancel");
+			Report.StartStep(ReportSettings.StepCounter + "- In the popup error I click on Cancel");
 			try
 			{
 				Delay.Seconds(2);
@@ -632,7 +634,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I click on the link I should see the WERCSmart new account page")]
 		public void WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- When I click on the link I should see the WERCSmart new account page");
+			Report.StartStep(ReportSettings.StepCounter + "- When I click on the link I should see the WERCSmart new account page");
 			try
 			{
 				Report.Info("Attempting to open the email link");
@@ -655,7 +657,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I enter the information into the new user form for user saved as: (.*)")]
 		public void WhenIEnterTheFollowingInformationIntoTheNewUserForm(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I enter the data in the table into the new account form.");
+			Report.StartStep(ReportSettings.StepCounter + "- I enter the data in the table into the new account form.");
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
@@ -699,7 +701,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the new user form I click on continue")]
 		public void WhenInTheNewUserFormIClickOnContinue()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I click continue on the New User form");
+			Report.StartStep(ReportSettings.StepCounter + "- I click continue on the New User form");
 			try
 			{
 				Report.Info("Attempting to click continue");
@@ -735,7 +737,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should be on the (.*) page of the form")]
 		public void ThenIShouldBeOnThePageOfTheForm(string pageTitle)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- check current page title");
+			Report.StartStep(ReportSettings.StepCounter + "- check current page title");
 			try
 			{
 				var thisNewUser = new NewUser();
@@ -754,7 +756,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"If terms of use page appears I accept")]
 		public void GivenIfTermsOfUsePageAppearsIAccept()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- If terms of use page appears I accept");
+			Report.StartStep(ReportSettings.StepCounter + "- If terms of use page appears I accept");
 			try
 			{
 				var myTermsOfUse = new TermsOfUse();
@@ -774,7 +776,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter the following into the Security Questions window for user saved as: (.*)")]
 		public void EnterTheFollowingIntoSecurityQuestions(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter Security Question information for user: " + savedAs);
+			Report.StartStep(ReportSettings.StepCounter + "- Enter Security Question information for user: " + savedAs);
 			try
 			{
 				Report.Info("Beginning entering Security Questions!");
@@ -817,7 +819,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter the pin: (.*)")]
 		public void EnterPin(string pin)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter Pin: '" + pin + "'");
+			Report.StartStep(ReportSettings.StepCounter + "- Enter Pin: '" + pin + "'");
 			try
 			{
 				var thisNewUser = new NewUser();
@@ -836,7 +838,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter the pin for user saved as: (.*)")]
 		public void EnterPinForUser(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter Pin: for user: '" + savedAs + "'");
+			Report.StartStep(ReportSettings.StepCounter + "- Enter Pin: for user: '" + savedAs + "'");
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
@@ -858,7 +860,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I create a user account with the following parameters saved as: (.*)")]
 		public void CreateNewStandardAccount(string savedAs, Table parameters)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var stepsLogin = new StepsLogin();
 			this.DefineUser(savedAs, parameters);
 			this.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
@@ -877,14 +879,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.EnterTheFollowingIntoSecurityQuestions(savedAs);
 			this.EnterPinForUser(savedAs);
 			this.WhenInTheNewUserFormIClickOnContinue();
-			TestReport.UseSubSteps = false;
+			ReportSettings.UseSubSteps = false;
 		}
 
 
 		[StepDefinition(@"there is a new email for user: (.*) from: (.*) with the title: (.*) and it should contain no attachments with the file name: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitleWithNoAttachments(string savedAs, string emailFrom, string title,string fileName)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
+			Report.StartStep(ReportSettings.StepCounter + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
 			string shouldOrNot = "should";
 			try
 			{
@@ -904,7 +906,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Checking for email differences");
 
 				Delay.Seconds(60);
-				if (EmailFunctions.WaitForInboxDifferences(user.Email))
+				if (MailosaurFunctions.WaitForInboxDifferences(user.Email))
 				{
 					this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 					var email = (Email)Context.GetFromContext("Matching");
@@ -931,7 +933,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						while (i < 5)
 						{
 							Report.Info("Attempt: " + (i + 1));
-							if (EmailFunctions.WaitForInboxDifferences(user.Email))
+							if (MailosaurFunctions.WaitForInboxDifferences(user.Email))
 							{
 								this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 								return;

@@ -1,12 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using System.Net.Mail;
+using System;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -108,6 +113,331 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return closeButton.TryClick();
 		}
+
+		public bool ClickFirstSupplier()
+		{
+			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath(".//table[@id='listSupplierInfo']//tr[not(@class='jqgfirstrow')]"), 2);
+			return firstSupplier.TryClick();
+		}
+
+		public bool ClickCategory(string category)
+		{
+			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();			
+			
+			IWebElement foundCategory = categories.First(x => x.Text == category);
+			if(foundCategory==null)
+			{
+				Report.Info($"Did not find the category: {category}");
+				return false;
+			}
+			Report.Info($"Found the category: {category}, attempting to click the category");
+			return foundCategory.TryClick();
+	
+			
+		}
+
+		public IWebElement CategoryHeaders => this.containerElement.FindElement(By.XPath($".//ul[contains(@class,'ui-tabs-nav')]"), 2);
+
+		public bool CheckCategoriesPresent()
+		{
+			IWebElement categoryHeaders = this.containerElement.WaitUntilElementVisible(By.XPath($"//div[@id='dialog-supplier-manager']//ul[contains(@class,'ui-tabs-nav')]"), 30);
+			if(categoryHeaders==null)
+			{
+				return false;
+			}
+			return true;
+
+		}
+
+		public bool CategoryIsActive(string category)
+		{
+			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();
+			IWebElement foundCategory = categories.First(x => x.Text == category);
+			if(foundCategory.GetAttribute("class").Contains("active"))
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public bool ColumnContains(string columnTitle,List<string> expectedValues)
+		{
+			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<string> tableHeaderStrings = new List<string>();
+			
+			foreach (var item in tableHeaders)
+			{
+				tableHeaderStrings.Add(item.Text);
+			}
+
+			if (columnTitle == "Retailer")
+			{
+				columnTitle = "";
+			}
+			int i = 1;
+			int titlePosition;
+			bool titleFound = false;
+			foreach(var title in tableHeaderStrings)
+			{
+				if(title==columnTitle)
+				{
+					titlePosition = i;
+					titleFound = true;
+					break;
+				}
+				i++;
+			}
+			if(titleFound==false)
+			{
+				return false;
+			}
+
+			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
+			List<string> tableRowStrings = new List<string>();
+			foreach(var row in tableRows)
+			{
+				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+				tableRowStrings.Add(rowText);
+			}
+			var differenceQuery1 = expectedValues.Except(tableRowStrings);
+			var differnceQuery2 = tableRowStrings.Except(expectedValues);
+			var resultingDiff = differenceQuery1.Concat(differnceQuery2).ToList();
+
+			return resultingDiff.Count()==0;
+
+			//int y = 0;
+			//foreach(var row in tableRows)
+			//{
+			//	string rowText=row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+			//	Report.Info($"Found the row text: {rowText} for postion: {i}");
+			//	if(expectedValues.Contains(rowText))
+			//	{
+			//		Report.Info($"This was an expected value");
+			//		y++;
+			//		Report.Info($"Total of the expected values found is now: {y}");
+			//	}
+			//}
+			//return expectedValues.Count == y;
+		}
+
+		public bool ColumnIncludes(string columnTitle, List<string> expectedValues)
+		{
+			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<string> tableHeaderStrings = new List<string>();
+
+			foreach (var item in tableHeaders)
+			{
+				tableHeaderStrings.Add(item.Text);
+			}
+			
+			if (columnTitle == "Retailer")
+			{
+				columnTitle = "";
+			}
+			int i = 1;
+			int titlePosition;
+			bool titleFound = false;
+			Report.Info($"Looking for the postion of column with title: {columnTitle}");
+			foreach (var title in tableHeaderStrings)
+			{
+				if (title == columnTitle)
+				{
+					titlePosition = i;
+					titleFound = true;
+					Report.Info($"The title was found at position: {i}");
+					break;
+				}
+			}
+			if (titleFound == false)
+			{
+				Report.Info("The title was not found in the table");
+				return false;
+			}
+			Report.Info("Starting to look for differences in the column and the expected values");
+			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
+			List<string> tableRowStrings = new List<string>();
+			foreach (var row in tableRows)
+			{
+				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+				tableRowStrings.Add(rowText);
+			}
+			var differenceQuery1 = expectedValues.Except(tableRowStrings);
+			//need to return correctly to indicate this is no difference etc
+			return differenceQuery1.IsNullOrEmpty(); 			
+
+		}
+
+		public bool DataConsentTableIsPresent()
+		{
+			IWebElement dataTierTable = this.containerElement.WaitUntilElementVisible(By.XPath($"//div[@id='dialog-supplier-manager']//table[@class='DataTierConsentGrid']"), 30);
+			if (dataTierTable == null)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public bool DataConsentTiersTableContainsHeaders(List<string> expectedHeaders)
+		{
+
+			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<string> tableHeaderStrings = new List<string>();
+			foreach (var item in tableHeaders)
+			{
+				tableHeaderStrings.Add(item.Text);
+			}
+			int i = 0;
+			bool headersCorrect = true;
+			if(expectedHeaders.Count!=tableHeaderStrings.Count)
+			{
+				Report.Info("The number of headers found did not match the expected number of headers");
+				return false;
+			}
+			foreach(var item in tableHeaderStrings)
+			{
+				Report.Info($"The header found was: {item}");
+				Report.Info($"The header expected was: {expectedHeaders[i]}");
+				if (item!=expectedHeaders[i])
+				{
+					headersCorrect = false;
+					Report.Info($"The header found was not as expected");
+				}
+				else
+				{
+					Report.Info($"The header was as expected");
+				}
+				i++;
+			}
+			return headersCorrect;
+
+
+
+		}
+
+		public bool EmailColumnContainsEmailAddresses()
+		{
+			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<string> tableHeaderStrings = new List<string>();
+
+			foreach (var item in tableHeaders)
+			{
+				tableHeaderStrings.Add(item.Text);
+			}
+
+
+			int i = 1;
+			int titlePosition;
+			bool titleFound = false;
+			foreach (var title in tableHeaderStrings)
+			{
+				if (title == "Email")
+				{
+					titlePosition = i;
+					titleFound = true;
+					break;
+				}
+				i++;
+			}
+			if (titleFound == false)
+			{
+				return false;
+			}
+			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
+			List<string> tableRowStrings = new List<string>();
+			foreach (var row in tableRows)
+			{
+				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+				tableRowStrings.Add(rowText);
+			}
+			bool emailValid = true;
+			int y = 1;
+			foreach (var email in tableRowStrings)
+			{
+				if (string.IsNullOrWhiteSpace(email))
+				{
+					Report.Info($"The email in row: {y} was returned as blank");
+					emailValid = false;
+				}
+				try
+				{
+					MailAddress m = new MailAddress(email);
+					Report.Info($"The email in row: {y} was a valid email address");
+
+				}
+				catch
+				{
+					Report.Info($"The email in row: {y} was not a vaid email address");
+					emailValid = false;
+				}
+				y++;
+					
+			}
+
+			return emailValid;
+		}
+
+		public bool DateColumnContainsValidmmddyyyy()
+		{
+			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
+			List<string> tableHeaderStrings = new List<string>();
+
+			foreach (var item in tableHeaders)
+			{
+				tableHeaderStrings.Add(item.Text);
+			}
+
+
+			int i = 1;
+			int titlePosition;
+			bool titleFound = false;
+			foreach (var title in tableHeaderStrings)
+			{
+				if (title == "Date")
+				{
+					titlePosition = i;
+					titleFound = true;
+					break;
+				}
+				i++;
+			}
+			if (titleFound == false)
+			{
+				return false;
+			}
+			List<IWebElement> tableRows = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tbody//tr"), 2).ToList();
+			List<string> tableRowStrings = new List<string>();
+			foreach (var row in tableRows)
+			{
+				string rowText = row.FindElement(By.XPath($".//td[{i}]"), 2).Text;
+				tableRowStrings.Add(rowText);
+			}
+			bool dateValid = true;
+			foreach (var date in tableRowStrings)
+			{
+
+				string pattern = @"^(0?[1-9]|1[012])[\-](0?[1-9]|[12][0-9]|3[01])[\-](19|20)\d\d$";
+				Regex rg = new Regex(pattern);
+				Match match = rg.Match(date);
+				if (match.Success)
+				{
+					Report.Info($"The date: {date} is in the valid format of mm-dd-yyyy");
+				}
+				else
+				{
+					Report.Info($"The date: {date} was not is the valid format of mm-dd-yyyy");
+					dateValid = false;
+				}
+				
+				//issue is that does not handle M-D-YYY
+				//DateTime checkDate;
+				//bool isValid = DateTime.TryParseExact(date,"MM-dd-yyyy",CultureInfo.InvariantCulture,DateTimeStyles.None,out checkDate);
+
+			}
+			return dateValid;
+		}
+
+		
+
 
 	}
 }

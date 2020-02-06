@@ -52,7 +52,7 @@ Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77862)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77862 and its status is: Submitted
-	And I Confirm the Product ID: saved as TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
+	And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
 
 @ScenarioId:5943
 Scenario: [77837] Create a kit - Direct ship = No, Retailer = Walmart - thru to Submitted

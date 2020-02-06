@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
@@ -122,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickButton(string button)
 		{
-			
+
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2).FirstOrDefault(x => x.Text == button).TryClick();
 		}
 
@@ -183,5 +183,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.containerElement.FindElements(By.XPath(".//div[@class='alert alert-warning']/p"), 2).Select(x => x.Text).ToList();
 		}
+
+		public bool EnterValidation(string code)
+		{
+			IWebElement inputValidation = this.containerElement.FindElement(By.XPath(".//input[@type='text']"), 2);
+			if (inputValidation == null)
+			{
+				return false;
+			}
+			else
+			{
+				inputValidation.EnterText(code);
+				return true;
+			}
+		}
+
+		public bool Click_Validate()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2).FirstOrDefault(x => x.Text == "VALIDATE").TryClick();
+		}
+
 	}
 }

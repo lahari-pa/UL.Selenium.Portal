@@ -1086,3 +1086,474 @@ Scenario: [IngredientsTableCheck] Non Cleaning Ingredients Table navigate back
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	And I navigate to the home page
 
+@AssignedDebug
+Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
+	Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
+	Given I navigate to the landing page
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I filter the products by: Accepted by Retailers
+	And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+	And I filter for the product saved as: TestCase75321
+	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+	Then I should see the header: Forward Product Registration on the Forward Product Registration window
+	And I enter the text: saved as TestCase75321 in the 'Search by WPS ID or Product Name' field
+	And In the Foward Product Registration Screen I should see product: saved as TestCase75321
+	And In the Foward Product Registration Screen I Select the product: saved as TestCase75321
+	And I click continue on the Forward Product Registration page
+	And In the Forward Product Registration Screen I select a retailer under Other Retailers and save as TestCase75321Retailer
+	And I click continue on the Forward Product Registration page
+	And I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue and save UPC as TestCase75321UPC
+	Then I should see the subheading 3: Product Results on the Forward Product Registration window
+	Then I confirm that for UPC Number saved as TestCase75321UPC the retailer is displayed as saved as TestCase75321Retailer
+	And I confirm that there are NO Errors displayed for the Product
+	And I click continue on the Forward Product Registration page
+	Then I should see the subheading 3: Review & Submit on the Forward Product Registration window
+	Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+	And I click continue on the Forward Product Registration page
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
+	And I Confirm the Product shows status: Completed for retailer: saved as retailer
+	And I Confirm the Product shows status: Submitted for retailer: saved as TestCase75321Retailer
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
+	And I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase75321
+	And I confirm the Product UPC window has opened
+	And I confirm that retailer saved as: TestCase75321Retailer appears for UPC saved as: TestCase75321UPC
+	And I close the current window and switch to the main window in Studio
+	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75321)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
+	And I Confirm the Product shows status: Completed for retailer: saved as retailer
+	And I Confirm the Product shows status: Accepted for retailer: saved as TestCase75321Retailer
+
+
+	Scenario: [CVSTIERSCLEANING] CVS - CLEANING TEST
+
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Cleaning Supply (RUCC0397), save it as: CVSCleaningProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSCleaningExcelFile and check that is shows the expected product saved as: CVSCleaningProduct1
+
+	#================================================================= DOT ==========================================================================#
+
+	
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase10006
+
+	
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase10003
+
+	
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase10021
+
+
+#================================================================== IATA + DOT =====================================================================#
+
+	
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase20002
+
+
+
+	
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase20016
+
+
+	
+
+	Scenario: [Mode7] Mode 7 - Scenario 23 UPC Transportation
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
+	Then I save the product information as: TestCase97484
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Given I should see the Additional Product Information Page
+	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Water         | 100     | false               | false       |            |		
+	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page	
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: IMDG
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: IMDG
+	And I click continue
+	And I set the UN Number field to: UN2650
+	And I click continue	
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 55   |      | 1        |
+	Given I Check that in the UPC screen, under the Transportation Column to option IMDG is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
+	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
+
+	Scenario: [Mode7] Mode 7 - Scenario 9 UPC Transportation
+	#This scenario needs updating to a differnt scenario (one that takes haz class of 2.x, but first need to to ask about "subsidery haz class"?
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC60116
+	Given I delete all products with UPC Number: saved as UPC60116
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
+	Then I save the product information as: TestCase60116
+	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
+	Given I click continue
+	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
+	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	#Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	And I should see the Transportation Details 1 Page	
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: IMDG
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: IMDG
+	And I click continue
+	And I set the UN Number field to: UN3241 
+	And I click continue
+	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+	Given I call Shared Step 60468 (VOC - CARB only required - enter value - Continue - Happy Path)
+	Given I click continue
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Aerosol Can    | 200   |      |          |
+	Given I Check that in the UPC screen, under the Transportation Column to option IMDG is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
+	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
+
+	Scenario: [Mode6] Mode 6 - Scenario 3 UPC Transportation
+
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC60116
+	Given I delete all products with UPC Number: saved as UPC60116
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
+	Then I save the product information as: TestCase60116
+	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
+	Given I click continue
+	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
+	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	#Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	And I should see the Transportation Details 1 Page	
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I set the Provide Special Permit numbers (if applicable) field to: 14188 	
+	And I click continue
+	And I set the UN Number field to: UN3159 
+	And I click continue
+	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+	Given I call Shared Step 60468 (VOC - CARB only required - enter value - Continue - Happy Path)
+	Given I click continue
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Aerosol Can    | 55   |      |          |
+	Given I Check that in the UPC screen, under the Transportation Column to option DOT is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
+	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
+
+	Scenario: [Mode6] Mode 6 - Scenario 28 UPC Trasnportation
+
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I set the Boiling Point (in Celsius) field to: 1
+	And I set the Flash Point (in Celsius) field to: 65
+	And The following options should be displayed exclusively for section: Flash Point Testing Method Used
+	| Option            |
+	| Closed cup method |
+	And I set the Flash Point Testing Method Used field to: Closed cup method
+	And I set the Select the best Water Solubility description field to: Insoluble
+	And I click continue
+	#And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
+	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page
+	And The following options should be displayed exclusively for section: Product is Regulated for Transport
+	| Option                               |
+	| Yes                                  |
+	| No, due to an exemption or exception |
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I click continue
+	And I set the UN Number field to: UN2258
+	And I click continue
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 55   |      |          |
+	Given I Check that in the UPC screen, under the Transportation Column to option DOT is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
+	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
+
+	Scenario: [Mode6] Mode 6 - Scenario 15 UPC Transportation
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
+	Then I save the product information as: TestCase97484
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Given I should see the Additional Product Information Page
+	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Ammonium dichromate | 100     | false               | false       |            |		
+	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page	
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I click continue
+	And I set the UN Number field to: UN1439
+	And I click continue	
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 55   |      | 1        |
+	Given I Check that in the UPC screen, under the Transportation Column to option DOT is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
+	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
+
+
+	Scenario: [Mode4x5] Mode 4x5 - Scenario 4 UPC Transportation
+
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC60116
+	Given I delete all products with UPC Number: saved as UPC60116
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
+	Then I save the product information as: TestCase60116
+	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+	Given I call Shared Step 60310 (Additional Product Information - Without Child question)
+	Given I click continue
+	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
+	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	#Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	And I should see the Transportation Details 1 Page	
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: IATA
+	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: IATA
+	And I click continue
+	And I set the UN Number field to: UN1950
+	And I set the Proper Shipping Name field to: Aerosols, flammable
+	And I set the Hazard Class (select) field to: 2.1	
+	And I click continue
+	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+	Given I call Shared Step 60468 (VOC - CARB only required - enter value - Continue - Happy Path)
+	Given I click continue
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Aerosol Can    | 55   |      |          |
+	Given I Check that in the UPC screen, under the Transportation Column to option IATA is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with consumer commodity is checked
+	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
+
+	Scenario: [Mode4x5] Mode 4x5 - Scenario 15 UPC Trasnportation
+
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I set the Boiling Point (in Celsius) field to: 1
+	And I set the Flash Point (in Celsius) field to: 65	
+	And I set the Flash Point Testing Method Used field to: Closed cup method
+	And I set the Select the best Water Solubility description field to: Insoluble
+	And I click continue
+	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: IATA
+	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: IATA
+	And I click continue
+	And I set the UN Number field to: UN3175
+	And I click continue
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 55   |      |          |
+	Given I Check that in the UPC screen, under the Transportation Column to option IATA is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with consumer commodity is checked
+	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
+
+
+	Scenario: [Mode4x5] Mode 4x5 - Scenario 20 UPC Trasnportation
+
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+	And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
+	And I set the Boiling Point (in Celsius) field to: 1
+	And I set the Flash Point (in Celsius) field to: 65	
+	And I set the Flash Point Testing Method Used field to: Closed cup method
+	And I set the Select the best Water Solubility description field to: Insoluble
+	And I click continue
+	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: IATA
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: IATA
+	And I click continue
+	And I set the UN Number field to: UN2307
+	And I click continue
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 55   |      |          |
+	Given I Check that in the UPC screen, under the Transportation Column to option IATA is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with limited quantity is checked
+	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
+
+
+	Scenario: [Mode4x5] Mode 4x5 - Scenario 25 UPC Transportation
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
+	Then I save the product information as: TestCase97484
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Given I should see the Additional Product Information Page
+	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| water  | 100     | false               | false       |            |		
+	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page	
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: IATA
+	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: IATA
+	And I click continue
+	And I set the UN Number field to: UN1579
+	And I click continue	
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 55   |      | 1        |
+	Given I Check that in the UPC screen, under the Transportation Column to option IATA is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with consumer commodity is checked
+	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
+
+	
+	Scenario: [Mode4x5] Mode 4x5 - Scenario 35 UPC Transportation
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid (Non-Spillable) Battery
+	Then I save the product information as: TestCase97484
+	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Given I should see the Additional Product Information Page
+	Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Benzaldehyde  | 100     | false               | false       |            |		
+	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page	
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: IATA
+	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: IATA
+	And I click continue
+	And I set the UN Number field to: UN1990
+	And I click continue	
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer  |
+		| Walgreens |
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 55   |      | 1        |
+	Given I Check that in the UPC screen, under the Transportation Column to option IATA is checked
+	Then I Check that in the UPC screen, under the Transportation Column to option Shipping with consumer commodity is checked
+	Given I click continue
+	Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCaseXXXXX
+
+		Then I add the following into the UPC Fields
+		| Field         | Value             |
+		| UPCNumber     | saved as UPC20034 |
+		| ContainerType | Glass Container   |
+		| Size          | 32                |
+		And in the New Product page I click Continue
+		Then I should see the following error text displayed in the UPC screen: 1
+		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase20034
+
+
+#======================================================================== IATA ======================================================================
+
+	
+	

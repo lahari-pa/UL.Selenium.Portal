@@ -3,13 +3,13 @@ using System.IO;
 using System.Linq;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -225,6 +225,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return output.ToString();
 		}
 
+		public bool ConfirmDocumentAcceptancePageIsShowing()
+		{
+			IWebElement DocumentAcceptancePageTitle = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='page-inner-header affix-top']//h2[text()='Document Acceptance']"), 2);
+			if (DocumentAcceptancePageTitle == null)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
 		public class MyProductsItem : DocumentAcceptance
 		{
 			public string WPSID { get; set; }
@@ -236,6 +249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return this.containerElement.FindElement(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr[./td[contains(@data-bind, 'ProductID') and text()='" + this.WPSID + "']]"), 2).TryClick();
 			}
 		}
+
 		public class DocumentsItem : DocumentAcceptance
 		{
 			public int Row { get; set; }

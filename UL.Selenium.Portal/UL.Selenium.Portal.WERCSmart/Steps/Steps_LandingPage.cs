@@ -1,9 +1,10 @@
 using System;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -23,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (!selHomepage.WaitForContainerToBeVisible())
 			{
 				Report.Info("Not on the Homepage, navigating...");
-				SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
+				SeleniumBrowser.Navigate(SeleniumBrowser.BaseTestUrl);
 				Report.IsTrue(selHomepage.WaitForContainerToBeVisible(), "Homepage failed to load!", "Homepage loaded successfully!");
 			}
 			Report.IsTrue(selHomepage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
@@ -124,8 +125,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I Check The landing page has loaded, and report if an Alert and Inactivity Prompt are open if it is not loaded")]
 		public void ICheckTheLandinPageHasLoadedAndReportIfNot()
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I Check the Landing page has loaded");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I Check the Landing page has loaded");
 
 			if (!(new LandingPage().WaitForContainerToBeVisible()))
 			{

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -119,6 +119,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string address = @"C:\temp\GetFile.pdf";
 			Delay.Seconds(1);
 			string documentText = selDocumentsAcceptance.DocumentText(address);
+		}
+
+		[StepDefinition(@"I confirm that the Document Acceptance page is showing")]
+		public void ThenIConfirmThatTheDocumentAcceptancePageIsShowing()
+		{
+			DocumentAcceptance EM = new DocumentAcceptance();
+			Report.IsTrue(EM.ConfirmDocumentAcceptancePageIsShowing(), "Failed to confirm that 'Document Acceptance' page is showing", "Successfully confirmed that 'Document Acceptance' page is showing");
 		}
 	}
 }

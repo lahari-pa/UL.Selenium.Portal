@@ -20,6 +20,7 @@
 @PaymentMethods
 @ProductSetUp
 @CreateProducts
+@Homepage
 Feature: Home Page
 
 #pass - staging 4.10
@@ -403,7 +404,10 @@ Scenario: [85275] Select All - Popup closes
 Scenario: [71230] Archived Retailers - My Products View
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
-	Given I filter the products by: Accepted by Retailers
+	Given I filter the products by: Accepted by Retailers	
+	#And I should see an option for More Filters
+	#Given I click More Filters in the products grid
+	#And I select the Wal-Mart/SAM'S CLUB option in the Retailer More Filters drop down
 	And I save the ProductID and Name of the first Product in the grid with a retailer as: TestCase71230
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Archive Retailers

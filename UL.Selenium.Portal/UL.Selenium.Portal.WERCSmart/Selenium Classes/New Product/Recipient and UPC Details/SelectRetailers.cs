@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -161,6 +163,41 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IList<IWebElement> checkboxes = this.containerElement.FindElements(By.XPath(".//label[@class='checkbox']/input"), 2);
 			return checkboxes.All(x => x.Checked()) ? new List<string>() :
 				checkboxes.Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span"), 2)?.Text).ToList();
+		}
+
+
+		public void CheckIfRetailersInTableDisplayErrorMessage(Table table)
+		{
+			IList<IWebElement> AllRetailerErrorMessages = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//span[@data-bind='html: $data']/../../../preceding-sibling::td[1]"), 2);
+			List<string> ReatilersThatDidNotDisplayErrorMessages = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				bool foundMatch = false;
+
+				foreach (IWebElement element in AllRetailerErrorMessages)
+				{
+					if (row["Retailer"] == element.Text)
+					{
+						foundMatch = true;
+					}
+				}
+
+				if (!foundMatch)
+				{
+					ReatilersThatDidNotDisplayErrorMessages.Add(row["Retailer"]);
+				}
+
+			}
+
+			if (ReatilersThatDidNotDisplayErrorMessages.Count() > 0)
+			{
+				Report.Failure("The following retailers: " + ReatilersThatDidNotDisplayErrorMessages.ToString() + " did not display the error messages they were supposed to.");
+				return;
+			}
+
+			Report.Success("All retailers in the table displayed their proper error messages");
+			return;
 		}
 	}
 

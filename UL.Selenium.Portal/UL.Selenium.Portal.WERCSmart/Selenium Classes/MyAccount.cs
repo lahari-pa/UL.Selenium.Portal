@@ -2,15 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using System.Collections.ObjectModel;
+using TechTalk.SpecFlow;
+using UL.Automation.Utilities;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RetailerAbbreviations;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -260,11 +263,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					break;
 				}
 				Report.Info("User Not Found On Page " + myPageNumber.Text + ", Navigating to Next Page");
+				myNext.ScrollElementIntoView();
 				if (!myNext.TryClick())
 				{
 					throw new Exception("Failed to click move to next page");
 				}
 				pageNo++;
+				Delay.Seconds(1);
 			}
 			Report.Info("User: " + userName + " Has Not Been Created");
 			Report.Screenshot();
@@ -477,6 +482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return subLevel.Text.Trim() == subscription;
 
 		}
+
 
 		//Accounts Navigation
 		[FindsBy(How = How.Id, Using = "myAccounts_navigation")]
@@ -699,7 +705,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Invoice_Email_Arrived: " + invoice_no);
 
-			if (!EmailFunctions.CheckEmailHasArrived("Invoice " + invoice_no + " is attached", email_address))
+			if (!MailosaurFunctions.CheckEmailHasArrived("Invoice " + invoice_no + " is attached", email_address))
 			{
 				Report.Info("Invoice Email has Not Arrived");
 				return false;
@@ -748,36 +754,54 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool UserGridNavigation(string navOption)
 		{
-			Report.Info("Navigating in the user grid with action - " + navOption);
-			IWebElement userGrid = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
-			if (userGrid == null)
+			bool success = false;
+			int i = 0;
+			while (success == false && i < 5)
 			{
-				Report.Info("Could not locate the user grid");
-				return false;
-			}
-			IWebElement navEl = null;
-			switch (navOption)
-			{
-				case "next":
-					navEl = userGrid.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
-					break;
-				case "previous":
-					navEl = userGrid.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
-					break;
-				case "...":
-					navEl = userGrid.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
-					break;
-				default:
-					Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
+				Report.Info("Navigating in the user grid with action - " + navOption);
+				IWebElement userGrid = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
+				if (userGrid == null)
+				{
+					Report.Info("Could not locate the user grid");
 					return false;
+				}
+				IWebElement navEl = null;
+				switch (navOption)
+				{
+					case "next":
+						navEl = userGrid.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
+						break;
+					case "previous":
+						navEl = userGrid.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
+						break;
+					case "...":
+						navEl = userGrid.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+						break;
+					default:
+						Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
+						return false;
+				}
+				if (navEl == null)
+				{
+					Report.Info("Could not locate the navigation button element");
+					return false;
+				}
+				navEl.ScrollElementIntoView();
+				if (navEl.TryClick())
+				{
+					Report.Info("Successfully clicked the found element");
+					success = true;
+				}
+				else
+				{
+					Report.Info($"Failed to click the element on try: {i+1}");
+					i++;
+				}
 			}
-			if (navEl == null)
-			{
-				Report.Info("Could not locate the navigation button element");
-				return false;
-			}
-			navEl.ScrollElementIntoView();
-			return navEl.TryClick();
+			return success;
+			
+
+			
 		}
 
 		public int GetPage(string position)
@@ -851,7 +875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public void NumToUserGridNavPageInput(string pageNumber)
+		public void NumToUserGridNavPageInput2(string pageNumber)
 		{
 			IWebElement inputEl = this.UserGridNavPageInput();
 			if (inputEl == null)
@@ -861,6 +885,62 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			inputEl.EnterText(pageNumber);
 		}
+
+
+		public void NumToUserGridNavPageInput(string pageNumber)
+		{
+			int i = 0;
+			while (i < 5)
+			{
+				try
+				{
+					IWebElement inputEl = this.UserGridNavPageInput();
+					if (inputEl == null)
+					{
+						Report.Info("The Num input was not displayed. Clicking the '...' navigation element");
+						this.UserGridNavigation("...");
+						inputEl = this.UserGridNavPageInput();
+						if (inputEl == null)
+						{
+							return; 
+						}
+						Report.Info("Entering page number: " + pageNumber);
+						//inputEl.EnterText(pageNumber);
+						//inputEl.Clear();
+						string text = inputEl.GetAttribute("value");
+						int textLength = text.Length;
+						int count = 0;
+						while (count < textLength)
+						{
+							inputEl.SendKeys(Keys.Delete);
+							count++;
+						}
+						inputEl.SendKeys(pageNumber);
+						return;
+					}
+					inputEl.EnterText(pageNumber);
+					return;
+				}
+				catch (StaleElementReferenceException ex)
+				{
+					Report.Info("inputEl threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the inputEl again if the number of attempts has not exceeded 5");
+
+				}
+				catch (Exception ex)
+				{
+					Report.Info("Exception: " + ex.Message);
+					return;
+				}
+
+			}
+			return;
+
+
+		}
+	
 
 		public string CurrentPageUserGridNavPageInput()
 		{
@@ -897,7 +977,207 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this._subscriptioncontainer.FindElement(By.XPath(".//a[./small[contains(text(),'How to Subscribe')]]"), 2).TryClick();
 		}
+
+		public bool ClickOnEditButtonInCompanyInformationPageInStewardshipNumbersSection()
+		{
+			IWebElement EditButton = this.containerElement.FindElement(By.XPath(".//a[@id='edit-stewardship']"), 2);
+			return EditButton.TryClick();
+		}
+
+		public bool FillInStewardshipData(Table table)
+		{
+			IList<IWebElement> Textboxes = this.containerElement.FindElements(By.XPath(".//table[@class='table table-bordered']//input[@type='text']"), 2);
+			List<string> StewardshipList = new List<string>();
+			List<string> IssueDateList = new List<string>();
+			List<string> ExpireDateList = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				StewardshipList.Add(row["Stewardship"]);
+				IssueDateList.Add(row["Issue Date"]);
+				ExpireDateList.Add(row["Expire Date"]);
+			}
+
+			int k = 0;
+			int textboxesPerRow = 3;
+			for (int i = 0; i < Textboxes.Count() - 1; i += textboxesPerRow)
+			{
+				Textboxes[i].TryEnterText(StewardshipList[k]);
+				Textboxes[i + 1].TryEnterText(IssueDateList[k]);
+				Textboxes[i + 2].TryEnterText(ExpireDateList[k]);
+				k++;
+			}
+
+			return true;
+		}
+
+		public bool ClickSaveButtonForStewardshipNumbers()
+		{
+			//Data entry in automation causes the datepickers to stay open, Automation does not click save if date pickers are open, so first need to click off the date pickers to close them. Clicking the container in this case fixes the issue.
+			this.containerElement.Click();			
+			IWebElement SaveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@data-bind='with: stewardshipNumberModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
+			return SaveButton.TryClick();
+		}
+
+		public bool CheckStewardshipNumbersTableDataAfterItHasBeenSaved(Table table)
+		{
+			Delay.Seconds(5);
+			IList<IWebElement> TableData = this.containerElement.FindElements(By.XPath(".//table[@class='table table-bordered']//input[@type='text']/preceding-sibling::p"), 2);
+			List<string> StewardshipList = new List<string>();
+			List<string> IssueDateList = new List<string>();
+			List<string> ExpireDateList = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				StewardshipList.Add(row["Stewardship"]);
+				IssueDateList.Add(row["Issue Date"]);
+				ExpireDateList.Add(row["Expire Date"]);
+			}
+
+			int k = 0;
+			int textboxesPerRow = 3;
+			for (int i = 0; i < TableData.Count() - 1; i += textboxesPerRow)
+			{
+
+				if (!((TableData[i].Text == StewardshipList[k]) &&
+					(TableData[i + 1].Text == IssueDateList[k]) &&
+					(TableData[i + 2].Text == ExpireDateList[k])))
+				{
+					return false;
+				}
+
+				k++;
+			}
+
+			return true;
+		}
+
+		public bool SearchForHeadingInCompanyInformationPageWithName(string headingName)
+		{
+			IWebElement heading = this.FindElement(By.XPath(".//*[text()='Stewardship Numbers']"), 2);
+
+			if (heading != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool CheckForTableInCompanyInformationPageInStewardshipNumbersSection()
+		{
+			IWebElement table = this.FindElement(By.XPath(".//*[text()='Stewardship Numbers']/following-sibling::div//table"), 2);
+
+			if (table != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public int CheckNumberOfColumnsInTableInCompanyInformationPageInStewardshipNumbersSection()
+		{
+			IList<IWebElement> tableColumns = this.FindElements(By.XPath(".//*[text()='Stewardship Numbers']/following-sibling::div//table//th"), 2);
+
+			return tableColumns.Count();
+		}
+
+		public bool CheckIfColumnNamesMatchInCompanyInformationPageInStewardshipNumbersSection(Table table)
+		{
+			IList<IWebElement> columnNames = this.FindElements(By.XPath(".//*[text()='Stewardship Numbers']/following-sibling::div//table//th"), 2);
+
+			foreach (TableRow row in table.Rows)
+			{
+				bool foundMatch = false;
+
+				foreach (IWebElement element in columnNames)
+				{
+					if (row["Column Name"] == element.Text)
+					{
+						foundMatch = true;
+					}
+				}
+
+				if (!foundMatch)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection(Table table)
+		{
+			IList<IWebElement> provinceNames = this.FindElements(By.XPath(".//*[text()='Stewardship Numbers']/following-sibling::div//table//tbody//td[1]"), 2);
+
+			foreach (TableRow row in table.Rows)
+			{
+				bool foundMatch = false;
+
+				foreach (IWebElement element in provinceNames)
+				{
+					if (row["Province Name"] == element.Text)
+					{
+						foundMatch = true;
+					}
+				}
+
+				if (!foundMatch)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckForEditButtonCheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection()
+		{
+			IWebElement EditButton = this.FindElement(By.XPath(".//a[@id='edit-stewardship']"), 2);
+
+			if (EditButton != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ClickOnEditButtonInCompanyInformationPageInBillingAddressSection()
+		{
+			Delay.Seconds(5);
+			IWebElement EditButton = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: billingAddressModel']//a[text()='Edit']"), 2);
+			return EditButton.TryClick();
+		}
+
+		public bool ClickSaveInChangeUserPasswordWindow()
+		{
+			IWebElement SaveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[text()='Change User Password']/../following-sibling::div/following-sibling::div//a[text()='Save']"), 2);
+			return SaveButton.TryClick();
+		}
+
+		public bool ClickCloseInChangeUserPasswordWindow()
+		{
+			IWebElement CloseButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[text()='Change User Password']/../following-sibling::div/following-sibling::div//button[text()='Close']"), 2);
+			return CloseButton.TryClick();
+		}
+
+		public bool PasswordTooRecentPopupPresent()
+		{
+			IWebElement tooRecentPopup = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]"), 2);
+			return tooRecentPopup != null;
+		}
+
+		public bool ClickCloseInPasswordTooRecentPopup()
+		{
+			IWebElement tooRecentPopupClose = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@style='display: block;']//div[@class='modal-content' and .//div[@class='modal-body'] and .//p[text()='This password was used too recently.']]//button[text()='Close']"), 2);
+			return tooRecentPopupClose.TryClick();
+		}
+
 	}
+
 	class MyAccount_CompanyInfo : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "companyInfoContainer")]
@@ -1323,6 +1603,103 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SuppCountryCode.EnterText(countryCode);
 			return true;
 		}
+
+		public bool SelectAStateAsAnOptionInCompanyInformationPageBillingAddressSection(string state)
+		{
+			IWebElement StateOption = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: billingAddressModel']//select[@class='form-control'][@tabindex='2']//option[text()='" + state + "']"), 2);
+			return StateOption.TryClick();
+		}
+
+		public bool ClickSaveButtonInCompanyInformationPageBillingAddressSection()
+		{
+			IWebElement SaveButton = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: billingAddressModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
+			return SaveButton.TryClick();
+		}
+
+		public bool ClickEditButtonAsAnOptionInCompanyInformationPageShippingAddressSection()
+		{
+			IWebElement EditButton = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: shippingAddressModel']//a[text()='Edit']"), 2);
+			return EditButton.TryClick();
+		}
+
+		public bool SelectAStateAsAnOptionInCompanyInformationPageShippingAddressSection(string state)
+		{
+			IWebElement StateOption = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: shippingAddressModel']//select[@class='form-control'][@tabindex='2']//option[text()='" + state + "']"), 2);
+			return StateOption.TryClick();
+		}
+
+		public bool ClickSaveButtonAsAnOptionInCompanyInformationPageShippingAddressSection()
+		{
+			IWebElement SaveButton = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: shippingAddressModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
+			return SaveButton.TryClick();
+		}
+
+		public bool FindStateWithNameInBillingAddressSection(string state)
+		{
+			Delay.Seconds(5);
+			var abbr = new StateAbbreviations();
+			string selectedAbbr = "";
+			abbr.Map.TryGetValue(state, out selectedAbbr);
+
+			IWebElement stateText = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: billingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
+
+			if (stateText.Text == selectedAbbr)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public bool FindStateWithNameInShippingAddressSection(string state)
+		{
+			Delay.Seconds(5);
+			var abbr = new StateAbbreviations();
+			string selectedAbbr = "";
+			abbr.Map.TryGetValue(state, out selectedAbbr);
+
+			IWebElement stateText = this.containerElement.FindElement(By.XPath(".//div[@data-bind='with: shippingAddressModel']//span[@data-bind='visible: !isInEditMode(), text: state.field']"), 2);
+
+			if (stateText.Text == selectedAbbr)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public bool ConfirmErrorInStewardshipInfoTable(string error, string province)
+		{
+			Delay.Seconds(5);
+			IWebElement ErrorMessage = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//td[text()='" + province + "']/following-sibling::td//span[text()='" + error + "']"), 2);
+
+			if (error == "No Error")
+			{
+				if (ErrorMessage == null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				if (ErrorMessage == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+		}
 	}
 
 	class MyAccount_SubscriptionInfo : BaseObject
@@ -1413,6 +1790,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//UPGRADE Button
 		[FindsBy(How = How.XPath, Using = ".//div/a[text()='Upgrade']")]
 		private IWebElement _btnUpgrade;
+
+		public bool ConfirmThatInTheMiddleOfThePageYouSeeTheUpgradeButton()
+		{
+			Report.Info("Beginning ConfirmThatInTheMiddleOfThePageYouSeeTheUpgradeButton");
+			if(this._btnUpgrade == null)
+			{
+				Report.Info("Upgrade Button was not Found!");
+				return false;
+			}
+			Report.Info("Upgrade Button Found!");
+			return true;
+		}
 
 		public bool Upgrade_click()
 		{
@@ -2001,6 +2390,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.ClickPage(ingredient.Page.ToString());
 			return this.containerElement.FindElement(By.XPath(".//tbody/tr[" + ingredient.Row + "]//input[@data-bind='checked: isChecked']"), 2).TryClick();
 		}
+
+		public bool AddIngredientToMyIngredients(string ingredientName,string cas)
+		{
+			this.EnterTextSearch(ingredientName);
+			return this.ClickSearchResult(ingredientName, cas);
+		}
+
 		public List<IngredientItem> IngredientsLibrary()
 		{
 			var selMyIngredients = new MyIngredients();
@@ -2096,6 +2492,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			edited.Add(publicName.SelectedOption() == ingredient.PublicName);
 			return edited.All(e => e);
 		}
+		public int GetHighestPageNo()
+		{
+			IList<IWebElement> pageNumbers = this.containerElement.FindElements(By.XPath(".//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+			var intPageNos = pageNumbers.Select(x => Convert.ToInt16(x.GetValue())).ToList();
+			return intPageNos.OrderByDescending(x => x).FirstOrDefault();
+
+		}
+
+		
+
 		public class SearchResult
 		{
 			public string Name { get; set; }

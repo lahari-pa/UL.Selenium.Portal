@@ -1,8 +1,9 @@
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps;
+using UL.Automation.Reporting;
 
 namespace UL.Selenium.Portal.ULSC.Steps
 {
@@ -12,12 +13,12 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I call Shared Step 29665 - Login to WSW as ULSC user")]
 		public void GivenICallSharedStep_LoginToWSWAsULSCUser()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var myStepsULSC = new StepsUlsc();
-			TestReport.StartStep("I navigate to Studio");
+			Report.StartStep("I navigate to Studio");
 			myStepsULSC.GivenINavigateToStudioULSC();
 			Delay.Seconds(2);
-			TestReport.StartStep("I log in to studio as ULSC user");
+			Report.StartStep("I log in to studio as ULSC user");
 			myStepsULSC.GivenILoginToStudioAsULSCUser();
 		}
 
@@ -26,7 +27,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I call Shared Step 53079 - WERCSLink go to Services - WERCSmart")]
 		public void GivenICallSharedStep_WERCSLinkGoToServices_WERCSmart()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var myStepsULSC = new StepsUlsc();
 			myStepsULSC.GivenIShouldSeeTheWERCSLinkDashboard();
 			myStepsULSC.GivenInTheWERCSLinkDashboardIClickMenuItemAndSubmenuItem("Services", "WERCSmart");
@@ -48,7 +49,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[StepDefinition(@"I call Shared Step 54595 - WERCSLink Dashboard > Services > My Products")]
 		public void GivenICallSharedStep54595WERCSLinkDashboardServicesMyProducts()
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var myStepsULSC = new StepsUlsc();
 			myStepsULSC.GivenIShouldSeeTheWERCSLinkDashboard();
 			myStepsULSC.GivenInTheWERCSLinkDashboardIClickMenuItemAndSubmenuItem("Services", "WERCSmart");

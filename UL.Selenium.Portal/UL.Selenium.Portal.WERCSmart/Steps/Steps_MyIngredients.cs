@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
@@ -31,13 +32,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I add the following ingredients and save them to context as: (.*)")]
 		public void AddIngredientItems(string savedAs, Table ingredients)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var ingredientsContext = new List<MyIngredients.IngredientItem>();
 			var selMyIngredients = new MyIngredients();
 			List<MyIngredients.IngredientItem> allIngredients = selMyIngredients.IngredientsLibrary();
 			foreach (TableRow row in ingredients.Rows)
 			{
-				TestReport.StartStep("I add the ingredient: " + row["Chemical Name"] + " to My Library");
+				Report.StartStep("I add the ingredient: " + row["Chemical Name"] + " to My Library");
 				Report.Info("I enter the text: " + row["Chemical Name"] + " into the My Ingredients search field");
 				this.EnterTextInSearch(row["Chemical Name"]);
 				Report.Info("I select '" + row["Chemical Name"] + "' from the smart search results");
@@ -158,11 +159,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("There was no ingredient in context saved as: " + savedAs);
 				return;
 			}
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var savedIngredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
-			TestReport.StartStep("Adding current list of ingredients to context");
+			Report.StartStep("Adding current list of ingredients to context");
 			List<MyIngredients.IngredientItem> currentIngredients = new MyIngredients().IngredientsLibrary();
-			TestReport.StartStep("Checking the ingredient I originally added has now been removed from the grid");
+			Report.StartStep("Checking the ingredient I originally added has now been removed from the grid");
 			Report.IsTrue(!currentIngredients.Contains(savedIngredient),
 				"The removed ingredient: " + savedIngredient.ChemicalName + " was still showing in the ingredients grid at position: " + savedIngredient.Index,
 				"The removed ingredient: " + savedIngredient.ChemicalName + " was no longer showing in the ingredients grid at position: " + savedIngredient.Index + " as expected");
@@ -256,7 +257,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("There was no ingredient list in context saved as: " + savedAs);
 				return;
 			}
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			var ingredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext(savedAs);
 			var selMyIngredients = new MyIngredients();
 			//| Index | Click Publicly Disclosed | Click Trade Secret | Public Name Index |
@@ -281,7 +282,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure("The ingredient to edit at index: " + index + " did not exist in the saved list of ingredients: " + savedAs);
 					continue;
 				}
-				TestReport.StartStep("I edit the ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index);
+				Report.StartStep("I edit the ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index);
 				if (row["Click Trade Secret"].ToLower() == "y")
 				{
 					ingredient.TradeSecret = !ingredient.TradeSecret;
@@ -313,7 +314,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				else
 				{
 					contextList.Add(ingredient);
-					Report.Warn("The Public Name Change value was null or did not match '+', '-' or '='");
+					Report.Warning("The Public Name Change value was null or did not match '+', '-' or '='");
 					Report.IsTrue(selMyIngredients.EditIngredient(ingredient),
 						"Failed to edit ingredient: " + ingredient.ChemicalName + " at index: " + ingredient.Index,
 						"Successfully edited ingredient: " + ingredient.ChemicalName + " at index: " + ingredient.Index);
@@ -370,7 +371,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I remove all ingredients in the list saved as: (.*)")]
 		public void DeleteIngredientsInContextList(string savedAs)
 		{
-			TestReport.UseSubSteps = true;
+			ReportSettings.UseSubSteps = true;
 			if (Context.GetFromContext(savedAs) == null)
 			{
 				Report.Failure("There was no ingredient list in context saved as: " + savedAs);
@@ -533,6 +534,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//string panelTitle= new NewProduct().PanelTitle;
 			//Report.IsTrue(panelTitle == "Ingredients", "The Current page is not the Ingredients page", "The current page is the Ingredients page");
 			
+		}
+
+		[StepDefinition(@"I ensure that there are enough Ingredients in the My Ingredients page to enable pagination")]
+		public void ThenIEnsureThatThereAreEnoughIngredientsInTheMyIngredietnsPageToEnablePagination()
+		{
+			var myIngredients = new MyIngredients();
+			Report.Info("Getting the total number of pages in the My Ingredietns Tab");
+			int currentTotalPages= myIngredients.GetHighestPageNo();
+			Report.Info($"The total number of pages was: {currentTotalPages}");
+
+			if (currentTotalPages < 3)
+			{
+				Report.Info($"The total number of pages was less than 3, adding more ingredients until there are atleast 3 pages");
+				int maxIngredientsToMake = 11 * (3 - currentTotalPages);
+				int i = 0;
+				Report.Info($"There are currently: {currentTotalPages} need to add: {3 - currentTotalPages} more pages to have at least 3 total pages. Adding up to a total of: {maxIngredientsToMake} ingredients.");
+				Report.Info($"Starting to add water ingredients to the my Ingredients list, checking the highest page number after each ingredient is added");
+				while (myIngredients.GetHighestPageNo() < 3 && i < maxIngredientsToMake)
+				{
+					Report.Info("Adding a new Water Ingredient to  My Ingredients");
+					myIngredients.AddIngredientToMyIngredients("Water", "7732-18-5");
+				}				
+				Report.Info($"The total number of pages now is {myIngredients.GetHighestPageNo()}");
+			}
+			Report.Info("Checking if the current total number of pages is atleast 3");
+			Report.IsTrue(myIngredients.GetHighestPageNo() > 1, "The total number of pages was not at least 3", "The total number of pages was at least 3");
+
+
 		}
 	}
 }

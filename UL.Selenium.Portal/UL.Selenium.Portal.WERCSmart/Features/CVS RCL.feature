@@ -830,3 +830,47 @@ Then I should see an error message: This is a required field.
 Then The alert message is displayed with text: Contact your CVS Product Development Manager with any questions.
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74261
+
+
+@ScenarioId:5977
+Scenario: [74278] CVS Brand Registration section and Data Tier validation
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then I call Shared Step 57205 (Go to Retail Partners - Select CVS)
+Then I ensure the Data Consent Tier Sliders are set as follows:
+| Tier | State |
+| 2.1  | Off   |
+| 2.2  | Off   |
+Given if the save button is visible, I save changes and close the popup dialog
+Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+# Use Lip Balm for the RU in the shared step below
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
+Then I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Then I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+# Common Ingredients of Lip Balm: paraffin / menthol / camphor
+Then I call Shared Step 29181 (Ingredients - add any chemical) with name: paraffin
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Then I call Shared Step 74201 (Select Retailers - CVS)
+# In the Shared step below enter a UPC which starts with the numbers 050428
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 10
+Then I save the product information as: TestCase74278
+#
+Then I navigate to the home page
+Then I search for the product: Lip Balm
+Then I click Row Actions for the first product returned
+Then I click on the Row Action: Edit
+Then I should not see the CVS Page
+
+Then I call Shared Step 57205 (Go to Retail Partners - Select CVS)
+Then I ensure the Data Consent Tier Sliders are set as follows:
+| Tier | State |
+| 2.1  | On    |
+| 2.2  | On    |
+Given if the save button is visible, I save changes and close the popup dialog
+Then I navigate to the home page
+Then I search for the product: Lip Balm
+Then I click Row Actions for the first product returned
+Then I click on the Row Action: Edit
+Then I should see the CVS Page
+Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74278

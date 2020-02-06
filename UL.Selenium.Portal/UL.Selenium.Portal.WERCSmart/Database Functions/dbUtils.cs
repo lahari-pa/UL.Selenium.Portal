@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
-using NTTQA.Selenium.Classes;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Database_Functions
 {
@@ -10,7 +11,7 @@ namespace UL.Selenium.Portal.WERCSmart.Database_Functions
 		public static string GetConnectionString()
 		{
 			string connectionString = "";
-			switch (GlobalParameters.SiteType)
+			switch (TReVorSettings.SoftwareBranch)
 			{
 				case "Development":
 					connectionString = ConfigurationManager.ConnectionStrings["WERCSmartDev"].ConnectionString;

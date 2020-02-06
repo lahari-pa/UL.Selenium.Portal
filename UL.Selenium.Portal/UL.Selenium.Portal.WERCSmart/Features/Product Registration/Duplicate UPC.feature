@@ -173,22 +173,58 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 
 @ScenarioId:1406
 Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - Case UPC
-	Given I find an existing UPC number in trevor account saved as: PremiumSubscriptionAccount using feature context: ExistingUPC_PremiumSubscriptionAccount_1
+	#Given I find an existing UPC number in trevor account saved as: PremiumSubscriptionAccount using feature context: ExistingUPC_PremiumSubscriptionAccount_1
+	#Given I navigate to the landing page
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Then  I filter the products by: Accepted by Retailers	
+	#And I save the ProductID of the first Product in the grid no in recertification as: testProduct91157
+	#Given I click Bulk Actions in the Products Grid
+	#Given I click Forward Product Registration in the Bulk Actions window
+	#	#| UPC Number                                        | Container Type    | Size | DPCI | Quantity |
+	#	#| saved as ExistingUPC_PremiumSubscriptionAccount_1 | Plastic Container | 1    |      |          |
+	#Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
+	#Given I click continue on the Forward Product Registration page
+	#Given I select the first product under the Select UPCs tab
+	#Given I click the Add Case UPC button under the Select UPCs tab
+	#And In the Add Case UPC modal window I enter the following information:
+	#	| UPC Number          | Type        | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
+	#	| saved as UPC91801_2 | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
+	#And In the Case UPC modal window I click Save
+	#Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then  I click the following option in the bottom menu: Search
+	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
+	And In SHA Manager ProductSearch page I run search:
+		| Search Term | Search Value                  |
+		| Status      | Completed                     |
+		| Supplier    | QA_Automation_ProductsAccount |
+		| User        | saved as AccountUsername      |
+	Then I save a UPC number for any product in the grid to context as: ExistingUPC
 	Given I navigate to the landing page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then  I filter the products by: Accepted by Retailers	
+	And I save the ProductID of the first Product in the grid no in recertification as: testProduct91157
 	Given I click Bulk Actions in the Products Grid
-	Given I click Forward Product Registration in the Bulk Actions window
-		| UPC Number                                        | Container Type    | Size | DPCI | Quantity |
-		| saved as ExistingUPC_PremiumSubscriptionAccount_1 | Plastic Container | 1    |      |          |
-	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
+	Given I click Forward Product Registration in the Bulk Actions window	
+	Then I should see the header: Forward Product Registration on the Forward Product Registration window
+	And I confirm the active Forward Product Registration tab is: Select Products	
+	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
+	And I select the product with ID saved as: testProduct91157 under the right hand panel of the Select Products tab
 	Given I click continue on the Forward Product Registration page
+
+	#Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
+	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
+
+	And I click continue on the Forward Product Registration page	
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add Case UPC button under the Select UPCs tab
+	Then I wait for the Add Case UPC popup to appear
 	And In the Add Case UPC modal window I enter the following information:
 		| UPC Number          | Type        | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
-		| saved as UPC91801_2 | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
+		| saved as ExistingUPC | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
 	And In the Case UPC modal window I click Save
-	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
+	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. 
+	
 
 @ScenarioId:1412
 Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - single UPC
@@ -311,13 +347,14 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 		| Supplier    | QA_Automation_ProductsAccount |
 		| User        | saved as AccountUsername      |
 	And I find the UPC number for: 5 products in the grid and save them to context starting with: ExistingUPC
-	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100
+	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100 with data:
 	Given I navigate to the landing page
 	Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase91100
 	Given I edit the first product in results
 	Then  I should see the Universal Product Code (UPC) Page
-	And I click the 'Upload UPCs' button and upload the file saved as: test91100
+	And I click the 'Upload UPCs' button and upload the file saved as: test91100 with data:
+	Then I confirm that the Add Multiple UPC window opens
 	Then In the Add Multiple dialog box I select all UPCs
 	Then In the Add Multiple dialog box I select the packaging type: <first>
 	Given In the Add Multiple dialog box I click Next
@@ -412,13 +449,14 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 		| Search Term | Search Value |
 		| Status      | Completed    |
 	Given I find a UPC number for: 5 products not belonging to Supplier: QA_Automation_ProductsAccount in the grid and save to context starting with: ExistingUPC
-	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91101
+	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91101 with data:
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)	
 	Given I search for the product saved as: TestCase91101
 	Given I edit the first product in results
 	Then  I should see the Universal Product Code (UPC) Page
-	And I click the 'Upload UPCs' button and upload the file saved as: test91101
+	And I click the 'Upload UPCs' button and upload the file saved as: test91101 with data:
+	Then I confirm that the Add Multiple UPC window opens
 	Then In the Add Multiple dialog box I select all UPCs
 	Then In the Add Multiple dialog box I select the packaging type: <first>
 	Given In the Add Multiple dialog box I click Next

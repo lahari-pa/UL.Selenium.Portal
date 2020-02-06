@@ -13,7 +13,6 @@
 @Studio
 @ProductSetUp
 @run_ProductSetUp3rdParty
-
 Feature: ProductSetUp_3rdParty
 
 @ScenarioId:1418
@@ -41,9 +40,10 @@ Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include gen
 	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 	Then in the Additional documents page I click Continue
-	Then in the Product aliases page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment
+	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	Then in the Sustainability Information page I click Continue
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 73956 version 2 (Go to Summary and verify data) with product type: Raw material
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -59,6 +59,7 @@ Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include gen
 	#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase79428)
 	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase79428)
+	And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open
@@ -91,10 +92,11 @@ Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic 
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 	#***** the below page is not mentioned in the test design ******
-	Given in the Aliases page I click Continue
 	Given in the Additional Documents to Provide page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	Then in the Sustainability Information page I click Continue
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 	Given in the Comments page I click Continue
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
@@ -106,6 +108,7 @@ Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic 
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase80768)
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80768)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80768)
+	And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open
@@ -146,10 +149,11 @@ Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include gen
 	And I should see the Additional Documents to Provide Page
 	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-	Then in the Additional documents page I click Continue
-	Then in the Product aliases page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Then in the Additional Documents to Provide page I click Continue
+	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	Then in the Sustainability Information page I click Continue
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -162,6 +166,7 @@ Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include gen
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80763 and its status is: Assigned
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80763)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80763)
+	And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open
@@ -227,16 +232,18 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	And I verify the Transparency Score displays 37.50%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 	Then in the Ingredients page I click Continue
-	And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
+	#And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
+	Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 	And I should see the Additional Documents to Provide Page
 	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 	Then in the Additional Documents to Provide page I click Continue
-	Then in the Product Aliases page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	Then in the Sustainability Information page I click Continue
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
@@ -248,6 +255,7 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Assigned
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80821)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80821)
+	And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open
@@ -263,3 +271,5 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80821)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Completed
+
+

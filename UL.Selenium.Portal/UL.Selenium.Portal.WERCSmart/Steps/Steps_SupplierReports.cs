@@ -1,16 +1,16 @@
 using System;
 using System.IO;
 using System.Linq;
-using Castle.Core.Internal;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
-using NTTQA.Selenium.UniversalFunctions;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.Utilities.Functions;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
+using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using NTTQA.Selenium.Cache;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -218,7 +218,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Could not find file saved as: " + spreadsheet);
 				return;
 			}
-			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			var ExcelUtils = new ExcelFunctions(file.ToString(), "Table");
 			int index = 1;
 			while (index < ExcelUtils.Excel_GetColumn(0).Count)
 			{
@@ -244,7 +244,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Could not find file saved as: " + spreadsheet);
 				return;
 			}
-			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			var ExcelUtils = new ExcelFunctions(file.ToString(), "Table");
 			var headers = table.Header.ToList<string>();
 			var values = table.Rows[0].Values.ToList<string>();
 			int index = 1;
@@ -275,7 +275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Could not find file saved as: " + spreadsheet);
 				return;
 			}
-			var ExcelUtils = new ExcelUtilities(file.ToString(), "Table");
+			var ExcelUtils = new ExcelFunctions(file.ToString(), "Table");
 			int index = 1;
 			while (index < ExcelUtils.Excel_GetColumn(0).Count)
 			{
@@ -304,7 +304,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var utils = new ExcelUtilities(File.ToString(), "Table");
+				var utils = new ExcelFunctions(File.ToString(), "Table");
 
 				var rows = utils.Excel_GetNoRows();
 				for (int i = 1; i < rows; i++)
@@ -365,7 +365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + fileSavedAs + "!", "File was found: " + File))
 			{
-				var utils = new ExcelUtilities(File.ToString(), "Table");
+				var utils = new ExcelFunctions(File.ToString(), "Table");
 				var rows = utils.Excel_GetNoRows();
 				for (int i = 1; i < rows; i++)
 				{
@@ -396,7 +396,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			bool AllPassed = true;
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				//get the index of column
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
@@ -479,7 +479,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 
@@ -527,7 +527,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 

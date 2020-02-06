@@ -1,4 +1,4 @@
-using NTTQA.Selenium.BaseClasses;
+using UL.Automation.Selenium.BaseClasses;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 

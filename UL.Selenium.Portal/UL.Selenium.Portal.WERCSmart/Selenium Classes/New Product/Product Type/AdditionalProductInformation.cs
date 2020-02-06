@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NTTQA.Selenium.ExtensionMethods;
+using UL.Automation.Selenium.Extensions;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 

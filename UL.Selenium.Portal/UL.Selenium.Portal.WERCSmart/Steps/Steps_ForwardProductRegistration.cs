@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Text.RegularExpressions;
+using UL.Automation.Reporting;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -39,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the subheading 3: (.*) on the Forward Product Registration window")]
 		public void CorrectSubHeader3Showing(string subheaderExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Forward Product Registration window should appear");
+			Report.StartStep(ReportSettings.StepCounter + " - Forward Product Registration window should appear");
 			try
 			{
 				GeneralUtilities.Wait_for_load_finish();
@@ -65,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should see the subheading 4: (.*) on the Forward Product Registration window")]
 		public void CorrectSubHeader4Showing(string subheaderExpected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Forward Product Registration window should appear");
+			Report.StartStep(ReportSettings.StepCounter + " - Forward Product Registration window should appear");
 			try
 			{
 				GeneralUtilities.Wait_for_load_finish();
@@ -87,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I should be sent to the Product Registration page with retailers list displayed")]
 		public void ThenIShouldBeSentToTheProductRegistrationPageWithRetailersListDisplayed()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Forward Product Registration window should appear");
+			Report.StartStep(ReportSettings.StepCounter + " - Forward Product Registration window should appear");
 			try
 			{
 				GeneralUtilities.Wait_for_load_finish();
@@ -209,6 +211,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully selected the first UPC");
 		}
 
+		[StepDefinition(@"I select Edit for the first UPC in Select UPCs tab")]
+		public void SelectEditForFirstUPC()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SelectEditForFirstUPC(),
+				"Failed to select Edit for the first UPC",
+				"Successfully selected Edit for the first UPC");
+		}
+
+		[StepDefinition(@"I confirm that Package Type is not shown")]
+		public void ConfirmPackageTypeNotShown()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ConfirmPackageTypeNotShown(),
+				"The Package Type is erroneously shown!",
+				"The Package Type is correctly not shown.");
+		}
+
 		[StepDefinition(@"I click the 'select all' UPCs checkbox")]
 		public void ClickSelectAllUpcsCheckbox()
 		{
@@ -319,6 +339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selForwardProductReg = new ForwardProductRegistration();
 			if (savedAs.ToLower().Contains("list"))
 			{
+				Report.Info($"Saved as contains the word list.");
 				var ids = (List<string>)Context.GetFromContext(savedAs);
 				if (ids == null)
 				{
@@ -346,7 +367,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-
+				Report.Info($"Saved as does not contain the word list.");
 				string id = Context.GetFromContext(savedAs)?.ToString();
 				if (id == null)
 				{
@@ -359,8 +380,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					try
 					{
-						var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-						id = productToSearch.ProductId;
+						var productToSearch = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productToSearch.Id;
 					}
 					catch (Exception)
 					{
@@ -444,8 +465,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab and the checkbox is disabled while the page is working")]
 		public void SelectProductWithIDSavedAsSelectProductAndCheckboxIsDisabled(string savedAs)
 		{
-			TestReport.UseSubSteps = true;
-			TestReport.StartStep("I select the product with ID saved as: " + savedAs + " under the Select Products tab");
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I select the product with ID saved as: " + savedAs + " under the Select Products tab");
 			var selForwardProductReg = new ForwardProductRegistration();
 			if (savedAs.ToLower().Contains("list"))
 			{
@@ -460,7 +481,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Clicking product checkbox with ID: " + id_);
 					if (selForwardProductReg.SelectProducts_ClickProductByID_(id_))
 					{
-						TestReport.StartStep("I confirm the checkbox is disabled while the page is working");
+						Report.StartStep("I confirm the checkbox is disabled while the page is working");
 						this.ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
 						break;
 					}
@@ -476,7 +497,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Report.Info("Clicking product checkbox with ID: " + id);
 				selForwardProductReg.SelectProducts_ClickProductByID_(id);
-				TestReport.StartStep("I confirm the checkbox is disabled while the page is working");
+				Report.StartStep("I confirm the checkbox is disabled while the page is working");
 				this.ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
 			}
 
@@ -701,7 +722,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-			Report.Info("Retailer: " + aRetailer);
+			Report.Info("The Retailer found in context is: " + aRetailer);
 			//        var abbreviationMappings = new RetailerAbbreviations().Map;
 			//        if (abbreviationMappings.ContainsKey(aRetailer))
 			//        {
@@ -714,7 +735,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//}
 			//        }
 			aRetailer = new RetailerAbbreviations().TryConvertToAbbreviation(aRetailer);
-			Report.Info("Retailer: " + aRetailer);
+			Report.Info("The Retailer from context after trying to convert to abbreviation is: " + aRetailer);
 			List<ForwardProductRegistration.ProductResults> listProductResults = selForwardProdReg.GetProductResults();
 			foreach (var productResults in listProductResults)
 			{
@@ -981,8 +1002,119 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I click Add Case UPC")]
+		public void GivenIClickAddCaseUPC()
+		{
+			UPC UPCObject = new UPC();
+			Report.IsTrue(UPCObject.ClickAddCaseUPCButton(), "Failed to click the 'Add Case UPC' button", "Successfully clicked the 'Add Case UPC' button");
+		}
+
+		[StepDefinition(@"I confirm no error is shown below the Individual UPC contained in the Case Pack field")]
+		public void ThenIConfirmNoErrorIsShownBelowTheIndividualUPCContainedInTheCasePackField()
+		{
+			UPC UPCObject = new UPC();
+			Report.IsFalse(UPCObject.CheckForErrorUnderneathIndividualUPCContainedInCasePackField(), "The error message was found", "The error message was not found");
+		}
+
+		[StepDefinition(@"I check if the textfields with the following placeholders display the error 'This is a required field.' bottom")]
+		public void ThenICheckIfTheFollowingTextfieldsDisplayTheErrorThisIsARequiredField(Table table)
+		{
+			UPC UPCObject = new UPC();
+			UPCObject.CheckIfTextfieldsWithPlaceholdersDisplayTheError(table);
+		}
+
+		[StepDefinition(@"I check if the dropdowns with the following default options display the error 'This is a required field.' bottom")]
+		public void ThenICheckIfTheFollowingDropdownsDisplayTheErrorThisIsARequiredField_(Table table)
+		{
+			UPC UPCObject = new UPC();
+			Report.IsTrue(UPCObject.CheckIfDropDownsWithDefaultOptionDisplayTheError(table), "At least one dropdown did not display an error", "All the dropdowns displayed their errors");
+		}
+
+		[StepDefinition(@"I select the first non Kit product from the list of IDs saved as: (.*) under the Select Products tab")]
+		public void SelectNonKitProductByIDSavedAs(string savedAs)
+		{
+
+			var selForwardProductReg = new ForwardProductRegistration();
+			Report.Info($"Attempting to select the first product from the list saved as: {savedAs} that is not a kit product");
+			var ids = (List<string>)Context.GetFromContext(savedAs);
+			if (ids == null)
+			{
+				Report.Failure("Could not find product IDs in context saved as: " + savedAs);
+				return;
+			}
+			bool clicked = false;
+			foreach (string id_ in ids)
+			{
+				Report.Info("Attempting to select product with id: " + id_);
+				this.EnterTextInSearchByIDOrProductNameField(id_);
+				if (selForwardProductReg.GetTopProductNameFromSelectProductList().IsNullOrEmpty())
+				{
+					Report.Info($"No Product Name was found for the product with id: {id_}");
+
+				}
+				else
+				{
+					if (selForwardProductReg.GetTopProductNameFromSelectProductList().ToLower().Contains("kit"))
+					{
+						Report.Info($"The Product Name for id: {id_} contained the word kit. Moving onto the next ID in the list saved as: {savedAs}");
+					}
+					else
+					{
+						if (selForwardProductReg.SelectProducts_ClickProductByID(id_))
+						{
+							Report.Success("Successfully selected product with ID: " + id_);
+							Report.Screenshot();
+							clicked = true;
+							break;
+						}
+					}
+
+				}
 
 
+			}
+			if (!clicked)
+			{
+				Report.Failure("Failed to select any of the products with ID in the list saved as: " + savedAs);
+				Report.Screenshot();
+			}
+
+
+		}
+
+		[StepDefinition(@"I wait for the Add Case UPC popup to appear")]
+		public void IWaitForTheAddCaseUPCPopupToAppear()
+		{
+			Report.IsTrue(new AddCaseUPCModal().WaitForAddCaseUPCPopup(), "The Add Case UPC modal did not appear", "The Add case upc modal appeared");
+		}
+
+		[StepDefinition(@"If there is the option to select a vendor for the product with ID: (.*), I select the first option")]
+		public void IfThereIsTheOptionToSelectVendorISelect(string id)
+		{
+			Report.Info("Checking to see if there is the option to select a Vendor");			
+			var frwdProdReg = new ForwardProductRegistration();
+			if (id.ToLower().Contains("saved as"))
+			{
+				var PI = (ProductInformation)Context.GetFromContext(id.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
+				if (PI == null)
+				{
+					throw new Exception("Failed to find product: " + id);
+				}
+
+				id = PI.Id;
+			}
+			Report.Info("Checking to see if there is the option to select a Vendor");
+			if(!frwdProdReg.GivenProductCheckVendorSelect(id))
+			{
+				Report.Info($"There was no option for selecting a vendor for the product with ID: {id}");
+				return;
+			}
+			Report.Info($"There the option for select vendor for ID: {id} was found!");
+			string firstOption = frwdProdReg.GivenProductFirstAvailableVendor(id);
+			Report.Info($"The first vendor option for ID: {id} was found as: {firstOption}");
+			Report.Info($"Selecting the option: {firstOption} for ID: {id}");
+			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option","Successfully selected the option");
+		}
 
 
 	}

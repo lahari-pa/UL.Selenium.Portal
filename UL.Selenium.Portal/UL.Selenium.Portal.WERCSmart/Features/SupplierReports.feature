@@ -273,6 +273,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 		| Camera wBattery | UPC108254BCP | Walgreens | Submitted | 32     | Plastic Container | Battery-Containing Product | ENHANCED ARTICLES |
 	And I delete the Supplier Report file saved as 108254
 
+@ScenarioId:6270
 Scenario: [73225] Kits that Contain a specific Product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -290,6 +291,7 @@ Scenario: [73225] Kits that Contain a specific Product
 		| Kit Name            |
 	And I delete the Supplier Report file saved as 73225
 
+@ScenarioId:6349
 Scenario: [73228] Products that are Associated with a specific Kit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -307,6 +309,7 @@ Scenario: [73228] Products that are Associated with a specific Kit
 		| Kit Name            |
 	And I delete the Supplier Report file saved as 73228
 
+@ScenarioId:6262
 Scenario: [73226] Pesticide Certificate Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -533,7 +536,13 @@ Scenario: [76759] Waste Classification Summary Report
 		| West Virginia  |
 		| Wisconsin      |
 		| Wyoming        |
+	Then I get the excel row data file saved as: SupplierReport76759 and save the data to context
 	And I delete the Supplier Report file saved as SupplierReport76759
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then In the Authoring menu I select Power Designer Plus
+	Then I filter subformat SWST and open checklist [SECT0150] Waste Checklist
+	Then I check if the excel data matches the checklist data
+	Then I close the window that opened
 
 #Unable to run because the report requires a 1 year old product that is in completed status
 @tfs_design

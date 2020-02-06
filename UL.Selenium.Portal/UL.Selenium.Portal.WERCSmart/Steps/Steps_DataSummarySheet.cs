@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -193,6 +193,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(transparencyRatio > -1, "Failed to get tranparency ratio", "Saved transparency ratio");
 		}
 
+		[StepDefinition(@"Get transparency percentage and save as (.*)")]
+		public void GetTransparencyPercentageAndSaveAs(string saveAs)
+		{
+			double transparencyPercentage = new DataSummary().GetTransparencyPercentage();
+			if (transparencyPercentage > -1)
+			{
+				Context.AddToContext(saveAs, transparencyPercentage);
+			}
+
+			Report.IsTrue(transparencyPercentage > -1, "Failed to get tranparency percentage", "Saved transparency percentage");
+		}
+
 		[StepDefinition(@"Confirm that transparency ratio is (.*) / (.*)")]
 		public void GivenConfirmThatTransparencyRatioSavedAsTRAfterIs(string numerator, string denominator)
 		{
@@ -209,8 +221,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"Confirm that transparency percentage is (.*)%")]
+		public void GivenConfirmThatTransparencyPercentageSavedAsTRAfterIs(string percentage)
+		{
+			var thisDataSummary = new DataSummary();
+			string actualRatio = thisDataSummary.SGetTransparencyPercentage();
+			string pattern = @"(\d+\.\d\d)";
+			System.Text.RegularExpressions.Match regMatch = System.Text.RegularExpressions.Regex.Match(actualRatio, pattern);
+			if (!regMatch.Success || regMatch.Groups.Count != 2)
+			{
+				Report.Failure("Actual Percentage was not as expected. It is: " + actualRatio);
+			}
+			Report.IsTrue(regMatch.Groups[1].ToString() == percentage, "Percentage was expected to be: " + percentage + " but is: " + regMatch.Groups[1].ToString(), "As expected, percentage is: " + percentage);
+
+		}
+
 		[StepDefinition(@"I confirm that the Transparency Ratio underneath Ingredients equals: (.*)")]
 		public void IConfirmThatTheTransparencyRatioEquals(string savedAs)
+		{
+			string transRatio = Context.GetFromContext(savedAs)?.ToString();
+			string pattern = @"(\d)\s\/\s(\d)";
+			Match regMatch = Regex.Match(transRatio, pattern);
+			string numerator = regMatch.Groups[1].ToString();
+			string denominator = regMatch.Groups[2].ToString();
+
+			var thisDataSummary = new DataSummary();
+			string pattern2 = @"([0123456789\.]*)\s*\/\s*([0123456789\.]*)";
+			string actualRatio = thisDataSummary.SGetTransparencyRatio();
+			Match regMatch2 = Regex.Match(actualRatio, pattern2);
+			if (!regMatch2.Success || regMatch2.Groups.Count != 3)
+			{
+				Report.Failure("Actual ratio was not as expected. It is: " + actualRatio);
+			}
+			Report.IsTrue(regMatch2.Groups[1].ToString() == numerator, "Numerator was expected to be: " + numerator + " but is: " + regMatch.Groups[1].ToString(), "As expected, numerator is: " + numerator);
+			Report.IsTrue(regMatch2.Groups[2].ToString() == denominator, "Denominator was expected to be: " + denominator + " but is: " + regMatch.Groups[1].ToString(), "As expected, denominator is: " + denominator);
+		}
+
+		//NOT COMPLETED
+		[StepDefinition(@"I confirm that the Transparency Percentage underneath Ingredients equals: (.*)")]
+		public void IConfirmThatTheTransparencyPercentageEquals(string savedAs)
 		{
 			string transRatio = Context.GetFromContext(savedAs)?.ToString();
 			string pattern = @"(\d)\s\/\s(\d)";

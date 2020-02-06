@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -242,6 +242,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
+
+		public bool ClickResolveButton()
+		{
+			IWebElement ResolveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='panel panel-default messaging']//p[contains(text(), 'AGHS document')]/../../following-sibling::td//a[text()='Resolve ']"), 2);
+			return ResolveButton.TryClick();
+		}
+
 	}
 
 

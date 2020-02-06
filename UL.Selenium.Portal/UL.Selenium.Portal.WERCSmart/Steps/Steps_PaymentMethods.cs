@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.SpecFlow;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -67,7 +68,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as (.*)")]
 		public void ThenIConfirmThatTheContactInformationIsCorrect(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm that the Contact Information is correct for Account saved as " + savedAs);
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm that the Contact Information is correct for Account saved as " + savedAs);
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -102,7 +103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as (.*)")]
 		public void ThenIConfirmThatTheBillingAddressIsCorrect(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm that the Billing Address is correct for Account saved as " + savedAs);
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm that the Billing Address is correct for Account saved as " + savedAs);
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -141,7 +142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Payment Methods screen I open the Edit Address form")]
 		public void ThenIOpenTheEditAddressForm()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I open the Edit Address form");
+			Report.StartStep(ReportSettings.StepCounter + " - I open the Edit Address form");
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -168,7 +169,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Sub Headings are correct: (.*), (.*)")]
 		public void ThenIConfirmTheSubHeadingsAreCorrect(string sub1, string sub2)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Sub Headings are correct");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the Sub Headings are correct");
 			try
 			{
 				var myPay = new PaymentMethods_Edit_Address();
@@ -188,7 +189,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Edit Address form has the correct fields")]
 		public void ThenIConfirmTheEditAddressFormHasTheCorrectFields(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Edit Address form has the correct fields");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the Edit Address form has the correct fields");
 			try
 			{
 				var myPay = new PaymentMethods_Edit_Address();
@@ -216,7 +217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I (check|un-check) the Shipping Address is the same as the billing address checkbox")]
 		public void ThenICheckTheShippingAdreessIsTheSameAsTheBillingAddressCheckbox(string check)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I " + check + " the Shipping Adreess is the same as the billing address checkbox");
+			Report.StartStep(ReportSettings.StepCounter + " - I " + check + " the Shipping Adreess is the same as the billing address checkbox");
 			try
 			{
 				var myPay = new PaymentMethods_Edit_Address();
@@ -236,7 +237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Shipping Address form has the correct fields")]
 		public void ThenIConfirmTheShippingAddressFormHasTheCorrectFields(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Shipping Address form has the correct fields");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the Shipping Address form has the correct fields");
 			try
 			{
 				var myPay = new PaymentMethods_Edit_Address();
@@ -264,7 +265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the Shipping Address is hidden")]
 		public void ThenIConfirmTheShippingAddressIsHidden()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Shipping Address is hidden");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the Shipping Address is hidden");
 			try
 			{
 				var myPay = new PaymentMethods_Edit_Address();
@@ -281,7 +282,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I cancel the Edit Address form")]
 		public void ThenICancelTheEditAddressForm()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I cancel the Edit Address form");
+			Report.StartStep(ReportSettings.StepCounter + " - I cancel the Edit Address form");
 			try
 			{
 				var myPay = new PaymentMethods_Edit_Address();
@@ -306,7 +307,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I edit the Primary Account Contact")]
 		public void ThenIEditThePrimaryAccountContact(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I edit the Primary Account Contact");
+			Report.StartStep(ReportSettings.StepCounter + " - I edit the Primary Account Contact");
 			try
 			{
 				var myPay = new PaymentMethods_Edit_Address();
@@ -345,7 +346,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I edit the Billing Address for user saved as: (.*)")]
 		public void ThenIEditTheBillingAddress(string savedAs, Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I edit the Billing Address");
+			Report.StartStep(ReportSettings.StepCounter + " - I edit the Billing Address");
 			try
 			{
 				var myPay = new PaymentMethods_Edit_Address();
@@ -426,7 +427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Payment Methods screen I confirm the Continue Button is (enabled|disabled)")]
 		public void ThenIConfirmTheContinueButtonIsX(string enabled)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Continue Button is " + enabled);
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the Continue Button is " + enabled);
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -443,7 +444,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Payment Methods screen I confirm the (Credit Card|ACH) fields are correct")]
 		public void ThenIConfirmTheXFieldsAreCorrect(string payMethod, Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the " + payMethod + " fields are correct");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the " + payMethod + " fields are correct");
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -482,7 +483,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Payment Methods screen I confirm the following warning message appears: (.*)")]
 		public void ThenIConfirmTheFollowingWarningMessageAppears(string warningMsg)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Wire Transfer warning message appears");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the Wire Transfer warning message appears");
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -499,7 +500,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Payment Methods screen I confirm the following text message appears for PayPal: (.*)")]
 		public void ThenIConfirmTheFollowingTextMessageAppearsForPayPal(string textMsg)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the PayPal text message appears");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the PayPal text message appears");
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -517,7 +518,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Payment Methods screen I confirm (Credit Card|ACH) error messages for the following fields are displayed")]
 		public void ThenIConfirmErrorMessagesForTheFollowingFieldsAreDisplayed(string payMethod, Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm error messages for " + payMethod + " fields are correct");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm error messages for " + payMethod + " fields are correct");
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -556,7 +557,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Payment Methods screen I click Continue")]
 		public void ThenIClickContinue()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Payment Methods screen I click Continue");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Payment Methods screen I click Continue");
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -574,7 +575,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Payment Methods screen I enter Credit Card details")]
 		public void ThenIEnterCreditCardDetails(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Payment Methods screen I enter Credit Card details");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Payment Methods screen I enter Credit Card details");
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -602,7 +603,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Purchase Summary screen I confirm the Purchase Summary header is displayed")]
 		public void ThenIConfirmThePurchaseSummaryHeaderIsDisplayed()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Purchase Summary header is displayed");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the Purchase Summary header is displayed");
 			try
 			{
 				var myPay = new PaymentMethods_Subscription_Billing();
@@ -620,7 +621,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Purchase Summary screen I check the Subscription Billing header is correct")]
 		public void ThenICheckTheSubscriptionBillingHeaderIsCorrect()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I check the Subscription Billing header is correct");
+			Report.StartStep(ReportSettings.StepCounter + " - I check the Subscription Billing header is correct");
 			try
 			{
 				var mySub = new PaymentMethods_Subscription_Billing();
@@ -638,7 +639,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Purchase Summary screen I confirm the Yearly Radio Option is (selected|not selected)")]
 		public void ThenIConfirmTheYearlyRadioOptionIsX(string select)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Yearly Radio Option is " + select);
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the Yearly Radio Option is " + select);
 			try
 			{
 				Delay.Seconds(2 * Delay.SpeedFactor);
@@ -662,7 +663,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Purchase Summary screen I confirm the column headings are correct: (.*), (.*), (.*)")]
 		public void ThenIConfirmTheColumnHeadingsAreCorrectXYZ(string column_1, string column_2, string column_3)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the column headings are correct");
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the column headings are correct");
 			try
 			{
 				var mySub = new PaymentMethods_Subscription_Billing();
@@ -680,7 +681,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Purchase Summary screen I confirm the folling statement is shown: (.*)")]
 		public void ThenIConfirmTheFollingStatementIsShownX(string statement)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the folling statement is shown: " + statement);
+			Report.StartStep(ReportSettings.StepCounter + " - I confirm the folling statement is shown: " + statement);
 			try
 			{
 				var mySub = new PaymentMethods_Subscription_Billing();
@@ -698,7 +699,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Purchase Summary screen I confirm the Prices and Payment section contains the text: (.*)")]
 		public void ThenInThePurchaseSummaryScreenIConfirmThePricesAndPaymentSectionContainsTheText(string prices_text)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Purchase Summary screen I confirm the Prices and Payment section contains the correct text");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Purchase Summary screen I confirm the Prices and Payment section contains the correct text");
 			try
 			{
 				var mySub = new PaymentMethods_Subscription_Billing();
@@ -718,7 +719,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Purchase Summary screen I confirm the following statement is shown: (.*)")]
 		public void ThenInThePurchaseSummaryScreenIConfirmTheFollowingStatementIsShown(string confirm_text)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Purchase Summary screen I confirm the following statement is shown: " + confirm_text);
+			Report.StartStep(ReportSettings.StepCounter + " - In the Purchase Summary screen I confirm the following statement is shown: " + confirm_text);
 			try
 			{
 				var mySub = new PaymentMethods_Subscription_Billing();
@@ -738,7 +739,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Purchase Summary screen I click Confirm Order")]
 		public void ThenInThePurchaseSummaryScreenIClickConfirmOrder()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Purchase Summary screen I click Confirm Order");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Purchase Summary screen I click Confirm Order");
 			try
 			{
 				var mySub = new PaymentMethods_Subscription_Billing();
@@ -790,7 +791,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Thank You screen I check the Header is correct")]
 		public void ThenInTheThankYouScreenICheckTheHeaderIsCorrect()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Thank You screen I check the Header is correct");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Thank You screen I check the Header is correct");
 			try
 			{
 				var myPay = new PaymentMethods_Thank_You();
@@ -809,7 +810,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Thank You screen I confirm the following statement is shown: (.*)")]
 		public void ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX(string ty_text)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Thank You screen I check the Confirmation statement is correct");
+			Report.StartStep(ReportSettings.StepCounter + " - In the Thank You screen I check the Confirmation statement is correct");
 			try
 			{
 				var myPay = new PaymentMethods_Thank_You();
@@ -946,6 +947,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(newProduct.PurchaseSummaryClickRemove(product), "Failed to click Remove for product '" + product + "'.",
 				"Successfully clicked Remove for product '" + product + "'.");
+		}
+
+		[StepDefinition(@"I click on the 'Edit' button in Company information in the Billing Address section")]
+		public void ThenIClickOnTheLinkInCompanyInformationInTheBillingAddressSection()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.ClickOnEditButtonInCompanyInformationPageInBillingAddressSection(), "Failed to click on 'Edit' button", "Successfully clicked 'Edit' button");
+		}
+
+		[StepDefinition(@"I select the state: (.*) in the Billing Address section")]
+		public void ThenISelectAStateInTheBillingAddressSection(string state)
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.SelectAStateAsAnOptionInCompanyInformationPageBillingAddressSection(state), "Failed to select state: " + state, "Successfully selected state: " + state);
+		}
+
+		[StepDefinition(@"I click the 'Save' button in the Billing Address section")]
+		public void ThenIClickTheSaveButtonInTheBillingAddressSeciton()
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.ClickSaveButtonInCompanyInformationPageBillingAddressSection(), "Failed to click on 'Save' button", "Successfully clicked 'Save' button");
+		}
+
+		[StepDefinition(@"I click on the 'Edit' button in Company information in the Shipping Address section")]
+		public void ThenIClickOnTheLinkInCompanyInformationInTheShippingAddressSection()
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.ClickEditButtonAsAnOptionInCompanyInformationPageShippingAddressSection(), "Failed to click on 'Edit' button", "Successfully clicked 'Edit' button");
+		}
+
+		[StepDefinition(@"I select the state: (.*) in the Shipping Address section")]
+		public void ThenISelectAStateInTheShippingAddressSection(string state)
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.SelectAStateAsAnOptionInCompanyInformationPageShippingAddressSection(state), "Failed to select state: " + state, "Successfully selected state: " + state);
+		}
+
+		[StepDefinition(@"I click the 'Save' button in the Shipping Address section")]
+		public void ThenIClickTheSaveButtonInTheShippingAddressSeciton()
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.ClickSaveButtonAsAnOptionInCompanyInformationPageShippingAddressSection(), "Failed to click on 'Save' button", "Successfully clicked 'Save' button");
+		}
+
+		[StepDefinition(@"I confirm that the correct state: (.*) has been saved in the Billing Address")]
+		public void ThenIConfirmThatTheCorrectStateHasBeenSavedInTheBillingAddress(string stateName)
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.FindStateWithNameInBillingAddressSection(stateName), "The state was not confirmed", "The state was confirmed");
+		}
+
+		[StepDefinition(@"I confirm that the correct state: (.*) has been saved in the Shipping Address")]
+		public void ThenIConfirmThatTheCorrectStateHasBeenSavedInTheShippingAddress(string stateName)
+		{
+			MyAccount_CompanyInfo MyAccount_CompanyInfoObject = new MyAccount_CompanyInfo();
+			Report.IsTrue(MyAccount_CompanyInfoObject.FindStateWithNameInShippingAddressSection(stateName), "The state was not confirmed", "The state was confirmed");
 		}
 	}
 }

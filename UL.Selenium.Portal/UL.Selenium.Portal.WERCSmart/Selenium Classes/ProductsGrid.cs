@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
-using NTTQA.Selenium.BaseClasses;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
+using UL.Automation.Selenium.BaseClasses;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -604,30 +605,75 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Navigating in the products grid with action - " + navOption);
 			IWebElement navEl;
-			switch (navOption)
+			int i = 0;
+			while (i < 6)
 			{
-				case "next":
-					navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
-					break;
-				case "previous":
-					navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
-					break;
-				case "...":
-					navEl = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
-					break;
-				default:
-					Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
+				try
+				{
+					switch (navOption)
+					{
+						case "next":
+							navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
+							break;
+						case "previous":
+							navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
+							break;
+						case "...":
+							//navEl = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+							navEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+							break;
+						default:
+							Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
+							return false;
+					}
+
+					if (navEl == null)
+					{
+						Report.Info("Could not locate the navigation button element for: " + navOption);
+						return false;
+					}
+					if (navOption == "...")
+					{
+						Report.Info("Attempting to click the '...' button, after scrolling it into view");
+						Delay.Seconds(1);
+						navEl.ScrollElementIntoView();
+						Delay.Seconds(1);
+						navEl.ClickLocation();
+						if (this.GridNavigationInput() == null)
+						{
+							return false;
+						}
+						else
+						{
+							return true;
+						}
+
+					}
+
+					Delay.Seconds(1);
+					navEl.ScrollElementIntoView();
+					Delay.Seconds(1);
+					bool clickSuccess = navEl.TryClick();
+					Delay.Seconds(1);
+					return clickSuccess;
+				}
+				catch (StaleElementReferenceException ex)
+				{
+					Report.Info("navEl threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the navEl: {navOption} if the number of attempts has not exceeded 5");
+
+				}
+				catch (Exception ex)
+				{
+					Report.Info($"Threw an expection of type:{ex.Message}");
 					return false;
+				}
 			}
+			return false;
 
-			if (navEl == null)
-			{
-				Report.Info("Could not locate the navigation button element for: " + navOption);
-				return false;
-			}
-
-			navEl.ScrollElementIntoView();
-			return navEl.TryClick();
+						
 		}
 
 		public bool NextDisabled()
@@ -680,7 +726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool NumToGridNavigationInput(string pageNumber)
 		{
 			int i = 0;
-			while (i<5)
+			while (i < 5)
 			{
 				try
 				{
@@ -727,7 +773,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			}
 			return false;
-			
+
 
 		}
 
@@ -736,7 +782,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement inputEl = this.GridNavigationInput();
 			if (inputEl == null)
 			{
-				Report.Failure("The navigation input box could not be found");
+				Report.Error("The navigation input box could not be found");
 				return null;
 			}
 
@@ -783,9 +829,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					break;
 				}
-				catch(Exception e)
+				catch (Exception e)
 				{
-					Report.Error(e);
+					Report.Error(e.Message);
 					throw;
 				}
 			}
@@ -1003,6 +1049,53 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public void ConfirmRetailersMatchInMyProductsSection(string savedAs)
+		{
+			Delay.Seconds(5);
+			string strVersionOfRemainingRetailerNames = Context.GetFromContext("ListOfRemainingRetailerNamesInTextForm").ToString();
+			List<string> ListOfRemainingRetailerNamesFromTheUPCPage = strVersionOfRemainingRetailerNames.Split(',').ToList();
+
+			List<string> ListOfRetailersThatWereSupposedToDisplayButDidNot = new List<string>();
+
+			var ProductID = Context.GetFromContext("ProductID");
+			IList<IWebElement> ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid = this.FindElements(By.XPath("//small[text()='" + ProductID + "']/../../following-sibling::td/following-sibling::td/following-sibling::td/following-sibling::td//span[@data-bind='text: Identifier']"), 2);
+
+
+			foreach (string RetailerName in ListOfRemainingRetailerNamesFromTheUPCPage)
+			{
+				bool foundMatch = false;
+
+				foreach (IWebElement DisplayedRetailerName in ListOfDisplayedAbreviatedRetailerNamesInTheProductGrid)
+				{
+					if (RetailerName == DisplayedRetailerName.GetValue())
+					{
+						foundMatch = true;
+					}
+				}
+
+				if (!foundMatch)
+				{
+					ListOfRetailersThatWereSupposedToDisplayButDidNot.Add(RetailerName);
+				}
+
+			}
+
+			if (ListOfRetailersThatWereSupposedToDisplayButDidNot.Count() > 0)
+			{
+				Report.Failure("The following retailers: " + ListOfRetailersThatWereSupposedToDisplayButDidNot.ToString() + " did not show in the Product Grid but were supposed to.");
+				return;
+			}
+
+			Report.Success("All retailers that were supposed to show up in the Product Grid did.");
+			return;
+		}
+
+		public bool ConfirmYouWouldLikeToDeleteButton()
+		{
+			IWebElement ConfirmYouWouldLikeToDeleteButton = this.FindElement(By.XPath("//div[@class='modal-footer']//button[@data-bind='click: function(){ resolve(false); }, text: noText']"), 2);
+			return ConfirmYouWouldLikeToDeleteButton.TryClick();
+		}
+
 		public ProductGridItem FirstProductNotRecertInGrid()
 		{
 			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
@@ -1013,48 +1106,79 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(5);
 
 			//IWebElement productRow = this.containerElement.FindElement(By.XPath(".//tbody//tr//li[@class and not(@class='update')]//ancestor::tr"), 2);
-			IWebElement productRow = this.containerElement.FindElement(By.XPath(".//tbody//tr[.//li[@class and not(@class='update')]]"), 2);
-
-
-			if (productRow == null || !productRow.Displayed)
+			List<IWebElement> productRows = this.containerElement.FindElements(By.XPath(".//tbody//tr[.//li[@class and not(@class='update')]]"), 2).ToList();
+			//get all rows in a list of webelements
+			//if the first one does not have the archeived tag then go
+			//if not try second row in list and so on
+			//checking the archieved tag -			
+			
+			foreach(var row in productRows)
 			{
-				return null;
-			}
-			string productId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
-			string dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
-			var retailers = new List<string>();
-			var retailersAbrv = new List<string>();
-			IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
+				bool notArchieved = false;
+				List<IWebElement> retailersymbolEL = row.FindElements(By.XPath(".//td[5]//ul//li"), 2).ToList();
+				foreach (var el in retailersymbolEL)
+				{
+					string classFound = el.GetAttribute("class");
+					Report.Info($"The class for the el was: {classFound}");
+					if (el.GetAttribute("class").Contains("archived"))
+					{
+						notArchieved = false;
+						Report.Info("One of the retailers was archived for the product moving to the next row.");
+						break;
+					}
+				}
+				if(!notArchieved)
+				{
 
-			foreach (IWebElement retailerLi in retailersLi)
-			{
-				IWebElement retailerLiButton = retailerLi.FindElement(By.XPath("./button"), 2);
-				if (!retailerLi.GetAttribute("title").IsNullOrEmpty())
-				{
-					retailers.Add(retailerLi.GetAttribute("title")?.Trim());
-				}
-				else if (retailerLiButton != null && !retailerLiButton.GetAttribute("title").IsNullOrEmpty())
-				{
-					retailers.Add(retailerLiButton.GetAttribute("title")?.Trim());
-				}
-				else
-				{
-					retailers.Add(retailerLi.GetAttribute("data-original-title")?.Trim());
-				}
-				retailersAbrv.Add(retailerLi.Text.Trim());
+					Report.Info($"The product did not contain any archived retailers, using this product");
+					IWebElement productRow = row;
+					if (productRow == null || !productRow.Displayed)
+					{
+						return null;
+					}
+					string productId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
+					string dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
+					var retailers = new List<string>();
+					var retailersAbrv = new List<string>();
+					IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
+
+					foreach (IWebElement retailerLi in retailersLi)
+					{
+						IWebElement retailerLiButton = retailerLi.FindElement(By.XPath("./button"), 2);
+						if (!retailerLi.GetAttribute("title").IsNullOrEmpty())
+						{
+							retailers.Add(retailerLi.GetAttribute("title")?.Trim());
+						}
+						else if (retailerLiButton != null && !retailerLiButton.GetAttribute("title").IsNullOrEmpty())
+						{
+							retailers.Add(retailerLiButton.GetAttribute("title")?.Trim());
+						}
+						else
+						{
+							retailers.Add(retailerLi.GetAttribute("data-original-title")?.Trim());
+						}
+						retailersAbrv.Add(retailerLi.Text.Trim());
+					}
+					IWebElement labelBrandTag = productRow.FindElement(By.XPath(".//div/p/span"), 2);
+					var productElement = new ProductGridItem() {
+						ProductId = productId,
+						ProductName = labelBrandTag != null ?
+							productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
+							productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
+						DateCreated = dateCreated,
+						Retailers = retailers,
+						RetailerAbrv = retailersAbrv,
+						NameLabel = labelBrandTag?.Text
+					};
+					return productElement;
+				}					
 			}
-			IWebElement labelBrandTag = productRow.FindElement(By.XPath(".//div/p/span"), 2);
-			var productElement = new ProductGridItem() {
-				ProductId = productId,
-				ProductName = labelBrandTag != null ?
-					productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
-					productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
-				DateCreated = dateCreated,
-				Retailers = retailers,
-				RetailerAbrv = retailersAbrv,
-				NameLabel = labelBrandTag?.Text
-			};
-			return productElement;
+			Report.Info($"All Products Found had either archieved retailers or were in recertification");
+			return null;
+
+
+
+			
 		}
 	}
 
@@ -1282,7 +1406,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	}
 
 
-	
+
 
 
 
