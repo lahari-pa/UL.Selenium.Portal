@@ -345,7 +345,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			bool found = false;
 
-			while (counter < 10 && !found)
+			while (counter < 20 && !found)
 			{
 				var thisStudioManager = new StudioSHAManager();
 				thisStudioManager.Wait_for_load();

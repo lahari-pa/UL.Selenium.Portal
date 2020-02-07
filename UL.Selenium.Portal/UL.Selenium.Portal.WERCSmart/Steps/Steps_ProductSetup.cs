@@ -2965,8 +2965,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//});
 			//sharedSteps.GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(savedAs, table4);
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
-				"Completed");
+
+			//Table retailerTable = new Table("Retailer");
+			//retailerTable.AddRow("Canadian Tire");
+
+			shaSteps.InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
+
+			//shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Completed");
 			//var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			//string ID = ProductDetails.Id;
 			//var myStudioShaManager = new StudioSHAManager();
