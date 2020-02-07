@@ -8738,8 +8738,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myNewProduct = new NewProduct();
 			Report.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+
+
 			Report.StartStep("I click expand arrow for: " + upc);
-			myNewProduct.ExpandArrowforUPC(upc);
+			myNewProduct.EnsureArrowIsExpandedforUPC(upc);
 			Report.StartStep("I add the following into the UPC Fields");
 			var upcInfo = new UpcInformation {
 				ContainerType = containerType,

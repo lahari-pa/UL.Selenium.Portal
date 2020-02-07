@@ -3412,6 +3412,73 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool EnsureArrowIsExpandedforUPC(string upc)
+		{
+			try
+			{
+				if (upc.ToLower().Contains("saved as"))
+				{
+					upc = Context.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
+				}
+				if (upc == null)
+				{
+					Report.Failure("Could not find UPC number in context saved as: " + upc);
+					return false;
+				}
+				Report.Info("Attempting to click expand arrow for: " + upc);
+				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				IWebElement upcmatch = container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.Text.Contains(upc))
+								?? container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.GetValue().Contains(upc))
+							   ?? container.FindElements(By.XPath(".//input[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.GetValue().Contains(upc));
+				if (upcmatch == null)
+				{
+					return false;
+				}
+				IWebElement arrowclass = upcmatch.FindElement(By.XPath("./ancestor::tr[position()=1]//a[@title='Expand']"), 2);
+				IWebElement arrowclassEl = arrowclass.FindElement(By.XPath(".//em"),2);
+				if(arrowclassEl.IsNullOrEmpty())
+				{
+					Report.Info("Failed to find arrow");
+					return false;
+				}
+				if(arrowclassEl.GetAttribute("class").Contains("right"))
+				{
+					Report.Info("The Arrow for the Upc was not expanded, now clicking the element to try and expand the UPC");
+					if(arrowclass.TryClick())
+					{
+						Report.Info("Successfully clicked expand arrow.");
+						Report.Screenshot();
+						Report.IsTrue(arrowclassEl.GetAttribute("class").Contains("down"), "Failed to expand the UPC sections", "Successfully expanded the UPC Section");
+					}
+					else
+					{
+						Report.Info("Failed to click the arrow");
+						return false;
+					}
+
+				}
+				else
+				{
+					if (arrowclassEl.GetAttribute("class").Contains("down"))
+					{
+						Report.Info("The UPC Arrow was already expanded");
+						return true;
+					}
+					Report.Info($"The Class was found to be: {arrowclassEl.GetAttribute("class")} and this was not one of the expected options");
+					return false;
+				}
+
+				
+				Report.Info("Successfully clicked expand arrow.");
+				Report.Screenshot();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		public bool CheckIfUPCDuplicateWarningAppears()
 		{
 			Report.Info("Beginning CheckIfUPCDuplicateWarningAppears");
