@@ -920,6 +920,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					return;
 				}
+				if(new NewProduct().FormError().Contains("UPC failing Transportation Rules."))
+				{
+					Report.Failure($"The Product created is failing the UPC Transporation Rules. An error was seen.");
+					Report.Screenshot();
+					return;
+				}
 				// delete upc that failed
 				stepsNewProduct.GivenIDeleteUPC(upc);
 				Report.Info("An error was showing! on click continue! Attempting a different UPC");
@@ -4502,7 +4508,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 			Report.StartStep("I select EN as the Language, MTR/CKLT as the format/subformat");
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
-			if (!thisPowerDesignerPlus.Wait_for_load(30))
+			if (!thisPowerDesignerPlus.Wait_for_load(120))
 			{
 				var thisStudioPowerDesignerPlusDesignMode =
 					new StudioPowerDesignerPlusDesignMode();
@@ -4511,7 +4517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(3);
 			}
 
-			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(60), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 			Report.Info("Setting power designer plus options...");
 			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",

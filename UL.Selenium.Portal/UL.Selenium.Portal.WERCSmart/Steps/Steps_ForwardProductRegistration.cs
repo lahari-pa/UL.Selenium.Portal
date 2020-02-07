@@ -1088,6 +1088,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new AddCaseUPCModal().WaitForAddCaseUPCPopup(), "The Add Case UPC modal did not appear", "The Add case upc modal appeared");
 		}
 
+		[StepDefinition(@"If there is the option to select a vendor for the product with ID: (.*), I select the first option")]
+		public void IfThereIsTheOptionToSelectVendorISelect(string id)
+		{
+			Report.Info("Checking to see if there is the option to select a Vendor");			
+			var frwdProdReg = new ForwardProductRegistration();
+			if (id.ToLower().Contains("saved as"))
+			{
+				var PI = (ProductInformation)Context.GetFromContext(id.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
+				if (PI == null)
+				{
+					throw new Exception("Failed to find product: " + id);
+				}
+
+				id = PI.Id;
+			}
+			Report.Info("Checking to see if there is the option to select a Vendor");
+			if(!frwdProdReg.GivenProductCheckVendorSelect(id))
+			{
+				Report.Info($"There was no option for selecting a vendor for the product with ID: {id}");
+				return;
+			}
+			Report.Info($"There the option for select vendor for ID: {id} was found!");
+			string firstOption = frwdProdReg.GivenProductFirstAvailableVendor(id);
+			Report.Info($"The first vendor option for ID: {id} was found as: {firstOption}");
+			Report.Info($"Selecting the option: {firstOption} for ID: {id}");
+			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option","Successfully selected the option");
+		}
+
 
 	}
 }

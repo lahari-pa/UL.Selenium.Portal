@@ -498,12 +498,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase86187) for");
 			var retailersTable = new Table("Retailer");
 			retailersTable.AddRow("CVS");
+			retailersTable.AddRow("Canadian Tire");
 			new Steps_Shared().GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs("TestCase86187", retailersTable);
 			Report.StartStep("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)");
 			new Steps_Shared().GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", "TestCase86187");
-			Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Completed");
-			new Steps_SHA().GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(
-				"TestCase86187", "Completed");
+			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted("TestCase86187", retailersTable);
+			//Report.StartStep("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Completed");
+			//new Steps_SHA().GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(
+			//	"TestCase86187", "Completed");
 		}
 
 		[StepDefinition(@"For CVS I create a product of type: Health & Beauty \(RUCC0392\), save it as: (.*) and leave it in New Status")]
@@ -571,8 +573,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_YesToProp();
-			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
-			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			//sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
+			//sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+
+
+
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
@@ -613,10 +623,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsIngredients.AddIngredients(tableIngredients);
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
-			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
-			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
 
-			
+			//sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
+			//sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+
 
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
@@ -906,8 +919,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			sharedSteps.GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath();
 			sharedSteps.GivenICallSharedStepEnterPesticideData_UnitedStatesWithoutEPANumber();
-			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
-			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			//sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
+			//sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+
+
 
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
@@ -988,8 +1008,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
-			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
-			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			//sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
+			//sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			//newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			//newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+
+			newProductSteps.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "TDG");
+			newProductSteps.SetTheOptionSubOptionTo("Shipping with limited quantity", "Select all modes of transport that you've classified the product for", "TDG");
+			newProductSteps.ClickContinue();
+			newProductSteps.SetTheSectionOptionTo("UN Number", "UN2035");
+			newProductSteps.ClickContinue();
+
+
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
