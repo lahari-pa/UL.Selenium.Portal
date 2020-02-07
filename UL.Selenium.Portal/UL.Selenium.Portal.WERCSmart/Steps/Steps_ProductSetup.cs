@@ -3023,6 +3023,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.GivenICallSharedStepRegulatoryInformation_CEPAOnlyShown_Continue_HappyPath();
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("Canadian Tire");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Canadian Tire");
 			sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as UPC86258", "Metal Container", "5");
 			sharedSteps.ThenICallSharedStep78884RegulatoryDocumentsToProvide_CanadaOnly_RequestAuthoringUploadLabel_Continue();
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
@@ -3052,8 +3054,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
 			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
-				"Completed");
+			
+			shaSteps.InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
+			//shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Completed");
 		}
 
 		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86114 and save as: (.*)")]
@@ -3137,6 +3140,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("Canadian Tire");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Canadian Tire");
 			sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as UPC86260", "Metal Container", "5");
 			sharedSteps.ThenICallSharedStep78868_RegulatoryDocumentsToProvide_USAndCanada_RequestAuthoringForBoth();
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
@@ -3166,8 +3171,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
 			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
-				"Completed");
+			shaSteps.InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
+			//shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Completed");
 		}
 
 		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86455 and save as: (.*)")]
