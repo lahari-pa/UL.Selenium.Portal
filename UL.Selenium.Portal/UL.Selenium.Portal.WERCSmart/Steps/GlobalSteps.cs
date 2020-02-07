@@ -1446,7 +1446,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					string currentTitle = SeleniumBrowser.WebBrowser.Title;
 					if (currentTitle == title)
 					{
-						Report.Success("Tab with title was loaded");
+						Report.Success("Tab with title was switched to");
 						Report.Screenshot();
 						return;
 					}
