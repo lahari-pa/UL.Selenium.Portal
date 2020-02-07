@@ -571,8 +571,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_YesToProp();
-			sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
-			sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			//sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
+			//sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
+			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+
+
+
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
@@ -1001,9 +1009,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//sharedSteps.GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity();
 			//sharedSteps.GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData();
+
 			newProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
-			newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
-			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			//newProductSteps.GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect("Not Regulated");
+			//newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+
+			newProductSteps.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "TDG");
+			newProductSteps.SetTheOptionSubOptionTo("Shipping with limited quantity", "Select all modes of transport that you've classified the product for", "TDG");
+			newProductSteps.ClickContinue();
+			newProductSteps.SetTheSectionOptionTo("UN Number", "UN2035");
+			newProductSteps.ClickContinue();
+
+
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
