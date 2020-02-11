@@ -4144,6 +4144,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			return this.TransLevelInput(option, transLevel).TryClick();
 		}
+
+		public List<string> GetDataAcceptancePageAlerts()
+		{
+			IList<IWebElement> el = this.containerElement.FindElements(By.XPath(".//div[@class='alert alert-danger' and contains(@data-bind,'visible')]"), 2);
+			if (el.Count > 0)
+			{
+				return this.containerElement.FindElements(By.XPath(".//div[@class='alert alert-danger' and contains(@data-bind,'visible')]"), 2).Select(x => x.GetValue()).ToList();
+			}
+			return new List<string>();
+		}
+
+		public bool DataAcceptanceShowsAlertX(string expectedAlert)
+		{
+			List<string> foundAlerts = this.GetDataAcceptancePageAlerts();
+			return foundAlerts.Contains(expectedAlert);
+		}
+
+
 	}
 
 	public class ProductInformation

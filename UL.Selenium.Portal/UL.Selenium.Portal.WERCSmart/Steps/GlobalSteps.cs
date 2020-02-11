@@ -1926,5 +1926,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
 		}
 
+		[StepDefinition(@"I Wait for a modal popup to appear")]
+		public void IWaitForModalPopupToBeVisible(int timeout=30)
+		{
+			Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(timeout), "The Modal did not appear", "The modal appeared");
+		}
+		[StepDefinition(@"I Wait for a modal popup to disappear")]
+		public void IWaitForModalPopupToBeInVisible(int timeout = 30)
+		{
+			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing","The modal was gone");
+		}
+
+
 	}
 }

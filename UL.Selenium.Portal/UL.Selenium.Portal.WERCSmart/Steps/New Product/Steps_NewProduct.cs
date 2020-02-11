@@ -2844,6 +2844,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(NewProductObject.CheckForErrorInTheFollowingFieldsInTheLithiumBatteryTransportationSection(table), "Failed to find an error in at least one of the fields", "Successfully found errors in all of the fields");
 
 		}
+
+		[StepDefinition(@"Data Accpetance Screen shows error with message: (.*)")]
+		public void DataAcceptanceScreenShowsError(string expectedError)
+		{
+			Report.IsTrue(new NewProduct().DataAcceptanceShowsAlertX(expectedError), "The expected alert was not found", "The expected alert was found");
+		}
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

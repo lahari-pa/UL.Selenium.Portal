@@ -1638,14 +1638,25 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Then I call Shared Step 51349 - SHA Manager > Assigned Product - Add Recert reason 20 for product saved as: TestCase65947
 	Given I navigate to the landing page
 	And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	And I filter for the product saved as: TestCase845073
+	And I filter for the product saved as: TestCase65947
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Required
 	Given In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
-	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: IMDG
+	#First remove check form the full reg box
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I click continue
+	Then I Wait for a modal popup to appear
+	Then I confirm the pop up shows the heading: UPC Transportation Warning
+	Given in the modal dialog I click the "Ok" button
+	Then I Wait for a modal popup to disappear
+	Given In the New Product page I click tab: Review and Submit
+	And I click the page heading: Data Acceptance
+	Then Data Accpetance Screen shows error with message:
+
+
 	#clicking continue should cause popup to go to the upc screen?
 	#Should get popup, then try to submit without going to the upc screen. That should fail, so then need to got to the upc screen then go back and try submit where it should now work. 
 
