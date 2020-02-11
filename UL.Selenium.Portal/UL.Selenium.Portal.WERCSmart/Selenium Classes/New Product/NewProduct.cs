@@ -2827,6 +2827,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public bool UnsetOptionInSectionSubSection(string section, string subSection, string value)
+		{
+			string xPath = $@"//div[preceding-sibling::div[./label[contains(text(),""{section}"")]]]//div[@class='form-subgroup' and preceding-sibling::div[.//span[contains(text(),'{subSection}')]]]//input[./following-sibling::span[contains(text(),'{value}')]]";
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
+			if (el == null)
+			{
+				Report.Info($"Unable to find the input under section {section} and subsection {subSection} option {value}");
+				return false;
+			}
+			if (el.GetAttribute("type") == "checkbox")
+			{
+				if(el.Checked())
+				{
+					el.TryClick();
+					return !el.Checked();
+				}
+				else
+				{
+					Report.Info("Cannot uncheck the input as it was not checked to start");
+					return false;
+				}
+			}
+			Report.Info("Method only applicable to checkbox type input");
+			return false;
+		}
+
 		public bool CheckStandaloneCheckbox(string description)
 		{
 			IWebElement el = this.StandaloneCheckbox(description);
@@ -4158,7 +4184,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool DataAcceptanceShowsAlertX(string expectedAlert)
 		{
 			List<string> foundAlerts = this.GetDataAcceptancePageAlerts();
-			return foundAlerts.Contains(expectedAlert);
+			if(foundAlerts.IsNullOrEmpty())
+			{
+				Report.Info("No alert messages were found");
+				return false;
+			}
+			foreach(var msg in foundAlerts)
+			{
+				Report.Info($"The Error message found was: {msg.Trim()}");
+				if (msg.Trim().Contains(expectedAlert))
+				{
+					Report.Info("The Error message found was the expected message");
+					return true;
+				}
+			}
+			Report.Info("Checked all the alerts, the expected message was not found");
+			return false;
 		}
 
 

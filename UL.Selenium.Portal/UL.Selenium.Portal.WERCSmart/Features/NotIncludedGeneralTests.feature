@@ -1645,16 +1645,23 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	#First remove check form the full reg box
-	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I unselect option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
-	And I click continue
+	And I click Save in The Product Page
 	Then I Wait for a modal popup to appear
 	Then I confirm the pop up shows the heading: UPC Transportation Warning
 	Given in the modal dialog I click the "Ok" button
 	Then I Wait for a modal popup to disappear
 	Given In the New Product page I click tab: Review and Submit
 	And I click the page heading: Data Acceptance
-	Then Data Accpetance Screen shows error with message:
+	#may need to update the below if inludes line breaks etc in the text
+	Then Data Accpetance Screen shows error with message: Please fix all the errors in product data before you can continue with submission.
+	And I click continue
+	And I should see the Universal Product Code (UPC) Page
+	And I click continue
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 
 
 	#clicking continue should cause popup to go to the upc screen?
