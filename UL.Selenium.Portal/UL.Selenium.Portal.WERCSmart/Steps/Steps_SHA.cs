@@ -3485,6 +3485,75 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Completed");
 		}
 
+		[StepDefinition(@"In the Supplier Manager Popup I click on the first supplier returned")]
+		public void InTheSupplierManagerPopupIClickOnFirstSupplier()
+		{
+			Report.Info("Attempting to click on the first supplier returned in the supplier manager popup");
+			Report.IsTrue(new StudioSupplierManager().ClickFirstSupplier(), "Failed to click the first supplier", "Successfully clicked the first supplier");
+			Report.Info("Waiting until the Category headers appear");
+			Report.IsTrue(new StudioSupplierManager().CheckCategoriesPresent(), "The category headers were not present", "The category headers were present");
+
+
+		}
+
+		
+
+		[StepDefinition(@"In The Supplier Manager popup I click on the category: (.*)")]
+		public void InTheSupplierManagerPopupIClickCategory(string category)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep($"Starting to attempt to click the catagory: {category}");
+			Report.IsTrue(new StudioSupplierManager().ClickCategory(category),"Failed to click the category","Successfully clicked the category");
+			Report.StartStep($"Checking that the catagory: {category} is active");
+			Report.IsTrue(new StudioSupplierManager().CategoryIsActive(category), "The Category was not active", "The Category was active");
+			
+		}
+
+		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
+		public void InTheSupplierManagerPopupICheckThatColumnXContainsAllValues(string column, Table table)
+		{
+			
+			Report.Info("Converting the table to a List");
+			List<string> expectedValues = new List<string>();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				expectedValues.Add(thisRow["Expected Value"]);
+			}
+			Report.IsTrue(new StudioSupplierManager().DataConsentTableIsPresent(), "The Data Consent Tier table was not showing", "The Data Consent Tier table was showing");
+			Report.IsTrue(new StudioSupplierManager().ColumnContains(column,expectedValues),"The column: "+column+" did not contain all the expected values", "The column: " + column + " did contain all the expected values");
+			
+		}
+
+		[StepDefinition(@"In the supplier manager popup I check that Data Tier Consent Table contains the following columns headings:")]
+		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsHeaders(Table table)
+		{
+			Report.Info("Converting the table to a List");
+			List<string> expectedValues = new List<string>();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				expectedValues.Add(thisRow["Expected Headers"]);
+			}
+			Report.IsTrue(new StudioSupplierManager().DataConsentTiersTableContainsHeaders(expectedValues),"The Headers were not as expected", "The headers were as expected");
+
+		}
+
+		[StepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the email column contains only valid email addresses")]
+		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsOnlyValidEmailAddress()
+		{
+			Report.IsTrue(new StudioSupplierManager().EmailColumnContainsEmailAddresses(), "The columns contained non valid email addresses", "The column contained only valid email addresses");
+						
+		}
+
+		[StepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the date column contains dates that are in the format mm-dd-yyyy")]
+		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsOnlyDatesInFormatmmddyyyy()
+		{
+			Report.IsTrue(new StudioSupplierManager().DateColumnContainsValidmmddyyyy(), "The Date column contained at least one non valid date", "The Date column contained only valid dates");
+
+		}
+
+
+
+
 
 
 

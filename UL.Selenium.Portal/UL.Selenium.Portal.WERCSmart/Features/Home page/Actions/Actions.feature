@@ -255,3 +255,4 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 		| Water           | Intentionally Added        | WaterFunctionalPurposesList           |
 		| Sodium chloride | Non-functional Byproduct   | Sodium chlorideFunctionalPurposesList |
 		| Butane          | Non-functional Contaminant | ButaneFunctionalPurposesList          |
+	
