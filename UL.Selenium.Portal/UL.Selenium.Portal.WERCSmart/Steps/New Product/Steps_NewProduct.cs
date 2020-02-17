@@ -1139,6 +1139,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Successfully set the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
 		}
 
+		[StepDefinition(@"In the Transportation Details 1 screen, I unselect all transportation options for (DOT|IATA|IMDG|TDG)")]
+		public void InTheTransportationDetails1ScreenIUnselectAllTransportationOptionsFor(string option)
+		{
+			Report.IsTrue(new NewProduct().UnselectTransportationOptions(option), "Failed to unselect Transportation options for " + option + ".",
+				"Successfully unselection Transportation options for " + option + ".");
+		}
+
 		[StepDefinition(@"I (see|only see|do not see) the following questions")]
 		[StepDefinition(@"I (see|only see|do not see) the following sections")]
 		public void CheckDisplayedSections(string condition, Table sections)

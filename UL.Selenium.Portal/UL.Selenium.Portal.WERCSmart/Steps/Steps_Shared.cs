@@ -1759,8 +1759,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(2);
 			Report.StartStep("I select the first option in section: Packing Group (select)");
 			MyNewProduct.SelectFirstOptionInSection("Packing Group (select)");
+			Report.StartStep("If Product boiling point question appears, I select the first radio button");
+			var expectedSections = new List<string>();
+			expectedSections.Add("Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.");
+			var expectedNormalised = expectedSections.Select(x => x.Replace(" ", "")).ToList();
+			var ActualSections = new NewProduct().GetDisplayedSections().Select(x => x).ToList();
+			var actualNormalised = ActualSections.Select(x => x.Replace(" ", "")).ToList();
+			if (expectedNormalised.All(actualNormalised.Contains))
+			{
+				MyNewProduct.SelectFirstOptionInSection("Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.");
+			}
 			Report.StartStep(
-				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+							"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue(
 				"U. S. Department of Transportation (DOT) Classification");
 		}
