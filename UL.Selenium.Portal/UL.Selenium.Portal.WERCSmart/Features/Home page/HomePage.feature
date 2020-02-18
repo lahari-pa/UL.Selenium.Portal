@@ -311,7 +311,7 @@ Scenario: [58579] Live Help - Chat Feature
 	Then In the Live Help dialog I should see an x in the upper right hand corner
 	Then In the Live Help dialog I should see the text 'Inbox' at the top of the chat window
 	Then In the Live Help dialog I should see the following text in the message area: Hello there! Need help? Reach out to us right here, and we'll get back to you as soon as we can!
-	Then In the Live Help dialog I should see the following text in the lower part of the chat window: Freshchat
+	#Then In the Live Help dialog I should see the following text in the lower part of the chat window: Freshchat
 	Then In the Live Help dialog I should see the following placeholder text in the text entry field: Reply here...
 	Then In the Live Help dialog I should see the paperclip icon in the lower right hand corner
 	Then In the Live Help dialog I should see the smiley icon in the lower right hand corner

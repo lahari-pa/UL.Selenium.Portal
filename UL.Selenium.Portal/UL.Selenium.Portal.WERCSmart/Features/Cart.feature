@@ -49,6 +49,7 @@ Scenario: [63323] Remove single product from cart
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given In the Purchase Summary screen I click Remove for product saved as TestCase63323
+	Given If a modal dialog opens I close it
 	Given in the modal dialog I click the "CANCEL" button
 	Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Given In the Purchase Summary screen I click Remove for product saved as TestCase63323
