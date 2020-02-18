@@ -2853,6 +2853,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+			}
+			return pass;
+		}
+
 		public bool CheckStandaloneCheckbox(string description)
 		{
 			IWebElement el = this.StandaloneCheckbox(description);
@@ -4042,11 +4046,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CheckTransportationCatagoryXIsChecked(string catagory)
 		{
 			Report.Info($"Checking that the Catagory {catagory} is checked");
-			IWebElement optionInput = this.containerElement.FindElement(By.XPath($".//span[text()='{catagory}']//preceding-sibling::input"), 2);			
+			IWebElement optionInput = this.containerElement.FindElement(By.XPath($".//span[text()='{catagory}']//preceding-sibling::input"), 2);
 			return optionInput.Checked();
 		}
 
-		public bool CheckTransportationOptionXIsCheckedForCatagoryY(string catagory,string option)
+		public bool CheckTransportationOptionXIsCheckedForCatagoryY(string catagory, string option)
 		{
 			Report.Info($"Checking that the option {option} is checked");
 			IWebElement optionInput = this.containerElement.FindElement(By.XPath($".//tr//div//div[.//span[text()='{catagory}']]//div[./span[text()='{option}']//preceding-sibling::input]//input"), 2);
