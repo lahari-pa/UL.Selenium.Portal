@@ -2853,9 +2853,38 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public bool UnselectTransportationOptions(string option)
+		{
+			bool pass = true;
+			var transportationOptionCheckboxes = this.containerElement.FindElements(By.XPath(@"//span[contains(text(), '" + option + "')]/../../following-sibling::div//input"), 2).ToList();
+			if (transportationOptionCheckboxes == null)
+			{
+				Report.Info("Failed to find parent for checkboxes!");
+				pass = false;
+				return pass;
+			}
+			foreach (IWebElement elem in transportationOptionCheckboxes)
+			{
+				if (elem != null && elem.Checked())
+				{
+					elem.TryClick();
+				}
+				else if (elem == null)
+				{
+					Report.Info("Failed to find appripropriate checkbox!");
+					pass = false;
+					return pass;
+				}
+				else
+				{
+					//do nothing.
+				}
 			}
 			return pass;
 		}
+
+
+
 
 		public bool CheckStandaloneCheckbox(string description)
 		{

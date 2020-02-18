@@ -307,6 +307,56 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 # Click Save
 # Ensure that you get an error that  tells you to check your transportation information
 
+@tfs_design
+Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: RandomUPC
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+	Given I save the product information as: TestCase
+	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I should see the Transportation Details 1 Page
+	Given I set the Product is Regulated for Transport field to: Yes
+	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+	Given I click continue
+	# Enter UN2831. Ensure that Hazard class is 6.1 and Packing group is III.
+	Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer  |
+		| Walgreens |
+	Given I click Done on Select Retailers window
+	Given I click continue
+	Given I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPCRandomUPC, container type: Plastic Container and size: 169 click continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
+		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	Given I navigate to the home page
+	Given I search for the product saved as: TestCase
+	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+	Given I enter the text: saved as TestCase in the 'Search by WPS ID or Product Name' field
+	Given In the Foward Product Registration Screen I should see product: saved as TestCase
+	Given In the Foward Product Registration Screen I Select the product: saved as TestCase
+	Given I click continue on the Forward Product Registration page
+	Given In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Walgreens under Other Retailers and save it as: Retailer
+	Given I click continue on the Forward Product Registration page
+# Select your product on the left hand side of the screen in the Select UPCs tab
+# Click the Add UPC button
+# Enter a random UPC
+# Enter a Type
+# Enter 170 in the Size (ounces) field
+# Click Save
+# Ensure that you get a UPC Transportation error
+
 
 Scenario: [123436] UPC Transportation - Recertification - Transportation Details 1 UPC popup
 #may be worth either cutting some of the steps or making a shared step that creates the prouduct (shorten the specflow)
