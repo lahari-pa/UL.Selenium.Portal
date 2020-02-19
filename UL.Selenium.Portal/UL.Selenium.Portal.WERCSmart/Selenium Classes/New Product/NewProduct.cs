@@ -3341,7 +3341,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string FormError()
 		{
-			return this.containerElement.FindElement(By.XPath(".//ul[@class='form-error']/li"), 2)?.Text;
+			IWebElement formError = this.containerElement.FindElement(By.XPath(".//ul[@class='form-error']/li"), 2);
+			var formErrorText = formError?.Text;
+			return formErrorText;
 		}
 
 		public bool SelectPackageType(string packageType)
@@ -3371,7 +3373,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool PurchaseSummaryClickRemove(string product)
 		{
-			IWebElement remove = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"/html/body/div[4]/div[3]/div[2]/div/div/div/div/div[2]/div/div/table/tbody/tr[1]/td/p/a"), 2);
+			IWebElement remove = this.containerElement.WaitUntilElementVisible(By.XPath(@"//table[@class='table table-hover']//tr//b[text()[contains(.,'{" + product + "}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
 			return remove.TryClick();
 		}
 

@@ -23,12 +23,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyThreeLinesIcon()
 		{
-			return this.containerElement.FindElement(By.XPath(".//img[@class='animated zoomIn faster']"), 5) != null;
+			IWebElement threeLinesIcon = this.containerElement.FindElement(By.XPath(".//img[@class='animated zoomIn faster']"), 5);
+			return threeLinesIcon != null;
 		}
 
 		public bool VerifyX()
 		{
-			return this.containerElement.FindElement(By.XPath("./../../preceding-sibling::div[@class='d_hotline minimize ']//i"), 2) != null;
+			IWebElement xIcon = this.containerElement.FindElement(By.XPath("./../../preceding-sibling::div[contains(@class,'d_hotline minimize' )]//i"), 5);
+			return xIcon != null;
 		}
 
 		public bool VerifyInboxText()
