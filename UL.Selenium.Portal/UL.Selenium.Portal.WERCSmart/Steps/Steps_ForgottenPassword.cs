@@ -283,7 +283,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIConfirmThatIAmOnTheSecurityQuestionsPage()
 		{
 
-			var selForgotpasswordconfirm = new ForgottenPassword();
+			var selForgotpasswordconfirm = new ForgottenPasswordQuestions();
 
 			Report.IsTrue(selForgotpasswordconfirm.ConfirmThatUserIsOnSecurityQuestionsPage(), "Failed to reach the Security Questions page", "Successfully reached the Security Questions Page");
 

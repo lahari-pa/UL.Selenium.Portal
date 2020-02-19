@@ -120,24 +120,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-
-		public bool ConfirmThatUserIsOnSecurityQuestionsPage()
-		{
-
-			Report.Info("Checking if the user reached the Security Questions page");
-			IWebElement securityQuesitonsPageTitle = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[text()='Forgot Password']"));
-
-			if (securityQuesitonsPageTitle != null)
-			{
-
-				return true;
-
-			}
-
-			return false;
-
-		}
-
 	}
 
 	class ForgottenPasswordQuestions : SeleniumBaseObject
@@ -366,6 +348,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Attempting to Click Login Button");
 			return this._btnLogin.TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+
+		public bool ConfirmThatUserIsOnSecurityQuestionsPage()
+		{
+
+			Report.Info("Checking if the user reached the Security Questions page");
+
+			IWebElement securityQuesitonsPageTitle = this.containerElement.WaitUntilElementVisible(By.XPath(".//h3[text()='Forgot Password']"), 2);
+
+			if (securityQuesitonsPageTitle != null)
+			{
+
+				return true;
+
+			}
+
+			return false;
+
 		}
 
 
