@@ -1195,7 +1195,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			foreach (IWebElement row in rows)
 			{
 				string upcNumber = row.Text.Split(' ')[0];
-				if (upcNumber == upc)
+				if (upcNumber.Contains(upc))
 				{
 					upcRow = row;
 				}
