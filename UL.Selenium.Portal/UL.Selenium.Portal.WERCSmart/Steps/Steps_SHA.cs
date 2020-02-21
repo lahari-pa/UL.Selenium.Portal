@@ -345,7 +345,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			bool found = false;
 
-			while (counter < 10 && !found)
+			while (counter < 20 && !found)
 			{
 				var thisStudioManager = new StudioSHAManager();
 				thisStudioManager.Wait_for_load();
@@ -3551,6 +3551,88 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+
+		[StepDefinition(@"In the SHA manager I search for the Product saved as: (.*) and if its Status is Accepted I set the retailers: to Completed and check the Products Grid")]
+		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs,Table retailerTable)
+		{
+			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
+			string ID = ProductDetails.Id;
+			string status = "Accepted";
+			Report.Info("Searching for id: " + ID + " and status: " + status);
+			
+			int counter = 0;
+
+			bool found = false;
+
+			while (counter < 3 && !found)
+			{
+				var thisStudioManager = new StudioSHAManager();
+				thisStudioManager.Wait_for_load();
+				thisStudioManager.ClickBottomMenuOption("Search");
+
+				var myStepsSha = new Steps_SHA();
+
+				var table = new Table(new string[] {
+					"SearchTerm",
+					"SearchValue"
+				});
+				table.AddRow(new string[] {
+					"ProductID",
+					ID
+				});
+				table.AddRow(new string[] {
+					"Status",
+					"All"
+				});
+				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+
+				Delay.Seconds(2);
+				var mySHAManager = new StudioSHAManager();
+				mySHAManager.WaitForProductList(10);
+
+				Product topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+				if (topProductnew != null)
+				{
+					if (topProductnew.ID == ID)
+					{
+						if (status.ToLower() == "accepted or completed")
+						{
+							if (topProductnew.Status.ToLower() == "accepted" |
+								topProductnew.Status.ToLower() == "completed")
+							{
+								found = true;
+							}
+						}
+						else
+						{
+							if (status.ToLower() == "submitted")
+							{
+								if (topProductnew.Status.ToLower() == "submitted")
+								{
+									found = true;
+								}
+							}
+
+							if (topProductnew.Status.ToLower() == status.ToLower())
+							{
+								found = true;
+							}
+						}
+					}
+				}
+				counter++;
+			}
+			if(found==true)
+			{
+				new Steps_Shared().GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(productSavedAs, retailerTable);
+				this.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(productSavedAs, "Completed");
+			}
+			else
+			{
+				this.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(productSavedAs, "Completed");
+			}
+
+		}
 
 
 

@@ -1306,9 +1306,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				urls = SeleniumBrowser.WebBrowser.WindowHandles;
 				if (urls.Count > 1)
 				{
+					Report.Info("The number of urls was > 1");
 					break;
 				}
-
+				Report.Info("Waiting 1 second");
 				Delay.Seconds(1);
 			}
 
@@ -1318,7 +1319,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-
+			Report.Info("Looking for the Apply rules window"); 
 			foreach (string handle in urls)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Apply Rules"))
@@ -1328,19 +1329,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Screenshot();
 					break;
 				}
+				Report.Info("Checking next handle...");
 			}
+
+			Report.Info("Finding the iframe...");
 
 			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"), 2);
 			if (frame != null)
 			{
+				Report.Info("The iframe was not null.");
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				Report.Info("going to 'base wait for load'");
 				if (base.Wait_for_load(30))
 				{
+					Report.Info("base loaded");
 					return true;
 				}
 
 			}
+			Report.Info("The iframe was null");
 			return false;
 		}
 
