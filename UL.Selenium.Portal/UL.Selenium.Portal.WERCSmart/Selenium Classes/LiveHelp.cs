@@ -29,7 +29,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyX()
 		{
-			IWebElement xIcon = this.containerElement.FindElement(By.XPath("./../../preceding-sibling::div[contains(@class,'d_hotline minimize' )]//i"), 5);
+			IWebElement xIcon = this.containerElement.FindElement(By.XPath("./../../preceding-sibling::div[contains(@class,'d_hotline minimize')]//i"), 5);
 			return xIcon != null;
 		}
 
@@ -41,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyMessageText(string message)
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@class='h-message-text ']"), 2);
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'h-message-text')]"), 2);
 			return elem != null && elem.Text == message;
 		}
 
@@ -72,7 +72,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCloseX()
 		{
-			return this.containerElement.FindElement(By.XPath("./../../preceding-sibling::div[@class='d_hotline minimize ']//i"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath("./../../preceding-sibling::div[contains(@class,'d_hotline minimize')]//i"), 2).TryClick();
 		}
 
 

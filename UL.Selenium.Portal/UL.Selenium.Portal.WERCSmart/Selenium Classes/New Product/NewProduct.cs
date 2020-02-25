@@ -396,6 +396,113 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{ Tab.ReviewAndSubmit , "Review and Submit" }
 		};
 		#endregion
+		//Philip
+		public bool CheckRetailerLogo(Table table)
+		{
+
+			foreach (TableRow row in table.Rows)
+			{
+
+				string companyName = row["CompanyInitial"];
+				IWebElement src = this.containerElement.FindElement(By.XPath(@"/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + companyName + ".png"), 2);
+
+				if (src == null)
+				{
+					return false;
+				}
+
+			}
+
+			return true;
+
+		}
+
+		public bool CheckRetailerLogoCheckMark(Table table)
+		{
+
+			foreach (TableRow row in table.Rows)
+			{
+				string companyName = row["CompanyInitial"];
+
+				IWebElement src = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + companyName + ".png']/../preceding-sibling::div//span//i[@class='fa fa-check fa-3x']"), 2);
+
+				if (src == null)
+				{
+					return false;
+				}
+
+			}
+
+			foreach (TableRow row in table.Rows)
+			{
+
+				string noCheckMark = row["NoCheckMark"];
+
+				IWebElement src1 = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + noCheckMark + ".png']/../preceding-sibling::div//span//i[@class='fa fa-check fa-3x']"), 2);
+
+				if (src1 != null)
+				{
+					return false;
+				}
+
+			}
+
+			return true;
+
+		}
+
+		public bool CheckRetailerScopeButton(Table table)
+		{
+
+			foreach (TableRow row in table.Rows)
+			{
+				string companyName = row["CompanyInitial"];
+				IWebElement src = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + companyName + ".png']/../following-sibling::div//button"), 2);
+
+				if (src.Text != "Scope")
+				{
+					return false;
+				}
+
+			}
+
+			return true;
+
+		}
+
+		public bool ClickScopeButton(string company)
+		{
+
+			IWebElement costcoScopeButton = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/CO.png']/../following-sibling::div//button"), 2);
+			return costcoScopeButton.TryClick();
+
+		}
+
+		public bool CheckRetailerModalPopup()
+		{
+
+			IWebElement src = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']"), 2);
+			if (src == null)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool CheckRetailerModalText(string text)
+		{
+			IWebElement src = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//p"), 2);
+
+			if (src.Text == text)
+			{
+				return true;
+			}
+
+			return false;
+
+		}
+
 		public string BatteyWarning()
 		{
 			return this.containerElement.FindElement(By.XPath(".//div[@class='WARNING']"), 2).Text;

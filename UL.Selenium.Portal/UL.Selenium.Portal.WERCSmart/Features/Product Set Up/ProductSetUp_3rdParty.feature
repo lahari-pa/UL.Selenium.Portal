@@ -13,10 +13,169 @@
 @Studio
 @ProductSetUp
 @run_ProductSetUp3rdParty
+@MyIngredients
+
 Feature: ProductSetUp_3rdParty
+
+Scenario: [122261] Create a 3rd party product - with Tier 2 approval (include generic component)- thru to Completed (includes adding WPSxxxxxx component)
+	Given I generate a random UPC number and save as: UPC79428
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
+	Then I save the product information as: TestCase79428
+	Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing79428Flav
+		| CASNumber  | ComponentName | Percentage |
+		| RR-38669-6 | FLAVORS       | 35         |
+	And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing79428Frag
+		| CASNumber | ComponentName                                                                  | Percentage |
+		| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 35         |
+	And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
+		| CASNumber | ComponentName | Percentage |
+		| 50-00-0   | Formaldehyde  | 30         |
+	Then in the Ingredients page I click Continue 
+	Then The Formulation 3rd Party Step is shown
+	Then I call Shared Step 79491 \(Formulation > 3rd Party - Accept formulation - Decline Tier 4.1 - Continue\)
+	When I click continue
+	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+	And I should see the Additional Documents to Provide Page
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	Then in the Additional documents page I click Continue
+	When I click continue
+	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	And I should see the Sustainability Page
+	#Check Text
+	When I click continue
+
+@ScenarioId:6627
+Scenario: [122123] Create a 3rd party product - with Tier 2 approval (include generic component)- thru to Completed (includes adding WPSxxxxxx component)
+	Given I generate a random UPC number and save as: UPC79428
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
+	Then I save the product information as: TestCase79428
+	Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing79428Flav
+		| CASNumber  | ComponentName | Percentage |
+		| RR-38669-6 | FLAVORS       | 35         |
+	And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing79428Frag
+		| CASNumber | ComponentName                                                                  | Percentage |
+		| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 35         |
+	And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
+		| CASNumber | ComponentName | Percentage |
+		| 50-00-0   | Formaldehyde  | 30         |
+	Then in the Ingredients page I click Continue 
+	And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
+	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+	And I should see the Additional Documents to Provide Page
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	Then in the Additional documents page I click Continue
+	Then in the Formulation Names page I click Continue
+	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	Then in the Sustainability Information page I click Continue
+	Then I check for the logos of the following companies
+	| CompanyInitial |
+	| CT |
+	| CO |
+	| CV |
+	| DT |
+	| FD |
+	| TG |
+	| WG |
+	| WM |
+	Then I check for a checkmark image above the following companies
+	| CompanyInitial | NoCheckMark |
+	| CT             | TG          |
+	| CO             | x           |
+	| CV             | x           |
+	| DT             | x           |
+	| FD             | x           |
+	| WG             | x           |
+	| WM             | x           |
+	Then I confirm there is a yellow exclamation point
+	Then I check for a 'Scope' button below the following companies
+	| CompanyInitial |
+	| CT |
+	| CO |
+	| CV |
+	| DT |
+	| FD |
+	| TG |
+	| WG |
+	| WM |
+	Then I hover over yellow triangle and look for text
+
+	Then I check if modal popup shows for company: CT
+	Then I click the scope button and check for this text: abc
+
+	Then I check if modal popup shows for company: CO
+	Then I click the scope button and check for this text: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent.
+
+	Then I check if modal popup shows for company: CV
+	Then I click the scope button and check for this text: CVS requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2, Tier 3 and Tier 4.1 permissions: Artists/Hobby, Automotive Care, Cleaning Supplies, Health & Beauty, Home Improvement, Lawn and Garden, Miscellaneous, Nutritional Supplements, Over-the-Counter (OTC), Pet Care, Photography, Sporting Goods, Stationery and Pharmacy
+
+	Then I check if modal popup shows for company: DT
+	Then I click the scope button and check for this text: Dollar Tree requires suppliers of formulated products to grant Tier 2.1 and Tier 2.2 permissions.
+
+	Then I check if modal popup shows for company: FD
+	Then I click the scope button and check for this text: abc
+
+	Then I check if modal popup shows for company: TG
+	Then I click the scope button and check for this text: abc
+
+	Then I check if modal popup shows for company: WG
+	Then I click the scope button and check for this text: abc
+
+	Then I check if modal popup shows for company: WM
+	Then I click the scope button and check for this text: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys.
+	#And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	#And I call Shared Step 73956 version 2 (Go to Summary and verify data) with product type: Raw material
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given If purchase details are showing click confirm order
+	##************************** Switching to SHA Manager ********************
+	#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase79428)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase79428 and its status is: Submitted
+	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase79428)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase79428)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase79428 and its status is: Assigned
+	##Scenario: Test
+	##Given I save to context name: TestCase79428 and value: 1523039
+	##Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase79428)
+	#Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase79428)
+	#And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
+	#And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
+	#And In Power Designer I double click on category: Water Soluble?
+	#Then In Power Designer the phrase selector screen should open
+	#And In the phrase selector screen I select phrases:
+	#	| Text |
+	#	| Y    |
+	#And In the phrase selector screen I click button: Save
+	#And I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party product)
+	#	| Component CAS          | Component ID | Chemical Name               |
+	#	| saved as TestCase79428 | MIXTURE      | AAA WERCS Test Raw Material |
+	#Given I click on home to navigate back to editing specific product saved as TestCase79428
+	#And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase79428
+	#Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase79428)
+	#Given I call Shared Step 59066 (Go to SHA Manager)
+	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase79428)
+	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase79428 and its status is: Completed
 
 @ScenarioId:1418
 Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include generic component)- thru to Completed (includes adding WPSxxxxxx component)
+Then I check for the logos of the following companies
+	| CompanyInitial |
+	| CT |
+	| CO |
+	| CV |
+	| DT |
+	| FD |
+	| TG |
+	| WG |
+	| WM |
 	Given I generate a random UPC number and save as: UPC79428
 	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))

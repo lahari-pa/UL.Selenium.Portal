@@ -27,6 +27,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private static NewProduct NewProduct => new NewProduct();
 
+		//Philip
+		[StepDefinition(@"I check for the logos of the following companies")]
+		public void ThenIConfirmTheFollowingCompanyLogos(Table table)
+		{
+
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.CheckRetailerLogo(table);
+
+		}
+
+		[StepDefinition(@"I check for a checkmark image above the following companies")]
+		public void ThenICheckForACheckmarkImageAboveTheFollowingCompanies(Table table)
+		{
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.CheckRetailerLogoCheckMark(table);
+		}
+
+		[Then(@"I confirm there is a yellow exclamation point")]
+		public void ThenIConfirmThereIsAYellowExclamationPoint()
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+		[StepDefinition(@"I check for a 'Scope' button below the following companies")]
+		public void ThenICheckForTheScopeButton(Table table)
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+
+		[StepDefinition(@"I check if modal popup shows for company: (.*)")]
+		public void ThenICheckIfModalPopupShows(string company)
+		{
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.ClickScopeButton(company);
+			Report.IsTrue(newProductObject.CheckRetailerModalPopup(), "It Failed", "It succeeded");
+		}
+
+		[StepDefinition(@"I click the scope button and check for this text: (*.)")]
+		public void ThenIClickTheScopeButtonForCOAndCheckForThisText(string text)
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.CheckRetailerModalPopup(), "It Failed", "It succeeded");
+			newProductObject.CheckRetailerModalText(text);
+		}
+
 		#region  General New Product steps
 
 		// Definitions, for consistency
