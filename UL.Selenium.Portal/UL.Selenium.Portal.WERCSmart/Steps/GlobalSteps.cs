@@ -528,15 +528,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Delay.Seconds(1);
 					allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(allWindows[0]);
-					Delay.Seconds(1);
-
-					if (allWindows.Count == 1)
+					Delay.Seconds(4);
+					SeleniumBrowser.Navigate(SeleniumBrowser.BaseTestUrl);
+					Delay.Seconds(4);
+					allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+					if (SeleniumBrowser.Alert.IsAlertPresent())
 					{
-						Report.Success("Successfully navigated to the landing page!");
+						Report.Info("Alert is present, accepting");
 						Report.Screenshot();
-						return;
+						SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+						Delay.Seconds(1);
+						allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(allWindows[0]);
+						Delay.Seconds(2);
+						allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+						if (allWindows.Count == 1)
+						{
+							Report.Success("Successfully navigated to the landing page!");
+							Report.Screenshot();
+							return;
 
+						}
 					}
+
+					
 				}
 
 				try

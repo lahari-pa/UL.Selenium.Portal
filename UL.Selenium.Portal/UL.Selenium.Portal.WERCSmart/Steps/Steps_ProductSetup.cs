@@ -3232,8 +3232,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//});
 			//sharedSteps.GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(savedAs, table4);
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
-				"Completed");
+			shaSteps.InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
+			//shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Completed");
 			//var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			//string ID = ProductDetails.Id;
 			//var myStudioShaManager = new StudioSHAManager();
@@ -3326,8 +3326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			sharedSteps.GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(savedAs, table4);
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
-				"Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Completed");
 		}
 
 		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86419 and save as: (.*)")]
@@ -3348,6 +3347,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65();
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("Canadian Tire");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Canadian Tire");
 			sharedSteps.ThenICallSharedStep75702_UPC_AddUPCContainerTypeSizeAndPackageTypeNoRetailerDataNeeded_Continue("saved as UPC86264", "Metal Container", "5");
 			sharedSteps.ThenICallSharedStep78868_RegulatoryDocumentsToProvide_USAndCanada_RequestAuthoringForBoth();
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
@@ -3377,8 +3378,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
 			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
-				"Completed");
+			shaSteps.InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
+			//shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Completed");
 		}
 
 
