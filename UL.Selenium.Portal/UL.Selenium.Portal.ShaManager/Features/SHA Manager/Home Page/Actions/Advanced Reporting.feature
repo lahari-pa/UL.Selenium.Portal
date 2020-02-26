@@ -1145,3 +1145,75 @@ Scenario: [122472] Subscription by Account and Product Type
 		| Active Subscription                          |
 		| Past Due Balance                             |
 	Given I delete the excel file saved as excel122472
+
+Scenario: [124993] Subscription by Account and Product Type
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Subscription by Account and Product Type report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Subscription by Account and Product Type is shown as: Subscription information for submitted registrations, including overall quantity of IDs and UPCs for the accounts.  All products and all accounts. Indicator of Past Due balance and Active subscriptions. Quantity of registrations per status, including cancelled, excluding new.  Internal Use Only.
+	Given In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called Subscription by Account and Product Type.xls and save as 124993
+	Then I confirm that the excel file saved as: 124993 contains the following columns: and they are in the correct order.
+		| Column                                       |
+		| Supplier                                     |
+		| Administrator E-Mail                         |
+		| Country                                      |
+		| Total Active IDs Qty                         |
+		| Total Active UPC Qty                         |
+		| Submitted (Qty of IDs / UPCs in this status) |
+		| Assigned                                     |
+		| Completed                                    |
+		| Cancelled                                    |
+		| Suspended                                    |
+		| Accepted                                     |
+		| Release for distribution                     |
+		| Formula                                      |
+		| Enhanced                                     |
+		| Articles                                     |
+		| Subscription Date (most recent)              |
+		| Active Subscription                          |
+		| Past Due Balance                             |		
+	Then For the excel file saved as: 124993 I check that the column with heading name: Cancelled does not contain: 0 / 0 in at least 1 row.
+	Then I delete the Advanced Report file saved as 124993
+
+Scenario: [124994] PM Walgreen Monthly Item Sync Report - UPC Requested Columns Contain Data
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: PM Walgreen Monthly Item Sync Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: PM Walgreen Monthly Item Sync Report is shown as: Walgreen Monthly Item Sync Report
+	Then I enter start Date: 10-10-2019 and end Date: NA for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called PM Walgreen Monthly Item Sync Report.xls and save as 124994
+	Then I confirm that the excel file saved as: 124994 contains the following columns: and they are in the correct order.
+		| Column                                |
+		| WPSID                                 |
+		| Product Status                        |
+		| Retailer Archived                     |
+		| UPC                                   |
+		| UPC Archived                          |
+		| Product Name                          |
+		| UPC Name                              |
+		| Supplier                              |
+		| PLP                                   |
+		| Item Type                             |
+		| RU                                    |
+		| RU Name                               |
+		| RUCC                                  |
+		| RUCC Name                                  |
+		| # Times UPC Requested                 |
+		| Date API Ping                         |
+		| UPC Last Requested                    |
+		| UPC Requested Response                |
+		| Walgreen Product Completion Date      |
+		| Suppliers Submission Date             |
+		| Recertification Reason                |
+		| Other Walgreen Non Completion Reasons |
+	Then For the excel file saved as: 124994 I check that the columns with heading names found in the Table: contain data in all rows.
+		| Headers                   |
+		| UPC Last Requested <date> |
+		| UPC Requested Response    |
+	Then I delete the Advanced Report file saved as 124994
+
+
+	
+	
+	#Then For the excel file saved as: 116340 I check that the column with heading name: Water % does not contains: 0 in any rows.
