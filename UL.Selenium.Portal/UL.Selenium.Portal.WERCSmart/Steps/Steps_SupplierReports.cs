@@ -712,7 +712,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 		
-
+		/// <summary>
+		/// If the values of a given column are in datetime format, you must add the suffix <date> to the header title in the table
+		/// </summary>
+		/// <param name="savedAs"></param>
+		/// <param name="table"></param>
 		[StepDefinition(@"For the excel file saved as: (.*) I check that the columns with heading names found in the Table: contain data in all rows.")]
 		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnsInTableContainDataInAllRows(string savedAs, Table table)
 		{
