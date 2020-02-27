@@ -1198,7 +1198,7 @@ Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 		| RU                                    |
 		| RU Name                               |
 		| RUCC                                  |
-		| RUCC Name                                  |
+		| RUCC Name                             |
 		| # Times UPC Requested                 |
 		| Date API Ping                         |
 		| UPC Last Requested                    |
@@ -1216,4 +1216,4 @@ Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 
 	
 	
-	#Then For the excel file saved as: 116340 I check that the column with heading name: Water % does not contains: 0 in any rows.
+
