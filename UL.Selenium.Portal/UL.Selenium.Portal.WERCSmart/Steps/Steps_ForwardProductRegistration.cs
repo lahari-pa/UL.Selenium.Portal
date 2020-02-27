@@ -602,8 +602,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				id = PI.Id;
 			}
 			var selForwardProdReg = new ForwardProductRegistration();
-			Report.IsTrue(selForwardProdReg.SelectProducts_ClickProductByID(id),
-				"ID: " + id + " has not be selected as expected", "ID: " + id + " has been selected as expected");
+			Report.IsTrue(selForwardProdReg.SelectProducts_ClickProductByID(id), "Failed to click product", "Successfully clicked product");
+			int i = 0;
+
+			while (i<5 && !selForwardProdReg.CheckProductsSelected_CheckProductSelectedByID(id))
+			{
+				Delay.Seconds(2);
+				i++;
+			}
+			Report.IsTrue(selForwardProdReg.CheckProductsSelected_CheckProductSelectedByID(id),"ID: " + id + " has not be selected as expected", "ID: " + id + " has been selected as expected");
+			
 		}
 
 		[StepDefinition(@"In the Forward Product Registration Screen I select a retailer under Other Retailers and save as (.*)")]
