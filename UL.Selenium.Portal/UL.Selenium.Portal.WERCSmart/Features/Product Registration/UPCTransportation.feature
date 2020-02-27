@@ -5,7 +5,9 @@
 @UPC
 @ForwardProductRegistration
 @PaymentMethods
+@SHA
 @SummaryPage
+@RetailPartners
 @run_UPCTransportation
 Feature: UPCTransportation
 
@@ -46,16 +48,15 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122305
 
-@tfs_design
 Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I generate a random UPC number and save as: RandomUPC
+	Given I generate a random UPC number and save as: UPC122382
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Given I save the product information as: TestCase122382
 	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+		| 2                          | 55                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -63,10 +64,10 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I set the Product is Regulated for Transport field to: Yes
 	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
-	# Select IMDG and Limited Quantity
-	# Select TDG and Limited Quantity
+	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
+	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
 	Given I click continue
-	Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols, 2.1, None, add technical name, Click Continue)
+	Given I enter UN1993 - Select data - Continue - Happy Path
 	Given I should see the International Air Transport (IATA) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 	Given I click continue
@@ -79,29 +80,36 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer  |
 		| Walgreens |
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPCRandomUPC, container type: Plastic Container and size: 2 do not click continue
-	# In the UPC Transportation column, upgrade DOT to Fully Regulated
-	# Upgrade IATA to Fully Regulated
-	# Upgrade IMDG to Fully Regulated
-	# Upgrade TDG to Fully Regulated
+	Then I click Done on Select Retailers window
+	Then I click continue
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC122382, container type: Plastic Container and size: 2 do not click continue
+	Given At the UPC level, I set DOT to Shipping fully regulated
+	Given At the UPC level, I set IATA to Shipping fully regulated
+	Given At the UPC level, I set IMDG to Shipping fully regulated
+	Given At the UPC level, I set TDG to Shipping fully regulated
 	Given I click continue
-	# Navigate to the Transportation Details 1 screen
-	# In the DOT section, unselect everything and select Consumer Commodity
-	# In the IATA section, unselect everything and then select Consumer Commodity
+	Given In the New Product page I click tab: Product Characteristics
+	And I click the page heading: Transportation Details 1
+	Given In the Transportation Details 1 screen, I unselect all transportation options for DOT
+	Given In the Transportation Details 1 screen, I unselect all transportation options for IATA
+	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I select option: Shipping with consumer commodity under section: Select all modes of transport that you've classified the product for and subsection: IATA
 	Given I click Save in The Product Page
-	# Confirm we get a popup saying that we have reset the UPC data (get exact text)
-	# Navigate to the UPC screen
-	# Ensure that DOT is listed at Consumer Commodity
-	# Ensure that IATA is listed at Consumer Commodity
-	# Ensure that IMDG has reset to Limited Quantity
-	# Ensure that TDG has reset to Limited Quantity
+	Given I confirm that I see the following text in the modal window popup: You have updated the transportation classification for this product registration. This impacts the UPC-level data for Transportation and the defaults have been adjusted. Be sure to review the UPC-Level transportation settings and update as needed before submitting your registration.
+	Given in the modal dialog I click the "OK" button
+	Given In the New Product page I click tab: Recipient and UPC Details
+	And I click the page heading: Universal Product Code (UPC)
+	Given I ensure that DOT is listed as Shipping with consumer commodity
+	Given I ensure that IATA is listed as Shipping with consumer commodity
+	Given I ensure that IMDG is listed as Shipping with limited quantity
+	Given I ensure that TDG is listed as Shipping with limited quantity
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122382
 
 @tfs_design
 Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I generate a random UPC number and save as: RandomUPC
+	Given I generate a random UPC number and save as: UPC122428
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Given I save the product information as: TestCase122428
@@ -117,7 +125,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 	# Select IMDG and Limited Quantity
 	# Select TDG and Limited Quantity
 	Given I click continue
-	Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols, 2.1, None, add technical name, Click Continue)
+	Given I enter UN1993 - Select data - Continue - Happy Path
 	Given I should see the International Air Transport (IATA) Classification Page
 	Given I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 	Given I click continue
@@ -130,7 +138,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer  |
 		| Walgreens |
-	Given I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPCRandomUPC, container type: Plastic Container and size: 2 click continue
+	Given I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPC122428, container type: Plastic Container and size: 2 click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -292,8 +300,146 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I click continue on the Forward Product Registration page
 	Given In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Walgreens under Other Retailers and save it as: Retailer
 	Given I click continue on the Forward Product Registration page
+
 # Select your product on the left hand side of the screen in the Select UPCs tab
 # Select Edit for the UPC in the Select UPCs table
 # Change the size attribute of the UPC to 170
 # Click Save
 # Ensure that you get an error that  tells you to check your transportation information
+
+@tfs_design
+Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: RandomUPC
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+	Given I save the product information as: TestCase
+	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 66               |
+	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I should see the Transportation Details 1 Page
+	Given I set the Product is Regulated for Transport field to: Yes
+	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+	Given I click continue
+	# Enter UN2831. Ensure that Hazard class is 6.1 and Packing group is III.
+	Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer  |
+		| Walgreens |
+	Given I click Done on Select Retailers window
+	Given I click continue
+	Given I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPCRandomUPC, container type: Plastic Container and size: 169 click continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
+		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	Given I navigate to the home page
+	Given I search for the product saved as: TestCase
+	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+	Given I enter the text: saved as TestCase in the 'Search by WPS ID or Product Name' field
+	Given In the Foward Product Registration Screen I should see product: saved as TestCase
+	Given In the Foward Product Registration Screen I Select the product: saved as TestCase
+	Given I click continue on the Forward Product Registration page
+	Given In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Walgreens under Other Retailers and save it as: Retailer
+	Given I click continue on the Forward Product Registration page
+# Select your product on the left hand side of the screen in the Select UPCs tab
+# Click the Add UPC button
+# Enter a random UPC
+# Enter a Type
+# Enter 170 in the Size (ounces) field
+# Click Save
+# Ensure that you get a UPC Transportation error
+
+
+Scenario: [123436] UPC Transportation - Recertification - Transportation Details 1 UPC popup
+#may be worth either cutting some of the steps or making a shared step that creates the prouduct (shorten the specflow)
+Given I log in with the account saved in TReVor as: ProductAccount
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	And I should see the Product Characteristics Page
+	Then I save the product information as: TestCase65947
+	And The following options should be displayed for section: Primary Physical State
+		| Option |
+		| Liquid |
+		| Solid  |
+	And I set the Primary Physical State option to: Liquid
+	And I set the Secondary Physical State option to: Liquid
+	And I set the Specific Gravity option to: 10
+	And I set the pH option to: 10.5
+	And I set the Boiling Point (in Celsius) option to: 120
+	And I set the Flash Point (in Celsius) option to: 23
+	And I set the Flash Point Testing Method Used option to: Closed cup method
+	And I set the Select the best Water Solubility description option to: Insoluble
+	And I click continue
+	And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I should see the Transportation Details 1 Page
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I click continue
+	And I should see the U. S. Department of Transportation (DOT) Classification Page
+	And I set the UN Number field to: UN2762
+	And I set the Technical Name field to: Technical Name UN2762
+	And I set the Packing Group (select) field to: II
+	And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
+	And I click continue
+	And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
+	Given I click the 'Add UPC' button
+	Then I generate a random UPC number and save as: RandomUPC91076
+	Given I add the following into the UPC Fields
+		| UPC Number              | Container Type    | Size | DPCI | Quantity |
+		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
+	Given I click continue
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	And I should see the Additional Documents to Provide Page
+	And I click continue
+	And I should see the Optional Reports and Documents Available for Purchase Page
+	And I click continue
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase65947 and its status is: Submitted
+	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase65947)
+	Then I call Shared Step 51349 - SHA Manager > Assigned Product - Add Recert reason 20 for product saved as: TestCase65947
+	Given I navigate to the landing page
+	And I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	And I filter for the product saved as: TestCase65947
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: Update Required
+	Given In the New Product page I click tab: Product Characteristics
+	And I click the page heading: Transportation Details 1
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	#First remove check form the full reg box
+	And I unselect option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I click Save in The Product Page
+	Then I Wait for a modal popup to appear
+	Then I confirm the pop up shows the heading: UPC Transportation Warning
+	Given in the modal dialog I click the "Ok" button
+	Then I Wait for a modal popup to disappear
+	Given In the New Product page I click tab: Review and Submit
+	And I click the page heading: Data Acceptance
+	#may need to update the below if inludes line breaks etc in the text
+	Then Data Accpetance Screen shows error with message: Please fix all the errors in product data before you can continue with submission.
+	And I click continue
+	And I should see the Universal Product Code (UPC) Page
+	And I click continue
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+

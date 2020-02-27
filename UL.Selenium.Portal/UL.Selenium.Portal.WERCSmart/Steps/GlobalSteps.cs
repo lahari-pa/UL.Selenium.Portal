@@ -528,15 +528,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Delay.Seconds(1);
 					allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(allWindows[0]);
-					Delay.Seconds(1);
-
-					if (allWindows.Count == 1)
+					Delay.Seconds(4);
+					SeleniumBrowser.Navigate(SeleniumBrowser.BaseTestUrl);
+					Delay.Seconds(4);
+					allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+					if (SeleniumBrowser.Alert.IsAlertPresent())
 					{
-						Report.Success("Successfully navigated to the landing page!");
+						Report.Info("Alert is present, accepting");
 						Report.Screenshot();
-						return;
+						SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+						Delay.Seconds(1);
+						allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(allWindows[0]);
+						Delay.Seconds(2);
+						allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+						if (allWindows.Count == 1)
+						{
+							Report.Success("Successfully navigated to the landing page!");
+							Report.Screenshot();
+							return;
 
+						}
 					}
+
+					
 				}
 
 				try
@@ -1447,7 +1462,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					string currentTitle = SeleniumBrowser.WebBrowser.Title;
 					if (currentTitle == title)
 					{
-						Report.Success("Tab with title was loaded");
+						Report.Success("Tab with title was switched to");
 						Report.Screenshot();
 						return;
 					}
@@ -1926,6 +1941,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string upc = TReVorSettings.TReVor.VisualStudioFunctions.GetRandomUpcNumber("CVS");
 		}
+
+		[StepDefinition(@"I Wait for a modal popup to appear")]
+		public void IWaitForModalPopupToBeVisible(int timeout=30)
+		{
+			Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(timeout), "The Modal did not appear", "The modal appeared");
+		}
+		[StepDefinition(@"I Wait for a modal popup to disappear")]
+		public void IWaitForModalPopupToBeInVisible(int timeout = 30)
+		{
+			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing","The modal was gone");
+		}
+
 
 	}
 }

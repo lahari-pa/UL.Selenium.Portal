@@ -27,6 +27,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private static NewProduct NewProduct => new NewProduct();
 
+		//Philip
+		[StepDefinition(@"I check for the logos of the following companies")]
+		public void ThenIConfirmTheFollowingCompanyLogos(Table table)
+		{
+
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.CheckRetailerLogo(table);
+
+		}
+
+		[StepDefinition(@"I check for a checkmark image above the following companies")]
+		public void ThenICheckForACheckmarkImageAboveTheFollowingCompanies(Table table)
+		{
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.CheckRetailerLogoCheckMark(table);
+		}
+
+		[Then(@"I confirm there is a yellow exclamation point")]
+		public void ThenIConfirmThereIsAYellowExclamationPoint()
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+		[StepDefinition(@"I check for a 'Scope' button below the following companies")]
+		public void ThenICheckForTheScopeButton(Table table)
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+
+		[StepDefinition(@"I check if modal popup shows for company: (.*)")]
+		public void ThenICheckIfModalPopupShows(string company)
+		{
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.ClickScopeButton(company);
+			Report.IsTrue(newProductObject.CheckRetailerModalPopup(), "It Failed", "It succeeded");
+		}
+
+		[StepDefinition(@"I click the scope button and check for this text: (*.)")]
+		public void ThenIClickTheScopeButtonForCOAndCheckForThisText(string text)
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.CheckRetailerModalPopup(), "It Failed", "It succeeded");
+			newProductObject.CheckRetailerModalText(text);
+		}
+
 		#region  General New Product steps
 
 		// Definitions, for consistency
@@ -1137,6 +1183,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().SetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
 				$"Failed to set the input to: '{option}' in section: '{section}' and subection: '{subSection}'",
 				$"Successfully set the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
+		}
+
+		[StepDefinition(@"In the Transportation Details 1 screen, I unselect all transportation options for (DOT|IATA|IMDG|TDG)")]
+		public void InTheTransportationDetails1ScreenIUnselectAllTransportationOptionsFor(string option)
+		{
+			Report.IsTrue(new NewProduct().UnselectTransportationOptions(option), "Failed to unselect Transportation options for " + option + ".",
+				"Successfully unselection Transportation options for " + option + ".");
 		}
 
 		[StepDefinition(@"I (see|only see|do not see) the following questions")]
@@ -2843,6 +2896,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var NewProductObject = new NewProduct();
 			Report.IsTrue(NewProductObject.CheckForErrorInTheFollowingFieldsInTheLithiumBatteryTransportationSection(table), "Failed to find an error in at least one of the fields", "Successfully found errors in all of the fields");
 
+		}
+
+		[StepDefinition(@"Data Accpetance Screen shows error with message: (.*)")]
+		public void DataAcceptanceScreenShowsError(string expectedError)
+		{
+			Report.IsTrue(new NewProduct().DataAcceptanceShowsAlertX(expectedError), "The expected alert was not found", "The expected alert was found");
+		}
+
+		[StepDefinition(@"I unselect option: (.*) under section: (.*) and subsection: (.*)")]
+		public void ForTheOptionSubOptionUnselect(string option, string section, string subSection)
+		{
+			Report.IsTrue(new NewProduct().UnsetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
+				$"Failed to unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'",
+				$"Successfully unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
 		}
 	}
 
