@@ -1559,8 +1559,8 @@ Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
 Scenario: [StagingRegressionFixes] CVS Artists supply to to new
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then In the Products Grid I delete All products	
-	Then For CVS I create a product of type: Sporting Goods (RUCC0386), save it as: CVSSportingGoodsProduct1 and leave it in New Status
-	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSSportingGoodsExcelFile and check that is shows the expected product saved as: CVSSportingGoodsProduct1
+	Then For CVS I create a product of type: Home Improvement (RUCC0394), save it as: CVSHomeProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSHomeExcelFile and check that is shows the expected product saved as: CVSHomeProduct1
 
 Scenario: [StagingRecertUPCTransportation] Recertification and Transporation 1 changes leads to popup
 #Issue here is that the product we are using in completed doe not have transporation details 1 in the flow. 

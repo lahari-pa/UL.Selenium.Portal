@@ -1,16 +1,37 @@
-﻿@Shared
-@ProductGrid
+@Shared
 @NewProduct
+@LandingPage
+@Login
 @Homepage
-@UPC
-@ForwardProductRegistration
-@PaymentMethods
-@SHA
-@SummaryPage
+@Signup
+@wercsmart
+@NewProduct
+@ProductGrid
+@DataSummarySheet
+@wercsmart
 @RetailPartners
+@SummaryPage
+@PaymentMethods
+@SubEnrollment
+@WERCSmart_Signup
+@MyAccount
+@PackagingTypes
+@Brands
+@MyIngredients
+@UPC
+@ProductSetUp
+@SHA
+@Studio
+@ForwardProductRegistration
+@ProductSetUp
+@SupplierReports
+@CreateProducts
+@ViewUpcs
+@Solutions
 @run_UPCTransportation
 Feature: UPCTransportation
 
+@ScenarioId:6508
 Scenario: [122305] UPC Transportation options are present if product-level options are present
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC112305
@@ -48,6 +69,7 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122305
 
+@ScenarioId:6598
 Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122382
@@ -107,6 +129,7 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122382
 
 @tfs_design
+@ScenarioId:6613
 Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122428
@@ -183,6 +206,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I click continue on the Forward Product Registration page
 	Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 
+@ScenarioId:6524
 Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122940
@@ -210,6 +234,7 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122940
 
+@ScenarioId:6527
 Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulated at the UPC Level
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC122971
@@ -358,6 +383,7 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 # Ensure that you get a UPC Transportation error
 
 
+@ScenarioId:6654
 Scenario: [123436] UPC Transportation - Recertification - Transportation Details 1 UPC popup
 #may be worth either cutting some of the steps or making a shared step that creates the prouduct (shorten the specflow)
 Given I log in with the account saved in TReVor as: ProductAccount

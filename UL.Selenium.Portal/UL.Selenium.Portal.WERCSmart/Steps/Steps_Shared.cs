@@ -4348,7 +4348,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			bool Found = false;
 			int counter = 0;
-			while (!Found && counter < 5)
+			while (!Found && counter < 7)
 			{
 				Report.StartStep("I click Srch in the bottom menu list");
 				myStudioShaManager.ClickBottomMenuOption("Search");
@@ -4370,6 +4370,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Found = true;
 				}
 			}
+			Report.IsTrue(Found, "The Top row in the Products table did not match the search ID", "The Top row in products table matched the search ID");
+
+
 
 		}
 
