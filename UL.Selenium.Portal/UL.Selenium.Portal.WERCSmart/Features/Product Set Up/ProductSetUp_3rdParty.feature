@@ -75,61 +75,61 @@ Scenario: [122123] Create a 3rd party product - with Tier 2 approval (include ge
 	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 	Then in the Sustainability Information page I click Continue
-	Then I check for the logos of the following companies
-	| CompanyInitial |
-	| CT |
-	| CO |
-	| CV |
-	| DT |
-	| FD |
-	| TG |
-	| WG |
-	| WM |
-	Then I check for a checkmark image above the following companies
-	| CompanyInitial | NoCheckMark |
-	| CT             | TG          |
-	| CO             | x           |
-	| CV             | x           |
-	| DT             | x           |
-	| FD             | x           |
-	| WG             | x           |
-	| WM             | x           |
-	Then I confirm there is a yellow exclamation point
-	Then I check for a 'Scope' button below the following companies
-	| CompanyInitial |
-	| CT |
-	| CO |
-	| CV |
-	| DT |
-	| FD |
-	| TG |
-	| WG |
-	| WM |
-	Then I hover over yellow triangle and look for text
-
-	Then I check if modal popup shows for company: CT
-	Then I click the scope button and check for this text: abc
-
-	Then I check if modal popup shows for company: CO
-	Then I click the scope button and check for this text: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent.
-
-	Then I check if modal popup shows for company: CV
-	Then I click the scope button and check for this text: CVS requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2, Tier 3 and Tier 4.1 permissions: Artists/Hobby, Automotive Care, Cleaning Supplies, Health & Beauty, Home Improvement, Lawn and Garden, Miscellaneous, Nutritional Supplements, Over-the-Counter (OTC), Pet Care, Photography, Sporting Goods, Stationery and Pharmacy
-
-	Then I check if modal popup shows for company: DT
-	Then I click the scope button and check for this text: Dollar Tree requires suppliers of formulated products to grant Tier 2.1 and Tier 2.2 permissions.
-
-	Then I check if modal popup shows for company: FD
-	Then I click the scope button and check for this text: abc
-
-	Then I check if modal popup shows for company: TG
-	Then I click the scope button and check for this text: abc
-
-	Then I check if modal popup shows for company: WG
-	Then I click the scope button and check for this text: abc
-
-	Then I check if modal popup shows for company: WM
-	Then I click the scope button and check for this text: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys.
+#	Then I check for the logos of the following companies
+#	| CompanyInitial |
+#	| CT |
+#	| CO |
+#	| CV |
+#	| DT |
+#	| FD |
+#	| TG |
+#	| WG |
+#	| WM |
+#	Then I check for a checkmark image above the following companies
+#	| CompanyInitial | NoCheckMark |
+#	| CT             | TG          |
+#	| CO             | x           |
+#	| CV             | x           |
+#	| DT             | x           |
+#	| FD             | x           |
+#	| WG             | x           |
+#	| WM             | x           |
+#	Then I confirm there is a yellow exclamation point
+#	Then I check for a 'Scope' button below the following companies
+#	| CompanyInitial |
+#	| CT |
+#	| CO |
+#	| CV |
+#	| DT |
+#	| FD |
+#	| TG |
+#	| WG |
+#	| WM |
+#	Then I hover over yellow triangle and look for text
+#
+#	Then I check if modal popup shows for company: CT
+#	Then I click the scope button and check for this text: abc
+#
+#	Then I check if modal popup shows for company: CO
+#	Then I click the scope button and check for this text: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent.
+#
+#	Then I check if modal popup shows for company: CV
+#	Then I click the scope button and check for this text: CVS requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2, Tier 3 and Tier 4.1 permissions: Artists/Hobby, Automotive Care, Cleaning Supplies, Health & Beauty, Home Improvement, Lawn and Garden, Miscellaneous, Nutritional Supplements, Over-the-Counter (OTC), Pet Care, Photography, Sporting Goods, Stationery and Pharmacy
+#
+#	Then I check if modal popup shows for company: DT
+#	Then I click the scope button and check for this text: Dollar Tree requires suppliers of formulated products to grant Tier 2.1 and Tier 2.2 permissions.
+#
+#	Then I check if modal popup shows for company: FD
+#	Then I click the scope button and check for this text: abc
+#
+#	Then I check if modal popup shows for company: TG
+#	Then I click the scope button and check for this text: abc
+#
+#	Then I check if modal popup shows for company: WG
+#	Then I click the scope button and check for this text: abc
+#
+#	Then I check if modal popup shows for company: WM
+#	Then I click the scope button and check for this text: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys.
 	#And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	#And I call Shared Step 73956 version 2 (Go to Summary and verify data) with product type: Raw material
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)

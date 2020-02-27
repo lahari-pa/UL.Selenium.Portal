@@ -65,7 +65,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductObject.CheckRetailerModalPopup(), "It Failed", "It succeeded");
 		}
 
-		[StepDefinition(@"I click the scope button and check for this text: (*.)")]
+		[StepDefinition(@"I click the scope button and check for this text: (.*)")]
 		public void ThenIClickTheScopeButtonForCOAndCheckForThisText(string text)
 		{
 			NewProduct newProductObject = new NewProduct();
