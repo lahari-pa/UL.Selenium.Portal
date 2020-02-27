@@ -397,92 +397,122 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		};
 		#endregion
 		//Philip
-		public bool CheckRetailerLogo(Table table)
+		public List<string> CheckIfRetailerLogoIsDisplayed(Table table)
 		{
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr = "";
+			List<string> retailersThatAreNotDisplayingTheirLogo = new List<string>();
 
 			foreach (TableRow row in table.Rows)
 			{
 
-				string companyName = row["CompanyInitial"];
-				IWebElement src = this.containerElement.FindElement(By.XPath(@"/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + companyName + ".png"), 2);
+				string retailer = row["Retailer"];
+				abbr.Map.TryGetValue(retailer, out selectedAbbr);
+				
+				IWebElement retailerLogo = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + retailer + ".png']"), 2);
 
-				if (src == null)
+				if (retailerLogo == null)
 				{
-					return false;
+					retailersThatAreNotDisplayingTheirLogo.Add(retailer);
 				}
 
 			}
 
-			return true;
+			return retailersThatAreNotDisplayingTheirLogo;
 
 		}
 
-		public bool CheckRetailerLogoCheckMark(Table table)
+		public List<string> CheckIfCheckmarkImageIsDisplayedAboveRetailerLogo(Table table)
 		{
 
-			foreach (TableRow row in table.Rows)
-			{
-				string companyName = row["CompanyInitial"];
-
-				IWebElement src = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + companyName + ".png']/../preceding-sibling::div//span//i[@class='fa fa-check fa-3x']"), 2);
-
-				if (src == null)
-				{
-					return false;
-				}
-
-			}
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr = "";
+			List<string> retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo = new List<string>();
 
 			foreach (TableRow row in table.Rows)
 			{
 
-				string noCheckMark = row["NoCheckMark"];
+				string retailer = row["Retailer"];
+				abbr.Map.TryGetValue(retailer, out selectedAbbr);
+				IWebElement checkmarkImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + retailer + ".png']/../preceding-sibling::div//span//i[@class='fa fa-check fa-3x']"), 2);
 
-				IWebElement src1 = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + noCheckMark + ".png']/../preceding-sibling::div//span//i[@class='fa fa-check fa-3x']"), 2);
-
-				if (src1 != null)
+				if (checkmarkImage == null)
 				{
-					return false;
+					retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.Add(retailer);
 				}
 
 			}
+			
 
-			return true;
+			return retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo;
 
 		}
 
-		public bool CheckRetailerScopeButton(Table table)
+		public List<string> CheckIfYellowTriangleImageIsDisplayedAboveRetailerLogo(Table table)
 		{
+
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr = "";
+			List<string> retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo = new List<string>();
 
 			foreach (TableRow row in table.Rows)
 			{
-				string companyName = row["CompanyInitial"];
-				IWebElement src = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + companyName + ".png']/../following-sibling::div//button"), 2);
 
-				if (src.Text != "Scope")
+				string retailer = row["Retailer"];
+				abbr.Map.TryGetValue(retailer, out selectedAbbr);
+				IWebElement checkmarkImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + retailer + ".png']/../preceding-sibling::div//span//i[@class='fa fa-exclamation-triangle fa-3x']"), 2);
+
+				if (checkmarkImage == null)
 				{
-					return false;
+					retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo.Add(retailer);
 				}
 
 			}
 
-			return true;
+
+			return retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo;
 
 		}
 
-		public bool ClickScopeButton(string company)
+		public List<string> CheckIfScopeButtonIsDisplayedBeloweRetailerLogo(Table table)
 		{
 
-			IWebElement costcoScopeButton = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/CO.png']/../following-sibling::div//button"), 2);
-			return costcoScopeButton.TryClick();
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr = "";
+			List<string> retailersThatDoNotDisplayAScopeButtonBelowTheirLogo = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				string retailer = row["Retailer"];
+				abbr.Map.TryGetValue(retailer, out selectedAbbr);
+			
+				IWebElement scopeButton = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + retailer + ".png']/../following-sibling::div//button"), 2);
+
+				if (scopeButton.Text != "Scope")
+				{
+					retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Add(retailer);
+				}
+
+			}
+
+			return retailersThatDoNotDisplayAScopeButtonBelowTheirLogo;
 
 		}
 
-		public bool CheckRetailerModalPopup()
+		public bool ClickScopeButtonBelowRetailerLogo(string retailer)
 		{
 
-			IWebElement src = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']"), 2);
-			if (src == null)
+			IWebElement scopeButton = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + retailer + ".png']/../following-sibling::div//button"), 2);
+			return scopeButton.TryClick();
+
+		}
+
+		public bool CheckIfRetailerModalIsDisplayed()
+		{
+
+			IWebElement retailerModalTitel = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']"), 2);
+
+			if (retailerModalTitel == null)
 			{
 				return false;
 			}
@@ -492,14 +522,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckRetailerModalText(string text)
 		{
-			IWebElement src = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//p"), 2);
+			IWebElement retailerModalBody = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//p"), 2);
 
-			if (src.Text == text)
+			if (retailerModalBody.Text == text)
 			{
 				return true;
 			}
 
 			return false;
+
+		}
+
+		public bool CloseRetailerModal()
+		{
+
+			IWebElement closeButton = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//p"), 2);
+			return closeButton.TryClick();
 
 		}
 

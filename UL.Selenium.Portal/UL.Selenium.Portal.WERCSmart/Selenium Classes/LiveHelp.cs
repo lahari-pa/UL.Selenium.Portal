@@ -61,18 +61,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			if (icon == "paperclip")
 			{
-				return this.containerElement.FindElement(By.XPath(".//i[@class='icons icon-ic_attachment']"), 2) != null;
+				IWebElement paperclipIcon = this.containerElement.FindElement(By.XPath(".//i[@class='icons icon-ic_attachment']"), 2);
+				return paperclipIcon != null;
 			}
 			if (icon == "smiley")
 			{
-				return this.containerElement.FindElement(By.XPath(".//i[@class='icons icon-ic_smiley']"), 2) != null;
+				IWebElement smileyIcon = this.containerElement.FindElement(By.XPath(".//i[@class='icons icon-ic_smiley']"), 2);
+				return smileyIcon != null;
 			}
 			return false;
 		}
 
 		public bool ClickCloseX()
 		{
-			return this.containerElement.FindElement(By.XPath("./../../preceding-sibling::div[contains(@class,'d_hotline minimize')]//i"), 2).TryClick();
+			IWebElement closeXButton = this.containerElement.FindElement(By.XPath("./../../preceding-sibling::div[contains(@class,'d_hotline minimize')]//i"), 2);
+			return closeXButton.TryClick();
 		}
 
 
