@@ -351,6 +351,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("Attempting to select product with id: " + id_);
 					this.EnterTextInSearchByIDOrProductNameField(id_);
+					int i = 0;
+					bool found = false;
+					while (i < 5 && found == false)
+					{
+
+						if (selForwardProductReg.GetTopProductNameFromSelectProductList().IsNullOrEmpty())
+						{
+							Report.Info($"No Product Name was found for the product with id: {id_}");
+							Delay.Seconds(2);
+							i++;
+
+						}
+						else
+						{
+							found = true;
+							Report.Info($"Product Name was found for the product with id: {id_}");
+						}
+					}
+					if (found == false)
+					{
+						Report.Failure($"The Product with {id_} was not found after searching for it.");
+						return;
+					}
 					if (selForwardProductReg.SelectProducts_ClickProductByID(id_))
 					{
 						Report.Success("Successfully selected product with ID: " + id_);
