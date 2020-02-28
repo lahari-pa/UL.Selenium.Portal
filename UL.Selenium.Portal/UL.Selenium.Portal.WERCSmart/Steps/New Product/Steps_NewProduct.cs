@@ -1207,6 +1207,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			List<string> options = myProduct.GetAllOptionsForSection(section);
 			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), "The option: " + options[0] + " could not be selected in section: " + section, "The option: " + options[0] + " was selected in section: " + section);
 		}
+		
 
 		[StepDefinition(@"If Section: (.*) is visible, I select the first option")]
 		public void IfSectionIsVisibleISelectTheOption(string section, string option)

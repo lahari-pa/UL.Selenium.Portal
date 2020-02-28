@@ -1737,8 +1737,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the UN Number field to: UN1950");
 			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
 			Delay.Seconds(2);
-			Report.StartStep("I select the first option in section: Proper Shipping Name");
-			MyNewProduct.SelectFirstOptionInSection("Proper Shipping Name");
+			Report.StartStep("I select the first option in section: Proper Shipping Name");			
+			MyNewProduct.SelectFirstOptionInSection("Proper Shipping Name");	
 			Delay.Seconds(2);
 			Report.StartStep("I select the first option in section: Hazard Class (select)");
 			MyNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
