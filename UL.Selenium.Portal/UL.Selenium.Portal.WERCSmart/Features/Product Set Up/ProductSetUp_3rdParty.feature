@@ -74,44 +74,44 @@ Scenario: [122123] Create a 3rd party product - with Tier 2 approval (include ge
 	Then in the Additional documents page I click Continue
 	Then in the Formulation Names page I click Continue
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
-	#Then in the Sustainability Information page I click Continue
 	Then I check if the logo is displayed for the following retailers
 	| Retailer	    |
-	| CT |
-	| CO       |
-	| CV           |
-	| DT   |
-	| FD |
-	| TG        |
-	| WG     |
-	| WM      |
+	| Canadian Tire |
+	| Costco        |
+	| CVS           |
+	| Dollar Tree   |
+	| Family Dollar |
+	| Target        |
+	| Walgreens     |
+	| Walamrt       |
 
 	Then I check if a checkmark image is displayed above the following retailers
 	| Retailer	    |
-	| CT |
-	| CO       |
-	| CV           |
-	| DT   |
-	| FD |
-	| WG     |
-	| WM      |
+	| Canadian Tire |
+	| Costco        |
+	| CVS           |
+	| Dollar Tree   |
+	| Family Dollar |
+	| Walgreens     |
+	| Walamrt       |
 
 	Then I check if a yellow triangle image is displayed above the following retailers
 	| Retailer	    |
-	| TG        |
+	| Target        |
 
 	Then I check if a 'Scope' button is displayed below the following retailers
 	| Retailer	    |
-	| CT |
-	| CO       |
-	| CV           |
-	| DT   |
-	| FD |
-	| TG        |
-	| WG     |
-	| WM      |
+	| Canadian Tire |
+	| Costco        |
+	| CVS           |
+	| Dollar Tree   |
+	| Family Dollar |
+	| Target        |
+	| Walgreens     |
+	| Walamrt       |
 
-	#Then I hover over yellow triangle and look for text
+	Then I hover over the yellow triangle image
+	Then I check if the text displayed over the yellow triangle image matches the following text: The following ingredients are on this WERCSmart Recipient's screening list for chemicals of concern. If your customer sells products within the Scope of this Recipient's program, it may impact your customer's relationship with the Retailer.
 
 	Then I check if the retailer modal is displayed for the following retailer: CO
 	Then I check if the retailer modal is displaying the following text: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent.
@@ -128,7 +128,7 @@ Scenario: [122123] Create a 3rd party product - with Tier 2 approval (include ge
 	Then I check if the retailer modal is displayed for the following retailer: WM
 	Then I check if the retailer modal is displaying the following text: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys.
 	Then I close the retailer modal
-
+	Then in the Sustainability Information page I click Continue
 	#And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	#And I call Shared Step 73956 version 2 (Go to Summary and verify data) with product type: Raw material
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)

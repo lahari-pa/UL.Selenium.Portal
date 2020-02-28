@@ -40,7 +40,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailersThatAreNotDisplayingTheirLogo.Count == 0, "The following retailers are not displaying their logos: " + retailersThatAreNotDisplayingTheirLogo, "All retailers are displaying their logos");
 		}
 
-		[Then(@"I check if a checkmark image is displayed above the following retailers")]
+		[StepDefinition(@"I check if a checkmark image is displayed above the following retailers")]
 		public void ThenICheckIfACheckmarkImageIsDisplayedAboveTheFollowingRetailers(Table table)
 		{
 			NewProduct newProductObject = new NewProduct();
@@ -69,6 +69,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			NewProduct newProductObject = new NewProduct();
 			var retailersThatDoNotDisplayAScopeButtonBelowTheirLogo = newProductObject.CheckIfScopeButtonIsDisplayedBeloweRetailerLogo(table);
+			foreach (string str in retailersThatDoNotDisplayAScopeButtonBelowTheirLogo)
+			{
+				Report.Info("HI " + str);
+			}
 			Report.IsTrue(retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Count == 0, "The following retailers are not displaying a 'Scope' button below their logos: " + retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.ToString(), "All retailers are displaying a 'Scope' button below their logos");
 		}
 
@@ -76,7 +80,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenICheckIfTheRetailerModalIsDisplayedForTheFollowingRetailerCT(string retailer)
 		{
 			NewProduct newProductObject = new NewProduct();
-			Delay.Seconds(3);
 			Report.IsTrue(newProductObject.ClickScopeButtonBelowRetailerLogo(retailer), "Failed to click 'Scope' button", "Successfully clicked 'Scope' button");
 			Delay.Seconds(3);
 			Report.IsTrue(newProductObject.CheckIfRetailerModalIsDisplayed(), "Failed to display retailer modal", "Successfully displayed retailer modal");
@@ -95,6 +98,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			NewProduct newProductObject = new NewProduct();
 			Report.IsTrue(newProductObject.CloseRetailerModal(), "Failed to close retailer modal", "Successfully closed retailer modal");
 		}
+
+		[StepDefinition(@"I hover over the yellow triangle image")]
+		public void ThenIHoverOverTheYellowTriangleImage()
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.HoverOverYellowTriangleImage(), "Failed to hover over the yellow triangle image", "Successfully hovered over the yellow triangle image");
+		}
+
+
+		[Then(@"I check if the text displayed over the yellow triangle image matches the following text: (.*)")]
+		public void ThenICheckIfTheTextDisplayedOverTheYellowTriangleImageMatchesTheFollowingText(string textToMatch)
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.CheckIfTextDisplayedOverYellowTriangleImageMatches(textToMatch), "The text over the yellow triangle image did not match the following text: " + textToMatch, "The text over the yellow trangle image did match the following text " + textToMatch);
+		}
+
 
 
 		#region  General New Product steps

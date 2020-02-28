@@ -18,6 +18,9 @@ using UL.Automation.Reporting;
 using UL.Automation.Selenium.Functions;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Chrome;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -400,20 +403,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public List<string> CheckIfRetailerLogoIsDisplayed(Table table)
 		{
 			var abbr = new RetailerAbbreviations();
-			string selectedAbbr = "";
 			List<string> retailersThatAreNotDisplayingTheirLogo = new List<string>();
 
 			foreach (TableRow row in table.Rows)
 			{
-
-				string retailer = row["Retailer"];
-				abbr.Map.TryGetValue(retailer, out selectedAbbr);
-				
-				IWebElement retailerLogo = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + retailer + ".png']"), 2);
+				string selectedAbbr = "";
+				abbr.Map.TryGetValue(row["Retailer"], out selectedAbbr);
+				IWebElement retailerLogo = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']"), 5);
 
 				if (retailerLogo == null)
 				{
-					retailersThatAreNotDisplayingTheirLogo.Add(retailer);
+					retailersThatAreNotDisplayingTheirLogo.Add(selectedAbbr);
 				}
 
 			}
@@ -438,7 +438,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (checkmarkImage == null)
 				{
-					retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.Add(retailer);
+					retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.Add(selectedAbbr);
 				}
 
 			}
@@ -464,7 +464,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (checkmarkImage == null)
 				{
-					retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo.Add(retailer);
+					retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo.Add(selectedAbbr);
 				}
 
 			}
@@ -490,7 +490,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (scopeButton.Text != "Scope")
 				{
-					retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Add(retailer);
+					retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Add(selectedAbbr);
 				}
 
 			}
@@ -536,9 +536,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CloseRetailerModal()
 		{
 
-			IWebElement closeButton = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//p"), 2);
+			IWebElement closeButton = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//button[text()='Close']"), 2);
 			return closeButton.TryClick();
 
+		}
+
+		public bool HoverOverYellowTriangleImage()
+		{
+			IWebElement yellowTrangleImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/DT.png']/../preceding-sibling::div//span//i[@class='fa fa-exclamation-triangle fa-3x']"), 2);
+
+			if (yellowTrangleImage != null)
+			{
+				yellowTrangleImage.Hover();
+				return true;
+			}
+
+			return false;
+
+		}
+
+		public bool CheckIfTextDisplayedOverYellowTriangleImageMatches(string textToMatch)
+		{
+			IWebElement toolTipDisplayBody = this.containerElement.FindElement(By.XPath(@"//div[@class='tooltip fade top in']//p"), 2);
+			
+			if (toolTipDisplayBody.Text == textToMatch)
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 		public string BatteyWarning()
