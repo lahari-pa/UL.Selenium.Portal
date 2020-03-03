@@ -403,13 +403,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public List<string> CheckIfRetailerLogoIsDisplayed(Table table)
 		{
 			var abbr = new RetailerAbbreviations();
+			string selectedAbbr;
 			List<string> retailersThatAreNotDisplayingTheirLogo = new List<string>();
 
 			foreach (TableRow row in table.Rows)
 			{
-				string selectedAbbr = "";
 				abbr.Map.TryGetValue(row["Retailer"], out selectedAbbr);
-				IWebElement retailerLogo = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']"), 5);
+				Report.Info("The retailer name is " + row["Retailer"] + " The retailer abbr is " + selectedAbbr);
+				IWebElement retailerLogo = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']"), 10);
 
 				if (retailerLogo == null)
 				{
@@ -426,15 +427,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 
 			var abbr = new RetailerAbbreviations();
-			string selectedAbbr = "";
+			string selectedAbbr;
 			List<string> retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo = new List<string>();
 
 			foreach (TableRow row in table.Rows)
 			{
 
-				string retailer = row["Retailer"];
-				abbr.Map.TryGetValue(retailer, out selectedAbbr);
-				IWebElement checkmarkImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + retailer + ".png']/../preceding-sibling::div//span//i[@class='fa fa-check fa-3x']"), 2);
+				abbr.Map.TryGetValue(row["Retailer"], out selectedAbbr);
+				Report.Info("The retailer name is " + row["Retailer"] + " The retailer abbr is " + selectedAbbr);
+				IWebElement checkmarkImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']/../preceding-sibling::div//span//i[@class='fa fa-check fa-3x']"), 2);
 
 				if (checkmarkImage == null)
 				{
@@ -460,7 +461,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				string retailer = row["Retailer"];
 				abbr.Map.TryGetValue(retailer, out selectedAbbr);
-				IWebElement checkmarkImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + retailer + ".png']/../preceding-sibling::div//span//i[@class='fa fa-exclamation-triangle fa-3x']"), 2);
+				IWebElement checkmarkImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']/../preceding-sibling::div//span//i[@class='fa fa-exclamation-triangle fa-3x']"), 2);
 
 				if (checkmarkImage == null)
 				{
@@ -486,7 +487,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				string retailer = row["Retailer"];
 				abbr.Map.TryGetValue(retailer, out selectedAbbr);
 			
-				IWebElement scopeButton = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + retailer + ".png']/../following-sibling::div//button"), 2);
+				IWebElement scopeButton = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']/../following-sibling::div//button"), 2);
 
 				if (scopeButton.Text != "Scope")
 				{
@@ -4405,6 +4406,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 			}
 			Report.Info("Checked all the alerts, the expected message was not found");
+			return false;
+		}
+
+		public bool CheckAlertMessageText(string displayedText)
+		{
+			IList<IWebElement> alertMessage = this.containerElement.FindElements(By.XPath("//div[@class='alert alert-danger'][contains(text(), '" + displayedText + "')]"), 2);
+
+			if (alertMessage != null)
+			{
+				return true;
+			}
+
 			return false;
 		}
 

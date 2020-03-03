@@ -32,12 +32,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenICheckIfTheLogoIsDisplayedForTheFollowingRetailers(Table table)
 		{
 			NewProduct newProductObject = new NewProduct();
-			var retailersThatAreNotDisplayingTheirLogo = newProductObject.CheckIfRetailerLogoIsDisplayed(table);
-			foreach (string str in retailersThatAreNotDisplayingTheirLogo)
+			List<string> retailersThatAreNotDisplayingTheirLogo = newProductObject.CheckIfRetailerLogoIsDisplayed(table);
+			foreach (string retailer in retailersThatAreNotDisplayingTheirLogo)
 			{
-				Report.Info("HI " + str);
+				Report.Info("The following retailer did not display their logo2: " + retailer + " HIHIIHI");
 			}
-			Report.IsTrue(retailersThatAreNotDisplayingTheirLogo.Count == 0, "The following retailers are not displaying their logos: " + retailersThatAreNotDisplayingTheirLogo, "All retailers are displaying their logos");
+			Report.IsTrue(retailersThatAreNotDisplayingTheirLogo.Count == 0, "One or more retailers did not display their logos: " + retailersThatAreNotDisplayingTheirLogo.ToString(), "All retailers are displaying their logos");
+			Report.Info("HI! " + retailersThatAreNotDisplayingTheirLogo.Count);
+            foreach (string retailer in retailersThatAreNotDisplayingTheirLogo)
+			{
+				Report.Info("The following retailer did not display their logo: " + retailer + " HIHIIHI");
+			}
+			for (int i = 0; i < retailersThatAreNotDisplayingTheirLogo.Count; i++)
+			{
+				Report.Info("The following retailer did not display their logo1: " + retailersThatAreNotDisplayingTheirLogo.ElementAt(i) + " HIHIIHI");
+			}
 		}
 
 		[StepDefinition(@"I check if a checkmark image is displayed above the following retailers")]
@@ -45,10 +54,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			NewProduct newProductObject = new NewProduct();
 			var retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo = newProductObject.CheckIfCheckmarkImageIsDisplayedAboveRetailerLogo(table);
-			foreach (string str in retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo)
-			{
-				Report.Info("HI " + str);
-			}
 			Report.IsTrue(retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.Count == 0, "The following retailers are not displaying a checkmark image above their logos: " + retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.ToString(), "All retailers are displaying checkmark images above their logos");
 		}
 
@@ -57,10 +62,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			NewProduct newProductObject = new NewProduct();
 			var retailersThatDoNotDisplayAYellowImageAboveTheirLogo = newProductObject.CheckIfYellowTriangleImageIsDisplayedAboveRetailerLogo(table);
-			foreach (string str in retailersThatDoNotDisplayAYellowImageAboveTheirLogo)
-			{
-				Report.Info("HI " + str);
-			}
 			Report.IsTrue(retailersThatDoNotDisplayAYellowImageAboveTheirLogo.Count == 0, "The following retailers are not displaying a yellow triangle image above their logos: " + retailersThatDoNotDisplayAYellowImageAboveTheirLogo.ToString(), "All retailers are displaying yellow triangle images above their logos");
 		}
 
@@ -69,10 +70,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			NewProduct newProductObject = new NewProduct();
 			var retailersThatDoNotDisplayAScopeButtonBelowTheirLogo = newProductObject.CheckIfScopeButtonIsDisplayedBeloweRetailerLogo(table);
-			foreach (string str in retailersThatDoNotDisplayAScopeButtonBelowTheirLogo)
-			{
-				Report.Info("HI " + str);
-			}
 			Report.IsTrue(retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Count == 0, "The following retailers are not displaying a 'Scope' button below their logos: " + retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.ToString(), "All retailers are displaying a 'Scope' button below their logos");
 		}
 
@@ -226,14 +223,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I should see the (.*) Page for the New Product")]
 		public void GivenIShouldSeeXPage(string page)
 		{
-			if (NewProduct.WaitForContainerToBeVisible())
-			{
-				Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
-				return;
+			//if (page == "Sustainability")
+			//{
+			//	Delay.Seconds(9999);
+			//}
+			//else
+			//{
+				if (NewProduct.WaitForContainerToBeVisible())
+				{
+					Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
+					return;
+				}
+				Report.Failure("New product page was not visible");
+				Report.Screenshot();
+//			}
 			}
-			Report.Failure("New product page was not visible");
-			Report.Screenshot();
-		}
 
 		[StepDefinition(@"I should see an error message: (.*)")]
 		public void ErrorMessageSpecific(string message)
@@ -2953,6 +2957,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().UnsetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
 				$"Failed to unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'",
 				$"Successfully unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
+		}
+
+		[Then(@"I check if alert message displays the following text: (.*)")]
+		public void ThenICheckIfAlertMessageDisplaysTheFollowingText(string displayedText)
+		{
+			var NewProductObject = new NewProduct();
+			Report.IsTrue(NewProductObject.CheckAlertMessageText(displayedText), "The alert message text did not match", "The alert message text did match");
 		}
 	}
 

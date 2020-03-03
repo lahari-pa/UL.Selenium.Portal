@@ -321,6 +321,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			this._abbr = new Dictionary<string, string> {
 				{ "Dollar General", "DG" },
+				{ "Dollar Tree", "DT" },
+				{ "Walmart", "WM" },
 				{ "Albertsons (includes Albertsons, LLC and New Albertson's Inc.)", "AL" },
 				{ "Northgate Market", "NM" },
 				{ "Weis", "WE" },
