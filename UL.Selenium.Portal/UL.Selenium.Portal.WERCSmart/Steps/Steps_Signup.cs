@@ -664,7 +664,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var thisNewUser = new NewUser();
 				Report.IsTrue(thisNewUser.Wait_for_load(), "New user form failed to load", "New user form is loaded as expected.");
 				Report.Screenshot();
-
+				
 				thisNewUser.Country = user.Country;
 				thisNewUser.FirstName = user.FirstName;
 				thisNewUser.LastName = user.LastName;
