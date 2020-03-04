@@ -1420,492 +1420,489 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ReportSettings.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartStep("I should only see the following retailers");
-				var produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				var productTable = new TechTalk.SpecFlow.Table(new string[] {
 				"Option"
 			});
-				produtTable.AddRow(new string[] {
-				"99 Cents"
+				productTable.AddRow(new string[] {
+				"Ace Hardware Corporation"
 			});
-				produtTable.AddRow(new string[] {
-				"Ahold"
+				productTable.AddRow(new string[] {
+				"Ahold | DelHaize USA"
 			});
-				produtTable.AddRow(new string[] {
-				"Albertsons (includes Albertsons, LLC and New Albertson's Inc.)"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Albertsons Companies"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Amazon"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Autozone"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)"
 			});
-				produtTable.AddRow(new string[] {
-				"Big Lots"
+				productTable.AddRow(new string[] {
+				"Best Buy"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Canadian Tire"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Costco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"CVS"
 			});
-				produtTable.AddRow(new string[] {
-				"Delhaize America (All Retail Banners)"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dick's Sporting Goods"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar General"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar Tree Stores, Inc. / Greenbrier International, Inc"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Essendant"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Family Dollar"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Genuine Parts"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Harbor Freight Tools"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HD Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HEB "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HyVee"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kohl's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kroger"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Lowe's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"McLane"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Meijer"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"New Egg"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"No Retailer/No UPC Product"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Northgate Market"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Office Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Optoro "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"O'Reilly"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Petco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Price Chopper "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Publix "
 			});
-				produtTable.AddRow(new string[] {
-				"PurView/CVS"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Rite Aid"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Save Mart Supermarkets"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Schnuck's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Sears/K-Mart"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Smart & Final"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Staples"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"SuperValu"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Target"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"The Home Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"TopCo"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Tractor Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Ultra/Standard"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Unified"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wakefern"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Walgreens"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wal-Mart/SAM'S CLUB"
 			});
-				produtTable.AddRow(new string[] {
-				"Weis"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"WinCo Foods"
 			});
-				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
+				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", productTable);
 			}
 			if (TReVorSettings.SoftwareBranch == "Staging")
 			{
 				ReportSettings.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartStep("I should only see the following retailers");
-				var produtTable = new Table(new string[] {
+				var productTable = new TechTalk.SpecFlow.Table(new string[] {
 				"Option"
 			});
-				produtTable.AddRow(new string[] {
-				"Ahold"
+				productTable.AddRow(new string[] {
+				"Ace Hardware Corporation"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
+				"Ahold | DelHaize USA"
+			});
+				productTable.AddRow(new string[] {
 				"Albertsons Companies"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Amazon"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Autozone"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
+				"Best Buy"
+			});
+				productTable.AddRow(new string[] {
 				"Canadian Tire"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Costco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"CVS"
 			});
-				produtTable.AddRow(new string[] {
-				"Delhaize America (All Retail Banners)"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dick's Sporting Goods"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar General"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar Tree Stores, Inc. / Greenbrier International, Inc"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Essendant"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Family Dollar"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Genuine Parts"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Harbor Freight Tools"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HD Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HEB "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HyVee"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kohl's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kroger"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Lowe's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"McLane"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Meijer"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"New Egg"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"No Retailer/No UPC Product"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Northgate Market"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Office Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Optoro "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"O'Reilly"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Petco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Price Chopper "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Publix "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Rite Aid"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Save Mart Supermarkets"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Schnuck's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Sears/K-Mart"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Smart & Final"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Staples"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"SuperValu"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Target"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"The Home Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"TopCo"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Tractor Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Ultra/Standard"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Unified"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wakefern"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Walgreens"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wal-Mart/SAM'S CLUB"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"WinCo Foods"
 			});
-				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
+				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", productTable);
 			}
 			if (TReVorSettings.SoftwareBranch == "Local Production")
 			{
 				ReportSettings.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartStep("I should only see the following retailers");
-				var produtTable = new Table(new string[] {
+				var productTable = new TechTalk.SpecFlow.Table(new string[] {
 				"Option"
 			});
-				produtTable.AddRow(new string[] {
-				"Ahold"
+				productTable.AddRow(new string[] {
+				"Ace Hardware Corporation"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
+				"Ahold | DelHaize USA"
+			});
+				productTable.AddRow(new string[] {
 				"Albertsons Companies"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Amazon"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Autozone"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
+				"Best Buy"
+			});
+				productTable.AddRow(new string[] {
 				"Canadian Tire"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Costco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"CVS"
 			});
-				produtTable.AddRow(new string[] {
-				"Delhaize America (All Retail Banners)"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dick's Sporting Goods"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar General"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar Tree Stores, Inc. / Greenbrier International, Inc"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Essendant"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Family Dollar"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Genuine Parts"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Harbor Freight Tools"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HD Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
+				"HEB "
+			});
+				productTable.AddRow(new string[] {
 				"HyVee"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kohl's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kroger"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Lowe's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"McLane"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Meijer"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"New Egg"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"No Retailer/No UPC Product"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Northgate Market"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Office Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Optoro "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"O'Reilly"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Petco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Price Chopper "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Publix "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Rite Aid"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Save Mart Supermarkets"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Schnuck's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Sears/K-Mart"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Smart & Final"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Staples"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"SuperValu"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Target"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"The Home Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"TopCo"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Tractor Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Ultra/Standard"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Unified"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wakefern"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Walgreens"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wal-Mart/SAM'S CLUB"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"WinCo Foods"
 			});
-				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
+				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", productTable);
 			}
 		}
 
