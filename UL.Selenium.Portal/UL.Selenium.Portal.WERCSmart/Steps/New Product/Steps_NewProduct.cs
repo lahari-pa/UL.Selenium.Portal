@@ -33,20 +33,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			NewProduct newProductObject = new NewProduct();
 			List<string> retailersThatAreNotDisplayingTheirLogo = newProductObject.CheckIfRetailerLogoIsDisplayed(table);
+			Report.IsTrue(retailersThatAreNotDisplayingTheirLogo.Count == 0, "One or more retailers did not display their logos", "All retailers are displaying their logos");
+
 			foreach (string retailer in retailersThatAreNotDisplayingTheirLogo)
 			{
-				Report.Info("The following retailer did not display their logo2: " + retailer + " HIHIIHI");
+				Report.Info("Retailer that did not display their logo: " + retailer);
 			}
-			Report.IsTrue(retailersThatAreNotDisplayingTheirLogo.Count == 0, "One or more retailers did not display their logos: " + retailersThatAreNotDisplayingTheirLogo.ToString(), "All retailers are displaying their logos");
-			Report.Info("HI! " + retailersThatAreNotDisplayingTheirLogo.Count);
-            foreach (string retailer in retailersThatAreNotDisplayingTheirLogo)
-			{
-				Report.Info("The following retailer did not display their logo: " + retailer + " HIHIIHI");
-			}
-			for (int i = 0; i < retailersThatAreNotDisplayingTheirLogo.Count; i++)
-			{
-				Report.Info("The following retailer did not display their logo1: " + retailersThatAreNotDisplayingTheirLogo.ElementAt(i) + " HIHIIHI");
-			}
+
 		}
 
 		[StepDefinition(@"I check if a checkmark image is displayed above the following retailers")]
@@ -54,7 +47,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			NewProduct newProductObject = new NewProduct();
 			var retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo = newProductObject.CheckIfCheckmarkImageIsDisplayedAboveRetailerLogo(table);
-			Report.IsTrue(retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.Count == 0, "The following retailers are not displaying a checkmark image above their logos: " + retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.ToString(), "All retailers are displaying checkmark images above their logos");
+			Report.IsTrue(retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.Count == 0, "One or more retailers did not display a checkmark image above their logos", "All retailers are displaying checkmark images above their logos");
+
+			foreach (string retailer in retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo)
+			{
+				Report.Info("Retailer that did not display a checkmark image above: " + retailer);
+			}
 		}
 
 		[StepDefinition(@"I check if a yellow triangle image is displayed above the following retailers")]
@@ -62,7 +60,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			NewProduct newProductObject = new NewProduct();
 			var retailersThatDoNotDisplayAYellowImageAboveTheirLogo = newProductObject.CheckIfYellowTriangleImageIsDisplayedAboveRetailerLogo(table);
-			Report.IsTrue(retailersThatDoNotDisplayAYellowImageAboveTheirLogo.Count == 0, "The following retailers are not displaying a yellow triangle image above their logos: " + retailersThatDoNotDisplayAYellowImageAboveTheirLogo.ToString(), "All retailers are displaying yellow triangle images above their logos");
+			Report.IsTrue(retailersThatDoNotDisplayAYellowImageAboveTheirLogo.Count == 0, "One or more retailers did not display a yellow triangle image above their logos", "All retailers are displaying yellow triangle images above their logos");
+
+			foreach (string retailer in retailersThatDoNotDisplayAYellowImageAboveTheirLogo)
+			{
+				Report.Info("Retailer that did not display a yellow triangle image above: " + retailer);
+			}
 		}
 
 		[StepDefinition(@"I check if a 'Scope' button is displayed below the following retailers")]
@@ -70,7 +73,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			NewProduct newProductObject = new NewProduct();
 			var retailersThatDoNotDisplayAScopeButtonBelowTheirLogo = newProductObject.CheckIfScopeButtonIsDisplayedBeloweRetailerLogo(table);
-			Report.IsTrue(retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Count == 0, "The following retailers are not displaying a 'Scope' button below their logos: " + retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.ToString(), "All retailers are displaying a 'Scope' button below their logos");
+			Report.IsTrue(retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Count == 0, "One or more retailers did not display a 'Scope' button below their logos", "All retailers are displaying a 'Scope' button below their logos");
+
+			foreach (string retailer in retailersThatDoNotDisplayAScopeButtonBelowTheirLogo)
+			{
+				Report.Info("Retailer that did not display a 'Scope' button below: " + retailer);
+			}
 		}
 
 		[StepDefinition(@"I check if the retailer modal is displayed for the following retailer: (.*)")]

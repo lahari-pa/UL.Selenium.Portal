@@ -399,7 +399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{ Tab.ReviewAndSubmit , "Review and Submit" }
 		};
 		#endregion
-		//Philip
+		
 		public List<string> CheckIfRetailerLogoIsDisplayed(Table table)
 		{
 			var abbr = new RetailerAbbreviations();
@@ -408,13 +408,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			foreach (TableRow row in table.Rows)
 			{
-				abbr.Map.TryGetValue(row["Retailer"], out selectedAbbr);
-				Report.Info("The retailer name is " + row["Retailer"] + " The retailer abbr is " + selectedAbbr);
-				IWebElement retailerLogo = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']"), 10);
+				string retailer = row["Retailer"];
+				abbr.Map.TryGetValue(retailer, out selectedAbbr);
+				IWebElement retailerLogo = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']"), 2);
 
 				if (retailerLogo == null)
 				{
-					retailersThatAreNotDisplayingTheirLogo.Add(selectedAbbr);
+					retailersThatAreNotDisplayingTheirLogo.Add(retailer);
 				}
 
 			}
@@ -432,14 +432,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			foreach (TableRow row in table.Rows)
 			{
-
-				abbr.Map.TryGetValue(row["Retailer"], out selectedAbbr);
-				Report.Info("The retailer name is " + row["Retailer"] + " The retailer abbr is " + selectedAbbr);
+				string retailer = row["Retailer"];
+				abbr.Map.TryGetValue(retailer, out selectedAbbr);
 				IWebElement checkmarkImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']/../preceding-sibling::div//span//i[@class='fa fa-check fa-3x']"), 2);
 
 				if (checkmarkImage == null)
 				{
-					retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.Add(selectedAbbr);
+					retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.Add(retailer);
 				}
 
 			}
@@ -453,7 +452,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 
 			var abbr = new RetailerAbbreviations();
-			string selectedAbbr = "";
+			string selectedAbbr;
 			List<string> retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo = new List<string>();
 
 			foreach (TableRow row in table.Rows)
@@ -465,7 +464,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (checkmarkImage == null)
 				{
-					retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo.Add(selectedAbbr);
+					retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo.Add(retailer);
 				}
 
 			}
@@ -479,7 +478,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 
 			var abbr = new RetailerAbbreviations();
-			string selectedAbbr = "";
+			string selectedAbbr;
 			List<string> retailersThatDoNotDisplayAScopeButtonBelowTheirLogo = new List<string>();
 
 			foreach (TableRow row in table.Rows)
@@ -491,7 +490,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (scopeButton.Text != "Scope")
 				{
-					retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Add(selectedAbbr);
+					retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Add(retailer);
 				}
 
 			}
@@ -4411,9 +4410,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckAlertMessageText(string displayedText)
 		{
-			IList<IWebElement> alertMessage = this.containerElement.FindElements(By.XPath("//div[@class='alert alert-danger'][contains(text(), '" + displayedText + "')]"), 2);
+			IWebElement alertMessage = this.containerElement.FindElement(By.XPath("//div[@class='col-sm-12']//div[@class='alert alert-danger']"), 2);
+			var displayedTextWithoutApastraphy = displayedText.Replace("'", "");
+			var alertMessageTextWithoutApastraphy = displayedText.Replace("'", "");
 
-			if (alertMessage != null)
+			if (alertMessageTextWithoutApastraphy.Equals(displayedTextWithoutApastraphy))
 			{
 				return true;
 			}
