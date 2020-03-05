@@ -172,6 +172,8 @@
     <Compile Include="Classes\WERCSmartUser.cs" />
     <Compile Include="Database Functions\dbRetailers.cs" />
     <Compile Include="Database Functions\dbUtils.cs" />
+    <Compile Include="Features\PhilipsFolder\PhilipsWebElements.cs" />
+    <Compile Include="Features\PhilipsFolder\StepDefinitions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
     <Compile Include="Selenium Classes\AddNewSupplier.cs" />
@@ -400,6 +402,7 @@
     </None>
     <None Include="Features\NewProduct.feature">
     </None>
+    <None Include="Features\PhilipsFolder\Philip.feature" />
     <None Include="Features\Product Registration\Batteries.feature" />
     <None Include="Features\NotIncludedGeneralTests.feature" />
     <None Include="Features\Product Registration\Duplicate UPC.feature" />
