@@ -2851,6 +2851,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(NewProductObject.CheckForErrorInTheFollowingFieldsInTheLithiumBatteryTransportationSection(table), "Failed to find an error in at least one of the fields", "Successfully found errors in all of the fields");
 
 		}
+
+		[StepDefinition(@"Data Accpetance Screen shows error with message: (.*)")]
+		public void DataAcceptanceScreenShowsError(string expectedError)
+		{
+			Report.IsTrue(new NewProduct().DataAcceptanceShowsAlertX(expectedError), "The expected alert was not found", "The expected alert was found");
+		}
+
+		[StepDefinition(@"I unselect option: (.*) under section: (.*) and subsection: (.*)")]
+		public void ForTheOptionSubOptionUnselect(string option, string section, string subSection)
+		{
+			Report.IsTrue(new NewProduct().UnsetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
+				$"Failed to unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'",
+				$"Successfully unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
+		}
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

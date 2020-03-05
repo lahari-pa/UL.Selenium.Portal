@@ -270,7 +270,7 @@ Scenario: [96172] Data Quality Review for Walmart
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: Data Quality Review for Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Data Quality Review for Walmart is shown as: Output consists of numerous datapoints that will allow internal users to manage the output for their immediate purpose and provide an overview of the Walmart-specific data provided to the retailer as a means of Quality Assurance. The report allow you to filter by product Last publish Date range and is limited to 500 records.
-	Then I enter start Date: 08-08-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
+	Then I enter start Date: 11-01-2019 and end Date: 11-14-2019 for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Data Quality Review for Walmart.xls and save as 96172
 	Then I confirm that the excel file saved as: 96172 contains the following columns: and they are in the correct order.
@@ -392,7 +392,6 @@ Scenario: [96733] UPC Details for Registration - Specific Retailer
 		| UPFV                         |
 		| UPDUM                        |
 		| UPFUM                        |
-		| DOT UN                       |
 		| Green Good Housekeeping      |
 		| Green Seal                   |
 		| EPA Safer Choice             |
@@ -417,7 +416,7 @@ Scenario: [114727] PM Walmart Monthly WMQC Report
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: PM Walmart Monthly WMQC Report report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: PM Walmart Monthly WMQC Report is shown as: Walmart Monthly Published WMQC subformat Report
-	Then I enter start Date: 08-08-2019 and end Date: Future for the Advanced report then I click Submit
+	Then I enter start Date: 01-01-2019 and end Date: Future for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called PM Walmart Monthly WMQC Report.xls and save as 114727
 	#Update Colum headings
@@ -485,7 +484,7 @@ Scenario: [114729] VOC Monthly Report - Walmart
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: VOC Monthly Report - Walmart report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: VOC Monthly Report - Walmart is shown as: Walmart Monthly VOC Report
-	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	Then I enter start Date: 09-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called VOC Monthly Report - Walmart.xls and save as 114729
 	#Then I confirm that the excel file saved as: 114729 includes the column: UPC Name between: Product Name and UPC
@@ -580,7 +579,7 @@ Scenario: [114732] WM Slotting Code Report
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: WM Slotting Code Report report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: WM Slotting Code Report is shown as: WM Slotting Code Report
-	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	Then I enter start Date: 09-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called WM Slotting Code Report.xls and save as 114732
 	Then I confirm that the excel file saved as: 114732 contains the following columns: and they are in the correct order.
@@ -761,7 +760,7 @@ Scenario: [98534] Advanced Reporting - Registrations Published report -
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I select the: Product Registrations Published report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Product Registrations Published is shown as: Assessed Registrations Published for Transfer and Completion to Retailers within a Date Range
-	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	Then I enter start Date: 11-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Product Registrations Published.xls and save as 98534
 	Then I confirm that the excel file saved as: 98534 contains the following columns:
@@ -832,7 +831,7 @@ Scenario: [115446] Products Fed to Retailers
 	Then I select the: Products Fed to Retailers report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: Products Fed to Retailers is shown as: Internal Use Only.  Products that successfully transferred registration assessment information to Retailers with an outline of the data provided.  Users can select specific retailers and a date range to generate the report.  Further filtering of data output can be done via UPC sizes, percentage of water and/or alcohol.
 	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM
-	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	Then I enter start Date: 07-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 115446
 	Then I confirm that the excel file saved as: 115446 contains the following columns:
@@ -922,7 +921,7 @@ Scenario: [116340] Products Fed to Retailers - Filters
 	Then I Check that the Description Text for the Report: Products Fed to Retailers is shown as: Internal Use Only.  Products that successfully transferred registration assessment information to Retailers with an outline of the data provided.  Users can select specific retailers and a date range to generate the report.  Further filtering of data output can be done via UPC sizes, percentage of water and/or alcohol.
 	Then In The advanced reporting screen I Click Option: Includes Water
 	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM
-	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	Then I enter start Date: 07-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340
 	Then For the excel file saved as: 116340 I check that the column with heading name: Water % does not contains: 0 in any rows.
@@ -930,7 +929,7 @@ Scenario: [116340] Products Fed to Retailers - Filters
 	Then I select the: Products Fed to Retailers report from Advanced Reporting in SHA
 	Then In The advanced reporting screen I Click Option: Contains Alcohol
 	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM
-	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	Then I enter start Date: 07-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340
 	Then For the excel file saved as: 116340 I check that the column with heading name: Alcohol % does not contains: 0 in any rows.
@@ -938,7 +937,7 @@ Scenario: [116340] Products Fed to Retailers - Filters
 	Then I select the: Products Fed to Retailers report from Advanced Reporting in SHA
 	Then I enter UPC Size: 1 in the advanced reporting popup
 	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM
-	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	Then I enter start Date: 07-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called Products Fed to Retailers.xls and save as 116340
 	Then For the excel file saved as: 116340 I check that the column with heading name: UPC Size only contains: 1 in all rows.
@@ -948,7 +947,7 @@ Scenario: [116340] Products Fed to Retailers - Filters
 	Then In The advanced reporting screen I Click Option: Contains Alcohol
 	Then I enter UPC Size: 1 in the advanced reporting popup
 	Then In The advanced reporting screen I choose WERCSmart Retail Recipient Code: WM
-	Then I enter start Date: 01-01-2019 and end Date: NA for the Advanced report then I click Submit
+	Then I enter start Date: 07-01-2019 and end Date: NA for the Advanced report then I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Then For the excel file saved as: 116340 I check that the column with heading name: Water % does not contains: 0 in any rows.
 	Then For the excel file saved as: 116340 I check that the column with heading name: Alcohol % does not contains: 0 in any rows.
@@ -1110,7 +1109,7 @@ Scenario: [118221] UPC Details for Registration - Specific Retailer - DOT Packin
 	Then I select the: UPC Details for Registration - Specific Retailer report from Advanced Reporting in SHA
 	Then I Check that the Description Text for the Report: UPC Details for Registration - Specific Retailer is shown as: Internal Use Only.  UPCs are listed for a chosen Retailer and include any additional UPC data such as Case Pack, Net Explosive Mass, and other details.
 	Then In The advanced reporting screen I enter WPSID saved as: TestCase65947
-	Then In The advanced reporting screen I choose retailer: CVS
+	Then In The advanced reporting screen I choose retailer: Walmart
 	Then In the Advanced Reporting popup I click Submit
 	And I wait for the Advanced Reporting Preparing Report popup to disappear
 	Given I confirm that an excel file is produced called UPC Details for Registration - Specific Retailer.xls and save as 96733
@@ -1146,3 +1145,75 @@ Scenario: [122472] Subscription by Account and Product Type
 		| Active Subscription                          |
 		| Past Due Balance                             |
 	Given I delete the excel file saved as excel122472
+
+Scenario: [124993] Subscription by Account and Product Type
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Subscription by Account and Product Type report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: Subscription by Account and Product Type is shown as: Subscription information for submitted registrations, including overall quantity of IDs and UPCs for the accounts.  All products and all accounts. Indicator of Past Due balance and Active subscriptions. Quantity of registrations per status, including cancelled, excluding new.  Internal Use Only.
+	Given In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called Subscription by Account and Product Type.xls and save as 124993
+	Then I confirm that the excel file saved as: 124993 contains the following columns: and they are in the correct order.
+		| Column                                       |
+		| Supplier                                     |
+		| Administrator E-Mail                         |
+		| Country                                      |
+		| Total Active IDs Qty                         |
+		| Total Active UPC Qty                         |
+		| Submitted (Qty of IDs / UPCs in this status) |
+		| Assigned                                     |
+		| Completed                                    |
+		| Cancelled                                    |
+		| Suspended                                    |
+		| Accepted                                     |
+		| Release for distribution                     |
+		| Formula                                      |
+		| Enhanced                                     |
+		| Articles                                     |
+		| Subscription Date (most recent)              |
+		| Active Subscription                          |
+		| Past Due Balance                             |		
+	Then For the excel file saved as: 124993 I check that the column with heading name: Cancelled does not contain: 0 / 0 in at least 1 row.
+	Then I delete the Advanced Report file saved as 124993
+
+Scenario: [124994] PM Walgreen Monthly Item Sync Report - UPC Requested Columns Contain Data
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: PM Walgreen Monthly Item Sync Report report from Advanced Reporting in SHA
+	Then I Check that the Description Text for the Report: PM Walgreen Monthly Item Sync Report is shown as: Walgreen Monthly Item Sync Report
+	Then I enter start Date: 10-10-2019 and end Date: NA for the Advanced report then I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called PM Walgreen Monthly Item Sync Report.xls and save as 124994
+	Then I confirm that the excel file saved as: 124994 contains the following columns: and they are in the correct order.
+		| Column                                |
+		| WPSID                                 |
+		| Product Status                        |
+		| Retailer Archived                     |
+		| UPC                                   |
+		| UPC Archived                          |
+		| Product Name                          |
+		| UPC Name                              |
+		| Supplier                              |
+		| PLP                                   |
+		| Item Type                             |
+		| RU                                    |
+		| RU Name                               |
+		| RUCC                                  |
+		| RUCC Name                             |
+		| # Times UPC Requested                 |
+		| Date API Ping                         |
+		| UPC Last Requested                    |
+		| UPC Requested Response                |
+		| Walgreen Product Completion Date      |
+		| Suppliers Submission Date             |
+		| Recertification Reason                |
+		| Other Walgreen Non Completion Reasons |
+	Then For the excel file saved as: 124994 I check that the columns with heading names found in the Table: contain data in all rows.
+		| Headers                   |
+		| UPC Last Requested <date> |
+		| UPC Requested Response    |
+	Then I delete the Advanced Report file saved as 124994
+
+
+	
+	
+

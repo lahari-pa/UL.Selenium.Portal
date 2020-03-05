@@ -24,6 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save the UPCs associated to the product as: (.*)")]
 		public void SaveUpcsToContext(string savedAs)
 		{
+			this.TheViewUPCPageLoadsWithNoErrors();
 			var upcNumbers = new List<string>();
 			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
 			foreach (ViewUpcs.ProductUpc upc in upcs)

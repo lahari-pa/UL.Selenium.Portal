@@ -256,7 +256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIExpandUPCDetails(string upc)
 		{
 			var upcToGet = Context.GetFromContext(upc).ToString();
-			new UPC().ExpandArrowforUPC(upcToGet);
+			new UPC().EnsureArrowIsExpandedforUPC(upcToGet);
 		}
 
 
