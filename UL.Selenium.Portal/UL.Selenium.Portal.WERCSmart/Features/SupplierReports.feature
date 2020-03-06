@@ -546,6 +546,7 @@ Scenario: [76759] Waste Classification Summary Report
 
 #Unable to run because the report requires a 1 year old product that is in completed status
 @tfs_design
+@ScenarioId:6619
 Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) report
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the Supplier Reports icon in the QuickLinks Pane
