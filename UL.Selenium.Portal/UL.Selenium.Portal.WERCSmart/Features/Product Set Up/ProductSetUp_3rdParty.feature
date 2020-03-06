@@ -254,8 +254,7 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80821)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Assigned
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80821)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80821)
-	And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80821)	
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open

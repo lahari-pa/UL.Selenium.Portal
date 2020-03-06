@@ -25,12 +25,13 @@ Scenario: [62775] Pesticides - Validation of Which one best describes your produ
 	Given I see the following sections
 		| Section                               |
 		| Which one best describes your product |
-	Given I should see a total of 3 radio buttons for the section: Which one best describes your product
+	Given I should see a total of 4 radio buttons for the section: Which one best describes your product
 	Then I should see the following radio buttons:
-		| Button                                                                                                                  |
-		| Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)                      |
-		| Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth |
-		| Product is not considered a pesticide product                                                                           |
+		| Button                                                                                                                                       |
+		| Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)                                           |
+		| Claims to sterilize, disinfect, sanitize or otherwise rid of bacteria, viruses or microorganisms that are infectious or pathogenic to humans. |
+		| Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth                      |
+		| Product is not considered a pesticide product                                                                                                |
 	And in the New Product page I click Continue
 	Then I should see an error message: This is a required field.
 	And I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)
@@ -473,7 +474,7 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 	Then I should see the Pesticide Details - State Registration Details Page
 	And I confirm that there is data populated in the Expiration Date Column for some States
 	And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
-	Then I edit the Expiration Date to: 2019-12-31 for the State: AZ on the Pesticide State Registration Details page
+	Then I edit the Expiration Date to: 2020-12-31 for the State: AZ on the Pesticide State Registration Details page
 	Given in the New Product page I click Continue
 	And I should see the Transportation Details 1 Page
 	Then I click the page heading: Pesticide Details - State Registration Details
@@ -627,7 +628,7 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	And I should see the Pesticide Details - State Registration Details Page
 	Given I confirm that there is data populated in the Expiration Date Column for some States
 	And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
-	Then I edit the Expiration Date to: 2019-12-31 for the State: AZ on the Pesticide State Registration Details page
+	Then I edit the Expiration Date to: 2020-12-31 for the State: AZ on the Pesticide State Registration Details page
 	Given in the New Product page I click Continue
 	Then I click the page heading: Pesticide Details - U.S.
 	And I should see the Pesticide Details - U.S. Page
