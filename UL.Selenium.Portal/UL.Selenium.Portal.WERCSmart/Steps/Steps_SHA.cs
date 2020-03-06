@@ -345,7 +345,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			bool found = false;
 
-			while (counter < 10 && !found)
+			while (counter < 20 && !found)
 			{
 				var thisStudioManager = new StudioSHAManager();
 				thisStudioManager.Wait_for_load();
@@ -3484,6 +3484,157 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Given In the SHA manager grid I see the WPS ID I have saved as product: " + saveAs + " and its status is: Completed");
 			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Completed");
 		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I click on the first supplier returned")]
+		public void InTheSupplierManagerPopupIClickOnFirstSupplier()
+		{
+			Report.Info("Attempting to click on the first supplier returned in the supplier manager popup");
+			Report.IsTrue(new StudioSupplierManager().ClickFirstSupplier(), "Failed to click the first supplier", "Successfully clicked the first supplier");
+			Report.Info("Waiting until the Category headers appear");
+			Report.IsTrue(new StudioSupplierManager().CheckCategoriesPresent(), "The category headers were not present", "The category headers were present");
+
+
+		}
+
+		
+
+		[StepDefinition(@"In The Supplier Manager popup I click on the category: (.*)")]
+		public void InTheSupplierManagerPopupIClickCategory(string category)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep($"Starting to attempt to click the catagory: {category}");
+			Report.IsTrue(new StudioSupplierManager().ClickCategory(category),"Failed to click the category","Successfully clicked the category");
+			Report.StartStep($"Checking that the catagory: {category} is active");
+			Report.IsTrue(new StudioSupplierManager().CategoryIsActive(category), "The Category was not active", "The Category was active");
+			
+		}
+
+		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
+		public void InTheSupplierManagerPopupICheckThatColumnXContainsAllValues(string column, Table table)
+		{
+			
+			Report.Info("Converting the table to a List");
+			List<string> expectedValues = new List<string>();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				expectedValues.Add(thisRow["Expected Value"]);
+			}
+			Report.IsTrue(new StudioSupplierManager().DataConsentTableIsPresent(), "The Data Consent Tier table was not showing", "The Data Consent Tier table was showing");
+			Report.IsTrue(new StudioSupplierManager().ColumnContains(column,expectedValues),"The column: "+column+" did not contain all the expected values", "The column: " + column + " did contain all the expected values");
+			
+		}
+
+		[StepDefinition(@"In the supplier manager popup I check that Data Tier Consent Table contains the following columns headings:")]
+		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsHeaders(Table table)
+		{
+			Report.Info("Converting the table to a List");
+			List<string> expectedValues = new List<string>();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				expectedValues.Add(thisRow["Expected Headers"]);
+			}
+			Report.IsTrue(new StudioSupplierManager().DataConsentTiersTableContainsHeaders(expectedValues),"The Headers were not as expected", "The headers were as expected");
+
+		}
+
+		[StepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the email column contains only valid email addresses")]
+		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsOnlyValidEmailAddress()
+		{
+			Report.IsTrue(new StudioSupplierManager().EmailColumnContainsEmailAddresses(), "The columns contained non valid email addresses", "The column contained only valid email addresses");
+						
+		}
+
+		[StepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the date column contains dates that are in the format mm-dd-yyyy")]
+		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsOnlyDatesInFormatmmddyyyy()
+		{
+			Report.IsTrue(new StudioSupplierManager().DateColumnContainsValidmmddyyyy(), "The Date column contained at least one non valid date", "The Date column contained only valid dates");
+
+		}
+
+
+		[StepDefinition(@"In the SHA manager I search for the Product saved as: (.*) and if its Status is Accepted I set the retailers: to Completed and check the Products Grid")]
+		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs,Table retailerTable)
+		{
+			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
+			string ID = ProductDetails.Id;
+			string status = "Accepted";
+			Report.Info("Searching for id: " + ID + " and status: " + status);
+			
+			int counter = 0;
+
+			bool found = false;
+
+			while (counter < 3 && !found)
+			{
+				var thisStudioManager = new StudioSHAManager();
+				thisStudioManager.Wait_for_load();
+				thisStudioManager.ClickBottomMenuOption("Search");
+
+				var myStepsSha = new Steps_SHA();
+
+				var table = new Table(new string[] {
+					"SearchTerm",
+					"SearchValue"
+				});
+				table.AddRow(new string[] {
+					"ProductID",
+					ID
+				});
+				table.AddRow(new string[] {
+					"Status",
+					"All"
+				});
+				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+
+				Delay.Seconds(2);
+				var mySHAManager = new StudioSHAManager();
+				mySHAManager.WaitForProductList(10);
+
+				Product topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+				if (topProductnew != null)
+				{
+					if (topProductnew.ID == ID)
+					{
+						if (status.ToLower() == "accepted or completed")
+						{
+							if (topProductnew.Status.ToLower() == "accepted" |
+								topProductnew.Status.ToLower() == "completed")
+							{
+								found = true;
+							}
+						}
+						else
+						{
+							if (status.ToLower() == "submitted")
+							{
+								if (topProductnew.Status.ToLower() == "submitted")
+								{
+									found = true;
+								}
+							}
+
+							if (topProductnew.Status.ToLower() == status.ToLower())
+							{
+								found = true;
+							}
+						}
+					}
+				}
+				counter++;
+			}
+			if(found==true)
+			{
+				new Steps_Shared().GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(productSavedAs, retailerTable);
+				this.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(productSavedAs, "Completed");
+			}
+			else
+			{
+				this.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(productSavedAs, "Completed");
+			}
+
+		}
+
+
 
 
 

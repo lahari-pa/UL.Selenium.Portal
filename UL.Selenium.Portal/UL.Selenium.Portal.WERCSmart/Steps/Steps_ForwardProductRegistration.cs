@@ -351,6 +351,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("Attempting to select product with id: " + id_);
 					this.EnterTextInSearchByIDOrProductNameField(id_);
+					int i = 0;
+					bool found = false;
+					while (i < 5 && found == false)
+					{
+
+						if (selForwardProductReg.GetTopProductNameFromSelectProductList().IsNullOrEmpty())
+						{
+							Report.Info($"No Product Name was found for the product with id: {id_}");
+							Delay.Seconds(2);
+							i++;
+
+						}
+						else
+						{
+							found = true;
+							Report.Info($"Product Name was found for the product with id: {id_}");
+						}
+					}
+					if (found == false)
+					{
+						Report.Failure($"The Product with {id_} was not found after searching for it.");
+						return;
+					}
 					if (selForwardProductReg.SelectProducts_ClickProductByID(id_))
 					{
 						Report.Success("Successfully selected product with ID: " + id_);
@@ -1082,6 +1105,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I wait for the Add Case UPC popup to appear")]
+		public void IWaitForTheAddCaseUPCPopupToAppear()
+		{
+			Report.IsTrue(new AddCaseUPCModal().WaitForAddCaseUPCPopup(), "The Add Case UPC modal did not appear", "The Add case upc modal appeared");
+		}
+
+		[StepDefinition(@"If there is the option to select a vendor for the product with ID: (.*), I select the first option")]
+		public void IfThereIsTheOptionToSelectVendorISelect(string id)
+		{
+			Report.Info("Checking to see if there is the option to select a Vendor");			
+			var frwdProdReg = new ForwardProductRegistration();
+			if (id.ToLower().Contains("saved as"))
+			{
+				var PI = (ProductInformation)Context.GetFromContext(id.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
+				if (PI == null)
+				{
+					throw new Exception("Failed to find product: " + id);
+				}
+
+				id = PI.Id;
+			}
+			Report.Info("Checking to see if there is the option to select a Vendor");
+			if(!frwdProdReg.GivenProductCheckVendorSelect(id))
+			{
+				Report.Info($"There was no option for selecting a vendor for the product with ID: {id}");
+				return;
+			}
+			Report.Info($"There the option for select vendor for ID: {id} was found!");
+			string firstOption = frwdProdReg.GivenProductFirstAvailableVendor(id);
+			Report.Info($"The first vendor option for ID: {id} was found as: {firstOption}");
+			Report.Info($"Selecting the option: {firstOption} for ID: {id}");
+			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option","Successfully selected the option");
+		}
 
 
 	}

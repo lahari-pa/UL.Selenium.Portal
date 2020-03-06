@@ -920,6 +920,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					return;
 				}
+				if(new NewProduct().FormError().Contains("UPC failing Transportation Rules."))
+				{
+					Report.Failure($"The Product created is failing the UPC Transporation Rules. An error was seen.");
+					Report.Screenshot();
+					return;
+				}
 				// delete upc that failed
 				stepsNewProduct.GivenIDeleteUPC(upc);
 				Report.Info("An error was showing! on click continue! Attempting a different UPC");
@@ -1674,23 +1680,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I set the UN Number field to: UN1950");
-			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
-			Delay.Seconds(2);
-			Report.StartStep("I select 'Aerosols' option in section: Proper Shipping Name");
-			MyNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Aerosols");
+			Report.StartStep("I set the UN Number field to: UN3159");			
+			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN3159");
+			Delay.Seconds(2);			
 			Delay.Seconds(2);
 			Report.StartStep("I enter 'Technical Test Name' in section: Technical Name (if applicable)");
 			MyNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Test Name");
 			Delay.Seconds(2);
-			Report.StartStep("I select '2.1' in section: Hazard Class (select)");
-			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "2.1");
+			Report.StartStep("I select '2.2' in section: Hazard Class (select)");			
+			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "2.2");
 			Report.StartStep("I select 'None' in section: Packing Group (select)");
 			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "None");
-			Report.StartStep(
-				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue(
-				"U. S. Department of Transportation (DOT) Classification");
+			Report.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
 		}
 
 		[StepDefinition(
@@ -1759,8 +1761,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(2);
 			Report.StartStep("I select the first option in section: Packing Group (select)");
 			MyNewProduct.SelectFirstOptionInSection("Packing Group (select)");
+			Report.StartStep("If Product boiling point question appears, I select the first radio button");
+			var expectedSections = new List<string>();
+			expectedSections.Add("Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.");
+			var expectedNormalised = expectedSections.Select(x => x.Replace(" ", "")).ToList();
+			var ActualSections = new NewProduct().GetDisplayedSections().Select(x => x).ToList();
+			var actualNormalised = ActualSections.Select(x => x.Replace(" ", "")).ToList();
+			if (expectedNormalised.All(actualNormalised.Contains))
+			{
+				MyNewProduct.SelectFirstOptionInSection("Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.");
+			}
 			Report.StartStep(
-				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+							"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue(
 				"U. S. Department of Transportation (DOT) Classification");
 		}
@@ -4502,7 +4514,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 			Report.StartStep("I select EN as the Language, MTR/CKLT as the format/subformat");
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
-			if (!thisPowerDesignerPlus.Wait_for_load(30))
+			if (!thisPowerDesignerPlus.Wait_for_load(120))
 			{
 				var thisStudioPowerDesignerPlusDesignMode =
 					new StudioPowerDesignerPlusDesignMode();
@@ -4511,7 +4523,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(3);
 			}
 
-			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(60), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 			Report.Info("Setting power designer plus options...");
 			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
@@ -4539,9 +4551,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 			Report.Info("Now going to click the sections side tab if its not open");
 			var selStepsStudio = new Steps_Studio();
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.InPDIEnsureSECT2318IsActive();
-			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			//selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			//selStepsStudio.InPDIEnsureSECT2318IsActive();
+			//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 
 
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
@@ -4645,9 +4657,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
 			var selStepsStudio = new Steps_Studio();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.InPDIEnsureSECT2318IsActive();
-			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			//selStepsStudio.InPDIEnsureSECT2318IsActive();
+			//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			//selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			new Steps_Studio().GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
@@ -5455,9 +5467,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I click continue");
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
 			Delay.Seconds(3);
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.InPDIEnsureSECT2318IsActive();
-			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			//selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			//selStepsStudio.InPDIEnsureSECT2318IsActive();
+			//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 		}
@@ -8732,8 +8744,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myNewProduct = new NewProduct();
 			Report.StartStep("I should see the Universal Product Code (UPC) Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+
+
 			Report.StartStep("I click expand arrow for: " + upc);
-			myNewProduct.ExpandArrowforUPC(upc);
+			myNewProduct.EnsureArrowIsExpandedforUPC(upc);
 			Report.StartStep("I add the following into the UPC Fields");
 			var upcInfo = new UpcInformation {
 				ContainerType = containerType,

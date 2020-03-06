@@ -6,6 +6,7 @@ using UL.Automation.Selenium.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -486,8 +487,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (countryDropDown == null)
 			{ throw new Exception("Country drop down control could not be found!"); }
 
-			countryDropDown.Click();
-
+			countryDropDown.Click();			
+			
 			IWebElement selectElement = countryDropDown.FindElements(By.XPath(".//option"), 2).FirstOrDefault(x => x.Text == country);
 			if (selectElement == null)
 			{ throw new Exception("Country not present in container!"); }

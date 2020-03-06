@@ -1155,6 +1155,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Successfully set the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
 		}
 
+		[StepDefinition(@"In the Transportation Details 1 screen, I unselect all transportation options for (DOT|IATA|IMDG|TDG)")]
+		public void InTheTransportationDetails1ScreenIUnselectAllTransportationOptionsFor(string option)
+		{
+			Report.IsTrue(new NewProduct().UnselectTransportationOptions(option), "Failed to unselect Transportation options for " + option + ".",
+				"Successfully unselection Transportation options for " + option + ".");
+		}
+
 		[StepDefinition(@"I (see|only see|do not see) the following questions")]
 		[StepDefinition(@"I (see|only see|do not see) the following sections")]
 		public void CheckDisplayedSections(string condition, Table sections)
@@ -2859,6 +2866,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var NewProductObject = new NewProduct();
 			Report.IsTrue(NewProductObject.CheckForErrorInTheFollowingFieldsInTheLithiumBatteryTransportationSection(table), "Failed to find an error in at least one of the fields", "Successfully found errors in all of the fields");
 
+		}
+
+		[StepDefinition(@"Data Accpetance Screen shows error with message: (.*)")]
+		public void DataAcceptanceScreenShowsError(string expectedError)
+		{
+			Report.IsTrue(new NewProduct().DataAcceptanceShowsAlertX(expectedError), "The expected alert was not found", "The expected alert was found");
+		}
+
+		[StepDefinition(@"I unselect option: (.*) under section: (.*) and subsection: (.*)")]
+		public void ForTheOptionSubOptionUnselect(string option, string section, string subSection)
+		{
+			Report.IsTrue(new NewProduct().UnsetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
+				$"Failed to unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'",
+				$"Successfully unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
 		}
 	}
 

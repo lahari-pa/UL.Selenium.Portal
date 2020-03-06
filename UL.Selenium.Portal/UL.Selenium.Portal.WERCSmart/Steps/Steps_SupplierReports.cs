@@ -568,6 +568,180 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) does not contain: (.*) in at least 1 row.")]
+		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnDoesNotContainForAtLeastOneRow(string savedAs, string column, string failValue)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				int wantedColumnIndex = 0;
+				bool wantedColumnFound = false;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == column)
+					{
+						wantedColumnIndex = i;
+						wantedColumnFound = true;
+						break;
+					}
+				}
+				if (!wantedColumnFound)
+				{
+					Report.Failure($"The column: {column} could not be found in the spreadsheet");
+					return;
+				}
+				List<string> wantedColumnContents = ExcelUtils.Excel_GetColumn(wantedColumnIndex);
+				bool failValueNotFound = false;
+				int y = 0;
+				foreach (var item in wantedColumnContents)
+				{
+					if (item != failValue && item != column)
+					{
+						Report.Info($"The Value {failValue} was not found in the column {column} for the entry at postition: {y}");
+						failValueNotFound = true;
+
+					}
+					if (item == failValue && item != column)
+					{
+						Report.Info($"The Value {failValue} was found in the column {column} for the entry at postition: {y}");
+					}
+					y++;
+				}
+				Report.IsTrue(failValueNotFound, "The fail value was found in all rows of the search column", "The fail value was not found in at least one row of the serch column");
+
+
+
+			}
+		}
+
+		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) contains data in all rows.")]
+		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnContainsDataInAllRows(string savedAs, string column)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				int wantedColumnIndex = 0;
+				bool wantedColumnFound = false;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == column)
+					{
+						wantedColumnIndex = i;
+						wantedColumnFound = true;
+						break;
+					}
+				}
+				if (!wantedColumnFound)
+				{
+					Report.Failure($"The column: {column} could not be found in the spreadsheet");
+					return;
+				}
+				List<string> wantedColumnContents = ExcelUtils.Excel_GetColumn(wantedColumnIndex);
+				bool wantedValueFound = true;
+				int y = 0;
+				foreach (var item in wantedColumnContents)
+				{
+					if (item.IsNullOrEmpty() && item != column)
+					{
+						Report.Failure($"The Value found in the column was empty for the entry at postition: {y}");
+						wantedValueFound = false;
+
+					}
+					y++;
+				}
+				Report.IsTrue(wantedValueFound, "Not all rows contained data for the search column", "All rows contained data for the search column");
+							   
+
+			}
+		}
+
+
+
+
+		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) contains dates in all rows.")]
+		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnContainsDatesInAllRows(string savedAs, string column)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				int wantedColumnIndex = 0;
+				bool wantedColumnFound = false;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == column)
+					{
+						wantedColumnIndex = i;
+						wantedColumnFound = true;
+						break;
+					}
+				}
+				if (!wantedColumnFound)
+				{
+					Report.Failure($"The column: {column} could not be found in the spreadsheet");
+					return;
+				}
+				var rows = ExcelUtils.Excel_GetNoRows();
+				for (int i = 1; i < rows; i++)
+				{
+					var currentRow = ExcelUtils.Excel_GetRow(i);				
+
+					var currentCell = currentRow[wantedColumnIndex];
+					try
+					{
+						DateTime dt = DateTime.Parse(currentCell);
+						Report.Success($"The value found in the row: {i} was a date as expected");
+					}
+					catch
+					{
+						Report.Failure($"The value found in the row: {i} was not a");
+					}
+
+				}
+			}
+		}
+		
+		/// <summary>
+		/// If the values of a given column are in datetime format, you must add the suffix <date> to the header title in the table
+		/// </summary>
+		/// <param name="savedAs"></param>
+		/// <param name="table"></param>
+		[StepDefinition(@"For the excel file saved as: (.*) I check that the columns with heading names found in the Table: contain data in all rows.")]
+		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnsInTableContainDataInAllRows(string savedAs, Table table)
+		{
+			List<string> headers = new List<string>();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				headers.Add(thisRow["Headers"]);
+			}
+			Report.Info($"The column that we are checking in are as follows: {string.Join(",", headers)}");
+			foreach(var row in headers)
+			{
+				if(row.Contains("<date>"))
+				{
+					string updatedHeader= row.Replace("<date>", "");					
+					updatedHeader = updatedHeader.Trim();
+					this.ThenIConfirmThatForTheExcelFileSavedAsTheColumnContainsDatesInAllRows(savedAs, updatedHeader);
+				}
+				else
+				{
+					this.ThenIConfirmThatForTheExcelFileSavedAsTheColumnContainsDataInAllRows(savedAs, row);
+				}
+				
+			}
+		}
+
 	}
 }
 

@@ -147,6 +147,7 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	And I click continue on the Forward Product Registration page
 	And In the Forward Product Registration Screen I select a retailer under Other Retailers and save as TestCase75321Retailer
 	And I click continue on the Forward Product Registration page
+	Then If there is the option to select a vendor for the product with ID: saved as TestCase75321, I select the first option
 	And I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue and save UPC as TestCase75321UPC
 	Then I should see the subheading 3: Product Results on the Forward Product Registration window
 	Then I confirm that for UPC Number saved as TestCase75321UPC the retailer is displayed as saved as TestCase75321Retailer
@@ -156,6 +157,7 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 	Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
 	And I click continue on the Forward Product Registration page
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	Given If purchase details are showing click confirm order
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)

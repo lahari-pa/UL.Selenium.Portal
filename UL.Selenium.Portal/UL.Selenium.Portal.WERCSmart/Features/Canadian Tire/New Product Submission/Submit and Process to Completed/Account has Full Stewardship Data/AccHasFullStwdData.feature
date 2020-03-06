@@ -67,7 +67,10 @@ Scenario: [86187] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 		| Retailer |
 		| CVS      |
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Completed
+	Then In the SHA manager I search for the Product saved as: TestCase86187 and if its Status is Accepted I set the retailers: to Completed and check the Products Grid
+	| Retailer      |
+	| Canadian Tire |
+	
 
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Product set up and process to specific statuses
@@ -116,8 +119,7 @@ Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Ch
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78864)
 	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase78864) for
 		| Retailer |
-		| CVS      |
-	#And I Confirm the product is shown in Accepted or Completed status for all retailers
+		| CVS      |	
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78864 and its status is: Completed
 
 @ScenarioId:1423
@@ -145,6 +147,7 @@ Scenario: [85286] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85286)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase85286)
 	#And I Confirm your product is shown in the Submitted status.Note this may take a few minutes for the Zuora process to process your product, if it is not shown in Submitted wait a minute or two and re-search for your product
 	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase85286)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85286)
@@ -290,7 +293,10 @@ Scenario: [86171] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase86171)
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86171)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86171 and its status is: Completed
+	Then In the SHA manager I search for the Product saved as: TestCase86171 and if its Status is Accepted I set the retailers: to Completed and check the Products Grid
+	| Retailer      |
+	| Canadian Tire |
+	
 
 
 @ScenarioId:6556
@@ -329,8 +335,10 @@ Scenario: [86170] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase86170
 	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase86170)
 	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86170)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86170 and its status is: Completed
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86170)	
+	Then In the SHA manager I search for the Product saved as: TestCase86170 and if its Status is Accepted I set the retailers: to Completed and check the Products Grid
+	| Retailer      |
+	| Canadian Tire |
 
 
 @ScenarioId:1578
@@ -369,5 +377,7 @@ Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Can
 	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase86395
 	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase86395)
 	Given I call Shared Step 59066 (Go to SHA Manager)
-	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86395)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86395 and its status is: Completed
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86395)	
+	Then In the SHA manager I search for the Product saved as: TestCase86395 and if its Status is Accepted I set the retailers: to Completed and check the Products Grid
+	| Retailer      |
+	| Canadian Tire |
