@@ -284,6 +284,7 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122971
 
 @tfs_design
+@ScenarioId:6713
 Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: RandomUPC

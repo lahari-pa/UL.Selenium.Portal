@@ -2080,10 +2080,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			stepsNewProductIngredients.AddIngredients(table);
-			Report.StartStep("In the Ingredients page I click Continue");
+			Report.StartStep("In the Ingredients page I click Continue");			
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartStep("I should see the Regulatory Information 1 Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Regulatory Information 1");
+			MyNewProductSteps.GivenIShouldSeeXPage("Regulatory Information 1");			
+			
 		}
 
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
@@ -4321,6 +4322,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("Beginning shared step: 49841");
 			Report.StartStep("I set the status filter to All");
+			Report.Screenshot();
 			var myStudioShaManager = new StudioSHAManager();
 			//myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter("All");
@@ -4348,13 +4350,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			bool Found = false;
 			int counter = 0;
-			while (!Found && counter < 7)
+			while (!Found && counter < 10)
 			{
 				Report.StartStep("I click Srch in the bottom menu list");
 				myStudioShaManager.ClickBottomMenuOption("Search");
 				var myStepsSha = new Steps_SHA();
-				Report.StartStep(
-					$"I enter ID: {id} in the Product ID box, change Status drop down to All, Click find");
+				Report.StartStep($"I enter ID: {id} in the Product ID box, change Status drop down to {status}, Click find");
 				Report.Info("Searching for: " + id);
 				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 				Delay.Seconds(1);
