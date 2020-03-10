@@ -1187,5 +1187,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return trScore == p0;
 		}
+
+		public bool CheckTopSearchfieldDropdownItemsCASNumber(string casNumber)
+		{
+			IWebElement topSearchfieldDropdownItemCASNumber = this.FindElement(By.XPath(".//ul[@class='select2-results__options']//span[@class='text-muted'][1]"), 2);
+
+			if (topSearchfieldDropdownItemCASNumber.Text == casNumber)
+			{
+				return true;
+			}
+
+			return false;
+		}
 	}
 }

@@ -191,7 +191,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Logged in, logging out");
 				Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out");
 			}
-			
+	
 			if (user == null)
 			{
 				string Branch = TReVorSettings.SoftwareBranch;
@@ -898,7 +898,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// </summary>
 		/// <param name="bodyText"></param>
 		[StepDefinition(@"the body of the email should show: (.*)")]
-		public void ThenTheBodyOfTheEmailShouldShow(string bodyText)
+	    public void ThenTheBodyOfTheEmailShouldShow(string bodyText)
 		{
 			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
 			try
@@ -1095,7 +1095,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIfAModalDialogOpensICloseIt()
 		{
 			var thisModalDialog = new ModalDialog();
-			if (thisModalDialog.Wait_for_load(3))
+			if (thisModalDialog.Wait_for_load(5))
 			{
 				Report.Info("modal dialog is opened. ");
 				Report.IsTrue(thisModalDialog.Click_Closex(), "Failed to click close button", "Clicked close button");
@@ -1105,6 +1105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the modal dialog I click the ""(.*)"" button")]
 		public void GivenInTheModalDialogIClickButton(string button)
 		{
+	
 			Report.IsTrue(new ModalDialog().ClickButton(button),
 				$@"Failed to click ""{button}"" button",
 				$@"Successfully clicked the ""{button}"" button");

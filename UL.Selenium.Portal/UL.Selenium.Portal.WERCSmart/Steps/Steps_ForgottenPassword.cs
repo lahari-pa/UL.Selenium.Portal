@@ -256,7 +256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var matchingEmail = (Email)Context.ScenarioContext["Matching"];
 				//var myLink = matchingEmail.Html.Links[0].Href;
 				var myLink = matchingEmail.Html.Links.ToList();
-
+		
 				foreach (Link link in myLink)
 				{
 					var myFp = new ForgottenPassword();
@@ -277,6 +277,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
+
+
+		[StepDefinition(@"I confirm that I am on the Security Questions page")]
+		public void ThenIConfirmThatIAmOnTheSecurityQuestionsPage()
+		{
+
+			var selForgotpasswordconfirm = new ForgottenPasswordQuestions();
+
+			Report.IsTrue(selForgotpasswordconfirm.ConfirmThatUserIsOnSecurityQuestionsPage(), "Failed to reach the Security Questions page", "Successfully reached the Security Questions Page");
+
+		}
+
 
 
 		[StepDefinition(@"the message should contain (.*)")]

@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -105,17 +106,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Reset_Password_Link");
 
-			Report.Info("Link = " + myLink);
-			if (myLink.Href.Contains("ResetPassword"))
+			var expectedPasswordLink = TestVariables.GetVariableSavedAs("ExpectedResetPasswordLink");
+
+			Report.Info("Link = " + myLink + "Expected Link = " + expectedPasswordLink);
+
+			if (myLink.Href.Contains(expectedPasswordLink))
 			{
 				Report.Info("Link Found");
 				SeleniumBrowser.Navigate(myLink.Href);
 				return true;
-			}
-			Report.Info(myLink.Href + " Not Found");
+		}
+		Report.Info(myLink.Href + " Not Found");
 			return false;
 		}
-
 
 	}
 
@@ -345,6 +348,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Attempting to Click Login Button");
 			return this._btnLogin.TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+
+		public bool ConfirmThatUserIsOnSecurityQuestionsPage()
+		{
+
+			Report.Info("Checking if the user reached the Security Questions page");
+
+			IWebElement securityQuesitonsPageTitle = this.containerElement.WaitUntilElementVisible(By.XPath(".//h3[text()='Forgot Password']"), 2);
+
+			if (securityQuesitonsPageTitle != null)
+			{
+
+				return true;
+
+			}
+
+			return false;
+
 		}
 
 

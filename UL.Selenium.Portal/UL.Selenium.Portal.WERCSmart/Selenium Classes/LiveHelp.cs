@@ -23,23 +23,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyThreeLinesIcon()
 		{
-			return this.containerElement.FindElement(By.XPath(".//span[@class='ic-chat']//i"), 2) != null;
+			IWebElement threeLinesIcon = this.containerElement.FindElement(By.XPath(".//img[@class='animated zoomIn faster']"), 5);
+			return threeLinesIcon != null;
 		}
 
 		public bool VerifyX()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i"), 2) != null;
+			IWebElement xIcon = this.containerElement.FindElement(By.XPath("./../../preceding-sibling::div[contains(@class,'d_hotline minimize')]//i"), 5);
+			return xIcon != null;
 		}
 
 		public bool VerifyInboxText()
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[contains(@class,'list-title')]"), 2);
-			return elem != null && elem.Text == "Inbox";
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[@class]"), 2);
+			return elem != null && elem.Text == "INBOX";
 		}
 
 		public bool VerifyMessageText(string message)
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[ contains(@class,'h-message-text')]"), 2);
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'h-message-text')]"), 2);
 			return elem != null && elem.Text == message;
 		}
 
@@ -51,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyPlaceholder(string text)
 		{
-			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@id='app-conversation-editor']"), 2);
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//div[@id='app-conversation-editor']"), 5);
 			return elem != null && elem.GetAttribute("data-placeholder") == text;
 		}
 
@@ -59,18 +61,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			if (icon == "paperclip")
 			{
-				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_attachment']"), 2) != null;
+				IWebElement paperclipIcon = this.containerElement.FindElement(By.XPath(".//i[@class='icons icon-ic_attachment']"), 2);
+				return paperclipIcon != null;
 			}
 			if (icon == "smiley")
 			{
-				return this.containerElement.FindElement(By.XPath(".//i[@class='icon-ic_smiley']"), 2) != null;
+				IWebElement smileyIcon = this.containerElement.FindElement(By.XPath(".//i[@class='icons icon-ic_smiley']"), 2);
+				return smileyIcon != null;
 			}
 			return false;
 		}
 
 		public bool ClickCloseX()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class='minimize']//i"), 2).TryClick();
+			IWebElement closeXButton = this.containerElement.FindElement(By.XPath("./../../preceding-sibling::div[contains(@class,'d_hotline minimize')]//i"), 2);
+			return closeXButton.TryClick();
 		}
 
 

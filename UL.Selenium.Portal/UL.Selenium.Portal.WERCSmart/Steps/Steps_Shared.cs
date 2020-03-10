@@ -1680,25 +1680,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I set the UN Number field to: UN3159");
-			//MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
+			Report.StartStep("I set the UN Number field to: UN3159");			
 			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN3159");
-			Delay.Seconds(2);
-			//Report.StartStep("I select 'Aerosols' option in section: Proper Shipping Name");
-			//MyNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Aerosols");
+			Delay.Seconds(2);			
 			Delay.Seconds(2);
 			Report.StartStep("I enter 'Technical Test Name' in section: Technical Name (if applicable)");
 			MyNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Test Name");
 			Delay.Seconds(2);
-			Report.StartStep("I select '2.2' in section: Hazard Class (select)");
-			//MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "2.1");
+			Report.StartStep("I select '2.2' in section: Hazard Class (select)");			
 			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "2.2");
 			Report.StartStep("I select 'None' in section: Packing Group (select)");
 			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "None");
-			Report.StartStep(
-				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue(
-				"U. S. Department of Transportation (DOT) Classification");
+			Report.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
 		}
 
 		[StepDefinition(
@@ -5086,6 +5080,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Granted");
 			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 4.1 Derived Results", "Granted");
+			var thisStepsNewProduct = new StepsNewProduct();
+			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
+		}
+
+		[StepDefinition(@"I call Shared Step 79491 \(Formulation > 3rd Party - Accept formulation - Decline Tier 4.1 - Continue\)")]
+		public void ThenICallSharedStep79491FormulationRdParty_AcceptFormulation_DeclineLastTier_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var thisMyIngredients = new Steps_MyIngredients();
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
+			//thisMyIngredients.InTheFormulationThirdPartySCreenISetDeclinedTo("true");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Granted");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 4.1 Derived Results", "Declined");
 			var thisStepsNewProduct = new StepsNewProduct();
 			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
 		}
