@@ -867,5 +867,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			string displayPercentage = new Ingredients().GetIngredientPercentage(ingredient);
 			Report.IsTrue(displayPercentage == percentage, "Failed to display percentage for ingredient: " + ingredient + " as: " + percentage + ", actually displayed: " + displayPercentage, "Successfully displayed percentage for ingredient: " + ingredient + " as: " + percentage);
 		}
+
+		[StepDefinition(@"I confirm the top result in the searchfields dropdown list has the following CAS number: (.*)")]
+		public void GivenIConfirmTheTopResultInTheSearchfieldsDropdownListHasTheFollowingCASNumber(string casNumber)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.CheckTopSearchfieldDropdownItemsCASNumber(casNumber), "The top result in the seachfields dropdown item did not have the CAS number, " + casNumber, "The top result in the seachfields dropdown item did have the CAS number, " + casNumber);
+		}
+
 	}
 }

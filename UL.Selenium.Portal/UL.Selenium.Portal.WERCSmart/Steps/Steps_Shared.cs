@@ -5080,6 +5080,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
 		}
 
+		[StepDefinition(@"I call Shared Step 79491 \(Formulation > 3rd Party - Accept formulation - Decline Tier 4.1 - Continue\)")]
+		public void ThenICallSharedStep79491FormulationRdParty_AcceptFormulation_DeclineLastTier_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var thisMyIngredients = new Steps_MyIngredients();
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
+			//thisMyIngredients.InTheFormulationThirdPartySCreenISetDeclinedTo("true");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Granted");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 4.1 Derived Results", "Declined");
+			var thisStepsNewProduct = new StepsNewProduct();
+			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 73956 version 2 \(Go to Summary and verify data\) with product type: (.*)")]
 		public void SharedGoToSummaryAndVerifyDataWithoutNavigatingToTheHomepage(string typeOfProduct)

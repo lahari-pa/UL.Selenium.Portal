@@ -304,10 +304,11 @@ Scenario: [58097] Ingredient Search in Registration
 	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 	Given I call Shared Step 37857 (Enter Physical Property - Solid)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	#enter CAS 18618-43-4, confirm match is top of filter list
+	Given I enter text: 13397-25-6 in the component search box
+	Given I confirm the top result in the searchfields dropdown list has the following CAS number: 13397-25-6
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| CASNumber  | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| 18618-43-4 | 100     | false               | false       |            |
+		| 13397-25-6 | 100     | false               | false       |            |
 	Given I navigate to the home page
 	Then I delete the product: TestCase58097
 

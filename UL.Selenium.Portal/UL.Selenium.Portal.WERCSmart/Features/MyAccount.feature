@@ -35,6 +35,7 @@ Scenario: [61796] Account User Name in Header
 	Given In the UserDetails page I click Save
 	Then I should see user name: saved as ThisUser in the header next to the user icon
 
+@ScenarioId:6704
 Scenario: [63514] Add and Deactivate a New User from the User Grid
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
