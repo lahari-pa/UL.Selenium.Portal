@@ -507,6 +507,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				var modal = new ModalDialog();
+				
 
 				Report.IsTrue(modal.ClickApprove(), "Could not click Approve in modal window", "Successfully clicked Approve in modal window");
 			}

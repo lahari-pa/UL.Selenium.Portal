@@ -985,6 +985,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Beginning double click on category to edit: " + category);
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			GeneralUtilities.StudioWaitForSpinner(30);
 			Report.IsTrue(selStudioPowerDesignerPlus.DoubleClickCategoryToEdit(category),
 				"Failed to double click category: " + category,
 				"Successfully clicked " + category);
