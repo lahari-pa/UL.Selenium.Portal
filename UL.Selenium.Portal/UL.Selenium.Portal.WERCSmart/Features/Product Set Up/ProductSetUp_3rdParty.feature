@@ -77,7 +77,7 @@ Scenario: [122123] Create a 3rd party product - with Tier 2 approval (include ge
 	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 	Then I check if the logo is displayed for the following retailers
 	| Retailer	    |
-	| Canadian Tire  |
+	| Canadian Tire |
 	| Costco        |
 	| CVS           |
 	| Dollar Tree   |
