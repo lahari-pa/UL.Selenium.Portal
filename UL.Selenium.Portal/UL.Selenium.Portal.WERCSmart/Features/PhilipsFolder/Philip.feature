@@ -44,7 +44,7 @@ Scenario:[120790] "U" for UPC Update for Submitted Status
 	Given I generate a random UPC number and save as: UPC85885
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-	Then I save the product information as: TestCase88918
+	Then I save the product information as: 1620206
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -63,7 +63,7 @@ Scenario:[120790] "U" for UPC Update for Submitted Status
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
-	Given I search for the product saved as: TestCase88918
+	Given I search for the product saved as: 1620206
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit UPCs
 
