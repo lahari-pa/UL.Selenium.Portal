@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.Selenium.Classes;
 using UL.Selenium.Portal.WERCSmart.Features.PhilipsFolder;
 
 namespace UL.Selenium.Portal.WERCSmart.Features.PhilipsFolder {
@@ -23,6 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.PhilipsFolder {
 		public void ThenIClickTheCheckboxLabeledAbc(string label)
 		{
 			PhilipsWebElements philipsWebElementsObject = new PhilipsWebElements();
+			Delay.Seconds(10);
 			Report.IsTrue(philipsWebElementsObject.ClickCheckBoxWithLabel(label), "Failed to click box", "Successfully clicked box");
 		}
 

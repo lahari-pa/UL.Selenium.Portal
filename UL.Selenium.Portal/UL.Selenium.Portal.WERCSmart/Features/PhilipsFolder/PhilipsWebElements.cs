@@ -30,8 +30,8 @@ namespace UL.Selenium.Portal.WERCSmart.Features.PhilipsFolder
 
 		public bool ClickCheckBoxWithLabel(string label)
 		{
-			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//input[@type='checkbox']"), 2);
-			return checkBox.TryClick();
+			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//input[@id='show-only-discontinued-products']"), 2);
+			return checkBox.TryCheck();
 		}
 	}
 
