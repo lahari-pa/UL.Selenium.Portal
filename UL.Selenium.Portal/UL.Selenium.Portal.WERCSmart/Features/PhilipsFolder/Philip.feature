@@ -32,6 +32,22 @@
 @PaymentMethods
 @ProductSetUp
 @run_AccountHasStewardshipInfo
+@Shared
+@LandingPage
+@Login
+@Homepage
+@Signup
+@wercsmart
+@NewProduct
+@ProductGrid
+@DataSummarySheet
+@wercsmart
+@RetailPartners
+@Studio
+@SHA
+@UPC
+@run_StwdInWpsStudiofeature
+@Philip
 
 Feature: Philip
 	In order to avoid silly mistakes
@@ -44,7 +60,7 @@ Scenario:[120790] "U" for UPC Update for Submitted Status
 	Given I generate a random UPC number and save as: UPC85885
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-	Then I save the product information as: 1620206
+	Then I save the product information as: TestCase85982
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
@@ -63,29 +79,21 @@ Scenario:[120790] "U" for UPC Update for Submitted Status
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
-	Given I search for the product saved as: 1620206
+
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+    Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase85982)
+    Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85982 and its status is: Submitted
+    Given I navigate to the landing page
+    Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+
+	Given I search for the product saved as: TestCase85982
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit UPCs
-
 	Given In the New Product page I click tab: Recipient and UPC Details
 	Given I click the page heading: Universal Product Code (UPC)
 	And I delete UPC: saved as UPC85885
 	Then In the list of UPCs I should not see UPC: saved as UPC85885
-
-	#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85982)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85982 and its status is: Submitted
-	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase85982)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85982)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85982 and its status is: Assigned
-	#And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase85982)
-	##And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
-	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase85982)
-	#And In Power Designer Plus page in My Toolbar tab I click on the product attributes button
-	#Given I call Shared Step 86015 - WPS PD+ -  Product attributes - check all entries for Canada Stewardship data
-
-
-
 
 
 
@@ -245,4 +253,163 @@ Scenario:[120790] "U" for UPC Update for Submitted Status
 
 
 	Scenario:[120866] UPC Retailer and Feed
+
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC85885
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase85982
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And In the 'Select Retailers' window I select the retailer: Costco
+	And I click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC85885, container type: Plastic Container and size: 12 click continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	And I navigate to the home page
+
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85982)
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase85982
+	Then I check for the following columns
+	| Column Name |
+	| UPC Number  |
+	| Pkg Type    |
+	| Pkg Size    |
+
+
+
+	Scenario:[120873] Product List - CW Column "Y" or "N"
+
+	Scenario:[121120] Pesticide - New Radio Icon Option
+    Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC85885
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#4
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with pest control
+	Then I save the product information as: TestCase85982
+	#5
+	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	#6
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+    #7
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	#8
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#9
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+	#13
+	And I should see the Transportation Details 1 Page
+	And The following options should be displayed exclusively for section: Product is Regulated for Transport
+	| Option                               |
+	| Yes                                  |
+	| No, due to an exemption or exception |
+	And I set the Product is Regulated for Transport field to: Yes
+	And I set the Select all modes of transport that you've classified the product for field to: DOT
+	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I click continue
+	#14
+	And In the 'Select Retailers' window I select the retailer: Costco
+	And I click continue
+	#15
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC85885, container type: Plastic Container and size: 12 click continue
+	#16
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then in the Additional Documents to Provide page I click Continue
+	#18
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	#19
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	#20
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	#21
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#22
+	Given If purchase details are showing click confirm order
+    #23
+	And I navigate to the home page
+
+#4.The Product - Enter Product Name and Select Type of Product  
+#5.Product Characteristics - Liquid Only available - Enter All Data - Continue - Happy Path  
+#6.Additional Product Information - New Pesticide Option Available  
+#7.Ingredients - Add Any Chemical  
+#8.Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path  
+#9.Regulatory Information 3 - None of the Above Option
+
+#10.Confirm the Pesticide Data - United States step is shown 
+#11.Enter Pesticide Data - United States (with EPA number)
+#12.Click Continue in Pesticide Details - State Registration Details
+#13.Transportation Details 1 > Not Regulated  
+#14.Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue  
+#15.Add UPC - Battery product, Add UPC, Container Type, and Size  
+#16.Regulatory Documents to Provide - Request Authoring with Product Label  
+#17.Additional Documents to Provide - Upload Full Product Label - Continue  
+#18.Click Continue in Optional Reports and Documents Available for Purchase 
+#19.Safety Data Sheet Authoring - Additional Data (Optional)  
+#20.Click Continue in Comments
+#21.Data Acceptance - Click Accept - Happy Path  
+#22.Click Confirm Order button 
+#23.Click Home	
+
+     Scenario:[119578] My Products - More Filters - For Discontinued Registrations
+	 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	 Then The home screen should load
+	 And I should see an option for More Filters
+	 Given I click More Filters in the products grid
+	 Then I click the checkbox labeled: Show Archived Retailers
+	 #Confirm that only discontinued products appear
+	 Then I click the checkbox labeled: Show Archived Retailers
+
+
+
+
+	 Scenario:[122366] Battery Containing Product (BCP) (Transportation override at UPC level- New Feature)
+	 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	 Given I generate a random UPC number and save as: UPC85885
+	 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery-Containing Product
+	 Then I save the product information as: TestCase120798
+	 Given I call Shared Step 60756 (Additional Product Information with Country and every option)
+	 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	 Then I should see the Product Includes Battery Page
+	 Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.
+	 Given I add the following batteries:
+		 | Battery Type     | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
+		 | Lithium Primary  | <any>        | 4                               | 4                                  | lithiumbattery |
+	 Given I click continue
+	 And I set 'Product has had TCLP; Report is available' to: No
+	 And I set the Lead option to: No
+	 And I set the Mercury option to: No
+	 And I set the Silver option to: No
+	 And I set the Cadmium option to: No
+	 And I set the Chromium option to: No
+	 And I set the Barium option to: No
+	 And I set the Arsenic option to: No
+	 And I set the Selenium option to: No
+	 Given I click continue
+	 Then I should see the Electronic Equipment Page
+	 And I set 'Contains Circuit Board' to: No
+	 And I set 'Has a LCD or Plasma Display' to: No
+	 Given I click continue
+	Given I call Shared Step 60096 (Lithium Battery Transportation)
+	And In the 'Select Retailers' window I select the retailer: Costco
+	And I click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC85885, container type: Plastic Container and size: 12 click continue
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase120798

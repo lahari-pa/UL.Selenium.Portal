@@ -172,6 +172,7 @@
     <Compile Include="Classes\WERCSmartUser.cs" />
     <Compile Include="Database Functions\dbRetailers.cs" />
     <Compile Include="Database Functions\dbUtils.cs" />
+    <Compile Include="Features\PhilipsFolder\PhilipsStepDefinitions.cs" />
     <Compile Include="Features\PhilipsFolder\PhilipsWebElements.cs" />
     <Compile Include="Features\PhilipsFolder\StepDefinitions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
