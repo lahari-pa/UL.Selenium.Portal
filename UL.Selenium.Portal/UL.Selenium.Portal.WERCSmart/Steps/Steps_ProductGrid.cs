@@ -2432,8 +2432,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid")]
+		public void ThenIClickTheShowOnlyDiscontinuedProductsCheckboxInTheMyProductsGrid()
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			Report.IsTrue(moreFiltersObject.ClickShowOnlyDiscontinuedProductsCheckbox(), "Failed to click checkbox", "Successfully clicked checkbox");
+		}
 
 
+		[StepDefinition(@"I confirm that only discontinued products appear in the 'My Products' grid")]
+		public void ThenIConfirmThatOnlyDiscontinuedProductsAppearInTheMyProductsGrid()
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			Report.Info("There were " + moreFiltersObject.CheckIfThereAreProductsInMyProductsGrid() + " discontinued products");
+		}
 
 	}
 }

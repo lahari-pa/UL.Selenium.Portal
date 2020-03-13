@@ -27,7 +27,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private static NewProduct NewProduct => new NewProduct();
 
-		//Philip
 		[StepDefinition(@"I check if the logo is displayed for the following retailers")]
 		public void ThenICheckIfTheLogoIsDisplayedForTheFollowingRetailers(Table table)
 		{
@@ -231,21 +230,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I should see the (.*) Page for the New Product")]
 		public void GivenIShouldSeeXPage(string page)
 		{
-			//if (page == "Sustainability")
-			//{
-			//	Delay.Seconds(9999);
-			//}
-			//else
-			//{
-				if (NewProduct.WaitForContainerToBeVisible())
-				{
-					Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
-					return;
-				}
-				Report.Failure("New product page was not visible");
-				Report.Screenshot();
-//			}
+			if (NewProduct.WaitForContainerToBeVisible())
+			{
+				Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
+				return;
 			}
+			Report.Failure("New product page was not visible");
+			Report.Screenshot();
+		}
 
 		[StepDefinition(@"I should see an error message: (.*)")]
 		public void ErrorMessageSpecific(string message)

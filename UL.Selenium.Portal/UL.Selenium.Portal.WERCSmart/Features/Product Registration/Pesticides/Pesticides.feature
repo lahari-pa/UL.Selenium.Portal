@@ -11,6 +11,7 @@
 @RetailPartners
 @SHA
 @run_Pesticides
+@UPC
 Feature: Pesticides
 
 @ScenarioId:655
@@ -639,3 +640,36 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	Then I confirm the 'Is Kelly Data' field for State: AZ is checked
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
+
+
+Scenario:[121120] Pesticide - New Radio Icon Option
+    Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC121120
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with pest control
+	Then I save the product information as: TestCase121120
+	And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	And I should see the Transportation Details 1 Page
+    And The following options should be displayed exclusively for section: Product is Regulated for Transport
+    | Option                               |
+    | Yes                                  |
+    | No, due to an exemption or exception |
+    | Not Regulated                        |
+    And I set the Product is Regulated for Transport field to: Not Regulated
+    And I click continue
+	And In the 'Select Retailers' window I select the retailer: Costco
+	And I click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC121120, container type: Plastic Container and size: 12 click continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
