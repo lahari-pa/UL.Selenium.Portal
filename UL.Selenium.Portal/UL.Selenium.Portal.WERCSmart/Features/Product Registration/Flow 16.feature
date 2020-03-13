@@ -10,6 +10,7 @@
 @wercsmart
 @RetailPartners
 @run_Flow16
+@UPC
 Feature: Flow 16
 
 @ScenarioId:680
@@ -510,3 +511,39 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59273. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alkaline battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
+
+
+Scenario:[122366] Battery Containing Product (BCP) (Transportation override at UPC level- New Feature)
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I generate a random UPC number and save as: UPC122366
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery-Containing Product
+	Then I save the product information as: TestCase122366
+	Given I call Shared Step 60756 (Additional Product Information with Country and every option)
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should see the Product Includes Battery Page
+	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.
+	Given I add the following batteries:
+	 | Battery Type     | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
+	 | Lithium Primary  | <any>        | 4                               | 4                                  | lithiumbattery |
+	Given I click continue
+	And I set 'Product has had TCLP; Report is available' to: No
+	And I set the Lead option to: No
+	And I set the Mercury option to: No
+	And I set the Silver option to: No
+	And I set the Cadmium option to: No
+	And I set the Chromium option to: No
+	And I set the Barium option to: No
+	And I set the Arsenic option to: No
+	And I set the Selenium option to: No
+	Given I click continue
+	Then I should see the Electronic Equipment Page
+	And I set 'Contains Circuit Board' to: No
+	And I set 'Has a LCD or Plasma Display' to: No
+	Given I click continue
+	Given I call Shared Step 60096 (Lithium Battery Transportation)
+	And In the 'Select Retailers' window I select the retailer: Costco
+	And I click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC122366, container type: Plastic Container and size: 12 click continue
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)

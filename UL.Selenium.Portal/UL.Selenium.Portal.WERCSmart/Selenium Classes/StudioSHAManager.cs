@@ -13,6 +13,9 @@ using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using Gherkin.Ast;
+using TechTalk.SpecFlow;
+using TableRow = TechTalk.SpecFlow.TableRow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -1461,6 +1464,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
+
+		public List<string> FindColumnWithTable(Table table)
+		{
+			List<string> columnsNotFound = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement columnName = this.containerElement.FindElement(By.XPath("//th[contains(text(),'" + row["Column Name"] + "')]"), 2);
+
+				if (columnName == null)
+				{
+					columnsNotFound.Add(row["Column Name"]);
+				}
+			}
+
+			return columnsNotFound;
+
+		}
+
+		public bool ConfirmUInSecondColumn(string productID)
+		{
+			IWebElement secondColumnU = this.containerElement.FindElement(By.XPath(".//td[@role='gridcell']//span[text()='" + productID + "']/../following-sibling::td[@title='UPC Update Only']"), 2);
+
+			if (secondColumnU != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
@@ -1903,6 +1936,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
+
 	}
 
 	class RightClickProductMenu : BaseObject
