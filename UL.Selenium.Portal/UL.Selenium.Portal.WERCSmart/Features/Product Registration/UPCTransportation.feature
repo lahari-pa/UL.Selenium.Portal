@@ -334,6 +334,7 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 # Ensure that you get an error that  tells you to check your transportation information
 
 @tfs_design
+@ScenarioId:6740
 Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: RandomUPC
