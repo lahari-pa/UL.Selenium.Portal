@@ -61,6 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					foreach (IWebElement userRow in listOfUsersRows)
 					{
+						Report.Info("Starting a new user");
 						var thisUser = new User {
 							Username = userRow.FindElement(By.XPath(".//td[1]")).Text,
 							Email = userRow.FindElement(By.XPath(".//td[2]")).Text,
@@ -94,11 +95,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Report.Screenshot();
 						break;
 					}
+					Report.Info("Trying to click the next page button");
 					if (!myNext.TryClick())
 					{
 						throw new Exception("Failed to click move to next page");
 					}
 					pageNo++;
+					Report.Screenshot();
 
 				}
 
@@ -2171,7 +2174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickEdit(int row, string brandName)
 		{
 			return this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[" + row + "][.//span[text()='" + brandName + "']]//a[contains(@data-bind,'click: edit')]"), 2).TryClick();
-
+						
 		}
 		public List<string> SavedBrands()
 		{

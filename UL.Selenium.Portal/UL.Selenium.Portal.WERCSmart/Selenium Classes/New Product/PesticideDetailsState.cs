@@ -6,6 +6,7 @@ using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -202,6 +203,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					//	break;
 					//}
 					Report.Info("Failed to click the calender button.Trying again...");
+					if(state=="NY")
+					{
+						Report.Info("Attempting to access the NY calendar button by scolling the page down again");
+						new Actions(SeleniumBrowser.WebBrowser).SendKeys(Keys.ArrowDown).Perform();
+						if (calendarButton.TryClick())
+						{
+							break;
+						}
+
+					}
+					
+
 					attempt++;
 				}
 				catch(Exception)

@@ -1558,6 +1558,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IEnsureThatOptionIsListedAs(string option, string transLevel)
 		{
 			var NewProductClassObject = new NewProduct();
+
 			Report.IsTrue(NewProductClassObject.CheckTransportationOption(option, transLevel), "Failed to find the correct Transportation option for " + option + ".",
 				"Successfully found correct Transportation option for " + option + ".");
 		}
@@ -1594,5 +1595,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(NewProductClassObject.SelectUPCTransportationOptionAtLevel(option, transLevel), "Failed to select " + option + " at " + transLevel + ".",
 				"Successfully selected " + option + " at " + transLevel + ".");
 		}
+
+		[StepDefinition(@"I ensure that I can select (DOT|IATA|IMDG|TDG) at (Shipping with limited quantity|Shipping with consumer commodity|Shipping fully regulated)")]
+		public void IEnsureThatICanSelectOptionAtLevel(string option, string transLevel)
+		{
+			var NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.SelectUPCTransportationOptionAtLevel(option, transLevel), "Failed to Click " + option + " at " + transLevel + ".","Successfully click " + option + " at " + transLevel + ".");
+			Report.IsTrue(NewProductClassObject.CheckTransportationOption(option, transLevel), "Failed to find the correct Transportation option for " + option + ".","Successfully found correct Transportation option for " + option + ".");
+
+		}
+
 	}
 }

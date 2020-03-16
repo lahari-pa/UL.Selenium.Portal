@@ -135,6 +135,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			return productRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2).TryClick();
 		}
+
+		public bool CheckProductsSelected_CheckProductSelectedByID(string id)
+		{
+			IWebElement productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
+			if (productRow == null)
+			{
+				Report.Info("Could not find product row for product ID: " + id);
+				return false;
+			}
+			return productRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2).Checked();
+		}
 		public bool SelectProducts_ClickProductByID_(string id)
 		{
 			IWebElement productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);

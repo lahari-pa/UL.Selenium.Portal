@@ -128,6 +128,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
 			Report.IsTrue(thisStudioManageGlobalMessages.Wait_for_load(),
 				"Manage Global Messages dialog is not showing", "Manage global messages dialog is showing");
+			Report.IsTrue(thisStudioManageGlobalMessages.WaitForMessageTableToShow(), "The table was not showing inside the global messages dialog", "The table was  showing inside the global messages dialog");
+
 			var ListOfMessages = new List<Message>();
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
@@ -345,7 +347,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			bool found = false;
 
-			while (counter < 20 && !found)
+			while (counter < 35 && !found)
 			{
 				var thisStudioManager = new StudioSHAManager();
 				thisStudioManager.Wait_for_load();
