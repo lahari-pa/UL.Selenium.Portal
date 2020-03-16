@@ -499,6 +499,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return editUPCs.ConfirmPackageTypeNotShown();
 		}
 
+		public bool ConfirmTransportationShown()
+		{
+			var editUPCs = new EditUPC();
+			return editUPCs.ConfirmTransportationShown();
+		}
+
+		public bool EditPopupConfirmOptionAtLevel(string option, string level)
+		{
+			var editUPCs = new EditUPC();
+			return editUPCs.EditPopupConfirmOptionAtLevel(option, level);
+		}
+
+		public bool EditPopupConfirmCannotDowngrade(string option, string level)
+		{
+			var editUPCs = new EditUPC();
+			return editUPCs.EditPopupConfirmCannotDowngrade(option, level);
+		}
+
+		public bool EditUPCUpgradeOptionToLevel(string option, string level)
+		{
+			var editUPCs = new EditUPC();
+			return editUPCs.EditUPCUpgradeOptionToLevel(option, level);
+		}
+
+		public bool ClickSave()
+		{
+			var editUPCs = new EditUPC();
+			return editUPCs.ClickButton("Save");
+		}
+
 		public bool SelectUPCByNumber(string aUPCNumber)
 		{
 			var thisSelectUPCs = new SelectUPCs {
@@ -602,7 +632,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath("//button[@id='add-new-row-btn' and contains(@data-bind,'addNewPackRow')]"), 2).TryClick();
 		}
 
-		
+
 
 
 		public bool ClickAddToNoRetailer()
@@ -660,6 +690,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return null;
 			}
 			return productNameElement.Text;
+		}
+
+		public bool EnsureUPCsTableHasTransportationColumn()
+		{
+			IWebElement transColumn = this.containerElement.FindElement(By.XPath(@"//h3[contains(text(), 'Select UPCs')]/..//table//th[contains(text(), 'Transportation')]"), 2);
+			return transColumn != null;
+		}
+
+		public bool EnsureThatOptionIsListedAtLevel(string option, string level)
+		{
+			IWebElement elem = this.containerElement.FindElement(By.XPath(@"//span[contains(text(), '" + option + "')]/../div//span[contains(text(), '" + level + "')]"), 2);
+			return elem != null;
 		}
 
 
@@ -1023,6 +1065,83 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 				}
 			}
+
+			public bool ConfirmTransportationShown()
+			{
+				Delay.Seconds(2);
+				IWebElement transport = this.containerElement.FindElement(By.XPath("//label[text()='Transportation']"), 2);
+				if (transport == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+
+			public bool EditPopupConfirmOptionAtLevel(string option, string level)
+			{
+				Delay.Seconds(2);
+				IWebElement transportOption = this.containerElement.FindElement(By.XPath("//label[text()='Transportation']/../div/div/span[text()='" + option + "']/preceding-sibling::input/../div/span[text()='" + level + "']/preceding-sibling::input"), 2);
+				if (transportOption == null || !transportOption.Checked())
+				{
+					Report.Info("Option " + option + " was not selected!");
+					return false;
+				}
+				return true;
+			}
+
+			public bool EditPopupConfirmCannotDowngrade(string option, string level)
+			{
+				IWebElement transportOption = this.containerElement.FindElement(By.XPath("//label[text()='Transportation']/../div/div/span[text()='" + option + "']/preceding-sibling::input/../div/span[text()='" + level + "']/preceding-sibling::input"), 2);
+				if (transportOption == null)
+				{
+					Report.Info("Failed to find " + level + " for option " + option + ".");
+					return false;
+				}
+				if (transportOption.Checked())
+				{
+					Report.Info("Level " + level + " was already selected for option " + option + ".");
+					return false;
+				}
+
+				transportOption.TryClick();
+
+				if (transportOption.Checked())
+				{
+					Report.Info("I was erroneously able to select " + level + " for option " + option + ".");
+					return false;
+				}
+
+				return true;
+			}
+
+			public bool EditUPCUpgradeOptionToLevel(string option, string level)
+			{
+				IWebElement transportOption = this.containerElement.FindElement(By.XPath("//label[text()='Transportation']/../div/div/span[text()='" + option + "']/preceding-sibling::input/../div/span[text()='" + level + "']/preceding-sibling::input"), 2);
+				if (transportOption == null)
+				{
+					Report.Info("Failed to find " + level + " for option " + option + ".");
+					return false;
+				}
+				if (transportOption.Checked())
+				{
+					Report.Info("Level " + level + " was already selected for option " + option + ".");
+					return false;
+				}
+
+				transportOption.TryClick();
+
+				if (!transportOption.Checked())
+				{
+					Report.Info("I was unable to upgrade to " + level + " for option " + option + ".");
+					return false;
+				}
+
+				return true;
+
+			}
 		}
 
 	}
@@ -1125,7 +1244,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	class AddCaseUPCModal : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@class='modal-content' and .//div[@class='modal-body']//div//div//div[@class='col-sm-6']//div//label[text()='Individual UPC contained in the Case Pack']]");
-		
+
 
 		public bool EnterCaseUPCInformation(TableRow row)
 		{
