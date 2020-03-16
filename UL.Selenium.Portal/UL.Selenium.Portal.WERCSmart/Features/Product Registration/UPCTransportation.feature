@@ -115,15 +115,16 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I save the product information as: TestCase122428
 	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-		| 2                          | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+		| 2                          | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 	Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport field to: Yes
 	Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 	Given I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
-	# Select IMDG and Limited Quantity
-	# Select TDG and Limited Quantity
+	And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
+	And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
 	Given I click continue
 	Given I enter UN1993 - Select data - Continue - Happy Path
 	Given I should see the International Air Transport (IATA) Classification Page
@@ -138,7 +139,9 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer  |
 		| Walgreens |
-	Given I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPC122428, container type: Plastic Container and size: 2 click continue
+	Then I click Done on Select Retailers window
+	Then I click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC122428, container type: Plastic Container and size: 12 click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -148,36 +151,44 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
+	Given I wait for 5 seconds
 	Given I navigate to the home page
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase122428)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase122428 and its status is: Submitted
+	Given I navigate to the landing page
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase122428
 	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-	Given I enter the text: saved as TestCase in the 'Search by WPS ID or Product Name' field
+	Given I enter the text: saved as TestCase122428 in the 'Search by WPS ID or Product Name' field
 	Given In the Foward Product Registration Screen I should see product: saved as TestCase122428
 	Given In the Foward Product Registration Screen I Select the product: saved as TestCase122428
 	Given I click continue on the Forward Product Registration page
-	Given In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Walgreens under Other Retailers and save it as: Retailer
+	Given In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Walgreens under Other Retailers and save it as: Retailer122428
 	Given I click continue on the Forward Product Registration page
-	# Select your product on the left hand side of the screen in the Select UPCs tab
-	# Ensure that the Select UPCs table on the right side of the screen contains a Transportation column
-	# Ensure that DOT is listed as shipping with limited quantity
-	# Ensure that IATA is listed as shipping with limited quantity
-	# Ensure that IMDG is listed as shipping with limited quantity
-	# Ensure that TDG is listed as shipping with limited quantity
-	# Select Edit for the UPC in the Select UPCs table
-	# Ensure that there is a Transportation section in the Edit UPC popup
-	# Ensure that the Transportation section lists DOT, IATA, IMDG, and TDG as shipping with limited quantity
-	# Ensure that you can select only one exception
-	# Ensure that for DOT and IATA, you cannot downgrade to Consumer Commodity
-	# Upgrade DOT to fully regulated
-	# Upgrade IATA to fully regulated
-	# Click Save
-	# Ensure that the Transportation column now lists DOT and IATA as fully regulated
-	# Ensure that IMDG and TDG are still listed as Limited Quantity
-	# Click Add a UPC
-	# Ensure that DOT, IATA, IMDG, and TDG are all listed in the Transportation section as Limited Quantity
-	# Enter any UPC, packaging type, and size data
-	# Click Save
-	# Ensure that the Select UPCs column shows Limited Quantity in the Transportation column for DOT, IATA, IMDG, and TDG
+	Given I select the first product under the Select UPCs tab
+	Given In Forward Product Registration, I ensure that the Select UPCs table has a Transportation column
+	Given In Forward Product Registration, I ensure that DOT is listed as Shipping with limited quantity
+	Given In Forward Product Registration, I ensure that IATA is listed as Shipping with limited quantity
+	Given In Forward Product Registration, I ensure that IMDG is listed as Shipping with limited quantity
+	Given In Forward Product Registration, I ensure that TDG is listed as Shipping with limited quantity
+	Given I select Edit for the first UPC in Select UPCs tab
+	Given I confirm that Transportation is shown
+	And In the Forwarding Edit popup, I confirm that DOT is listed at Shipping with limited quantity
+	And In the Forwarding Edit popup, I confirm that IATA is listed at Shipping with limited quantity
+	And In the Forwarding Edit popup, I confirm that IMDG is listed at Shipping with limited quantity
+	And In the Forwarding Edit popup, I confirm that TDG is listed at Shipping with limited quantity
+	And In the Forwarding Edit popup, I confirm that I cannot downgrade DOT to Shipping with consumer commodity
+	And In the Forwarding Edit popup, I confirm that I cannot downgrade IATA to Shipping with consumer commodity
+	And In the Forwarding Edit popup, I upgrade DOT to Shipping fully regulated
+	And In the Forwarding Edit popup, I upgrade IATA to Shipping fully regulated
+	And I click Save in the Edit UPC popup in Forwarding
+	Given In Forward Product Registration, I ensure that DOT is listed as Shipping fully regulated
+	Given In Forward Product Registration, I ensure that IATA is listed as Shipping fully regulated
+	Given In Forward Product Registration, I ensure that IMDG is listed as Shipping with limited quantity
+	Given In Forward Product Registration, I ensure that TDG is listed as Shipping with limited quantity
+	And I select the first UPC in the grid under the Select UPCs tab
+	Given I click continue on the Forward Product Registration page
 	Given I click continue on the Forward Product Registration page
 	Given I select the true radio for the 'Are Statements True' question under the Review and Submit tab
 	Given I click continue on the Forward Product Registration page
