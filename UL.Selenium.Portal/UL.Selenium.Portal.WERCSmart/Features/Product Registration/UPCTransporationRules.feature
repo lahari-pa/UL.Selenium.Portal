@@ -33,7 +33,7 @@
 Feature: UPCTransporationRules
 
 @ScenarioId:6425
-Scenario: Mode 7 - Scenario 4 UPC Trasnportation
+Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -77,8 +77,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode7S4
 
 @ScenarioId:6424
-	Scenario: Mode 7 - Scenario 23 UPC Transportation
-	
+	Scenario: [122303] UPC Transportation Error - Mode 7 - Scenario 23 	
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -142,7 +141,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 	
 
 @ScenarioId:6422
-	Scenario: Mode 6 - Scenario 3 UPC Transportation
+	Scenario: [122303] UPC Transportation Error - Mode 6 - Scenario 3
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -186,7 +185,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode6S3
 
 @ScenarioId:6421
-	Scenario: Mode 6 - Scenario 28 UPC Trasnportation
+	Scenario:	[122301] UPC Transportation Error - Mode 6 - Scenario 28
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -224,7 +223,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode6S28
 
 @ScenarioId:6420
-	Scenario: Mode 6 - Scenario 15 UPC Transportation	
+	Scenario: [122300] UPC Transportation Error - Mode 6 - Scenario 15	
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -286,7 +285,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 
 
 @ScenarioId:6419
-	Scenario: Mode 4x5 - Scenario 4 UPC Transportation
+	Scenario: [122299] UPC Transportation Error - Mode 4x5 - Scenario 4
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -330,7 +329,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S4
 
 @ScenarioId:6415
-	Scenario: Mode 4x5 - Scenario 15 UPC Trasnportation
+	Scenario: [122294] UPC Transportation Error - Mode 4x5 - Scenario 15
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -368,7 +367,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 
 
 @ScenarioId:6416
-	Scenario: Mode 4x5 - Scenario 20 UPC Trasnportation
+	Scenario: [122296] UPC Transportation Error - Mode 4x5 - Scenario 20
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -406,7 +405,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 
 
 @ScenarioId:6417
-	Scenario: Mode 4x5 - Scenario 25 UPC Transportation
+	Scenario: [122297] UPC Transportation Error - Mode 4x5 - Scenario 25 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
@@ -476,7 +475,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 
 	
 @ScenarioId:6418
-	Scenario: Mode 4x5 - Scenario 35 UPC Transportation
+	Scenario: [122298] UPC Transportation Error - Mode 4x5 - Scenario 35 
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
@@ -539,7 +538,7 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 
 
 
-	Scenario: Mode 1 - 6 - If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
+	Scenario:[122288] UPC Transportation Error - Mode 1 - 6
 		# If DOT Hazard Class is 3 and Packing group is I and UPC > 16.907 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -605,7 +604,8 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S6
 
 
-	Scenario:  Mode 1 - 3 - If physical state is Aerosol and DOT UN is 3159 and UPC Size is > 33.814 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and DOT Special Permit is “14188” or 20464” then populate UPCTERR with “1”
+	Scenario:  [122287] UPC Transportation Error - Mode 1 - 3 
+		#If physical state is Aerosol and DOT UN is 3159 and UPC Size is > 33.814 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and DOT Special Permit is “14188” or 20464” then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
@@ -663,7 +663,8 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S3
 
-	Scenario:   Mode 1 - 21 – If DOT Hazard Class is 5.2 and physical state is Solid and UPC > 3.381 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and Proper Shipping name is Type B or C then populate UPCTERR with “1”
+	Scenario: [122286] UPC Transportation Error - Mode 1 - 21
+		#If DOT Hazard Class is 5.2 and physical state is Solid and UPC > 3.381 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and Proper Shipping name is Type B or C then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer 
@@ -724,7 +725,8 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 
 
 
-	Scenario:  Mode 2/3 - 2 – If IATA Hazard Class is 2.1 or 2.2 and IATA UN is 1950 and IATA Subsidiary Hazard is 6.1 and UPC Size > 4.058 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
+	Scenario:  [122290] UPC Transportation Error - Mode 2/3 - 2
+		#If IATA Hazard Class is 2.1 or 2.2 and IATA UN is 1950 and IATA Subsidiary Hazard is 6.1 and UPC Size > 4.058 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
@@ -799,7 +801,8 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S2
 
 
-	Scenario:   Mode 2/3 - 16 – If IATA Hazard Class is 5.1 and Packing group is II and physical state is liquid and UPC Size > 3.381 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
+	Scenario:  [122289] UPC Transportation Error - Mode 2/3 - 16
+		#If IATA Hazard Class is 5.1 and Packing group is II and physical state is liquid and UPC Size > 3.381 oz and DOT is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -878,7 +881,8 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S16
 
-	Scenario:   Mode 2/3 - 34 – If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and DOT is Consumer Commodity at the UPC level then populate UPCTERR with “1”
+	Scenario:  [122293] UPC Transportation Error - Mode 2/3 - 34
+		#If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and DOT is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -951,7 +955,8 @@ Scenario: Mode 7 - Scenario 4 UPC Trasnportation
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S34
 
 
-Scenario:  Mode 4/5 - 5 – If IATA Hazard Class is 2.2 and IATA UN is 1950 and UPC Size > 27.728 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
+Scenario:  [122294] UPC Transportation Error - Mode 4/5 - 5
+		#If IATA Hazard Class is 2.2 and IATA UN is 1950 and UPC Size > 27.728 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Animal deterrent - Aerosol
@@ -1010,7 +1015,8 @@ Scenario:  Mode 4/5 - 5 – If IATA Hazard Class is 2.2 and IATA UN is 1950 and 
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S5
 
 
-Scenario:  Mode 4/5 - 21 - If IATA Hazard Class is 6.1 and Packing group is III and physical state is liquid and UPC Size > 16.907 oz and IATA is Limited Quantity at the UPC level then populate UPCTERR with “1”
+Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
+		#If IATA Hazard Class is 6.1 and Packing group is III and physical state is liquid and UPC Size > 16.907 oz and IATA is Limited Quantity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -1074,7 +1080,8 @@ Scenario:  Mode 4/5 - 21 - If IATA Hazard Class is 6.1 and Packing group is III 
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S21
 
 
-Scenario:  Mode 4/5 - 34 - If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
+Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
+		#If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and IATA is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 		And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach

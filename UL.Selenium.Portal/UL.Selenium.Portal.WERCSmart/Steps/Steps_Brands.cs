@@ -5,6 +5,7 @@ using UL.Automation.Reporting.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
+using UL.Automation.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -57,6 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ActiveValueIsYesForLastBrand(string active)
 		{
 			//Requires Context on latest brand save
+			Delay.Seconds(2);
 			int savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
 			string savedBrandName = Context.GetFromContext("Saved brand name").ToString();
 			//Matching on both row index and brand name in case there are previously added duplicates
@@ -81,6 +83,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click Edit in the My Brands grid for the last saved brand")]
 		public void ClickEditMyBrandsGrid()
 		{
+			Report.Screenshot();
+			Delay.Seconds(2);
+			Report.Screenshot();
 			int savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
 			string savedBrandName = Context.GetFromContext("Saved brand name").ToString();
 			Report.IsTrue(new MyBrands().ClickEdit(savedRowIndex, savedBrandName),
