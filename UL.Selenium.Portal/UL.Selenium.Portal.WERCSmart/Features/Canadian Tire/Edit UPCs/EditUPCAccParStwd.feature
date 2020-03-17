@@ -110,6 +110,7 @@ Scenario: [86260] Edit UPC - Product SOLD = US & Canada, PL = No, Retailer = Can
 	Then In the SHA list of UPCs I should see UPC: saved as UPC86260
 
 
+@ScenarioId:6787
 Scenario:[120866] UPC Retailer and Feed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC120866

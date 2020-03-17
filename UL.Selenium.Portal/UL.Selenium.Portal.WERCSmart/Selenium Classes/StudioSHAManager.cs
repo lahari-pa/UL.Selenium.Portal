@@ -1465,7 +1465,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public List<string> FindColumnWithTable(Table table)
+		public List<string> FindColumnInUPCRetailerAndFeedPageWithTable(Table table)
 		{
 			List<string> columnsNotFound = new List<string>();
 

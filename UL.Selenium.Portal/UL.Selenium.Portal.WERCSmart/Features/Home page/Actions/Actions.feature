@@ -257,6 +257,7 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 		| Butane          | Non-functional Contaminant | ButaneFunctionalPurposesList          |
 	
 
+@ScenarioId:6866
 Scenario:[119578] My Products - More Filters - For Discontinued Registrations
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -265,3 +266,4 @@ Scenario:[119578] My Products - More Filters - For Discontinued Registrations
 	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
 	Then I confirm that only discontinued products appear in the 'My Products' grid
 	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
+	Then I confirm that all products appear in the 'My Products' grid
