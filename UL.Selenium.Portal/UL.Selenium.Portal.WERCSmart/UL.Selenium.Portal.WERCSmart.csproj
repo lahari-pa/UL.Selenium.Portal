@@ -364,12 +364,11 @@
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdFull.feature">
     </None>
-    <None Include="Features\Canadian Tire\New Product Submission\Stewardship Data in WPS Studio\StwdInWpsStudiofeature.feature">
+    <None Include="Features\Canadian Tire\New Product Submission\StwdInWpsStudiofeature.feature" />
+    <None Include="Features\Canadian Tire\New Product Submission\AccHasFullStwdData.feature" />
+    <None Include="Features\Canadian Tire\New Product Submission\AccHasNoStwdData.feature">
     </None>
-    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Full Stewardship Data\AccHasFullStwdData.feature" />
-    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has No Stwd Data\AccHasNoStwdData.feature">
-    </None>
-    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Partial Sewardship Data\AccHasPartialStwd.feature">
+    <None Include="Features\Canadian Tire\New Product Submission\AccHasPartialStwd.feature">
     </None>
     <None Include="Features\Cart.feature">
     </None>
