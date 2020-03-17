@@ -3642,9 +3642,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
-			List<string> columnsNotFound = studioSHAManagerObject.FindColumnWithTable(table);
+			List<string> columnsNotFound = studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table);
 
-			Report.IsTrue(studioSHAManagerObject.FindColumnWithTable(table).Count > 0, "One or more of the columns were not found", "Successfully found all columns");
+			Report.IsTrue(studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table).Count == 0, "One or more of the columns were not found", "Successfully found all columns");
 
 			foreach (string columnName in columnsNotFound)
 			{

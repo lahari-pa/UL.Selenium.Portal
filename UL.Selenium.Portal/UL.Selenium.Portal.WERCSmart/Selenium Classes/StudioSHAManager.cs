@@ -13,10 +13,17 @@ using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
+<<<<<<< HEAD
 using OpenQA.Selenium.Interactions;
 using Gherkin.Ast;
 using TechTalk.SpecFlow;
 using TableRow = TechTalk.SpecFlow.TableRow;
+=======
+using Gherkin.Ast;
+using TechTalk.SpecFlow;
+using TableRow = TechTalk.SpecFlow.TableRow;
+using OpenQA.Selenium.Interactions;
+>>>>>>> Phil-QA
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -1473,7 +1480,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public List<string> FindColumnWithTable(Table table)
+		public List<string> FindColumnInUPCRetailerAndFeedPageWithTable(Table table)
 		{
 			List<string> columnsNotFound = new List<string>();
 

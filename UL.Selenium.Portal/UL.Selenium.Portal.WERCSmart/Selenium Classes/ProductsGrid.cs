@@ -1178,7 +1178,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public int CheckIfThereAreProductsInMyProductsGrid()
+		public int CheckTheAmountOfProductsInProductsGrid()
 		{
 			IList<IWebElement> productList = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 2);
 			return productList.Count;
@@ -1401,8 +1401,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickShowOnlyDiscontinuedProductsCheckbox()
 		{
-			IWebElement checkBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='show-only-discontinued-products']"), 2);
-			return checkBox.TryCheck();
+			IWebElement checkBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='show-only-discontinued-products']"), 2);
+			return checkBox.TryClick();
 		}
 	}
 
