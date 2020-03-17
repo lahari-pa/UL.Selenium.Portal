@@ -123,9 +123,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
-			Report.IsTrue(new MyIngredients().ClickRemove(ingredient),
-				"Failed to remove ingredient from My Library",
-				"Successfully removed ingredient from My Library");
+			Report.IsTrue(new MyIngredients().ClickRemove(ingredient),"Failed to click remove","Successfully clicked remove");
+			new MyIngredientsModal().WaitForContainerToBeVisible(30);			
 		}
 
 		[StepDefinition(@"I confirm the component name in the delete product popup matches the ingredient saved as: (.*)")]
@@ -146,6 +145,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I click: (YES|NO) in the 'Remove Component from My Ingredients' pop up")]
 		public void ClickOptionInRemoveComponentDialog(string option)
 		{
+			
 			Report.IsTrue(new MyIngredientsModal().ClickButton(option),
 				"Failed to click button: " + option + " in the 'Remove Component from My Ingredients' pop up",
 				"Successfully clicked button: " + option + " in the 'Remove Component from My Ingredients' pop up");

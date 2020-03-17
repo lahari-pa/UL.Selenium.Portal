@@ -13,6 +13,7 @@ using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using OpenQA.Selenium.Interactions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -411,7 +412,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							return true;
 						}
 
-						checkbox.TryClick();
+						checkbox.TryClick();						
 						if (checkbox.Checked())
 						{
 							Report.Screenshot();
@@ -547,7 +548,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (matchingTD2 != null)
 			{
 				Report.Info("Found matching cell");
-				matchingTD2.RightClick();
+				//matchingTD2.RightClick();
+				//This below is to handle the Right click clicking below the element.
+				//if this fails in some cases, try the old method first and then check for the context menu (var thisContextMenu = new RightClickProductMenu();) and only if that fails do the new way
+				Actions actions = new Actions(SeleniumBrowser.WebBrowser);				
+				actions.MoveToElement(matchingTD2);
+				actions.MoveByOffset(0,-50);
+				actions.ContextClick();
+				actions.Perform();
 				return true;
 			}
 			else

@@ -46,6 +46,7 @@ Scenario: [63514] Add and Deactivate a New User from the User Grid
 		| User      | Mr    | User | 123-456-7889 | Saved         | Saved         | empty        | United Kingdom |
 	Then I confirm the new user is Active
 	Given I Select the ... from the Actions column of the account I just created and select Deactivate
+	Then I Wait for a modal popup to appear
 	And I Click approve in dialog
 	And I Click close in dialog
 	Then I confirm the new user is Not Active
@@ -53,6 +54,7 @@ Scenario: [63514] Add and Deactivate a New User from the User Grid
 	And I Click close in dialog
 	Then I confirm the new user is Active
 	Then I Select the ... from the Actions column of the account I just created and select Deactivate
+	Then I Wait for a modal popup to appear
 	And I Click approve in dialog
 
 @ScenarioId:735

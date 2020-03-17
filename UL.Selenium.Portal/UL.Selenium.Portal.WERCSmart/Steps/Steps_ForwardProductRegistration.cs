@@ -155,6 +155,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
+		[StepDefinition(@"In Forward Product Registration, I ensure that the Select UPCs table has a Transportation column")]
+		public void IEnsureThatTheSelectUPCsTableHasATransportationColumn()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.EnsureUPCsTableHasTransportationColumn(), "Failed to find Transportation column in Select UPCs table",
+				"Successfully found Transportation column in Select UPCs table");
+		}
+
+		[StepDefinition(@"In Forward Product Registration, I ensure that (DOT|IATA|IMDG|TDG) is listed as (Shipping fully regulated|Shipping with limited quantity|Shipping with consumer commodity)")]
+		public void IEnsureThatOptionIsListedAtLevel(string option, string level)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.EnsureThatOptionIsListedAtLevel(option, level), "Failed to find option " + option + " listed at level " + level + ".",
+				"Successfully found option " + option + " listed at level " + level + ".");
+		}
+
 		[StepDefinition(@"in the Select Retailers tab under Forward Product Registration I select the retailer: (.*)")]
 		public void SelectRetailer(string retailer)
 		{
@@ -227,6 +243,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selForwardProdReg.ConfirmPackageTypeNotShown(),
 				"The Package Type is erroneously shown!",
 				"The Package Type is correctly not shown.");
+		}
+
+		[StepDefinition(@"I confirm that Transportation is shown")]
+		public void ConfirmTransportationShown()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ConfirmTransportationShown(),
+				"Transportation is nowhere to be found!",
+				"Transportation successfully found.");
+		}
+
+		[StepDefinition(@"In the Forwarding Edit popup, I confirm that (DOT|IATA|IMDG|TDG) is listed at (Shipping with limited quantity|Shipping with consumer commodity|Shipping fully regulated)")]
+		public void InTheForwardingEditPopupIConfirmThatOptionisListedatLevel(string option, string level)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.EditPopupConfirmOptionAtLevel(option, level), "Option " + option + " was not found at transportation level " + level + ".",
+				"Option " + option + " successfully found at level " + level + ".");
+		}
+
+		[StepDefinition(@"In the Forwarding Edit popup, I confirm that I cannot downgrade (DOT|IATA|IMDG|TDG) to (Shipping with limited quantity|Shipping fully regulated|Shipping with consumer commodity)")]
+		public void InTheForwardingEditPopupIConfirmThatICannotDowngradeOptionToLevel(string option, string level)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.EditPopupConfirmCannotDowngrade(option, level), "Failure. Option " + option + " can be downgraded to level " + level + ".",
+				"Success. Option " + option + " cannot be downgraded to level " + level + ".");
+		}
+
+		[StepDefinition(@"In the Forwarding Edit popup, I upgrade (DOT|IATA|IMDG|TDG) to (Shipping with limited quantity|Shipping fully regulated|Shipping with consumer commodity)")]
+		public void InTheForwardingEditPopupIUpgradeOptionToLevel(string option, string level)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.EditUPCUpgradeOptionToLevel(option, level), "Failed to upgrade option " + option + " to level " + level + ".",
+				"Successfully upgraded option " + option + " to level " + level + ".");
+		}
+
+		[StepDefinition(@"I click Save in the Edit UPC popup in Forwarding")]
+		public void AndIClickSaveInTheEditUPCPopupInFowarding()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ClickSave(), "Failed to click save in the Edit UPC popup in Forwarding.",
+				"Successfully clicked save in the Edit UPC popup in Forwarding.");
 		}
 
 		[StepDefinition(@"I click the 'select all' UPCs checkbox")]
@@ -602,8 +659,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				id = PI.Id;
 			}
 			var selForwardProdReg = new ForwardProductRegistration();
-			Report.IsTrue(selForwardProdReg.SelectProducts_ClickProductByID(id),
-				"ID: " + id + " has not be selected as expected", "ID: " + id + " has been selected as expected");
+			Report.IsTrue(selForwardProdReg.SelectProducts_ClickProductByID(id), "Failed to click product", "Successfully clicked product");
+			int i = 0;
+
+			while (i<5 && !selForwardProdReg.CheckProductsSelected_CheckProductSelectedByID(id))
+			{
+				Delay.Seconds(2);
+				i++;
+			}
+			Report.IsTrue(selForwardProdReg.CheckProductsSelected_CheckProductSelectedByID(id),"ID: " + id + " has not be selected as expected", "ID: " + id + " has been selected as expected");
+			
 		}
 
 		[StepDefinition(@"In the Forward Product Registration Screen I select a retailer under Other Retailers and save as (.*)")]

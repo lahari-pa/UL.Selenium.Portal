@@ -61,6 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					foreach (IWebElement userRow in listOfUsersRows)
 					{
+						Report.Info("Starting a new user");
 						var thisUser = new User {
 							Username = userRow.FindElement(By.XPath(".//td[1]")).Text,
 							Email = userRow.FindElement(By.XPath(".//td[2]")).Text,
@@ -94,11 +95,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Report.Screenshot();
 						break;
 					}
+					Report.Info("Trying to click the next page button");
 					if (!myNext.TryClick())
 					{
 						throw new Exception("Failed to click move to next page");
 					}
 					pageNo++;
+					Report.Screenshot();
 
 				}
 
@@ -1384,53 +1387,57 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterStewardshipInfo(string field, string option1)
 		{
-			GeneralUtilities.Wait_for_load_finish();
-			IWebElement matchingRow = this.containerElement.FindElement(By.XPath(".//tr[contains(td,'" + field + "')]"));
-
-			IWebElement stweardshipInput = matchingRow.FindElement(By.XPath(".//input[contains(@data-bind,'StewardNumber.field')]"));
-
-			IWebElement issueDate = matchingRow.FindElement(By.XPath(".//input[contains(@data-bind,'IssueDate.field')]"));
-
-			IWebElement expireDate = matchingRow.FindElement(By.XPath(".//input[contains(@data-bind,'ExpireDate.field')]"));
-
-			if (stweardshipInput == null)
+			try
 			{
-				Report.Failure("Not able to find Stewardship input field");
-				Report.Screenshot();
+				IWebElement matchingRow = this.containerElement.FindElement(By.XPath(".//tr[contains(td,'" + field + "')]"));
+
+				IWebElement stweardshipInput = matchingRow.FindElement(By.XPath(".//input[contains(@data-bind,'StewardNumber.field')]"));
+
+				IWebElement issueDate = matchingRow.FindElement(By.XPath(".//input[contains(@data-bind,'IssueDate.field')]"));
+
+				IWebElement expireDate = matchingRow.FindElement(By.XPath(".//input[contains(@data-bind,'ExpireDate.field')]"));
+
+				if (stweardshipInput == null)
+				{
+					Report.Failure("Not able to find Stewardship input field");
+					Report.Screenshot();
+					return false;
+				}
+				stweardshipInput.EnterText(option1);
+
+				if (issueDate == null)
+				{
+					Report.Failure("not able to find the issue date field");
+					Report.Screenshot();
+					return false;
+				}
+				TimeZone tz = TimeZone.CurrentTimeZone;
+				DateTime ut = tz.ToUniversalTime(DateTime.Now);
+				var est = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+				var esttime = TimeZoneInfo.ConvertTimeFromUtc(ut, est);
+				var option2 = esttime.ToString("yyyy-MM-dd");
+				issueDate.Clear();
+				issueDate.EnterText(option2);
+				issueDate.SendKeys(Keys.Enter);
+
+				if (expireDate == null)
+				{
+					Report.Failure("not able to find the expire date field");
+					Report.Screenshot();
+					return false;
+				}
+				DateTime today = DateTime.Now;
+				DateTime yearAhead = today.AddYears(1);
+				var option3 = yearAhead.ToString("yyyy-MM-dd");
+				expireDate.Clear();
+				expireDate.EnterText(option3);
+				expireDate.SendKeys(Keys.Enter);
+				return true;
+			}
+			catch (Exception)
+			{
 				return false;
 			}
-			stweardshipInput.EnterText(option1);
-
-			if (issueDate == null)
-			{
-				Report.Failure("not able to find the issue date field");
-				Report.Screenshot();
-				return false;
-			}
-			TimeZone tz = TimeZone.CurrentTimeZone;
-			DateTime ut = tz.ToUniversalTime(DateTime.Now);
-			var est = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-			var esttime = TimeZoneInfo.ConvertTimeFromUtc(ut, est);
-			var option2 = esttime.ToString("yyyy-MM-dd");
-			issueDate.Clear();
-			issueDate.EnterText(option2);
-			issueDate.SendKeys(Keys.Enter);
-
-			if (expireDate == null)
-			{
-				Report.Failure("not able to find the expire date field");
-				Report.Screenshot();
-				return false;
-			}
-			int year2 = DateTime.Now.Year + 1;
-			int month2 = DateTime.Now.Month + 1;
-			int day2 = DateTime.Now.Day;
-			var dtExp = new DateTime(year2, month2, day2);
-			var option3 = dtExp.ToString("yyyy-MM-dd");
-			expireDate.Clear();
-			expireDate.EnterText(option3);
-			expireDate.SendKeys(Keys.Enter);
-			return true;
 		}
 
 		public bool StewardshipEdit_click()
@@ -2167,7 +2174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickEdit(int row, string brandName)
 		{
 			return this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[" + row + "][.//span[text()='" + brandName + "']]//a[contains(@data-bind,'click: edit')]"), 2).TryClick();
-
+						
 		}
 		public List<string> SavedBrands()
 		{
