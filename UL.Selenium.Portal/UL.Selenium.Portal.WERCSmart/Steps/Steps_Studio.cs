@@ -219,12 +219,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (TableRow thisRow in table.Rows)
 			{
 				var thisStudioPowerDesignerPlusDesignMode =
-					new StudioPowerDesignerPlusDesignMode();
+					new StudioPowerDesignerPlusDesignMode();		
+				GeneralUtilities.StudioWaitForSpinner(30);
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
 				thisStudioPowerDesignerPlusDesignMode.DoubleClickDataCode(thisRow["datacode"]);
 				Delay.Seconds(15);
 				var thisGraphicEditor = new GraphicEditor();
-				Report.IsTrue(thisGraphicEditor.Wait_for_load(90), "Graphic editor has not loaded",
-					"Graphic editor has loaded.");
+				Report.IsTrue(thisGraphicEditor.Wait_for_load(90), "Graphic editor has not loaded","Graphic editor has loaded.");
 				string valueToSearchFor = "";
 
 				Report.Info("Attempting to set value: " + thisRow["value"] + " for graphic: " + thisRow["datacode"]);
@@ -984,6 +985,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Beginning double click on category to edit: " + category);
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			GeneralUtilities.StudioWaitForSpinner(30);
 			Report.IsTrue(selStudioPowerDesignerPlus.DoubleClickCategoryToEdit(category),
 				"Failed to double click category: " + category,
 				"Successfully clicked " + category);

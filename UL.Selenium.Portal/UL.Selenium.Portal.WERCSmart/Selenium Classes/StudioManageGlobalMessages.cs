@@ -92,6 +92,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool WaitForMessageTableToShow()
+		{
+			IWebElement messageTable= this.containerElement.WaitUntilElementVisible(By.XPath(".//table[@id='tblGlobalMessages']"), 30);
+			return messageTable != null;
+		}
+
 	}
 
 	public class Message

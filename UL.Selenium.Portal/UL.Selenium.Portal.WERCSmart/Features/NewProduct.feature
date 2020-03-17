@@ -58,7 +58,11 @@ Scenario: [87295] 3rd party Ingredients - Informational Message
 	Then I save the product information as: TestCase87295
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: WPS
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: WPS
+	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| WPS           | 100     |                     |             |            |
+	Given I click continue
 	Then a Warning popup dialog should appear with the message: Your product registration contains a 3rd-Party Formula that needs to be updated for it to be included in chemical-policy or sustainability assessments conducted by retailers or in GoodGuide ratings. We have sent a notification to your 3rd-Party Formulator requesting that the ingredient's Data Use Tier consent, and the public disclosure status of its ingredients, be updated. Please continue with this product registration, but note that the chemical-policy or sustainability assessment results may change if, and when, your 3rd-Party Formulator authorizes its ingredient to be included in such programs.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87295
 

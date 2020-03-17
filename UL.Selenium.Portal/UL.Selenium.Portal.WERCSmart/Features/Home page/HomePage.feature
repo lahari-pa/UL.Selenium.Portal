@@ -254,7 +254,7 @@ Scenario: [65886] My Products - Pagination
 # JS 13/8/18 Finished test now we have more products completed via SHA - it will work in staging at least
 @ScenarioId:452
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I filter the products by: Accepted by Retailers
 	Given I click Row Actions for the first product not in the 'Needs Your Attention' status

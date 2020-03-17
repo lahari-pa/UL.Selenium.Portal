@@ -596,7 +596,7 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57709, container type: Aerosol Can and size: 33
+	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57709, container type: Aerosol Can and size: 1
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -676,7 +676,7 @@ Scenario: [117894] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC 
 		| %UPC_Jacob_4% | Firework4 | 4        | 14   | 2                  | 1004            | 4444            | A0004          | 111-22-0004 | 100000004 | 123-1234, 123-1233 |                         |            |                  |                  |            |              |            |          |                              |
 		| %UPC_Jacob_5% | Firework5 | 5        | 15   | 2.1                | 1005            | 5555            | A0005          | 111-22-0005 | 100000005 | 123-1234, 123-1234 |                         |            |                  |                  |            |              |            |          |                              |
 		| %UPC_Jacob_6% | Firework6 | 6        | 16   | -1                 | 1006            | 6666            | A0006          | 111-22-0006 | 100000006 | 123-1234, 123-1235 |                         |            |                  |                  |            |              |            |          |                              |
-		| %UPC_Jacob_0% | Firework7 | 7        | 17   | NA                 | 1007            | 7777            | A0007          | 111-22-0007 | 100000007 | 123-1234, 123-1236 |                         |            |                  |                  |            |              |            |          |                              |
+		| %UPC_Jacob_0% | Firework7 | 7        | 1    | NA                 | 1007            | 7777            | A0007          | 111-22-0007 | 100000007 | 123-1234, 123-1236 |                         |            |                  |                  |            |              |            |          |                              |
 	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest117894
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable117894
 	Then In the Add Multiple dialog box I select all UPCs
