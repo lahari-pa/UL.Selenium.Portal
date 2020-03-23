@@ -878,3 +878,4 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 	Given In the Data Acceptance page I click on the Accept button
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page
+
