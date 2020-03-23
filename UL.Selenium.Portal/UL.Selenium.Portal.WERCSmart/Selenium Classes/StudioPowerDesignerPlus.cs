@@ -256,6 +256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement AUTHC = this.containerElement.FindElement(By.XPath(@"//*[@title='Click to Edit [AUTHC(PVAL)] - Authoring Complete']//span"), 2);
 			Report.IsTrue(AUTHC.TryDoubleClick(), "Unable to locate AUTHC to Edit Value.", "Opened AUTHC Edit Value box.");
 			Delay.Seconds(2);
+			this.Wait_for_load(30);
 			IWebElement newVal = this.containerElement.FindElement(By.XPath("//*[@id='ssValue']"), 2);
 			Report.IsTrue(newVal.TryEnterText(setTo), "Unable to enter text: " + setTo + " in AUTHC Value", "Successfully entered " + setTo + " in AUTHC Value");
 			IWebElement saveBtn = this.containerElement.FindElement(By.XPath("//*[@id='btnSave']"), 2);

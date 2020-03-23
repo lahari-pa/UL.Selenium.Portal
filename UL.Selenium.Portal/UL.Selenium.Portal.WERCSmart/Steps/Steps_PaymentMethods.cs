@@ -930,6 +930,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Purchase Summary screen I click Remove for product (.*)")]
 		public void InThePurchaseSummaryScreenIClickRemove(string product)
 		{
+	
 			var newProduct = new NewProduct();
 
 			if (product.ToLower().Contains("saved as"))

@@ -1731,8 +1731,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set the UN Number field to: UN1950");
 			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
 			Delay.Seconds(2);
-			Report.StartStep("I select the first option in section: Proper Shipping Name");
-			MyNewProduct.SelectFirstOptionInSection("Proper Shipping Name");
+			Report.StartStep("I select the first option in section: Proper Shipping Name");			
+			MyNewProduct.SelectFirstOptionInSection("Proper Shipping Name");	
 			Delay.Seconds(2);
 			Report.StartStep("I select the first option in section: Hazard Class (select)");
 			MyNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
@@ -2074,10 +2074,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			stepsNewProductIngredients.AddIngredients(table);
-			Report.StartStep("In the Ingredients page I click Continue");
+			Report.StartStep("In the Ingredients page I click Continue");			
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartStep("I should see the Regulatory Information 1 Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Regulatory Information 1");
+			MyNewProductSteps.GivenIShouldSeeXPage("Regulatory Information 1");			
+			
 		}
 
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
@@ -4315,6 +4316,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("Beginning shared step: 49841");
 			Report.StartStep("I set the status filter to All");
+			Report.Screenshot();
 			var myStudioShaManager = new StudioSHAManager();
 			//myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter("All");
@@ -4342,13 +4344,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			bool Found = false;
 			int counter = 0;
-			while (!Found && counter < 5)
+			while (!Found && counter < 10)
 			{
 				Report.StartStep("I click Srch in the bottom menu list");
 				myStudioShaManager.ClickBottomMenuOption("Search");
 				var myStepsSha = new Steps_SHA();
-				Report.StartStep(
-					$"I enter ID: {id} in the Product ID box, change Status drop down to All, Click find");
+				Report.StartStep($"I enter ID: {id} in the Product ID box, change Status drop down to {status}, Click find");
 				Report.Info("Searching for: " + id);
 				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 				Delay.Seconds(1);
@@ -4364,6 +4365,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Found = true;
 				}
 			}
+			Report.IsTrue(Found, "The Top row in the Products table did not match the search ID", "The Top row in products table matched the search ID");
+
+
 
 		}
 
@@ -5076,6 +5080,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Granted");
 			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 4.1 Derived Results", "Granted");
+			var thisStepsNewProduct = new StepsNewProduct();
+			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
+		}
+
+		[StepDefinition(@"I call Shared Step 79491 \(Formulation > 3rd Party - Accept formulation - Decline Tier 4.1 - Continue\)")]
+		public void ThenICallSharedStep79491FormulationRdParty_AcceptFormulation_DeclineLastTier_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var thisMyIngredients = new Steps_MyIngredients();
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
+			//thisMyIngredients.InTheFormulationThirdPartySCreenISetDeclinedTo("true");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Granted");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 4.1 Derived Results", "Declined");
 			var thisStepsNewProduct = new StepsNewProduct();
 			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
 		}

@@ -18,6 +18,9 @@ using UL.Automation.Reporting;
 using UL.Automation.Selenium.Functions;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Chrome;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -396,6 +399,174 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{ Tab.ReviewAndSubmit , "Review and Submit" }
 		};
 		#endregion
+		
+		public List<string> CheckIfRetailerLogoIsDisplayed(Table table)
+		{
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr;
+			List<string> retailersThatAreNotDisplayingTheirLogo = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				string retailer = row["Retailer"];
+				abbr.Map.TryGetValue(retailer, out selectedAbbr);
+				IWebElement retailerLogo = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']"), 2);
+
+				if (retailerLogo == null)
+				{
+					retailersThatAreNotDisplayingTheirLogo.Add(retailer);
+				}
+
+			}
+
+			return retailersThatAreNotDisplayingTheirLogo;
+
+		}
+
+		public List<string> CheckIfCheckmarkImageIsDisplayedAboveRetailerLogo(Table table)
+		{
+
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr;
+			List<string> retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				string retailer = row["Retailer"];
+				abbr.Map.TryGetValue(retailer, out selectedAbbr);
+				IWebElement checkmarkImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']/../preceding-sibling::div//span//i[@class='fa fa-check fa-3x']"), 2);
+
+				if (checkmarkImage == null)
+				{
+					retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.Add(retailer);
+				}
+
+			}
+			
+
+			return retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo;
+
+		}
+
+		public List<string> CheckIfYellowTriangleImageIsDisplayedAboveRetailerLogo(Table table)
+		{
+
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr;
+			List<string> retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+
+				string retailer = row["Retailer"];
+				abbr.Map.TryGetValue(retailer, out selectedAbbr);
+				IWebElement checkmarkImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']/../preceding-sibling::div//span//i[@class='fa fa-exclamation-triangle fa-3x']"), 2);
+
+				if (checkmarkImage == null)
+				{
+					retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo.Add(retailer);
+				}
+
+			}
+
+
+			return retailersThatDoNotDisplayAYellowTriangleImageAboveTheirLogo;
+
+		}
+
+		public List<string> CheckIfScopeButtonIsDisplayedBeloweRetailerLogo(Table table)
+		{
+
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr;
+			List<string> retailersThatDoNotDisplayAScopeButtonBelowTheirLogo = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				string retailer = row["Retailer"];
+				abbr.Map.TryGetValue(retailer, out selectedAbbr);
+			
+				IWebElement scopeButton = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + selectedAbbr + ".png']/../following-sibling::div//button"), 2);
+
+				if (scopeButton.Text != "Scope")
+				{
+					retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Add(retailer);
+				}
+
+			}
+
+			return retailersThatDoNotDisplayAScopeButtonBelowTheirLogo;
+
+		}
+
+		public bool ClickScopeButtonBelowRetailerLogo(string retailer)
+		{
+
+			IWebElement scopeButton = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/" + retailer + ".png']/../following-sibling::div//button"), 2);
+			return scopeButton.TryClick();
+
+		}
+
+		public bool CheckIfRetailerModalIsDisplayed()
+		{
+
+			IWebElement retailerModalTitel = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']"), 2);
+
+			if (retailerModalTitel == null)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool CheckRetailerModalText(string text)
+		{
+			IWebElement retailerModalBody = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//p"), 2);
+
+			if (retailerModalBody.Text == text)
+			{
+				return true;
+			}
+
+			return false;
+
+		}
+
+		public bool CloseRetailerModal()
+		{
+
+			IWebElement closeButton = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//button[text()='Close']"), 2);
+			return closeButton.TryClick();
+
+		}
+
+		public bool HoverOverYellowTriangleImage()
+		{
+			IWebElement yellowTrangleImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/DT.png']/../preceding-sibling::div//span//i[@class='fa fa-exclamation-triangle fa-3x']"), 2);
+
+			if (yellowTrangleImage != null)
+			{
+				yellowTrangleImage.Hover();
+				return true;
+			}
+
+			return false;
+
+		}
+
+		public bool CheckIfTextDisplayedOverYellowTriangleImageMatches(string textToMatch)
+		{
+			IWebElement toolTipDisplayBody = this.containerElement.FindElement(By.XPath(@"//div[@class='tooltip fade top in']//p"), 2);
+			
+			if (toolTipDisplayBody.Text == textToMatch)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 		public string BatteyWarning()
 		{
 			return this.containerElement.FindElement(By.XPath(".//div[@class='WARNING']"), 2).Text;
@@ -3400,7 +3571,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string FormError()
 		{
-			return this.containerElement.FindElement(By.XPath(".//ul[@class='form-error']/li"), 2)?.Text;
+			IWebElement formError = this.containerElement.FindElement(By.XPath(".//ul[@class='form-error']/li"), 2);
+			var formErrorText = formError?.Text;
+			return formErrorText;
 		}
 
 		public bool SelectPackageType(string packageType)
@@ -3430,7 +3603,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool PurchaseSummaryClickRemove(string product)
 		{
-			IWebElement remove = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table[@class='table table-hover']//tr//b[text()[contains(.,""" + product + @""")]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
+			IWebElement remove = this.containerElement.WaitUntilElementVisible(By.XPath(@"//table[@class='table table-hover']//tr//b[text()[contains(.,'{" + product + "}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
 			return remove.TryClick();
 		}
 
@@ -4232,6 +4405,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 			}
 			Report.Info("Checked all the alerts, the expected message was not found");
+			return false;
+		}
+
+		public bool CheckAlertMessageText(string displayedText)
+		{
+			IWebElement alertMessage = this.containerElement.FindElement(By.XPath("//div[@class='col-sm-12']//div[@class='alert alert-danger']"), 2);
+			var displayedTextWithoutApastraphy = displayedText.Replace("'", "");
+			var alertMessageTextWithoutApastraphy = displayedText.Replace("'", "");
+
+			if (alertMessageTextWithoutApastraphy.Equals(displayedTextWithoutApastraphy))
+			{
+				return true;
+			}
+
 			return false;
 		}
 

@@ -27,6 +27,99 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private static NewProduct NewProduct => new NewProduct();
 
+		[StepDefinition(@"I check if the logo is displayed for the following retailers")]
+		public void ThenICheckIfTheLogoIsDisplayedForTheFollowingRetailers(Table table)
+		{
+			NewProduct newProductObject = new NewProduct();
+			List<string> retailersThatAreNotDisplayingTheirLogo = newProductObject.CheckIfRetailerLogoIsDisplayed(table);
+			Report.IsTrue(retailersThatAreNotDisplayingTheirLogo.Count == 0, "One or more retailers did not display their logos", "All retailers are displaying their logos");
+
+			foreach (string retailer in retailersThatAreNotDisplayingTheirLogo)
+			{
+				Report.Info("Retailer that did not display their logo: " + retailer);
+			}
+
+		}
+
+		[StepDefinition(@"I check if a checkmark image is displayed above the following retailers")]
+		public void ThenICheckIfACheckmarkImageIsDisplayedAboveTheFollowingRetailers(Table table)
+		{
+			NewProduct newProductObject = new NewProduct();
+			var retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo = newProductObject.CheckIfCheckmarkImageIsDisplayedAboveRetailerLogo(table);
+			Report.IsTrue(retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo.Count == 0, "One or more retailers did not display a checkmark image above their logos", "All retailers are displaying checkmark images above their logos");
+
+			foreach (string retailer in retailersThatDoNotDisplayACheckmarkImageAboveTheirLogo)
+			{
+				Report.Info("Retailer that did not display a checkmark image above: " + retailer);
+			}
+		}
+
+		[StepDefinition(@"I check if a yellow triangle image is displayed above the following retailers")]
+		public void ThenICheckIfAYellowTriangleImageIsDisplayedAboveTheFollowingRetailers(Table table)
+		{
+			NewProduct newProductObject = new NewProduct();
+			var retailersThatDoNotDisplayAYellowImageAboveTheirLogo = newProductObject.CheckIfYellowTriangleImageIsDisplayedAboveRetailerLogo(table);
+			Report.IsTrue(retailersThatDoNotDisplayAYellowImageAboveTheirLogo.Count == 0, "One or more retailers did not display a yellow triangle image above their logos", "All retailers are displaying yellow triangle images above their logos");
+
+			foreach (string retailer in retailersThatDoNotDisplayAYellowImageAboveTheirLogo)
+			{
+				Report.Info("Retailer that did not display a yellow triangle image above: " + retailer);
+			}
+		}
+
+		[StepDefinition(@"I check if a 'Scope' button is displayed below the following retailers")]
+		public void ThenICheckIfAScopeButtonIsDisplayedBelowTheFollowingRetailers(Table table)
+		{
+			NewProduct newProductObject = new NewProduct();
+			var retailersThatDoNotDisplayAScopeButtonBelowTheirLogo = newProductObject.CheckIfScopeButtonIsDisplayedBeloweRetailerLogo(table);
+			Report.IsTrue(retailersThatDoNotDisplayAScopeButtonBelowTheirLogo.Count == 0, "One or more retailers did not display a 'Scope' button below their logos", "All retailers are displaying a 'Scope' button below their logos");
+
+			foreach (string retailer in retailersThatDoNotDisplayAScopeButtonBelowTheirLogo)
+			{
+				Report.Info("Retailer that did not display a 'Scope' button below: " + retailer);
+			}
+		}
+
+		[StepDefinition(@"I check if the retailer modal is displayed for the following retailer: (.*)")]
+		public void ThenICheckIfTheRetailerModalIsDisplayedForTheFollowingRetailerCT(string retailer)
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.ClickScopeButtonBelowRetailerLogo(retailer), "Failed to click 'Scope' button", "Successfully clicked 'Scope' button");
+			Delay.Seconds(3);
+			Report.IsTrue(newProductObject.CheckIfRetailerModalIsDisplayed(), "Failed to display retailer modal", "Successfully displayed retailer modal");
+		}
+
+		[StepDefinition(@"I check if the retailer modal is displaying the following text: (.*)")]
+		public void ThenICheckIfTheRetailerModalIsDisplayingTheFollowingText(string retailerModalText)
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.CheckRetailerModalText(retailerModalText), "The reatiler modal text did not match", "The retailer modal text did match");
+		}
+
+		[StepDefinition(@"I close the retailer modal")]
+		public void ThenICloseTheRetailerModal()
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.CloseRetailerModal(), "Failed to close retailer modal", "Successfully closed retailer modal");
+		}
+
+		[StepDefinition(@"I hover over the yellow triangle image")]
+		public void ThenIHoverOverTheYellowTriangleImage()
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.HoverOverYellowTriangleImage(), "Failed to hover over the yellow triangle image", "Successfully hovered over the yellow triangle image");
+		}
+
+
+		[Then(@"I check if the text displayed over the yellow triangle image matches the following text: (.*)")]
+		public void ThenICheckIfTheTextDisplayedOverTheYellowTriangleImageMatchesTheFollowingText(string textToMatch)
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.CheckIfTextDisplayedOverYellowTriangleImageMatches(textToMatch), "The text over the yellow triangle image did not match the following text: " + textToMatch, "The text over the yellow trangle image did match the following text " + textToMatch);
+		}
+
+
+
 		#region  General New Product steps
 
 		// Definitions, for consistency
@@ -1107,10 +1200,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.Failure("The new product page is not showing");
 			}
-			Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
-				"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
-				"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
-			Delay.Seconds(1);
+			if (option.StartsWith("UPC"))
+			{
+				var value = Context.GetFromContext(option)?.ToString();
+				if (value == null)
+				{
+					throw new Exception("Could not find item in context: " + value + " for checking field input is correct value!");
+				}
+				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), value.Trim()),
+					"Failed to set the input to " + value.Trim() + " in section: " + section.Trim(),
+					"Successfully set the input to " + value.Trim() + " in section: " + section.Trim());
+				Delay.Seconds(1);
+			}
+			else
+			{
+				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
+					"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
+					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+				Delay.Seconds(1);
+			}
+
 		}
 
 		[StepDefinition(@"I set the (.*) option to: (.*) and save entry")]
@@ -1207,6 +1316,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			List<string> options = myProduct.GetAllOptionsForSection(section);
 			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), "The option: " + options[0] + " could not be selected in section: " + section, "The option: " + options[0] + " was selected in section: " + section);
 		}
+		
 
 		[StepDefinition(@"If Section: (.*) is visible, I select the first option")]
 		public void IfSectionIsVisibleISelectTheOption(string section, string option)
@@ -2880,6 +2990,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().UnsetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
 				$"Failed to unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'",
 				$"Successfully unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
+		}
+
+		[Then(@"I check if alert message displays the following text: (.*)")]
+		public void ThenICheckIfAlertMessageDisplaysTheFollowingText(string displayedText)
+		{
+			var NewProductObject = new NewProduct();
+			Report.IsTrue(NewProductObject.CheckAlertMessageText(displayedText), "The alert message text did not match", "The alert message text did match");
 		}
 	}
 

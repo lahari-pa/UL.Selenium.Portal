@@ -254,7 +254,7 @@ Scenario: [65886] My Products - Pagination
 # JS 13/8/18 Finished test now we have more products completed via SHA - it will work in staging at least
 @ScenarioId:452
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
-	Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I filter the products by: Accepted by Retailers
 	Given I click Row Actions for the first product not in the 'Needs Your Attention' status
@@ -311,7 +311,7 @@ Scenario: [58579] Live Help - Chat Feature
 	Then In the Live Help dialog I should see an x in the upper right hand corner
 	Then In the Live Help dialog I should see the text 'Inbox' at the top of the chat window
 	Then In the Live Help dialog I should see the following text in the message area: Hello there! Need help? Reach out to us right here, and we'll get back to you as soon as we can!
-	Then In the Live Help dialog I should see the following text in the lower part of the chat window: Freshchat
+	#Then In the Live Help dialog I should see the following text in the lower part of the chat window: Freshchat
 	Then In the Live Help dialog I should see the following placeholder text in the text entry field: Reply here...
 	Then In the Live Help dialog I should see the paperclip icon in the lower right hand corner
 	Then In the Live Help dialog I should see the smiley icon in the lower right hand corner

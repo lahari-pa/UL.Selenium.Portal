@@ -456,6 +456,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			var expectedActions = new List<string>();
 			table.Rows.Cast<TableRow>().ToList().ForEach(x => expectedActions.Add(x["Option"]));
+
 			switch (seeCondition)
 			{
 				case "see":

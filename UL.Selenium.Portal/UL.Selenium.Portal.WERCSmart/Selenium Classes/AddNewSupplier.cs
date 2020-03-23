@@ -16,6 +16,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterSupplierID(string supplierID)
 		{
+			Delay.Seconds(2);
 			IWebElement SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID']"), 2);
 			SupplierID.EnterText(supplierID);
 			return SupplierID.GetValue() == supplierID;
