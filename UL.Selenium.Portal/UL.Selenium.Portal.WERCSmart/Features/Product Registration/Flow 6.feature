@@ -116,7 +116,7 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57711, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57711, container type: Aerosol Can and size: 10
 
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -129,6 +129,8 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
+
+Then In the Data Acceptance page I select Yes, Agreed
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Antifungal - Aerosol
 
