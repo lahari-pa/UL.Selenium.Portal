@@ -2157,6 +2157,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Message: '" + alert + "' is displayed as expected");
 		}
 
+		[StepDefinition(@"An alert is displayed with the message: (.*)")]
+		public void AnAlertIsDisplayedWithTheMessage(string message)
+		{
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				string alertText = SeleniumBrowser.WebBrowser.SwitchTo().Alert().Text;
+				Report.IsTrue(message == alertText, "Alert text does not match! Expected: " + message + ". Actual: " + alertText + ".",
+					"Successfully found text in alert!");
+			}
+			else
+			{
+				Report.Failure("Alert not present!");
+			}
+
+		}
+
 		[StepDefinition(@"If purchase details are showing click confirm order")]
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
 		{
