@@ -83,7 +83,7 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60018. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: LITHIUM ION BATTERIES
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithium Ion Batteries
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60018
 
 @ScenarioId:699
