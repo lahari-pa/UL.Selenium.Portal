@@ -657,6 +657,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"\[WERCSmart] I enter the information into the new user form for user saved as: (.*)")]
 		public void WhenIEnterTheFollowingInformationIntoTheNewUserForm(string savedAs)
 		{
+			Delay.Seconds(10);
 			Report.StartStep(ReportSettings.StepCounter + "- I enter the data in the table into the new account form.");
 			try
 			{
