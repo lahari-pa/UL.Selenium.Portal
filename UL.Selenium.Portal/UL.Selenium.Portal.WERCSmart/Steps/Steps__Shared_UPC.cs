@@ -650,6 +650,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 
 			Report.IsTrue(new MultipleUPC().ClickFinishButton(), "Failed To click the Finish button", "Successfully clicked the Finish button");
+			Report.IsTrue(new MultipleUPC().WaitForContainerToBeInvisible(), "The popup was still showing", "The popup was no longer showing");
 		}
 
 		[StepDefinition(@"I check that the UPC Number of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
@@ -707,7 +708,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Create file here
 			//var excelfile = new ExcelFunctions CreateSpreadsheet(fileName);
 			//var utils = ExcelFunctions.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
-			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination))
+			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.BulkUploadFile.xlsx", out string destination))
 			{
 				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
 				return;
@@ -722,6 +723,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			//add all rows from table to excelfile
 			System.IO.Directory.Move(destination, KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
+			
 			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", fileSavedAs), "Failed to validate File", "Successfully validated File");
 		}
 

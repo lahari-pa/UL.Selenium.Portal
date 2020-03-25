@@ -330,6 +330,7 @@
     <EmbeddedResource Include="Dependencies\PDF\testdoc.pdf" />
     <EmbeddedResource Include="Dependencies\Excel\testdoc.xlsx" />
     <EmbeddedResource Include="Dependencies\Excel\UPCsDuplicatedwithinAccount.xlsx" />
+    <EmbeddedResource Include="Dependencies\Excel\BulkUploadFile.xlsx" />
     <None Include="Features\AdditionalProductInformation.feature">
     </None>
     <None Include="Features\API\ItemSync.feature" />
