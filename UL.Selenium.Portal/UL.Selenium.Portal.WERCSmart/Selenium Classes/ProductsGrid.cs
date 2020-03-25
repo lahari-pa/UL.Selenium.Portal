@@ -1401,7 +1401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickShowOnlyDiscontinuedProductsCheckbox()
 		{
-			IWebElement checkBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='show-only-discontinued-products']"), 2);
+			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//input[@id='show-only-discontinued-products']"), 2);
 			return checkBox.TryClick();
 		}
 	}
