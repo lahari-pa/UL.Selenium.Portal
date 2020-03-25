@@ -14,6 +14,43 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
+		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[text()='" + radioButtonText + "']"), 2);
+
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				if (el == null)
+				{
+					return false;
+				} else
+				{
+					return true;
+				}
+			} else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				if (el == null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			return false;
+
+		}
+
+		public bool CheckAIS()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click \"Browse\"')]"), 2);
+			if (el == null)
+			{ return false; } else
+			{ return true;  }
+		}
+
 		public bool Closepopup()
 		{
 			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@data-bind='click: redirectToRetailers']"), 2);

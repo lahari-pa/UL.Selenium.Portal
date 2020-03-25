@@ -30,6 +30,23 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 	class StepDefinitions
 	{
 
+//Then I click Browse button
+//Then I upload document
+
+		[StepDefinition(@"I (should|should not) see radio option: (.*)")]
+		public void ISeeRadioOption(string shouldOrShouldNot, string radioButtonText)
+		{
+			WebElements WebElementsObject = new WebElements();
+			WebElementsObject.FindRadioButton(shouldOrShouldNot, radioButtonText);
+		}
+
+		[StepDefinition(@"I check if AIS is not uploaded")]
+		public void ICheckIfAISIsNotUploaded()
+		{
+			WebElements WebElementsObject = new WebElements();
+			WebElementsObject.CheckAIS();
+		}
+
 		[StepDefinition(@"I close annoying popup")]
 		public void GivenICloseAnnoyingPopup()
 		{
