@@ -2295,6 +2295,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
 		}
 
+		[StepDefinition(@"I Confirm the Products shown display the Blue Colour Status - which is the Sending to Retailers")]
+		public void GivenIConfirmTheProductsShownAreBlue()
+		{
+			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Sending to Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
+		}
+
 		[StepDefinition(@"I edit the product saved as: (.*)")]
 		public void EditProductSavedAs(string productSavedAs)
 		{

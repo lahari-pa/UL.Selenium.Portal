@@ -158,6 +158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selHomepage = new Homepage();
 			Report.IsTrue(selHomepage.WaitForContainerToBeVisible(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 			GeneralUtilities.Wait_for_load_finish();
+
 		}
 
 		public string GetEmailForAccount(string accountSavedAs)
@@ -1951,6 +1952,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IWaitForModalPopupToBeInVisible(int timeout = 30)
 		{
 			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing","The modal was gone");
+		}
+
+		[StepDefinition(@"I save the following text: (.*) as (.*)")]
+		public void SaveTextToContextAs(string text, string savedAs)
+		{
+			Context.AddToContext(savedAs, text);
 		}
 
 
