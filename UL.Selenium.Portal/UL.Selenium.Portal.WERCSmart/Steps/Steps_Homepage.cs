@@ -418,6 +418,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+			
 		}
 
 		[StepDefinition(@"I should see the following filter options below My Products")]
