@@ -674,6 +674,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check that the (UPC|Type|Size|Retailer) of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
 		public void ICheckValueOfEachProductFromFile(string value, string file, string savedAs)
 		{
+			//This may need fixing to adapt the offset value (currently 21). See the below method for item number etc
 			Report.IsTrue(new MultipleUPC().CheckValueOfEachProductFromFile(value, file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
 
 		}
