@@ -3117,6 +3117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ClickSubmit(), "Failed to click submit", "Successfully clicked submit");
+			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(@"I Check that for the product: (.*) the Details in SHA Manager Match the details found in the file: (.*)")]

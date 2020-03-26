@@ -78,7 +78,37 @@
 @ViewUpcs
 @Solutions
 @run_NotIncludedGeneralTests
-
+@Shared
+@NewProduct
+@LandingPage
+@Login
+@Homepage
+@Signup
+@wercsmart
+@NewProduct
+@ProductGrid
+@DataSummarySheet
+@wercsmart
+@RetailPartners
+@SummaryPage
+@PaymentMethods
+@SubEnrollment
+@WERCSmart_Signup
+@MyAccount
+@PackagingTypes
+@Brands
+@MyIngredients
+@UPC
+@ProductSetUp
+@SHA
+@Studio
+@ForwardProductRegistration
+@ProductSetUp
+@SupplierReports
+@CreateProducts
+@ViewUpcs
+@Solutions
+@run_NotIncludedGeneralTests
 @Shared
 @NewProduct
 @Homepage
@@ -206,7 +236,17 @@ Scenario: [127901] SHA - Actions - Advanced Reporting - Daily Report - Data Tier
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I select the: Daily Report - Data Tier Consent report from Advanced Reporting in SHA
 Given In the Advanced Reporting popup I click Submit
-# Confirmed that the 'Daily Report - Data Tier Consent' Excel Report opens# Confirm that 'Dollar General' (DG) is listed as a 'Client'
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I select the: Daily Report - Data Tier Consent report from Advanced Reporting in SHA
+	Then In the Advanced Reporting popup I click Submit
+	And I wait for the Advanced Reporting Preparing Report popup to disappear
+	Given I confirm that an excel file is produced called Daily Report - Data Tier Consent.xls and save as 115163
+	#Update Column headings
+	Then I confirm that the excel file saved as: 115163 contains the following columns:
+		| Column |
+		| Client |	
+	
+# Confirm that 'Dollar General' (DG) is listed as a 'Client'
 # Confirm that 'Costco' (CO) is listed as a 'Client'
 # Confirm that 'Canadian Tire' (CT) is listed as a 'Client'
 # Confirm that 'CVS' is listed as a 'Client'
@@ -214,7 +254,8 @@ Given In the Advanced Reporting popup I click Submit
 # Confirm that 'Bed Bath and Beyond' (BB) is listed as a 'Client'
 # Confirm that 'Target' (TG) is listed as a 'Client'
 # Confirm that 'Walgreens' (WG) is listed as a 'Client'
-# Confirm that 'Family Dollar' (FD) is listed as a 'Client'# Confirm that 'Walmart' (WM) is listed as a 'Client'
+# Confirm that 'Family Dollar' (FD) is listed as a 'Client'
+# Confirm that 'Walmart' (WM) is listed as a 'Client'
 # Confirm that 'Amazon' (AM) is listed as a 'Client'
 # Confirm that 'Dollar Tree' (DT) is listed as a 'Client'
 Given I delete the Advanced Report file saved as Daily Report - Data Tier Consent
