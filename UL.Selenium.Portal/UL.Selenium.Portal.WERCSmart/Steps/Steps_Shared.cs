@@ -4305,6 +4305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I log in to studio as administrator");
 			myStepsSha.GivenILoginToStudioAsAdministrator();
 			this.GivenICallSharedStep59066GoToSHAManager();
+			Delay.Seconds(9999);
 
 		}
 

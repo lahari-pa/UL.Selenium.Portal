@@ -560,7 +560,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NewFolder1\" />
     <Folder Include="Selenium Classes\New Product\Review and Submit\" />
     <Folder Include="Steps\New Product\Recipient and UPC Details\" />
   </ItemGroup>

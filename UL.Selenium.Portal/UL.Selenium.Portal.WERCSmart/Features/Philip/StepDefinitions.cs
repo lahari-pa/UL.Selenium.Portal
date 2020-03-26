@@ -30,8 +30,55 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 	class StepDefinitions
 	{
 
-//Then I click Browse button
-//Then I upload document
+		[StepDefinition(@"I Close 'Supplier Manager'")]
+		public void ThenIClose()
+		{
+			WebElements WebElementsObject = new WebElements();
+			WebElementsObject.CloseDialog();
+		}
+
+
+		[StepDefinition(@"Confirm that '(.*)' shows (.*) marked with a '(.*)'")]
+		public void ThenConfirmThatShowsTierTierAndTierMarkedWithA(string supplier, string tiers, string marked)
+		{
+			WebElements WebElementsObject = new WebElements();
+			var arr = tiers.Split(',');
+			WebElementsObject.ConfirmTier(supplier, arr, marked);
+		}
+
+
+		[StepDefinition(@"Select the 'Data Tier Consent' Tab")]
+		public void ThenSelectTheTab()
+		{
+			WebElements WebElementsObject = new WebElements();
+			WebElementsObject.ClickTab();
+		}
+
+
+		[StepDefinition(@"Select the 'The WERCS LTD' - Staging")]
+		public void ThenSelectThe_Staging()
+		{
+			WebElements WebElementsObject = new WebElements();
+			WebElementsObject.ClickResult();
+		}
+
+
+		[StepDefinition(@"Search for '(.*)' Vendor")]
+		public void ThenSearchForVendor(string text)
+		{
+			WebElements WebElementsObject = new WebElements();
+			WebElementsObject.SearchText(text);
+			WebElementsObject.ClickSearch();
+		}
+
+
+		[StepDefinition(@"I Click 'Suppliers'")]
+		public void ThenIClick(string p0)
+		{
+			WebElements WebElementsObject = new WebElements();
+			WebElementsObject.ClickSuppliers();
+		}
+
 
 		[StepDefinition(@"I (should|should not) see radio option: (.*)")]
 		public void ISeeRadioOption(string shouldOrShouldNot, string radioButtonText)

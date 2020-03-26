@@ -175,3 +175,47 @@ Then Confirm that a Column Header shows for 'Bed, Bath & Beyond'
 Given I delete the Supplier Report file saved as Retailer Chemicals of Concern
 # Click 'CLOSE' on Report Download window
 
+
+@Shared
+
+Scenario: [127895] SHA Manager: Supplier Records: Verification of Data Tier Consent
+
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Then I Click 'Suppliers'
+Then Search for 'The WERCS LTD' Vendor
+Then Select the 'The WERCS LTD' - Staging
+Then Select the 'Data Tier Consent' Tab
+Then Confirm that 'Dollar General' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
+# Confirm that 'Costco' shows Tier 1, Tier 2.1 and Tier 2.2 marked with a 'Y'
+# Confirm that 'Canadian Tire' shows Tier 1, Tier 2.1 and Tier 2.2 marked with a 'Y'
+# Confirm that 'CVS' shows Tier 1, Tier 2.1, Tier 2.2 and Tier 3 marked with a 'Y'
+# Confirm that 'Rite Aid' shows Tier 1, Tier 2.1, Tier 2.2 and Tier 3 marked with a 'Y'
+# Confirm that 'Target' shows Tier 1, Tier 2.1, Tier 2.2, Tier 3 and Tier 4.1 marked with a 'Y'
+# Confirm that 'Walgreens' shows Tier 1, Tier 2.1 and Tier 2.2 marked with a 'Y'
+# Confirm that 'Family Dollar' shows Tier 1 marked with a 'Y'
+# Confirm that 'Wal-Mart/Sam's Club' shows Tier 1, Tier 2.1 and Tier 2.2 marked with a 'Y'
+# Confirm that 'Amazon' shows Tier 1 marked with a 'Y'
+# Confirm that 'Dollar Tree Stores, Inc. / Greenbrier International Inc.'' shows Tier 1, Tier 2.1 and Tier 2.2 marked with a 'Y'
+# Confirm that 'Bed Bath and Beyond (including Harmon Buy Buy Baby and Christmas Tree Shops)' shows Tier 1, Tier 2.1, Tier 2.2, and Tier 4.1 marked with a 'Y'
+Then I Close 'Supplier Manager'
+
+
+
+Scenario: [127901] SHA - Actions - Advanced Reporting - Daily Report - Data Tier Consent
+
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I select the: Daily Report - Data Tier Consent report from Advanced Reporting in SHA
+Given In the Advanced Reporting popup I click Submit
+# Confirmed that the 'Daily Report - Data Tier Consent' Excel Report opens# Confirm that 'Dollar General' (DG) is listed as a 'Client'
+# Confirm that 'Costco' (CO) is listed as a 'Client'
+# Confirm that 'Canadian Tire' (CT) is listed as a 'Client'
+# Confirm that 'CVS' is listed as a 'Client'
+# Confirm that 'Rite Aid' (RA) is listed as a 'Client'
+# Confirm that 'Bed Bath and Beyond' (BB) is listed as a 'Client'
+# Confirm that 'Target' (TG) is listed as a 'Client'
+# Confirm that 'Walgreens' (WG) is listed as a 'Client'
+# Confirm that 'Family Dollar' (FD) is listed as a 'Client'# Confirm that 'Walmart' (WM) is listed as a 'Client'
+# Confirm that 'Amazon' (AM) is listed as a 'Client'
+# Confirm that 'Dollar Tree' (DT) is listed as a 'Client'
+Given I delete the Advanced Report file saved as Daily Report - Data Tier Consent
+Given I Click close in the Advanced Reporting Popup

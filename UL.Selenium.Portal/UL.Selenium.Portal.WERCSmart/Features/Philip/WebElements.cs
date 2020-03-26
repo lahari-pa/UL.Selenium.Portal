@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.Selenium.Classes;
+using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.WERCSmart.Philip
 {
@@ -14,6 +15,42 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
+		public bool CloseDialog()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog =-title-dialog-supplier-manager']//span[text()='close']"), 2);
+			return el.TryClick();
+		}
+		public bool ConfirmTier(string retailer, string[]arr, string marked)
+		{
+			IList <IWebElement> el = this.containerElement.FindElements(By.XPath("//td[text()='" + retailer + "']//following-sibling::td"), 2);
+			return false;
+		}
+		public bool ClickTab()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//a[text()='Data Tier Consent']"), 2);
+			return el.TryClick();
+		}
+		public bool ClickResult()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//td[@title='The WERCS LTD - STAGING']"), 2);
+			return el.TryClick();
+		}
+		public bool SearchText(string text)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@id='textSupplierSearch']"), 2);
+			return el.TryEnterText(text);
+		}
+		public bool ClickSearch()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//button[@id='supplierSearchButton']"), 2);
+			return el.TryClick();
+		}
+
+		public bool ClickSuppliers()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//a[text()='Suppliers']"), 2);
+			return el.TryClick();
+		}
 		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[text()='" + radioButtonText + "']"), 2);
