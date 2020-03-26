@@ -20,6 +20,10 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.Selenium.Functions;
 using UL.Automation.TReVor.Classes;
+using System.IO;
+using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Core;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -708,7 +712,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Create file here
 			//var excelfile = new ExcelFunctions CreateSpreadsheet(fileName);
 			//var utils = ExcelFunctions.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
-			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.BulkUploadFile.xlsx", out string destination))
+			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination))
 			{
 				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
 				return;
@@ -725,6 +729,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			System.IO.Directory.Move(destination, KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
 			
 			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", fileSavedAs), "Failed to validate File", "Successfully validated File");
+
+			//File.SetLastWriteTime(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx", DateTime.Now);
+			//var dt = File.GetLastWriteTime(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
+
+			Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+
+			
+
+			var excelWorkBook = excelApp.Workbooks.Open(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
+			excelWorkBook.Activate();
+			excelWorkBook.Save();
+			excelWorkBook.Close();
+			excelApp.Quit();
+
+
+
 		}
 
 		[StepDefinition(@"I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: (.*)")]
