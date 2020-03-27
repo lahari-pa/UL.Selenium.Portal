@@ -73,7 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 
 		[StepDefinition(@"I Click 'Suppliers'")]
-		public void ThenIClick(string p0)
+		public void ThenIClick()
 		{
 			WebElements WebElementsObject = new WebElements();
 			WebElementsObject.ClickSuppliers();

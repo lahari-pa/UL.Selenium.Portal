@@ -17,38 +17,103 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		public bool CloseDialog()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog =-title-dialog-supplier-manager']//span[text()='close']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog =-title-dialog-supplier-manager']//span[text()='close']"), 2);
 			return el.TryClick();
 		}
 		public bool ConfirmTier(string retailer, string[]arr, string marked)
 		{
-			IList <IWebElement> el = this.containerElement.FindElements(By.XPath("//td[text()='" + retailer + "']//following-sibling::td"), 2);
-			return false;
+			IList <IWebElement> el = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//td[text()='" + retailer + "']//following-sibling::td"), 2);
+			
+			foreach (string str in arr)
+			{
+				switch (str.ToLower())
+				{
+					case "tier 1":
+
+						if (el[1].Text != marked)
+						{
+							return false;
+						}
+
+						break;
+
+					case "tier 2.1":
+
+						if (el[2].Text != marked)
+						{
+							return false;
+						}
+
+						break;
+
+					case "tier 2.2":
+
+						if (el[3].Text != marked)
+						{
+							return false;
+						}
+
+						break;
+
+					case "tier 3":
+
+						if (el[4].Text != marked)
+						{
+							return false;
+						}
+
+						break;
+
+					case "tier 4.1":
+
+						if (el[5].Text != marked)
+						{
+							return false;
+						}
+
+						break;
+
+					case "tier 4.2":
+
+						if (el[6].Text != marked)
+						{
+							return false;
+						}
+
+						break;
+
+					default:
+						return false;
+						break;
+				}
+				
+			}
+			return true;
 		}
 		public bool ClickTab()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//a[text()='Data Tier Consent']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[text()='Data Tier Consent']"), 2);
 			return el.TryClick();
 		}
 		public bool ClickResult()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//td[@title='The WERCS LTD - STAGING']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@title='The WERCS LTD - STAGING']"), 2);
 			return el.TryClick();
 		}
 		public bool SearchText(string text)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@id='textSupplierSearch']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='textSupplierSearch']"), 2);
 			return el.TryEnterText(text);
 		}
 		public bool ClickSearch()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//button[@id='supplierSearchButton']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='supplierSearchButton']"), 2);
 			return el.TryClick();
 		}
 
 		public bool ClickSuppliers()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//a[text()='Suppliers']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[text()='Suppliers']"), 2);
 			return el.TryClick();
 		}
 		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)

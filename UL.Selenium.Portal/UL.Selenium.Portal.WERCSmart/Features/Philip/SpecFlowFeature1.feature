@@ -13,7 +13,6 @@
 @SHA
 @UPC
 @run_AdditionalProductInformation
-@Philip
 @Shared
 @LandingPage
 @Login
@@ -112,6 +111,26 @@
 @Shared
 @NewProduct
 @Homepage
+@Shared
+@wercsmart
+@Login
+@UlSolutionCenter
+@Homepage
+@ProductGrid
+@ForwardProductRegistration
+@NewProduct
+@RetailPartners
+@MessageCenter
+@MyAccount
+@LandingPage
+@DocumentAcceptance
+@DeleteActiveProducts
+@Solutions
+@UPC
+@ReviewDocuments
+@SHA
+@MyMessages
+@run_MyMessages
 
 Feature: ChooseGoodGuide.com Scenarios
 
@@ -199,35 +218,34 @@ Scenario: [127767] Supplier Reports - Retailer Chemicals of Concern - Bed Bath a
 Given I click the Supplier Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Retailer Chemicals of Concern
 Given In the Supplier Reports screen I click on the Download button
-Given I confirm that a file is downloaded with file name: Retailer Chemicals of Concern then close the Report Download popup. I save the file as Retailer Chemicals of Concern
-Then Open the Retailer Chemicals of Concern Excel Report
-Then Confirm that a Column Header shows for 'Bed, Bath & Beyond'
+Given I confirm an excel file is downloaded then close the Report Download popup. I save the file as excel72586
+Then I confirm that the exported excel file saved as: excel72586 contains the following columns:
+		| Column             |
+		| Bed, Bath & Beyond |
 Given I delete the Supplier Report file saved as Retailer Chemicals of Concern
 # Click 'CLOSE' on Report Download window
 
-
-@Shared
 
 Scenario: [127895] SHA Manager: Supplier Records: Verification of Data Tier Consent
 
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Then I Click 'Suppliers'
 Then Search for 'The WERCS LTD' Vendor
-Then Select the 'The WERCS LTD' - Staging
-Then Select the 'Data Tier Consent' Tab
-Then Confirm that 'Dollar General' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
-# Confirm that 'Costco' shows Tier 1, Tier 2.1 and Tier 2.2 marked with a 'Y'
-# Confirm that 'Canadian Tire' shows Tier 1, Tier 2.1 and Tier 2.2 marked with a 'Y'
-# Confirm that 'CVS' shows Tier 1, Tier 2.1, Tier 2.2 and Tier 3 marked with a 'Y'
-# Confirm that 'Rite Aid' shows Tier 1, Tier 2.1, Tier 2.2 and Tier 3 marked with a 'Y'
-# Confirm that 'Target' shows Tier 1, Tier 2.1, Tier 2.2, Tier 3 and Tier 4.1 marked with a 'Y'
-# Confirm that 'Walgreens' shows Tier 1, Tier 2.1 and Tier 2.2 marked with a 'Y'
-# Confirm that 'Family Dollar' shows Tier 1 marked with a 'Y'
-# Confirm that 'Wal-Mart/Sam's Club' shows Tier 1, Tier 2.1 and Tier 2.2 marked with a 'Y'
-# Confirm that 'Amazon' shows Tier 1 marked with a 'Y'
-# Confirm that 'Dollar Tree Stores, Inc. / Greenbrier International Inc.'' shows Tier 1, Tier 2.1 and Tier 2.2 marked with a 'Y'
-# Confirm that 'Bed Bath and Beyond (including Harmon Buy Buy Baby and Christmas Tree Shops)' shows Tier 1, Tier 2.1, Tier 2.2, and Tier 4.1 marked with a 'Y'
-Then I Close 'Supplier Manager'
+#Then Select the 'The WERCS LTD' - Staging
+#Then Select the 'Data Tier Consent' Tab
+#Then Confirm that 'Dollar General' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
+#Then Confirm that 'Costco' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
+#Then Confirm that 'Canadian Tire' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
+#Then Confirm that 'CVS' shows Tier 1,Tier 2.1,Tier 2.2,Tier 3 marked with a 'Y'
+#Then Confirm that 'Rite Aid' shows Tier 1,Tier 2.1,Tier 2.2,Tier 3 marked with a 'Y'
+#Then Confirm that 'Target' shows Tier 1,Tier 2.1,Tier 2.2,Tier 3,Tier 4.1 marked with a 'Y'
+#Then Confirm that 'Walgreens' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
+#Then Confirm that 'Family Dollar' shows Tier 1 marked with a 'Y'
+#Then Confirm that 'Wal-Mart/Sam's Club' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
+#Then Confirm that 'Amazon' shows Tier 1 marked with a 'Y'
+#Then Confirm that 'Dollar Tree Stores, Inc. / Greenbrier International Inc.'' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
+#Then Confirm that 'Bed Bath and Beyond (including Harmon Buy Buy Baby and Christmas Tree Shops)' shows Tier 1,Tier 2.1,Tier 2.2,Tier 4.1 marked with a 'Y'
+#Then I Close 'Supplier Manager'
 
 
 
@@ -237,12 +255,12 @@ Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I select the: Daily Report - Data Tier Consent report from Advanced Reporting in SHA
 Given In the Advanced Reporting popup I click Submit
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Then I select the: Daily Report - Data Tier Consent report from Advanced Reporting in SHA
-	Then In the Advanced Reporting popup I click Submit
-	And I wait for the Advanced Reporting Preparing Report popup to disappear
-	Given I confirm that an excel file is produced called Daily Report - Data Tier Consent.xls and save as 115163
-	#Update Column headings
-	Then I confirm that the excel file saved as: 115163 contains the following columns:
+Then I select the: Daily Report - Data Tier Consent report from Advanced Reporting in SHA
+Then In the Advanced Reporting popup I click Submit
+And I wait for the Advanced Reporting Preparing Report popup to disappear
+Given I confirm that an excel file is produced called Daily Report - Data Tier Consent.xls and save as 115163
+#Update Column headings
+Then I confirm that the excel file saved as: 115163 contains the following columns:
 		| Column |
 		| Client |	
 	
@@ -260,3 +278,20 @@ Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 # Confirm that 'Dollar Tree' (DT) is listed as a 'Client'
 Given I delete the Advanced Report file saved as Daily Report - Data Tier Consent
 Given I Click close in the Advanced Reporting Popup
+
+
+
+
+Scenario: [127903] Supplier Reports - Retailer Chemicals of Concern Report - Need to Include the Column for Bed Bath and Beyond
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I click the Supplier Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: Retailer Chemicals of Concern
+Given In the Supplier Reports screen I click on the Download button
+Given I confirm an excel file is downloaded then close the Report Download popup. I save the file as excel72586
+Then I confirm that the exported excel file saved as: excel72586 contains the following columns:
+		| Column             |
+		| Bed, Bath & Beyond |
+# Only Chemicals of Concern to BED BATH AND BEYOND will appear marked with an 'X'
+And I delete the excel file saved as excel72586
+# Click on the Bottom Tab to open the Excel Retailer Chemicals of Concern Report
