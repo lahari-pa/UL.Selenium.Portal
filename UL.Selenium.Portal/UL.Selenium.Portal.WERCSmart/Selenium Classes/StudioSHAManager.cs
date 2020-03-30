@@ -553,7 +553,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				//if this fails in some cases, try the old method first and then check for the context menu (var thisContextMenu = new RightClickProductMenu();) and only if that fails do the new way
 				Actions actions = new Actions(SeleniumBrowser.WebBrowser);				
 				actions.MoveToElement(matchingTD2);
-				actions.MoveByOffset(0,-50);
+				//actions.MoveByOffset(0,-50);
+				actions.MoveByOffset(0,-40);
 				actions.ContextClick();
 				actions.Perform();
 				return true;

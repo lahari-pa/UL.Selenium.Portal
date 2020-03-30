@@ -3603,7 +3603,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool PurchaseSummaryClickRemove(string product)
 		{
-			IWebElement remove = this.containerElement.WaitUntilElementVisible(By.XPath(@"//table[@class='table table-hover']//tr//b[text()[contains(.,'{" + product + "}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
+			IWebElement remove = this.containerElement.WaitUntilElementVisible(By.XPath($"//table[@class='table table-hover']//tr//b[text()[contains(.,'{product}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
 			return remove.TryClick();
 		}
 
