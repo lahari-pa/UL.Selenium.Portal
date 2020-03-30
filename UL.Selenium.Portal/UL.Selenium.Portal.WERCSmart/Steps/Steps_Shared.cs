@@ -81,6 +81,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				char[] forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
 				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
+			Report.StartStep("Setting Product Line or Brand to: TestBrand");
+			new Steps_TheProduct().SetProductLineOrBrand("TestBrand");
 			new Steps_TheProduct().SetProductNameTo(name);
 			Report.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
 			new Steps_TheProduct().SetTypeOfProductTo(type);
@@ -1701,6 +1703,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GivenICallSharedStepU_S_DepartmentOfTransportationDOTClassification_EnterAllValidDataUNUnmberUNProperShippingNameNonanesTechniacalNameTechnicalTestNameHazardClassPackingGroupIII(
 				string unNo, string psnName, string techName, string hazClass, string packClass)
 		{
+			Delay.Seconds(9999);
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set the UN Number field to: " + unNo);
@@ -3516,6 +3519,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["VOC for states"]);
 			Report.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(
@@ -4225,6 +4229,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsRetailPartners().ThenIShouldSeeTheFollowingHeading("Retail Partners");
 			Report.StartStep("I select the retailer: CVS");
 			new StepsRetailPartners().SelectRetailer("CVS");
+		}
+
+		[StepDefinition(@"I call Shared Step 57206 \(Go to Retail Partners - Select Bed Bath and Beyond\)")]
+		public void SharedGoToRetailPartners_SelectBedBathandBeyond()
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I click the Retail Partners icon in the Navigation Pane");
+			new StepsHomepage().ClickItemInNavigationPanel("Retail Partners");
+			Report.StartStep("I should see the heading 'Retail Partners'");
+			new StepsRetailPartners().ThenIShouldSeeTheFollowingHeading("Retail Partners");
+			Report.StartStep("I select the retailer: Bed Bath and Beyond");
+			new StepsRetailPartners().SelectRetailer("Bed Bath and Beyond");
 		}
 
 		[StepDefinition(@"I call Shared Step 74269 \(Select Retailers - Rite Aid\)")]

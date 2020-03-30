@@ -174,6 +174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						"Column name has been found as expected: " + thisRow["Column"], false, false);
 				}
 			}
+			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(@"I Click the More Filters Button to expand the option")]

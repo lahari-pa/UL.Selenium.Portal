@@ -22,8 +22,9 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		}
 		public bool ConfirmTier(string retailer, string[]arr, string marked)
 		{
-			IList <IWebElement> el = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//td[text()='" + retailer + "']//following-sibling::td"), 2);
-			
+		
+			IList <IWebElement> el = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//td[contains(text(), '" + retailer + "')]//following-sibling::td"), 2);
+	
 			foreach (string str in arr)
 			{
 				switch (str.ToLower())

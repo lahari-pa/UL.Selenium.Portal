@@ -23,12 +23,65 @@ using UL.Automation.Selenium.Classes;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Automation.Utilities.Functions;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RetailerAbbreviations;
 
 namespace UL.Selenium.Portal.WERCSmart.Philip
 {
 	[Binding, Scope(Tag = "Philip")]
 	class StepDefinitions
 	{
+
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columnss:")]
+		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				List<List<string>> str = new List<List<string>>();
+				for (int i = 1; i < table.RowCount+1; i++)
+				{
+					List<string> ColumnTitles = ExcelUtils.Excel_GetRow(i);
+
+					str.Add(ColumnTitles);
+				}
+
+				Report.Info("hi");
+				var abbr = new RetailerAbbreviations();
+				string selectedAbbr = "";
+
+				foreach (TableRow thisRow in table.Rows)
+				{
+
+					Report.Info("hi1");
+					string retailer = thisRow["Retailer"];
+					bool isFound = false;
+
+					abbr.Map.TryGetValue(retailer, out selectedAbbr);
+					Report.Info("hi1.1 " + retailer + " === " + selectedAbbr);
+					foreach (List<string>listStr in str)
+					{
+						
+						Report.Info("hi2 " + listStr[0] + " === " + retailer + " === " + selectedAbbr);
+						if (listStr[0] == selectedAbbr)
+						{
+							Report.Info("hi2.1");
+							isFound = true;
+						}
+					}
+					if (!isFound)
+					{
+						Report.Info("hi3");
+						Report.IsTrue(isFound, "", "");
+					}
+				}
+				Report.Info("hi4");
+				return true;
+			}
+			Report.Info("hi5");
+			return false;
+		}
 
 		[StepDefinition(@"I Close 'Supplier Manager'")]
 		public void ThenIClose()
@@ -52,6 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		{
 			WebElements WebElementsObject = new WebElements();
 			WebElementsObject.ClickTab();
+			Delay.Seconds(8);
 		}
 
 
