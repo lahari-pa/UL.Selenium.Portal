@@ -1703,7 +1703,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GivenICallSharedStepU_S_DepartmentOfTransportationDOTClassification_EnterAllValidDataUNUnmberUNProperShippingNameNonanesTechniacalNameTechnicalTestNameHazardClassPackingGroupIII(
 				string unNo, string psnName, string techName, string hazClass, string packClass)
 		{
-			Delay.Seconds(9999);
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
 			Report.StartStep("I set the UN Number field to: " + unNo);
@@ -3519,7 +3518,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["VOC for states"]);
 			Report.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(

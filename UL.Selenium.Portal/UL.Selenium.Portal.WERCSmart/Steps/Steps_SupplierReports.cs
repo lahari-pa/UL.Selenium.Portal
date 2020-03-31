@@ -140,7 +140,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Failed to close the Report Download popup",
 					"Successfully closed the Report Download popup");
 			}
-			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(@"I delete the Supplier Report file saved as (.*)")]

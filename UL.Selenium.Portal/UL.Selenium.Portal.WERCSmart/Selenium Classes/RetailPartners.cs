@@ -137,6 +137,168 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//Jacob
+
+		public bool CloseDialog()
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog =-title-dialog-supplier-manager']//span[text()='close']"), 2);
+			return el.TryClick();
+		}
+		public bool ConfirmTierHasCorrectMarkingForRetailer(string retailer, string[] tierArray, string mark)
+		{
+
+			IList<IWebElement> rowElementsArray = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//td[contains(text(), '" + retailer + "')]//following-sibling::td"), 2);
+
+			foreach (string str in tierArray)
+			{
+				switch (str.ToLower())
+				{
+					case "tier 1":
+
+						if (rowElementsArray[1].Text == mark)
+						{
+							return true;
+						}
+
+						break;
+
+					case "tier 2.1":
+
+						if (rowElementsArray[2].Text == mark)
+						{
+							return true;
+						}
+
+						break;
+
+					case "tier 2.2":
+
+						if (rowElementsArray[3].Text == mark)
+						{
+							return true;
+						}
+
+						break;
+
+					case "tier 3":
+
+						if (rowElementsArray[4].Text == mark)
+						{
+							return true;
+						}
+
+						break;
+
+					case "tier 4.1":
+
+						if (rowElementsArray[5].Text == mark)
+						{
+							return true;
+						}
+
+						break;
+
+					case "tier 4.2":
+
+						if (rowElementsArray[6].Text == mark)
+						{
+							return true;
+						}
+
+						break;
+
+					default:
+						return false;
+						break;
+				}
+
+			}
+			return false;
+		}
+		public bool ClickTabWithName(string tabName)
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[text()='" + tabName + "']"), 2);
+			return el.TryClick();
+		}
+		public bool ClickResultWithName(string resultName)
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@title='" + resultName + "']"), 2);
+			return el.TryClick();
+		}
+		public bool SearchTheFollowingText(string searchText)
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='textSupplierSearch']"), 2);
+			return el.TryEnterText(searchText);
+		}
+		public bool ClickSearchButton()
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='supplierSearchButton']"), 2);
+			return el.TryClick();
+		}
+
+		public bool ClickSuppliersButton()
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[text()='Suppliers']"), 2);
+			return el.TryClick();
+		}
+		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[text()='" + radioButtonText + "']"), 2);
+
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				if (el == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				if (el == null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			return false;
+
+		}
+
+		public bool CheckIfAISIsUploaded()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click \"Browse\"')]"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		public bool CheckProductInformation()
+		{
+			Delay.Seconds(5);
+			IWebElement productID = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']//br[1]/preceding-sibling::text()[1]"), 2);
+			IWebElement productType = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']//br[1]/following-sibling::text()[1]"), 2);
+			IWebElement productAccessCode = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']//br[2]/following-sibling::text()[1]"), 2);
+
+			if (productID != null && productType != null && productAccessCode != null)
+			{
+				return true;
+			}
+
+			return false;
+
+		}
 	}
 
 	class RetailPartnersDetails : SeleniumBaseObject

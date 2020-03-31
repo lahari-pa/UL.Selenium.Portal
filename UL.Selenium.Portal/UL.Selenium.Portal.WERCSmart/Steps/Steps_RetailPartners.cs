@@ -2126,7 +2126,138 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				}
 			}
+
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following retailers:")]
+		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingRetailers(string savedAs, Table table)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				List<List<string>> ListOfRetailerNames = new List<List<string>>();
+
+				for (int i = 1; i < table.RowCount + 1; i++)
+				{
+					List<string> RetailerName = ExcelUtils.Excel_GetRow(i);
+
+					ListOfRetailerNames.Add(RetailerName);
+				}
+
+				var abbr = new RetailerAbbreviations();
+				string selectedAbbr = "";
+
+				foreach (TableRow thisRow in table.Rows)
+				{
+
+					string retailer = thisRow["Retailer"];
+					bool isFound = false;
+
+					abbr.Map.TryGetValue(retailer, out selectedAbbr);
+
+					foreach (List<string> Retailer in ListOfRetailerNames)
+					{
+
+						if (Retailer[0] == selectedAbbr)
+						{
+							isFound = true;
+						}
+					}
+
+					if (!isFound)
+					{
+						Report.Failure("The reatiler: " + retailer + " was not found");
+						return isFound;
+					}
+
+				}
+
+				Report.Info("All retailers were fonud");
+				return true;
+			}
+
+			Report.Failure("Excel data was not found");
+			return false;
 		}
+
+		[StepDefinition(@"I Close 'Supplier Manager'")]
+		public void ThenIClose()
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.CloseDialog(), "Failed to close dialog", "Successfully closed dialog");
+		}
+
+
+		[StepDefinition(@"Confirm that '(.*)' shows (.*) marked with a '(.*)'")]
+		public void ThenConfirmThatShowsTierTierAndTierMarkedWithA(string supplier, string tiers, string marked)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			var arr = tiers.Split(',');
+			Report.IsTrue(retailPartnersObject.ConfirmTierHasCorrectMarkingForRetailer(supplier, arr, marked), "Failed to confirm all tier markings", "Successfully confirmed all tier markings");
+		}
+
+
+		[StepDefinition(@"Select the '(.*)' Tab")]
+		public void ThenSelectTheTab(string tabName)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.ClickTabWithName(tabName), "Failed to the following tab: " + tabName, "Successfully clicked the following tab: " + tabName);
+			Delay.Seconds(5);
+		}
+
+
+		[StepDefinition(@"Select the '(.*)'")]
+		public void ThenSelectThe_Staging(string selectedResult)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.ClickResultWithName(selectedResult), "Failed to click result with name: " + selectedResult, "Successfully clicked result with name: " + selectedResult);
+		}
+
+
+		[StepDefinition(@"Search for '(.*)' Vendor")]
+		public void ThenSearchForVendor(string text)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.SearchTheFollowingText(text), "Failed to search for the following text: " + text, "Successfully searched for the following text: " + text);
+			Report.IsTrue(retailPartnersObject.ClickSearchButton(), "Failed to click the search button", "Successfully clicked the search button");
+		}
+
+
+		[StepDefinition(@"I Click 'Suppliers'")]
+		public void ThenIClick()
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
+		}
+
+
+		[StepDefinition(@"I (should|should not) see radio option: (.*)")]
+		public void ISeeRadioOption(string shouldOrShouldNot, string radioButtonText)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.FindRadioButton(shouldOrShouldNot, radioButtonText), "Failed to see/not see the radio button with the following text: " + radioButtonText, "Succes saw/not saw the radio button with the following text: " + radioButtonText);
+		}
+
+		[StepDefinition(@"I check if AIS is not uploaded")]
+		public void ICheckIfAISIsNotUploaded()
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
+		}
+
+		[StepDefinition(@"Check popup date productID: (.*) productType:(.*) productAccessCode: (.*)")]
+		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			string testCaseId;
+			var obj = Context.GetFromContext(productID);
+			Report.Info("Attempting to convert Product to type ProductInformation");
+			var Product = (ProductInformation)obj;
+			Report.Info("Attempting to delete: " + Product.Name);
+			testCaseId = Product.Id;
+			Report.Info("ProductID: " + testCaseId + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
+			Report.IsTrue(retailPartnersObject.CheckProductInformation(), "Failed to check product information", "Successfully checked product information");
+		}
+	}
 
 
 
