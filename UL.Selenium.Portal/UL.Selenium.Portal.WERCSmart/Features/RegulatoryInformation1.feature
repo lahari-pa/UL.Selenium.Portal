@@ -72,7 +72,7 @@ Scenario: [85695] California Proposition 65 - select Yes - navigation
 	And I should see following statement: If the product carries a custom warning, please provide the exact text that is being used:
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85695
 
-	Scenario: [123123123] Actions - 3rd Party Access Code Window
+	Scenario: [No Ticket Number] Actions - 3rd Party Access Code Window
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
