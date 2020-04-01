@@ -371,6 +371,7 @@
     </None>
     <None Include="Features\Canadian Tire\New Product Submission\AccHasPartialStwd.feature">
     </None>
+    <None Include="Features\CanNotRunOnTReVor.feature" />
     <None Include="Features\Cart.feature">
     </None>
     <None Include="Features\ConflictMinerals.feature">

@@ -552,42 +552,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				//matchingTD2.RightClick();
 				//This below is to handle the Right click clicking below the element.
 				//if this fails in some cases, try the old method first and then check for the context menu (var thisContextMenu = new RightClickProductMenu();) and only if that fails do the new way
-				Actions actions = new Actions(SeleniumBrowser.WebBrowser);				
-				actions.MoveToElement(matchingTD2);				
-				actions.MoveByOffset(0,-30);
-				actions.ContextClick();
-				actions.Perform();
-				if(thisContextMenu.MenuExists())
+				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+				int i = 0;
+				while (i<70)
 				{
-					return true;
-				}
-				Delay.Seconds(2);
-				actions.MoveToElement(matchingTD2);
-				actions.MoveByOffset(0, -45);
-				actions.ContextClick();
-				actions.Perform();
-				if (thisContextMenu.MenuExists())
-				{
-					return true;
-				}
-				Delay.Seconds(2);
-				actions.MoveToElement(matchingTD2);
-				actions.MoveByOffset(0, -50);
-				actions.ContextClick();
-				actions.Perform();
-				if (thisContextMenu.MenuExists())
-				{
-					return true;
-				}
-				Delay.Seconds(2);
-				actions.MoveToElement(matchingTD2);
-				actions.MoveByOffset(0, -55);
-				actions.ContextClick();
-				actions.Perform();
-				if (thisContextMenu.MenuExists())
-				{
-					return true;
-				}
+					Delay.Seconds(2);
+					actions.MoveToElement(matchingTD2);
+					actions.MoveByOffset(0, i);
+					actions.ContextClick();
+					actions.Perform();
+					if (thisContextMenu.MenuExists())
+					{
+						return true;
+					}
+					i = i - 10;
+				}				
 				return false;
 			}
 			else
