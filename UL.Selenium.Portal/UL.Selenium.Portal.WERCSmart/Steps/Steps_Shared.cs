@@ -82,7 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
 			Report.StartStep("Setting Product Line or Brand to: TestBrand");
-			new Steps_TheProduct().SetProductLineOrBrand("TestBrand");
+			new Steps_TheProduct().SetProductLineOrBrand("Pau test vendor");
 			new Steps_TheProduct().SetProductNameTo(name);
 			Report.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
 			new Steps_TheProduct().SetTypeOfProductTo(type);
@@ -1090,7 +1090,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Minimum Ignition Energy"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(
 				table.Rows[0]["Minimum Ignition Energy"]);
-			Report.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
+Report.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
 								 table.Rows[0]["Viscosity"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(table.Rows[0]["Viscosity"]);
 			Report.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +

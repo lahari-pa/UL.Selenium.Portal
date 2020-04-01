@@ -1807,7 +1807,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			this.GivenIClickOnCloseInTheReportDownloadDialog();
-
 		}
 
 
