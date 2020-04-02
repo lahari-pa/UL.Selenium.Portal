@@ -3637,11 +3637,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In The SHA products grid I filter for product saved as: (.*) and check that last activity date matches the one found in RPS")]
-		public void InSHAProductsGridFilterByProductAndCompareLastActivityDateToRPS(string savedAs)
-		{
-
-		}
+	
 
 
 

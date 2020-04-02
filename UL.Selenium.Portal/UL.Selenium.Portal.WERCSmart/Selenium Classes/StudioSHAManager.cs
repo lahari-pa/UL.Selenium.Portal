@@ -17,7 +17,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class StudioSHAManager : BaseObject
+	public class StudioSHAManager : BaseObject
 	{
 		public const string BasePath = "//div[@id='main']";
 
@@ -2388,7 +2388,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class Product
+	public class Product
 	{
 		public string ID { get; set; }
 		public string Name { get; set; }
@@ -2415,7 +2415,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string Distributor { get; set; }
 	}
 
-	class SHAManagerProdcutUPC
+	public class SHAManagerProdcutUPC
 	{
 		public string UPCNumber { get; set; }
 		public string PackagingType { get; set; }
