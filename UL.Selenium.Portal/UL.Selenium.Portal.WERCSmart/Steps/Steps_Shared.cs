@@ -82,7 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
 			Report.StartStep("Setting Product Line or Brand to: TestBrand");
-			new Steps_TheProduct().SetProductLineOrBrand("Pau test vendor");
+			new Steps_TheProduct().SetProductLineOrBrand("TestBrand");
 			new Steps_TheProduct().SetProductNameTo(name);
 			Report.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
 			new Steps_TheProduct().SetTypeOfProductTo(type);
@@ -854,7 +854,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		// Enter UPC string in the form: "Equals"+upcNumber where upcNumber is the exact number to input, rather than using the randomly generated step from context
 		// Enter '_CVS' or '_cvs' for upc variable to use a upc number for retailer CVS from (required for some test cases eg. CVS RCL feature)
 		[StepDefinition(
-			@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+			@"I call Shared Step 57961 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*), capsule count: (.*) and size: (.*)")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc, string containerType, string capsuleCount, string size)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Report.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					CapsuleCount = capsuleCount,
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_,
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				upcTable.AddRow("CapsuleCount", capsuleCount);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+
+			Report.StartStep("In the Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+		[StepDefinition(
+	@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc, string containerType, string size)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -922,7 +960,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					return;
 				}
-				if(new NewProduct().FormError().Contains("UPC failing Transportation Rules."))
+				if (new NewProduct().FormError().Contains("UPC failing Transportation Rules."))
 				{
 					Report.Failure($"The Product created is failing the UPC Transporation Rules. An error was seen.");
 					Report.Screenshot();
@@ -933,6 +971,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("An error was showing! on click continue! Attempting a different UPC");
 			}
 		}
+
 		// UPC: CVS binding text used for using a UPC from the list of valid CVS UPCs from upcitemdb.com
 		[StepDefinition(
 			@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*), size: (.*), Do not click continue")]
@@ -5490,7 +5529,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				throw new Exception(
 					$"Needs the product ID to be saved to context as 'TestCase{TReVorSettings.TestCaseId}'!");
 			}
-
+			
 			selStepsStudio.PowerDesignerPlusWelcomeIEnterSelectSourceProduct(id);
 			Report.StartStep("I confirm CKLT (Checklist) is selected as the subformat");
 			selStepsStudio.IConfirmTheSelectedSubformatInThePdPlusPopupIs("CKLT / Checklist");

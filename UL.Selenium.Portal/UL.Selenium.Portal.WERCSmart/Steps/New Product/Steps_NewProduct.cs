@@ -230,12 +230,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I should see the (.*) Page for the New Product")]
 		public void GivenIShouldSeeXPage(string page)
 		{
-			if (NewProduct.WaitForContainerToBeVisible())
-			{
+			//if (NewProduct.WaitForContainerToBeVisible())
+			//{
 				Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
 				return;
-			}
-			Report.Failure("New product page was not visible");
+			//}
+			//Report.Failure("New product page was not visible");
 			Report.Screenshot();
 		}
 
@@ -1061,6 +1061,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			UpcInformation upcInfo = table.CreateInstance<UpcInformation>();
 			Report.Info("UPC Number: " + upcInfo.UpcNumber);
 			Report.Info("Container Type: " + upcInfo.ContainerType);
+			Report.Info("Capsule Count: " + upcInfo.CapsuleCount);
 			Report.Info("Size: " + upcInfo.Size);
 			Report.Info("DPCI: " + upcInfo.Dpci);
 			Report.Info("Quantity: " + upcInfo.Quantity);

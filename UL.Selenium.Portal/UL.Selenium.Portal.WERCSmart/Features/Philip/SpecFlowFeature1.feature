@@ -159,7 +159,6 @@ And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given Confirm that there is a CW column between Last Pub Date and GHS columns
 	Then In SHA Manager Page I select status: Assigned
 	Then Find product that has a Y in the CW column
-	#Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
 	Then I click vendor section
 	Then I click a section
 	Then check text
@@ -167,7 +166,6 @@ And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I click a section
 	Then check text
 	Then Find product that has a N in the CW column
-	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
 	Then I click vendor section
 	Then I click a section
 	Then check text
@@ -217,36 +215,43 @@ Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - requ
 Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
 When I click continue
 When I click continue
-#Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: VOC Exemption Letter and file: C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: VOC Exemption Letter and file: C:\Dependencies\WERCSmart\testdoc.pdf
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor    | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 | Opaque     | 0                        | 0                       | Alcohol | No data available | No Data Available     | Goggles                       |           |
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I call Shared Step 57206 (Go to Retail Partners - Select Bed Bath and Beyond)
-Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_1_2020.xlsx and save as Products in Scope Report for BBB
-Then I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: 'Cleaning Supplies Product for BBB'
-Given I delete the excel file saved as Products in Scope Report for BBB
+#Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57206 (Go to Retail Partners - Select Bed Bath and Beyond)
+#Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_1_2020.xlsx and save as Products in Scope Report for BBB
+#Then I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: 'Cleaning Supplies Product for BBB'
+#Given I delete the excel file saved as Products in Scope Report for BBB
 
 
 Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Gel Consistency
 
 Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-Given I generate a random UPC number and save as: UPC804879551225
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+Given I generate a random UPC number and save as: UPC127870
 Given I click continue
-# In Product Information screen, copy and paste 10866-0885-2 and select it from the list, click Continue
-# In SPL Information screen - Confirm the fields are automatically populated, if a field is not populate (for example the Distributor field, fill it in) - click continue
-# In Product Characteristics for secondary state drop down select- Solid Gel Consistency
-# For question: "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?" select No
-# Select the best Water Solubility description from the drop down
-# Click Continue
-# The Ingredients get populated automatically, fill in the percentages for each ingredient - click Continue
-# For question: "Should this product be refrigerated for transport or storage?" Select NO
-# For question: "Is the product regulated for transport (before exceptions or exemptions)" select No, not regulated
-# Click Continue# In Retailer Association section select a Vendor from the drop down for  Wal-Mart/SAM'S CLUB
-# Click Continue# In the Universal Product Code (UPC) section click +Add UPC button
-# Confirm that the Tablet or Capsule Count field is available
-# In the Shared step below type in a number for the tablet or capsule count fieldGiven I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC«upc», container type: Plastic Container and size: 1
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: «savedAs»
+Given I call my Shared Step 2: prescription pharmaceutical, solid
+Given I enter NDC: 10866-0885-2
+Then I save the product information as: TestCase127870
+Then I click continue
+Given SPL Information screen
+Then I click continue
+	And I set the Secondary Physical State to be: Solid
+	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+	And I set the Select the best Water Solubility description to be: Very soluble
+	And in the New Product page I click Continue
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Propane       | 100     | false               | false       |            |
+	Given I set the Should this product be refrigerated for transport or storage? option to: No
+	Then I click continue
+	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: No, not regulated
+	Then I click continue
+	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
+	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+	Then I click continue
+	Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127870, container type: Plastic Container, capsule count: 2  and size: 1
+    Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127870

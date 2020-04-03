@@ -15,6 +15,46 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
+		public bool ClickNDC(string text)
+		{
+
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[contains(@class,'select2-selection select2-selection--single')]"), 2);
+
+			return el.TryClick();
+
+		}
+		public bool ClickFirstItem(string text)
+		{
+
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//ul[@class='select2-results__options']//li[1]"), 2);
+
+			return el.TryClick();
+
+		}
+		
+		public bool EnterNDC(string text)
+		{
+
+			IWebElement el1 = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@class='select2-search__field']"), 2);
+
+			el1.TryEnterText(text);
+			if (el1.Text == text)
+			{
+				return true;
+			}
+			return false;
+		}
+		public void CheckFields()
+		{
+			IList<IWebElement>el = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='text']"), 2);
+			foreach (IWebElement ell in el)
+			{
+				if (ell.Text == "")
+				{
+					ell.TryEnterText("Test");
+				}
+			}
+		}
 		public bool CloseDialog()
 		{
 			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog =-title-dialog-supplier-manager']//span[text()='close']"), 2);
@@ -181,10 +221,18 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			return false;
 		}
 
-		public string FindProduct()
+		public string FindProduct(string letter)
 		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@aria-describedby='list_Waste'][@title='Y']/preceding-sibling::td[@aria-describedby='list_Product']//span"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@aria-describedby='list_Waste'][@title='" + letter +"']/preceding-sibling::td[@aria-describedby='list_Product']//span"), 2);
 			return el.Text;
+		}
+
+		public void SearchSHA(string search)
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='ucSelectProdselectProdTB']"), 2);
+			IWebElement el1 = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@class='button-icon icon-refresh'][1]"), 2);
+			el.TryEnterText(search);
+			el1.TryClick();
 		}
 
 		public bool FindProductN()

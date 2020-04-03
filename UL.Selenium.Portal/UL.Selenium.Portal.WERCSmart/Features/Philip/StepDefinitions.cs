@@ -27,12 +27,62 @@ using UL.Automation.Utilities.Functions;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RetailerAbbreviations;
 using UL.Selenium.Portal.WERCSmart.Steps;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Philip
 {
 	[Binding, Scope(Tag = "Philip")]
 	class StepDefinitions
 	{
+		public object TheProduct { get; private set; }
+
+		[StepDefinition(@"SPL Information screen")]
+		public void GivenSPLInformationScreen()
+		{
+			Delay.Seconds(10);
+			WebElements webElementsObject = new WebElements();
+			webElementsObject.CheckFields();
+		}
+
+
+		[StepDefinition(@"I enter NDC: (.*)")]
+		public void GivenIEnterNDC(string type)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.ClickNDC(type), "Failed", "Successful");
+			Delay.Seconds(5);
+			Report.IsTrue(webElementsObject.EnterNDC(type), "Failed1", "Successful1");
+			Delay.Seconds(5);
+			Report.IsTrue(webElementsObject.ClickFirstItem(type), "Failed2", "Successful2");
+			Delay.Seconds(5);
+		}
+
+
+		[StepDefinition(@"I call my Shared Step 2: (.*)")]
+		public void GivenICallMySharedStepPrescriptionPharmaceuticalSolid(string type)
+		{
+			string name = "";
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the The Product Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
+			Report.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
+			if (name == "")
+			{
+				char[] forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
+				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
+			}
+			new Steps_TheProduct().SetProductNameTo(name);
+			Report.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			new Steps_TheProduct().SetTypeOfProductTo(type);
+			Report.StartStep("In the New Product page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
+			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
+
+			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
+		}
 
 		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following product name: '(.*)'")]
 		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingProductName(string savedAs, string productName)
@@ -168,42 +218,13 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			WebElementsObject.CheckColumn();
 		}
 
-		[StepDefinition(@"Find product that has a Y in the CW column")]
-		public void ThenFindProductThatHasAYInTheCWColumn()
+		[StepDefinition(@"Find product that has a (.*) in the CW column")]
+		public void ThenFindProductThatHasAYInTheCWColumn(string letter)
 		{
 			WebElements WebElementsObject = new WebElements();
-			var savedas = "TestCase" + WebElementsObject.FindProduct();
-
-			ReportSettings.UseSubSteps = true;
-			var selStepsSha = new Steps_SHA();
-			var selStepsStudio = new Steps_Studio();
-			Report.StartStep("I navigate to Power Designer Plus");
-			selStepsSha.GivenIClickTopMenuItemAndSubMenuItem("Authoring", "Power Designer Plus");
-			GeneralUtilities.StudioWaitForSpinner();
-			Report.Info("012");
-			string id = savedas;
-			Report.Info("123");
-			//selStepsStudio.PowerDesignerPlusWelcomeIEnterSelectSourceProduct(id);
-			Report.Info("456");
-			Report.StartStep("I confirm CKLT (Checklist) is selected as the subformat");
-			selStepsStudio.IConfirmTheSelectedSubformatInThePdPlusPopupIs("CKLT / Checklist");
-			Report.Info("789");
-			Report.StartStep("I click continue");
-			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
-			Delay.Seconds(3);
-			//selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			//selStepsStudio.InPDIEnsureSECT2318IsActive();
-			//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
-			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-
-
-		}
-
-		[StepDefinition(@"Find product that has a N in the CW column")]
-		public void ThenFindProductThatHasANInTheCWColumn()
-		{
-			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.FindProductN();
+			var savedas = WebElementsObject.FindProduct(letter);
+			WebElementsObject.SearchSHA(savedas);
+			
 		}
 
 
