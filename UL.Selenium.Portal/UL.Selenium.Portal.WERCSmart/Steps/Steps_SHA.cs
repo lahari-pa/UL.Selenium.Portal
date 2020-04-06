@@ -2108,7 +2108,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
-		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
+	public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
 		{
 			if (retailer.ToLower().Contains("saved as"))
 			{

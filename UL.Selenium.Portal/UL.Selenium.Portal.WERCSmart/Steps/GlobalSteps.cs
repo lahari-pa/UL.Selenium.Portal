@@ -1104,6 +1104,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I wait for a modal dialog to open")]
+		public void WaitForAModalDialogToOpen()
+		{
+			var thisModalDialog = new ModalDialog();
+			if (thisModalDialog.Wait_for_load(30))
+			{
+				Report.Success("Modal dialog is opened.");
+				
+			}
+			else
+			{
+				Report.Failure("A modal dialog is not open.");
+
+			}
+		}
+
 		[StepDefinition(@"in the modal dialog I click the ""(.*)"" button")]
 		public void GivenInTheModalDialogIClickButton(string button)
 		{
