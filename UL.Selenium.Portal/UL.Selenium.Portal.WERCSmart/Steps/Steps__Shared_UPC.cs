@@ -657,6 +657,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(new MultipleUPC().ClickFinishButton(), "Failed To click the Finish button", "Successfully clicked the Finish button");
 			Report.IsTrue(new MultipleUPC().WaitForContainerToBeInvisible(), "The popup was still showing", "The popup was no longer showing");
+			
+
 		}
 
 		[StepDefinition(@"I check that the UPC Number of each product matches the excel file named: (.*) uploaded saved as: (.*)")]

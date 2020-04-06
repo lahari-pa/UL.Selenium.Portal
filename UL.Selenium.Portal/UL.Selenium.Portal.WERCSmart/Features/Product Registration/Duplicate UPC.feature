@@ -422,6 +422,10 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 		| 978959000000 |      | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
 		| 688267000000 |      | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
 		| 854911000000 |      | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
+
+	#Looks like there is a bug failing this test that does not auto fill product name if using bulk upload file, in testing we can use below method with sample file data+ names to stop this being an issue, but needs to be raised.
+	#And I edit the testdoc.xlsx, and save its filepath as: Bulktest95988 and verify it contains the UPC data in the table saved as: UPCTable95988, (Base Data Only: true)
+
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I click the following option in the bottom menu: Search
 	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
@@ -430,6 +434,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 		| Status      | Completed    |
 	Given I find a UPC number for: 5 products not belonging to Supplier: QA_Automation_ProductsAccount in the grid and save to context starting with: ExistingUPC
 	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91101 with data:
+	#Then I add Generic Product Names to the UPC bulk upload spreadsheet: BulkUpload91101
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)	
 	Given I search for the product saved as: TestCase91101

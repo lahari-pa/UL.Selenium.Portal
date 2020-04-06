@@ -2502,6 +2502,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I add Generic Product Names to the UPC bulk upload spreadsheet: (.*)")]
+		public void IUpdateBulkUPCFileToIncludeProductNames (string spreadsheetSavedAs)
+		{
+			
+			//Currently does not work if the values you are trying to edit are blank (which is by default in the sample file)
+			var spreadSheetFile = (string)Context.GetFromContext(spreadsheetSavedAs);
+			var excel = new ExcelFunctions(spreadSheetFile, "Sheet1");
+			int numberOfProducts = excel.Excel_GetNoRows();
+			int x = 1;
+			for (int i = 1; i <= numberOfProducts; i++)
+			{
+				Report.IsTrue(excel.EditCell(i, 1, ("TestName"+x)), "Failed to edit UPC" + i + " to: " + ("TestName" + x), "Successfully edited UPC to: " + ("TestName" + x), false, false);
+				x++;
+			}
+		}
+
 		[StepDefinition(@"I find a UPC number for: (.*) products not belonging to Supplier: (.*) in the grid and save to context starting with: (.*)")]
 		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs)
 		{
