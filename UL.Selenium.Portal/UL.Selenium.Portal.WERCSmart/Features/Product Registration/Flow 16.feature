@@ -37,7 +37,7 @@ Scenario: [59273] Alkaline Battery - RU000344
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
