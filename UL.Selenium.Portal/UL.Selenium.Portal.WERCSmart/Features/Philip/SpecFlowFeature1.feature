@@ -156,19 +156,23 @@ Feature: ChooseGoodGuide.com Scenarios
 
 Scenario:[120873] Product List - CW Column "Y" or "N"
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given Confirm that there is a CW column between Last Pub Date and GHS columns
+	Given Confirm that there is a middle column called: CW between left column called: Last Pub Date and right column called: GHS
 	Then In SHA Manager Page I select status: Assigned
-	Then Find product that has a Y in the CW column
-	Then I click vendor section
-	Then I click a section
-	Then check text
+	Then Find productID that has the letter: Y in the CW column and save it as: productID120873
+	Then I open Power Designer Plus
+	#Then I search for productID saved as : productID120873 in SHA
+	#Then I click the refresh button in SHA
+	Then I click the Vendor Report section
+	Then I click section called: TXALL in the Vendor Report section
+	Then I check that the following text: There is no (or limited) data available for any components and waste code has been assigned as a conservative approach due to lack of significant data showing non-hazardous should exist
 	Then I call Shared Step 59066 (Go to SHA Manager)
-	Then I click a section
-	Then check text
-	Then Find product that has a N in the CW column
-	Then I click vendor section
-	Then I click a section
-	Then check text
+	#Then In SHA Manager Page I select status: Assigned
+	#Then Find product that has the letter: N in the CW column
+	#Then In the Authoring menu I select Power Designer Plus
+	#Then I click the Vendor Report section
+	#Then I click section called: TXALL in the Vendor Report section
+	#Then I check that the following text: There is no (or limited) data available for any components and waste code has been assigned as a conservative approach due to lack of significant data showing non-hazardous should not exist
+	#
 
 	Scenario: [127903] Supplier Reports - Retailer Chemicals of Concern Report - Need to Include the Column for Bed Bath and Beyond
 
@@ -219,12 +223,12 @@ Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Pa
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor    | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 | Opaque     | 0                        | 0                       | Alcohol | No data available | No Data Available     | Goggles                       |           |
-#Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
-#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-#Given I call Shared Step 57206 (Go to Retail Partners - Select Bed Bath and Beyond)
-#Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_1_2020.xlsx and save as Products in Scope Report for BBB
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 57206 (Go to Retail Partners - Select Bed Bath and Beyond)
+Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_1_2020.xlsx and save as Products in Scope Report for BBB
 #Then I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: 'Cleaning Supplies Product for BBB'
-#Given I delete the excel file saved as Products in Scope Report for BBB
+Given I delete the excel file saved as Products in Scope Report for BBB
 
 
 Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Gel Consistency
@@ -233,11 +237,11 @@ Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127870
 Given I click continue
-Given I call my Shared Step 2: prescription pharmaceutical, solid
-Given I enter NDC: 10866-0885-2
+Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127870
 Then I click continue
-Given SPL Information screen
+Given I fill all empty fields in the SPL Information screen
 Then I click continue
 	And I set the Secondary Physical State to be: Solid
 	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
@@ -253,5 +257,5 @@ Then I click continue
 	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	Then I click continue
-	Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127870, container type: Plastic Container, capsule count: 2  and size: 1
+	Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127870, container type: Plastic Container, capsule count: 50  and size: 1
     Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127870

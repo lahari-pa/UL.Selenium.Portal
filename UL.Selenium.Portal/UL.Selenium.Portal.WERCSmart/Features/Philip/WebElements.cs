@@ -15,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
-		public bool ClickNDC(string text)
+		public bool ClickNDCField()
 		{
 
 			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[contains(@class,'select2-selection select2-selection--single')]"), 2);
@@ -23,7 +23,7 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			return el.TryClick();
 
 		}
-		public bool ClickFirstItem(string text)
+		public bool SelectFirstNDCNumberOption()
 		{
 
 			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//ul[@class='select2-results__options']//li[1]"), 2);
@@ -31,29 +31,40 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			return el.TryClick();
 
 		}
-		
-		public bool EnterNDC(string text)
+
+		public bool EnterNDCNumber(string number)
 		{
 
 			IWebElement el1 = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@class='select2-search__field']"), 2);
 
-			el1.TryEnterText(text);
-			if (el1.Text == text)
+			el1.TryEnterText(number);
+			if (el1.Text == number)
 			{
 				return true;
 			}
 			return false;
 		}
-		public void CheckFields()
+		public bool CheckAndFillEmptyFieldsInSPLInformationScreen()
 		{
-			IList<IWebElement>el = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='text']"), 2);
-			foreach (IWebElement ell in el)
+			IList<IWebElement> allFieldsOnPage = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='text']"), 2);
+
+			foreach (IWebElement field in allFieldsOnPage)
 			{
-				if (ell.Text == "")
+				bool enteredText = false;
+
+				if (field.Text == "")
 				{
-					ell.TryEnterText("Test");
+					enteredText = field.TryEnterText("Test");
+
+					if (!enteredText)
+					{
+						return false;
+					}
+
 				}
 			}
+
+			return true;
 		}
 		public bool CloseDialog()
 		{
@@ -202,6 +213,17 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@data-bind='click: redirectToRetailers']"), 2);
 			return el.TryClick();
 		}
+
+
+
+
+
+
+
+
+
+
+
 		public void CheckPopUp()
 		{
 			Delay.Seconds(5);
@@ -210,62 +232,79 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			IWebElement productAccessCode = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']//br[2]/following-sibling::text()[1]"), 2);
 		}
 
-		public bool CheckColumn()
+		public bool ChcekForAColumnBetweenTwoColumns(string middleColumn, string leftColumn, string rightColumn)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//div[text()='CW']/../preceding-sibling::th//div[text()='Last Pub Date']"), 2);
-			IWebElement el1 = this.containerElement.FindElement(By.XPath("//div[text()='CW']/../preceding-sibling::th//div[text()='GHS']"), 2);
-			if (el != null && el1 != null)
-			{
-				return true;
-			}
-			return false;
-		}
+			IWebElement middleColumnFromLeftColumn = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[text()='" + middleColumn + "']/../preceding-sibling::th//div[text()='" + leftColumn + "']"), 2);
+			IWebElement middleColumnFromRightColumn = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[text()='" + middleColumn + "']/../following-sibling::th//div[text()='" + rightColumn + "']"), 2);
 
-		public string FindProduct(string letter)
-		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@aria-describedby='list_Waste'][@title='" + letter +"']/preceding-sibling::td[@aria-describedby='list_Product']//span"), 2);
-			return el.Text;
-		}
-
-		public void SearchSHA(string search)
-		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='ucSelectProdselectProdTB']"), 2);
-			IWebElement el1 = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@class='button-icon icon-refresh'][1]"), 2);
-			el.TryEnterText(search);
-			el1.TryClick();
-		}
-
-		public bool FindProductN()
-		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@aria-describedby='list_Waste'][@title='N']/preceding-sibling::td[@aria-describedby='list_Product']"), 2);
-			if (el != null)
-			{
-				return true;
-			}
-			return false;
-		}
-
-		public bool ClickVendorSection()
-		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//span[text()='[SECT0770] Vendor Report']"), 2);
-			return el.TryClick();
-		}
-
-		public bool ClickASection()
-		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//span[text()='[TXALL]']"), 2);
-			return el.TryDoubleClick();
-		}
-
-		public bool CheckText()
-		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//td[contains(text(), 'There is no (or limited) data available for any components and waste code has been assigned as a conservative approach due to lack of significant data showing non-hazardous')]"), 2);
-			if (el != null)
+			if (middleColumnFromLeftColumn != null && middleColumnFromRightColumn != null)
 			{
 				return true;
 			}
 
 			return false;
+		}
+
+		public string FindProductIDWithSpecificLetterInCWColumn(string letter)
+		{
+			IWebElement productID = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@aria-describedby='list_Waste'][@title='" + letter + "']/preceding-sibling::td[@aria-describedby='list_Product']//span"), 2);
+			return productID.Text;
+		}
+
+		public bool EnterProductWithIDInSHASearchField(string productID)
+		{
+			IWebElement searchField = this.containerElement.FindElement(By.XPath("//input[@id='ucSelectProdselectProdTB']"), 2);
+			searchField.TryClick();
+			return searchField.TryEnterTextAndTab(productID);
+		}
+
+		public bool ClickSearchButtonInSHA()
+		{
+			IWebElement searchButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@class='button-icon icon-refresh'][1]"), 2);
+			return searchButton.TryClick();
+		}
+
+		public bool ClickVendorReportSection()
+		{
+			IWebElement vendorReportSection = this.containerElement.FindElement(By.XPath("//span[text()='[SECT0770] Vendor Report']"), 2);
+			return vendorReportSection.TryClick();
+		}
+
+		public bool ClickASectionInVendorReportSection(string sectionName)
+		{
+			IWebElement section = this.containerElement.FindElement(By.XPath("//span[text()='[" + sectionName + "]']"), 2);
+			return section.TryDoubleClick();
+		}
+
+		public bool CheckForTheFollowingText(string text, string shouldOrShouldNot)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//td[contains(text(), '" + text + "')]"), 2);
+
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+
+				if (el != null)
+				{
+					return true;
+				}
+
+				return false;
+
+			}
+			else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+
+				if (el == null)
+				{
+					return true;
+				}
+
+				return false;
+
+			}
+
+			return false;
+
 		}
 	}
 }

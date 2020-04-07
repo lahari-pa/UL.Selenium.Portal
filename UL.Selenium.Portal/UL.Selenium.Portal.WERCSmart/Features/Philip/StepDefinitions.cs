@@ -37,29 +37,81 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 	{
 		public object TheProduct { get; private set; }
 
-		[StepDefinition(@"SPL Information screen")]
-		public void GivenSPLInformationScreen()
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columnss:")]
+		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
-			Delay.Seconds(10);
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				List<List<string>> str = new List<List<string>>();
+				for (int i = 1; i < table.RowCount + 1; i++)
+				{
+					List<string> ColumnTitles = ExcelUtils.Excel_GetRow(i);
+
+					str.Add(ColumnTitles);
+				}
+
+				Report.Info("hi");
+				var abbr = new RetailerAbbreviations();
+				string selectedAbbr = "";
+
+				foreach (TableRow thisRow in table.Rows)
+				{
+
+					Report.Info("hi1");
+					string retailer = thisRow["Retailer"];
+					bool isFound = false;
+
+					abbr.Map.TryGetValue(retailer, out selectedAbbr);
+					Report.Info("hi1.1 " + retailer + " === " + selectedAbbr);
+					foreach (List<string> listStr in str)
+					{
+
+						Report.Info("hi2 " + listStr[0] + " === " + retailer + " === " + selectedAbbr);
+						if (listStr[0] == selectedAbbr)
+						{
+							Report.Info("hi2.1");
+							isFound = true;
+						}
+					}
+					if (!isFound)
+					{
+						Report.Info("hi3");
+						Report.IsTrue(isFound, "", "");
+					}
+				}
+				Report.Info("hi4");
+				return true;
+			}
+			Report.Info("hi5");
+			return false;
+		}
+
+		[StepDefinition(@"I fill all empty fields in the SPL Information screen")]
+		public void GivenIFillAllEmmptyFieldsInTheSPLInformationScreen()
+		{
+			Delay.Seconds(5);
 			WebElements webElementsObject = new WebElements();
-			webElementsObject.CheckFields();
+			Report.IsTrue(webElementsObject.CheckAndFillEmptyFieldsInSPLInformationScreen(), "Failed to fill in all empty fields", "Successfully filled in all empty fields");
 		}
 
 
-		[StepDefinition(@"I enter NDC: (.*)")]
-		public void GivenIEnterNDC(string type)
+
+		[StepDefinition(@"I enter the NDC number: (.*)")]
+		public void GivenIEnterNDC(string number)
 		{
 			WebElements webElementsObject = new WebElements();
-			Report.IsTrue(webElementsObject.ClickNDC(type), "Failed", "Successful");
+			Report.IsTrue(webElementsObject.ClickNDCField(), "Failed to click on NDC field", "Successfully clicked on NDC field");
 			Delay.Seconds(5);
-			Report.IsTrue(webElementsObject.EnterNDC(type), "Failed1", "Successful1");
+			Report.IsTrue(webElementsObject.EnterNDCNumber(number), "Failed to enter NDC number", "Successfully entered NDC number");
 			Delay.Seconds(5);
-			Report.IsTrue(webElementsObject.ClickFirstItem(type), "Failed2", "Successful2");
+			Report.IsTrue(webElementsObject.SelectFirstNDCNumberOption(), "Failed to select first option in NDC dropdown results", "Successfully selected first option in NDC dropdown results");
 			Delay.Seconds(5);
 		}
 
 
-		[StepDefinition(@"I call my Shared Step 2: (.*)")]
+		[StepDefinition(@"I call Shared Step 57500a \(Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path\): (.*)")]
 		public void GivenICallMySharedStepPrescriptionPharmaceuticalSolid(string type)
 		{
 			string name = "";
@@ -84,169 +136,70 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
 		}
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following product name: '(.*)'")]
-		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingProductName(string savedAs, string productName)
-		{
-			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
-			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
-			{
-				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
-				List<List<string>> rows = new List<List<string>>();
 
-				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
-				{
-					List<string> row = ExcelUtils.Excel_GetRow(i);
 
-					rows.Add(row);
-				}
-
-				foreach (List<string> row in rows)
-				{
-
-					foreach (string item in row)
-					{
-
-						if (item == productName)
-						{
-							return true;
-						}
-
-					}
-
-				}
-
-				return false;
-
-			}
-
-			Report.Failure("Excel data was not found");
-			return false;
-		}
-
-		[StepDefinition(@"I Close 'Supplier Manager'")]
-		public void ThenIClose()
+		[StepDefinition(@"Confirm that there is a middle column called: (.*) between left column called: (.*) and right column called: (.*)")]
+		public void GivenConfirmThatThereIsAMiddleColumnCalledBetweenLeftColumnCalledAndRightColumnCalled(string middleColumnName, string leftColumnName, string rightColumnName)
 		{
 			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.CloseDialog();
+			Report.IsTrue(WebElementsObject.ChcekForAColumnBetweenTwoColumns(middleColumnName, leftColumnName, rightColumnName), "Failed to find a middle column called: " + middleColumnName, "Successfully found a middle column called: " + middleColumnName);
 		}
 
-
-		[StepDefinition(@"Confirm that '(.*)' shows (.*) marked with a '(.*)'")]
-		public void ThenConfirmThatShowsTierTierAndTierMarkedWithA(string supplier, string tiers, string marked)
+		[StepDefinition(@"Find productID that has the letter: (.*) in the CW column and save it as: (.*)")]
+		public void ThenFindProductThatHasTheLetterInTheCWColumn(string letter, string saveAs)
 		{
 			WebElements WebElementsObject = new WebElements();
-			var arr = tiers.Split(',');
-			WebElementsObject.ConfirmTier(supplier, arr, marked);
+			string productID = WebElementsObject.FindProductIDWithSpecificLetterInCWColumn(letter);
+			Context.AddToContext(saveAs, productID);
+			Report.IsTrue(productID != null, "Failed to find a productID", "Successfully found a productID");
 		}
 
+		[StepDefinition(@"I open Power Designer Plus")]
+		public void ThenIOpenPowerDesignerPlus()
+		{
+			var thisTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing", showSuccessScreenshot: false);
+			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
+				"Failed to navigate to power designer plus", "Navigated to power designer plus");
+		}
 
-		[StepDefinition(@"Select the 'Data Tier Consent' Tab")]
-		public void ThenSelectTheTab()
+		[StepDefinition(@"I search for productID saved as : (.*) in SHA")]
+		public void ThenISearchForProductIDSavedAsProductIDInSHA(string saveAs)
+		{
+			Delay.Seconds(30);
+		WebElements WebElementsObject = new WebElements();
+		var productID = Context.GetFromContext(saveAs).ToString();
+		Report.IsTrue(WebElementsObject.EnterProductWithIDInSHASearchField(productID), "Failed to enter productID: " + productID + " in search field", "Successfully enter productID: " + productID + " in search field");
+		}
+
+		[StepDefinition(@"I click the refresh button in SHA")]
+		public void ThenIClickTheRefreshButtonInSHA()
 		{
 			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.ClickTab();
-			Delay.Seconds(8);
+			Report.IsTrue(WebElementsObject.ClickSearchButtonInSHA(), "Failed to click search button in SHA", "Successfully clicked search button in SHA");
 		}
 
 
-		[StepDefinition(@"Select the 'The WERCS LTD' - Staging")]
-		public void ThenSelectThe_Staging()
-		{
-			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.ClickResult();
-		}
-
-
-		[StepDefinition(@"Search for '(.*)' Vendor")]
-		public void ThenSearchForVendor(string text)
-		{
-			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.SearchText(text);
-			WebElementsObject.ClickSearch();
-		}
-
-
-		[StepDefinition(@"I Click 'Suppliers'")]
-		public void ThenIClick()
-		{
-			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.ClickSuppliers();
-		}
-
-
-		[StepDefinition(@"I (should|should not) see radio option: (.*)")]
-		public void ISeeRadioOption(string shouldOrShouldNot, string radioButtonText)
-		{
-			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.FindRadioButton(shouldOrShouldNot, radioButtonText);
-		}
-
-		[StepDefinition(@"I check if AIS is not uploaded")]
-		public void ICheckIfAISIsNotUploaded()
-		{
-			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.CheckAIS();
-		}
-
-		[StepDefinition(@"I close annoying popup")]
-		public void GivenICloseAnnoyingPopup()
-		{
-			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.Closepopup();
-		}
-
-
-		[StepDefinition(@"Check popup date productID: (.*) productType:(.*) productAccessCode: (.*)")]
-		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
-		{
-			WebElements WebElementsObject = new WebElements();
-			string testCaseId;
-			var obj = Context.GetFromContext(productID);
-			Report.Info("Attempting to convert Product to type ProductInformation");
-			var Product = (ProductInformation)obj;
-			Report.Info("Attempting to delete: " + Product.Name);
-			testCaseId = Product.Id;
-			Report.Info("ProductID: " + testCaseId + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
-			WebElementsObject.CheckPopUp();
-		}
-
-
-		[StepDefinition(@"Confirm that there is a CW column between Last Pub Date and GHS columns")]
-		public void GivenConfirmThatThereIsACWColumnBetweenLastPubDateAndGHSColumns()
-		{
-			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.CheckColumn();
-		}
-
-		[StepDefinition(@"Find product that has a (.*) in the CW column")]
-		public void ThenFindProductThatHasAYInTheCWColumn(string letter)
-		{
-			WebElements WebElementsObject = new WebElements();
-			var savedas = WebElementsObject.FindProduct(letter);
-			WebElementsObject.SearchSHA(savedas);
-			
-		}
-
-
-		[StepDefinition(@"I click vendor section")]
+		[StepDefinition(@"I click the Vendor Report section")]
 		public void ThenIClickVendorSection()
 		{
+			Delay.Seconds(30);
 			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.ClickVendorSection();
+			Report.IsTrue(WebElementsObject.ClickVendorReportSection(), "Failed to click Vendor Report section", "Successfully clicked Vendor Report section");
 		}
 
-		[StepDefinition(@"I click a section")]
-		public void ThenIClickASection()
+		[StepDefinition(@"I click section called: (.*) in the Vendor Report section")]
+		public void ThenIClickASection(string sectionName)
 		{
 			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.ClickASection();
+			Report.IsTrue(WebElementsObject.ClickASectionInVendorReportSection(sectionName), "Failed to click section called: " + sectionName, "Successfully clicked section called: " + sectionName);
 		}
 
-		[StepDefinition(@"check text")]
-		public void ThenCheckText()
+		[StepDefinition(@"I check that the following text: (.*) (should|should not) exist")]
+		public void ThenCheckText(string text, string shouldOrShouldNot)
 		{
 			WebElements WebElementsObject = new WebElements();
-			WebElementsObject.CheckText();
+			Report.IsTrue(WebElementsObject.CheckForTheFollowingText(text, shouldOrShouldNot), "Failed to check if text " + shouldOrShouldNot + " exist", "Successfully checked if text " + shouldOrShouldNot + " exist");
 		}
 
 	}
