@@ -483,22 +483,22 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I should see the Regulatory Documents to Provide Page
 	Then in the Regulatory Documents to Provide page I click Continue
 	Given I verify the error messaging in Regulatory Documents to Provide:
-		| Question                          | Expected Answer                                                                                                                   |
-		| Article Information Sheet         | Document is required: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. |
-		| Batteries are considered Articles | Select at least one of the options                                                                                                |
-		| WHMIS-compliant Safety Data Sheet | Select at least one of the options                                                                                                |
-		| WHMIS-compliant label             | Document is required: Label in both French and English                                                                            |
+		| Question                                     | Expected Answer                                                                                                                   |
+		| Article Information Sheet                    | Document is required: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. |
+		| Batteries are considered Articles            | Select at least one of the options                                                                                                |
+		| WHMIS-compliant Safety Data Sheet            | Select at least one of the options                                                                                                |
+		| Product Label in English and French-Canadian | Document is required: Label in both French and English                                                                            |
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Then in the Regulatory Documents to Provide page I click Continue
 	Given I verify the error messaging in Regulatory Documents to Provide:
-		| Question                          | Expected Answer                                        |
-		| WHMIS-compliant Safety Data Sheet | Select at least one of the options                     |
-		| WHMIS-compliant label             | Document is required: Label in both French and English |
+		| Question                                     | Expected Answer                                        |
+		| WHMIS-compliant Safety Data Sheet            | Select at least one of the options                     |
+		| Product Label in English and French-Canadian | Document is required: Label in both French and English |
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Then in the Regulatory Documents to Provide page I click Continue
 	Given I verify the error messaging in Regulatory Documents to Provide:
-		| Question              | Expected Answer                                        |
-		| WHMIS-compliant label | Document is required: Label in both French and English |
+		| Question                                     | Expected Answer                                        |
+		| Product Label in English and French-Canadian | Document is required: Label in both French and English |
 	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
