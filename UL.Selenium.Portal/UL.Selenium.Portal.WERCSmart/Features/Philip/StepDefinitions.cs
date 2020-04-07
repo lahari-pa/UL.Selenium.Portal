@@ -36,6 +36,41 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 	class StepDefinitions
 	{
 		public object TheProduct { get; private set; }
+		public string File { get; private set; }
+
+		[StepDefinition(@"I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: '(.*)'")]
+		public bool ThenIConfirmThatTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingProductName(string productName)
+		{
+
+			string File = "BB_Report_DataUsageTier_4_7_2020.xlsx";
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + File + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				List<List<string>> excelRowList = new List<List<string>>();
+				for (int i = 1; i < ExcelUtils.Excel_GetNoRows(); i++)
+				{
+					List<string> excelRow = ExcelUtils.Excel_GetRow(i);
+
+					excelRowList.Add(excelRow);
+				}
+
+				foreach (List<string>excelRow in excelRowList)
+				{
+					if (excelRow[1] == productName)
+					{
+						return true;
+					}
+				}
+
+				return false;
+
+			}
+
+			Report.Info("The following excel file: " + File + " was not found");
+			return false;
+
+		}
+
 
 		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columnss:")]
 		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
