@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using OpenQA.Selenium.Interactions;
+using UL.Selenium.Portal.WERCSmart.Steps;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -1362,6 +1363,92 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Id = thisIDTD.GetValue().Trim(),
 							Name = thisNameTD.GetValue().Trim()
 						};
+					}
+
+				}
+			}
+
+			return null;
+		}
+
+		public ProductInformation ReturnProductInformationOfProductwithIsBlueAndHasClientsAndUPC()
+		{
+			int indexOfID = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+			int indexOfName = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Name");
+			int indexOfClients = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+			ReadOnlyCollection<IWebElement> idTDs = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfID + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> nameTDs = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfName + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> clientsTDs = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfClients + 1).ToString() + "]"));
+
+			// start at a random place in the list. This solves the problem where we are always selecting the first product in the list,
+			// which then accumulates too many Retailers.
+			Random rnd = new Random();
+			for (int i = rnd.Next(idTDs.Count); i < idTDs.Count; i++)
+			{
+				IWebElement thisIDTD = idTDs[i];
+				IWebElement thisNameTD = nameTDs[i];
+				IWebElement thisClientsTD = clientsTDs[i];
+				string colour = thisIDTD.FindElement(By.XPath(".//span")).GetCssValue("color").ToString();
+				if (colour == "rgba(0, 0, 255, 1)" && thisClientsTD.GetValue().Length > 0)
+				{
+					string bottomBorderColour = thisIDTD.GetCssValue("border-bottom-color");
+					string leftBorderColour = thisIDTD.GetCssValue("border-left-color");
+					string rightBorderColour = thisIDTD.GetCssValue("border-right-color");
+
+					if (!(bottomBorderColour == "rgba(205, 10, 10, 1)" && leftBorderColour == "rgba(205, 10, 10, 1)" &&
+						  rightBorderColour == "rgba(205, 10, 10, 1)"))
+					{
+						var shaSteps = new Steps_SHA();
+						string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+						string idString = thisIDTD.Text;
+						this.RightClickProductByID(idString);
+						Context.AddToContext("MainSHAindowHandle", currentHandle);
+						Report.StartStep("I click 'UPC Retailer and Feed'");
+						shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
+						Delay.Seconds(5);
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(currentHandle);
+						var studioSHAManger = new StudioSHAManager();
+
+						Delay.Seconds(10);
+						shaSteps.SwitchToProductListUpcWindow();
+						Delay.Seconds(4);
+						string url2 = SeleniumBrowser.WebBrowser.Url;
+						List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+						Report.Info($"The number of UPCs displayed in the UPC Details page is: {displayedUpcs.Count}");
+						if (displayedUpcs.Count > 0)
+						{
+
+
+							new GlobalSteps().SaveTheCurrentWindowAs("CurrentWindow");
+							string productsGridHandle = (string)Context.GetFromContext("MainWindowHandle");
+							SeleniumBrowser.WebBrowser.SwitchTo().Window(productsGridHandle);
+							Delay.Seconds(5);
+							SeleniumBrowser.SwitchToIFrame("Widget1FRAME");						
+							string newTab = (string)Context.GetFromContext("CurrentWindow");
+							SeleniumBrowser.WebBrowser.SwitchTo().Window(newTab);
+							new GlobalSteps().SwitchBackToMainWindow("CurrentWindow");
+							SeleniumBrowser.WebBrowser.SwitchTo().Window(productsGridHandle);
+							SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
+							return new ProductInformation
+							{
+								Id = thisIDTD.GetValue().Trim(),
+								Name = thisNameTD.GetValue().Trim()
+							};
+						}
+						new GlobalSteps().SaveTheCurrentWindowAs("CurrentWindow");
+						string failedproductsGridHandle = (string)Context.GetFromContext("MainWindowHandle");
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(failedproductsGridHandle);
+						Delay.Seconds(5);
+						SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
+						string failednewTab = (string)Context.GetFromContext("CurrentWindow");
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(failednewTab);
+						new GlobalSteps().SwitchBackToMainWindow("CurrentWindow");
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(failedproductsGridHandle);
+						SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
+
 					}
 
 				}

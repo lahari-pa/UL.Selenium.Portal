@@ -733,6 +733,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.IsTrue(new NewUser().ClickSuccess(), "Failed to click Success", "Successfully clicked Success");
 			GeneralUtilities.Wait_for_load_finish();
+			if( new NewUser().ClickSuccessButton!=null)
+			{
+				int i = 0;
+				bool buttonGone = false;
+				while (i < 5 && buttonGone==false)
+				{
+					Report.IsTrue(new NewUser().ClickSuccess(), "Failed to click Success", "Successfully clicked Success");
+					GeneralUtilities.Wait_for_load_finish();
+					buttonGone = new NewUser().ClickSuccessButton == null;
+					Delay.Seconds(2);
+				}
+				Report.IsTrue(buttonGone, "The Successbutton was not clicked successfully as it was still showing", "The success button was clicked successfully and was not longer showing");
+			}
 		}
 
 		[StepDefinition(@"I should be on the (.*) page of the form")]

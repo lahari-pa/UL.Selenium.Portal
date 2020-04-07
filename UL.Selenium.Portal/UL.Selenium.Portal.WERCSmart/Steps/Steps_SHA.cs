@@ -2087,6 +2087,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I save a product which blue and has retailers and at least 1 UCP as (.*)")]
+		public void GivenISaveAProductWhichIsNotRedOrOrangeAndHasRetailersAndUPCAsTestCase(string saveAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			ProductInformation info = thisStudioSHAManager.ReturnProductInformationOfProductwithIsBlueAndHasClientsAndUPC();
+
+			if (info != null)
+			{
+				Context.AddToContext(saveAs, info);
+			}
+
+			Report.IsTrue(info != null, "No suitable id was found", "ID: " + info.Id + " was found and saved as: " + saveAs);
+
+		}
 
 		[StepDefinition(@"I save the retailers associated with product (.*) as (.*)")]
 		public void ISaveTheRetailersAssociatedWithTheProductAs(string productSavedAs, string retailersSavedAs)
