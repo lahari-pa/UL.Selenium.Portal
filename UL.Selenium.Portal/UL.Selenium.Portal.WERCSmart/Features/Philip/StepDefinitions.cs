@@ -38,6 +38,52 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public object TheProduct { get; private set; }
 		public string File { get; private set; }
 
+		//128018
+
+		[StepDefinition(@"I check for the following options in the Additonal Documents to Provide section")]
+		public void ThenICheckForTheFollowingOptionsInTheAdditonalDocumentsToProvideSection(Table table)
+		{
+			WebElements webElementsObject = new WebElements();
+			var optionsNotFoundList = webElementsObject.CheckForOptions(table);
+			Report.IsTrue(optionsNotFoundList.Count == 0, "Failed to locate all options in the Additonal Documents to Provide section", "Successfully located all options in the Additonal Documents to Provide section");
+
+			foreach (string option in optionsNotFoundList)
+			{
+				Report.Info("Option that was not found: " + option);
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//128018
+
+
+
+
+
+
+
+
+
+
+
+
 		[StepDefinition(@"I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: '(.*)'")]
 		public bool ThenIConfirmThatTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingProductName(string productName)
 		{

@@ -5,6 +5,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.Selenium.Classes;
 using System.Collections.Generic;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Philip
 {
@@ -14,6 +15,22 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public const string BasePath = "";
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
+
+		public List<string> CheckForOptions(Table table)
+		{
+			List<string> optionsNotFoundList = new List<string>();
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(),'" + row["Option"] + "')]"), 2);
+
+				if (el == null)
+				{
+					optionsNotFoundList.Add(row["Option"]);
+				}
+			}
+
+			return optionsNotFoundList;
+		}
 
 		public bool ClickNDCField()
 		{
