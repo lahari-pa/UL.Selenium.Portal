@@ -476,3 +476,108 @@ Then In the Thank You screen I confirm the following statement is shown: Thank y
 And I navigate to the home page
 Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+
+
+
+
+
+
+
+
+
+Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Containing Liquid
+Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
+Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
+Given I generate a random UPC number and save as: UPC127854
+Given I click continue
+Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+#0360-0089-01
+Given I enter the NDC number: 0360-0089-01
+Then I save the product information as: TestCase127854
+Then I click continue
+Given I fill all empty fields in the SPL Information screen
+Then I click continue
+And I set the Secondary Physical State to be: Solid Containing Liquid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description to be: Very soluble
+And in the New Product page I click Continue
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Propane       | 100     | false               | false       |            |
+Given I set the Should this product be refrigerated for transport or storage? option to: No
+Then I click continue
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: No, not regulated
+Then I click continue
+Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
+Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+Then I click continue
+Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127854, container type: Plastic Container, capsule count: 50 and size: 1
+When I click continue
+When I click continue
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854»
+
+
+
+
+
+
+
+
+
+Scenario: [127791] Pharma - Retailer Default
+Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
+Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
+Given I generate a random UPC number and save as: UPC127847
+Given I click continue
+Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+Given I enter the NDC number: 0360-0089-01
+Then I save the product information as: TestCase127847
+Then I click continue
+Given I fill all empty fields in the SPL Information screen
+Then I click continue
+And I set the Secondary Physical State to be: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description to be: Very soluble
+And in the New Product page I click Continue
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Propane       | 100     | false               | false       |            |
+Given I set the Should this product be refrigerated for transport or storage? option to: No
+Then I click continue
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: No, not regulated
+Then I click continue
+Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
+Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+#Then I click continue
+#Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
+#When I click continue
+#When I click continue
+#Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
+#And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+#Then I check for the following options in the Additonal Documents to Provide section
+#| Option                       |
+#| Safety Data Sheet (Optional) |
+#When I click continue
+#Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+#When I click continue
+#When I click continue
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+#Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+#And I navigate to the home page
+#Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+
+
+
+
+
+
+
+# Confirm the Retailer Association section appears
+# Confirm that No Retailer/No UPC Product and Wal-Mart/SAM'S CLUB  are the retailers selected by default
+# Confirm Wal-Mart/SAM'S CLUB have a drop down option available for Vendor
+# Select a Vendor for Walmart and click Continue
+# In the Universal Product Code (UPC) section click +Add UPC button
+# Confirm that for Destination Retailers WM is the only option available
+# Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: «savedAs»
