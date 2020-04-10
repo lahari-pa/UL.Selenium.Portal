@@ -76,13 +76,56 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 
 
+		[StepDefinition(@"I fill all empty fields in the SPL Information screen")]
+		public void GivenIFillAllEmmptyFieldsInTheSPLInformationScreen()
+		{
+			Delay.Seconds(5);
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.CheckAndFillEmptyFieldsInSPLInformationScreen(), "Failed to fill in all empty fields", "Successfully filled in all empty fields");
+		}
+
+
+		[StepDefinition(@"I enter the NDC number: (.*)")]
+		public void GivenIEnterNDC(string number)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.ClickNDCField(), "Failed to click on NDC field", "Successfully clicked on NDC field");
+			Delay.Seconds(5);
+			Report.IsTrue(webElementsObject.EnterNDCNumber(number), "Failed to enter NDC number", "Successfully entered NDC number");
+			Delay.Seconds(5);
+			Report.IsTrue(webElementsObject.SelectFirstNDCNumberOption(), "Failed to select first option in NDC dropdown results", "Successfully selected first option in NDC dropdown results");
+			Delay.Seconds(5);
+		}
+
+		[StepDefinition(@"I call Shared Step 57500a \(Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path\): (.*)")]
+		public void GivenICallMySharedStepPrescriptionPharmaceuticalSolid(string type)
+		{
+			string name = "";
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the The Product Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
+			Report.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
+			if (name == "")
+			{
+				char[] forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
+				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
+			}
+			new Steps_TheProduct().SetProductNameTo(name);
+			Report.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			new Steps_TheProduct().SetTypeOfProductTo(type);
+			Report.StartStep("In the New Product page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
+			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
+
+			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
+		}
 
 
 
 
-
-
-
+		//127767
 
 		[StepDefinition(@"I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: '(.*)'")]
 		public bool ThenIConfirmThatTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingProductName(string productName)
@@ -169,55 +212,15 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			return false;
 		}
 
-		[StepDefinition(@"I fill all empty fields in the SPL Information screen")]
-		public void GivenIFillAllEmmptyFieldsInTheSPLInformationScreen()
-		{
-			Delay.Seconds(5);
-			WebElements webElementsObject = new WebElements();
-			Report.IsTrue(webElementsObject.CheckAndFillEmptyFieldsInSPLInformationScreen(), "Failed to fill in all empty fields", "Successfully filled in all empty fields");
-		}
 
 
 
-		[StepDefinition(@"I enter the NDC number: (.*)")]
-		public void GivenIEnterNDC(string number)
-		{
-			WebElements webElementsObject = new WebElements();
-			Report.IsTrue(webElementsObject.ClickNDCField(), "Failed to click on NDC field", "Successfully clicked on NDC field");
-			Delay.Seconds(5);
-			Report.IsTrue(webElementsObject.EnterNDCNumber(number), "Failed to enter NDC number", "Successfully entered NDC number");
-			Delay.Seconds(5);
-			Report.IsTrue(webElementsObject.SelectFirstNDCNumberOption(), "Failed to select first option in NDC dropdown results", "Successfully selected first option in NDC dropdown results");
-			Delay.Seconds(5);
-		}
 
 
-		[StepDefinition(@"I call Shared Step 57500a \(Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path\): (.*)")]
-		public void GivenICallMySharedStepPrescriptionPharmaceuticalSolid(string type)
-		{
-			string name = "";
-			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the The Product Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
-			Report.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
-			if (name == "")
-			{
-				char[] forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
-				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
-			}
-			new Steps_TheProduct().SetProductNameTo(name);
-			Report.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
-			new Steps_TheProduct().SetTypeOfProductTo(type);
-			Report.StartStep("In the New Product page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
-			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
-
-			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
-		}
 
 
+
+		//120873
 
 		[StepDefinition(@"Confirm that there is a middle column called: (.*) between left column called: (.*) and right column called: (.*)")]
 		public void GivenConfirmThatThereIsAMiddleColumnCalledBetweenLeftColumnCalledAndRightColumnCalled(string middleColumnName, string leftColumnName, string rightColumnName)

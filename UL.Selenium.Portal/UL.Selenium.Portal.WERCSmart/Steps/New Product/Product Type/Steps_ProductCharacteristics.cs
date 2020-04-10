@@ -79,6 +79,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		[StepDefinition(@"I set the Secondary Physical State to be: (.*)")]
 		public void ThenISetTheSecondaryPhysicalStateToBe(string state)
 		{
+			Delay.Seconds(9999);
 			Report.IsTrue(new NewProduct().SelectSecondaryPhysicalState(state), "Failed to set the secondary physical state to be: " + state, "Successfully set the Secondary Physical State to be: " + state);
 		}
 
