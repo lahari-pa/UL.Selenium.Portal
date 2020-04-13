@@ -231,12 +231,12 @@ Then I confirm that the exported excel file saved as: excel72586 contains the fo
 
 
 
-
+#Works
 Scenario: [127767] Register a Cleaning Supplies - Sanitizer (Non Aerosol) Product Type for a verification of the Products in Scope Report for Bed Bath and Beyondd Bath and Beyond
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I generate a random UPC number and save as: UPC804879551225
+Given I generate a random UPC number and save as: UPC127767
 Given I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Sanitizer (Non-Aerosol)
 Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 And I set the Which one best describes your product field to: Product is not considered a pesticide product
@@ -255,7 +255,7 @@ When I click continue
 When I click continue
 Given I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC804879551225, container type: Plastic Container and size: 3.5
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127767, container type: Plastic Container and size: 3.5
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: VOC Exemption Letter and file: C:\Dependencies\WERCSmart\testdoc.pdf
 Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
@@ -267,6 +267,7 @@ Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (O
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 57206 (Go to Retail Partners - Select Bed Bath and Beyond)
+#Replace file name with BB_Report_DataUsageTier_CurrentMonth_CurrentDay_CurrentYear.xlsx
 Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_1_2020.xlsx and save as Products in Scope Report for BBB
 Then I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: 'Cleaning Supplies Product for BBB'
 Given I delete the excel file saved as Products in Scope Report for BBB
@@ -278,7 +279,7 @@ Given I delete the excel file saved as Products in Scope Report for BBB
 
 
 
-
+#Works
 Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Gel Consistency
 
 Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
@@ -315,7 +316,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-
+#Works
 Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Documents to Provide 
 Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
@@ -354,36 +355,6 @@ Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
-
-# Click on Prescription Pharmaceutical icon
-# New Product screen: click Continue
-#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
-# In Product Information screen, copy and paste 0360-0089-01 and select it from the list, click Continue
-# In SPL Information screen - Confirm the fields are automatically populated, if a field is not populate (for example the Distributor field, fill it in) - click continue
-# In Product Characteristics for secondary state drop down select- solid
-# For question: "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?" select No
-# Select the best Water Solubility description from the drop down
-# Click Continue
-# The Ingredients get populated automatically, fill in the percentages for each ingredient - click Continue
-# Select No for question: "Should this product be refrigerated for transport or storage?"
-# For question: "Is the product regulated for transport (before exceptions or exemptions)" select No, not regulated
-# Click Continue
-# In Retailer Association section select a Vendor from the drop down for  Wal-Mart/SAM'S CLUB
-# Click Continue
-# In the Universal Product Code (UPC) section click +Add UPC button
-# In the Shared step below type in a number for the tablet or capsule count field
-#Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC«upc», container type: Plastic Container and size: 1
-# Click Continue in the Regulatory Documents to Provide
-# Confirm an error message shows: "Document is required: Product Label"
-# Click Browse for the upload a "Product Label" file
-# Find and select a PDF type document, click open; file uploads
-# Click Continue; Additional Documents to Provide section shows
-# Confirm that the option was renamed: "Safety Data Sheet (Optional)"
-# Confirm that "Safety Data Sheet" is the only available option in Additional Documents to Provide
-# Click Continue, Data Acceptance sections appears
-#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-# Purchase Summary page is shown with the following message: "Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise."
-# Click Home button
 
 
 
@@ -448,15 +419,14 @@ And I navigate to the home page
 
 
 
-
-
+#Worked
 Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid
 Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127847
 Given I click continue
 Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
-Given I enter the NDC number: 0360-0089-01
+Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127847
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
@@ -501,7 +471,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-
+#Working
 Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Containing Liquid
 Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
@@ -509,12 +479,12 @@ Given I generate a random UPC number and save as: UPC127854
 Given I click continue
 Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
 #0360-0089-01
-Given I enter the NDC number: 0360-0089-01
+Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127854
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
 Then I click continue
-And I set the Secondary Physical State to be: Solid Containing Liquid
+And I set the Secondary Physical State to be: Solid containing liquid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Very soluble
 And in the New Product page I click Continue
@@ -531,7 +501,7 @@ Then I click continue
 Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127854, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854»
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854
 
 
 
@@ -540,15 +510,15 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
-
+#Worked
 Scenario: [127791] Pharma - Retailer Default
 Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-Given I generate a random UPC number and save as: UPC127847
+Given I generate a random UPC number and save as: UPC127791
 Given I click continue
 Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
-Given I enter the NDC number: 0360-0089-01
-Then I save the product information as: TestCase127847
+Given I enter the NDC number: 10866-0885-2
+Then I save the product information as: TestCase127791
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
 Then I click continue
@@ -569,15 +539,10 @@ And The selected retailers on the Retailer page should be:
 		| No Retailer/No UPC Product |
 		| Wal-Mart/SAM'S CLUB        | 
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
-# Confirm the Retailer Association section appears
-# Confirm that No Retailer/No UPC Product and Wal-Mart/SAM'S CLUB  are the retailers selected by default
-# Confirm Wal-Mart/SAM'S CLUB have a drop down option available for Vendor
-# Select a Vendor for Walmart and click Continue
-# In the Universal Product Code (UPC) section click +Add UPC button
-# Confirm that for Destination Retailers WM is the only option available
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
+Given I click the 'Add UPC' button
+And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
+Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127791, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
@@ -594,13 +559,13 @@ And In the Purchase Summary screen I confirm the Purchase Summary header is disp
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
 Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127791
 
 
 
 
 
-
+#Worked
 Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 
 Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
@@ -608,7 +573,7 @@ Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127847
 Given I click continue
 Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): Prescription Pharmaceutical with Liquid Core
-Given I enter the NDC number: 0360-0089-01
+Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127847
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
@@ -628,16 +593,17 @@ Then I click continue
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127970, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
 And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+Then I check for the following options in the Additonal Documents to Provide section
+| Option                       |
+| Safety Data Sheet (Optional) |
 When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 When I click continue
-Then I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
-# Safety Data Sheet and Transportation Exemption Letter or Special Permit options should be available, but not required
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
@@ -651,46 +617,48 @@ Scenario: [128677] Pharma - Prescription Pharmaceutical - Liquid Product
 
 Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-Given I generate a random UPC number and save as: UPC127847
+Given I generate a random UPC number and save as: UPC128677
 Given I click continue
 Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
-Given I enter the NDC number: 0360-0089-01
-Then I save the product information as: TestCase127847
+Given I enter the NDC number: 10866-0885-2
+Then I save the product information as: TestCase128677
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
 Then I click continue
 And I set the Secondary Physical State to be: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description to be: Very soluble
 Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 |  Liquid                | Liquid                   | 2                | 2  | 2                          | 66                       |  Closed cup method              | Appreciable                                  |
 # Enter a Specific Gravity
 # Enter a boiling point
 # Enter a Flash Point
-And I set the Select the best Water Solubility description to be: Very soluble
 And in the New Product page I click Continue
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Propane       | 100     | false               | false       |            |
 Given I set the Should this product be refrigerated for transport or storage? option to: No
 Then I click continue
-Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: Yes, agree
-Then I click continue
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: Yes, Agree
 Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 Then I click continue
 Given I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue) 
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127970, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128677, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
 And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
 When I click continue
+Then I check for the following options in the Additonal Documents to Provide section
+| Option                       |
+| Safety Data Sheet (Optional) |
+When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 When I click continue
-Then I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
-# Safety Data Sheet and Transportation Exemption Letter or Special Permit options should be available, but not required
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
