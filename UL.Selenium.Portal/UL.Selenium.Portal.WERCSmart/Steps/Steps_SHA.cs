@@ -1967,6 +1967,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string docURL = thisSHADocument.DocumentWindowOpen();
 			if (docURL != null)
 			{
+				Report.Info($"The found URL was: {docURL}");
 				string pdfText = thisSHADocument.DocumentText(docURL);
 				Report.IsTrue(pdfText.Contains(ID), "PDF does not contain: " + ID, "PDF contains " + ID);
 				Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2,
