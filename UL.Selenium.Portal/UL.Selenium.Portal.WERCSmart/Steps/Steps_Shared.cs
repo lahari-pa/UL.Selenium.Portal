@@ -5417,11 +5417,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep(
 				"I set the Select all modes of transport that you've classified the product for field to: DOT");
 			selStepsNewProduct.SetTheSectionOptionTo(
-				"Select all modes of transport that you've classified the product for", "DOT");
+				"Select applicable modes of transport for which you classify the product", "DOT");
 			Report.StartStep(
-				"I set the section 'Select all modes of transport that you've classified the product for' subsection 'DOT' field to: Shipping with limited quantity");
-			selStepsNewProduct.SetTheOptionSubOptionTo("Shipping with limited quantity",
-				"Select all modes of transport that you've classified the product for", "DOT");
+				"I set the section 'Select applicable modes of transport for which you classify the product' subsection 'DOT' field to: Yes, Shipped with Limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Yes, Shipped with Limited quantity",
+				"Select applicable modes of transport for which you classify the product", "DOT");
 		}
 
 		[StepDefinition(@"I call Shared Step 65700 \(Transportation Details 1 - Select IATA & Limited Shipping\)")]
@@ -5553,10 +5553,10 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			selStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
 			Report.StartStep("I select Aerosols from the Proper Shipping Name drop down");
 			selStepsNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Aerosols");
-			Report.StartStep("I select the first option from: Hazard Class (select)");
-			selStepsNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
-			Report.StartStep("I confirm the Packing Group (select) option is set to: None");
-			selStepsNewProduct.CheckingFieldInputIsCorrect("Packing Group (select)", "None");
+			Report.StartStep("I select the first option from: Hazard Class (if available)");
+			selStepsNewProduct.SelectFirstOptionInSection("Hazard Class (if available)");
+			Report.StartStep("I confirm the Packing Group (if available) option is set to: None");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Packing Group (if available)", "None");
 			Report.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
 		}
@@ -9873,6 +9873,31 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.IsTrue(new UPC().GetUPCErrorForSection(section, expectedMessage, out string displayedMessage),
 			  "Error message displayed is " + displayedMessage + " but expected " + expectedMessage,
 			  "Error Message displayed in section: " + section + "is displayed as: " + expectedMessage + " as expected");
+		}
+
+		[StepDefinition(@"I call Shared Step 57500a \(Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path\): (.*)")]
+		public void GivenICallMySharedStepPrescriptionPharmaceuticalSolid(string type)
+		{
+			string name = "";
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the The Product Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
+			Report.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
+			if (name == "")
+			{
+				char[] forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
+				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
+			}
+			new Steps_TheProduct().SetProductNameTo(name);
+			Report.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			new Steps_TheProduct().SetTypeOfProductTo(type);
+			Report.StartStep("In the New Product page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
+			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
+
+			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
 		}
 	}
 }

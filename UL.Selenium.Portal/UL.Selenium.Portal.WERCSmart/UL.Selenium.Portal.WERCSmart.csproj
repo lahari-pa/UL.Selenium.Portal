@@ -172,8 +172,6 @@
     <Compile Include="Classes\WERCSmartUser.cs" />
     <Compile Include="Database Functions\dbRetailers.cs" />
     <Compile Include="Database Functions\dbUtils.cs" />
-    <Compile Include="Features\Philip\StepDefinitions.cs" />
-    <Compile Include="Features\Philip\WebElements.cs" />
     <Compile Include="Features\Product Registration\Distributor.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,6 +205,7 @@
     <Compile Include="Selenium Classes\NavigationBar.cs" />
     <Compile Include="Selenium Classes\New Product\Distributor.cs" />
     <Compile Include="Selenium Classes\New Product\OptionalReports.cs" />
+    <Compile Include="Selenium Classes\New Product\Pharma.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\EcologoReadiness.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ElectronicEquipment.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\Ingredients.cs" />
@@ -284,6 +283,7 @@
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_ProductIncludesBattery.cs" />
+    <Compile Include="Steps\New Product\Steps_Pharma.cs" />
     <Compile Include="Steps\New Product\Steps_Retailer.cs" />
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_TCLP.cs" />
@@ -409,7 +409,6 @@
     </None>
     <None Include="Features\NewProduct.feature">
     </None>
-    <None Include="Features\Philip\SpecFlowFeature1.feature" />
     <None Include="Features\Product Registration\Batteries.feature" />
     <None Include="Features\NotIncludedGeneralTests.feature" />
     <None Include="Features\Product Registration\Distributor.feature">
@@ -486,6 +485,7 @@
     </None>
     <None Include="Features\Product Registration\Pesticides\Pesticides.feature">
     </None>
+    <None Include="Features\Product Registration\Pharma.feature" />
     <None Include="Features\Product Registration\Product Documents\Product Documents.feature">
     </None>
     <None Include="Features\Product Registration\Product Registration.feature">
