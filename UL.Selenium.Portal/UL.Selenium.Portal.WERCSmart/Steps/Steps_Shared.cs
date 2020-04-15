@@ -4229,18 +4229,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsRetailPartners().SelectRetailer("CVS");
 		}
 
-		[StepDefinition(@"I call Shared Step 57206 \(Go to Retail Partners - Select Bed Bath and Beyond\)")]
-		public void SharedGoToRetailPartners_SelectBedBathandBeyond()
-		{
-			ReportSettings.UseSubSteps = true;
-			Report.StartStep("I click the Retail Partners icon in the Navigation Pane");
-			new StepsHomepage().ClickItemInNavigationPanel("Retail Partners");
-			Report.StartStep("I should see the heading 'Retail Partners'");
-			new StepsRetailPartners().ThenIShouldSeeTheFollowingHeading("Retail Partners");
-			Report.StartStep("I select the retailer: Bed Bath and Beyond");
-			new StepsRetailPartners().SelectRetailer("Bed Bath and Beyond");
-		}
-
 		[StepDefinition(@"I call Shared Step 74269 \(Select Retailers - Rite Aid\)")]
 		public void SharedSelectRetailers_RiteAid()
 		{
