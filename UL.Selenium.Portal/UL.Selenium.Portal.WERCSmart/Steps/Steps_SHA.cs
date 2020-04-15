@@ -1968,10 +1968,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (docURL != null)
 			{
 				Report.Info($"The found URL was: {docURL}");
-				string pdfText = thisSHADocument.DocumentText(docURL);
+				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				Report.Info($"Found the downloads folder: {downloadsFolder}");
+				thisSHADocument.DownloadFileFromURL(docURL, downloadsFolder + @"\TempPDF.pdf");
+				Report.Info($@"Downloading file from url complete, downloaded to: {downloadsFolder}+ \TempPDF.pdf");
+
+
+				//TEST CODE
+				Report.Info($"Running Test code for PDF check using new downloaded file");
+				
+				GeneralUtilities.OpenNewTabAndNavigateTo(downloadsFolder + @"\TempPDF.pdf");
+				Report.Info($"tab opened");
+				Delay.Seconds(3);
+				string docURL2 = thisSHADocument.DocumentWindowOpen();
+				Report.Info($"doc window opened");
+				Report.Screenshot();
+
+				if (docURL2 == null)
+				{
+					Report.Info("The docURL was null");
+					return;
+				}
+
+				string pdfText = thisSHADocument.DocumentText(docURL2);
+				Report.Info($"this was the new found pdf text using the new test code: {pdfText}");
+
+				//END TEST CODE		
+
+
+				//string pdfText = thisSHADocument.DocumentText(docURL);
+
+
+				Report.Info($"The Found PDF Text was: {pdfText}");
 				Report.IsTrue(pdfText.Contains(ID), "PDF does not contain: " + ID, "PDF contains " + ID);
-				Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2,
-					"PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
+				Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2,"PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
 			}
 			else
 			{
@@ -2139,24 +2169,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 			}
-			var thisStudioSHAManager = new StudioSHAManager();
-			List<Product> RetailerStatuses = thisStudioSHAManager.GetTopXProducts(2);
-			var matchingStatusRows = RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
-			var abbreviationMap = new RetailerAbbreviations().Map;
-			foreach (var row in matchingStatusRows)
+
+			int j = 0;
+			bool success = false;
+			while (j < 20 && success == false)
 			{
-				var clients = row.Clients;
-				var clientAbbreviations = clients.Split(',').Select(x => x.Trim()).ToList();
-				foreach (var abbr in clientAbbreviations)
+				var myStudioShaManager = new StudioSHAManager();
+				var thisProductSearch = new StudioSHAManagerProductSearch();
+
+
+				Report.StartStep("I click Srch in the bottom menu list");
+				myStudioShaManager.ClickBottomMenuOption("Search");
+				Report.Screenshot();
+				Report.Info("Going to click find");
+				Delay.Seconds(1);
+				Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find", false, false);
+				Report.Info("Waiting for loading bar");
+				new StudioSHAManager().Wait_For_Loading_Finish();
+				Report.Info("Finished waiting for loading");
+				Delay.Seconds(1);
+				Report.Screenshot();
+
+				var thisStudioSHAManager = new StudioSHAManager();
+				List<Product> RetailerStatuses = thisStudioSHAManager.GetTopXProducts(2);
+				var matchingStatusRows = RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
+				var abbreviationMap = new RetailerAbbreviations().Map;
+				foreach (var row in matchingStatusRows)
 				{
-					if (abbreviationMap.ContainsValue(abbr) && abbreviationMap.FirstOrDefault(x => x.Value == abbr).Key == retailer)
+					var clients = row.Clients;
+					var clientAbbreviations = clients.Split(',').Select(x => x.Trim()).ToList();
+					foreach (var abbr in clientAbbreviations)
 					{
-						Report.Success("Found product with status: " + status + " and retailer: " + retailer);
-						Report.Screenshot();
-						return;
+						if (abbreviationMap.ContainsValue(abbr) && abbreviationMap.FirstOrDefault(x => x.Value == abbr).Key == retailer)
+						{
+							Report.Success("Found product with status: " + status + " and retailer: " + retailer);
+							Report.Screenshot();
+							return;
+						}
 					}
 				}
+
+				Report.Info($"Failed to find product with status: " + status + " and retailer: " + retailer+" on attempt: "+ j+1);
+				Delay.Seconds(60);
+				j++;
+
+
 			}
+
 			Report.Failure("Failed to find product with status: " + status + " and retailer: " + retailer);
 			//var thisStepsRetailPartners = new StepsRetailPartners();
 			//var matchingClients = matchingStatusRows.Select(x => x.Clients)

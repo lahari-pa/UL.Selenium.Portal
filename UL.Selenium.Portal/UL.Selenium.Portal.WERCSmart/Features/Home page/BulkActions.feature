@@ -100,6 +100,7 @@ Scenario: [76314] Forward Product - NR should Not Require UPC
 	Given I click continue on the Forward Product Registration page
 	Then I confirm the active Forward Product Registration tab is: Select UPCs
 	Given I select the first product under the Select UPCs tab
+	And If the Private Label textbox is showing in the Select UPCs screen, I enter the value: N/A
 	Given I click the Add To No Retailer button under the Select UPCs tab
 	And I select the UPC row: 'No UPC'/ 'No Retailer'
 	Given I click continue on the Forward Product Registration page

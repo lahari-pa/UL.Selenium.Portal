@@ -1047,7 +1047,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				StewardshipList.Add(row["Stewardship"]);
 				IssueDateList.Add(row["Issue Date"]);
-				ExpireDateList.Add(row["Expire Date"]);
+				if (row["Expire Date"] == "Tomorrow")
+				{
+					string input = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+					ExpireDateList.Add(input);
+				}
+				else
+				{					
+					ExpireDateList.Add(row["Expire Date"]);
+				}
 			}
 
 			int k = 0;

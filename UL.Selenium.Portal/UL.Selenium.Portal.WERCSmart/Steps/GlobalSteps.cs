@@ -846,6 +846,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					email = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
 				}
+				Delay.Seconds(10);
 
 				if (MailosaurFunctions.WaitForInboxDifferences(email))
 				{
@@ -853,6 +854,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Found " + differences.Count() + " emails");
 
 					Mailosaur.Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
+					Report.Info("Checking if an email that matches the criteria was found...");
 
 					if (shouldOrNot == "should")
 					{

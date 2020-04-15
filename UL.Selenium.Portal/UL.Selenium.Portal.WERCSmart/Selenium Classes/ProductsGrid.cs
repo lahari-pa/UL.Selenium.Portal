@@ -650,11 +650,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					}
 
-					Delay.Seconds(1);
 					navEl.ScrollElementIntoView();
 					Delay.Seconds(1);
 					bool clickSuccess = navEl.TryClick();
 					Delay.Seconds(1);
+					int x = 0;
+					while(clickSuccess==false&&x<6)
+					{
+						navEl.ScrollElementIntoView();
+						Delay.Seconds(1);
+						clickSuccess = navEl.TryClick();
+						Delay.Seconds(1);
+						x++;
+
+					}
 					return clickSuccess;
 				}
 				catch (StaleElementReferenceException ex)

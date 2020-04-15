@@ -3095,7 +3095,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			if (el.GetAttribute("type") == "text")
 			{
 				el.EnterText(value);
-				return el.GetValue() == value;
+				if(el.GetValue() == value)
+				{
+					return el.GetValue() == value;
+				}
+				else
+				{
+					int j = 0;
+					bool textEntered = false;
+					while (textEntered==false&&j<6)
+					{
+						Delay.Seconds(1);
+						Report.Info($"Attempting to enter text, attempt: {j+2}");
+						el.ClearTextBox();
+						el.EnterText(value);
+						textEntered = el.GetValue() == value;
+						j++;
+					}
+					return textEntered;
+
+				}
 			}
 			if (el.TagName.ToLower() == "select")
 			{
@@ -3122,7 +3141,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (el.GetAttribute("type") == "checkbox")
 				{
 					el.TryCheck();
-					return el.Checked();
+					if(el.Checked()==true)
+					{
+						return el.Checked();
+					}
+					else
+					{
+						int x = 0;
+						bool isChecked = false;
+						while(isChecked==false&&x<6)
+						{
+							Delay.Seconds(1);
+							Report.Info($"Attempting to check box, attempt: {x + 2}");
+							el.TryCheck();
+							isChecked = el.Checked();
+							x++;
+						}
+						return isChecked;
+					}
 				}
 
 			}
@@ -3133,12 +3169,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			// don't click the label if it contains a web link
 			if (el.FindElement(By.XPath("./span/a[contains(@href,'http')]"), 2) == null && el.TryClick())
 			{
+				Report.Info("Dont Click label if contains web link");
 				Delay.Seconds(2);
 				if (this.SelectedOptionsForSection(section).Contains(value))
 				{
 					return true;
 				}
 			}
+			Report.Info("Trying a basic Try click on the element");
 			return el.FindElement(By.XPath("./input"), 10).TryClick();
 		}
 
