@@ -1185,10 +1185,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"All Products Found had either archieved retailers or were in recertification");
 			return null;
 
-
-
-			
 		}
+
+		public int CheckTheAmountOfProductsInProductsGrid()
+		{
+			IList<IWebElement> productList = this.containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 2);
+			return productList.Count;
+		}
+
 	}
 
 	public class ProductGridItem : ProductsGrid
@@ -1402,6 +1406,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			el.SelectByValue(brand.ID);
 			return el.SelectedOption() == brand.Name;
+		}
+
+		public bool ClickShowOnlyDiscontinuedProductsCheckbox()
+		{
+			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//input[@id='show-only-discontinued-products']"), 2);
+			return checkBox.TryClick();
 		}
 	}
 

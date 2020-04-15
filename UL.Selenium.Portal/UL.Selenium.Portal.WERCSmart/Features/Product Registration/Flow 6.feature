@@ -136,6 +136,8 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
+Then In the Data Acceptance page I select Yes, Agreed
+
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Antifungal - Aerosol
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57711

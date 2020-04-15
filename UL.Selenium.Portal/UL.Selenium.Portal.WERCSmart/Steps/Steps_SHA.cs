@@ -3731,9 +3731,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
+		[StepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
+		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			List<string> columnsNotFound = studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table);
+
+			Report.IsTrue(studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table).Count == 0, "One or more of the columns were not found", "Successfully found all columns");
+
+			foreach (string columnName in columnsNotFound)
+			{
+				Report.Info("Column not found: " + columnName);
+			}
+		}
 
 
+		[StepDefinition(@"I confirm that there is a 'U' next to the following product saved as: (.*)")]
+		public void ThenIConfirmThatThereIsANextToTheFollowingProductSavedAs(string productSavedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 
+			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
+			string ID = ProductDetails.Id;
+
+			Report.IsTrue(studioSHAManagerObject.ConfirmUInSecondColumn(ID), "Failed to find 'U' next to product with product ID: " + ID, "Successfully found a 'U' next to product with product ID: " + ID);
+		}
 
 	}
 
