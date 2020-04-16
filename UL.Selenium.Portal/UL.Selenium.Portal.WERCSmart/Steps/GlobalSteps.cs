@@ -398,6 +398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure("Failed to log in");
 			Report.Screenshot();
+			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(@"I logout")]

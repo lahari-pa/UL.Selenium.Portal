@@ -5699,6 +5699,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			var selGlobalSteps = new GlobalSteps();
 			selGlobalSteps.LoginToAccount("ProductAccount");
 			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
+			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(
