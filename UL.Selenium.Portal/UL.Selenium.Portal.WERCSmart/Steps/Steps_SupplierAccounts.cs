@@ -406,6 +406,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
 			myAccount.ClickIhaveNoStewardshipNumbers();
+			//modal wait and accept accept/ press YES
+			new GlobalSteps().WaitForAModalDialogToOpen();
+			new ModalDialog().ClickButton("YES");
+			Delay.Seconds(2);
 
 			//data tiers
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
