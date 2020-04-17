@@ -767,6 +767,7 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 #And I confirm that for each retailer, the entry has a status of Chemical Assessment
 
 
+@ScenarioId:7042
 	Scenario:[120798] "U" for UPC Update for Suspended Status
 
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -827,6 +828,7 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 	Then I confirm that there is a 'U' next to the following product saved as: TestCase120798
 
 	
+@ScenarioId:7043
 	Scenario:[120849] "U" for UPC Update No Fee Charge
 
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
