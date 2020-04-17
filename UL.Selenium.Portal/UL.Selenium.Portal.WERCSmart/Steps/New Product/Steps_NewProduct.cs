@@ -130,7 +130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		// * 'Section' is the individual input/ question within a Page [html: 'form-group']
 		//		eg. 'Product name', 'Type of product', pH...
 
-		[StepDefinition(@"In the New Product page I click tab: (Product Type|Product Characteristics|Retailer Association|Recipient and UPC Details|Review and Submit)")]
+		[StepDefinition(@"In the New Product page I click tab: (Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)")]
 		public void GivenInTheNewProductPageIClickTab(string tabName)
 		{
 			try

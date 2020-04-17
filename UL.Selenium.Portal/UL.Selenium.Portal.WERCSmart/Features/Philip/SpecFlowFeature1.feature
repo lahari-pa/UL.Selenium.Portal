@@ -298,6 +298,13 @@ And I navigate to the home page
 #And I enter the text: saved as TestCase128018 in the 'Search by WPS ID or Product Name' field
 #And In the Foward Product Registration Screen I should not see product: saved as TestCase128018
 #And I navigate to the home page
+
+
+
+
+
+
+
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase128018)
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase128018)
@@ -312,15 +319,23 @@ Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish 
 #		| CVS      |
 #Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase128018)
 #And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase128018
+
+
+
+
+
+
+Given I navigate to the landing page
 Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
 And I filter for the product saved as: TestCase128018
 And I click Row Actions for the first product returned
+
 And I click on the Row Action: Update Required
 Given In the New Product page I click tab: Product Type
 And I click the page heading: Product Type
 And I set the Secondary Physical State to be: Solid containing liquid
 And I click Save in The Product Page
-Given In the New Product page I click tab: Retailer Association
+Given In the New Product page I click tab: Recipient and UPC Details
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 Given I generate a random UPC number and save as: UPC1280188
 Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC1280188, container type: Plastic Container, capsule count: 50 and size: 1
