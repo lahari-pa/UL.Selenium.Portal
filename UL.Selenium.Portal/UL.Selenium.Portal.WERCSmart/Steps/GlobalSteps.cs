@@ -1838,6 +1838,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				// required to switch to the frame and refresh container
 				new StudioSHAManager().Wait_for_load();
+				//switch to correct iFrame? if elements are returning as null etc after swithcing back to SHA products grid, may need to switch to correct IFrame again. Here or in methods?
 			}
 			catch (Exception ex)
 			{

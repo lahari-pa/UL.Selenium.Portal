@@ -1573,19 +1573,68 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> FindColumnInUPCRetailerAndFeedPageWithTable(Table table)
 		{
-			List<string> columnsNotFound = new List<string>();
-
-			foreach (TableRow row in table.Rows)
+			try
 			{
-				IWebElement columnName = this.containerElement.FindElement(By.XPath("//th[contains(text(),'" + row["Column Name"] + "')]"), 2);
-
-				if (columnName == null)
+				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (string handle in allHandles)
 				{
-					columnsNotFound.Add(row["Column Name"]);
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+						Context.AddToContext("SHAManagerProductUPC", currentHandle);
+						foundWindow = true;
+						break;
+					}
 				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+				}
+
+				List<string> columnsNotFound = new List<string>();
+
+				foreach (TableRow row in table.Rows)
+				{
+					//needs updating because "container element" is not correct container. Move this method to same place as other upc retailer feed methods.
+					//After checking looks like is not a "class" of the UPC Tab page, all methods using seleniumBrowser, may need to update these methods later.
+					IWebElement columnName = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//th[contains(text(),'" + row["Column Name"] + "')]"), 2);
+					
+
+					if (columnName == null)
+					{
+						columnsNotFound.Add(row["Column Name"]);
+					}
+				}
+
+				return columnsNotFound;
 			}
 
-			return columnsNotFound;
+
+			catch (NoSuchWindowException)
+			{
+				Report.Failure("Failed to switch to the SHA Manager Product UPC window!");
+				Report.Screenshot();
+				return null;
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+				return null;
+
+			}
 
 		}
 
@@ -1600,6 +1649,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
