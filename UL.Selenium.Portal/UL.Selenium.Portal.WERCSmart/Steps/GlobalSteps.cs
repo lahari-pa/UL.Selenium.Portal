@@ -23,6 +23,8 @@ using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
+using OpenQA.Selenium.Chrome;
+
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -520,6 +522,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Navigating to the landing page");
+				Report.Info("Checking the number of tabs that are open in the current window");
+				ReadOnlyCollection<string> currentTabs = SeleniumBrowser.WebBrowser.WindowHandles;
+				if(currentTabs.Count()==1)
+				{
+					Report.Info("There was only 1 tab open, attempting to close and reopen chrome");
+					SeleniumBrowser.WebBrowser.Quit();
+					//var driver = new ChromeDriver(chromeDriverService, new ChromeOptions());
+					var chromeDriverService = ChromeDriverService.CreateDefaultService();
+					SeleniumBrowser.WebBrowser =  new ChromeDriver(chromeDriverService, new ChromeOptions());
+					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+				}
+
+
 				SeleniumBrowser.Navigate(SeleniumBrowser.BaseTestUrl);
 				Delay.Seconds(1);
 				ReadOnlyCollection<string> allWindows = SeleniumBrowser.WebBrowser.WindowHandles;

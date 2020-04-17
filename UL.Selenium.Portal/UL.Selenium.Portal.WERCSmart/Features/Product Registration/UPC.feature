@@ -828,6 +828,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Then I check that DPCI for retailer Target UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable115330
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase115330
 
+@ScenarioId:7042
 	Scenario:[120798] "U" for UPC Update for Suspended Status
 
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -888,6 +889,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Then I confirm that there is a 'U' next to the following product saved as: TestCase120798
 
 
+@ScenarioId:7043
 	Scenario:[120849] "U" for UPC Update No Fee Charge
 
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
