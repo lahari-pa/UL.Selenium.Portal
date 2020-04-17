@@ -17,6 +17,7 @@ Scenario: [127767] Register a Cleaning Supplies - Sanitizer (Non Aerosol) Produc
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC127767
+###Change this
 Given I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Sanitizer (Non-Aerosol)
 Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 And I set the Which one best describes your product field to: Product is not considered a pesticide product
