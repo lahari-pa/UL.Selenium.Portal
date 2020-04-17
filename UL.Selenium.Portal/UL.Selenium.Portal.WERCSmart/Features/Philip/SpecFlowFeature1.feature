@@ -313,12 +313,12 @@ Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessR
 And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase128018)
 Given I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase128018
 Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase128018)
-#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase128018)
-#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase128018) for
-#		| Retailer |
-#		| CVS      |
-#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase128018)
-#And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase128018
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase128018)
+Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase128018) for
+		| Retailer |
+		| CVS      |
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase128018)
+And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase128018
 
 
 
