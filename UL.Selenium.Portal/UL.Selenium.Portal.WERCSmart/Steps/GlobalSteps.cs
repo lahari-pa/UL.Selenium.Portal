@@ -213,6 +213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (attemptOnce)
 				{
 					this.AttemptToLoginWithEmailAndPassword(user.Username, user.Password);
+					new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 					return;
 				}
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
