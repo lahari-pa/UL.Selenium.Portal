@@ -207,8 +207,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						break;
 
 					default:
+						Report.Info("Was not one of the expected tiers: " + str);
 						return false;
-
 				}
 
 			}
