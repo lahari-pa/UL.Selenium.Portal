@@ -4268,7 +4268,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			new StepsRetailPartners().SelectRetailer("CVS");
 		}
 
-		[StepDefinition(@"I call Shared Step 57206 \(Go to Retail Partners - Select Bed Bath and Beyond\)")]
+		[StepDefinition(@"I call Shared Step 130558 \(Go to Retail Partners - Select Bed Bath and Beyond\)")]
 		public void SharedGoToRetailPartners_SelectBBB()
 		{
 			ReportSettings.UseSubSteps = true;
