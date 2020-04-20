@@ -81,8 +81,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				char[] forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
 				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
-			Report.StartStep("Setting Product Line or Brand to: TestBrand");
-			new Steps_TheProduct().SetProductLineOrBrand("TestBrand");
 			new Steps_TheProduct().SetProductNameTo(name);
 			Report.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
 			new Steps_TheProduct().SetTypeOfProductTo(type);
@@ -90,6 +88,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
+
+
 
 			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
 		}
@@ -4269,7 +4269,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		}
 
 		[StepDefinition(@"I call Shared Step 57206 \(Go to Retail Partners - Select Bed Bath and Beyond\)")]
-		public void SharedGoToRetailPartners_SelectBedBathandBeyond()
+		public void SharedGoToRetailPartners_SelectBBB()
 		{
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I click the Retail Partners icon in the Navigation Pane");
@@ -5417,6 +5417,21 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep(
 				"I set the Select all modes of transport that you've classified the product for field to: DOT");
 			selStepsNewProduct.SetTheSectionOptionTo(
+				"Select all modes of transport that you've classified the product for", "DOT");
+			Report.StartStep(
+				"I set the section 'Select all modes of transport that you've classified the product for' subsection 'DOT' field to: Shipping with limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Shipping with limited quantity",
+				"Select all modes of transport that you've classified the product for", "DOT");
+		}
+
+		[StepDefinition(@"I call Shared Step 130543 \(Transport - Pharma Flow - Select DOT & Limited Shipping - No Continue\)")]
+		public void Shared130543_Transport_PharmaFlow_SelectDotAndLimitedShipping_NoContinue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			Report.StartStep(
+				"I set the Select all modes of transport that you've classified the product for field to: DOT");
+			selStepsNewProduct.SetTheSectionOptionTo(
 				"Select applicable modes of transport for which you classify the product", "DOT");
 			Report.StartStep(
 				"I set the section 'Select applicable modes of transport for which you classify the product' subsection 'DOT' field to: Yes, Shipped with Limited quantity");
@@ -5546,6 +5561,24 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		[StepDefinition(
 			@"I call Shared Step 81310 \(UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue\)")]
 		public void Shared81310_UNNumber_EnterUN1950SelectAerosolAndHazClassConfirmPackingGroup_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I enter UN1950 in the UN Number field");
+			selStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
+			Report.StartStep("I select Aerosols from the Proper Shipping Name drop down");
+			selStepsNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Aerosols");
+			Report.StartStep("I select the first option from: Hazard Class (select)");
+			selStepsNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
+			Report.StartStep("I confirm the Packing Group (select) option is set to: None");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Packing Group (select)", "None");
+			Report.StartStep("I click continue");
+			selStepsNewProduct.ClickContinue();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 130542 \(UN Number - Pharma Flow - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue\)")]
+		public void Shared130542_UNNumber_PharmaFlow_EnterUN1950SelectAerosolAndHazClassConfirmPackingGroup_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
 			var selStepsNewProduct = new StepsNewProduct();

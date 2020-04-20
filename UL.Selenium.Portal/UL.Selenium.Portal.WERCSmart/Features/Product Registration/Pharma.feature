@@ -48,7 +48,7 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 57206 (Go to Retail Partners - Select Bed Bath and Beyond)
 #Replace file name with BB_Report_DataUsageTier_CurrentMonth_CurrentDay_CurrentYear.xlsx
-Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_14_2020.xlsx and save as Products in Scope Report for BBB
+Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_20_2020.xlsx and save as Products in Scope Report for BBB
 Then I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: 'Cleaning Supplies Product for BBB'
 Given I delete the excel file saved as Products in Scope Report for BBB
 
@@ -410,9 +410,9 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 Given I set the Should this product be refrigerated for transport or storage? option to: No
 Then I click continue
 Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: Yes, Agree
-Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+Given I call Shared Step 130543 (Transport - Pharma Flow - Select DOT & Limited Shipping - No Continue)
 Then I click continue
-Given I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue) 
+Given I call Shared Step 130542 (UN Number - Pharma Flow - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
