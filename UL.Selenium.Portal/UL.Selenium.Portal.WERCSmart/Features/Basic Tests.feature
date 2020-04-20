@@ -13,6 +13,9 @@ Feature: Basic Tests
 @ScenarioId:1159
 Scenario: Login - check navigation menu - check products grid
 
+#remove the navigate landing page step 
+Given I navigate to the landing page
+
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 
 Then the WERCSmart homepage should load

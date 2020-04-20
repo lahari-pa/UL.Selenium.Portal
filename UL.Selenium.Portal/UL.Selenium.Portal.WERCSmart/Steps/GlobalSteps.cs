@@ -527,10 +527,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if(currentTabs.Count()==1)
 				{
 					Report.Info("There was only 1 tab open, attempting to close and reopen chrome");
+					Report.Info("Chrome Quit - Closing the chrome window");
 					SeleniumBrowser.WebBrowser.Quit();
 					//var driver = new ChromeDriver(chromeDriverService, new ChromeOptions());
+					Report.Info("Attempting to initialize the chrome driver");
 					var chromeDriverService = ChromeDriverService.CreateDefaultService();
+					Report.Info("Attempting to Open a chrome window");
 					SeleniumBrowser.WebBrowser =  new ChromeDriver(chromeDriverService, new ChromeOptions());
+					Report.Info("Attempting to maximize the window");
 					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 				}
 
