@@ -410,9 +410,9 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 Given I set the Should this product be refrigerated for transport or storage? option to: No
 Then I click continue
 Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: Yes, Agree
-Given I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+Given I call Shared Step 130543 (Transport - Pharma Flow - Select DOT & Limited Shipping - No Continue)
 Then I click continue
-Given I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue) 
+Given I call Shared Step 130542 (UN Number - Pharma Flow - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue

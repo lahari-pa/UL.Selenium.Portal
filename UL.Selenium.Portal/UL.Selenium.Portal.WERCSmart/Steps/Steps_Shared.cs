@@ -5424,6 +5424,21 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				"Select all modes of transport that you've classified the product for", "DOT");
 		}
 
+		[StepDefinition(@"I call Shared Step 130543 \(Transport - Pharma Flow - Select DOT & Limited Shipping - No Continue\)")]
+		public void Shared130543_Transport_PharmaFlow_SelectDotAndLimitedShipping_NoContinue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			Report.StartStep(
+				"I set the Select all modes of transport that you've classified the product for field to: DOT");
+			selStepsNewProduct.SetTheSectionOptionTo(
+				"Select applicable modes of transport for which you classify the product", "DOT");
+			Report.StartStep(
+				"I set the section 'Select applicable modes of transport for which you classify the product' subsection 'DOT' field to: Yes, Shipped with Limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Yes, Shipped with Limited quantity",
+				"Select applicable modes of transport for which you classify the product", "DOT");
+		}
+
 		[StepDefinition(@"I call Shared Step 65700 \(Transportation Details 1 - Select IATA & Limited Shipping\)")]
 		public void Shared65700_TransportDetails1_SelectIataAndLimitedShipping()
 		{
@@ -5557,6 +5572,24 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			selStepsNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
 			Report.StartStep("I confirm the Packing Group (select) option is set to: None");
 			selStepsNewProduct.CheckingFieldInputIsCorrect("Packing Group (select)", "None");
+			Report.StartStep("I click continue");
+			selStepsNewProduct.ClickContinue();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 130542 \(UN Number - Pharma Flow - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue\)")]
+		public void Shared130542_UNNumber_PharmaFlow_EnterUN1950SelectAerosolAndHazClassConfirmPackingGroup_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I enter UN1950 in the UN Number field");
+			selStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
+			Report.StartStep("I select Aerosols from the Proper Shipping Name drop down");
+			selStepsNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Aerosols");
+			Report.StartStep("I select the first option from: Hazard Class (if available)");
+			selStepsNewProduct.SelectFirstOptionInSection("Hazard Class (if available)");
+			Report.StartStep("I confirm the Packing Group (if available) option is set to: None");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Packing Group (if available)", "None");
 			Report.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
 		}
