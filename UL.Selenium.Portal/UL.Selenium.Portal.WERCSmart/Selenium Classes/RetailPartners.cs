@@ -208,7 +208,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					default:
 						return false;
-						break;
+
 				}
 
 			}

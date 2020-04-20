@@ -17,7 +17,6 @@ Scenario: [127767] Register a Cleaning Supplies - Sanitizer (Non Aerosol) Produc
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I generate a random UPC number and save as: UPC127767
-###Change this
 Given I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Sanitizer (Non-Aerosol)
 Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 And I set the Which one best describes your product field to: Product is not considered a pesticide product
@@ -49,7 +48,7 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 57206 (Go to Retail Partners - Select Bed Bath and Beyond)
 #Replace file name with BB_Report_DataUsageTier_CurrentMonth_CurrentDay_CurrentYear.xlsx
-Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_14_2020.xlsx and save as Products in Scope Report for BBB
+Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_20_2020.xlsx and save as Products in Scope Report for BBB
 Then I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: 'Cleaning Supplies Product for BBB'
 Given I delete the excel file saved as Products in Scope Report for BBB
 

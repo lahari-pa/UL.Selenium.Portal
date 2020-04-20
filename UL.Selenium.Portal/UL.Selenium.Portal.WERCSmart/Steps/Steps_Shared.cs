@@ -81,8 +81,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				char[] forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
 				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
-			Report.StartStep("Setting Product Line or Brand to: TestBrand");
-			new Steps_TheProduct().SetProductLineOrBrand("TestBrand");
 			new Steps_TheProduct().SetProductNameTo(name);
 			Report.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
 			new Steps_TheProduct().SetTypeOfProductTo(type);
@@ -90,6 +88,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
+
+
 
 			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
 		}
@@ -4268,6 +4268,18 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			new StepsRetailPartners().SelectRetailer("CVS");
 		}
 
+		[StepDefinition(@"I call Shared Step 57206 \(Go to Retail Partners - Select Bed Bath and Beyond\)")]
+		public void SharedGoToRetailPartners_SelectBBB()
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I click the Retail Partners icon in the Navigation Pane");
+			new StepsHomepage().ClickItemInNavigationPanel("Retail Partners");
+			Report.StartStep("I should see the heading 'Retail Partners'");
+			new StepsRetailPartners().ThenIShouldSeeTheFollowingHeading("Retail Partners");
+			Report.StartStep("I select the retailer: Bed Bath and Beyond");
+			new StepsRetailPartners().SelectRetailer("Bed Bath and Beyond");
+		}
+
 		[StepDefinition(@"I call Shared Step 74269 \(Select Retailers - Rite Aid\)")]
 		public void SharedSelectRetailers_RiteAid()
 		{
@@ -5405,11 +5417,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep(
 				"I set the Select all modes of transport that you've classified the product for field to: DOT");
 			selStepsNewProduct.SetTheSectionOptionTo(
-				"Select applicable modes of transport for which you classify the product", "DOT");
+				"Select all modes of transport that you've classified the product for", "DOT");
 			Report.StartStep(
-				"I set the section 'Select applicable modes of transport for which you classify the product' subsection 'DOT' field to: Yes, Shipped with Limited quantity");
-			selStepsNewProduct.SetTheOptionSubOptionTo("Yes, Shipped with Limited quantity",
-				"Select applicable modes of transport for which you classify the product", "DOT");
+				"I set the section 'Select all modes of transport that you've classified the product for' subsection 'DOT' field to: Shipping with limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Shipping with limited quantity",
+				"Select all modes of transport that you've classified the product for", "DOT");
 		}
 
 		[StepDefinition(@"I call Shared Step 65700 \(Transportation Details 1 - Select IATA & Limited Shipping\)")]
@@ -5541,10 +5553,10 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			selStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
 			Report.StartStep("I select Aerosols from the Proper Shipping Name drop down");
 			selStepsNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Aerosols");
-			Report.StartStep("I select the first option from: Hazard Class (if available)");
-			selStepsNewProduct.SelectFirstOptionInSection("Hazard Class (if available)");
-			Report.StartStep("I confirm the Packing Group (if available) option is set to: None");
-			selStepsNewProduct.CheckingFieldInputIsCorrect("Packing Group (if available)", "None");
+			Report.StartStep("I select the first option from: Hazard Class (select)");
+			selStepsNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
+			Report.StartStep("I confirm the Packing Group (select) option is set to: None");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Packing Group (select)", "None");
 			Report.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
 		}
