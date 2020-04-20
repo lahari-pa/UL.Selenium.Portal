@@ -24,7 +24,7 @@ using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
 using OpenQA.Selenium.Chrome;
-
+using System.Diagnostics;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -37,6 +37,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public static void SetTestURL()
 		{
 			SeleniumBrowser.BaseTestUrl = TestVariables.GetVariableSavedAs("TestURL");
+		}
+
+		[AfterScenario(Order = 1)]
+		public static void CloseChrome()
+		{
+			//Process.GetProcessesByName("chrome").ToList().ForEach(x => x.Kill());
+			Process.GetProcessesByName("chromedriver").ToList().ForEach(x => x.Kill());
 		}
 
 
@@ -528,14 +535,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("There was only 1 tab open, attempting to close and reopen chrome");
 					Report.Info("Chrome Quit - Closing the chrome window");
-					SeleniumBrowser.WebBrowser.Quit();
-					//var driver = new ChromeDriver(chromeDriverService, new ChromeOptions());
-					Report.Info("Attempting to initialize the chrome driver");
-					var chromeDriverService = ChromeDriverService.CreateDefaultService();
+					SeleniumBrowser.StopBrowser();
+					//Report.Info("Attempting to initialize the chrome driver");
+					//var chromeDriverService = ChromeDriverService.CreateDefaultService();
 					Report.Info("Attempting to Open a chrome window");
-					SeleniumBrowser.WebBrowser =  new ChromeDriver(chromeDriverService, new ChromeOptions());
-					Report.Info("Attempting to maximize the window");
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					//SeleniumBrowser.WebBrowser =  new ChromeDriver(chromeDriverService, new ChromeOptions());
+					//Report.Info("Attempting to maximize the window");
+					SeleniumBrowser.StartBrowser();
+					//SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 				}
 
 
