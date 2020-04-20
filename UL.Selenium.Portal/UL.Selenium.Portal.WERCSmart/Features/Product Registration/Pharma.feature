@@ -46,7 +46,7 @@ Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (O
 | Opaque     | 0                        | 0                       | Alcohol | No data available | No Data Available     | Goggles                       |           |
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I call Shared Step 57206 (Go to Retail Partners - Select Bed Bath and Beyond)
+Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 #Replace file name with BB_Report_DataUsageTier_CurrentMonth_CurrentDay_CurrentYear.xlsx
 Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_20_2020.xlsx and save as Products in Scope Report for BBB
 Then I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: 'Cleaning Supplies Product for BBB'
