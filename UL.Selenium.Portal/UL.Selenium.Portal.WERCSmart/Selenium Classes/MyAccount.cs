@@ -54,13 +54,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var listOfUsers = new List<User>();
 				while (pageNo <= pageCount)
 				{
-					Delay.Seconds(1.5 * Delay.SpeedFactor);
+					Delay.Seconds(4 * Delay.SpeedFactor);
 
 					IWebElement userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
 					ReadOnlyCollection<IWebElement> listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
 
 					foreach (IWebElement userRow in listOfUsersRows)
 					{
+						Delay.Seconds(2);
 						Report.Info("Starting a new user");
 						var thisUser = new User {
 							Username = userRow.FindElement(By.XPath(".//td[1]")).Text,
@@ -68,6 +69,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Role = userRow.FindElement(By.XPath(".//td[3]")).Text,
 							IsActive = userRow.FindElement(By.XPath(".//td[4]")).Text == "Yes"
 						};
+						Delay.Seconds(1);
 						ReadOnlyCollection<IWebElement> checkboxes = userRow.FindElements(By.XPath(".//td[5]/div[@class='checkbox']"));
 						foreach (IWebElement checkbox in checkboxes)
 						{
@@ -101,6 +103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						throw new Exception("Failed to click move to next page");
 					}
 					pageNo++;
+					Delay.Seconds(4);
 					Report.Screenshot();
 
 				}
@@ -414,7 +417,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			while (pageNo < 10)
 			{
-				Delay.Seconds(1.5 * Delay.SpeedFactor);
+				Delay.Seconds(3 * Delay.SpeedFactor);
 
 				IWebElement myPageNumber = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/span[@class='current']"), 10).FirstOrDefault();
 
@@ -425,6 +428,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				foreach (IWebElement userRow in listOfUsersRows)
 				{
+					Delay.Seconds(2);
 					string myUsername = userRow.FindElement(By.XPath(".//td[1]")).Text;
 
 					if (myUsername == userName)
@@ -998,7 +1002,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				StewardshipList.Add(row["Stewardship"]);
 				IssueDateList.Add(row["Issue Date"]);
-				ExpireDateList.Add(row["Expire Date"]);
+				if (row["Expire Date"]=="Tomorrow")
+				{
+					var input = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+					ExpireDateList.Add(input);
+				}
+				else
+				{
+					ExpireDateList.Add(row["Expire Date"]);
+				}
+				
 			}
 
 			int k = 0;
@@ -1034,7 +1047,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				StewardshipList.Add(row["Stewardship"]);
 				IssueDateList.Add(row["Issue Date"]);
-				ExpireDateList.Add(row["Expire Date"]);
+				if (row["Expire Date"] == "Tomorrow")
+				{
+					string input = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+					ExpireDateList.Add(input);
+				}
+				else
+				{					
+					ExpireDateList.Add(row["Expire Date"]);
+				}
 			}
 
 			int k = 0;

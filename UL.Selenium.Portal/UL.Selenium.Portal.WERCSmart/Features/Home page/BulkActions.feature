@@ -100,6 +100,7 @@ Scenario: [76314] Forward Product - NR should Not Require UPC
 	Given I click continue on the Forward Product Registration page
 	Then I confirm the active Forward Product Registration tab is: Select UPCs
 	Given I select the first product under the Select UPCs tab
+	And If the Private Label textbox is showing in the Select UPCs screen, I enter the value: N/A
 	Given I click the Add To No Retailer button under the Select UPCs tab
 	And I select the UPC row: 'No UPC'/ 'No Retailer'
 	Given I click continue on the Forward Product Registration page
@@ -198,7 +199,7 @@ Scenario: [75129] Forward - Product in Submitted Status
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: saved as TestCase75129Email and saved name as: TestCase75129Supplier
 	And I call Shared Step 74655 SHA with email - Search by Supplier ID saved as TestCase75129Supplier for specific product status: Submitted and email: saved as TestCase75129Email
-	And I save a product which blue and has retailers as TestCase75129
+	And I save a product which blue and has retailers and at least 1 UCP as TestCase75129
 	And I save the retailers associated with product TestCase75129 as TestCase75129Retailers
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

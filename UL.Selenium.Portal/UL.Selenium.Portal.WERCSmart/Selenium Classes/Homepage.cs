@@ -249,6 +249,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return ResolveButton.TryClick();
 		}
 
+		//public bool DataConsentPopupPresent()
+		//{
+
+		//}
+
 	}
 
 

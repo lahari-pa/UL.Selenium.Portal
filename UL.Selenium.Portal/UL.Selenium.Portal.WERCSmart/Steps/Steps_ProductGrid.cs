@@ -1410,6 +1410,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(expectedOptions.All(x => displayedOptions.Contains(x)) && expectedOptions.Count == displayedOptions.Count,
 				$"The displayed options for filter {filter} did not match the expected options! Expected: {string.Join(", ", expectedOptions.Select(x => $"'{x}'").ToList())}. Actual: {string.Join(", ", displayedOptions.Select(x => $"'{x}'").ToList())}",
 				$"The displayed options for filter: {filter}' matched the expected options.");
+			var diff = expectedOptions.Except(displayedOptions);
+			var diff2 = displayedOptions.Except(expectedOptions);
+
 		}
 
 		[StepDefinition(@"I confirm retailers list based on environment")]
@@ -2290,6 +2293,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIConfirmTheProductsShownAreGreen()
 		{
 			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
+		}
+
+		[StepDefinition(@"I Confirm the Products shown display the Blue Colour Status - which is the Sending to Retailers")]
+		public void GivenIConfirmTheProductsShownAreBlue()
+		{
+			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Sending to Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
 		}
 
 		[StepDefinition(@"I edit the product saved as: (.*)")]

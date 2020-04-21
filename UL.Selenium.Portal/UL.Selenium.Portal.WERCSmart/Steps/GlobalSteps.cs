@@ -158,6 +158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selHomepage = new Homepage();
 			Report.IsTrue(selHomepage.WaitForContainerToBeVisible(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 			GeneralUtilities.Wait_for_load_finish();
+
 		}
 
 		public string GetEmailForAccount(string accountSavedAs)
@@ -215,6 +216,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
+				new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 			}
 			
 		}
@@ -844,6 +846,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					email = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
 				}
+				Delay.Seconds(10);
 
 				if (MailosaurFunctions.WaitForInboxDifferences(email))
 				{
@@ -851,6 +854,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Found " + differences.Count() + " emails");
 
 					Mailosaur.Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
+					Report.Info("Checking if an email that matches the criteria was found...");
 
 					if (shouldOrNot == "should")
 					{
@@ -1099,6 +1103,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("modal dialog is opened. ");
 				Report.IsTrue(thisModalDialog.Click_Closex(), "Failed to click close button", "Clicked close button");
+			}
+		}
+
+		[StepDefinition(@"I wait for a modal dialog to open")]
+		public void WaitForAModalDialogToOpen()
+		{
+			var thisModalDialog = new ModalDialog();
+			if (thisModalDialog.Wait_for_load(30))
+			{
+				Report.Success("Modal dialog is opened.");
+				
+			}
+			else
+			{
+				Report.Failure("A modal dialog is not open.");
+
 			}
 		}
 
@@ -1951,6 +1971,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IWaitForModalPopupToBeInVisible(int timeout = 30)
 		{
 			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing","The modal was gone");
+		}
+
+		[StepDefinition(@"I save the following text: (.*) as (.*)")]
+		public void SaveTextToContextAs(string text, string savedAs)
+		{
+			Context.AddToContext(savedAs, text);
 		}
 
 
