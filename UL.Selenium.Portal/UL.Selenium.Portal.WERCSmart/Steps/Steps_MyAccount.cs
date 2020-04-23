@@ -506,9 +506,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportSettings.StepCounter + " - I click Approve");
 			try
 			{
-				var modal = new ModalDialog();
-				
 
+				var modal = new ModalDialog();
+
+				modal.WaitForContainerToBeVisible(20);
 				Report.IsTrue(modal.ClickApprove(), "Could not click Approve in modal window", "Successfully clicked Approve in modal window");
 			}
 			catch (Exception ex)
@@ -1090,7 +1091,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Screenshot();
 					Report.Info("Saving YouTube window to context");
 					new GlobalSteps().SaveTheCurrentWindowAs("YouTube");
-					if (selYoutube.VideoDisplayed())
+					 if (selYoutube.VideoDisplayed())
 					{
 						string actualTitle = selYoutube.VideoTitle();
 						Report.IsTrue(actualTitle == videoTitle, "The video title did not match the expected text! Expected: " + videoTitle + " but found: " + actualTitle, "A video was displayed with the title: " + videoTitle + " as expected");

@@ -1857,6 +1857,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			//{
 			//	namesAsList.Add(item.Name);
 			//}
+
 			Report.IsTrue(!productLineOptions.Select(x => x.Name).ToList().Except(activeBrands).Any() && productLineOptions.Count == activeBrands.Count,
 				"The 'Product Line or Brand' drop down options were not limited exclusively to saved active brands. The options showing were: " + string.Join(", ", productLineOptions.Select(x => x.Name).ToList()),
 				"The 'Product Line or Brand' drop down options were limited exclusively to saved active brands as expected. The options showing were: " + string.Join(", ", productLineOptions.Select(x => x.Name).ToList()));
