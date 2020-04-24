@@ -513,6 +513,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I ensure the Data Consent Tier Sliders exist for the following tiers:")]
+		public void DataConsentTiersSlidersExist(Table expected)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier Sliders exist");
+			try
+			{
+				Report.Info("Ensure the Data Consent Tier Sliders exist");
+				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
+				{
+					Report.IsTrue(selRetailDetails.GetDataConsentTier("Tier " + row["Tier"]),
+						"Failed to find slider for Tier " + row["Tier"],
+						"Successfully found slider for Tier " + row["Tier"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I ensure the Data Consent Tier Sliders are set as follows:")]
 		public void DataConsentTiersSet(Table expected)
 		{
@@ -1197,6 +1219,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The Data Tier Details popup shows the following tabs:")]
 		public void DataTierDetailsPopUpShowsTheFollowingTabs(Table tabs)
 		{
+			Delay.Seconds(10);
 			var expectedTabs = new List<string>();
 			tabs.Rows.Cast<TableRow>().ToList().ForEach(x => expectedTabs.Add(x["Tab"]));
 			List<string> displayedTabs = new DataTierDetails().AllTabs();

@@ -254,7 +254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Info($"Tab: {tabName} was already active");
 				return true;
 			}
-			IWebElement tabEl = this.ProgressBar?.FindElement(By.XPath($".//div[contains(@class, 'prog-step')]//a/span[contains(text(),'{tabName}')]"), 2);
+			IWebElement tabEl = this.ProgressBar?.FindElement(By.XPath($".//div[contains(@class, 'prog-step')]//span[contains(text(),'{tabName}')]"), 2);
 			if (tabEl == null)
 			{
 				return false;
@@ -390,11 +390,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#endregion
 
 		#region classes
-		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit, NDCNo }
+		public enum Tab { ProductType, ProductCharacteristics, RetailerAssociation, RecipientAndUpcDetails, ReviewAndSubmit, NDCNo }
 
 		public static Dictionary<Tab, string> MapTabs = new Dictionary<Tab, string> {
 			{ Tab.ProductType , "Product Type" },
 			{ Tab.ProductCharacteristics , "Product Characteristics" },
+			{ Tab.RetailerAssociation , "Retailer Association" },
 			{ Tab.RecipientAndUpcDetails , "Recipient and UPC Details" },
 			{ Tab.ReviewAndSubmit , "Review and Submit" }
 		};

@@ -202,5 +202,3 @@ Scenario: [115255] CVS - Uses Updated Data Tier Consent Requirements (Included C
 	#Cannot create Grocery Products for cvs, waiting on dev response
 	#Then For CVS I create a product of type: Grocery (RUCC0389), save it as: CVSGroceryProduct1 and leave it in New Status
 	#Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSGroceryExcelFile and check that is shows the expected product saved as: CVSGroceryProduct1
-	
-

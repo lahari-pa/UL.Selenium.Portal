@@ -388,7 +388,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
-			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(@"I click Row Actions for product saved as: (.*)")]
