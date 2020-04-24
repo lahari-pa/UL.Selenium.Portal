@@ -823,6 +823,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new RetailPartnersDetails().ClickAddSupplierId(), "Failed to click add supplier id link",
 				"Successfully clicked add supplier id link");
+			Delay.Seconds(5);
 		}
 
 		[StepDefinition(@"I confirm the pop up shows the heading: (.*)")]
