@@ -7,6 +7,7 @@
 @NewProduct
 @ProductGrid
 @DataSummarySheet
+@MyIngredients
 @wercsmart
 @RetailPartners
 @run_ProductRegistration
@@ -480,4 +481,127 @@ Scenario: [105352] Product Comments screen Max input length
 	Given I navigate to the home page
 	Then I delete the product: TestCase105352
 
+	@ScenarioId:6627
+Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
+	Given I generate a random UPC number and save as: UPC79428
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
+	Then I save the product information as: TestCase79428
+	Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing79428Flav
+		| CASNumber  | ComponentName | Percentage |
+		| RR-38669-6 | FLAVORS       | 35         |
+	And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing79428Frag
+		| CASNumber | ComponentName                                                                  | Percentage |
+		| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 35         |
+	And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
+		| CASNumber | ComponentName | Percentage |
+		| 7726-95-6   | 6Bromine  | 30         |
+	Then in the Ingredients page I click Continue 
+	And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
+	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+	And I should see the Additional Documents to Provide Page
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	Then in the Additional documents page I click Continue
+	Then in the Formulation Names page I click Continue
+	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	And I should see the Sustainability Page
+	And In the New Product page I should be on tab: Review and Submit
+	Then I check if the logo is displayed for the following retailers
+	| Retailer	    |
+	| Canadian Tire |
+	| Costco        |
+	| CVS           |
+	| Dollar Tree   |
+	| Family Dollar |
+	| Target        |
+	| Walgreens     |
+	| Walmart       |
+
+	Then I check if a checkmark image is displayed above the following retailers
+	| Retailer      |
+	| Canadian Tire |
+	| Costco        |
+	| CVS           |
+	| Dollar Tree   |
+	| Family Dollar |
+	| Target        |
+	
+
+	Then I check if a yellow triangle image is displayed above the following retailers
+	| Retailer	    |
+	| Walgreens     |
+	| Walmart       |
+
+	Then I check if a 'Scope' button is displayed below the following retailers
+	| Retailer	    |
+	| Canadian Tire |
+	| Costco        |
+	| CVS           |
+	| Dollar Tree   |
+	| Family Dollar |
+	| Target        |
+	| Walgreens     |
+	| Walmart       |
+
+
+	#Update below to take retailer?
+	Then I hover over the yellow triangle image for retailer: Walgreens
+	Then I check if the text displayed over the yellow triangle image matches the following text: The following ingredients are on this WERCSmart Recipient's screening list for chemicals of concern. If your customer sells products within the Scope of this Recipient's program, it may impact your customer's relationship with the Retailer.
+	Then I hover over the yellow triangle image for retailer: Walmart
+	Then I check if the text displayed over the yellow triangle image matches the following text: The following ingredients are on this WERCSmart Recipient's screening list for chemicals of concern. If your customer sells products within the Scope of this Recipient's program, it may impact your customer's relationship with the Retailer.
+
+
+	Then I check if the retailer modal is displayed for the following retailer: CO
+	Then I check if the retailer modal is displaying the following text: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent.
+	Then I close the retailer modal
+
+	Then I check if the retailer modal is displayed for the following retailer: CV
+	Then I check if the retailer modal is displaying the following text: CVS requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2, Tier 3 and Tier 4.1 permissions: Artists/Hobby, Automotive Care, Cleaning Supplies, Health & Beauty, Home Improvement, Lawn and Garden, Miscellaneous, Nutritional Supplements, Over-the-Counter (OTC), Pet Care, Photography, Sporting Goods, Stationery and Pharmacy
+	Then I close the retailer modal
+
+	Then I check if the retailer modal is displayed for the following retailer: DT
+	Then I check if the retailer modal is displaying the following text: Dollar Tree requires suppliers of formulated products to grant Tier 2.1 and Tier 2.2 permissions.
+	Then I close the retailer modal
+
+	Then I check if the retailer modal is displayed for the following retailer: WM
+	Then I check if the retailer modal is displaying the following text: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys.
+	Then I close the retailer modal
+	Then in the Sustainability Information page I click Continue
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+
+
+	@ScenarioId:6674
+	Scenario: [122261] Sustainability Screen - Consent Not Granted Message
+	Given I generate a random UPC number and save as: UPC79428
+	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
+	Then I save the product information as: TestCase79428
+	Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing79428Flav
+		| CASNumber  | ComponentName | Percentage |
+		| RR-38669-6 | FLAVORS       | 35         |
+	And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing79428Frag
+		| CASNumber | ComponentName                                                                  | Percentage |
+		| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 35         |
+	And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
+		| CASNumber | ComponentName | Percentage |
+		| 50-00-0   | Formaldehyde  | 30         |
+	Then in the Ingredients page I click Continue 
+	Then The Formulation 3rd Party Step is shown
+    Then I call Shared Step 79491 (Formulation > 3rd Party - Accept formulation - Decline Tier 4.1 - Continue)
+	When I click continue
+	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+	And I should see the Additional Documents to Provide Page
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+	Then in the Additional documents page I click Continue
+	When I click continue
+	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	And I should see the Sustainability Page
+	Then I check if alert message displays the following text: You have not granted consent to requested Data Use Tiers for this component.  Your customer's products will not be fully screened and evaluated by any relevant WERCSmart Recipient chemical policy or product qualification program.  The results for each program is displayed above.  If you wish to update your consents for this component, please go to Product Characteristics / Formulation > Third-Party
+	When I click continue
 

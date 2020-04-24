@@ -103,11 +103,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductObject.CloseRetailerModal(), "Failed to close retailer modal", "Successfully closed retailer modal");
 		}
 
-		[StepDefinition(@"I hover over the yellow triangle image")]
-		public void ThenIHoverOverTheYellowTriangleImage()
+		[StepDefinition(@"I hover over the yellow triangle image for retailer: (.*)")]
+		public void ThenIHoverOverTheYellowTriangleImage(string retailer)
 		{
 			NewProduct newProductObject = new NewProduct();
-			Report.IsTrue(newProductObject.HoverOverYellowTriangleImage(), "Failed to hover over the yellow triangle image", "Successfully hovered over the yellow triangle image");
+			Report.IsTrue(newProductObject.HoverOverYellowTriangleImage(retailer), "Failed to hover over the yellow triangle image", "Successfully hovered over the yellow triangle image");
 		}
 
 

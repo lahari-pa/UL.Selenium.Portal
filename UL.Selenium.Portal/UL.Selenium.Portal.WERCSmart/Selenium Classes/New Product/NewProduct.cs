@@ -403,6 +403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public List<string> CheckIfRetailerLogoIsDisplayed(Table table)
 		{
 			var abbr = new RetailerAbbreviations();
+			
 			string selectedAbbr;
 			List<string> retailersThatAreNotDisplayingTheirLogo = new List<string>();
 
@@ -541,9 +542,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
-		public bool HoverOverYellowTriangleImage()
+		public bool HoverOverYellowTriangleImage(string retailer)
 		{
-			IWebElement yellowTrangleImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/DT.png']/../preceding-sibling::div//span//i[@class='fa fa-exclamation-triangle fa-3x']"), 2);
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr;
+			abbr.Map.TryGetValue(retailer, out selectedAbbr);
+
+			IWebElement yellowTrangleImage = this.containerElement.FindElement(By.XPath($@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/{selectedAbbr}.png']/../preceding-sibling::div//span//i[@class='fa fa-exclamation-triangle fa-3x']"), 2);
 
 			if (yellowTrangleImage != null)
 			{
