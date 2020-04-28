@@ -9,7 +9,7 @@
 @Pharma
 @DocumentAcceptance
 @UPC
-
+@run_Pharma
 Feature: Pharma
 
 
@@ -50,7 +50,7 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 #Replace file name with BB_Report_DataUsageTier_CurrentMonth_CurrentDay_CurrentYear.xlsx
-Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_20_2020.xlsx and save as Products in Scope Report for BBB
+Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_4_28_2020.xlsx and save as Products in Scope Report for BBB
 Then I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: 'Cleaning Supplies Product for BBB'
 Given I delete the excel file saved as Products in Scope Report for BBB
 
@@ -68,7 +68,7 @@ Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127870
 Given I click continue
-Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127870
 Then I click continue
@@ -88,7 +88,7 @@ Then I click continue
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127870, container type: Plastic Container, capsule count: 50  and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127870, container type: Plastic Container, capsule count: 50  and size: 1
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127870
 
 
@@ -104,7 +104,7 @@ Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127970
 Given I click continue
-Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127870
 Then I click continue
@@ -124,7 +124,7 @@ Then I click continue
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127970, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127970, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
@@ -151,7 +151,7 @@ Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128018
 Given I click continue
-Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase128018
 Then I click continue
@@ -171,7 +171,7 @@ Then I click continue
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
@@ -204,7 +204,7 @@ Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127847
 Given I click continue
-Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127847
 Then I click continue
@@ -224,7 +224,7 @@ Then I click continue
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
@@ -240,7 +240,6 @@ Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
-Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
 
 
@@ -255,7 +254,7 @@ Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127854
 Given I click continue
-Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127854
 Then I click continue
@@ -275,7 +274,7 @@ Then I click continue
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127854, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127854, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854
@@ -292,7 +291,7 @@ Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127791
 Given I click continue
-Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127791
 Then I click continue
@@ -318,7 +317,7 @@ Given In the Retailers tab, I select the first Vendor option for retailer: Wal-M
 Then I click continue
 Given I click the 'Add UPC' button
 And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127791, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127791, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
@@ -334,7 +333,6 @@ Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
-Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127791
 
 
@@ -347,7 +345,7 @@ Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127847
 Given I click continue
-Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): Prescription Pharmaceutical with Liquid Core
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Prescription Pharmaceutical with Liquid Core
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase127847
 Then I click continue
@@ -368,7 +366,7 @@ Then I click continue
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
@@ -393,7 +391,7 @@ Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128677
 Given I click continue
-Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase128677
 Then I click continue
@@ -418,7 +416,7 @@ Given I call Shared Step 130542 (UN Number - Pharma Flow - enter UN1950 select A
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128677, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128677, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
