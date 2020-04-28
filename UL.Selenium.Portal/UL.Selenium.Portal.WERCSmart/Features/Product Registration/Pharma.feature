@@ -7,7 +7,7 @@
 @NewProduct
 @RetailPartners
 @Pharma
-
+@run_Pharma
 Feature: Pharma
 
 
@@ -391,7 +391,8 @@ Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128677
 Given I click continue
-Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
+#Given I call Shared Step 57500 (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase128677
 Then I click continue
