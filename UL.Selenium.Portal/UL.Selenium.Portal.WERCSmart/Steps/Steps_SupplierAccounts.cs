@@ -148,14 +148,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			//create a product for Costco data tier
-			myProductsetup.CreateProductConditionerForCostcoAndTakeToDataSummary("product4", "Conditioner");
-			myHome.ClickItemInNavigationPanel("Retail Partners");
-			myRetailPartner.SelectRetailer("Costco");
-			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
-			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
-			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
-			myRetailPartner.GivenClickTheSaveChangesButton();
-			myRetailPartner.ClickCloseOnSavePopupDialog();
+			//myProductsetup.CreateProductConditionerForCostcoAndTakeToDataSummary("product4", "Conditioner");
+			//myHome.ClickItemInNavigationPanel("Retail Partners");
+			//myRetailPartner.SelectRetailer("Costco");
+			//myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			//myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			//myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			//myRetailPartner.GivenClickTheSaveChangesButton();
+			//myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			//create a product for Dollar Tree data tier
 			myProductsetup.CreateProductConditionerForDollarTreeAndTakeToDataSummary("product5", "Conditioner");
