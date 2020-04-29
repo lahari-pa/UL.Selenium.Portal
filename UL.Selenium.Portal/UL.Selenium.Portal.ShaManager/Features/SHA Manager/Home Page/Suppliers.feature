@@ -42,7 +42,6 @@ Then In the Supplier Manager Popup I click on the first supplier returned
 Then In The Supplier Manager popup I click on the category: Data Tier Consent
 Then In The Supplier Manager popup I check that the column: Retailer contains all values found in the table:
 | Expected Value                                           |
-| Costco                                                   |
 | Canadian Tire                                            |
 | CVS                                                      |
 | Target                                                   |

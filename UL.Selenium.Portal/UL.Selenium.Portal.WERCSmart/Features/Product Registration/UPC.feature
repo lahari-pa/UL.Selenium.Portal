@@ -510,7 +510,6 @@ Scenario: [84510] Select Retailers in UPC screen
 		| Amazon         |
 		| Autozone       |
 		| Best Buy       |
-		| Costco         |
 		| CVS            |
 		| Dollar General |
 		| Family Dollar  |
@@ -595,8 +594,7 @@ Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when 
 		| Retailer       |
 		| Amazon         |
 		| Autozone       |
-		| Best Buy       |
-		| Costco         |
+		| Best Buy       |		
 		| CVS            |
 		| Dollar General |
 	Given I click the 'Add UPC' button
@@ -840,7 +838,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And In the 'Select Retailers' window I select the retailer: Costco
+	And In the 'Select Retailers' window I select the retailer: Walgreens
 	And I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC120798, container type: Plastic Container and size: 12 click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -901,7 +899,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And In the 'Select Retailers' window I select the retailer: Costco
+	And In the 'Select Retailers' window I select the retailer: Walgreens
 	And I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC120798, container type: Plastic Container and size: 12 click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -928,8 +926,8 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120798)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Accepted
 	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase120798) for
-		| Retailer |
-		| Costco   |
+		| Retailer  |
+		| Walgreens |
 
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase120798
