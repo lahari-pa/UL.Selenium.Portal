@@ -6,6 +6,8 @@ using UL.Automation.Reporting.Functions;
 using UL.Automation.Selenium.Classes;
 using System.Collections.Generic;
 using TechTalk.SpecFlow;
+using System;
+using UL.Automation.Reporting.SpecFlow.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Philip
 {
@@ -15,6 +17,107 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public const string BasePath = "";
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
+
+
+
+
+		public bool SelectCheckBoxNextToWPSIDLabel(string selectOrDeselect)
+		{
+			IWebElement checkbox = this.containerElement.FindElement(By.XPath("//th[contains(text(), 'WPS ID')]/..//input[@type='checkbox']"), 2);
+
+			if (selectOrDeselect.ToLower() == "select")
+			{
+
+				checkbox.TryCheck();
+				return checkbox.Checked();
+
+			}
+			else
+			{
+
+				checkbox.TryCheck();
+				return !checkbox.Checked();
+
+			}
+
+		}
+
+		public bool ConfirmAllProductsInListAreChecked(string selectedOrDeselected)
+		{
+			IList <IWebElement> checkboxList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']"), 2);
+
+			foreach (IWebElement checkBox in checkboxList)
+			{
+				if (selectedOrDeselected.ToLower() == "selected")
+				{
+					if (!checkBox.Checked())
+					{
+						return false;
+					}
+				} else
+				{
+					if (checkBox.Checked())
+					{
+						return false;
+					}
+				}
+			}
+
+			return true;
+		}
+
+		public bool ClickMakeObsoleteButton()
+		{
+			IWebElement button = this.containerElement.FindElement(By.XPath("//button[contains(text(), 'Make Obsolete')]"), 2);
+			return button.TryClick();
+		}
+
+		public bool SelectCheckBoxInMakeObsoletePopup()
+		{
+			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//input[@type='checkbox']"), 2);
+			return checkBox.TryCheck();
+		}
+
+		public bool SelectRandomCheckBox(string savedAs)
+		{
+			IList<IWebElement> checkboxList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']"), 2);
+			IList<IWebElement> productIDList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']/../following-sibling::td[@data-bind='text: Product.ProductID']"), 2);
+			
+			Random rnd = new Random();
+			int randIndex = rnd.Next(1, checkboxList.Count);
+
+			if (checkboxList[randIndex].TryCheck())
+			{
+				Context.AddToContext(savedAs, productIDList[randIndex]);
+			}
+
+			return checkboxList[randIndex].TryCheck();
+		}
+
+		public bool CheckIfProductIsMissing(string productID)
+		{
+			IList<IWebElement> productIDList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']/../following-sibling::td[@data-bind='text: Product.ProductID']"), 2);
+
+			bool productIDMissing = true;
+
+			foreach (IWebElement productIDInList in productIDList)
+			{
+
+				if (productIDInList.Text == productID)
+				{
+					productIDMissing = false;
+				}
+				
+			}
+
+			return productIDMissing;
+
+		}
+
+
+
+
+
 
 
 		public bool CloseDialog()

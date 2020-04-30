@@ -1013,6 +1013,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new DeleteActiveProducts().Wait_for_load(),
 				"Delete Active Products page is not showing as expected.", "Delete Active Products page is showing");
+			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(@"I should see the header: Message Center on the Message Center window")]

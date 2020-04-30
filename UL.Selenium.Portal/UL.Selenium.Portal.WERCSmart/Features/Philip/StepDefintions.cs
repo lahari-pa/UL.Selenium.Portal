@@ -39,6 +39,77 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public string File { get; private set; }
 
 
+
+		[StepDefinition(@"I (select|deselect) the checkbox next to WPS ID in the Delete Active Products page")]
+		public void ThenISelectTheCheckboxNextToWPSIDInTheDeleteActiveProductsPage(string selectOrDeselect)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.SelectCheckBoxNextToWPSIDLabel(selectOrDeselect), "Failed to " + selectOrDeselect + " checkbox next to WPS ID Label", "Successfully  " + selectOrDeselect + "ed checkbox next to WPS ID Label");
+		}
+
+		[StepDefinition(@"I confirm all checkboxes are (selected|deselected) in the Delete Active Products page")]
+		public void ThenIConfirmAllCheckboxesAreSelectedInTheDeleteActiveProductsPage(string selectedOrDeselected)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.ConfirmAllProductsInListAreChecked(selectedOrDeselected), "Not all products in product list are " + selectedOrDeselected, "All products in product list are " + selectedOrDeselected);
+		}
+
+		[StepDefinition(@"I click on the Make Obsolete button")]
+		public void ThenIClickOnTheMakeObsoleteButton()
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.ClickMakeObsoleteButton(), "Failed to click 'Make Obsolete' button", "Successfully clicked 'Make Obsolete' button");
+		}
+
+		[StepDefinition(@"I select the checkbox in the Make Obsolete popup")]
+		public void ThenIClickOnTheCheckboxInTheMakeObsoletePopup()
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.SelectCheckBoxInMakeObsoletePopup(), "Failed to select the checkbox in the Make Obsolete popup", "Successfully selected the checkbox in the Make Obsolete popup");
+		}
+
+		[StepDefinition(@"In the Make Obsolete popup I click on the Accept button")]
+		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
+		{
+			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to click accept button", "Clicked accept button", true);
+			GeneralUtilities.Wait_for_load_finish();
+			Delay.Seconds(1);
+		}
+
+		[StepDefinition(@"I select a random products checkbox and save as: (.*)")]
+		public void ThenISelectARandomProductsCheckbox(string savedAs)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.SelectRandomCheckBox(savedAs), "Failed to select a random checkbox and save its corresponding product ID", "Successfully selected a random checkbox and save its corresponding product ID");
+		}
+
+		[StepDefinition(@"I make sure product saved as: (.*) is missing from the product list")]
+		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs)
+		{
+			WebElements webElementsObject = new WebElements();
+			var productID = Context.GetFromContext(savedAs);
+			Report.IsTrue(webElementsObject.CheckIfProductIsMissing(productID.ToString()), "The following product ID: " + productID + " should be missing but it was found in the product list", "The following product ID: " + productID + " was expected to be missing from the product list and it was");
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columnss:")]
 		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
