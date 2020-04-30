@@ -27,14 +27,14 @@ And I call Shared Step 57514 (Product Characteristics - Liquid Only available - 
 Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-And I call Shared Step  (Select Retailers Costco and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+And I call Shared Step  (Select Retailers Walgreens and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC85784, container type: Plastic Container and size: 12 click continue
 Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85784
 
 
 @ScenarioId:1255
-Scenario: [85785] Account Canada Address and Partial stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
+Scenario: [+] Account Canada Address and Partial stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
 Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
 Given I generate a random UPC number and save as: UPC85785
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
