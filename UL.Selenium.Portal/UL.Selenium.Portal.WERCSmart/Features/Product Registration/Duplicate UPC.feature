@@ -327,13 +327,13 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 		| Supplier    | QA_Automation_ProductsAccount |
 		| User        | saved as AccountUsername      |
 	And I find the UPC number for: 5 products in the grid and save them to context starting with: ExistingUPC
-	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100 with data:
+	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100
 	Given I navigate to the landing page
 	Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase91100
 	Given I edit the first product in results
 	Then  I should see the Universal Product Code (UPC) Page
-	And I click the 'Upload UPCs' button and upload the file saved as: test91100 with data:
+	And I click the 'Upload UPCs' button and upload the file saved as: test91100
 	Then I confirm that the Add Multiple UPC window opens
 	Then In the Add Multiple dialog box I select all UPCs
 	Then In the Add Multiple dialog box I select the packaging type: <first>
