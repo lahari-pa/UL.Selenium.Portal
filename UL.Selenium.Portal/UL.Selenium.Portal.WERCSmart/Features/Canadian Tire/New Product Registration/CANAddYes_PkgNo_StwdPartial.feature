@@ -34,7 +34,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @ScenarioId:1255
-Scenario: [+] Account Canada Address and Partial stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
+Scenario: [85785] Account Canada Address and Partial stewardship, SOLD = US Only, PL = NO, Packaging type IS NOT required
 Given I log in with the account saved in TReVor as: CanadaNoPkgStwdPartial
 Given I generate a random UPC number and save as: UPC85785
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
