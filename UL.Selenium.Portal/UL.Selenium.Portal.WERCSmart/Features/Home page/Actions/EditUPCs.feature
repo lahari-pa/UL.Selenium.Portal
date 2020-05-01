@@ -236,6 +236,11 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
+	 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+    Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120790)
+    Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120790 and its status is: Submitted
+	Given I navigate to the landing page
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase120790
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit UPCs

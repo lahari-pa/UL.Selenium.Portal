@@ -492,6 +492,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
+				Delay.Seconds(2);
 				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
@@ -538,6 +539,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
+				Delay.Seconds(2);
 				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
