@@ -163,6 +163,7 @@ Scenario: [56911] Retailer Detail Page - Your Supplier ID - Add New Supplier ID 
 	When I select the retailer: Sears
 	Then I should see the Retailer Detail page
 	Given I click on the Add new Supplier ID link
+	Then I Wait for a modal popup to appear
 	Then I confirm the pop up shows the heading: Add New Supplier
 	Then I confirm the pop up shows the Supplier ID heading and data entry field
 	Then I confirm the pop up shows the Company or Brand Name heading and data entry field

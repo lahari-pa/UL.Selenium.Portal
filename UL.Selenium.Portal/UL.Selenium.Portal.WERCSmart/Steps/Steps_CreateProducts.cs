@@ -100,8 +100,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsShared.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included");
 			Report.StartStep("Then I save the product information as: TestCase84109");
 			MyStepsNewProduct.SaveProductInformation(saveAs);
-			Report.StartStep("I call Shared Step 69687(Additional Product Information - US, No(PL))");
-			MyStepsShared.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			//Report.StartStep("I call Shared Step 69687(Additional Product Information - US, No(PL))");
+			//MyStepsShared.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			Report.StartStep("I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only");				
+			MyStepsShared.GivenICallSharedStep60935AdditionalProductInformation_US_DirectShip_PrivateLabelOnly();
+
+
 			Report.StartStep("I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			MyStepsShared.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 48369(Toxicity Characteristics Leaching Procedure(TCLP) - No to ALL With Copper)");
