@@ -1980,7 +1980,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.OpenNewTabAndNavigateTo(downloadsFolder + @"\TempPDF.pdf");
 				Report.Info($"tab opened");
 				Delay.Seconds(3);
-				string docURL2 = thisSHADocument.DocumentWindowOpen();
+				//string docURL2 = thisSHADocument.DocumentWindowOpen();
+				string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
 				Report.Info($"doc window opened");
 				Report.Screenshot();
 

@@ -224,6 +224,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 63704 \(Additional Product Information - US, No\(DSV\), No\(PL\), No\(GNFR\)\)")]
+		public void GivenICallSharedStepAdditionalProductInformationUSNoDSVNoPLNoGNFR()
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			if (myNewProduct.CountryofOriginExists())
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			}
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use",
+				"No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
 		//[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
 		//[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
 		//public void GivenICallSharedStepAdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
@@ -9824,5 +9843,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			  "Error message displayed is " + displayedMessage + " but expected " + expectedMessage,
 			  "Error Message displayed in section: " + section + "is displayed as: " + expectedMessage + " as expected");
 		}
+
+
 	}
 }

@@ -410,10 +410,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Select_ActivateDeactivate");
 			IWebElement myFirstPageNo = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']//li//a[contains(text(), '1')]"), 10).FirstOrDefault();
-			if(myFirstPageNo.Text=="1")
+			if (myFirstPageNo == null)
 			{
-				myFirstPageNo.TryClick();
-			}		
+				//Do Nothing, assume already on page 1
+			}
+			else
+			{
+				//if there are 10 or more pages the first element should be page 1 unless its already selected then the text will be 10 
+				if (myFirstPageNo.Text == "1")
+				{
+					myFirstPageNo.TryClick();
+				}
+			}					
 
 			int pageNo = 1;
 

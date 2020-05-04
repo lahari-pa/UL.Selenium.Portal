@@ -2007,6 +2007,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, text);
 		}
 
+		[StepDefinition(@"I Delete the file with name: (.*) from the downloads folder")]
+		public void DeleteFileFromDownloadsFolder(string fileName)
+		{
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(fileName), "", "");
+		}
+
+
+
 
 	}
 }
