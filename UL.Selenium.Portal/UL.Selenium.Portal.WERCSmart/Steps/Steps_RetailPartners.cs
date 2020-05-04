@@ -1379,8 +1379,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add New Supplier Dialog I click save")]
 		public void GivenInTheAddNewSupplierDialogIClickSave()
 		{
+		
 			var thisAddNewSupplier = new AddNewSupplier();
-			thisAddNewSupplier.ClickSave();
+			Report.IsTrue(thisAddNewSupplier.ClickSave(), "Failed to click save", "Successfully clicked save");			
 			Delay.Seconds(2);
 		}
 

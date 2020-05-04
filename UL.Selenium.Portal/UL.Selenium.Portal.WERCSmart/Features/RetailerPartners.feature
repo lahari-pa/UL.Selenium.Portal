@@ -294,6 +294,7 @@ Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New S
 	And The Supplier ID Table should be showing
 	Given I call Shared Step 58828 - Delete Supplier with ID: 654327
 	Given I click on the Add new Supplier ID link
+	Then I Wait for a modal popup to appear
 	And in the Add New Supplier Dialog I click save
 	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: This is a required field.
 	And in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: This is a required field.
