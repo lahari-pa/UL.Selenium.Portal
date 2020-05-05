@@ -33,7 +33,10 @@ Scenario: [57206] Retailer specific - CVS
 	And I click the back arrow next to CVS
 	Then I should see the Retail Partners page
 
+@tfs_design
+@CostcoRemoval
 @ScenarioId:466
+#Obsolete test case after costco removal (4/30/2020)
 Scenario: [57211] Retailer specific - Costco
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load

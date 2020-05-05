@@ -405,11 +405,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//select I have no stewardship numbers
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			Delay.Seconds(5);
 			myAccount.ClickIhaveNoStewardshipNumbers();
+			Delay.Seconds(5);
 			//modal wait and accept accept/ press YES
 			new GlobalSteps().WaitForAModalDialogToOpen();
 			new ModalDialog().ClickButton("YES");
-			Delay.Seconds(2);
+			Delay.Seconds(5);
 
 			//data tiers
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
