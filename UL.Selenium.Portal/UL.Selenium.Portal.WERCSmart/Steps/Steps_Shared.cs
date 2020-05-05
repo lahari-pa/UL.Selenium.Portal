@@ -9149,8 +9149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(
-			@"I call Shared Step 89286 - Additional Product Information - US and Canada - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP\(YES\), GNFR \(NO\), Continue")]
+		[StepDefinition(@"I call Shared Step 89286 - Additional Product Information - US and Canada - OSHA \(NO\), DSV \(NO\), PLP \(YES\), GNFR \(NO\), Continue")]
 		public void
 			USandCanadaPLPYes()
 		{

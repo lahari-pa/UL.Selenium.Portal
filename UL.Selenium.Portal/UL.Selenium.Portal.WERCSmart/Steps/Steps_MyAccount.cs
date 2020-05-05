@@ -714,8 +714,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Your Company User Accounts the user (.*) is associated with the administrator email address")]
 		public void UserIsAssociatedAdminEmail(string user)
 		{
+			Delay.Seconds(2);
 			var listOfUsers = (List<User>)Context.GetFromContext("userGrid");
 			User userMatch = listOfUsers.FirstOrDefault(x => x.Username == user);
+			Delay.Seconds(2);
 			Report.IsFalse(userMatch == null,
 				"The user: " + user + " was not found in the My Account user grid",
 				"The user: " + user + " was found in the My Account user grid");
@@ -725,10 +727,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
+			Delay.Seconds(2);
 			Report.Success("The user: " + user + " was found in the My Account user grid");
 			Report.Screenshot();
 			string adminEmail = new MyAccount().GetAdminEmail();
-
+			Delay.Seconds(2);
 			Report.IsTrue(userMatch.Email == adminEmail,
 				string.Format("The user: '{0}' was not associated with the email address: '{1}'",
 					user, adminEmail),

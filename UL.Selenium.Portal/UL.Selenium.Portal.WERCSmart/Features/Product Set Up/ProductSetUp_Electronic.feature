@@ -60,6 +60,8 @@ Scenario: [84511] Electronic Product from Completed status to Recertification
 	Given For product saved as: TestCase84511 the status is: Completed
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Data
+	And I should see the Update Registration popup
+	And In the Update Registration popup I click on button Yes	
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
 	Then I click Save in The Product Page
