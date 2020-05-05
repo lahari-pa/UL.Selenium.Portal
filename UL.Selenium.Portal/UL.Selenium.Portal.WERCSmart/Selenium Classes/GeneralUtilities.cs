@@ -490,6 +490,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info("List does not contain input");
 				}
 				Report.Info($"Failed to find the input retailer: {input} in the Retailer abbreviations list");
+				x++;
 				
 			}
 			return input;

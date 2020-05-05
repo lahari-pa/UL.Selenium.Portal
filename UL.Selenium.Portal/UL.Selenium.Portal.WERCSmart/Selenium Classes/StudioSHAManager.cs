@@ -415,18 +415,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Report.Info("Checkbox is already checked");
 							return true;
 						}
+						int x = 0;
+						bool clickedSuccess = false;
+						while (x<5 && clickedSuccess==false)
+						{
+							Delay.Seconds(2);
+							checkbox.TryClick();
+							if (checkbox.Checked())
+							{
+								Report.Screenshot();
+								clickedSuccess = true;
+								return true;
+							}
+							else
+							{
+								Report.Info("Attempted to check checkbox but failed.");
+									
+							}
+							x++;
 
-						checkbox.TryClick();						
-						if (checkbox.Checked())
-						{
-							Report.Screenshot();
-							return true;
 						}
-						else
+						if (clickedSuccess == false)
 						{
-							Report.Info("Attempted to check checkbox but failed.");
+							Report.Info("Final attempt to check checkbox failed.");
 							return false;
 						}
+						
 					}
 					else
 					{

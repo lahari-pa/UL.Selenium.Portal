@@ -1072,7 +1072,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int textboxesPerRow = 3;
 			for (int i = 0; i < TableData.Count() - 1; i += textboxesPerRow)
 			{
-
+				Report.Info($"Expected data was: {TableData[i].Text}, {TableData[i+1].Text}, {TableData[i+2].Text}");
+				Report.Info($"Found data was: {StewardshipList[k]}, {IssueDateList[k]}, {ExpireDateList[k]}");
 				if (!((TableData[i].Text == StewardshipList[k]) &&
 					(TableData[i + 1].Text == IssueDateList[k]) &&
 					(TableData[i + 2].Text == ExpireDateList[k])))

@@ -109,7 +109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
 				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 				IWebElement upcNameField = container.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/..//input"), 2);
-
+				Delay.Seconds(0.5);
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
 					try
@@ -165,7 +165,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				//}
 
-
+				Delay.Seconds(0.5);
 				IWebElement productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
 
 				string productNameDataBind = productNameOnlabelObj.GetAttribute("class");
@@ -217,7 +217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 
-
+				Delay.Seconds(0.5);
 
 				IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
 				if (info.ContainerType == "<first>")
@@ -252,7 +252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 				}
 				sizeField.EnterText(info.Size);
-
+				Delay.Seconds(0.5);
 				if (info.Quantity.Length > 0)
 				{
 					IWebElement quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity of Units within the Case']"), 2);
@@ -275,13 +275,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 
 				}
-
+				Delay.Seconds(0.5);
 				if (info.IndividualUpcCasePack.Length > 0)
 				{
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'upcContained.field')]"), 2);
 					packageField.Select(info.IndividualUpcCasePack);
 				}
-
+				Delay.Seconds(0.5);
 				if (info.TransportationOption.Length > 0)
 				{
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'transport.field')]"), 2);

@@ -939,6 +939,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsProductGrid.WhenIClickRowActionsForTheFirstProductReturned();
 			//And I click on the Row Action: Update Data
 			thisStepsProductGrid.ClickRowAction("Update Data");
+			thisStepsProductGrid.IShouldSeeTheUpdateRegistrationPopup();
+			thisStepsProductGrid.InUpdateRegistrationPopupIClickButton("Yes");
 			//#And If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 			//And I should see the The Product Page
 			newProductSteps.GivenIShouldSeeXPage("The Product");
