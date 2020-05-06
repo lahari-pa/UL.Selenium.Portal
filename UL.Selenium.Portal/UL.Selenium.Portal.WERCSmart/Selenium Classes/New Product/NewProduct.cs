@@ -4429,6 +4429,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public bool SelectRestrictUseOption(string retrictOption)
+		{
+			IWebElement restrictOptionCheckBox = this.containerElement.FindElement(By.XPath("//span[contains(text(),'" + retrictOption + "')]/preceding-sibling::input"), 2);
+			return restrictOptionCheckBox.TryCheck();
+		}
+
 
 	}
 

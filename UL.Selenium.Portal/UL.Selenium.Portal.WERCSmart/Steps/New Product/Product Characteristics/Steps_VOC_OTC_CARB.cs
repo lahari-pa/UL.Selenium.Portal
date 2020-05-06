@@ -142,5 +142,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 			Report.IsTrue(this._vocOtcCarb.VocContentAsUsedError() == null, "Expected no error but got: " + this._vocOtcCarb.VocContentAsUsedError(),
 				"Error is showing as expected");
 		}
+
+		[Given(@"In the VOC Acceptance section I agree")]
+		public void GivenInTheVOCAcceptanceSectionIAgree()
+		{
+			Report.IsTrue(this._vocOtcCarb.SelectAgreeInVOCAcceptance(), "Failed to select agree in VOC Acceptance",
+				"Successfully selected agree in VOC Acceptance");
+		}
+
+
 	}
 }

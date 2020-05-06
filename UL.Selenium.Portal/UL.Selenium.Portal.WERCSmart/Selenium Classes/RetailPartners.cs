@@ -140,13 +140,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CloseDialog()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog =-title-dialog-supplier-manager']//span[text()='close']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog =-title-dialog-supplier-manager']//span[text()='close']"), 2);
 			return el.TryClick();
 		}
 		public bool ConfirmTierHasCorrectMarkingForRetailer(string retailer, string[] tierArray, string mark)
 		{
-
-			IList<IWebElement> rowElementsArray = this.containerElement.FindElements(By.XPath("//td[contains(text(), '" + retailer + "')]//following-sibling::td"), 2);
+			IList<IWebElement> rowElementsArray = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//td[contains(text(), '" + retailer + "')]//following-sibling::td"), 2);
 
 			foreach (string str in tierArray)
 			{
@@ -216,33 +215,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickTabWithName(string tabName)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//a[text()='" + tabName + "']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[text()='" + tabName + "']"), 2);
 			return el.TryClick();
 		}
 		public bool ClickResultWithName(string resultName)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//td[@title='" + resultName + "']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@title='" + resultName + "']"), 2);
 			return el.TryClick();
 		}
 		public bool SearchTheFollowingText(string searchText)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@id='textSupplierSearch']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='textSupplierSearch']"), 2);
 			return el.TryEnterText(searchText);
 		}
 		public bool ClickSearchButton()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//button[@id='supplierSearchButton']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='supplierSearchButton']"), 2);
 			return el.TryClick();
 		}
 
 		public bool ClickSuppliersButton()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//a[text()='Suppliers']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[text()='Suppliers']"), 2);
 			return el.TryClick();
 		}
 		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[text()='" + radioButtonText + "']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[contains(text(), \"" + radioButtonText + "\")]"), 2);
 
 			if (shouldOrShouldNot.ToLower() == "should")
 			{
@@ -273,7 +272,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckIfAISIsUploaded()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click \"Browse\"')]"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click ')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -284,19 +283,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public bool CheckProductInformation()
+		public bool CheckProductInformation(string id, string productType, string productAccessCode)
 		{
-			Delay.Seconds(5);
-			IWebElement productID = this.containerElement.FindElement(By.XPath("//div[@data-bind='html: html']//br[1]/preceding-sibling::text()[1]"), 2);
-			IWebElement productType = this.containerElement.FindElement(By.XPath("//div[@data-bind='html: html']//br[1]/following-sibling::text()[1]"), 2);
-			IWebElement productAccessCode = this.containerElement.FindElement(By.XPath("//div[@data-bind='html: html']//br[2]/following-sibling::text()[1]"), 2);
 
-			if (productID != null && productType != null && productAccessCode != null)
+			IWebElement accessCode = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@data-bind='html: html']"), 2);
+			string accessCodeText = accessCode.Text;
+
+			if (!accessCodeText.Contains(id))
 			{
-				return true;
+
+				Report.Info("Product ID does not match");
+				return false;
+
+			} else if (!accessCodeText.Contains(productType))
+			{
+
+				Report.Info("Product Type does not match");
+				return false;
+
+			} else if (!accessCodeText.Contains("Access Code: " + productAccessCode))
+			{
+
+				Report.Info("Product ID does not match");
+				return false;
+
 			}
 
-			return false;
+			return true;
 
 		}
 	}

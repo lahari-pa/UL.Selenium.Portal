@@ -230,12 +230,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I should see the (.*) Page for the New Product")]
 		public void GivenIShouldSeeXPage(string page)
 		{
-			//if (NewProduct.WaitForContainerToBeVisible())
-			//{
+			if (NewProduct.WaitForContainerToBeVisible())
+			{
 				Report.IsTrue(NewProduct.WaitForSection(page), page + " is not showing when it was expected to", page + " is showing as expected");
 				return;
-			//}
-			//Report.Failure("New product page was not visible");
+			}
+			Report.Failure("New product page was not visible");
 			Report.Screenshot();
 		}
 
@@ -2874,22 +2874,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(@"In the Restict Use page I select Do Not Restict")]
+		[StepDefinition(@"In the Restict Use page I select Do Not Restrict")]
 		public void DoNotRestrictUse_Restrict()
 		{
 			ReportSettings.UseSubSteps = true;
 			Report.Info("Selecting No in the Restrict Use section");
-			var MyStepsNewProduct = new StepsNewProduct();
-			var restrictUse = new Table("Section");
-			restrictUse.AddRow("Do you want to restrict searchable access to your registered formula?");
-			MyStepsNewProduct.CheckDisplayedSections("see", restrictUse);
-			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-				"Do you want to restrict searchable access to your registered formula?",
-				"Do Not Restrict � Formula is searchable in WERCSmart and does not require an access code"));
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Do you want to restrict searchable access to your registered formula?",
-				"� Formula is searchable in WERCSmart and does not require an access code");
+			var NewProductObject = new NewProduct();
+			Report.IsTrue(NewProductObject.SelectRestrictUseOption(" – Formula is searchable in WERCSmart and does not require an access code") , "Failed to select restriction option", "Successfully selected restriction option");
 			Report.StartStep("in the Restrict Use page I click continue");
+			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
 		}
 		[StepDefinition(@"I confirm the UPC table area is shown in red highlight")]

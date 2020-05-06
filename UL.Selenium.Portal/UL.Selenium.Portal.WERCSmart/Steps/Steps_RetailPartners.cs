@@ -623,6 +623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(selDataEntryChanges.ClickClose(), "Failed to click close", "Clicked close successfully!");
 			}
+ 			Delay.Seconds(0);
 		}
 
 		[StepDefinition(@"if the save button is visible, I save changes and close the popup dialog")]
@@ -955,7 +956,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.Info("Found unexpected column title: " + ColumnTitle + ".");
 						}
 					}
-					Report.Failure("Found " + unexpectedCount + " unexpected columns.", false);
+					Report.Info("Found " + unexpectedCount + " unexpected columns.", false);
 				}
 
 				foreach (TableRow thisRow in table.Rows)
@@ -2195,7 +2196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"Select the '(.*)' Tab")]
+		[StepDefinition(@"Select the '(.*)' Tab in Supplier Manager")]
 		public void ThenSelectTheTab(string tabName)
 		{
 			RetailPartners retailPartnersObject = new RetailPartners();
@@ -2204,15 +2205,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"Select the '(.*)'")]
+		[StepDefinition(@"Select the supplier with the following name in Supplier Manager: '(.*)'")]
 		public void ThenSelectThe_Staging(string selectedResult)
 		{
 			RetailPartners retailPartnersObject = new RetailPartners();
 			Report.IsTrue(retailPartnersObject.ClickResultWithName(selectedResult), "Failed to click result with name: " + selectedResult, "Successfully clicked result with name: " + selectedResult);
+			Delay.Seconds(5);
 		}
 
 
-		[StepDefinition(@"Search for '(.*)' Vendor")]
+		[StepDefinition(@"Search for the supplier with the following name in Supplier Manager: '(.*)'")]
 		public void ThenSearchForVendor(string text)
 		{
 			RetailPartners retailPartnersObject = new RetailPartners();
@@ -2221,7 +2223,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I Click 'Suppliers'")]
+		[StepDefinition(@"I Click 'Suppliers' in SHA Manager")]
 		public void ThenIClick()
 		{
 			RetailPartners retailPartnersObject = new RetailPartners();
@@ -2247,14 +2249,66 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
 		{
 			RetailPartners retailPartnersObject = new RetailPartners();
-			string testCaseId;
-			var obj = Context.GetFromContext(productID);
-			Report.Info("Attempting to convert Product to type ProductInformation");
-			var Product = (ProductInformation)obj;
-			Report.Info("Attempting to delete: " + Product.Name);
-			testCaseId = Product.Id;
-			Report.Info("ProductID: " + testCaseId + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
-			Report.IsTrue(retailPartnersObject.CheckProductInformation(), "Failed to check product information", "Successfully checked product information");
+			string savedAs = productID;
+			try
+			{
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Report.Info("ProductID: " + id + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
+				Report.IsTrue(retailPartnersObject.CheckProductInformation(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
+
+			}
+			catch (Exception ex)
+			{
+
+				Report.Failure(ex.Message);
+				throw;
+			}
+
 		}
 	}
 
