@@ -342,6 +342,7 @@
     </None>
     <None Include="Features\Basic Tests.feature">
     </None>
+    <None Include="Features\Battery.feature" />
     <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd2.feature" />
     <None Include="Features\Canadian Tire\Forwarding\AccountHasStewardship.feature">
     </None>
@@ -531,6 +532,7 @@
     </None>
     <None Include="Features\Security Roles.feature">
     </None>
+    <None Include="Features\SHA Manager Supplier Records.feature" />
     <None Include="Features\SHA Search.feature" />
     <None Include="Features\Signup.feature">
     </None>

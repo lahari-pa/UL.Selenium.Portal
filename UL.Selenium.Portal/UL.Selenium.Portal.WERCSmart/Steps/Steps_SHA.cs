@@ -3757,6 +3757,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSHAManagerObject.ConfirmUInSecondColumn(ID), "Failed to find 'U' next to product with product ID: " + ID, "Successfully found a 'U' next to product with product ID: " + ID);
 		}
 
+		[StepDefinition(@"I Close 'Supplier Manager'")]
+		public void ThenICloseSupplierManager()
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			Report.IsTrue(studioSHAManagerObject.CloseDialog(), "Failed to close dialog", "Successfully closed dialog");
+		}
+
+
+		[StepDefinition(@"Confirm that '(.*)' shows (.*) marked with a '(.*)'")]
+		public void ThenConfirmThatShowsTierTierAndTierMarkedWithA(string supplier, string tiers, string marked)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			var arr = tiers.Split(',');
+			Report.IsTrue(retailPartnersObject.ConfirmTierHasCorrectMarkingForRetailer(supplier, arr, marked), "Failed to confirm all tier markings", "Successfully confirmed all tier markings");
+		}
+
+
+		[StepDefinition(@"Select the '(.*)' Tab in Supplier Manager")]
+		public void ThenSelectTheTab(string tabName)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.ClickTabWithName(tabName), "Failed to the following tab: " + tabName, "Successfully clicked the following tab: " + tabName);
+			Delay.Seconds(5);
+		}
+
+
+		[StepDefinition(@"Select the supplier with the following name in Supplier Manager: '(.*)'")]
+		public void ThenSelectThe_Staging(string selectedResult)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.ClickResultWithName(selectedResult), "Failed to click result with name: " + selectedResult, "Successfully clicked result with name: " + selectedResult);
+			Delay.Seconds(5);
+		}
+
+
+		[StepDefinition(@"Search for the supplier with the following name in Supplier Manager: '(.*)'")]
+		public void ThenSearchForVendor(string text)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.SearchTheFollowingText(text), "Failed to search for the following text: " + text, "Successfully searched for the following text: " + text);
+			Report.IsTrue(retailPartnersObject.ClickSearchButton(), "Failed to click the search button", "Successfully clicked the search button");
+		}
+
+
+		[StepDefinition(@"I Click 'Suppliers' in SHA Manager")]
+		public void ThenIClick()
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
+		}
+
 	}
 
 }

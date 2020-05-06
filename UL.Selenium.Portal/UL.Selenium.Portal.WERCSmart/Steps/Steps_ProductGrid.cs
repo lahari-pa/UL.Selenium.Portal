@@ -177,6 +177,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					ProductIdField = id
 				};
 				GeneralUtilities.Wait_for_load_finish();
+				Delay.Seconds(10);
 				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + id + "'!", "Product was returned!");
 			}
 			catch (Exception ex)

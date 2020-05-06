@@ -1221,6 +1221,33 @@ And In the Advanced Reporting popup I verify I cannot select report Obsoleted Pr
 And Verify no Advanced Report exists with description reading: List of Obsoleted Products, with Supplier Name and User
 
 
-	
-	
+Scenario: [127901] SHA - Actions - Advanced Reporting - Daily Report - Data Tier Consent
 
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I select the: Daily Report - Data Tier Consent report from Advanced Reporting in SHA
+Given In the Advanced Reporting popup I click Submit
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Then I select the: Daily Report - Data Tier Consent report from Advanced Reporting in SHA
+Then In the Advanced Reporting popup I click Submit
+And I wait for the Advanced Reporting Preparing Report popup to disappear
+Given I confirm that an excel file is produced called Daily Report - Data Tier Consent.xls and save as 127901
+And I confirm the excel file saved as 127901 can be opened and contains data
+Then I confirm that the excel file saved as: 127901 includes the following columns:
+		| Column |
+		| Client |	
+Then I confirm that the excel file saved as: 127901 contains the following retailers:
+| Retailer            |
+| Dollar General      |
+| Costco              |
+| Canadian Tire       |
+| CVS                 |
+| Rite Aid            |
+| Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops) |
+| Target              |
+| Walgreens           |
+| Family Dollar       |
+| Walmart             |
+| Amazon              |
+| Dollar Tree         |
+Given I delete the Advanced Report file saved as 127901
+Given I Click close in the Advanced Reporting Popup
