@@ -19,7 +19,17 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
 
+		public bool ClickFilterButtonInDeleteActiveProductsPage()
+		{
+			IWebElement filterButton = this.containerElement.FindElement(By.XPath("//button[@data-bind='click: searchProducts']"), 2);
+			return filterButton.TryClick();
+		}
 
+		public bool EnterTextInSearchBarInDeleteActiveProductsPage(string upcNumber)
+		{
+			IWebElement searchBar = this.containerElement.FindElement(By.XPath("//input[@data-bind='textInput: upcNumber']"), 2);
+			return searchBar.TryEnterText(upcNumber);
+		}
 
 		public bool SelectCheckBoxNextToWPSIDLabel(string selectOrDeselect)
 		{

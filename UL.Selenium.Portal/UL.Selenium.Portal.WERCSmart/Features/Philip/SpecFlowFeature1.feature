@@ -241,25 +241,27 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Then I generate a random UPC number and save as: UPC88826
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And In the 'Select Retailers' window I select the retailer: Costco
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| CASNumber | ComponentName       | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+	|           | Water               | 100     | false               |            | false       |
+	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And In the 'Select Retailers' window I select the retailer: CVS
 	And I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC88826, container type: Plastic Container and size: 12 click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	#Then in the Additional Documents to Provide page I click Continue
-	#Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	#Given I navigate to the home page
-	#Given I click Bulk Actions in the Products Grid
-	#And I click Delete Products in the Bulk Actions window
-	#And I should see the header: Delete Active Products on the Delete Active Product window
-	##Search for product
-	##Click filter
-	#Then I make sure product saved as: selectedProduct is missing from the product list
-	#Then I click on the Make Obsolete button
-	#Then I select the checkbox in the Make Obsolete popup
-	#Then In the Make Obsolete popup I click on the Accept button
-	#Then I make sure product saved as: selectedProduct is missing from the product list
-	#Given I navigate to the home page
-	#Given I search for the product saved as: TestCase88826
-	##Confirm product not shown
+	Then in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I navigate to the home page
+	Given I click Bulk Actions in the Products Grid
+	And I click Delete Products in the Bulk Actions window
+	And I should see the header: Delete Active Products on the Delete Active Product window
+	Then In the Delete Active Products page I search for UPC saved as: UPC88826
+	Then In the Delete Active Products page I click the Filter button
+	Then I make sure product saved as: selectedProduct is missing from the product list
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Accept button
+	Then I make sure product saved as: selectedProduct is missing from the product list
+	Given I navigate to the home page
+	Given I search for the product saved as: TestCase88826
+	#Confirm product not shown

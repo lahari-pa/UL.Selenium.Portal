@@ -38,7 +38,20 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public object TheProduct { get; private set; }
 		public string File { get; private set; }
 
+		[StepDefinition(@"In the Delete Active Products page I click the Filter button")]
+		public void ThenInTheDeleteActiveProductsPageIClickTheFilterButton()
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.ClickFilterButtonInDeleteActiveProductsPage(), "Failed to click Filter button", "Successfully clicked Filter button");
+		}
 
+		[StepDefinition(@"In the Delete Active Products page I search for UPC saved as: (.*)")]
+		public void ThenInTheDeleteActiveProductsPageISearchForUPCSavedAsUPC(string upcNumber)
+		{
+			WebElements webElementsObject = new WebElements();
+			upcNumber = Context.GetFromContext(upcNumber).ToString();
+			Report.IsTrue(webElementsObject.EnterTextInSearchBarInDeleteActiveProductsPage(upcNumber), "Failed to enter UPC number in the searchbar", "Successfully entered UPC number in the searchbar");
+		}
 
 		[StepDefinition(@"I (select|deselect) the checkbox next to WPS ID in the Delete Active Products page")]
 		public void ThenISelectTheCheckboxNextToWPSIDInTheDeleteActiveProductsPage(string selectOrDeselect)
