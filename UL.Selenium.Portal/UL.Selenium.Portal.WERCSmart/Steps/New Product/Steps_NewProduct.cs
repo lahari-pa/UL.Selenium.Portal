@@ -2983,6 +2983,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var NewProductObject = new NewProduct();
 			Report.IsTrue(NewProductObject.CheckAlertMessageText(displayedText), "The alert message text did not match", "The alert message text did match");
 		}
+
+		[StepDefinition(@"In the Additional Product Information Page, I ensure that for 'countries the product may be sold in' only Canada is selected")]
+		public void InAdditionalProductInformationPageEnsureOnlySoldInCanada()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();		
+			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+
+			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+
+		}
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

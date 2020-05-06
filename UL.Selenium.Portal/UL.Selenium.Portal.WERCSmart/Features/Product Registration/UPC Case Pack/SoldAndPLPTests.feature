@@ -178,7 +178,14 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase88198
 	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
-	#Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	#Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))	
+	Then In the Additional Product Information Page, I ensure that for 'countries the product may be sold in' only Canada is selected
+	And I set the Product is shipped directly by supplier to the consumer field to: No
+	And I set the Product is a Retailer's Private Label or Brand field to: No
+	And in the Additional Product Information page I click Continue
+
+
+
 
 	Given I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 
