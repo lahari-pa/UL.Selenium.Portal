@@ -2,6 +2,7 @@
 @NewProduct
 @ProductGrid
 @RetailPartners
+@NewProduct
 @run_Battery
 
 Feature: Battery
@@ -24,7 +25,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 |           | Potassium hydroxide | 20.5    | false               |            | false       |
 |           | Zinc chloride       | 9.5     | false               |            | false       |
 |           | Aqua                | 70      | false               |            | false       |
-Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+Given I call Shared Step 132375 (Waste Classification Data - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59273 with container type: Metal Container size: 40.0 and quantity: 100
 Given I should see the Regulatory Documents to Provide Page

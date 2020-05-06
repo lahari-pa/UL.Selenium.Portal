@@ -138,11 +138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		//Jacob
 
-		public bool CloseDialog()
-		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog =-title-dialog-supplier-manager']//span[text()='close']"), 2);
-			return el.TryClick();
-		}
+		
 		public bool ConfirmTierHasCorrectMarkingForRetailer(string retailer, string[] tierArray, string mark)
 		{
 			IList<IWebElement> rowElementsArray = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//td[contains(text(), '" + retailer + "')]//following-sibling::td"), 2);

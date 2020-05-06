@@ -25,10 +25,7 @@ Feature: Pharma
 #Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 #| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 #| Ethyl Alcohol | 100     | false               | false       |            |
-#Given I should see the Waste Classification Data Page
-#Given For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
-#Given I set 'Prop65' to: No
-#When I click continue
+#And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 #Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 #Given I set the UN Number option to: UN1791
 #Given I set the Technical Name (if applicable) option to: Ethanol Solutions
@@ -56,7 +53,7 @@ Feature: Pharma
 #Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
 #Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 #Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
-#Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_5_5_2020.xlsx and save as Products in Scope Report for BBB
+#Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
 #Then I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: 'Cleaning Supplies Product for BBB'
 #Given I delete the excel file saved as Products in Scope Report for BBB
 
@@ -97,7 +94,7 @@ Given I set the Is the product regulated for transport (before exceptions or exe
 Then I click continue
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127870, container type: Plastic Container, capsule count: 50  and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127870, container type: Plastic Container, capsule count: 50 and size: 1
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127870
 
 

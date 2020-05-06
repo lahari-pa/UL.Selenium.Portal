@@ -1,5 +1,5 @@
 ﻿@Shared
-@RetailPartners
+@SHA
 @run_SHAManagerSupplierRecords
 Feature: SHA Manager Supplier Records
 
@@ -12,7 +12,6 @@ Then Search for the supplier with the following name in Supplier Manager: 'The W
 Then Select the supplier with the following name in Supplier Manager: 'The WERCS LTD - STAGING'
 Then Select the 'Data Tier Consent' Tab in Supplier Manager
 Then Confirm that 'Dollar General' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
-Then Confirm that 'Costco' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
 Then Confirm that 'Canadian Tire' shows Tier 1,Tier 2.1,Tier 2.2 marked with a 'Y'
 Then Confirm that 'CVS' shows Tier 1,Tier 2.1,Tier 2.2,Tier 3 marked with a 'Y'
 Then Confirm that 'Rite Aid' shows Tier 1,Tier 2.1,Tier 2.2,Tier 3 marked with a 'Y'
