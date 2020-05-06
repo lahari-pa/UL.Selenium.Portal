@@ -933,6 +933,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckValueOfEachProductFromFile(string value, string file, string savedAs)
 		{
+			//may need fixing to adapt the offset value(currently 21)
 			new UPC().GetFile(file, savedAs);
 			var actualFile = Context.GetFromContext(savedAs);
 			List<string> fileData = new UPC().GetFileData(savedAs, actualFile);
@@ -1017,8 +1018,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string retailerAbbr = new RetailerAbbreviations().TryConvertToAbbreviation($"{retailer}");
 			offset = fileData.FindIndex(x => x.Equals($"{retailerAbbr}: {value}"));
 
-			IList<IWebElement> valueList = multipleUPCModal.FindElements(By.XPath($".//td[{retailerIndex + 1}]//span[@data-bind='{spanDataBind}']"), 2);
-			int i = 21 + offset;
+			//List<IWebElement> wantedCells = multipleUPCModal.FindElements(By.XPath($".//td[{retailerIndex + 1}]"), 2).ToList();
+
+			IList<IWebElement> valueList = multipleUPCModal.FindElements(By.XPath($".//td[{retailerIndex + 1}]"), 2);
+
+			int q = 0;
+			bool finalHeaderFound = false;
+			foreach(var el in fileData)
+			{
+				int y = 0;
+				var isNumeric = Regex.IsMatch(el, @"^\d+$");
+				if (el.Length==12 && isNumeric)
+				{
+					finalHeaderFound = true;
+					break;
+				}
+				q++;
+			}
+			if(finalHeaderFound==false)
+			{
+				Report.Info("Was not able to find the number of headers, could not find the first UPC number in the file data");
+				return false;
+			}
+			//IList <IWebElement> valueList = multipleUPCModal.FindElements(By.XPath($".//td[{retailerIndex + 1}]//span[@data-bind='{spanDataBind}']"), 2);
+			int i = q + offset;
 
 			if (valueList.Count == 0)
 			{
@@ -1034,7 +1057,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info("error: popup contains: " + valueString + "while file data contains: " + fileData[i] + " in row " + i);
 					return false;
 				}
-				i = i + 21;
+				i = i + q;
 			}
 			return true;
 		}

@@ -1,6 +1,7 @@
-﻿@ProductGrid
+@ProductGrid
 @ForwardProductRegistration
 @NewProduct
+@wercsmart
 @RetailPartners
 @MessageCenter
 @MyAccount
@@ -15,6 +16,7 @@
 @ProductSetUp
 @ViewUpcs
 @Shared
+@CreateProducts
 @run_Forwarding
 Feature: Forwarding
 
@@ -38,3 +40,30 @@ Scenario: [86003] Forward Product - US Only - PL = No, Packaging type not requir
 	And I select the true radio for the 'Are Statements True' question under the Review and Submit tab
 	And I click continue on the Forward Product Registration page
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+
+@ScenarioId:6946
+Scenario: [115393] Forward Product - Target - Does not require DPCI
+	Then I create a Chalk product for Amazon and Proccess it through to Accepted
+	Given I navigate to the landing page
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#Then I save the following text: 1621940 as TestCase87685
+	And I filter for the product saved as: TestCase87685
+	And I Confirm the Products shown display the Blue Colour Status - which is the Sending to Retailers
+	Given I click Bulk Actions in the Products Grid
+	Then I should see a popup with header Bulk Actions
+	Given I click Forward Product Registration in the Bulk Actions window
+	And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
+	And I confirm the active Forward Product Registration tab is: Select Products
+	Given I select the product with ID saved as: TestCase87685 under the Select Products tab
+	Given I click continue on the Forward Product Registration page
+	Then I confirm the active Forward Product Registration tab is: Select Retailers
+	And in the Select Retailers tab under Forward Product Registration I select the retailer: Target
+	Given I click continue on the Forward Product Registration page
+	Then I confirm the active Forward Product Registration tab is: Select UPCs
+	Given I select the first product under the Select UPCs tab
+	Then I select the first UPC in the grid under the Select UPCs tab
+	Given I click continue on the Forward Product Registration page
+	And I should see the subheading 3: Product Results on the Forward Product Registration window
+	And I confirm that there are NO Errors displayed for the Product
+	And I click continue on the Forward Product Registration page
+	Then I should see the subheading 3: Review & Submit on the Forward Product Registration window

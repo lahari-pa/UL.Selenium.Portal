@@ -1213,6 +1213,13 @@ Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 		| UPC Requested Response    |
 	Then I delete the Advanced Report file saved as 124994
 
+@ScenarioId:1568
+Scenario:[112754] SHA Manager: Advanced Reports: Obsolete Report: Obsoleted Products
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And In SHA Manager - Select Actions - Advanced Reporting
+And In the Advanced Reporting popup I verify I cannot select report Obsoleted Products
+And Verify no Advanced Report exists with description reading: List of Obsoleted Products, with Supplier Name and User
+
 
 Scenario: [127901] SHA - Actions - Advanced Reporting - Daily Report - Data Tier Consent
 

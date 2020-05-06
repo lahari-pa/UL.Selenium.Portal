@@ -436,6 +436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Success("Successfully selected product with ID: " + id_);
 						Report.Screenshot();
 						clicked = true;
+						Report.IsTrue(selForwardProductReg.CheckProductsRightPanel_CheckProductByID(id_), "The Product was not showing in the right panel", "The product was showing in the right panel");
 						break;
 					}
 				}
@@ -474,6 +475,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
 					"Failed to select the product with ID: " + id + "!",
 					"Successfully selected the product with ID: " + id);
+				Report.IsTrue(selForwardProductReg.CheckProductsRightPanel_CheckProductByID(id), "The Product was not showing in the right panel", "The product was showing in the rigt panel");
+				
 			}
 		}
 

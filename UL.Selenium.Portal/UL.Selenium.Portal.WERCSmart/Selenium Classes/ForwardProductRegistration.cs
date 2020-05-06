@@ -665,6 +665,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return productRow.FindElement(By.XPath($".//ancestor::tr//td//input[@type='checkbox']"), 2).TryClick();
 		}
 
+		public bool CheckProductsRightPanel_CheckProductByID(string id)
+		{
+			IWebElement productRow = this.containerElement.WaitUntilElementVisible(By.XPath($"//table[contains(@data-bind,'selectedProds')]//tr//td//label[contains(text(),'{id}')]"), 10);
+			if (productRow == null)
+			{
+				Report.Info("Could not find product row for product ID: " + id);
+				return false;
+			}
+			return productRow != null;
+		}
+
 		public bool EnterPrivateLabelIfExists(string value)
 		{
 			IWebElement privateLabelInput = this.containerElement.FindElement(By.XPath(@"//label[contains(text(), 'Private Label')]/following-sibling::input"), 2);

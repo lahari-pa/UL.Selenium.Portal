@@ -28,12 +28,6 @@
 @run_Sprint16
 Feature: Sprint 16
 
-@ScenarioId:1568
-Scenario:[112754] SHA Manager: Advanced Reports: Obsolete Report: Obsoleted Products
-	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	And In SHA Manager - Select Actions - Advanced Reporting
-	And In the Advanced Reporting popup I verify I cannot select report Obsoleted Products
-	And Verify no Advanced Report exists with description reading: List of Obsoleted Products, with Supplier Name and User
 
 @ScenarioId:1575
 Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 200 to 500 Characters and Spaces.
