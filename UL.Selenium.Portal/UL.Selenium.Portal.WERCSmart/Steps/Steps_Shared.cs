@@ -1,8 +1,3 @@
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
-using UL.Automation.Utilities.Functions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -12,7 +7,13 @@ using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
 using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -21,7 +22,6 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
-using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -4070,7 +4070,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I should see the WHMIS SDS question");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
 			Report.StartStep("I should see the WHMIS Label question");
-			MyNewProduct.ThenFieldExists("WHMIS-compliant label, English and French-Canadian");
+			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian");
 			Report.StartStep("I upload a PDF file in the WHMIS Label section");
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
 				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
@@ -4401,9 +4401,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				Report.StartStep("I click Srch in the bottom menu list");
 				myStudioShaManager.ClickBottomMenuOption("Search");
 				var myStepsSha = new Steps_SHA();
+				Report.Screenshot();
 				Report.StartStep($"I enter ID: {id} in the Product ID box, change Status drop down to {status}, Click find");
 				Report.Info("Searching for: " + id);
 				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+				Report.Screenshot();
 				Delay.Seconds(1);
 				Report.Info("Waiting for product list");
 				Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
@@ -6616,7 +6618,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
-			MyNewProduct.ThenFieldExists("WHMIS-compliant label, English and French-Canadian");
+			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartStep("I set 'OSHA-compliant Safety Data Sheet, English' to: Request to author");
 			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
 			Report.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
@@ -6642,7 +6644,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
 			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
-			Report.StartStep("I upload a PDF document into the WHMIS-compliant label, English and French-Canadian field.");
+			Report.StartStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");

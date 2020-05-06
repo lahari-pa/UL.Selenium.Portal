@@ -9,6 +9,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1111,6 +1112,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Homepage HomePageObject = new Homepage();
 			Report.IsTrue(HomePageObject.ClickResolveButton(), "Failed to click 'Resolve' button", "Successfully clicked 'Resolve' button");
+		}
+
+		[StepDefinition(@"If The Data Consent Requests modal is showing, navigate to the Retailer Partners page and add required tiers")]
+		public void IfDataConsentRequestsModalIsShowingAddRequiredTiers()
+		{
+			Report.Info("I wait for the Data Consent Requests Modal to appear");
+			if(new ModalDialog().WaitForContainerToBeVisible(5))
+			{
+				Report.Info("A modal was found checking the modal is the Data Consent Requests modal");
+				if(new ModalDialog().GetTitle().ToLower()=="data consent requests")
+				{
+					Report.Info("Attempting to click the button with text: 'GO TO MY RETAILERS");
+					new ModalDialog().ClickButton("GO TO MY RETAILERS");
+					new StepsRetailPartners().GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection();
+				}
+				else
+				{
+					Report.Info("The modal found was not the data consent requests modal");
+					return;
+				}
+			}
+			else
+			{
+				Report.Info("No modal was found, continuing as normal");
+				return;
+			}
 		}
 	}
 }

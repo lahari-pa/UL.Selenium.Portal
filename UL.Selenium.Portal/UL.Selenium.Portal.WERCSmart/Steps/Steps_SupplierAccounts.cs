@@ -406,6 +406,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
 			myAccount.ClickIhaveNoStewardshipNumbers();
+			//modal wait and accept accept/ press YES
+			new GlobalSteps().WaitForAModalDialogToOpen();
+			new ModalDialog().ClickButton("YES");
+			Delay.Seconds(2);
 
 			//data tiers
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
@@ -708,7 +712,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_PremiumSubscription", "Welcome1!", "Address1", "Address2", "Latham", "Florida", "12205", "QA_PremiumSubscription", "123-456-7889",
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_PremiumSubscription", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_PremiumSubscription", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -1077,6 +1081,96 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIShouldNotBeAbleToCreateAWERCSmartAccountWithTheFollowingParameters(string specialChar)
 		{
 			Report.IsTrue(new TestCreatingSupplierAccount(specialChar).TryCreateSupplier(), "", "");
+		}
+
+		[StepDefinition(@"I create a new supplier NO products account with the following parameters and update TReVor information for: (.*)")]
+		public void CreateNewNOProductsAccountWithFollowingParameters(string savedAs)
+		{
+			Report.Info("Setting up account for user: '" + savedAs + "'");
+			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
+				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_Automation_ProductsAccount", "123-456-7889",
+				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+			this.BasicSignup(savedAs);
+
+			var myHome = new StepsHomepage();
+			var myAccount = new StepsMyAccount();
+			var mySubscriptionEnrollment = new StepsSubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+			var myAccountSteps = new StepsMyAccount();
+			var myPkgType = new Steps_PackagingTypes();
+			var newProductSteps = new StepsNewProduct();
+			var myBrand = new Steps_Brands();
+			var myRetailPartner = new StepsRetailPartners();
+			var myProductsetup = new Steps_ProductSetup();
+			var dataNotification = new GoToDataTierNotification();
+			myHome.ThenIClickOnUserItem("My Account");
+			//Subscription 
+			myAccount.ThenIClickOnNewSubscription();
+			var subEnrollTable = new Table("Articles", "Enhanced Articles",
+				"Formulated Products", "Feature Plan", "Support Services Plan");
+			subEnrollTable.AddRow("Up to 400 Product(s)", "Up to 400 Product(s)", "Up to 400 Product(s)", "Standard", "Bronze");
+			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
+			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
+			myPay.ThenISelectPaymentMethodX("Credit Card");
+			var myCreditCardTable = new Table("Card Type", "Card Number", "Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
+			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
+			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+			myPay.ThenIClickContinue();
+			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+			myPay.ThenInTheThankYouScreenIClickHome();
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("400", "400", "400");
+
+			//My Packaging Type
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
+			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
+			newProductSteps.GivenIShouldSeeXPage("Packaging Type");
+			newProductSteps.SetTheSectionOptionTo("Package Type Name", "myPkg");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
+			myPkgType.SavePackagingTypeDetails("MyPkg1");
+			myPkgType.ClickAddRowBillOfMaterials();
+			myPkgType.SelectOptionForFieldInTable("Clear Glass", "My Packaging Materials");
+			myPkgType.SelectOptionForFieldInTable("2", "My Packaging Weight (grams)");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container or any packaging", "No");
+			newProductSteps.SetTheSectionOptionTo("Do you have a CONEG Certificate", "No");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container contain", "None of the above");
+			newProductSteps.SetTheSectionOptionTo("Packaging Component Recyclable", "21");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
+			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
+
+			//My Brands
+			myAccount.ClickTabMyLibrary("My Brands");
+			myAccount.ClickAddNewMyLibrary("My Brands");
+			myBrand.EnterBrandNameExpandedRow("TestBrand");
+			myBrand.ClickSaveMyBrandsGrid();
+			myBrand.ActiveValueIsYesForLastBrand("Yes");
+
+			//Supplier/Vendor id 
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Wal-Mart/SAM'S CLUB");
+			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
+			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput("TestBrand");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
+			var brandTable = new Table("Supplier ID", "Company or Brand Name");
+			brandTable.AddRow("123456", "TestBrand");
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable);		
+
+			//Save account and update TReVor data
+			Report.Info(savedAs + " Created");
+			this.SaveUserToTReVor(savedAs, account);
 		}
 
 	}
