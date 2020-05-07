@@ -100,14 +100,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
-			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
+			MyStepsNewProduct.SectExatcDataNotKnown("pH");
+			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7 (Neutral)");
+			//MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");	
 			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			MyStepsNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Not Tested/Unknown");
+			
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Open cup method");
-			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Combustible IIIA (>60C and <93C)");
+			
 			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
 				"Dairy or products containing dairy or milk");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
@@ -131,7 +135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			MyStepsNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Not Tested/Unknown");
+			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=23C and <38C");
 			var MyNewProduct = new NewProduct();
 			if (MyNewProduct.OptionExists("Flash Point (in Celsius)", "Flammable 1C"))
 			{
@@ -147,7 +151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
 			}
 
-			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
 				"Dairy or products containing dairy or milk");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
@@ -480,8 +484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Toxicity Characteristic Leaching Procedure (TCLP)");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 58189 Answer Electronic Equipment questions - With Cathode Ray - No to all")]
+		[StepDefinition(@"I call Shared Step 58189 Answer Electronic Equipment questions - With Cathode Ray - No to all")]
 		public void GivenICallShared58189AnswerElectronicEquipmentQuestions_WithCathodeRay_NoToAll()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -506,13 +509,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			Report.StartStep("I should see the Regulatory Information 1 Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
 			Report.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
 			stepsRegulatoryInformation.SetTSCATo("Compliant");
 			Report.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
-			Report.StartStep("In the Regulatory Information 1 page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+			Report.StartStep("In the Waste Classification Data page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
 
 		[StepDefinition(@"I call Shared Step 104276 \(Enter Regulatory Information - TSCA, CEPA, Not Prop 65\)")]
@@ -2285,8 +2288,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
 			}
 
-			Report.StartStep("I set the Select all ingredients included in this product option to: Dairy");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
+			Report.StartStep("I set theSelect all potential allergens included in this product option to: Dairy");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
 			Report.StartStep(
 				"I set the Product is manufactured in a facility that processes, or contains option to: Dairy or products containing dairy or milk");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
@@ -5820,11 +5823,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selNewProductSteps.SelectFirstOptionInSection(
 				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			Report.StartStep("I select the first option for: Select all ingredients included in this product");
-			selNewProductSteps.SelectFirstOptionInSection("Select all ingredients included in this product");
-			Report.StartStep(
-				"I select the first option for: Product is manufactured in a facility that processes, or contains");
-			selNewProductSteps.SelectFirstOptionInSection(
-				"Product is manufactured in a facility that processes, or contains");
+			selNewProductSteps.SelectFirstOptionInSection("Select all potential allergens included in this product");
+			Report.StartStep("I select the first option for: Product is manufactured in a facility that processes, or contains");
+			selNewProductSteps.SelectFirstOptionInSection("Product is manufactured in a facility that processes, or contains");
 			Report.StartStep("I select the first option for: Product is verified and sold");
 			selNewProductSteps.SelectFirstOptionInSection("Product is verified and sold");
 			Report.StartStep("I select the first option for: Product contains the following sweeteners");
