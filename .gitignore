@@ -333,5 +333,3 @@ UL.Selenium.Portal/UL.Selenium.Portal.WERCSmart/**/*.feature.cs
 UL.Selenium.Portal/UL.Selenium.Portal.ULSC/**/*.feature.cs
 UL.Selenium.Portal/UL.Selenium.Portal.ShaManager/**/*.feature.cs
 UL.Selenium.Portal/UL.Selenium.Portal.ChooseGoodGuide/**/*.feature.cs
-UL.Selenium.Portal/UL.Selenium.Portal.WERCSmart/Features/Philip/StepDefintions.cs
-UL.Selenium.Portal/UL.Selenium.Portal.WERCSmart/Features/Philip/WebElements.cs
