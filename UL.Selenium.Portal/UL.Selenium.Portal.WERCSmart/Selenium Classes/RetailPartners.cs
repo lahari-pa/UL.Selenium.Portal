@@ -138,103 +138,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		//Jacob
 
-		
-		public bool ConfirmTierHasCorrectMarkingForRetailer(string retailer, string[] tierArray, string mark)
-		{
-			IList<IWebElement> rowElementsArray = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//td[contains(text(), '" + retailer + "')]//following-sibling::td"), 2);
-
-			foreach (string str in tierArray)
-			{
-				switch (str.ToLower())
-				{
-					case "tier 1":
-
-						if (rowElementsArray[1].Text == mark)
-						{
-							return true;
-						}
-
-						break;
-
-					case "tier 2.1":
-
-						if (rowElementsArray[2].Text == mark)
-						{
-							return true;
-						}
-
-						break;
-
-					case "tier 2.2":
-
-						if (rowElementsArray[3].Text == mark)
-						{
-							return true;
-						}
-
-						break;
-
-					case "tier 3":
-
-						if (rowElementsArray[4].Text == mark)
-						{
-							return true;
-						}
-
-						break;
-
-					case "tier 4.1":
-
-						if (rowElementsArray[5].Text == mark)
-						{
-							return true;
-						}
-
-						break;
-
-					case "tier 4.2":
-
-						if (rowElementsArray[6].Text == mark)
-						{
-							return true;
-						}
-
-						break;
-
-					default:
-						Report.Info("Was not one of the expected tiers: " + str);
-						return false;
-				}
-
-			}
-			return false;
-		}
-		public bool ClickTabWithName(string tabName)
-		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[text()='" + tabName + "']"), 2);
-			return el.TryClick();
-		}
-		public bool ClickResultWithName(string resultName)
-		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@title='" + resultName + "']"), 2);
-			return el.TryClick();
-		}
-		public bool SearchTheFollowingText(string searchText)
-		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='textSupplierSearch']"), 2);
-			return el.TryEnterText(searchText);
-		}
-		public bool ClickSearchButton()
-		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='supplierSearchButton']"), 2);
-			return el.TryClick();
-		}
-
-		public bool ClickSuppliersButton()
-		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[text()='Suppliers']"), 2);
-			return el.TryClick();
-		}
 		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)
 		{
 			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[contains(text(), \"" + radioButtonText + "\")]"), 2);
@@ -282,7 +185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckProductInformation(string id, string productType, string productAccessCode)
 		{
 
-			IWebElement accessCode = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@data-bind='html: html']"), 2);
+			IWebElement accessCode = this.containerElement.FindElement(By.XPath(".//div[@data-bind='html: html']"), 2);
 			string accessCodeText = accessCode.Text;
 
 			if (!accessCodeText.Contains(id))

@@ -1600,12 +1600,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
-
-		public bool CloseDialog()
-		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog =-title-dialog-supplier-manager']//span[text()='close']"), 2);
-			return el.TryClick();
-		}
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
