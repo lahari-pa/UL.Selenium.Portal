@@ -273,9 +273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void NotErrorMessageSpecific(string message)
 		{
 			List<string> errors = NewProduct.ErrorMessagesText;
-			Report.IsTrue(!errors.Contains(message),
-				"Error message was showing when it wasn't expected to! Error: " + message,
-				"As expected, the error message was not showing. Error: " + message);
+			Report.IsTrue(!errors.Contains(message),"Error message was showing when it wasn't expected to! Error: " + message,"As expected, the error message was not showing. Error: " + message);
 		}
 
 		[StepDefinition(@"in page (.*) I should see no errors")]
