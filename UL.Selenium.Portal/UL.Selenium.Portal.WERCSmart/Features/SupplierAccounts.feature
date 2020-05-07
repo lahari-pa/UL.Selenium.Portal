@@ -121,3 +121,13 @@ Given I create a new supplier sub cart with the following parameters and update 
 @ScenarioId:1401
 Scenario: Create new account with supplier settings for Visual
 Given I create a new supplier Visual with the following parameters and update TReVor information for: VisualAccount
+
+
+@ScenarioId:6939
+Scenario: Create new account with supplier settings for No Products Account
+Given I create a new supplier NO products account with the following parameters and update TReVor information for: NoProductsAccount
+
+@ScenarioId:7035
+Scenario: Create new account with supplier settings for Password Reset Account
+Given I create a new supplier NO products account with the following parameters and update TReVor information for: PasswordResetAccount
+

@@ -645,6 +645,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(selDataEntryChanges.ClickClose(), "Failed to click close", "Clicked close successfully!");
 			}
+ 			Delay.Seconds(0);
 		}
 
 		[StepDefinition(@"if the save button is visible, I save changes and close the popup dialog")]
@@ -2201,56 +2202,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return false;
 		}
 
-		[StepDefinition(@"I Close 'Supplier Manager'")]
-		public void ThenIClose()
-		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			Report.IsTrue(retailPartnersObject.CloseDialog(), "Failed to close dialog", "Successfully closed dialog");
-		}
-
-
-		[StepDefinition(@"Confirm that '(.*)' shows (.*) marked with a '(.*)'")]
-		public void ThenConfirmThatShowsTierTierAndTierMarkedWithA(string supplier, string tiers, string marked)
-		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			var arr = tiers.Split(',');
-			Report.IsTrue(retailPartnersObject.ConfirmTierHasCorrectMarkingForRetailer(supplier, arr, marked), "Failed to confirm all tier markings", "Successfully confirmed all tier markings");
-		}
-
-
-		[StepDefinition(@"Select the '(.*)' Tab")]
-		public void ThenSelectTheTab(string tabName)
-		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			Report.IsTrue(retailPartnersObject.ClickTabWithName(tabName), "Failed to the following tab: " + tabName, "Successfully clicked the following tab: " + tabName);
-			Delay.Seconds(5);
-		}
-
-
-		[StepDefinition(@"Select the '(.*)'")]
-		public void ThenSelectThe_Staging(string selectedResult)
-		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			Report.IsTrue(retailPartnersObject.ClickResultWithName(selectedResult), "Failed to click result with name: " + selectedResult, "Successfully clicked result with name: " + selectedResult);
-		}
-
-
-		[StepDefinition(@"Search for '(.*)' Vendor")]
-		public void ThenSearchForVendor(string text)
-		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			Report.IsTrue(retailPartnersObject.SearchTheFollowingText(text), "Failed to search for the following text: " + text, "Successfully searched for the following text: " + text);
-			Report.IsTrue(retailPartnersObject.ClickSearchButton(), "Failed to click the search button", "Successfully clicked the search button");
-		}
-
-
-		[StepDefinition(@"I Click 'Suppliers'")]
-		public void ThenIClick()
-		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			Report.IsTrue(retailPartnersObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
-		}
-
 
 		[StepDefinition(@"I (should|should not) see radio option: (.*)")]
 		public void ISeeRadioOption(string shouldOrShouldNot, string radioButtonText)
@@ -2270,14 +2221,66 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
 		{
 			RetailPartners retailPartnersObject = new RetailPartners();
-			string testCaseId;
-			var obj = Context.GetFromContext(productID);
-			Report.Info("Attempting to convert Product to type ProductInformation");
-			var Product = (ProductInformation)obj;
-			Report.Info("Attempting to delete: " + Product.Name);
-			testCaseId = Product.Id;
-			Report.Info("ProductID: " + testCaseId + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
-			Report.IsTrue(retailPartnersObject.CheckProductInformation(), "Failed to check product information", "Successfully checked product information");
+			string savedAs = productID;
+			try
+			{
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Report.Info("ProductID: " + id + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
+				Report.IsTrue(retailPartnersObject.CheckProductInformation(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
+
+			}
+			catch (Exception ex)
+			{
+
+				Report.Failure(ex.Message);
+				throw;
+			}
+
 		}
 	}
 

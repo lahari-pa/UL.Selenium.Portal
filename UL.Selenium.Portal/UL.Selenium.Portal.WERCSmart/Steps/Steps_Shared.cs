@@ -1,8 +1,3 @@
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.Reporting.SpecFlow.Classes;
-using UL.Automation.Utilities.Functions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -12,7 +7,13 @@ using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
 using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -21,7 +22,6 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
-using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -854,7 +854,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		// Enter UPC string in the form: "Equals"+upcNumber where upcNumber is the exact number to input, rather than using the randomly generated step from context
 		// Enter '_CVS' or '_cvs' for upc variable to use a upc number for retailer CVS from (required for some test cases eg. CVS RCL feature)
 		[StepDefinition(
-			@"I call Shared Step 57961 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*), capsule count: (.*) and size: (.*)")]
+			@"I call Shared Step 131303 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*), capsule count: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc, string containerType, string capsuleCount, string size)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -2395,6 +2395,45 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
+		[StepDefinition(@"I call Shared Step 132370\(Waste Classification Data - TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
+		public void ICallSharedWasteClassificationData_TSCARandom_Pro65No_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			var table = new Table("Section");
+			table.AddRow("U.S. Toxic Substances Control Act (TSCA) status");
+			table.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
+			Report.Info("Checking that the only visible questions relate to: TSCA and Prop 65");
+			MyStepsNewProduct.CheckDisplayedSections("only see", table);
+			Report.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			Report.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			Report.StartStep("In the Waste Classification Data Page page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+		}
+
+		[StepDefinition(@"I call Shared Step 132375 \(Waste Classification Data - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
+		public void ICallSharedWasteClassificationData_TSCAAndCEPAShown_NoToProp65()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
+			Report.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Exempt");
+			stepsRegulatoryInformation.SetTSCATo("Exempt");
+			Report.StartStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
+			MyNewProductSteps.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status", "Compliant with Domestic Substances List (DSL)");
+			Report.StartStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			Report.StartStep("In the Waste Classification Data Page page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+		}
+
 		[StepDefinition(@"I call Shared Step 59927 \(Primary Physical State > Solid only available – Without Water Solubility question\)")]
 		public void SharedPrimaryPhysicalStateSolidOnlyAvailable_WithoutWaterSolubilityQuestion()
 		{
@@ -2894,9 +2933,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Do you want to restrict searchable access to your registered formula?",
 				"Restrict - Customers should contact my organization for an access code"));
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Do you want to restrict searchable access to your registered formula?",
-				" - Customers should contact my organization for an access code");
+			var NewProductObject = new NewProduct();
+			Report.IsTrue(NewProductObject.SelectRestrictUseOption(" - Customers should contact my organization for an access code"), "Failed to select restriction option", "Successfully selected restriction option");
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Access Code",
 				"1234"));
@@ -3477,6 +3515,54 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				table.Rows[0]["Select the best Water Solubility description"]);
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
 				table.Rows[0]["Select the best Water Solubility description"]);
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 132110 \(Product Characteristics - Select Liquid as primary physical state and enter all required data - Without Water Solubility\)")]
+		public void ICallSharedProductCharacteristics_PharmaFlow_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Product Characteristics Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Delay.Seconds(1);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Primary Physical State I select: " +
+				table.Rows[0]["Primary Physical State"]);
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State",
+				table.Rows[0]["Primary Physical State"]);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
+				table.Rows[0]["Secondary Physical State"]);
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+				table.Rows[0]["Secondary Physical State"]);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
+				table.Rows[0]["Specific Gravity"]);
+			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
+				table.Rows[0]["Specific Gravity"]);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
+				table.Rows[0]["pH"]);
+			MyNewProduct.SetTheSectionOptionTo("pH",
+				table.Rows[0]["pH"]);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: " +
+				table.Rows[0]["Boiling Point (in Celsius)"]);
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)",
+				table.Rows[0]["Boiling Point (in Celsius)"]);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: " +
+				table.Rows[0]["Flash Point (in Celsius)"]);
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)",
+				table.Rows[0]["Flash Point (in Celsius)"]);
+			Report.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: " +
+				table.Rows[0]["Flash Point Testing Method Used"]);
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
+				table.Rows[0]["Flash Point Testing Method Used"]);
 			Report.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -4070,7 +4156,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I should see the WHMIS SDS question");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
 			Report.StartStep("I should see the WHMIS Label question");
-			MyNewProduct.ThenFieldExists("WHMIS-compliant label, English and French-Canadian");
+			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian");
 			Report.StartStep("I upload a PDF file in the WHMIS Label section");
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
 				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
@@ -4401,9 +4487,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				Report.StartStep("I click Srch in the bottom menu list");
 				myStudioShaManager.ClickBottomMenuOption("Search");
 				var myStepsSha = new Steps_SHA();
+				Report.Screenshot();
 				Report.StartStep($"I enter ID: {id} in the Product ID box, change Status drop down to {status}, Click find");
 				Report.Info("Searching for: " + id);
 				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+				Report.Screenshot();
 				Delay.Seconds(1);
 				Report.Info("Waiting for product list");
 				Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found",
@@ -6616,7 +6704,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
-			MyNewProduct.ThenFieldExists("WHMIS-compliant label, English and French-Canadian");
+			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartStep("I set 'OSHA-compliant Safety Data Sheet, English' to: Request to author");
 			MyNewProduct.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "Request to author");
 			Report.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
@@ -6642,7 +6730,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
 			MyNewProduct.SetRadioOptionInSectionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
-			Report.StartStep("I upload a PDF document into the WHMIS-compliant label, English and French-Canadian field.");
+			Report.StartStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");

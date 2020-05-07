@@ -329,7 +329,104 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return dateValid;
 		}
 
-		
+		public bool ConfirmTierHasCorrectMarkingForRetailer(string retailer, string[] tierArray, string mark)
+		{
+
+			IList<IWebElement> rowElementsArray = this.containerElement.FindElements(By.XPath("//td[contains(text(), '" + retailer + "')]//following-sibling::td"), 2);
+
+			foreach (string str in tierArray)
+			{
+				switch (str.ToLower())
+				{
+					case "tier 1":
+
+						if (rowElementsArray[0].Text != mark)
+						{
+							return false;
+						}
+
+						break;
+
+					case "tier 2.1":
+
+						if (rowElementsArray[1].Text != mark)
+						{
+							return false;
+						}
+
+						break;
+
+					case "tier 2.2":
+
+						if (rowElementsArray[2].Text != mark)
+						{
+							return false;
+						}
+
+						break;
+
+					case "tier 3":
+
+						if (rowElementsArray[3].Text != mark)
+						{
+							return false;
+						}
+
+						break;
+
+					case "tier 4.1":
+
+						if (rowElementsArray[4].Text != mark)
+						{
+							return false;
+						}
+
+						break;
+
+					case "tier 4.2":
+
+						if (rowElementsArray[5].Text != mark)
+						{
+							return false;
+						}
+
+						break;
+
+					default:
+						Report.Info("Was not one of the expected tiers: " + str);
+						return false;
+				}
+
+			}
+			return true;
+		}
+		public bool ClickTabWithName(string tabName)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//a[text()='" + tabName + "']"), 2);
+			return el.TryClick();
+		}
+		public bool ClickResultWithName(string resultName)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//td[@title='" + resultName + "']"), 2);
+			return el.TryClick();
+		}
+		public bool SearchTheFollowingText(string searchText)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@id='textSupplierSearch']"), 2);
+			return el.TryEnterText(searchText);
+		}
+
+		public bool ClickSuppliersButton()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//a[text()='Suppliers']"), 2);
+			return el.TryClick();
+		}
+
+		public bool CloseSupplierManager()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='dialog-supplier-manager']/preceding-sibling::div//a"), 2);
+			return el.TryClick();
+		}
 
 
 	}

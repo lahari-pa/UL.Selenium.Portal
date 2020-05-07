@@ -183,12 +183,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				User inOriginalButNotNew = originalGrid.Where(y => !newGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
 				User inNewButNotOriginal = newGrid.Where(y => !originalGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
 
-				Report.IsTrue(inOriginalButNotNew.Username == savedUser.Username,
-					"User: " + savedUser.Username + " has not been replaced. ",
-					"As expected, " + savedUser.Username + " has been replaced");
-				Report.IsTrue(inNewButNotOriginal.Username == replacedBy,
-					"User has not been replaced by: " + replacedBy,
-					"As expected the replacement user is: " + replacedBy);
+				Report.IsTrue(inOriginalButNotNew.Username.Contains(savedUser.Username), "User: " + savedUser.Username + " was not found in the orginal list. ", "As expected, " + savedUser.Username + " was found in the original list");
+				Report.IsTrue(inNewButNotOriginal.Username.Contains(replacedBy), "User has not been replaced by: " + replacedBy, "As expected the replacement user is: " + replacedBy);
+
+
+				//Report.IsTrue(inOriginalButNotNew.Username == savedUser.Username,"User: " + savedUser.Username + " has not been replaced. ","As expected, " + savedUser.Username + " has been replaced");
+				//Report.IsTrue(inNewButNotOriginal.Username == replacedBy,"User has not been replaced by: " + replacedBy, "As expected the replacement user is: " + replacedBy);
 			}
 			catch (Exception ex)
 			{

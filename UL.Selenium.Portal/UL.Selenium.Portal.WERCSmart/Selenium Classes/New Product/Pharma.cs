@@ -51,27 +51,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool EnterNDCNumber(string number)
 		{
 
-			IWebElement el1 = this.containerElement.FindElement(By.XPath("//input[@class='select2-search__field']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@class='select2-search__field']"), 2);
 
-			el1.TryEnterText(number);
-			if (el1.Text == number)
-			{
-				return true;
-			}
-			return false;
+			return el.TryEnterText(number);
+
 		}
 		public bool CheckAndFillEmptyFieldsInSPLInformationScreen()
 		{
-			IList<IWebElement> allFieldsOnPage = this.containerElement.FindElements(By.XPath("//input[@type='text']"), 2);
-
+			IList<IWebElement> allFieldsOnPage = this.containerElement.FindElements(By.XPath("//span[contains(text(),'This is a required field')]/../preceding-sibling::input"), 2);
+			Report.Info("List count " + allFieldsOnPage.Count);
+	
 			foreach (IWebElement field in allFieldsOnPage)
 			{
 				bool enteredText = false;
 
-				if (field.Text == "")
+				if (field.Text.Length < 1)
 				{
 					enteredText = field.TryEnterText("Test");
-
+	
 					if (!enteredText)
 					{
 						return false;
