@@ -10,61 +10,6 @@
 @run_Pharma
 Feature: Pharma
 
-
-#Scenario: [127767] Register a Cleaning Supplies - Sanitizer (Non Aerosol) Product Type for a verification of the Products in Scope Report for Bed Bath and Beyondd Bath and Beyond
-#
-#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-#Given I generate a random UPC number and save as: UPC127767
-#Given I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Sanitizer (Non-Aerosol)
-#Given I call Shared Step 132110 (Product Characteristics - Select Liquid as primary physical state and enter all required data - Without Water Solubility)
-#| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used |
-#| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               |
-#And I set the Which one best describes your product field to: Product is not considered a pesticide product
-#Given I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
-#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-#| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-#| Ethyl Alcohol | 100     | false               | false       |            |
-#And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-#Given I set the UN Number option to: UN1791
-#Given I set the Technical Name (if applicable) option to: Ethanol Solutions
-#Given I set the Packing Group (select) option to: III
-#When I click continue
-#And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: Yes
-#Given I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 40
-#Given I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule option to: 5
-#Given I set the Would you like to use the VOC percentages option to: Yes
-#When I click continue
-#When I click continue
-#Given I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
-#Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
-#Given In the VOC Acceptance section I agree
-#Given in the Volatile Organic Compound Summary page I click Continue
-#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
-#Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127767, container type: Plastic Container and size: 3.5
-#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-#Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: VOC Exemption Letter and file: C:\Dependencies\WERCSmart\testdoc.pdf
-#Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
-#When I click continue
-#Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-#| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor    | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
-#| Opaque     | 0                        | 0                       | Alcohol | No data available | No Data Available     | Goggles                       |           |
-#Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
-#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-#Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
-#Given I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
-#Then I confirm that the excel file saved as: Products in Scope Report for BBB contains the following product name: 'Cleaning Supplies Product for BBB'
-#Given I delete the excel file saved as Products in Scope Report for BBB
-
-
-
-
-
-
-
-
-
 Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Gel Consistency
 
 Given I attempt to log in with email: pharma.kxxyxunf@mailosaur.io and password: Welcome1!

@@ -140,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[contains(text(), \"" + radioButtonText + "\")]"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[contains(text(), \"" + radioButtonText + "\")]"), 2);
 
 			if (shouldOrShouldNot.ToLower() == "should")
 			{
@@ -171,7 +171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckIfAISIsUploaded()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click ')]"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click ')]"), 2);
 			if (el == null)
 			{
 				return false;
