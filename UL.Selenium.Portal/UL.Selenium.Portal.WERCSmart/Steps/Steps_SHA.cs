@@ -3760,52 +3760,52 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Close 'Supplier Manager'")]
 		public void ThenICloseSupplierManager()
 		{
-			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
-			Report.IsTrue(studioSHAManagerObject.CloseDialog(), "Failed to close dialog", "Successfully closed dialog");
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.CloseSupplierManager(), "Failed to close dialog", "Successfully closed dialog");
 		}
 
 
 		[StepDefinition(@"Confirm that '(.*)' shows (.*) marked with a '(.*)'")]
 		public void ThenConfirmThatShowsTierTierAndTierMarkedWithA(string supplier, string tiers, string marked)
 		{
-			RetailPartners retailPartnersObject = new RetailPartners();
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
 			var arr = tiers.Split(',');
-			Report.IsTrue(retailPartnersObject.ConfirmTierHasCorrectMarkingForRetailer(supplier, arr, marked), "Failed to confirm all tier markings", "Successfully confirmed all tier markings");
+			Report.IsTrue(studioSupplierManagerObject.ConfirmTierHasCorrectMarkingForRetailer(supplier, arr, marked), "Failed to confirm all tier markings", "Successfully confirmed all tier markings");
 		}
 
 
 		[StepDefinition(@"Select the '(.*)' Tab in Supplier Manager")]
-		public void ThenSelectTheTab(string tabName)
+		public void ThenSelectTheTabInSupplierManager(string tabName)
 		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			Report.IsTrue(retailPartnersObject.ClickTabWithName(tabName), "Failed to the following tab: " + tabName, "Successfully clicked the following tab: " + tabName);
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.ClickTabWithName(tabName), "Failed to the following tab: " + tabName, "Successfully clicked the following tab: " + tabName);
 			Delay.Seconds(5);
 		}
 
 
 		[StepDefinition(@"Select the supplier with the following name in Supplier Manager: '(.*)'")]
-		public void ThenSelectThe_Staging(string selectedResult)
+		public void SelectTheSupplierWithTheFollowingNameInSupplierManager(string selectedResult)
 		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			Report.IsTrue(retailPartnersObject.ClickResultWithName(selectedResult), "Failed to click result with name: " + selectedResult, "Successfully clicked result with name: " + selectedResult);
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.ClickResultWithName(selectedResult), "Failed to click result with name: " + selectedResult, "Successfully clicked result with name: " + selectedResult);
 			Delay.Seconds(5);
 		}
 
 
 		[StepDefinition(@"Search for the supplier with the following name in Supplier Manager: '(.*)'")]
-		public void ThenSearchForVendor(string text)
+		public void SearchForTheSupplierWithTheFollowingNameInSupplierManager(string text)
 		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			Report.IsTrue(retailPartnersObject.SearchTheFollowingText(text), "Failed to search for the following text: " + text, "Successfully searched for the following text: " + text);
-			Report.IsTrue(retailPartnersObject.ClickSearchButton(), "Failed to click the search button", "Successfully clicked the search button");
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.SearchTheFollowingText(text), "Failed to search for the following text: " + text, "Successfully searched for the following text: " + text);
+			Report.IsTrue(studioSupplierManagerObject.ClickSearchButton(), "Failed to click the search button", "Successfully clicked the search button");
 		}
 
 
 		[StepDefinition(@"I Click 'Suppliers' in SHA Manager")]
-		public void ThenIClick()
+		public void IClickSuppliersInSHAManager()
 		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			Report.IsTrue(retailPartnersObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
 		}
 
 	}
