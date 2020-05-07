@@ -140,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)
 		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[contains(text(), \"" + radioButtonText + "\")]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[contains(text(), \"" + radioButtonText + "\")]"), 2);
 
 			if (shouldOrShouldNot.ToLower() == "should")
 			{
@@ -171,7 +171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckIfAISIsUploaded()
 		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click ')]"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click ')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -185,7 +185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckProductInformation(string id, string productType, string productAccessCode)
 		{
 
-			IWebElement accessCode = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@data-bind='html: html']"), 2);
+			IWebElement accessCode = this.containerElement.FindElement(By.XPath(".//div[@data-bind='html: html']"), 2);
 			string accessCodeText = accessCode.Text;
 
 			if (!accessCodeText.Contains(id))
