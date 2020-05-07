@@ -205,6 +205,7 @@
     <Compile Include="Selenium Classes\NavigationBar.cs" />
     <Compile Include="Selenium Classes\New Product\Distributor.cs" />
     <Compile Include="Selenium Classes\New Product\OptionalReports.cs" />
+    <Compile Include="Selenium Classes\New Product\Pharma.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\EcologoReadiness.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ElectronicEquipment.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\Ingredients.cs" />
@@ -282,6 +283,7 @@
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_ProductIncludesBattery.cs" />
+    <Compile Include="Steps\New Product\Steps_Pharma.cs" />
     <Compile Include="Steps\New Product\Steps_Retailer.cs" />
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_TCLP.cs" />
@@ -338,6 +340,7 @@
     </None>
     <None Include="Features\Basic Tests.feature">
     </None>
+    <None Include="Features\Battery.feature" />
     <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd2.feature" />
     <None Include="Features\Canadian Tire\Forwarding\AccountHasStewardship.feature">
     </None>
@@ -484,6 +487,7 @@
     </None>
     <None Include="Features\Product Registration\Pesticides\Pesticides.feature">
     </None>
+    <None Include="Features\Product Registration\Pharma.feature" />
     <None Include="Features\Product Registration\Product Documents\Product Documents.feature">
     </None>
     <None Include="Features\Product Registration\Product Registration.feature">
@@ -525,6 +529,7 @@
     </None>
     <None Include="Features\Security Roles.feature">
     </None>
+    <None Include="Features\SHA Manager Supplier Records.feature" />
     <None Include="Features\SHA Search.feature" />
     <None Include="Features\Signup.feature">
     </None>

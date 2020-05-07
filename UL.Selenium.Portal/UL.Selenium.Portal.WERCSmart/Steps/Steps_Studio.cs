@@ -930,6 +930,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void PowerDesignerPlusWelcomeIEnterSelectSourceProduct(string productID)
 		{
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Delay.Seconds(10);
 			Report.IsTrue(thisPowerDesignerPlus.EnterSourceProduct(productID), $"Failed to enter {productID} into the Select Source Product field!", $"Successfully entered {productID} into the Select Source Product field");
 			Report.Info("Clicking Refresh");
 			thisPowerDesignerPlus.ClickRefreshButton();
@@ -965,9 +966,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Power Designer I (left|right|double) click on section: (.*)")]
 		public void GivenInPowerDesignerIClickOnSection(string click, string section)
 		{
+
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
-			if(click=="right"||!selStudioPowerDesignerPlus.IsSectionActive(section))
+
+			if (click=="right"||!selStudioPowerDesignerPlus.IsSectionActive(section))
 			{
+	
 				Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
 								"Studio power designer is open");
 				Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection(section, click),

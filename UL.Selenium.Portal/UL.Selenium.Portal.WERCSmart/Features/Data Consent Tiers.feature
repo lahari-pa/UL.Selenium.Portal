@@ -4,6 +4,10 @@
 @wercsmart
 @MyAccount
 @run_DataConsentTiers
+@SHA
+
+
+
 Feature: Data Consent Tiers
 
 Background:

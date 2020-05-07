@@ -3757,6 +3757,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSHAManagerObject.ConfirmUInSecondColumn(ID), "Failed to find 'U' next to product with product ID: " + ID, "Successfully found a 'U' next to product with product ID: " + ID);
 		}
 
+		[StepDefinition(@"I Close 'Supplier Manager'")]
+		public void ThenICloseSupplierManager()
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.CloseSupplierManager(), "Failed to close dialog", "Successfully closed dialog");
+		}
+
+
+		[StepDefinition(@"Confirm that '(.*)' shows (.*) marked with a '(.*)'")]
+		public void ThenConfirmThatShowsTierTierAndTierMarkedWithA(string supplier, string tiers, string marked)
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			var arr = tiers.Split(',');
+			Report.IsTrue(studioSupplierManagerObject.ConfirmTierHasCorrectMarkingForRetailer(supplier, arr, marked), "Failed to confirm all tier markings", "Successfully confirmed all tier markings");
+		}
+
+
+		[StepDefinition(@"Select the '(.*)' Tab in Supplier Manager")]
+		public void ThenSelectTheTabInSupplierManager(string tabName)
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.ClickTabWithName(tabName), "Failed to the following tab: " + tabName, "Successfully clicked the following tab: " + tabName);
+			Delay.Seconds(5);
+		}
+
+
+		[StepDefinition(@"Select the supplier with the following name in Supplier Manager: '(.*)'")]
+		public void SelectTheSupplierWithTheFollowingNameInSupplierManager(string selectedResult)
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.ClickResultWithName(selectedResult), "Failed to click result with name: " + selectedResult, "Successfully clicked result with name: " + selectedResult);
+			Delay.Seconds(5);
+		}
+
+
+		[StepDefinition(@"Search for the supplier with the following name in Supplier Manager: '(.*)'")]
+		public void SearchForTheSupplierWithTheFollowingNameInSupplierManager(string text)
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.SearchTheFollowingText(text), "Failed to search for the following text: " + text, "Successfully searched for the following text: " + text);
+			Report.IsTrue(studioSupplierManagerObject.ClickSearchButton(), "Failed to click the search button", "Successfully clicked the search button");
+		}
+
+
+		[StepDefinition(@"I Click 'Suppliers' in SHA Manager")]
+		public void IClickSuppliersInSHAManager()
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
+		}
+
 	}
 
 }
