@@ -256,3 +256,44 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 		| Sodium chloride | Non-functional Byproduct   | Sodium chlorideFunctionalPurposesList |
 		| Butane          | Non-functional Contaminant | ButaneFunctionalPurposesList          |
 	
+
+@ScenarioId:6866
+Scenario:[119578] My Products - More Filters - For Discontinued Registrations
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	And I should see an option for More Filters
+	Given I click More Filters in the products grid
+	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
+	Then I confirm that only discontinued products appear in the 'My Products' grid
+	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
+	Then I confirm that all products appear in the 'My Products' grid
+
+
+@ScenarioId:8177
+Scenario: [125144] Actions - 3rd Party Access Code Window
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw material
+Then I save the product information as: TestCase90002
+Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName   | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+|           | Sodium chloride | 33.33   | false               |            | false       |
+|           | Copper sulfate  | 11.67   | false               |            | false       |
+|           | Nitric acid     | 55      | false               |            | false       |
+Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
+And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+Then I click continue
+Then I click continue
+And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+Then I should see the Sustainability Page
+Given in the Sustainability page I click Continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I click the Home navigation icon
+Given I search for the product saved as: TestCase90002
+When I click Row Actions for the most recent product returned
+Then I click on the Row Action: Access Code
+Then Check popup date productID: TestCase90002 productType:Raw material productAccessCode: 1234
+Given I click close on the Save Changes popup dialog

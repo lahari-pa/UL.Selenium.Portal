@@ -205,6 +205,7 @@
     <Compile Include="Selenium Classes\NavigationBar.cs" />
     <Compile Include="Selenium Classes\New Product\Distributor.cs" />
     <Compile Include="Selenium Classes\New Product\OptionalReports.cs" />
+    <Compile Include="Selenium Classes\New Product\Pharma.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\EcologoReadiness.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ElectronicEquipment.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\Ingredients.cs" />
@@ -282,6 +283,7 @@
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_ProductIncludesBattery.cs" />
+    <Compile Include="Steps\New Product\Steps_Pharma.cs" />
     <Compile Include="Steps\New Product\Steps_Retailer.cs" />
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_TCLP.cs" />
@@ -330,6 +332,7 @@
     <EmbeddedResource Include="Dependencies\PDF\testdoc.pdf" />
     <EmbeddedResource Include="Dependencies\Excel\testdoc.xlsx" />
     <EmbeddedResource Include="Dependencies\Excel\UPCsDuplicatedwithinAccount.xlsx" />
+    <EmbeddedResource Include="Dependencies\Excel\BulkUploadFile.xlsx" />
     <None Include="Features\AdditionalProductInformation.feature">
     </None>
     <None Include="Features\API\ItemSync.feature" />
@@ -337,6 +340,7 @@
     </None>
     <None Include="Features\Basic Tests.feature">
     </None>
+    <None Include="Features\Battery.feature" />
     <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd2.feature" />
     <None Include="Features\Canadian Tire\Forwarding\AccountHasStewardship.feature">
     </None>
@@ -364,13 +368,13 @@
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdFull.feature">
     </None>
-    <None Include="Features\Canadian Tire\New Product Submission\Stewardship Data in WPS Studio\StwdInWpsStudiofeature.feature">
+    <None Include="Features\Canadian Tire\New Product Submission\StwdInWpsStudiofeature.feature" />
+    <None Include="Features\Canadian Tire\New Product Submission\AccHasFullStwdData.feature" />
+    <None Include="Features\Canadian Tire\New Product Submission\AccHasNoStwdData.feature">
     </None>
-    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Full Stewardship Data\AccHasFullStwdData.feature" />
-    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has No Stwd Data\AccHasNoStwdData.feature">
+    <None Include="Features\Canadian Tire\New Product Submission\AccHasPartialStwd.feature">
     </None>
-    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Partial Sewardship Data\AccHasPartialStwd.feature">
-    </None>
+    <None Include="Features\CanNotRunOnTReVor.feature" />
     <None Include="Features\Cart.feature">
     </None>
     <None Include="Features\ConflictMinerals.feature">
@@ -483,6 +487,7 @@
     </None>
     <None Include="Features\Product Registration\Pesticides\Pesticides.feature">
     </None>
+    <None Include="Features\Product Registration\Pharma.feature" />
     <None Include="Features\Product Registration\Product Documents\Product Documents.feature">
     </None>
     <None Include="Features\Product Registration\Product Registration.feature">
@@ -524,6 +529,7 @@
     </None>
     <None Include="Features\Security Roles.feature">
     </None>
+    <None Include="Features\SHA Manager Supplier Records.feature" />
     <None Include="Features\SHA Search.feature" />
     <None Include="Features\Signup.feature">
     </None>
@@ -560,6 +566,35 @@
     <Folder Include="Selenium Classes\New Product\Review and Submit\" />
     <Folder Include="Steps\New Product\Recipient and UPC Details\" />
   </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem ##### UL.Automation.Vanessa Post-Build Events #####
@@ -585,17 +620,17 @@
     <Error Condition="!Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
-    <Error Condition="!Exists('..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.Reporting.SpecFlow.0.0.59\build\UL.Automation.Reporting.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Reporting.SpecFlow.0.0.59\build\UL.Automation.Reporting.SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\build\UL.Automation.TReVor.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\build\UL.Automation.TReVor.SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.44.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
   <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.2.4.1\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
-  <Import Project="..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets')" />
-  <Import Project="..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets')" />
   <Import Project="..\packages\UL.Automation.Reporting.SpecFlow.0.0.59\build\UL.Automation.Reporting.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Reporting.SpecFlow.0.0.59\build\UL.Automation.Reporting.SpecFlow.targets')" />
+  <Import Project="..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Selenium.SpecFlow.0.0.70\build\UL.Automation.Selenium.SpecFlow.targets')" />
   <Import Project="..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\build\UL.Automation.TReVor.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.TReVor.SpecFlow.0.0.64\build\UL.Automation.TReVor.SpecFlow.targets')" />
+  <Import Project="..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets" Condition="Exists('..\packages\UL.Automation.Utilities.SpecFlow.0.0.12\build\UL.Automation.Utilities.SpecFlow.targets')" />
 </Project>

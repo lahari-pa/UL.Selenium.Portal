@@ -423,14 +423,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ExpirationDate_CurrentYear_NotAugust31th(string state)
 		{
 			var table = new Table("State", "Month", "Day", "Increment year?");
-			table.AddRow(state, "1", "8", "no");
+			//table.AddRow(state, "1", "8", "no");
+			//looks like this causes and issue if current date (just not be 31 aug and current year;
+			var today = DateTime.Now;
+			var tomorrow = today.AddDays(1);
+			var tomorrowDay = tomorrow.Day;
+			var tomorrowMonth = tomorrow.Month;
+			if(tomorrowDay==31 && tomorrowMonth==8)
+			{
+				tomorrow = today.AddDays(2);
+				tomorrowDay = tomorrow.Day;
+				tomorrowMonth = tomorrow.Month;
+			}
+			table.AddRow(state, tomorrowMonth.ToString(),tomorrowDay.ToString(), "no");
+
 			this.EnterEpaRegistrationDateCurrentYear(table);
 		}
 
 		[StepDefinition(@"I select expiration date \(next year - Not August 31st\) for state: (.*)")]
 		public void ExpirationDate_NextYear_NotAugust31th(string state)
 		{
-			this.EnterEpaRegistrationDateNextYear("8", "1", state);
+			//looks like this causes and issue if current date (just not be 31 aug and current year;
+			//this.EnterEpaRegistrationDateNextYear("8", "1", state);
+			var today = DateTime.Now;
+			var tomorrow = today.AddDays(1);
+			var tomorrowDay = tomorrow.Day;
+			var tomorrowMonth = tomorrow.Month;
+			if (tomorrowDay == 31 && tomorrowMonth == 8)
+			{
+				tomorrow = today.AddDays(2);
+				tomorrowDay = tomorrow.Day;
+				tomorrowMonth = tomorrow.Month;
+			}
+			this.EnterEpaRegistrationDateNextYear(tomorrowMonth.ToString(), tomorrowDay.ToString(), state);
 		}
 
 		[StepDefinition(@"I select EPA expiration date - enter current year plus (.*):")]

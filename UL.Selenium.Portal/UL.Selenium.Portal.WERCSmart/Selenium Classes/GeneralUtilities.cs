@@ -311,6 +311,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public static void OpenNewTabAndNavigateTo(string url)
+		{
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.open();");
+			SeleniumBrowser.WebBrowser.SwitchTo().Window(SeleniumBrowser.WebBrowser.WindowHandles.Last());
+			if (url.ToLower().Contains("savedas"))
+			{
+				url = (string)Context.GetFromContext(url);
+			}
+			SeleniumBrowser.WebBrowser.Url = url;
+			SeleniumBrowser.WebBrowser.WaitForPageLoad();
+		}
+
 	}
 
 	public class RetailerAbbreviations
@@ -469,6 +483,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return input;
 		}
 
+		
 
 
 

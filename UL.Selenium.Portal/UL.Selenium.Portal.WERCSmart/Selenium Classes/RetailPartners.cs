@@ -137,6 +137,80 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//Jacob
+
+		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[contains(text(), \"" + radioButtonText + "\")]"), 2);
+
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				if (el == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				if (el == null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			return false;
+
+		}
+
+		public bool CheckIfAISIsUploaded()
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click ')]"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		public bool CheckProductInformation(string id, string productType, string productAccessCode)
+		{
+
+			IWebElement accessCode = this.containerElement.FindElement(By.XPath(".//div[@data-bind='html: html']"), 2);
+			string accessCodeText = accessCode.Text;
+
+			if (!accessCodeText.Contains(id))
+			{
+
+				Report.Info("Product ID does not match");
+				return false;
+
+			} else if (!accessCodeText.Contains(productType))
+			{
+
+				Report.Info("Product Type does not match");
+				return false;
+
+			} else if (!accessCodeText.Contains("Access Code: " + productAccessCode))
+			{
+
+				Report.Info("Product ID does not match");
+				return false;
+
+			}
+
+			return true;
+
+		}
 	}
 
 	class RetailPartnersDetails : SeleniumBaseObject

@@ -9,6 +9,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -418,6 +419,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+			
 		}
 
 		[StepDefinition(@"I should see the following filter options below My Products")]
@@ -737,7 +739,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
+		[StepDefinition(@"I click the (Home|Register New Product|Prescription Pharmaceutical|My Messages|Retail Partners|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
 		public void ClickItemInQuickLinks(string item)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Selecting " + item + " in the Navigation Pane");
@@ -1109,6 +1111,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Homepage HomePageObject = new Homepage();
 			Report.IsTrue(HomePageObject.ClickResolveButton(), "Failed to click 'Resolve' button", "Successfully clicked 'Resolve' button");
+		}
+
+		[StepDefinition(@"If The Data Consent Requests modal is showing, navigate to the Retailer Partners page and add required tiers")]
+		public void IfDataConsentRequestsModalIsShowingAddRequiredTiers()
+		{
+			Report.Info("I wait for the Data Consent Requests Modal to appear");
+			if(new ModalDialog().WaitForContainerToBeVisible(5))
+			{
+				Report.Info("A modal was found checking the modal is the Data Consent Requests modal");
+				if(new ModalDialog().GetTitle().ToLower()=="data consent requests")
+				{
+					Report.Info("Attempting to click the button with text: 'GO TO MY RETAILERS");
+					new ModalDialog().ClickButton("GO TO MY RETAILERS");
+					new StepsRetailPartners().GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection();
+				}
+				else
+				{
+					Report.Info("The modal found was not the data consent requests modal");
+					return;
+				}
+			}
+			else
+			{
+				Report.Info("No modal was found, continuing as normal");
+				return;
+			}
 		}
 	}
 }

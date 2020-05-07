@@ -390,7 +390,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#endregion
 
 		#region classes
-		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit }
+		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit, NDCNo }
 
 		public static Dictionary<Tab, string> MapTabs = new Dictionary<Tab, string> {
 			{ Tab.ProductType , "Product Type" },
@@ -1106,6 +1106,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
 					packageField.Select(info.PackageType);
 				}
+
+				if (info.CapsuleCount.Length > 0)
+				{
+					IWebElement capsuleCountField = container.FindElement(By.XPath(".//label[contains(text(),'Capsule Count')]/..//input"), 2);
+					capsuleCountField.EnterText(info.CapsuleCount);
+				}
+
 				return true;
 			}
 			catch (Exception ex)
@@ -3076,11 +3083,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetOptionInSection(string section, string value)
 		{
-			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
-						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
 						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
 						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])] | " +
-						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
 
@@ -3095,7 +3102,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			if (el.GetAttribute("type") == "text")
 			{
 				el.EnterText(value);
-				return el.GetValue() == value;
+				if(el.GetValue() == value)
+				{
+					return el.GetValue() == value;
+				}
+				else
+				{
+					int j = 0;
+					bool textEntered = false;
+					while (textEntered==false&&j<6)
+					{
+						Delay.Seconds(1);
+						Report.Info($"Attempting to enter text, attempt: {j+2}");
+						el.ClearTextBox();
+						el.EnterText(value);
+						textEntered = el.GetValue() == value;
+						j++;
+					}
+					return textEntered;
+
+				}
 			}
 			if (el.TagName.ToLower() == "select")
 			{
@@ -3122,7 +3148,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (el.GetAttribute("type") == "checkbox")
 				{
 					el.TryCheck();
-					return el.Checked();
+					if(el.Checked()==true)
+					{
+						return el.Checked();
+					}
+					else
+					{
+						int x = 0;
+						bool isChecked = false;
+						while(isChecked==false&&x<6)
+						{
+							Delay.Seconds(1);
+							Report.Info($"Attempting to check box, attempt: {x + 2}");
+							el.TryCheck();
+							isChecked = el.Checked();
+							x++;
+						}
+						return isChecked;
+					}
 				}
 
 			}
@@ -3133,12 +3176,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			// don't click the label if it contains a web link
 			if (el.FindElement(By.XPath("./span/a[contains(@href,'http')]"), 2) == null && el.TryClick())
 			{
+				Report.Info("Dont Click label if contains web link");
 				Delay.Seconds(2);
 				if (this.SelectedOptionsForSection(section).Contains(value))
 				{
 					return true;
 				}
 			}
+			Report.Info("Trying a basic Try click on the element");
 			return el.FindElement(By.XPath("./input"), 10).TryClick();
 		}
 
@@ -3603,7 +3648,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool PurchaseSummaryClickRemove(string product)
 		{
-			IWebElement remove = this.containerElement.WaitUntilElementVisible(By.XPath(@"//table[@class='table table-hover']//tr//b[text()[contains(.,'{" + product + "}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
+			IWebElement remove = this.containerElement.WaitUntilElementVisible(By.XPath($"//table[@class='table table-hover']//tr//b[text()[contains(.,'{product}')]]/following-sibling::a[contains(text(), 'Remove')]"), 2);
 			return remove.TryClick();
 		}
 
@@ -4422,6 +4467,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public bool SelectRestrictUseOption(string retrictOption)
+		{
+			IWebElement restrictOptionCheckBox = this.containerElement.FindElement(By.XPath("//span[contains(text(),'" + retrictOption + "')]/preceding-sibling::input"), 2);
+			return restrictOptionCheckBox.TryCheck();
+		}
+
 
 	}
 
@@ -4449,6 +4500,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		public string UpcNumber { get; set; } = "";
 		public string ContainerType { get; set; } = "";
+		public string CapsuleCount { get; set; } = "";
 		public string Size { get; set; } = "";
 		public string Dpci { get; set; } = "";
 		public string Quantity { get; set; } = "";

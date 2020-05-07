@@ -444,6 +444,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.Success("Successfully selected product with ID: " + id_);
 						Report.Screenshot();
 						clicked = true;
+						Report.IsTrue(selForwardProductReg.CheckProductsRightPanel_CheckProductByID(id_), "The Product was not showing in the right panel", "The product was showing in the right panel");
 						break;
 					}
 				}
@@ -482,6 +483,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
 					"Failed to select the product with ID: " + id + "!",
 					"Successfully selected the product with ID: " + id);
+				Report.IsTrue(selForwardProductReg.CheckProductsRightPanel_CheckProductByID(id), "The Product was not showing in the right panel", "The product was showing in the rigt panel");
+				
 			}
 		}
 
@@ -635,8 +638,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully set the 'Are Statements True' radio to: " + option);
 		}
 
-		[StepDefinition(@"In the Foward Product Registration Screen I should see product: (.*)")]
-		public void ThenInTheFowardProductRegistrationScreenIShouldSeeProduct(string id)
+		[StepDefinition(@"In the Foward Product Registration Screen I (should|should not) see product: (.*)")]
+		public void ThenInTheFowardProductRegistrationScreenIShouldSeeProduct(string shouldOrShouldNot, string id)
 		{
 			if (id.ToLower().Contains("saved as"))
 			{
@@ -649,8 +652,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				id = PI.Id;
 			}
 			var selForwardProdReg = new ForwardProductRegistration();
-			Report.IsTrue(selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
-				"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
+
+			if (shouldOrShouldNot.ToLower() == "should") {
+
+				Report.IsTrue(selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
+					"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
+
+			} else if(shouldOrShouldNot.ToLower() == "should not") {
+
+				Report.IsTrue(!selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
+					"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
+
+			}
+
 		}
 
 		[StepDefinition(@"In the Foward Product Registration Screen I Select the product: (.*)")]

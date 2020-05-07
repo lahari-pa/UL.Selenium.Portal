@@ -20,6 +20,12 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.Selenium.Functions;
 using UL.Automation.TReVor.Classes;
+using System.IO;
+using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Core;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -650,6 +656,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 
 			Report.IsTrue(new MultipleUPC().ClickFinishButton(), "Failed To click the Finish button", "Successfully clicked the Finish button");
+			Report.IsTrue(new MultipleUPC().WaitForContainerToBeInvisible(), "The popup was still showing", "The popup was no longer showing");
+			
+
 		}
 
 		[StepDefinition(@"I check that the UPC Number of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
@@ -669,6 +678,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check that the (UPC|Type|Size|Retailer) of each product matches the excel file named: (.*) uploaded saved as: (.*)")]
 		public void ICheckValueOfEachProductFromFile(string value, string file, string savedAs)
 		{
+			//This may need fixing to adapt the offset value (currently 21). See the below method for item number etc
 			Report.IsTrue(new MultipleUPC().CheckValueOfEachProductFromFile(value, file, savedAs), "The UPC numbers shown in the Add Multiple Popup did not match the file", "The UPC numbers shown in the Add Multiple Popup matched the file");
 
 		}
@@ -698,8 +708,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I edit the testdoc.xlsx, and save its filepath as: (.*) and verify it contains the UPC data in the table saved as: (.*)")]
-		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string fileSavedAs, string tableSavedAs, Table table)
+		[StepDefinition(@"I edit the testdoc.xlsx, and save its filepath as: (.*) and verify it contains the UPC data in the table saved as: (.*), \(Base Data Only: (true|false)\)")]
+		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string fileSavedAs, string tableSavedAs,bool baseData, Table table)
 		{
 			Context.AddToContext(tableSavedAs, table);
 			var upc = new UPC();
@@ -722,7 +732,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			//add all rows from table to excelfile
 			System.IO.Directory.Move(destination, KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
+			
 			Report.IsTrue(upc.VerifySampleFile(table, "testdoc.xlsx", fileSavedAs), "Failed to validate File", "Successfully validated File");
+
+			//File.SetLastWriteTime(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx", DateTime.Now);
+			//var dt = File.GetLastWriteTime(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
+
+			if (baseData == false)
+			{
+				Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+
+				var excelWorkBook = excelApp.Workbooks.Open(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx");
+				excelWorkBook.Activate();
+				excelWorkBook.Save();
+				excelWorkBook.Close();
+				excelApp.Quit();
+			}
+
+			//XSSFWorkbook hssfwb;
+			//using (FileStream file = new FileStream(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx", FileMode.Open, FileAccess.Read))
+			//{
+			//	hssfwb = new XSSFWorkbook(file);
+			//	file.Close();
+			//}
+
+			//ISheet sheet = hssfwb.GetSheetAt(0);
+			//IRow testrow = sheet.GetRow(4);
+
+			////sheet.CreateRow(row.LastCellNum);
+			//ICell cell = testrow.CreateCell(testrow.LastCellNum);
+			//cell.SetCellValue("test");
+
+			//using (FileStream file = new FileStream(KnownFolders.GetPath(KnownFolder.Downloads) + @"\testdoc.xlsx", FileMode.OpenOrCreate, FileAccess.Write))
+			//{
+			//	hssfwb.Write(file);
+			//	file.Close();
+			//}
+
+
+
+
 		}
 
 		[StepDefinition(@"I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: (.*)")]
@@ -1139,6 +1188,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					if (box.UpcNumber == upcNumber && timesDuplicated > 1)
 					{
+						box.CheckBox.ScrollElementIntoView();
 						Report.IsTrue(box.CheckBox.TryClick(), "The check box next to duplicate UPC No. " + upcNumber + " was not checked sucessfully", "The check box next to duplicate UPC No. " + upcNumber + " was checked sucessfully");
 						warningHTcopy[upcNumber] = timesDuplicated - 1;
 						break;
@@ -1147,6 +1197,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					else if ((int)upcsWithWarningHT[upcNumber] == 1)
 					{
 						var testTT = (int)upcsWithWarningHT[upcNumber];
+						box.CheckBox.ScrollElementIntoView();
 						Report.IsTrue(box.CheckBox.TryClick(), "The check box next to duplicate UPC No. " + upcNumber + " was not checked sucessfully", "The check box next to duplicate UPC No. " + upcNumber + " was checked sucessfully");
 						break;
 					}
