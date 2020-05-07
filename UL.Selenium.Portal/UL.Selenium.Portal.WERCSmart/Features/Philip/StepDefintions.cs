@@ -38,11 +38,21 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public object TheProduct { get; private set; }
 		public string File { get; private set; }
 
+		[StepDefinition(@"I select checkbox for product saved as: (.*)")]
+		public void ThenISelectCheckboxForProductSavedAsUPC(string upcNumber)
+		{
+			WebElements webElementsObject = new WebElements();
+			upcNumber = Context.GetFromContext(upcNumber).ToString();
+			Report.IsTrue(webElementsObject.SelectCheckboxForProductWithUPC(upcNumber), "Failed to select checkbox", "Successfully selected checkbox");
+		}
+
+
 		[StepDefinition(@"In the Delete Active Products page I click the Filter button")]
 		public void ThenInTheDeleteActiveProductsPageIClickTheFilterButton()
 		{
 			WebElements webElementsObject = new WebElements();
 			Report.IsTrue(webElementsObject.ClickFilterButtonInDeleteActiveProductsPage(), "Failed to click Filter button", "Successfully clicked Filter button");
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"In the Delete Active Products page I search for UPC saved as: (.*)")]
@@ -72,6 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		{
 			WebElements webElementsObject = new WebElements();
 			Report.IsTrue(webElementsObject.ClickMakeObsoleteButton(), "Failed to click 'Make Obsolete' button", "Successfully clicked 'Make Obsolete' button");
+			Delay.Seconds(5);
 		}
 
 		[StepDefinition(@"I select the checkbox in the Make Obsolete popup")]
@@ -83,10 +94,9 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		[StepDefinition(@"In the Make Obsolete popup I click on the Accept button")]
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
-		{
-			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to click accept button", "Clicked accept button", true);
-			GeneralUtilities.Wait_for_load_finish();
-			Delay.Seconds(1);
+		{ 
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.ClickAcceptButtonInMakeObsoletePopup(), "Failed to click Accept button", "Successfully clicked Accept button");
 		}
 
 		[StepDefinition(@"I select a random products checkbox and save as: (.*)")]
@@ -96,12 +106,19 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			Report.IsTrue(webElementsObject.SelectRandomCheckBox(savedAs), "Failed to select a random checkbox and save its corresponding product ID", "Successfully selected a random checkbox and save its corresponding product ID");
 		}
 
-		[StepDefinition(@"I make sure product saved as: (.*) is missing from the product list")]
-		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs)
+		[StepDefinition(@"I make sure product saved as: (.*) (should|should not) missing from the product list")]
+		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs, string shouldOrShouldNot)
 		{
 			WebElements webElementsObject = new WebElements();
-			var productID = Context.GetFromContext(savedAs);
-			Report.IsTrue(webElementsObject.CheckIfProductIsMissing(productID.ToString()), "The following product ID: " + productID + " should be missing but it was found in the product list", "The following product ID: " + productID + " was expected to be missing from the product list and it was");
+			savedAs = Context.GetFromContext(savedAs).ToString();
+
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				Report.IsTrue(webElementsObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product UPC: " + savedAs + " should be missing but it was found in the product list", "The following product UPC: " + savedAs + " was expected to be missing from the product list and it was");
+			} else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				Report.IsTrue(!webElementsObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product UPC: " + savedAs + " should not be missing but it was found in the product list", "The following product UPC: " + savedAs + " was expected to be found in the product list and it was");
+			}
 		}
 
 

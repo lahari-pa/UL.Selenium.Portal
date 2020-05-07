@@ -18,16 +18,27 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
+		public bool ClickAcceptButtonInMakeObsoletePopup()
+		{
+			IWebElement acceptButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h3[text()='Make Obsolete']/../following-sibling::div/following-sibling::div//button[text()='Accept']"), 2);
+			return acceptButton.TryClick();
+		}
+
+		public bool SelectCheckboxForProductWithUPC(string upcNumber)
+		{
+			IWebElement checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[@data-bind='text: UPCNumber'][text()='" + upcNumber + "']/../../../..//input[@type='checkbox']"), 2);
+			return checkbox.TryCheck();
+		}
 
 		public bool ClickFilterButtonInDeleteActiveProductsPage()
 		{
-			IWebElement filterButton = this.containerElement.FindElement(By.XPath("//button[@data-bind='click: searchProducts']"), 2);
+			IWebElement filterButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@data-bind='click: searchProducts']"), 2);
 			return filterButton.TryClick();
 		}
 
 		public bool EnterTextInSearchBarInDeleteActiveProductsPage(string upcNumber)
 		{
-			IWebElement searchBar = this.containerElement.FindElement(By.XPath("//input[@data-bind='textInput: upcNumber']"), 2);
+			IWebElement searchBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@data-bind='textInput: upcNumber']"), 2);
 			return searchBar.TryEnterText(upcNumber);
 		}
 
@@ -78,13 +89,13 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		public bool ClickMakeObsoleteButton()
 		{
-			IWebElement button = this.containerElement.FindElement(By.XPath("//button[contains(text(), 'Make Obsolete')]"), 2);
+			IWebElement button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[contains(text(), 'Make Obsolete')]"), 2);
 			return button.TryClick();
 		}
 
 		public bool SelectCheckBoxInMakeObsoletePopup()
 		{
-			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//input[@type='checkbox']"), 2);
+			IWebElement checkBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='modal-content']//input[@type='checkbox']"), 2);
 			return checkBox.TryCheck();
 		}
 
@@ -104,23 +115,15 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			return checkboxList[randIndex].TryCheck();
 		}
 
-		public bool CheckIfProductIsMissing(string productID)
+		public bool CheckIfProductIsMissing(string upcNumber)
 		{
-			IList<IWebElement> productIDList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']/../following-sibling::td[@data-bind='text: Product.ProductID']"), 2);
-
-			bool productIDMissing = true;
-
-			foreach (IWebElement productIDInList in productIDList)
+			IWebElement product = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[@data-bind='text: UPCNumber'][text()='" + upcNumber + "']"), 2);
+			if (product == null)
 			{
-
-				if (productIDInList.Text == productID)
-				{
-					productIDMissing = false;
-				}
-				
+				return true;
 			}
 
-			return productIDMissing;
+			return false;
 
 		}
 

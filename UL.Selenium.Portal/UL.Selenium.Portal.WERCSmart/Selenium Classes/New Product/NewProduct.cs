@@ -1486,7 +1486,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickAcceptButton()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[text()='Accept']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[text()='Accept']"), 2);
 			if (el == null)
 			{
 				return false;
