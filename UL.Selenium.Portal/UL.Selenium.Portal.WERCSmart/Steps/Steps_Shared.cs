@@ -2642,7 +2642,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.UploadPDFFileSectionAndType("OSHA SDS", "Upload Physical", docPath);
+			//MyStepsNewProduct.UploadPDFFileSectionAndType("OSHA SDS", "Upload Physical", docPath);
+			MyStepsNewProduct.UploadPDFFileSectionAndType("OSHA SDS", "Upload SDS (Optional)", docPath);
 			Report.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -3542,11 +3543,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 
 			Report.StartStep("I should see the Volatile Organic Compound Summary");
-			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
-			
+			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");			
 			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
-			Report.StartStep("In the New Product page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			
 
 		}
 
