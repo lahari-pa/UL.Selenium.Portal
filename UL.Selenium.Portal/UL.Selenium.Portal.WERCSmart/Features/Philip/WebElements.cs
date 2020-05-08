@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using TechTalk.SpecFlow;
 using System;
 using UL.Automation.Reporting.SpecFlow.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Philip
 {
@@ -18,15 +20,69 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
-		public bool ClickAcceptButtonInMakeObsoletePopup()
+		public string GetProductIDFromContext(string savedAs)
 		{
-			IWebElement acceptButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h3[text()='Make Obsolete']/../following-sibling::div/following-sibling::div//button[text()='Accept']"), 2);
-			return acceptButton.TryClick();
+
+			Report.Info("Searching for Product Saved as " + savedAs);
+
+			if (!Context.Contains(savedAs))
+			{
+				Report.Failure("The reference: " + savedAs + " was not found in context");
+				return "";
+			}
+
+			string id = "";
+
+			try
+			{
+				var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+				id = productToSearch.ProductId;
+			}
+			catch (Exception)
+			{
+				//do nothing
+			}
+
+			//if we didn't get the id try a different object type
+			if (id == "")
+			{
+				try
+				{
+					var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+					id = productDetails.Id;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+			}
+
+			if (id == "")
+			{
+				try
+				{
+					id = Context.GetFromContext(savedAs).ToString();
+				}
+				catch (Exception)
+				{
+
+				}
+			}
+
+			return id;
+
 		}
 
-		public bool SelectCheckboxForProductWithUPC(string upcNumber)
+		public bool ClickAcceptButtonInMakeObsoletePopup(string acceptOrCancel)
 		{
-			IWebElement checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[@data-bind='text: UPCNumber'][text()='" + upcNumber + "']/../../../..//input[@type='checkbox']"), 2);
+			IWebElement button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h3[text()='Make Obsolete']/../following-sibling::div/following-sibling::div//button[text()='" + acceptOrCancel + "']"), 2);
+			return button.TryClick();
+		}
+
+		public bool SelectCheckboxForProductWithWPSID(string wpsID)
+		{
+			IWebElement checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@data-bind='text: Product.ProductID'][text()='" + wpsID + "']/preceding-sibling::td//input"), 2);
 			return checkbox.TryCheck();
 		}
 
@@ -36,30 +92,38 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			return filterButton.TryClick();
 		}
 
-		public bool EnterTextInSearchBarInDeleteActiveProductsPage(string upcNumber)
+		public bool EnterTextInSearchBarInDeleteActiveProductsPage(string wpsID)
 		{
-			IWebElement searchBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@data-bind='textInput: upcNumber']"), 2);
-			return searchBar.TryEnterText(upcNumber);
+			IWebElement searchBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@data-bind='textInput: wpsID']"), 2);
+			return searchBar.TryEnterText(wpsID);
 		}
 
 		public bool SelectCheckBoxNextToWPSIDLabel(string selectOrDeselect)
 		{
-			IWebElement checkbox = this.containerElement.FindElement(By.XPath("//th[contains(text(), 'WPS ID')]/..//input[@type='checkbox']"), 2);
+			IWebElement checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//th[contains(text(), 'WPS ID')]/..//input[@type='checkbox']"), 2);
 
 			if (selectOrDeselect.ToLower() == "select")
 			{
 
 				checkbox.TryCheck();
-				return checkbox.Checked();
+				if (checkbox.Checked())
+				{
+					return true;
+				}
 
 			}
-			else
+			else if (selectOrDeselect.ToLower() == "deselect")
 			{
 
-				checkbox.TryCheck();
-				return !checkbox.Checked();
+				checkbox.TryClick();
+				if (!checkbox.Checked())
+				{
+					return true;
+				}
 
 			}
+
+			return false;
 
 		}
 
@@ -99,25 +163,50 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			return checkBox.TryCheck();
 		}
 
-		public bool SelectRandomCheckBox(string savedAs)
+		public bool SelectRandomCheckBoxes(string savedAs)
 		{
-			IList<IWebElement> checkboxList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']"), 2);
-			IList<IWebElement> productIDList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']/../following-sibling::td[@data-bind='text: Product.ProductID']"), 2);
-			
-			Random rnd = new Random();
-			int randIndex = rnd.Next(1, checkboxList.Count);
+			IList<IWebElement> checkboxList = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='checkbox']"), 2);
+			IList<IWebElement> productIDList = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='checkbox']/../following-sibling::td[@data-bind='text: Product.ProductID']"), 2);
+			List<string> productsChecked = new List<string>();
+			List<int> indexesChecked = new List<int>();
 
-			if (checkboxList[randIndex].TryCheck())
+			Random rnd = new Random();
+
+			for (int i = 0; i < 3; i++)
 			{
-				Context.AddToContext(savedAs, productIDList[randIndex]);
+
+				int randIndex = rnd.Next(1, checkboxList.Count);
+
+				if (!indexesChecked.Contains(randIndex))
+				{
+
+					if (checkboxList[randIndex].TryCheck())
+					{
+						if (productsChecked.Count == 0)
+						{
+							productsChecked.Add(productIDList[randIndex].Text);
+						} else
+						{
+							productsChecked.Add("," + productIDList[randIndex].Text);
+						}
+						indexesChecked.Add(randIndex);
+					}
+
+				} else
+				{
+					i--;
+				}
+
 			}
 
-			return checkboxList[randIndex].TryCheck();
+			Context.AddToContext(savedAs, productsChecked.ToString());
+
+			return true;
 		}
 
-		public bool CheckIfProductIsMissing(string upcNumber)
+		public bool CheckIfProductIsMissing(string wpsID)
 		{
-			IWebElement product = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[@data-bind='text: UPCNumber'][text()='" + upcNumber + "']"), 2);
+			IWebElement product = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@data-bind='text: Product.ProductID'][text()='" + wpsID + "']"), 2);
 			if (product == null)
 			{
 				return true;

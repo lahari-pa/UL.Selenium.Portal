@@ -38,12 +38,26 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public object TheProduct { get; private set; }
 		public string File { get; private set; }
 
-		[StepDefinition(@"I select checkbox for product saved as: (.*)")]
-		public void ThenISelectCheckboxForProductSavedAsUPC(string upcNumber)
+		[StepDefinition(@"I make sure products saved as: (.*) are missing from the product list")]
+		public void ThenIMakeSureProductsSavedAsSelectedProductsAreMissingFromTheProductList(string savedAs)
 		{
 			WebElements webElementsObject = new WebElements();
-			upcNumber = Context.GetFromContext(upcNumber).ToString();
-			Report.IsTrue(webElementsObject.SelectCheckboxForProductWithUPC(upcNumber), "Failed to select checkbox", "Successfully selected checkbox");
+			var list = Context.GetFromContext(savedAs).ToString();
+			string[] listSplit = list.Split(',');
+			Report.Info("Testing " + list + " split " + listSplit);
+			foreach (string listItem in listSplit)
+			{
+				Report.IsTrue(webElementsObject.CheckIfProductIsMissing(listItem), "The following product WPS ID: " + savedAs + " should be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be missing from the product list and it was");
+			}
+		}
+
+
+		[StepDefinition(@"I select checkbox for product saved as: (.*)")]
+		public void ThenISelectCheckboxForProductSavedAs(string wpsID)
+		{
+			WebElements webElementsObject = new WebElements();
+			wpsID = webElementsObject.GetProductIDFromContext(wpsID);
+			Report.IsTrue(webElementsObject.SelectCheckboxForProductWithWPSID(wpsID), "Failed to select checkbox", "Successfully selected checkbox");
 		}
 
 
@@ -55,12 +69,12 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			Delay.Seconds(10);
 		}
 
-		[StepDefinition(@"In the Delete Active Products page I search for UPC saved as: (.*)")]
-		public void ThenInTheDeleteActiveProductsPageISearchForUPCSavedAsUPC(string upcNumber)
+		[StepDefinition(@"In the Delete Active Products page I search for WPS ID saved as: (.*)")]
+		public void ThenInTheDeleteActiveProductsPageISearchForWPSIDSavedAs(string wpsID)
 		{
 			WebElements webElementsObject = new WebElements();
-			upcNumber = Context.GetFromContext(upcNumber).ToString();
-			Report.IsTrue(webElementsObject.EnterTextInSearchBarInDeleteActiveProductsPage(upcNumber), "Failed to enter UPC number in the searchbar", "Successfully entered UPC number in the searchbar");
+			wpsID = webElementsObject.GetProductIDFromContext(wpsID);
+			Report.IsTrue(webElementsObject.EnterTextInSearchBarInDeleteActiveProductsPage(wpsID), "Failed to enter WPS ID number in the searchbar", "Successfully entered WPS ID number in the searchbar");
 		}
 
 		[StepDefinition(@"I (select|deselect) the checkbox next to WPS ID in the Delete Active Products page")]
@@ -92,32 +106,33 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			Report.IsTrue(webElementsObject.SelectCheckBoxInMakeObsoletePopup(), "Failed to select the checkbox in the Make Obsolete popup", "Successfully selected the checkbox in the Make Obsolete popup");
 		}
 
-		[StepDefinition(@"In the Make Obsolete popup I click on the Accept button")]
-		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
+		[StepDefinition(@"In the Make Obsolete popup I click on the (Accept|Cancel) button")]
+		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton(string acceptOrCancel)
 		{ 
 			WebElements webElementsObject = new WebElements();
-			Report.IsTrue(webElementsObject.ClickAcceptButtonInMakeObsoletePopup(), "Failed to click Accept button", "Successfully clicked Accept button");
+			Report.IsTrue(webElementsObject.ClickAcceptButtonInMakeObsoletePopup(acceptOrCancel), "Failed to click " + acceptOrCancel + " button", "Successfully clicked " + acceptOrCancel + " button");
+			Delay.Seconds(5);
 		}
 
-		[StepDefinition(@"I select a random products checkbox and save as: (.*)")]
-		public void ThenISelectARandomProductsCheckbox(string savedAs)
+		[StepDefinition(@"I select random products checkbox and save as: (.*)")]
+		public void ThenISelectRandomProductsCheckbox(string savedAs)
 		{
 			WebElements webElementsObject = new WebElements();
-			Report.IsTrue(webElementsObject.SelectRandomCheckBox(savedAs), "Failed to select a random checkbox and save its corresponding product ID", "Successfully selected a random checkbox and save its corresponding product ID");
+			Report.IsTrue(webElementsObject.SelectRandomCheckBoxes(savedAs), "Failed to select random checkboxes and save their corresponding product IDs", "Successfully selected random checkboxes and saved their corresponding product IDs");
 		}
 
 		[StepDefinition(@"I make sure product saved as: (.*) (should|should not) missing from the product list")]
 		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs, string shouldOrShouldNot)
 		{
 			WebElements webElementsObject = new WebElements();
-			savedAs = Context.GetFromContext(savedAs).ToString();
+			savedAs = webElementsObject.GetProductIDFromContext(savedAs);
 
 			if (shouldOrShouldNot.ToLower() == "should")
 			{
-				Report.IsTrue(webElementsObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product UPC: " + savedAs + " should be missing but it was found in the product list", "The following product UPC: " + savedAs + " was expected to be missing from the product list and it was");
+				Report.IsTrue(webElementsObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product WPS ID: " + savedAs + " should be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be missing from the product list and it was");
 			} else if (shouldOrShouldNot.ToLower() == "should not")
 			{
-				Report.IsTrue(!webElementsObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product UPC: " + savedAs + " should not be missing but it was found in the product list", "The following product UPC: " + savedAs + " was expected to be found in the product list and it was");
+				Report.IsTrue(!webElementsObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product WPS ID: " + savedAs + " should not be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be found in the product list and it was");
 			}
 		}
 

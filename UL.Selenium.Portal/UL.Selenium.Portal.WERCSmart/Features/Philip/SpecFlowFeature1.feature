@@ -223,14 +223,14 @@ Given I click Bulk Actions in the Products Grid
 	Then I confirm all checkboxes are selected in the Delete Active Products page
 	Then I deselect the checkbox next to WPS ID in the Delete Active Products page
 	Then I confirm all checkboxes are deselected in the Delete Active Products page
+	Then I select random products checkbox and save as: selectedProducts
 	Then I click on the Make Obsolete button
 	Then I select the checkbox in the Make Obsolete popup
-	And I Click close in dialog
-	Then I select a random products checkbox and save as: selectedProduct
+	Then In the Make Obsolete popup I click on the Cancel button
 	Then I click on the Make Obsolete button
 	Then I select the checkbox in the Make Obsolete popup
 	Then In the Make Obsolete popup I click on the Accept button
-	Then I make sure product saved as: selectedProduct is missing from the product list
+	Then I make sure products saved as: selectedProducts are missing from the product list
 
 
 Scenario:[88826] My Products - Bulk Actions Multiple Deletion of Registrations
@@ -255,16 +255,16 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given I click Bulk Actions in the Products Grid
 	And I click Delete Products in the Bulk Actions window
 	And I should see the header: Delete Active Products on the Delete Active Product window
-	Then In the Delete Active Products page I search for UPC saved as: UPC88826
+	Then In the Delete Active Products page I search for WPS ID saved as: TestCase88826
 	Then In the Delete Active Products page I click the Filter button
-	Then I make sure product saved as: UPC88826 should not missing from the product list
-	Then I select checkbox for product saved as: UPC88826  
+	Then I make sure product saved as: TestCase88826 should not missing from the product list
+	Then I select checkbox for product saved as: TestCase88826  
 	Then I click on the Make Obsolete button
 	Then I select the checkbox in the Make Obsolete popup
 	Then In the Make Obsolete popup I click on the Accept button
-	Then In the Delete Active Products page I search for UPC saved as: UPC88826
+	Then In the Delete Active Products page I search for WPS ID saved as: TestCase88826
 	Then In the Delete Active Products page I click the Filter button
-	Then I make sure product saved as: UPC88826 should missing from the product list
+	Then I make sure product saved as: TestCase88826 should missing from the product list
 	Given I navigate to the home page
-	Given I search for the product saved as: TestCase88826
+	#Given I search for the product saved as: TestCase88826
 	#Confirm product not shown
