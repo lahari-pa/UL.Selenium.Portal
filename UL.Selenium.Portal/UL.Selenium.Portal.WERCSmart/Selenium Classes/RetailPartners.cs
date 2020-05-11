@@ -184,23 +184,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckProductInformation(string id, string productType, string productAccessCode)
 		{
-
-			IWebElement accessCode = this.containerElement.FindElement(By.XPath(".//div[@data-bind='html: html']"), 2);
-			string accessCodeText = accessCode.Text;
-
-			if (!accessCodeText.Contains(id))
+	
+			IWebElement popup = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']"), 2);
+			string popupText = popup.Text.ToLower();
+			Report.Info("hi " + popupText + " HI1 " + id);
+			if (!popupText.Contains(id.ToLower()))
 			{
 
 				Report.Info("Product ID does not match");
 				return false;
 
-			} else if (!accessCodeText.Contains(productType))
-			{
+			//} else if (!popupText.Contains(productType.ToLower()))
+			//{
+	
+			//	Report.Info("Product Type does not match");
+			//	return false;
 
-				Report.Info("Product Type does not match");
-				return false;
-
-			} else if (!accessCodeText.Contains("Access Code: " + productAccessCode))
+			} else if (!popupText.Contains("access code: " + productType.ToLower()))
 			{
 
 				Report.Info("Product ID does not match");
