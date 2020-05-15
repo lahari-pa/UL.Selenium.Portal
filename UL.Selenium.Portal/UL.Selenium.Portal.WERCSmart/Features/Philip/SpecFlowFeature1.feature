@@ -268,3 +268,117 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given I navigate to the home page
 	#Given I search for the product saved as: TestCase88826
 	#Confirm product not shown
+
+
+Scenario: [132756] Canadian Province Pesticide Options
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I generate a random UPC number and save as: RandomUPC
+Given I delete all products with UPC Number: RandomUPC
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I save the product information as: TestCase
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+Given I call Shared Step 1234 (Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path)
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| 74-98-6   | Propane       | 100     | false               |            | false       |
+Given I call Shared Step 133277(Waste Classification Data - CEPA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I should see the Pesticide Details - Canada Page
+Then I check the options in the dropdown menus for the following sections
+| Section                    | Options                                                                                                                                                                                                                              |
+| Alberta                    | None,Schedule 1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                                 |
+| British Columbia           | None,Permit Restricted,Restricted,Commercial,Domestic,Excluded                                                                                                                                                                  |
+| Manitoba                   | None,Commercial,Controlled Purchase,Not Regulated,Restricted,Self-Select                                                                                                                                                        |
+| New Brunswick              | None,Banned,Domestic / Self-Select,Non-Domestic                                                                                                                                                                                   |
+| New Foundland and Labrador | None,Banned,Domestic,Commerical,Restricted                                                                                                                                                                                       |
+| Nova Scotia                | None,Allowed / Self-Select,Banned,Commercial,Controlled Purchase,Restricted,Not Regulated                                                                                                                                      |
+| Ontario                    | None,Class A: Manufacturing Products,Class B: Restricted,Class C: Commercial,Class D: Domestic with License,Class D: Domestic without License,Class D: Domestic Controlled Purchase Requiring a License,Class E: Treated Seed |
+| Prince Edward Island       | Banned,Controlled Purchase,Exempt: Schedule 2,Exempt: Schedule 7,Non-Domestic,None,Self-Select: Schedule 8                                                                                                                     |
+| Quebec                     | None,Class 1,Class 2,Class 3,Class 3A,Class 4,Class 5,Banned                                                                                                                                                                 |
+| Saskatchewan               | None,Commercial,Restricted                                                                                                                                                                                                         |
+| Northwest Territory        | Not Applicable                                                                                                                                                                                       |
+| Yukon Territory            | None,Commercial,Domestic,Restricted                                                                                                                                                                                               |
+
+
+Scenario: [133161] Fertilizer - P, N, or K question
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+Given I should see the Additional Product Information Page
+Given I set the Does the product contain fertilizer (P, N or K)? option to: No
+#Ensure not options
+Given I set the Does the product contain fertilizer (P, N or K)? option to: Yes
+Then I should see the PNK section title in the Additional Product Information with the following text: Provide the amount (Percent) of each of the following within the product
+Then I check if input field for the following section exists: Phosphates /Phosphorous (“P”)
+Then I check if input field for the following section exists: Nitrogen /Nitrates (“N”)
+Then I check if input field for the following section exists: Potassium(“K”)
+Then I enter the following text: 1000000 for the input field in the following section: Phosphates /Phosphorous (“P”)
+Then I enter the following text: 10.1232123 for the input field in the following section: Nitrogen /Nitrates (“N”)
+Then I enter the following text: 100 for the input field in the following section: Potassium(“K”)
+Then I click continue
+And Phosphates /Phosphorous (“P”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+And Nitrogen /Nitrates (“N”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+Then I enter the following text: 35.24 for the input field in the following section: Phosphates /Phosphorous (“P”)
+Then I enter the following text: .05 for the input field in the following section: Nitrogen /Nitrates (“N”)
+And Phosphates /Phosphorous (“P”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+And Nitrogen /Nitrates (“N”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+
+
+Scenario: [100980] Regulatory Documents to Provide - US and Canada - upload all documents > Continue
+    Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I generate a random UPC number and save as: UPC120866
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase120866
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 74201 (Select Retailers - CVS)
+	And I click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC120866, container type: Plastic Container and size: 12 click continue
+	And I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
+
+
+Scenario: [130389] Demo Scenario
+Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save product Product to context as TestCase
+
+Scenario: [128754] BCP Product - Family Dollar and Dollar Tree Retailers Available for selection
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I generate a random UPC number and save as: UPC60643
+Given I delete all products with UPC Number: saved as UPC60643
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
+Then I save the product information as: TestCase60643
+Given I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 48367 (Product Includes Battery > any type)
+| Battery Type | How many batteries required to run | Manufacturer | Number of batteries per package |
+| Alkaline     | 6                                  | <any>        | 6                               |
+Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+And I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
+Given I select the following retailers in the Select Retailers popup list view:
+| Retailer												   |
+| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+| Family Dollar                                            |
+Then I click Done on Select Retailers window
+Then I confirm the following retailers are showing in the Retailer page
+| Retailer												   |
+| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+| Family Dollar                                            |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60643
+

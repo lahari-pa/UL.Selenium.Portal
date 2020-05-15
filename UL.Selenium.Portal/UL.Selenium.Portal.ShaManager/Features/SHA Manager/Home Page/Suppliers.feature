@@ -41,15 +41,16 @@ Then In the Supplier Manager Popup I click on the search button
 Then In the Supplier Manager Popup I click on the first supplier returned
 Then In The Supplier Manager popup I click on the category: Data Tier Consent
 Then In The Supplier Manager popup I check that the column: Retailer contains all values found in the table:
-| Expected Value                                           |
-| Costco                                                   |
-| Canadian Tire                                            |
-| CVS                                                      |
-| Target                                                   |
-| Walgreens                                                |
-| Family Dollar                                            |
-| Wal-Mart/SAM'S CLUB                                      |
-| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+| Expected Value																 |
+| Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops) |
+| CVS                                                                            |
+| Dollar General                                                                 |
+| Dollar Tree Stores, Inc. / Greenbrier International, Inc	                     |
+| Family Dollar	                                                                 |
+| Rite Aid	                                                                     |
+| Target	                                                                     |
+| Walgreens	                                                                     |
+| Wal-Mart/SAM'S CLUB		                                                     |
 Then In the supplier manager popup I check that Data Tier Consent Table contains the following columns headings:
 | Expected Headers |
 |                  |
@@ -63,18 +64,18 @@ Then In the supplier manager popup I check that Data Tier Consent Table contains
 | Email            |
 | Date             |
 Then In The Supplier Manager popup I check that the column: Name contains all values found in the table:
-| Expected Value |
-| Richard Smith  |
-| Richard Smith  |
-| Richard Smith  |
-| Richard Smith  |
-| Richard Smith  |
-| Richard Smith  |
-| Richard Smith  |
-| Richard Smith  |
+| Expected Value       |
+|                      |
+| Automated, Products  |
+|                      |
+| Automated, Products  |
+| Automated, Products  |
+| Automated, Products  |
+| Automated, Products  |
+| Automated, Products  |
+| Automated, Products  |
 Then In the Supplier Manager popup I check that in The Data Tier Consent Table the email column contains only valid email addresses
 Then In the Supplier Manager popup I check that in The Data Tier Consent Table the date column contains dates that are in the format mm-dd-yyyy
-
 
 
 

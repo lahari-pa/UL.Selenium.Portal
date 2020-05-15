@@ -1221,7 +1221,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
 				Delay.Seconds(1);
 			}
-
 		}
 
 		[StepDefinition(@"I set the (.*) option to: (.*) and save entry")]
@@ -2971,12 +2970,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Successfully unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
 		}
 
+		[StepDefinition(@"I unselect option: (.*) under section: (.*)")]
+		public void ForTheOptionUnselect(string option, string section)
+		{
+			Report.IsTrue(new NewProduct().UnsetOptionInSection(section.Trim(), option.Trim()),
+				$"Failed to unset the input to: '{option}' in section: '{section}'",
+				$"Successfully unset the input to: '{option}' in section: '{section}'");
+		}
+
 		[Then(@"I check if alert message displays the following text: (.*)")]
 		public void ThenICheckIfAlertMessageDisplaysTheFollowingText(string displayedText)
 		{
 			var NewProductObject = new NewProduct();
 			Report.IsTrue(NewProductObject.CheckAlertMessageText(displayedText), "The alert message text did not match", "The alert message text did match");
 		}
+
+		[StepDefinition(@"I check the options in the dropdown menus for the following sections")]
+		public void ThenICheckTheOptionsInTheDropdownMenusForTheFollowingSections(Table table)
+		{
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.CheckOptionsInDropDownMenusForTheFollowingSectinons(table);
+		}
+
+		[StepDefinition(@"I (should|shoult not) see the PNK section title in the Additional Product Information with the following text: (.*)")]
+		public void ThenIShouldSeeThePNKSectionTitleInTheAdditionalProductInformationWithTheFollowingText(string shouldOrShouldNot, string titleText)
+		{
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.CheckForPNKSectionTitleWithText(shouldOrShouldNot, titleText);
+		}
+
+		[StepDefinition(@"I check if input field for the following section exists: (.*)")]
+		public void ThenICheckIfInputFieldForTheFollowingSectionExistsPhosphatesPhosphorousP(string sectionName)
+		{
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.CheckForInputFieldInSection(sectionName);
+		}
+
+		[StepDefinition(@"I enter the following text: (.*) for the input field in the following section: (.*)")]
+		public void ThenIEnterTheFollowingTextForTheInputFieldInTheFollowingSectionPhosphatesPhosphorousP(string enterText, string sectionName)
+		{
+			NewProduct newProductObject = new NewProduct();
+			newProductObject.EnterTextInInputFieldInSection(enterText, sectionName);
+		}
+
+
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

@@ -641,6 +641,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product has an Environmental Protection Agency (EPA) Registration Number", "No");
+			Report.StartStep(
+				"Product has a State Registration: No");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product has a State Registration", "No");
 			Report.StartStep("I select the first option in section: Select the applicable exemption");
 			MyStepsNewProduct.SelectFirstOptionInSection("Select the applicable exemption");
 			Report.StartStep("In the Pesticide Details - U.S. page I click Continue");
@@ -2410,6 +2414,25 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyStepsNewProduct.CheckDisplayedSections("only see", table);
 			Report.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
 			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			Report.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			Report.StartStep("In the Waste Classification Data Page page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+		}
+
+		[StepDefinition(@"I call Shared Step 133277\(Waste Classification Data - CEPA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
+		public void ICallSharedWasteClassificationData_CEAPRandom_Pro65No_Continue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
+			var table = new Table("Section");
+			table.AddRow("Canadian Enviornmental Protection Act (CEPA) status");
+			table.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
+			Report.StartStep("I set the Canadian Enviornmental Protection Act (CEPA) status option to: Compliant");
+			stepsRegulatoryInformation.SetCEPATo("Compliant with Domestic Substances List (DSL)");
 			Report.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
 			Report.StartStep("In the Waste Classification Data Page page I click Continue");
@@ -10019,6 +10042,54 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
 
 			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
+		}
+
+		[StepDefinition(@"I call Shared Step 1234 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path\)")]
+		public void IcallSharedStep1234()
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I should see the Additional Product Information Page");
+			var MyNewProductSteps = new StepsNewProduct();
+			var newProductObject = new NewProduct();
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProductSteps.SetTheSectionOptionTo("Which one best describes your product", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
+			newProductObject.UnsetOptionInSection("Select countries the product may be sold in".Trim(), "United States".Trim());
+			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyNewProductSteps.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			var tableFirst = new Table("Section");
+			tableFirst.AddRow("Select countries the product may be sold in");
+			tableFirst.AddRow(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
+			tableFirst.AddRow(
+				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
+			tableFirst.AddRow(
+				"Product is a Retailer's Private Label or Brand");
+			tableFirst.AddRow(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
+			Report.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartStep(
+				"Product is a Retailer's Private Label or Brand: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is a Retailer's Private Label or Brand",
+				"No");
+			Report.StartStep(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale): No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 	}
 }

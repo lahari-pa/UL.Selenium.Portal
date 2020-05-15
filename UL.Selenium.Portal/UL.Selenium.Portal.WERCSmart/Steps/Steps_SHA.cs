@@ -3605,7 +3605,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
 		public void InTheSupplierManagerPopupICheckThatColumnXContainsAllValues(string column, Table table)
 		{
-			
 			Report.Info("Converting the table to a List");
 			List<string> expectedValues = new List<string>();
 			foreach (TableRow thisRow in table.Rows)

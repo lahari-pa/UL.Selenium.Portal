@@ -38,6 +38,14 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public object TheProduct { get; private set; }
 		public string File { get; private set; }
 
+		[StepDefinition(@"I confirm the following retailers are showing in the Retailer page")]
+		public void ThenIConfirmTheFollowingRetailersAreShowingInTheRetailerPage(Table table)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.CheckForTheFollowingRetailersInRetailerPage(table), "Failed to find all retailers", "Successfully found all retailers");
+		}
+
+
 		[StepDefinition(@"I make sure products saved as: (.*) are missing from the product list")]
 		public void ThenIMakeSureProductsSavedAsSelectedProductsAreMissingFromTheProductList(string savedAs)
 		{

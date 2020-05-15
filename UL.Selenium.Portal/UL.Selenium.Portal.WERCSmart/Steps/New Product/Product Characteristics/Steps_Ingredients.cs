@@ -875,5 +875,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.CheckTopSearchfieldDropdownItemsCASNumber(casNumber), "The top result in the seachfields dropdown item did not have the CAS number, " + casNumber, "The top result in the seachfields dropdown item did have the CAS number, " + casNumber);
 		}
 
+		[StepDefinition(@"I set first VOC option to: 'Yes'")]
+		public void GivenISetFirstVOCOptionToYes1(string yesOrNo)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			ingredientsObject.SetFirstVOCOption(yesOrNo);
+		}
+
 	}
 }

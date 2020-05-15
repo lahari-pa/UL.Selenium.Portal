@@ -3032,6 +3032,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public bool UnsetOptionInSection(string section, string value)
+		{
+			string xPath = $@"//div[preceding-sibling::div[./label[contains(text(),""{section}"")]]]//input[./following-sibling::span[contains(text(),'{value}')]]";
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
+			if (el == null)
+			{
+				Report.Info($"Unable to find the input under section {section} option {value}");
+				return false;
+			}
+			if (el.GetAttribute("type") == "checkbox")
+			{
+				if (el.Checked())
+				{
+					el.TryClick();
+					return !el.Checked();
+				}
+				else
+				{
+					Report.Info("Cannot uncheck the input as it was not checked to start");
+					return false;
+				}
+			}
+			Report.Info("Method only applicable to checkbox type input");
+			return false;
+		}
+
 		public bool UnselectTransportationOptions(string option)
 		{
 			bool pass = true;
@@ -4474,6 +4500,56 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return restrictOptionCheckBox.TryCheck();
 		}
 
+		public bool CheckOptionsInDropDownMenusForTheFollowingSectinons(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{ 
+				IList<IWebElement> options = this.containerElement.FindElements(By.XPath("//div[@class='col-sm-4']//label[text()='" + row["Section"] + "']/../following-sibling::div//select//option"), 2);
+				string[] strArr = row["Options"].Split(',');
+				if (strArr.Count() != options.Count() - 1 || options.Count() < 1)
+				{
+					return false;
+				}
+				foreach (IWebElement option in options)
+				{
+					string optionText = option.Text;
+					if (optionText != "Choose..." && optionText != "choose...")
+					{
+						if (!strArr.Contains(optionText))
+						{
+							return false;
+						}
+					}
+				}
+
+			}
+
+			return true;
+		}
+
+		public bool CheckForPNKSectionTitleWithText(string shouldOrShouldNot, string titleText)
+		{
+			IWebElement sectionTitle = this.containerElement.FindElement(By.XPath(@"//div[text()='" + titleText + "']"), 2);
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				return sectionTitle != null;
+			} else
+			{
+				return sectionTitle == null;
+			}
+		}
+
+		public bool CheckForInputFieldInSection(string sectionName)
+		{
+			IWebElement section = this.containerElement.FindElement(By.XPath(@"//label[text()='" + sectionName + "']"), 2);
+			return section != null;
+		}
+
+		public bool EnterTextInInputFieldInSection(string enterText, string sectionName)
+		{
+			IWebElement section = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//label[text()='" + sectionName + "']/../following-sibling::div//input"), 2);
+			return section.TryEnterText(enterText);
+		}
 
 	}
 
