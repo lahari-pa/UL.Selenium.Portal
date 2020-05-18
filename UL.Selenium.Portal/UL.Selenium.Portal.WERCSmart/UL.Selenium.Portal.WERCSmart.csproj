@@ -172,8 +172,6 @@
     <Compile Include="Classes\WERCSmartUser.cs" />
     <Compile Include="Database Functions\dbRetailers.cs" />
     <Compile Include="Database Functions\dbUtils.cs" />
-    <Compile Include="Features\Philip\StepDefintions.cs" />
-    <Compile Include="Features\Philip\WebElements.cs" />
     <Compile Include="Features\Product Registration\Distributor.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

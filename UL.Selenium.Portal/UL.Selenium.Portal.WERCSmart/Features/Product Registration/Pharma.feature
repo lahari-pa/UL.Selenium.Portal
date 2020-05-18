@@ -7,6 +7,8 @@
 @NewProduct
 @RetailPartners
 @Pharma
+@DocumentAcceptance
+@UPC
 @run_Pharma
 Feature: Pharma
 
@@ -370,67 +372,6 @@ And I navigate to the home page
 
 
 
-Scenario: [128141] Verification that 'Bed Bath and Beyond' Displays under 'My Retailers' and its Data Consent Tiers
-
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Then I click the Retail Partners icon in the Navigation Pane
-	When I select the retailer: Bed Bath and Beyond (Including Harmon, Buy buy Baby, and Christmas Tree Shops)
-	And I confirm that: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops) requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.1 permissions: Cleaning Supplies, Grocery, Health & Beauty, Nutritional Supplements, OTC - Over the Counter, and Pharmacy is showing under the Data Consent Tiers heading
-	When I click the More Information hyperlink
-	Then I check that the current URL contains: https://bedbathandbeyond.gcs-web.com/static-files/551ad447-b204-4204-90c8-a5064079c2f5/
-	And I close the window that opened
-
-	And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
-
-	And I click the "Tier 1: Regulatory Compliance" tab in Data Tier Details
-	And I confirm the Data Tier Details subheading reads: What does Regulatory Support mean?
-	And I click download PDF for "What does Regulatory Support mean?"
-	Then I confirm a new window opens displaying the document url: https://staging.thewercs.com/Wercs.SHA.MVCWebV1/RetailPartners/Retailer/Index/ec6b4522-b4f7-4567-acd2-8101450b6a07
-
-	And I click the "Tier 2: Chemical Program Support" tab in Data Tier Details
-	And I confirm the Data Tier Details subheading reads: What does Chemical Program Support mean?
-	And I click download PDF for "What does Chemical Program Support mean?"
-	Then I confirm a new window opens displaying the document url: https://staging.thewercs.com/Wercs.SHA.MVCWebV1/RetailPartners/Retailer/Index/ec6b4522-b4f7-4567-acd2-8101450b6a07
-
-	And I click the "Tier 3: Supplemental Reports" tab in Data Tier Details
-	And I confirm the Data Tier Details subheading reads: What does Supplemental Reports for Internal Business Use Only mean?
-	And I click download PDF for "What does Supplemental Reports for Internal Business Use Only mean?"
-	Then I confirm a new window opens displaying the document url: https://staging.thewercs.com/Wercs.SHA.MVCWebV1/RetailPartners/Retailer/Index/ec6b4522-b4f7-4567-acd2-8101450b6a07
-
-	And I click the "Tier 4: Public Disclosure Options" tab in Data Tier Details
-	And I confirm the Data Tier Details subheading reads: What are my Public Disclosure Options?
-	And I click download PDF for "What are my Public Disclosure Options?"
-	Then I confirm a new window opens displaying the document url: https://staging.thewercs.com/Wercs.SHA.MVCWebV1/RetailPartners/Retailer/Index/ec6b4522-b4f7-4567-acd2-8101450b6a07
-
-	And The Data Tier Details popup shows the following tabs:
-		| Tab                               |
-		| Tier 1: Regulatory Compliance     |
-		| Tier 2: Chemical Program Support  |
-		| Tier 3: Supplemental Reports      |
-		| Tier 4: Public Disclosure Options |
-	And I close the Data Tier Details popup
-
-	Then I confirm that there is a section labeled: Data Consent Tiers
-	Given I ensure the Data Consent Tier Sliders exist for the following tiers:
-		| Tier |
-		| 1    |
-		| 2.1  |
-		| 2.2  |
-		| 4.1  |
-
-	Given I click the Save Changes button
-	Then The success message in the Save Changes popup dialog should contain the following:
-		| Message                                                                                       |
-		| The information was saved correctly and the notification Email was sent to all Administrators |
-	Given I click close on the Save Changes popup dialog
-	And I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown
-	Given I click the back arrow on the Retail Partners Details page
-	Then I should see the Retail Partners page
-	And I navigate to the home page
-
-
-
-
 
 
 Scenario: [128134] Pharma -  Product in Recertification
@@ -459,7 +400,7 @@ Then I click continue
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
@@ -510,7 +451,7 @@ And I click Save in The Product Page
 Given In the New Product page I click tab: Retailer Association
 And I click the page heading: Universal Product Code (UPC)
 And I click Save in The Product Page
-Then Tablet or Capsule Count should not be showing the error messages on upc screen: This is a required field.
+Then 'Tablet or Capsule Count' should not be showing the error messages on upc screen: 'This is a required field.'
 And I click Save in The Product Page
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 And I click Save in The Product Page
