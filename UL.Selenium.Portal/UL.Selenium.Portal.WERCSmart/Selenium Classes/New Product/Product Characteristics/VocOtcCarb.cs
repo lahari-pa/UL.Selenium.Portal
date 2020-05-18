@@ -12,9 +12,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		public new string PanelTitle = "Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)";
 
 
-		//Below needs restoring as the SelectRadio() method needs fixing to handle to hyperlink seperting the text
-		//private const string _grantedAcpQuestion = "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.";
-		private const string _grantedAcpQuestion = "Product has been granted";
+		
+		private const string _grantedAcpQuestion = "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.";
+		//private const string _grantedAcpQuestion = "Product has been granted";
 
 		private const string _labelDilutionQuestion = "Product label specifies a dilution ratio which results in a final VOC concentration for the product during use";
 

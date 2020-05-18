@@ -409,8 +409,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.ClickIhaveNoStewardshipNumbers();
 			Delay.Seconds(5);
 			//modal wait and accept accept/ press YES
-			new GlobalSteps().WaitForAModalDialogToOpen();
-			new ModalDialog().ClickButton("YES");
+			//new GlobalSteps().WaitForAModalDialogToOpen();
+			//new ModalDialog().ClickButton("YES");
 			Delay.Seconds(5);
 
 			//data tiers

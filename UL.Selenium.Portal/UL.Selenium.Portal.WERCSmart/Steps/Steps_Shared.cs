@@ -1408,6 +1408,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"5.6");
 			Report.StartStep("In the Volatile Organic Compounds (VOC) page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compounds (VOC)");
+			Report.StartStep("I should see the Volatile Organic Compound Summary");
+			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
+			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 		}
 
 		[StepDefinition(@"I call Shared Step 57885 \(Data Acceptance - Click Accept - Happy Path\)")]

@@ -27,10 +27,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selRetailPartners = new RetailPartners();
 
-			if (!selRetailPartners.Wait_for_load(10))
+			if (!selRetailPartners.Wait_for_load(30))
 			{
 				Report.Info("Retail partners page has not loaded so no need to deal with it. ");
 			}
+			//if(new ModalDialog().WaitForContainerToBeVisible(5))
+			//{
+			//	new ModalDialog().ClickButton("GO TO MY RETAILERS");
+			//	selRetailPartners.Wait_for_load(10);
+			//}
 			else
 			{
 				//get list of all top level retail partners

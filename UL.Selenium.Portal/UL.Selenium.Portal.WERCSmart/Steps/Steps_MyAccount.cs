@@ -1304,6 +1304,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
 			GeneralUtilities.Wait_for_load_finish();
 			Report.IsTrue(mystwdinfo.NoStewardshipCheckbox_click(), "failed to click checkbox", "successfully clicked checkbox");
+			new GlobalSteps().WaitForAModalDialogToOpen();		
+
+
 			Report.IsTrue(modaldialog.Click_Yes(), "failed to click Yes", "successfully clicked Yes");
 
 			Report.IsTrue(mystwdinfo.StewardshipSaveOrCancel_Click("Save"), "failed to click save", "successfully clicked save");

@@ -3188,14 +3188,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			try
 			{
 				string xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]";
-				if (section== "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.")
+				IWebElement el;
+				if (section == "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.")
 				{
 
+					var elsFound = this.containerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
+					var upperEl = elsFound.First(x => x.Text.Contains(section));
+					el = upperEl.FindElement(By.XPath($".//following-sibling::div[1]//label[.//span[contains(text(),'{value}')]]"), 2);
+
 				}
-				//string xPath = $@"//div[@class='form-group' and .//label[contains(text(),'{section}')]]//label[.//span[contains(text(),'{value}')]]//input";
-				//IWebElement test = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='form-group' and .//label[contains(text(),'Product has been granted')]]"), 2);
-				//string testtt = test.Text;
-				IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 2);
+				else
+				{
+					el = this.containerElement.FindElement(By.XPath(xPath), 2);
+				}				
+				
 				if (el != null)
 				{
 					return el.TryClick();
