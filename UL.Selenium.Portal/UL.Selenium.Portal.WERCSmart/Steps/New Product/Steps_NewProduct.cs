@@ -195,7 +195,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click continue")]
 		public void ClickContinue()
 		{
-			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
+			int i = 0;
+			while(i<5)
+			{
+				if(NewProduct.ClickContinue())
+				{
+					Report.Success("Clicked 'Continue' successfully");
+					Report.Screenshot();
+					return;
+
+				}
+				Report.Info($"Failed to click continue on attempt: {i + 1}");
+				i++;
+			}
+			Report.Failure("Failed to click 'Continue'!");
+			Report.Screenshot();
+			//Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
 		}
 
 		[StepDefinition(@"in the (.*) page I click Continue")]
