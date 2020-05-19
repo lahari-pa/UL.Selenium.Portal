@@ -887,7 +887,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
     Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Suspended
 	Then I confirm that there is a 'U' next to the following product saved as: TestCase120798
 
-
+	
 @ScenarioId:7043
 	Scenario:[120849] "U" for UPC Update No Fee Charge
 

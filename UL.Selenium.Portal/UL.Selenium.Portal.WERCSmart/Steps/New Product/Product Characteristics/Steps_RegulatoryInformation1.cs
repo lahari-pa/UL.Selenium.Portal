@@ -21,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 				"Successfully set TSCA status: " + option);
 		}
 
-		[StepDefinition(@"For Canadian Environmental Protection Act (CEPA) status I select: (.*)")]
+		[StepDefinition(@"For Canadian Environmental Protection Act \(CEPA\) status I select: (.*)")]
 		public void SetCEPATo(string option)
 		{
 			Report.IsTrue(this.RegulatoryInformation1.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded",

@@ -390,7 +390,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#endregion
 
 		#region classes
-		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit }
+		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit, NDCNo }
 
 		public static Dictionary<Tab, string> MapTabs = new Dictionary<Tab, string> {
 			{ Tab.ProductType , "Product Type" },
@@ -1111,6 +1111,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
 					packageField.Select(info.PackageType);
 				}
+
+				if (info.CapsuleCount.Length > 0)
+				{
+					IWebElement capsuleCountField = container.FindElement(By.XPath(".//label[contains(text(),'Capsule Count')]/..//input"), 2);
+					capsuleCountField.EnterText(info.CapsuleCount);
+				}
+
 				return true;
 			}
 			catch (Exception ex)
@@ -3079,11 +3086,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetOptionInSection(string section, string value)
 		{
-			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
-						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
 						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
 						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])] | " +
-						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
 
@@ -4476,6 +4483,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public bool SelectRestrictUseOption(string retrictOption)
+		{
+			IWebElement restrictOptionCheckBox = this.containerElement.FindElement(By.XPath("//span[contains(text(),'" + retrictOption + "')]/preceding-sibling::input"), 2);
+			return restrictOptionCheckBox.TryCheck();
+		}
+
 
 	}
 
@@ -4503,6 +4516,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		public string UpcNumber { get; set; } = "";
 		public string ContainerType { get; set; } = "";
+		public string CapsuleCount { get; set; } = "";
 		public string Size { get; set; } = "";
 		public string Dpci { get; set; } = "";
 		public string Quantity { get; set; } = "";

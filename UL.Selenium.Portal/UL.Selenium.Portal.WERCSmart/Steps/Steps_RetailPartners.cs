@@ -628,6 +628,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(selDataEntryChanges.ClickClose(), "Failed to click close", "Clicked close successfully!");
 			}
+ 			Delay.Seconds(0);
 		}
 
 		[StepDefinition(@"if the save button is visible, I save changes and close the popup dialog")]
@@ -1815,7 +1816,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			this.GivenIClickOnCloseInTheReportDownloadDialog();
-
 		}
 
 
@@ -2134,7 +2134,140 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				}
 			}
+
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following retailers:")]
+		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingRetailers(string savedAs, Table table)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				List<List<string>> ListOfRetailerNames = new List<List<string>>();
+
+				for (int i = 1; i < table.RowCount + 1; i++)
+				{
+					List<string> RetailerName = ExcelUtils.Excel_GetRow(i);
+
+					ListOfRetailerNames.Add(RetailerName);
+				}
+
+				var abbr = new RetailerAbbreviations();
+				string selectedAbbr = "";
+
+				foreach (TableRow thisRow in table.Rows)
+				{
+
+					string retailer = thisRow["Retailer"];
+					bool isFound = false;
+
+					abbr.Map.TryGetValue(retailer, out selectedAbbr);
+
+					foreach (List<string> Retailer in ListOfRetailerNames)
+					{
+
+						if (Retailer[0] == selectedAbbr)
+						{
+							isFound = true;
+						}
+					}
+
+					if (!isFound)
+					{
+						Report.Failure("The reatiler: " + retailer + " was not found");
+						return isFound;
+					}
+
+				}
+
+				Report.Info("All retailers were fonud");
+				return true;
+			}
+
+			Report.Failure("Excel data was not found");
+			return false;
 		}
+
+
+		[StepDefinition(@"I (should|should not) see radio option: (.*)")]
+		public void ISeeRadioOption(string shouldOrShouldNot, string radioButtonText)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.FindRadioButton(shouldOrShouldNot, radioButtonText), "Failed to see/not see the radio button with the following text: " + radioButtonText, "Succes saw/not saw the radio button with the following text: " + radioButtonText);
+		}
+
+		[StepDefinition(@"I check if AIS is not uploaded")]
+		public void ICheckIfAISIsNotUploaded()
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
+		}
+
+		[StepDefinition(@"Check popup date productID: (.*) productType:(.*) productAccessCode: (.*)")]
+		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			string savedAs = productID;
+			try
+			{
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Report.Info("ProductID: " + id + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
+				Report.IsTrue(retailPartnersObject.CheckProductInformation(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
+
+			}
+			catch (Exception ex)
+			{
+
+				Report.Failure(ex.Message);
+				throw;
+			}
+
+		}
+	}
 
 
 

@@ -630,8 +630,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully set the 'Are Statements True' radio to: " + option);
 		}
 
-		[StepDefinition(@"In the Foward Product Registration Screen I should see product: (.*)")]
-		public void ThenInTheFowardProductRegistrationScreenIShouldSeeProduct(string id)
+		[StepDefinition(@"In the Foward Product Registration Screen I (should|should not) see product: (.*)")]
+		public void ThenInTheFowardProductRegistrationScreenIShouldSeeProduct(string shouldOrShouldNot, string id)
 		{
 			if (id.ToLower().Contains("saved as"))
 			{
@@ -644,8 +644,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				id = PI.Id;
 			}
 			var selForwardProdReg = new ForwardProductRegistration();
-			Report.IsTrue(selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
-				"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
+
+			if (shouldOrShouldNot.ToLower() == "should") {
+
+				Report.IsTrue(selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
+					"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
+
+			} else if(shouldOrShouldNot.ToLower() == "should not") {
+
+				Report.IsTrue(!selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
+					"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
+
+			}
+
 		}
 
 		[StepDefinition(@"In the Foward Product Registration Screen I Select the product: (.*)")]

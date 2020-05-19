@@ -1,8 +1,10 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UL.Automation.Selenium.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics
 {
@@ -84,7 +86,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 		#endregion
 
+		#region IWebElement Methods
 
+		public bool SelectAgreeInVOCAcceptance()
+		{
+			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//span[contains(text(), 'Your acknowledgement of this registration includes that your product (exceeds/does not exceed) the limits specified by the noted regulations and understand these statements of exceeding, or not exceeding, will be provided to the recipients for which the product is registered and assessed.  Recipients may take action based on these statements.')]/preceding-sibling::input"), 2);
+			return checkBox.TryCheck();
+		}
+
+		#endregion
 	}
-	
+
 }
