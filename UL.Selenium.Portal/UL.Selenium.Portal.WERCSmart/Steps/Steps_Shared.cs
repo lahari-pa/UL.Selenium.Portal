@@ -2421,7 +2421,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
 		}
 
-		[StepDefinition(@"I call Shared Step 132370\(Waste Classification Data - TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 132370 \(Waste Classification Data - TSCA \(Random\) - Prop 65 \(No\) - Continue - Happy Path\)")]
 		public void ICallSharedWasteClassificationData_TSCARandom_Pro65No_Continue()
 		{
 			ReportSettings.UseSubSteps = true;
