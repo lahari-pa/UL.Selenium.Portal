@@ -969,6 +969,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 				IWebElement ProductNameOnlabel = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/..//input"), 2);
 
+
+
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
 					try
@@ -1109,6 +1111,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (info.PackageType.Length > 0)
 				{
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					if (info.PackageType=="<First>")
+					{
+						var firstOption = packageField.FindElement(By.XPath("./option[not(text()='Package Type')]"), 1).Text;
+						info.PackageType = firstOption;
+					}
 					packageField.Select(info.PackageType);
 				}
 
@@ -1117,6 +1124,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					IWebElement capsuleCountField = container.FindElement(By.XPath(".//label[contains(text(),'Capsule Count')]/..//input"), 2);
 					capsuleCountField.EnterText(info.CapsuleCount);
 				}
+
+				if (info.ItemNumber.Length > 0)
+				{
+					IWebElement ItemNumberField = container.FindElement(By.XPath(".//label[contains(text(),'Please enter comma separated Item Number')]//following-sibling::input"), 2);
+					ItemNumberField.EnterText(info.ItemNumber);
+				}
+
 
 				return true;
 			}
@@ -4522,6 +4536,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string Quantity { get; set; } = "";
 		public string PackageType { get; set; } = "";
 		public string UPCName { get; set; } = "";
+		public string ItemNumber { get; set; } = "";
 
 	}
 

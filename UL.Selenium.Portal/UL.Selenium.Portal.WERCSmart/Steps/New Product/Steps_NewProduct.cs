@@ -1078,6 +1078,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Info("Size: " + upcInfo.Size);
 			Report.Info("DPCI: " + upcInfo.Dpci);
 			Report.Info("Quantity: " + upcInfo.Quantity);
+			Report.Info("PackageType: " + upcInfo.PackageType);
+			Report.Info("ItemNumber: " + upcInfo.ItemNumber);
+
 
 			if (upcInfo.UPCName.IsNullOrEmpty())
 			{
