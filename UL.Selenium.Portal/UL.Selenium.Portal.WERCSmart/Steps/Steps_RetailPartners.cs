@@ -2256,7 +2256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Report.Info("ProductID: " + id + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
-				Report.IsTrue(retailPartnersObject.CheckProductInformation(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
+				Report.IsTrue(new ModalDialog().CheckProductInformation(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
 
 			}
 			catch (Exception ex)
