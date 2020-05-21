@@ -3011,6 +3011,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
 
 		}
+
+		[StepDefinition(@"In the Regulatory Documents to Prodivde page, I enter the value: (.*) into the WHMIS SDS Docmument Date Field")]
+		public void InTheRegualtoryDocumentsToProvidePageIEnterValueIntoWHMISSDSDocumentDateField(string value)
+		{
+			Report.IsTrue(new NewProduct().EnterWHMISSDSDocumentDate(value), "Text: " + value + " was not successfully inputted into the field!", "Text: " + value + " was successfully inputted into the field!");
+
+		}
+
+
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

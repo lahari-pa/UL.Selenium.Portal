@@ -10,6 +10,7 @@
 @wercsmart
 @RetailPartners
 @CreateProducts
+@PaymentMethods
 @UPC
 @Studio
 @ProductSetUp
@@ -175,5 +176,12 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 	Given I generate a random UPC number and save as: UPC100969
 	Then I call Shared Step 76738 (Universal Product Code (UPC) - Canada - Package Type) for UPC: saved as UPC100969, container type: Paper bag, size: 2, package type: <First> and Item Number: 111-1111 then click continue
-	
-
+	Then I call Shared Step 100974 (Regulatory Documents to Provide - Canada only - Upload documents > Continue)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+	And I navigate to the home page
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase100969)
