@@ -4668,7 +4668,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 					Report.Info("Skipping step because this is an electronic product");
 					return;
 				}
-
+				Delay.Seconds(9999);
 			}
 
 			ReportSettings.UseSubSteps = true;

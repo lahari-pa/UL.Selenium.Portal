@@ -126,7 +126,7 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60722
 
 @ScenarioId:715
-Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens and Harbor Freight
+Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
