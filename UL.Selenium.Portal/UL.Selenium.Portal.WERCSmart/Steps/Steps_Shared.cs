@@ -2312,8 +2312,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 					"When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
 			}
 
-			Report.StartStep("I set the Select all ingredients included in this product option to: Dairy");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
+			Report.StartStep("I set theSelect all potential allergens included in this product option to: Dairy");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
 			Report.StartStep(
 				"I set the Product is manufactured in a facility that processes, or contains option to: Dairy or products containing dairy or milk");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
@@ -6380,6 +6380,24 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			Report.StartStep("I click 'UPC Retailer and Feed'");
 			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
+			Delay.Seconds(5);
+		}
+
+		[StepDefinition(@"I call Shared Step 134404 \(SHA > Select Product > UPC Assessment Details\) for product saved as: (.*)")]
+		//[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC List\) for product saved as: (.*)")]
+		public void Shared75309_SHA_SelectProduct_UpcAssessmentDetails(string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			var shaSteps = new Steps_SHA();
+			Report.StartStep("I select  product in the SHA grid saved as " + savedAs);
+			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
+			Report.StartStep("I right click the product");
+			shaSteps.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
+			// saving the current window so we can naviate back from UPC List
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			Report.StartStep("I click 'UPC Assessment Details'");
+			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Assessment Details");
 			Delay.Seconds(5);
 		}
 

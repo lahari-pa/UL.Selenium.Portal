@@ -20,6 +20,30 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
+		public bool CheckTheFollowingSectionTitles(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement section = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//tr[@class='DarkBack'][2]//th[" + row["Section"] + "]"), 2);
+				if (section.Text != row["Column Name"])
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool EnterExpirationDateForStatePesticideReigstration(string date, string state)
+		{
+			IWebElement calendar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[text()='" + state + "']/../following-sibling::td//input[@data-date-format=\"yyyy-mm-dd\"]"), 2);
+			return calendar.TryEnterText(date);
+		}
+		public bool EnterEPAPesticideRegistrationNo(string enterText)
+		{
+			IWebElement textField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//th[text()='EPA Pesticide Registration No.']/../../following-sibling::tbody//input"), 2);
+			return textField.TryEnterText(enterText);
+		}
 		public bool CheckForTheFollowingRetailersInRetailerPage(Table table)
 		{
 			IList<IWebElement> retailerList = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@class='table table-striped table-hover table-fixed marTop-20']//tbody//td[@class='col-xs-3']"), 2);

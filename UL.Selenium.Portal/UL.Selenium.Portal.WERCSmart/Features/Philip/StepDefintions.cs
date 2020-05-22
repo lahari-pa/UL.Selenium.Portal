@@ -38,6 +38,32 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public object TheProduct { get; private set; }
 		public string File { get; private set; }
 
+		[StepDefinition(@"I check that the following sections contain the corresponding titles:")]
+		public void ThenICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
+		}
+
+
+
+		[StepDefinition(@"I set the following data: (.*) for the following state: (.*)")]
+		public void GivenISetTheFollowingDataErtForTheFollowingStateMA(string date, string state)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.EnterExpirationDateForStatePesticideReigstration(date, state), "Failed to enter a date", "Successfully entered a date");
+		}
+
+
+		[StepDefinition(@"I enter the following EPA Pesticide Registration No\.: (.*)")]
+		public void ThenIEnterTheFollowingEPAPesticideRegistrationNo_(string enterText)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.EnterEPAPesticideRegistrationNo(enterText), "Failed to enter text", "Successfully entered text");
+		}
+
+
+
 		[StepDefinition(@"I confirm the following retailers are showing in the Retailer page")]
 		public void ThenIConfirmTheFollowingRetailersAreShowingInTheRetailerPage(Table table)
 		{

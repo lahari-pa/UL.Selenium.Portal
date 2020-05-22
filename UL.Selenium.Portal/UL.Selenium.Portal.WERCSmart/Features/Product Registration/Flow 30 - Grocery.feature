@@ -138,12 +138,10 @@ Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens and Harbor
 	Then I save the product information as: TestCase73041
 	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
 	Given I call Shared Step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then In the 'Select retailers' window I should see the following retailers:
 		| Retailer                   |
 		| No Retailer/No UPC Product |
-		| Optoro                     |
-		| Publix                     |
 		| Walgreens                  |
 	Given I click Done in the Select Retailers popup
 	Given I navigate to the home page
