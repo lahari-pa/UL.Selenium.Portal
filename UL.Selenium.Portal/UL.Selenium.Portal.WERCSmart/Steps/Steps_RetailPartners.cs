@@ -2217,7 +2217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
 		}
 
-		[StepDefinition(@"Check popup date productID: (.*) productType:(.*) productAccessCode: (.*)")]
+		[StepDefinition(@"Check popup date productID: (.*) productType: (.*) productAccessCode: (.*)")]
 		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
 		{
 			RetailPartners retailPartnersObject = new RetailPartners();

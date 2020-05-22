@@ -187,7 +187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	
 			IWebElement popup = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']"), 2);
 			string popupText = popup.Text.ToLower();
-			Report.Info("hi " + popupText + " HI1 " + id);
+
 			if (!popupText.Contains(id.ToLower()))
 			{
 

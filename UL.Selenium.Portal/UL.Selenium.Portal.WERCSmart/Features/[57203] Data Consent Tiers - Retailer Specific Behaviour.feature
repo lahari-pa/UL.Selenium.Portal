@@ -12,6 +12,7 @@
 @run_DataConsentTiers_RetailerSpecific
 Feature: [57203] Data Consent Tiers - Retailer Specific Behavior
 
+@ScenarioId:8261
 Scenario: [128141] Verification that 'Bed Bath and Beyond' Displays under 'My Retailers' and its Data Consent Tiers
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
