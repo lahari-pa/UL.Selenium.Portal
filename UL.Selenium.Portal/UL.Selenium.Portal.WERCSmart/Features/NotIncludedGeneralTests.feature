@@ -1672,3 +1672,10 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC86463
 	Given I generate a random UPC number and save as: UPC864631	
 	Given I navigate to the landing page
+
+
+	Scenario: [cvs] CVSGROCERYTESTQS
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Lawn & Garden (RUCC0395), save it as: CVSLawnGardenProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSLawnGardenExcelFile and check that is shows the expected product saved as: CVSLawnGardenProduct1
