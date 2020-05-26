@@ -1670,6 +1670,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 	Scenario: [ChromeWindowTest] Chrome Window Test
 	Given I generate a random UPC number and save as: UPC86463
+
 	Given I generate a random UPC number and save as: UPC864631	
 	Given I navigate to the landing page
 
