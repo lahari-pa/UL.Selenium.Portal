@@ -10003,7 +10003,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the The Product Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Type");
 			Report.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
 			if (name == "")
 			{

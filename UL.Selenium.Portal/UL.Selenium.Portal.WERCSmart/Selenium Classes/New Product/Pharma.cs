@@ -56,19 +56,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el.TryEnterText(number);
 
 		}
-		public bool CheckAndFillEmptyFieldsInSPLInformationScreen()
+		
+		public bool CheckAndFillEmptyFieldsInIngredientsScreen()
 		{
-			IList<IWebElement> allFieldsOnPage = this.containerElement.FindElements(By.XPath("//span[contains(text(),'This is a required field')]/../preceding-sibling::input"), 2);
-			Report.Info("List count " + allFieldsOnPage.Count);
-	
+			IList<IWebElement> allFieldsOnPage = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//span[contains(text(),'For all components entered percentage should be greater than 0. Formulation must total or exceed 100%.')]/../preceding-sibling::input"), 2);
+
 			foreach (IWebElement field in allFieldsOnPage)
 			{
 				bool enteredText = false;
 
 				if (field.Text.Length < 1)
 				{
-					enteredText = field.TryEnterText("Test");
+
+					enteredText = field.TryEnterText("1");
+
+					if (!enteredText)
+					{
+						return false;
+					}
+
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckAndFillEmptyFieldsInSPLInformationScreen()
+		{
+			IList<IWebElement> allFieldsOnPage = this.containerElement.FindElements(By.XPath("//span[contains(text(),'This is a required field')]/../preceding-sibling::input"), 2);
 	
+			foreach (IWebElement field in allFieldsOnPage)
+			{
+				bool enteredText = false;
+			
+				if (field.Text.Length < 1)
+				{
+			
+					enteredText = field.TryEnterText("Test");
+					
 					if (!enteredText)
 					{
 						return false;

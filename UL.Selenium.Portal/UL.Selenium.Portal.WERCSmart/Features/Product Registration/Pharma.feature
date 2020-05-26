@@ -14,7 +14,7 @@ Feature: Pharma
 
 Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Gel Consistency
 
-Given I attempt to log in with email: pharma.kxxyxunf@mailosaur.io and password: Welcome1!
+Given I attempt to log in with email: qa_pharma.kxxyxunf@mailosaur.io and password: Thewercs100!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127870
 Given I click continue
@@ -53,7 +53,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Documents to Provide 
-Given I attempt to log in with email: pharma.kxxyxunf@mailosaur.io and password: Welcome1!
+Given I attempt to log in with email: qa_pharma.kxxyxunf@mailosaur.io and password: Thewercs100!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127970
 Given I click continue
@@ -103,7 +103,7 @@ And I navigate to the home page
 
 
 Scenario: [128018] Pharma - Forwarding Not Allowed
-Given I attempt to log in with email: pharma.kxxyxunf@mailosaur.io and password: Welcome1!
+Given I attempt to log in with email: qa_pharma.kxxyxunf@mailosaur.io and password: Thewercs100!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128018
 Given I click continue
@@ -159,7 +159,7 @@ And I navigate to the home page
 
 
 Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid
-Given I attempt to log in with email: pharma.kxxyxunf@mailosaur.io and password: Welcome1!
+Given I attempt to log in with email: qa_pharma.kxxyxunf@mailosaur.io and password: Thewercs100!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127847
 Given I click continue
@@ -198,7 +198,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Containing Liquid
-Given I attempt to log in with email: pharma.kxxyxunf@mailosaur.io and password: Welcome1!
+Given I attempt to log in with email: qa_pharma.kxxyxunf@mailosaur.io and password: Thewercs100!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127854
 Given I click continue
@@ -238,7 +238,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 Scenario: [127791] Pharma - Retailer Default
-Given I attempt to log in with email: pharma.kxxyxunf@mailosaur.io and password: Welcome1!
+Given I attempt to log in with email: qa_pharma.kxxyxunf@mailosaur.io and password: Thewercs100!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127791
 Given I click continue
@@ -279,7 +279,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 
-Given I attempt to log in with email: pharma.kxxyxunf@mailosaur.io and password: Welcome1!
+Given I attempt to log in with email: qa_pharma.kxxyxunf@mailosaur.io and password: Thewercs100!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC127847
 Given I click continue
@@ -328,7 +328,7 @@ And I navigate to the home page
 
 Scenario: [128677] Pharma - Prescription Pharmaceutical - Liquid Product
 
-Given I attempt to log in with email: pharma.kxxyxunf@mailosaur.io and password: Welcome1!
+Given I attempt to log in with email: qa_pharma.kxxyxunf@mailosaur.io and password: Thewercs100!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128677
 Given I click continue
@@ -376,7 +376,7 @@ And I navigate to the home page
 
 Scenario: [128134] Pharma -  Product in Recertification
 
-Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
+Given I attempt to log in with email: qa_pharma.kxxyxunf@mailosaur.io and password: Thewercs100!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128018
 Given I click continue
@@ -384,21 +384,25 @@ Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Ente
 Given I enter the NDC number: 10866-0885-2
 Then I save the product information as: TestCase128018
 Then I click continue
+Then I click continue
 Given I fill all empty fields in the SPL Information screen
 Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Very soluble
 And in the New Product page I click Continue
+Then I click continue
+Then I fill all empty fields in the Ingredients screen
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-	| Propane       | 100     | false               | false       |            |
+	| ComponentName              | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Propane                    | 100     | false               | false       |            |
 Given I set the Should this product be refrigerated for transport or storage? option to: No
 Then I click continue
-Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: No, not regulated
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
 Then I click continue
-Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
-Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+And I call Shared Step  (Select Retailers Ace Hardware Corporation and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+And I call Shared Step  (Select Retailers Wal-Mart/SAM'S CLUB and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+Given in the Select Retailers tab under Forward Product Registration I select the retailer: Ace Hardware Corporation
 Then I click continue
 Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
 When I click continue

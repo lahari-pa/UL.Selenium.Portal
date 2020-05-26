@@ -1221,7 +1221,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
 				Delay.Seconds(1);
 			}
+		}
 
+		[StepDefinition(@"I set the (.*) field to exactly match: (.*)")]
+		[StepDefinition(@"I set the (.*) option to exactly match: (.*)")]
+		public void SetTheSectionOptionToExactlyMatch(string section, string option)
+		{
+			var thisNewProduct = new NewProduct();
+			if (!thisNewProduct.WaitForContainerToBeVisible(3))
+			{
+				Report.Failure("The new product page is not showing");
+			}
+			if (option.StartsWith("UPC"))
+			{
+				var value = Context.GetFromContext(option)?.ToString();
+				if (value == null)
+				{
+					throw new Exception("Could not find item in context: " + value + " for checking field input is correct value!");
+				}
+				Report.IsTrue(thisNewProduct.SetOptionInSectionToExactlyMatch(section.Trim(), value.Trim()),
+					"Failed to set the input to " + value.Trim() + " in section: " + section.Trim(),
+					"Successfully set the input to " + value.Trim() + " in section: " + section.Trim());
+				Delay.Seconds(1);
+			}
+			else
+			{
+				Report.IsTrue(thisNewProduct.SetOptionInSectionToExactlyMatch(section.Trim(), option.Trim()),
+					"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
+					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+				Delay.Seconds(1);
+			}
 		}
 
 		[StepDefinition(@"I set the (.*) option to: (.*) and save entry")]

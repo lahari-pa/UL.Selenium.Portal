@@ -3188,6 +3188,112 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el.FindElement(By.XPath("./input"), 10).TryClick();
 		}
 
+		public bool SetOptionInSectionToExactlyMatch(string section, string value)
+		{
+			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text(),""" + value + @""" and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text(),""" + value + @""" and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
+						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text(),""" + value + @""" and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
+
+			if (el == null)
+			{
+				Report.Error("Could not find the correct input in section: " + section);
+				return false;
+			}
+
+			el.ScrollElementIntoView();
+			Report.Info("Entering value of: '" + value + "' in section: '" + section + "'");
+			if (el.GetAttribute("type") == "text")
+			{
+				el.EnterText(value);
+				if (el.GetValue() == value)
+				{
+					return el.GetValue() == value;
+				}
+				else
+				{
+					int j = 0;
+					bool textEntered = false;
+					while (textEntered == false && j < 6)
+					{
+						Delay.Seconds(1);
+						Report.Info($"Attempting to enter text, attempt: {j + 2}");
+						el.ClearTextBox();
+						el.EnterText(value);
+						textEntered = el.GetValue() == value;
+						j++;
+					}
+					return textEntered;
+
+				}
+			}
+			if (el.TagName.ToLower() == "select")
+			{
+				int i = 0;
+				while (i < 10)
+				{
+					try
+					{
+						el.Select(value);
+						return el.SelectedOption() == value;
+					}
+					catch (Exception)
+					{
+						i++;
+						Delay.Seconds(1);
+					}
+				}
+
+				return el.SelectedOption() == value;
+			}
+
+			try
+			{
+				if (el.GetAttribute("type") == "checkbox")
+				{
+					el.TryCheck();
+					if (el.Checked() == true)
+					{
+						return el.Checked();
+					}
+					else
+					{
+						int x = 0;
+						bool isChecked = false;
+						while (isChecked == false && x < 6)
+						{
+							Delay.Seconds(1);
+							Report.Info($"Attempting to check box, attempt: {x + 2}");
+							el.TryCheck();
+							isChecked = el.Checked();
+							x++;
+						}
+						return isChecked;
+					}
+				}
+
+			}
+			catch (Exception)
+			{
+
+			}
+			// don't click the label if it contains a web link
+			if (el.FindElement(By.XPath("./span/a[contains(@href,'http')]"), 2) == null && el.TryClick())
+			{
+				Report.Info("Dont Click label if contains web link");
+				Delay.Seconds(2);
+				if (this.SelectedOptionsForSection(section).Contains(value))
+				{
+					return true;
+				}
+			}
+			Report.Info("Trying a basic Try click on the element");
+			return el.FindElement(By.XPath("./input"), 10).TryClick();
+		}
+
 		public bool SelectRadio(string section, string value)
 		{
 			try
