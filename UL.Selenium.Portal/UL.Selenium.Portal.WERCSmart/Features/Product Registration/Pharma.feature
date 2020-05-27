@@ -437,7 +437,7 @@ Then I click the Retail Partners icon in the Navigation Pane
 
 Scenario: [128134] Pharma -  Product in Recertification
 
-Given I attempt to log in with email: wercsmartsub1@sharklasers.com and password: Thewercs1!
+Given I attempt to log in with email: User_961bd2d527f3.kxxyxunf@mailosaur.io and password: Welcome1!
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128018
 Given I click continue

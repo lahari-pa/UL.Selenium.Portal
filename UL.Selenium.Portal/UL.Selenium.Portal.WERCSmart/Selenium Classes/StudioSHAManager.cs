@@ -1574,10 +1574,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> FindColumnInUPCRetailerAndFeedPageWithTable(Table table)
 		{
 			List<string> columnsNotFound = new List<string>();
-
+			
 			foreach (TableRow row in table.Rows)
 			{
-				IWebElement columnName = this.containerElement.FindElement(By.XPath("//th[contains(text(),'" + row["Column Name"] + "')]"), 2);
+				IWebElement columnName = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//th[contains(text(),'" + row["Column Name"] + "')]"), 2);
 
 				if (columnName == null)
 				{

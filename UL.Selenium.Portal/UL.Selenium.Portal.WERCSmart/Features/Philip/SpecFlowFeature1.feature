@@ -487,8 +487,8 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 
 
 
-		Scenario: [56598] Pesticide Data - EPA Expiration date validation (Massachusetts - June 30th no more than 1 year out)
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Scenario: [56598] Pesticide Data - EPA Expiration date validation (Massachusetts - June 30th no more than 1 year out)
+    Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then The home screen should load
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
@@ -546,11 +546,11 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer |
 		| CVS      |
-	And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and required ) for UPC: saved as UPC26827, container type: Plastic Container and size: 12 click continue
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC26827, container type: Plastic Container and size: 12 do not click continue
+	And I click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
@@ -559,6 +559,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase26827)
 	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase26827
 	Then I check for the following columns in UPC Retailer and Feed
 	| Column Name |
@@ -585,17 +586,17 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 
 
 	Scenario: [57647] Pesticide Data - EPA Expiration date validation (Massachusetts - June 30th no more than 1 year out)
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+    Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide-Flying Bug-Moth Proofing Product containing <98% Para-Dichlorobenzene
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
 	Then I generate a random UPC number and save as: UPC87914
 	Then I save the product information as: TestCase87914
 	And I set the Primary Physical State to be: Solid
 	And I set the Secondary Physical State to be: Solid
 	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	And I set the Select the best Water Solubility description to be: Very soluble
-	Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
-		Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
+	Given I click continue
+	Given I call Shared Step 134650 (Additional Product Information - Prevents, Destroys Repels Pests, US only, NO to everything else - Continue - Happy Path)
+	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| CASNumber | ComponentName       | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 	|           | Potassium hydroxide | 100     | false               |            | false       |
 	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -603,7 +604,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58736, container type: Aerosol Can and size: 33
+	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87914, container type: Aerosol Can and size: 33
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -611,6 +612,5 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58736. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide-Flying Bug-Moth Proofing Product containing <98% Para-Dichlorobenzene
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58736
+	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87914
