@@ -347,6 +347,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 	Given in the New Product page I click Continue
 	# Volatile Organic Compound Summary Page
 	Then I should see the Volatile Organic Compound Summary Page
+	Given In the VOC Acceptance section I agree
 	Given in the New Product page I click Continue
 	# Retailers Page
 	Then In the 'Select Retailers' window I select the retailer: Walgreens

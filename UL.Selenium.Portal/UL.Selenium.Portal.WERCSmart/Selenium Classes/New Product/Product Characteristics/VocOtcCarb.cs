@@ -91,7 +91,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		public bool SelectAgreeInVOCAcceptance()
 		{
 			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//span[contains(text(), 'Your acknowledgement of this registration includes that your product (exceeds/does not exceed) the limits specified by the noted regulations and understand these statements of exceeding, or not exceeding, will be provided to the recipients for which the product is registered and assessed.  Recipients may take action based on these statements.')]/preceding-sibling::input"), 2);
-			return checkBox.TryCheck();
+			return checkBox.TryClick();
+			
 		}
 
 		#endregion

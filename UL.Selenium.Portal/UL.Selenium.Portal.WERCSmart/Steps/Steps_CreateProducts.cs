@@ -770,6 +770,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.SetTheSectionOptionTo("Verify VOC content is below the threshold of 0.02lb/start of CARB", "No");
 			newProductSteps.SetTheSectionOptionTo("Verify VOC content is below the threshold of 0.02lb/start of OTC", "No");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			newProductSteps.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 
 			Report.Info("Then I select a retailer");
