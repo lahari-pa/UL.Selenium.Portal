@@ -1131,9 +1131,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
 			var selStepsStudio = new Steps_Studio();
-			//selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			//selStepsStudio.InPDIEnsureSECT2318IsActive();
-			//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 		}
@@ -1463,6 +1467,61 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 
 		}
+
+		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0755")]
+		public void InPDFillInSET2318ifPresentThenNavigateToSECT0755()
+		{
+			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+
+
+		}
+
+		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077")]
+		public void InPDFillInSET2318ifPresentThenNavigateToSECT0077()
+		{
+			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0077] Walmart Transportation Information");
+
+
+		}
+
+		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present")]
+		public void InPDFillInSET2318ifPresent()
+		{
+			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			
+
+
+		}
+
+
+
+
 
 
 	}

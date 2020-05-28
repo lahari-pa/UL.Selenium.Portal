@@ -62,6 +62,8 @@ Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include gen
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase79428)
 	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase79428)
 	#And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
+	#And In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077
+	And In Power Desginer, fill in SECT2318 if it is present
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open
@@ -111,6 +113,8 @@ Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic 
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80768)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80768)
 	#And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
+	#And In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077
+	And In Power Desginer, fill in SECT2318 if it is present
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open
@@ -169,6 +173,7 @@ Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include gen
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80763)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80763)
 	#And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
+	And In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open
