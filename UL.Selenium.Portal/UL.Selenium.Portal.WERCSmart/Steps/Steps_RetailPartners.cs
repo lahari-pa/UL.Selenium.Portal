@@ -535,6 +535,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I ensure the Data Consent Tier On/Off switch exists for the following tiers:")]
+		public void DataConsentTiersOnOffSwitchExist(Table expected)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier On/Off switch exist");
+			try
+			{
+				Report.Info("Ensure the Data Consent Tier On/Off switch exist");
+				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
+				{
+					Report.IsTrue(selRetailDetails.GetDataConsentTierOnofFSwitch("Tier " + row["Tier"]),
+						"Failed to find slider for Tier " + row["Tier"],
+						"Successfully found slider for Tier " + row["Tier"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I ensure the Data Consent Tier Sliders are set as follows:")]
 		public void DataConsentTiersSet(Table expected)
 		{

@@ -105,5 +105,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return true;
 		}
 
+		public bool CheckAndFillEmptyFieldsInIngredeientsScreen()
+		{
+			IList<IWebElement> allFieldsOnPage = this.containerElement.FindElements(By.XPath("//span[contains(text(),'For all components entered percentage should be greater than 0. Formulation must total or exceed 100%.')]/../preceding-sibling::input"), 2);
+
+			foreach (IWebElement field in allFieldsOnPage)
+			{
+				bool enteredText = false;
+
+				if (field.Text.Length < 1)
+				{
+
+					enteredText = field.TryEnterText("1");
+
+					if (!enteredText)
+					{
+						return false;
+					}
+
+				}
+			}
+
+			return true;
+		}
+
 	}
 }

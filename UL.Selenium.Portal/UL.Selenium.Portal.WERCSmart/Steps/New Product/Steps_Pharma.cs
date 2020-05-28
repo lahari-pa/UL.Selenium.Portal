@@ -41,15 +41,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I fill all empty fields in the Ingredients screen")]
-		public void GivenIFillAllEmmptyFieldsInTheIngredientsScreen()
-		{
-			Delay.Seconds(10);
-			Pharma pharmaObject = new Pharma();
-			Report.IsTrue(pharmaObject.CheckAndFillEmptyFieldsInIngredientsScreen(), "Failed to fill in all empty fields", "Successfully filled in all empty fields");
-		}
-
-
 		[StepDefinition(@"I fill all empty fields in the SPL Information screen")]
 		public void GivenIFillAllEmmptyFieldsInTheSPLInformationScreen()
 		{
@@ -57,7 +48,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Pharma pharmaObject = new Pharma();
 			Report.IsTrue(pharmaObject.CheckAndFillEmptyFieldsInSPLInformationScreen(), "Failed to fill in all empty fields", "Successfully filled in all empty fields");
 		}
-
 
 		[StepDefinition(@"I enter the NDC number: (.*)")]
 		public void GivenIEnterNDC(string number)

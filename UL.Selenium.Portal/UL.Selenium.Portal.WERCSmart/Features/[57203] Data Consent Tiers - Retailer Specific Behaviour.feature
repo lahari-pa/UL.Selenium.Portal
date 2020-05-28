@@ -54,19 +54,9 @@ Then I click the Retail Partners icon in the Navigation Pane
 	And I close the Data Tier Details popup
 
 	Then I confirm that there is a section labeled: Data Consent Tiers
-	Given I ensure the Data Consent Tier Sliders exist for the following tiers:
+	Given I ensure the Data Consent Tier On/Off switch exists for the following tiers:
 		| Tier |
 		| 1    |
-		| 2.1  |
-		| 2.2  |
-		| 4.1  |
-
-	Given I click the Save Changes button
-	Then The success message in the Save Changes popup dialog should contain the following:
-		| Message                                                                                       |
-		| The information was saved correctly and the notification Email was sent to all Administrators |
-	Given I click close on the Save Changes popup dialog
-	And I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown
 	Given I click the back arrow on the Retail Partners Details page
 	Then I should see the Retail Partners page
 	And I navigate to the home page
