@@ -5176,6 +5176,13 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyGlobalSteps.LoginToAccount("PremiumSubscriptionAccount");
 		}
 
+		[StepDefinition(@"I call Shared Step \(Login to WERCSmart - Pharma Account\)")]
+		public void GivenICallSharedStepLoginToWERCSmart_PharmaAccount()
+		{
+			var MyGlobalSteps = new GlobalSteps();
+			MyGlobalSteps.LoginToAccount("PharmaAccount");
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 74834 \(Login to WERCSmart - with subscription without products account\)")]
 		public void Shared74834_LoginToWercSmart_WithSubscriptionWithoutProductsAccount()
