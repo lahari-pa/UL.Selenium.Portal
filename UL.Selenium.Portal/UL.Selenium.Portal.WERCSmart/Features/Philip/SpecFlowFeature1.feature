@@ -442,7 +442,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 
 
 	Scenario: [56651] Pesticide Data - EPA Expiration date validation (Massachusetts - June 30th no more than 1 year out)
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+    Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then The home screen should load
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
@@ -450,7 +450,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Then I should see the Pesticide Details - U.S. Page
 	And I see the following sections
