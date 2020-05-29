@@ -23,7 +23,7 @@ Scenario: [66635] Left hand navigation - Shopping Cart navigation - Products
 
 @ScenarioId:1007
 Scenario: [63323] Remove single product from cart
-       Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: CartNoProducts
        Then The home screen should load
        Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
        Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk

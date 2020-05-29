@@ -27,10 +27,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selRetailPartners = new RetailPartners();
 
-			if (!selRetailPartners.Wait_for_load(10))
+			if (!selRetailPartners.Wait_for_load(30))
 			{
 				Report.Info("Retail partners page has not loaded so no need to deal with it. ");
 			}
+			//if(new ModalDialog().WaitForContainerToBeVisible(5))
+			//{
+			//	new ModalDialog().ClickButton("GO TO MY RETAILERS");
+			//	selRetailPartners.Wait_for_load(10);
+			//}
 			else
 			{
 				//get list of all top level retail partners
@@ -814,6 +819,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on close in the Report Download dialog")]
 		public void GivenIClickOnCloseInTheReportDownloadDialog()
 		{
+			Delay.Seconds(10);
 			Report.IsTrue(new ReportDownload().ClickClose(), "Failed to click close on Report Download modal dialog", "Successfully clicked close");
 		}
 
@@ -868,11 +874,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new RetailPartnersDetails().ClickAddSupplierId(), "Failed to click add supplier id link",
 				"Successfully clicked add supplier id link");
+			//Delay.Seconds(5);
 		}
 
 		[StepDefinition(@"I confirm the pop up shows the heading: (.*)")]
 		public void ThenIConfirmThePopUpShowsTheHeading(string title)
 		{
+			Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(), "The modal was not visible", "The modal was visible");
 			string actualTitle = new ModalDialog().GetTitle();
 			Report.IsTrue(actualTitle == title, "Title is " + actualTitle + " but should be: " + title,
 				"Title is showing as expected: " + title);
@@ -1423,8 +1431,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add New Supplier Dialog I click save")]
 		public void GivenInTheAddNewSupplierDialogIClickSave()
 		{
+		
 			var thisAddNewSupplier = new AddNewSupplier();
-			thisAddNewSupplier.ClickSave();
+			Report.IsTrue(thisAddNewSupplier.ClickSave(), "Failed to click save", "Successfully clicked save");			
 			Delay.Seconds(2);
 		}
 
@@ -2293,7 +2302,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Report.Info("ProductID: " + id + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
-				Report.IsTrue(retailPartnersObject.CheckProductInformation(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
+				Report.IsTrue(new ModalDialog().CheckProductInformation(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
 
 			}
 			catch (Exception ex)

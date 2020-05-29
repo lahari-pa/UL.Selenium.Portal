@@ -150,7 +150,7 @@ Scenario: [90001] Labels for Input Fields in UPC Screen
 	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable90001
 	When In the Recipient and Product Details tab, I expand the first UPC
 	Then I confirm that DPCI label text for retailer Target UPC item 1 matches: DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.
-	And I confirm that OMSID label text for retailer The Home Depot UPC item 1 matches: OMSID (Must be 9 digits)
+	And I confirm that OMSID label text for retailer The Home Depot UPC item 1 matches: OMSID (Must be 9 digits).
 	And I confirm that Item Number label text for retailer Essendant UPC item 1 matches: Please enter a Item Number (No more than 30 Alphanumeric characters)
 	And I confirm that Part Number label text for retailer Essendant UPC item 1 matches: Part Number
 	And I confirm that Part Number label text for retailer Genuine Parts UPC item 1 matches: Part Number

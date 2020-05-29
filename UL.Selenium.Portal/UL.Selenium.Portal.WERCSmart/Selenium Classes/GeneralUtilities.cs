@@ -470,17 +470,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public string TryConvertToAbbreviation(string input)
 		{
-			var abbreviationMappings = this.Map;
-			if (abbreviationMappings.ContainsKey(input))
+			int x = 0;
+			bool foundMapping = false;
+			while(foundMapping==false && x<6)
 			{
-				abbreviationMappings.TryGetValue(input, out string retailer);
-				if (retailer != null)
+				Delay.Seconds(2);
+				var abbreviationMappings = this.Map;
+				if (abbreviationMappings.ContainsKey(input))
 				{
-					return retailer;
+					abbreviationMappings.TryGetValue(input, out string retailer);
+					if (retailer != null)
+					{
+						Report.Info($"Found the retailer abbrevation: {input}");
+						return retailer;
+					}
 				}
+				else
+				{
+					Report.Info("List does not contain input");
+				}
+				Report.Info($"Failed to find the input retailer: {input} in the Retailer abbreviations list");
+				x++;
+				
 			}
-			Report.Info($"Failed to find the input retailer: {input} in the Retailer abbreviations list");
 			return input;
+
 		}
 
 		

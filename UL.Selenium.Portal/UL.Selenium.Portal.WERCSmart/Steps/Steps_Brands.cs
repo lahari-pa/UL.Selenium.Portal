@@ -119,6 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I save the active brands list to context")]
 		public void SaveActiveBrandsListToContext()
 		{
+			Delay.Seconds(15);
 			List<string> activeBrands = new MyBrands().ActiveSavedBrands();
 			if (activeBrands.Count == 0)
 			{

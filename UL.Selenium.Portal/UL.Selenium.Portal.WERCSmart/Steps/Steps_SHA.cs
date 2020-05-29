@@ -1980,7 +1980,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.OpenNewTabAndNavigateTo(downloadsFolder + @"\TempPDF.pdf");
 				Report.Info($"tab opened");
 				Delay.Seconds(3);
-				string docURL2 = thisSHADocument.DocumentWindowOpen();
+				//string docURL2 = thisSHADocument.DocumentWindowOpen();
+				string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
 				Report.Info($"doc window opened");
 				Report.Screenshot();
 
@@ -3605,7 +3606,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
 		public void InTheSupplierManagerPopupICheckThatColumnXContainsAllValues(string column, Table table)
 		{
-			
 			Report.Info("Converting the table to a List");
 			List<string> expectedValues = new List<string>();
 			foreach (TableRow thisRow in table.Rows)
@@ -3734,10 +3734,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
 		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
 		{
+			Delay.Seconds(10);
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			List<string> columnsNotFound = studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table);
 
-			Report.IsTrue(studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table).Count == 0, "One or more of the columns were not found", "Successfully found all columns");
+			Report.IsTrue(columnsNotFound.Count == 0, "One or more of the columns were not found", "Successfully found all columns");
 
 			foreach (string columnName in columnsNotFound)
 			{

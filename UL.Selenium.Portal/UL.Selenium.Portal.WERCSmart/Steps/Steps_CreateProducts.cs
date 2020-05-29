@@ -100,8 +100,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsShared.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included");
 			Report.StartStep("Then I save the product information as: TestCase84109");
 			MyStepsNewProduct.SaveProductInformation(saveAs);
-			Report.StartStep("I call Shared Step 69687(Additional Product Information - US, No(PL))");
-			MyStepsShared.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			//Report.StartStep("I call Shared Step 69687(Additional Product Information - US, No(PL))");
+			//MyStepsShared.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			Report.StartStep("I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only");				
+			MyStepsShared.GivenICallSharedStep60935AdditionalProductInformation_US_DirectShip_PrivateLabelOnly();
+
+
 			Report.StartStep("I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			MyStepsShared.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 48369(Toxicity Characteristics Leaching Procedure(TCLP) - No to ALL With Copper)");
@@ -762,10 +766,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
 			sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
-			newProductSteps.SetTheSectionOptionTo(" Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
+			newProductSteps.SetTheSectionOptionTo("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
 			newProductSteps.SetTheSectionOptionTo("Verify VOC content is below the threshold of 0.02lb/start of CARB", "No");
 			newProductSteps.SetTheSectionOptionTo("Verify VOC content is below the threshold of 0.02lb/start of OTC", "No");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			newProductSteps.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 
 			Report.Info("Then I select a retailer");

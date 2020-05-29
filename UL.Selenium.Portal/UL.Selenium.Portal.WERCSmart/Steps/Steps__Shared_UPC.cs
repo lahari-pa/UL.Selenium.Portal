@@ -492,6 +492,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
+				Delay.Seconds(2);
 				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
@@ -514,8 +515,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		// Enter UPC string in the form: "Equals"+upcNumber where upcNumber is the exact number to input, rather than using the randomly generated step from context
 		// Enter '_CVS' or '_cvs' for upc variable to use a upc number for retailer CVS from (required for some test cases eg. CVS RCL feature)
-		[StepDefinition(
-			@"I enter information for Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC(.*), container type: (.*) and size: (.*) - do not click continue")]
+		[StepDefinition(@"I enter information for Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC(.*), container type: (.*) and size: (.*) - do not click continue")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc,
 			string containerType, string size)
 		{
@@ -539,6 +539,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
+				Delay.Seconds(2);
 				var upcTable = new Table("Field", "Value");
 				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
 				upcTable.AddRow("ContainerType", containerType);
@@ -1654,6 +1655,46 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(NewProductClassObject.SelectUPCTransportationOptionAtLevel(option, transLevel), "Failed to Click " + option + " at " + transLevel + ".","Successfully click " + option + " at " + transLevel + ".");
 			Report.IsTrue(NewProductClassObject.CheckTransportationOption(option, transLevel), "Failed to find the correct Transportation option for " + option + ".","Successfully found correct Transportation option for " + option + ".");
 
+		}
+
+		[StepDefinition(@"I call Shared Step 76738 \(Universal Product Code \(UPC\) - Canada - Package Type\) for UPC: saved as UPC(.*), container type: (.*), size: (.*), package type: (.*) and Item Number: (.*) then click continue")]
+		public void EnterUPCInfoAndItemNumberThenClickContinue(string upc, string containerType, string size, string packageType, string itemNumber)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Delay.Seconds(3);
+			Report.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_,
+					PackageType= packageType,
+					ItemNumber = itemNumber
+
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				upcTable.AddRow("PackageType", packageType);
+				upcTable.AddRow("ItemNumber", itemNumber);
+
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+				MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+
+			}
 		}
 
 	}

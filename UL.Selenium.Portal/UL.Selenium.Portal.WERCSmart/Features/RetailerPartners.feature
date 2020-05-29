@@ -45,8 +45,7 @@ Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 		| Amazon                 | AM    |
 		| Autozone               | AZ    |
 		| Bed Bath and Beyond    | BB    |
-		| Canadian Tire          | CT    |
-		| Costco                 | CO    |
+		| Canadian Tire          | CT    |		
 		| CVS                    | CV    |
 		| Delhaize               | DA    |
 		| Dick's Sporting Goods  | DI    |
@@ -164,6 +163,7 @@ Scenario: [56911] Retailer Detail Page - Your Supplier ID - Add New Supplier ID 
 	When I select the retailer: Sears
 	Then I should see the Retailer Detail page
 	Given I click on the Add new Supplier ID link
+	Then I Wait for a modal popup to appear
 	Then I confirm the pop up shows the heading: Add New Supplier
 	Then I confirm the pop up shows the Supplier ID heading and data entry field
 	Then I confirm the pop up shows the Company or Brand Name heading and data entry field
@@ -294,6 +294,7 @@ Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New S
 	And The Supplier ID Table should be showing
 	Given I call Shared Step 58828 - Delete Supplier with ID: 654327
 	Given I click on the Add new Supplier ID link
+	Then I Wait for a modal popup to appear
 	And in the Add New Supplier Dialog I click save
 	And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: This is a required field.
 	And in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: This is a required field.
@@ -352,17 +353,17 @@ Scenario: [56909] Retailer Detail Page - Retailer does not require Supplier ID b
 	# Retail Partners Page
 	And I click the Retail Partners icon in the Navigation Pane
 	Then I should see the following heading Retail Partners
-	And I select the retailer: Costco
+	And I select the retailer: Amazon
 	# Retailer Detail Page
-	Then I should see the retailer heading: Costco
+	Then I should see the retailer heading: Amazon
 	And I confirm that there is a section labeled: Your Supplier IDs
 	And Section: Your Supplier IDs should be showing text: This retailer does not support Supplier ID management
 	And I confirm that there is a section labeled: Data Consent Tiers
 	And I should see the button: What are the Data Usage Tiers? in section: Data Consent Tiers
 	And I should see the button: Products in Scope in section: Data Consent Tiers
-	And I confirm that there is a section labeled: Costco & You
+	And I confirm that there is a section labeled: Amazon & You
 	And The pie chart should be showing on the retailer details page
-	And The pie chart footer text should contain: % of your product portfolio is associated with Costco
+	And The pie chart footer text should contain: % of your product portfolio is associated with Amazon
 
 @ScenarioId:746
 Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tiers

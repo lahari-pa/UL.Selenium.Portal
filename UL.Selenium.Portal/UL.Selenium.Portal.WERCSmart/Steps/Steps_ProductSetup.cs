@@ -854,7 +854,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
 			//And I call Shared Step 69687(Additional Product Information - US, No(PL))
-			sharedSteps.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			//sharedSteps.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			//And I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
+			sharedSteps.GivenICallSharedStep60935AdditionalProductInformation_US_DirectShip_PrivateLabelOnly();
 			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			//And I call Shared Step 48369(Toxicity Characteristics Leaching Procedure(TCLP) - No to ALL With Copper)
@@ -937,6 +939,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsProductGrid.WhenIClickRowActionsForTheFirstProductReturned();
 			//And I click on the Row Action: Update Data
 			thisStepsProductGrid.ClickRowAction("Update Data");
+			thisStepsProductGrid.IShouldSeeTheUpdateRegistrationPopup();
+			thisStepsProductGrid.InUpdateRegistrationPopupIClickButton("Yes");
 			//#And If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 			//And I should see the The Product Page
 			newProductSteps.GivenIShouldSeeXPage("The Product");

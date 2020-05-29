@@ -1200,5 +1200,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return false;
 		}
+
+		public bool SetFirstVOCOption(string yesOrNo)
+		{
+			IWebElement option;
+			if (yesOrNo.ToLower() == "yes")
+			{
+				option = this.FindElement(By.XPath("//a[text()='Alternative Control Plan']/../..//label[contains(text(),'Product has been granted an ')]/../following-sibling::div//input[@value='1']"), 2);
+			} else
+			{
+				option = this.FindElement(By.XPath("//a[text()='Alternative Control Plan']/../..//label[contains(text(),'Product has been granted an ')]/../following-sibling::div//input[@value='0']"), 2);
+			}
+
+			return option.TryClick();
+		}
 	}
 }
