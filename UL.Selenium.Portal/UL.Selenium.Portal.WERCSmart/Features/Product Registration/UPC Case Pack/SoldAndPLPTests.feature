@@ -124,7 +124,7 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 		| Secondary Physical State | Select the best Water Solubility description |
 		| Compressed gas           | Low                                          |
 	#Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	Given I call Shared Step 89286 - Additional Product Information - US and Canada - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+	Given I call Shared Step 89286 - Additional Product Information - US and Canada - OSHA (NO), DSV (NO), PLP (YES), GNFR (NO), Continue
 	#Given I call Shared Step 63804 (Additional Product Information - enter options)
 	#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier  | Private Label or Brand | Good Not for resale |
 	#| No                                                             | No                            | No                         | No              |
@@ -178,9 +178,15 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase88198
 	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
-	#Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	Given I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+	#Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))	
+	Then In the Additional Product Information Page, I ensure that for 'countries the product may be sold in' only Canada is selected
+	And I set the Product is shipped directly by supplier to the consumer field to: No
+	And I set the Product is a Retailer's Private Label or Brand field to: No
+	And in the Additional Product Information page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon

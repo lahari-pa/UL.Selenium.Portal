@@ -123,7 +123,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selForwardProdReg.EnterTextToSearchField(value),
 				"Failed to enter text: " + value + " to the search field",
 				"Successfully entered text: " + value + " to the search field");
-			Delay.Seconds(2);
+			Delay.Seconds(5);
 		}
 
 		[StepDefinition(@"I click continue on the Forward Product Registration page")]

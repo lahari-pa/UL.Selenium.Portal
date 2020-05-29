@@ -103,11 +103,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductObject.CloseRetailerModal(), "Failed to close retailer modal", "Successfully closed retailer modal");
 		}
 
-		[StepDefinition(@"I hover over the yellow triangle image")]
-		public void ThenIHoverOverTheYellowTriangleImage()
+		[StepDefinition(@"I hover over the yellow triangle image for retailer: (.*)")]
+		public void ThenIHoverOverTheYellowTriangleImage(string retailer)
 		{
 			NewProduct newProductObject = new NewProduct();
-			Report.IsTrue(newProductObject.HoverOverYellowTriangleImage(), "Failed to hover over the yellow triangle image", "Successfully hovered over the yellow triangle image");
+			Report.IsTrue(newProductObject.HoverOverYellowTriangleImage(retailer), "Failed to hover over the yellow triangle image", "Successfully hovered over the yellow triangle image");
 		}
 
 
@@ -195,7 +195,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click continue")]
 		public void ClickContinue()
 		{
-			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
+			int i = 0;
+			while(i<5)
+			{
+				if(NewProduct.ClickContinue())
+				{
+					Report.Success("Clicked 'Continue' successfully");
+					Report.Screenshot();
+					return;
+
+				}
+				Report.Info($"Failed to click continue on attempt: {i + 1}");
+				i++;
+			}
+			Report.Failure("Failed to click 'Continue'!");
+			Report.Screenshot();
+			//Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
 		}
 
 		[StepDefinition(@"in the (.*) page I click Continue")]
@@ -273,9 +288,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void NotErrorMessageSpecific(string message)
 		{
 			List<string> errors = NewProduct.ErrorMessagesText;
-			Report.IsTrue(!errors.Contains(message),
-				"Error message was showing when it wasn't expected to! Error: " + message,
-				"As expected, the error message was not showing. Error: " + message);
+			Report.IsTrue(!errors.Contains(message),"Error message was showing when it wasn't expected to! Error: " + message,"As expected, the error message was not showing. Error: " + message);
 		}
 
 		[StepDefinition(@"in page (.*) I should see no errors")]
@@ -1065,6 +1078,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Info("Size: " + upcInfo.Size);
 			Report.Info("DPCI: " + upcInfo.Dpci);
 			Report.Info("Quantity: " + upcInfo.Quantity);
+			Report.Info("PackageType: " + upcInfo.PackageType);
+			Report.Info("ItemNumber: " + upcInfo.ItemNumber);
+
 
 			if (upcInfo.UPCName.IsNullOrEmpty())
 			{
@@ -1858,6 +1874,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			//{
 			//	namesAsList.Add(item.Name);
 			//}
+
 			Report.IsTrue(!productLineOptions.Select(x => x.Name).ToList().Except(activeBrands).Any() && productLineOptions.Count == activeBrands.Count,
 				"The 'Product Line or Brand' drop down options were not limited exclusively to saved active brands. The options showing were: " + string.Join(", ", productLineOptions.Select(x => x.Name).ToList()),
 				"The 'Product Line or Brand' drop down options were limited exclusively to saved active brands as expected. The options showing were: " + string.Join(", ", productLineOptions.Select(x => x.Name).ToList()));
@@ -2976,6 +2993,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var NewProductObject = new NewProduct();
 			Report.IsTrue(NewProductObject.CheckAlertMessageText(displayedText), "The alert message text did not match", "The alert message text did match");
 		}
+
+		[StepDefinition(@"In the Additional Product Information Page, I ensure that for 'countries the product may be sold in' only Canada is selected")]
+		public void InAdditionalProductInformationPageEnsureOnlySoldInCanada()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();		
+			Report.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+
+			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+
+		}
+
+		[StepDefinition(@"In the Regulatory Documents to Prodivde page, I enter the value: (.*) into the WHMIS SDS Docmument Date Field")]
+		public void InTheRegualtoryDocumentsToProvidePageIEnterValueIntoWHMISSDSDocumentDateField(string value)
+		{
+			Report.IsTrue(new NewProduct().EnterWHMISSDSDocumentDate(value), "Text: " + value + " was not successfully inputted into the field!", "Text: " + value + " was successfully inputted into the field!");
+
+		}
+
+
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

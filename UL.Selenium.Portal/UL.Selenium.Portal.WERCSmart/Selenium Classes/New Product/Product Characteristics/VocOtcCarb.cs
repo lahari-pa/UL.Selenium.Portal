@@ -13,7 +13,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		#region Label constants
 		public new string PanelTitle = "Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)";
 
+
+		
 		private const string _grantedAcpQuestion = "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.";
+		//private const string _grantedAcpQuestion = "Product has been granted";
 
 		private const string _labelDilutionQuestion = "Product label specifies a dilution ratio which results in a final VOC concentration for the product during use";
 
@@ -88,7 +91,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		public bool SelectAgreeInVOCAcceptance()
 		{
 			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//span[contains(text(), 'Your acknowledgement of this registration includes that your product (exceeds/does not exceed) the limits specified by the noted regulations and understand these statements of exceeding, or not exceeding, will be provided to the recipients for which the product is registered and assessed.  Recipients may take action based on these statements.')]/preceding-sibling::input"), 2);
-			return checkBox.TryCheck();
+			return checkBox.TryClick();
+			
 		}
 
 		#endregion

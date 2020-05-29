@@ -24,7 +24,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string ArticleHeading()
 		{
-			return this.containerElement.FindElement(By.XPath(".//*[@class='heading']"), 2)?.Text.Trim();
+			var foundText = this.containerElement.FindElement(By.XPath(".//*[@class='heading']"), 2)?.Text.Trim();
+			var finalText= foundText.Replace("\r\nPrint", "");
+			return finalText;
 		}
 
 		public bool ClickIntroductoryVideo => this.IntroductoryVideo.TryClick();

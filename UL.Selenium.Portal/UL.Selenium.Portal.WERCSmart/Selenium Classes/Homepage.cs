@@ -16,6 +16,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
+
+
+		public bool SubTestStep()
+        {
+			return true;
+        }
+
+
+
+
 		public bool QuickLinkButtonShowing(string button)
 		{
 			// Specific XPath used as the elements in the 'Bulk Actions' window also seem to appear in the general search...

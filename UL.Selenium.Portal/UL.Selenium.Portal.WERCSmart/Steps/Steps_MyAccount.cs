@@ -506,9 +506,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportSettings.StepCounter + " - I click Approve");
 			try
 			{
-				var modal = new ModalDialog();
-				
 
+				var modal = new ModalDialog();
+
+				modal.WaitForContainerToBeVisible(20);
 				Report.IsTrue(modal.ClickApprove(), "Could not click Approve in modal window", "Successfully clicked Approve in modal window");
 			}
 			catch (Exception ex)
@@ -713,8 +714,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In Your Company User Accounts the user (.*) is associated with the administrator email address")]
 		public void UserIsAssociatedAdminEmail(string user)
 		{
+			Delay.Seconds(2);
 			var listOfUsers = (List<User>)Context.GetFromContext("userGrid");
 			User userMatch = listOfUsers.FirstOrDefault(x => x.Username == user);
+			Delay.Seconds(2);
 			Report.IsFalse(userMatch == null,
 				"The user: " + user + " was not found in the My Account user grid",
 				"The user: " + user + " was found in the My Account user grid");
@@ -724,10 +727,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
+			Delay.Seconds(2);
 			Report.Success("The user: " + user + " was found in the My Account user grid");
 			Report.Screenshot();
 			string adminEmail = new MyAccount().GetAdminEmail();
-
+			Delay.Seconds(2);
 			Report.IsTrue(userMatch.Email == adminEmail,
 				string.Format("The user: '{0}' was not associated with the email address: '{1}'",
 					user, adminEmail),
@@ -1090,7 +1094,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Screenshot();
 					Report.Info("Saving YouTube window to context");
 					new GlobalSteps().SaveTheCurrentWindowAs("YouTube");
-					if (selYoutube.VideoDisplayed())
+					 if (selYoutube.VideoDisplayed())
 					{
 						string actualTitle = selYoutube.VideoTitle();
 						Report.IsTrue(actualTitle == videoTitle, "The video title did not match the expected text! Expected: " + videoTitle + " but found: " + actualTitle, "A video was displayed with the title: " + videoTitle + " as expected");
@@ -1300,6 +1304,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
 			GeneralUtilities.Wait_for_load_finish();
 			Report.IsTrue(mystwdinfo.NoStewardshipCheckbox_click(), "failed to click checkbox", "successfully clicked checkbox");
+			new GlobalSteps().WaitForAModalDialogToOpen();		
+
+
 			Report.IsTrue(modaldialog.Click_Yes(), "failed to click Yes", "successfully clicked Yes");
 
 			Report.IsTrue(mystwdinfo.StewardshipSaveOrCancel_Click("Save"), "failed to click save", "successfully clicked save");
