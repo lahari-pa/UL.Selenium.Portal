@@ -268,10 +268,11 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	And In the phrase selector screen I select phrases:
 		| Text |
 		| Y    |
-	And In the phrase selector screen I click button: Save
+	And In the phrase selector screen I click button: Save	
 	And I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party product)
 		| Component CAS          | Component ID | Chemical Name               |
 		| saved as TestCase80821 | MIXTURE      | AAA WERCS Test Raw Material |
+	#switch to checklist section?
 	Given I click on home to navigate back to editing specific product saved as TestCase80821
 	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase80821
 	Given I call Shared Step 59066 (Go to SHA Manager)
