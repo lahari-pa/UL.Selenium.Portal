@@ -282,7 +282,7 @@ Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredie
 |           | Copper sulfate  | 11.67   | false               |            | false       |
 |           | Nitric acid     | 55      | false               |            | false       |
 Then I call Shared Step 48948 (Formulation > 3rd Party - Select all)
-And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 Then I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 Then I click continue
 Then I click continue

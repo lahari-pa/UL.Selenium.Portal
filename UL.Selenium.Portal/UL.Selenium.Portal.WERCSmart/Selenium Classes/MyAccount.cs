@@ -410,8 +410,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Select_ActivateDeactivate");
 			IWebElement myFirstPageNo = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']//li//a[contains(text(), '1')]"), 10).FirstOrDefault();
-
-			myFirstPageNo.TryClick();
+			if (myFirstPageNo == null)
+			{
+				//Do Nothing, assume already on page 1
+			}
+			else
+			{
+				//if there are 10 or more pages the first element should be page 1 unless its already selected then the text will be 10 
+				if (myFirstPageNo.Text == "1")
+				{
+					myFirstPageNo.TryClick();
+				}
+			}					
 
 			int pageNo = 1;
 
@@ -1062,7 +1072,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int textboxesPerRow = 3;
 			for (int i = 0; i < TableData.Count() - 1; i += textboxesPerRow)
 			{
-
+				Report.Info($"Expected data was: {TableData[i].Text}, {TableData[i+1].Text}, {TableData[i+2].Text}");
+				Report.Info($"Found data was: {StewardshipList[k]}, {IssueDateList[k]}, {ExpireDateList[k]}");
 				if (!((TableData[i].Text == StewardshipList[k]) &&
 					(TableData[i + 1].Text == IssueDateList[k]) &&
 					(TableData[i + 2].Text == ExpireDateList[k])))

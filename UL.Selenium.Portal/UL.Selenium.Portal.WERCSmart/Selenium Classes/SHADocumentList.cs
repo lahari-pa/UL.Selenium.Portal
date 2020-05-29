@@ -91,6 +91,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return null;
 		}
 
+		public string TemporaryPDFWindowOpen()
+		{
+			Report.Info("Switch to SHA Document Temp PDF window");
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (string handle in handles)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("TempPDF"))
+				{
+					Report.Info("Found the URL Containing 'TempPDF'");
+					return SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url;
+				}
+			}
+			return null;
+		}
+
 		public string DocumentText(string address)
 		{
 		

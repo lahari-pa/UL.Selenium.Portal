@@ -14,125 +14,8 @@
 @ProductSetUp
 @run_ProductSetUp3rdParty
 @MyIngredients
-
 Feature: ProductSetUp_3rdParty
 
-@ScenarioId:6674
-Scenario: [122261] Sustainability Screen - Consent Not Granted Message
-	Given I generate a random UPC number and save as: UPC79428
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
-	Then I save the product information as: TestCase79428
-	Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing79428Flav
-		| CASNumber  | ComponentName | Percentage |
-		| RR-38669-6 | FLAVORS       | 35         |
-	And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing79428Frag
-		| CASNumber | ComponentName                                                                  | Percentage |
-		| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 35         |
-	And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
-		| CASNumber | ComponentName | Percentage |
-		| 50-00-0   | Formaldehyde  | 30         |
-	Then in the Ingredients page I click Continue 
-	Then The Formulation 3rd Party Step is shown
-    Then I call Shared Step 79491 (Formulation > 3rd Party - Accept formulation - Decline Tier 4.1 - Continue)
-	When I click continue
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
-	And I should see the Additional Documents to Provide Page
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-	Then in the Additional documents page I click Continue
-	When I click continue
-	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
-	And I should see the Sustainability Page
-	Then I check if alert message displays the following text: You have not granted consent to requested Data Use Tiers for this component.  Your customer's products will not be fully screened and evaluated by any relevant WERCSmart Recipient chemical policy or product qualification program.  The results for each program is displayed above.  If you wish to update your consents for this component, please go to Product Characteristics / Formulation > Third-Party
-	When I click continue
-
-@ScenarioId:6627
-Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
-	Given I generate a random UPC number and save as: UPC79428
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
-	Then I save the product information as: TestCase79428
-	Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing79428Flav
-		| CASNumber  | ComponentName | Percentage |
-		| RR-38669-6 | FLAVORS       | 35         |
-	And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing79428Frag
-		| CASNumber | ComponentName                                                                  | Percentage |
-		| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 35         |
-	And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
-		| CASNumber | ComponentName | Percentage |
-		| 50-00-0   | Formaldehyde  | 30         |
-	Then in the Ingredients page I click Continue 
-	And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
-	And I should see the Additional Documents to Provide Page
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-	Then in the Additional documents page I click Continue
-	Then in the Formulation Names page I click Continue
-	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
-	And I should see the Sustainability Page
-	And In the New Product page I should be on tab: Review and Submit
-	Then I check if the logo is displayed for the following retailers
-	| Retailer	    |
-	| Canadian Tire |
-	| Costco        |
-	| CVS           |
-	| Dollar Tree   |
-	| Family Dollar |
-	| Target        |
-	| Walgreens     |
-	| Walmart       |
-
-	Then I check if a checkmark image is displayed above the following retailers
-	| Retailer	    |
-	| Canadian Tire |
-	| Costco        |
-	| CVS           |
-	| Dollar Tree   |
-	| Family Dollar |
-	| Walgreens     |
-	| Walmart       |
-
-	Then I check if a yellow triangle image is displayed above the following retailers
-	| Retailer	    |
-	| Target        |
-
-	Then I check if a 'Scope' button is displayed below the following retailers
-	| Retailer	    |
-	| Canadian Tire |
-	| Costco        |
-	| CVS           |
-	| Dollar Tree   |
-	| Family Dollar |
-	| Target        |
-	| Walgreens     |
-	| Walmart       |
-
-	Then I hover over the yellow triangle image
-	Then I check if the text displayed over the yellow triangle image matches the following text: The following ingredients are on this WERCSmart Recipient's screening list for chemicals of concern. If your customer sells products within the Scope of this Recipient's program, it may impact your customer's relationship with the Retailer.
-
-	Then I check if the retailer modal is displayed for the following retailer: CO
-	Then I check if the retailer modal is displaying the following text: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent.
-	Then I close the retailer modal
-
-	Then I check if the retailer modal is displayed for the following retailer: CV
-	Then I check if the retailer modal is displaying the following text: CVS requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2, Tier 3 and Tier 4.1 permissions: Artists/Hobby, Automotive Care, Cleaning Supplies, Health & Beauty, Home Improvement, Lawn and Garden, Miscellaneous, Nutritional Supplements, Over-the-Counter (OTC), Pet Care, Photography, Sporting Goods, Stationery and Pharmacy
-	Then I close the retailer modal
-
-	Then I check if the retailer modal is displayed for the following retailer: DT
-	Then I check if the retailer modal is displaying the following text: Dollar Tree requires suppliers of formulated products to grant Tier 2.1 and Tier 2.2 permissions.
-	Then I close the retailer modal
-
-	Then I check if the retailer modal is displayed for the following retailer: WM
-	Then I check if the retailer modal is displaying the following text: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys.
-	Then I close the retailer modal
-	Then in the Sustainability Information page I click Continue
-	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 
 @ScenarioId:1418
 Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include generic component)- thru to Completed (includes adding WPSxxxxxx component)
@@ -179,6 +62,8 @@ Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include gen
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase79428)
 	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase79428)
 	#And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
+	#And In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077
+	And In Power Desginer, fill in SECT2318 if it is present
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open
@@ -228,6 +113,8 @@ Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic 
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80768)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80768)
 	#And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
+	#And In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077
+	And In Power Desginer, fill in SECT2318 if it is present
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open
@@ -286,6 +173,7 @@ Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include gen
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80763)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80763)
 	#And In Power Designer I left click on section: [SECT2318] WALMART QC RESPONSE FORM
+	And In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077
 	And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 	And In Power Designer I double click on category: Water Soluble?
 	Then In Power Designer the phrase selector screen should open
@@ -380,10 +268,11 @@ Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific com
 	And In the phrase selector screen I select phrases:
 		| Text |
 		| Y    |
-	And In the phrase selector screen I click button: Save
+	And In the phrase selector screen I click button: Save	
 	And I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party product)
 		| Component CAS          | Component ID | Chemical Name               |
 		| saved as TestCase80821 | MIXTURE      | AAA WERCS Test Raw Material |
+	#switch to checklist section?
 	Given I click on home to navigate back to editing specific product saved as TestCase80821
 	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase80821
 	Given I call Shared Step 59066 (Go to SHA Manager)

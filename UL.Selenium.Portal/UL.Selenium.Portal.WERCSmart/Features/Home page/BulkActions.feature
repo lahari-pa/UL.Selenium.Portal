@@ -265,6 +265,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I click continue
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
 	And I navigate to the home page
 	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 	And I enter the text: saved as TestCase78048 in the 'Search by WPS ID or Product Name' field

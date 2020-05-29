@@ -208,7 +208,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2).FirstOrDefault(x => x.Text == "VALIDATE").TryClick();
 		}
 
-		
+		public bool CheckProductInformation(string id, string productType, string productAccessCode)
+		{
+
+			IWebElement accessCode = this.containerElement.FindElement(By.XPath(".//div[@data-bind='html: html']"), 2);
+			string accessCodeText = accessCode.Text;
+
+			if (!accessCodeText.Contains(id))
+			{
+
+				Report.Info("Product ID does not match");
+				return false;
+
+			}
+			else if (!accessCodeText.Contains(productType))
+			{
+
+				Report.Info("Product Type does not match");
+				return false;
+
+			}
+			else if (!accessCodeText.Contains("Access Code: " + productAccessCode))
+			{
+
+				Report.Info("Product ID does not match");
+				return false;
+
+			}
+
+			return true;
+
+		}
 
 	}
 }

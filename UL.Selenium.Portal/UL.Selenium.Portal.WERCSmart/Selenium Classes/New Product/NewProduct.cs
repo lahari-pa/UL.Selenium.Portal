@@ -92,7 +92,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public List<string> GetErrorsForSection(string section)
 		{
-			IList<IWebElement> els = this.containerElement.FindElements(By.XPath(@".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2);
+			IList<IWebElement> els;
+			if (section == "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations." || section == "Product has been granted an Alternative Control Plan")
+			{
+
+				var elsFound = this.containerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
+				var upperEl = elsFound.First(x => x.Text.Contains(section));
+				els = upperEl.FindElements(By.XPath($".//following-sibling::div[1]//p[@class='form-error']//span"), 2);
+
+			}
+            else
+            {
+				els = this.containerElement.FindElements(By.XPath(@".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2);
+			}			
 			return els.Count == 0 ? new List<string>() : els.Select(x => x.Text).ToList();
 		}
 
@@ -404,6 +416,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public List<string> CheckIfRetailerLogoIsDisplayed(Table table)
 		{
 			var abbr = new RetailerAbbreviations();
+			
 			string selectedAbbr;
 			List<string> retailersThatAreNotDisplayingTheirLogo = new List<string>();
 
@@ -542,9 +555,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
-		public bool HoverOverYellowTriangleImage()
+		public bool HoverOverYellowTriangleImage(string retailer)
 		{
-			IWebElement yellowTrangleImage = this.containerElement.FindElement(By.XPath(@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/DT.png']/../preceding-sibling::div//span//i[@class='fa fa-exclamation-triangle fa-3x']"), 2);
+			var abbr = new RetailerAbbreviations();
+			string selectedAbbr;
+			abbr.Map.TryGetValue(retailer, out selectedAbbr);
+
+			IWebElement yellowTrangleImage = this.containerElement.FindElement(By.XPath($@"//img[@src='/Wercs.SHA.MVCWebV1/Content/images/retailer-logos/{selectedAbbr}.png']/../preceding-sibling::div//span//i[@class='fa fa-exclamation-triangle fa-3x']"), 2);
 
 			if (yellowTrangleImage != null)
 			{
@@ -965,6 +982,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 				IWebElement ProductNameOnlabel = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/..//input"), 2);
 
+
+
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
 					try
@@ -1105,6 +1124,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (info.PackageType.Length > 0)
 				{
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					if (info.PackageType=="<First>")
+					{
+						var firstOption = packageField.FindElement(By.XPath("./option[not(text()='Package Type')]"), 1).Text;
+						info.PackageType = firstOption;
+					}
 					packageField.Select(info.PackageType);
 				}
 
@@ -1113,6 +1137,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					IWebElement capsuleCountField = container.FindElement(By.XPath(".//label[contains(text(),'Capsule Count')]/..//input"), 2);
 					capsuleCountField.EnterText(info.CapsuleCount);
 				}
+
+				if (info.ItemNumber.Length > 0)
+				{
+					IWebElement ItemNumberField = container.FindElement(By.XPath(".//label[contains(text(),'Please enter comma separated Item Number')]//following-sibling::input"), 2);
+					ItemNumberField.EnterText(info.ItemNumber);
+				}
+
 
 				return true;
 			}
@@ -2423,9 +2454,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//By.XPath(
 			//	".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div[//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]]//a[text()='Browse']"),
 			//2);
-			IWebElement el = this.containerElement.FindElement(
-				By.XPath(
-					".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]/..//a[text()='Browse']"),
+			IWebElement el = this.containerElement.FindElement(	By.XPath(".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]/..//a[text()='Browse']"),
 				2);
 			if (el == null)
 			{
@@ -3110,13 +3139,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetOptionInSection(string section, string value)
 		{
-			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
-						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+
+			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
 						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
 						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])] | " +
-						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
+
+			if (section == "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations."|| section== "Product has been granted an Alternative Control Plan")
+			{
+
+				var elsFound = this.containerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
+				var upperEl = elsFound.First(x => x.Text.Contains(section));
+				el = upperEl.FindElement(By.XPath($".//following-sibling::div[1]//label[.//span[contains(text(),'{value}')]]"), 2);
+
+			}
 
 			if (el == null)
 			{
@@ -3219,7 +3258,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			try
 			{
 				string xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]";
-				IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 2);
+				IWebElement el;
+				if (section == "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.")
+				{
+
+					var elsFound = this.containerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
+					var upperEl = elsFound.First(x => x.Text.Contains(section));
+					el = upperEl.FindElement(By.XPath($".//following-sibling::div[1]//label[.//span[contains(text(),'{value}')]]"), 2);
+
+				}
+				else
+				{
+					el = this.containerElement.FindElement(By.XPath(xPath), 2);
+				}				
+				
 				if (el != null)
 				{
 					return el.TryClick();
@@ -3258,7 +3310,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public List<string> SelectedOptionsForSection(string section)
 		{
-			IList<IWebElement> matchingElements = this.containerElement.FindElements(By.XPath(@".//div[contains(@class,'form-group') and .//label[contains(text(),""" + section + @""")]]//*[name()='input' or name()='select']"), 2);
+
+			IList<IWebElement> matchingElements;
+			if (section == "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations."||section == "Product has been granted an Alternative Control Plan")
+			{
+
+				var elsFound = this.containerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
+				var upperEl = elsFound.First(x => x.Text.Contains(section));
+				matchingElements = upperEl.FindElements(By.XPath($".//following-sibling::div[1]//label//input"), 2);
+
+			}
+            else
+            {
+				matchingElements = this.containerElement.FindElements(By.XPath(@".//div[contains(@class,'form-group') and .//label[contains(text(),""" + section + @""")]]//*[name()='input' or name()='select']"), 2);
+			}
+
 			if (matchingElements.Count == 0)
 			{
 				return new List<string>();
@@ -3336,7 +3402,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Delay.Seconds(1);
 			Report.Info("Beginning get all options for section.");
 			var optionsText = new List<string>();
-			IList<IWebElement> matchingElements = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@".//div[contains(@class,'form-group') and .//label[contains(text(),""" + section + @""")]]//*[name()='input' or name()='select']"), 2);
+			IList<IWebElement> matchingElements;
+			if (section == "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations." || section == "Product has been granted an Alternative Control Plan")
+			{
+
+				var elsFound = this.containerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
+				var upperEl = elsFound.First(x => x.Text.Contains(section));
+				matchingElements = upperEl.FindElements(By.XPath($".//following-sibling::div[1]//label//input"), 2);
+
+			}
+            else
+            {
+				matchingElements = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@".//div[contains(@class,'form-group') and .//label[contains(text(),""" + section + @""")]]//*[name()='input' or name()='select']"), 2);
+			}
+			
 			if (matchingElements.Count == 1 && matchingElements.FirstOrDefault().TagName.ToLower() == "select")
 			{
 				optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option")).Select(x => x.Text).Where(x => x != "Choose...").ToList();
@@ -4583,6 +4662,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string Quantity { get; set; } = "";
 		public string PackageType { get; set; } = "";
 		public string UPCName { get; set; } = "";
+		public string ItemNumber { get; set; } = "";
 
 	}
 

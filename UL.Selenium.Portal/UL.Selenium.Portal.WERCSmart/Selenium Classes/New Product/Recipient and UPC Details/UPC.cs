@@ -109,7 +109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
 				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 				IWebElement upcNameField = container.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/..//input"), 2);
-
+				Delay.Seconds(0.5);
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
 					try
@@ -165,7 +165,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				//}
 
-
+				Delay.Seconds(0.5);
 				IWebElement productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
 
 				string productNameDataBind = productNameOnlabelObj.GetAttribute("class");
@@ -217,7 +217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 
-
+				Delay.Seconds(0.5);
 
 				IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
 				if (info.ContainerType == "<first>")
@@ -252,7 +252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 				}
 				sizeField.EnterText(info.Size);
-
+				Delay.Seconds(0.5);
 				if (info.Quantity.Length > 0)
 				{
 					IWebElement quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity of Units within the Case']"), 2);
@@ -275,13 +275,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 
 				}
-
+				Delay.Seconds(0.5);
 				if (info.IndividualUpcCasePack.Length > 0)
 				{
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'upcContained.field')]"), 2);
 					packageField.Select(info.IndividualUpcCasePack);
 				}
-
+				Delay.Seconds(0.5);
 				if (info.TransportationOption.Length > 0)
 				{
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'transport.field')]"), 2);
@@ -1000,10 +1000,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					spanDataBind = "text: row.getAdditionalDataValue(identifier(), 0)";
 					break;
 				case "DPCI":
-					spanDataBind = value;
+					//spanDataBind = value;
+					spanDataBind = "text: row.getAdditionalDataValue(identifier(), 2)";
+					break;
 					break;
 				case "OMSID":
-					spanDataBind = value;
+					//spanDataBind = value;
+					spanDataBind = "text: row.getAdditionalDataValue(identifier(), 3)";
 					break;
 			}
 			var headerTextList = multipleUPCModal.FindElements(By.XPath($".//div[@class='col-md-8 upc-list-container']//th"), 2).Select(x => x.Text).ToList<string>();
@@ -1020,7 +1023,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			//List<IWebElement> wantedCells = multipleUPCModal.FindElements(By.XPath($".//td[{retailerIndex + 1}]"), 2).ToList();
 
-			IList<IWebElement> valueList = multipleUPCModal.FindElements(By.XPath($".//td[{retailerIndex + 1}]"), 2);
+			////IList<IWebElement> valueList = multipleUPCModal.FindElements(By.XPath($".//td[{retailerIndex + 1}]"), 2);
 
 			int q = 0;
 			bool finalHeaderFound = false;
@@ -1040,7 +1043,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Was not able to find the number of headers, could not find the first UPC number in the file data");
 				return false;
 			}
-			//IList <IWebElement> valueList = multipleUPCModal.FindElements(By.XPath($".//td[{retailerIndex + 1}]//span[@data-bind='{spanDataBind}']"), 2);
+			IList <IWebElement> valueList = multipleUPCModal.FindElements(By.XPath($".//td[{retailerIndex + 1}]//span[@data-bind='{spanDataBind}']"), 2);
 			int i = q + offset;
 
 			if (valueList.Count == 0)
@@ -1052,6 +1055,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			foreach (IWebElement item in valueList)
 			{
 				string valueString = item.Text;
+				var test = fileData[i].Trim();
 				if (valueString != fileData[i].Trim())
 				{
 					Report.Info("error: popup contains: " + valueString + "while file data contains: " + fileData[i] + " in row " + i);

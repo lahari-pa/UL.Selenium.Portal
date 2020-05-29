@@ -759,6 +759,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool DoesPDSectionExist(string section)
+		{
+			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
+			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue().Contains(section));
+			if (matchingSection == null)
+			{
+				Report.Info("Section was not found");
+				return false;
+			}
+			else
+			{
+				Report.Info("The section was found");
+				return true;
+			}
+		}
+
 		//public bool IsSectionActive(string section)
 		//{
 		//	IWebElement tabElement = this.containerElement.FindElement(By.Id(section));

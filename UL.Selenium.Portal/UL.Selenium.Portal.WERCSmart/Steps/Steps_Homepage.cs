@@ -1125,7 +1125,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("Attempting to click the button with text: 'GO TO MY RETAILERS");
 					new ModalDialog().ClickButton("GO TO MY RETAILERS");
+					Delay.Seconds(15);
 					new StepsRetailPartners().GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection();
+					
 				}
 				else
 				{

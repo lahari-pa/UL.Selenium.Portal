@@ -148,14 +148,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			//create a product for Costco data tier
-			myProductsetup.CreateProductConditionerForCostcoAndTakeToDataSummary("product4", "Conditioner");
-			myHome.ClickItemInNavigationPanel("Retail Partners");
-			myRetailPartner.SelectRetailer("Costco");
-			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
-			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
-			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
-			myRetailPartner.GivenClickTheSaveChangesButton();
-			myRetailPartner.ClickCloseOnSavePopupDialog();
+			//myProductsetup.CreateProductConditionerForCostcoAndTakeToDataSummary("product4", "Conditioner");
+			//myHome.ClickItemInNavigationPanel("Retail Partners");
+			//myRetailPartner.SelectRetailer("Costco");
+			//myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			//myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			//myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			//myRetailPartner.GivenClickTheSaveChangesButton();
+			//myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			//create a product for Dollar Tree data tier
 			myProductsetup.CreateProductConditionerForDollarTreeAndTakeToDataSummary("product5", "Conditioner");
@@ -405,11 +405,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//select I have no stewardship numbers
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			Delay.Seconds(5);
 			myAccount.ClickIhaveNoStewardshipNumbers();
+			Delay.Seconds(5);
 			//modal wait and accept accept/ press YES
-			new GlobalSteps().WaitForAModalDialogToOpen();
-			new ModalDialog().ClickButton("YES");
-			Delay.Seconds(2);
+			//new GlobalSteps().WaitForAModalDialogToOpen();
+			//new ModalDialog().ClickButton("YES");
+			Delay.Seconds(5);
 
 			//data tiers
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");

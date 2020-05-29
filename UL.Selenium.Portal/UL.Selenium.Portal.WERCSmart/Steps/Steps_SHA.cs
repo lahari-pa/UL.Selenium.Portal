@@ -1980,7 +1980,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.OpenNewTabAndNavigateTo(downloadsFolder + @"\TempPDF.pdf");
 				Report.Info($"tab opened");
 				Delay.Seconds(3);
-				string docURL2 = thisSHADocument.DocumentWindowOpen();
+				//string docURL2 = thisSHADocument.DocumentWindowOpen();
+				string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
 				Report.Info($"doc window opened");
 				Report.Screenshot();
 
@@ -3737,7 +3738,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			List<string> columnsNotFound = studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table);
 
-			Report.IsTrue(studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table).Count == 0, "One or more of the columns were not found", "Successfully found all columns");
+			Report.IsTrue(columnsNotFound.Count == 0, "One or more of the columns were not found", "Successfully found all columns");
 
 			foreach (string columnName in columnsNotFound)
 			{
