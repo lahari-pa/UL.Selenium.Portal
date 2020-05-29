@@ -614,3 +614,33 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58736. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87914
+
+
+Scenario: [87271] US & Canada - PL = Yes, Retailer is NOT Canadian Tire, no error re package type on forward
+Given I create a Completed product using Test Case 86187 (SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product)
+Given I navigate to the landing page
+#Given I call Shared Step 85328 (Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full))
+Given I attempt to log in with email: CanadaHasPackandPartialStewardship.kxxyxunf@mailosaur.io and password: Thewercs1!1030
+Given I filter the products by: Accepted by Retailers
+Given I search for the product saved as: TestCase86187
+And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+And I enter the text: saved as TestCase86187 in the 'Search by WPS ID or Product Name' field
+And In the Foward Product Registration Screen I should see product: saved as TestCase86187
+And In the Foward Product Registration Screen I Select the product: saved as TestCase86187
+And I click continue on the Forward Product Registration page
+And In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Canadian Tire under Other Retailers and save it as: retailer87217
+And I click continue on the Forward Product Registration page
+And If the Private Label textbox is showing in the Select UPCs screen, I enter the value: N/A
+And I call Shared Step 86824 (Forwarding - Select Existing UPC, Click Continue, No error for Package type)
+And I should see the subheading 3: Product Results on the Forward Product Registration window
+And I click continue on the Forward Product Registration page
+And I should see the subheading 3: Review & Submit on the Forward Product Registration window
+And I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+And I click continue on the Forward Product Registration page
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+And I navigate to the home page
+
+
+Scenario: [56086] US & Canada - PL = Yes, Retailer is NOT Canadian Tire, no error re package type on forward
