@@ -4739,7 +4739,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}		
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 
 		}
 
@@ -4847,7 +4848,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
 			// Do this by double clicking on the graphic and selecting the green check mark graphic from the available list and click save
@@ -5691,7 +5693,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 		}
 
 		[StepDefinition(

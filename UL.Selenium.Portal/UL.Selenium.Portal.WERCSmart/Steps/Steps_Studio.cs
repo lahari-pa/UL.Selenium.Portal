@@ -1141,7 +1141,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 		}
 
 		[StepDefinition(@"I check whether the current environment is Staging or Production and if it is I skip the next three steps")]
@@ -1513,8 +1514,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0755")]
-		public void InPDFillInSET2318ifPresentThenNavigateToSECT0755()
+		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to Checklist Section")]
+		public void InPDFillInSET2318ifPresentThenNavigateToChecklistSection()
 		{
 			var selStepsStudio = new Steps_Studio();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
@@ -1525,7 +1526,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 
 
 		}
