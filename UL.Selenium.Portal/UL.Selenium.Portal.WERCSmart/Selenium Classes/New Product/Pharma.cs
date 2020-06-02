@@ -64,17 +64,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			foreach (IWebElement field in allFieldsOnPage)
 			{
 				bool enteredText = false;
+				
+				enteredText = field.TryEnterText("1");
 
-				if (field.Text.Length < 1)
+				if (!enteredText)
 				{
-
-					enteredText = field.TryEnterText("1");
-
-					if (!enteredText)
-					{
-						return false;
-					}
-
+					return false;
 				}
 			}
 
@@ -88,18 +83,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			foreach (IWebElement field in allFieldsOnPage)
 			{
 				bool enteredText = false;
-			
-				if (field.Text.Length < 1)
-				{
-			
-					enteredText = field.TryEnterText("Test");
-					
-					if (!enteredText)
-					{
-						return false;
-					}
 
+				enteredText = field.TryEnterText("Test");
+					
+				if (!enteredText)
+				{
+					return false;
 				}
+
 			}
 
 			return true;

@@ -1588,21 +1588,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> FindColumnInUPCRetailerAndFeedPageWithTable(Table table)
 		{
 			List<string> columnsNotFound = new List<string>();
-			
+
 			foreach (TableRow row in table.Rows)
 			{
 				IWebElement columnName = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//th[contains(text(),'" + row["Column Name"] + "')]"), 2);
 
-					if (columnName == null)
-					{
-						columnsNotFound.Add(row["Column Name"]);
-					}
+				if (columnName == null)
+				{
+					columnsNotFound.Add(row["Column Name"]);
 				}
-
-				return columnsNotFound;
 			}
 
+			try {
 
+			}
 			catch (NoSuchWindowException)
 			{
 				Report.Failure("Failed to switch to the SHA Manager Product UPC window!");
@@ -1617,6 +1616,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return null;
 
 			}
+
+			return columnsNotFound;
 
 		}
 

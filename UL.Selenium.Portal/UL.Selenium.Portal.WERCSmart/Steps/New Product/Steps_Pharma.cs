@@ -44,15 +44,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I fill all empty fields in the SPL Information screen")]
 		public void GivenIFillAllEmmptyFieldsInTheSPLInformationScreen()
 		{
-			Delay.Seconds(10);
 			Pharma pharmaObject = new Pharma();
 			Report.IsTrue(pharmaObject.CheckAndFillEmptyFieldsInSPLInformationScreen(), "Failed to fill in all empty fields", "Successfully filled in all empty fields");
 		}
 
 		[StepDefinition(@"I fill all empty fields in the Pharma Ingredients screen")]
 		public void GivenIFillAllEmptyFieldsInThePharmaIngredientsScreen()
-		{
-			Delay.Seconds(10);
+		{ 
 			Pharma pharmaObject = new Pharma();
 			Report.IsTrue(pharmaObject.CheckAndFillEmptyFieldsInPharmaIngredientsScreen(), "Failed to fill in all empty fields", "Successfully filled in all empty fields");
 		}

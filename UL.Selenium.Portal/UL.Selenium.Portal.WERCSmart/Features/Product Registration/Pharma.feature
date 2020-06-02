@@ -31,7 +31,7 @@ Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
+Then I click continue
 Then I click continue
 Given I fill all empty fields in the Pharma Ingredients screen
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -72,7 +72,9 @@ Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Propane       | 100     | false               | false       |            |
@@ -122,7 +124,9 @@ Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Propane       | 100     | false               | false       |            |
@@ -175,7 +179,9 @@ Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Propane       | 100     | false               | false       |            |
@@ -214,7 +220,9 @@ Then I click continue
 And I set the Secondary Physical State to be: Solid containing liquid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Propane       | 100     | false               | false       |            |
@@ -254,7 +262,9 @@ Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Propane       | 100     | false               | false       |            |
@@ -296,7 +306,9 @@ Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Propane       | 100     | false               | false       |            |
@@ -344,7 +356,9 @@ Then I click continue
 Given I set the Secondary Physical State field to: Liquid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 Given I set the Select the best Water Solubility description field to: Appreciable
-And in the New Product page I click Continue
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Propane       | 100     | false               | false       |            |
@@ -449,7 +463,9 @@ Then I click continue
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Propane       | 100     | false               | false       |            |
@@ -460,7 +476,7 @@ Then I click continue
 Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 57961 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128018, container type: Plastic Contains, capsule count: 50 and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
