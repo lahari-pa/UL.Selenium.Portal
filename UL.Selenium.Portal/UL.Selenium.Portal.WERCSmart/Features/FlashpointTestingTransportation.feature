@@ -557,7 +557,7 @@ And I call Shared Step 57500 (The Product- Enter name, select product type - Con
 And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-And I set the Flash Point (in Celsius) field to: >60C and <93C
+And I set the Flash Point (in Celsius) field to: >60C and <=93C
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option                   |
 | Closed cup method        |
@@ -614,7 +614,7 @@ And I call Shared Step 57500 (The Product- Enter name, select product type - Con
 And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 80
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-And I set the Flash Point (in Celsius) field to: >=93C and <=815C
+And I set the Flash Point (in Celsius) field to: >93C and <=815C
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option                   |
 | Closed cup method        |
