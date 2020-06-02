@@ -2180,8 +2180,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("In the Ingredients page I click Continue");			
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartStep("I should see the Waste Classification Data Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");			
-			
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 		}
 
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
@@ -3732,8 +3731,6 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I should see the Volatile Organic Compound Summary");
 			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");			
 			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
-			
-
 		}
 
 		[StepDefinition(
@@ -4736,7 +4733,6 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 					Report.Info("Skipping step because this is an electronic product");
 					return;
 				}
-				Delay.Seconds(9999);
 			}
 
 			ReportSettings.UseSubSteps = true;

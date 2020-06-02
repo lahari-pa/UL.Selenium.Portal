@@ -258,7 +258,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	And In the 'Select Retailers' window I select the retailer: CVS
 	And I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC88826, container type: Plastic Container and size: 12 click continue
@@ -355,7 +355,7 @@ Scenario: [100980] Regulatory Documents to Provide - US and Canada - upload all 
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I call Shared Step 74201 (Select Retailers - CVS)
 	And I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC120866, container type: Plastic Container and size: 12 click continue
@@ -378,7 +378,7 @@ Given I call Shared Step 57753 (Create a New Registration via Register New Produ
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 Then I save the product information as: TestCase60643
 Given I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
-And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 Given I call Shared Step 48367 (Product Includes Battery > any type)
 | Battery Type | How many batteries required to run | Manufacturer | Number of batteries per package |
 | Alkaline     | 6                                  | <any>        | 6                               |
@@ -405,7 +405,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Then I should see the Pesticide Details - U.S. Page
 	And I see the following sections
@@ -450,7 +450,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Then I should see the Pesticide Details - U.S. Page
 	And I see the following sections
@@ -496,7 +496,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Then I should see the Pesticide Details - U.S. Page
 	And I see the following sections
@@ -542,7 +542,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer |
 		| CVS      |
@@ -599,7 +599,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| CASNumber | ComponentName       | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 	|           | Potassium hydroxide | 100     | false               |            | false       |
-	And I call Shared Step 132370(Waste Classification Data - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
     Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
@@ -644,3 +644,253 @@ And I navigate to the home page
 
 
 Scenario: [56086] US & Canada - PL = Yes, Retailer is NOT Canadian Tire, no error re package type on forward
+
+
+Scenario: [philip123] The Product - Industrial Category not available for Selection
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I should see the The Product Page
+And I set the Product Name as it a appears on the Package Label field to: Chalk
+And I set 'Type of Product' to: For Industrial use only
+Then I confirm the product type field displaying the following results
+| Results          |
+| No results found |
+And I set 'Type of Product' to: Laboratory use only
+Then I confirm the product type field displaying the following results
+| Results          |
+| No results found |
+And I set 'Type of Product' to: For Industrial use only
+Then I confirm the product type field displaying the following results
+| Results          |
+| No results found |
+And I set 'Type of Product' to: Pharmaceutical use only
+Then I confirm the product type field displaying the following results
+| Results          |
+| No results found |
+And I set 'Type of Product' to: Profession use only
+Then I confirm the product type field displaying the following results
+| Results          |
+| No results found |
+And I set 'Type of Product' to: Research and Development use only
+Then I confirm the product type field displaying the following results
+| Results          |
+| No results found |
+
+
+Scenario: Select Retailers - Removing Retailer(s) Selected
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| calcium       | 100     |                     |            |             |
+And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+Given I select the following retailers in the Select Retailers popup list view:
+| Retailer              |
+| cvs                   |
+| dollar general        |
+| Family Dollar         |
+| Dick's Sporting Goods |
+| Amazon                |
+| Best Buy              |
+Given I click Done in the Select Retailers popup
+And The selected retailers on the Retailer page should be:
+| Retailer              |
+| cvs                   |
+| dollar general        |
+| Family Dollar         |
+| Dick's Sporting Goods |
+| Amazon                |
+| Best Buy              |
+Given I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'
+Given in the Regulatory Documents to Provide page I click Continue
+Then I select the following retailers in the Retailer page
+| Retailers      |
+| CVS            |
+| Dollar General |
+Then I click the delete icon in the Retailer page
+Given I click the 'Add Retailers' button
+And The selected retailers on the Retailer page should be:
+| Retailer              |
+| Family Dollar         |
+| Dick's Sporting Goods |
+| Amazon                |
+| Best Buy              |
+Then The following retailers in the Select Retailers popup list view should be selected
+| Retailers             |
+| Family Dollar         |
+| Dick's Sporting Goods |
+| Amazon                |
+| Best Buy              |
+Given I click Done in the Select Retailers popup
+Given I click continue
+And I click the 'Add UPC' button
+And I confirm that retailer "CV" is not present under the 'Destination Retailers' column in the UPC table
+And I confirm that retailer "DG" is not present under the 'Destination Retailers' column in the UPC table
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase
+
+
+
+
+
+Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561a (The Product - Enter Product Name: Pesticide Testing Product and select Type of Product): Insecticide - Fogger
+Then I save the product information as: TestCase133335
+	And I set the Primary Physical State option to: Aerosol
+	And I set the Secondary Physical State option to: Liquid spray
+	And I check the 'I do not have exact' checkbox for field: pH
+	And I set the pH option to: 4 - 6.9 
+	And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then option to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
+	And in the New Product page I click Continue
+	# Additional Product Information page
+	And I should see the Additional Product Information Page
+	Given I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+	# Ingredient Page
+	And I should see the Ingredients Page
+	Then I add the following ingredients:
+		| ComponentName			     	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Glutens, corn    | 50      | false               | false       |            |
+		| Butane             | 0.1     | false               | false       |            |
+		| Oils, Cedarwood, Texan    | 49.9    | false               | false       |            |
+	Given in the New Product page I click Continue
+	Then I confirm there is a popup video titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA). The product type is typically considered a pesticide, and there are ingredients present in the registration that are known to be used in Pesticide products.
+	Then I confirm the table in the popup view has the following column titles
+	| Titles          |
+	| CAS Number      |
+	| Name            |
+	| Active or Inert |
+	Then I confirm the table in the popup view has following column data
+	| CAS Number | Name                   | Active or Inert |
+	| 66071-96-3 | Glutens, corn          | Active          |
+	| 68990-83-0 | Oils, Cedarwood, Texan | Active          |
+    Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
+	Then I confirm I see a checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following buttons in the popup view:
+	| Button  |
+	| Go back |
+	| Confirm |
+
+	## Regulatory 1 Page Details
+	#And I should see the Regulatory Information 1 Page
+	#And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+	#And I set 'Prop65' to: No
+	#Given in the New Product page I click Continue
+	## Transportation Details 1 Page
+	#And I should see the Transportation Details 1 Page
+	#And I set the Product is Regulated for Transport option to: Yes
+	#And I set the below options for field: Select all modes of transport that you've classified the product for
+	#	| Option                           |
+	#	| DOT                              |
+	#	| Shipping with limited quantity   |
+	#	| Shipping with consumer commodity |
+	#Given in the New Product page I click Continue
+	## U. S. Department of Transportation (DOT) Classification Page
+	#Then I should see the U. S. Department of Transportation (DOT) Classification Page
+	#And I set the UN Number field to: UN1950
+	#And I set the Proper Shipping Name field to: Aerosols
+	#And I set the Technical Name (if applicable) field to: Clear Coating - Aerosol
+	#And I set the Hazard Class (select) field to: 2.1
+	#And I set the Packing Group (select) field to: None
+	#Given in the New Product page I click Continue
+	## Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	#And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	#Then I see the following questions
+	#	| Section                                                                                                                                        |
+	#	| Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. |
+	#	| VOC content in grams ozone per gram                                                                                                            |
+	#And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: No
+	#And in the New Product page I click Continue
+	#Then VOC content in grams ozone per gram should be showing the error messages: This is a required field.
+	#And I set the VOC content in grams ozone per gram field to: 0.5
+	#And in the New Product page I click Continue
+	## Volatile Organic Compound Summary page
+	#And I should see the Volatile Organic Compound Summary Page
+	#And I confirm that I see todays VOC Analysis Date
+	#And I confirm that I see the bold VOC-OTC-CARB Compliance Limits statement: Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are:
+	#And I should see the following Voc Limits present:
+	#	| Use                     | VOC Compliance Limit | Regulation                  |
+	#	| Clear Coating - Aerosol | 0.85                 | Aerosol Coatings CARB limit |
+	#And I confirm that I see the following VOC Grams Ozone value: 0.5
+	#And I confirm statement: limits specified shows the text: Does not exceed the limits specified in the Aerosol Coatings by the CARB
+	#And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+	##change the VOC grams value
+	#Then I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
+	#And I set the VOC content in grams ozone per gram field to: 1
+	#And in the New Product page I click Continue
+	#And I confirm statement: limits specified shows the text: Exceeds the limits specified in the Aerosol Coatings by the CARB
+	#And in the New Product page I click Continue
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	## Regulatory Documents to Provide Page
+	#And I should see the Regulatory Documents to Provide Page
+	#And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+	#And in the New Product page I click Continue
+	## Additional Documents to Provide Page
+	#And I should see the Additional Documents to Provide Page
+	#And in the New Product page I click Continue
+	#Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
+	#And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	#And in the New Product page I click Continue
+	## Optional Reports and Documents Available for Purchase Page
+	#And I should see the Optional Reports and Documents Available for Purchase Page
+	#And in the New Product page I click Continue
+	## Safety Data Sheet Authoring - Additional Data (Optional) Page
+	#And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	#And I set the Appearance field to: Brown
+	#And I set the Odor field to: Banana
+	#And I set the Odor Threshold field to: Not applicable
+	#And I set the Partition Coefficient field to: 5
+	##And in the New Product page I click Continue
+	##Then Product's Dispensing Method should be showing the error messages: This is a required field.
+	#And I set the Product's Dispensing Method field to: Pump
+	#And in the New Product page I click Continue
+	## Comments Page
+	#And I should see the Comments Page
+	#And in the New Product page I click Continue
+	## Data Acceptance Page and clean up
+	#And I should see the Data Acceptance Page
+	#Given I navigate to the home page
+	#Then I delete the product: TestCase133335
+
+# In the 'Additional Product Information Page'
+# CONFIRM the 'Additional Product Information Page' displays the Question "Which one best describes your product"
+# Select the Radio Button Option - "Product is not considered a pesticide product"
+# CONFIRM that by default the "United States" checkbox is selected
+# Select 'NO' for the rest of the questions listed in the 'Additional Product Information Page'
+# Click 'CONTINUE'
+# In the 'INGREDIENTS SCREEN' enter the following CAS Numbers
+# 66071-96-3 - Glutens, corn @ 50%
+# 106-97-8 - Butane @ 0.1%
+# 68990-83-0 - Oils, Cedarwood, Texan @ 49.9%
+# Click 'CONTINUE'
+# CONFIRM that you are prompted with the 'PRODUCT CONTAINS INGREDIENTS TYPICAL OF A PESTICIDE' Message Box
+# CONFIRM that the following statement displays on the top of the message box:  You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA). The product type is typically considered a pesticide, and there are ingredients present in the registration that are known to be used in Pesticide products.
+# CONFIRM that the middle section of the message box contains the following Component Table Columns:  CAS NUMBER / NAME OF COMPONENT / and 'ACTIVE OR INERT'
+# CONFIRM that the CAS Numbers of the Components you used, display in this message window.
+# CONFIRM that the Name of the Components you used, display in this message window.
+# CONFIRM that the each Component is marked as 'ACTIVE'
+# CONFIRM that below the Component Table the following statement displays:  If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy.  Should all indications and ingredients be correct and the product is not a pesticide, please indicate below
+# CONFIRM that at the bottom of the message box - You see "The Product Type, Pest Selection, and Ingredients listed are accurate" CHECKBOX
+# CONFIRM that at the bottom-right of the message box - The 'GO BACK' and 'CONFIRM' BUTTONS are available
+# Click on the 'GO BACK BUTTON'
+# CONFIRM that transitions back to the 'INGREDIENTS PAGE'
+# CONFIRM that you see a message in RED FONT that states the following:  Exclamation Point! You must either confirm that your product is not a pesticide, change your product details to confirm that it is a pesticide, or change your ingredients to remove the pesticide ingredients.
+# Do not make any changes to the Components - leave them as is
+# Click 'CONTINUE'
+# CONFIRM you are prompted with the 'Product Contains Ingredients Typical of a Pesticide' Message Box
+# Place a check mark on the 'The Product Type, Pest Selection, and Ingredients listed are accurate' Checkbox
+# Click on the CONFIRM BUTTON
+# Transitions to the 'WASTE CLASSIFICATION DATA PAGE'
+# Click again on the 'INGREDIENTS EDIT LINK'
+# CONFIRM it transitions back to the INGREDIENTS PAGE
+# Click 'CONTINUE'
+# CONFIRM that you are not prompted again with the 'Product Contains Ingredients Typical of a Pesticide' Message Box
+# Once the checkbox 'The Product Type, Pest Selection, and Ingredients listed are accurate' checkbox is checked the message box in the Ingredient Screen will no longer showGiven I click the Home navigation icon
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Pesticide Testing Product

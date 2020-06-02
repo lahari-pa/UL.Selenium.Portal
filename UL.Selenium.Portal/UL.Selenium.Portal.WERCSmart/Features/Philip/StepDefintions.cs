@@ -38,6 +38,85 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public object TheProduct { get; private set; }
 		public string File { get; private set; }
 
+		[StepDefinition(@"In the popup view with the following title: (.*) I confirm I see the following buttons in the popup view:")]
+		public void ThenIConfirmISeeTheFollowingButtonsInThePopupView(string popupTitle, Table table)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.CheckForTheFollowingButtonsInThePopupView(popupTitle, table), "Failed to find all the buttons", "Successfully found all the buttons");
+		}
+
+
+		[StepDefinition(@"I confirm I see a checkbox in the popup view with the following text: (.*)")]
+		public void ThenIConfirmISeeACheckboxInThePopupViewWithTheFollowingText(string text)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.ConfirmACheckboxWithTheFollowingTextExists(text), "Failed to find the a checkbox with the following text: " + text, "Successfully found a checkbox with the following text: " + text);
+		}
+
+
+		[StepDefinition(@"I confirm the table in the popup view has following column data")]
+		public void ThenIConfirmTheTableInThePopupViewHasFollowingColumnData(Table table)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.CheckForTheFollowingTableColumnDataInPopupView(table), "Failed to find all the columns", "Successfully found all the columns");
+		}
+
+
+		[StepDefinition(@"I confirm the table in the popup view has the following column titles")]
+		public void ThenIConfirmIATableWithTheFollowingColumnTitles(Table table)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.CheckForTheFollowingTableColumnTitlesInPopupView(table), "Failed to find all the columns", "Successfully found all the columns");
+		}
+
+		[StepDefinition(@"In the popup view with the following title: (.*) I confirm I see the following statement in the popup view: (.*)")]
+		public void ThenIConfirmISeeTheFollowingStatementInThePopupView(string popupTitle, string text)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.ConfirmTheFollowingTextIsInThePopupView(popupTitle, text), "Failed to find the following text: " + text, "Successfully found the following text: " + text);
+		}
+
+
+		[StepDefinition(@"I confirm there is a popup video titled: (.*) in the Ingredients page")]
+		public void ThenIConfirmThereIsAPopupVideoTitled(string popupTitle)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.ConfirmThereIsAPopupViewTitled(popupTitle), "Failed to find the following title: " + popupTitle, "Successfully found the following title: " + popupTitle);
+		}
+
+
+		[StepDefinition(@"The following retailers in the Select Retailers popup list view should be selected")]
+		public void ThenTheFollowingRetailersInTheSelectRetailersPopupListViewShouldBeSelected(Table table)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.CheckThatTheFollowingRetailersAreSelectedInTheRetailersPopupList(table), "Unexpected retailers were found checked", "All expected retailers were checked");
+		}
+
+
+		[StepDefinition(@"I click the delete icon in the Retailer page")]
+		public void ThenIClickTheDeleteIconInTheRetailerPage()
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.SelectTheDeleteSelectedRetailersButton(), "Failed to select the delete selected retailers button", "Successfully selected the delete selected retailers button");
+		}
+
+
+		[StepDefinition(@"I select the following retailers in the Retailer page")]
+		public void ThenISelectTheFollowingRetailersInTheRetailerPage(Table table)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.SelectTheFollowingRetailersInTheRetailersPage(table), "Failed to select the following retailers", "Successfully selected the following retailers");
+		}
+
+
+		[StepDefinition(@"I confirm the product type field displaying the following results")]
+		public void ThenIConfirmTheProductTypeFieldDisplayingTheFollowingResults(Table table)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.CheckForTheFollowingResultsInTheProductTypeField(table), "Failed to confirm the following results", "Successfully confirmed the following results");
+		}
+
+
 		[StepDefinition(@"I check that the following sections contain the corresponding titles:")]
 		public void ThenICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
 		{

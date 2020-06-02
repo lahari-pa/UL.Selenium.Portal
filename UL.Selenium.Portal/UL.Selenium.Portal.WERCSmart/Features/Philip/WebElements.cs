@@ -20,6 +20,153 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
+		public bool CheckForTheFollowingButtonsInThePopupView(string popupTitle, Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='modal-content']//h4[text()='" + popupTitle + "']/../following-sibling::div[@class='modal-footer']//button[text()='" + row["Button"] + "']"), 2);
+				if (button == null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+		public bool ConfirmACheckboxWithTheFollowingTextExists (string text)
+		{
+			IWebElement checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[text()='" + text + "']/preceding-sibling::input"), 2);
+
+			if (checkbox == null)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool CheckForTheFollowingTableColumnDataInPopupView(Table table)
+		{
+			IList <IWebElement> casNum = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[1]"), 2);
+			IList <IWebElement> name = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[2]"), 2);
+			IList <IWebElement> activeOrInert = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[3]"), 2);
+
+			var index = 0;
+
+			foreach (TableRow row in table.Rows)
+			{
+				if (casNum[index].Text != row["CAS Number"])
+				{
+					Report.Info("CAS Number did not match");
+					return false;
+				}
+				if (name[index].Text != row["Name"])
+				{
+					Report.Info("Name did not match");
+					return false;
+				}
+				if (activeOrInert[index].Text != row["Active or Inert"])
+				{
+					Report.Info("Active or Inert Number did not match");
+					return false;
+				}
+
+				index += 1;
+			}
+
+			return true;
+		}
+
+		public bool CheckForTheFollowingTableColumnTitlesInPopupView(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement title = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//th[text()='" + row["Titles"] + "']"), 2);
+				if (title == null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool ConfirmTheFollowingTextIsInThePopupView(string popupTitle, string text)
+		{
+			IList <IWebElement> textEl = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='modal-content']//h4[contains(text(), '" + popupTitle + "')]/../following-sibling::div//p"), 2);
+
+			foreach (IWebElement el in textEl)
+			{
+				Report.Info("Found '" + el.Text + "' expected '" + text + "'");
+				if (el.Text.Contains(text))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool ConfirmThereIsAPopupViewTitled(string popupTitle)
+		{
+			IWebElement title = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='modal-content']//h4[contains(text(), '" + popupTitle + "')]"), 2);
+			Report.Info("found '" + title.Text + "' expected '" + popupTitle + "'");
+			if (title.Text != popupTitle)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool CheckThatTheFollowingRetailersAreSelectedInTheRetailersPopupList(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement retailerCheckBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[text()='" + row["Retailers"] + "']/preceding-sibling::input"), 2);
+				if (retailerCheckBox.Checked() == false)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool SelectTheDeleteSelectedRetailersButton()
+		{
+			IWebElement deleteButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='btn delete-selected']"), 2);
+			return deleteButton.TryClick();
+		}
+
+		public bool SelectTheFollowingRetailersInTheRetailersPage(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement checkBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[text()='" + row["Retailers"] + "']/preceding-sibling::td//input"), 2);
+				if (checkBox.TryCheck() == false)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckForTheFollowingResultsInTheProductTypeField(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement result = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//ul[@class='select2-results__options']//li[text()='" + row["Results"] + "']"), 2);
+				if (result.Text != row["Results"])
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		public bool CheckTheFollowingSectionTitles(Table table)
 		{
 			foreach (TableRow row in table.Rows)

@@ -50,7 +50,7 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 
 @ScenarioId:1006
 Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
-	Given I login as the administrator
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then The home screen should load
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wipes, Cleaning (with Chemical)
@@ -59,7 +59,7 @@ Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Glycerin
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |

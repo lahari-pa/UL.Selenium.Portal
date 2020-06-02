@@ -1593,16 +1593,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				IWebElement columnName = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//th[contains(text(),'" + row["Column Name"] + "')]"), 2);
 
-					if (columnName == null)
-					{
-						columnsNotFound.Add(row["Column Name"]);
-					}
+				if (columnName == null)
+				{
+					columnsNotFound.Add(row["Column Name"]);
 				}
-
+			}
+			//Philip
+			try
+			{
 				return columnsNotFound;
 			}
-
-
 			catch (NoSuchWindowException)
 			{
 				Report.Failure("Failed to switch to the SHA Manager Product UPC window!");

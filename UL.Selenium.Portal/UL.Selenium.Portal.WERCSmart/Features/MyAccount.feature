@@ -35,11 +35,13 @@ Scenario: [61796] Account User Name in Header
 	Given In the UserDetails page I click Save
 	Then I should see user name: saved as ThisUser in the header next to the user icon
 
+
 @ScenarioId:6704
 Scenario: [63514] Add and Deactivate a New User from the User Grid
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I click on My Account
+	Then I call Shared Step 63511 (Create New User via User Grid)
 	Then I create a new email address
 	Then I add a new user with the following information
 		| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |

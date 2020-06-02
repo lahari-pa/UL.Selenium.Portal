@@ -806,7 +806,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.StartStep(ReportSettings.StepCounter + " I create a new email address");
 			try
-			{
+			{ 
+
 				string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
 
 				string myEmail = MailosaurFunctions.CreateEmail(myDate);
@@ -815,6 +816,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					throw new Exception("Failed to Create a New Email Address");
 				}
+
+				if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
+				{
+					Context.ScenarioContext.Remove("CurrentEmail");
+				}
+
 				Context.ScenarioContext.Add("CurrentEmail", myEmail);
 				Report.Success("Email Address Created and Saved in Scenario Context");
 			}

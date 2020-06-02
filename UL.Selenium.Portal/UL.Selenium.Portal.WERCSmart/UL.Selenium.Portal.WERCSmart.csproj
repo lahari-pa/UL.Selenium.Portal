@@ -343,6 +343,7 @@
     <None Include="Features\Basic Tests.feature">
     </None>
     <None Include="Features\Battery.feature" />
+    <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd.feature" />
     <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd2.feature" />
     <None Include="Features\Canadian Tire\Forwarding\AccountHasStewardship.feature">
     </None>
@@ -414,6 +415,7 @@
     <None Include="Features\NewProduct.feature">
     </None>
     <None Include="Features\Philip\SpecFlowFeature1.feature" />
+    <None Include="Features\Philip\Temp.feature" />
     <None Include="Features\Product Registration\Batteries.feature" />
     <None Include="Features\NotIncludedGeneralTests.feature" />
     <None Include="Features\Product Registration\Distributor.feature">
@@ -421,8 +423,6 @@
       <LastGenOutput>Distributor.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Duplicate UPC.feature" />
-    <None Include="Features\Canadian Tire\Edit UPCs\EditUPCAccParStwd.feature">
-    </None>
     <None Include="Features\Product Registration\Flow 12.feature">
     </None>
     <None Include="Features\Product Registration\Flow 14.feature">
