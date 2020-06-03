@@ -18,6 +18,7 @@
 @SummaryPage
 @PaymentMethods
 @ProductSetUp
+@UPC
 @run_BulkActions
 Feature: BulkActions
 
@@ -283,3 +284,57 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page
 
+	
+@ScenarioId:9320
+	Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I click Bulk Actions in the Products Grid
+	And I click Delete Products in the Bulk Actions window
+	And I should see the header: Delete Active Products on the Delete Active Product window
+	Then I select the checkbox next to WPS ID in the Delete Active Products page
+	Then I confirm all checkboxes are selected in the Delete Active Products page
+	Then I deselect the checkbox next to WPS ID in the Delete Active Products page
+	Then I confirm all checkboxes are deselected in the Delete Active Products page
+	Then I select random products checkbox and save as: selectedProducts
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Cancel button
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Accept button
+	Then I make sure products saved as: selectedProducts are missing from the product list
+
+	
+@ScenarioId:9321
+	Scenario:[88826] Delete Products > Product Not yet submitted
+    Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase88826
+	Then I generate a random UPC number and save as: UPC88826
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	And In the 'Select Retailers' window I select the retailer: CVS
+	And I click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC88826, container type: Plastic Container and size: 12 click continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I navigate to the home page
+	Given I click Bulk Actions in the Products Grid
+	And I click Delete Products in the Bulk Actions window
+	And I should see the header: Delete Active Products on the Delete Active Product window
+	Then In the Delete Active Products page I search for WPS ID saved as: TestCase88826
+	Then In the Delete Active Products page I click the Filter button
+	Then I make sure product saved as: TestCase88826 should not missing from the product list
+	Then I select checkbox for product saved as: TestCase88826  
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Accept button
+	Then In the Delete Active Products page I search for WPS ID saved as: TestCase88826
+	Then In the Delete Active Products page I click the Filter button
+	Then I make sure product saved as: TestCase88826 should missing from the product list
+	Given I navigate to the home page
+	Then I confirm the follow product doesn't exist in the product grid: TestCase88826

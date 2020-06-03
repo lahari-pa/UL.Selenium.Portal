@@ -9,6 +9,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@UPC
 @run_ProductDocuments
 
 Feature: Product Documents
@@ -118,3 +119,19 @@ And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Opt
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Crayon
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59321
+
+
+Scenario: [100980] Regulatory Documents to Provide - US and Canada - upload all documents > Continue
+    Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I generate a random UPC number and save as: UPC120866
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase120866
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 74201 (Select Retailers - CVS)
+	And I click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC120866, container type: Plastic Container and size: 12 click continue
+	And I set the OSHA-compliant Safety Data Sheet, English field to: Request to author

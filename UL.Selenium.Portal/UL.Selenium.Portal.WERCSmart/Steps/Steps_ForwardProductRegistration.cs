@@ -1218,6 +1218,75 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option","Successfully selected the option");
 		}
 
+	
+		[StepDefinition(@"I select checkbox for product saved as: (.*)")]
+		public void ThenISelectCheckboxForProductSavedAs(string wpsID)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			wpsID = selForwardProdReg.GetProductIDFromContext(wpsID);
+			Report.IsTrue(selForwardProdReg.SelectCheckboxForProductWithWPSID(wpsID), "Failed to select checkbox", "Successfully selected checkbox");
+		}
+
+
+		[StepDefinition(@"In the Delete Active Products page I click the Filter button")]
+		public void ThenInTheDeleteActiveProductsPageIClickTheFilterButton()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ClickFilterButtonInDeleteActiveProductsPage(), "Failed to click Filter button", "Successfully clicked Filter button");
+			Delay.Seconds(10);
+		}
+
+		[StepDefinition(@"In the Delete Active Products page I search for WPS ID saved as: (.*)")]
+		public void ThenInTheDeleteActiveProductsPageISearchForWPSIDSavedAs(string wpsID)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			wpsID = selForwardProdReg.GetProductIDFromContext(wpsID);
+			Report.IsTrue(selForwardProdReg.EnterTextInSearchBarInDeleteActiveProductsPage(wpsID), "Failed to enter WPS ID number in the searchbar", "Successfully entered WPS ID number in the searchbar");
+		}
+
+		[StepDefinition(@"I (select|deselect) the checkbox next to WPS ID in the Delete Active Products page")]
+		public void ThenISelectTheCheckboxNextToWPSIDInTheDeleteActiveProductsPage(string selectOrDeselect)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SelectCheckBoxNextToWPSIDLabel(selectOrDeselect), "Failed to " + selectOrDeselect + " checkbox next to WPS ID Label", "Successfully  " + selectOrDeselect + "ed checkbox next to WPS ID Label");
+		}
+
+		[StepDefinition(@"I confirm all checkboxes are (selected|deselected) in the Delete Active Products page")]
+		public void ThenIConfirmAllCheckboxesAreSelectedInTheDeleteActiveProductsPage(string selectedOrDeselected)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ConfirmAllProductsInListAreChecked(selectedOrDeselected), "Not all products in product list are " + selectedOrDeselected, "All products in product list are " + selectedOrDeselected);
+		}
+
+		[StepDefinition(@"I click on the Make Obsolete button")]
+		public void ThenIClickOnTheMakeObsoleteButton()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ClickMakeObsoleteButton(), "Failed to click 'Make Obsolete' button", "Successfully clicked 'Make Obsolete' button");
+			Delay.Seconds(5);
+		}
+
+		[StepDefinition(@"I select the checkbox in the Make Obsolete popup")]
+		public void ThenIClickOnTheCheckboxInTheMakeObsoletePopup()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SelectCheckBoxInMakeObsoletePopup(), "Failed to select the checkbox in the Make Obsolete popup", "Successfully selected the checkbox in the Make Obsolete popup");
+		}
+
+		[StepDefinition(@"In the Make Obsolete popup I click on the (Accept|Cancel) button")]
+		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton(string acceptOrCancel)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ClickAcceptButtonInMakeObsoletePopup(acceptOrCancel), "Failed to click " + acceptOrCancel + " button", "Successfully clicked " + acceptOrCancel + " button");
+			Delay.Seconds(5);
+		}
+
+		[StepDefinition(@"I select random products checkbox and save as: (.*)")]
+		public void ThenISelectRandomProductsCheckbox(string savedAs)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SelectRandomCheckBoxes(savedAs), "Failed to select random checkboxes and save their corresponding product IDs", "Successfully selected random checkboxes and saved their corresponding product IDs");
+		}
 
 	}
 }

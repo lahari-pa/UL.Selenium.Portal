@@ -211,6 +211,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 
 		}
+
+		public void CheckPopUp()
+		{
+			Delay.Seconds(5);
+			IWebElement productID = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']//br[1]/preceding-sibling::text()[1]"), 2);
+			IWebElement productType = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']//br[1]/following-sibling::text()[1]"), 2);
+			IWebElement productAccessCode = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']//br[2]/following-sibling::text()[1]"), 2);
+		}
 	}
 
 	class RetailPartnersDetails : SeleniumBaseObject

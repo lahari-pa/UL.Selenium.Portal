@@ -3057,10 +3057,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenIEnterTheFollowingTextForTheInputFieldInTheFollowingSectionPhosphatesPhosphorousP(string enterText, string sectionName)
 		{
 			NewProduct newProductObject = new NewProduct();
-			newProductObject.EnterTextInInputFieldInSection(enterText, sectionName);
+			Report.IsTrue(newProductObject.EnterTextInInputFieldInSection(enterText, sectionName), "Failed to enter text in input field", "Successfully entered text in input field");
+		}
+
+		[StepDefinition(@"in page Pesticide Details - State Registration page I should see no error")]
+		public void ThenInPagePesticideDetails_StateRegistrationPageIShouldSeeNoError()
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.CheckIfThereIsNoErrorInThePesticideDetailsStateRegistration(), "Failed to display no error", "Successfully displayed no errors");
 		}
 
 
+		[StepDefinition(@"I check that the following sections contain the corresponding titles:")]
+		public void ThenICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
+		}
+
+
+
+		[StepDefinition(@"I set the following data: (.*) for the following state: (.*)")]
+		public void GivenISetTheFollowingDataErtForTheFollowingStateMA(string date, string state)
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.EnterExpirationDateForStatePesticideReigstration(date, state), "Failed to enter a date", "Successfully entered a date");
+		}
+
+
+		[StepDefinition(@"I enter the following EPA Pesticide Registration No\.: (.*)")]
+		public void ThenIEnterTheFollowingEPAPesticideRegistrationNo_(string enterText)
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.EnterEPAPesticideRegistrationNo(enterText), "Failed to enter text", "Successfully entered text");
+		}
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

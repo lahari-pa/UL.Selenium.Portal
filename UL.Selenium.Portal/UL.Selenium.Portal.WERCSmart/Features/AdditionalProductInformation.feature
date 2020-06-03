@@ -152,6 +152,33 @@ And Product is sold to the Retailer solely for the Retailer's use and is not sol
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85489
 
 
+@ScenarioId:8231
+Scenario: [133161] Fertilizer - P, N, or K question
 
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+Given I should see the Additional Product Information Page
+Given I set the Does the product contain fertilizer (P, N or K)? option to: No
+Given I set the Does the product contain fertilizer (P, N or K)? option to: Yes
+Then I should see the PNK section title in the Additional Product Information with the following text: Provide the amount (Percent) of each of the following within the product
+Then I check if input field for the following section exists: Phosphates /Phosphorous (“P”)
+Then I check if input field for the following section exists: Nitrogen /Nitrates (“N”)
+Then I check if input field for the following section exists: Potassium(“K”)
+Then I enter the following text: 1000000 for the input field in the following section: Phosphates /Phosphorous (“P”)
+Then I enter the following text: 10.1232123 for the input field in the following section: Nitrogen /Nitrates (“N”)
+Then I enter the following text: 100 for the input field in the following section: Potassium(“K”)
+Then I click continue
+And Phosphates /Phosphorous (“P”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+And Nitrogen /Nitrates (“N”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+Then I enter the following text: 35.24 for the input field in the following section: Phosphates /Phosphorous (“P”)
+Then I enter the following text: .05 for the input field in the following section: Nitrogen /Nitrates (“N”)
+And Phosphates /Phosphorous (“P”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+And Nitrogen /Nitrates (“N”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 
 

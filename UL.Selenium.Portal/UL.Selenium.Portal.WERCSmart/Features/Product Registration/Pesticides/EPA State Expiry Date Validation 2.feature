@@ -271,3 +271,173 @@ And I should see the Transportation Details 1 Page
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56610
 
+
+@ScenarioId:9323
+Scenario: [132756] Canadian Province Pesticide Options
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I generate a random UPC number and save as: RandomUPC
+Given I delete all products with UPC Number: RandomUPC
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I save the product information as: TestCase
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
+| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
+Given I call Shared Step 135134 (Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path)
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| 74-98-6   | Propane       | 100     | false               |            | false       |
+Given I call Shared Step 133277(Waste Classification Data - CEPA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I should see the Pesticide Details - Canada Page
+Then I check the options in the dropdown menus for the following sections
+| Section                    | Options                                                                                                                                                                                                                       |
+| Alberta                    | None,Schedule 1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                              |
+| British Columbia           | None,Permit Restricted,Restricted,Commercial,Domestic,Excluded                                                                                                                                                                |
+| Manitoba                   | None,Commercial,Controlled Purchase,Not Regulated,Restricted,Self-Select                                                                                                                                                      |
+| New Brunswick              | None,Banned,Domestic / Self-Select,Non-Domestic                                                                                                                                                                               |
+| New Foundland and Labrador | None,Banned,Domestic,Commerical,Restricted                                                                                                                                                                                    |
+| Nova Scotia                | None,Allowed / Self-Select,Banned,Commercial,Controlled Purchase,Restricted,Not Regulated                                                                                                                                     |
+| Ontario                    | None,Class A: Manufacturing Products,Class B: Restricted,Class C: Commercial,Class D: Domestic with License,Class D: Domestic without License,Class D: Domestic Controlled Purchase Requiring a License,Class E: Treated Seed |
+| Prince Edward Island       | Banned,Controlled Purchase,Exempt: Schedule 2,Exempt: Schedule 7,Non-Domestic,None,Self-Select: Schedule 8                                                                                                                    |
+| Quebec                     | None,Class 1,Class 2,Class 3,Class 3A,Class 4,Class 5,Banned                                                                                                                                                                  |
+| Saskatchewan               | None,Commercial,Restricted                                                                                                                                                                                                    |
+| Northwest Territory        | Not Applicable                                                                                                                                                                                                                |
+| Yukon Territory            | None,Commercial,Domestic,Restricted                                                                                                                                                                                           |
+
+
+@ScenarioId:9324
+Scenario: [56652] Pesticide Data - EPA Expiration date validation (Massachusetts - June 30th no more than 1 year out)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then The home screen should load
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Then I save the product information as: TestCase62778
+	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Then I should see the Pesticide Details - U.S. Page
+	And I see the following sections
+		| Section                                                                  |
+		| Product has an Environmental Protection Agency (EPA) Registration Number |
+	And The following options should be displayed for section: Product has an Environmental Protection Agency (EPA) Registration Number
+		| Option |
+		| Yes    |
+		| No     |
+	Given I click continue
+	Then Product has an Environmental Protection Agency (EPA) Registration Number should be showing the error messages: This is a required field.
+	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+	Then I enter the following EPA Pesticide Registration No.: Test-1234
+	Given I click continue
+
+	And I set the following data: 2020-06-29 for the following state: MA
+	Given I click continue
+    Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
+
+	And I set the following data: 2021-06-29 for the following state: MA
+	Given I click continue
+    Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
+
+	And I set the following data: 2021-06-30 for the following state: MA
+	Given I click continue
+    Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
+
+	And I set the following data: 2020-06-30 for the following state: MA
+    Given I click continue
+	Then in page Pesticide Details - State Registration page I should see no error
+
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
+
+
+	Scenario: [56651] Pesticide Data - EPA Expiration date validation (Delaware - July 1st no more than two years out)
+    Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then The home screen should load
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Then I save the product information as: TestCase62778
+	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Then I should see the Pesticide Details - U.S. Page
+	And I see the following sections
+		| Section                                                                  |
+		| Product has an Environmental Protection Agency (EPA) Registration Number |
+	And The following options should be displayed for section: Product has an Environmental Protection Agency (EPA) Registration Number
+		| Option |
+		| Yes    |
+		| No     |
+	Given I click continue
+	Then Product has an Environmental Protection Agency (EPA) Registration Number should be showing the error messages: This is a required field.
+	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+	Then I enter the following EPA Pesticide Registration No.: Test-1234
+	Given I click continue
+
+	And I set the following data: 2020-06-30 for the following state: DE
+	Given I click continue
+    Then in page Pesticide Details - State Registration page I should see error: State DE: Valid date is July 01 no more than two calendar years out at any given time.
+
+	And I set the following data: 2021-06-30 for the following state: DE
+	Given I click continue
+    Then in page Pesticide Details - State Registration page I should see error: State DE: Valid date is July 01 no more than two calendar years out at any given time.
+
+	And I set the following data: 2022-06-30 for the following state: DE
+	Given I click continue
+    Then in page Pesticide Details - State Registration page I should see error: State DE: Valid date is July 01 no more than two calendar years out at any given time.
+
+	And I set the following data: 2020-07-01 for the following state: DE
+    Given I click continue
+	Then in page Pesticide Details - State Registration page I should see no error
+
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
+
+
+
+	Scenario: [56598] Pesticide Data - EPA Expiration date validation (Kansas - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
+    Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then The home screen should load
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Then I save the product information as: TestCase62778
+	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Then I should see the Pesticide Details - U.S. Page
+	And I see the following sections
+		| Section                                                                  |
+		| Product has an Environmental Protection Agency (EPA) Registration Number |
+	And The following options should be displayed for section: Product has an Environmental Protection Agency (EPA) Registration Number
+		| Option |
+		| Yes    |
+		| No     |
+	Given I click continue
+	Then Product has an Environmental Protection Agency (EPA) Registration Number should be showing the error messages: This is a required field.
+	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+	Then I enter the following EPA Pesticide Registration No.: Test-1234
+	Given I click continue
+
+	And I set the following data: 2020-12-30 for the following state: KS
+	Given I click continue
+    Then in page Pesticide Details - State Registration page I should see error: State KS: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
+
+	And I set the following data: 2021-12-30 for the following state: KS
+	Given I click continue
+    Then in page Pesticide Details - State Registration page I should see error: State KS: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
+
+	And I set the following data: 2021-12-31 for the following state: KS
+	Given I click continue
+    Then in page Pesticide Details - State Registration page I should see error: State KS: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
+
+	And I set the following data: 2020-12-31 for the following state: KS
+	Given I click continue
+	Then in page Pesticide Details - State Registration page I should see no error
+
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778

@@ -2533,5 +2533,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("There were " + moreFiltersObject.CheckTheAmountOfProductsInProductsGrid() + " products displayed");
 		}
 
+	
+		[StepDefinition(@"I make sure product saved as: (.*) (should|should not) missing from the product list")]
+		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs, string shouldOrShouldNot)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			ForwardProductRegistration forwardProductRegistrationObject = new ForwardProductRegistration();
+			savedAs = forwardProductRegistrationObject.GetProductIDFromContext(savedAs);
+
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				Report.IsTrue(moreFiltersObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product WPS ID: " + savedAs + " should be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be missing from the product list and it was");
+			}
+			else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				Report.IsTrue(!moreFiltersObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product WPS ID: " + savedAs + " should not be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be found in the product list and it was");
+			}
+		}
+
+		[StepDefinition(@"I make sure products saved as: (.*) are missing from the product list")]
+		public void ThenIMakeSureProductsSavedAsSelectedProductsAreMissingFromTheProductList(string savedAs)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			var list = Context.GetFromContext(savedAs).ToString();
+			string[] listSplit = list.Split(',');
+
+			foreach (string listItem in listSplit)
+			{
+				Report.IsTrue(moreFiltersObject.CheckIfProductIsMissing(listItem), "The following product WPS ID: " + savedAs + " should be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be missing from the product list and it was");
+			}
+		}
+
 	}
 }

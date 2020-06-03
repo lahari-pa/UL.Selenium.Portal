@@ -1413,6 +1413,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement checkBox = this.containerElement.FindElement(By.XPath("//input[@id='show-only-discontinued-products']"), 2);
 			return checkBox.TryClick();
 		}
+//Phliip-Web
+		public bool CheckIfProductIsMissing(string wpsID)
+		{
+			IWebElement product = this.containerElement.FindElement(By.XPath("//td[@data-bind='text: Product.ProductID'][text()='" + wpsID + "']"), 2);
+			if (product == null)
+			{
+				return true;
+			}
+
+			return false;
+
+		}
 	}
 
 	class RemoveUpcUpdate : ModalDialog

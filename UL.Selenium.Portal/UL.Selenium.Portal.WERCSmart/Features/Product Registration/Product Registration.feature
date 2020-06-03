@@ -13,6 +13,13 @@
 @run_ProductRegistration
 Feature: Product Registration
 
+
+Scenario: [130389] Demo Scenario
+Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save product Product to context as TestCase
+
 #Background:
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 #Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -606,3 +613,30 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then I check if alert message displays the following text: You have not granted consent to requested Data Use Tiers for this component.  Your customer's products will not be fully screened and evaluated by any relevant WERCSmart Recipient chemical policy or product qualification program.  The results for each program is displayed above.  If you wish to update your consents for this component, please go to Product Characteristics / Formulation > Third-Party
 	When I click continue
 
+@ScenarioId:9318
+Scenario: [128754] BCP Product - Family Dollar and Dollar Tree Retailers Available for selection
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I generate a random UPC number and save as: UPC128754
+Given I delete all products with UPC Number: saved as UPC128754
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
+Then I save the product information as: TestCase128754
+Given I call Shared Step 70393 (Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
+And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+Given I call Shared Step 48367 (Product Includes Battery > any type)
+| Battery Type | How many batteries required to run | Manufacturer | Number of batteries per package |
+| Alkaline     | 6                                  | <any>        | 6                               |
+Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+And I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
+Given I select the following retailers in the Select Retailers popup list view:
+| Retailer												   |
+| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+| Family Dollar                                            |
+Then I click Done on Select Retailers window
+Then I confirm the following retailers are showing in the Retailer page
+| Retailer												   |
+| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+| Family Dollar                                            |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128754

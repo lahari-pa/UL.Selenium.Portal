@@ -275,7 +275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EmailColumnContainsEmailAddresses()
 		{
-			Report.Info("Testing " + this.ColumnValues("Email"));
+			
 			var tableRowStrings = this.ColumnValues("Email");
 			bool emailValid = true;
 			int y = 1;

@@ -3734,7 +3734,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
 		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
 		{
-			Delay.Seconds(10);
+			Delay.Seconds(5);
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			List<string> columnsNotFound = studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table);
 

@@ -245,6 +245,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			SelectRetailers SelectRetailersObject = new SelectRetailers();
 			SelectRetailersObject.CheckIfRetailersInTableDisplayErrorMessage(table);
 		}
+		
+		[StepDefinition(@"I confirm the following retailers are showing in the Retailer page")]
+		public void ThenIConfirmTheFollowingRetailersAreShowingInTheRetailerPage(Table table)
+		{
+			SelectRetailers SelectRetailersObject = new SelectRetailers();
+			Report.IsTrue(SelectRetailersObject.CheckForTheFollowingRetailersInRetailerPage(table), "Failed to find all retailers", "Successfully found all retailers");
+		}
 
 	}
 }
