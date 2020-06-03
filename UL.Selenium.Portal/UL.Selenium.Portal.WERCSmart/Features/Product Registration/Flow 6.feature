@@ -100,6 +100,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
+
 Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))

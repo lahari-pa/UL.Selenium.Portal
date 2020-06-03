@@ -3020,6 +3020,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
+		[StepDefinition(@"I confirm the Regulatory Information 3 page contains the statement: (.*)")]
+		public void IConfirmRegulatoryInformation3PageContainsStatement(string text)
+		{
+			var newProductPage = new NewProduct();
+			string statementtextfound = newProductPage.GetRegulatoryInformation3Statement();
+			Report.Info($"The expected Text was {text}");
+			Report.Info($"The found text was {statementtextfound}");
+			Report.IsTrue(statementtextfound == text, "The text found was not a match", "The text found matched the expected text");
+		}
+
+		[StepDefinition(@"I check the uploaded file name of document type: (.*) and for control label: (.*) matches: (.*)")]
+		public void CheckUploadedFileNameForTypeAndLabel(string type, string label, string filename)
+		{
+			
+			Report.IsTrue(new NewProduct().CheckFileNameForSectionAndType(type, label, filename), "File name did not match the expected","The file name matched");
+
+		}
+
+
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

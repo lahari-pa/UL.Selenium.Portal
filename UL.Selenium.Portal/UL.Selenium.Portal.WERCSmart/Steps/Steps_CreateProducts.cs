@@ -878,7 +878,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();			
+			//sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
+			sharedSteps.GivenICallSharedStep132427WasteClassificationDataForOTCProducts();
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
