@@ -295,5 +295,5 @@ Given I click the Home navigation icon
 Given I search for the product saved as: TestCase125144
 When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Access Code
-Then Check popup date productID: TestCase125144 productType: Raw material productAccessCode: 1234
+Then Check popup date productID: TestCase125144 productType: Raw Material productAccessCode: 1234
 Given I click close on the Save Changes popup dialog

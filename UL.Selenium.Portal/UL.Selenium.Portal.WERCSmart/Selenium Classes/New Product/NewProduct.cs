@@ -1517,7 +1517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickAcceptButton()
 		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[text()='Accept']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[text()='Accept']"), 2);
 			if (el == null)
 			{
 				return false;
@@ -4686,12 +4686,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckOptionsInDropDownMenusForTheFollowingSectinons(Table table)
 		{
+
+			List<string> unexpectedOptions = new List<string>();
+
 			foreach (TableRow row in table.Rows)
 			{ 
 				IList<IWebElement> options = this.containerElement.FindElements(By.XPath("//div[@class='col-sm-4']//label[text()='" + row["Section"] + "']/../following-sibling::div//select//option"), 2);
 				string[] strArr = row["Options"].Split(',');
-				if (strArr.Count() != options.Count() - 1 || options.Count() < 1)
+
+				if (strArr.Count() != options.Count() - 1)
 				{
+					Report.Failure("The amount of options expected and the amount of options found were not the same");
+					return false;
+				} else if (options.Count() < 1)
+				{
+					Report.Failure("No options were found");
 					return false;
 				}
 				foreach (IWebElement option in options)
@@ -4701,11 +4710,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					{
 						if (!strArr.Contains(optionText))
 						{
-							return false;
+							unexpectedOptions.Add(optionText);
 						}
 					}
 				}
 
+			}
+
+			if (unexpectedOptions.Count > 0)
+			{
+				foreach (string option in unexpectedOptions)
+				{
+					Report.Info("Unexpected option found: " + option);
+				}
+				return false;
 			}
 
 			return true;
@@ -4725,7 +4743,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckForInputFieldInSection(string sectionName)
 		{
-			IWebElement section = this.containerElement.FindElement(By.XPath(@"//label[text()='" + sectionName + "']"), 2);
+			IWebElement section = this.containerElement.FindElement(By.XPath(@"//label[text()='" + sectionName + "']/../following-sibling::div//input"), 2);
 			return section != null;
 		}
 

@@ -163,7 +163,13 @@ Given I call Shared Step 74760 (Product Characteristics - Select Liquid as prima
 | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
 Given I should see the Additional Product Information Page
 Given I set the Does the product contain fertilizer (P, N or K)? option to: No
+And I should not see following statement: Phosphates /Phosphorous (“P”)
+And I should not see following statement: Nitrogen /Nitrates (“N”)
+And I should not see following statement: Potassium(“K”)
 Given I set the Does the product contain fertilizer (P, N or K)? option to: Yes
+And I should see following statement: Phosphates /Phosphorous (“P”)
+And I should see following statement: Nitrogen /Nitrates (“N”)
+And I should see following statement: Potassium(“K”)
 Then I should see the PNK section title in the Additional Product Information with the following text: Provide the amount (Percent) of each of the following within the product
 Then I check if input field for the following section exists: Phosphates /Phosphorous (“P”)
 Then I check if input field for the following section exists: Nitrogen /Nitrates (“N”)

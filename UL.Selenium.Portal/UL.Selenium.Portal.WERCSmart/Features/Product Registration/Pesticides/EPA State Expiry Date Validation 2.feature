@@ -288,7 +288,7 @@ Given I call Shared Step 135134 (Additional Product Information - YES to pestici
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 | 74-98-6   | Propane       | 100     | false               |            | false       |
-Given I call Shared Step 133277(Waste Classification Data - CEPA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I should see the Pesticide Details - Canada Page
 Then I check the options in the dropdown menus for the following sections
 | Section                    | Options                                                                                                                                                                                                                       |
@@ -352,6 +352,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
 
 
+@ScenarioId:9325
 	Scenario: [56651] Pesticide Data - EPA Expiration date validation (Delaware - July 1st no more than two years out)
     Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then The home screen should load
@@ -398,6 +399,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 
 
 
+@ScenarioId:9334
 	Scenario: [56598] Pesticide Data - EPA Expiration date validation (Kansas - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
     Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Then The home screen should load

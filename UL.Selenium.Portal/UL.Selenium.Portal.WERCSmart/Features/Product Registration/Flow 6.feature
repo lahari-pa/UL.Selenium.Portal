@@ -154,7 +154,7 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 	And I set the Secondary Physical State to be: Solid
 	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 	Given I click continue
-	Given I call Shared Step 134650 (Additional Product Information - Prevents, Destroys Repels Pests, US only, NO to everything else - Continue - Happy Path)
+	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	| CASNumber | ComponentName       | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 	|           | Potassium hydroxide | 100     | false               |            | false       |

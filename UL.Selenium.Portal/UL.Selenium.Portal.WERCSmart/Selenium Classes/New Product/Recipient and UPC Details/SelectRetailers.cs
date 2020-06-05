@@ -203,7 +203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	
 		public bool CheckForTheFollowingRetailersInRetailerPage(Table table)
 		{
-			IList<IWebElement> retailerList = this.containerElement.FindElements(By.XPath("//table[@class='table table-striped table-hover table-fixed marTop-20']//tbody//td[@class='col-xs-3']"), 2);
+			IList<IWebElement> retailerList = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@class='table table-striped table-hover table-fixed marTop-20']//tbody//td[@class='col-xs-3']"), 2);
 			List<string> retailerListText = new List<string>();
 
 			if (table.RowCount != retailerList.Count)

@@ -182,43 +182,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public bool CheckProductInformation(string id, string productType, string productAccessCode)
-		{
-	
-			IWebElement popup = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']"), 2);
-			string popupText = popup.Text.ToLower();
-
-			if (!popupText.Contains(id.ToLower()))
-			{
-
-				Report.Info("Product ID does not match");
-				return false;
-
-			//} else if (!popupText.Contains(productType.ToLower()))
-			//{
-	
-			//	Report.Info("Product Type does not match");
-			//	return false;
-
-			} else if (!popupText.Contains("access code: " + productType.ToLower()))
-			{
-
-				Report.Info("Product ID does not match");
-				return false;
-
-			}
-
-			return true;
-
-		}
-
-		public void CheckPopUp()
-		{
-			Delay.Seconds(5);
-			IWebElement productID = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']//br[1]/preceding-sibling::text()[1]"), 2);
-			IWebElement productType = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']//br[1]/following-sibling::text()[1]"), 2);
-			IWebElement productAccessCode = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: html']//br[2]/following-sibling::text()[1]"), 2);
-		}
 	}
 
 	class RetailPartnersDetails : SeleniumBaseObject

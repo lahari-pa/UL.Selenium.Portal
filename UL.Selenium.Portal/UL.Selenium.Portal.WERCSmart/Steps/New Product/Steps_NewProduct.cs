@@ -2460,16 +2460,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Section '{section}' colour was red as expected");
 		}
 
-		[StepDefinition(@"I should see following statement: (.*)")]
-		public void SectionStatement(string option)
+		[StepDefinition(@"I (should|should not) see following statement: (.*)")]
+		public void SectionStatement(string shouldOrShouldNot, string option)
 		{
 			Report.Info("Checking statement");
 			var selNewProduct = new NewProduct();
 			List<string> found = selNewProduct.GetDisplayedSections();
 
-			Report.IsTrue(found.Contains(option),
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				Report.IsTrue(found.Contains(option),
 				"statement was not as expected! Expected: " + option + ", but found: " + found + "!",
 				"statement was showing: " + option + ", as expected!");
+			} else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				Report.IsTrue(!found.Contains(option),
+				"statement was not as expected! Not expected: " + option + ", but found: " + found + "!",
+				"statement was not showing: " + option + ", as expected!");
+			}
+
 		}
 
 		[StepDefinition(@"I click on the Notice of Adoption Article link")]
@@ -3091,6 +3100,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
 			Report.IsTrue(pesticideDetailsStateObject.EnterEPAPesticideRegistrationNo(enterText), "Failed to enter text", "Successfully entered text");
 		}
+
+		[StepDefinition(@"I set first VOC option to: 'Yes'")]
+		public void GivenISetFirstVOCOptionToYes1(string yesOrNo)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			ingredientsObject.SetFirstVOCOption(yesOrNo);
+		}
+
+
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

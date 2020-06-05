@@ -32,7 +32,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I add the following ingredients and save them to context as: (.*)")]
 		public void AddIngredientItems(string savedAs, Table ingredients)
 		{
-			//Delay.Seconds(9999);
 			ReportSettings.UseSubSteps = true;
 			var ingredientsContext = new List<MyIngredients.IngredientItem>();
 			var selMyIngredients = new MyIngredients();

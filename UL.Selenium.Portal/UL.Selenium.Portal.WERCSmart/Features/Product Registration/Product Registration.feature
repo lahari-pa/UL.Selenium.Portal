@@ -638,5 +638,5 @@ Then I click Done on Select Retailers window
 Then I confirm the following retailers are showing in the Retailer page
 | Retailer												   |
 | Dollar Tree Stores, Inc. / Greenbrier International, Inc |
-| Family Dollar                                            |
+| Family Dollar                                           |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128754
