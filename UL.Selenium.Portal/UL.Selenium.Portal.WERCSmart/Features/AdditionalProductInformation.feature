@@ -168,15 +168,15 @@ Then I should see the PNK section title in the Additional Product Information wi
 Then I check if input field for the following section exists: Phosphates /Phosphorous (“P”)
 Then I check if input field for the following section exists: Nitrogen /Nitrates (“N”)
 Then I check if input field for the following section exists: Potassium(“K”)
-Then I enter the following text: 1000000 for the input field in the following section: Phosphates /Phosphorous (“P”)
-Then I enter the following text: 10.1232123 for the input field in the following section: Nitrogen /Nitrates (“N”)
-Then I enter the following text: 100 for the input field in the following section: Potassium(“K”)
+Then I set the 1000000 field to: Phosphates /Phosphorous (“P”)
+Then I set the 10.1232123 field to: Nitrogen /Nitrates (“N”)
+Then I set the 100 field to: Potassium(“K”)
 Then I click continue
 And Phosphates /Phosphorous (“P”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 And Nitrogen /Nitrates (“N”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-Then I enter the following text: 35.24 for the input field in the following section: Phosphates /Phosphorous (“P”)
-Then I enter the following text: .05 for the input field in the following section: Nitrogen /Nitrates (“N”)
+Then I set the 35.24 field to: Phosphates /Phosphorous (“P”)
+Then I set the .05 field to: Nitrogen /Nitrates (“N”)
 And Phosphates /Phosphorous (“P”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 And Nitrogen /Nitrates (“N”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place

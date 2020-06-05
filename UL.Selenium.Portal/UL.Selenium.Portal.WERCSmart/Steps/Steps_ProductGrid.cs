@@ -2538,8 +2538,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs, string shouldOrShouldNot)
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
-			ForwardProductRegistration forwardProductRegistrationObject = new ForwardProductRegistration();
-			savedAs = forwardProductRegistrationObject.GetProductIDFromContext(savedAs);
+			DeleteActiveProducts deleteActiveProductsObject = new DeleteActiveProducts();
+			savedAs = deleteActiveProductsObject.GetProductIDFromContext(savedAs);
 
 			if (shouldOrShouldNot.ToLower() == "should")
 			{

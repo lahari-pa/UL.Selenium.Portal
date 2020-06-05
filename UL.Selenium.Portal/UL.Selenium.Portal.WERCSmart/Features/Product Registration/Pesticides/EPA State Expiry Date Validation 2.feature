@@ -346,7 +346,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 
 	And I set the following data: 2020-06-30 for the following state: MA
     Given I click continue
-	Then in page Pesticide Details - State Registration page I should see no error
+	Then in page Pesticide Details - State Registration Details I should see no errors
 
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
@@ -391,7 +391,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 
 	And I set the following data: 2020-07-01 for the following state: DE
     Given I click continue
-	Then in page Pesticide Details - State Registration page I should see no error
+	Then in page Pesticide Details - State Registration Details I should see no errors
 
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
@@ -437,7 +437,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 
 	And I set the following data: 2020-12-31 for the following state: KS
 	Given I click continue
-	Then in page Pesticide Details - State Registration page I should see no error
+	Then in page Pesticide Details - State Registration Details I should see no errors
 
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
