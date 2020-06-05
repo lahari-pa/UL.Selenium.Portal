@@ -44,7 +44,7 @@ Scenario: [62775] Pesticides - Validation of Which one best describes your produ
 
 @ScenarioId:660
 Scenario: [62849] Pesticide - Manually entered date not altered by refresh from Kelly
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control

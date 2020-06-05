@@ -20,6 +20,29 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
+		public bool ConfirmDropDownOptionsAreInAlphabeticalOrderForRetailer(string dropDownTitle, string retailer)
+		{
+			IList <IWebElement> options = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//label[text()='" + dropDownTitle + "']/following-sibling::select//option"), 2);
+			Report.Info("count " + options.Count);
+			//Remove the default "Choose..." option
+			options.RemoveAt(0);
+
+			foreach (var op in options)
+			{
+				Report.Info("HIbye " + op.Text);
+			}
+
+			for (int i = 1; i < options.Count - 1; i++)
+			{
+				Report.Info("HI " + i + " " + options[i].Text);
+				if (StringComparer.Ordinal.Compare(options[i].Text, options[i + 1].Text) > 0)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
 		public bool CheckForTheFollowingButtonsInThePopupView(string popupTitle, Table table)
 		{
 			foreach (TableRow row in table.Rows)

@@ -38,6 +38,46 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		public object TheProduct { get; private set; }
 		public string File { get; private set; }
 
+
+		[StepDefinition(@"I confirm the excel file saved as: (.*) contains the following data: (.*)")]
+		public void ThenIConfirmTheExcelFileSavedAsContainsTheFollowingData(string savedAs, string data)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+
+				for (int i=0;i< ExcelUtils.Excel_GetNoRows();i++)
+				{
+					List<string> row = ExcelUtils.Excel_GetRow(i);
+					Report.Info("Header row contained: '" + string.Join("', '", row) + "'");
+					foreach (var str in row)
+					{
+						Report.Info("Test1 " + str + " " + data);
+						if (str == data)
+						{
+							Report.Success("Excel file contained the following data: " + data);
+						}
+					}
+				}
+
+
+
+				Report.Success("Excel file did not contained the following data: " + data);
+			}
+		}
+
+
+		[StepDefinition(@"I confirm that the product names from the drop down for: (.*) for (.*) appear in alphabetical order")]
+		public void ThenIConfirmThatTheProductNamesFromTheDropDownForAppearInAlphabeticalOrder(string dropDownTitle, string retailer)
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.ConfirmDropDownOptionsAreInAlphabeticalOrderForRetailer(dropDownTitle, retailer), "Drop down options were not in alphabetical order", "Drop down options were in alphabetical order");
+		}
+
+
 		[StepDefinition(@"In the popup view with the following title: (.*) I confirm I see the following buttons in the popup view:")]
 		public void ThenIConfirmISeeTheFollowingButtonsInThePopupView(string popupTitle, Table table)
 		{

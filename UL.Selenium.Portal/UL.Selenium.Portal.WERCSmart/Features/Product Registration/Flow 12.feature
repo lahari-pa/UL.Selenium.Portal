@@ -47,7 +47,8 @@ And I call Shared Step 57570 (Enter Ingredients) and add the following ingredien
 | Copper sulfate  | 11.67   | false               | false       |            |
 | Nitric acid     | 55      | false               | false       |            |
 And I call Shared Step 48948 (Formulation > 3rd Party - Select all)
-And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I set 'Prop65' to: No
+Given I click continue
 And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 And I click continue
 And I click continue
@@ -76,7 +77,8 @@ Scenario: [58605] Suppository (no laxative) -  RU001151
 		| Glycerin      | 30      | false               | false       |            |
 		| Glucose       | 30      | false               | false       |            |
 		| Aqua          | 40      | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I set 'Prop65' to: No
+	Given I click continue
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
@@ -106,7 +108,8 @@ Scenario: [58606] Medicinal Liquids - RU001188
 		| Paracetamol   | 5       | false               | false       |            |
 		| Aqua          | 50      | false               | false       |            |
 		| Guaifenesin   | 25      | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I set 'Prop65' to: No
+	Given I click continue
 	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)

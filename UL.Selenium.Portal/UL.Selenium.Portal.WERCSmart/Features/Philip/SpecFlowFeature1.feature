@@ -758,10 +758,10 @@ Then I save the product information as: TestCase133335
 		| ComponentName			     	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Glutens, corn    | 50      | false               | false       |            |
 		| Butane             | 0.1     | false               | false       |            |
-		| Oils, Cedarwood, Texan    | 49.9    | false               | false       |            |
+		| Oils, cedarwood, Texan    | 49.9    | false               | false       |            |
 	Given in the New Product page I click Continue
 	Then I confirm there is a popup video titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA). The product type is typically considered a pesticide, and there are ingredients present in the registration that are known to be used in Pesticide products.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA). The product type is typically considered a pesticide, and there are ingredients present in the registration that are known to be used in Pesticide products.' expected 'You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA). The product type is typically considered a pesticide, and there are ingredients present in the registration that are known to be used in Pesticide products.
 	Then I confirm the table in the popup view has the following column titles
 	| Titles          |
 	| CAS Number      |
@@ -770,7 +770,7 @@ Then I save the product information as: TestCase133335
 	Then I confirm the table in the popup view has following column data
 	| CAS Number | Name                   | Active or Inert |
 	| 66071-96-3 | Glutens, corn          | Active          |
-	| 68990-83-0 | Oils, Cedarwood, Texan | Active          |
+	| 68990-83-0 | Oils, cedarwood, Texan | Active          |
     Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
 	Then I confirm I see a checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following buttons in the popup view:
@@ -894,3 +894,68 @@ Then I save the product information as: TestCase133335
 # CONFIRM that you are not prompted again with the 'Product Contains Ingredients Typical of a Pesticide' Message Box
 # Once the checkbox 'The Product Type, Pest Selection, and Ingredients listed are accurate' checkbox is checked the message box in the Ingredient Screen will no longer showGiven I click the Home navigation icon
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Pesticide Testing Product
+
+
+
+
+
+Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+|  Liquid                | Liquid                   | 20               | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
+
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+|           | calcium       | 100     |                     |            |             |
+Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+Then In the 'Select Retailers' window I select the retailer: Albertsons Companies
+Then In the 'Select Retailers' window I select the retailer: Wal-Mart/SAM'S CLUB
+Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Albertsons Companies appear in alphabetical order
+Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart/SAM'S CLUB appear in alphabetical order
+
+
+
+
+
+Scenario: [127767]Register a Cleaning Supplies - Bleach Product Type for a verification of the Products in Scope Report for Bed Bath and Beyond
+Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC804879551225
+Then I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Bleach
+Given I set the Primary Physical State option to: Liquid
+And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
+And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
+Given I set the Secondary Physical State option to: Liquid
+Given I set the Specific Gravity option to: 0.1
+Given I set the pH option to: 11.5
+Given I set the Boiling Point (in Celsius) option to: Not tested/Unknown
+Given I set the Flash Point (in Celsius) option to: None, No Flash Point
+Given I set the Select the best Water Solubility description option to: Soluble in water
+Given I click continue
+Given I click continue
+Then I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+      	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Propane       | 100     | false               | false       |            |
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+Then In the 'Select Retailers' window I select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+Given I click continue
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC804879551225, container type: Plastic Container and size: 3.5
+Then I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I click continue
+Given I click continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+Then I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
+Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
+Then I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_Current_Month_Day_Year.xlsx and save as Products in Scope Report for BBB
+Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Cleaning Supplies Product for BBB
+Then I delete the excel file saved as Products in Scope Report for BBB
