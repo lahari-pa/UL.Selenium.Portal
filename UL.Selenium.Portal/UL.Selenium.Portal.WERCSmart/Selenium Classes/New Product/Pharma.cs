@@ -78,6 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckAndFillEmptyFieldsInSPLInformationScreen()
 		{
+	
 			IList<IWebElement> allFieldsOnPage = this.containerElement.FindElements(By.XPath("//span[contains(text(),'This is a required field')]/../preceding-sibling::input"), 2);
 	
 			foreach (IWebElement field in allFieldsOnPage)

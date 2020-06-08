@@ -419,6 +419,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+
+		[StepDefinition(@"I enter the EPA registration date in the next two years for state: (.*):")]
+		public void EnterEpaRegistrationDateNextTwoYears(string month, string date, string state, bool addYear = false)
+		{
+			var pesticideDetailsState = new PesticideDetailsState();
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			int year = DateTime.Now.Year;
+			if (int.TryParse(month, out int monthNum) && int.TryParse(date, out int dateNum))
+			{
+				if (addYear)
+				{
+					Report.Info("From test plan: 'If the current date is after XX xxth for the current year select XX xxth for next year + 1'");
+				}
+				var dt = new DateTime(year, monthNum, dateNum);
+				if (addYear && dt < DateTime.Now)
+				{
+					Report.Info("Using the next year + 1 because the current date has passed the specified date");
+					dt = new DateTime(year + 3, monthNum, dateNum);
+				}
+				else
+				{
+					Report.Info("Using the next year for EPA registration");
+					dt = new DateTime(year + 2, monthNum, dateNum);
+				}
+				Report.Info("Entering date of (month/date): " + dt.Month + "/ " + dt.Day + " (NOT Nov 30)");
+				Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+					"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+					"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+
+
+				// Click Continue
+				Report.StartStep("I click continue in the Pesticide Details - State Registration page");
+				new StepsNewProduct().GivenInTheNewProductPageIClickContinue("Pesticide Details - State Registration Details");
+			}
+			else
+			{
+				throw new Exception("Month/ date parameter must be parsable as an integer!");
+			}
+		}
+
 		[StepDefinition(@"I select expiration date \(current year - Not August 31st\) for state: (.*)")]
 		public void ExpirationDate_CurrentYear_NotAugust31th(string state)
 		{

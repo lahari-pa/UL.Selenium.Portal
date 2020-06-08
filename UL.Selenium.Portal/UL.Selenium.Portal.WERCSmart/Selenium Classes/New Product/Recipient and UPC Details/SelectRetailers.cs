@@ -200,33 +200,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return;
 		}
 
-	
-		public bool CheckForTheFollowingRetailersInRetailerPage(Table table)
-		{
-			IList<IWebElement> retailerList = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@class='table table-striped table-hover table-fixed marTop-20']//tbody//td[@class='col-xs-3']"), 2);
-			List<string> retailerListText = new List<string>();
-
-			if (table.RowCount != retailerList.Count)
-			{
-				Report.Info("The amount of retailers found are not equal to the amount of retailers in the table");
-				return false;
-			}
-
-			foreach (var retailerName in retailerList)
-			{
-				retailerListText.Add(retailerName.Text);
-			}
-
-			foreach (TableRow row in table.Rows)
-			{
-				if (!retailerListText.Contains(row["Retailer"]))
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
 	}
 
 	class NoRetailerWarningPopup : SeleniumBaseObject

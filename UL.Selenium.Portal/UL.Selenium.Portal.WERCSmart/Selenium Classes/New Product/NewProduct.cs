@@ -4694,7 +4694,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IList<IWebElement> options = this.containerElement.FindElements(By.XPath("//div[@class='col-sm-4']//label[text()='" + row["Section"] + "']/../following-sibling::div//select//option"), 2);
 				string[] strArr = row["Options"].Split(',');
 
-				if (strArr.Count() != options.Count() - 1)
+				var index = 0;
+				var defaultOptionFound = false;
+				
+				foreach (var option in options)
+				{
+					if (option.Text.Contains("Choose"))
+					{
+						index = options.IndexOf(option);
+						defaultOptionFound = true;
+					}
+				}
+
+				if (defaultOptionFound)
+				{
+					options.RemoveAt(index);
+				}
+
+				if (strArr.Count() != options.Count())
 				{
 					Report.Failure("The amount of options expected and the amount of options found were not the same");
 					return false;

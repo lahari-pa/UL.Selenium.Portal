@@ -303,7 +303,7 @@ Then I check the options in the dropdown menus for the following sections
 | Quebec                     | None,Class 1,Class 2,Class 3,Class 3A,Class 4,Class 5,Banned                                                                                                                                                                  |
 | Saskatchewan               | None,Commercial,Restricted                                                                                                                                                                                                    |
 | Northwest Territory        | Not Applicable                                                                                                                                                                                                                |
-| Yukon Territory            | None,Commercial,Domestic,Restricted                                                                                                                                                                                           |
+| Yukon Territory            | None,Commercial,Domestic,Restricted,Use Permit                                                                                                                                                                                           |
 
 
 @ScenarioId:9324
@@ -332,20 +332,16 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Then I enter the following EPA Pesticide Registration No.: Test-1234
 	Given I click continue
 
-	And I set the following data: 2020-06-29 for the following state: MA
-	Given I click continue
+	And I call Shared Step 55843 (EPA expiration date - enter current year - Not June 30th) for state: MA
     Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
 
-	And I set the following data: 2021-06-29 for the following state: MA
-	Given I click continue
+	And I call Shared Step 55844 (EPA expiration date - enter next year - Not June 30th) for state: MA
     Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
 
-	And I set the following data: 2021-06-30 for the following state: MA
-	Given I click continue
+	And I call Shared Step 55846 (EPA expiration date - enter next year - June 30th) for state: MA
     Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
 
-	And I set the following data: 2020-06-30 for the following state: MA
-    Given I click continue
+	And I call Shared Step 55845 (EPA expiration date - enter current year - June 30th) for state: MA
 	Then in page Pesticide Details - State Registration Details I should see no errors
 
 	Given I navigate to the home page
@@ -378,20 +374,16 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Then I enter the following EPA Pesticide Registration No.: Test-1234
 	Given I click continue
 
-	And I set the following data: 2020-06-30 for the following state: DE
-	Given I click continue
+	And I call Shared Step 136221 (EPA expiration date - enter current year - Not July 1st) for state: DE
     Then in page Pesticide Details - State Registration page I should see error: State DE: Valid date is July 01 no more than two calendar years out at any given time.
 
-	And I set the following data: 2021-06-30 for the following state: DE
-	Given I click continue
+	And  I call Shared Step 136222 (EPA expiration date - enter next year - Not July 1st) for state: DE
     Then in page Pesticide Details - State Registration page I should see error: State DE: Valid date is July 01 no more than two calendar years out at any given time.
 
-	And I set the following data: 2022-06-30 for the following state: DE
-	Given I click continue
+	And I call Shared Step 136223 (EPA expiration date - enter current year plus 2 - Not July 1st) for state: DE
     Then in page Pesticide Details - State Registration page I should see error: State DE: Valid date is July 01 no more than two calendar years out at any given time.
 
-	And I set the following data: 2020-07-01 for the following state: DE
-    Given I click continue
+	And I call Shared Step 136224 (EPA expiration date - enter current year - July 1st) for state: DE
 	Then in page Pesticide Details - State Registration Details I should see no errors
 
 	Given I navigate to the home page
@@ -425,20 +417,16 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Then I enter the following EPA Pesticide Registration No.: Test-1234
 	Given I click continue
 
-	And I set the following data: 2020-12-30 for the following state: KS
-	Given I click continue
+	And I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: KS
     Then in page Pesticide Details - State Registration page I should see error: State KS: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
 
-	And I set the following data: 2021-12-30 for the following state: KS
-	Given I click continue
+	And I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: KS
     Then in page Pesticide Details - State Registration page I should see error: State KS: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
 
-	And I set the following data: 2021-12-31 for the following state: KS
-	Given I click continue
+	And I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: KS
     Then in page Pesticide Details - State Registration page I should see error: State KS: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.
 
-	And I set the following data: 2020-12-31 for the following state: KS
-	Given I click continue
+	And I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: KS
 	Then in page Pesticide Details - State Registration Details I should see no errors
 
 	Given I navigate to the home page

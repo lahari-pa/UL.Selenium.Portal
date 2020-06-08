@@ -171,18 +171,20 @@ And I should see following statement: Phosphates /Phosphorous (“P”)
 And I should see following statement: Nitrogen /Nitrates (“N”)
 And I should see following statement: Potassium(“K”)
 Then I should see the PNK section title in the Additional Product Information with the following text: Provide the amount (Percent) of each of the following within the product
-Then I check if input field for the following section exists: Phosphates /Phosphorous (“P”)
-Then I check if input field for the following section exists: Nitrogen /Nitrates (“N”)
-Then I check if input field for the following section exists: Potassium(“K”)
-Then I set the 1000000 field to: Phosphates /Phosphorous (“P”)
-Then I set the 10.1232123 field to: Nitrogen /Nitrates (“N”)
-Then I set the 100 field to: Potassium(“K”)
+And I see the following sections
+| Section                       |
+| Phosphates /Phosphorous (“P”) |
+| Nitrogen /Nitrates (“N”)      |
+| Potassium(“K”)                |
+Then I set the Phosphates /Phosphorous (“P”) field to: 1000000
+Then I set the Nitrogen /Nitrates (“N”) field to: 10.1232123 
+Then I set the Potassium(“K”) field to: 100
 Then I click continue
 And Phosphates /Phosphorous (“P”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 And Nitrogen /Nitrates (“N”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-Then I set the 35.24 field to: Phosphates /Phosphorous (“P”)
-Then I set the .05 field to: Nitrogen /Nitrates (“N”)
+Then I set the Phosphates /Phosphorous (“P”) field to: 35.24
+Then I set the Nitrogen /Nitrates (“N”) field to: .05
 And Phosphates /Phosphorous (“P”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 And Nitrogen /Nitrates (“N”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place

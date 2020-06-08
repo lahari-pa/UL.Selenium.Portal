@@ -6433,8 +6433,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		}
 
 		[StepDefinition(@"I call Shared Step 134404 \(SHA > Select Product > UPC Assessment Details\) for product saved as: (.*)")]
-		//[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC List\) for product saved as: (.*)")]
-		public void Shared75309_SHA_SelectProduct_UpcAssessmentDetails(string savedAs)
+		public void Shared134404_SHA_SelectProduct_UpcAssessmentDetails(string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
 			var shaSteps = new Steps_SHA();
@@ -7087,6 +7086,81 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			thisStepsStudio.ICloseAlert();
 			Report.StartStep("I close the Document queue window");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136221 \(EPA expiration date - enter current year - Not July 1st\) for state: (.*)")]
+		public void SharedStep136221_EPAExpirationDate_EnterCurrentYear_NotJuly1st(string state)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Beginning shared step: 55843");
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select a date for the current year that is not June 30th
+			var table = new Table("State", "Month", "Day", "Increment year?");
+			table.AddRow(state, "8", "8", "yes");
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateCurrentYear(table);
+			new StepsNewProduct().ClickContinue();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136222 \(EPA expiration date - enter next year - Not July 1st\) for state: (.*)")]
+		public void SharedStep55844a_EPAExpirationDate_EnterNextYear_NotJuly1st(string state)
+		{
+			//// Click in the EPA Expiration Date box for the state you are working with
+			//// Select a date for the next year that is not June 30th
+			//var pesticideDetailsState = new PesticideDetailsState();
+			//ReportSettings.UseSubSteps = true;
+			//Report.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			//var MyStepsNewProduct = new StepsNewProduct();
+			//var year = DateTime.Now.Year + 1;
+			//var dt = new DateTime(year, 8, 8);
+			//Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+			//	"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+			//	"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			//// Click Continue
+			//Report.StartStep("I click continue in the Pesticide Details - State Registration page");
+			//MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+			//	"Pesticide Details - State Registration Details");
+
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateNextYear("8", "8", state);
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136223 \(EPA expiration date - enter current year plus 2 - Not July 1st\) for state: (.*)")]
+		public void SharedStep136223_EPAExpirationDate_EnterNextYear_NotJuly1st(string state)
+		{
+			//// Click in the EPA Expiration Date box for the state you are working with
+			//// Select a date for the next year that is not June 30th
+			//var pesticideDetailsState = new PesticideDetailsState();
+			//ReportSettings.UseSubSteps = true;
+			//Report.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			//var MyStepsNewProduct = new StepsNewProduct();
+			//var year = DateTime.Now.Year + 1;
+			//var dt = new DateTime(year, 8, 8);
+			//Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+			//	"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+			//	"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			//// Click Continue
+			//Report.StartStep("I click continue in the Pesticide Details - State Registration page");
+			//MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+			//	"Pesticide Details - State Registration Details");
+
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateNextTwoYears("8", "8", state);
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136224 \(EPA expiration date - enter current year - July 1st\) for state: (.*)")]
+		public void SharedStep136224_EPAExpirationDate_EnterCurrentYear_July1st(string state)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Beginning shared step: 55845");
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select June 30th for the current year
+			// NOTE:  If the current date is after June 30th for the current year select June 30th for next year
+			var table = new Table("State", "Month", "Day", "Increment year?");
+			table.AddRow(state, "7", "1", "yes");
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateCurrentYear(table);
+			new StepsNewProduct().ClickContinue();
 		}
 
 		[StepDefinition(

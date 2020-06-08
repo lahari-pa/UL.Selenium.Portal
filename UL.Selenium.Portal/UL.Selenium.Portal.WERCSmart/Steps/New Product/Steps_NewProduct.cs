@@ -3055,20 +3055,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			newProductObject.CheckForPNKSectionTitleWithText(shouldOrShouldNot, titleText);
 		}
 
-		[StepDefinition(@"I check if input field for the following section exists: (.*)")]
-		public void ThenICheckIfInputFieldForTheFollowingSectionExistsPhosphatesPhosphorousP(string sectionName)
-		{
-			NewProduct newProductObject = new NewProduct();
-			newProductObject.CheckForInputFieldInSection(sectionName);
-		}
-
-		[StepDefinition(@"I enter the following text: (.*) for the input field in the following section: (.*)")]
-		public void ThenIEnterTheFollowingTextForTheInputFieldInTheFollowingSectionPhosphatesPhosphorousP(string enterText, string sectionName)
-		{
-			NewProduct newProductObject = new NewProduct();
-			Report.IsTrue(newProductObject.EnterTextInInputFieldInSection(enterText, sectionName), "Failed to enter text in input field", "Successfully entered text in input field");
-		}
-
 		[StepDefinition(@"in page Pesticide Details - State Registration page I should see no error")]
 		public void ThenInPagePesticideDetails_StateRegistrationPageIShouldSeeNoError()
 		{
