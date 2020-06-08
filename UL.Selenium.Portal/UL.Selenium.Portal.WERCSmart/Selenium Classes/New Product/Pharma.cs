@@ -59,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		
 		public bool CheckAndFillEmptyFieldsInPharmaIngredientsScreen()
 		{
-			IList<IWebElement> allFieldsOnPage = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//span[contains(text(),'For all components entered percentage should be greater than 0. Formulation must total or exceed 100%.')]/../preceding-sibling::input"), 2);
+			IList<IWebElement> allFieldsOnPage = this.containerElement.FindElements(By.XPath("//span[contains(text(),'For all components entered percentage should be greater than 0. Formulation must total or exceed 100%.')]/../preceding-sibling::input"), 2);
 
 			foreach (IWebElement field in allFieldsOnPage)
 			{

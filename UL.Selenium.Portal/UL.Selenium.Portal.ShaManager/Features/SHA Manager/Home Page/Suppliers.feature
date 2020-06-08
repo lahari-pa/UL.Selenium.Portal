@@ -51,6 +51,7 @@ Then In The Supplier Manager popup I check that the column: Retailer contains al
 | Target	                                                                     |
 | Walgreens	                                                                     |
 | Wal-Mart/SAM'S CLUB		                                                     |
+Then In The Supplier Manager popup I check that the column: Retailer is in alphabetical order
 Then In the supplier manager popup I check that Data Tier Consent Table contains the following columns headings:
 | Expected Headers |
 |                  |

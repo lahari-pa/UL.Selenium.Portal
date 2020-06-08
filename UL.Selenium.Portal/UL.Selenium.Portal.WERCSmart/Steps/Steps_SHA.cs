@@ -3644,6 +3644,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) is in alphabetical order")]
+		public void ThenInTheSupplierManagerPopupICheckThatTheColumnRetailerIsInAlphabeticalOrder(string columnName)
+		{
+			Report.IsTrue(new StudioSupplierManager().RetailsAreInAlphabeticalOrder(), "The retailers were not in alphabetical order in column: " + columnName, "The retailers were in alphabetical order in column: " + columnName);
+		}
+
 
 		[StepDefinition(@"In the SHA manager I search for the Product saved as: (.*) and if its Status is Accepted I set the retailers: to Completed and check the Products Grid")]
 		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs,Table retailerTable)
@@ -3734,7 +3740,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
 		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
 		{
-			Delay.Seconds(5);
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			List<string> columnsNotFound = studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table);
 
