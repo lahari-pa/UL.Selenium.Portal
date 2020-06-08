@@ -254,6 +254,7 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58075, container type: Plastic Container and size: 100
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Additional Documents to Provide page I click Continue
 	Then I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
