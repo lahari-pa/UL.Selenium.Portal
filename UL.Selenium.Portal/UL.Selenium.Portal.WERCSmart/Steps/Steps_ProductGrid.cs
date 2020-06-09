@@ -2533,5 +2533,102 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("There were " + moreFiltersObject.CheckTheAmountOfProductsInProductsGrid() + " products displayed");
 		}
 
+	
+		[StepDefinition(@"I make sure product saved as: (.*) (should|should not) missing from the product list")]
+		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs, string shouldOrShouldNot)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			DeleteActiveProducts deleteActiveProductsObject = new DeleteActiveProducts();
+			savedAs = deleteActiveProductsObject.GetProductIDFromContext(savedAs);
+
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				Report.IsTrue(moreFiltersObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product WPS ID: " + savedAs + " should be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be missing from the product list and it was");
+			}
+			else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				Report.IsTrue(!moreFiltersObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product WPS ID: " + savedAs + " should not be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be found in the product list and it was");
+			}
+		}
+
+		[StepDefinition(@"I make sure products saved as: (.*) are missing from the product list")]
+		public void ThenIMakeSureProductsSavedAsSelectedProductsAreMissingFromTheProductList(string savedAs)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			var list = Context.GetFromContext(savedAs).ToString();
+			string[] listSplit = list.Split(',');
+
+			foreach (string listItem in listSplit)
+			{
+				Report.IsTrue(moreFiltersObject.CheckIfProductIsMissing(listItem), "The following product WPS ID: " + savedAs + " should be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be missing from the product list and it was");
+			}
+		}
+
+		[StepDefinition(@"Check popup date productID: (.*) productType: (.*) productAccessCode: (.*)")]
+		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			string savedAs = productID;
+			try
+			{
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Report.Info("ProductID: " + id + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
+				Report.IsTrue(new ModalDialog().CheckProductInformationIn3rdPartyAccessCodeWindowInProductsGrid(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
+
+			}
+			catch (Exception ex)
+			{
+
+				Report.Failure(ex.Message);
+				throw;
+			}
+
+		}
+
 	}
 }

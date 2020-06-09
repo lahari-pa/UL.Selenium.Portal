@@ -1989,38 +1989,6 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step 134650 \(Additional Product Information - Prevents, Destroys Repels Pests, US only, NO to everything else - Continue - Happy Path\)")]
-		public void ICallSharedAdditionalProductInformation_Pesticide_USOnly_NoToEverythingElse()
-		{
-			ReportSettings.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I should see the Additional Product Information Page");
-			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			Report.StartStep(
-				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
-				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			Report.StartStep(
-				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
-				"No");
-			Report.StartStep(
-				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
-				"No");
-			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
-			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			Report.StartStep(
-				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
-				"No");
-			Report.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
-		}
-
 		// Duplicate with Shared Step 57884
 		[StepDefinition(@"I call Shared Step 59663 \(Safety Data Sheet Authoring - Additional Data \(Optional\)\)")]
 		public void ICallSharedSafetyDataSheetAuthoring_AdditionalDataOptional(Table table)
@@ -4777,8 +4745,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 
 			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
 			Report.StartStep("I click Continue");
-			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
-				"Clicked continue button");
+			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
 			Delay.Seconds(3);
 			Report.Info("Now going to click the sections side tab if its not open");
 			var selStepsStudio = new Steps_Studio();
@@ -4788,7 +4755,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			{
 				selStepsStudio.InPDIEnsureSECT2318IsActive();
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
-			}		
+			}
+
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
 
@@ -5269,6 +5237,13 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			var MyGlobalSteps = new GlobalSteps();
 			MyGlobalSteps.LoginToAccount("PremiumSubscriptionAccount");
+		}
+
+		[StepDefinition(@"I call Shared Step \(Login to WERCSmart - Pharma Account\)")]
+		public void GivenICallSharedStepLoginToWERCSmart_PharmaAccount()
+		{
+			var MyGlobalSteps = new GlobalSteps();
+			MyGlobalSteps.LoginToAccount("PharmaAccount");
 		}
 
 		[StepDefinition(
@@ -6458,8 +6433,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		}
 
 		[StepDefinition(@"I call Shared Step 134404 \(SHA > Select Product > UPC Assessment Details\) for product saved as: (.*)")]
-		//[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC List\) for product saved as: (.*)")]
-		public void Shared75309_SHA_SelectProduct_UpcAssessmentDetails(string savedAs)
+		public void Shared134404_SHA_SelectProduct_UpcAssessmentDetails(string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
 			var shaSteps = new Steps_SHA();
@@ -7112,6 +7086,81 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			thisStepsStudio.ICloseAlert();
 			Report.StartStep("I close the Document queue window");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136221 \(EPA expiration date - enter current year - Not July 1st\) for state: (.*)")]
+		public void SharedStep136221_EPAExpirationDate_EnterCurrentYear_NotJuly1st(string state)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Beginning shared step: 55843");
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select a date for the current year that is not June 30th
+			var table = new Table("State", "Month", "Day", "Increment year?");
+			table.AddRow(state, "8", "8", "yes");
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateCurrentYear(table);
+			new StepsNewProduct().ClickContinue();
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136222 \(EPA expiration date - enter next year - Not July 1st\) for state: (.*)")]
+		public void SharedStep55844a_EPAExpirationDate_EnterNextYear_NotJuly1st(string state)
+		{
+			//// Click in the EPA Expiration Date box for the state you are working with
+			//// Select a date for the next year that is not June 30th
+			//var pesticideDetailsState = new PesticideDetailsState();
+			//ReportSettings.UseSubSteps = true;
+			//Report.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			//var MyStepsNewProduct = new StepsNewProduct();
+			//var year = DateTime.Now.Year + 1;
+			//var dt = new DateTime(year, 8, 8);
+			//Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+			//	"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+			//	"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			//// Click Continue
+			//Report.StartStep("I click continue in the Pesticide Details - State Registration page");
+			//MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+			//	"Pesticide Details - State Registration Details");
+
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateNextYear("8", "8", state);
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136223 \(EPA expiration date - enter current year plus 2 - Not July 1st\) for state: (.*)")]
+		public void SharedStep136223_EPAExpirationDate_EnterNextYear_NotJuly1st(string state)
+		{
+			//// Click in the EPA Expiration Date box for the state you are working with
+			//// Select a date for the next year that is not June 30th
+			//var pesticideDetailsState = new PesticideDetailsState();
+			//ReportSettings.UseSubSteps = true;
+			//Report.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			//var MyStepsNewProduct = new StepsNewProduct();
+			//var year = DateTime.Now.Year + 1;
+			//var dt = new DateTime(year, 8, 8);
+			//Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+			//	"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+			//	"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			//// Click Continue
+			//Report.StartStep("I click continue in the Pesticide Details - State Registration page");
+			//MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+			//	"Pesticide Details - State Registration Details");
+
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateNextTwoYears("8", "8", state);
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 136224 \(EPA expiration date - enter current year - July 1st\) for state: (.*)")]
+		public void SharedStep136224_EPAExpirationDate_EnterCurrentYear_July1st(string state)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Beginning shared step: 55845");
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select June 30th for the current year
+			// NOTE:  If the current date is after June 30th for the current year select June 30th for next year
+			var table = new Table("State", "Month", "Day", "Increment year?");
+			table.AddRow(state, "7", "1", "yes");
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateCurrentYear(table);
+			new StepsNewProduct().ClickContinue();
 		}
 
 		[StepDefinition(
@@ -10118,7 +10167,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the The Product Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Type");
 			Report.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
 			if (name == "")
 			{
@@ -10136,7 +10185,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Context.AddToContext($"TestCase{TReVorSettings.TestCaseId}", prodDetails);
 		}
 
-		[StepDefinition(@"I call Shared Step 1234 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 135134 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path\)")]
 		public void IcallSharedStep1234()
 		{
 			ReportSettings.UseSubSteps = true;

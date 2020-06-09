@@ -1239,6 +1239,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"I set the (.*) field to exactly match: (.*)")]
+		[StepDefinition(@"I set the (.*) option to exactly match: (.*)")]
+		public void SetTheSectionOptionToExactlyMatch(string section, string option)
+		{
+			var thisNewProduct = new NewProduct();
+			if (!thisNewProduct.WaitForContainerToBeVisible(3))
+			{
+				Report.Failure("The new product page is not showing");
+			}
+			if (option.StartsWith("UPC"))
+			{
+				var value = Context.GetFromContext(option)?.ToString();
+				if (value == null)
+				{
+					throw new Exception("Could not find item in context: " + value + " for checking field input is correct value!");
+				}
+				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
+					"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
+					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+				Delay.Seconds(1);
+			}
+			else
+			{
+				Report.IsTrue(thisNewProduct.SetOptionInSectionToExactlyMatch(section.Trim(), option.Trim()),
+					"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
+					"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+				Delay.Seconds(1);
+			}
+		}
+
 		[StepDefinition(@"I set the (.*) option to: (.*) and save entry")]
 		public void SetTheSectionOptionToAndSaveEntry(string section, string option)
 		{
@@ -2430,16 +2460,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Section '{section}' colour was red as expected");
 		}
 
-		[StepDefinition(@"I should see following statement: (.*)")]
-		public void SectionStatement(string option)
+		[StepDefinition(@"I (should|should not) see following statement: (.*)")]
+		public void SectionStatement(string shouldOrShouldNot, string option)
 		{
 			Report.Info("Checking statement");
 			var selNewProduct = new NewProduct();
 			List<string> found = selNewProduct.GetDisplayedSections();
 
-			Report.IsTrue(found.Contains(option),
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				Report.IsTrue(found.Contains(option),
 				"statement was not as expected! Expected: " + option + ", but found: " + found + "!",
 				"statement was showing: " + option + ", as expected!");
+			} else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				Report.IsTrue(!found.Contains(option),
+				"statement was not as expected! Not expected: " + option + ", but found: " + found + "!",
+				"statement was not showing: " + option + ", as expected!");
+			}
+
 		}
 
 		[StepDefinition(@"I click on the Notice of Adoption Article link")]
@@ -3026,18 +3065,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			newProductObject.CheckForPNKSectionTitleWithText(shouldOrShouldNot, titleText);
 		}
 
-		[StepDefinition(@"I check if input field for the following section exists: (.*)")]
-		public void ThenICheckIfInputFieldForTheFollowingSectionExistsPhosphatesPhosphorousP(string sectionName)
+		[StepDefinition(@"in page Pesticide Details - State Registration page I should see no error")]
+		public void ThenInPagePesticideDetails_StateRegistrationPageIShouldSeeNoError()
 		{
-			NewProduct newProductObject = new NewProduct();
-			newProductObject.CheckForInputFieldInSection(sectionName);
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.CheckIfThereIsNoErrorInThePesticideDetailsStateRegistration(), "Failed to display no error", "Successfully displayed no errors");
 		}
 
-		[StepDefinition(@"I enter the following text: (.*) for the input field in the following section: (.*)")]
-		public void ThenIEnterTheFollowingTextForTheInputFieldInTheFollowingSectionPhosphatesPhosphorousP(string enterText, string sectionName)
+
+		[StepDefinition(@"I check that the following sections contain the corresponding titles:")]
+		public void ThenICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
 		{
-			NewProduct newProductObject = new NewProduct();
-			newProductObject.EnterTextInInputFieldInSection(enterText, sectionName);
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
+		}
+
+
+
+		[StepDefinition(@"I set the following data: (.*) for the following state: (.*)")]
+		public void GivenISetTheFollowingDataErtForTheFollowingStateMA(string date, string state)
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.EnterExpirationDateForStatePesticideReigstration(date, state), "Failed to enter a date", "Successfully entered a date");
+		}
+
+
+		[StepDefinition(@"I enter the following EPA Pesticide Registration No\.: (.*)")]
+		public void ThenIEnterTheFollowingEPAPesticideRegistrationNo_(string enterText)
+		{
+			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
+			Report.IsTrue(pesticideDetailsStateObject.EnterEPAPesticideRegistrationNo(enterText), "Failed to enter text", "Successfully entered text");
+		}
+
+		[StepDefinition(@"I set first VOC option to: 'Yes'")]
+		public void GivenISetFirstVOCOptionToYes1(string yesOrNo)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			ingredientsObject.SetFirstVOCOption(yesOrNo);
 		}
 
 

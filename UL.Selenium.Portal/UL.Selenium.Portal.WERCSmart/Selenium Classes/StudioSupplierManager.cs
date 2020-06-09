@@ -275,7 +275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EmailColumnContainsEmailAddresses()
 		{
-			Report.Info("Testing " + this.ColumnValues("Email"));
+			
 			var tableRowStrings = this.ColumnValues("Email");
 			bool emailValid = true;
 			int y = 1;
@@ -428,6 +428,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return el.TryClick();
 		}
 
+		public bool RetailsAreInAlphabeticalOrder()
+		{
+			IList <IWebElement> retailers = this.containerElement.FindElements(By.XPath("//div[@class='ui-tabs-panel ui-widget-content ui-corner-bottom']//tr//td[1]"), 2);
+			List<string> retailerNames = new List<string>();
+			foreach (var retailer in retailers)
+			{
+				retailerNames.Add(retailer.Text);
+			}
+
+			var orderedList = retailerNames.OrderBy(item => item.Split('.').First());
+
+			for (int i=0;i<retailerNames.Count;i++)
+			{
+				if (retailerNames.ElementAt(i) != orderedList.ElementAt(i))
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
 
 	}
 }

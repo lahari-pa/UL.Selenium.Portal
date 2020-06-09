@@ -1218,6 +1218,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option","Successfully selected the option");
 		}
 
-
 	}
 }

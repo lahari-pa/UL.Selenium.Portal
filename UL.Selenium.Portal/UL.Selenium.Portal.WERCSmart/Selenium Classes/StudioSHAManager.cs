@@ -1587,37 +1587,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> FindColumnInUPCRetailerAndFeedPageWithTable(Table table)
 		{
+
 			List<string> columnsNotFound = new List<string>();
-			
+			List<string> columnNamesStrings = new List<string>();
+			IList <IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+
+			foreach (var columnName in columnNames)
+			{
+				columnNamesStrings.Add(columnName.Text);
+			}
+
 			foreach (TableRow row in table.Rows)
 			{
-				IWebElement columnName = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//th[contains(text(),'" + row["Column Name"] + "')]"), 2);
-
-				if (columnName == null)
+			
+				if (!columnNamesStrings.Contains(row["Column Name"]))
 				{
 					columnsNotFound.Add(row["Column Name"]);
 				}
 			}
-			//Philip
-			try
-			{
-				return columnsNotFound;
-			}
-			catch (NoSuchWindowException)
-			{
-				Report.Failure("Failed to switch to the SHA Manager Product UPC window!");
-				Report.Screenshot();
-				return null;
 
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				Report.Screenshot();
-				return null;
+			return columnsNotFound;
 
-			}
+		}
 
+		public string FindClientsForProduct(string productID)
+		{
+			IWebElement clients = this.containerElement.FindElement(By.XPath(".//td[@title='" + productID + "']/following-sibling::td[@aria-describedby='list_CLIENTS']"), 2);
+			return clients.Text;
 		}
 
 		public bool ConfirmUInSecondColumn(string productID)
@@ -1630,6 +1626,52 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return false;
+		}
+
+		public bool FindDataForClientsInUPCRetailerAndFeedPage(string[] clients)
+		{
+			List<string> columnsNotFound = new List<string>();
+			List<string> columnNamesStrings = new List<string>();
+			IList<IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+			IList<IWebElement> columnData = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+
+			if (columnNames.Count == 0)
+			{
+				Report.Info("No column names were fonud");
+				return false;
+			}
+
+			if (columnData.Count == 0)
+			{
+				Report.Info("No column data was fonud");
+				return false;
+			}
+
+			foreach (var columnName in columnNames)
+			{
+				columnNamesStrings.Add(columnName.Text);
+			}
+
+			foreach (string client in clients)
+			{
+
+				if (!columnNamesStrings.Contains(client))
+				{
+					Report.Info(client + " was not found");
+					return false;
+				}
+				else
+				{
+					int index = Array.FindIndex(clients, row => row.Contains(client));
+					if (columnData.ElementAt(index).Text.Length < 1)
+					{
+						Report.Info(client + " had no data");
+						return false;
+					}
+				}
+			}
+
+			return true;
 		}
 
 	}

@@ -7,6 +7,7 @@ using UL.Automation.Selenium.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using TechTalk.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -401,5 +402,43 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//	return false;
 			//}
 		}
+
+
+		public bool CheckIfThereIsNoErrorInThePesticideDetailsStateRegistration()
+		{
+			IList<IWebElement> error = this.containerElement.FindElements(By.XPath("//div[@class='alert alert-danger']//p[@class='form-error']"), 2);
+			if (error.Count < 1)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool CheckTheFollowingSectionTitles(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement section = this.containerElement.FindElement(By.XPath("//tr[@class='DarkBack'][2]//th[" + row["Section"] + "]"), 2);
+				if (section.Text != row["Column Name"])
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool EnterExpirationDateForStatePesticideReigstration(string date, string state)
+		{
+			IWebElement calendar = this.containerElement.FindElement(By.XPath("//div[text()='" + state + "']/../following-sibling::td//input[@data-date-format=\"yyyy-mm-dd\"]"), 2);
+			return calendar.TryEnterText(date);
+		}
+		public bool EnterEPAPesticideRegistrationNo(string enterText)
+		{
+			IWebElement textField = this.containerElement.FindElement(By.XPath("//th[text()='EPA Pesticide Registration No.']/../../following-sibling::tbody//input"), 2);
+			return textField.TryEnterText(enterText);
+		}
+
 	}
 }

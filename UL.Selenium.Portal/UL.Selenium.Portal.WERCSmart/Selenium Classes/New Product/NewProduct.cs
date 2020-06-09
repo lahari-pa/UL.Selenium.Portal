@@ -1517,7 +1517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickAcceptButton()
 		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[text()='Accept']"), 2);
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//a[text()='Accept']"), 2);
 			if (el == null)
 			{
 				return false;
@@ -3139,7 +3139,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetOptionInSection(string section, string value)
 		{
-
 			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
 						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
@@ -3223,6 +3222,112 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						int x = 0;
 						bool isChecked = false;
 						while(isChecked==false&&x<6)
+						{
+							Delay.Seconds(1);
+							Report.Info($"Attempting to check box, attempt: {x + 2}");
+							el.TryCheck();
+							isChecked = el.Checked();
+							x++;
+						}
+						return isChecked;
+					}
+				}
+
+			}
+			catch (Exception)
+			{
+
+			}
+			// don't click the label if it contains a web link
+			if (el.FindElement(By.XPath("./span/a[contains(@href,'http')]"), 2) == null && el.TryClick())
+			{
+				Report.Info("Dont Click label if contains web link");
+				Delay.Seconds(2);
+				if (this.SelectedOptionsForSection(section).Contains(value))
+				{
+					return true;
+				}
+			}
+			Report.Info("Trying a basic Try click on the element");
+			return el.FindElement(By.XPath("./input"), 10).TryClick();
+		}
+
+		public bool SetOptionInSectionToExactlyMatch(string section, string value)
+		{
+			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
+						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text()=""" + value + @""" and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+
+			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
+
+			if (el == null)
+			{
+				Report.Error("Could not find the correct input in section: " + section);
+				return false;
+			}
+
+			el.ScrollElementIntoView();
+			Report.Info("Entering value of: '" + value + "' in section: '" + section + "'");
+			if (el.GetAttribute("type") == "text")
+			{
+				el.EnterText(value);
+				if (el.GetValue() == value)
+				{
+					return el.GetValue() == value;
+				}
+				else
+				{
+					int j = 0;
+					bool textEntered = false;
+					while (textEntered == false && j < 6)
+					{
+						Delay.Seconds(1);
+						Report.Info($"Attempting to enter text, attempt: {j + 2}");
+						el.ClearTextBox();
+						el.EnterText(value);
+						textEntered = el.GetValue() == value;
+						j++;
+					}
+					return textEntered;
+
+				}
+			}
+			if (el.TagName.ToLower() == "select")
+			{
+				int i = 0;
+				while (i < 10)
+				{
+					try
+					{
+						el.Select(value);
+						return el.SelectedOption() == value;
+					}
+					catch (Exception)
+					{
+						i++;
+						Delay.Seconds(1);
+					}
+				}
+
+				return el.SelectedOption() == value;
+			}
+
+			try
+			{
+				if (el.GetAttribute("type") == "checkbox")
+				{
+					el.TryCheck();
+					if (el.Checked() == true)
+					{
+						return el.Checked();
+					}
+					else
+					{
+						int x = 0;
+						bool isChecked = false;
+						while (isChecked == false && x < 6)
 						{
 							Delay.Seconds(1);
 							Report.Info($"Attempting to check box, attempt: {x + 2}");
@@ -4581,12 +4686,38 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckOptionsInDropDownMenusForTheFollowingSectinons(Table table)
 		{
+
+			List<string> unexpectedOptions = new List<string>();
+
 			foreach (TableRow row in table.Rows)
 			{ 
 				IList<IWebElement> options = this.containerElement.FindElements(By.XPath("//div[@class='col-sm-4']//label[text()='" + row["Section"] + "']/../following-sibling::div//select//option"), 2);
 				string[] strArr = row["Options"].Split(',');
-				if (strArr.Count() != options.Count() - 1 || options.Count() < 1)
+
+				var index = 0;
+				var defaultOptionFound = false;
+				
+				foreach (var option in options)
 				{
+					if (option.Text.Contains("Choose"))
+					{
+						index = options.IndexOf(option);
+						defaultOptionFound = true;
+					}
+				}
+
+				if (defaultOptionFound)
+				{
+					options.RemoveAt(index);
+				}
+
+				if (strArr.Count() != options.Count())
+				{
+					Report.Failure("The amount of options expected and the amount of options found were not the same");
+					return false;
+				} else if (options.Count() < 1)
+				{
+					Report.Failure("No options were found");
 					return false;
 				}
 				foreach (IWebElement option in options)
@@ -4596,11 +4727,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					{
 						if (!strArr.Contains(optionText))
 						{
-							return false;
+							unexpectedOptions.Add(optionText);
 						}
 					}
 				}
 
+			}
+
+			if (unexpectedOptions.Count > 0)
+			{
+				foreach (string option in unexpectedOptions)
+				{
+					Report.Info("Unexpected option found: " + option);
+				}
+				return false;
 			}
 
 			return true;
@@ -4620,7 +4760,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckForInputFieldInSection(string sectionName)
 		{
-			IWebElement section = this.containerElement.FindElement(By.XPath(@"//label[text()='" + sectionName + "']"), 2);
+			IWebElement section = this.containerElement.FindElement(By.XPath(@"//label[text()='" + sectionName + "']/../following-sibling::div//input"), 2);
 			return section != null;
 		}
 

@@ -3644,6 +3644,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) is in alphabetical order")]
+		public void ThenInTheSupplierManagerPopupICheckThatTheColumnRetailerIsInAlphabeticalOrder(string columnName)
+		{
+			Report.IsTrue(new StudioSupplierManager().RetailsAreInAlphabeticalOrder(), "The retailers were not in alphabetical order in column: " + columnName, "The retailers were in alphabetical order in column: " + columnName);
+		}
+
 
 		[StepDefinition(@"In the SHA manager I search for the Product saved as: (.*) and if its Status is Accepted I set the retailers: to Completed and check the Products Grid")]
 		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs,Table retailerTable)
@@ -3727,14 +3733,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-	
-
-
-
 		[StepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
 		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
 		{
-			Delay.Seconds(10);
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			List<string> columnsNotFound = studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table);
 
@@ -3744,6 +3745,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Column not found: " + columnName);
 			}
+		}
+
+
+		[StepDefinition(@"I save all clients for product saved as: (.*)")]
+		public void ThenISaveAllClientsForPrductsSavedAsTestCase(string savedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
+
+			var clients = studioSHAManagerObject.FindClientsForProduct(id);
+			if (clients != null)
+			{
+				var key = id + "'s Clients";
+				Context.AddToContext(key, clients);
+			}
+
+			Report.IsTrue(clients != null, "Failed to find product clients", "Successfully found product clients");
 		}
 
 
@@ -3807,6 +3831,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
 			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
+		}
+
+		[StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
+		public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
+
+			var key = id + "'s Clients";
+			var clients = Context.GetFromContext(key).ToString();
+			string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
+			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
 		}
 
 	}
