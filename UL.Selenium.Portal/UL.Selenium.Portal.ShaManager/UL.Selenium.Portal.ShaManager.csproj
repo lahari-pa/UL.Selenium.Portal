@@ -154,8 +154,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Selenium Classes\" />
-    <Folder Include="Steps\" />
+    <Folder Include="Selenium Classes\Steps\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj">

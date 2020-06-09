@@ -13,7 +13,8 @@
 @run_ProductRegistration
 Feature: Product Registration
 
-
+@tfs_design
+#Non-important scenario - Philip
 Scenario: [130389] Demo Scenario
 Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)

@@ -347,6 +347,49 @@ Then I check the options in the dropdown menus for the following sections
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
 
 
+@tfs_design
+#Bug ticket placed for the error that is not displaying - Philip
+	@ScenarioId:9324
+Scenario: [56652] Pesticide Data - EPA Expiration date validation (Massachusetts - June 30th no more than 1 year out)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Then The home screen should load
+	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Then I save the product information as: TestCase62778
+	Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Then I should see the Pesticide Details - U.S. Page
+	And I see the following sections
+		| Section                                                                  |
+		| Product has an Environmental Protection Agency (EPA) Registration Number |
+	And The following options should be displayed for section: Product has an Environmental Protection Agency (EPA) Registration Number
+		| Option |
+		| Yes    |
+		| No     |
+	Given I click continue
+	Then Product has an Environmental Protection Agency (EPA) Registration Number should be showing the error messages: This is a required field.
+	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+	Then I enter the following EPA Pesticide Registration No.: Test-1234
+	Given I click continue
+
+	And I call Shared Step 55843 (EPA expiration date - enter current year - Not June 30th) for state: MA
+    Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
+
+	And I call Shared Step 55844 (EPA expiration date - enter next year - Not June 30th) for state: MA
+    Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
+
+	And I call Shared Step 55846 (EPA expiration date - enter next year - June 30th) for state: MA
+    Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
+
+	And I call Shared Step 55845 (EPA expiration date - enter current year - June 30th) for state: MA
+	Then in page Pesticide Details - State Registration Details I should see no errors
+
+	Given I navigate to the home page
+	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
+
 
 @ScenarioId:9334
 	Scenario: [56598] Pesticide Data - EPA Expiration date validation (Kansas - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)

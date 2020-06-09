@@ -3733,10 +3733,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-	
-
-
-
 		[StepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
 		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
 		{
@@ -3835,6 +3831,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
 			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
+		}
+
+		[StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
+		public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
+
+			var key = id + "'s Clients";
+			var clients = Context.GetFromContext(key).ToString();
+			string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
+			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
 		}
 
 	}

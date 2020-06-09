@@ -106,32 +106,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return checkBox.TryCheck();
 		}
 
-		public bool SelectFirstThreeCheckBoxes(string savedAs)
-		{
-			IList<IWebElement> checkboxList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']"), 2);
-			IList<IWebElement> productIDList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']/../following-sibling::td[@data-bind='text: Product.ProductID']"), 2);
-			List<string> productsChecked = new List<string>();
-
-			for (int i = 1; i < 4; i++)
-			{
-				if (checkboxList[i].TryCheck())
-				{
-					if (productsChecked.Count == 0)
-					{
-						productsChecked.Add(productIDList[i].Text);
-					}
-					else
-					{
-						productsChecked.Add("," + productIDList[i].Text);
-					}
-				}
-			}
-
-			Context.AddToContext(savedAs, productsChecked.ToString());
-
-			return true;
-		}
-
 		public string GetProductIDFromContext(string savedAs)
 		{
 

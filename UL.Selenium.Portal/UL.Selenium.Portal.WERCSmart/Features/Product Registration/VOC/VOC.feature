@@ -26,7 +26,6 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I set first VOC option to: 'Yes'
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 0                     | 0                          | Yes            |

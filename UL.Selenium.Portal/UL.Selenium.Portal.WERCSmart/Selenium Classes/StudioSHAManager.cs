@@ -1628,6 +1628,52 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool FindDataForClientsInUPCRetailerAndFeedPage(string[] clients)
+		{
+			List<string> columnsNotFound = new List<string>();
+			List<string> columnNamesStrings = new List<string>();
+			IList<IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+			IList<IWebElement> columnData = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+
+			if (columnNames.Count == 0)
+			{
+				Report.Info("No column names were fonud");
+				return false;
+			}
+
+			if (columnData.Count == 0)
+			{
+				Report.Info("No column data was fonud");
+				return false;
+			}
+
+			foreach (var columnName in columnNames)
+			{
+				columnNamesStrings.Add(columnName.Text);
+			}
+
+			foreach (string client in clients)
+			{
+
+				if (!columnNamesStrings.Contains(client))
+				{
+					Report.Info(client + " was not found");
+					return false;
+				}
+				else
+				{
+					int index = Array.FindIndex(clients, row => row.Contains(client));
+					if (columnData.ElementAt(index).Text.Length < 1)
+					{
+						Report.Info(client + " had no data");
+						return false;
+					}
+				}
+			}
+
+			return true;
+		}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
