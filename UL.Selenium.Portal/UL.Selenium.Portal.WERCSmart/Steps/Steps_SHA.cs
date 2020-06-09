@@ -3752,6 +3752,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I save all clients for product saved as: (.*)")]
+		public void ThenISaveAllClientsForPrductsSavedAsTestCase(string savedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
+
+			var clients = studioSHAManagerObject.FindClientsForProduct(id);
+			if (clients != null)
+			{
+				var key = id + "'s Clients";
+				Context.AddToContext(key, clients);
+			}
+
+			Report.IsTrue(clients != null, "Failed to find product clients", "Successfully found product clients");
+		}
+
+
 		[StepDefinition(@"I confirm that there is a 'U' next to the following product saved as: (.*)")]
 		public void ThenIConfirmThatThereIsANextToTheFollowingProductSavedAs(string productSavedAs)
 		{

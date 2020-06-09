@@ -1281,11 +1281,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 		}
 
-		[StepDefinition(@"I select random products checkbox and save as: (.*)")]
-		public void ThenISelectRandomProductsCheckbox(string savedAs)
+		[StepDefinition(@"I select the first three products checkbox and save as: (.*)")]
+		public void ThenISelectTheFirstThreeProductsCheckbox(string savedAs)
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();
-			Report.IsTrue(deleteActiveProductsObject.SelectRandomCheckBoxes(savedAs), "Failed to select random checkboxes and save their corresponding product IDs", "Successfully selected random checkboxes and saved their corresponding product IDs");
+			Report.IsTrue(deleteActiveProductsObject.SelectFirstThreeCheckBoxes(savedAs), "Failed to select random checkboxes and save their corresponding product IDs", "Successfully selected random checkboxes and saved their corresponding product IDs");
 		}
 
 	}

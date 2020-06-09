@@ -311,6 +311,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase93366a
 
 	And I navigate to the home page
 Given I generate a random UPC number and save as: UPC93366b
@@ -335,6 +336,7 @@ Given I generate a random UPC number and save as: UPC93366b
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase93366b
 
 		And I navigate to the home page
 Given I generate a random UPC number and save as: UPC93366c
@@ -359,6 +361,7 @@ Given I generate a random UPC number and save as: UPC93366c
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase93366c
 
 		And I navigate to the home page
 Given I generate a random UPC number and save as: UPC93366d
@@ -383,6 +386,7 @@ Given I generate a random UPC number and save as: UPC93366d
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase93366d
 
 		And I navigate to the home page
 Given I generate a random UPC number and save as: UPC93366e
@@ -407,6 +411,7 @@ Given I generate a random UPC number and save as: UPC93366e
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase93366e
 
 	And I navigate to the home page
 	Given I click Bulk Actions in the Products Grid
@@ -416,7 +421,7 @@ Given I generate a random UPC number and save as: UPC93366e
 	Then I confirm all checkboxes are selected in the Delete Active Products page
 	Then I deselect the checkbox next to WPS ID in the Delete Active Products page
 	Then I confirm all checkboxes are deselected in the Delete Active Products page
-	Then I select random products checkbox and save as: selectedProducts
+	Then I select the first three products checkbox and save as: selectedProducts
 	Then I click on the Make Obsolete button
 	Then I select the checkbox in the Make Obsolete popup
 	Then In the Make Obsolete popup I click on the Cancel button

@@ -106,42 +106,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return checkBox.TryCheck();
 		}
 
-		public bool SelectRandomCheckBoxes(string savedAs)
+		public bool SelectFirstThreeCheckBoxes(string savedAs)
 		{
 			IList<IWebElement> checkboxList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']"), 2);
 			IList<IWebElement> productIDList = this.containerElement.FindElements(By.XPath("//input[@type='checkbox']/../following-sibling::td[@data-bind='text: Product.ProductID']"), 2);
 			List<string> productsChecked = new List<string>();
-			List<int> indexesChecked = new List<int>();
 
-			Random rnd = new Random();
-
-			for (int i = 0; i < 3; i++)
+			for (int i = 1; i < 4; i++)
 			{
-
-				int randIndex = rnd.Next(1, checkboxList.Count);
-
-				if (!indexesChecked.Contains(randIndex))
+				if (checkboxList[i].TryCheck())
 				{
-
-					if (checkboxList[randIndex].TryCheck())
+					if (productsChecked.Count == 0)
 					{
-						if (productsChecked.Count == 0)
-						{
-							productsChecked.Add(productIDList[randIndex].Text);
-						}
-						else
-						{
-							productsChecked.Add("," + productIDList[randIndex].Text);
-						}
-						indexesChecked.Add(randIndex);
+						productsChecked.Add(productIDList[i].Text);
 					}
-
+					else
+					{
+						productsChecked.Add("," + productIDList[i].Text);
+					}
 				}
-				else
-				{
-					i--;
-				}
-
 			}
 
 			Context.AddToContext(savedAs, productsChecked.ToString());

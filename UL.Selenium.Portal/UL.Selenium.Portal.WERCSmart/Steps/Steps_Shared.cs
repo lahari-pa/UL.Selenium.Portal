@@ -4752,10 +4752,13 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Delay.Seconds(3);
 			Report.Info("Now going to click the sections side tab if its not open");
 			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.InPDIEnsureSECT2318IsActive();
-			selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
-
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
 
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");

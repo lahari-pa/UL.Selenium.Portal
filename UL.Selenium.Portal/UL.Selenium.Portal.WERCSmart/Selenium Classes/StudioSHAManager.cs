@@ -1610,6 +1610,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public string FindClientsForProduct(string productID)
+		{
+			IWebElement clients = this.containerElement.FindElement(By.XPath(".//td[@title='" + productID + "']/following-sibling::td[@aria-describedby='list_CLIENTS']"), 2);
+			return clients.Text;
+		}
+
 		public bool ConfirmUInSecondColumn(string productID)
 		{
 			IWebElement secondColumnU = this.containerElement.FindElement(By.XPath(".//td[@role='gridcell']//span[text()='" + productID + "']/../following-sibling::td[@title='UPC Update Only']"), 2);
