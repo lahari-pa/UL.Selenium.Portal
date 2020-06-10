@@ -4770,6 +4770,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return section.TryEnterText(enterText);
 		}
 
+		public bool EnterWHMISSDSDocumentDate(string text)
+		{
+			try
+			{
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='WHMIS SDS Document Date']/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					el.SendKeys(Keys.Enter);
+					return el.GetAttribute("value") == text;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
 	}
 
 	public class ProductInformation

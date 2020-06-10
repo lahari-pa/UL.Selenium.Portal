@@ -10232,5 +10232,26 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("In the Additional Product Information page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
+
+		[StepDefinition(@"I call Shared Step 100974 \(Regulatory Documents to Provide - Canada only - Upload documents > Continue\)")]
+		public void GivenICallSharedStep100974RegulatoryDocumentsToProvideCanadaOnlyUploadDocumentsContinue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Regulatory Documents to Provide Page");
+			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
+			Report.StartStep("I should see the WHMIS SDS question");
+			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
+			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.");
+			MyNewProduct.UploadPDFFile("Dual-Language WHMIS SDS, in French Canadian and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			DateTime currentDate = DateTime.Today;
+			string currentDateString = currentDate.ToString("yyyy-MM-dd");
+			MyNewProduct.InTheRegualtoryDocumentsToProvidePageIEnterValueIntoWHMISSDSDocumentDateField(currentDateString);
+			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian");
+			Report.StartStep("I upload a PDF file in the WHMIS Label section");
+			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			Report.StartStep("I click continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
+		}
 	}
 }
