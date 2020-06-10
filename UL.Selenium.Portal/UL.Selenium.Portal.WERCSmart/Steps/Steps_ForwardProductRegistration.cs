@@ -653,10 +653,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			} else if(shouldOrShouldNot.ToLower() == "should not") {
 
 				Report.IsTrue(!selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
-					"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
+					"ID: " + id + " is showing as expected", "ID: " + id + " is not showing as expected");
 
 			}
-
+	
 		}
 
 		[StepDefinition(@"In the Foward Product Registration Screen I Select the product: (.*)")]
@@ -1217,7 +1217,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"Selecting the option: {firstOption} for ID: {id}");
 			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option","Successfully selected the option");
 		}
-
 
 	}
 }

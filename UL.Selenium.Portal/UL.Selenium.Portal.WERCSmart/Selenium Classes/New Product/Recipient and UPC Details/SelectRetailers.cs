@@ -199,6 +199,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Success("All retailers in the table displayed their proper error messages");
 			return;
 		}
+
 	}
 
 	class NoRetailerWarningPopup : SeleniumBaseObject

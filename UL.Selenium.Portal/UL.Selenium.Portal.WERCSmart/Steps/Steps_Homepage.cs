@@ -364,6 +364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+
 		}
 
 		[StepDefinition(@"I click the Home navigation icon and (accept|dismiss) the alert popup")]

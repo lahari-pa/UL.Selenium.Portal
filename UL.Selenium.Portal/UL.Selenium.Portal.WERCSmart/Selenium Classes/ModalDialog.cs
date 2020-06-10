@@ -7,6 +7,7 @@ using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using UL.Automation.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -208,7 +209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2).FirstOrDefault(x => x.Text == "VALIDATE").TryClick();
 		}
 
-		public bool CheckProductInformation(string id, string productType, string productAccessCode)
+		public bool CheckProductInformationIn3rdPartyAccessCodeWindowInProductsGrid(string id, string productType, string productAccessCode)
 		{
 
 			IWebElement accessCode = this.containerElement.FindElement(By.XPath(".//div[@data-bind='html: html']"), 2);
