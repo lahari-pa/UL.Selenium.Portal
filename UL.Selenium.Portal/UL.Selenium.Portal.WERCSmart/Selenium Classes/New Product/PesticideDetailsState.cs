@@ -415,19 +415,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
-		public bool CheckTheFollowingSectionTitles(Table table)
-		{
-			foreach (TableRow row in table.Rows)
-			{
-				IWebElement section = this.containerElement.FindElement(By.XPath("//tr[@class='DarkBack'][2]//th[" + row["Section"] + "]"), 2);
-				if (section.Text != row["Column Name"])
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
+		
 
 		public bool EnterExpirationDateForStatePesticideReigstration(string date, string state)
 		{

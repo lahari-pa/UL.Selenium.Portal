@@ -2554,13 +2554,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[StepDefinition(@"I confirm that retailer ""(.*)"" (is|is not) present under the 'Destination Retailers' column in the UPC table")]
-		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string isOrIsNot, string retailer)
+		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer, string isOrIsNot)
 		{
 			List<string> displayedRetailers = new NewProduct().GetAllUPCDestinationRetailers();
 
 			if (isOrIsNot.ToLower() == "is not")
 			{
-				Report.IsTrue(displayedRetailers.Contains(retailer),
+				Report.IsTrue(!displayedRetailers.Contains(retailer),
 				$@"Retailer ""{retailer}"" is present under Destination Retailers",
 				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}");
 			}
@@ -3071,15 +3071,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
 			Report.IsTrue(pesticideDetailsStateObject.CheckIfThereIsNoErrorInThePesticideDetailsStateRegistration(), "Failed to display no error", "Successfully displayed no errors");
 		}
-
-
-		[StepDefinition(@"I check that the following sections contain the corresponding titles:")]
-		public void ThenICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
-		{
-			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
-			Report.IsTrue(pesticideDetailsStateObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
-		}
-
 
 
 		[StepDefinition(@"I set the following data: (.*) for the following state: (.*)")]

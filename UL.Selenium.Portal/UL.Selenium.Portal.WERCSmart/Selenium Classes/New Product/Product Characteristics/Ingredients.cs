@@ -1214,5 +1214,117 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return option.TryClick();
 		}
+		//Philip
+		public bool ClickTheFollowingButtonInThePopupView(string popupTitle, string buttonTitle)
+		{
+			IWebElement button = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//h4[text()='" + popupTitle + "']/../following-sibling::div[@class='modal-footer']//button[text()='" + buttonTitle + "']"), 2);
+			return button.TryClick();
+		}
+
+		public bool CheckForTheFollowingButtonsInThePopupView(string popupTitle, Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement button = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//h4[text()='" + popupTitle + "']/../following-sibling::div[@class='modal-footer']//button[text()='" + row["Button"] + "']"), 2);
+				if (button == null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckACheckboxWithTheFollowingText(string text)
+		{
+			IWebElement checkbox = this.containerElement.FindElement(By.XPath("//span[text()='" + text + "']/preceding-sibling::input"), 2);
+			return checkbox.TryCheck();
+		}
+
+		public bool ConfirmACheckboxWithTheFollowingTextExists(string text)
+		{
+			IWebElement checkbox = this.containerElement.FindElement(By.XPath("//span[text()='" + text + "']/preceding-sibling::input"), 2);
+
+			if (checkbox == null)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool CheckForTheFollowingTableColumnDataInPopupView(Table table)
+		{
+			IList<IWebElement> casNum = this.containerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[1]"), 2);
+			IList<IWebElement> name = this.containerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[2]"), 2);
+			IList<IWebElement> activeOrInert = this.containerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[3]"), 2);
+
+			var index = 0;
+
+			foreach (TableRow row in table.Rows)
+			{
+				if (casNum[index].Text != row["CAS Number"])
+				{
+					Report.Info("CAS Number did not match");
+					return false;
+				}
+				if (name[index].Text != row["Name"])
+				{
+					Report.Info("Name did not match");
+					return false;
+				}
+				if (activeOrInert[index].Text != row["Active or Inert"])
+				{
+					Report.Info("Active or Inert Number did not match");
+					return false;
+				}
+
+				index += 1;
+			}
+
+			return true;
+		}
+
+		public bool CheckForTheFollowingTableColumnTitlesInPopupView(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement title = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//th[text()='" + row["Titles"] + "']"), 2);
+				if (title == null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool ConfirmTheFollowingTextIsInThePopupView(string popupTitle, string text)
+		{
+			IList<IWebElement> textEl = this.containerElement.FindElements(By.XPath("//div[@class='modal-content']//h4[contains(text(), '" + popupTitle + "')]/../following-sibling::div//p"), 2);
+
+			foreach (IWebElement el in textEl)
+			{
+				Report.Info("Found '" + el.Text + "' expected '" + text + "'");
+				if (el.Text.Contains(text))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool ConfirmThereIsAPopupViewTitled(string popupTitle)
+		{
+			IWebElement title = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//h4[contains(text(), '" + popupTitle + "')]"), 2);
+			Report.Info("found '" + title.Text + "' expected '" + popupTitle + "'");
+			if (title.Text != popupTitle)
+			{
+				return false;
+			}
+
+			return true;
+		}
 	}
 }

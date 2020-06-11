@@ -155,7 +155,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectRetailerFromListView(string retailer)
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//span[text()='" + retailer + "']]//input"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//span[text()=\"" + retailer + "\"]]//input"), 2).TryClick();
 		}
 
 		public List<string> UnselectedRetailers()
@@ -198,6 +198,66 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			Report.Success("All retailers in the table displayed their proper error messages");
 			return;
+		}
+		//Philip
+		public bool ConfirmDropDownOptionsAreInAlphabeticalOrderForRetailer(string dropDownTitle, string retailer)
+		{
+			IList<IWebElement> options = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//label[contains(text(), '" + dropDownTitle + "')]/following-sibling::select//option"), 2);
+			List<string> optionsNames = new List<string>();
+
+			//Remove the default "Choose..." option
+			options.RemoveAt(0);
+
+			foreach (var option in options)
+			{
+				optionsNames.Add(option.Text);
+			}
+
+			optionsNames.Sort();
+
+			for (int i = 1; i < options.Count - 1; i++)
+			{
+				if (options[i].Text != optionsNames[i])
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckThatTheFollowingRetailersAreSelectedInTheRetailersPopupList(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement retailerCheckBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[text()='" + row["Retailers"] + "']/preceding-sibling::input"), 2);
+				if (retailerCheckBox.Checked())
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool SelectTheDeleteSelectedRetailersButton()
+		{
+			IWebElement deleteButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='btn delete-selected']"), 2);
+			return deleteButton.TryClick();
+		}
+
+		public bool SelectTheFollowingRetailersInTheRetailersPage(Table table)
+		{
+			foreach (TableRow row in table.Rows)
+			{
+				IWebElement checkBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[text()='" + row["Retailers"] + "']/preceding-sibling::td//input"), 2);
+				if (checkBox.TryCheck() == false)
+				{
+					return false;
+				}
+			}
+
+			return true;
 		}
 
 	}

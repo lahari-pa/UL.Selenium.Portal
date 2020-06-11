@@ -641,3 +641,43 @@ Then I confirm the following retailers are showing in the Retailer page
 | Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 | Family Dollar                                           |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128754
+
+
+#//Philip
+Scenario: [127767] Register a Cleaning Supplies - Bleach Product Type for a verification of the Products in Scope Report for Bed Bath and Beyond
+Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC804879551225
+Then I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Bleach
+Given I set the Primary Physical State option to: Liquid
+And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
+And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
+Given I set the Secondary Physical State option to: Liquid
+Given I set the Specific Gravity option to: 0.1
+Given I set the pH option to: 11.5
+Given I set the Boiling Point (in Celsius) option to: Not tested/Unknown
+Given I set the Flash Point (in Celsius) option to: None, No Flash Point
+Given I set the Select the best Water Solubility description option to: Soluble in water
+Given I click continue
+Given I click continue
+Then I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+      	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Propane       | 100     | false               | false       |            |
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Then I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+Then In the 'Select Retailers' window I select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+Given I click continue
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC804879551225, container type: Plastic Container and size: 3.5
+Then I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I click continue
+Given I click continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+Then I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
+Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
+Then I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
+Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Cleaning Supplies Product for BBB
+Then I delete the excel file saved as Products in Scope Report for BBB

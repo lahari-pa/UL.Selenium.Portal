@@ -180,5 +180,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"All of the expected retailers were selected");
 		}
 
+		//Philip
+		[StepDefinition(@"I confirm that the product names from the drop down for: (.*) for (.*) appear in alphabetical order")]
+		public void ThenIConfirmThatTheProductNamesFromTheDropDownForAppearInAlphabeticalOrder(string dropDownTitle, string retailer)
+		{
+			var selSelectRetailers = new SelectRetailers();
+			Report.IsTrue(selSelectRetailers.ConfirmDropDownOptionsAreInAlphabeticalOrderForRetailer(dropDownTitle, retailer), "Drop down options were not in alphabetical order", "Drop down options were in alphabetical order");
+		}
+
+		[StepDefinition(@"The following retailers in the Select Retailers popup list view should be selected")]
+		public void ThenTheFollowingRetailersInTheSelectRetailersPopupListViewShouldBeSelected(Table table)
+		{
+			var selSelectRetailers = new SelectRetailers();
+			Report.IsTrue(selSelectRetailers.CheckThatTheFollowingRetailersAreSelectedInTheRetailersPopupList(table), "Unexpected retailers were found checked", "All expected retailers were checked");
+		}
+
+
+		[StepDefinition(@"I click the delete icon in the Retailer page")]
+		public void ThenIClickTheDeleteIconInTheRetailerPage()
+		{
+			var selSelectRetailers = new SelectRetailers();
+			Report.IsTrue(selSelectRetailers.SelectTheDeleteSelectedRetailersButton(), "Failed to select the delete selected retailers button", "Successfully selected the delete selected retailers button");
+		}
+
+
+		[StepDefinition(@"I select the following retailers in the Retailer page")]
+		public void ThenISelectTheFollowingRetailersInTheRetailerPage(Table table)
+		{
+			var selSelectRetailers = new SelectRetailers();
+			Report.IsTrue(selSelectRetailers.SelectTheFollowingRetailersInTheRetailersPage(table), "Failed to select the following retailers", "Successfully selected the following retailers");
+		}
+
 	}
 }
