@@ -686,10 +686,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the window that opened")]
 		public void ThenCloseTheWindowThatOpened()
 		{
+			Delay.Seconds(5);
 			Report.StartStep(ReportSettings.StepCounter + " - Closing current window");
 			try
 			{
 				object mainWindowHandle = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle");
+
 				if (mainWindowHandle == null)
 				{
 					throw new Exception("No Main Window Handle found in context!");
@@ -1482,6 +1484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the current tab")]
 		public void GivenICloseTheCurrentTab()
 		{
+			Delay.Seconds(5);
 			SeleniumBrowser.CloseTabWithURL(SeleniumBrowser.GetActiveTabURL());
 		}
 

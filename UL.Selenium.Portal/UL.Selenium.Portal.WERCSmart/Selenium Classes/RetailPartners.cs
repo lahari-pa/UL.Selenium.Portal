@@ -182,7 +182,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		
 	}
 
 	class RetailPartnersDetails : SeleniumBaseObject
@@ -355,6 +354,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool Checked = checkbox.Selected;
 			return Checked;
 		}
+		public bool GetDataConsentTierOnofFSwitch(string tier)
+		{
+			IWebElement onOffSwitch = this.containerElement.FindElement(By.XPath(".//div[contains(text(),'" + tier + "')]/../following-sibling::td//span[@class='slider round']"), 2);
+			if (onOffSwitch != null)
+			{
+				return true;
+			}
+			return false;
+		}
+
 
 		public bool SaveChangesButtonShowing()
 		{

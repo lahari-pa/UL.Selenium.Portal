@@ -12,6 +12,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting.SpecFlow.Classes;
 using System;
 using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -715,7 +716,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return elem != null;
 		}
 
-
 		public class SelectProducts : ForwardProductRegistration
 		{
 			public string ID { get; set; }
@@ -1153,6 +1153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return true;
 
 			}
+
 		}
 
 	}

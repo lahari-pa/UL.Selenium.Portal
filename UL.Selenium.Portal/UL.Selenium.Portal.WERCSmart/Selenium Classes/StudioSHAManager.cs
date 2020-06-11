@@ -1587,69 +1587,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> FindColumnInUPCRetailerAndFeedPageWithTable(Table table)
 		{
-			try
+
+			List<string> columnsNotFound = new List<string>();
+			List<string> columnNamesStrings = new List<string>();
+			IList <IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+
+			foreach (var columnName in columnNames)
 			{
-				string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-				Context.AddToContext("MainWindowHandle", currentHandle);
-				ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
-				Report.Info("Looking for SHA Manager Product UPC window");
-				bool foundWindow = false;
-				foreach (string handle in allHandles)
-				{
-					Report.Info("Checking handle: " + handle);
-					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-					if (SeleniumBrowser.WebBrowser.FindElement(
-							By.XPath(".//h1[contains(text(),'WERCSmart Product ID')]"), 2) != null)
-					{
-						Report.Success("Tab was switched successfully!");
-						Report.Screenshot();
-						currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-						Context.AddToContext("SHAManagerProductUPC", currentHandle);
-						foundWindow = true;
-						break;
-					}
-				}
-
-				if (!foundWindow)
-				{
-					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
-					Report.Screenshot();
-				}
-
-				List<string> columnsNotFound = new List<string>();
-
-				foreach (TableRow row in table.Rows)
-				{
-					//needs updating because "container element" is not correct container. Move this method to same place as other upc retailer feed methods.
-					//After checking looks like is not a "class" of the UPC Tab page, all methods using seleniumBrowser, may need to update these methods later.
-					IWebElement columnName = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//th[contains(text(),'" + row["Column Name"] + "')]"), 2);
-					
-
-					if (columnName == null)
-					{
-						columnsNotFound.Add(row["Column Name"]);
-					}
-				}
-
-				return columnsNotFound;
+				columnNamesStrings.Add(columnName.Text);
 			}
 
-
-			catch (NoSuchWindowException)
+			foreach (TableRow row in table.Rows)
 			{
-				Report.Failure("Failed to switch to the SHA Manager Product UPC window!");
-				Report.Screenshot();
-				return null;
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				Report.Screenshot();
-				return null;
-
+			
+				if (!columnNamesStrings.Contains(row["Column Name"]))
+				{
+					columnsNotFound.Add(row["Column Name"]);
+				}
 			}
 
+			return columnsNotFound;
+
+		}
+
+		public string FindClientsForProduct(string productID)
+		{
+			IWebElement clients = this.containerElement.FindElement(By.XPath(".//td[@title='" + productID + "']/following-sibling::td[@aria-describedby='list_CLIENTS']"), 2);
+			return clients.Text;
 		}
 
 		public bool ConfirmUInSecondColumn(string productID)
@@ -1662,6 +1626,52 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return false;
+		}
+
+		public bool FindDataForClientsInUPCRetailerAndFeedPage(string[] clients)
+		{
+			List<string> columnsNotFound = new List<string>();
+			List<string> columnNamesStrings = new List<string>();
+			IList<IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+			IList<IWebElement> columnData = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+
+			if (columnNames.Count == 0)
+			{
+				Report.Info("No column names were fonud");
+				return false;
+			}
+
+			if (columnData.Count == 0)
+			{
+				Report.Info("No column data was fonud");
+				return false;
+			}
+
+			foreach (var columnName in columnNames)
+			{
+				columnNamesStrings.Add(columnName.Text);
+			}
+
+			foreach (string client in clients)
+			{
+
+				if (!columnNamesStrings.Contains(client))
+				{
+					Report.Info(client + " was not found");
+					return false;
+				}
+				else
+				{
+					int index = Array.FindIndex(clients, row => row.Contains(client));
+					if (columnData.ElementAt(index).Text.Length < 1)
+					{
+						Report.Info(client + " had no data");
+						return false;
+					}
+				}
+			}
+
+			return true;
 		}
 
 	}

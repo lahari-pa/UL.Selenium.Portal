@@ -518,6 +518,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I ensure the Data Consent Tier Sliders exist for the following tiers:")]
+		public void DataConsentTiersSlidersExist(Table expected)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier Sliders exist");
+			try
+			{
+				Report.Info("Ensure the Data Consent Tier Sliders exist");
+				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
+				{
+					Report.IsTrue(selRetailDetails.GetDataConsentTier("Tier " + row["Tier"]),
+						"Failed to find slider for Tier " + row["Tier"],
+						"Successfully found slider for Tier " + row["Tier"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I ensure the Data Consent Tier On/Off switch exists for the following tiers:")]
+		public void DataConsentTiersOnOffSwitchExist(Table expected)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier On/Off switch exist");
+			try
+			{
+				Report.Info("Ensure the Data Consent Tier On/Off switch exist");
+				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
+				{
+					Report.IsTrue(selRetailDetails.GetDataConsentTierOnofFSwitch("Tier " + row["Tier"]),
+						"Failed to find slider for Tier " + row["Tier"],
+						"Successfully found slider for Tier " + row["Tier"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I ensure the Data Consent Tier Sliders are set as follows:")]
 		public void DataConsentTiersSet(Table expected)
 		{
@@ -775,6 +819,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on close in the Report Download dialog")]
 		public void GivenIClickOnCloseInTheReportDownloadDialog()
 		{
+			Delay.Seconds(10);
 			Report.IsTrue(new ReportDownload().ClickClose(), "Failed to click close on Report Download modal dialog", "Successfully clicked close");
 		}
 
@@ -1205,6 +1250,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The Data Tier Details popup shows the following tabs:")]
 		public void DataTierDetailsPopUpShowsTheFollowingTabs(Table tabs)
 		{
+			Delay.Seconds(10);
 			var expectedTabs = new List<string>();
 			tabs.Rows.Cast<TableRow>().ToList().ForEach(x => expectedTabs.Add(x["Tab"]));
 			List<string> displayedTabs = new DataTierDetails().AllTabs();
@@ -2202,71 +2248,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
 		}
 
-		[StepDefinition(@"Check popup date productID: (.*) productType:(.*) productAccessCode: (.*)")]
-		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
-		{
-			RetailPartners retailPartnersObject = new RetailPartners();
-			string savedAs = productID;
-			try
-			{
-
-				if (!Context.Contains(savedAs))
-				{
-					Report.Failure("The reference: " + savedAs + " was not found in context");
-					return;
-				}
-
-				string id = "";
-
-				try
-				{
-					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-					id = productToSearch.ProductId;
-				}
-				catch (Exception)
-				{
-					//do nothing
-				}
-
-				//if we didn't get the id try a different object type
-				if (id == "")
-				{
-					try
-					{
-						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
-						id = productDetails.Id;
-					}
-					catch (Exception)
-					{
-						//do nothing
-					}
-
-				}
-
-				if (id == "")
-				{
-					try
-					{
-						id = Context.GetFromContext(savedAs).ToString();
-					}
-					catch (Exception)
-					{
-
-					}
-				}
-
-				Report.Info("ProductID: " + id + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
-				Report.IsTrue(new ModalDialog().CheckProductInformation(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
-
-			}
-			catch (Exception ex)
-			{
-
-				Report.Failure(ex.Message);
-				throw;
-			}
-
-		}
 	}
 
 

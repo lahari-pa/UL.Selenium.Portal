@@ -269,3 +269,4 @@ Scenario: [103572] Lithium Battery UN 38.3 Auto-Recertification - Update Data
 	And I Filter for your BCP Product
 	And I Confirm that your product is in Needs Your Attention status
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase103572
+
