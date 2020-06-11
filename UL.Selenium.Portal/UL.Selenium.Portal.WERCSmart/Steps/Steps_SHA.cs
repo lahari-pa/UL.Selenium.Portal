@@ -3852,13 +3852,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
 		}
 
-	
 		[StepDefinition(@"In UPC Retailer and Feed I check that the following sections contain the corresponding titles:")]
-		public void ThenICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
+		public void ThenInUPCRetailerAndFeedICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			Report.IsTrue(studioSHAManagerObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
 		}
+
 
 	}
 

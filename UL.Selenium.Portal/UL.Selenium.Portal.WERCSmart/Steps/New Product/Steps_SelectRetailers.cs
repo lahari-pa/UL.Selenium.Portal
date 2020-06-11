@@ -202,7 +202,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(selSelectRetailers.SelectTheDeleteSelectedRetailersButton(), "Failed to select the delete selected retailers button", "Successfully selected the delete selected retailers button");
 		}
 
-
 		[StepDefinition(@"I select the following retailers in the Retailer page")]
 		public void ThenISelectTheFollowingRetailersInTheRetailerPage(Table table)
 		{
