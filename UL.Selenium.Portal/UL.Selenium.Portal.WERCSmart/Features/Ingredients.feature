@@ -627,7 +627,6 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 
 
 
-	#//Philip
 @ScenarioId:9377
 	Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

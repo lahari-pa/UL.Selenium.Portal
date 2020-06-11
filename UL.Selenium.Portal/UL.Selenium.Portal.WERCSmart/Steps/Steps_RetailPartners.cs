@@ -2248,7 +2248,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
 		}
 
-		//Philip
+		
 		[StepDefinition(@"I confirm the excel file saved as: (.*) contains the following data: (.*)")]
 		public void ThenIConfirmTheExcelFileSavedAsContainsTheFollowingData(string savedAs, string data)
 		{

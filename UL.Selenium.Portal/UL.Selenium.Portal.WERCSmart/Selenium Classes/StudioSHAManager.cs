@@ -1673,7 +1673,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return true;
 		}
-		//Philip
+	
 		public bool CheckTheFollowingSectionTitles(Table table)
 		{
 			foreach (TableRow row in table.Rows)

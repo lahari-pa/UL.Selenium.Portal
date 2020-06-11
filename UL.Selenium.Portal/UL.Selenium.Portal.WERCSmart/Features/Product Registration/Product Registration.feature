@@ -643,7 +643,6 @@ Then I confirm the following retailers are showing in the Retailer page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128754
 
 
-#//Philip
 Scenario: [127767] Register a Cleaning Supplies - Bleach Product Type for a verification of the Products in Scope Report for Bed Bath and Beyond
 Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)

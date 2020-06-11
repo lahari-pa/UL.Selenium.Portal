@@ -1214,7 +1214,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return option.TryClick();
 		}
-		//Philip
+	
 		public bool ClickTheFollowingButtonInThePopupView(string popupTitle, string buttonTitle)
 		{
 			IWebElement button = this.containerElement.FindElement(By.XPath("//div[@class='modal-content']//h4[text()='" + popupTitle + "']/../following-sibling::div[@class='modal-footer']//button[text()='" + buttonTitle + "']"), 2);

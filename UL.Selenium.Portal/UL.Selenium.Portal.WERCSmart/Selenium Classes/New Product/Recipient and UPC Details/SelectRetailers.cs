@@ -199,7 +199,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Success("All retailers in the table displayed their proper error messages");
 			return;
 		}
-		//Philip
+
 		public bool ConfirmDropDownOptionsAreInAlphabeticalOrderForRetailer(string dropDownTitle, string retailer)
 		{
 			IList<IWebElement> options = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//label[contains(text(), '" + dropDownTitle + "')]/following-sibling::select//option"), 2);

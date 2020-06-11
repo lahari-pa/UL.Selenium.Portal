@@ -208,8 +208,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 
 
-#//Philip
-Scenario: [philip1234] Select Retailers - Removing Retailer(s) Selected
+Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -253,7 +252,7 @@ And I confirm that retailer "CV" is not present under the 'Destination Retailers
 And I confirm that retailer "DG" is not present under the 'Destination Retailers' column in the UPC table
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase1234
 
-#//Philip
+
 @ScenarioId:9378
 Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 

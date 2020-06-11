@@ -3852,7 +3852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
 		}
 
-		//Philip
+	
 		[StepDefinition(@"In UPC Retailer and Feed I check that the following sections contain the corresponding titles:")]
 		public void ThenICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
 		{

@@ -875,7 +875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.CheckTopSearchfieldDropdownItemsCASNumber(casNumber), "The top result in the seachfields dropdown item did not have the CAS number, " + casNumber, "The top result in the seachfields dropdown item did have the CAS number, " + casNumber);
 		}
 
-		//Philip
+		
 		[StepDefinition(@"In the popup view with the following title: (.*) I click the (.*) button")]
 		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
 		{

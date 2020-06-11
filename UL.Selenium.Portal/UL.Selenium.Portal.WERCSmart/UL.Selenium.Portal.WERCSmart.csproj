@@ -413,8 +413,6 @@
     </None>
     <None Include="Features\NewProduct.feature">
     </None>
-    <None Include="Features\Philip\SpecFlowFeature1.feature" />
-    <None Include="Features\Philip\Temp.feature" />
     <None Include="Features\Product Registration\Batteries.feature" />
     <None Include="Features\NotIncludedGeneralTests.feature" />
     <None Include="Features\Product Registration\Distributor.feature">

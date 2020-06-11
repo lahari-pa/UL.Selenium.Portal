@@ -180,7 +180,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"All of the expected retailers were selected");
 		}
 
-		//Philip
 		[StepDefinition(@"I confirm that the product names from the drop down for: (.*) for (.*) appear in alphabetical order")]
 		public void ThenIConfirmThatTheProductNamesFromTheDropDownForAppearInAlphabeticalOrder(string dropDownTitle, string retailer)
 		{
