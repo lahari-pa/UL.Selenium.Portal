@@ -20,12 +20,6 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.Selenium.Functions;
 using UL.Automation.TReVor.Classes;
-using System.IO;
-using Excel = Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Core;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
-
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
