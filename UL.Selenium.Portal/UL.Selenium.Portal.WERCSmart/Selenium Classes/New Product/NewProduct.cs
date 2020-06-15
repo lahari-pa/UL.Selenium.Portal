@@ -3161,7 +3161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
 
-			if (section == "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations."|| section== "Product has been granted an Alternative Control Plan")
+			if (section.Contains("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations")|| section== "Product has been granted an Alternative Control Plan")
 			{
 
 				var elsFound = this.containerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
