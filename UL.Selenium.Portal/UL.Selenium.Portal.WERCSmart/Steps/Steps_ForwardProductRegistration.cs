@@ -599,9 +599,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClickAddCaseUPCsButtonUnderSelectUPCsTab()
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
-			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(),
-							"Failed to click the Add UPC button!",
-							"Successfully clicked the Add UPC button");
+			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(),"Failed to click the Add UPC button!",	"Successfully clicked the Add UPC button");
 		}
 
 		[StepDefinition(@"I click the Add To No Retailer button under the Select UPCs tab")]
