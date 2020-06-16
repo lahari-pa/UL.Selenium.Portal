@@ -3102,6 +3102,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
+		[StepDefinition(@"I check that the input field with label: (.*) has the following text: (.*)")]
+		public void ICheckThatTheInputFieldWithLabelHasTheFollowingText(string fieldName, string text)
+		{
+			Report.IsTrue(new NewProduct().CheckInputFieldText(fieldName, text), "The input field text was not as expected", "The input field text was as expected");
+		}
+
+		[StepDefinition(@"I check that the input field with label: (.*) has the following placeholder: (.*)")]
+		public void ICheckThatTheInputFieldWithLabelHasTheFollowingPlaceholder(string fieldName, string placeholder)
+		{
+			Report.IsTrue(new NewProduct().CheckInputFieldPlaceholder(fieldName, placeholder), "The input field placeholder was not as expected", "The input field placeholder was as expected");
+		}
+
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

@@ -4792,6 +4792,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public bool CheckInputFieldText(string fieldName, string text) {
+		
+			IWebElement el = this.containerElement.FindElement(By.XPath("//label[text()='" + fieldName + "']/../following-sibling::div//input"), 2);
+			if (el.Text == text)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool CheckInputFieldPlaceholder(string fieldName, string placeholder)
+		{
+
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='" + fieldName + "']/../following-sibling::div//input[@placeholder='" + placeholder + "']"), 2);
+			if (el != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 	}
 
 	public class ProductInformation

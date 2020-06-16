@@ -52,7 +52,22 @@ Given I set 'Prop65' to: No
 Given I click continue
 And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 And I click continue
-And I click continue
+#Then I check that the input field with label: Formula Name for the WERCSmart Ingredient Directory has the following text: Raw materialAnd I should see following statement: Provide the name(s) to be used to identify the formula
+Then I set the Formula Name for the WERCSmart Ingredient Directory field to: -
+Then I set the Formula Name for the WERCSmart Ingredient Directory field to: Raw material
+
+And I should see following statement: Provide Public Name(s) of the formula you're registering. This will be available to the Supplier to select for your ingredient when the ingredient is indicated to be Publicly Available. Public Names are typically on a products label, website or other information available to the general public.
+And I should see following statement: Public Name 1
+And I should see following statement: Public Name 2
+And I should see following statement: Public Name 3
+And I should see following statement: For ingredients used in cleaning products its Business-to-Consumer name must comply with the requirements of the California Cleaning Product Right to Know Act. Manufacturer must use a name that is only as generic as necessary to protect the confidential identity of the ingredient. In developing the generic name, the manufacturer must use the generic name framework provided by the Federal Environmental Protection Agency (EPA) guidance for the Toxic Substances Control Act (TSCA) Confidential Inventory.
+And I should see following statement: Business to Consumer Name
+Then I check that the input field with label: Business to Consumer Name has the following placeholder: Business-to-Consumer Name (Generic Ingredient Name)
+Then I set the Business to Consumer Name field to: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+Then I click continue 
+And Business to Consumer Name should be showing the error messages:  Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+Then I set the Business to Consumer Name field to: Test
+And Business to Consumer Name should not be showing the error messages:  Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I click continue
 And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 And I should see the Sustainability Page

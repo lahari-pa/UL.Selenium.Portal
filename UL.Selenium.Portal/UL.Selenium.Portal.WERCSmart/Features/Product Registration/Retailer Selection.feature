@@ -208,6 +208,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 
 
+@ScenarioId:9399
 Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
