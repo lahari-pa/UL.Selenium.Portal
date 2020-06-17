@@ -34,13 +34,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"The selected retailers on the Retailer page should be:")]
-		public void SelectedRetailersShouldBe(Table retailers)
+		[StepDefinition(@"The selected retailers on the Retailer page (should|should not) be:")]
+		public void SelectedRetailersShouldBe(string shouldOrShouldNot, Table retailers)
 		{
 			var expectedRetailers = new List<string>();
 			retailers.Rows.Cast<TableRow>().ToList().ForEach(x => expectedRetailers.Add(x["Retailer"]));
 			var actualRetailers = new Retailer().SelectedRetailers();
-			Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
+
+			if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				Report.IsTrue((!actualRetailers.All(expectedRetailers.Contains)), "The selected retailers did match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers did not match as expected: " + string.Join(", ", actualRetailers));
+			} else
+			{
+				Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
+			}
 		}
 
 		[StepDefinition(@"I click 'Add Retailers' in the Retailers page")]

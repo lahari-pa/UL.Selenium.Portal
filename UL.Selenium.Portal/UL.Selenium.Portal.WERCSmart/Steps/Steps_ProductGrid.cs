@@ -1172,7 +1172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
 			int N = 4;
 			int Q = 2;
-			for (int i = 0; i < N - 1; i++)
+			for ( int i = 0; i < N - 1; i++)
 			{
 				// The filter at index i and j are the targets for this action
 				// Fix i and iterate j from i + 1 to the end then repeat for i++ etc
@@ -1209,7 +1209,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							else
 							{
 								options = selMoreFilters.Options(filterType);
-							}
+							}				
+							
 							string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 							switch (filterType)
 							{

@@ -2477,6 +2477,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return true;
 		}
 
+		public bool CheckFileNameForSectionAndType(string label, string section, string pdffileName)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]/..//div[@class='ws-dropzone-container']//span"),2);
+		
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.Text == pdffileName;
+
+
+		}
+
 		public string GetDocumentTypeForSection(string section)
 		{
 			try
@@ -3147,7 +3161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
 
-			if (section == "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations."|| section== "Product has been granted an Alternative Control Plan")
+			if (section.Contains("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations")|| section== "Product has been granted an Alternative Control Plan")
 			{
 
 				var elsFound = this.containerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
@@ -3547,6 +3561,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			var linksText = new List<string>();
 			linksText = this.containerElement.FindElements(By.XPath(".//a[@class='link-publication']")).Select(x => x.Text).ToList();
 			return linksText;
+		}
+
+		public string GetRegulatoryInformation3Statement()
+		{
+			var statementEl = this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-12']//div[@data-bind='html: field.field']//strong"), 2);
+			return statementEl.Text;
 		}
 
 		public bool AddDocument(string documentName, string language)

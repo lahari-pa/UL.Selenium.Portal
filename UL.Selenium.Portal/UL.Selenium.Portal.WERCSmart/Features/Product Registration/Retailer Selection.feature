@@ -208,6 +208,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 
 
+@ScenarioId:9399
 Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -223,7 +224,7 @@ Given I select the following retailers in the Select Retailers popup list view:
 | CVS                   |
 | Dollar General        |
 | Family Dollar         |
-| Dick's Sporting Goods |
+#| Dick's Sporting Goods |
 | Amazon                |
 | Best Buy              |
 Given I click Done in the Select Retailers popup
@@ -232,7 +233,7 @@ And The selected retailers on the Retailer page should be:
 | CVS                   |
 | Dollar General        |
 | Family Dollar         |
-| Dick's Sporting Goods |
+#| Dick's Sporting Goods |
 | Amazon                |
 | Best Buy              |
 Then I select the following retailers in the Retailer page
@@ -240,8 +241,12 @@ Then I select the following retailers in the Retailer page
 | CVS            |
 | Dollar General |
 Then I click the delete icon in the Retailer page
+And The selected retailers on the Retailer page should not be:
+| Retailer              |
+| CVS                   |
+| Dollar General        |
 Given I click 'Add Retailers' in the Retailers page
-Then The following retailers in the Select Retailers popup list view should be selected
+Then The following retailers in the Select Retailers popup list view should not be selected
 | Retailers      |
 | CVS            |
 | Dollar General |

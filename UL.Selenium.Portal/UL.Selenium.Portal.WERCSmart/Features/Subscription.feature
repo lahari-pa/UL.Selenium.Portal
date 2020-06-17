@@ -20,6 +20,7 @@
 
 Feature: Subscription
 
+@ScenarioId:9386
 Scenario: [63297] Add subscription to a new supplier through data entry
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: TC63297User with the following parameters:

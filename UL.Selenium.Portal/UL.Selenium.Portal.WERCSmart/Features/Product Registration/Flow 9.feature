@@ -168,8 +168,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Vitamin E
-	Given I set 'Prop65' to: No
-	Then I click continue
+	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Then I should see the Regulatory Documents to Provide Page
@@ -185,7 +184,9 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then I should see the Additional Documents to Provide Page
 	Then I see the following sections
 		| Section               |
+		| Upload Physical Data-related Documents (Optional) |
 		| Upload SDS (Optional) |
+		| Toxicity Characteristics Leaching Procedure (TCLP) |
 	Given I click Continue and should not see an error message
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63325
@@ -229,18 +230,7 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplement for Infants - Liquid
 	Then I save the product information as: TestCase58075
-	Given I set the Primary Physical State option to: Liquid
-	And I check the 'I do not have exact' checkbox for field: pH
-	And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-	And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
-	Given I set the Secondary Physical State option to: Liquid
-	Given I set the Specific Gravity option to: 20
-	Given I set the pH option to: 7.1 - 9.9
-	Given I set the Boiling Point (in Celsius) option to: 20.1C (68.1F) - 35C (95F)
-	Given I set the Flash Point (in Celsius) option to: >93C and <=815C
-	Given I set the Flash Point Testing Method Used option to: Closed cup method
-	Given I set the Select the best Water Solubility description option to: 100g/100ml
-	Given I click continue
+	Then I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -268,18 +258,7 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplements for Domesticated Animals
 	Then I save the product information as: TestCase58089
-	Given I set the Primary Physical State option to: Liquid
-	And I check the 'I do not have exact' checkbox for field: pH
-	And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-	And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
-	Given I set the Secondary Physical State option to: Liquid
-	Given I set the Specific Gravity option to: 20
-	Given I set the pH option to: 7.1 - 9.9
-	Given I set the Boiling Point (in Celsius) option to: 20.1C (68.1F) - 35C (95F)
-	Given I set the Flash Point (in Celsius) option to: >93C and <=815C
-	Given I set the Flash Point Testing Method Used option to: Closed cup method
-	Given I set the Select the best Water Solubility description option to: 100g/100ml
-	Given I click continue
+	Then I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |

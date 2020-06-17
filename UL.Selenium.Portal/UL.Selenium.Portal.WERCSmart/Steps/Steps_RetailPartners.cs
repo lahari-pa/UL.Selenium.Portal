@@ -2274,7 +2274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-				Report.Success("Excel file did not contained the following data: " + data);
+				Report.Failure("Excel file did not contain the following data: " + data);
 			}
 		}
 

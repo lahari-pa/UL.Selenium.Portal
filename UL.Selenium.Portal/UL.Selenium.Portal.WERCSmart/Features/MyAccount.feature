@@ -41,7 +41,6 @@ Scenario: [63514] Add and Deactivate a New User from the User Grid
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I click on My Account
-	Then I call Shared Step 63511 (Create New User via User Grid)
 	Then I create a new email address
 	Then I add a new user with the following information
 		| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |

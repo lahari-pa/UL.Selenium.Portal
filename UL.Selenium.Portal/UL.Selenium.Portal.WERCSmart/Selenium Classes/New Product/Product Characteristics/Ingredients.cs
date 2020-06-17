@@ -1301,7 +1301,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmTheFollowingTextIsInThePopupView(string popupTitle, string text)
 		{
-			IList<IWebElement> textEl = this.containerElement.FindElements(By.XPath("//div[@class='modal-content']//h4[contains(text(), '" + popupTitle + "')]/../following-sibling::div//p"), 2);
+			IList<IWebElement> textEl = this.containerElement.FindElements(By.XPath("//div[@class='modal-content']//h4[contains(text(), \"" + popupTitle + "\")]/../following-sibling::div//p"), 2);
 
 			foreach (IWebElement el in textEl)
 			{
