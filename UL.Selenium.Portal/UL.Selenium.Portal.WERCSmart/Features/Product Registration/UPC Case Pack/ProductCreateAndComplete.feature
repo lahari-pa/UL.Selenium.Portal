@@ -107,6 +107,7 @@ Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87914 and its status is: Completed
 
 @tfs_design
+@ScenarioId:9406
 Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to completed
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
