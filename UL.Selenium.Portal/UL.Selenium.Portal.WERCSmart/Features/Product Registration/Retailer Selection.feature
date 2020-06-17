@@ -224,7 +224,7 @@ Given I select the following retailers in the Select Retailers popup list view:
 | CVS                   |
 | Dollar General        |
 | Family Dollar         |
-#| Dick's Sporting Goods |
+| Dick's Sporting Goods |
 | Amazon                |
 | Best Buy              |
 Given I click Done in the Select Retailers popup
@@ -233,7 +233,7 @@ And The selected retailers on the Retailer page should be:
 | CVS                   |
 | Dollar General        |
 | Family Dollar         |
-#| Dick's Sporting Goods |
+| Dick's Sporting Goods |
 | Amazon                |
 | Best Buy              |
 Then I select the following retailers in the Retailer page
