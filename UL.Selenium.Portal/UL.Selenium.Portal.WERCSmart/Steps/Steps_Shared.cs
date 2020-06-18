@@ -10280,8 +10280,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 
 		}
 
-		[StepDefinition(@"I call Shared Step 57713 \(Regulatory Information 3 - Nutritional Category\)")]
-		public void GivenICallSharedStep57713RegulatoryInformation3NutritionalCategory()
+		[StepDefinition(@"I call Shared Step 132473 \(Regulatory Information 3 - Nutritional Category\)")]
+		public void GivenICallSharedStep132473RegulatoryInformation3NutritionalCategory()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -10313,7 +10313,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I should see the Additional Documents to Provide screen");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Documents to Provide");
 			MyNewProduct.ThenFieldExists("OSHA-compliant Safety Data Sheet (Optional)");
-			MyNewProduct.ThenFieldExists("Upload Full Product Label (required)(For private label products please upload a generic label that is not retailer-specific.)");
+			MyNewProduct.ThenFieldExists("Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)");
 
 			//new NewProduct().SectionExists("Upload Full Product Label (required)");
 

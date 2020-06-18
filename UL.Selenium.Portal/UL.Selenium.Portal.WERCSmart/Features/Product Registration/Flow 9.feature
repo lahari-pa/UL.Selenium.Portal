@@ -252,7 +252,7 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	# Added in 57637 to make test run. Consult Aaron (WERCS)
 	#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Then I call Shared Step 57713 (Regulatory Information 3 - Nutritional Category)
+	Then I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58075, container type: Plastic Container and size: 100
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
