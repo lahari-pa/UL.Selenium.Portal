@@ -321,7 +321,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 		| Formaldehyde  | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
 	And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
 	Given in the New Product page I click Continue

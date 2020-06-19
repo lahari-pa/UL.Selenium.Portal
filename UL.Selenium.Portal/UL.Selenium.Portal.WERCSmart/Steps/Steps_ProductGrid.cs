@@ -2141,6 +2141,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"In The products Grid I Wait for the Retailers Popup to (appear|disappear)")]
+		public void InTheProductsGridIWaitForRetailersPopupToAppearOrDisappear(string status)
+		{
+			
+			switch (status)
+			{
+				case "appear":
+					Report.IsTrue(new ProductsGrid().WaitForRetailerPopupToBeDisplayed(), "The retailers popup was not displayed when it was expected to be!","The retailers popup was displayed as expected");
+					return;
+				case "disappear":
+					Report.IsTrue(new ProductsGrid().WaitForRetailerPopupToNotBeDisplayed(), "The retailers popup was displayed when it was not expected to be!","The retailers popup was not displayed as expected");
+					return;
+				default:
+					Report.Info("The parameter did not match expected: 'appear' or 'disappear'");
+					return;
+			}
+		}
+
 		[StepDefinition(@"I click the products grid container")]
 		public void ClickProductsGridContainer()
 		{

@@ -395,8 +395,10 @@ Scenario: [85275] Select All - Popup closes
 	And I navigate to the home page
 	And I search for the product saved as: TestCase85275
 	And I click 'All' under Retailers for the first product returned
+	And In The products Grid I Wait for the Retailers Popup to appear
 	Then I confirm the Retailers popup is displayed
 	And I click the products grid container
+	And In The products Grid I Wait for the Retailers Popup to disappear
 	Then I confirm the Retailers popup is not displayed
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85275
 

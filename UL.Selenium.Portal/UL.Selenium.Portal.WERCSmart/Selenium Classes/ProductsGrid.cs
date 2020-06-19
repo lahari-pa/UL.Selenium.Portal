@@ -10,6 +10,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using OpenQA.Selenium.DevTools.DOM;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -1014,6 +1015,54 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			// Use the ID to find the popup container (if it exists)
 			IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
 			return popover != null;
+		}
+
+		public bool WaitForRetailerPopupToBeDisplayed()
+		{
+			Report.Info("Checking if Retailer popup is displayed");
+			// The ID is generated every time the popup is opened. Fetch from the button's attribute (only exists when popup is open)
+			string popoverId = this.containerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
+			if (popoverId.IsNullOrEmpty())
+			{
+				return false;
+			}
+			Report.Info("Popup id is: " + popoverId);
+			// Use the ID to find the popup container (if it exists)
+			int x = 0;
+			bool popupdisplayed = false;
+			while (x<30&& popupdisplayed==false)
+			{
+				IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
+				popupdisplayed = popover != null;
+				x++;
+				Delay.Seconds(2);
+			}
+			return popupdisplayed;
+			
+		}
+
+		public bool WaitForRetailerPopupToNotBeDisplayed()
+		{
+			Report.Info("Checking if Retailer popup is displayed");
+			// The ID is generated every time the popup is opened. Fetch from the button's attribute (only exists when popup is open)
+			string popoverId = this.containerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
+			if (popoverId.IsNullOrEmpty())
+			{
+				return false;
+			}
+			Report.Info("Popup id is: " + popoverId);
+			// Use the ID to find the popup container (if it exists)
+			int x = 0;
+			bool popupdisplayed = false;
+			while (x < 30 && popupdisplayed == false)
+			{
+				IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
+				popupdisplayed = popover == null;
+				x++;
+				Delay.Seconds(2);
+			}
+			return popupdisplayed;
+
 		}
 
 		public void ClickContainer()
