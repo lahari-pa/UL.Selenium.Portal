@@ -983,6 +983,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
 			Context.AddToContext(savedAs, prodIDs);
+			if(prodIDs.Count()==0)
+			{
+				Report.Failure("There was no products IDs found to be displayed");
+			}
 		}
 
 		[StepDefinition(@"I navigate to the WERCSmart site")]

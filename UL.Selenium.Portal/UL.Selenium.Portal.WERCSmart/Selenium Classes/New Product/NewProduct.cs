@@ -2479,8 +2479,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckFileNameForSectionAndType(string label, string section, string pdffileName)
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]/..//div[@class='ws-dropzone-container']//span"),2);
-		
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[child::label[contains(text(),'" + label + "')]]/following-sibling::div//span[text()='" + section + "' and not(contains(@style, 'display: none;'))]/..//div[@class='ws-dropzone-container']//span"), 2);
+
 			if (el == null)
 			{
 				return false;
@@ -2975,6 +2975,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 				IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 2);
+
+
+
+				if (el == null)
+				{
+					string backupXPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label) and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label) and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+							@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label) and @type='text'] | " +
+							@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label)] | " +
+							@"//div[@class='dropzone' and (.//ancestor::div[starts-with(@class,'form-group')]//label)] | " +
+							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+					List<IWebElement> backupElList = this.containerElement.FindElements(By.XPath(backupXPath), 2).ToList();
+					List<IWebElement> labelElementsFromXpath = new List<IWebElement>();
+					foreach (var thing in backupElList)
+					{
+						IWebElement currentLableEL = thing.FindElement(By.XPath(".//ancestor::div[starts-with(@class,'form-group')]//label"), 2);
+						labelElementsFromXpath.Add(currentLableEL);
+					}
+					//This handles the new Line. If the devops test case does not space seperate when there is a new line the below will not match.
+					//If issues arise could change below to and "or" and the replace with "" instead.
+					el = labelElementsFromXpath.FirstOrDefault(x => x.Text.Replace("\r\n", " ").Contains(section));
+				}
 				return el != null && el.Displayed;
 			}
 			catch (Exception)
@@ -2982,6 +3004,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
+
 
 		public bool OptionExists(string section, string value)
 		{
