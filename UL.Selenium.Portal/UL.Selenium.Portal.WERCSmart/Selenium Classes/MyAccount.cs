@@ -1211,6 +1211,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return tooRecentPopupClose.TryClick();
 		}
 
+		public bool SearchForUserSavedAs()
+		{
+			IWebElement searchBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='userSearch']"), 2);
+			IWebElement searchButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='userSearch']/following-sibling::span"), 2);
+
+			string email = Context.GetFromContext("CurrentEmail").ToString();
+
+			searchBar.TryEnterText(email);
+			searchButton.TryClick();
+			Delay.Seconds(5);
+
+			IList<IWebElement> userEmails = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='user-accounts-grid']//td[@data-bind='text: Email']"), 2);
+			string[] userEmailArr = new string[userEmails.Count];
+
+			for (int i = 0; i < userEmails.Count; i++)
+			{
+				userEmailArr[i] = userEmails[i].Text;
+			}
+
+			for (int i = 0; i < userEmailArr.Count(); i++)
+			{
+				if (userEmailArr[i] == email)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 	}
 
 	class MyAccount_CompanyInfo : BaseObject

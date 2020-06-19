@@ -1737,6 +1737,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		
+		[StepDefinition(@"I search for user with email")]
+		public void ThenISearchForUserWithEmailSaved()
+		{
+			MyAccount MyAccountObject = new MyAccount();
+			Report.IsTrue(MyAccountObject.SearchForUserSavedAs(), "Failed to find user with email", "Successfully found user with email");
+		}
+
+
 	}
 }

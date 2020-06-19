@@ -68,7 +68,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I click the Publicly Disclosed checkbox for ingredient: Aqua
 	Given I confirm there are 1 Publicly Disclosed ingredients in the Total section
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
-
+	
 @ScenarioId:671
 Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -90,7 +90,7 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I click continue
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
-	Given I call Shared Step 60567 (Upload Product Label only)
+	Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
@@ -206,7 +206,9 @@ Scenario: [58091] Latex Gloves - RU000151
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Polyisoprene  | 90      | false               | false       |            |
 		| Ethanol       | 10      | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
+
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58091, container type: Plastic Container and size: 37
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -239,11 +241,10 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 		| Citric acid   | 25      | false               | false       |            |
 		| Vitamin E     | 5       | false               | false       |            |
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I set the Refer to your Product Label option to: None of the Above
-	Given I click continue
+	Given I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58075, container type: Plastic Container and size: 100
-	Given I call Shared Step 60567 (Upload Product Label only)
+	Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58075. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I navigate to the home page
@@ -267,11 +268,10 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 		| Citric acid   | 25      | false               | false       |            |
 	# Added in 57637 to make test run. Ask Wercs testers
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I set the Refer to your Product Label option to: None of the Above
-	Given I click continue
+	Given I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Petco
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58089, container type: Plastic Container and size: 100
-	Given I call Shared Step 60567 (Upload Product Label only)
+	Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58089. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I navigate to the home page

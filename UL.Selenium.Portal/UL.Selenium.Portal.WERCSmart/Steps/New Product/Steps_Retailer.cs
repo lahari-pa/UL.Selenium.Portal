@@ -43,7 +43,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			if (shouldOrShouldNot.ToLower() == "should not")
 			{
-				Report.IsTrue((!actualRetailers.All(expectedRetailers.Contains)), "The selected retailers did match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers did not match as expected: " + string.Join(", ", actualRetailers));
+				Report.IsTrue((!actualRetailers.All(expectedRetailers.Contains)), "The selected retailers did match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers
+
+					), " The selected retailers did not match as expected: " + string.Join(", ", expectedRetailers));
 			} else
 			{
 				Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
