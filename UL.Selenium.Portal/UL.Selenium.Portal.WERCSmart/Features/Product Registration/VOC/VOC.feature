@@ -32,7 +32,6 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 	And I should see the following Voc percent for each state:
 		| State           | Regulation            | VOC Value | State VOC Threshold | Message                          |
 		| Connecticut     | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Washington D.C. | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Delaware        | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Illinois        | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Indiana         | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
