@@ -1703,11 +1703,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("TReVor user does exist");
 				}
 
-				if (Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
+				//if (Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword), "Not able to update password in TReVor", "Successfully updated password in TReVor"))
+				TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, finalPassword);
+				TestUsers.RefreshUsers();
+				var userList = TReVorSettings.TReVor.CacheFunctions.GetTestUsers();
+				var foundUser = userList.FirstOrDefault(x => x.TestUserId == user.TestUserId);
+				string branch = TReVorSettings.SoftwareBranch;
+				user = TestUsers.GetUserSavedAs(foundUser.SavedAs, "3", branch);
+				string userpass = user.Password;
+
+				if (userpass == finalPassword)
 				{
+
+					Report.Success("Successfully updated password in TReVor");				
+					
 					TestUsers.RefreshUsers();
 					user.Password = finalPassword;
 				}
+				else
+				{
+					Report.Failure("Not able to update password in TReVor");
+				}
+				
 				TestUsers.RefreshUsers();
 
 			}
