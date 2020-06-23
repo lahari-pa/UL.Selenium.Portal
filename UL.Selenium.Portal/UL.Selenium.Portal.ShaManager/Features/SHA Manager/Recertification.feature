@@ -59,14 +59,20 @@ Scenario: [51296] Product in Assigned status - add to recertification
 	#And I If you are using a ULSC registered supplier you will see the Re-Import data from ULSC services page - Select No, continue editing data and click Save
 	#And I The Product Type step is shown
 	And In the New Product page I click tab: Review and Submit
-	And in the New Product page I click section: Safety Data Sheet Authoring - Additional Data (Optional)
+
+	Then I click the page heading: Safety Data Sheet Authoring - Additional Data (Optional)
+	#And in the New Product page I click section: Safety Data Sheet Authoring - Additional Data (Optional)
+
 	And I set the Appearance field to: Brown
 	And I set the Odor field to: Banana
 	And I set the Odor Threshold field to: Not applicable
 	And I set the Partition Coefficient field to: 5
 	And I click Save in The Product Page
 	#And in the New Product page I click Continue
-	And in the New Product page I click section: Data Acceptance
+
+	Then I click the page heading: Data Acceptance
+	#And in the New Product page I click section: Data Acceptance
+
 	#And I Confirm no errors are shown
 	And In the Data Acceptance page I click on the Accept button
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed

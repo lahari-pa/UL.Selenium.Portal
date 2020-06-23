@@ -334,7 +334,15 @@ Scenario: [56920] Your Supplier IDs - Actions - Deactivate
 	And I select the retailer: O'Reilly
 	And I confirm the Retailer Details Page has loaded
 	#And I In the Supplier ID table find the Supplier ID 56920x where x = 1 for O'Reilly, 2 for Sears, 3 for Wal-Mart
-	And I find the Supplier ID for O'Reilly in the SupplierID table and save as supplierID56920
+	Then For Retailer: O'Reilly If the supplier ID: 56920x is not found In the Supplier Table I add it with the first option in the Company or Brand Name field.
+	Given I navigate to the landing page
+	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	And I click the Retail Partners icon in the Navigation Pane
+	And I select the retailer: O'Reilly
+	And I confirm the Retailer Details Page has loaded
+	#And I find the Supplier ID for O'Reilly in the SupplierID table and save as supplierID56920
+	Then For retailer: O'Reilly I confirm the the supplier ID: 56920x is found in the supplier ID Table and save it as: supplierID56920
 	And I Confirm the Is Active column for SupplierID saved as supplierID56920 shows a green check mark
 	And I call Shared Step 57621 - Supplier ID table > Select Deactivate - Confirm Supplier ID Is set to Inactive for supplierID saved as supplierID56920
 	#And [Shared Step 57319 - Database Check - Find t_vendor Is_active records for Specific Supplier and Retailer]
