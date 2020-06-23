@@ -557,7 +557,7 @@ And I call Shared Step 57500 (The Product- Enter name, select product type - Con
 And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 50
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-And I set the Flash Point (in Celsius) field to: >60C and <93C
+And I set the Flash Point (in Celsius) field to: >60C and <=93C
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option                   |
 | Closed cup method        |
@@ -614,7 +614,7 @@ And I call Shared Step 57500 (The Product- Enter name, select product type - Con
 And I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH)
 And I set the Boiling Point (in Celsius) field to: 80
 And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-And I set the Flash Point (in Celsius) field to: >=93C and <=815C
+And I set the Flash Point (in Celsius) field to: >93C and <=815C
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option                   |
 | Closed cup method        |
@@ -639,7 +639,7 @@ And I select option: Shipping fully regulated under section: Select all modes of
 And I click continue
 And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
 And section: UN Number is highlighed in red indicating an error
-And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (93C - greater than 60C) must not be used with Hazard Class 3
+And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (94C - greater than 60C) must not be used with Hazard Class 3
 And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29

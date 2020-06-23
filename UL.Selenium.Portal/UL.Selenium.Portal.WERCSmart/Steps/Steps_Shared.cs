@@ -715,16 +715,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Electronic Equipment");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path")]
+		[StepDefinition(@"I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path")]
 		public void GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep(
 				"I confirm the Label Information section on the Regulatory Information 3 page contains a link for: OTC Drug Facts Label (may including Active Ingredient)");
-			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains(
-				"OTC Drug Facts Label (may including Active Ingredient)");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("OTC Drug Facts Label (may including Active Ingredient)");
 			Report.StartStep("I set the Refer to your Product Label option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Refer to your Product Label", "None of the Above");
 			Report.StartStep("In the Regulatory Information 3 page I click Continue");
@@ -1199,8 +1197,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "20.1C (68.1F) - 35C (95F)");
 			Report.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
 			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			Report.StartStep("I set the Flash Point (in Celsius) field to: >=23C and <38C");
-			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=93C and <=815C");
+			Report.StartStep("I set the Flash Point (in Celsius) field to: >=93C and <=815C");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">93C and <=815C");
 			Report.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			Report.StartStep("I set the Select the best Water Solubility description field to: 100g/100ml");
@@ -1382,8 +1380,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60931 \(Additional Documents to Provide - Exemption - Special Permit - Product Label\)")]
+		[StepDefinition(@"I call Shared Step 60931 \(Additional Documents to Provide - Exemption - Special Permit - Product Label\)")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_SpecialPermit_ProductLabel()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -1423,6 +1420,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				"I set the Amount of VOC content as weight percentage of the total formula field to: 50");
 			MyNewProduct.SetTheSectionOptionTo("Amount of VOC content as weight percentage of the total formula", "50");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compounds (VOC)");
+			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
+			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 		}
 
 		[StepDefinition(
@@ -4758,7 +4757,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			}
 
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 
 		}
 
@@ -4866,7 +4866,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 			new Steps_Studio().ISetTheAuthoringCompleteCodeToNGHS();
 			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
 			// Do this by double clicking on the graphic and selecting the green check mark graphic from the available list and click save
@@ -5717,7 +5718,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 		}
 
 		[StepDefinition(
@@ -8079,11 +8081,15 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Pesticide Details - U.S. Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Pesticide Details - U.S.");
-			Report.StartStep(
-				"I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product has an Environmental Protection Agency (EPA) Registration Number", "No");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Pesticide Details - U.S.");		
+
+			Report.StartStep("I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has an Environmental Protection Agency (EPA) Registration Number", "No");
+
+			Report.StartStep("I set the Product has a State Registration option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has a State Registration", "No");
+
+
 			Report.StartStep("I select the first option in section: Select the applicable exemption");
 			MyStepsNewProduct.SelectFirstOptionInSection("Select the applicable exemption");
 			Report.StartStep("In the Pesticide Details - U.S. page I click Continue");
@@ -10253,5 +10259,72 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
+
+
+		[StepDefinition(@"I call Shared Step 132427 \(Waste Classification Data- For OTC Products\)")]
+		public void GivenICallSharedStep132427WasteClassificationDataForOTCProducts()
+		{
+			var regulatoryInformation = new RegulatoryInformation1();
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
+			Report.StartStep("I should see the Waste Classification Data Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");			
+			Report.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
+			Report.StartStep("In the Waste Classification Data page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Waste Classification Data");
+
+		}
+
+		[StepDefinition(@"I call Shared Step 132473 \(Regulatory Information 3 - Nutritional Category\)")]
+		public void GivenICallSharedStep132473RegulatoryInformation3NutritionalCategory()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Regulatory Information 3");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 3");
+			Report.StartStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: OTC Drug Facts Label (may including Active Ingredient)");
+			MyStepsNewProduct.IConfirmRegulatoryInformation3PageContainsStatement("Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).");
+			Report.StartStep("For the 'Refer to your Product Label. From the options, select those that appear on the Label.' question three options should appear: 'Supplement Facts Panel', 'Nutrition Facts Panel' and 'None of the Above'");
+			var table = new Table("Option");
+			table.AddRow("Supplement Facts Panel");
+			table.AddRow("Nutrition Facts Panel");
+			table.AddRow("None of the Above");
+			MyStepsNewProduct.CheckOptionsInSection("should", "displayed", "Refer to your Product Label.", table);
+			Report.StartStep("Select any of the three options that apply");
+			MyStepsNewProduct.GivenInTheRegulatoryInforamtionTabISelectProductLableAs("Supplement Facts Panel");
+			Report.StartStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: Nutritional and Supplement Labels");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("Nutritional and Supplement Labels");
+			Report.StartStep("I confirm the Label Information section on the Regulatory Information 3 page contains a link for: Dietary Supplements Label");
+			MyStepsNewProduct.IConfirmLabelInformationOnRegulatoryInformationPageContains("Dietary Supplements Label");
+			Report.StartStep("In the Regulatory Information 3 page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 3");
+		}
+
+		[StepDefinition(@"I call Shared Step 132601 \(Additional Documents to Provide - Nutritional Flow\)")]
+		public void GivenICallSharedStepAdditionalDocumentsToProvide_NutritionalFlow()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Additional Documents to Provide screen");
+			MyNewProduct.GivenIShouldSeeXPage("Additional Documents to Provide");
+			MyNewProduct.ThenFieldExists("OSHA-compliant Safety Data Sheet (Optional)");
+			MyNewProduct.ThenFieldExists("Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)");
+
+			//new NewProduct().SectionExists("Upload Full Product Label (required)");
+
+
+
+			Report.StartStep("Upload Product Label");
+			MyNewProduct.UploadPDFFileSectionAndType("Product Label", "Upload Full Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			Report.Screenshot();
+			MyNewProduct.CheckUploadedFileNameForTypeAndLabel("Upload Full Product Label", "Product Label", "testdoc.pdf");
+			MyNewProduct.ThenFieldExists("Toxicity Characteristic Leaching Procedure (TCLP)");
+			Report.StartStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+
+		}
+
 	}
 }

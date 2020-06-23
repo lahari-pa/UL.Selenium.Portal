@@ -1675,8 +1675,8 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Given I navigate to the landing page
 
 
-	Scenario: [cvs] CVSGardenTESTQS
+	Scenario: [cvs] CVSPharmTESTQS
 	Given I log in with the account saved in TReVor as: NoProductsAccount
 	Then In the Products Grid I delete All products
-	Then For CVS I create a product of type: Lawn & Garden (RUCC0395), save it as: CVSLawnGardenProduct1 and leave it in New Status
-	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSLawnGardenExcelFile and check that is shows the expected product saved as: CVSLawnGardenProduct1
+	Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPharmacyProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPharmacyExcelFile and check that is shows the expected product saved as: CVSPharmacyProduct1

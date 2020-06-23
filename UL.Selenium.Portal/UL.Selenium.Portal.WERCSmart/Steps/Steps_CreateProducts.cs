@@ -878,7 +878,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();			
+			//sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
+			sharedSteps.GivenICallSharedStep132427WasteClassificationDataForOTCProducts();
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
@@ -1134,6 +1135,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		//[StepDefinition(@"For CVS I create a product of type: Pharmacy \(RUCC0393\), save it as: (.*) and leave it in New Status")]
+		//public void ForCVSICreateProductOfTypePharmacyAndLeaveAsNew(string savedAs)
+
+		//{
+		//	var sharedSteps = new Steps_Shared();
+		//	var productsGridSteps = new StepsProductGrid();
+		//	var newProductSteps = new StepsNewProduct();
+		//	var newProduct = new NewProduct();
+		//	var shaSteps = new Steps_SHA();
+		//	var thisGlobalSteps = new GlobalSteps();
+		//	var stepsIngredients = new StepsIngredients();
+		//	var stepsProductChar = new Steps_ProductCharacteristics();
+		//	var stepsSelectretailers = new StepsSelectRetailers();
+		//	var selectRetailers = new StepsSelectRetailers();
+
+		//	sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+		//	sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)");
+		//	newProductSteps.SaveProductInformation(savedAs);
+		//	sharedSteps.SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue();
+		//	sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+		//	Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+		//	table57570.AddRow("Sodium chloride", "100", "false", "false", "");
+
+		//	sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
+		//	sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
+		//	sharedSteps.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
+		//	sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
+		//	Report.Info("Then I select a retailer");
+		//	selectRetailers.SelectTheRetailer("CVS");
+		//	newProductSteps.ClickContinue();
+		//	sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+		//	//go back to homepage (products grid)
+		//	new StepsHomepage().ThenINavigateToTheHomePage();
+		//	new GlobalSteps().ThenTheHomeScreenShouldLoad();
+
+
+		//}
+
 		[StepDefinition(@"For CVS I create a product of type: Pharmacy \(RUCC0393\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypePharmacyAndLeaveAsNew(string savedAs)
 
@@ -1150,9 +1189,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selectRetailers = new StepsSelectRetailers();
 
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
-			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)");
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Digestive Aid");
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue();
+			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
+			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
+			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			//sharedSteps.SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue();
 			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");

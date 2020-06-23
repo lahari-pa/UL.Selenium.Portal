@@ -205,7 +205,9 @@ Scenario: [58091] Latex Gloves - RU000151
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Polyisoprene  | 90      | false               | false       |            |
 		| Ethanol       | 10      | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
+
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58091, container type: Plastic Container and size: 37
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -248,12 +250,17 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 		| Vitamin A     | 5       | false               | false       |            |
 		| Citric acid   | 25      | false               | false       |            |
 		| Vitamin E     | 5       | false               | false       |            |
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I set the Refer to your Product Label option to: None of the Above
-	Given I click continue
+	# Added in 57637 to make test run. Consult Aaron (WERCS)
+	#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Then I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58075, container type: Plastic Container and size: 100
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given I call Shared Step 60567 (Upload Product Label only)
+	Given in the Additional Documents to Provide page I click Continue
+	Then I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58075. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I navigate to the home page
