@@ -189,6 +189,63 @@
 
 Feature: ChooseGoodGuide.com Scenarios
 
+
+
+
+Scenario: [87821] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - with UPC available for selection
+Given I call Shared Step 85328 (Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full))
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Then I save the product information as: TestCase87821
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I should see the Additional Product Information Page
+And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer  |
+| Walgreens |
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87821, container type: Plastic Container and size: 32 do not click continue
+
+Given I should see the Regulatory Documents Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87821
+
+
+Scenario: [undefined] Canadian Tire Available for Selection for Articles
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candy, Chewing Gum
+# Share step 125120 is needed here in this spot, but it is not available for selection in specflow yet
+Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+# Confirm that Canadian Tire is available in the Select Retailers pop up, close window
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: «savedAs»
+
+
+
+Scenario: [undefined] my new scenario
+
+Given I call Shared Step (Login to WERCSmart - Premium Account)
+Given I collapse the Navigation Menu
+# i need a step that clicks the new gotobutton and then checks that a popup entitled goto appears
+
+
+Scenario: Create a new simple product (Chalk) and process from NEW to Accepted
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCaseCreate
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer  |
+| Walgreens |
+| Amazon    |
+Given I call Shared Step 60533 (Additional Documents to Provide - Flash Point and Product Label only) : documentPathNeeded
+# Document path needed in above step
+
+
+
 #Philip - Get back to 58430
 
 Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product

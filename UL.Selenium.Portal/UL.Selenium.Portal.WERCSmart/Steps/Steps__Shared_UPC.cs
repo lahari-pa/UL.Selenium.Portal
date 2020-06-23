@@ -209,6 +209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
+			Delay.Seconds(9999);
 		}
 
 		[StepDefinition(@"I call Shared Step 87658 \(Enter Universal Product Code \(UPC\)\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*) do not click continue")]
