@@ -2331,10 +2331,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			var MyNewProduct = new NewProduct();
 			if (MyNewProduct.OptionExists("When mixed with an equal amount of water"))
 			{
-				Report.StartStep(
-					"I set the When mixed with an equal amount of water, will this produce a solution with a pH option to: Yes");
-				MyStepsNewProduct.SetTheSectionOptionTo(
-					"When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
+				Report.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH option to: Yes");
+				new NewProduct().containerElement.Scroll();
+				Delay.Seconds(5);
+				MyStepsNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
+				
 			}
 
 			Report.StartStep("I set theSelect all potential allergens included in this product option to: Dairy");
