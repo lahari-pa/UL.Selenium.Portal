@@ -1172,9 +1172,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Notification History Screen I confirm that one of the rows is as follows:")]
 		public void ThenInTheNotificationHistoryScreenIConfirmThatOneOfTheRowsIsAsFollows(Table table)
 		{
-			SpecFlowReporting.TableRow(table.Rows[0]);
-			Report.Info("Getting displayed notifications");
 			var thisProductNotificationHistory = new ProductNotificationHistory();
+			thisProductNotificationHistory.WaitForTableContentToLoad();
+			SpecFlowReporting.TableRow(table.Rows[0]);
+			Report.Info("Getting displayed notifications");			
 			List<Notification> notifications = thisProductNotificationHistory.GetNotifications();
 			for (int i = 0; i < notifications.Count; i++)
 			{

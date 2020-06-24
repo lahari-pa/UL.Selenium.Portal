@@ -139,7 +139,7 @@ Scenario: [113092] Registration Suspension -  Suspension Email Notification Mess
 	And In the Suspended dialog I Select the following clients: All
 	And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: SHA Regulatory Specialist
 	And In the Suspended dialog in the Select Subject drop down I choose: Formula – Document Issue
-	And In the Suspended dialog I click Save
+	And In the Suspended dialog I click Suspend
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109503)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109503 and its status is: Suspended
 	Then I Check there should be a new suspension notification email for user: ProductAccountEmail for the Product saved as: TestCase109503 with the suspension subject of: Formula – Document Issue and check it does not contain text from the table:
