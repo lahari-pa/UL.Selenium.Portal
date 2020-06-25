@@ -1680,3 +1680,11 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Then In the Products Grid I delete All products
 	Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPharmacyProduct1 and leave it in New Status
 	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPharmacyExcelFile and check that is shows the expected product saved as: CVSPharmacyProduct1
+
+
+	Scenario: [DATATIERGETCHECK] Tier check test
+
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Health & Beauty (RUCC0392), save it as: CVSHBProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSHBExcelFile and check that is shows the expected product saved as: CVSHBProduct1
