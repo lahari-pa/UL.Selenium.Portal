@@ -39,6 +39,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.BaseTestUrl = TestVariables.GetVariableSavedAs("TestURL");
 		}
 
+		[BeforeFeature(Order = 2)]
+		public static void BeforeTestKillChrome()
+		{
+			Process.GetProcessesByName("chromedriver").ToList().ForEach(x => x.Kill());
+		}
+
 		[AfterScenario(Order = 1)]
 		public static void CloseChrome()
 		{
