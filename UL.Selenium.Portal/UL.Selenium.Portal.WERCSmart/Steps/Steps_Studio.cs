@@ -1549,6 +1549,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"In Power Desginer, fill in Additional Sections if they are present then navigate to Checklist Section")]
+		public void InPDFillInAdditonionalSectionsifPresentThenNavigateToChecklistSection()
+		{
+			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
+			{
+				selStepsStudio.InPDIEnsureSECT0077IsActive();
+				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
+
+
+		}
+
 		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077")]
 		public void InPDFillInSET2318ifPresentThenNavigateToSECT0077()
 		{
@@ -1579,6 +1602,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			
+
+
+		}
+
+		[StepDefinition(@"In Power Desginer, fill in Additional Sections if they are present")]
+		public void InPDFillInAdditionalSectionsifPresent()
+		{
+			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
+			{
+				selStepsStudio.InPDIEnsureSECT0077IsActive();
+				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+
 
 
 		}

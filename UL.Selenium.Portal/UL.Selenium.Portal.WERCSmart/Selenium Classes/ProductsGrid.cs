@@ -12,6 +12,7 @@ using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using OpenQA.Selenium.DevTools.DOM;
 
+
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class ProductsGrid : SeleniumBaseObject
@@ -141,6 +142,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return (colourShowing == colourExpected);
 
 		}
+	
+
 
 		public bool ClickStatusFilter(string option)
 		{
