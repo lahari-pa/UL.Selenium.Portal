@@ -196,8 +196,8 @@ Scenario: [78865] Create a new product SOLD = Canada only , PL = No, NR product 
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78865)
-	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78865 and its status is: Submitted
-	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase78865)
+	#And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78865 and its status is: Submitted
+	#And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase78865)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78865)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78865 and its status is: Assigned
 	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase78865)
