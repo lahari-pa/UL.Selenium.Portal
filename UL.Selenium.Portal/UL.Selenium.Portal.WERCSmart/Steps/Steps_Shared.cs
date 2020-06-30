@@ -4875,6 +4875,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				selStepsStudio.InPDIEnsureSECT2318IsActive();
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
+			{
+				selStepsStudio.InPDIEnsureSECT0077IsActive();
+				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
+			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
@@ -5726,6 +5731,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			{
 				selStepsStudio.InPDIEnsureSECT2318IsActive();
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
+			{
+				selStepsStudio.InPDIEnsureSECT0077IsActive();
+				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
 			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
