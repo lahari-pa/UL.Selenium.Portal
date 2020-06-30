@@ -1335,8 +1335,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();			
-			
 			var valueEdit = new ValueEditor();
+
+			Report.Info("I check that the WALMART QC RESPONSE FORM is not already filled in with junk data");
+			if(selStudioPowerDesignerPlus.GivenCategoryContainsData("Additional Information"))
+			{
+				Delay.Seconds(1);
+				selStudioPowerDesignerPlus.Wait_for_load(30);
+				Report.Info("As the WALMART QC RESPONSE FORM was found to already contain data, skipping junk data fill");
+				return;
+			}
 			Report.StartStep("I Select the Catagory Titled: Inquiry Date");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");			
@@ -1639,7 +1647,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 
-			var valueEdit = new ValueEditor();			
+			var valueEdit = new ValueEditor();
+
+
+			Report.Info("I check that the Walmart Transportation Information section is not already filled in with junk data");
+			if (selStudioPowerDesignerPlus.GivenCategoryContainsData("DOT Regulated Flag for BBB"))
+			{
+				Delay.Seconds(1);
+				selStudioPowerDesignerPlus.Wait_for_load(30);
+				Report.Info("As the Walmart Transportation Information section was found to already contain data, skipping junk data fill");
+				return;
+			}
 
 			Report.StartStep("I Double Click on the section with name: Hazmat Pack Type Code for Walmart");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Hazmat Pack Type Code for Walmart");

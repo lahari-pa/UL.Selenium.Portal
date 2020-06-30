@@ -4751,6 +4751,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
 			Delay.Seconds(3);
 			Report.Info("Now going to click the sections side tab if its not open");
+			thisPowerDesignerPlus.Wait_for_load(60);
 			var selStepsStudio = new Steps_Studio();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
@@ -7915,6 +7916,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			});
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
+			this.GivenICallSharedStep49742_WPS_CheckInProduct(savedAs);
+
 			Report.StartStep("I open the Current Document pop up using the tool bar icons");
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
 			Report.StartStep("Select the Authorize Formula and Attributes for publishing check box ");
