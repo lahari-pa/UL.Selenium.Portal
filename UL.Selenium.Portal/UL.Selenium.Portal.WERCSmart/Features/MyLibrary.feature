@@ -247,14 +247,14 @@ Scenario: [73329] Edit Ingredient
 		| Chemical Name             | CAS          |
 		| Sulfuric acid             | 7664-93-9    |
 		| Cobalt sulfate            | 10124-43-3   |
-		| Graphene                  | 1034343-98-0 |
-		| Pyrrole-2-carboxylic acid | 634-97-9     |
+		| Graphite                  | 7782-42-5    |
 		| Formaldehyde              | 50-00-0      |
 		| Polycarbonate             | 25037-45-0   |
 		| Nitric acid               | 7697-37-2    |
 		| Cumene                    | 98-82-8      |
 		| Argon                     | 7440-37-1    |
 		| Mica                      | 12001-26-2   |
+		| Formaldehyde cyanohydrin  | 107-16-4   |
 	# The test has a step 'Select one of the ingredients' before editing other ones. Having an ingredient selected has no bearing on 'Save' so skipping this
 	# And I select the ingredient in My Library at index: 5 from ingredients saved as: My Library Ingredients
 	# Explicit 'true/false' will only ever edit ingredient state once. Flip the checkbox with Y/N, avoid checking the same value repeatedly

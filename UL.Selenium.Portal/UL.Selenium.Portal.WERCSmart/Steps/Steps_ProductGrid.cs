@@ -714,6 +714,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
+			Report.Info("testing0 " + savedAs + " " + Context.GetFromContext(savedAs));
 			//Report.Info("Generated UPC No: " + uPCNo);
 			//Delay.Seconds(2);
 			Report.Info(uPCNo);
@@ -1230,6 +1231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							}
 							Report.Info("I set the " + filterType + " to: " + option);
 						}
+						Delay.Seconds(10);
 						GeneralUtilities.Wait_for_load_finish();
 						Report.Info("Looking for product ID: " + id);
 						Report.IsTrue(selProductsGrid.AllIDsInGrid().Contains(id) == productReturned,

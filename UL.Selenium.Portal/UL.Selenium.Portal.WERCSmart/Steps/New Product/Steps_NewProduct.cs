@@ -210,7 +210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				i++;
 			}
 			Report.Failure("Failed to click 'Continue'!");
-			Report.Screenshot();
+			Report.Screenshot();Delay.Seconds(9999);
 			//Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
 		}
 

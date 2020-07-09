@@ -1719,6 +1719,32 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		}
 
 		[StepDefinition(
+			@"I call Shared Step 126160 \(U\.S\. Department of Transportation \(DOT\) Classification - Enter UN1057 - Lighter Fluid\)")]
+		public void
+			GivenICallSharedStepTransportation_DOTUNStep_EnterUNSelectLightersNoneAddTechnicalNameClickContinue()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("I set the UN Number field to: UN1057");
+			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1057");
+			Delay.Seconds(2);
+			Report.StartStep("I select 'Lighters' option in section: Proper Shipping Name");
+			MyNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Lighters");
+			Delay.Seconds(2);
+			Delay.Seconds(2);
+			Report.StartStep("I select '2.1' in section: Hazard Class (select)");
+			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "2.1");
+			Report.StartStep("I select 'None' in section: Packing Group (select)");
+			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "None");
+			Report.StartStep("I select '123' in section: For the lighter, provide the DOT Approval Number (LAA)");
+			MyNewProduct.SetTheSectionOptionTo("For the lighter, provide the DOT Approval Number (LAA)", "123");
+			Report.StartStep(
+				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue(
+				"U. S. Department of Transportation (DOT) Classification");
+		}
+
+		[StepDefinition(
 			@"I call Shared Step 65705 \(Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue\)")]
 		public void
 			GivenICallSharedStepTransportation_DOTUNStep_EnterUNSelectAerosolsNoneAddTechnicalNameClickContinue()
@@ -9588,8 +9614,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		[StepDefinition(
 		@"I filter subformat (.*) and open checklist (.*)")]
 		public void IFilertSubformatAndOpenChecklist(string subformat, string checkList)
-		{
-
+		{ 		
 			if (Context.Contains("ElectronicProduct"))
 			{
 				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
@@ -9631,8 +9656,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
 				"Set action option");
 
-			string WERCSmartIDFromContext = Context.GetFromContext("WERCSmart ID").ToString();
-			Report.IsTrue(thisPowerDesignerPlus.EnterSourceProduct(WERCSmartIDFromContext), $"Failed to enter {WERCSmartIDFromContext} into the Select Source Product field!", $"Successfully entered {WERCSmartIDFromContext} into the Select Source Product field");
+			if (Context.Contains("WERCSmart ID"))
+			{
+				string WERCSmartIDFromContext = Context.GetFromContext("WERCSmart ID").ToString();
+				Report.IsTrue(thisPowerDesignerPlus.EnterSourceProduct(WERCSmartIDFromContext), $"Failed to enter {WERCSmartIDFromContext} into the Select Source Product field!", $"Successfully entered {WERCSmartIDFromContext} into the Select Source Product field");
+			}
 
 			thisPowerDesignerPlus.ClickRefreshButton();
 			Delay.Seconds(3);
@@ -10099,7 +10127,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Dictionary<string, string> ExcelDictionaryDataFromContext = (Dictionary<string, string>)Context.GetFromContext("ExcelDictionaryData");
 
 			string ExcelEPAType, ExcelEPACode;
-
+			
 			if (ExcelDictionaryDataFromContext.ContainsKey("EPA Type"))
 			{
 				ExcelEPAType = ExcelDictionaryDataFromContext["EPA Type"];
@@ -10117,7 +10145,6 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			{
 				ExcelEPACode = "NON-RCRA";
 			}
-
 
 			Report.IsTrue(ExcelEPAType == SHA.CheckListEPAType, "The excel EPA Type: " + ExcelEPAType + ", does not match the checklist EPA Type: " + SHA.CheckListEPAType, "The excel EPA Type: " + ExcelEPAType + ", does match the checklist EPA Type: " + SHA.CheckListEPAType);
 

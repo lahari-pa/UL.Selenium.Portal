@@ -21,7 +21,7 @@ Feature: Supplier Reports
 @ScenarioId:978
 Scenario: [68420] List of Supplier Reports
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	And In the Supplier Reports screen the page title should be: Available Reports
 	Given under the supplier Reports menu I should see the following options
 		| Reports                                                            |
@@ -49,7 +49,7 @@ Scenario: [68420] List of Supplier Reports
 @ScenarioId:979
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	And In the Supplier Reports screen the page title should be: Available Reports
 	Given Under the Supplier Reports menu I choose: UPCs (Active) for all Registrations
 	Then In the Supplier Reports screen the current sub-page should be: UPCs (Active) for all Registrations
@@ -81,7 +81,7 @@ Scenario: [68421] Active UPCs for Products Report
 @ScenarioId:980
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Battery-Containing Products
 	Then In the Supplier Reports screen the current sub-page should be: Battery-Containing Products
 	Given In the Supplier Reports screen I click on the Download button
@@ -106,12 +106,12 @@ Scenario: [68422] Battery-containing products report
 @ScenarioId:981
 Scenario: [68423] Formulated vs Articles Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: Subscription Renewal (Formulated, Enhanced, Articles)
-	Then In the Supplier Reports screen the current sub-page should be: Subscription Renewal (Formulated, Enhanced, Articles)
+	Given I click the My Reports icon in the QuickLinks Pane
+	Given Under the Supplier Reports menu I choose: Subscription Product Types
+	Then In the Supplier Reports screen the current sub-page should be: Subscription Product Types
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called Subscription Renewal (Formulated Enhanced Articles).xlsx and save as 68423
+	Given I confirm that an excel file is produced called Subscription Product Types.xlsx and save as 68423
 	Then I confirm that the excel file saved as: 68423 contains the following columns:
 		| Column              |
 		| WPSID               |
@@ -133,7 +133,7 @@ Scenario: [68423] Formulated vs Articles Report
 @ScenarioId:982
 Scenario: [73082] UPC Report for All Products with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
 	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
 	Given In the Supplier Reports screen I click on the Download button
@@ -256,7 +256,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given If purchase details are showing click confirm order
 	#Begin steps to get report and verify data
 	Given I navigate to the home page
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
 	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
 	Given In the Supplier Reports screen I click on the Download button
@@ -276,7 +276,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 @ScenarioId:6270
 Scenario: [73225] Kits that Contain a specific Product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Kits Containing a Specific Registration
 	Then In the Supplier Reports screen the current sub-page should be: Kits Containing a Specific Registration
 	Given I select a random product from the drop down
@@ -294,13 +294,13 @@ Scenario: [73225] Kits that Contain a specific Product
 @ScenarioId:6349
 Scenario: [73228] Products that are Associated with a specific Kit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: Kit Registration Details
-	Then In the Supplier Reports screen the current sub-page should be: Kit Registration Details
+	Given I click the My Reports icon in the QuickLinks Pane
+	Given Under the Supplier Reports menu I choose: Kits Containing a Registration
+	Then In the Supplier Reports screen the current sub-page should be: Kits Containing a Registration
 	Given I select a random product from the drop down
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called Kit Registration Details.xlsx and save as 73228
+	Given I confirm that an excel file is produced called Kits Containing a Registration.xlsx and save as 73228
 	Then I confirm that the excel file saved as: 73228 contains the following columns:
 		| Column              |
 		| Product in Kit      |
@@ -313,7 +313,7 @@ Scenario: [73228] Products that are Associated with a specific Kit
 Scenario: [73226] Pesticide Certificate Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Pesticide Certificate Report
 	Then In the Supplier Reports screen the current sub-page should be: Pesticide Certificate Report
 	Given In the Supplier Reports screen I click on the Download button
@@ -337,23 +337,43 @@ Scenario: [73226] Pesticide Certificate Report
 @ScenarioId:984
 Scenario: [73229] Products with VOCs
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: VOC-related Registrations
-	Then In the Supplier Reports screen the current sub-page should be: VOC-related Registrations
+	Given I click the My Reports icon in the QuickLinks Pane
+	Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
+	Then In the Supplier Reports screen the current sub-page should be: Volatile Organic Compounds
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called VOCrelated Registrations.xlsx and save as 73229
+	Given I confirm that an excel file is produced called Volatile Organic Compounds.xlsx and save as 73229
 	Then I confirm that the excel file saved as: 73229 contains the following columns:
 		| Column       |
 		| Supplier     |
 		| WPSID        |
 		| Product Name |
+		| CN           |
+		| CT           |
+		| DC           |
+		| DE           |
+		| IL           |
+		| IN           |
+		| MA           |
+		| MD           |
+		| ME           |
+		| MI           |
+		| NH           |
+		| NJ           |
+		| NY           |
+		| OH           |
+		| PA           |
+		| RI           |
+		| TX           |
+		| UT           |
+		| VA           |
+		| VT           |
 	And I delete the excel file saved as 73229
 
 @ScenarioId:983
 Scenario: [73227] Products and Recommended Use Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Product Types Registered
 	Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
 	Given In the Supplier Reports screen I click on the Download button
@@ -371,7 +391,7 @@ Scenario: [73227] Products and Recommended Use Report
 @ScenarioId:985
 Scenario: [73230] UPC Report for Specific Product with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: UPC and Retailer (Product Specific)
 	Then In the Supplier Reports screen the current sub-page should be: UPC and Retailer (Product Specific)
 	Given I select a random product from the drop down
@@ -392,7 +412,7 @@ Scenario: [73230] UPC Report for Specific Product with Retailer
 
 Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Sustainability Survey Eligibility - Health & Beauty
 	Then In the Supplier Reports screen the current sub-page should be: Sustainability Survey Eligibility - Health & Beauty
 	Given In the Supplier Report page in the select Retailer dropdown I select: Target
@@ -446,7 +466,7 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 2018
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: California Proposition 65 - Registrations Prior to August 30, 2018
 	Then In the Supplier Reports screen the current sub-page should be: California Proposition 65 - Registrations Prior to August 30, 2018
 	And In the Supplier Report page I should see the report description should be showing with text: The report output will illustrate the WERCSmart registrations active, not deleted, that exist in your WERCSmart account. The output will provide information related to Active Registrations and their responses to Proposition 65 questions presented in WERCSmart before the transition to the revised Prop 65 questions in July / August of 2018. The report will include registrations not yet updated and submitted with the revised Prop 65 data
@@ -471,21 +491,23 @@ Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 
 Scenario: [76759] Waste Classification Summary Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I click the Supplier Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: Waste Classification Summary for All Registrations
-	Then In the Supplier Reports screen the current sub-page should be: Waste Classification Summary for All Registrations
-	And In the Supplier Report page I should see the report description should be showing with text: Report will show the waste classification for each of the 50 states and other areas within the United States, as well as the Federal waste classification. For specific information about a registration's waste classification, and how the waste classification was derived, you may request an Additional Document from the My Products area for the registration you're interested in receiving details about.
+	Given I click the My Reports icon in the QuickLinks Pane
+	Given Under the Supplier Reports menu I choose: Waste Classification Summary
+	Then In the Supplier Reports screen the current sub-page should be: Waste Classification Summary
+	And In the Supplier Report page I should see the report description should be showing with text: For each active registration, details of the classification made during assessment for the United States Federal and State regulations. For specific information about how the waste was classified, you may request an Additional Document (no charge) from the My Products area for the specific registration.
 	Given In the Supplier Reports screen I click on the Download button
-	Given I confirm that a file is downloaded with file name: Waste Classification Summary for All Registrations.xlsx then close the Report Download popup. I save the file as SupplierReport76759
-	Then I confirm that the excel file saved as: SupplierReport76759 contains the following columns:
-		| Column        |
-		| WERCSmart ID  |
-		| Product Name  |
-		| Federal Waste |
-		| EPA Type      |
-		| EPA Code      |
+	Given I confirm that a file is downloaded with file name: Waste Classification Summary.xlsx then close the Report Download popup. I save the file as SupplierReport76759
 	Then I confirm that the excel file saved as: SupplierReport76759 contains the following columns:
 		| Column         |
+		| WERCSmart ID   |
+		| Product Name   |
+		| Federal Waste  |
+		| EPA Type       |
+		| EPA Code       |
+		| WA Hazard      |
+		| CA Hazard      |
+		| CT Hazard      |
+		| MI Hazard      |
 		| Alabama        |
 		| Alaska         |
 		| Arizona        |
@@ -549,7 +571,7 @@ Scenario: [76759] Waste Classification Summary Report
 @ScenarioId:6619
 Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) report
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Subscription Renewal (Registrations Eligible for Deletion)
 	Then In the Supplier Reports screen the current sub-page should be: Subscription Renewal (Registrations Eligible for Deletion)
 	Then I Check that the Description text on the supplier report page matches: The report will provide you with the information for current, submitted registrations, regardless of current registration status (Net Yet Submitted, In Progress, Sending, Accepted, Needs Attention), that are eligible for deletion from your account. The quantity of submitted registrations directly impacts your subscription levels for Formulated, Enhanced Articles and Articles. Eligible for deletion criteria is based on order history dates.
@@ -576,7 +598,7 @@ Scenario: [79635] Subscription Renewal (Registrations Eligible for Deletion) rep
 @ScenarioId:976
 Scenario: [110480] Subscription Renewal (Registrations Eligible for Deletion)- Check for correct description text
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Subscription Renewal (Registrations Eligible for Deletion)
 	Then In the Supplier Reports screen the current sub-page should be: Subscription Renewal (Registrations Eligible for Deletion)
 	Then I Check that the Description text on the supplier report page matches: The report will provide you with the information for current, submitted registrations, regardless of current registration status (Net Yet Submitted, In Progress, Sending, Accepted, Needs Attention), that are eligible for deletion from your account. The quantity of submitted registrations directly impacts your subscription levels for Formulated, Enhanced Articles and Articles. Eligible for deletion criteria is based on order history dates.
@@ -590,7 +612,7 @@ Scenario: [114764] UPCs and Registrations (Retailer Specific) - Report correctly
 	Given I navigate to the landing page
 	And I call Shared Step (Login to WERCSmart - Premium Account)
 	#Then I wait for 30 seconds
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
 	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
 	Given In the Supplier Reports screen I click on the Download button

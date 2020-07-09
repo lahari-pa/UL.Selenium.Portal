@@ -185,41 +185,348 @@
 @ULSC
 @Shared
 @Pharma
+@CreateProducts
 @run_Transportation
 
 Feature: ChooseGoodGuide.com Scenarios
+
+Scenario: [139385] CA Cleaning - Generic Ingredient Used
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+Given I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| RR-05150-3    | 100     | No                  | Aqua       | Yes         |
+# Enter CAS number RR-05150-3 as your first ingredient. Set its percentage to 100%. Select Trade Secret and add a Generic Name. Add a functional purpose and ingredient type.
+Given I click continue
+# Ensure that you see an error popup on the screen
+# Ensure that there is an error present that matches the screenshot attached to this TFS test case
+Then I click the close button for the popup with the following title: California Cleaning Right to Know
+# Delete ingredient RR-05150-3 from the formulation
+# Add ingredient Water at 100%
+# select Trade secret for your Water ingredient and add a Generic Name
+# Add a Ingredient Type and Functional Purpose for your Water ingredient
+Given I click continue
+And I should see the Waste Classification Data Page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TheProduct
+
+
+Scenario: [139387] CA Cleaning - 100% Formula Total (Minimum)
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+Given I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| Water         | 10      | No                  |            | Yes         |
+Given I click continue
+# Ensure that you see an error popup
+# Ensure that the error popup contains the error in the screenshot attached to this TFS test case
+Then I click the close button for the popup with the following title: California Cleaning Right to Know
+# Set Water ingredient percentage to 100%
+Given I click continue
+And I should see the Waste Classification Data Page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TheProduct
+
+
+Scenario: [139388] CA Cleaning - Public Disclosure or Trade Secret Issue
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+Given I click continue
+Then I add the following ingredients:
+	| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Water         | 100     | false               | false       |            |
+Then I click continue
+Then I confirm I see the two error messages in the popup with the following title: California Cleaning Right to Know
+Then I click the close button for the popup with the following title: California Cleaning Right to Know
+Then I add the following ingredients:
+	| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Water         | 100     | false               | true        | Aqua       |
+Then I click continue
+And I should see the Waste Classification Data Page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TheProduct
+
+
+
+
+Scenario: [139205] CA Cleaning - Ingredient Validation Upon Continue or Save
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+Then I click continue
+And I should see the Ingredients Page
+Then I add the following ingredients:
+	| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| RR-05150-3    | 10      | false               | false       |            |
+Then I click continue
+Then I confirm I see the four error messages in the popup with the following title: California Cleaning Right to Know
+# Enter CAS number RR-05150-3 as your first ingredient. Set its percentage to 10%. Click continue
+# Ensure that four (4) error messages appear in a popup on the screen
+# Ensure that the error text matches the errors listed in the screenshot attached to ticket 126697
+# Exit the popup
+Then in page Ingredients page I should see error: Please fix all errors related to California Cleaning Right to Know before proceeding.
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: ThisProduct
+
+
+
+Scenario: [139193] CA Cleaning - Initial Message to Registrant for Ingredients
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Then I save the product information as: TestCase139193
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+Given I click continue
+Given I confirm there is a message displayed at the top of the Ingredients page
+Given I confirm there is a checkbox with the following text: Don't show this again in the message displayed at the top of the Ingredients page
+# Ensure that you see a message in blue at the top of the screen
+# Ensure that the message matches the screenshot attached to ticket 126693
+# Ensure that you see a checkbox in the message with the text "Don't show this again"
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139193
+
+Scenario: [87691] UPC - Case Pack, Recertification by WERCSmart User - Remove Case Pack Leaving Only Regular UPC
+Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I filter for the product saved as: TestCase87685
+	And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+	Given I click Bulk Actions in the Products Grid
+	Then I should see a popup with header Bulk Actions
+	And I click on the Row Action: Update Data
+	And I should see the Update Registration popup
+	And In the Update Registration popup I click on button Yes
+	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+	And I should see the The Product Page
+	Then I click Save in The Product Page
+	When In the New Product page I click tab: Recipient and UPC Details
+	And I click the page heading: Universal Product Code (UPC)
+	Then I confirm the case dropdown with the following UPC: saved as UPC87685 should be available for selection
+    Then I Click Delete Rows
+	Then I confirm the case dropdown with the following UPC: saved as UPC87685 should not be available for selection
+    Then I click Continue and should not see an error message
+	When In the New Product page I click tab: Review and Submit
+	And I click the page heading: Additional Documents to Provide
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+
+Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Beyond
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561a (The Product - Enter Product Name: Product NOT in Scope for BBB and select Type of Product): Pet Shampoo
+Given I generate a random UPC number and save as: UPC128144
+Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber  | ComponentName                   | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| 61789-31-9 | Fatty Acids, coco, sodium salts | 100     |                     |            |             |
+And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128144, container type: Plastic Container and size: 6.2 do not click continue
+Then I click continue
+Given I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
+Given I call Shared Step 60567 (Upload Product Label only)
+Then I click continue
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_Current_Month_Day_Year.xlsx and save as PRODUCTS NOT IN SCOPE REPORT FOR BBB
+# Confirm that the PRODUCT NAME: 'Product NOT in Scope for BBB' is NOT listed in the Report
+Given I delete the excel file saved as PRODUCTS NOT IN SCOPE REPORT FOR BBB
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+# Confirm that the 'Data Consent Tier' Pop-Up Window Does Not Show
+
+
+
+Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Lighter, Provide the DOT Approval Number' Field
+
+Given I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
+Given I generate a random UPC number and save as: UPC126286
+Then I save the product information as: TestCase126286
+Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
+Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+Given I set the Product is a Retailer's Private Label or Brand option to: No
+Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber  | ComponentName                                                               | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| 68410-97-9 | Distillates, petroleum, light distillate hydrotreating process, low-boiling | 70      |                     |            |             |
+| 64742-49-0 | Naphtha, petroleum, hydrotreated light                                      | 30      |                     |            |             |
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
+Then in page U. S. Department of Transportation (DOT) Classification I should see no errors
+And I click the page heading: U. S. Department of Transportation (DOT) Classification
+And For the lighter, provide the DOT Approval Number (LAA) should be showing the value: 123
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase126286
+
+
+Scenario: [87706] Universal Product Code (UPC) Step - Delete Case Pack row
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
+Given I generate a random UPC number and save as: UPC87706
+Then I save the product information as: TestCase87706
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I should see the Additional Product Information Page
+And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+Then I click continue
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87706, container type: Plastic Container and size: 32 do not click continue
+And I Select a package type from the drop down list
+Then I select the case UPC dropdown arrow to collapse the UPC saved as: UPC87706
+Then I confirm the case dropdown with the following UPC: saved as UPC87706 should be available for selection
+Then I Click Delete Rows
+Then I Check the Delete Rows Warning Popup: appears
+Then I Check the Delete Rows Warning Popup contains the following text, Line One: You are about to delete 1 UPC's., Line Two: Do you want to proceed?
+Then I Click Ok in the Delete Rows Warning Popup
+Then I Check the Delete Rows Warning Popup: disappears
+Then I confirm the case dropdown with the following UPC: saved as UPC87706 should not be available for selection
+Then I click Continue and should not see an error message
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87706
+
+
+Scenario: [87718] Universal Product Code (UPC) Step - Collapsed View of Case UPC
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
+Given I generate a random UPC number and save as: UPC87718
+Then I save the product information as: TestCase87718
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I should see the Additional Product Information Page
+And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+Then I click continue
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87718, container type: Plastic Container and size: 32 do not click continue
+And I Select a package type from the drop down list
+Then I select the case UPC dropdown arrow to collapse the UPC saved as: UPC87718
+Then I confirm the case dropdown with the following UPC: saved as UPC87718 should be available for selection
+Then I check if the case UPC details are collapsed for UPC: saved as UPC87718
+Then I confirm a case dropdown contains the following UPC: saved as UPC87718
+Then I confirm that the truck icon is displaying next to the case UPC: saved as UPC87718
+Then I select the case UPC dropdown arrow to expand the UPC saved as: UPC87718
+Then I confirm the Container Type field is below the UPC Number field
+
+Then I confirm the correct UPC: saved as UPC87718 is displayed in the UPC Number textfield
+Then I click continue
+Given I should see the Regulatory Documents Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87718
+
+
+
+
+
+
+Scenario: [87818] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - none available for selection
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC87818
+Then I save the product information as: TestCase87818
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I should see the Additional Product Information Page
+And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+Then I click continue
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87818, container type: Plastic Container and size: 32 do not click continue
+Then I select the case UPC dropdown arrow to collapse the UPC saved as: UPC87818
+Then I confirm the case dropdown with the following UPC: saved as UPC87818 should be available for selection
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87818
+
 
 
 
 
 Scenario: [87821] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - with UPC available for selection
-Given I call Shared Step 85328 (Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full))
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC87821
 Then I save the product information as: TestCase87821
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 And I should see the Additional Product Information Page
 And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-| Retailer  |
-| Walgreens |
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
+Then I click continue
 And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87821, container type: Plastic Container and size: 32 do not click continue
-
+And I Select a package type from the drop down list
+Then I select the case UPC dropdown arrow to collapse the UPC saved as: UPC87821
+Then I confirm a case dropdown contains the following UPC: saved as UPC87821
+Then I confirm the case dropdown with the following UPC: saved as UPC87821 should be available for selection
+Then I click continue
 Given I should see the Regulatory Documents Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87821
 
 
-Scenario: [undefined] Canadian Tire Available for Selection for Articles
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scenario: [125130] Canadian Tire Available for Selection for Articles
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candy, Chewing Gum
-# Share step 125120 is needed here in this spot, but it is not available for selection in specflow yet
+Then I save the product information as: TestCase125130
+And I set the Select countries the product may be sold in field to: Canada
+Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
+Then I click continue
 Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
-# Confirm that Canadian Tire is available in the Select Retailers pop up, close window
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: «savedAs»
+Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Canadian Tire and enter the name: Test
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
 
 
 
@@ -252,14 +559,14 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 
 Given I call Shared Step (Login to WERCSmart - Pharma Account)
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-Given I generate a random UPC number and save as: UPC127970
+Given I generate a random UPC number and save as: UPC128085
 Given I click continue
 Then I should see the Product Type Page
 Then I set 'Product Name' to: Prescription Pharmaceutical, Aerosol
 Then I set 'Type of Product' to: Prescription Pharmaceutical, Aerosol
 Then I click continue
 Given I enter the NDC number: 13630-0089-3
-Then I save the product information as: TestCase127870
+Then I save the product information as: TestCase128085
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
@@ -281,10 +588,13 @@ And I set the Select applicable modes of transport for which you classify the pr
 And I select option: Yes, Shipped with Limited quantity under section: Select applicable modes of transport for which you classify the product. and subsection: DOT
 And I select option: Yes, Shipped with Consumer Commodity under section: Select applicable modes of transport for which you classify the product. and subsection: DOT
 Then I click continue
-Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+And I set the UN Number field to: UN1950
+And I set the Proper Shipping Name option to: Aerosols, flammable, n.o.s.
+And I set the Select Hazard Class (if available) option to: 2.1
+Then I click continue
 Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 Then I click continue
-Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127970, container type: Plastic Container, capsule count: 50 and size: 1
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128085, container type: Aerosol Can and size: 1
 When I click continue
 When I click continue
 Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
@@ -297,44 +607,6 @@ Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
-
-# Click on Prescription Pharmaceutical Icon
-# New Product - Selected by default "Yes, Create a New Product"
-# Click CONTINUE
-# Product Type: Enter a Product Name
-# Product Type:  Prescription Pharmaceutical, Aerosol
-# Click CONTINUE
-# In Product Information screen, for the NDC
-#, copy and paste 13630-0089-3 and select it, Product Name and Generic Name get populated, click Continue
-# In SPL Information screen - Confirm the fields are automatically populated, if a field is not populate (for example the Distributor field, fill it in) - click continue
-# In Product Characteristics for secondary state drop down select- Aerosol
-# For the pH type in a number between 1-14
-# Select the best Water Solubility description from the drop down
-# For question: "When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then," select any of the three options available
-# Click Continue
-
-# The Ingredients get populated automatically, fill in the percentages for each ingredient - click Continue
-# Select No for question: "Should this product be refrigerated for transport or storage?"
-# Confirm only the 'Yes, Agree' Radio Button is available for the "Is the product regulated for transport" question
-# Select The "DOT" checkbox,
-# Select the checkbox : Shipping with Limited quantity and Shipping with Consumer Commodity
-# Click Continue
-Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-# In Retailer Association section select a Vendor from the drop down for  Wal-Mart/SAM'S CLUB
-# Click Continue
-# In the Universal Product Code (UPC) section click +Add UPC button
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC«upc», container type: Aerosol Can and size: 12
-# Click Continue in the Regulatory Documents to Provide
-# Confirm an error message shows: "Document is required: Product Label"
-# Click Browse for the upload a "Product Label" file
-# Find and select a PDF type document, click open; file uploads
-# Click Continue; Additional Documents to Provide section shows
-# Safety Data Sheet and Transportation Exemption Letter or Special Permit options should be available, but not required
-# Click Continue, Data Acceptance sections appears
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-# Purchase Summary page is shown with the following message: "Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise."
-# Click Home button
-
 
 
 Scenario: [129793] Advanced Reporting - Last 30 Days, Random Product for Reviewer
@@ -361,11 +633,13 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Stereo Equipment / Radio, Not Portable, No Battery Included
-Then I save the product information as: TestCase60671
+Then I save the product information as: TestCase128920
 Given I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
-Given I call Shared Step 58189 Answer Electronic Equipment questions - With Cathode Ray - No to all
+Given I set the Contains Circuit Board option to: No
+Given I set the Has a LCD or Plasma Display option to: No
+Then I click continue
 Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer                                                 |
 		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
@@ -375,12 +649,12 @@ Then I confirm the following retailers are showing in the Retailer page
 		| Retailer												   |
 		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 		| Family Dollar                                            |
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60671
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128920
 
 
 Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Available for Selection
 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then The home screen should load
 Given I generate a random UPC number and save as: UPC59273
 Given I delete all products with UPC Number: saved as UPC59273
@@ -414,9 +688,13 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Peripherals (Keyboard, Mouse, Trackball) without Battery
+Then I save the product information as: TestCase128694
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-Then I confirm that the following section is available for selection: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60671
+And The following options should be displayed exclusively for section: Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.
+| Option |
+| Yes    |
+| No	 |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128694
 
 
 Scenario: [128721] DSV Option Available for Appliance - Hot Water Tank (Standard, no electronic components) - RU001206
@@ -425,9 +703,13 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Appliance - Hot Water Tank (Standard, no electronic components)
+Then I save the product information as: TestCase128721
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-Then I confirm that the following section is available for selection: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60671
+And The following options should be displayed exclusively for section: Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.
+| Option |
+| Yes    |
+| No	 |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128721
 
 
 Scenario: [128703] DSV Option Available for Auto Parts - Engine Parts and Components with Electrical Parts -  RU001428
@@ -436,9 +718,13 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine Parts and Components with Electrical Parts
+Then I save the product information as: TestCase128703
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-Then I confirm that the following section is available for selection: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60671
+And The following options should be displayed exclusively for section: Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.
+| Option |
+| Yes    |
+| No	 |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128703
 
 
 Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
@@ -446,59 +732,56 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561a (The Product - Enter Product Name: TRAP AND/OR BAIT STATION TEST PRODUCT and select Type of Product): Trap and/or Bait Station
+Then I save the product information as: TestCase133610
 Given I set the Primary Physical State option to: Solid
 Given I set the Secondary Physical State option to: Solid
 Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 Then I click continue
+And I see the following sections
+| Section                               |
+| Which one best describes your product |
 Given I set the Which one best describes your product option to: Product is not considered a pesticide product
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-Given I set the Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns. option to: No
-
+Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+Given I set the Product is a Retailer's Private Label or Brand option to: No
+Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
 Then I click continue
 Then I add the following ingredients:
 | ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Glutens       | 100     | false               | false       |            |
- Then I click continue
-Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
- Then I click continue
-# For the question 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?  - Select 'NO'
-# Click 'CONTINUE'
-# In the 'Additional Product Information Page'
-# CONFIRM the 'Additional Product Information Page' displays the Question "Which one best describes your product"
-# Select the Radio Button Option - "Product is not considered a pesticide product"
-# CONFIRM that by default the "United States" checkbox is selected
-# Select 'NO' for the rest of the questions listed in the 'Additional Product Information Page'
-# Click 'CONTINUE'
-# In the 'INGREDIENTS SCREEN' enter the following CAS Numbers
-# 66071-96-3 - Glutens, corn @ 100%
-# Click 'CONTINUE'
-# CONFIRM that you are prompted with the 'PRODUCT CONTAINS INGREDIENTS TYPICAL OF A PESTICIDE' Message Box
-# CONFIRM that the Component is marked as 'ACTIVE'
-# Click on the 'GO BACK BUTTON'
-# CONFIRM that transitions back to the 'INGREDIENTS PAGE'
-# Do not make any changes to the Components - leave them as is
-# Click on the 'PRODUCT TYPE' Tab
-# Click on 'THE PRODUCT' Edit Pencil Icon
-# CONFIRM it transitions back to 'THE PRODUCT' PAGE
-# Edit the Product Name to 'RESET PRODUCT'
-# Change the 'TYPE OF PRODUCT' TO:  Chalk
-# Click 'CONTINUE'
-# In the Product Characteristics Page -  By default 'SOLID' is selected as a Primary Physical State
-# Select SOLID for Secondary Physical State
-# For the question 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?  - Select 'NO'
-# Click on the 'Water Solubility description' drop-down and select Soluble in Water
-# Click 'CONTINUE'
-# CONFIRM that it transitions to the 'Additional Product Information Page'
-# CONFIRM that the Pesticide Section in the Additional Product Information Page shows
-# CONFIRM that the first question is the 'Select countries the product may be sold in'
-# Select 'NO' for the rest of the questions in the Page
-# Click 'CONTINUE'
-# Transitions to the 'INGREDIENTS Page'
-# Click 'CONTINUE' on the 'INGREDIENTS' Page
-# CONFIRM that you are NOT prompted with the window message 'Product Contains Ingredients Typical of a Pesticide'
-# By changing the Product Type - the flow should reset and no longer show the Pesticide Information
-#Continues onto the 'Waste Classification Data' Page
-Given I click the Home navigation icon
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Pesticide Testing Product
+| Glutens, corn       | 100     | false               | false       |            |
+Then I click continue
+Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA).
+Then I confirm the table in the popup view has following column data
+| CAS Number | Name                   | Active or Inert |
+| 66071-96-3 | Glutens, corn          | Active          |
+Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+And I should see the Ingredients Page
+When In the New Product page I click tab: Product Type
+And I click the page heading: The Product
+And I should see the The Product Page
+Given I call Shared Step 57561a (The Product - Enter Product Name: RESET PRODUCT and select Type of Product): Chalk
+Then I click continue
+Given I set the Primary Physical State option to: Solid
+Given I set the Secondary Physical State option to: Solid
+Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+Given I set the Select the best Water Solubility description option to: Soluble in water
+Then I click continue
+And I should see the Additional Product Information Page
+And I see the following sections
+| Section                               |
+| Which one best describes your product |
+Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+Given I set the Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns. option to: No
+Given I set the Product is a Retailer's Private Label or Brand option to: No
+Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+Then I click continue
+And I should see the Ingredients Page
+Then I click continue
+Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+And I should see the Waste Classification Data Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133610
+
+Then I click close for the warning popup titled: California Cleaning Right to Know
