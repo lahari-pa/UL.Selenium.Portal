@@ -60,10 +60,8 @@ Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
 	Given I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
 	Then I add the following ingredients:
 		| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Glycerin      | 100     | false               | false       |            |
+		| Water         | 100     | false               | false       |            |
 	Then I click continue
-	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)

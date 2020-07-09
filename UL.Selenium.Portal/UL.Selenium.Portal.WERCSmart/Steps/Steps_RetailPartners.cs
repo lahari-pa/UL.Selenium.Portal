@@ -2249,7 +2249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I confirm the excel file saved as: (.*) contains the following data: (.*)")]
-		public void ThenIConfirmTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingDataCleaningSuppliesProductForBBB(string savedAs, string data)
+		public bool ThenIConfirmTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingDataCleaningSuppliesProductForBBB(string savedAs, string data)
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			object File = Context.GetFromContext(savedAs);
@@ -2264,10 +2264,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Header row contained: '" + string.Join("', '", row) + "'");
 					foreach (var str in row)
 					{
-						Report.Info("Test1 " + str + " " + data);
 						if (str == data)
 						{
 							Report.Success("Excel file contained the following data: " + data);
+							return true;
 						}
 					}
 				}
@@ -2275,7 +2275,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 				Report.Failure("Excel file did not contain the following data: " + data);
+				return false;
 			}
+
+			return false;
 		}
 
 	}

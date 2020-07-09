@@ -1213,8 +1213,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SearchForUserSavedAs()
 		{
-			IWebElement searchBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='userSearch']"), 2);
-			IWebElement searchButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='userSearch']/following-sibling::span"), 2);
+			IWebElement searchBar = this.containerElement.FindElement(By.XPath("//input[@id='userSearch']"), 2);
+			IWebElement searchButton = this.containerElement.FindElement(By.XPath("//input[@id='userSearch']/following-sibling::span"), 2);
 
 			string email = Context.GetFromContext("CurrentEmail").ToString();
 
@@ -1222,7 +1222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			searchButton.TryClick();
 			Delay.Seconds(5);
 
-			IList<IWebElement> userEmails = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='user-accounts-grid']//td[@data-bind='text: Email']"), 2);
+			IList<IWebElement> userEmails = this.containerElement.FindElements(By.XPath("//div[@id='user-accounts-grid']//td[@data-bind='text: Email']"), 2);
 			string[] userEmailArr = new string[userEmails.Count];
 
 			for (int i = 0; i < userEmails.Count; i++)
