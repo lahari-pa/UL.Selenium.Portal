@@ -584,14 +584,12 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Training aid repellant
 	Then I save the product information as: TestCase57709
-	Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
-		| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
-	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+    Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
@@ -668,7 +666,7 @@ Scenario: [117894] Fireworks (RU000330) - 8-S - UN0358 - Net Explosive Mass UPC 
          | 688267000000 |      | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
          | 854911000000 |      | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
 	
-	And I edit the testdoc.xlsx, and save its filepath as: Bulktest117894 and verify it contains the UPC data in the table saved as: UPCTable117894
+	And I edit the testdoc.xlsx, and save its filepath as: Bulktest117894 and verify it contains the UPC data in the table saved as: UPCTable117894, (Base Data Only: true)
 		| UPC           | Name      | Quantity | Size | Net Explosive Mass | US: Part Number | GP: Part Number | SP:Part Number | TG: DPCI    | HD: OMSID | CT: Item Number    | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
 		| %UPC_Jacob_1% | Firework1 | 1        | 11   | N/A                | 1001            | 1111            | A0001          | 111-22-0001 | 100000001 | 123-1234, 123-1230 |                         |            |                  |                  |            |              |            |          |                              |
 		| %UPC_Jacob_2% | Firework2 | 2        | 12   | 1.230              | 1002            | 2222            | A0002          | 111-22-0002 | 100000002 | 123-1234, 123-1231 |                         |            |                  |                  |            |              |            |          |                              |

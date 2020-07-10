@@ -311,6 +311,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public static void OpenNewTabAndNavigateTo(string url)
+		{
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.open();");
+			SeleniumBrowser.WebBrowser.SwitchTo().Window(SeleniumBrowser.WebBrowser.WindowHandles.Last());
+			if (url.ToLower().Contains("savedas"))
+			{
+				url = (string)Context.GetFromContext(url);
+			}
+			SeleniumBrowser.WebBrowser.Url = url;
+			SeleniumBrowser.WebBrowser.WaitForPageLoad();
+		}
+
 	}
 
 	public class RetailerAbbreviations
@@ -456,19 +470,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		/// </summary>
 		public string TryConvertToAbbreviation(string input)
 		{
-			var abbreviationMappings = this.Map;
-			if (abbreviationMappings.ContainsKey(input))
+			int x = 0;
+			bool foundMapping = false;
+			while(foundMapping==false && x<6)
 			{
-				abbreviationMappings.TryGetValue(input, out string retailer);
-				if (retailer != null)
+				Delay.Seconds(2);
+				var abbreviationMappings = this.Map;
+				if (abbreviationMappings.ContainsKey(input))
 				{
-					return retailer;
+					abbreviationMappings.TryGetValue(input, out string retailer);
+					if (retailer != null)
+					{
+						Report.Info($"Found the retailer abbrevation: {input}");
+						return retailer;
+					}
 				}
+				else
+				{
+					Report.Info("List does not contain input");
+				}
+				Report.Info($"Failed to find the input retailer: {input} in the Retailer abbreviations list");
+				x++;
+				
 			}
-			Report.Info($"Failed to find the input retailer: {input} in the Retailer abbreviations list");
 			return input;
+
 		}
 
+		
 
 
 

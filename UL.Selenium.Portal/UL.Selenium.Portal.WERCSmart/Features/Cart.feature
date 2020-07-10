@@ -23,7 +23,7 @@ Scenario: [66635] Left hand navigation - Shopping Cart navigation - Products
 
 @ScenarioId:1007
 Scenario: [63323] Remove single product from cart
-       Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: CartNoProducts
        Then The home screen should load
        Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
        Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -49,9 +49,11 @@ Scenario: [63323] Remove single product from cart
        Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
        Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
        Given In the Purchase Summary screen I click Remove for product saved as TestCase63323
+	   Then I wait for a modal dialog to open
        Given in the modal dialog I click the "CANCEL" button
        Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
        Given In the Purchase Summary screen I click Remove for product saved as TestCase63323
+	   Then I wait for a modal dialog to open
        Given in the modal dialog I click the "REMOVE" button
        Then The home screen should load
        And I search for the product saved as: TestCase63323

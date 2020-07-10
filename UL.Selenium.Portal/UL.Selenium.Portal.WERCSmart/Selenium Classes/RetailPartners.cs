@@ -137,6 +137,51 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//Jacob
+
+		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[contains(text(), \"" + radioButtonText + "\")]"), 2);
+
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				if (el == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				if (el == null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			return false;
+
+		}
+
+		public bool CheckIfAISIsUploaded()
+		{
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click ')]"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
 	}
 
 	class RetailPartnersDetails : SeleniumBaseObject
@@ -309,6 +354,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool Checked = checkbox.Selected;
 			return Checked;
 		}
+		public bool GetDataConsentTierOnofFSwitch(string tier)
+		{
+			IWebElement onOffSwitch = this.containerElement.FindElement(By.XPath(".//div[contains(text(),'" + tier + "')]/../following-sibling::td//span[@class='slider round']"), 2);
+			if (onOffSwitch != null)
+			{
+				return true;
+			}
+			return false;
+		}
+
 
 		public bool SaveChangesButtonShowing()
 		{

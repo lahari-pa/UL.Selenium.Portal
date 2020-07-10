@@ -13,11 +13,15 @@ using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using Gherkin.Ast;
+using TechTalk.SpecFlow;
+using TableRow = TechTalk.SpecFlow.TableRow;
 using OpenQA.Selenium.Interactions;
+using UL.Selenium.Portal.WERCSmart.Steps;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class StudioSHAManager : BaseObject
+	public class StudioSHAManager : BaseObject
 	{
 		public const string BasePath = "//div[@id='main']";
 
@@ -411,18 +415,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Report.Info("Checkbox is already checked");
 							return true;
 						}
+						int x = 0;
+						bool clickedSuccess = false;
+						while (x<5 && clickedSuccess==false)
+						{
+							Delay.Seconds(2);
+							checkbox.TryClick();
+							if (checkbox.Checked())
+							{
+								Report.Screenshot();
+								clickedSuccess = true;
+								return true;
+							}
+							else
+							{
+								Report.Info("Attempted to check checkbox but failed.");
+									
+							}
+							x++;
 
-						checkbox.TryClick();						
-						if (checkbox.Checked())
-						{
-							Report.Screenshot();
-							return true;
 						}
-						else
+						if (clickedSuccess == false)
 						{
-							Report.Info("Attempted to check checkbox but failed.");
+							Report.Info("Final attempt to check checkbox failed.");
 							return false;
 						}
+						
 					}
 					else
 					{
@@ -548,15 +566,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (matchingTD2 != null)
 			{
 				Report.Info("Found matching cell");
+				var thisContextMenu = new RightClickProductMenu();
 				//matchingTD2.RightClick();
 				//This below is to handle the Right click clicking below the element.
 				//if this fails in some cases, try the old method first and then check for the context menu (var thisContextMenu = new RightClickProductMenu();) and only if that fails do the new way
-				Actions actions = new Actions(SeleniumBrowser.WebBrowser);				
-				actions.MoveToElement(matchingTD2);
-				actions.MoveByOffset(0,-50);
-				actions.ContextClick();
-				actions.Perform();
-				return true;
+				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+				int i = 0;
+				while (i<70)
+				{
+					Delay.Seconds(2);
+					actions.MoveToElement(matchingTD2);
+					actions.MoveByOffset(0, i);
+					actions.ContextClick();
+					actions.Perform();
+					if (thisContextMenu.MenuExists())
+					{
+						return true;
+					}
+					i = i - 10;
+				}				
+				return false;
 			}
 			else
 			{
@@ -1359,6 +1388,92 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return null;
 		}
 
+		public ProductInformation ReturnProductInformationOfProductwithIsBlueAndHasClientsAndUPC()
+		{
+			int indexOfID = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+			int indexOfName = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Name");
+			int indexOfClients = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+			ReadOnlyCollection<IWebElement> idTDs = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfID + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> nameTDs = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfName + 1).ToString() + "]"));
+
+			ReadOnlyCollection<IWebElement> clientsTDs = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfClients + 1).ToString() + "]"));
+
+			// start at a random place in the list. This solves the problem where we are always selecting the first product in the list,
+			// which then accumulates too many Retailers.
+			Random rnd = new Random();
+			for (int i = rnd.Next(idTDs.Count); i < idTDs.Count; i++)
+			{
+				IWebElement thisIDTD = idTDs[i];
+				IWebElement thisNameTD = nameTDs[i];
+				IWebElement thisClientsTD = clientsTDs[i];
+				string colour = thisIDTD.FindElement(By.XPath(".//span")).GetCssValue("color").ToString();
+				if (colour == "rgba(0, 0, 255, 1)" && thisClientsTD.GetValue().Length > 0)
+				{
+					string bottomBorderColour = thisIDTD.GetCssValue("border-bottom-color");
+					string leftBorderColour = thisIDTD.GetCssValue("border-left-color");
+					string rightBorderColour = thisIDTD.GetCssValue("border-right-color");
+
+					if (!(bottomBorderColour == "rgba(205, 10, 10, 1)" && leftBorderColour == "rgba(205, 10, 10, 1)" &&
+						  rightBorderColour == "rgba(205, 10, 10, 1)"))
+					{
+						var shaSteps = new Steps_SHA();
+						string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+						string idString = thisIDTD.Text;
+						this.RightClickProductByID(idString);
+						Context.AddToContext("MainSHAindowHandle", currentHandle);
+						Report.StartStep("I click 'UPC Retailer and Feed'");
+						shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
+						Delay.Seconds(5);
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(currentHandle);
+						var studioSHAManger = new StudioSHAManager();
+
+						Delay.Seconds(10);
+						shaSteps.SwitchToProductListUpcWindow();
+						Delay.Seconds(4);
+						string url2 = SeleniumBrowser.WebBrowser.Url;
+						List<SHAManagerProdcutUPC> displayedUpcs = new StudioSHAManager().GetUPCs();
+						Report.Info($"The number of UPCs displayed in the UPC Details page is: {displayedUpcs.Count}");
+						if (displayedUpcs.Count > 0)
+						{
+
+
+							new GlobalSteps().SaveTheCurrentWindowAs("CurrentWindow");
+							string productsGridHandle = (string)Context.GetFromContext("MainWindowHandle");
+							SeleniumBrowser.WebBrowser.SwitchTo().Window(productsGridHandle);
+							Delay.Seconds(5);
+							SeleniumBrowser.SwitchToIFrame("Widget1FRAME");						
+							string newTab = (string)Context.GetFromContext("CurrentWindow");
+							SeleniumBrowser.WebBrowser.SwitchTo().Window(newTab);
+							new GlobalSteps().SwitchBackToMainWindow("CurrentWindow");
+							SeleniumBrowser.WebBrowser.SwitchTo().Window(productsGridHandle);
+							SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
+							return new ProductInformation
+							{
+								Id = thisIDTD.GetValue().Trim(),
+								Name = thisNameTD.GetValue().Trim()
+							};
+						}
+						new GlobalSteps().SaveTheCurrentWindowAs("CurrentWindow");
+						string failedproductsGridHandle = (string)Context.GetFromContext("MainWindowHandle");
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(failedproductsGridHandle);
+						Delay.Seconds(5);
+						SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
+						string failednewTab = (string)Context.GetFromContext("CurrentWindow");
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(failednewTab);
+						new GlobalSteps().SwitchBackToMainWindow("CurrentWindow");
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(failedproductsGridHandle);
+						SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
+
+					}
+
+				}
+			}
+
+			return null;
+		}
+
 		public List<string> ReturnClientsOfProductByID(string id)
 		{
 			int indexOfID = SeleniumBrowser.WebBrowser
@@ -1469,6 +1584,96 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
+
+		public List<string> FindColumnInUPCRetailerAndFeedPageWithTable(Table table)
+		{
+
+			List<string> columnsNotFound = new List<string>();
+			List<string> columnNamesStrings = new List<string>();
+			IList <IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+
+			foreach (var columnName in columnNames)
+			{
+				columnNamesStrings.Add(columnName.Text);
+			}
+
+			foreach (TableRow row in table.Rows)
+			{
+			
+				if (!columnNamesStrings.Contains(row["Column Name"]))
+				{
+					columnsNotFound.Add(row["Column Name"]);
+				}
+			}
+
+			return columnsNotFound;
+
+		}
+
+		public string FindClientsForProduct(string productID)
+		{
+			IWebElement clients = this.containerElement.FindElement(By.XPath(".//td[@title='" + productID + "']/following-sibling::td[@aria-describedby='list_CLIENTS']"), 2);
+			return clients.Text;
+		}
+
+		public bool ConfirmUInSecondColumn(string productID)
+		{
+			IWebElement secondColumnU = this.containerElement.FindElement(By.XPath(".//td[@role='gridcell']//span[text()='" + productID + "']/../following-sibling::td[@title='UPC Update Only']"), 2);
+
+			if (secondColumnU != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool FindDataForClientsInUPCRetailerAndFeedPage(string[] clients)
+		{
+			List<string> columnsNotFound = new List<string>();
+			List<string> columnNamesStrings = new List<string>();
+			IList<IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+			IList<IWebElement> columnData = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+
+			if (columnNames.Count == 0)
+			{
+				Report.Info("No column names were fonud");
+				return false;
+			}
+
+			if (columnData.Count == 0)
+			{
+				Report.Info("No column data was fonud");
+				return false;
+			}
+
+			foreach (var columnName in columnNames)
+			{
+				columnNamesStrings.Add(columnName.Text);
+			}
+
+			foreach (string client in clients)
+			{
+
+				if (!columnNamesStrings.Contains(client))
+				{
+					Report.Info(client + " was not found");
+					return false;
+				}
+				else
+				{
+					int index = Array.FindIndex(clients, row => row.Contains(client));
+					if (columnData.ElementAt(index).Text.Length < 1)
+					{
+						Report.Info(client + " had no data");
+						return false;
+					}
+				}
+			}
+
+			return true;
+		}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
@@ -1756,8 +1961,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[contains(@aria-labelledby,'IsArchiveProduct')]");
 
+		
+
 		public bool ArchivedUPCPopupTitle(string title, out string displayedTitle) =>
 			title == (displayedTitle = this.containerElement.FindElement(By.Id("ui-dialog-title-dialog-IsArchiveProduct")).GetInnerText());
+
 
 		public bool VerifyPopupContents(string uPC, out string failedAt)
 		{
@@ -1911,6 +2119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
+
 	}
 
 	class RightClickProductMenu : BaseObject
@@ -2374,7 +2583,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class Product
+	public class Product
 	{
 		public string ID { get; set; }
 		public string Name { get; set; }
@@ -2401,7 +2610,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string Distributor { get; set; }
 	}
 
-	class SHAManagerProdcutUPC
+	public class SHAManagerProdcutUPC
 	{
 		public string UPCNumber { get; set; }
 		public string PackagingType { get; set; }

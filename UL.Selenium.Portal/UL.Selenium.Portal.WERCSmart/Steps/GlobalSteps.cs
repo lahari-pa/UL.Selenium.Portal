@@ -23,6 +23,8 @@ using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
+using OpenQA.Selenium.Chrome;
+using System.Diagnostics;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -35,6 +37,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public static void SetTestURL()
 		{
 			SeleniumBrowser.BaseTestUrl = TestVariables.GetVariableSavedAs("TestURL");
+		}
+
+		[AfterScenario(Order = 1)]
+		public static void CloseChrome()
+		{
+			//Process.GetProcessesByName("chrome").ToList().ForEach(x => x.Kill());
+			Process.GetProcessesByName("chromedriver").ToList().ForEach(x => x.Kill());
 		}
 
 
@@ -158,6 +167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selHomepage = new Homepage();
 			Report.IsTrue(selHomepage.WaitForContainerToBeVisible(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 			GeneralUtilities.Wait_for_load_finish();
+
 		}
 
 		public string GetEmailForAccount(string accountSavedAs)
@@ -212,9 +222,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (attemptOnce)
 				{
 					this.AttemptToLoginWithEmailAndPassword(user.Username, user.Password);
+					new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 					return;
 				}
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
+				new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 			}
 			
 		}
@@ -517,6 +529,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Navigating to the landing page");
+				Report.Info("Checking the number of tabs that are open in the current window");
+				ReadOnlyCollection<string> currentTabs = SeleniumBrowser.WebBrowser.WindowHandles;
+				if(currentTabs.Count()==1)
+				{
+					Report.Info("There was only 1 tab open, attempting to close and reopen chrome");
+					Report.Info("Chrome Quit - Closing the chrome window");
+					SeleniumBrowser.StopBrowser();
+					//Report.Info("Attempting to initialize the chrome driver");
+					//var chromeDriverService = ChromeDriverService.CreateDefaultService();
+					Report.Info("Attempting to Open a chrome window");
+					//SeleniumBrowser.WebBrowser =  new ChromeDriver(chromeDriverService, new ChromeOptions());
+					//Report.Info("Attempting to maximize the window");
+					SeleniumBrowser.StartBrowser();
+					//SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+				}
+
+
 				SeleniumBrowser.Navigate(SeleniumBrowser.BaseTestUrl);
 				Delay.Seconds(1);
 				ReadOnlyCollection<string> allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
@@ -657,10 +686,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the window that opened")]
 		public void ThenCloseTheWindowThatOpened()
 		{
+			Delay.Seconds(5);
 			Report.StartStep(ReportSettings.StepCounter + " - Closing current window");
 			try
 			{
 				object mainWindowHandle = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle");
+
 				if (mainWindowHandle == null)
 				{
 					throw new Exception("No Main Window Handle found in context!");
@@ -844,6 +875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					email = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
 				}
+				Delay.Seconds(10);
 
 				if (MailosaurFunctions.WaitForInboxDifferences(email))
 				{
@@ -851,6 +883,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Found " + differences.Count() + " emails");
 
 					Mailosaur.Email matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
+					Report.Info("Checking if an email that matches the criteria was found...");
 
 					if (shouldOrNot == "should")
 					{
@@ -1099,6 +1132,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("modal dialog is opened. ");
 				Report.IsTrue(thisModalDialog.Click_Closex(), "Failed to click close button", "Clicked close button");
+			}
+		}
+
+		[StepDefinition(@"I wait for a modal dialog to open")]
+		public void WaitForAModalDialogToOpen()
+		{
+			var thisModalDialog = new ModalDialog();
+			if (thisModalDialog.Wait_for_load(30))
+			{
+				Report.Success("Modal dialog is opened.");
+				
+			}
+			else
+			{
+				Report.Failure("A modal dialog is not open.");
+
 			}
 		}
 
@@ -1435,6 +1484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the current tab")]
 		public void GivenICloseTheCurrentTab()
 		{
+			Delay.Seconds(5);
 			SeleniumBrowser.CloseTabWithURL(SeleniumBrowser.GetActiveTabURL());
 		}
 
@@ -1817,6 +1867,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				// required to switch to the frame and refresh container
 				new StudioSHAManager().Wait_for_load();
+				//switch to correct iFrame? if elements are returning as null etc after swithcing back to SHA products grid, may need to switch to correct IFrame again. Here or in methods?
 			}
 			catch (Exception ex)
 			{
@@ -1952,6 +2003,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing","The modal was gone");
 		}
+
+		[StepDefinition(@"I save the following text: (.*) as (.*)")]
+		public void SaveTextToContextAs(string text, string savedAs)
+		{
+			Context.AddToContext(savedAs, text);
+		}
+
+		[StepDefinition(@"I Delete the file with name: (.*) from the downloads folder")]
+		public void DeleteFileFromDownloadsFolder(string fileName)
+		{
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(fileName), "", "");
+		}
+
+
 
 
 	}

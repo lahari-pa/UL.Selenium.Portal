@@ -34,7 +34,9 @@ Scenario: [57863] Flow 7 - ABS Welding (RU000868)
 	Then The VOC content in g/L message shows the value: 10.0
 	Then The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the California Air District(s)
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
+	Given in the Volatile Organic Compound Summary page I click Continue
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57863, container type: Metal Container and size: 40
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	#Given I call Shared Step 60933 (Additional Documents to Provide - Product Label and OSHA SDS only)
@@ -78,6 +80,8 @@ Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (R
 	Then The VOC content in g/L message shows the value: 10.0
 	Then The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the California Air District(s)
 	#the South Coast Air Quality Management District
+	Given in the Volatile Organic Compound Summary page I click Continue
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	Given in the Volatile Organic Compound Summary page I click Continue
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	# Shared 42759 is a duplicate - using 57960

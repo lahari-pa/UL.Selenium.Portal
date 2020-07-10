@@ -18,6 +18,8 @@
 @SummaryPage
 @PaymentMethods
 @ProductSetUp
+@UPC
+@DeleteActiveProducts
 @run_BulkActions
 Feature: BulkActions
 
@@ -100,6 +102,7 @@ Scenario: [76314] Forward Product - NR should Not Require UPC
 	Given I click continue on the Forward Product Registration page
 	Then I confirm the active Forward Product Registration tab is: Select UPCs
 	Given I select the first product under the Select UPCs tab
+	And If the Private Label textbox is showing in the Select UPCs screen, I enter the value: N/A
 	Given I click the Add To No Retailer button under the Select UPCs tab
 	And I select the UPC row: 'No UPC'/ 'No Retailer'
 	Given I click continue on the Forward Product Registration page
@@ -198,7 +201,7 @@ Scenario: [75129] Forward - Product in Submitted Status
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: saved as TestCase75129Email and saved name as: TestCase75129Supplier
 	And I call Shared Step 74655 SHA with email - Search by Supplier ID saved as TestCase75129Supplier for specific product status: Submitted and email: saved as TestCase75129Email
-	And I save a product which blue and has retailers as TestCase75129
+	And I save a product which blue and has retailers and at least 1 UCP as TestCase75129
 	And I save the retailers associated with product TestCase75129 as TestCase75129Retailers
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -264,6 +267,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I click continue
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
 	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
 	And I navigate to the home page
 	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 	And I enter the text: saved as TestCase78048 in the 'Search by WPS ID or Product Name' field
@@ -281,3 +285,208 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page
 
+	
+@ScenarioId:9320
+	Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
+
+	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I generate a random UPC number and save as: UPC93366a
+	Given I delete all products with UPC Number: saved as UPC93366a
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase93366a
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
+		| Retailer       |
+		| CVS            |
+		| Dollar General |
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC93366a, container type: Metal Container and size: 40
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+
+	And I navigate to the home page
+Given I generate a random UPC number and save as: UPC93366b
+	Given I delete all products with UPC Number: saved as UPC93366b
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase93366b
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
+		| Retailer       |
+		| CVS            |
+		| Dollar General |
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC93366b, container type: Metal Container and size: 40
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
+		And I navigate to the home page
+Given I generate a random UPC number and save as: UPC93366c
+	Given I delete all products with UPC Number: saved as UPC93366c
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase93366c
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
+		| Retailer       |
+		| CVS            |
+		| Dollar General |
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC93366c, container type: Metal Container and size: 40
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
+		And I navigate to the home page
+Given I generate a random UPC number and save as: UPC93366d
+	Given I delete all products with UPC Number: saved as UPC93366d
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase93366d
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
+		| Retailer       |
+		| CVS            |
+		| Dollar General |
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC93366d, container type: Metal Container and size: 40
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
+		And I navigate to the home page
+Given I generate a random UPC number and save as: UPC93366e
+	Given I delete all products with UPC Number: saved as UPC93366e
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase93366e
+	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
+		| Retailer       |
+		| CVS            |
+		| Dollar General |
+	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC93366e, container type: Metal Container and size: 40
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
+	And I navigate to the home page
+	Given I click Bulk Actions in the Products Grid
+	And I click Delete Products in the Bulk Actions window
+	And I should see the header: Delete Active Products on the Delete Active Product window
+	Then I select the checkbox next to WPS ID in the Delete Active Products page
+	Then I confirm all checkboxes are selected in the Delete Active Products page
+	Then I deselect the checkbox next to WPS ID in the Delete Active Products page
+	Then I confirm all checkboxes are deselected in the Delete Active Products page
+
+	Then In the Delete Active Products page I search for WPS ID saved as: TestCase93366a
+	Then In the Delete Active Products page I click the Filter button
+	Then I make sure product saved as: TestCase93366a should not missing from the product list
+	Then I select checkbox for product saved as: TestCase93366a
+
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Cancel button
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Accept button
+	Then I make sure product saved as: TestCase93366a should missing from the product list
+
+	Then In the Delete Active Products page I search for WPS ID saved as: TestCase93366b
+	Then In the Delete Active Products page I click the Filter button
+	Then I make sure product saved as: TestCase93366b should not missing from the product list
+	Then I select checkbox for product saved as: TestCase93366b
+
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Cancel button
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Accept button
+	Then I make sure product saved as: TestCase93366b should missing from the product list
+
+	Then In the Delete Active Products page I search for WPS ID saved as: TestCase93366c
+	Then In the Delete Active Products page I click the Filter button
+	Then I make sure product saved as: TestCase93366c should not missing from the product list
+	Then I select checkbox for product saved as: TestCase93366c
+
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Cancel button
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Accept button
+	Then I make sure product saved as: TestCase93366c should missing from the product list
+
+	
+@ScenarioId:9321
+	Scenario:[88826] Delete Products > Product Not yet submitted
+    Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase88826
+	Then I generate a random UPC number and save as: UPC88826
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	And In the 'Select Retailers' window I select the retailer: CVS
+	And I click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC88826, container type: Plastic Container and size: 12 click continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I navigate to the home page
+	Given I click Bulk Actions in the Products Grid
+	And I click Delete Products in the Bulk Actions window
+	And I should see the header: Delete Active Products on the Delete Active Product window
+	Then In the Delete Active Products page I search for WPS ID saved as: TestCase88826
+	Then In the Delete Active Products page I click the Filter button
+	Then I make sure product saved as: TestCase88826 should not missing from the product list
+	Then I select checkbox for product saved as: TestCase88826  
+	Then I click on the Make Obsolete button
+	Then I select the checkbox in the Make Obsolete popup
+	Then In the Make Obsolete popup I click on the Accept button
+	Then In the Delete Active Products page I search for WPS ID saved as: TestCase88826
+	Then In the Delete Active Products page I click the Filter button
+	Then I make sure product saved as: TestCase88826 should missing from the product list
+	Given I navigate to the home page
+	Then I confirm the follow product doesn't exist in the product grid: TestCase88826

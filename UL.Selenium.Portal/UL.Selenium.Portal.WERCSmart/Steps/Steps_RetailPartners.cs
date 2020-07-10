@@ -27,10 +27,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selRetailPartners = new RetailPartners();
 
-			if (!selRetailPartners.Wait_for_load(10))
+			if (!selRetailPartners.Wait_for_load(30))
 			{
 				Report.Info("Retail partners page has not loaded so no need to deal with it. ");
 			}
+			//if(new ModalDialog().WaitForContainerToBeVisible(5))
+			//{
+			//	new ModalDialog().ClickButton("GO TO MY RETAILERS");
+			//	selRetailPartners.Wait_for_load(10);
+			//}
 			else
 			{
 				//get list of all top level retail partners
@@ -513,6 +518,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I ensure the Data Consent Tier Sliders exist for the following tiers:")]
+		public void DataConsentTiersSlidersExist(Table expected)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier Sliders exist");
+			try
+			{
+				Report.Info("Ensure the Data Consent Tier Sliders exist");
+				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
+				{
+					Report.IsTrue(selRetailDetails.GetDataConsentTier("Tier " + row["Tier"]),
+						"Failed to find slider for Tier " + row["Tier"],
+						"Successfully found slider for Tier " + row["Tier"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I ensure the Data Consent Tier On/Off switch exists for the following tiers:")]
+		public void DataConsentTiersOnOffSwitchExist(Table expected)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier On/Off switch exist");
+			try
+			{
+				Report.Info("Ensure the Data Consent Tier On/Off switch exist");
+				var selRetailDetails = new RetailPartnersDetails();
+				foreach (TableRow row in expected.Rows)
+				{
+					Report.IsTrue(selRetailDetails.GetDataConsentTierOnofFSwitch("Tier " + row["Tier"]),
+						"Failed to find slider for Tier " + row["Tier"],
+						"Successfully found slider for Tier " + row["Tier"]);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I ensure the Data Consent Tier Sliders are set as follows:")]
 		public void DataConsentTiersSet(Table expected)
 		{
@@ -623,6 +672,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(selDataEntryChanges.ClickClose(), "Failed to click close", "Clicked close successfully!");
 			}
+ 			Delay.Seconds(0);
 		}
 
 		[StepDefinition(@"if the save button is visible, I save changes and close the popup dialog")]
@@ -769,6 +819,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click on close in the Report Download dialog")]
 		public void GivenIClickOnCloseInTheReportDownloadDialog()
 		{
+			Delay.Seconds(10);
 			Report.IsTrue(new ReportDownload().ClickClose(), "Failed to click close on Report Download modal dialog", "Successfully clicked close");
 		}
 
@@ -823,11 +874,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new RetailPartnersDetails().ClickAddSupplierId(), "Failed to click add supplier id link",
 				"Successfully clicked add supplier id link");
+			//Delay.Seconds(5);
 		}
 
 		[StepDefinition(@"I confirm the pop up shows the heading: (.*)")]
 		public void ThenIConfirmThePopUpShowsTheHeading(string title)
 		{
+			Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(), "The modal was not visible", "The modal was visible");
 			string actualTitle = new ModalDialog().GetTitle();
 			Report.IsTrue(actualTitle == title, "Title is " + actualTitle + " but should be: " + title,
 				"Title is showing as expected: " + title);
@@ -1197,6 +1250,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"The Data Tier Details popup shows the following tabs:")]
 		public void DataTierDetailsPopUpShowsTheFollowingTabs(Table tabs)
 		{
+			Delay.Seconds(10);
 			var expectedTabs = new List<string>();
 			tabs.Rows.Cast<TableRow>().ToList().ForEach(x => expectedTabs.Add(x["Tab"]));
 			List<string> displayedTabs = new DataTierDetails().AllTabs();
@@ -1377,8 +1431,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the Add New Supplier Dialog I click save")]
 		public void GivenInTheAddNewSupplierDialogIClickSave()
 		{
+		
 			var thisAddNewSupplier = new AddNewSupplier();
-			thisAddNewSupplier.ClickSave();
+			Report.IsTrue(thisAddNewSupplier.ClickSave(), "Failed to click save", "Successfully clicked save");			
 			Delay.Seconds(2);
 		}
 
@@ -1807,7 +1862,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			this.GivenIClickOnCloseInTheReportDownloadDialog();
-
 		}
 
 
@@ -2126,7 +2180,75 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				}
 			}
+
+		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following retailers:")]
+		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingRetailers(string savedAs, Table table)
+		{
+			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!string.IsNullOrEmpty(File), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				List<List<string>> ListOfRetailerNames = new List<List<string>>();
+
+				for (int i = 1; i < table.RowCount + 1; i++)
+				{
+					List<string> RetailerName = ExcelUtils.Excel_GetRow(i);
+
+					ListOfRetailerNames.Add(RetailerName);
+				}
+
+				var abbr = new RetailerAbbreviations();
+				string selectedAbbr = "";
+
+				foreach (TableRow thisRow in table.Rows)
+				{
+
+					string retailer = thisRow["Retailer"];
+					bool isFound = false;
+
+					abbr.Map.TryGetValue(retailer, out selectedAbbr);
+
+					foreach (List<string> Retailer in ListOfRetailerNames)
+					{
+
+						if (Retailer[0] == selectedAbbr)
+						{
+							isFound = true;
+						}
+					}
+
+					if (!isFound)
+					{
+						Report.Failure("The reatiler: " + retailer + " was not found");
+						return isFound;
+					}
+
+				}
+
+				Report.Info("All retailers were fonud");
+				return true;
+			}
+
+			Report.Failure("Excel data was not found");
+			return false;
 		}
+
+
+		[StepDefinition(@"I (should|should not) see radio option: (.*)")]
+		public void ISeeRadioOption(string shouldOrShouldNot, string radioButtonText)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.FindRadioButton(shouldOrShouldNot, radioButtonText), "Failed to see/not see the radio button with the following text: " + radioButtonText, "Succes saw/not saw the radio button with the following text: " + radioButtonText);
+		}
+
+		[StepDefinition(@"I check if AIS is not uploaded")]
+		public void ICheckIfAISIsNotUploaded()
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
+		}
+
+	}
 
 
 

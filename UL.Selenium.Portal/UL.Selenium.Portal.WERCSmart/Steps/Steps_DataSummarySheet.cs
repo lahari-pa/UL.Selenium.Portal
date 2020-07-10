@@ -121,7 +121,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var dataSummarySheet = new DataSummary();
 
-
 			List<string> found = dataSummarySheet.GetInfoForSectionOption(section, option);
 
 			Report.IsTrue(found.Contains(option),

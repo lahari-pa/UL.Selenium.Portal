@@ -9,6 +9,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@UPC
 @run_ProductDocuments
 
 Feature: Product Documents
@@ -38,6 +39,7 @@ Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commiss
 And I set the Product has been granted an Alternative Control Plan option to: Yes
 And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB field to: 23
 Given in the New Product page I click Continue
+Given In the VOC Acceptance section I agree
 Given in the New Product page I click Continue
 #And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
@@ -117,3 +119,4 @@ And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Opt
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Crayon
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59321
+

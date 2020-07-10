@@ -12,6 +12,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting.SpecFlow.Classes;
 using System;
 using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -671,6 +672,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return productRow.FindElement(By.XPath($".//ancestor::tr//td//input[@type='checkbox']"), 2).TryClick();
 		}
 
+		public bool CheckProductsRightPanel_CheckProductByID(string id)
+		{
+			IWebElement productRow = this.containerElement.WaitUntilElementVisible(By.XPath($"//table[contains(@data-bind,'selectedProds')]//tr//td//label[contains(text(),'{id}')]"), 10);
+			if (productRow == null)
+			{
+				Report.Info("Could not find product row for product ID: " + id);
+				return false;
+			}
+			return productRow != null;
+		}
+
 		public bool EnterPrivateLabelIfExists(string value)
 		{
 			IWebElement privateLabelInput = this.containerElement.FindElement(By.XPath(@"//label[contains(text(), 'Private Label')]/following-sibling::input"), 2);
@@ -709,7 +721,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement elem = this.containerElement.FindElement(By.XPath(@"//span[contains(text(), '" + option + "')]/../div//span[contains(text(), '" + level + "')]"), 2);
 			return elem != null;
 		}
-
 
 		public class SelectProducts : ForwardProductRegistration
 		{

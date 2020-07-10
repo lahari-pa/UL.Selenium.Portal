@@ -76,7 +76,7 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 		| 978959000000 |      | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
 		| 688267000000 |      | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
 		| 854911000000 |      | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
-	And I edit the testdoc.xlsx, and save its filepath as: Bulktest82536 and verify it contains the UPC data in the table saved as: UPCTable82536
+	And I edit the testdoc.xlsx, and save its filepath as: Bulktest82536 and verify it contains the UPC data in the table saved as: UPCTable82536, (Base Data Only: true)
 		| UPC          | Name    | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
 		| %RandomUPC1% | MySoap1 | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |                         |            |                  |                  |            |              |            |          |                              |
 		| %RandomUPC1% | MySoap2 | 2        | 32   | 2.33               | 00BB02          | 2002            | 1112            | G0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |                         |            |                  |                  |            |              |            |          |                              |
@@ -270,6 +270,7 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 	Given I click continue on the Forward Product Registration page
 	Given I select the first product under the Select UPCs tab
 	Given I click the Add Case UPC button under the Select UPCs tab
+	Then I wait for the Add Case UPC popup to appear
 	And In the Add Case UPC modal window I enter the following information:
 		| UPC Number          | Type        | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
 		| saved as UPC91800_2 | Aerosol Can | 32                   | 32       | 4A: steel box          | WG       |
@@ -327,13 +328,13 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 		| Supplier    | QA_Automation_ProductsAccount |
 		| User        | saved as AccountUsername      |
 	And I find the UPC number for: 5 products in the grid and save them to context starting with: ExistingUPC
-	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100 with data:
+	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100
 	Given I navigate to the landing page
 	Then I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase91100
 	Given I edit the first product in results
 	Then  I should see the Universal Product Code (UPC) Page
-	And I click the 'Upload UPCs' button and upload the file saved as: test91100 with data:
+	And I click the 'Upload UPCs' button and upload the file saved as: test91100
 	Then I confirm that the Add Multiple UPC window opens
 	Then In the Add Multiple dialog box I select all UPCs
 	Then In the Add Multiple dialog box I select the packaging type: <first>
@@ -422,6 +423,10 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 		| 978959000000 |      | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
 		| 688267000000 |      | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
 		| 854911000000 |      | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
+
+	#Looks like there is a bug failing this test that does not auto fill product name if using bulk upload file, in testing we can use below method with sample file data+ names to stop this being an issue, but needs to be raised.
+	#And I edit the testdoc.xlsx, and save its filepath as: Bulktest95988 and verify it contains the UPC data in the table saved as: UPCTable95988, (Base Data Only: true)
+
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I click the following option in the bottom menu: Search
 	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
@@ -430,6 +435,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 		| Status      | Completed    |
 	Given I find a UPC number for: 5 products not belonging to Supplier: QA_Automation_ProductsAccount in the grid and save to context starting with: ExistingUPC
 	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91101 with data:
+	#Then I add Generic Product Names to the UPC bulk upload spreadsheet: BulkUpload91101
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)	
 	Given I search for the product saved as: TestCase91101

@@ -10,6 +10,7 @@
 @wercsmart
 @RetailPartners
 @run_Flow16
+@UPC
 Feature: Flow 16
 
 @ScenarioId:680
@@ -37,7 +38,7 @@ Scenario: [59273] Alkaline Battery - RU000344
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -75,7 +76,7 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -112,7 +113,7 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -149,7 +150,7 @@ Scenario: [59277] Magnesium Battery - RU000728
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -187,7 +188,7 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -219,13 +220,13 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 		| Aqua            | 76.13   | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59279 with container type: Metal Container size: 40.0 and quantity: 100
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -264,7 +265,7 @@ Scenario: [59280] Silver Battery - RU000698
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -297,13 +298,13 @@ Scenario: [59281] Water-Charged Cell - RU001543
 		| Aqua            | 56.67   | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59281 with container type: Metal Container size: 30.0 and quantity: 50
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -335,13 +336,13 @@ Scenario: [59282] Zinc Air - RU001205
 		| Aqua          | 55      | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59282 with container type: Metal Container size: 40.0 and quantity: 100
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -373,13 +374,13 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 		| Aqua          | 55      | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59275 with container type: Metal Container size: 20.0 and quantity: 10
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -413,7 +414,7 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -445,7 +446,7 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Given I should see the Regulatory Documents to Provide Page
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -483,23 +484,23 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I should see the Regulatory Documents to Provide Page
 	Then in the Regulatory Documents to Provide page I click Continue
 	Given I verify the error messaging in Regulatory Documents to Provide:
-		| Question                          | Expected Answer                                                                                                                   |
-		| Article Information Sheet         | Document is required: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. |
-		| Batteries are considered Articles | Select at least one of the options                                                                                                |
-		| WHMIS-compliant Safety Data Sheet | Select at least one of the options                                                                                                |
-		| WHMIS-compliant label             | Document is required: Label in both French and English                                                                            |
+		| Question                                     | Expected Answer                                                                                                                   |
+		| Article Information Sheet                    | Document is required: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. |
+		| Batteries are considered Articles            | Select at least one of the options                                                                                                |
+		| WHMIS-compliant Safety Data Sheet            | Select at least one of the options                                                                                                |
+		| Product Label in English and French-Canadian | Document is required: Label in both French and English                                                                            |
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Then in the Regulatory Documents to Provide page I click Continue
 	Given I verify the error messaging in Regulatory Documents to Provide:
-		| Question                          | Expected Answer                                        |
-		| WHMIS-compliant Safety Data Sheet | Select at least one of the options                     |
-		| WHMIS-compliant label             | Document is required: Label in both French and English |
+		| Question                                     | Expected Answer                                        |
+		| WHMIS-compliant Safety Data Sheet            | Select at least one of the options                     |
+		| Product Label in English and French-Canadian | Document is required: Label in both French and English |
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Then in the Regulatory Documents to Provide page I click Continue
 	Given I verify the error messaging in Regulatory Documents to Provide:
-		| Question              | Expected Answer                                        |
-		| WHMIS-compliant label | Document is required: Label in both French and English |
-	Given I click the browse button for document type: Label in both French and English and for control label: WHMIS-compliant label, English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+		| Question                                     | Expected Answer                                        |
+		| Product Label in English and French-Canadian | Document is required: Label in both French and English |
+	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -510,3 +511,41 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59273. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alkaline battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
+
+
+@ScenarioId:8180
+Scenario:[122366] Battery Containing Product (BCP) (Transportation override at UPC level- New Feature)
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I generate a random UPC number and save as: UPC122366
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Battery-Containing Product
+	Then I save the product information as: TestCase122366
+	#Given I call Shared Step 60756 (Additional Product Information with Country and every option)
+	Then I call Shared Step 63704 (Additional Product Information - US, No(DSV), No(PL), No(GNFR))
+	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should see the Product Includes Battery Page
+	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product.
+	Given I add the following batteries:
+	 | Battery Type     | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
+	 | Lithium Primary  | <any>        | 4                               | 4                                  | lithiumbattery |
+	Given I click continue
+	And I set 'Product has had TCLP; Report is available' to: No
+	And I set the Lead option to: No
+	And I set the Mercury option to: No
+	And I set the Silver option to: No
+	And I set the Cadmium option to: No
+	And I set the Chromium option to: No
+	And I set the Barium option to: No
+	And I set the Arsenic option to: No
+	And I set the Selenium option to: No
+	Given I click continue
+	Then I should see the Electronic Equipment Page
+	And I set 'Contains Circuit Board' to: No
+	And I set 'Has a LCD or Plasma Display' to: No
+	Given I click continue
+	Given I call Shared Step 60096 (Lithium Battery Transportation)
+	And In the 'Select Retailers' window I select the retailer: Walgreens
+	And I click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC122366, container type: Plastic Container and size: 12 click continue
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)

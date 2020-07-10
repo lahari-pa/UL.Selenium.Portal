@@ -177,7 +177,76 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					ProductIdField = id
 				};
 				GeneralUtilities.Wait_for_load_finish();
+				Delay.Seconds(10);
 				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + id + "'!", "Product was returned!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm the follow product doesn't exist in the product grid: (.*)")]
+		public void GivenISearchForTheProductSavedAsAndConfirmItDoesNotExist(string savedAs)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Searching for Product Saved as " + savedAs);
+			try
+			{
+				Report.Info("Searching for Product Saved as " + savedAs);
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Report.Info("Searching for product with ID: '" + id + "'");
+				var selProdGrid = new ProductsGrid {
+					ProductIdField = id
+				};
+				GeneralUtilities.Wait_for_load_finish();
+				Delay.Seconds(10);
+				Report.IsTrue(selProdGrid.ProductsCount() == 0, "A product was returned for ID: '" + id + "'!", "No product were returned!");
 			}
 			catch (Exception ex)
 			{
@@ -1103,7 +1172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
 			int N = 4;
 			int Q = 2;
-			for (int i = 0; i < N - 1; i++)
+			for ( int i = 0; i < N - 1; i++)
 			{
 				// The filter at index i and j are the targets for this action
 				// Fix i and iterate j from i + 1 to the end then repeat for i++ etc
@@ -1140,7 +1209,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							else
 							{
 								options = selMoreFilters.Options(filterType);
-							}
+							}				
+							
 							string option = match[l] ? filter.Value : options.First(x => x != filter.Value);
 							switch (filterType)
 							{
@@ -1410,6 +1480,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(expectedOptions.All(x => displayedOptions.Contains(x)) && expectedOptions.Count == displayedOptions.Count,
 				$"The displayed options for filter {filter} did not match the expected options! Expected: {string.Join(", ", expectedOptions.Select(x => $"'{x}'").ToList())}. Actual: {string.Join(", ", displayedOptions.Select(x => $"'{x}'").ToList())}",
 				$"The displayed options for filter: {filter}' matched the expected options.");
+			var diff = expectedOptions.Except(displayedOptions);
+			var diff2 = displayedOptions.Except(expectedOptions);
+
 		}
 
 		[StepDefinition(@"I confirm retailers list based on environment")]
@@ -1420,492 +1493,489 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ReportSettings.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartStep("I should only see the following retailers");
-				var produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				var productTable = new TechTalk.SpecFlow.Table(new string[] {
 				"Option"
 			});
-				produtTable.AddRow(new string[] {
-				"99 Cents"
+				productTable.AddRow(new string[] {
+				"Ace Hardware Corporation"
 			});
-				produtTable.AddRow(new string[] {
-				"Ahold"
+				productTable.AddRow(new string[] {
+				"Ahold | DelHaize USA"
 			});
-				produtTable.AddRow(new string[] {
-				"Albertsons (includes Albertsons, LLC and New Albertson's Inc.)"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Albertsons Companies"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Amazon"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Autozone"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)"
 			});
-				produtTable.AddRow(new string[] {
-				"Big Lots"
+				productTable.AddRow(new string[] {
+				"Best Buy"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Canadian Tire"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Costco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"CVS"
 			});
-				produtTable.AddRow(new string[] {
-				"Delhaize America (All Retail Banners)"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dick's Sporting Goods"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar General"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar Tree Stores, Inc. / Greenbrier International, Inc"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Essendant"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Family Dollar"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Genuine Parts"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Harbor Freight Tools"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HD Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HEB "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HyVee"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kohl's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kroger"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Lowe's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"McLane"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Meijer"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"New Egg"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"No Retailer/No UPC Product"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Northgate Market"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Office Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Optoro "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"O'Reilly"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Petco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Price Chopper "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Publix "
 			});
-				produtTable.AddRow(new string[] {
-				"PurView/CVS"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Rite Aid"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Save Mart Supermarkets"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Schnuck's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Sears/K-Mart"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Smart & Final"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Staples"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"SuperValu"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Target"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"The Home Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"TopCo"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Tractor Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Ultra/Standard"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Unified"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wakefern"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Walgreens"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wal-Mart/SAM'S CLUB"
 			});
-				produtTable.AddRow(new string[] {
-				"Weis"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"WinCo Foods"
 			});
-				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
+				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", productTable);
 			}
 			if (TReVorSettings.SoftwareBranch == "Staging")
 			{
 				ReportSettings.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartStep("I should only see the following retailers");
-				var produtTable = new Table(new string[] {
+				var productTable = new TechTalk.SpecFlow.Table(new string[] {
 				"Option"
 			});
-				produtTable.AddRow(new string[] {
-				"Ahold"
+				productTable.AddRow(new string[] {
+				"Ace Hardware Corporation"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
+				"Ahold | DelHaize USA"
+			});
+				productTable.AddRow(new string[] {
 				"Albertsons Companies"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Amazon"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Autozone"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
+				"Best Buy"
+			});
+				productTable.AddRow(new string[] {
 				"Canadian Tire"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Costco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"CVS"
 			});
-				produtTable.AddRow(new string[] {
-				"Delhaize America (All Retail Banners)"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dick's Sporting Goods"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar General"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar Tree Stores, Inc. / Greenbrier International, Inc"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Essendant"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Family Dollar"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Genuine Parts"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Harbor Freight Tools"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HD Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HEB "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HyVee"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kohl's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kroger"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Lowe's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"McLane"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Meijer"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"New Egg"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"No Retailer/No UPC Product"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Northgate Market"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Office Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Optoro "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"O'Reilly"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Petco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Price Chopper "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Publix "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Rite Aid"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Save Mart Supermarkets"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Schnuck's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Sears/K-Mart"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Smart & Final"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Staples"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"SuperValu"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Target"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"The Home Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"TopCo"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Tractor Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Ultra/Standard"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Unified"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wakefern"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Walgreens"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wal-Mart/SAM'S CLUB"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"WinCo Foods"
 			});
-				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
+				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", productTable);
 			}
 			if (TReVorSettings.SoftwareBranch == "Local Production")
 			{
 				ReportSettings.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartStep("I should only see the following retailers");
-				var produtTable = new Table(new string[] {
+				var productTable = new TechTalk.SpecFlow.Table(new string[] {
 				"Option"
 			});
-				produtTable.AddRow(new string[] {
-				"Ahold"
+				productTable.AddRow(new string[] {
+				"Ace Hardware Corporation"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
+				"Ahold | DelHaize USA"
+			});
+				productTable.AddRow(new string[] {
 				"Albertsons Companies"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Amazon"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Autozone"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
+				"Best Buy"
+			});
+				productTable.AddRow(new string[] {
 				"Canadian Tire"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Costco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"CVS"
 			});
-				produtTable.AddRow(new string[] {
-				"Delhaize America (All Retail Banners)"
-			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dick's Sporting Goods"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar General"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Dollar Tree Stores, Inc. / Greenbrier International, Inc"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Essendant"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Family Dollar"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Genuine Parts"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Harbor Freight Tools"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"HD Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
+				"HEB "
+			});
+				productTable.AddRow(new string[] {
 				"HyVee"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kohl's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Kroger"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Lowe's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"McLane"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Meijer"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"New Egg"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"No Retailer/No UPC Product"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Northgate Market"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Office Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Optoro "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"O'Reilly"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Petco"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Price Chopper "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Publix "
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Rite Aid"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Save Mart Supermarkets"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Schnuck's"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Sears/K-Mart"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Smart & Final"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Staples"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"SuperValu"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Target"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"The Home Depot"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"TopCo"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Tractor Supply"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Ultra/Standard"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Unified"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wakefern"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Walgreens"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"Wal-Mart/SAM'S CLUB"
 			});
-				produtTable.AddRow(new string[] {
+				productTable.AddRow(new string[] {
 				"WinCo Foods"
 			});
-				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
+				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", productTable);
 			}
 		}
 
@@ -2295,6 +2365,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
 		}
 
+		[StepDefinition(@"I Confirm the Products shown display the Blue Colour Status - which is the Sending to Retailers")]
+		public void GivenIConfirmTheProductsShownAreBlue()
+		{
+			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Sending to Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
+		}
+
 		[StepDefinition(@"I edit the product saved as: (.*)")]
 		public void EditProductSavedAs(string productSavedAs)
 		{
@@ -2435,8 +2511,125 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid")]
+		public void ThenIClickTheShowOnlyDiscontinuedProductsCheckboxInTheMyProductsGrid()
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			Report.IsTrue(moreFiltersObject.ClickShowOnlyDiscontinuedProductsCheckbox(), "Failed to click checkbox", "Successfully clicked checkbox");
+			Delay.Seconds(5);
+		}
 
 
+		[StepDefinition(@"I confirm that only discontinued products appear in the 'My Products' grid")]
+		public void ThenIConfirmThatOnlyDiscontinuedProductsAppearInTheMyProductsGrid()
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			Report.Info("There were " + moreFiltersObject.CheckTheAmountOfProductsInProductsGrid() + " discontinued products displayed");
+		}
+
+		[StepDefinition(@"I confirm that all products appear in the 'My Products' grid")]
+		public void ThenIConfirmThatAllProductsAppearInTheMyProductsGrid()
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			Report.Info("There were " + moreFiltersObject.CheckTheAmountOfProductsInProductsGrid() + " products displayed");
+		}
+
+	
+		[StepDefinition(@"I make sure product saved as: (.*) (should|should not) missing from the product list")]
+		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs, string shouldOrShouldNot)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			DeleteActiveProducts deleteActiveProductsObject = new DeleteActiveProducts();
+			savedAs = deleteActiveProductsObject.GetProductIDFromContext(savedAs);
+
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
+				Report.IsTrue(moreFiltersObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product WPS ID: " + savedAs + " should be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be missing from the product list and it was");
+			}
+			else if (shouldOrShouldNot.ToLower() == "should not")
+			{
+				Report.IsTrue(!moreFiltersObject.CheckIfProductIsMissing(savedAs.ToString()), "The following product WPS ID: " + savedAs + " should not be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be found in the product list and it was");
+			}
+		}
+
+		[StepDefinition(@"I make sure products saved as: (.*) are missing from the product list")]
+		public void ThenIMakeSureProductsSavedAsSelectedProductsAreMissingFromTheProductList(string savedAs)
+		{
+			MoreFilters moreFiltersObject = new MoreFilters();
+			var list = Context.GetFromContext(savedAs).ToString();
+			string[] listSplit = list.Split(',');
+
+			foreach (string listItem in listSplit)
+			{
+				Report.IsTrue(moreFiltersObject.CheckIfProductIsMissing(listItem), "The following product WPS ID: " + savedAs + " should be missing but it was found in the product list", "The following product WPS ID: " + savedAs + " was expected to be missing from the product list and it was");
+			}
+		}
+
+		[StepDefinition(@"Check popup date productID: (.*) productType: (.*) productAccessCode: (.*)")]
+		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
+		{
+			RetailPartners retailPartnersObject = new RetailPartners();
+			string savedAs = productID;
+			try
+			{
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+					return;
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception)
+					{
+						//do nothing
+					}
+
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception)
+					{
+
+					}
+				}
+
+				Report.Info("ProductID: " + id + " ProductType: " + productType + " ProductAccessCode: " + productAccessCode);
+				Report.IsTrue(new ModalDialog().CheckProductInformationIn3rdPartyAccessCodeWindowInProductsGrid(id, productType, productAccessCode), "Failed to match product information", "Successfully matched product information");
+
+			}
+			catch (Exception ex)
+			{
+
+				Report.Failure(ex.Message);
+				throw;
+			}
+
+		}
 
 	}
 }

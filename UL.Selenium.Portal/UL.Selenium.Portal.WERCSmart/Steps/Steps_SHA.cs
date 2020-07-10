@@ -323,6 +323,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						throw new Exception("Invalid column name");
 				}
 			}
+			Report.Screenshot();
 			Report.Info("Going to click find");
 			Delay.Seconds(1);
 			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find", false, false);
@@ -1966,10 +1967,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string docURL = thisSHADocument.DocumentWindowOpen();
 			if (docURL != null)
 			{
-				string pdfText = thisSHADocument.DocumentText(docURL);
+				Report.Info($"The found URL was: {docURL}");
+				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				Report.Info($"Found the downloads folder: {downloadsFolder}");
+				thisSHADocument.DownloadFileFromURL(docURL, downloadsFolder + @"\TempPDF.pdf");
+				Report.Info($@"Downloading file from url complete, downloaded to: {downloadsFolder}+ \TempPDF.pdf");
+
+
+				//TEST CODE
+				Report.Info($"Running Test code for PDF check using new downloaded file");
+				
+				GeneralUtilities.OpenNewTabAndNavigateTo(downloadsFolder + @"\TempPDF.pdf");
+				Report.Info($"tab opened");
+				Delay.Seconds(3);
+				//string docURL2 = thisSHADocument.DocumentWindowOpen();
+				string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
+				Report.Info($"doc window opened");
+				Report.Screenshot();
+
+				if (docURL2 == null)
+				{
+					Report.Info("The docURL was null");
+					return;
+				}
+
+				string pdfText = thisSHADocument.DocumentText(docURL2);
+				Report.Info($"this was the new found pdf text using the new test code: {pdfText}");
+
+				//END TEST CODE		
+
+
+				//string pdfText = thisSHADocument.DocumentText(docURL);
+
+
+				Report.Info($"The Found PDF Text was: {pdfText}");
 				Report.IsTrue(pdfText.Contains(ID), "PDF does not contain: " + ID, "PDF contains " + ID);
-				Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2,
-					"PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
+				Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2,"PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
 			}
 			else
 			{
@@ -2086,6 +2119,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I save a product which blue and has retailers and at least 1 UCP as (.*)")]
+		public void GivenISaveAProductWhichIsNotRedOrOrangeAndHasRetailersAndUPCAsTestCase(string saveAs)
+		{
+			var thisStudioSHAManager = new StudioSHAManager();
+			ProductInformation info = thisStudioSHAManager.ReturnProductInformationOfProductwithIsBlueAndHasClientsAndUPC();
+
+			if (info != null)
+			{
+				Context.AddToContext(saveAs, info);
+			}
+
+			Report.IsTrue(info != null, "No suitable id was found", "ID: " + info.Id + " was found and saved as: " + saveAs);
+
+		}
 
 		[StepDefinition(@"I save the retailers associated with product (.*) as (.*)")]
 		public void ISaveTheRetailersAssociatedWithTheProductAs(string productSavedAs, string retailersSavedAs)
@@ -2107,7 +2154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
-		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
+	public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
 		{
 			if (retailer.ToLower().Contains("saved as"))
 			{
@@ -2123,24 +2170,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 			}
-			var thisStudioSHAManager = new StudioSHAManager();
-			List<Product> RetailerStatuses = thisStudioSHAManager.GetTopXProducts(2);
-			var matchingStatusRows = RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
-			var abbreviationMap = new RetailerAbbreviations().Map;
-			foreach (var row in matchingStatusRows)
+
+			int j = 0;
+			bool success = false;
+			while (j < 20 && success == false)
 			{
-				var clients = row.Clients;
-				var clientAbbreviations = clients.Split(',').Select(x => x.Trim()).ToList();
-				foreach (var abbr in clientAbbreviations)
+				var myStudioShaManager = new StudioSHAManager();
+				var thisProductSearch = new StudioSHAManagerProductSearch();
+
+
+				Report.StartStep("I click Srch in the bottom menu list");
+				myStudioShaManager.ClickBottomMenuOption("Search");
+				Report.Screenshot();
+				Report.Info("Going to click find");
+				Delay.Seconds(1);
+				Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find", false, false);
+				Report.Info("Waiting for loading bar");
+				new StudioSHAManager().Wait_For_Loading_Finish();
+				Report.Info("Finished waiting for loading");
+				Delay.Seconds(1);
+				Report.Screenshot();
+
+				var thisStudioSHAManager = new StudioSHAManager();
+				List<Product> RetailerStatuses = thisStudioSHAManager.GetTopXProducts(2);
+				var matchingStatusRows = RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
+				var abbreviationMap = new RetailerAbbreviations().Map;
+				foreach (var row in matchingStatusRows)
 				{
-					if (abbreviationMap.ContainsValue(abbr) && abbreviationMap.FirstOrDefault(x => x.Value == abbr).Key == retailer)
+					var clients = row.Clients;
+					var clientAbbreviations = clients.Split(',').Select(x => x.Trim()).ToList();
+					foreach (var abbr in clientAbbreviations)
 					{
-						Report.Success("Found product with status: " + status + " and retailer: " + retailer);
-						Report.Screenshot();
-						return;
+						if (abbreviationMap.ContainsValue(abbr) && abbreviationMap.FirstOrDefault(x => x.Value == abbr).Key == retailer)
+						{
+							Report.Success("Found product with status: " + status + " and retailer: " + retailer);
+							Report.Screenshot();
+							return;
+						}
 					}
 				}
+
+				Report.Info($"Failed to find product with status: " + status + " and retailer: " + retailer+" on attempt: "+ j+1);
+				Delay.Seconds(60);
+				j++;
+
+
 			}
+
 			Report.Failure("Failed to find product with status: " + status + " and retailer: " + retailer);
 			//var thisStepsRetailPartners = new StepsRetailPartners();
 			//var matchingClients = matchingStatusRows.Select(x => x.Clients)
@@ -2498,6 +2574,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Failure("Failed to find: " + savedAs + i + " in context!", false);
 				}
+			}
+		}
+
+		[StepDefinition(@"I add Generic Product Names to the UPC bulk upload spreadsheet: (.*)")]
+		public void IUpdateBulkUPCFileToIncludeProductNames (string spreadsheetSavedAs)
+		{
+			
+			//Currently does not work if the values you are trying to edit are blank (which is by default in the sample file)
+			var spreadSheetFile = (string)Context.GetFromContext(spreadsheetSavedAs);
+			var excel = new ExcelFunctions(spreadSheetFile, "Sheet1");
+			int numberOfProducts = excel.Excel_GetNoRows();
+			int x = 1;
+			for (int i = 1; i <= numberOfProducts; i++)
+			{
+				Report.IsTrue(excel.EditCell(i, 1, ("TestName"+x)), "Failed to edit UPC" + i + " to: " + ("TestName" + x), "Successfully edited UPC to: " + ("TestName" + x), false, false);
+				x++;
 			}
 		}
 
@@ -3514,7 +3606,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
 		public void InTheSupplierManagerPopupICheckThatColumnXContainsAllValues(string column, Table table)
 		{
-			
 			Report.Info("Converting the table to a List");
 			List<string> expectedValues = new List<string>();
 			foreach (TableRow thisRow in table.Rows)
@@ -3551,6 +3642,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new StudioSupplierManager().DateColumnContainsValidmmddyyyy(), "The Date column contained at least one non valid date", "The Date column contained only valid dates");
 
+		}
+
+		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) is in alphabetical order")]
+		public void ThenInTheSupplierManagerPopupICheckThatTheColumnRetailerIsInAlphabeticalOrder(string columnName)
+		{
+			Report.IsTrue(new StudioSupplierManager().RetailsAreInAlphabeticalOrder(), "The retailers were not in alphabetical order in column: " + columnName, "The retailers were in alphabetical order in column: " + columnName);
 		}
 
 
@@ -3636,11 +3733,123 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
+		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			List<string> columnsNotFound = studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table);
+
+			Report.IsTrue(columnsNotFound.Count == 0, "One or more of the columns were not found", "Successfully found all columns");
+
+			foreach (string columnName in columnsNotFound)
+			{
+				Report.Info("Column not found: " + columnName);
+			}
+		}
 
 
+		[StepDefinition(@"I save all clients for product saved as: (.*)")]
+		public void ThenISaveAllClientsForPrductsSavedAsTestCase(string savedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
+
+			var clients = studioSHAManagerObject.FindClientsForProduct(id);
+			if (clients != null)
+			{
+				var key = id + "'s Clients";
+				Context.AddToContext(key, clients);
+			}
+
+			Report.IsTrue(clients != null, "Failed to find product clients", "Successfully found product clients");
+		}
 
 
+		[StepDefinition(@"I confirm that there is a 'U' next to the following product saved as: (.*)")]
+		public void ThenIConfirmThatThereIsANextToTheFollowingProductSavedAs(string productSavedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 
+			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
+			string ID = ProductDetails.Id;
+
+			Report.IsTrue(studioSHAManagerObject.ConfirmUInSecondColumn(ID), "Failed to find 'U' next to product with product ID: " + ID, "Successfully found a 'U' next to product with product ID: " + ID);
+		}
+
+		[StepDefinition(@"I Close 'Supplier Manager'")]
+		public void ThenICloseSupplierManager()
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.CloseSupplierManager(), "Failed to close dialog", "Successfully closed dialog");
+		}
+
+
+		[StepDefinition(@"Confirm that '(.*)' shows (.*) marked with a '(.*)'")]
+		public void ThenConfirmThatShowsTierTierAndTierMarkedWithA(string supplier, string tiers, string marked)
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			var arr = tiers.Split(',');
+			Report.IsTrue(studioSupplierManagerObject.ConfirmTierHasCorrectMarkingForRetailer(supplier, arr, marked), "Failed to confirm all tier markings", "Successfully confirmed all tier markings");
+		}
+
+
+		[StepDefinition(@"Select the '(.*)' Tab in Supplier Manager")]
+		public void ThenSelectTheTabInSupplierManager(string tabName)
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.ClickTabWithName(tabName), "Failed to the following tab: " + tabName, "Successfully clicked the following tab: " + tabName);
+			Delay.Seconds(5);
+		}
+
+
+		[StepDefinition(@"Select the supplier with the following name in Supplier Manager: '(.*)'")]
+		public void SelectTheSupplierWithTheFollowingNameInSupplierManager(string selectedResult)
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.ClickResultWithName(selectedResult), "Failed to click result with name: " + selectedResult, "Successfully clicked result with name: " + selectedResult);
+			Delay.Seconds(5);
+		}
+
+
+		[StepDefinition(@"Search for the supplier with the following name in Supplier Manager: '(.*)'")]
+		public void SearchForTheSupplierWithTheFollowingNameInSupplierManager(string text)
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.SearchTheFollowingText(text), "Failed to search for the following text: " + text, "Successfully searched for the following text: " + text);
+			Report.IsTrue(studioSupplierManagerObject.ClickSearchButton(), "Failed to click the search button", "Successfully clicked the search button");
+		}
+
+
+		[StepDefinition(@"I Click 'Suppliers' in SHA Manager")]
+		public void IClickSuppliersInSHAManager()
+		{
+			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
+			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
+		}
+
+		[StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
+		public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
+
+			var key = id + "'s Clients";
+			var clients = Context.GetFromContext(key).ToString();
+			string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
+			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
+		}
 
 	}
 
