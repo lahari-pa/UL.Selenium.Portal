@@ -123,7 +123,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selForwardProdReg.EnterTextToSearchField(value),
 				"Failed to enter text: " + value + " to the search field",
 				"Successfully entered text: " + value + " to the search field");
-			Delay.Seconds(2);
+			Delay.Seconds(5);
 		}
 
 		[StepDefinition(@"I click continue on the Forward Product Registration page")]
@@ -607,9 +607,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClickAddCaseUPCsButtonUnderSelectUPCsTab()
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
-			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(),
-							"Failed to click the Add UPC button!",
-							"Successfully clicked the Add UPC button");
+			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(),"Failed to click the Add UPC button!",	"Successfully clicked the Add UPC button");
 		}
 
 		[StepDefinition(@"I click the Add To No Retailer button under the Select UPCs tab")]
@@ -661,10 +659,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			} else if(shouldOrShouldNot.ToLower() == "should not") {
 
 				Report.IsTrue(!selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
-					"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
+					"ID: " + id + " is showing as expected", "ID: " + id + " is not showing as expected");
 
 			}
-
+	
 		}
 
 		[StepDefinition(@"In the Foward Product Registration Screen I Select the product: (.*)")]
@@ -1225,7 +1223,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"Selecting the option: {firstOption} for ID: {id}");
 			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option", "Successfully selected the option");
 		}
-
 
 	}
 }

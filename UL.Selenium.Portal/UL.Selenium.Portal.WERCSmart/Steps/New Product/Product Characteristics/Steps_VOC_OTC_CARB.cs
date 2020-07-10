@@ -146,8 +146,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 		[Given(@"In the VOC Acceptance section I agree")]
 		public void GivenInTheVOCAcceptanceSectionIAgree()
 		{
-			Report.IsTrue(this._vocOtcCarb.SelectAgreeInVOCAcceptance(), "Failed to select agree in VOC Acceptance",
-				"Successfully selected agree in VOC Acceptance");
+			//Report.IsTrue(this._vocOtcCarb.SelectAgreeInVOCAcceptance(), "Failed to select agree in VOC Acceptance",				"Successfully selected agree in VOC Acceptance");
+			var newProductSteps = new StepsNewProduct();
+			newProductSteps.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
+
 		}
 
 

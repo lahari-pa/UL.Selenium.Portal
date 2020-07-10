@@ -364,6 +364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+
 		}
 
 		[StepDefinition(@"I click the Home navigation icon and (accept|dismiss) the alert popup")]
@@ -982,6 +983,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
 			Context.AddToContext(savedAs, prodIDs);
+			if(prodIDs.Count()==0)
+			{
+				Report.Failure("There was no products IDs found to be displayed");
+			}
 		}
 
 		[StepDefinition(@"I navigate to the WERCSmart site")]
@@ -1124,7 +1129,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("Attempting to click the button with text: 'GO TO MY RETAILERS");
 					new ModalDialog().ClickButton("GO TO MY RETAILERS");
+					Delay.Seconds(15);
 					new StepsRetailPartners().GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection();
+					
 				}
 				else
 				{

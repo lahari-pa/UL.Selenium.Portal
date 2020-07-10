@@ -23,6 +23,8 @@ using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
+using OpenQA.Selenium.Chrome;
+using System.Diagnostics;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -35,6 +37,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public static void SetTestURL()
 		{
 			SeleniumBrowser.BaseTestUrl = TestVariables.GetVariableSavedAs("TestURL");
+		}
+
+		[AfterScenario(Order = 1)]
+		public static void CloseChrome()
+		{
+			//Process.GetProcessesByName("chrome").ToList().ForEach(x => x.Kill());
+			Process.GetProcessesByName("chromedriver").ToList().ForEach(x => x.Kill());
 		}
 
 
@@ -213,6 +222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (attemptOnce)
 				{
 					this.AttemptToLoginWithEmailAndPassword(user.Username, user.Password);
+					new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 					return;
 				}
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
@@ -519,6 +529,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				Report.Info("Navigating to the landing page");
+				Report.Info("Checking the number of tabs that are open in the current window");
+				ReadOnlyCollection<string> currentTabs = SeleniumBrowser.WebBrowser.WindowHandles;
+				if(currentTabs.Count()==1)
+				{
+					Report.Info("There was only 1 tab open, attempting to close and reopen chrome");
+					Report.Info("Chrome Quit - Closing the chrome window");
+					SeleniumBrowser.StopBrowser();
+					//Report.Info("Attempting to initialize the chrome driver");
+					//var chromeDriverService = ChromeDriverService.CreateDefaultService();
+					Report.Info("Attempting to Open a chrome window");
+					//SeleniumBrowser.WebBrowser =  new ChromeDriver(chromeDriverService, new ChromeOptions());
+					//Report.Info("Attempting to maximize the window");
+					SeleniumBrowser.StartBrowser();
+					//SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+				}
+
+
 				SeleniumBrowser.Navigate(SeleniumBrowser.BaseTestUrl);
 				Delay.Seconds(1);
 				ReadOnlyCollection<string> allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
@@ -659,10 +686,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the window that opened")]
 		public void ThenCloseTheWindowThatOpened()
 		{
+			Delay.Seconds(5);
 			Report.StartStep(ReportSettings.StepCounter + " - Closing current window");
 			try
 			{
 				object mainWindowHandle = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle");
+
 				if (mainWindowHandle == null)
 				{
 					throw new Exception("No Main Window Handle found in context!");
@@ -1455,6 +1484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I close the current tab")]
 		public void GivenICloseTheCurrentTab()
 		{
+			Delay.Seconds(5);
 			SeleniumBrowser.CloseTabWithURL(SeleniumBrowser.GetActiveTabURL());
 		}
 
@@ -1837,6 +1867,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				// required to switch to the frame and refresh container
 				new StudioSHAManager().Wait_for_load();
+				//switch to correct iFrame? if elements are returning as null etc after swithcing back to SHA products grid, may need to switch to correct IFrame again. Here or in methods?
 			}
 			catch (Exception ex)
 			{
@@ -1978,6 +2009,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Context.AddToContext(savedAs, text);
 		}
+
+		[StepDefinition(@"I Delete the file with name: (.*) from the downloads folder")]
+		public void DeleteFileFromDownloadsFolder(string fileName)
+		{
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(fileName), "", "");
+		}
+
+
 
 
 	}

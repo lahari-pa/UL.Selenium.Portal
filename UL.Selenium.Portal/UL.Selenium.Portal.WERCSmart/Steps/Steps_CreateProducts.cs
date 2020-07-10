@@ -100,8 +100,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsShared.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included");
 			Report.StartStep("Then I save the product information as: TestCase84109");
 			MyStepsNewProduct.SaveProductInformation(saveAs);
-			Report.StartStep("I call Shared Step 69687(Additional Product Information - US, No(PL))");
-			MyStepsShared.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			//Report.StartStep("I call Shared Step 69687(Additional Product Information - US, No(PL))");
+			//MyStepsShared.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			Report.StartStep("I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only");				
+			MyStepsShared.GivenICallSharedStep60935AdditionalProductInformation_US_DirectShip_PrivateLabelOnly();
+
+
 			Report.StartStep("I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)");
 			MyStepsShared.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 48369(Toxicity Characteristics Leaching Procedure(TCLP) - No to ALL With Copper)");
@@ -762,10 +766,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			sharedSteps.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
 			sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
-			newProductSteps.SetTheSectionOptionTo(" Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
+			newProductSteps.SetTheSectionOptionTo("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
 			newProductSteps.SetTheSectionOptionTo("Verify VOC content is below the threshold of 0.02lb/start of CARB", "No");
 			newProductSteps.SetTheSectionOptionTo("Verify VOC content is below the threshold of 0.02lb/start of OTC", "No");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			newProductSteps.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 
 			Report.Info("Then I select a retailer");
@@ -873,7 +878,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");
 
 			sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
-			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();			
+			//sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
+			sharedSteps.GivenICallSharedStep132427WasteClassificationDataForOTCProducts();
 			Report.Info("Then I select a retailer");
 			selectRetailers.SelectTheRetailer("CVS");
 			newProductSteps.ClickContinue();
@@ -1129,6 +1135,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		//[StepDefinition(@"For CVS I create a product of type: Pharmacy \(RUCC0393\), save it as: (.*) and leave it in New Status")]
+		//public void ForCVSICreateProductOfTypePharmacyAndLeaveAsNew(string savedAs)
+
+		//{
+		//	var sharedSteps = new Steps_Shared();
+		//	var productsGridSteps = new StepsProductGrid();
+		//	var newProductSteps = new StepsNewProduct();
+		//	var newProduct = new NewProduct();
+		//	var shaSteps = new Steps_SHA();
+		//	var thisGlobalSteps = new GlobalSteps();
+		//	var stepsIngredients = new StepsIngredients();
+		//	var stepsProductChar = new Steps_ProductCharacteristics();
+		//	var stepsSelectretailers = new StepsSelectRetailers();
+		//	var selectRetailers = new StepsSelectRetailers();
+
+		//	sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+		//	sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)");
+		//	newProductSteps.SaveProductInformation(savedAs);
+		//	sharedSteps.SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue();
+		//	sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+		//	Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
+		//	table57570.AddRow("Sodium chloride", "100", "false", "false", "");
+
+		//	sharedSteps.GivenICallSharedStepEnterIngredients(table57570);
+		//	sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
+		//	sharedSteps.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
+		//	sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
+		//	Report.Info("Then I select a retailer");
+		//	selectRetailers.SelectTheRetailer("CVS");
+		//	newProductSteps.ClickContinue();
+		//	sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly("Metal Container", "40");
+		//	//go back to homepage (products grid)
+		//	new StepsHomepage().ThenINavigateToTheHomePage();
+		//	new GlobalSteps().ThenTheHomeScreenShouldLoad();
+
+
+		//}
+
 		[StepDefinition(@"For CVS I create a product of type: Pharmacy \(RUCC0393\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypePharmacyAndLeaveAsNew(string savedAs)
 
@@ -1145,9 +1189,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selectRetailers = new StepsSelectRetailers();
 
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
-			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)");
+			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Digestive Aid");
 			newProductSteps.SaveProductInformation(savedAs);
-			sharedSteps.SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue();
+			stepsProductChar.SetThePrimayPhysicalStateTo("Solid");
+			stepsProductChar.ThenISetTheSecondaryPhysicalStateToBe("Granular");
+			newProductSteps.ThenISetTheWaterMixtureQuestionTo("Yes");
+			stepsProductChar.ThenISetTheWaterSolubilityDescriptionTo("Completely soluble");
+			newProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+			//sharedSteps.SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue();
 			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
 			Table table57570 = new Table("ComponentName", "Percent", "PublicallyDisclosed", "TradeSecret", "PublicName");
 			table57570.AddRow("Sodium chloride", "100", "false", "false", "");

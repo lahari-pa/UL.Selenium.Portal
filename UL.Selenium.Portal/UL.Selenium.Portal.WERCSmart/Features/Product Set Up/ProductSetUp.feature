@@ -10,6 +10,8 @@
 @wercsmart
 @RetailPartners
 @CreateProducts
+@PaymentMethods
+@UPC
 @Studio
 @ProductSetUp
 @run_ProductSetUp
@@ -159,3 +161,27 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845072 and its status is: Assigned
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase845072)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845073 and its status is: Assigned
+
+@tfs_design
+@ScenarioId:8268
+	Scenario: [100969] RU = Chalk, Sold = Canada, has retailer, Uploaded SDS, SHA status = Submitted
+	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
+	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase100969
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	And I call Shared Step 78879 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	Given I generate a random UPC number and save as: UPC100969
+	Then I call Shared Step 76738 (Universal Product Code (UPC) - Canada - Package Type) for UPC: saved as UPC100969, container type: Paper bag, size: 2, package type: <First> and Item Number: 111-1111 then click continue
+	Then I call Shared Step 100974 (Regulatory Documents to Provide - Canada only - Upload documents > Continue)
+	Given in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+	And I navigate to the home page
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase100969)

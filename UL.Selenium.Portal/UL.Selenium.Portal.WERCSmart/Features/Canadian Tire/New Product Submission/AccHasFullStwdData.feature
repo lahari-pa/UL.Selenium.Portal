@@ -89,7 +89,7 @@ Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Ch
 	And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	And I call Shared Step 132375 (Waste Classification Data - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	#In the shared step below DO NOT select Canadian Tire as your retailer
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer |
@@ -385,20 +385,22 @@ Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Can
 	| Canadian Tire |
 
 
-    @ScenarioId:6786
-    Scenario:[120790] "U" for UPC Update for Submitted Status
+   @tfs_design
+   #Waiting for Fabiola to help me find where I can pull a full list of expected retailers from - Philip
+   @ScenarioId:6787
+Scenario:[120866] UPC Retailer and Feed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I generate a random UPC number and save as: UPC120790
+	Given I generate a random UPC number and save as: UPC120866
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-	Then I save the product information as: TestCase120790
+	Then I save the product information as: TestCase120866
 	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And In the 'Select Retailers' window I select the retailer: Costco
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	And In the 'Select Retailers' window I select the retailer: CVS
 	And I click continue
-	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC120790, container type: Plastic Container and size: 12 click continue
+	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC120866, container type: Plastic Container and size: 12 click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -409,15 +411,15 @@ Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Can
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
-    And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-    Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120790)
-    Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120790 and its status is: Submitted
-	Then I confirm that there is a 'U' next to the following product saved as: TestCase120790
-    Given I navigate to the landing page
-    Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I search for the product saved as: TestCase120790
-	When I click Row Actions for the most recent product returned
-	Then I click on the Row Action: Edit UPCs
-	Given I click the page heading: Universal Product Code (UPC)
-	And I delete UPC: saved as UPC120790
-	Then In the list of UPCs I should not see UPC: saved as UPC120790
+
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120866)
+	Then I save all clients for product saved as: TestCase120866
+	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase120866
+	And I confirm the Product UPC window has opened
+	Then I check for the following columns in UPC Retailer and Feed
+	| Column Name |
+	| UPC Number  |
+	| Pkg Type    |
+	| Pkg Size    |
+	Then I check that all clients for product saved as: TestCase120866 have data

@@ -1668,3 +1668,15 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	#Should get popup, then try to submit without going to the upc screen. That should fail, so then need to got to the upc screen then go back and try submit where it should now work. 
 
 
+	Scenario: [ChromeWindowTest] Chrome Window Test
+	Given I generate a random UPC number and save as: UPC86463
+
+	Given I generate a random UPC number and save as: UPC864631	
+	Given I navigate to the landing page
+
+
+	Scenario: [cvs] CVSPharmTESTQS
+	Given I log in with the account saved in TReVor as: NoProductsAccount
+	Then In the Products Grid I delete All products
+	Then For CVS I create a product of type: Pharmacy (RUCC0393), save it as: CVSPharmacyProduct1 and leave it in New Status
+	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSPharmacyExcelFile and check that is shows the expected product saved as: CVSPharmacyProduct1

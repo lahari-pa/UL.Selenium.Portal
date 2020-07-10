@@ -662,7 +662,7 @@ Scenario:[121120] Pesticide - New Radio Icon Option
     | Not Regulated                        |
     And I set the Product is Regulated for Transport field to: Not Regulated
     And I click continue
-	And In the 'Select Retailers' window I select the retailer: Costco
+	And In the 'Select Retailers' window I select the retailer: Walgreens
 	And I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC121120, container type: Plastic Container and size: 12 click continue
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)

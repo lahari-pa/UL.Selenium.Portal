@@ -22,7 +22,8 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Answering machine, No battery included
 	Then I save the product information as: TestCase84109
-	And I call Shared Step 69687 (Additional Product Information - US, No(PL))
+	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
+	Then I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
@@ -59,6 +60,8 @@ Scenario: [84511] Electronic Product from Completed status to Recertification
 	Given For product saved as: TestCase84511 the status is: Completed
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Update Data
+	And I should see the Update Registration popup
+	And In the Update Registration popup I click on button Yes	
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
 	Then I click Save in The Product Page

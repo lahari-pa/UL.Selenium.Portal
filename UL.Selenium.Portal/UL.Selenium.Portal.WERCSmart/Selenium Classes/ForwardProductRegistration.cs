@@ -12,6 +12,7 @@ using TechTalk.SpecFlow;
 using UL.Automation.Reporting.SpecFlow.Classes;
 using System;
 using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -720,7 +721,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement elem = this.containerElement.FindElement(By.XPath(@"//span[contains(text(), '" + option + "')]/../div//span[contains(text(), '" + level + "')]"), 2);
 			return elem != null;
 		}
-
 
 		public class SelectProducts : ForwardProductRegistration
 		{

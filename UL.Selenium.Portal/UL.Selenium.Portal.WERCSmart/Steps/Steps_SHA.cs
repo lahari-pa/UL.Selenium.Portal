@@ -1980,7 +1980,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				GeneralUtilities.OpenNewTabAndNavigateTo(downloadsFolder + @"\TempPDF.pdf");
 				Report.Info($"tab opened");
 				Delay.Seconds(3);
-				string docURL2 = thisSHADocument.DocumentWindowOpen();
+				//string docURL2 = thisSHADocument.DocumentWindowOpen();
+				string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
 				Report.Info($"doc window opened");
 				Report.Screenshot();
 
@@ -3605,7 +3606,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
 		public void InTheSupplierManagerPopupICheckThatColumnXContainsAllValues(string column, Table table)
 		{
-			
 			Report.Info("Converting the table to a List");
 			List<string> expectedValues = new List<string>();
 			foreach (TableRow thisRow in table.Rows)
@@ -3642,6 +3642,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new StudioSupplierManager().DateColumnContainsValidmmddyyyy(), "The Date column contained at least one non valid date", "The Date column contained only valid dates");
 
+		}
+
+		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) is in alphabetical order")]
+		public void ThenInTheSupplierManagerPopupICheckThatTheColumnRetailerIsInAlphabeticalOrder(string columnName)
+		{
+			Report.IsTrue(new StudioSupplierManager().RetailsAreInAlphabeticalOrder(), "The retailers were not in alphabetical order in column: " + columnName, "The retailers were in alphabetical order in column: " + columnName);
 		}
 
 
@@ -3727,22 +3733,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-	
-
-
-
 		[StepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
 		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			List<string> columnsNotFound = studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table);
 
-			Report.IsTrue(studioSHAManagerObject.FindColumnInUPCRetailerAndFeedPageWithTable(table).Count == 0, "One or more of the columns were not found", "Successfully found all columns");
+			Report.IsTrue(columnsNotFound.Count == 0, "One or more of the columns were not found", "Successfully found all columns");
 
 			foreach (string columnName in columnsNotFound)
 			{
 				Report.Info("Column not found: " + columnName);
 			}
+		}
+
+
+		[StepDefinition(@"I save all clients for product saved as: (.*)")]
+		public void ThenISaveAllClientsForPrductsSavedAsTestCase(string savedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
+
+			var clients = studioSHAManagerObject.FindClientsForProduct(id);
+			if (clients != null)
+			{
+				var key = id + "'s Clients";
+				Context.AddToContext(key, clients);
+			}
+
+			Report.IsTrue(clients != null, "Failed to find product clients", "Successfully found product clients");
 		}
 
 
@@ -3806,6 +3831,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
 			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
+		}
+
+		[StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
+		public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
+
+			var key = id + "'s Clients";
+			var clients = Context.GetFromContext(key).ToString();
+			string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
+			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
 		}
 
 	}

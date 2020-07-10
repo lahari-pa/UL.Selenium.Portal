@@ -182,35 +182,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public bool CheckProductInformation(string id, string productType, string productAccessCode)
-		{
-
-			IWebElement accessCode = this.containerElement.FindElement(By.XPath(".//div[@data-bind='html: html']"), 2);
-			string accessCodeText = accessCode.Text;
-
-			if (!accessCodeText.Contains(id))
-			{
-
-				Report.Info("Product ID does not match");
-				return false;
-
-			} else if (!accessCodeText.Contains(productType))
-			{
-
-				Report.Info("Product Type does not match");
-				return false;
-
-			} else if (!accessCodeText.Contains("Access Code: " + productAccessCode))
-			{
-
-				Report.Info("Product ID does not match");
-				return false;
-
-			}
-
-			return true;
-
-		}
 	}
 
 	class RetailPartnersDetails : SeleniumBaseObject
@@ -383,6 +354,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool Checked = checkbox.Selected;
 			return Checked;
 		}
+		public bool GetDataConsentTierOnofFSwitch(string tier)
+		{
+			IWebElement onOffSwitch = this.containerElement.FindElement(By.XPath(".//div[contains(text(),'" + tier + "')]/../following-sibling::td//span[@class='slider round']"), 2);
+			if (onOffSwitch != null)
+			{
+				return true;
+			}
+			return false;
+		}
+
 
 		public bool SaveChangesButtonShowing()
 		{

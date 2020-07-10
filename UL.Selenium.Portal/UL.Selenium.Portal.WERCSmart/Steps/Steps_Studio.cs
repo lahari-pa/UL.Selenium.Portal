@@ -1131,11 +1131,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
 			var selStepsStudio = new Steps_Studio();
-			//selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			//selStepsStudio.InPDIEnsureSECT2318IsActive();
-			//selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			Delay.Seconds(10);
+			selStudioPowerDesignerPlus.Wait_for_load(30);			
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Chemical Product Checklist");
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 		}
 
 		[StepDefinition(@"I check whether the current environment is Staging or Production and if it is I skip the next three steps")]
@@ -1327,6 +1334,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();			
+			
 			var valueEdit = new ValueEditor();
 			Report.StartStep("I Select the Catagory Titled: Inquiry Date");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");			
@@ -1334,111 +1343,152 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I Click on 'Select Current Date'");
 			valueEdit.SelectCurrentDate();
 			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			valueEdit.ClickSaveButton();
 			//valueEdit.ClickButton("Save");
 			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 			Report.StartStep("I Double Click on the section with name: Response Date");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Response Date");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded","Power designer plus has loaded");
 			Report.StartStep("I Click on 'Select Current Date'");
 			valueEdit.SelectCurrentDate();
-			Delay.Seconds(1);			
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			valueEdit.ClickSaveButton();
-
-			Delay.Seconds(1);			
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Report.StartStep("I Double Click on the section with name: Type of Inquiry/Concern");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Type of Inquiry/Concern");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("Clicking the first available option in the list");
 			valueEdit.SelectTopOption();
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
-
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Report.StartStep("I Double Click on the section with name: Brief Description of Issue");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Brief Description of Issue");			
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Brief Description of Issue");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
 			//valueEdit.EnterValueIntoField("Test");
 			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			valueEdit.ClickSaveButton();
-
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Report.StartStep("I Double Click on the section with name: Revision Required?");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Revision Required?");			
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Revision Required?");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("Clicking the first available option in the list");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			valueEdit.SelectTopOption();
 			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
-
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Report.StartStep("I Double Click on the section with name: Justification");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Justification");			
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Justification");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 			Delay.Seconds(1);
 
 			Report.StartStep("I Double Click on the section with name: Root Cause (if Revision Required)");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Root Cause (if Revision Required)");			
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Root Cause (if Revision Required)");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("Clicking the first available option in the list");
 			valueEdit.SelectTopOption();
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
-			
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+
 
 
 			Report.StartStep("I Double Click on the section with name: Corrective Action (if Revision Required)");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Corrective Action (if Revision Required)");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("Clicking the first available option in the list");
 			valueEdit.SelectTopOption();
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 			Delay.Seconds(1);			
 
 
 			Report.StartStep("I Double Click on the section with name: Additional Information");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Additional Information");			
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Additional Information");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 
 			Report.StartStep("I Double Click on the section with name: Regulatory/IT Contact");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Regulatory/IT Contact");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 
 			Report.StartStep("I Double Click on the section with name: Approving Manager");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Approving Manager");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("Entering the value: 'Test' Into the New Value box");
 			valueEdit.NewValueBox.EnterText("Test");
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
 
 			Report.StartStep("I Double Click on the section with name: Inquiry Submitted By:");
-			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Submitted By:");			
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Submitted By:");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
 			Report.StartStep("Clicking the first available option in the list");
 			valueEdit.SelectTopOption();
 			Delay.Seconds(1);
 			valueEdit.ClickSaveButton();
 			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
 		}
 
 		[StepDefinition(@"In Power Designer I ensure SECT2318 is the Active Section")]
@@ -1463,6 +1513,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 
 		}
+
+		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to Checklist Section")]
+		public void InPDFillInSET2318ifPresentThenNavigateToChecklistSection()
+		{
+			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
+
+
+		}
+
+		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077")]
+		public void InPDFillInSET2318ifPresentThenNavigateToSECT0077()
+		{
+			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0077] Walmart Transportation Information");
+
+
+		}
+
+		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present")]
+		public void InPDFillInSET2318ifPresent()
+		{
+			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			
+
+
+		}
+
+
+
+
 
 
 	}

@@ -12,6 +12,7 @@ using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -148,14 +149,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			//create a product for Costco data tier
-			myProductsetup.CreateProductConditionerForCostcoAndTakeToDataSummary("product4", "Conditioner");
-			myHome.ClickItemInNavigationPanel("Retail Partners");
-			myRetailPartner.SelectRetailer("Costco");
-			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
-			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
-			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
-			myRetailPartner.GivenClickTheSaveChangesButton();
-			myRetailPartner.ClickCloseOnSavePopupDialog();
+			//myProductsetup.CreateProductConditionerForCostcoAndTakeToDataSummary("product4", "Conditioner");
+			//myHome.ClickItemInNavigationPanel("Retail Partners");
+			//myRetailPartner.SelectRetailer("Costco");
+			//myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
+			//myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
+			//myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
+			//myRetailPartner.GivenClickTheSaveChangesButton();
+			//myRetailPartner.ClickCloseOnSavePopupDialog();
 
 			//create a product for Dollar Tree data tier
 			myProductsetup.CreateProductConditionerForDollarTreeAndTakeToDataSummary("product5", "Conditioner");
@@ -405,11 +406,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//select I have no stewardship numbers
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			Delay.Seconds(5);
 			myAccount.ClickIhaveNoStewardshipNumbers();
+			Delay.Seconds(5);
 			//modal wait and accept accept/ press YES
-			new GlobalSteps().WaitForAModalDialogToOpen();
-			new ModalDialog().ClickButton("YES");
-			Delay.Seconds(2);
+			//new GlobalSteps().WaitForAModalDialogToOpen();
+			//new ModalDialog().ClickButton("YES");
+			Delay.Seconds(5);
 
 			//data tiers
 			myProductsetup.CreateProductChalkWithCanadianTierAndPLAndGoToSummary("product1", "Crayon");
@@ -1066,9 +1069,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (user != null)
 			{
 				Report.Info("User found!, Updating the password in TReVor");
-				Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email), "Not able to update username", "Successfully updated username");
-				Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password), "Not able to update password", "Successfully updated password");
+				//Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email), "Not able to update username", "Successfully updated username");
+				//Report.IsTrue(TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password), "Not able to update password", "Successfully updated password");
+
+				TReVorSettings.TReVor.CacheFunctions.UpdateTestUsername(user.TestUserId, account.Email);
+				TReVorSettings.TReVor.CacheFunctions.UpdateTestUserPassword(user.TestUserId, account.Password);
+				TestUsers.RefreshUsers();
+				var userList = TReVorSettings.TReVor.CacheFunctions.GetTestUsers();				
+				var foundUser = userList.FirstOrDefault(x => x.TestUserId == user.TestUserId);
+				Report.IsTrue(foundUser.Username == account.Email, "Not able to update username", "Successfully updated username");				
+				string branch = TReVorSettings.SoftwareBranch;				
+				user = TestUsers.GetUserSavedAs(foundUser.SavedAs, "3", branch);
+				string userpass = user.Password;
+				Report.IsTrue(userpass == account.Password, "Not able to update password", "Successfully updated password");
 			}
+
+
+
+
 			else
 			{
 				throw new Exception("Unable to find TReVor test user saved as: " + savedAs);
