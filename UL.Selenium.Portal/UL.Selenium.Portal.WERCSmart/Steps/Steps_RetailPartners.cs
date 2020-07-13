@@ -1766,7 +1766,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			List<string> tierdiff = tiersPresent.FindAll(x => !x.Contains(tier1));
 
-			Report.IsTrue(tierdiff.IsNullOrEmpty(), "The Data Consent Tiers found included more than Tier 1. The found differences were: " + string.Join(",", tierdiff), "The Data Consent Tiers found only included Tier 1");
+			Report.IsTrue(tierdiff.Count()==0, "The Data Consent Tiers found included more than Tier 1. The found differences were: " + string.Join(",", tierdiff), "The Data Consent Tiers found only included Tier 1");
 
 
 		}

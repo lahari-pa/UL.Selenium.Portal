@@ -45,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Process.GetProcessesByName("chromedriver").ToList().ForEach(x => x.Kill());
 		}
 
-		[AfterScenario(Order = 1)]
+		[AfterFeature(Order = 1)]
 		public static void CloseChrome()
 		{
 			//Process.GetProcessesByName("chrome").ToList().ForEach(x => x.Kill());
