@@ -37,6 +37,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath("..//h2"))?.Text;
 		}
 
+		public string GetSubheadingText()
+		{
+			var el= this.containerElement.FindElement(By.XPath("//div[@class='product-header']//p"), 2);
+			return el.Text; 
+
+		}
+
 		public string GetCurrentSubText()
 		{
 			return this.containerElement.FindElement(By.XPath(".//form[@id='panel']//p"))?.Text;

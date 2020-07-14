@@ -33,6 +33,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Page title '" + title + "' is showing as expected.");
 		}
 
+
+		[StepDefinition(@"In the Supplier Reports screen the subheader should be: (.*)")]
+		public void InTheSupplierReportsScreenTheSubheaderShouldBe(string subheading)
+		{
+			string actual = new SupplierReports().GetSubheadingText();
+			Report.IsTrue(actual == subheading, "Page subheading'" + subheading + "' is not showing as expected.",
+				"Page subheading '" + subheading + "' is showing as expected.");
+		}
+
 		[StepDefinition(@"In the Supplier Reports screen the current page should be: (.*)")]
 		public void ThenInTheSupplierReportsScreenTheCurrentPageShouldBe(string expected)
 		{
