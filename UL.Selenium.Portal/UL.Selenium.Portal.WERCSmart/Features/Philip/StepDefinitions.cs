@@ -67,8 +67,8 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		//	Report.IsTrue(webElementsObject.CheckForCheckBoxWithTextInMessageAtTheTopOfIngredientsPage(label), "Failed to find checkbox in message at the top of the ingredients page with the following text: " + label, "Successfully found checkbox in message at the top of the ingredients page with the following text: " + label);
 		//}
 
-		[StepDefinition(@"I confirm I see the two error messages in the popup with the following title: (.*)")]
-		public void ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(string popupTitle)
+		[StepDefinition(@"I confirm I see the error message types in the popup with the following title: (.*)")]
+		public void ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(Table table, string popupTitle)
 		{
 			WebElements webElementsObject = new WebElements();
 			Report.IsTrue(webElementsObject.CheckForTwoErrorMessagesInPopupWithTitle(popupTitle), "Failed to find all the error messages in popup with title " + popupTitle, "Successfully found all the error messages in popup with title " + popupTitle);

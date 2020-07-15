@@ -39,7 +39,7 @@ And I enter the pin for user saved as: NewUser
 When In the new user form I click on Next
 Then In the new user form I click on Success
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-And I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Raw material)
+And I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party)
 Then I save the product information as: TestCase58430
 And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -52,9 +52,10 @@ Given I set 'Prop65' to: No
 Given I click continue
 And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 And I click continue
-#Then I check that the input field with label: Formula Name for the WERCSmart Ingredient Directory has the following text: Raw materialAnd I should see following statement: Provide the name(s) to be used to identify the formula
+#Then I check that the input field with label: Formula Name for the WERCSmart Ingredient Directory has the following text: Raw material
+And I should see following statement: Provide the name(s) to be used to identify the formula
 Then I set the Formula Name for the WERCSmart Ingredient Directory field to: -
-Then I set the Formula Name for the WERCSmart Ingredient Directory field to: Raw material
+Then I set the Formula Name for the WERCSmart Ingredient Directory field to: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
 
 And I should see following statement: Provide Public Name(s) of the formula you're registering. This will be available to the Supplier to select for your ingredient when the ingredient is indicated to be Publicly Available. Public Names are typically on a products label, website or other information available to the general public.
 And I should see following statement: Public Name 1
@@ -73,7 +74,7 @@ And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 And I should see the Sustainability Page
 Given in the Sustainability page I click Continue
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
+And I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 
 @ScenarioId:794

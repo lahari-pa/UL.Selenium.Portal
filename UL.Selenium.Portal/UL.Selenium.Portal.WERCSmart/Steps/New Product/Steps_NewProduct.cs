@@ -184,6 +184,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			Report.IsTrue(NewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
 			GeneralUtilities.Wait_for_load_finish();
+			Delay.Seconds(10);
 			//this.GivenIShouldSeeXPage(section);
 		}
 
@@ -210,7 +211,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				i++;
 			}
 			Report.Failure("Failed to click 'Continue'!");
-			Report.Screenshot();Delay.Seconds(9999);
 			//Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
 		}
 

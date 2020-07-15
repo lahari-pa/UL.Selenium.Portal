@@ -190,6 +190,276 @@
 
 Feature: ChooseGoodGuide.com Scenarios
 
+
+Scenario: [87275] US & Canada - PL = Yes, Retailer is NOT Canadian Tire, no error re package type on forward
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I filter the products by: Accepted by Retailers
+Given I search for the product saved as: TestCase86187
+And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+And I enter the text: saved as TestCase86187 in the 'Search by WPS ID or Product Name' field
+And In the Foward Product Registration Screen I should see product: saved as TestCase86187
+And In the Foward Product Registration Screen I Select the product: saved as TestCase86187
+And I click continue on the Forward Product Registration page
+And In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Canadian Tire under Other Retailers and save it as: retailer87217
+And I click continue on the Forward Product Registration page
+And I call Shared Step 86002 (Forwarding - PLP - Select Product: saved as TestCase86187 & UPCs step - Edit existing UPC Confirm)
+
+And If the Private Label textbox is showing in the Select UPCs screen, I enter the value: N/A
+And I call Shared Step 86824 (Forwarding - Select Existing UPC, Click Continue, No error for Package type)
+
+And I should see the subheading 3: Product Results on the Forward Product Registration window
+And I click continue on the Forward Product Registration page
+And I should see the subheading 3: Review & Submit on the Forward Product Registration window
+And I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+And I click continue on the Forward Product Registration page
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+
+
+
+Scenario: [85963] Forward Product - US Only - PL = Yes, Packaging type not required/shown
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I filter the products by: Accepted by Retailers
+Given I search for the product saved as: TestCase86187
+And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+And I enter the text: saved as TestCase86187 in the 'Search by WPS ID or Product Name' field
+And In the Foward Product Registration Screen I should see product: saved as TestCase86187
+And In the Foward Product Registration Screen I Select the product: saved as TestCase86187
+And I click continue on the Forward Product Registration page
+And In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: Canadian Tire under Other Retailers and save it as: retailer87217
+And I click continue on the Forward Product Registration page
+And I call Shared Step 86002 (Forwarding - PLP - Select Product: saved as TestCase86187 & UPCs step - Edit existing UPC Confirm)
+
+#And If the Private Label textbox is showing in the Select UPCs screen, I enter the value: N/A
+#And I call Shared Step 86824 (Forwarding - Select Existing UPC, Click Continue, No error for Package type)
+
+And I should see the subheading 3: Product Results on the Forward Product Registration window
+And I click continue on the Forward Product Registration page
+And I should see the subheading 3: Review & Submit on the Forward Product Registration window
+And I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+And I click continue on the Forward Product Registration page
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
+
+
+Scenario: [87922] Universal Product Code (UPC) Step - Add Case UPC - Size (Weight Ounces) field validation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I generate a random UPC number and save as: UPC87633
+Then I save the product information as: TestCase87633
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer  |
+| Walgreens |
+And I should see the Universal Product Code Page
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87633, container type: Plastic Container and size: abc do not click continue
+Given I check for the appropriate alert: This field must be a number
+Given I fill in the UPC data; UPC:UPC87633, Product Type:Plastic Container, Product Weight: +6
+Then I click continue
+Given I check for the appropriate alert: This field must be a number
+Given I fill in the UPC data; UPC:UPC87633, Product Type:Plastic Container, Product Weight: 6
+Then I check for the appropriate alert: No error
+Then I click continue
+And I should see the Regulatory Documents to Provide Page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87633
+
+
+
+Scenario: [87631] Universal Product Code (UPC) Step - Add Case UPC - Size (Weight Ounces) field validation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I generate a random UPC number and save as: UPC87633
+Then I save the product information as: TestCase87633
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer  |
+| Walgreens |
+And I should see the Universal Product Code Page
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87633, container type: Plastic Container and size: abc do not click continue
+Given I check for the appropriate alert: This field must be a number
+Given I fill in the UPC data; UPC:UPC87633, Product Type:Plastic Container, Product Weight: +6
+Then I click continue
+Given I check for the appropriate alert: This field must be a number
+Given I fill in the UPC data; UPC:UPC87633, Product Type:Plastic Container, Product Weight: 6
+Then I check for the appropriate alert: No error
+Then I click continue
+And I should see the Regulatory Documents to Provide Page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87633
+
+
+
+Scenario: [87633] Universal Product Code (UPC) Step - Add Case UPC - Size (Weight Ounces) field validation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I generate a random UPC number and save as: UPC87633
+Then I save the product information as: TestCase87633
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer  |
+| Walgreens |
+And I should see the Universal Product Code Page
+And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87633, container type: Plastic Container and size: abc do not click continue
+Given I check for the appropriate alert: This field must be a number
+Given I fill in the UPC data; UPC:UPC87633, Product Type:Plastic Container, Product Weight: +6
+Then I click continue
+Given I check for the appropriate alert: This field must be a number
+Given I fill in the UPC data; UPC:UPC87633, Product Type:Plastic Container, Product Weight: 6
+Then I check for the appropriate alert: No error
+Then I click continue
+And I should see the Regulatory Documents to Provide Page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87633
+
+
+
+
+Scenario: [139531] CA Cleaning - Ingredient Type Missing
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+Given I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| Water         | 10      | No                  |            | Yes         |
+Given I click continue
+# Ensure that you see an 
+Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
+| Error                                                  |
+| GenericInUse                                           |
+| LessThan100Percent                                     |
+| PublicDisclosureOrTradeSecretIssue                     |
+| IngredientTypeMissing                                  |
+| FragranceComponentFunctionalPurposeMismatch            |
+| NonFunctionalIngredientDisclosureIssue                 |
+| CAHCPPublicDisclosureIssues                            |
+| NonFunctionalIngredientTypeOrFunctionalPurposeMismatch |
+| PVBOTThirdPartyError                                   |
+Then I click the close button for the popup with the following title: California Cleaning Right to Know
+Then I add the following ingredients:
+	| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Water         | 100     | false               | true        | Aqua       |
+Then I click continue
+And I should see the Waste Classification Data Page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TheProduct
+
+
+
+
+#Scenario: [139531] CA Cleaning - Ingredient Type Missing
+#
+#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+#Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+#Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+#Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+#Given I add the following ingredients:
+#| ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+#| Water         | 10      | No                  |            | Yes         |
+#Given I click continue
+## Ensure that you see an error popup
+## Ensure that the error in the popup matches the error in the screenshot attached to this TFS test case
+## Exit the error popup
+## Add an Ingredient Type for your Water ingredient
+#Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
+#| Error                                                  |
+#| GenericInUse                                           |
+#| LessThan100Percent                                     |
+#| PublicDisclosureOrTradeSecretIssue                     |
+#| IngredientTypeMissing                                  |
+#| FragranceComponentFunctionalPurposeMismatch            |
+#| NonFunctionalIngredientDisclosureIssue                 |
+#| CAHCPPublicDisclosureIssues                            |
+#| NonFunctionalIngredientTypeOrFunctionalPurposeMismatch |
+#| PVBOTThirdPartyError                                   |
+#Then I click the close button for the popup with the following title: California Cleaning Right to Know
+#Then I add the following ingredients:
+#	| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+#	| Water         | 100     | false               | true        | Aqua       |
+#Then I click continue
+#And I should see the Waste Classification Data Page
+#Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TheProduct
+
+
+
+Scenario: [139534] CA Cleaning - Fragrance Component and Functional Purpose MisMatch
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+Given I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| Water         | 100     | No                  |            | Yes         |
+# In the ingredient screen, add water at 100%. Select Trade Secret and add a Generic Name. Select Fragrance as Ingredient Type.
+# If the Functional Purpose auto-populates to Fragrance, change it to something else. If it hasn't auto populated, simply put any functional purpose that isn't Fragrance.
+Given I click continue
+# Ensure that the error in the popup matches the error in the screenshot attached to this TFS test case
+Then I click the close button for the popup with the following title: California Cleaning Right to Know
+# Change the Functional Purpose to Fragrance
+Given I click continue
+And I should see the Waste Classification Data Page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TheProduct
+
+
+
+
+
+Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutritional Supplement - Nutritional Supplement - Solid
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561a (The Product - Enter Product Name: Nutritional (Solid) Supplement Product for BBB and select Type of Product): Nutritional Supplement - Solid
+Given I generate a random UPC number and save as: UPC128140
+Given I call Shared Step 37857 (Enter Physical Property - Solid)
+And I call Shared Step 62678 (Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| 56-85-9   | L-Glutamine   | 100     |                     |            |             |
+And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+#Given I set the Refer to your Product Label. From the options, select those that appear on the Label. option to: None of the Above
+Given I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
+#Given I click continue
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128140, container type: Plastic Container and size: 6.2
+Given I call Shared Step 60567 (Upload Product Label only)
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
+Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_Current_Month_Day_Year.xlsx and save as Products in Scope Report for BBB
+Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Nutritional (Solid) Supplement Product for BBB Product for BBB
+#Given I delete the excel file saved as Products in Scope Report for BBB
+
+
 Scenario: [139385] CA Cleaning - Generic Ingredient Used
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -250,7 +520,17 @@ Then I add the following ingredients:
 	| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	| Water         | 100     | false               | false       |            |
 Then I click continue
-Then I confirm I see the two error messages in the popup with the following title: California Cleaning Right to Know
+Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
+| Error                                                  |
+| GenericInUse                                           |
+| LessThan100Percent                                     |
+| PublicDisclosureOrTradeSecretIssue                     |
+| IngredientTypeMissing                                  |
+| FragranceComponentFunctionalPurposeMismatch            |
+| NonFunctionalIngredientDisclosureIssue                 |
+| CAHCPPublicDisclosureIssues                            |
+| NonFunctionalIngredientTypeOrFunctionalPurposeMismatch |
+| PVBOTThirdPartyError                                   |
 Then I click the close button for the popup with the following title: California Cleaning Right to Know
 Then I add the following ingredients:
 	| ComponentName	| Percent | PublicallyDisclosed | TradeSecret | PublicName |

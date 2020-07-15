@@ -4513,6 +4513,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				Report.StartStep("I click continue");
 				selStepsNewProduct.ClickContinue();
 			}
+		
 		}
 
 		[StepDefinition(@"I call Shared Step 65080 \(Login to Studio and Open SHA manager\)")]

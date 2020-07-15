@@ -846,7 +846,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I add the following CA Cleaning ingredients:")]
 		public void IAddTheFollowingCACleaningIngredients(Table table)
 		{
-			Delay.Seconds(9999);
 			var newProductIngredients = new Ingredients();
 			IEnumerable<Ingredients.CACleaningIngredient> Ingredients = table.CreateSet<Ingredients.CACleaningIngredient>();
 			foreach (Ingredients.CACleaningIngredient item in Ingredients)
