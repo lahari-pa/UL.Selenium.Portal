@@ -2334,7 +2334,29 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				Report.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH option to: Yes");
 				new NewProduct().containerElement.Scroll();
 				Delay.Seconds(5);
-				MyStepsNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
+				var thisNewProduct = new NewProduct();
+				string section = "When mixed with an equal amount of water, will this produce a solution with a pH";
+				string option = "Yes";
+				if (thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()))
+				{
+					Report.Success("Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+				}
+				else
+				{
+					int i = 0;
+					bool clicked = false;
+					while (i<5&& clicked == false)
+					{
+						Delay.Seconds(2);
+						clicked = thisNewProduct.SetOptionInSection(section.Trim(), option.Trim());
+						i++;
+					}
+					Report.IsTrue(clicked, "Failed to set the input to " + option.Trim() + " in section: " + section.Trim(), "Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+
+				}
+				//Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),	"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(), "Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
+				Delay.Seconds(1);
+				//MyStepsNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
 				
 			}
 
@@ -2930,14 +2952,15 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Consent to Tier 2 Data Uses",
 				"Granted"));
-			MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 2 Data Uses", "Granted");
-			if (myNewProductClass.SectionExists("Consent to Tier 4.1 Derived Results"))
-			{
-				Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-				"Consent to Tier 4.1 Derived Results",
-				"Granted"));
-				MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 4.1 Derived Results", "Granted");
-			}
+			MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 2.1, 2.2, 4.2 Data Uses", "Granted");
+			//MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 2 Data Uses", "Granted");
+			//if (myNewProductClass.SectionExists("Consent to Tier 4.1 Derived Results"))
+			//{
+			//	Report.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+			//	"Consent to Tier 4.1 Derived Results",
+			//	"Granted"));
+			//	MyStepsNewProduct.SetTheSectionOptionTo("Consent to Tier 4.1 Derived Results", "Granted");
+			//}
 			Report.StartStep("in the Formulation > 3rd Party page I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Formulation > 3rd Party");
 		}

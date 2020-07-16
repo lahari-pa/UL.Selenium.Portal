@@ -197,6 +197,7 @@ Scenario: [75321] Forward Product - Completed Status (NO Recert)
 # NetProjects10\WercsSmart Portal\Release Day Tests
 @ScenarioId:1091
 Scenario: [75129] Forward - Product in Submitted Status
+	#Given I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA
 	Given I retrieve the email address for account: WERCs Product Account and save as: TestCase75129Email
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: saved as TestCase75129Email and saved name as: TestCase75129Supplier
