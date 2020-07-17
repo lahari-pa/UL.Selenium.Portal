@@ -1651,6 +1651,169 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", productTable);
 			}
+			if (TReVorSettings.SoftwareBranch == "QA")
+			{
+				ReportSettings.UseSubSteps = true;
+				var MyNewProduct = new StepsProductGrid();
+				Report.StartStep("I should only see the following retailers");
+				var productTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Option"
+			});
+				productTable.AddRow(new string[] {
+				"Ace Hardware Corporation"
+			});
+				productTable.AddRow(new string[] {
+				"Ahold | DelHaize USA"
+			});
+				productTable.AddRow(new string[] {
+				"Albertsons Companies"
+			});
+				productTable.AddRow(new string[] {
+				"Amazon"
+			});
+				productTable.AddRow(new string[] {
+				"Autozone"
+			});
+				productTable.AddRow(new string[] {
+				"Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)"
+			});
+				productTable.AddRow(new string[] {
+				"Best Buy"
+			});
+				productTable.AddRow(new string[] {
+				"Canadian Tire"
+			});
+				//	productTable.AddRow(new string[] {
+				//	"Costco"
+				//});
+				productTable.AddRow(new string[] {
+				"CVS"
+			});
+				productTable.AddRow(new string[] {
+				"Dick's Sporting Goods"
+			});
+				productTable.AddRow(new string[] {
+				"Dollar General"
+			});
+				productTable.AddRow(new string[] {
+				"Dollar Tree Stores, Inc. / Greenbrier International, Inc"
+			});
+				productTable.AddRow(new string[] {
+				"Essendant"
+			});
+				productTable.AddRow(new string[] {
+				"Family Dollar"
+			});
+				productTable.AddRow(new string[] {
+				"Genuine Parts"
+			});
+				productTable.AddRow(new string[] {
+				"Harbor Freight Tools"
+			});
+				productTable.AddRow(new string[] {
+				"HD Supply"
+			});
+				productTable.AddRow(new string[] {
+				"HEB "
+			});
+				productTable.AddRow(new string[] {
+				"HyVee"
+			});
+				productTable.AddRow(new string[] {
+				"Kohl's"
+			});
+				productTable.AddRow(new string[] {
+				"Kroger"
+			});
+				productTable.AddRow(new string[] {
+				"Lowe's"
+			});
+				productTable.AddRow(new string[] {
+				"McLane"
+			});
+				productTable.AddRow(new string[] {
+				"Meijer"
+			});
+				productTable.AddRow(new string[] {
+				"New Egg"
+			});
+				productTable.AddRow(new string[] {
+				"No Retailer/No UPC Product"
+			});
+				productTable.AddRow(new string[] {
+				"Northgate Market"
+			});
+				productTable.AddRow(new string[] {
+				"Office Depot"
+			});
+				productTable.AddRow(new string[] {
+				"Optoro "
+			});
+				productTable.AddRow(new string[] {
+				"O'Reilly"
+			});
+				productTable.AddRow(new string[] {
+				"Petco"
+			});
+				productTable.AddRow(new string[] {
+				"Price Chopper "
+			});
+				productTable.AddRow(new string[] {
+				"Publix "
+			});
+				productTable.AddRow(new string[] {
+				"Rite Aid"
+			});
+				productTable.AddRow(new string[] {
+				"Save Mart Supermarkets"
+			});
+				productTable.AddRow(new string[] {
+				"Schnuck's"
+			});
+				productTable.AddRow(new string[] {
+				"Sears/K-Mart"
+			});
+				productTable.AddRow(new string[] {
+				"Smart & Final"
+			});
+				productTable.AddRow(new string[] {
+				"Staples"
+			});
+				productTable.AddRow(new string[] {
+				"SuperValu"
+			});
+				productTable.AddRow(new string[] {
+				"Target"
+			});
+				productTable.AddRow(new string[] {
+				"The Home Depot"
+			});
+				productTable.AddRow(new string[] {
+				"TopCo"
+			});
+				productTable.AddRow(new string[] {
+				"Tractor Supply"
+			});
+				productTable.AddRow(new string[] {
+				"Ultra/Standard"
+			});
+				productTable.AddRow(new string[] {
+				"Unified"
+			});
+				productTable.AddRow(new string[] {
+				"Wakefern"
+			});
+				productTable.AddRow(new string[] {
+				"Walgreens"
+			});
+				productTable.AddRow(new string[] {
+				"Wal-Mart/SAM'S CLUB"
+			});
+				productTable.AddRow(new string[] {
+				"WinCo Foods"
+			});
+				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", productTable);
+			}
 			if (TReVorSettings.SoftwareBranch == "Staging")
 			{
 				ReportSettings.UseSubSteps = true;
@@ -1683,9 +1846,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				productTable.AddRow(new string[] {
 				"Canadian Tire"
 			});
-				productTable.AddRow(new string[] {
-				"Costco"
-			});
+			//	productTable.AddRow(new string[] {
+			//	"Costco"
+			//});
 				productTable.AddRow(new string[] {
 				"CVS"
 			});
