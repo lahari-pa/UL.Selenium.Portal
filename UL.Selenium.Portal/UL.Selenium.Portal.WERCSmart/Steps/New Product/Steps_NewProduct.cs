@@ -2553,13 +2553,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$@"The name displayed in the header matcehd the expected value: ""{name}""");
 		}
 
-		[StepDefinition(@"I confirm that retailer ""(.*)"" is present under the 'Destination Retailers' column in the UPC table")]
-		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer)
+		[StepDefinition(@"I confirm that retailer ""(.*)"" (is|is not) present under the 'Destination Retailers' column in the UPC table")]
+		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer, string isOrIsNot)
 		{
 			List<string> displayedRetailers = new NewProduct().GetAllUPCDestinationRetailers();
-			Report.IsTrue(displayedRetailers.Contains(retailer),
-				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}",
-				$@"Retailer ""{retailer}"" is present under Destination Retailers");
+
+			if (isOrIsNot.ToLower() == "is not")
+			{
+				Report.IsTrue(!displayedRetailers.Contains(retailer),
+				$@"Retailer ""{retailer}"" is present under Destination Retailers",
+				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}");
+			}
+			else
+			{
+				Report.IsTrue(displayedRetailers.Contains(retailer),
+					$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}",
+					$@"Retailer ""{retailer}"" is present under Destination Retailers");
+			}
 		}
 
 		[StepDefinition(@"I click (Save|Cancel) in The Product Page")]
@@ -3061,15 +3071,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
 			Report.IsTrue(pesticideDetailsStateObject.CheckIfThereIsNoErrorInThePesticideDetailsStateRegistration(), "Failed to display no error", "Successfully displayed no errors");
 		}
-
-
-		[StepDefinition(@"I check that the following sections contain the corresponding titles:")]
-		public void ThenICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
-		{
-			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
-			Report.IsTrue(pesticideDetailsStateObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
-		}
-
 
 
 		[StepDefinition(@"I set the following data: (.*) for the following state: (.*)")]

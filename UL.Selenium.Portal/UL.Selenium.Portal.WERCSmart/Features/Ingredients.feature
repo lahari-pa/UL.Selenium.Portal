@@ -623,3 +623,62 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 		| Water  |
 		| Butane |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
+
+
+
+
+@ScenarioId:9377
+	Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561a (The Product - Enter Product Name: Pesticide Testing Product and select Type of Product): Insecticide - Fogger
+Then I save the product information as: TestCase133335
+	And I set the Primary Physical State option to: Aerosol
+	And I set the Secondary Physical State option to: Liquid spray
+	And I check the 'I do not have exact' checkbox for field: pH
+	And I set the pH option to: 4 - 6.9 
+	And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then option to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
+	And in the New Product page I click Continue
+	# Additional Product Information page
+	And I should see the Additional Product Information Page
+	Given I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+	# Ingredient Page
+	And I should see the Ingredients Page
+	Then I add the following ingredients:
+		| ComponentName			     	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Glutens, corn    | 50      | false               | false       |            |
+		| Butane             | 0.1     | false               | false       |            |
+		| Oils, cedarwood, Texan    | 49.9    | false               | false       |            |
+	Given in the New Product page I click Continue
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA).
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: The product type is typically considered a pesticide, and there are ingredients present in the registration that are known to be used in Pesticide products.
+	Then I confirm the table in the popup view has the following column titles
+	| Titles          |
+	| CAS Number      |
+	| Name            |
+	| Active or Inert |
+	Then I confirm the table in the popup view has following column data
+	| CAS Number | Name                   | Active or Inert |
+	| 66071-96-3 | Glutens, corn          | Active          |
+	| 68990-83-0 | Oils, cedarwood, Texan | Active          |
+    Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
+	Then I confirm I see a checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following buttons in the popup view:
+	| Button  |
+	| Go back |
+	| Confirm |
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+	And I should see the Ingredients Page
+	Then in page Ingredients Page I should see error: You must either confirm that your product is not a pesticide, change your product details to confirm that it is a pesticide, or change your ingredients to remove the pesticide ingredients.
+	Then I click continue
+	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+	## Regulatory 1 Page Details
+	And I should see the Waste Classification Data Page
+    When In the New Product page I click tab: Product Characteristics
+	And I click the page heading: Ingredients
+	And I click continue
+	Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Given I click the Home navigation icon
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335

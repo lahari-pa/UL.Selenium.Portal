@@ -3745,6 +3745,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Column not found: " + columnName);
 			}
+
 		}
 
 
@@ -3850,6 +3851,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
 			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
 		}
+
+		[StepDefinition(@"In UPC Retailer and Feed I check that the following sections contain the corresponding titles:")]
+		public void ThenInUPCRetailerAndFeedICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			Report.IsTrue(studioSHAManagerObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
+		}
+
 
 	}
 

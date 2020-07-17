@@ -155,7 +155,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectRetailerFromListView(string retailer)
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//span[text()='" + retailer + "']]//input"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//span[text()=\"" + retailer + "\"]]//input"), 2).TryClick();
 		}
 
 		public List<string> UnselectedRetailers()

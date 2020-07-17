@@ -2147,8 +2147,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("In the Ingredients page I click Continue");			
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartStep("I should see the Waste Classification Data Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");			
-			
+			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
 		}
 
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
@@ -2276,10 +2275,10 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I should see the Retailer Page");
 			stepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			Report.StartStep("The selected retailers on the Retailer page should be:");
-			//MyNewProductSteps.SelectedRetailersShouldBe(new List<string> { retailer });
+			//MyNewProductSteps.SelectedRetailersShouldBe("should", new List<string> { retailer });
 			var retailers = new Table("Retailer");
 			retailers.AddRow(retailer);
-			new Steps_Retailer().SelectedRetailersShouldBe(retailers);
+			new Steps_Retailer().SelectedRetailersShouldBe("should", retailers);
 			Report.StartStep("In the Retailer page I click Continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
@@ -3699,8 +3698,6 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I should see the Volatile Organic Compound Summary");
 			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");			
 			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
-			
-
 		}
 
 		[StepDefinition(
@@ -10281,7 +10278,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		}
 
 		[StepDefinition(@"I call Shared Step 132473 \(Regulatory Information 3 - Nutritional Category\)")]
-		public void GivenICallSharedStep132473RegulatoryInformation3NutritionalCategory()
+		public void GivenICallSharedStepRegulatoryInformation_NutritionalCategory()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
