@@ -10237,7 +10237,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		}
 
 		[StepDefinition(@"I call Shared Step 135134 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path\)")]
-		public void IcallSharedStep1234()
+		public void IcallSharedStep135134()
 		{
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I should see the Additional Product Information Page");
@@ -10369,6 +10369,63 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 
+		}
+
+		[StepDefinition(@"I call Shared Step 140562 \(Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path\)")]
+		public void IcallSharedStep140562()
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I should see the Additional Product Information Page");
+			var MyNewProductSteps = new StepsNewProduct();
+			var newProductObject = new NewProduct();
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep("I set the product description option to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProductSteps.SetTheSectionOptionTo("Which one best describes your product", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			Report.StartStep("I unselect option: United States under section: Select countries the product may be sold in");
+			newProductObject.UnsetOptionInSection("Select countries the product may be sold in".Trim(), "United States".Trim());
+			Report.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyNewProductSteps.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			var tableFirst = new Table("Section");
+			tableFirst.AddRow("Select countries the product may be sold in");
+			tableFirst.AddRow(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
+			tableFirst.AddRow(
+				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
+			tableFirst.AddRow(
+				"Product is a Retailer's Private Label or Brand");
+			tableFirst.AddRow(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
+			Report.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+
+			Report.StartStep(
+				"California's Cleaning Product Right to Know Act: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"California's Cleaning Product Right to Know Act",
+				"No");
+
+
+
+			Report.StartStep(
+				"Product is a Retailer's Private Label or Brand: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is a Retailer's Private Label or Brand",
+				"No");
+			Report.StartStep(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale): No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
 	}

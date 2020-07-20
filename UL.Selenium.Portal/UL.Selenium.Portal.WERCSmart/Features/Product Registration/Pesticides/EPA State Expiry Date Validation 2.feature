@@ -271,39 +271,7 @@ And I should see the Transportation Details 1 Page
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56610
 
-
-@ScenarioId:9323
-Scenario: [132756] Canadian Province Pesticide Options
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given I generate a random UPC number and save as: RandomUPC
-Given I delete all products with UPC Number: RandomUPC
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
-Given I save the product information as: TestCase
-Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
-| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
-Given I call Shared Step 135134 (Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path)
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
-| 74-98-6   | Propane       | 100     | false               |            | false       |
-And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
-Then I should see the Pesticide Details - Canada Page
-Then I check the options in the dropdown menus for the following sections
-| Section                    | Options                                                                                                                                                                                                                       |
-| Alberta                    | None,Schedule 1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                              |
-| British Columbia           | None,Permit Restricted,Restricted,Commercial,Domestic,Excluded                                                                                                                                                                |
-| Manitoba                   | None,Commercial,Controlled Purchase,Not Regulated,Restricted,Self-Select                                                                                                                                                      |
-| New Brunswick              | None,Banned,Domestic / Self-Select,Non-Domestic                                                                                                                                                                               |
-| New Foundland and Labrador | None,Banned,Domestic,Commerical,Restricted                                                                                                                                                                                    |
-| Nova Scotia                | None,Allowed / Self-Select,Banned,Commercial,Controlled Purchase,Restricted,Not Regulated                                                                                                                                     |
-| Ontario                    | None,Class A: Manufacturing Products,Class B: Restricted,Class C: Commercial,Class D: Domestic with License,Class D: Domestic without License,Class D: Domestic Controlled Purchase Requiring a License,Class E: Treated Seed |
-| Prince Edward Island       | Banned,Controlled Purchase,Exempt: Schedule 2,Exempt: Schedule 7,Non-Domestic,None,Self-Select: Schedule 8                                                                                                                    |
-| Quebec                     | None,Class 1,Class 2,Class 3,Class 3A,Class 4,Class 5,Banned                                                                                                                                                                  |
-| Saskatchewan               | None,Commercial,Restricted                                                                                                                                                                                                    |
-| Northwest Territory        | Not Applicable                                                                                                                                                                                                                |
-| Yukon Territory            | None,Commercial,Domestic,Restricted,Use Permit                                                                                                                                                                                           |
+                                                                                                                                                                                    |
 
 @ScenarioId:9325
 	Scenario: [56651] Pesticide Data - EPA Expiration date validation (Delaware - July 1st no more than two years out)
