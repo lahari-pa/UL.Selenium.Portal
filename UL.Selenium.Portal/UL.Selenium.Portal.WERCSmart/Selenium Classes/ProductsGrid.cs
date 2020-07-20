@@ -512,10 +512,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 			if (rows.Count == 0)
 			{
-				Report.Info("No rows were found to delete!");
-				return true;
-			}
+				int x = 0;
+				bool rowsFound = false;
+				while (x<5&&rowsFound==false)
+				{
+					Delay.Seconds(10);
+					IList<IWebElement> newrows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+					if(newrows.Count==0)
+					{
+						Report.Info("No rows were found to delete! Waiting for 10 seconds");
 
+					}
+					else
+					{
+						Report.Info("Rows were found");
+						rowsFound = true;
+					}
+					x++;
+					
+				}
+
+				if(rowsFound == false)
+				{
+					Report.Info("After 1 minute No rows were found to delete! Moving on.");
+					return true;
+				}	
+				
+			}
+			rows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 			foreach (IWebElement row in rows)
 			{
 				IWebElement toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
