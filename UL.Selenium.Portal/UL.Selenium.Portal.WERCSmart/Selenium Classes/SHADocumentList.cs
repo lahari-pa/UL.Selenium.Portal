@@ -50,8 +50,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			ReadOnlyCollection<IWebElement> ListOfFilenameTDs = this.containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
 			IWebElement matchingTD = ListOfFilenameTDs.FirstOrDefault(x => x.GetValue().Contains(pdfName));
+			
+
 			if (matchingTD != null)
 			{
+				matchingTD.JsClick();
+				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+				Delay.Seconds(2);
+				actions.MoveToElement(submitButtonEl);
+				
+				actions.MoveByOffset(50, -180);
+				           
+				actions.ClickAndHold();
+				actions.Perform();
+
+
+
 				return matchingTD.TryDoubleClick();
 			}
 

@@ -2022,6 +2022,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(fileName), "", "");
 		}
 
+		[StepDefinition(@"I save the product ID: (.*) to a context under type 'ProductInformation' as: (.*)")]
+		public void SaveProductIDAsProductInformationNamed(string prodID, string savedAs)
+		{
+			var createdProduct = new ProductInformation();
+			createdProduct.Id = prodID;
+			Context.AddToContext(savedAs, createdProduct);
+		}
 
 
 

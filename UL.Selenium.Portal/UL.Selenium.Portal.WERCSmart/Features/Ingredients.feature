@@ -376,7 +376,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 		| Sodium hydroxide | 10      | false               | false       |            |
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Dye X         | 10      | false               | false       |            |
+		| Bromate         | 10      | false               | false       |            |
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Sodium chloride | 10      | false               | false       |            |
@@ -592,6 +592,8 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	And for ingredient: Water I set Public Disclosure checkbox to checked: true
 	#Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1
 	And I verify the Transparency Score displays 100.00%
+
+	And I click continue
 	#Given I close the current window
 	#Given I open a new window
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -601,6 +603,8 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then I click on the Row Action: Edit
 	Then the Product Editor page should be loaded
 	And the product saved as: FirstProduct should be visible in editor
+
+	#Looks like th issue is with the ingredients page not showing, instead its the additional product information page
 	And In the ingredients table the ingredients should be in the following order
 		| Name  |
 		| Water |
