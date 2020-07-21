@@ -54,15 +54,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingTD != null)
 			{
-				matchingTD.JsClick();
-				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
-				Delay.Seconds(2);
-				actions.MoveToElement(submitButtonEl);
+				//matchingTD.JsClick();
+				//Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+				//Delay.Seconds(2);
+				//actions.MoveToElement(submitButtonEl);
 				
-				actions.MoveByOffset(50, -180);
+				//actions.MoveByOffset(50, -180);
 				           
-				actions.ClickAndHold();
-				actions.Perform();
+				//actions.ClickAndHold();
+				//actions.Perform();
 
 
 
