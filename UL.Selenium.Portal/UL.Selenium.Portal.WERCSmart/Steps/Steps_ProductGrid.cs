@@ -2277,6 +2277,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click 'All' under Retailers for the first product returned")]
 		public void ClickAllRetailersForFirstProduct()
 		{
+			Delay.Seconds(3);
 			Report.IsTrue(new ProductsGrid().ClickRetailerFirstRow("All"),
 				"Failed to click 'All' under Retailers for the first product!",
 				"Successfully clicked 'All' under Retailers for the first product");

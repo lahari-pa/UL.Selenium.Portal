@@ -169,7 +169,7 @@ Scenario: [64854] Navigation Settings
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -331,7 +331,7 @@ Scenario: [66335] Main Menu - expanded
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -342,7 +342,7 @@ Scenario: [66335] Main Menu - expanded
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -362,7 +362,7 @@ Scenario: [66336] Main Menu - collapsed
 		| Flask      | Register New Product |
 		| Envelope   | My Messages          |
 		| Handshake  | Retail Partners      |
-		| Cloud      | Supplier Reports     |
+		| File-Text  | My Reports           |
 		| Bulb       | UL Solution Center   |
 		| Cart       | Shopping Cart        |
 		| Life-Saver | Support              |
@@ -449,7 +449,7 @@ Scenario: [55796] Navigate to Home Page
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -461,7 +461,7 @@ Scenario: [55796] Navigate to Home Page
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
