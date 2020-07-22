@@ -22,7 +22,6 @@
 @CreateProducts
 @ForwardProductRegistration
 @ProductSetUp
-@Philip
 @run_ProductCreateAndComplete
 Feature: Product Create and Process to Completed
 

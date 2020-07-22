@@ -207,8 +207,6 @@
     <Compile Include="Classes\WERCSmartUser.cs" />
     <Compile Include="Database Functions\dbRetailers.cs" />
     <Compile Include="Database Functions\dbUtils.cs" />
-    <Compile Include="Features\Philip\StepDefinitions.cs" />
-    <Compile Include="Features\Philip\WebElements.cs" />
     <Compile Include="Features\Product Registration\Distributor.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -218,6 +216,7 @@
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
     <Compile Include="Selenium Classes\AddNewSupplier.cs" />
     <Compile Include="Selenium Classes\AdvancedReportsRules\DailyReportWERCSmartAdditionalReportsPublished.cs" />
+    <Compile Include="Selenium Classes\CACleaning.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\AccountCreation.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\GGNewProduct.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\Homepage.cs" />
@@ -325,6 +324,7 @@
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_TCLP.cs" />
     <Compile Include="Steps\Steps_Brands.cs" />
+    <Compile Include="Steps\Steps_CACleaning.cs" />
     <Compile Include="Steps\Steps_ChooseGoodGuide.cs" />
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
     <Compile Include="Steps\Steps_CreateProducts.cs" />
@@ -450,7 +450,6 @@
     </None>
     <None Include="Features\NewProduct.feature">
     </None>
-    <None Include="Features\Philip\SpecFlowFeature1.feature" />
     <None Include="Features\Product Registration\Batteries.feature" />
     <None Include="Features\NotIncludedGeneralTests.feature" />
     <None Include="Features\Product Registration\Distributor.feature">
@@ -546,6 +545,7 @@
     </None>
     <None Include="Features\Product Registration\VOC\VOC.feature">
     </None>
+    <None Include="Features\Product Set Up\CA Cleaning.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_3rdParty.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_Chalk.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_Electronic.feature" />

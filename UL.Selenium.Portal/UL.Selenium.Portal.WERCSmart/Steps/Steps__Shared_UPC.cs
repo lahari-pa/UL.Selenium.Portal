@@ -176,7 +176,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 87647 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) do not click continue")]
 		public void EnterUPCInfoDoNotClickContinue(string upc, string containerType, string size)
 		{
-
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Universal Product Code (UPC) Page");
@@ -1220,6 +1219,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(new DeleteRowsWarning().WaitForContainerToBeInvisible(30), "The warning popup appeared", "The warning popup did not appear");
 			}
+		}
+//Philil-Steps
+		[StepDefinition(@"I Check the Delete Rows Warning Popup contains the following text, Line One: (.*), Line Two: (.*)")]
+		public void ThenICheckTheDeleteRowsWarningPopupContainsTheFollowingTextYouAreAboutToDelete(string lineOne, string lineTwo)
+		{
+			var selectionBoxes = new UPC();
+			Report.IsTrue(selectionBoxes.CheckDeleteRowsWarningPopupContainsText(lineOne, lineTwo), "Failed to confirm the following text in the Delete Rows Warning Popup: " + lineOne + lineTwo, "Successfully confirmed the following text in the Delete Rows Warning Popup: " + lineOne + lineTwo);
 		}
 
 		[StepDefinition("I Click Ok in the Delete Rows Warning Popup")]

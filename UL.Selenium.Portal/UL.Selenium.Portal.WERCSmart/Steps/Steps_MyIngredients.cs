@@ -145,7 +145,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition("I click: (YES|NO) in the 'Remove Component from My Ingredients' pop up")]
 		public void ClickOptionInRemoveComponentDialog(string option)
 		{
-			
+			Delay.Seconds(5);
 			Report.IsTrue(new MyIngredientsModal().ClickButton(option),
 				"Failed to click button: " + option + " in the 'Remove Component from My Ingredients' pop up",
 				"Successfully clicked button: " + option + " in the 'Remove Component from My Ingredients' pop up");

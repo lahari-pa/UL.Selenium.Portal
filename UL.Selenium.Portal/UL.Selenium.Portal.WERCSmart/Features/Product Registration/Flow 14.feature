@@ -9,7 +9,6 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
-@Philip
 @run_Flow14
 Feature: Flow 14
 

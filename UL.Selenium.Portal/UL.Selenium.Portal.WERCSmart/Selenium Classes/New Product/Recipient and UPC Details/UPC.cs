@@ -620,6 +620,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (IWebElement element in AlertMessagesWithSpanTag)
 			{
+				Report.Info("testing -" + element.Text + "- -" + alertText + "-");
 				if (element.Text == alertText)
 				{
 					return true;
@@ -817,6 +818,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement isRequiredLabel = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]//..//p[@class='form-error']"), 2);
 			return isRequiredLabel.Displayed;
 		}
+
+		public bool ClickCloseInPopupWithTitle(string title)
+		{
+			IWebElement continueButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='" + title + "']/../following-sibling::div[@class='modal-footer']//button"), 2);
+			return continueButton.TryClick();
+		}
+
+		public bool CheckDeleteRowsWarningPopupContainsText(string lineOne, string lineTwo)
+		{
+			IWebElement lineOneEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
+			IWebElement lineTwoEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
+
+			if (lineOneEl.Text == lineOne && lineTwoEl.Text == lineTwo)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 	}
 
 	public class DeleteRowsWarning : SeleniumBaseObject

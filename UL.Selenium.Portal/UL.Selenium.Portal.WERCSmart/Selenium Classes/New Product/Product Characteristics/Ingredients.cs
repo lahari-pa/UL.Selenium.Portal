@@ -225,6 +225,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						publicName.Select(ingredient.PublicName);
 					}
 
+					if (!string.IsNullOrEmpty(ingredient.GenericName))
+					{
+						IWebElement genericName = matchingrow.FindElement(By.XPath(".//td[@class='newcol']//input[@data-bind='value: GenericName.field']"), 2);
+						genericName.Select(ingredient.GenericName);
+					}
+
 					return success;
 				}
 
@@ -249,7 +255,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Percent = ingredient.Percent,
 				PublicallyDisclosed = ingredient.PublicallyDisclosed,
 				TradeSecret = ingredient.TradeSecret,
-				PublicName = ingredient.PublicName
+				PublicName = ingredient.PublicName,
+				GenericName = ingredient.GenericName
 			};
 			this.AddIngredient(ing);
 
@@ -969,9 +976,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			public bool PublicallyDisclosed { get; set; } = false;
 			public bool TradeSecret { get; set; } = false;
 			public string PublicName { get; set; } = "";
+			public string GenericName { get; set; } = "";
 			public bool TradeSecretEnabled { get; set; } = false;
 			public bool PublicDisclosureEnabled { get; set; } = false;
 			public bool PublicNameEnabled { get; set; } = false;
+			public bool GenericNameEnabled { get; set; } = false;
 			public bool Selected { get; set; } = false;
 
 			public string GetDetails()
