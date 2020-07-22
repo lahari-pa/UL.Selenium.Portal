@@ -1,3 +1,5 @@
+extern alias selenium;
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +15,7 @@ using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using System;
 using System.Net;
+using selenium::OpenQA.Selenium.Interactions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -54,19 +57,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingTD != null)
 			{
-				//matchingTD.JsClick();
-				//Actions actions = new Actions(SeleniumBrowser.WebBrowser);
-				//Delay.Seconds(2);
-				//actions.MoveToElement(submitButtonEl);
-				
-				//actions.MoveByOffset(50, -180);
-				           
-				//actions.ClickAndHold();
-				//actions.Perform();
+
+				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+				actions.MoveToElement(matchingTD);
+				Delay.Seconds(2);
+				actions.MoveByOffset(0, -60);
+				//actions.ContextClick();
+				actions.DoubleClick();
+				actions.Perform();
+
+				return true;
 
 
-
-				return matchingTD.TryDoubleClick();
+				//return matchingTD.TryDoubleClick();
 			}
 
 			return false;
@@ -113,9 +116,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in handles)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("TempPDF"))
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("GetDocument"))
 				{
-					Report.Info("Found the URL Containing 'TempPDF'");
+					Report.Info("Found the URL Containing 'GetDocument'");
 					return SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url;
 				}
 			}

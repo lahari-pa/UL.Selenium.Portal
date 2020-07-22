@@ -2031,6 +2031,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I confirm that a file is produced called (.*) and save as (.*)")]
+		public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Confirm File is downloaded with name: " + file);
+			try
+			{
+				Delay.Seconds(10);
+				Report.Info("Confirm a file is downloaded with name: " + file);
+				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				Report.Info("Downloads folder: " + downloadsFolder);
+				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+				if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
+				{
+					Context.AddToContext(savedAs, dir.FirstOrDefault());
+				}
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 	}
 }
