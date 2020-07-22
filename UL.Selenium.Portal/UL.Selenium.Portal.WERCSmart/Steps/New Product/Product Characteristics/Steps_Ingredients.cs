@@ -881,6 +881,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
+			Delay.Seconds(5);
 		}
 
 

@@ -652,6 +652,7 @@ Then I save the product information as: TestCase133335
 	Given in the New Product page I click Continue
 	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA).
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: The product type is typically considered a pesticide, and there are ingredients present in the registration that are known to be used in Pesticide products.
 	Then I confirm the table in the popup view has the following column titles
 	| Titles          |
 	| CAS Number      |
@@ -668,6 +669,8 @@ Then I save the product information as: TestCase133335
 	| Go back |
 	| Confirm |
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+	And I should see the Ingredients Page
+	Then in page Ingredients Page I should see error: You must either confirm that your product is not a pesticide, change your product details to confirm that it is a pesticide, or change your ingredients to remove the pesticide ingredients.
 	Then I click continue
 	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button

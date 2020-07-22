@@ -68,7 +68,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I click the Publicly Disclosed checkbox for ingredient: Aqua
 	Given I confirm there are 1 Publicly Disclosed ingredients in the Total section
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
-
+	
 @ScenarioId:671
 Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -90,7 +90,7 @@ Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I click continue
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
-	Given I call Shared Step 60567 (Upload Product Label only)
+	Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
@@ -168,9 +168,9 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Vitamin E
-	Given I set 'Prop65' to: No
-	Then I click continue
+	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Then I should see the Regulatory Documents to Provide Page
 	Then I see the following sections
@@ -186,6 +186,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then I see the following sections
 		| Section               |
 		| Upload SDS (Optional) |
+		| Toxicity Characteristic Leaching Procedure (TCLP) |
 	Given I click Continue and should not see an error message
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63325
@@ -231,18 +232,7 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplement for Infants - Liquid
 	Then I save the product information as: TestCase58075
-	Given I set the Primary Physical State option to: Liquid
-	And I check the 'I do not have exact' checkbox for field: pH
-	And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-	And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
-	Given I set the Secondary Physical State option to: Liquid
-	Given I set the Specific Gravity option to: 20
-	Given I set the pH option to: 7.1 - 9.9
-	Given I set the Boiling Point (in Celsius) option to: 20.1C (68.1F) - 35C (95F)
-	Given I set the Flash Point (in Celsius) option to: >93C and <=815C
-	Given I set the Flash Point Testing Method Used option to: Closed cup method
-	Given I set the Select the best Water Solubility description option to: 100g/100ml
-	Given I click continue
+	Then I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -275,18 +265,7 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplements for Domesticated Animals
 	Then I save the product information as: TestCase58089
-	Given I set the Primary Physical State option to: Liquid
-	And I check the 'I do not have exact' checkbox for field: pH
-	And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-	And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
-	Given I set the Secondary Physical State option to: Liquid
-	Given I set the Specific Gravity option to: 20
-	Given I set the pH option to: 7.1 - 9.9
-	Given I set the Boiling Point (in Celsius) option to: 20.1C (68.1F) - 35C (95F)
-	Given I set the Flash Point (in Celsius) option to: >93C and <=815C
-	Given I set the Flash Point Testing Method Used option to: Closed cup method
-	Given I set the Select the best Water Solubility description option to: 100g/100ml
-	Given I click continue
+	Then I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -295,11 +274,13 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 		| Citric acid   | 25      | false               | false       |            |
 	# Added in 57637 to make test run. Ask Wercs testers
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I set the Refer to your Product Label option to: None of the Above
-	Given I click continue
+	Given I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Petco
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58089, container type: Plastic Container and size: 100
-	Given I call Shared Step 60567 (Upload Product Label only)
+	Then I see the following sections
+		| Section                    |
+		| Flash Point Testing Report |
+	Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58089. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I navigate to the home page

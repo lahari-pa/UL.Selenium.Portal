@@ -2301,10 +2301,10 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I should see the Retailer Page");
 			stepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			Report.StartStep("The selected retailers on the Retailer page should be:");
-			//MyNewProductSteps.SelectedRetailersShouldBe(new List<string> { retailer });
+			//MyNewProductSteps.SelectedRetailersShouldBe("should", new List<string> { retailer });
 			var retailers = new Table("Retailer");
 			retailers.AddRow(retailer);
-			new Steps_Retailer().SelectedRetailersShouldBe(retailers);
+			new Steps_Retailer().SelectedRetailersShouldBe("should", retailers);
 			Report.StartStep("In the Retailer page I click Continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
@@ -10306,7 +10306,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		}
 
 		[StepDefinition(@"I call Shared Step 132473 \(Regulatory Information 3 - Nutritional Category\)")]
-		public void GivenICallSharedStep132473RegulatoryInformation3NutritionalCategory()
+		public void GivenICallSharedStepRegulatoryInformation_NutritionalCategory()
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();

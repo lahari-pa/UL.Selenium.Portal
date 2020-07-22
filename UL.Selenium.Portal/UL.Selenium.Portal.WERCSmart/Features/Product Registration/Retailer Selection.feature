@@ -241,8 +241,12 @@ Then I select the following retailers in the Retailer page
 | CVS            |
 | Dollar General |
 Then I click the delete icon in the Retailer page
+And The selected retailers on the Retailer page should not be:
+| Retailer              |
+| CVS                   |
+| Dollar General        |
 Given I click 'Add Retailers' in the Retailers page
-Then The following retailers in the Select Retailers popup list view should be selected
+Then The following retailers in the Select Retailers popup list view should not be selected
 | Retailers      |
 | CVS            |
 | Dollar General |

@@ -1676,12 +1676,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	
 		public bool CheckTheFollowingSectionTitles(Table table)
 		{
+
 			foreach (TableRow row in table.Rows)
 			{
-				IWebElement section = this.containerElement.FindElement(By.XPath("//tr[@class='DarkBack'][2]//th[" + row["Section"] + "]"), 2);
-				if (section.Text != row["Column Name"])
+				var columnNamesArr = row["Column Names"].ToString().Split(',');
+				var columnSectionsArr = row["Column Numbers"].ToString().Split(',');
+
+				for (int i = 0; i < columnNamesArr.Count(); i++)
 				{
-					return false;
+					IWebElement section = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//tr[@class='DarkBack'][2]//th[" + columnSectionsArr[i] + "]"), 2);
+	
+					if (!section.Text.Contains(columnNamesArr[i]))
+					{
+						return false;
+					}
+
 				}
 			}
 
