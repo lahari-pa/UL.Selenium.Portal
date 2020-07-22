@@ -620,7 +620,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (IWebElement element in AlertMessagesWithSpanTag)
 			{
-				Report.Info("testing -" + element.Text + "- -" + alertText + "-");
 				if (element.Text == alertText)
 				{
 					return true;
