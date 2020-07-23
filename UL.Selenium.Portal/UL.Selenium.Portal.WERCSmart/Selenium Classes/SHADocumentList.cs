@@ -57,7 +57,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingTD != null)
 			{
-
+				matchingTD.TryDoubleClick();
+				Report.Info($"attempting back up double click");
 				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
 				actions.MoveToElement(matchingTD);
 				Delay.Seconds(2);
