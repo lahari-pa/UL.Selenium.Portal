@@ -2293,15 +2293,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					break;
 				}
 			}
-
+			Report.Info("Looking for Iframe");
 			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"), 10);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			Report.Info("Switching to Iframe");
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 10);
+			Report.Info("Starting a wait for load");
 			if (base.Wait_for_load(30))
 			{
+				Report.Info("Loading was successfull");
 				return true;
 			}
-
+			Report.Info($"failed to load");
 			return false;
 		}
 
