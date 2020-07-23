@@ -588,7 +588,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						//Delay.Seconds(3);
 						Report.Info("Checking the products grid is empty");
 						int x = 0;
-						while(x<30)
+						while(x<10)
 						{
 							row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 							if(row==null)
@@ -596,9 +596,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								Report.Info($"The products grid was emtpy");
 								return true;
 							}
-							Report.Info("The products grid was not empty, waiting 10 more seconds and checking again");
-							Delay.Seconds(10);
-							x++;
+							try
+							{
+
+
+								toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
+								toggleButton.TryClick();
+								deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 10);
+								deleteButton.TryClick();
+								delDialog.WaitForContainerToBeVisible();
+								Delay.Seconds(10);
+								GeneralUtilities.Wait_for_load_finish();
+								Report.Info("The products grid was not empty, waiting 10 more seconds and checking again");
+								Delay.Seconds(30);
+								x++;
+							}
+							catch
+							{
+								Report.Info($"Exception thrown during product deletion. Checking to see if product was removed between attempts");
+								row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+								if (row == null)
+								{
+									Report.Info($"The products grid was emtpy");
+									return true;
+								}
+								Report.Info($"The Products grid was still not empty after all attempts");
+								return false;
+							}
+
 						}
 
 						Report.Info($"The Products grid was still not empty after all attempts");
