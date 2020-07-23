@@ -21,31 +21,48 @@ Feature: Supplier Reports
 @ScenarioId:978
 Scenario: [68420] List of Supplier Reports
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
-	And In the Supplier Reports screen the page title should be: Available Reports
+	Given I click the My Reports icon in the QuickLinks Pane
+	#And In the Supplier Reports screen the page title should be: Available Reports
+	Then In the Supplier Reports screen the subheader should be: Requested reports are available for 30 days. Requestor will receive an email notification when the report is ready in WERCSmart. Please allow several moments for the report to be generated, email sent. Check your clutter, junk and/or spam folders.
 	Given under the supplier Reports menu I should see the following options
-		| Reports                                                            |
-		| Battery-Containing Products                                        |
-		| California Proposition 65 - Registrations Prior to August 30, 2018 |
-		| Kit Registration Details                                           |
-		| Kits Containing a Specific Registration                            |
-		| Pesticide Certificate Report                                       |
-		| Pesticide Report                                                   |
-		| Product Types Registered                                           |
-		| Registrations Revised - Not Yet Submitted                          |
-		| Registrations with Retailer Chemicals of Concern                   |
-		| Retailer Chemicals of Concern                                      |
-		| Subscription Renewal (Formulated, Enhanced, Articles)              |
-		| Subscription Renewal (Registrations Eligible for Deletion)         |
-		| Sustainability Survey Eligibility - Health & Beauty                |
-		| UPC and Retailer (Product Specific)                                |
-		| UPC Error Details                                                  |
-		| UPCs (Active) for all Registrations                                |
-		| UPCs and Registrations (Retailer Specific)                         |
-		| UPCs Duplicated within Account                                     |
-		| VOC-related Registrations                                          |
-		| Waste Classification Summary for All Registrations                 |
+		| Reports                                |
+		| Battery-Containing Products            |
+		| California Proposition 65              |
+		| Chemicals of Concern                   |
+		| Eligible to Obsolete                   |
+		| Kit Registrations                      |
+		| Kits Containing a Registration         |
+		| Pesticide Registrations                |
+		| Product Types Registered               |
+		| Registration Updates Not Submitted     |
+		| Subscription Product Types             |
+		| UPC and Retailer (All)                 |
+		| UPC and Retailer (Single Registration) |
+		| UPC Duplication                        |
+		| UPC Errors for The Home Depot          |
+		| Volatile Organic Compounds             |
+		| Waste Classification Summary           |
+		#| Kit Registration Details                                           |
+		#| Kits Containing a Specific Registration                            |
+		#| Pesticide Certificate Report                                       |
+		#| Pesticide Report                                                   |
+		#| Product Types Registered                                           |
+		#| Registrations Revised - Not Yet Submitted                          |
+		#| Registrations with Retailer Chemicals of Concern                   |
+		#| Retailer Chemicals of Concern                                      |
+		#| Subscription Renewal (Formulated, Enhanced, Articles)              |
+		#| Subscription Renewal (Registrations Eligible for Deletion)         |
+		#| Sustainability Survey Eligibility - Health & Beauty                |
+		#| UPC and Retailer (Product Specific)                                |
+		#| UPC Error Details                                                  |
+		#| UPCs (Active) for all Registrations                                |
+		#| UPCs and Registrations (Retailer Specific)                         |
+		#| UPCs Duplicated within Account                                     |
+		#| VOC-related Registrations                                          |
+		#| Waste Classification Summary for All Registrations                 |
 
+@tfs_design
+@Obsolete
 @ScenarioId:979
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -81,9 +98,10 @@ Scenario: [68421] Active UPCs for Products Report
 @ScenarioId:980
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Battery-Containing Products
 	Then In the Supplier Reports screen the current sub-page should be: Battery-Containing Products
+	#Description check
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called BatteryContaining Products.xlsx and save as 68422

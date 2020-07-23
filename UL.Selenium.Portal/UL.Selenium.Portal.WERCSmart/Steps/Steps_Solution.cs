@@ -8,6 +8,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using UL.Automation.Utilities.Functions;
+using UL.Automation.Selenium.Extensions;
 using System;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps

@@ -14,7 +14,7 @@ using UL.Automation.Reporting;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
-
+using NPOI.SS.Formula.Functions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1449,7 +1449,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				MatchCollection matches = Regex.Matches(thisSupplier.SupplierID, @"\d{5}1");
 				// Use foreach-loop.
-				foreach (Match match in matches)
+				foreach (System.Text.RegularExpressions.Match match in matches)
 				{
 					if (match.Success)
 					{
@@ -1491,6 +1491,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			Context.AddToContext(saveAs, requiredId);
+
+		}
+
+		//Creating a new version of this method as the above one was erroring and I am not sure why its getting rootstrings etc?
+		[StepDefinition(@"For retailer: (.*) I confirm the the supplier ID: (.*) is found in the supplier ID Table and save it as: (.*)")]
+		public void GivenIFindTheSupplierIDForSupplierInTheSupplierIDTable(string supplier, string expectedID, string saveAs)
+		{
+			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();			
+			var regex = new Regex(@"\d+");
+			var potentialRootStrings = new List<string>();
+			if(expectedID.Contains("x"))
+			{
+				switch (supplier)
+				{
+					case "O'Reilly":
+						expectedID= expectedID.Replace("x","1");
+						break;
+					case "Sears":
+						expectedID = expectedID.Replace("x", "2");
+						break;
+					case "Wal-Mart":
+						expectedID = expectedID.Replace("x", "3");
+						break;
+					default:
+						throw new Exception("You need to specify O'Reilly, Sears or Wal-Mart");
+				}
+			}
+
+			foreach (Supplier thisSupplier in allSuppliers)
+			{
+
+				if(thisSupplier.SupplierID==expectedID)
+				{
+					Report.Success($"The Supplier ID: {expectedID} was found in the supplier ID table");
+					Report.Info($"Adding the supplier ID to context as: {saveAs}");
+					Context.AddToContext(saveAs, expectedID);
+					return;
+				}
+				//MatchCollection matches = Regex.Matches(thisSupplier.SupplierID, @"\d{5}1");
+				//// Use foreach-loop.
+				//foreach (Match match in matches)
+				//{
+				//	if (match.Success)
+				//	{
+				//		if(match.ToString()==expectedID)
+				//		{
+				//			Report.Success($"The Supplier ID: {expectedID} was foun in the supplier ID table");
+				//			Report.Info($"Adding the supplier ID to context as: {saveAs}");
+				//			Context.AddToContext()
+				//		}						
+						
+				//	}
+				//}
+			}
+
+			Report.Failure($"The Supplier ID: {expectedID} was not found in the supplier ID table");
+			return;
+			//Context.AddToContext(saveAs, requiredId);
 
 		}
 
@@ -1708,7 +1766,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			List<string> tierdiff = tiersPresent.FindAll(x => !x.Contains(tier1));
 
-			Report.IsTrue(tierdiff.Any(), "The Data Consent Tiers found included more than Tier 1. The found differences were: " + string.Join(",", tierdiff), "The Data Consent Tiers found only included Tier 1");
+			Report.IsTrue(tierdiff.Count()==0, "The Data Consent Tiers found included more than Tier 1. The found differences were: " + string.Join(",", tierdiff), "The Data Consent Tiers found only included Tier 1");
 
 
 		}
@@ -2248,38 +2306,59 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
 		}
 
-		[StepDefinition(@"I confirm the excel file saved as: (.*) contains the following data: (.*)")]
-		public bool ThenIConfirmTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingDataCleaningSuppliesProductForBBB(string savedAs, string data)
+		[StepDefinition(@"For Retailer: (.*) If the supplier ID: (.*) is not found In the Supplier Table I add it with the first option in the Company or Brand Name field.")]
+		public void ForRetailerCheckForSupplierIDAndAddIfNotFound(string retailer, string supplierID)
 		{
-			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
-			object File = Context.GetFromContext(savedAs);
-			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			if(Report.IsTrue(new RetailPartnersDetails().GetSelectedRetailer().Trim() == retailer.Trim(), "Retailer: " + retailer + " was not showing!", "Retailer: " + retailer + " was showing as expected!"))
 			{
-				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
-				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
-
-				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
+				if (supplierID.Contains("x"))
 				{
-					List<string> row = ExcelUtils.Excel_GetRow(i);
-					Report.Info("Header row contained: '" + string.Join("', '", row) + "'");
-					foreach (var str in row)
+					switch (retailer)
 					{
-						if (str == data)
-						{
-							Report.Success("Excel file contained the following data: " + data);
-							return true;
-						}
+						case "O'Reilly":
+							supplierID = supplierID.Replace("x", "1");
+							break;
+						case "Sears":
+							supplierID = supplierID.Replace("x", "2");
+							break;
+						case "Wal-Mart":
+							supplierID = supplierID.Replace("x", "3");
+							break;
+						default:
+							throw new Exception("You need to specify O'Reilly, Sears or Wal-Mart");
 					}
 				}
 
 
+				List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();				
+				foreach (Supplier thisSupplier in allSuppliers)
+				{
 
-				Report.Failure("Excel file did not contain the following data: " + data);
-				return false;
+					if (thisSupplier.SupplierID == supplierID)
+					{
+						Report.Success($"The Supplier ID: {supplierID} was found to already be in the supplier ID table, no need to add it.");						
+						return;
+					}
+					
+				}
+
+				Report.Info($"The Supplier ID: {supplierID} was not found in the supplier ID table, beginning the steps to add it.");
+				this.GivenIClickOnTheAddNewSupplierIDLink();
+				new GlobalSteps().IWaitForModalPopupToBeVisible();
+				string companyBrandSavedAs = "companybrand" + supplierID;
+				this.GivenInTheAddNewSupplierDialogISelectTheFirstOptionInTheCompanyOrBrandNameInput(companyBrandSavedAs);
+				this.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput(supplierID);
+				this.GivenInTheAddNewSupplierDialogIClickSave();
+				var supplierDetailsTable = new Table("Supplier ID", "Company or Brand Name");
+				supplierDetailsTable.AddRow(supplierID, "saved as: "+companyBrandSavedAs);				
+
+				this.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(supplierDetailsTable);
 			}
+			return;
 
-			return false;
+
 		}
+
 
 	}
 

@@ -1335,8 +1335,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();			
-			
 			var valueEdit = new ValueEditor();
+
+			Report.Info("I check that the WALMART QC RESPONSE FORM is not already filled in with junk data");
+			if(selStudioPowerDesignerPlus.GivenCategoryContainsData("Additional Information"))
+			{
+				Delay.Seconds(1);
+				selStudioPowerDesignerPlus.Wait_for_load(30);
+				Report.Info("As the WALMART QC RESPONSE FORM was found to already contain data, skipping junk data fill");
+				return;
+			}
 			Report.StartStep("I Select the Catagory Titled: Inquiry Date");
 			this.GivenInPowerDesignerIDoubleClickOnCategory("Inquiry Date");			
 			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");			
@@ -1507,10 +1515,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to " + click + " click section: " + "[SECT2318] WALMART QC RESPONSE FORM",
 				"Successfully " + click + " clicked " + "[SECT2318] WALMART QC RESPONSE FORM");
 			Delay.Seconds(3);
+			return;		
+
+		}
+
+		[StepDefinition(@"In Power Designer I ensure SECT0077 is the Active Section")]
+		public void InPDIEnsureSECT0077IsActive()
+		{
+			string click = "left";
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			if (new StudioPowerDesignerPlusDesignMode().ActiveSectionMatches("[SECT0077]"))
+			{
+				Report.Success("The Section was already active");
+				return;
+			}
+			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
+								"Studio power designer is open");
+			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection("[SECT0077] Walmart Transportation Information", click),
+				"Failed to " + click + " click section: " + "[SECT0077] Walmart Transportation Information",
+				"Successfully " + click + " clicked " + "[SECT0077] Walmart Transportation Information");
+			Delay.Seconds(3);
 			return;
-
-
-			
 
 		}
 
@@ -1524,6 +1549,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				selStepsStudio.InPDIEnsureSECT2318IsActive();
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
+			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
+
+
+		}
+
+		[StepDefinition(@"In Power Desginer, fill in Additional Sections if they are present then navigate to Checklist Section")]
+		public void InPDFillInAdditonionalSectionsifPresentThenNavigateToChecklistSection()
+		{
+			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
+			{
+				selStepsStudio.InPDIEnsureSECT0077IsActive();
+				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
 			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			var checkListSection = TestVariables.GetVariableSavedAs("PD Checklist Section");
@@ -1566,6 +1614,285 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"In Power Desginer, fill in Additional Sections if they are present")]
+		public void InPDFillInAdditionalSectionsifPresent()
+		{
+			var selStepsStudio = new Steps_Studio();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
+			{
+				selStepsStudio.InPDIEnsureSECT2318IsActive();
+				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
+			}
+			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT0077"))
+			{
+				selStepsStudio.InPDIEnsureSECT0077IsActive();
+				selStepsStudio.InPDIFillTheSectionWalmartTransportationInformationWithJunkData();
+			}
+			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
+
+
+
+		}
+
+
+
+
+
+		[StepDefinition(@"In PD+ I Fill the section Walmart Transportation Information  with junk data")]
+		public void InPDIFillTheSectionWalmartTransportationInformationWithJunkData()
+		{
+			ReportSettings.UseSubSteps = true;
+			var studioPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+
+			var valueEdit = new ValueEditor();
+
+
+			Report.Info("I check that the Walmart Transportation Information section is not already filled in with junk data");
+			if (selStudioPowerDesignerPlus.GivenCategoryContainsData("DOT Regulated Flag for BBB"))
+			{
+				Delay.Seconds(1);
+				selStudioPowerDesignerPlus.Wait_for_load(30);
+				Report.Info("As the Walmart Transportation Information section was found to already contain data, skipping junk data fill");
+				return;
+			}
+
+			Report.StartStep("I Double Click on the section with name: Hazmat Pack Type Code for Walmart");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Hazmat Pack Type Code for Walmart");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);			
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: Marine Pollutant Indicator for DOT Only (Y/N)");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Marine Pollutant Indicator for DOT Only (Y/N)");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: WM - Repackaged (Y/N)");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("WM - Repackaged (Y/N)");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: MSDS?");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("MSDS?");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: Need Info?");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Need Info?");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: Water Soluble?");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Water Soluble?");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: WM - No Reason Air Code");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("WM - No Reason Air Code");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: WM - No Reason Air CodeDOT Regulated Flag for BBB");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("DOT Regulated Flag for BBB");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Clicking the first available option in the list");
+			valueEdit.SelectTopOption();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+
+			Report.StartStep("I Double Click on the section with name: Haz Class");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("Haz Class");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: DOT Ground Proper Shipping Name w/TN");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("DOT Ground Proper Shipping Name w/TN");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: DOT Air Cargo Proper Shipping Name w/TN");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("DOT Air Cargo Proper Shipping Name w/TN");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: HAZARD CLASS DOMESTIC AIR PASSENGER");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("HAZARD CLASS DOMESTIC AIR PASSENGER");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: DOT Air Passenger Proper Shipping Name w/TN");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("DOT Air Passenger Proper Shipping Name w/TN");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+
+			Report.StartStep("I Double Click on the section with name: HAZARD CLASS IATA AIR CARGO");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("HAZARD CLASS IATA AIR CARGO");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: IATA Air Cargo International Proper Shipping Name w/TN");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("IATA Air Cargo International Proper Shipping Name w/TN");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: HAZARD CLASS IATA AIR PASSENGER");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("HAZARD CLASS IATA AIR PASSENGER");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+
+			Report.StartStep("I Double Click on the section with name: IATA Air Passenger International Proper Shipping Name w/TN");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("IATA Air Passenger International Proper Shipping Name w/TN");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: DOT Vessel Hazard Class");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("DOT Vessel Hazard Class");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name:	DOT Vessel Proper Shipping Name w/TN");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("DOT Vessel Proper Shipping Name w/TN");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+			Report.StartStep("I Double Click on the section with name: 	IMDG Vessel Proper Shipping Name w/TN");
+			this.GivenInPowerDesignerIDoubleClickOnCategory("IMDG Vessel Proper Shipping Name w/TN");
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+			Report.IsTrue(valueEdit.Wait_for_load(30), "Power designer plus has not loaded", "Power designer plus has loaded");
+			Report.StartStep("Entering the value: 'Test' Into the New Value box");
+			valueEdit.NewValueBox.EnterText("Test");
+			Delay.Seconds(1);
+			valueEdit.ClickSaveButton();
+			Delay.Seconds(1);
+			selStudioPowerDesignerPlus.Wait_for_load(30);
+
+
+
+		}
 
 
 
