@@ -2306,6 +2306,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
 		}
 
+		[StepDefinition(@"I confirm the excel file saved as: (.*) contains the following data: (.*)")]
+		public bool ThenIConfirmTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingDataCleaningSuppliesProductForBBB(string savedAs, string data)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+
+				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
+				{
+					List<string> row = ExcelUtils.Excel_GetRow(i);
+					Report.Info("Header row contained: '" + string.Join("', '", row) + "'");
+					foreach (var str in row)
+					{
+						if (str == data)
+						{
+							Report.Success("Excel file contained the following data: " + data);
+							return true;
+						}
+					}
+				}
+
+
+
+				Report.Failure("Excel file did not contain the following data: " + data);
+				return false;
+			}
+
+			return false;
+		}
+
+
 		[StepDefinition(@"For Retailer: (.*) If the supplier ID: (.*) is not found In the Supplier Table I add it with the first option in the Company or Brand Name field.")]
 		public void ForRetailerCheckForSupplierIDAndAddIfNotFound(string retailer, string supplierID)
 		{
