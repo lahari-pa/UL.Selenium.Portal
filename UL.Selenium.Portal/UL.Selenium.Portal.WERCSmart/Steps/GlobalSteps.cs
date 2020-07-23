@@ -2055,6 +2055,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I delete the file saved as (.*)")]
+		public void DeleteFileSavedAs(string savedAs)
+		{
+			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + savedAs);
+				return;
+			}
+			Report.Info("Deleting file: " + file);
+			File.Delete(file);
+		}
+
 
 	}
 }

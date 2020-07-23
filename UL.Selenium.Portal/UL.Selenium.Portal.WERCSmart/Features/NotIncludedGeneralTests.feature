@@ -1690,13 +1690,10 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Then I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: CVSHBExcelFile and check that is shows the expected product saved as: CVSHBProduct1
 
 	Scenario: [KITPDFTEST] Debug scenario for kit pdf
-
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I save the product ID: 1802471 to a context under type 'ProductInformation' as: TestCase73949
-
 	Then I save the product ID: 1802381 to a context under type 'ProductInformation' as: TestCase73949PROD1
 	Then I save the product ID: 1802431 to a context under type 'ProductInformation' as: TestCase73949PROD2
-
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Assigned
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase73949
@@ -1708,7 +1705,9 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	#Then I should see a new tabbed document with the pdf containing product code saved as: TestCase73949 and NGHS / English twice for file: savedas73949PDF
 	Then I Check that the file saved as: savedas73949PDF contains the text 'NGHS / English' twice as well as the product codes saved as: TestCase73949PROD1 and TestCase73949PROD2
 	#Then I should see a new tabbed document whose URL contains DocumentID
-	Then I Delete the file with name: TempPDF.pdf from the downloads folder
+	#Then I Delete the file with name: TempPDF.pdf from the downloads folder
+	Then I delete the file saved as savedas73949PDF
+	And I Click Cancel on the Document List window pop up
 	
 
 

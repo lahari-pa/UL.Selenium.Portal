@@ -53,12 +53,19 @@ Scenario: [73949] Kit - Document merge - US only
 	And I Confirm you see the Document List pop up
 	And In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx.pdf - where xxxxxxx is the product id of product saved as: TestCase73949
 	And In the Document List popup I Double click on the filename for product saved as: TestCase73949
+
+	Then I confirm that a file is produced called GetDocument.pdf and save as savedas73949PDF
+	Then I Check that the file saved as: savedas73949PDF contains the text 'NGHS / English' twice as well as the product codes saved as: 73949_KitProduct1 and 73949_KitProduct2
+	Then I delete the file saved as savedas73949PDF
+	And I Click Cancel on the Document List window pop up
+
 	# And confirm you see NGHS documents in EN for both the input productsNote:
 	# each document in the PDF will show NGHS / English and the Product Code(s) will show the product ID for the input product
 	#CLF 21/03/2019 Commenting out below because I cannot get the pdf document
-	Then I should see a new tabbed document with the pdf containing product code saved as: TestCase73949 and NGHS / English twice
-	Then I should see a new tabbed document whose URL contains DocumentID
-	Then I Delete the file with name: TempPDF.pdf from the downloads folder
+
+	#Then I should see a new tabbed document with the pdf containing product code saved as: TestCase73949 and NGHS / English twice
+	#Then I should see a new tabbed document whose URL contains DocumentID
+	#Then I Delete the file with name: TempPDF.pdf from the downloads folder
 
 #And I close the window that opened
 #And I Click Cancel on the Document List window pop up
