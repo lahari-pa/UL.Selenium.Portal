@@ -2052,6 +2052,105 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the product codes saved as: (.*) and (.*)")]
+		public void CheckThatFileSavedAsContaisnProductCodesSavedAs(string fileSavedAs, string code1SavedAs, string code2SavedAs)
+		{
+			var productOneDetails = (ProductInformation)Context.GetFromContext(code1SavedAs);
+			string ID1 = productOneDetails.Id;
+
+			var productTwoDetails = (ProductInformation)Context.GetFromContext(code2SavedAs);
+			string ID2 = productTwoDetails.Id;
+
+
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");
+			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
+			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
+			
+
+		}
+
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / English' twice")]
+		public void CheckThatFileSavedAsContaisnTextCanadaEnglishTwice(string fileSavedAs)
+		{	
+
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");		
+
+
+			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/English");
+			Report.IsTrue(foundOccurences == 2, "PDF does not contain: Canada / English twice", "PDF contains NGHS / English twice");
+
+		}
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / Français' twice")]
+		public void CheckThatFileSavedAsContaisnTextCanadaFrançaisTwice(string fileSavedAs)
+		{
+
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");
+
+
+			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/Français");
+			Report.IsTrue(foundOccurences == 2, "PDF does not contain: Canada / Français twice", "PDF contains NGHS / English twice");
+
+		}
+
 
 		public static int CountStringOccurrences(string text, string pattern)
 		{
@@ -2066,6 +2165,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			return count;
 		}
+
+
+
 
 		[StepDefinition(@"I click on the Suppliers link on the top right of the screen")]
 		public void IClickOnSuppliersLink()

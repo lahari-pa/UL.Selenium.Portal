@@ -109,6 +109,11 @@ Scenario: [73950] Kit Document merge - Canada only
 	And I Confirm you see the Document List pop up
 	And In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx.pdf - where xxxxxxx is the product id of product saved as: TestCase73950
 	And In the Document List popup I Double click on the filename for product saved as: TestCase73950
+
+
+
+
+
 	#CLF 21/03/2019 Commenting out below because I cannot get the pdf document
 	# And I Scroll thru the PDF document and confirm you see HGHS documents in EN and HGHS documents in CF for both the input products (4 documents in all will be merged into the one PDF)Note: each document in the PDF will show Canada / English or Canada/Francais and the Product Code(s) will show the product ID for the input product
 	And I Click Cancel on the Document List window pop up
