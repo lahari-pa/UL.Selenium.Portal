@@ -59,7 +59,6 @@ Scenario: [51296] Product in Assigned status - add to recertification
 	#And I If you are using a ULSC registered supplier you will see the Re-Import data from ULSC services page - Select No, continue editing data and click Save
 	#And I The Product Type step is shown
 	And In the New Product page I click tab: Review and Submit
-
 	Then I click the page heading: Safety Data Sheet Authoring - Additional Data (Optional)
 	#And in the New Product page I click section: Safety Data Sheet Authoring - Additional Data (Optional)
 

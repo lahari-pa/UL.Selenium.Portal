@@ -751,6 +751,101 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm that the latest report in the Report history table has the name: (.*)")]
+		public void IConfirmLatestReportInHistoryTableHasName(string reportName)
+		{
+			//We are assuming that the report we just ran will still be the latest report, if another test is running at same time this may cause some issues.
+
+			Report.IsTrue(new SupplierReports().ReportHistoryTablePresent(), "The Report History Table was not present", "The Report History Table was present");
+			var foundName = new SupplierReports().ReportHistroryLatestReportName();
+			Report.Info($"The Found report at the top of the report history table was: {foundName}");
+			Report.IsTrue(foundName == reportName, "The found report name did not match the expected", "The found report name matched the expected");
+		}
+
+		[StepDefinition(@"I confirm that the latest report in the Report history table has the File Type: (.*)")]
+		public void IConfirmLatestReportInHistoryTableHasFileType(string reportName)
+		{
+			//We are assuming that the report we just ran will still be the latest report, if another test is running at same time this may cause some issues.
+
+			Report.IsTrue(new SupplierReports().ReportHistoryTablePresent(), "The Report History Table was not present", "The Report History Table was present");
+			var foundName = new SupplierReports().ReportHistroryLatestReportFileType();
+			Report.Info($"The Found report at the top of the report history table was: {foundName}");
+			Report.IsTrue(foundName == reportName, "The found report File Type did not match the expected", "The found report File Type matched the expected");
+		}
+
+
+		[StepDefinition(@"I confirm that the latest report in the Report history table matches the following data:")]
+		public void IConfirmLatestReportInHistoryTableHasFileType(Table table)
+		{
+			//We are assuming that the report we just ran will still be the latest report, if another test is running at same time this may cause some issues.
+
+
+			//need to remove spaces in column titles -> check this is working
+
+			Delay.Seconds(20);
+
+			Report.IsTrue(new SupplierReports().ReportHistoryTablePresent(), "The Report History Table was not present", "The Report History Table was present");
+			Report.IsTrue(new SupplierReports().ReportHistoryTableRowsPresent(), "The Report History Table did not contain rows", "The Report History Table did contain rows");			
+
+			Report.IsTrue(new SupplierReports().ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
+
+			Report.IsTrue(new SupplierReports().ReportHistoryTablePresent(), "The Report History Table was not present", "The Report History Table was present");
+			Report.IsTrue(new SupplierReports().ReportHistoryTableRowsPresent(), "The Report History Table did not contain rows", "The Report History Table did contain rows");
+
+
+			foreach (TableRow thisRow in table.Rows)
+			{
+				string columnTitle = thisRow["Column"];
+				columnTitle = columnTitle.Replace(" ", "");
+				string expectedValue = thisRow["Value"];
+				if(expectedValue=="<TodaysDate>")
+				{
+					//This may need updating if day is 01 etc (M/dd/yyyy)					
+					string datePart= DateTime.Now.ToString("M/d/yyyy");
+					var columnValue = new SupplierReports().ReportHistroryLatestReportFileColumnData(columnTitle);
+					Report.Info($"The found Date Requested was: {columnValue}");
+
+					var columnValueSecondHalf = columnValue.Remove(0, columnValue.IndexOf(' ') + 1);
+					var columnValueFirstHalf = columnValue.Replace(columnValueSecondHalf, "").Trim();
+					Report.IsTrue(columnValueFirstHalf == datePart, "The first half of the Date Requested was not a match", "The first half of the Date Requested was a match");
+
+					//TimeSpan convertedValue;
+					bool isTimeFormat = false;
+
+					var dateFormats = "hh:mm:ss tt";	
+
+
+
+					if (GeneralUtilities.IsValidDate(columnValueSecondHalf, dateFormats))
+					{
+						isTimeFormat = true;
+					}
+					else
+					{
+						isTimeFormat = false;
+					}
+					Report.IsTrue(isTimeFormat, "The second half of the Date Requested was not a time stamp", "The second half of the Date Requested was a time stamp");
+								
+
+					 
+				}
+				else
+				{
+					if (expectedValue == "<CurrentUser>")
+					{
+						expectedValue = new TopMenuBar().GetCurrentUserText();
+					}
+
+					columnTitle = columnTitle.Replace(" ", "");
+					var foundValue = new SupplierReports().ReportHistroryLatestReportFileColumnData(columnTitle);
+					Report.IsTrue(foundValue == expectedValue, "The found report value for column: " + columnTitle + " did not match the expected", "The found report value for column: " + columnTitle + " did match the expected");
+				}
+				
+
+			}
+
+		}
+
 	}
 }
 

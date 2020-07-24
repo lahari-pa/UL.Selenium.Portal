@@ -144,5 +144,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 		}
+
+		public string GetCurrentUserText()
+		{
+
+			var el = this.containerElement.FindElement(By.XPath("//ul[@class='nav navbar-nav pull-right']//a[i[@class='fa fa-user']]"), 2);
+			var foundText = el.Text;
+			return foundText;
+		}
 	}
 }

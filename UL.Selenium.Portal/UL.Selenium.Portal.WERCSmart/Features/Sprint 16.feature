@@ -77,7 +77,7 @@ Scenario:[112940] Product Registration: Vendor Comment Area Revise Limit from 20
 Scenario:[113004] UPC Data Expansion: Transportation and Name: My Reports: UPC Error Details
 	#Given I log in with the account saved in TReVor as: Error Report User
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I click the Supplier Reports icon in the QuickLinks Pane
+	And I click the My Reports icon in the QuickLinks Pane
 	Then Under the Supplier Reports menu I choose: UPC Error Details
 	# Sprint 1 - 1506182, Sprint 2 - 1505712, QA - 1520299, Staging - 1593242, TReVor var request sent
 	Then in UPC Error Details WPSID box I enter product ID for the UPC Error Details report

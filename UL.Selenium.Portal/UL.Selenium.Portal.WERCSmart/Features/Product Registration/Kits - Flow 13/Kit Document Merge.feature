@@ -51,6 +51,8 @@ Scenario: [73949] Kit - Document merge - US only
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Assigned
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase73949
 	And I Confirm you see the Document List pop up
+
+	Then I Delete the file with name: GetDocument.pdf from the downloads folder
 	And In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx.pdf - where xxxxxxx is the product id of product saved as: TestCase73949
 	And In the Document List popup I Double click on the filename for product saved as: TestCase73949
 
