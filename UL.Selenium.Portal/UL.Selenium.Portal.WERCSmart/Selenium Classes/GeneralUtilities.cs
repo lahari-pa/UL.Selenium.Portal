@@ -76,6 +76,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]")) != null;
 		}
 
+
+
 		public static void ScrollToBottomOfPage()
 		{
 			((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");

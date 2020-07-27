@@ -436,7 +436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info($"Row did not contain the Case pack upc");
 					y++;
 				}
-				if (foundUPC==false)
+				if (foundUPC == false)
 				{
 					Report.Failure("Unable to find the CasePack UPC in the SpreadSheet");
 					return;
@@ -451,7 +451,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 				List<string> casePackRowItems = ExcelUtils.Excel_GetColumn(columnCasePackIndex);
-				if(casePackRowItems[y]!="Y")
+				if (casePackRowItems[y] != "Y")
 				{
 					Report.Failure($"The Case pack column for Case pack UPC: {casePackUPC} did not contain a 'Y'");
 					return;
@@ -479,7 +479,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 
-			
+
 		}
 
 		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) does not contains: (.*) in any rows.")]
@@ -513,16 +513,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				int y = 0;
 				foreach (var item in wantedColumnContents)
 				{
-					if (item ==failValue)
+					if (item == failValue)
 					{
 						Report.Failure($"The Value {failValue} was found in the column {column} for the entry at postition: {y}");
 						failValueNotFound = false;
-						
+
 					}
 					y++;
 				}
 				Report.IsTrue(failValueNotFound, "The unwanted value was found in the search column", "The unwanted value was not found in the search column");
-				
+
 
 
 
@@ -561,7 +561,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				int y = 0;
 				foreach (var item in wantedColumnContents)
 				{
-					if (item != wantedValue && item!=column)
+					if (item != wantedValue && item != column)
 					{
 						Report.Failure($"The Value {wantedValue} was not found in the column {column} for the entry at postition: {y}");
 						wantedValueFound = false;
@@ -667,7 +667,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					y++;
 				}
 				Report.IsTrue(wantedValueFound, "Not all rows contained data for the search column", "All rows contained data for the search column");
-							   
+
 
 			}
 		}
@@ -704,7 +704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var rows = ExcelUtils.Excel_GetNoRows();
 				for (int i = 1; i < rows; i++)
 				{
-					var currentRow = ExcelUtils.Excel_GetRow(i);				
+					var currentRow = ExcelUtils.Excel_GetRow(i);
 
 					var currentCell = currentRow[wantedColumnIndex];
 					try
@@ -720,7 +720,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		
+
 		/// <summary>
 		/// If the values of a given column are in datetime format, you must add the suffix <date> to the header title in the table
 		/// </summary>
@@ -735,11 +735,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				headers.Add(thisRow["Headers"]);
 			}
 			Report.Info($"The column that we are checking in are as follows: {string.Join(",", headers)}");
-			foreach(var row in headers)
+			foreach (var row in headers)
 			{
-				if(row.Contains("<date>"))
+				if (row.Contains("<date>"))
 				{
-					string updatedHeader= row.Replace("<date>", "");					
+					string updatedHeader = row.Replace("<date>", "");
 					updatedHeader = updatedHeader.Trim();
 					this.ThenIConfirmThatForTheExcelFileSavedAsTheColumnContainsDatesInAllRows(savedAs, updatedHeader);
 				}
@@ -747,7 +747,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					this.ThenIConfirmThatForTheExcelFileSavedAsTheColumnContainsDataInAllRows(savedAs, row);
 				}
-				
+
 			}
 		}
 
@@ -782,10 +782,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//need to remove spaces in column titles -> check this is working
 
-			Delay.Seconds(20);
+			Delay.Seconds(60);
 
 			Report.IsTrue(new SupplierReports().ReportHistoryTablePresent(), "The Report History Table was not present", "The Report History Table was present");
-			Report.IsTrue(new SupplierReports().ReportHistoryTableRowsPresent(), "The Report History Table did not contain rows", "The Report History Table did contain rows");			
+			Report.IsTrue(new SupplierReports().ReportHistoryTableRowsPresent(), "The Report History Table did not contain rows", "The Report History Table did contain rows");
 
 			Report.IsTrue(new SupplierReports().ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
 
@@ -798,10 +798,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string columnTitle = thisRow["Column"];
 				columnTitle = columnTitle.Replace(" ", "");
 				string expectedValue = thisRow["Value"];
-				if(expectedValue=="<TodaysDate>")
+				if (expectedValue == "<TodaysDate>")
 				{
 					//This may need updating if day is 01 etc (M/dd/yyyy)					
-					string datePart= DateTime.Now.ToString("M/d/yyyy");
+					string datePart = DateTime.Now.ToString("M/d/yyyy");
 					var columnValue = new SupplierReports().ReportHistroryLatestReportFileColumnData(columnTitle);
 					Report.Info($"The found Date Requested was: {columnValue}");
 
@@ -812,7 +812,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					//TimeSpan convertedValue;
 					bool isTimeFormat = false;
 
-					var dateFormats = "hh:mm:ss tt";	
+					var dateFormats = "h:mm:ss tt";
 
 
 
@@ -825,9 +825,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						isTimeFormat = false;
 					}
 					Report.IsTrue(isTimeFormat, "The second half of the Date Requested was not a time stamp", "The second half of the Date Requested was a time stamp");
-								
 
-					 
+
+
 				}
 				else
 				{
@@ -840,10 +840,55 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var foundValue = new SupplierReports().ReportHistroryLatestReportFileColumnData(columnTitle);
 					Report.IsTrue(foundValue == expectedValue, "The found report value for column: " + columnTitle + " did not match the expected", "The found report value for column: " + columnTitle + " did match the expected");
 				}
-				
+
 
 			}
 
+		}
+
+		[StepDefinition(@"I confirm that the latest report in the Report history table has a: (.*) button in the Actions Column")]
+		public void IConfirmLatestReportInHistoryTableHasGivenButtonForLatest(string buttonName)
+		{
+			//We are assuming that the report we just ran will still be the latest report, if another test is running at same time this may cause some issues.
+
+			Delay.Seconds(10);
+
+			Report.IsTrue(new SupplierReports().ReportHistoryTablePresent(), "The Report History Table was not present", "The Report History Table was present");
+			Report.IsTrue(new SupplierReports().ReportHistoryTableRowsPresent(), "The Report History Table did not contain rows", "The Report History Table did contain rows");
+
+			Report.IsTrue(new SupplierReports().ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
+
+			Report.IsTrue(new SupplierReports().ReportHistoryTablePresent(), "The Report History Table was not present", "The Report History Table was present");
+			Report.IsTrue(new SupplierReports().ReportHistoryTableRowsPresent(), "The Report History Table did not contain rows", "The Report History Table did contain rows");
+
+			var foundValue = new SupplierReports().ReportHistroryLatestReportFileActionsColumnContainsButton(buttonName);
+			Report.IsTrue(foundValue, "The "+buttonName+" button was not found in the actions column for the latest report", "The " + buttonName + " button was found in the actions column for the latest report");
+		}
+
+		[StepDefinition(@"I click the: (.*) button for the latest report in the Report history table")]
+		public void IClickGivebnButtonForLatestReportInTable(string buttonName)
+		{
+			//We are assuming that the report we just ran will still be the latest report, if another test is running at same time this may cause some issues.
+
+			Delay.Seconds(10);
+
+			Report.IsTrue(new SupplierReports().ReportHistoryTablePresent(), "The Report History Table was not present", "The Report History Table was present");
+			Report.IsTrue(new SupplierReports().ReportHistoryTableRowsPresent(), "The Report History Table did not contain rows", "The Report History Table did contain rows");
+
+			Report.IsTrue(new SupplierReports().ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
+
+			Report.IsTrue(new SupplierReports().ReportHistoryTablePresent(), "The Report History Table was not present", "The Report History Table was present");
+			Report.IsTrue(new SupplierReports().ReportHistoryTableRowsPresent(), "The Report History Table did not contain rows", "The Report History Table did contain rows");
+
+			var clickedButton = new SupplierReports().ReportHistroryLatestReportFileActionsColumnClickButton(buttonName);
+			Report.IsTrue(clickedButton, "The " + buttonName + " button was not clicked in the actions column for the latest report", "The " + buttonName + " button was clicked in the actions column for the latest report");
+		}
+
+		[StepDefinition(@"In the Supplier Reports screen the current page description should be: (.*)")]
+		public void ThenInTheSupplierReportsScreenTheCurrentPageDescriptionShouldBe(string expectedDesc)
+		{
+			Report.IsTrue(new SupplierReports().GetCurrentDescriptionText() == expectedDesc, "Description is not showing as expected",
+				"Showing Description: " + expectedDesc + " as expected.");
 		}
 
 	}

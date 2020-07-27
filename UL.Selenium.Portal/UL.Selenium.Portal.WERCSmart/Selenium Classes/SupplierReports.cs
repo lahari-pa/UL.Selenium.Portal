@@ -220,6 +220,43 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return dataEl.Text;
 
 		}
+
+		public bool ReportHistroryLatestReportFileActionsColumnContainsButton(string buttonName)
+		{
+			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
+			var firstRow = tableEl.FindElement(By.XPath("//tr"), 2);
+			if (firstRow == null)
+			{
+				Report.Info($"The first row element was null");
+				return false;
+			}
+			var actionsEl = firstRow.FindElement(By.XPath($"//td[.//button]"), 2);
+			var wantedButtonEl = actionsEl.FindElement(By.XPath($"//button[text()='{buttonName}']"), 2);
+
+			return wantedButtonEl != null;
+
+		}
+
+		public bool ReportHistroryLatestReportFileActionsColumnClickButton(string buttonName)
+		{
+			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
+			var firstRow = tableEl.FindElement(By.XPath("//tr"), 2);
+			if (firstRow == null)
+			{
+				Report.Info($"The first row element was null");
+				return false;
+			}
+			var actionsEl = firstRow.FindElement(By.XPath($"//td[.//button]"), 2);
+			var wantedButtonEl = actionsEl.FindElement(By.XPath($"//button[text()='{buttonName}']"), 2);
+			if(wantedButtonEl==null)
+			{
+				Report.Info($"The wanted button element was not found");
+				return false;
+			}
+			return wantedButtonEl.TryClick();
+
+		}
+
 		/// <summary>
 		/// direction should only be ascending or descending
 		/// </summary>
@@ -256,7 +293,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					wantedTitleMasterEl.TryClick();
 					correctDirection = directionTitleEl.GetAttribute("style") != "display: none;";
+					GeneralUtilities.Wait_for_load_finish();
 					Delay.Seconds(2);
+					GeneralUtilities.Wait_for_load_finish();
+					//int y = 0;
+					//bool loadingActive = GeneralUtilities.Loading_Active();
+					//while (y<10 && !GeneralUtilities.Wait_for_load_finish())
+					//{
+					//	Delay.Seconds(2);
+					//	y++;
+					//}
+
+					//Delay.Seconds(8);
 					x++;
 				}
 				
@@ -265,6 +313,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			directionTitleEl = tableHeaderEl.FindElement(By.XPath($"//span[@id='{column}{wantedID}']"), 15);
 			return directionTitleEl.GetAttribute("style") != "display: none;";
 
+		}
+
+		public string GetCurrentDescriptionText()
+		{
+			string descriptionText = this.containerElement.FindElement(By.XPath(".//p[@data-bind='text: Description']"))?.Text;
+			return descriptionText;
 		}
 
 

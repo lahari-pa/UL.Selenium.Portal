@@ -466,6 +466,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Confirm " + filetype + " file is downloaded with name: " + file);
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 				Report.Info("Downloads folder: " + downloadsFolder);
+				string[] dir2 = Directory.GetFiles(downloadsFolder,"*", SearchOption.AllDirectories);
 				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
 				{
