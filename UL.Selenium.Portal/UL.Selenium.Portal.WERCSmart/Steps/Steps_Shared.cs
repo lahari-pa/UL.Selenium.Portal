@@ -7946,7 +7946,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			});
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
-			this.GivenICallSharedStep49742_WPS_CheckInProduct(savedAs);
+			//this.GivenICallSharedStep49742_WPS_CheckInProduct(savedAs);
 
 			Report.StartStep("I open the Current Document pop up using the tool bar icons");
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
