@@ -4842,6 +4842,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public bool CheckRegulatoryDocumentsConfirmationBox()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//div[@class='checkbox']//input[//span[contains(text(),'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration.')]]"), 2);
+			bool clicked= el.TryClick();
+			bool isChecked = el.Checked();
+			return clicked && isChecked;
+			
+		}
+
 	}
 
 	public class ProductInformation
