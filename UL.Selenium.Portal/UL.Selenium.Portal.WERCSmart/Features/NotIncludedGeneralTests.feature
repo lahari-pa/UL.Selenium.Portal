@@ -1705,7 +1705,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	#Then I should see a new tabbed document with the pdf containing product code saved as: TestCase73949 and NGHS / English twice for file: savedas73949PDF
 	Then I Check that the file saved as: savedas73949PDF contains the text 'NGHS / English' twice as well as the product codes saved as: TestCase73949PROD1 and TestCase73949PROD2
 	#Then I should see a new tabbed document whose URL contains DocumentID
-	#Then I Delete the file with name: TempPDF.pdf from the downloads folder
+	#Then I Delete the file with name: TempPDF.pdf from the downloads folde
 	Then I delete the file saved as savedas73949PDF
 	And I Click Cancel on the Document List window pop up
 
