@@ -414,24 +414,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the Products in Scope button and confirm that an (excel|html) file is produced called (.*) and save as (.*)")]
 		public void ThenClickTheProductsInScopeButtonBelowTheMoreInformationHyperlink(string filetype, string file, string savedAs)
 		{
-			Report.Info("Click the Products in Scope button");
+            Report.Info("Click the Products in Scope button");
 
 			var selRetailDetails = new RetailPartnersDetails();
 
-			if (!selRetailDetails.Wait_for_load(10))
-			{
-				throw new Exception("Page failed to load!");
-			}
+			//if (!selRetailDetails.Wait_for_load(10))
+			//{
+			//	throw new Exception("Page failed to load!");
+			//}
 
 			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 			Report.Info("Downloads folder: " + downloadsFolder);
 
 			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 
-			foreach (string file_ in dir)
-			{
-				File.Delete(file_);
-			}
+			//foreach (string file_ in dir)
+			//{
+			//	File.Delete(file_);
+			//}
 
 
 			selRetailDetails.ClickProductsInScope();
@@ -2248,8 +2248,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
 		}
 
-		[StepDefinition(@"I confirm the excel file saved as: (.*) contains the following data: (.*)")]
-		public bool ThenIConfirmTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingDataCleaningSuppliesProductForBBB(string savedAs, string data)
+		[StepDefinition(@"I confirm the excel file saved as: (.*) (contains|does not contain) the following data: (.*)")]
+		public bool ThenIConfirmTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingDataCleaningSuppliesProductForBBB(string savedAs, string containsOrDoesNotContain, string data)
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			object File = Context.GetFromContext(savedAs);
@@ -2264,7 +2264,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Header row contained: '" + string.Join("', '", row) + "'");
 					foreach (var str in row)
 					{
-						if (str == data)
+						if (str == data && containsOrDoesNotContain == "contains")
 						{
 							Report.Success("Excel file contained the following data: " + data);
 							return true;
@@ -2272,10 +2272,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
+					if (containsOrDoesNotContain == "does not contain")
+					{
+						Report.Success("Excel file did not contain the following data: " + data);
+						return true;
+					}
+					else
+					{
 
-
-				Report.Failure("Excel file did not contain the following data: " + data);
-				return false;
+						Report.Failure("Excel file did not contain the following data: " + data);
+						return false;
+					}
 			}
 
 			return false;

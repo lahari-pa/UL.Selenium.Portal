@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -19,6 +19,7 @@
 @run_CA Cleaning
 Feature:  California Cleaning Scenarios
 
+@ScenarioId:9832
 Scenario: [139531] CA Cleaning - Ingredient Type Missing
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -31,8 +32,8 @@ Given In the Additional Product Information Screen I answer the questions as fol
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
 Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | false       | AQUA           | Choose...      | Abrasive, Absorbent, Adhesive | true  | true      |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType | FunctionalPurpose | Clean | Certified |
+		| Water         | 100     | false               | true       | AQUA       | AQUA1       | Choose...      | Abrasive, Absorbent, Adhesive | true  | true      |
 Given I click continue
 Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
 | Error                                   |
@@ -41,8 +42,8 @@ Then I click the close button for the CA Cleaning Ingredients Popup
 Then I click the 'x' button for component number 1
 Given I click: YES in the 'Remove Component from My Ingredients' pop up
 Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | false       | AQUA           | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
+		| Water         | 100     | false               | true       | AQUA           | AQUA1       | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 Then I click continue
 And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139531

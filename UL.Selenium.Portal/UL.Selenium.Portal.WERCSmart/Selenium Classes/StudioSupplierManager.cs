@@ -122,18 +122,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCategory(string category)
 		{
-			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();			
+			//List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();			
+
+			//IWebElement foundCategory = categories.First(x => x.Text == category);
+			//if(foundCategory==null)
+			//{
+			//	Report.Info($"Did not find the category: {category}");
+			//	return false;
+			//}
+			//Report.Info($"Found the category: {category}, attempting to click the category");
+			//return foundCategory.TryClick();
 			
-			IWebElement foundCategory = categories.First(x => x.Text == category);
-			if(foundCategory==null)
-			{
-				Report.Info($"Did not find the category: {category}");
-				return false;
-			}
-			Report.Info($"Found the category: {category}, attempting to click the category");
-			return foundCategory.TryClick();
-	
-			
+			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath(".//div[text()='"+ category + "']"), 2);
+			return firstSupplier.TryClick();
+
+		}
+
+		public bool ClickClearCartForAllUsers()
+		{
+			IWebElement clearCartForAllUsersButton = this.containerElement.FindElement(By.XPath(".//button[@id='clearCartButton']"), 2);
+			return clearCartForAllUsersButton.TryClick();
 		}
 
 		public IWebElement CategoryHeaders => this.containerElement.WaitUntilElementVisible(By.XPath($".//ul[contains(@class,'ui-tabs-nav')]"), 2);
@@ -448,6 +456,55 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return true;
+		}
+
+		public bool CheckTextInConfirmClearCartForAllUsersPopup()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='confirmationClearCartModal']"), 2);
+			if (el.Text.Contains("You have selected to clear the shopping cart for this account. The Account's Administrator(s) will be notified via email of this action.") &&
+				el.Text.Contains("Are you sure you want to proceed? It cannot be reversed."))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ClickContinueInConfirmClearCartForAllUsersPopup()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='confirmationClearCartModal']/following-sibling::div//span[text()='Continue']"), 2);
+			return el.TryClick();
+		}
+
+		public bool EnterInformationInClearShoppingCartPopup(string userID, string password, string tfsTicketNumber, string supportTicketNumber)
+		{
+			IWebElement userIDEl = this.containerElement.FindElement(By.XPath("//input[@name='ResetUser']"), 2);
+			IWebElement passwordEl = this.containerElement.FindElement(By.XPath("//input[@name='ResetPassword']"), 2);
+			IWebElement tfsTicketNumberEl = this.containerElement.FindElement(By.XPath("//input[@name='TFSTicketNumber']"), 2);
+			IWebElement supportTicketNumberEl = this.containerElement.FindElement(By.XPath("//input[@name='SupportTicketNumber']"), 2);
+			if (userIDEl.TryEnterText(userID) && passwordEl.TryEnterText(password) && tfsTicketNumberEl.TryEnterText(tfsTicketNumber) && supportTicketNumberEl.TryEnterText(supportTicketNumber))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ClickContinueInClearShoppingCartPopup()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog-title-dialog-validate-clear-cart']//span[text()='Continue']"), 2);
+			return el.TryClick();
+		}
+
+		public bool CheckTextInResultsClearShoppingCartForAllUsersPopup()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@aria-labelledby='ui-dialog-title-1']//div[@class='ui-dialog-content ui-widget-content']"), 2);
+			if (el.Text.Contains("The Cart has successfully been cleared for all users from the active database. the account administrator has been notified via email."))
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 	}

@@ -592,6 +592,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	And for ingredient: Water I set Public Disclosure checkbox to checked: true
 	#Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1
 	And I verify the Transparency Score displays 100.00%
+	Then I click continue
 	#Given I close the current window
 	#Given I open a new window
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -600,11 +601,13 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit
 	Then the Product Editor page should be loaded
+	And In the New Product page I click tab: Product Characteristics
+	And I click the page heading: Ingredients
 	And the product saved as: FirstProduct should be visible in editor
 	And In the ingredients table the ingredients should be in the following order
 		| Name  |
 		| Water |
-	And for ingredient: Water Percentage displayed: 43.0
+	And for ingredient: Water Percentage displayed: 43
 	Then I enter text: Butane in the component search box
 	And I select the component search result with CAS matching text: 106-97-8 and save ingredient as: Butane_95487
 	And In the ingredients table the ingredients should be in the following order

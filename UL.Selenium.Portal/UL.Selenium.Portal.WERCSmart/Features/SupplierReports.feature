@@ -467,11 +467,11 @@ Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I click the My Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: California Proposition 65 - Registrations Prior to August 30, 2018
-	Then In the Supplier Reports screen the current sub-page should be: California Proposition 65 - Registrations Prior to August 30, 2018
+	Given Under the Supplier Reports menu I choose: California Proposition 65
+	Then In the Supplier Reports screen the current sub-page should be: California Proposition 65
 	And In the Supplier Report page I should see the report description should be showing with text: The report output will illustrate the WERCSmart registrations active, not deleted, that exist in your WERCSmart account. The output will provide information related to Active Registrations and their responses to Proposition 65 questions presented in WERCSmart before the transition to the revised Prop 65 questions in July / August of 2018. The report will include registrations not yet updated and submitted with the revised Prop 65 data
 	Given In the Supplier Reports screen I click on the Download button
-	Given I confirm that a file is downloaded with file name: California Proposition 65  Registrations Prior to August 30 2018.xlsx then close the Report Download popup. I save the file as excel76551
+	Given I confirm that a file is downloaded with file name: California Proposition 65.xlsx then close the Report Download popup. I save the file as excel76551
 	Then I confirm that the excel file saved as: excel76551 contains the following columns:
 		| Column                    |
 		| WERCSmart ID              |
