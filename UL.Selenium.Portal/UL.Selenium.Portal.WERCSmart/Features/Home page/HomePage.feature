@@ -169,7 +169,7 @@ Scenario: [64854] Navigation Settings
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -331,7 +331,7 @@ Scenario: [66335] Main Menu - expanded
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -342,7 +342,7 @@ Scenario: [66335] Main Menu - expanded
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -362,7 +362,7 @@ Scenario: [66336] Main Menu - collapsed
 		| Flask      | Register New Product |
 		| Envelope   | My Messages          |
 		| Handshake  | Retail Partners      |
-		| Cloud      | Supplier Reports     |
+		| File-Text  | My Reports           |
 		| Bulb       | UL Solution Center   |
 		| Cart       | Shopping Cart        |
 		| Life-Saver | Support              |
@@ -395,8 +395,10 @@ Scenario: [85275] Select All - Popup closes
 	And I navigate to the home page
 	And I search for the product saved as: TestCase85275
 	And I click 'All' under Retailers for the first product returned
+	And In The products Grid I Wait for the Retailers Popup to appear
 	Then I confirm the Retailers popup is displayed
 	And I click the products grid container
+	And In The products Grid I Wait for the Retailers Popup to disappear
 	Then I confirm the Retailers popup is not displayed
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85275
 
@@ -447,7 +449,7 @@ Scenario: [55796] Navigate to Home Page
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |
@@ -459,7 +461,7 @@ Scenario: [55796] Navigate to Home Page
 		| Register New Product |
 		| My Messages          |
 		| Retail Partners      |
-		| Supplier Reports     |
+		| My Reports           |
 		| UL Solution Center   |
 		| Shopping Cart        |
 		| Support              |

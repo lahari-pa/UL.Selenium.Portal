@@ -21,31 +21,48 @@ Feature: Supplier Reports
 @ScenarioId:978
 Scenario: [68420] List of Supplier Reports
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
-	And In the Supplier Reports screen the page title should be: Available Reports
+	Given I click the My Reports icon in the QuickLinks Pane
+	#And In the Supplier Reports screen the page title should be: Available Reports
+	Then In the Supplier Reports screen the subheader should be: Requested reports are available for 30 days. Requestor will receive an email notification when the report is ready in WERCSmart. Please allow several moments for the report to be generated, email sent. Check your clutter, junk and/or spam folders.
 	Given under the supplier Reports menu I should see the following options
-		| Reports                                                            |
-		| Battery-Containing Products                                        |
-		| California Proposition 65 - Registrations Prior to August 30, 2018 |
-		| Kit Registration Details                                           |
-		| Kits Containing a Specific Registration                            |
-		| Pesticide Certificate Report                                       |
-		| Pesticide Report                                                   |
-		| Product Types Registered                                           |
-		| Registrations Revised - Not Yet Submitted                          |
-		| Registrations with Retailer Chemicals of Concern                   |
-		| Retailer Chemicals of Concern                                      |
-		| Subscription Renewal (Formulated, Enhanced, Articles)              |
-		| Subscription Renewal (Registrations Eligible for Deletion)         |
-		| Sustainability Survey Eligibility - Health & Beauty                |
-		| UPC and Retailer (Product Specific)                                |
-		| UPC Error Details                                                  |
-		| UPCs (Active) for all Registrations                                |
-		| UPCs and Registrations (Retailer Specific)                         |
-		| UPCs Duplicated within Account                                     |
-		| VOC-related Registrations                                          |
-		| Waste Classification Summary for All Registrations                 |
+		| Reports                                |
+		| Battery-Containing Products            |
+		| California Proposition 65              |
+		| Chemicals of Concern                   |
+		| Eligible to Obsolete                   |
+		| Kit Registrations                      |
+		| Kits Containing a Registration         |
+		| Pesticide Registrations                |
+		| Product Types Registered               |
+		| Registration Updates Not Submitted     |
+		| Subscription Product Types             |
+		| UPC and Retailer (All)                 |
+		| UPC and Retailer (Single Registration) |
+		| UPC Duplication                        |
+		| UPC Errors for The Home Depot          |
+		| Volatile Organic Compounds             |
+		| Waste Classification Summary           |
+		#| Kit Registration Details                                           |
+		#| Kits Containing a Specific Registration                            |
+		#| Pesticide Certificate Report                                       |
+		#| Pesticide Report                                                   |
+		#| Product Types Registered                                           |
+		#| Registrations Revised - Not Yet Submitted                          |
+		#| Registrations with Retailer Chemicals of Concern                   |
+		#| Retailer Chemicals of Concern                                      |
+		#| Subscription Renewal (Formulated, Enhanced, Articles)              |
+		#| Subscription Renewal (Registrations Eligible for Deletion)         |
+		#| Sustainability Survey Eligibility - Health & Beauty                |
+		#| UPC and Retailer (Product Specific)                                |
+		#| UPC Error Details                                                  |
+		#| UPCs (Active) for all Registrations                                |
+		#| UPCs and Registrations (Retailer Specific)                         |
+		#| UPCs Duplicated within Account                                     |
+		#| VOC-related Registrations                                          |
+		#| Waste Classification Summary for All Registrations                 |
 
+@tfs_design
+@Obsolete
 @ScenarioId:979
 Scenario: [68421] Active UPCs for Products Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -81,11 +98,13 @@ Scenario: [68421] Active UPCs for Products Report
 @ScenarioId:980
 Scenario: [68422] Battery-containing products report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Battery-Containing Products
 	Then In the Supplier Reports screen the current sub-page should be: Battery-Containing Products
-	Given In the Supplier Reports screen I click on the Download button
-	Given I click on close in the Report Download dialog
+	Then In the Supplier Reports screen the current page description should be: For Battery-containing product registrations, the report includes details on the battery selected within the registration, including manufacturer of the battery.
+	Then I Delete the file with name: BatteryContaining Products.xlsx from the downloads folder
+	Then I Delete the file with name: Battery-Containing Products.xlsx from the downloads folder
+	Given In the Supplier Reports screen I click on the Download button	
 	Given I confirm that an excel file is produced called BatteryContaining Products.xlsx and save as 68422
 	Then I confirm that the excel file saved as: 68422 contains the following columns:
 		| Column        |
@@ -94,14 +113,35 @@ Scenario: [68422] Battery-containing products report
 		| Product Name  |
 		| Battery Type  |
 		| Battery Mfg   |
-	#data validation
-	Then I save the value with the header WPSID on the first product in the excel spreadsheet saved as: 68422 as TestCase68422Id
-	Then I save the value with the header Product Name on the first product in the excel spreadsheet saved as: 68422 as TestCase68422Name
-	Given I save the product with name: TestCase68422Name and id: TestCase68422Id as: TestCase68422
-	Given I navigate to the home page
-	Given I search for the product saved as: TestCase68422
-	And I confirm that the product returned has the same name as the product saved as: TestCase68422
+	Given I click on close in the Report Download dialog
 	And I delete the Supplier Report file saved as 68422
+	Then I confirm that the latest report in the Report history table matches the following data:
+	| Column         | Value                       |
+	| Report Name    | Battery-Containing Products |
+	| File Type      | XLSX                        |
+	| Date Requested | <TodaysDate>                |
+	| Requested By   | <CurrentUser>               |
+	And I confirm that the latest report in the Report history table has a: Download button in the Actions Column
+	Then I click the: Download button for the latest report in the Report history table
+	Given I confirm that an excel file is produced called Battery-Containing Products.xlsx and save as 68422b
+	And I confirm the excel file saved as 68422b can be opened and contains data
+	Then I confirm that the excel file saved as: 68422b contains the following columns:
+		| Column        |
+		| Supplier Name |
+		| WPSID         |
+		| Product Name  |
+		| Battery Type  |
+		| Battery Mfg   |
+	And I delete the Supplier Report file saved as 68422b
+	Given I click on close in the Report Download dialog
+	#Confirm latest report has download button in actions row
+	#Then I save the value with the header WPSID on the first product in the excel spreadsheet saved as: 68422 as TestCase68422Id
+	#Then I save the value with the header Product Name on the first product in the excel spreadsheet saved as: 68422 as TestCase68422Name
+	#Given I save the product with name: TestCase68422Name and id: TestCase68422Id as: TestCase68422
+	#Given I navigate to the home page
+	#Given I search for the product saved as: TestCase68422
+	#And I confirm that the product returned has the same name as the product saved as: TestCase68422
+	#And I delete the Supplier Report file saved as 68422
 
 @ScenarioId:981
 Scenario: [68423] Formulated vs Articles Report
@@ -133,7 +173,7 @@ Scenario: [68423] Formulated vs Articles Report
 @ScenarioId:982
 Scenario: [73082] UPC Report for All Products with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
 	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
 	Given In the Supplier Reports screen I click on the Download button

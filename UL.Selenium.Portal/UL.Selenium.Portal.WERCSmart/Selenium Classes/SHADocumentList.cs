@@ -1,3 +1,5 @@
+extern alias selenium;
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +15,7 @@ using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Collections.ObjectModel;
 using System;
 using System.Net;
+using selenium::OpenQA.Selenium.Interactions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -50,9 +53,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			ReadOnlyCollection<IWebElement> ListOfFilenameTDs = this.containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
 			IWebElement matchingTD = ListOfFilenameTDs.FirstOrDefault(x => x.GetValue().Contains(pdfName));
+			
+
 			if (matchingTD != null)
 			{
-				return matchingTD.TryDoubleClick();
+				matchingTD.TryDoubleClick();
+				Report.Info($"attempting back up double click");
+				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+				actions.MoveToElement(matchingTD);
+				Delay.Seconds(2);
+				actions.MoveByOffset(0, -60);
+				//actions.ContextClick();
+				actions.DoubleClick();
+				actions.Perform();
+
+				return true;
+
+
+				//return matchingTD.TryDoubleClick();
 			}
 
 			return false;
@@ -99,9 +117,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in handles)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("TempPDF"))
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("GetDocument"))
 				{
-					Report.Info("Found the URL Containing 'TempPDF'");
+					Report.Info("Found the URL Containing 'GetDocument'");
 					return SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url;
 				}
 			}

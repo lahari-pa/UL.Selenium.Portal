@@ -8,6 +8,9 @@ using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using UL.Automation.Reporting.Functions;
 using System;
+using TechTalk.SpecFlow;
+using NPOI.SS.UserModel;
+using Gherkin.Events.Args.Pickle;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -35,6 +38,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetCurrentTitle()
 		{
 			return this.containerElement.FindElement(By.XPath("..//h2"))?.Text;
+		}
+
+		public string GetSubheadingText()
+		{
+			var el = this.containerElement.FindElement(By.XPath("//div[@class='product-header']//p"), 2);
+			return el.Text;
+
 		}
 
 		public string GetCurrentSubText()
@@ -151,6 +161,164 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.FindElement(By.XPath("//*[@id='panel']//span[@role='combobox']"), 2).TryClick();
 			this.FindElement(By.XPath("//input[@class='select2-search__field']"), 2).TryEnterText(wpsid);
 			return this.FindElement(By.XPath("//*[@class='select2-results__option select2-results__option--highlighted']"), 2).TryClick();
+		}
+
+		public bool ReportHistoryTablePresent()
+		{
+			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
+			return tableEl != null;
+			
+		}
+
+		public bool ReportHistoryTableRowsPresent()
+		{
+			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
+			List<IWebElement> rows = tableEl.FindElements(By.XPath("//tbody//tr"), 5).ToList();
+			bool rowsFound = rows.Any();
+			return rowsFound;
+
+		}
+
+		public string ReportHistroryLatestReportName()
+		{
+			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
+			var firstRow = tableEl.FindElement(By.XPath("//tr"), 2);
+			if(firstRow==null)
+			{
+				Report.Info($"The first row element was null");
+					return null;
+			}
+			var nameEl = firstRow.FindElement(By.XPath("//td[@data-bind='text:ReportName']"), 2);
+			return nameEl.Text;
+
+		}
+
+		public string ReportHistroryLatestReportFileType()
+		{
+			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
+			var firstRow = tableEl.FindElement(By.XPath("//tr"), 2);
+			if (firstRow == null)
+			{
+				Report.Info($"The first row element was null");
+				return null;
+			}
+			var typeEl = firstRow.FindElement(By.XPath("//td[@data-bind='text:FileType']"), 2);
+			return typeEl.Text;
+
+		}
+
+		public string ReportHistroryLatestReportFileColumnData(string column)
+		{
+			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
+			var firstRow = tableEl.FindElement(By.XPath("//tr"), 2);
+			if (firstRow == null)
+			{
+				Report.Info($"The first row element was null");
+				return null;
+			}
+			var dataEl = firstRow.FindElement(By.XPath($"//td[@data-bind='text:{column}']"), 2);
+			return dataEl.Text;
+
+		}
+
+		public bool ReportHistroryLatestReportFileActionsColumnContainsButton(string buttonName)
+		{
+			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
+			var firstRow = tableEl.FindElement(By.XPath("//tr"), 2);
+			if (firstRow == null)
+			{
+				Report.Info($"The first row element was null");
+				return false;
+			}
+			var actionsEl = firstRow.FindElement(By.XPath($"//td[.//button]"), 2);
+			var wantedButtonEl = actionsEl.FindElement(By.XPath($"//button[text()='{buttonName}']"), 2);
+
+			return wantedButtonEl != null;
+
+		}
+
+		public bool ReportHistroryLatestReportFileActionsColumnClickButton(string buttonName)
+		{
+			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
+			var firstRow = tableEl.FindElement(By.XPath("//tr"), 2);
+			if (firstRow == null)
+			{
+				Report.Info($"The first row element was null");
+				return false;
+			}
+			var actionsEl = firstRow.FindElement(By.XPath($"//td[.//button]"), 2);
+			var wantedButtonEl = actionsEl.FindElement(By.XPath($"//button[text()='{buttonName}']"), 2);
+			if(wantedButtonEl==null)
+			{
+				Report.Info($"The wanted button element was not found");
+				return false;
+			}
+			return wantedButtonEl.TryClick();
+
+		}
+
+		/// <summary>
+		/// direction should only be ascending or descending
+		/// </summary>
+		/// <param name="column"></param>
+		/// <param name="direction"></param>
+		/// <returns></returns>
+		public bool ReportHistroryTableFilterByColumn(string column, string direction)
+		{
+			string wantedID = "";
+			switch (direction)
+			{
+				case "ascending":
+					wantedID = "_asc";
+					break;
+				case "descending":
+					wantedID = "_desc";
+					break;
+				default:
+					Report.Error(" variable must be either 'ascending' or 'descending'!");
+					return false;
+					
+			}
+
+			var tableHeaderEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table//thead"), 15);
+			var wantedTitleMasterEl = tableHeaderEl.FindElement(By.XPath($"//th[contains(@data-bind,'{column}')]"), 15);
+			var directionTitleEl = tableHeaderEl.FindElement(By.XPath($"//span[@id='{column}{wantedID}']"), 15);
+
+			if (directionTitleEl.GetAttribute("style") == "display: none;")
+			{
+				int x = 0;
+				directionTitleEl = tableHeaderEl.FindElement(By.XPath($"//span[@id='{column}{wantedID}']"), 15);
+				bool correctDirection = directionTitleEl.GetAttribute("style") != "display: none;";
+				while (x < 5 && correctDirection==false)
+				{
+					wantedTitleMasterEl.TryClick();
+					correctDirection = directionTitleEl.GetAttribute("style") != "display: none;";
+					GeneralUtilities.Wait_for_load_finish();
+					Delay.Seconds(2);
+					GeneralUtilities.Wait_for_load_finish();
+					//int y = 0;
+					//bool loadingActive = GeneralUtilities.Loading_Active();
+					//while (y<10 && !GeneralUtilities.Wait_for_load_finish())
+					//{
+					//	Delay.Seconds(2);
+					//	y++;
+					//}
+
+					//Delay.Seconds(8);
+					x++;
+				}
+				
+			}
+
+			directionTitleEl = tableHeaderEl.FindElement(By.XPath($"//span[@id='{column}{wantedID}']"), 15);
+			return directionTitleEl.GetAttribute("style") != "display: none;";
+
+		}
+
+		public string GetCurrentDescriptionText()
+		{
+			string descriptionText = this.containerElement.FindElement(By.XPath(".//p[@data-bind='text: Description']"))?.Text;
+			return descriptionText;
 		}
 
 

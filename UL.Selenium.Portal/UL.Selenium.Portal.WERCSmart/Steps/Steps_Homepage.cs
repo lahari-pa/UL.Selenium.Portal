@@ -740,7 +740,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I click the (Home|Register New Product|Prescription Pharmaceutical|My Messages|Retail Partners|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
+		[StepDefinition(@"I click the (Home|Register New Product|Prescription Pharmaceutical|My Messages|Retail Partners|My Reports|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
 		public void ClickItemInQuickLinks(string item)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Selecting " + item + " in the Navigation Pane");
