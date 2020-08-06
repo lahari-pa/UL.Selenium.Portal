@@ -1645,7 +1645,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	#First remove check form the full reg box
-	And I unselect option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I unselect the option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I click Save in The Product Page
 	Then I Wait for a modal popup to appear
