@@ -295,12 +295,12 @@ Scenario: [73225] Kits that Contain a specific Product
 Scenario: [73228] Products that are Associated with a specific Kit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: Kits Containing a Registration
-	Then In the Supplier Reports screen the current sub-page should be: Kits Containing a Registration
+	Given Under the Supplier Reports menu I choose: Kits Registration
+	Then In the Supplier Reports screen the current sub-page should be: Kits Registration
 	Given I select a random product from the drop down
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called Kits Containing a Registration.xlsx and save as 73228
+	Given I confirm that an excel file is produced called Kits Registration.xlsx and save as 73228
 	Then I confirm that the excel file saved as: 73228 contains the following columns:
 		| Column              |
 		| Product in Kit      |

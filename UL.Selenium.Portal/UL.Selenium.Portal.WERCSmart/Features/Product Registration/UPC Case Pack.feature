@@ -389,6 +389,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835
 
 
+@ScenarioId:10103
 	Scenario: [87631] Universal Product Code (UPC) Step - Add Case UPC - Size (Weight Ounces) field validation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

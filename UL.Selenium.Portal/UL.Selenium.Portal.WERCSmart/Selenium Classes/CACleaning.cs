@@ -6,23 +6,26 @@ using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.Selenium.BaseClasses;
 using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class CACleaning
+	class CACleaning : SeleniumBaseObject
 	{
+		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
+
 		public bool SelectXForComponentNumber(string number)
 		{
-			IList<IWebElement> xButtons = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//a[@aria-label='Delete component']"), 2);
+			IList<IWebElement> xButtons = this.containerElement.FindElements(By.XPath("//a[@aria-label='Delete component']"), 2);
 			int numberInt = int.Parse(number);
 			return xButtons[numberInt - 1].TryClick();
 		}
 
 		public bool ConfirmTruckIconIsDisplayedForUPC(string savedAs)
 		{
-			IWebElement truckIcon = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/following-sibling::i"), 2);
+			IWebElement truckIcon = this.containerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/following-sibling::i"), 2);
 			if (truckIcon != null)
 			{
 				return true;
@@ -33,13 +36,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckForCheckBoxWithTextInMessageAtTheTopOfIngredientsPage(string text)
 		{
-			IWebElement alertMessage1 = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='alert alert-info alert-dismissible']//label//input"), 2);
+			IWebElement alertMessage1 = this.containerElement.FindElement(By.XPath("//div[@class='alert alert-info alert-dismissible']//label//input"), 2);
 			return alertMessage1.TryCheck();
 		}
 
 		public bool CloseCACleaningIngredientsPopupWindow()
 		{
-			IWebElement closeButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div/following-sibling::div//button"), 2);
+			IWebElement closeButton = this.containerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div/following-sibling::div//button"), 2);
 			return closeButton.TryClick();
 		}
 		public bool CheckForTwoErrorMessagesInPopupWithTitle(Table table, string popupTitle)
@@ -92,7 +95,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (string error in errors)
 			{
-				IWebElement errorEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model." + error + "'][@style='display: none;']"), 2);
+				IWebElement errorEl = this.containerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model." + error + "'][@style='display: none;']"), 2);
 				if (errorEl != null)
 				{
 					return false;
@@ -104,7 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckForErrorMessagesInPopupWithTitle(string popupTitle)
 		{
-			IList<IWebElement> errorMessages = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div"), 2);
+			IList<IWebElement> errorMessages = this.containerElement.FindElements(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div"), 2);
 			if (errorMessages[1].Text.Contains("Generic ingredients are not permitted as they cannot be screened for Chemicals of Concern. Each ingredient must use any of the following: Valid Chemical Abstract Service identifier(CAS number); or Valid 3rd - Party Formula registration(CAS begins with \"WPS\"); or Valid CAS Addition(CAS begins with NA) Please note that use of an ingredient with a CAS beginning with NA may result in a suspension of the registration requiring more information or details. You should always use a valid CAS number or 3rd - Party Formula before using an NA option."))
 			{
 				Report.Info("true");
@@ -121,7 +124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckForMessageAtTheTopOfIngredientsPage()
 		{
-			IWebElement alertMessage = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='alert alert-info alert-dismissible']"), 2);
+			IWebElement alertMessage = this.containerElement.FindElement(By.XPath("//div[@class='alert alert-info alert-dismissible']"), 2);
 			if (alertMessage.Text.Contains("Note: there are special requirements for formulations that must be met in order to generate a California Cleaning Right to Know ingredient disclosure report. Formulations CANNOT contain:")
 				&& alertMessage.Text.Contains("Any generic ingredient names (e.g., fragrance). Each generic ingredient name must be replaced by either a registered 3rd-Party component, or a list of the specific ingredients that comprise the generic mixture.")
 				&& alertMessage.Text.Contains("An indication of the ingredient being EITHER \"Publicly Disclosed\" or \"Trade Secret\".")
@@ -136,13 +139,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCloseInPopupWithTitle(string title)
 		{
-			IWebElement continueButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='" + title + "']/../following-sibling::div[@class='modal-footer']//button"), 2);
+			IWebElement continueButton = this.containerElement.FindElement(By.XPath("//h4[text()='" + title + "']/../following-sibling::div[@class='modal-footer']//button"), 2);
 			return continueButton.TryClick();
 		}
 		public bool CheckDeleteRowsWarningPopupContainsText(string lineOne, string lineTwo)
 		{
-			IWebElement lineOneEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
-			IWebElement lineTwoEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
+			IWebElement lineOneEl = this.containerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
+			IWebElement lineTwoEl = this.containerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
 
 			if (lineOneEl.Text == lineOne && lineTwoEl.Text == lineTwo)
 			{

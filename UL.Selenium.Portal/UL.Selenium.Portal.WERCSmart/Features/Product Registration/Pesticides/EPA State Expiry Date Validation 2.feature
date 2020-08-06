@@ -436,7 +436,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 
 
 @ScenarioId:9393
-	Scenario: [26827] Pesticide Data - EPA Expiration date validation (Massachusetts - June 30th no more than 1 year out)
+	Scenario: [26827] UPC Assessment Details
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC26827
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

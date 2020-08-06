@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @LandingPage
 @Login
 @Homepage
@@ -19,6 +19,7 @@
 @run_CA Cleaning
 Feature:  California Cleaning Scenarios
 
+@ScenarioId:9832
 Scenario: [139531] CA Cleaning - Ingredient Type Missing
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -78,6 +79,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139534
 
 
+@ScenarioId:10105
 Scenario: [139385] CA Cleaning - Generic Ingredient Used
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -200,6 +202,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139205
 
 
+@ScenarioId:10106
 Scenario: [139193] CA Cleaning - Initial Message to Registrant for Ingredients
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

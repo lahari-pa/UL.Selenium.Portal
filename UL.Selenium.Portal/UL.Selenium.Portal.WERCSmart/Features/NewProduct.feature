@@ -93,6 +93,7 @@ Scenario: [74944] BCP - Contains Lithium Primary packaged with the product - Lit
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74944
 
 
+@ScenarioId:10108
 Scenario: [128694] DSV Option Available for Electronic - Peripherals - RU001162
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -109,6 +110,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@ScenarioId:10107
 Scenario: [128721] DSV Option Available for Appliance - Hot Water Tank (Standard, no electronic components) - RU001206
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
