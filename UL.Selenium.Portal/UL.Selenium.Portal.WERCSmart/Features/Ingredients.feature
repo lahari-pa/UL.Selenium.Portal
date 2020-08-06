@@ -102,7 +102,7 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Given for ingredient: Butane I set Public Disclosure checkbox to checked: false
 	Then for ingredient: Butane the Trade Secret field is enabled
 	Then in the Ingredients page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
 @ScenarioId:908
@@ -123,7 +123,7 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Then for ingredient: Butane the Public Name field is enabled
 	Then for ingredient: Butane I confirm the Public Name selectbox contains names for selection
 	Then in the Ingredients page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
 
 #CLF - this is basically the same as 65470
@@ -141,7 +141,7 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then for ingredient: Butane the Publicly Disclosed field is disabled
 	Then for ingredient: Butane the Public Name field is disabled
 	Then in the Ingredients page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
 
 @ScenarioId:905
@@ -160,7 +160,7 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Then for ingredient: Butane I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
 	Then for ingredient: Butane I select Public Name: Butane
 	Then in the Ingredients page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
 
 @ScenarioId:904
@@ -181,7 +181,7 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 		| Trade Secret?       | checkbox |
 		| Public Name         | select   |
 	Then in the Ingredients page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 
 @ScenarioId:903
@@ -199,7 +199,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 		| Butane        | 50      | false               | true        |            |
 	Then in the Ingredients page I click Continue
 	Then a Warning popup dialog should appear with the message: Your product registration contains a 3rd-Party Formula that needs to be updated for it to be included in chemical-policy or sustainability assessments conducted by retailers or in GoodGuide ratings. We have sent a notification to your 3rd-Party Formulator requesting that the ingredient's Data Use Tier consent, and the public disclosure status of its ingredients, be updated. Please continue with this product registration, but note that the chemical-policy or sustainability assessment results may change if, and when, your 3rd-Party Formulator authorizes its ingredient to be included in such programs.
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
 
 @ScenarioId:910
@@ -222,7 +222,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.
 	Then on the Neonicotinoid Warning Page I should see a link with text: EPA website which links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators
 	Then in the Neonicotinoid Warning page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
 
 @ScenarioId:913
@@ -268,7 +268,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Then I should see an error message: Formulation must total or exceed 100%.
 	Given I change the percent field to 100
 	Given in the Ingredients page I click Continue
-	Then I should see the Regulatory Information 1 Page
+	Then I should see the Waste Classification Data Page
 	Given In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	Then I should not see an error message: Formulation must total or exceed 100%.
@@ -376,7 +376,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 		| Sodium hydroxide | 10      | false               | false       |            |
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Dye X         | 10      | false               | false       |            |
+		| Bromate         | 10      | false               | false       |            |
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Sodium chloride | 10      | false               | false       |            |
@@ -592,6 +592,8 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	And for ingredient: Water I set Public Disclosure checkbox to checked: true
 	#Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1
 	And I verify the Transparency Score displays 100.00%
+
+	And I click continue
 	#Given I close the current window
 	#Given I open a new window
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -601,6 +603,8 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then I click on the Row Action: Edit
 	Then the Product Editor page should be loaded
 	And the product saved as: FirstProduct should be visible in editor
+
+	#Looks like th issue is with the ingredients page not showing, instead its the additional product information page
 	And In the ingredients table the ingredients should be in the following order
 		| Name  |
 		| Water |

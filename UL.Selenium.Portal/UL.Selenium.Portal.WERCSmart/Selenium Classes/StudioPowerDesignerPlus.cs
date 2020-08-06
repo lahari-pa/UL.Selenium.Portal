@@ -931,6 +931,52 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool GivenCategoryContainsData(string category)
+		{
+			int i = 0;
+			while (i < 5)
+			{
+				try
+				{
+
+					IWebElement wantedCategory = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//table[contains(@title,'{category}')]"), 2);
+					string dataCode = wantedCategory.GetAttribute("ss");
+					IWebElement inputField= wantedCategory.FindElement(By.XPath($".//tbody//tr//td[.//b//span[text()='{category}']]//following-sibling::td//span[not(text()='[{dataCode}]')]"),2);
+					
+					
+					if (inputField == null)
+					{
+						Report.Info("inputField was not found");
+						return false;
+					}
+					Report.Info("inputField Category was found");
+					string foundText = inputField.Text;
+					if(foundText==""|| foundText== " "|| foundText.ToLower().Contains("data required"))
+					{
+						Report.Info("The found text indicated the category did not contain data");
+						return false;
+					}
+					Report.Info($"The found text indicated the cateogr contained data");
+					return true;
+
+				}
+				catch (StaleElementReferenceException ex)
+				{
+					Report.Info("wantedCategory threw a stale element reference exeption");
+					i++;
+					Delay.Seconds(1);
+					Report.Info($"Attempting to Find the categorie with title: {category} if the number of attempts has not exceeded 5");
+
+				}
+				catch (Exception ex)
+				{
+					Report.Info($"Threw an expection of type:{ex.Message}");
+					return false;
+				}
+			}
+			return false;
+		}
+
 	}
 
 	class GraphicEditor : BaseObject
@@ -1092,7 +1138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Alert Found, Trying to get the Text of the Alert");
 				string alertText = SeleniumBrowser.Alert.GetText();
 				int i = 2;
-				while(alertText.IsNullOrEmpty()|| i<11)
+				while(alertText.IsNullOrEmpty()&& i<11)
 				{
 					Report.Info($"No Text Was Found In the Alert, Trying again");
 					Report.Info($"Looking for alert text. Attempt: {i}");
@@ -2247,15 +2293,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					break;
 				}
 			}
-
+			Report.Info("Looking for Iframe");
 			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"), 10);
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			Report.Info("Switching to Iframe");
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 10);
+			Report.Info("Starting a wait for load");
 			if (base.Wait_for_load(30))
 			{
+				Report.Info("Loading was successfull");
 				return true;
 			}
-
+			Report.Info($"failed to load");
 			return false;
 		}
 

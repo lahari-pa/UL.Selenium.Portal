@@ -32,7 +32,6 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 	And I should see the following Voc percent for each state:
 		| State           | Regulation            | VOC Value | State VOC Threshold | Message                          |
 		| Connecticut     | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Washington D.C. | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Delaware        | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Illinois        | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Indiana         | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
@@ -156,7 +155,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 		| Butane        | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
 	And I set 'Prop65' to: No
 	Given in the New Product page I click Continue
@@ -199,6 +198,8 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And in the New Product page I click Continue
 	And I confirm statement: limits specified by CARB shows the text: Does not exceed the limits specified by CARB
 	And I confirm statement: limits specified by OTC shows the text: Does not exceed the limits specified by OTC Model Rule
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
+
 	And in the New Product page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	# Regulatory Documents to Provide Page
@@ -273,6 +274,7 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 	Then I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
 	And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted CARB value: 40
 	And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted OTC value: 5
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	Given in the New Product page I click Continue
 	# If your supplier account is on Premium subscription you will see the Ecologo step - perform the Shared Step below if you do, if not skip to step 43
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
@@ -340,7 +342,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 		| Butane        | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
 	And I set 'Prop65' to: No
 	Given in the New Product page I click Continue
@@ -380,6 +382,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 0
 	And in the New Product page I click Continue
 	And I confirm statement: limits specified shows the text: Does not exceed the limits specified by CARB and OTC Model Rule
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	And in the New Product page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	# Regulatory Documents to Provide Page
@@ -453,7 +456,7 @@ Scenario: [56484] VOC - Aero checks
 		| Butane        | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	# Regulatory 1 Page Details
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
 	And I set 'Prop65' to: No
 	Given in the New Product page I click Continue
@@ -500,6 +503,7 @@ Scenario: [56484] VOC - Aero checks
 	And I set the VOC content in grams ozone per gram field to: 1
 	And in the New Product page I click Continue
 	And I confirm statement: limits specified shows the text: Exceeds the limits specified in the Aerosol Coatings by the CARB
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	And in the New Product page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	# Regulatory Documents to Provide Page
@@ -564,6 +568,7 @@ Scenario: [56476] VOC checks for Personal Fragrance product
 	Then I confirm that I see the following CARB value: 20
 	Then I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
 	And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted CARB value: 20
+	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	Given in the New Product page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)

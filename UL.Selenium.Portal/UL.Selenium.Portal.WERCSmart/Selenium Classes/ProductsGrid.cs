@@ -10,6 +10,8 @@ using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using UL.Automation.Reporting.SpecFlow.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using OpenQA.Selenium.DevTools.DOM;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -140,6 +142,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return (colourShowing == colourExpected);
 
 		}
+	
+
 
 		public bool ClickStatusFilter(string option)
 		{
@@ -508,10 +512,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IList<IWebElement> rows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 			if (rows.Count == 0)
 			{
-				Report.Info("No rows were found to delete!");
-				return true;
-			}
+				int x = 0;
+				bool rowsFound = false;
+				while (x<5&&rowsFound==false)
+				{
+					Delay.Seconds(10);
+					IList<IWebElement> newrows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+					if(newrows.Count==0)
+					{
+						Report.Info("No rows were found to delete! Waiting for 10 seconds");
 
+					}
+					else
+					{
+						Report.Info("Rows were found");
+						rowsFound = true;
+					}
+					x++;
+					
+				}
+
+				if(rowsFound == false)
+				{
+					Report.Info("After 1 minute No rows were found to delete! Moving on.");
+					return true;
+				}	
+				
+			}
+			rows = this.containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 			foreach (IWebElement row in rows)
 			{
 				IWebElement toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
@@ -559,8 +587,47 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						GeneralUtilities.Wait_for_load_finish();
 						//Delay.Seconds(3);
 						Report.Info("Checking the products grid is empty");
-						row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-						return row == null;
+						int x = 0;
+						while(x<10)
+						{
+							row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+							if(row==null)
+							{
+								Report.Info($"The products grid was emtpy");
+								return true;
+							}
+							try
+							{
+
+
+								toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
+								toggleButton.TryClick();
+								deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 10);
+								deleteButton.TryClick();
+								delDialog.WaitForContainerToBeVisible();
+								Delay.Seconds(10);
+								GeneralUtilities.Wait_for_load_finish();
+								Report.Info("The products grid was not empty, waiting 10 more seconds and checking again");
+								Delay.Seconds(30);
+								x++;
+							}
+							catch
+							{
+								Report.Info($"Exception thrown during product deletion. Checking to see if product was removed between attempts");
+								row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+								if (row == null)
+								{
+									Report.Info($"The products grid was emtpy");
+									return true;
+								}
+								Report.Info($"The Products grid was still not empty after all attempts");
+								return false;
+							}
+
+						}
+
+						Report.Info($"The Products grid was still not empty after all attempts");
+						return false;						
 					}
 					Report.Info("Failed to click 'Delete' in popup dialog");
 					return false;
@@ -1014,6 +1081,62 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			// Use the ID to find the popup container (if it exists)
 			IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
 			return popover != null;
+		}
+
+		public bool WaitForRetailerPopupToBeDisplayed()
+		{
+			Report.Info("Checking if Retailer popup is displayed");
+			// The ID is generated every time the popup is opened. Fetch from the button's attribute (only exists when popup is open)
+			string popoverId = this.containerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
+			if (popoverId.IsNullOrEmpty())
+			{
+				return false;
+			}
+			Report.Info("Popup id is: " + popoverId);
+			// Use the ID to find the popup container (if it exists)
+			int x = 0;
+			bool popupdisplayed = false;
+			while (x<30&& popupdisplayed==false)
+			{
+				IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
+				popupdisplayed = popover != null;
+				x++;
+				Delay.Seconds(2);
+			}
+			return popupdisplayed;
+			
+		}
+
+		public bool WaitForRetailerPopupToNotBeDisplayed()
+		{
+			Report.Info("Checking if Retailer popup is displayed");
+			// The ID is generated every time the popup is opened. Fetch from the button's attribute (only exists when popup is open)
+			string popoverId = this.containerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
+			if (popoverId.IsNullOrEmpty())
+			{
+				return true;
+			}
+			Report.Info("Popup id is: " + popoverId);
+			// Use the ID to find the popup container (if it exists)
+			int x = 0;
+			bool popupdisplayed = true;
+			while (x < 30 && popupdisplayed == true)
+			{
+				IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
+				popupdisplayed = popover != null;
+				x++;
+				Delay.Seconds(2);
+			}
+			if (popupdisplayed == true)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+			
+
 		}
 
 		public void ClickContainer()

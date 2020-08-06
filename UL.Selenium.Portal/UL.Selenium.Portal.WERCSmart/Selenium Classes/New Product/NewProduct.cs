@@ -3184,6 +3184,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			IWebElement el = this.containerElement.FindElement(By.XPath(xPath), 10);
 
+			if(el==null)
+			{
+				Report.Info("The Element found from the original xpath was null");
+			}
+
 			if (section.Contains("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations")|| section== "Product has been granted an Alternative Control Plan")
 			{
 
@@ -3276,6 +3281,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			}
 			// don't click the label if it contains a web link
+			el.Scroll();
+			el.ScrollElementIntoView();			
 			if (el.FindElement(By.XPath("./span/a[contains(@href,'http')]"), 2) == null && el.TryClick())
 			{
 				Report.Info("Dont Click label if contains web link");
@@ -4833,6 +4840,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
+		}
+
+		public bool CheckRegulatoryDocumentsConfirmationBox()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//div[@class='checkbox']//input[//span[contains(text(),'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration.')]]"), 2);
+			bool clicked= el.TryClick();
+			bool isChecked = el.Checked();
+			return clicked && isChecked;
+			
 		}
 
 		public bool CheckInputFieldText(string fieldName, string text) {
