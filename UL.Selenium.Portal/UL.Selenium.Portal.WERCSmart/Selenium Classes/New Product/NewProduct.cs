@@ -2963,6 +2963,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool CheckBoxOptionExists(string label)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath($"//div[@class='form-subgroup']//div[@class='checkbox']//label//span[contains(text(),'{label}')]"), 2);
+			return el != null;
+		}
+
+
+
+
 		public bool OptionExists(string section)
 		{
 			try

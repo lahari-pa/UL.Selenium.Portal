@@ -6881,6 +6881,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
@@ -6890,6 +6891,13 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+		
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
+
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -7914,6 +7922,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			Report.StartStep("I set WHMIS-complient SDS to 'I need an SDS authored'");
@@ -7922,6 +7931,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			Report.StartStep("I upload a label");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -9182,8 +9196,10 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I upload a PDF file to section: OSHA SDS");
 			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("Click the checkbox for the 'I confirm that I have provided the most up - to - date, OSHA - compliant SDS...' question");
-			MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
-			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
+			//MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
+			//Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
+			Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+			MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 
