@@ -3234,9 +3234,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I check for a truck icon for UPC: saved as (.*)")]
 		public void ThenICheckForATruckIconForUPCSavedAsUPC(string savedAs)
 		{
-			var newProductPage = new NewProduct();
+			var UPCPage = new UPC();
 			savedAs = Context.GetFromContext(savedAs).ToString();
-			Report.IsTrue(newProductPage.ConfirmTruckIconIsDisplayedForUPC(savedAs), "Failed to find truck icon for UPC: " + savedAs, "Successfully found truck icon for UPC: " + savedAs);
+			Report.IsTrue(UPCPage.ConfirmTruckIconIsDisplayedForUPC(savedAs), "Failed to find truck icon for UPC: " + savedAs, "Successfully found truck icon for UPC: " + savedAs);
 		}
 
 		}
@@ -3272,5 +3272,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		//	}
 		//}
 	}
-}
+
 

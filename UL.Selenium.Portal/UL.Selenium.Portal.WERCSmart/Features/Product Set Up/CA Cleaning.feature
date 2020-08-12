@@ -32,8 +32,8 @@ Given In the Additional Product Information Screen I answer the questions as fol
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
 Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | false       | AQUA           | Choose...      | Abrasive, Absorbent, Adhesive | true  | true      |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType | FunctionalPurpose             | Clean | Certified |
+		| Water         | 100     | false               | true        | AQUA       | AQUA        | Choose...      | Abrasive, Absorbent, Adhesive | true  | true      |
 Given I click continue
 Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
 | Error                                   |
@@ -62,8 +62,8 @@ Given In the Additional Product Information Screen I answer the questions as fol
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
 Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | IngredientType           | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | false       | AQUA       | Intentionally Added      | Abrasive, Absorbent, Adhesive | true  | true      |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType | FunctionalPurpose             | Clean | Certified |
+		| Water         | 100     | false               | true        | AQUA       | AQUA        | Choose...      | Abrasive, Absorbent, Adhesive | true  | true      |
 Given I click continue
 Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
 | Error                                   |
@@ -92,8 +92,8 @@ Given In the Additional Product Information Screen I answer the questions as fol
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
 Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| RR-05150-3    | 100     | false               | false       | AQUA       | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
+		| RR-05150-3    | 100     | false               | true        | AQUA       | AQUA        | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 Given I click continue
 Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
 | Error                                   |
@@ -123,8 +123,8 @@ Given In the Additional Product Information Screen I answer the questions as fol
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
 Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| Water         | 10      | false               | false       | AQUA       | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
+		| Water         | 10      | false               | false       | AQUA       | AQUA        | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 Given I click continue
 Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
 | Error                                   |
@@ -182,8 +182,8 @@ Given In the Additional Product Information Screen I answer the questions as fol
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
 Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| RR-05150-3    | 10      | false               | true        | AQUA       | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
+		| RR-05150-3    | 10      | false               | true        | AQUA       | AQUA        | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 Given I click continue
 Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
 | Error                                   |

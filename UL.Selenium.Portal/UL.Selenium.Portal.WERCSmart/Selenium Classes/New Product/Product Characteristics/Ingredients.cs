@@ -280,12 +280,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 			}
 
-			if (ingredient.Clean)
+			if (ingredient.TradeSecret)
 			{
-				pass = this.SelectClean(ingredient.ComponentName);
+				pass = this.AddGenericName(ingredient.ComponentName, ingredient.GenericName);
 				if (!pass)
 				{
-					Report.Info("Failed to set Clean checkbox");
+					Report.Info("Failed to set Generic Name");
 					return false;
 				}
 			}
@@ -1128,7 +1128,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Info("Could not find the Functional Purpose Input Box");
 				return false;
 			}
-			bool selectedOptionSuccessfull = true;
+			bool selectedOptionSuccessfull = false;
 			var selectedOptionsStr = new List<string>();
 
 			if (functionalPurpose == "NA")
@@ -1142,20 +1142,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			List<IWebElement> selectedOptionsEl = wantedRow.FindElements(By.XPath($".//td//span[@class='selection']//li"), 2).ToList();
 
-
-			foreach (var item in selectedOptionsEl)
+			foreach (IWebElement item in selectedOptionsEl)
 			{
-				selectedOptionsStr.Add(item.Text);
-			}
-
-			if (selectedOptionsStr.Contains("�" + functionalPurpose))
-			{
-				Report.Info($"The correct Purpose was selected.");
-			}
-			else
-			{
-				Report.Info("Failed to select the correct Purpose");
-				selectedOptionSuccessfull = false;
+				if (item.Text == "×" + functionalPurpose)
+				{
+					Report.Info($"The correct Purpose was selected.");
+					selectedOptionSuccessfull = true;
+				}
+				else if (selectedOptionsEl.Last() == item && !selectedOptionSuccessfull)
+				{
+					Report.Info("Failed to select the correct Purpose");
+					selectedOptionSuccessfull = false;
+				}
 			}
 			return selectedOptionSuccessfull;
 		}
@@ -1164,6 +1162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
 			IWebElement cleanCheckbox = wantedRow.FindElement(By.XPath(".//td//input[contains(@data-bind,'caClean')]"), 2);
+
 			if (cleanCheckbox == null)
 			{
 				Report.Info("Could not find the Clean Check Box");
@@ -1171,6 +1170,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			return cleanCheckbox.TryClick();
+
+		}
+
+		public bool AddGenericName(string ingredientName, string genericName)
+		{
+			IWebElement wantedRow = this.FindElement(By.XPath($"//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr//div[@class='chemical-name'][text()='" + ingredientName + "']"), 2);
+			IWebElement genericNameField = this.FindElement(By.XPath("//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr//div[@class='chemical-name'][text()='" + ingredientName + "']/../..//input[@data-bind='value: GenericName.field']"), 2);
+
+			if (genericNameField == null)
+			{
+				Report.Info("Could not find the Generic Name Box");
+				return false;
+			}
+			
+			return genericNameField.TryEnterText(genericName);
+
+		}
+
+		public bool SelectTradeSecret(string ingredientName)
+		{
+			Report.Info("testing2 " + ingredientName);
+			IWebElement wantedRow = this.FindElement(By.XPath($"//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr//div[@class='chemical-name'][text()='" + ingredientName + "']"), 2);
+			IWebElement tradeSecretCheckbox = this.FindElement(By.XPath("//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr//div[@class='chemical-name'][text()='" + ingredientName + "']/../..//td[@class='trade-secret']//input"), 2);
+
+			if (tradeSecretCheckbox == null)
+			{
+				Report.Info("Could not find the Trade Secret Check Box");
+				return false;
+			}
+
+			return tradeSecretCheckbox.TryClick();
 
 		}
 
@@ -1334,6 +1364,134 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 			return true;
+		}
+
+		public bool SelectXForComponentNumber(string number)
+		{
+			IList<IWebElement> xButtons = this.ContainerElement.FindElements(By.XPath("//a[@aria-label='Delete component']"), 2);
+			int numberInt = int.Parse(number);
+			return xButtons[numberInt - 1].TryClick();
+		}
+
+		public bool CheckForCheckBoxWithTextInMessageAtTheTopOfIngredientsPage(string text)
+		{
+			IWebElement alertMessage1 = this.ContainerElement.FindElement(By.XPath("//div[@class='alert alert-info alert-dismissible']//label//input"), 2);
+			return alertMessage1.TryCheck();
+		}
+
+		public bool CloseCACleaningIngredientsPopupWindow()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div/following-sibling::div//button"), 2);
+			return closeButton.TryClick();
+		}
+		public bool CheckForTwoErrorMessagesInPopupWithTitle(Table table, string popupTitle)
+		{
+			List<string> errors = new List<string>();
+
+			foreach (TableRow row in table.Rows)
+			{
+				if (row["Error"] == "Generic")
+				{
+					errors.Add("GenericInUse");
+				}
+				else if (row["Error"] == "Percent")
+				{
+					errors.Add("LessThan100Percent");
+				}
+				else if (row["Error"] == "Publicly Disclosed or Trade Secret")
+				{
+					errors.Add("PublicDisclosureOrTradeSecretIssue");
+				}
+				else if (row["Error"] == "Ingredient Type")
+				{
+					errors.Add("IngredientTypeMissing");
+				}
+				else if (row["Error"] == "Functional Purpose")
+				{
+					errors.Add("FragranceComponentFunctionalPurposeMismatch");
+				}
+				else if (row["Error"] == "Publicly Disclosed")
+				{
+					errors.Add("NonFunctionalIngredientDisclosureIssue");
+				}
+				else if (row["Error"] == "Public Name")
+				{
+					errors.Add("CAHCPPublicDisclosureIssues");
+				}
+				else if (row["Error"] == "Ingredient Type with Functional Purpose")
+				{
+					errors.Add("NonFunctionalIngredientTypeOrFunctionalPurposeMismatch");
+				}
+				else if (row["Error"] == "Third Party")
+				{
+					errors.Add("PVBOTThirdPartyError");
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			foreach (string error in errors)
+			{
+				IWebElement errorEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model." + error + "'][@style='display: none;']"), 2);
+				if (errorEl != null)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool CheckForErrorMessagesInPopupWithTitle(string popupTitle)
+		{
+			IList<IWebElement> errorMessages = this.ContainerElement.FindElements(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div"), 2);
+			if (errorMessages[1].Text.Contains("Generic ingredients are not permitted as they cannot be screened for Chemicals of Concern. Each ingredient must use any of the following: Valid Chemical Abstract Service identifier(CAS number); or Valid 3rd - Party Formula registration(CAS begins with \"WPS\"); or Valid CAS Addition(CAS begins with NA) Please note that use of an ingredient with a CAS beginning with NA may result in a suspension of the registration requiring more information or details. You should always use a valid CAS number or 3rd - Party Formula before using an NA option."))
+			{
+				Report.Info("true");
+			}
+			else
+			{
+				Report.Info("false " + errorMessages[1].Text);
+				Report.Info("false " + errorMessages[2].Text);
+				Report.Info("false " + errorMessages[3].Text);
+				Report.Info("false " + errorMessages[4].Text);
+			}
+			return true;
+		}
+
+		public bool CheckForMessageAtTheTopOfIngredientsPage()
+		{
+			IWebElement alertMessage = this.ContainerElement.FindElement(By.XPath("//div[@class='alert alert-info alert-dismissible']"), 2);
+			if (alertMessage.Text.Contains("Note: there are special requirements for formulations that must be met in order to generate a California Cleaning Right to Know ingredient disclosure report. Formulations CANNOT contain:")
+				&& alertMessage.Text.Contains("Any generic ingredient names (e.g., fragrance). Each generic ingredient name must be replaced by either a registered 3rd-Party component, or a list of the specific ingredients that comprise the generic mixture.")
+				&& alertMessage.Text.Contains("An indication of the ingredient being EITHER \"Publicly Disclosed\" or \"Trade Secret\".")
+				&& alertMessage.Text.Contains("For each Publicly Disclosed ingredient, select a Public Name.")
+				&& alertMessage.Text.Contains("For each Trade Secret ingredient, provide a public name that is only as generic as necessary to protect its confidential identity."))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ClickCloseInPopupWithTitle(string title)
+		{
+			IWebElement continueButton = this.ContainerElement.FindElement(By.XPath("//h4[text()='" + title + "']/../following-sibling::div[@class='modal-footer']//button"), 2);
+			return continueButton.TryClick();
+		}
+		public bool CheckDeleteRowsWarningPopupContainsText(string lineOne, string lineTwo)
+		{
+			IWebElement lineOneEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
+			IWebElement lineTwoEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
+
+			if (lineOneEl.Text == lineOne && lineTwoEl.Text == lineTwo)
+			{
+				return true;
+			}
+
+			return false;
 		}
 	}
 }

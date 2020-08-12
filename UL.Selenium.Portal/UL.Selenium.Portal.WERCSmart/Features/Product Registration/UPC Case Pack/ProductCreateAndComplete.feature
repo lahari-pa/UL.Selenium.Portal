@@ -385,10 +385,9 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I click continue
 	#
 	Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | true                | false       | AQUA           | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType | FunctionalPurpose | Clean | Certified |
+		| Water         | 100     | false               | true        | AQUA       | AQUA        | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 	And in the Ingredients page I click Continue
-	Then I click close for the warning popup titled: California Cleaning Right to Know 
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
@@ -400,7 +399,10 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 		| Retailer  |
 		| Walgreens |
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC118139, container type: Metal Container and size: 32
-	Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given I set the OSHA-compliant Safety Data Sheet, English option to: Yes
+	Given I click the browse button for label: OSHA SDS and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+	Given I click continue
 	Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test

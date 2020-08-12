@@ -318,6 +318,7 @@ Scenario: [73225] Kits that Contain a specific Product
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Kits Containing a Specific Registration
 	Then In the Supplier Reports screen the current sub-page should be: Kits Containing a Specific Registration
+	Given In the Supplier Reports screen the current page description should be: For a specific WERCSmart ID, the report will show the various Kit registrations that include the specific registration.
 	Given I select a random product from the drop down
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
@@ -334,12 +335,13 @@ Scenario: [73225] Kits that Contain a specific Product
 Scenario: [73228] Products that are Associated with a specific Kit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: Kits Registration
-	Then In the Supplier Reports screen the current sub-page should be: Kits Registration
+	Given Under the Supplier Reports menu I choose: Kit Registrations
+	Then In the Supplier Reports screen the current sub-page should be: Kit Registrations
+	Given In the Supplier Reports screen the current page description should be: For a specific Kit registration, the report will include the individual WERCSmart IDs that are included in the Kit.
 	Given I select a random product from the drop down
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called Kits Registration.xlsx and save as 73228
+	Given I confirm that an excel file is produced called Kit Registrations.xlsx and save as 73228
 	Then I confirm that the excel file saved as: 73228 contains the following columns:
 		| Column              |
 		| Product in Kit      |
@@ -379,6 +381,7 @@ Scenario: [73229] Products with VOCs
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
 	Then In the Supplier Reports screen the current sub-page should be: Volatile Organic Compounds
+	Given In the Supplier Reports screen the current page description should be: Registrations within the Account that have VOC data. Report includes the VOC information and other data for each registration.
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called Volatile Organic Compounds.xlsx and save as 73229
@@ -415,6 +418,7 @@ Scenario: [73227] Products and Recommended Use Report
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: Product Types Registered
 	Then In the Supplier Reports screen the current sub-page should be: Product Types Registered
+	Given In the Supplier Reports screen the current page description should be: A list of the Products registered in the account with the corresponding Product Type per registration.
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
 	Given I confirm that an excel file is produced called Product Types Registered.xlsx and save as 73227
@@ -431,12 +435,13 @@ Scenario: [73227] Products and Recommended Use Report
 Scenario: [73230] UPC Report for Specific Product with Retailer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I click the My Reports icon in the QuickLinks Pane
-	Given Under the Supplier Reports menu I choose: UPC and Retailer (Product Specific)
-	Then In the Supplier Reports screen the current sub-page should be: UPC and Retailer (Product Specific)
+	Given Under the Supplier Reports menu I choose: UPC and Retailer (Single Registration)
+	Then In the Supplier Reports screen the current sub-page should be: UPC and Retailer (Single Registration)
+	Given In the Supplier Reports screen the current page description should be: For a specific WERCSmart registration, the report outlines the retailers and UPCs associated to the registration.
 	Given I select a random product from the drop down
 	Given In the Supplier Reports screen I click on the Download button
 	Given I click on close in the Report Download dialog
-	Given I confirm that an excel file is produced called UPC and Retailer (Product Specific).xlsx and save as 73230
+	Given I confirm that an excel file is produced called UPC and Retailer (Single Registration).xlsx and save as 73230
 	Then I confirm that the excel file saved as: 73230 contains the following columns:
 		| Column          |
 		| WPSID           |
