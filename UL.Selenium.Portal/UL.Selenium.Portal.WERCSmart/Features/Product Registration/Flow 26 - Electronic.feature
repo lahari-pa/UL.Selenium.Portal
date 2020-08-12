@@ -23,7 +23,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
 
-# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
+# ======= Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
 #Given I generate a random UPC number and save as: UPC60671
 #Given I delete all products with UPC Number: saved as UPC60671
 
