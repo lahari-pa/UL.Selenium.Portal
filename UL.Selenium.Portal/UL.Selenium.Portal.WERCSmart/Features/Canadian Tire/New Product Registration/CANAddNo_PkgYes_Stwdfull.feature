@@ -141,6 +141,7 @@ And I Select a container type from the drop down list
 And I enter Size Value: 12
 And I Confirm the Package Type drop down list shows a Packaging type available for selection - Do not select one
 Given in the Universal Product Code (UPC) page I click Continue
-Then The alert message is displayed with text: STOP! When selecting authoring of a Safety Data Sheet (SDS) for Canada, you need to provide your Canada address. Please go to the My Account area, and update this information in My Company. You can then resume your registration set up.
+Then I should see the Regulatory Documents to Provide Page
+Then The alert message is not displayed with text: STOP! When selecting authoring of a Safety Data Sheet (SDS) for Canada, you need to provide your Canada address. Please go to the My Account area, and update this information in My Company. You can then resume your registration set up.
 Given in the Regulatory Documents to Provide page I click Continue
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85796
