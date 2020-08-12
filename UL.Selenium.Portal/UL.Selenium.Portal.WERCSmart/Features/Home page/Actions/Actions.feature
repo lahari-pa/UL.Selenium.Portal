@@ -147,6 +147,7 @@ Scenario: [56218] My Products grid Actions - View Navigation
 
 #actions/documents
 @ScenarioId:434
+@tfs_design
 Scenario: [56219] My Products grid Actions - Documents navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -156,10 +157,15 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Documents
 	And I should see Review Documents
+	Then I Delete the file with name: testdoc.pdf from the downloads folder
 	Then In the Documents section I should see the following columns: Document Name, Subformat, Language, Actions
 	Given I click on the View link of the first document in Supplier Uploaded
-	Then a document should open
-	Given I close the document
+	#Confirm document contains text, then delete, click home icon to navigate away
+	#Then a document should open
+	#Given I close the document
+	Then I confirm that a file is produced called testdoc.pdf and save as savedas56219PDF
+	Then I Check that the file saved as: savedas56219PDF contains text
+	Then I delete the file saved as savedas56219PDF	
 
 @ScenarioId:6114
 Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
