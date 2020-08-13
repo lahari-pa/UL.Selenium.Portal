@@ -127,6 +127,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@ScenarioId:10147
 Scenario: [128703] DSV Option Available for Auto Parts - Engine Parts and Components with Electrical Parts -  RU001428
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

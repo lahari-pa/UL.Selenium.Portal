@@ -547,7 +547,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Attempting to Open a chrome window");
 					//SeleniumBrowser.WebBrowser =  new ChromeDriver(chromeDriverService, new ChromeOptions());
 					//Report.Info("Attempting to maximize the window");
-				    SeleniumBrowser.StartBrowser();
+				    //SeleniumBrowser.StartBrowser();
 					//SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 				}
 

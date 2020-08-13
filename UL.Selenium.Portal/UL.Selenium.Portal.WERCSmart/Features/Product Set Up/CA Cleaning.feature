@@ -111,6 +111,7 @@ And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139385
 
 
+@ScenarioId:10146
 Scenario: [139387] CA Cleaning - 100% Formula Total (Minimum)
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -182,8 +183,8 @@ Given In the Additional Product Information Screen I answer the questions as fol
 Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 Given I click continue
 Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| RR-05150-3    | 10      | false               | true        | AQUA       | AQUA        | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| CASNumber  | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
+		| RR-05150-3 | 10      | false               | true        | AQUA       | AQUA        | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 Given I click continue
 Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
 | Error                                   |
