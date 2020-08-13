@@ -86,6 +86,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_TheProduct().SetTypeOfProductTo(type);
 			Report.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			var modal = new ModalDialog();
+
+			if(type=="Raw Material")
+			{
+				if (modal.WaitForContainerToBeVisible(2) && modal.GetTitle().Contains("Warning"))
+				{
+					Report.Info($"The Raw Material warning popup was found");
+					Report.Info("Closing popup");
+					modal.ClickButton("OK");
+					Delay.Seconds(2);
+					Report.Info("I click Continue");
+					MyStepsNewProduct.ClickContinue();
+				}
+			}
+			
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
 

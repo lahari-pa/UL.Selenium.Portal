@@ -50,6 +50,9 @@ And I call Shared Step 57500 (The Product- Enter name, select product type - Con
 And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 And I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Magnesium
+Given I should see the Formulation > Batteries Page
+Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: "Granted"
+Given I click continue
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 And If the UPCs Warning popup is displayed I click OK
