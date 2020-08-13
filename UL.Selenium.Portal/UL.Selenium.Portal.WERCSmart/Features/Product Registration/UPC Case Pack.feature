@@ -457,36 +457,6 @@ And I should see the Regulatory Documents to Provide Page
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87633
 
 
-
-
-Scenario: [87633] Universal Product Code (UPC) Step - Delete Case Pack row
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
-Given I generate a random UPC number and save as: UPC87706
-Then I save the product information as: TestCase87706
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-And I should see the Additional Product Information Page
-And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
-And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
-Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
-Then I click continue
-And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87706, container type: Plastic Container and size: 32 do not click continue
-And I Select a package type from the drop down list
-Then I select the case UPC dropdown arrow to collapse the UPC saved as: UPC87706
-Then I confirm the case dropdown with the following UPC: saved as UPC87706 should be available for selection
-Then I Click Delete Rows
-Then I Check the Delete Rows Warning Popup: appears
-Then I Check the Delete Rows Warning Popup contains the following text, Line One: You are about to delete 1 UPC's., Line Two: Do you want to proceed?
-Then I Click Ok in the Delete Rows Warning Popup
-Then I Check the Delete Rows Warning Popup: disappears
-Then I confirm the case dropdown with the following UPC: saved as UPC87706 should not be available for selection
-Then I click Continue and should not see an error message
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87706
-
-
-
 @ScenarioId:10145
 Scenario: [87718] Universal Product Code (UPC) Step - Collapsed View of Case UPC
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
