@@ -15,6 +15,7 @@ using UL.Automation.Reporting.SpecFlow.Classes;
 using System.Net;
 using System.Drawing;
 using TechTalk.SpecFlow;
+using System.Globalization;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -38,6 +39,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
+
+		
 
 		public static bool StudioWaitForSpinner(int maxSecondsToWait)
 		{
@@ -72,6 +75,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]")) != null;
 		}
+
+
 
 		public static void ScrollToBottomOfPage()
 		{
@@ -325,6 +330,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
+		public static bool IsValidDate(string value, string dateFormats)
+		{
+			DateTime tempDate;
+			bool validDate = DateTime.TryParseExact(value, dateFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out tempDate);
+			if (validDate)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+
 	}
 
 	public class RetailerAbbreviations
@@ -498,7 +518,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		
-
 
 
 

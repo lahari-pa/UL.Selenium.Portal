@@ -86,7 +86,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
 	Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60723, container type: Aerosol Can and size: 20
-Given I call Shared Step 60567 (Upload Product Label only)
+	Given I call Shared Step 60567 (Upload Product Label only)
 	# Additional Documents to Provide Page
 	And I should see the Additional Documents to Provide Page
 	Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf

@@ -31,6 +31,8 @@ Scenario: [59273] Alkaline Battery - RU000344
 		| Zinc chloride       | 9.5     | false               | false       |            |
 		| Aqua                | 70      | false               | false       |            |
 	# removed Shared Step 57571
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59273 with container type: Metal Container size: 40.0 and quantity: 100
@@ -39,6 +41,7 @@ Scenario: [59273] Alkaline Battery - RU000344
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -47,6 +50,7 @@ Scenario: [59273] Alkaline Battery - RU000344
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 230                      | 55.4                    | 33.3      | Black      | Acidic | No data available | 1.44                  |
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59273. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 69358 (Data Acceptance - Click Summary Button)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
 @ScenarioId:681

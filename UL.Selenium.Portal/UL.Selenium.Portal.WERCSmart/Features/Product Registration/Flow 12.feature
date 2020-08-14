@@ -64,9 +64,9 @@ And I should see following statement: Business to Consumer Name
 Then I check that the input field with label: Business to Consumer Name has the following placeholder: Business-to-Consumer Name (Generic Ingredient Name)
 Then I set the Business to Consumer Name field to: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 Then I click continue 
-And Business to Consumer Name should be showing the error messages:  Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+And Business to Consumer Name should be showing the error messages: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 Then I set the Business to Consumer Name field to: Test
-And Business to Consumer Name should not be showing the error messages:  Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+And Business to Consumer Name should not be showing the error messages: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I click continue
 And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 And I should see the Sustainability Page

@@ -837,6 +837,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public new bool ConfirmTruckIconIsDisplayedForUPC(string savedAs)
+		{
+			IWebElement truckIcon = this.containerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/following-sibling::i"), 2);
+			if (truckIcon != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 	}
 
 	public class DeleteRowsWarning : SeleniumBaseObject

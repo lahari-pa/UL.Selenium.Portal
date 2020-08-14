@@ -147,6 +147,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					indexOfSubject = i + 1;
 				}
 			}
+		
 
 			IList<IWebElement> selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='tblViewNotificationHistory']//tr"), 2);
 			var listOfNotifications = new List<Notification>();
@@ -178,6 +179,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return listOfNotifications;
 		}
+
+		public bool WaitForTableContentToLoad()
+		{
+			int x = 0;
+			while (x < 20)
+			{
+				IWebElement tableEl = this.containerElement.FindElement(By.XPath($".//div[@class='ui-jqgrid-bdiv']"), 2);
+				if(tableEl!=null)
+				{
+					Report.Info($"The Table was loaded");
+					return true;
+				}
+				x++;
+				Delay.Seconds(3);
+			}			
+			Report.Info($"The table did not load after 60 seconds");
+			return false;
+
+		}
+
 
 		public bool ClickTopItem()
 		{

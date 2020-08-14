@@ -809,12 +809,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void OnTheIngredientsPageSelectTypeAndPurpose(string ingredientName, string ingredientType, Table table)
 		{
 			Report.Info($"Attempting to select the ingredient type: {ingredientType} for the Ingredient: {ingredientName}");
-			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
+			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType, "ComponentName"), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
 			Report.Info($"Attempting to Select the Functional Purposes from the table.");
 			var selectedOptionsStr = new List<string>();
 			foreach (TableRow row in table.Rows)
 			{
-				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"]), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
+				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"], "ComponentName"), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
 				{
 					selectedOptionsStr.Add(row["Functional Purpose"]);
 				}
@@ -826,8 +826,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"On the Ingredients page for the Ingredient: (.*) I add Ingredient Type: (.*) and All Functional Purposes")]
 		public void OnTheIngredientsPageSelectTypeAndAllPurpose(string ingredientName, string ingredientType)
 		{
-			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
-			Report.IsTrue(new Ingredients().ISelectAllFunctionalPurpose(ingredientName), "Failed to Select All The Functional Purpose options", "Successfully selected  All The Functional Purpose options");
+			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType, "ComponentName"), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
+			Report.IsTrue(new Ingredients().ISelectAllFunctionalPurpose(ingredientName, "ComponentName"), "Failed to Select All The Functional Purpose options", "Successfully selected  All The Functional Purpose options");
 
 		}
 
@@ -875,7 +875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.CheckTopSearchfieldDropdownItemsCASNumber(casNumber), "The top result in the seachfields dropdown item did not have the CAS number, " + casNumber, "The top result in the seachfields dropdown item did have the CAS number, " + casNumber);
 		}
 
-		
+
 		[StepDefinition(@"In the popup view with the following title: (.*) I click the (.*) button")]
 		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
 		{

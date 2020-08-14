@@ -511,6 +511,7 @@ And I click alias subsection option TDGCP and confirm data as:
 | 1 |
 
 
+@ScenarioId:10101
 Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Lighter, Provide the DOT Approval Number' Field
 
 Given I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)

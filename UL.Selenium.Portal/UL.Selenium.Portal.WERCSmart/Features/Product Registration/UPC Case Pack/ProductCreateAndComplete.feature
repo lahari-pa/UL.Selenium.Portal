@@ -385,10 +385,9 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I click continue
 	#
 	Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | true                | false       | AQUA           | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
+		| Water         | 100     | false               | true        | AQUA       | AQUA        | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 	And in the Ingredients page I click Continue
-	Then I click close for the warning popup titled: California Cleaning Right to Know 
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
@@ -400,8 +399,10 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 		| Retailer  |
 		| Walgreens |
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC118139, container type: Metal Container and size: 32
-	Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
+	Given I set the OSHA-compliant Safety Data Sheet, English option to: Yes
+	Given I click the browse button for label: OSHA SDS and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+	Given I click continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
@@ -411,17 +412,17 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase118139 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase118139)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase118139)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase118139 and its status is: Assigned
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase118139 and its status is: Assigned
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase118139)
 	Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase118139)
 	Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase118139
 	Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase118139)
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase118139)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase118139 and its status is: Accepted
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase118139 and its status is: Accepted
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase118139)
 	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase118139) for
 		| Retailer  |
 		| Walgreens |
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase118139)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase118139 and its status is: Completed
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase118139 and its status is: Completed
