@@ -171,6 +171,7 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	Then I delete the file saved as savedas56219PDF
 	Then I close All the current windows except the Main Window
 	#STILL NOT ENDING
+	#Remove new methods that relate to window switching and closing if not used?
 	
 
 
