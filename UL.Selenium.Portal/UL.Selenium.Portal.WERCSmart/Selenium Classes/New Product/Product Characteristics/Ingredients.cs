@@ -283,6 +283,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
+			pass = this.ISetGenericName(component, ingredient.IngredientType, ingredient.GenericName, componentType);
+
+			if (!pass)
+			{
+				Report.Info("Failed to set Generic Name");
+				return false;
+			}
+
 			var tableFunctionalPurpose = new Table("Functional Purpose");
 			string[] funcPurposes = ingredient.FunctionalPurpose.Split(',');
 			foreach (string funcPurpose in funcPurposes)
@@ -1085,9 +1093,39 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public bool ISetGenericName (string ingredientName, string ingredientType, string ingredientGenericName, string componentNameOrCASNumber)
+		{
+			IWebElement wantedRow;
+			if (componentNameOrCASNumber == "ComponentName")
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[text()='{ingredientName}']]"), 2);
+			}
+			else
+			{
+				wantedRow = this.FindElement(By.XPath($".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//small[text()='{ingredientName}']]"), 2);
+
+			}
+
+			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath(".//td//input[@data-bind='value: GenericName.field']"), 2);
+
+			if (ingredientTypeBox == null)
+			{
+				Report.Failure("Could not find the Generic Name Input Box");
+				return false;
+			}
+
+			if (ingredientTypeBox.TryEnterText(ingredientGenericName))
+			{
+				Report.Info($"Successfully entered Generic Name");
+				return true;
+			}
+			Report.Info($"Failed to enter Generic Name");
+			return false;
+
+		}
+
 		public bool ISelectAllFunctionalPurpose(string ingredientName, string componentNameOrCASNumber)
 		{
-			Report.Info("testing2");
 			IWebElement wantedRow;
 			if (componentNameOrCASNumber == "ComponentName")
 			{
@@ -1102,7 +1140,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement functionalPurposeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'functionalPurpose')]"), 2);
 			if (functionalPurposeBox == null)
 			{
-				Report.Info("testing3");
 				Report.Info("Could not find the Functional Purpose Input Box");
 				return false;
 			}
@@ -1111,7 +1148,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			var allOptionsStr = new List<string>();
 			foreach (var el in allOptions)
 			{
-				Report.Info("testing4 " + el.Text);
 				allOptionsStr.Add(el.Text);
 			}
 			Context.AddToContext(ingredientName + "FunctionalPurposesList", allOptionsStr);
@@ -1130,7 +1166,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				foreach (var item in currentlySelectedOptionsEl)
 				{
 					currentlySelectedOptionsStr.Add(item.Text);
-					Report.Info("testing " + item.Text);
 				}
 
 				if (currentlySelectedOptionsStr.Contains("x" + option))
