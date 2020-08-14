@@ -2104,6 +2104,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
+		[StepDefinition(@"I save the current window handle to context as: (.*)")]
+		public void SaveTheCurrentWindowHandleToContextAs(string saveAs)
+		{
+			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext(saveAs, currentHandle);		
+		}
+
+		[StepDefinition(@"I switch to the window with handle saved as: (.*)")]
+		public void SwitchToTheWindowWithHandleSavedAs(string savedAs)
+		{
+			string handle = (string)Context.GetFromContext(savedAs);
+			SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+			Delay.Seconds(2);
+		}
+
+		[StepDefinition(@"I close All the current windows")]
+		public void CloseAllTheCurrentWindows()
+		{
+			
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach(var handle in allHandles)
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				Delay.Seconds(1);
+				SeleniumBrowser.WebBrowser.Close();
+
+			}
+		
+		}
+
+
+		[StepDefinition(@"I close All the current windows except the Main Window")]
+		public void CloseAllTheCurrentWindowsExceptTheMainWindow()
+		{
+
+			string mainHandle = (string)Context.GetFromContext("MainWindowHandle");
+			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				if(handle ==mainHandle)
+				{
+					Report.Info($"Main Handle");
+					//do nothing
+				}
+				else
+				{
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);					
+					SeleniumBrowser.WebBrowser.Close();
+				}
+				
+
+			}
+
+		}
+
+
+
 
 	}
 }

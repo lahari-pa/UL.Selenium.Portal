@@ -19,6 +19,7 @@
 @SummaryPage
 @CreateProducts
 @PaymentMethods
+@SupplierReports
 @ProductSetUp
 @UPC
 @ViewUpcs
@@ -159,13 +160,19 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	And I should see Review Documents
 	Then I Delete the file with name: testdoc.pdf from the downloads folder
 	Then In the Documents section I should see the following columns: Document Name, Subformat, Language, Actions
+	Then I save the current window handle to context as: MainWindowHandle
 	Given I click on the View link of the first document in Supplier Uploaded
 	#Confirm document contains text, then delete, click home icon to navigate away
 	#Then a document should open
 	#Given I close the document
 	Then I confirm that a file is produced called testdoc.pdf and save as savedas56219PDF
 	Then I Check that the file saved as: savedas56219PDF contains text
-	Then I delete the file saved as savedas56219PDF	
+	Then I switch to the window with handle saved as: MainWindowHandle
+	Then I delete the file saved as savedas56219PDF
+	Then I close All the current windows except the Main Window
+	#STILL NOT ENDING
+	
+
 
 @ScenarioId:6114
 Scenario: [112937] View UPCs - UPC name column exists in the Product UPCs table
