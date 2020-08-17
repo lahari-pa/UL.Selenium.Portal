@@ -43,6 +43,7 @@ Scenario: [72582] Active Export Report
 
 # Need to check how to archive messages - there are none archived in the products account
 @tfs_design
+@ScenarioId:9410
 Scenario: [72586] Archive Export Report
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -97,7 +98,7 @@ Scenario: [109503] Message Center - Suspended message stays in Message Center fo
 	And I click the following option in the bottom menu: Suspended
 	And In the Suspended dialog I Select the following clients: All
 	And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: Automated QASha
-	And In the Suspended dialog in the Select Subject drop down I choose: Formula – Document Issue
+	And In the Suspended dialog in the Select Subject drop down I choose: Formula ï¿½ Document Issue
 	And In the Suspended dialog in the Supplier Message field I add the following text: supplier message input
 	And In the Suspended dialog in the Internal Product Note field I add the following text: internal product note input
 	And In the Suspended dialog I click Save
