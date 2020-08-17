@@ -19,6 +19,8 @@ using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1172,9 +1174,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Notification History Screen I confirm that one of the rows is as follows:")]
 		public void ThenInTheNotificationHistoryScreenIConfirmThatOneOfTheRowsIsAsFollows(Table table)
 		{
-			SpecFlowReporting.TableRow(table.Rows[0]);
-			Report.Info("Getting displayed notifications");
 			var thisProductNotificationHistory = new ProductNotificationHistory();
+			thisProductNotificationHistory.WaitForTableContentToLoad();
+			SpecFlowReporting.TableRow(table.Rows[0]);
+			Report.Info("Getting displayed notifications");			
 			List<Notification> notifications = thisProductNotificationHistory.GetNotifications();
 			for (int i = 0; i < notifications.Count; i++)
 			{
@@ -1956,23 +1959,107 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to double click button: " + button, "Clicked button: " + button);
 		}
 
-		[StepDefinition(
-			@"I should see a new tabbed document with the pdf containing product code saved as: (.*) and NGHS / English twice")]
-		public void ThenIShouldSeeANewTabbedDocumentWithThePdfContainingProductCodeSavedAsTestCase(string savedAs)
-		{
-			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-			string ID = ProductDetails.Id;
-			var thisSHADocument = new SHADocumentList();
-			Delay.Seconds(3);
-			string docURL = thisSHADocument.DocumentWindowOpen();
-			if (docURL != null)
-			{
-				Report.Info($"The found URL was: {docURL}");
-				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-				Report.Info($"Found the downloads folder: {downloadsFolder}");
-				thisSHADocument.DownloadFileFromURL(docURL, downloadsFolder + @"\TempPDF.pdf");
-				Report.Info($@"Downloading file from url complete, downloaded to: {downloadsFolder}+ \TempPDF.pdf");
+		//[StepDefinition(
+		//	@"I should see a new tabbed document with the pdf containing product code saved as: (.*) and NGHS / English twice")]
+		//public void ThenIShouldSeeANewTabbedDocumentWithThePdfContainingProductCodeSavedAsTestCase(string savedAs)
+		//{
+		//	var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+		//	string ID = ProductDetails.Id;
+		//	var thisSHADocument = new SHADocumentList();
+		//	Delay.Seconds(3);
+		//	string docURL = thisSHADocument.DocumentWindowOpen();
+		//	if (docURL != null)
+		//	{
+		//		Report.Info($"The found URL was: {docURL}");
+		//		string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+		//		Report.Info($"Found the downloads folder: {downloadsFolder}");
+		//		thisSHADocument.DownloadFileFromURL(docURL, downloadsFolder + @"\TempPDF.pdf");
+		//		Report.Info($@"Downloading file from url complete, downloaded to: {downloadsFolder}+ \TempPDF.pdf");
 
+
+		//		//TEST CODE
+		//		Report.Info($"Running Test code for PDF check using new downloaded file");
+
+		//		GeneralUtilities.OpenNewTabAndNavigateTo(downloadsFolder + @"\TempPDF.pdf");
+		//		Report.Info($"tab opened");
+		//		Delay.Seconds(3);
+		//		//string docURL2 = thisSHADocument.DocumentWindowOpen();
+		//		string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
+		//		Report.Info($"doc window opened");
+		//		Report.Screenshot();
+
+		//		if (docURL2 == null)
+		//		{
+		//			Report.Info("The docURL was null");
+		//			return;
+		//		}
+
+		//		string pdfText = thisSHADocument.DocumentText(docURL2);
+		//		Report.Info($"this was the new found pdf text using the new test code: {pdfText}");
+
+		//		//END TEST CODE		
+
+
+		//		//string pdfText = thisSHADocument.DocumentText(docURL);
+
+
+		//		Report.Info($"The Found PDF Text was: {pdfText}");
+		//		Report.IsTrue(pdfText.Contains(ID), "PDF does not contain: " + ID, "PDF contains " + ID);
+		//		Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2, "PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
+		//	}
+		//	else
+		//	{
+		//		Report.Error("Tabbed document has not been found as expected");
+		//	}
+		//}
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'NGHS / English' twice as well as the product codes saved as: (.*) and (.*)")]		
+		public void CheckThatFileSavedAsContaisnTextNGHSEnglishTwicAndProductCodesSavedAs(string fileSavedAs, string code1SavedAs, string code2SavedAs)
+		{
+			var productOneDetails = (ProductInformation)Context.GetFromContext(code1SavedAs);
+			string ID1 = productOneDetails.Id;
+
+			var productTwoDetails = (ProductInformation)Context.GetFromContext(code2SavedAs);
+			string ID2 = productTwoDetails.Id;
+
+
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);		
+			Report.Screenshot();
+			
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");
+			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
+			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
+
+
+			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ",""), @"NGHS/English");
+			Report.IsTrue(foundOccurences == 2, "PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
+
+		}
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the product codes saved as: (.*) and (.*)")]
+		public void CheckThatFileSavedAsContaisnProductCodesSavedAs(string fileSavedAs, string code1SavedAs, string code2SavedAs)
+		{
+			var productOneDetails = (ProductInformation)Context.GetFromContext(code1SavedAs);
+			string ID1 = productOneDetails.Id;
+
+			var productTwoDetails = (ProductInformation)Context.GetFromContext(code2SavedAs);
+			string ID2 = productTwoDetails.Id;
 
 				//TEST CODE
 				Report.Info($"Running Test code for PDF check using new downloaded file");
@@ -1985,29 +2072,87 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info($"doc window opened");
 				Report.Screenshot();
 
-				if (docURL2 == null)
-				{
-					Report.Info("The docURL was null");
-					return;
-				}
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
 
-				string pdfText = thisSHADocument.DocumentText(docURL2);
-				Report.Info($"this was the new found pdf text using the new test code: {pdfText}");
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");
+			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
+			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
+			
+
+		}
+
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / English' twice")]
+		public void CheckThatFileSavedAsContaisnTextCanadaEnglishTwice(string fileSavedAs)
+		{	
 
 				//END TEST CODE
 
-
-				//string pdfText = thisSHADocument.DocumentText(docURL);
-
-
-				Report.Info($"The Found PDF Text was: {pdfText}");
-				Report.IsTrue(pdfText.Contains(ID), "PDF does not contain: " + ID, "PDF contains " + ID);
-				Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2, "PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
-			}
-			else
+			if (fileSavedAs.ToLower().Contains("savedas"))
 			{
-				Report.Error("Tabbed document has not been found as expected");
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");		
+
+
+			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/English");
+			Report.IsTrue(foundOccurences == 2, "PDF does not contain: Canada / English twice", "PDF contains NGHS / English twice");
+
+		}
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / Français' twice")]
+		public void CheckThatFileSavedAsContaisnTextCanadaFrançaisTwice(string fileSavedAs)
+		{
+
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");
+
+
+			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/Français");
+			Report.IsTrue(foundOccurences == 2, "PDF does not contain: Canada / Français twice", "PDF contains NGHS / English twice");
+
 		}
 
 
@@ -2024,6 +2169,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			return count;
 		}
+
+
+
 
 		[StepDefinition(@"I click on the Suppliers link on the top right of the screen")]
 		public void IClickOnSuppliersLink()
@@ -3777,6 +3925,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Column not found: " + columnName);
 			}
+
 		}
 
 
@@ -3882,6 +4031,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
 			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
 		}
+
+		[StepDefinition(@"In UPC Retailer and Feed I check that the following sections contain the corresponding titles:")]
+		public void ThenInUPCRetailerAndFeedICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			Report.IsTrue(studioSHAManagerObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
+		}
+
 
 	}
 

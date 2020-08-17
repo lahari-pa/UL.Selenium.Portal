@@ -39,7 +39,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.BaseTestUrl = TestVariables.GetVariableSavedAs("TestURL");
 		}
 
-		[AfterScenario(Order = 1)]
+		[BeforeFeature(Order = 2)]
+		public static void BeforeTestKillChrome()
+		{
+			Process.GetProcessesByName("chromedriver").ToList().ForEach(x => x.Kill());
+		}
+
+		[AfterFeature(Order = 1)]
 		public static void CloseChrome()
 		{
 			//Process.GetProcessesByName("chrome").ToList().ForEach(x => x.Kill());
@@ -806,7 +812,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.StartStep(ReportSettings.StepCounter + " I create a new email address");
 			try
-			{
+			{ 
+
 				string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
 
 				string myEmail = MailosaurFunctions.CreateEmail(myDate);
@@ -815,6 +822,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					throw new Exception("Failed to Create a New Email Address");
 				}
+
+				if (Context.ScenarioContext.ContainsKey("CurrentEmail"))
+				{
+					Context.ScenarioContext.Remove("CurrentEmail");
+				}
+
 				Context.ScenarioContext.Add("CurrentEmail", myEmail);
 				Report.Success("Email Address Created and Saved in Scenario Context");
 			}
@@ -2016,7 +2029,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(fileName), "", "");
 		}
 
+		[StepDefinition(@"I save the product ID: (.*) to a context under type 'ProductInformation' as: (.*)")]
+		public void SaveProductIDAsProductInformationNamed(string prodID, string savedAs)
+		{
+			var createdProduct = new ProductInformation();
+			createdProduct.Id = prodID;
+			Context.AddToContext(savedAs, createdProduct);
+		}
 
+
+		[StepDefinition(@"I confirm that a file is produced called (.*) and save as (.*)")]
+		public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)
+		{
+			Report.StartStep(ReportSettings.StepCounter + " - Confirm File is downloaded with name: " + file);
+			try
+			{
+				Delay.Seconds(10);
+				Report.Info("Confirm a file is downloaded with name: " + file);
+				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				Report.Info("Downloads folder: " + downloadsFolder);
+				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+				if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
+				{
+					Context.AddToContext(savedAs, dir.FirstOrDefault());
+				}
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I delete the file saved as (.*)")]
+		public void DeleteFileSavedAs(string savedAs)
+		{
+			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + savedAs);
+				return;
+			}
+			Report.Info("Deleting file: " + file);
+			File.Delete(file);
+		}
 
 
 	}

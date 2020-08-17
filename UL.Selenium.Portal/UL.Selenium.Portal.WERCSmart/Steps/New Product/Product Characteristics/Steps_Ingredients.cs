@@ -875,5 +875,76 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.CheckTopSearchfieldDropdownItemsCASNumber(casNumber), "The top result in the seachfields dropdown item did not have the CAS number, " + casNumber, "The top result in the seachfields dropdown item did have the CAS number, " + casNumber);
 		}
 
+		
+		[StepDefinition(@"In the popup view with the following title: (.*) I click the (.*) button")]
+		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
+			Delay.Seconds(5);
+		}
+
+
+		[StepDefinition(@"In the popup view with the following title: (.*) I confirm I see the following buttons in the popup view:")]
+		public void ThenIConfirmISeeTheFollowingButtonsInThePopupView(string popupTitle, Table table)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.CheckForTheFollowingButtonsInThePopupView(popupTitle, table), "Failed to find all the buttons", "Successfully found all the buttons");
+		}
+
+		[StepDefinition(@"I confirm I check the checkbox in the popup view with the following text: (.*)")]
+		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_(string text)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.CheckACheckboxWithTheFollowingText(text), "Failed to check the checkbox with the following text: " + text, "Successfully checked the checkbox with the following text: " + text);
+		}
+
+
+		[StepDefinition(@"I confirm I see a checkbox in the popup view with the following text: (.*)")]
+		public void ThenIConfirmISeeACheckboxInThePopupViewWithTheFollowingText(string text)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.ConfirmACheckboxWithTheFollowingTextExists(text), "Failed to find a checkbox with the following text: " + text, "Successfully found a checkbox with the following text: " + text);
+		}
+
+
+		[StepDefinition(@"I confirm the table in the popup view has following column data")]
+		public void ThenIConfirmTheTableInThePopupViewHasFollowingColumnData(Table table)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.CheckForTheFollowingTableColumnDataInPopupView(table), "Failed to find all the columns", "Successfully found all the columns");
+		}
+
+
+		[StepDefinition(@"I confirm the table in the popup view has the following column titles")]
+		public void ThenIConfirmIATableWithTheFollowingColumnTitles(Table table)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.CheckForTheFollowingTableColumnTitlesInPopupView(table), "Failed to find all the columns", "Successfully found all the columns");
+		}
+
+		[StepDefinition(@"In the popup view with the following title: (.*) I confirm I see the following statement in the popup view: (.*)")]
+		public void ThenIConfirmISeeTheFollowingStatementInThePopupView(string popupTitle, string text)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.ConfirmTheFollowingTextIsInThePopupView(popupTitle, text), "Failed to find the following text: " + text, "Successfully found the following text: " + text);
+		}
+
+
+		[StepDefinition(@"I confirm there (is|is not) a popup view titled: (.*) in the Ingredients page")]
+		public void ThenIConfirmThereIsAPopupVideoTitled(string isOrIsNot, string popupTitle)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+
+			if (isOrIsNot.ToLower() == "is")
+			{
+				Report.IsTrue(ingredientsObject.ConfirmThereIsAPopupViewTitled(popupTitle), "Failed to find the following title: " + popupTitle, "Successfully found the following title: " + popupTitle);
+			}
+			else
+			{
+				Report.IsTrue(!ingredientsObject.ConfirmThereIsAPopupViewTitled(popupTitle), "Found the following title: " + popupTitle, "Did not find the following title: " + popupTitle);
+			}
+		}
+
 	}
 }

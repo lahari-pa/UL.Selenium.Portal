@@ -197,9 +197,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ClickContinue()
 		{
 			int i = 0;
-			while(i<5)
+			while (i < 5)
 			{
-				if(NewProduct.ClickContinue())
+				if (NewProduct.ClickContinue())
 				{
 					Report.Success("Clicked 'Continue' successfully");
 					Report.Screenshot();
@@ -289,7 +289,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void NotErrorMessageSpecific(string message)
 		{
 			List<string> errors = NewProduct.ErrorMessagesText;
-			Report.IsTrue(!errors.Contains(message),"Error message was showing when it wasn't expected to! Error: " + message,"As expected, the error message was not showing. Error: " + message);
+			Report.IsTrue(!errors.Contains(message), "Error message was showing when it wasn't expected to! Error: " + message, "As expected, the error message was not showing. Error: " + message);
 		}
 
 		[StepDefinition(@"in page (.*) I should see no errors")]
@@ -1363,7 +1363,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			List<string> options = myProduct.GetAllOptionsForSection(section);
 			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), "The option: " + options[0] + " could not be selected in section: " + section, "The option: " + options[0] + " was selected in section: " + section);
 		}
-		
+
 
 		[StepDefinition(@"If Section: (.*) is visible, I select the first option")]
 		public void IfSectionIsVisibleISelectTheOption(string section, string option)
@@ -2488,7 +2488,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.IsTrue(found.Contains(option),
 				"statement was not as expected! Expected: " + option + ", but found: " + found + "!",
 				"statement was showing: " + option + ", as expected!");
-			} else if (shouldOrShouldNot.ToLower() == "should not")
+			}
+			else if (shouldOrShouldNot.ToLower() == "should not")
 			{
 				Report.IsTrue(!found.Contains(option),
 				"statement was not as expected! Not expected: " + option + ", but found: " + found + "!",
@@ -2569,13 +2570,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$@"The name displayed in the header matcehd the expected value: ""{name}""");
 		}
 
-		[StepDefinition(@"I confirm that retailer ""(.*)"" is present under the 'Destination Retailers' column in the UPC table")]
-		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer)
+		[StepDefinition(@"I confirm that retailer ""(.*)"" (is|is not) present under the 'Destination Retailers' column in the UPC table")]
+		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer, string isOrIsNot)
 		{
 			List<string> displayedRetailers = new NewProduct().GetAllUPCDestinationRetailers();
-			Report.IsTrue(displayedRetailers.Contains(retailer),
-				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}",
-				$@"Retailer ""{retailer}"" is present under Destination Retailers");
+
+			if (isOrIsNot.ToLower() == "is not")
+			{
+				Report.IsTrue(!displayedRetailers.Contains(retailer),
+				$@"Retailer ""{retailer}"" is present under Destination Retailers",
+				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}");
+			}
+			else
+			{
+				Report.IsTrue(displayedRetailers.Contains(retailer),
+					$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}",
+					$@"Retailer ""{retailer}"" is present under Destination Retailers");
+			}
 		}
 
 		[StepDefinition(@"I click (Save|Cancel) in The Product Page")]
@@ -2952,7 +2963,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			ReportSettings.UseSubSteps = true;
 			Report.Info("Selecting No in the Restrict Use section");
 			var NewProductObject = new NewProduct();
-			Report.IsTrue(NewProductObject.SelectRestrictUseOption(" – Formula is searchable in WERCSmart and does not require an access code") , "Failed to select restriction option", "Successfully selected restriction option");
+			Report.IsTrue(NewProductObject.SelectRestrictUseOption(" – Formula is searchable in WERCSmart and does not require an access code"), "Failed to select restriction option", "Successfully selected restriction option");
 			Report.StartStep("in the Restrict Use page I click continue");
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
@@ -3079,15 +3090,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I check that the following sections contain the corresponding titles:")]
-		public void ThenICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
-		{
-			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
-			Report.IsTrue(pesticideDetailsStateObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
-		}
-
-
-
 		[StepDefinition(@"I set the following data: (.*) for the following state: (.*)")]
 		public void GivenISetTheFollowingDataErtForTheFollowingStateMA(string date, string state)
 		{
@@ -3131,42 +3133,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I check the uploaded file name of document type: (.*) and for control label: (.*) matches: (.*)")]
 		public void CheckUploadedFileNameForTypeAndLabel(string type, string label, string filename)
 		{
-			
-			Report.IsTrue(new NewProduct().CheckFileNameForSectionAndType(type, label, filename), "File name did not match the expected","The file name matched");
+
+			Report.IsTrue(new NewProduct().CheckFileNameForSectionAndType(type, label, filename), "File name did not match the expected", "The file name matched");
 
 		}
 
+		[StepDefinition(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'")]
+		public void SelectConfirmRegulatoryDocumentsConfirmationQuestion()
+		{
+			Report.IsTrue(new NewProduct().CheckRegulatoryDocumentsConfirmationBox(), "Failed to tick the confirmation option", "Successfully ticked the confirmation option");
 
+		}
+
+		//public class UPCWarning : SeleniumBaseObject
+		//{
+		//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
+
+		//	protected override By ContainerElementLocator => By.XPath(BasePath);
+
+		//	public bool ClickUPCWarningButton(string choice)
+		//	{
+		//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
+		//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
+
+		//		if (modalWindow is null || modalTitle is null)
+		//		{
+		//			Report.Failure("Could not locate UPC Warning modal window.");
+		//			return false;
+		//		}
+
+		//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
+		//		switch (choice)
+		//		{
+		//			case "ok":
+		//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
+		//				return deleteBtn.TryClick();
+		//			case "cancel":
+		//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
+		//				return cancelBtn.TryClick();
+		//		}
+		//		return false;
+		//	}
+		//}
 	}
-
-	//public class UPCWarning : SeleniumBaseObject
-	//{
-	//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
-
-	//	protected override By ContainerElementLocator => By.XPath(BasePath);
-
-	//	public bool ClickUPCWarningButton(string choice)
-	//	{
-	//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
-	//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
-
-	//		if (modalWindow is null || modalTitle is null)
-	//		{
-	//			Report.Failure("Could not locate UPC Warning modal window.");
-	//			return false;
-	//		}
-
-	//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
-	//		switch (choice)
-	//		{
-	//			case "ok":
-	//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
-	//				return deleteBtn.TryClick();
-	//			case "cancel":
-	//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
-	//				return cancelBtn.TryClick();
-	//		}
-	//		return false;
-	//	}
-	//}
 }
+

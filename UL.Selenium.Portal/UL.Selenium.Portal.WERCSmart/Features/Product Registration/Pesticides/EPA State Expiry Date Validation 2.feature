@@ -9,6 +9,8 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@UPC
+@SHA
 @run_EPAState2
 
 Feature:  EPA State Expiry Date Validation 2 (Suite ID: 56545)
@@ -271,39 +273,7 @@ And I should see the Transportation Details 1 Page
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56610
 
-
-@ScenarioId:9323
-Scenario: [132756] Canadian Province Pesticide Options
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given I generate a random UPC number and save as: RandomUPC
-Given I delete all products with UPC Number: RandomUPC
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
-Given I save the product information as: TestCase
-Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
-| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Specific Gravity |
-| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Appreciable                                  | 2                |
-Given I call Shared Step 135134 (Additional Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, - Continue - Happy Path)
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
-| 74-98-6   | Propane       | 100     | false               |            | false       |
-And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
-Then I should see the Pesticide Details - Canada Page
-Then I check the options in the dropdown menus for the following sections
-| Section                    | Options                                                                                                                                                                                                                       |
-| Alberta                    | None,Schedule 1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                              |
-| British Columbia           | None,Permit Restricted,Restricted,Commercial,Domestic,Excluded                                                                                                                                                                |
-| Manitoba                   | None,Commercial,Controlled Purchase,Not Regulated,Restricted,Self-Select                                                                                                                                                      |
-| New Brunswick              | None,Banned,Domestic / Self-Select,Non-Domestic                                                                                                                                                                               |
-| New Foundland and Labrador | None,Banned,Domestic,Commerical,Restricted                                                                                                                                                                                    |
-| Nova Scotia                | None,Allowed / Self-Select,Banned,Commercial,Controlled Purchase,Restricted,Not Regulated                                                                                                                                     |
-| Ontario                    | None,Class A: Manufacturing Products,Class B: Restricted,Class C: Commercial,Class D: Domestic with License,Class D: Domestic without License,Class D: Domestic Controlled Purchase Requiring a License,Class E: Treated Seed |
-| Prince Edward Island       | Banned,Controlled Purchase,Exempt: Schedule 2,Exempt: Schedule 7,Non-Domestic,None,Self-Select: Schedule 8                                                                                                                    |
-| Quebec                     | None,Class 1,Class 2,Class 3,Class 3A,Class 4,Class 5,Banned                                                                                                                                                                  |
-| Saskatchewan               | None,Commercial,Restricted                                                                                                                                                                                                    |
-| Northwest Territory        | Not Applicable                                                                                                                                                                                                                |
-| Yukon Territory            | None,Commercial,Domestic,Restricted,Use Permit                                                                                                                                                                                           |
+                                                                                                                                                                                    |
 
 @ScenarioId:9325
 	Scenario: [56651] Pesticide Data - EPA Expiration date validation (Delaware - July 1st no more than two years out)
@@ -431,3 +401,54 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
+
+
+@ScenarioId:9393
+	Scenario: [26827] UPC Assessment Details
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I generate a random UPC number and save as: UPC26827
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I save the product information as: TestCase26827
+	Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+	Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+		| Retailer |
+		| CVS      |
+	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC26827, container type: Plastic Container and size: 12 do not click continue
+	And I click continue
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then in the Additional Documents to Provide page I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given If purchase details are showing click confirm order
+	And I navigate to the home page
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase26827)
+	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase26827
+	And I confirm the Product UPC window has opened
+	Then I check for the following columns in UPC Retailer and Feed
+	| Column Name |
+	| UPC Number  |
+	| Container   |
+	| Size        |
+	| WeightSize  |
+	| Fluid Size  |
+	| Added       |
+	| Archived    |
+	| My Pkg ID   |
+	| CasePack    |
+	| Qty In Case |
+	| NEM         |
+	Then In UPC Retailer and Feed I check that the following sections contain the corresponding titles: 
+	| Section Name | Column Names													   | Column Numbers       |
+	| DOT          | UN,HazClass,Pkg Group,Ltd Qty,DOT Pkging Code,Exception,Sp Permit | 12,13,14,15,16,17,18 |
+	| IMDG         | UN,HazClass,Pkg Group,Ltd Qty									   | 19,20,21,22          |
+	| IATA         | UN,HazClass,Pkg Group,Ltd Qty									   | 23,24,25,26          |
+	| TDG		   | UN,HazClass,Pkg Group,Ltd Qty									   | 27,28,29,30          |

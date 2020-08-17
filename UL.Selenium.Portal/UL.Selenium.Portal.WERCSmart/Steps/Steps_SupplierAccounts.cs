@@ -47,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.ThenIClickOnNewSubscription();
 			var subEnrollTable = new Table("Articles", "Enhanced Articles",
 				"Formulated Products", "Feature Plan", "Support Services Plan");
-			subEnrollTable.AddRow("Up to 400 Product(s)", "Up to 400 Product(s)", "Up to 400 Product(s)", "Standard", "Bronze");
+			subEnrollTable.AddRow("Up to 6000 Product(s)", "Up to 6000 Product(s)", "Up to 6000 Product(s)", "Standard", "Bronze");
 			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
 			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
 			myPay.ThenISelectPaymentMethodX("Credit Card");
@@ -59,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myPay.ThenInTheThankYouScreenIClickHome();
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
-			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("400", "400", "400");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("6000", "6000", "6000");
 
 			//My Packaging Type
 			myHome.ThenIClickOnUserItem("My Account");
@@ -96,6 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Supplier/Vendor id 
 			myHome.ClickItemInNavigationPanel("Retail Partners");
 			myRetailPartner.SelectRetailer("Wal-Mart/SAM'S CLUB");
+			
 			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
 			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
 			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
@@ -104,6 +105,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var brandTable = new Table("Supplier ID", "Company or Brand Name");
 			brandTable.AddRow("123456", "TestBrand");
 			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable);
+
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Sears/K-Mart");
+			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
+			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput("TestBrand");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
+			var brandTable2 = new Table("Supplier ID", "Company or Brand Name");
+			brandTable2.AddRow("123456", "TestBrand");
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable2);
+
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("O'Reilly");
+			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
+			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput("TestBrand");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
+			var brandTable3 = new Table("Supplier ID", "Company or Brand Name");
+			brandTable3.AddRow("123456", "TestBrand");
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable3);
 
 			//create a product for Walmart data tier 4.2 
 			myProductsetup.CreateProductConditionerAndTakeToSubmitted("product1", "Conditioner");
@@ -1128,7 +1151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myAccount.ThenIClickOnNewSubscription();
 			var subEnrollTable = new Table("Articles", "Enhanced Articles",
 				"Formulated Products", "Feature Plan", "Support Services Plan");
-			subEnrollTable.AddRow("Up to 400 Product(s)", "Up to 400 Product(s)", "Up to 400 Product(s)", "Standard", "Bronze");
+			subEnrollTable.AddRow("Up to 6000 Product(s)", "Up to 6000 Product(s)", "Up to 6000 Product(s)", "Standard", "Bronze");
 			mySubscriptionEnrollment.ThenISelectTheFollowingEnrollmentOptions(subEnrollTable);
 			mySubscriptionEnrollment.ThenIClickOnX("Checkout");
 			myPay.ThenISelectPaymentMethodX("Credit Card");
@@ -1140,7 +1163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myPay.ThenInTheThankYouScreenIClickHome();
 			myHome.ThenIClickOnUserItem("My Account");
 			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Subscription Information");
-			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("400", "400", "400");
+			myAccount.ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles("6000", "6000", "6000");
 
 			//My Packaging Type
 			myHome.ThenIClickOnUserItem("My Account");
@@ -1184,7 +1207,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
 			var brandTable = new Table("Supplier ID", "Company or Brand Name");
 			brandTable.AddRow("123456", "TestBrand");
-			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable);		
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable);
+
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("Sears/K-Mart");
+			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
+			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput("TestBrand");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
+			var brandTable2 = new Table("Supplier ID", "Company or Brand Name");
+			brandTable2.AddRow("123456", "TestBrand");
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable2);
+
+			myHome.ClickItemInNavigationPanel("Retail Partners");
+			myRetailPartner.SelectRetailer("O'Reilly");
+			myRetailPartner.IConfirmTheRetailerDetailsPageHasLoaded();
+			myRetailPartner.GivenIClickOnTheAddNewSupplierIDLink();
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput("123456");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput("TestBrand");
+			myRetailPartner.GivenInTheAddNewSupplierDialogIClickSave();
+			var brandTable3 = new Table("Supplier ID", "Company or Brand Name");
+			brandTable3.AddRow("123456", "TestBrand");
+			myRetailPartner.ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(brandTable3);
 
 			//Save account and update TReVor data
 			Report.Info(savedAs + " Created");

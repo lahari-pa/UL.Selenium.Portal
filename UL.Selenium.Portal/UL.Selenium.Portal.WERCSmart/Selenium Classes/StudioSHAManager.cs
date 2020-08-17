@@ -1673,6 +1673,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return true;
 		}
+	
+		public bool CheckTheFollowingSectionTitles(Table table)
+		{
+
+			foreach (TableRow row in table.Rows)
+			{
+				var columnNamesArr = row["Column Names"].ToString().Split(',');
+				var columnSectionsArr = row["Column Numbers"].ToString().Split(',');
+
+				for (int i = 0; i < columnNamesArr.Count(); i++)
+				{
+					IWebElement section = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//tr[@class='DarkBack'][2]//th[" + columnSectionsArr[i] + "]"), 2);
+	
+					if (!section.Text.Contains(columnNamesArr[i]))
+					{
+						return false;
+					}
+
+				}
+			}
+
+			return true;
+		}
 
 	}
 

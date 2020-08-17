@@ -74,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickEpaKellyServicesLink()
 		{
-			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> links = this.containerElement.FindElements(By.XPath(@".//div[@class='panel-heading']/following-sibling::div//span[contains(text(),'Update WERCSmart data with EPA data through Kelly Services')]"));
+			System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> links = this.containerElement.FindElements(By.XPath(@".//div[@class='panel-heading']/following-sibling::div//span[contains(text(),'Update WERCSmart data with EPA data through Kelly Solutions')]"));
 			if (links == null || links.Count == 0)
 			{
 				Report.Info("No (span) links showing with text 'Update WERCSmart data...'");
@@ -415,19 +415,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
-		public bool CheckTheFollowingSectionTitles(Table table)
-		{
-			foreach (TableRow row in table.Rows)
-			{
-				IWebElement section = this.containerElement.FindElement(By.XPath("//tr[@class='DarkBack'][2]//th[" + row["Section"] + "]"), 2);
-				if (section.Text != row["Column Name"])
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
+		
 
 		public bool EnterExpirationDateForStatePesticideReigstration(string date, string state)
 		{

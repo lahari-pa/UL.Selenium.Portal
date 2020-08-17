@@ -205,3 +205,76 @@ Then I check that Walmart and all of its affiliates are not available
 Then I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase96708
 # Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase96708
+
+
+
+@ScenarioId:9399
+Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
+Then I save the product information as: TestCase1234
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Calcium
+And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+Given I select the following retailers in the Select Retailers popup list view:
+| Retailer              |
+| CVS                   |
+| Dollar General        |
+| Family Dollar         |
+| Dick's Sporting Goods |
+| Amazon                |
+| Best Buy              |
+Given I click Done in the Select Retailers popup
+And The selected retailers on the Retailer page should be:
+| Retailer              |
+| CVS                   |
+| Dollar General        |
+| Family Dollar         |
+| Dick's Sporting Goods |
+| Amazon                |
+| Best Buy              |
+Then I select the following retailers in the Retailer page
+| Retailers      |
+| CVS            |
+| Dollar General |
+Then I click the delete icon in the Retailer page
+And The selected retailers on the Retailer page should not be:
+| Retailer              |
+| CVS                   |
+| Dollar General        |
+Given I click 'Add Retailers' in the Retailers page
+Then The following retailers in the Select Retailers popup list view should not be selected
+| Retailers      |
+| CVS            |
+| Dollar General |
+Given I click Done in the Select Retailers popup
+Given I click continue
+And I click the 'Add UPC' button
+And I confirm that retailer "CV" is not present under the 'Destination Retailers' column in the UPC table
+And I confirm that retailer "DG" is not present under the 'Destination Retailers' column in the UPC table
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase1234
+
+
+@ScenarioId:9378
+Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+|           | calcium       | 100     |                     |            |             |
+Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+Then In the 'Select Retailers' window I select the retailer: Albertsons Companies
+Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Albertsons Companies appear in alphabetical order
+Then I select the following retailers in the Retailer page
+| Retailers            |
+| Albertsons Companies |
+Then I click the delete icon in the Retailer page
+Then In the 'Select Retailers' window I select the retailer: Wal-Mart/SAM'S CLUB
+Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order

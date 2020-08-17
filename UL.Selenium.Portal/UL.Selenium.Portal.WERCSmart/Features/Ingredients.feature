@@ -102,7 +102,7 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Given for ingredient: Butane I set Public Disclosure checkbox to checked: false
 	Then for ingredient: Butane the Trade Secret field is enabled
 	Then in the Ingredients page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
 @ScenarioId:908
@@ -123,7 +123,7 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Then for ingredient: Butane the Public Name field is enabled
 	Then for ingredient: Butane I confirm the Public Name selectbox contains names for selection
 	Then in the Ingredients page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
 
 #CLF - this is basically the same as 65470
@@ -141,7 +141,7 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then for ingredient: Butane the Publicly Disclosed field is disabled
 	Then for ingredient: Butane the Public Name field is disabled
 	Then in the Ingredients page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
 
 @ScenarioId:905
@@ -160,7 +160,7 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Then for ingredient: Butane I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
 	Then for ingredient: Butane I select Public Name: Butane
 	Then in the Ingredients page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
 
 @ScenarioId:904
@@ -181,7 +181,7 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 		| Trade Secret?       | checkbox |
 		| Public Name         | select   |
 	Then in the Ingredients page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 
 @ScenarioId:903
@@ -199,7 +199,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 		| Butane        | 50      | false               | true        |            |
 	Then in the Ingredients page I click Continue
 	Then a Warning popup dialog should appear with the message: Your product registration contains a 3rd-Party Formula that needs to be updated for it to be included in chemical-policy or sustainability assessments conducted by retailers or in GoodGuide ratings. We have sent a notification to your 3rd-Party Formulator requesting that the ingredient's Data Use Tier consent, and the public disclosure status of its ingredients, be updated. Please continue with this product registration, but note that the chemical-policy or sustainability assessment results may change if, and when, your 3rd-Party Formulator authorizes its ingredient to be included in such programs.
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
 
 @ScenarioId:910
@@ -222,7 +222,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.
 	Then on the Neonicotinoid Warning Page I should see a link with text: EPA website which links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators
 	Then in the Neonicotinoid Warning page I click Continue
-	And I should see the Regulatory Information 1 Page
+	And I should see the Waste Classification Data Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
 
 @ScenarioId:913
@@ -268,7 +268,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Then I should see an error message: Formulation must total or exceed 100%.
 	Given I change the percent field to 100
 	Given in the Ingredients page I click Continue
-	Then I should see the Regulatory Information 1 Page
+	Then I should see the Waste Classification Data Page
 	Given In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	Then I should not see an error message: Formulation must total or exceed 100%.
@@ -376,7 +376,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 		| Sodium hydroxide | 10      | false               | false       |            |
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Dye X         | 10      | false               | false       |            |
+		| Bromate         | 10      | false               | false       |            |
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Sodium chloride | 10      | false               | false       |            |
@@ -592,6 +592,8 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	And for ingredient: Water I set Public Disclosure checkbox to checked: true
 	#Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1
 	And I verify the Transparency Score displays 100.00%
+
+	And I click continue
 	#Given I close the current window
 	#Given I open a new window
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -601,6 +603,8 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then I click on the Row Action: Edit
 	Then the Product Editor page should be loaded
 	And the product saved as: FirstProduct should be visible in editor
+
+	#Looks like th issue is with the ingredients page not showing, instead its the additional product information page
 	And In the ingredients table the ingredients should be in the following order
 		| Name  |
 		| Water |
@@ -623,3 +627,62 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 		| Water  |
 		| Butane |
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
+
+
+
+
+@ScenarioId:9377
+	Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561a (The Product - Enter Product Name: Pesticide Testing Product and select Type of Product): Insecticide - Fogger
+Then I save the product information as: TestCase133335
+	And I set the Primary Physical State option to: Aerosol
+	And I set the Secondary Physical State option to: Liquid spray
+	And I check the 'I do not have exact' checkbox for field: pH
+	And I set the pH option to: 4 - 6.9 
+	And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then option to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
+	And in the New Product page I click Continue
+	# Additional Product Information page
+	And I should see the Additional Product Information Page
+	Given I call Shared Step 105379 Additional Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
+	# Ingredient Page
+	And I should see the Ingredients Page
+	Then I add the following ingredients:
+		| ComponentName			     	| Percent | PublicallyDisclosed | TradeSecret | PublicName |
+		| Glutens, corn    | 50      | false               | false       |            |
+		| Butane             | 0.1     | false               | false       |            |
+		| Oils, cedarwood, Texan    | 49.9    | false               | false       |            |
+	Given in the New Product page I click Continue
+	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: You've indicated the product is not a pesticide under the EPA's Federal Insecticide and Rodenticide Act (FIFRA).
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: The product type is typically considered a pesticide, and there are ingredients present in the registration that are known to be used in Pesticide products.
+	Then I confirm the table in the popup view has the following column titles
+	| Titles          |
+	| CAS Number      |
+	| Name            |
+	| Active or Inert |
+	Then I confirm the table in the popup view has following column data
+	| CAS Number | Name                   | Active or Inert |
+	| 66071-96-3 | Glutens, corn          | Active          |
+	| 68990-83-0 | Oils, cedarwood, Texan | Active          |
+    Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following statement in the popup view: If you need to revise your selection for Pesticides, please use the Product Type tab and go to the Additional Product Information section to make your revisions. Or, revise your ingredient information, ensuring accuracy. Should all indications and ingredients be correct and the product is not a pesticide, please indicate below.
+	Then I confirm I see a checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I confirm I see the following buttons in the popup view:
+	| Button  |
+	| Go back |
+	| Confirm |
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
+	And I should see the Ingredients Page
+	Then in page Ingredients Page I should see error: You must either confirm that your product is not a pesticide, change your product details to confirm that it is a pesticide, or change your ingredients to remove the pesticide ingredients.
+	Then I click continue
+	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+	## Regulatory 1 Page Details
+	And I should see the Waste Classification Data Page
+    When In the New Product page I click tab: Product Characteristics
+	And I click the page heading: Ingredients
+	And I click continue
+	Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
+	Given I click the Home navigation icon
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335

@@ -158,6 +158,9 @@
     <Reference Include="UL.Automation.Utilities.SpecFlow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UL.Automation.Utilities.SpecFlow.2.0.37\lib\net461\UL.Automation.Utilities.SpecFlow.dll</HintPath>
     </Reference>
+    <Reference Include="UL.WERCSmart.Library.Testing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UL.WERCSmart.Library.Testing.1.0.0\lib\UL.WERCSmart.Library.Testing.dll</HintPath>
+    </Reference>
     <Reference Include="Utf8Json, Version=1.3.7.0, Culture=neutral, PublicKeyToken=8a73d3ba7e392e27, processorArchitecture=MSIL">
       <HintPath>..\packages\Utf8Json.1.3.7\lib\net45\Utf8Json.dll</HintPath>
     </Reference>
