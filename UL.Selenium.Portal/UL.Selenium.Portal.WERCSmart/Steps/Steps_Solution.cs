@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using UL.Automation.Utilities.Functions;
 using System;
+using UL.Automation.Selenium.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -161,7 +162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string url = new UlSolutionCenter().GetSectionLogoUrl("Navigator");
 			Bitmap actualBitmap = GeneralUtilities.CreateBitmapFromURL(url);
 			EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Images.NAVIGATOR-LOGO TM.png", out string filePath);
-			if(filePath==null)
+			if (filePath == null)
 			{
 				Report.Failure("Failed to extract dependency file");
 				return;
@@ -178,7 +179,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure($"The Navigator Logo was not as expected: {ex.Message}");
 			}
-			
+
 		}
 	}
 }

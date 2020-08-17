@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @wercsmart
 @API
 @Homepage
@@ -10,6 +10,7 @@
 Feature:ItemSync
 
 # uses 736EA04E-9654-49B3-BB55-C66C5CEB55A3(WM) as the requesting retailer
+@ScenarioId:9792
 Scenario: [API]ItemSync
 	Given I generate a random UPC number and save as: UPC108810
 	Given I generate a random UPC number and save as: UPC2
@@ -21,6 +22,7 @@ Scenario: [API]ItemSync
 
 @tfs_design
 # uses 16793FA3-452C-45B6-AF48-969AFDF58216(TG) as the requesting retailer
+@ScenarioId:9791
 Scenario: [108810]ItemSync
 	Given I generate a random UPC number and save as: UPC108810
 	Given I authenticate ItemSync username: QATest, password: c06Q3@!gRzNzqk

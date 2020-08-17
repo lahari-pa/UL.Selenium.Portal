@@ -117,23 +117,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickFirstSupplier()
 		{
 			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath(".//table[@id='listSupplierInfo']//tr[not(@class='jqgfirstrow')]"), 2);
+			while (firstSupplier == null)
+			{
+				Delay.Seconds(1);
+			}
 			return firstSupplier.TryClick();
+
 		}
 
 		public bool ClickCategory(string category)
 		{
-			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();			
-			
+			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();
+
 			IWebElement foundCategory = categories.First(x => x.Text == category);
-			if(foundCategory==null)
+			if (foundCategory == null)
 			{
 				Report.Info($"Did not find the category: {category}");
 				return false;
 			}
 			Report.Info($"Found the category: {category}, attempting to click the category");
 			return foundCategory.TryClick();
-	
-			
+
+
 		}
 
 		public IWebElement CategoryHeaders => this.containerElement.WaitUntilElementVisible(By.XPath($".//ul[contains(@class,'ui-tabs-nav')]"), 2);
@@ -141,7 +146,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckCategoriesPresent()
 		{
 			IWebElement categoryHeaders = this.containerElement.WaitUntilElementVisible(By.XPath($"//div[@id='dialog-supplier-manager']//ul[contains(@class,'ui-tabs-nav')]"), 30);
-			if(categoryHeaders==null)
+			if (categoryHeaders == null)
 			{
 				return false;
 			}
@@ -149,24 +154,71 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool CheckForSupplierManagerColumn(string columnTitle)
+		{
+			IWebElement subscriptionStatusColumn = this.containerElement.FindElement(By.XPath($".//th//div[contains(text(), '{columnTitle}')]"), 2);
+
+			if (subscriptionStatusColumn == null)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public bool CheckForSupplierManagerColumnValue(string columnTitle, string status)
+		{
+			IWebElement subscriptionStatus = this.containerElement.FindElement(By.XPath($".//td[@aria-describedby='listSupplierInfo_{columnTitle}']"), 2);
+			string statusText = subscriptionStatus.Text;
+			return statusText == status;
+		}
+
+		public bool CheckForSubscriptionTabColor(string color)
+		{
+			switch (color)
+			{
+				case "black":
+					color = "rgba(85, 85, 85, 1)";
+					break;
+				case "blue":
+					color = "rgba(0, 0, 255, 1)";
+					break;
+				case "red":
+					color = "rgba(255, 0, 0, 1)";
+					break;
+				case "yellow":
+					color = "rgba(255, 255, 0, 1)";
+					break;
+				default:
+					break;
+			}
+			string fontColor = this.containerElement.FindElement(By.XPath($"//li/a[contains(text(), 'Subscription')]"), 2).GetCssValue("color").ToString();
+			return color == fontColor;
+		}
+
+		public bool CheckForSubscriptionTabBackgroundColor(string color)
+		{
+			string style = this.containerElement.FindElement(By.XPath($"//li/a[contains(text(), 'Subscription')]"), 2).GetAttribute("style");
+			return style.Contains("background-color") && style.Contains(color);
+		}
+
 		public bool CategoryIsActive(string category)
 		{
 			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();
 			IWebElement foundCategory = categories.First(x => x.Text == category);
-			if(foundCategory==null)
+			if (foundCategory == null)
 			{
 				Report.Info("Did not find the catagory, the element was null");
 				return false;
 			}
-			if(foundCategory.GetAttribute("class").Contains("active"))
+			if (foundCategory.GetAttribute("class").Contains("active"))
 			{
 				return true;
 			}
 			return false;
 		}
-		
 
-		public List<string>ColumnValues(string columnTitle)
+
+		public List<string> ColumnValues(string columnTitle)
 		{
 			List<IWebElement> tableHeaders = this.containerElement.FindElements(By.XPath($".//table[@class='DataTierConsentGrid']//tr[@class='AltItem']//th"), 2).ToList();
 			List<string> tableHeaderStrings = new List<string>();
@@ -222,8 +274,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ColumnIncludes(string columnTitle, List<string> expectedValues)
 		{
-			var differenceQuery1 = expectedValues.Except(this.ColumnValues(columnTitle));			
-			return differenceQuery1.IsNullOrEmpty(); 			
+			var differenceQuery1 = expectedValues.Except(this.ColumnValues(columnTitle));
+			return differenceQuery1.IsNullOrEmpty();
 		}
 
 		public bool DataConsentTableIsPresent()
@@ -247,16 +299,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			int i = 0;
 			bool headersCorrect = true;
-			if(expectedHeaders.Count!=tableHeaderStrings.Count)
+			if (expectedHeaders.Count != tableHeaderStrings.Count)
 			{
 				Report.Info("The number of headers found did not match the expected number of headers");
 				return false;
 			}
-			foreach(var item in tableHeaderStrings)
+			foreach (var item in tableHeaderStrings)
 			{
 				Report.Info($"The header found was: {item}");
 				Report.Info($"The header expected was: {expectedHeaders[i]}");
-				if (item!=expectedHeaders[i])
+				if (item != expectedHeaders[i])
 				{
 					headersCorrect = false;
 					Report.Info($"The header found was not as expected");
@@ -275,7 +327,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EmailColumnContainsEmailAddresses()
 		{
-			
+
 			var tableRowStrings = this.ColumnValues("Email");
 			bool emailValid = true;
 			int y = 1;
@@ -298,7 +350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					emailValid = false;
 				}
 				y++;
-					
+
 			}
 
 			return emailValid;
@@ -323,7 +375,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info($"The date: {date} was not is the valid format of mm-dd-yyyy");
 					dateValid = false;
 				}
-				
+
 
 			}
 			return dateValid;
@@ -430,7 +482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool RetailsAreInAlphabeticalOrder()
 		{
-			IList <IWebElement> retailers = this.containerElement.FindElements(By.XPath("//div[@class='ui-tabs-panel ui-widget-content ui-corner-bottom']//tr//td[1]"), 2);
+			IList<IWebElement> retailers = this.containerElement.FindElements(By.XPath("//div[@class='ui-tabs-panel ui-widget-content ui-corner-bottom']//tr//td[1]"), 2);
 			List<string> retailerNames = new List<string>();
 			foreach (var retailer in retailers)
 			{
@@ -439,7 +491,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			var orderedList = retailerNames.OrderBy(item => item.Split('.').First());
 
-			for (int i=0;i<retailerNames.Count;i++)
+			for (int i = 0; i < retailerNames.Count; i++)
 			{
 				if (retailerNames.ElementAt(i) != orderedList.ElementAt(i))
 				{

@@ -343,6 +343,7 @@ Scenario: [73326] Searching an Ingredient
 	Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
 	And I navigate to the home page
 
+@ScenarioId:10027
 Scenario: [70516] Add and Remove Packaging Type
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
