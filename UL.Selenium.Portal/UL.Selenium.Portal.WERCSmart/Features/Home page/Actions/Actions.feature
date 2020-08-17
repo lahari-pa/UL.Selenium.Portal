@@ -148,7 +148,7 @@ Scenario: [56218] My Products grid Actions - View Navigation
 
 #actions/documents
 @ScenarioId:434
-@tfs_design
+
 Scenario: [56219] My Products grid Actions - Documents navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
@@ -167,6 +167,7 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	#Given I close the document
 	Then I confirm that a file is produced called testdoc.pdf and save as savedas56219PDF
 	Then I Check that the file saved as: savedas56219PDF contains text
+	#match on set text snipper
 	Then I switch to the window with handle saved as: MainWindowHandle
 	Then I delete the file saved as savedas56219PDF
 	Then I close All the current windows except the Main Window

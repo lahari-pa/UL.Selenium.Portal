@@ -590,6 +590,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						int x = 0;
 						while(x<10)
 						{
+							var modalD = new ModalDialog();
+							if (modalD.ContainerVisible())
+							{
+								delDialog.ClickDelete();
+							}
 							row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 							if(row==null)
 							{
@@ -599,7 +604,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							try
 							{
 
-
 								toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
 								toggleButton.TryClick();
 								deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 10);
@@ -607,8 +611,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								delDialog.WaitForContainerToBeVisible();
 								Delay.Seconds(10);
 								GeneralUtilities.Wait_for_load_finish();
+								if (modalD.ContainerVisible())
+								{
+									delDialog.ClickDelete();
+								}
+								row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+								if (row == null)
+								{
+									Report.Info($"The products grid was emtpy");
+									return true;
+								}
+
 								Report.Info("The products grid was not empty, waiting 10 more seconds and checking again");
-								Delay.Seconds(30);
+								Delay.Seconds(15);
 								x++;
 							}
 							catch

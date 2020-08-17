@@ -1091,13 +1091,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Delay.Seconds(2);
 
-			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			{
-				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			}
-			//Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-			//MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			//if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			//{
+			//	//Should this show on this page? this step is for the additional docs page? Any examples?
+			//	Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+			//	MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			//	//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
+			//}
+		
 			Delay.Seconds(2);
 			Report.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");

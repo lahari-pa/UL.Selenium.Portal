@@ -2156,6 +2156,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				
 
 			}
+			SeleniumBrowser.WebBrowser.SwitchTo().Window(mainHandle);
+
 
 		}
 
