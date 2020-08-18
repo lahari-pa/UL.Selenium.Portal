@@ -201,6 +201,57 @@
 
 Feature: ChooseGoodGuide.com Scenarios
 
+
+Scenario: [142371] Battery - Data Consents
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
+Given I generate a random UPC number and save as: UPC142371
+Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+# Ensure that you are presented with the Formulation > Batteries screen
+And I should see the Formulation > Batteries Page
+# Ensure that the text in the blue box matches the screenshot attached to this TFS test case
+Given I confirm the Formulation > Batteries displays the correct text
+# Ensure that there are two options to click: 'Granted' and 'Declined'
+# Select 'Granted' for the question 'Consent to Tier 2.1, 2.2, 4.2 Data Uses'
+Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Declined
+Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+Given I click continue
+Given I call Shared Step 132375 (Waste Classification Data - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer  |
+| Walgreens |
+Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC142371 with container type: Plastic Container size: 2 and quantity: 2 do not click continue
+Given I click continue
+#Given I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
+Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+Given I set the WHMIS-compliant Safety Data Sheet, English and French-Canadian field to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+Given I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+Given I click continue
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+Given I click continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor   | Odor Threshold | Partition Coefficient | Personal Protection Equipment | Viscosity |
+| Buff       | 2                        | 2                       | Banana | Not applicable | 2                     | Mask                          | 2         |
+Given I append the following into the comments field: test
+Given I click continue
+Given I call Shared Step 69358 (Data Acceptance - Click Summary Button)
+Given A Summary page should open in a new browser tab
+# In the Summary screen, confirm that for the question 'Consent to Tier 2.1, 2.2, 4.2 Data Uses', it shows the answer 'Accept'
+Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Accept
+Given I close the Data Summary tab
+Given I click the Home navigation icon
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: ThisProduct
+
+
+
 Scenario: My new scenario
 
 Given I Submit a new product which has a Case UPC and a regular UPC
@@ -401,7 +452,144 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 # Confirm that the Cart icon in the left navigation panel shows there are 0 items in the cart
 
 
+Scenario: [140292] Volatile Organic Compounds - CSV File
 
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+# Click on My Reports in the left navigation; My Reports screen displays
+Given I click the My Reports icon in the QuickLinks Pane
+# Select Volatile Organic Compounds; right side of the screen becomes active
+Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
+# From the Select File Type dropdown select: CSV
+Then I select CSV from the Select File Type
+# Click on Request Report button: Report download pop up appears
+# Open the report (in Chrome it will be on the bottom of the browser)
+Then I select the Request Report button excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
+Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+# Confirm report opens properly without any errors and as a csv file
+# Close Report
+# Click Close button on Report Download pop up, My Reports screen refreshes
+# Confirm Volatile Organic Compounds report name appears in the history table
+# File Type  appears as: CSV
+Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
+Given I delete the excel file saved as Chemicals of Concern
+# Date Requested column should show today's date and time stamp
+# Requested By Column should show User Name
+Then I confirm the most recent file has the following information Report Name: Product Types Registered File Type: CSV Date Requested: 1/1/1111 Requested By: WERCS Test_Automation_ProductsAccount
+# In the Actions column you should see the download button
+# Click Download button; Report download pop up shows
+Then I click the Download button for the most recent Report
+# Open the report (in Chrome it will be on the bottom of the browser)
+# Confirm report opens properly without any errors
+# Close the report
+# Close Report download pop up
+Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern (1).csv and save as Chemicals of Concern (1)
+Given I delete the excel file saved as Chemicals of Concern (1)
+
+
+Scenario: [140293] Waste Classification Summary - CSV File
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+# Click on My Reports in the left navigation; My Reports screen displays
+Given I click the My Reports icon in the QuickLinks Pane
+# Select Waste Classification Summary; right side of the screen becomes active
+Given Under the Supplier Reports menu I choose: Waste Classification Summary
+# From the Select File Type dropdown select: CSV
+Then I select CSV from the Select File Type
+# Click on Request Report button: Report download pop up appears
+Then I select the Request Report button excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
+Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+# Open the report (in Chrome it will be on the bottom of the browser)
+# Confirm report opens properly without any errors and as a csv file
+# Close Report
+# Click Close button on Report Download pop up, My Reports screen refreshes
+# Confirm Waste Classification Summary report name appears in the history table
+# File Type  appears as: CSV
+Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
+Given I delete the excel file saved as Chemicals of Concern
+# Date Requested column should show today's date and time stamp
+# Requested By Column should show User Name
+Then I confirm the most recent file has the following information Report Name: Product Types Registered File Type: CSV Date Requested: 1/1/1111 Requested By: WERCS Test_Automation_ProductsAccount
+# In the Actions column you should see the download button
+# Click Download button; Report download pop up shows
+Then I click the Download button for the most recent Report
+# Open the report (in Chrome it will be on the bottom of the browser)
+# Confirm report opens properly without any errors
+# Close the report
+# Close Report download pop up
+Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern (1).csv and save as Chemicals of Concern (1)
+Given I delete the excel file saved as Chemicals of Concern (1)
+
+
+
+Scenario: [140309] Chemicals of Concern - CSV File
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+# Click on My Reports on the left navigation; My Reports screen displays
+Given I click the My Reports icon in the QuickLinks Pane
+# Select Chemicals of Concern; right side of the screen becomes active
+Given Under the Supplier Reports menu I choose: Chemicals of Concern
+# From the Select File Type dropdown select: CSV
+Then I select CSV from the Select File Type
+# Click on Request Report button; Report download pop up appears with green text: "This report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Then I select the Request Report button excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
+Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+# Close Report Download pop up; My Reports screen refreshes
+# Confirm that you receive email:   WERCSmart Report is Ready: Chemicals of Concern   The report you requested is now available for download. Please log into your WERCSmart account and go to the My Reports menu option. Use the Download option for the report under Actions. If you're already on the My Report area, please refresh your browser to show the Download action option.  The link to the report will expire in 30 days.
+# In My Reports screen confirm the report Chemicals of Concern appears on the history table
+# File Type  appears as: CSV
+Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
+Given I delete the excel file saved as Chemicals of Concern
+# Date Requested column should show today's date and time stamp
+# Requested By Column should show User Name
+Then I confirm the most recent file has the following information Report Name: Product Types Registered File Type: CSV Date Requested: 1/1/1111 Requested By: WERCS Test_Automation_ProductsAccount
+# In the Actions column you should see the download button
+# Click Download button; Report Download pop up shows
+Then I click the Download button for the most recent Report
+# Open the report (in Chrome it will be on the bottom of the browser)
+# Confirm report opens properly without any errors and as a csv file
+# Close Report
+# Close Report download pop up
+Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern (1).csv and save as Chemicals of Concern (1)
+Given I delete the excel file saved as Chemicals of Concern (1)
+
+
+Scenario: [141799] Chemicals of Concern- CSV Zip File
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+
+# Click on My Reports in the left navigation; My Reports screen displays
+Given I click the My Reports icon in the QuickLinks Pane
+
+# Select Chemicals of Concern; right side of the screen becomes active
+Given Under the Supplier Reports menu I choose: Chemicals of Concern
+
+# From the Select File Type dropdown select: CSV
+Then I select CSV from the Select File Type
+
+# Select Zip Report checkbox
+Given I select the Zip Report Checkbox
+# Click on Request Report button: Report download pop up appears with green text: "This report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Then I select the Request Report button excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
+Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+# Close Report Download pop up; My Reports screen refreshes
+#  Confirm that you receive email:   WERCSmart Report is Ready: Chemicals of Concern   The report you requested is now available for download. Please log into your WERCSmart account and go to the My Reports menu option. Use the Download option for the report under Actions. If you're already on the My Report area, please refresh your browser to show the Download action option.  The link to the report will expire in 30 days.# In My Reports screen confirm the report Chemicals of Concern appears on the history table
+# File Type  appears as: CSV (Zip)
+# Date Requested column should show today's date and time stamp
+Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
+Given I delete the excel file saved as Chemicals of Concern
+
+# Requested By Column should show User Name
+Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV (Zip) Date Requested: 1/1/1111 Requested By: WERCS Test_Automation_ProductsAccount
+
+# In the Actions column you should see the download button
+# Click Download button; Report download pop up shows
+Then I click the Download button for the most recent Report
+
+# Open the report (in Chrome it will be on the bottom of the browser) File Zip pop up window opens
+# Double click on the file
+# Confirm report opens properly without any errors and as a csv file# Close Report# Close Report Download pop up
+Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern (1).csv and save as Chemicals of Concern (1)
+Given I delete the excel file saved as Chemicals of Concern (1)
 
 
 

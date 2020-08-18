@@ -23,14 +23,36 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 		//	Report.IsTrue(webElementsObject.CheckForMessageAtTheTopOfIngredientsPage(), "Failed to find message at the top of the ingredients page", "Successfully found message at the top of the ingredients page");
 		//}
 
-
+		[StepDefinition(@"I confirm the Formulation > Batteries displays the correct text")]
+		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText()
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.CheckTextInForumulationBatteriesPage(), "The text in the Formulation > Batteries page displayed the incorrect text", "The text in the Formulation > Batteries page displayed the correct text");
+		}
 
 		[StepDefinition(@"I select (Excel|CSV) from the Select File Type")]
 		public void ThenISelectCSVFromTheSelectFileType(string excelOrCSV)
 		{
 			WebElements webElementsObject = new WebElements();
 			Report.IsTrue(webElementsObject.SelectFromSelectFileType(excelOrCSV), "Failed to select " + excelOrCSV, "Successfully selected " + excelOrCSV);
+			Delay.Seconds(9999);
 		}
+
+
+		[StepDefinition(@"I select the Zip Report Checkbox")]
+		public void GivenISelectTheZipReportCheckbox()
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.SelectZipReportCheckbox(), "Failed to select Zip Report Checkbox", "Successfully selected Zip Report Checkbox");
+		}
+
+		[StepDefinition(@"I see a Report Download popup with the following text: (.*)")]
+		public void GivenISeeAReportDownloadPopupWithTheFollowingText()
+		{
+			WebElements webElementsObject = new WebElements();
+			Report.IsTrue(webElementsObject.SelectZipReportCheckbox(), "Failed to find the correct text in the popup", "Successfully founded the correct text in the popup");
+		}
+
 
 		[StepDefinition(@"I select the Request Report button (excel|html) file is produced called (.*) and save as (.*)")]
 		public void ThenISelectTheRequestReportButton(string filetype, string file, string savedAs)
@@ -91,7 +113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 			Delay.Seconds(10);
 		}
 
-		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX) Date Requested: (.*) Requested By: (.*)")]
+		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV (Zip)| XLSX (Zip)) Date Requested: (.*) Requested By: (.*)")]
 		public void ThenIConfirmTheMostRecentFileHasTheFollowingInformationReportNameWasteClassificationSummaryFileTypeCSVDataRequestedRequestedByWERCSTest_Automation_ProductsAccount(string reportName, string type, string dateRequested, string requestedBy)
 		{
 			WebElements webElementsObject = new WebElements();

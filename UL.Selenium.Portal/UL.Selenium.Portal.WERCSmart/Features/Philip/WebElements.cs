@@ -20,6 +20,47 @@ namespace UL.Selenium.Portal.WERCSmart.Philip
 
 		protected override By ContainerElementLocator => throw new System.NotImplementedException();
 
+		public bool CheckTextInForumulationBatteriesPage()
+		{
+			IWebElement displayedText = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2);
+			Report.Info("testing ---" + displayedText.Text);
+			if (displayedText.Text.Contains("Data Use Consents"))
+			{
+				Report.Info("testing1");
+			}
+			if (displayedText.Text.Contains("Direct suppliers with products containing your battery (i.e., your customers) may opt to participate in various chemical policy and product qualification programs operated by WERCSmart Recipients. Further information about these consents and data uses are provided in the Data Use Tier Disclosure section of the WERCSmart Terms of Use."))
+			{
+				Report.Info("testing2");
+			}
+			if (displayedText.Text.Contains("You have the option of allowing this battery to be included in such programs by providing the consent below. Such consent means:"))
+			{
+				Report.Info("testing3");
+			}
+			if (displayedText.Text.Contains("a. That your battery data may be utilized when UL generates aggregate usage reports, chemical screening results and transparency ratios for such Direct Supplier products (Tier 2.1),"))
+			{
+				Report.Info("testing4");
+			}
+			if (displayedText.Text.Contains("b. That the identity of ingredients in your battery (i.e., the standard chemical names or CAS Numbers) may be disclosed to your customer and the relevant WERCSmart Recipient, but only if you have marked an ingredient as publicly disclosed on the formulation page (Tier 2.2) or if applicable law requires that an ingredient be publicly disclosed, and"))
+			{
+				Report.Info("testing5");
+			}
+			if (displayedText.Text.Contains("c. That your customer can publicly disclose the identity of ingredients in your battery, but only if you have marked an ingredient as publicly disclosed (Tier 4.2)."))
+			{
+				Report.Info("testing6");
+			}
+			if (displayedText.Text.Contains("These consents do not authorize any disclosure of ingredient by percent weight to your customer, any retail Recipient, or the public."))
+			{
+				Report.Info("testing7");
+			}
+			return true;
+		}
+
+		public bool SelectZipReportCheckbox()
+		{
+			IWebElement checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='chkZip']"), 2);
+			return checkbox.TryCheck();
+		}
+
 		public bool SelectFromSelectFileType(string excelOrCSV)
 		{
 			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='fileTypeDDL']"), 2);
