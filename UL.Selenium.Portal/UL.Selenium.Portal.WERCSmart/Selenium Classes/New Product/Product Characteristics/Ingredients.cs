@@ -1542,13 +1542,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickCloseInPopupWithTitle(string title)
 		{
-			IWebElement continueButton = this.containerElement.FindElement(By.XPath("//h4[text()='" + title + "']/../following-sibling::div[@class='modal-footer']//button"), 2);
+			IWebElement continueButton = this.ContainerElement.FindElement(By.XPath("//h4[text()='" + title + "']/../following-sibling::div[@class='modal-footer']//button"), 2);
 			return continueButton.TryClick();
 		}
 		public bool CheckDeleteRowsWarningPopupContainsText(string lineOne, string lineTwo)
 		{
-			IWebElement lineOneEl = this.containerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
-			IWebElement lineTwoEl = this.containerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
+			IWebElement lineOneEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
+			IWebElement lineTwoEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
 
 			if (lineOneEl.Text == lineOne && lineTwoEl.Text == lineTwo)
 			{

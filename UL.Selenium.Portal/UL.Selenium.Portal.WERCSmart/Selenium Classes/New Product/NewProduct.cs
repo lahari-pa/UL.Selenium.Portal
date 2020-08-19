@@ -4876,7 +4876,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmOptionIsCheckedInSection(string option, string section)
 		{
-			IWebElement optionEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[text()='" + section + "']/../following-sibling::div//span[text()='" + option + "']/preceding-sibling::input"), 2);
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//label[text()='" + section + "']/../following-sibling::div//span[text()='" + option + "']/preceding-sibling::input"), 2);
 			if (optionEl.Checked())
 			{
 				return true;
@@ -4890,18 +4890,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement optionEl;
 			if (expandOrCollapse.ToLower() == "expand")
 			{
-				optionEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//em[@class='fa fa-chevron-right']"), 2);
+				optionEl = this.ContainerElement.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//em[@class='fa fa-chevron-right']"), 2);
 			}
 			else
 			{
-				optionEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@placeholder='UPC Number']/../../..//a[@title='Expand']"), 2);
+				optionEl = this.ContainerElement.FindElement(By.XPath("//input[@placeholder='UPC Number']/../../..//a[@title='Expand']"), 2);
 			}
 			return optionEl.TryClick();
 		}
 
 		public bool ConfirmUPCNumberIsDisplayedInUPCNumberField(string savedAs)
 		{
-			IWebElement optionEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@data-bind='textInput: upcNumber.field']"), 2);
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//input[@data-bind='textInput: upcNumber.field']"), 2);
 			if (optionEl.Text == savedAs)
 			{
 				return true;
@@ -4912,7 +4912,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmFieldExists(string field)
 		{
-			IList<IWebElement> fields = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='form-group has-success']"), 2);
+			IList<IWebElement> fields = this.ContainerElement.FindElements(By.XPath("//div[@class='form-group has-success']"), 2);
 
 			if (field == "UPC")
 			{
@@ -4947,7 +4947,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				field = "packType";
 			}
 
-			IWebElement fieldEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + field + ".isValid() && " + field + ".hasValue(), 'has-error': !" + field + ".isValid() }\"]"), 2);
+			IWebElement fieldEl = this.ContainerElement.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + field + ".isValid() && " + field + ".hasValue(), 'has-error': !" + field + ".isValid() }\"]"), 2);
 
 			if (field != null)
 			{
@@ -4959,7 +4959,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmLowerFieldIsBelowUpperField(string lowerField, string upperField)
 		{
-			IList<IWebElement> fields = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='form-group has-success']"), 2);
+			IList<IWebElement> fields = this.ContainerElement.FindElements(By.XPath("//div[@class='form-group has-success']"), 2);
 
 			if (lowerField == "UPC" || upperField == "UPC")
 			{
@@ -5050,8 +5050,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 			}
 
-			IWebElement lowerFieldEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + lowerField + ".isValid() && " + lowerField + ".hasValue(), 'has-error': !" + lowerField + ".isValid() }\"]"), 2);
-			IWebElement upperFieldEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + upperField + ".isValid() && " + upperField + ".hasValue(), 'has-error': !" + upperField + ".isValid() }\"]"), 2);
+			IWebElement lowerFieldEl = this.ContainerElement.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + lowerField + ".isValid() && " + lowerField + ".hasValue(), 'has-error': !" + lowerField + ".isValid() }\"]"), 2);
+			IWebElement upperFieldEl = this.ContainerElement.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + upperField + ".isValid() && " + upperField + ".hasValue(), 'has-error': !" + upperField + ".isValid() }\"]"), 2);
 
 			if (fields.IndexOf(lowerFieldEl) > fields.IndexOf(upperFieldEl))
 			{
@@ -5063,7 +5063,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmTruckIconIsDisplayingNextToUPC(string savedAs)
 		{
-			IWebElement optionEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//i[@class='fa fa-truck']"), 2);
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//i[@class='fa fa-truck']"), 2);
 			if (optionEl != null)
 			{
 				return true;
@@ -5074,7 +5074,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmCaseUPCDetailsAreCollapsedForUPC(string savedAs)
 		{
-			IWebElement optionEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//input[@data-bind='textInput: upcNumber.field']"), 2);
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//input[@data-bind='textInput: upcNumber.field']"), 2);
 			if (optionEl == null)
 			{
 				return true;
@@ -5085,7 +5085,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmCaseDropDownContainsUPC(string savedAs)
 		{
-			IWebElement optionEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']"), 2);
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']"), 2);
 			if (optionEl != null)
 			{
 				return true;
@@ -5096,7 +5096,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmCaseDropDownWithUPCIsAvailableForSelection(string savedAs)
 		{
-			IWebElement optionEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/../..//input"), 2);
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/../..//input"), 2);
 
 			if (optionEl != null)
 			{
@@ -5110,7 +5110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmSectionIsAvailableForSelection(string sectionName)
 		{
-			IList<IWebElement> options = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//label[text()=\"" + sectionName + "\"]/../following-sibling::div//div[@data-toggle='buttons']//input"), 2);
+			IList<IWebElement> options = this.ContainerElement.FindElements(By.XPath("//label[text()=\"" + sectionName + "\"]/../following-sibling::div//div[@data-toggle='buttons']//input"), 2);
 
 			if (options.Count != 2)
 			{
@@ -5139,7 +5139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckForOptionsInIndividualUPCField()
 		{
-			IList<IWebElement> options = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//option[text()='Individual UPC contained in the Case Pack']/..//option"), 2);
+			IList<IWebElement> options = this.ContainerElement.FindElements(By.XPath("//option[text()='Individual UPC contained in the Case Pack']/..//option"), 2);
 
 			if (options.Count < 2)
 			{
@@ -5151,7 +5151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmTruckIconIsDisplayedForUPC(string savedAs)
 		{
-			IWebElement truckIcon = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/following-sibling::i"), 2);
+			IWebElement truckIcon = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/following-sibling::i"), 2);
 			if (truckIcon != null)
 			{
 				return true;
