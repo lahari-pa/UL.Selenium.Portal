@@ -1866,6 +1866,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Screenshot();
 				Report.Info("Selecting the first option for the required field");
 				string option = selNewProduct.GetAllOptionsForSection(section).First();
+
 				selNewProduct.SetOptionInSection(section, option);
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(),

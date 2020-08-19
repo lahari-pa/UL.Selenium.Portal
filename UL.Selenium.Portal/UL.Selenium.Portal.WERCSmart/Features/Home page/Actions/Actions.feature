@@ -162,17 +162,11 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	Then In the Documents section I should see the following columns: Document Name, Subformat, Language, Actions
 	Then I save the current window handle to context as: MainWindowHandle
 	Given I click on the View link of the first document in Supplier Uploaded
-	#Confirm document contains text, then delete, click home icon to navigate away
-	#Then a document should open
-	#Given I close the document
 	Then I confirm that a file is produced called testdoc.pdf and save as savedas56219PDF
-	Then I Check that the file saved as: savedas56219PDF contains text
-	#match on set text snipper
+	Then I Check that the pdf file saved as: savedas56219PDF contains the text: If your product contains any kind of chemical	
 	Then I switch to the window with handle saved as: MainWindowHandle
 	Then I delete the file saved as savedas56219PDF
 	Then I close All the current windows except the Main Window
-	#STILL NOT ENDING
-	#Remove new methods that relate to window switching and closing if not used?
 	
 
 

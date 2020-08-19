@@ -2078,7 +2078,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I Check that the file saved as: (.*) contains text")]
-		public void CheckThatFileSavedAsContaisnProductCodesSavedAs(string fileSavedAs)
+		public void CheckThatFileSavedAsContainsText(string fileSavedAs)
 		{
 		
 			var thisSHADocument = new SHADocumentList();
@@ -2100,6 +2100,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var pdfText = text;
 			Report.Info($"The Found PDF Text was: {pdfText}");
 			Report.IsTrue(pdfText!=null, "PDF does not contains text","PDF does contain text");		
+
+		}
+
+		[StepDefinition(@"I Check that the pdf file saved as: (.*) contains the text: (.*)")]
+		public void CheckThatPDFFileSavedAsContainsX(string fileSavedAs,string searchText)
+		{
+
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+			Report.Info($"The Found PDF Text was: {pdfText}");
+			Report.IsTrue(pdfText.Contains(searchText), "PDF does not contain the text", "PDF does contain the text");
 
 		}
 
