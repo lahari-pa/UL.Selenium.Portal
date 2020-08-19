@@ -3135,6 +3135,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
+		[StepDefinition(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'")]
+		public void SelectConfirmRegulatoryDocumentsConfirmationQuestion()
+		{
+			Report.IsTrue(new NewProduct().CheckRegulatoryDocumentsConfirmationBox(), "Failed to tick the confirmation option", "Successfully ticked the confirmation option");
+
+		}
+
 		[StepDefinition(@"I confirm that the the option: (.*) (.*) checked for the following section: (.*)")]
 		public void ThenIConfirmThatTheTheOptionCheckedForTheFollowingSection(string option, string isOrIsNot, string section)
 		{
