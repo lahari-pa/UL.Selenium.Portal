@@ -100,7 +100,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I generate a random UPC number and save as: UPC876503
 	Given I generate a random UPC number and save as: UPC876504
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LITHIUM ION BATTERIES
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Battery
 	Then I save the product information as: TestCase87650
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
@@ -302,6 +302,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
 
 @singlerun
+@ScenarioId:10161
 Scenario: [87894] Forwarding - Edit existing Case UPC
 Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status
 	Given I navigate to the landing page

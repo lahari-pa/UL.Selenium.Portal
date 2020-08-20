@@ -452,6 +452,55 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 # Confirm that the Cart icon in the left navigation panel shows there are 0 items in the cart
 
 
+
+Scenario: [140289] UPC Duplication - CSV File
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I click the My Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: Registration Updates Not Submitted
+Then I select CSV from the Select File Type
+Then I select the Request Report button excel file is produced called Registration Updates Not Submitted.csv and save as Registration Updates Not Submitted
+Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I click the Products in Scope button and confirm that an excel file is produced called Registration Updates Not Submitted.csv and save as Registration Updates Not Submitted
+Given I delete the excel file saved as Registration Updates Not Submitted
+Then I confirm the most recent file has the following information Report Name: Product Types Registered File Type: CSV Date Requested: 1/1/1111 Requested By: WERCS Test_Automation_ProductsAccount
+Then I click the Download button for the most recent Report
+Given I click the Products in Scope button and confirm that an excel file is produced called Registration Updates Not Submitted (1).csv and save as Registration Updates Not Submitted (1)
+Given I delete the excel file saved as Registration Updates Not Submitted (1)
+
+Scenario: [140290] UPC Duplication - CSV File
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I click the My Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: Subscription Product Types
+Then I select CSV from the Select File Type
+Then I select the Request Report button excel file is produced called Subscription Product Types.csv and save as Subscription Product Types
+Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I click the Products in Scope button and confirm that an excel file is produced called UPC Duplication.csv and save as Subscription Product Types
+Given I delete the excel file saved as Subscription Product Types
+Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV Date Requested: 1/1/1111 Requested By: WERCS Test_Automation_ProductsAccount
+Then I click the Download button for the most recent Report
+Given I click the Products in Scope button and confirm that an excel file is produced called Subscription Product Types (1).csv and save as Subscription Product Types (1)
+Given I delete the excel file saved as Subscription Product Types (1)
+
+Scenario: [140291] UPC Duplication - CSV File
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I click the My Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: UPC Duplication
+Then I select CSV from the Select File Type
+Then I select the Request Report button excel file is produced called UPC Duplication.csv and save as UPC Duplication
+Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I click the Products in Scope button and confirm that an excel file is produced called UPC Duplication.csv and save as UPC Duplication
+Given I delete the excel file saved as UPC Duplication
+Then I confirm the most recent file has the following information Report Name: Product Types Registered File Type: CSV Date Requested: 1/1/1111 Requested By: WERCS Test_Automation_ProductsAccount
+Then I click the Download button for the most recent Report
+Given I click the Products in Scope button and confirm that an excel file is produced called UPC Duplication (1).csv and save as UPC Duplication (1)
+Given I delete the excel file saved as UPC Duplication (1)
+
+
+
+
 Scenario: [140292] Volatile Organic Compounds - CSV File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
