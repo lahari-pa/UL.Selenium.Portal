@@ -100,6 +100,9 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
 		| Graphite           | 33.2    | false               | false       |            |
 		| Ethylene carbonate | 60.1    | false               | false       |            |
+	Given I should see the Formulation > Batteries Page
+	Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+	Given I click continue
 	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 	Given I call Shared Step 73282 (Lithium Battery Characteristics - Weight in Grams)
 	Given I call Shared Step 60096 (Lithium Battery Transportation)
@@ -128,7 +131,9 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. is shown as Green
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Label in both French and English is shown as Green
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Upload UN38.3 Test Document (Required) is shown as Green
+	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
+	Given I should see the Additional Documents to Provide Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104222
 
 @ScenarioId:700
@@ -145,6 +150,9 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
 		| Graphite           | 33.2    | false               | false       |            |
 		| Ethylene carbonate | 60.1    | false               | false       |            |
+	Given I should see the Formulation > Batteries Page
+	Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+	Given I click continue
 	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 	Given I call Shared Step 73282 (Lithium Battery Characteristics - Weight in Grams)
 	Given I call Shared Step 60096 (Lithium Battery Transportation)
@@ -157,7 +165,9 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I set the radio option in section: Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats. to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
 	And I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I don't need a WHMIS Compliant SDS
+	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
+	Given I should see the Additional Documents to Provide Page
 	Given I click the browse button for label: Please upload a PDF of the product. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Then in the Additional Documents to Provide page I click Continue
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -166,15 +176,20 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 		#| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		#| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
 	Then in the Comments page I click Continue
+	Then I save the current window handle to context as: MainWindowHandle
 	Given I click the Summary button in the Data Acceptance window
 	And I switch to the Data Summary page
-	Then Upload UN38.3 Test Document (Required) document section should be showing the following document: testdoc.pdf
+	Then Upload UN38.3 Test Document (Required) document section should be showing the following document: testdoc.pdf	
+	Then I Delete the file with name: testdoc.pdf from the downloads folder
 	Given I click the View button for section: Upload UN38.3 Test Document (Required)
-	Then I confirm a new window opens displaying the document url: ProductDocument
-	Given I close the window that opened
+	Then I confirm that a file is produced called testdoc.pdf and save as savedas56219PDF
+	Then I Check that the pdf file saved as: savedas56219PDF contains the text: If your product contains any kind of chemical	
+	Then I switch to the window with handle saved as: MainWindowHandle
+	Then I delete the file saved as savedas56219PDF
+	Then I close All the current windows except the Main Window
+	#Then I confirm a new window opens displaying the document url: ProductDocument
+	#Given I close the window that opened
 	And I switch to Data Acceptance page
-	And I switch to the Data Summary page
-	And I close the Data Summary tab
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104227
 
 @tfs_design
