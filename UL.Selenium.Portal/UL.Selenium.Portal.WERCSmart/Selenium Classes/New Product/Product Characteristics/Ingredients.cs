@@ -283,12 +283,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
-			pass = this.ISetGenericName(component, ingredient.IngredientType, ingredient.GenericName, componentType);
-
-			if (!pass)
+			if (ingredient.TradeSecret)
 			{
-				Report.Info("Failed to set Generic Name");
-				return false;
+
+				pass = this.ISetGenericName(component, ingredient.IngredientType, ingredient.GenericName, componentType);
+
+				if (!pass)
+				{
+					Report.Info("Failed to set Generic Name");
+					return false;
+				}
+
 			}
 
 			var tableFunctionalPurpose = new Table("Functional Purpose");
@@ -1075,7 +1080,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			}
 
-			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath(".//td//select[contains(@data-bind,'ingredientType')]"), 2);
+			IWebElement ingredientTypeBox = wantedRow.FindElement(By.XPath("//td//select[contains(@data-bind,'ingredientType')]"), 2);
 
 			if (ingredientTypeBox == null)
 			{

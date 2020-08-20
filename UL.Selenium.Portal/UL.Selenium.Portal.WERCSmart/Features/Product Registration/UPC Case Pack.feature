@@ -302,6 +302,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87686 and its status is: Completed
 
 @singlerun
+@ScenarioId:10161
 Scenario: [87894] Forwarding - Edit existing Case UPC
 Given I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status
 	Given I navigate to the landing page
