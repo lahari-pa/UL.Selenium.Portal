@@ -390,7 +390,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] UPCs and Registrations (Retailer Specific) - 
 	And I call Shared Step (Login to WERCSmart - Premium Account)
 	#Should be able to remove the wait but check first
 	Then I wait for 30 seconds
-	Given I click the Supplier Reports icon in the QuickLinks Pane
+	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
 	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
 	Given In the Supplier Reports screen I click on the Download button

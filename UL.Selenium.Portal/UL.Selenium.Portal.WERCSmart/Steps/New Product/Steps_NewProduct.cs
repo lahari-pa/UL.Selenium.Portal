@@ -184,6 +184,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			Report.IsTrue(NewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
 			GeneralUtilities.Wait_for_load_finish();
+			Delay.Seconds(10);
 			//this.GivenIShouldSeeXPage(section);
 		}
 
@@ -3103,6 +3104,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
+		[StepDefinition(@"I check that the input field with label: (.*) has the following text: (.*)")]
+		public void ICheckThatTheInputFieldWithLabelHasTheFollowingText(string fieldName, string text)
+		{
+			Report.IsTrue(new NewProduct().CheckInputFieldText(fieldName, text), "The input field text was not as expected", "The input field text was as expected");
+		}
+
+		[StepDefinition(@"I check that the input field with label: (.*) has the following placeholder: (.*)")]
+		public void ICheckThatTheInputFieldWithLabelHasTheFollowingPlaceholder(string fieldName, string placeholder)
+		{
+			Report.IsTrue(new NewProduct().CheckInputFieldPlaceholder(fieldName, placeholder), "The input field placeholder was not as expected", "The input field placeholder was as expected");
+		}
+
 
 		[StepDefinition(@"I confirm the Regulatory Information 3 page contains the statement: (.*)")]
 		public void IConfirmRegulatoryInformation3PageContainsStatement(string text)
@@ -3126,6 +3139,112 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void SelectConfirmRegulatoryDocumentsConfirmationQuestion()
 		{
 			Report.IsTrue(new NewProduct().CheckRegulatoryDocumentsConfirmationBox(), "Failed to tick the confirmation option", "Successfully ticked the confirmation option");
+
+		}
+
+		[StepDefinition(@"I confirm that the the option: (.*) (.*) checked for the following section: (.*)")]
+		public void ThenIConfirmThatTheTheOptionCheckedForTheFollowingSection(string option, string isOrIsNot, string section)
+		{
+			var newProductPage = new NewProduct();
+
+			if (isOrIsNot.ToLower() == "is")
+			{
+				Report.IsTrue(newProductPage.ConfirmOptionIsCheckedInSection(option, section), "The option " + option + " was not checked", "The option " + option + " was checked");
+			}
+			else
+			{
+				Report.IsTrue(!newProductPage.ConfirmOptionIsCheckedInSection(option, section), "The option " + option + " was checked", "The option " + option + " was not checked");
+			}
+		}
+
+		[StepDefinition(@"I select the case UPC dropdown arrow to (expand|collapse) the UPC saved as: (.*)")]
+		public void ThenISelectTheCaseUPCDropdownArrowForUPCSavedAsUPC(string expandOrCollapse, string savedAs)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(newProductPage.SelectCaseUPCDropDownArrowForUPC(savedAs, expandOrCollapse), "Failed to select dropdown arrow with the UPC: " + savedAs, "Succesfully selected dropdown arrow with the UPC: " + savedAs);
+		}
+
+		[StepDefinition(@"I confirm the correct UPC: saved as (.*) is displayed in the UPC Number textfield")]
+		public void ThenIConfirmTheCorrectUPCSavedAsUPCIsDisplayedInTheUPCNumberTextfield(string savedAs)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(newProductPage.ConfirmUPCNumberIsDisplayedInUPCNumberField(savedAs), "Failed to confirm UPC Number field contains UPC: " + savedAs, "Successfully confirmed UPC Number field contains UPC: " + savedAs);
+		}
+
+		[StepDefinition(@"I confirm Individual UPC field does not display any options")]
+		public void ThenIConfirmIndividualUPCFieldDoesNotDisplayAnyOptions()
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.CheckForOptionsInIndividualUPCField(), "Failed to confirm the Individual UPC field has no options", "Successfully confirmed the Individual UPC field has no options");
+		}
+
+		[StepDefinition(@"I confirm the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field is shown in the Universal Product Code \(UPC\) Page")]
+		public void ThenIConfirmTheQuantityFieldIsShownInTheUniversalProductCodeUPCPage(string field)
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.ConfirmFieldExists(field), "Failed to confirm " + field + " field exists", "Successfully confirmed the " + field + " exists");
+		}
+
+
+		[StepDefinition(@"I confirm the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field is below the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field")]
+		public void ThenIConfirmTheContainerTypeFieldIsBelowTheUPCNumberField(string lowerField, string upperField)
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.ConfirmLowerFieldIsBelowUpperField(lowerField, upperField), "Failed to confirm " + lowerField + " field is below " + upperField + " field", "Successfully confirmed the " + lowerField + " field is below " + upperField + " field");
+		}
+
+
+		[StepDefinition(@"I confirm that the truck icon is displaying next to the case UPC: saved as (.*)")]
+		public void ThenIConfirmThatTheTruckIconIsDisplayingNextToTheCaseUPCSavedAsUPC(string savedAs)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(newProductPage.ConfirmTruckIconIsDisplayingNextToUPC(savedAs), "Failed to confirm truck icon is displayd with the UPC: " + savedAs, "Successfuly confirmed truck icon is displayd with the UPC: " + savedAs);
+		}
+
+
+		[StepDefinition(@"I check if the case UPC details are collapsed for UPC: saved as (.*)")]
+		public void ThenICheckIfTheCaseUPCDetailsAreCollapsedForUPCSavedAsUPC(string savedAs)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(newProductPage.ConfirmCaseUPCDetailsAreCollapsedForUPC(savedAs), "Failed to confirm case UPC details are collapsed with the UPC: " + savedAs, "Succesfully confirmed case UPC details are collapsed with the UPC: " + savedAs);
+		}
+
+		[StepDefinition(@"I confirm the case dropdown with the following UPC: saved as (.*) (should|should not) be available for selection")]
+		public void ThenIConfirmTheCaseDropdownWithTheFollowingUPCSavedAsUPCIsAvailableForSelection(string savedAs, string shouldOrShouldNot)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+
+			if (shouldOrShouldNot == "should")
+			{
+				Report.IsTrue(newProductPage.ConfirmCaseDropDownWithUPCIsAvailableForSelection(savedAs), "Failed to confirm that the dropdown with the UPC: " + savedAs + " is available for selection", "Confirmed that the dropdown with the UPC: " + savedAs + " is available for selection");
+			}
+			else
+			{
+				Report.IsTrue(!newProductPage.ConfirmCaseDropDownWithUPCIsAvailableForSelection(savedAs), "Failed to confirm that the dropdown with the UPC: " + savedAs + " is not available for selection", "Confirmed that the dropdown with the UPC: " + savedAs + " is not available for selection");
+			}
+		}
+
+		[StepDefinition(@"I confirm a case dropdown contains the following UPC: saved as (.*)")]
+		public void ThenIConfirmACaseDropdownContainsTheFollowingUPCSavedAsUPC(string savedAs)
+		{
+			var newProductPage = new NewProduct();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(newProductPage.ConfirmCaseDropDownContainsUPC(savedAs), "Failed to confirm that the dropdown contained the UPC: " + savedAs, "Confirmed that the dropdown contained the UPC: " + savedAs);
+		}
+
+
+		[StepDefinition(@"I check for a truck icon for UPC: saved as (.*)")]
+		public void ThenICheckForATruckIconForUPCSavedAsUPC(string savedAs)
+		{
+			var UPCPage = new UPC();
+			savedAs = Context.GetFromContext(savedAs).ToString();
+			Report.IsTrue(UPCPage.ConfirmTruckIconIsDisplayedForUPC(savedAs), "Failed to find truck icon for UPC: " + savedAs, "Successfully found truck icon for UPC: " + savedAs);
+		}
 
 		}
 
@@ -3160,5 +3279,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		//	}
 		//}
 	}
-}
+
 

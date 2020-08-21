@@ -31,7 +31,7 @@ Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 		| Lithium perchlorate | 50      | false               | false       |            |
 		| manganese dioxide   | 50      | false               | false       |            |
 	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
-	Given I call Shared Step 73282 (Lithium Battery Characteristics - Weight in Grams)
+	And I call Shared Step 103412 - Lithium Primary/Metal Battery Characteristics - any data - Happy path
 	Given I call Shared Step 60096 (Lithium Battery Transportation)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC60017 with container type: Plastic Container size: 50.0 and quantity: 1000

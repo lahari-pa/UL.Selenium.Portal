@@ -278,3 +278,76 @@ Then I select the following retailers in the Retailer page
 Then I click the delete icon in the Retailer page
 Then In the 'Select Retailers' window I select the retailer: Wal-Mart/SAM'S CLUB
 Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order
+
+
+Scenario: [125130] Canadian Tire Available for Selection for Articles
+
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candy, Chewing Gum
+Then I save the product information as: TestCase125130
+And I set the Select countries the product may be sold in field to: Canada
+Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
+Then I click continue
+Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Canadian Tire and enter the name: Test
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
+
+
+
+
+Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available for Selection
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Stereo Equipment / Radio, Not Portable, No Battery Included
+Then I save the product information as: TestCase128920
+Given I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+Given I set the Contains Circuit Board option to: No
+Given I set the Has a LCD or Plasma Display option to: No
+Then I click continue
+Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer                                                 |
+		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+		| Family Dollar                                            |
+Then I click Done on Select Retailers window
+Then I confirm the following retailers are showing in the Retailer page
+		| Retailer												   |
+		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+		| Family Dollar                                            |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128920
+
+
+
+Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Available for Selection
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then The home screen should load
+Given I generate a random UPC number and save as: UPC59273
+Given I delete all products with UPC Number: saved as UPC59273
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
+Then I save the product information as: TestCase59273
+Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+Given I should see the Additional Product Information Page
+Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber | ComponentName       | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+|           | Potassium hydroxide | 20.5    | false               |            | false       |
+|           | Zinc chloride       | 9.5     | false               |            | false       |
+|           | Aqua                | 70      | false               |            | false       |
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+Given I select the following retailers in the Select Retailers popup list view:
+		| Retailer                                                 |
+		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+		| Family Dollar                                            |
+Then I click Done on Select Retailers window
+Then I confirm the following retailers are showing in the Retailer page
+		| Retailer												   |
+		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
+		| Family Dollar                                            |
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
+#

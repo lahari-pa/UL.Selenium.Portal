@@ -301,6 +301,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SPG.IClickRowActionsForTheProductSavedAs(savedAs);
 				SPG.ClickRowAction("View UPCs");
 				new GlobalSteps().SwitchToTabWithTitle("View UPCs");
+				Delay.Seconds(5);
 				new Steps_ViewUpcs().SaveFirstUpcNumberToContext($"{savedAs}_UPC");
 				new GlobalSteps().SwitchToTabWithTitle("WERCSmart Version 2.0");
 				Report.Info("Saved UPC number to context");
@@ -311,7 +312,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			selProdGrid.ProductIdField = string.Empty;
 		}
-		[Given(@"I create a Product using Test Case 85965 \(SOLD = US only, PL = Yes, Completed status for 1 or more retailers\)")]
+		[StepDefinition(@"I create a Product using Test Case 85965 \(SOLD = US only, PL = Yes, Completed status for 1 or more retailers\)")]
 		public void CreateProductUsing85965()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -1430,10 +1431,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				MyStepsNewProduct.ThenISetTheProductsGTINBrickCodeTo("[10000424] Laundry Detergents");
 			}
-
-
-
-
 		}
 
 		[StepDefinition(@"CVS Pharmacy - No, Later Date")]

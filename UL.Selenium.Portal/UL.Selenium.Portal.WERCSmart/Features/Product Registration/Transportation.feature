@@ -509,3 +509,31 @@ Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for TDGCP
 And I click alias subsection option TDGCP and confirm data as:
 | Data           |
 | 1 |
+
+
+@ScenarioId:10101
+Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Lighter, Provide the DOT Approval Number' Field
+
+Given I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
+Given I generate a random UPC number and save as: UPC126286
+Then I save the product information as: TestCase126286
+Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
+Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
+Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
+Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
+Given I set the Product is a Retailer's Private Label or Brand option to: No
+Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+Then I click continue
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| CASNumber  | ComponentName                                                               | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+| 68410-97-9 | Distillates, petroleum, light distillate hydrotreating process, low-boiling | 70      |                     |            |             |
+| 64742-49-0 | Naphtha, petroleum, hydrotreated light                                      | 30      |                     |            |             |
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
+Then in page U. S. Department of Transportation (DOT) Classification I should see no errors
+And I click the page heading: U. S. Department of Transportation (DOT) Classification
+And For the lighter, provide the DOT Approval Number (LAA) should be showing the value: 123
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase126286
