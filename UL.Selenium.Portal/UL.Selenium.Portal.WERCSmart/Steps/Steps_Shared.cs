@@ -6931,6 +6931,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			Report.StartStep("I set 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.");
@@ -6944,6 +6945,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}

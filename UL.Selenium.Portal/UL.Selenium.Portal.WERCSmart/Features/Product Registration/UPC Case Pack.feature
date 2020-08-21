@@ -100,7 +100,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I generate a random UPC number and save as: UPC876503
 	Given I generate a random UPC number and save as: UPC876504
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LITHIUM ION BATTERIES
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Battery
 	Then I save the product information as: TestCase87650
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
@@ -109,6 +109,9 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
 		| Graphite           | 33.2    | false               | false       |            |
 		| Ethylene carbonate | 60.1    | false               | false       |            |
+	Given I should see the Formulation > Batteries Page
+	Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+	Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 54799 (Lithium Battery Characteristics - any data - Happy path)
 	Given I call Shared Step 60096 (Lithium Battery Transportation)

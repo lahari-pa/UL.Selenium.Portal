@@ -30,6 +30,9 @@ Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lithium perchlorate | 50      | false               | false       |            |
 		| manganese dioxide   | 50      | false               | false       |            |
+	Given I should see the Formulation > Batteries Page
+	Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+	Given I click continue
 	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 	Given I call Shared Step 73282 (Lithium Battery Characteristics - Weight in Grams)
 	Given I call Shared Step 60096 (Lithium Battery Transportation)
@@ -39,6 +42,7 @@ Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 	Given I click the browse button for label: Upload UN38.3 Test Document (Required) and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 	Given I set the radio option in section: WHMIS-compliant Safety Data Sheet, English and French-Canadian to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
 	Given I click continue
 	Given I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -57,7 +61,7 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 	Given I generate a random UPC number and save as: UPC60018
 	Given I delete all products with UPC Number: saved as UPC60018
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium ion batteries
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Ion Battery
 	Then I save the product information as: TestCase60018
 	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
@@ -66,6 +70,9 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
 		| Graphite           | 33.2    | false               | false       |            |
 		| Ethylene carbonate | 60.1    | false               | false       |            |
+	Given I should see the Formulation > Batteries Page
+	Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+	Given I click continue
 	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 	Given I call Shared Step 54799 (Lithium Battery Characteristics - any data - Happy path)
 	Given I call Shared Step 60096 (Lithium Battery Transportation)
