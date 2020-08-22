@@ -201,13 +201,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void LoginToAccount(string accountSavedAs, bool attemptOnce = false)
 		{
 			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
-			
+
 			if (new TopMenuBar().LoggedIn())
 			{
 				Report.Info("Logged in, logging out");
 				Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out");
 			}
-	
+
 			if (user == null)
 			{
 				string Branch = TReVorSettings.SoftwareBranch;
@@ -234,7 +234,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
 				new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 			}
-			
+
 		}
 
 		/// <summary>
@@ -537,7 +537,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Navigating to the landing page");
 				Report.Info("Checking the number of tabs that are open in the current window");
 				ReadOnlyCollection<string> currentTabs = SeleniumBrowser.WebBrowser.WindowHandles;
-				if(currentTabs.Count()==1)
+				if (currentTabs.Count() == 1)
 				{
 					Report.Info("There was only 1 tab open, attempting to close and reopen chrome");
 					Report.Info("Chrome Quit - Closing the chrome window");
@@ -586,7 +586,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 					}
 
-					
+
 				}
 
 				try
@@ -812,7 +812,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.StartStep(ReportSettings.StepCounter + " I create a new email address");
 			try
-			{ 
+			{
 
 				string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
 
@@ -844,7 +844,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportSettings.StepCounter + " I create a new email address");
 			try
 			{
-				
+
 				string myEmail = MailosaurFunctions.CreateEmail("<random>");
 
 				if (myEmail == "")
@@ -944,7 +944,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// </summary>
 		/// <param name="bodyText"></param>
 		[StepDefinition(@"the body of the email should show: (.*)")]
-	    public void ThenTheBodyOfTheEmailShouldShow(string bodyText)
+		public void ThenTheBodyOfTheEmailShouldShow(string bodyText)
 		{
 			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
 			try
@@ -1155,7 +1155,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (thisModalDialog.Wait_for_load(30))
 			{
 				Report.Success("Modal dialog is opened.");
-				
+
 			}
 			else
 			{
@@ -1167,7 +1167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"in the modal dialog I click the ""(.*)"" button")]
 		public void GivenInTheModalDialogIClickButton(string button)
 		{
-	
+
 			Report.IsTrue(new ModalDialog().ClickButton(button),
 				$@"Failed to click ""{button}"" button",
 				$@"Successfully clicked the ""{button}"" button");
@@ -1512,7 +1512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Report.Info("Saving current window to context as MainWindowHandle");
-			
+
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			int i = 1;
 			Report.Info("Attempting up to 10 times to find wanted tab");
@@ -1934,13 +1934,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I Check there should be a new suspension notification email for user: (.*) for the Product saved as: (.*) with the suspension subject of: (.*) and check it does not contain text from the table:")]
-		public void ICheckThereIsANewEmailForUserXFromYAndSpecificTitle(string emailSavedAs,string productSavedAs, string subject, Table stringTable)
+		public void ICheckThereIsANewEmailForUserXFromYAndSpecificTitle(string emailSavedAs, string productSavedAs, string subject, Table stringTable)
 		{
 			ReportSettings.UseSubSteps = true;
 			var productDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
 			string productID = productDetails.Id;
-			string emailSuspensionTitle = "Notification - Product "+productID+" - "+subject;
-						
+			string emailSuspensionTitle = "Notification - Product " + productID + " - " + subject;
+
 			Report.StartStep($"I confirm the administrator receieved an email with subject '{emailSuspensionTitle}'");
 			Delay.Seconds(5);
 			new GlobalSteps().ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", emailSavedAs, "<SiteNotification>", emailSuspensionTitle);
@@ -1968,9 +1968,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Body of the Email was: " + emailText);
 					Report.IsTrue(!actualTrimmed.Contains(expectedTrimmed), "Body text did contain the given text", "Body text did not contain the given text");
 				}
-					   	
-																
-			
+
+
+
 			}
 			catch (Exception ex)
 			{
@@ -1987,7 +1987,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
 				string emailText = email.Text.ToString();
-				string actualTrimmed = Regex.Replace(emailText, @"\r|\n| ", "");					
+				string actualTrimmed = Regex.Replace(emailText, @"\r|\n| ", "");
 				string expectedTrimmed = Regex.Replace(bodyText, @"\r|\n| ", "");
 				Report.Info("Expected email body text: " + expectedTrimmed);
 				Report.Info("Body of the Email was: " + actualTrimmed);
@@ -2014,7 +2014,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I Wait for a modal popup to disappear")]
 		public void IWaitForModalPopupToBeInVisible(int timeout = 30)
 		{
-			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing","The modal was gone");
+			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing", "The modal was gone");
 		}
 
 		[StepDefinition(@"I save the following text: (.*) as (.*)")]
@@ -2074,6 +2074,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Deleting file: " + file);
 			File.Delete(file);
 		}
+
+		[StepDefinition(@"An alert is displayed with the message: (.*)")]
+		public void AnAlertIsDisplayedWithTheMessage(string message)
+		{
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				string alertText = SeleniumBrowser.WebBrowser.SwitchTo().Alert().Text;
+				Report.IsTrue(message == alertText, "Alert text does not match! Expected: " + message + ". Actual: " + alertText + ".",
+					"Successfully found text in alert!");
+			}
+			else
+			{
+				Report.Failure("Alert not present!");
+			}
+
+		}
+
 
 
 	}

@@ -1177,7 +1177,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisProductNotificationHistory = new ProductNotificationHistory();
 			thisProductNotificationHistory.WaitForTableContentToLoad();
 			SpecFlowReporting.TableRow(table.Rows[0]);
-			Report.Info("Getting displayed notifications");			
+			Report.Info("Getting displayed notifications");
 			List<Notification> notifications = thisProductNotificationHistory.GetNotifications();
 			for (int i = 0; i < notifications.Count; i++)
 			{
@@ -1997,7 +1997,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//		string pdfText = thisSHADocument.DocumentText(docURL2);
 		//		Report.Info($"this was the new found pdf text using the new test code: {pdfText}");
 
-		//		//END TEST CODE		
+		//		//END TEST CODE
 
 
 		//		//string pdfText = thisSHADocument.DocumentText(docURL);
@@ -2013,7 +2013,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//	}
 		//}
 
-		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'NGHS / English' twice as well as the product codes saved as: (.*) and (.*)")]		
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'NGHS / English' twice as well as the product codes saved as: (.*) and (.*)")]
 		public void CheckThatFileSavedAsContaisnTextNGHSEnglishTwicAndProductCodesSavedAs(string fileSavedAs, string code1SavedAs, string code2SavedAs)
 		{
 			var productOneDetails = (ProductInformation)Context.GetFromContext(code1SavedAs);
@@ -2024,9 +2024,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			var thisSHADocument = new SHADocumentList();
-			Delay.Seconds(3);		
+			Delay.Seconds(3);
 			Report.Screenshot();
-			
+
 			if (fileSavedAs.ToLower().Contains("savedas"))
 			{
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
@@ -2047,7 +2047,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
 
 
-			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ",""), @"NGHS/English");
+			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"NGHS/English");
 			Report.IsTrue(foundOccurences == 2, "PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
 
 		}
@@ -2061,16 +2061,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var productTwoDetails = (ProductInformation)Context.GetFromContext(code2SavedAs);
 			string ID2 = productTwoDetails.Id;
 
-				//TEST CODE
-				Report.Info($"Running Test code for PDF check using new downloaded file");
-
-				GeneralUtilities.OpenNewTabAndNavigateTo(downloadsFolder + @"\TempPDF.pdf");
-				Report.Info($"tab opened");
-				Delay.Seconds(3);
-				//string docURL2 = thisSHADocument.DocumentWindowOpen();
-				string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
-				Report.Info($"doc window opened");
-				Report.Screenshot();
+			var thisSHADocument = new SHADocumentList();
+			Report.Info($"tab opened");
+			Delay.Seconds(3);
+			//string docURL2 = thisSHADocument.DocumentWindowOpen();
+			string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
+			Report.Info($"doc window opened");
+			Report.Screenshot();
 
 			if (fileSavedAs.ToLower().Contains("savedas"))
 			{
@@ -2090,16 +2087,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"The Found PDF Text was: {pdfText}");
 			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
 			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
-			
+
 
 		}
 
 
 		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / English' twice")]
 		public void CheckThatFileSavedAsContaisnTextCanadaEnglishTwice(string fileSavedAs)
-		{	
+		{
 
-				//END TEST CODE
+			var thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			Report.Screenshot();
 
 			if (fileSavedAs.ToLower().Contains("savedas"))
 			{
@@ -2116,7 +2115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var pdfText = text;
 
 
-			Report.Info($"The Found PDF Text was: {pdfText}");		
+			Report.Info($"The Found PDF Text was: {pdfText}");
 
 
 			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/English");
