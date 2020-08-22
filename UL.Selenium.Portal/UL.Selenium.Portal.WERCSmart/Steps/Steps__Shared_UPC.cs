@@ -32,6 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIClickTheAddCaseUpcButton()
 		{
 			Report.IsTrue((new UPC()).ClickAddCaseUpcButton(), "Failed to click the 'Add Case UPC' button!", "Successfully clicked the 'Add Case UPC' button");
+			Delay.Seconds(5);
 		}
 
 		[StepDefinition(@"I should (see|not see) the following UPC options:")]
@@ -1218,6 +1219,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(new DeleteRowsWarning().WaitForContainerToBeInvisible(30), "The warning popup appeared", "The warning popup did not appear");
 			}
+		}
+
+		[StepDefinition(@"I Check the Delete Rows Warning Popup contains the following text, Line One: (.*), Line Two: (.*)")]
+		public void ThenICheckTheDeleteRowsWarningPopupContainsTheFollowingTextYouAreAboutToDelete(string lineOne, string lineTwo)
+		{
+			var selectionBoxes = new UPC();
+			Report.IsTrue(selectionBoxes.CheckDeleteRowsWarningPopupContainsText(lineOne, lineTwo), "Failed to confirm the following text in the Delete Rows Warning Popup: " + lineOne + lineTwo, "Successfully confirmed the following text in the Delete Rows Warning Popup: " + lineOne + lineTwo);
 		}
 
 		[StepDefinition("I Click Ok in the Delete Rows Warning Popup")]

@@ -18,7 +18,7 @@ Feature: ProductSetUp_Chalk
 
 @ScenarioId:1415
 Scenario: [75335] Create a new simple product (Chalk) and submit thru to Completed status (NGHS only)
-	Given I login into the WERCSmart Portal - Administrator Role
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC75335
 	Given I delete all products with UPC Number: saved as UPC75335
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

@@ -12,6 +12,60 @@
 @run_Pharma
 Feature: Pharma
 
+Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
+
+Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
+Given I generate a random UPC number and save as: UPC128085
+Given I click continue
+Then I should see the Product Type Page
+Then I set 'Product Name' to: Prescription Pharmaceutical, Aerosol
+Then I set 'Type of Product' to: Prescription Pharmaceutical, Aerosol
+Then I click continue
+Given I enter the NDC number: 13630-0089-3
+Then I save the product information as: TestCase128085
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the SPL Information screen
+Then I click continue
+And I set the Secondary Physical State to be: Aerosol
+And I set the pH field to: 5
+And I set the Select the best Water Solubility description to be: Very soluble
+And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then field to: This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).
+Then I click continue
+Then I click continue
+Given I fill all empty fields in the Pharma Ingredients screen
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	| Propane       | 100     | false               | false       |            |
+Given I set the Should this product be refrigerated for transport or storage? option to: No
+Then I click continue
+Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: Yes, Agree
+And I set the Select applicable modes of transport for which you classify the product. field to: DOT
+And I select option: Yes, Shipped with Limited quantity under section: Select applicable modes of transport for which you classify the product. and subsection: DOT
+And I select option: Yes, Shipped with Consumer Commodity under section: Select applicable modes of transport for which you classify the product. and subsection: DOT
+Then I click continue
+And I set the UN Number field to: UN1950
+And I set the Proper Shipping Name option to: Aerosols, flammable, n.o.s.
+And I set the Select Hazard Class (if available) option to: 2.1
+Then I click continue
+Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+Then I click continue
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128085, container type: Aerosol Can and size: 1
+When I click continue
+When I click continue
+Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
+And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+When I click continue
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+When I click continue
+When I click continue
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+And I navigate to the home page
+
+
 Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid Gel Consistency
 
 Given I call Shared Step (Login to WERCSmart - Pharma Account)

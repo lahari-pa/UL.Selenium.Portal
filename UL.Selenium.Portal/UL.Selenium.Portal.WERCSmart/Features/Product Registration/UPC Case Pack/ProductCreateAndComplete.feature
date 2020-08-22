@@ -371,7 +371,7 @@ Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87923 and its status is: Completed
 
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
-@tfs_design
+
 @ScenarioId:6151
 Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -383,9 +383,10 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
 	Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
 	Given I click continue
-	Given I add the following CA Cleaning ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | false       |            | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+	#
+	Given I add the following CA Cleaning ingredients:  
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
+		| Water         | 100     | false               | true        | AQUA       | AQUA        | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 	And in the Ingredients page I click Continue
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
@@ -398,9 +399,13 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 		| Retailer  |
 		| Walgreens |
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC118139, container type: Metal Container and size: 32
-	Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I set the OSHA-compliant Safety Data Sheet, English option to: Yes
+	Given I click the browse button for label: OSHA SDS and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+	Given I click continue
+	Given I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	Given in the Additional Documents to Provide page I click Continue
+	Given I click continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I call Shared Step 54796 (Purchase Summary)

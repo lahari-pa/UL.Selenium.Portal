@@ -210,6 +210,11 @@
     <Compile Include="Classes\WERCSmartUser.cs" />
     <Compile Include="Database Functions\dbRetailers.cs" />
     <Compile Include="Database Functions\dbUtils.cs" />
+    <Compile Include="Features\Product Registration\Distributor.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Distributor.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
     <Compile Include="Selenium Classes\AddNewSupplier.cs" />
@@ -321,6 +326,7 @@
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_TCLP.cs" />
     <Compile Include="Steps\Steps_Brands.cs" />
+    <Compile Include="Steps\Steps_CACleaning.cs" />
     <Compile Include="Steps\Steps_ChooseGoodGuide.cs" />
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
     <Compile Include="Steps\Steps_CreateProducts.cs" />
@@ -541,6 +547,7 @@
     </None>
     <None Include="Features\Product Registration\VOC\VOC.feature">
     </None>
+    <None Include="Features\Product Set Up\CA Cleaning.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_3rdParty.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_Chalk.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_Electronic.feature" />

@@ -4851,6 +4851,315 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			
 		}
 
+		public bool CheckInputFieldText(string fieldName, string text) {
+		
+			IWebElement el = this.containerElement.FindElement(By.XPath("//label[text()='" + fieldName + "']/../following-sibling::div//input"), 2);
+			if (el.Text == text)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool CheckInputFieldPlaceholder(string fieldName, string placeholder)
+		{
+
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='" + fieldName + "']/../following-sibling::div//input[@placeholder='" + placeholder + "']"), 2);
+			if (el != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmOptionIsCheckedInSection(string option, string section)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//label[text()='" + section + "']/../following-sibling::div//span[text()='" + option + "']/preceding-sibling::input"), 2);
+			if (optionEl.Checked())
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool SelectCaseUPCDropDownArrowForUPC(string savedAs, string expandOrCollapse)
+		{
+			IWebElement optionEl;
+			if (expandOrCollapse.ToLower() == "expand")
+			{
+				optionEl = this.ContainerElement.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//em[@class='fa fa-chevron-right']"), 2);
+			}
+			else
+			{
+				optionEl = this.ContainerElement.FindElement(By.XPath("//input[@placeholder='UPC Number']/../../..//a[@title='Expand']"), 2);
+			}
+			return optionEl.TryClick();
+		}
+
+		public bool ConfirmUPCNumberIsDisplayedInUPCNumberField(string savedAs)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//input[@data-bind='textInput: upcNumber.field']"), 2);
+			if (optionEl.Text == savedAs)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmFieldExists(string field)
+		{
+			IList<IWebElement> fields = this.ContainerElement.FindElements(By.XPath("//div[@class='form-group has-success']"), 2);
+
+			if (field == "UPC")
+			{
+				field = "upcNumber";
+			}
+			else if (field == "Name")
+			{
+				field = "name";
+			}
+			else if (field == "Container")
+			{
+				field = "type";
+			}
+			else if (field == "Size")
+			{
+				field = "size";
+			}
+			else if (field == "Quantity")
+			{
+				field = "quantity";
+			}
+			else if (field == "Individual UPC")
+			{
+				field = "upcContained";
+			}
+			else if (field == "Transport")
+			{
+				field = "transport";
+			}
+			else if (field == "Package")
+			{
+				field = "packType";
+			}
+
+			IWebElement fieldEl = this.ContainerElement.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + field + ".isValid() && " + field + ".hasValue(), 'has-error': !" + field + ".isValid() }\"]"), 2);
+
+			if (field != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmLowerFieldIsBelowUpperField(string lowerField, string upperField)
+		{
+			IList<IWebElement> fields = this.ContainerElement.FindElements(By.XPath("//div[@class='form-group has-success']"), 2);
+
+			if (lowerField == "UPC" || upperField == "UPC")
+			{
+				if (lowerField == "UPC")
+				{
+					lowerField = "upcNumber";
+				}
+				if (upperField == "UPC")
+				{
+					upperField = "upcNumber";
+				}
+			}
+			if (lowerField == "Name" || upperField == "Name")
+			{
+				if (lowerField == "Name")
+				{
+					lowerField = "name";
+				}
+				if (upperField == "Name")
+				{
+					upperField = "name";
+				}
+			}
+			if (lowerField == "Container" || upperField == "Container")
+			{
+				if (lowerField == "Container")
+				{
+					lowerField = "type";
+				}
+				if (upperField == "Container")
+				{
+					upperField = "type";
+				}
+			}
+			if (lowerField == "Size" || upperField == "Size")
+			{
+				if (lowerField == "Size")
+				{
+					lowerField = "size";
+				}
+				if (upperField == "Size")
+				{
+					upperField = "size";
+				}
+			}
+			if (lowerField == "Quantity" || upperField == "Quantity")
+			{
+				if (lowerField == "Quantity")
+				{
+					lowerField = "quantity";
+				}
+				if (upperField == "Quantity")
+				{
+					upperField = "quantity";
+				}
+			}
+			if (lowerField == "Indvidual UPC" || upperField == "Indvidual UPC")
+			{
+				if (lowerField == "Indvidual UPC")
+				{
+					lowerField = "upcContained";
+				}
+				if (upperField == "Indvidual UPC")
+				{
+					upperField = "upcContained";
+				}
+			}
+			if (lowerField == "Transport" || upperField == "Transport")
+			{
+				if (lowerField == "Transport")
+				{
+					lowerField = "transport";
+				}
+				if (upperField == "Transport")
+				{
+					upperField = "transport";
+				}
+			}
+			if (lowerField == "Package" || upperField == "Package")
+			{
+				if (lowerField == "Package")
+				{
+					lowerField = "packType";
+				}
+				if (upperField == "Package")
+				{
+					upperField = "packType";
+				}
+			}
+
+			IWebElement lowerFieldEl = this.ContainerElement.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + lowerField + ".isValid() && " + lowerField + ".hasValue(), 'has-error': !" + lowerField + ".isValid() }\"]"), 2);
+			IWebElement upperFieldEl = this.ContainerElement.FindElement(By.XPath("//div[@data-bind=\"css: { 'has-success': " + upperField + ".isValid() && " + upperField + ".hasValue(), 'has-error': !" + upperField + ".isValid() }\"]"), 2);
+
+			if (fields.IndexOf(lowerFieldEl) > fields.IndexOf(upperFieldEl))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmTruckIconIsDisplayingNextToUPC(string savedAs)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//i[@class='fa fa-truck']"), 2);
+			if (optionEl != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmCaseUPCDetailsAreCollapsedForUPC(string savedAs)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[text()='" + savedAs + "']/../..//input[@data-bind='textInput: upcNumber.field']"), 2);
+			if (optionEl == null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmCaseDropDownContainsUPC(string savedAs)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']"), 2);
+			if (optionEl != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmCaseDropDownWithUPCIsAvailableForSelection(string savedAs)
+		{
+			IWebElement optionEl = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/../..//input"), 2);
+
+			if (optionEl != null)
+			{
+				optionEl.TryCheck();
+				return optionEl.Checked();
+			}
+
+			return false;
+		}
+
+
+		public bool ConfirmSectionIsAvailableForSelection(string sectionName)
+		{
+			IList<IWebElement> options = this.ContainerElement.FindElements(By.XPath("//label[text()=\"" + sectionName + "\"]/../following-sibling::div//div[@data-toggle='buttons']//input"), 2);
+
+			if (options.Count != 2)
+			{
+				Report.Info("The amount of options found were not as expected");
+				return false;
+			}
+
+			foreach (IWebElement el in options)
+			{
+				if ((el.Text.ToLower() != "no") && (el.Text.ToLower() != "yes"))
+				{
+					Report.Info("An option with an unexpected name was found");
+					return false;
+				}
+
+				if (!el.TryClick())
+				{
+					Report.Info("At least one option was not clickable");
+					return false;
+				}
+
+			}
+
+			return true;
+		}
+
+		public bool CheckForOptionsInIndividualUPCField()
+		{
+			IList<IWebElement> options = this.ContainerElement.FindElements(By.XPath("//option[text()='Individual UPC contained in the Case Pack']/..//option"), 2);
+
+			if (options.Count < 2)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool ConfirmTruckIconIsDisplayedForUPC(string savedAs)
+		{
+			IWebElement truckIcon = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/following-sibling::i"), 2);
+			if (truckIcon != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 	}
 
 	public class ProductInformation
