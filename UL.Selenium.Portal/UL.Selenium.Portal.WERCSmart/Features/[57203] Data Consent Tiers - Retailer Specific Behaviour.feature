@@ -25,7 +25,7 @@ Scenario: [57206] Retailer specific - CVS
 	When I select the retailer: CVS
 	Then I confirm that there is a section labeled: CVS
 	And I confirm that under the pie chart I see the label: % of your product portfolio is associated with CVS
-	And I confirm that: CVS requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2, Tier 3 and Tier 4.1 permissions: Artists/Hobby, Automotive Care, Cleaning Supplies, Health & Beauty, Home Improvement, Lawn and Garden, Miscellaneous, Nutritional Supplements, Over-the-Counter (OTC), Pet Care, Photography, Sporting Goods, Stationery and Pharmacy is showing under the Data Consent Tiers heading
+	And I confirm that: CVS requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.1 permissions: Artists/Hobby, Automotive Care, Cleaning Supplies, Health & Beauty, Home Improvement, Lawn and Garden, Miscellaneous, Nutritional Supplements, Over-the-Counter (OTC), Pet Care, Photography, Sporting Goods, Stationery and Pharmacy is showing under the Data Consent Tiers heading
 	When I click the More Information hyperlink
 	Then I check that the current URL contains: https://login.ulscm.com/RPUI/cvsportal
 	And I close the window that opened

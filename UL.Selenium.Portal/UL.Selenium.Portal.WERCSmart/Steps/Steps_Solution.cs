@@ -121,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					urls = new[] { "https://choosegoodguide.com/" };
 					break;
 				case "GoodGuide for Consumers":
-					urls = new[] { "https://www.goodguide.com/" };
+					urls = new[] { "https://goodguide.com/" };
 					break;
 				case "Navigator":
 					urls = new[] { "https://msc.ul.com/en/products/navigator/" };

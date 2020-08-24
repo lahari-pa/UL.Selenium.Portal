@@ -36,6 +36,8 @@ And I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC a
 And I click continue
 And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
+Then In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet (SDS)' I tick confirm
+And I click continue
 And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 And I click continue
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Test 69577

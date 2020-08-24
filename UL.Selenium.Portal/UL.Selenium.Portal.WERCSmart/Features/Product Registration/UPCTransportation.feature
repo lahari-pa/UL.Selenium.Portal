@@ -430,7 +430,11 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I set the Flash Point Testing Method Used option to: Closed cup method
 	And I set the Select the best Water Solubility description option to: Insoluble
 	And I click continue
-	And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+
+	And I call Shared Step xxxx (Additional Product Information - Pesticide= Not considered, Fertilizer = No, SOLD=US, everything else = No - Continue)
+	#And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+
+
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
@@ -477,7 +481,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I click the page heading: Transportation Details 1
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	#First remove check form the full reg box
-	And I unselect option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
+	And I unselect the option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I click Save in The Product Page
 	Then I Wait for a modal popup to appear
