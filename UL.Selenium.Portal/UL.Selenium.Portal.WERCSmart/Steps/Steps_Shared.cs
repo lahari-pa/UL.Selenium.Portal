@@ -3906,9 +3906,9 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		}
 
 
-		[StepDefinition(@"I call Shared Step xxxx \(Additional Product Information - Pesticide= Not considered, Fertilizer = No, SOLD=US, everything else = No - Continue\)")]
+		[StepDefinition(@"I call Shared Step 143792 \(Additional Product Information - Pesticide= Not considered, Fertilizer = No, SOLD=US, everything else = No - Continue\)")]
 		public void
-			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
+			GivenICallSharedStep143792AdditionalProductInformation_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			var myNewProductClass = new NewProduct();
