@@ -3083,7 +3083,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			if (el.GetAttribute("type") == "checkbox")
 			{
-				if(el.Checked())
+				if (el.Checked())
 				{
 					el.TryClick();
 					return !el.Checked();
@@ -3973,16 +3973,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return false;
 				}
 				IWebElement arrowclass = upcmatch.FindElement(By.XPath("./ancestor::tr[position()=1]//a[@title='Expand']"), 2);
-				IWebElement arrowclassEl = arrowclass.FindElement(By.XPath(".//em"),2);
-				if(arrowclassEl.IsNullOrEmpty())
+				IWebElement arrowclassEl = arrowclass.FindElement(By.XPath(".//em"), 2);
+				if (arrowclassEl.IsNullOrEmpty())
 				{
 					Report.Info("Failed to find arrow");
 					return false;
 				}
-				if(arrowclassEl.GetAttribute("class").Contains("right"))
+				if (arrowclassEl.GetAttribute("class").Contains("right"))
 				{
 					Report.Info("The Arrow for the Upc was not expanded, now clicking the element to try and expand the UPC");
-					if(arrowclass.TryClick())
+					if (arrowclass.TryClick())
 					{
 						Report.Info("Successfully clicked expand arrow.");
 						Report.Screenshot();
@@ -4006,7 +4006,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return false;
 				}
 
-				
+
 				Report.Info("Successfully clicked expand arrow.");
 				Report.Screenshot();
 				return true;
@@ -4696,12 +4696,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool DataAcceptanceShowsAlertX(string expectedAlert)
 		{
 			List<string> foundAlerts = this.GetDataAcceptancePageAlerts();
-			if(foundAlerts.IsNullOrEmpty())
+			if (foundAlerts.IsNullOrEmpty())
 			{
 				Report.Info("No alert messages were found");
 				return false;
 			}
-			foreach(var msg in foundAlerts)
+			foreach (var msg in foundAlerts)
 			{
 				Report.Info($"The Error message found was: {msg.Trim()}");
 				if (msg.Trim().Contains(expectedAlert))

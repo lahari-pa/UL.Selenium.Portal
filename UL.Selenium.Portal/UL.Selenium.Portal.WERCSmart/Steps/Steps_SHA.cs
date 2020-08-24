@@ -1177,7 +1177,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisProductNotificationHistory = new ProductNotificationHistory();
 			thisProductNotificationHistory.WaitForTableContentToLoad();
 			SpecFlowReporting.TableRow(table.Rows[0]);
-			Report.Info("Getting displayed notifications");			
+			Report.Info("Getting displayed notifications");
 			List<Notification> notifications = thisProductNotificationHistory.GetNotifications();
 			for (int i = 0; i < notifications.Count; i++)
 			{
@@ -1997,7 +1997,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//		string pdfText = thisSHADocument.DocumentText(docURL2);
 		//		Report.Info($"this was the new found pdf text using the new test code: {pdfText}");
 
-		//		//END TEST CODE		
+		//		//END TEST CODE
 
 
 		//		//string pdfText = thisSHADocument.DocumentText(docURL);
@@ -2013,7 +2013,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//	}
 		//}
 
-		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'NGHS / English' twice as well as the product codes saved as: (.*) and (.*)")]		
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'NGHS / English' twice as well as the product codes saved as: (.*) and (.*)")]
 		public void CheckThatFileSavedAsContaisnTextNGHSEnglishTwicAndProductCodesSavedAs(string fileSavedAs, string code1SavedAs, string code2SavedAs)
 		{
 			var productOneDetails = (ProductInformation)Context.GetFromContext(code1SavedAs);
@@ -2024,9 +2024,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			var thisSHADocument = new SHADocumentList();
-			Delay.Seconds(3);		
+			Delay.Seconds(3);
 			Report.Screenshot();
-			
+
 			if (fileSavedAs.ToLower().Contains("savedas"))
 			{
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
@@ -2047,7 +2047,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
 
 
-			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ",""), @"NGHS/English");
+			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"NGHS/English");
 			Report.IsTrue(foundOccurences == 2, "PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
 
 		}
@@ -2061,6 +2061,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var productTwoDetails = (ProductInformation)Context.GetFromContext(code2SavedAs);
 			string ID2 = productTwoDetails.Id;
 
+			var thisSHADocument = new SHADocumentList();
+			Report.Info($"tab opened");
+			Delay.Seconds(3);
+			//string docURL2 = thisSHADocument.DocumentWindowOpen();
+			string docURL2 = thisSHADocument.TemporaryPDFWindowOpen();
+			Report.Info($"doc window opened");
+			Report.Screenshot();
+
+			if (fileSavedAs.ToLower().Contains("savedas"))
+			{
+				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
+			}
+
+			PdfReader reader = new PdfReader(fileSavedAs);
+			string text = string.Empty;
+			for (int page = 1; page <= reader.NumberOfPages; page++)
+			{
+				text += PdfTextExtractor.GetTextFromPage(reader, page);
+			}
+			reader.Close();
+			var pdfText = text;
+
+
+			Report.Info($"The Found PDF Text was: {pdfText}");
+			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
+			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
+
+
+		}
+
+
+		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / English' twice")]
+		public void CheckThatFileSavedAsContaisnTextCanadaEnglishTwice(string fileSavedAs)
+		{
 
 			var thisSHADocument = new SHADocumentList();
 			Delay.Seconds(3);
@@ -2082,37 +2116,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			Report.Info($"The Found PDF Text was: {pdfText}");
-			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
-			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
-			
-
-		}
-
-
-		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / English' twice")]
-		public void CheckThatFileSavedAsContaisnTextCanadaEnglishTwice(string fileSavedAs)
-		{	
-
-			var thisSHADocument = new SHADocumentList();
-			Delay.Seconds(3);
-			Report.Screenshot();
-
-			if (fileSavedAs.ToLower().Contains("savedas"))
-			{
-				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
-			}
-
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
-
-
-			Report.Info($"The Found PDF Text was: {pdfText}");		
 
 
 			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/English");
@@ -2188,6 +2191,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
 		{
+			if (searchTerm.Contains("saved as"))
+			{
+				searchTerm = Context.GetFromContext(searchTerm.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
+			}
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm),
 				"Failed to enter search term: " + searchTerm,
@@ -2298,7 +2305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
-	public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
+		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
 		{
 			if (retailer.ToLower().Contains("saved as"))
 			{
@@ -2354,7 +2361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-				Report.Info($"Failed to find product with status: " + status + " and retailer: " + retailer+" on attempt: "+ j+1);
+				Report.Info($"Failed to find product with status: " + status + " and retailer: " + retailer + " on attempt: " + j + 1);
 				Delay.Seconds(60);
 				j++;
 
@@ -2722,9 +2729,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I add Generic Product Names to the UPC bulk upload spreadsheet: (.*)")]
-		public void IUpdateBulkUPCFileToIncludeProductNames (string spreadsheetSavedAs)
+		public void IUpdateBulkUPCFileToIncludeProductNames(string spreadsheetSavedAs)
 		{
-			
+
 			//Currently does not work if the values you are trying to edit are blank (which is by default in the sample file)
 			var spreadSheetFile = (string)Context.GetFromContext(spreadsheetSavedAs);
 			var excel = new ExcelFunctions(spreadSheetFile, "Sheet1");
@@ -2732,7 +2739,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			int x = 1;
 			for (int i = 1; i <= numberOfProducts; i++)
 			{
-				Report.IsTrue(excel.EditCell(i, 1, ("TestName"+x)), "Failed to edit UPC" + i + " to: " + ("TestName" + x), "Successfully edited UPC to: " + ("TestName" + x), false, false);
+				Report.IsTrue(excel.EditCell(i, 1, ("TestName" + x)), "Failed to edit UPC" + i + " to: " + ("TestName" + x), "Successfully edited UPC to: " + ("TestName" + x), false, false);
 				x++;
 			}
 		}
@@ -3734,17 +3741,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		
+		[StepDefinition(@"I ensure that there is a SubscriptionStatus column in the Supplier Manager popup")]
+		public void IEnsureThatThereIsASubscriptionStatusColumn()
+		{
+			Report.Info("Checking for SubscriptionStatus column");
+			Report.IsTrue(new StudioSupplierManager().CheckForSupplierManagerColumn("SubscriptionStatus"), "Failed to find SubscriptionStatus column", "Successfully found SubscriptionStatus column");
+		}
+
+		[StepDefinition(@"I ensure that I see the status (.*) under the SubscriptionStatus column")]
+		public void IEnsureThatISeeTheStatusUnderTheSubscriptionStatusColumn(string status)
+		{
+			Report.Info("Checking for status " + status + " under the SubscriptionStatus column");
+			Report.IsTrue(new StudioSupplierManager().CheckForSupplierManagerColumnValue("SubscriptionStatus", status), "Failed to find status " + status + " for the SubscriptionStatus", "Successfully found SubscriptionStatus " + status + ".");
+		}
+
+		[StepDefinition(@"I ensure that the Subscription tab has (.*) font")]
+		public void IEnsureThatTheSubscriptionTabHasFont(string color)
+		{
+			Report.Info("Checking for " + color + " font on Subscription tab");
+			Report.IsTrue(new StudioSupplierManager().CheckForSubscriptionTabColor(color), "Failed to find " + color + " font on the Subscription tab", "Successfully found " + color + " font on the Subscription tab");
+		}
+
+		[StepDefinition(@"I ensure that the Subscription tab has (.*) background color")]
+		public void IEnsureThatTheSubscriptionTabHasBackgroundColor(string color)
+		{
+			Report.Info("Checking for " + color + " background color on Subscription tab");
+			Report.IsTrue(new StudioSupplierManager().CheckForSubscriptionTabBackgroundColor(color), "Failed to find " + color + " background color on the Subscription tab", "Successfully found " + color + " background color on the Subscription tab");
+		}
+
+
 
 		[StepDefinition(@"In The Supplier Manager popup I click on the category: (.*)")]
 		public void InTheSupplierManagerPopupIClickCategory(string category)
 		{
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep($"Starting to attempt to click the catagory: {category}");
-			Report.IsTrue(new StudioSupplierManager().ClickCategory(category),"Failed to click the category","Successfully clicked the category");
+			Report.IsTrue(new StudioSupplierManager().ClickCategory(category), "Failed to click the category", "Successfully clicked the category");
 			Report.StartStep($"Checking that the catagory: {category} is active");
 			Report.IsTrue(new StudioSupplierManager().CategoryIsActive(category), "The Category was not active", "The Category was active");
-			
+
 		}
 
 		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
@@ -3757,8 +3792,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				expectedValues.Add(thisRow["Expected Value"]);
 			}
 			Report.IsTrue(new StudioSupplierManager().DataConsentTableIsPresent(), "The Data Consent Tier table was not showing", "The Data Consent Tier table was showing");
-			Report.IsTrue(new StudioSupplierManager().ColumnContains(column,expectedValues),"The column: "+column+" did not contain all the expected values", "The column: " + column + " did contain all the expected values");
-			
+			Report.IsTrue(new StudioSupplierManager().ColumnContains(column, expectedValues), "The column: " + column + " did not contain all the expected values", "The column: " + column + " did contain all the expected values");
+
 		}
 
 		[StepDefinition(@"In the supplier manager popup I check that Data Tier Consent Table contains the following columns headings:")]
@@ -3770,7 +3805,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				expectedValues.Add(thisRow["Expected Headers"]);
 			}
-			Report.IsTrue(new StudioSupplierManager().DataConsentTiersTableContainsHeaders(expectedValues),"The Headers were not as expected", "The headers were as expected");
+			Report.IsTrue(new StudioSupplierManager().DataConsentTiersTableContainsHeaders(expectedValues), "The Headers were not as expected", "The headers were as expected");
 
 		}
 
@@ -3778,7 +3813,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsOnlyValidEmailAddress()
 		{
 			Report.IsTrue(new StudioSupplierManager().EmailColumnContainsEmailAddresses(), "The columns contained non valid email addresses", "The column contained only valid email addresses");
-						
+
 		}
 
 		[StepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the date column contains dates that are in the format mm-dd-yyyy")]
@@ -3796,13 +3831,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		[StepDefinition(@"In the SHA manager I search for the Product saved as: (.*) and if its Status is Accepted I set the retailers: to Completed and check the Products Grid")]
-		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs,Table retailerTable)
+		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs, Table retailerTable)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
 			string ID = ProductDetails.Id;
 			string status = "Accepted";
 			Report.Info("Searching for id: " + ID + " and status: " + status);
-			
+
 			int counter = 0;
 
 			bool found = false;
@@ -3865,7 +3900,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				counter++;
 			}
-			if(found==true)
+			if (found == true)
 			{
 				new Steps_Shared().GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(productSavedAs, retailerTable);
 				this.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(productSavedAs, "Completed");

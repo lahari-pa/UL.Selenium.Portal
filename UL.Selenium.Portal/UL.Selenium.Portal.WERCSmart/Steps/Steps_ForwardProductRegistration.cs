@@ -286,6 +286,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked save in the Edit UPC popup in Forwarding.");
 		}
 
+		[StepDefinition(@"In the Forwarding Edit popup, I set the size \(ounces\) attribute to (.*)")]
+		public void InTheForwardingEditPopupISetTheSizeAttributeTo(string value)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SetSizeAttribute(value), "Failed to set the size attribute for the UPC",
+				"Successfully set the size attribute for the UPC");
+		}
+
 		[StepDefinition(@"I click the 'select all' UPCs checkbox")]
 		public void ClickSelectAllUpcsCheckbox()
 		{
@@ -1191,7 +1199,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"If there is the option to select a vendor for the product with ID: (.*), I select the first option")]
 		public void IfThereIsTheOptionToSelectVendorISelect(string id)
 		{
-			Report.Info("Checking to see if there is the option to select a Vendor");			
+			Report.Info("Checking to see if there is the option to select a Vendor");
 			var frwdProdReg = new ForwardProductRegistration();
 			if (id.ToLower().Contains("saved as"))
 			{
@@ -1204,7 +1212,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				id = PI.Id;
 			}
 			Report.Info("Checking to see if there is the option to select a Vendor");
-			if(!frwdProdReg.GivenProductCheckVendorSelect(id))
+			if (!frwdProdReg.GivenProductCheckVendorSelect(id))
 			{
 				Report.Info($"There was no option for selecting a vendor for the product with ID: {id}");
 				return;
@@ -1213,7 +1221,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string firstOption = frwdProdReg.GivenProductFirstAvailableVendor(id);
 			Report.Info($"The first vendor option for ID: {id} was found as: {firstOption}");
 			Report.Info($"Selecting the option: {firstOption} for ID: {id}");
-			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option","Successfully selected the option");
+			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option", "Successfully selected the option");
 		}
 
 	}

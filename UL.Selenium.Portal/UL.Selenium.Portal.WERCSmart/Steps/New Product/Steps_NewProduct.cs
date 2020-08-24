@@ -2316,6 +2316,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Message: '" + alert + "' is displayed as expected");
 		}
 
+
 		[StepDefinition(@"If purchase details are showing click confirm order")]
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
 		{
@@ -3246,38 +3247,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(UPCPage.ConfirmTruckIconIsDisplayedForUPC(savedAs), "Failed to find truck icon for UPC: " + savedAs, "Successfully found truck icon for UPC: " + savedAs);
 		}
 
-		}
-
-		//public class UPCWarning : SeleniumBaseObject
-		//{
-		//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
-
-		//	protected override By ContainerElementLocator => By.XPath(BasePath);
-
-		//	public bool ClickUPCWarningButton(string choice)
-		//	{
-		//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
-		//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
-
-		//		if (modalWindow is null || modalTitle is null)
-		//		{
-		//			Report.Failure("Could not locate UPC Warning modal window.");
-		//			return false;
-		//		}
-
-		//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
-		//		switch (choice)
-		//		{
-		//			case "ok":
-		//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
-		//				return deleteBtn.TryClick();
-		//			case "cancel":
-		//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
-		//				return cancelBtn.TryClick();
-		//		}
-		//		return false;
-		//	}
-		//}
 	}
+
+	//public class UPCWarning : SeleniumBaseObject
+	//{
+	//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
+
+	//	protected override By ContainerElementLocator => By.XPath(BasePath);
+
+	//	public bool ClickUPCWarningButton(string choice)
+	//	{
+	//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
+	//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
+
+	//		if (modalWindow is null || modalTitle is null)
+	//		{
+	//			Report.Failure("Could not locate UPC Warning modal window.");
+	//			return false;
+	//		}
+
+	//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
+	//		switch (choice)
+	//		{
+	//			case "ok":
+	//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
+	//				return deleteBtn.TryClick();
+	//			case "cancel":
+	//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
+	//				return cancelBtn.TryClick();
+	//		}
+	//		return false;
+	//	}
+	//}
+}
 
 
