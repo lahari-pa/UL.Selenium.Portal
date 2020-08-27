@@ -1867,6 +1867,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Screenshot();
 				Report.Info("Selecting the first option for the required field");
 				string option = selNewProduct.GetAllOptionsForSection(section).First();
+
 				selNewProduct.SetOptionInSection(section, option);
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(),
@@ -3031,7 +3032,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().DataAcceptanceShowsAlertX(expectedError), "The expected alert was not found", "The expected alert was found");
 		}
 
-		[StepDefinition(@"I unselect option: (.*) under section: (.*) and subsection: (.*)")]
+		[StepDefinition(@"I unselect the option: (.*) under section: (.*) and subsection: (.*)")]
 		public void ForTheOptionSubOptionUnselect(string option, string section, string subSection)
 		{
 			Report.IsTrue(new NewProduct().UnsetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
@@ -3136,7 +3137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'")]
+		[StepDefinition(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet \(SDS\), Article Information Sheet (AIS) and/or Product Label for this registration'")]
 		public void SelectConfirmRegulatoryDocumentsConfirmationQuestion()
 		{
 			Report.IsTrue(new NewProduct().CheckRegulatoryDocumentsConfirmationBox(), "Failed to tick the confirmation option", "Successfully ticked the confirmation option");
@@ -3246,6 +3247,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			savedAs = Context.GetFromContext(savedAs).ToString();
 			Report.IsTrue(UPCPage.ConfirmTruckIconIsDisplayedForUPC(savedAs), "Failed to find truck icon for UPC: " + savedAs, "Successfully found truck icon for UPC: " + savedAs);
 		}
+
+		[StepDefinition(@"In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet \(SDS\)' I tick confirm")]
+		public void InTheRegulatoryDocumentsToProvideScreenIfTheConfirmSDSQuestionIsSeenThenGrant()
+		{
+
+			var MyStepsNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
+
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
+		}
+
+
 
 	}
 

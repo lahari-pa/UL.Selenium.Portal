@@ -607,6 +607,7 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 
 @ScenarioId:733
 @ScenarioId:733
+@tfs_design
 Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -615,16 +616,20 @@ Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Single Purpose Cleaner
 	Given I save the product information as: TestCase75840
-	Given I call Shared Step 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
+	Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+	#Given I call Shared Step 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
 	#Given I call Shared Step 118064 (Additional Product Information - US only - No GHS, Not Direct Ship, Not CA Cleaning ,Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Then I should see the Additional Documents to Provide Page
+	#And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
 	Given in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue

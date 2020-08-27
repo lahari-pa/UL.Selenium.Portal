@@ -86,6 +86,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_TheProduct().SetTypeOfProductTo(type);
 			Report.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			var modal = new ModalDialog();
+
+			if(type=="Raw Material")
+			{
+				if (modal.WaitForContainerToBeVisible(2) && modal.GetTitle().Contains("Warning"))
+				{
+					Report.Info($"The Raw Material warning popup was found");
+					Report.Info("Closing popup");
+					modal.ClickButton("OK");
+					Delay.Seconds(2);
+					Report.Info("I click Continue");
+					MyStepsNewProduct.ClickContinue();
+				}
+			}
+			
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
 
@@ -1070,12 +1085,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedUploadProductLabelOnly()
 		{
 			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();			
+			var newProdClass = new NewProduct();
 			Report.StartStep(@"I click the browse button for label: Product Label and upload PDF: testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Delay.Seconds(2);
-			Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-			MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+
+			//if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			//{
+			//	//Should this show on this page? this step is for the additional docs page? Any examples?
+			//	Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+			//	MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			//	//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
+			//}
+		
 			Delay.Seconds(2);
 			Report.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -3842,8 +3865,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
+		[StepDefinition(@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
 		public void
 			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSEverythingElseNo_Continue()
 		{
@@ -3856,6 +3878,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
 				"Product is not considered a pesticide product");
+			Report.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			Report.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			Report.StartStep("Looking For the I Set the Cleaning products must comply with California's Cleaning Product Right to Know Act field, and Setting to: No if it exists ");
+			if (myNewProductClass.SectionExists("Cleaning products must comply with California's Cleaning Product Right to Know Act."))
+			{
+				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
+					"No");
+			}
+			Report.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			Report.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+
+		[StepDefinition(@"I call Shared Step 143792 \(Additional Product Information - Pesticide= Not considered, Fertilizer = No, SOLD=US, everything else = No - Continue\)")]
+		public void
+			GivenICallSharedStep143792AdditionalProductInformation_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
+		{
+			var MyNewProduct = new StepsNewProduct();
+			var myNewProductClass = new NewProduct();
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I should see the Additional Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Report.StartStep(
+				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"Product is not considered a pesticide product");
+			Report.StartStep(
+				"I set the PDoes the product contain fertilizer (P, N or K) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Does the product contain fertilizer (P, N or K)",
+				"No");
+
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -6862,6 +6931,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
@@ -6871,6 +6941,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+		
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
+
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -6881,6 +6958,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			Report.StartStep("I set 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.");
@@ -6894,6 +6972,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -7895,6 +7978,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			Report.StartStep("I set WHMIS-complient SDS to 'I need an SDS authored'");
@@ -7903,6 +7987,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			Report.StartStep("I upload a label");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
