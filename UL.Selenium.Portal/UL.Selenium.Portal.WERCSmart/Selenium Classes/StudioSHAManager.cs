@@ -417,7 +417,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						}
 						int x = 0;
 						bool clickedSuccess = false;
-						while (x<5 && clickedSuccess==false)
+						while (x < 5 && clickedSuccess == false)
 						{
 							Delay.Seconds(2);
 							checkbox.TryClick();
@@ -430,7 +430,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							else
 							{
 								Report.Info("Attempted to check checkbox but failed.");
-									
+
 							}
 							x++;
 
@@ -440,7 +440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Report.Info("Final attempt to check checkbox failed.");
 							return false;
 						}
-						
+
 					}
 					else
 					{
@@ -572,7 +572,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				//if this fails in some cases, try the old method first and then check for the context menu (var thisContextMenu = new RightClickProductMenu();) and only if that fails do the new way
 				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
 				int i = 0;
-				while (i<70)
+				while (i < 70)
 				{
 					Delay.Seconds(2);
 					actions.MoveToElement(matchingTD2);
@@ -584,7 +584,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 					i = i - 10;
-				}				
+				}
 				return false;
 			}
 			else
@@ -1275,7 +1275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string backgroundColourTest = upcRow.GetAttribute("background-color");
 			Report.Info($"The string for the attribute 'background-color' was found to be: {backgroundColourTest}");
 
-			return background == "rgb(235, 235, 224)";
+			return background == "rgba(235, 235, 224, 1)";
 		}
 
 		public bool ClickProcessRecertification()
@@ -1443,14 +1443,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							string productsGridHandle = (string)Context.GetFromContext("MainWindowHandle");
 							SeleniumBrowser.WebBrowser.SwitchTo().Window(productsGridHandle);
 							Delay.Seconds(5);
-							SeleniumBrowser.SwitchToIFrame("Widget1FRAME");						
+							SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
 							string newTab = (string)Context.GetFromContext("CurrentWindow");
 							SeleniumBrowser.WebBrowser.SwitchTo().Window(newTab);
 							new GlobalSteps().SwitchBackToMainWindow("CurrentWindow");
 							SeleniumBrowser.WebBrowser.SwitchTo().Window(productsGridHandle);
 							SeleniumBrowser.SwitchToIFrame("Widget1FRAME");
-							return new ProductInformation
-							{
+							return new ProductInformation {
 								Id = thisIDTD.GetValue().Trim(),
 								Name = thisNameTD.GetValue().Trim()
 							};
@@ -1590,7 +1589,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			List<string> columnsNotFound = new List<string>();
 			List<string> columnNamesStrings = new List<string>();
-			IList <IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
+			IList<IWebElement> columnNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//th"), 2);
 
 			foreach (var columnName in columnNames)
 			{
@@ -1599,7 +1598,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (TableRow row in table.Rows)
 			{
-			
+
 				if (!columnNamesStrings.Contains(row["Column Name"]))
 				{
 					columnsNotFound.Add(row["Column Name"]);
@@ -1673,7 +1672,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return true;
 		}
-	
+
 		public bool CheckTheFollowingSectionTitles(Table table)
 		{
 
@@ -1685,7 +1684,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				for (int i = 0; i < columnNamesArr.Count(); i++)
 				{
 					IWebElement section = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//tr[@class='DarkBack'][2]//th[" + columnSectionsArr[i] + "]"), 2);
-	
+
 					if (!section.Text.Contains(columnNamesArr[i]))
 					{
 						return false;
@@ -1984,7 +1983,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[contains(@aria-labelledby,'IsArchiveProduct')]");
 
-		
+
 
 		public bool ArchivedUPCPopupTitle(string title, out string displayedTitle) =>
 			title == (displayedTitle = this.containerElement.FindElement(By.Id("ui-dialog-title-dialog-IsArchiveProduct")).GetInnerText());
@@ -2442,9 +2441,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				IWebElement statusSelect = this.containerElement.FindElement(By.XPath(".//select[@id='txtHoldSubject']"));
-				if(option.Contains("�"))
+				if (option.Contains("�"))
 				{
-					string updatedOption= option.Replace("�", "–");
+					string updatedOption = option.Replace("�", "–");
 					statusSelect.Select(updatedOption);
 					return statusSelect.SelectedOption() == updatedOption;
 				}
