@@ -1867,6 +1867,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Screenshot();
 				Report.Info("Selecting the first option for the required field");
 				string option = selNewProduct.GetAllOptionsForSection(section).First();
+
 				selNewProduct.SetOptionInSection(section, option);
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(),
@@ -2315,6 +2316,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Alert message {(expectDisplayed ? "is not" : "is")} displayed when . Expected: " + alert + " but got: " + string.Join(",", actualAlerts),
 				"Message: '" + alert + "' is displayed as expected");
 		}
+
 
 		[StepDefinition(@"If purchase details are showing click confirm order")]
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
@@ -3030,7 +3032,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().DataAcceptanceShowsAlertX(expectedError), "The expected alert was not found", "The expected alert was found");
 		}
 
-		[StepDefinition(@"I unselect option: (.*) under section: (.*) and subsection: (.*)")]
+		[StepDefinition(@"I unselect the option: (.*) under section: (.*) and subsection: (.*)")]
 		public void ForTheOptionSubOptionUnselect(string option, string section, string subSection)
 		{
 			Report.IsTrue(new NewProduct().UnsetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
@@ -3132,6 +3134,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 
 			Report.IsTrue(new NewProduct().CheckFileNameForSectionAndType(type, label, filename), "File name did not match the expected", "The file name matched");
+
+		}
+
+		[StepDefinition(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet \(SDS\), Article Information Sheet (AIS) and/or Product Label for this registration'")]
+		public void SelectConfirmRegulatoryDocumentsConfirmationQuestion()
+		{
+			Report.IsTrue(new NewProduct().CheckRegulatoryDocumentsConfirmationBox(), "Failed to tick the confirmation option", "Successfully ticked the confirmation option");
 
 		}
 
@@ -3255,36 +3264,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 	}
 
-		//public class UPCWarning : SeleniumBaseObject
-		//{
-		//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
+	//public class UPCWarning : SeleniumBaseObject
+	//{
+	//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
 
-		//	protected override By ContainerElementLocator => By.XPath(BasePath);
+	//	protected override By ContainerElementLocator => By.XPath(BasePath);
 
-		//	public bool ClickUPCWarningButton(string choice)
-		//	{
-		//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
-		//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
+	//	public bool ClickUPCWarningButton(string choice)
+	//	{
+	//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
+	//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
 
-		//		if (modalWindow is null || modalTitle is null)
-		//		{
-		//			Report.Failure("Could not locate UPC Warning modal window.");
-		//			return false;
-		//		}
+	//		if (modalWindow is null || modalTitle is null)
+	//		{
+	//			Report.Failure("Could not locate UPC Warning modal window.");
+	//			return false;
+	//		}
 
-		//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
-		//		switch (choice)
-		//		{
-		//			case "ok":
-		//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
-		//				return deleteBtn.TryClick();
-		//			case "cancel":
-		//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
-		//				return cancelBtn.TryClick();
-		//		}
-		//		return false;
-		//	}
-		//}
-	}
+	//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
+	//		switch (choice)
+	//		{
+	//			case "ok":
+	//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
+	//				return deleteBtn.TryClick();
+	//			case "cancel":
+	//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
+	//				return cancelBtn.TryClick();
+	//		}
+	//		return false;
+	//	}
+	//}
+}
 
 

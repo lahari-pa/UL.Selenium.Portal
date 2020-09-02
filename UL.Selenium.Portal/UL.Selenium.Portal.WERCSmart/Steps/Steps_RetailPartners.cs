@@ -368,6 +368,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Success("More Information link clicked!");
 				Report.Info("Switching to new window");
 
+				Delay.Seconds(10);
+
 				Context.AddToContext("MainWindowHandle", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
 
 				ReadOnlyCollection<string> windowHandles = SeleniumBrowser.WebBrowser.WindowHandles;

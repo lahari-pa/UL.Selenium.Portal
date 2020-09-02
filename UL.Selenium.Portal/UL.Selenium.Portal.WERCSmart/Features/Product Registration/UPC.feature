@@ -598,7 +598,7 @@ Scenario: [87305] Retailer Selected but No UPC Associated: Remove Retailer when 
 		| Retailer       |
 		| Amazon         |
 		| Autozone       |
-		| Best Buy       |		
+		| Best Buy       |
 		| CVS            |
 		| Dollar General |
 	Given I click the 'Add UPC' button
@@ -761,17 +761,17 @@ Scenario: [109596] Edit UPC and adding a Retailer to a UPC should create an orde
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109596)
+
 #Given I right click on product saved as TestCase109596 and select View Orders
 #Given I click on the first entry in the View Orders popup
 #And I confirm that the top entry has a status of Additional UPC submission
 #And In the View Orders popup I click Back
 #Given I click on the second entry in the View Orders popup
 #And I confirm that for each retailer, the entry has a status of Chemical Assessment
-
 @ScenarioId:6948
 Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
-#Currently running into issues with file upload working full with dpci. Need to discuss. May need to remove BulkUploadFile 
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Currently running into issues with file upload working full with dpci. Need to discuss. May need to remove BulkUploadFile
+	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase115330
@@ -780,8 +780,8 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I select the following retailers in the Select Retailers popup list view:
-		| Retailer       |
-		| Target         |		
+		| Retailer |
+		| Target   |
 	Then I click Done on Select Retailers window
 	And I click continue
 	Then I generate a random UPC number and save as: UPC#115330_1
@@ -798,7 +798,6 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 		| 978959000000 |      | 3        | 33   | 3.44               | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
 		| 688267000000 |      | 4        | 44   | 4.55               | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
 		| 854911000000 |      | 5        | 55   | 5.66               | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
-
 	And I edit the testdoc.xlsx, and save its filepath as: Bulktest115330 and verify it contains the UPC data in the table saved as: UPCTable115330, (Base Data Only: true)
 		| UPC            | Name     | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI | HD: OMSID | CT: Item Number   |
 		| %UPC#115330_1% | MyChalk1 | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           |          | 100000001 | 123-1234,123-1230 |
@@ -807,8 +806,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 		| %UPC#115330_4% | MyChalk4 | 4        | 32   | 4.55               | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
 		| %UPC#115330_5% | MyChalk5 | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
 		| %UPC#115330_6% | MyChalk6 | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           |          | 100000006 | 123-1234,123-1235 |
-		| %UPC#115330_7% | MyChalk7 | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |  
-
+		| %UPC#115330_7% | MyChalk7 | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |
 	Then I click the 'Upload UPCs' button and upload the file saved as: Bulktest115330
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable115330
 	Then In the Add Multiple dialog box I select all UPCs
@@ -818,7 +816,6 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given In the Add Multiple dialog box I click Next
 	Then In the Add Multiple dialog box I select all Retailers
 	Then I Check if all Retailers are: Selected
-	And I check that the DPCI of each Target product matches the excel file named: testdoc.xlsx uploaded saved as: UPCTablePath115330
 	Then In the Add Multiple dialog box I click Finish
 	When In the Recipient and Product Details tab, I expand the first UPC
 	Then I check that DPCI for retailer Target UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable115330
@@ -831,8 +828,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase115330
 
 @ScenarioId:7042
-	Scenario:[120798] "U" for UPC Update for Suspended Status
-
+Scenario:[120798] "U" for UPC Update for Suspended Status
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC120798
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -849,35 +845,35 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Then in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-    And I navigate to the home page
-
+	And I navigate to the home page
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120798)
-    Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Submitted
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120798)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120798)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Assigned
-    And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120798)
+	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120798)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase120798)
 	And I call Shared Step 78877 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT, NGHS, HSGH (EN and CF) and SBCS for saved as: TestCase120798
 	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase120798)
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120798)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Accepted
-
+	Given I navigate to the landing page
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase120798
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit UPCs
 	Given I generate a random UPC number and save as: UPC120798
-	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC120798, container type: Plastic Container and size: 12 click continue
+	And I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC120798, container type: Plastic Container and size: 12 - do not click continue
+	And I click Save in The Product Page
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	And I navigate to the home page
-
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I click the following option in the bottom menu: Search
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120798)
@@ -885,14 +881,17 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Then I confirm that there is a 'U' next to the following product saved as: TestCase120798
 	And In SHA Manager I select the first product
 	And I click the following option in the bottom menu: Suspended
-	And In the Suspended dialog in the Select Subject drop down I choose: Save
-    Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Suspended
+	And In the Suspended dialog I Select the following clients: All
+	And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: Automated QASha
+	And In the Suspended dialog in the Select Subject drop down I choose: Product Name is Unclear
+	And In the Suspended dialog in the Supplier Message field I add the following text: supplier message input
+	And In the Suspended dialog in the Internal Product Note field I add the following text: internal product note input
+	And In the Suspended dialog I click Suspend
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Suspended
 	Then I confirm that there is a 'U' next to the following product saved as: TestCase120798
 
-	
 @ScenarioId:7043
-	Scenario:[120849] "U" for UPC Update No Fee Charge
-
+Scenario:[120849] "U" for UPC Update No Fee Charge
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC120798
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -909,21 +908,20 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Then in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
 	And I navigate to the home page
-
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120798)
-    Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Submitted
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Submitted
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120798)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120798)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120798 and its status is: Assigned
-    And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120798)
-    And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase120798)
+	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase120798)
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase120798)
 	And I call Shared Step 78877 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT, NGHS, HSGH (EN and CF) and SBCS for saved as: TestCase120798
 	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase120798)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120798)
@@ -931,7 +929,6 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase120798) for
 		| Retailer  |
 		| Walgreens |
-
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I search for the product saved as: TestCase120798
 	When I click Row Actions for the most recent product returned
@@ -942,4 +939,3 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 	Given In the Data Acceptance page I click on the Accept button
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page
-

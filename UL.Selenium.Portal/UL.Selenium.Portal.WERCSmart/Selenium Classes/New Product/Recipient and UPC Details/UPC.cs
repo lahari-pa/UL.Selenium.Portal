@@ -814,20 +814,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool IsRequiredValueOfRetailerInActiveRow(string retailerID, string field)
 		{
-			IWebElement isRequiredLabel = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]//..//p[@class='form-error']"), 2);
+			IWebElement isRequiredLabel = this.ContainerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]//..//p[@class='form-error']"), 2);
 			return isRequiredLabel.Displayed;
 		}
 
 		public bool ClickCloseInPopupWithTitle(string title)
 		{
-			IWebElement continueButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='" + title + "']/../following-sibling::div[@class='modal-footer']//button"), 2);
+			IWebElement continueButton = this.ContainerElement.FindElement(By.XPath("//h4[text()='" + title + "']/../following-sibling::div[@class='modal-footer']//button"), 2);
 			return continueButton.TryClick();
 		}
 
 		public bool CheckDeleteRowsWarningPopupContainsText(string lineOne, string lineTwo)
 		{
-			IWebElement lineOneEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
-			IWebElement lineTwoEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
+			IWebElement lineOneEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
+			IWebElement lineTwoEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
 
 			if (lineOneEl.Text == lineOne && lineTwoEl.Text == lineTwo)
 			{
@@ -839,7 +839,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public new bool ConfirmTruckIconIsDisplayedForUPC(string savedAs)
 		{
-			IWebElement truckIcon = this.containerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/following-sibling::i"), 2);
+			IWebElement truckIcon = this.ContainerElement.FindElement(By.XPath("//span[@data-bind='text: upcNumber.field'][text()='" + savedAs + "']/following-sibling::i"), 2);
 			if (truckIcon != null)
 			{
 				return true;

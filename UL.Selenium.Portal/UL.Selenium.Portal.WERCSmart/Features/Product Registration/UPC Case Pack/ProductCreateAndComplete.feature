@@ -371,7 +371,7 @@ Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87923 and its status is: Completed
 
 #And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
-@tfs_design
+
 @ScenarioId:6151
 Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -403,7 +403,9 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I click the browse button for label: OSHA SDS and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	Given in the Additional Documents to Provide page I click Continue
+	Given I click continue
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I call Shared Step 54796 (Purchase Summary)

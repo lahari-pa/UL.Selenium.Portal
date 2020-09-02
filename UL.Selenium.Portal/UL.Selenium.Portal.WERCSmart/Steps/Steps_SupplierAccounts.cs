@@ -146,7 +146,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myRetailPartner.ConfirmHeadingShowing("Data Consent Tiers");
 			myRetailPartner.SetDataConsentTier("Tier 2.1", "on");
 			myRetailPartner.SetDataConsentTier("Tier 2.2", "on");
-			myRetailPartner.SetDataConsentTier("Tier 3", "on");
+			myRetailPartner.SetDataConsentTier("Tier 4.1", "on");
 			myRetailPartner.GivenClickTheSaveChangesButton();
 			myRetailPartner.ClickCloseOnSavePopupDialog();
 

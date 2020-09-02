@@ -109,6 +109,9 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
 		| Graphite           | 33.2    | false               | false       |            |
 		| Ethylene carbonate | 60.1    | false               | false       |            |
+	Given I should see the Formulation > Batteries Page
+	Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+	Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 54799 (Lithium Battery Characteristics - any data - Happy path)
 	Given I call Shared Step 60096 (Lithium Battery Transportation)

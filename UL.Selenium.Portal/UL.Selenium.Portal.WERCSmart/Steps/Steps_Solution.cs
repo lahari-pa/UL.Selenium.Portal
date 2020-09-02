@@ -10,6 +10,7 @@ using System.Drawing;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Selenium.Extensions;
 using System;
+using UL.Automation.Selenium.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -120,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					urls = new[] { "https://choosegoodguide.com/" };
 					break;
 				case "GoodGuide for Consumers":
-					urls = new[] { "https://www.goodguide.com/" };
+					urls = new[] { "https://goodguide.com/" };
 					break;
 				case "Navigator":
 					urls = new[] { "https://msc.ul.com/en/products/navigator/" };
@@ -162,7 +163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string url = new UlSolutionCenter().GetSectionLogoUrl("Navigator");
 			Bitmap actualBitmap = GeneralUtilities.CreateBitmapFromURL(url);
 			EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Images.NAVIGATOR-LOGO TM.png", out string filePath);
-			if(filePath==null)
+			if (filePath == null)
 			{
 				Report.Failure("Failed to extract dependency file");
 				return;
@@ -179,7 +180,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Failure($"The Navigator Logo was not as expected: {ex.Message}");
 			}
-			
+
 		}
 	}
 }

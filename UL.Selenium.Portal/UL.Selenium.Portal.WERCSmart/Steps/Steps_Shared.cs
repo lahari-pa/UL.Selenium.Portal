@@ -86,6 +86,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_TheProduct().SetTypeOfProductTo(type);
 			Report.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			var modal = new ModalDialog();
+
+			if(type=="Raw Material")
+			{
+				if (modal.WaitForContainerToBeVisible(2) && modal.GetTitle().Contains("Warning"))
+				{
+					Report.Info($"The Raw Material warning popup was found");
+					Report.Info("Closing popup");
+					modal.ClickButton("OK");
+					Delay.Seconds(2);
+					Report.Info("I click Continue");
+					MyStepsNewProduct.ClickContinue();
+				}
+			}
+			
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
 			Report.Info($"The TestCaseId was found as: {TReVorSettings.TestCaseId}");
 
@@ -104,14 +119,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
 			MyStepsNewProduct.SectExatcDataNotKnown("pH");
 			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7 (Neutral)");
-			//MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");	
+			//MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
 			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			MyStepsNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Not Tested/Unknown");
-			
+
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Open cup method");
-			
+
 			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all potential allergens included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
@@ -1070,12 +1085,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedUploadProductLabelOnly()
 		{
 			ReportSettings.UseSubSteps = true;
-			var MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();			
+			var newProdClass = new NewProduct();
 			Report.StartStep(@"I click the browse button for label: Product Label and upload PDF: testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Delay.Seconds(2);
-			Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-			//MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+
+			//if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			//{
+			//	//Should this show on this page? this step is for the additional docs page? Any examples?
+			//	Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+			//	MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			//	//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
+			//}
+		
 			Delay.Seconds(2);
 			Report.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -1155,8 +1178,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				table.Rows[0]["Minimum Ignition Energy"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(
 				table.Rows[0]["Minimum Ignition Energy"]);
-Report.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-								 table.Rows[0]["Viscosity"]);
+			Report.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
+											 table.Rows[0]["Viscosity"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(table.Rows[0]["Viscosity"]);
 			Report.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
 								 table.Rows[0]["Appearance"]);
@@ -1779,14 +1802,14 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
-			Report.StartStep("I set the UN Number field to: UN3159");			
+			Report.StartStep("I set the UN Number field to: UN3159");
 			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN3159");
-			Delay.Seconds(2);			
+			Delay.Seconds(2);
 			Delay.Seconds(2);
 			Report.StartStep("I enter 'Technical Test Name' in section: Technical Name (if applicable)");
 			MyNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Test Name");
 			Delay.Seconds(2);
-			Report.StartStep("I select '2.2' in section: Hazard Class (select)");			
+			Report.StartStep("I select '2.2' in section: Hazard Class (select)");
 			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "2.2");
 			Report.StartStep("I select 'None' in section: Packing Group (select)");
 			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "None");
@@ -1830,8 +1853,8 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I set the UN Number field to: UN1950");
 			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
 			Delay.Seconds(2);
-			Report.StartStep("I select the first option in section: Proper Shipping Name");			
-			MyNewProduct.SelectFirstOptionInSection("Proper Shipping Name");	
+			Report.StartStep("I select the first option in section: Proper Shipping Name");
+			MyNewProduct.SelectFirstOptionInSection("Proper Shipping Name");
 			Delay.Seconds(2);
 			Report.StartStep("I select the first option in section: Hazard Class (select)");
 			MyNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
@@ -2173,7 +2196,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			stepsNewProductIngredients.AddIngredients(table);
-			Report.StartStep("In the Ingredients page I click Continue");			
+			Report.StartStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			Report.StartStep("I should see the Waste Classification Data Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Waste Classification Data");
@@ -2373,7 +2396,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				{
 					int i = 0;
 					bool clicked = false;
-					while (i<5&& clicked == false)
+					while (i < 5 && clicked == false)
 					{
 						Delay.Seconds(2);
 						clicked = thisNewProduct.SetOptionInSection(section.Trim(), option.Trim());
@@ -2385,7 +2408,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				//Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),	"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(), "Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
 				Delay.Seconds(1);
 				//MyStepsNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
-				
+
 			}
 
 			Report.StartStep("I set theSelect all potential allergens included in this product option to: Dairy");
@@ -3749,7 +3772,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 
 			Report.StartStep("I should see the Volatile Organic Compound Summary");
-			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");			
+			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
 			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 		}
 
@@ -3842,8 +3865,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
+		[StepDefinition(@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
 		public void
 			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSEverythingElseNo_Continue()
 		{
@@ -4586,7 +4608,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				Report.StartStep("I click continue");
 				selStepsNewProduct.ClickContinue();
 			}
-		
+
 		}
 
 		[StepDefinition(@"I call Shared Step 65080 \(Login to Studio and Open SHA manager\)")]
@@ -5813,14 +5835,14 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				throw new Exception(
 					$"Needs the product ID to be saved to context as 'TestCase{TReVorSettings.TestCaseId}'!");
 			}
-			
+
 			selStepsStudio.PowerDesignerPlusWelcomeIEnterSelectSourceProduct(id);
 			Report.StartStep("I confirm CKLT (Checklist) is selected as the subformat");
 			selStepsStudio.IConfirmTheSelectedSubformatInThePdPlusPopupIs("CKLT / Checklist");
 			Report.StartStep("I click continue");
 			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
 			Delay.Seconds(3);
-			
+
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
@@ -6908,6 +6930,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			MyNewProduct.ThenFieldExists("WHMIS-compliant Safety Data Sheet, English and French-Canadian");
@@ -6917,6 +6940,13 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I set 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian", "I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+		
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
+
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -6927,6 +6957,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide Page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			Report.StartStep("I set 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.");
@@ -6940,6 +6971,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			MyNewProduct.ThenFieldExists("Product Label in English and French-Canadian as required in Consumer Chemicals and Containers Regulations (CCCR), 2001 of the Hazardous Products Act");
 			Report.StartStep("I upload a PDF document into the Product Label in English and French-Canadian field.");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -7941,6 +7977,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		{
 			ReportSettings.UseSubSteps = true;
 			var MyNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
 			Report.StartStep("I should see the Regulatory Documents to Provide page");
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 			Report.StartStep("I set WHMIS-complient SDS to 'I need an SDS authored'");
@@ -7949,6 +7986,11 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 				"I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.");
 			Report.StartStep("I upload a label");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
 			Report.StartStep("I click continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -8199,7 +8241,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			Report.StartStep("I should see the Pesticide Details - U.S. Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Pesticide Details - U.S.");		
+			MyStepsNewProduct.GivenIShouldSeeXPage("Pesticide Details - U.S.");
 
 			Report.StartStep("I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has an Environmental Protection Agency (EPA) Registration Number", "No");
@@ -9209,7 +9251,9 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Report.StartStep("I upload a PDF file to section: OSHA SDS");
 			MyNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Report.StartStep("Click the checkbox for the 'I confirm that I have provided the most up - to - date, OSHA - compliant SDS...' question");
-			MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
+			//MyNewProduct.SetTheSectionOptionTo("SDS current version", "OSHA-compliant SDS");
+			MyNewProduct.ICheckTheCheckboxWithDescription("check",
+							"I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.");
 			Report.StartStep("In the Regulatory Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
@@ -9706,7 +9750,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 		[StepDefinition(
 		@"I filter subformat (.*) and open checklist (.*)")]
 		public void IFilertSubformatAndOpenChecklist(string subformat, string checkList)
-		{ 		
+		{
 			if (Context.Contains("ElectronicProduct"))
 			{
 				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
@@ -10219,7 +10263,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			Dictionary<string, string> ExcelDictionaryDataFromContext = (Dictionary<string, string>)Context.GetFromContext("ExcelDictionaryData");
 
 			string ExcelEPAType, ExcelEPACode;
-			
+
 			if (ExcelDictionaryDataFromContext.ContainsKey("EPA Type"))
 			{
 				ExcelEPAType = ExcelDictionaryDataFromContext["EPA Type"];
@@ -10388,7 +10432,7 @@ Report.StartStep("In the Review and Submit tab of the New Product Page for Visco
 			var MyStepsNewProduct = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			Report.StartStep("I should see the Waste Classification Data Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");			
+			MyStepsNewProduct.GivenIShouldSeeXPage("Waste Classification Data");
 			Report.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
 			Report.StartStep("In the Waste Classification Data page I click Continue");

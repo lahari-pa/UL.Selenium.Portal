@@ -391,19 +391,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			Report.Info("Checking to see if the product found has the option to select a vendor");
-			if(wantedProduct.SelectVendor ==null)
+			if (wantedProduct.SelectVendor == null)
 			{
 				Report.Info("The Select Vendor option was not found");
 				return false;
 			}
 			Report.Info("The select vendor option was found");
 			return true;
-		
+
 		}
 
 
 
-		public bool GivenProductSelectVendor (string wantedID,string option)
+		public bool GivenProductSelectVendor(string wantedID, string option)
 		{
 			List<SelectProducts> products = this.GetProducts();
 			if (products.Count == 0)
@@ -447,14 +447,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			bool foundProduct = false;
 			SelectProducts wantedProduct = new SelectProducts();
-			foreach(var product in products)
+			foreach (var product in products)
 			{
-				if(product.ID==wantedID)
+				if (product.ID == wantedID)
 				{
 					wantedProduct = product;
 				}
 			}
-			if(foundProduct==false)
+			if (foundProduct == false)
 			{
 				Report.Failure($"There was no Product with ID: {wantedID} found");
 				Report.Screenshot();
@@ -522,6 +522,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var editUPCs = new EditUPC();
 			return editUPCs.EditUPCUpgradeOptionToLevel(option, level);
+		}
+
+		public bool SetSizeAttribute(string value)
+		{
+			var editUPCs = new EditUPC();
+			return editUPCs.SetSizeAttribute(value);
 		}
 
 		public bool ClickSave()
@@ -1154,6 +1160,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			}
 
+			public bool SetSizeAttribute(string value)
+			{
+				IWebElement size = this.containerElement.FindElement(By.XPath(@"//label[text()='Size (Ounces)']/following-sibling::input"), 2);
+				return size.TryEnterText(value);
+			}
 		}
 
 	}
