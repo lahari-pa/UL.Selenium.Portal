@@ -133,7 +133,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//Report.Info($"Found the category: {category}, attempting to click the category");
 			//return foundCategory.TryClick();
 			
-			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath(".//div[text()='"+ category + "']"), 2);
+			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath(".//ul[@class='ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all']//a[text()='" + category + "']"), 2);
 			return firstSupplier.TryClick();
 
 		}

@@ -5160,6 +5160,52 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		public bool ConfirmTierDataShowsCorrectAnswer(string answer)
+		{
+			IWebElement answerEl = this.ContainerElement.FindElement(By.XPath("//h3[text()='Consent to Tier 2.1, 2.2, 4.2 Data Uses']/following-sibling::p[text()='Accept']"), 2);
+			if (answerEl != null)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool CheckTextInForumulationBatteriesPage()
+		{
+			IWebElement displayedText = this.ContainerElement.FindElement(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2);
+
+			if (!displayedText.Text.Contains("Data Use Consents"))
+			{
+				return false;
+			}
+			if (!displayedText.Text.Contains("Direct suppliers with products containing your battery (i.e., your customers) may opt to participate in various chemical policy and product qualification programs operated by WERCSmart Recipients. Further information about these consents and data uses are provided in the Data Use Tier Disclosure section of the WERCSmart Terms of Use."))
+			{
+				return false;
+			}
+			if (!displayedText.Text.Contains("You have the option of allowing this battery to be included in such programs by providing the consent below. Such consent means:"))
+			{
+				return false;
+			}
+			if (!displayedText.Text.Contains("a. That your battery data may be utilized when UL generates aggregate usage reports, chemical screening results and transparency ratios for such Direct Supplier products (Tier 2.1),"))
+			{
+				return false;
+			}
+			if (!displayedText.Text.Contains("b. That the identity of ingredients in your battery (i.e., the standard chemical names or CAS Numbers) may be disclosed to your customer and the relevant WERCSmart Recipient, but only if you have marked an ingredient as publicly disclosed on the formulation page (Tier 2.2) or if applicable law requires that an ingredient be publicly disclosed, and"))
+			{
+				return false;
+			}
+			if (!displayedText.Text.Contains("c. That your customer can publicly disclose the identity of ingredients in your battery, but only if you have marked an ingredient as publicly disclosed (Tier 4.2)."))
+			{
+				return false;
+			}
+			if (!displayedText.Text.Contains("These consents do not authorize any disclosure of ingredient by percent weight to your customer, any retail Recipient, or the public."))
+			{
+				return false;
+			}
+			return true;
+		}
+
 	}
 
 	public class ProductInformation

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using System.IO;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -889,6 +890,66 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new SupplierReports().GetCurrentDescriptionText() == expectedDesc, "Description is not showing as expected",
 				"Showing Description: " + expectedDesc + " as expected.");
+		}
+
+		[StepDefinition(@"I select (Excel|CSV) from the Select File Type")]
+		public void ThenISelectCSVFromTheSelectFileType(string excelOrCSV)
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.SelectFromSelectFileType(excelOrCSV), "Failed to select " + excelOrCSV, "Successfully selected " + excelOrCSV);
+		}
+
+
+		[StepDefinition(@"I select the Zip Report Checkbox")]
+		public void GivenISelectTheZipReportCheckbox()
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.SelectZipReportCheckbox(), "Failed to select Zip Report Checkbox", "Successfully selected Zip Report Checkbox");
+		}
+
+		[StepDefinition(@"I select the Request Report button (excel|csv) file is produced called (.*) and save as (.*)")]
+		public void ThenISelectTheRequestReportButton(string filetype, string file, string savedAs)
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.SelectRequestReportButton(), "Failed to select Request Report button", "Successfully selected Request Report button");
+			string currentTime = DateTime.Now.ToString();
+			int index = currentTime.LastIndexOf(":") + 2;
+			if (index > 0)
+			{
+				currentTime = currentTime.Substring(0, index);
+			}
+			Context.AddToContext("LastReportDownloadTime", currentTime);
+			Delay.Seconds(10);
+
+		}
+	
+		[StepDefinition(@"I click Close in the Report Download popup")]
+		public void ThenIClickCloseInTheReportDownloadPopup()
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.SelectCloseButtonInReportDownloadPopup(), "Failed to select Close button", "Successfully selected Close button");
+		}
+
+		[StepDefinition(@"I click the Download button for the most recent report")]
+		public void ThenIClickTheDownloadButtonForTheMostRecentReport()
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.SelectDownloadButtonForTheMostRecentReport(), "Failed to select Download button", "Successfully selected Download button");
+			Delay.Seconds(10);
+		}
+
+		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)) Date Requested: (.*) Requested By: (.*)")]
+		public void ThenIConfirmTheMostRecentFileHasTheFollowingInformationReportNameWasteClassificationSummaryFileTypeCSVDataRequestedRequestedByWERCSTest_Automation_ProductsAccount(string reportName, string type, string dateRequested, string requestedBy)
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.CheckReportDataForMostRecentFile(reportName, type, dateRequested, requestedBy), "Failed to match all data for the most recent file", "Successfully matched all data for the most recent file");
+		}
+
+		[StepDefinition(@"I see a Report Download popup with the following text: (.*)")]
+		public void GivenISeeAReportDownloadPopupWithTheFollowingText(string text)
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.FindReportDownloadPopupWithTheFollowingText(text), "Failed to find the correct text in the popup", "Successfully founded the correct text in the popup");
 		}
 
 	}

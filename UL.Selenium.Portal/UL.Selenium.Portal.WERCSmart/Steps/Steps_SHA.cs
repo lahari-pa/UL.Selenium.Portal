@@ -2209,6 +2209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.ClickSearchButton(), "Failed to click search button",
 				"Clicked search button");
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
@@ -3747,7 +3748,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"In The Supplier Manager popup I click on the 'Clear Cart for All Users' button")]
-		public void InTheSupplierManagerPopupIClickTheClearCartForAllUsersButton(string category)
+		public void InTheSupplierManagerPopupIClickTheClearCartForAllUsersButton()
 		{
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep($"Starting to attempt to click the 'Clear Cart for All Users' button");

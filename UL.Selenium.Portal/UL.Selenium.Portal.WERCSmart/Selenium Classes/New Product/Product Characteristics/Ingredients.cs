@@ -283,23 +283,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
-			pass = this.ISetGenericName(component, ingredient.IngredientType, ingredient.GenericName, componentType);
-
-			if (!pass)
+			if (ingredient.TradeSecret)
 			{
-				Report.Info("Failed to set Generic Name");
-				return false;
-			}
 
-			var tableFunctionalPurpose = new Table("Functional Purpose");
-			string[] funcPurposes = ingredient.FunctionalPurpose.Split(',');
-			foreach (string funcPurpose in funcPurposes)
-			{
-				pass = this.ISelectFunctionalPurpose(component, funcPurpose.Trim(), componentType);
+				pass = this.ISetGenericName(component, ingredient.IngredientType, ingredient.GenericName, componentType);
+
 				if (!pass)
 				{
-					Report.Info("Failed to set Functional Purpose");
+					Report.Info("Failed to set Generic Name");
 					return false;
+				}
+
+			}
+
+			if (ingredient.FunctionalPurpose.Length > 0)
+			{
+				var tableFunctionalPurpose = new Table("Functional Purpose");
+				string[] funcPurposes = ingredient.FunctionalPurpose.Split(',');
+				foreach (string funcPurpose in funcPurposes)
+				{
+					pass = this.ISelectFunctionalPurpose(component, funcPurpose.Trim(), componentType);
+					if (!pass)
+					{
+						Report.Info("Failed to set Functional Purpose");
+						return false;
+					}
 				}
 			}
 
@@ -1557,5 +1565,65 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return false;
 		}
+	
+		public bool ClickCloseButtonInFunctionalPurposeDropdownMenu()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath("//div[@class='select2-link2 select2-close']//button"), 2);
+			return closeButton.TryClick();
+		}
+
+		public bool ConfirmTheFollowingFunctionalPurposeIsDisplayed(string functionalPurpose)
+		{
+			IList<IWebElement> functionalPurposesEl = this.ContainerElement.FindElements(By.XPath("//ul[@class='select2-selection__rendered']//li"), 2);
+			foreach (IWebElement el in functionalPurposesEl)
+			{
+				if (el.Text.Contains(functionalPurpose))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public bool SelectTheFollowingFunctionalPurpose(string functionalPurpose)
+		{
+			IWebElement functionalPurposeEl = this.ContainerElement.FindElement(By.XPath("//li[@role='treeitem'][text()='" + functionalPurpose + "']"), 2);
+			return functionalPurposeEl.TryClick();
+		}
+
+		public bool ConfirmDropDownMenuOpensInIngredientsPage(string displayOrNotDisplayed)
+		{
+			IWebElement dropDownMenu = this.ContainerElement.FindElement(By.XPath("//ul[@class='select2-results__options']"), 2);
+
+			if (displayOrNotDisplayed == "displays")
+			{
+				if (dropDownMenu != null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				if (dropDownMenu == null)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+
+		public bool SelectChooseOptionForFunctionalPurposeInIngredientsPage()
+		{
+			IWebElement chooseOption = this.ContainerElement.FindElement(By.XPath("//li[@class='select2-selection__choice']"), 2);
+			return chooseOption.TryClick();
+		}
+
 	}
 }
