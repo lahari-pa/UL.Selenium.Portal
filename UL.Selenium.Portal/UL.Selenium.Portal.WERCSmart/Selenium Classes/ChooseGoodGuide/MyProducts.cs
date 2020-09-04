@@ -59,6 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			}
 			catch (Exception)
 			{
+				return false;
 			}
 
 			return false;
@@ -130,7 +131,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			if (this.FindAndClickProduct(findBy, findValue))
 			{
 				Delay.Seconds(2);
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='editdata']")).TryClick())
+				IWebElement el;
+				try
+				{
+					el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='editdata']")), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
+				if (el.TryClick())
 				{
 					Report.Info("Clicked edit button");
 					Delay.Seconds(1);

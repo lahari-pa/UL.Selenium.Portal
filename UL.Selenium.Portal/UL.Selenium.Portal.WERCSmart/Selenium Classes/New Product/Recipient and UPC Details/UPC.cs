@@ -53,8 +53,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckIfUPCDuplicateWarningAppears()
 		{
 			Report.Info("Beginning CheckIfUPCDuplicateWarningAppears");
-			var UPCWarning = this.containerElement.FindElement(By.XPath("//i[contains(@title, 'UPC')]"), 2);
-			if(UPCWarning == null)
+			IWebElement UPCWarning;
+			try
+			{
+				UPCWarning = this.containerElement.FindElement(By.XPath("//i[contains(@title, 'UPC')]"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+
+			if (UPCWarning == null)
 			{
 				Report.Info("UPCWarning returns null");
 				return false;
@@ -108,7 +117,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool AddUpcButton()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
+			IWebElement el;
+			;
+			try
+			{
+				el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);, 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			if (el == null)
 			{
 				return false;
@@ -268,8 +286,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				if (info.ContainerType == "<first>")
 				{
-					var firstOption = containsType.FindElement(By.XPath("./option[not(text()='Container Type')]"), 1).Text;
-
+					string firstOption;
+					try
+					{
+						firstOption = containsType.FindElement(By.XPath("./option[not(text()='Container Type')]"), 1).Text;
+					}
+					catch (NoSuchElementException)
+					{
+						return false;
+					}
 					if (firstOption == null)
 					{
 						Report.Failure("There are no Container Types");
@@ -785,14 +810,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
         public bool IsFirstUPCTabOpen()
         {
-            //new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
-            IWebElement expandArrow = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']//em"));
-            return expandArrow.GetAttribute("class").Contains("down");
+			//new NewProduct().WaitForTab(NewProduct.Tab.RecipientAndUpcDetails,60);
+			IWebElement expandArrow;
+			try
+			{
+				expandArrow = this.containerElement.FindElement(By.XPath(".//form//table[contains(@class,'upc-table')]//a[@title='Expand']//em"));
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+			return expandArrow.GetAttribute("class").Contains("down");
         }
 
         public bool CheckForErrorUnderneathIndividualUPCContainedInCasePackField()
 		{
-			IWebElement IndividualUPCContainerFieldError = this.FindElement(By.XPath(".//option[text()='Individual UPC contained in the Case Pack']/../following-sibling::p//span[text()='This is a required field.']"), 2);
+			IWebElement IndividualUPCContainerFieldError;
+			try
+			{
+				IndividualUPCContainerFieldError = this.FindElement(By.XPath(".//option[text()='Individual UPC contained in the Case Pack']/../following-sibling::p//span[text()='This is a required field.']"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+
 			if (IndividualUPCContainerFieldError != null)
 			{
 				return true;
@@ -816,7 +858,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			foreach (TableRow row in table.Rows)
 			{
-				IWebElement TextField = this.FindElement(By.XPath(".//*[@placeholder='" + row["Placeholder"] + "']/..//span[text()='This is a required field.']"), 2);
+				IWebElement TextField;
+				try
+				{
+					TextField = this.FindElement(By.XPath(".//*[@placeholder='" + row["Placeholder"] + "']/..//span[text()='This is a required field.']"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return;
+				}
 				if (TextField == null)
 				{
 					ListOfTextFieldsThatDisplayedTheError.Add(row["Placeholder"]);
@@ -1131,7 +1181,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					break;
 				case "OMSID":
 					//spanDataBind = value;
-					spanDataBind = "text: row.getAdditionalDataValue(identifier(), 3)";
+					try
+					{
+						spanDataBind = "text: row.getAdditionalDataValue(identifier(), 3)";
+					}
+					catch (NoSuchElementException)
+					{
+						return false;
+					}
 					break;
 			}
 			var headerTextList = multipleUPCModal.FindElements(By.XPath($".//div[@class='col-md-8 upc-list-container']//th"), 2).Select(x => x.Text).ToList<string>();

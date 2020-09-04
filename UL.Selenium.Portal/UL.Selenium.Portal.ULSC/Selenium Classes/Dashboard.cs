@@ -81,7 +81,15 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			{
 				return false;
 			}
-			IWebElement el = container.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
+			IWebElement el;
+			try
+			{
+				el = container.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			return el.TryClick();
 		}
 
@@ -95,10 +103,21 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 				return null;
 			}
 			rMessageCenter.Title = "Message Center";
-			// Get Filter value
-			rMessageCenter.FilterPlaceholder = container.FindElement(By.XPath(".//input[@id='filterCurrent']"), 2)?.GetAttribute("placeholder");
-			// Get Messages
-			rMessageCenter.FilterValue = container.FindElement(By.XPath(".//input[@id='filterCurrent']"), 2)?.GetValue();
+
+			rMessageCenter.FilterPlaceholder = "";
+			rMessageCenter.FilterValue = "";
+			try
+			{
+				// Get Filter value
+				rMessageCenter.FilterPlaceholder = container.FindElement(By.XPath(".//input[@id='filterCurrent']"), 2)?.GetAttribute("placeholder");
+				// Get Messages
+				rMessageCenter.FilterValue = container.FindElement(By.XPath(".//input[@id='filterCurrent']"), 2)?.GetValue();
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
+
 			return rMessageCenter;
 		}
 
@@ -124,7 +143,15 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			{
 				return null;
 			}
-			IList<IWebElement> gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
+			IList<IWebElement> gEls;
+			try
+			{
+				gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
 			if (gEls.Count == 0)
 			{
 				return null;

@@ -18,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 				ReadOnlyCollection<IWebElement> listOfCountries;
 				try
 				{
-					listOfCountries = this.containerElement.FindElements(By.XPath(".//label"), 2
+					listOfCountries = this.containerElement.FindElements(By.XPath(".//label"), 
 						.FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in"))
 						.FindElements(By.XPath("../..//input"));
 				}

@@ -733,7 +733,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickAddUpcButton()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
+			IWebElement el;
+			try
+			{
+				el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			return el != null && el.TryClick();
 		}
 
