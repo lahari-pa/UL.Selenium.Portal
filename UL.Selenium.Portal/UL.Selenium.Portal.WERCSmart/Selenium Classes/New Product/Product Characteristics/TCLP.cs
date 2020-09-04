@@ -18,6 +18,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			get
 			{
 				IWebElement activeLabel = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'TCLP')]/../following-sibling::div//label[contains(@class,'active')]"), 2);
+				try
+				{
+					activeLabel = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'TCLP')]/../following-sibling::div//label[contains(@class,'active')]"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
 				if (activeLabel == null)
 				{
 					throw new Exception("No Product is Retailer's Private Label or Brand value is selected");
@@ -76,8 +84,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 				IWebElement header = this.MetalHeader;
 				foreach (MetalPresence thisMetal in value)
 				{
-					IWebElement metalLabel = header.FindElements(By.XPath("../../following::div//label[@class='control-label']")).FirstOrDefault(x => x.GetValue().Trim() == thisMetal.Metal);
-					IWebElement inputLabel = metalLabel.FindElements(By.XPath("../..//input/../span")).FirstOrDefault(x => x.Text == thisMetal.Presence);
+					IWebElement metalLabel;
+					IWebElement inputLabel;
+					try
+					{
+						metalLabel = header.FindElements(By.XPath("../../following::div//label[@class='control-label']")).FirstOrDefault(x => x.GetValue().Trim() == thisMetal.Metal);
+						inputLabel = metalLabel.FindElements(By.XPath("../..//input/../span")).FirstOrDefault(x => x.Text == thisMetal.Presence);
+					}
+					catch (NoSuchElementException)
+					{
+						return;
+					}
 
 					if (inputLabel != null)
 					{

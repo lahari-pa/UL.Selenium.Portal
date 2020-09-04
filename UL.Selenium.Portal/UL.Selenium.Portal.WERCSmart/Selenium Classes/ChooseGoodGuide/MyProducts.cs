@@ -20,8 +20,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				if (searchBy.Length > 0)
 				{
-					IWebElement searchBySelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
+					IWebElement searchBySelect;
+					try
+					{
+						searchBySelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
 						"//section[@id='productGridSection']//label[contains(text(), 'Search By')]/following-sibling::select"));
+					}
+					catch (NoSuchElementException)
+					{
+						return false;
+					}
 					searchBySelect.Select(searchBy);
 
 				}
@@ -59,7 +67,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickFilter()
 		{
-			if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdFilterProducts']")).TryClick())
+			IWebElement el;
+			try
+			{
+				el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdFilterProducts']")), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+			if (el.TryClick())
 			{
 				this.WaitForLoadingToGo();
 				return true;
@@ -144,8 +161,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				try
 				{
-					IWebElement invisibleLoading =
+					IWebElement invisibleLoading;
+					IWebElement acceptBtn;
+					try
+					{
+						invisibleLoading =
 						SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='load_tblProducts' and contains(@style,'none')]"));
+					}
+					catch (NoSuchElementException)
+					{
+						return;
+					}
 					if (invisibleLoading != null)
 					{
 						return;
@@ -172,12 +198,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickDelete()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Delete')])]")).TryClick();
+			IWebElement el;
+			try
+			{
+				el = this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Delete')])]"));
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+			return el.TryClick();
 		}
 
 		public bool ClickCancel()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Cancel')])]")).TryClick();
+			IWebElement el;
+			try
+			{
+				el = this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Cancel')])]"));
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+			return el.TryClick();
 		}
 
 		public bool WaitForDialogToDisappear(int secondsToWait)

@@ -45,11 +45,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				IWebElement input = this.containerElement.FindElement(
+				IWebElement input;
+				try
+				{
+					input = this.containerElement.FindElement(
 					By.XPath("//div[@class='form-group']//label[contains(text(),'Product Name')]/../..//input"));
-				input.EnterText(productName);
+					input.EnterText(productName);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
 				return true;
 			}
+
 			catch (Exception)
 			{
 				return false;
@@ -58,8 +67,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool ProductLineExists(string productLine)
 		{
-			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
+			IWebElement select;
+			try
+			{
+				select = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
 				".//div[@class='form-group']//label[contains(text(),'Product Line/Brand')]/../..//select"));
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			select.TryClick();
 			if (select.FindElements(By.XPath("./option")).Select(x => x.Text).Contains(productLine))
 			{
@@ -92,7 +109,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[@class='form-group child']//select")).Select(category);
+				IWebElement el;
+				try
+				{
+					el = this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[@class='form-group child']//select"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
+				el.Select(category);
 				return true;
 			}
 			catch (Exception)
@@ -105,9 +131,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool SelectSubCategory(string subcategory)
 		{
+			IWebElement el;
 			try
 			{
-				this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[contains(@class,'form-group offset')]//select")).Select(subcategory);
+				el = this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[contains(@class,'form-group offset')]//select")), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+			try
+			{
+				el.Select(subcategory);
 				return true;
 			}
 			catch (Exception)

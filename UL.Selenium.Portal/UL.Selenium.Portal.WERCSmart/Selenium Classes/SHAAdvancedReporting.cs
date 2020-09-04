@@ -185,7 +185,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyPopupTitle(string title, out string output)
 		{
-			IWebElement actualTitle = this.FindElement(By.Id("ui-dialog-title-preparing-file-modal"), 10);
+			IWebElement actualTitle;
+			try
+			{
+				actualTitle = this.FindElement(By.Id("ui-dialog-title-preparing-file-modal"), 10);
+			}
+			catch (NoSuchElementException)
+			{
+				output = null;
+				return false;
+			}
 			output = actualTitle.Text;
 			return output == title;
 		}
@@ -334,8 +343,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckIfReportDescriptionUpArrowActive(string active)
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement upArrow = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Description']//span//span[1]"), 2);
+			IWebDriver frame;
+			IWebElement upArrow;
+			try
+			{
+				frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+				upArrow = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Description']//span//span[1]"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			bool isActive = upArrow.GetAttribute("class").Contains("ui-state-disabled");
 			switch (active)
 			{

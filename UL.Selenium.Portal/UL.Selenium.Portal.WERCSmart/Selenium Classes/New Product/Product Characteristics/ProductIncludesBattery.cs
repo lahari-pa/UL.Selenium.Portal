@@ -177,7 +177,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 		public void DeleteEmptyBatteryRows()
 		{
-			IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"));
+			IWebElement thisTable;
+			try
+			{
+				thisTable = this.containerElement.FindElement(By.XPath(".//table"));
+			}
+			catch (NoSuchElementException)
+			{
+				return;
+			}
+
 			List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable);
 			int batteryTypeIndex = th.FirstOrDefault(x => x.Value == "Battery Type").Key;
 			int removeIndex = th.FirstOrDefault(x => x.Value == "Remove").Key;

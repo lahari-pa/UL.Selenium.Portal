@@ -15,9 +15,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			get
 			{
 				var countries = new List<string>();
-				ReadOnlyCollection<IWebElement> listOfCountries = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in"))
-					.FindElements(By.XPath("../..//input"));
+				ReadOnlyCollection<IWebElement> listOfCountries;
+				try
+				{
+					listOfCountries = this.containerElement.FindElements(By.XPath(".//label"), 2
+						.FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in"))
+						.FindElements(By.XPath("../..//input"));
+				}
+				catch (NoSuchElementException)
+				{
+					return null;
+				}
 				foreach (IWebElement country in listOfCountries)
 				{
 					if (country.Selected)
@@ -32,8 +40,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			{
 				foreach (string country in value)
 				{
-					IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == country);
-					IWebElement countryInput = thisLabel.FindElement(By.XPath(".//../input"));
+					IWebElement thisLabel;
+					IWebElement countryInput;
+					try
+					{
+						thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == country);
+						countryInput = thisLabel.FindElement(By.XPath(".//../input"));
+					}
+					catch (NoSuchElementException)
+					{
+						return;
+					}
 					if (!countryInput.Selected)
 					{
 						countryInput.Click();

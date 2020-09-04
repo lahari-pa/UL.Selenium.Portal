@@ -51,8 +51,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 			foreach (string question in questions.Keys)
 			{
 				bool correct = true;
-				IWebElement elQuestion = this.FindElement(By.XPath(string.Format("//label[contains(text(),\"{0}\")]", question)), 2);
-				string actualMessage = elQuestion.FindElement(By.XPath("..//parent::div//parent::div//p//span"), 2).GetInnerText();
+				IWebElement elQuestion;
+				string actualMessage;
+				try
+				{
+					elQuestion = this.FindElement(By.XPath(string.Format("//label[contains(text(),\"{0}\")]", question)), 2);
+					actualMessage = elQuestion.FindElement(By.XPath("..//parent::div//parent::div//p//span"), 2).GetInnerText();
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
 				expected = questions[question];
 
 				correct = expected.Trim() == actualMessage.Trim();

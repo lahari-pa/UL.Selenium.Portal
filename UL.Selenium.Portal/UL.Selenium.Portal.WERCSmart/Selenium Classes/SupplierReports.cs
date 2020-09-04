@@ -42,8 +42,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string GetSubheadingText()
-		{
-			var el = this.containerElement.FindElement(By.XPath("//div[@class='product-header']//p"), 2);
+		{ 
+
+			IWebElement el;
+			try
+			{
+				el = this.containerElement.FindElement(By.XPath("//div[@class='product-header']//p"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
+
 			return el.Text;
 
 		}
@@ -70,7 +80,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]")).TryClick();
 			Delay.Seconds(1);
 			ReadOnlyCollection<IWebElement> Searches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//input"));
-			IWebElement Search = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@type='search']"));
+			IWebElement Search;
+			try
+			{
+				Search = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@type='search']"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			Search.EnterText(searchTerm);
 			Delay.Seconds(1);
 			IWebElement searching =
@@ -134,7 +152,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectRetailer(string retailer)
 		{
-			IWebElement selectionBox = this.containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"));
+			IWebElement selectionBox;
+			try
+			{
+				selectionBox = this.containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			selectionBox.Select(retailer);
 			return selectionBox.SelectedOption() == retailer;
 		}
@@ -142,7 +168,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool DescriptionTextMatches(string expectedText)
 		{
 			//first try no remove white spaces
-			string actualText = this.containerElement.FindElement(By.XPath(".//p[@data-bind='text: Description']"), 2).Text;
+			string actualText;
+
+			try
+			{
+				actualText = this.containerElement.FindElement(By.XPath(".//p[@data-bind='text: Description']"), 2).Text;
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+
 			Report.Info($"The expected Text was: {expectedText}");
 			Report.Info($"The actual text found is: {actualText}");
 			if (actualText == null)
@@ -284,6 +320,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var tableHeaderEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table//thead"), 15);
 			var wantedTitleMasterEl = tableHeaderEl.FindElement(By.XPath($"//th[contains(@data-bind,'{column}')]"), 15);
 			var directionTitleEl = tableHeaderEl.FindElement(By.XPath($"//span[@id='{column}{wantedID}']"), 15);
+
+			if (tableHeaderEl == null || wantedTitleMasterEl == null || directionTitleEl == null)
+			{
+				return false;
+			}
 
 			if (directionTitleEl.GetAttribute("style") == "display: none;")
 			{

@@ -17,7 +17,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnterSupplierID(string supplierID)
 		{
 			Delay.Seconds(2);
-			IWebElement SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID']"), 2);
+
+			IWebElement SupplierID;
+			try
+			{
+				SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID']"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			SupplierID.EnterText(supplierID);
 			return SupplierID.GetValue() == supplierID;
 		}
@@ -25,9 +34,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterSupplierIDExists()
 		{
+			IWebElement SupplierID;
 			try
 			{
-				IWebElement SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID' and ./preceding-sibling::label[text()='Supplier ID']]"), 2);
+				SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID' and ./preceding-sibling::label[text()='Supplier ID']]"), 2);
 				return (SupplierID.Enabled && SupplierID.Displayed);
 			}
 			catch (Exception)
@@ -67,7 +77,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				Delay.Seconds(2);
-				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']"), 2);
+
+				IWebElement SupplierError;
+				try
+				{
+					SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
 				return (SupplierError.Enabled && SupplierError.Displayed && SupplierError.Text != string.Empty);
 			}
 			catch (Exception)

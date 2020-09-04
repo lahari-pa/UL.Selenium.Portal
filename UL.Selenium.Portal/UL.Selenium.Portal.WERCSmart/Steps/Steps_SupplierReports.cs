@@ -933,9 +933,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the Download button for the most recent report")]
 		public void ThenIClickTheDownloadButtonForTheMostRecentReport()
 		{
+			Delay.Seconds(5);
+			SeleniumBrowser.WebBrowser.Navigate().Refresh();
+			Delay.Seconds(5);
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.SelectDownloadButtonForTheMostRecentReport(), "Failed to select Download button", "Successfully selected Download button");
-			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)) Date Requested: (.*) Requested By: (.*)")]

@@ -43,7 +43,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement button = this.containerElement.FindElement(By.XPath(".//a[@class='btn btn-success' and text()='Add Retailers']"));
+				IWebElement button;
+				try
+				{
+					button = this.containerElement.FindElement(By.XPath(".//a[@class='btn btn-success' and text()='Add Retailers']"));
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
 				return button.TryClick();
 			}
 			catch (Exception)
@@ -57,7 +65,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			try
 			{
 				var selectedRetailers = new List<string>();
-				ReadOnlyCollection<IWebElement> selectedRetailersName = this.containerElement.FindElements(By.XPath(".//div[@class='grid-container']//tr[parent::tbody[@data-bind='foreach: field.field']]/td[@class='col-xs-3']"));
+				ReadOnlyCollection<IWebElement> selectedRetailersName;
+				try
+				{
+					selectedRetailersName = this.containerElement.FindElements(By.XPath(".//div[@class='grid-container']//tr[parent::tbody[@data-bind='foreach: field.field']]/td[@class='col-xs-3']"));
+				}
+				catch (NoSuchElementException)
+				{
+					return null;
+				}
 				foreach (IWebElement row in selectedRetailersName)
 				{
 					selectedRetailers.Add(row.Text);
@@ -151,8 +167,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
-				IWebElement el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
+				IWebElement container;
+				IWebElement el;
+				try
+				{
+					container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+					el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
+
+
 				if (el == null)
 				{
 					Report.Error("Could not find the Vendor ID select input element");

@@ -23,7 +23,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			checkBox.ScrollElementIntoView();
 			checkBox.Check(true);
 
-			IWebElement acceptBtn = this.containerElement.FindElement(By.XPath(".//button[@value='Continue' and @type='submit']"), 2);
+			IWebElement acceptBtn;
+			try
+			{
+				acceptBtn = this.containerElement.FindElement(By.XPath(".//button[@value='Continue' and @type='submit']"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return;
+			}
 			acceptBtn.Click();
 		}
 

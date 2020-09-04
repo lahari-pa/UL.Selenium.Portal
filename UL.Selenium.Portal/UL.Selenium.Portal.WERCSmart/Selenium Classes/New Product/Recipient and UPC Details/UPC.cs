@@ -38,7 +38,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string LithiumBatteyWarning()
 		{
 			//this.RefreshContainer();
-			return this.containerElement.FindElement(By.XPath("//div[contains(text(), 'Lithium battery registrations')]"), 2).Text;
+			IWebElement el;
+			try
+			{
+				el = this.containerElement.FindElement(By.XPath("//div[contains(text(), 'Lithium battery registrations')]"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
+			return el.Text;
 		}
 
 		public bool CheckIfUPCDuplicateWarningAppears()
@@ -56,7 +65,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string MaximumLimitUpcWarning()
 		{
 			//this.RefreshContainer();
-			return this.containerElement.FindElement(By.XPath("//p[@class='marBot-0' and contains(text(), 'maximum limit' )]"), 2).Text;
+			IWebElement el;
+			try
+			{
+				el = this.containerElement.FindElement(By.XPath("//p[@class='marBot-0' and contains(text(), 'maximum limit' )]"), 2)
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
+			return el.Text;
 		}
 
 		public List<string> GetUPCOptions()
@@ -105,10 +123,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-				IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
-				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
-				IWebElement upcNameField = container.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/..//input"), 2);
+				IWebElement container;
+				IList<IWebElement> textInputs;
+				IWebElement upcNumberField;
+				IWebElement upcNameField;
+				try
+				{
+					container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+					textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
+					upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+					upcNameField = container.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/..//input"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
+
 				Delay.Seconds(0.5);
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
@@ -166,7 +196,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				//}
 
 				Delay.Seconds(0.5);
-				IWebElement productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
+				IWebElement productNameOnlabelObj;
+				try
+				{
+					productNameOnlabelObj = container.FindElement(By.XPath(".//label[contains(text(),'Product Name on Label')]/.."), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
 
 				string productNameDataBind = productNameOnlabelObj.GetAttribute("class");
 				if (productNameDataBind != null)
@@ -219,7 +257,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				Delay.Seconds(0.5);
 
-				IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+				IWebElement containsType;
+				try
+				{
+					containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
 				if (info.ContainerType == "<first>")
 				{
 					var firstOption = containsType.FindElement(By.XPath("./option[not(text()='Container Type')]"), 1).Text;
@@ -255,7 +301,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Delay.Seconds(0.5);
 				if (info.Quantity.Length > 0)
 				{
-					IWebElement quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity of Units within the Case']"), 2);
+					IWebElement quantityField;
+					try
+					{
+						quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity of Units within the Case']"), 2);
+					}
+					catch (NoSuchElementException)
+					{
+						return false;
+					}
 					quantityField.EnterText(info.Quantity);
 				}
 
@@ -278,7 +332,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Delay.Seconds(0.5);
 				if (info.IndividualUpcCasePack.Length > 0)
 				{
-					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'upcContained.field')]"), 2);
+					IWebElement packageField;
+					try
+					{
+						packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'upcContained.field')]"), 2);
+					}
+					catch (NoSuchElementException)
+					{
+						return false;
+					}
 					packageField.Select(info.IndividualUpcCasePack);
 				}
 				Delay.Seconds(0.5);
@@ -787,13 +849,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetExpandedUPC()
 		{
-			IWebElement upcField = this.containerElement.FindElement(By.XPath($".//label[contains(text(),'UPC Number')]/following-sibling::input"));
+			IWebElement upcField;
+			try
+			{
+				upcField = this.containerElement.FindElement(By.XPath($".//label[contains(text(),'UPC Number')]/following-sibling::input"));
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
 			return upcField.GetValue();
 		}
 
 		public string GetValueOfRetailerFieldInActiveRow(string retailerID, string field)
 		{
-			IWebElement retailerField = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]/following-sibling::input"));
+			IWebElement retailerField;
+			try
+			{
+				retailerField = this.containerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]/following-sibling::input"));
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
 			return retailerField.GetValue();
 		}
 
@@ -814,7 +892,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool IsRequiredValueOfRetailerInActiveRow(string retailerID, string field)
 		{
-			IWebElement isRequiredLabel = this.ContainerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]//..//p[@class='form-error']"), 2);
+			IWebElement isRequiredLabel;
+			try
+			{
+				isRequiredLabel = this.ContainerElement.FindElement(By.XPath($".//span[text()='{retailerID}']//..//..//label[contains(text(),'{field}')]//..//p[@class='form-error']"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			return isRequiredLabel.Displayed;
 		}
 
@@ -826,9 +912,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckDeleteRowsWarningPopupContainsText(string lineOne, string lineTwo)
 		{
-			IWebElement lineOneEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
-			IWebElement lineTwoEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
-
+			IWebElement lineOneEl;
+			IWebElement lineTwoEl;
+			try
+			{
+				lineOneEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
+				lineTwoEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			if (lineOneEl.Text == lineOne && lineTwoEl.Text == lineTwo)
 			{
 				return true;

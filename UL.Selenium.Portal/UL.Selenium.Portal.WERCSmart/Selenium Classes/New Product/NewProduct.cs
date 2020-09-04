@@ -536,7 +536,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckRetailerModalText(string text)
 		{
-			IWebElement retailerModalBody = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//p"), 2);
+			IWebElement retailerModalBody;
+			try
+			{
+				retailerModalBody = this.containerElement.FindElement(By.XPath(@"//h4[text()='Information']/../following-sibling::div//p"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 
 			if (retailerModalBody.Text == text)
 			{
@@ -575,8 +583,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckIfTextDisplayedOverYellowTriangleImageMatches(string textToMatch)
 		{
-			IWebElement toolTipDisplayBody = this.containerElement.FindElement(By.XPath(@"//div[@class='tooltip fade top in']//p"), 2);
-			
+			IWebElement toolTipDisplayBody;
+			try
+			{
+				toolTipDisplayBody = this.containerElement.FindElement(By.XPath(@"//div[@class='tooltip fade top in']//p"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+
 			if (toolTipDisplayBody.Text == textToMatch)
 			{
 				return true;
@@ -587,12 +603,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string BatteyWarning()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class='WARNING']"), 2).Text;
+			try
+			{
+				return this.containerElement.FindElement(By.XPath(".//div[@class='WARNING']"), 2).Text;
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
 		}
 
 		public string GetCurrentProduct()
 		{
-			return this.containerElement.FindElement(By.XPath(".//h2[@class='product-name']"), 2).Text.Trim();
+			try
+			{
+				return this.containerElement.FindElement(By.XPath(".//h2[@class='product-name']"), 2).Text.Trim();
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
 		}
 
 		//New, Copy or UPC
@@ -891,6 +921,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+			try
+			{
+				container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 
 			if (upcNumber.ToLower().Contains("saved as"))
 			{
@@ -938,8 +977,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool InputUPCSize(string size)
 		{
-			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-			IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
+			IWebElement container;
+			IList<IWebElement> textInputs;
+			try
+			{
+				container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
+
 			string regex = @"(.*)\((.*)\)";
 			IWebElement sizeField = (from input in textInputs
 									 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
@@ -956,20 +1005,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectContainerType(string containerType)
 		{
-			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+			IWebElement container;
+			IWebElement upcNumberField;
+			IWebElement containsType;
+			try
+			{
+				container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+				containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 
-			IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
 			containsType.Select(containerType);
 			return containsType.GetValue() == containerType;
 		}
 
 		public List<string> GetContainerOptions()
 		{
-			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+			IWebElement container;
+			IWebElement upcNumberField;
+			IWebElement containsType;
+			try
+			{
+				container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+				containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
 
-			IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
 			return containsType.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
 		}
 
@@ -1123,7 +1192,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (info.PackageType.Length > 0)
 				{
-					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					IWebElement packageField;
+					try
+					{
+						packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					}
+					catch (NoSuchElementException)
+					{
+						return false;
+					}
 					if (info.PackageType=="<First>")
 					{
 						var firstOption = packageField.FindElement(By.XPath("./option[not(text()='Package Type')]"), 1).Text;
@@ -1134,13 +1211,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (info.CapsuleCount.Length > 0)
 				{
-					IWebElement capsuleCountField = container.FindElement(By.XPath(".//label[contains(text(),'Capsule Count')]/..//input"), 2);
+					IWebElement capsuleCountField;
+					try
+					{
+						capsuleCountField = container.FindElement(By.XPath(".//label[contains(text(),'Capsule Count')]/..//input"), 2);
+					}
+					catch (NoSuchElementException)
+					{
+						return false;
+					}
 					capsuleCountField.EnterText(info.CapsuleCount);
 				}
 
 				if (info.ItemNumber.Length > 0)
 				{
-					IWebElement ItemNumberField = container.FindElement(By.XPath(".//label[contains(text(),'Please enter comma separated Item Number')]//following-sibling::input"), 2);
+					IWebElement ItemNumberField;
+					try
+					{
+						ItemNumberField = container.FindElement(By.XPath(".//label[contains(text(),'Please enter comma separated Item Number')]//following-sibling::input"), 2);
+					}
+					catch (NoSuchElementException)
+					{
+						return false;
+					}
 					ItemNumberField.EnterText(info.ItemNumber);
 				}
 
@@ -1211,7 +1304,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return false;
 				}
 
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
+				IWebElement el;
+				try
+				{
+					el = this.containerElement.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
 				if (append)
 				{
 					el.SendKeys(text);
@@ -1759,12 +1860,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string WaterSolubility {
 			get
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
+				IWebElement el;
+				try
+				{
+					el = this.containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return null;
+				}
 				return el.SelectedOption();
 			}
 			set
 			{
-				IWebElement el = this.containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
+				IWebElement el;
+				try
+				{
+					el = this.containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return;
+				}
 				el.Select(value);
 			}
 		}
@@ -1859,12 +1976,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement placeholderEl = this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
-				placeholderEl.TryClick();
+				IWebElement placeholderEl;
 				IWebElement MatchedEntry = null;
-				IWebElement inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+				IWebElement inputEl;
+				IWebElement searching;
+
+				try
+				{
+					placeholderEl = this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
+					MatchedEntry = null;
+					inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+					searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+				}
+				catch (NoSuchElementException)
+				{
+					return false;
+				}
+
+				placeholderEl.TryClick();
 				inputEl.EnterText(product);
-				IWebElement searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+
 				int i = 0;
 				while (searching != null && i < 10)
 				{
@@ -1961,12 +2092,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				for (int j = 0; j < 5; j++)
 				{
-					IWebElement placeholderEl = this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
+					IWebElement placeholderEl;
+					IWebElement inputEl;
+					IWebElement searching;
+					try
+					{
+						placeholderEl = this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
+						inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+						searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+					}
+					catch (NoSuchElementException)
+					{
+						return false;
+					}
+					
 					placeholderEl.TryClick();
 					IWebElement MatchedEntry = null;
-					IWebElement inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
 					inputEl.EnterText(product.Id);
-					IWebElement searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+					
 					int i = 0;
 					while (searching != null && i < 10)
 					{
@@ -2017,16 +2160,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		internal bool CommentsAreaContains(string contents)
 		{
-			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"));
-
+			IWebElement commentBox;
+			try
+			{
+				commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"));
+			}
+			catch (NoSuchElementException)
+			{
+				return false;
+			}
 			return contents == commentBox.Text;
 		}
 
 		internal bool CommentsCharactersRemaining(int expected, int maximum, out int remainDisplayed)
 		{
-			IWebElement maxCharacters = this.FindElement(By.XPath("//span[@data-bind='text: maxLength']"));
-			IWebElement charactersRemain = this.FindElement(By.XPath("//span[@data-bind='text: maxLength() - field.field().length']"), 2);
-			IWebElement commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"));
+			IWebElement maxCharacters;
+			IWebElement charactersRemain;
+			IWebElement commentBox;
+			try
+			{
+				maxCharacters = this.FindElement(By.XPath("//span[@data-bind='text: maxLength']"));
+				charactersRemain = this.FindElement(By.XPath("//span[@data-bind='text: maxLength() - field.field().length']"), 2);
+				commentBox = this.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"));
+			}
+			catch (NoSuchElementException)
+			{
+				remainDisplayed = 0;
+				return false;
+			}
 
 			Report.IsTrue(int.TryParse(maxCharacters.Text, out int maxDisplayed),
 				"Maximum Characters is displaying " + maxCharacters.Text + " which cannot be parsed into an integer",
@@ -2149,8 +2310,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string MinimumIgnitionEnergy {
 			get
 			{
-				IWebElement lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
+				IWebElement lbl;
+				try
+				{
+					lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Ignition"));
+				}
+				catch (NoSuchElementException)
+				{
+					return null;
+				}
 
 				if (lbl != null)
 				{
@@ -4505,7 +4674,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (info.PackageType.Length > 0)
 				{
-					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					IWebElement packageField;
+					try
+					{
+						packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					}
+					catch (NoSuchElementException)
+					{
+						return false;
+					}
 					packageField.Select(info.PackageType);
 				}
 
