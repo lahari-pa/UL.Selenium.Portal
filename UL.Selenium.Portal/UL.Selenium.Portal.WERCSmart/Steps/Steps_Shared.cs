@@ -1091,14 +1091,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Delay.Seconds(2);
 
-			//if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			//{
-			//	//Should this show on this page? this step is for the additional docs page? Any examples?
-			//	Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-			//	MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			//	//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
-			//}
-		
+			//60723 uses this on the reulatory docs to provide screen, but also on the additional docs to provide screen in 57950
+			//If keep sds confirm step in does this brake the step if used on the other screen?
+
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				//Should this show on this page? this step is for the additional docs page? Any examples?
+				Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+				//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
+			}
+
 			Delay.Seconds(2);
 			Report.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");

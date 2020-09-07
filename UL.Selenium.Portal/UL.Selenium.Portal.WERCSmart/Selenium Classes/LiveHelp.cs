@@ -36,7 +36,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool VerifyInboxText()
 		{
 			IWebElement elem = this.containerElement.FindElement(By.XPath(".//h1[@class]"), 2);
+			var textFound = elem.Text;
 			return elem != null && elem.Text == "INBOX";
+		}
+
+		public bool VerifyDescText(string expectedDesc)
+		{
+			IWebElement elem = this.containerElement.FindElement(By.XPath(".//p[contains(@class,'channel-desc')]"), 2);
+			var textFound = elem.Text;
+			return textFound == expectedDesc;
 		}
 
 		public bool VerifyMessageText(string message)
