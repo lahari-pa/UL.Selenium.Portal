@@ -3262,6 +3262,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"In the Optional Reports and Documents Available for Purchase page, the footer text contains: (.*)")]
+		public void InTheOptionalReportsAndDocumentsPageFooterTextContains(string expectedText)
+		{
+			Report.IsTrue(new NewProduct().ConfirmOptionalReportsFooterContains(expectedText), "Failed to find the text", "The text was found");
+
+		}
+
 
 
 	}
