@@ -71,7 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			IWebElement el;
 			try
 			{
-				el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdFilterProducts']")), 2);
+				el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdFilterProducts']"), 2);
 			}
 			catch (NoSuchElementException)
 			{
@@ -134,7 +134,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				IWebElement el;
 				try
 				{
-					el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='editdata']")), 2);
+					el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='editdata']"), 2);
 				}
 				catch (NoSuchElementException)
 				{

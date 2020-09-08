@@ -77,7 +77,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement el;
 			try
 			{
-				el = this.containerElement.FindElement(By.XPath("//p[@class='marBot-0' and contains(text(), 'maximum limit' )]"), 2)
+				el = this.containerElement.FindElement(By.XPath("//p[@class='marBot-0' and contains(text(), 'maximum limit' )]"), 2);
 			}
 			catch (NoSuchElementException)
 			{
@@ -121,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			;
 			try
 			{
-				el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);, 2);
+				el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
 			}
 			catch (NoSuchElementException)
 			{

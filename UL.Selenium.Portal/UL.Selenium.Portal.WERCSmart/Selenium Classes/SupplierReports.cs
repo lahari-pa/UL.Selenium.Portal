@@ -402,7 +402,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectDownloadButtonForTheMostRecentReport()
 		{
-			Delay.Seconds(10);
+			Report.Info("Downloading report with the following time: " + Context.GetFromContext("LastReportDownloadTime").ToString());
 			IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//button"), 2);
 			return downloadButton.TryClick();
 		}

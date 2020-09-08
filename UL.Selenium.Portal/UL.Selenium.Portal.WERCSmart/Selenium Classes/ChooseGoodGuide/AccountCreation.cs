@@ -15,8 +15,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			this.containerElement.FindElement(By.XPath(".//a[text()='Create Company Account']"), 2).TryClick();
 
 		public string Email {
-			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).GetValue();
-			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).EnterText(value);
+			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2)?.GetValue();
+			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2)?.EnterText(value);
 		}
 
 		public bool ClickNext =>

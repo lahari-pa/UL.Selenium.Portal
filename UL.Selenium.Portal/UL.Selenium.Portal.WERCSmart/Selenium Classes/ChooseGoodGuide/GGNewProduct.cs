@@ -134,7 +134,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			IWebElement el;
 			try
 			{
-				el = this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[contains(@class,'form-group offset')]//select")), 2);
+				el = this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[contains(@class,'form-group offset')]//select"), 2);
 			}
 			catch (NoSuchElementException)
 			{

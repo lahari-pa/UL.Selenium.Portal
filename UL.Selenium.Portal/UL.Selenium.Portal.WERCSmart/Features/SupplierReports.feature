@@ -809,44 +809,20 @@ Given I click the Products in Scope button and confirm that an excel file is pro
 Given I delete the excel file saved as Chemicals of Concern
 
 
-
+@tfs_design
 @ScenarioId:10258
 Scenario: [141799] Chemicals of Concern- CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-
-# Click on My Reports in the left navigation; My Reports screen displays
 Given I click the My Reports icon in the QuickLinks Pane
-
-# Select Chemicals of Concern; right side of the screen becomes active
 Given Under the Supplier Reports menu I choose: Chemicals of Concern
-
-# From the Select File Type dropdown select: CSV
 Then I select CSV from the Select File Type
-
-# Select Zip Report checkbox
 Given I select the Zip Report Checkbox
-# Click on Request Report button: Report download pop up appears with green text: "This report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
 Then I select the Request Report button excel file is produced called Chemicals of Concern.zip and save as Chemicals of Concern
 Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
-# Close Report Download pop up; My Reports screen refreshes
 Given I click Close in the Report Download popup
-#  Confirm that you receive email:   WERCSmart Report is Ready: Chemicals of Concern   The report you requested is now available for download. Please log into your WERCSmart account and go to the My Reports menu option. Use the Download option for the report under Actions. If you're already on the My Report area, please refresh your browser to show the Download action option.  The link to the report will expire in 30 days.# In My Reports screen confirm the report Chemicals of Concern appears on the history table
-# File Type  appears as: CSV (Zip)
-# Date Requested column should show today's date and time stamp
-#Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern.zip and save as Chemicals of Concern
-#Given I delete the excel file saved as Chemicals of Concern
-
-# Requested By Column should show User Name
 Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
-
-# In the Actions column you should see the download button
-# Click Download button; Report download pop up shows
 Then I click the Download button for the most recent report
 Given I click Close in the Report Download popup
-
-# Open the report (in Chrome it will be on the bottom of the browser) File Zip pop up window opens
-# Double click on the file
-# Confirm report opens properly without any errors and as a csv file# Close Report# Close Report Download pop up
 Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern.zip and save as Chemicals of Concern
 Given I delete the excel file saved as Chemicals of Concern

@@ -933,7 +933,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the Download button for the most recent report")]
 		public void ThenIClickTheDownloadButtonForTheMostRecentReport()
 		{
-			Delay.Seconds(5);
+			Delay.Seconds(61);
 			SeleniumBrowser.WebBrowser.Navigate().Refresh();
 			Delay.Seconds(5);
 			SupplierReports supplierReportsObject = new SupplierReports();

@@ -10,7 +10,9 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 {
 	class Dashboard : BaseObject
 	{
-		public const string BasePath = "//section";
+		public const string BasePath = "//section";	
+
+		private IWebElement El => this.containerElement.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
@@ -70,8 +72,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			{
 				return false;
 			}
-			IWebElement el = container.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
-			return el != null && el.Displayed;
+			return this.El != null && this.El.Displayed;
 		}
 
 		public bool ClickRemoveDropDownItem(string widgetTitle)
@@ -81,16 +82,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			{
 				return false;
 			}
-			IWebElement el;
-			try
-			{
-				el = container.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
-			}
-			catch (NoSuchElementException)
-			{
-				return false;
-			}
-			return el.TryClick();
+			return this.El.TryClick();
 		}
 
 		public MessageCenter GetMessageCenter()

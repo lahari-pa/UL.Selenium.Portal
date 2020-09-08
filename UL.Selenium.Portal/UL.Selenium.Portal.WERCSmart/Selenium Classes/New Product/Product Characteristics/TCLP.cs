@@ -10,7 +10,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 {
 	class TCLP : NewProduct
 	{
-		private IWebElement MetalHeader => this.containerElement.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
+		private IWebElement MetalHeader => this.containerElement.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"), 2);
 
 		private List<IWebElement> MetalContainers => this.MetalHeader.FindElements(By.XPath("../../following-sibling::div[not(@style='display: none;')]"), 2).ToList();
 
