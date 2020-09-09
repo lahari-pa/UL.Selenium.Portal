@@ -322,6 +322,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@ScenarioId:10275
 Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Available for Selection
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -331,7 +332,7 @@ Given I delete all products with UPC Number: saved as UPC59273
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 Then I save the product information as: TestCase59273
-Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+Given I call Shared Step 59927 (Primary Physical State > Solid only available Without Water Solubility question)
 Given I should see the Additional Product Information Page
 Given I call Shared Step 102767 (Additional Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:

@@ -686,6 +686,7 @@ Then I delete the excel file saved as Products in Scope Report for BBB
 
 
 
+@ScenarioId:10280
 Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Beyond
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -727,6 +728,7 @@ Given I click on close in the Report Download dialog
 Given I navigate to the home page
 
 
+@ScenarioId:10281
 Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutritional Supplement - Nutritional Supplement - Solid
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
