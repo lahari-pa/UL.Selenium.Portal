@@ -15,14 +15,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			get
 			{
 				var countries = new List<string>();
-				ReadOnlyCollection<IWebElement> listOfCountries;
-				try
-				{
-					listOfCountries = this.containerElement.FindElements(By.XPath(".//label")) 
+				ReadOnlyCollection<IWebElement> listOfCountries = this.containerElement.FindElements(By.XPath(".//label"), 2) 
 						.FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in"))
 						.FindElements(By.XPath("../..//input"));
-				}
-				catch (NoSuchElementException)
+				
+				if (listOfCountries == null)
 				{
 					return null;
 				}
@@ -30,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 				{
 					if (country.Selected)
 					{
-						countries.Add(country.FindElement(By.XPath("../..//label")).Text);
+						countries.Add(country.FindElement(By.XPath("../..//label"), 2).Text);
 					}
 				}
 				return countries;
@@ -40,14 +37,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			{
 				foreach (string country in value)
 				{
-					IWebElement thisLabel;
-					IWebElement countryInput;
-					try
-					{
-						thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == country);
-						countryInput = thisLabel.FindElement(By.XPath(".//../input"));
-					}
-					catch (NoSuchElementException)
+
+					IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == country);
+					IWebElement countryInput = thisLabel.FindElement(By.XPath(".//../input"), 2);
+					
+					if (thisLabel == null || countryInput == null)
 					{
 						return;
 					}
@@ -66,11 +60,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			{
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Product has been classified using OSHA"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
+					.FindElements(By.XPath("../following-sibling::div//label"), 2).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
 				if (selectOption != null)
 				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
+					string selectedOption = selectOption.FindElement(By.XPath(".//span"), 2).Text.Trim();
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -95,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Product has been classified using OSHA"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
+					.FindElements(By.XPath("../..//label"), 2).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
 			}
 		}
@@ -105,11 +99,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			{
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Product is shipped directly"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
+					.FindElements(By.XPath("../following-sibling::div//label"), 2).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
 				if (selectOption != null)
 				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
+					string selectedOption = selectOption.FindElement(By.XPath(".//span"), 2).Text.Trim();
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -134,7 +128,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Product is shipped directly"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
+					.FindElements(By.XPath("../..//label"), 2).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
 			}
 		}
@@ -144,11 +138,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			{
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Private Label or Brand"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
+					.FindElements(By.XPath("../following-sibling::div//label"), 2).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
 				if (selectOption != null)
 				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
+					string selectedOption = selectOption.FindElement(By.XPath(".//span"), 2).Text.Trim();
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -173,7 +167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Private Label or Brand"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
+					.FindElements(By.XPath("../..//label"), 2).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
 
 
@@ -185,7 +179,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			{
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("solely for the Retailer's use"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
+					.FindElements(By.XPath("../following-sibling::div//label"), 2).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
 				if (selectOption != null)
 				{
@@ -214,7 +208,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("solely for the Retailer's use"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
+					.FindElements(By.XPath("../..//label"), 2).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
 
 
@@ -226,11 +220,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			{
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("California's Cleaning Product"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
+					.FindElements(By.XPath("../following-sibling::div//label"), 2).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
 				if (selectOption != null)
 				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
+					string selectedOption = selectOption.FindElement(By.XPath(".//span"), 2).Text.Trim();
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -255,7 +249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("California's Cleaning Product"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
+					.FindElements(By.XPath("../..//label"), 2).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
 
 

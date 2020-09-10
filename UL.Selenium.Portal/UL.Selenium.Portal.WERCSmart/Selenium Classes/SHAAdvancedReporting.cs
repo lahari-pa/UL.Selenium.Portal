@@ -185,16 +185,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyPopupTitle(string title, out string output)
 		{
-			IWebElement actualTitle;
-			try
-			{
-				actualTitle = this.FindElement(By.Id("ui-dialog-title-preparing-file-modal"), 10);
-			}
-			catch (NoSuchElementException)
+			IWebElement actualTitle = this.FindElement(By.Id("ui-dialog-title-preparing-file-modal"), 10);
+
+			if (actualTitle == null)
 			{
 				output = null;
 				return false;
 			}
+			
 			output = actualTitle.Text;
 			return output == title;
 		}

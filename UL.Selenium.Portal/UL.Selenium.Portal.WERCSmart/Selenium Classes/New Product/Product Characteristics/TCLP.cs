@@ -17,12 +17,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		public bool ProductHasTclp {
 			get
 			{
-				IWebElement activeLabel;
-				try
-				{
-					activeLabel = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'TCLP')]/../following-sibling::div//label[contains(@class,'active')]"), 2);
-				}
-				catch (NoSuchElementException)
+				IWebElement activeLabel = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'TCLP')]/../following-sibling::div//label[contains(@class,'active')]"), 2);
+				
+				if (activeLabel == null)
 				{
 					return false;
 				}
@@ -84,14 +81,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 				IWebElement header = this.MetalHeader;
 				foreach (MetalPresence thisMetal in value)
 				{
-					IWebElement metalLabel;
-					IWebElement inputLabel;
-					try
-					{
-						metalLabel = header.FindElements(By.XPath("../../following::div//label[@class='control-label']")).FirstOrDefault(x => x.GetValue().Trim() == thisMetal.Metal);
-						inputLabel = metalLabel.FindElements(By.XPath("../..//input/../span")).FirstOrDefault(x => x.Text == thisMetal.Presence);
-					}
-					catch (NoSuchElementException)
+					IWebElement metalLabel = header.FindElements(By.XPath("../../following::div//label[@class='control-label']"), 2).FirstOrDefault(x => x.GetValue().Trim() == thisMetal.Metal);
+					IWebElement inputLabel = metalLabel.FindElements(By.XPath("../..//input/../span"), 2).FirstOrDefault(x => x.Text == thisMetal.Presence);
+					
+					if (metalLabel == null || inputLabel == null)
 					{
 						return;
 					}
@@ -100,7 +93,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 					{
 						try
 						{
-							IWebElement metalInput = inputLabel.FindElement(By.XPath("../input"));
+							IWebElement metalInput = inputLabel.FindElement(By.XPath("../input"), 2);
 							Report.Info("Attempting to set metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
 							metalInput.TryClick();
 						}
@@ -134,7 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement header = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div")).FirstOrDefault(x => x.Text.Contains("following metals"));
+				IWebElement header = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div"), 2).FirstOrDefault(x => x.Text.Contains("following metals"));
 				if (header != null)
 				{
 					return true;

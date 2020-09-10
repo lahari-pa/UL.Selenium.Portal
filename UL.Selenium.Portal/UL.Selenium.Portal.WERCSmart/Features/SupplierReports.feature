@@ -666,19 +666,22 @@ Scenario: [114764] UPCs and Registrations (Retailer Specific) - Report correctly
 	And I delete the Supplier Report file saved as 73082
 
 
+@ScenarioId:10293
 Scenario: [140261] California Proposition 65 - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: California Proposition 65
 Then I select CSV from the Select File Type
 Then I select the Request Report button excel file is produced called California Proposition 65.csv and save as California Proposition 65
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I click the Products in Scope button and confirm that an excel file is produced called California Proposition 65.csv and save as California Proposition 65
 Given I delete the excel file saved as California Proposition 65
 
+@ScenarioId:10294
 Scenario: [140260] Battery-Containing Products - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane

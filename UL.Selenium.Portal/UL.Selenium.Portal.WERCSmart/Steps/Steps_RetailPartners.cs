@@ -447,7 +447,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			while (!dir.Any() && i < 30)
 			{
 				//dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
-				dir = Directory.GetFiles(downloadsFolder, "" + file.Replace("<Date>", ""), SearchOption.AllDirectories);
+				dir = Directory.GetFiles(downloadsFolder, "" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}

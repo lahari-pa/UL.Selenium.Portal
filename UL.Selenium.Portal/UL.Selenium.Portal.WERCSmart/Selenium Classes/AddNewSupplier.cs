@@ -18,15 +18,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Delay.Seconds(2);
 
-			IWebElement SupplierID;
-			try
-			{
-				SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID']"), 2);
-			}
-			catch (NoSuchElementException)
+			IWebElement SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID']"), 2);
+
+			if (supplierID == null)
 			{
 				return false;
 			}
+
 			SupplierID.EnterText(supplierID);
 			return SupplierID.GetValue() == supplierID;
 		}
@@ -34,78 +32,65 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterSupplierIDExists()
 		{
-			IWebElement SupplierID;
-			try
-			{
-				SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID' and ./preceding-sibling::label[text()='Supplier ID']]"), 2);
-				return (SupplierID.Enabled && SupplierID.Displayed);
-			}
-			catch (Exception)
+			IWebElement SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID' and ./preceding-sibling::label[text()='Supplier ID']]"), 2);
+
+			if (SupplierID == null)
 			{
 				return false;
 			}
+
+			return (SupplierID.Enabled && SupplierID.Displayed);
+			
 		}
 
 		public bool SupplierIDErrorExists()
-		{
-			try
-			{
-				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']"), 2);
-				return (SupplierError.Enabled && SupplierError.Displayed);
-			}
-			catch (Exception)
+		{ 
+			IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']"), 2);
+
+			if (SupplierError == null)
 			{
 				return false;
 			}
+
+			return (SupplierError.Enabled && SupplierError.Displayed);
 		}
 
 		public string GetSupplierError()
 		{
-			try
-			{
-				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']"), 2);
-				return SupplierError.GetValue();
-			}
-			catch (Exception)
+			IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']"), 2);
+
+			if (SupplierError == null)
 			{
 				return null;
 			}
+
+			return SupplierError.GetValue();
 		}
 
 		public bool CompanyNameErrorExists()
 		{
-			try
-			{
-				Delay.Seconds(2);
+			Delay.Seconds(2);
 
-				IWebElement SupplierError;
-				try
-				{
-					SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']"), 2);
-				}
-				catch (NoSuchElementException)
+			IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']"), 2);
+
+				if (SupplierError == null)
 				{
 					return false;
 				}
-				return (SupplierError.Enabled && SupplierError.Displayed && SupplierError.Text != string.Empty);
-			}
-			catch (Exception)
-			{
-				return false;
-			}
+
+			return (SupplierError.Enabled && SupplierError.Displayed && SupplierError.Text != string.Empty);
 		}
 
 		public string GetCompanyNameError()
 		{
-			try
-			{
-				IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']/span"), 2);
-				return SupplierError.GetValue();
-			}
-			catch (Exception)
+			IWebElement SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']/span"), 2);
+
+			if (SupplierError == null)
 			{
 				return null;
 			}
+
+				return SupplierError.GetValue();
 		}
 
 		public bool EnterCompanyOrBrandName(string companyOrBrandName)

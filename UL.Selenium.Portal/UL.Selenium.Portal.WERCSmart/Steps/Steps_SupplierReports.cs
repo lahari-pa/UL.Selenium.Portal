@@ -930,6 +930,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(supplierReportsObject.SelectCloseButtonInReportDownloadPopup(), "Failed to select Close button", "Successfully selected Close button");
 		}
 
+		[StepDefinition(@"I confirm there is a Download button for the most recent report")]
+		public void ThenIClickThereIsADownloadButtonForTheMostRecentReport()
+		{
+			Delay.Seconds(61);
+			SeleniumBrowser.WebBrowser.Navigate().Refresh();
+			Delay.Seconds(5);
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.CheckForDownloadButtonForTheMostRecentReport(), "Failed to find Download button", "Successfully found Download button");
+		}
+
 		[StepDefinition(@"I click the Download button for the most recent report")]
 		public void ThenIClickTheDownloadButtonForTheMostRecentReport()
 		{

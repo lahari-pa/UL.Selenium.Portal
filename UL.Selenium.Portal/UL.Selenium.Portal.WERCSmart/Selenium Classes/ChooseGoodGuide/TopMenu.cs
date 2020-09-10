@@ -27,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 					IWebElement select;
 					try
 					{
-						select = this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']"));
+						select = this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']"), 2);
 					}
 					catch (NoSuchElementException)
 					{
