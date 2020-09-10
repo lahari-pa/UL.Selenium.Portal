@@ -663,6 +663,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.	
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode1S3
 
+@ScenarioId:10292
 	Scenario: [122286] UPC Transportation Error - Mode 1 - 21
 		#If DOT Hazard Class is 5.2 and physical state is Solid and UPC > 3.381 oz and DOT Consumer Commodity and/or Limited Quantity at the UPC level and Proper Shipping name is Type B or C then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

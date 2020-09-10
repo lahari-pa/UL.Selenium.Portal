@@ -686,6 +686,7 @@ Then I delete the excel file saved as Products in Scope Report for BBB
 
 
 
+@ScenarioId:10280
 Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Beyond
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -709,9 +710,7 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128144, container type: Plastic Container and size: 6.2 do not click continue
 Then I click continue
 Given I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
-And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 Given I click continue
-Given I call Shared Step 60567 (Upload Product Label only)
 Then I click continue
 And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
@@ -720,13 +719,14 @@ Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (O
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
-Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_Current_Month_Day_Year.xlsx and save as PRODUCTS NOT IN SCOPE REPORT FOR BBB
+Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as PRODUCTS NOT IN SCOPE REPORT FOR BBB
 Then I confirm the excel file saved as: PRODUCTS NOT IN SCOPE REPORT FOR BBB does not contain the following data: Product NOT in Scope for BBB
 Given I delete the excel file saved as PRODUCTS NOT IN SCOPE REPORT FOR BBB
 Given I click on close in the Report Download dialog
 Given I navigate to the home page
 
 
+@ScenarioId:10281
 Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutritional Supplement - Nutritional Supplement - Solid
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -747,6 +747,6 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: «comments»
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
-Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_Current_Month_Day_Year.xlsx and save as Products in Scope Report for BBB
+Given I click the Products in Scope button and confirm that an excel file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
 Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Nutritional (Solid) Supplement Product for BBB
 Given I delete the excel file saved as Products in Scope Report for BBB

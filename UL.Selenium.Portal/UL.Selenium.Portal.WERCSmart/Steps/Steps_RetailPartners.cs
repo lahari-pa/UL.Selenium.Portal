@@ -420,20 +420,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var selRetailDetails = new RetailPartnersDetails();
 
-			//if (!selRetailDetails.Wait_for_load(10))
-			//{
-			//	throw new Exception("Page failed to load!");
-			//}
+			if (!selRetailDetails.Wait_for_load(10))
+			{
+				throw new Exception("Page failed to load!");
+			}
 
 			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 			Report.Info("Downloads folder: " + downloadsFolder);
 
 			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 
-			//foreach (string file_ in dir)
-			//{
-			//	File.Delete(file_);
-			//}
+			foreach (string file_ in dir)
+			{
+				File.Delete(file_);
+			}
 
 
 			selRetailDetails.ClickProductsInScope();
@@ -446,7 +446,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
 			while (!dir.Any() && i < 30)
 			{
-				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				//dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				dir = Directory.GetFiles(downloadsFolder, "" + file.Replace("<Date>", ""), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}
