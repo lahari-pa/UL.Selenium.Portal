@@ -1204,6 +1204,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				try
 				{
 					matchingElement.Check(setChecked);
+					//Code Below is used to help debug 42196, issue getting the authroized checkbox the be checked (remove once passing)
+					if (name == "authorized")
+					{
+						bool isChecked = matchingElement.Checked();
+						Report.Info($"element checked bool: {isChecked}");
+					}						
 					return true;
 				}
 				catch (Exception e)

@@ -272,7 +272,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				myNext.ScrollElementIntoView();
 				if (!myNext.TryClick())
 				{
-					throw new Exception("Failed to click move to next page");
+					Delay.Seconds(5);
+					myNext = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='Next']"), 10).FirstOrDefault();
+					if (myNext == null)
+					{
+						Report.Info("On Last Page");
+						Report.Screenshot();
+						break;
+					}
+					myNext.ScrollElementIntoView();
+					if (!myNext.TryClick())
+					{
+						throw new Exception("Failed to click move to next page");
+					}
 				}
 				pageNo++;
 				Delay.Seconds(1);
