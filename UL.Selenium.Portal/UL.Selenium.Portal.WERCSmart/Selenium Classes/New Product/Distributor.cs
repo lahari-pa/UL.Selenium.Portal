@@ -103,10 +103,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (info.ContainerType.ToLower() != "none")
 				{
 					IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-					{
-						return false
-					}
+
 					if (containsType == null)
+					{
+						return false;
+					}
 
 					containsType.Select(info.ContainerType);
 				}

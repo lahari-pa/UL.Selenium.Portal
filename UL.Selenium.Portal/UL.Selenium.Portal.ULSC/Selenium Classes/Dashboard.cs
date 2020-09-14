@@ -135,12 +135,9 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			{
 				return null;
 			}
-			IList<IWebElement> gEls;
-			try
-			{
-				gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
-			}
-			catch (NoSuchElementException)
+			IList<IWebElement> gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
+			
+			if (gEls == null)
 			{
 				return null;
 			}

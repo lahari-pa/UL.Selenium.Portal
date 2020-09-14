@@ -183,7 +183,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 
 				if (selectOption != null)
 				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
+					string selectedOption = selectOption.FindElement(By.XPath(".//span"), 2).Text.Trim();
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;

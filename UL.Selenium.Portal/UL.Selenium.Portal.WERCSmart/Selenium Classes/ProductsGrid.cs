@@ -100,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetAllFilters()
 		{
-			return this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"))
+			return this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2)
 				.Select(x => x.Text).ToList();
 		}
 
@@ -290,7 +290,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public ProductGridItem FirstProductInGrid()
 		{
-			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2).Count == 0)
 			{
 				Report.Error("No rows have been found!");
 				return null;
@@ -305,7 +305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
 			var retailers = new List<string>();
 			var retailersAbrv = new List<string>();
-			IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
+			IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li"), 2).Where(x => x.Displayed);
 
 			foreach (IWebElement retailerLi in retailersLi)
 			{
@@ -386,7 +386,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					continue;
 				}
-				var productElement = new ProductGridItem { ProductId = row.FindElement(By.XPath(".//small"), 2).Text.Trim(), ProductName = row.FindElement(By.XPath(".//div/p"), 2).Text.Trim(), DateCreated = row.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(), Retailers = row.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList() };
+				var productElement = new ProductGridItem { ProductId = row.FindElement(By.XPath(".//small"), 2).Text.Trim(), ProductName = row.FindElement(By.XPath(".//div/p"), 2).Text.Trim(), DateCreated = row.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(), Retailers = row.FindElements(By.XPath(".//li"), 2).Where(x => x.Displayed).Select(x => x.Text).ToList() };
 				return productElement;
 			}
 			return null;
@@ -394,7 +394,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<ProductGridItem> GetAllItemsInGrid()
 		{
-			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2).Count == 0)
 			{
 				Report.Error("No rows have been found!");
 				return null;
@@ -418,7 +418,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
 							productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
 						DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
-						Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList(),
+						Retailers = productRow.FindElements(By.XPath(".//li"), 2).Where(x => x.Displayed).Select(x => x.Text).ToList(),
 						NameLabel = labelBrandTag?.Text
 					};
 					ListProductGridItems.Add(productElement);
@@ -440,7 +440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
 				ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
 				DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
-				Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList()
+				Retailers = productRow.FindElements(By.XPath(".//li"), 2).Where(x => x.Displayed).Select(x => x.Text).ToList()
 			};
 			return thisProduct;
 		}
@@ -1245,7 +1245,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public ProductGridItem FirstProductNotRecertInGrid()
 		{
-			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2).Count == 0)
 			{
 				Report.Error("No rows have been found!");
 				return null;
@@ -1287,7 +1287,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					string dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
 					var retailers = new List<string>();
 					var retailersAbrv = new List<string>();
-					IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
+					IEnumerable<IWebElement> retailersLi = productRow.FindElements(By.XPath(".//li"), 2).Where(x => x.Displayed);
 
 					foreach (IWebElement retailerLi in retailersLi)
 					{
@@ -1533,7 +1533,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> MoreFilterLabels()
 		{
-			return this.containerElement.FindElements(By.XPath(".//div[@id='more-filters-panel']//label")).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath(".//div[@id='more-filters-panel']//label"), 2).Select(x => x.Text).ToList();
 		}
 
 		public bool SelectBrandByValue(MyBrands.Brand brand)

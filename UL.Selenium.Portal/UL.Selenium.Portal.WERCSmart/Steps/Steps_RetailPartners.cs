@@ -1180,7 +1180,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I confirm that under the <Retailer> & You heading all 7 Wal-Mart affiliate retailers are displayed");
 				List<string> actualRetailers = selRetailPartnersDetails.WalmartRegistrationsRetailers();
 				Report.IsTrue(!actualRetailers.Except(retailerNames).Any() && actualRetailers.Count == retailerNames.Count,
-					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'")),
+					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'"), 2),
 					"The actual list of retailers showing under '<Retailer> & You matched the expected list");
 				selRetailPartnersDetails.ClickBackButton();
 			}
@@ -1259,7 +1259,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tabs.Rows.Cast<TableRow>().ToList().ForEach(x => expectedTabs.Add(x["Tab"]));
 			List<string> displayedTabs = new DataTierDetails().AllTabs();
 			Report.IsTrue(expectedTabs.All(x => displayedTabs.Contains(x)) && expectedTabs.Count == displayedTabs.Count,
-				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"))}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"))}""",
+				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"), 2)}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"), 2)}""",
 				"The displayed tabs matched the expected tabs.");
 		}
 
@@ -2334,17 +2334,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 
-					if (containsOrDoesNotContain == "does not contain")
-					{
-						Report.Success("Excel file did not contain the following data: " + data);
-						return true;
-					}
-					else
-					{
+				if (containsOrDoesNotContain == "contains")
+				{
+					Report.Failure("Excel file did not contain the following data: " + data);
+					return false;
+				}
 
-						Report.Failure("Excel file did not contain the following data: " + data);
-						return false;
-					}
+				if (containsOrDoesNotContain == "does not contain")
+				{
+					Report.Success("Excel file did not contain the following data: " + data);
+					return true;
+				}
+
 			}
 
 			return false;

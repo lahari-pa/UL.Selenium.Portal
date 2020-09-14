@@ -44,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			try
 			{
 				IWebElement error = SeleniumBrowser.WebBrowser.FindElements(By.XPath(
-						".//div[@class='validation-summary-errors']/span"))
+						".//div[@class='validation-summary-errors']/span"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Log in was unsuccessful"));
 				if (error != null)
 				{
@@ -192,7 +192,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickLogin()
 		{
-			IWebElement loginButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdLogIn']"));
+			IWebElement loginButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdLogIn']"), 2);
 			if (loginButton != null)
 			{
 				return loginButton.TryClick();
@@ -204,7 +204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickContinue()
 		{
 			Delay.Seconds(1);
-			IWebElement continueButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//*[@type='submit']"));
+			IWebElement continueButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//*[@type='submit']"), 2);
 			if (continueButton != null)
 			{
 				return continueButton.TryClick();
@@ -215,7 +215,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCongratulationsLogin()
 		{
-			IWebElement loginButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button[@id='cmdSupplierLogin']"));
+			IWebElement loginButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button[@id='cmdSupplierLogin']"), 2);
 			if (loginButton != null)
 			{
 				return loginButton.TryClick();
@@ -241,7 +241,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSignIn()
 		{
-			IWebElement signInLink = this.containerElement.FindElement(By.XPath(".//a[@id='loginLink']"));
+			IWebElement signInLink = this.containerElement.FindElement(By.XPath(".//a[@id='loginLink']"), 2);
 
 			if (signInLink != null)
 			{
@@ -252,7 +252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickNext()
 		{
-			IWebElement nextButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdNext']"));
+			IWebElement nextButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdNext']"), 2);
 
 			if (nextButton != null)
 			{
@@ -263,7 +263,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickBack()
 		{
-			IWebElement backButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdBack']"));
+			IWebElement backButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdBack']"), 2);
 
 			if (backButton != null)
 			{
@@ -274,7 +274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCancel()
 		{
-			IWebElement cancelButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"));
+			IWebElement cancelButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"), 2);
 
 			if (cancelButton != null)
 			{
@@ -286,7 +286,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickVerify()
 		{
 			Delay.Seconds(1);
-			IWebElement verifyButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//*[@id='cmdVerify']"));
+			IWebElement verifyButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//*[@id='cmdVerify']"), 2);
 
 			if (verifyButton != null)
 			{
@@ -299,7 +299,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement CompanyNameField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='txtCompanyName']"));
+				IWebElement CompanyNameField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='txtCompanyName']"), 2);
 
 				if (CompanyNameField != null)
 				{
@@ -315,7 +315,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement Contents = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='legends']")).FirstOrDefault(x => x.Text.Contains("Congratulations! You have successfully"));
+				IWebElement Contents = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='legends']"), 2).FirstOrDefault(x => x.Text.Contains("Congratulations! You have successfully"));
 
 				if (Contents != null)
 				{
@@ -333,7 +333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
-					IWebElement VerificationField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//*[@id='VerificationCode']"));
+					IWebElement VerificationField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//*[@id='VerificationCode']"), 2);
 					if (VerificationField != null)
 					{
 						return true;
@@ -355,7 +355,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
-					IWebElement AcceptedCheckField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='Accepted']"));
+					IWebElement AcceptedCheckField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='Accepted']"), 2);
 
 					if (AcceptedCheckField != null)
 					{
@@ -378,7 +378,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
-					IWebElement h1Dashboard = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//h1")).FirstOrDefault(x => x.Text.Contains("Dashboard"));
+					IWebElement h1Dashboard = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//h1"), 2).FirstOrDefault(x => x.Text.Contains("Dashboard"));
 
 					if (h1Dashboard != null)
 					{
@@ -400,7 +400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement ContactNameField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='txtContactName']"));
+				IWebElement ContactNameField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='txtContactName']"), 2);
 
 				if (ContactNameField != null)
 				{
@@ -416,7 +416,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement emailField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='txtEmail']"));
+				IWebElement emailField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='txtEmail']"), 2);
 
 				if (emailField != null)
 				{
