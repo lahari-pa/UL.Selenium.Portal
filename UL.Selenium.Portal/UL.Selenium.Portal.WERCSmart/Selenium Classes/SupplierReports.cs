@@ -315,11 +315,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			var tableHeaderEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table//thead"), 15);
+
+			if (tableHeaderEl == null)
+			{
+				Report.Info("TableHeaderEl returned null");
+				return false;
+			}
+
 			var wantedTitleMasterEl = tableHeaderEl.FindElement(By.XPath($"//th[contains(@data-bind,'{column}')]"), 15);
 			var directionTitleEl = tableHeaderEl.FindElement(By.XPath($"//span[@id='{column}{wantedID}']"), 15);
 
-			if (tableHeaderEl == null || wantedTitleMasterEl == null || directionTitleEl == null)
+			if (wantedTitleMasterEl == null)
 			{
+				Report.Info("WantedTitleMasterEl returned null");
+				return false;
+			}
+
+			if (directionTitleEl == null)
+			{
+				Report.Info("DirectionTitleEl returned null");
 				return false;
 			}
 

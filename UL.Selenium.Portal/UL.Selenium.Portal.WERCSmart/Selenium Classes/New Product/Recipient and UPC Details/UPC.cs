@@ -923,8 +923,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement lineOneEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[1]"), 2);
 			IWebElement lineTwoEl = this.ContainerElement.FindElement(By.XPath("//h4[text()='Warning!']/../..//div[@class='modal-body']//p[2]"), 2);
 			
-			if (lineOneEl == null || lineTwoEl == null)
+			if (lineOneEl == null)
 			{
+				Report.Error("Could not find first p element");
+				return false;
+			}
+			if (lineTwoEl == null)
+			{
+				Report.Error("Could not find second p element");
 				return false;
 			}
 			if (lineOneEl.Text == lineOne && lineTwoEl.Text == lineTwo)

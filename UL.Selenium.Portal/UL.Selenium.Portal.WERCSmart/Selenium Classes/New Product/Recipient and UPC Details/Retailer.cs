@@ -168,13 +168,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 
 				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
-				IWebElement el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
 
-				if (container == null || el == null)
+				if (container == null)
 				{
+					Report.Error("Could not find the container element");
 					return false;
 				}
 
+				IWebElement el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
 
 				if (el == null)
 				{
