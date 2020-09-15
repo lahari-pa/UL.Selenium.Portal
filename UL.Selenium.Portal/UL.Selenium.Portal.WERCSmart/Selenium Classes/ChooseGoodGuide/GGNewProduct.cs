@@ -24,13 +24,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		public bool ClickSaveAndNext()
 		{
 			Delay.Seconds(1);
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[(./b[contains(text(), 'Save and Next')])]")).TryClick();
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[(./b[contains(text(), 'Save and Next')])]"), 2).TryClick();
 
 		}
 		//Create or Copy
 		public bool SelectAddProductOption(string option)
 		{
-			return this.containerElement.FindElement(By.XPath("//label[contains(text(), 'Add Product')]/..//label/span[contains(text(),'" + option + "')]/../input")).TryClick();
+			return this.containerElement.FindElement(By.XPath("//label[contains(text(), 'Add Product')]/..//label/span[contains(text(),'" + option + "')]/../input"), 2).TryClick();
 
 		}
 
@@ -45,18 +45,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				IWebElement input;
-				try
-				{
-					input = this.containerElement.FindElement(
-					By.XPath("//div[@class='form-group']//label[contains(text(),'Product Name')]/../..//input"));
-					input.EnterText(productName);
-				}
-				catch (NoSuchElementException)
+				IWebElement input = this.containerElement.FindElement(
+					By.XPath("//div[@class='form-group']//label[contains(text(),'Product Name')]/../..//input"), 2);
+
+				if (input == null)
 				{
 					return false;
 				}
-				return true;
+
+				return input.TryEnterText(productName);
+				;
 			}
 
 			catch (Exception)
@@ -67,18 +65,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool ProductLineExists(string productLine)
 		{
-			IWebElement select;
-			try
-			{
-				select = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
-				".//div[@class='form-group']//label[contains(text(),'Product Line/Brand')]/../..//select"));
-			}
-			catch (NoSuchElementException)
+			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
+				".//div[@class='form-group']//label[contains(text(),'Product Line/Brand')]/../..//select"), 2);
+			
+			if (select == null)
 			{
 				return false;
 			}
 			select.TryClick();
-			if (select.FindElements(By.XPath("./option")).Select(x => x.Text).Contains(productLine))
+			if (select.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Contains(productLine))
 			{
 				return true;
 			}
@@ -109,12 +104,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				IWebElement el;
-				try
-				{
-					el = this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[@class='form-group child']//select"), 2);
-				}
-				catch (NoSuchElementException)
+				IWebElement el = this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[@class='form-group child']//select"), 2);
+				
+				if (el == null)
 				{
 					return false;
 				}
@@ -131,12 +123,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool SelectSubCategory(string subcategory)
 		{
-			IWebElement el;
-			try
-			{
-				el = this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[contains(@class,'form-group offset')]//select"), 2);
-			}
-			catch (NoSuchElementException)
+			IWebElement el = this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[contains(@class,'form-group offset')]//select"), 2);
+			
+			if (el == null)
 			{
 				return false;
 			}
@@ -157,7 +146,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='form-group']/div[@class='INFO' and not(contains(@style, 'none'))]/p")).Text.Trim();
+				return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='form-group']/div[@class='INFO' and not(contains(@style, 'none'))]/p"), 2).Text.Trim();
 			}
 			catch (Exception)
 			{
@@ -170,9 +159,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			try
 			{
 				IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
-					".//div[@class='form-group']//label[contains(text(),'Product Line/Brand')]/../..//select"));
+					".//div[@class='form-group']//label[contains(text(),'Product Line/Brand')]/../..//select"), 2);
 				select.TryClick();
-				if (select.FindElements(By.XPath("./option")).Select(x => x.Text).Contains(productLine))
+				if (select.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Contains(productLine))
 				{
 					select.Select(productLine);
 					return true;
@@ -189,13 +178,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool AddNewProductLineBrandName(string productLine)
 		{
-			if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[contains(text(), 'Add new product')]")).TryClick())
+			if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[contains(text(), 'Add new product')]"), 2).TryClick())
 			{
 				if (this.WaitForSection("Product Line/Brand"))
 				{
-					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Product Line/Brand')]/following-sibling::input")).EnterText(productLine);
-					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Product Line/Brand')]/following-sibling::button")).TryClick();
-					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Product Line/Brand')]/following-sibling::a")).TryClick();
+					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Product Line/Brand')]/following-sibling::input"), 2).EnterText(productLine);
+					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Product Line/Brand')]/following-sibling::button"), 2).TryClick();
+					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Product Line/Brand')]/following-sibling::a"), 2).TryClick();
 					if (this.WaitForSection("Product Identification"))
 					{
 						return true;
@@ -214,7 +203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			try
 			{
 				IWebElement radio = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
-					".//label[contains(text(),'physical state of your product')]/..//label/span[text()='" + state + "']/..//input"));
+					".//label[contains(text(),'physical state of your product')]/..//label/span[text()='" + state + "']/..//input"), 2);
 				return radio.TryClick();
 			}
 			catch (Exception)
@@ -228,7 +217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				IWebElement phInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@name='PH']"));
+				IWebElement phInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@name='PH']"), 2);
 				phInput.EnterText(value);
 				return true;
 			}
@@ -244,7 +233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				IWebElement score = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//*[@id='GGPREV_chart']//*[name()='svg']//*[name()='text']//*[name()='tspan']"));
+				IWebElement score = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//*[@id='GGPREV_chart']//*[name()='svg']//*[name()='text']//*[name()='tspan']"), 2);
 				return Convert.ToInt16(score.Text.Trim());
 			}
 			catch (Exception)
@@ -260,11 +249,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			try
 			{
 				IWebElement input = SeleniumBrowser.WebBrowser.FindElement(
-					By.XPath("//label[contains(text(), 'Would you like to continue')]/..//span[text()='Yes']/..//input"));
+					By.XPath("//label[contains(text(), 'Would you like to continue')]/..//span[text()='Yes']/..//input"), 2);
 				if (continueYN.ToLower() == "no")
 				{
 					input = SeleniumBrowser.WebBrowser.FindElement(
-						By.XPath("//label[contains(text(), 'Would you like to continue')]/..//span[text()='No']/..//input"));
+						By.XPath("//label[contains(text(), 'Would you like to continue')]/..//span[text()='No']/..//input"), 2);
 				}
 
 				return input.TryClick();
@@ -283,7 +272,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			IWebElement buttonToClick =
 				this.containerElement.FindElement(
-					By.XPath("//tr/td/label[contains(text(), '" + documentType.Trim() + "')]/../..//span[contains(@class, 'button')]"));
+					By.XPath("//tr/td/label[contains(text(), '" + documentType.Trim() + "')]/../..//span[contains(@class, 'button')]"), 2);
 			if (buttonToClick != null)
 			{
 				if (buttonToClick.TryClick())
@@ -304,12 +293,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickAddUPC()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[contains(@data-bind, 'addUpc')]")).TryClick();
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[contains(@data-bind, 'addUpc')]"), 2).TryClick();
 		}
 
 		public bool ClickSaveUPC()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[contains(@data-bind, 'save')]")).TryClick();
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[contains(@data-bind, 'save')]"), 2).TryClick();
 		}
 
 		public bool InputUpcInformation(UpcInformation info)
@@ -354,7 +343,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool SetUPCValue(string upc)
 		{
-			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[contains(@data-bind, 'upc')]"));
+			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[contains(@data-bind, 'upc')]"), 2);
 			if (upcInput != null)
 			{
 				upcInput.EnterText(upc);
@@ -366,7 +355,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool SetUPCType(string type)
 		{
-			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[contains(@data-bind, 'Type')]"));
+			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[contains(@data-bind, 'Type')]"), 2);
 			if (upcInput != null)
 			{
 				upcInput.Select(type);
@@ -380,7 +369,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				IWebElement upcCheckbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='checkbox' and not(@id='chkAll')]"));
+				IWebElement upcCheckbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='checkbox' and not(@id='chkAll')]"), 2);
 				upcCheckbox.Check(trueOrFalse);
 				return true;
 			}
@@ -394,7 +383,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool SetUPCSize(string size)
 		{
-			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[contains(@data-bind, 'size')]"));
+			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[contains(@data-bind, 'size')]"), 2);
 			if (upcInput != null)
 			{
 				upcInput.EnterText(size);
@@ -410,7 +399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				try
 				{
-					IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[contains(@data-bind, 'upc')]"));
+					IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[contains(@data-bind, 'upc')]"), 2);
 					if (upcInput != null)
 					{
 						return true;
@@ -432,7 +421,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				try
 				{
-					IWebElement upcGrid = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[contains(@class, 'upcgrid')]//button[(i[contains(@class, 'edit')])]"));
+					IWebElement upcGrid = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[contains(@class, 'upcgrid')]//button[(i[contains(@class, 'edit')])]"), 2);
 					if (upcGrid != null)
 					{
 						return true;
@@ -452,13 +441,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			IWebElement buttonToClick =
 				SeleniumBrowser.WebBrowser.FindElement(
-					By.XPath("//table[contains(@class, 'upcgrid')]//button[(i[contains(@class, '" + button + "')])]"));
+					By.XPath("//table[contains(@class, 'upcgrid')]//button[(i[contains(@class, '" + button + "')])]"), 2);
 			return buttonToClick.TryClick();
 		}
 
 		public bool UPCGridSetProductName(string productName)
 		{
-			IWebElement upcProductName = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[contains(@data-bind, 'value')]"));
+			IWebElement upcProductName = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[contains(@data-bind, 'value')]"), 2);
 			if (upcProductName != null)
 			{
 				upcProductName.EnterText(productName);
@@ -470,7 +459,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool UPCGridGoodGuide(string yesNo)
 		{
-			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[4]/select[contains(@data-bind, 'options')]"));
+			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[4]/select[contains(@data-bind, 'options')]"), 2);
 			if (upcInput != null)
 			{
 				upcInput.Select(yesNo);
@@ -482,7 +471,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool UPCGridScent(string scent)
 		{
-			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[6]/select[contains(@data-bind, 'options')]"));
+			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[6]/select[contains(@data-bind, 'options')]"), 2);
 			if (upcInput != null)
 			{
 				upcInput.ScrollElementIntoView();
@@ -495,7 +484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool UPCGridColour(string colour)
 		{
-			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[5]/select[contains(@data-bind, 'options')]"));
+			IWebElement upcInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[5]/select[contains(@data-bind, 'options')]"), 2);
 			if (upcInput != null)
 			{
 				upcInput.ScrollElementIntoView();
@@ -509,17 +498,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		//Image, Front, Back
 		public bool UPCUpload(string documentType, string filePath)
 		{
-			IWebElement buttonToClick = this.containerElement.FindElement(By.XPath("//td[7]//span[text()='Add']/../../span"));
+			IWebElement buttonToClick = this.containerElement.FindElement(By.XPath("//td[7]//span[text()='Add']/../../span"), 2);
 			switch (documentType)
 			{
 				case "Image":
-					buttonToClick = this.containerElement.FindElement(By.XPath("//td[7]//span[text()='Add']/../../span"));
+					buttonToClick = this.containerElement.FindElement(By.XPath("//td[7]//span[text()='Add']/../../span"), 2);
 					break;
 				case "Front":
-					buttonToClick = this.containerElement.FindElement(By.XPath("//td[8]//span[text()='Add']/../../span"));
+					buttonToClick = this.containerElement.FindElement(By.XPath("//td[8]//span[text()='Add']/../../span"), 2);
 					break;
 				case "Back":
-					buttonToClick = this.containerElement.FindElement(By.XPath("//td[9]//span[text()='Add']/../../span"));
+					buttonToClick = this.containerElement.FindElement(By.XPath("//td[9]//span[text()='Add']/../../span"), 2);
 					break;
 				default:
 					throw new Exception("You must provide a valid document type");
@@ -547,13 +536,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		public bool WouldYouLikeToSubmitProductInfo(string yesOrNo)
 		{
 			IWebElement submit = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
-				"//h4[contains(text(), 'submit your product information')]/..//input[@value='" + yesOrNo.ToLower() + "']"));
+				"//h4[contains(text(), 'submit your product information')]/..//input[@value='" + yesOrNo.ToLower() + "']"), 2);
 			return submit.TryClick();
 		}
 
 		public bool DataAcceptanceClickOK()
 		{
-			IWebElement buttonOK = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button[@id='cmdAcceptProduct']"));
+			IWebElement buttonOK = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button[@id='cmdAcceptProduct']"), 2);
 			return buttonOK.TryClick();
 		}
 
@@ -566,11 +555,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 					By.XPath("//h3[contains(text(), 'GoodGuide Products')]/../following-sibling::div/table/tbody/tr"));
 
 			IWebElement planRadio =
-				listOfRows.FirstOrDefault(x => x.FindElement(By.XPath(".//td[1]")).Text.Contains(numberOfProducts.ToString()));
+				listOfRows.FirstOrDefault(x => x.FindElement(By.XPath(".//td[1]"), 2).Text.Contains(numberOfProducts.ToString()));
 
 			if (planRadio != null)
 			{
-				return planRadio.FindElement(By.XPath(".//td[2]//input")).TryClick();
+				return planRadio.FindElement(By.XPath(".//td[2]//input"), 2).TryClick();
 			}
 
 			return false;
@@ -578,7 +567,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool InChoosePlanClickNext()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdNext']")).TryClick();
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdNext']"), 2).TryClick();
 		}
 
 		// ========= Add Ingredient Functions ========= //

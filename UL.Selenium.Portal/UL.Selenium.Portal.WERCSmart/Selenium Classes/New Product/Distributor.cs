@@ -103,6 +103,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (info.ContainerType.ToLower() != "none")
 				{
 					IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+
+					if (containsType == null)
+					{
+						return false;
+					}
+
 					containsType.Select(info.ContainerType);
 				}
 
@@ -119,25 +125,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				sizeField.EnterText(info.Size);
 				if (info.Dpci.Length > 0)
 				{
-					IWebElement dpciField;
-					try
-					{
-						dpciField = container.FindElement(By.XPath(".//input[contains(@data-bind,'value.field')]"), 2);
-					}
-					catch (NoSuchElementException)
+					IWebElement dpciField = container.FindElement(By.XPath(".//input[contains(@data-bind,'value.field')]"), 2);
+					
+					if (dpciField == null)
 					{
 						return false;
 					}
 					dpciField.EnterText(info.Dpci);
 				}
+
 				if (info.Quantity.Length > 0)
 				{
-					IWebElement quantityField;
-					try
-					{
-						quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity']"), 2);
-					}
-					catch (NoSuchElementException)
+					IWebElement quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity']"), 2);
+					
+					if (quantityField == null)
 					{
 						return false;
 					}
@@ -146,12 +147,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (info.PackageType.Length > 0)
 				{
-					IWebElement packageField;
-					try
-					{
-						packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
-					}
-					catch (NoSuchElementException)
+					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					
+					if (packageField == null)
 					{
 						return false;
 					}

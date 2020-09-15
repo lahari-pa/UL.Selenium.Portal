@@ -420,20 +420,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var selRetailDetails = new RetailPartnersDetails();
 
-			//if (!selRetailDetails.Wait_for_load(10))
-			//{
-			//	throw new Exception("Page failed to load!");
-			//}
+			if (!selRetailDetails.Wait_for_load(10))
+			{
+				throw new Exception("Page failed to load!");
+			}
 
 			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 			Report.Info("Downloads folder: " + downloadsFolder);
 
 			string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 
-			//foreach (string file_ in dir)
-			//{
-			//	File.Delete(file_);
-			//}
+			foreach (string file_ in dir)
+			{
+				File.Delete(file_);
+			}
 
 
 			selRetailDetails.ClickProductsInScope();
@@ -446,7 +446,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
 			while (!dir.Any() && i < 30)
 			{
-				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				//dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				dir = Directory.GetFiles(downloadsFolder, "" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}
@@ -1179,7 +1180,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I confirm that under the <Retailer> & You heading all 7 Wal-Mart affiliate retailers are displayed");
 				List<string> actualRetailers = selRetailPartnersDetails.WalmartRegistrationsRetailers();
 				Report.IsTrue(!actualRetailers.Except(retailerNames).Any() && actualRetailers.Count == retailerNames.Count,
-					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'")),
+					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'"), 2),
 					"The actual list of retailers showing under '<Retailer> & You matched the expected list");
 				selRetailPartnersDetails.ClickBackButton();
 			}
@@ -1258,7 +1259,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tabs.Rows.Cast<TableRow>().ToList().ForEach(x => expectedTabs.Add(x["Tab"]));
 			List<string> displayedTabs = new DataTierDetails().AllTabs();
 			Report.IsTrue(expectedTabs.All(x => displayedTabs.Contains(x)) && expectedTabs.Count == displayedTabs.Count,
-				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"))}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"))}""",
+				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"), 2)}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"), 2)}""",
 				"The displayed tabs matched the expected tabs.");
 		}
 
@@ -2330,20 +2331,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.Success("Excel file contained the following data: " + data);
 							return true;
 						}
+						if (str == data && containsOrDoesNotContain == "does not contain")
+						{
+							Report.Failure("Excel file contained the following data: " + data);
+							return false;
+						}
 					}
 				}
 
-					if (containsOrDoesNotContain == "does not contain")
-					{
-						Report.Success("Excel file did not contain the following data: " + data);
-						return true;
-					}
-					else
-					{
+				if (containsOrDoesNotContain == "contains")
+				{
+					Report.Failure("Excel file did not contain the following data: " + data);
+					return false;
+				}
 
-						Report.Failure("Excel file did not contain the following data: " + data);
-						return false;
-					}
+				if (containsOrDoesNotContain == "does not contain")
+				{
+					Report.Success("Excel file did not contain the following data: " + data);
+					return true;
+				}
+
 			}
 
 			return false;

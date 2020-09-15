@@ -127,19 +127,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCategory(string category)
 		{
-			//List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();			
+			List<IWebElement> categories = this.containerElement.FindElements(By.XPath($".//li[contains(@class,'ui-state-default ui-corner-top')]"), 2).ToList();
 
-			//IWebElement foundCategory = categories.First(x => x.Text == category);
-			//if(foundCategory==null)
-			//{
-			//	Report.Info($"Did not find the category: {category}");
-			//	return false;
-			//}
-			//Report.Info($"Found the category: {category}, attempting to click the category");
-			//return foundCategory.TryClick();
-			
-			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath(".//ul[@class='ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all']//a[text()='" + category + "']"), 2);
-			return firstSupplier.TryClick();
+			if (categories == null)
+			{
+				Report.Info($"Did not find any categories");
+				return false;
+			}
+
+			IWebElement foundCategory = categories.First(x => x.Text == category);
+			if (foundCategory == null)
+			{
+				Report.Info($"Did not find the category: {category}");
+				return false;
+			}
+			Report.Info($"Found the category: {category}, attempting to click the category");
+			return foundCategory.TryClick();
+
+			//IWebElement firstSupplier = this.containerElement.FindElement(By.XPath(".//ul[@class='ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all']//a[text()='" + category + "']"), 2);
+			//return firstSupplier.TryClick();
 
 		}
 

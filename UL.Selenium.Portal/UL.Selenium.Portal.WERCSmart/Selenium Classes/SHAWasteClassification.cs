@@ -25,26 +25,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void GetDataFromTable()
 		{
 
-			IWebElement USEPAWasteNumber;
-			IWebElement USEPAWasteHazard;
-			try
-			{
-				USEPAWasteNumber = this.FindElement(By.XPath("//table[@class='CanvasSS     XTABLE        ']//font[@face='Arial']//span[@name='EPAN']"));
-				USEPAWasteHazard = this.FindElement(By.XPath("//font[@face='Arial']//span[@name='EPAH']"));
-			}
-			catch (NoSuchElementException)
-			{
-				return;
-			}
+			IWebElement USEPAWasteNumber = this.FindElement(By.XPath("//table[@class='CanvasSS     XTABLE        ']//font[@face='Arial']//span[@name='EPAN']"), 2);
+			IWebElement USEPAWasteHazard = this.FindElement(By.XPath("//font[@face='Arial']//span[@name='EPAH']"), 2);
 
 			if (USEPAWasteHazard.Text != null)
 			{
 				this.CheckListEPAType = USEPAWasteHazard.Text;
+			} else
+			{
+				return;
 			}
 
 			if (USEPAWasteNumber.Text != null)
 			{
 				this.CheckListEPACode = USEPAWasteNumber.Text;
+			} else
+			{
+				return;
 			}
 
 		}

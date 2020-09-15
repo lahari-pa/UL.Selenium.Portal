@@ -101,9 +101,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmHeaders(ICollection<string> headers, string section)
 		{
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"));
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"), 2);
 			table.ScrollElementIntoView();
-			IList<IWebElement> headersElems = table.FindElements(By.TagName("th"));
+			IList<IWebElement> headersElems = table.FindElements(By.TagName("th"), 2);
 			var foundHeaders = new List<string>();
 			foreach (IWebElement elem in headersElems)
 			{
@@ -127,7 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmCaseUPC(TableRows rows, string section)
 		{
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"));
+			IWebElement table = this.containerElement.FindElement(By.XPath(@"//h2[contains(text(), """ + section + @""")]/following-sibling::table"), 2);
 			table.ScrollElementIntoView();
 
 			IWebElement caseUPCIcon = table.FindElement(By.XPath("//i[@class='fa fa-truck']"), 2);
@@ -436,7 +436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return -1;
 				}
 
-				var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr")).ToList();
+				var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr"), 2).ToList();
 
 				if (ingredientsRows.Count == 0)
 				{
@@ -445,7 +445,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				IWebElement ratioRow = ingredientsRows[(ingredientsRows.Count - 1)];
-				string sRatio = ratioRow.FindElements(By.XPath(".//td"))[2].GetValue();
+				string sRatio = ratioRow.FindElements(By.XPath(".//td"), 2)[2].GetValue();
 				Report.Info("Ratio: " + sRatio);
 
 				string pattern = @"(\d)\s\/\s(\d)";
@@ -480,7 +480,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return null;
 				}
 
-				var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr")).ToList();
+				var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr"), 2).ToList();
 
 				if (ingredientsRows.Count == 0)
 				{
@@ -489,7 +489,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				IWebElement ratioRow = ingredientsRows[(ingredientsRows.Count - 1)];
-				string sRatio = ratioRow.FindElements(By.XPath(".//td"))[2].GetValue();
+				string sRatio = ratioRow.FindElements(By.XPath(".//td"), 2)[2].GetValue();
 				Report.Info("Ratio is: " + sRatio);
 				return sRatio.Trim();
 			}
@@ -513,7 +513,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return -1;
 				}
 
-				var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr")).ToList();
+				var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr"), 2).ToList();
 
 				if (ingredientsRows.Count == 0)
 				{
@@ -522,7 +522,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				IWebElement ratioRow = ingredientsRows[(ingredientsRows.Count - 1)];
-				string sRatio = ratioRow.FindElements(By.XPath(".//td"))[2].GetValue();
+				string sRatio = ratioRow.FindElements(By.XPath(".//td"), 2)[2].GetValue();
 				Report.Info("Percentage: " + sRatio);
 
 				string pattern = @"(\d+\.\d\d)";
@@ -555,7 +555,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return null;
 				}
 
-				var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr")).ToList();
+				var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr"), 2).ToList();
 
 				if (ingredientsRows.Count == 0)
 				{
@@ -564,7 +564,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				IWebElement ratioRow = ingredientsRows[(ingredientsRows.Count - 1)];
-				string sRatio = ratioRow.FindElements(By.XPath(".//td"))[2].GetValue();
+				string sRatio = ratioRow.FindElements(By.XPath(".//td"), 2)[2].GetValue();
 				Report.Info("Percentage is: " + sRatio);
 				return sRatio.Trim();
 			}

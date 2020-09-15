@@ -155,7 +155,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not find product row for product ID: " + id);
 				return false;
 			}
-			IWebElement inputEl = productRow.FindElement(By.XPath(".//input[@type='checkbox']"));
+			IWebElement inputEl = productRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2);
 			if (inputEl == null)
 			{
 				return false;
@@ -311,7 +311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("No retailer tiles were found!");
 				return false;
 			}
-			return retailers.First().FindElement(By.XPath(".//label")).TryClick() && retailers.First().FindElement(By.XPath(".//input")).Checked();
+			return retailers.First().FindElement(By.XPath(".//label"), 2).TryClick() && retailers.First().FindElement(By.XPath(".//input"), 2).Checked();
 		}
 
 		public bool AllWalMartAffiliatesSelected()
@@ -788,11 +788,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public string UPCContained { get; set; }
 			public bool SelectUPC()
 			{
-				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCInfo.UPCNumber + "']]/td/input")).TryClick();
+				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCInfo.UPCNumber + "']]/td/input"), 2).TryClick();
 			}
 			public bool ClickEditForUPC()
 			{
-				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCInfo.UPCNumber + "']]/td/a")).TryClick();
+				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCInfo.UPCNumber + "']]/td/a"), 2).TryClick();
 
 			}
 
@@ -813,17 +813,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public bool TruckIcon { get; set; }
 			public bool SelectUPC()
 			{
-				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCNumber + "']]/td//input[@class='checkbox']")).TryClick();
+				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCNumber + "']]/td//input[@class='checkbox']"), 2).TryClick();
 			}
 			public bool ClickAction(string action)
 			{
 				if (action.ToLower() == "edit")
 				{
-					return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCNumber + "']]/td/a[contains(@data-bind,'edit')]")).TryClick();
+					return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCNumber + "']]/td/a[contains(@data-bind,'edit')]"), 2).TryClick();
 				}
 				if (action.ToLower() == "remove")
 				{
-					return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCNumber + "']]/td/a[contains(@data-bind,'remove') or contains(@data-bind,'delete')]")).TryClick();
+					return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCNumber + "']]/td/a[contains(@data-bind,'remove') or contains(@data-bind,'delete')]"), 2).TryClick();
 				}
 				return false;
 			}
@@ -1232,7 +1232,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (row["Retailer"] == "Select all")
 			{
-				IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//input[@id='chkAllRetailers']"));
+				IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//input[@id='chkAllRetailers']"), 2);
 				if (retailer == null || !retailer.TryCheck())
 				{
 					Report.Info("Failed to check the Select all Retailes option.");
@@ -1241,7 +1241,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			else
 			{
-				IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), """ + row["Retailer"] + @""")]/preceding-sibling::input"));
+				IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), """ + row["Retailer"] + @""")]/preceding-sibling::input"), 2);
 				if (retailer == null || !retailer.TryCheck())
 				{
 					Report.Info("Failed to check the retailer '" + row["Retailer"] + "'.");
@@ -1312,7 +1312,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			IWebElement quantity = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'Quantity')]"));
+			IWebElement quantity = this.containerElement.FindElement(By.XPath(@"//input[@type='text' and contains(@placeholder,'Quantity')]"), 2);
 			if (quantity == null || !quantity.TryEnterText(row["Quantity"]))
 			{
 				Report.Info("Failed to enter the Quantity in the Add Case UPC modal window.");
@@ -1330,7 +1330,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				transportation.Select(row["Transportation Options"]);
 			}
 
-			IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), """ + row["Retailer"] + @""")]/preceding-sibling::input"));
+			IWebElement retailer = this.containerElement.FindElement(By.XPath(@"//div//span[contains(text(), """ + row["Retailer"] + @""")]/preceding-sibling::input"), 2);
 			if (retailer == null || !retailer.TryCheck())
 			{
 				Report.Info("Failed to check the retailer '" + row["Retailer"] + "'.");

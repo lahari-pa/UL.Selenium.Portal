@@ -513,7 +513,7 @@ Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: California Proposition 65
 	Then In the Supplier Reports screen the current sub-page should be: California Proposition 65
-	And In the Supplier Report page I should see the report description should be showing with text: The report output will illustrate the WERCSmart registrations active, not deleted, that exist in your WERCSmart account. The output will provide information related to Active Registrations and their responses to Proposition 65 questions presented in WERCSmart before the transition to the revised Prop 65 questions in July / August of 2018. The report will include registrations not yet updated and submitted with the revised Prop 65 data
+	And In the Supplier Report page I should see the report description should be showing with text: For items submitted prior to August 30, 2018. The report will list registrations that are active and not updated with the current Prop 65 data. Regulation was revised in mid-2018.
 	Given In the Supplier Reports screen I click on the Download button
 	Given I confirm that a file is downloaded with file name: California Proposition 65.xlsx then close the Report Download popup. I save the file as excel76551
 	Then I confirm that the excel file saved as: excel76551 contains the following columns:
@@ -666,19 +666,26 @@ Scenario: [114764] UPCs and Registrations (Retailer Specific) - Report correctly
 	And I delete the Supplier Report file saved as 73082
 
 
+@ScenarioId:10293
 Scenario: [140261] California Proposition 65 - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: California Proposition 65
 Then I select CSV from the Select File Type
 Then I select the Request Report button excel file is produced called California Proposition 65.csv and save as California Proposition 65
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I confirm that an excel file is produced called California Proposition 65.csv and save as California Proposition 65
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
+And I confirm the excel file saved as California Proposition 65 can be opened and contains data
 Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
+And I confirm the excel file saved as California Proposition 65.csv can be opened and contains data
 Given I click the Products in Scope button and confirm that an excel file is produced called California Proposition 65.csv and save as California Proposition 65
+Given I click Close in the Report Download popup
 Given I delete the excel file saved as California Proposition 65
 
+@ScenarioId:10294
 Scenario: [140260] Battery-Containing Products - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane

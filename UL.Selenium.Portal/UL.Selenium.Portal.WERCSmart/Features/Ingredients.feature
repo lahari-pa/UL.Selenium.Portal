@@ -691,6 +691,7 @@ Then I save the product information as: TestCase133335
 
 
 
+@ScenarioId:10286
 Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

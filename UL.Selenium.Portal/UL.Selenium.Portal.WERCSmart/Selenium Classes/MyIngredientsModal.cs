@@ -44,11 +44,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				rIngredients.Add(new MyIngredients.IngredientItem() {
 					Index = count,
-					CASNumber = row.FindElement(By.XPath(".//span[@data-bind='text: component.cas']")).Text,
-					ChemicalName = row.FindElement(By.XPath(".//span[@data-bind='text: component.name']")).Text,
-					PublicallyDisclosed = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isDisclosed')]")).Checked(),
-					TradeSecret = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isTradeSecret')]")).Checked(),
-					PublicName = row.FindElement(By.XPath(".//select[contains(@data-bind,'value: publicName')]")).SelectedOption()
+					CASNumber = row.FindElement(By.XPath(".//span[@data-bind='text: component.cas']"), 2).Text,
+					ChemicalName = row.FindElement(By.XPath(".//span[@data-bind='text: component.name']"), 2).Text,
+					PublicallyDisclosed = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isDisclosed')]"), 2).Checked(),
+					TradeSecret = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isTradeSecret')]"), 2).Checked(),
+					PublicName = row.FindElement(By.XPath(".//select[contains(@data-bind,'value: publicName')]"), 2).SelectedOption()
 				});
 				count++;
 			}
@@ -59,11 +59,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					rIngredients.Add(new MyIngredients.IngredientItem() {
 						Index = count,
-						CASNumber = row.FindElement(By.XPath(".//span[@data-bind='text: component.cas']")).Text,
-						ChemicalName = row.FindElement(By.XPath(".//span[@data-bind='text: component.name']")).Text,
-						PublicallyDisclosed = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isDisclosed')]")).Checked(),
-						TradeSecret = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isTradeSecret')]")).Checked(),
-						PublicName = row.FindElement(By.XPath(".//select[contains(@data-bind,'value: publicName')]")).SelectedOption()
+						CASNumber = row.FindElement(By.XPath(".//span[@data-bind='text: component.cas']"), 2).Text,
+						ChemicalName = row.FindElement(By.XPath(".//span[@data-bind='text: component.name']"), 2).Text,
+						PublicallyDisclosed = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isDisclosed')]"), 2).Checked(),
+						TradeSecret = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isTradeSecret')]"), 2).Checked(),
+						PublicName = row.FindElement(By.XPath(".//select[contains(@data-bind,'value: publicName')]"), 2).SelectedOption()
 					});
 					count++;
 				}

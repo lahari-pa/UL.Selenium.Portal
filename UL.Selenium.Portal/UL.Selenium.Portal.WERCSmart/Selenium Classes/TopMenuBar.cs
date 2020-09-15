@@ -116,15 +116,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetCurrentUser()
 		{
 			Report.Info("Beginning get current user");
-			IWebElement ddt;
-			try
-			{
-				ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
-			}
-			catch (NoSuchElementException)
+			IWebElement ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
+
+			if (ddt == null)
 			{
 				return null;
 			}
+
 			ddt.ScrollElementIntoView();
 			return ddt.GetValue();
 
@@ -137,19 +135,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool LoggedIn()
 		{
-			try
-			{
-				IWebElement ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
-				if (ddt == null)
-				{
-					return false;
-				}
-				return true;
-			}
-			catch (Exception)
+			IWebElement ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
+			if (ddt == null)
 			{
 				return false;
 			}
+			return true;
 
 		}
 

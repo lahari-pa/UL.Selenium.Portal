@@ -55,33 +55,33 @@ And I add the following ingredients:
 	Then in the Ingredients page I click Continue
 And I should see the Formulation > Batteries Page
 Given I confirm the Formulation > Batteries displays the correct text
-Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Declined
-Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
-Given I click continue
-Given I call Shared Step 132375 (Waste Classification Data - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-| Retailer  |
-| Walgreens |
-Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC142371 with container type: Plastic Container size: 2 and quantity: 2 do not click continue
-Given I click continue
-Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-Given I set the WHMIS-compliant Safety Data Sheet, English and French-Canadian field to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-Given I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
-Given I click continue
-Given in the Additional Documents to Provide page I click Continue
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
-And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
-Given I click continue
-Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor   | Odor Threshold | Partition Coefficient | Personal Protection Equipment | Viscosity |
-| Buff       | 2                        | 2                       | Banana | Not applicable | 2                     | Mask                          | 2         |
-Given I append the following into the comments field: test
-Given I click continue
-Given I call Shared Step 69358 (Data Acceptance - Click Summary Button)
-Given A Summary page should open in a new browser tab
-Given I confirm the Consent to Tier 2.1, 2.2, 4.2 Data shows the answer: Accept
-Given I close the browser tab with the Summary page
-Given I click the Home navigation icon
-Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: ThisProduct
+#Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Declined
+#Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+#Given I click continue
+#Given I call Shared Step 132375 (Waste Classification Data - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+#| Retailer  |
+#| Walgreens |
+#Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC142371 with container type: Plastic Container size: 2 and quantity: 2 do not click continue
+#Given I click continue
+#Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+#Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+#Given I set the WHMIS-compliant Safety Data Sheet, English and French-Canadian field to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+#Given I click the browse button for label: Label in both French and English and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+#And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+#Given I click continue
+#Given in the Additional Documents to Provide page I click Continue
+#Given in the Optional Reports and Documents Available for Purchase page I click Continue
+#And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+#Given I click continue
+#Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+#| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor   | Odor Threshold | Partition Coefficient | Personal Protection Equipment | Viscosity |
+#| Buff       | 2                        | 2                       | Banana | Not applicable | 2                     | Mask                          | 2         |
+#Given I append the following into the comments field: test
+#Given I click continue
+#Given I call Shared Step 69358 (Data Acceptance - Click Summary Button)
+#Given A Summary page should open in a new browser tab
+#Given I confirm the Consent to Tier 2.1, 2.2, 4.2 Data shows the answer: Accept
+#Given I close the browser tab with the Summary page
+#Given I click the Home navigation icon
+#Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: ThisProduct

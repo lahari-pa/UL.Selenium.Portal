@@ -43,12 +43,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement button;
-				try
-				{
-					button = this.containerElement.FindElement(By.XPath(".//a[@class='btn btn-success' and text()='Add Retailers']"));
-				}
-				catch (NoSuchElementException)
+				IWebElement button = this.containerElement.FindElement(By.XPath(".//a[@class='btn btn-success' and text()='Add Retailers']"), 2);
+				
+				if (button == null)
 				{
 					return false;
 				}
@@ -65,12 +62,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			try
 			{
 				var selectedRetailers = new List<string>();
-				ReadOnlyCollection<IWebElement> selectedRetailersName;
-				try
-				{
-					selectedRetailersName = this.containerElement.FindElements(By.XPath(".//div[@class='grid-container']//tr[parent::tbody[@data-bind='foreach: field.field']]/td[@class='col-xs-3']"));
-				}
-				catch (NoSuchElementException)
+				ReadOnlyCollection<IWebElement> selectedRetailersName = this.containerElement.FindElements(By.XPath(".//div[@class='grid-container']//tr[parent::tbody[@data-bind='foreach: field.field']]/td[@class='col-xs-3']"));
+				
+				if (selectedRetailersName == null)
 				{
 					return null;
 				}
@@ -143,12 +137,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement el;
-				try
-				{
-					el = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//tr[(.//td[text()='" + retailer + "'])]//input[starts-with(@placeholder,'Indicate full name of product')]"), 2);
-				}
-				catch (NoSuchElementException)
+				IWebElement el = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//tr[(.//td[text()='" + retailer + "'])]//input[starts-with(@placeholder,'Indicate full name of product')]"), 2);
+				
+				if (el == null)
 				{
 					return false;
 				}
@@ -175,18 +166,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement container;
-				IWebElement el;
-				try
+
+				IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+
+				if (container == null)
 				{
-					container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
-					el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
-				}
-				catch (NoSuchElementException)
-				{
+					Report.Error("Could not find the container element");
 					return false;
 				}
 
+				IWebElement el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
 
 				if (el == null)
 				{

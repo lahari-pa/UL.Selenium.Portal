@@ -52,19 +52,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 			{
 				bool correct = true;
 				IWebElement elQuestion;
-				string actualMessage;
-				try
-				{
-					elQuestion = this.FindElement(By.XPath(string.Format("//label[contains(text(),\"{0}\")]", question)), 2);
-					actualMessage = elQuestion.FindElement(By.XPath("..//parent::div//parent::div//p//span"), 2).GetInnerText();
-				}
-				catch (NoSuchElementException)
+				IWebElement actualMessage;
+				
+				elQuestion = this.FindElement(By.XPath(string.Format("//label[contains(text(),\"{0}\")]", question)), 2);
+				actualMessage = elQuestion.FindElement(By.XPath("..//parent::div//parent::div//p//span"), 2);
+
+				if (elQuestion == null || actualMessage == null)
 				{
 					return false;
 				}
+
+				string actualMessageStr = actualMessage.GetInnerText();
+				
 				expected = questions[question];
 
-				correct = expected.Trim() == actualMessage.Trim();
+				correct = expected.Trim() == actualMessageStr.Trim();
 				Report.IsTrue(correct, "Question " + question + " displayed " + actualMessage + " instead of " + expected, "Question " + question + " displayed " + expected + " as expected.");
 				if (!correct)
 				{
