@@ -673,12 +673,16 @@ Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: California Proposition 65
 Then I select CSV from the Select File Type
 Then I select the Request Report button excel file is produced called California Proposition 65.csv and save as California Proposition 65
+Given I confirm that an excel file is produced called California Proposition 65.csv and save as California Proposition 65
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
+And I confirm the excel file saved as California Proposition 65 can be opened and contains data
 Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
+And I confirm the excel file saved as California Proposition 65.csv can be opened and contains data
 Given I click the Products in Scope button and confirm that an excel file is produced called California Proposition 65.csv and save as California Proposition 65
+Given I click Close in the Report Download popup
 Given I delete the excel file saved as California Proposition 65
 
 @ScenarioId:10294

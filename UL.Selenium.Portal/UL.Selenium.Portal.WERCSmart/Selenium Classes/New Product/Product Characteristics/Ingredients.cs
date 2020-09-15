@@ -1569,12 +1569,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool ClickCloseButtonInFunctionalPurposeDropdownMenu()
 		{
 			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath("//div[@class='select2-link2 select2-close']//button"), 2);
+			if (closeButton == null)
+			{
+				return false;
+			}
 			return closeButton.TryClick();
 		}
 
 		public bool ConfirmTheFollowingFunctionalPurposeIsDisplayed(string functionalPurpose)
 		{
 			IList<IWebElement> functionalPurposesEl = this.ContainerElement.FindElements(By.XPath("//ul[@class='select2-selection__rendered']//li"), 2);
+			if (functionalPurposesEl == null)
+			{
+				return false;
+			}
 			foreach (IWebElement el in functionalPurposesEl)
 			{
 				if (el.Text.Contains(functionalPurpose))
@@ -1588,6 +1596,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool SelectTheFollowingFunctionalPurpose(string functionalPurpose)
 		{
 			IWebElement functionalPurposeEl = this.ContainerElement.FindElement(By.XPath("//li[@role='treeitem'][text()='" + functionalPurpose + "']"), 2);
+			if (functionalPurposeEl == null)
+			{
+				return false;
+			}
 			return functionalPurposeEl.TryClick();
 		}
 
@@ -1622,6 +1634,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool SelectChooseOptionForFunctionalPurposeInIngredientsPage()
 		{
 			IWebElement chooseOption = this.ContainerElement.FindElement(By.XPath("//li[@class='select2-selection__choice']"), 2);
+			if (chooseOption == null)
+			{
+				return false;
+			}
 			return chooseOption.TryClick();
 		}
 

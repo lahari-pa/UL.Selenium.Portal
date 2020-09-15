@@ -84,6 +84,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			{
 				var listOfBatteries = new List<Battery>();
 				IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"), 2);
+
+				if (thisTable == null)
+				{
+					return null;
+				}
+
 				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable);
 				ReadOnlyCollection<IWebElement> listOfRows = this.containerElement.FindElements(By.XPath(".//tbody//tr"));
 				int batteryTypeIndex = th.FirstOrDefault(x => x.Value == "Battery Type").Key;

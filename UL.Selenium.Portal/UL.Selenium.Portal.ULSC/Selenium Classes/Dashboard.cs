@@ -12,7 +12,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 	{
 		public const string BasePath = "//section";	
 
-		private IWebElement El => this.containerElement.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
+		private IWebElement MessageCenterRemoveEl => this.containerElement.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
@@ -72,7 +72,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			{
 				return false;
 			}
-			return this.El != null && this.El.Displayed;
+			return this.MessageCenterRemoveEl != null && this.MessageCenterRemoveEl.Displayed;
 		}
 
 		public bool ClickRemoveDropDownItem(string widgetTitle)
@@ -82,7 +82,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 			{
 				return false;
 			}
-			return this.El.TryClick();
+			return this.MessageCenterRemoveEl.TryClick();
 		}
 
 		public MessageCenter GetMessageCenter()
@@ -95,17 +95,12 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 				return null;
 			}
 			rMessageCenter.Title = "Message Center";
+			// Get Filter value
+			rMessageCenter.FilterPlaceholder = container.FindElement(By.XPath(".//input[@id='filterCurrent']"), 2)?.GetAttribute("placeholder");
+			// Get Messages
+			rMessageCenter.FilterValue = container.FindElement(By.XPath(".//input[@id='filterCurrent']"), 2)?.GetValue();
 
-			rMessageCenter.FilterPlaceholder = "";
-			rMessageCenter.FilterValue = "";
-			try
-			{
-				// Get Filter value
-				rMessageCenter.FilterPlaceholder = container.FindElement(By.XPath(".//input[@id='filterCurrent']"), 2)?.GetAttribute("placeholder");
-				// Get Messages
-				rMessageCenter.FilterValue = container.FindElement(By.XPath(".//input[@id='filterCurrent']"), 2)?.GetValue();
-			}
-			catch (NoSuchElementException)
+			if (rMessageCenter.FilterPlaceholder == null || rMessageCenter.FilterValue == null)
 			{
 				return null;
 			}

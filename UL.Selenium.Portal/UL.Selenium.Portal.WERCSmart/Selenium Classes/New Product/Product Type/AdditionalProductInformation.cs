@@ -16,8 +16,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			{
 				var countries = new List<string>();
 				ReadOnlyCollection<IWebElement> listOfCountries = this.containerElement.FindElements(By.XPath(".//label"), 2) 
-						.FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in"))
-						.FindElements(By.XPath("../..//input"));
+						?.FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in"))
+						?.FindElements(By.XPath("../..//input"));
 				
 				if (listOfCountries == null)
 				{
@@ -38,10 +38,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 				foreach (string country in value)
 				{
 
-					IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == country);
+					IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == country);
+
+					if (thisLabel == null)
+					{
+						return;
+					}
+
 					IWebElement countryInput = thisLabel.FindElement(By.XPath(".//../input"), 2);
 					
-					if (thisLabel == null || countryInput == null)
+					if (countryInput == null)
 					{
 						return;
 					}

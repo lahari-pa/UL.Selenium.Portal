@@ -2331,6 +2331,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.Success("Excel file contained the following data: " + data);
 							return true;
 						}
+						if (str == data && containsOrDoesNotContain == "does not contain")
+						{
+							Report.Failure("Excel file contained the following data: " + data);
+							return false;
+						}
 					}
 				}
 

@@ -1866,7 +1866,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement el = this.containerElement
 				.FindElements(By.XPath(".//label[contains(text(),'flammable propellant')]/../following-sibling::div//span"), 2)
-				.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"), 2);
+				?.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"), 2);
 			if (el != null)
 			{
 				el.TryClick();
@@ -2459,7 +2459,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			set
 			{
-				IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Flash Point Testing Method Used")).FindElements(By.XPath("../..//input/../../label/span"), 2).FirstOrDefault(y => y.Text == value);
+				IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains("Flash Point Testing Method Used")).FindElements(By.XPath("../..//input/../../label/span"), 2).FirstOrDefault(y => y.Text == value);
 				IWebElement optionInput = thisLabel.FindElement(By.XPath(".//../input"), 2);
 				if (!optionInput.Selected)
 				{
@@ -2510,7 +2510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			set
 			{
-				IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("California Consumer Products Regulation")).FindElements(By.XPath("../..//input/../../label/span"), 2).FirstOrDefault(y => y.Text == value);
+				IWebElement thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains("California Consumer Products Regulation")).FindElements(By.XPath("../..//input/../../label/span"), 2).FirstOrDefault(y => y.Text == value);
 				IWebElement optionInput = thisLabel.FindElement(By.XPath(".//../input"), 2);
 				if (!optionInput.Selected)
 				{
@@ -5297,10 +5297,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ConfirmTierDataShowsCorrectAnswer(string answer)
 		{
-			IWebElement answerEl = this.ContainerElement.FindElement(By.XPath("//h3[text()='Consent to Tier 2.1, 2.2, 4.2 Data Uses']/following-sibling::p[text()='Accept']"), 2);
+			IWebElement answerEl = this.ContainerElement.FindElement(By.XPath("//h3[text()='Consent to Tier 2.1, 2.2, 4.2 Data Uses']/following-sibling::p[@data-bind='html: Data']"), 2);
 			if (answerEl != null)
 			{
-				return true;
+				if (answerEl.Text == answer)
+				{
+					return true;
+				}
 			}
 
 			return false;
@@ -5308,6 +5311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckTextInForumulationBatteriesPage()
 		{
+
 			IWebElement displayedText = this.ContainerElement.FindElement(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2);
 
 			if (!displayedText.Text.Contains("Data Use Consents"))
@@ -5339,6 +5343,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 			return true;
+		}
+
+		public void InTheRegulatoryDocumentsToProvideScreenIfTheConfirmSDSQuestionIsSeenThenGrant()
+		{
+
+			var MyStepsNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
+
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
 		}
 
 	}

@@ -47,13 +47,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				IWebElement input = this.containerElement.FindElement(
 					By.XPath("//div[@class='form-group']//label[contains(text(),'Product Name')]/../..//input"), 2);
-					input.EnterText(productName);
-				
+
 				if (input == null)
 				{
 					return false;
 				}
-				return true;
+
+				return input.TryEnterText(productName);
+				;
 			}
 
 			catch (Exception)

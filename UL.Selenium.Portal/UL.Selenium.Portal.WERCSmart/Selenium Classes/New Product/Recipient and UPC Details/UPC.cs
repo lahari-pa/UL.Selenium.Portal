@@ -130,8 +130,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 				IWebElement upcNameField = container.FindElement(By.XPath(".//label[contains(text(),'Product Name')]/..//input"), 2);
 				
-				if (container == null || textInputs == null || upcNumberField == null || upcNameField == null)
+				if (container == null)
 				{
+					Report.Info("Container element was equal to null");
+					return false;
+				}
+
+				if (textInputs == null)
+				{
+					Report.Info("Text Inputs element was equal to null");
+					return false;
+				}
+
+				if (upcNumberField == null)
+				{
+					Report.Info("UPC Number field element was equal to null");
+					return false;
+				}
+
+				if (upcNameField == null)
+				{
+					Report.Info("UPC Name Field element was equal to null");
 					return false;
 				}
 

@@ -81,10 +81,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 				IWebElement header = this.MetalHeader;
 				foreach (MetalPresence thisMetal in value)
 				{
-					IWebElement metalLabel = header.FindElements(By.XPath("../../following::div//label[@class='control-label']"), 2).FirstOrDefault(x => x.GetValue().Trim() == thisMetal.Metal);
-					IWebElement inputLabel = metalLabel.FindElements(By.XPath("../..//input/../span"), 2).FirstOrDefault(x => x.Text == thisMetal.Presence);
+					IWebElement metalLabel = header.FindElements(By.XPath("../../following::div//label[@class='control-label']"), 2)?.FirstOrDefault(x => x.GetValue().Trim() == thisMetal.Metal);
+
+					if (metalLabel == null)
+					{
+						return;
+					}
+
+					IWebElement inputLabel = metalLabel.FindElements(By.XPath("../..//input/../span"), 2)?.FirstOrDefault(x => x.Text == thisMetal.Presence);
 					
-					if (metalLabel == null || inputLabel == null)
+					if (inputLabel == null)
 					{
 						return;
 					}
