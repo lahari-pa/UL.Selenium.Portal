@@ -147,6 +147,7 @@ And The following options should be displayed exclusively for section: Packing G
 And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
 And I click continue
 And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
+#Confirm that ^ checkbox is selected (failing currently)?
 And UN Number should be showing the value: UN1950
 And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
@@ -289,7 +290,8 @@ And I set the Flash Point Testing Method Used option to: Closed cup method
 And I set the Select the best Water Solubility description option to: Insoluble
 And I click continue
 #And I call Shared Step 118085 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No California Cleaning = No - Continue)
-Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+#Given I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+Given I call Shared Step 143792 (Additional Product Information - Pesticide= Not considered, Fertilizer = No, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
