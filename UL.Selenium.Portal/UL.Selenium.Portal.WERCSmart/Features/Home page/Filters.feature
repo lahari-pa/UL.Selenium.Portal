@@ -98,7 +98,12 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 |           | Alcohol       | 100     |                     |            |             |
 Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
-# In Transportation Details 1 section; for question: "Product is Regulated for Transport" select option: "No, due to an exemption or exception"# Confirm for question: "Please select DOT Exceptions if applicable?" option" 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid." displays# Confirm that the following DOT Exception does not display in the list: "173.159 (a) - Exemption for non-spillable lead-acid batteries"# Select option: 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid.# Click 'CONTINUE'Given I call Shared Step 62536 (Transportation Details 2 &gt; I do not ship internationally &gt; Continue - Happy Path)
+# In Transportation Details 1 section; for question: "Product is Regulated for Transport" select option: "No, due to an exemption or exception"
+# Confirm for question: "Please select DOT Exceptions if applicable?" option" 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid." displays
+# Confirm that the following DOT Exception does not display in the list: "173.159 (a) - Exemption for non-spillable lead-acid batteries"
+# Select option: 172.102(c) - Special Provision 47: Product contains 10 mL or less of a Class 3 liquid and is fully absorbed with no free liquid.
+# Click 'CONTINUE'
+#Given I call Shared Step 62536 (Transportation Details 2 &gt; I do not ship internationally &gt; Continue - Happy Path)
 And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 Given I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
@@ -106,7 +111,8 @@ Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Contain
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Given I click continue
 Given I click continue
-# Click 'Continue' on Additional Documents to Provide section# Click 'Continue' on Optional Reports and Documents Available for Purchase section
+# Click 'Continue' on Additional Documents to Provide section
+# Click 'Continue' on Optional Reports and Documents Available for Purchase section
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Appearance        | Autoignition Temperature | Minimum Ignition Energy | Odor    | Odor Threshold | Partition Coefficient | Personal Protection Equipment | Viscosity |
 | No data available |                          |                         | Neutral | Not applicable | 9                     |                               |           |
@@ -128,19 +134,24 @@ Scenario: [144468] Alcoholic Beverages - With DOT Exception
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Beer
+Then I save the product information as: TestCase144468
 Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-# In "Additional Product Information" Page; For the "Select Countries the Product May Be Sold In" Question - By default the "United States" checkbox will be selected
-#  Select "NO" for the "Product is a Retailer's Private Label or Brand" Question# Click 'CONTINUE'; Transitions to "Waste Classification Data" Page
+Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
 Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 Given I click continue
 And I should see the Waste Classification Data Page
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I call Shared Step 49818 (Beverage Regulatory Details)
-And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
+And I set the Please select DOT Exceptions if applicable option to: 173.120(a)(4)
+And The following radio buttons should not be displayed for section: Please select DOT Exceptions if applicable?
+		| Button                                                       |
+		| 173.159(a) - Exemption for non-spillable lead-acid batteries |
+And I click continue
 And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 # In "Transportation Details 1" section; for question: "Product is Regulated for Transport" Select "No, due to an exemption or exception"
 # Confirm that in the list of DOT Exceptions the option: "173.159(a) - Exemption for non-spillable lead-acid batteries" does not display as an option
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: testcase
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase144468
 
 
 

@@ -753,7 +753,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No, due to an exemption or exception");
 			MyStepsNewProduct.SetTheSectionOptionTo("Please select DOT Exceptions if applicable", "173.120(a)(4)");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
-		}
+		}	
 
 		[StepDefinition(
 			@"I call Shared Step 69682 \(Retailer Association - Add Private Label Information\) and select the retailer: (.*) and enter the name: (.*)")]
@@ -1530,7 +1530,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-			[StepDefinition(@"I call Shared Step 145000 \(Enter Physical Property - Solid - Without Water Solubility Description\)")]
+		[StepDefinition(@"I call Shared Step 145000 \(Enter Physical Property - Solid - Without Water Solubility Description\)")]
 		public void GivenICallSharedEnterPhysicalProperty_Solid_WithoutWaterSolubilityDescription()
 		{
 			ReportSettings.UseSubSteps = true;
