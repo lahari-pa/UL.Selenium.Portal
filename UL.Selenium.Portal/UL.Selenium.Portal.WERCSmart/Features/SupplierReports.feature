@@ -672,18 +672,18 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: California Proposition 65
 Then I select CSV from the Select File Type
+Then I Delete the file with name: California Proposition 65.csv from the downloads folder
 Then I select the Request Report button excel file is produced called California Proposition 65.csv and save as California Proposition 65
 Given I confirm that an excel file is produced called California Proposition 65.csv and save as California Proposition 65
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the excel file saved as California Proposition 65 can be opened and contains data
+And I confirm the csv file saved as California Proposition 65 can be opened and contains data
+Given I delete the excel file saved as California Proposition 65
 Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-And I confirm the excel file saved as California Proposition 65.csv can be opened and contains data
-Given I click the Products in Scope button and confirm that an excel file is produced called California Proposition 65.csv and save as California Proposition 65
+And I confirm the csv file saved as California Proposition 65 can be opened and contains data
 Given I click Close in the Report Download popup
-Given I delete the excel file saved as California Proposition 65
 
 @ScenarioId:10294
 Scenario: [140260] Battery-Containing Products - CSV File
@@ -691,130 +691,166 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Battery-Containing Products
 Then I select CSV from the Select File Type
+Then I Delete the file with name: Battery-Containing Products.csv from the downloads folder
 Then I select the Request Report button excel file is produced called Battery-Containing Products.csv and save as Battery-Containing Products
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I confirm that an excel file is produced called Battery-Containing Products.csv and save as Battery-Containing Products
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
-Then I click the Download button for the most recent report
-Given I click the Products in Scope button and confirm that an excel file is produced called Battery-Containing Products.csv and save as Battery-Containing Products
+And I confirm the csv file saved as Battery-Containing Products can be opened and contains data
 Given I delete the excel file saved as Battery-Containing Products
+Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
+Then I click the Download button for the most recent report
+And I confirm the csv file saved as Battery-Containing Products can be opened and contains data
+Given I click Close in the Report Download popup
 
 Scenario: [140273] Eligible to Obsolete - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Eligible to Obsolete
 Then I select CSV from the Select File Type
+Then I Delete the file with name: Eligible to Obsolete.csv from the downloads folder
 Then I select the Request Report button excel file is produced called Eligible to Obsolete.csv and save as Eligible to Obsolete
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I confirm that an excel file is produced called Eligible to Obsolete.csv and save as Eligible to Obsolete
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
-Then I click the Download button for the most recent report
-Given I click the Products in Scope button and confirm that an excel file is produced called Eligible to Obsolete.csv and save as Eligible to Obsolete
+And I confirm the csv file saved as Eligible to Obsolete can be opened and contains data
 Given I delete the excel file saved as Eligible to Obsolete
+Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
+Then I click the Download button for the most recent report
+And I confirm the csv file saved as Eligible to Obsolete can be opened and contains data
+Given I click Close in the Report Download popup
 
 Scenario: [140280] Pesticide Registrations - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Pesticide Registrations
 Then I select CSV from the Select File Type
+Then I Delete the file with name: Pesticide Registrations.csv from the downloads folder
 Then I select the Request Report button excel file is produced called Pesticide Registrations.csv and save as Pesticide Registrations
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I confirm that an excel file is produced called Pesticide Registrations.csv and save as Pesticide Registrations
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
-Then I click the Download button for the most recent report
-Given I click the Products in Scope button and confirm that an excel file is produced called Pesticide Registrations.csv and save as Pesticide Registrations
+And I confirm the csv file saved as Pesticide Registrations can be opened and contains data
 Given I delete the excel file saved as Pesticide Registrations
+Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
+Then I click the Download button for the most recent report
+And I confirm the csv file saved as Pesticide Registrations can be opened and contains data
+Given I click Close in the Report Download popup
 
-Scenario: [140289] UPC Duplication - CSV File
 
+Scenario: [140289] Registration Updates Not Submitted - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: UPC Duplication
+Given Under the Supplier Reports menu I choose: Registration Updates Not Submitted
 Then I select CSV from the Select File Type
-Then I select the Request Report button excel file is produced called UPC Duplication.csv and save as UPC Duplication
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Then I Delete the file with name: Registration Updates Not Submitted.csv from the downloads folder
+Then I select the Request Report button excel file is produced called Registration Updates Not Submitted.csv and save as Registration Updates Not Submitted
+Given I confirm that an excel file is produced called Registration Updates Not Submitted.csv and save as Registration Updates Not Submitted
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the csv file saved as Registration Updates Not Submitted can be opened and contains data
+Given I delete the excel file saved as Registration Updates Not Submitted
+Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-Given I click the Products in Scope button and confirm that an excel file is produced called UPC Duplication.csv and save as UPC Duplication
-Given I delete the excel file saved as UPC Duplication
+And I confirm the csv file saved as Registration Updates Not Submitted can be opened and contains data
+Given I click Close in the Report Download popup
+
 
 Scenario: [140290] Subscription Product Types - CSV File
-
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Subscription Product Types
 Then I select CSV from the Select File Type
+Then I Delete the file with name: Subscription Product Types.csv from the downloads folder
 Then I select the Request Report button excel file is produced called Subscription Product Types.csv and save as Subscription Product Types
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I confirm that an excel file is produced called Subscription Product Types.csv and save as Subscription Product Types
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
-Then I click the Download button for the most recent report
-Given I click the Products in Scope button and confirm that an excel file is produced called Subscription Product Types.csv and save as Subscription Product Types
+And I confirm the csv file saved as Subscription Product Types can be opened and contains data
 Given I delete the excel file saved as Subscription Product Types
-
+Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
+Then I click the Download button for the most recent report
+And I confirm the csv file saved as Subscription Product Types can be opened and contains data
+Given I click Close in the Report Download popup
 
 Scenario: [140291] UPC Duplication - CSV File
-
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: UPC Duplication
+Given Under the Supplier Reports menu I choose: California Proposition 65
 Then I select CSV from the Select File Type
-Then I select the Request Report button excel file is produced called UPC Duplication.csv and save as UPC Duplication
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Then I Delete the file with name: California Proposition 65.csv from the downloads folder
+Then I select the Request Report button excel file is produced called California Proposition 65.csv and save as California Proposition 65
+Given I confirm that an excel file is produced called California Proposition 65.csv and save as California Proposition 65
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the csv file saved as California Proposition 65 can be opened and contains data
+Given I delete the excel file saved as California Proposition 65
+Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-Given I click the Products in Scope button and confirm that an excel file is produced called UPC Duplication.csv and save as UPC Duplication
-Given I delete the excel file saved as UPC Duplication
-
+And I confirm the csv file saved as California Proposition 65 can be opened and contains data
+Given I click Close in the Report Download popup
 
 Scenario: [140292] Volatile Organic Compounds - CSV File
-
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
 Then I select CSV from the Select File Type
+Then I Delete the file with name: Volatile Organic Compounds.csv from the downloads folder
 Then I select the Request Report button excel file is produced called Volatile Organic Compounds.csv and save as Volatile Organic Compounds
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I confirm that an excel file is produced called Volatile Organic Compounds.csv and save as Volatile Organic Compounds
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
-Then I click the Download button for the most recent report
-Given I click the Products in Scope button and confirm that an excel file is produced called Volatile Organic Compounds.csv and save as Volatile Organic Compounds
+And I confirm the csv file saved as Volatile Organic Compounds can be opened and contains data
 Given I delete the excel file saved as Volatile Organic Compounds
-
+Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
+Then I click the Download button for the most recent report
+And I confirm the csv file saved as Volatile Organic Compounds can be opened and contains data
+Given I click Close in the Report Download popup
 
 Scenario: [140293] Waste Classification Summary - CSV File
-
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Waste Classification Summary
 Then I select CSV from the Select File Type
+Then I Delete the file with name: Waste Classification Summary.csv from the downloads folder
 Then I select the Request Report button excel file is produced called Waste Classification Summary.csv and save as Waste Classification Summary
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I confirm that an excel file is produced called Waste Classification Summary.csv and save as Waste Classification Summary
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
-Then I click the Download button for the most recent report
-Given I click the Products in Scope button and confirm that an excel file is produced called Waste Classification Summary.csv and save as Waste Classification Summary
+And I confirm the csv file saved as Waste Classification Summary can be opened and contains data
 Given I delete the excel file saved as Waste Classification Summary
-
+Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
+Then I click the Download button for the most recent report
+And I confirm the csv file saved as Waste Classification Summary can be opened and contains data
+Given I click Close in the Report Download popup
 
 
 @ScenarioId:10259
 Scenario: [140309] Chemicals of Concern - CSV File
-
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Chemicals of Concern
 Then I select CSV from the Select File Type
+Then I Delete the file with name: Chemicals of Concern.csv from the downloads folder
 Then I select the Request Report button excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
-Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
+Given I confirm that an excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
+Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
-Then I click the Download button for the most recent report
-Given I click the Products in Scope button and confirm that an excel file is produced called Chemicals of Concern.csv and save as Chemicals of Concern
+And I confirm the csv file saved as Chemicals of Concern can be opened and contains data
 Given I delete the excel file saved as Chemicals of Concern
-
+Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm there is a Download button for the most recent report
+Then I click the Download button for the most recent report
+And I confirm the csv file saved as Chemicals of Concern can be opened and contains data
+Given I click Close in the Report Download popup
 
 @tfs_design
 @ScenarioId:10258
