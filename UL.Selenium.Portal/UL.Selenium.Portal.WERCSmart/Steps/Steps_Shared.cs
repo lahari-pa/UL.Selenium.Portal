@@ -8451,6 +8451,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I click on the search button");
 			thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			new StudioSupplierManager().WaitForSuppliersToLoad();
 
 			Report.StartStep("I Make a note of the Supplier Name");
 			thisStepsSha.InSupplierManagerPopupISaveFirstSupplierNameAs(savedAs);

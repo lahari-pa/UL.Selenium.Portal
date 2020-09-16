@@ -274,6 +274,8 @@ Scenario: [59280] Silver Battery - RU000698
 		| Silver Oxide  | 19.52   | false               | false       |            |
 		| Zinc          | 5.18    | false               | false       |            |
 		| Aqua          | 75.3    | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
@@ -284,6 +286,8 @@ Scenario: [59280] Silver Battery - RU000698
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -314,6 +318,8 @@ Scenario: [59281] Water-Charged Cell - RU001543
 		| Copper          | 4.70    | false               | false       |            |
 		| Magnesium       | 5.30    | false               | false       |            |
 		| Aqua            | 56.67   | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
@@ -323,6 +329,7 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue

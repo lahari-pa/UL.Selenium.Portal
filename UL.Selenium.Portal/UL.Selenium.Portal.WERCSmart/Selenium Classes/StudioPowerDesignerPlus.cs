@@ -1167,11 +1167,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning set checkbox: " + name);
 			ReadOnlyCollection<IWebElement> checkboxes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='checkbox']"));
+			Report.Info($"Entering Switch Statement");
 			IWebElement matchingElement;
 			switch (name.ToLower())
 			{
 				case "authorized":
+					Report.Info($"case was 'authorized");
 					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "ucProdAuth_chkAuth");
+					Report.Info($"authorized element set");
 					break;
 				case "apply":
 					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "ucProdAuth_chkAllSubformatAuthorize");
@@ -1203,10 +1206,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
+					Report.Info("'Checking' element");
 					matchingElement.Check(setChecked);
 					//Code Below is used to help debug 42196, issue getting the authroized checkbox the be checked (remove once passing)
 					if (name == "authorized")
 					{
+						Report.Info($"starting element checked check...");
 						bool isChecked = matchingElement.Checked();
 						Report.Info($"element checked bool: {isChecked}");
 					}						
