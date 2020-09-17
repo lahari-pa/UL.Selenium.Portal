@@ -912,7 +912,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.SelectRequestReportButton(), "Failed to select Request Report button", "Successfully selected Request Report button");
-			string currentTime = DateTime.Now.ToString();
+
+			var timeUtc = DateTime.UtcNow;
+			TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+			DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, easternZone);
+			string currentTime = easternTime.ToString();
+
 			int index = currentTime.LastIndexOf(":") + 2;
 			if (index > 0)
 			{
