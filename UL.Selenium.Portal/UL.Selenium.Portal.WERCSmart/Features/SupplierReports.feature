@@ -691,17 +691,18 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Battery-Containing Products
 Then I select CSV from the Select File Type
-Then I Delete the file with name: Battery-Containing Products.csv from the downloads folder
-Then I select the Request Report button excel file is produced called BatteryContaining Products.csv and save as Battery-Containing Products
-Given I confirm that an excel file is produced called BatteryContaining Products.csv and save as Battery-Containing Products
+Then I Delete the file with name: BatteryContaining Products.csv from the downloads folder
+Then I select the Request Report button excel file is produced called BatteryContaining Products.csv and save as BatteryContaining Products
+Given I confirm that an excel file is produced called BatteryContaining Products.csv and save as BatteryContaining Products
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as Battery-Containing Products can be opened and contains data
-Given I delete the excel file saved as Battery-Containing Products
+And I confirm the csv file saved as BatteryContaining Products can be opened and contains data
+Given I delete the excel file saved as BatteryContaining Products
 Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-And I confirm the csv file saved as Battery-Containing Products can be opened and contains data
+Given I confirm that an excel file is produced called Battery-Containing Products.csv and save as BatteryContaining Products
+And I confirm the csv file saved as BatteryContaining Products can be opened and contains data
 Given I click Close in the Report Download popup
 
 @ScenarioId:10309
