@@ -692,8 +692,8 @@ Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Battery-Containing Products
 Then I select CSV from the Select File Type
 Then I Delete the file with name: Battery-Containing Products.csv from the downloads folder
-Then I select the Request Report button excel file is produced called Battery-Containing Products.csv and save as Battery-Containing Products
-Given I confirm that an excel file is produced called Battery-Containing Products.csv and save as Battery-Containing Products
+Then I select the Request Report button excel file is produced called BatteryContaining Products.csv and save as Battery-Containing Products
+Given I confirm that an excel file is produced called BatteryContaining Products.csv and save as Battery-Containing Products
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Battery-Containing Products can be opened and contains data
@@ -704,6 +704,7 @@ Then I click the Download button for the most recent report
 And I confirm the csv file saved as Battery-Containing Products can be opened and contains data
 Given I click Close in the Report Download popup
 
+@ScenarioId:10309
 Scenario: [140273] Eligible to Obsolete - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -722,6 +723,7 @@ Then I click the Download button for the most recent report
 And I confirm the csv file saved as Eligible to Obsolete can be opened and contains data
 Given I click Close in the Report Download popup
 
+@ScenarioId:10310
 Scenario: [140280] Pesticide Registrations - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -741,6 +743,7 @@ And I confirm the csv file saved as Pesticide Registrations can be opened and co
 Given I click Close in the Report Download popup
 
 
+@ScenarioId:10307
 Scenario: [140289] Registration Updates Not Submitted - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -760,6 +763,7 @@ And I confirm the csv file saved as Registration Updates Not Submitted can be op
 Given I click Close in the Report Download popup
 
 
+@ScenarioId:10311
 Scenario: [140290] Subscription Product Types - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -778,24 +782,26 @@ Then I click the Download button for the most recent report
 And I confirm the csv file saved as Subscription Product Types can be opened and contains data
 Given I click Close in the Report Download popup
 
+@ScenarioId:10312
 Scenario: [140291] UPC Duplication - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: California Proposition 65
+Given Under the Supplier Reports menu I choose: UPC Duplication
 Then I select CSV from the Select File Type
-Then I Delete the file with name: California Proposition 65.csv from the downloads folder
-Then I select the Request Report button excel file is produced called California Proposition 65.csv and save as California Proposition 65
-Given I confirm that an excel file is produced called California Proposition 65.csv and save as California Proposition 65
+Then I Delete the file with name: UPC Duplication.csv from the downloads folder
+Then I select the Request Report button excel file is produced called UPC Duplication.csv and save as UPC Duplication
+Given I confirm that an excel file is produced called UPC Duplication.csv and save as UPC Duplication
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as California Proposition 65 can be opened and contains data
-Given I delete the excel file saved as California Proposition 65
-Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+And I confirm the csv file saved as UPC Duplication can be opened and contains data
+Given I delete the excel file saved as UPC Duplication
+Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-And I confirm the csv file saved as California Proposition 65 can be opened and contains data
+And I confirm the csv file saved as UPC Duplication can be opened and contains data
 Given I click Close in the Report Download popup
 
+@ScenarioId:10313
 Scenario: [140292] Volatile Organic Compounds - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -814,6 +820,7 @@ Then I click the Download button for the most recent report
 And I confirm the csv file saved as Volatile Organic Compounds can be opened and contains data
 Given I click Close in the Report Download popup
 
+@ScenarioId:10314
 Scenario: [140293] Waste Classification Summary - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I click the My Reports icon in the QuickLinks Pane
@@ -833,6 +840,7 @@ And I confirm the csv file saved as Waste Classification Summary can be opened a
 Given I click Close in the Report Download popup
 
 
+@tfs_design
 @ScenarioId:10259
 Scenario: [140309] Chemicals of Concern - CSV File
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
