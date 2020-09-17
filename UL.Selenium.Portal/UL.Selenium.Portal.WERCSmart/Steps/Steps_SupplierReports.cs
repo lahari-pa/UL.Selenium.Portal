@@ -24,6 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new SupplierReports().SelectReport(choice), "Failed to choose: " + choice,
 				"Successfully chose: " + choice);
+			Delay.Seconds(15);
 		}
 
 		[StepDefinition(@"In the Supplier Reports screen the page title should be: (.*)")]
