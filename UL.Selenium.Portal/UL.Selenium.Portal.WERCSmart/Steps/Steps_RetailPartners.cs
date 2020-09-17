@@ -507,6 +507,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm the csv file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheCSVFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var lines = System.IO.File.ReadAllLines(File.ToString());
+
+				if (lines != null)
+				{
+					Report.IsTrue(lines != null, "CSV file contains data");
+				}
+
+				Report.IsTrue(lines != null, "CSV did not contain any product data!", "CSV file contained product data, as expected!");
+			}
+		}
+
 		[StepDefinition(@"I confirm the html file saved as (.*) can be opened and contains text: (.*)")]
 		public void CheckingDownloadedHTMLFile(string savedAs, string text)
 		{

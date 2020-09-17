@@ -465,7 +465,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool FindReportDownloadPopupWithTheFollowingText(string text)
 		{
-			IWebElement textEl = this.ContainerElement.FindElement(By.XPath("//h3[text()='Report Download']/../following-sibling::div//div[@id='report-success-job']//p"), 2);
+			IWebElement textEl = this.ContainerElement.FindElement(By.XPath("//h3[text()='Report Download']/../following-sibling::div//div[@id='report-success-message']//p"), 2);
 
 			if (textEl.Text == text)
 			{

@@ -54,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				}
 
 				return input.TryEnterText(productName);
-				;
+				
 			}
 
 			catch (Exception)
