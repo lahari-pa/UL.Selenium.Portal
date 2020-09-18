@@ -1497,6 +1497,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I fill in Stweardship Numbers information")]
 		public void ThenIFillInStweardshipNumbersInformation(Table table)
 		{
+			Delay.Seconds(9999);
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.FillInStewardshipData(table), "Failed to fill in Stewardship table data", "Successfully filled in Stewardship table data");
 		}
