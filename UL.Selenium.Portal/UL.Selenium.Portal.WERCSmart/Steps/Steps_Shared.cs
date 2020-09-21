@@ -9652,8 +9652,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I Un-check the United States check box for the "Select countries the product may be sold in" question
 			//List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			//MyStepsNewProduct.SetTheSectionOptionTo("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
 				"No");
