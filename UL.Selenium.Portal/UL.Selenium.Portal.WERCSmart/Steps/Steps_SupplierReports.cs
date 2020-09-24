@@ -912,7 +912,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.SelectRequestReportButton(), "Failed to select Request Report button", "Successfully selected Request Report button");
-			string currentTime = DateTime.Now.ToString();
+
+			var timeUtc = DateTime.UtcNow;
+			TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+			DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, easternZone);
+			string currentTime = easternTime.ToString();
+
 			int index = currentTime.LastIndexOf(":") + 2;
 			if (index > 0)
 			{
@@ -933,9 +938,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm there is a Download button for the most recent report")]
 		public void ThenIClickThereIsADownloadButtonForTheMostRecentReport()
 		{
-			Delay.Seconds(61);
 			SeleniumBrowser.WebBrowser.Navigate().Refresh();
-			Delay.Seconds(5);
+			GeneralUtilities.Wait_for_load_finish();
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.CheckForDownloadButtonForTheMostRecentReport(), "Failed to find Download button", "Successfully found Download button");
 		}
@@ -943,16 +947,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the Download button for the most recent report")]
 		public void ThenIClickTheDownloadButtonForTheMostRecentReport()
 		{
-			Delay.Seconds(61);
 			SeleniumBrowser.WebBrowser.Navigate().Refresh();
-			Delay.Seconds(5);
+			GeneralUtilities.Wait_for_load_finish();
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.SelectDownloadButtonForTheMostRecentReport(), "Failed to select Download button", "Successfully selected Download button");
+			Delay.Seconds(25);
 		}
 
 		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)) Date Requested: (.*) Requested By: (.*)")]
 		public void ThenIConfirmTheMostRecentFileHasTheFollowingInformationReportNameWasteClassificationSummaryFileTypeCSVDataRequestedRequestedByWERCSTest_Automation_ProductsAccount(string reportName, string type, string dateRequested, string requestedBy)
 		{
+			SeleniumBrowser.WebBrowser.Navigate().Refresh();
+			GeneralUtilities.Wait_for_load_finish();
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.CheckReportDataForMostRecentFile(reportName, type, dateRequested, requestedBy), "Failed to match all data for the most recent file", "Successfully matched all data for the most recent file");
 		}

@@ -133,7 +133,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement header = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div"), 2).FirstOrDefault(x => x.Text.Contains("following metals"));
+				IWebElement header = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div"), 2)?.FirstOrDefault(x => x.Text.Contains("following metals"));
 				if (header != null)
 				{
 					return true;

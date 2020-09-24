@@ -77,15 +77,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]")).TryClick();
 			Delay.Seconds(1);
 			ReadOnlyCollection<IWebElement> Searches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//input"));
-			IWebElement Search;
-			try
-			{
-				Search = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@type='search']"), 2);
-			}
-			catch (NoSuchElementException)
+			IWebElement Search = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@type='search']"), 2);
+
+			if (Search == null)
 			{
 				return false;
 			}
+
 			Search.EnterText(searchTerm);
 			Delay.Seconds(1);
 			IWebElement searching =
@@ -149,15 +147,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectRetailer(string retailer)
 		{
-			IWebElement selectionBox;
-			try
-			{
-				selectionBox = this.containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"), 2);
-			}
-			catch (NoSuchElementException)
+			IWebElement selectionBox = this.containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"), 2);
+
+			if (selectionBox == null)
 			{
 				return false;
 			}
+
 			selectionBox.Select(retailer);
 			return selectionBox.SelectedOption() == retailer;
 		}
@@ -165,13 +161,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool DescriptionTextMatches(string expectedText)
 		{
 			//first try no remove white spaces
-			string actualText;
+			string actualText = this.containerElement.FindElement(By.XPath(".//p[@data-bind='text: Description']"), 2).Text;
 
-			try
-			{
-				actualText = this.containerElement.FindElement(By.XPath(".//p[@data-bind='text: Description']"), 2).Text;
-			}
-			catch (NoSuchElementException)
+			if (actualText == null)
 			{
 				return false;
 			}
@@ -465,7 +457,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool FindReportDownloadPopupWithTheFollowingText(string text)
 		{
-			IWebElement textEl = this.ContainerElement.FindElement(By.XPath("//h3[text()='Report Download']/../following-sibling::div//div[@id='report-success-job']//p"), 2);
+			IWebElement textEl = this.ContainerElement.FindElement(By.XPath("//h3[text()='Report Download']/../following-sibling::div//div[@id='report-success-message']//p"), 2);
 
 			if (textEl.Text == text)
 			{

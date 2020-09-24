@@ -1138,14 +1138,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					//spanDataBind = value;
 					spanDataBind = "text: row.getAdditionalDataValue(identifier(), 2)";
 					break;
-					break;
 				case "OMSID":
 					//spanDataBind = value;
-					try
-					{
-						spanDataBind = "text: row.getAdditionalDataValue(identifier(), 3)";
-					}
-					catch (NoSuchElementException)
+					spanDataBind = "text: row.getAdditionalDataValue(identifier(), 3)";
+					if (spanDataBind == null)
 					{
 						return false;
 					}

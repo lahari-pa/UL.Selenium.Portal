@@ -924,10 +924,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
-			
-			if (container == null || upcNumberField == null)
+
+			if (container == null)
 			{
+				Report.Failure("Container Element is null");
+				return false;
+			}
+
+			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+			if (upcNumberField == null)
+			{
+				Report.Failure("UPC Number Field Element is null");
 				return false;
 			}
 
@@ -979,10 +987,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-			IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
-			
-			if (container == null || textInputs == null)
+
+			if (container == null)
 			{
+				Report.Failure("Container Element is null");
+				return false;
+			}
+
+			IList<IWebElement> textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
+
+			if (textInputs == null)
+			{
+				Report.Failure("Text Inputs Element is null");
 				return false;
 			}
 
@@ -1004,11 +1020,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+
+			if (container == null)
+			{
+				Report.Failure("Container Element returned null");
+				return false;
+			}
+
 			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 			IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-			
-			if (container == null || upcNumberField == null || containerType == null)
+
+			if (upcNumberField == null)
 			{
+				Report.Failure("UPC Number Field Element returned null");
+				return false;
+			}
+
+			if (containsType == null)
+			{
+				Report.Failure("Contains Type Element returned null");
 				return false;
 			}
 
@@ -1020,11 +1050,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 
 			IWebElement container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+
+			if (container == null)
+			{
+				Report.Failure("Container Element returned null");
+				return null;
+			}
+
 			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 			IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-			
-			if (container == null || upcNumberField == null || containsType == null)
+
+			if (upcNumberField == null)
 			{
+				Report.Failure("UPC Number Field Element returned null");
+				return null;
+			}
+
+			if (containsType == null)
+			{
+				Report.Failure("Contains Type Element returned null");
 				return null;
 			}
 
@@ -1949,8 +1993,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
 				IWebElement searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 
-				if (placeholderEl == null || MatchedEntry == null || inputEl == null || searching == null)
+				if (placeholderEl == null)
 				{
+					Report.Failure("Placeholder Element returned null");
+					return false;
+				}
+
+				if (inputEl == null)
+				{
+					Report.Failure("Input Element returned null");
+					return false;
+				}
+
+				if (searching == null)
+				{
+					Report.Failure("Searching Element returned null");
 					return false;
 				}
 

@@ -86,7 +86,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
 			myPkgType.PackagingTypeSavedAsAppearsInGrid("MyPkg1", "appears");
 
+			//Canada supplier address
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("Company Information");
+			myAccount.AddCanadaAddress("100 King St W", "Ontario", "Toronto", "ON M5X 1A9", "123-123-1234", "CANADA", "1");
+
 			//My Brands
+			myHome.ThenIClickOnUserItem("My Account");
+			myAccount.ThenInTheMyAccountScreenINavigateToTheXPage("My Library");
+
 			myAccount.ClickTabMyLibrary("My Brands");
 			myAccount.ClickAddNewMyLibrary("My Brands");
 			myBrand.EnterBrandNameExpandedRow("TestBrand");
