@@ -61,13 +61,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(newProductIngredients.CheckForCheckBoxWithTextInMessageAtTheTopOfIngredientsPage(label), "Failed to find checkbox in message at the top of the ingredients page with the following text: " + label, "Successfully found checkbox in message at the top of the ingredients page with the following text: " + label);
 		}
 
-
-
 		[StepDefinition(@"I confirm I see the four error messages in the popup with the following title: (.*)")]
 		public void ThenIConfirmISeeTheFourErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(string popupTitle)
 		{
 			var newProductIngredients = new Ingredients();
 			Report.IsTrue(newProductIngredients.CheckForErrorMessagesInPopupWithTitle(popupTitle), "Failed to find all the error messages in popup with title " + popupTitle, "Successfully found all the error messages in popup with title " + popupTitle);
+		}
+
+		[StepDefinition(@"I click the close button in the Functional Purpose dropdown menu")]
+		public void ThenIClickTheCloseButtonInTheFunctionalPurposeDropdownMenu()
+		{
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(newProductIngredients.ClickCloseButtonInFunctionalPurposeDropdownMenu(), "Failed to click the close button", "Successfully clicked the close button");
+		}
+
+
+		[StepDefinition(@"I confirm the following Functional Purpose is displayed: (.*)")]
+		public void ThenIConfirmTheFollowingFunctionalPurposeIsDisplayed(string functionalPurpose)
+		{
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(newProductIngredients.ConfirmTheFollowingFunctionalPurposeIsDisplayed(functionalPurpose), "Failed to confirm the following functional purposed is displayed: " + functionalPurpose, "Successfully confirmed the following functional purposed is displayed: " + functionalPurpose);
+		}
+
+
+		[StepDefinition(@"I select the following Functional Purpose: (.*)")]
+		public void ThenISelectTheFollowingFunctionalPurpose(string functionalPurpose)
+		{
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(newProductIngredients.SelectTheFollowingFunctionalPurpose(functionalPurpose), "Failed to select the following functional purpose: " + functionalPurpose, "Successfully selected the following functional purpose: " + functionalPurpose);
+		}
+
+
+		[StepDefinition(@"I confirm a dropdown menu (displays|is not displayed) in the Ingredients page")]
+		public void ThenIConfirmADropdownMenuOpens(string displayOrNotDisplayed)
+		{
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(newProductIngredients.ConfirmDropDownMenuOpensInIngredientsPage(displayOrNotDisplayed), "Failed to confirm dropdown menu " + displayOrNotDisplayed, "Successfully confirmed dropdown menu " + displayOrNotDisplayed);
+		}
+
+		[StepDefinition(@"I click the Choose\.\.\. option for Functional Purpose in the Ingredients page")]
+		public void ThenIClickTheChoose_OptioninTheIngredientsPage()
+		{
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(newProductIngredients.SelectChooseOptionForFunctionalPurposeInIngredientsPage(), "Failed to click the Choose... option", "Successfully clicked the Choose... option");
 		}
 
 	}

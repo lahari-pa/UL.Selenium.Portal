@@ -1422,6 +1422,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I fill in the UPC data; UPC:(.*), Product Type:(.*), Product Weight:(.*)")]
 		public void FillInUPCData(string productUPC, string productType, string productWeight)
 		{
+			if (Context.Contains(productUPC))
+			{
+				productUPC = Context.GetFromContext(productUPC).ToString();
+			}
 			NewProduct NewProductClassObject = new NewProduct();
 			Report.IsTrue(NewProductClassObject.FillInUPCData(productUPC, productType, productWeight), "Failed to fill in UPC data", "Succeeded to fill in UPC data");
 		}

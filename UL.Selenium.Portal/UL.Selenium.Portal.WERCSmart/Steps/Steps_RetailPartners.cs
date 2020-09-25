@@ -416,7 +416,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I click the Products in Scope button and confirm that an (excel|html) file is produced called (.*) and save as (.*)")]
 		public void ThenClickTheProductsInScopeButtonBelowTheMoreInformationHyperlink(string filetype, string file, string savedAs)
 		{
-			Report.Info("Click the Products in Scope button");
+            Report.Info("Click the Products in Scope button");
 
 			var selRetailDetails = new RetailPartnersDetails();
 
@@ -446,7 +446,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
 			while (!dir.Any() && i < 30)
 			{
-				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				//dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				dir = Directory.GetFiles(downloadsFolder, "" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}
@@ -503,6 +504,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Report.IsTrue(Data, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+			}
+		}
+
+		[StepDefinition(@"I confirm the csv file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheCSVFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var lines = System.IO.File.ReadAllLines(File.ToString());
+
+				if (lines != null)
+				{
+					Report.IsTrue(lines != null, "CSV file contains data");
+				}
+
+				Report.IsTrue(lines != null, "CSV did not contain any product data!", "CSV file contained product data, as expected!");
 			}
 		}
 
@@ -1179,7 +1198,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I confirm that under the <Retailer> & You heading all 7 Wal-Mart affiliate retailers are displayed");
 				List<string> actualRetailers = selRetailPartnersDetails.WalmartRegistrationsRetailers();
 				Report.IsTrue(!actualRetailers.Except(retailerNames).Any() && actualRetailers.Count == retailerNames.Count,
-					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'")),
+					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'"), 2),
 					"The actual list of retailers showing under '<Retailer> & You matched the expected list");
 				selRetailPartnersDetails.ClickBackButton();
 			}
@@ -1258,7 +1277,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			tabs.Rows.Cast<TableRow>().ToList().ForEach(x => expectedTabs.Add(x["Tab"]));
 			List<string> displayedTabs = new DataTierDetails().AllTabs();
 			Report.IsTrue(expectedTabs.All(x => displayedTabs.Contains(x)) && expectedTabs.Count == displayedTabs.Count,
-				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"))}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"))}""",
+				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"), 2)}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"), 2)}""",
 				"The displayed tabs matched the expected tabs.");
 		}
 
@@ -2309,8 +2328,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
 		}
 
-		[StepDefinition(@"I confirm the excel file saved as: (.*) contains the following data: (.*)")]
-		public bool ThenIConfirmTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingDataCleaningSuppliesProductForBBB(string savedAs, string data)
+		[StepDefinition(@"I confirm the excel file saved as: (.*) (contains|does not contain) the following data: (.*)")]
+		public bool ThenIConfirmTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingDataCleaningSuppliesProductForBBB(string savedAs, string containsOrDoesNotContain, string data)
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			object File = Context.GetFromContext(savedAs);
@@ -2325,18 +2344,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Header row contained: '" + string.Join("', '", row) + "'");
 					foreach (var str in row)
 					{
-						if (str == data)
+						if (str == data && containsOrDoesNotContain == "contains")
 						{
 							Report.Success("Excel file contained the following data: " + data);
 							return true;
 						}
+						if (str == data && containsOrDoesNotContain == "does not contain")
+						{
+							Report.Failure("Excel file contained the following data: " + data);
+							return false;
+						}
 					}
 				}
 
+				if (containsOrDoesNotContain == "contains")
+				{
+					Report.Failure("Excel file did not contain the following data: " + data);
+					return false;
+				}
 
+				if (containsOrDoesNotContain == "does not contain")
+				{
+					Report.Success("Excel file did not contain the following data: " + data);
+					return true;
+				}
 
-				Report.Failure("Excel file did not contain the following data: " + data);
-				return false;
 			}
 
 			return false;

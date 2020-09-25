@@ -1004,7 +1004,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-
 			Report.Failure("Summary window is not showing");
 			Report.Screenshot();
 		}

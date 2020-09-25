@@ -4,12 +4,15 @@ using UL.Automation.Selenium.Classes;
 using UL.Automation.Selenium.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 {
 	class KeyPerformanceIndicators : BaseObject
 	{
 		public const string BasePath = "//section";
+
+		private IList <IWebElement> El => this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'grid-stack-item-content')]"), 2);
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
@@ -31,7 +34,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 		{
 			if (firstSection)
 			{
-				return this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'grid-stack-item-content')]"), 2).FirstOrDefault();
+				return this.El.FirstOrDefault();
 			}
 			IWebElement match = this.containerElement.FindElements(By.XPath(".//div[@class='panel-title']"), 2)
 				?.FirstOrDefault(x => x.Text == title);

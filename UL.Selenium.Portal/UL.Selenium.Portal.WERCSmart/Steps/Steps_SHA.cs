@@ -2216,6 +2216,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.ClickSearchButton(), "Failed to click search button",
 				"Clicked search button");
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
@@ -3779,7 +3780,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new StudioSupplierManager().ClickCategory(category), "Failed to click the category", "Successfully clicked the category");
 			Report.StartStep($"Checking that the catagory: {category} is active");
 			Report.IsTrue(new StudioSupplierManager().CategoryIsActive(category), "The Category was not active", "The Category was active");
+		}
 
+		[StepDefinition(@"In The Supplier Manager popup I click on the 'Clear Cart for All Users' button")]
+		public void InTheSupplierManagerPopupIClickTheClearCartForAllUsersButton()
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep($"Starting to attempt to click the 'Clear Cart for All Users' button");
+			Report.IsTrue(new StudioSupplierManager().ClickClearCartForAllUsers(), "Failed to click the 'Clear Cart for All Users' button", "Successfully clicked the 'Clear Cart for All Users' button");
 		}
 
 		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
@@ -3827,6 +3835,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheSupplierManagerPopupICheckThatTheColumnRetailerIsInAlphabeticalOrder(string columnName)
 		{
 			Report.IsTrue(new StudioSupplierManager().RetailsAreInAlphabeticalOrder(), "The retailers were not in alphabetical order in column: " + columnName, "The retailers were in alphabetical order in column: " + columnName);
+		}
+
+		[StepDefinition(@"In the Clear Cart for All Users Popup I confirm the correct text is displayed")]
+		public void GivenIConfirmTheConfirmClearCartForAllUsersPopupContainsTheCorrectText()
+		{
+			Report.IsTrue(new StudioSupplierManager().CheckTextInConfirmClearCartForAllUsersPopup(), "The 'Confirm Clear Cart for All Users' Popup did not display the correct text", "The 'Confirm Clear Cart for All Users' Popup displayed the correct text");
+		}
+
+		[StepDefinition(@"In the Clear Cart for All Users Popup I click the Continue button")]
+		public void GivenInTheClearCartForAllUsersPopupIClickTheContinueButton()
+		{
+			Report.IsTrue(new StudioSupplierManager().ClickContinueInConfirmClearCartForAllUsersPopup(), "Failed to click the Continue button in 'Confirm Clear Cart for All Users' Popup", "Successfully clicked the Continue button in 'Confirm Clear Cart for All Users' Popup");
+		}
+
+		[StepDefinition(@"In the Clear Shopping Cart Popup I enter the following UserID: (.*), Password: (.*), TFS Ticket Number: (.*), Support Ticket Number: (.*) then I click Continue")]
+		public void GivenInTheClearShoppingCartPopupIEnterTheFollowingUserIDAPasswordATFSTicketNumberASupportTicketNumberAThenIClickContinue(string userID, string password, string tfsTicketNumber, string supportTicketNumber)
+		{
+			Report.IsTrue(new StudioSupplierManager().EnterInformationInClearShoppingCartPopup(userID, password, tfsTicketNumber, supportTicketNumber), "Failed to enter information in 'Clear Shopping Cart' Popup", "Successfully entered information in 'Clear Shopping Cart' Popup");
+			Report.IsTrue(new StudioSupplierManager().ClickContinueInClearShoppingCartPopup(), "Failed to click Continue in 'Clear Shopping Cart' Popup", "Successfully clicked Continue 'Clear Shopping Cart' Popup");
+		}
+
+		[StepDefinition(@"In the Results Clear Shopping Cart for All Users Popup I confirm the correct text is displayed")]
+		public void GivenInTheResultsClearShoppingCartForAllUsersPopupIConfirmTheCorrectTextIsDisplayed()
+		{
+			Report.IsTrue(new StudioSupplierManager().CheckTextInResultsClearShoppingCartForAllUsersPopup(), "The 'Results Clear Shopping Cart for All Users' Popup did not display the correct text", "The 'Results Clear Shopping Cart for All Users' Popup displayed the correct text");
 		}
 
 

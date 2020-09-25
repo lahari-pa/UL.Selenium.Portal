@@ -3248,21 +3248,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(UPCPage.ConfirmTruckIconIsDisplayedForUPC(savedAs), "Failed to find truck icon for UPC: " + savedAs, "Successfully found truck icon for UPC: " + savedAs);
 		}
 
-		[StepDefinition(@"In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet \(SDS\)' I tick confirm")]
-		public void InTheRegulatoryDocumentsToProvideScreenIfTheConfirmSDSQuestionIsSeenThenGrant()
+		[StepDefinition(@"I confirm the Consent to Tier 2.1, 2.2, 4.2 Data shows the answer: (.*)")]
+		public void GivenIConfirmTheConsentToTierDataShowsTheAnswerAccept(string answer)
 		{
-
-			var MyStepsNewProduct = new StepsNewProduct();
-			var newProdClass = new NewProduct();
-
-			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			{
-				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			}
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.ConfirmTierDataShowsCorrectAnswer(answer), "Failed to confirm the following answer: " + answer, "Successfully confirmed the following answer: " + answer);
 		}
 
-
+		[StepDefinition(@"I confirm the Formulation > Batteries displays the correct text")]
+		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText()
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.CheckTextInForumulationBatteriesPage(), "The text in the Formulation > Batteries page displayed the incorrect text", "The text in the Formulation > Batteries page displayed the correct text");
+		}
 
 	}
 

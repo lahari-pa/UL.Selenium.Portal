@@ -42,8 +42,8 @@ Then I click the close button for the CA Cleaning Ingredients Popup
 Then I click the 'x' button for component number 1
 Given I click: YES in the 'Remove Component from My Ingredients' pop up
 Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | false       | AQUA           | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
+		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
+		| Water         | 100     | false               | true       | AQUA           | AQUA1       | Intentionally Added | Abrasive, Absorbent, Adhesive | true  | true      |
 Then I click continue
 And I should see the Waste Classification Data Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139531
@@ -217,3 +217,44 @@ Given I click continue
 Given I confirm there is a message displayed at the top of the Ingredients page
 Given I confirm there is a checkbox with the following text: Don't show this again in the message displayed at the top of the Ingredients page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139193
+
+
+
+@ScenarioId:10284
+Scenario: [139445] CA Cleaning - Ingredients Screen - Validation for INTENTIONALLY ADDED Ingredient Type and Multi-Select Functional Purpose
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): General Purpose Cleaner - Non-aerosol
+Then I save the product information as: TestCase139445
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+Given I set the Which one best describes your product option to: Product is not considered a pesticide product
+Given In the Additional Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
+Then I click continue
+Given In the California Cleaning Product Disclosure tab, I enter: NONE in the Final Domestic Distributor
+Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
+Given In the California Cleaning Product Disclosure tab, I enter: 1-800-258-7412 in the Company's Toll-Free Phone Number
+Given In the California Cleaning Product Disclosure tab, I enter: http://google.com in the Company Web Address
+Given I set the Product's GTIN Brick Code to: [10000397] Cleaning Aids
+Then I click continue
+Given I add the following CA Cleaning ingredients:  
+		| ComponentName                                       | Percent | PublicallyDisclosed | TradeSecret | PublicName      | GenericName | IngredientType      | FunctionalPurpose | Clean | Certified |
+		| D-Glucopyranose, oligomeric, decyl octyl glycosides | 100     | true                | false       | Decyl Glucoside |             | Intentionally Added |			          | true  | true      |
+Given I click continue
+Then in page Ingredients Page I should see error: Please select at least one Functional Purpose since Ingredient Type is indicated to be Intentionally Added.
+Then I click the Choose... option for Functional Purpose in the Ingredients page
+Then I confirm a dropdown menu displays in the Ingredients page
+Then I select the following Functional Purpose: Brightening Agent
+Then I confirm the following Functional Purpose is displayed: Brightening Agent
+Then I select the following Functional Purpose: Deodorizing Agent
+Then I confirm the following Functional Purpose is displayed: Deodorizing Agent
+Then I select the following Functional Purpose: Processing Aid
+Then I confirm the following Functional Purpose is displayed: Processing Aid
+Then I click the close button in the Functional Purpose dropdown menu
+Then I confirm a dropdown menu is not displayed in the Ingredients page
+Then I confirm the following Functional Purpose is displayed: Brightening Agent
+Then I confirm the following Functional Purpose is displayed: Deodorizing Agent
+Then I confirm the following Functional Purpose is displayed: Processing Aid
+Then I click continue
+And I should see the Waste Classification Data Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139445

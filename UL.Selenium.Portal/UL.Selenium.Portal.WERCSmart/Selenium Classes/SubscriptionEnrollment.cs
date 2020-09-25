@@ -68,13 +68,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Get_Articles_info_header()
 		{
-			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Articles ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Articles ']/a"), 2)
 				.GetAttribute("data-original-title").ToString();
 		}
 
 		public string Get_Articles_info_body()
 		{
-			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Articles ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Articles ']/a"), 2)
 				.GetAttribute("data-content").ToString();
 		}
 
@@ -112,30 +112,30 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Get_Page_Header()
 		{
-			return this.containerElement.FindElement(By.XPath("//div[contains(@class, 'header-with-back')]/h2")).Text.Trim();
+			return this.containerElement.FindElement(By.XPath("//div[contains(@class, 'header-with-back')]/h2"), 2).Text.Trim();
 		}
 
 		public List<string> Get_Page_SubHeaders()
 		{
 			this.RefreshContainerElement();
-			return this.containerElement.FindElements(By.XPath("//h3/span/../../h3")).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath("//h3/span/../../h3"), 2).Select(x => x.Text).ToList();
 		}
 
 		public string Get_Extra_Text_SubHeader(string subHeader)
 		{
 			return this.Extract_Before_Return(this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
-																			   "')]/following-sibling::div/p")).Text);
+																			   "')]/following-sibling::div/p"), 2).Text);
 		}
 
 		public string Get_Extra_Text_Link(string subHeader)
 		{
-			return this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader + "')]/following-sibling::div/p/a")).Text;
+			return this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader + "')]/following-sibling::div/p/a"), 2).Text;
 		}
 
 		public void Click_Extra_Text_Link(string subHeader, string link)
 		{
 			this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
-												  "')]/following-sibling::div/p/a[contains(text(),'" + link + "')]")).TryClick();
+												  "')]/following-sibling::div/p/a[contains(text(),'" + link + "')]"), 2).TryClick();
 			Delay.Seconds(1);
 		}
 
@@ -169,13 +169,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Get_Enhanced_Articles_info_header()
 		{
-			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/a"), 2)
 				.GetAttribute("data-original-title").ToString();
 		}
 
 		public string Get_Enhanced_Articles_info_body()
 		{
-			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/a"), 2)
 				.GetAttribute("data-content").ToString();
 		}
 
@@ -208,13 +208,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public string Get_Formulated_Products_info_header()
 		{
-			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Formulated Products ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Formulated Products ']/a"), 2)
 				.GetAttribute("data-original-title").ToString();
 		}
 
 		public string Get_Formulated_Products_info_body()
 		{
-			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Formulated Products ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Formulated Products ']/a"), 2)
 				.GetAttribute("data-content").ToString();
 		}
 
@@ -222,7 +222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var featurePlans = new List<string>();
 			var regex = new Regex(@".*\r\n");
-			var listOfPlans = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).Select(x => x.Text).ToList();
+			var listOfPlans = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label"), 2).Select(x => x.Text).ToList();
 			foreach (string thisPlan in listOfPlans)
 			{
 				Match match = regex.Match(thisPlan);
@@ -254,13 +254,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				if (thisPlan.Info_points.Select(x => x.Info_Header).Contains(item))
 				{
-					IWebElement PlanLabel = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
+					IWebElement PlanLabel = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"), 2)
 						.FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == thisPlan.Plan_Name));
 					try
 					{
 						ReadOnlyCollection<IWebElement> listOfLis = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"));
 						IWebElement infoText = listOfLis.FirstOrDefault(x => x.Text.Trim() == item.Trim());
-						IWebElement infoLink = infoText.FindElement(By.XPath(".//a"));
+						IWebElement infoLink = infoText.FindElement(By.XPath(".//a"), 2);
 
 						if (infoLink != null)
 						{
@@ -272,11 +272,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Delay.Seconds(1);
 							Report.Info("Clicked info link");
 							Report.Screenshot();
-							IWebElement expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
+							IWebElement expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"), 2).FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"), 2);
 							if (expandableDiv.GetAttribute("aria-expanded") == "true")
 							{
 								Report.Info("Got extra info. Trying to find url link.");
-								IWebElement link = expandableDiv.FindElements(By.XPath(".//a")).FirstOrDefault(x => x.Text.Trim() == linkText && x.GetAttribute("href").Contains(linkURL));
+								IWebElement link = expandableDiv.FindElements(By.XPath(".//a"), 2).FirstOrDefault(x => x.Text.Trim() == linkText && x.GetAttribute("href").Contains(linkURL));
 								if (link == null)
 								{
 									Report.Info("Could not find matching url: " + linkText);
@@ -335,25 +335,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> GetAllPlanNames()
 		{
 			return SeleniumBrowser.WebBrowser
-				.FindElements(By.XPath(".//div[contains(@class, 'subscription')]/div[contains(@class, 'heading')]/label"))
+				.FindElements(By.XPath(".//div[contains(@class, 'subscription')]/div[contains(@class, 'heading')]/label"), 2)
 				.Select(x => this.Extract_Before_Return(x.Text)).ToList();
 
 		}
 
 		public string GetFooterSubsCalculatorText()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@class, 'panel-footer')]/h3")).Text.Trim();
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class, 'panel-footer')]/h3"), 2).Text.Trim();
 		}
 
 		public string GetEstimatedAnualCost()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@class, 'calculator-total')]/p[text()= 'Estimated Annual Cost: ']/strong")).Text.Trim();
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class, 'calculator-total')]/p[text()= 'Estimated Annual Cost: ']/strong"), 2).Text.Trim();
 
 		}
 
 		public string GetEstimatedAnualCostPerProduct()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@class, 'calculator-total')]/p[text()= 'Estimated Annual Cost per Product: ']/strong")).Text.Trim();
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class, 'calculator-total')]/p[text()= 'Estimated Annual Cost per Product: ']/strong"), 2).Text.Trim();
 
 		}
 
@@ -378,7 +378,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			List<string> featurePlans = this.Get_Feature_Plans();
 			var listOfPlans = new List<Plan>();
-			var listSubscriptions = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'subscription')]")).ToList();
+			var listSubscriptions = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'subscription')]"), 2).ToList();
 
 			foreach (IWebElement subscription in listSubscriptions)
 			{
@@ -386,7 +386,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				var regex = new Regex(@".*\r\n");
 
-				string allLabel = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]/label")).Text.Trim();
+				string allLabel = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]/label"), 2).Text.Trim();
 				Match match = regex.Match(allLabel);
 				if (match.Success)
 				{
@@ -398,7 +398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				if (spans.Count > 1)
 				{
 					newPlan.Best_Value = true;
-					newPlan.Plan_Sub = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//span[2]")).Text.Trim();
+					newPlan.Plan_Sub = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//span[2]"), 2).Text.Trim();
 				}
 				else
 				{
@@ -408,12 +408,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					else
 					{
-						newPlan.Plan_Sub = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//span[1]")).Text.Trim();
+						newPlan.Plan_Sub = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//span[1]"), 2).Text.Trim();
 					}
 
 				}
 
-				var infos = subscription.FindElements(By.XPath(".//div[contains(@class, 'body')]//li")).ToList();
+				var infos = subscription.FindElements(By.XPath(".//div[contains(@class, 'body')]//li"), 2).ToList();
 				newPlan.Info_points = new List<Info_Point>();
 				foreach (IWebElement info in infos)
 				{
@@ -425,18 +425,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					try
 					{
 						//expand
-						IWebElement infoLink = info.FindElement(By.XPath(".//a"));
+						IWebElement infoLink = info.FindElement(By.XPath(".//a"), 2);
 						infoLink.TryClick();
 						Delay.Seconds(1);
 
-						thisInfoPoint.Info_Detail = info.FindElement(By.XPath(".//div")).Text.Trim();
+						thisInfoPoint.Info_Detail = info.FindElement(By.XPath(".//div"), 2).Text.Trim();
 						thisInfoPoint.Info_Links = new List<Info_Link>();
-						var links = info.FindElements(By.XPath(".//div/a")).ToList();
+						var links = info.FindElements(By.XPath(".//div/a"), 2).ToList();
 						foreach (IWebElement link in links)
 						{
 							//refinding because link text is missing
 							IWebElement refoundLink =
-								SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[contains(@href, '" + link.GetAttribute("href") + "')]"));
+								SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[contains(@href, '" + link.GetAttribute("href") + "')]"), 2);
 							Report.Info("Adding new link: " + link.Text + " " + refoundLink.Text);
 							thisInfoPoint.Info_Links.Add(new Info_Link(refoundLink.Text, refoundLink.GetAttribute("href")));
 						}
@@ -453,7 +453,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				//newPlan.Info_points
-				IWebElement subsIndicator = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//div[@class='subs__indicator']"));
+				IWebElement subsIndicator = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//div[@class='subs__indicator']"), 2);
 
 				string backGroundColour = subsIndicator.GetCssValue("background-color");
 				if (backGroundColour.Contains("255, 255, 255"))
@@ -513,13 +513,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				if (thisPlan.Info_points.Select(x => x.Info_Header).Contains(item))
 				{
-					IWebElement PlanLabel = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
+					IWebElement PlanLabel = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"), 2)
 						.FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == thisPlan.Plan_Name));
 					try
 					{
 						ReadOnlyCollection<IWebElement> listOfLis = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"));
 						IWebElement infoText = listOfLis.FirstOrDefault(x => x.Text.Trim() == item.Trim());
-						IWebElement infoLink = infoText.FindElement(By.XPath(".//a"));
+						IWebElement infoLink = infoText.FindElement(By.XPath(".//a"), 2);
 
 						if (infoLink != null)
 						{
@@ -528,7 +528,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								throw new Exception("Failed to click info link.");
 							}
 							Delay.Seconds(1);
-							IWebElement expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
+							IWebElement expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"), 2).FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"), 2);
 							if (expandableDiv.GetAttribute("aria-expanded") == "true")
 							{
 								string expandableDivText = expandableDiv.Text.Trim();
@@ -599,7 +599,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Get_Feature_Plan: " + feature_plan);
 
-			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).ToList();
+			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label"), 2).ToList();
 
 			foreach (IWebElement feature in allProducts)
 			{
@@ -711,7 +711,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Get_General_Support_Plan");
 
-			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-4']/div/div/label")).ToList();
+			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-4']/div/div/label"), 2).ToList();
 
 			foreach (IWebElement feature in allProducts)
 			{
@@ -1121,7 +1121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetBodyText()
 		{
-			return this.containerElement.FindElement(By.XPath("//div[@class='modal-body']")).Text.Trim();
+			return this.containerElement.FindElement(By.XPath("//div[@class='modal-body']"), 2).Text.Trim();
 		}
 
 		public string AgencyPopupText()
@@ -1138,7 +1138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void ClickCloseButton()
 		{
-			//containerElement.FindElement(By.XPath("#showAgencyServiceAgreement > div > div > div.modal-footer > button")).TryClick();
+			//containerElement.FindElement(By.XPath("#showAgencyServiceAgreement > div > div > div.modal-footer > button"), 2).TryClick();
 
 			IWebElement el = this.PopupCloseButton;
 

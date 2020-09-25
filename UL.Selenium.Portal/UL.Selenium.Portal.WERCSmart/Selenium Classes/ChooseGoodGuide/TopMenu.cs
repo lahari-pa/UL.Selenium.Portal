@@ -15,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickDropDownNextToSelectBox(string selectBoxText)
 		{
-			return this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']/following-sibling::button")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']/following-sibling::button"), 2).TryClick();
 		}
 
 		public bool ClickSelectBox(string selectBoxText)
@@ -24,7 +24,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				try
 				{
-					IWebElement select = this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']"));
+					IWebElement select = this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']"), 2);
+					
+					if (select == null)
+					{
+						return false;
+					}
+
 					if (select != null)
 					{
 						return select.TryClick();
@@ -46,8 +52,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				if (this.ClickDropDownNextToSelectBox(selectBoxText))
 				{
 					Delay.Seconds(1);
-					IWebElement dropDownMenu = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']")).FirstOrDefault(x => x.Displayed);
-					return dropDownMenu.FindElement(By.XPath(".//li/a/span[text()='" + itemToSelect + "']")).TryClick();
+					IWebElement dropDownMenu = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']"), 2).FirstOrDefault(x => x.Displayed);
+					return dropDownMenu.FindElement(By.XPath(".//li/a/span[text()='" + itemToSelect + "']"), 2).TryClick();
 
 				}
 			}

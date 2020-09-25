@@ -349,20 +349,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Screenshot();
 				return null;
 			}
-			var rows = epaTable.FindElements(By.XPath(".//tbody/tr")).ToList();
+			var rows = epaTable.FindElements(By.XPath(".//tbody/tr"), 2).ToList();
 			Report.Info("Getting state data for: " + rows.Count + " rows");
 			foreach (IWebElement thisRow in rows)
 			{
-				string state = thisRow.FindElement(By.XPath($".//td[position() = {headings.IndexOf(expectedHeadings[1]) + 1}]//div")).Text;
-				string expirationDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[2]) + 1}]//input")).GetValue();
-				IWebElement registrationNumberEl = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[0]) + 1}]//input"));
+				string state = thisRow.FindElement(By.XPath($".//td[position() = {headings.IndexOf(expectedHeadings[1]) + 1}]//div"), 2).Text;
+				string expirationDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[2]) + 1}]//input"), 2).GetValue();
+				IWebElement registrationNumberEl = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[0]) + 1}]//input"), 2);
 				string registrationNumber = registrationNumberEl.GetValue();
 				if (registrationNumber.Length == 0)
 				{
 					registrationNumber = registrationNumberEl.GetAttribute("placeholder");
 				}
-				string kellyDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[3]) + 1}]//label"))?.Text;
-				bool isKellyData = thisRow.FindElements(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[4]) + 1}]//div")).Count == 1;
+				string kellyDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[3]) + 1}]//label"), 2)?.Text;
+				bool isKellyData = thisRow.FindElements(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[4]) + 1}]//div"), 2).Count == 1;
 				rStatePest.Add(new StatePesticideRegistration() {
 					State = state,
 					ExpirationDate = expirationDate,

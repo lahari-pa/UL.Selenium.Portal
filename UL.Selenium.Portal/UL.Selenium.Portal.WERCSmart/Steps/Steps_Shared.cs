@@ -3905,10 +3905,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-
-		[StepDefinition(@"I call Shared Step 143792 \(Additional Product Information - Pesticide= Not considered, Fertilizer = No, SOLD=US, everything else = No - Continue\)")]
+		[StepDefinition(
+			@"I call Shared Step 143418 \(Additional Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue\)")]
 		public void
-			GivenICallSharedStep143792AdditionalProductInformation_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
+			GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredFertilizerNoSOLDUSEverythingElseNo_Continue()
 		{
 			var MyNewProduct = new StepsNewProduct();
 			var myNewProductClass = new NewProduct();
@@ -3920,11 +3920,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
 				"Product is not considered a pesticide product");
 			Report.StartStep(
-				"I set the PDoes the product contain fertilizer (P, N or K) field to: No");
+				"I set the Does the product contain fertilizer (P, N or K) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
 				"Does the product contain fertilizer (P, N or K)",
 				"No");
-
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(

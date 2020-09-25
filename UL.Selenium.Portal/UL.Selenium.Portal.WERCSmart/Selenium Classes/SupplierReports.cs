@@ -11,6 +11,7 @@ using System;
 using TechTalk.SpecFlow;
 using NPOI.SS.UserModel;
 using Gherkin.Events.Args.Pickle;
+using UL.Automation.Reporting.SpecFlow.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -41,8 +42,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string GetSubheadingText()
-		{
-			var el = this.containerElement.FindElement(By.XPath("//div[@class='product-header']//p"), 2);
+		{ 
+
+			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@class='product-header']//p"), 2);
+
+			if (el == null)
+			{
+				return null;
+			}
+
 			return el.Text;
 
 		}
@@ -69,7 +77,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]")).TryClick();
 			Delay.Seconds(1);
 			ReadOnlyCollection<IWebElement> Searches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//input"));
-			IWebElement Search = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@type='search']"));
+			IWebElement Search = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@type='search']"), 2);
+
+			if (Search == null)
+			{
+				return false;
+			}
+
 			Search.EnterText(searchTerm);
 			Delay.Seconds(1);
 			IWebElement searching =
@@ -133,7 +147,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectRetailer(string retailer)
 		{
-			IWebElement selectionBox = this.containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"));
+			IWebElement selectionBox = this.containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"), 2);
+
+			if (selectionBox == null)
+			{
+				return false;
+			}
+
 			selectionBox.Select(retailer);
 			return selectionBox.SelectedOption() == retailer;
 		}
@@ -142,6 +162,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			//first try no remove white spaces
 			string actualText = this.containerElement.FindElement(By.XPath(".//p[@data-bind='text: Description']"), 2).Text;
+
+			if (actualText == null)
+			{
+				return false;
+			}
+
 			Report.Info($"The expected Text was: {expectedText}");
 			Report.Info($"The actual text found is: {actualText}");
 			if (actualText == null)
@@ -281,8 +307,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			var tableHeaderEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table//thead"), 15);
+
+			if (tableHeaderEl == null)
+			{
+				Report.Info("TableHeaderEl returned null");
+				return false;
+			}
+
 			var wantedTitleMasterEl = tableHeaderEl.FindElement(By.XPath($"//th[contains(@data-bind,'{column}')]"), 15);
 			var directionTitleEl = tableHeaderEl.FindElement(By.XPath($"//span[@id='{column}{wantedID}']"), 15);
+
+			if (wantedTitleMasterEl == null)
+			{
+				Report.Info("WantedTitleMasterEl returned null");
+				return false;
+			}
+
+			if (directionTitleEl == null)
+			{
+				Report.Info("DirectionTitleEl returned null");
+				return false;
+			}
 
 			if (directionTitleEl.GetAttribute("style") == "display: none;")
 			{
@@ -321,6 +366,106 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return descriptionText;
 		}
 
+		public bool SelectFromSelectFileType(string excelOrCSV)
+		{
+			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='fileTypeDDL']"), 2);
+			IWebElement option = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='fileTypeDDL']//option[text()='" + excelOrCSV + "']"), 2);
+			bool selectSelected = false;
+			bool optionSelected = false;
+
+			selectSelected = select.TryClick();
+			optionSelected = option.TryClick();
+
+			if (selectSelected && optionSelected)
+			{
+				return true;
+			}
+
+			return false;
+
+		}
+
+		public bool SelectZipReportCheckbox()
+		{
+			IWebElement checkbox = this.ContainerElement.FindElement(By.XPath("//input[@id='chkZip']"), 2);
+			return checkbox.TryCheck();
+		}
+
+		public bool SelectRequestReportButton()
+		{
+			IWebElement button = this.ContainerElement.FindElement(By.XPath("//button[text()='Request Report']"), 2);
+			return button.TryClick();
+		}
+
+		public bool SelectCloseButtonInReportDownloadPopup()
+		{
+			IWebElement button = this.ContainerElement.FindElement(By.XPath("//a[@data-dismiss='modal']"), 2);
+			return button.TryClick();
+		}
+
+		public bool CheckForDownloadButtonForTheMostRecentReport()
+		{
+			Report.Info("Check for download button for report with the following time: " + Context.GetFromContext("LastReportDownloadTime").ToString());
+			IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//button"), 2);
+			if (downloadButton != null)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public bool SelectDownloadButtonForTheMostRecentReport()
+		{
+			Report.Info("Downloading report with the following time: " + Context.GetFromContext("LastReportDownloadTime").ToString());
+			IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//button"), 2);
+			return downloadButton.TryClick();
+		}
+
+		public bool CheckReportDataForMostRecentFile(string reportName, string type, string dateRequested, string requestedBy)
+		{
+			Delay.Seconds(10);
+			IList<IWebElement> fileList = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//td"), 2);
+			string reportNameStr = fileList[0].Text;
+			string reportTypeStr = fileList[2].Text;
+			string reportDateRequestedStr = fileList[3].Text;
+			string reportRequestedByStr = fileList[4].Text;
+
+			if (reportNameStr == reportName && reportTypeStr == type && reportDateRequestedStr.Contains(Context.GetFromContext(dateRequested).ToString()) && reportRequestedByStr == requestedBy)
+			{
+				return true;
+			}
+
+			if (reportNameStr != reportName)
+			{ 
+				Report.Failure("Failed to match Report Name");
+			}
+			if (reportTypeStr != type)
+			{
+				Report.Failure("Failed to match Type");
+			}
+			if (!reportDateRequestedStr.Contains(Context.GetFromContext("LastReportDownloadTime").ToString()))
+			{
+				Report.Failure("Failed to match Date Requested");
+			}
+			if (reportRequestedByStr != requestedBy)
+			{
+				Report.Failure("Failed to match Requested By");
+			}
+
+			return false;
+		}
+
+		public bool FindReportDownloadPopupWithTheFollowingText(string text)
+		{
+			IWebElement textEl = this.ContainerElement.FindElement(By.XPath("//h3[text()='Report Download']/../following-sibling::div//div[@id='report-success-message']//p"), 2);
+
+			if (textEl.Text == text)
+			{
+				return true;
+			}
+
+			return false;
+		}
 
 	}
 }
