@@ -1564,6 +1564,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 
 		}
+
+		public bool ConfirmSectionHasFollowingValueInSummaryPage(string section, string value)
+		{
+			IWebElement sectionValue = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h3[text()='" + section + "']/following-sibling::p[@data-bind='html: Data']"), 2);
+			if (sectionValue.Text == value)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 	}
 
 	class RemoveUpcUpdate : ModalDialog
