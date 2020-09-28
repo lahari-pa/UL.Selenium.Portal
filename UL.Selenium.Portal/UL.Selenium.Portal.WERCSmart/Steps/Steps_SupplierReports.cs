@@ -24,6 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new SupplierReports().SelectReport(choice), "Failed to choose: " + choice,
 				"Successfully chose: " + choice);
+			Delay.Seconds(15);
 		}
 
 		[StepDefinition(@"In the Supplier Reports screen the page title should be: (.*)")]
@@ -951,10 +952,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.SelectDownloadButtonForTheMostRecentReport(), "Failed to select Download button", "Successfully selected Download button");
-			Delay.Seconds(25);
 		}
 
-		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)) Date Requested: (.*) Requested By: (.*)")]
+		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Date Requested: (.*) Requested By: (.*)")]
 		public void ThenIConfirmTheMostRecentFileHasTheFollowingInformationReportNameWasteClassificationSummaryFileTypeCSVDataRequestedRequestedByWERCSTest_Automation_ProductsAccount(string reportName, string type, string dateRequested, string requestedBy)
 		{
 			SeleniumBrowser.WebBrowser.Navigate().Refresh();
@@ -967,8 +967,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenISeeAReportDownloadPopupWithTheFollowingText(string text)
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
-			Report.IsTrue(supplierReportsObject.FindReportDownloadPopupWithTheFollowingText(text), "Failed to find the correct text in the popup", "Successfully founded the correct text in the popup");
+			Report.IsTrue(supplierReportsObject.FindReportDownloadPopupWithTheFollowingText(text), "Failed to find the correct text in the popup", "Successfully found the correct text in the popup");
 		}
+
+		[StepDefinition(@"I confirm the following description is displayed: (.*)")]
+		public void GivenIConfirmTheFollowingDescriptionIsDisplayed(string description)
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.FindDescriptionInMyReports(description), "Failed to find the correct text in My Reports", "Successfully found the correct text in My Reports");
+		}
+
+		[StepDefinition(@"I enter the following in the WPSID textfield in the My Reports page: (.*)")]
+		public void ThenIEnterTheFollowingInTheWPSIDTextfieldInTheMyReportsPage(string text)
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.EnterTextIntoWPSIDTextFieldInMyReportsPage(text), "Failed to find the correct text in WPSID textfield", "Successfully found the correct text in WPSID textfield");
+		}
+
+		[StepDefinition(@"I select the first result in the WPSID textfield search results")]
+		public void ThenISelectTheFirstResultInTheWPSIDTextfieldSearchResults()
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.SelectFirstResultInWPSIDTextFieldSearchResultsInMyReportsPage(), "Failed to select first result in the WPSID textfield search results", "Successfully selected the first result in the WPSID textfield search results");
+		}
+
 
 	}
 }

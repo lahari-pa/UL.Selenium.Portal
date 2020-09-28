@@ -467,5 +467,79 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool FindDescriptionInMyReports(string text)
+		{
+			IWebElement textEl = this.ContainerElement.FindElement(By.XPath("//div[@class='panel panel-default ws-panel data-consent']//p[@data-bind='text: Description']"), 2);
+
+			if (textEl.Text == text)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public bool EnterTextIntoWPSIDTextFieldInMyReportsPage(string text)
+		{
+			IWebElement searchbarEl = this.ContainerElement.FindElement(By.XPath("//span[@class='select2-selection__rendered']"), 2);
+	
+			bool searchBarElClicked = false;
+			bool textFieldElEntered = false;
+
+			if (searchbarEl == null)
+			{
+				Report.Failure("SearchbarEl was not found");
+				return false;
+			}
+
+			searchBarElClicked = searchbarEl.TryClick();
+
+			if (!searchBarElClicked)
+			{
+				Report.Failure("Searchbar was not clicked");
+				return false;
+			}
+
+			Delay.Seconds(5);
+
+			IWebElement textfieldEl = this.ContainerElement.FindElement(By.XPath("//span[@class='select2-search select2-search--dropdown']//input"), 2);
+
+			if (textfieldEl == null)
+			{
+				Report.Failure("TextfieldEl was not found");
+				return false;
+			}
+
+			textFieldElEntered = textfieldEl.TryEnterText(text);
+
+			if (!textFieldElEntered)
+			{
+				Report.Failure("Text was not entered in textfield");
+				return false;
+			}
+
+			Delay.Seconds(2);
+
+			return true;
+		}
+
+		public bool SelectFirstResultInWPSIDTextFieldSearchResultsInMyReportsPage()
+		{
+			IWebElement el = this.ContainerElement.FindElement(By.XPath("//span[@class='select2-search select2-search--dropdown']//input/../following-sibling::span//li[1]"), 2);
+
+			if (el == null)
+			{
+				return false;
+			}
+
+			if (el.Text == "No results found")
+			{
+				Report.Failure("No results were found");
+				return false;
+			}
+
+			return el.TryClick();
+		}
+
 	}
 }

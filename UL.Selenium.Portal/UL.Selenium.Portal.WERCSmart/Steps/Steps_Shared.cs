@@ -753,7 +753,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No, due to an exemption or exception");
 			MyStepsNewProduct.SetTheSectionOptionTo("Please select DOT Exceptions if applicable", "173.120(a)(4)");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
-		}
+		}	
 
 		[StepDefinition(
 			@"I call Shared Step 69682 \(Retailer Association - Add Private Label Information\) and select the retailer: (.*) and enter the name: (.*)")]
@@ -1520,6 +1520,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"No");
 			Report.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
+			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
+			{
+				Report.StartStep(
+					"I set the Secondary Physical State option to: Solid");
+				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+					"Solid");
+			}
+
+		}
+
+		[StepDefinition(@"I call Shared Step 145000 \(Enter Physical Property - Solid - Without Water Solubility Description\)")]
+		public void GivenICallSharedEnterPhysicalProperty_Solid_WithoutWaterSolubilityDescription()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("Primary Physical State should be showing the value: Solid");
+			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
+			List<string> showing = new NewProduct().SelectedOptionsForSection("Primary Physical State");
+			if (!showing.Contains("Solid"))
+			{
+				Report.StartStep("I set the Primary Physical State option to: Solid");
+				Report.Info("Setting the Physical State to Solid because it was not selected by default");
+				MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			}
+
+			Report.StartStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
 			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
 			{
 				Report.StartStep(

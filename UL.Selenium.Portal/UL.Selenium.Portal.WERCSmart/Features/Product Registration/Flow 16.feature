@@ -72,6 +72,10 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 		| Formaldehyde  | 14.7    | false               | false       |            |
 		| Aqua          | 70.1    | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59274 with container type: Metal Container size: 40.0 and quantity: 100
@@ -80,6 +84,7 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -109,6 +114,10 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 		| Lead sulfate  | 50      | false               | false       |            |
 		| Aqua          | 50      | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59276 with container type: Metal Container size: 40.0 and quantity: 100
@@ -117,6 +126,7 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -127,7 +137,7 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59276. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid Battery - No Acid Included
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
-
+	
 @ScenarioId:684
 Scenario: [59277] Magnesium Battery - RU000728
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -146,6 +156,10 @@ Scenario: [59277] Magnesium Battery - RU000728
 		| Magnesium     | 50      | false               | false       |            |
 		| Sulfuric acid | 50      | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59277 with container type: Metal Container size: 40.0 and quantity: 100
@@ -154,6 +168,7 @@ Scenario: [59277] Magnesium Battery - RU000728
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -164,7 +179,7 @@ Scenario: [59277] Magnesium Battery - RU000728
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59277. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Magnesium Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59277
-
+	
 @ScenarioId:685
 Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -184,6 +199,10 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 		| Lanthanum     | 1       | false               | false       |            |
 		| Aqua          | 90      | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I should see the Formulation > Batteries Page
+	Given I confirm the Formulation > Batteries displays the correct text
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59278 with container type: Metal Container size: 40.0 and quantity: 100
@@ -192,7 +211,8 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-	Given I click continue
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
+    Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
@@ -202,7 +222,7 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59278. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel Metal Hydride (NiMH) Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59278
-
+	
 @ScenarioId:686
 Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -222,6 +242,10 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 		| Cadmium sulfide | 12.75   | false               | false       |            |
 		| Aqua            | 76.13   | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59279 with container type: Metal Container size: 40.0 and quantity: 100
@@ -230,6 +254,7 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -240,7 +265,7 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59279. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel-cadmium battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59279
-
+	
 @ScenarioId:687
 Scenario: [59280] Silver Battery - RU000698
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -260,6 +285,10 @@ Scenario: [59280] Silver Battery - RU000698
 		| Zinc          | 5.18    | false               | false       |            |
 		| Aqua          | 75.3    | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59280 with container type: Metal Container size: 10.0 and quantity: 1
@@ -269,6 +298,7 @@ Scenario: [59280] Silver Battery - RU000698
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -279,7 +309,7 @@ Scenario: [59280] Silver Battery - RU000698
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59280. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Silver Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59280
-
+	
 @ScenarioId:688
 Scenario: [59281] Water-Charged Cell - RU001543
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -300,6 +330,10 @@ Scenario: [59281] Water-Charged Cell - RU001543
 		| Magnesium       | 5.30    | false               | false       |            |
 		| Aqua            | 56.67   | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59281 with container type: Metal Container size: 30.0 and quantity: 50
@@ -308,6 +342,7 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -318,7 +353,7 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59281. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Water-Charged Cell
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59281
-
+	
 @ScenarioId:689
 Scenario: [59282] Zinc Air - RU001205
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -338,6 +373,10 @@ Scenario: [59282] Zinc Air - RU001205
 		| Carbon        | 15      | false               | false       |            |
 		| Aqua          | 55      | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59282 with container type: Metal Container size: 40.0 and quantity: 100
@@ -346,6 +385,7 @@ Scenario: [59282] Zinc Air - RU001205
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -356,7 +396,7 @@ Scenario: [59282] Zinc Air - RU001205
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59282. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Zinc Air
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59282
-
+	
 @ScenarioId:682
 Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -376,6 +416,10 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 		| Carbon        | 15      | false               | false       |            |
 		| Aqua          | 55      | false               | false       |            |
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59275 with container type: Metal Container size: 20.0 and quantity: 10
@@ -384,6 +428,7 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -394,7 +439,7 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59275. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Carbon Zinc Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59275
-
+	
 @ScenarioId:1511
 Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -409,6 +454,10 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lead sulfate  | 50      | false               | false       |            |
 		| Aqua          | 50      | false               | false       |            |
+		And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
@@ -418,6 +467,7 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -428,7 +478,7 @@ Scenario: [97484] Stand alone Lead Acid non spill-able Battery
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid (Non-Spillable) Battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97484
-
+	
 @ScenarioId:690
 Scenario: [97470] Stand alone Lead Acid Battery
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -443,6 +493,10 @@ Scenario: [97470] Stand alone Lead Acid Battery
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lead sulfate  | 50      | false               | false       |            |
 		| Aqua          | 50      | false               | false       |            |
+		And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
@@ -450,6 +504,7 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -460,7 +515,7 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead acid battery
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97470
-
+	
 @ScenarioId:679
 Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Error Messaging - RU000344
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -479,6 +534,10 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 		| Zinc chloride       | 9.5     | false               | false       |            |
 		| Aqua                | 70      | false               | false       |            |
 	# removed Shared Step 57571
+	And I should see the Formulation > Batteries Page
+    Given I confirm the Formulation > Batteries displays the correct text
+    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+    Given I click continue
 	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
 	Given If the UPCs Warning popup is displayed I click OK
@@ -504,6 +563,7 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 		| Question                                     | Expected Answer                                        |
 		| Product Label in English and French-Canadian | Document is required: Label in both French and English |
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+	And I check the checkbox with description: I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration. I understand I will need to provide a revised document should any changes be made to the registration data or documents in the future.
 	Given I click continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue

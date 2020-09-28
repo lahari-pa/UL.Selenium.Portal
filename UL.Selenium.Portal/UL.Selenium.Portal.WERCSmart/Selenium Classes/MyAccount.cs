@@ -1003,6 +1003,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool FillInStewardshipData(Table table)
 		{
+
 			IList<IWebElement> Textboxes = this.containerElement.FindElements(By.XPath(".//table[@class='table table-bordered']//input[@type='text']"), 2);
 			List<string> StewardshipList = new List<string>();
 			List<string> IssueDateList = new List<string>();
@@ -1012,7 +1013,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				StewardshipList.Add(row["Stewardship"]);
 				IssueDateList.Add(row["Issue Date"]);
-				if (row["Expire Date"]=="Tomorrow")
+				if (row["Expire Date"] == "Today")
+				{
+					var input = DateTime.Now.ToString("yyyy-MM-dd");
+					ExpireDateList.Add(input);
+				}
+				else if (row["Expire Date"] == "Tomorrow")
 				{
 					var input = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
 					ExpireDateList.Add(input);
@@ -1021,12 +1027,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					ExpireDateList.Add(row["Expire Date"]);
 				}
-				
+
 			}
 
 			int k = 0;
 			int textboxesPerRow = 3;
-			for (int i = 0; i < Textboxes.Count() - 1; i += textboxesPerRow)
+			for (int i = 0; i < StewardshipList.Count() * 3; i += textboxesPerRow)
 			{
 				Textboxes[i].TryEnterText(StewardshipList[k]);
 				Textboxes[i + 1].TryEnterText(IssueDateList[k]);
