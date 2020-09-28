@@ -63,8 +63,9 @@ Scenario: [87295] 3rd party Ingredients - Informational Message
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| WPS           | 100     |                     |             |            |
 	Given I click continue
-	Then a Warning popup dialog should appear with the message: Your product registration contains a 3rd-Party Formula that needs to be updated for it to be included in chemical-policy or sustainability assessments conducted by retailers or in GoodGuide ratings. We have sent a notification to your 3rd-Party Formulator requesting that the ingredient's Data Use Tier consent, and the public disclosure status of its ingredients, be updated. Please continue with this product registration, but note that the chemical-policy or sustainability assessment results may change if, and when, your 3rd-Party Formulator authorizes its ingredient to be included in such programs.
+	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87295
+
 
 
 @ScenarioId:6335
