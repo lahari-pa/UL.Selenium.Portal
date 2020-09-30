@@ -929,6 +929,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new LiveHelp().VerifyInboxText(), "Inbox text is not present", "Inbox text is present");
 		}
 
+		[StepDefinition(@"In the Live Help dialog I should see the description text: (.*) at the top of the chat window")]
+		public void ThenIShouldSeeDescriptionText(string expectedText)
+		{
+			Report.IsTrue(new LiveHelp().VerifyDescText(expectedText), "Description text is not present", "Description text is present");
+		}
+
 		[StepDefinition(@"In the Live Help dialog I should see the following text in the message area: (.*)")]
 		public void ThenIShouldSeeTheFollowingTextInTheMessageArea(string message)
 		{

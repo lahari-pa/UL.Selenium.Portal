@@ -3262,6 +3262,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductPage.CheckTextInForumulationBatteriesPage(), "The text in the Formulation > Batteries page displayed the incorrect text", "The text in the Formulation > Batteries page displayed the correct text");
 		}
 
+		[StepDefinition(@"In the Optional Reports and Documents Available for Purchase page, the footer text contains: (.*)")]
+		public void InTheOptionalReportsAndDocumentsPageFooterTextContains(string expectedText)
+		{
+			Report.IsTrue(new NewProduct().ConfirmOptionalReportsFooterContains(expectedText), "Failed to find the text", "The text was found");
+
+		}
+
+
+
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

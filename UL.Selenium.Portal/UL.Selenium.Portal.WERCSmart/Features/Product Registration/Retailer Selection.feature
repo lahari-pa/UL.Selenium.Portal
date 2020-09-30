@@ -340,6 +340,9 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 |           | Potassium hydroxide | 20.5    | false               |            | false       |
 |           | Zinc chloride       | 9.5     | false               |            | false       |
 |           | Aqua                | 70      | false               |            | false       |
+Given I should see the Formulation > Batteries Page
+Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+Given I click continue
 Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer                                                 |
@@ -351,4 +354,4 @@ Then I confirm the following retailers are showing in the Retailer page
 		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 		| Family Dollar                                            |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
-#
+
