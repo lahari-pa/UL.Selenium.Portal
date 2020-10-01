@@ -254,7 +254,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							"Failed to set supplier", "Successfully set supplier", false, false);
 						break;
 					case "User":
-						Report.IsTrue(thisProductSearch.EnterUser(value),
+						string user = value;
+						if (UL.Automation.Reporting.SpecFlow.Classes.Context.Contains(value))
+						{
+							user = UL.Automation.Reporting.SpecFlow.Classes.Context.GetFromContext(value).ToString();
+						}
+						Report.IsTrue(thisProductSearch.EnterUser(user),
 							"Failed to set user", "Successfully set user", false, false);
 						break;
 					case "Reviewer":
@@ -993,6 +998,92 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to select subject: " + subject, "Selected: " + subject);
 		}
 
+		[StepDefinition(@"In the Reject Submission dialog I Select Subject: (.*)")]
+		public void GivenInTheRejectSubmissionDialogISelectSubject(string subject)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+			Report.IsTrue(thisStudioSHAManagerProductRejectSubmission.SelectSubject(subject),
+				"Failed to select subject: " + subject, "Selected: " + subject);
+		}
+
+		[StepDefinition(@"In the Reject Submission dialog in the Subject field I should see: (.*)")]
+		public void GivenInTheRejectSubmissionDialogInTheSupplierSubjectIShouldSee(string shouldSee)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+
+			string actualMessage = thisStudioSHAManagerProductRejectSubmission.GetSupplierMessage();
+			Report.Screenshot();
+
+			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
+
+			RegexOptions options = RegexOptions.None;
+			var regex = new Regex("[ ]{2,}", options);
+			actualMessage = regex.Replace(actualMessage, " ");
+
+			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
+						" expected message length is: " + shouldSee.Trim().Length);
+			if (actualMessage.Trim() != shouldSee.Trim())
+			{
+				var builder = new StringBuilder();
+				char[] ar1 = actualMessage.ToArray();
+				for (int i = 0; i < ar1.Length; i++)
+				{
+					if (actualMessage.Length > i + 1 && ar1[i].Equals(shouldSee[i]))
+					{
+						builder.Append(ar1[i]);
+					}
+					else
+					{
+						Report.Info("Failed on actual is: " + ar1[i] + " and expected is: " + shouldSee[i]);
+						break;
+					}
+				}
+
+				Report.Info("Matched up to " + builder);
+				Report.IsTrue(actualMessage.Trim() == shouldSee.Trim(),
+					"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			}
+		}
+
+		[StepDefinition(@"In the Reject Submission dialog in the Supplier Message field I should see: (.*)")]
+		public void GivenInTheRejectSubmissionDialogInTheSupplierMessageFieldIShouldSee(string shouldSee)
+		{
+			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
+
+			string actualMessage = thisStudioSHAManagerProductRejectSubmission.GetSupplierMessage();
+			Report.Screenshot();
+
+			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
+
+			RegexOptions options = RegexOptions.None;
+			var regex = new Regex("[ ]{2,}", options);
+			actualMessage = regex.Replace(actualMessage, " ");
+
+			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
+						" expected message length is: " + shouldSee.Trim().Length);
+			if (actualMessage.Trim() != shouldSee.Trim())
+			{
+				var builder = new StringBuilder();
+				char[] ar1 = actualMessage.ToArray();
+				for (int i = 0; i < ar1.Length; i++)
+				{
+					if (actualMessage.Length > i + 1 && ar1[i].Equals(shouldSee[i]))
+					{
+						builder.Append(ar1[i]);
+					}
+					else
+					{
+						Report.Info("Failed on actual is: " + ar1[i] + " and expected is: " + shouldSee[i]);
+						break;
+					}
+				}
+
+				Report.Info("Matched up to " + builder);
+				Report.IsTrue(actualMessage.Trim() == shouldSee.Trim(),
+					"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			}
+		}
+
 		[StepDefinition(@"In SHA Manager I select the first product")]
 		public void GivenInSHAManagerISelectTheProduct()
 		{
@@ -1108,6 +1199,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
 
+		[StepDefinition(@"In the Suspended dialog below the Supplier Message field I see the following text in red: (.*)")]
+		public void GivenInTheSuspendedDialogBelowTheSupplierMessageFieldIEnterTheFollowingTextInRed(string textToAdd)
+		{
+			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.CheckForRedTextBelowSupplierMessage(textToAdd),
+				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
+		}
 
 		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I should see: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIShouldSee(string shouldSee)

@@ -1174,6 +1174,7 @@ And I confirm the excel file saved as UPCs to Retailer via Item Sync can be open
 Given I click Close in the Report Download popup
 
 
+@ScenarioId:10349
 Scenario: [146172] UPCs to Retailer via Item Sync - Excel Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
