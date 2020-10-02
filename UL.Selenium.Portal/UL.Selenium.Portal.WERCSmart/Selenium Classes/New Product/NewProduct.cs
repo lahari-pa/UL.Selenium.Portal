@@ -2915,6 +2915,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			var columnHeadings = tableElement.FindElements(By.XPath(".//thead//th"), 2).ToList();
 			int getIndex;
 			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Use"), 2);
+			List<string> testlist = new List<string>();
+			foreach(var thing in columnHeadings)
+			{
+				testlist.Add(thing.Text);
+			}
+
+
 			// If the returned index for any column name is -1, we return a null string for that property.
 			string useInd = getIndex == -1 ? null : (getIndex + 1).ToString();
 			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "VOC Compliance Limit"), 2);

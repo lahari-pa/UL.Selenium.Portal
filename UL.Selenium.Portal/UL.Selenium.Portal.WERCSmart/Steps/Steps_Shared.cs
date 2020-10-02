@@ -4448,6 +4448,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string use)
 		{
 			List<VocLimitsWithUnits> LimitsTable = new NewProduct().GetDisplayedVocLimitsWithUnits();
+
 			var regulationOtcLimit = LimitsTable.Where(x => x.Regulation.Trim() == "OTC Model rule limit").ToList();
 			var regulationCarbLimit = LimitsTable.Where(x => x.Regulation == "CARB limit").ToList();
 			Report.IsTrue(regulationOtcLimit.Count == 1,

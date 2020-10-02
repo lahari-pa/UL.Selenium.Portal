@@ -102,6 +102,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//a[@data-bind='click: next']"), 2).TryClick();
 		}
 
+		public bool ClickHome()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[@class='btn btn-success btn-lg']"), 2).TryClick();
+		}
+
 		public bool SelectProducts_ClickTheFirstProductCheckbox()
 		{
 			var productRows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2).ToList();
