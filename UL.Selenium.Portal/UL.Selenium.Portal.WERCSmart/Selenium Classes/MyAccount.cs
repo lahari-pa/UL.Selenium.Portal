@@ -1009,21 +1009,51 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			List<string> IssueDateList = new List<string>();
 			List<string> ExpireDateList = new List<string>();
 
+			bool issueDateFilled;
+			bool expireDateFilled;
+
 			foreach (TableRow row in table.Rows)
 			{
+
 				StewardshipList.Add(row["Stewardship"]);
-				IssueDateList.Add(row["Issue Date"]);
+
+			    issueDateFilled = false;
+				expireDateFilled = false;
+
+				if (row["Issue Date"] == "Today")
+				{
+					var input = DateTime.Now.ToString("yyyy-MM-dd");
+					IssueDateList.Add(input);
+					issueDateFilled = true;
+				}
+				else if (row["Issue Date"] == "Tomorrow")
+				{
+					var input = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+					IssueDateList.Add(input);
+					issueDateFilled = true;
+				}
+
+
 				if (row["Expire Date"] == "Today")
 				{
 					var input = DateTime.Now.ToString("yyyy-MM-dd");
 					ExpireDateList.Add(input);
+					expireDateFilled = true;
 				}
 				else if (row["Expire Date"] == "Tomorrow")
 				{
 					var input = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
 					ExpireDateList.Add(input);
+					expireDateFilled = true;
 				}
-				else
+
+
+				if (!issueDateFilled)
+				{
+					IssueDateList.Add(row["Issue Date"]);
+				}
+
+				if (!expireDateFilled)
 				{
 					ExpireDateList.Add(row["Expire Date"]);
 				}

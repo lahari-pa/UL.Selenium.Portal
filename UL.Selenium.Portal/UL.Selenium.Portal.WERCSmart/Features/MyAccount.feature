@@ -578,7 +578,7 @@ Given I add following stewardship information
 | British Columbia | BC-1-1      |
 | Saskatchewan     | SA-1-1      |
 Then I save Stewardship Numbers information
-Then I click on the 'Edit' button in Company information in the Stewardship Numbers section
+Given In Stewardship table click edit
 Then I fill in Stweardship Numbers information
 | Stewardship | Issue Date | Expire Date |
 | BC-1-1      | Today      | Tomorrow    |

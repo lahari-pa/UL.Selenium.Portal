@@ -2812,14 +2812,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
-
-		[StepDefinition(@"I confirm the following section: (.*) has the following value: (.*) in the Summary Page")]
-		public void ThenIConfirmTheFollowingSectionHasTheFollowingValueInTheSummaryPage(string section, string value)
-		{
-			MoreFilters moreFiltersObject = new MoreFilters();
-			Report.IsTrue(moreFiltersObject.ConfirmSectionHasFollowingValueInSummaryPage(section, value), "Failed to find the following value: " + value + " in the following section: " + section, "Successfully found the following value: " + value + " in the following section: " + section);
-		}
-
-
 	}
 }
