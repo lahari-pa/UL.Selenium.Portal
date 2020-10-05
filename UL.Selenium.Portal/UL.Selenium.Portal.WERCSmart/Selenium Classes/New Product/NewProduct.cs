@@ -2914,22 +2914,85 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			// Fetch the indices for each column from the headings by name.
 			var columnHeadings = tableElement.FindElements(By.XPath(".//thead//th"), 2).ToList();
 			int getIndex;
-			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Use"), 2);
-			List<string> testlist = new List<string>();
-			foreach(var thing in columnHeadings)
+			List<string> stringList = columnHeadings.Select(x => x.Text).ToList();
+
+			int findIndex;
+			int currentPos;
+
+			findIndex = -1;
+			currentPos = 0;
+			foreach(var item in stringList)
 			{
-				testlist.Add(thing.Text);
+				if(item=="Use")
+				{
+					findIndex = currentPos;
+					break;
+				}
+				currentPos++;
 			}
+
+			string useInd = findIndex == -1 ? null : (findIndex + 1).ToString();
+
+			findIndex = -1;
+			currentPos = 0;
+			foreach (var item in stringList)
+			{
+				if (item == "VOC Compliance Limit")
+				{
+					findIndex = currentPos;
+					break;
+				}
+				currentPos++;
+			}
+
+			string complianceInd = findIndex == -1 ? null : (findIndex + 1).ToString();
+
+
+			findIndex = -1;
+			currentPos = 0;
+			foreach (var item in stringList)
+			{
+				if (item == "Units")
+				{
+					findIndex = currentPos;
+					break;
+				}
+				currentPos++;
+			}
+
+			string unitsInd = findIndex == -1 ? null : (findIndex + 1).ToString();
+
+			findIndex = -1;
+			currentPos = 0;
+			foreach (var item in stringList)
+			{
+				if (item == "Regulation")
+				{
+					findIndex = currentPos;
+					break;
+				}
+				currentPos++;
+			}
+
+			string regulationInd = findIndex == -1 ? null : (findIndex + 1).ToString();
+
+
+
+
+
+			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Use"), 2);
+		
 
 
 			// If the returned index for any column name is -1, we return a null string for that property.
-			string useInd = getIndex == -1 ? null : (getIndex + 1).ToString();
-			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "VOC Compliance Limit"), 2);
-			string complianceInd = getIndex == -1 ? null : (getIndex + 1).ToString();
-			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Units"), 2);
-			string unitsInd = getIndex == -1 ? null : (getIndex + 1).ToString();
-			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Regulation"), 2);
-			string regulationInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+
+			//string useInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "VOC Compliance Limit"), 2);
+			//string complianceInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Units"), 2);
+			//string unitsInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Regulation"), 2);
+			//string regulationInd = getIndex == -1 ? null : (getIndex + 1).ToString();
 			foreach (IWebElement row in rows)
 			{
 				string use = useInd == null ? null : row.FindElement(By.XPath(".//td[" + useInd + "]"), 2).GetValue();

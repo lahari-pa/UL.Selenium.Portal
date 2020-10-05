@@ -69,9 +69,9 @@ Scenario: [86258] Edit UPC - Product SOLD = Canada only, PL = No, Retailer = Can
 Scenario: [86259] Edit UPC - Product SOLD = US & Canada, PL = Yes, Retailer Not Canadian Tire, package type is not required
 	Given I generate a random UPC number and save as: UPC86259
 	Given I generate a random UPC number and save as: UPC862591
-	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
-	Given I create a Chalk product and take to completed using Test Case 86114 and save as: TestCase86259
-	Given I navigate to the landing page
+	#Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
+	#Given I create a Chalk product and take to completed using Test Case 86114 and save as: TestCase86259
+	#Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: CanadaHasPackandPartialStewardship
 	Then the WERCSmart homepage should load
 	Given I search for the product saved as: TestCase86259
