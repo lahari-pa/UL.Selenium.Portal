@@ -1729,7 +1729,22 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Then I delete the file saved as savedas73949PDF
 	And I Click Cancel on the Document List window pop up
 
+	Scenario: [KITTESTENTRY] Kit Id select issue debug
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
+	Then I save the product ID: 1827869 to a context under type 'ProductInformation' as: Kit1
+	Then I save the product ID: 1827913 to a context under type 'ProductInformation' as: Kit2
+
+	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Care kit
+	Then I save the product information as: TestCase63521
+	Given I call Shared Step 63460 (Additional Product Information - SOLD = US, No(PL), No(GNFR) only shown (mainly kits) Happy Path)
+	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	And I should see the Create the Kit Page
+	Given In the Create the kit page I search for and select: saved as Kit1
+	Given In the Create the kit page I search for and select: saved as Kit2
+	Then in the Create the Kit page I click Continue
+	And I should see the Transportation Details 1 Page
 
 
 

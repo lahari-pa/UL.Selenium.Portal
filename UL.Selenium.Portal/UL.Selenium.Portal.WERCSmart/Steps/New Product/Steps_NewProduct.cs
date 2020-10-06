@@ -1922,15 +1922,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (productToAdd.ToLower().Contains("saved as"))
 			{
-				var productToAddPI = (ProductInformation)Context
-					.GetFromContext(productToAdd.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+				var productToAddPI = (ProductInformation)Context.GetFromContext(productToAdd.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+				
 
+				Report.Info($"Attempting to add by ID");
 				Report.IsTrue(new NewProduct().AddItemToKitByID(productToAddPI),
 					"Failed to add product: " + productToAddPI.Id + " to kit.",
 					"Successfully added product: " + productToAddPI.Id + " to kit.");
 			}
 			else
 			{
+				Report.Info($"Attempting to add item to Kit.");
 				Report.IsTrue(new NewProduct().AddItemToKit(productToAdd),
 					"Failed to add product: " + productToAdd + " to kit.",
 					"Successfully added product: " + productToAdd + " to kit.");

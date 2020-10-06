@@ -22,6 +22,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Chrome;
 
+
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	public class NewProduct : SeleniumBaseObject
@@ -249,7 +250,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool WaitForTab(Tab tab, int secondsToWait = 30)
 		{
 			string tabName = MapTabs[tab];
-			return this.ProgressBar?.WaitUntilElementVisible(By.XPath($".//div[@class= 'prog-step in-progress active' and .//span[contains(text(),'{tabName}')]]"), secondsToWait) != null;
+
+			if (this.ProgressBar?.WaitUntilElementVisible(By.XPath($".//div[@class= 'prog-step in-progress active' and .//span[contains(text(),'{tabName}')]]"), secondsToWait) != null)
+			{
+				return true;
+			}
+			else
+			{
+				return this.ProgressBar?.WaitUntilElementVisible(By.XPath($".//div[@class= 'prog-step active done' and .//span[contains(text(),'{tabName}')]]"), secondsToWait) != null;
+			}
+
+			
+
 		}
 
 		/// <summary>
@@ -2110,20 +2122,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				for (int j = 0; j < 5; j++)
 				{
-
 					IWebElement placeholderEl = this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
-					IWebElement inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
-					IWebElement searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
-
-					if (placeholderEl == null || inputEl == null || searching == null)
+					if(placeholderEl==null)
 					{
+						Report.Info($"placeholderEl was null");
 						return false;
 					}
-					
 					placeholderEl.TryClick();
 					IWebElement MatchedEntry = null;
+					IWebElement inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+					if (inputEl == null)
+					{
+						Report.Info($"inputEl was null");
+						return false;
+					}
 					inputEl.EnterText(product.Id);
-					
+					IWebElement searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					int i = 0;
 					while (searching != null && i < 10)
 					{
