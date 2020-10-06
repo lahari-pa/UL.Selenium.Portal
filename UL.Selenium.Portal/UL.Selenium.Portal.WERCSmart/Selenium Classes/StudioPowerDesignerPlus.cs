@@ -761,6 +761,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool DoesPDSectionExist(string section)
 		{
+			Report.Info($"Looking for the PD+ panel section: {section}");
 			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
 			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue().Contains(section));
 			if (matchingSection == null)

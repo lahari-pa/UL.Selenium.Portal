@@ -413,11 +413,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisApplyRulesPage = new ApplyRulesPage();
 			try
 			{
-				thisApplyRulesPage.Wait_for_load(60);
+				thisApplyRulesPage.Wait_for_load(300);
 			}
 			catch (Exception)
 			{
-				if (SeleniumBrowser.Alert.WaitForAlert(3))
+				if (SeleniumBrowser.Alert.WaitForAlert(300))
 				{
 					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 				}
@@ -428,10 +428,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (button.ToLower() == "apply")
 			{
 				Report.Info("As button was apply, waiting for spinner and alert");
-				Delay.Seconds(30);
-				if (!thisApplyRulesPage.WaitForSpinner(120))
+				Delay.Seconds(60);
+				if (!thisApplyRulesPage.WaitForSpinner(300))
 				{
-					if (SeleniumBrowser.Alert.WaitForAlert(3))
+					if (SeleniumBrowser.Alert.WaitForAlert(300))
 					{
 						SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 					}
@@ -439,7 +439,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						if (!thisApplyRulesPage.WaitForSpinner())
 						{
-							if (SeleniumBrowser.Alert.WaitForAlert(3))
+							if (SeleniumBrowser.Alert.WaitForAlert(120))
 							{
 								SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 							}
@@ -1104,11 +1104,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(string savedAs)
 		{
 			var thispd = new StudioPowerDesignerPlusDesignMode();
-			thispd.Wait_for_load(5);
+			thispd.Wait_for_load(180);
 			thispd.ClickMenuAndSubmenuOptions("Home");
 			Delay.Seconds(3);
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
-			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(120), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 
 			Report.Info("Setting power designer plus options...");
@@ -1121,19 +1121,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
 				"Set action option");
 			Report.Screenshot();
-			Delay.Seconds(1);
+			Delay.Seconds(5);
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
 			thisPowerDesignerPlus.EnterSourceProduct(id);
 			thisPowerDesignerPlus.ClickRefreshButton();
-			Delay.Seconds(1);
+			Delay.Seconds(5);
 			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
 			var selStepsStudio = new Steps_Studio();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
-			Delay.Seconds(10);
-			selStudioPowerDesignerPlus.Wait_for_load(30);			
+			Delay.Seconds(30);
+			selStudioPowerDesignerPlus.Wait_for_load(120);			
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
 			{
