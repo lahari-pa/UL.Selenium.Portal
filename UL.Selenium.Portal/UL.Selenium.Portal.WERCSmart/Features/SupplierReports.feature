@@ -1188,7 +1188,7 @@ Then I select the Request Report button excel file is produced called UPCs to Re
 Given I confirm that an excel file is produced called UPCs to Retailer via Item Sync.zip and save as UPCs to Retailer via Item Sync
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
+And I confirm the zip excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Then I confirm that the excel file saved as: UPCs to Retailer via Item Sync contains the following columns:
 		| Column            |
 		| WPSID             |
@@ -1251,8 +1251,8 @@ Then I select the Request Report button csv file is produced called UPCs to Reta
 Given I confirm that an excel file is produced called UPCs to Retailer via Item Sync.zip and save as UPCs to Retailer via Item Sync
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
-Then I confirm that the excel file saved as: UPCs to Retailer via Item Sync contains the following columns:
+And I confirm the zip csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
+Then I confirm that the CSV file saved as: UPCs to Retailer via Item Sync contains the following columns:
 		| Column            |
 		| WPSID             |
 		| Product Name      |
@@ -1283,8 +1283,8 @@ Then I select the Request Report button csv file is produced called UPC and Reta
 Given I confirm that an excel file is produced called UPC and Retailer (All).zip and save as UPC and Retailer (All)
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as UPC and Retailer (All) can be opened and contains data
-Then I confirm that the excel file saved as: UPC and Retailer (All) contains the following columns:
+And I confirm the zip csv file saved as UPC and Retailer (All) can be opened and contains data
+Then I confirm that the CSV file saved as: UPC and Retailer (All) contains the following columns:
 		| Column            |
 		| WPSID             |
 		| Product Name      |
@@ -1318,8 +1318,8 @@ Then I select the Request Report button csv file is produced called UPC Errors f
 Given I confirm that an excel file is produced called UPC Errors for The Home Depot.zip and save as UPC Errors for The Home Depot
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as UPC Errors for The Home Depot can be opened and contains data
-Then I confirm that the excel file saved as: UPC Errors for The Home Depot contains the following columns:
+And I confirm the zip csv file saved as UPC Errors for The Home Depot can be opened and contains data
+Then I confirm that the CSV file saved as: UPC Errors for The Home Depot contains the following columns:
 		| Column            |
 		| WPSID             |
 		| Product Name      |
@@ -1353,8 +1353,8 @@ Then I select the Request Report button csv file is produced called Kit Registra
 Given I confirm that an excel file is produced called Kit Registrations.zip and save as Kit Registrations
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as Kit Registrations can be opened and contains data
-Then I confirm that the excel file saved as: Kit Registrations contains the following columns:
+And I confirm the zip csv file saved as Kit Registrations can be opened and contains data
+Then I confirm that the CSV file saved as: Kit Registrations contains the following columns:
 		| Column            |
 		| WPSID             |
 		| Product Name      |
@@ -1388,8 +1388,8 @@ Then I select the Request Report button csv file is produced called Kits Contain
 Given I confirm that an excel file is produced called Kits Containing a Registration.zip and save as Kits Containing a Registration
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as Kits Containing a Registration can be opened and contains data
-Then I confirm that the excel file saved as: Kits Containing a Registration contains the following columns:
+And I confirm the zip csv file saved as Kits Containing a Registration can be opened and contains data
+Then I confirm that the CSV file saved as: Kits Containing a Registration contains the following columns:
 		| Column            |
 		| WPSID             |
 		| Product Name      |
@@ -1424,8 +1424,8 @@ Then I select the Request Report button csv file is produced called UPC and Reta
 Given I confirm that an excel file is produced called UPC and Retailer (Single Registration).zip and save as UPC and Retailer (Single Registration)
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the csv file saved as UPC and Retailer (Single Registration) can be opened and contains data
-Then I confirm that the excel file saved as: UPC and Retailer (Single Registration) contains the following columns:
+And I confirm the zip csv file saved as UPC and Retailer (Single Registration) can be opened and contains data
+Then I confirm that the CSV file saved as: UPC and Retailer (Single Registration) contains the following columns:
 		| Column            |
 		| WPSID             |
 		| Product Name      |

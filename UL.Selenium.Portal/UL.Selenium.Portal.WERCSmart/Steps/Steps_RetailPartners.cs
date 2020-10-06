@@ -15,6 +15,7 @@ using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using NPOI.SS.Formula.Functions;
+using System.IO.Compression;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -507,11 +508,80 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the csv file saved as (.*) can be opened and contains data")]
-		public void ThenConfirmTheCSVFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		[StepDefinition(@"I confirm the zip excel file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheZipExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			object File = Context.GetFromContext(savedAs);
+
+			string startPath = @".\downloads";
+			string zipPath = File.ToString();
+			string extractPath = File.ToString();
+			extractPath = extractPath.Replace(".zip", ".xlsx");
+
+			ZipFile.ExtractToDirectory(zipPath, extractPath);
+
+			extractPath = extractPath.Replace(@".xlsx", @".xlsx\" + savedAs + ".xlsx");
+
+			Context.AddToContext(savedAs, extractPath);
+
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + extractPath))
+			{
+				bool Data = false;
+				var ExcelUtils = new ExcelFunctions(extractPath, "Table");
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
+				if (FirstRow != null)
+				{
+					Data = true;
+				}
+				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
+				for (int i = 1; i < ExcelUtils.Excel_GetNoRows(); i++)
+				{
+					List<string> RowData = ExcelUtils.Excel_GetRow(i);
+					Report.Info("Row " + i + " had " + FirstRow[0] + ": " + RowData[0] + " and " + FirstRow[1] + ": " + RowData[1]);
+					Data = true;
+				}
+
+				Report.IsTrue(Data, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+			}
+		}
+
+		[StepDefinition(@"I confirm the csv file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheCSVFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		{
+			Report.Info("Confirm the csv file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var lines = System.IO.File.ReadAllLines(File.ToString());
+
+				if (lines != null)
+				{
+					Report.IsTrue(lines != null, "CSV file contains data");
+				}
+
+				Report.IsTrue(lines != null, "CSV did not contain any product data!", "CSV file contained product data, as expected!");
+			}
+		}
+
+		[StepDefinition(@"I confirm the zip csv file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheZipCSVFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+
+			string startPath = @".\downloads";
+			string zipPath = File.ToString();
+			string extractPath = File.ToString();
+			extractPath = extractPath.Replace(".zip", ".csv");
+
+			ZipFile.ExtractToDirectory(zipPath, extractPath);
+
+			extractPath = extractPath.Replace(@".csv", @".csv\" + savedAs + ".csv");
+
+			Context.AddToContext(savedAs, extractPath);
+
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
 				var lines = System.IO.File.ReadAllLines(File.ToString());
