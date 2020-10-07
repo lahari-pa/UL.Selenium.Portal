@@ -141,7 +141,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	
 
 @ScenarioId:6422
-	Scenario: [122303] UPC Transportation Error - Mode 6 - Scenario 3
+	Scenario: [122302] UPC Transportation Error - Mode 6 - Scenario 3
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
@@ -329,7 +329,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode45S4
 
 @ScenarioId:6415
-	Scenario: [122294] UPC Transportation Error - Mode 4x5 - Scenario 15
+	Scenario: [122295] UPC Transportation Error - Mode 4x5 - Scenario 15
 
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -882,7 +882,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I should see a list style form error with text: UPC failing Transportation Rules. Review your Transport overrides.
 		Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: Mode23S16
 
-	Scenario:  [122293] UPC Transportation Error - Mode 2/3 - 34
+	Scenario:  [122291] UPC Transportation Error - Mode 2/3 - 34
 		#If IATA Hazard Class is 9 and Packing Group is II or III and physical state is liquid and UPC Size > 16.907 oz and DOT is Consumer Commodity at the UPC level then populate UPCTERR with “1”
 		Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 		And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
