@@ -226,6 +226,48 @@ Feature: SpecFlowFeature1
 	As a math idiot
 	I want to be told the sum of two numbers
 
+
+
+
+Scenario: My new scenario
+
+#Given I Submit a new product which has a Case UPC and a regular UPC
+#Given I navigate to the landing page
+Given I call Shared Step (Login to WERCSmart - Premium Account)
+Given I delete the excel file saved as UPC and Retailer (Single Registration)
+# Please do a new thing
+Given I click the My Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: UPC and Retailer (Single Registration)
+Then I enter the following in the WPSID textfield in the My Reports page: 1
+Then I select the first result in the WPSID textfield search results
+Given In the Supplier Reports screen I click on the Download button
+Given I click on close in the Report Download dialog
+Given I confirm that an excel file is produced called UPC and Retailer (Single Registration).xlsx and save as 73082
+Then I confirm that in the excel file saved as: 73082 for the UPC saved as: UPC876851 there is a 'Y' in the Case Pack column and an Individual UPC listed as: UPC87685
+
+
+
+
+Scenario: [147446] WM - Authoring option ONLY available
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Given I generate a random UPC number and save as: UPC147446
+Given I save the product information as: testcase147446
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+#For the below step, say YES to PLP
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 77535 (Retailer Association - Walmart)
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC147446, container type: Plastic Container and size: 2
+# In the Authoring screen, ensure that Authoring is the only option
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: ThisProduct
+
+
+
+
 Scenario: [144185] Suspended - Invalid Retailer Supplier ID Associated with Registration
 
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
