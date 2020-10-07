@@ -584,7 +584,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
-				var lines = System.IO.File.ReadAllLines(File.ToString());
+				var lines = System.IO.File.ReadAllLines(extractPath.ToString());
 
 				if (lines != null)
 				{
