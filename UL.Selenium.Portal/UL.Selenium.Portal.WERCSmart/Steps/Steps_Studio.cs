@@ -1104,10 +1104,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(string savedAs)
 		{
 			var thispd = new StudioPowerDesignerPlusDesignMode();
-			thispd.Wait_for_load(180);
-			thispd.ClickMenuAndSubmenuOptions("Home");
-			Delay.Seconds(3);
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			thispd.Wait_for_load(180);
+			Report.Screenshot();
+			thisPowerDesignerPlus.Wait_for_load(120);
+			Report.Screenshot();
+			thispd.ClickMenuAndSubmenuOptions("Home");
+			Delay.Seconds(10);
+			
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(120), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 

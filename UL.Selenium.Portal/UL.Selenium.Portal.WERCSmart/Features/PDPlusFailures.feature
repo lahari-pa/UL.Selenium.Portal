@@ -1,4 +1,4 @@
-﻿@Shared
+@Shared
 @NewProduct
 @LandingPage
 @Login
@@ -146,6 +146,7 @@ Scenario: [PDPlusFailure] 42196 | Flow 12
 	Given For product saved as: TestCase42196 the status is: Completed
 
 
+@ScenarioId:10361
 Scenario: [PDPlusFailures] 118139 | Product Create and Process to Completed
 
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

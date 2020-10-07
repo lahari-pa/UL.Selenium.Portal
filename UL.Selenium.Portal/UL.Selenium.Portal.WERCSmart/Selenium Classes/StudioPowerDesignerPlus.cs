@@ -296,6 +296,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem = "")
 		{
 			ReadOnlyCollection<IWebElement> listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
+			var itemsFound = listOfMenuItems.Any();
+			Report.Info($"itemsFound was: {itemsFound}");
+			Report.Screenshot();
 			IWebElement matchingMenuItem = listOfMenuItems.FirstOrDefault(x => x.GetValue().Contains(menuItem));
 
 			if (matchingMenuItem == null)
