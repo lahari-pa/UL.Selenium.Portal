@@ -1062,15 +1062,33 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			int k = 0;
 			int textboxesPerRow = 3;
+			bool textEntered = true;
 			for (int i = 0; i < StewardshipList.Count() * 3; i += textboxesPerRow)
 			{
-				Textboxes[i].TryEnterText(StewardshipList[k]);
-				Textboxes[i + 1].TryEnterText(IssueDateList[k]);
-				Textboxes[i + 2].TryEnterText(ExpireDateList[k]);
+
+				if (Textboxes[i].TryEnterText(StewardshipList[k]) == false)
+				{
+					Report.Info($"Failed to enter Stewardship Info into row");
+					textEntered = false;
+				}
+				if (Textboxes[i + 1].TryEnterText(IssueDateList[k]) == false)
+				{
+					Report.Info($"Failed to enter Issue Date into row");
+					textEntered = false;
+
+				}
+				if (Textboxes[i + 2].TryEnterText(ExpireDateList[k]) == false)
+				{
+					Report.Info($"Failed to enter Expire Data into row");
+					textEntered = false;
+
+				}
+
 				k++;
+
 			}
 
-			return true;
+			return textEntered;
 		}
 
 		public bool ClickSaveButtonForStewardshipNumbers()
@@ -1540,6 +1558,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool StewardshipEdit_click()
 		{
+			GeneralUtilities.Wait_for_load_finish();
 			IWebElement StwdshipEdit = this.containerElement.FindElement(By.Id("edit-stewardship"), 2);
 			Report.Info("Attempting to Click Edit Stewardship Button");
 

@@ -908,7 +908,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(supplierReportsObject.SelectZipReportCheckbox(), "Failed to select Zip Report Checkbox", "Successfully selected Zip Report Checkbox");
 		}
 
-		[StepDefinition(@"I select the Request Report button (excel|csv) file is produced called (.*) and save as (.*)")]
+		[StepDefinition(@"I select the Request Report button (excel|csv|zip) file is produced called (.*) and save as (.*)")]
 		public void ThenISelectTheRequestReportButton(string filetype, string file, string savedAs)
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();

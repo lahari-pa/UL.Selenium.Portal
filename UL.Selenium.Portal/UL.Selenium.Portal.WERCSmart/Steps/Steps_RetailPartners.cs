@@ -460,7 +460,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that an (excel|html) file is produced called (.*) and save as (.*)")]
+		[StepDefinition(@"I confirm that an (excel|html|zip) file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string filetype, string file, string savedAs)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Confirm Excel File is downloaded with name: " + file);
@@ -514,10 +514,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			object File = Context.GetFromContext(savedAs);
 
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(File.ToString()), "", "");
+
 			string startPath = @".\downloads";
 			string zipPath = File.ToString();
 			string extractPath = File.ToString();
 			extractPath = extractPath.Replace(".zip", ".xlsx");
+
+			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(extractPath), "", "");
 
 			ZipFile.ExtractToDirectory(zipPath, extractPath);
 
@@ -554,14 +558,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			object File = Context.GetFromContext(savedAs);
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
-				var lines = System.IO.File.ReadAllLines(File.ToString());
 
-				if (lines != null)
+				string s = File.ToString();
+				string[] arr = s.Split(new string[] { "." },
+								  StringSplitOptions.None);
+				if (Report.IsTrue(arr[arr.Length - 1] == "csv", "File was not a csv type file", "File was a csv type file"))
 				{
-					Report.IsTrue(lines != null, "CSV file contains data");
-				}
+					var lines = System.IO.File.ReadAllLines(File.ToString());
 
-				Report.IsTrue(lines != null, "CSV did not contain any product data!", "CSV file contained product data, as expected!");
+					if (lines != null)
+					{
+						Report.IsTrue(lines != null, "CSV file contains data");
+					}
+
+					Report.IsTrue(lines != null, "CSV did not contain any product data!", "CSV file contained product data, as expected!");
+				}
 			}
 		}
 
@@ -1087,17 +1098,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				string linesStr = lines[0];
-
+				bool failedToFindData = false;
 				foreach (TableRow row in table.Rows)
 				{
 					if ((!linesStr.Contains(row[@"Column"] + ",")) && (!linesStr.Contains("," + row[@"Column"])))
 					{
 						Report.Failure("The following data was not found: " + row[@"Column"]);
-						return;
+						failedToFindData = true;
 					}
 				}
-
-				Report.Success("All columns in table have been found"); 
+				if (!failedToFindData)
+				{
+					Report.Success("All columns in table have been found");
+				}
 				
 			}
 
