@@ -43,6 +43,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool VerifyDescText(string expectedDesc)
 		{
 			IWebElement elem = this.containerElement.FindElement(By.XPath(".//p[contains(@class,'channel-desc')]"), 2);
+			if(elem == null)
+			{
+				Report.Info($"Description element was found to be null");
+				return false;
+			}
 			var textFound = elem.Text;
 			return textFound == expectedDesc;
 		}
