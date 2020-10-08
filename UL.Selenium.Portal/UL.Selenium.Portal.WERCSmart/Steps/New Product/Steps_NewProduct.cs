@@ -3262,6 +3262,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductPage.CheckTextInForumulationBatteriesPage(), "The text in the Formulation > Batteries page displayed the incorrect text", "The text in the Formulation > Batteries page displayed the correct text");
 		}
 
+		[StepDefinition(@"In the Optional Reports and Documents Available for Purchase page, the footer text contains: (.*)")]
+		public void InTheOptionalReportsAndDocumentsPageFooterTextContains(string expectedText)
+		{
+			Report.IsTrue(new NewProduct().ConfirmOptionalReportsFooterContains(expectedText), "Failed to find the text", "The text was found");
+
+		}
+
+		[StepDefinition(@"In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet \(SDS\)' I tick confirm")]
+		public void InTheRegulatoryDocumentsToProvideScreenIfTheConfirmSDSQuestionIsSeenThenGrant()
+		{
+
+			var MyStepsNewProduct = new StepsNewProduct();
+			var newProdClass = new NewProduct();
+
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				Report.StartStep(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+			}
+		}
+
+
+
 	}
 
 	//public class UPCWarning : SeleniumBaseObject

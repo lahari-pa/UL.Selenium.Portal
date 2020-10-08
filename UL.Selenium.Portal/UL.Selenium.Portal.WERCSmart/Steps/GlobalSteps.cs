@@ -286,6 +286,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;
+
+
+		
+
 			while ((!selHomepage.WaitForContainerToBeVisible(2) || !selTopMenuBar.Wait_for_load(3)) && i < 4)
 			{
 				Report.Info("========== Login Attempt: " + i + " ==========");
@@ -301,6 +305,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Clicking login");
 				Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
 				selHomepage = new Homepage();
+
+				//wait 5 seconds max for the consent page/handle
+				new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
+
 				if (selHomepage.WaitForContainerToBeVisible())
 				{
 					Report.Success("Successfully logged in!");
@@ -395,6 +403,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			selHomepage = new Homepage();
 			// check for home page
+
+			new StepsSignup().IfHomePageDoesNotLoadAcceptTermsOfUse();
+
 			if (selHomepage.WaitForContainerToBeVisible())
 			{
 				Report.Success("Successfully logged in!");
