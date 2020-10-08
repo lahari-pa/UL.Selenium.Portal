@@ -721,7 +721,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Stewardship_Only", "Welcome1!", "1425 Kingsway", "Address2", "Latham", "New York", "12110", "QA_Partial_Stewardship_Only", "123-456-7889",
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_Partial_Stewardship_Only", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_Partial_Stewardship_Only", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
@@ -746,7 +746,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_PremiumSubscription", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_PremiumSubscription", "123-456-7889",
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_PremiumSubscription", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_PremiumSubscription", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 
 			var myHome = new StepsHomepage();
