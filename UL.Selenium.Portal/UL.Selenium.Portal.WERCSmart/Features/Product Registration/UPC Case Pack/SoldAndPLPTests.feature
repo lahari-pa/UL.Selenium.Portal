@@ -131,7 +131,8 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
@@ -139,7 +140,8 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 		| Retailer |
 		| Amazon   |
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87969, container type: <first> and size: 2 and Quantity: 4 and Transportation option: <first>
-	Given I call Shared Step 104662 - Regulatory Documents to Provide - Lithium Batteries - US and Canada - Request authoring for both
+	Then I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
+	#Given I call Shared Step 104662 - Regulatory Documents to Provide - Lithium Batteries - US and Canada - Request authoring for both
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
@@ -179,14 +181,14 @@ Scenario: [88198] SOLD = Canada Only, PL = Yes, Create Electronic (Answering mac
 	Then I save the product information as: TestCase88198
 	#And I call Shared Step 69687 (Additional Product Information - US, No(PL))
 	#Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))	
-	Then In the Additional Product Information Page, I ensure that for 'countries the product may be sold in' only Canada is selected
+	#Then In the Additional Product Information Page, I ensure that for 'countries the product may be sold in' only Canada is selected
 	And I set the Product is shipped directly by supplier to the consumer field to: No
 	And I set the Product is a Retailer's Private Label or Brand field to: No
 	And in the Additional Product Information page I click Continue
 
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-
-
+	#Updated to use 57911 instead of 57503 to match test case, now failing?
+	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon

@@ -2542,6 +2542,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		//[StepDefinition(@"In the Retail Partners page, I close the 'What are the Data Usage Tiers' popup")]
+		//public void InTheRetailPartnersPageICloseTheWhatAreTheDataUsageTiersPopup()
+		//{
+		//	Report.IsTrue(new RetailPartnersDetails().)
+		//}
+
 
 	}
 
