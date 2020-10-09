@@ -12,6 +12,7 @@
 @run_Flow14
 Feature: Flow 14
 
+@tfs_design
 @ScenarioId:705
 Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001240
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -22,7 +23,7 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Sanitizer Wipes for Use on Domesticated Animals
 	Then I save the product information as: TestCase58736
 	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-	Given I call Shared Step 145000 (Enter Physical Property - Solid - Without Water Solubility Description)
+	Given I call Shared Step 73223 (Enter Physical Property - Solid - Without Secondary Physical State)
 	Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |

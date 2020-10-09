@@ -1696,6 +1696,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool CheckTheDocumentPurposeTypeDropdown(string dropDownOption)
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath("//select[@id='docType']//option"), 2);
+			return true;
+		}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject

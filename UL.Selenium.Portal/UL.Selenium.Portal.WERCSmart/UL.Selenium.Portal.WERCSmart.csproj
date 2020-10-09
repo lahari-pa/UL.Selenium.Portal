@@ -601,7 +601,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-    <None Include="Philip\SpecFlowFeature1.feature" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Selenium Classes\New Product\Review and Submit\" />

@@ -1338,6 +1338,7 @@ Given I click Close in the Report Download popup
 
 
 
+@ScenarioId:10367
 Scenario: [144240] Kit Registrations - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -1373,6 +1374,7 @@ Given I click Close in the Report Download popup
 
 
 
+@ScenarioId:10368
 Scenario: [144259] Kits Containing a Registration - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -1409,6 +1411,7 @@ Given I click Close in the Report Download popup
 
 
 
+@ScenarioId:10365
 Scenario: [144262] UPC and Retailer (Single Registration) - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -1440,3 +1443,33 @@ Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPC and Retailer (Single Registration) can be opened and contains data
 Given I click Close in the Report Download popup
+
+
+
+
+
+
+
+
+
+
+
+
+
+@tfs_design
+@philtest
+Scenario: My new scenario
+
+Given I Submit a new product which has a Case UPC and a regular UPC
+Given I navigate to the landing page
+Given I call Shared Step (Login to WERCSmart - Premium Account)
+Given I delete the excel file saved as 73082
+# Please do a new thing
+Given I click the My Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: UPC and Retailer (Single Registration)
+Then I enter the following in the WPSID textfield in the My Reports page: 1
+Then I select the first result in the WPSID textfield search results
+Given In the Supplier Reports screen I click on the Download button
+Given I click on close in the Report Download dialog
+Given I confirm that an excel file is produced called UPC and Retailer (Single Registration).xlsx and save as 73082
+Then I confirm that in the excel file saved as: 73082 for the UPC saved as: UPC876851 there is a 'Y' in the Case Pack column and an Individual UPC listed as: UPC87685

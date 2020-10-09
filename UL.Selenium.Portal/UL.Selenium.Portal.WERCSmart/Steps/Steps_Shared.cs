@@ -1564,6 +1564,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 73223 \(Enter Physical Property - Solid - Without Secondary Physical State\)")]
+		public void GivenICallSharedEnterPhysicalProperty_Solid_WithoutSecondaryPhysicalState()
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyNewProduct = new StepsNewProduct();
+			Report.StartStep("Primary Physical State should be showing the value: Solid");
+			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
+			List<string> showing = new NewProduct().SelectedOptionsForSection("Primary Physical State");
+			if (!showing.Contains("Solid"))
+			{
+				Report.Failure("Primary Physical State was not set to Solid by default");
+			}
+
+			Report.StartStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+
+			Report.StartStep(
+				"I set the Select the best Water Solubility description option to: Insoluble");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Select the best Water Solubility description",
+				"Insoluble");
+
+			Report.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
 		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\) with the following inputs:")]
 		public void GivenICallSharedEnterPhysicalProperty_SolidParameters(Table table)
 		{
@@ -4713,8 +4742,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 			Report.IsTrue(Found, "The Top row in the Products table did not match the search ID", "The Top row in products table matched the search ID");
-
-
 
 		}
 

@@ -4169,6 +4169,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSHAManagerObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
 		}
 
+		[StepDefinition(@"I confirm the Document Purpose Type dropdown shows: (.*)")]
+		public void GivenIConfirmTheDocumentPurposeTypeDropdownShowsAIS(string dropDownOption)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+			Report.IsTrue(studioSHAManagerObject.CheckTheDocumentPurposeTypeDropdown(dropDownOption), "The following option was not displayed: " + dropDownOption, "The following option was displayed: " + dropDownOption);
+		}
 
 	}
 
