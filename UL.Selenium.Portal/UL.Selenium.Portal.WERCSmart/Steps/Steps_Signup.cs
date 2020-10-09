@@ -787,6 +787,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"If Homepage does not load, accept terms of use")]
+		public void IfHomePageDoesNotLoadAcceptTermsOfUse()
+		{
+			var selHomepage = new Homepage();
+			Report.Info($"Starting, wait for the homepage to appear");
+			if(selHomepage.WaitForContainerToBeVisible(30))
+			{
+				Report.Info($"The homepage was showing");
+				return;
+
+			}
+			try
+			{
+				var myTermsOfUse = new TermsOfUse();
+				if (myTermsOfUse.Wait_for_load(10))
+				{
+					myTermsOfUse.Accept();
+				}
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I enter the following into the Security Questions window for user saved as: (.*)")]
 		public void EnterTheFollowingIntoSecurityQuestions(string savedAs)
 		{

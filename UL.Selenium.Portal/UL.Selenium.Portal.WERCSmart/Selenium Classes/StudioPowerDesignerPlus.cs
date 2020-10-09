@@ -1162,16 +1162,60 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			}
 		}
+		public IWebElement GetCheckBoxEl(string name)
+		{
+			ReadOnlyCollection<IWebElement> checkboxes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='checkbox']"));
+			Report.Info($"Entering Switch Statement");
+			IWebElement matchingElement;
+			switch (name.ToLower())
+			{
+				case "authorized":
+					Report.Info($"case was 'authorized");
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "ucProdAuth_chkAuth");
+					Report.Info($"authorized element set");
+					break;
+				case "apply":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "ucProdAuth_chkAllSubformatAuthorize");
+					break;
+				case "queue":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkQueue");
+					break;
+				case "clear":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkClearRFR");
+					break;
+				case "do not unauthorize":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkDoNotUnauthorize");
+					break;
+				case "display revision marking":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkRevMarking");
+					break;
+				case "suppress":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkShowTradeSecInfo");
+					break;
+				case "hide alias":
+					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "chkHideAlias");
+					break;
+				default:
+					Report.Error("Please provide a valid checkbox option. You sent: " + name);
+					return null;
+			}
+
+			return matchingElement;
+
+		}
 
 		public bool SetCheckBox(string name, bool setChecked)
 		{
 			Report.Info("Beginning set checkbox: " + name);
 			ReadOnlyCollection<IWebElement> checkboxes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='checkbox']"));
+			Report.Info($"Entering Switch Statement");
 			IWebElement matchingElement;
 			switch (name.ToLower())
 			{
 				case "authorized":
+					Report.Info($"case was 'authorized");
 					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "ucProdAuth_chkAuth");
+					Report.Info($"authorized element set");
 					break;
 				case "apply":
 					matchingElement = checkboxes.FirstOrDefault(x => x.GetAttribute("id") == "ucProdAuth_chkAllSubformatAuthorize");
@@ -1203,7 +1247,64 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
+					Report.Info("'Checking' element");
 					matchingElement.Check(setChecked);
+					//Code Below is used to help debug 42196, issue getting the authroized checkbox the be checked (remove once passing)
+					if (name == "authorized")
+					{
+						Delay.Seconds(10);
+						Report.Info($"starting element checked check...");
+						matchingElement = this.GetCheckBoxEl(name);
+						var chckAtr = matchingElement.GetAttribute("checked");
+
+						if(chckAtr.IsNullOrEmpty())
+						{
+							matchingElement = this.GetCheckBoxEl(name);
+							matchingElement.Check(setChecked);
+
+							Delay.Seconds(10);
+							matchingElement = this.GetCheckBoxEl(name);
+							chckAtr = matchingElement.GetAttribute("checked");
+							if (chckAtr.IsNullOrEmpty())
+							{
+								Report.Info($"The element was not checked correctly");
+								return false;
+
+							}
+
+							else
+							{
+								if (chckAtr == "true")
+								{
+
+									Report.Info($"element attribute was: {chckAtr} = indicates the box is checked");
+									return true;
+								}
+								else
+								{
+									Report.Info($"element attribute was: {chckAtr} = indicates the box was not checked");
+									return false;
+								}
+							}
+
+						}
+						else
+						{
+							if(chckAtr == "true")
+							{
+								
+								Report.Info($"element attribute was: {chckAtr} = indicates the box is checked");
+								return true;
+
+							}
+							else
+							{
+								Report.Info($"element attribute was: {chckAtr} = indicates the box was not checked");
+								return false;
+
+							}
+						}
+					}						
 					return true;
 				}
 				catch (Exception e)

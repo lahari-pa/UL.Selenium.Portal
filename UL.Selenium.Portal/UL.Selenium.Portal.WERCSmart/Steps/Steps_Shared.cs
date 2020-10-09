@@ -1091,14 +1091,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 			Delay.Seconds(2);
 
-			//if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
-			//{
-			//	//Should this show on this page? this step is for the additional docs page? Any examples?
-			//	Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
-			//	MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
-			//	//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
-			//}
-		
+			//60723 uses this on the reulatory docs to provide screen, but also on the additional docs to provide screen in 57950
+			//If keep sds confirm step in does this brake the step if used on the other screen?
+
+			if (newProdClass.CheckBoxOptionExists("I confirm I am providing the most current Safety Data Sheet"))
+			{
+				//Should this show on this page? this step is for the additional docs page? Any examples?
+				Report.StartStep(@"I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration'");
+				MyStepsNewProduct.SelectConfirmRegulatoryDocumentsConfirmationQuestion();
+				//If this is found to be needed on this page ^ create a copy of the above method for the additional docs page.
+			}
+
 			Delay.Seconds(2);
 			Report.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -2263,7 +2266,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
-		{
+		 {
 			ReportSettings.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
 			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
@@ -6146,8 +6149,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisMyIngredients = new Steps_MyIngredients();
 			thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
 			//thisMyIngredients.InTheFormulationThirdPartySCreenISetDeclinedTo("true");
-			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Declined");
-			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 4.1 Derived Results", "Declined");
+			//thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2 Data Uses", "Declined");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetFieldTo("Consent to Tier 2.1, 2.2, 4.2 Data Uses", "Declined");
 			var thisStepsNewProduct = new StepsNewProduct();
 			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
 		}
@@ -8504,6 +8507,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I click on the search button");
 			thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+			new StudioSupplierManager().WaitForSuppliersToLoad();
 
 			Report.StartStep("I Make a note of the Supplier Name");
 			thisStepsSha.InSupplierManagerPopupISaveFirstSupplierNameAs(savedAs);
@@ -9704,8 +9708,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And I Un-check the United States check box for the "Select countries the product may be sold in" question
 			//List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			//MyStepsNewProduct.SetTheSectionOptionTo("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
 				"No");

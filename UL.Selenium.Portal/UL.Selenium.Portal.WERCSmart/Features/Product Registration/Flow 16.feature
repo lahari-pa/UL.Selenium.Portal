@@ -71,6 +71,8 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 		| Mercury oxide | 15.2    | false               | false       |            |
 		| Formaldehyde  | 14.7    | false               | false       |            |
 		| Aqua          | 70.1    | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I should see the Formulation > Batteries Page
     Given I confirm the Formulation > Batteries displays the correct text
@@ -113,6 +115,8 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lead sulfate  | 50      | false               | false       |            |
 		| Aqua          | 50      | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I should see the Formulation > Batteries Page
     Given I confirm the Formulation > Batteries displays the correct text
@@ -155,6 +159,8 @@ Scenario: [59277] Magnesium Battery - RU000728
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Magnesium     | 50      | false               | false       |            |
 		| Sulfuric acid | 50      | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I should see the Formulation > Batteries Page
     Given I confirm the Formulation > Batteries displays the correct text
@@ -198,6 +204,8 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 		| Nickel        | 9       | false               | false       |            |
 		| Lanthanum     | 1       | false               | false       |            |
 		| Aqua          | 90      | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I should see the Formulation > Batteries Page
 	Given I confirm the Formulation > Batteries displays the correct text
@@ -241,6 +249,8 @@ Scenario: [59279] Nickel-Cadmium Battery - RU000346
 		| Nickel          | 11.12   | false               | false       |            |
 		| Cadmium sulfide | 12.75   | false               | false       |            |
 		| Aqua            | 76.13   | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I should see the Formulation > Batteries Page
     Given I confirm the Formulation > Batteries displays the correct text
@@ -284,6 +294,8 @@ Scenario: [59280] Silver Battery - RU000698
 		| Silver Oxide  | 19.52   | false               | false       |            |
 		| Zinc          | 5.18    | false               | false       |            |
 		| Aqua          | 75.3    | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I should see the Formulation > Batteries Page
     Given I confirm the Formulation > Batteries displays the correct text
@@ -329,6 +341,8 @@ Scenario: [59281] Water-Charged Cell - RU001543
 		| Copper          | 4.70    | false               | false       |            |
 		| Magnesium       | 5.30    | false               | false       |            |
 		| Aqua            | 56.67   | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I should see the Formulation > Batteries Page
     Given I confirm the Formulation > Batteries displays the correct text
@@ -372,6 +386,8 @@ Scenario: [59282] Zinc Air - RU001205
 		| Zinc          | 30      | false               | false       |            |
 		| Carbon        | 15      | false               | false       |            |
 		| Aqua          | 55      | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I should see the Formulation > Batteries Page
     Given I confirm the Formulation > Batteries displays the correct text
@@ -415,6 +431,8 @@ Scenario: [59275] Carbon Zinc Battery - RU000727
 		| Zinc          | 30      | false               | false       |            |
 		| Carbon        | 15      | false               | false       |            |
 		| Aqua          | 55      | false               | false       |            |
+	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	And I should see the Formulation > Batteries Page
     Given I confirm the Formulation > Batteries displays the correct text
@@ -533,6 +551,10 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 		| Potassium hydroxide | 20.5    | false               | false       |            |
 		| Zinc chloride       | 9.5     | false               | false       |            |
 		| Aqua                | 70      | false               | false       |            |
+	Given I click continue
+	Given I should see the Formulation > Batteries Page
+	Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
+	Given I click continue
 	# removed Shared Step 57571
 	And I should see the Formulation > Batteries Page
     Given I confirm the Formulation > Batteries displays the correct text

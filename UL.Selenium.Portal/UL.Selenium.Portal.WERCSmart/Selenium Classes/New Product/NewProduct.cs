@@ -5444,6 +5444,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool ConfirmOptionalReportsFooterContains(string expectedText)
+		{
+			IWebElement footerTextEl = this.ContainerElement.FindElement(By.XPath(".//div[@data-bind='html: field.field']"), 2);
+			if(footerTextEl==null)
+			{
+				Report.Info($"The element was null");
+				return false;
+			}
+			var footerTextFound = footerTextEl.Text;
+			return footerTextFound.Contains(expectedText);
+		}
+
 	}
 
 	public class ProductInformation
