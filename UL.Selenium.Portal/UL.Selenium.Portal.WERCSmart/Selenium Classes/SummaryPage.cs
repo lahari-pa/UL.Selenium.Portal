@@ -8,6 +8,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using UL.Automation.Reporting.Functions;
 using TechTalk.SpecFlow;
+using UL.Automation.Selenium.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -17,6 +18,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
+
+		public bool WaitForSummaryPageToLoad(int secondsToWait = 30)
+		{
+			for (int i = 0; i < secondsToWait; i++)
+			{
+				IWebElement sumPageEl = this.containerElement;
+
+				if (sumPageEl != null)
+				{
+					return true;
+				}
+				Delay.Seconds(1);
+			}
+
+			return false;
+		}
+
+		public bool ClickEditProduct()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//button[text()='Edit Product']"), 2);
+			if(el==null)
+			{
+				Report.Info($"el was found to be null");
+				return false; 
+			}
+			return el.TryClick();
+		}
+
 
 		public List<string> ListOfButtons()
 		{

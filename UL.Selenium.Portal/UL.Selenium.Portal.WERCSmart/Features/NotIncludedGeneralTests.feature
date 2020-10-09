@@ -1747,4 +1747,68 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I should see the Transportation Details 1 Page
 
 
+	Scenario: [UpdatePopupDebug] Update Popup Debug scenario
+
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then I save the product ID: 1828816 to a context under type 'ProductInformation' as: TestCase84511
+	Given I navigate to the landing page
+	Given I login into the WERCSmart Portal - Administrator Role
+	Given I search for the product saved as: TestCase84511
+	Given For product saved as: TestCase84511 the status is: Completed
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: Update Data
+	Then I wait for the Summary Screen to Load
+	Then In the Summary screen, I click the Edit Product Button
+
+	And I should see the Update Registration popup
+	And In the Update Registration popup I click on button Yes	
+	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+	And I should see the The Product Page
+	Then I click Save in The Product Page
+	#Scenario: Test
+	#Given I save to context name: TestCase84511 and value: 1524214
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Completed
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its font is red indicating a recertification
+	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: TestCase84511
+	And In the Product Recertification History popup I should see the following entry
+		| Product ID             | Active | Recertification Reason                           |
+		| saved as TestCase84511 | true   | Recertification of Product by WERCSmart Customer |
+	And I Close the Product Recertification History pop up
+	#Scenario: Test
+	#Given I save to context name: TestCase84511 and value: 1524214
+	Given I navigate to the landing page
+	Given I login into the WERCSmart Portal - Administrator Role
+	Given I search for the product saved as: TestCase84511
+	Given For product saved as: TestCase84511 the status is: Needs Your Attention
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: Update Required
+	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+	And I should see the The Product Page
+	And In the New Product page I click tab: Product Characteristics
+	And I click the page heading: Toxicity Characteristic Leaching Procedure (TCLP)
+	And I set the Lead option to: Yes
+	And I set the Mercury option to: Yes
+	And I set the Silver option to: Yes
+	Then I click Save in The Product Page
+	And In the New Product page I click tab: Review and Submit
+	And I click the page heading: Data Acceptance
+	And In the Data Acceptance page I click on the Accept button
+	Given If purchase details are showing click confirm order
+	And I navigate to the home page
+	And I search for the product saved as: TestCase84511
+	Given For product saved as: TestCase84511 the status is: Assessment in Progress
+	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Recertification
+	#And I Confirm your product is shown in the Recertification status without the red recertification font color
+	And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: TestCase84511
+	And In the Product Recertification History popup I should see the following entry
+		| Product ID             | Active | Recertification Reason                           |
+		| saved as TestCase84511 | false  | Recertification of Product by WERCSmart Customer |
+	And I Close the Product Recertification History pop up
+
+
+
 

@@ -183,5 +183,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new SummaryPage().DoesUPCTransportationColumnContain(option, level), "Failed to find option " + option + " at level " + level + " in the UPC Transportation column.",
 				"Successfully found option " + option + " at level " + level + " in the UPC Transportation column.");
 		}
+
+		[StepDefinition(@"I wait for the Summary Screen to Load")]
+		public void IWaitForTheSummaryScreenToLoad()
+		{
+			Report.IsTrue(new SummaryPage().WaitForSummaryPageToLoad(60),"The page did not load","The page loaded");
+		}
+
+		[StepDefinition(@"In the Summary screen, I click the Edit Product Button")]
+		public void InTheSummaryScreenIClick()
+		{
+			Report.IsTrue(new SummaryPage().ClickEditProduct(), "Failed to click the button", "Succesfully clicked the button");
+		}
 	}
 }

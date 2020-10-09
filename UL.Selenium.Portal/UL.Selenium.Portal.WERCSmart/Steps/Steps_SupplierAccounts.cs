@@ -718,6 +718,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I create a new supplier Partial Stewardship only account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountpartialStewardshipOnlyWithFollowingParameters(string savedAs)
 		{
+
+
+
+
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
