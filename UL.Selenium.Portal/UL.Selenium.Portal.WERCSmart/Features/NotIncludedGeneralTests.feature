@@ -1749,10 +1749,10 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 	Scenario: [UpdatePopupDebug] Update Popup Debug scenario
 
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Then I save the product ID: 1828816 to a context under type 'ProductInformation' as: TestCase84511
-	Given I navigate to the landing page
+	
 	Given I login into the WERCSmart Portal - Administrator Role
+	Then I save the product ID: 1828816 to a context under type 'ProductInformation' as: TestCase84511
+	
 	Given I search for the product saved as: TestCase84511
 	Given For product saved as: TestCase84511 the status is: Completed
 	And I click Row Actions for the first product returned
@@ -1761,7 +1761,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Then In the Summary screen, I click the Edit Product Button
 
 	And I should see the Update Registration popup
-	And In the Update Registration popup I click on button Yes	
+	And In the Update Registration popup I click on button Continue	
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 	And I should see the The Product Page
 	Then I click Save in The Product Page
