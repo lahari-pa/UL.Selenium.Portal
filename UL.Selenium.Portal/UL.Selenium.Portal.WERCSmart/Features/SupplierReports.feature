@@ -1152,7 +1152,6 @@ Given I click Close in the Report Download popup
 
 
 
-
 @ScenarioId:10336
 Scenario: [146145] UPCs to Retailer via Item Sync - Excel File 
 
@@ -1166,7 +1165,6 @@ Then I select the Request Report button excel file is produced called UPCs to Re
 Given I confirm that an excel file is produced called UPCs to Retailer via Item Sync.xlsx and save as UPCs to Retailer via Item Sync
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
-And I confirm the excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Then I confirm that the excel file saved as: UPCs to Retailer via Item Sync contains the following columns:
 		| Column            |
 		| WPSID             |
@@ -1333,14 +1331,6 @@ Given I confirm that an zip file is produced called UPC Errors for The Home Depo
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as UPC Errors for The Home Depot can be opened and contains data
-Then I confirm that the CSV file saved as: UPC Errors for The Home Depot contains the following columns:
-		| Column            |
-		| WPSID             |
-		| Product Name      |
-		| Supplier          |
-		| UPC               |
-		| Retailer          |
-		| Date UPC Provided |
 Given I delete the excel file saved as UPC Errors for The Home Depot
 Given Under the Supplier Reports menu I choose: UPC Errors for The Home Depot
 Then I confirm the most recent file has the following information Report Name: UPC Errors for The Home Depot File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
@@ -1370,14 +1360,6 @@ Given I confirm that an zip file is produced called Kit Registrations.zip and sa
 Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as Kit Registrations can be opened and contains data
-Then I confirm that the CSV file saved as: Kit Registrations contains the following columns:
-		| Column            |
-		| WPSID             |
-		| Product Name      |
-		| Supplier          |
-		| UPC               |
-		| Retailer          |
-		| Date UPC Provided |
 Given I delete the excel file saved as Kit Registrations
 Given Under the Supplier Reports menu I choose: Kit Registrations
 Then I confirm the most recent file has the following information Report Name: Kit Registrations File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
@@ -1389,6 +1371,7 @@ Given I click Close in the Report Download popup
 
 
 
+@ScenarioId:10368
 Scenario: [144259] Kits Containing a Registration - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
