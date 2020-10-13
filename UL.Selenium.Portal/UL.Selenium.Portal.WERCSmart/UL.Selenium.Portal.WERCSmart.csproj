@@ -215,6 +215,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Distributor.feature</DependentUpon>
     </Compile>
+    <Compile Include="Philip\stepdefinitions.cs" />
+    <Compile Include="Philip\WebElements.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
     <Compile Include="Selenium Classes\AddNewSupplier.cs" />

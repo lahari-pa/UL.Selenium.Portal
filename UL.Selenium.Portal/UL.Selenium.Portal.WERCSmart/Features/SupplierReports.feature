@@ -1338,6 +1338,7 @@ Given I click Close in the Report Download popup
 
 
 
+@ScenarioId:10367
 Scenario: [144240] Kit Registrations - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -1373,6 +1374,7 @@ Given I click Close in the Report Download popup
 
 
 
+@ScenarioId:10368
 Scenario: [144259] Kits Containing a Registration - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -1409,6 +1411,7 @@ Given I click Close in the Report Download popup
 
 
 
+@ScenarioId:10365
 Scenario: [144262] UPC and Retailer (Single Registration) - CSV Zip File
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
