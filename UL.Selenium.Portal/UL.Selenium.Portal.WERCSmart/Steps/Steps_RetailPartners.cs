@@ -514,14 +514,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			object File = Context.GetFromContext(savedAs);
 
-			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(File.ToString()), "", "");
-
 			string startPath = @".\downloads";
 			string zipPath = File.ToString();
 			string extractPath = File.ToString();
 			extractPath = extractPath.Replace(".zip", ".xlsx");
-
-			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(extractPath), "", "");
 
 			ZipFile.ExtractToDirectory(zipPath, extractPath);
 

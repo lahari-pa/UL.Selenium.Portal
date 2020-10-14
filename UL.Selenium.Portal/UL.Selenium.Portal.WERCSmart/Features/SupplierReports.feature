@@ -1151,7 +1151,6 @@ Given I click Close in the Report Download popup
 
 
 
-@philtag
 @ScenarioId:10336
 Scenario: [146145] UPCs to Retailer via Item Sync - Excel File 
 
@@ -1163,7 +1162,6 @@ Then I select Excel from the Select File Type
 Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
 Then I select the Request Report button excel file is produced called UPCs to Retailer via Item Sync.xlsx and save as UPCs to Retailer via Item Sync
 Given I confirm that an excel file is produced called UPCs to Retailer via Item Sync.xlsx and save as UPCs to Retailer via Item Sync
-Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 Then I confirm that the excel file saved as: UPCs to Retailer via Item Sync contains the following columns:
 		| Column            |
@@ -1181,7 +1179,6 @@ Then I click the Download button for the most recent report
 And I confirm the excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
 
-@philtag
 @ScenarioId:10349
 Scenario: [146172] UPCs to Retailer via Item Sync - Excel Zip File
 
@@ -1195,7 +1192,6 @@ Then I Delete the file with name: UPCs to Retailer via Item Sync.zip from the do
 Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
 Then I select the Request Report button zip file is produced called UPCs to Retailer via Item Sync.zip and save as UPCs to Retailer via Item Sync
 Given I confirm that an zip file is produced called UPCs to Retailer via Item Sync.zip and save as UPCs to Retailer via Item Sync
-Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 And I confirm the zip excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Then I confirm that the excel file saved as: UPCs to Retailer via Item Sync contains the following columns:
@@ -1214,7 +1210,7 @@ Then I click the Download button for the most recent report
 And I confirm the excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
 
-@philtag
+
 @ScenarioId:10337
 Scenario: [146146] UPCs to Retailer via Item Sync - CSV File
 
@@ -1226,7 +1222,6 @@ Then I select CSV from the Select File Type
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
 Then I select the Request Report button zip file is produced called UPCs to Retailer via Item Sync.csv and save as UPCs to Retailer via Item Sync
 Given I confirm that an excel file is produced called UPCs to Retailer via Item Sync.csv and save as UPCs to Retailer via Item Sync
-Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Then I confirm that the CSV file saved as: UPCs to Retailer via Item Sync contains the following columns:
@@ -1245,7 +1240,7 @@ Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
 
-@philtag
+
 @ScenarioId:10345
 Scenario: [146164] UPCs to Retailer via Item Sync - CSV Zip File
 
@@ -1259,7 +1254,6 @@ Then I Delete the file with name: UPCs to Retailer via Item Sync.zip from the do
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
 Then I select the Request Report button zip file is produced called UPCs to Retailer via Item Sync.zip and save as UPCs to Retailer via Item Sync
 Given I confirm that an zip file is produced called UPCs to Retailer via Item Sync.zip and save as UPCs to Retailer via Item Sync
-Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Then I confirm that the CSV file saved as: UPCs to Retailer via Item Sync contains the following columns:
@@ -1278,7 +1272,7 @@ Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
 
-@philtag
+
 @ScenarioId:10343
 Scenario: [144339] UPC and Retailer (All) - CSV Zip File
 
@@ -1292,7 +1286,7 @@ Then I Delete the file with name: UPC and Retailer (All).zip from the downloads 
 Then I Delete the file with name: UPC and Retailer (All).csv from the downloads folder
 Then I select the Request Report button zip file is produced called UPC and Retailer (All).zip and save as UPC and Retailer (All)
 Given I confirm that an zip file is produced called UPC and Retailer (All).zip and save as UPC and Retailer (All)
-Given I see a Report Download popup with the following text: Report download complete!
+Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
 Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as UPC and Retailer (All) can be opened and contains data
 Then I confirm that the CSV file saved as: UPC and Retailer (All) contains the following columns:
@@ -1312,7 +1306,7 @@ And I confirm the csv file saved as UPC and Retailer (All) can be opened and con
 Given I click Close in the Report Download popup
 
 
-@philtag
+
 @ScenarioId:10344
 Scenario: [144263] UPC Errors for The Home Depot- CSV Zip File 
 
@@ -1341,7 +1335,7 @@ Given I click Close in the Report Download popup
 
 
 
-@philtag
+
 @ScenarioId:10367
 Scenario: [144240] Kit Registrations - CSV Zip File
 
@@ -1370,7 +1364,7 @@ Given I click Close in the Report Download popup
 
 
 
-@philtag
+
 @ScenarioId:10368
 Scenario: [144259] Kits Containing a Registration - CSV Zip File
 
@@ -1408,7 +1402,7 @@ Given I click Close in the Report Download popup
 
 
 
-@philtag
+
 @ScenarioId:10365
 Scenario: [144262] UPC and Retailer (Single Registration) - CSV Zip File
 

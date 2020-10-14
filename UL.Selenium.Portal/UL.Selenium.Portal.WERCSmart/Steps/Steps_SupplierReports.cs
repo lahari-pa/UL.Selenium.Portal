@@ -925,7 +925,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				currentTime = currentTime.Substring(0, index);
 			}
 			Context.AddToContext("LastReportDownloadTime", currentTime);
-			Delay.Seconds(10);
+			Delay.Seconds(25);
 
 		}
 	
@@ -934,6 +934,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.SelectCloseButtonInReportDownloadPopup(), "Failed to select Close button", "Successfully selected Close button");
+			Delay.Seconds(25);
 		}
 
 		[StepDefinition(@"I confirm there is a Download button for the most recent report")]
@@ -952,6 +953,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.SelectDownloadButtonForTheMostRecentReport(), "Failed to select Download button", "Successfully selected Download button");
+			Delay.Seconds(25);
 		}
 
 		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Date Requested: (.*) Requested By: (.*)")]
