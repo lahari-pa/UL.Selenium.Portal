@@ -3878,6 +3878,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new StudioSupplierManager().ClickCategory(category), "Failed to click the category", "Successfully clicked the category");
 			Report.StartStep($"Checking that the catagory: {category} is active");
 			Report.IsTrue(new StudioSupplierManager().CategoryIsActive(category), "The Category was not active", "The Category was active");
+			Delay.Seconds(15);
 		}
 
 		[StepDefinition(@"In The Supplier Manager popup I click on the 'Clear Cart for All Users' button")]

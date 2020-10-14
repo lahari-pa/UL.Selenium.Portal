@@ -61,7 +61,6 @@ Then In the supplier manager popup I check that Data Tier Consent Table contains
 | Tier 2.2         |
 | Tier 3           |
 | Tier 4.1         |
-| Tier 4.2         |
 | Name             |
 | Email            |
 | Date             |
@@ -78,7 +77,7 @@ Then In The Supplier Manager popup I check that the column: Name contains all va
 | Automated, Products  |
 Then In the Supplier Manager popup I check that in The Data Tier Consent Table the email column contains only valid email addresses
 Then In the Supplier Manager popup I check that in The Data Tier Consent Table the date column contains dates that are in the format mm-dd-yyyy
-
+Then In the Supplier Manager Popup I click on the close button
 
 
 
@@ -114,8 +113,8 @@ Given I click the Home navigation icon
 # Ensure that there are two items in the cart (Cart icon with a little number next to it)
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I Click 'Suppliers' in SHA Manager
-Then In the Supplier Manager Popup I select radio button: Vendor
-Given In the Supplier Manager Popup I enter the following search term: Automated Products
+Then In the Supplier Manager Popup I select radio button: E-Mail
+Given In the Supplier Manager Popup I enter the following search term: AdminEmailAddress
 Given In the Supplier Manager Popup I click on the search button
 Given In the Supplier Manager Popup I click on the first supplier returned
 Given In The Supplier Manager popup I click on the category: Subscription

@@ -369,18 +369,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Switching to new window");
 
 				Delay.Seconds(10);
-
+				Report.Info("testing1");
 				Context.AddToContext("MainWindowHandle", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
-
+				Report.Info("testing2");
 				ReadOnlyCollection<string> windowHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("testing3");
 				string newTab = windowHandles.FirstOrDefault(x => x != SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				Report.Info("testing4 " + newTab);
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(newTab);
+				Report.Info("testing5");
 				Report.Success("Window switched successfully!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
 			{
-				Report.Failure(ex.Message);
+				Report.Failure("Exception: " + ex.Message);
 				throw;
 			}
 		}

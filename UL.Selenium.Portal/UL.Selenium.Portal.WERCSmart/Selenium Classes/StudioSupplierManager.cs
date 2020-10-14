@@ -116,11 +116,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickFirstSupplier()
 		{
-			IWebElement firstSupplier = this.containerElement.FindElement(By.XPath(".//table[@id='listSupplierInfo']//tr[not(@class='jqgfirstrow')]"), 2);
-			while (firstSupplier == null)
-			{
-				Delay.Seconds(1);
-			}
+			Delay.Seconds(10);
+			IWebElement firstSupplier = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='listSupplierInfo']//tr[not(@class='jqgfirstrow')]"), 2);
+			//int i = 0;
+			//while (firstSupplier == null)
+			//{
+			//	Delay.Seconds(1);
+			//	i++;
+
+			//	if (i == 30)
+			//	{
+			//		break;
+			//	}
+			//}
 			return firstSupplier.TryClick();
 
 		}
