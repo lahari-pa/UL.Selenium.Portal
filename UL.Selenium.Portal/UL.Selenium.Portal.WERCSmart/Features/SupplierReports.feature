@@ -1151,7 +1151,7 @@ Given I click Close in the Report Download popup
 
 
 
-
+@philtag
 @ScenarioId:10336
 Scenario: [146145] UPCs to Retailer via Item Sync - Excel File 
 
@@ -1181,7 +1181,7 @@ Then I click the Download button for the most recent report
 And I confirm the excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
 
-
+@philtag
 @ScenarioId:10349
 Scenario: [146172] UPCs to Retailer via Item Sync - Excel Zip File
 
@@ -1214,7 +1214,7 @@ Then I click the Download button for the most recent report
 And I confirm the excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
 
-
+@philtag
 @ScenarioId:10337
 Scenario: [146146] UPCs to Retailer via Item Sync - CSV File
 
@@ -1245,7 +1245,7 @@ Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
 
-
+@philtag
 @ScenarioId:10345
 Scenario: [146164] UPCs to Retailer via Item Sync - CSV Zip File
 
@@ -1278,7 +1278,7 @@ Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
 
-
+@philtag
 @ScenarioId:10343
 Scenario: [144339] UPC and Retailer (All) - CSV Zip File
 
@@ -1312,7 +1312,7 @@ And I confirm the csv file saved as UPC and Retailer (All) can be opened and con
 Given I click Close in the Report Download popup
 
 
-
+@philtag
 @ScenarioId:10344
 Scenario: [144263] UPC Errors for The Home Depot- CSV Zip File 
 
@@ -1341,7 +1341,7 @@ Given I click Close in the Report Download popup
 
 
 
-
+@philtag
 @ScenarioId:10367
 Scenario: [144240] Kit Registrations - CSV Zip File
 
@@ -1370,7 +1370,7 @@ Given I click Close in the Report Download popup
 
 
 
-
+@philtag
 @ScenarioId:10368
 Scenario: [144259] Kits Containing a Registration - CSV Zip File
 
@@ -1408,7 +1408,7 @@ Given I click Close in the Report Download popup
 
 
 
-@philstag
+@philtag
 @ScenarioId:10365
 Scenario: [144262] UPC and Retailer (Single Registration) - CSV Zip File
 
