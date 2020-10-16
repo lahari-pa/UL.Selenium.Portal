@@ -387,8 +387,6 @@ Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Can
 	| Canadian Tire |
 
 
-   @tfs_design
-   #Waiting for Fabiola to help me find where I can pull a full list of expected retailers from - Philip
    @ScenarioId:6787
 Scenario:[120866] UPC Retailer and Feed
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
