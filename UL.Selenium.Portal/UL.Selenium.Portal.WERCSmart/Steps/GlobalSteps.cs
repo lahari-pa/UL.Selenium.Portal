@@ -894,6 +894,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				if (MailosaurFunctions.WaitForInboxDifferences(email))
 				{
+
 					List<Mailosaur.Email> differences = MailosaurFunctions.GetInboxDifferences(email);
 					Report.Info("Found " + differences.Count() + " emails");
 
@@ -908,7 +909,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						Report.IsTrue(matchingEmail == null, "A matching email has been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has not been found.");
 					}
-
+		
 					if (matchingEmail != null)
 					{
 						using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
@@ -919,10 +920,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 					}
 
-					UL.Automation.Reporting.SpecFlow.Classes.Context.AddToContext("Matching", matchingEmail);
+					Context.AddToContext("Matching", matchingEmail);
 				}
 				else
 				{
+		
 					if (shouldOrNot == "should not")
 					{
 						Report.Success("As expected, no email has been received");
@@ -951,13 +953,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(ReportSettings.StepCounter + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
-				string emailBody = MailosaurFunctions.GetEmailBody(email);
+			
+				Mailosaur.Email email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				if (email == null)
+				{
+					Report.Info("null email for some reason");
+				}
+			
+				string emailBody = email.Text.ToString();
+	
 				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
-				Report.Info("Expected email body text: " + bodyText);
-				Report.Info("Body of the Email was: " + emailBody);
+
 				//string actualTrimmed = bodyDecode.Replace(" ", "");
 				string actualTrimmed = Regex.Replace(bodyDecode, @"\r|\n| ", "");
 				string expectedTrimmed = bodyText.Replace(" ", "");

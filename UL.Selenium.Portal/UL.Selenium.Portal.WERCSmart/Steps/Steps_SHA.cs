@@ -3953,6 +3953,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new StudioSupplierManager().EnterInformationInClearShoppingCartPopup(userID, password, tfsTicketNumber, supportTicketNumber), "Failed to enter information in 'Clear Shopping Cart' Popup", "Successfully entered information in 'Clear Shopping Cart' Popup");
 			Report.IsTrue(new StudioSupplierManager().ClickContinueInClearShoppingCartPopup(), "Failed to click Continue in 'Clear Shopping Cart' Popup", "Successfully clicked Continue 'Clear Shopping Cart' Popup");
+			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"In the Results Clear Shopping Cart for All Users Popup I confirm the correct text is displayed")]
@@ -3960,7 +3961,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new StudioSupplierManager().CheckTextInResultsClearShoppingCartForAllUsersPopup(), "The 'Results Clear Shopping Cart for All Users' Popup did not display the correct text", "The 'Results Clear Shopping Cart for All Users' Popup displayed the correct text");
 		}
-
 
 		[StepDefinition(@"In the SHA manager I search for the Product saved as: (.*) and if its Status is Accepted I set the retailers: to Completed and check the Products Grid")]
 		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs, Table retailerTable)

@@ -526,7 +526,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckTextInConfirmClearCartForAllUsersPopup()
 		{
-			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@id='confirmationClearCartModal']"), 2);
+			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='confirmationClearCartModal']"), 2);
+
 			if (el.Text.Contains("You have selected to clear the shopping cart for this account. The Account's Administrator(s) will be notified via email of this action.") &&
 				el.Text.Contains("Are you sure you want to proceed? It cannot be reversed."))
 			{
