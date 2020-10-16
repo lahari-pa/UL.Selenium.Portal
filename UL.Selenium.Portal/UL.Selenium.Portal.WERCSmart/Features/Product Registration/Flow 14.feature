@@ -76,7 +76,9 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 	And I should see the Optional Reports and Documents Available for Purchase Page
-	Then I check for the following text: Additional documents are not subject to standard two day turnaround. in the Optional Reports and Documents Available for Purchase Page
+	
+	Then In the Optional Reports and Documents Available for Purchase page, the footer text contains: Additional documents are not subject to standard two day turnaround.
+	#Then I check for the following text: Additional documents are not subject to standard two day turnaround. in the Optional Reports and Documents Available for Purchase Page
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |

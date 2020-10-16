@@ -150,7 +150,8 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Then I should see an error message: This is a required field.
 	Given I set the Product is Regulated for Transport field to: No, due to an exemption or exception
 	Then I should not see an error message: This is a required field.
-	Given I set the Please select DOT Exceptions if applicable? field to: 173.159 (a) – Exemption for non-spillable lead-acid batteries
+	#Given I set the Please select DOT Exceptions if applicable? field to: 173.159 (a) – Exemption for non-spillable lead-acid batteries
+	Given I set the Please select DOT Exceptions if applicable? field to: 173.120(a)(2)
 	Then in the Transportation Details 1 page I click Continue
 	And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)

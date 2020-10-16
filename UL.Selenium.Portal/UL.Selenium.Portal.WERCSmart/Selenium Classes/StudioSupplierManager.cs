@@ -35,6 +35,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return searchInput.TryEnterText(searchTerm);
 		}
 
+		public bool WaitForSuppliersToLoad()
+		{
+			IWebElement el = this.containerElement.FindElement(By.XPath(".//div[@class='loading ui-state-default ui-state-active' and @style='display: block;']"), 2);
+			if(el==null)
+			{
+				Report.Success($"Loading... was not showing");
+				return true;
+
+			}
+			int x = 0;
+			bool loaded = false;
+			while (x<12&&loaded==false)
+			{
+				el = this.containerElement.FindElement(By.XPath(".//div[@class='loading ui-state-default ui-state-active' and @style='display: block;']"), 2);
+				loaded = el.IsNullOrEmpty();
+				x++;
+				Delay.Seconds(5);
+			}
+			return loaded;
+		}
+
 		public bool ClickSearchButton()
 		{
 			IWebElement searchButton = this.containerElement.FindElement(By.XPath(".//button[@id='supplierSearchButton']"), 2);
