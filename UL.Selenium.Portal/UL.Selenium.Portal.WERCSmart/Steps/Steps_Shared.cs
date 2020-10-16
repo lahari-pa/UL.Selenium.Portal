@@ -1533,38 +1533,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 145000 \(Enter Physical Property - Solid - Without Water Solubility Description\)")]
+		[StepDefinition(@"I call Shared Step 145000 \(Enter Physical Property - Solid, 2nd Phys State\(anything\), mixed \(anything\)\)")]
 		public void GivenICallSharedEnterPhysicalProperty_Solid_WithoutWaterSolubilityDescription()
 		{
 			ReportSettings.UseSubSteps = true;
-			var MyNewProduct = new StepsNewProduct();
+			var MyNewProductSteps = new StepsNewProduct();
+			var thisNewProduct = new NewProduct();
+			Report.StartStep("I should see the Product Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			Report.StartStep("There should only be one option available for Primary Physical State");
+			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
 			Report.StartStep("Primary Physical State should be showing the value: Solid");
-			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
-			List<string> showing = new NewProduct().SelectedOptionsForSection("Primary Physical State");
-			if (!showing.Contains("Solid"))
+			if (!thisNewProduct.SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
 			{
-				Report.StartStep("I set the Primary Physical State option to: Solid");
-				Report.Info("Setting the Physical State to Solid because it was not selected by default");
-				MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+				Report.Failure("The Primary Physical State was not set to Solid by default.");
+				Report.Screenshot();
+				Report.Info("Setting the Primary Physical State to: Solid");
+				MyNewProductSteps.SetTheSectionOptionTo(
+					"Primary Physical State",
+					"Solid");
+			}
+			else
+			{
+				Report.Success("The Primary Physical State was showing the value of: Solid as expected");
+				Report.Screenshot();
 			}
 
 			Report.StartStep(
 				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
-			MyNewProduct.SetTheSectionOptionTo(
+			MyNewProductSteps.SetTheSectionOptionTo(
 				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
 				"No");
 			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
 			{
 				Report.StartStep(
 					"I set the Secondary Physical State option to: Solid");
-				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+				MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State",
 					"Solid");
 			}
 
 			//Report.StartStep("I set the Secondary Physical State option to: Solid");
 			//MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
 			Report.StartStep("In the New Product page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
 		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\) with the following inputs:")]

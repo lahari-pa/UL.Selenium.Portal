@@ -579,6 +579,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ConfirmSectionHasFollowingValueInSummaryPage(string section, string value)
 		{
 			IWebElement sectionValue = this.ContainerElement.FindElement(By.XPath("//h3[text()='" + section + "']/following-sibling::p[@data-bind='html: Data']"), 2);
+
+			if (sectionValue == null)
+			{
+				return false;
+			}
+
 			if (sectionValue.Text == value)
 			{
 				return true;

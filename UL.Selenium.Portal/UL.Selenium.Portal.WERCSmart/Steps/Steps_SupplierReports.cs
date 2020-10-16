@@ -972,7 +972,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(supplierReportsObject.FindReportDownloadPopupWithTheFollowingText(text), "Failed to find the correct text in the popup", "Successfully found the correct text in the popup");
 		}
 
-		[StepDefinition(@"I confirm the following description is displayed: (.*)")]
+		[StepDefinition(@"In the My Reports Screen I confirm the following description is displayed: (.*)")]
 		public void GivenIConfirmTheFollowingDescriptionIsDisplayed(string description)
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
@@ -986,7 +986,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(supplierReportsObject.EnterTextIntoWPSIDTextFieldInMyReportsPage(text), "Failed to find the correct text in WPSID textfield", "Successfully found the correct text in WPSID textfield");
 		}
 
-		[StepDefinition(@"I select the first result in the WPSID textfield search results")]
+		[StepDefinition(@"In the My Reports Screen I select the first result in the WPSID textfield search results")]
 		public void ThenISelectTheFirstResultInTheWPSIDTextfieldSearchResults()
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
