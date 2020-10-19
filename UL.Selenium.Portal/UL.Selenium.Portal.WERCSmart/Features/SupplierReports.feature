@@ -680,7 +680,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as California Proposition 65 can be opened and contains data
 Given I delete the excel file saved as California Proposition 65
-Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as California Proposition 65 can be opened and contains data
@@ -699,7 +699,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as BatteryContaining Products can be opened and contains data
 Given I delete the excel file saved as BatteryContaining Products
-Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an excel file is produced called Battery-Containing Products.csv and save as BatteryContaining Products
@@ -719,7 +719,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Eligible to Obsolete can be opened and contains data
 Given I delete the excel file saved as Eligible to Obsolete
-Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Eligible to Obsolete can be opened and contains data
@@ -738,7 +738,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Pesticide Registrations can be opened and contains data
 Given I delete the excel file saved as Pesticide Registrations
-Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Pesticide Registrations can be opened and contains data
@@ -758,7 +758,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Registration Updates Not Submitted can be opened and contains data
 Given I delete the excel file saved as Registration Updates Not Submitted
-Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Registration Updates Not Submitted can be opened and contains data
@@ -778,7 +778,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Subscription Product Types can be opened and contains data
 Given I delete the excel file saved as Subscription Product Types
-Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Subscription Product Types can be opened and contains data
@@ -797,7 +797,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as UPC Duplication can be opened and contains data
 Given I delete the excel file saved as UPC Duplication
-Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPC Duplication can be opened and contains data
@@ -816,7 +816,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Volatile Organic Compounds can be opened and contains data
 Given I delete the excel file saved as Volatile Organic Compounds
-Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Volatile Organic Compounds can be opened and contains data
@@ -835,7 +835,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Waste Classification Summary can be opened and contains data
 Given I delete the excel file saved as Waste Classification Summary
-Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Waste Classification Summary can be opened and contains data
@@ -856,7 +856,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Chemicals of Concern can be opened and contains data
 Given I delete the excel file saved as Chemicals of Concern
-Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as Chemicals of Concern can be opened and contains data
@@ -928,7 +928,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as California Proposition 65 can be opened and contains data
 Given I delete the excel file saved as California Proposition 65
 Given Under the Supplier Reports menu I choose: California Proposition 65
-Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as California Proposition 65 can be opened and contains data
@@ -950,7 +950,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as BatteryContaining Products can be opened and contains data
 Given I delete the excel file saved as BatteryContaining Products
 Given Under the Supplier Reports menu I choose: Battery-Containing Products
-Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an excel file is produced called Battery-Containing Products.zip and save as BatteryContaining Products
@@ -973,7 +973,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as Eligible to Obsolete can be opened and contains data
 Given I delete the excel file saved as Eligible to Obsolete
 Given Under the Supplier Reports menu I choose: Eligible to Obsolete
-Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as Eligible to Obsolete can be opened and contains data
@@ -995,7 +995,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as Pesticide Registrations can be opened and contains data
 Given I delete the excel file saved as Pesticide Registrations
 Given Under the Supplier Reports menu I choose: Pesticide Registrations
-Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as Pesticide Registrations can be opened and contains data
@@ -1018,7 +1018,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as Registration Updates Not Submitted can be opened and contains data
 Given I delete the excel file saved as Registration Updates Not Submitted
 Given Under the Supplier Reports menu I choose: Registration Updates Not Submitted
-Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as Registration Updates Not Submitted can be opened and contains data
@@ -1041,7 +1041,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as Subscription Product Types can be opened and contains data
 Given I delete the excel file saved as Subscription Product Types
 Given Under the Supplier Reports menu I choose: Subscription Product Types
-Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as Subscription Product Types can be opened and contains data
@@ -1063,7 +1063,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as UPC Duplication can be opened and contains data
 Given I delete the excel file saved as UPC Duplication
 Given Under the Supplier Reports menu I choose: UPC Duplication
-Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as UPC Duplication can be opened and contains data
@@ -1085,7 +1085,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as Volatile Organic Compounds can be opened and contains data
 Given I delete the excel file saved as Volatile Organic Compounds
 Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
-Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as Volatile Organic Compounds can be opened and contains data
@@ -1107,7 +1107,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as Waste Classification Summary can be opened and contains data
 Given I delete the excel file saved as Waste Classification Summary
 Given Under the Supplier Reports menu I choose: Waste Classification Summary
-Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as Waste Classification Summary can be opened and contains data
@@ -1130,7 +1130,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as Chemicals of Concern can be opened and contains data
 Given I delete the excel file saved as Chemicals of Concern
 Given Under the Supplier Reports menu I choose: Chemicals of Concern
-Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as Chemicals of Concern can be opened and contains data
@@ -1173,7 +1173,7 @@ Then I confirm that the excel file saved as: UPCs to Retailer via Item Sync cont
 		| Date UPC Provided |
 Given I delete the excel file saved as UPCs to Retailer via Item Sync
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
-Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
@@ -1204,7 +1204,7 @@ Then I confirm that the excel file saved as: UPCs to Retailer via Item Sync cont
 		| Date UPC Provided |
 Given I delete the excel file saved as UPCs to Retailer via Item Sync
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
-Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
@@ -1234,7 +1234,7 @@ Then I confirm that the CSV file saved as: UPCs to Retailer via Item Sync contai
 		| Date UPC Provided |
 Given I delete the excel file saved as UPCs to Retailer via Item Sync
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
-Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
@@ -1266,7 +1266,7 @@ Then I confirm that the CSV file saved as: UPCs to Retailer via Item Sync contai
 		| Date UPC Provided |
 Given I delete the excel file saved as UPCs to Retailer via Item Sync
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
-Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
@@ -1289,17 +1289,9 @@ Given I confirm that an zip file is produced called UPC and Retailer (All).zip a
 Given I see a Report Download popup with the following text: The report has been scheduled. Once completed, you will see the report in your history and you will be notified of availability via email.
 Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as UPC and Retailer (All) can be opened and contains data
-Then I confirm that the CSV file saved as: UPC and Retailer (All) contains the following columns:
-		| Column            |
-		| WPSID             |
-		| Product Name      |
-		| Supplier          |
-		| UPC               |
-		| Retailer          |
-		| Date UPC Provided |
 Given I delete the excel file saved as UPC and Retailer (All)
 Given Under the Supplier Reports menu I choose: UPC and Retailer (All)
-Then I confirm the most recent file has the following information Report Name: UPC and Retailer (All) File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: UPC and Retailer (All) File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPC and Retailer (All) can be opened and contains data
@@ -1327,7 +1319,7 @@ Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as UPC Errors for The Home Depot can be opened and contains data
 Given I delete the excel file saved as UPC Errors for The Home Depot
 Given Under the Supplier Reports menu I choose: UPC Errors for The Home Depot
-Then I confirm the most recent file has the following information Report Name: UPC Errors for The Home Depot File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: UPC Errors for The Home Depot File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPC Errors for The Home Depot can be opened and contains data
@@ -1351,12 +1343,11 @@ Then I enter the following in the WPSID textfield in the My Reports page: 1
 Then In the My Reports Screen I select the first result in the WPSID textfield search results
 Then I select the Request Report button zip file is produced called Kit Registrations.zip and save as Kit Registrations
 Given I confirm that an zip file is produced called Kit Registrations.zip and save as Kit Registrations
-Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as Kit Registrations can be opened and contains data
 Given I delete the excel file saved as Kit Registrations
 Given Under the Supplier Reports menu I choose: Kit Registrations
-Then I confirm the most recent file has the following information Report Name: Kit Registrations File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Kit Registrations File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Kit Registrations can be opened and contains data
@@ -1380,20 +1371,11 @@ Then I enter the following in the WPSID textfield in the My Reports page: 1
 Then In the My Reports Screen I select the first result in the WPSID textfield search results
 Then I select the Request Report button zip file is produced called Kits Containing a Registration.zip and save as Kits Containing a Registration
 Given I confirm that an zip file is produced called Kits Containing a Registration.zip and save as Kits Containing a Registration
-Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as Kits Containing a Registration can be opened and contains data
-Then I confirm that the CSV file saved as: Kits Containing a Registration contains the following columns:
-		| Column            |
-		| WPSID             |
-		| Product Name      |
-		| Supplier          |
-		| UPC               |
-		| Retailer          |
-		| Date UPC Provided |
 Given I delete the excel file saved as Kits Containing a Registration
 Given Under the Supplier Reports menu I choose: Kits Containing a Registration
-Then I confirm the most recent file has the following information Report Name: Kits Containing a Registration File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: Kits Containing a Registration File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Kits Containing a Registration can be opened and contains data
@@ -1418,20 +1400,11 @@ Then I enter the following in the WPSID textfield in the My Reports page: 1
 Then In the My Reports Screen I select the first result in the WPSID textfield search results
 Then I select the Request Report button csv file is produced called UPC and Retailer (Single Registration).zip and save as UPC and Retailer (Single Registration)
 Given I confirm that an zip file is produced called UPC and Retailer (Single Registration).zip and save as UPC and Retailer (Single Registration)
-Given I see a Report Download popup with the following text: Report download complete!
 Given I click Close in the Report Download popup
 And I confirm the zip csv file saved as UPC and Retailer (Single Registration) can be opened and contains data
-Then I confirm that the CSV file saved as: UPC and Retailer (Single Registration) contains the following columns:
-		| Column            |
-		| WPSID             |
-		| Product Name      |
-		| Supplier          |
-		| UPC               |
-		| Retailer          |
-		| Date UPC Provided |
 Given I delete the excel file saved as UPC and Retailer (Single Registration)
 Given Under the Supplier Reports menu I choose: UPC and Retailer (Single Registration)
-Then I confirm the most recent file has the following information Report Name: UPC and Retailer (Single Registration) File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: WERCS Test_Automation_ProductsAccount
+Then I confirm the most recent file has the following information Report Name: UPC and Retailer (Single Registration) File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPC and Retailer (Single Registration) can be opened and contains data
