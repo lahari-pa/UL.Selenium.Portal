@@ -508,6 +508,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm the Supplier Reports excel file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheSupplierReportsExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		{
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			object File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new ExcelFunctions(File.ToString(), "Table");
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
+				bool Data = false;
+				for (int i = 0; i < ExcelUtils.Excel_GetNoRows(); i++)
+				{
+					List<string> RowData = ExcelUtils.Excel_GetRow(i);
+					Report.Info("Row " + i + " had " + FirstRow[0] + ": " + RowData[0] + " and " + FirstRow[1] + ": " + RowData[1]);
+					Data = true;
+				}
+
+				Report.IsTrue(Data, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+			}
+		}
+
 		[StepDefinition(@"I confirm the zip excel file saved as (.*) can be opened and contains data")]
 		public void ThenConfirmTheZipExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
@@ -522,7 +545,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ZipFile.ExtractToDirectory(zipPath, extractPath);
 
 			extractPath = extractPath.Replace(@".xlsx", @".xlsx\" + savedAs + ".xlsx");
-
+	
 			Context.AddToContext(savedAs, extractPath);
 
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + extractPath))

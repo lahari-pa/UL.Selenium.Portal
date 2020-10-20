@@ -425,11 +425,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Delay.Seconds(10);
 			IList<IWebElement> fileList = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//td"), 2);
-			string reportNameStr = fileList[0].Text;
-			string reportTypeStr = fileList[2].Text;
-			string reportDateRequestedStr = fileList[3].Text;
-			string reportRequestedByStr = fileList[4].Text;
 
+			string reportNameStr = fileList[0].Text;
+		
+			string reportTypeStr = fileList[2].Text;
+		
+			string reportDateRequestedStr = fileList[3].Text;
+		
+			string reportRequestedByStr = fileList[4].Text;
+			
 			if (reportNameStr == reportName && reportTypeStr == type && reportDateRequestedStr.Contains(Context.GetFromContext(dateRequested).ToString()) && reportRequestedByStr == requestedBy)
 			{
 				return true;
