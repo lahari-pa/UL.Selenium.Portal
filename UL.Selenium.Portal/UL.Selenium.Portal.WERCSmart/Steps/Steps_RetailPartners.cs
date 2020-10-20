@@ -460,7 +460,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that an (excel|html|zip) file is produced called (.*) and save as (.*)")]
+		[StepDefinition(@"I confirm that an (excel|html|zip|csv) file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string filetype, string file, string savedAs)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Confirm " + filetype + " File is downloaded with name: " + file);
