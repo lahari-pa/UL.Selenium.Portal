@@ -1269,7 +1269,8 @@ Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
 Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
+Given I confirm that an zip file is produced called UPCs to Retailer via Item Sync (1).zip and save as UPCs to Retailer via Item Sync
+And I confirm the zip csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
 
 
@@ -1294,7 +1295,8 @@ Given Under the Supplier Reports menu I choose: UPC and Retailer (All)
 Then I confirm the most recent file has the following information Report Name: UPC and Retailer (All) File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-And I confirm the csv file saved as UPC and Retailer (All) can be opened and contains data
+Given I confirm that an zip file is produced called UPC and Retailer (All) (1).zip and save as UPC and Retailer (All)
+And I confirm the zip csv file saved as UPC and Retailer (All) can be opened and contains data
 Given I click Close in the Report Download popup
 
 
@@ -1322,7 +1324,8 @@ Given Under the Supplier Reports menu I choose: UPC Errors for The Home Depot
 Then I confirm the most recent file has the following information Report Name: UPC Errors for The Home Depot File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-And I confirm the csv file saved as UPC Errors for The Home Depot can be opened and contains data
+Given I confirm that an zip file is produced called UPC Errors for The Home Depot (1).zip and save as UPC Errors for The Home Depot
+And I confirm the zip csv file saved as UPC Errors for The Home Depot can be opened and contains data
 Given I click Close in the Report Download popup
 
 
@@ -1350,7 +1353,8 @@ Given Under the Supplier Reports menu I choose: Kit Registrations
 Then I confirm the most recent file has the following information Report Name: Kit Registrations File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-And I confirm the csv file saved as Kit Registrations can be opened and contains data
+Given I confirm that an zip file is produced called Kit Registrations (1).zip and save as Kit Registrations
+And I confirm the zip csv file saved as Kit Registrations can be opened and contains data
 Given I click Close in the Report Download popup
 
 
@@ -1378,7 +1382,8 @@ Given Under the Supplier Reports menu I choose: Kits Containing a Registration
 Then I confirm the most recent file has the following information Report Name: Kits Containing a Registration File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-And I confirm the csv file saved as Kits Containing a Registration can be opened and contains data
+Given I confirm that an zip file is produced called Kits Containing a Registration (1).zip and save as Kits Containing a Registration
+And I confirm the zip csv file saved as Kits Containing a Registration can be opened and contains data
 Given I click Close in the Report Download popup
 
 
@@ -1407,5 +1412,6 @@ Given Under the Supplier Reports menu I choose: UPC and Retailer (Single Registr
 Then I confirm the most recent file has the following information Report Name: UPC and Retailer (Single Registration) File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-And I confirm the csv file saved as UPC and Retailer (Single Registration) can be opened and contains data
+Given I confirm that an zip file is produced called UPC and Retailer (Single Registration) (1).zip and save as UPC and Retailer (Single Registration)
+And I confirm the zip csv file saved as UPC and Retailer (Single Registration) can be opened and contains data
 Given I click Close in the Report Download popup
