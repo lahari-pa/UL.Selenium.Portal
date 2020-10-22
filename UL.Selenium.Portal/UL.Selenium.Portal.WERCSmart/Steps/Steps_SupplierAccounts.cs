@@ -26,8 +26,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Setting up account for user: '" + savedAs + "'");
 			var subCompanyInfo = new Table("Email", "Country", "FirstName", "LastName", "Password", "Address1", "Address2", "City", "State", "Zip", "CompanyName", "CompanyPhone",
 				"EmergencyPhoneNumber", "SupplierType", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "Pin");
-			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_Automation_ProductsAccount", "123-456-7889",
+
+
+			subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "725 5th Ave", "", "New York", "New York", "10022", "QA_Automation_ProductsAccount", "123-456-7889",
 				"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+						//subCompanyInfo.AddRow("User_<random>", "UNITED STATES", "WERCS", "Test_Automation_ProductsAccount", "Welcome1!", "Address1", "Address2", "Latham", "New York", "12110", "QA_Automation_ProductsAccount", "123-456-7889",
+			//	"123-456-7889", "Manufacturer", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
+
+
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
 			this.BasicSignup(savedAs);
 
@@ -54,6 +60,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myCreditCardTable = new Table("Card Type", "Card Number", "Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+			//myPay.ThenIOpenTheEditAddressForm();
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state:"New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+
+
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -397,6 +412,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -496,6 +518,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -777,6 +805,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -908,6 +942,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -1021,6 +1061,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -1170,6 +1216,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var myCreditCardTable = new Table("Card Type", "Card Number", "Expiration Month", "Expiration Year", "CVV", "Cardholder Name");
 			myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation");
 			myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+
+			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
+
+			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();

@@ -2312,6 +2312,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.CheckDisplayedSections("see", tableSecond);
 			Report.StartStep("I set the Product is a Retailer's Private Label or Brand option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+
+
 			Report.StartStep(
 				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo(
