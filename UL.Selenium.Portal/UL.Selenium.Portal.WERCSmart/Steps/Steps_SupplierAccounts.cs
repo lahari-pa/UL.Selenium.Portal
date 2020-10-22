@@ -67,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
 
-
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
 
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
@@ -418,6 +418,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
 
 			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
+
 
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
@@ -523,6 +525,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
 
 			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
 
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
@@ -810,6 +813,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
 
 			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
 
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
@@ -948,6 +952,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
 
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
+
+
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 			myPay.ThenInTheThankYouScreenIClickHome();
@@ -1066,6 +1073,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
 
 			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
+
 
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
@@ -1220,6 +1229,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new PaymentMethods_Edit_Address().Edit_Billing_Address(state: "New York");
 
 			Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+			new PaymentMethods_Edit_Address().EditAddressPopupNotShowing();
 
 			myPay.ThenIClickContinue();
 			myPay.ThenInThePurchaseSummaryScreenIClickConfirmOrder();

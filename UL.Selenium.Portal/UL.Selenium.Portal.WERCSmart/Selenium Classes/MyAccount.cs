@@ -1802,6 +1802,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				art_no == "0" ? "" : art_no + " Articles",
 				en_art_no == "0" ? "" : en_art_no + " Enhanced Articles"
 			};
+
+
+
 			string ExpectedText = string.Join(", ", Expected.Where(x => x != ""), 2);
 
 			Report.Info("Expected string: " + ExpectedText);

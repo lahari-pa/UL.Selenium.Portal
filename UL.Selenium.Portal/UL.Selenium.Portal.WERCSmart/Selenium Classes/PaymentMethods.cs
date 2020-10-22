@@ -972,6 +972,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool EditAddressPopupNotShowing()
+		{
+			var elFound = this.containerElement.WaitUntilElementInvisible(By.Id("editAddressDetails"), 45);
+			return elFound;
+			
+		}
+
 
 		//================================================================================================= BILLING ADDRESS
 
