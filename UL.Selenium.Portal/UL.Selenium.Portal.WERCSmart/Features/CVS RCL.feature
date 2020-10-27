@@ -326,13 +326,12 @@ Given I set the Is this product intended to be rinsed off after use? option to: 
 
 Then the question: Refer to your Product Label. Select the options that appear on the label. is displayed at position: 8
 
+#Remove two options according to ticket 145533
 And The following options should be displayed for section: Refer to your Product Label. Select the options that appear on the label.
 | Option                                      |
 | Drug Facts Panel                            |
 | Supplement Facts Panel                      |
 | Nutrition Facts Panel                       |
-| Active Ingredient Panel                     |
-| An Active Ingredient is listed on the Panel |
 | None of the Above                           |
 
 Given I click continue

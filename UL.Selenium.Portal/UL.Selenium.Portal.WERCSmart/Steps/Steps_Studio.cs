@@ -433,18 +433,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					if (SeleniumBrowser.Alert.WaitForAlert(300))
 					{
+						Report.Info($"Attempting to switch to alert 1");
 						SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 					}
 					else
 					{
 						if (!thisApplyRulesPage.WaitForSpinner())
 						{
-							if (SeleniumBrowser.Alert.WaitForAlert(120))
+							if (SeleniumBrowser.Alert.WaitForAlert(180))
 							{
+								Report.Info($"Attempting to switch to alert 2");
 								SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 							}
 							else
 							{
+								Report.Info($"Throwing exception");
 								throw new Exception("Spinner is still showing");
 							}
 						}
