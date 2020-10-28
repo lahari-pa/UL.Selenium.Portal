@@ -4435,19 +4435,74 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
+		//public bool RemoveRandomRetailers()
+		//{
+		//	IList<IWebElement> deleteButtons = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
+		//	List<int> listOfAlreadyRemovedButtonIndexes = new List<int>();
+		//	Random random = new Random();
+		//	int numOfLoops = random.Next(2, deleteButtons.Count - 1);
+
+		//	for (int i = 0; i <= numOfLoops; i++)
+		//	{
+		//		int ran = random.Next(0, deleteButtons.Count);
+		//		if (!listOfAlreadyRemovedButtonIndexes.Contains(ran))
+		//		{
+		//			IWebElement deleteButton = deleteButtons[ran];
+		//			listOfAlreadyRemovedButtonIndexes.Add(ran);
+		//			bool RemoveSelectedRetailer = Report.IsTrue(deleteButton.TryClick(), "Failed to remove selected retailer", "Successfully removed selected retailer");
+		//			if (!RemoveSelectedRetailer)
+		//			{
+		//				return false;
+		//			}
+		//		}
+		//		else
+		//		{
+		//			i -= 1;
+		//		}
+		//	}
+
+		//	return true;
+
+		//}
+
 		public bool RemoveRandomRetailers()
 		{
-			IList<IWebElement> deleteButtons = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
+			//RemoveRandomRetailersWithoutSameBeginningLetter
+			List<IWebElement> retailerRows = this.ContainerElement.FindElements(By.XPath($"//div[@class='row']//div//span[@data-bind='text: identifier']"), 5).ToList();
 			List<int> listOfAlreadyRemovedButtonIndexes = new List<int>();
-			Random random = new Random();
-			int numOfLoops = random.Next(2, deleteButtons.Count - 1);
+			List<char> beginningLettersFound = new List<char>();
+			Random random = new Random();			
+			int numOfLoops = random.Next(2, retailerRows.Count - 1);
+
+			// xpath to use //div[@class='row']//div//span[@data-bind='text: identifier']//ancestor::div[1]//following-sibling::div[a[@title='Remove']]//a[@title='Remove']//em[@class='fa fa-remove']
+
 
 			for (int i = 0; i <= numOfLoops; i++)
 			{
-				int ran = random.Next(0, deleteButtons.Count);
+				int ran = random.Next(0, retailerRows.Count);
+
 				if (!listOfAlreadyRemovedButtonIndexes.Contains(ran))
 				{
-					IWebElement deleteButton = deleteButtons[ran];
+					//IWebElement deleteButton = deleteButtons[ran];
+
+					IWebElement chosenRow = retailerRows[ran];
+					string foundRetailerInitials = chosenRow.Text;
+					char firstLetter = foundRetailerInitials[0];
+					Report.Info($"Initials of the retailer found was: {foundRetailerInitials}");
+					Report.Info($"First letter of retailer was: {firstLetter}");
+					if(!beginningLettersFound.Contains(firstLetter))
+					{
+
+						//do stuff with deleteing row here
+						beginningLettersFound.Add(firstLetter);
+					}
+					else
+					{
+						Report.Info($"A retailer with that starting character was already deleted, moving on.");
+					}
+
+
+
 					listOfAlreadyRemovedButtonIndexes.Add(ran);
 					bool RemoveSelectedRetailer = Report.IsTrue(deleteButton.TryClick(), "Failed to remove selected retailer", "Successfully removed selected retailer");
 					if (!RemoveSelectedRetailer)
@@ -4561,7 +4616,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			foreach (TechTalk.SpecFlow.TableRow row in table.Rows)
 			{
-
+				
 				ReportSettings.UseSubSteps = true;
 				var stepsRetailer = new Retailer();
 				Report.StartStep("In the Select Retailers popup I select the retailer: " + (row["Retailer"]));

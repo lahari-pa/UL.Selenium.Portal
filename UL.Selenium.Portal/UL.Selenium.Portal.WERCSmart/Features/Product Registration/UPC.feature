@@ -509,16 +509,30 @@ Scenario: [84510] Select Retailers in UPC screen
 		| Propane       | 100     | false               | false       |            |
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	And I select the following retailers in the 'Select Retailers' window
-		| Retailer       |
-		| Amazon         |
-		| Autozone       |
-		| Best Buy       |
-		| CVS            |
-		| Dollar General |
-		| Family Dollar  |
-		| Kohl's         |
-		| McLane         |
+	#Going to rewrite to select all retailers.
+	#Wil add step that slects all vendors where drop down is found
+	#Will save list of selected retailers to context.
+
+	#And I select the following retailers in the 'Select Retailers' window
+	#	| Retailer       |
+	#	| Amazon         |
+	#	| Autozone       |
+	#	| Best Buy       |
+	#	| CVS            |
+	#	| Dollar General |
+	#	| Family Dollar  |
+	#	| Kohl's         |
+	#	| McLane         |
+
+	Then the 'Select Retailers' window appears
+	Given I click the Select all retailers option in the Select Retailers popup
+	Then all retailers are selected in the Select Retailers window
+	Given I click Done in the Select Retailers popup
+	Given In the Retailers tab, I select the first Vendor option for retailer: O'Reilly
+	Given In the Retailers tab, I select the first Vendor option for retailer: Sears/K-Mart
+	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+	And I click continue
+
 	Given I click the 'Add UPC' button
 	Given I fill in the UPC data; UPC:0786987894855, Product Type:Paper bag, Product Weight:5
 	Given I remove randomly selected retailers
