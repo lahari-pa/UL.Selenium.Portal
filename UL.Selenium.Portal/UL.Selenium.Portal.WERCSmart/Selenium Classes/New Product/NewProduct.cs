@@ -4475,7 +4475,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			int numOfLoops = random.Next(2, retailerRows.Count - 1);
 
 			// xpath to use //div[@class='row']//div//span[@data-bind='text: identifier']//ancestor::div[1]//following-sibling::div[a[@title='Remove']]//a[@title='Remove']//em[@class='fa fa-remove']
-
+			bool allButtonClicked = true;
 
 			for (int i = 0; i <= numOfLoops; i++)
 			{
@@ -4494,21 +4494,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					{
 
 						//do stuff with deleteing row here
+						var delButtonEl = chosenRow.FindElement(By.XPath($".//ancestor::div[1]//following-sibling::div[a[@title='Remove']]//a[@title='Remove']//em[@class='fa fa-remove']"), 5);
+						if(delButtonEl.TryClick())
+						{
+							Report.Info($"Successfully clicked the delete button for: {foundRetailerInitials}");
+						}
+						else
+						{
+							allButtonClicked = false;
+							Report.Info($"Failed to click the delete button for: {foundRetailerInitials}");
+						}
 						beginningLettersFound.Add(firstLetter);
 					}
 					else
 					{
 						Report.Info($"A retailer with that starting character was already deleted, moving on.");
-					}
+					}				
 
-
-
-					listOfAlreadyRemovedButtonIndexes.Add(ran);
-					bool RemoveSelectedRetailer = Report.IsTrue(deleteButton.TryClick(), "Failed to remove selected retailer", "Successfully removed selected retailer");
-					if (!RemoveSelectedRetailer)
-					{
-						return false;
-					}
 				}
 				else
 				{
@@ -4516,7 +4518,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 			}
 
-			return true;
+			return allButtonClicked;
+
 
 		}
 
