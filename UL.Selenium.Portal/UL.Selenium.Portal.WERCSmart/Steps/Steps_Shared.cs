@@ -867,8 +867,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selSelectRetailers = new SelectRetailers();
 			var selRetailer = new Retailer();
 
-			selRetailer.ClickAddRetailers();
-			selSelectRetailers.Wait_for_load(30);
+			//selRetailer.ClickAddRetailers();
+			//selSelectRetailers.Wait_for_load(30);
 
 			//if (!selSelectRetailers.DoneButton())
 			//{
@@ -7967,8 +7967,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
 			var WarningPopup = new NoRetailerWarningPopup();
-			Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
-			new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
+			//Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
+			//new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
 			Report.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			var thisNewProduct = new NewProduct();
@@ -7979,8 +7979,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			/* --As per TFS70787 warning popup displays for NR  --- */
 			//Delay.Seconds(1);
-			Report.StartStep("In the UPCs Warning popup I click Ok");
-			WarningPopup.ClickChoice("Ok");
+			//Report.StartStep("In the UPCs Warning popup I click Ok");
+			//WarningPopup.ClickChoice("Ok");
 		}
 
 		[StepDefinition(

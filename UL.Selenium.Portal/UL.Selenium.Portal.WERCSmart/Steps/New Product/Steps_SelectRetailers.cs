@@ -89,13 +89,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the 'Select Retailers' window I select the retailer: (.*)")]
 		public void SelectTheRetailer(string retailer)
 		{
-			var selectRetailers = new SelectRetailers();
-			if (!selectRetailers.WaitForContainerToBeVisible(1))
-			{
-				new Retailer().ClickAddRetailers();
-				Delay.Seconds(1);
-			}
-			if (!selectRetailers.WaitForContainerToBeVisible(1))
+			var selectRetailers = new SelectRetailers();			
+			new Retailer().ClickAddRetailers();
+			Delay.Seconds(1);
+			
+			if (!selectRetailers.WaitForContainerToBeVisible(30))
 			{
 				throw new Exception("Select retailers popup is not showing as expected");
 			}
