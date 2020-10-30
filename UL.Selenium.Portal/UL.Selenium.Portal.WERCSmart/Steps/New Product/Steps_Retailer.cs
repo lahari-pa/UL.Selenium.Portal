@@ -262,5 +262,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(RetailersObject.CheckForTheFollowingRetailersInRetailerPage(table), "Failed to find all retailers", "Successfully found all retailers");
 		}
 
+		[StepDefinition(@"On The Retailer Screen, I enter 'This Private Label' as the full name of the product for every retailer selected")]
+		public void OnTheRetailerScreenIEnterTheProductNameAsFullNameOfProductForEveryRetailer()
+		{
+
+			var listOfRetailers = new Retailer().SelectedRetailers();
+			if(listOfRetailers.Count()==0)
+			{
+				Report.Failure($"No Retailers were found selected for the product");
+				return;
+			}
+			foreach(var retailer in listOfRetailers)
+			{
+				this.ForRetailerIEnterPrivateLabelName(retailer, "This Private Label");
+			}
+
+		}
+		
 	}
 }

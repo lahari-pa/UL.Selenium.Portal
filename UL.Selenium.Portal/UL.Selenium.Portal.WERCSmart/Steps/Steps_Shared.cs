@@ -3565,8 +3565,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 65181 \(Retailer Association - Add Private Label Information and Select Vendor ID\) and select the retailer: (.*) and enter the name: (.*) and select Vendor id: (.*)")]
-		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId(string retailer,
-			string name, string option)
+		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId(string retailer, string name, string option)
 		{
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
@@ -3590,6 +3589,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("Selecting vendor ID: " + option);
 				new Steps_Retailer().ISelectVendorId(option);
 			}
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 
 			Report.StartStep("In the Retailer page I click Continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
@@ -6251,6 +6251,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				selStepsNewProduct.ThenIAddAdditionaRequirmentsInfoForRetailer(thisRetailer["Retailer"],
 					"Additional requirements: " + thisRetailer["Retailer"]);
 			}
+
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
+
 			Report.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
 			if (new NewProduct().ErrorMessageText == "This is a required field.")
@@ -8412,8 +8415,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new NewProduct().ClickContinue();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step  \(Select Retailers (.*) and enter additional requirements field - Indicate full name of product, as sold via this retailer\)")]
+		[StepDefinition(@"I call Shared Step  \(Select Retailers (.*) and enter additional requirements field - Indicate full name of product, as sold via this retailer\)")]
 		public void SelectRetailers(string retailer)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -10552,5 +10554,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
+	
 	}
 }
