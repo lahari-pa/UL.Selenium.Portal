@@ -866,11 +866,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var MyStepsNewProduct = new StepsNewProduct();
 			var selSelectRetailers = new SelectRetailers();
 			var selRetailer = new Retailer();
-			if (!selSelectRetailers.DoneButton())
-			{
-				Report.Warning("The Select Retailers page was not loaded on entering the Retailer page");
-				selRetailer.ClickAddRetailers();
-			}
+
+			selRetailer.ClickAddRetailers();
+			selSelectRetailers.Wait_for_load(30);
+
+			//if (!selSelectRetailers.DoneButton())
+			//{
+			//	Report.Warning("The Select Retailers page was not loaded on entering the Retailer page");
+			//	selRetailer.ClickAddRetailers();
+			//}
 			//if (!selSelectRetailers.Wait_for_load(10))
 			//{
 			//	Report.Warning("The Select Retailers page was not loaded on entering the Retailer page");
