@@ -2229,15 +2229,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var MyStepsNewProduct = new StepsNewProduct();
 			var WarningPopup = new NoRetailerWarningPopup();
-			Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
-			new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
+			//Report.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
+			//new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
 			Report.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			Report.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
 			/* --As per TFS70787 warning popup displays for NR  --- */
-			Report.StartStep("In the UPCs Warning popup I click Ok");
-			new Steps_Retailer().IfISeeUpcWarningPopupClick("Ok");
+			//Report.StartStep("In the UPCs Warning popup I click Ok");
+			//new Steps_Retailer().IfISeeUpcWarningPopupClick("Ok");
 		}
 
 		[StepDefinition(@"I call Shared Step 59042 \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]

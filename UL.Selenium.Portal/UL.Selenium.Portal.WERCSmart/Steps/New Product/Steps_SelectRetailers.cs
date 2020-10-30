@@ -17,8 +17,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"the 'Select Retailers' window appears")]
 		public void GivenIShouldSeeTheSelectRetailersPopUp()
 		{
-			var selSelectRetailers = new SelectRetailers();
+			var selSelectRetailers = new SelectRetailers();	
+			new Retailer().ClickAddRetailers();
+			Delay.Seconds(1);			
 			Report.IsTrue(selSelectRetailers.WaitForContainerToBeVisible(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
+
 		}
 
 		[StepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]

@@ -524,6 +524,8 @@ Scenario: [84510] Select Retailers in UPC screen
 	#	| Kohl's         |
 	#	| McLane         |
 
+
+	#if the select retailers window does not open then we need to clickt eh add retailers button (bug?) -> can only test after the Acc reset.
 	Then the 'Select Retailers' window appears
 	Given I click the Select all retailers option in the Select Retailers popup
 	Then all retailers are selected in the Select Retailers window
