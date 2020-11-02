@@ -4476,6 +4476,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			// xpath to use //div[@class='row']//div//span[@data-bind='text: identifier']//ancestor::div[1]//following-sibling::div[a[@title='Remove']]//a[@title='Remove']//em[@class='fa fa-remove']
 			bool allButtonClicked = true;
+			IWebElement anchorEl = this.containerElement.FindElement(By.Id("txtSearch"), 2);
+
 
 			for (int i = 0; i <= numOfLoops; i++)
 			{
@@ -4495,14 +4497,80 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 						//do stuff with deleteing row here
 						var delButtonEl = chosenRow.FindElement(By.XPath($".//ancestor::div[1]//following-sibling::div[a[@title='Remove']]//a[@title='Remove']//em[@class='fa fa-remove']"), 5);
+						delButtonEl.ScrollElementIntoView();
 						if(delButtonEl.TryClick())
 						{
 							Report.Info($"Successfully clicked the delete button for: {foundRetailerInitials}");
 						}
 						else
 						{
-							allButtonClicked = false;
-							Report.Info($"Failed to click the delete button for: {foundRetailerInitials}");
+							bool elInView = false;
+							int x = 0;
+
+							//scroll (by sending keys updown) until element is visible
+							//First up by one, check visible exit
+							//then down by one check visible exit
+							//up the number by one for x amount until either hit limit or is visible. 
+
+
+
+							
+							//while(delButtonEl.VisibleInViewport() == false || x<10 )
+							//{
+							//	for(int b = 0; b< x; b++)
+							//	{
+							//		try
+							//		{
+
+							//			anchorEl.SendKeys(Keys.PageUp);
+							//			if (delButtonEl.VisibleInViewport())
+							//			{
+							//				break;
+							//			}
+							//		}
+							//		catch
+							//		{
+
+							//			Report.Info($"test fail");
+							//		}
+									
+							//	}
+							//	if (delButtonEl.VisibleInViewport())
+							//	{
+							//		break;
+							//	}
+
+							//	for (int k = 0; k < x; k++)
+							//	{
+							//		anchorEl.SendKeys(Keys.PageDown);
+							//		if (delButtonEl.VisibleInViewport())
+							//		{
+							//			break;
+							//		}
+							//	}
+							//	if (delButtonEl.VisibleInViewport())
+							//	{
+							//		break;
+							//	}
+
+							//	x++;
+
+
+
+							//}
+
+							if(!delButtonEl.TryClick())
+							{
+								allButtonClicked = false;
+								Report.Info($"Failed to click the delete button for: {foundRetailerInitials}");
+							}
+							else
+							{
+								Report.Info($"Successfully clicked the delete button for: {foundRetailerInitials}");
+							}					
+							
+							
+							
 						}
 						beginningLettersFound.Add(firstLetter);
 					}

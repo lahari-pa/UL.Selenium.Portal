@@ -4434,6 +4434,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsSelectRetailers().SelectTheRetailer("CVS");
 			Report.StartStep("I enter private label as 'This Private Label'");
 			stepsRetailer.EnterPrivateLabelName("This Private Label");
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
@@ -8426,10 +8427,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReportSettings.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
 			var stepsRetailer = new Retailer();
-			Report.StartStep("In the Select Retailers popup I select the retailer: CVS");
+			Report.StartStep($"In the Select Retailers popup I select the retailer: {retailer}");
 			new StepsSelectRetailers().SelectTheRetailer(retailer);
 			Report.StartStep("I enter private label as 'This Private Label'");
-			stepsRetailer.EnterPrivateLabelName("This Private Label");
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName(retailer, "This Private Label");
+			//stepsRetailer.EnterPrivateLabelName("This Private Label");
+
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
