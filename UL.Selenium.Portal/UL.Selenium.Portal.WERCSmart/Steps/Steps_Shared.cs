@@ -767,6 +767,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			var MyNewProduct = new NewProduct();
 			MyNewProduct.SetFullNameOfProductForRetailer(retailer, name);
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
