@@ -680,7 +680,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as California Proposition 65 can be opened and contains data
 Given I delete the excel file saved as California Proposition 65
-Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as California Proposition 65 can be opened and contains data
@@ -699,7 +699,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as BatteryContaining Products can be opened and contains data
 Given I delete the excel file saved as BatteryContaining Products
-Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an excel file is produced called Battery-Containing Products.csv and save as BatteryContaining Products
@@ -719,7 +719,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Eligible to Obsolete can be opened and contains data
 Given I delete the excel file saved as Eligible to Obsolete
-Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Eligible to Obsolete can be opened and contains data
@@ -738,7 +738,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Pesticide Registrations can be opened and contains data
 Given I delete the excel file saved as Pesticide Registrations
-Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Pesticide Registrations can be opened and contains data
@@ -758,7 +758,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Registration Updates Not Submitted can be opened and contains data
 Given I delete the excel file saved as Registration Updates Not Submitted
-Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Registration Updates Not Submitted can be opened and contains data
@@ -778,7 +778,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Subscription Product Types can be opened and contains data
 Given I delete the excel file saved as Subscription Product Types
-Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Subscription Product Types can be opened and contains data
@@ -797,7 +797,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as UPC Duplication can be opened and contains data
 Given I delete the excel file saved as UPC Duplication
-Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPC Duplication can be opened and contains data
@@ -816,7 +816,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Volatile Organic Compounds can be opened and contains data
 Given I delete the excel file saved as Volatile Organic Compounds
-Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Volatile Organic Compounds can be opened and contains data
@@ -835,7 +835,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Waste Classification Summary can be opened and contains data
 Given I delete the excel file saved as Waste Classification Summary
-Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Waste Classification Summary can be opened and contains data
@@ -856,7 +856,7 @@ Given I see a Report Download popup with the following text: Report download com
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Chemicals of Concern can be opened and contains data
 Given I delete the excel file saved as Chemicals of Concern
-Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as Chemicals of Concern can be opened and contains data
@@ -929,7 +929,7 @@ Given I delete the excel file saved as California Proposition 65
 Then I Delete the file with name: California Proposition 65.zip from the downloads folder
 Then I Delete the file with name: California Proposition 65.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: California Proposition 65
-Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called California Proposition 65.zip and save as California Proposition 65
@@ -938,6 +938,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as California Proposition 65
 Then I Delete the file with name: California Proposition 65.zip from the downloads folder
 Then I Delete the file with name: California Proposition 65.csv from the downloads folder
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @ScenarioId:10294
 Scenario: [140683] Battery-Containing Products - CSV Zip File
@@ -956,7 +957,7 @@ Given I delete the excel file saved as BatteryContaining Products
 Then I Delete the file with name: BatteryContaining Products.zip from the downloads folder
 Then I Delete the file with name: BatteryContaining Products.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: BatteryContaining Products
-Then I confirm the most recent file has the following information Report Name: BatteryContaining Products File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: BatteryContaining Products File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called BatteryContaining Products.zip and save as BatteryContaining Products
@@ -965,6 +966,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as BatteryContaining Products
 Then I Delete the file with name: BatteryContaining Products.zip from the downloads folder
 Then I Delete the file with name: BatteryContaining Products.csv from the downloads folder
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @ScenarioId:10309
 Scenario: [141005] Eligible to Obsolete - CSV Zip File
@@ -984,7 +986,7 @@ Given I delete the excel file saved as Eligible to Obsolete
 Then I Delete the file with name: Eligible to Obsolete.zip from the downloads folder
 Then I Delete the file with name: Eligible to Obsolete.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Eligible to Obsolete
-Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Eligible to Obsolete.zip and save as Eligible to Obsolete
@@ -1011,7 +1013,7 @@ Given I delete the excel file saved as Pesticide Registrations
 Then I Delete the file with name: Pesticide Registrations.zip from the downloads folder
 Then I Delete the file with name: Pesticide Registrations.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Pesticide Registrations
-Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Pesticide Registrations.zip and save as Pesticide Registrations
@@ -1020,7 +1022,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as Pesticide Registrations
 Then I Delete the file with name: Pesticide Registrations.zip from the downloads folder
 Then I Delete the file with name: Pesticide Registrations.csv from the downloads folder
-
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @ScenarioId:10307
 Scenario: [141028] Registration Updates Not Submitted - CSV Zip File
@@ -1039,7 +1041,7 @@ Given I delete the excel file saved as Registration Updates Not Submitted
 Then I Delete the file with name: Registration Updates Not Submitted.zip from the downloads folder
 Then I Delete the file with name: Registration Updates Not Submitted.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Registration Updates Not Submitted
-Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Registration Updates Not Submitted.zip and save as Registration Updates Not Submitted
@@ -1048,7 +1050,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as Registration Updates Not Submitted
 Then I Delete the file with name: Registration Updates Not Submitted.zip from the downloads folder
 Then I Delete the file with name: Registration Updates Not Submitted.csv from the downloads folder
-
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @ScenarioId:10311
 Scenario: [141029] Subscription Product Types - CSV Zip File
@@ -1067,7 +1069,7 @@ Given I delete the excel file saved as Subscription Product Types
 Then I Delete the file with name: Subscription Product Types.zip from the downloads folder
 Then I Delete the file with name: Subscription Product Types.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Subscription Product Types
-Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Subscription Product Types.zip and save as Subscription Product Types
@@ -1076,6 +1078,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as Subscription Product Types
 Then I Delete the file with name: Subscription Product Types.zip from the downloads folder
 Then I Delete the file with name: Subscription Product Types.csv from the downloads folder
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @ScenarioId:10312
 Scenario: [141034] UPC Duplication - CSV Zip File
@@ -1094,7 +1097,7 @@ Given I delete the excel file saved as UPC Duplication
 Then I Delete the file with name: UPC Duplication.zip from the downloads folder
 Then I Delete the file with name: UPC Duplication.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: UPC Duplication
-Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called UPC Duplication.zip and save as UPC Duplication
@@ -1103,6 +1106,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as UPC Duplication
 Then I Delete the file with name: UPC Duplication.zip from the downloads folder
 Then I Delete the file with name: UPC Duplication.csv from the downloads folder
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @ScenarioId:10313
 Scenario: [141036] Volatile Organic Compounds - CSV Zip File
@@ -1121,7 +1125,7 @@ Given I delete the excel file saved as Volatile Organic Compounds
 Then I Delete the file with name: Volatile Organic Compounds.zip from the downloads folder
 Then I Delete the file with name: Volatile Organic Compounds.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Volatile Organic Compounds
-Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Volatile Organic Compounds.zip and save as Volatile Organic Compounds
@@ -1130,6 +1134,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as Volatile Organic Compounds
 Then I Delete the file with name: Volatile Organic Compounds.zip from the downloads folder
 Then I Delete the file with name: Volatile Organic Compounds.csv from the downloads folder
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @ScenarioId:10314
 Scenario: [141041] Waste Classification Summary - CSV Zip File
@@ -1148,7 +1153,7 @@ Given I delete the excel file saved as Waste Classification Summary
 Then I Delete the file with name: Waste Classification Summary.zip from the downloads folder
 Then I Delete the file with name: Waste Classification Summary.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Waste Classification Summary
-Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Waste Classification Summary.zip and save as Waste Classification Summary
@@ -1157,7 +1162,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as Waste Classification Summary
 Then I Delete the file with name: Waste Classification Summary.zip from the downloads folder
 Then I Delete the file with name: Waste Classification Summary.csv from the downloads folder
-
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @tfs_design
 @ScenarioId:10318
@@ -1177,7 +1182,7 @@ Given I delete the excel file saved as Chemicals of Concern
 Then I Delete the file with name: Chemicals of Concern.zip from the downloads folder
 Then I Delete the file with name: Chemicals of Concern.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Chemicals of Concern
-Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Chemicals of Concern.zip and save as Chemicals of Concern
@@ -1186,7 +1191,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as Chemicals of Concern
 Then I Delete the file with name: Chemicals of Concern.zip from the downloads folder
 Then I Delete the file with name: Chemicals of Concern.csv from the downloads folder
-
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 
 
@@ -1224,12 +1229,13 @@ Then I confirm that the excel file saved as: UPCs to Retailer via Item Sync cont
 		| Date UPC Provided |
 Given I delete the excel file saved as UPCs to Retailer via Item Sync
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
-Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an excel file is produced called UPCs to Retailer via Item Sync.xlsx and save as UPCs to Retailer via Item Sync
 And I confirm the Supplier Reports excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
+Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
 
 @ScenarioId:10349
 Scenario: [146172] UPCs to Retailer via Item Sync - Excel Zip File
@@ -1254,14 +1260,18 @@ Then I confirm that the excel file saved as: UPCs to Retailer via Item Sync cont
 		| UPC               |
 		| Retailer          |
 		| Date UPC Provided |
-Given I delete the excel file saved as UPCs to Retailer via Item Sync
+Then I Delete the file with name: UPCs to Retailer via Item Sync.zip from the downloads folder
+Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
-Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-Given I confirm that an zip file is produced called UPCs to Retailer via Item Sync (1).zip and save as UPCs to Retailer via Item Sync
+Given I confirm that an zip file is produced called UPCs to Retailer via Item Sync.zip and save as UPCs to Retailer via Item Sync
 And I confirm the zip excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
+Then I Delete the file with name: UPCs to Retailer via Item Sync.zip from the downloads folder
+Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 
 @ScenarioId:10337
@@ -1274,7 +1284,7 @@ Given In the My Reports Screen I confirm the following description is displayed:
 Then I select CSV from the Select File Type
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
 Then I select the Request Report button csv file is produced called UPCs to Retailer via Item Sync.csv and save as UPCs to Retailer via Item Sync
-Given I confirm that an excel file is produced called UPCs to Retailer via Item Sync.csv and save as UPCs to Retailer via Item Sync
+Given I confirm that an csv file is produced called UPCs to Retailer via Item Sync.csv and save as UPCs to Retailer via Item Sync
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Then I confirm that the CSV file saved as: UPCs to Retailer via Item Sync contains the following columns:
@@ -1288,7 +1298,7 @@ Then I confirm that the CSV file saved as: UPCs to Retailer via Item Sync contai
 Given I delete the excel file saved as UPCs to Retailer via Item Sync
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
-Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an csv file is produced called UPCs to Retailer via Item Sync.csv and save as UPCs to Retailer via Item Sync
@@ -1321,11 +1331,10 @@ Then I confirm that the CSV file saved as: UPCs to Retailer via Item Sync contai
 		| UPC               |
 		| Retailer          |
 		| Date UPC Provided |
-Given I delete the excel file saved as UPCs to Retailer via Item Sync
 Then I Delete the file with name: UPCs to Retailer via Item Sync.zip from the downloads folder
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
-Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called UPCs to Retailer via Item Sync.zip and save as UPCs to Retailer via Item Sync
@@ -1334,6 +1343,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as UPCs to Retailer via Item Sync
 Then I Delete the file with name: UPCs to Retailer via Item Sync.zip from the downloads folder
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 @ScenarioId:10343
 Scenario: [144339] UPC and Retailer (All) - CSV Zip File
@@ -1355,7 +1365,7 @@ Given I delete the excel file saved as UPC and Retailer (All)
 Then I Delete the file with name: UPC and Retailer (All).zip from the downloads folder
 Then I Delete the file with name: UPC and Retailer (All).csv from the downloads folder
 Given Under the Supplier Reports menu I choose: UPC and Retailer (All)
-Then I confirm the most recent file has the following information Report Name: UPC and Retailer (All) File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: UPC and Retailer (All) File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called UPC and Retailer (All).zip and save as UPC and Retailer (All)
@@ -1364,7 +1374,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as UPC and Retailer (All)
 Then I Delete the file with name: UPC and Retailer (All).zip from the downloads folder
 Then I Delete the file with name: UPC and Retailer (All).csv from the downloads folder
-
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 
 @ScenarioId:10344
@@ -1389,7 +1399,7 @@ Given I delete the excel file saved as UPC Errors for The Home Depot
 Then I Delete the file with name: UPC Errors for The Home Depot.zip from the downloads folder
 Then I Delete the file with name: UPC Errors for The Home Depot.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: UPC Errors for The Home Depot
-Then I confirm the most recent file has the following information Report Name: UPC Errors for The Home Depot File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: UPC Errors for The Home Depot File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called UPC Errors for The Home Depot.zip and save as UPC Errors for The Home Depot
@@ -1398,7 +1408,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as UPC Errors for The Home Depot
 Then I Delete the file with name: UPC Errors for The Home Depot.zip from the downloads folder
 Then I Delete the file with name: UPC Errors for The Home Depot.csv from the downloads folder
-
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 
 
@@ -1423,7 +1433,7 @@ Given I delete the excel file saved as Kit Registrations
 Then I Delete the file with name: Kit Registrations.zip from the downloads folder
 Then I Delete the file with name: Kit Registrations.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Kit Registrations
-Then I confirm the most recent file has the following information Report Name: Kit Registrations File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Kit Registrations File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Kit Registrations.zip and save as Kit Registrations
@@ -1432,7 +1442,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as Kit Registrations
 Then I Delete the file with name: Kit Registrations.zip from the downloads folder
 Then I Delete the file with name: Kit Registrations.csv from the downloads folder
-
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 
 @ScenarioId:10368
@@ -1456,7 +1466,7 @@ Given I delete the excel file saved as Kits Containing a Registration
 Then I Delete the file with name: Kits Containing a Registration.zip from the downloads folder
 Then I Delete the file with name: Kits Containing a Registration.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Kits Containing a Registration
-Then I confirm the most recent file has the following information Report Name: Kits Containing a Registration File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Kits Containing a Registration File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Kits Containing a Registration.zip and save as Kits Containing a Registration
@@ -1465,7 +1475,7 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as Kits Containing a Registration
 Then I Delete the file with name: Kits Containing a Registration.zip from the downloads folder
 Then I Delete the file with name: Kits Containing a Registration.csv from the downloads folder
-
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
 
 
@@ -1491,7 +1501,7 @@ Given I delete the excel file saved as UPC and Retailer (Single Registration)
 Then I Delete the file with name: UPC and Retailer (Single Registration).zip from the downloads folder
 Then I Delete the file with name: UPC and Retailer (Single Registration).csv from the downloads folder
 Given Under the Supplier Reports menu I choose: UPC and Retailer (Single Registration)
-Then I confirm the most recent file has the following information Report Name: UPC and Retailer (Single Registration) File Type: CSV (Zip) Date Requested: LastReportDownloadTime Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: UPC and Retailer (Single Registration) File Type: CSV (Zip) Requested By: Richard Smith
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called UPC and Retailer (Single Registration).zip and save as UPC and Retailer (Single Registration)
@@ -1500,3 +1510,4 @@ Given I click Close in the Report Download popup
 Given I delete the file saved as UPC and Retailer (Single Registration)
 Then I Delete the file with name: UPC and Retailer (Single Registration).zip from the downloads folder
 Then I Delete the file with name: UPC and Retailer (Single Registration).csv from the downloads folder
+Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder

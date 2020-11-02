@@ -775,7 +775,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(foundName == reportName, "The found report File Type did not match the expected", "The found report File Type matched the expected");
 		}
 
-
 		[StepDefinition(@"I confirm that the latest report in the Report history table matches the following data:")]
 		public void IConfirmLatestReportInHistoryTableHasFileType(Table table)
 		{
@@ -913,18 +912,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.SelectRequestReportButton(), "Failed to select Request Report button", "Successfully selected Request Report button");
-
-			var timeUtc = DateTime.UtcNow;
-			TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-			DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, easternZone);
-			string currentTime = easternTime.ToString();
-
-			int index = currentTime.LastIndexOf(":") + 2;
-			if (index > 0)
-			{
-				currentTime = currentTime.Substring(0, index);
-			}
-			Context.AddToContext("LastReportDownloadTime", currentTime);
 			Delay.Seconds(25);
 
 		}
@@ -943,6 +930,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.WebBrowser.Navigate().Refresh();
 			GeneralUtilities.Wait_for_load_finish();
 			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
 			Report.IsTrue(supplierReportsObject.CheckForDownloadButtonForTheMostRecentReport(), "Failed to find Download button", "Successfully found Download button");
 		}
 
@@ -956,13 +944,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(25);
 		}
 
-		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Date Requested: (.*) Requested By: (.*)")]
-		public void ThenIConfirmTheMostRecentFileHasTheFollowingInformationReportNameWasteClassificationSummaryFileTypeCSVDataRequestedRequestedByWERCSTest_Automation_ProductsAccount(string reportName, string type, string dateRequested, string requestedBy)
+		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Requested By: (.*)")]
+		public void ThenIConfirmTheMostRecentFileHasTheFollowingInformationReportNameWasteClassificationSummaryFileTypeCSVdRequestedByWERCSTest_Automation_ProductsAccount(string reportName, string type, string requestedBy)
 		{
 			SeleniumBrowser.WebBrowser.Navigate().Refresh();
 			GeneralUtilities.Wait_for_load_finish();
 			SupplierReports supplierReportsObject = new SupplierReports();
-			Report.IsTrue(supplierReportsObject.CheckReportDataForMostRecentFile(reportName, type, dateRequested, requestedBy), "Failed to match all data for the most recent file", "Successfully matched all data for the most recent file");
+
+			Report.IsTrue(supplierReportsObject.ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
+			Report.IsTrue(supplierReportsObject.CheckReportDataForMostRecentFile(reportName, type, requestedBy), "Failed to match all data for the most recent file", "Successfully matched all data for the most recent file");
 		}
 
 		[StepDefinition(@"I see a Report Download popup with the following text: (.*)")]

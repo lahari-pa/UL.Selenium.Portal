@@ -17,6 +17,27 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using NPOI.SS.Formula.Functions;
 using System.IO.Compression;
 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using HtmlAgilityPack;
+using UL.Automation.Selenium.Classes;
+using UL.Automation.Selenium.Extensions;
+using UL.Automation.Reporting.Functions;
+using OpenQA.Selenium;
+using System.Text;
+using System.Linq;
+using UL.Automation.Utilities.Functions;
+using System.IO;
+using System.Text.RegularExpressions;
+using UL.Automation.Reporting.SpecFlow.Classes;
+using System.Net;
+using System.Drawing;
+using TechTalk.SpecFlow;
+using System.Globalization;
+
+
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "RetailPartners")]
@@ -536,22 +557,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 			object File = Context.GetFromContext(savedAs);
-
 			string startPath = @".\downloads";
 			string zipPath = File.ToString();
 			string extractPath = File.ToString();
 			extractPath = extractPath.Replace(".zip", ".xlsx");
 
-			ZipFile.ExtractToDirectory(zipPath, extractPath);
+			string rootFolder = @"" + KnownFolders.GetPath(KnownFolder.Downloads) + "\\ExtractFolder\\";
+			string authorsFile = "" + savedAs + ".xlsx";
 
-			extractPath = extractPath.Replace(@".xlsx", @".xlsx\" + savedAs + ".xlsx");
-	
-			Context.AddToContext(savedAs, extractPath);
+			if (Directory.Exists(rootFolder))
+			{
+				Directory.Delete(rootFolder, true);
+			}
+		
+			ZipFile.ExtractToDirectory(zipPath, rootFolder);
 
-			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + extractPath))
+			Context.AddToContext(savedAs, rootFolder + authorsFile);
+		
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + rootFolder + authorsFile))
 			{
 				bool Data = false;
-				var ExcelUtils = new ExcelFunctions(extractPath, "Table");
+				var ExcelUtils = new ExcelFunctions(rootFolder + authorsFile, "Table");
 				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
 				List<string> FirstRow = ExcelUtils.Excel_GetRow(0);
 				if (FirstRow != null)
@@ -598,23 +624,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm the zip csv file saved as (.*) can be opened and contains data")]
 		public void ThenConfirmTheZipCSVFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
-			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			Report.Info("Confirm the csv file saved as " + savedAs + " can be opened and contains data");
 			object File = Context.GetFromContext(savedAs);
-
 			string startPath = @".\downloads";
 			string zipPath = File.ToString();
 			string extractPath = File.ToString();
 			extractPath = extractPath.Replace(".zip", ".csv");
 
-			ZipFile.ExtractToDirectory(zipPath, extractPath);
+			string rootFolder = @"" + KnownFolders.GetPath(KnownFolder.Downloads) + "\\ExtractFolder\\";
+			string authorsFile = "" + savedAs + ".csv";
 
-			extractPath = extractPath.Replace(@".csv", @".csv\" + savedAs + ".csv");
-
-			Context.AddToContext(savedAs, extractPath);
-
-			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			if (Directory.Exists(rootFolder))
 			{
-				var lines = System.IO.File.ReadAllLines(extractPath.ToString());
+				Directory.Delete(rootFolder, true);
+			}
+
+			ZipFile.ExtractToDirectory(zipPath, rootFolder);
+
+			Context.AddToContext(savedAs, rootFolder + authorsFile);
+
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + rootFolder + authorsFile))
+			{
+				var lines = System.IO.File.ReadAllLines(rootFolder + authorsFile);
 
 				if (lines != null)
 				{
@@ -1173,6 +1204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						"Column name has been found as expected: " + thisRow["Column"], false, false);
 				}
 			}
+
 		}
 
 		[StepDefinition(@"I get the excel row data file saved as: (.*) and save the data to context")]

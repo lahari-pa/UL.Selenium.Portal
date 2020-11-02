@@ -405,8 +405,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckForDownloadButtonForTheMostRecentReport()
 		{
-			Report.Info("Check for download button for report with the following time: " + Context.GetFromContext("LastReportDownloadTime").ToString());
-			IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//button"), 2);
+			IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr[1]//td[@data-bind='text:DateRequested']/..//button"), 2);
 			if (downloadButton != null)
 			{
 				return true;
@@ -416,29 +415,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectDownloadButtonForTheMostRecentReport()
 		{
-			Report.Info("Downloading report with the following time: " + Context.GetFromContext("LastReportDownloadTime").ToString());
-			IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//button"), 2);
+			IWebElement downloadButton = this.ContainerElement.FindElement(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr[1]//td[@data-bind='text:DateRequested']/..//button"), 2);
 			return downloadButton.TryClick();
 		}
 
-		public bool CheckReportDataForMostRecentFile(string reportName, string type, string dateRequested, string requestedBy)
+		public bool CheckReportDataForMostRecentFile(string reportName, string type, string requestedBy)
 		{
 			Delay.Seconds(10);
-			IList<IWebElement> fileList = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr//td[@data-bind='text:DateRequested'][contains(text(),'" + Context.GetFromContext("LastReportDownloadTime").ToString() + "')]/..//td"), 2);
-
+		
+			IList<IWebElement> fileList = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr[1]//td[@data-bind='text:DateRequested']/..//td"), 2);
+		
 			string reportNameStr = fileList[0].Text;
 		
 			string reportTypeStr = fileList[2].Text;
-		
-			string reportDateRequestedStr = fileList[3].Text;
-		
-			string reportRequestedByStr = fileList[4].Text;
 			
-			if (reportNameStr == reportName && reportTypeStr == type && reportDateRequestedStr.Contains(Context.GetFromContext(dateRequested).ToString()) && reportRequestedByStr == requestedBy)
+			string reportRequestedByStr = fileList[4].Text;
+
+			if (reportNameStr == reportName && reportTypeStr == type && reportRequestedByStr == requestedBy)
 			{
 				return true;
 			}
-
+			
 			if (reportNameStr != reportName)
 			{ 
 				Report.Failure("Failed to match Report Name");
@@ -446,10 +443,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (reportTypeStr != type)
 			{
 				Report.Failure("Failed to match Type");
-			}
-			if (!reportDateRequestedStr.Contains(Context.GetFromContext("LastReportDownloadTime").ToString()))
-			{
-				Report.Failure("Failed to match Date Requested");
 			}
 			if (reportRequestedByStr != requestedBy)
 			{
