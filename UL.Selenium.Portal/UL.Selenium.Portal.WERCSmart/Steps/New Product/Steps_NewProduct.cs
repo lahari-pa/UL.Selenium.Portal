@@ -2668,6 +2668,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(thisNewProduct.EnterAdditionalRequirement(retailer, additionalRequirements),
 				"Failed to enter additional requirements: " + additionalRequirements + " for retailer: " + retailer,
 				"Added additional requirements for retailer: " + retailer);
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 		}
 
 		//Item Description
