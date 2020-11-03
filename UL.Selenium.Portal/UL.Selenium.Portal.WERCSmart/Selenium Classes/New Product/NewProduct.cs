@@ -4504,62 +4504,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						}
 						else
 						{
-							bool elInView = false;
-							int x = 0;
-
-							//scroll (by sending keys updown) until element is visible
-							//First up by one, check visible exit
-							//then down by one check visible exit
-							//up the number by one for x amount until either hit limit or is visible. 
-
-
-
 							
-							//while(delButtonEl.VisibleInViewport() == false || x<10 )
-							//{
-							//	for(int b = 0; b< x; b++)
-							//	{
-							//		try
-							//		{
-
-							//			anchorEl.SendKeys(Keys.PageUp);
-							//			if (delButtonEl.VisibleInViewport())
-							//			{
-							//				break;
-							//			}
-							//		}
-							//		catch
-							//		{
-
-							//			Report.Info($"test fail");
-							//		}
+							GeneralUtilities.ScrollToBottomOfPage();
+							for(int x = 0; x<6; x++)
+							{
+								anchorEl.SendKeys(Keys.PageUp);
+								if(delButtonEl.VisibleInViewport())
+								{
+									Report.Info($"The delete button for the retailer was now visisble");
 									
-							//	}
-							//	if (delButtonEl.VisibleInViewport())
-							//	{
-							//		break;
-							//	}
-
-							//	for (int k = 0; k < x; k++)
-							//	{
-							//		anchorEl.SendKeys(Keys.PageDown);
-							//		if (delButtonEl.VisibleInViewport())
-							//		{
-							//			break;
-							//		}
-							//	}
-							//	if (delButtonEl.VisibleInViewport())
-							//	{
-							//		break;
-							//	}
-
-							//	x++;
-
-
-
-							//}
-
-							if(!delButtonEl.TryClick())
+									break;
+								}
+							}
+							if (!delButtonEl.TryClick())
 							{
 								allButtonClicked = false;
 								Report.Info($"Failed to click the delete button for: {foundRetailerInitials}");
@@ -4567,11 +4524,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 							else
 							{
 								Report.Info($"Successfully clicked the delete button for: {foundRetailerInitials}");
-							}					
-							
-							
-							
-						}
+							}
+
+						}				
+																		
+						
 						beginningLettersFound.Add(firstLetter);
 					}
 					else
