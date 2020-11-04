@@ -18,26 +18,6 @@ using NPOI.SS.Formula.Functions;
 using System.IO.Compression;
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlAgilityPack;
-using UL.Automation.Selenium.Classes;
-using UL.Automation.Selenium.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using System.Text;
-using System.Linq;
-using UL.Automation.Utilities.Functions;
-using System.IO;
-using System.Text.RegularExpressions;
-using UL.Automation.Reporting.SpecFlow.Classes;
-using System.Net;
-using System.Drawing;
-using TechTalk.SpecFlow;
-using System.Globalization;
-
-
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "RetailPartners")]

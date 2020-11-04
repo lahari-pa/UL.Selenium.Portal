@@ -913,7 +913,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.SelectRequestReportButton(), "Failed to select Request Report button", "Successfully selected Request Report button");
 			Delay.Seconds(25);
-
 		}
 	
 		[StepDefinition(@"I click Close in the Report Download popup")]
@@ -940,8 +939,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.WebBrowser.Navigate().Refresh();
 			GeneralUtilities.Wait_for_load_finish();
 			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
 			Report.IsTrue(supplierReportsObject.SelectDownloadButtonForTheMostRecentReport(), "Failed to select Download button", "Successfully selected Download button");
-			Delay.Seconds(25);
+			Delay.Seconds(45);
 		}
 
 		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Requested By: (.*)")]
