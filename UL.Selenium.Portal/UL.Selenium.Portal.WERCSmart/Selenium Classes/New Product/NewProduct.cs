@@ -4473,19 +4473,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			List<char> beginningLettersFound = new List<char>();
 			Random random = new Random();			
 			int numOfLoops = random.Next(2, retailerRows.Count - 1);
+			List<string> RemovedRetailersInitials = new List<string>();
 
 			// xpath to use //div[@class='row']//div//span[@data-bind='text: identifier']//ancestor::div[1]//following-sibling::div[a[@title='Remove']]//a[@title='Remove']//em[@class='fa fa-remove']
 			bool allButtonClicked = true;
 			IWebElement anchorEl = this.containerElement.FindElement(By.Id("txtSearch"), 2);
 
+			Report.Info($"The random number of loops will be: {numOfLoops}");
 
 			for (int i = 0; i <= numOfLoops; i++)
 			{
+
+				retailerRows = this.ContainerElement.FindElements(By.XPath($"//div[@class='row']//div//span[@data-bind='text: identifier']"), 5).ToList();
 				int ran = random.Next(0, retailerRows.Count);
+
+				
 
 				if (!listOfAlreadyRemovedButtonIndexes.Contains(ran))
 				{
-					//IWebElement deleteButton = deleteButtons[ran];
 
 					IWebElement chosenRow = retailerRows[ran];
 					string foundRetailerInitials = chosenRow.Text;
@@ -4495,7 +4500,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					if(!beginningLettersFound.Contains(firstLetter))
 					{
 
-						//do stuff with deleteing row here
 						var delButtonEl = chosenRow.FindElement(By.XPath($".//ancestor::div[1]//following-sibling::div[a[@title='Remove']]//a[@title='Remove']//em[@class='fa fa-remove']"), 5);
 						delButtonEl.ScrollElementIntoView();
 						if(delButtonEl.TryClick())
@@ -4504,7 +4508,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						}
 						else
 						{
-							
+							Report.Info($"Starting scrolling");
 							GeneralUtilities.ScrollToBottomOfPage();
 							for(int x = 0; x<6; x++)
 							{
@@ -4516,6 +4520,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 									break;
 								}
 							}
+							Report.Info($"Going to tryclick....");
 							if (!delButtonEl.TryClick())
 							{
 								allButtonClicked = false;
@@ -4526,10 +4531,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 								Report.Info($"Successfully clicked the delete button for: {foundRetailerInitials}");
 							}
 
-						}				
-																		
-						
+						}
+
+						Report.Info($"Adding retailer to lists");
 						beginningLettersFound.Add(firstLetter);
+						RemovedRetailersInitials.Add(foundRetailerInitials);
 					}
 					else
 					{
@@ -4540,9 +4546,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				else
 				{
 					i -= 1;
+					Report.Info($"I was now: {i}");
 				}
 			}
 
+			Context.AddToContext("LatestRemovedRetailers", RemovedRetailersInitials);
 			return allButtonClicked;
 
 
@@ -4575,6 +4583,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			IList<IWebElement> CheckBoxes = this.containerElement.FindElements(By.XPath(".//ul[@aria-labelledby='ddAddRetailers']//input[@type='checkbox']"), 2);
 			List<int> listOfAlreadyClickedCheckBoxIndexes = new List<int>();
+			List<string> restoredRetailers = new List<string>();
+
 
 			for (int i = 0; i < CheckBoxes.Count; i++)
 			{
@@ -4683,6 +4693,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
+		public List<string> GetListOfRemovedRetailersInPopup()
+		{
+			IList<IWebElement> RemovedRetailers = this.containerElement.FindElements(By.XPath(".//a[@data-bind='text: name, click: $parent.restoreRetailer.bind($parent)']"), 2);
+			if(RemovedRetailers.IsNullOrEmpty())
+			{
+				Report.Info("el was null for RemovedRetailers");
+				return null;
+			}
+			List<string> RemovedRetailerNames = new List<string>();
+			foreach (IWebElement element in RemovedRetailers)
+			{
+				RemovedRetailerNames.Add(element.Text);
+			}
+			return RemovedRetailerNames;
+		}
+
 		public bool CheckIfListOfAddedRetailersAreInAlphabeticalOrder()
 		{
 			IList<IWebElement> AddedRetailers = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']"), 2);
@@ -4694,9 +4720,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			var expectedList = AddedRetailersNames.OrderBy(x => x).ToList();
 
-			return Report.IsTrue(expectedList.SequenceEqual(AddedRetailersNames),
-			"List of added retailers was not sorted as expected. Found: " + string.Join(",", AddedRetailersNames),
-			"Added retailer names are in order");
+			return Report.IsTrue(expectedList.SequenceEqual(AddedRetailersNames),"List of added retailers was not sorted as expected. Found: " + string.Join(",", AddedRetailersNames),"Added retailer names are in order");
 		}
 
 		public bool CompanyTollFreePhoneNumber(string text)

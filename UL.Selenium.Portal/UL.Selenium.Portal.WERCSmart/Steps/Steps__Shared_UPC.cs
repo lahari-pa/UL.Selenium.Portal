@@ -1456,8 +1456,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIClickAddRetailers()
 		{
 			NewProduct NewProductClassObject = new NewProduct();
+			//Open Retailers popup
 			Report.IsTrue(NewProductClassObject.ClickAddRetailersButton(), "Failed to click 'Add Retailers' button", "Successfully clicked 'Add Retailers' button");
 			Report.IsTrue(NewProductClassObject.CheckIfListOfRemovedRetailersAreInAlphabeticalOrder(), "The removed retailers are not sorted in alphabetical order", "The removed retailers are sorted in alphabetical order");
+		}
+
+		[StepDefinition(@"The 'Add Retailers' popup contains all the retailers saved as: (.*)")]
+		public void AddRetailersPopupContainsDeletedRetailersList(string savedAs)
+		{
+			List<string> deletedRetailersInitials = (List<string>)Context.GetFromContext(savedAs);
+			List<string> foundRetaiers = new NewProduct().GetListOfRemovedRetailersInPopup();
+			List<string> foundRetailersInitials = new List<string>();
+			foreach(var item in foundRetaiers)
+			{
+				foundRetailersInitials.Add(new RetailerAbbreviations().TryConvertToAbbreviation($"{item}")); 
+
+			}
+			bool countsMatch =  foundRetailersInitials.Count() == deletedRetailersInitials.Count();
+			var differences1 = foundRetailersInitials.Except(deletedRetailersInitials).ToList();
+			bool foundDifferences1 = differences1.IsNullOrEmpty();
+			var differences2 = deletedRetailersInitials.Except(foundRetailersInitials).ToList();
+			bool foundDifferences2 = differences2.IsNullOrEmpty();
+			Report.IsTrue(countsMatch && foundDifferences1 && foundDifferences2, $"The 'Add Retailers' popop did not contain all the expected retailers", "The 'Add Retailers' popop did contain all the expected retailers");
+
+
 		}
 
 		[StepDefinition(@"I randomly select retailers to restore")]

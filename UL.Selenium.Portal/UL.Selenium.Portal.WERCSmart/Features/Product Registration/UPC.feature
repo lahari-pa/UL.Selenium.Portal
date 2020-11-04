@@ -538,7 +538,12 @@ Scenario: [84510] Select Retailers in UPC screen
 	Given I click the 'Add UPC' button
 	Given I fill in the UPC data; UPC:0786987894855, Product Type:Paper bag, Product Weight:5
 	Given I remove randomly selected retailers
+
+	#Below check that the realtaiers deleted are all seen in below window popup list.
+	#Retailers in popup are in alphabeticcal order
+	#Once restored check destination retailers list is in alpha order
 	Given I click the 'Add Retailers' button
+	Then The 'Add Retailers' popup contains all the retailers saved as: LatestRemovedRetailers
 	Given I randomly select retailers to restore
 	Given I click the 'Restore Selected' button
 	Given I click the 'Add Retailers' button
