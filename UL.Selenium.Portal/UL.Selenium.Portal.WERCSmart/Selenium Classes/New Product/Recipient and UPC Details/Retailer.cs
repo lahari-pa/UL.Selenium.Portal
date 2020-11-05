@@ -148,15 +148,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Error("Could not find the input field for retailer: " + retailer);
 					return false;
 				}
-
-				if(item== "<ProductName>")
-				{
-				
-				}
-
 				el.EnterText(item);
 				Delay.Seconds(1);
-				return el.GetValue() == item.Trim();
+				return el.GetValue() == item.Trim(); 
 			}
 			catch (Exception ex)
 			{

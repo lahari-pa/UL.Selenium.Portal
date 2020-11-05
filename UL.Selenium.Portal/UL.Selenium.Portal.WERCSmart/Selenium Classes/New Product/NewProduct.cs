@@ -2991,15 +2991,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			string regulationInd = findIndex == -1 ? null : (findIndex + 1).ToString();
 
 
-
-
-
-			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Use"), 2);
-		
-
-
+			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Use"), 2);	
 			// If the returned index for any column name is -1, we return a null string for that property.
-
 			//string useInd = getIndex == -1 ? null : (getIndex + 1).ToString();
 			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "VOC Compliance Limit"), 2);
 			//string complianceInd = getIndex == -1 ? null : (getIndex + 1).ToString();
@@ -3007,6 +3000,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			//string unitsInd = getIndex == -1 ? null : (getIndex + 1).ToString();
 			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Regulation"), 2);
 			//string regulationInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+
 			foreach (IWebElement row in rows)
 			{
 				string use = useInd == null ? null : row.FindElement(By.XPath(".//td[" + useInd + "]"), 2).GetValue();
@@ -4434,39 +4428,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return false;
 		}
-
-		//public bool RemoveRandomRetailers()
-		//{
-		//	IList<IWebElement> deleteButtons = this.containerElement.FindElements(By.XPath(".//span[@data-bind='text: identifier']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
-		//	List<int> listOfAlreadyRemovedButtonIndexes = new List<int>();
-		//	Random random = new Random();
-		//	int numOfLoops = random.Next(2, deleteButtons.Count - 1);
-
-		//	for (int i = 0; i <= numOfLoops; i++)
-		//	{
-		//		int ran = random.Next(0, deleteButtons.Count);
-		//		if (!listOfAlreadyRemovedButtonIndexes.Contains(ran))
-		//		{
-		//			IWebElement deleteButton = deleteButtons[ran];
-		//			listOfAlreadyRemovedButtonIndexes.Add(ran);
-		//			bool RemoveSelectedRetailer = Report.IsTrue(deleteButton.TryClick(), "Failed to remove selected retailer", "Successfully removed selected retailer");
-		//			if (!RemoveSelectedRetailer)
-		//			{
-		//				return false;
-		//			}
-		//		}
-		//		else
-		//		{
-		//			i -= 1;
-		//		}
-		//	}
-
-		//	return true;
-
-		//}
-
+		
+		
 		public bool RemoveRandomRetailers()
 		{
+
+
+			//This currently is not fully robust. Something about the page means that when you go to select the delete button for a given retailer the tryclick fails.
+			//This appears to be related to the element not being on screen, but even with a scroll into view the element is off the screen
+			//The issue is moslty fixed by using a page up loop, but it appears in some cases, especially if a lot of retailers are removed, then some try clicks still fail
+			//Either an alternative click or a more robust 'scrolling' solution are needed to make this work at all times.
+
 
 			//RemoveRandomRetailersWithoutSameBeginningLetter
 			List<IWebElement> retailerRows = this.ContainerElement.FindElements(By.XPath($"//div[@class='row']//div//span[@data-bind='text: identifier']"), 5).ToList();
