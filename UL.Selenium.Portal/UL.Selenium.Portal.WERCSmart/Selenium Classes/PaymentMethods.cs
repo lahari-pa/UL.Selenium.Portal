@@ -972,6 +972,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
+		public bool EditAddressPopupNotShowing()
+		{
+			var elFound = this.containerElement.WaitUntilElementInvisible(By.Id("editAddressDetails"), 45);
+			return elFound;
+			
+		}
+
 
 		//================================================================================================= BILLING ADDRESS
 
@@ -1190,7 +1197,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			if (state != "")
 			{
-				IWebElement myState = this._section_bill.FindElements(By.XPath(".//input[@name='state']"), 10).FirstOrDefault();
+				//IWebElement myState = this._section_bill.FindElements(By.XPath(".//input[@name='state']"), 10).FirstOrDefault();
+				IWebElement myState = this._section_bill.FindElements(By.XPath(".//select"), 10).FirstOrDefault();
 				if (myState == null)
 				{
 					Report.Info("Failed to Find State Text Box");
@@ -1198,20 +1206,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 				}
 				Report.Info("Editing State: " + state);
-				myState.EnterText(state);
+				myState.Select(state);
+				//myState.EnterText(state);
 			}
-			if (state != "")
-			{
-				IWebElement myState = this._section_bill.FindElements(By.XPath(".//input[@name='state']"), 10).FirstOrDefault();
-				if (myState == null)
-				{
-					Report.Info("Failed to Find State Text Box");
-					Report.Screenshot();
-					return false;
-				}
-				Report.Info("Editing State: " + state);
-				myState.EnterText(state);
-			}
+			//if (state != "")
+			//{
+			//	IWebElement myState = this._section_bill.FindElements(By.XPath(".//select[@name='state']"), 10).FirstOrDefault();
+			//	if (myState == null)
+			//	{
+			//		Report.Info("Failed to Find State Text Box");
+			//		Report.Screenshot();
+			//		return false;
+			//	}
+			//	Report.Info("Editing State: " + state);
+			//	myState.EnterText(state);
+			//}
 			if (zip != "")
 			{
 				IWebElement myZip = this._section_bill.FindElements(By.XPath(".//input[@name='zip']"), 10).FirstOrDefault();

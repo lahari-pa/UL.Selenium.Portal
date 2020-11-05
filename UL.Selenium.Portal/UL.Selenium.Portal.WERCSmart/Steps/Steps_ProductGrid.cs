@@ -2515,7 +2515,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Update registration is not showing as expected", "Update registration dialog is showing as expected");
 		}
 
-		[StepDefinition(@"In the Update Registration popup I click on button (Cancel|View|Yes)")]
+		[StepDefinition(@"In the Update Registration popup I click on button (Cancel|View|Yes|Continue)")]
 		public void InUpdateRegistrationPopupIClickButton(string button)
 		{
 			var thisModalDialog = new ModalDialog();

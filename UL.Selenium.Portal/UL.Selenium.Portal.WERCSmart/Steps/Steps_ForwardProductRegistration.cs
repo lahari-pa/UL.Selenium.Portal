@@ -135,6 +135,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click continue", "Successfully clicked continue");
 		}
 
+		[StepDefinition(@"I click Home on the Forward Product Registration Purchase Summary page")]
+		public void ClickHomeForwardProductRegistrationPurchaseSummaryScreen()
+		{
+			Delay.Seconds(3);
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ClickHome() && GeneralUtilities.Wait_for_load_finish(),
+				"Failed to click Home", "Successfully clicked Home");
+		}
+
+
 		[StepDefinition(@"I select the first product under the Select Products tab")]
 		public void SelectTheFirstProduct()
 		{

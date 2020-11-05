@@ -1456,8 +1456,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIClickAddRetailers()
 		{
 			NewProduct NewProductClassObject = new NewProduct();
+			//Open Retailers popup
 			Report.IsTrue(NewProductClassObject.ClickAddRetailersButton(), "Failed to click 'Add Retailers' button", "Successfully clicked 'Add Retailers' button");
 			Report.IsTrue(NewProductClassObject.CheckIfListOfRemovedRetailersAreInAlphabeticalOrder(), "The removed retailers are not sorted in alphabetical order", "The removed retailers are sorted in alphabetical order");
+		}
+
+		[StepDefinition(@"In the 'Add Retailers' popup does not contain the retailes saved as (.*)")]
+		public void AddRetailersPopupDoesNotContainListOfRetailers(string savedAs)
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+
+			Report.IsTrue(NewProductClassObject.ListOfRemovedRetailersDoesNotContainListSavedAs(savedAs), "Restored Retailers were still found in the deleted retailers list", "No Restored Retailers were found in the deleted retailers list");
+
+		}
+
+		[StepDefinition(@"The 'Add Retailers' popup contains all the retailers saved as: (.*)")]
+		public void AddRetailersPopupContainsDeletedRetailersList(string savedAs)
+		{
+			List<string> deletedRetailersInitials = (List<string>)Context.GetFromContext(savedAs);
+			List<string> foundRetaiers = new NewProduct().GetListOfRemovedRetailersInPopup();
+			List<string> foundRetailersInitials = new List<string>();
+			foreach(var item in foundRetaiers)
+			{
+				foundRetailersInitials.Add(new RetailerAbbreviations().TryConvertToAbbreviation($"{item}")); 
+
+			}
+			bool countsMatch =  foundRetailersInitials.Count() == deletedRetailersInitials.Count();
+			var differences1 = foundRetailersInitials.Except(deletedRetailersInitials).ToList();
+			bool foundDifferences1 = differences1.Count() == 0;
+			var differences2 = deletedRetailersInitials.Except(foundRetailersInitials).ToList();
+			bool foundDifferences2 = differences2.Count() == 0;
+			Report.IsTrue(countsMatch && foundDifferences1 && foundDifferences2, $"The 'Add Retailers' popop did not contain all the expected retailers", "The 'Add Retailers' popop did contain all the expected retailers");
+
+
 		}
 
 		[StepDefinition(@"I randomly select retailers to restore")]
@@ -1480,6 +1511,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			NewProduct NewProductClassObject = new NewProduct();
 			Report.IsTrue(NewProductClassObject.ClickSelectAllInRemovedRetailersBox(), "Failed to click 'Select All' in removed retailers pop-up box", "Successfully clicked 'Select All' in removed retailers pop-up box");
+		}
+
+		[StepDefinition(@"In the 'Add Retailers' popup I confirm that all retailers are currently selected")]
+		public void InTheAddRetailers()
+		{
+			NewProduct NewProductClassObject = new NewProduct();
+			Report.IsTrue(NewProductClassObject.CheckAllRetailesInAddRetailersPopupAreSelected(), "Not all Retailers were selected", "All Retailers were selected");
+
+			
 		}
 
 		[StepDefinition(@"I Enter Universal Product Code details for a CVS Product, container type: (.*), size: (.*), Quantity (.*)")]
