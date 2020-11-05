@@ -62,8 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//Seems to be identical to 57500
-		[StepDefinition(
-			@"I call Shared Step 57561a \(The Product - Enter Product Name: (.*) and select Type of Product\): (.*)")]
+		[StepDefinition(@"I call Shared Step 57561a \(The Product - Enter Product Name: (.*) and select Type of Product\): (.*)")]
 		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string name, string type)
 		{
 			this.Step57561(type, name);
@@ -2471,6 +2470,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			Report.StartStep("I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
 			Report.StartStep(
 				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -2482,7 +2483,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//	"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
 			//MyNewProduct.SetTheSectionOptionTo(
 			//	"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
-			//	"No");
+			//	"No");			
+			Report.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+
 			Report.StartStep("In the Additional Product Information page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}

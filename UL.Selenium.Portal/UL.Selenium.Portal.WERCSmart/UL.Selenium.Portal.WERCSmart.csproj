@@ -548,6 +548,7 @@
     </None>
     <None Include="Features\Product Registration\VOC\VOC.feature">
     </None>
+    <None Include="Features\Product Registration\Webviewer Products.feature" />
     <None Include="Features\Product Set Up\CA Cleaning.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_3rdParty.feature" />
     <None Include="Features\Product Set Up\ProductSetUp_Chalk.feature" />
