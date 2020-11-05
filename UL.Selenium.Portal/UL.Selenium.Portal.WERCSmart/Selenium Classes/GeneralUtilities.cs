@@ -67,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			// wait up to 2 seconds for the loading bar to become visible
 			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//body[contains(@class,'pace-running')]"), 2);
-			// waits up to 30 seconds for the loading bar to then become invisible
+			// waits up to 60 seconds for the loading bar to then become invisible
 			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 60);
 		}
 

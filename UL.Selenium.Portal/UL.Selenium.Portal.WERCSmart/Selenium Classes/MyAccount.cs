@@ -1801,16 +1801,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				form_no == "0" ? "" : form_no + " Formulated",
 				art_no == "0" ? "" : art_no + " Articles",
 				en_art_no == "0" ? "" : en_art_no + " Enhanced Articles"
-			};
-
-
-
-			//string ExpectedText = string.Join(", ", Expected.Where(x => x != ""), 2);
-
-			//foreach(var thing in Expected)
-			//{
-			//	newString = newString + thing;
-			//}	
+			};		
 
 			string newString = "";
 			for(int x=0; x<Expected.Count(); x++)

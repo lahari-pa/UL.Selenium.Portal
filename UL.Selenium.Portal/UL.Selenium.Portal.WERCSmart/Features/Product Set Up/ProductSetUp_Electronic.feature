@@ -63,7 +63,6 @@ Scenario: [84511] Electronic Product from Completed status to Recertification
 	And I click on the Row Action: Update Data
 	Then I wait for the Summary Screen to Load
 	Then In the Summary screen, I click the Edit Product Button
-
 	And I should see the Update Registration popup
 	And In the Update Registration popup I click on button Continue	
 	#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save

@@ -492,6 +492,7 @@ Scenario: [101023] UPC Step - Add Part Number
 
 
 @tfs_design
+#In Progress. This test was a false positive in the regression. Some minor reworking is still needed to make it pass consistently.  
 @ScenarioId:6025
 Scenario: [84510] Select Retailers in UPC screen
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -514,7 +515,6 @@ Scenario: [84510] Select Retailers in UPC screen
 	#Going to rewrite to select all retailers.
 	#Wil add step that slects all vendors where drop down is found
 	#Will save list of selected retailers to context.
-
 	#And I select the following retailers in the 'Select Retailers' window
 	#	| Retailer       |
 	#	| Amazon         |
@@ -525,8 +525,6 @@ Scenario: [84510] Select Retailers in UPC screen
 	#	| Family Dollar  |
 	#	| Kohl's         |
 	#	| McLane         |
-
-
 	#if the select retailers window does not open then we need to clickt eh add retailers button (bug?) -> can only test after the Acc reset.
 	Then the 'Select Retailers' window appears
 	Given I click the Select all retailers option in the Select Retailers popup
