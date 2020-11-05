@@ -490,6 +490,8 @@ Scenario: [101023] UPC Step - Add Part Number
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase105352
 
+
+@tfs_design
 @ScenarioId:6025
 Scenario: [84510] Select Retailers in UPC screen
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -547,7 +549,9 @@ Scenario: [84510] Select Retailers in UPC screen
 	Given I randomly select retailers to restore
 	Given I click the 'Restore Selected' button
 	Given I click the 'Add Retailers' button
+	Then In the 'Add Retailers' popup does not contain the retailes saved as LastRestoredRetailers
 	Given I click 'Select All' to add all removed retailers
+	Then In the 'Add Retailers' popup I confirm that all retailers are currently selected
 	Given I click the 'Restore Selected' button
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84510
 

@@ -377,7 +377,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{ "HD Supply", "HS" },
 				{ "Price Chopper", "PR" },
 				{ "The Home Depot", "HD" },
-				{ "Ahold", "AH" },
+				{ "Ahold | DelHaize USA", "AH" },
 				{ "Lowe's", "LW" },
 				{ "SuperValu", "SV" },
 				{ "CVS", "CV" },
@@ -414,6 +414,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{ "TopCo", "TP" },
 				{ "Subscription", "SB" },
 				{ "Save Mart Supermarkets", "SM" },
+				{"Ace Hardware Corporation", "AC" },
 				{ "Best Buy", "BE" },
 				{ "Albertsons Companies", "SW" },
 				{ "Enterprise license", "EL" }

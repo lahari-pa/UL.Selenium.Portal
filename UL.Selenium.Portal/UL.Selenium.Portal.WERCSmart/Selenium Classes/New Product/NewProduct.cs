@@ -4467,6 +4467,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool RemoveRandomRetailers()
 		{
+
 			//RemoveRandomRetailersWithoutSameBeginningLetter
 			List<IWebElement> retailerRows = this.ContainerElement.FindElements(By.XPath($"//div[@class='row']//div//span[@data-bind='text: identifier']"), 5).ToList();
 			List<int> listOfAlreadyRemovedButtonIndexes = new List<int>();
@@ -4532,7 +4533,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 							}
 
 						}
-
+						if(allButtonClicked==false)
+						{
+							Report.Info($"did not click delete for retailer after all attempts");
+							return false;
+						}	
 						Report.Info($"Adding retailer to lists");
 						beginningLettersFound.Add(firstLetter);
 						RemovedRetailersInitials.Add(foundRetailerInitials);
@@ -4549,6 +4554,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					Report.Info($"I was now: {i}");
 				}
 			}
+
 
 			Context.AddToContext("LatestRemovedRetailers", RemovedRetailersInitials);
 			return allButtonClicked;
@@ -4596,7 +4602,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			Random random = new Random();
 			int numOfLoops = random.Next(1, CheckBoxes.Count - 1);
-			for (int i = 0; i <= numOfLoops; i++)
+			for (int i = 0; i < numOfLoops; i++)
 			{
 				int ran = random.Next(1, CheckBoxes.Count);
 				if (!listOfAlreadyClickedCheckBoxIndexes.Contains(ran))
@@ -4609,13 +4615,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					{
 						return false;
 					}
+
+					IWebElement textLabelEl = CheckBox.FindElement(By.XPath($".//following-sibling::a"), 2);
+					string labelString = textLabelEl.Text;
+					restoredRetailers.Add(labelString);
+
+
 				}
 				else
 				{
 					i -= 1;
 				}
 			}
-
+			Context.AddToContext($"LastRestoredRetailers", restoredRetailers);
 			return true;
 		}
 
@@ -4707,6 +4719,57 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				RemovedRetailerNames.Add(element.Text);
 			}
 			return RemovedRetailerNames;
+		}
+
+		public bool ListOfRemovedRetailersDoesNotContainListSavedAs(string savedAs)
+		{
+			var listOfRestored = (List<string>)Context.GetFromContext(savedAs);
+			if (listOfRestored.IsNullOrEmpty())
+			{
+				Report.Info("el was null for listOfRestored");
+				return false;
+			}
+			var foundRetailers = this.GetListOfRemovedRetailersInPopup();
+			if (foundRetailers.IsNullOrEmpty())
+			{
+				Report.Info("el was null for foundRetailers");
+				return false;
+			}
+
+			Report.Info($"The list of restored retailers was: {string.Join(",", listOfRestored)}");
+			Report.Info($"The list of deleted retailers was: {string.Join(",", foundRetailers)}");
+
+			if (foundRetailers.Any(x => listOfRestored.Any(y => y == x)))
+			{
+				Report.Info($"Restored Retailers were still found in the deleted retailers list...");
+				return false;
+			}
+			else
+			{
+				Console.WriteLine("No Restored Retailers were found in the deleted retailers list");
+				return true;
+			}
+
+		}
+
+		public bool CheckAllRetailesInAddRetailersPopupAreSelected()
+		{
+			IList<IWebElement> RemovedRetailers = this.containerElement.FindElements(By.XPath(".//a[@data-bind='text: name, click: $parent.restoreRetailer.bind($parent)']"), 2);
+			if (RemovedRetailers.IsNullOrEmpty())
+			{
+				Report.Info("el was null for RemovedRetailers");
+				return false;
+			}
+			foreach(var item in RemovedRetailers)
+			{
+				if(!item.Checked())
+				{
+					Report.Info($"The item was not checked");
+					return false;
+				}	
+			}
+			Report.Info($"All Retailers were selected");
+			return true;
 		}
 
 		public bool CheckIfListOfAddedRetailersAreInAlphabeticalOrder()
