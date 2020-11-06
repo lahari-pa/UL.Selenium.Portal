@@ -29,20 +29,27 @@ Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test B
 # Given I call shared step 144974 (Login to WS as supplier with feed to Web viewers)
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I generate a random UPC number and save as: UPC146792
 #In 57561a enter the name for final product run to be "Test Case 146792 - BCP, PLP No, Authoring requested, contains test batteries"
 Then I call Shared Step 57561a (The Product - Enter Product Name: Carbon Monoxide Detectors Test Product and select Type of Product): Carbon monoxide detectors
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chalk
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-# Given I call shared step 146794 (Product Includes a Battery > Add test Lithium Ion batteries for checking in Webviewers)
-Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
+Given I call Shared Step 146794 (Product Includes a Battery > Add test Lithium Ion batteries for checking in Webviewers)
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Lithium Ion  | <any>        | 6                               | 6                                  |
+| Lithium Ion  | <any>        | 6                               | 6                                  |
+| Lithium Ion  | <any>        | 6                               | 6                                  |
+
+#Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
 Given I call Shared Step 60096 (Lithium Battery Transportation)
-# Given I call shared step 144968 (Retailers - Add Retailers for Web viewers)
-# Given I call shared step 144969 (Universal Product Code (UPC) - Add UPC for Web viewer Retailers - Continue)
+Given I call Shared Step 144968 (Retailers - Add Retailers for Web viewers)
+Given I call Shared Step 144969 (Universal Product Code (UPC) - Add UPC for Web viewer Retailers - Continue) for UPC: saved as UPC146792, container type: Plastic Container and size: 50
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-# Given the Additional documents to Provide step is shown
+And I should see the Additional Documents to Provide Page
 Given I click continue
+
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor | Odor Threshold | Partition Coefficient | Personal Protection Equipment | Viscosity |
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test

@@ -4920,7 +4920,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				if (partNameTextField == null)
 				{
-					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
+					Report.Info(@"partNameTextField was not found");
 					return false;
 				}
 				partNameTextField.EnterText(partNumber);

@@ -49,6 +49,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var retailersToSelect = new List<string>();
 			var selSelectRetailers = new SelectRetailers();
+			new Retailer().ClickAddRetailers();
+			Delay.Seconds(1);
 			retailers.Rows.Cast<TableRow>().ToList().ForEach(x => retailersToSelect.Add(x["Retailer"]));
 			foreach (string retailer in retailersToSelect)
 			{

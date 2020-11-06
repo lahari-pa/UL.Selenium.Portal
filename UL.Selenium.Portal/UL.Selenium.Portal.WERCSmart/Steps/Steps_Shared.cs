@@ -10567,6 +10567,168 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-	
+
+
+		[StepDefinition(@"I call Shared Step 146794 \(Product Includes a Battery > Add test Lithium Ion batteries for checking in Webviewers\)")]
+		public void GivenICallSharedStep146794ProductsIncludesABatteryAddTestLithiumIonBatteriesForCheckingInWebvi(Table table)
+		{
+			var MyStepsNewProduct = new StepsNewProduct();
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("I set the Indicate how battery is packaged field to: Installed in the product");
+			MyStepsNewProduct.SetTheSectionOptionTo("Indicate how battery is packaged", "Installed in the product");
+			Report.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Number of batteries per package | How many batteries are required to run |");
+			try
+			{
+				var listOfBatteries = new List<Battery>();
+				foreach (TableRow thisRow in table.Rows)
+				{
+					if (!int.TryParse(thisRow["Number of batteries per package"], out int batteriesPerPackage))
+					{
+						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
+						throw new Exception("'Number of batteries per package' column of the step table must be an integer value");
+					}
+					if (!int.TryParse(thisRow["How many batteries required to run"], out int batteriesRequired))
+					{
+						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
+						throw new Exception("'How many batteries required to run' column of the step table must be an integer value");
+					}
+					var thisBattery = new Battery {
+						BatteryType = thisRow["Battery Type"],
+						Manufacturer = thisRow["Manufacturer"],
+						NumberPerPackage = batteriesPerPackage,
+						RequiredToRun = batteriesRequired
+					};
+					listOfBatteries.Add(thisBattery);
+				}
+				var productIncludesBattery = new ProductIncludesBattery();
+				if (listOfBatteries.Any())
+				{
+					// setter adds a table row for each battery in the list and enters data into each column
+					productIncludesBattery.Batteries = listOfBatteries;
+					productIncludesBattery.DeleteEmptyBatteryRows();
+				}
+				else
+				{
+					Report.Error("There were no batteries to add");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+			Report.StartStep("In the Product Includes Battery page I click continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Includes Battery");
+		}
+
+
+		[StepDefinition(@"I call Shared Step 144968 \(Retailers - Add Retailers for Web viewers\)")]
+		public void GivenICallSharedStep144968Retailers_AddRetailersForWebViewers()
+		{
+			ReportSettings.UseSubSteps = true;
+
+			var selSelectRetailers = new SelectRetailers();
+
+			Report.StartStep("With the Select Retailers pop up shown, Select all the web viewer retailers:");
+			var retailerTable = new Table("Retailer");
+			retailerTable.AddRow("Ace Hardware");
+			retailerTable.AddRow("Albertsons");
+			retailerTable.AddRow("Autozone");
+			retailerTable.AddRow("Dicks");
+			retailerTable.AddRow("Genuine Parts");
+			retailerTable.AddRow("Kroger");
+			retailerTable.AddRow("Office Depot");
+			retailerTable.AddRow("Sears");
+			retailerTable.AddRow("Smart & Final");
+			retailerTable.AddRow("Staples");
+			retailerTable.AddRow("Target");
+			retailerTable.AddRow("Walmart");
+			retailerTable.AddRow("Winco");
+			new StepsSelectRetailers().SelectRetailersInListView(retailerTable);
+			var allRetailers = selSelectRetailers.AllRetailers();
+			if (allRetailers.Contains($"Canadian Tire"))
+			{
+				Report.Info($"Canadian Tire was found as an option, selecting it as a retailer");
+				new StepsSelectRetailers().SelectTheRetailer("Canadian Tire");
+
+			}
+			else
+			{
+				Report.Info($"Canadian Tire was not found as an option, moving on.");
+			}
+			Report.StartStep("Click Done");
+			new StepsSelectRetailers().IClickDoneButtonOnSelectRetailersWindow();
+			Report.StartStep("In The additional requirments column, select an entry from the drop list for retailers 'Walmart' and 'Sears'");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Wal-Mart/SAM'S CLUB");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Sears/K-Mart");
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
+
+		}
+
+
+		[StepDefinition(@"I call Shared Step 144969 \(Universal Product Code \(UPC\) - Add UPC for Web viewer Retailers - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		public void GivenICallSharedStep144969UniversalProductCodeAddUPCForWebViewerRetailersContinue(string upc, string containerType, string size)
+		{
+			ReportSettings.UseSubSteps = true;
+			var MyStepsNewProduct = new StepsNewProduct();
+			Report.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			Report.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			Delay.Seconds(3);
+			Report.StartStep("I add the following into the UPC Fields");
+
+			if (upc.Contains("Equals"))
+			{
+				string upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
+
+				//Report.IsTrue(new NewProduct().InputPartNumberInformation(upcInfo, partNumber), "Failed to input UPC Information!", "Successfully inputted UPC information!");
+
+			}
+			else
+			{
+				var upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+
+			}
+
+			IWebElement partNameTextField = new NewProduct().containerElement.FindElement(By.XPath(".//label[contains(text(),'Part Number')]/..//input"), 2);
+
+			if (partNameTextField == null)
+			{
+				Report.Info(@"partNameTextField was not found");
+				return;
+			}
+			partNameTextField.EnterText("A0001");
+
+			IWebElement dpciField = new NewProduct().containerElement.FindElement(By.XPath(".//label[contains(text(),'DPCI')]/..//input"), 2);
+			if (dpciField == null)
+			{
+				Report.Info(@"dpciField was not found");
+				return;
+			}
+			dpciField.EnterText("111-22-0001");
+
+			Report.StartStep("Click Continue");
+			new StepsNewProduct().ClickContinue();
+
+
+
+		}
+
+
+
+
 	}
 }
