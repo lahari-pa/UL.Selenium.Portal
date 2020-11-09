@@ -2930,97 +2930,99 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			int getIndex;
 			List<string> stringList = columnHeadings.Select(x => x.Text).ToList();
 
-			int findIndex;
+			//int findIndex;
 			int currentPos;
+			currentPos = 0;
 
-			//foreach (var item in stringList)
+			string useInd = "";
+			string complianceInd = "";
+			string unitsInd = "";
+			string regulationInd = "";
+
+			foreach(var thing in stringList)
+			{
+				switch (thing)
+				{
+					case "Use":
+						useInd = (currentPos + 1).ToString();
+						break;
+					case "VOC Compliance Limit":
+						complianceInd = (currentPos + 1).ToString();
+						break;
+
+					case "Units":
+						unitsInd = (currentPos + 1).ToString();
+						break;
+
+					case "Regulation":
+						regulationInd = (currentPos + 1).ToString();
+						break;
+
+					default:
+						Report.Failure("Item must be one of 'Use', 'VOC Compliance Limit', 'Units' or 'Regulation'");
+						return null;
+
+				}
+
+				currentPos++;
+			}
+
+			//findIndex = -1;
+			//currentPos = 0;
+			//foreach(var item in stringList)
 			//{
-			//	switch (item)
+			//	if(item=="Use")
 			//	{
-			//		case "Use":
-			//			findIndex = currentPos;
-			//			break;
-			//		case "Use":
-			//			findIndex = currentPos;
-			//			break;
-
+			//		findIndex = currentPos;
+			//		break;
 			//	}
+			//	currentPos++;
 			//}
 
+			//string useInd = findIndex == -1 ? null : (findIndex + 1).ToString();
+
+			//findIndex = -1;
+			//currentPos = 0;
+			//foreach (var item in stringList)
+			//{
+			//	if (item == "VOC Compliance Limit")
+			//	{
+			//		findIndex = currentPos;
+			//		break;
+			//	}
+			//	currentPos++;
+			//}
+
+			//string complianceInd = findIndex == -1 ? null : (findIndex + 1).ToString();
 
 
+			//findIndex = -1;
+			//currentPos = 0;
+			//foreach (var item in stringList)
+			//{
+			//	if (item == "Units")
+			//	{
+			//		findIndex = currentPos;
+			//		break;
+			//	}
+			//	currentPos++;
+			//}
 
+			//string unitsInd = findIndex == -1 ? null : (findIndex + 1).ToString();
 
+			//findIndex = -1;
+			//currentPos = 0;
+			//foreach (var item in stringList)
+			//{
+			//	if (item == "Regulation")
+			//	{
+			//		findIndex = currentPos;
+			//		break;
+			//	}
+			//	currentPos++;
+			//}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-			findIndex = -1;
-			currentPos = 0;
-			foreach(var item in stringList)
-			{
-				if(item=="Use")
-				{
-					findIndex = currentPos;
-					break;
-				}
-				currentPos++;
-			}
-
-			string useInd = findIndex == -1 ? null : (findIndex + 1).ToString();
-
-			findIndex = -1;
-			currentPos = 0;
-			foreach (var item in stringList)
-			{
-				if (item == "VOC Compliance Limit")
-				{
-					findIndex = currentPos;
-					break;
-				}
-				currentPos++;
-			}
-
-			string complianceInd = findIndex == -1 ? null : (findIndex + 1).ToString();
-
-
-			findIndex = -1;
-			currentPos = 0;
-			foreach (var item in stringList)
-			{
-				if (item == "Units")
-				{
-					findIndex = currentPos;
-					break;
-				}
-				currentPos++;
-			}
-
-			string unitsInd = findIndex == -1 ? null : (findIndex + 1).ToString();
-
-			findIndex = -1;
-			currentPos = 0;
-			foreach (var item in stringList)
-			{
-				if (item == "Regulation")
-				{
-					findIndex = currentPos;
-					break;
-				}
-				currentPos++;
-			}
-
-			string regulationInd = findIndex == -1 ? null : (findIndex + 1).ToString();
+			//string regulationInd = findIndex == -1 ? null : (findIndex + 1).ToString();
 
 
 			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Use"), 2);	
@@ -3036,9 +3038,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			foreach (IWebElement row in rows)
 			{
 				string use = useInd == null ? null : row.FindElement(By.XPath(".//td[" + useInd + "]"), 2)?.GetValue();
-				string voccompliancelimit = complianceInd == null ? null : row.FindElement(By.XPath(".//td[" + complianceInd + "]"), 2).GetValue();
-				string units = unitsInd == null ? null : row.FindElement(By.XPath(".//td[" + unitsInd + "]"), 2).GetValue();
-				string regulation = regulationInd == null ? null : row.FindElement(By.XPath(".//td[" + regulationInd + "]"), 2).GetValue();
+				string voccompliancelimit = complianceInd == null ? null : row.FindElement(By.XPath(".//td[" + complianceInd + "]"), 2)?.GetValue();
+				string units = unitsInd == null ? null : row.FindElement(By.XPath(".//td[" + unitsInd + "]"), 2)?.GetValue();
+				string regulation = regulationInd == null ? null : row.FindElement(By.XPath(".//td[" + regulationInd + "]"), 2)?.GetValue();
 				retList.Add(new VocLimitsWithUnits() { Use = use, VocComplianceLimit = voccompliancelimit, Units = units, Regulation = regulation });
 			}
 			return retList;
