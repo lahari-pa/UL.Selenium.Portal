@@ -3003,7 +3003,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			foreach (IWebElement row in rows)
 			{
-				string use = useInd == null ? null : row.FindElement(By.XPath(".//td[" + useInd + "]"), 2).GetValue();
+				string use = useInd == null ? null : row.FindElement(By.XPath(".//td[" + useInd + "]"), 2)?.GetValue();
 				string voccompliancelimit = complianceInd == null ? null : row.FindElement(By.XPath(".//td[" + complianceInd + "]"), 2).GetValue();
 				string units = unitsInd == null ? null : row.FindElement(By.XPath(".//td[" + unitsInd + "]"), 2).GetValue();
 				string regulation = regulationInd == null ? null : row.FindElement(By.XPath(".//td[" + regulationInd + "]"), 2).GetValue();
