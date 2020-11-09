@@ -4919,8 +4919,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 40657 \(SHA Manager - Submitted - Select product > process product data for product saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 40657 \(SHA Manager - Submitted - Select product > process product data for product saved as: (.*)\)")]
 		public void GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -10724,6 +10723,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().ClickContinue();
 
 
+
+		}
+
+		[StepDefinition(@"I call Shared Step 145300 \(SHA - Submitted Status - Process BCP product - Close warning message\) for product saved as: (.*)")]
+		public void GivenICallShared145300SHASubmittedStatusProcessBCPProductCloseWarningMessage(string savedAs)
+		{
+			ReportSettings.UseSubSteps = true;
+			Report.StartStep("Beginning shared step 145300");
+			var myStudioShaManager = new StudioSHAManager();
+			if (!myStudioShaManager.Wait_for_load(30))
+			{
+				Report.Error("Studio SHA Manager is not showing");
+			}
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = productDetails.Id;
+
+			bool selectedID = false;
+			for (int i = 0; i < 20; i++)
+			{
+				Report.Info("Waiting interation: " + i.ToString());
+				Report.IsTrue(myStudioShaManager.SelectFromStatusFilter("Submitted"),
+					"Failed to select from status filter",
+					"Selected from status filter");
+				Delay.Seconds(3);
+				if (!myStudioShaManager.Wait_for_load(30))
+				{
+					Report.Error("Studio SHA Manager is not showing");
+				}
+
+				if (myStudioShaManager.SelectProductByID(id))
+				{
+					selectedID = true;
+					break;
+				}
+
+				Delay.Seconds(3);
+			}
+
+			Report.IsTrue(selectedID, "Failed to select product with id: " + id, "Selected product with id: " + id);
+			myStudioShaManager.ClickProcessProductData();
+			Report.IsTrue(myStudioShaManager.SetAutoAssignRegulatorySpecialisttoProduct(false),
+				"Failed to deselect Auto assign regulatory specialist", "Deselected auto assign regulatory specialist");
+			var regSpec = TestVariables.GetVariableSavedAs("SHA Regulatory Specialist");
+			if (regSpec == null)
+			{
+				Report.Info("Failed to find SHA Regulatory Specialist in context, defaulting to: Automated QASha");
+				regSpec = "Automated QASha";
+			}
+			Report.Info($"The Regulatory Specialist that will be selected is: {regSpec}");
+
+			Report.IsTrue(myStudioShaManager.SelectRegulatorySpecialist(regSpec),
+				"Failed to select regulatory specialist", "Selected regulatory specialist");
+			Report.IsTrue(myStudioShaManager.ClickContinueInProcessProducts(), "Failed to click continue",
+				"Clicked continue");
+			Report.IsTrue(myStudioShaManager.ProcessProductsErrorMessageMatches(id+" (product name) - Merge: Document merge for BCP product xxxxxxx has failed - Please publish the required SDS for this product and manually run the document merge process."), "Failed to find the error message", "The error message was found");
+			Report.IsTrue(myStudioShaManager.ClickCloseInProcessProducts(), "Failed to click close","Clicked close");
 
 		}
 

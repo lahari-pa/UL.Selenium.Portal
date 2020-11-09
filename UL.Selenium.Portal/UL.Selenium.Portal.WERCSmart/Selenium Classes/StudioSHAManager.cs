@@ -1004,6 +1004,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool ProcessProductsErrorMessageMatches(string expectedText)
+		{
+			for (int i = 0; i < 30; i++)
+			{
+				IWebElement messageEl =	SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='dialog-product']//div[@id='message']"));
+				string messageTextFound = messageEl.Text;				
+				if (messageTextFound == expectedText)
+				{
+					return true;
+				}
+
+				Delay.Seconds(1);
+			}
+
+			return false;
+		}
+
 		public bool ClickCloseInProcessProducts()
 		{
 			ReadOnlyCollection<IWebElement> buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='dialog-product']/..//button"));
@@ -2098,6 +2115,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return false;
 		}
+
+
 
 		public bool SelectNewStatus(string status)
 		{
