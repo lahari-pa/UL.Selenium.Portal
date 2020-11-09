@@ -690,7 +690,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				//Below Code cluster is used to add a unique ID (Grabbed from the email) to each company name.
 				//Need to check if this should be for the company name for First/Last Name?
 				string emailFind = user.Email;
-				string userString = emailFind.Replace(".kxxyxunf@mailosaur.io", "");
+				string userString = emailFind.Replace(TestVariables.GetVariableSavedAs("Mailosaur Prefix"), "");
 				string randomID = userString.Replace("User_", "");
 				string currentCompName = user.CompanyName;
 				user.CompanyName = currentCompName + randomID;

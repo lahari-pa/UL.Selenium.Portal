@@ -2929,8 +2929,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			var columnHeadings = tableElement.FindElements(By.XPath(".//thead//th"), 2).ToList();
 			int getIndex;
 			List<string> stringList = columnHeadings.Select(x => x.Text).ToList();
-
-			//int findIndex;
+			
 			int currentPos;
 			currentPos = 0;
 
@@ -2965,64 +2964,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 
 				currentPos++;
-			}
-
-			//findIndex = -1;
-			//currentPos = 0;
-			//foreach(var item in stringList)
-			//{
-			//	if(item=="Use")
-			//	{
-			//		findIndex = currentPos;
-			//		break;
-			//	}
-			//	currentPos++;
-			//}
-
-			//string useInd = findIndex == -1 ? null : (findIndex + 1).ToString();
-
-			//findIndex = -1;
-			//currentPos = 0;
-			//foreach (var item in stringList)
-			//{
-			//	if (item == "VOC Compliance Limit")
-			//	{
-			//		findIndex = currentPos;
-			//		break;
-			//	}
-			//	currentPos++;
-			//}
-
-			//string complianceInd = findIndex == -1 ? null : (findIndex + 1).ToString();
-
-
-			//findIndex = -1;
-			//currentPos = 0;
-			//foreach (var item in stringList)
-			//{
-			//	if (item == "Units")
-			//	{
-			//		findIndex = currentPos;
-			//		break;
-			//	}
-			//	currentPos++;
-			//}
-
-			//string unitsInd = findIndex == -1 ? null : (findIndex + 1).ToString();
-
-			//findIndex = -1;
-			//currentPos = 0;
-			//foreach (var item in stringList)
-			//{
-			//	if (item == "Regulation")
-			//	{
-			//		findIndex = currentPos;
-			//		break;
-			//	}
-			//	currentPos++;
-			//}
-
-			//string regulationInd = findIndex == -1 ? null : (findIndex + 1).ToString();
+			}			
 
 
 			//getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Use"), 2);	
@@ -4508,6 +4450,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					{
 
 						var delButtonEl = chosenRow.FindElement(By.XPath($".//ancestor::div[1]//following-sibling::div[a[@title='Remove']]//a[@title='Remove']//em[@class='fa fa-remove']"), 5);
+						if(delButtonEl.IsNullOrEmpty())
+						{
+							Report.Info($"The Delete button element was not found");
+							return false;
+						}
 						delButtonEl.ScrollElementIntoView();
 						if(delButtonEl.TryClick())
 						{
