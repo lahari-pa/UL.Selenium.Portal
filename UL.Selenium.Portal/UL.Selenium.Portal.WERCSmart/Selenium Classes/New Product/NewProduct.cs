@@ -2933,6 +2933,38 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			int findIndex;
 			int currentPos;
 
+			//foreach (var item in stringList)
+			//{
+			//	switch (item)
+			//	{
+			//		case "Use":
+			//			findIndex = currentPos;
+			//			break;
+			//		case "Use":
+			//			findIndex = currentPos;
+			//			break;
+
+			//	}
+			//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			findIndex = -1;
 			currentPos = 0;
 			foreach(var item in stringList)
