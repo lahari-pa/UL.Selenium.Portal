@@ -67,8 +67,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			// wait up to 2 seconds for the loading bar to become visible
 			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//body[contains(@class,'pace-running')]"), 2);
-			// waits up to 30 seconds for the loading bar to then become invisible
-			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 30);
+			// waits up to 60 seconds for the loading bar to then become invisible
+			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 60);
 		}
 
 		public static bool Loading_Active()
@@ -377,7 +377,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{ "HD Supply", "HS" },
 				{ "Price Chopper", "PR" },
 				{ "The Home Depot", "HD" },
-				{ "Ahold", "AH" },
+				{ "Ahold | DelHaize USA", "AH" },
 				{ "Lowe's", "LW" },
 				{ "SuperValu", "SV" },
 				{ "CVS", "CV" },
@@ -414,6 +414,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{ "TopCo", "TP" },
 				{ "Subscription", "SB" },
 				{ "Save Mart Supermarkets", "SM" },
+				{"Ace Hardware Corporation", "AC" },
 				{ "Best Buy", "BE" },
 				{ "Albertsons Companies", "SW" },
 				{ "Enterprise license", "EL" }
