@@ -581,6 +581,9 @@
     </None>
     <None Include="Features\SupplierAccounts.feature">
     </None>
+    <None Include="Features\SupplierReports%281%29.feature" />
+    <None Include="Features\SupplierReports%282%29.feature" />
+    <None Include="Features\SupplierReports%283%29.feature" />
     <None Include="Features\SupplierReports.feature">
     </None>
     <None Include="Features\TheProduct.feature">

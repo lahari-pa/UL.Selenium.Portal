@@ -8,7 +8,6 @@
 @wercsmart
 @Signup
 @ProductGrid
-@run_SupplierReports
 @ViewUpcs
 @DataSummarySheet
 @SHA
