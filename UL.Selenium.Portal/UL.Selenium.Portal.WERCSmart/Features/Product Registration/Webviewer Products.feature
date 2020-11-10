@@ -43,7 +43,7 @@ Given I call Shared Step 146794 (Product Includes a Battery > Add test Lithium I
 | Lithium Ion  | <any>        | 6                               | 6                                  |
 | Lithium Ion  | <any>        | 6                               | 6                                  |
 
-#Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
+Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
 Given I call Shared Step 60096 (Lithium Battery Transportation)
 Given I call Shared Step 144968 (Retailers - Add Retailers for Web viewers)
 Given I call Shared Step 144969 (Universal Product Code (UPC) - Add UPC for Web viewer Retailers - Continue) for UPC: saved as UPC146792, container type: Plastic Container and size: 50
@@ -64,7 +64,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Statu
 # Given I call shared step 145300 (SHA - Submitted Status - Process BCP product - Close warning message)
 Given I call Shared Step 145300 (SHA - Submitted Status - Process BCP product - Close warning message) for product saved as: TestCase146792
 
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: xxxxxxx (product name) - Merge: Document merge for BCP product xxxxxxx has failed - Please publish the required SDS for this product and manually run the document merge process.)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase146792)
 # Confirm your product is still in the Submitted status
 # So even though the product is in submitted status the import process rules will be running and the product will be shown in PD+ so we can process the publishing of the documents
 Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase146792)
