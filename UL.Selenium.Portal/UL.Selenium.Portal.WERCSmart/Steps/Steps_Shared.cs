@@ -3934,9 +3934,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
 				"Product is not considered a pesticide product");
 			Report.StartStep(
-				"I set the Does the product contain fertilizer (P, N or K) field to: No");
+				"I set the Does the product contain fertilizer (N, P, K) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
-				"Does the product contain fertilizer (P, N or K)",
+				"Does the product contain fertilizer (N, P, K)",
 				"No");
 			Report.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
