@@ -15,8 +15,8 @@
 @NewProduct
 @ProductSetUp
 @UPC
-@run_SupplierReports(3)
-Feature: Supplier Reports (3)
+@run_SupplierReports3
+Feature: Supplier Reports 3
 
 @ScenarioId:10307
 Scenario: [141028] Registration Updates Not Submitted - CSV Zip File

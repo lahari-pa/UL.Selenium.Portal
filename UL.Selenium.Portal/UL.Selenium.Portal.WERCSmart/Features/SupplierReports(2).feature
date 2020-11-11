@@ -15,8 +15,8 @@
 @NewProduct
 @ProductSetUp
 @UPC
-@run_SupplierReports(2)
-Feature: Supplier Reports (2)
+@run_SupplierReports2
+Feature: Supplier Reports 2
 
 @ScenarioId:5976
 Scenario: [114764] UPCs and Registrations (Retailer Specific) - Report correctly displays case pack individual UPC

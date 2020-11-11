@@ -15,8 +15,8 @@
 @NewProduct
 @ProductSetUp
 @UPC
-@run_SupplierReports(1)
-Feature: Supplier Reports (1)
+@run_SupplierReports1
+Feature: Supplier Reports 1
 
 @ScenarioId:978
 Scenario: [68420] List of Supplier Reports
