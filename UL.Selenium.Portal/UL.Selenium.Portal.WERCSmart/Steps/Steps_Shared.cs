@@ -4567,7 +4567,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep("In the Select Retailers popup I select the retailer: Rite Aid");
 			new StepsSelectRetailers().SelectTheRetailer("Rite Aid");
 			Report.StartStep("I enter private label as 'This Private Label'");
-			stepsRetailer.IEnterPrivateLabelName("This Private Label");
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("Rite Aid", "This Private Label");
+			new Steps_Retailer().ForRetailerIEnterPrivateLabelName("No Retailer/No UPC Product", "This Private Label");
 			Report.StartStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
