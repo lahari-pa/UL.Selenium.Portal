@@ -42,16 +42,17 @@ Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: California Proposition 65
 Then I select CSV from the Select File Type
 Then I Delete the file with name: California Proposition 65.csv from the downloads folder
-Then I select the Request Report button excel file is produced called California Proposition 65 (1).csv and save as California Proposition 65
-Given I confirm that an excel file is produced called California Proposition 65 (1).csv and save as California Proposition 65
+Then I select the Request Report button csv file is produced called California Proposition 65.csv and save as California Proposition 65
+Given I confirm that an csv file is produced called California Proposition 65.csv and save as California Proposition 65
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as California Proposition 65 can be opened and contains data
 Given I delete the excel file saved as California Proposition 65
-Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as California Proposition 65 can be opened and contains data
 Given I click Close in the Report Download popup
+Then I Delete the file with name: California Proposition 65.csv from the downloads folder
 
 @ScenarioId:10294
 Scenario: [140260] Battery-Containing Products - CSV File
@@ -59,17 +60,17 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Battery-Containing Products
 Then I select CSV from the Select File Type
-Then I Delete the file with name: BatteryContaining Products (1).csv from the downloads folder
-Then I select the Request Report button excel file is produced called BatteryContaining Products (1).csv and save as BatteryContaining Products
-Given I confirm that an excel file is produced called BatteryContaining Products (1).csv and save as BatteryContaining Products
+Then I Delete the file with name: BatteryContaining Products.csv from the downloads folder
+Then I select the Request Report button csv file is produced called BatteryContaining Products.csv and save as BatteryContaining Products
+Given I confirm that an csv file is produced called BatteryContaining Products.csv and save as BatteryContaining Products
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as BatteryContaining Products can be opened and contains data
 Given I delete the excel file saved as BatteryContaining Products
-Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-Given I confirm that an excel file is produced called Battery-Containing Products (1).csv and save as BatteryContaining Products
-And I confirm the csv file saved as BatteryContaining Products can be opened and contains data
+Given I confirm that an csv file is produced called Battery-Containing Products.csv and save as Battery-Containing Products
+And I confirm the csv file saved as Battery-Containing Products can be opened and contains data
 Given I click Close in the Report Download popup
 
 @ScenarioId:10309
@@ -79,12 +80,12 @@ Given I click the My Reports icon in the QuickLinks Pane
 Given Under the Supplier Reports menu I choose: Eligible to Obsolete
 Then I select CSV from the Select File Type
 Then I Delete the file with name: Eligible to Obsolete (1).csv from the downloads folder
-Then I select the Request Report button excel file is produced called Eligible to Obsolete (1).csv and save as Eligible to Obsolete
-Given I confirm that an excel file is produced called Eligible to Obsolete (1).csv and save as Eligible to Obsolete
+Then I select the Request Report button csv file is produced called Eligible to Obsolete (1).csv and save as Eligible to Obsolete
+Given I confirm that an csv file is produced called Eligible to Obsolete (1).csv and save as Eligible to Obsolete
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Eligible to Obsolete can be opened and contains data
 Given I delete the excel file saved as Eligible to Obsolete
-Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Eligible to Obsolete can be opened and contains data
@@ -102,7 +103,7 @@ Given I confirm that an zip file is produced called Pesticide Registrations (1).
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Pesticide Registrations can be opened and contains data
 Given I delete the excel file saved as Pesticide Registrations
-Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Pesticide Registrations can be opened and contains data
@@ -121,7 +122,7 @@ Given I confirm that an excel file is produced called Registration Updates Not S
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Registration Updates Not Submitted can be opened and contains data
 Given I delete the excel file saved as Registration Updates Not Submitted
-Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Registration Updates Not Submitted File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Registration Updates Not Submitted can be opened and contains data
@@ -140,7 +141,7 @@ Given I confirm that an excel file is produced called Subscription Product Types
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Subscription Product Types can be opened and contains data
 Given I delete the excel file saved as Subscription Product Types
-Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Subscription Product Types File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Subscription Product Types can be opened and contains data
@@ -158,7 +159,7 @@ Given I confirm that an excel file is produced called UPC Duplication (1).csv an
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as UPC Duplication can be opened and contains data
 Given I delete the excel file saved as UPC Duplication
-Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: UPC Duplication File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as UPC Duplication can be opened and contains data
@@ -176,7 +177,7 @@ Given I confirm that an excel file is produced called Volatile Organic Compounds
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Volatile Organic Compounds can be opened and contains data
 Given I delete the excel file saved as Volatile Organic Compounds
-Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Volatile Organic Compounds File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Volatile Organic Compounds can be opened and contains data
@@ -194,7 +195,7 @@ Given I confirm that an excel file is produced called Waste Classification Summa
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Waste Classification Summary can be opened and contains data
 Given I delete the excel file saved as Waste Classification Summary
-Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Waste Classification Summary File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the csv file saved as Waste Classification Summary can be opened and contains data
@@ -214,7 +215,7 @@ Given I confirm that an excel file is produced called Chemicals of Concern (1).c
 Given I click Close in the Report Download popup
 And I confirm the csv file saved as Chemicals of Concern can be opened and contains data
 Given I delete the excel file saved as Chemicals of Concern
-Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Chemicals of Concern File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 And I confirm the zip csv file saved as Chemicals of Concern can be opened and contains data
@@ -287,7 +288,7 @@ Given I delete the excel file saved as California Proposition 65
 Then I Delete the file with name: California Proposition 65.zip from the downloads folder
 Then I Delete the file with name: California Proposition 65.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: California Proposition 65
-Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV (Zip) Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: California Proposition 65 File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called California Proposition 65.zip and save as California Proposition 65
@@ -315,14 +316,14 @@ Given I delete the excel file saved as BatteryContaining Products
 Then I Delete the file with name: BatteryContaining Products.zip from the downloads folder
 Then I Delete the file with name: BatteryContaining Products.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Battery-Containing Products
-Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV (Zip) Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Battery-Containing Products File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
-Given I confirm that an zip file is produced called BatteryContaining Products.zip and save as BatteryContaining Products
+Given I confirm that an zip file is produced called Battery-Containing Products.zip and save as BatteryContaining Products
 And I confirm the zip csv file saved as BatteryContaining Products can be opened and contains data
 Given I click Close in the Report Download popup
 Given I delete the file saved as BatteryContaining Products
-Then I Delete the file with name: BatteryContaining Products.zip from the downloads folder
+Then I Delete the file with name: Battery-Containing Products.zip from the downloads folder
 Then I Delete the file with name: BatteryContaining Products.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
@@ -343,7 +344,7 @@ Given I delete the excel file saved as Eligible to Obsolete
 Then I Delete the file with name: Eligible to Obsolete.zip from the downloads folder
 Then I Delete the file with name: Eligible to Obsolete.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Eligible to Obsolete
-Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV (Zip) Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Eligible to Obsolete File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Eligible to Obsolete.zip and save as Eligible to Obsolete
@@ -370,7 +371,7 @@ Given I delete the excel file saved as Pesticide Registrations
 Then I Delete the file with name: Pesticide Registrations.zip from the downloads folder
 Then I Delete the file with name: Pesticide Registrations.csv from the downloads folder
 Given Under the Supplier Reports menu I choose: Pesticide Registrations
-Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV (Zip) Requested By: Richard Smith
+Then I confirm the most recent file has the following information Report Name: Pesticide Registrations File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
 Given I confirm that an zip file is produced called Pesticide Registrations.zip and save as Pesticide Registrations
