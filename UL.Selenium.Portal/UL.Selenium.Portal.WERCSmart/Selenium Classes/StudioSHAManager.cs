@@ -298,7 +298,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				else
 				{
-					mySHAManager.SelectFromStatusFilter("Assigned");
+					//mySHAManager.SelectFromStatusFilter("Assigned");
+					mySHAManager.SelectFromStatusFilter("All");
+					var myProductSearch = new StudioSHAManagerProductSearch();
+					myProductSearch.Wait_for_load(3);
+					myProductSearch.ClickButton("Find");
+					mySHAManager.WaitForProductList(30);
 				}
 
 				Delay.Seconds(5);
@@ -1009,7 +1014,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			for (int i = 0; i < 30; i++)
 			{
 				IWebElement messageEl =	SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='dialog-product']//div[@id='message']"));
-				string messageTextFound = messageEl.Text;				
+				string messageTextFound = messageEl.Text;
+				Report.Info($"The found text was: {messageTextFound}");
+
 				if (messageTextFound == expectedText)
 				{
 					return true;
@@ -1017,7 +1024,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				Delay.Seconds(1);
 			}
-
 			return false;
 		}
 

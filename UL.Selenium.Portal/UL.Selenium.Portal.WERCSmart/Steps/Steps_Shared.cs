@@ -10740,6 +10740,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
+			string prodName = productDetails.Name;
 
 			bool selectedID = false;
 			for (int i = 0; i < 20; i++)
@@ -10779,7 +10780,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to select regulatory specialist", "Selected regulatory specialist");
 			Report.IsTrue(myStudioShaManager.ClickContinueInProcessProducts(), "Failed to click continue",
 				"Clicked continue");
-			Report.IsTrue(myStudioShaManager.ProcessProductsErrorMessageMatches(id+" (product name) - Merge: Document merge for BCP product xxxxxxx has failed - Please publish the required SDS for this product and manually run the document merge process."), "Failed to find the error message", "The error message was found");
+			Report.IsTrue(myStudioShaManager.ProcessProductsErrorMessageMatches(id+" ("+prodName+ ") - Merge: Document merge for BCP product " + id+ " has failed – Please publish the required SDS for this product and manually run the document merge process."), "Failed to find the error message", "The error message was found");
 			Report.IsTrue(myStudioShaManager.ClickCloseInProcessProducts(), "Failed to click close","Clicked close");
 
 		}

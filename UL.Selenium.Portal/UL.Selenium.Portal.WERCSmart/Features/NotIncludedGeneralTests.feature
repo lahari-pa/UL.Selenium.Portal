@@ -1815,7 +1815,8 @@ Given I log in with the account saved in TReVor as: ProductAccount
 Scenario: [WEBRPS] Test 1
 	
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-Then I save the product ID: 1835612 to a context under type 'ProductInformation' as: TestCase146792
+Then Saving the product ID: 1836055 and Name: Carbon Monoxide Detectors Test Product to a context under type 'ProductInformation' as: TestCase146792
+#Then I save the product ID: 1836055 to a context under type 'ProductInformation' as: TestCase146792
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase146792)
 
 Given I call Shared Step 145300 (SHA - Submitted Status - Process BCP product - Close warning message) for product saved as: TestCase146792
