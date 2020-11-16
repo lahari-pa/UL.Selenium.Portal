@@ -1856,8 +1856,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				form_no == "0" ? "" : form_no + " Formulated",
 				art_no == "0" ? "" : art_no + " Articles",
 				en_art_no == "0" ? "" : en_art_no + " Enhanced Articles"
-			};
-			string ExpectedText = string.Join(", ", Expected.Where(x => x != ""), 2);
+			};		
+
+			string newString = "";
+			for(int x=0; x<Expected.Count(); x++)
+			{
+				if (x== Expected.Count() - 1)
+				{
+					newString = newString + Expected[x];
+				}
+				else
+				{
+					newString = newString + Expected[x]+ ", ";
+				}
+			}
+
+			string ExpectedText = newString;
+			
+
 
 			Report.Info("Expected string: " + ExpectedText);
 

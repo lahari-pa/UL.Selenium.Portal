@@ -150,7 +150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 				el.EnterText(item);
 				Delay.Seconds(1);
-				return el.GetValue() == item.Trim();
+				return el.GetValue() == item.Trim(); 
 			}
 			catch (Exception ex)
 			{

@@ -73,7 +73,7 @@ Scenario: [57218] Retailer specific - Family Dollar
 	When I select the retailer: Family Dollar
 	And I confirm that: Family Dollar requires suppliers of formulated products to grant Tier 2.1 and Tier 2.2. is showing under the Data Consent Tiers heading
 	And I should not see the More Information hyperlink
-	When I click the Products in Scope button and confirm that an excel file is produced called FD_Report_DataUsageTiers_<Date>.xlsx and save as FamilyDollarExcelFile
+	When I click the Products in Scope button and confirm that an excel file is produced called FD_Report_DataUsageTier_<Date>.xlsx and save as FamilyDollarExcelFile
 	And I confirm the excel file saved as FamilyDollarExcelFile can be opened and contains data
 
 @ScenarioId:469

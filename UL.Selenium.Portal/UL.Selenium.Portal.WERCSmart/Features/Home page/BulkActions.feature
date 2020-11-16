@@ -283,6 +283,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I click continue on the Forward Product Registration page
 	Given I select the true radio for the 'Are Statements True' question under the Review and Submit tab
 	And I click continue on the Forward Product Registration page
+	#Then I click Home on the Forward Product Registration Purchase Summary page
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
 	And I navigate to the home page
 

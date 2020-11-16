@@ -490,6 +490,9 @@ Scenario: [101023] UPC Step - Add Part Number
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase105352
 
+
+@tfs_design
+#In Progress. This test was a false positive in the regression. Some minor reworking is still needed to make it pass consistently.  
 @ScenarioId:6025
 Scenario: [84510] Select Retailers in UPC screen
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -509,24 +512,44 @@ Scenario: [84510] Select Retailers in UPC screen
 		| Propane       | 100     | false               | false       |            |
 	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	And I select the following retailers in the 'Select Retailers' window
-		| Retailer       |
-		| Amazon         |
-		| Autozone       |
-		| Best Buy       |
-		| CVS            |
-		| Dollar General |
-		| Family Dollar  |
-		| Kohl's         |
-		| McLane         |
+	#Going to rewrite to select all retailers.
+	#Wil add step that slects all vendors where drop down is found
+	#Will save list of selected retailers to context.
+	#And I select the following retailers in the 'Select Retailers' window
+	#	| Retailer       |
+	#	| Amazon         |
+	#	| Autozone       |
+	#	| Best Buy       |
+	#	| CVS            |
+	#	| Dollar General |
+	#	| Family Dollar  |
+	#	| Kohl's         |
+	#	| McLane         |
+	#if the select retailers window does not open then we need to clickt eh add retailers button (bug?) -> can only test after the Acc reset.
+	Then the 'Select Retailers' window appears
+	Given I click the Select all retailers option in the Select Retailers popup
+	Then all retailers are selected in the Select Retailers window
+	Given I click Done in the Select Retailers popup
+	Given In the Retailers tab, I select the first Vendor option for retailer: O'Reilly
+	Given In the Retailers tab, I select the first Vendor option for retailer: Sears/K-Mart
+	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+	And I click continue
+
 	Given I click the 'Add UPC' button
 	Given I fill in the UPC data; UPC:0786987894855, Product Type:Paper bag, Product Weight:5
 	Given I remove randomly selected retailers
+
+	#Below check that the realtaiers deleted are all seen in below window popup list.
+	#Retailers in popup are in alphabeticcal order
+	#Once restored check destination retailers list is in alpha order
 	Given I click the 'Add Retailers' button
+	Then The 'Add Retailers' popup contains all the retailers saved as: LatestRemovedRetailers
 	Given I randomly select retailers to restore
 	Given I click the 'Restore Selected' button
 	Given I click the 'Add Retailers' button
+	Then In the 'Add Retailers' popup does not contain the retailes saved as LastRestoredRetailers
 	Given I click 'Select All' to add all removed retailers
+	Then In the 'Add Retailers' popup I confirm that all retailers are currently selected
 	Given I click the 'Restore Selected' button
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84510
 
