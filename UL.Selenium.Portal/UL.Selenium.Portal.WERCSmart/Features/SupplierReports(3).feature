@@ -226,9 +226,9 @@ Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
 Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
+Given I click Close in the Report Download popup
 Given I confirm that an excel file is produced called UPCs to Retailer via Item Sync.xlsx and save as UPCs to Retailer via Item Sync
 And I confirm the Supplier Reports excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
-Given I click Close in the Report Download popup
 Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
 
 @ScenarioId:10349
@@ -295,9 +295,9 @@ Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
 Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
 Then I click the Download button for the most recent report
+Given I click Close in the Report Download popup
 Given I confirm that an csv file is produced called UPCs to Retailer via Item Sync.csv and save as UPCs to Retailer via Item Sync
 And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
-Given I click Close in the Report Download popup
 Given I delete the file saved as UPCs to Retailer via Item Sync
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
 
@@ -339,7 +339,7 @@ Then I Delete the file with name: UPCs to Retailer via Item Sync.zip from the do
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
 
-@tfsdesign
+@tfs_design
 @ScenarioId:10343
 Scenario: [144339] UPC and Retailer (All) - CSV Zip File
 

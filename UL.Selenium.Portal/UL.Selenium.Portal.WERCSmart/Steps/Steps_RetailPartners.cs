@@ -464,6 +464,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I confirm that an (excel|html|zip|csv) file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string filetype, string file, string savedAs)
 		{
+			GeneralUtilities.Wait_for_load_finish();
+			//string downloadsFolder1 = KnownFolders.GetPath(KnownFolder.Downloads);
+			//var files1 = Directory.GetFiles(downloadsFolder1);
+			////Philip-Remove
+			//foreach (var file1 in files1)
+			//{
+			//	Report.Info("testing " + file1.ToString());
+			//}
+
+
 			Report.StartStep(ReportSettings.StepCounter + " - Confirm " + filetype + " File is downloaded with name: " + file);
 			try
 			{
@@ -549,11 +559,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Directory.Delete(rootFolder, true);
 			}
-		
+
 			ZipFile.ExtractToDirectory(zipPath, rootFolder);
 
 			Context.AddToContext(savedAs, rootFolder + authorsFile);
-		
+
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + rootFolder + authorsFile))
 			{
 				bool Data = false;
@@ -1141,7 +1151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Success("All columns in table have been found");
 				}
-				
+
 			}
 
 		}
