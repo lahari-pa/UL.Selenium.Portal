@@ -465,14 +465,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmFileAppearsInDownloadsFolder(string filetype, string file, string savedAs)
 		{
 			GeneralUtilities.Wait_for_load_finish();
-			//string downloadsFolder1 = KnownFolders.GetPath(KnownFolder.Downloads);
-			//var files1 = Directory.GetFiles(downloadsFolder1);
-			////Philip-Remove
-			//foreach (var file1 in files1)
-			//{
-			//	Report.Info("testing " + file1.ToString());
-			//}
-
 
 			Report.StartStep(ReportSettings.StepCounter + " - Confirm " + filetype + " File is downloaded with name: " + file);
 			try

@@ -1573,6 +1573,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.StartStep(
 					"I set the Secondary Physical State option to: Solid");
+				Report.Failure("The Secondary Physical State option was displayed");
+				Report.Screenshot();
 				MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State",
 					"Solid");
 			}

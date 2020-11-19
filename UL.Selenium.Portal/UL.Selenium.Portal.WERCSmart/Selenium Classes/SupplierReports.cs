@@ -428,10 +428,38 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string reportNameStr = fileList[0].Text;
 		
 			string reportTypeStr = fileList[2].Text;
-			
+
+			string dateRequestedStr = fileList[3].Text;
+
 			string reportRequestedByStr = fileList[4].Text;
 
-			if (reportNameStr == reportName && reportTypeStr == type && reportRequestedByStr == requestedBy)
+
+				
+			string datePart = DateTime.Now.ToString("M/d/yyyy");
+
+			var columnValueSecondHalf = dateRequestedStr.Remove(0, dateRequestedStr.IndexOf(' ') + 1);
+
+			var columnValueFirstHalf = dateRequestedStr.Replace(columnValueSecondHalf, "").Trim();
+
+			Report.IsTrue(columnValueFirstHalf == datePart, "The first half of the Date Requested was not a match", "The first half of the Date Requested was a match");
+
+			//TimeSpan convertedValue;
+			bool isTimeFormat = false;
+
+			var dateFormats = "h:mm:ss tt";
+
+			if (GeneralUtilities.IsValidDate(columnValueSecondHalf, dateFormats))
+			{
+				isTimeFormat = true;
+			}
+			else
+			{
+				isTimeFormat = false;
+			}
+
+			Report.IsTrue(isTimeFormat, "The second half of the Date Requested was not a time stamp", "The second half of the Date Requested was a time stamp");
+
+			if (reportNameStr == reportName && reportTypeStr == type && reportRequestedByStr == requestedBy && (columnValueFirstHalf == datePart && isTimeFormat))
 			{
 				return true;
 			}
@@ -467,6 +495,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool FindDescriptionInMyReports(string text)
 		{
 			IWebElement textEl = this.ContainerElement.FindElement(By.XPath("//div[@class='panel panel-default ws-panel data-consent']//p[@data-bind='text: Description']"), 2);
+
+			if (textEl == null)
+			{
+				return false;
+			}
 
 			if (textEl.Text == text)
 			{
