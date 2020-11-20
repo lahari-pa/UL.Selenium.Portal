@@ -9099,6 +9099,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			ReportSettings.UseSubSteps = true;
 			Report.StartStep("I select a valid retailer and click DONE");
+			var selectRetailers = new SelectRetailers();
+			new Retailer().ClickAddRetailers();
 			List<string> retailers = new SelectRetailers().GetListOfRetailers();
 			List<string> invalidRetailers = new List<string>() { "Walmart", "O'Reilly", "Sears", "Ultra Standard", "Genuine Parts", "Staples", "Target", "Home Depot" };
 			Report.Info("Invalid retailers are: " + string.Join(", ", invalidRetailers));
@@ -9108,7 +9110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("There were no valid retailers to select!");
 				Report.Screenshot();
 				return;
-			}
+			} 
 			Report.Info("Selecting retailer: " + selectRetailer);
 			new StepsSelectRetailers().SelectTheRetailer(selectRetailer);
 			Report.StartStep("Click CONTINUE");
