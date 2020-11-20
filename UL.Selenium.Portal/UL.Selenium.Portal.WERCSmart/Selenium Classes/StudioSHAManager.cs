@@ -298,12 +298,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				else
 				{
-					//mySHAManager.SelectFromStatusFilter("Assigned");
-					mySHAManager.SelectFromStatusFilter("All");
-					var myProductSearch = new StudioSHAManagerProductSearch();
-					myProductSearch.Wait_for_load(3);
-					myProductSearch.ClickButton("Find");
-					mySHAManager.WaitForProductList(30);
+					if (mySHAManager.GetCurrentStatusFilter() == "All")
+					{
+						//do nothing
+					}
+					else
+					{
+						//mySHAManager.SelectFromStatusFilter("Assigned");
+						mySHAManager.SelectFromStatusFilter("All");
+						var myProductSearch = new StudioSHAManagerProductSearch();
+						myProductSearch.Wait_for_load(3);
+						myProductSearch.ClickButton("Find");
+						mySHAManager.WaitForProductList(30);
+					}
+					
 				}
 
 				Delay.Seconds(5);
