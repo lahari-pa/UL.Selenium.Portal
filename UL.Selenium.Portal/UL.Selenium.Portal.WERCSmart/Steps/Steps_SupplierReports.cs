@@ -933,13 +933,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(supplierReportsObject.CheckForDownloadButtonForTheMostRecentReport(), "Failed to find Download button", "Successfully found Download button");
 		}
 
-		[StepDefinition(@"I click the Download button for the most recent report")]
-		public void ThenIClickTheDownloadButtonForTheMostRecentReport()
+		[StepDefinition(@"I click the Download button for the most recent report with Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Requested By: (.*)")]
+		public void ThenIClickTheDownloadButtonForTheMostRecentReportWithReportNameFileTypeRequestedBy(string reportName, string type, string requestedBy)
 		{
 			GeneralUtilities.Wait_for_load_finish();
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
-			Report.IsTrue(supplierReportsObject.SelectDownloadButtonForTheMostRecentReport(), "Failed to select Download button", "Successfully selected Download button");
+			Report.IsTrue(supplierReportsObject.SelectDownloadButtonForTheMostRecentReport(reportName, type, requestedBy), "Failed to select Download button", "Successfully selected Download button");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 

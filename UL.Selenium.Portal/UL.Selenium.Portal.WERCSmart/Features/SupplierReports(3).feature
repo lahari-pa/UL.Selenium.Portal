@@ -43,7 +43,7 @@ Given I delete the excel file saved as UPCs to Retailer via Item Sync
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
 Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report
+Then I click the Download button for the most recent report with Report Name: UPCs to Retailer via Item Sync File Type: XLSX Requested By: WERCS Test_Automation_ProductsAccount
 Given I click Close in the Report Download popup
 Given I confirm that an excel file is produced called UPCs to Retailer via Item Sync.xlsx and save as UPCs to Retailer via Item Sync
 And I confirm the Supplier Reports excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
@@ -77,14 +77,13 @@ Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the d
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
 Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: XLSX (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report
+Then I click the Download button for the most recent report with Report Name: UPCs to Retailer via Item Sync File Type: XLSX (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Given I confirm that an zip file is produced called UPCs to Retailer via Item Sync.zip and save as UPCs to Retailer via Item Sync
 And I confirm the zip excel file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
 Then I Delete the file with name: UPCs to Retailer via Item Sync.zip from the downloads folder
 Then I Delete the file with name: UPCs to Retailer via Item Sync.xlsx from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
-
 
 @ScenarioId:10337
 Scenario: [146146] UPCs to Retailer via Item Sync - CSV File
@@ -112,13 +111,12 @@ Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the do
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
 Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report
+Then I click the Download button for the most recent report with Report Name: UPCs to Retailer via Item Sync File Type: CSV Requested By: WERCS Test_Automation_ProductsAccount
 Given I click Close in the Report Download popup
 Given I confirm that an csv file is produced called UPCs to Retailer via Item Sync.csv and save as UPCs to Retailer via Item Sync
 And I confirm the csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I delete the file saved as UPCs to Retailer via Item Sync
 Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the downloads folder
-
 
 @ScenarioId:10345
 Scenario: [146164] UPCs to Retailer via Item Sync - CSV Zip File
@@ -148,7 +146,7 @@ Then I Delete the file with name: UPCs to Retailer via Item Sync.csv from the do
 Given Under the Supplier Reports menu I choose: UPCs to Retailer via Item Sync
 Then I confirm the most recent file has the following information Report Name: UPCs to Retailer via Item Sync File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report
+Then I click the Download button for the most recent report with Report Name: UPCs to Retailer via Item Sync File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Given I confirm that an zip file is produced called UPCs to Retailer via Item Sync.zip and save as UPCs to Retailer via Item Sync
 And I confirm the zip csv file saved as UPCs to Retailer via Item Sync can be opened and contains data
 Given I click Close in the Report Download popup
@@ -180,7 +178,7 @@ Then I Delete the file with name: UPC and Retailer (All).csv from the downloads 
 Given Under the Supplier Reports menu I choose: UPC and Retailer (All)
 Then I confirm the most recent file has the following information Report Name: UPC and Retailer (All) File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report
+Then I click the Download button for the most recent report with Report Name: UPC and Retailer (All) File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Given I confirm that an zip file is produced called UPC and Retailer (All).zip and save as UPC and Retailer (All)
 And I confirm the zip csv file saved as UPC and Retailer (All) can be opened and contains data
 Given I click Close in the Report Download popup
@@ -188,7 +186,6 @@ Given I delete the file saved as UPC and Retailer (All)
 Then I Delete the file with name: UPC and Retailer (All).zip from the downloads folder
 Then I Delete the file with name: UPC and Retailer (All).csv from the downloads folder
 Given I Delete the directory and its contents with name: ExtractFolder from the downloads folder
-
 
 @ScenarioId:10344
 Scenario: [144263] UPC Errors for The Home Depot- CSV Zip File 
@@ -213,7 +210,7 @@ Then I Delete the file with name: UPC Errors for The Home Depot.csv from the dow
 Given Under the Supplier Reports menu I choose: UPC Errors for The Home Depot
 Then I confirm the most recent file has the following information Report Name: UPC Errors for The Home Depot File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report
+Then I click the Download button for the most recent report with Report Name: UPC Errors for The Home Depot File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Given I confirm that an zip file is produced called UPC Errors for The Home Depot.zip and save as UPC Errors for The Home Depot
 And I confirm the zip csv file saved as UPC Errors for The Home Depot can be opened and contains data
 Given I click Close in the Report Download popup
@@ -247,7 +244,7 @@ Then I Delete the file with name: Kit Registrations.csv from the downloads folde
 Given Under the Supplier Reports menu I choose: Kit Registrations
 Then I confirm the most recent file has the following information Report Name: Kit Registrations File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report
+Then I click the Download button for the most recent report with Report Name: Kit Registrations File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Given I confirm that an zip file is produced called Kit Registrations.zip and save as Kit Registrations
 And I confirm the zip csv file saved as Kit Registrations can be opened and contains data
 Given I click Close in the Report Download popup
@@ -280,7 +277,7 @@ Then I Delete the file with name: Kits Containing a Registration.csv from the do
 Given Under the Supplier Reports menu I choose: Kits Containing a Registration
 Then I confirm the most recent file has the following information Report Name: Kits Containing a Registration File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report
+Then I click the Download button for the most recent report with Report Name: Kits Containing a Registration File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Given I confirm that an zip file is produced called Kits Containing a Registration.zip and save as Kits Containing a Registration
 And I confirm the zip csv file saved as Kits Containing a Registration can be opened and contains data
 Given I click Close in the Report Download popup
@@ -315,7 +312,7 @@ Then I Delete the file with name: UPC and Retailer (Single Registration).csv fro
 Given Under the Supplier Reports menu I choose: UPC and Retailer (Single Registration)
 Then I confirm the most recent file has the following information Report Name: UPC and Retailer (Single Registration) File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Then I confirm there is a Download button for the most recent report
-Then I click the Download button for the most recent report
+Then I click the Download button for the most recent report with Report Name: UPC and Retailer (Single Registration) File Type: CSV (Zip) Requested By: WERCS Test_Automation_ProductsAccount
 Given I confirm that an zip file is produced called UPC and Retailer (Single Registration).zip and save as UPC and Retailer (Single Registration)
 And I confirm the zip csv file saved as UPC and Retailer (Single Registration) can be opened and contains data
 Given I click Close in the Report Download popup
