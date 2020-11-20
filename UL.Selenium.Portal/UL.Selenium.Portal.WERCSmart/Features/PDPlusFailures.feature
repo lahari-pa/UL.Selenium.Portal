@@ -249,6 +249,7 @@ Scenario: [PDPlusFailure] 87914 | Product Create and Process to Completed
 
 
 
+@ScenarioId:10493
 Scenario: [75335c] Create a new simple product (Chalk) and submit thru to Completed status (NGHS only)	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account) (Removed Steps Updated)
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC75335
