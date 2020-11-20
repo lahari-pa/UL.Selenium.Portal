@@ -249,8 +249,7 @@ Scenario: [PDPlusFailure] 87914 | Product Create and Process to Completed
 
 
 
-@ScenarioId:10491
-	Scenario: [PDPlusTesting] 75335 Shorten
+Scenario: [75335c] Create a new simple product (Chalk) and submit thru to Completed status (NGHS only)	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account) (Removed Steps Updated)
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I generate a random UPC number and save as: UPC75335
 	Given I delete all products with UPC Number: saved as UPC75335
@@ -294,3 +293,5 @@ Scenario: [PDPlusFailure] 87914 | Product Create and Process to Completed
 		| CVS      |
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
+
+
