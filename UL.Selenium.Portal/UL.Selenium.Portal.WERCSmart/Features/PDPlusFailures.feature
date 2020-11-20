@@ -274,8 +274,6 @@ Scenario: [PDPlusFailure] 87914 | Product Create and Process to Completed
 	Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given If purchase details are showing click confirm order
-
-
 	
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
