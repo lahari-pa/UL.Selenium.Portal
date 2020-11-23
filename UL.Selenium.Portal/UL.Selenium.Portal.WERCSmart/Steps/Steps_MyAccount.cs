@@ -935,6 +935,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (TableRow thisRow in myTable.Rows)
 			{
 				string companyName = thisRow["Company Name"];
+				if(companyName.Contains("<RandomID>"))
+				{
+					string currentUsedEmail = TestUsers.GetUserSavedAs(thisRow["Email Address"].TrimStart('<').TrimEnd('>')).Username;
+					string edited1 = currentUsedEmail.Replace("User_", "");
+					string userString = edited1.Replace(TestVariables.GetVariableSavedAs("Mailosaur Prefix"), "");
+					companyName= companyName.Replace("<RandomID>", userString);		
+					
+				}
+
 				Report.Info("Company Name = '" + companyName + "'");
 				string adminName = thisRow["Admin Name"];
 				Report.Info("Admin Name = '" + adminName + "'");
